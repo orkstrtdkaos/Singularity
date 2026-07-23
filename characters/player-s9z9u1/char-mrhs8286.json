@@ -116,7 +116,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.10207167750865691,
+    "spectrumId": -0.14696809363322405,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.2591592263196316,
     "mechanical_spiritual": 0.2580372847905887,
@@ -1700,7 +1700,124 @@
     "The party transits the waygate and arrives at the Crossing — a small road-junction settlement with a mill, a well, boiling-rags on the rail, and the gray-brown tinge of the creek running downstream of the Zone."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_crossing",
+    "turns": [
+      {
+        "player": "[The party arrives back on the Waygate hub platform on the edge of the great Crossing.  A huge city with the Coliseum etc.   we look around to see if Siol and her party of Elves are anywhere]",
+        "summary": "Party arrives at the Hub plaza and scans for Siol — the plaza is empty of her; the city opens around them.",
+        "narration": "The waygate platform sits at the Hub's edge the way it always has — worn central paving, seven arches in their crescent behind you, the market row stretching south. The city beyond is the same city: wide, loud, everyone from somewhere else, nobody from here. The Coliseum's outer wall is visible northwest, its gates open in the early afternoon light. The plaza runs in every direction from the crescent's mouth, vendors calling, a water-seller moving with a clay jug on each shoulder and a boiling-rag tied to his belt. The crisis has reached the Hub too, then.\n\nYou scan the plaza slow and thorough, letting the crowd sort itself. Pell stands at your left shoulder, reading the ground in her own way. Veth holds slightly back, the still point behind you. Huginn is already aloft, circling the crescent in a lazy arc that covers more ground than you can from the paving.\n\nNo pale coat. No tall Elven figure at the arch's edge or along the market row's near stalls. Siol is not here now. The last you saw her, she was holding the sixth arch's edge as the party went through. That was days ago, and the Hub is large enough that she could be anywhere inside it, or she could have moved on entirely. Huginn drops back to your shoulder and says nothing, which is its own kind of answer.\n\nPell turns her chin toward the market row. \"Cooperage,\" she says, flat and practical. \"Coliseum gates are open. And someone at that far stall is burning something that is not wood.\" She is already sorting the Hub into working infrastructure and everything else, which is what Pell does. Veth simply watches the crowd, her hands at her sides, reading the settlement the way she reads all settlements — mill, well, long building."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The waygate platform sits at the Hub's edge the way it always has — worn central paving, seven arches in their crescent behind you, the market row stretching south. The city beyond is the same city: wide, loud, everyone from somewhere else, nobody from here. The Coliseum's outer wall is visible northwest, its gates open in the early afternoon light. The plaza runs in every direction from the crescent's mouth, vendors calling, a water-seller moving with a clay jug on each shoulder and a boiling-rag tied to his belt. The crisis has reached the Hub too, then.\n\nYou scan the plaza slow and thorough, letting the crowd sort itself. Pell stands at your left shoulder, reading the ground in her own way. Veth holds slightly back, the still point behind you. Huginn is already aloft, circling the crescent in a lazy arc that covers more ground than you can from the paving.\n\nNo pale coat. No tall Elven figure at the arch's edge or along the market row's near stalls. Siol is not here now. The last you saw her, she was holding the sixth arch's edge as the party went through. That was days ago, and the Hub is large enough that she could be anywhere inside it, or she could have moved on entirely. Huginn drops back to your shoulder and says nothing, which is its own kind of answer.\n\nPell turns her chin toward the market row. \"Cooperage,\" she says, flat and practical. \"Coliseum gates are open. And someone at that far stall is burning something that is not wood.\" She is already sorting the Hub into working infrastructure and everything else, which is what Pell does. Veth simply watches the crowd, her hands at her sides, reading the settlement the way she reads all settlements — mill, well, long building.",
+      "sceneSummary": "Party arrives at the Hub plaza and scans for Siol — the plaza is empty of her; the city opens around them.",
+      "choices": [
+        {
+          "label": "Ask the gate-keeper — the warden who confirmed the March setting knows faces; ask if an Elven party passed through recently.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Head for the Council of Mavens Hall — the water committee that has Calvar's name may have new information, and finding Edvar Crane is the more pressing thread.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Find the dark-cloth stall in the market row — Veth's old post; someone there may know if Siol has been seen in the Hub.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Huginn directly — the bird swept the crescent from above and has attended more arrivals and departures here than you can count. What does it see?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "Hub Waygate Plaza — late afternoon, open sky, the seven-arch crescent at the party's back. A water-seller moves through the crowd with boiling-rags on his belt. The Coliseum is visible to the northwest, gates open.",
+        "npcsPresent": [
+          {
+            "name": "Pell Marsh",
+            "state": "Standing at Silas's left shoulder, reading the ground — noting the cooperage and a far stall's odd smoke."
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "Slightly behind, watching the crowd with her hands at her sides."
+          },
+          {
+            "name": "Huginn",
+            "state": "Back on Silas's shoulder after a sweep of the crescent — silent."
+          }
+        ],
+        "objects": [
+          "Seven waygate arches in their crescent behind the party",
+          "Worn central paving",
+          "Market row stretching south",
+          "Water-seller with boiling-rags on his belt",
+          "Coliseum outer wall to the northwest, gates open"
+        ],
+        "threads": [
+          "Siol's whereabouts unknown — not visible in the plaza",
+          "Edvar Crane is somewhere in the Hub — the second thread of the Waymarker's work",
+          "The water crisis has reached the Hub — boiling-rags on the water-seller's belt"
+        ]
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief scan of the plaza on arrival"
+      }
+    },
+    "sceneState": {
+      "setting": "Hub Waygate Plaza — late afternoon, open sky, the seven-arch crescent at the party's back. A water-seller moves through the crowd with boiling-rags on his belt. The Coliseum is visible to the northwest, gates open.",
+      "npcsPresent": [
+        {
+          "name": "Pell Marsh",
+          "state": "Standing at Silas's left shoulder, reading the ground — noting the cooperage and a far stall's odd smoke."
+        },
+        {
+          "name": "Veth Ondra",
+          "state": "Slightly behind, watching the crowd with her hands at her sides."
+        },
+        {
+          "name": "Huginn",
+          "state": "Back on Silas's shoulder after a sweep of the crescent — silent."
+        }
+      ],
+      "objects": [
+        "Seven waygate arches in their crescent behind the party",
+        "Worn central paving",
+        "Market row stretching south",
+        "Water-seller with boiling-rags on his belt",
+        "Coliseum outer wall to the northwest, gates open"
+      ],
+      "threads": [
+        "Siol's whereabouts unknown — not visible in the plaza",
+        "Edvar Crane is somewhere in the Hub — the second thread of the Waymarker's work",
+        "The water crisis has reached the Hub — boiling-rags on the water-seller's belt"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 13,
@@ -4192,7 +4309,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 573,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean…",
@@ -5688,21 +5805,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.743094570260986,
-    "cerebral": 19.071582728556844,
-    "social": 7.176733831671754,
-    "generous": 5.220737617531361,
-    "cautious": 4.243478644733088,
-    "physical": 0.6003863315299565,
-    "risky": 1.749052642732857,
-    "ruthless": 0.009180469874354722,
-    "carousing": 0.3548364355642761,
-    "amorous": 3.573222728873584,
-    "patient": 0.24528434654433168,
-    "stealth": 0.0035583735775802203,
-    "devotion": 1.8795282470130634,
-    "craft": 0.5960408765597324,
-    "leadership": 0.018112516422122693
+    "strategic": 17.32451720600446,
+    "cerebral": 18.594793160342924,
+    "social": 6.99731548587996,
+    "generous": 5.0902191770930765,
+    "cautious": 4.137391678614761,
+    "physical": 0.5853766732417075,
+    "risky": 1.7053263266645355,
+    "ruthless": 0.008950958127495854,
+    "carousing": 0.34596552467516917,
+    "amorous": 3.4838921606517443,
+    "patient": 0.23915223788072337,
+    "stealth": 0.0034694142381407147,
+    "devotion": 1.8325400408377368,
+    "craft": 0.581139854645739,
+    "leadership": 0.017659703511569626
   },
   "aptitudes": [
     "strategist",
@@ -5710,7 +5827,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 710,
+  "actionCount": 711,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6100,8 +6217,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784844264255,
-  "rev": 1137,
+  "updatedAt": 1784844941898,
+  "rev": 1138,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8232,7 +8349,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 62
+    "the_center": 63
   },
   "foreclosed": [
     "rootkin",
@@ -8355,10 +8472,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T22:04:24.253Z",
+      "lastAt": "2026-07-23T22:15:41.896Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 44
+      "beats": 45
     }
   ],
   "company": [
@@ -8556,15 +8673,15 @@
     "gen-waygate": "https://image.pollinations.ai/prompt/Waygate%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Waygate.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=37923&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 82,
-    "choices": 82,
+    "sceneSummary": 83,
+    "choices": 83,
     "characterDeltas": 35,
-    "scene": 82,
+    "scene": 83,
     "npcUpdates": 70,
     "factUpdates": 6,
     "placeUpdates": 14,
     "codexUpdates": 47,
-    "timeOps": 76,
+    "timeOps": 77,
     "imagePrompt": 2,
     "sceneEnded": 18,
     "itemUpdates": 2,
@@ -8578,7 +8695,7 @@
     "discovery": 2,
     "stageOps": 1
   },
-  "_opTurns": 82,
+  "_opTurns": 83,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

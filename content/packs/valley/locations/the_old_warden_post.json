@@ -21,18 +21,18 @@
   "thin-ground"
  ],
  "connections": [
-  "ashwarden_march_road"
+  "cairnhold",
+  "the_hollowing"
  ],
  "descriptionSeed": "An old Ashwarden watch-post on a shoulder of ground two miles northwest along the March road's left branch — three rooms and a stair, a corner watch-tower, and a fold of thin ground behind it. Reactivated and claimed by Silas Weir and company; named for its rooms: Pell's forge, Veth's laboratory, Cassiel's keeper's ground, Huginn's Rook, and the Maker's hollow that gives Stillwater's Trouble its name.",
  "loreRefs": [
-  "valley_primer",
-  "ashwarden",
+  "traditions",
+  "world_framing",
   "precursors"
  ],
  "npcsPresent": [],
  "encounterFlavor": "Scavengers who assumed it was empty. Someone from the settlements below come up to see who has moved in and why. Old warden fittings worth more as iron than as history. Nothing here hunts you — but nothing here is watching the road for you either, until someone starts.",
  "dangerLevel": 1,
- "image": null,
  "questSeeds": [
   "The Post has no owner anyone can name, which is either an opportunity or a question somebody below has already asked",
   "The corner tower's sightlines cover the road to the treeline — whoever holds it sees who comes to Stillwater first",
@@ -43,7 +43,12 @@
   "y": 320
  },
  "encounterSeeds": [],
- "poleIntensity": 0.2,
+ "poleIntensity": {
+  "death": 0.5,
+  "order": 0.3,
+  "peace": 0.3,
+  "space": 0.2
+ },
  "substrateSource": "thin-unreached",
  "axisVector": [
   0.0,

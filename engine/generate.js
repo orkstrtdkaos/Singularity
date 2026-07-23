@@ -399,7 +399,10 @@ const ATTENTION_CAP = 60;
  *  quest / session). Mutates `_gen`; bumps the score, stamps the day, recomputes the tier. */
 export function recordAttention(entity, kind = "interact", day = null) {
   const g = entity?._gen;
-  if (!g) return entity;
+  // SNG-216: a malformed `_gen` (a boolean `true` — the SNG-210 crash) is truthy but has no properties, so a
+  // presence-only guard passed and `g.engagementScore = …` THREW on the boolean, aborting the whole applyTurn
+  // (and with it the location commit). Guard TYPE, not just presence: a non-object `_gen` is a no-op here.
+  if (!g || typeof g !== "object") return entity;
   g.engagementScore = Math.min(ATTENTION_CAP, (g.engagementScore || 0) + (ATTENTION_WEIGHT[kind] || 1));
   if (day != null) g.lastAttentionDay = day;
   else if (g.lastAttentionDay == null) g.lastAttentionDay = g.createdDay ?? null;
@@ -416,7 +419,7 @@ export function recordAttention(entity, kind = "interact", day = null) {
 /** Realness = birth-power + accumulated attention. Drives contradiction-resolution +
  *  promotion in Phase 3; recorded from birth so promotion is zero-rework. */
 export function effectiveWeight(entity) {
-  const g = entity?._gen || {};
+  const g = (entity?._gen && typeof entity._gen === "object") ? entity._gen : {}; // SNG-216: a boolean `_gen` → treat as unmanaged
   return (g.birthWeight || 1) + Math.floor((g.engagementScore || 0) / 2);
 }
 
@@ -424,7 +427,7 @@ export function effectiveWeight(entity) {
  *  earned it does not fall back from inattention (only FRESH goes dormant). Returns the tier. */
 export function recomputeTier(entity) {
   const g = entity?._gen;
-  if (!g) return "fresh";
+  if (!g || typeof g !== "object") return "fresh"; // SNG-216: a boolean `_gen` never became a tier — and `g.tier = …` would throw
   const s = g.engagementScore || 0;
   if (s >= TIER_AT.nominated) g.tier = "nominated";
   else if (s >= TIER_AT.established) g.tier = "established";
@@ -482,7 +485,7 @@ export function needsEnrichment(entity) {
  *  nominated are never dormant. Never means deleted. */
 export function isDormant(entity, { day = null, window = FRESH_WINDOW_DAYS } = {}) {
   const g = entity?._gen;
-  if (!g || g.tier === "established" || g.tier === "nominated") return false;
+  if (!g || typeof g !== "object" || g.tier === "established" || g.tier === "nominated") return false; // SNG-216: a boolean `_gen` is unmanaged, never dormant
   const since = g.lastAttentionDay ?? g.createdDay; // never-attended fresh ages from its birth day
   if (day == null || since == null) return false;    // no clock info → not dormant
   return (day - since) > window;
@@ -493,7 +496,7 @@ export function isDormant(entity, { day = null, window = FRESH_WINDOW_DAYS } = {
  *  it just stops being raised at the player. */
 export function isSurfaceable(entity, opts = {}) {
   const g = entity?._gen;
-  if (!g) return true; // authored / unmanaged content always surfaces
+  if (!g || typeof g !== "object") return true; // authored / unmanaged content (incl. a malformed boolean `_gen`, SNG-216) always surfaces
   return !isDormant(entity, opts);
 }
 

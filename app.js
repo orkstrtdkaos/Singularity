@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.208";
+const APP_VERSION = "1.8.209";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4596,7 +4596,10 @@ function mintTransitLocation(moveRef) {
     id, name, regionId: here?.regionId || here?.region || null,
     ...(promotedFrom ? { parentId: promotedFrom.parentId, _promotedFromSubPlace: true } : {}),
     descriptionSeed: `A place the road led to — ${name}. The fiction brought you here before the map knew its name.`,
-    tags: ["transitional"], connections: here ? [here.id] : [], _gen: true, _mintedAs: "transit",
+    // SNG-216: `_gen` MUST be the tracking OBJECT (stampGenerated's shape), not a boolean flag — a boolean
+    // here is what made recordAttention throw on arrival + abort the location commit (the SNG-210 desync).
+    tags: ["transitional"], connections: here ? [here.id] : [], _mintedAs: "transit",
+    _gen: { type: "location", tier: "fresh", engagementScore: 0, birthWeight: 1, rating: null, attentionHistory: [], createdDay: (() => { try { return readClock(character.clock).day; } catch { return null; } })(), provenance: { locationId: here?.id || null, day: null, hint: "transit" } },
     map: coordForGenerated(id, here?.map, existing)
   };
   character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)

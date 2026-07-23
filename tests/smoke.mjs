@@ -7184,6 +7184,43 @@ await (async () => {
   check("213 §Q4: the panel manifest lists correctEntityField (panel + GM stay in lockstep)", !!man213.ops.correctEntityField);
 }
 
+// ---- SNG-216: a boolean `_gen` can never crash a turn again (reader-harden) + old saves self-heal (backfill) ----
+{
+  // §3a — the crash repro: every generated-entity reader must survive a boolean `_gen` (the old transit-mint shape).
+  let threw = false;
+  try { recordAttention({ id: "x", type: "location", _gen: true }, "interact", 1); } catch { threw = true; }
+  check("216 §3a: recordAttention does NOT throw on a boolean _gen (the exact crash that aborted the location commit)", !threw);
+  check("216 §3a: recomputeTier returns 'fresh' on a boolean _gen (never reaches g.tier = …)", recomputeTier({ _gen: true }) === "fresh");
+  check("216 §3a: isDormant is false on a boolean _gen (unmanaged is never dormant)", isDormant({ _gen: true }) === false);
+  check("216 §3a: isSurfaceable is true on a boolean _gen (unmanaged always surfaces)", isSurfaceable({ _gen: true }) === true);
+  let w216; try { w216 = effectiveWeight({ _gen: true }); } catch { /* must not */ }
+  check("216 §3a: effectiveWeight computes on a boolean _gen without throwing", typeof w216 === "number");
+  const genSrc216 = readFileSync(join(root, "engine/generate.js"), "utf8");
+  check("216 §3a: all five _gen readers type-guard (a boolean can never reach a write)", (genSrc216.match(/typeof g !== "object"|typeof entity\._gen === "object"/g) || []).length >= 5);
+
+  // §3b — the writer: the transit-mint now emits the tracking OBJECT, never the boolean flag.
+  const appSrc216 = readFileSync(join(root, "app.js"), "utf8");
+  check("216 §3b: the transit-mint writer emits a _gen OBJECT (never `_gen: true`)", /_mintedAs: "transit"/.test(appSrc216) && /_gen: \{ type: "location", tier: "fresh"/.test(appSrc216) && !/_gen: true, _mintedAs/.test(appSrc216));
+
+  // §3b — the backfill: an old save with a boolean `_gen` heals on load, then rejoins the attention system.
+  const save = { reconcileVersion: 16, generated: { schemaVersion: 1, npc: {}, location: { gx: { id: "gx", type: "location", _gen: true } }, arc: {} } };
+  reconcile(save, "character", {});
+  const rec = save.generated.location.gx;
+  check("216 §3b: the reconcile backfill upgrades a boolean _gen → a real tracking object", rec._gen && typeof rec._gen === "object" && rec._gen.tier === "fresh" && rec._gen.entityId === "gx");
+  recordAttention(rec, "interact", 1);
+  check("216 §3b: a HEALED entity now participates in attention again (engagementScore moved)", rec._gen.engagementScore > 0);
+
+  // §3b — idempotence: a real tracking object beside a malformed one is left exactly as-is.
+  const mixed = { reconcileVersion: 16, generated: { schemaVersion: 1, npc: {}, location: {
+    bad: { id: "bad", type: "location", _gen: true },
+    good: { id: "good", type: "location", _gen: { entityId: "good", type: "location", tier: "established", engagementScore: 5, attentionHistory: [], createdDay: 3 } }
+  }, arc: {} } };
+  reconcile(mixed, "character", {});
+  check("216 §3b: the backfill LEAVES a real tracking object untouched (idempotent — earned tier + score survive)", mixed.generated.location.good._gen.tier === "established" && mixed.generated.location.good._gen.engagementScore === 5);
+  check("216 §3b: … while still healing the malformed one alongside it", typeof mixed.generated.location.bad._gen === "object" && mixed.generated.location.bad._gen.tier === "fresh");
+  check("216 §3b: the heal step is registered at version 17 (the idempotence gate advances)", CHARACTER_STEPS.some(s => s.version === 17 && s.id === "gen-tracking-object"));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

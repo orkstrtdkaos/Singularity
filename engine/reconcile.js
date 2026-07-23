@@ -442,6 +442,40 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 17, id: "gen-tracking-object", playerFacing: false,
+    // SNG-216. Older saves minted generated entities (notably transit locations, app.js) with `_gen: true` —
+    // a boolean flag, not the tracking OBJECT every generate.js reader expects. The presence guard
+    // `if (!g) return` passed on `true`, then the first WRITE (`g.engagementScore = …` in recordAttention)
+    // threw "Cannot create property on boolean", aborting the whole turn's location commit mid-apply — the
+    // real cause of the SNG-210 travel desync. generate.js's readers are now type-guarded (the urgent half),
+    // so this can never crash again; this step heals the DATA so those entities re-enter the attention/tier
+    // system instead of being permanently inert. Walks every generated record and, where `_gen` is not a
+    // proper object, replaces it with a fresh default tracking object. Idempotent: only touches malformed
+    // `_gen`; a real tracking object is left exactly as-is. Silent — no player-facing note (pure hygiene).
+    apply: (c) => {
+      const gen = c.generated;
+      if (!gen || typeof gen !== "object") return {};
+      let healed = 0;
+      for (const type of ["npc", "location", "arc"]) {
+        const pool = gen[type];
+        if (!pool || typeof pool !== "object") continue;
+        for (const rec of Object.values(pool)) {
+          if (!rec || typeof rec !== "object") continue;
+          if (rec._gen && typeof rec._gen === "object") continue; // already a proper tracking object
+          rec._gen = {
+            entityId: rec.id || null, type,
+            birthWeight: 1, engagementScore: 0, tier: "fresh", rating: null,
+            attentionHistory: [], createdDay: null,
+            provenance: { healed: "sng-216-backfill" }
+          };
+          healed++;
+        }
+      }
+      if (healed) console.log(`[reconcile] sng-216: healed ${healed} generated entit${healed === 1 ? "y" : "ies"} with a boolean/missing _gen → tracking object`);
+      return {}; // silent hygiene — no player-facing note
+    }
+  },
+  {
     version: 6, id: "place-containment", playerFacing: true,
     // SNG-154 stage 4. Repair a save whose place hierarchy was scrambled before `parentId` existed.
     // Containment used to be inferred per-write from wherever the engine last believed the

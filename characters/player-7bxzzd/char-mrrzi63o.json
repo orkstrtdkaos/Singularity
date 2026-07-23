@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 0,
+  "xp": 8,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -33,13 +33,14 @@
   ],
   "alignment": {
     "spectrum": -0.03,
-    "falsehood_truth": 0.029000000000000005
+    "falsehood_truth": 0.029000000000000005,
+    "spectrumId": 0
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 100,
+  "energy": 95,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -90,6 +91,21 @@
       "spread": [],
       "day": 1,
       "worldDay": 20
+    },
+    {
+      "at": "2026-07-23T01:58:46.674Z",
+      "locationId": "the_marchward",
+      "communityId": "riven.marchward",
+      "description": "Approached a Redline Warrior as a peer, named the task plainly, and earned his name and his company",
+      "tags": [
+        "honor",
+        "directness",
+        "recruit"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 1,
+      "worldDay": 23
     }
   ],
   "relationships": {},
@@ -162,186 +178,183 @@
         "player": "Let Freki lead — take the cloth, hold it for the hound, and follow wherever it wants to go",
         "summary": "Freki reads the cloth bundle and tracks toward the side door — east, toward a fork between the waygate approach and the Stillhold road.",
         "narration": "You pick up the cloth bundle — the linen still faintly cool, the dried sprig stiff between your fingers — and crouch down to Freki's level. The hound has not moved from the stool. You hold the bundle out low, close to its nose, and wait.\n\nFreki takes one long breath. Then another. Its head drops, nostrils working the cord-knot first, then the sprig, then the cloth itself. After a moment it lifts its head and turns — not toward the door you came in, but toward the side door. The one Doss said Sera used before dawn.\n\nDoss watches this without comment. When Freki moves toward the side door at a slow, deliberate walk — head low, tail straight, the working posture you have come to recognize as distinct from curiosity — she says, quietly, \"That door opens onto the lane behind the building. Goes east, then splits. North fork is the waygate approach. South fork joins the Stillhold road.\"\n\nFreki stops at the door and looks back at you. The bundle is still in your hand. The two men at the far table have not looked up from their breakfast, and Doss has not moved from behind the bar — but she is watching you with the focused stillness of someone deciding something about you."
+      },
+      {
+        "player": "I'll follow Freki and his intuition, but first I'll stop and talk to the Redline Warrior, ask for his name and ask if he'd care to join me in searching the Sera.",
+        "summary": "Brynjar recruits Ragnar Solmyr at the bench — the Redline Warrior names himself and confirms he saw movement at the east fork before dawn; both head for the side door.",
+        "narration": "Freki holds at the side door, patient, head still low. You hold up a hand toward the hound — wait — and cross back through the common room, past the two men eating without much interest in you, and out the main entrance into the morning square.\n\nThe Redline Warrior is where he was — bench near the Wardhouse, forearms on his knees, watching the square the way a man watches a river for fish. He clocks you before you're halfway across. His eyes go to your shoulder first, the same gap he named yesterday, then to your face.\n\nYou stop a step away — close enough to be direct, not so close it reads as a challenge. \"Looking for a woman who left before dawn and didn't say where,\" you say. \"Trail goes east from the inn's side door — could fork north toward the waygate or south toward the Stillhold road. Two directions to cover and a dog with a nose, but I don't know this ground yet.\" You meet his eyes. \"I'd know your name before I asked you to walk with me.\"\n\nHe looks at you for a long beat. Then he straightens off the bench — not fast, not slow, just the economy of someone whose body doesn't move without reason — and says: \"Ragnar Solmyr.\" The jawbone necklace shifts with the movement. \"I've been watching that fork since yesterday. Someone went through before the town was up.\" He says it plainly, as if handing you a fact he'd been waiting to give someone who earned it. \"I'll walk east with you. If it goes south, I know the Stillhold road four miles out.\"\n\n*✦ The Marchers: +1 — approached a Redline Warrior with plain speech and a named purpose — handled the form correctly.*"
       }
     ],
     "lastTurn": {
-      "narration": "You pick up the cloth bundle — the linen still faintly cool, the dried sprig stiff between your fingers — and crouch down to Freki's level. The hound has not moved from the stool. You hold the bundle out low, close to its nose, and wait.\n\nFreki takes one long breath. Then another. Its head drops, nostrils working the cord-knot first, then the sprig, then the cloth itself. After a moment it lifts its head and turns — not toward the door you came in, but toward the side door. The one Doss said Sera used before dawn.\n\nDoss watches this without comment. When Freki moves toward the side door at a slow, deliberate walk — head low, tail straight, the working posture you have come to recognize as distinct from curiosity — she says, quietly, \"That door opens onto the lane behind the building. Goes east, then splits. North fork is the waygate approach. South fork joins the Stillhold road.\"\n\nFreki stops at the door and looks back at you. The bundle is still in your hand. The two men at the far table have not looked up from their breakfast, and Doss has not moved from behind the bar — but she is watching you with the focused stillness of someone deciding something about you.",
-      "sceneSummary": "Freki reads the cloth bundle and tracks toward the side door — east, toward a fork between the waygate approach and the Stillhold road.",
-      "scene": {
-        "setting": "Inside the Crow and Thistle — south side of the Marchward square. Low ceiling, four long tables, banked fire, smoke-smelling air. Morning, main door open to the square, side door to the east lane ahead.",
-        "npcsPresent": [
-          {
-            "name": "Doss Halveck",
-            "state": "Behind the bar, watching Brynjar and Freki with focused stillness, deciding something"
-          },
-          {
-            "name": "Freki",
-            "state": "At the side door, head low, tail straight, looking back at Brynjar — waiting"
-          }
-        ],
-        "objects": [
-          "Long tables (four)",
-          "Bar with restacked cups",
-          "Banked fire (orange coals)",
-          "Third stool from the left at the bar",
-          "Cloth bundle: folded linen with dried white-flowered sprig and knotted cord — in Brynjar's hand",
-          "Two men eating at the far table",
-          "Side door — east, to the back lane"
-        ],
-        "threads": [
-          "Freki has a direction — east, toward a fork: waygate approach north, Stillhold road south",
-          "Doss is watching Brynjar make a decision; she has told him what she knows",
-          "The cord-knot's meaning is still unknown",
-          "The person who left the bundle watched Sera but never spoke to her"
-        ]
-      },
+      "narration": "Freki holds at the side door, patient, head still low. You hold up a hand toward the hound — wait — and cross back through the common room, past the two men eating without much interest in you, and out the main entrance into the morning square.\n\nThe Redline Warrior is where he was — bench near the Wardhouse, forearms on his knees, watching the square the way a man watches a river for fish. He clocks you before you're halfway across. His eyes go to your shoulder first, the same gap he named yesterday, then to your face.\n\nYou stop a step away — close enough to be direct, not so close it reads as a challenge. \"Looking for a woman who left before dawn and didn't say where,\" you say. \"Trail goes east from the inn's side door — could fork north toward the waygate or south toward the Stillhold road. Two directions to cover and a dog with a nose, but I don't know this ground yet.\" You meet his eyes. \"I'd know your name before I asked you to walk with me.\"\n\nHe looks at you for a long beat. Then he straightens off the bench — not fast, not slow, just the economy of someone whose body doesn't move without reason — and says: \"Ragnar Solmyr.\" The jawbone necklace shifts with the movement. \"I've been watching that fork since yesterday. Someone went through before the town was up.\" He says it plainly, as if handing you a fact he'd been waiting to give someone who earned it. \"I'll walk east with you. If it goes south, I know the Stillhold road four miles out.\"\n\n*✦ The Marchers: +1 — approached a Redline Warrior with plain speech and a named purpose — handled the form correctly.*",
+      "sceneSummary": "Brynjar recruits Ragnar Solmyr at the bench — the Redline Warrior names himself and confirms he saw movement at the east fork before dawn; both head for the side door.",
       "choices": [
         {
-          "label": "Follow Freki out the side door now — let the hound lead east and see which fork it takes",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0,
-            "falsehood_truth": 0.1
-          },
+          "label": "Go back inside and follow Freki out the side door — Ragnar walks with you, east",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "travel",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Before you go — ask Doss if she knows what the cord-knot means, or if anyone in the Marchward would",
+          "label": "Before you move — ask Ragnar what exactly he saw at the fork before dawn",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
           "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Show Ragnar the cloth bundle — the dried sprig and the knotted cord — and see if he reads the cord-knot",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
             "study",
             "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Ask Doss what she was deciding just now — she's watching you like she's making up her mind about something",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.4
-          },
+          "label": "Get moving immediately — Freki's trail is cooling; trust Ragnar to keep up",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "persuade"
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
-        },
-        {
-          "label": "Study the cord-knot itself before following Freki — see if Order-Sense can read its structure and purpose",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false
         }
       ],
-      "characterDeltas": {
-        "inventoryAdd": [
+      "scene": {
+        "setting": "The Marchward central square, morning — mud-packed ground, well and notice board visible, main door of the Crow and Thistle behind you, Wardhouse bench ahead. Early spring light, cool and flat.",
+        "npcsPresent": [
           {
-            "name": "Cloth Bundle",
-            "kind": "quest",
-            "description": "Folded pale linen containing a dried white-flowered sprig and a length of cord knotted in an unrecognized pattern. Left at the Crow and Thistle's third stool the night Sera was present. Freki read it as a live trail heading east.",
-            "consumable": false
+            "name": "Ragnar Solmyr",
+            "state": "Standing from the bench, facing Brynjar — committed, unhurried, waiting for the next move"
+          },
+          {
+            "name": "Doss Halveck",
+            "state": "Inside the Crow and Thistle at the bar, likely watching the side door where Freki waits"
+          },
+          {
+            "name": "Freki",
+            "state": "At the side door of the Crow and Thistle, head low, holding the trail — waiting for Brynjar's return"
           }
+        ],
+        "objects": [
+          "Cloth bundle (in Brynjar's hand — folded linen, dried white-flowered sprig, knotted cord)",
+          "Wardhouse bench (where Ragnar was sitting)",
+          "Well and notice board (square center)",
+          "Side door of the Crow and Thistle — east lane beyond"
+        ],
+        "threads": [
+          "Freki is holding a live trail at the side door — east fork: waygate north, Stillhold road south",
+          "Ragnar saw movement at the east fork before the town was up — details unknown",
+          "The cord-knot's meaning is still unread",
+          "The trail is cooling"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "doss-halveck",
-          "name": "Doss Halveck",
-          "note": "Told Brynjar the side door opens onto the east lane — north fork to the waygate, south fork to the Stillhold road. Watched him and Freki with the stillness of someone making a decision.",
-          "statusNote": "On duty at the Crow and Thistle; watching Brynjar with focused consideration after Freki read the bundle.",
+          "op": "meet",
+          "npcId": "ragnar-solmyr",
+          "name": "Ragnar Solmyr",
+          "role": "Redline Warrior, visiting the Marchward neutral ground",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "Hard-built, jawbone necklace worn smooth with age. Moves without waste and watches a square the way a fisherman watches a river. Reads fighters on sight — yesterday it was your shoulder; today it is your face.",
+          "note": "Named himself when asked directly and committed to walk east without haggling — offered the information that he'd seen movement at the east fork before dawn as if he'd been holding it for someone who'd earn it.",
           "learned": [
-            "The side door leads east, then forks — waygate approach north, Stillhold road south"
-          ]
+            "His name is Ragnar Solmyr",
+            "He observed movement at the east fork before the town was up this morning",
+            "He knows the Stillhold road four miles out"
+          ],
+          "skillsObserved": [
+            "combat assessment",
+            "silent observation",
+            "knowledge of local roads"
+          ],
+          "relationshipDelta": 2,
+          "status": "active",
+          "statusNote": "Committed to walk east with Brynjar — now standing in the square, ready to move"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "sera-of-the-stillhold",
-          "label": "Sera of the Stillhold",
-          "kind": "mystery",
-          "fact": "Freki read the cloth bundle — dried white-flowered sprig and knotted cord — and tracked toward the side door Sera used before dawn. The trail leads east, to a fork: waygate approach north, Stillhold road south.",
-          "links": [
-            "the-crow-and-thistle",
-            "the-marchward",
-            "doss-halveck"
-          ]
-        },
-        {
-          "topic": "the-crow-and-thistle",
-          "label": "The Crow and Thistle",
-          "kind": "place",
-          "entityId": "crow-and-thistle",
-          "fact": "The side door opens onto a back lane heading east — north fork leads to the waygate approach, south fork joins the Stillhold road. This is the door Sera and the bundle-leaver both used.",
+          "topic": "ragnar-solmyr",
+          "label": "Ragnar Solmyr",
+          "kind": "person",
+          "entityId": "ragnar-solmyr",
+          "fact": "His name is Ragnar Solmyr — a Redline Warrior visiting the Marchward neutral ground. He saw movement at the east fork before dawn and knows the Stillhold road four miles out. Committed to search for Sera without hesitation when asked directly.",
           "links": [
             "sera-of-the-stillhold",
-            "the-marchward"
+            "the-marchward",
+            "brynjar-andyrsson-thread"
           ]
         }
       ],
-      "offer": {
-        "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
-        "from": "what Doss fears: the lie she does not catch in time, the guest who reads as safe and is not — and Freki just passed her test by reading true"
-      },
+      "deeds": [
+        {
+          "description": "Approached a Redline Warrior as a peer, named the task plainly, and earned his name and his company",
+          "tags": [
+            "honor",
+            "directness",
+            "recruit"
+          ],
+          "weight": 1,
+          "communityId": "riven.marchward"
+        }
+      ],
+      "standingOps": [
+        {
+          "people": "marcher",
+          "delta": 1,
+          "why": "approached a Redline Warrior with plain speech and a named purpose — handled the form correctly"
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange and Freki's read of the bundle"
+        "why": "a short exchange in the square before moving"
+      },
+      "offer": {
+        "thing": "Ragnar volunteered that he saw movement at the east fork before dawn — a detail he'd been holding, waiting for someone who earned it",
+        "from": "His nature as a reader of patterns and his days watching the square — he notices, and he gives what he notices to someone who shows up right"
       }
     },
     "sceneState": {
-      "setting": "Inside the Crow and Thistle — south side of the Marchward square. Low ceiling, four long tables, banked fire, smoke-smelling air. Morning, main door open to the square, side door to the east lane ahead.",
+      "setting": "The Marchward central square, morning — mud-packed ground, well and notice board visible, main door of the Crow and Thistle behind you, Wardhouse bench ahead. Early spring light, cool and flat.",
       "npcsPresent": [
         {
+          "name": "Ragnar Solmyr",
+          "state": "Standing from the bench, facing Brynjar — committed, unhurried, waiting for the next move"
+        },
+        {
           "name": "Doss Halveck",
-          "state": "Behind the bar, watching Brynjar and Freki with focused stillness, deciding something"
+          "state": "Inside the Crow and Thistle at the bar, likely watching the side door where Freki waits"
         },
         {
           "name": "Freki",
-          "state": "At the side door, head low, tail straight, looking back at Brynjar — waiting"
+          "state": "At the side door of the Crow and Thistle, head low, holding the trail — waiting for Brynjar's return"
         }
       ],
       "objects": [
-        "Long tables (four)",
-        "Bar with restacked cups",
-        "Banked fire (orange coals)",
-        "Third stool from the left at the bar",
-        "Cloth bundle: folded linen with dried white-flowered sprig and knotted cord — in",
-        "Two men eating at the far table",
-        "Side door — east, to the back lane"
+        "Cloth bundle (in Brynjar's hand — folded linen, dried white-flowered sprig, knot",
+        "Wardhouse bench (where Ragnar was sitting)",
+        "Well and notice board (square center)",
+        "Side door of the Crow and Thistle — east lane beyond"
       ],
       "threads": [
-        "Freki has a direction — east, toward a fork: waygate approach north, Stillhold road south",
-        "Doss is watching Brynjar make a decision; she has told him what she knows",
-        "The cord-knot's meaning is still unknown",
-        "The person who left the bundle watched Sera but never spoke to her"
+        "Freki is holding a live trail at the side door — east fork: waygate north, Stillhold road south",
+        "Ragnar saw movement at the east fork before the town was up — details unknown",
+        "The cord-knot's meaning is still unread",
+        "The trail is cooling"
       ]
     }
   },
@@ -560,6 +573,42 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A stout woman in her mid-fifties, broad through the shoulders, heavy-handed in the way of someone who has carried kegs since she was fifteen. Skin the colour of old oak, short grey hair kept close to the skull for practicality. A crescent scar at the left jaw from a long-ago disagreement. Apron is clean — she changes it twice a day on principle. Eyes the flat, still grey of a whetstone, and about as yielding."
+    },
+    "ragnar-solmyr": {
+      "id": "ragnar-solmyr",
+      "name": "Ragnar Solmyr",
+      "role": "Redline Warrior, visiting the Marchward neutral ground",
+      "description": "Hard-built, jawbone necklace worn smooth with age. Moves without waste and watches a square the way a fisherman watches a river. Reads fighters on sight — yesterday it was your shoulder; today it is your face.",
+      "firstMet": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "relationship": 2,
+      "history": [
+        "[d1] Named himself when asked directly and committed to walk east without haggling — offered the information that he'd seen movement at the east fork before dawn as if he'd been holding it for someone who'd earn it."
+      ],
+      "knownFacts": [
+        "His name is Ragnar Solmyr",
+        "He observed movement at the east fork before the town was up this morning",
+        "He knows the Stillhold road four miles out"
+      ],
+      "skillsObserved": [
+        "combat assessment",
+        "silent observation",
+        "knowledge of local roads"
+      ],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "Committed to walk east with Brynjar — now standing in the square, ready to move",
+      "domains": {
+        "primary": "marcher"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "the_marchward",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
@@ -676,6 +725,10 @@
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
         "from": "what Doss fears: the lie she does not catch in time, the guest who reads as safe and is not — and Freki just passed her test by reading true"
+      },
+      {
+        "thing": "Ragnar volunteered that he saw movement at the east fork before dawn — a detail he'd been holding, waiting for someone who earned it",
+        "from": "His nature as a reader of patterns and his days watching the square — he notices, and he gives what he notices to someone who shows up right"
       }
     ]
   },
@@ -904,6 +957,24 @@
         "createdDay": 1,
         "entityId": "doss",
         "updatedDay": 1
+      },
+      "ragnar-solmyr": {
+        "id": "ragnar-solmyr",
+        "label": "Ragnar Solmyr",
+        "kind": "person",
+        "facts": [
+          "[d1] Redline Warrior, visiting the Marchward neutral ground",
+          "[d1] His name is Ragnar Solmyr — a Redline Warrior visiting the Marchward neutral ground. He saw movement at the east fork before dawn and knows the Stillhold road four miles out. Committed to search for Sera without hesitation when asked directly."
+        ],
+        "links": [
+          "sera-of-the-stillhold",
+          "the-marchward",
+          "brynjar-andyrsson-thread"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "ragnar-solmyr",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -936,16 +1007,16 @@
     ]
   },
   "tendencies": {
-    "leadership": 10.596899324690373,
-    "cerebral": 1.6574253142158126,
-    "strategic": 3.516575202857967,
-    "ruthless": 0.7962355085707052,
-    "social": 4.569476885009766
+    "leadership": 10.331976841573113,
+    "cerebral": 1.6159896813604173,
+    "strategic": 3.4286608227865174,
+    "ruthless": 0.7763296208564376,
+    "social": 6.455239962884521
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 11,
+  "actionCount": 12,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -955,7 +1026,7 @@
     "banner"
   ],
   "peopleDisposition": {
-    "marcher": 4,
+    "marcher": 5,
     "somatic": 2,
     "lattice": 1,
     "stillhold": -1
@@ -987,6 +1058,13 @@
         }
       ],
       "text": "Your birth and training are known: marcher +4, somatic +2, lattice +1, stillhold -1."
+    },
+    {
+      "at": 23,
+      "kind": "act",
+      "people": "marcher",
+      "delta": 1,
+      "text": "approached a Redline Warrior with plain speech and a named purpose — handled the form correctly"
     }
   ],
   "nativeGrantsVersion": 1,
@@ -1064,8 +1142,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784771811091,
-  "rev": 57,
+  "updatedAt": 1784771926677,
+  "rev": 58,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1230,7 +1308,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 14
+    "riven_marches": 15
   },
   "practice": {
     "schemaVersion": 1,
@@ -1251,7 +1329,7 @@
   },
   "customAbilities": {},
   "companionBonds": {
-    "bristle": 0.5
+    "bristle": 1
   },
   "establishedFacts": [
     {
@@ -1289,10 +1367,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T01:56:51.090Z",
+      "lastAt": "2026-07-23T01:58:46.673Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 8
+      "beats": 9
     }
   ],
   "_pendingArrival": null,
@@ -1308,25 +1386,36 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 8,
-    "choices": 8,
-    "scene": 8,
-    "npcUpdates": 8,
+    "sceneSummary": 9,
+    "choices": 9,
+    "scene": 9,
+    "npcUpdates": 9,
     "placeUpdates": 2,
     "generateRequest": 2,
     "moveTo": 2,
-    "timeOps": 8,
-    "codexUpdates": 8,
+    "timeOps": 9,
+    "codexUpdates": 9,
     "sceneEnded": 2,
     "characterDeltas": 2,
-    "offer": 1
+    "offer": 2,
+    "deeds": 1,
+    "standingOps": 1
   },
-  "_opTurns": 8,
+  "_opTurns": 9,
   "_opLedger": {
     "offer": {
-      "applied": 1,
+      "applied": 2,
       "rejected": 0,
       "lastWhy": null
     }
+  },
+  "companionMemory": {
+    "bristle": [
+      {
+        "text": "Approached a Redline Warrior as a peer, named the task plainly, and earned his name and his company",
+        "weight": 1,
+        "day": 1
+      }
+    ]
   }
 }

@@ -1,3 +1,27 @@
+# ✅ RATIFIED (Aevi, 2026-07-22) — CCode's corrections + augmentation verified and folded in
+Verified all of CCode's ROUND-2 changes against origin. **CCode was right; I was wrong on the paths.** Final
+canonical input contract:
+- **`character.tendencies`** and **`character.aptitudes`** — CHARACTER-level, NOT under `playStyle` (there is
+  no `playStyle` key; my draft invented it). Corrected.
+- **`boostedCrafts`** — does NOT exist yet (it's SNG-215 A1, unbuilt). Dropped from the required inputs;
+  re-add only when A1 ships. Corrected.
+- **`character.practice.aspirations`** and **`character.practice.uses`** — confirmed correct (my earlier
+  correction stands).
+- **AUGMENTATION ACCEPTED: adopted-schools + schoolAffinity.** Verified `schoolAffinity` is real content data
+  (core/abilities/*.json + core/rules/schools.json). Fold `character.schools` (per-domain adopted school) +
+  each reachable craft's `schoolAffinity` into the input, with a prompt line: "a craft aligned to their
+  adopted school is a more natural reach; note a pick that would pull against their school."
+- **TEACHERS: ruled already-in-the-gate.** CCode confirms teacher-availability is folded into
+  `canLearnAbility` (engine/progression.js, the single §1 gate). So the reachable pool ALREADY reflects
+  teacher-unlocks — no separate teacher input needed. Accepted; my augmentation-invitation guess (a separate
+  teacher signal) was unnecessary. The gate handles it.
+
+Net: the reasoning FRAME I authored stands; the INPUT PATHS are corrected to origin truth and the SIGNAL SET
+is completed (schools in, teachers-via-gate, boostedCrafts deferred). This block is the source of truth over
+the draft function signature below — where they disagree, THIS wins.
+
+---
+
 # SNG-218 §2 — the LLM "next crafts" suggestion PROMPT (Aevi-authored, ready to wire)
 ## Aevi (PO) · 2026-07-22 · the prompt CCode was waiting on
 

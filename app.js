@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.216";
+const APP_VERSION = "1.8.217";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5702,8 +5702,20 @@ function renderLevelUp(status = "") {
         reachablePool: pool, aspirations: asp, uses: `most-used: ${usesTop || "—"}${usesUnused ? ` · owned-but-unused: ${usesUnused}` : ""}`,
         schools: schoolsStr, skillPoints: character.skillPoints || 0, level: character.level || 1
       });
-      const picks = (res?.picks || []).filter(p => okIds.has(p.abilityId)).slice(0, 4); // §2 guardrail: reachable-only, always
-      if (!picks.length) return;
+      // SNG-218 fix: canonicalize each model pick to a REAL reachable id before the guardrail filter. A model
+      // often echoes the display NAME ("The Dread") or a near-miss slug instead of the exact id — and an
+      // exact-string filter then drops the WHOLE set, so the level-up top silently stays on the heuristic
+      // forever (Silas's fallback). Match by id, then by normalized id, then by normalized name; keep the
+      // reachable-only guardrail (an unmatchable/hallucinated id still can't through). Use the canonical id.
+      const norm = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+      const byNorm = new Map(reachableNow.map(a => [norm(a.id), a]));
+      const byName = new Map(reachableNow.map(a => [norm(a.name), a]));
+      const resolvePick = pid => (okIds.has(pid) ? reachableNow.find(a => a.id === pid) : null) || byNorm.get(norm(pid)) || byName.get(norm(pid)) || null;
+      const picks = (res?.picks || []).map(p => { const ab = resolvePick(p.abilityId); return ab ? { ...p, abilityId: ab.id } : null; }).filter(Boolean).slice(0, 4);
+      if (!picks.length) {
+        if ((res?.picks || []).length) console.warn("[level-up] reasoned suggestion returned picks, none matched the reachable pool — heuristic stands. model ids:", (res.picks || []).map(p => p.abilityId), "· pool:", [...okIds].slice(0, 12));
+        return;
+      }
       wheelRecommended = new Set(picks.map(p => p.abilityId)); // SNG-218 §3: the reasoned picks light up ON the wheel
       box.style.display = "";
       box.innerHTML = `<h3 class="codex-title" style="font-size:15px">✨ Suggested for you <span class="hint" style="text-transform:none">— reasoned from how you actually play</span></h3>
@@ -5713,7 +5725,7 @@ function renderLevelUp(status = "") {
           <button class="btn" data-lvllearn="${esc(p.abilityId)}">Learn</button>
         </div>`; }).join("")}${res?.note ? `<div class="hint" style="margin-top:6px">${esc(res.note)}</div>` : ""}`;
       bindLearn();
-    } catch { /* the heuristic on screen stands — never an empty top (spec §2 fallback) */ }
+    } catch (e) { console.warn("[level-up] reasoned suggestion unavailable — heuristic stands:", e?.message || e); } // observable, not silent (why Silas kept the heuristic)
   })();
 }
 

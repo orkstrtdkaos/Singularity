@@ -7358,7 +7358,8 @@ await (async () => {
   // the app render wires the fallback + the hard filter (source-level, since it's async DOM).
   const appSrc218b = readFileSync(join(root, "app.js"), "utf8");
   check("218 §2: renderLevelUp reads reachableNow (§1 gate) for BOTH the heuristic and the LLM pool", /const reachableNow = learnable\.filter\(ab => canLearnAbility/.test(appSrc218b) && /recommendSkills\(character, reachableNow/.test(appSrc218b));
-  check("218 §2: the render hard-filters model picks against okIds + falls back to the heuristic on failure", /okIds\.has\(p\.abilityId\)/.test(appSrc218b) && /the heuristic on screen stands/.test(appSrc218b));
+  check("218 §2: the render canonicalizes model picks (name/near-slug → real id), guardrails, falls back on failure", /const resolvePick = pid =>/.test(appSrc218b) && /byName\.get\(norm\(pid\)\)/.test(appSrc218b) && /heuristic stands/.test(appSrc218b));
+  check("218 §2 fix: both fallback paths are OBSERVABLE (no more silent heuristic — the Silas fallback)", /none matched the reachable pool/.test(appSrc218b) && /reasoned suggestion unavailable/.test(appSrc218b));
 
   // §3: the wheel is the browse+highlight surface — suggestion picks lit, standing-locked capstones dimmed as "later".
   check("218 §3: the suggestion's picks populate wheelRecommended (heuristic AND the LLM upgrade)", /wheelRecommended = new Set\(suggestions\.map/.test(appSrc218b) && /wheelRecommended = new Set\(picks\.map/.test(appSrc218b));

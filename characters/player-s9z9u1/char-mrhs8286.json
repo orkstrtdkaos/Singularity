@@ -1688,29 +1688,39 @@
         "player": "Ask for Pell to check the line with her own senses... encourage her to reach beyond ironsense - use what's in her innately. As for me, I'll have Huginn seach for any endings nearby that need to be witnessed, but follow the cairn-line checking in wiht order sense occasionally.",
         "summary": "Pell walks the cairn-line interval and feels the design settle under her feet; Huginn scouts the line's south run and finds one small, unhurried ending — nothing that calls for witness yet.",
         "narration": "Silas touches Pell's arm lightly as they walk and asks her to try. He says it plain: not the iron, not the sword's thread — reach past those. She knows the line is there. What does it feel like underneath the metal-sense?\n\nPell does not answer right away. She slows her pace until she is walking at the interval of the stones themselves — one long stride between each step, the cairn-line's own rhythm. Her hands open at her sides. After the third stone she says, quietly, \"Something settles when I match the spacing. Like walking into a room that is the right temperature.\" She does not say what kind of right. She keeps walking.\n\nSilas turns to Huginn and gives the bird a short nod. Huginn lifts without ceremony, beats twice, and angles south along the line — not high, perhaps thirty feet, quartering slow. Silas opens his own sense lightly, the way Veth named it: not pushing into the design, just letting the weight of it register through the soles of his boots. The lattice is thin here and the craft costs him a beat of effort for what should be effortless. It comes through anyway, faint and patient — the line running thicker at its deep axis, not toward any single stone but threading below all of them at once, a long continuous structure pulling southward. Order-Sense reads it as a single object, not a row of objects. The cairns are its surface. The design is its body.\n\nHuginn banks at the far end of the visible line and tilts his head — the movement that means he found something and is deciding if it rises to the level of Silas's attention. He wheels once and returns. No cry. Whatever ending he located down the line is small, or patient, or already done — nothing demanding witness. He settles back to the left shoulder and tucks his beak once toward the road ahead, which is the direction of the Crossing.\n\n*You feel it settle into you — a new steadiness. (Level 19: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "Ask Pell what she felt past the iron — press her to name it, not just describe the temperature.",
+        "summary": "Pell names what she felt past the iron — not temperature, but recognition: something below the cairn-line reads a person walking at the right interval, and Pell believes Silas's father walked this same road.",
+        "narration": "Silas falls into step beside Pell and asks her directly. Not the temperature, he says. What was it like? She walks another two cairn-stones before she answers.\n\n\"Like something recognized me,\" she says. She does not look at him when she says it. \"Not the iron. Not the spear's thread. Something older than either of those, and it was not looking for iron — it was looking for weight. For a person at the right interval.\" She pauses. \"It did not feel like reading. It felt like being read.\"\n\nVeth has slowed without appearing to slow. She is close enough to hear, and she does not interrupt. Huginn tilts its beak south along the line, toward wherever the small ending waits. The cairn-stones pace them on the left, one after another, patient and old.\n\nPell finally looks at Silas. \"It knew the interval,\" she says. \"Whatever is down there, it was built to recognize someone walking it correctly. Not a warden. Not a craftsman specifically. Just a person who matches the rhythm.\" She glances at the nearest stone. \"Your father walked this road.\""
       }
     ],
     "lastTurn": {
-      "narration": "Silas touches Pell's arm lightly as they walk and asks her to try. He says it plain: not the iron, not the sword's thread — reach past those. She knows the line is there. What does it feel like underneath the metal-sense?\n\nPell does not answer right away. She slows her pace until she is walking at the interval of the stones themselves — one long stride between each step, the cairn-line's own rhythm. Her hands open at her sides. After the third stone she says, quietly, \"Something settles when I match the spacing. Like walking into a room that is the right temperature.\" She does not say what kind of right. She keeps walking.\n\nSilas turns to Huginn and gives the bird a short nod. Huginn lifts without ceremony, beats twice, and angles south along the line — not high, perhaps thirty feet, quartering slow. Silas opens his own sense lightly, the way Veth named it: not pushing into the design, just letting the weight of it register through the soles of his boots. The lattice is thin here and the craft costs him a beat of effort for what should be effortless. It comes through anyway, faint and patient — the line running thicker at its deep axis, not toward any single stone but threading below all of them at once, a long continuous structure pulling southward. Order-Sense reads it as a single object, not a row of objects. The cairns are its surface. The design is its body.\n\nHuginn banks at the far end of the visible line and tilts his head — the movement that means he found something and is deciding if it rises to the level of Silas's attention. He wheels once and returns. No cry. Whatever ending he located down the line is small, or patient, or already done — nothing demanding witness. He settles back to the left shoulder and tucks his beak once toward the road ahead, which is the direction of the Crossing.\n\n*You feel it settle into you — a new steadiness. (Level 19: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Pell walks the cairn-line interval and feels the design settle under her feet; Huginn scouts the line's south run and finds one small, unhurried ending — nothing that calls for witness yet.",
+      "narration": "Silas falls into step beside Pell and asks her directly. Not the temperature, he says. What was it like? She walks another two cairn-stones before she answers.\n\n\"Like something recognized me,\" she says. She does not look at him when she says it. \"Not the iron. Not the spear's thread. Something older than either of those, and it was not looking for iron — it was looking for weight. For a person at the right interval.\" She pauses. \"It did not feel like reading. It felt like being read.\"\n\nVeth has slowed without appearing to slow. She is close enough to hear, and she does not interrupt. Huginn tilts its beak south along the line, toward wherever the small ending waits. The cairn-stones pace them on the left, one after another, patient and old.\n\nPell finally looks at Silas. \"It knew the interval,\" she says. \"Whatever is down there, it was built to recognize someone walking it correctly. Not a warden. Not a craftsman specifically. Just a person who matches the rhythm.\" She glances at the nearest stone. \"Your father walked this road.\"",
+      "sceneSummary": "Pell names what she felt past the iron — not temperature, but recognition: something below the cairn-line reads a person walking at the right interval, and Pell believes Silas's father walked this same road.",
       "choices": [
         {
-          "label": "Walk the full interval to where the design feels thickest — let Order-Sense read where the line's center pulls.",
+          "label": "Use Order-Sense now — press lightly outward along the line and see if the design's center shows itself, the way Veth described.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {
+            "chaos_order": 0.4,
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 0,
           "intentTags": [
-            "careful",
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Ask Huginn what ending he found — small or not, it is on the line, and the line may be the point.",
+          "label": "Ask Veth what it means that the design reads for interval and weight rather than craft-signature — is that how a boundary-seat knows its warden?",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -1720,22 +1730,25 @@
           "trivial": true
         },
         {
-          "label": "Ask Pell what she felt past the iron — press her to name it, not just describe the temperature.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Huginn plainly where the small ending is — and whether it is the kind that needs a warden or simply the kind that is already being held.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "help"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Keep south at a steady pace — the Crossing waits, and the line will show its center when it is ready.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Keep walking at the cairn-line's interval — south, toward the Crossing — and let the design show what it wants to show at its own pace.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "travel",
@@ -1746,66 +1759,47 @@
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "energy": -2
-      },
       "scene": {
-        "setting": "The cairn-line road south of Cairnhold, early morning, early spring. The stones continue at long-stride intervals along the left. Huginn has returned to Silas's left shoulder. Clear and cold, the town a few minutes behind.",
+        "setting": "The cairn-line road south of Cairnhold, early morning, early spring. Clear and cold. The stones continue at long-stride intervals on the left. The town is several minutes behind now.",
         "npcsPresent": [
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Walking ahead, watching Pell work the interval without comment."
+            "state": "Walking close enough to have heard Pell's answer — slowed without appearing to slow, silent, processing."
           },
           {
             "name": "Pell Marsh",
-            "state": "Walking at the cairn-line's rhythm, hands open, reporting quietly what she feels under the iron-sense."
+            "state": "Walking at Silas's side now, hands still open, looking at the nearest cairn-stone after naming what she felt."
           },
           {
             "name": "Huginn",
-            "state": "Back on Silas's left shoulder — made one southward pass, found a small ending, returned without alarm. Beak tilted toward the road ahead."
+            "state": "Beak tilted south along the line, toward the small ending it found — unhurried, waiting."
           }
         ],
         "objects": [
-          "Cairn-stones — spaced at long-stride intervals along the left, the design running below all of them at once",
-          "The road south — clear, cold-firm, running toward the lowlands and the Crossing"
+          "Cairn-stones — spaced at long-stride intervals on the left, running south",
+          "The road south — cold-firm, clear, opening toward the lowlands and the Crossing"
         ],
         "threads": [
-          "Pell's sense past the iron — she named the feeling but not what kind of right it was; unpressed",
-          "Huginn's finding — a small or patient ending somewhere south along the line; not yet named",
-          "The design's center — Order-Sense reads the line as one continuous structure pulling south; the thickest point not yet located",
+          "Pell's named feeling — something below the line recognized her walking the interval correctly; she believes Silas's father walked this road",
+          "Huginn's finding — a small, patient ending somewhere south along the line; not yet named or located",
+          "The design's center — Order-Sense reads the whole line as one structure pulling south; the thickest point still unfound",
           "The Crossing ahead — Edvar Crane, the guild rolls, the second thread"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell Marsh",
-          "note": "Walked the cairn-line interval at Silas's request, reaching past ironsense — reported that the spacing feels like walking into a room that is the right temperature. Left the character of that right unnamed.",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Named what she felt past the iron-sense: not temperature, but recognition — something below the cairn-line reads a person walking at the right interval, looking for weight and rhythm rather than craft-signature. Named her belief that Silas's father walked this road.",
           "learned": [
-            "The cairn-line spacing produces a settling feeling past the iron-sense — something older than metal responding to the interval"
+            "The cairn-line's buried design reads for interval and weight — it recognized Pell walking correctly, not as a craftsman but as a person matching the rhythm",
+            "She believes Silas's father walked this same road at the same interval"
           ],
           "skillsObserved": [
-            "walking a design's native rhythm to read it through the body rather than through craft"
+            "walking the cairn-line interval and reporting the felt distinction between iron-sense and the deeper recognition beneath it"
           ],
-          "statusNote": "On the road south of Cairnhold, walking the cairn-line interval, hands open."
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Scouted the cairn-line's south run — found one small or patient ending; judged it did not need immediate witness; returned without alarm.",
-          "learned": [
-            "There is at least one ending present somewhere south along the cairn-line — small, patient, or already concluded"
-          ],
-          "statusNote": "Back on Silas's left shoulder, beak tilted south; the found ending unreported in detail."
-        },
-        {
-          "op": "update",
-          "npcId": "veth",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Walking ahead, watching Pell work without intervention — silent endorsement of the method.",
-          "statusNote": "On the road south of Cairnhold, walking two paces ahead."
+          "statusNote": "On the road south of Cairnhold, walking beside Silas, hands open."
         }
       ],
       "codexUpdates": [
@@ -1813,43 +1807,44 @@
           "topic": "precursor-signs-in-the-valley",
           "label": "Precursor Signs in the Valley",
           "kind": "mystery",
-          "fact": "Order-Sense reads the cairn-line as a single continuous object pulling southward — not a row of stones but one design below them all, with its center somewhere further south. Pell confirmed a settling response past ironsense when walking the line at its own interval. Huginn located one small ending along the south run — patient or already done, not yet demanding witness.",
+          "fact": "Pell walked the cairn-line interval and named the buried design's quality precisely: it reads for weight and rhythm, not craft-signature. It recognized her walking at the correct interval — not as an Ashwarden or Wright, but as a person matching the pace. She believes Silas's father walked this road at the same interval. Whatever is seated below the cairn-line was built to recognize a person, not a tradition.",
           "links": [
             "the-second-thread",
             "what-the-water-remembers",
-            "stillwaters-trouble"
+            "pell-ran-marsh",
+            "the-water-crisis"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short stretch of road walked while Huginn scouted and Pell worked the interval"
+        "why": "a short stretch of road-walking and a few minutes of conversation"
       }
     },
     "sceneState": {
-      "setting": "The cairn-line road south of Cairnhold, early morning, early spring. The stones continue at long-stride intervals along the left. Huginn has returned to Silas's left shoulder. Clear and cold, the town a few minutes behind.",
+      "setting": "The cairn-line road south of Cairnhold, early morning, early spring. Clear and cold. The stones continue at long-stride intervals on the left. The town is several minutes behind now.",
       "npcsPresent": [
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Walking ahead, watching Pell work the interval without comment."
+          "state": "Walking close enough to have heard Pell's answer — slowed without appearing to slow, silent, processing."
         },
         {
           "name": "Pell Marsh",
-          "state": "Walking at the cairn-line's rhythm, hands open, reporting quietly what she feels under the iron-sense."
+          "state": "Walking at Silas's side now, hands still open, looking at the nearest cairn-stone after naming what she felt."
         },
         {
           "name": "Huginn",
-          "state": "Back on Silas's left shoulder — made one southward pass, found a small ending, returned without alarm. Beak tilted towar"
+          "state": "Beak tilted south along the line, toward the small ending it found — unhurried, waiting."
         }
       ],
       "objects": [
-        "Cairn-stones — spaced at long-stride intervals along the left, the design runnin",
-        "The road south — clear, cold-firm, running toward the lowlands and the Crossing"
+        "Cairn-stones — spaced at long-stride intervals on the left, running south",
+        "The road south — cold-firm, clear, opening toward the lowlands and the Crossing"
       ],
       "threads": [
-        "Pell's sense past the iron — she named the feeling but not what kind of right it was; unpressed",
-        "Huginn's finding — a small or patient ending somewhere south along the line; not yet named",
-        "The design's center — Order-Sense reads the line as one continuous structure pulling south; the thickest point not yet located",
+        "Pell's named feeling — something below the line recognized her walking the interval correctly; she believes Silas's father walked this road",
+        "Huginn's finding — a small, patient ending somewhere south along the line; not yet named or located",
+        "The design's center — Order-Sense reads the whole line as one structure pulling south; the thickest point still unfound",
         "The Crossing ahead — Edvar Crane, the guild rolls, the second thread"
       ]
     }
@@ -2697,7 +2692,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] The crescendo reached together — the soul bond's choice held and made complete a second time, in the only register that needs no words. She is close, unhurried, not releasing.",
         "[d12] Named plainly that she felt the merger seat through the bond, and that she had wanted it before Silas asked — held it back for fear it would read as pressure, and waited for the bond to carry it instead.",
         "[d12] Named the iridescent fabric plainly: made well, not crafted toward an outcome. Dry, exact, unhurried. The Wrights who make it work in beauty, not in results.",
         "[d12] Named the iridescent fabric as standard Wright journeyman work — no enhancement toward conception. Confirmed she noticed the floor's buried hum and watched Huginn move when it happened.",
@@ -2706,28 +2700,29 @@
         "[d13] Blush confirmed — tucked her hair, took a long drink, did not look at Silas. The reaction was real.",
         "[d13] Finished breakfast first, looked out the window, gave Silas one direct warm glance before the door. On the road now, not looking back.",
         "[d13] Came level with Silas and offered the ironsense parallel unprompted — you feel where it is thickest, you do not go inside it. Veth gave her the short confirming nod.",
-        "[d13] Walked the cairn-line interval at Silas's request, reaching past ironsense — reported that the spacing feels like walking into a room that is the right temperature. Left the character of that right unnamed."
+        "[d13] Walked the cairn-line interval at Silas's request, reaching past ironsense — reported that the spacing feels like walking into a room that is the right temperature. Left the character of that right unnamed.",
+        "[d13] Named what she felt past the iron-sense: not temperature, but recognition — something below the cairn-line reads a person walking at the right interval, looking for weight and rhythm rather than craft-signature. Named her belief that Silas's father walked this road."
       ],
       "knownFacts": [
-        "The soul bond's question answered again at the crescendo — the choice to try for a child held at full load, not a yielding but a holding.",
-        "She felt the soul-merger seat at the moment it happened — bond carried the information cleanly.",
         "She wanted the child before Silas asked, and chose silence over what might have sounded like pressure.",
         "The iridescent fabric is Wright-made for beauty, not enhanced toward conception — Pell named this directly.",
         "The iridescent fabric is Wright-made at journeyman level — beauty only, nothing exotic.",
         "She noticed the floor's tonal vibration and flagged Huginn's response to it.",
         "The floor hum recurred before dawn on the morning of departure — second confirmed instance at this house; Huginn's reaction was identical to the first.",
-        "The cairn-line spacing produces a settling feeling past the iron-sense — something older than metal responding to the interval"
+        "The cairn-line spacing produces a settling feeling past the iron-sense — something older than metal responding to the interval",
+        "The cairn-line's buried design reads for interval and weight — it recognized Pell walking correctly, not as a craftsman but as a person matching the rhythm",
+        "She believes Silas's father walked this same road at the same interval"
       ],
       "skillsObserved": [
-        "feeding ironsense through the spear-shaft as a structural an",
         "finding the honest entry point into an unfamiliar room",
         "reading a shadow-build's structure from ironsense feed — fol",
         "reading a structural mark's pressure and interval from an ir",
         "translating an unfamiliar craft-concept into a working irons",
-        "walking a design's native rhythm to read it through the body"
+        "walking a design's native rhythm to read it through the body",
+        "walking the cairn-line interval and reporting the felt disti"
       ],
       "status": "active",
-      "statusNote": "On the road south of Cairnhold, walking the cairn-line interval, hands open.",
+      "statusNote": "On the road south of Cairnhold, walking beside Silas, hands open.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 13
@@ -4265,7 +4260,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 552,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -4754,7 +4749,6 @@
         "label": "Precursor Signs in the Valley",
         "kind": "mystery",
         "facts": [
-          "[d2] A second pre-Transition site exists within reach of Millbrook — flagged slate floor, saddle-mount hooks, worn stand-positions, pressed wall-marks. Pell found it through the north cut following a hills",
           "[d2] The buried structure beneath the east furlong and north-cut hillside is a single coherent design — different rooms (wash-room, valve seats), same builder, same intent. Huginn's attention moved to the ",
           "[d2] The wash-room operator's station was the control head of the full buried structure — valve housings, channel junctions, and the amber-lit crack above the bedrock shelf are all downstream of this point",
           "[d2] A sealed section of the original east-channel bed within Millbrook itself carries the same CCW stain signature as the active valve failures — the structure's footprint extends into the village's own o",
@@ -4765,17 +4759,18 @@
           "[d12] Pell confirmed she heard the buried hum from beneath Ama's house floor on World-day 12 night — a single low tonal note, then gone. She watched Huginn move in response. Two witnesses, one event.",
           "[d13] The buried hum beneath Ama's house recurred a second time — one low tonal note roughly an hour before dawn on the morning of departure. Pell heard it and watched Huginn's response: a half-second of complete stillness, then nothing. Two witnesses on two separate nights at the same location.",
           "[d13] Veth named the cairn-line south of Cairnhold as a boundary-seat pattern — the stones are the surface layer of something much larger and more patient seated in the ground below. The buried hum beneath Ama's house is not the cairns themselves; it is the deeper design coming closer to the surface…",
-          "[d13] Order-Sense reads the cairn-line as a single continuous object pulling southward — not a row of stones but one design below them all, with its center somewhere further south. Pell confirmed a settling response past ironsense when walking the line at its own interval. Huginn located one small…"
+          "[d13] Order-Sense reads the cairn-line as a single continuous object pulling southward — not a row of stones but one design below them all, with its center somewhere further south. Pell confirmed a settling response past ironsense when walking the line at its own interval. Huginn located one small…",
+          "[d13] Pell walked the cairn-line interval and named the buried design's quality precisely: it reads for weight and rhythm, not craft-signature. It recognized her walking at the correct interval — not as an Ashwarden or Wright, but as a person matching the pace. She believes Silas's father walked this…"
         ],
         "links": [
-          "dara-holt",
           "aldric",
           "the-actor-with-a-list",
           "the-water-crisis",
           "waygate",
           "the-second-thread",
           "what-the-water-remembers",
-          "stillwaters-trouble"
+          "stillwaters-trouble",
+          "pell-ran-marsh"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -5711,21 +5706,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 11.345520692301209,
-    "cerebral": 17.14887533314596,
-    "social": 13.307243566155995,
-    "generous": 2.3456369520024856,
-    "cautious": 2.517619676868073,
-    "physical": 0.08155383997475119,
-    "risky": 0.0855253576057536,
-    "ruthless": 0.027268825625277156,
-    "carousing": 1.053973600406509,
-    "amorous": 10.61357303574611,
-    "patient": 0.7285701239771851,
-    "stealth": 0.010569466478800343,
-    "devotion": 0.21592452868908732,
-    "craft": 0.6354746445946995,
-    "leadership": 0.05379975738818579
+    "strategic": 11.061882674993678,
+    "cerebral": 17.72015344981731,
+    "social": 12.974562477002095,
+    "generous": 3.2869960282024233,
+    "cautious": 2.454679184946371,
+    "physical": 0.0795149939753824,
+    "risky": 0.08338722366560976,
+    "ruthless": 0.026587104984645227,
+    "carousing": 1.0276242603963464,
+    "amorous": 10.348233709852458,
+    "patient": 0.7103558708777555,
+    "stealth": 0.010305229816830333,
+    "devotion": 0.21052641547186013,
+    "craft": 0.619587778479832,
+    "leadership": 0.05245476345348115
   },
   "aptitudes": [
     "strategist",
@@ -5734,7 +5729,7 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 667,
+  "actionCount": 668,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -6084,8 +6079,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784767762825,
-  "rev": 1041,
+  "updatedAt": 1784768952372,
+  "rev": 1042,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8119,7 +8114,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 59
+    "the_center": 60
   },
   "foreclosed": [
     "rootkin",
@@ -8233,10 +8228,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-23T00:49:22.823Z",
+      "lastAt": "2026-07-23T01:09:12.370Z",
       "startDay": 22,
       "endDay": 23,
-      "beats": 33
+      "beats": 34
     }
   ],
   "company": [
@@ -8424,22 +8419,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 43,
-    "choices": 43,
+    "sceneSummary": 44,
+    "choices": 44,
     "characterDeltas": 21,
-    "scene": 43,
-    "npcUpdates": 37,
+    "scene": 44,
+    "npcUpdates": 38,
     "factUpdates": 5,
     "placeUpdates": 2,
-    "codexUpdates": 18,
-    "timeOps": 38,
+    "codexUpdates": 19,
+    "timeOps": 39,
     "imagePrompt": 1,
     "sceneEnded": 11,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 2
   },
-  "_opTurns": 43,
+  "_opTurns": 44,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

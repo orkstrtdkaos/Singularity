@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 19,
-  "xp": 1844,
+  "xp": 1849,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -117,7 +117,7 @@
     "chaos_order": 0.25700971191540173,
     "mechanical_spiritual": 0.2580372847905887,
     "concrete_abstract": -0.021014395762538336,
-    "death_life": -0.18603959732339526,
+    "death_life": -0.1917376174572255,
     "emotional_logical": 0.008330843749999983,
     "falsehood_truth": 0.31383840738235763,
     "demonic_angelic": 0.013499999999999998,
@@ -128,7 +128,7 @@
   "maxHealth": 120,
   "health": 120,
   "maxEnergy": 190,
-  "energy": 157,
+  "energy": 155,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1658,6 +1658,21 @@
       ],
       "day": 6,
       "worldDay": 19
+    },
+    {
+      "at": "2026-07-23T17:47:06.255Z",
+      "locationId": "gen-ashwarden-march-road",
+      "communityId": "ashwarden",
+      "description": "Attended the ending of an old badger in the hollow below the Raven's Home post — sat with it in the plain Ashwarden way, no craft past the clean reading, no ceremony past the presence.",
+      "tags": [
+        "ashwarden",
+        "attend-ending",
+        "devote"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 13,
+      "worldDay": 23
     }
   ],
   "relationships": {},
@@ -1746,148 +1761,182 @@
         "player": "Stay aloft a moment and reach with The Attended End — the southeast treeline, the hollow, the cairn-line. Ask what is ending near here.",
         "summary": "Silas reads the land from above with The Attended End — an old animal ending quietly in the hollow below the birch line, the cairn-line holding firm, and Huginn already watching the same spot.",
         "narration": "Silas holds position at twenty feet — Light-Borne steady, the post's roofline below, the spring air thin and cold against his face. He does not reach far. He reaches with care, the way you press a thumb against a bruise to learn its shape without deepening it.\n\nThe Attended End opens quietly. To the southeast, past the treeline's grey fringe, something is ending — not fast, not violently, but with the settled patience of a thing that has been ending for a while and knows it. An animal. Old. Not the small sharp ending of a hunt; this is the slower kind, a life unwinding on its own schedule. It is in the hollow ground below the birch line, and it is not in distress. It simply has less time than it did yesterday.\n\nThe cairn-line reads clean. Whatever the buried design is doing, it is not ending — if anything it reads more present than it did when Silas set his feet on it this morning, as though the waymarker bond settling into the post gave it something to measure against.\n\nHuginn is still locked-wing above the east treeline. He has not moved. He already knew."
+      },
+      {
+        "player": "Descend and go to the hollow — attend the animal's ending directly.",
+        "summary": "Silas descends from the air and attends the badger's ending in the hollow — a plain, patient death, witnessed without ceremony.",
+        "narration": "Silas lets the Light-Borne go slow and controlled, dropping in a steady arc from the post's roofline height down to the cleared ground. Cassiel watches without comment. Pell raises her chin once in a question. Silas shakes his head — not trouble, not yet — and tips it southeast. She understands and stays.\n\nThe path through the birch line is short but the birch close here, grey trunks pale and cool, the ground spongy under last year's leaf-fall. The hollow opens without announcement — a bowl of darker earth, the rim soft with moss, the spring air noticeably stiller inside it. Huginn is already there, settled on the lowest branch of a deadfall birch at the hollow's east edge, watching the ground.\n\nThe animal is a badger. Old, by the weight of its stillness — broad-skulled, flanks gone hollow, one eye half-closed against the light. It has chosen a root-hollow at the limestone outcrop's base and it has not moved in some time. Silas crouches at the hollow's rim, close enough to see its breathing, and opens The Attended End quietly and without ceremony. He does not reach for more than the reading. The badger's end is very close, and it is not complicated. No wound. No hunger. The body has simply run its full count and is settling the last of the ledger.\n\nHuginn makes no sound. Silas sits down on the damp earth and waits with the animal in the ordinary way — no craft required to hold the position, no energy spent past the one clean reading. The badger breathes four more times. Then it does not. Silas holds the moment for a breath of his own, then stands, his coat muddy at the knee, and looks at Huginn. The bird blinks once. That is sufficient.\n\n*✦ The Ashwardens: +1 — Attended an ending at the reclaimed post's ground in the plain Ashwarden way — present, unhurried, no performance.*"
       }
     ],
     "lastTurn": {
-      "narration": "Silas holds position at twenty feet — Light-Borne steady, the post's roofline below, the spring air thin and cold against his face. He does not reach far. He reaches with care, the way you press a thumb against a bruise to learn its shape without deepening it.\n\nThe Attended End opens quietly. To the southeast, past the treeline's grey fringe, something is ending — not fast, not violently, but with the settled patience of a thing that has been ending for a while and knows it. An animal. Old. Not the small sharp ending of a hunt; this is the slower kind, a life unwinding on its own schedule. It is in the hollow ground below the birch line, and it is not in distress. It simply has less time than it did yesterday.\n\nThe cairn-line reads clean. Whatever the buried design is doing, it is not ending — if anything it reads more present than it did when Silas set his feet on it this morning, as though the waymarker bond settling into the post gave it something to measure against.\n\nHuginn is still locked-wing above the east treeline. He has not moved. He already knew.",
-      "sceneSummary": "Silas reads the land from above with The Attended End — an old animal ending quietly in the hollow below the birch line, the cairn-line holding firm, and Huginn already watching the same spot.",
+      "narration": "Silas lets the Light-Borne go slow and controlled, dropping in a steady arc from the post's roofline height down to the cleared ground. Cassiel watches without comment. Pell raises her chin once in a question. Silas shakes his head — not trouble, not yet — and tips it southeast. She understands and stays.\n\nThe path through the birch line is short but the birch close here, grey trunks pale and cool, the ground spongy under last year's leaf-fall. The hollow opens without announcement — a bowl of darker earth, the rim soft with moss, the spring air noticeably stiller inside it. Huginn is already there, settled on the lowest branch of a deadfall birch at the hollow's east edge, watching the ground.\n\nThe animal is a badger. Old, by the weight of its stillness — broad-skulled, flanks gone hollow, one eye half-closed against the light. It has chosen a root-hollow at the limestone outcrop's base and it has not moved in some time. Silas crouches at the hollow's rim, close enough to see its breathing, and opens The Attended End quietly and without ceremony. He does not reach for more than the reading. The badger's end is very close, and it is not complicated. No wound. No hunger. The body has simply run its full count and is settling the last of the ledger.\n\nHuginn makes no sound. Silas sits down on the damp earth and waits with the animal in the ordinary way — no craft required to hold the position, no energy spent past the one clean reading. The badger breathes four more times. Then it does not. Silas holds the moment for a breath of his own, then stands, his coat muddy at the knee, and looks at Huginn. The bird blinks once. That is sufficient.\n\n*✦ The Ashwardens: +1 — Attended an ending at the reclaimed post's ground in the plain Ashwarden way — present, unhurried, no performance.*",
+      "sceneSummary": "Silas descends from the air and attends the badger's ending in the hollow — a plain, patient death, witnessed without ceremony.",
       "choices": [
         {
-          "label": "Descend and go to the hollow — attend the animal's ending directly.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
+          "label": "Tend the body — bury it or mark the spot in some small Ashwarden way before returning to the post.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "help",
             "devote"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Signal Huginn — let him lead you to whatever he sees in the east treeline.",
+          "label": "Sit a moment longer in the hollow — this is the first ending you have attended here, and the place should know you are paying attention.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.2
-          },
           "difficulty": 0,
           "intentTags": [
-            "scout"
+            "devote",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Descend and report to Veth and Cassiel — name what you read, ask if Veth knows the hollow's animals.",
+          "label": "Return to the post and read the Father's Sealed Letter — the work here is settling, and there is nothing left today that requires you to delay.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Return to Cassiel and ask directly what he meant when he stood at the hollow's rim eleven years ago — this place has earned the question.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Stay aloft another moment and reach further — use Order-Sense on the cairn-line to read what the waymarker bond changed in it.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.2
-          },
           "difficulty": 15,
           "intentTags": [
-            "study"
+            "comfort",
+            "negotiate"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "Above the Raven's Home warden post — Silas is aloft on Light-Borne at roughly twenty to thirty feet, pale midday spring sky, the post's roofline below, the cairn-line visible running south, the ward wall's seam legible from this height.",
+        "setting": "Inside the hollow below the southeast birch line — a bowl of dark earth and old leaf-fall, the limestone outcrop at the far rim, Huginn on the lowest branch of a deadfall birch. The badger's body is still in the root-hollow at the outcrop's base. Still, overcast midday light filters through the birch canopy.",
         "npcsPresent": [
           {
-            "name": "Cassiel Ord",
-            "state": "On the west ground below — two folded pages in hand, charcoal marks scratched in the mud at his feet, watching Silas aloft."
-          },
-          {
-            "name": "Pell Marsh",
-            "state": "Standing near the post's door below, eyes up, reading the flight without comment."
-          },
-          {
-            "name": "Veth Ondra",
-            "state": "On the west ground, at ease, watching both Silas and Huginn."
-          },
-          {
             "name": "Huginn",
-            "state": "Locked-wing, holding still above the east treeline — watching the hollow below him, unchanged."
+            "state": "On the lowest branch of a deadfall birch, watching Silas from the hollow's east edge — unhurried, unmoving."
           }
         ],
         "objects": [
+          "Badger's body — at the root-hollow at the limestone outcrop's base, still",
           "Waymarker — on Silas's person, warm",
-          "Memory (spear) — below, at the post",
-          "Cassiel's folded paper — charcoal marks, two full pages",
-          "Mud-scratched gathering hall footprint — visible below on the west ground",
-          "Ward wall seam — visible from this height as a subtle pressure-line curving north",
-          "Chalk Blanks (pair) — in inventory"
+          "Memory (spear) — at the post above, with the group",
+          "Father's Sealed Letter — in inventory, unread"
         ],
         "threads": [
-          "Old animal ending quietly in the hollow below the southeast birch line — patient, unwitnessed",
-          "Huginn locked-wing above the east treeline — watching the same spot Silas just read",
-          "Cairn-line reading more present since the waymarker bond seated",
-          "Huginn's small ending to the south — still patient, still unwitnessed",
+          "Cassiel, Pell, and Veth waiting above at the post",
           "Father's Sealed Letter — unread",
-          "Pell's forge dimensions — to be sent to Cassiel in writing"
+          "The question Cassiel carried at this hollow's rim for eleven years"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Present at the badger's ending in the hollow — settled on the deadfall birch, watching the ground before Silas arrived. One blink at the close. That is all.",
+          "statusNote": "In the hollow with Silas — the ending attended, the work done.",
+          "learned": [
+            "The first ending attended at the Raven's Home ground — a badger, old, no wound, the full count run out."
+          ]
+        }
+      ],
+      "offer": {
+        "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean naming, but something older, a sense that this bowl of earth has seen this kind of attendance and is not surprised.",
+        "from": "The place itself — Stillwater's Trouble, a ground that held Veth for eleven years and now holds Silas's first tended ending here; the world noting that attendance has begun."
+      },
+      "codexUpdates": [
+        {
+          "topic": "stillwaters-trouble",
+          "label": "Stillwater's Trouble",
+          "kind": "place",
+          "entityId": "stillwaters-trouble",
+          "fact": "The first ending attended at the Raven's Home ground — a badger, old, no wound, the body's full count settled. The hollow received the attendance without strangeness. Huginn was already there.",
+          "links": [
+            "ashwarden",
+            "what-the-water-remembers",
+            "the-second-thread",
+            "precursor-signs-in-the-valley"
+          ]
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief moment aloft, reaching with The Attended End"
-      }
+        "hoursPassed": 0.5,
+        "why": "A short descent from the air, the walk through the birch line, and the time spent sitting with the badger's end."
+      },
+      "deeds": [
+        {
+          "description": "Attended the ending of an old badger in the hollow below the Raven's Home post — sat with it in the plain Ashwarden way, no craft past the clean reading, no ceremony past the presence.",
+          "tags": [
+            "ashwarden",
+            "attend-ending",
+            "devote"
+          ],
+          "weight": 1,
+          "communityId": "ashwarden"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "First Ashwarden attendance performed in the hollow — the badger's ending witnessed on World-day 13 midday, the first death tended at this ground since the post was reclaimed.",
+          "flag": {
+            "first_ending_attended": true
+          },
+          "subPlace": {
+            "name": "The Root-Hollow at the Outcrop",
+            "parent": "Stillwater's Trouble",
+            "note": "A root-hollow at the base of the limestone outcrop at the hollow's far rim — where the old badger ended. First death site of the new tenure.",
+            "visited": true
+          }
+        }
+      ],
+      "standingOps": [
+        {
+          "people": "ashwarden",
+          "delta": 1,
+          "why": "Attended an ending at the reclaimed post's ground in the plain Ashwarden way — present, unhurried, no performance"
+        }
+      ],
+      "ledgerEvents": [
+        {
+          "what": "The first Ashwarden ending attended at the Raven's Home ground since its reclaiming — a plain death, witnessed without ceremony, in the hollow below the southeast birch line.",
+          "tags": [
+            "ashwarden",
+            "attend-ending",
+            "stillwaters-trouble"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "death_life": -0.02
+          },
+          "impactsLocal": false
+        }
+      ]
     },
     "sceneState": {
-      "setting": "Above the Raven's Home warden post — Silas is aloft on Light-Borne at roughly twenty to thirty feet, pale midday spring sky, the post's roofline below, the cairn-line visible running south, the ward wall's seam legible from this height.",
+      "setting": "Inside the hollow below the southeast birch line — a bowl of dark earth and old leaf-fall, the limestone outcrop at the far rim, Huginn on the lowest branch of a deadfall birch. The badger's body is still in the root-hollow at the outcrop's base. Still, overcast midday light filters through the birch canopy.",
       "npcsPresent": [
         {
-          "name": "Cassiel Ord",
-          "state": "On the west ground below — two folded pages in hand, charcoal marks scratched in the mud at his feet, watching Silas alo"
-        },
-        {
-          "name": "Pell Marsh",
-          "state": "Standing near the post's door below, eyes up, reading the flight without comment."
-        },
-        {
-          "name": "Veth Ondra",
-          "state": "On the west ground, at ease, watching both Silas and Huginn."
-        },
-        {
           "name": "Huginn",
-          "state": "Locked-wing, holding still above the east treeline — watching the hollow below him, unchanged."
+          "state": "On the lowest branch of a deadfall birch, watching Silas from the hollow's east edge — unhurried, unmoving."
         }
       ],
       "objects": [
+        "Badger's body — at the root-hollow at the limestone outcrop's base, still",
         "Waymarker — on Silas's person, warm",
-        "Memory (spear) — below, at the post",
-        "Cassiel's folded paper — charcoal marks, two full pages",
-        "Mud-scratched gathering hall footprint — visible below on the west ground",
-        "Ward wall seam — visible from this height as a subtle pressure-line curving nort",
-        "Chalk Blanks (pair) — in inventory"
+        "Memory (spear) — at the post above, with the group",
+        "Father's Sealed Letter — in inventory, unread"
       ],
       "threads": [
-        "Old animal ending quietly in the hollow below the southeast birch line — patient, unwitnessed",
-        "Huginn locked-wing above the east treeline — watching the same spot Silas just read",
-        "Cairn-line reading more present since the waymarker bond seated",
-        "Huginn's small ending to the south — still patient, still unwitnessed",
-        "Father's Sealed Letter — unread"
+        "Cassiel, Pell, and Veth waiting above at the post",
+        "Father's Sealed Letter — unread",
+        "The question Cassiel carried at this hollow's rim for eleven years"
       ]
     }
   },
@@ -4020,7 +4069,8 @@
         "[d13] Cassiel formally tasked as reconstruction lead — all five spaces named, funded, and being planned: Veth's laboratory (east wall), Silas's workshop (north corner), Huginn's Watch (east sill), Pell's forge (hearth-end), Cassiel's keeper's hut (threshold and grounds).",
         "[d13] Main compound building settled in plan — gathering hall with kitchen joined at the back, supply store at the north end, table for ten, large hearth. Footprint approved by Cassiel on the west cleared ground.",
         "[d13] Pell's forge flue requires widening before the anvil is brought in — exact dimensions to follow in writing from Pell. Cassiel has an asterisk beside this entry.",
-        "[d13] Ward wall perimeter named and walked — runs from post's north corner, out to west ground's edge, back to the cairn-line's first stone. Foundation measurements are Cassiel's next task. Defensive strategist promised."
+        "[d13] Ward wall perimeter named and walked — runs from post's north corner, out to west ground's edge, back to the cairn-line's first stone. Foundation measurements are Cassiel's next task. Defensive strategist promised.",
+        "[d13] First Ashwarden attendance performed in the hollow — the badger's ending witnessed on World-day 13 midday, the first death tended at this ground since the post was reclaimed."
       ],
       "flags": {
         "binding_seated": true,
@@ -4030,7 +4080,8 @@
         "reconstruction_delegated": true,
         "reconstruction_lead": "cassiel-ord",
         "ward_perimeter_named": true,
-        "defensive_strategist_promised": true
+        "defensive_strategist_promised": true,
+        "first_ending_attended": true
       },
       "subPlaces": {
         "waygate-arrival-point": {
@@ -4110,7 +4161,10 @@
           "parentUnresolved": "Raven's Home Warden Post"
         }
       },
-      "vectorsKnown": []
+      "vectorsKnown": [],
+      "_containmentNotes": [
+        "\"The Root-Hollow at the Outcrop\" was placed in gen-stillwater-s-trouble (the fiction named it), not gen-ashwarden-march-road"
+      ]
     },
     "cairnhold": {
       "visits": 1,
@@ -4212,6 +4266,20 @@
         "reactivated": true,
         "promotedFrom": "gen-stillwater-s-trouble",
         "wards": []
+      }
+    },
+    "gen-stillwater-s-trouble": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "subPlaces": {
+        "the-root-hollow-at-the-outcrop": {
+          "name": "The Root-Hollow at the Outcrop",
+          "parentId": "gen-stillwater-s-trouble",
+          "day": 13,
+          "visited": true,
+          "note": "A root-hollow at the base of the limestone outcrop at the hollow's far rim — where the old badger ended. First death site of the new tenure."
+        }
       }
     }
   },
@@ -4336,7 +4404,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 569,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 0,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -4353,6 +4421,10 @@
       {
         "thing": "Cassiel pauses his writing and says, without looking up: 'Eleven years. I noticed things. Along the line.' He does not elaborate yet — he…",
         "from": "Cassiel's want: to sit long enough to know whether what he is feeling is conscience or exhaustion — he has been holding what he observed…"
+      },
+      {
+        "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean…",
+        "from": "The place itself — Stillwater's Trouble, a ground that held Veth for eleven years and now holds Silas's first tended ending here; the…"
       }
     ],
     "wantProgress": {
@@ -5799,21 +5871,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.85125865356103,
-    "cerebral": 17.9313694335029,
-    "social": 10.701819432694846,
-    "generous": 3.3916854614477288,
-    "cautious": 2.6955907504490217,
-    "physical": 0.060186598997177786,
-    "risky": 0.06311757243927894,
-    "ruthless": 0.020124348204089936,
-    "carousing": 0.7778307736449633,
-    "amorous": 7.832799343690977,
-    "patient": 0.5376835463138808,
-    "stealth": 0.007800248777624891,
-    "devotion": 0.15935194499594568,
-    "craft": 1.3065708300254228,
-    "leadership": 0.039704131958356266
+    "strategic": 20.329977187222003,
+    "cerebral": 17.48308519766533,
+    "social": 10.434273946877473,
+    "generous": 4.3068933249115355,
+    "cautious": 2.628200981687796,
+    "physical": 0.05868193402224834,
+    "risky": 0.06153963312829697,
+    "ruthless": 0.019621239498987687,
+    "carousing": 0.7583850043038393,
+    "amorous": 7.636979360098702,
+    "patient": 0.5242414576560338,
+    "stealth": 0.007605242558184269,
+    "devotion": 1.155368146371047,
+    "craft": 1.2739065592747874,
+    "leadership": 0.03871152865939736
   },
   "aptitudes": [
     "strategist",
@@ -5823,7 +5895,7 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 679,
+  "actionCount": 680,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6173,8 +6245,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784828701628,
-  "rev": 1076,
+  "updatedAt": 1784828826258,
+  "rev": 1077,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7911,7 +7983,7 @@
       "palework": 29,
       "deathsense": 31,
       "shadowstep": 17,
-      "the-attended-end": 34,
+      "the-attended-end": 35,
       "wildcraft": 6,
       "the_raised_thing": 9,
       "the_ended_threat": 4,
@@ -8277,7 +8349,7 @@
   "syncedAt": 1784477453768,
   "teachers": {},
   "regionsKnown": {
-    "valley": 444,
+    "valley": 445,
     "the_palelands": 6,
     "the_center": 62
   },
@@ -8401,10 +8473,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T17:45:01.627Z",
+      "lastAt": "2026-07-23T17:47:06.254Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 11
+      "beats": 12
     }
   ],
   "company": [
@@ -8533,7 +8605,7 @@
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
   "peopleDisposition": {
-    "ashwarden": 7,
+    "ashwarden": 8,
     "cogitant": 2,
     "figurist": 1,
     "rootkin": -1,
@@ -8576,6 +8648,13 @@
       "people": "ashwarden",
       "delta": 1,
       "text": "Claimed and named the abandoned warden post on the Ashwarden March — opened a working base where none has stood in eleven years"
+    },
+    {
+      "at": 23,
+      "kind": "act",
+      "people": "ashwarden",
+      "delta": 1,
+      "text": "Attended an ending at the reclaimed post's ground in the plain Ashwarden way — present, unhurried, no performance"
     }
   ],
   "_pendingIntent": null,
@@ -8592,24 +8671,27 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 51,
-    "choices": 51,
+    "sceneSummary": 52,
+    "choices": 52,
     "characterDeltas": 23,
-    "scene": 51,
-    "npcUpdates": 44,
+    "scene": 52,
+    "npcUpdates": 45,
     "factUpdates": 5,
-    "placeUpdates": 7,
-    "codexUpdates": 24,
-    "timeOps": 46,
+    "placeUpdates": 8,
+    "codexUpdates": 25,
+    "timeOps": 47,
     "imagePrompt": 1,
     "sceneEnded": 11,
     "itemUpdates": 1,
     "questUpdates": 2,
-    "offer": 3,
+    "offer": 4,
     "moveTo": 2,
-    "delegateOps": 1
+    "delegateOps": 1,
+    "deeds": 1,
+    "standingOps": 1,
+    "ledgerEvents": 1
   },
-  "_opTurns": 51,
+  "_opTurns": 52,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -8617,7 +8699,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 4,
+      "applied": 5,
       "rejected": 0,
       "lastWhy": null
     },
@@ -8651,5 +8733,14 @@
   ],
   "locationAliases": {
     "gen-stillwater-s-trouble": "the_old_warden_post"
+  },
+  "companionMemory": {
+    "marrow": [
+      {
+        "text": "Attended the ending of an old badger in the hollow below the Raven's Home post — sat with it in the plain Ashwarden way, no craft past the clean reading, no ceremony past the presence.",
+        "weight": 1,
+        "day": 13
+      }
+    ]
   }
 }

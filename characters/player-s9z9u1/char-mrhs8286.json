@@ -1712,68 +1712,68 @@
         "player": "I'm certain we'll cross paths with Siol again... but for now let's do a quick distribution of tasks.  Veth, please look into any resources, or workers we might be able to use back at either Stillwater's Trouble, or even out in Millbrook.  Also, see if anyone knows Crane.  Pell the same, but the focus would be on forge resources and perhaps getting another bout in at the coliseum. Huginn - with me... until the end.  I'm going to check on the ent the Council of Maven's and see if I can find a message runner post that has news from Millbrook.",
         "summary": "The party splits at the Hub plaza — Veth to ask after Crane and resources, Pell toward the Coliseum and forge supplies, Silas to the message board and the Ent grove with Huginn on his shoulder.",
         "narration": "You let the plaza settle around you and speak quietly enough that the crowd noise swallows the words before they travel. 'Veth — workers, resources, anyone who knows the name Crane. Pell — forge supplies, and another bout if the Coliseum has room.' Pell gives a short nod without looking up from the cooperage she has been reading for the past thirty seconds. Said Veth, equally plain: 'Crane. Resources. I'll ask at the well.' The two of them peel away in separate directions, Pell toward the northwest gate and its forge-smoke smell, Veth toward the cluster of people around the water-seller.\n\nHuginn drops from the crescent arch to your shoulder as the party splits. Its weight is familiar by now — the particular settle of something that has decided to remain. You do not look at it and it does not comment. The two of you move south across the worn central paving, past the water-seller's boiling-rags, toward the market row and the longer walk to the Ent grove circle at the Hub's quieter edge.\n\nThe Maven's Council post is a narrow building on the market row's east side — a message-board on the outer wall, a runner's bell above the door. You stop long enough to check the board for anything out of Millbrook: there is a folded notice pinned at the board's lower corner, sealed with a chalk mark you recognize as Mara's relay notation. Whatever it carries, it arrived recently. The runner inside has two more folded slips on the counter, sorted by settlement name. Millbrook is in the stack."
+      },
+      {
+        "player": "Open Mara's relay notice at the board — read what she sent",
+        "summary": "Silas reads Mara's relay notice at the Hub message board — water situation worsening, document roll delivered, repair work continuing, Pip's postscript pocket-filed.",
+        "narration": "The message board on the runner post's outer wall holds three slips today. Mara's is easy to find — her chalk seal is a plain circle with a single diagonal stroke, distinctive enough to read from six feet off. You pull the fold free and break the seal with your thumbnail.\n\nThe writing inside is Mara's: compact, no wasted words. She writes in two blocks. The first is water. The creek ran gray-green four mornings out of the past six at Millbrook's intake wheel. She has reduced her draw volume and is telling you so you know the pace. Pip Cotter completed the delivery on schedule — document roll received at the district records office, clerk's initials on the receipt slip, and Mara has that slip in her ledger. The second block is shorter. Calvar walked the lowest intake with Dara on day nine and flagged two additional sleeve joints at the east-bend showing early iron-oxide seep. Added to the repair queue behind the primary failure. Work is continuing.\n\nThere is a postscript, three words in a different hand — Pip's, you think, rounder letters. It reads: 'Roads go two ways.' Nothing else. You fold the notice and pocket it.\n\nHuginn shifts on your shoulder as you step back from the board. It says nothing, but it turns its head toward the plaza and holds the regard — patient, unimpressed by the crowd, watching the afternoon light move across the paving stones the way only something very old watches ordinary light."
       }
     ],
     "lastTurn": {
-      "narration": "You let the plaza settle around you and speak quietly enough that the crowd noise swallows the words before they travel. 'Veth — workers, resources, anyone who knows the name Crane. Pell — forge supplies, and another bout if the Coliseum has room.' Pell gives a short nod without looking up from the cooperage she has been reading for the past thirty seconds. Said Veth, equally plain: 'Crane. Resources. I'll ask at the well.' The two of them peel away in separate directions, Pell toward the northwest gate and its forge-smoke smell, Veth toward the cluster of people around the water-seller.\n\nHuginn drops from the crescent arch to your shoulder as the party splits. Its weight is familiar by now — the particular settle of something that has decided to remain. You do not look at it and it does not comment. The two of you move south across the worn central paving, past the water-seller's boiling-rags, toward the market row and the longer walk to the Ent grove circle at the Hub's quieter edge.\n\nThe Maven's Council post is a narrow building on the market row's east side — a message-board on the outer wall, a runner's bell above the door. You stop long enough to check the board for anything out of Millbrook: there is a folded notice pinned at the board's lower corner, sealed with a chalk mark you recognize as Mara's relay notation. Whatever it carries, it arrived recently. The runner inside has two more folded slips on the counter, sorted by settlement name. Millbrook is in the stack.",
-      "sceneSummary": "The party splits at the Hub plaza — Veth to ask after Crane and resources, Pell toward the Coliseum and forge supplies, Silas to the message board and the Ent grove with Huginn on his shoulder.",
+      "narration": "The message board on the runner post's outer wall holds three slips today. Mara's is easy to find — her chalk seal is a plain circle with a single diagonal stroke, distinctive enough to read from six feet off. You pull the fold free and break the seal with your thumbnail.\n\nThe writing inside is Mara's: compact, no wasted words. She writes in two blocks. The first is water. The creek ran gray-green four mornings out of the past six at Millbrook's intake wheel. She has reduced her draw volume and is telling you so you know the pace. Pip Cotter completed the delivery on schedule — document roll received at the district records office, clerk's initials on the receipt slip, and Mara has that slip in her ledger. The second block is shorter. Calvar walked the lowest intake with Dara on day nine and flagged two additional sleeve joints at the east-bend showing early iron-oxide seep. Added to the repair queue behind the primary failure. Work is continuing.\n\nThere is a postscript, three words in a different hand — Pip's, you think, rounder letters. It reads: 'Roads go two ways.' Nothing else. You fold the notice and pocket it.\n\nHuginn shifts on your shoulder as you step back from the board. It says nothing, but it turns its head toward the plaza and holds the regard — patient, unimpressed by the crowd, watching the afternoon light move across the paving stones the way only something very old watches ordinary light.",
+      "sceneSummary": "Silas reads Mara's relay notice at the Hub message board — water situation worsening, document roll delivered, repair work continuing, Pip's postscript pocket-filed.",
       "choices": [
         {
-          "label": "Open Mara's relay notice at the board — read what she sent",
+          "label": "Check the two additional slips on the runner's counter — see if the Millbrook stack holds anything else from the relay",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Head to the Ent grove to check the ward seated there on the party's last visit — Huginn's attention on the open plaza makes the grove feel like the next call",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "travel",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask the runner if there are any other messages for the Millbrook thread or the name Edvar Crane",
+          "label": "Ask the water-seller at the south end of the plaza what he has heard from upstream — his boiling-rag marks him as a man who pays attention to the water situation",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
+            "study",
             "persuade"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Continue to the Ent grove first — check on the ward seated there before reading the board",
+          "label": "Scan the plaza for any sign of Edvar Crane — the name your father left, somewhere in this city, holding the second thread",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
+          "subAttribute": "reason",
+          "difficulty": 15,
           "intentTags": [
+            "scout",
             "study"
           ],
           "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Use Order-Sense on the message board itself — read whether the notice is the only thread here or whether something is being held back",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "Hub Waygate Plaza and message-runner post on the market row's east side — afternoon light, open sky, the seven-arch crescent behind. A folded notice sealed with Mara's chalk relay mark is pinned to the board's lower corner. The runner's bell is above the door.",
+        "setting": "Hub Waygate Plaza and message-runner post on the market row's east side — afternoon light, open sky, the seven-arch crescent to the north. Mara's relay notice is now open and read, fold in Silas's pocket.",
         "npcsPresent": [
           {
             "name": "Huginn",
-            "state": "Settled on Silas's shoulder, watching the market row."
+            "state": "On Silas's shoulder, head turned toward the open plaza, watching the afternoon light on the paving stones."
           },
           {
             "name": "Pell Marsh",
@@ -1781,65 +1781,81 @@
           },
           {
             "name": "Veth Ondra",
-            "state": "Moving toward the water-seller and the cluster of people around him."
+            "state": "Moving toward the water-seller cluster at the plaza's south end."
+          },
+          {
+            "name": "Water-seller",
+            "state": "Working the south end of the plaza, boiling-rag on his belt, clay jugs on each shoulder."
           }
         ],
         "objects": [
           "Seven waygate arches in their crescent to the north",
-          "Message board on the runner post's outer wall — one notice pinned with Mara's chalk seal",
+          "Message board on the runner post's outer wall — Mara's notice removed and pocketed",
           "Runner's bell above the door",
-          "Two additional folded slips on the counter inside, sorted by settlement",
-          "Water-seller with boiling-rags on his belt, working the south end of the plaza",
+          "Two additional folded slips on the counter inside, sorted by settlement — Millbrook is in the stack",
           "Coliseum outer wall to the northwest, gates open"
         ],
         "threads": [
-          "Mara's relay notice pinned to the board — contents unread",
-          "Two additional slips on the runner's counter — Millbrook is in the stack",
+          "Two additional slips on the runner's counter — Millbrook stack unchecked",
           "Edvar Crane is somewhere in the Hub — location unknown",
-          "Siol not visible in the plaza",
-          "The Ent grove ward has not been checked since the party's return"
+          "Ent grove ward has not been checked since the party's last visit",
+          "Veth moving toward the water-seller to ask after Crane and resources",
+          "Pell moving toward the Coliseum and forge district"
         ]
       },
+      "codexUpdates": [
+        {
+          "topic": "mara-wells",
+          "label": "Mara Wells",
+          "kind": "person",
+          "entityId": "mara-wells",
+          "fact": "Relay notice received at the Hub on day 13: creek ran gray-green four of the past six mornings at Millbrook's intake. Document roll received at district records office with clerk's initials — Mara holds the receipt slip. Pip's postscript: 'Roads go two ways.'",
+          "links": [
+            "the-water-crisis",
+            "the-edge-district-ledger",
+            "what-the-water-remembers",
+            "calvar",
+            "dara-holt"
+          ]
+        },
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Millbrook's intake ran gray-green four of six mornings by day 13 — the discoloration is now a reliable pattern at the village level, not an anomaly. Mara has reduced draw volume accordingly.",
+          "links": [
+            "mara-wells",
+            "calvar",
+            "dara-holt",
+            "what-the-water-remembers"
+          ]
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Tasked with scouting forge resources and booking a bout at the Coliseum — moving northwest.",
-          "statusNote": "Moving toward the Coliseum gate and forge district in the Hub.",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Tasked with finding workers, resources for Stillwater's Trouble or Millbrook, and asking after Edvar Crane — moving toward the water-seller cluster.",
-          "statusNote": "Moving through the Hub plaza, asking after Crane and resources.",
-          "status": "active"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "A message from Mara Wells's relay arrived at the Hub message-runner post — pinned to the board with her chalk seal, unopened as of this scene.",
-          "subPlace": {
-            "name": "Message-Runner Post",
-            "parent": "The Crossing",
-            "note": "A narrow building on the market row's east side — message board on the outer wall, runner's bell above the door. Millbrook slips are in the counter stack.",
-            "visited": true
-          }
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Relay notice received at Hub on day 13 — intake gray-green four of six mornings, document roll delivered with clerk's initials, two additional sleeve joints flagged by Calvar and Dara at east-bend, Pip's postscript noted.",
+          "learned": [
+            "Creek ran gray-green four of the past six mornings at Millbrook's intake wheel — Mara has reduced draw volume",
+            "Document roll received at district records office, clerk's initials on the receipt slip, Mara holds it",
+            "Calvar and Dara flagged two additional sleeve joints at the east-bend on day 9 — added to repair queue"
+          ],
+          "statusNote": "In her store — relay notice sent and confirmed received; document roll delivery complete; managing water stock by reduced draw."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A quick division of tasks and walk to the message-runner post."
+        "hoursPassed": 0.25,
+        "why": "a quick read of the relay notice at the board"
       }
     },
     "sceneState": {
-      "setting": "Hub Waygate Plaza and message-runner post on the market row's east side — afternoon light, open sky, the seven-arch crescent behind. A folded notice sealed with Mara's chalk relay mark is pinned to the board's lower corner. The runner's bell is above the door.",
+      "setting": "Hub Waygate Plaza and message-runner post on the market row's east side — afternoon light, open sky, the seven-arch crescent to the north. Mara's relay notice is now open and read, fold in Silas's pocket.",
       "npcsPresent": [
         {
           "name": "Huginn",
-          "state": "Settled on Silas's shoulder, watching the market row."
+          "state": "On Silas's shoulder, head turned toward the open plaza, watching the afternoon light on the paving stones."
         },
         {
           "name": "Pell Marsh",
@@ -1847,23 +1863,26 @@
         },
         {
           "name": "Veth Ondra",
-          "state": "Moving toward the water-seller and the cluster of people around him."
+          "state": "Moving toward the water-seller cluster at the plaza's south end."
+        },
+        {
+          "name": "Water-seller",
+          "state": "Working the south end of the plaza, boiling-rag on his belt, clay jugs on each shoulder."
         }
       ],
       "objects": [
         "Seven waygate arches in their crescent to the north",
-        "Message board on the runner post's outer wall — one notice pinned with Mara's ch",
+        "Message board on the runner post's outer wall — Mara's notice removed and pocket",
         "Runner's bell above the door",
-        "Two additional folded slips on the counter inside, sorted by settlement",
-        "Water-seller with boiling-rags on his belt, working the south end of the plaza",
+        "Two additional folded slips on the counter inside, sorted by settlement — Millbr",
         "Coliseum outer wall to the northwest, gates open"
       ],
       "threads": [
-        "Mara's relay notice pinned to the board — contents unread",
-        "Two additional slips on the runner's counter — Millbrook is in the stack",
+        "Two additional slips on the runner's counter — Millbrook stack unchecked",
         "Edvar Crane is somewhere in the Hub — location unknown",
-        "Siol not visible in the plaza",
-        "The Ent grove ward has not been checked since the party's return"
+        "Ent grove ward has not been checked since the party's last visit",
+        "Veth moving toward the water-seller to ask after Crane and resources",
+        "Pell moving toward the Coliseum and forge district"
       ]
     }
   },
@@ -2781,7 +2800,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d5] Left with Calvar to settle him — called to the forge tonight after she's done.",
         "[d5] Arrived with a folded page in her breast pocket — ledger-eyes reading the room. Document roll on her person.",
         "[d5] Filed the shop name, catalogued the room, holding the document roll — the question of whose hands it reaches is hers to help answer.",
         "[d5] Placed the document roll on the forge block and named its destination without being asked — she knows the carrier already.",
@@ -2790,17 +2808,18 @@
         "[d5] Established the relay-contact protocol — Pip Cotter to the split-rock relay point, chalk-scratch for passage, Huginn as a distance option. Wrote the relay point into her ledger's margin. Confirmed the document roll goes out in two days.",
         "[d6] Confirmed Bren placed with Aldric on smokehouse deliveries, Curis with Dara's irrigation crew. Named Silas's introduction as the thing that opened the door.",
         "[d9] Pip Cotter left with the document roll on schedule; Mara scratched the departure date into her ledger margin and has been watching the water wheel intake each morning since, noting the color.",
-        "[d12] Mara recorded the gray-green intake on two of the past three mornings in her ledger margin and quietly reduced the volume she's drawing from the wheel cistern, rationing stored clean water without announcing it to the village."
+        "[d12] Mara recorded the gray-green intake on two of the past three mornings in her ledger margin and quietly reduced the volume she's drawing from the wheel cistern, rationing stored clean water without announcing it to the village.",
+        "[d13] Relay notice received at Hub on day 13 — intake gray-green four of six mornings, document roll delivered with clerk's initials, two additional sleeve joints flagged by Calvar and Dara at east-bend, Pip's postscript noted."
       ],
       "knownFacts": [
-        "Formally tasked with resupply, communications, and document-roll delivery — named the carrier and route before the question was asked",
-        "Pip Cotter is her chosen carrier for the document roll — fast, quiet, reliable",
-        "Split-rock relay point north of the pass-trail is the agreed contact point for urgent messages",
         "Bren Thalle is on smokehouse delivery with Aldric for the week",
         "Curis is on irrigation ditch repair with Dara's crew — useful with stone",
         "Pip Cotter departed with the document roll on day 7 — on schedule",
         "The Echo River ran gray-green on two of the past three mornings at Millbrook's intake",
-        "The discoloration is consistent enough now to treat as a pattern, not an anomaly — she is managing stock accordingly"
+        "The discoloration is consistent enough now to treat as a pattern, not an anomaly — she is managing stock accordingly",
+        "Creek ran gray-green four of the past six mornings at Millbrook's intake wheel — Mara has reduced draw volume",
+        "Document roll received at district records office, clerk's initials on the receipt slip, Mara holds it",
+        "Calvar and Dara flagged two additional sleeve joints at the east-bend on day 9 — added to repair queue"
       ],
       "skillsObserved": [
         "rapid trail-kit assembly from known inventory",
@@ -2811,10 +2830,10 @@
         "naming a destination and a carrier without prompting — opera"
       ],
       "status": "active",
-      "statusNote": "In her store — ledger in hand, both opportunists placed in honest work, relay protocol in place.",
+      "statusNote": "In her store — relay notice sent and confirmed received; document roll delivery complete; managing water stock by reduced draw.",
       "lastSeen": {
-        "locationId": null,
-        "day": 12
+        "locationId": "the_crossing",
+        "day": 13
       },
       "gender": "woman",
       "pronouns": "she/her",
@@ -4368,7 +4387,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 573,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean…",
@@ -4830,7 +4849,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Order-Sense confirms the wash-room is an operator's station — the head of the buried structure. The cradle-recess held a cylindrical iron-sheathed instrument (~5 ft, weighted base, working head) that ",
           "[d2] Huginn is attending something ending northeast of the wash-room operator's station — in the hillside above the buried structure's main course. Pace: unhurried. Nature: unknown.",
           "[d2] A structural section of the buried channel system northeast of the wash-room operator's station is failing — slow compression surrender, no fracture, approximately six weeks before it fails completely",
           "[d2] When the failing structural section collapses, it will redirect the channel flow rather than stop it — a surge hitting Dara Holt's entire east-channel network, capable of blowing every seated sleeve b",
@@ -4853,17 +4871,18 @@
           "[d12] The accumulation at the Disputed Zone's upper reach sits at the convergence of three structural channels. Two are finished. One is open — left so by Silas's father when he stopped the work. The third line's maker and its intended terminus are unknown.",
           "[d13] A drainage cut on the March Road runs at a wrong slope — water pools rather than drains, and Pell's ironsense reads cold iron from years of water sitting in the wrong direction. Old work, possibly wrong from the start. May connect to upstream contamination.",
           "[d13] The drainage cut at the March Road's outer ward margin has the same iron-oxide failure pattern Pell named at the east-channel joints in Millbrook — wrong slope, pooling water, years of cold iron underneath. Earlier stage, same cause.",
-          "[d13] The Crossing's creek runs gray-brown on Day 13 afternoon — downstream contamination from the Disputed Zone has reached this settlement. Boiling-rags at the well confirm the locals are treating the water."
+          "[d13] The Crossing's creek runs gray-brown on Day 13 afternoon — downstream contamination from the Disputed Zone has reached this settlement. Boiling-rags at the well confirm the locals are treating the water.",
+          "[d13] Millbrook's intake ran gray-green four of six mornings by day 13 — the discoloration is now a reliable pattern at the village level, not an anomaly. Mara has reduced draw volume accordingly."
         ],
         "links": [
-          "the-edge-district-ledger",
           "calvar",
           "mara-wells",
           "the-second-thread",
           "stillwaters-trouble",
           "pell-ran-marsh",
           "what-the-water-remembers",
-          "the-crossing"
+          "the-crossing",
+          "dara-holt"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -5397,23 +5416,24 @@
           "[d5] Mara Wells named the document roll's destination and carrier at the Fell Pell gathering on World-day 18 evening — delivery to the district records office arranged before week's end. The accountability",
           "[d5] Mara Wells named Pip Cotter as the document roll's carrier to the district records office — departure in two days. The roll is open for final witness lines tonight before sealing.",
           "[d5] Silas's witness statement added to the roll on World-day 18 evening — the complete chain now in his hand under Calvar's wax seal. Fendt formally named to the fellowship. The gathering sealed: 'Thus be",
-          "[d1] Village supply store operator, Millbrook"
+          "[d1] Village supply store operator, Millbrook",
+          "[d13] Relay notice received at the Hub on day 13: creek ran gray-green four of the past six mornings at Millbrook's intake. Document roll received at district records office with clerk's initials — Mara holds the receipt slip. Pip's postscript: 'Roads go two ways.'"
         ],
         "links": [
-          "overseer-grael",
           "mara-wells",
           "millbrook",
           "find-the-engineer",
           "calvar",
           "leth",
           "the-water-crisis",
-          "fendt"
+          "fendt",
+          "what-the-water-remembers"
         ],
         "aliases": [
           "Mara Wells"
         ],
         "createdDay": 3,
-        "updatedDay": 1,
+        "updatedDay": 13,
         "entityId": "mara-wells"
       },
       "edge-district-document-roll": {
@@ -5864,21 +5884,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.89140427585435,
-    "cerebral": 18.12992333133435,
-    "social": 6.82238259873296,
-    "generous": 4.962963697665749,
-    "cautious": 4.033956886649392,
-    "physical": 0.5707422564106648,
-    "risky": 1.662693168497922,
-    "ruthless": 0.008727184174308457,
-    "carousing": 0.33731638655828994,
-    "amorous": 3.3967948566354504,
-    "patient": 0.2331734319337053,
-    "stealth": 0.0033826788821871966,
-    "devotion": 1.7867265398167933,
-    "craft": 0.5666113582795955,
-    "leadership": 0.017218210923780383
+    "strategic": 19.39411916895799,
+    "cerebral": 18.67667524805099,
+    "social": 6.651823033764636,
+    "generous": 4.8388896052241055,
+    "cautious": 3.933107964483157,
+    "physical": 0.5564737000003982,
+    "risky": 1.621125839285474,
+    "ruthless": 0.008509004569950745,
+    "carousing": 0.32888347689433267,
+    "amorous": 3.311874985219564,
+    "patient": 0.22734409613536266,
+    "stealth": 0.0032981119101325165,
+    "devotion": 1.7420583763213735,
+    "craft": 0.5524460743226056,
+    "leadership": 0.016787755650685875
   },
   "aptitudes": [
     "strategist",
@@ -5886,7 +5906,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 712,
+  "actionCount": 713,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6276,8 +6296,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784848590403,
-  "rev": 1139,
+  "updatedAt": 1784848719106,
+  "rev": 1140,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8408,7 +8428,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 64
+    "the_center": 65
   },
   "foreclosed": [
     "rootkin",
@@ -8531,10 +8551,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T23:16:30.401Z",
+      "lastAt": "2026-07-23T23:18:39.105Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 46
+      "beats": 47
     }
   ],
   "company": [
@@ -8732,15 +8752,15 @@
     "gen-waygate": "https://image.pollinations.ai/prompt/Waygate%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Waygate.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=37923&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 84,
-    "choices": 84,
+    "sceneSummary": 85,
+    "choices": 85,
     "characterDeltas": 35,
-    "scene": 84,
-    "npcUpdates": 71,
+    "scene": 85,
+    "npcUpdates": 72,
     "factUpdates": 6,
     "placeUpdates": 15,
-    "codexUpdates": 47,
-    "timeOps": 78,
+    "codexUpdates": 48,
+    "timeOps": 79,
     "imagePrompt": 2,
     "sceneEnded": 18,
     "itemUpdates": 2,
@@ -8754,7 +8774,7 @@
     "discovery": 2,
     "stageOps": 1
   },
-  "_opTurns": 84,
+  "_opTurns": 85,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

@@ -108,8 +108,15 @@ export function worldTierNodes(CONTENT, character) {
 /** REGION — the settlements and points of interest inside ONE region. This is today's map, finally
  *  scoped: the same drawing, showing the places that are actually near each other. */
 export function regionTierNodes(CONTENT, character, regionId) {
+  // SNG-221 render-fix: a gen location that has been PROMOTED into a canonical file (its play-state migrated,
+  // `supersededBy` stamped + an id bridge in `character.locationAliases`) must NOT draw as its own node — the
+  // canonical twin now owns the place. The reconcile leaves both signals; the render path is the last consumer
+  // that hadn't read them, so a promoted stub kept drawing as a duplicate. Drop it here (the record stays in
+  // CONTENT.locations so any lingering id ref still resolves — this hides the node, it doesn't delete the data).
+  const aliased = character?.locationAliases || {};
   const locs = Object.values(CONTENT?.locations || {})
-    .filter(l => (l.regionId || l.region) === regionId);
+    .filter(l => (l.regionId || l.region) === regionId)
+    .filter(l => !l.supersededBy && !aliased[l.id]);
   const ids = new Set(locs.map(l => l.id));
   const edges = [];
   const seen = new Set();

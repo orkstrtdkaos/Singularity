@@ -7429,6 +7429,22 @@ await (async () => {
   check("221: the promote step is registered at version 19", CHARACTER_STEPS.some(s => s.version === 19 && s.id === "gen-location-promote"));
   const owp = JSON.parse(readFileSync(join(root, "content/packs/valley/locations/the_old_warden_post.json"), "utf8"));
   check("221: the_old_warden_post declares supersedes + aliases (the authored gen→canonical link)", owp.supersedes?.includes("gen-stillwater-s-trouble") && owp.aliases?.includes("Stillwater's Trouble") && owp.aliases?.includes("Raven's Home"));
+
+  // 221 RENDER-FIX: the promoted gen-location must NOT draw as a duplicate map node. The reconcile stamps
+  // `supersededBy` + a `locationAliases` bridge; regionTierNodes now reads them (it was the last consumer that
+  // didn't), so one place = one node again. (The live bug: "Stillwater's Trouble" kept drawing beside "Raven's Home".)
+  const wm221 = await import("../engine/worldmap.js");
+  const CONTENT221 = { locations: {
+    the_old_warden_post: { id: "the_old_warden_post", name: "Raven's Home (the Old Warden Post)", regionId: "valley", supersedes: ["gen-stillwater-s-trouble"] },
+    "gen-stillwater-s-trouble": { id: "gen-stillwater-s-trouble", name: "Stillwater's Trouble", regionId: "valley", supersededBy: "the_old_warden_post" },
+    millbrook: { id: "millbrook", name: "Millbrook", regionId: "valley" }
+  } };
+  const ch221 = { locationAliases: { "gen-stillwater-s-trouble": "the_old_warden_post" }, placeMemory: {} };
+  const nodeIds = wm221.regionTierNodes(CONTENT221, ch221, "valley").locations.map(l => l.id);
+  check("221 RENDER-FIX: the superseded gen-location is dropped from the map node list (no duplicate node)", !nodeIds.includes("gen-stillwater-s-trouble") && nodeIds.includes("the_old_warden_post") && nodeIds.includes("millbrook"));
+  // dropped by EITHER signal alone — supersededBy on the record, or the alias bridge (belt-and-suspenders).
+  const bySupersededOnly = wm221.regionTierNodes(CONTENT221, { placeMemory: {} }, "valley").locations.map(l => l.id);
+  check("221 RENDER-FIX: `supersededBy` on the record alone is enough to drop it (even with no locationAliases)", !bySupersededOnly.includes("gen-stillwater-s-trouble"));
 }
 
 // ---- SNG-222: a minted DISCOVERY earns the braid MOMENT (+ its image); Marrow's Wings backfills on load ----

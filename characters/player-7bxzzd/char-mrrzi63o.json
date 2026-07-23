@@ -1,0 +1,1007 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mrrzi63o",
+  "playerKey": "player-7bxzzd",
+  "name": "Brynjar Andyrsson",
+  "origin": "marcher",
+  "nativeTradition": "marcher",
+  "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
+  "background": "war_leader",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 4,
+    "mental": 3,
+    "social": 4,
+    "practical": 3
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "disarm",
+      "level": 1
+    },
+    {
+      "abilityId": "order_sense",
+      "level": 1
+    },
+    {
+      "abilityId": "read_the_fight",
+      "level": 1,
+      "native": true
+    }
+  ],
+  "alignment": {
+    "spectrum": -0.03
+  },
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true,
+      "pinned": false
+    }
+  ],
+  "deeds": [
+    {
+      "at": "2026-07-20T15:55:34.797Z",
+      "locationId": "the_marchward",
+      "communityId": "riven.marchward",
+      "description": "Swore a blood oath on his father Andyr's name to seek honorable vengeance against Jarl Kjotve Olafsson",
+      "tags": [
+        "oath",
+        "honor",
+        "vengeance"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 1,
+      "worldDay": 20
+    }
+  ],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "the_marchward",
+  "activeScene": {
+    "locationId": "the_marchward",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Brynjar arrives in the Marchward — a border town between war and false peace — and takes his first look at the square.",
+        "narration": "The Marchward sits at the edge of two worlds and looks like neither. It is a working town — stone buildings with patched roofs, a main street packed to mud by boot and cart, cookfire smoke threading straight up in the still spring air. The snow is gone but the cold lingers in the shade, and the light has that early-season flatness where everything looks a little undecided.\n\nYou came through the gate road from the north two hours ago, and the town noticed you the way a border town notices everyone: a look, a pause, a resumed conversation. A scarred Redline warrior with a jawbone necklace ate his breakfast on a bench and watched you pass without expression. A woman in grey Stillhold cloth crossed without making eye contact. Freki walked at your heel and watched both, ears forward.\n\nYou are standing now at the edge of the Marchward's central square — more of a wide junction than a proper square, but there is a well here, and a public board with bills tacked to it, and a low building to your left marked WARDHOUSE in worn paint. Across the square a tavern, the hearthfire visible through an open shutter. To your right, the road continues east toward the Redline; behind you, the road runs west toward the Stillhold. A waygate anchor-stone stands at the square's far corner, old and plain and exactly where the treaty says it must be — nobody stands near it.\n\nFreki puts her nose to the mud and circles the well twice, then sits beside you and looks up at your face."
+      },
+      {
+        "player": "I’ll find a tree and rest against ",
+        "summary": "Brynjar settles against a birch at the square's edge to take the measure of the Marchward.",
+        "narration": "You find a birch at the square's edge, bark white and cold, and put your back to it. Freki circles once and settles against your left leg, the solid warmth of him a thing you've stopped noticing the way you stop noticing your own heartbeat. From here you can see the whole square without looking like you're watching it.\n\nThe Redline warrior finishes his breakfast and sets the bowl on the bench beside him. He doesn't move. His eyes track the square the same way yours do — not suspicious, just professional. You've met that look before, in men who've spent enough time in dangerous places that vigilance became habit and habit became muscle. His jawbone necklace is old, polished smooth from handling. Someone's, once.\n\nThe notice board has three bills tacked to it. At this distance you can make out the shapes but not the words. One is a long column of text, black ink, official-looking. Another is hand-lettered and recent — the ink still dark. The Wardhouse door behind the warrior is closed but not barred; there's a strip of lamplight showing under it even now, which means someone's already at work inside.\n\nFreki's ear — the notched one — rotates toward the tavern. Something in there: voices, the scratch of a bench on stone, the particular note of people already in an argument before the morning's properly started."
+      },
+      {
+        "player": "I’ll sit against the tree with Freki and think back about everything I’ve experienced, the raid on Javiksholm, the death of my father by Kjotves hand. Think about the burning hatred and lust for revenge.",
+        "summary": "Brynjar sits against a birch in the Marchward square and turns the memory of the raid over in his hands — his father's death, Kjotve's cowardice, the weight of unfinished business.",
+        "narration": "The birch bark is cold through your shirt. Freki's weight is warm against your leg, steady as breathing.\n\nYou close your eyes and it comes easy — too easy. The raid doesn't take effort to recall. It comes back the way cold water comes back when you've been under it: all at once, total. The sound first — not the clash of weapons but the dogs barking, then stopping. The smell of thatch catching. Then the light of it, orange and wrong through the smoke. Your father's voice saying *go*, the single flat word that meant he'd already decided how this ended.\n\nYou looked back. You shouldn't have, but you did. You watched Kjotve Olafsson move — not like a warrior caught in a fight, but like a man ticking a task off a list. Andyr was still standing when the spear went into his back from behind. Not Kjotve's hand. Kjotve's *order*. That detail sits in your chest like a bone splinter, the specific cowardice of it. The duel was real until Kjotve was losing, and then it stopped being a duel, and Andyr fell, and Kjotve stood over him and said something you couldn't hear across the burning square.\n\nFreki shifts, pushing his flank harder against your leg. You open your eyes. The square is still here — the warrior on the bench, the anchor-stone at the far corner, cookfire smoke going straight up in cold still air.\n\nThe hatred isn't hot. That's what surprises you, still, when you look at it directly. It doesn't burn. It sits heavy and patient in your ribcage the way a stone sits at the bottom of still water. Kjotve has the village, the fields, the shore. He has Andyr's land and Andyr's name on no grave. And you are here, on the far side of the world, alive because your father told you to be.\n\nYou don't know yet what you're going to do with that. But you know it isn't finished."
+      },
+      {
+        "player": "I’ll swear to myself and in somewhat my father, “I will kill Kjotve for what he has done. I will kill him but I will do it with more honor than that spineless serpent has ever had. I swear it, to all the gods above and especially to you father.” I’ll scratch Freki behind the ears once more and pat him in the head. Then, I’ll stand and walk over to the square.",
+        "summary": "Brynjar swears a blood oath on his father's name — to kill Kjotve with more honor than the Jarl ever showed — then walks into the Marchward square.",
+        "narration": "You speak it quiet enough that only Freki hears — and the birch bark behind you, and whatever gods are awake at this hour in a border town between war and false peace. *I will kill Kjotve for what he has done. I will kill him but I will do it with more honor than that spineless serpent has ever had. I swear it, to all the gods above and especially to you, father.* The words feel different said aloud. Heavier. A thing you can't take back, which is exactly what you wanted.\n\nFreki tilts his head into your hand when you scratch behind his ears — that slow lean into pressure, the small surrender of it. You pat the broad skull once and he holds still under it, watching the square with you for one more moment, like he understood the weight of what just passed.\n\nYou stand. The cold comes back into your legs from the packed earth. You roll your shoulders once and walk out into the square proper — mud underfoot, the smell of cookfire and early morning damp, the well at the center and the notice board beside it. Three bills tacked to the board, edges already curling in the spring air. The Redline warrior on the bench near the Wardhouse turns his head a fraction when you cross toward the well — not a challenge, just the same professional accounting he's been running all morning. From here you can hear the tavern argument more clearly: a woman's voice, sharp and certain, and a lower reply that keeps trying to end the conversation and failing."
+      },
+      {
+        "player": "Read the notice board — see what the Marchward is posting this morning",
+        "summary": "Brynjar reads the Marchward notice board — a labor posting, a truce-law warning, a missing Stillholder woman — and a Redline warrior offers him an unsolicited and accurate assessment of his fighting form.",
+        "narration": "The notice board is three steps from the well, low enough that someone short could read it without standing on their toes. Three bills, edges curling from overnight damp.\n\nThe first is a work posting — the Wardhouse wants a second hand for road-clearing on the eastern track toward the Stillhold, two days' labor, meal and copper included. Someone has already written TAKEN across it in charcoal and underlined it twice.\n\nThe second is a warning, block-lettered in a confident hand: WAYGATE TRANSIT — ALL ARRIVING PARTIES MUST PRESENT THEMSELVES TO THE WARDHOUSE WITHIN THE HOUR. ARMS CHECKED AT THE ANCHOR. THIS IS NOT OPTIONAL. Below it, smaller: Violation is grounds for removal. The Marchward holds its truce by agreement, not courtesy.\n\nThe third is older than the other two — the tack holding its upper-left corner has gone green with rust. It reads: MISSING. Sera of the Stillhold, grey cloak, dark braid, last seen at the south gate seven days past. Her family asks only that word be sent. No payment named. No questions asked of the finder. Below the text, a careful ink drawing of a woman's face — composed, watchful eyes, a detail of the cloak's hem-pattern for identification.\n\nFreki noses the base of the board, smelling whoever stood here last. He doesn't growl.\n\nThen the Redline warrior is beside you. Not close — a respectful arm's length — but you didn't hear him cross the square, which is the kind of thing worth noting. He reads the board for three seconds, not the bills, just looking in their direction while he says, without turning his head: \"You lead from your left shoulder. Gap above the collarbone when you raise your arm. Someone patient would put a blade there before the second exchange.\" A pause. \"You have time to close it.\" He goes back to his bench."
+      },
+      {
+        "player": "Go to the Wardhouse and present yourself as required",
+        "summary": "Brynjar presents himself at the Wardhouse as truce-law requires and is logged by the duty officer.",
+        "narration": "The Wardhouse is a low stone building on the north side of the square, lamplight still burning under the door even though the morning is pale enough to read by. You push it open.\n\nInside: a long table, a rack of iron hooks holding two shortswords and a crossbow that someone checked before you, a charcoal map of the Marchward pinned flat with river stones. A woman sits at the far end of the table, stylus in hand, a ledger open in front of her. She looks up when you and Freki come in. Her eyes go to the axe on your hip, then to the shield across your back, then to your face. Unhurried, thorough.\n\n\"Name and origin,\" she says. No pleasantry, no threat in it — just the form. She dips the stylus and waits. Behind you, Freki sniffs at the threshold and then steps fully inside, tail low and steady.\n\nYou give her Brynjar Andyrsson, Javiksholm. She writes it. When she looks up again there's something in her expression — not pity, not recognition, just the slight weight of someone who has heard the name of a razed village before and knows what a man from one looks like when he walks in. She doesn't comment on it. She gestures at the hooks on the wall. \"Arms stay here while you're in the square on Marchward business. You can pick them up when you leave or check them for the night. Your call.\" She marks something in the ledger. \"Anything to declare — cargo, message, blood business?\""
+      },
+      {
+        "player": "Check your weapons at the hooks and ask if there's paid work in the Marchward",
+        "summary": "Brynjar checks his weapons at the Wardhouse hooks and learns of two opportunities: a night-watch posting and the missing-person bill for Sera of the Stillhold.",
+        "narration": "The axe comes off your hip with a practiced shrug — you set it handle-up on the nearest hook, then work the shield from your back and hang it flat against the wall. The rack takes both without ceremony. The woman behind the ledger watches your hands the whole time, and when the shield settles she marks something brief in the margin.\n\n\"Brynjar Andyrsson,\" she says, as if confirming it against the entry she already made. \"From Javiksholm.\" A pause — not unkind, just the gap where the next question usually sits. \"Blood business, cargo, or message — anything to declare?\"\n\nFreki has stationed himself near the door, nose working the air of the place: old iron, lamp oil, someone's cold breakfast. His ears are low but not flat. Neutral ground reads as neutral to him.\n\nYou answer her question, and then put yours to her plainly: is there paid work in the Marchward? She doesn't look up from the ledger at first — finishes the line she's writing — then sets the stylus down and gives you the honest answer this place is known for.\n\n\"Road-clearing east toward the Stillhold is taken. What's open—\" she turns a page, scans it, turns it back \"—is a night-watch slot. The Wardhouse posts one vacancy a week for travelers with no permanent standing here. Meal, floor space, and a half-copper per watch. It's not glory.\" She looks at you steadily. \"And there's the missing-person bill on the board. No official work in that — but the Marchward would notice if someone brought Sera of the Stillhold back through the south gate.\""
+      }
+    ],
+    "lastTurn": {
+      "narration": "The axe comes off your hip with a practiced shrug — you set it handle-up on the nearest hook, then work the shield from your back and hang it flat against the wall. The rack takes both without ceremony. The woman behind the ledger watches your hands the whole time, and when the shield settles she marks something brief in the margin.\n\n\"Brynjar Andyrsson,\" she says, as if confirming it against the entry she already made. \"From Javiksholm.\" A pause — not unkind, just the gap where the next question usually sits. \"Blood business, cargo, or message — anything to declare?\"\n\nFreki has stationed himself near the door, nose working the air of the place: old iron, lamp oil, someone's cold breakfast. His ears are low but not flat. Neutral ground reads as neutral to him.\n\nYou answer her question, and then put yours to her plainly: is there paid work in the Marchward? She doesn't look up from the ledger at first — finishes the line she's writing — then sets the stylus down and gives you the honest answer this place is known for.\n\n\"Road-clearing east toward the Stillhold is taken. What's open—\" she turns a page, scans it, turns it back \"—is a night-watch slot. The Wardhouse posts one vacancy a week for travelers with no permanent standing here. Meal, floor space, and a half-copper per watch. It's not glory.\" She looks at you steadily. \"And there's the missing-person bill on the board. No official work in that — but the Marchward would notice if someone brought Sera of the Stillhold back through the south gate.\"",
+      "sceneSummary": "Brynjar checks his weapons at the Wardhouse hooks and learns of two opportunities: a night-watch posting and the missing-person bill for Sera of the Stillhold.",
+      "choices": [
+        {
+          "label": "Declare blood business honestly — Kjotve Olafsson is the name, and you're building toward it",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.8
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Declare no immediate business — you're passing through, working where you can",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": -0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Halvra what she knows about the missing woman — the bill said no questions, but she'd know more than the board",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Accept the night-watch posting on the spot — steady meals and a floor are worth more than pride right now",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "Inside the Wardhouse — low stone building, north side of the square. Long table, weapons rack with Brynjar's axe and shield now added alongside two shortswords and a crossbow. A charcoal map pinned flat with river stones. Early morning, lamplight still burning.",
+        "npcsPresent": [
+          {
+            "name": "Halvra Stenn",
+            "state": "Sitting at the far end of the table, ledger open, stylus set down — waiting for Brynjar's declaration and his response to the work options she just laid out"
+          }
+        ],
+        "objects": [
+          "Iron hooks rack — Brynjar's axe and shield now checked alongside two shortswords and a crossbow",
+          "Long wooden table",
+          "Charcoal map of the Marchward pinned with river stones",
+          "Open ledger with fresh entries",
+          "Lamp burning low"
+        ],
+        "threads": [
+          "Halvra waiting for Brynjar's declaration — blood business, cargo, or message?",
+          "Night-watch posting: meal, floor space, half-copper per watch",
+          "Missing-person bill: Sera of the Stillhold — the Marchward would notice a finder"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "halvra-stenn",
+          "name": "Halvra Stenn",
+          "note": "Informed Brynjar of the night-watch vacancy and mentioned the missing-person bill for Sera of the Stillhold — laid out both opportunities plainly",
+          "learned": [
+            "Road-clearing east is taken; a weekly night-watch vacancy is open to travelers",
+            "The Marchward would take notice of whoever brought Sera of the Stillhold home"
+          ],
+          "statusNote": "On duty at the Wardhouse, waiting for Brynjar's formal declaration"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "marchward-work",
+          "label": "Work in the Marchward",
+          "kind": "lore",
+          "entityId": "the_marchward",
+          "fact": "The Wardhouse posts a weekly night-watch vacancy for travelers without permanent standing — meal, floor space, and a half-copper per watch. Road-clearing east toward the Stillhold is already taken.",
+          "links": [
+            "sera-of-the-stillhold",
+            "halvra-stenn"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief exchange at the intake table"
+      }
+    },
+    "sceneState": {
+      "setting": "Inside the Wardhouse — low stone building, north side of the square. Long table, weapons rack with Brynjar's axe and shield now added alongside two shortswords and a crossbow. A charcoal map pinned flat with river stones. Early morning, lamplight still burning.",
+      "npcsPresent": [
+        {
+          "name": "Halvra Stenn",
+          "state": "Sitting at the far end of the table, ledger open, stylus set down — waiting for Brynjar's declaration and his response t"
+        }
+      ],
+      "objects": [
+        "Iron hooks rack — Brynjar's axe and shield now checked alongside two shortswords",
+        "Long wooden table",
+        "Charcoal map of the Marchward pinned with river stones",
+        "Open ledger with fresh entries",
+        "Lamp burning low"
+      ],
+      "threads": [
+        "Halvra waiting for Brynjar's declaration — blood business, cargo, or message?",
+        "Night-watch posting: meal, floor space, half-copper per watch",
+        "Missing-person bill: Sera of the Stillhold — the Marchward would notice a finder"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 9,
+    "realAnchor": null
+  },
+  "companions": [
+    "bristle"
+  ],
+  "companionNames": {
+    "bristle": "Freki"
+  },
+  "quests": [
+    {
+      "id": "brynjar-andyrsson-thread",
+      "title": "The Thread of A Northern Village Called Javiksholm But It Was Raided And Razed.",
+      "structured": true,
+      "status": "active",
+      "premise": "Brynjar Andyrsson carries an unfinished thing: They were forced to flee from the raid that killed their father and razed their home village.. The valley will give them the chance to face it.",
+      "stakes": "who they become when the thing they left behind finally catches up",
+      "axis": null,
+      "traditions": [],
+      "giver": null,
+      "legend": null,
+      "region": "valley",
+      "tier": "personal",
+      "arcId": "brynjar-andyrsson_personal_arc",
+      "locationId": null,
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "a first sign of They were forced to flee from the raid that killed their father and razed their home village. surfaces in the valley"
+        },
+        {
+          "id": "s2",
+          "objective": "the thread deepens — what it costs to pull it becomes clear"
+        },
+        {
+          "id": "s3",
+          "objective": "the reckoning — and the choice of what to do with it"
+        }
+      ],
+      "routes": {
+        "marcher": "answer it as your people would",
+        "seek": "seek the truth of it, wherever it leads"
+      },
+      "outcomes": [
+        {
+          "id": "marcher",
+          "name": "Marcher",
+          "narration": [],
+          "effects": []
+        },
+        {
+          "id": "seek",
+          "name": "Seek",
+          "narration": [],
+          "effects": []
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-19T16:06:41.716Z",
+      "startedWorldDay": 19
+    }
+  ],
+  "npcRegistry": {
+    "redline-warrior": {
+      "id": "redline-warrior",
+      "name": "Redline Warrior",
+      "role": "Marcher duelist, visiting the Marchward neutral ground",
+      "description": "Hard-built, jawbone necklace worn smooth with age, moves across a square without sound. Reads fighters on sight.",
+      "firstMet": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Crossed the square to deliver an accurate assessment of Brynjar's left-shoulder lead — a gap above the collarbone — then returned to his bench without waiting for a response."
+      ],
+      "knownFacts": [
+        "Reads fighting stances on sight",
+        "Identified Brynjar's collarbone gap as a liability against a patient opponent",
+        "Offered it as professional courtesy, not threat"
+      ],
+      "skillsObserved": [
+        "combat assessment",
+        "silent movement"
+      ],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "Sitting on bench near the Wardhouse, watching the square",
+      "domains": {
+        "primary": "marcher"
+      },
+      "domainsSource": "role",
+      "lastSeen": {
+        "locationId": "the_marchward",
+        "day": 1
+      }
+    },
+    "kjotve-olafsson": {
+      "id": "kjotve-olafsson",
+      "name": "Kjotve Olafsson",
+      "role": "",
+      "description": "",
+      "firstMet": {
+        "locationId": null,
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Known from what has passed between you."
+      ],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": null,
+      "pronouns": null,
+      "_backfilledFrom": "establishedFacts"
+    },
+    "wardhouse-officer": {
+      "id": "wardhouse-officer",
+      "name": "Halvra Stenn",
+      "role": "Wardhouse intake officer, the Marchward",
+      "description": "Compact, unhurried, reads a man the way she reads a ledger — top to bottom, nothing missed. No warmth she hasn't decided to spend.",
+      "firstMet": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Logged Brynjar Andyrsson from Javiksholm; noted the razed-village weight without naming it; asked for a declaration of cargo, message, or blood business",
+        "[d1] Informed Brynjar of the night-watch vacancy and mentioned the missing-person bill for Sera of the Stillhold — laid out both opportunities plainly"
+      ],
+      "knownFacts": [
+        "Heard of Javiksholm — recognized what a man from a razed village looks like",
+        "Road-clearing east is taken; a weekly night-watch vacancy is open to travelers",
+        "The Marchward would take notice of whoever brought Sera of the Stillhold home"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "On duty at the Wardhouse, waiting for Brynjar's formal declaration",
+      "domains": {
+        "primary": "marcher"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "_filledFromGenerate": true,
+      "_mergedFrom": "halvra-stenn",
+      "people": "human",
+      "peopleSource": "generated",
+      "appearance": "A compact woman somewhere in her mid-forties, hair the colour of old iron worn in a single braid wound close to the head. A small, neat scar through the left eyebrow — not a fighter's scar, an old workplace scar, which tells its own story. Wears the Wardhouse grey, kept better than the building deserves. Her hands are ink-stained at the fingertips and absolutely still when she is waiting for your answer."
+    }
+  },
+  "placeMemory": {
+    "the_marchward": {
+      "visits": 1,
+      "notes": [
+        "[d1] Brynjar arrived in the Marchward on World-day 20, early morning. First impressions: Redline warrior on bench near Wardhouse, Stillhold woman in grey, waygate anchor-stone visible but avoided by locals."
+      ],
+      "flags": {},
+      "subPlaces": {
+        "central-square": {
+          "name": "Central Square",
+          "parentId": "the_marchward",
+          "day": 1,
+          "visited": true,
+          "note": "Wide mud-packed junction with a well, public notice board, access to the Wardhouse, tavern, and the waygate anchor-stone."
+        },
+        "the-wardhouse": {
+          "name": "The Wardhouse",
+          "parentId": "the_marchward",
+          "day": 1,
+          "visited": true,
+          "note": "Low stone building on the north side of the square. Intake table, weapons rack, charcoal map. Truce-law check-in point for all Marchward arrivals."
+        }
+      }
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 2,
+        "sinceDay": 13
+      }
+    },
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 19,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 17,
+        "text": "This reaches your area — Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements. (near radiant plateau edge)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 18,
+        "text": "This reaches your area — Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction (near millbrook)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 19,
+        "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
+      },
+      {
+        "day": 1,
+        "worldDay": 23,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations."
+      },
+      {
+        "day": 1,
+        "worldDay": 23,
+        "text": "Redline Warrior: Over three days of sparring on the neutral ground, Redline Warrior has drawn two other visiting duelists into a loose, unspoken rivalry — testing footwork and reading each other without anyone yet naming the challenge openly."
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-23T01:32:42.645Z",
+    "lastTickWorldDay": 23,
+    "lastCanonWorldDay": 23,
+    "lastGenCount": 553,
+    "wantProgress": {
+      "redline-warrior": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 23,
+        "lastOutcome": "progress"
+      },
+      "the_last_walker": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 23,
+        "lastOutcome": "stall"
+      }
+    },
+    "turnsSinceOffer": 2
+  },
+  "domains": {
+    "primary": "marcher",
+    "secondary": "somatic",
+    "tertiary": "lattice"
+  },
+  "form": "Stocky, average-height man with pale skin and icy blue eyes. Chestnut hair shaved at sides and back, long on top and knotted. Thick beard with two braids flanking the mouth. A dark blue Norse dragon-knot tattoo curls from behind his ear to his temple; vertical dark blue rune tattoos descend from above his brows, over both eyes and cheeks, into the beard. Blue tunic with light red cuff-and-collar accents, dark grey puffy trousers, dark blue shin-wraps over leather boots. Silver arm ring with two dragon heads on the right arm. Bronze-inlaid one-handed axe at the hip, seax at the back of the belt, pouches at the front.",
+  "bio": {
+    "hometown": "A northern village called Javiksholm but it was raided and razed.",
+    "residence": "They’ve been on the road joined by their hound Freki",
+    "livelihood": "Hunting and trading on the road",
+    "hobbies": "Hunt, board games,",
+    "motivation": "They were forced to flee from the raid that killed their father and razed their home village.",
+    "story": "Brynjar had fled from his village of Javiksholm during the raid as his father commanded. On his way out of the longhouse he made sure to grab his axe and shield. He also was followed by his dog Freki. Before he had fully escaped the village he looked back towards the longhouse and saw his father Andyr fighting off many of the raiders until one, the leader of this raid and a rival Jarl Kjotve Olafsson, who wanted the land Brynjar’s clan had owned due to its fertile fields and prime oceanfront access. Kjotve had locked into a duel with Andyr until he started loosing and he had one of his men strike him in the back with a spear, then it was all over. Kjotve had ordered his men to toss his body into the ocean and burn the longhouse down. After seeing this Brynjar had fled and escaped from the village. He has been on the road ever since surviving off of hunting wild game and trading with villages and traders he passed along the way, which leads us here."
+  },
+  "subAttributes": {
+    "strength": 4,
+    "agility": 3,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 4,
+    "craft": 3,
+    "wits": 3
+  },
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "the-marchward": {
+        "id": "the-marchward",
+        "label": "The Marchward",
+        "kind": "place",
+        "facts": [
+          "[d1] A border town between the Redline and the Stillhold — Redliners and Stillholders use the same square without warmth. A waygate anchor-stone sits at the corner under truce-law; no one stands near it. The Wardhouse is the visible seat of local authority.",
+          "[d1] Three bills posted: a filled labor posting for road-clearing east toward the Stillhold; a waygate truce-law notice requiring all arrivals to present at the Wardhouse within the hour with arms checked; and a missing-person posting for Sera of the Stillhold — grey cloak, dark braid, last seen at the…",
+          "[d?] you have walked here",
+          "[d1] All arrivals must present at the Wardhouse within the hour by truce-law; arms are checked on the rack inside. The duty officer logs names, origins, and any declaration of blood business.",
+          "[d1] The Wardhouse posts a weekly night-watch vacancy for travelers without permanent standing — meal, floor space, and a half-copper per watch. Road-clearing east toward the Stillhold is already taken."
+        ],
+        "links": [
+          "the-redline",
+          "the-stillhold",
+          "riven-marches",
+          "brynjar-andyrsson-thread",
+          "sera-of-the-stillhold",
+          "halvra-stenn"
+        ],
+        "aliases": [
+          "Marchward Notice Board",
+          "Work in the Marchward"
+        ],
+        "createdDay": 1,
+        "entityId": "the-marchward",
+        "updatedDay": 1
+      },
+      "kjotve-olafsson": {
+        "id": "kjotve-olafsson",
+        "label": "Kjotve Olafsson",
+        "kind": "person",
+        "facts": [
+          "[d1] Jarl who led the raid on Javiksholm. Won Andyr's land by having a spearman strike Andyr from behind mid-duel — a formal fight turned to murder when Kjotve was losing. Now holds Javiksholm's fields and shore. Andyr's body was thrown into the ocean.",
+          "[d1] met in play"
+        ],
+        "links": [
+          "brynjar-andyrsson-thread",
+          "javiksholm"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1,
+        "entityId": "kjotve-olafsson"
+      },
+      "javiksholm": {
+        "id": "javiksholm",
+        "label": "Javiksholm",
+        "kind": "place",
+        "facts": [
+          "[d1] Brynjar's home village — raided and razed by Kjotve Olafsson. Andyr died here, struck from behind. The longhouse was burned. Kjotve now holds the fertile fields and the oceanfront."
+        ],
+        "links": [
+          "kjotve-olafsson",
+          "brynjar-andyrsson-thread"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "brynjar-andyrsson-thread": {
+        "id": "brynjar-andyrsson-thread",
+        "label": "The Oath on Kjotve",
+        "kind": "event",
+        "facts": [
+          "[d1] Brynjar swore aloud, to his father and the gods, to kill Kjotve Olafsson — but to do it with more honor than Kjotve ever showed. The oath is spoken and cannot be unsaid."
+        ],
+        "links": [
+          "kjotve-olafsson",
+          "javiksholm"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "sera-of-the-stillhold": {
+        "id": "sera-of-the-stillhold",
+        "label": "Sera of the Stillhold",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Missing woman, grey cloak, dark braid, last seen at the Marchward's south gate seven days ago. Her family posted a bill — no payment, no questions asked of the finder. An ink portrait is attached."
+        ],
+        "links": [
+          "marchward-notice-board",
+          "the-stillhold"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "redline-warrior": {
+        "id": "redline-warrior",
+        "label": "Redline Warrior",
+        "kind": "person",
+        "facts": [
+          "[d1] Marcher duelist, visiting the Marchward neutral ground",
+          "[d1] [while away] Over three days of sparring on the neutral ground, Redline Warrior has drawn two other visiting duelists into a loose, unspoken rivalry — testing footwork and reading each other without anyone yet naming the challenge openly."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "redline-warrior",
+        "updatedDay": 1
+      },
+      "companion-bristle": {
+        "id": "companion-bristle",
+        "label": "Freki",
+        "kind": "person",
+        "facts": [
+          "[d?] The Stray That Stayed — Wary, watchful, keeping a body-length of distance even as it follows — a dog deciding whether the world is safe again."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "companion-bristle",
+        "updatedDay": null
+      },
+      "the-last-walker": {
+        "id": "the-last-walker",
+        "label": "The Last Walker of the Sealed Wood",
+        "kind": "person",
+        "facts": [
+          "[d1] [while away] The Last Walker has moved no further than the wood's edge, standing long hours in the threshold light — the tension between enclosure and the open world unresolved, no step taken in either direction."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "the-last-walker",
+        "updatedDay": 1
+      },
+      "wardhouse-officer": {
+        "id": "wardhouse-officer",
+        "label": "Wardhouse Duty Officer",
+        "kind": "person",
+        "facts": [
+          "[d1] Wardhouse intake officer, the Marchward"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "wardhouse-officer",
+        "updatedDay": 1
+      },
+      "halvra-stenn": {
+        "id": "halvra-stenn",
+        "label": "Halvra Stenn",
+        "kind": "person",
+        "facts": [
+          "[d1] Wardhouse Duty Officer — she processes what the Marchward receives, and she has received a great deal"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "halvra-stenn",
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {
+    "leadership": 12.335339707031249,
+    "cerebral": 0.9036878906249999,
+    "strategic": 1.877484375,
+    "ruthless": 0.9268593749999999,
+    "social": 1
+  },
+  "aptitudes": [
+    "banner"
+  ],
+  "actionCount": 5,
+  "grantsVersion": 1,
+  "precursorAccess": [],
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "grantedAptitudes": [
+    "banner"
+  ],
+  "peopleDisposition": {
+    "marcher": 4,
+    "somatic": 2,
+    "lattice": 1,
+    "stillhold": -1
+  },
+  "standingLedger": [
+    {
+      "at": 1,
+      "kind": "seed",
+      "entries": [
+        {
+          "people": "marcher",
+          "delta": 4,
+          "why": "born to this people"
+        },
+        {
+          "people": "somatic",
+          "delta": 2,
+          "why": "kin to this people"
+        },
+        {
+          "people": "lattice",
+          "delta": 1,
+          "why": "a hand in this people's craft"
+        },
+        {
+          "people": "stillhold",
+          "delta": -1,
+          "why": "the far side of the circle from your own"
+        }
+      ],
+      "text": "Your birth and training are known: marcher +4, somatic +2, lattice +1, stillhold -1."
+    }
+  ],
+  "nativeGrantsVersion": 1,
+  "reconcileVersion": 16,
+  "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Halvra Stenn",
+      "url": "https://image.pollinations.ai/prompt/A%20compact%20woman%20somewhere%20in%20her%20mid-forties%2C%20hair%20the%20colour%20of%20old%20iron%20worn%20in%20a%20single%20braid%20wound%20close%20to%20the%20head.%20A%20small%2C%20neat%20scar%20through%20the%20left%20eyebrow%20%E2%80%94%20not%20a%20fighter's%20scar%2C%20an%20old%20wor%2C%20character%20portrait%2C%20named%20Halvra%20Stenn%2C%20Wardhouse%20Duty%20Officer%20%E2%80%94%20she%20processes%20what%20the%20Marchward%20receives%2C%20and%20she%20has%20received%20a%20great%20dea%2C%20Unhurried%2C%20precise%2C%20neither%20cold%20nor%20warm%20%E2%80%94%20the%20voice%20of%20a%20woman%20who%20has%20asked%20the%20same%20necessary%20qu%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73527&nologo=true",
+      "caption": "Halvra Stenn",
+      "worldDay": 23,
+      "at": "2026-07-23T01:30:44.634Z"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "Brynjar Andyrsson",
+      "url": "https://image.pollinations.ai/prompt/Stocky%2C%20average-height%20man%20with%20pale%20skin%20and%20icy%20blue%20eyes.%20Chestnut%20hair%20shaved%20at%20sides%20and%20back%2C%20long%20on%20top%20and%20knotted.%20Thick%20beard%20with%20two%20braids%20flanking%20the%20mouth.%20A%20dark%20blue%20Norse%20dragon-knot%20tattoo%20curls%20fro%2C%20full-body%20character%20portrait%2C%20named%20Brynjar%20Andyrsson%2C%20of%20the%20marcher%2C%20war%20leader%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20They%20were%20forced%20to%20flee%20from%20the%20raid%20that%20killed%20their%20father%20and%20razed%20their%20home%20village.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=53421&nologo=true",
+      "caption": "Brynjar Andyrsson — marcher",
+      "worldDay": 19,
+      "at": "2026-07-19T16:02:34.224Z"
+    }
+  ],
+  "portrait": "https://image.pollinations.ai/prompt/Stocky%2C%20average-height%20man%20with%20pale%20skin%20and%20icy%20blue%20eyes.%20Chestnut%20hair%20shaved%20at%20sides%20and%20back%2C%20long%20on%20top%20and%20knotted.%20Thick%20beard%20with%20two%20braids%20flanking%20the%20mouth.%20A%20dark%20blue%20Norse%20dragon-knot%20tattoo%20curls%20fro%2C%20full-body%20character%20portrait%2C%20named%20Brynjar%20Andyrsson%2C%20of%20the%20marcher%2C%20war%20leader%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20They%20were%20forced%20to%20flee%20from%20the%20raid%20that%20killed%20their%20father%20and%20razed%20their%20home%20village.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=53421&nologo=true",
+  "personalArc": {
+    "id": "brynjar-andyrsson-thread",
+    "name": "The Thread of A Northern Village Called Javiksholm But It Was Raided And Razed.",
+    "arcId": "brynjar-andyrsson_personal_arc",
+    "boundToCharacter": "Brynjar Andyrsson",
+    "boundToPlayer": "player-0jwfjo",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "Brynjar Andyrsson carries an unfinished thing: They were forced to flee from the raid that killed their father and razed their home village.. The valley will give them the chance to face it.",
+    "stakes": "who they become when the thing they left behind finally catches up",
+    "legendNpc": null,
+    "legend": null,
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "a first sign of They were forced to flee from the raid that killed their father and razed their home village. surfaces in the valley"
+      },
+      {
+        "id": "s2",
+        "objective": "the thread deepens — what it costs to pull it becomes clear"
+      },
+      {
+        "id": "s3",
+        "objective": "the reckoning — and the choice of what to do with it"
+      }
+    ],
+    "routes": {
+      "marcher": "answer it as your people would",
+      "seek": "seek the truth of it, wherever it leads"
+    },
+    "outcomes": [
+      {
+        "id": "marcher",
+        "name": "Marcher",
+        "effects": []
+      },
+      {
+        "id": "seek",
+        "name": "Seek",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal_fallback",
+    "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "updatedAt": 1784770512236,
+  "rev": 41,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {
+      "wardhouse-officer": {
+        "schemaVersion": 1,
+        "id": "wardhouse-officer",
+        "name": "Halvra Stenn",
+        "role": "Wardhouse Duty Officer — she processes what the Marchward receives, and she has received a great deal",
+        "homeLocation": "the_marchward",
+        "communityId": "marcher.marchward",
+        "personality": {
+          "warmth": 0.4,
+          "trust": 0.5,
+          "candor": 0.85,
+          "patience": 0.75
+        },
+        "spectrum": {
+          "violence_peace": 0.3,
+          "falsehood_truth": 0.8,
+          "emotional_logical": -0.2
+        },
+        "voiceHints": "Unhurried, precise, neither cold nor warm — the voice of a woman who has asked the same necessary questions ten thousand times and still means every one. She will wait for a real answer. She has a drawer full of time. Oaths do not impress her; she has seen oaths arrive on men who bled out before sundown. What she wants to know is what you actually are.",
+        "knowledge": [
+          "Every entry protocol the Marchward has written or revised in the last eighteen years, including the three that were written because of things she personally witnessed",
+          "How to read an arrival — what a man's posture, kit, and silence say about what he did before he reached this door",
+          "That sworn fighters carrying edge-oaths come through in clusters, and that the clusters predict things, and that she has logged every cluster since she took this post",
+          "The early-spring thaw makes the northern passes passable two weeks before most arrivals expect, which means the Wardhouse is always short-staffed for the first surge"
+        ],
+        "wants": "Honest answers to honest questions, and an orderly log at end of shift.",
+        "fears": "Waving through the thing that unmakes the Marchward because she asked the wrong question — or worse, the right question and accepted a careful lie.",
+        "reactsToReputation": {
+          "oath-bound": "takes note, writes it down, asks what the oath costs you rather than what it grants",
+          "violent": "does not flinch — adjusts the question, not the composure",
+          "evasive": "quieter, slower, more precise — she will find the edge of what you will not say and she will name it aloud"
+        },
+        "universalRole": "Gatekeeper",
+        "roleFunction": "reveal — surfaces what an arrival actually is beneath what they present; ward — holds the threshold against things that should not pass it unmarked",
+        "roleMethod": "Marchward method — truth extracted through bureaucratic patience, not pressure; the form is the instrument",
+        "appearance": "A compact woman somewhere in her mid-forties, hair the colour of old iron worn in a single braid wound close to the head. A small, neat scar through the left eyebrow — not a fighter's scar, an old workplace scar, which tells its own story. Wears the Wardhouse grey, kept better than the building deserves. Her hands are ink-stained at the fingertips and absolutely still when she is waiting for your answer.",
+        "people": "human",
+        "domains": {
+          "primary": "verist",
+          "secondary": "marcher",
+          "tertiary": "syllogist"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Halvra practises verist as craft — truth as the working material of duty, not ideology. Marcher secondary because she holds a threshold and knows what holding costs. Syllogist tertiary: the log, the form, the deduction from incomplete data.",
+        "arrivalProtocol": {
+          "standardQuestion": "Name, origin, purpose in the Marchward, and anything you are carrying that could end a conversation permanently.",
+          "oathQuestion": "She asks it simply, without ceremony: 'What does the oath require of you while you are here?' — because she needs to know whether what you swore will make you easier or harder to process when something goes wrong.",
+          "noteOnBrynjar": "She asked him a question that required a real answer. She is still waiting. She has written nothing yet."
+        },
+        "_gen": {
+          "entityId": "halvra-stenn",
+          "type": "npc",
+          "birthWeight": 2,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-7bxzzd",
+            "characterId": "char-mrrzi63o",
+            "locationId": "the_marchward",
+            "day": 1,
+            "worldDay": null,
+            "hint": "Wardhouse duty officer — a woman who processes arrivals with bureaucratic calm and quiet competence; she has seen fighte",
+            "why": "She is the first functional authority figure Brynjar speaks to in the Marchward, and she asked a question that requires "
+          },
+          "attentionHistory": [],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20compact%20woman%20somewhere%20in%20her%20mid-forties%2C%20hair%20the%20colour%20of%20old%20iron%20worn%20in%20a%20single%20braid%20wound%20close%20to%20the%20head.%20A%20small%2C%20neat%20scar%20through%20the%20left%20eyebrow%20%E2%80%94%20not%20a%20fighter's%20scar%2C%20an%20old%20wor%2C%20character%20portrait%2C%20named%20Halvra%20Stenn%2C%20Wardhouse%20Duty%20Officer%20%E2%80%94%20she%20processes%20what%20the%20Marchward%20receives%2C%20and%20she%20has%20received%20a%20great%20dea%2C%20Unhurried%2C%20precise%2C%20neither%20cold%20nor%20warm%20%E2%80%94%20the%20voice%20of%20a%20woman%20who%20has%20asked%20the%20same%20necessary%20qu%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73527&nologo=true"
+      }
+    },
+    "location": {},
+    "arc": {}
+  },
+  "company": [],
+  "_pinsInitialized": true,
+  "regionsKnown": {
+    "riven_marches": 8
+  },
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {},
+    "coActivations": {},
+    "aspirations": [
+      {
+        "abilityId": "hearthbinding",
+        "since": "2026-07-19T16:03:43.767Z",
+        "progress": 0
+      },
+      {
+        "abilityId": "beastfriend",
+        "since": "2026-07-19T16:03:59.776Z",
+        "progress": 0
+      }
+    ]
+  },
+  "customAbilities": {},
+  "companionBonds": {
+    "bristle": 0.5
+  },
+  "establishedFacts": [
+    {
+      "id": "kjotve-olafsson",
+      "text": "Brynjar has sworn a blood oath to kill Kjotve Olafsson with honor — spoken aloud in the Marchward square on World-day 20.",
+      "day": 1,
+      "subjectId": "kjotve-olafsson"
+    }
+  ],
+  "teachers": {},
+  "foreclosed": [
+    "stillhold",
+    "cogitant"
+  ],
+  "forkChoices": {},
+  "backfillVersion": 1,
+  "opLossPending": false,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-07-20T02:27:27.074Z",
+      "lastAt": "2026-07-20T02:41:35.650Z",
+      "startDay": 20,
+      "endDay": 20,
+      "beats": 3
+    },
+    {
+      "id": "sess-2",
+      "startedAt": "2026-07-20T15:55:34.797Z",
+      "lastAt": "2026-07-20T15:59:18.453Z",
+      "startDay": 20,
+      "endDay": 20,
+      "beats": 2
+    },
+    {
+      "id": "sess-3",
+      "startedAt": "2026-07-23T01:30:20.702Z",
+      "lastAt": "2026-07-23T01:35:12.233Z",
+      "startDay": 23,
+      "endDay": 23,
+      "beats": 2
+    }
+  ],
+  "_pendingArrival": null,
+  "syncedAt": 1784563158461,
+  "schools": {
+    "marcher": "mar_plain",
+    "somatic": "som_plain",
+    "lattice": "lat_standing"
+  },
+  "chronicleCache": {
+    "hash": "d0|b|c|q|L1|They were forced to flee from the raid that kill",
+    "text": "You have become a man unmade and remaking — your father Andyr's blood still vivid in memory, the village ash-smell still catching in your throat when the wind turns wrong, the night Jarl Kjotve Olafsson's raiders came and you ran still a splinter you cannot pull clean. What you have done since is small but absolute: you opened your palm, pressed steel to skin, and swore Andyr's name against Kjotve's, a blood oath that has given your flight the shape of a purpose. The Marchward knows your face now, and the Marchers know it too — a grieving son moving through their territory with a wound he has decided to sharpen into something useful.",
+    "at": "2026-07-23T01:18:04.353Z"
+  },
+  "_opEmitted": {
+    "sceneSummary": 2,
+    "choices": 2,
+    "scene": 2,
+    "npcUpdates": 2,
+    "placeUpdates": 1,
+    "generateRequest": 1,
+    "moveTo": 1,
+    "timeOps": 2,
+    "codexUpdates": 2
+  },
+  "_opTurns": 2
+}

@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.222";
+const APP_VERSION = "1.8.223";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1540,6 +1540,8 @@ function migrate(c) {
   // SNG-197 p2: braids backfilled as stubs (before the moment existed) get the moment they never got —
   // enriched in place + re-presented, one per load. Best-effort, non-blocking.
   if ((c.braids || []).some(b => c.customAbilities?.[b.id]?.minted && c.customAbilities[b.id].minted.presented !== true)) presentBackfilledBraids(c);
+  // SNG-222: a discovery minted before the moment existed (Erik's Marrow's Wings) gets its moment on load.
+  if ((c.discoveries || []).some(d => d && !d._momentShown)) presentBackfilledDiscoveries(c);
   return c;
 }
 
@@ -3363,22 +3365,28 @@ function showBraidMoment(def) {
   if (!def) return;
   _braidMomentOpen = true;
   document.getElementById("help-pop")?.remove();
-  const parents = (def.minted?.sourceNames || []).map(esc).join("</strong> and <strong>");
+  // SNG-222: the ceremony now serves DISCOVERIES too — the most braid-shaped event there is (a capability
+  // neither parent had, earned in play). Same beat, adapted copy; a discovery also carries an image (§5).
+  const isDiscovery = def.kind === "discovery";
+  const parents = (def.minted?.sourceNames || def._parentNames || []).map(esc).join("</strong> and <strong>");
   // SNG-201 §2: a braid the world already knows is a RECOGNITION beat, not a CREATION beat — a different
   // kind of cool. The player still earned it through their own play; someone found it first.
   const finder = def._recognition?.firstFinder || (def.minted?.adoptedFrom ? def.minted.adoptedFrom.characterName : null);
-  const isRecognition = !!(def._recognition || def.minted?.adoptedFrom);
+  const isRecognition = !isDiscovery && !!(def._recognition || def.minted?.adoptedFrom);
+  const kicker = isDiscovery ? "A TECHNIQUE DISCOVERED" : isRecognition ? "A BRAID RECOGNISED" : "A BRAID FORMS";
+  const arrow = isDiscovery ? "found in the doing — a thing neither could do apart" : isRecognition ? "you have earned, together" : "braided together into";
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
   const close = () => { pop.remove(); _braidMomentOpen = false; flushBraidMoments(); };
-  pop.innerHTML = `<div class="help-card braid-moment" role="dialog" aria-label="${isRecognition ? "A braid recognised" : "A braid forms"}">
-    <div class="braid-moment-kicker">✦ ${isRecognition ? "A BRAID RECOGNISED" : "A BRAID FORMS"} ✦</div>
+  pop.innerHTML = `<div class="help-card braid-moment" role="dialog" aria-label="${isDiscovery ? "A technique discovered" : isRecognition ? "A braid recognised" : "A braid forms"}">
+    <div class="braid-moment-kicker">✦ ${kicker} ✦</div>
+    ${def.image ? `<img class="braid-moment-art" src="${esc(def.image)}" alt="${esc(def.name)}" data-lightbox="${esc(def.image)}">` : ""}
     <div class="braid-moment-parents"><strong>${parents}</strong></div>
-    <div class="braid-moment-arrow">${isRecognition ? "you have earned, together" : "braided together into"}</div>
+    <div class="braid-moment-arrow">${arrow}</div>
     <h2 class="braid-moment-name" id="braid-name">${esc(def.name)}</h2>
     ${isRecognition && finder ? `<div class="braid-moment-finder">first found by ${esc(finder)} — and now yours too</div>` : ""}
     <p class="braid-moment-desc">${esc(def.description || "")}</p>
-    ${braidEmergentLine(def)}
+    ${isDiscovery ? "" : braidEmergentLine(def)}
     <div class="braid-moment-rename">
       <input id="braid-rename-in" maxlength="60" placeholder="…or name it yourself" value="${def.minted?.namedBy === "player" ? esc(def.name) : ""}">
       <button class="link-btn" id="braid-rename-go">Make it mine</button>
@@ -3391,9 +3399,48 @@ function showBraidMoment(def) {
   document.getElementById("braid-rename-go").onclick = () => {
     const v = String(document.getElementById("braid-rename-in").value || "").trim();
     if (!v) return;
-    renameBraid(def, v);
+    if (isDiscovery) renameDiscovery(def, v); else renameBraid(def, v);
     document.getElementById("braid-name").textContent = def.name;
   };
+}
+
+/** SNG-222: rename a discovery from its moment (parallels renameBraid). Persists onto the live discovery record. */
+function renameDiscovery(def, name) {
+  const clean = String(name || "").trim().slice(0, 60);
+  if (!clean || !def) return;
+  def.name = clean;
+  if (def._discovery) def._discovery.name = clean;
+  saveCharacter(character);
+}
+
+/** SNG-222: queue a minted DISCOVERY's moment — the same ceremony a braid gets (reuses pendingBraidMoments +
+ *  showBraidMoment). Generates + caches the discovery's image (§5): the GM's authored prose IS the prompt.
+ *  Idempotent via `_momentShown`; a re-surfaced (already-shown) discovery never re-fires. */
+function queueDiscoveryMoment(disc, c = character) {
+  if (!disc || disc._momentShown) return;
+  const cat = { ...CONTENT.abilities, ...(c.customAbilities || {}) };
+  const parentNames = (disc.abilities || []).map(id => cat[id]?.name || String(id).replace(/[-_]+/g, " "));
+  try {
+    if (imagesEnabled() && !disc.image) {
+      const url = ensureImage({ id: `discovery-${disc.id}`, prompt: smartClamp(`${disc.name} — ${disc.description}`, 300) }, "moment", { ratingLevel: viewerRatingLevel(), isMinor: false, field: "image" });
+      if (url) { disc.image = url; try { addGalleryImage(c, { kind: "discovery", prompt: disc.description, url, caption: disc.name, worldDay: absoluteWorldDay() }); } catch { /* gallery is a convenience */ } }
+    }
+  } catch (err) { console.warn("[art] discovery art skipped:", err?.message); }
+  disc._momentShown = true;
+  saveCharacter(c);
+  pendingBraidMoments.push({ kind: "discovery", id: disc.id, name: disc.name, description: disc.description, _parentNames: parentNames, _discovery: disc, image: disc.image || null });
+}
+
+/** SNG-222: a discovery minted before the moment existed (Erik's Marrow's Wings) — or any silent discovery —
+ *  gets the moment it never got, on load. One per load, deferred after the play screen settles (mirrors the
+ *  braid backfill). Idempotent via `_momentShown`. */
+function presentBackfilledDiscoveries(c) {
+  try {
+    const pending = (c.discoveries || []).filter(d => d && !d._momentShown);
+    if (!pending.length) return;
+    queueDiscoveryMoment(pending[0], c);          // one per load; the rest fire on subsequent loads
+    setTimeout(flushBraidMoments, 1300);          // after the play screen has settled
+  } catch (err) { console.warn("[discovery] re-present skipped:", err?.message); }
 }
 
 /** Show the next queued braid moment (one on screen at a time; a burst chains on dismiss, never stacks). */
@@ -3651,7 +3698,11 @@ function applyTurn(turn, resolution, playerWords = null) {
       name: turn.discovery.name, description: turn.discovery.description,
       abilityIds: resolution.discoveryAbilities || [], noveltyHint: resolution.action?.noveltyHint || "", day: dayNow
     });
-    if (minted) turn.narration += `\n\n*✦ New technique discovered: **${minted.name}** — it's yours now.*`;
+    if (minted) {
+      turn.narration += `\n\n*✦ New technique discovered: **${minted.name}** — it's yours now.*`;
+      queueDiscoveryMoment(minted, character); // SNG-222: a discovery deserves the ceremony (+ its image, §5)
+      setTimeout(flushBraidMoments, 450);       // after the turn renders (parallels the braid mint flush)
+    }
   }
   // earned xp: every meaningful resolved action teaches something (trivial acts don't)
   if (resolution && resolution.degree && resolution.degree !== "auto") {

@@ -7430,6 +7430,19 @@ await (async () => {
   check("221: the_old_warden_post declares supersedes + aliases (the authored gen→canonical link)", owp.supersedes?.includes("gen-stillwater-s-trouble") && owp.aliases?.includes("Stillwater's Trouble") && owp.aliases?.includes("Raven's Home"));
 }
 
+// ---- SNG-222: a minted DISCOVERY earns the braid MOMENT (+ its image); Marrow's Wings backfills on load ----
+{
+  const appSrc222 = readFileSync(join(root, "app.js"), "utf8");
+  check("222: the moment modal serves DISCOVERIES too (kind==='discovery' adapts the ceremony copy)", /const isDiscovery = def\.kind === "discovery"/.test(appSrc222) && /A TECHNIQUE DISCOVERED/.test(appSrc222));
+  check("222 §3: a minted discovery is QUEUED into the SAME braid-moment queue (reuse, not a parallel modal)", /queueDiscoveryMoment\(minted, character\)/.test(appSrc222) && /pendingBraidMoments\.push\(\{ kind: "discovery"/.test(appSrc222));
+  check("222 §5: the discovery generates + caches an IMAGE via the same ensureImage pipeline", /ensureImage\(\{ id: `discovery-\$\{disc\.id\}`/.test(appSrc222) && /disc\.image = url/.test(appSrc222));
+  check("222 GUARD: novelty/idempotence — a discovery already shown (_momentShown) never re-fires", /if \(!disc \|\| disc\._momentShown\) return;/.test(appSrc222) && /disc\._momentShown = true;/.test(appSrc222));
+  check("222 §3: Marrow's Wings BACKFILLS on load — a discovery without _momentShown gets its moment", /presentBackfilledDiscoveries\(c\)/.test(appSrc222) && /\(c\.discoveries \|\| \[\]\)\.filter\(d => d && !d\._momentShown\)/.test(appSrc222));
+  check("222: a discovery can be RENAMED from its moment (renameDiscovery, parallels renameBraid)", /function renameDiscovery/.test(appSrc222) && /if \(isDiscovery\) renameDiscovery\(def, v\)/.test(appSrc222));
+  const cssSrc222 = readFileSync(join(root, "style.css"), "utf8");
+  check("222 §5: the discovery/braid moment art is styled (lightbox)", /\.braid-moment-art/.test(cssSrc222) && /data-lightbox/.test(appSrc222));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

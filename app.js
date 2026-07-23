@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.221";
+const APP_VERSION = "1.8.222";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5404,7 +5404,8 @@ function renderSkillWheel(selectedId = null, status = "") {
   _wheelLODBucket = wheelLodBucket(graphViews.wheel?.k || 1);
   for (const g of app.querySelectorAll("[data-wheelnode]")) g.onclick = () => {
     if (_graphDidPan) { _graphDidPan = false; return; }
-    wheelSelTrad = null; // selecting a specific craft leaves tradition-highlight mode
+    // SNG-218 §3 (Erik): selecting a craft to see its details KEEPS the tradition highlight (and the function /
+    // ✨-suggested filters) — you can light a people's crafts, then click through them without the filter clearing.
     renderSkillWheel(g.dataset.wheelnode === selectedId ? null : g.dataset.wheelnode);
   };
   // SNG-202B §2: tap a tradition on the ring → highlight its crafts, its braids, dim its neighbours, show the foreclosure line.

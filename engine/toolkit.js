@@ -100,6 +100,11 @@ export function toolkitForGM(character, opts = {}) {
     lines.push(`- Aspiration in play: working toward ${nm} (${asp.progress || 0}/${ripeAt}) — a beat that practices it advances it.`);
   }
 
+  // (3b) SNG-215 §A1: crafts the PLAYER flagged (boosted) to use more — a thumb on the scale for which craft a
+  // choice pre-fills (feeds the SNG-214 diversity rule), never a force: surface a boosted craft when it FITS.
+  const boosted = cap((character?.boostedCrafts || []).map(id => catalog[id]?.name || id), 4);
+  if (boosted.length) lines.push(`- Player wants to use these MORE (favour them when a beat genuinely fits — never force an ill-fitting one): ${boosted.join(", ")}.`);
+
   // (4) a carried item that could serve — a named/legendary/evolving item, a consumable, or one with authored uses/tags
   const notableItems = cap((character?.inventory || []).filter(i => i && (i.customName || i.evoStageName || (i.uses || []).length || i.consumable || (i.bonusTags || []).length)), 2)
     .map(i => { const capy = itemCapability(i); return `${i.customName || i.evoStageName || i.name}${capy ? ` — ${capy}` : ""}`; });

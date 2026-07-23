@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.231";
+const APP_VERSION = "1.8.232";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -110,6 +110,20 @@ app.addEventListener("click", e => { const el = e.target.closest?.("[data-aptchi
 // SNG-134 Part 2: ONE hover/tap detail for a skill / name / item, everywhere they appear (data-entity="kind:id").
 // Same entity → same detail, no matter the render site (the consistency ask). Reuses the one popover surface.
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-entity]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = entityHover(el.dataset.entity); if (txt) showPopoverText(txt); } });
+// SNG-215 §A1: toggle a craft BOOST — a player nudge that WEIGHTS the GM's craft suggestions (SNG-214), never
+// an override, never a roll change. Targeted DOM update + persist; no full re-render (keeps sidebar scroll).
+app.addEventListener("click", e => {
+  const el = e.target.closest?.("[data-boost]"); if (!el || !character) return;
+  e.preventDefault(); e.stopPropagation();
+  const id = el.dataset.boost;
+  character.boostedCrafts = character.boostedCrafts || [];
+  const at = character.boostedCrafts.indexOf(id);
+  const on = at < 0; // becoming boosted?
+  if (on) character.boostedCrafts.push(id); else character.boostedCrafts.splice(at, 1);
+  el.classList.toggle("on", on); el.closest(".ability")?.classList.toggle("boosted", on);
+  el.title = on ? "Boosted — the GM leans toward suggesting this when it fits (tap to clear). A nudge, never a force." : "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll.";
+  try { saveCharacter(character); } catch { /* best-effort */ }
+});
 
 // SNG-134: resolve "kind:id" → the shared detail text, gathering the live values the pure formatters need.
 function entityHover(spec) {
@@ -5892,6 +5906,7 @@ function renderLevelUp(status = "") {
         owned: (character.abilities || []).map(a => `${cat[a.abilityId]?.name || a.abilityId} r${rankOf(a.abilityId)}`).join(", "),
         domains: character.domains || {}, tendencies: topTend, aptitudes: (character.aptitudes || []).join(", ") || "none",
         reachablePool: pool, aspirations: asp, uses: `most-used: ${usesTop || "—"}${usesUnused ? ` · owned-but-unused: ${usesUnused}` : ""}`,
+        boosted: (character.boostedCrafts || []).map(id => cat[id]?.name || id).join(", "), // SNG-215 §A1: the player's thumb on the scale
         schools: schoolsStr, skillPoints: character.skillPoints || 0, level: character.level || 1
       });
       // SNG-218 fix: canonicalize each model pick to a REAL reachable id before the guardrail filter. A model
@@ -7525,19 +7540,27 @@ function renderPlay(turn, opts = {}) {
         // SNG-202 §3: braids get their OWN category — they belong to no single tradition (that is the point),
         // and interleaving them under one parent's group hid what they are. The list view of the same fact
         // the wheel shows spatially.
-        const byClass = {}; const braids = [];
+        // SNG-215 §A2: group owned crafts by FUNCTION FAMILY (what they DO) instead of by tradition — the kit
+        // legible at a glance ("what can I WARD with here"), reinforcing the world's own spine of functions.
+        // Family via familiesOfAbility (the join FN_INDEX already carries); a craft files under its PRIMARY
+        // (first) family; braids keep their own group. Grouping is a VIEW — each row still shows rank/cost/practice.
+        const byFam = {}; const braids = [];
         for (const o of owned) {
           if (o.ab.minted && Array.isArray(o.ab.minted.from) && o.ab.minted.from.length === 2) { braids.push(o); continue; }
-          const key = abilityTradition(o.ab) || o.ab.powerSystem || "learned"; (byClass[key] = byClass[key] || []).push(o);
+          const key = familiesOfAbility(o.ab, FN_INDEX)[0] || "OTHER"; (byFam[key] = byFam[key] || []).push(o);
         }
-        const order = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b)));
+        const order = [...FUNCTION_FAMILIES.filter(f => byFam[f]?.length), ...(byFam.OTHER ? ["OTHER"] : [])];
+        const famLabel = f => f === "OTHER" ? "Other" : f.charAt(0) + f.slice(1).toLowerCase();
+        const boostSet = new Set(character.boostedCrafts || []); // SNG-215 §A1
         const row = ({ a, ab }) => {
           const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
           const p = rankProgress(character, a.abilityId); // ability-arch v2: earned, not bought
+          const on = boostSet.has(a.abilityId); // SNG-215 §A1: a player-set boost — a thumb on the scale for suggestions, never an override
           // SNG-202 §3 / SNG-201: a braid names its parents + who found it first (the list echo of the wheel).
           const braidLine = (ab.minted && (ab.minted.from || []).length === 2)
             ? `<div class="hint braid-parents">⧉ braid of ${esc((ab.minted.sourceNames || []).join(" × ") || "two crafts")}${ab.minted.namedBy === "player" ? " · your name for it" : ab.minted.adoptedFrom?.characterName ? ` · first found by ${esc(ab.minted.adoptedFrom.characterName)}` : ab.minted.firstFinder ? " · you found it first" : ""}</div>` : "";
-          return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
+          return `<div class="ability${on ? " boosted" : ""}" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
+            <button class="craft-boost${on ? " on" : ""}" data-boost="${esc(a.abilityId)}" title="${on ? "Boosted — the GM leans toward suggesting this when it fits (tap to clear). A nudge, never a force." : "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll."}">✦</button>
             <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(ab.levelReq)}">${tierOf(ab.levelReq)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
             <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
             ${functionChips(ab)}${braidLine}
@@ -7546,8 +7569,8 @@ function renderPlay(turn, opts = {}) {
         const braidGroup = braids.length
           ? `<details class="skill-group braids-group" open><summary>✦ Braids <span class="cost">(${braids.length})</span></summary>${braids.sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`
           : "";
-        return braidGroup + order.map(cls => `<details class="skill-group" open><summary>${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
-          byClass[cls].sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`).join("");
+        return braidGroup + order.map(fam => `<details class="skill-group ${familyClass(fam)}" open><summary>${FAMILY_GLYPH?.[fam] || "◆"} ${esc(famLabel(fam))} <span class="cost">(${byFam[fam].length})</span></summary>${
+          byFam[fam].sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`).join("");
       })()}
       ${(() => {
         const canShow = character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules));

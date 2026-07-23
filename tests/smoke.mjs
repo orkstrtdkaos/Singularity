@@ -7480,7 +7480,7 @@ await (async () => {
 // ---- SNG-214: the choice-prefill craft is DIVERSIFIED, not defaulted to the broad Order-Sense (prompt-side) ----
 {
   const gmSrc214 = readFileSync(join(root, "engine/gm.js"), "utf8");
-  check("214: choices' abilityId is diversified — vary the craft across choices, aspiration-favoured", /SNG-214/.test(gmSrc214) && /VARY the craft/.test(gmSrc214) && /FAVOUR a craft the player has DECLARED as an ASPIRATION/.test(gmSrc214));
+  check("214: choices' abilityId is diversified — vary the craft across choices, aspiration-favoured", /SNG-214/.test(gmSrc214) && /VARY the craft/.test(gmSrc214) && /DECLARED as an ASPIRATION/.test(gmSrc214));
   check("214 §3.3: a broad perception craft (Order-Sense) is a FALLBACK, never the reflexive default", /Order-Sense\) is a FALLBACK/.test(gmSrc214) && /NEVER the reflexive default/.test(gmSrc214));
   check("214 §3.4: not every choice needs an abilityId — a plain/freetext option leaves it null", /NOT every choice needs an abilityId/.test(gmSrc214));
 }
@@ -7605,6 +7605,34 @@ await (async () => {
   check("225 prevention: the moveTo directive forbids coining a NEW name for a place that already exists", /USE THE EXISTING NAME/.test(gmSrc225) && /coined synonym mints a DUPLICATE/.test(gmSrc225));
   check("225 prevention: the travel directive tells the GM to reuse a reachable place's exact name/id", /do not coin a new synonym for a place you can already reach/.test(appSrc225));
   check("225 observability: mintTransitLocation logs every coin (the coin-rate is measurable)", /\[transit-mint\] coined/.test(appSrc225));
+}
+
+// ---- SNG-215 §A: the ability sidebar — grouped by FUNCTION, and a player-set craft BOOST ----
+{
+  const appSrcA = readFileSync(join(root, "app.js"), "utf8");
+  const gmSrcA = readFileSync(join(root, "engine/gm.js"), "utf8");
+  const cssA = readFileSync(join(root, "style.css"), "utf8");
+
+  // §A2: the sidebar groups owned crafts by FUNCTION FAMILY (familiesOfAbility), not by tradition.
+  check("215 §A2: the sidebar groups crafts by FUNCTION FAMILY (familiesOfAbility + FUNCTION_FAMILIES order)", /familiesOfAbility\(o\.ab, FN_INDEX\)\[0\]/.test(appSrcA) && /FUNCTION_FAMILIES\.filter\(f => byFam\[f\]/.test(appSrcA));
+  check("215 §A2: each family group is colour-coded by the world's function colour", /\.skill-group\.fn-fam-know > summary/.test(cssA) && /\.skill-group\.fn-fam-harm > summary/.test(cssA));
+
+  // §A1: the boost toggle in the row, its persist-and-nudge handler, and the CSS.
+  check("215 §A1: each craft row carries a boost toggle (data-boost) reading character.boostedCrafts", /data-boost="\$\{esc\(a\.abilityId\)\}"/.test(appSrcA) && /const boostSet = new Set\(character\.boostedCrafts/.test(appSrcA));
+  check("215 §A1: the boost handler toggles boostedCrafts + persists (targeted DOM update, no full re-render)", /const el = e\.target\.closest\?\.\("\[data-boost\]"\)/.test(appSrcA) && /character\.boostedCrafts\.push\(id\)/.test(appSrcA) && /saveCharacter\(character\)/.test(appSrcA));
+
+  // §A1 wiring: the boost reaches BOTH suggestion surfaces — the level-up reasoned pick and the choice pre-fill.
+  check("215 §A1: the level-up suggestion is now PASSED the boosted crafts (was declared, never fed)", /boosted: \(character\.boostedCrafts \|\| \[\]\)\.map\(id => cat\[id\]\?\.name \|\| id\)/.test(appSrcA));
+  check("215 §A1: the SNG-214 choice pre-fill rule FAVOURS a boosted craft (when it fits, never forced)", /FAVOUR a craft the player has BOOSTED/.test(gmSrcA));
+
+  // §A1: the TOOLKIT block surfaces boosted crafts (the shared signal the choice rule reads).
+  const { toolkitForGM: tkA } = await import("../engine/toolkit.js");
+  const { buildFunctionIndex: bfiA } = await import("../engine/functions.js");
+  const chA = { abilities: [{ abilityId: "wither", level: 2 }], boostedCrafts: ["wither"], practice: {} };
+  const blockA = tkA(chA, { catalog: { wither: { name: "Wither" } }, fnIndex: bfiA({}), rules: {} });
+  check("215 §A1: toolkitForGM surfaces the player's boosted crafts (fed to the GM, atmospherically)", /Player wants to use these MORE/.test(blockA) && /Wither/.test(blockA));
+  check("215 §A1 GUARD: no boosted crafts → no boost line (only when the player set one)", !/Player wants to use these MORE/.test(tkA({ abilities: [], practice: {} }, { catalog: {}, fnIndex: bfiA({}), rules: {} })));
+  check("215 §A1: the boost is a NUDGE, not an override (the guard is in the prompt + the tooltip)", /never force an ill-fitting one/.test(blockA) || /thumb on the scale/.test(gmSrcA));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

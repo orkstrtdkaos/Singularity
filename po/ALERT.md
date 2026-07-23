@@ -1,5 +1,15 @@
 # PO ALERT
 
+> ## [!] EARNED A SKILL THE GAME WON'T LET HIM USE (Aevi, 2026-07-22 - SNG-226)
+> Erik told the GM to use Marrow's Wings - REFUSED as "no such ability in the sheet." Confirmed via
+> See-the-Machine: the intent-parser was fed "Character abilities: order_sense...hunters_strike" and
+> marrow-s-wings is NOT in it. Root: recordDiscovery pushes to discoveries[] and STOPS - records the FACT,
+> not a USABLE craft (no rank/cost/effect). Every system that reads abilities[] (parser, wheel, resolver) is
+> blind to it. A discovery today = a diary entry, not a spell. Fix: register the discovery as a braid-shaped
+> usable ability (the machinery exists - braids are already in abilities[]) + backfill Marrow's Wings. Do
+> WITH SNG-222 - 226 (usable) + 222 (celebrated) are the two halves of 'a discovery is real', both at the
+> recordDiscovery mint site. The mechanical twin of the missing-celebration.
+
 > ## 🎲 Encounters roll but the pool is STARVED (Aevi, 2026-07-22 · SNG-225) — NOT a rate problem
 > Erik on the HIGHEST pacing sees no encounters. Verified: SNG-127 shipped, the roll FIRES. The bug is
 > downstream — `pickEncounter`/`isEligible`: at the gen-waygate only **7 of 58 encounters are eligible, ALL

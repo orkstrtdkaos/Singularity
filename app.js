@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.226";
+const APP_VERSION = "1.8.227";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2621,7 +2621,7 @@ function renderCreate() {
     document.getElementById("form-done").onclick = () => { state.form = document.getElementById("form-text").value.trim(); renderBioStep(); };
   }
 
-  function renderBioStep(bio = { hometown: "", residence: "", livelihood: "", hobbies: "", motivation: "", story: "" }) {
+  function renderBioStep(bio = { hometown: "", residence: "", livelihood: "", hobbies: "", motivation: "", story: "" }, revertTo = null) {
     const FIELDS = [
       ["hometown", "Where are they from?", "e.g. a fishing hamlet two days upriver"],
       ["residence", "Where do they live now?", "e.g. a rented loft over the Millbrook cooperage"],
@@ -2634,23 +2634,29 @@ function renderCreate() {
       <p class="hint" style="margin-bottom:14px">This is what makes them a character and not a bystander. The GM grounds every scene in it. Fill it in, or let the valley weave a draft you can edit.</p>
       ${FIELDS.map(([k, label, ph]) => `<div class="field"><label>${label}</label><input id="bio-${k}" value="${esc(bio[k])}" placeholder="${esc(ph)}"></div>`).join("")}
       <div class="field"><label>Their story so far</label><textarea id="bio-story" rows="4" style="width:100%" placeholder="A few sentences tying it together">${esc(bio.story)}</textarea></div>
-      <div style="display:flex; gap:8px;">
-        <button class="btn secondary" id="bio-weave">✦ Weave it for me</button>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <button class="btn secondary" id="bio-weave">✦ Weave in the valley</button>
+        ${revertTo ? `<button class="btn secondary" id="bio-revert">↺ Revert to what I wrote</button>` : ""}
         <button class="btn" id="bio-done">Begin in ${esc(CONTENT.locations?.[state.startingLocation || defaultStart(state.origin)]?.name || "the Valley")}</button>
       </div>
-      <div class="hint" id="bio-status" style="margin-top:8px"></div>
+      ${/* SNG-220 §2d: say what the button does, right next to it — and it's now honest (§2a/§2b make it integrative). */""}
+      <div class="hint" style="margin-top:6px">✦ Fills in the blanks and enriches what you've written with the valley's lore — it <strong>keeps your words</strong>, and everything stays editable.</div>
+      <div class="hint" id="bio-status" style="margin-top:6px"></div>
     </div>`);
     const read = () => Object.fromEntries([...FIELDS.map(([k]) => [k, document.getElementById(`bio-${k}`).value.trim()]), ["story", document.getElementById("bio-story").value.trim()]]);
     document.getElementById("bio-weave").onclick = async () => {
       const status = document.getElementById("bio-status");
-      status.textContent = "The valley considers who you might be…";
+      const before = read(); // SNG-220 §2c: stash what the player wrote, for one undo
+      status.textContent = "The valley weaves the land into your words…";
       try {
-        const draft = await generateBio({ name: state.name, origin: state.origin, background: state.background, attributes: state.attrs });
-        renderBioStep({ ...read(), ...Object.fromEntries(Object.entries(draft).filter(([, v]) => v)) });
+        // SNG-220 §2a: the player's typed words go IN as the seed; §2b: the weave ENRICHES them, never replaces.
+        const draft = await generateBio({ name: state.name, origin: state.origin, background: state.background, attributes: state.attrs, bio: read() });
+        renderBioStep({ ...read(), ...Object.fromEntries(Object.entries(draft).filter(([, v]) => v)) }, before);
       } catch (err) {
         status.textContent = "The weave slipped (" + err.message.slice(0, 60) + ") — write it by hand or try again.";
       }
     };
+    if (revertTo) document.getElementById("bio-revert").onclick = () => renderBioStep(revertTo); // SNG-220 §2c: put their own words back
     document.getElementById("bio-done").onclick = () => finish(read());
   }
 

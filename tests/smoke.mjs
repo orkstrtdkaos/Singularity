@@ -12,7 +12,7 @@ import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, wor
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs, noteCompanionWitnessed, companionMemoryForGM } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched, traditionArcForGM, npcQuestsForGM, practicedTraditions, traditionArcBeat, structuredQuestRecord, normalizeProse } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
-import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective, suggestNextCrafts } from "../engine/gm.js";
+import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective, suggestNextCrafts, generateBio } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM, effectiveEpicStatus, applyEpicArcPush, resolveEpicClash, applyEpicClashOutcome } from "../engine/worldtick.js";
@@ -7463,6 +7463,23 @@ await (async () => {
   check("214: choices' abilityId is diversified — vary the craft across choices, aspiration-favoured", /SNG-214/.test(gmSrc214) && /VARY the craft/.test(gmSrc214) && /FAVOUR a craft the player has DECLARED as an ASPIRATION/.test(gmSrc214));
   check("214 §3.3: a broad perception craft (Order-Sense) is a FALLBACK, never the reflexive default", /Order-Sense\) is a FALLBACK/.test(gmSrc214) && /NEVER the reflexive default/.test(gmSrc214));
   check("214 §3.4: not every choice needs an abilityId — a plain/freetext option leaves it null", /NOT every choice needs an abilityId/.test(gmSrc214));
+}
+
+// ---- SNG-220: "Weave in the valley" INTEGRATES what the player typed, never overwrites it ----
+{
+  // §2a/§2b: the player's typed bio goes IN as the seed; the prompt enriches, never replaces (injected fake).
+  let capSys = "", capContent = "";
+  const cap = async (msgs, opts) => { capSys = opts.system; capContent = msgs[0].content; return { story: "x" }; };
+  await generateBio({ name: "Sisu", origin: "valley", background: "farmer", attributes: { craft: 4 }, bio: { hometown: "a fishing hamlet two days upriver", motivation: "a debt he can't name" } }, cap);
+  check("220 §2a: the player's typed bio fields reach generateBio (the seed)", /a fishing hamlet two days upriver/.test(capContent) && /a debt he can't name/.test(capContent));
+  check("220 §2b: the prompt INTEGRATES — preserve intent, enrich, never replace/discard", /Their words are the SEED/.test(capSys) && /never contradict or discard/.test(capSys) && /do NOT replace their story with yours/.test(capSys));
+  const emptyCap = { sys: "", content: "" };
+  await generateBio({ name: "A", origin: "valley", background: "b", attributes: {} }, async (m, o) => { emptyCap.content = m[0].content; return {}; });
+  check("220: a blank bio still authors fresh (no typed fields → the 'left blank' path)", /left the story blank/.test(emptyCap.content));
+  const appSrc220 = readFileSync(join(root, "app.js"), "utf8");
+  check("220 §2a: the weave call passes the player's read() as `bio` (the fear-fix)", /generateBio\(\{ name: state\.name, origin: state\.origin, background: state\.background, attributes: state\.attrs, bio: read\(\) \}\)/.test(appSrc220));
+  check("220 §2c: an undo — the pre-weave text is stashed + a 'Revert to what I wrote' restores it", /const before = read\(\)/.test(appSrc220) && /bio-revert/.test(appSrc220) && /renderBioStep\(revertTo\)/.test(appSrc220));
+  check("220 §2c/§2d: the button is relabelled + a plain description states it keeps your words", /✦ Weave in the valley/.test(appSrc220) && /keeps your words/.test(appSrc220));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

@@ -639,11 +639,16 @@ Rules: order the steps as the player intends to ATTEMPT them. Use the PLAYER'S p
 }
 
 /** Generate a bio draft from the creation choices (player edits before accepting). */
-export async function generateBio({ name, origin, background, attributes }) {
-  const sys = `You write short character bios for an RPG set in the Valley of Echoes — a post-de-technologizing world (15 years after humanity voluntarily stepped back from its own technology) with two local civilizations: the sonic Harmonic Heights and the photonic Radiant Plateau, plus unaligned valley-floor farming communities. Grounded, specific, warm; no cliches, no chosen-one tropes. Reply with ONLY JSON:
+export async function generateBio({ name, origin, background, attributes, bio = {} }, callJSON = callClaudeJSON) { // SNG-220 §2a: the player's typed words come IN
+  const typed = Object.entries(bio || {}).filter(([, v]) => String(v || "").trim());
+  // SNG-220 §2b: INTEGRATE, don't replace — the player's words are the SEED, the land is woven INTO them.
+  const sys = `You write short character bios for an RPG set in the Valley of Echoes — a post-de-technologizing world (15 years after humanity voluntarily stepped back from its own technology) with two local civilizations: the sonic Harmonic Heights and the photonic Radiant Plateau, plus unaligned valley-floor farming communities. Grounded, specific, warm; no cliches, no chosen-one tropes.
+⛔ THE PLAYER HAS ALREADY WRITTEN SOME OF THIS. Their words are the SEED — preserve their intent, their specifics, their voice. Where a field is FILLED, ENRICH it (ground it in the land, add texture, reconcile it with their origin/background) but KEEP WHAT THEY MEANT — never contradict or discard it. Where a field is BLANK, author it to FIT what they have already established. Weave the Valley's lore INTO their story; do NOT replace their story with yours. The lore serves THEIR character, not the reverse — a weave that buries their fishing-hamlet in generic Valley lore has failed.
+Reply with ONLY JSON:
 {"hometown": "where they grew up (specific, in-world)", "residence": "where they live now and what it's like", "livelihood": "how they actually make money", "hobbies": "2-3 real hobbies", "motivation": "why they stepped out of ordinary life to become someone things happen to — concrete and personal, not grand", "story": "3-4 sentence life story tying it together"}`;
-  const content = `Name: ${name}. Origin: ${origin} (harmonic = Heights sonic culture, radiant = Plateau light culture, valley = unaligned farming folk). Background: ${background}. Attributes (1-4): ${JSON.stringify(attributes)} — let the strongest shape the story.`;
-  return callClaudeJSON([{ role: "user", content }], { task: "bio-gen", system: sys, maxTokens: 1024 });
+  const content = `Name: ${name}. Origin: ${origin} (harmonic = Heights sonic culture, radiant = Plateau light culture, valley = unaligned farming folk). Background: ${background}. Attributes (1-4): ${JSON.stringify(attributes)} — let the strongest shape the story.
+${typed.length ? `WHAT THE PLAYER HAS ALREADY WRITTEN — preserve + enrich these, author the blanks to fit:\n${typed.map(([k, v]) => `- ${k}: ${smartClamp(String(v), 400)}`).join("\n")}` : "The player left the story blank — author it fresh, grounded in their origin + background."}`;
+  return callJSON([{ role: "user", content }], { task: "bio-gen", system: sys, maxTokens: 1024 });
 }
 
 /** Parse a freeform player action into a resolvable action spec (cheap model). */

@@ -128,24 +128,29 @@
         "player": "Ask Halvra what she knows about the missing woman — the bill said no questions, but she'd know more than the board",
         "summary": "Halvra fills in what the bill left out — Sera arrived alone, checked in properly, and vanished overnight; the Crow and Thistle is the thread to pull.",
         "narration": "Halvra looks at you for a moment before she answers — weighing, you think, not whether to tell you, but how much is useful.\n\n\"Sera,\" she says. \"Stillhold family, respectable. Came through the gate seven days back, alone, which is unusual — the Stillhold doesn't send its people out alone unless they have a reason they won't name.\" She sets the stylus down and folds her hands on the ledger. \"She checked in properly, declared no blood business, no cargo. Said she was looking for lodging. I logged her, pointed her toward the Crow and Thistle.\" A pause. \"Next morning, her room was empty and the innkeep hadn't seen her leave. The bill went up that afternoon.\"\n\nFreki has drifted closer to the table during this — not begging, just listening. Halvra glances at him once and says nothing about it.\n\n\"The bill says no questions of the finder,\" she adds, \"which the family wrote themselves. My read is they know roughly what she came here to do, and they'd rather have her back than an accounting.\" She picks up the stylus again, not dismissively — just ready to write whatever comes next. \"The Crow and Thistle would be the starting place. Innkeep's name is Doss. He's thorough when he wants to be.\"\n\nShe leaves it there, open."
+      },
+      {
+        "player": "I'll ask Halvra \"Are there any caravans or important individuals needing protection travelling through the town? Any bodyguard jobs listed?\"",
+        "summary": "Halvra tells Brynjar that bodyguard postings aren't formal here — the Crow and Thistle is where those conversations happen.",
+        "narration": "Halvra picks the stylus back up and taps it once against the ledger's edge — thinking, or just giving the question its due weight.\n\n\"Bodyguard work.\" She says it flat, not dismissive. \"Nothing posted formally, no. The Marchward doesn't run a hire-board for that — too easy to abuse on neutral ground.\" She glances toward the square-side window, a narrow rectangle of pale morning light. \"What comes through here, mostly, are travelers who already have their arrangements made before they arrive. Redline folk with escorts, Stillhold messengers in pairs.\" A beat. \"Occasionally someone comes through who didn't plan as well as they thought and starts asking the same question you just asked me.\"\n\nShe turns a page in the ledger — not dismissively, just continuing her work while she talks. \"The Crow and Thistle is where you'd hear about it before I would. Doss keeps an ear on everything that moves through his common room. If a merchant came in last night nervous about the road east, Doss would know before they'd finished their first cup.\" She looks up again, direct. \"You're already going there for the Sera business, unless I misread you.\""
       }
     ],
     "lastTurn": {
-      "narration": "Halvra looks at you for a moment before she answers — weighing, you think, not whether to tell you, but how much is useful.\n\n\"Sera,\" she says. \"Stillhold family, respectable. Came through the gate seven days back, alone, which is unusual — the Stillhold doesn't send its people out alone unless they have a reason they won't name.\" She sets the stylus down and folds her hands on the ledger. \"She checked in properly, declared no blood business, no cargo. Said she was looking for lodging. I logged her, pointed her toward the Crow and Thistle.\" A pause. \"Next morning, her room was empty and the innkeep hadn't seen her leave. The bill went up that afternoon.\"\n\nFreki has drifted closer to the table during this — not begging, just listening. Halvra glances at him once and says nothing about it.\n\n\"The bill says no questions of the finder,\" she adds, \"which the family wrote themselves. My read is they know roughly what she came here to do, and they'd rather have her back than an accounting.\" She picks up the stylus again, not dismissively — just ready to write whatever comes next. \"The Crow and Thistle would be the starting place. Innkeep's name is Doss. He's thorough when he wants to be.\"\n\nShe leaves it there, open.",
-      "sceneSummary": "Halvra fills in what the bill left out — Sera arrived alone, checked in properly, and vanished overnight; the Crow and Thistle is the thread to pull.",
+      "narration": "Halvra picks the stylus back up and taps it once against the ledger's edge — thinking, or just giving the question its due weight.\n\n\"Bodyguard work.\" She says it flat, not dismissive. \"Nothing posted formally, no. The Marchward doesn't run a hire-board for that — too easy to abuse on neutral ground.\" She glances toward the square-side window, a narrow rectangle of pale morning light. \"What comes through here, mostly, are travelers who already have their arrangements made before they arrive. Redline folk with escorts, Stillhold messengers in pairs.\" A beat. \"Occasionally someone comes through who didn't plan as well as they thought and starts asking the same question you just asked me.\"\n\nShe turns a page in the ledger — not dismissively, just continuing her work while she talks. \"The Crow and Thistle is where you'd hear about it before I would. Doss keeps an ear on everything that moves through his common room. If a merchant came in last night nervous about the road east, Doss would know before they'd finished their first cup.\" She looks up again, direct. \"You're already going there for the Sera business, unless I misread you.\"",
+      "sceneSummary": "Halvra tells Brynjar that bodyguard postings aren't formal here — the Crow and Thistle is where those conversations happen.",
       "choices": [
         {
-          "label": "Ask about Sera's manner when she came in — did she seem frightened, purposeful, watched?",
+          "label": "Head to the Crow and Thistle — ask Doss about Sera's disappearance and whether anyone needs a road escort east",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "travel"
           ],
           "trivial": true
         },
         {
-          "label": "Take the night-watch posting — declare it to Halvra and get logged for tonight's watch",
+          "label": "Before you go, take the night-watch posting — a meal, floor space, and honest copper is a foundation while you find your footing",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -155,22 +160,24 @@
           "trivial": true
         },
         {
-          "label": "Head to the Crow and Thistle to find Doss — the innkeep saw Sera last",
-          "attribute": "practical",
+          "label": "Ask Halvra directly — who came through the gate in the last two days that looks like someone who'd pay for a sword at their back",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Collect your axe and shield from the rack and step out into the square — get a read on who's moving through the Marchward this morning",
+          "attribute": "mental",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "travel",
             "scout"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Or do something else.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [],
           "trivial": true
         }
       ],
@@ -179,11 +186,11 @@
         "npcsPresent": [
           {
             "name": "Halvra Stenn",
-            "state": "Sitting at the far end of the table, stylus back in hand, ledger open — waiting to see what Brynjar does next"
+            "state": "Stylus in hand, ledger turned to a fresh page, watching Brynjar with the same level attention she gives everything"
           },
           {
             "name": "Freki",
-            "state": "Closer to the table now, listening — nose working the room"
+            "state": "Sitting near the door, watching the room, nose working"
           }
         ],
         "objects": [
@@ -194,9 +201,9 @@
           "Lamp burning low"
         ],
         "threads": [
-          "Sera of the Stillhold — missing seven days, last known at the Crow and Thistle; Doss the innkeep is the next thread",
+          "Sera of the Stillhold — missing seven days, Crow and Thistle is the next thread; Doss the innkeep knows more",
           "Night-watch posting still open — meal, floor space, half-copper per watch",
-          "Halvra waiting to see what Brynjar declares or asks next"
+          "Bodyguard work — no formal board, but the Crow and Thistle common room is where those arrangements get made"
         ]
       },
       "npcUpdates": [
@@ -204,33 +211,30 @@
           "op": "update",
           "npcId": "halvra-stenn",
           "name": "Halvra Stenn",
-          "note": "Told Brynjar what she knows of Sera: alone, proper check-in, vanished overnight; pointed him toward Doss at the Crow and Thistle",
+          "note": "Told Brynjar there's no formal bodyguard hire-board in the Marchward — neutral ground makes it too easy to abuse. Directed him to Doss at the Crow and Thistle for road-work arrangements.",
           "learned": [
-            "Sera arrived alone — unusual for a Stillholder",
-            "Sera declared no blood business or cargo, asked for lodging, was sent to the Crow and Thistle",
-            "Sera's room was empty the next morning without the innkeep seeing her leave",
-            "Halvra's read: the family knows why she came and want her back without an accounting"
+            "No formal bodyguard posting board at the Marchward",
+            "Doss at the Crow and Thistle hears about road-escort needs before the Wardhouse does"
           ],
-          "statusNote": "On duty at the Wardhouse; has shared what she knows of Sera freely"
+          "statusNote": "On duty at the Wardhouse; has shared what she knows freely and directed Brynjar toward the Crow and Thistle"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "sera-of-the-stillhold",
-          "label": "Sera of the Stillhold",
-          "kind": "mystery",
-          "fact": "Arrived alone seven days ago — unusual; checked in properly, no declared business, asked for lodging at the Crow and Thistle. Room empty next morning, innkeep Doss didn't see her leave. Family posted the bill knowing roughly why she came but wanting her back without questions.",
+          "topic": "crow-and-thistle",
+          "label": "The Crow and Thistle",
+          "kind": "place",
+          "fact": "The inn where Doss works and where informal road-escort arrangements get made before anyone posts a formal notice. The common room is the real information hub of the Marchward.",
           "links": [
+            "sera-of-the-stillhold",
             "halvra-stenn",
-            "the-marchward",
-            "the-stillhold",
-            "crow-and-thistle"
+            "the-marchward"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange at the intake table"
+        "why": "A brief exchange with Halvra — a few minutes at the table"
       }
     },
     "sceneState": {
@@ -238,11 +242,11 @@
       "npcsPresent": [
         {
           "name": "Halvra Stenn",
-          "state": "Sitting at the far end of the table, stylus back in hand, ledger open — waiting to see what Brynjar does next"
+          "state": "Stylus in hand, ledger turned to a fresh page, watching Brynjar with the same level attention she gives everything"
         },
         {
           "name": "Freki",
-          "state": "Closer to the table now, listening — nose working the room"
+          "state": "Sitting near the door, watching the room, nose working"
         }
       ],
       "objects": [
@@ -253,9 +257,9 @@
         "Lamp burning low"
       ],
       "threads": [
-        "Sera of the Stillhold — missing seven days, last known at the Crow and Thistle; Doss the innkeep is the next thread",
+        "Sera of the Stillhold — missing seven days, Crow and Thistle is the next thread; Doss the innkeep knows more",
         "Night-watch posting still open — meal, floor space, half-copper per watch",
-        "Halvra waiting to see what Brynjar declares or asks next"
+        "Bodyguard work — no formal board, but the Crow and Thistle common room is where those arrangements get made"
       ]
     }
   },
@@ -396,7 +400,8 @@
       "history": [
         "[d1] Logged Brynjar Andyrsson from Javiksholm; noted the razed-village weight without naming it; asked for a declaration of cargo, message, or blood business",
         "[d1] Informed Brynjar of the night-watch vacancy and mentioned the missing-person bill for Sera of the Stillhold — laid out both opportunities plainly",
-        "[d1] Told Brynjar what she knows of Sera: alone, proper check-in, vanished overnight; pointed him toward Doss at the Crow and Thistle"
+        "[d1] Told Brynjar what she knows of Sera: alone, proper check-in, vanished overnight; pointed him toward Doss at the Crow and Thistle",
+        "[d1] Told Brynjar there's no formal bodyguard hire-board in the Marchward — neutral ground makes it too easy to abuse. Directed him to Doss at the Crow and Thistle for road-work arrangements."
       ],
       "knownFacts": [
         "Heard of Javiksholm — recognized what a man from a razed village looks like",
@@ -404,13 +409,15 @@
         "The Marchward would take notice of whoever brought Sera of the Stillhold home",
         "Sera arrived alone — unusual for a Stillholder",
         "Sera declared no blood business or cargo, asked for lodging, was sent to the Crow and Thistle",
-        "Sera's room was empty the next morning without the innkeep seeing her leave"
+        "Sera's room was empty the next morning without the innkeep seeing her leave",
+        "No formal bodyguard posting board at the Marchward",
+        "Doss at the Crow and Thistle hears about road-escort needs before the Wardhouse does"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On duty at the Wardhouse; has shared what she knows of Sera freely",
+      "statusNote": "On duty at the Wardhouse; has shared what she knows freely and directed Brynjar toward the Crow and Thistle",
       "domains": {
         "primary": "marcher"
       },
@@ -528,7 +535,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 3
+    "turnsSinceOffer": 4
   },
   "domains": {
     "primary": "marcher",
@@ -718,20 +725,36 @@
         "createdDay": 1,
         "entityId": "halvra-stenn",
         "updatedDay": 1
+      },
+      "crow-and-thistle": {
+        "id": "crow-and-thistle",
+        "label": "The Crow and Thistle",
+        "kind": "place",
+        "facts": [
+          "[d1] The inn where Doss works and where informal road-escort arrangements get made before anyone posts a formal notice. The common room is the real information hub of the Marchward."
+        ],
+        "links": [
+          "sera-of-the-stillhold",
+          "halvra-stenn",
+          "the-marchward"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "leadership": 12.026956214355467,
-    "cerebral": 1.881095693359375,
-    "strategic": 1.8305472656250001,
-    "ruthless": 0.9036878906249999,
-    "social": 1.975
+    "leadership": 11.72628230899658,
+    "cerebral": 1.8340683010253906,
+    "strategic": 2.784783583984375,
+    "ruthless": 0.8810956933593749,
+    "social": 2.925625
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 6,
+  "actionCount": 7,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -842,8 +865,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784770686585,
-  "rev": 42,
+  "updatedAt": 1784770901472,
+  "rev": 43,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -928,7 +951,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 9
+    "riven_marches": 10
   },
   "practice": {
     "schemaVersion": 1,
@@ -987,10 +1010,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T01:38:06.584Z",
+      "lastAt": "2026-07-23T01:41:41.468Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_pendingArrival": null,
@@ -1006,15 +1029,15 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 3,
-    "choices": 3,
-    "scene": 3,
-    "npcUpdates": 3,
+    "sceneSummary": 4,
+    "choices": 4,
+    "scene": 4,
+    "npcUpdates": 4,
     "placeUpdates": 1,
     "generateRequest": 1,
     "moveTo": 1,
-    "timeOps": 3,
-    "codexUpdates": 3
+    "timeOps": 4,
+    "codexUpdates": 4
   },
-  "_opTurns": 3
+  "_opTurns": 4
 }

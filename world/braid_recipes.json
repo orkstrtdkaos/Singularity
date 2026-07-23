@@ -70,6 +70,41 @@
         "characterName": "Silas Weir"
       },
       "foundWorldDay": 22
+    },
+    "prism_sight+sonic_resonance": {
+      "braidKey": "prism_sight+sonic_resonance",
+      "name": "Shatterlight",
+      "description": "Where Prism Sight splits the world into its hidden frequencies and Sonic Resonance drives those frequencies to sing or shatter, Shatterlight Choir does something neither could achieve alone: it reads the structural truth of a thing — its load-bearing fault lines, its resonant core, its secret geometries — and then sings that truth back at it with surgical precision. Light becomes the score…",
+      "notFor": "It cannot create what it opens — corridors revealed are empty, locks undone hold nothing back. It cannot sustain a structure it has sung apart, nor heal what the resonance has already broken beyond its natural tolerance.",
+      "emergentFunction": "open",
+      "tree": [
+        {
+          "name": "Frequency Reading",
+          "grants": "The practitioner sees and hears simultaneously — light refracts into audible harmonics, revealing the resonant signature of any material object within sight range. Hidden seams, concealed…",
+          "cannot": "Cannot yet act on what is read; this rank is pure perception, no manipulation."
+        },
+        {
+          "name": "Scored Strike",
+          "grants": "Using a revealed frequency signature, the practitioner may direct a focused sonic pulse along the exact fault line of a structure — bypassing outer integrity to strike, bind, or move an interior…",
+          "cannot": "Cannot open living tissue or flesh-bound seals; works only on stone, wood, metal, and manufactured mechanisms."
+        },
+        {
+          "name": "Resonant Key",
+          "grants": "The practitioner's voice alone becomes a master key. By humming the precise chord-shape of a sealed thing — door, vault, ward-glyph, or silence-sealed passage — they open it without touch, without…",
+          "cannot": "Cannot open things that were never meant to be opened at all — flesh sealed by surgery, earth collapsed by ruin, bonds of will or oath. It finds doors; it…"
+        }
+      ],
+      "namedBy": "player",
+      "sourceNames": [
+        "Prism Sight",
+        "Sonic Resonance"
+      ],
+      "contributedBy": {
+        "playerKey": "player-s9z9u1",
+        "characterId": "char-mr4ejo8c",
+        "characterName": "Cellaceron"
+      },
+      "foundWorldDay": 23
     }
   }
 }

@@ -1722,24 +1722,19 @@
         "player": "Check the two additional slips on the runner's counter — see if the Millbrook stack holds anything else from the relay",
         "summary": "Silas checks the runner post counter — Dara's repair update confirms the third junction and materials staged; Pip's general notice quietly names Fendt to the hub board as a man who knows his trade.",
         "narration": "You step inside the runner post. The interior is narrow — a counter of bare wood, a shelf of pigeonholed cubbies behind it, and a runner's boy sitting on a stool with his chin in his hand and his eyes mostly shut. He opens them when the bell above the door settles.\n\nThe two slips on the counter are sorted by settlement, as the board outside promised. The first is Millbrook's, in a hand you don't recognize — thin, careful script, the letters slightly too upright, the hand of someone who learned to write from a ledger rather than a teacher. You unfold it. It is from Dara Holt. She writes to say that Calvar walked the lowest east-bend intake that morning and confirmed the third sleeve junction is showing the same iron-oxide seep as the others. She has staged the repair materials in sequence. She does not editorialize; she ends with the junction's designation and her initials. The work is moving.\n\nThe second slip is not from Millbrook at all. It is addressed to the hub message post generally, in Pip Cotter's hand — you recognize the particular curl she puts on the letter R from the postscript on Mara's relay. It is short. It reads: 'Roads go two ways. One more name for the board if anyone asks: Fendt, at the Fell — he knows his trade.' Nothing else. Pip is advertising Fendt's standing to anyone at the hub who might be asking after a filtration man. You fold both slips and add them to your pocket with Mara's.\n\nHuginn shifts on your shoulder and says nothing. The runner's boy is already asleep again."
+      },
+      {
+        "player": "Ask the runner's boy if anyone by the name Crane has left a message or passed through recently",
+        "summary": "Silas asks the runner's boy about Crane — no message, no recent passage, a near-miss named and dismissed.",
+        "narration": "The runner's boy straightens on his stool when you address him directly. He is perhaps fourteen, with ink on his left index finger and the look of someone who has memorized every name that has passed through this counter in the last month.\n\nYou ask him plainly. Has anyone by the name Crane left a message here, or passed through recently?\n\nHe tips his head to one side and works through it. His lips move slightly — the habit of someone cataloguing out loud without sound. Then he shakes his head, deliberate and certain. 'No Crane on the board,' he says. 'No Crane at the counter. Had a Cray last week — spice-merchant, picking up his usual.' He offers this addition with the professional courtesy of someone who knows the difference between a miss and a near-miss and wants you to know he checked both.\n\nHuginn shifts on your shoulder and says nothing. Its silence is the kind that has an opinion in it."
       }
     ],
     "lastTurn": {
-      "narration": "You step inside the runner post. The interior is narrow — a counter of bare wood, a shelf of pigeonholed cubbies behind it, and a runner's boy sitting on a stool with his chin in his hand and his eyes mostly shut. He opens them when the bell above the door settles.\n\nThe two slips on the counter are sorted by settlement, as the board outside promised. The first is Millbrook's, in a hand you don't recognize — thin, careful script, the letters slightly too upright, the hand of someone who learned to write from a ledger rather than a teacher. You unfold it. It is from Dara Holt. She writes to say that Calvar walked the lowest east-bend intake that morning and confirmed the third sleeve junction is showing the same iron-oxide seep as the others. She has staged the repair materials in sequence. She does not editorialize; she ends with the junction's designation and her initials. The work is moving.\n\nThe second slip is not from Millbrook at all. It is addressed to the hub message post generally, in Pip Cotter's hand — you recognize the particular curl she puts on the letter R from the postscript on Mara's relay. It is short. It reads: 'Roads go two ways. One more name for the board if anyone asks: Fendt, at the Fell — he knows his trade.' Nothing else. Pip is advertising Fendt's standing to anyone at the hub who might be asking after a filtration man. You fold both slips and add them to your pocket with Mara's.\n\nHuginn shifts on your shoulder and says nothing. The runner's boy is already asleep again.",
-      "sceneSummary": "Silas checks the runner post counter — Dara's repair update confirms the third junction and materials staged; Pip's general notice quietly names Fendt to the hub board as a man who knows his trade.",
+      "narration": "The runner's boy straightens on his stool when you address him directly. He is perhaps fourteen, with ink on his left index finger and the look of someone who has memorized every name that has passed through this counter in the last month.\n\nYou ask him plainly. Has anyone by the name Crane left a message here, or passed through recently?\n\nHe tips his head to one side and works through it. His lips move slightly — the habit of someone cataloguing out loud without sound. Then he shakes his head, deliberate and certain. 'No Crane on the board,' he says. 'No Crane at the counter. Had a Cray last week — spice-merchant, picking up his usual.' He offers this addition with the professional courtesy of someone who knows the difference between a miss and a near-miss and wants you to know he checked both.\n\nHuginn shifts on your shoulder and says nothing. Its silence is the kind that has an opinion in it.",
+      "sceneSummary": "Silas asks the runner's boy about Crane — no message, no recent passage, a near-miss named and dismissed.",
       "choices": [
         {
-          "label": "Go to the Ent grove and check on the ward — see if it still holds",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask the runner's boy if anyone by the name Crane has left a message or passed through recently",
+          "label": "Ask the boy if he knows where a long-timer at the Crossing would sit — someone who has been here awhile, waiting",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1749,10 +1744,10 @@
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the runner post itself — the message board, the cubbies, the sorting system — and read whether Crane has had a presence here",
+          "label": "Step back outside and use Order-Sense on the plaza — read the Crossing's design to find where a man holding a thread would naturally end up",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
+          "subAttribute": "insight",
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
@@ -1761,12 +1756,22 @@
           "trivial": false
         },
         {
-          "label": "Head northwest toward the Coliseum and forge district — find Pell and see what the Hub's forge quarter looks like",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Head toward the Ent grove — check the ward, let Huginn walk its edge, and see if the grove has anything to say about who has been near it",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Leave my own name at the counter — a note that Silas Weir is looking for Edvar Crane, with the Fell Pell at Millbrook as return address",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
           ],
           "trivial": true
         }
@@ -1776,80 +1781,30 @@
         "npcsPresent": [
           {
             "name": "Runner's boy",
-            "state": "Chin in hand on his stool, eyes shut again after a moment's wakefulness."
+            "state": "Sitting up straight now, having given his answer — ink-fingered, professionally attentive."
           },
           {
             "name": "Huginn",
-            "state": "Settled on Silas's shoulder, watching the interior with its usual unhurried attention."
+            "state": "Settled on Silas's shoulder, silent in the way that has an opinion in it."
           }
         ],
         "objects": [
-          "Two additional folded slips now read and pocketed — Dara Holt's repair update and Pip Cotter's general hub notice",
+          "Two additional folded slips now read and pocketed — Dara Holt's repair update and Pip's general notice",
           "Mara's relay notice already pocketed",
           "Empty counter surface",
           "Pigeonholed cubby shelf behind the counter",
           "Runner's bell above the door"
         ],
         "threads": [
+          "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
           "Veth moving toward the water-seller cluster to ask after Crane and resources",
           "Pell moving toward the Coliseum gate and forge district",
-          "Edvar Crane is somewhere in the Hub — location still unknown",
           "Ent grove ward unchecked since last visit"
         ]
       },
-      "codexUpdates": [
-        {
-          "topic": "the-edge-district-ledger",
-          "label": "The Edge District Ledger",
-          "kind": "event",
-          "fact": "Pip Cotter left a general notice at the Hub message post naming Fendt at the Fell Pell as a man who knows his trade — quietly advertising his standing to anyone asking after a filtration engineer at the hub level.",
-          "links": [
-            "fendt",
-            "mara-wells",
-            "millbrook",
-            "what-the-water-remembers"
-          ]
-        },
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "Dara Holt's relay confirms a third sleeve junction at the east-bend intake is showing the same iron-oxide seep as the others — repair materials staged in sequence by Dara, Calvar walking the line.",
-          "links": [
-            "dara-holt",
-            "calvar",
-            "millbrook",
-            "what-the-water-remembers"
-          ]
-        }
-      ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "dara-holt",
-          "name": "Dara Holt",
-          "note": "Sent a relay slip to the Hub confirming a third sleeve junction showing iron-oxide seep at the east-bend intake — repair materials staged in sequence, Calvar walking the line.",
-          "learned": [
-            "Third sleeve junction at east-bend intake confirmed with same iron-oxide seep pattern — staged in repair queue behind the primary failure."
-          ],
-          "status": "active",
-          "statusNote": "At Millbrook — repair materials staged, working alongside Calvar on the east-channel junction sequence."
-        },
-        {
-          "op": "update",
-          "npcId": "fendt",
-          "name": "Fendt",
-          "note": "Pip Cotter has named him at the Hub message board as a man who knows his trade — his standing is quietly spreading beyond Millbrook.",
-          "learned": [
-            "Named at the Hub message post by Pip Cotter as a filtration man worth asking after — the Fell Pell fellowship beginning to carry weight beyond the village."
-          ],
-          "status": "active",
-          "statusNote": "At Millbrook, at the Fell Pell — his name now circulating at the Hub level through Pip's notice."
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief stop at the runner post counter to read two slips."
+        "why": "a short exchange at the counter"
       }
     },
     "sceneState": {
@@ -1857,11 +1812,11 @@
       "npcsPresent": [
         {
           "name": "Runner's boy",
-          "state": "Chin in hand on his stool, eyes shut again after a moment's wakefulness."
+          "state": "Sitting up straight now, having given his answer — ink-fingered, professionally attentive."
         },
         {
           "name": "Huginn",
-          "state": "Settled on Silas's shoulder, watching the interior with its usual unhurried attention."
+          "state": "Settled on Silas's shoulder, silent in the way that has an opinion in it."
         }
       ],
       "objects": [
@@ -1872,9 +1827,9 @@
         "Runner's bell above the door"
       ],
       "threads": [
+        "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
         "Veth moving toward the water-seller cluster to ask after Crane and resources",
         "Pell moving toward the Coliseum gate and forge district",
-        "Edvar Crane is somewhere in the Hub — location still unknown",
         "Ent grove ward unchecked since last visit"
       ]
     }
@@ -4380,7 +4335,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 573,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean…",
@@ -5878,21 +5833,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.909266189734037,
-    "cerebral": 18.209758366849716,
-    "social": 6.4855274579205195,
-    "generous": 4.717917365093503,
-    "cautious": 3.834780265371078,
-    "physical": 0.5425618575003882,
-    "risky": 1.580597693303337,
-    "ruthless": 0.008296279455701976,
-    "carousing": 0.32066138997197435,
-    "amorous": 3.229078110589075,
-    "patient": 0.2216604937319786,
-    "stealth": 0.0032156591123792037,
-    "devotion": 1.698506916913339,
-    "craft": 0.5386349224645405,
-    "leadership": 0.01636806175941873
+    "strategic": 19.411534534990686,
+    "cerebral": 17.75451440767847,
+    "social": 7.323389271472506,
+    "generous": 4.599969430966166,
+    "cautious": 3.7389107587368007,
+    "physical": 0.5289978110628785,
+    "risky": 1.5410827509707534,
+    "ruthless": 0.008088872469309427,
+    "carousing": 0.312644855222675,
+    "amorous": 3.148351157824348,
+    "patient": 0.21611898138867913,
+    "stealth": 0.0031352676345697233,
+    "devotion": 1.6560442439905056,
+    "craft": 0.525169049402927,
+    "leadership": 0.01595886021543326
   },
   "aptitudes": [
     "strategist",
@@ -5900,7 +5855,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 714,
+  "actionCount": 715,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6290,8 +6245,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784848836307,
-  "rev": 1141,
+  "updatedAt": 1784849123995,
+  "rev": 1142,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8422,7 +8377,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 66
+    "the_center": 67
   },
   "foreclosed": [
     "rootkin",
@@ -8545,10 +8500,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T23:20:36.306Z",
+      "lastAt": "2026-07-23T23:25:23.994Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 48
+      "beats": 49
     }
   ],
   "company": [
@@ -8746,15 +8701,15 @@
     "gen-waygate": "https://image.pollinations.ai/prompt/Waygate%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Waygate.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=37923&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 86,
-    "choices": 86,
+    "sceneSummary": 87,
+    "choices": 87,
     "characterDeltas": 35,
-    "scene": 86,
+    "scene": 87,
     "npcUpdates": 73,
     "factUpdates": 6,
     "placeUpdates": 15,
     "codexUpdates": 49,
-    "timeOps": 80,
+    "timeOps": 81,
     "imagePrompt": 2,
     "sceneEnded": 18,
     "itemUpdates": 2,
@@ -8768,7 +8723,7 @@
     "discovery": 2,
     "stageOps": 1
   },
-  "_opTurns": 86,
+  "_opTurns": 87,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

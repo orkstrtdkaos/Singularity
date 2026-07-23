@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.223";
+const APP_VERSION = "1.8.224";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3368,7 +3368,9 @@ function showBraidMoment(def) {
   // SNG-222: the ceremony now serves DISCOVERIES too — the most braid-shaped event there is (a capability
   // neither parent had, earned in play). Same beat, adapted copy; a discovery also carries an image (§5).
   const isDiscovery = def.kind === "discovery";
-  const parents = (def.minted?.sourceNames || def._parentNames || []).map(esc).join("</strong> and <strong>");
+  // SNG-222 (Erik): credit the real TWO OR MORE skills, joined naturally — "A and B", "A, B and C", etc.
+  const strongJoin = arr => { const a = (arr || []).map(esc); return a.length <= 1 ? (a[0] || "") : a.length === 2 ? `${a[0]}</strong> and <strong>${a[1]}` : `${a.slice(0, -1).join("</strong>, <strong>")}</strong> and <strong>${a[a.length - 1]}`; };
+  const parents = strongJoin(def.minted?.sourceNames || def._parentNames || []);
   // SNG-201 §2: a braid the world already knows is a RECOGNITION beat, not a CREATION beat — a different
   // kind of cool. The player still earned it through their own play; someone found it first.
   const finder = def._recognition?.firstFinder || (def.minted?.adoptedFrom ? def.minted.adoptedFrom.characterName : null);
@@ -3419,7 +3421,11 @@ function renameDiscovery(def, name) {
 function queueDiscoveryMoment(disc, c = character) {
   if (!disc || disc._momentShown) return;
   const cat = { ...CONTENT.abilities, ...(c.customAbilities || {}) };
-  const parentNames = (disc.abilities || []).map(id => cat[id]?.name || String(id).replace(/[-_]+/g, " "));
+  // SNG-222 (Erik): credit the REAL skills used — resolve each parent id to its true catalog name, tolerant of
+  // id-format drift (a discovery may store "the-attended-end" while the catalog keys "the_attended_end", or vice
+  // versa). Try the id, its hyphen/underscore variants and its slug; only then fall back to the id-as-words.
+  const resolveName = id => { const s = String(id); return cat[s]?.name || cat[s.replace(/-/g, "_")]?.name || cat[s.replace(/_/g, "-")]?.name || cat[slugify(s)]?.name || s.replace(/[-_]+/g, " "); };
+  const parentNames = (disc.abilities || []).map(resolveName).filter(Boolean);
   try {
     if (imagesEnabled() && !disc.image) {
       const url = ensureImage({ id: `discovery-${disc.id}`, prompt: smartClamp(`${disc.name} — ${disc.description}`, 300) }, "moment", { ratingLevel: viewerRatingLevel(), isMinor: false, field: "image" });

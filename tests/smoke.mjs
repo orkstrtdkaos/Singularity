@@ -7441,6 +7441,8 @@ await (async () => {
   check("222: a discovery can be RENAMED from its moment (renameDiscovery, parallels renameBraid)", /function renameDiscovery/.test(appSrc222) && /if \(isDiscovery\) renameDiscovery\(def, v\)/.test(appSrc222));
   const cssSrc222 = readFileSync(join(root, "style.css"), "utf8");
   check("222 §5: the discovery/braid moment art is styled (lightbox)", /\.braid-moment-art/.test(cssSrc222) && /data-lightbox/.test(appSrc222));
+  check("222 (Erik): parents credit the REAL skills — resolve names tolerant of hyphen/underscore id drift", /const resolveName = id =>/.test(appSrc222) && /cat\[s\.replace\(\/-\/g, "_"\)\]\?\.name/.test(appSrc222));
+  check("222 (Erik): TWO OR MORE parent skills join naturally (A, B and C)", /const strongJoin = arr =>/.test(appSrc222) && /a\.length === 2/.test(appSrc222));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

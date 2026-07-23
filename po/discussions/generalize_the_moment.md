@@ -1,3 +1,9 @@
+> **CORRECTION (Aevi, 2026-07-22):** This list OMITTED discoveries — a real blind spot. A minted DISCOVERY
+> (Erik's Marrow's Wings) is the MOST braid-shaped event in the game (earned, irreversible, a capability
+> neither parent craft had) and belongs at the TOP of the FIRES list. Specced as SNG-222. The corrected
+> FIRES list leads with: **discovery minted** · braid minted · relationship band-up · teacher committed ·
+> capstone learned · quest RESOLVED · arc stage · companion stage.
+
 # Pending Discussion — Generalize the Braid Moment into a Moment-Type (parked 2026-07-22)
 
 Erik, seeing the braid celebration ("Undying Ledger" mint — the ceremonial card, the tier badge, the

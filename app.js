@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.232";
+const APP_VERSION = "1.8.233";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6324,17 +6324,40 @@ function renderRepairScreen(note = "") {
   };
 }
 
+// SNG-215 §B: a physical KIND-icon per item so the bag reads at a glance (a bag of objects, not a list).
+const ITEM_KIND_ICON = { weapon: "⚔", tool: "⚒", consumable: "🧪", quest: "📜", relic: "◈", trinket: "◈", armor: "🛡", armour: "🛡", misc: "◌" };
+const itemKindIcon = it => ITEM_KIND_ICON[it?.kind] || "◌";
+
+// SNG-215 §B: the inventory is a BAG — a grid of tiny kind-icon tiles you scan, each opening a DETAIL POPUP
+// (the larger generated image + full description + mechanics: kind, uses, equip, growth + the use/name/drop
+// actions). Icons in the grid (fast, no quota); the image generates only for the item you actually open
+// (Erik's call). Reuses itemCard (image + mechanics + actions) inside the modal, and the ONE shared binding.
 function renderInventoryScreen(openName = null) {
   const kinds = ["weapon", "tool", "consumable", "quest", "misc"];
+  const inv = character.inventory || [];
+  const openIt = openName ? inv.find(i => i.name === openName) : null;
+  const tile = it => `<button class="bag-tile${it.pinned ? " pinned" : ""}${openName === it.name ? " sel" : ""}" data-inv="${esc(it.name)}" title="${esc(displayName(it))}">
+    <span class="bag-icon">${itemKindIcon(it)}</span>
+    <span class="bag-name">${esc(displayName(it))}${it.qty > 1 ? ` ×${it.qty}` : ""}</span>
+    ${it.equipped ? `<span class="bag-flag" title="equipped">▸</span>` : ""}${it.pinned ? `<span class="bag-flag" title="pinned">📌</span>` : ""}</button>`;
+  const grid = kinds.filter(k => inv.some(i => i.kind === k)).map(k =>
+    `<div class="bag-section"><h3 class="codex-title bag-kind">${k}s</h3><div class="bag-grid">${
+      inv.filter(i => i.kind === k).sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0)).map(tile).join("")}</div></div>`).join("")
+    || "<div class='insight'>empty-handed</div>";
+  // growth (SNG-215 §B): a story item that GREW shows the stage it reached, so earned power is visible.
+  const growth = openIt && (openIt.evoStageName || openIt.evoStage) ? `<div class="item-growth">✦ grown to <em>${esc(openIt.evoStageName || ("stage " + openIt.evoStage))}</em>${openIt.evoStage ? ` (stage ${esc(String(openIt.evoStage))})` : ""}</div>` : "";
   chrome(`<div class="screen" style="max-width:680px">
-    <h2>Inventory — ${esc(character.name)}</h2>
-    ${kinds.filter(k => (character.inventory || []).some(i => i.kind === k)).map(k => `
-      <div class="cs-block"><h3 class="codex-title" style="font-size:14px; text-transform:capitalize">${k}s</h3>
-      ${(character.inventory || []).filter(i => i.kind === k).map(it => `
-        <div class="inv-row">${itemCard(it, { open: openName === it.name, toggleAttr: "data-inv", showPin: true })}</div>`).join("")}</div>`).join("") || "<div class='insight'>empty-handed</div>"}
+    <h2>Inventory — ${esc(character.name)} <span class="cost">(${inv.length})</span></h2>
+    ${grid}
     <button class="btn secondary" id="inv-back" style="margin-top:10px">Back</button>
-  </div>`);
+  </div>
+  ${openIt ? `<div class="item-detail-modal" id="item-modal"><div class="item-detail-sheet">
+    <button class="item-modal-close" id="item-modal-close" title="Close">✕</button>
+    ${itemCard(openIt, { open: true, showPin: true })}${growth}
+  </div></div>` : ""}`);
   for (const b of app.querySelectorAll("[data-inv]")) b.onclick = () => renderInventoryScreen(openName === b.dataset.inv ? null : b.dataset.inv);
+  const closeM = document.getElementById("item-modal-close"); if (closeM) closeM.onclick = () => renderInventoryScreen(null);
+  const modal = document.getElementById("item-modal"); if (modal) modal.onclick = e => { if (e.target === modal) renderInventoryScreen(null); }; // backdrop closes
   bindItemCardHandlers(name => renderInventoryScreen(name ?? openName)); // SNG-114: the ONE shared use/name/drop binding
   document.getElementById("inv-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }

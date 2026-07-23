@@ -224,6 +224,23 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .item-tags { font-size: 11px; color: var(--accent2); margin-bottom: 6px; }
 .item-actions { display: flex; gap: 6px; }
 .item-actions .opt { font-size: 11px; padding: 4px 8px; }
+/* SNG-215 §B: the inventory BAG — a grid of kind-icon tiles you scan; tap opens the detail popup. */
+.bag-section { margin-bottom: 10px; }
+.bag-kind { font-size: 12px !important; text-transform: uppercase; letter-spacing: 1px; color: var(--accent2); margin-bottom: 4px; }
+.bag-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 6px; }
+.bag-tile { position: relative; display: flex; align-items: center; gap: 7px; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 9px; cursor: pointer; text-align: left; color: var(--ink); font-size: 12px; font-family: inherit; transition: border-color .15s, background .15s; }
+.bag-tile:hover { border-color: var(--accent); background: var(--panel); }
+.bag-tile.pinned { border-color: var(--accent2); }
+.bag-tile.sel { border-color: var(--accent); }
+.bag-icon { font-size: 18px; line-height: 1; flex: 0 0 auto; opacity: .85; }
+.bag-name { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bag-flag { flex: 0 0 auto; font-size: 10px; opacity: .8; }
+.item-detail-modal { position: fixed; inset: 0; background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center; z-index: 60; padding: 16px; }
+.item-detail-sheet { position: relative; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; max-width: 380px; width: 100%; max-height: 86vh; overflow-y: auto; }
+.item-modal-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: var(--ink-dim); font-size: 16px; cursor: pointer; }
+.item-modal-close:hover { color: var(--accent); }
+.item-detail-sheet .item-img { max-height: 300px; object-fit: cover; }
+.item-growth { margin-top: 8px; font-size: 12px; color: var(--accent); }
 .rep-band { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 11px; border: 1px solid var(--border); }
 .rep-band.trusted, .rep-band.revered, .rep-band.known { border-color: var(--ok); color: var(--ok); }
 .rep-band.wary, .rep-band.distrusted, .rep-band.hated { border-color: var(--danger); color: var(--danger); }

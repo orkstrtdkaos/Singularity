@@ -7633,6 +7633,12 @@ await (async () => {
   check("215 §A1: toolkitForGM surfaces the player's boosted crafts (fed to the GM, atmospherically)", /Player wants to use these MORE/.test(blockA) && /Wither/.test(blockA));
   check("215 §A1 GUARD: no boosted crafts → no boost line (only when the player set one)", !/Player wants to use these MORE/.test(tkA({ abilities: [], practice: {} }, { catalog: {}, fnIndex: bfiA({}), rules: {} })));
   check("215 §A1: the boost is a NUDGE, not an override (the guard is in the prompt + the tooltip)", /never force an ill-fitting one/.test(blockA) || /thumb on the scale/.test(gmSrcA));
+
+  // §B: the inventory is a BAG — a grid of kind-icon tiles, tap → a detail popup (image + mechanics + actions).
+  check("215 §B: a kind→icon map + a bag GRID of tiles (scan fast, no image quota in the grid)", /const ITEM_KIND_ICON = \{/.test(appSrcA) && /class="bag-tile/.test(appSrcA) && /<div class="bag-grid">/.test(appSrcA));
+  check("215 §B: a tile opens a DETAIL POPUP that reuses itemCard(open) — the larger image + mechanics + actions", /class="item-detail-modal"/.test(appSrcA) && /itemCard\(openIt, \{ open: true, showPin: true \}\)/.test(appSrcA));
+  check("215 §B: the popup closes on ✕ or backdrop, and a grown story-item shows the stage it reached", /item-modal-close/.test(appSrcA) && /if \(e\.target === modal\) renderInventoryScreen\(null\)/.test(appSrcA) && /grown to/.test(appSrcA));
+  check("215 §B: the bag + popup are styled (grid + modal + larger detail image)", /\.bag-grid \{ display: grid/.test(cssA) && /\.item-detail-modal \{/.test(cssA) && /\.item-detail-sheet \.item-img/.test(cssA));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

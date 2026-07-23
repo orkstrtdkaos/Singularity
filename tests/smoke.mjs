@@ -7457,6 +7457,14 @@ await (async () => {
   check("223: the craft detail art is styled (lightbox)", /\.craft-detail-art/.test(cssSrc223) && /data-lightbox/.test(appSrc223));
 }
 
+// ---- SNG-214: the choice-prefill craft is DIVERSIFIED, not defaulted to the broad Order-Sense (prompt-side) ----
+{
+  const gmSrc214 = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("214: choices' abilityId is diversified — vary the craft across choices, aspiration-favoured", /SNG-214/.test(gmSrc214) && /VARY the craft/.test(gmSrc214) && /FAVOUR a craft the player has DECLARED as an ASPIRATION/.test(gmSrc214));
+  check("214 §3.3: a broad perception craft (Order-Sense) is a FALLBACK, never the reflexive default", /Order-Sense\) is a FALLBACK/.test(gmSrc214) && /NEVER the reflexive default/.test(gmSrc214));
+  check("214 §3.4: not every choice needs an abilityId — a plain/freetext option leaves it null", /NOT every choice needs an abilityId/.test(gmSrc214));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

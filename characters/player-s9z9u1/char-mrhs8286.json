@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 20,
-  "xp": 1975,
+  "xp": 1980,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -118,12 +118,12 @@
   "alignment": {
     "spectrumId": -0.1326387045039847,
     "violence_peace": 0.1030845625,
-    "chaos_order": 0.2591592263196316,
+    "chaos_order": 0.25620126500365004,
     "mechanical_spiritual": 0.2580372847905887,
     "concrete_abstract": -0.021014395762538336,
     "death_life": -0.18279319975514602,
     "emotional_logical": 0.008330843749999983,
-    "falsehood_truth": 0.31383840738235763,
+    "falsehood_truth": 0.31314648701323977,
     "demonic_angelic": 0.013499999999999998,
     "value": 0.053420408281249956,
     "spectrum": 0.11337499999999998
@@ -132,7 +132,7 @@
   "maxHealth": 125,
   "health": 125,
   "maxEnergy": 195,
-  "energy": 160,
+  "energy": 155,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1732,112 +1732,88 @@
         "player": "Have the boy send a message to Millbrook, to Mara Wells.  Fill her in on the latest from your end and ensure her that you're finding every assistance you can.  Tell her about Stillwater's Trouble as a potential refuge or exchange of goods/resources/labor.  Ask her to send word about who needs to be convinced by you to help.",
         "summary": "Silas dictates a message to Mara Wells — Stillwater's Trouble named as a potential refuge and staging point, labor and goods welcome in exchange, and a plain question: who needs to hear from you directly?",
         "narration": "You turn back to the runner's boy and ask him to take down a message for Millbrook. He pulls a fresh slip from beneath the counter, dips his pen, and waits with the professional patience of someone who has written other people's words all his working life.\n\nYou dictate it plainly. The message is for Mara Wells, chalk-seal on the reply. You tell her the road has been productive. Stillwater's Trouble — the old Raven's Home warden post two miles northwest of the March Road, now reclaimed and named — is open. It has walls, a roof that holds, a forge corner, and an Ashwarden's hand keeping it. If Millbrook's workers or supplies need somewhere to stage, or if there are people the village cannot house through the flood season, the post can take them. Labor and goods are welcome in exchange. You tell her the repair work she is coordinating is known and trusted here, and that you are pressing every resource the Crossing has to offer.\n\nThen you add the question plainly: who needs to hear from you directly? Name the person or the post, and you will go there. She knows the ground better than anyone. Trust her judgment and say so in the last line.\n\nThe runner's boy writes it all down in his careful ledger hand, reads it back to you without being asked, and folds it tight with Millbrook's mark on the outside. He tells you it goes on the next morning run. He sets it in its cubby with the quiet efficiency of someone who has done this ten thousand times and will do it ten thousand more."
+      },
+      {
+        "player": "Ask the boy to also send a second note — to the Hub Council water committee, naming Mara Wells as the Millbrook relay contact and pressing for a meeting sooner than their scheduled three days",
+        "summary": "Silas dictates a second message to the Hub Council water committee — naming Mara Wells as relay contact and pressing for a meeting before their scheduled three days.",
+        "narration": "You ask the boy to take down a second message before he caps his pen. He looks up — not reluctant, just checking he heard the scope correctly — and dips back in when you nod.\n\nYou give him the Hub Council water committee as the address. You tell them that Mara Wells in Millbrook is the relay contact for the valley's east-channel situation, that her records go back six mornings of discoloration at the intake, and that the committee's three-day window is a luxury the water is not offering. You ask for a meeting sooner than that — you name yourself as the one requesting it, and you name Millbrook, and you let the weight of that stand without decoration.\n\nThe boy writes quickly, the pen scratching in the quiet of the post. When he reaches the end he reads it back without being asked — two sentences, the core of it, the weight intact. He caps the pen and holds both slips together. 'Morning run carries them both,' he says. 'Committee receives by midday if the roads hold.'\n\nHuginn shifts on your shoulder and looks at the pigeonhole shelf one more time, cataloguing whatever it catalogs. The runner's boy watches the bird with the mild wariness of someone who has decided to tolerate it and is not entirely comfortable with that decision. The afternoon light through the open door is beginning to angle lower."
       }
     ],
     "lastTurn": {
-      "narration": "You turn back to the runner's boy and ask him to take down a message for Millbrook. He pulls a fresh slip from beneath the counter, dips his pen, and waits with the professional patience of someone who has written other people's words all his working life.\n\nYou dictate it plainly. The message is for Mara Wells, chalk-seal on the reply. You tell her the road has been productive. Stillwater's Trouble — the old Raven's Home warden post two miles northwest of the March Road, now reclaimed and named — is open. It has walls, a roof that holds, a forge corner, and an Ashwarden's hand keeping it. If Millbrook's workers or supplies need somewhere to stage, or if there are people the village cannot house through the flood season, the post can take them. Labor and goods are welcome in exchange. You tell her the repair work she is coordinating is known and trusted here, and that you are pressing every resource the Crossing has to offer.\n\nThen you add the question plainly: who needs to hear from you directly? Name the person or the post, and you will go there. She knows the ground better than anyone. Trust her judgment and say so in the last line.\n\nThe runner's boy writes it all down in his careful ledger hand, reads it back to you without being asked, and folds it tight with Millbrook's mark on the outside. He tells you it goes on the next morning run. He sets it in its cubby with the quiet efficiency of someone who has done this ten thousand times and will do it ten thousand more.",
-      "sceneSummary": "Silas dictates a message to Mara Wells — Stillwater's Trouble named as a potential refuge and staging point, labor and goods welcome in exchange, and a plain question: who needs to hear from you directly?",
+      "narration": "You ask the boy to take down a second message before he caps his pen. He looks up — not reluctant, just checking he heard the scope correctly — and dips back in when you nod.\n\nYou give him the Hub Council water committee as the address. You tell them that Mara Wells in Millbrook is the relay contact for the valley's east-channel situation, that her records go back six mornings of discoloration at the intake, and that the committee's three-day window is a luxury the water is not offering. You ask for a meeting sooner than that — you name yourself as the one requesting it, and you name Millbrook, and you let the weight of that stand without decoration.\n\nThe boy writes quickly, the pen scratching in the quiet of the post. When he reaches the end he reads it back without being asked — two sentences, the core of it, the weight intact. He caps the pen and holds both slips together. 'Morning run carries them both,' he says. 'Committee receives by midday if the roads hold.'\n\nHuginn shifts on your shoulder and looks at the pigeonhole shelf one more time, cataloguing whatever it catalogs. The runner's boy watches the bird with the mild wariness of someone who has decided to tolerate it and is not entirely comfortable with that decision. The afternoon light through the open door is beginning to angle lower.",
+      "sceneSummary": "Silas dictates a second message to the Hub Council water committee — naming Mara Wells as relay contact and pressing for a meeting before their scheduled three days.",
       "choices": [
         {
-          "label": "Head to the Ent grove now — check on the ward and sit with the tree a moment before the afternoon slips away",
+          "label": "Step out and head toward the Ent grove — check on the ward since the last visit",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.2,
-            "mechanical_spiritual": 0.2
-          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "trivial": true
+        },
+        {
+          "label": "Ask the boy if the Hub Council meets anywhere nearby — find out where to show up in person rather than wait on a runner",
+          "attribute": "social",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Wait here at the post a few minutes — see if Veth or Pell circles back with news of Crane before moving on",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Step out and walk toward the water-seller cluster — find Veth and compare what each of you has learned about Crane so far",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "travel",
-            "careful"
+            "plan"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask the boy to also send a second note — to the Hub Council water committee, naming Mara Wells as the Millbrook relay contact and pressing for a meeting sooner than their scheduled three days",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.3,
-            "chaos_order": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "negotiate",
-            "lead"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step outside and wait for Veth to come back from the water-seller cluster — she may have word of Crane already",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense on the runner post itself — the Crossing is a place where threads cross; there may be a pattern in what messages have passed through here recently",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "falsehood_truth": 0.3,
-            "chaos_order": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door. The runner's boy has just filed the Millbrook slip into its cubby.",
+        "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door, angling lower now toward mid-afternoon.",
         "npcsPresent": [
           {
             "name": "Runner's boy",
-            "state": "Settling back onto his stool, the pen capped, the Millbrook slip filed — watching Silas with the mild expectancy of someone waiting to see if there is more."
+            "state": "Holding both slips together — Mara's and the committee's — ready for the morning run. Watching Huginn with cautious tolerance."
           },
           {
             "name": "Huginn",
-            "state": "Still on Silas's shoulder, eye on the pigeonhole shelf with the steady attention of something cataloguing which messages will never be claimed."
+            "state": "On Silas's shoulder, eye still on the pigeonhole shelf."
           }
         ],
         "objects": [
-          "Freshly filed Millbrook slip in the cubby — morning run, Mara Wells, Silas's message inside",
+          "Two dictated slips held by the runner's boy — one for Mara Wells, one for the Hub Council water committee — morning run delivery",
+          "Freshly filed Millbrook slip in the cubby — Mara's original relay notice",
           "Two additional slips already read and pocketed — Dara Holt's repair update and Pip's general notice",
-          "Mara's relay notice already pocketed",
-          "Empty counter surface",
           "Pigeonholed cubby shelf behind the counter, several other slips in various cubbies",
           "Runner's bell above the door",
-          "Ink pot and pen on the counter edge"
+          "Ink pot and pen on the counter edge, now capped"
         ],
         "threads": [
           "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
           "Veth moving toward the water-seller cluster to ask after Crane and resources",
           "Pell moving toward the Coliseum gate and forge district",
           "Ent grove ward unchecked since last visit",
-          "Morning run will carry Silas's message to Mara — reply will take at least a day"
+          "Morning run will carry both messages — committee reply will determine meeting timing"
         ]
       },
       "npcUpdates": [
@@ -1845,82 +1821,62 @@
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "role": "Village supply store operator, Millbrook",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "A message sent via the Hub runner: Stillwater's Trouble named as a potential refuge and staging post, labor and goods welcome in exchange, and a direct question — who needs to hear from Silas personally? Morning run carries it.",
-          "learned": [
-            "Stillwater's Trouble is open — walls, roof, forge corner, Ashwarden keeping it; can take workers or supplies through the flood season in exchange for labor and goods"
-          ],
-          "statusNote": "In her store in Millbrook — relay protocol active; morning run will carry Silas's latest message within the day.",
-          "relationshipDelta": 0
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "A message sent to Mara Wells via Hub runner on Day 13 afternoon — Stillwater's Trouble named as a staging refuge, labor and goods welcomed in exchange, and a direct question asking who Silas needs to speak to personally. Morning run delivery.",
-          "subjectId": "mara-wells"
+          "note": "A second message sent naming her as relay contact to the Hub Council water committee — her information now formally entering the committee's line of sight.",
+          "statusNote": "In her store in Millbrook — relay protocol active; morning run will carry both Silas's message and his committee notice within the day."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "stillwaters-trouble",
-          "label": "Stillwater's Trouble",
-          "kind": "place",
-          "fact": "Named to Mara Wells via Hub runner as a potential refuge and exchange point — walls, roof, forge corner, Ashwarden keeping it. Labor and goods welcome in exchange for shelter or staging.",
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
           "links": [
             "mara-wells",
             "millbrook",
-            "what-the-water-remembers",
-            "the-second-thread"
+            "the-edge-district-ledger",
+            "what-the-water-remembers"
           ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "what-the-water-remembers",
-          "note": "Stillwater's Trouble named to Mara as a resource and refuge — Silas asking her directly who he needs to convince. The network is beginning to reach back toward the source."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short dictation and filing at the runner's counter"
+        "why": "A short exchange at the runner counter — two messages dictated and filed."
       },
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
-      }
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "what-the-water-remembers",
+          "note": "Hub Council water committee formally contacted — Mara Wells named as relay, meeting requested ahead of schedule. The institutional thread is now live."
+        }
+      ]
     },
     "sceneState": {
-      "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door. The runner's boy has just filed the Millbrook slip into its cubby.",
+      "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door, angling lower now toward mid-afternoon.",
       "npcsPresent": [
         {
           "name": "Runner's boy",
-          "state": "Settling back onto his stool, the pen capped, the Millbrook slip filed — watching Silas with the mild expectancy of some"
+          "state": "Holding both slips together — Mara's and the committee's — ready for the morning run. Watching Huginn with cautious tole"
         },
         {
           "name": "Huginn",
-          "state": "Still on Silas's shoulder, eye on the pigeonhole shelf with the steady attention of something cataloguing which messages"
+          "state": "On Silas's shoulder, eye still on the pigeonhole shelf."
         }
       ],
       "objects": [
-        "Freshly filed Millbrook slip in the cubby — morning run, Mara Wells, Silas's mes",
+        "Two dictated slips held by the runner's boy — one for Mara Wells, one for the Hu",
+        "Freshly filed Millbrook slip in the cubby — Mara's original relay notice",
         "Two additional slips already read and pocketed — Dara Holt's repair update and P",
-        "Mara's relay notice already pocketed",
-        "Empty counter surface",
         "Pigeonholed cubby shelf behind the counter, several other slips in various cubbi",
         "Runner's bell above the door",
-        "Ink pot and pen on the counter edge"
+        "Ink pot and pen on the counter edge, now capped"
       ],
       "threads": [
         "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
         "Veth moving toward the water-seller cluster to ask after Crane and resources",
         "Pell moving toward the Coliseum gate and forge district",
         "Ent grove ward unchecked since last visit",
-        "Morning run will carry Silas's message to Mara — reply will take at least a day"
+        "Morning run will carry both messages — committee reply will determine meeting timing"
       ]
     }
   },
@@ -2658,7 +2614,8 @@
       "stageIndex": 0,
       "completedStages": [],
       "progress": [
-        "Stillwater's Trouble named to Mara as a resource and refuge — Silas asking her directly who he needs to convince. The network is beginning to reach back toward the source."
+        "Stillwater's Trouble named to Mara as a resource and refuge — Silas asking her directly who he needs to convince. The network is beginning to reach back toward the source.",
+        "Hub Council water committee formally contacted — Mara Wells named as relay, meeting requested ahead of schedule. The institutional thread is now live."
       ],
       "aliases": [],
       "startedAt": "2026-07-22T20:49:54.189Z",
@@ -2840,7 +2797,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d5] Filed the shop name, catalogued the room, holding the document roll — the question of whose hands it reaches is hers to help answer.",
         "[d5] Placed the document roll on the forge block and named its destination without being asked — she knows the carrier already.",
         "[d5] Named Pip Cotter as the document roll's carrier to the district records office — two days from now. Fingers on the roll, waiting for final witness lines tonight.",
         "[d5] Fingers on the document roll — waiting for the word to seal it. All lines now present.",
@@ -2849,7 +2805,8 @@
         "[d9] Pip Cotter left with the document roll on schedule; Mara scratched the departure date into her ledger margin and has been watching the water wheel intake each morning since, noting the color.",
         "[d12] Mara recorded the gray-green intake on two of the past three mornings in her ledger margin and quietly reduced the volume she's drawing from the wheel cistern, rationing stored clean water without announcing it to the village.",
         "[d13] Relay notice received at Hub on day 13 — intake gray-green four of six mornings, document roll delivered with clerk's initials, two additional sleeve joints flagged by Calvar and Dara at east-bend, Pip's postscript noted.",
-        "[d13] A message sent via the Hub runner: Stillwater's Trouble named as a potential refuge and staging post, labor and goods welcome in exchange, and a direct question — who needs to hear from Silas personally? Morning run carries it."
+        "[d13] A message sent via the Hub runner: Stillwater's Trouble named as a potential refuge and staging post, labor and goods welcome in exchange, and a direct question — who needs to hear from Silas personally? Morning run carries it.",
+        "[d13] A second message sent naming her as relay contact to the Hub Council water committee — her information now formally entering the committee's line of sight."
       ],
       "knownFacts": [
         "Curis is on irrigation ditch repair with Dara's crew — useful with stone",
@@ -2870,7 +2827,7 @@
         "naming a destination and a carrier without prompting — opera"
       ],
       "status": "active",
-      "statusNote": "In her store in Millbrook — relay protocol active; morning run will carry Silas's latest message within the day.",
+      "statusNote": "In her store in Millbrook — relay protocol active; morning run will carry both Silas's message and his committee notice within the day.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 13
@@ -4427,7 +4384,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 573,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean…",
@@ -4889,7 +4846,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] A structural section of the buried channel system northeast of the wash-room operator's station is failing — slow compression surrender, no fracture, approximately six weeks before it fails completely",
           "[d2] When the failing structural section collapses, it will redirect the channel flow rather than stop it — a surge hitting Dara Holt's entire east-channel network, capable of blowing every seated sleeve b",
           "[d2] The failing vault section's surface footprint is now marked — twenty-five feet on the hillside settling-seam, directly above the east-channel main feeder run. When it fails, the redirected surge will ",
           "[d2] Dara Holt has accepted the six-week window and the search-beyond-the-valley as the necessary response — she will hold the channel network while Silas and Pell seek a pre-Transition expert, deadline ha",
@@ -4912,17 +4868,18 @@
           "[d13] The drainage cut at the March Road's outer ward margin has the same iron-oxide failure pattern Pell named at the east-channel joints in Millbrook — wrong slope, pooling water, years of cold iron underneath. Earlier stage, same cause.",
           "[d13] The Crossing's creek runs gray-brown on Day 13 afternoon — downstream contamination from the Disputed Zone has reached this settlement. Boiling-rags at the well confirm the locals are treating the water.",
           "[d13] Millbrook's intake ran gray-green four of six mornings by day 13 — the discoloration is now a reliable pattern at the village level, not an anomaly. Mara has reduced draw volume accordingly.",
-          "[d13] Dara Holt's relay confirms a third sleeve junction at the east-bend intake is showing the same iron-oxide seep as the others — repair materials staged in sequence by Dara, Calvar walking the line."
+          "[d13] Dara Holt's relay confirms a third sleeve junction at the east-bend intake is showing the same iron-oxide seep as the others — repair materials staged in sequence by Dara, Calvar walking the line.",
+          "[d13] Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run."
         ],
         "links": [
-          "mara-wells",
           "the-second-thread",
           "stillwaters-trouble",
           "pell-ran-marsh",
           "what-the-water-remembers",
           "the-crossing",
           "dara-holt",
-          "millbrook"
+          "millbrook",
+          "the-edge-district-ledger"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -5925,21 +5882,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.92624617161592,
-    "cerebral": 17.310651547486508,
-    "social": 8.140304539685694,
-    "generous": 4.484970195192012,
-    "cautious": 3.6454379897683804,
-    "physical": 0.5157728657863065,
-    "risky": 1.5025556821964845,
-    "ruthless": 0.007886650657576691,
-    "carousing": 0.3048287338421081,
-    "amorous": 3.0696423788787395,
-    "patient": 0.21071600685396216,
-    "stealth": 0.00305688594370548,
-    "devotion": 1.6146431378907429,
-    "craft": 0.5120398231678538,
-    "leadership": 0.015559888710047428
+    "strategic": 19.42809001732552,
+    "cerebral": 16.877885258799346,
+    "social": 8.936796926193551,
+    "generous": 4.372845940312211,
+    "cautious": 3.554302040024171,
+    "physical": 0.5028785441416489,
+    "risky": 1.4649917901415723,
+    "ruthless": 0.0076894843911372735,
+    "carousing": 0.2972080154960554,
+    "amorous": 2.992901319406771,
+    "patient": 0.2054481066826131,
+    "stealth": 0.0029804637951128432,
+    "devotion": 1.5742770594434743,
+    "craft": 0.49923882758865745,
+    "leadership": 1.0151708914922963
   },
   "aptitudes": [
     "strategist",
@@ -5947,7 +5904,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 716,
+  "actionCount": 717,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6337,8 +6294,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784849535507,
-  "rev": 1143,
+  "updatedAt": 1784849677858,
+  "rev": 1144,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8469,7 +8426,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 68
+    "the_center": 69
   },
   "foreclosed": [
     "rootkin",
@@ -8592,10 +8549,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T23:32:15.502Z",
+      "lastAt": "2026-07-23T23:34:37.857Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 50
+      "beats": 51
     }
   ],
   "company": [
@@ -8793,19 +8750,19 @@
     "gen-waygate": "https://image.pollinations.ai/prompt/Waygate%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Waygate.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=37923&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 88,
-    "choices": 88,
+    "sceneSummary": 89,
+    "choices": 89,
     "characterDeltas": 36,
-    "scene": 88,
-    "npcUpdates": 74,
+    "scene": 89,
+    "npcUpdates": 75,
     "factUpdates": 7,
     "placeUpdates": 15,
-    "codexUpdates": 50,
-    "timeOps": 82,
+    "codexUpdates": 51,
+    "timeOps": 83,
     "imagePrompt": 2,
     "sceneEnded": 18,
     "itemUpdates": 2,
-    "questUpdates": 5,
+    "questUpdates": 6,
     "offer": 8,
     "moveTo": 5,
     "delegateOps": 1,
@@ -8815,7 +8772,7 @@
     "discovery": 2,
     "stageOps": 1
   },
-  "_opTurns": 88,
+  "_opTurns": 89,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

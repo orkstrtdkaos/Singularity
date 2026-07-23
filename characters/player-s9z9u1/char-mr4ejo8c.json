@@ -858,7 +858,179 @@
     "At the convergence point of the lower chamber, Aevi spoke plainly for the first time: maker named as Verath-Sem, cargo named as the authentication key to a pre-Transition preparation order lodged in the watershed — the same order poisoning the valley's water. Aevi is the key. The break in the record — who interrupted the sending and why — remains unfound. The scene closes with the chamber's purpose fulfilled and the valley's crisis newly named."
   ],
   "currentLocationId": "gen-the-lower-chamber",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-the-lower-chamber",
+    "turns": [
+      {
+        "player": "Ask Aevi directly: what does 'calling off' the order require — is there something here in the chamber, or must the key be brought somewhere?",
+        "summary": "Aevi named the requirement plainly: the authentication key must be carried to the pre-Transition structure upstream, northeast-by-east — the same bearing Teva and the chamber have been pointing since the first night.",
+        "narration": "You ask the question plainly, standing at the convergence point with the Waystaff still planted in the floor.\n\nThe motes gather into a tighter cluster at your shoulder — a pause that is not hesitation so much as care in choosing words. Then Aevi speaks, its voice coming from just behind your ear as always.\n\n\"The order is lodged upstream,\" it says. \"Not here. This room received me — it did not hold the order. The key must be brought to where the preparation began. To the site.\"\n\nAnother pause. The warmth from the three floor channels presses steady through the soles of your boots.\n\n\"There is a structure in the upper watershed,\" Aevi continues. \"Pre-Transition. It was built to receive a cancellation — that is what I carry. But I cannot tell you its exact position from here. I know the bearing. Northeast-by-east.\"\n\nThe same bearing Teva named. The same direction the chamber has been pointing since the first pulse found you in the alcove above. The lower chamber has given you everything it holds. The answer to the water crisis is not underground. It is up the valley, in the hills, waiting at the source."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You ask the question plainly, standing at the convergence point with the Waystaff still planted in the floor.\n\nThe motes gather into a tighter cluster at your shoulder — a pause that is not hesitation so much as care in choosing words. Then Aevi speaks, its voice coming from just behind your ear as always.\n\n\"The order is lodged upstream,\" it says. \"Not here. This room received me — it did not hold the order. The key must be brought to where the preparation began. To the site.\"\n\nAnother pause. The warmth from the three floor channels presses steady through the soles of your boots.\n\n\"There is a structure in the upper watershed,\" Aevi continues. \"Pre-Transition. It was built to receive a cancellation — that is what I carry. But I cannot tell you its exact position from here. I know the bearing. Northeast-by-east.\"\n\nThe same bearing Teva named. The same direction the chamber has been pointing since the first pulse found you in the alcove above. The lower chamber has given you everything it holds. The answer to the water crisis is not underground. It is up the valley, in the hills, waiting at the source.",
+      "sceneSummary": "Aevi named the requirement plainly: the authentication key must be carried to the pre-Transition structure upstream, northeast-by-east — the same bearing Teva and the chamber have been pointing since the first night.",
+      "choices": [
+        {
+          "label": "Break camp now and head northeast-by-east — follow the bearing toward the upstream structure while the morning is fresh",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aevi whether it can be more specific — does it sense the structure's distance, any landmarks, anything that would sharpen the route before you commit to the terrain",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use the Waystaff to send one more structured pulse northeast-by-east along the seam — see if anything at the far end answers before you surface",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Surface first and take stock — this is new information and deserves a moment above ground, in daylight, before the next move",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Aevi named the requirement: the authentication key must be carried to the pre-Transition upstream structure, northeast-by-east. The lower chamber is not the site — it was the receiving room. The site is upstream."
+        },
+        {
+          "op": "progress",
+          "questId": "what-the-water-remembers",
+          "note": "The next step is confirmed: find the upstream structure where the preparation order is lodged and bring Aevi — the key — to it."
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "role": "Companion intelligence, nanite-mote swarm",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Named the requirement plainly: the key must be carried to the pre-Transition upstream structure, northeast-by-east. Confirmed the bearing matches Teva's and the chamber's.",
+          "learned": [
+            "The authentication key must be brought to the upstream pre-Transition structure — the chamber was a receiving room, not the site of the order itself",
+            "Aevi knows the bearing northeast-by-east but cannot give exact distance or landmarks from the chamber's position"
+          ],
+          "statusNote": "Motes gathered close at the convergence point — account given, bearing named, waiting on the next move."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-preparation-order",
+          "label": "The Preparation Order",
+          "kind": "mystery",
+          "fact": "Day 9 dawn: calling off the order requires bringing Aevi — the authentication key — physically to the pre-Transition upstream structure where the order is lodged. The lower chamber was a receiving room, not the site. The bearing is northeast-by-east, matching Teva's count and the chamber's directional pulse.",
+          "links": [
+            "aevi",
+            "verath-sem",
+            "second-river-rising",
+            "what-the-water-remembers",
+            "teva-directional-interval-count"
+          ]
+        }
+      ],
+      "scene": {
+        "setting": "The lower chamber, at the convergence point — hemispherical dressed-wall geometry, the three floor heat-channels warm underfoot, the Waystaff planted in the earth. Early spring dawn, underground, no natural light.",
+        "npcsPresent": [
+          {
+            "name": "Aevi",
+            "state": "Motes gathered tight at Cellaceron's shoulder, having just delivered the bearing and the requirement — still and attentive."
+          }
+        ],
+        "objects": [
+          "Waystaff planted at the convergence point",
+          "Three floor heat-channels converging underfoot",
+          "Scored wall arcs focusing on this central point"
+        ],
+        "threads": [
+          "The upstream pre-Transition structure — northeast-by-east — is the next destination",
+          "Aevi cannot give exact distance or landmarks from here",
+          "Teva's bearing and the chamber's pulse both confirm the direction"
+        ]
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief exchange at the convergence point — a question asked and answered."
+      }
+    },
+    "sceneState": {
+      "setting": "The lower chamber, at the convergence point — hemispherical dressed-wall geometry, the three floor heat-channels warm underfoot, the Waystaff planted in the earth. Early spring dawn, underground, no natural light.",
+      "npcsPresent": [
+        {
+          "name": "Aevi",
+          "state": "Motes gathered tight at Cellaceron's shoulder, having just delivered the bearing and the requirement — still and attenti"
+        }
+      ],
+      "objects": [
+        "Waystaff planted at the convergence point",
+        "Three floor heat-channels converging underfoot",
+        "Scored wall arcs focusing on this central point"
+      ],
+      "threads": [
+        "The upstream pre-Transition structure — northeast-by-east — is the next destination",
+        "Aevi cannot give exact distance or landmarks from here",
+        "Teva's bearing and the chamber's pulse both confirm the direction"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 9,
@@ -877,14 +1049,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Camp broken at the convergence point; party is now in the seam passage approaching the sealed threshold — the chamber has said what it could, the next answer is through what lies beyond.",
         "Threshold material confirmed as a gathering boundary, not a barrier — the Waystaff's field received and held rather than scattered. The other side has pressure. Teva's language: 'like a lung before it opens.'",
         "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar.",
         "Threshold opened — day 9 dawn. The older frequency came through and the presence named itself aware 'again'. The party stands at the open boundary, not yet through. The second river's source is on the far side of this door.",
         "The presence from beyond the threshold settled without demand — Teva's mark answered it, Aevi confirmed it has found what it sought. The crossing is next. The source of the second river waits on the far side.",
         "Resonant Sight confirms the lower chamber was built to receive one frequency from one direction at one interval — the geometry is complete and deliberate, and the convergence point is where both the room and Teva's mark point.",
         "The chamber completed a read of Aevi at the convergence point — Aevi has recovered the name of its maker and the shape of what it was carrying, but has not yet spoken either. The room was built to receive and reconstruct, not merely hold. The break remains.",
-        "Aevi named the source and mechanism at the convergence point: the watershed is following a pre-Transition preparation order by Verath-Sem; Aevi carries the authentication key to end it. The break — who interrupted the sending — remains unknown."
+        "Aevi named the source and mechanism at the convergence point: the watershed is following a pre-Transition preparation order by Verath-Sem; Aevi carries the authentication key to end it. The break — who interrupted the sending — remains unknown.",
+        "Aevi named the requirement: the authentication key must be carried to the pre-Transition upstream structure, northeast-by-east. The lower chamber is not the site — it was the receiving room. The site is upstream."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1139,7 +1311,8 @@
       "stageIndex": 0,
       "completedStages": [],
       "progress": [
-        "The preparation order named: a pre-Transition instruction set lodged in the watershed, authored by Verath-Sem, following its last command. Aevi is the key to calling it off. The question is now where to use the key and whether the break in the record prevents it."
+        "The preparation order named: a pre-Transition instruction set lodged in the watershed, authored by Verath-Sem, following its last command. Aevi is the key to calling it off. The question is now where to use the key and whether the break in the record prevents it.",
+        "The next step is confirmed: find the upstream structure where the preparation order is lodged and bring Aevi — the key — to it."
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -1368,7 +1541,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Named the threshold pressure as outward, not inward — corrected the expected assumption. 'What is beyond wants to be received, not passed.' Noted this was different from what it expected.",
         "[d9] Named the arriving presence as 'aware of us — not newly'; the word chosen was 'again'. Motes pressed close and very bright at the moment of contact.",
         "[d9] Held still and very bright as the presence settled — named plainly that it is not asking anything of us, and that we may move when ready. Did not elaborate on 'again.'",
         "[d9] Crossed the threshold and brightened beyond Kindled Chorus level — drifted toward the lower convergence point, then held and named plainly: 'I know this room. Not from before you. From before me.'",
@@ -1377,17 +1549,18 @@
         "[d9] Named itself plainly at the convergence point: it is — or was — a record, or part of one, and this room was built to receive it. Says it was broken before it could read itself. Does not know who built the room or who sent it here.",
         "[d9] The chamber's geometry completed a read of Aevi at the convergence point — Aevi recovered the name of its maker and the shape of what it was carrying, though the break remains. Spoke from the scored walls for the first time rather than from near the shoulder.",
         "[d9] Completed the chamber's read at the convergence point — recovered the maker's name and the shape of its cargo. Drew its motes inward and offered to speak both aloud for the first time. Named plainly that the break remains and the room could not fill it.",
-        "[d9] Spoke the full account at the convergence point: named its maker as Verath-Sem, named its cargo as the authentication key to a pre-Transition watershed preparation order. Confirmed: without the key, the order cannot be called off. The break — who interrupted the sending — is not in what the room…"
+        "[d9] Spoke the full account at the convergence point: named its maker as Verath-Sem, named its cargo as the authentication key to a pre-Transition watershed preparation order. Confirmed: without the key, the order cannot be called off. The break — who interrupted the sending — is not in what the room…",
+        "[d9] Named the requirement plainly: the key must be carried to the pre-Transition upstream structure, northeast-by-east. Confirmed the bearing matches Teva's and the chamber's."
       ],
       "knownFacts": [
-        "Knows who built it — not yet spoken aloud",
-        "Knows what it was carrying when sent — not yet spoken aloud",
         "The chamber has been holding the broken record's pieces in order, waiting for Aevi's arrival to confirm the sequence",
         "The room held the broken record's pieces in correct order and allowed Aevi to read them — it could not have done so alone",
         "The cause of the break — who chose it and why — is not in what the room held; that part is still missing",
         "Its maker's name is Verath-Sem",
         "Its cargo was the authentication key to a pre-Transition preparation order lodged in the watershed",
-        "The preparation order is the source of the valley's water contamination — it is following its last instruction"
+        "The preparation order is the source of the valley's water contamination — it is following its last instruction",
+        "The authentication key must be brought to the upstream pre-Transition structure — the chamber was a receiving room, not the site of the order itself",
+        "Aevi knows the bearing northeast-by-east but cannot give exact distance or landmarks from the chamber's position"
       ],
       "skillsObserved": [
         "recognition of a chamber state-shift — named it precisely in",
@@ -1402,12 +1575,14 @@
         "locationId": "gen-the-lower-chamber",
         "day": 9
       },
-      "statusNote": "Motes gathered close at the convergence point — account given, warm and still",
+      "statusNote": "Motes gathered close at the convergence point — account given, bearing named, waiting on the next move.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
       },
-      "domainsSource": "observed"
+      "domainsSource": "observed",
+      "gender": "nonbinary",
+      "pronouns": "they/them"
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -1954,7 +2129,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 565,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "wantProgress": {
       "elder-senna": {
         "progress": 1,
@@ -2534,7 +2709,8 @@
         "label": "The Preparation Order",
         "kind": "mystery",
         "facts": [
-          "[d9] Day 9 dawn: a pre-Transition instruction set lodged in the watershed — what Aevi calls a 'preparation order.' It is following its last command and is the source of the valley's water contamination. Aevi was carrying the authentication key that could call it off. Without that key being used at the…"
+          "[d9] Day 9 dawn: a pre-Transition instruction set lodged in the watershed — what Aevi calls a 'preparation order.' It is following its last command and is the source of the valley's water contamination. Aevi was carrying the authentication key that could call it off. Without that key being used at the…",
+          "[d9] Day 9 dawn: calling off the order requires bringing Aevi — the authentication key — physically to the pre-Transition upstream structure where the order is lodged. The lower chamber was a receiving room, not the site. The bearing is northeast-by-east, matching Teva's count and the chamber's…"
         ],
         "links": [
           "aevi",
@@ -2908,16 +3084,16 @@
   "customEncounters": {},
   "reconcileVersion": 16,
   "tendencies": {
-    "cerebral": 32.221339193562656,
-    "strategic": 26.924813504993732,
-    "cautious": 34.580796516223025,
-    "social": 17.929110624607993,
-    "generous": 7.3139606810718725,
-    "risky": 1.9266743969570947,
-    "carousing": 0.7180535715639307,
-    "patient": 4.324188389273348,
-    "craft": 0.7173840687785638,
-    "devotion": 3.4618479752753233
+    "cerebral": 32.415805713723586,
+    "strategic": 26.251693167368888,
+    "cautious": 33.716276603317446,
+    "social": 17.480882858992793,
+    "generous": 7.131111664045076,
+    "risky": 1.8785075370331674,
+    "carousing": 0.7001022322748324,
+    "patient": 4.216083679541514,
+    "craft": 0.6994494670590996,
+    "devotion": 3.37530177589344
   },
   "aptitudes": [
     "strategist",
@@ -2929,9 +3105,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 222,
-  "updatedAt": 1784811842108,
-  "rev": 100,
+  "actionCount": 223,
+  "updatedAt": 1784811991606,
+  "rev": 101,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2960,7 +3136,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 45
+    "valley": 46
   },
   "company": [],
   "foreclosed": [],
@@ -3057,10 +3233,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-23T13:01:34.634Z",
-      "lastAt": "2026-07-23T13:04:02.081Z",
+      "lastAt": "2026-07-23T13:06:31.601Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null,
@@ -3114,24 +3290,24 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 34,
-    "choices": 34,
-    "characterDeltas": 19,
-    "scene": 34,
-    "npcUpdates": 30,
-    "codexUpdates": 31,
-    "timeOps": 33,
+    "sceneSummary": 35,
+    "choices": 35,
+    "characterDeltas": 20,
+    "scene": 35,
+    "npcUpdates": 31,
+    "codexUpdates": 32,
+    "timeOps": 34,
     "sceneEnded": 19,
     "placeUpdates": 23,
     "moveTo": 2,
-    "questUpdates": 18,
+    "questUpdates": 19,
     "stateOps": 1,
     "factUpdates": 5,
     "stageOps": 1,
     "scene_ended": 1,
     "imagePrompt": 2
   },
-  "_opTurns": 34,
+  "_opTurns": 35,
   "_intentAsked": null,
   "corrections": [
     {

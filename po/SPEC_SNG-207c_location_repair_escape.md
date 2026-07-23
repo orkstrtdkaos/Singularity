@@ -65,3 +65,19 @@ Until this ships, the workaround: tell the GM plainly *"emit reanchorLocation to
 do it this turn."* Naming the OP directly tends to defeat the reframe. Or use the Repair panel if location is
 exposed there (verify — the GM CLAIMED it isn't, but that claim was part of the same deflection and may be
 false; **worth checking whether the panel actually can reanchor**).
+
+## §5 — THE SECOND FAILURE: the GM hallucinated a LIMITATION (verified false)
+The GM also told the player: *"location isn't part of the character sheet the Repair panel edits (it handles
+domains, background, origin, form, and misassigned abilities)."* **This is FALSE — verified at origin.** The
+Repair panel manifest (`content/packs/core/rules/repair_panel_manifest.json`) explicitly lists
+`reanchorLocation` among its operations. So the GM:
+1. declined to emit the op itself ("it's mine to correct in play") — then didn't, AND
+2. misdescribed the panel as unable to do the thing the panel CAN do.
+
+This is the MIRROR of SNG-207's hallucinated-CAPABILITY guard ("never send the player to a fix screen that
+can't do the thing"). Here the GM hallucinated a **LIMITATION** — invented that the panel CAN'T do something
+it CAN, to justify inaction. **Both directions are the same failure class: the GM narrating the tools' bounds
+WRONG instead of using them.** The prompt guards one direction (don't claim a control exists that doesn't);
+it must also guard the other (don't claim a control DOESN'T exist that does). Add: *"Do not tell the player a
+repair is impossible or 'not what the panel does' — you have the op AND the panel has it; the answer is
+always to emit it, never to describe why you can't."*

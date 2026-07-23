@@ -62,9 +62,27 @@ into — discovery and braid first (both mint-shaped, both here now), the relati
 folded in as those systems get their threshold hooks (ties the one-way-ratchet audit — a band you can LOSE
 makes the band-up moment mean something).
 
+## §5 — The discovery moment gets an IMAGE (Erik follow-up) — nearly free, the slot exists
+> Erik: *"include an image generation along with the skill discovery... the images the scene produces were
+> amazing, let's keep that going with the skill celebration."*
+The moment modal ALREADY renders art — verified: `ensureImage(moment, "moment", …)` (app.js:3263) generates
+the scene "moment art" and the modal shows it with a lightbox (7454). So the discovery celebration getting an
+image is a SMALL extension, not a new system:
+- When a discovery mints and queues its moment (§3), generate its image via the SAME `ensureImage` pipeline —
+  a new `"discovery"` (or reuse `"ability"`) image type, prompted from the discovery's authored description
+  ("death-shadow wings capable of open-air flight — a carried passage through open ground") + the parent
+  crafts. The GM already wrote gorgeous prose; that prose IS the image prompt.
+- **Generate-once-and-cache** like place images (SNG-046): the discovery's image persists on the record
+  (`discovery.image`), never regenerates, shows in the moment AND anywhere the discovery is later displayed
+  (catalog, wheel node — see SNG-223).
+- Rating-lens + minor-safe + gallery + lightbox all come FREE — `ensureImage` already handles them.
+- **Marrow's Wings backfill (§3) carries its image** — when it fires its retroactive moment, it generates its
+  image then, so Erik sees the death-shadow wings rendered, not just named.
+
 ## OWNERSHIP
-CCode — engine/app.js: queue discoveries into the moment, adapt the modal copy, backfill the existing one.
-No content authoring; the discovery's text is already authored (the GM wrote Marrow's Wings' description).
+CCode — engine/app.js: queue discoveries into the moment, adapt the modal copy, backfill the existing one,
+AND wire the discovery image via ensureImage (§5). No content authoring; the discovery's text is already
+authored (the GM wrote Marrow's Wings' description) and doubles as the image prompt.
 
 ## GUARDS
 - **Reuse, don't rebuild** — `showBraidMoment` + `pendingBraidMoments` already do this; discoveries JOIN the

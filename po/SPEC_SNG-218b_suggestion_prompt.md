@@ -115,6 +115,43 @@ ${reachablePool}`;
 - **tendencies formatting:** pass the tendency map as a compact "cerebral 18, social 13, strategic 11…" list
   (drop near-zero ones) — the prompt reads it as a fingerprint, not raw numbers.
 
+## ⇄ AUGMENTATION INVITATION — CCode, improve the INPUTS, not just wire the prompt (Erik-directed)
+This prompt was authored from the signals Aevi surfaced by inspecting a save — which is a PARTIAL view. Aevi
+has a session-built model of the game, not the whole engine. Before wiring, **audit the prompt's input set
+against what the engine actually knows about craft-learning, and augment it.** The prompt structure is sound;
+its INPUTS may be incomplete. Treat the signal list as a floor, not a ceiling.
+
+**Known gap Aevi flagged: SCHOOLS and TEACHERS.** Aevi left these out of the reasoning and shouldn't have.
+Verified in the save:
+- `character.schools` — the adopted school PER DOMAIN (Silas: ashwarden→`ash_plain`, cogitant→`cog_unaided`,
+  figurist→`fig_forming`). 67 schools exist across the traditions; 19 abilities carry `schoolAffinity` marks.
+- `character.teachers` — a teacher map (empty for Silas here, but the mechanism exists; `markTeacher` /
+  `adoptSchool` are live ops).
+- The established finding "the material school is the one that travels — it carries the floor" implies a
+  craft's SCHOOL-FIT with the character's adopted school plausibly affects whether it's a good next pick
+  (a craft aligned to their school may be more reachable / more natural / cheaper; a teacher may unlock or
+  ease specific crafts).
+
+Aevi does NOT understand the school/teacher learning mechanics well enough to encode them correctly — so
+rather than guess and get it wrong, **CCode decides how (and whether) school-affinity and teacher-availability
+should feed the suggestion**, because CCode owns that engine. Options CCode should weigh:
+- Add `schools` + `schoolAffinity` of each reachable craft to the input, and a prompt line ("a craft aligned
+  to their adopted school is a more natural reach; note when a pick would need a different school").
+- Add teacher-availability (a craft a present/known teacher could grant is a stronger, story-earned pick).
+- Or, if school-fit is already baked into the §1 `reachable` predicate (a craft's school-gate is part of
+  "can learn now"), then it may need NO new input — just confirm and note it.
+
+**Broader ask:** beyond schools/teachers, CCode should check for OTHER learning-relevant signals Aevi may have
+missed — braid/combination affinity (`coActivations` is in `practice`), emergence readiness, precursor/
+substrate access, ring-neighbour relationships, cross-pole braid eligibility. Any that genuinely shape "what's
+a good next craft" should be folded into the input payload + a matching prompt line. Aevi authored the
+reasoning FRAME (fit-to-character, cover-the-gap, honest reasons, reachable-only); CCode completes the
+SIGNAL SET from the engine it owns.
+
+**Then:** note back in the results doc what you added (or why a candidate signal was left out), so Aevi can
+fold the final input contract into the canonical prompt. This is the proposal→augment→ratify loop, applied to
+a prompt's inputs: Aevi proposes the frame, CCode augments from the substrate, Aevi ratifies the result.
+
 ## Guard held
 Same discipline as suggestBuild: honest reasons, name the cost/gap, suggest-never-impose, reachable-only.
 This is the "genuinely rationalized suggestion" Erik asked for — reasoning from the character's real

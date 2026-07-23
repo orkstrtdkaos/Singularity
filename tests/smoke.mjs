@@ -7429,6 +7429,9 @@ await (async () => {
   check("221: the promote step is registered at version 19", CHARACTER_STEPS.some(s => s.version === 19 && s.id === "gen-location-promote"));
   const owp = JSON.parse(readFileSync(join(root, "content/packs/valley/locations/the_old_warden_post.json"), "utf8"));
   check("221: the_old_warden_post declares supersedes + aliases (the authored gen→canonical link)", owp.supersedes?.includes("gen-stillwater-s-trouble") && owp.aliases?.includes("Stillwater's Trouble") && owp.aliases?.includes("Raven's Home"));
+  // Erik-confirmed fold (2026-07-23): the 'Center' travel-stub IS The Crossing (its original id was `the_center`).
+  const xing = JSON.parse(readFileSync(join(root, "content/packs/valley/locations/the_crossing.json"), "utf8"));
+  check("221: the_crossing supersedes the 'gen-center' stub + aliases 'Center' (travel-by-name resolves, one node)", xing.supersedes?.includes("gen-center") && xing.aliases?.includes("Center"));
 
   // 221 RENDER-FIX: the promoted gen-location must NOT draw as a duplicate map node. The reconcile stamps
   // `supersededBy` + a `locationAliases` bridge; regionTierNodes now reads them (it was the last consumer that

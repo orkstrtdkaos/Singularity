@@ -39,15 +39,32 @@
   "The hollow behind the Post is thin ground of the unreached kind, and thin ground is worth something to the wrong people too"
  ],
  "map": {
-  "x": 437,
-  "y": 296
+  "x": 585,
+  "y": 320
  },
  "encounterSeeds": [],
  "poleIntensity": 0.2,
  "substrateSource": "thin-unreached",
- "axisVector": null,
- "axisVectorNote": "Ashwarden ground (death-life, life-leaning as a held post), but the Maker's hollow is thin of the unreached kind — never drained, simply never reached by the old works.",
- "worldPos": null,
- "worldPosNote": "Two miles NW of the waygate arrival along the March road's left branch; the road waypost (the marker-stone fork ~1/4 mile N of the waygate) is a SEPARATE place — the sign, not the held ground.",
+ "axisVector": [
+  0.0,
+  0.2,
+  0.0,
+  0.3,
+  0.0,
+  0.0,
+  0.3,
+  -0.2,
+  -0.5,
+  0.2,
+  0.0,
+  0.2
+ ],
+ "axisVectorNote": "Ashwarden death-life ground (index-8 negative, death-leaning like its region) but MODERATED — reactivated and warded as a held refuge, pulled back toward life, with order (the binding+Boundary-Stone wards), peace (a protected refuge), and space (the watch-tower sightlines, the hollow's thin unreached ground).",
+ "worldPos": {
+  "colatitude": 73.0,
+  "longitude": 71.0,
+  "depth": 0
+ },
+ "worldPosNote": "Two miles NW of Cairnhold (colat 76, lon 74) along the Ashwarden March road's left branch; the road waypost (marker-stone fork ~1/4 mile N of the waygate) is a SEPARATE place.",
  "description": "The old Warden Post sits on a shoulder of ground that has been holding weather off Stillwater for longer than anyone has kept records for. Three rooms and a stair, all of them wrong for what they were built for and most of them right for something else. The long room faces east and takes morning light through arrow-slits that were never meant to let anything in; the hearth-wall is thick enough to hold heat for a day.\n\nThe rooms have been named by the people who claimed them. **Pell's forge** is built into the long room's chimney-wall — a flue that has drawn for two hundred years, the stone already sound. **Veth's laboratory** is up the stair, a room with a shuttered window and a floor that slopes very slightly toward the outer wall: a fault in a barracks and a virtue anywhere something might spill, and cold in the mornings, which is useful. **Cassiel's keeper's ground** is not in the Post at all — it is the bare south terrace where the wall gives out and the light stays longest, chosen before it was needed, because choosing it after is just a burial. **Huginn's Rook** is the corner tower, or what is left of it: open to the sky on one side, three walls and a floor and a view of every approach from the road to the treeline — the only part of the Post built to watch rather than to withstand.\n\nAnd below, down the back slope where the hill folds in on itself, is **the Maker's hollow** — the thin ground that gives Stillwater's Trouble its name. Not drained thin, not the deliberate quiet of ground that gave itself up; the other kind, the kind that never had anything to give, ordinary country the old works simply never reached. Silas placed a ward on the road waypost to signal the post reactivated, then arrived here and claimed it — the post, its buildings, and the hollow — and the company has begun to weave the boundary that will hold it."
 }

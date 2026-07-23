@@ -1,5 +1,16 @@
 # PO ALERT
 
+> ## 🏰 Raven's Home reconcile — buildings authored, now bridge them to the wards (Aevi, 2026-07-22 · SNG-221)
+> Aevi wrote the canonical `the_old_warden_post.json` (buildings/layout — Pell's forge, Veth's lab, Cassiel's
+> keeper's ground, Huginn's Rook, the Maker's hollow). But verified: the WARDS + claim are recorded in the
+> SAVE's `placeMemory["gen-stillwater-s-trouble"]` (binding runes + Boundary-Stone ward, "protected refuge")
+> — keyed to the GEN id, while the buildings are on the CANONICAL id. No gen→canonical link exists (0 in
+> code). SNG-221: build a location alias/supersede so the game resolves them as ONE place, migrate the
+> play-state (wards/claim/visits/knownPlaces/currentLocationId) onto the canonical id, and lift the wards
+> from a prose note to structured state so the GM KNOWS they're active. General gen→canonical promoter
+> (recurs whenever a minted sub-place later gets a canonical file). Layer discipline: canonical=description
+> (Aevi, done), save=state (CCode migrates, live layer — no origin save-poke).
+
 > ## 🎯 THE REPAIR CLUSTER — "the GM can't fix anything" is REAL, and it's two problems (Aevi, 2026-07-22)
 > Erik: hasn't seen the GM fix ANYTHING he's asked. Verified — it's systemic, and it's TWO failure modes.
 > Three related specs, sequence them together as one push (this is the session's highest-value work — it's

@@ -1671,7 +1671,161 @@
     "Breakfast at Ama's table in Cairnhold — the last meal before the road. Ama names Silas's father's hands. Pell and Veth say their farewells in the register they know best. Silas embraces his mother at the door and steps out with the whole party into the early-spring morning, the Crossing ahead."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_crossing",
+    "turns": [
+      {
+        "player": "Ask Veth, on the road, what she makes of the buried hum — she knows March-work; does the cairn-line pattern match anything she has walked over before?",
+        "summary": "Veth reads the cairn-line interval on the road out of Cairnhold — named it not markers but a surface layer over something older; the hum beneath Ama's house is the deeper design coming closer to waking.",
+        "narration": "The road out of Cairnhold runs south along the cairn-line before it bends toward the lowlands, and the stones pace you on the left — older than anyone living can say, spaced at the interval a long stride wants to find. Veth walks two paces ahead, as is her habit. Huginn rides Silas's left shoulder, which is the shoulder nearest the stones, and has said nothing about that.\n\nSilas asks her plainly. Does the buried hum match anything she has walked over before? A March pattern, a boundary-seat, something the cairns are part of?\n\nVeth does not answer immediately. She walks another four paces, head level, and then she says, \"Once. South-facing post on the March, third year. The ground had a low note in it — not a sound, exactly. More like a word said in the next room and felt through the wall.\" She pauses. \"I walked it for two seasons before I understood it was the boundary itself. The posts are not markers. They are the closest the design gets to the surface.\"\n\n\"The cairns here are older than any March post I have stood over,\" she continues. \"But the interval is right. The spacing you would choose if you were seating something very large and very patient into the ground.\" She glances left at the nearest stone as they pass it. \"The hum your house sits on top of is not the cairns themselves. The cairns are the surface layer. Something below them is closer to waking than it was, and that is what Huginn heard.\" Huginn makes no sound. The timing of its silence is, as Veth would say, a comment."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The road out of Cairnhold runs south along the cairn-line before it bends toward the lowlands, and the stones pace you on the left — older than anyone living can say, spaced at the interval a long stride wants to find. Veth walks two paces ahead, as is her habit. Huginn rides Silas's left shoulder, which is the shoulder nearest the stones, and has said nothing about that.\n\nSilas asks her plainly. Does the buried hum match anything she has walked over before? A March pattern, a boundary-seat, something the cairns are part of?\n\nVeth does not answer immediately. She walks another four paces, head level, and then she says, \"Once. South-facing post on the March, third year. The ground had a low note in it — not a sound, exactly. More like a word said in the next room and felt through the wall.\" She pauses. \"I walked it for two seasons before I understood it was the boundary itself. The posts are not markers. They are the closest the design gets to the surface.\"\n\n\"The cairns here are older than any March post I have stood over,\" she continues. \"But the interval is right. The spacing you would choose if you were seating something very large and very patient into the ground.\" She glances left at the nearest stone as they pass it. \"The hum your house sits on top of is not the cairns themselves. The cairns are the surface layer. Something below them is closer to waking than it was, and that is what Huginn heard.\" Huginn makes no sound. The timing of its silence is, as Veth would say, a comment.",
+      "sceneSummary": "Veth reads the cairn-line interval on the road out of Cairnhold — named it not markers but a surface layer over something older; the hum beneath Ama's house is the deeper design coming closer to waking.",
+      "choices": [
+        {
+          "label": "Ask Veth what 'closer to waking' means in practice — what changes when a thing like that stirs?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Run Order-Sense on the nearest cairn-stone while walking past it — see what design it is part of",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": 0.3,
+            "chaos_order": 0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Ask Veth whether Ama should be warned — and what form that warning would take",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Press south toward the Crossing — the road is the next thing; file what Veth named and keep moving",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "The cairn-line road south of Cairnhold, early morning, early spring. The stones run along the left side of the road at long-stride intervals. Clear and cold. The town is a few minutes behind.",
+        "npcsPresent": [
+          {
+            "name": "Pell Marsh",
+            "state": "Walking a pace or two back, listening, eyes on the road ahead and the stones beside it in turns."
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "Two paces ahead, having just named the cairn-line's pattern — level head, not looking back."
+          },
+          {
+            "name": "Huginn",
+            "state": "On Silas's left shoulder, nearest the cairn-stones. Silent. The silence is timed."
+          }
+        ],
+        "objects": [
+          "Cairn-stones — spaced at long-stride intervals along the left side of the road, older than any named post",
+          "The road south — clear, firm with cold, running toward the lowlands"
+        ],
+        "threads": [
+          "Veth's reading: the cairns are a surface layer over something older and closer to waking than it was",
+          "The buried hum beneath Ama's house — now given a shape, not yet a meaning",
+          "The Crossing ahead — Edvar Crane, the guild rolls, the second thread"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Named the cairn-line interval as a boundary-seat pattern — the stones are the surface layer, not the design itself. Something below is closer to waking. Drawn from her own third-year experience on the south-facing March post.",
+          "learned": [
+            "The cairn-line's spacing matches the interval of a large, patient boundary-seat — not markers, but the closest the design gets to the surface.",
+            "The hum beneath Ama's house is not the cairns themselves — something below them is closer to waking than it was."
+          ],
+          "skillsObserved": [
+            "reading a ground-pattern's interval against known March-work from direct experience"
+          ],
+          "statusNote": "On the cairn-line road south of Cairnhold, two paces ahead, reading the road."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "precursor-signs-in-the-valley",
+          "label": "Precursor Signs in the Valley",
+          "kind": "mystery",
+          "fact": "Veth named the cairn-line south of Cairnhold as a boundary-seat pattern — the stones are the surface layer of something much larger and more patient seated in the ground below. The buried hum beneath Ama's house is not the cairns themselves; it is the deeper design coming closer to the surface. Veth has felt a similar ground-note once before, at a south-facing March post in her third year — it was the boundary itself.",
+          "links": [
+            "order-sense",
+            "the-second-thread",
+            "what-the-water-remembers",
+            "stillwaters-trouble",
+            "millbrook"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short exchange on the road out of Cairnhold — a few minutes of walking and talking."
+      },
+      "offer": {
+        "thing": "Huginn chose the left shoulder — the one nearest the cairn-stones — and has not moved or spoken since Veth named the design. The choice of perch is deliberate in the way all of Huginn's choices are deliberate.",
+        "from": "Huginn's established nature: it knows when things are ending, and it positions itself accordingly. Something in the cairn-line's pattern is ending — or nearing its end of waiting."
+      }
+    },
+    "sceneState": {
+      "setting": "The cairn-line road south of Cairnhold, early morning, early spring. The stones run along the left side of the road at long-stride intervals. Clear and cold. The town is a few minutes behind.",
+      "npcsPresent": [
+        {
+          "name": "Pell Marsh",
+          "state": "Walking a pace or two back, listening, eyes on the road ahead and the stones beside it in turns."
+        },
+        {
+          "name": "Veth (Stillwater) Ondra",
+          "state": "Two paces ahead, having just named the cairn-line's pattern — level head, not looking back."
+        },
+        {
+          "name": "Huginn",
+          "state": "On Silas's left shoulder, nearest the cairn-stones. Silent. The silence is timed."
+        }
+      ],
+      "objects": [
+        "Cairn-stones — spaced at long-stride intervals along the left side of the road, ",
+        "The road south — clear, firm with cold, running toward the lowlands"
+      ],
+      "threads": [
+        "Veth's reading: the cairns are a surface layer over something older and closer to waking than it was",
+        "The buried hum beneath Ama's house — now given a shape, not yet a meaning",
+        "The Crossing ahead — Edvar Crane, the guild rolls, the second thread"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 13,
@@ -3216,7 +3370,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Named the accumulation in the hollow's center as deliberately caught and held — not accidental drainage. Pointed plainly at the sealed letter as the likely explanation.",
         "[d12] Named the accumulation's deliberate shape before the letter confirmed it — her read was correct. Received the confirmation without visible reaction.",
         "[d12] Remained still — her read was correct, the confirmation is in. Waiting on what comes next.",
         "[d12] Named the day at Stillwater's Trouble as right, and named Cassiel's silence as the thing that makes it necessary. 'He never did ask.' Received the sequence without dispute.",
@@ -3225,30 +3378,31 @@
         "[d12] Named the shared stopping point as a limit — plain, unhurried, correct.",
         "[d12] Followed Ama to the east room — the evening's work complete, palms off the table, no ceremony in the parting.",
         "[d13] First to the kitchen — sat without comment, wrapped her hands around a mug.",
-        "[d13] Said farewell to Ama with a short plain nod — the nod that means 'I will look after him' without the words. First on the road."
+        "[d13] Said farewell to Ama with a short plain nod — the nod that means 'I will look after him' without the words. First on the road.",
+        "[d13] Named the cairn-line interval as a boundary-seat pattern — the stones are the surface layer, not the design itself. Something below is closer to waking. Drawn from her own third-year experience on the south-facing March post."
       ],
       "knownFacts": [
-        "The shadow-map shows the accumulation caught and held at the hollow's center — the binding reads in the shadow-craft's image",
-        "The accumulation at Stillwater's Trouble's hollow center is being collected deliberately — the shadow-image showed it caught and held, not draining",
         "She believes the sealed letter holds the explanation for what the accumulation is for",
         "The accumulation at Stillwater's Trouble was channeled deliberately by Silas's father — a slow careful directing of what was already moving",
         "The second layer of the Waymarker completes that work — a bond between holder and post",
         "The sealed letter and the shadow-build are complementary records — one names the reason for stopping, the other names what was not finished",
         "The older mark's groove angle differs from the father's by a measurable degree — a different hand, years earlier, reaching the same stopping point.",
-        "The older mark's craftsman stopped at the same place as Silas's father — named by Veth as a structural limit, not coincidence."
+        "The older mark's craftsman stopped at the same place as Silas's father — named by Veth as a structural limit, not coincidence.",
+        "The cairn-line's spacing matches the interval of a large, patient boundary-seat — not markers, but the closest the design gets to the surface.",
+        "The hum beneath Ama's house is not the cairns themselves — something below them is closer to waking than it was."
       ],
       "skillsObserved": [
-        "reading a ward's rough edge and filling it without being ask",
         "naming a student's pattern plainly without softening it",
         "demonstrating a lesson at the same time as naming it",
         "reading a soul bond's character from outside — named its qua",
         "framing an Ashwarden companion's nature for a civilian witho",
-        "reading a mark's tradition-distance and temporal distance fr"
+        "reading a mark's tradition-distance and temporal distance fr",
+        "reading a ground-pattern's interval against known March-work"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On the Cairnhold center lane, two paces ahead, reading the road.",
+      "statusNote": "On the cairn-line road south of Cairnhold, two paces ahead, reading the road.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 13
@@ -4083,7 +4237,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 551,
-    "turnsSinceOffer": 27,
+    "turnsSinceOffer": 0,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -4092,6 +4246,10 @@
       {
         "thing": "The Waymarker on the shelf catches the stub's light at a particular angle — the second open layer faintly visible as a difference in the…",
         "from": "The father's unfinished work, present in the room and waiting — it surfaces naturally when the room goes quiet."
+      },
+      {
+        "thing": "Huginn chose the left shoulder — the one nearest the cairn-stones — and has not moved or spoken since Veth named the design. The choice of…",
+        "from": "Huginn's established nature: it knows when things are ending, and it positions itself accordingly. Something in the cairn-line's pattern…"
       }
     ]
   },
@@ -4552,17 +4710,18 @@
           "[d6] A thin line of brightness moved through water pooled in the Hub Coliseum's upper bench seam — traveling laterally and slow, like a thread drawn from beneath. Gone in three seconds. Not lamplight, not sun. Huginn noticed it.",
           "[d12] A single buried hum rose through the floorboards of Ama's house in Cairnhold and faded in three heartbeats — not a structural creak, something tonal. Huginn noted it. The house sits on the center lane, close to the cairn-line.",
           "[d12] Pell confirmed she heard the buried hum from beneath Ama's house floor on World-day 12 night — a single low tonal note, then gone. She watched Huginn move in response. Two witnesses, one event.",
-          "[d13] The buried hum beneath Ama's house recurred a second time — one low tonal note roughly an hour before dawn on the morning of departure. Pell heard it and watched Huginn's response: a half-second of complete stillness, then nothing. Two witnesses on two separate nights at the same location."
+          "[d13] The buried hum beneath Ama's house recurred a second time — one low tonal note roughly an hour before dawn on the morning of departure. Pell heard it and watched Huginn's response: a half-second of complete stillness, then nothing. Two witnesses on two separate nights at the same location.",
+          "[d13] Veth named the cairn-line south of Cairnhold as a boundary-seat pattern — the stones are the surface layer of something much larger and more patient seated in the ground below. The buried hum beneath Ama's house is not the cairns themselves; it is the deeper design coming closer to the surface…"
         ],
         "links": [
-          "order-sense",
           "dara-holt",
           "aldric",
           "the-actor-with-a-list",
           "the-water-crisis",
           "waygate",
           "the-second-thread",
-          "what-the-water-remembers"
+          "what-the-water-remembers",
+          "stillwaters-trouble"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -5496,21 +5655,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 9.03105791242734,
-    "cerebral": 16.397579549913882,
-    "social": 14.357349048938515,
-    "generous": 2.5307366093184154,
-    "cautious": 2.716290890263772,
-    "physical": 0.08798944281569272,
-    "risky": 0.09227436212289875,
-    "ruthless": 0.029420671960379275,
-    "carousing": 1.1371451040310283,
-    "amorous": 11.451114723575097,
-    "patient": 0.7860632838473314,
-    "stealth": 0.011403527615826666,
-    "devotion": 0.23296363452016366,
-    "craft": 0.6856214240641408,
-    "leadership": 0.058045221140678206
+    "strategic": 8.805281464616655,
+    "cerebral": 16.987640061166033,
+    "social": 13.99841532271505,
+    "generous": 2.467468194085455,
+    "cautious": 2.6483836180071774,
+    "physical": 0.0857897067453004,
+    "risky": 0.08996750306982627,
+    "ruthless": 0.028685155161369793,
+    "carousing": 1.1087164764302526,
+    "amorous": 11.164836855485719,
+    "patient": 0.766411701751148,
+    "stealth": 0.011118439425430999,
+    "devotion": 0.22713954365715958,
+    "craft": 0.6684808884625373,
+    "leadership": 0.05659409061216125
   },
   "aptitudes": [
     "strategist",
@@ -5519,7 +5678,7 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 664,
+  "actionCount": 665,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -5869,8 +6028,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784765587370,
-  "rev": 1036,
+  "updatedAt": 1784766150943,
+  "rev": 1037,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7884,7 +8043,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 56
+    "the_center": 57
   },
   "foreclosed": [
     "rootkin",
@@ -7998,10 +8157,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-23T00:13:07.369Z",
+      "lastAt": "2026-07-23T00:22:30.940Z",
       "startDay": 22,
       "endDay": 23,
-      "beats": 30
+      "beats": 31
     }
   ],
   "company": [
@@ -8189,22 +8348,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 41,
-    "choices": 41,
+    "sceneSummary": 42,
+    "choices": 42,
     "characterDeltas": 20,
-    "scene": 41,
-    "npcUpdates": 35,
+    "scene": 42,
+    "npcUpdates": 36,
     "factUpdates": 5,
     "placeUpdates": 2,
-    "codexUpdates": 16,
-    "timeOps": 36,
+    "codexUpdates": 17,
+    "timeOps": 37,
     "imagePrompt": 1,
     "sceneEnded": 11,
     "itemUpdates": 1,
     "questUpdates": 1,
-    "offer": 2
+    "offer": 3
   },
-  "_opTurns": 41,
+  "_opTurns": 42,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -8212,7 +8371,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 2,
+      "applied": 3,
       "rejected": 0,
       "lastWhy": null
     }

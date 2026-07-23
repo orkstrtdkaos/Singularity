@@ -51,7 +51,8 @@
         "retreat",
         "careful"
       ],
-      "consumable": false
+      "consumable": false,
+      "pinned": true
     },
     {
       "id": "waterskin",
@@ -63,7 +64,7 @@
         "energy": 10
       },
       "consumable": true,
-      "pinned": false
+      "pinned": true
     }
   ],
   "deeds": [
@@ -143,66 +144,131 @@
         "player": "Ask about Sera directly — what did Doss see, what did she hear, and does she think the girl left on her own?",
         "summary": "Doss confirms Sera left of her own will before dawn; Freki stops at the third stool from the left and Doss notices.",
         "narration": "Doss sets down the cup she was wiping and looks at you with the particular patience of someone who has answered this question before, or knew it was coming.\n\n\"She left on her own,\" Doss says. \"That much I'm certain of. The door to her room was latched from the inside — you can only do that from inside. Window was shut. I run a clean house.\" She says that last part without emphasis, which makes it land harder. \"She came down before I was up, which is early, and she went out the side door. I heard it. Didn't think anything of it — some folk walk at dawn.\" She picks the cup back up and resumes. \"Didn't come back for breakfast. Didn't come back at all.\"\n\n\"She was quiet,\" Doss adds, like she's been deciding whether it matters. \"Not frightened-quiet. Thinking-quiet. Sat right there—\" a tip of her chin toward the middle of the room, \"—ate her supper alone, had one cup, watched the door the whole time. Waited for someone, maybe, or was watching to see if someone walked in she didn't want to see. Couldn't tell you which.\"\n\nFreki has moved along the bar slowly, unhurried, the way it moves when it's actually interested in something rather than just alert. It stops at the third stool from the left and stands there — not sniffing, just standing, head down, weight forward. Doss watches the dog with more attention than she's given you since you walked in.\n\n\"Your hound does that every time something's been left behind,\" she says. Not a question."
+      },
+      {
+        "player": "Ask what was left behind at that stool — someone sat there around the time Sera did",
+        "summary": "Doss reveals what was left at the third stool — a sprig of white herb and a knotted cord — and offers it to Brynjar; Freki reads the spot with focused attention.",
+        "narration": "You nod toward the third stool. \"Something was left there,\" you say. \"Around the time Sera was here. What was it?\"\n\nDoss doesn't look surprised you asked. She reaches under the bar and sets a small object on the worn wood between you — a folded square of cloth, pale linen, the kind someone uses to wrap a keepsake. She unfolds it with two fingers. Inside is a single dried sprig of something — white-flowered, small, the kind of herb you'd find at the Stillhold's edge if you knew where to look — and a piece of cord knotted in a pattern you don't immediately recognize. No note. No name.\n\n\"Someone sat there the same evening she did,\" Doss says. \"Not together — separate stools, never spoke that I saw. But they were watching each other. The person left before she did, left this behind.\" She refolds the linen. \"Could be a coincidence. Could be a message she knew how to read and I don't.\"\n\nFreki has not moved from the stool. The hound stands with its weight forward, head lowered slightly, reading something in the wood or the air above it — not distress, not alarm, but the focused attention it gives a trail worth following. You've learned to trust that posture.\n\n\"You want it?\" Doss asks, pushing the folded cloth toward you. \"I've no use for it. And I'd rather it go with someone who's actually looking for her.\""
       }
     ],
     "lastTurn": {
-      "narration": "Doss sets down the cup she was wiping and looks at you with the particular patience of someone who has answered this question before, or knew it was coming.\n\n\"She left on her own,\" Doss says. \"That much I'm certain of. The door to her room was latched from the inside — you can only do that from inside. Window was shut. I run a clean house.\" She says that last part without emphasis, which makes it land harder. \"She came down before I was up, which is early, and she went out the side door. I heard it. Didn't think anything of it — some folk walk at dawn.\" She picks the cup back up and resumes. \"Didn't come back for breakfast. Didn't come back at all.\"\n\n\"She was quiet,\" Doss adds, like she's been deciding whether it matters. \"Not frightened-quiet. Thinking-quiet. Sat right there—\" a tip of her chin toward the middle of the room, \"—ate her supper alone, had one cup, watched the door the whole time. Waited for someone, maybe, or was watching to see if someone walked in she didn't want to see. Couldn't tell you which.\"\n\nFreki has moved along the bar slowly, unhurried, the way it moves when it's actually interested in something rather than just alert. It stops at the third stool from the left and stands there — not sniffing, just standing, head down, weight forward. Doss watches the dog with more attention than she's given you since you walked in.\n\n\"Your hound does that every time something's been left behind,\" she says. Not a question.",
-      "sceneSummary": "Doss confirms Sera left of her own will before dawn; Freki stops at the third stool from the left and Doss notices.",
+      "narration": "You nod toward the third stool. \"Something was left there,\" you say. \"Around the time Sera was here. What was it?\"\n\nDoss doesn't look surprised you asked. She reaches under the bar and sets a small object on the worn wood between you — a folded square of cloth, pale linen, the kind someone uses to wrap a keepsake. She unfolds it with two fingers. Inside is a single dried sprig of something — white-flowered, small, the kind of herb you'd find at the Stillhold's edge if you knew where to look — and a piece of cord knotted in a pattern you don't immediately recognize. No note. No name.\n\n\"Someone sat there the same evening she did,\" Doss says. \"Not together — separate stools, never spoke that I saw. But they were watching each other. The person left before she did, left this behind.\" She refolds the linen. \"Could be a coincidence. Could be a message she knew how to read and I don't.\"\n\nFreki has not moved from the stool. The hound stands with its weight forward, head lowered slightly, reading something in the wood or the air above it — not distress, not alarm, but the focused attention it gives a trail worth following. You've learned to trust that posture.\n\n\"You want it?\" Doss asks, pushing the folded cloth toward you. \"I've no use for it. And I'd rather it go with someone who's actually looking for her.\"",
+      "sceneSummary": "Doss reveals what was left at the third stool — a sprig of white herb and a knotted cord — and offers it to Brynjar; Freki reads the spot with focused attention.",
       "choices": [
         {
-          "label": "Ask what was left behind at that stool — someone sat there around the time Sera did",
+          "label": "Take the cloth bundle and examine it carefully — try to read what the cord-knot means",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take it and ask Doss to describe the person who left it — appearance, direction they went",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.35
+          },
           "difficulty": 0,
           "intentTags": [
             "persuade"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Let Freki work — watch what it does, follow its lead",
-          "attribute": "mental",
+          "label": "Let Freki lead — take the cloth, hold it for the hound, and follow wherever it wants to go",
+          "attribute": "physical",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Doss one more thing before you take it: did Sera speak to anyone else that evening, or did anyone ask after her the next morning?",
+          "attribute": "social",
           "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.35
+          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Doss who else was in the room that night — who was watching Sera",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Order a meal and take a seat — let Doss come to you at her own pace",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "calm"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "scene": {
+        "setting": "Inside the Crow and Thistle — south side of the Marchward square. Low ceiling, four long tables, banked fire, smoke-smelling air. Morning, door open to the square.",
+        "npcsPresent": [
+          {
+            "name": "Doss Halveck",
+            "state": "Behind the bar, cloth bundle unfolded and pushed toward Brynjar, watching to see if he takes it"
+          }
+        ],
+        "objects": [
+          "Long tables (four)",
+          "Bar with restacked cups",
+          "Banked fire (orange coals)",
+          "Third stool from the left at the bar — where Freki stands, weight forward, focused",
+          "Cloth bundle on the bar: folded linen containing a dried white-flowered sprig and a knotted cord",
+          "Two men eating at the far table"
+        ],
+        "threads": [
+          "The cord-knot may be a message or a marker — Doss doesn't know its meaning",
+          "The person who left it was watching Sera without speaking to her",
+          "Freki is reading something at the stool — a trail, a scent, a direction",
+          "Doss is offering the bundle but waiting on Brynjar's answer"
+        ]
+      },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "doss-halveck",
           "name": "Doss Halveck",
-          "note": "Confirmed Sera left on her own before dawn via the side door; described her as thinking-quiet, watching the entrance; noted Freki's behavior at the third stool",
+          "role": "Innkeep, the Crow and Thistle",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Produced the cloth bundle left at the third stool — dried white herb and a knotted cord. Offered it to Brynjar directly.",
           "learned": [
-            "Sera's room was latched from the inside — she left of her own will",
-            "Sera left before dawn via the side door",
-            "Sera ate alone, had one cup, watched the door all evening — waiting or watching for someone",
-            "Something was left at the third stool from the left; Doss noticed Freki's reaction to it"
+            "A second person sat near Sera the same evening, watching her without speaking, then left before her — leaving the bundle behind",
+            "Doss kept the bundle because it felt deliberate, not lost"
           ],
-          "statusNote": "On duty at the Crow and Thistle, morning shift; forthcoming about Sera now that Brynjar is asking directly"
+          "status": "active",
+          "statusNote": "On duty at the Crow and Thistle; has shared everything she observed about Sera and the bundle"
         }
       ],
       "codexUpdates": [
@@ -210,7 +276,7 @@
           "topic": "sera-of-the-stillhold",
           "label": "Sera of the Stillhold",
           "kind": "mystery",
-          "fact": "Sera left the Crow and Thistle before dawn of her own will — room latched from inside, side door. She spent her evening watching the entrance, thinking-quiet, waiting or watching for someone. Something was left at the third stool from the left at the bar around the same time.",
+          "fact": "A second person was present the evening Sera stayed — sat at the third stool, watched her without speaking, left before dawn, left behind a folded linen with a dried white-flowered sprig and a knotted cord. The cord-knot's meaning is unknown. Freki reads the stool as a live trail.",
           "links": [
             "the-crow-and-thistle",
             "doss-halveck",
@@ -218,51 +284,33 @@
           ]
         }
       ],
-      "scene": {
-        "setting": "Inside the Crow and Thistle — south side of the Marchward square. Low ceiling, four long tables, banked fire, smoke-smelling air. Morning, door open to the square.",
-        "npcsPresent": [
-          {
-            "name": "Doss Halveck",
-            "state": "Behind the bar, cup in hand, watching Freki at the third stool with more attention than she's given Brynjar"
-          }
-        ],
-        "objects": [
-          "Long tables (four)",
-          "Bar with restacked cups",
-          "Banked fire (orange coals)",
-          "Third stool from the left at the bar — where Freki has stopped and stands, head down, weight forward",
-          "Two men eating at the far table"
-        ],
-        "threads": [
-          "Something was left at or near the third stool — Doss knows what it is",
-          "Sera watched the door all evening — waiting for someone or watching for someone she didn't want to see",
-          "Freki's behavior at the stool: standing still, not sniffing, weight forward"
-        ]
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short conversation at the bar"
-      }
+        "why": "A short exchange at the bar"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Inside the Crow and Thistle — south side of the Marchward square. Low ceiling, four long tables, banked fire, smoke-smelling air. Morning, door open to the square.",
       "npcsPresent": [
         {
           "name": "Doss Halveck",
-          "state": "Behind the bar, cup in hand, watching Freki at the third stool with more attention than she's given Brynjar"
+          "state": "Behind the bar, cloth bundle unfolded and pushed toward Brynjar, watching to see if he takes it"
         }
       ],
       "objects": [
         "Long tables (four)",
         "Bar with restacked cups",
         "Banked fire (orange coals)",
-        "Third stool from the left at the bar — where Freki has stopped and stands, head ",
+        "Third stool from the left at the bar — where Freki stands, weight forward, focus",
+        "Cloth bundle on the bar: folded linen containing a dried white-flowered sprig an",
         "Two men eating at the far table"
       ],
       "threads": [
-        "Something was left at or near the third stool — Doss knows what it is",
-        "Sera watched the door all evening — waiting for someone or watching for someone she didn't want to see",
-        "Freki's behavior at the stool: standing still, not sniffing, weight forward"
+        "The cord-knot may be a message or a marker — Doss doesn't know its meaning",
+        "The person who left it was watching Sera without speaking to her",
+        "Freki is reading something at the stool — a trail, a scent, a direction",
+        "Doss is offering the bundle but waiting on Brynjar's answer"
       ]
     }
   },
@@ -447,14 +495,17 @@
       "relationship": 0,
       "history": [
         "[d1] Greeted Brynjar before he could state his business; named both his purposes — Sera and the east road — on sight.",
-        "[d1] Confirmed Sera left on her own before dawn via the side door; described her as thinking-quiet, watching the entrance; noted Freki's behavior at the third stool"
+        "[d1] Confirmed Sera left on her own before dawn via the side door; described her as thinking-quiet, watching the entrance; noted Freki's behavior at the third stool",
+        "[d1] Produced the cloth bundle left at the third stool — dried white herb and a knotted cord. Offered it to Brynjar directly."
       ],
       "knownFacts": [
         "Brynjar arrived asking about Sera and road-escort work",
         "Freki paused at the third stool from the left at the bar",
         "Sera's room was latched from the inside — she left of her own will",
         "Sera left before dawn via the side door",
-        "Sera ate alone, had one cup, watched the door all evening — waiting or watching for someone"
+        "Sera ate alone, had one cup, watched the door all evening — waiting or watching for someone",
+        "A second person sat near Sera the same evening, watching her without speaking, then left before her — leaving the bundle behind",
+        "Doss kept the bundle because it felt deliberate, not lost"
       ],
       "skillsObserved": [
         "quick read of a stranger's intent"
@@ -462,7 +513,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On duty at the Crow and Thistle, morning shift; forthcoming about Sera now that Brynjar is asking directly",
+      "statusNote": "On duty at the Crow and Thistle; has shared everything she observed about Sera and the bundle",
       "domains": {
         "primary": "marcher"
       },
@@ -569,7 +620,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-23T01:32:42.645Z",
+    "lastSharedReadAt": "2026-07-23T01:54:10.287Z",
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 553,
@@ -587,7 +638,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 6
+    "turnsSinceOffer": 7
   },
   "domains": {
     "primary": "marcher",
@@ -700,7 +751,8 @@
         "facts": [
           "[d1] Missing woman, grey cloak, dark braid, last seen at the Marchward's south gate seven days ago. Her family posted a bill — no payment, no questions asked of the finder. An ink portrait is attached.",
           "[d1] Arrived alone seven days ago — unusual; checked in properly, no declared business, asked for lodging at the Crow and Thistle. Room empty next morning, innkeep Doss didn't see her leave. Family posted the bill knowing roughly why she came but wanting her back without questions.",
-          "[d1] Sera left the Crow and Thistle before dawn of her own will — room latched from inside, side door. She spent her evening watching the entrance, thinking-quiet, waiting or watching for someone. Something was left at the third stool from the left at the bar around the same time."
+          "[d1] Sera left the Crow and Thistle before dawn of her own will — room latched from inside, side door. She spent her evening watching the entrance, thinking-quiet, waiting or watching for someone. Something was left at the third stool from the left at the bar around the same time.",
+          "[d1] A second person was present the evening Sera stayed — sat at the third stool, watched her without speaking, left before dawn, left behind a folded linen with a dried white-flowered sprig and a knotted cord. The cord-knot's meaning is unknown. Freki reads the stool as a live trail."
         ],
         "links": [
           "marchward-notice-board",
@@ -755,28 +807,18 @@
         "entityId": "the-last-walker",
         "updatedDay": 1
       },
-      "wardhouse-officer": {
-        "id": "wardhouse-officer",
-        "label": "Wardhouse Duty Officer",
-        "kind": "person",
-        "facts": [
-          "[d1] Wardhouse intake officer, the Marchward"
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 1,
-        "entityId": "wardhouse-officer",
-        "updatedDay": 1
-      },
       "halvra-stenn": {
         "id": "halvra-stenn",
         "label": "Halvra Stenn",
         "kind": "person",
         "facts": [
-          "[d1] Wardhouse Duty Officer — she processes what the Marchward receives, and she has received a great deal"
+          "[d1] Wardhouse Duty Officer — she processes what the Marchward receives, and she has received a great deal",
+          "[d1] Wardhouse intake officer, the Marchward"
         ],
         "links": [],
-        "aliases": [],
+        "aliases": [
+          "Wardhouse Duty Officer"
+        ],
         "createdDay": 1,
         "entityId": "halvra-stenn",
         "updatedDay": 1
@@ -821,19 +863,47 @@
         "entityId": "doss",
         "updatedDay": 1
       }
-    }
+    },
+    "mergeUndo": [
+      {
+        "at": "2026-07-23T01:51:37.724Z",
+        "source": {
+          "id": "wardhouse-officer",
+          "label": "Wardhouse Duty Officer",
+          "kind": "person",
+          "facts": [
+            "[d1] Wardhouse intake officer, the Marchward"
+          ],
+          "links": [],
+          "aliases": [],
+          "createdDay": 1,
+          "entityId": "wardhouse-officer",
+          "updatedDay": 1
+        },
+        "targetId": "halvra-stenn",
+        "targetBefore": {
+          "facts": [
+            "[d1] Wardhouse Duty Officer — she processes what the Marchward receives, and she has received a great deal"
+          ],
+          "links": [],
+          "aliases": [],
+          "entityId": "halvra-stenn"
+        },
+        "relinked": []
+      }
+    ]
   },
   "tendencies": {
-    "leadership": 11.147297119989874,
-    "cerebral": 1.743511178662262,
-    "strategic": 2.6472848945251464,
-    "ruthless": 0.8375915934997556,
-    "social": 3.781172265625
+    "leadership": 10.868614691990127,
+    "cerebral": 1.6999233991957052,
+    "strategic": 2.5811027721620174,
+    "ruthless": 0.8166518036622618,
+    "social": 4.686642958984375
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 9,
+  "actionCount": 10,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -952,8 +1022,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784771275629,
-  "rev": 46,
+  "updatedAt": 1784771686569,
+  "rev": 56,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1118,7 +1188,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 12
+    "riven_marches": 13
   },
   "practice": {
     "schemaVersion": 1,
@@ -1177,10 +1247,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T01:47:55.628Z",
+      "lastAt": "2026-07-23T01:54:46.567Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 6
+      "beats": 7
     }
   ],
   "_pendingArrival": null,
@@ -1196,16 +1266,17 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 6,
-    "choices": 6,
-    "scene": 6,
-    "npcUpdates": 6,
+    "sceneSummary": 7,
+    "choices": 7,
+    "scene": 7,
+    "npcUpdates": 7,
     "placeUpdates": 2,
     "generateRequest": 2,
     "moveTo": 2,
-    "timeOps": 6,
-    "codexUpdates": 6,
-    "sceneEnded": 1
+    "timeOps": 7,
+    "codexUpdates": 7,
+    "sceneEnded": 2,
+    "characterDeltas": 1
   },
-  "_opTurns": 6
+  "_opTurns": 7
 }

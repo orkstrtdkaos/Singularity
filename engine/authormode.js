@@ -26,7 +26,7 @@ function logEdit(character, entry, ctx) {
 }
 
 /** The god-mode op vocabulary — the fields each op reads, for the panel + the prompt-free direct surface. */
-export const AUTHOR_OPS = ["addXp", "setLevel", "setSkillPoints", "restoreVitals", "setVital", "grantAbility", "grantItem", "setArcStage", "resolveDeath"];
+export const AUTHOR_OPS = ["addXp", "setLevel", "setSkillPoints", "restoreVitals", "setVital", "grantAbility", "grantItem", "setArcStage", "resolveDeath", "reparentLocation"];
 
 /** Apply a set of AUTHOR (god-mode) ops directly to the save. Returns { applied:[], refused:[] }.
  *  NO fairness, NO trace, NO earned-ness check — that is the whole point of this surface. Safety floors are
@@ -129,6 +129,30 @@ export function applyAuthorOps(character, ops = [], ctx = {}) {
         if (!res.ok) { refused.push({ op, reason: res.why || "not in the death state" }); break; }
         logEdit(character, { kind: "resolveDeath", id, outcome, changed: op.changed || null, note: note(op) }, ctx);
         applied.push({ resolveDeath: id, outcome });
+        break;
+      }
+      case "reparentLocation": {
+        // SNG-224: nest a stray gen-location under its true parent (or un-nest it) — the retroactive fix for
+        // a transit-stub the mint left flat (Silas's Ent Grove → the crossroads). Only a GENERATED location
+        // moves; canonical places are fixed geography. A falsy parentId clears the parent (back to top-level).
+        const id = op.locationId, pid = op.parentId || null;
+        const target = character.generated?.location?.[id];
+        if (!target) { refused.push({ op, reason: `no generated location "${id}" (canonical places are fixed geography)` }); break; }
+        if (pid === id) { refused.push({ op, reason: "a place cannot be its own parent" }); break; }
+        if (pid) {
+          const parent = (ctx.locations || {})[pid] || character.generated?.location?.[pid];
+          if (!parent) { refused.push({ op, reason: `no location "${pid}" to nest under` }); break; }
+          const prev = target.parentId || null;
+          target.parentId = pid;
+          const pregion = parent.regionId || parent.region; if (pregion) target.regionId = pregion; // a sub-place shares its parent's region
+          logEdit(character, { kind: "reparentLocation", id, to: pid, from: prev, note: note(op) }, ctx);
+          applied.push({ reparentLocation: id, parentId: pid });
+        } else {
+          const prev = target.parentId || null;
+          delete target.parentId;
+          logEdit(character, { kind: "reparentLocation", id, to: null, from: prev, note: note(op) }, ctx);
+          applied.push({ reparentLocation: id, parentId: null });
+        }
         break;
       }
       default: refused.push({ op, reason: `unknown author op "${op.op}"` });

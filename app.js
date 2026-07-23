@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.230";
+const APP_VERSION = "1.8.231";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1118,6 +1118,7 @@ function renderAuthorPanel() {
   const edits = character.authorEdits || [];
   const now = `L${character.level} · ${character.xp || 0} xp · ${character.skillPoints || 0} sp · ${character.health}/${character.maxHealth} hp · ${character.energy}/${character.maxEnergy} en · ${(character.abilities || []).length} crafts · ${(character.inventory || []).length} items`;
   const vitals = ["health", "energy", "maxHealth", "maxEnergy", "attunement"];
+  const genLocs = Object.values(character.generated?.location || {}).filter(l => l && !l.supersededBy); // SNG-224: reparentable stubs
   chrome(`<div class="screen" style="max-width:760px">
     <h2>⚙ Author — god-mode <span class="dev-badge">DEV</span></h2>
     <p class="hint" style="margin-bottom:6px">Erik-as-<strong>author</strong>, not the character. No fairness, no trace — this is the separate god-mode surface (SNG-207b), never the in-fiction GM. Safety (content-rating, minor-safety) lives in its own controls and is never touched here. Every edit is logged below.</p>
@@ -1134,6 +1135,9 @@ function renderAuthorPanel() {
     <div class="author-row"><label>Grant ability</label><input id="au-abil" placeholder="ability id (e.g. the_cut_thread)"><button class="btn secondary" data-au="grantAbility">Grant</button></div>
     <div class="author-row"><label>Grant item</label><input id="au-item" placeholder="item name"><button class="btn secondary" data-au="grantItem">Grant</button></div>
 
+    ${genLocs.length ? `<h3>Geography <span class="hint" style="font-weight:400">— nest a stray transit-stub under its true place (SNG-224)</span></h3>
+    <div class="author-row"><label>Reparent place</label><select id="au-loc">${genLocs.map(l => `<option value="${esc(l.id)}">${esc(l.name)}</option>`).join("")}</select><select id="au-loc-parent"><option value="">— top-level (no parent) —</option>${genLocs.map(l => `<option value="${esc(l.id)}">under ${esc(l.name)}</option>`).join("")}</select><button class="btn secondary" data-au="reparentLocation">Nest</button></div>` : ""}
+
     ${arcs.length ? `<h3>World arcs</h3>${arcs.map(a => `<div class="author-row"><label>${esc(a.name)}</label><select id="au-arc-${esc(a.id)}">${Array.from({ length: (a.stages || []).length }, (_, i) => `<option value="${i + 1}">stage ${i + 1}${(a.stages[i]?.name) ? " — " + esc(a.stages[i].name) : ""}</option>`).join("")}</select><button class="btn secondary" data-au="setArcStage" data-arc="${esc(a.id)}">Set</button></div>`).join("")}` : ""}
 
     <div id="au-status" class="hint" style="margin-top:10px;min-height:1.2em"></div>
@@ -1142,7 +1146,7 @@ function renderAuthorPanel() {
     <button class="btn secondary" id="au-back" style="margin-top:12px">Back</button>
   </div>`);
 
-  const ctx = () => ({ rules: CONTENT.rules, items: CONTENT.items || {}, abilities: fullCatalog(), greaterArcs: CONTENT.greaterArcs || [], worldDay: absoluteWorldDay(), nowISO: new Date().toISOString() });
+  const ctx = () => ({ rules: CONTENT.rules, items: CONTENT.items || {}, abilities: fullCatalog(), greaterArcs: CONTENT.greaterArcs || [], locations: CONTENT.locations || {}, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString() });
   const status = document.getElementById("au-status");
   const numVal = id => Number(document.getElementById(id)?.value);
   const runAuthor = (op) => {
@@ -1161,6 +1165,7 @@ function renderAuthorPanel() {
     if (which === "grantAbility") return runAuthor({ op: "grantAbility", abilityId: (document.getElementById("au-abil").value || "").trim() });
     if (which === "grantItem") return runAuthor({ op: "grantItem", name: (document.getElementById("au-item").value || "").trim() });
     if (which === "setArcStage") { const arcId = b.dataset.arc; return runAuthor({ op: "setArcStage", arcId, stage: Number(document.getElementById("au-arc-" + arcId)?.value) }); }
+    if (which === "reparentLocation") return runAuthor({ op: "reparentLocation", locationId: document.getElementById("au-loc")?.value, parentId: document.getElementById("au-loc-parent")?.value || null });
   };
   document.getElementById("au-back").onclick = () => renderRoster();
 }
@@ -4584,7 +4589,7 @@ function buildTravelDirective(ti) {
   const adj = (here?.connections || []).map(id => CONTENT.locations[id]).filter(Boolean)
     .filter(l => isPlaceKnown(character, l.id, CONTENT.locations)).map(l => `${l.name} (${l.id})`);
   const dest = ti.destId ? `${CONTENT.locations[ti.destId].name} (id ${ti.destId})` : `"${ti.ref}"`;
-  return `The player INTENDS to travel to ${dest}. If the fiction actually DEPARTS this beat — they set out, are led, or the trip is a montage with time passing on the road — emit "moveTo": {"location": "${ti.destId || ti.ref}", "why": "…"} so they arrive, and narrate the journey (with timeOps if far). But if this beat is still PLANNING or discussing the trip and they have NOT left yet, do NOT move them — keep the scene where it is and offer the road as the next step. Never relocate a character who only spoke about going (SNG-188). ${adj.length ? `Places reachable from ${here?.name || "here"}: ${adj.join(", ")}.` : ""}`;
+  return `The player INTENDS to travel to ${dest}. If the fiction actually DEPARTS this beat — they set out, are led, or the trip is a montage with time passing on the road — emit "moveTo": {"location": "${ti.destId || ti.ref}", "why": "…"} so they arrive, and narrate the journey (with timeOps if far). But if this beat is still PLANNING or discussing the trip and they have NOT left yet, do NOT move them — keep the scene where it is and offer the road as the next step. Never relocate a character who only spoke about going (SNG-188). ${adj.length ? `Places reachable from ${here?.name || "here"}: ${adj.join(", ")}. ⛔ If the destination is one of THESE, use its exact name/id — do not coin a new synonym for a place you can already reach (it mints a duplicate).` : ""}`;
 }
 
 /** SNG-122: the one-tap safety net — the travel beat didn't move the player, so arrive now via the SAME
@@ -4728,6 +4733,11 @@ function mintTransitLocation(moveRef) {
     _gen: { type: "location", tier: "fresh", engagementScore: 0, birthWeight: 1, rating: null, attentionHistory: [], createdDay: (() => { try { return readClock(character.clock).day; } catch { return null; } })(), provenance: { locationId: here?.id || null, day: null, hint: "transit" } },
     map: coordForGenerated(id, here?.map, existing)
   };
+  // SNG-224 observability: a mint means the GM named a place that matched NOTHING existing (resolveLocationId
+  // already ran and missed). Log it so the coin-rate is measurable — a coined synonym for an existing place
+  // (the "Center"/"The Crossing" duplicate) shows up here; the fix is an alias on the canonical file, or the
+  // reparent lever if it's really a sub-place. A genuinely new place is expected and fine.
+  console.log(`[transit-mint] coined "${name}" (${id})${promotedFrom ? ` — nested under ${promotedFrom.parentId}` : " — top-level, no matching place found"}. If this duplicates a real place, add an alias to its canonical file or reparent it (Author panel).`);
   character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
   CONTENT.locations[id] = rec;              // live this session
   if (here && Array.isArray(here.connections) && !here.connections.includes(id)) here.connections = [...here.connections, id]; // bidirectional reach

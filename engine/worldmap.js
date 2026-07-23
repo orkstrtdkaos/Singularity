@@ -114,9 +114,16 @@ export function regionTierNodes(CONTENT, character, regionId) {
   // that hadn't read them, so a promoted stub kept drawing as a duplicate. Drop it here (the record stays in
   // CONTENT.locations so any lingering id ref still resolves — this hides the node, it doesn't delete the data).
   const aliased = character?.locationAliases || {};
-  const locs = Object.values(CONTENT?.locations || {})
+  const inRegion = Object.values(CONTENT?.locations || {})
     .filter(l => (l.regionId || l.region) === regionId)
     .filter(l => !l.supersededBy && !aliased[l.id]);
+  // SNG-224 nesting: a SUB-LOCATION (its parentId points at another place shown IN THIS region) belongs
+  // nested under its parent at the interior tier, not as a top-level peer node. This is what makes the
+  // reparent lever honest — reparenting a stray stub under its true parent actually removes it from the
+  // region map. (No canonical valley loc has an in-region parent, so this only nests gen sub-places — e.g.
+  // Silas's Ent Grove once reparented under the crossroads; travel/edges still reach it via the parent.)
+  const regionIds = new Set(inRegion.map(l => l.id));
+  const locs = inRegion.filter(l => { const pid = l.parentId || l.containerId; return !(pid && regionIds.has(pid)); });
   const ids = new Set(locs.map(l => l.id));
   const edges = [];
   const seen = new Set();

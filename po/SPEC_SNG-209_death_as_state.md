@@ -1,5 +1,14 @@
 # SPEC — SNG-209: Death is a state, not a terminus
 ## Aevi (PO) · 2026-07-22 · awaiting CCode ROUND 2
+<!-- status: SNG-209 PHASE 1 (the substrate) COMPLETE_PENDING_REVIEW (CCode 2026-07-23). v1.8.228 (e656609c).
+     Built: engine/death.js (deathState model + computed depth §2 + the clock §5.6 + retrieval primitive §4
+     + reachableDeadForGM reader §1); epic death enters the state §5.3 (Q5 gate landed); the GM sees the
+     reachable dead; a `resolveDeath` god-mode op is the Phase-1 trigger. ROUND 2 answered in the results doc:
+     po/results/20260723_SNG-209_death_as_state.md — Q1 computed-with-override ✓, Q2 status-object-+-read-model
+     (recommend against a 2nd stored home), Q5 confirmed. DEFERRED to you: §3 tradition roads (content),
+     §5.5 retrieval quests (content), §4 player-death UX (design), §5.2 NPC/companion onto the clock (1-line
+     wire, ships with the quests). Smoke + wiring-audit green; clean fresh-port boot. -->
+## ⚠ ROUND 2 STATUS: Phase-1 substrate shipped. §3/§4/§5.5 (roads + quests + player-death UX) are yours.
 
 > **Erik, 2026-07-22:** *"What happens when someone dies — I'd say that's an entered state. Silas has
 > already resurrected a rabbit, so just because someone dies doesn't make it permanent. Quests could be

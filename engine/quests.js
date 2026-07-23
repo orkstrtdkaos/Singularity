@@ -13,6 +13,17 @@ import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
 import { traditionOf } from "./traditions.js";
 import { createWake } from "./wake.js"; // SNG-204: a significant outcome leaves a wake the world continues from
 
+/** SNG-217: models often "type" \n / \t as the literal two-character escape inside their JSON strings.
+ *  Valid JSON parses that as backslash-n (two chars), which then renders verbatim — literal `\n` on screen
+ *  (Erik's Second Thread bug). Normalize a prose field on WRITE so every consumer — render, GM context,
+ *  search, export — sees real line breaks. Targets the formatting escapes ONLY: a real newline is never
+ *  matched, and a legitimately backslashed literal in prose is rare (and safe to leave). Markdown (`**bold**`)
+ *  is intentionally LEFT for the render layer, not stripped here — the intent is preserved, rendered on display. */
+export function normalizeProse(s) {
+  if (typeof s !== "string" || s.indexOf("\\") === -1) return s; // fast path: no backslash → nothing to normalize
+  return s.replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n").replace(/\\t/g, "\t");
+}
+
 /** Resolve an incoming quest op to an existing quest: exact id → slugified-title id →
  *  title/alias fuzzy. Returns the quest or null. */
 export function resolveQuest(character, u) {
@@ -49,7 +60,7 @@ function entityIdFor(name, pool) {
 export function applyQuestUpdates(character, updates = [], ctx = {}) {
   character.quests = character.quests || [];
   const notes = [];
-  const clampNote = n => smartClamp(n, 600); // SNG-076: model note — bound generously, on a word boundary
+  const clampNote = n => smartClamp(normalizeProse(n), 600); // SNG-076: model note — bound generously, on a word boundary; SNG-217: literal \n → real break
   // SNG-162 §3: PARTITION BEFORE CAPPING. `updates.slice(0, 4)` dropped by ARRAY ORDER, so a busy
   // turn emitting three `progress` ops and one `complete` could lose the complete — arbitrarily,
   // depending on where the model happened to put it. That is a second, independent cause of "the
@@ -72,7 +83,7 @@ export function applyQuestUpdates(character, updates = [], ctx = {}) {
       character.quests.push({
         id,
         title: String(u.title || "A new undertaking").slice(0, 80),
-        summary: smartClamp(u.summary || u.note || "", 600), // SNG-076: model quest summary — word-boundary clamp
+        summary: smartClamp(normalizeProse(u.summary || u.note || ""), 600), // SNG-076: model quest summary — word-boundary clamp; SNG-217: literal \n → real break
         giver: u.giver ? String(u.giver).slice(0, 60) : null,
         giverEntityId: entityIdFor(u.giver, ctx.entities?.people),
         locationId: u.locationId || null,
@@ -180,17 +191,20 @@ export function isRealQuest(def) {
 export function structuredQuestRecord(def) { // registry:internal
   return {
     id: slugify(def.id), title: def.name || def.id, structured: true, status: "available",
-    premise: def.premise || "", stakes: def.stakes || "", axis: def.axis || null,
+    premise: normalizeProse(def.premise || ""), stakes: normalizeProse(def.stakes || ""), axis: def.axis || null, // SNG-217: literal \n → real break on write
     traditions: def.traditions || [], giver: def.giver || null, legend: def.legend || null,
     region: def.region || null, tier: def.tier || null,
     arcId: def.arcId || null, locationId: def.locationId || null,   // SNG-112: shared-arc key + own place (parallel player quests)
-    stages: (def.stages || []).map(s => ({ id: s.id, objective: s.objective, condition: s.condition, change: s.change })),
+    stages: (def.stages || []).map(s => ({ id: s.id, objective: normalizeProse(s.objective), condition: normalizeProse(s.condition), change: normalizeProse(s.change) })),
     routes: def.routes || {},
-    outcomes: (def.outcomes || []).map(o => ({
-      id: o.id, name: o.name, summary: o.summary,
-      narration: o.narration || o.consequences || [],   // prose for the chronicle (legacy: consequences)
-      effects: o.effects || null                          // machine-readable deltas (null → legacy prose parse)
-    })),
+    outcomes: (def.outcomes || []).map(o => {
+      const narr = o.narration || o.consequences || [];
+      return {
+        id: o.id, name: o.name, summary: normalizeProse(o.summary),
+        narration: Array.isArray(narr) ? narr.map(normalizeProse) : normalizeProse(narr),   // prose for the chronicle (legacy: consequences)
+        effects: o.effects || null                          // machine-readable deltas (null → legacy prose parse)
+      };
+    }),
     stageIndex: 0, completedStages: [], progress: [], aliases: []
   };
 }

@@ -10,7 +10,7 @@ import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, grantAptitude
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs, noteCompanionWitnessed, companionMemoryForGM } from "../engine/companions.js";
-import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched, traditionArcForGM, npcQuestsForGM, practicedTraditions, traditionArcBeat } from "../engine/quests.js";
+import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched, traditionArcForGM, npcQuestsForGM, practicedTraditions, traditionArcBeat, structuredQuestRecord, normalizeProse } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
@@ -7221,6 +7221,50 @@ await (async () => {
   check("216 §3b: the backfill LEAVES a real tracking object untouched (idempotent — earned tier + score survive)", mixed.generated.location.good._gen.tier === "established" && mixed.generated.location.good._gen.engagementScore === 5);
   check("216 §3b: … while still healing the malformed one alongside it", typeof mixed.generated.location.bad._gen === "object" && mixed.generated.location.bad._gen.tier === "fresh");
   check("216 §3b: the heal step is registered at version 17 (the idempotence gate advances)", CHARACTER_STEPS.some(s => s.version === 17 && s.id === "gen-tracking-object"));
+}
+
+// ---- SNG-217: literal `\n` / raw `**` in quest text — normalize on write, render markdown on display, heal old saves ----
+{
+  const LIT = "a"; const bs = "\\"; // build a string containing the literal two chars backslash+n (as a real quest would store)
+  const litN = bs + "n"; // "\n" as two characters, not a newline
+  // §3a — the WRITE path normalizes a structured-quest def's prose fields.
+  const rec = structuredQuestRecord({
+    id: "the-second-thread", name: "The Second Thread",
+    premise: `He kept it hidden until he came asking.${litN}${litN}The second could not be unmade.`,
+    stakes: `One thread frays.${litN}Another holds.`,
+    stages: [{ id: "s1", objective: `find the${litN}half-made waygate`, condition: `reach it${litN}before dusk`, change: "x" }],
+    outcomes: [{ id: "o1", name: "o", summary: `it${litN}closes`, narration: [`line one${litN}line two`] }]
+  });
+  check("217 §3a: structuredQuestRecord converts literal \\n → real newline in premise (no backslash-n left)", rec.premise.includes("\n") && !rec.premise.includes(litN));
+  check("217 §3a: … and in stakes", rec.stakes.includes("\n") && !rec.stakes.includes(litN));
+  check("217 §3a: … and in a stage condition + objective (the fields Erik's save carried)", !rec.stages[0].condition.includes(litN) && !rec.stages[0].objective.includes(litN));
+  check("217 §3a: … and in outcome summary + narration array", !rec.outcomes[0].summary.includes(litN) && !rec.outcomes[0].narration[0].includes(litN));
+  check("217 §3a: markdown `**` is LEFT for the render layer (intent preserved, not stripped on write)", normalizeProse(`a ${bs}n **bold** b`).includes("**bold**"));
+
+  // §3a — the GM-op WRITE path (applyQuestUpdates) normalizes summary + notes too.
+  const ch217 = { quests: [] };
+  applyQuestUpdates(ch217, [{ op: "start", questId: "q217", title: "Q", summary: `first${litN}${litN}second`, note: `did a${litN}thing` }], {});
+  check("217 §3a: applyQuestUpdates normalizes a started quest's summary (GM-op path)", !ch217.quests[0].summary.includes(litN) && ch217.quests[0].summary.includes("\n"));
+
+  // normalizeProse is idempotent + safe on non-strings.
+  check("217: normalizeProse is idempotent (a real newline is never re-matched)", normalizeProse(normalizeProse(`x${litN}y`)) === normalizeProse(`x${litN}y`));
+  check("217: normalizeProse leaves a clean string + non-strings untouched", normalizeProse("no escapes here") === "no escapes here" && normalizeProse(null) === null && normalizeProse(42) === 42);
+
+  // §3b — the DISPLAY path renders markdown + breaks (mdProse), not raw esc(), at the quest-body sites.
+  const appSrc217 = readFileSync(join(root, "app.js"), "utf8");
+  check("217 §3b: the quest-body render sites use mdProse (bold + <br>), not raw esc()", /mdProse\(q\.premise\)/.test(appSrc217) && /mdProse\(q\.stakes\)/.test(appSrc217) && /mdProse\(def\.stakes/.test(appSrc217));
+  const mdProseDef = appSrc217.slice(appSrc217.indexOf("function mdProse(s)"), appSrc217.indexOf("function mdProse(s)") + 200);
+  check("217 §3b: mdProse escapes FIRST, then renders <strong> + <br> (XSS-safe, same convention as mdLite)", mdProseDef.includes("esc(") && mdProseDef.includes("<strong>") && mdProseDef.includes("<br>"));
+
+  // §3c — the backfill heals a quest already in the save.
+  const oldSave = { reconcileVersion: 17, quests: [
+    { id: "the-second-thread", structured: true, premise: `He came asking.${litN}${litN}The second could not.`, stakes: `frays.${litN}holds.`, stages: [{ id: "s1", condition: `reach${litN}it` }], outcomes: [{ id: "o1", summary: `it${litN}ends` }], progress: [`noted${litN}here`] }
+  ] };
+  reconcile(oldSave, "character", {});
+  const q = oldSave.quests[0];
+  check("217 §3c: the reconcile backfill heals literal \\n in an existing quest's premise", !q.premise.includes(litN) && q.premise.includes("\n"));
+  check("217 §3c: … stakes, stage condition, outcome summary, and progress note too", !q.stakes.includes(litN) && !q.stages[0].condition.includes(litN) && !q.outcomes[0].summary.includes(litN) && !q.progress[0].includes(litN));
+  check("217 §3c: the heal step is registered at version 18 (gate advances past 17)", CHARACTER_STEPS.some(s => s.version === 18 && s.id === "quest-prose-escapes"));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

@@ -14,7 +14,7 @@
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
 import { mergeCodexTopics, ensureCodex, applyCodexUpdates } from "./codex.js";
-import { dedupeQuests } from "./quests.js";
+import { dedupeQuests, normalizeProse } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc } from "./personalArc.js";
@@ -472,6 +472,29 @@ export const CHARACTER_STEPS = [
         }
       }
       if (healed) console.log(`[reconcile] sng-216: healed ${healed} generated entit${healed === 1 ? "y" : "ies"} with a boolean/missing _gen → tracking object`);
+      return {}; // silent hygiene — no player-facing note
+    }
+  },
+  {
+    version: 18, id: "quest-prose-escapes", playerFacing: false,
+    // SNG-217. A model-authored structured quest (Silas's The Second Thread) stored paragraph breaks as the
+    // literal two characters `\n` inside its JSON strings; the renderer showed them verbatim. The write path
+    // now normalizes on store (structuredQuestRecord / applyQuestUpdates) and the render path renders the
+    // markdown (`**bold**` + breaks) — this step heals quests ALREADY in the save. Normalizes literal
+    // `\n`/`\t` → real breaks in every quest prose field. Idempotent: a real newline is never matched by the
+    // literal-escape regex, so running twice is a no-op. Silent — pure text hygiene, no player-facing note.
+    apply: (c) => {
+      let healed = 0;
+      const fix = (obj, key) => { if (!obj) return; const v = obj[key]; const n = normalizeProse(v); if (n !== v) { obj[key] = n; healed++; } };
+      const fixArr = (obj, key) => { if (!obj || !Array.isArray(obj[key])) return; obj[key] = obj[key].map(x => { const n = normalizeProse(x); if (n !== x) healed++; return n; }); };
+      for (const q of c.quests || []) {
+        if (!q || typeof q !== "object") continue;
+        fix(q, "premise"); fix(q, "stakes"); fix(q, "summary");
+        fixArr(q, "progress");
+        for (const s of q.stages || []) { fix(s, "objective"); fix(s, "condition"); fix(s, "change"); }
+        for (const o of q.outcomes || []) { fix(o, "summary"); fixArr(o, "narration"); }
+      }
+      if (healed) console.log(`[reconcile] sng-217: normalized ${healed} quest prose field(s) that stored literal escape sequences`);
       return {}; // silent hygiene — no player-facing note
     }
   },

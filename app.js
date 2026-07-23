@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.209";
+const APP_VERSION = "1.8.210";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -112,6 +112,11 @@ function helpEntry(id) { return CONTENT?.helpText?.[id] || null; }
 function infoDot(id) { return helpEntry(id) ? `<button class="info-dot" data-help="${esc(id)}" title="What's this?" aria-label="Explain this">ⓘ</button>` : ""; }
 /** Light markdown: **bold** only (the copy uses it), everything else escaped. */
 function mdLite(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>"); }
+/** SNG-217: a model-authored prose BODY (quest premise/stakes) — escape, then render the app's light
+ *  markdown (**bold**, the same convention mdLite uses) and real newlines as breaks. The write path
+ *  (quests.js normalizeProse) turns literal `\n` into a real newline first; this shows it as a line break
+ *  instead of collapsing it, and renders `**...**` as bold instead of leaving raw asterisks on screen. */
+function mdProse(s) { return esc(String(s ?? "")).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\n/g, "<br>"); }
 /** Show the explanation for a mechanic: the one-sentence `short`, `more` behind a toggle (progressive),
  *  and a link out to the Library for the deep read. A dismissible overlay — never blocks the screen. */
 function showHelp(id) {
@@ -6080,8 +6085,8 @@ function renderStructuredQuestDetail(q) {
   chrome(`<div class="screen" style="max-width:720px">
     <div class="codex-kind">${esc(q.status)}${q.tier ? " · " + esc(q.tier) : ""}${q.axis ? " · " + esc(String(q.axis).replace(/_/g, " ↔ ")) : ""}</div>
     <h2 style="margin-top:4px">${esc(q.title)}</h2>
-    <p class="map-details-desc">${esc(q.premise)}</p>
-    <div class="quest-stakes"><span class="quest-stakes-label">What's at stake</span> ${esc(q.stakes)}</div>
+    <p class="map-details-desc">${mdProse(q.premise)}</p>
+    <div class="quest-stakes"><span class="quest-stakes-label">What's at stake</span> ${mdProse(q.stakes)}</div>
     ${resolved ? `<div class="quest-outcome-banner"><strong>Outcome:</strong> ${esc(q.outcomeName || "resolved")}</div>` : ""}
     <h3 class="codex-title" style="font-size:15px;margin-top:16px">Stages</h3>
     ${q.stages.map(stageRow).join("")}
@@ -6148,7 +6153,7 @@ function renderQuestLog() {
   const availSection = avail.length ? `<div class="codex-group"><div class="codex-group-title">Available here (${avail.length})</div>${avail.map(def => `
       <div class="quest" style="margin:3px 0">
         <span class="quest-title">${esc(def.name)}</span> <span class="cost">${esc(String(def.axis || "").replace(/_/g, "↔"))}</span>
-        <div class="quest-note"><strong>Stakes:</strong> ${esc(String(def.stakes || ""))}</div>${/* SNG-076: authored stakes render IN FULL — the prose IS the game */""}
+        <div class="quest-note"><strong>Stakes:</strong> ${mdProse(def.stakes || "")}</div>${/* SNG-076: authored stakes render IN FULL — the prose IS the game; SNG-217: bold + line breaks, not raw ** and \n */""}
         <button class="btn" data-startquest="${esc(def.id)}" style="margin-top:6px">Take it on</button>
       </div>`).join("")}</div>` : "";
   chrome(`<div class="screen" style="max-width:680px">

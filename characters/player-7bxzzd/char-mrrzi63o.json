@@ -183,25 +183,40 @@
         "player": "I'll follow Freki and his intuition, but first I'll stop and talk to the Redline Warrior, ask for his name and ask if he'd care to join me in searching the Sera.",
         "summary": "Brynjar recruits Ragnar Solmyr at the bench — the Redline Warrior names himself and confirms he saw movement at the east fork before dawn; both head for the side door.",
         "narration": "Freki holds at the side door, patient, head still low. You hold up a hand toward the hound — wait — and cross back through the common room, past the two men eating without much interest in you, and out the main entrance into the morning square.\n\nThe Redline Warrior is where he was — bench near the Wardhouse, forearms on his knees, watching the square the way a man watches a river for fish. He clocks you before you're halfway across. His eyes go to your shoulder first, the same gap he named yesterday, then to your face.\n\nYou stop a step away — close enough to be direct, not so close it reads as a challenge. \"Looking for a woman who left before dawn and didn't say where,\" you say. \"Trail goes east from the inn's side door — could fork north toward the waygate or south toward the Stillhold road. Two directions to cover and a dog with a nose, but I don't know this ground yet.\" You meet his eyes. \"I'd know your name before I asked you to walk with me.\"\n\nHe looks at you for a long beat. Then he straightens off the bench — not fast, not slow, just the economy of someone whose body doesn't move without reason — and says: \"Ragnar Solmyr.\" The jawbone necklace shifts with the movement. \"I've been watching that fork since yesterday. Someone went through before the town was up.\" He says it plainly, as if handing you a fact he'd been waiting to give someone who earned it. \"I'll walk east with you. If it goes south, I know the Stillhold road four miles out.\"\n\n*✦ The Marchers: +1 — approached a Redline Warrior with plain speech and a named purpose — handled the form correctly.*"
+      },
+      {
+        "player": "Get moving immediately — Freki's trail is cooling; trust Ragnar to keep up",
+        "summary": "Brynjar, Ragnar, and Freki leave the Marchward by the east lane and follow the trail to the fork, where Freki turns south toward the Stillhold road.",
+        "narration": "Ragnar falls into step without a word as you cross back through the square. You push the side door open — Freki is exactly where you left it, head low, the cord-knot's scent still fresh in its nose — and the hound moves the moment your boot clears the threshold.\n\nThe east lane is narrow, mud-soft from the melt, and quiet. No one else is out this side of the Marchward yet. Freki sets a steady pace, not a run — purposeful, nose working low to the ground between strides, occasionally checking a wheel-rut or a boot-print pressed into the mud. You can see the fork maybe a hundred yards ahead: the lane splits, one branch curving north toward the tree-line where the waygate approach begins, the other bending south and wide toward the Stillhold road.\n\nRagnar moves beside you at the same unhurried pace, scanning the lane's edges without being asked. \"Movement I saw was south-fork,\" he says quietly. \"Two people, maybe. Before the light was full.\" He doesn't embellish it, doesn't say which two, doesn't say where they went after the fork — just gives you what he has, plainly, the way someone hands over a tool.\n\nFreki slows as the fork approaches, nose dropping almost to the ground. At the split it pauses, circles once, then angles south — toward the Stillhold road."
       }
     ],
     "lastTurn": {
-      "narration": "Freki holds at the side door, patient, head still low. You hold up a hand toward the hound — wait — and cross back through the common room, past the two men eating without much interest in you, and out the main entrance into the morning square.\n\nThe Redline Warrior is where he was — bench near the Wardhouse, forearms on his knees, watching the square the way a man watches a river for fish. He clocks you before you're halfway across. His eyes go to your shoulder first, the same gap he named yesterday, then to your face.\n\nYou stop a step away — close enough to be direct, not so close it reads as a challenge. \"Looking for a woman who left before dawn and didn't say where,\" you say. \"Trail goes east from the inn's side door — could fork north toward the waygate or south toward the Stillhold road. Two directions to cover and a dog with a nose, but I don't know this ground yet.\" You meet his eyes. \"I'd know your name before I asked you to walk with me.\"\n\nHe looks at you for a long beat. Then he straightens off the bench — not fast, not slow, just the economy of someone whose body doesn't move without reason — and says: \"Ragnar Solmyr.\" The jawbone necklace shifts with the movement. \"I've been watching that fork since yesterday. Someone went through before the town was up.\" He says it plainly, as if handing you a fact he'd been waiting to give someone who earned it. \"I'll walk east with you. If it goes south, I know the Stillhold road four miles out.\"\n\n*✦ The Marchers: +1 — approached a Redline Warrior with plain speech and a named purpose — handled the form correctly.*",
-      "sceneSummary": "Brynjar recruits Ragnar Solmyr at the bench — the Redline Warrior names himself and confirms he saw movement at the east fork before dawn; both head for the side door.",
+      "narration": "Ragnar falls into step without a word as you cross back through the square. You push the side door open — Freki is exactly where you left it, head low, the cord-knot's scent still fresh in its nose — and the hound moves the moment your boot clears the threshold.\n\nThe east lane is narrow, mud-soft from the melt, and quiet. No one else is out this side of the Marchward yet. Freki sets a steady pace, not a run — purposeful, nose working low to the ground between strides, occasionally checking a wheel-rut or a boot-print pressed into the mud. You can see the fork maybe a hundred yards ahead: the lane splits, one branch curving north toward the tree-line where the waygate approach begins, the other bending south and wide toward the Stillhold road.\n\nRagnar moves beside you at the same unhurried pace, scanning the lane's edges without being asked. \"Movement I saw was south-fork,\" he says quietly. \"Two people, maybe. Before the light was full.\" He doesn't embellish it, doesn't say which two, doesn't say where they went after the fork — just gives you what he has, plainly, the way someone hands over a tool.\n\nFreki slows as the fork approaches, nose dropping almost to the ground. At the split it pauses, circles once, then angles south — toward the Stillhold road.",
+      "sceneSummary": "Brynjar, Ragnar, and Freki leave the Marchward by the east lane and follow the trail to the fork, where Freki turns south toward the Stillhold road.",
       "choices": [
         {
-          "label": "Go back inside and follow Freki out the side door — Ragnar walks with you, east",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Press on — follow Freki south down the Stillhold road",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "travel"
           ],
           "trivial": true
         },
         {
-          "label": "Before you move — ask Ragnar what exactly he saw at the fork before dawn",
+          "label": "Pause at the fork — study the ground before committing south (boot-prints, weight, how many, how long ago)",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Ask Ragnar exactly what he saw — two people, their builds, their direction, whether either seemed unwilling",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -211,150 +226,110 @@
           "trivial": true
         },
         {
-          "label": "Show Ragnar the cloth bundle — the dried sprig and the knotted cord — and see if he reads the cord-knot",
+          "label": "Hold Freki and examine the cloth bundle again — look at the cord-knot properly now that you have daylight and the fork in front of you",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "negotiate"
+            "study"
           ],
           "trivial": false
-        },
-        {
-          "label": "Get moving immediately — Freki's trail is cooling; trust Ragnar to keep up",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The Marchward central square, morning — mud-packed ground, well and notice board visible, main door of the Crow and Thistle behind you, Wardhouse bench ahead. Early spring light, cool and flat.",
+        "setting": "The east lane outside the Crow and Thistle's side door — mud-soft, narrow, empty. The fork is a hundred yards ahead: north branch toward the waygate approach, south branch toward the Stillhold road. Early spring morning, cool, flat light.",
         "npcsPresent": [
           {
             "name": "Ragnar Solmyr",
-            "state": "Standing from the bench, facing Brynjar — committed, unhurried, waiting for the next move"
-          },
-          {
-            "name": "Doss Halveck",
-            "state": "Inside the Crow and Thistle at the bar, likely watching the side door where Freki waits"
+            "state": "Walking beside Brynjar, scanning the lane's edges, watching the fork"
           },
           {
             "name": "Freki",
-            "state": "At the side door of the Crow and Thistle, head low, holding the trail — waiting for Brynjar's return"
+            "state": "At the fork, nose to the ground — has turned south toward the Stillhold road"
           }
         ],
         "objects": [
           "Cloth bundle (in Brynjar's hand — folded linen, dried white-flowered sprig, knotted cord)",
-          "Wardhouse bench (where Ragnar was sitting)",
-          "Well and notice board (square center)",
-          "Side door of the Crow and Thistle — east lane beyond"
+          "Mud-soft lane with visible boot-prints and wheel-ruts from the melt",
+          "Fork in the road — north branch to waygate approach, south branch to Stillhold road"
         ],
         "threads": [
-          "Freki is holding a live trail at the side door — east fork: waygate north, Stillhold road south",
-          "Ragnar saw movement at the east fork before the town was up — details unknown",
+          "Freki has committed south — Stillhold road",
+          "Ragnar saw two people at the fork before full light — details unconfirmed",
           "The cord-knot's meaning is still unread",
-          "The trail is cooling"
+          "The trail is live but cooling"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "ragnar-solmyr",
           "name": "Ragnar Solmyr",
-          "role": "Redline Warrior, visiting the Marchward neutral ground",
-          "gender": "man",
-          "pronouns": "he/him",
-          "description": "Hard-built, jawbone necklace worn smooth with age. Moves without waste and watches a square the way a fisherman watches a river. Reads fighters on sight — yesterday it was your shoulder; today it is your face.",
-          "note": "Named himself when asked directly and committed to walk east without haggling — offered the information that he'd seen movement at the east fork before dawn as if he'd been holding it for someone who'd earn it.",
+          "note": "Fell into step without hesitation; confirmed the movement he saw was at the south fork, two people, before full light — gave the information plainly and without embellishment",
           "learned": [
-            "His name is Ragnar Solmyr",
-            "He observed movement at the east fork before the town was up this morning",
-            "He knows the Stillhold road four miles out"
+            "Movement at the south fork before dawn — two people, direction south toward Stillhold road"
           ],
-          "skillsObserved": [
-            "combat assessment",
-            "silent observation",
-            "knowledge of local roads"
-          ],
-          "relationshipDelta": 2,
-          "status": "active",
-          "statusNote": "Committed to walk east with Brynjar — now standing in the square, ready to move"
+          "statusNote": "Walking south down the east lane with Brynjar and Freki, watching the trail's edges"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "ragnar-solmyr",
-          "label": "Ragnar Solmyr",
-          "kind": "person",
-          "entityId": "ragnar-solmyr",
-          "fact": "His name is Ragnar Solmyr — a Redline Warrior visiting the Marchward neutral ground. He saw movement at the east fork before dawn and knows the Stillhold road four miles out. Committed to search for Sera without hesitation when asked directly.",
+          "topic": "sera-of-the-stillhold",
+          "label": "Sera of the Stillhold",
+          "kind": "mystery",
+          "fact": "Freki confirmed the trail at the fork goes south — toward the Stillhold road. Ragnar saw two people at the south fork before full light. Sera was not alone when she left, or someone followed her.",
           "links": [
-            "sera-of-the-stillhold",
-            "the-marchward",
-            "brynjar-andyrsson-thread"
+            "ragnar-solmyr",
+            "the-stillhold",
+            "the-marchward"
           ]
-        }
-      ],
-      "deeds": [
-        {
-          "description": "Approached a Redline Warrior as a peer, named the task plainly, and earned his name and his company",
-          "tags": [
-            "honor",
-            "directness",
-            "recruit"
-          ],
-          "weight": 1,
-          "communityId": "riven.marchward"
-        }
-      ],
-      "standingOps": [
-        {
-          "people": "marcher",
-          "delta": 1,
-          "why": "approached a Redline Warrior with plain speech and a named purpose — handled the form correctly"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange in the square before moving"
+        "why": "Short walk from the Crow and Thistle side door to the fork — a few minutes at most"
       },
-      "offer": {
-        "thing": "Ragnar volunteered that he saw movement at the east fork before dawn — a detail he'd been holding, waiting for someone who earned it",
-        "from": "His nature as a reader of patterns and his days watching the square — he notices, and he gives what he notices to someone who shows up right"
-      }
+      "placeUpdates": [
+        {
+          "note": "The east fork outside the Crow and Thistle side door — muddy, boot-prints visible in the melt. Freki's trail confirms the south branch leads toward the Stillhold road; Ragnar saw two people here before dawn.",
+          "subPlace": {
+            "name": "East Fork",
+            "parent": "The Marchward",
+            "note": "The split in the east lane — north branch to the waygate approach, south branch to the Stillhold road. Visible boot-prints in the spring mud.",
+            "visited": true
+          }
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "brynjar-andyrsson-thread",
+          "note": "Freki's trail leads south toward the Stillhold road — Sera was not alone at the fork, and the hunt is moving"
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The Marchward central square, morning — mud-packed ground, well and notice board visible, main door of the Crow and Thistle behind you, Wardhouse bench ahead. Early spring light, cool and flat.",
+      "setting": "The east lane outside the Crow and Thistle's side door — mud-soft, narrow, empty. The fork is a hundred yards ahead: north branch toward the waygate approach, south branch toward the Stillhold road. Early spring morning, cool, flat light.",
       "npcsPresent": [
         {
           "name": "Ragnar Solmyr",
-          "state": "Standing from the bench, facing Brynjar — committed, unhurried, waiting for the next move"
-        },
-        {
-          "name": "Doss Halveck",
-          "state": "Inside the Crow and Thistle at the bar, likely watching the side door where Freki waits"
+          "state": "Walking beside Brynjar, scanning the lane's edges, watching the fork"
         },
         {
           "name": "Freki",
-          "state": "At the side door of the Crow and Thistle, head low, holding the trail — waiting for Brynjar's return"
+          "state": "At the fork, nose to the ground — has turned south toward the Stillhold road"
         }
       ],
       "objects": [
         "Cloth bundle (in Brynjar's hand — folded linen, dried white-flowered sprig, knot",
-        "Wardhouse bench (where Ragnar was sitting)",
-        "Well and notice board (square center)",
-        "Side door of the Crow and Thistle — east lane beyond"
+        "Mud-soft lane with visible boot-prints and wheel-ruts from the melt",
+        "Fork in the road — north branch to waygate approach, south branch to Stillhold r"
       ],
       "threads": [
-        "Freki is holding a live trail at the side door — east fork: waygate north, Stillhold road south",
-        "Ragnar saw movement at the east fork before the town was up — details unknown",
+        "Freki has committed south — Stillhold road",
+        "Ragnar saw two people at the fork before full light — details unconfirmed",
         "The cord-knot's meaning is still unread",
-        "The trail is cooling"
+        "The trail is live but cooling"
       ]
     }
   },
@@ -420,48 +395,15 @@
       ],
       "stageIndex": 0,
       "completedStages": [],
-      "progress": [],
+      "progress": [
+        "Freki's trail leads south toward the Stillhold road — Sera was not alone at the fork, and the hunt is moving"
+      ],
       "aliases": [],
       "startedAt": "2026-07-19T16:06:41.716Z",
       "startedWorldDay": 19
     }
   ],
   "npcRegistry": {
-    "redline-warrior": {
-      "id": "redline-warrior",
-      "name": "Redline Warrior",
-      "role": "Marcher duelist, visiting the Marchward neutral ground",
-      "description": "Hard-built, jawbone necklace worn smooth with age, moves across a square without sound. Reads fighters on sight.",
-      "firstMet": {
-        "locationId": "the_marchward",
-        "day": 1
-      },
-      "relationship": 1,
-      "history": [
-        "[d1] Crossed the square to deliver an accurate assessment of Brynjar's left-shoulder lead — a gap above the collarbone — then returned to his bench without waiting for a response."
-      ],
-      "knownFacts": [
-        "Reads fighting stances on sight",
-        "Identified Brynjar's collarbone gap as a liability against a patient opponent",
-        "Offered it as professional courtesy, not threat"
-      ],
-      "skillsObserved": [
-        "combat assessment",
-        "silent movement"
-      ],
-      "status": "active",
-      "gender": "man",
-      "pronouns": "he/him",
-      "statusNote": "Sitting on bench near the Wardhouse, watching the square",
-      "domains": {
-        "primary": "marcher"
-      },
-      "domainsSource": "role",
-      "lastSeen": {
-        "locationId": "the_marchward",
-        "day": 1
-      }
-    },
     "kjotve-olafsson": {
       "id": "kjotve-olafsson",
       "name": "Kjotve Olafsson",
@@ -585,22 +527,29 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Named himself when asked directly and committed to walk east without haggling — offered the information that he'd seen movement at the east fork before dawn as if he'd been holding it for someone who'd earn it."
+        "[d1] Named himself when asked directly and committed to walk east without haggling — offered the information that he'd seen movement at the east fork before dawn as if he'd been holding it for someone who'd earn it.",
+        "[d1] Crossed the square to deliver an accurate assessment of Brynjar's left-shoulder lead — a gap above the collarbone — then returned to his bench without waiting for a response.",
+        "[d1] Fell into step without hesitation; confirmed the movement he saw was at the south fork, two people, before full light — gave the information plainly and without embellishment"
       ],
       "knownFacts": [
         "His name is Ragnar Solmyr",
         "He observed movement at the east fork before the town was up this morning",
-        "He knows the Stillhold road four miles out"
+        "He knows the Stillhold road four miles out",
+        "Reads fighting stances on sight",
+        "Identified Brynjar's collarbone gap as a liability against a patient opponent",
+        "Offered it as professional courtesy, not threat",
+        "Movement at the south fork before dawn — two people, direction south toward Stillhold road"
       ],
       "skillsObserved": [
         "combat assessment",
         "silent observation",
-        "knowledge of local roads"
+        "knowledge of local roads",
+        "silent movement"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Committed to walk east with Brynjar — now standing in the square, ready to move",
+      "statusNote": "Walking south down the east lane with Brynjar and Freki, watching the trail's edges",
       "domains": {
         "primary": "marcher"
       },
@@ -608,14 +557,18 @@
       "lastSeen": {
         "locationId": "the_marchward",
         "day": 1
-      }
+      },
+      "aliases": [
+        "Redline Warrior"
+      ]
     }
   },
   "placeMemory": {
     "the_marchward": {
       "visits": 1,
       "notes": [
-        "[d1] Brynjar arrived in the Marchward on World-day 20, early morning. First impressions: Redline warrior on bench near Wardhouse, Stillhold woman in grey, waygate anchor-stone visible but avoided by locals."
+        "[d1] Brynjar arrived in the Marchward on World-day 20, early morning. First impressions: Redline warrior on bench near Wardhouse, Stillhold woman in grey, waygate anchor-stone visible but avoided by locals.",
+        "[d1] The east fork outside the Crow and Thistle side door — muddy, boot-prints visible in the melt. Freki's trail confirms the south branch leads toward the Stillhold road; Ragnar saw two people here before dawn."
       ],
       "flags": {},
       "subPlaces": {
@@ -639,6 +592,13 @@
           "day": 1,
           "visited": true,
           "note": "The inn on the south side of the Marchward square. Doss keeps it. Common room is the real information hub — road-escort arrangements, gossip, and morning meals. Freki paused at the third stool from…"
+        },
+        "east-fork": {
+          "name": "East Fork",
+          "parentId": "the_marchward",
+          "day": 1,
+          "visited": true,
+          "note": "The split in the east lane — north branch to the waygate approach, south branch to the Stillhold road. Visible boot-prints in the spring mud."
         }
       }
     }
@@ -720,7 +680,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -845,7 +805,8 @@
           "[d1] Arrived alone seven days ago — unusual; checked in properly, no declared business, asked for lodging at the Crow and Thistle. Room empty next morning, innkeep Doss didn't see her leave. Family posted the bill knowing roughly why she came but wanting her back without questions.",
           "[d1] Sera left the Crow and Thistle before dawn of her own will — room latched from inside, side door. She spent her evening watching the entrance, thinking-quiet, waiting or watching for someone. Something was left at the third stool from the left at the bar around the same time.",
           "[d1] A second person was present the evening Sera stayed — sat at the third stool, watched her without speaking, left before dawn, left behind a folded linen with a dried white-flowered sprig and a knotted cord. The cord-knot's meaning is unknown. Freki reads the stool as a live trail.",
-          "[d1] Freki read the cloth bundle — dried white-flowered sprig and knotted cord — and tracked toward the side door Sera used before dawn. The trail leads east, to a fork: waygate approach north, Stillhold road south."
+          "[d1] Freki read the cloth bundle — dried white-flowered sprig and knotted cord — and tracked toward the side door Sera used before dawn. The trail leads east, to a fork: waygate approach north, Stillhold road south.",
+          "[d1] Freki confirmed the trail at the fork goes south — toward the Stillhold road. Ragnar saw two people at the south fork before full light. Sera was not alone when she left, or someone followed her."
         ],
         "links": [
           "marchward-notice-board",
@@ -854,24 +815,11 @@
           "the-marchward",
           "crow-and-thistle",
           "the-crow-and-thistle",
-          "doss-halveck"
+          "doss-halveck",
+          "ragnar-solmyr"
         ],
         "aliases": [],
         "createdDay": 1,
-        "updatedDay": 1
-      },
-      "redline-warrior": {
-        "id": "redline-warrior",
-        "label": "Redline Warrior",
-        "kind": "person",
-        "facts": [
-          "[d1] Marcher duelist, visiting the Marchward neutral ground",
-          "[d1] [while away] Over three days of sparring on the neutral ground, Redline Warrior has drawn two other visiting duelists into a loose, unspoken rivalry — testing footwork and reading each other without anyone yet naming the challenge openly."
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 1,
-        "entityId": "redline-warrior",
         "updatedDay": 1
       },
       "companion-bristle": {
@@ -964,14 +912,18 @@
         "kind": "person",
         "facts": [
           "[d1] Redline Warrior, visiting the Marchward neutral ground",
-          "[d1] His name is Ragnar Solmyr — a Redline Warrior visiting the Marchward neutral ground. He saw movement at the east fork before dawn and knows the Stillhold road four miles out. Committed to search for Sera without hesitation when asked directly."
+          "[d1] His name is Ragnar Solmyr — a Redline Warrior visiting the Marchward neutral ground. He saw movement at the east fork before dawn and knows the Stillhold road four miles out. Committed to search for Sera without hesitation when asked directly.",
+          "[d1] Marcher duelist, visiting the Marchward neutral ground",
+          "[d1] [while away] Over three days of sparring on the neutral ground, Redline Warrior has drawn two other visiting duelists into a loose, unspoken rivalry — testing footwork and reading each other without anyone yet naming the challenge openly."
         ],
         "links": [
           "sera-of-the-stillhold",
           "the-marchward",
           "brynjar-andyrsson-thread"
         ],
-        "aliases": [],
+        "aliases": [
+          "Redline Warrior"
+        ],
         "createdDay": 1,
         "entityId": "ragnar-solmyr",
         "updatedDay": 1
@@ -1003,20 +955,52 @@
           "entityId": "halvra-stenn"
         },
         "relinked": []
+      },
+      {
+        "at": "2026-07-23T01:59:53.655Z",
+        "source": {
+          "id": "redline-warrior",
+          "label": "Redline Warrior",
+          "kind": "person",
+          "facts": [
+            "[d1] Marcher duelist, visiting the Marchward neutral ground",
+            "[d1] [while away] Over three days of sparring on the neutral ground, Redline Warrior has drawn two other visiting duelists into a loose, unspoken rivalry — testing footwork and reading each other without anyone yet naming the challenge openly."
+          ],
+          "links": [],
+          "aliases": [],
+          "createdDay": 1,
+          "entityId": "redline-warrior",
+          "updatedDay": 1
+        },
+        "targetId": "ragnar-solmyr",
+        "targetBefore": {
+          "facts": [
+            "[d1] Redline Warrior, visiting the Marchward neutral ground",
+            "[d1] His name is Ragnar Solmyr — a Redline Warrior visiting the Marchward neutral ground. He saw movement at the east fork before dawn and knows the Stillhold road four miles out. Committed to search for Sera without hesitation when asked directly."
+          ],
+          "links": [
+            "sera-of-the-stillhold",
+            "the-marchward",
+            "brynjar-andyrsson-thread"
+          ],
+          "aliases": [],
+          "entityId": "ragnar-solmyr"
+        },
+        "relinked": []
       }
     ]
   },
   "tendencies": {
-    "leadership": 10.331976841573113,
-    "cerebral": 1.6159896813604173,
-    "strategic": 3.4286608227865174,
-    "ruthless": 0.7763296208564376,
-    "social": 6.455239962884521
+    "leadership": 10.073677420533784,
+    "cerebral": 1.5755899393264068,
+    "strategic": 3.3429443022168543,
+    "ruthless": 0.7569213803350267,
+    "social": 6.293858963812408
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 12,
+  "actionCount": 13,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1142,8 +1126,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784771926677,
-  "rev": 58,
+  "updatedAt": 1784772121604,
+  "rev": 61,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1308,7 +1292,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 15
+    "riven_marches": 16
   },
   "practice": {
     "schemaVersion": 1,
@@ -1367,10 +1351,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T01:58:46.673Z",
+      "lastAt": "2026-07-23T02:02:01.601Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 9
+      "beats": 10
     }
   ],
   "_pendingArrival": null,
@@ -1386,22 +1370,23 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 9,
-    "choices": 9,
-    "scene": 9,
-    "npcUpdates": 9,
-    "placeUpdates": 2,
+    "sceneSummary": 10,
+    "choices": 10,
+    "scene": 10,
+    "npcUpdates": 10,
+    "placeUpdates": 3,
     "generateRequest": 2,
     "moveTo": 2,
-    "timeOps": 9,
-    "codexUpdates": 9,
+    "timeOps": 10,
+    "codexUpdates": 10,
     "sceneEnded": 2,
     "characterDeltas": 2,
     "offer": 2,
     "deeds": 1,
-    "standingOps": 1
+    "standingOps": 1,
+    "questUpdates": 1
   },
-  "_opTurns": 9,
+  "_opTurns": 10,
   "_opLedger": {
     "offer": {
       "applied": 2,
@@ -1417,5 +1402,15 @@
         "day": 1
       }
     ]
-  }
+  },
+  "corrections": [
+    {
+      "kind": "merge",
+      "id": "redline-warrior",
+      "into": "ragnar-solmyr",
+      "why": "player: same person (Redline Warrior → Ragnar Solmyr)",
+      "worldDay": 23,
+      "at": "2026-07-23T02:00:18.543Z"
+    }
+  ]
 }

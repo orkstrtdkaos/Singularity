@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 20,
-  "xp": 1967,
+  "xp": 1975,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -132,7 +132,7 @@
   "maxHealth": 125,
   "health": 125,
   "maxEnergy": 195,
-  "energy": 162,
+  "energy": 160,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1731,67 +1731,81 @@
         "player": "Ask Veth what she would braid with the perimeter — she has seen more ashwarden combinations than you have, and the question is honest",
         "summary": "Veth names three potential braids with the Boundary-Stone oval — Palework-attunement, Wither-framing, and a theoretical draw-commons — and then asks the second lesson question: did belief precede the Word, or follow it.",
         "narration": "Veth is quiet for a moment. Not the quiet of someone thinking — the quiet of someone deciding how much of the answer to give at once.\n\nThen she says, 'Three things.' She holds up one finger. 'Palework. Attuned to the space inside the perimeter — a mercy field, a battlefield-ease. Every ending within the oval gets a hand under it. The line keeps the work from bleeding out.' A second finger. 'Wither. Not to the people inside, to the structure around them. Wall, door, obstacle — you put the frame around the thing you need to fail and it fails on schedule.' She lowers her hand. 'The third is harder to name. Not a braid I have done. But a sustained draw — if you could hold it across the perimeter instead of by touch — everyone inside the oval sharing what the field has to give. Not healing. Distribution. The Boundary-Stone as a commons.'\n\nShe looks at the ward's edge. The rain is still sheeting clean around it. 'The perimeter is the problem in all three. You need it to be load-bearing without being rigid — a frame that passes the braid through without eating it.' She glances at Pell. 'Your ironwork is doing that right now. That is not nothing.'\n\nPell says, from the ward's edge, 'It reads like a jointed hinge. Not welded.' She does not look up from where her attention is running along the seam. 'Welded would hold more weight. Jointed takes more stress before it fails.'\n\nVeth nods at that — a slow, precise movement. 'The hinge is the whole argument,' she says. Then she looks back at you and the second question comes out plain. 'The Shielding Word required you to believe what you said. You said the edge holds. Did you believe it before you said it, or did saying it make it true?'"
+      },
+      {
+        "player": "Sit with the question rather than answer quickly — let the ward itself be the answer, still live around you",
+        "summary": "Silas answers Veth's second lesson question inside the storm-ward — the belief was already true; the Word named it. Veth receives the answer and turns it: right, and also wrong, and a decade of work between those two.",
+        "narration": "You do not answer immediately. You let the question sit in the air the way the ward sits in the air — simply present, doing its work.\n\nVeth watches your face. She does not prompt you. Outside, the sleet hisses against the invisible boundary and falls away. The birches bend. Inside the four-pace circle, nothing moves.\n\nThen you say, 'It was already true. I said it because it was already true. The Word named what was there — it did not make it.' You do not elaborate. The ward is still standing. That is the elaboration.\n\nVeth looks at the ward's edge for a long moment. She breathes out slowly through her nose. Then she says, 'Yes. That is the right answer. And it is the wrong answer too, and you will spend the next ten years finding out why.' She says it without satisfaction, without cruelty — the flat delivery of someone returning a tool to a shelf, exactly where it belongs. Pell's attention shifts along the inner seam. She says nothing, but her hand unclenches at her side. She heard something in that, through the ironsense or through the plainness of it, and she filed it."
       }
     ],
     "lastTurn": {
-      "narration": "Veth is quiet for a moment. Not the quiet of someone thinking — the quiet of someone deciding how much of the answer to give at once.\n\nThen she says, 'Three things.' She holds up one finger. 'Palework. Attuned to the space inside the perimeter — a mercy field, a battlefield-ease. Every ending within the oval gets a hand under it. The line keeps the work from bleeding out.' A second finger. 'Wither. Not to the people inside, to the structure around them. Wall, door, obstacle — you put the frame around the thing you need to fail and it fails on schedule.' She lowers her hand. 'The third is harder to name. Not a braid I have done. But a sustained draw — if you could hold it across the perimeter instead of by touch — everyone inside the oval sharing what the field has to give. Not healing. Distribution. The Boundary-Stone as a commons.'\n\nShe looks at the ward's edge. The rain is still sheeting clean around it. 'The perimeter is the problem in all three. You need it to be load-bearing without being rigid — a frame that passes the braid through without eating it.' She glances at Pell. 'Your ironwork is doing that right now. That is not nothing.'\n\nPell says, from the ward's edge, 'It reads like a jointed hinge. Not welded.' She does not look up from where her attention is running along the seam. 'Welded would hold more weight. Jointed takes more stress before it fails.'\n\nVeth nods at that — a slow, precise movement. 'The hinge is the whole argument,' she says. Then she looks back at you and the second question comes out plain. 'The Shielding Word required you to believe what you said. You said the edge holds. Did you believe it before you said it, or did saying it make it true?'",
-      "sceneSummary": "Veth names three potential braids with the Boundary-Stone oval — Palework-attunement, Wither-framing, and a theoretical draw-commons — and then asks the second lesson question: did belief precede the Word, or follow it.",
+      "narration": "You do not answer immediately. You let the question sit in the air the way the ward sits in the air — simply present, doing its work.\n\nVeth watches your face. She does not prompt you. Outside, the sleet hisses against the invisible boundary and falls away. The birches bend. Inside the four-pace circle, nothing moves.\n\nThen you say, 'It was already true. I said it because it was already true. The Word named what was there — it did not make it.' You do not elaborate. The ward is still standing. That is the elaboration.\n\nVeth looks at the ward's edge for a long moment. She breathes out slowly through her nose. Then she says, 'Yes. That is the right answer. And it is the wrong answer too, and you will spend the next ten years finding out why.' She says it without satisfaction, without cruelty — the flat delivery of someone returning a tool to a shelf, exactly where it belongs. Pell's attention shifts along the inner seam. She says nothing, but her hand unclenches at her side. She heard something in that, through the ironsense or through the plainness of it, and she filed it.",
+      "sceneSummary": "Silas answers Veth's second lesson question inside the storm-ward — the belief was already true; the Word named it. Veth receives the answer and turns it: right, and also wrong, and a decade of work between those two.",
       "choices": [
         {
-          "label": "Answer honestly — 'I believed it the moment the Stone was down. The Word named something that was already there.'",
+          "label": "Ask what makes it wrong — the decade of work Veth just named is not a small thing to leave unnamed",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Answer honestly — 'I said it first. The saying was what made it real.'",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Sit with the question rather than answer quickly — let the ward itself be the answer, still live around you",
+          "label": "Let it stand — the lesson is complete enough, and the squall is nearly done; use the last few minutes to check the Waymarker's pull toward the Crossing",
           "attribute": "mental",
           "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "devote"
-          ],
-          "abilityId": "the-attended-end",
-          "trivial": true
-        },
-        {
-          "label": "Test it now — deliberately weaken your certainty and see if the ward notices",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "risky"
+            "careful"
           ],
           "abilityId": "order_sense",
+          "energyCost": 2,
           "trivial": false
+        },
+        {
+          "label": "Release the ward as the squall passes — step out into the clearing air and press on to the Crossing while the afternoon holds",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Veth the second half of her own answer — she named the load-bearing hinge problem with Pell's ironsense last lesson; does the same problem live in the question she just asked",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The March Road, open stretch heading northeast. The spring squall is fully underway — heavy rain and sleet sheeting sideways outside the ward, wind bending the birch stands to the west. Inside Silas's ward, four paces in every direction, the air is still and dry. Afternoon light, early spring, pewter-grey. Roughly twenty minutes of squall remain.",
+        "setting": "The March Road, open stretch heading northeast. The spring squall is easing — heavy rain and sleet still sheeting sideways outside the ward, but lighter now, the sky beginning to thin at the western edge. Inside the storm-ward, four paces in every direction, the air is still and dry. Afternoon light, early spring, pewter-grey. Roughly ten minutes of squall remain.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Attention running along the ward's inner seam through ironsense — named the join as a jointed hinge, not welded."
+            "state": "Standing inside the ward, hand unclenched at her side — she filed something from Silas's answer, through ironsense or through the plainness of it."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing, second question just asked — watching Silas's face for how long he takes to answer."
+            "state": "Standing, answer received and turned — watching Silas with the flat attention of someone who has set the next problem in motion and is waiting to see if he notices."
           },
           {
             "name": "Huginn",
@@ -1800,13 +1814,13 @@
         ],
         "objects": [
           "Ward boundary — invisible, marked by rain and sleet sheeting around it roughly four paces out",
-          "March Road ahead — running northeast, weather-dark, not yet visible past the squall",
-          "Field-stone wall with roofed stock shelter — still visible roughly twenty minutes' walk ahead",
+          "March Road ahead — running northeast, weather-dark, beginning to lighten at the horizon",
+          "Field-stone wall with roofed stock shelter — still visible roughly twenty minutes northeast",
           "Waymarker, warm in the pack"
         ],
         "threads": [
-          "Veth's second lesson question is live and unanswered: did the belief precede the Word, or did the saying make it true?",
-          "The squall will pass in roughly twenty minutes — afternoon ground to the Crossing is at stake",
+          "Veth has named the answer both right and wrong — the decade of work between those two positions is unnamed",
+          "The squall is nearly done — ten minutes, then afternoon ground to the Crossing is open",
           "The Crossing and Edvar Crane wait ahead"
         ]
       },
@@ -1815,62 +1829,63 @@
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "role": "Former Ashwarden warden, traveling companion",
-          "note": "Named three potential Boundary-Stone braids: Palework-attunement for a mercy field, Wither for structural targeting, and a theoretical draw-commons. Then posed the second lesson question: belief before the Word, or belief from it?",
+          "note": "Received Silas's second-question answer — named it right and wrong simultaneously, without cruelty, and placed the decade of work between those two positions without explaining it. A teacher returning a tool to the shelf.",
           "learned": [
-            "Three Boundary-Stone braid candidates: Palework-attuned mercy field, Wither-framing for structural targets, and a theoretical sustained-draw commons across the perimeter",
-            "The load-bearing hinge problem — the perimeter must pass the braid through without eating it; Pell's ironsense is currently doing that work"
+            "Silas's answer: the Word names what is already true; belief precedes utterance. And Veth's counter: it is right, and also wrong, and the difference is a decade."
           ],
           "skillsObserved": [
-            "naming three advanced braid candidates from a single observed technique in sequence",
-            "identifying the structural hinge problem in Pell's ironsense work without prompting"
+            "placing a correct answer beside its own limitation without closing the question"
           ],
-          "statusNote": "On the March Road — inside the ward, second lesson question just posed and live."
+          "relationshipDelta": 0,
+          "statusNote": "On the March Road — inside the ward, second lesson complete, the decade's question now live."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, traveling companion",
-          "note": "Named the ward's join as a jointed hinge, not welded — load-bearing without rigidity, more stress-tolerant than a weld.",
+          "note": "Her hand unclenched at her side as Silas answered — she heard something in it, through ironsense or through the plainness of the statement, and filed it without naming it aloud.",
           "learned": [
-            "The Boundary-Stone-Shielding Word join reads as a jointed hinge through ironsense — flexible under stress, not fused"
+            "The Shielding Word names what is already true — the certainty precedes the craft, and the craft names it."
           ],
-          "skillsObserved": [
-            "naming the mechanical character of a craft-join through ironsense — hinge versus weld"
-          ],
-          "statusNote": "On the March Road — inside the ward, attention still running along the seam."
+          "statusNote": "On the March Road — inside the ward, filing something heard from Silas's lesson answer."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "boundary-stone-braid-theory",
-          "label": "Boundary-Stone as Braid Chassis",
+          "topic": "the-shielding-word",
+          "label": "The Shielding Word — Belief and Utterance",
           "kind": "lore",
-          "fact": "Veth named three advanced braid candidates for the Boundary-Stone oval: (1) Palework-attuned mercy field — the line keeps the work from bleeding out; (2) Wither-framing for structural targets inside or around the perimeter; (3) a theoretical draw-commons — sustained Draw Down spread across everyone inside the oval rather than by touch. The load-bearing problem in all three is the hinge: the perimeter must pass the braid through without eating it. Pell's ironsense is currently doing that work in the storm-ward.",
+          "fact": "The Word does not make the certainty — it names what is already true. Belief precedes utterance. And Veth's counter: that answer is right, and also wrong, and a decade of practice lives in the gap between the two.",
           "links": [
-            "precursor-signs-in-the-valley",
+            "ashwarden",
             "the-second-thread",
-            "the-attended-end",
-            "ashwarden"
+            "precursor-signs-in-the-valley"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a lesson exchange inside the storm-ward — a few minutes of teaching"
-      }
+        "why": "A few minutes inside the squall-ward — the lesson's second question answered, the squall still running."
+      },
+      "deeds": [],
+      "ledgerEvents": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "questUpdates": [],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The March Road, open stretch heading northeast. The spring squall is fully underway — heavy rain and sleet sheeting sideways outside the ward, wind bending the birch stands to the west. Inside Silas's ward, four paces in every direction, the air is still and dry. Afternoon light, early spring, pewter-grey. Roughly twenty minutes of squall remain.",
+      "setting": "The March Road, open stretch heading northeast. The spring squall is easing — heavy rain and sleet still sheeting sideways outside the ward, but lighter now, the sky beginning to thin at the western edge. Inside the storm-ward, four paces in every direction, the air is still and dry. Afternoon light, early spring, pewter-grey. Roughly ten minutes of squall remain.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Attention running along the ward's inner seam through ironsense — named the join as a jointed hinge, not welded."
+          "state": "Standing inside the ward, hand unclenched at her side — she filed something from Silas's answer, through ironsense or th"
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing, second question just asked — watching Silas's face for how long he takes to answer."
+          "state": "Standing, answer received and turned — watching Silas with the flat attention of someone who has set the next problem in"
         },
         {
           "name": "Huginn",
@@ -1879,13 +1894,13 @@
       ],
       "objects": [
         "Ward boundary — invisible, marked by rain and sleet sheeting around it roughly f",
-        "March Road ahead — running northeast, weather-dark, not yet visible past the squ",
+        "March Road ahead — running northeast, weather-dark, beginning to lighten at the ",
         "Field-stone wall with roofed stock shelter — still visible roughly twenty minute",
         "Waymarker, warm in the pack"
       ],
       "threads": [
-        "Veth's second lesson question is live and unanswered: did the belief precede the Word, or did the saying make it true?",
-        "The squall will pass in roughly twenty minutes — afternoon ground to the Crossing is at stake",
+        "Veth has named the answer both right and wrong — the decade of work between those two positions is unnamed",
+        "The squall is nearly done — ten minutes, then afternoon ground to the Crossing is open",
         "The Crossing and Edvar Crane wait ahead"
       ]
     }
@@ -2742,7 +2757,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Watched the arc and the landing from the forge corner — the look she gives iron that has answered correctly.",
         "[d13] Crossed the yard to Silas after landing, made the temperature-check touch, assessed the wings' structural grain through the bank. Her complete approval delivered in one technical sentence.",
         "[d13] Watched the quiet arc. Her full assessment already given — she is letting the moment stand.",
         "[d13] Fell in beside Silas without ceremony as the party moved out. Nothing wasted.",
@@ -2751,17 +2765,18 @@
         "[d13] Eyes on the road — did not ask about the Waymarker check; the morning is still settling.",
         "[d13] Watched Silas braid two crafts mid-road — said 'Oh.' at the ward seating. Dry and satisfied inside it.",
         "[d13] Named the perimeter as a frame — 'A frame takes what you put in it' — and listed Palework, Wither, and a hypothetical draw as possible braids. Practical, not a plan.",
-        "[d13] Named the ward's join as a jointed hinge, not welded — load-bearing without rigidity, more stress-tolerant than a weld."
+        "[d13] Named the ward's join as a jointed hinge, not welded — load-bearing without rigidity, more stress-tolerant than a weld.",
+        "[d13] Her hand unclenched at her side as Silas answered — she heard something in it, through ironsense or through the plainness of the statement, and filed it without naming it aloud."
       ],
       "knownFacts": [
-        "The cairn-line's buried design reads for interval and weight — it recognized Pell walking correctly, not as a craftsman but as a person matching the rhythm",
         "She believes Silas's father walked this same road at the same interval",
         "The cairn-line's interval carries a worn shape — someone walked it many times before; the feel of it is like a grip already pressed into a borrowed tool",
         "The buried cairn-line design reads her at every correct interval — persistent, patient, like something making a note",
         "The hollow settling when Silas sat with the badger was perceptible to Pell through ironsense — she cannot name it yet but she felt it.",
         "Boundary-Stone and Shielding Word can braid into a sustained place-ward — she watched it seat",
         "The Boundary-Stone oval can serve as a chassis for braided crafts — Palework, Wither, or a sustained draw if the skill existed to hold it steady across a perimeter",
-        "The Boundary-Stone-Shielding Word join reads as a jointed hinge through ironsense — flexible under stress, not fused"
+        "The Boundary-Stone-Shielding Word join reads as a jointed hinge through ironsense — flexible under stress, not fused",
+        "The Shielding Word names what is already true — the certainty precedes the craft, and the craft names it."
       ],
       "skillsObserved": [
         "translating an unfamiliar craft-concept into a working irons",
@@ -2772,7 +2787,7 @@
         "naming the mechanical character of a craft-join through iron"
       ],
       "status": "active",
-      "statusNote": "On the March Road — inside the ward, attention still running along the seam.",
+      "statusNote": "On the March Road — inside the ward, filing something heard from Silas's lesson answer.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -3443,7 +3458,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Named the attended-weight plainly from outside observation — identified that the hollow's death-density did not thin across open ground, and framed this as a permanent truth about Silas now. Noted Huginn's silence as its own kind of answer.",
         "[d13] Watched the third, quiet arc — the restrained form of the technique. Has not spoken yet. The first lesson is still waiting in her.",
         "[d13] Gave Silas the first lesson she promised — the difference between an ending that needs witness and one that needs room. Delivered without ceremony, precise, and complete. Huginn acknowledged it.",
         "[d13] Gave the second lesson — named it not as a lesson yet but as a question to carry into the next ending: witness, or room. Will know which when the work shows it.",
@@ -3452,30 +3466,31 @@
         "[d13] Read Silas's hand-motion at the pack without asking — held the silence correctly.",
         "[d13] Tested the ward's edge with her palm — inside and outside. Expression as close to delighted as she allows. Has questions.",
         "[d13] Filed the answer — line first, then certainty — and named that Silas was already thinking past it. A second question is forming.",
-        "[d13] Named three potential Boundary-Stone braids: Palework-attunement for a mercy field, Wither for structural targeting, and a theoretical draw-commons. Then posed the second lesson question: belief before the Word, or belief from it?"
+        "[d13] Named three potential Boundary-Stone braids: Palework-attunement for a mercy field, Wither for structural targeting, and a theoretical draw-commons. Then posed the second lesson question: belief before the Word, or belief from it?",
+        "[d13] Received Silas's second-question answer — named it right and wrong simultaneously, without cruelty, and placed the decade of work between those two positions without explaining it. A teacher returning a tool to the shelf."
       ],
       "knownFacts": [
-        "The first lesson she intends to teach: the difference between an ending that needs witness and one that needs room",
         "The Waymarker's second layer has seated into the post — the bond between holder and post is complete.",
         "Her laboratory requirements: east wall, the window kept clear for weather-reading, a peg near the door, a table, a hearth, a non-leaning chair.",
         "The distinction between a witnessed ending and one given room is the core ashwarden judgment — getting it wrong in either direction is a failure of craft, not merely a failure of feeling.",
         "The second lesson is not delivered in a yard — it is given in the work; it asks the student to name, afterward, which kind of ending they attended",
         "The Held Place technique — watched the braid seat from outside",
         "Three Boundary-Stone braid candidates: Palework-attuned mercy field, Wither-framing for structural targets, and a theoretical sustained-draw commons across the perimeter",
-        "The load-bearing hinge problem — the perimeter must pass the braid through without eating it; Pell's ironsense is currently doing that work"
+        "The load-bearing hinge problem — the perimeter must pass the braid through without eating it; Pell's ironsense is currently doing that work",
+        "Silas's answer: the Word names what is already true; belief precedes utterance. And Veth's counter: it is right, and also wrong, and the difference is a decade."
       ],
       "skillsObserved": [
-        "naming the core ashwarden judgment plainly and without waste",
         "reading Huginn's acknowledgment as confirmation without expl",
         "structuring a lesson as a question the student earns the ans",
         "recognizing a third-thing emergence from two-craft braid — t",
         "naming three advanced braid candidates from a single observe",
-        "identifying the structural hinge problem in Pell's ironsense"
+        "identifying the structural hinge problem in Pell's ironsense",
+        "placing a correct answer beside its own limitation without c"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On the March Road — inside the ward, second lesson question just posed and live.",
+      "statusNote": "On the March Road — inside the ward, second lesson complete, the decade's question now live.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -4373,11 +4388,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-23T20:50:28.141Z",
+    "lastSharedReadAt": "2026-07-23T21:42:04.199Z",
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
-    "lastGenCount": 572,
-    "turnsSinceOffer": 5,
+    "lastGenCount": 573,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Cassiel pauses his writing and says, without looking up: 'Eleven years. I noticed things. Along the line.' He does not elaborate yet — he…",
@@ -5873,21 +5888,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.69610178806754,
-    "cerebral": 20.66499553151438,
-    "social": 7.404245553323553,
-    "generous": 4.047545818530652,
-    "cautious": 5.06628609654775,
-    "physical": 0.7168008086391229,
-    "risky": 2.088192689977573,
-    "ruthless": 0.010960556368522579,
-    "carousing": 0.42363896476281854,
-    "amorous": 4.266068041518167,
-    "patient": 0.29284480461348283,
-    "stealth": 0.004248339650487739,
-    "devotion": 1.2183263942798521,
-    "craft": 0.7116127730810448,
-    "leadership": 0.021624520306420647
+    "strategic": 16.278699243365853,
+    "cerebral": 21.148370643226517,
+    "social": 7.2191394144904635,
+    "generous": 3.946357173067385,
+    "cautious": 4.939628944134056,
+    "physical": 0.6988807884231448,
+    "risky": 2.0359878727281338,
+    "ruthless": 0.010686542459309514,
+    "carousing": 0.4130479906437481,
+    "amorous": 4.159416340480213,
+    "patient": 0.28552368449814575,
+    "stealth": 0.004142131159225545,
+    "devotion": 2.1878682344228557,
+    "craft": 0.6938224537540186,
+    "leadership": 0.02108390729876013
   },
   "aptitudes": [
     "strategist",
@@ -5896,7 +5911,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 703,
+  "actionCount": 704,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6286,8 +6301,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784842568267,
-  "rev": 1128,
+  "updatedAt": 1784843228853,
+  "rev": 1131,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8042,7 +8057,7 @@
       "palework": 29,
       "deathsense": 33,
       "shadowstep": 19,
-      "the-attended-end": 37,
+      "the-attended-end": 38,
       "wildcraft": 6,
       "the_raised_thing": 12,
       "the_ended_threat": 4,
@@ -8416,7 +8431,7 @@
   "syncedAt": 1784838745449,
   "teachers": {},
   "regionsKnown": {
-    "valley": 470,
+    "valley": 471,
     "the_palelands": 6,
     "the_center": 62
   },
@@ -8541,10 +8556,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T21:36:08.263Z",
+      "lastAt": "2026-07-23T21:47:08.849Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 37
+      "beats": 38
     }
   ],
   "company": [
@@ -8744,7 +8759,7 @@
   "_opEmitted": {
     "sceneSummary": 76,
     "choices": 76,
-    "characterDeltas": 32,
+    "characterDeltas": 33,
     "scene": 76,
     "npcUpdates": 64,
     "factUpdates": 6,
@@ -8752,7 +8767,7 @@
     "codexUpdates": 42,
     "timeOps": 70,
     "imagePrompt": 2,
-    "sceneEnded": 16,
+    "sceneEnded": 17,
     "itemUpdates": 2,
     "questUpdates": 3,
     "offer": 7,

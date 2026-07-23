@@ -7278,6 +7278,39 @@ await (async () => {
   check("219: the bar is sticky + in-flow (pushes content, hides with [hidden])", /#sticky-back \{[^}]*position: sticky/.test(cssSrc219) && /#sticky-back\[hidden\] \{ display: none/.test(cssSrc219));
 }
 
+// ---- SNG-211: the "while you were away" surface ranks by stakes — a real event never drowns under ambient ----
+{
+  // Erik's exact case: one real world event (water crisis) buried under three ambient offscreen textures.
+  const mk = () => ({ worldState: { unseenNews: [
+    { text: "Vash re-grinds a lens.", tier: "ambient", worldDay: 10 },
+    { text: "Calvar takes his usual reading.", tier: "ambient", worldDay: 10 },
+    { text: "The Water Crisis has worsened — First Sickness: upstream fisher families fall ill.", tier: "event", worldDay: 10 },
+    { text: "Pip charms a stall-keeper.", tier: "ambient", worldDay: 10 }
+  ] } });
+  const surfaced = takeUnseenNews(mk());
+  check("211: the real EVENT ranks FIRST, above the ambient texture (Erik's buried water crisis)", /Water Crisis/.test(surfaced[0].text) && surfaced[0].tier === "event");
+  check("211: ambient is CAPPED (≤2), so three lens-grindings can't crowd the surface", surfaced.filter(n => n.tier === "ambient").length <= 2);
+  check("211: ambient is not KILLED — a touch still surfaces (GUARD: rank it, don't remove it)", surfaced.some(n => n.tier === "ambient"));
+  check("211: every real event survives the cap; only ambient is dropped", surfaced.filter(n => n.tier === "event").length === 1);
+
+  // untagged (legacy) items are treated as events — nothing meaningful is ever capped by accident.
+  const legacy = takeUnseenNews({ worldState: { unseenNews: [{ text: "old news, no tier", worldDay: 1 }, { text: "amb", tier: "ambient", worldDay: 1 }] } });
+  check("211: an untagged legacy item counts as an EVENT (conservative — never capped)", legacy[0].text === "old news, no tier");
+
+  // many events, no ambient starvation: events fill first, ambient drops before any event.
+  const manyEv = { worldState: { unseenNews: [
+    ...Array.from({ length: 9 }, (_, i) => ({ text: `event ${i}`, tier: "event", worldDay: i })),
+    { text: "ambient a", tier: "ambient" }, { text: "ambient b", tier: "ambient" }, { text: "ambient c", tier: "ambient" }
+  ] } };
+  const many = takeUnseenNews(manyEv);
+  check("211: when events fill the surface, ambient is dropped before any event is (events never starved)", many.every(n => n.tier === "event") && many.length === 8);
+
+  // the emitters stamp their own stakes (Q1): the ambient sources are tagged, the event sources default to event.
+  const wtSrc211 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  check("211 Q1: the ambient sources (want-move, wake-fade) stamp tier:'ambient' at emit", /tier: "ambient"/.test(wtSrc211) && /source === "legend" \|\| resolved \|\| outcome === "problem"/.test(wtSrc211));
+  check("211: takeUnseenNews ranks via rankNews (surface shaped, ws.news log untouched)", /return rankNews\(items, opts\)/.test(wtSrc211));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

@@ -214,7 +214,7 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
   if (news.length) {
     // SNG-041: stamp the absolute world-day (shared calendar) alongside the local journey-day.
     const wd = absoluteWorldDay();
-    const stamped = news.map(n => ({ day: currentDay, worldDay: wd, text: n }));
+    const stamped = news.map(n => ({ day: currentDay, worldDay: wd, text: n, tier: "event" })); // SNG-211: delegated-work outcomes are real, not ambient
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -263,7 +263,7 @@ export async function runGenerationTurn({ character, content, now = Date.now(), 
   }
 
   if (news.length) {
-    const stamped = news.map(t => ({ day: ws.lastTickDay ?? null, worldDay: absoluteWorldDay(now), text: smartClamp(t, 400) }));
+    const stamped = news.map(t => ({ day: ws.lastTickDay ?? null, worldDay: absoluteWorldDay(now), text: smartClamp(t, 400), tier: "event" })); // SNG-211: an arc surfacing/resolving is a real event
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -371,7 +371,7 @@ export async function syncSharedWorld({ character, content }) {
   if (news.length) {
     // each item carries its OWN absolute world-day (a cross-character event keeps the date it
     // actually happened; a local merge stamps now) — so the shared calendar stays coherent.
-    const stamped = news.map(n => ({ day: ws.lastTickDay, worldDay: n.worldDay ?? absoluteWorldDay(), text: smartClamp(n.text, 600), ...(n.impactsLocal ? { impactsLocal: true } : {}) }));
+    const stamped = news.map(n => ({ day: ws.lastTickDay, worldDay: n.worldDay ?? absoluteWorldDay(), text: smartClamp(n.text, 600), tier: n.tier || "event", ...(n.impactsLocal ? { impactsLocal: true } : {}) })); // SNG-211: a cross-character arc move is a real event
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -642,9 +642,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   const news = [];
   // SNG-204: open wakes decay over world-time; one nobody engaged closes unspawned (the world moves on). This
   // runs every tick, even when no figure is in scope — so a wake left unacted-on still fades on schedule.
-  for (const w of decayWakes(character, currentWorldDay)) news.push({ text: `The moment to act on ${w.source.arcId ? String(w.source.arcId).replace(/^arc_/, "").replace(/_/g, " ") : "a passing consequence"} has closed — the world moved on.`, worldDay: currentWorldDay });
+  for (const w of decayWakes(character, currentWorldDay)) news.push({ text: `The moment to act on ${w.source.arcId ? String(w.source.arcId).replace(/^arc_/, "").replace(/_/g, " ") : "a passing consequence"} has closed — the world moved on.`, worldDay: currentWorldDay, tier: "ambient" }); // SNG-211: a fade is texture, not a headline
   if (!population.length || !evolveFn) {
-    if (news.length) { const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: smartClamp(n.text, 600) })); ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP); ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP); }
+    if (news.length) { const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: smartClamp(n.text, 600), tier: n.tier || "event" })); ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP); ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP); }
     return news;
   }
   const batch = population.slice(0, 4);
@@ -672,7 +672,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
               const clash = resolveEpicClash(def, rivalDef, rng);
               const winner = clash.winnerId === def.id ? def : rivalDef, loser = clash.loserId === def.id ? def : rivalDef;
               const res = applyEpicClashOutcome(ws, winner, loser, clash.kind, currentWorldDay);
-              for (const line of res.news) news.push({ text: line, worldDay: currentWorldDay });
+              for (const line of res.news) news.push({ text: line, worldDay: currentWorldDay, tier: "event" }); // SNG-211: an epic clash/death is a real event
               if (res.event) { character.worldEvents = character.worldEvents || []; character.worldEvents.push(res.event); }
               if (res.codex) { try { applyCodexUpdates(character, [res.codex], { day: ws.lastTickDay ?? null }); } catch { /* graveyard record is a convenience */ } }
             }
@@ -689,12 +689,16 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       const headline = resolved ? `${fig.name}: ${note} — and that thread has run its course.`
         : outcome === "problem" ? `${fig.name} has hit trouble — ${note}`
         : `${fig.name}: ${note}`;
-      if (moved || outcome === "problem") news.push({ text: headline, worldDay: currentWorldDay });
+      // SNG-211: a legend acting, a thread RESOLVING, or a real setback is an EVENT; an ordinary want-move
+      // ("Vash re-grinds a lens") is AMBIENT texture — it fills the remainder of the surface, never crowds
+      // the real event out of it (§2, GUARD: rank ambient, don't kill it).
+      const tier = (fig.source === "legend" || resolved || outcome === "problem") ? "event" : "ambient";
+      if (moved || outcome === "problem") news.push({ text: headline, worldDay: currentWorldDay, tier });
     }
   } catch (err) { console.warn("[offscreen-gen] skipped:", err.message); return []; }
 
   if (news.length) {
-    const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: smartClamp(n.text, 600) }));
+    const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: smartClamp(n.text, 600), tier: n.tier || "event" }));
     ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
@@ -715,11 +719,25 @@ async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDa
   return callClaudeJSON([{ role: "user", content }], { task: "world-tick", system: sys, maxTokens: 1024 });
 }
 
-/** Pull (and clear) news the player hasn't seen — shown once on return to play. */
-export function takeUnseenNews(character) {
+/** SNG-211: rank the "while you were away" surface by STAKES so a real world event (an arc move, a crisis
+ *  escalation, an epic's deed or death, a resolution) always outranks ambient offscreen texture ("Vash
+ *  re-grinds a lens") for the scarce slots. Events first, in the order they happened; ambient fills only the
+ *  REMAINDER, capped — the lived-in feel stays a touch, never a feed (GUARD: rank ambient, don't kill it).
+ *  Items with no tier are treated as events (never capped) — conservative: nothing meaningful is dropped.
+ *  Does not mutate the persistent `ws.news` log; only shapes what surfaces on return. */
+function rankNews(items = [], { maxAmbient = 2, maxTotal = 8 } = {}) {
+  const list = Array.isArray(items) ? items : [];
+  const isAmbient = n => n?.tier === "ambient";
+  const events = list.filter(n => !isAmbient(n));   // real events keep their order, and their slots first
+  const ambient = list.filter(isAmbient).slice(0, maxAmbient);
+  return [...events, ...ambient].slice(0, maxTotal); // events fill first; ambient is dropped before any event is
+}
+
+/** Pull (and clear) news the player hasn't seen — shown once on return to play, ranked by stakes (SNG-211). */
+export function takeUnseenNews(character, opts = {}) {
   const items = character.worldState?.unseenNews || [];
   if (character.worldState) character.worldState.unseenNews = [];
-  return items;
+  return rankNews(items, opts);
 }
 
 /** Recent news block for the GM prompt — rumors NPCs might repeat. */

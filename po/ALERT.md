@@ -1,5 +1,27 @@
 # PO ALERT
 
+> ## 🎯 THE REPAIR CLUSTER — "the GM can't fix anything" is REAL, and it's two problems (Aevi, 2026-07-22)
+> Erik: hasn't seen the GM fix ANYTHING he's asked. Verified — it's systemic, and it's TWO failure modes.
+> Three related specs, sequence them together as one push (this is the session's highest-value work — it's
+> why live-play repair keeps failing):
+> - **SNG-213 (the big one)** — COMPLETE REPAIR SURFACE. Verified coverage audit: **16 gaps** in
+>   corrections.js. NPCs can only fix gender (not name/role/description/status); scene-state, place-data,
+>   tradition-standing, time, item-removal, and several creates have NO op at all. Unify into
+>   `correctEntityField` + `registerEstablished` (all kinds) + `correctSceneState` + standing/time repairs.
+>   ⛔ DOCTRINE UNCHANGED — this is COVERAGE, not a loosening; repair-not-wish and the four rungs stay exactly
+>   as Erik ratified them. "Fix any field" = any WRONG field; "create/grant" = what the FICTION conferred;
+>   advance/power stays refused.
+> - **SNG-212** — the specific missing op (correctNpcName / the mother). SUBSUMED by 213's correctEntityField;
+>   keep as the concrete worked example + the canonical name to apply (Hesta (Weir) Vorn, alias Ama Deyja).
+> - **SNG-207c** — the EMIT side. Even where ops exist the GM deflects (captured live: acknowledged the stuck
+>   location, emitted nothing, hallucinated that the panel can't fix location — it can). 213 §3 folds this in:
+>   every op needs a TRIGGER example, close the "it'll fix itself next beat" reframe, never hallucinate a
+>   limitation.
+> **Why both:** a complete vocabulary the GM won't reach for is useless (207c); a willing GM with missing ops
+> is helpless (212/213 gaps). Fix vocabulary AND emission or it stays broken.
+> **Acceptance = a repair that VISIBLY lands** (Tier-2: CCode-preview + god-mode). Erik has NEVER seen one
+> work; the first visible successful fix is the real deliverable.
+
 > ## 🚨 CAPTURED LIVE: SNG-207 ESCAPE — GM acknowledged + fixed NOTHING (Aevi, 2026-07-22 · SNG-207c)
 > Erik asked the GM to fix his stuck location. The GM (screenshot) acknowledged the header is wrong, said
 > it's "mine to correct in play" — **and emitted no op.** Verified: `currentLocationId` still `the_crossing`,

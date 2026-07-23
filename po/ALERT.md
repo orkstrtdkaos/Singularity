@@ -1,5 +1,16 @@
 # PO ALERT
 
+> ## 🎲 Encounters roll but the pool is STARVED (Aevi, 2026-07-22 · SNG-225) — NOT a rate problem
+> Erik on the HIGHEST pacing sees no encounters. Verified: SNG-127 shipped, the roll FIRES. The bug is
+> downstream — `pickEncounter`/`isEligible`: at the gen-waygate only **7 of 58 encounters are eligible, ALL
+> beneficial/benign/beautiful — zero dangerous/theft/chase/fight**. Root: generated locations have
+> **`dangerLevel: null`**, and `null→0` makes `minDanger>0` eliminate all 24 dangerous encounters (a
+> null-danger place can NEVER roll a fight). Same "gen-location missing a field" family as SNG-216/the null
+> worldPos. Fix (SNG-225): derive dangerLevel on mint + backfill, floor `dangerOf` against null, a pacing
+> floor so the highest setting actually DELIVERS stakes; + Aevi re-tags some encounters valley-wide (the "*"
+> pool is currently all-peaceful). ⚠️ Do NOT re-crank the rate — the roll works; it's the POOL. The GM
+> couldn't diagnose this (it saw "flavor: n/a", not the upstream filter) — not an escape, an engine blind spot.
+
 > ## 🎨 Skill images — the moment gets art + every craft gets a face (Aevi, 2026-07-22 · SNG-222 §5 + SNG-223)
 > Erik: put image-gen on skill discovery, and images for every skill — "keep the amazing scene images going
 > into the celebration and catalogs." Verified: the scene/place/moment images ALL run through ONE generalized

@@ -136,7 +136,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.06643452091942498,
+    "spectrumId": -0.06311279487345373,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.26339120175346753,
     "mechanical_spiritual": 0.25513542055105926,
@@ -1883,102 +1883,85 @@
         "player": "Step back and let Pell take the anchor re-closure herself — you have built the channel, she knows the iron, and this last seating is the kind of work she does best.",
         "summary": "Silas steps back and lets Pell close the anchor — she seats the copper wire to the socket throat cleanly, reads the channel tip-to-butt, and calls it done in two words.",
         "narration": "You set the file down and step back from the anvil.\n\nPell looks at you once — a quick read, the kind she does without thinking — and then she picks up the copper wire coil and moves into the space you have left. No ceremony about it. She runs her thumb along the channel you opened, feeling the seat, and gives a short nod: clean cut, right width, exactly what the shadow model showed. Then she threads the wire from the socket throat forward, her hands unhurried, letting the ironsense do the reading where her fingers cannot go.\n\nHuginn shifts on the bellows-post. Just once. Then settles again.\n\nThe anchor re-closure takes less than two minutes. Pell seats the wire's end into the throat junction with the flat of her thumbnail, presses it firm, and lifts her hands away. She turns Memory over — point up now, the fuller facing the light — and looks at the channel from the tip back toward the socket. She tilts the spear slightly. The copper wire holds flush the whole length. No gap at the throat, no lift at the crown.\n\n\"Done,\" she says to Aldric."
+      },
+      {
+        "player": "Ask Pell if there is anything she would like to add - or if you should add a Weirmark.  The tell her you want to test the shadow summoning before sealing it with the Word.",
+        "summary": "Pell recommends the Weirmark, then confirms the shadow summoning is true — every thread reads clean in the duplicate before the Shielding Word is spoken.",
+        "narration": "You ask Pell plainly: is there anything she would add, or should you seat a Weirmark before the Word?\n\nShe looks at Memory for a long moment, turning the spear once in her hands so the copper wire catches the forge light. Then she sets it back on the anvil, point-up, the way you had it.\n\n\"The Weirmark,\" she says. \"Yes. If this shadow is going to answer your call from any distance — from any room, any road — it wants your mark in the grain. Otherwise it knows the design but not the caller. It could drift.\"\n\nHuginn makes a low sound from the bellows-post. Not agreement, exactly. Acknowledgment.\n\nPell steps back and folds her arms. \"Test it first, though. Before the Word. If the summoning is wrong, you want to know while you can still reach it.\"\n\nSo you reach for the shadow-spear.\n\nThe conjuration rises clean — the life-sized duplicate, every channel exactly where you seated it, the fuller's new width plain in the shadow's geometry, the copper wire's path honest to the thread. It holds its shape without effort on your part. It answers you. You turn it in the air and it turns. You bring it low and it comes. The shadow knows Memory's grain the way Memory knows its own iron.\n\nPell watches with her ironsense open — you can see it in the quality of her stillness. After a moment she nods. \"It's true,\" she says. \"All of it. The channel is in there. The threads read from the shadow the same way they read from the spear.\" A pause. \"Seat the mark. Then speak the Word.\""
       }
     ],
     "lastTurn": {
-      "narration": "You set the file down and step back from the anvil.\n\nPell looks at you once — a quick read, the kind she does without thinking — and then she picks up the copper wire coil and moves into the space you have left. No ceremony about it. She runs her thumb along the channel you opened, feeling the seat, and gives a short nod: clean cut, right width, exactly what the shadow model showed. Then she threads the wire from the socket throat forward, her hands unhurried, letting the ironsense do the reading where her fingers cannot go.\n\nHuginn shifts on the bellows-post. Just once. Then settles again.\n\nThe anchor re-closure takes less than two minutes. Pell seats the wire's end into the throat junction with the flat of her thumbnail, presses it firm, and lifts her hands away. She turns Memory over — point up now, the fuller facing the light — and looks at the channel from the tip back toward the socket. She tilts the spear slightly. The copper wire holds flush the whole length. No gap at the throat, no lift at the crown.\n\n\"Done,\" she says to Aldric.",
-      "sceneSummary": "Silas steps back and lets Pell close the anchor — she seats the copper wire to the socket throat cleanly, reads the channel tip-to-butt, and calls it done in two words.",
+      "narration": "You ask Pell plainly: is there anything she would add, or should you seat a Weirmark before the Word?\n\nShe looks at Memory for a long moment, turning the spear once in her hands so the copper wire catches the forge light. Then she sets it back on the anvil, point-up, the way you had it.\n\n\"The Weirmark,\" she says. \"Yes. If this shadow is going to answer your call from any distance — from any room, any road — it wants your mark in the grain. Otherwise it knows the design but not the caller. It could drift.\"\n\nHuginn makes a low sound from the bellows-post. Not agreement, exactly. Acknowledgment.\n\nPell steps back and folds her arms. \"Test it first, though. Before the Word. If the summoning is wrong, you want to know while you can still reach it.\"\n\nSo you reach for the shadow-spear.\n\nThe conjuration rises clean — the life-sized duplicate, every channel exactly where you seated it, the fuller's new width plain in the shadow's geometry, the copper wire's path honest to the thread. It holds its shape without effort on your part. It answers you. You turn it in the air and it turns. You bring it low and it comes. The shadow knows Memory's grain the way Memory knows its own iron.\n\nPell watches with her ironsense open — you can see it in the quality of her stillness. After a moment she nods. \"It's true,\" she says. \"All of it. The channel is in there. The threads read from the shadow the same way they read from the spear.\" A pause. \"Seat the mark. Then speak the Word.\"",
+      "sceneSummary": "Pell recommends the Weirmark, then confirms the shadow summoning is true — every thread reads clean in the duplicate before the Shielding Word is spoken.",
       "choices": [
         {
-          "label": "Speak the Shielding Word now — the last step. Name the shadow-spear's certainty aloud into the channel before the anchor cools.",
+          "label": "Seat the Weirmark into the shadow-channel now — your mark in the grain, so the conjuration knows its caller across any distance",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "craft"
+          ],
+          "abilityId": "the_shadow_work",
+          "trivial": true
+        },
+        {
+          "label": "Speak the Shielding Word — seal the conjuration's certainty and complete the work",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.3,
-            "concrete_abstract": 0.2
-          },
+          "difficulty": 0,
+          "intentTags": [
+            "devote"
+          ],
+          "abilityId": "the_shielding_word",
+          "trivial": true
+        },
+        {
+          "label": "Seat the Weirmark and speak the Word in one motion — the mark names the caller, the Word seals the certainty, and the work is done",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 15,
           "intentTags": [
             "craft",
             "devote"
           ],
-          "abilityId": "the_shielding_word",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "the_shadow_work",
+          "trivial": false
         },
         {
-          "label": "Read the finished work with Order-Sense before the Word — confirm the channel and the whole design are exactly as the shadow model showed, no gap, no missed load.",
+          "label": "Test the shadow-spear's reach a second time — push it to the edge of the room, hold it at the far wall, and see how far the call extends before the seating",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.4
-          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Pell what she felt in the iron when she closed the anchor — let her reading shape where the Word is spoken and what it names.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Call Crane's name in your mind — he was supposed to be at the waygate at first light, and first light is now.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside Pell's forge at dawn — fire properly up, pale early-spring light through the single high window. Memory lies on the anvil point-up, the fuller widened, the shadow-channel seated in copper wire, anchor re-closed at the socket throat.",
+        "setting": "Inside Pell's forge at dawn — fire properly up, pale early-spring light through the single high window. Memory lies on the anvil point-up, fuller widened, shadow-channel seated in copper wire, anchor closed at the socket throat. The shadow-duplicate hangs in the air, life-sized and true, just tested and confirmed.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing to the left of the anvil, hands at her sides, reading Memory from tip to socket — the anchor closure just finished."
+            "state": "Standing back from the anvil with arms folded, ironsense open — she has just confirmed the shadow reads true and named her recommendation plainly: Weirmark, then the Word."
           },
           {
             "name": "Huginn",
-            "state": "On the bellows-post, settled after one shift. Watching the spear."
+            "state": "On the bellows-post, settled. Made one sound of acknowledgment. Watching."
           }
         ],
         "objects": [
-          "Memory — on the anvil, point up, fuller widened, shadow-channel seated and anchor re-closed",
-          "Shadow-duplicate of the full modification — still hanging, life-sized",
+          "Memory — on the anvil, point up, fully modified, shadow-channel seated",
+          "Shadow-duplicate of Memory — hanging in the air, life-sized, just tested and confirmed true",
           "File — on the bench",
           "Copper wire coil — on the bench, partially used",
           "Chalk Blanks (pair) — in Silas's kit",
           "Forge fire — properly up"
         ],
         "threads": [
-          "Shielding Word not yet spoken — the conjuration's condition, the last step before the work is complete",
+          "Weirmark not yet seated — Pell's named recommendation, the last step before the Word",
+          "Shielding Word not yet spoken — the conjuration's sealing condition",
           "Crane's departure timing — he was due at the waygate at first light"
         ]
       },
@@ -1987,42 +1970,44 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Took the anchor re-closure from Silas without being asked — read the channel by ironsense from socket to tip, pressed the wire home with her thumbnail, called it done in two words.",
-          "skillsObserved": [
-            "anchor closure by ironsense feel under no direction",
-            "copper-wire seating at a socket throat by thumbnail pressure"
+          "note": "Named the Weirmark as necessary for distance-summoning — without the caller's mark in the grain, the shadow knows the design but not who calls it and could drift. Confirmed the test: the shadow reads true, all threads present. Directed: seat the mark, then speak the Word.",
+          "learned": [
+            "The shadow-spear needs a Weirmark in the grain to answer a call across distance — otherwise the design is present but the caller is not identified"
           ],
-          "statusNote": "At the forge, anchor re-closure complete, waiting on the Shielding Word."
+          "skillsObserved": [
+            "ironsense confirmation of shadow-duplicate fidelity"
+          ],
+          "statusNote": "At the forge, work confirmed true, waiting on the Weirmark and the Word."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief focused exchange at the anvil — the anchor closure and a step back"
-      },
-      "sceneEnded": false
+        "why": "A brief consultation and a first summoning test — minutes, not an hour."
+      }
     },
     "sceneState": {
-      "setting": "Inside Pell's forge at dawn — fire properly up, pale early-spring light through the single high window. Memory lies on the anvil point-up, the fuller widened, the shadow-channel seated in copper wire, anchor re-closed at the socket throat.",
+      "setting": "Inside Pell's forge at dawn — fire properly up, pale early-spring light through the single high window. Memory lies on the anvil point-up, fuller widened, shadow-channel seated in copper wire, anchor closed at the socket throat. The shadow-duplicate hangs in the air, life-sized and true, just tested and confirmed.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing to the left of the anvil, hands at her sides, reading Memory from tip to socket — the anchor closure just finis"
+          "state": "Standing back from the anvil with arms folded, ironsense open — she has just confirmed the shadow reads true and named h"
         },
         {
           "name": "Huginn",
-          "state": "On the bellows-post, settled after one shift. Watching the spear."
+          "state": "On the bellows-post, settled. Made one sound of acknowledgment. Watching."
         }
       ],
       "objects": [
-        "Memory — on the anvil, point up, fuller widened, shadow-channel seated and ancho",
-        "Shadow-duplicate of the full modification — still hanging, life-sized",
+        "Memory — on the anvil, point up, fully modified, shadow-channel seated",
+        "Shadow-duplicate of Memory — hanging in the air, life-sized, just tested and con",
         "File — on the bench",
         "Copper wire coil — on the bench, partially used",
         "Chalk Blanks (pair) — in Silas's kit",
         "Forge fire — properly up"
       ],
       "threads": [
-        "Shielding Word not yet spoken — the conjuration's condition, the last step before the work is complete",
+        "Weirmark not yet seated — Pell's named recommendation, the last step before the Word",
+        "Shielding Word not yet spoken — the conjuration's sealing condition",
         "Crane's departure timing — he was due at the waygate at first light"
       ]
     }
@@ -3041,7 +3026,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Took Silas on her own terms in the pre-dawn quiet — decisive, unhurried, entirely herself; the warmth between them real and grounded.",
         "[d14] Took Silas on her own terms in the pre-dawn gray — present, unhurried, entirely herself.",
         "[d14] Took the last of the pre-dawn warmth with Silas on her own terms, then settled loose against him in the quiet after — present and unhurried throughout.",
         "[d14] Woke at Silas's word without negotiation — forge first, then food. Walking beside him now.",
@@ -3050,28 +3034,29 @@
         "[d14] Named the socket-end channel-seat and the Raised Thing's existing presence as the weave — reading the shadow model with her ironsense, specific and economical.",
         "[d14] Named the Shielding Word's logic precisely: spoken once at the seating, inherited by every call — a shadow that arrives certain of itself.",
         "[d14] Laid the copper wire along the channel to check fit by feel, confirmed the seat, stepped back without comment. Present and reading.",
-        "[d14] Took the anchor re-closure from Silas without being asked — read the channel by ironsense from socket to tip, pressed the wire home with her thumbnail, called it done in two words."
+        "[d14] Took the anchor re-closure from Silas without being asked — read the channel by ironsense from socket to tip, pressed the wire home with her thumbnail, called it done in two words.",
+        "[d14] Named the Weirmark as necessary for distance-summoning — without the caller's mark in the grain, the shadow knows the design but not who calls it and could drift. Confirmed the test: the shadow reads true, all threads present. Directed: seat the mark, then speak the Word."
       ],
       "knownFacts": [
-        "The brigandine's thread held through the hunt — she'd leave it",
         "The shadow copy of Memory's intention requires widening the fuller's channel to carry the secondary thread alongside the anchor — a morning's work with both hands on the shaft.",
         "Silas names her brilliance directly and means it, separate from any work she has done",
         "The Working Model sequence for Memory's upgrade: widen the fuller, seat the shadow-channel, re-close the anchor — in that order.",
         "The secondary thread needs a channel-end seat at the socket throat, not a shared node at the tip — tip is Hunter's Strike's ground; socket is the shadow's home when the spear is still.",
         "The Raised Thing is already the weave that holds the binding; it does not need to be added again.",
         "The Shielding Word built into the strike reads as certainty declared before the spear moves — power or delay depending on direction of use.",
-        "The Shielding Word is not a thread on the blade but the condition of the conjuring — seated once, inherited by every subsequent call of the shadow-spear."
+        "The Shielding Word is not a thread on the blade but the condition of the conjuring — seated once, inherited by every subsequent call of the shadow-spear.",
+        "The shadow-spear needs a Weirmark in the grain to answer a call across distance — otherwise the design is present but the caller is not identified"
       ],
       "skillsObserved": [
-        "ironsense reading of a shadow design duplicate",
         "practical sequencing of thread-node separation under conflic",
         "reading a conjuring-design's load-bearing condition and nami",
         "ironsense confirmation of channel-seat fit by touch alone",
         "anchor closure by ironsense feel under no direction",
-        "copper-wire seating at a socket throat by thumbnail pressure"
+        "copper-wire seating at a socket throat by thumbnail pressure",
+        "ironsense confirmation of shadow-duplicate fidelity"
       ],
       "status": "active",
-      "statusNote": "At the forge, anchor re-closure complete, waiting on the Shielding Word.",
+      "statusNote": "At the forge, work confirmed true, waiting on the Weirmark and the Word.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -5019,7 +5004,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 591,
-    "turnsSinceOffer": 25,
+    "turnsSinceOffer": 26,
     "recentOffers": [
       {
         "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the…",
@@ -6535,21 +6520,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.98818252413524,
-    "cerebral": 14.55600939225899,
-    "social": 10.24049343031053,
-    "generous": 3.896222034421278,
-    "cautious": 4.565242892200216,
-    "physical": 0.2433706739828156,
-    "risky": 0.21388778549132595,
-    "ruthless": 0.1891862120959876,
-    "carousing": 0.04339216416945235,
-    "amorous": 6.216990286028957,
-    "patient": 0.260281373499777,
-    "stealth": 0.0004351456473432894,
-    "devotion": 0.22984335902771297,
-    "craft": 3.8152694293556553,
-    "leadership": 2.001365494665702
+    "strategic": 23.438477961031857,
+    "cerebral": 14.192109157452514,
+    "social": 9.984481094552766,
+    "generous": 3.798816483560746,
+    "cautious": 4.451111819895211,
+    "physical": 0.2372864071332452,
+    "risky": 0.2085405908540428,
+    "ruthless": 0.1844565567935879,
+    "carousing": 0.04230736006521604,
+    "amorous": 6.061565528878233,
+    "patient": 0.25377433916228254,
+    "stealth": 0.00042426700615970717,
+    "devotion": 0.22409727505202015,
+    "craft": 3.719887693621764,
+    "leadership": 1.9513313572990594
   },
   "aptitudes": [
     "strategist",
@@ -6557,7 +6542,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 793,
+  "actionCount": 794,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6947,8 +6932,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784908748051,
-  "rev": 1289,
+  "updatedAt": 1784909025502,
+  "rev": 1290,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9761,7 +9746,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 531,
+    "valley": 532,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9896,10 +9881,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T15:59:08.049Z",
+      "lastAt": "2026-07-24T16:03:45.500Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 44
+      "beats": 45
     }
   ],
   "company": [
@@ -10099,15 +10084,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 163,
-    "choices": 163,
+    "sceneSummary": 164,
+    "choices": 164,
     "characterDeltas": 64,
-    "scene": 163,
-    "npcUpdates": 147,
+    "scene": 164,
+    "npcUpdates": 148,
     "factUpdates": 11,
     "placeUpdates": 26,
     "codexUpdates": 94,
-    "timeOps": 157,
+    "timeOps": 158,
     "imagePrompt": 3,
     "sceneEnded": 34,
     "itemUpdates": 2,
@@ -10124,7 +10109,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 163,
+  "_opTurns": 164,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

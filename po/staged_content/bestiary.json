@@ -2,28 +2,35 @@
  "schemaVersion": 1,
  "id": "bestiary",
  "kind": "bestiary",
- "note": "SNG (world-design 2026-07-22, Erik direction): morally-clean adversaries \u2014 things a character can fight and kill without it being a person with a story. Three classes. Power-tiered (riffraff/notable/regional/epic) to scale. Each entry carries the tradition-function families it PRESSURES (so the fight tests craft, not just HP) and the arc it reads from. This is the GM's pool for 'something to fight' that doesn't cost the player a moral choice \u2014 the counterpart to the challenger_pool (which is people) and legends (which are named figures).",
+ "note": "SNG (world-design 2026-07-22, Erik direction): morally-clean adversaries — things a character can fight and kill without it being a person with a story. Three classes. Power-tiered (riffraff/notable/regional/epic) to scale. Each entry carries the tradition-function families it PRESSURES (so the fight tests craft, not just HP) and the arc it reads from. This is the GM's pool for 'something to fight' that doesn't cost the player a moral choice — the counterpart to the challenger_pool (which is people) and legends (which are named figures).",
  "designLaws": [
   "No person. A bestiary entry has no name of its own, no want, no story being ended. If it would be a tragedy to kill, it belongs in NPCs, not here.",
-  "A hazard, not a villain. Its 'motivation' is at most an instinct or a broken directive \u2014 never a grievance, never a plea.",
-  "Every entry pressures FUNCTION FAMILIES, not just deals damage. A fight should ask something of the character's craft \u2014 a thing that must be sensed, unmade, warded, or outmaneuvered, so 22 of 24 traditions that don't fight-by-hitting still have a way in.",
-  "Tied to the world. Each class reads from an arc \u2014 killing them is also reading the world's temperature."
+  "A hazard, not a villain. Its 'motivation' is at most an instinct or a broken directive — never a grievance, never a plea.",
+  "Every entry pressures FUNCTION FAMILIES, not just deals damage. A fight should ask something of the character's craft — a thing that must be sensed, unmade, warded, or outmaneuvered, so 22 of 24 traditions that don't fight-by-hitting still have a way in.",
+  "Tied to the world. Each class reads from an arc — killing them is also reading the world's temperature."
  ],
  "classes": {
   "manifested_creature": {
-   "concept": "A creature bled out of native fiction by the Manifestation Storm \u2014 a thing from a domain that manifested wrong, 'wrong for here,' flagged by how badly it fits the place it's in. Not evil; misplaced, and dangerous the way a wild animal in a kitchen is dangerous.",
+   "concept": "A creature bled out of native fiction by the Manifestation Storm — a thing from a domain that manifested wrong, 'wrong for here,' flagged by how badly it fits the place it's in. Not evil; misplaced, and dangerous the way a wild animal in a kitchen is dangerous.",
    "readsFromArc": "arc_manifestation_storm",
    "morallyClean": "It was dreamed into being by the substrate, not born. Ending it returns borrowed fiction; there is no one to mourn."
   },
   "feral_construct": {
-   "concept": "A mechanism whose maker is gone and whose directive rots \u2014 a pre-Transition device or Enginewright construct still running an order it no longer understands, turned dangerous by a purpose with no one to serve.",
+   "concept": "A mechanism whose maker is gone and whose directive rots — a pre-Transition device or Enginewright construct still running an order it no longer understands, turned dangerous by a purpose with no one to serve.",
    "readsFromArc": "arc_what_wakes_beneath",
    "morallyClean": "It is a broken tool, not a mind. Stopping it is repair by other means; the only tragedy is the maker who left it, and they are long gone."
   },
   "substrate_warped_beast": {
-   "concept": "A real animal the stirring substrate touched \u2014 a wolf, a river-thing, a bird-flock \u2014 warped past its own nature into something that hunts wrong and cannot be calmed. The saddest of the three, but past saving: the animal it was is already gone.",
+   "concept": "A real animal the stirring substrate touched — a wolf, a river-thing, a bird-flock — warped past its own nature into something that hunts wrong and cannot be calmed. The saddest of the three, but past saving: the animal it was is already gone.",
    "readsFromArc": "arc_what_wakes_beneath",
-   "morallyClean": "The creature it was is already lost to the warp. A clean end is the last mercy its original nature can be given \u2014 closer to putting down than to killing."
+   "morallyClean": "The creature it was is already lost to the warp. A clean end is the last mercy its original nature can be given — closer to putting down than to killing."
+  },
+  "made_weapon": {
+   "concept": "A person who has unmade themselves into a weapon — an assassin bound to a contract they can no longer refuse, a cultist hollowed by the cult-of-purity of their own tradition, a warden turned by the thing they warded. Clean to kill NOT because they were never a person, but because the person is already gone: what's left is the function. The design law holds by a hair — there is no story left to end, only a hand that will not stop.",
+   "designNote": "The one class where the adversary wears a face. It stays clean ONLY when the person is genuinely foreclosed — a made instrument, not a soul mid-choice. If it would be a tragedy, it's an NPC, not this. Use sparingly; the horror is that a person CAN become this."
+  },
+  "great_manifestation": {
+   "concept": "The largest things the Storm bled through or the substrate raised — dragon-scale manifestations of a whole domain's logic given hunger and wing. Not an animal grown big: a piece of the world's grammar walking, the size of a hill, that resolved wrong and will not resolve back. A dragon is a domain that learned to fly and forgot everything but appetite."
   }
  },
  "roster": [
@@ -32,7 +39,7 @@
    "class": "manifested_creature",
    "tier": "riffraff",
    "name": "glimmerlings",
-   "look": "A flickering swarm of palm-sized things that are almost birds, almost lights, almost nothing \u2014 bled from a domain of pure attention.",
+   "look": "A flickering swarm of palm-sized things that are almost birds, almost lights, almost nothing — bled from a domain of pure attention.",
    "danger": "Individually harmless; a swarm blinds and disorients, and they feed on whatever a person is looking at.",
    "pressures": [
     "KNOW (sense which are real)",
@@ -89,8 +96,8 @@
    "class": "manifested_creature",
    "tier": "regional",
    "name": "a tessellith",
-   "look": "A block-logic manifestation the size of a cart \u2014 matter that resolved into a crawling geometry of interlocking units, bled from the Blocklands seam.",
-   "danger": "Resolves what it touches into its own grammar \u2014 ground, tools, a careless limb \u2014 growing as it goes.",
+   "look": "A block-logic manifestation the size of a cart — matter that resolved into a crawling geometry of interlocking units, bled from the Blocklands seam.",
+   "danger": "Resolves what it touches into its own grammar — ground, tools, a careless limb — growing as it goes.",
    "pressures": [
     "UNMAKE (break the grammar)",
     "KNOW (read the pattern)",
@@ -98,7 +105,7 @@
     "SHAPE (impose your own order)"
    ],
    "readsAlsoFrom": "arc_block_bleed",
-   "clean": "It is the bleed made flesh \u2014 geometry, not a being. You are correcting a grammar error that grew teeth."
+   "clean": "It is the bleed made flesh — geometry, not a being. You are correcting a grammar error that grew teeth."
   },
   {
    "id": "the_unmoored_choir",
@@ -106,7 +113,7 @@
    "tier": "epic",
    "name": "the unmoored choir",
    "look": "A domain-scale manifestation: a drifting region of half-formed voices and light where a bloom set WRONG, a place that is almost a creature and almost a weather.",
-   "danger": "Everything inside it starts to un-belong \u2014 craft frays, memory loosens, the self blurs toward the choir. It spreads at its edges.",
+   "danger": "Everything inside it starts to un-belong — craft frays, memory loosens, the self blurs toward the choir. It spreads at its edges.",
    "pressures": [
     "WARD (hold the self)",
     "KNOW (map the un-belonging)",
@@ -115,7 +122,302 @@
     "MOVE (survive inside it)"
    ],
    "readsAlsoFrom": "arc_manifestation_storm",
-   "clean": "A birth that went wrong and never became anyone. Ending it is the stemming 'Present at the Birth' offers \u2014 grief for a wonder, not a death."
+   "clean": "A birth that went wrong and never became anyone. Ending it is the stemming 'Present at the Birth' offers — grief for a wonder, not a death."
+  },
+  {
+   "id": "cinder_mote_drift",
+   "class": "manifested_creature",
+   "tier": "riffraff",
+   "name": "a cinder-mote drift",
+   "look": "A low cloud of orange sparks that drifts like it's thinking, settling on anything that will catch. Blazeborn radiance bled loose and gone stupid.",
+   "danger": "Ignites what it touches; swarms toward the brightest heat, including yours.",
+   "pressures": [
+    "WARD (smother the catch)",
+    "MOVE (stay ahead of the drift)",
+    "UNMAKE (starve it of fuel)"
+   ],
+   "clean": "Light with no eye behind it. Snuffing it is housekeeping."
+  },
+  {
+   "id": "rust_choir_gnats",
+   "class": "feral_construct",
+   "tier": "riffraff",
+   "name": "rust-choir gnats",
+   "look": "A cloud of thumbnail-sized repair-drones, makers long gone, still trying to 'fix' — welding shut what should be open, patching flesh like it's hull.",
+   "danger": "Swarms a wound or a seam and 'mends' it wrong; individually nothing, together a slow ruin.",
+   "pressures": [
+    "MOVE (break contact)",
+    "HARM (disperse the swarm)",
+    "MEND (undo their bad mending)"
+   ],
+   "clean": "A directive with no maker. Ending it frees nothing that can feel freed."
+  },
+  {
+   "id": "mire_gulper",
+   "class": "substrate_warped_beast",
+   "tier": "riffraff",
+   "name": "a mire-gulper",
+   "look": "Was a bottom-feeding fish; is now a mouth on four crawling fins, hauling itself up the bank after warmth.",
+   "danger": "Ambushes from mud; a bite that doesn't let go; comes in numbers where the water's gone wrong.",
+   "pressures": [
+    "KNOW (spot the mud-sign)",
+    "HARM (kill it fast)",
+    "WARD (break the grip)"
+   ],
+   "clean": "A hunger that outgrew its body. No mercy owed, none possible."
+  },
+  {
+   "id": "pale_reader",
+   "class": "manifested_creature",
+   "tier": "riffraff",
+   "name": "a pale reader",
+   "look": "A thin, translucent figure-shape that copies whatever craft it last saw, badly — a manifested echo of Cogitant memory, running a stolen gesture on loop.",
+   "danger": "Mimics your last ability at half strength and turns it back on you; unsettling, not deadly, until three of them agree.",
+   "pressures": [
+    "KNOW (recognize the mimicry)",
+    "SWAY (break its loop)",
+    "HARM (disperse it)"
+   ],
+   "clean": "An echo of a thought no one is thinking. Silencing it ends nothing."
+  },
+  {
+   "id": "gloamwolf_pack",
+   "class": "substrate_warped_beast",
+   "tier": "notable",
+   "name": "a gloamwolf pack",
+   "look": "Wolves the dark got into — coats that drink light, eyes gone flat black, moving in a silence that's wrong for that many bodies.",
+   "danger": "Coordinated, patient, drives prey toward the ones waiting; the pack thinks as one and the one is hungry.",
+   "pressures": [
+    "KNOW (read the drive)",
+    "HARM (thin the pack)",
+    "WARD (hold the line)",
+    "MOVE (don't get herded)"
+   ],
+   "clean": "Wolves are honest. These aren't wolves anymore. End it and the wood can have its wolves back."
+  },
+  {
+   "id": "toll_wraith",
+   "class": "manifested_creature",
+   "tier": "notable",
+   "name": "a toll-wraith",
+   "look": "A road-shaped grievance manifested — Marcher discipline bled into a thing that guards a crossing that no longer exists, and charges the living to pass.",
+   "danger": "Blocks a path and demands a price in blood or memory; will not be reasoned with, only paid or beaten.",
+   "pressures": [
+    "WARD (survive the toll)",
+    "HARM (break the wraith)",
+    "SWAY (refuse the price)"
+   ],
+   "clean": "A rule with no ruler, guarding a gate that fell. Breaking it opens the road."
+  },
+  {
+   "id": "lantern_ambusher",
+   "class": "feral_construct",
+   "tier": "notable",
+   "name": "a lantern-ambusher",
+   "look": "A pre-Transition sentry-frame, one lamp-eye still lit, that learned the light draws the lost — and waits where it drew them.",
+   "danger": "Lures with a warm light in bad country, then falls on what comes; patient, positioned, cold.",
+   "pressures": [
+    "KNOW (see the lure)",
+    "HARM (kill the frame)",
+    "MOVE (break the ambush)"
+   ],
+   "clean": "A trap that outlived its war. It baits; it doesn't grieve."
+  },
+  {
+   "id": "weeping_stone",
+   "class": "manifested_creature",
+   "tier": "notable",
+   "name": "a weeping stone",
+   "look": "A Threnodist grief manifested into slow-moving rock that leaks sorrow like water — everything near it slows, saddens, forgets why it was hurrying.",
+   "danger": "Not a striker — a drainer; the longer you're near, the less you can act, until you sit down beside it and stop.",
+   "pressures": [
+    "WARD (against the sorrow)",
+    "SWAY (hold your own feeling)",
+    "MOVE (get clear before you can't)"
+   ],
+   "clean": "Feeling with no one feeling it. Ending it is a mercy to everyone in earshot."
+  },
+  {
+   "id": "quill_swarm",
+   "class": "substrate_warped_beast",
+   "tier": "notable",
+   "name": "a quill-swarm",
+   "look": "A flock of small birds warped into flying blades — feathers gone to hardened spines, moving as one turning sheet.",
+   "danger": "Attacks in a wave, banks, comes again; open ground is death, cover is survival.",
+   "pressures": [
+    "WARD (weather the pass)",
+    "MOVE (reach cover)",
+    "HARM (scatter the flock)",
+    "KNOW (read the bank)"
+   ],
+   "clean": "A murmuration with the murmur gone to malice. Scattering it is clean."
+  },
+  {
+   "id": "the_kept_hunger",
+   "class": "feral_construct",
+   "tier": "notable",
+   "name": "the kept hunger",
+   "look": "An Ashwarden-made containment vessel whose seal rotted — the last thing it was keeping is loose inside it, and it walks now looking for more to keep.",
+   "danger": "Tries to 'contain' the living — a grip that stills, a cold that keeps; what it holds, it does not release.",
+   "pressures": [
+    "WARD (don't be kept)",
+    "UNMAKE (break the seal for good)",
+    "HARM (end the vessel)"
+   ],
+   "clean": "A jar that learned to hunt. What's inside was ended long ago; this only echoes it."
+  },
+  {
+   "id": "glass_stalker",
+   "class": "manifested_creature",
+   "tier": "notable",
+   "name": "a glass-stalker",
+   "look": "A Verist-truth manifestation — a near-invisible predator of clear planes that you see only in reflection or by the wrongness it bends around itself.",
+   "danger": "Strikes from the angle you're not looking; the only defense is knowing it's there before it moves.",
+   "pressures": [
+    "KNOW (find it in reflection)",
+    "WARD (block the unseen strike)",
+    "HARM (hit what you can barely see)"
+   ],
+   "clean": "A truth so plain it's invisible, gone predatory. Seeing it kill it is the whole fight."
+  },
+  {
+   "id": "churn_revel",
+   "class": "manifested_creature",
+   "tier": "notable",
+   "name": "a churn-revel",
+   "look": "Churnfolk chaos manifested into a rolling knot of improvised limbs and salvage, laughing in a language of breaking things, never the same shape twice.",
+   "danger": "Unpredictable by nature — no read holds two beats; it's the fight where planning fails and reflex wins.",
+   "pressures": [
+    "MOVE (react, don't plan)",
+    "HARM (hit the shifting core)",
+    "KNOW (find the one constant)"
+   ],
+   "clean": "Joy with nothing behind the laugh. Ending it quiets a wrongness, not a soul."
+  },
+  {
+   "id": "the_unrefusing_blade",
+   "class": "made_weapon",
+   "tier": "notable",
+   "name": "the Unrefusing Blade",
+   "look": "An assassin bound to a Lattice-contract they can no longer break — the person spent, the contract still running them. Moves with a terrible economy; every motion is the shortest line to your death.",
+   "danger": "No wasted act, no tell, no mercy and no cruelty — just the function. Reads YOUR craft and pre-empts it.",
+   "pressures": [
+    "KNOW (predict the line)",
+    "WARD (survive the opening strike)",
+    "HARM (end it before it ends you)",
+    "SWAY (there is nothing left to sway — and learning that IS the fight)"
+   ],
+   "clean": "The person who took the contract is gone; the contract wears their hands. You are not killing them. You are ending what took their place."
+  },
+  {
+   "id": "the_pure_of_ash",
+   "class": "made_weapon",
+   "tier": "regional",
+   "name": "the Pure-of-Ash",
+   "look": "An Ashwarden hollowed by their own cult-of-purity — one who decided the mercy of stopping should be given to EVERYONE, unasked. Grey-robed, calm, and utterly certain.",
+   "danger": "Wields real Palework turned to murder; believes each kill is a kindness; cannot be argued out of a certainty that is all that's left of them.",
+   "pressures": [
+    "WARD (against real death-craft)",
+    "KNOW (read a master's craft)",
+    "HARM (stop a stopper)",
+    "SWAY (test whether any person remains — the answer is no)"
+   ],
+   "clean": "The cult-of-purity ate the warden. What's left administers death as doctrine. Ending it is the mercy they forgot how to withhold."
+  },
+  {
+   "id": "the_severed_choir",
+   "class": "made_weapon",
+   "tier": "regional",
+   "name": "the Severed Choir",
+   "look": "A Seraphic order-member who cut away their own doubt to become pure instrument of judgment — armored in certainty, voice a chord that compels, eyes that have decided about you already.",
+   "danger": "Compels with choral force (obey, kneel, stop); judges in absolutes; the fight is as much against agreeing with it as against its blade.",
+   "pressures": [
+    "SWAY (resist the compulsion)",
+    "WARD (against the judging chord)",
+    "HARM (break certainty made armor)",
+    "KNOW (find the seam doubt left)"
+   ],
+   "clean": "They severed the part that could be wrong. What judges you now is a verdict, not a person. There is no one left to appeal to — only the sentence to end."
+  },
+  {
+   "id": "the_gearfather",
+   "class": "feral_construct",
+   "tier": "regional",
+   "name": "the Gearfather",
+   "look": "A pre-Transition foundational engine woken feral — building-sized, still trying to 'complete' a project whose plans rotted, assembling anything nearby into its endless wrong construction.",
+   "danger": "Reaches with crane-arms to add you to the build; the ground is its body; you fight it by fighting the place.",
+   "pressures": [
+    "MOVE (the terrain is alive)",
+    "UNMAKE (break the directive)",
+    "HARM (there is no one part)",
+    "KNOW (find the rotted core)"
+   ],
+   "clean": "A maker with no plan and no maker. It builds nothing and won't stop. Ending it lets the ground be ground."
+  },
+  {
+   "id": "the_bloom_that_hungers",
+   "class": "substrate_warped_beast",
+   "tier": "regional",
+   "name": "the Bloom-That-Hungers",
+   "look": "A Rootkin growth gone predatory — a hill-sized flowering mass that lures with impossible beauty and fruit, and feeds on what comes to eat.",
+   "danger": "Beauty as bait, tendrils as jaws, spores that make you want to stay; the whole thing is one slow mouth.",
+   "pressures": [
+    "SWAY (resist the wanting)",
+    "WARD (against the spores)",
+    "HARM (find the heart in the mass)",
+    "MOVE (don't root in place)"
+   ],
+   "clean": "Growth is not always good. This one grows to eat. Burning it back is the garden's mercy."
+  },
+  {
+   "id": "the_ashen_wyrm",
+   "class": "great_manifestation",
+   "tier": "epic",
+   "name": "the Ashen Wyrm",
+   "look": "A dragon of the death-pole — hill-sized, ash-scaled, its breath the grey stillness of everything stopping at once. Where it flies, the season ends. The Ashwardens' mercy given wings and turned to a weather.",
+   "danger": "Its breath stops craft and slows blood across a valley; a wingbeat is a wind of endings; it does not hunt, it PASSES, and what it passes over is done.",
+   "pressures": [
+    "WARD (survive the stilling breath)",
+    "KNOW (read a domain-scale flight)",
+    "HARM (wound a hill)",
+    "UNMAKE (the only thing that touches it)",
+    "MOVE (a campaign of position)"
+   ],
+   "clean": "A dragon is a domain that forgot everything but appetite. This one's appetite is endings. It cannot be reasoned with because there is no it — only the death-pole, flying. Ending it is the largest mercy the valley will ever be asked to give.",
+   "epicNote": "Domain-scale. Not a fight — a campaign (ties SNG-208 offscreen-epic/arc). A growing world-threat; slaying it is a saga, not an encounter."
+  },
+  {
+   "id": "the_bright_devourer",
+   "class": "great_manifestation",
+   "tier": "epic",
+   "name": "the Bright Devourer",
+   "look": "A dragon of the light-pole — scales like struck glass, a radiance that permits no shadow and no secret. It does not burn; it REVEALS, and what it reveals it consumes. The Blazeborn truth given wings and gone starving.",
+   "danger": "Its light strips cover, illusion, and hidden craft for miles; you fight it with nowhere to hide, everything you are laid bare; the revelation itself is the weapon.",
+   "pressures": [
+    "WARD (endure being wholly seen)",
+    "KNOW (fight in total exposure)",
+    "HARM (wound the radiant)",
+    "SWAY (hold your self against the stripping light)",
+    "MOVE (a war without cover)"
+   ],
+   "clean": "Truth that devours what it shows. There is no one behind the light — only the light-pole, hungry. To end it is to let the world keep its shadows, which is to say, keep its secrets, which is to say, keep itself.",
+   "epicNote": "Domain-scale. A campaign, not a fight. Antipode of the Ashen Wyrm — the two dragons are the death/life... no, dark/light poles given wing. (SNG-208 arc-scale threat.)"
+  },
+  {
+   "id": "the_unspooling_worm",
+   "class": "great_manifestation",
+   "tier": "epic",
+   "name": "the Unspooling Worm",
+   "look": "A dragon of the destruction-pole — vast, segmented, wingless, boring through the world itself; where it passes, made things come UNMADE, back to the raw material they were built from. The Unmakers' ethic of clearing, given a body the size of a river and no ethic left.",
+   "danger": "Unmakes structure — walls, bindings, crafts, the ground — in a wake behind it; you cannot fortify against it, only outmaneuver and strike the one moving thing.",
+   "pressures": [
+    "MOVE (nothing you build survives)",
+    "KNOW (predict the bore-line)",
+    "HARM (wound the unmaking)",
+    "UNMAKE (fight ruin with ruin)",
+    "WARD (protect what can't be walled)"
+   ],
+   "clean": "Clearing with nothing left to clear FOR. It unmakes because unmaking is all that remains of what it was. Ending it lets the made things stay made."
   }
  ]
 }

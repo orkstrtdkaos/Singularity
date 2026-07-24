@@ -61,11 +61,18 @@
 > collapse). §89-safe (GM narrates it harder; the mechanical failure already bit — no meter re-tune, no spawned
 > fight). **Phase 3 §6b/§7a is now COMPLETE** (collapse both paths + morph). Still deferred (needs Erik's balance
 > call): the HEAVY morph — mechanically spawning a harder fight (soft→fight) or a skill-battle meter penalty.
-> **NEXT — Phase 4 (§7b/§7c), Aevi-content-heavy:** ward-denial (`denies: [families]` + `breakDC` on ward
-> abilities — a ward FORBIDS a whole mechanic, e.g. a Death-Ward makes instakill INAPPLICABLE, not just resisted)
-> + kit-trivialization (`premise`/`trivializedBy`/`resistDC` on challenges — the right kit VOIDS the obstacle,
-> e.g. a fly-craft trivialises a low wall). CCode wires the checks; **Aevi authors the content** (which wards
-> deny what; which challenges declare what premise). Natural Aevi handoff.
+> **Phase 4 §7b/§7c ENGINE + WIRING shipped (v1.8.256) — ALL specced SNG-230 phases now built.** ward-denial
+> (wardAgainst/wardBroken — a ward FORBIDS a mechanic; only a demolishing crit breaks it) wired into both
+> collapse paths + the receipt + `frameModel.warded`; kit-trivialization (trivializes — the right kit voids a
+> challenge's premise → trivial bypass or opposed roll) wired into onChoice + the receipt. Both ADDITIVE — no-ops
+> until Aevi authors the content. Live decision matrix + receipt narrations verified.
+> **AEVI — the content contract is SET (author in parallel; the engine reads it the moment it lands):**
+> - WARDS on a creature/encounter def: `wards: [{ denies: ["finish"|"escape"|"sway"|"instant_end"], breakDC:<margin>, name:"…" }]`.
+> - TRIVIALIZE on a challenge def: `premise:"a sheer climb"`, `trivializedBy:["MOVE"]`, optional `resistDC:<n>`
+>   (set it to make a hard challenge force an opposed roll instead of a free bypass; omit for a simple one).
+> Full arc: `po/results/20260724_SNG-230_encounter_frame_ALL_PHASES.md`. Two things still deferred (Erik's balance
+> call, not blockers): the HEAVY morph (a whiffed finisher mechanically spawning a fight); narrative-promotion of
+> the 27 perilous narrative encounters (shouldFrame/PERILOUS).
 > **NEXT — Phase 4 (§7b/§7c):** ward-denial (`denies`/`breakDC`) + kit-trivialization (`premise`/`trivializedBy`/
 > `resistDC`) — Aevi content-heavy. Also still deferred: narrative-promotion (shouldFrame/PERILOUS).
 

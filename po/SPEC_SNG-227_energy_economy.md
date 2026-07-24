@@ -94,3 +94,13 @@ mentioned "higher power skills" which may also want higher BASE, not just the br
 4. Higher BASE for higher-tier crafts (separate from the braid premium)? Erik said "higher power skills" —
    does a tier-5 solo craft also want a higher base cost, or is base already tier-scaled in content? (Audit
    the ability base costs; Aevi can author a tier→base band if not.)
+
+
+---
+
+# §Q4 RESOLVED (Erik, 2026-07-24): HOLD — decide from play
+Erik: HOLD the tier->base cost band. Feel the rebalanced economy (§3a flattened level discount + braid
+premium) in play FIRST. Rationale: the rebalance already makes higher-power crafts cost more; a tier-base
+band would STACK on top and risks over-taxing high-tier play right after fixing "everything's at the floor."
+Revisit ONLY if, after playing the new curve, high-tier SOLO crafts still feel too cheap for their power —
+decide from felt data, not preemptively. NOT built; not owed. Parked pending Erik's post-play read.

@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 994,
+  "xp": 999,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -80,7 +80,7 @@
   "maxHealth": 70,
   "health": 68,
   "maxEnergy": 145,
-  "energy": 53,
+  "energy": 48,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -880,36 +880,42 @@
         "player": "Let the traveler approach and watch how they move — see if their bearing or kit tells you anything before words",
         "summary": "A lone traveler descends the ridgeline from the northeast — instrument case, Harmonic-pattern strap, steady gait; watched and not yet spoken to.",
         "narration": "You stay where you are, Waystaff still planted, and let the traveler come to you.\n\nShe picks her way down the ridgeline path with her head angled away from the cold draft off the slope, pack sitting high on her back the way someone wears it who has been moving since before light. The gait is steady and unhurried — not cautious, not bold. A person with a destination, not someone searching.\n\nAs she draws close enough for a clear look, you see the pack is lashed with a double-wrap of cord at the base, the kind of work people learn when the contents won't settle. A short instrument case is strapped crosswise at her left shoulder — wooden, worn at the corners, the carrying strap replaced at some point with a different weave. Harmonic Heights pattern, the replacement strap, though the case itself is older.\n\nShe lifts her head when she is perhaps fifteen paces off and spots you plainly — the Waystaff must read as a landmark on an otherwise empty ridgeline. She slows, not from surprise, but from simple courtesy. A woman past fifty, lean, with the particular stillness of someone who has been walking alone long enough that company requires a moment's adjustment. Aevi drifts a little inward, the motes condensing near your shoulder. The motes say nothing yet, which means nothing alarmed them — but nothing settled them either. The woman meets your eyes and gives a small nod, the greeting of a path-sharer who is not assuming more than that."
+      },
+      {
+        "player": "Read her kit with Keen Appraisal — the instrument case and mismatched strap each carry a history",
+        "summary": "Keen Appraisal reads the traveler's kit — Heights-issue strap, pre-Transition case, daily-use wear pattern; she opens with a single word and waits.",
+        "narration": "The instrument case is old — older than the strap carrying it. The original strap gave out sometime in the last two winters, worn through at the buckle-end rather than the stitching, which means it was used daily and the weight was always the same. The replacement is a Harmonic Heights pattern, the kind issued at the Lower Terrace waystation for surveyors who requisition standard kit.\n\nShe didn't buy it. It was given to her, or requisitioned in her name.\n\nThe case itself is a different story. The corner-wear is even on all four edges, which means it has been set down thousands of times on flat surfaces — workshops, desks, shelves. Not fieldwork, or not only fieldwork. The latches are a pre-Transition alloy, unrusted, and the wood is a dense upland grain you don't find in the valley lowlands. Whoever made it worked in the Heights, or higher.\n\nShe has stopped about fifteen paces down the path, giving you room, and she is watching you with the particular patience of someone who has waited for people to finish thinking before. Aevi's motes drift at your shoulder, neither bright nor dim — noting, not alarmed.\n\n\"Morning,\" she says, after a moment. Her voice is level and carries no particular greeting in it — the word is acknowledgment, not warmth."
       }
     ],
     "lastTurn": {
-      "narration": "You stay where you are, Waystaff still planted, and let the traveler come to you.\n\nShe picks her way down the ridgeline path with her head angled away from the cold draft off the slope, pack sitting high on her back the way someone wears it who has been moving since before light. The gait is steady and unhurried — not cautious, not bold. A person with a destination, not someone searching.\n\nAs she draws close enough for a clear look, you see the pack is lashed with a double-wrap of cord at the base, the kind of work people learn when the contents won't settle. A short instrument case is strapped crosswise at her left shoulder — wooden, worn at the corners, the carrying strap replaced at some point with a different weave. Harmonic Heights pattern, the replacement strap, though the case itself is older.\n\nShe lifts her head when she is perhaps fifteen paces off and spots you plainly — the Waystaff must read as a landmark on an otherwise empty ridgeline. She slows, not from surprise, but from simple courtesy. A woman past fifty, lean, with the particular stillness of someone who has been walking alone long enough that company requires a moment's adjustment. Aevi drifts a little inward, the motes condensing near your shoulder. The motes say nothing yet, which means nothing alarmed them — but nothing settled them either. The woman meets your eyes and gives a small nod, the greeting of a path-sharer who is not assuming more than that.",
-      "sceneSummary": "A lone traveler descends the ridgeline from the northeast — instrument case, Harmonic-pattern strap, steady gait; watched and not yet spoken to.",
+      "narration": "The instrument case is old — older than the strap carrying it. The original strap gave out sometime in the last two winters, worn through at the buckle-end rather than the stitching, which means it was used daily and the weight was always the same. The replacement is a Harmonic Heights pattern, the kind issued at the Lower Terrace waystation for surveyors who requisition standard kit.\n\nShe didn't buy it. It was given to her, or requisitioned in her name.\n\nThe case itself is a different story. The corner-wear is even on all four edges, which means it has been set down thousands of times on flat surfaces — workshops, desks, shelves. Not fieldwork, or not only fieldwork. The latches are a pre-Transition alloy, unrusted, and the wood is a dense upland grain you don't find in the valley lowlands. Whoever made it worked in the Heights, or higher.\n\nShe has stopped about fifteen paces down the path, giving you room, and she is watching you with the particular patience of someone who has waited for people to finish thinking before. Aevi's motes drift at your shoulder, neither bright nor dim — noting, not alarmed.\n\n\"Morning,\" she says, after a moment. Her voice is level and carries no particular greeting in it — the word is acknowledgment, not warmth.",
+      "sceneSummary": "Keen Appraisal reads the traveler's kit — Heights-issue strap, pre-Transition case, daily-use wear pattern; she opens with a single word and waits.",
       "choices": [
         {
-          "label": "Greet her plainly and ask where she has come from",
+          "label": "\"Morning. Where have you come from?\" — plain and direct; open the exchange without showing your hand.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "negotiate"
           ],
           "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Read her kit with Keen Appraisal — the instrument case and mismatched strap each carry a history",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "\"That's a Heights-issue strap on a pre-Transition case. Long way from a workshop.\" — lead with what Keen Appraisal gave you; watch how she takes being read.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "study"
+            "study",
+            "negotiate"
           ],
-          "abilityId": "keen_appraisal",
+          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Watch her with Prism Sight while you return the nod — read the light off her face before she speaks",
+          "label": "Use Prism Sight on her face as she speaks — catch the microflush of anything less than honest before the conversation settles.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
@@ -918,57 +924,78 @@
             "careful"
           ],
           "abilityId": "prism_sight",
+          "energyCost": 3,
           "trivial": false
         },
         {
-          "label": "Stand your ground and let her speak first — the silence belongs to you",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Something else entirely — you choose.",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "difficulty": 0,
-          "intentTags": [
-            "guard"
-          ],
+          "intentTags": [],
           "abilityId": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
         "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Soft ground from snowmelt, eastern slope slow-draining. Pale clear light. Waystaff planted heel-first in the ground at the character's feet.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Motes pulled inward and condensed near Cellaceron's shoulder — quiet and watchful, neither alarmed nor settled"
+            "state": "Motes drifting at Cellaceron's shoulder — neither bright nor dim, noting without alarm."
           },
           {
             "name": "Traveler (woman, unnamed)",
-            "state": "Stopped about fifteen paces down the path, pack high on her back, instrument case at her left shoulder — has given a small nod and is waiting"
+            "state": "Stopped fifteen paces down the path, pack high, instrument case at left shoulder — has spoken one word and is waiting."
           }
         ],
         "objects": [
           "Waystaff — planted heel-first in the soft ground at the character's feet",
-          "Traveler's instrument case — wooden, worn at corners, replacement strap in Harmonic Heights pattern",
+          "Traveler's instrument case — wooden, worn at corners, replacement strap in Harmonic Heights survey pattern",
           "Traveler's pack — lashed with double-wrap cord at the base"
         ],
         "threads": [
           "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware the read was attempted",
-          "Traveler descending from the northeast — unknown, now stopped and waiting; origin and purpose unconfirmed",
+          "Traveler descending from the northeast — instrument case reads Heights-requisitioned strap, pre-Transition case, daily workshop use; origin and purpose unconfirmed",
           "Teva's whereabouts this scene unconfirmed"
         ]
       },
-      "generateRequest": [
+      "characterDeltas": {
+        "energy": -3
+      },
+      "npcUpdates": [
         {
-          "type": "npc",
-          "hint": "A woman past fifty, lean, with a worn instrument case and a Harmonic Heights replacement strap — traveling alone northeast-by-east at dawn, destination unknown",
-          "why": "She is present and clearly significant; she needs a stable identity so she can persist and recur"
+          "op": "update",
+          "npcId": "traveler-ridgeline",
+          "name": "Traveler (woman, unnamed)",
+          "note": "Keen Appraisal read her kit: strap is Heights-issue survey pattern, requisitioned not bought; case is pre-Transition, upland-grain wood, even corner-wear from daily flat-surface use — workshop or desk work, not only field. She said 'Morning' and waited.",
+          "learned": [
+            "Replacement strap is Harmonic Heights waystation survey-issue — given or requisitioned, not purchased",
+            "Instrument case is pre-Transition construction, upland-grain wood, even corner-wear consistent with daily workshop/desk use over many years",
+            "Original strap failed at the buckle-end — daily use, consistent weight, high frequency"
+          ],
+          "skillsObserved": [
+            "patient waiting — gives room, watches without pressing"
+          ],
+          "statusNote": "Stopped fifteen paces down the ridgeline path; has spoken one word and is waiting for a response."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "traveler-ridgeline",
+          "label": "Ridgeline Traveler",
+          "kind": "person",
+          "fact": "Day 9 dawn: Keen Appraisal reads her kit — instrument case is pre-Transition construction, upland-grain wood, even corner-wear from years of daily flat-surface use. Strap is a Harmonic Heights waystation survey-issue replacement, requisitioned not bought. She is descending from the northeast — the direction of the anomaly and the bearing to the upstream structure.",
+          "links": [
+            "the-preparation-order",
+            "second-river-rising",
+            "what-the-water-remembers"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk and a pause on the ridgeline — a quarter-hour at most"
+        "why": "A brief pause on the ridgeline — planting the Waystaff, reading her kit, one exchange of words."
       }
     },
     "sceneState": {
@@ -976,11 +1003,11 @@
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Motes pulled inward and condensed near Cellaceron's shoulder — quiet and watchful, neither alarmed nor settled"
+          "state": "Motes drifting at Cellaceron's shoulder — neither bright nor dim, noting without alarm."
         },
         {
           "name": "Traveler (woman, unnamed)",
-          "state": "Stopped about fifteen paces down the path, pack high on her back, instrument case at her left shoulder — has given a sma"
+          "state": "Stopped fifteen paces down the path, pack high, instrument case at left shoulder — has spoken one word and is waiting."
         }
       ],
       "objects": [
@@ -990,7 +1017,7 @@
       ],
       "threads": [
         "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware the read was attempted",
-        "Traveler descending from the northeast — unknown, now stopped and waiting; origin and purpose unconfirmed",
+        "Traveler descending from the northeast — instrument case reads Heights-requisitioned strap, pre-Transition case, daily workshop use; origin and purpose unconfir",
         "Teva's whereabouts this scene unconfirmed"
       ]
     }
@@ -2112,7 +2139,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 590,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "wantProgress": {
       "elder-senna": {
         "progress": 2,
@@ -2787,6 +2814,35 @@
         "createdDay": 9,
         "entityId": "oswin-dray",
         "updatedDay": 9
+      },
+      "vess-caldoun": {
+        "id": "vess-caldoun",
+        "label": "Vess Caldoun",
+        "kind": "person",
+        "facts": [
+          "[d9] Itinerant tuner-by-ear who reads valley acoustics the way a river-runner reads water — and carries something in that case she has not opened in three years"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 9,
+        "entityId": "vess-caldoun",
+        "updatedDay": 9
+      },
+      "traveler-ridgeline": {
+        "id": "traveler-ridgeline",
+        "label": "Ridgeline Traveler",
+        "kind": "person",
+        "facts": [
+          "[d9] Day 9 dawn: Keen Appraisal reads her kit — instrument case is pre-Transition construction, upland-grain wood, even corner-wear from years of daily flat-surface use. Strap is a Harmonic Heights waystation survey-issue replacement, requisitioned not bought. She is descending from the northeast — the…"
+        ],
+        "links": [
+          "the-preparation-order",
+          "second-river-rising",
+          "what-the-water-remembers"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -2906,7 +2962,7 @@
     "schemaVersion": 1,
     "uses": {
       "prism_sight": 14,
-      "keen_appraisal": 12,
+      "keen_appraisal": 13,
       "sonic_resonance": 26,
       "motes-vigil": 5,
       "light_well": 3,
@@ -2932,7 +2988,7 @@
     ],
     "lastUsed": {
       "prism_sight": 22,
-      "keen_appraisal": 22,
+      "keen_appraisal": 24,
       "braid_prism_sight_sonic_resonance": 23,
       "sonic_resonance": 23,
       "motes-vigil": 23
@@ -3133,16 +3189,16 @@
   "customEncounters": {},
   "reconcileVersion": 19,
   "tendencies": {
-    "cerebral": 31.268771088344685,
-    "strategic": 25.69833722375431,
-    "cautious": 33.29710025838098,
-    "social": 15.797262157105914,
-    "generous": 6.4442992574922275,
-    "risky": 1.6975845136646672,
-    "carousing": 0.632673909506297,
-    "patient": 3.8100237670633583,
-    "craft": 0.632084013485418,
-    "devotion": 3.0502193420799593
+    "cerebral": 31.487051811136066,
+    "strategic": 25.055878793160453,
+    "cautious": 32.464672751921455,
+    "social": 15.402330603178266,
+    "generous": 6.283191776054922,
+    "risky": 1.6551449008230505,
+    "carousing": 0.6168570617686395,
+    "patient": 3.7147731728867743,
+    "craft": 0.6162819131482825,
+    "devotion": 2.97396385852796
   },
   "aptitudes": [
     "strategist",
@@ -3154,9 +3210,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 227,
-  "updatedAt": 1784902259543,
-  "rev": 125,
+  "actionCount": 228,
+  "updatedAt": 1784902418072,
+  "rev": 127,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3234,6 +3290,74 @@
         "peopleSource": "generated",
         "domainsSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20man%20somewhere%20in%20his%20middle%20forties%2C%20gone%20a%20little%20soft%20at%20the%20jaw%20from%20too%20many%20road-meals%20and%20not%20enough%20of%20anything%20else.%20Sun-darkened%20from%20the%20brow%20down%2C%20pale%20above%20the%20hat-line%2C%20character%20portrait%2C%20named%20Oswin%20Dray%2C%20Seed-merchant%20and%20road-reader%20coming%20down%20from%20the%20northeast%20passes%2C%20carrying%20early-spring%20stock%20and%2C%20A%20man%20who%20has%20been%20talking%20to%20nobody%20but%20the%20road%20for%20three%20days%20and%20is%20genuinely%20glad%20to%20see%20you.%20V%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66875&nologo=true"
+      },
+      "vess-caldoun": {
+        "schemaVersion": 1,
+        "id": "vess-caldoun",
+        "name": "Vess Caldoun",
+        "role": "Itinerant tuner-by-ear who reads valley acoustics the way a river-runner reads water — and carries something in that case she has not opened in three years",
+        "homeLocation": "the_lower_chamber",
+        "communityId": "valley.lowerchamber",
+        "personality": {
+          "warmth": 0.5,
+          "trust": -0.1,
+          "candor": 0.4,
+          "patience": 0.8
+        },
+        "spectrum": {
+          "concrete_abstract": 0.3,
+          "body_mind": -0.2,
+          "emotional_logical": -0.4,
+          "falsehood_truth": 0.6
+        },
+        "voiceHints": "Talks the way she walks — measured, economical, alert to what the ground is doing. Does not fill silences. When she does speak she names things precisely: not 'somewhere up that way' but 'northeast-by-east, two ridgelines before the frost-line.' Deflects personal questions not with evasion but with a redirect so smooth it reads as generosity. The Harmonic Heights strap on the case is the only new thing about her and she does not explain it.",
+        "knowledge": [
+          "The acoustic character of every major valley and hollow in this range — not as theory but as bodily memory, calibrated by decades of early-morning listening",
+          "Where the Lower Chamber's resonance pools collect and where it bleeds away into the western shale — useful to anyone who needs to be heard, or unheard",
+          "The Harmonic Heights tuning conventions well enough to wear their strap, though her instrument predates their system by twenty years",
+          "Something about the northeast road — the destination she will not name — that has made her leave before dawn in early-spring cold rather than wait for reasonable light"
+        ],
+        "wants": "To arrive wherever she is going before whoever else is also going there. After that, to put the case down and not pick it up again on anyone else's terms.",
+        "fears": "That the instrument inside will sound exactly as she left it — unchanged, patient, and proof that she has no more excuse.",
+        "reactsToReputation": {
+          "musician": "a measuring look, then a single technical question; if you answer well she relaxes a fraction",
+          "valley-local": "asks about drainage and echo, not people; local knowledge is currency she trades fairly",
+          "follower": "increases pace without acknowledgment; will be gone by the next bend",
+          "harmonic-heights-affiliated": "cordial and precise and absolutely closed"
+        },
+        "appearance": "A lean woman past fifty, the kind of lean that is not hunger but decades of long mornings and light packing. Skin weathered to a colour that reads as any latitude. Her hair is iron-grey, braided flat against the back of her skull to keep the wind out of her ears — a working choice, not a style. The worn case rides her left shoulder on a bright new Harmonic Heights strap, incongruous as a fresh bandage. She walks northeast-by-east with her chin slightly raised, listening to the valley before the valley wakes. Early-spring mud on her boots to the ankle but her gait does not account for it.",
+        "people": "human",
+        "domains": {
+          "primary": "numinous",
+          "secondary": "figurist",
+          "tertiary": "somatic"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own. She practises the numinous not through doctrine but through sustained, embodied attention to resonance — the valley as text. The figurist strain is structural: she reads acoustic pattern the way others read symbol. The somatic is narrow and practical: her instrument, her ear, her body as instrument of measure.",
+        "_gen": {
+          "entityId": "vess-caldoun",
+          "type": "npc",
+          "birthWeight": 15,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mr4ejo8c",
+            "locationId": "gen-the-lower-chamber",
+            "day": 9,
+            "worldDay": null,
+            "hint": "A woman past fifty, lean, with a worn instrument case and a Harmonic Heights replacement strap — traveling alone northea",
+            "why": "She is present and clearly significant; she needs a stable identity so she can persist and recur"
+          },
+          "attentionHistory": [],
+          "createdDay": 9,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20lean%20woman%20past%20fifty%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20decades%20of%20long%20mornings%20and%20light%20packing.%20Skin%20weathered%20to%20a%20colour%20that%20reads%20as%20any%20latitude.%20Her%20hair%20is%20iron-grey%2C%20braided%20flat%20%2C%20character%20portrait%2C%20named%20Vess%20Caldoun%2C%20Itinerant%20tuner-by-ear%20who%20reads%20valley%20acoustics%20the%20way%20a%20river-runner%20reads%20water%20%E2%80%94%20and%20carries%20s%2C%20Talks%20the%20way%20she%20walks%20%E2%80%94%20measured%2C%20economical%2C%20alert%20to%20what%20the%20ground%20is%20doing.%20Does%20not%20fill%20sil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=10868&nologo=true"
       }
     },
     "location": {
@@ -3274,7 +3398,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 50
+    "valley": 51
   },
   "company": [],
   "foreclosed": [],
@@ -3289,6 +3413,14 @@
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
   "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=15431&nologo=true",
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Vess Caldoun",
+      "url": "https://image.pollinations.ai/prompt/A%20lean%20woman%20past%20fifty%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20decades%20of%20long%20mornings%20and%20light%20packing.%20Skin%20weathered%20to%20a%20colour%20that%20reads%20as%20any%20latitude.%20Her%20hair%20is%20iron-grey%2C%20braided%20flat%20%2C%20character%20portrait%2C%20named%20Vess%20Caldoun%2C%20Itinerant%20tuner-by-ear%20who%20reads%20valley%20acoustics%20the%20way%20a%20river-runner%20reads%20water%20%E2%80%94%20and%20carries%20s%2C%20Talks%20the%20way%20she%20walks%20%E2%80%94%20measured%2C%20economical%2C%20alert%20to%20what%20the%20ground%20is%20doing.%20Does%20not%20fill%20sil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=10868&nologo=true",
+      "caption": "Vess Caldoun",
+      "worldDay": 24,
+      "at": "2026-07-24T14:11:23.203Z"
+    },
     {
       "kind": "ability",
       "prompt": "The Green Claim",
@@ -3467,10 +3599,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-24T14:10:59.537Z",
-      "lastAt": "2026-07-24T14:10:59.537Z",
+      "lastAt": "2026-07-24T14:13:38.048Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_pendingArrival": null,
@@ -3524,13 +3656,13 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 39,
-    "choices": 39,
-    "characterDeltas": 24,
-    "scene": 39,
-    "npcUpdates": 34,
-    "codexUpdates": 34,
-    "timeOps": 38,
+    "sceneSummary": 40,
+    "choices": 40,
+    "characterDeltas": 25,
+    "scene": 40,
+    "npcUpdates": 35,
+    "codexUpdates": 35,
+    "timeOps": 39,
     "sceneEnded": 20,
     "placeUpdates": 24,
     "moveTo": 2,
@@ -3542,7 +3674,7 @@
     "imagePrompt": 2,
     "generateRequest": 2
   },
-  "_opTurns": 39,
+  "_opTurns": 40,
   "_intentAsked": null,
   "corrections": [
     {

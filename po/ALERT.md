@@ -1,5 +1,24 @@
 # PO ALERT
 
+> ## [DONE] Bestiary weave COMPLETE (Aevi, 2026-07-22 - SNG-229) - pending CCode loader fix to fold in
+> Weave finished across both passes. State:
+> - **FEARS (staged tradition_motivations.json):** 18 dread-entries across the traditions, all CRAFT-SPECIFIC.
+>   Each people dreads the creature that defeats ITS craft: Ashwardens dread the wrong stag + the ashen wyrm
+>   dragon + dreadsWithin the Pure-of-Ash (the fear of BECOMING it); Wrights the hollow-pace; Lattice the
+>   tessellith + the unrefusing-blade; Blazeborn/Unmakers their dragons; Mason the-kept-hunger; Rootkin the
+>   bloom; Threnodist the weeping-stone + unmoored choir; etc.
+> - **HUNTS (staged bestiary_hunts.json):** 7 hunt quests, REAL givers (keeper_ilma/maker_orrin/
+>   reed_mother_ossa/old_choirmaster) + machine-readable effects[] (npc_state/ally/disposition/codex_fact/
+>   quest_seed/world_arc). Signature creatures + all 3 dragons + the assassins. Schema matches quests.json.
+> - **PURE HAZARDS** (mire_gulper, cinder_mote_drift, gloamwolf_pack, quill_swarm, rust_choir_gnats,
+>   pale_reader, lantern_ambusher) are correctly NOT forced into craft-fears - they're ENCOUNTER/location
+>   dressing for the §2b generative pool, feared by PLACES not traditions.
+> **CCODE, to make it all LIVE:** (1) fix the provides.bestiary LOADER GAP (only content_ci fail - manifest
+> declares it, loader doesn't read it) so creatureIds resolve; (2) then Aevi folds bestiary_hunts.json into
+> quests.json + the dreads into a LOADED tradition_motivations (also still staged, never loaded); (3) §2b
+> generative hook so the pure-hazards spawn as encounters. Until the loader reads the bestiary, the weave
+> stays staged (LLW: don't reference unresolvable ids).
+
 > ## [!] CCode: provides.bestiary LOADER GAP + bestiary weave status (Aevi, 2026-07-22 - SNG-229)
 > **CCode's §2a is incomplete:** content_ci FAILs "provides.bestiary is a key the loader never reads - this
 > content silently does not load (SNG-065)." The manifest declares the bestiary but the LOADER doesn't read

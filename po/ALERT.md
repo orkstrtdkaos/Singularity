@@ -29,6 +29,10 @@
 >   `traditionMotivations=24`. `po/results/20260724_SNG-229-2c_tradition_motivations.md`.
 > - **SNG-215 §C — the authored `trait_readouts` are WIRED** (were loading empty: no content home + a plural/
 >   singular key mismatch). 40 backgrounds + 27 origins now render on tap. `po/results/20260724_SNG-215-C_trait_readouts_wired.md`.
+> - **SNG-223 Q4 — the per-tradition VISUAL aesthetic is WIRED** (Erik approved: "proceed with 223"). Aevi's
+>   `tradition_visual_aesthetics.json` (24 traditions × palette/materials/light/mood) is loaded + rides the craft
+>   image prompt, so an Ashwarden craft looks Ashwarden. Backward-safe fallback; forward-only (cached images
+>   never regen). `po/results/20260724_SNG-223-Q4_tradition_visual_aesthetics.md`.
 > **AEVI, your fold is unblocked at LOADED targets:** creatureIds resolve, and `tradition_motivations.json` is now
 > `content/packs/valley/tradition_motivations.json` (loaded). Fold `bestiary_hunts.json` → `quests.json` and
 > `bestiary_weave.json`'s wants/hunts → the LOADED tradition_motivations (edit the content-pack copy, not the

@@ -1,5 +1,14 @@
 # PO ALERT
 
+> ## [!] PERSON PARSED AS PLACE - "take the road to Ossian" (Aevi, 2026-07-22 - SNG-228)
+> Erik flew to "the brick hall to catch Ossian" - the travel panel offered "Set out for Ossian / Take the
+> road to Ossian." Ossian is a PERSON (Clerk-Warden). Verified: the parser set travelTo="Ossian"; travelIntentOf's
+> TRUSTED path (4434) mints an unmapped travelTo as a phantom place, and the only guard (NOT_A_PLACE) catches
+> pronouns not proper-name PEOPLE. Ossian is a freshly-named, not-yet-registered NPC. Fix (two layers):
+> parser guard (travelTo is a PLACE never a PERSON - Aevi's prompt) + resolver person cross-check + redirect
+> to the person's PLACE (the brick hall was the real destination, named in fiction). SNG-188 code-belt family
+> (the parser's travelTo trusted too much).
+
 > ## [!] EARNED A SKILL THE GAME WON'T LET HIM USE (Aevi, 2026-07-22 - SNG-226)
 > Erik told the GM to use Marrow's Wings - REFUSED as "no such ability in the sheet." Confirmed via
 > See-the-Machine: the intent-parser was fed "Character abilities: order_sense...hunters_strike" and

@@ -21,35 +21,37 @@
     "char-mr4ejo8c",
     "char-mr5ns3hh",
     "char-devtest",
-    "char-mrhs8286"
+    "char-mrhs8286",
+    "char-mrum8y4d"
   ],
   "history": [],
   "rating": {
     "preset": "R+",
     "setBy": "erik",
     "isMinor": false,
-    "updatedAt": 1784838603492,
+    "updatedAt": 1784515228250,
     "adultVerified": true
   },
-  "pacing": "relentless",
   "uiSidebar": {
     "open": [
       "quests",
       "company",
-      "items",
-      "playstyle",
-      "codex",
-      "abilities",
       "maprest",
-      "attributes",
-      "whoshere"
+      "codex",
+      "items",
+      "whoshere",
+      "playstyle",
+      "abilities"
     ],
-    "closed": []
+    "closed": [
+      "attributes"
+    ]
   },
+  "pacing": "relentless",
   "sharedChronicle": true,
-  "contentGenerator": true,
   "plainness": "balanced",
   "bluntness": "blunt",
+  "contentGenerator": true,
   "ttsVoice": null,
   "readAloud": true
 }

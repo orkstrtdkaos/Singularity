@@ -284,6 +284,13 @@ export function completeQuestStage(character, questId, stageId) {
   q.stageIndex = Math.max(q.stageIndex || 0, Math.min(si + 1, q.stages.length));
   const change = q.stages[si].change;
   if (change && !(q.progress || []).includes(change)) q.progress = [...(q.progress || []), change].slice(-12);
+  // CCODE-16: the invariant "every stage behind you → the decision opens" lives HERE, in the one applier
+  // BOTH write paths go through (the GM-op path via advanceStructuredQuest, and the manual "Mark this stage
+  // met" button in the UI). The button path used to skip it, so a hand-completed quest could reach the final
+  // stage yet never surface its endings — it read "This isn't finished yet" with nothing left to do. This is
+  // NOT auto-resolve: awaitingResolution only unlocks the outcome menu; choosing the ending stays the player's.
+  const done = (q.completedStages.length >= q.stages.length) || (q.stageIndex >= q.stages.length);
+  if (done && !q.awaitingResolution) q.awaitingResolution = true;
   return { ok: true, change, stage: q.stages[si], nextStage: q.stages[q.stageIndex] || null };
 }
 

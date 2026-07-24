@@ -68,7 +68,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.243";
+const APP_VERSION = "1.8.244";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1496,6 +1496,15 @@ function migrate(c) {
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];
   if (!c.quests) c.quests = [];
+  // CCODE-16: heal structured quests that were hand-completed through the "Mark this stage met" button
+  // before the engine maintained the invariant — every stage closed, still active, but awaitingResolution
+  // never written, so the GM context couldn't tell the quest was at its decision. Backfill the flag so the
+  // persisted state matches what the render now derives. Idempotent; only touches all-stages-done actives.
+  for (const q of c.quests) {
+    if (!q || !q.structured || q.status !== "active" || q.awaitingResolution) continue;
+    const total = (q.stages || []).length;
+    if (total && ((q.completedStages || []).length >= total || (q.stageIndex || 0) >= total)) q.awaitingResolution = true;
+  }
   migrateRelationships(c, CONTENT.npcs);
   mergeDuplicateNpcs(c, Object.keys(CONTENT.locations)); // heal duplicate/id-named people
   { const bf = backfillNpcGender(c); // SNG-143: stamp gender from each record's own narration where unambiguous (the Pell fix); leaves ambiguous unset
@@ -6555,6 +6564,12 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
 function renderStructuredQuestDetail(q) {
   const resolved = q.status !== "active";
   const routes = routesForCharacter(q, character);
+  // CCODE-16: the decision opens when every stage is behind you — derived from the stages themselves, not
+  // only from the persisted awaitingResolution flag. A save hand-completed through the "Mark this stage met"
+  // button never got that flag written (fixed at the engine now, but old saves already lack it), so keying the
+  // outcome menu off allStagesDone too means such a quest can be finished on the very next open — no reload.
+  const allStagesDone = (q.completedStages || []).length >= (q.stages || []).length || (q.stageIndex || 0) >= (q.stages || []).length;
+  const atDecision = !resolved && (q.awaitingResolution || allStagesDone);
   const stageRow = (s, i) => { const done = (q.completedStages || []).includes(s.id); const current = !done && i === (q.stageIndex || 0);
     return `<div class="quest-stage ${done ? "done" : current ? "current" : ""}">
       <div class="quest-stage-obj">${done ? "✓ " : current ? "▶ " : "○ "}${esc(s.objective)}</div>
@@ -6576,7 +6591,7 @@ function renderStructuredQuestDetail(q) {
           throughout is what invited clicking through a quest to see how it could go — and made
           resolution feel like a panel chore rather than a moment. Progress is automatic now; the
           ENDING stays the player's, and it surfaces when it's time. */""}
-    ${!resolved && q.awaitingResolution ? `<h3 class="codex-title" style="font-size:15px;margin-top:16px">Resolve — decide what the truth is for</h3>
+    ${atDecision ? `<h3 class="codex-title" style="font-size:15px;margin-top:16px">Resolve — decide what the truth is for</h3>
       <div class="hint" style="margin-bottom:8px">Every stage is behind you. Every ending is a real ending — what you choose changes the world durably, and you'll be able to go back and see it.</div>
       ${q.outcomes.map(o => `<button class="opt quest-outcome-btn" data-outcome="${esc(o.id)}" style="display:block;width:100%;text-align:left;margin:4px 0">
         <strong>${esc(o.name)}</strong><div class="hint" style="text-transform:none">${esc(o.summary)}</div></button>`).join("")}`

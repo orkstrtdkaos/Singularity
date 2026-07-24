@@ -4195,8 +4195,26 @@ await (async () => {
     detectAnomalies(c6, {}).some(a => a.kind === "repairAsRoutine" && /stageOps/.test(a.note)));
 
   const appSrc162 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
-  check("162: outcome buttons render ONLY at the decision point", /!resolved && q\.awaitingResolution \?/.test(appSrc162));
+  check("162/CCODE-16: outcome buttons render at the decision point (keyed on atDecision)", /\$\{atDecision \? `/.test(appSrc162));
+  check("CCODE-16: the decision gate opens when every stage is done, not only when the flag was persisted",
+    /const allStagesDone = .*completedStages.*length >= .*stages.*length/.test(appSrc162) &&
+    /const atDecision = !resolved && \(q\.awaitingResolution \|\| allStagesDone\)/.test(appSrc162));
   check("162: and an unfinished quest says so instead of showing a menu", /the endings appear when you reach the decision/.test(appSrc162));
+
+  // CCODE-16 engine: the MANUAL "Mark this stage met" path (completeQuestStage, no GM op) must ALSO open the
+  // decision when it closes the last stage. The bug was a hand-completed quest reaching the final stage yet
+  // never surfacing its endings — "This isn't finished yet" with nothing left to do.
+  const cm = ch();
+  completeQuestStage(cm, "the-ledger", "s1");
+  check("CCODE-16: completing a NON-final stage by hand does not prematurely open the decision",
+    cm.quests[0].awaitingResolution !== true && cm.quests[0].stageIndex === 1);
+  completeQuestStage(cm, "the-ledger", "s2");
+  check("CCODE-16: completing the FINAL stage by hand opens the decision (awaitingResolution set), quest stays active",
+    cm.quests[0].awaitingResolution === true && cm.quests[0].status === "active" && !cm.quests[0].outcomeId);
+  // the migrate backfill's derivation heals an old save that closed every stage before the invariant existed
+  const cLegacy = { quests: [{ ...mkQuest(), stageIndex: 2, completedStages: ["s1", "s2"] }] };
+  const legacyDone = cLegacy.quests[0].completedStages.length >= cLegacy.quests[0].stages.length;
+  check("CCODE-16: an all-stages-done active quest is detectable as at-decision (the migrate backfill's rule)", legacyDone === true);
   const gmSrc162 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
   check("162: stageOps is contracted AND salvageable", /"stageOps": \[\{"questId"/.test(gmSrc162) && /"questUpdates", "stageOps"/.test(gmSrc162));
   check("162: the contract keeps the NEVER-adjudicate rule while adding the OBSERVE duty",

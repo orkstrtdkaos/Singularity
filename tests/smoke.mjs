@@ -26,7 +26,7 @@ import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconci
 import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
-import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -1175,7 +1175,7 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const medFight = buildOffer(fightEntry, charWith(["mediators_tongue"]), { mediators_tongue: { name: "Mediator's Tongue" } }, rules);
   check("mediator defuse offered on a fight", medFight.choices.some(c => c.abilityId === "mediators_tongue"));
 
-  check("dangerOf clamps undefined to 0", dangerOf({}) === 0 && dangerOf({ dangerLevel: 9 }) === 4);
+  check("dangerOf floors a missing dangerLevel to 1 (SNG-225 §4b — not 0, which starved the pool) + clamps 9→4", dangerOf({}) === 1 && dangerOf({ dangerLevel: 9 }) === 4);
 }
 
 // --- SNG-BATCH-3 Phase 2: location affinities (SNG-013) ---
@@ -7702,6 +7702,27 @@ await (async () => {
   const appSrc226 = readFileSync(join(root, "app.js"), "utf8");
   check("226: mint-time — recordDiscovery is followed by registerDiscoveryAbility (usable + celebrated together, §5)", /registerDiscoveryAbility\(character, minted, fullCatalog\(\)/.test(appSrc226));
   check("226 §4: a load BACKFILL registers any discovery not yet in abilities[] (Marrow's Wings heals on load)", /for \(const d of \(c\.discoveries \|\| \[\]\)\)[\s\S]{0,140}registerDiscoveryAbility\(c, d/.test(appSrc226));
+}
+
+// ---- SNG-225: the encounter pool is STARVED at generated locations — null danger reads as 0 (§3/§4a/§4b) ----
+{
+  // §4b: a MISSING dangerLevel floors to 1 (not 0), so it never silently guts the pool. An explicit value stands.
+  check("225 §4b: dangerOf floors a NULL dangerLevel to 1 (a missing field is not the safest place)", dangerOf({ tags: [] }) === 1 && dangerOf({ dangerLevel: null }) === 1 && dangerOf({}) === 1);
+  check("225 §4b: an EXPLICIT dangerLevel is honoured (0 stays 0 — a deliberate haven; 3 stays 3)", dangerOf({ dangerLevel: 0 }) === 0 && dangerOf({ dangerLevel: 3 }) === 3);
+
+  // THE BUG, PROVEN: a minDanger:1 encounter was INELIGIBLE at a null-danger location; now it's eligible.
+  const fight = { id: "raiders", flavor: "fight", minDanger: 1, regions: ["*"] };
+  check("225 §3: a minDanger:1 encounter is now ELIGIBLE at a null-danger location (the pool un-starves)", isEligible(fight, { tags: ["transitional"], regionId: "valley" }) === true);
+
+  // §4a: deriveDangerLevel — inherit the neighbourhood, nudge by tags, floor 1, clamp 4.
+  check("225 §4a: derive inherits the neighbourhood's danger (a road near a danger-2 town ≈ 2)", deriveDangerLevel({ tags: ["transitional"] }, { baseDanger: 2 }) === 2);
+  check("225 §4a: a transit stub with no neighbourhood still floors to 1 (never null/0)", deriveDangerLevel({ tags: ["transitional"] }) === 1);
+  check("225 §4a: a RISKY tag lifts, a SAFE tag lowers, clamped 1..4", deriveDangerLevel({ tags: ["disputed"] }, { baseDanger: 2 }) === 3 && deriveDangerLevel({ tags: ["hearth"] }, { baseDanger: 2 }) === 1 && deriveDangerLevel({ tags: ["ruin", "wild"] }, { baseDanger: 4 }) === 4);
+
+  // wiring: minted with a real danger + a load backfill heals existing null-danger gen-locations.
+  const appSrc225b = readFileSync(join(root, "app.js"), "utf8");
+  check("225 §4a: mintTransitLocation stamps a derived dangerLevel (never null again)", /dangerLevel: deriveDangerLevel\(\{ tags: \["transitional"\] \}, \{ baseDanger: here\?\.dangerLevel \}\)/.test(appSrc225b));
+  check("225 §4a: a load BACKFILL heals any gen-location minted with null danger, from the region MEDIAN (Silas's Waygate → ~2)", /for \(const loc of Object\.values\(c\.generated\?\.location \|\| \{\}\)\)[\s\S]{0,160}loc\.dangerLevel = deriveDangerLevel\(loc, \{ baseDanger: regionMedian/.test(appSrc225b));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

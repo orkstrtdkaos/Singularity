@@ -10,10 +10,30 @@
 
 const PEACEFUL = ["beneficial", "benign", "beautiful"];
 const PERILOUS = ["dangerous", "theft", "chase", "fight"];
+const RISKY_TAGS = ["disputed", "wild", "frontier", "march", "ruin", "raid", "contested", "border", "wilds", "deep", "dark", "waste", "broken", "haunt"];
+const SAFE_TAGS = ["sanctuary", "haven", "hearth", "temple", "market", "settled", "home", "refuge", "village"];
+const DANGER_FLOOR = 1; // SNG-225 §4b: a place in the world is never "safest possible" by accident of a missing field
 
-/** A location's danger, clamped 0..4 (undefined → 0: the quiet places). */
+/** A location's danger, clamped 0..4. SNG-225 §4b: a MISSING dangerLevel is NOT 0 (the safest possible, which
+ *  silently disqualifies every minDanger>0 encounter and STARVES the eligible pool at generated locations) —
+ *  a null/undefined danger floors to DANGER_FLOOR so a road can still hold a threat. An explicit 0 is honoured
+ *  (a deliberate haven); only the absence of the field is floored. */
 export function dangerOf(location) {
-  return Math.max(0, Math.min(4, location?.dangerLevel | 0));
+  const raw = location?.dangerLevel;
+  if (raw == null) return DANGER_FLOOR;
+  return Math.max(0, Math.min(4, raw | 0));
+}
+
+/** SNG-225 §4a: a real dangerLevel for a MINTED location, so it is never null (null guts encounter eligibility,
+ *  §3). Inherits the neighbourhood's danger (the place it was reached from), nudged by its own tags — a road
+ *  near a danger-2 town is ~danger 2, a "wild"/"disputed"/"ruin"-tagged place lifts, a hearth/haven lowers.
+ *  Low-but-nonzero floor of 1 (a transit waypost is not danger 0). Pure, clamped 1..4. */
+export function deriveDangerLevel(location, { baseDanger = null } = {}) {
+  const tags = (location?.tags || []).map(t => String(t).toLowerCase());
+  let d = baseDanger != null ? Math.max(0, Math.min(4, baseDanger | 0)) : DANGER_FLOOR;
+  if (tags.some(t => RISKY_TAGS.some(r => t.includes(r)))) d += 1;
+  if (tags.some(t => SAFE_TAGS.some(s => t.includes(s)))) d -= 1;
+  return Math.max(1, Math.min(4, d));
 }
 
 /** Settled/hearth rests are safe — wilderness rests are where the night has teeth. */

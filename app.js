@@ -59,7 +59,7 @@ import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncoun
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
-import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours } from "./engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.236";
+const APP_VERSION = "1.8.237";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1570,6 +1570,21 @@ function migrate(c) {
     let registered = 0;
     for (const d of (c.discoveries || [])) if (d && !(c.abilities || []).some(a => a.abilityId === d.id) && registerDiscoveryAbility(c, d, cat, { at: null })) registered++;
     if (registered) { try { saveCharacter(c); } catch { /* best-effort */ } }
+  }
+  // SNG-225 §4a: heal generated locations minted with a NULL dangerLevel (Silas's Waygate) — a null danger
+  // starves the encounter pool (reads as 0 → every minDanger>0 encounter is ineligible). Derive a real one
+  // from the location's REGION median (valley ≈ 2, so a healed stub isn't the tamest place in the world; this
+  // un-gates the minDanger:2 perilous encounters, not just minDanger:1) + its own tags. Idempotent. Live layer.
+  {
+    const medianCache = {};
+    const regionMedian = rid => {
+      if (medianCache[rid] != null) return medianCache[rid];
+      const vals = Object.values(CONTENT.locations || {}).filter(l => (l.regionId || l.region) === rid && l.dangerLevel != null).map(l => l.dangerLevel | 0).sort((a, b) => a - b);
+      return (medianCache[rid] = vals.length ? vals[Math.floor(vals.length / 2)] : 1);
+    };
+    let healed = 0;
+    for (const loc of Object.values(c.generated?.location || {})) if (loc && typeof loc === "object" && loc.dangerLevel == null) { loc.dangerLevel = deriveDangerLevel(loc, { baseDanger: regionMedian(loc.regionId || loc.region) }); healed++; }
+    if (healed) { try { saveCharacter(c); } catch { /* best-effort */ } }
   }
   // SNG-222: a discovery minted before the moment existed (Erik's Marrow's Wings) gets its moment on load.
   if ((c.discoveries || []).some(d => d && !d._momentShown)) presentBackfilledDiscoveries(c);
@@ -4757,6 +4772,9 @@ function mintTransitLocation(moveRef) {
     // SNG-216: `_gen` MUST be the tracking OBJECT (stampGenerated's shape), not a boolean flag — a boolean
     // here is what made recordAttention throw on arrival + abort the location commit (the SNG-210 desync).
     tags: ["transitional"], connections: here ? [here.id] : [], _mintedAs: "transit",
+    // SNG-225 §4a: a real dangerLevel, never null — a null danger reads as 0 (safest possible) and STARVES the
+    // encounter pool (every minDanger>0 encounter becomes ineligible). Inherit the neighbourhood's danger.
+    dangerLevel: deriveDangerLevel({ tags: ["transitional"] }, { baseDanger: here?.dangerLevel }),
     _gen: { type: "location", tier: "fresh", engagementScore: 0, birthWeight: 1, rating: null, attentionHistory: [], createdDay: (() => { try { return readClock(character.clock).day; } catch { return null; } })(), provenance: { locationId: here?.id || null, day: null, hint: "transit" } },
     map: coordForGenerated(id, here?.map, existing)
   };

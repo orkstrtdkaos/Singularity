@@ -7,8 +7,8 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
-  "level": 22,
-  "xp": 2196,
+  "level": 23,
+  "xp": 2209,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -148,11 +148,11 @@
     "value": 0.053420408281249956,
     "spectrum": 0.11337499999999998
   },
-  "attunement": 22,
-  "maxHealth": 135,
-  "health": 135,
-  "maxEnergy": 205,
-  "energy": 193,
+  "attunement": 23,
+  "maxHealth": 140,
+  "health": 140,
+  "maxEnergy": 210,
+  "energy": 210,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -526,7 +526,8 @@
         "valley.radiant_plateau_edge",
         "ashwarden.cairnhold",
         "ashwarden.long_grey",
-        "ashwarden.quiet_ground"
+        "ashwarden.quiet_ground",
+        "ashwarden"
       ],
       "day": 1,
       "worldDay": 12
@@ -647,7 +648,8 @@
         "valley.radiant_plateau_edge",
         "ashwarden.cairnhold",
         "ashwarden.long_grey",
-        "ashwarden.quiet_ground"
+        "ashwarden.quiet_ground",
+        "ashwarden"
       ],
       "_bonusApplied": 0.25,
       "day": 1,
@@ -785,7 +787,8 @@
         "valley.radiant_plateau_edge",
         "ashwarden.cairnhold",
         "ashwarden.long_grey",
-        "ashwarden.quiet_ground"
+        "ashwarden.quiet_ground",
+        "ashwarden"
       ],
       "_bonusApplied": 0.25,
       "day": 1,
@@ -923,7 +926,8 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden"
       ],
       "_bonusApplied": 0.4,
       "day": 3,
@@ -1029,7 +1033,8 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden"
       ],
       "_bonusApplied": 0.15,
       "day": 3,
@@ -1136,7 +1141,8 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden"
       ],
       "day": 4,
       "worldDay": 18
@@ -1241,7 +1247,8 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden"
       ],
       "day": 5,
       "worldDay": 18
@@ -1345,7 +1352,8 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden"
       ],
       "day": 5,
       "worldDay": 18
@@ -1450,7 +1458,8 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden"
       ],
       "day": 5,
       "worldDay": 18
@@ -1603,7 +1612,8 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden"
       ],
       "_bonusApplied": 0.15,
       "day": 6,
@@ -1848,88 +1858,90 @@
         "player": "Light the forge and begin with The Working Model — think the full modification through before touching the fuller, so every cut is certain",
         "summary": "Silas runs The Working Model on Memory's upgrade at dawn — the full modification sequence mapped before a single cut is made.",
         "narration": "The forge is cold from the night. Pell crouches at the firebox and opens the draft while you set Memory against the near wall, point down, shaft resting in the bracket. Huginn drops from your shoulder to the top of the bellows-post and tucks its wings.\n\nYou close your eyes. The Working Model is not a dramatic thing — it is the opposite of dramatic. It is sitting with a problem until the problem tells you what it needs. You hold Memory's design in your mind: the four seated threads, the fuller's channel, the existing anchor. The shadow-copy intention you and Pell named last night wants to ride alongside the anchor thread, not replace it. The fuller is not wide enough for two threads of that weight. You will need to open it by two finger-widths, recut the seating groove, and reseat the shadow-channel before the anchor can be re-tied. The order matters: channel first, shadow-work seated, anchor re-closed last. If you reverse any step, the anchor thread will read the shadow-channel as interference and resist the closure.\n\nYou open your eyes. Pell has the fire lit and is working the bellows with one hand, the other resting on the anvil face. She looks at you and you tell her the sequence — channel, shadow, anchor — and the width you need taken from the fuller. She nods once. She already had the file in her hand."
+      },
+      {
+        "player": "Create a shadow work of the working model you just made. 1-1 size... hold it and  evaluate it with Pell",
+        "summary": "Silas manifests a shadow-scale working model of Memory's upgrade and holds it for Pell to read — she names the single-pass angle before he finishes looking.",
+        "narration": "The Working Model is already sharp in your mind — the full sequence mapped, every cut placed. You do not let it dissolve. Instead you hold it steady and reach for The Shadow Work alongside it, the two running at once without quite joining. Not a braid. A carrying. The shadow lifts off the design the way smoke lifts off a coal: slow, exact, the shape of the thing without the weight of it.\n\nA dark double of Memory's intended modification hangs in the air between you and Pell. Life-sized. The fuller's channel shows clearly — its current width, and the wider path it needs to carry two threads. The shadow-copy's seating groove is visible too, the exact track the secondary thread must follow before the anchor re-closes over it. It is not solid enough to touch, but it is solid enough to read.\n\nPell sets her file down without being asked. She steps to your left side and studies the shadow from the angle she would work. Her eye moves along the channel, pauses at the seating groove, moves back. She says, \"The grove wants to start at the near shoulder and push through in one pass. Single-angle.\" She says it the way she names most things — as information, not a question. Then she says, \"You agree?\"\n\nYou hold the shadow steady. She is right. The fuller's geometry wants a single-direction pass rather than two correcting cuts. The shadow shows it clearly. Huginn's eye tracks the dark shape from the bellows-post, utterly unimpressed, then looks away.\n\n*You feel it settle into you — a new steadiness. (Level 23: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "The forge is cold from the night. Pell crouches at the firebox and opens the draft while you set Memory against the near wall, point down, shaft resting in the bracket. Huginn drops from your shoulder to the top of the bellows-post and tucks its wings.\n\nYou close your eyes. The Working Model is not a dramatic thing — it is the opposite of dramatic. It is sitting with a problem until the problem tells you what it needs. You hold Memory's design in your mind: the four seated threads, the fuller's channel, the existing anchor. The shadow-copy intention you and Pell named last night wants to ride alongside the anchor thread, not replace it. The fuller is not wide enough for two threads of that weight. You will need to open it by two finger-widths, recut the seating groove, and reseat the shadow-channel before the anchor can be re-tied. The order matters: channel first, shadow-work seated, anchor re-closed last. If you reverse any step, the anchor thread will read the shadow-channel as interference and resist the closure.\n\nYou open your eyes. Pell has the fire lit and is working the bellows with one hand, the other resting on the anvil face. She looks at you and you tell her the sequence — channel, shadow, anchor — and the width you need taken from the fuller. She nods once. She already had the file in her hand.",
-      "sceneSummary": "Silas runs The Working Model on Memory's upgrade at dawn — the full modification sequence mapped before a single cut is made.",
+      "narration": "The Working Model is already sharp in your mind — the full sequence mapped, every cut placed. You do not let it dissolve. Instead you hold it steady and reach for The Shadow Work alongside it, the two running at once without quite joining. Not a braid. A carrying. The shadow lifts off the design the way smoke lifts off a coal: slow, exact, the shape of the thing without the weight of it.\n\nA dark double of Memory's intended modification hangs in the air between you and Pell. Life-sized. The fuller's channel shows clearly — its current width, and the wider path it needs to carry two threads. The shadow-copy's seating groove is visible too, the exact track the secondary thread must follow before the anchor re-closes over it. It is not solid enough to touch, but it is solid enough to read.\n\nPell sets her file down without being asked. She steps to your left side and studies the shadow from the angle she would work. Her eye moves along the channel, pauses at the seating groove, moves back. She says, \"The grove wants to start at the near shoulder and push through in one pass. Single-angle.\" She says it the way she names most things — as information, not a question. Then she says, \"You agree?\"\n\nYou hold the shadow steady. She is right. The fuller's geometry wants a single-direction pass rather than two correcting cuts. The shadow shows it clearly. Huginn's eye tracks the dark shape from the bellows-post, utterly unimpressed, then looks away.\n\n*You feel it settle into you — a new steadiness. (Level 23: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Silas manifests a shadow-scale working model of Memory's upgrade and holds it for Pell to read — she names the single-pass angle before he finishes looking.",
       "choices": [
         {
-          "label": "Begin the physical work — give Pell the fuller and guide her cuts with your read of the channel",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
-          "intentTags": [
-            "craft",
-            "careful"
-          ],
-          "abilityId": "the_raised_thing",
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Seat the shadow-channel yourself before the anchor is re-tied — hands on the shaft, the thread drawn from the shadow-work",
+          "label": "Agree with Pell's read and begin the work — single-angle pass on the fuller, then seat the shadow-channel",
           "attribute": "practical",
           "subAttribute": "craft",
           "difficulty": 15,
           "intentTags": [
             "craft"
           ],
-          "abilityId": "the_shadow_work",
-          "energyCost": 1,
+          "abilityId": "the_raised_thing",
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Let Pell lead the full physical work — you watch the channel with Order-Sense and call corrections as she cuts",
+          "label": "Study the shadow a moment longer — run Order-Sense across the full design before the first cut",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "craft",
-            "careful"
+            "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Check on Crane's departure timing before the work goes deep — a word at the door, then back to the forge",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Release the shadow and hand the file to Pell — let her lead the cut while you watch the thread",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "help"
           ],
           "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Pell to mark the angle on the shaft before you start — chalk line, so the cut has no doubt in it",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "craft"
+          ],
+          "abilityId": null,
           "trivial": true
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -1,
-        "xp": 1
+        "energy": -1
       },
       "scene": {
-        "setting": "Inside Pell's forge, dawn — fire newly lit, the firebox drawing, cold stone walls just starting to hold the first edge of warmth. Early-spring light pale at the single high window.",
+        "setting": "Inside Pell's forge, dawn — fire newly lit and drawing, the firebox beginning to push warmth into cold stone. Early-spring light pale at the single high window. A shadow-scale duplicate of Memory's modification hangs in the air between Silas and Pell.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing at the anvil, file in hand, bellows-arm loose, watching Silas — ready to begin."
+            "state": "Standing to Silas's left, file set down, reading the shadow-duplicate carefully — she has already named the single-angle pass."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the bellows-post, wings tucked, watching the forge floor."
+            "state": "On the bellows-post, wings tucked, watched the shadow briefly and looked away."
           }
         ],
         "objects": [
           "Memory (spear, leaned shaft-down in the wall bracket)",
-          "The fuller — not yet touched",
-          "File in Pell's hand",
-          "Forge fire — newly lit, building heat"
+          "Shadow-duplicate of Memory's fuller modification — life-sized, readable, hanging in the air",
+          "File — set down on the anvil",
+          "Forge fire — newly lit, building heat",
+          "Chalk Blanks (pair) — in Silas's kit"
         ],
         "threads": [
-          "Memory's upgrade sequence: channel first, shadow-work seated, anchor re-closed last",
+          "Memory's upgrade sequence confirmed: single-angle pass on the fuller, shadow-channel seated, anchor re-closed last",
           "Crane's departure — morning, before the first water reading",
           "Pell's 'not nothing' — too soon to know"
         ]
@@ -1939,50 +1951,39 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Received the modification sequence without question — file already in hand before Silas finished naming the steps.",
-          "statusNote": "At the forge, ready to begin Memory's fuller work.",
-          "learned": [
-            "The Working Model sequence for Memory's upgrade: widen the fuller, seat the shadow-channel, re-close the anchor — in that order."
-          ]
+          "note": "Read the shadow-duplicate of Memory's fuller modification and named the single-angle pass before Silas finished studying it.",
+          "skillsObserved": [
+            "reading a shadow working model and extracting the correct cut angle without prompting"
+          ],
+          "statusNote": "At the forge, file set down, waiting for Silas's answer on the single-angle pass."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short quiet stretch — fire lit, the model thought through, the sequence named."
-      },
-      "codexUpdates": [
-        {
-          "topic": "memory-spear",
-          "label": "Memory — Upgrade Plan",
-          "kind": "lore",
-          "fact": "The modification sequence is mapped: widen the fuller by two finger-widths, recut the seating groove for the shadow-channel, seat the shadow-work thread, then re-close the anchor. Order is load-bearing — reversing any step causes the anchor to read the new thread as interference.",
-          "links": [
-            "millbrook",
-            "the-second-thread"
-          ]
-        }
-      ]
+        "why": "Brief work at the forge — the working model and its shadow made, Pell's read given"
+      }
     },
     "sceneState": {
-      "setting": "Inside Pell's forge, dawn — fire newly lit, the firebox drawing, cold stone walls just starting to hold the first edge of warmth. Early-spring light pale at the single high window.",
+      "setting": "Inside Pell's forge, dawn — fire newly lit and drawing, the firebox beginning to push warmth into cold stone. Early-spring light pale at the single high window. A shadow-scale duplicate of Memory's modification hangs in the air between Silas and Pell.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at the anvil, file in hand, bellows-arm loose, watching Silas — ready to begin."
+          "state": "Standing to Silas's left, file set down, reading the shadow-duplicate carefully — she has already named the single-angle"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the bellows-post, wings tucked, watching the forge floor."
+          "state": "On the bellows-post, wings tucked, watched the shadow briefly and looked away."
         }
       ],
       "objects": [
         "Memory (spear, leaned shaft-down in the wall bracket)",
-        "The fuller — not yet touched",
-        "File in Pell's hand",
-        "Forge fire — newly lit, building heat"
+        "Shadow-duplicate of Memory's fuller modification — life-sized, readable, hanging",
+        "File — set down on the anvil",
+        "Forge fire — newly lit, building heat",
+        "Chalk Blanks (pair) — in Silas's kit"
       ],
       "threads": [
-        "Memory's upgrade sequence: channel first, shadow-work seated, anchor re-closed last",
+        "Memory's upgrade sequence confirmed: single-angle pass on the fuller, shadow-channel seated, anchor re-closed last",
         "Crane's departure — morning, before the first water reading",
         "Pell's 'not nothing' — too soon to know"
       ]
@@ -2303,7 +2304,8 @@
       ],
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
-      "startedWorldDay": 16
+      "startedWorldDay": 16,
+      "awaitingResolution": true
     },
     {
       "id": "the-door-that-closed-behind",
@@ -3001,7 +3003,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Read Memory, the short sword, and the brigandine through ironsense in the last of the lamp-light — named Memory as the priority and offered a forge hour in the morning before Crane moves.",
         "[d13] Read the short sword's order-sense capacitor by ironsense in the near-dark and nudged it back to center without forge work — restrained, economical, satisfied.",
         "[d13] Received the forge plan without ceremony and reminded Silas she already knew how the work goes — with considerable economy of expression.",
         "[d14] Named the forge plan for Memory in full: seat a secondary shadow-channel alongside the anchor thread, widen the fuller to let the order-sense signature bleed through — the result is a shadow copy of Memory's intention at reach, not the instrument itself. Practical, precise, and delivered from…",
@@ -3010,7 +3011,8 @@
         "[d14] Took Silas on her own terms in the pre-dawn gray — present, unhurried, entirely herself.",
         "[d14] Took the last of the pre-dawn warmth with Silas on her own terms, then settled loose against him in the quiet after — present and unhurried throughout.",
         "[d14] Woke at Silas's word without negotiation — forge first, then food. Walking beside him now.",
-        "[d14] Received the modification sequence without question — file already in hand before Silas finished naming the steps."
+        "[d14] Received the modification sequence without question — file already in hand before Silas finished naming the steps.",
+        "[d14] Read the shadow-duplicate of Memory's fuller modification and named the single-angle pass before Silas finished studying it."
       ],
       "knownFacts": [
         "The fold in the upper reach is the next move — named aloud between the two of them tonight.",
@@ -3023,15 +3025,15 @@
         "The Working Model sequence for Memory's upgrade: widen the fuller, seat the shadow-channel, re-close the anchor — in that order."
       ],
       "skillsObserved": [
-        "reading a technical blueprint's structural line without verb",
         "extending a filtration design through ironsense load-reading",
         "ironsense structural reading of multiple bound weapons simul",
         "practical triage of gear priority under time constraint",
         "fine ironsense correction of a thread-seated capacitor witho",
-        "precision identification of a novel rune-work modification p"
+        "precision identification of a novel rune-work modification p",
+        "reading a shadow working model and extracting the correct cu"
       ],
       "status": "active",
-      "statusNote": "At the forge, ready to begin Memory's fuller work.",
+      "statusNote": "At the forge, file set down, waiting for Silas's answer on the single-angle pass.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -4051,7 +4053,7 @@
     },
     "old-shepherd-woman": {
       "id": "old-shepherd-woman",
-      "name": "Gweth Callow, the Shepherd of the South March",
+      "name": "Gweth Callow",
       "role": "Smallholder shepherd, March Road south of Millbrook",
       "description": "Small, shoulder-bent, even stride — hazel switch in hand and a single copper bell on the lead ewe. Reads travelers in one look and finds most of them satisfactory.",
       "firstMet": {
@@ -4847,7 +4849,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 13,
+    "lastTickDay": 14,
     "eventStages": {
       "water_crisis": {
         "stage": 2,
@@ -4860,56 +4862,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 12,
-        "worldDay": 19,
-        "text": "Word from the smokehouse: Aldric's been asking deliverymen what color the river runs where they crossed — two of three said gray by the time it reached the low ford."
-      },
-      {
-        "day": 12,
-        "worldDay": 19,
-        "text": "Mara Wells is buying stored grain from two east-furlong families — quiet, no reason given, but people notice when the supply store is buying instead of selling."
-      },
-      {
-        "day": 12,
-        "worldDay": 20,
-        "text": "Vash: Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since."
-      },
-      {
-        "day": 12,
-        "worldDay": 20,
-        "text": "Calvar: Calvar noticed a drift of 0.003 in the seventh-band baseline reading and spent the night re-checking his instruments rather than the sky, unwilling to admit whether he is hoping to find instrument error or confirm the drift is real."
-      },
-      {
-        "day": 12,
-        "worldDay": 20,
-        "text": "Pip Cotter, Mara's Errand-Runner: On the return leg Pip talked her way into carrying a small bundle of waxed cord to a chandler two streets off her route, arriving back to Mara later than expected but plainly satisfied with herself."
-      },
-      {
-        "day": 12,
-        "worldDay": 20,
-        "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir: Siol remained at the Hub plaza through the cold part of the morning, watching the Waygate with the particular stillness of someone who has decided not to leave yet but has not decided why."
-      },
-      {
-        "day": 12,
-        "worldDay": 21,
-        "text": "Vash: Vash spent the quiet hours between grinds tracing back what she overheard against the small things she knows about the array's optical layer — a particular phrase she'd dismissed as jargon now sits wrong in her, not quite matching the geometry it should describe, and she has not yet decided whether that wrongness is hers or theirs."
-      },
-      {
-        "day": 12,
-        "worldDay": 21,
-        "text": "Calvar: A subtle drift appeared in the seventh-band readings overnight — within tolerance, technically, but not within the pattern Calvar has memorized across fifteen years, and he has been sitting with that deviation since before dawn, deciding whether it is the window finally failing him or finally telling him something new."
-      },
-      {
-        "day": 12,
-        "worldDay": 21,
-        "text": "Pip Cotter, Mara's Errand-Runner: On the return leg Pip talked a market-stall keeper into letting her carry a folded note two streets over, which was small and unnecessary and made the whole trip feel properly used."
-      },
-      {
-        "day": 12,
-        "worldDay": 21,
-        "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir: Siol remained at the Hub plaza through the cooler part of the morning, watching the foot-traffic shift, neither departing nor inquiring — present in the way that costs nothing yet, and costs something."
-      },
       {
         "day": 12,
         "worldDay": 22,
@@ -4962,14 +4914,74 @@
         "worldDay": 24,
         "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir has hit trouble — A plaza vendor who had grown used to Siol's quiet presence reported them to a Hub registrar as a loiterer without a declared purpose, and now there is a notice requiring Siol to either state their business in writing or move on by the following morning.",
         "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond millbrook: Raised a cleaned rabbit from the dead in the upper meadow — no ritual, no preparation, hands and will and the valley's old grain answering",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond millbrook: Silas Weir bound death-runes into the assembled spear at an open-sky fire, with Pell Marsh's maker's mark seated into the blade and Huginn witness at the stone ring.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond millbrook: Delivered a dressed bull and sow to Aldric's smokehouse — a significant haul by village standards, carried down from the north wood by three hunters.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond millbrook: Persuaded Fendt to commit his testimony to paper and walk to Millbrook — moved the falsified ledger thread from evidence-held to evidence-carried.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond millbrook: Persuaded Calvar — pre-Transition filtration engineer and author of the seventh-band specification — to leave the Edge District and travel to Millbrook to attest against Overseer Grael",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond edge-district: Neutralized a relay figure in the cut-lane without violence or alarm — The Ended Threat, Wildcraft, and The Shadow Work braided into a clean exit for Calvar and the document.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond millbrook: Showed mercy to road opportunists after disarming them — named the broad man's grief, gave them provisions, and sent them to honest work rather than leaving them in the mud",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond millbrook: Called the key players of the water crisis to Pell's forge for an evening council — Dara, Aldric, Fendt, Mara, and the engineer Calvar, all in one room.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond millbrook: Organized the valley's water-crisis response into four parallel working threads — engineering, logistics, supply, and accounts — with named leads for each, in front of every stakeholder",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 24,
+        "text": "Word has spread beyond hub: Seated a ward in the Ent grove circle — a collective working with Pell, Veth, Siol, and Huginn — the grove's own shape as the structure, the Weirmark at the join. The Ent received it.",
+        "tier": "event"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T12:36:33.764Z",
+    "lastSharedReadAt": "2026-07-24T15:32:07.434Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
-    "lastGenCount": 588,
-    "turnsSinceOffer": 20,
+    "lastGenCount": 591,
+    "turnsSinceOffer": 21,
     "recentOffers": [
       {
         "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the…",
@@ -5063,8 +5075,8 @@
     "craft": 7,
     "wits": 5
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [
     {
       "key": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
@@ -6485,21 +6497,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.74706643249278,
-    "cerebral": 11.286276775561294,
-    "social": 11.622453165406306,
-    "generous": 3.287068653552014,
-    "cautious": 4.074747974889776,
-    "physical": 0.27621366875022435,
-    "risky": 0.2427520496392745,
-    "ruthless": 0.21471698649969873,
-    "carousing": 0.04924795853218848,
-    "amorous": 7.05597624966851,
-    "patient": 0.29540647566599254,
-    "stealth": 0.0004938687711481133,
-    "devotion": 0.26086083584336184,
-    "craft": 3.2235652163120796,
-    "leadership": 1.136500271437909
+    "strategic": 21.228389771680458,
+    "cerebral": 13.004119856172261,
+    "social": 11.331891836271147,
+    "generous": 3.2048919372132136,
+    "cautious": 3.9728792755175317,
+    "physical": 0.26930832703146873,
+    "risky": 0.23668324839829263,
+    "ruthless": 0.20934906183720625,
+    "carousing": 0.048016759568883766,
+    "amorous": 6.879576843426797,
+    "patient": 0.2880213137743427,
+    "stealth": 0.0004815220518694105,
+    "devotion": 0.2543393149472778,
+    "craft": 3.1429760859042775,
+    "leadership": 1.1080877646519613
   },
   "aptitudes": [
     "strategist",
@@ -6507,7 +6519,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 788,
+  "actionCount": 789,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6897,8 +6909,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784906589868,
-  "rev": 1279,
+  "updatedAt": 1784907199470,
+  "rev": 1285,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9195,7 +9207,7 @@
       "wildcraft": 6,
       "the_raised_thing": 13,
       "the_ended_threat": 4,
-      "the_shadow_work": 14,
+      "the_shadow_work": 15,
       "draw_down": 1,
       "wither": 3,
       "the_grey_road": 1,
@@ -9207,7 +9219,7 @@
       "marrow-s-wings": 2,
       "ask_the_dead": 1,
       "the_warding_mark": 1,
-      "the_working_model": 3,
+      "the_working_model": 4,
       "the-held-place": 1
     },
     "coActivations": {
@@ -9247,7 +9259,7 @@
       "ask_the_dead+marrow-s-wings": 1,
       "palework+shadowstep": 1,
       "the_shadow_work+the_warding_mark": 1,
-      "the_shadow_work+the_working_model": 1,
+      "the_shadow_work+the_working_model": 2,
       "the-held-place+the_shadow_work": 1,
       "the-held-place+the_working_model": 1
     },
@@ -9711,7 +9723,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 526,
+    "valley": 527,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9846,10 +9858,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T15:23:09.865Z",
+      "lastAt": "2026-07-24T15:33:19.467Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 39
+      "beats": 40
     }
   ],
   "company": [
@@ -10056,7 +10068,7 @@
     "npcUpdates": 143,
     "factUpdates": 11,
     "placeUpdates": 26,
-    "codexUpdates": 94,
+    "codexUpdates": 93,
     "timeOps": 153,
     "imagePrompt": 3,
     "sceneEnded": 33,

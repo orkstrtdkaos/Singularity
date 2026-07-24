@@ -1838,120 +1838,127 @@
         "player": "Tell her what you want — take her in turn, your hands and your weight, before the forge and Crane's departure claim the morning",
         "summary": "Silas and Pell take the last of the pre-dawn warmth for themselves — present, unhurried, entirely together — before the forge and the day's work begin.",
         "narration": "You tell her what you want. The words are plain — no ceremony, no asking permission for what is already yours to ask — and she hears them with her whole body, the lift of her chin, the way her hands go still on your chest for one breath before she answers by leaning back to give you room to move.\n\nYou take your time with it. The morning is thin at the window and Huginn has not moved and the world outside has not begun yet, and so there is time. You bring her down and settle your weight over her and she receives it the way she receives everything useful — without fuss, with complete attention. Her hands find your shoulders, your ribs, the ridge of your back. She is warm. She is entirely present. The flush that starts at her throat spreads in the cold air and you put your mouth to it and feel her exhale against your ear.\n\nHer nipples tighten again under your palms when you cup her, the cold of the room doing its work, and she makes that sound — low, unhurried, not suppressed — and presses into your hands before her attention shifts to the arch of her back and the way her hips answer yours. She is not performing anything. She is here. That is the thing about Pell. She is always entirely, uncomplicatedly here.\n\nAfterward the room is warm and she is loose against you, her forehead at your collarbone, one hand opened flat on your chest. The gray light has lifted slightly at the window. Huginn shifts on the ledge, once, and resettles. Below in the grain store the first sounds of the village beginning reach up through the boards — distant, unhurried, not yet a demand. You have a little time left before Crane's departure and the forge claim the morning. Pell does not speak. She breathes. Her hand rises once with your chest and falls."
+      },
+      {
+        "player": "Wake her fully and go to the forge now — Memory's upgrade first, while the morning is still yours.",
+        "summary": "Silas and Pell dress at dawn and carry Memory to the forge — the upgrade begins before the village wakes.",
+        "narration": "The gray finishes becoming light. You feel the shift — the room's dark thinning past the point where it is still night — and you put your mouth to the crown of her head and say her name, quiet, once.\n\nPell wakes the way she does everything: completely and without complaint. No slow negotiation with the dark, no second-guessing the hour. She registers the light at the window, registers your body beside hers, and says, \"Forge first. Then food.\" It is not a question. She is already sitting up, reaching for her shirt.\n\nYou dress in the half-dark while Huginn shifts on the ledge and faces into the room for the first time this morning. One eye. Then it faces outward again. The grain store below has begun to creak with the early movement of the day — someone down there filling sacks, the sound muffled through the floorboards.\n\nMemory is cold against your palm when you lift it from the wall. You carry it out and down the stair with Pell at your shoulder, the short sword at her hip, both of you stepping into the early-spring morning before Millbrook has properly found its feet. The forge is fifty yards. The coals from last night will want waking. The plan you made in the dark — the secondary shadow-channel, the fuller widened to carry the intention at reach — is clear in your hands before you have touched a single tool."
       }
     ],
     "lastTurn": {
-      "narration": "You tell her what you want. The words are plain — no ceremony, no asking permission for what is already yours to ask — and she hears them with her whole body, the lift of her chin, the way her hands go still on your chest for one breath before she answers by leaning back to give you room to move.\n\nYou take your time with it. The morning is thin at the window and Huginn has not moved and the world outside has not begun yet, and so there is time. You bring her down and settle your weight over her and she receives it the way she receives everything useful — without fuss, with complete attention. Her hands find your shoulders, your ribs, the ridge of your back. She is warm. She is entirely present. The flush that starts at her throat spreads in the cold air and you put your mouth to it and feel her exhale against your ear.\n\nHer nipples tighten again under your palms when you cup her, the cold of the room doing its work, and she makes that sound — low, unhurried, not suppressed — and presses into your hands before her attention shifts to the arch of her back and the way her hips answer yours. She is not performing anything. She is here. That is the thing about Pell. She is always entirely, uncomplicatedly here.\n\nAfterward the room is warm and she is loose against you, her forehead at your collarbone, one hand opened flat on your chest. The gray light has lifted slightly at the window. Huginn shifts on the ledge, once, and resettles. Below in the grain store the first sounds of the village beginning reach up through the boards — distant, unhurried, not yet a demand. You have a little time left before Crane's departure and the forge claim the morning. Pell does not speak. She breathes. Her hand rises once with your chest and falls.",
-      "sceneSummary": "Silas and Pell take the last of the pre-dawn warmth for themselves — present, unhurried, entirely together — before the forge and the day's work begin.",
+      "narration": "The gray finishes becoming light. You feel the shift — the room's dark thinning past the point where it is still night — and you put your mouth to the crown of her head and say her name, quiet, once.\n\nPell wakes the way she does everything: completely and without complaint. No slow negotiation with the dark, no second-guessing the hour. She registers the light at the window, registers your body beside hers, and says, \"Forge first. Then food.\" It is not a question. She is already sitting up, reaching for her shirt.\n\nYou dress in the half-dark while Huginn shifts on the ledge and faces into the room for the first time this morning. One eye. Then it faces outward again. The grain store below has begun to creak with the early movement of the day — someone down there filling sacks, the sound muffled through the floorboards.\n\nMemory is cold against your palm when you lift it from the wall. You carry it out and down the stair with Pell at your shoulder, the short sword at her hip, both of you stepping into the early-spring morning before Millbrook has properly found its feet. The forge is fifty yards. The coals from last night will want waking. The plan you made in the dark — the secondary shadow-channel, the fuller widened to carry the intention at reach — is clear in your hands before you have touched a single tool.",
+      "sceneSummary": "Silas and Pell dress at dawn and carry Memory to the forge — the upgrade begins before the village wakes.",
       "choices": [
         {
-          "label": "Lie still with her a little longer — let the quiet hold before the forge calls you both.",
+          "label": "Light the forge and begin with The Working Model — think the full modification through before touching the fuller, so every cut is certain",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "craft",
+            "careful"
+          ],
+          "abilityId": "the_working_model",
+          "energyCost": 1,
+          "trivial": true
+        },
+        {
+          "label": "Go straight to the fuller with Pell — her ironsense reading the existing threads live while you open the channel, both of you working at once",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "craft",
+            "plan"
+          ],
+          "abilityId": "the_raised_thing",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Before you touch the spear, use Order-Sense to see the complete design Memory already is — find exactly where the secondary channel wants to sit before Pell opens the fuller",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "sustain"
+            "study",
+            "careful"
           ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "trivial": true
         },
         {
-          "label": "Dress and go to the window — check the light, judge how much time Crane needs before he departs.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Wake her fully and go to the forge now — Memory's upgrade first, while the morning is still yours.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 0,
-          "intentTags": [
-            "craft"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask her again — quietly, with your mouth at her ear — whether she felt anything in the bond last night. The question that is still open.",
+          "label": "Ask Pell to take the lead on the fuller work — her ironsense in this material is more precise than your hands, and you'll seat the shadow thread once the channel is open",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "help",
+            "craft"
           ],
+          "abilityId": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The low-lit room above the grain store in Millbrook — early-spring dawn brightening slowly at the window, the room warm from shared heat, the grain store beginning to stir below.",
+        "setting": "The lane outside the grain store, early-spring dawn — cold air, the village not yet fully awake, the forge building fifty yards ahead, coals from last night banked and waiting.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Loose against Silas, forehead at his collarbone, hand opened flat on his chest — breathing, present, not yet speaking."
+            "state": "Walking beside Silas, short sword at her hip, awake and purposeful — the forge already in her mind."
           },
           {
             "name": "Huginn",
-            "state": "On the window ledge, settled after one shift — facing outward with principled commitment."
+            "state": "On Silas's shoulder for the transit, eye forward."
           }
         ],
         "objects": [
-          "Memory (spear, leaning against the wall where morning light now touches it)",
-          "Pell's short sword (at the belt by the door, capacitor running clean)",
-          "Brigandine (stowed, sound)",
-          "Father's sealed fold (in pack on the shelf)",
-          "Waymarker (on person)",
-          "Document roll (with Crane for the morning)"
+          "Memory (spear, cold in hand)",
+          "Pell's short sword (at belt)",
+          "Brigandine (not yet worn — still in the room above)"
         ],
         "threads": [
-          "Memory's forge-work — secondary shadow-channel, widen the fuller, before the day claims the morning",
-          "Pell's 'not nothing' — too soon to know, the question still open",
-          "The fold in the upper reach — named between them, not yet to anyone else",
-          "Crane's departure and the committee meeting in three days"
+          "Memory's forge-work — secondary shadow-channel, widen the fuller, before Crane's departure claims the morning",
+          "Crane's departure and the committee meeting in three days",
+          "Pell's 'not nothing' — too soon to know, the question still open"
         ]
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Dressing and moving from the room to the lane — a few minutes, the first gray of dawn"
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Took the last of the pre-dawn warmth with Silas on her own terms, then settled loose against him in the quiet after — present and unhurried throughout.",
-          "statusNote": "In the room above the grain store — the warmth of the morning still hers, the forge waiting.",
-          "relationshipDelta": 0
+          "note": "Woke at Silas's word without negotiation — forge first, then food. Walking beside him now.",
+          "statusNote": "Walking with Silas toward the forge at dawn — Memory's upgrade the morning's first work."
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "the last of the pre-dawn quiet, before the village fully wakes"
-      }
+      ]
     },
     "sceneState": {
-      "setting": "The low-lit room above the grain store in Millbrook — early-spring dawn brightening slowly at the window, the room warm from shared heat, the grain store beginning to stir below.",
+      "setting": "The lane outside the grain store, early-spring dawn — cold air, the village not yet fully awake, the forge building fifty yards ahead, coals from last night banked and waiting.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Loose against Silas, forehead at his collarbone, hand opened flat on his chest — breathing, present, not yet speaking."
+          "state": "Walking beside Silas, short sword at her hip, awake and purposeful — the forge already in her mind."
         },
         {
           "name": "Huginn",
-          "state": "On the window ledge, settled after one shift — facing outward with principled commitment."
+          "state": "On Silas's shoulder for the transit, eye forward."
         }
       ],
       "objects": [
-        "Memory (spear, leaning against the wall where morning light now touches it)",
-        "Pell's short sword (at the belt by the door, capacitor running clean)",
-        "Brigandine (stowed, sound)",
-        "Father's sealed fold (in pack on the shelf)",
-        "Waymarker (on person)",
-        "Document roll (with Crane for the morning)"
+        "Memory (spear, cold in hand)",
+        "Pell's short sword (at belt)",
+        "Brigandine (not yet worn — still in the room above)"
       ],
       "threads": [
-        "Memory's forge-work — secondary shadow-channel, widen the fuller, before the day claims the morning",
-        "Pell's 'not nothing' — too soon to know, the question still open",
-        "The fold in the upper reach — named between them, not yet to anyone else",
-        "Crane's departure and the committee meeting in three days"
+        "Memory's forge-work — secondary shadow-channel, widen the fuller, before Crane's departure claims the morning",
+        "Crane's departure and the committee meeting in three days",
+        "Pell's 'not nothing' — too soon to know, the question still open"
       ]
     }
   },
@@ -2968,7 +2975,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Named the fold as first priority without prompting — 'everything else is already moving without us.' Satisfied by the fellowship structure holding.",
         "[d13] Received Silas's hand on her belly and answered plainly — too soon to know, but not nothing. Put her hand over his and held it. Told him to ask again when they're out of the mud.",
         "[d13] Read Memory, the short sword, and the brigandine through ironsense in the last of the lamp-light — named Memory as the priority and offered a forge hour in the morning before Crane moves.",
         "[d13] Read the short sword's order-sense capacitor by ironsense in the near-dark and nudged it back to center without forge work — restrained, economical, satisfied.",
@@ -2977,7 +2983,8 @@
         "[d14] Received Silas's praise plainly and without deflection — said 'I know' into his shoulder, meaning it entirely. Lay close through the pre-dawn quiet.",
         "[d14] Took Silas on her own terms in the pre-dawn quiet — decisive, unhurried, entirely herself; the warmth between them real and grounded.",
         "[d14] Took Silas on her own terms in the pre-dawn gray — present, unhurried, entirely herself.",
-        "[d14] Took the last of the pre-dawn warmth with Silas on her own terms, then settled loose against him in the quiet after — present and unhurried throughout."
+        "[d14] Took the last of the pre-dawn warmth with Silas on her own terms, then settled loose against him in the quiet after — present and unhurried throughout.",
+        "[d14] Woke at Silas's word without negotiation — forge first, then food. Walking beside him now."
       ],
       "knownFacts": [
         "Intake head must account for low-water pressure drop or the first filter stage starves",
@@ -2998,7 +3005,7 @@
         "precision identification of a novel rune-work modification p"
       ],
       "status": "active",
-      "statusNote": "In the room above the grain store — the warmth of the morning still hers, the forge waiting.",
+      "statusNote": "Walking with Silas toward the forge at dawn — Memory's upgrade the morning's first work.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -4936,7 +4943,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 588,
-    "turnsSinceOffer": 18,
+    "turnsSinceOffer": 19,
     "recentOffers": [
       {
         "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the…",
@@ -6452,21 +6459,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.82465896909168,
-    "cerebral": 11.872480500261716,
-    "social": 12.226117728238062,
-    "generous": 3.457797400186208,
-    "cautious": 3.23444888877294,
-    "physical": 0.29056007232107756,
-    "risky": 0.25536047299331965,
-    "ruthless": 0.22586928231395004,
-    "carousing": 0.05180587353813384,
-    "amorous": 7.42246022318844,
-    "patient": 0.3107497442903275,
-    "stealth": 0.0005195200748435118,
-    "devotion": 0.274409820742524,
-    "craft": 1.3134150861928517,
-    "leadership": 1.1955295426039807
+    "strategic": 21.279042494864388,
+    "cerebral": 11.575668487755173,
+    "social": 11.92046478503211,
+    "generous": 3.3713524651815527,
+    "cautious": 3.1535876665536167,
+    "physical": 0.2832960705130506,
+    "risky": 0.24897646116848665,
+    "ruthless": 0.22022255025610127,
+    "carousing": 0.05051072669968049,
+    "amorous": 7.236898717608729,
+    "patient": 0.30298100068306927,
+    "stealth": 0.000506532072972424,
+    "devotion": 0.2675495752239609,
+    "craft": 2.2805797090380304,
+    "leadership": 1.165641304038881
   },
   "aptitudes": [
     "strategist",
@@ -6474,7 +6481,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 786,
+  "actionCount": 787,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6864,8 +6871,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784905774141,
-  "rev": 1277,
+  "updatedAt": 1784905890494,
+  "rev": 1278,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9678,7 +9685,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 524,
+    "valley": 525,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9813,10 +9820,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T15:09:34.139Z",
+      "lastAt": "2026-07-24T15:11:30.493Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 37
+      "beats": 38
     }
   ],
   "company": [
@@ -10016,15 +10023,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 157,
-    "choices": 157,
+    "sceneSummary": 158,
+    "choices": 158,
     "characterDeltas": 63,
-    "scene": 157,
-    "npcUpdates": 141,
+    "scene": 158,
+    "npcUpdates": 142,
     "factUpdates": 11,
     "placeUpdates": 26,
     "codexUpdates": 93,
-    "timeOps": 151,
+    "timeOps": 152,
     "imagePrompt": 3,
     "sceneEnded": 33,
     "itemUpdates": 2,
@@ -10041,7 +10048,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 157,
+  "_opTurns": 158,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

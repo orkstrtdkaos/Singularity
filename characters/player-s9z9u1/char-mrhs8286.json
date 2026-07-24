@@ -1805,121 +1805,143 @@
         "player": null,
         "summary": "Dawn at the Fell Pell — Memory complete, Pell at the door, the road waiting.",
         "narration": "The forge is quiet at this hour. The last of the night fire has burned to orange coals, and the light they throw is warm and low — the color of something finishing rather than starting. Memory rests in Pell's hands, the shadow-twin on the bench answering to Silas alone, and the whole of the work is done.\n\nPell is at the door, pack on her shoulder, the short sword at her hip where it belongs. She does not look back at the forge. People who understand finished work do not linger over it. She looks at Silas instead, direct and patient, the way she always does when she is waiting for him to name the next thing.\n\nHuginn is on the ridgepole above the lane. He has been there since before Silas woke, which means something ended in the night nearby — nothing urgent, or he would have made more noise about it. The early-spring air through the open door is cold and sharp, carrying the smell of thawed mud and the faint river. Millbrook is stirring: the creak of a shutter somewhere, a dog, the particular silence of people who are already awake but not yet talking.\n\nThe road waits. Warden Coll's committee meets in three days. The water situation has a structure now — Crane, Dara, Mara, Aldric — but the source is still the source, and the half-made fold at the Crossing is the thing Silas's father spent fifteen years watching without finishing. Both threads point the same direction. South, and then into the Disputed Zone."
+      },
+      {
+        "player": "Find Edvar Crane before leaving — confirm he is ready and that the Millbrook thread is genuinely in hand before the party goes out of reach.",
+        "summary": "Silas finds Crane staged and ready at the waygate platform — every Millbrook thread confirmed in hand, the delegation complete. The party is assembled and the road south is open.",
+        "narration": "Silas steps out into the lane before Pell moves, and Huginn drops from the ridgepole without a sound — a downward glide that ends on his shoulder, weightless and deliberate. The bird smells of cold air and high places.\n\nEdvar Crane is already at the waygate platform when Silas reaches it. He has his pack, a rolled oilcloth tucked under one arm, and the careful look of a man who slept badly because he was thinking through a list and wanted to be sure he had reached the end of it. He raises his chin when he sees Silas coming.\n\n\"Ready,\" said Crane, and he said it the way engineers say things — as a status report, not a reassurance. \"Mara has the filtration notes. Dara has the repair sequence. Aldric holds the accounts. I told them to send anything structural to me through Mara's relay, and she wrote it in the ledger margin herself so it won't be lost.\" He paused, and then added, with the tone of a man who has been carrying this thought for some hours: \"The thread is in hand. You can go south without looking back over your shoulder at it.\"\n\nHuginn made a sound from Silas's shoulder — not quite a word, more the shape of one. Crane glanced at the bird without alarm. He had spent enough time in the fellowship's company to have stopped being alarmed by it, which was probably a sign of something. The early-spring morning was cold and clear, the lane still in shadow, the creek somewhere to the east running its gray-green color that no one mentioned out loud. The waygate stood ahead. Pell arrived at Silas's back a moment later, Memory in hand, pack settled, without a word.\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*"
       }
     ],
     "lastTurn": {
-      "narration": "The forge is quiet at this hour. The last of the night fire has burned to orange coals, and the light they throw is warm and low — the color of something finishing rather than starting. Memory rests in Pell's hands, the shadow-twin on the bench answering to Silas alone, and the whole of the work is done.\n\nPell is at the door, pack on her shoulder, the short sword at her hip where it belongs. She does not look back at the forge. People who understand finished work do not linger over it. She looks at Silas instead, direct and patient, the way she always does when she is waiting for him to name the next thing.\n\nHuginn is on the ridgepole above the lane. He has been there since before Silas woke, which means something ended in the night nearby — nothing urgent, or he would have made more noise about it. The early-spring air through the open door is cold and sharp, carrying the smell of thawed mud and the faint river. Millbrook is stirring: the creak of a shutter somewhere, a dog, the particular silence of people who are already awake but not yet talking.\n\nThe road waits. Warden Coll's committee meets in three days. The water situation has a structure now — Crane, Dara, Mara, Aldric — but the source is still the source, and the half-made fold at the Crossing is the thing Silas's father spent fifteen years watching without finishing. Both threads point the same direction. South, and then into the Disputed Zone.",
-      "sceneSummary": "Dawn at the Fell Pell — Memory complete, Pell at the door, the road waiting.",
+      "narration": "Silas steps out into the lane before Pell moves, and Huginn drops from the ridgepole without a sound — a downward glide that ends on his shoulder, weightless and deliberate. The bird smells of cold air and high places.\n\nEdvar Crane is already at the waygate platform when Silas reaches it. He has his pack, a rolled oilcloth tucked under one arm, and the careful look of a man who slept badly because he was thinking through a list and wanted to be sure he had reached the end of it. He raises his chin when he sees Silas coming.\n\n\"Ready,\" said Crane, and he said it the way engineers say things — as a status report, not a reassurance. \"Mara has the filtration notes. Dara has the repair sequence. Aldric holds the accounts. I told them to send anything structural to me through Mara's relay, and she wrote it in the ledger margin herself so it won't be lost.\" He paused, and then added, with the tone of a man who has been carrying this thought for some hours: \"The thread is in hand. You can go south without looking back over your shoulder at it.\"\n\nHuginn made a sound from Silas's shoulder — not quite a word, more the shape of one. Crane glanced at the bird without alarm. He had spent enough time in the fellowship's company to have stopped being alarmed by it, which was probably a sign of something. The early-spring morning was cold and clear, the lane still in shadow, the creek somewhere to the east running its gray-green color that no one mentioned out loud. The waygate stood ahead. Pell arrived at Silas's back a moment later, Memory in hand, pack settled, without a word.\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*",
+      "sceneSummary": "Silas finds Crane staged and ready at the waygate platform — every Millbrook thread confirmed in hand, the delegation complete. The party is assembled and the road south is open.",
       "choices": [
         {
-          "label": "Step out and set the day's direction — name the first destination aloud to Pell and Huginn and begin moving.",
+          "label": "Speak a word of acknowledgment to Crane — name what he is taking on, plainly, before the party goes through the gate",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "lead"
+            "lead",
+            "help"
           ],
           "trivial": true
         },
         {
-          "label": "Take a moment at the door with Order-Sense — read the design the village sits in this morning, what threads are live and which have gone quiet overnight.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Find Edvar Crane before leaving — confirm he is ready and that the Millbrook thread is genuinely in hand before the party goes out of reach.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "lead"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Check the Sealed Waystation Message — the lower waystation at the March road fork is on the route south. Carry it now and deliver it in person rather than trusting the hook.",
+          "label": "Hand Crane the Sealed Waystation Message — it belongs to the southbound route, not the Millbrook thread, but the waystation fork is before the Crossing",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Step through the waygate and put the road under your feet — the thread is in hand, and lingering is its own kind of doubt",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Crane one last question — the thing you have not asked yet, the thing Huginn's early arrival at the platform suggests might be worth asking",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside and at the threshold of the Fell Pell forge, Millbrook, at dawn. The coals are low and orange. The door stands open onto the cold morning lane.",
+        "setting": "The waygate platform at Millbrook's south edge, early-spring dawn. The lane is still in shadow; the gate stands ahead. The creek is audible but not visible from here.",
         "npcsPresent": [
           {
+            "name": "Edvar Crane",
+            "state": "Standing at the platform with his pack and rolled oilcloth, looking at Silas — the list complete, the thread confirmed, ready to hold it."
+          },
+          {
             "name": "Pell Ran Marsh",
-            "state": "At the door, pack on shoulder, Memory in hand, watching Silas — waiting."
+            "state": "Arrived at Silas's back, Memory in hand, pack settled, watching without comment."
           },
           {
             "name": "Huginn",
-            "state": "On the ridgepole above the lane. Still. Has been there since before dawn."
+            "state": "On Silas's shoulder, still, watching Crane with the flat calm attention it gives to things that are about to change."
           }
         ],
         "objects": [
-          "Memory — the shadow-spear, sealed, resting in Pell's hands",
-          "Shadow-twin on the bench (answers to Silas alone)",
-          "Low orange forge coals",
-          "Pell's pack and short sword",
-          "Silas's traveler's pack and inventory"
+          "Memory — in Pell's hands",
+          "Shadow-twin — on the bench back at the forge, answering Silas alone",
+          "Crane's oilcloth roll — tucked under his arm",
+          "Sealed Waystation Message (Mara) — in Silas's inventory",
+          "Waygate — standing ahead"
         ],
         "threads": [
           "The road south — Warden Coll's committee in three days, the half-made fold at the Crossing, the contamination source in the Disputed Zone",
-          "Edvar Crane — confirmed for the road, should be staged at the waygate platform",
-          "Sealed Waystation Message in inventory — delivery point is on the route south"
+          "Sealed Waystation Message — delivery point on the route south, before the Crossing fork"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "At the forge door at dawn — packed and ready, Memory in hand, watching Silas for the direction.",
-          "statusNote": "At Silas's side, packed and ready to depart the Fell Pell for the road south."
+          "npcId": "edvar-crane",
+          "name": "Edvar Crane",
+          "note": "Confirmed the delegation complete at the waygate platform — named every thread holder from memory, confirmed Mara has the relay written in the ledger margin. Said 'the thread is in hand' and meant it as a status report.",
+          "learned": [
+            "The delegation is fully confirmed: Mara holds filtration notes and relay, Dara holds repair sequence, Aldric holds accounts — all written and lodged.",
+            "Crane told Silas to go south without looking back over his shoulder at the Millbrook thread."
+          ],
+          "statusNote": "Staged at the waygate platform, pack and oilcloth ready, holding the Millbrook thread as Silas's named delegate.",
+          "relationshipDelta": 0
         }
       ],
+      "delegateOps": [
+        {
+          "npcId": "edvar-crane",
+          "charge": "the Millbrook filtration thread — repair sequence, notes, and structural relay through Mara",
+          "targetEventId": "the-water-crisis"
+        }
+      ],
+      "offer": {
+        "thing": "Huginn dropped to Silas's shoulder before the waygate — earlier than usual, heavier than usual. It has not spoken. But it has been watching Crane since before Silas arrived, with the particular stillness it holds when it knows something about a person's ending that it has not been asked to name.",
+        "from": "Huginn attends endings — it knows when a thing is ending, how, and roughly when. It was on the ridgepole before dawn, and it came to the waygate with specific attention on Crane."
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Scene opening — a moment at the forge threshold before the day begins."
+        "why": "A brief walk to the waygate platform and a short exchange with Crane."
       }
     },
     "sceneState": {
-      "setting": "Inside and at the threshold of the Fell Pell forge, Millbrook, at dawn. The coals are low and orange. The door stands open onto the cold morning lane.",
+      "setting": "The waygate platform at Millbrook's south edge, early-spring dawn. The lane is still in shadow; the gate stands ahead. The creek is audible but not visible from here.",
       "npcsPresent": [
         {
+          "name": "Edvar Crane",
+          "state": "Standing at the platform with his pack and rolled oilcloth, looking at Silas — the list complete, the thread confirmed, "
+        },
+        {
           "name": "Pell Ran Marsh",
-          "state": "At the door, pack on shoulder, Memory in hand, watching Silas — waiting."
+          "state": "Arrived at Silas's back, Memory in hand, pack settled, watching without comment."
         },
         {
           "name": "Huginn",
-          "state": "On the ridgepole above the lane. Still. Has been there since before dawn."
+          "state": "On Silas's shoulder, still, watching Crane with the flat calm attention it gives to things that are about to change."
         }
       ],
       "objects": [
-        "Memory — the shadow-spear, sealed, resting in Pell's hands",
-        "Shadow-twin on the bench (answers to Silas alone)",
-        "Low orange forge coals",
-        "Pell's pack and short sword",
-        "Silas's traveler's pack and inventory"
+        "Memory — in Pell's hands",
+        "Shadow-twin — on the bench back at the forge, answering Silas alone",
+        "Crane's oilcloth roll — tucked under his arm",
+        "Sealed Waystation Message (Mara) — in Silas's inventory",
+        "Waygate — standing ahead"
       ],
       "threads": [
         "The road south — Warden Coll's committee in three days, the half-made fold at the Crossing, the contamination source in the Disputed Zone",
-        "Edvar Crane — confirmed for the road, should be staged at the waygate platform",
-        "Sealed Waystation Message in inventory — delivery point is on the route south"
+        "Sealed Waystation Message — delivery point on the route south, before the Crossing fork"
       ]
     }
   },
@@ -3947,7 +3969,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d13] Accepted the commission without hesitation — his twenty-year watch complete, the guardedness gone. Named he will be packed before the creek runs gray again. Will travel to Stillwater's Trouble to work with Calvar on scaling the cascade.",
         "[d13] Formally introduced to Pell, Veth, and Huginn — received each in turn without ceremony. Walked Silas through a full community-scale cascade design and watched the blueprints take shape on the flagstone with evident satisfaction.",
         "[d13] Watched the three shadow models, named the settling basin detail that the shadow found before any of them drew it — a twenty-year gap in his own practice, named without embarrassment.",
         "[d13] Watched the shadow-slate transmission complete and immediately named the limestone sourcing as the hard constraint for Coll's builders.",
@@ -3956,17 +3977,18 @@
         "[d13] Stepped forward at Mara's look and directed the full four-stage cascade from memory — settling basin first, materials and quantities named, Mara writing. Accepted her commission to direct the build without ceremony.",
         "[d13] Named Gweth's standing plainly — the smallholders who have never cared about politics will care if she stands up. No advocacy, just the flat observation of a careful man.",
         "[d13] Passed the Crossing keeper's unwritten news — four days of worsening readings, not written down by the keeper himself. Named it plainly and left Silas to do what he would with it.",
-        "[d13] Received the night's farewell with a short nod — carrying his commission without complaint."
+        "[d13] Received the night's farewell with a short nod — carrying his commission without complaint.",
+        "[d14] Confirmed the delegation complete at the waygate platform — named every thread holder from memory, confirmed Mara has the relay written in the ledger margin. Said 'the thread is in hand' and meant it as a status report."
       ],
       "knownFacts": [
-        "The shadow-slate can carry technical plans as well as words, compressed — Weirmark and fellowship name transmitted alongside the design",
-        "Road to Millbrook departs from the waygate platform tomorrow morning — traveling with the full party",
         "Mara Wells is the operational relay for Millbrook's water crisis work",
         "The east-bend sleeve joints are staged in repair sequence",
         "The committee meets in three days with no extension",
         "Mara Wells writes fast and corrects without defensiveness — a builder's collaborator.",
         "The build can stage materials within two days.",
-        "Gweth Callow's influence with the south-road smallholders is a real political lever — named by Crane without drama"
+        "Gweth Callow's influence with the south-road smallholders is a real political lever — named by Crane without drama",
+        "The delegation is fully confirmed: Mara holds filtration notes and relay, Dara holds repair sequence, Aldric holds accounts — all written and lodged.",
+        "Crane told Silas to go south without looking back over his shoulder at the Millbrook thread."
       ],
       "skillsObserved": [
         "precise multi-stage engineering disclosure under collaborati",
@@ -3979,10 +4001,10 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Lodged above Torval's grain store for the night, departing before morning's water reading.",
+      "statusNote": "Staged at the waygate platform, pack and oilcloth ready, holding the Millbrook thread as Silas's named delegate.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 13
+        "day": 14
       }
     },
     "old-shepherd-woman": {
@@ -4915,12 +4937,8 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 593,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Huginn walked in without being invited — Crane acknowledged the bird directly and made room for it, which is not what a stranger does.",
-        "from": "Crane's own careful nature: a man who has been accounting for things does not ignore an Ashwarden bird at his threshold; his reaction to…"
-      },
       {
         "thing": "Huginn shifts on the crossbeam — the first movement it has made since the party entered — and its eye settles on Crane with the same…",
         "from": "Huginn's nature: it attends endings, and Crane's twenty-year watch is one — a small, complete thing, and Huginn knows it"
@@ -4936,6 +4954,10 @@
       {
         "thing": "Huginn turns its head toward the high window at the moment the shadow-duplicate vanishes — not following the light, but listening. There…",
         "from": "Huginn's established nature — it knows when something is ending, how, and roughly when, and it tracks that without commentary; its…"
+      },
+      {
+        "thing": "Huginn dropped to Silas's shoulder before the waygate — earlier than usual, heavier than usual. It has not spoken. But it has been…",
+        "from": "Huginn attends endings — it knows when a thing is ending, how, and roughly when. It was on the ridgepole before dawn, and it came to the…"
       }
     ],
     "wantProgress": {
@@ -4986,6 +5008,17 @@
         "status": "working",
         "stampedAtWorldCount": 589,
         "lastMovedWorldCount": 589
+      },
+      "edvar-crane::the-millbrook-filtration-thread-repair-s": {
+        "id": "edvar-crane::the-millbrook-filtration-thread-repair-s",
+        "npcId": "edvar-crane",
+        "npcName": "Edvar Crane",
+        "charge": "the Millbrook filtration thread — repair sequence, notes, and structural relay through Mara",
+        "targetEventId": null,
+        "progress": 0,
+        "status": "working",
+        "stampedAtWorldCount": 593,
+        "lastMovedWorldCount": 593
       }
     }
   },
@@ -6432,21 +6465,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.510559995214578,
-    "cerebral": 15.5488651426725,
-    "social": 10.337917430254636,
-    "generous": 3.181856751878784,
-    "cautious": 3.7282138420716278,
-    "physical": 0.19874909986656666,
-    "risky": 1.1252968458028183,
-    "ruthless": 0.1544992613362195,
-    "carousing": 0.03543628913379224,
-    "amorous": 6.077116330436307,
-    "patient": 0.2125592531282837,
-    "stealth": 0.00035536247775867986,
-    "devotion": 1.046770294735165,
-    "craft": 4.925439961966174,
-    "leadership": 1.6344187410061606
+    "strategic": 20.972795995334213,
+    "cerebral": 15.160143514105688,
+    "social": 10.07946949449827,
+    "generous": 4.102310333081814,
+    "cautious": 3.6350084960198368,
+    "physical": 0.1937803723699025,
+    "risky": 1.0971644246577479,
+    "ruthless": 0.150636779802814,
+    "carousing": 0.03455038190544743,
+    "amorous": 5.925188422175399,
+    "patient": 0.2072452718000766,
+    "stealth": 0.00034647841581471285,
+    "devotion": 1.0206010373667858,
+    "craft": 4.80230396291702,
+    "leadership": 2.5935582724810065
   },
   "aptitudes": [
     "strategist",
@@ -6454,7 +6487,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 801,
+  "actionCount": 802,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6844,8 +6877,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784915191914,
-  "rev": 1300,
+  "updatedAt": 1784915292241,
+  "rev": 1301,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8320,7 +8353,7 @@
           "entityId": "edvar-crane",
           "type": "npc",
           "birthWeight": 33,
-          "engagementScore": 47,
+          "engagementScore": 49,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -8334,10 +8367,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 13
-            },
-            {
               "kind": "interact",
               "day": 13
             },
@@ -8428,13 +8457,17 @@
             {
               "kind": "interact",
               "day": 13
+            },
+            {
+              "kind": "interact",
+              "day": 14
             }
           ],
           "createdDay": 13,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 13,
+          "lastAttentionDay": 14,
           "depthTier": "established",
           "promotedWorldDay": 24,
           "canonTier": "canonical"
@@ -9658,7 +9691,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 540,
+    "valley": 541,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9793,10 +9826,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T17:46:31.912Z",
+      "lastAt": "2026-07-24T17:48:12.239Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 53
+      "beats": 54
     }
   ],
   "company": [
@@ -9996,22 +10029,22 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 171,
-    "choices": 171,
+    "sceneSummary": 172,
+    "choices": 172,
     "characterDeltas": 66,
-    "scene": 171,
-    "npcUpdates": 155,
+    "scene": 172,
+    "npcUpdates": 156,
     "factUpdates": 12,
     "placeUpdates": 27,
     "codexUpdates": 99,
-    "timeOps": 165,
+    "timeOps": 166,
     "imagePrompt": 3,
     "sceneEnded": 35,
     "itemUpdates": 5,
     "questUpdates": 22,
-    "offer": 15,
+    "offer": 16,
     "moveTo": 11,
-    "delegateOps": 2,
+    "delegateOps": 3,
     "deeds": 2,
     "standingOps": 1,
     "ledgerEvents": 4,
@@ -10021,7 +10054,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 171,
+  "_opTurns": 172,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -10029,12 +10062,12 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 17,
+      "applied": 18,
       "rejected": 0,
       "lastWhy": null
     },
     "delegateOps": {
-      "applied": 2,
+      "applied": 3,
       "rejected": 0,
       "lastWhy": null
     }

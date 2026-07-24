@@ -1,0 +1,74 @@
+{
+ "schemaVersion": 1,
+ "id": "bestiary_weave",
+ "kind": "content",
+ "note": "SNG-229: the living-world weave for the bestiary. For each creature: craft-specific FEAR (which people dreads it and WHY their craft can't answer it), a WANT (what someone wants about it), and a HUNT quest seed. Folds into tradition_motivations.json (the dreads/wants) and quests.json (the hunts) once CCode loads the bestiary (§2a) so creature ids resolve. Staged now to avoid referencing unloadable ids (LLW). Aevi-authored 2026-07-22. Design law holds: the creature has no grievance/plea/story — the fear and want live in the PEOPLE.",
+ "creatures": {
+  "glimmerling_swarm": {
+   "fearedBy": {
+    "tradition": "veilwright",
+    "why": "Falsecraft works by controlling what's seen; a swarm that is 'almost light, almost bird, almost nothing' can't be fixed in the eye long enough to be worked — the one thing a Veilwright can't do is look away, and glimmerlings make looking useless."
+   },
+   "want": {
+    "who": "lamp-keepers and night-market folk",
+    "what": "the swarms stripped from the trade-roads before they blind a caravan at the wrong moment — a standing bounty, low but steady"
+   },
+   "huntSeed": "The glimmerlings have thickened on the east road and a night-hauler went off the verge chasing lights that weren't there. Thin them before the next one doesn't walk away."
+  },
+  "hollow_pace": {
+   "fearedBy": {
+    "tradition": "wright",
+    "why": "A made thing that outlived its maker and its purpose, still walking its dead patrol — it is the Wrights' own nightmare of their work: a creation that continues past all meaning. To end it is to admit a made thing can become a horror, which every Wright half-believes and never says."
+   },
+   "want": {
+    "who": "the Enginewrights",
+    "what": "one taken INTACT — its rotted directive is a readable record of a pre-Transition system, worth more captured than broken; they'll pay well and ask no questions about the mess"
+   },
+   "huntSeed": "A hollow-pace still walks the line of a wall that fell a century ago, and it has started 'defending' the gap against anyone who crosses. The Enginewrights want it whole. Everyone else just wants it gone."
+  },
+  "warpling_hare": {
+   "fearedBy": {
+    "tradition": "rootkin",
+    "why": "Vivimancy is the craft of life kept right; a warpling is life gone WRONG in a way the green-heart can't heal — too many legs, a hunger that doesn't fit the body, a thing that was a hare and is now an argument against everything Rootkin believe about growth. They cannot mercy it back; they can only end it."
+   },
+   "want": {
+    "who": "a downstream settlement",
+    "what": "the warplings cleared from the water-source before the wrongness spreads to the herd — desperate, and willing to trade real coin or standing"
+   },
+   "huntSeed": "The warplings have gotten into the upper water and the beasts that drink there are starting to move wrong too. Clear them at the source, before 'wrong' becomes the whole valley's problem."
+  },
+  "the_wrong_stag": {
+   "fearedBy": {
+    "tradition": "ashwarden",
+    "why": "Palework is the mercy of stopping — the Ashwardens' whole craft is helping a thing end RIGHT. The wrong stag is a thing that has gone past dying-right: its antlers a humming lattice, its death no longer available to be given. It is the one creature an Ashwarden's craft cannot answer, because it is already outside the death they keep. That terrifies them more than any predator."
+   },
+   "want": {
+    "who": "a Lattice-city broker (and quietly, a Figurist)",
+    "what": "the lattice-antler, intact — it hums with something that resolved wrong, and to the right buyer that's a key, a proof, or a fortune"
+   },
+   "huntSeed": "The wrong stag has taken three walkers at the tree-line and the graze has been silent since it changed. It is notable ground now — not a hunt for anyone alone. End it, and someone will want the antler."
+  },
+  "tessellith": {
+   "fearedBy": {
+    "tradition": "lattice",
+    "why": "Latticework is the binding of possibility — no accident permitted. A tessellith is block-logic manifested and gone FERAL: their own order turned crawling and predatory, matter that resolved into a thing that hunts. It is the Lattice-Cities' perfection become a monster, and it means the one thing they insist is impossible — that order can go wrong — is walking around the size of a cart."
+   },
+   "want": {
+    "who": "a Mason survey-crew",
+    "what": "the ground it crawls made safe again — they can't build on block-logic that bites, and they'll fund a clearing to get their site back"
+   },
+   "huntSeed": "A tessellith has resolved out of the block-bleed and taken a survey-crew's ground, crawling its geometry over everything they'd staked. Regional stakes — bring help. The Masons want their site; the Lattice want it to have never happened."
+  },
+  "the_unmoored_choir": {
+   "fearedBy": {
+    "tradition": "threnodist",
+    "why": "Pathos is feeling given form and voice — the Threnodists' craft is the honest expression of emotion. The unmoored choir is a domain-scale drift of half-formed voices with NO feeling behind them, expression severed from any heart — the hollow mimicry of everything they hold sacred, growing. To a Threnodist it is obscene in a way no mere monster could be: their art, unmoored from meaning, spreading."
+   },
+   "want": {
+    "who": "everyone within reach of it",
+    "what": "it stopped before it grows — this is past 'want' into need; a domain-scale threat that will not stay where it is"
+   },
+   "huntSeed": "The unmoored choir is spreading — a drifting region of voices that mean nothing, and the edge of it is closer than it was. This is epic ground: not a fight but a campaign, and it will take more than one hand to end. (Ties the offscreen-epic/arc system — a growing world-threat, SNG-208.)"
+  }
+ }
+}

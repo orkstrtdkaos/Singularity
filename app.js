@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.256";
+const APP_VERSION = "1.8.257";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4451,8 +4451,11 @@ async function onChoice(choice) {
       // A fly-craft makes a climb no obstacle at all → a trivial bypass (no grind, a narrated walk-around); a
       // harder challenge RESISTS → an opposed roll (a good roll bypasses, else the normal stages stand).
       // Additive: no trivializedBy on the def → nothing changes.
+      const frameContent = CONTENT.encounterFrameContent || {};
+      // the acting craft's verbs + lowercased families — Aevi's trivializedBy/denies name either (move / reveal…)
+      const kitKeys = choice.abilityId ? [...(fullCatalog()[choice.abilityId]?.functions || []), ...familiesOfAbility(fullCatalog()[choice.abilityId], FN_INDEX).map(f => String(f).toLowerCase())] : [];
       if (!outcome && choice.abilityId && enc.def.type === "challenge") {
-        const triv = trivializes(enc.def, familiesOfAbility(fullCatalog()[choice.abilityId], FN_INDEX));
+        const triv = trivializes(enc.def, kitKeys, frameContent.challengePremises);
         if (triv === "trivial" || (triv === "opposed" && ["success", "crit_success"].includes(resolution.degree))) {
           outcome = "completed";
           resolution.trivialize = { craft: fullCatalog()[choice.abilityId]?.name || null, mode: triv, premise: enc.def.premise || null };
@@ -4462,12 +4465,12 @@ async function onChoice(choice) {
       if (!outcome && choice.abilityId && frameCollapsible(enc.def)) {
         const mode = collapseMode(familiesOfAbility(fullCatalog()[choice.abilityId], FN_INDEX), encounterKind(enc.def));
         const craft = fullCatalog()[choice.abilityId]?.name || null;
-        const res = mode ? collapseResult(resolution.degree, { floor: collapseFloor(enc.def) }) : null;
+        const res = mode ? collapseResult(resolution.degree, { floor: collapseFloor(enc.def, frameContent.collapseEligibility) }) : null;
         if (res === "collapse") {
-          // SNG-230 §7b: a WARD can FORBID the instant-end OUTRIGHT (Aevi content: wards[].denies + breakDC). If a
-          // ward denies this mode and the roll doesn't DEMOLISH it (a crit whose margin beats breakDC), the
-          // collapse is off the table — the finisher does ordinary damage instead (the normal round stands).
-          const ward = wardAgainst(enc.def, mode);
+          // SNG-230 §7b: a WARD can FORBID the instant-end OUTRIGHT (Aevi content: a target's ward ability id →
+          // wardDenials). If a ward denies this mode and the roll doesn't DEMOLISH it (a crit whose margin beats
+          // breakDC), the collapse is off the table — the finisher does ordinary damage instead (normal round stands).
+          const ward = wardAgainst(enc.def, mode, frameContent.wardDenials);
           const margin = (resolution.chance ?? 0) - (resolution.roll ?? 0);
           if (ward.denied && !wardBroken(resolution.degree, margin, ward.breakDC)) {
             resolution.collapse = { mode, result: "warded", craft, ward: ward.name }; // the ward held — no instant-end
@@ -7701,9 +7704,10 @@ function sbDeclare(skill, { intensity = "standard", scouting = false } = {}) {
     const swing = (rr.state?.momentum ?? 0) - (enc.state?.momentum ?? 0);
     const meterMax = sb.momentum?.meterMax ?? 10;
     // §7b: a WARD denying "finish" forbids the early end unless a demolishing swing breaks it (Aevi content).
-    const ward = wardAgainst(enc.def, "finish");
+    const frameContent = CONTENT.encounterFrameContent || {};
+    const ward = wardAgainst(enc.def, "finish", frameContent.wardDenials);
     const wardHolds = ward.denied && !wardBroken(swingDegree(swing, meterMax), swing, ward.breakDC);
-    if (!wardHolds && collapseMode([fam], "fight") === "finish" && swing > 0 && collapseResult(swingDegree(swing, meterMax), { floor: collapseFloor(enc.def) }) === "collapse") {
+    if (!wardHolds && collapseMode([fam], "fight") === "finish" && swing > 0 && collapseResult(swingDegree(swing, meterMax), { floor: collapseFloor(enc.def, frameContent.collapseEligibility) }) === "collapse") {
       rr = { ...rr, ended: true, outcome: "opponent_fell", state: { ...rr.state, status: "ended" }, _collapse: true };
     }
   }
@@ -8149,7 +8153,7 @@ function renderPlay(turn, opts = {}) {
       // frames the classic duel / challenge / puzzle. Phase 1b (Erik's OQ1 = size by tier): a weighty encounter
       // (regional/epic, danger ≥ 3, long challenge) presents as a TAKEOVER card that takes the surface with the
       // action buttons inside it; a small one stays a compact BANNER above the buttons. Same frame, sized to stakes.
-      const fm = frameModel(d, e.state, null);
+      const fm = frameModel(d, e.state, null, CONTENT.frameKinds);
       if (!fm) return btns;
       const meterHtml = fm.meter?.total ? `<div class="enc-frame-meter" title="${esc(fm.meter.label)}"><div class="enc-frame-meter-fill" style="width:${fm.meter.pct}%"></div></div>
         <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.done}/${fm.meter.total}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : "";

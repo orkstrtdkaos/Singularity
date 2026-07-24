@@ -88,15 +88,20 @@ export function chaseFromFight(fightDef) {
 
 const DEGREE_RANK = { crit_failure: 0, failure: 1, partial: 2, success: 3, crit_success: 4 };
 
-/** §6c / OQ6 + Erik (easier vs weaker foes): how EASILY a foe collapses — the degree AT OR ABOVE which a
- *  finisher ends it in one beat. A riffraff drops on a solid hit (`success`); a notable needs a clean crit; the
- *  great ones (epic/regional/danger-4) never collapse (null) — you fight them through. Tier first, then danger.
- *  Pure over the def's size signal. */
-export function collapseFloor(def) {
+/** §6c / OQ6 + Erik (easier vs weaker foes): how EASILY a foe collapses — the degree AT OR ABOVE which a finisher
+ *  ends it in one beat. Reads Aevi's `collapseEligibility` LAYER when supplied (tier → {collapsible, collapseDC});
+ *  a non-collapsible tier (epic) → null. Falls back to the tier defaults. Aevi's ruling stands: riffraff drops
+ *  on a solid `success`, notable/regional need a clean crit (a demolishing finisher), epic NEVER collapses.
+ *  Pure over the def + the (optional) eligibility layer. */
+export function collapseFloor(def, eligibility = null) {
   const tier = def?.tier || null;
-  if (tier === "epic" || tier === "regional") return null;
+  const elig = tier && eligibility ? eligibility[tier] : null;
+  if (elig && elig.collapsible === false) return null;          // Aevi content: an epic is non-collapsible
+  if (elig && elig.collapsible === true) return tier === "riffraff" ? "success" : "crit_success";
+  // fallback (no layer): epic never; regional now collapsible on a demolishing crit (aligns with Aevi); else tier.
+  if (tier === "epic") return null;
   if (tier === "riffraff") return "success";
-  if (tier === "notable") return "crit_success";
+  if (tier === "notable" || tier === "regional") return "crit_success";
   const danger = [def?.danger, def?.minDanger, def?.dangerLevel].find(d => Number.isFinite(d));
   if (Number.isFinite(danger)) return danger >= 4 ? null : danger >= 2 ? "crit_success" : "success";
   return "crit_success"; // unknown → conservative (a clean crit only)
@@ -152,16 +157,29 @@ export function swingDegree(delta, meterMax) {
 // wall for a third (warded against their one trick). Both are CONTENT-DRIVEN (Aevi authors the ward/premise
 // fields); absent them, these are no-ops. All pure.
 
-/** §7b: does a WARD on the target FORBID a collapse mechanic OUTRIGHT (a gate, not a modifier)? A target declares
- *  `wards: [{ denies:[modes|"instant_end"|"collapse"], breakDC, name }]` — a Death-Ward denies "finish", a
- *  mind-ward denies "sway", a movement-ward denies "escape". Returns {denied, breakDC, name}; when denied the
- *  collapse is OFF THE TABLE unless the roll DEMOLISHES the ward (wardBroken). Absent a ward → not denied. Pure. */
-export function wardAgainst(def, mode) {
-  const wards = def?.wards || (def?.ward ? [def.ward] : []);
-  for (const w of wards) {
-    const d = w?.denies || [];
-    if (d.includes(mode) || d.includes("instant_end") || d.includes("collapse")) {
-      return { denied: true, breakDC: Number.isFinite(w.breakDC) ? w.breakDC : Infinity, name: w.name || null };
+// §7b: the deny-vocabulary a collapse MODE is vulnerable to — Aevi's wards name the CRAFT terms they forbid
+// (a Death-Ward denies "finish"/"end"/"harm"; a boundary-stone denies "move"/"track"), so a mode maps to the
+// verbs/families a ward could name to block it. Generic "instant_end"/"collapse" block any mode.
+const MODE_DENY_KEYS = {
+  finish: ["finish", "end", "harm", "kill", "strike", "break", "instant_end", "collapse"],
+  escape: ["escape", "move", "track", "travel", "transit", "instant_end", "collapse"],
+  solve: ["solve", "know", "reveal", "foresee", "unravel", "instant_end", "collapse"],
+};
+
+/** §7b: does a WARD on the target FORBID this collapse mechanic OUTRIGHT (a gate, not a modifier)? A target's
+ *  `wards` are either ability-id STRINGS resolved through Aevi's `wardDenials` LAYER (the_shielding_word →
+ *  denies:["finish","end"], breakDC) or inline `{denies, breakDC, name}` objects. Returns {denied, breakDC,
+ *  name}; when denied the collapse is OFF THE TABLE unless the roll DEMOLISHES the ward (wardBroken). Absent a
+ *  ward → not denied. Pure over the def + the (optional) wardDenials layer. */
+export function wardAgainst(def, mode, wardDenials = {}) {
+  const keys = MODE_DENY_KEYS[mode] || [mode, "instant_end", "collapse"];
+  const raw = def?.wards || (def?.ward ? [def.ward] : []);
+  for (const w of raw) {
+    const rec = typeof w === "string" ? wardDenials[w] : w;    // an ability-id references the layer; an inline obj wins directly
+    if (!rec) continue;
+    const denies = (rec.denies || []).map(x => String(x).toLowerCase());
+    if (denies.some(d => keys.includes(d))) {
+      return { denied: true, breakDC: Number.isFinite(rec.breakDC) ? rec.breakDC : Infinity, name: rec.name || (typeof w === "string" ? w : null) };
     }
   }
   return { denied: false, breakDC: 0, name: null };
@@ -174,18 +192,22 @@ export function wardBroken(degree, margin, breakDC) {
   return degree === "crit_success" && (margin ?? 0) >= (breakDC ?? Infinity);
 }
 
-/** §7c: does the player's KIT void this challenge's PREMISE — making it trivial? A challenge declares
- *  `trivializedBy: [families]` (families that remove its obstacle — a MOVE/fly craft voids a climb) + an optional
- *  `resistDC` (a hardness above which even the voiding kit must ROLL, opposed, instead of walking around it).
- *  Returns "trivial" (premise voided + soft → bypass, NO roll, a narrated walk-around), "opposed" (voided but the
- *  challenge RESISTS → an opposed roll), or null (the kit doesn't void it → normal stages). Absent the content →
- *  null. Pure. */
-export function trivializes(def, kitFamilies) {
-  const by = def?.trivializedBy || [];
+/** §7c: does the player's KIT void this challenge's PREMISE — making it trivial? The challenge names a premise
+ *  TYPE (e.g. `premise: "physical_ascent"`) resolved through Aevi's `challengePremises` LAYER
+ *  ({ trivializedBy:[verbs/families that VOID it], resistDC }), or carries inline `trivializedBy`/`resistDC`.
+ *  `kitKeys` is the acting craft's verbs + lowercased families (a MOVE/fly craft → ["move", ...]). Returns
+ *  "trivial" (premise voided AND the challenge is soft, below resistDC → bypass, NO roll — a narrated
+ *  walk-around), "opposed" (voided but the challenge RESISTS, at/above resistDC → an opposed roll), or null (the
+ *  kit doesn't void it → normal stages). Absent the content → null. Pure over the def + the (optional) layer. */
+export function trivializes(def, kitKeys, premises = {}) {
+  const rec = (def?.premise && premises[def.premise]) || def;
+  const by = (rec?.trivializedBy || []).map(x => String(x).toLowerCase());
   if (!by.length) return null;
-  const kit = new Set(Array.isArray(kitFamilies) ? kitFamilies : []);
+  const kit = new Set((Array.isArray(kitKeys) ? kitKeys : []).map(x => String(x).toLowerCase()));
   if (!by.some(f => kit.has(f))) return null;
-  return (Number.isFinite(def?.resistDC) && def.resistDC > 0) ? "opposed" : "trivial";
+  const resistDC = [rec?.resistDC, def?.resistDC].find(d => Number.isFinite(d)) ?? 0;
+  const diff = Math.max(0, def?.difficulty || 0, ...(def?.stages || []).map(s => s?.difficulty || 0));
+  return (resistDC > 0 && diff >= resistDC) ? "opposed" : "trivial";
 }
 
 /** Which frame KIND an encounter is. def.type is the structural truth (duel/challenge/puzzle); flavor themes the
@@ -236,7 +258,7 @@ function frameMeter(kind, def, state) {
  *  FAIL for a FIGHT is a chooseable Yield; for the other kinds it is the OUTCOME of losing the stages (reached,
  *  not clicked) — so it has no button, and its stakes are surfaced instead (a frame with no visible fail is a
  *  formality; here fail is legible as what losing costs). Pure. */
-export function frameExits(kind, def, state) {
+export function frameExits(kind, def, state, exitLabels = null) {
   const stageName = def?.stages?.[state?.stageIndex ?? 0]?.name || null;
   const defeat = ({
     fight:    { label: "Strike",                    action: "strike",  means: "Defeat it." },
@@ -260,6 +282,9 @@ export function frameExits(kind, def, state) {
     { role: "flee", ...flee },
     { role: "fail", ...fail },
   ];
+  // Aevi's authored per-kind exit labels override the placeholders (a "—", e.g. chase's disabled flee, keeps the
+  // default label — a dash isn't a button). Only labels the player can act on (non-null) are overridden.
+  if (exitLabels) for (const ex of exits) { const lbl = exitLabels[ex.role]; if (lbl && lbl !== "—" && ex.label != null) ex.label = lbl; }
   // SNG-230 §6a: surface where an exit CHAINS (frames chain — fleeing a fight becomes a chase; a caught chase
   // becomes a fight). The exit carries `chainTo` and its `means` names the next frame, so the player SEES the
   // chain before choosing it. This is the legibility half of §6a; the behavior wiring (actually starting the
@@ -288,18 +313,24 @@ export function frameSize(def, state = {}) {
 
 /** The full frame descriptor the UI renders — the one object the render (Erik) and content (Aevi) build against.
  *  Returns null when the encounter isn't framed. Pure. */
-export function frameModel(def, state = {}, entry = null) {
+export function frameModel(def, state = {}, entry = null, kinds = null) {
   const kind = encounterKind(def, entry);
   if (!kind) return null;
-  const theme = FRAME_KINDS[kind];
+  // Aevi's per-kind framing copy (title/icon/winCondition/meterLabel/exits/failStakes) overrides the placeholder
+  // FRAME_KINDS defaults when supplied; absent it, the defaults hold.
+  const base = FRAME_KINDS[kind] || {};
+  const a = kinds?.[kind] || null;
+  const theme = { icon: a?.icon || base.icon, title: a?.title || base.title, win: a?.winCondition || base.win, meterLabel: a?.meterLabel || base.meterLabel };
   const staged = kind === "chase" || kind === "hazard" || kind === "standoff";
+  const meter = frameMeter(kind, def, state);
+  if (theme.meterLabel) meter.label = theme.meterLabel;
   return {
     kind,
     icon: theme.icon,
     title: def?.name || theme.title,
     winCondition: theme.win,
-    meter: frameMeter(kind, def, state),
-    exits: frameExits(kind, def, state),
+    meter,
+    exits: frameExits(kind, def, state, a?.exits || null),
     freeform: FRAME_FREEFORM_CUE, // the frame is a legibility layer — freeform play + the GM stay the real interaction
     // §6b/§7a: whether a decisive finisher could END this in one beat (a foe too great can't be) — surfaced so
     // the player knows the gamble is on the table. The actual collapse resolves along the degree bands.
@@ -309,7 +340,7 @@ export function frameModel(def, state = {}, entry = null) {
     stage: staged
       ? { index: state?.stageIndex ?? 0, total: def?.stages?.length || 0, name: def?.stages?.[state?.stageIndex ?? 0]?.name || null }
       : null,
-    // FAIL is a branch, not a wall (§Guard): what losing the current stage costs, surfaced so the stakes are legible.
-    failStakes: def?.stages?.[state?.stageIndex ?? 0]?.failureCost || null,
+    // FAIL is a branch, not a wall (§Guard): what losing costs — Aevi's per-kind failStakes prose if authored, else the stage's failureCost.
+    failStakes: (a?.failStakes) || def?.stages?.[state?.stageIndex ?? 0]?.failureCost || null,
   };
 }

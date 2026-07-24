@@ -7846,7 +7846,7 @@ await (async () => {
   const manifest = JSON.parse(readFileSync(join(root, "content/packs/valley/manifest.json"), "utf8"));
   check("229 §2a: the manifest WHITELISTS the bestiary (or it silently does not exist)", (manifest.provides.bestiary || []).includes("bestiary.json"));
   const stateSrc229 = readFileSync(join(root, "engine/state.js"), "utf8");
-  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /bestiary, traditionMotivations, startingLocation/.test(stateSrc229) && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
+  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /bestiary, traditionMotivations, encounterFrameContent/.test(stateSrc229) && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
 
   // §2b: every creature becomes a danger-gated DUEL encounter — the fight pool finally has monsters.
   const monsters = bestiaryEncounters(bestiary);
@@ -7866,7 +7866,7 @@ await (async () => {
   const tmDoc = JSON.parse(readFileSync(tmPath, "utf8"));
   check("229 §2c: the manifest WHITELISTS tradition_motivations (its own content type, not lore)", (manifest.provides.tradition_motivations || []).includes("tradition_motivations.json"));
   check("229 §2c: loadContent loads it into CONTENT.traditionMotivations (parallel to the bestiary loader)",
-    /const traditionMotivationsP = jSettled\(\(valley\.provides\.tradition_motivations/.test(stateSrc229) && /traditionMotivations, startingLocation/.test(stateSrc229));
+    /const traditionMotivationsP = jSettled\(\(valley\.provides\.tradition_motivations/.test(stateSrc229) && /traditionMotivations, encounterFrameContent/.test(stateSrc229));
   // the SELECTOR: bounded to who's in play, deduped, dread resolved to a creature name, villainy GM-eyes
   const dreadCreature = tmDoc.traditions.ashwarden?.dreads?.creature;
   const sel = traditionMotivationsForGM(tmDoc, ["ashwarden", "cogitant", "ashwarden", "not_a_tradition"], { bestiary, labelOf: id => id });
@@ -7960,15 +7960,16 @@ await (async () => {
     /character\.activeEncounter = \{ defId: chase\.id, state: startEncounter\(chase\)/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
 
   // §6b/§7a: a SKILL can COLLAPSE (or morph) the frame — resolved along the degree bands, gated by collapsibility.
-  check("230 §6b: frameCollapsible — riffraff/notable + low danger can be one-beat-ended; epic/regional/danger-4 cannot",
-    frameCollapsible({ tier: "riffraff" }) === true && frameCollapsible({ tier: "notable" }) === true && frameCollapsible({ danger: 2 }) === true &&
-    frameCollapsible({ tier: "epic" }) === false && frameCollapsible({ tier: "regional" }) === false && frameCollapsible({ danger: 4 }) === false);
+  check("230 §6b: frameCollapsible — riffraff/notable/regional + low danger can be one-beat-ended (regional only on a demolishing crit); an EPIC/danger-4 cannot",
+    frameCollapsible({ tier: "riffraff" }) === true && frameCollapsible({ tier: "notable" }) === true && frameCollapsible({ tier: "regional" }) === true && frameCollapsible({ danger: 2 }) === true &&
+    frameCollapsible({ tier: "epic" }) === false && frameCollapsible({ danger: 4 }) === false);
   check("230 §6c: collapseMode is FAMILY-driven — HARM finishes a fight/hazard, MOVE slips a chase, KNOW cracks a puzzle; wrong family → null",
     collapseMode(["HARM"], "fight") === "finish" && collapseMode(["MOVE"], "chase") === "escape" && collapseMode(["KNOW"], "puzzle") === "solve" &&
     collapseMode(["MOVE"], "fight") === null && collapseMode(["HARM"], "chase") === null && collapseMode([], "fight") === null);
   // Erik: EASIER vs weaker foes + MITIGATED below a finish — a tier-scaled floor, graded by degree.
-  check("230 §7a: collapseFloor scales by foe — a riffraff drops on a solid 'success', a notable needs a crit, the great ones never collapse",
-    collapseFloor({ tier: "riffraff" }) === "success" && collapseFloor({ tier: "notable" }) === "crit_success" && collapseFloor({ tier: "epic" }) === null && collapseFloor({ tier: "regional" }) === null && collapseFloor({ danger: 4 }) === null);
+  check("230 §7a: collapseFloor scales by foe — riffraff drops on 'success', notable/regional need a crit, an EPIC never collapses; Aevi's collapseEligibility layer wins when supplied",
+    collapseFloor({ tier: "riffraff" }) === "success" && collapseFloor({ tier: "notable" }) === "crit_success" && collapseFloor({ tier: "regional" }) === "crit_success" && collapseFloor({ tier: "epic" }) === null && collapseFloor({ danger: 4 }) === null &&
+    collapseFloor({ tier: "regional" }, { regional: { collapsible: false } }) === null && collapseFloor({ tier: "notable" }, { notable: { collapsible: true } }) === "crit_success");
   check("230 §7a: collapseResult COLLAPSES at/above the floor, MITIGATES below it (hard/partial), MORPHS on a whiff",
     collapseResult("success", { floor: "success" }) === "collapse" && collapseResult("success", { floor: "crit_success" }) === "hard" &&
     collapseResult("crit_success", { floor: null }) === "hard" && collapseResult("partial", { floor: "success" }) === "partial" &&
@@ -7980,9 +7981,9 @@ await (async () => {
   check("230 §6b: frameModel surfaces collapsibility (the finisher gamble is on the table, legibly)",
     frameModel({ type: "duel", tier: "riffraff" }, {}, null).collapsible === true && frameModel({ type: "duel", tier: "epic" }, {}, null).collapsible === false);
   check("230 §6b WIRING: onChoice applies a finisher COLLAPSE on the non-skill-battle path (guard §89), reading family + degree + the foe's floor",
-    /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ floor: collapseFloor\(enc\.def\) \}\)/.test(appSrc230) && /if \(res === "collapse"\)/.test(appSrc230) && /resolution\.collapse = \{ mode, result: "collapse"/.test(appSrc230));
+    /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ floor: collapseFloor\(enc\.def, frameContent\.collapseEligibility\) \}\)/.test(appSrc230) && /if \(res === "collapse"\)/.test(appSrc230) && /resolution\.collapse = \{ mode, result: "collapse"/.test(appSrc230));
   check("230 §6b WIRING: a decisive HARM finisher can END the SKILL-BATTLE early (Erik) — momentum swing → degree → floor, meter otherwise untouched",
-    /collapseMode\(\[fam\], "fight"\) === "finish" && swing > 0 && collapseResult\(swingDegree\(swing, meterMax\), \{ floor: collapseFloor\(enc\.def\) \}\) === "collapse"/.test(appSrc230) && /outcome: "opponent_fell", state: \{ \.\.\.rr\.state, status: "ended" \}, _collapse: true/.test(appSrc230));
+    /collapseMode\(\[fam\], "fight"\) === "finish" && swing > 0 && collapseResult\(swingDegree\(swing, meterMax\), \{ floor: collapseFloor\(enc\.def, frameContent\.collapseEligibility\) \}\) === "collapse"/.test(appSrc230) && /outcome: "opponent_fell", state: \{ \.\.\.rr\.state, status: "ended" \}, _collapse: true/.test(appSrc230));
   check("230 §6b: the finisher gamble is surfaced in the frame (collapsible vs too-great)",
     /enc-frame-collapse/.test(appSrc230) && /A decisive finisher could end this in one beat/.test(appSrc230));
 
@@ -8011,20 +8012,26 @@ await (async () => {
   check("230 §7b: the receipt tells the GM the ward FORBADE the instant-end (it could not apply — not merely resisted)",
     /FINISHER WARDED/.test(rcWarded) && /Death-Ward/.test(rcWarded) && /FORBADE the instant-end/.test(rcWarded));
 
-  // §7c: the KIT VOIDS a challenge's PREMISE — trivial bypass (soft) or an opposed roll (resists).
-  const climb = { type: "challenge", flavor: "dangerous", premise: "a sheer climb", trivializedBy: ["MOVE"] };
-  const wardedClimb = { type: "challenge", flavor: "dangerous", premise: "a warded height", trivializedBy: ["MOVE"], resistDC: 18 };
-  check("230 §7c: trivializes — a MOVE/fly kit VOIDS a climb (trivial); a resistDC turns it into an opposed roll; a non-voiding kit → null",
-    trivializes(climb, ["MOVE"]) === "trivial" && trivializes(wardedClimb, ["MOVE"]) === "opposed" && trivializes(climb, ["HARM"]) === null && trivializes({ type: "challenge" }, ["MOVE"]) === null);
+  // §7c: the KIT VOIDS a challenge's PREMISE — trivial bypass (soft) or an opposed roll (hard, difficulty ≥ resistDC).
+  const climb = { type: "challenge", flavor: "dangerous", trivializedBy: ["MOVE"] };
+  const wardedClimb = { type: "challenge", flavor: "dangerous", trivializedBy: ["MOVE"], resistDC: 18, stages: [{ difficulty: 20 }] };
+  check("230 §7c: trivializes — a MOVE/fly kit VOIDS a climb (trivial); a hard one (difficulty ≥ resistDC) is an opposed roll; a non-voiding kit → null",
+    trivializes(climb, ["move"]) === "trivial" && trivializes(wardedClimb, ["move"]) === "opposed" && trivializes(climb, ["harm"]) === null && trivializes({ type: "challenge" }, ["move"]) === null);
+  // integration: the ACTUAL Aevi layer — a ward ability id resolves through wardDenials; a premise type through challengePremises
+  const frameContent230 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/encounter_frame_content.json"), "utf8"));
+  check("230 §7b integration: a target tagged with Aevi's ward ability (the_kept_breath) DENIES a finish through the wardDenials layer",
+    wardAgainst({ type: "duel", wards: ["the_kept_breath"] }, "finish", frameContent230.wardDenials).denied === true && wardAgainst({ type: "duel", wards: ["boundary_stone"] }, "finish", frameContent230.wardDenials).denied === false && wardAgainst({ type: "duel", wards: ["boundary_stone"] }, "escape", frameContent230.wardDenials).denied === true);
+  check("230 §7c integration: a challenge naming Aevi's premise type (physical_ascent) is voided by a 'move' kit through challengePremises",
+    trivializes({ type: "challenge", premise: "physical_ascent" }, ["move"], frameContent230.challengePremises) === "trivial" && trivializes({ type: "challenge", premise: "pattern_puzzle" }, ["reveal"], frameContent230.challengePremises) === "trivial" && trivializes({ type: "challenge", premise: "physical_ascent" }, ["harm"], frameContent230.challengePremises) === null);
   const rcTriv = recFn({ type: "challenge", round: 1, status: "ended", stagesDone: [], stageIndex: 0 }, { name: "The Wall", stages: [{ name: "climb" }] }, { degree: "trivial", trivialize: { craft: "Marrow's Wings", mode: "trivial", premise: "a sheer climb" } }, { outcome: "completed", events: [] });
   check("230 §7c: the receipt tells the GM the PREMISE was VOIDED — a narrated walk-around, do NOT grind the stages",
     /PREMISE VOIDED/.test(rcTriv) && /Marrow's Wings/.test(rcTriv) && /walk-around/.test(rcTriv) && /Do NOT grind the stages/.test(rcTriv));
 
   // WIRING (source-asserted): both are additive on the existing paths, and do nothing absent Aevi's content.
   check("230 §7b WIRING: the collapse path checks a denying ward FIRST — a held ward blocks the instant-end (onChoice + skill-battle)",
-    /const ward = wardAgainst\(enc\.def, mode\)/.test(appSrc230) && /ward\.denied && !wardBroken\(resolution\.degree, margin, ward\.breakDC\)/.test(appSrc230) && /result: "warded"/.test(appSrc230) && /const ward = wardAgainst\(enc\.def, "finish"\)/.test(appSrc230));
+    /const ward = wardAgainst\(enc\.def, mode, frameContent\.wardDenials\)/.test(appSrc230) && /ward\.denied && !wardBroken\(resolution\.degree, margin, ward\.breakDC\)/.test(appSrc230) && /result: "warded"/.test(appSrc230) && /const ward = wardAgainst\(enc\.def, "finish", frameContent\.wardDenials\)/.test(appSrc230));
   check("230 §7c WIRING: onChoice trivializes a challenge when the kit voids its premise (trivial bypass or opposed roll)",
-    /const triv = trivializes\(enc\.def, familiesOfAbility/.test(appSrc230) && /triv === "trivial" \|\| \(triv === "opposed" && \["success", "crit_success"\]\.includes\(resolution\.degree\)\)/.test(appSrc230) && /resolution\.trivialize = \{ craft/.test(appSrc230));
+    /const triv = trivializes\(enc\.def, kitKeys, frameContent\.challengePremises\)/.test(appSrc230) && /triv === "trivial" \|\| \(triv === "opposed" && \["success", "crit_success"\]\.includes\(resolution\.degree\)\)/.test(appSrc230) && /resolution\.trivialize = \{ craft/.test(appSrc230));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

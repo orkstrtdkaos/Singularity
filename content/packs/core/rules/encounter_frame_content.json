@@ -1,0 +1,122 @@
+{
+ "schemaVersion": 1,
+ "id": "encounter_frame_content",
+ "kind": "content",
+ "note": "SNG-230 Phase 4 content (Aevi 2026-07-22): the ward-denials (§7b) and challenge-premises (§7c) the engine checks read. Authored as a LAYER (ability_id -> denies/breakDC; challenge premise -> trivializedBy/resistDC) rather than editing 18 ability files surgically. CCode's frameModel/collapse-path looks up an ability's ward-denial here, and a challenge's premise here. Function families use the 24-verb vocab (ward/shield/resist/finish/end/move/know/reveal/foresee/...). Fields match the frame contract (engine/encounterFrame.js). Ability ids verified against Silas's sheet + core abilities.",
+ "wardDenials": {
+  "_doc": "ability_id -> {denies:[function families this ward makes INAPPLICABLE, not just resisted], breakDC:the margin a collapse attempt must DEMOLISH by to break the ward and apply anyway, breakBand:the resolver degree required to break}. A denied mechanic simply cannot fire while the ward holds; only a demolishing roll breaks it.",
+  "the_shielding_word": {
+   "denies": [
+    "finish",
+    "end"
+   ],
+   "breakDC": 30,
+   "breakBand": "crit_success",
+   "flavor": "The Shielding Word speaks a NO over you that a killing stroke cannot argue with — an instakill does not land, it is refused. Only a stroke that demolishes the word (a crit-margin above its tier) reaches past it."
+  },
+  "the_warding_mark": {
+   "denies": [
+    "harm",
+    "finish"
+   ],
+   "breakDC": 25,
+   "breakBand": "crit_success",
+   "flavor": "The Warding Mark turns a finishing blow into an ordinary one — the mark denies the KILL, not the hit. A demolishing strike breaks the mark and the finisher applies."
+  },
+  "boundary_stone": {
+   "denies": [
+    "move",
+    "track"
+   ],
+   "breakDC": 25,
+   "breakBand": "crit_success",
+   "flavor": "The Boundary Stone denies passage and pursuit — a transit-collapse of a chase (a shadowstep-away, a grey-road exit) simply does not open across it. Only a demolishing move breaks the bound."
+  },
+  "the_kept_breath": {
+   "denies": [
+    "end",
+    "finish"
+   ],
+   "breakDC": 35,
+   "breakBand": "crit_success",
+   "flavor": "The Kept Breath holds a life past the moment it should end — an instant-death mechanic finds nothing to end. The strongest of Silas's denials; only an overwhelming stroke reaches the kept breath."
+  }
+ },
+ "challengePremises": {
+  "_doc": "challenge premise -> {barrier:what makes it hard, trivializedBy:[function families that VOID the premise -> trivial bypass below resistDC], resistDC:the difficulty above which even a voiding skill must roll OPPOSED, acknowledgeTone:the §8 'little mention' shape when a kit trivializes it}. A challenge with a matching premise checks the player's kit: premise-voided + below resistDC -> trivial bypass (with the named acknowledgment); premise-voided + at/above resistDC -> opposed roll; not voided -> normal stages.",
+  "physical_ascent": {
+   "barrier": "a wall, cliff, or height to climb",
+   "trivializedBy": [
+    "move"
+   ],
+   "resistDC": 40,
+   "acknowledgeTone": "name the movement craft making nothing of the height — 'your wings make nothing of the wall; you're over it before it was a question'",
+   "note": "A fly/transit craft (Marrow's Wings, shadowstep) voids a low climb. A WARDED height (resistDC 40+, e.g. warded against flight) stays a real opposed climb."
+  },
+  "locked_barrier": {
+   "barrier": "a sealed door, lock, or physical obstruction",
+   "trivializedBy": [
+    "unmake",
+    "transform",
+    "move"
+   ],
+   "resistDC": 45,
+   "acknowledgeTone": "name the craft that made the barrier irrelevant — 'the lock was never going to hold; you simply go around what it guards'",
+   "note": "An unmake/transit craft voids a simple lock; a hard-warded seal resists (opposed)."
+  },
+  "pattern_puzzle": {
+   "barrier": "a puzzle, cipher, or pattern to solve",
+   "trivializedBy": [
+    "know",
+    "reveal",
+    "foresee"
+   ],
+   "resistDC": 50,
+   "acknowledgeTone": "name the insight craft laying the answer out — 'the pattern lays itself out under Order-Sense; the lock was never going to hold against you'",
+   "note": "A high KNOW/reveal/foresee craft lays out a SIMPLE puzzle whole (trivial). A HARD puzzle (resistDC 50+) resists even the right skill -> opposed roll. Erik: 'simple puzzles trivial, harder puzzles opposed rolls.'"
+  },
+  "hidden_thing": {
+   "barrier": "something concealed, a trap, an ambush, a hidden path",
+   "trivializedBy": [
+    "reveal",
+    "know",
+    "track"
+   ],
+   "resistDC": 45,
+   "acknowledgeTone": "name the perceiving craft that saw through it — 'nothing stays hidden from you here; the ambush was over before it sprang'",
+   "note": "A reveal/track craft voids a simple concealment; a well-hidden or warded thing resists."
+  },
+  "closed_distance": {
+   "barrier": "a gap, a chase, a thing fleeing or fled",
+   "trivializedBy": [
+    "move",
+    "track"
+   ],
+   "resistDC": 45,
+   "acknowledgeTone": "name the movement craft closing it instantly — 'the distance means nothing to you; you're beside them before they know it'",
+   "note": "A fast transit/track craft can collapse a CHASE (close the gap instantly). A movement-warded quarry (boundary_stone-like) resists -> opposed."
+  }
+ },
+ "collapseEligibility": {
+  "_doc": "tier -> whether a FINISH/END-family collapse (instant-end) can fire, and its base collapseDC. Riffraff freely collapsible; epics NON-collapsible (no one-beat kill on a dragon - fight the stages). Read against the finisher's opposed roll AND any wardDenial on the target.",
+  "riffraff": {
+   "collapsible": true,
+   "collapseDC": 15,
+   "note": "a finisher likely ends it in one beat"
+  },
+  "notable": {
+   "collapsible": true,
+   "collapseDC": 35,
+   "note": "collapsible but resists - an opposed roll; a solid fail still damages (§7a)"
+  },
+  "regional": {
+   "collapsible": true,
+   "collapseDC": 55,
+   "note": "only a demolishing finisher collapses; usually you fight the stages"
+  },
+  "epic": {
+   "collapsible": false,
+   "note": "NON-collapsible - no one-beat kill on an epic/dragon. The finisher does damage per §7a but never collapses the frame. You fight the stages, together."
+  }
+ }
+}

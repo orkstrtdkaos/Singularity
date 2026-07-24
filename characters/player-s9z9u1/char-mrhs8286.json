@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 20,
-  "xp": 1993,
+  "xp": 1998,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -131,11 +131,11 @@
     "spectrumId": -0.1326387045039847,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.25620126500365004,
-    "mechanical_spiritual": 0.2580372847905887,
+    "mechanical_spiritual": 0.25513542055105926,
     "concrete_abstract": -0.021014395762538336,
     "death_life": -0.18279319975514602,
     "emotional_logical": 0.008330843749999983,
-    "falsehood_truth": 0.31314648701323977,
+    "falsehood_truth": 0.31248916266257776,
     "demonic_angelic": 0.013499999999999998,
     "value": 0.053420408281249956,
     "spectrum": 0.11337499999999998
@@ -144,7 +144,7 @@
   "maxHealth": 125,
   "health": 125,
   "maxEnergy": 195,
-  "energy": 147,
+  "energy": 132,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1711,9 +1711,9 @@
     "The party closes Stillwater's Trouble — three flights of Marrow's Wings, the first Ashwarden attendance, two lessons from Veth, and the hollow known and held — and sets out on the March Road toward the Crossing and Edvar Crane.",
     "The party transits the waygate and arrives at the Crossing — a small road-junction settlement with a mill, a well, boiling-rags on the rail, and the gray-brown tinge of the creek running downstream of the Zone."
   ],
-  "currentLocationId": "the_crossing",
+  "currentLocationId": "gen-north-gate-registry-ossian-office",
   "activeScene": {
-    "locationId": "the_crossing",
+    "locationId": "gen-north-gate-registry-ossian-office",
     "turns": [
       {
         "player": "[The party arrives back on the Waygate hub platform on the edge of the great Crossing.  A huge city with the Coliseum etc.   we look around to see if Siol and her party of Elves are anywhere]",
@@ -1754,75 +1754,63 @@
         "player": "No, that's not fast enough... ask him who on the council receives the posts? Where they can be found -- let's your Marrow's Wings emerge as you ask and prepare to fly there directly.",
         "summary": "Silas draws Marrow's Wings in the runner's post — the boy names Clerk-Warden Ossian as the committee's gatekeeper, corner room behind the north gate registry, catchable now before midday ends.",
         "narration": "You turn from the counter and ask the runner's boy one more question. Who on the Council actually receives these posts? Not the committee as a body — the person. The one who opens the slips.\n\nThe boy blinks. He is not certain he should answer that. But you are already shifting, and Huginn lifts from your shoulder with a short, dry croak as the wings come.\n\nMarrow's Wings do not announce themselves. The shadow simply gathers at your back — not dramatically, not with heat or sound — and takes the shape they take. Dark, quiet, the span of a long reach to either side. The boy's eyes go wide and he takes one step back from the counter, the pen still in his hand.\n\nYou ask again. Calmly. The wings are simply there.\n\nHe finds his voice. 'Clerk-Warden Ossian,' he says, precise and quick, the way people name things they want to finish naming. 'Corner room, second floor, the brick hall behind the north gate registry. Morning post only — she is usually in before the bell and gone by midday. You'd want to catch her now, if the slips run with the morning.' He pauses, then adds, with the careful honesty of someone who understands what he is looking at: 'She is the one who decides what gets to the committee and what gets filed.'"
+      },
+      {
+        "player": "Fly to the brick hall behind the north gate registry now — catch Ossian before she leaves",
+        "summary": "Silas flies on Marrow's Wings to the north gate registry and arrives at Ossian's door before she leaves — she opens it already knowing his name.",
+        "narration": "You step through the runner's post door and the wings open fully in the afternoon light.\n\nThe span of them is not subtle. Marrow's Wings at surge are shadow made deliberate — wide and dark and carrying a quality that makes the nearest market-goers press back half a step without quite knowing why. Huginn lifts from the doorframe and climbs ahead of you, a ragged grey-black arrow pointing north.\n\nThe Crossing from above is exactly what it is: everything at once, crammed into a road-junction and refusing to apologize for it. You cross the market row in three wingbeats, clear the cooperage roof, and find the brick hall by its north gate registry flag snapping in the early-spring wind. Corner room, second floor — a window with a lamp still burning behind it. You come down on the landing outside it, the wings folding as you reach the step, shadow bleeding back into the ordinary afternoon.\n\nYou knock. A voice from inside says 'a moment' in the flat tone of someone who has been trying to finish a sentence for the last hour. Then the door opens.\n\nOssian is a compact woman in her mid-forties with ink on her left thumb and the expression of someone who has seen most things and categorized all of them. She looks at you. She looks at the window, clearly calculating how you arrived at this landing with no visible staircase. She looks back at you. 'You're Silas Weir,' she says — not a question. 'The morning run mentioned you were in the Crossing.' She steps back and opens the door the rest of the way. 'Come in before someone sees you and I have to explain what the registry's landing is for.'"
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the counter and ask the runner's boy one more question. Who on the Council actually receives these posts? Not the committee as a body — the person. The one who opens the slips.\n\nThe boy blinks. He is not certain he should answer that. But you are already shifting, and Huginn lifts from your shoulder with a short, dry croak as the wings come.\n\nMarrow's Wings do not announce themselves. The shadow simply gathers at your back — not dramatically, not with heat or sound — and takes the shape they take. Dark, quiet, the span of a long reach to either side. The boy's eyes go wide and he takes one step back from the counter, the pen still in his hand.\n\nYou ask again. Calmly. The wings are simply there.\n\nHe finds his voice. 'Clerk-Warden Ossian,' he says, precise and quick, the way people name things they want to finish naming. 'Corner room, second floor, the brick hall behind the north gate registry. Morning post only — she is usually in before the bell and gone by midday. You'd want to catch her now, if the slips run with the morning.' He pauses, then adds, with the careful honesty of someone who understands what he is looking at: 'She is the one who decides what gets to the committee and what gets filed.'",
-      "sceneSummary": "Silas draws Marrow's Wings in the runner's post — the boy names Clerk-Warden Ossian as the committee's gatekeeper, corner room behind the north gate registry, catchable now before midday ends.",
+      "narration": "You step through the runner's post door and the wings open fully in the afternoon light.\n\nThe span of them is not subtle. Marrow's Wings at surge are shadow made deliberate — wide and dark and carrying a quality that makes the nearest market-goers press back half a step without quite knowing why. Huginn lifts from the doorframe and climbs ahead of you, a ragged grey-black arrow pointing north.\n\nThe Crossing from above is exactly what it is: everything at once, crammed into a road-junction and refusing to apologize for it. You cross the market row in three wingbeats, clear the cooperage roof, and find the brick hall by its north gate registry flag snapping in the early-spring wind. Corner room, second floor — a window with a lamp still burning behind it. You come down on the landing outside it, the wings folding as you reach the step, shadow bleeding back into the ordinary afternoon.\n\nYou knock. A voice from inside says 'a moment' in the flat tone of someone who has been trying to finish a sentence for the last hour. Then the door opens.\n\nOssian is a compact woman in her mid-forties with ink on her left thumb and the expression of someone who has seen most things and categorized all of them. She looks at you. She looks at the window, clearly calculating how you arrived at this landing with no visible staircase. She looks back at you. 'You're Silas Weir,' she says — not a question. 'The morning run mentioned you were in the Crossing.' She steps back and opens the door the rest of the way. 'Come in before someone sees you and I have to explain what the registry's landing is for.'",
+      "sceneSummary": "Silas flies on Marrow's Wings to the north gate registry and arrives at Ossian's door before she leaves — she opens it already knowing his name.",
       "choices": [
         {
-          "label": "Fly to the brick hall behind the north gate registry now — catch Ossian before she leaves",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.3,
-            "mechanical_spiritual": 0.2
-          },
+          "label": "State the case plainly — name Millbrook's situation, the relay contact, and ask for the earliest meeting she can arrange",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "travel",
-            "negotiate"
+            "negotiate",
+            "persuade"
           ],
-          "abilityId": "light_borne",
-          "energyCost": 6,
+          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Go on foot — fold the wings and walk to the registry hall directly",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
+          "label": "Read the room first — use Order-Sense to see the design Ossian sits inside and find which angle of approach carries the least resistance",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "negotiate"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "abilityId": "order_sense",
+          "trivial": false
         },
         {
-          "label": "Ask the boy what Ossian is like before you go — what gets her attention and what gets things filed",
+          "label": "Put the document roll's chain — Fendt's testimony, Calvar's witness, Mara's relay — on her desk and let the evidence speak before you do",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "plan"
+          ],
+          "abilityId": null,
+          "trivial": false
+        },
+        {
+          "label": "Ask her what she already knows — she said your name without prompting; find out what the morning run told her and how she read it",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.2
-          },
           "difficulty": 0,
           "intentTags": [
             "study",
             "negotiate"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Wait for Veth and Pell to check in first — coordinate before approaching the registry",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
@@ -1830,97 +1818,112 @@
         "energy": -5
       },
       "scene": {
-        "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door angling lower toward mid-afternoon. Marrow's Wings are manifested at Silas's back, the shadow quiet and wide.",
+        "setting": "Corner room, second floor, brick hall behind the north gate registry — a working clerk's space: a lamp still burning on the desk, a window showing the afternoon roofline, a short stack of incoming slips on the left corner. Ossian is standing in the open doorway. The landing outside still holds a trace of shadow from the wings' folding.",
         "npcsPresent": [
           {
-            "name": "Runner's boy",
-            "state": "One step back from the counter, pen still in hand, watching the wings with wide eyes and professional composure fighting each other."
+            "name": "Ossian",
+            "state": "Standing in the open doorway, ink on her left thumb, taking Silas's measure — has stepped back to let him in but not fully moved aside yet"
           },
           {
             "name": "Huginn",
-            "state": "Airborne — circled once above the counter, now hanging near the door frame, watching."
+            "state": "Circling just beyond the window — visible through the glass, unhurried"
           }
         ],
         "objects": [
-          "Two dictated slips held by the runner's boy — one for Mara Wells, one for the Hub Council water committee — ready for the morning run",
-          "Freshly filed Millbrook slip in the cubby — Mara's original relay notice",
-          "Two additional slips already read and pocketed — Dara Holt's repair update and Pip's notice",
-          "Pigeonholed cubby shelf behind the counter, several other slips in various cubbies",
-          "Runner's bell above the door",
-          "Ink pot and pen on the counter edge, now capped"
+          "Lamp burning on the desk",
+          "Stack of incoming slips on the desk's left corner",
+          "Ink pot and pen mid-use on the writing surface",
+          "A half-finished sentence on an open folio",
+          "Registry flag snapping outside the window"
         ],
         "threads": [
-          "Clerk-Warden Ossian named as the committee gatekeeper — corner room, second floor, brick hall behind the north gate registry; catchable now before midday ends",
+          "Ossian knows Silas's name from the morning run — the extent of what she already knows is unread",
+          "The committee meeting is still unscheduled — the three-day window is the current shape of her answer",
           "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
           "Veth moving toward the water-seller cluster to ask after Crane and resources",
-          "Pell moving toward the Coliseum gate and forge district",
-          "Morning run will carry both messages — committee reply depends on whether Ossian is reached first"
+          "Pell moving toward the Coliseum gate and forge district"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "role": "Clerk-Warden, Hub Council water committee gatekeeper",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "The person who decides what reaches the committee and what gets filed — corner room, second floor, brick hall behind the north gate registry.",
-          "note": "Named by the runner's boy as the committee's receiving clerk. Morning post only; in before the bell, gone by midday.",
+          "note": "Opened the door already knowing Silas's name from the morning run — stepped back and let him in rather than turning him away; her guard is practical, not hostile",
           "learned": [
-            "Corner room, second floor, brick hall behind the north gate registry",
-            "Morning post only — in before the bell, gone by midday",
-            "She decides what reaches the committee and what gets filed"
+            "Silas Weir arrived at her landing via Marrow's Wings — she noted it, catalogued it, and did not make a scene of it",
+            "She knew his name before he gave it — the morning run's message reached her"
           ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Likely still in her office — catchable now before midday ends"
+          "statusNote": "In her corner office at the north gate registry — the door is open and Silas is on the threshold"
+        }
+      ],
+      "moveTo": {
+        "location": "north-gate-registry-ossian-office",
+        "why": "flew on Marrow's Wings directly from the runner's post to the brick hall behind the north gate registry"
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a short flight across the Crossing, arrival at the registry landing"
+      },
+      "placeUpdates": [
+        {
+          "note": "Silas arrived at the landing outside Ossian's corner room via Marrow's Wings — the approach is now known to Ossian and anyone who glanced up from the market row",
+          "subPlace": {
+            "name": "Ossian's Corner Room",
+            "parent": "north-gate-registry",
+            "note": "Corner room, second floor — Ossian's working office, where committee posts are received and filtered",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "what-the-water-remembers",
-          "label": "What the Water Remembers",
-          "kind": "event",
-          "fact": "Clerk-Warden Ossian is the committee's gatekeeper — corner room, second floor, brick hall behind the north gate registry. Morning post only; she decides what reaches the committee and what gets filed. Catchable before midday ends.",
+          "topic": "ossian",
+          "label": "Ossian — Clerk-Warden",
+          "kind": "person",
+          "entityId": "ossian",
+          "fact": "Ossian is compact, mid-forties, practical — already knew Silas's name from the morning run before he knocked. Her corner room is a working space: lamp, incoming slips, an open folio mid-sentence. She opened the door rather than turning him away.",
           "links": [
-            "ossian",
-            "the-water-crisis",
-            "mara-wells"
+            "what-the-water-remembers",
+            "the-water-crisis"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange at the runner's counter"
+      "offer": {
+        "thing": "The half-finished sentence on Ossian's open folio is visible from the doorway — it mentions the Millbrook intake in Ossian's own hand, which means she was already writing something about it before Silas knocked",
+        "from": "Ossian's role as the person who decides what reaches the committee — she has been reading the morning slips, and Mara's relay was among them"
       },
-      "sceneEnded": false
+      "imagePrompt": "A wright stepping onto a narrow registry landing from shadow-dark wings folding into nothing — afternoon light, a brick hall roofline, a lamp burning in the corner window, a compact woman in the doorway holding the door half-open, a grey-black bird circling just beyond the glass",
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20wright%20stepping%20onto%20a%20narrow%20registry%20landing%20from%20shadow-dark%20wings%20folding%20into%20nothing%20%E2%80%94%20afternoon%20light%2C%20a%20brick%20hall%20roofline%2C%20a%20lamp%20burning%20in%20the%20corner%20window%2C%20a%20compact%20woman%20in%20the%20doorway%20holding%20the%20door%20half-open%2C%20a%20grey-black%20bird%20circling%20just%20beyond%20the%20glass%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=60585&nologo=true"
     },
     "sceneState": {
-      "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door angling lower toward mid-afternoon. Marrow's Wings are manifested at Silas's back, the shadow quiet and wide.",
+      "setting": "Corner room, second floor, brick hall behind the north gate registry — a working clerk's space: a lamp still burning on the desk, a window showing the afternoon roofline, a short stack of incoming slips on the left corner. Ossian is standing in the open doorway. The landing outside still holds a trace of shadow from the wings' folding.",
       "npcsPresent": [
         {
-          "name": "Runner's boy",
-          "state": "One step back from the counter, pen still in hand, watching the wings with wide eyes and professional composure fighting"
+          "name": "Ossian",
+          "state": "Standing in the open doorway, ink on her left thumb, taking Silas's measure — has stepped back to let him in but not ful"
         },
         {
           "name": "Huginn",
-          "state": "Airborne — circled once above the counter, now hanging near the door frame, watching."
+          "state": "Circling just beyond the window — visible through the glass, unhurried"
         }
       ],
       "objects": [
-        "Two dictated slips held by the runner's boy — one for Mara Wells, one for the Hu",
-        "Freshly filed Millbrook slip in the cubby — Mara's original relay notice",
-        "Two additional slips already read and pocketed — Dara Holt's repair update and P",
-        "Pigeonholed cubby shelf behind the counter, several other slips in various cubbi",
-        "Runner's bell above the door",
-        "Ink pot and pen on the counter edge, now capped"
+        "Lamp burning on the desk",
+        "Stack of incoming slips on the desk's left corner",
+        "Ink pot and pen mid-use on the writing surface",
+        "A half-finished sentence on an open folio",
+        "Registry flag snapping outside the window"
       ],
       "threads": [
-        "Clerk-Warden Ossian named as the committee gatekeeper — corner room, second floor, brick hall behind the north gate registry; catchable now before midday ends",
+        "Ossian knows Silas's name from the morning run — the extent of what she already knows is unread",
+        "The committee meeting is still unscheduled — the three-day window is the current shape of her answer",
         "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
         "Veth moving toward the water-seller cluster to ask after Crane and resources",
-        "Pell moving toward the Coliseum gate and forge district",
-        "Morning run will carry both messages — committee reply depends on whether Ossian is reached first"
+        "Pell moving toward the Coliseum gate and forge district"
       ]
     }
   },
@@ -3632,20 +3635,23 @@
         "locationId": "the_crossing",
         "day": 13
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
-        "[d13] Named by the runner's boy as the committee's receiving clerk. Morning post only; in before the bell, gone by midday."
+        "[d13] Named by the runner's boy as the committee's receiving clerk. Morning post only; in before the bell, gone by midday.",
+        "[d13] Opened the door already knowing Silas's name from the morning run — stepped back and let him in rather than turning him away; her guard is practical, not hostile"
       ],
       "knownFacts": [
         "Corner room, second floor, brick hall behind the north gate registry",
         "Morning post only — in before the bell, gone by midday",
-        "She decides what reaches the committee and what gets filed"
+        "She decides what reaches the committee and what gets filed",
+        "Silas Weir arrived at her landing via Marrow's Wings — she noted it, catalogued it, and did not make a scene of it",
+        "She knew his name before he gave it — the morning run's message reached her"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Likely still in her office — catchable now before midday ends",
+      "statusNote": "In her corner office at the north gate registry — the door is open and Silas is on the threshold",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 13
@@ -4258,7 +4264,8 @@
         "[d12] The deep drawer beneath the work counter held Silas's father's Waymarker and sealed letter for years — both now retrieved and on the table. The drawer is open.",
         "[d12] The Waymarker is now seated to Stillwater's Trouble — the tool carries the post's address and can locate it from a distance.",
         "[d13] Party approaching on the cairn-line road from the north, day 13 morning — Huginn has marked a patient ending somewhere along the line south of Cairnhold.",
-        "[d13] A message from Mara Wells's relay arrived at the Hub message-runner post — pinned to the board with her chalk seal, unopened as of this scene."
+        "[d13] A message from Mara Wells's relay arrived at the Hub message-runner post — pinned to the board with her chalk seal, unopened as of this scene.",
+        "[d13] Silas arrived at the landing outside Ossian's corner room via Marrow's Wings — the approach is now known to Ossian and anyone who glanced up from the market row"
       ],
       "flags": {
         "waymarker_seated": "stillwaters-trouble"
@@ -4275,6 +4282,14 @@
           "day": 13,
           "visited": true,
           "note": "A narrow building on the market row's east side — message board on the outer wall, runner's bell above the door. Millbrook slips are in the counter stack."
+        },
+        "ossian-s-corner-room": {
+          "name": "Ossian's Corner Room",
+          "parentId": "the_crossing",
+          "day": 13,
+          "visited": true,
+          "note": "Corner room, second floor — Ossian's working office, where committee posts are received and filtered",
+          "parentUnresolved": "north-gate-registry"
         }
       }
     },
@@ -4331,6 +4346,13 @@
           "note": "The yard of dark earth just inside the hollow's rim — below the birch line, above the limestone circuit. The sentry's lower loop passes through here."
         }
       },
+      "lastVisit": 13,
+      "vectorsKnown": []
+    },
+    "gen-north-gate-registry-ossian-office": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
       "lastVisit": 13,
       "vectorsKnown": []
     }
@@ -4459,12 +4481,8 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 576,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean…",
-        "from": "The place itself — Stillwater's Trouble, a ground that held Veth for eleven years and now holds Silas's first tended ending here; the…"
-      },
       {
         "thing": "The Father's Sealed Letter sits in inventory, unread — and the hollow, with the badger's circuit running quiet below and Huginn approving…",
         "from": "The hollow itself — it has received the first attendance, the sentry is seated, and there is a breath of quiet before the climb back up…"
@@ -4480,6 +4498,10 @@
       {
         "thing": "Huginn's shift at the drainage cut — a single deliberate adjustment on the pack frame, the kind it makes when it has registered something…",
         "from": "Huginn attends endings — it notices what is concluding, and something at the drainage cut earned that small movement. The detail is there…"
+      },
+      {
+        "thing": "The half-finished sentence on Ossian's open folio is visible from the doorway — it mentions the Millbrook intake in Ossian's own hand…",
+        "from": "Ossian's role as the person who decides what reaches the committee — she has been reading the morning slips, and Mara's relay was among them"
       }
     ],
     "wantProgress": {
@@ -5959,21 +5981,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.94238776689238,
-    "cerebral": 17.45593812732936,
-    "social": 8.713377003038712,
-    "generous": 4.2635247918044055,
-    "cautious": 3.4654444890235667,
-    "physical": 0.49030658053810766,
-    "risky": 1.428366995388033,
-    "ruthless": 0.007497247281358842,
-    "carousing": 0.289777815108654,
-    "amorous": 2.9180787864216016,
-    "patient": 0.20031190401554777,
-    "stealth": 0.002905952200235022,
-    "devotion": 1.5349201329573874,
-    "craft": 0.486757856898941,
-    "leadership": 0.9897916192049889
+    "strategic": 20.41882807272007,
+    "cerebral": 17.019539674146127,
+    "social": 9.495542577962745,
+    "generous": 4.156936672009295,
+    "cautious": 3.3788083767979775,
+    "physical": 0.47804891602465494,
+    "risky": 1.392657820503332,
+    "ruthless": 0.007309816099324871,
+    "carousing": 0.2825333697309377,
+    "amorous": 2.8451268167610615,
+    "patient": 0.19530410641515908,
+    "stealth": 0.0028333033952291464,
+    "devotion": 1.4965471296334527,
+    "craft": 0.4745889104764675,
+    "leadership": 0.9650468287248641
   },
   "aptitudes": [
     "strategist",
@@ -5981,10 +6003,26 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 718,
+  "actionCount": 719,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A wright stepping onto a narrow registry landing from shadow-dark wings folding into nothing — afternoon light, a brick hall roofline, a lamp burning in the corner window, a compact woman in the doorw",
+      "url": "https://image.pollinations.ai/prompt/A%20wright%20stepping%20onto%20a%20narrow%20registry%20landing%20from%20shadow-dark%20wings%20folding%20into%20nothing%20%E2%80%94%20afternoon%20light%2C%20a%20brick%20hall%20roofline%2C%20a%20lamp%20burning%20in%20the%20corner%20window%2C%20a%20compact%20woman%20in%20the%20doorway%20holding%20the%20door%20half-open%2C%20a%20grey-black%20bird%20circling%20just%20beyond%20the%20glass%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=60585&nologo=true",
+      "caption": "Silas flies on Marrow's Wings to the north gate registry and arrives at Ossian's door befo",
+      "worldDay": 24,
+      "at": "2026-07-24T00:21:42.174Z"
+    },
+    {
+      "kind": "location",
+      "prompt": "North Gate Registry Ossian Office",
+      "url": "https://image.pollinations.ai/prompt/North%20Gate%20Registry%20Ossian%20Office%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20North%20Gate%20Registry%20Ossian%20Office.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=7567&nologo=true",
+      "caption": "North Gate Registry Ossian Office",
+      "worldDay": 24,
+      "at": "2026-07-24T00:21:42.170Z"
+    },
     {
       "kind": "ability",
       "prompt": "The Ended Threat",
@@ -6352,27 +6390,11 @@
       "caption": "The Deathbound Runic Spear upgraded through a full night's work — circuit deepened, maker'",
       "worldDay": 14,
       "at": "2026-07-14T13:29:32.224Z"
-    },
-    {
-      "kind": "moment",
-      "prompt": "Pre-dawn grey light in a birch-wood. A sow lies still in a low sedge strip, frost-pale. A broad-shouldered man kneels beside her, knife lowered, face calm. A tall figure stands two paces east, arms at",
-      "url": "https://image.pollinations.ai/prompt/Pre-dawn%20grey%20light%20in%20a%20birch-wood.%20A%20sow%20lies%20still%20in%20a%20low%20sedge%20strip%2C%20frost-pale.%20A%20broad-shouldered%20man%20kneels%20beside%20her%2C%20knife%20lowered%2C%20face%20calm.%20A%20tall%20figure%20stands%20two%20paces%20east%2C%20arms%20at%20his%20sides%2C%20a%20long%20ash-and-iron%20spear%20held%20horizontal.%20A%20big%20grey-black%20corvid%20sits%20on%20a%20fence-post%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=95532&nologo=true",
-      "caption": "Sow killed cleanly — Corvin's strike, Silas's bar, clean finish. Huginn attends. The north",
-      "worldDay": 13,
-      "at": "2026-07-13T21:07:31.823Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "Silas Weir",
-      "url": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20and%20the%20hold%20of%20the%20clutching%20hand%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13697&nologo=true",
-      "caption": "Silas Weir — level 3",
-      "worldDay": 13,
-      "at": "2026-07-13T17:30:03.286Z"
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784852067479,
-  "rev": 1156,
+  "updatedAt": 1784852502174,
+  "rev": 1162,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7891,6 +7913,43 @@
           "y": 384.4108727502462
         },
         "supersededBy": "the_old_warden_post"
+      },
+      "gen-north-gate-registry-ossian-office": {
+        "id": "gen-north-gate-registry-ossian-office",
+        "name": "North Gate Registry Ossian Office",
+        "regionId": "the_center",
+        "descriptionSeed": "A place the road led to — North Gate Registry Ossian Office. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "the_crossing"
+        ],
+        "_mintedAs": "transit",
+        "_gen": {
+          "type": "location",
+          "tier": "fresh",
+          "engagementScore": 2,
+          "birthWeight": 1,
+          "rating": null,
+          "attentionHistory": [
+            {
+              "kind": "revisit",
+              "day": 13
+            }
+          ],
+          "createdDay": 13,
+          "provenance": {
+            "locationId": "the_crossing",
+            "day": null,
+            "hint": "transit"
+          },
+          "lastAttentionDay": 13
+        },
+        "map": {
+          "x": 284.42733036328025,
+          "y": 347.5471840270921
+        }
       }
     },
     "arc": {}
@@ -8160,7 +8219,7 @@
       "boundary_stone": 6,
       "the_kept_breath": 2,
       "light_borne": 2,
-      "marrow-s-wings": 1,
+      "marrow-s-wings": 2,
       "ask_the_dead": 1
     },
     "coActivations": {
@@ -8656,7 +8715,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 70
+    "the_center": 71
   },
   "foreclosed": [
     "rootkin",
@@ -8675,7 +8734,8 @@
     "the_old_warden_post",
     "cairnhold",
     "the_crossing",
-    "gen-stillwater-s-trouble"
+    "gen-stillwater-s-trouble",
+    "gen-north-gate-registry-ossian-office"
   ],
   "opLossLog": [
     {
@@ -8779,10 +8839,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T00:14:27.475Z",
+      "lastAt": "2026-07-24T00:21:42.164Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 52
+      "beats": 53
     }
   ],
   "company": [
@@ -8977,24 +9037,25 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true",
     "gen-stillwater-s-trouble": "https://image.pollinations.ai/prompt/Stillwater'S%20Trouble%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Stillwater'S%20Trouble.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=9692&nologo=true",
     "gen-ashwarden-march-road": "https://image.pollinations.ai/prompt/Ashwarden%20March%20Road%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Ashwarden%20March%20Road.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=9497&nologo=true",
-    "gen-waygate": "https://image.pollinations.ai/prompt/Waygate%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Waygate.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=37923&nologo=true"
+    "gen-waygate": "https://image.pollinations.ai/prompt/Waygate%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Waygate.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=37923&nologo=true",
+    "gen-north-gate-registry-ossian-office": "https://image.pollinations.ai/prompt/North%20Gate%20Registry%20Ossian%20Office%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20North%20Gate%20Registry%20Ossian%20Office.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=7567&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 89,
-    "choices": 89,
-    "characterDeltas": 37,
-    "scene": 89,
-    "npcUpdates": 75,
+    "sceneSummary": 90,
+    "choices": 90,
+    "characterDeltas": 38,
+    "scene": 90,
+    "npcUpdates": 76,
     "factUpdates": 7,
-    "placeUpdates": 15,
-    "codexUpdates": 51,
-    "timeOps": 83,
-    "imagePrompt": 2,
-    "sceneEnded": 19,
+    "placeUpdates": 16,
+    "codexUpdates": 52,
+    "timeOps": 84,
+    "imagePrompt": 3,
+    "sceneEnded": 20,
     "itemUpdates": 2,
     "questUpdates": 5,
-    "offer": 8,
-    "moveTo": 5,
+    "offer": 9,
+    "moveTo": 6,
     "delegateOps": 1,
     "deeds": 1,
     "standingOps": 1,
@@ -9002,7 +9063,7 @@
     "discovery": 2,
     "stageOps": 1
   },
-  "_opTurns": 89,
+  "_opTurns": 90,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -9010,7 +9071,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 9,
+      "applied": 10,
       "rejected": 0,
       "lastWhy": null
     },

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 22,
-  "xp": 2109,
+  "xp": 2111,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -144,7 +144,7 @@
   "maxHealth": 135,
   "health": 135,
   "maxEnergy": 205,
-  "energy": 200,
+  "energy": 198,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1755,117 +1755,134 @@
         "player": "Go, but let Huginn lead — follow where it goes, not straight to the mill.",
         "summary": "Huginn leads the party north along the channel to the mill's intake — Veth reads the treated water without hesitation.",
         "narration": "The crow lifts from the rooftop without being asked.\n\nYou watch it angle north along the lane — not the direct route to the mill but something adjacent. It passes the boiling-rags well, passes the two women with their jugs, and drops into the narrower passage between a grain store and a mender's shed where the light goes flat and the smell of the creek is stronger. Huginn does not circle or hesitate. It moves with the particular unhurry of something that knows where it is going and has no reason to rush.\n\nYou follow. Pell falls in half a step to your left, and Veth a step behind that. Nobody speaks.\n\nThe passage opens onto a short stretch of packed mud where a water-channel runs along the northern edge of the settlement toward the mill. The channel is low for the season. The melt should have it running full, but it is barely knee-deep. The color is wrong. Not the gray-brown of the creek at the well — this is cleaner. Cleaner than it should be, given everything else. Huginn lands on the far bank and stands there, looking at the water with the still, sidelong attention it reserves for things that are in the middle of something.\n\nVeth says quietly, \"It is treating the intake.\" She means the mill. She means Crane has done something upstream of the wheel to pull the water through before it reaches whatever he uses it for. She does not say this as a surprise. She says it the way she names most things — as a fact that was already there, waiting for someone to look at the right angle.\n\nHuginn gives one low sound. Then it is still."
+      },
+      {
+        "player": "Read the channel with Order-Sense — understand what the intake treatment is before you approach, and what it tells you about what Crane is filtering for.",
+        "summary": "Order-Sense fails in the thin substrate — the intake treatment's purpose stays opaque; Crane must be met face to face.",
+        "narration": "You reach for Order-Sense at the water's edge and the lattice gives you almost nothing.\n\nThe substrate here is thin — worked ground, settlement-old, the kind of place where the nanite density has been low for years and what remains is scattered. You feel the craft start, feel the familiar opening of design-sight, and then it closes. The channel is just a channel. The intake treatment reads as a blur — something is there, a purpose, a filter arrangement — but the resolution is not fine enough to tell you what it is for. You get the shape of a lid without knowing what it covers.\n\nHuginn is still on the far bank. It gives one more low sound and does not look away from the water.\n\nVeth steps up beside you. \"Thin here,\" she says quietly, without judgment. She is reading the same absence you are. \"We will need to ask him directly.\"\n\nPell says nothing, but her gaze has moved to the mill ahead — the wheel turning slow in the low water, a single lamp burning in the ground-floor window despite the afternoon light. Someone is working inside, or waiting."
       }
     ],
     "lastTurn": {
-      "narration": "The crow lifts from the rooftop without being asked.\n\nYou watch it angle north along the lane — not the direct route to the mill but something adjacent. It passes the boiling-rags well, passes the two women with their jugs, and drops into the narrower passage between a grain store and a mender's shed where the light goes flat and the smell of the creek is stronger. Huginn does not circle or hesitate. It moves with the particular unhurry of something that knows where it is going and has no reason to rush.\n\nYou follow. Pell falls in half a step to your left, and Veth a step behind that. Nobody speaks.\n\nThe passage opens onto a short stretch of packed mud where a water-channel runs along the northern edge of the settlement toward the mill. The channel is low for the season. The melt should have it running full, but it is barely knee-deep. The color is wrong. Not the gray-brown of the creek at the well — this is cleaner. Cleaner than it should be, given everything else. Huginn lands on the far bank and stands there, looking at the water with the still, sidelong attention it reserves for things that are in the middle of something.\n\nVeth says quietly, \"It is treating the intake.\" She means the mill. She means Crane has done something upstream of the wheel to pull the water through before it reaches whatever he uses it for. She does not say this as a surprise. She says it the way she names most things — as a fact that was already there, waiting for someone to look at the right angle.\n\nHuginn gives one low sound. Then it is still.",
-      "sceneSummary": "Huginn leads the party north along the channel to the mill's intake — Veth reads the treated water without hesitation.",
+      "narration": "You reach for Order-Sense at the water's edge and the lattice gives you almost nothing.\n\nThe substrate here is thin — worked ground, settlement-old, the kind of place where the nanite density has been low for years and what remains is scattered. You feel the craft start, feel the familiar opening of design-sight, and then it closes. The channel is just a channel. The intake treatment reads as a blur — something is there, a purpose, a filter arrangement — but the resolution is not fine enough to tell you what it is for. You get the shape of a lid without knowing what it covers.\n\nHuginn is still on the far bank. It gives one more low sound and does not look away from the water.\n\nVeth steps up beside you. \"Thin here,\" she says quietly, without judgment. She is reading the same absence you are. \"We will need to ask him directly.\"\n\nPell says nothing, but her gaze has moved to the mill ahead — the wheel turning slow in the low water, a single lamp burning in the ground-floor window despite the afternoon light. Someone is working inside, or waiting.",
+      "sceneSummary": "Order-Sense fails in the thin substrate — the intake treatment's purpose stays opaque; Crane must be met face to face.",
       "scene": {
-        "setting": "The packed-mud bank of the settlement's north water-channel, afternoon — the mill visible another minute's walk ahead, the channel running low and unusually clean, flat early-spring light.",
+        "setting": "Packed-mud bank of the settlement's north water-channel, afternoon — the mill visible a minute's walk ahead, the channel running low and unusually clean, flat early-spring light.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing half a step to Silas's left, coat straight, watching Huginn on the far bank."
+            "state": "Standing half a step to Silas's left, gaze on the mill's ground-floor window — a lamp burning inside."
           },
           {
             "name": "Huginn",
-            "state": "On the far bank of the channel — still, looking at the water, one low sound given."
+            "state": "On the far bank — still, looking at the water, a second low sound given."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "A step behind the party, having named the intake treatment plainly."
+            "state": "Beside Silas, having named the substrate's thinness plainly."
           }
         ],
         "objects": [
           "The water-channel — low, running cleaner than the creek at the well",
-          "The mill — visible a minute's walk north along the channel",
+          "The mill — a minute's walk north, wheel turning slow, lamp burning in the ground-floor window",
           "Packed mud bank with the mender's shed and grain store behind"
         ],
         "threads": [
-          "Crane has treated the intake — he is filtering for something specific",
-          "Huginn chose this route and gave one low sound at the water",
-          "Edvar Crane boards at the mill — still needs to be met"
+          "Crane is filtering for something specific — the intake purpose unread",
+          "Huginn gave a second low sound at the water — something is ending here, or near here",
+          "A lamp burns in the mill's ground-floor window in afternoon light — someone is inside"
         ]
       },
       "choices": [
         {
-          "label": "Go to the mill — knock and ask for Crane directly. You have his name and a reason. See who answers.",
+          "label": "Walk to the mill and knock — meet Crane face to face, no preamble.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "help"
           ],
           "trivial": true
         },
         {
-          "label": "Read the channel with Order-Sense — understand what the intake treatment is before you approach, and what it tells you about what Crane is filtering for.",
+          "label": "Before you knock — let Huginn cross and tell you what it hears in the ending already present here.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "trivial": true
+        },
+        {
+          "label": "Ask Veth: what does an Ashwarden read in water treated this carefully by someone who already knows?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Try Deathsense on the water itself — read whether anything in it is ending, and how.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": "order_sense",
+          "abilityId": "deathsense",
           "energyCost": 2,
           "trivial": false
-        },
-        {
-          "label": "Circle the mill's exterior — read the building, its access points, and who comes and goes, before committing to an approach.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask Veth what she makes of it. She named the intake treatment without being asked — she has a read already.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Read the same absence as Silas — watching the mill's lamp in the afternoon light, waiting.",
+          "statusNote": "Standing at the channel bank north of the well lane — gaze on the mill, ready to move."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Named the substrate's thinness plainly without judgment — the craft simply could not resolve here.",
+          "statusNote": "Beside Silas at the channel bank, reading the same thin ground."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short walk through the settlement's north lane to the channel bank"
+        "why": "A brief attempt at the water's edge — moments only."
       }
     },
     "sceneState": {
-      "setting": "The packed-mud bank of the settlement's north water-channel, afternoon — the mill visible another minute's walk ahead, the channel running low and unusually clean, flat early-spring light.",
+      "setting": "Packed-mud bank of the settlement's north water-channel, afternoon — the mill visible a minute's walk ahead, the channel running low and unusually clean, flat early-spring light.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing half a step to Silas's left, coat straight, watching Huginn on the far bank."
+          "state": "Standing half a step to Silas's left, gaze on the mill's ground-floor window — a lamp burning inside."
         },
         {
           "name": "Huginn",
-          "state": "On the far bank of the channel — still, looking at the water, one low sound given."
+          "state": "On the far bank — still, looking at the water, a second low sound given."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "A step behind the party, having named the intake treatment plainly."
+          "state": "Beside Silas, having named the substrate's thinness plainly."
         }
       ],
       "objects": [
         "The water-channel — low, running cleaner than the creek at the well",
-        "The mill — visible a minute's walk north along the channel",
+        "The mill — a minute's walk north, wheel turning slow, lamp burning in the ground",
         "Packed mud bank with the mender's shed and grain store behind"
       ],
       "threads": [
-        "Crane has treated the intake — he is filtering for something specific",
-        "Huginn chose this route and gave one low sound at the water",
-        "Edvar Crane boards at the mill — still needs to be met"
+        "Crane is filtering for something specific — the intake purpose unread",
+        "Huginn gave a second low sound at the water — something is ending here, or near here",
+        "A lamp burns in the mill's ground-floor window in afternoon light — someone is inside"
       ]
     }
   },
@@ -2731,7 +2748,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Her hand unclenched at her side as Silas answered — she heard something in it, through ironsense or through the plainness of the statement, and filed it without naming it aloud.",
         "[d13] Invited to experiment with ironsense against the live ward — took the invitation without asking what was meant, set her feet, and started working.",
         "[d13] Silas named what he felt through the bond as she worked — she is tracing the join's load-bearing hinge, reading load not shape, and it arrives through the bond as weight through a joint that is not rigid.",
         "[d13] Received the attending-quality pass through the soul bond and used it — her step slowed, her head dropped, she found something at the ward's outer margin she would not have found alone",
@@ -2740,7 +2756,8 @@
         "[d13] Arrived at the Crossing, immediately read the settlement for working infrastructure — noted no forge smoke, spotted a cooperage.",
         "[d13] Tasked with scouting forge resources and booking a bout at the Coliseum — moving northwest.",
         "[d13] Received the full weight of the boar hunt through the soul bond — cold ground, the kill, the walk back after, the unbroken line to this stall. Found the structural truth of it through ironsense. Did not speak, which was the answer.",
-        "[d13] Found at a hardware boutique — mid-read on a buckle, nothing worth buying. Rejoined Silas at the crescent's northern end."
+        "[d13] Found at a hardware boutique — mid-read on a buckle, nothing worth buying. Rejoined Silas at the crescent's northern end.",
+        "[d13] Read the same absence as Silas — watching the mill's lamp in the afternoon light, waiting."
       ],
       "knownFacts": [
         "Boundary-Stone and Shielding Word can braid into a sustained place-ward — she watched it seat",
@@ -2761,7 +2778,7 @@
         "reading structural anomaly in road construction through iron"
       ],
       "status": "active",
-      "statusNote": "At the hardware boutique in the crescent's north end — buckle set down, turning to meet Silas, ready to move on.",
+      "statusNote": "Standing at the channel bank north of the well lane — gaze on the mill, ready to move.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -3432,7 +3449,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Received Silas's second-question answer — named it right and wrong simultaneously, without cruelty, and placed the decade of work between those two positions without explaining it. A teacher returning a tool to the shelf.",
         "[d13] Stepped aside to observe Pell's experiment — silent, watching the ward's join and Pell's hands simultaneously.",
         "[d13] Asked the cross-reference question — iron or intention — watching both Silas's report and Pell's feet simultaneously.",
         "[d13] Named the soul bond used as an attending-quality pass-through a teaching tool she has never encountered — said she needs to think about what it means that Silas has it",
@@ -3441,7 +3457,8 @@
         "[d13] Arrived at the Crossing, standing quiet, reading the settlement in her own way — mill, well, long building.",
         "[d13] Tasked with finding workers, resources for Stillwater's Trouble or Millbrook, and asking after Edvar Crane — moving toward the water-seller cluster.",
         "[d13] Found near the water-seller's cart at the Crossing well — mid-conversation, listening to someone tell her less than they think they are.",
-        "[d13] Worked the water-seller cleanly — got the contamination timing, the smell description, and Crane's location from a man who didn't realize he was being interviewed."
+        "[d13] Worked the water-seller cleanly — got the contamination timing, the smell description, and Crane's location from a man who didn't realize he was being interviewed.",
+        "[d13] Named the substrate's thinness plainly without judgment — the craft simply could not resolve here."
       ],
       "knownFacts": [
         "The Held Place technique — watched the braid seat from outside",
@@ -3464,7 +3481,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "With the party at the well lane — report delivered, ready to move.",
+      "statusNote": "Beside Silas at the channel bank, reading the same thin ground.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -4600,11 +4617,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T03:39:18.795Z",
+    "lastSharedReadAt": "2026-07-24T10:57:33.964Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
-    "lastGenCount": 579,
-    "turnsSinceOffer": 8,
+    "lastGenCount": 586,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "The stock shelter, plain and open on the lee side of the field-stone wall — exactly the kind of place Huginn will land first and inspect…",
@@ -6107,21 +6124,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.283700241807104,
-    "cerebral": 12.851152960045495,
-    "social": 13.704961627351596,
-    "generous": 5.0607321630713695,
-    "cautious": 4.40178128699495,
-    "physical": 0.6871934339117137,
-    "risky": 0.6039440963784106,
-    "ruthless": 0.5341955158827862,
-    "carousing": 0.12252425410373108,
-    "amorous": 2.071417677074053,
-    "patient": 0.7349433188125152,
-    "stealth": 0.0012286987037340626,
-    "devotion": 0.648997040470084,
-    "craft": 1.0224634297983453,
-    "leadership": 0.9914350289770308
+    "strategic": 17.826607735761925,
+    "cerebral": 13.529874136044358,
+    "social": 13.362337586667806,
+    "generous": 4.934213858994585,
+    "cautious": 4.291736754820076,
+    "physical": 0.6700135980639209,
+    "risky": 0.5888454939689504,
+    "ruthless": 0.5208406279857166,
+    "carousing": 0.1194611477511378,
+    "amorous": 2.019632235147202,
+    "patient": 0.7165697358422023,
+    "stealth": 0.001197981236140711,
+    "devotion": 0.6327721144583319,
+    "craft": 0.9969018440533866,
+    "leadership": 0.966649153252605
   },
   "aptitudes": [
     "strategist",
@@ -6129,7 +6146,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 752,
+  "actionCount": 753,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6519,8 +6536,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784865356884,
-  "rev": 1217,
+  "updatedAt": 1784890853503,
+  "rev": 1220,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8565,7 +8582,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 79,
+      "order_sense": 80,
       "palework": 30,
       "deathsense": 33,
       "shadowstep": 21,
@@ -9082,7 +9099,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 486,
+    "valley": 487,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9213,6 +9230,14 @@
       "startDay": 23,
       "endDay": 24,
       "beats": 86
+    },
+    {
+      "id": "sess-12",
+      "startedAt": "2026-07-24T11:00:53.492Z",
+      "lastAt": "2026-07-24T11:00:53.492Z",
+      "startDay": 24,
+      "endDay": 24,
+      "beats": 1
     }
   ],
   "company": [
@@ -9414,9 +9439,9 @@
   "_opEmitted": {
     "sceneSummary": 122,
     "choices": 122,
-    "characterDeltas": 50,
+    "characterDeltas": 49,
     "scene": 122,
-    "npcUpdates": 105,
+    "npcUpdates": 106,
     "factUpdates": 7,
     "placeUpdates": 21,
     "codexUpdates": 71,

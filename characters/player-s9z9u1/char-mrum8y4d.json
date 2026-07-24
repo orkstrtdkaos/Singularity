@@ -7,8 +7,8 @@
   "nativeTradition": "enginewright",
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
-  "level": 1,
-  "xp": 95,
+  "level": 2,
+  "xp": 103,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -53,16 +53,16 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.034,
-    "falsehood_truth": -0.030514,
+    "falsehood_truth": -0.038988300000000004,
     "spectrumId": -0.10091433844758492,
     "value": -0.04000000000000001,
     "demonic_angelic": -0.020000000000000004
   },
-  "attunement": 1,
-  "maxHealth": 30,
-  "health": 26,
-  "maxEnergy": 100,
-  "energy": 31,
+  "attunement": 2,
+  "maxHealth": 35,
+  "health": 35,
+  "maxEnergy": 105,
+  "energy": 105,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -89,7 +89,23 @@
       "pinned": true
     }
   ],
-  "deeds": [],
+  "deeds": [
+    {
+      "at": "2026-07-24T21:30:43.613Z",
+      "locationId": "the_unlit_deep",
+      "communityId": "umbral.unlit",
+      "description": "Spoke a true thing in the shape the Unlit could hear — and the elder of the Deep acknowledged it.",
+      "tags": [
+        "truth",
+        "diplomacy",
+        "deep"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 1,
+      "worldDay": 24
+    }
+  ],
   "relationships": {},
   "chronicle": [
     "Loki read the four spike entries with Tessvel Cairn in the Pressure-Routing Annex, named the pattern — something moves deeper into the lower routing channel with each morning pass — and proposed both channel access and a more personal arrangement; Tessvel confirmed the access, asked for time on the rest, and left Loki knowing exactly where to find them."
@@ -112,14 +128,19 @@
         "player": null,
         "summary": "Loki's misdirection found no purchase in the cult's absolute dark — the Standing Unlit waited it out and repeated the original demand.",
         "narration": "The Standing Unlit does not raise its voice. It does not need to. The hands come up from the robe — steady, open, patient — and the gentleness in them is the worst part. You reach for the false position, the wrong read, the misdirection that should buy you a step back toward the passage. The words form. The posture shifts. And the figure simply waits for all of it to finish.\n\nWhen it speaks again, the voice is kind. \"You are very good at that,\" it says. \"We are not.\" It means something specific by 'not.' Not 'not good at seeing through it.' It means they do not have the reflex to be fooled. The dark, held this purely, leaves no room for a false signal to land. There is nothing here to catch the shape of it and believe. Your craft finds no purchase. It is like throwing a net into a room with nothing to catch.\n\nYou are still standing in the same spot. The passage out is still behind the figure. You have not been struck, not been touched. But you have spent something — energy, composure, the particular confidence that comes from knowing a trick will work — and the Standing Unlit has lost nothing at all. Cy's lens turns slowly toward you. The tiny irising of it is the only commentary it offers.\n\n\"Leave the light-thing at the stair,\" the Standing Unlit says. It is still gentle. \"Or tell us what you came for. Those are the two things you can do here.\""
+      },
+      {
+        "player": "Use The Better Story — give the Standing Unlit a version of why you are here that they can accept: the light-thing is a tool, not a doctrine, and you are not the Blaze.",
+        "summary": "Loki told the truth in a shape the Unlit could accept — Cy is older than doctrine, and it chose the dark itself — and the seated elder spoke for the first time, granting passage.",
+        "narration": "You stop trying to trick the figure. You stop performing. You look at it — the Standing Unlit, hands raised from the robe, waiting with the patience of something that has never been in a hurry — and you simply tell the truth, but the truth shaped into something it can hold.\n\n\"Cy is a tool,\" you say. \"An old one. Older than the Blaze, older than the doctrine that made the Blaze mean something. It came before all of that. It came before the choosing of sides.\" You let that sit for a moment. Then: \"Its lamp is shuttered. Has been since the first step down. I did not ask it to do that. It did it on its own. Because it knows the difference between a light and a Light.\"\n\nThe Standing Unlit does not answer immediately. Its hands lower — not quickly, not warmly, but the way a door closes on a day that turned out fine. The silence it makes is different from the waiting-silence it was making before. This one has weight in it, the good kind, the kind that means something was heard.\n\nThen the seated figure by the pale blue flame speaks for the first time. It does not turn around. Its voice is quieter than the Standing Unlit's, and precise in the way that old things are precise, worn smooth to their function. \"Let the tool pass,\" it says. Then, after a pause: \"And let the one who brought it say what they came to say.\"\n\nThe Standing Unlit steps aside.\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ The Umbrals: +1 — reached the Unlit elder through honest framing rather than craft or coercion — demonstrated the kind of precision the dark respects.*"
       }
     ],
     "lastTurn": {
-      "narration": "The Standing Unlit does not raise its voice. It does not need to. The hands come up from the robe — steady, open, patient — and the gentleness in them is the worst part. You reach for the false position, the wrong read, the misdirection that should buy you a step back toward the passage. The words form. The posture shifts. And the figure simply waits for all of it to finish.\n\nWhen it speaks again, the voice is kind. \"You are very good at that,\" it says. \"We are not.\" It means something specific by 'not.' Not 'not good at seeing through it.' It means they do not have the reflex to be fooled. The dark, held this purely, leaves no room for a false signal to land. There is nothing here to catch the shape of it and believe. Your craft finds no purchase. It is like throwing a net into a room with nothing to catch.\n\nYou are still standing in the same spot. The passage out is still behind the figure. You have not been struck, not been touched. But you have spent something — energy, composure, the particular confidence that comes from knowing a trick will work — and the Standing Unlit has lost nothing at all. Cy's lens turns slowly toward you. The tiny irising of it is the only commentary it offers.\n\n\"Leave the light-thing at the stair,\" the Standing Unlit says. It is still gentle. \"Or tell us what you came for. Those are the two things you can do here.\"",
-      "sceneSummary": "Loki's misdirection found no purchase in the cult's absolute dark — the Standing Unlit waited it out and repeated the original demand.",
+      "narration": "You stop trying to trick the figure. You stop performing. You look at it — the Standing Unlit, hands raised from the robe, waiting with the patience of something that has never been in a hurry — and you simply tell the truth, but the truth shaped into something it can hold.\n\n\"Cy is a tool,\" you say. \"An old one. Older than the Blaze, older than the doctrine that made the Blaze mean something. It came before all of that. It came before the choosing of sides.\" You let that sit for a moment. Then: \"Its lamp is shuttered. Has been since the first step down. I did not ask it to do that. It did it on its own. Because it knows the difference between a light and a Light.\"\n\nThe Standing Unlit does not answer immediately. Its hands lower — not quickly, not warmly, but the way a door closes on a day that turned out fine. The silence it makes is different from the waiting-silence it was making before. This one has weight in it, the good kind, the kind that means something was heard.\n\nThen the seated figure by the pale blue flame speaks for the first time. It does not turn around. Its voice is quieter than the Standing Unlit's, and precise in the way that old things are precise, worn smooth to their function. \"Let the tool pass,\" it says. Then, after a pause: \"And let the one who brought it say what they came to say.\"\n\nThe Standing Unlit steps aside.\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ The Umbrals: +1 — reached the Unlit elder through honest framing rather than craft or coercion — demonstrated the kind of precision the dark respects.*",
+      "sceneSummary": "Loki told the truth in a shape the Unlit could accept — Cy is older than doctrine, and it chose the dark itself — and the seated elder spoke for the first time, granting passage.",
       "choices": [
         {
-          "label": "Tell them plainly what you came for — you are looking for someone the Unlit brought down from the city.",
+          "label": "Move forward and address the seated elder — ask plainly who they have brought down from the city.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
@@ -134,9 +155,43 @@
           "emergenceId": null
         },
         {
-          "label": "Leave Cy at the stair — do what they ask, keep the peace, and go further in.",
+          "label": "Move forward but say nothing yet — read the chamber, read the elder, find the seam before speaking.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move forward and speak to the elder honestly — tell them why you are actually here, including the water and the something-moving-beneath.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "help"
+          ],
+          "abilityId": "the_better_story",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Before anything else, check on Cy — let it know the way is open and watch how it responds to the elder.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -147,67 +202,108 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Use The Better Story — give the Standing Unlit a version of why you are here that they can accept: the light-thing is a tool, not a doctrine, and you are not the Blaze.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": -0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade"
-          ],
-          "abilityId": "the_better_story",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read the Standing Unlit — use See the Made Thing to understand how their certainty is constructed and where it has a seam.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "falsehood_truth": 0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Spoke a true thing in the shape the Unlit could hear — and the elder of the Deep acknowledged it.",
+          "tags": [
+            "truth",
+            "diplomacy",
+            "deep"
+          ],
+          "weight": 1,
+          "communityId": null
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -2
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
+      "questUpdates": [
+        {
+          "op": "start",
+          "questId": "the-taken-from-the-city",
+          "title": "The Taken",
+          "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen. The elder has granted an audience.",
+          "giver": "the elder of the Unlit Deep",
+          "note": "Passage granted after Loki's honest account of Cy's nature. The elder speaks; the inner chamber is now reachable."
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "standing-unlit",
+          "name": "Standing Unlit",
+          "note": "Lowered their hands and stepped aside after Loki's honest framing — Cy as pre-doctrinal tool, older than the Blaze, choosing the dark on its own. The first time this figure yielded.",
+          "learned": [
+            "The Better Story found purchase where misdirection could not — they are not fooled by performance, but they can be reached by truth in the right shape."
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Stepped aside; no longer blocking the passage. Watching."
+        },
+        {
+          "op": "meet",
+          "npcId": "unlit-elder",
+          "name": "Unlit Elder",
+          "role": "Seated elder of the Unlit Deep's outer chamber",
+          "gender": "unknown",
+          "pronouns": "they/them",
+          "description": "Grey-robed, seated by the pale blue flame, face not yet seen. Voice quieter than the Standing Unlit's and worn smooth to its function, like an old tool. Has not moved.",
+          "note": "Spoke for the first time when Loki's framing landed — ordered the Standing Unlit to let Cy pass, and granted Loki an audience.",
+          "learned": [
+            "Commands the Standing Unlit; their word is final here.",
+            "Chose to hear Loki rather than dismiss — the truth in the right shape reached them."
+          ],
+          "skillsObserved": [
+            "Absolute stillness",
+            "Precise, economical authority"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Seated by the pale blue flame, now facing the space Loki will approach. Has granted an audience."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-unlit",
+          "label": "The Unlit",
+          "kind": "faction",
+          "fact": "The Better Story — truth in the shape they can carry — reaches the Unlit where misdirection cannot. They are not fooled by performance, but they can be moved by honest framing. The elder spoke for the first time when Loki named Cy as older than doctrine, and the Standing Unlit stepped aside.",
+          "links": [
+            "the-unlit-deep",
+            "unlit-elder",
+            "standing-unlit"
+          ]
+        },
+        {
+          "topic": "the-unlit-deep",
+          "label": "The Unlit Deep",
+          "kind": "place",
+          "entityId": "the-unlit-deep",
+          "fact": "The inner chamber is now accessible — the elder granted passage after Loki's honest account. The blue flame and the seated elder are the heart of the outer space; what lies beyond is unread.",
+          "links": [
+            "the-unlit",
+            "unlit-elder",
+            "the-taken-from-the-city"
+          ]
+        }
+      ],
       "scene": {
-        "setting": "The outer chamber of the Unlit Deep — worked stone floor worn smooth, ceiling invisible, empty lantern-brackets, the pale blue flame in its stone bowl about thirty feet ahead. Early morning, no external light.",
+        "setting": "The outer chamber of the Unlit Deep — worked stone floor, ceiling invisible, empty lantern-brackets. The pale blue flame burns in its stone bowl roughly thirty feet ahead. Early morning, no external light. The passage inward is now unblocked.",
         "npcsPresent": [
           {
-            "name": "Robed Figure (Unlit — seated)",
-            "state": "Still by the blue flame, hands folded, facing away — has not turned or spoken."
+            "name": "Unlit Elder",
+            "state": "Seated by the pale blue flame, still robed, face not yet visible — has just spoken and is now waiting."
           },
           {
             "name": "Standing Unlit",
-            "state": "Between Loki and the passage out, hands raised from the robe, waiting with perfect patience."
+            "state": "Stepped to the side of the passage, hands lowered, watching without moving."
           },
           {
             "name": "Cy",
-            "state": "At Loki's heel, lamp shuttered, lens wide open, watching in silence."
+            "state": "At Loki's heel, lamp shuttered, lens wide, processing in silence."
           }
         ],
         "objects": [
@@ -219,58 +315,39 @@
         "threads": [
           "Who the Unlit have brought down from the city",
           "Why Cy shuttered its lamp before the bottom step without being asked",
-          "The Standing Unlit's demand: leave Cy at the stair, or name your purpose",
-          "The seated figure has still not acknowledged Loki"
+          "The elder's face — not yet seen",
+          "What the inner chamber holds"
         ]
       },
-      "npcUpdates": [
+      "standingOps": [
         {
-          "op": "update",
-          "npcId": "standing-unlit",
-          "name": "Standing Unlit",
-          "note": "Waited out Loki's misdirection without effort — the pure dark gives no purchase for false signals. Repeated the original demand, still gentle, still blocking the exit.",
-          "learned": [
-            "Misdirection crafts find no grip in a space this purely held — not because they see through the trick but because there is nothing here to believe it"
-          ],
-          "skillsObserved": [
-            "Immunity to social misdirection in pure-dark conditions",
-            "Absolute patience under attempted manipulation"
-          ],
-          "status": "active",
-          "statusNote": "Standing between Loki and the passage out, demand unresolved, waiting."
+          "people": "umbral",
+          "delta": 1,
+          "why": "reached the Unlit elder through honest framing rather than craft or coercion — demonstrated the kind of precision the dark respects"
         }
       ],
-      "codexUpdates": [
+      "factUpdates": [
         {
-          "topic": "the-unlit",
-          "label": "The Unlit",
-          "kind": "faction",
-          "fact": "Misdirection and false signals find no purchase in their space — not because they are perceptive, but because the pure dark they hold leaves nothing for a false read to land on. The craft simply has nothing to catch.",
-          "links": [
-            "the-unlit-deep"
-          ]
+          "op": "add",
+          "text": "The elder of the Unlit Deep granted Loki an audience — passage to the inner chamber is open.",
+          "subjectId": "unlit-elder"
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A tense, brief exchange — the confrontation took only a few minutes."
-      },
-      "sceneEnded": false
+      ]
     },
     "sceneState": {
-      "setting": "The outer chamber of the Unlit Deep — worked stone floor worn smooth, ceiling invisible, empty lantern-brackets, the pale blue flame in its stone bowl about thirty feet ahead. Early morning, no external light.",
+      "setting": "The outer chamber of the Unlit Deep — worked stone floor, ceiling invisible, empty lantern-brackets. The pale blue flame burns in its stone bowl roughly thirty feet ahead. Early morning, no external light. The passage inward is now unblocked.",
       "npcsPresent": [
         {
-          "name": "Robed Figure (Unlit — seated)",
-          "state": "Still by the blue flame, hands folded, facing away — has not turned or spoken."
+          "name": "Unlit Elder",
+          "state": "Seated by the pale blue flame, still robed, face not yet visible — has just spoken and is now waiting."
         },
         {
           "name": "Standing Unlit",
-          "state": "Between Loki and the passage out, hands raised from the robe, waiting with perfect patience."
+          "state": "Stepped to the side of the passage, hands lowered, watching without moving."
         },
         {
           "name": "Cy",
-          "state": "At Loki's heel, lamp shuttered, lens wide open, watching in silence."
+          "state": "At Loki's heel, lamp shuttered, lens wide, processing in silence."
         }
       ],
       "objects": [
@@ -282,15 +359,15 @@
       "threads": [
         "Who the Unlit have brought down from the city",
         "Why Cy shuttered its lamp before the bottom step without being asked",
-        "The Standing Unlit's demand: leave Cy at the stair, or name your purpose",
-        "The seated figure has still not acknowledged Loki"
+        "The elder's face — not yet seen",
+        "What the inner chamber holds"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -299,7 +376,23 @@
   "companionNames": {
     "coil": "Cy"
   },
-  "quests": [],
+  "quests": [
+    {
+      "id": "the-taken-from-the-city",
+      "title": "The Taken",
+      "summary": "Someone was brought from the city to the Unlit Deep, and the city is pretending it did not happen. The elder has granted an audience.",
+      "giver": "the elder of the Unlit Deep",
+      "giverEntityId": null,
+      "locationId": null,
+      "locationEntityId": "the-unlit-deep",
+      "status": "active",
+      "progress": [
+        "Passage granted after Loki's honest account of Cy's nature. The elder speaks; the inner chamber is now reachable."
+      ],
+      "aliases": [],
+      "startedAt": "2026-07-24T21:30:43.637Z"
+    }
+  ],
   "npcRegistry": {
     "tessvel-cairn": {
       "id": "tessvel-cairn",
@@ -367,15 +460,17 @@
         "locationId": "the_unlit_deep",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d1] Told Loki to leave Cy at the top of the stair or leave something else — phrased as a courtesy, delivered as a threat.",
-        "[d1] Waited out Loki's misdirection without effort — the pure dark gives no purchase for false signals. Repeated the original demand, still gentle, still blocking the exit."
+        "[d1] Waited out Loki's misdirection without effort — the pure dark gives no purchase for false signals. Repeated the original demand, still gentle, still blocking the exit.",
+        "[d1] Lowered their hands and stepped aside after Loki's honest framing — Cy as pre-doctrinal tool, older than the Blaze, choosing the dark on its own. The first time this figure yielded."
       ],
       "knownFacts": [
         "Objects to Cy's presence — calls it a 'light-thing'",
         "Speaks gently but the gentleness is a doctrine, not a warmth",
-        "Misdirection crafts find no grip in a space this purely held — not because they see through the trick but because there is nothing here to believe it"
+        "Misdirection crafts find no grip in a space this purely held — not because they see through the trick but because there is nothing here to believe it",
+        "The Better Story found purchase where misdirection could not — they are not fooled by performance, but they can be reached by truth in the right shape."
       ],
       "skillsObserved": [
         "Concealment in near-total dark",
@@ -386,7 +481,41 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Standing between Loki and the passage out, demand unresolved, waiting.",
+      "statusNote": "Stepped aside; no longer blocking the passage. Watching.",
+      "domains": {
+        "primary": "umbral"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "the_unlit_deep",
+        "day": 1
+      }
+    },
+    "unlit-elder": {
+      "id": "unlit-elder",
+      "name": "Unlit Elder",
+      "role": "Seated elder of the Unlit Deep's outer chamber",
+      "description": "Grey-robed, seated by the pale blue flame, face not yet seen. Voice quieter than the Standing Unlit's and worn smooth to its function, like an old tool. Has not moved.",
+      "firstMet": {
+        "locationId": "the_unlit_deep",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Spoke for the first time when Loki's framing landed — ordered the Standing Unlit to let Cy pass, and granted Loki an audience."
+      ],
+      "knownFacts": [
+        "Commands the Standing Unlit; their word is final here.",
+        "Chose to hear Loki rather than dismiss — the truth in the right shape reached them."
+      ],
+      "skillsObserved": [
+        "Absolute stillness",
+        "Precise, economical authority"
+      ],
+      "status": "active",
+      "gender": "unknown",
+      "pronouns": "they/them",
+      "statusNote": "Seated by the pale blue flame, now facing the space Loki will approach. Has granted an audience.",
       "domains": {
         "primary": "umbral"
       },
@@ -538,11 +667,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 596,
-    "lastSharedReadAt": "2026-07-24T20:02:26.202Z",
+    "lastGenCount": 597,
+    "lastSharedReadAt": "2026-07-24T21:28:07.902Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -601,8 +730,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -780,11 +909,15 @@
         "kind": "place",
         "facts": [
           "[d1] you have walked here",
-          "[d1] The outer chamber is worked stone, ceiling invisible, lit only by a single pale blue flame the Unlit allow. Cy shuttered its lamp before the bottom step — unprompted, without explanation."
+          "[d1] The outer chamber is worked stone, ceiling invisible, lit only by a single pale blue flame the Unlit allow. Cy shuttered its lamp before the bottom step — unprompted, without explanation.",
+          "[d1] The inner chamber is now accessible — the elder granted passage after Loki's honest account. The blue flame and the seated elder are the heart of the outer space; what lies beyond is unread."
         ],
         "links": [
           "the-water-crisis",
-          "terminus-seals-beneath-the-valley"
+          "terminus-seals-beneath-the-valley",
+          "the-unlit",
+          "unlit-elder",
+          "the-taken-from-the-city"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -798,10 +931,13 @@
         "facts": [
           "[d1] A cult of the pure dark-pole. They are described as gentle. They want something that cannot be compromised with. The Umbrals go quiet when asked about them. They have apparently taken someone from the city.",
           "[d1] A second Unlit figure was concealed in the bracket-shadows of the outer chamber — patient, skilled at stillness, and gentle in address even while blocking the exit. They object to Cy's lamp on principle and call it a 'light-thing.'",
-          "[d1] Misdirection and false signals find no purchase in their space — not because they are perceptive, but because the pure dark they hold leaves nothing for a false read to land on. The craft simply has nothing to catch."
+          "[d1] Misdirection and false signals find no purchase in their space — not because they are perceptive, but because the pure dark they hold leaves nothing for a false read to land on. The craft simply has nothing to catch.",
+          "[d1] The Better Story — truth in the shape they can carry — reaches the Unlit where misdirection cannot. They are not fooled by performance, but they can be moved by honest framing. The elder spoke for the first time when Loki named Cy as older than doctrine, and the Standing Unlit stepped aside."
         ],
         "links": [
-          "the-unlit-deep"
+          "the-unlit-deep",
+          "unlit-elder",
+          "standing-unlit"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -819,24 +955,37 @@
         "createdDay": 1,
         "entityId": "standing-unlit",
         "updatedDay": 1
+      },
+      "unlit-elder": {
+        "id": "unlit-elder",
+        "label": "Unlit Elder",
+        "kind": "person",
+        "facts": [
+          "[d1] Seated elder of the Unlit Deep's outer chamber"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "unlit-elder",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 6.2269551547251645,
-    "cerebral": 10.344128238189016,
-    "social": 14.764574001976936,
-    "strategic": 5.156935771077839,
-    "cautious": 4.300530948752154,
-    "amorous": 12.029668119863693,
-    "generous": 1.2372982686757408,
-    "ruthless": 0.70155967750146
+    "devotion": 6.071281275857035,
+    "cerebral": 10.08552503223429,
+    "social": 15.395459651927512,
+    "strategic": 5.028012376800893,
+    "cautious": 4.19301767503335,
+    "amorous": 11.7289264168671,
+    "generous": 1.2063658119588472,
+    "ruthless": 0.6840206855639235
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 32,
+  "actionCount": 33,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -847,7 +996,7 @@
   ],
   "peopleDisposition": {
     "veilwright": 4,
-    "umbral": 2,
+    "umbral": 3,
     "horizon": 1,
     "verist": -1
   },
@@ -878,6 +1027,13 @@
         }
       ],
       "text": "Your birth and training are known: veilwright +4, umbral +2, horizon +1, verist -1."
+    },
+    {
+      "at": 24,
+      "kind": "act",
+      "people": "umbral",
+      "delta": 1,
+      "text": "reached the Unlit elder through honest framing rather than craft or coercion — demonstrated the kind of precision the dark respects"
     }
   ],
   "nativeGrantsVersion": 1,
@@ -971,8 +1127,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784923604101,
-  "rev": 73,
+  "updatedAt": 1784928643641,
+  "rev": 76,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1280,7 +1436,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 3
+    "umbral_depths": 4
   },
   "opLossPending": false,
   "sessions": [
@@ -1303,13 +1459,20 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-24T20:03:01.555Z",
-      "lastAt": "2026-07-24T20:06:44.101Z",
+      "lastAt": "2026-07-24T21:30:43.611Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 3
+      "beats": 4
     }
   ],
-  "establishedFacts": [],
+  "establishedFacts": [
+    {
+      "id": "unlit-elder",
+      "text": "The elder of the Unlit Deep granted Loki an audience — passage to the inner chamber is open.",
+      "day": 1,
+      "subjectId": "unlit-elder"
+    }
+  ],
   "_opLedger": {
     "offer": {
       "applied": 3,
@@ -1319,23 +1482,29 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 32,
-    "choices": 32,
-    "characterDeltas": 11,
-    "scene": 32,
+    "sceneSummary": 33,
+    "choices": 33,
+    "characterDeltas": 12,
+    "scene": 33,
     "placeUpdates": 3,
-    "codexUpdates": 23,
+    "codexUpdates": 24,
     "timeOps": 32,
     "offer": 3,
     "generateRequest": 2,
     "sceneEnded": 10,
-    "npcUpdates": 26,
+    "npcUpdates": 27,
     "moveTo": 1,
-    "gambitApt": 1
+    "gambitApt": 1,
+    "deeds": 1,
+    "questUpdates": 1,
+    "standingOps": 1,
+    "factUpdates": 1
   },
-  "_opTurns": 32,
+  "_opTurns": 33,
   "customAbilities": {},
-  "companionBonds": {},
+  "companionBonds": {
+    "coil": 0.5
+  },
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -1343,7 +1512,7 @@
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,
-      "the_better_story": 1
+      "the_better_story": 2
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -1366,7 +1535,7 @@
       "falsecraft": 21,
       "the_wrong_reality": 21,
       "the_misdirect": 21,
-      "the_better_story": 21
+      "the_better_story": 24
     }
   },
   "teachers": {},
@@ -1538,5 +1707,16 @@
   "legendGovernor": {
     "lastDeployDay": 24,
     "lastBeat": "witness_power"
+  },
+  "syncedAt": 1784923604101,
+  "_applyFailures": null,
+  "companionMemory": {
+    "coil": [
+      {
+        "text": "Spoke a true thing in the shape the Unlit could hear — and the elder of the Deep acknowledged it.",
+        "weight": 1,
+        "day": 1
+      }
+    ]
   }
 }

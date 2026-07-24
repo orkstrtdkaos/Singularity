@@ -29,12 +29,16 @@
 > onChoice intercepts drive it; the chase renders through renderPlay so the GM + freefield still drive it (no
 > mini-loop). Robust (GM-hiccup falls back, never wedges). Full flee→chase→escape/refight drive w/ live GM
 > narration = Erik's Tier-2 (needs his key).
-> **NEXT — Phase 3 (§6b + §7a):** skill collapse/morph — a FINISH/transit craft offers a collapse action inside
-> the frame, resolved as an OPPOSED check keyed off function family (HARM verbs / MOVE-transit — there is NO
-> FINISH family, per the P1 corrections), along the resolver's degree bands (crit→collapse … whiff→morph). Then
-> Phase 4 (§7b/§7c ward-denial + kit-trivialization — Aevi content-heavy: `denies`/`breakDC`, `premise`/`trivializedBy`/`resistDC`).
-> Deferred to later phases: narrative-promotion (shouldFrame/PERILOUS), chaining (§6a), collapse/morph+degrees
-> (§6b/§7a), ward-denial + kit-trivialization (§7b/§7c).
+> **Phase 3 §6b/§7a COLLAPSE shipped (v1.8.253):** a decisive finisher ends a collapsible foe in ONE beat — HARM
+> finishes a fight/hazard, MOVE slips a chase, KNOW cracks a puzzle (family-driven, §6c); resolved along the
+> degree bands (frameCollapsible + collapseMode + collapseResult, pure). Wired on the NON-skill-battle path only
+> (guard §89 — the fight-panel meter untouched); the frame surfaces the gamble. Live decision matrix verified.
+> **TWO FLAGGED for Erik/Aevi:** (1) §6b-vs-§89 tension — does a finisher collapse a SKILL-BATTLE fight (the
+> headline "Cut the Thread drops the swarm" case IS a skill_battle), or only classic-duel/challenge/puzzle? Kept
+> OUT of the meter for now; needs Erik's call. (2) MORPH deferred — a whiffed finisher costs (failureCost) but
+> doesn't yet SPAWN a harder fight (soft→fight); next slice.
+> **NEXT — Phase 4 (§7b/§7c):** ward-denial (`denies`/`breakDC`) + kit-trivialization (`premise`/`trivializedBy`/
+> `resistDC`) — Aevi content-heavy. Also still deferred: narrative-promotion (shouldFrame/PERILOUS).
 
 > ## [RESOLVED] Erik's two calls (2026-07-24)
 > - **SNG-223 Q4: WIRE IT.** The per-tradition visual guide (tradition_visual_aesthetics.json, all 24, staged)

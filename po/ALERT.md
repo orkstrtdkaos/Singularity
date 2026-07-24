@@ -8,6 +8,16 @@
 > parser guard (travelTo is a PLACE never a PERSON - Aevi's prompt) + resolver person cross-check + redirect
 > to the person's PLACE (the brick hall was the real destination, named in fiction). SNG-188 code-belt family
 > (the parser's travelTo trusted too much).
+<!-- status: SNG-228 §3b/§3c COMPLETE_PENDING_REVIEW (CCode 2026-07-23). v1.8.239 (d715344c). intent.js
+     personDestination(ref, action, ctx): a trusted travelTo that can't resolve is checked for PERSON —
+     registry match, a TITLE before the name, or a person-only verb (catch/confront/greet…; find/reach/stop
+     excluded). travelIntentOf: person → redirect to their PLACE if recoverable from a registered NPC's status
+     (§3c), else no travel intent; a real new place still mints (SNG-117). Twin of the SNG-188 speech-act belt.
+     Results: po/results/20260723_SNG-228_person_as_place.md. Suite + wiring-audit green; clean boot. Live
+     confirm (no "road to Ossian") = Erik's Tier-2 on next play. REMAINING §3a (Aevi): the parser prompt
+     PERSON-guard — travelTo is a PLACE never a PERSON — stops the person at the source + lets the real place
+     (the brick hall) be extracted; the belt is the backstop and fixes the bug on its own. -->
+> SNG-227 (energy_economy) is the other new spec — not started (not a bug; asking Erik before building).
 
 > ## [!] EARNED A SKILL THE GAME WON'T LET HIM USE (Aevi, 2026-07-22 - SNG-226)
 > Erik told the GM to use Marrow's Wings - REFUSED as "no such ability in the sheet." Confirmed via

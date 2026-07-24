@@ -34,7 +34,14 @@
      confirm (no "road to Ossian") = Erik's Tier-2 on next play. REMAINING §3a (Aevi): the parser prompt
      PERSON-guard — travelTo is a PLACE never a PERSON — stops the person at the source + lets the real place
      (the brick hall) be extracted; the belt is the backstop and fixes the bug on its own. -->
-> SNG-227 (energy_economy) is the other new spec — not started (not a bug; asking Erik before building).
+<!-- status: SNG-227 COMPLETE_PENDING_REVIEW (CCode 2026-07-23). v1.8.240 (811b972a). §3a level discount
+     -1/TEN levels (renamed energyEfficiencyPerTenLevels) — base-8 fresh curve OLD 8/6/4/4/4 → NEW 8/8/8/7/7,
+     the floor no longer dumped at L10; §3c the existing rank discount now visible (L10 rank 1/2/3 = 8/7/6);
+     §3b 50% floor unchanged; §3d braid base = priciest parent + ceil(cheaper/2) (8+10→14) at MINT, ties
+     SNG-226 (a discovered braid lands expensive); §4 all knobs JSON-tunable (incl. braidCheaperParentFraction)
+     threaded from CONTENT.rules. Results: po/results/20260723_SNG-227_energy_economy.md. Suite + wiring-audit
+     green; clean boot. Feel = Erik's Tier-3 (knobs are JSON). Q4 (higher BASE for higher-tier solo crafts) is
+     Aevi's content lane if wanted — flagged, not done. -->
 
 > ## [!] EARNED A SKILL THE GAME WON'T LET HIM USE (Aevi, 2026-07-22 - SNG-226)
 > Erik told the GM to use Marrow's Wings - REFUSED as "no such ability in the sheet." Confirmed via

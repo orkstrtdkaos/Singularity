@@ -136,7 +136,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.0463937037061549,
+    "spectrumId": -0.04407401852084715,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.27522164166579416,
     "mechanical_spiritual": 0.25513542055105926,
@@ -152,7 +152,7 @@
   "maxHealth": 145,
   "health": 145,
   "maxEnergy": 215,
-  "energy": 193,
+  "energy": 188,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1870,158 +1870,184 @@
         "player": "It's Pell's call - she's the best judge of iron around.",
         "summary": "Pell reads the Blazeborn traveler by ironsense — no working iron, nothing primed. He waits with the lineage offer still open.",
         "narration": "You step back half a pace and look at Pell. 'It's yours,' you say. 'You're the best judge of iron here.'\n\nPell does not look at you. Her eyes are already on the man. She crosses the last few feet of road at an even pace and crouches beside the clay bowl. She turns it over once in her hands — the extinguished fire gone cold, the clay plain and rough-made. Then she sets it down and looks at the man himself. She reads him the way she reads metal at the forge: not quickly, not with ceremony, just the flat attention of someone who has handled enough of a thing to know its character on sight.\n\n'The bowl is river clay,' she says, straightening. 'Fired low. No alloy in it, no wire, nothing seated.' She steps back to your shoulder. 'He carries nothing I can feel. If there is iron on him it is not working and it is not primed.' A pause. 'That is as much as I can tell you from here.'\n\nThe man on the stone has watched all of this without moving. His hands are still cupped around the cold bowl. When Pell finishes he gives a single, unhurried nod — the acknowledgment of someone who expected to be read and is not offended by it. Then he looks back at you, and the offer he made is still open in his expression. He said he would answer the lineage question. He is still waiting."
+      },
+      {
+        "player": "So, you accept the duel - name any terms.",
+        "summary": "The Blazeborn traveler accepts the duel offer and names terms: single pass, hands only, first down or first to call it, no craft, no blades.",
+        "narration": "You look at the man on the stone and give him a plain nod. 'I accept,' you say. 'Name your terms.'\n\nHe uncurls from the low stone without hurry, setting the clay bowl aside in the scrub grass. He is broad across the chest and moves like someone who has been still for a long time and is comfortable with that. He stands a hand's width taller than you. His eyes run over the party once — Pell with Memory in carry-grip, Veth steady at your right, Huginn motionless on your shoulder — and he names none of it as a problem.\n\n'Single pass,' he says. 'No blades, no craft. Hands only. First one down or first one who calls it.' He opens both hands briefly, palms out, then lets them fall. 'I do not need your companions to stand aside. I am not asking for a clean ring. I am asking for a fair one.'\n\nHe meets your eyes and waits. Pell has not moved from your left shoulder. Veth has gone very still in the way she goes still when she is deciding something. Huginn shifts once on your shoulder and is quiet again."
       }
     ],
     "lastTurn": {
-      "narration": "You step back half a pace and look at Pell. 'It's yours,' you say. 'You're the best judge of iron here.'\n\nPell does not look at you. Her eyes are already on the man. She crosses the last few feet of road at an even pace and crouches beside the clay bowl. She turns it over once in her hands — the extinguished fire gone cold, the clay plain and rough-made. Then she sets it down and looks at the man himself. She reads him the way she reads metal at the forge: not quickly, not with ceremony, just the flat attention of someone who has handled enough of a thing to know its character on sight.\n\n'The bowl is river clay,' she says, straightening. 'Fired low. No alloy in it, no wire, nothing seated.' She steps back to your shoulder. 'He carries nothing I can feel. If there is iron on him it is not working and it is not primed.' A pause. 'That is as much as I can tell you from here.'\n\nThe man on the stone has watched all of this without moving. His hands are still cupped around the cold bowl. When Pell finishes he gives a single, unhurried nod — the acknowledgment of someone who expected to be read and is not offended by it. Then he looks back at you, and the offer he made is still open in his expression. He said he would answer the lineage question. He is still waiting.",
-      "sceneSummary": "Pell reads the Blazeborn traveler by ironsense — no working iron, nothing primed. He waits with the lineage offer still open.",
+      "narration": "You look at the man on the stone and give him a plain nod. 'I accept,' you say. 'Name your terms.'\n\nHe uncurls from the low stone without hurry, setting the clay bowl aside in the scrub grass. He is broad across the chest and moves like someone who has been still for a long time and is comfortable with that. He stands a hand's width taller than you. His eyes run over the party once — Pell with Memory in carry-grip, Veth steady at your right, Huginn motionless on your shoulder — and he names none of it as a problem.\n\n'Single pass,' he says. 'No blades, no craft. Hands only. First one down or first one who calls it.' He opens both hands briefly, palms out, then lets them fall. 'I do not need your companions to stand aside. I am not asking for a clean ring. I am asking for a fair one.'\n\nHe meets your eyes and waits. Pell has not moved from your left shoulder. Veth has gone very still in the way she goes still when she is deciding something. Huginn shifts once on your shoulder and is quiet again.",
+      "sceneSummary": "The Blazeborn traveler accepts the duel offer and names terms: single pass, hands only, first down or first to call it, no craft, no blades.",
       "choices": [
         {
-          "label": "Ask him plainly: who are you, how do you know my father's line, and what brought you to this road at this hour?",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Agree to his terms exactly as named — hands only, first down or first to call it",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {
-            "falsehood_truth": 0.4
+            "violence_peace": -0.2
           },
-          "difficulty": 0,
-          "intentTags": [
-            "persuade",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use Order-Sense on the man himself — read what design he is part of before he speaks another word",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Ask Huginn first — the bird has been watching him since he sat down; let it say what it sees",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Name yourself fully — Post Master of Stillwater's Trouble, Ashwarden-adjacent, bound south into the Zone — and invite him to do the same",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.5
-          },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "negotiate",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Agree — but add one term of your own before the pass begins",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Agree — and ask his name before you close the distance",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Counter: craft is permitted on both sides, or the pass means nothing between people like us",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "chaos_order": -0.1,
+            "violence_peace": -0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "gamble"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
       "scene": {
         "setting": "The left branch of the March Road, inside the first bend west — early dawn, mist sitting heavy with a faint mineral-gray cast. The road is packed earth flanked by scrub and early-spring growth.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Returned to Silas's shoulder after her ironsense read — standing easy, Memory in carry-grip, eyes on the man."
+            "state": "Standing at Silas's left shoulder, Memory in carry-grip, watching the Blazeborn man."
           },
           {
             "name": "Veth Ondra",
-            "state": "Still spread right, reading the tree-line in short arcs."
+            "state": "Spread right, gone very still — deciding something."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, facing the seated man, silent and motionless."
+            "state": "On Silas's shoulder, shifted once and now quiet again."
           },
           {
             "name": "Blazeborn traveler",
-            "state": "Seated on the low stone, both hands cupped around the cold clay bowl, watching Silas — the lineage offer still open in his expression."
+            "state": "Standing, both hands open, waiting for Silas's answer to his terms — the lineage question still behind his eyes."
           }
         ],
         "objects": [
           "Memory — in Pell's carry-grip",
-          "Clay bowl — extinguished, cold, confirmed plain river clay by Pell's ironsense",
+          "Clay bowl — set in the scrub grass, extinguished and cold",
           "The thickening mist ahead where the road bends further west"
         ],
         "threads": [
-          "The Blazeborn man named Silas's parentage on sight — his meaning and his knowledge are unexplained",
-          "He said he will answer the lineage question — the offer is open and waiting",
-          "He extinguished the flame without being asked — the gesture is deliberate",
+          "The Blazeborn man's terms are named and waiting for a plain answer",
+          "He still has not explained how he knew Silas's parentage on sight",
+          "The lineage offer remains open — he said he would answer it",
           "The Zone's interference on crafts is still anticipated further in"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell Ran Marsh",
-          "note": "Read the Blazeborn traveler by ironsense on Silas's deferral — confirmed no working iron, nothing primed. Stepped back to his shoulder and named her limit plainly.",
+          "npcId": "blazeborn-traveler",
+          "name": "Blazeborn traveler",
+          "role": "someone of Disputed Zone — Left Branch Entrance",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Named terms for the duel cleanly — hands only, single pass, first down or first to call it, no craft, no blades. Did not ask companions to stand aside. Waiting.",
           "learned": [
-            "The Blazeborn traveler carries no working or primed iron — confirmed by ironsense at close range"
+            "Named single-pass hands-only terms without hesitation — prepared for this"
           ],
           "skillsObserved": [
-            "ironsense read of a person at close range — confirmed absence of working iron"
+            "measured self-presentation under scrutiny — named terms without grandstanding"
           ],
-          "statusNote": "On the left branch road inside the Zone entrance — at Silas's shoulder after the ironsense read, Memory in carry-grip."
+          "status": "active",
+          "statusNote": "Standing on the left branch road, terms named, waiting for Silas's answer."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.1,
-        "why": "a brief exchange and a close read — a few minutes at most"
-      }
+        "why": "a short exchange of terms at the roadside"
+      },
+      "sceneEnded": false,
+      "_applyFailed": true,
+      "_applyFailedOp": "npcUpdates"
     },
     "sceneState": {
       "setting": "The left branch of the March Road, inside the first bend west — early dawn, mist sitting heavy with a faint mineral-gray cast. The road is packed earth flanked by scrub and early-spring growth.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Returned to Silas's shoulder after her ironsense read — standing easy, Memory in carry-grip, eyes on the man."
+          "state": "Standing at Silas's left shoulder, Memory in carry-grip, watching the Blazeborn man."
         },
         {
           "name": "Veth Ondra",
-          "state": "Still spread right, reading the tree-line in short arcs."
+          "state": "Spread right, gone very still — deciding something."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, facing the seated man, silent and motionless."
+          "state": "On Silas's shoulder, shifted once and now quiet again."
         },
         {
           "name": "Blazeborn traveler",
-          "state": "Seated on the low stone, both hands cupped around the cold clay bowl, watching Silas — the lineage offer still open in h"
+          "state": "Standing, both hands open, waiting for Silas's answer to his terms — the lineage question still behind his eyes."
         }
       ],
       "objects": [
         "Memory — in Pell's carry-grip",
-        "Clay bowl — extinguished, cold, confirmed plain river clay by Pell's ironsense",
+        "Clay bowl — set in the scrub grass, extinguished and cold",
         "The thickening mist ahead where the road bends further west"
       ],
       "threads": [
-        "The Blazeborn man named Silas's parentage on sight — his meaning and his knowledge are unexplained",
-        "He said he will answer the lineage question — the offer is open and waiting",
-        "He extinguished the flame without being asked — the gesture is deliberate",
+        "The Blazeborn man's terms are named and waiting for a plain answer",
+        "He still has not explained how he knew Silas's parentage on sight",
+        "The lineage offer remains open — he said he would answer it",
         "The Zone's interference on crafts is still anticipated further in"
       ]
     }
@@ -5080,11 +5106,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T20:33:21.473Z",
+    "lastSharedReadAt": "2026-07-24T20:57:28.480Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 596,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "Huginn turns its head toward the high window at the moment the shadow-duplicate vanishes — not following the light, but listening. There…",
@@ -6675,21 +6701,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.376856594552276,
-    "cerebral": 14.456017028283117,
-    "social": 8.36860925508466,
-    "generous": 2.7359134982698246,
-    "cautious": 8.50447775494359,
-    "physical": 0.12923603857836077,
-    "risky": 0.7317210828824718,
-    "ruthless": 0.10046270655706604,
-    "carousing": 0.023042346519523037,
-    "amorous": 3.9516276604660416,
-    "patient": 0.8951374319091826,
-    "stealth": 0.00023107344343071501,
-    "devotion": 0.6806594157352084,
-    "craft": 3.202753367775825,
-    "leadership": 1.7296963199026323
+    "strategic": 19.867435179688467,
+    "cerebral": 14.094616602576039,
+    "social": 9.159394023707543,
+    "generous": 2.667515660813079,
+    "cautious": 8.29186581107,
+    "physical": 0.12600513761390175,
+    "risky": 0.71342805581041,
+    "ruthless": 0.09795113889313939,
+    "carousing": 0.022466287856534962,
+    "amorous": 3.8528369689543904,
+    "patient": 0.872758996111453,
+    "stealth": 0.00022529660734494714,
+    "devotion": 0.6636429303418282,
+    "craft": 3.1226845335814293,
+    "leadership": 1.6864539119050665
   },
   "aptitudes": [
     "strategist",
@@ -6697,10 +6723,18 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 818,
+  "actionCount": 819,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Bryn Callowell",
+      "url": "https://image.pollinations.ai/prompt/A%20broad-chested%20man%20in%20his%20mid-thirties%2C%20built%20for%20endurance%20rather%20than%20force%20%E2%80%94%20the%20kind%20of%20frame%20that%20still%20looks%20like%20it%20could%20cover%20forty%20miles%20and%20then%20split%20wood.%20Amber%20eyes%2C%20unhurried.%20Tawny%20sk%2C%20character%20portrait%2C%20named%20Bryn%20Callowell%2C%20Former%20south-circuit%20post%20rider%20turned%20deliberate%20messenger%20%E2%80%94%20the%20man%20who%20rode%20the%20Zone's%20margins%20lo%2C%20Unhurried%20in%20all%20things%20%E2%80%94%20speaks%20the%20way%20a%20man%20moves%20who%20has%20spent%20years%20in%20a%20saddle%20reading%20weather%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=29545&nologo=true",
+      "caption": "Bryn Callowell",
+      "worldDay": 24,
+      "at": "2026-07-24T20:37:00.048Z"
+    },
     {
       "kind": "npc",
       "prompt": "A Blazeborn traveler in his mid-thirties, broad-chested, bur",
@@ -7076,19 +7110,11 @@
       "caption": "Calvar — devoted",
       "worldDay": 18,
       "at": "2026-07-18T00:41:45.054Z"
-    },
-    {
-      "kind": "location",
-      "prompt": "The Low Lamp Inn",
-      "url": "https://image.pollinations.ai/prompt/The%20Low%20Lamp%20Inn%3A%20Tucked%20into%20the%20lower%20tier%20of%20the%20Edge%20District%20where%20the%20light-guide%20streets%20run%20closest%20to%20the%20valley%20floor%2C%20the%20Low%20Lamp%20sits%20over%20a%20junction%20conduit%20%E2%80%94%20the%20glow%20rises%20through%20pale%20stone%20floors%20and%20fills%20the%20common%20room%20from%20below%2C%20warm%20and%20directionless%20as%20afternoon%20through%20cloud.%20The%20building%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=64375&nologo=true",
-      "caption": "The Low Lamp Inn",
-      "worldDay": 17,
-      "at": "2026-07-17T19:29:39.503Z"
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784925267722,
-  "rev": 1351,
+  "updatedAt": 1784926711999,
+  "rev": 1362,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8864,6 +8890,84 @@
           "romanceEligible": true
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20A%20Blazeborn%20traveler%20in%20his%20mid-thirties%2C%20broad-chested%2C%20bur%2C%20someone%20of%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=93712&nologo=true"
+      },
+      "bryn-callowell": {
+        "schemaVersion": 1,
+        "id": "bryn-callowell",
+        "name": "Bryn Callowell",
+        "role": "Former south-circuit post rider turned deliberate messenger — the man who rode the Zone's margins long enough to know what the margins remember, now waiting at the Left Branch Entrance to deliver something he has been carrying since Silas's father stopped being able to carry it himself",
+        "homeLocation": "disputed_zone_left_branch_entrance",
+        "communityId": "zone.southcircuit",
+        "personality": {
+          "warmth": 0.55,
+          "trust": 0.4,
+          "candor": 0.65,
+          "patience": 0.85
+        },
+        "spectrum": {
+          "body_mind": -0.3,
+          "emotional_logical": -0.1,
+          "concrete_abstract": -0.5,
+          "falsehood_truth": 0.6
+        },
+        "voiceHints": "Unhurried in all things — speaks the way a man moves who has spent years in a saddle reading weather. Does not front-load. Lets silence do work. When he finally lands a sentence it is already done being revised. He does not apologise for the three days he waited; it is simply what the thing required. Carries gravity without weight — nothing performed about the stillness, it is just how he is arranged.",
+        "knowledge": [
+          "The south circuit's waypoints, seasonal shortcuts, and which crossings are disputed on paper but stable in practice",
+          "Edric Vael's work along the zone margin — what it actually was, not the version that got simplified in the retelling",
+          "Which parcels Edric never logged and why, and what one of them contained",
+          "The Left Branch valley in early spring: where the mud sets overnight, which stone shelf is dry, where to tie a horse so she doesn't founder in the cold"
+        ],
+        "wants": "To put what he is carrying into Silas's hands and be released from it — not because it is a burden he resents, but because it was always meant to reach the son and it has not yet.",
+        "fears": "That Silas will not be ready to hold the weight of what his father actually was — and that Bryn will misjudge the moment and hand it over anyway, because the alternative is carrying it until he dies.",
+        "reactsToReputation": {
+          "silas": "recognition without performance — he simply says 'I know. Sit down.'",
+          "hostile": "does not flinch or escalate; goes very still and waits for the posture to exhaust itself",
+          "curious": "answers the question behind the question, not the question asked",
+          "grieving": "moves closer without speaking"
+        },
+        "appearance": "A broad-chested man in his mid-thirties, built for endurance rather than force — the kind of frame that still looks like it could cover forty miles and then split wood. Amber eyes, unhurried. Tawny skin weathered at the neck and the back of the hands from years of open-road riding. His hair is dark, kept short and practical, with the first grey coming in at the temples. He is sitting on a low stone at the valley entrance when Silas arrives — not pacing, not anxious, not asleep. Just waiting, the way a man waits who decided three days ago that this was the correct place to be and has not reconsidered.",
+        "people": "human",
+        "domains": {
+          "primary": "wayfarer",
+          "secondary": "syllogist",
+          "tertiary": "umbral"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own. Wayfarer primary: Bryn reads the Zone's contested terrain the way a wayfarer reads the land — disputed boundaries, seasonal passage, who controls which crossing and when. Syllogist secondary: years of post-riding required holding contradictory claims simultaneously and routing through them without choosing a side prematurely. Umbral tertiary: the south circuit runs through margins where things are not fully one thing or another; Bryn has learned to move in that half-light without needing to resolve it.",
+        "history": {
+          "southCircuit": "Rode the Zone's south circuit for eleven years — a route that skirts both claimed and unclaimed ground, serving settlements that cannot afford to declare alignment. The work required discretion above speed.",
+          "edricVael": "Crossed paths with Silas's father regularly over a six-year stretch. Edric used the post route for things that were not quite post. Bryn never asked. He understood the shape of the work without needing the details, and Edric trusted that understanding.",
+          "threeYearsAgo": "Edric gave Bryn something to hold. Not urgently — quietly, the way a man makes arrangements he hopes will not be needed soon. Said: give it to the boy when he comes south.",
+          "waiting": "Bryn retired from the circuit eighteen months ago. When word reached him that Silas was moving toward the Zone's Left Branch, he rode here and sat down."
+        },
+        "functions": [
+          "reveal",
+          "bind"
+        ],
+        "functionsNote": "reveal: Bryn carries knowledge of Edric Vael's actual work — its true shape, its undisclosed pieces — and will surface this to Silas at the right moment. bind: his long witness of Edric's life and his deliberate choice to wait for the son creates a link between Silas's present and his father's past that neither time nor death dissolved.",
+        "_gen": {
+          "entityId": "bryn-callowell",
+          "type": "npc",
+          "birthWeight": 36,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-disputed-zone-left-branch-entrance",
+            "day": 14,
+            "worldDay": null,
+            "hint": "Bryn Callowell — a broad-chested Blazeborn man in his mid-thirties, former Zone south-circuit post rider, amber eyes, un",
+            "why": "Named himself this beat; needs a stable persistent identity with history tied to Silas's father and the Zone's south cir"
+          },
+          "attentionHistory": [],
+          "createdDay": 14,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20broad-chested%20man%20in%20his%20mid-thirties%2C%20built%20for%20endurance%20rather%20than%20force%20%E2%80%94%20the%20kind%20of%20frame%20that%20still%20looks%20like%20it%20could%20cover%20forty%20miles%20and%20then%20split%20wood.%20Amber%20eyes%2C%20unhurried.%20Tawny%20sk%2C%20character%20portrait%2C%20named%20Bryn%20Callowell%2C%20Former%20south-circuit%20post%20rider%20turned%20deliberate%20messenger%20%E2%80%94%20the%20man%20who%20rode%20the%20Zone's%20margins%20lo%2C%20Unhurried%20in%20all%20things%20%E2%80%94%20speaks%20the%20way%20a%20man%20moves%20who%20has%20spent%20years%20in%20a%20saddle%20reading%20weather%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=29545&nologo=true"
       }
     },
     "location": {
@@ -9351,7 +9455,7 @@
       }
     }
   },
-  "opLossPending": false,
+  "opLossPending": true,
   "establishedFacts": [
     {
       "id": "pell-ran-marsh",
@@ -10124,7 +10228,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 565,
+    "valley": 568,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10261,10 +10365,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T20:34:27.719Z",
+      "lastAt": "2026-07-24T20:58:31.989Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 78
+      "beats": 81
     }
   ],
   "company": [
@@ -10333,9 +10437,11 @@
   },
   "_intentAsked": null,
   "_turnApplyError": {
-    "at": "2026-07-24T19:56:20.379Z",
+    "at": "2026-07-24T20:58:31.999Z",
+    "op": "npcUpdates",
+    "isolated": true,
     "message": "Cannot read properties of undefined (reading 'split')",
-    "stack": "TypeError: Cannot read properties of undefined (reading 'split') <-     at findExistingNpc (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:61:20) <-     at applyNpcUpdates (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:92:13) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.256:3763:3)"
+    "stack": "TypeError: Cannot read properties of undefined (reading 'split') <-     at findExistingNpc (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:61:20) <-     at applyNpcUpdates (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:92:13)"
   },
   "personalArc": {
     "id": "the-door-that-closed-behind",
@@ -10476,17 +10582,17 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 191,
-    "choices": 191,
-    "characterDeltas": 74,
-    "scene": 191,
-    "npcUpdates": 173,
+    "sceneSummary": 193,
+    "choices": 193,
+    "characterDeltas": 76,
+    "scene": 193,
+    "npcUpdates": 175,
     "factUpdates": 13,
     "placeUpdates": 33,
-    "codexUpdates": 111,
-    "timeOps": 185,
+    "codexUpdates": 112,
+    "timeOps": 187,
     "imagePrompt": 3,
-    "sceneEnded": 44,
+    "sceneEnded": 45,
     "itemUpdates": 5,
     "questUpdates": 24,
     "offer": 19,
@@ -10497,11 +10603,12 @@
     "ledgerEvents": 4,
     "discovery": 2,
     "stageOps": 6,
-    "generateRequest": 7,
+    "generateRequest": 8,
     "inventoryAdd": 2,
-    "scene_ended": 1
+    "scene_ended": 1,
+    "_applyFailedOp": 1
   },
-  "_opTurns": 191,
+  "_opTurns": 193,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -10637,5 +10744,6 @@
     "the-edge-district-ledger: already-done"
   ],
   "_pendingLedger": [],
-  "locationState": {}
+  "locationState": {},
+  "_applyFailures": null
 }

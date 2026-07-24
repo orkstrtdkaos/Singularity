@@ -207,7 +207,13 @@ export function encounterReceiptForGM(state, def, resolution, roundResult) {
   if (state.type === "challenge") sides = `Progress: ${state.stagesDone.length}/${def.stages.length} stages (next: ${def.stages[state.stageIndex]?.name || "done"}).`;
   if (state.type === "puzzle") sides = `Attempts: ${state.attempts}. Understanding gained: ${state.hintsRevealed} of ${(def.hintTiers || []).length} layers.`;
   const events = roundResult?.events?.length ? `This round: ${roundResult.events.join(" ")}` : "";
-  return `${head}\n${sides}\n${events}\nNarrate this receipt exactly — do not move health, stages, or hints yourself. Offer choices that fit the encounter (attack/press/defend, flee/yield/abandon where sensible, ability and item uses).`;
+  // SNG-230 §6b/§7a: a FINISHER attempt — narrate the one-beat COLLAPSE, or the botched finisher MORPH (it
+  // hardens; the thing knows you tried). The mechanical state already moved; this only shapes the narration.
+  const fin = resolution?.collapse;
+  const finLine = !fin ? "" : fin.result === "collapse"
+    ? `\nFINISHER LANDED: ${fin.craft || "a decisive craft"} ended this in ONE beat — narrate a single decisive ${fin.mode === "escape" ? "escape (you slip away clean)" : fin.mode === "solve" ? "solving stroke (it opens at once)" : "finishing stroke, fast and hard"}.`
+    : `\nFINISHER WHIFFED: ${fin.craft || "the finisher"} tried to END this and MISSED — narrate the encounter HARDENING (it knows you tried to finish it; you're exposed${fin.result === "morph_bad" ? ", badly — a dangerous opening left wide" : ""}). It is NOT over.`;
+  return `${head}\n${sides}\n${events}${finLine}\nNarrate this receipt exactly — do not move health, stages, or hints yourself. Offer choices that fit the encounter (attack/press/defend, flee/yield/abandon where sensible, ability and item uses).`;
 }
 
 /** GM encounter ops: narrative-flavor only, clamped. */

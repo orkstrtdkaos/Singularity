@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.254";
+const APP_VERSION = "1.8.255";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4442,16 +4442,21 @@ async function onChoice(choice) {
       if (!rr.ended && checkIncapacitation(character)) { outcome = "incapacitated"; rr.state.status = "ended"; }
       // SNG-230 §6b/§7a: a decisive FINISHER can COLLAPSE a collapsible encounter in ONE beat — a HARM craft ends
       // a fight/hazard, a transit (MOVE) craft slips a chase, a KNOW craft cracks a puzzle. Family-driven (§6c),
-      // resolved ALONG the degree bands: a crit collapses it; lesser rolls fall through to the normal round; a
-      // whiff already bit via failureCost (the morph-to-a-harder-fight is the next slice). A foe too great
-      // (epic/regional/danger-4) can't be one-beat-ended — frameCollapsible says no. Skill-battle fights don't
-      // reach here (their own meter — guard §89); this is the classic-duel / challenge / puzzle path.
+      // resolved ALONG the degree bands. Top → collapse; middle → the normal round (mitigated); BOTTOM → MORPH:
+      // the botched finisher HARDENS the encounter — you tried to end it and missed, and now it's angry / you're
+      // exposed. §89-safe: the morph is the GM narrating it harder (the mechanical failure already bit via
+      // failureCost) — no meter re-tune, no spawned fight. A foe too great can't be one-beat-ended. Skill-battle
+      // fights don't reach here (their own meter — guard §89); this is the classic-duel / challenge / puzzle path.
       if (!outcome && choice.abilityId && frameCollapsible(enc.def)) {
         const mode = collapseMode(familiesOfAbility(fullCatalog()[choice.abilityId], FN_INDEX), encounterKind(enc.def));
-        if (mode && collapseResult(resolution.degree, { floor: collapseFloor(enc.def) }) === "collapse") {
+        const craft = fullCatalog()[choice.abilityId]?.name || null;
+        const res = mode ? collapseResult(resolution.degree, { floor: collapseFloor(enc.def) }) : null;
+        if (res === "collapse") {
           outcome = mode === "solve" ? "solved" : (mode === "finish" && enc.def.type === "duel") ? "opponent_fell" : "completed";
-          resolution.collapse = { mode, craft: fullCatalog()[choice.abilityId]?.name || null }; // the GM narrates the one-beat end
+          resolution.collapse = { mode, result: "collapse", craft }; // the GM narrates the one-beat end
           rr.state.status = "ended";
+        } else if (res === "morph" || res === "morph_bad") {
+          resolution.collapse = { mode, result: res, craft }; // the GM narrates the botched finisher hardening it (§89-safe)
         }
       }
       resolution.encounterReceipt = encounterReceiptForGM(rr.state, enc.def, resolution, { ...rr, outcome });

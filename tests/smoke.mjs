@@ -7980,11 +7980,23 @@ await (async () => {
   check("230 §6b: frameModel surfaces collapsibility (the finisher gamble is on the table, legibly)",
     frameModel({ type: "duel", tier: "riffraff" }, {}, null).collapsible === true && frameModel({ type: "duel", tier: "epic" }, {}, null).collapsible === false);
   check("230 §6b WIRING: onChoice applies a finisher COLLAPSE on the non-skill-battle path (guard §89), reading family + degree + the foe's floor",
-    /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ floor: collapseFloor\(enc\.def\) \}\) === "collapse"/.test(appSrc230) && /resolution\.collapse = \{ mode/.test(appSrc230));
+    /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ floor: collapseFloor\(enc\.def\) \}\)/.test(appSrc230) && /if \(res === "collapse"\)/.test(appSrc230) && /resolution\.collapse = \{ mode, result: "collapse"/.test(appSrc230));
   check("230 §6b WIRING: a decisive HARM finisher can END the SKILL-BATTLE early (Erik) — momentum swing → degree → floor, meter otherwise untouched",
     /collapseMode\(\[fam\], "fight"\) === "finish" && swing > 0 && collapseResult\(swingDegree\(swing, meterMax\), \{ floor: collapseFloor\(enc\.def\) \}\) === "collapse"/.test(appSrc230) && /outcome: "opponent_fell", state: \{ \.\.\.rr\.state, status: "ended" \}, _collapse: true/.test(appSrc230));
   check("230 §6b: the finisher gamble is surfaced in the frame (collapsible vs too-great)",
     /enc-frame-collapse/.test(appSrc230) && /A decisive finisher could end this in one beat/.test(appSrc230));
+
+  // §7a MORPH: a botched finisher HARDENS the encounter — the GM narrates it (§89-safe: the mechanical failure
+  // already bit via failureCost; no meter re-tune, no spawned fight).
+  check("230 §7a: onChoice tags a whiffed finisher as a MORPH for the GM to narrate (not just a silent failure)",
+    /res === "morph" \|\| res === "morph_bad"/.test(appSrc230) && /resolution\.collapse = \{ mode, result: res, craft \}/.test(appSrc230));
+  const { encounterReceiptForGM: recFn } = await import("../engine/encounters.js");
+  const rcCollapse = recFn({ type: "duel", round: 2, status: "ended" }, { name: "A Raider", opponent: { name: "the raider", health: 6 } }, { degree: "crit_success", collapse: { mode: "finish", result: "collapse", craft: "Cut the Thread" } }, { outcome: "opponent_fell", events: [] });
+  const rcMorph = recFn({ type: "challenge", round: 2, status: "active", stagesDone: [], stageIndex: 0 }, { name: "Hard Ground", stages: [{ name: "cross" }] }, { degree: "failure", collapse: { mode: "finish", result: "morph_bad", craft: "Cut the Thread" } }, { events: [] });
+  check("230 §7a: the receipt tells the GM to narrate the one-beat COLLAPSE (finisher landed) vs the botched finisher MORPH (it hardens, not over)",
+    /FINISHER LANDED/.test(rcCollapse) && /Cut the Thread/.test(rcCollapse) && /FINISHER WHIFFED/.test(rcMorph) && /HARDENING/.test(rcMorph) && /NOT over/.test(rcMorph));
+  check("230 §7a: no finisher note when there was no finisher (an ordinary round reads clean)",
+    !/FINISHER/.test(recFn({ type: "duel", round: 1, status: "active" }, { name: "X", opponent: { name: "y", health: 5 } }, { degree: "success" }, { events: [] })));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

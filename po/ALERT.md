@@ -1,5 +1,18 @@
 # PO ALERT
 
+> ## [BUILD NOW] The World Feed - Brooklyn wants it (Erik, 2026-07-22 - SNG-168 §2 RESOLVED)
+> "Post a turn you love, with its image, so other players see it." Specced 2026-07-18 (SNG-168 §2),
+> NEVER SHIPPED - it was blocked on one question (where does the feed live). Erik answered: IN THE APP,
+> per family group. And scoped it: JUST THE FEED (map §1 decoupled, messaging §3 deferred). It's now a
+> SMALL build - rides the EXISTING substrate: syncSharedCanon/sharedCanonView (per-family-group sync +
+> rating-lens, app.js:2164), profile.sharedChronicle (family consent, 6292), imagePrompt/addGalleryImage
+> (turn image, 1973). No new backend, no new auth. CCode builds: (1) post-a-turn control carrying its
+> image, (2) the in-app per-family feed view (character/location/date/narration/image, reverse-chron),
+> (3) per-post consent SEPARATE from sharedChronicle, rating-lensed on read, (4) world-news items if
+> cheap else fast-follow. GUARD: a feed post is NEVER canon - do not hydrate it into another player's
+> CONTENT (that's the separate shared-canon path). Acceptance: Brooklyn posts a turn+image, it appears
+> in the family feed lensed, without becoming canon in anyone's game. Full resolution: SPEC_SNG-168 §6.
+
 > ## [!] The bestiary is AUTHORED but woven into NOTHING (Aevi, 2026-07-22 - SNG-229)
 > Erik asked if the monsters got incorporated. Verified: NO. bestiary.json (6 creatures: glimmerling swarm,
 > hollow-pace, warpling hare, the wrong stag, tessellith, the unmoored choir) is STAGED and INERT - 0 loaders,

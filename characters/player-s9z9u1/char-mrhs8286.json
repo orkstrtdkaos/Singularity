@@ -1798,7 +1798,131 @@
     "Silas named his love to Pell plainly at the forge bench at dawn — she received it in her own register and gave it back. Both of them packed for the road without ceremony, and the Fell Pell is ready to be left."
   ],
   "currentLocationId": "millbrook",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Dawn at the Fell Pell — Memory complete, Pell at the door, the road waiting.",
+        "narration": "The forge is quiet at this hour. The last of the night fire has burned to orange coals, and the light they throw is warm and low — the color of something finishing rather than starting. Memory rests in Pell's hands, the shadow-twin on the bench answering to Silas alone, and the whole of the work is done.\n\nPell is at the door, pack on her shoulder, the short sword at her hip where it belongs. She does not look back at the forge. People who understand finished work do not linger over it. She looks at Silas instead, direct and patient, the way she always does when she is waiting for him to name the next thing.\n\nHuginn is on the ridgepole above the lane. He has been there since before Silas woke, which means something ended in the night nearby — nothing urgent, or he would have made more noise about it. The early-spring air through the open door is cold and sharp, carrying the smell of thawed mud and the faint river. Millbrook is stirring: the creak of a shutter somewhere, a dog, the particular silence of people who are already awake but not yet talking.\n\nThe road waits. Warden Coll's committee meets in three days. The water situation has a structure now — Crane, Dara, Mara, Aldric — but the source is still the source, and the half-made fold at the Crossing is the thing Silas's father spent fifteen years watching without finishing. Both threads point the same direction. South, and then into the Disputed Zone."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The forge is quiet at this hour. The last of the night fire has burned to orange coals, and the light they throw is warm and low — the color of something finishing rather than starting. Memory rests in Pell's hands, the shadow-twin on the bench answering to Silas alone, and the whole of the work is done.\n\nPell is at the door, pack on her shoulder, the short sword at her hip where it belongs. She does not look back at the forge. People who understand finished work do not linger over it. She looks at Silas instead, direct and patient, the way she always does when she is waiting for him to name the next thing.\n\nHuginn is on the ridgepole above the lane. He has been there since before Silas woke, which means something ended in the night nearby — nothing urgent, or he would have made more noise about it. The early-spring air through the open door is cold and sharp, carrying the smell of thawed mud and the faint river. Millbrook is stirring: the creak of a shutter somewhere, a dog, the particular silence of people who are already awake but not yet talking.\n\nThe road waits. Warden Coll's committee meets in three days. The water situation has a structure now — Crane, Dara, Mara, Aldric — but the source is still the source, and the half-made fold at the Crossing is the thing Silas's father spent fifteen years watching without finishing. Both threads point the same direction. South, and then into the Disputed Zone.",
+      "sceneSummary": "Dawn at the Fell Pell — Memory complete, Pell at the door, the road waiting.",
+      "choices": [
+        {
+          "label": "Step out and set the day's direction — name the first destination aloud to Pell and Huginn and begin moving.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "lead"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Take a moment at the door with Order-Sense — read the design the village sits in this morning, what threads are live and which have gone quiet overnight.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Find Edvar Crane before leaving — confirm he is ready and that the Millbrook thread is genuinely in hand before the party goes out of reach.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "lead"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Check the Sealed Waystation Message — the lower waystation at the March road fork is on the route south. Carry it now and deliver it in person rather than trusting the hook.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "Inside and at the threshold of the Fell Pell forge, Millbrook, at dawn. The coals are low and orange. The door stands open onto the cold morning lane.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "At the door, pack on shoulder, Memory in hand, watching Silas — waiting."
+          },
+          {
+            "name": "Huginn",
+            "state": "On the ridgepole above the lane. Still. Has been there since before dawn."
+          }
+        ],
+        "objects": [
+          "Memory — the shadow-spear, sealed, resting in Pell's hands",
+          "Shadow-twin on the bench (answers to Silas alone)",
+          "Low orange forge coals",
+          "Pell's pack and short sword",
+          "Silas's traveler's pack and inventory"
+        ],
+        "threads": [
+          "The road south — Warden Coll's committee in three days, the half-made fold at the Crossing, the contamination source in the Disputed Zone",
+          "Edvar Crane — confirmed for the road, should be staged at the waygate platform",
+          "Sealed Waystation Message in inventory — delivery point is on the route south"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "At the forge door at dawn — packed and ready, Memory in hand, watching Silas for the direction.",
+          "statusNote": "At Silas's side, packed and ready to depart the Fell Pell for the road south."
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Scene opening — a moment at the forge threshold before the day begins."
+      }
+    },
+    "sceneState": {
+      "setting": "Inside and at the threshold of the Fell Pell forge, Millbrook, at dawn. The coals are low and orange. The door stands open onto the cold morning lane.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "At the door, pack on shoulder, Memory in hand, watching Silas — waiting."
+        },
+        {
+          "name": "Huginn",
+          "state": "On the ridgepole above the lane. Still. Has been there since before dawn."
+        }
+      ],
+      "objects": [
+        "Memory — the shadow-spear, sealed, resting in Pell's hands",
+        "Shadow-twin on the bench (answers to Silas alone)",
+        "Low orange forge coals",
+        "Pell's pack and short sword",
+        "Silas's traveler's pack and inventory"
+      ],
+      "threads": [
+        "The road south — Warden Coll's committee in three days, the half-made fold at the Crossing, the contamination source in the Disputed Zone",
+        "Edvar Crane — confirmed for the road, should be staged at the waygate platform",
+        "Sealed Waystation Message in inventory — delivery point is on the route south"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 14,
@@ -2813,7 +2937,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Laid the copper wire along the channel to check fit by feel, confirmed the seat, stepped back without comment. Present and reading.",
         "[d14] Took the anchor re-closure from Silas without being asked — read the channel by ironsense from socket to tip, pressed the wire home with her thumbnail, called it done in two words.",
         "[d14] Named the Weirmark as necessary for distance-summoning — without the caller's mark in the grain, the shadow knows the design but not who calls it and could drift. Confirmed the test: the shadow reads true, all threads present. Directed: seat the mark, then speak the Word.",
         "[d14] Confirmed the Weirmark seal and the Word settling — nodded once when the shadow acknowledged the mark and vanished. Put a hand briefly on Silas's shoulder when the work was done.",
@@ -2822,7 +2945,8 @@
         "[d14] Wielded the shadow-twin through four paces and reported its feel plainly — waiting-light, and yours the whole time she held it. Not a complaint; a reading.",
         "[d14] Held the shadow-twin through the caller-link test — named the change in weight plainly ('Something moved'). Steady and accurate as always.",
         "[d14] Accepted Memory into her hands without ceremony — named the arrangement plainly: 'Yours to call. Mine to carry.' The split design is acknowledged and held.",
-        "[d14] Received Silas's declaration of love at the forge bench at dawn — answered it plainly, in her own register: 'Me too.' Both packed for the road without ceremony."
+        "[d14] Received Silas's declaration of love at the forge bench at dawn — answered it plainly, in her own register: 'Me too.' Both packed for the road without ceremony.",
+        "[d14] At the forge door at dawn — packed and ready, Memory in hand, watching Silas for the direction."
       ],
       "knownFacts": [
         "The Shielding Word is not a thread on the blade but the condition of the conjuring — seated once, inherited by every subsequent call of the shadow-spear.",
@@ -2843,7 +2967,7 @@
         "accurate tactile reporting of a working's feel under hands-o"
       ],
       "status": "active",
-      "statusNote": "At Silas's side, packed and ready to depart the Fell Pell for the waygate and the road south.",
+      "statusNote": "At Silas's side, packed and ready to depart the Fell Pell for the road south.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -4787,11 +4911,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T15:32:07.434Z",
+    "lastSharedReadAt": "2026-07-24T17:46:01.917Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
-    "lastGenCount": 591,
-    "turnsSinceOffer": 6,
+    "lastGenCount": 593,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Huginn walked in without being invited — Crane acknowledged the bird directly and made room for it, which is not what a stranger does.",
@@ -6720,8 +6844,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784911824936,
-  "rev": 1297,
+  "updatedAt": 1784915191914,
+  "rev": 1300,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9534,7 +9658,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 539,
+    "valley": 540,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9669,10 +9793,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T16:50:24.934Z",
+      "lastAt": "2026-07-24T17:46:31.912Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 52
+      "beats": 53
     }
   ],
   "company": [
@@ -9879,10 +10003,10 @@
     "npcUpdates": 155,
     "factUpdates": 12,
     "placeUpdates": 27,
-    "codexUpdates": 100,
+    "codexUpdates": 99,
     "timeOps": 165,
     "imagePrompt": 3,
-    "sceneEnded": 36,
+    "sceneEnded": 35,
     "itemUpdates": 5,
     "questUpdates": 22,
     "offer": 15,

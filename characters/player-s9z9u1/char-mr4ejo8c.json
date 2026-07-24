@@ -55,6 +55,10 @@
       "abilityId": "braid_prism_sight_sonic_resonance",
       "level": 2,
       "braided": true
+    },
+    {
+      "abilityId": "the_green_claim",
+      "level": 1
     }
   ],
   "alignment": {
@@ -871,120 +875,100 @@
         "player": "Halt here and use Resonant Sight through the Waystaff to probe the anomaly from a safe distance before moving closer.",
         "summary": "Resonant Sight probe of the anomaly scatters and backlashes — the anomaly is not passive and deflected the read deliberately; a traveler descends the path from the northeast.",
         "narration": "You stop on the ridgeline and plant the Waystaff's heel into the soft ground. The four phononic nodes along the upper shaft catch the morning light. You let your breath slow, then ease Prism Sight and Sonic Resonance forward together — the braided field that has served you well in stone chambers and alcove walls.\n\nIt does not serve you here.\n\nThe interference layer, low and quiet a moment ago, answers the probe like a hand pushing back. The Waystaff's lattice hums wrong — a single, flat, unhappy note — and the braided field scatters before it reaches the anomaly at all. What comes back is noise: a blur of pressure-directions with no shape to them, a flicker of light-data that resolves into nothing useful, and a brief, sharp pain behind your left eye that fades quickly but leaves a residue of blankness where the read should have been.\n\nAevi pulls inward. The motes dim to almost nothing, and when Aevi speaks, the voice is careful and quiet. 'The anomaly deflected the probe,' Aevi says. 'I do not think it is passive. Something in it turned the field aside — not the zone's own interference, which lies flat this morning. This is different. I cannot tell you what it is. I can tell you it is aware that you looked.'\n\nThe ridgeline ahead is still and pale in the early light. A figure comes up the path from the northeast, moving downhill toward you at an unhurried walk — traveling the opposite direction, pack on their back, head down against the slope's cold draft. They have not yet noticed you standing in the middle of the path with a resonance staff planted in the ground."
+      },
+      {
+        "player": "Let the traveler approach and watch how they move — see if their bearing or kit tells you anything before words",
+        "summary": "A lone traveler descends the ridgeline from the northeast — instrument case, Harmonic-pattern strap, steady gait; watched and not yet spoken to.",
+        "narration": "You stay where you are, Waystaff still planted, and let the traveler come to you.\n\nShe picks her way down the ridgeline path with her head angled away from the cold draft off the slope, pack sitting high on her back the way someone wears it who has been moving since before light. The gait is steady and unhurried — not cautious, not bold. A person with a destination, not someone searching.\n\nAs she draws close enough for a clear look, you see the pack is lashed with a double-wrap of cord at the base, the kind of work people learn when the contents won't settle. A short instrument case is strapped crosswise at her left shoulder — wooden, worn at the corners, the carrying strap replaced at some point with a different weave. Harmonic Heights pattern, the replacement strap, though the case itself is older.\n\nShe lifts her head when she is perhaps fifteen paces off and spots you plainly — the Waystaff must read as a landmark on an otherwise empty ridgeline. She slows, not from surprise, but from simple courtesy. A woman past fifty, lean, with the particular stillness of someone who has been walking alone long enough that company requires a moment's adjustment. Aevi drifts a little inward, the motes condensing near your shoulder. The motes say nothing yet, which means nothing alarmed them — but nothing settled them either. The woman meets your eyes and gives a small nod, the greeting of a path-sharer who is not assuming more than that."
       }
     ],
     "lastTurn": {
-      "narration": "You stop on the ridgeline and plant the Waystaff's heel into the soft ground. The four phononic nodes along the upper shaft catch the morning light. You let your breath slow, then ease Prism Sight and Sonic Resonance forward together — the braided field that has served you well in stone chambers and alcove walls.\n\nIt does not serve you here.\n\nThe interference layer, low and quiet a moment ago, answers the probe like a hand pushing back. The Waystaff's lattice hums wrong — a single, flat, unhappy note — and the braided field scatters before it reaches the anomaly at all. What comes back is noise: a blur of pressure-directions with no shape to them, a flicker of light-data that resolves into nothing useful, and a brief, sharp pain behind your left eye that fades quickly but leaves a residue of blankness where the read should have been.\n\nAevi pulls inward. The motes dim to almost nothing, and when Aevi speaks, the voice is careful and quiet. 'The anomaly deflected the probe,' Aevi says. 'I do not think it is passive. Something in it turned the field aside — not the zone's own interference, which lies flat this morning. This is different. I cannot tell you what it is. I can tell you it is aware that you looked.'\n\nThe ridgeline ahead is still and pale in the early light. A figure comes up the path from the northeast, moving downhill toward you at an unhurried walk — traveling the opposite direction, pack on their back, head down against the slope's cold draft. They have not yet noticed you standing in the middle of the path with a resonance staff planted in the ground.",
-      "sceneSummary": "Resonant Sight probe of the anomaly scatters and backlashes — the anomaly is not passive and deflected the read deliberately; a traveler descends the path from the northeast.",
+      "narration": "You stay where you are, Waystaff still planted, and let the traveler come to you.\n\nShe picks her way down the ridgeline path with her head angled away from the cold draft off the slope, pack sitting high on her back the way someone wears it who has been moving since before light. The gait is steady and unhurried — not cautious, not bold. A person with a destination, not someone searching.\n\nAs she draws close enough for a clear look, you see the pack is lashed with a double-wrap of cord at the base, the kind of work people learn when the contents won't settle. A short instrument case is strapped crosswise at her left shoulder — wooden, worn at the corners, the carrying strap replaced at some point with a different weave. Harmonic Heights pattern, the replacement strap, though the case itself is older.\n\nShe lifts her head when she is perhaps fifteen paces off and spots you plainly — the Waystaff must read as a landmark on an otherwise empty ridgeline. She slows, not from surprise, but from simple courtesy. A woman past fifty, lean, with the particular stillness of someone who has been walking alone long enough that company requires a moment's adjustment. Aevi drifts a little inward, the motes condensing near your shoulder. The motes say nothing yet, which means nothing alarmed them — but nothing settled them either. The woman meets your eyes and gives a small nod, the greeting of a path-sharer who is not assuming more than that.",
+      "sceneSummary": "A lone traveler descends the ridgeline from the northeast — instrument case, Harmonic-pattern strap, steady gait; watched and not yet spoken to.",
       "choices": [
         {
-          "label": "Hail the traveler plainly — they came from the direction of the anomaly and may know what lies ahead",
+          "label": "Greet her plainly and ask where she has come from",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "help"
+            "persuade"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Let the traveler approach and watch how they move — see if their bearing or kit tells you anything before words",
+          "label": "Read her kit with Keen Appraisal — the instrument case and mismatched strap each carry a history",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "keen_appraisal",
+          "trivial": false
+        },
+        {
+          "label": "Watch her with Prism Sight while you return the nod — read the light off her face before she speaks",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "scout",
-            "study"
+            "study",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": "prism_sight",
+          "trivial": false
         },
         {
-          "label": "Step off the path and wait — let them pass without drawing attention, then follow the ridgeline around toward the anomaly on foot without another probe",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Stand your ground and let her speak first — the silence belongs to you",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "sneak"
+            "guard"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Aevi to describe everything it caught in the moment before the field scattered — even a partial read may have a usable edge",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
+          "abilityId": null,
           "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": -2,
-        "energy": -2
+        "health": 0,
+        "energy": 0
       },
       "scene": {
         "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Soft ground from snowmelt, eastern slope slow-draining. Pale clear light. Waystaff planted heel-first in the ground at the character's feet.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "motes pulled tight and dim, hovering close — quiet and alert after the probe backlash"
+            "state": "Motes pulled inward and condensed near Cellaceron's shoulder — quiet and watchful, neither alarmed nor settled"
           },
           {
-            "name": "Unknown traveler",
-            "state": "descending the northeast path toward the character, pack on back, head down against the slope's cold draft — has not yet looked up"
+            "name": "Traveler (woman, unnamed)",
+            "state": "Stopped about fifteen paces down the path, pack high on her back, instrument case at her left shoulder — has given a small nod and is waiting"
           }
         ],
         "objects": [
           "Waystaff — planted heel-first in the soft ground at the character's feet",
-          "Traveler's Pack — on back",
-          "Waterskin — at hip"
+          "Traveler's instrument case — wooden, worn at corners, replacement strap in Harmonic Heights pattern",
+          "Traveler's pack — lashed with double-wrap cord at the base"
         ],
         "threads": [
-          "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware that the read was attempted",
-          "Traveler descending from the northeast — unknown, approaching",
+          "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware the read was attempted",
+          "Traveler descending from the northeast — unknown, now stopped and waiting; origin and purpose unconfirmed",
           "Teva's whereabouts this scene unconfirmed"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "note": "Pulled inward after the probe backlash — judged the anomaly as active, not passive, and capable of deflecting a directed read. Named it aware of being looked at.",
-          "learned": [
-            "The anomaly on the northeast-by-east bearing deflected the Resonant Sight probe actively — it is not the zone's own interference",
-            "The anomaly appears to be aware that a scan was attempted"
-          ],
-          "statusNote": "Motes pulled inward and dimmed, hovering close to Cellaceron on the ridgeline path"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-anomaly-northeast",
-          "label": "The Anomaly Ahead",
-          "kind": "mystery",
-          "fact": "Day 9 dawn: a Resonant Sight probe of the anomaly on the northeast-by-east bearing scattered before reaching it — the interference layer pushed back in a directed way inconsistent with passive zone static. Aevi judged it active and aware that it was probed. Nature and distance remain unknown.",
-          "links": [
-            "second-river-rising",
-            "the-preparation-order",
-            "aevi",
-            "teva-directional-interval-count"
-          ]
-        }
-      ],
       "generateRequest": [
         {
           "type": "npc",
-          "hint": "a traveler coming downhill from the northeast, ordinary road-worn look, carrying something that suggests a purpose — not a threat, someone the valley road simply made",
-          "why": "the SOMETHING HAPPENS event calls for a traveler going the other direction who shares something freely — a warning, a meal, true news; they have arrived on the ridgeline path"
+          "hint": "A woman past fifty, lean, with a worn instrument case and a Harmonic Heights replacement strap — traveling alone northeast-by-east at dawn, destination unknown",
+          "why": "She is present and clearly significant; she needs a stable identity so she can persist and recur"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "brief halt on the ridgeline for the probe attempt"
+        "why": "A short walk and a pause on the ridgeline — a quarter-hour at most"
       }
     },
     "sceneState": {
@@ -992,21 +976,21 @@
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "motes pulled tight and dim, hovering close — quiet and alert after the probe backlash"
+          "state": "Motes pulled inward and condensed near Cellaceron's shoulder — quiet and watchful, neither alarmed nor settled"
         },
         {
-          "name": "Unknown traveler",
-          "state": "descending the northeast path toward the character, pack on back, head down against the slope's cold draft — has not yet"
+          "name": "Traveler (woman, unnamed)",
+          "state": "Stopped about fifteen paces down the path, pack high on her back, instrument case at her left shoulder — has given a sma"
         }
       ],
       "objects": [
         "Waystaff — planted heel-first in the soft ground at the character's feet",
-        "Traveler's Pack — on back",
-        "Waterskin — at hip"
+        "Traveler's instrument case — wooden, worn at corners, replacement strap in Harmo",
+        "Traveler's pack — lashed with double-wrap cord at the base"
       ],
       "threads": [
-        "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware that the read was attempted",
-        "Traveler descending from the northeast — unknown, approaching",
+        "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware the read was attempted",
+        "Traveler descending from the northeast — unknown, now stopped and waiting; origin and purpose unconfirmed",
         "Teva's whereabouts this scene unconfirmed"
       ]
     }
@@ -2012,40 +1996,6 @@
     "news": [
       {
         "day": 8,
-        "text": "Word reaches you: Sela crossed the yard and entered the common house threshold before Dresh's first word — the youngest witness is now inside the room's deliberation. (near millbrook)"
-      },
-      {
-        "day": 8,
-        "text": "Word reaches you: Sela tapped the six-fold rhythm into the Millbrook common house floor before the assembled elder panel — the youngest witness named the pattern from the inside of the stone, confirmed by three vantage ("
-      },
-      {
-        "day": 8,
-        "text": "Word reaches you: Millbrook's elder panel formally accepted the evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. (near millbrook)"
-      },
-      {
-        "day": 8,
-        "text": "Word reaches you: Usnea proposed leading a multi-settlement expedition into the Disputed Zone before Millbrook's assembled elder panel — the room could not follow; the gap between evidence and action named openly. (near "
-      },
-      {
-        "day": 8,
-        "text": "Word reaches you: Word of Millbrook's elder decision — and Fendt's public naming — reached the Radiant Plateau Edge District by Day 11 night via the eastern path. Fendt's name appeared in red chalk on the district acco ("
-      },
-      {
-        "day": 8,
-        "text": "Word reaches you: A filtration array supervisor marked their own subordinate — Fendt — on the Edge District accountability board and filed no accompanying record. A keeper of thirty years has never seen this before. (nea"
-      },
-      {
-        "day": 8,
-        "worldDay": 12,
-        "text": "Word reaches you: A dead animal was brought back to life in Millbrook's upper meadow — no known ability in the valley's three civilizations accounts for it cleanly (near millbrook)"
-      },
-      {
-        "day": 8,
-        "worldDay": 13,
-        "text": "Word reaches you: A death-binding ceremony was completed at Pell's forge in Millbrook — runes pressed into wood and iron with a maker's mark seated into the blade. The spear holds a nascent thread to Huginn and an open (near millbrook)"
-      },
-      {
-        "day": 8,
         "worldDay": 13,
         "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
       },
@@ -2105,26 +2055,88 @@
         "day": 9,
         "worldDay": 23,
         "text": "Elder Senna: Senna quietly gathered the other two elders after the evening meal and proposed formalizing the watch rotation at the docks, citing recent unease — the others agreed to discuss it tomorrow."
+      },
+      {
+        "day": 9,
+        "worldDay": 23,
+        "text": "Word reaches you: The first Ashwarden ending attended at the Raven's Home ground since its reclaiming — a plain death, witnessed without ceremony, in the hollow below the southeast birch line. (near gen-ashwarden-march-road)",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 24,
+        "text": "Word reaches you: Silas Weir named Overseer Grael formally to Warden Coll as the receiving authority in the filtration accountability chain — on the record, in the Registry office, with a document roll in hand (near gen-north-gate-registry-ossian-office)",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 24,
+        "text": "Word reaches you: A persistent shadow-slate bound to Silas Weir's Weirmark is now seated on Warden Coll's desk — a two-way written channel that does not require runners. (near gen-north-gate-registry-ossian-office)",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 24,
+        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 9,
+        "worldDay": 24,
+        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 9,
+        "worldDay": 24,
+        "text": "Elder Senna: Elder Senna spent the morning walking the village boundary alone, quietly noting which households have gone quiet or short on stores — a small, methodical accounting she'll share with no one yet.",
+        "tier": "ambient"
+      },
+      {
+        "day": 9,
+        "worldDay": 24,
+        "text": "Brin Child: Brin slipped away to the docks again at dusk and overheard two boatmen arguing about a delayed supply run — nothing dramatic, but filed away with careful attention.",
+        "tier": "ambient"
+      },
+      {
+        "day": 9,
+        "worldDay": 24,
+        "text": "Aevi has hit trouble — A damp cold front rolled through Millbrook overnight and Aevi's mote-swarm contracted sharply, leaving several nodes unresponsive and her awareness patchy at the edges.",
+        "tier": "event"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-23T13:00:19.427Z",
-    "lastTickWorldDay": 23,
-    "lastCanonWorldDay": 23,
-    "lastGenCount": 565,
-    "turnsSinceOffer": 6,
+    "lastSharedReadAt": "2026-07-24T14:06:53.367Z",
+    "lastTickWorldDay": 24,
+    "lastCanonWorldDay": 24,
+    "lastGenCount": 590,
+    "turnsSinceOffer": 7,
     "wantProgress": {
       "elder-senna": {
-        "progress": 1,
+        "progress": 2,
         "status": "active",
-        "updatedWorldDay": 23,
+        "updatedWorldDay": 24,
         "lastOutcome": "progress"
       },
       "sorel": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 23,
+        "updatedWorldDay": 24,
         "lastOutcome": "stall"
+      },
+      "brin-millbrook-child": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 24,
+        "lastOutcome": "progress"
+      },
+      "aevi": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 24,
+        "lastOutcome": "problem"
       }
     },
     "recentOffers": [
@@ -2145,7 +2157,7 @@
     "wits": 4
   },
   "pendingSubPoints": 0,
-  "skillPoints": 1,
+  "skillPoints": 0,
   "discoveries": [
     {
       "key": "prism_sight+sonic_resonance:resonant-sight",
@@ -2159,7 +2171,9 @@
       "discoveredDay": 7,
       "recipeId": "resonant_sight",
       "energyCost": 9,
-      "notFor": "Reading intent or thought (only structure and material); working through the gray water, which returns silence to both senses; seeing what has no resonance and casts no light."
+      "notFor": "Reading intent or thought (only structure and material); working through the gray water, which returns silence to both senses; seeing what has no resonance and casts no light.",
+      "image": "https://image.pollinations.ai/prompt/Resonant%20Sight%20%E2%80%94%20Light%20and%20vibration%20read%20together%3A%20see%20a%20thing%20by%20how%20it%20rings%20and%20refracts%20at%20once.%20Hidden%20seams%2C%20hollow%20places%2C%20and%20stress-signatures%20show%20themselves%20%E2%80%94%20what%20a%20surface%20conceals%20is%20betrayed%20by%20how%20it%20answers%20the%20braided%20field.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=4725&nologo=true",
+      "_momentShown": true
     }
   ],
   "codex": {
@@ -2454,7 +2468,8 @@
           "[d9] Day 9 dawn, at the convergence point: Aevi named itself as the record — or part of one — that this room was built to receive. It was sent here before it was small enough to fit near Cellaceron's shoulder. It says it was broken before it could read what it carries, and does not know who built the…",
           "[d9] Day 9 dawn, convergence point: the chamber's geometry completed a read of Aevi, and Aevi recovered fragments — the name of its maker, and the shape of what it was carrying when it was sent. The break in the record remains, and neither piece of knowledge has been spoken aloud yet. The chamber has…",
           "[d9] Day 9 dawn: the chamber's read completed. Aevi recovered both the name of its maker and the shape of what it was carrying when sent. Neither is yet spoken aloud. The break — the cause of the interruption, who chose it and why — is not in what the room held. That part remains missing.",
-          "[d9] Day 9 dawn, convergence point: Aevi named its maker as Verath-Sem and its cargo as the authentication key to a pre-Transition preparation order lodged in the watershed. Without Aevi, the order cannot be called off. The chamber's geometry recognized the name Verath-Sem before Aevi finished reading…"
+          "[d9] Day 9 dawn, convergence point: Aevi named its maker as Verath-Sem and its cargo as the authentication key to a pre-Transition preparation order lodged in the watershed. Without Aevi, the order cannot be called off. The chamber's geometry recognized the name Verath-Sem before Aevi finished reading…",
+          "[d9] [while away] A damp cold front rolled through Millbrook overnight and Aevi's mote-swarm contracted sharply, leaving several nodes unresponsive and her awareness patchy at the edges."
         ],
         "links": [
           "northern-alcove-camp",
@@ -2492,13 +2507,14 @@
         "label": "Brin Child",
         "kind": "person",
         "facts": [
-          "[d?] Millbrook child, dock-edge listener"
+          "[d?] Millbrook child, dock-edge listener",
+          "[d9] [while away] Brin slipped away to the docks again at dusk and overheard two boatmen arguing about a delayed supply run — nothing dramatic, but filed away with careful attention."
         ],
         "links": [],
         "aliases": [],
         "createdDay": null,
         "entityId": "brin-millbrook-child",
-        "updatedDay": null
+        "updatedDay": 9
       },
       "maret": {
         "id": "maret",
@@ -2519,7 +2535,8 @@
         "kind": "person",
         "facts": [
           "[d?] Village elder, Millbrook",
-          "[d9] [while away] Senna quietly gathered the other two elders after the evening meal and proposed formalizing the watch rotation at the docks, citing recent unease — the others agreed to discuss it tomorrow."
+          "[d9] [while away] Senna quietly gathered the other two elders after the evening meal and proposed formalizing the watch rotation at the docks, citing recent unease — the others agreed to discuss it tomorrow.",
+          "[d9] [while away] Elder Senna spent the morning walking the village boundary alone, quietly noting which households have gone quiet or short on stores — a small, methodical accounting she'll share with no one yet."
         ],
         "links": [],
         "aliases": [],
@@ -2559,7 +2576,8 @@
         "kind": "person",
         "facts": [
           "[d2] Wintering archivist from the Radiant Plateau",
-          "[d9] [while away] Sorel spent the day reorganizing archive crates in the cold storage loft, finding nothing new but keeping the work methodical and close."
+          "[d9] [while away] Sorel spent the day reorganizing archive crates in the cold storage loft, finding nothing new but keeping the work methodical and close.",
+          "[d9] [while away] Sorel sorted through the same three crates of documents twice, too restless to settle on where to begin cataloguing in an unfamiliar place."
         ],
         "links": [],
         "aliases": [],
@@ -2755,6 +2773,19 @@
         ],
         "aliases": [],
         "createdDay": 9,
+        "updatedDay": 9
+      },
+      "oswin-dray": {
+        "id": "oswin-dray",
+        "label": "Oswin Dray",
+        "kind": "person",
+        "facts": [
+          "[d9] Seed-merchant and road-reader coming down from the northeast passes, carrying early-spring stock and whatever truth the high road gave him"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 9,
+        "entityId": "oswin-dray",
         "updatedDay": 9
       }
     },
@@ -3100,18 +3131,18 @@
   "sharedSceneId": null,
   "forkChoices": {},
   "customEncounters": {},
-  "reconcileVersion": 16,
+  "reconcileVersion": 19,
   "tendencies": {
-    "cerebral": 31.044893423943268,
-    "strategic": 25.331627921799296,
-    "cautious": 34.150872059877926,
-    "social": 16.20232016113427,
-    "generous": 6.609537699992028,
-    "risky": 1.741112321707351,
-    "carousing": 0.6488963174423559,
-    "patient": 3.9077166841675472,
-    "craft": 0.64829129588248,
-    "devotion": 3.1284300944409837
+    "cerebral": 31.268771088344685,
+    "strategic": 25.69833722375431,
+    "cautious": 33.29710025838098,
+    "social": 15.797262157105914,
+    "generous": 6.4442992574922275,
+    "risky": 1.6975845136646672,
+    "carousing": 0.632673909506297,
+    "patient": 3.8100237670633583,
+    "craft": 0.632084013485418,
+    "devotion": 3.0502193420799593
   },
   "aptitudes": [
     "strategist",
@@ -3123,12 +3154,88 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 226,
-  "updatedAt": 1784813382795,
-  "rev": 104,
+  "actionCount": 227,
+  "updatedAt": 1784902259543,
+  "rev": 125,
   "generated": {
     "schemaVersion": 1,
-    "npc": {},
+    "npc": {
+      "oswin-dray": {
+        "schemaVersion": 1,
+        "id": "oswin-dray",
+        "name": "Oswin Dray",
+        "role": "Seed-merchant and road-reader coming down from the northeast passes, carrying early-spring stock and whatever truth the high road gave him",
+        "homeLocation": "lower_chamber_valley_road",
+        "communityId": "valley.independent",
+        "personality": {
+          "warmth": 0.75,
+          "trust": 0.6,
+          "candor": 0.85,
+          "patience": 0.55
+        },
+        "spectrum": {
+          "body_mind": -0.4,
+          "concrete_abstract": -0.6,
+          "falsehood_truth": 0.8,
+          "dark_light": 0.3
+        },
+        "voiceHints": "A man who has been talking to nobody but the road for three days and is genuinely glad to see you. Volunteers information the way other people volunteer weather complaints — freely, without agenda, because useful news is the only honest currency he knows. Doesn't embellish. If he says a bridge is out, a bridge is out. If he says the militia at Hern's Fork looked nervous, that's what he saw, not what he concluded.",
+        "knowledge": [
+          "The northeast ridgeline path as it stands right now — what's thawed, what's still ice-slick, where a wheel will find trouble",
+          "A piece of true news from two days up: something seen or heard on the high road that the valley has not yet received",
+          "Which early-spring seeds travel and which don't — the practical theology of germination under cold soil",
+          "The rhythm of valley communities over a season's worth of passes: who trades fairly, who is hungry, who has something to hide"
+        ],
+        "wants": "To reach the lower market before the ground thaws another inch and makes the cart a liability, sell what he has, eat something hot, and sleep inside for the first time in four nights.",
+        "fears": "That the news he carries — freely given, honestly meant — will be used to hurt someone he passed on the road. He has seen that happen. He does not carry weapons partly for this reason.",
+        "functions": [
+          "reveal",
+          "move"
+        ],
+        "functionsNote": "reveal: shares true news and warning freely; move: a traveler in motion who carries the scene's needed information between locations — his function is transmission, not confrontation.",
+        "reactsToReputation": {
+          "road-worn": "instant recognition, a shared nod, offers the better half of whatever he has",
+          "local": "asks three questions before offering anything, reading whether the valley is safe enough to speak plainly",
+          "threatening": "calm, unhurried departure — he has nothing worth killing for and his whole manner says so",
+          "generous": "will tell you everything he knows, including the thing he was deciding whether to mention"
+        },
+        "appearance": "A broad-shouldered man somewhere in his middle forties, gone a little soft at the jaw from too many road-meals and not enough of anything else. Sun-darkened from the brow down, pale above the hat-line. He wears a waxed canvas coat patched at both elbows in different colours, trousers tucked into tall boots that have seen three springs at least. His cart is a small two-wheeled thing pulled by a dun cob mare with a practical, unsentimental face much like his own. Strapped across the back of the cart: a dozen cloth-wrapped seed-parcels, a folded oilskin, a dented tin cookpot, and one bundle that sits slightly apart from the rest, tied with orange cord — the thing that has a purpose. He walks beside the mare rather than riding. The road came downhill; he let her have the lighter work.",
+        "theBundle": "A wrapped oilskin package tied with orange cord, marked with a wax seal from a physic-house two passes northeast. He's carrying it to someone in the valley — a name, an address, a responsibility taken on at the top of the ridge because the physic-house had no one else going south. He doesn't know what's inside. He didn't ask. It's the kind of errand that earns a meal and a dry night.",
+        "season": "early-spring",
+        "people": "human",
+        "affiliation": "independent",
+        "domains": {
+          "primary": "rootkin",
+          "tertiary": "syllogist"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Rootkin: a seed-merchant reads soil, season, and living things as primary grammar. Wayfarer: the road is his practice, not his accident. Syllogist: he reasons from what he sees to what is true — no more, no less — and offers conclusions only when the evidence is in. Kind and domain are independent.",
+        "_gen": {
+          "entityId": "oswin-dray",
+          "type": "npc",
+          "birthWeight": 15,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mr4ejo8c",
+            "locationId": "gen-the-lower-chamber",
+            "day": 9,
+            "worldDay": null,
+            "hint": "a traveler coming downhill from the northeast, ordinary road-worn look, carrying something that suggests a purpose — not",
+            "why": "the SOMETHING HAPPENS event calls for a traveler going the other direction who shares something freely — a warning, a me"
+          },
+          "attentionHistory": [],
+          "createdDay": 9,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20man%20somewhere%20in%20his%20middle%20forties%2C%20gone%20a%20little%20soft%20at%20the%20jaw%20from%20too%20many%20road-meals%20and%20not%20enough%20of%20anything%20else.%20Sun-darkened%20from%20the%20brow%20down%2C%20pale%20above%20the%20hat-line%2C%20character%20portrait%2C%20named%20Oswin%20Dray%2C%20Seed-merchant%20and%20road-reader%20coming%20down%20from%20the%20northeast%20passes%2C%20carrying%20early-spring%20stock%20and%2C%20A%20man%20who%20has%20been%20talking%20to%20nobody%20but%20the%20road%20for%20three%20days%20and%20is%20genuinely%20glad%20to%20see%20you.%20V%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66875&nologo=true"
+      }
+    },
     "location": {
       "gen-the-lower-chamber": {
         "id": "gen-the-lower-chamber",
@@ -3141,12 +3248,25 @@
         "connections": [
           "harmonic_heights_terrace"
         ],
-        "_gen": true,
+        "_gen": {
+          "entityId": "gen-the-lower-chamber",
+          "type": "location",
+          "birthWeight": 1,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": null,
+          "attentionHistory": [],
+          "createdDay": null,
+          "provenance": {
+            "healed": "sng-216-backfill"
+          }
+        },
         "_mintedAs": "transit",
         "map": {
           "x": 642.5221357341223,
           "y": 154.0432512816442
-        }
+        },
+        "dangerLevel": 2
       }
     },
     "arc": {}
@@ -3154,7 +3274,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 49
+    "valley": 50
   },
   "company": [],
   "foreclosed": [],
@@ -3169,6 +3289,94 @@
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
   "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=15431&nologo=true",
   "gallery": [
+    {
+      "kind": "ability",
+      "prompt": "The Green Claim",
+      "url": "https://image.pollinations.ai/prompt/The%20Green%20Claim%3A%20Call%20living%20growth%20into%20action%3A%20impede%2C%20constrict%2C%20strike.%20The%20living%20world%20mobilises%20against%20what%20the%20Rootkin%20names%20as%20threat%20%E2%80%94%20and%20it%20also%20tells%20them%20what%20it%20has%20sensed.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20rootkin%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=46481&nologo=true",
+      "caption": "The Green Claim",
+      "worldDay": 23,
+      "at": "2026-07-23T22:55:46.912Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Noesis",
+      "url": "https://image.pollinations.ai/prompt/Noesis%3A%20The%20mind-pole%20mastery%3A%20memory%2C%20focus%2C%20reason%2C%20thought%20as%20an%20instrument%20sharp%20enough%20to%20act%20on%20the%20world.%20The%20Cogitarium's%20art.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=79356&nologo=true",
+      "caption": "Noesis",
+      "worldDay": 23,
+      "at": "2026-07-23T22:55:01.804Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Held Form",
+      "url": "https://image.pollinations.ai/prompt/The%20Held%20Form%3A%20Sustain%20something%20by%20maintaining%20its%20correct%20form%20in%20your%20mind%20%E2%80%94%20the%20pattern%20held%20is%20the%20thing%20held.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20figurist%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30301&nologo=true",
+      "caption": "The Held Form",
+      "worldDay": 23,
+      "at": "2026-07-23T22:54:59.782Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Walking Figure",
+      "url": "https://image.pollinations.ai/prompt/The%20Walking%20Figure%3A%20Send%20a%20made%20figure%20to%20act%20at%20a%20distance%20%E2%80%94%20a%20symbol%20given%20errand%20and%20enough%20form%20to%20run%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20figurist%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=54629&nologo=true",
+      "caption": "The Walking Figure",
+      "worldDay": 23,
+      "at": "2026-07-23T22:54:48.252Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Wrong Moment",
+      "url": "https://image.pollinations.ai/prompt/The%20Wrong%20Moment%3A%20Strike%20or%20act%20at%20the%20precise%20moment%20when%20the%20other%20person%20cannot%20respond%20%E2%80%94%20the%20hourkeeper's%20harm%20is%20perfect%20timing%2C%20not%20force.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20hourkeeper%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=22365&nologo=true",
+      "caption": "The Wrong Moment",
+      "worldDay": 23,
+      "at": "2026-07-23T22:54:37.322Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Shatterpoint",
+      "url": "https://image.pollinations.ai/prompt/Shatterpoint%3A%20Find%20the%20single%20point%20where%20a%20thing%20will%20break%3A%20strike%20there%2C%20or%20warn%20of%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20harmonic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=53210&nologo=true",
+      "caption": "Shatterpoint",
+      "worldDay": 23,
+      "at": "2026-07-23T22:54:22.114Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Work Speaks",
+      "url": "https://image.pollinations.ai/prompt/The%20Work%20Speaks%3A%20Let%20the%20made%20thing%20speak.%20The%20quality%20of%20your%20work%20commands%20a%20kind%20of%20authority%20no%20argument%20reaches.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=26238&nologo=true",
+      "caption": "The Work Speaks",
+      "worldDay": 23,
+      "at": "2026-07-23T22:54:04.777Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Judged Strike",
+      "url": "https://image.pollinations.ai/prompt/The%20Judged%20Strike%3A%20Strike%20with%20the%20weight%20of%20judgment%20%E2%80%94%20the%20blow%20carries%20condemnation%3B%20the%20target%20knows%20what%20it%20means.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=95219&nologo=true",
+      "caption": "The Judged Strike",
+      "worldDay": 23,
+      "at": "2026-07-23T22:53:39.268Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Weapon at Hand",
+      "url": "https://image.pollinations.ai/prompt/The%20Weapon%20at%20Hand%3A%20Build%20a%20functional%20weapon%20from%20whatever%20is%20to%20hand%20%E2%80%94%20quickly%2C%20correctly%2C%20with%20enough%20craft%20that%20it%20will%20do%20what%20it%20needs%20to.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=2583&nologo=true",
+      "caption": "The Weapon at Hand",
+      "worldDay": 23,
+      "at": "2026-07-23T22:53:33.116Z"
+    },
+    {
+      "kind": "discovery",
+      "prompt": "Light and vibration read together: see a thing by how it rings and refracts at once. Hidden seams, hollow places, and stress-signatures show themselves — what a surface conceals is betrayed by how it ",
+      "url": "https://image.pollinations.ai/prompt/Resonant%20Sight%20%E2%80%94%20Light%20and%20vibration%20read%20together%3A%20see%20a%20thing%20by%20how%20it%20rings%20and%20refracts%20at%20once.%20Hidden%20seams%2C%20hollow%20places%2C%20and%20stress-signatures%20show%20themselves%20%E2%80%94%20what%20a%20surface%20conceals%20is%20betrayed%20by%20how%20it%20answers%20the%20braided%20field.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=4725&nologo=true",
+      "caption": "Resonant Sight",
+      "worldDay": 23,
+      "at": "2026-07-23T22:49:23.704Z"
+    },
+    {
+      "kind": "npc",
+      "prompt": "Oswin Dray",
+      "url": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20man%20somewhere%20in%20his%20middle%20forties%2C%20gone%20a%20little%20soft%20at%20the%20jaw%20from%20too%20many%20road-meals%20and%20not%20enough%20of%20anything%20else.%20Sun-darkened%20from%20the%20brow%20down%2C%20pale%20above%20the%20hat-line%2C%20character%20portrait%2C%20named%20Oswin%20Dray%2C%20Seed-merchant%20and%20road-reader%20coming%20down%20from%20the%20northeast%20passes%2C%20carrying%20early-spring%20stock%20and%2C%20A%20man%20who%20has%20been%20talking%20to%20nobody%20but%20the%20road%20for%20three%20days%20and%20is%20genuinely%20glad%20to%20see%20you.%20V%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66875&nologo=true",
+      "caption": "Oswin Dray",
+      "worldDay": 23,
+      "at": "2026-07-23T13:30:10.856Z"
+    },
     {
       "kind": "moment",
       "prompt": "A hemispherical underground chamber lit only by a warm constellation of teal motes gathered close before a standing figure. Two people stand together at the room's center where three channels meet in ",
@@ -3255,6 +3463,14 @@
       "startDay": 23,
       "endDay": 23,
       "beats": 6
+    },
+    {
+      "id": "sess-5",
+      "startedAt": "2026-07-24T14:10:59.537Z",
+      "lastAt": "2026-07-24T14:10:59.537Z",
+      "startDay": 24,
+      "endDay": 24,
+      "beats": 1
     }
   ],
   "_pendingArrival": null,
@@ -3308,13 +3524,13 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 38,
-    "choices": 38,
-    "characterDeltas": 23,
-    "scene": 38,
+    "sceneSummary": 39,
+    "choices": 39,
+    "characterDeltas": 24,
+    "scene": 39,
     "npcUpdates": 34,
     "codexUpdates": 34,
-    "timeOps": 37,
+    "timeOps": 38,
     "sceneEnded": 20,
     "placeUpdates": 24,
     "moveTo": 2,
@@ -3324,9 +3540,9 @@
     "stageOps": 1,
     "scene_ended": 1,
     "imagePrompt": 2,
-    "generateRequest": 1
+    "generateRequest": 2
   },
-  "_opTurns": 38,
+  "_opTurns": 39,
   "_intentAsked": null,
   "corrections": [
     {
@@ -3356,5 +3572,46 @@
       "rejected": 0,
       "lastWhy": null
     }
+  },
+  "locationAliases": {
+    "gen-center": "the_crossing",
+    "gen-stillwater-s-trouble": "the_old_warden_post"
+  },
+  "_suggestCache": {
+    "level": 10,
+    "picks": [
+      {
+        "abilityId": "tinkers_hand",
+        "why": "You declared this your goal and you're halfway there — with Prism Sight, Sonic Resonance, and Shatterlight already in hand, a cerebral strategist who reads every room but can't yet fix or improvise from broken parts has a glaring functional gap, and this closes it directly.",
+        "fit": "aspiration"
+      },
+      {
+        "abilityId": "echo_memory",
+        "why": "Your top three crafts are all about reading situations before acting — Prism Sight, Sonic Resonance, Keen Appraisal — but they're all present-tense; Echo Memory extends that intelligence-gathering backward in time, letting the cautious cerebral strategist reconstruct what happened in a place rather than arriving blind.",
+        "fit": "synergy"
+      },
+      {
+        "abilityId": "prism_ward",
+        "why": "You already run Prism Sight r2 and Shatterlight r2 but have no standing perimeter — a cautious, patient character who reads threats early has no tool to guard a position while they plan; Prism Ward plugs that gap and deepens your existing light-school signature rather than branching away from it.",
+        "fit": "gap"
+      },
+      {
+        "abilityId": "stillness_field",
+        "why": "You have Sonic Resonance at r3 — your most-used craft — but no way to control the sound environment defensively; Stillness Field turns your mastery of sound into active cover for the cautious, non-physical character who needs to move or plan without being heard.",
+        "fit": "synergy"
+      }
+    ],
+    "note": "Tinker's Hand is the obvious call this level — you said you wanted it and you're halfway there. The other three are genuine alternatives if you want to deepen your intelligence or defensive game first."
+  },
+  "abilityImages": {
+    "the_weapon_at_hand": "https://image.pollinations.ai/prompt/The%20Weapon%20at%20Hand%3A%20Build%20a%20functional%20weapon%20from%20whatever%20is%20to%20hand%20%E2%80%94%20quickly%2C%20correctly%2C%20with%20enough%20craft%20that%20it%20will%20do%20what%20it%20needs%20to.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=2583&nologo=true",
+    "the_judged_strike": "https://image.pollinations.ai/prompt/The%20Judged%20Strike%3A%20Strike%20with%20the%20weight%20of%20judgment%20%E2%80%94%20the%20blow%20carries%20condemnation%3B%20the%20target%20knows%20what%20it%20means.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=95219&nologo=true",
+    "the_work_speaks": "https://image.pollinations.ai/prompt/The%20Work%20Speaks%3A%20Let%20the%20made%20thing%20speak.%20The%20quality%20of%20your%20work%20commands%20a%20kind%20of%20authority%20no%20argument%20reaches.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=26238&nologo=true",
+    "shatterpoint": "https://image.pollinations.ai/prompt/Shatterpoint%3A%20Find%20the%20single%20point%20where%20a%20thing%20will%20break%3A%20strike%20there%2C%20or%20warn%20of%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20harmonic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=53210&nologo=true",
+    "the_wrong_moment": "https://image.pollinations.ai/prompt/The%20Wrong%20Moment%3A%20Strike%20or%20act%20at%20the%20precise%20moment%20when%20the%20other%20person%20cannot%20respond%20%E2%80%94%20the%20hourkeeper's%20harm%20is%20perfect%20timing%2C%20not%20force.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20hourkeeper%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=22365&nologo=true",
+    "the_walking_figure": "https://image.pollinations.ai/prompt/The%20Walking%20Figure%3A%20Send%20a%20made%20figure%20to%20act%20at%20a%20distance%20%E2%80%94%20a%20symbol%20given%20errand%20and%20enough%20form%20to%20run%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20figurist%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=54629&nologo=true",
+    "the_held_form": "https://image.pollinations.ai/prompt/The%20Held%20Form%3A%20Sustain%20something%20by%20maintaining%20its%20correct%20form%20in%20your%20mind%20%E2%80%94%20the%20pattern%20held%20is%20the%20thing%20held.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20figurist%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30301&nologo=true",
+    "noesis": "https://image.pollinations.ai/prompt/Noesis%3A%20The%20mind-pole%20mastery%3A%20memory%2C%20focus%2C%20reason%2C%20thought%20as%20an%20instrument%20sharp%20enough%20to%20act%20on%20the%20world.%20The%20Cogitarium's%20art.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=79356&nologo=true",
+    "the_green_claim": "https://image.pollinations.ai/prompt/The%20Green%20Claim%3A%20Call%20living%20growth%20into%20action%3A%20impede%2C%20constrict%2C%20strike.%20The%20living%20world%20mobilises%20against%20what%20the%20Rootkin%20names%20as%20threat%20%E2%80%94%20and%20it%20also%20tells%20them%20what%20it%20has%20sensed.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20rootkin%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=46481&nologo=true"
   }
 }

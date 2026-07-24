@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "tradition_motivations",
  "kind": "lore",
- "note": "SNG (world-design 2026-07-22, Erik direction): every tradition's motivation and its stake in the world arcs. A few prominent traditions warrant their own arc; all 24 have a documented stake in an existing arc. The stake is the tradition's disposition UNDER PRESSURE; the villainy is its cultOfPurity (the extreme it pulls toward). This is the map the GM reads to know why a tradition acts, and the seed the wake engine (SNG-204) and future tradition-arcs (SNG-203 §4) draw from. | SNG-229 weave (Aevi 2026-07-22): each affected tradition gains a `dreads` (and ashwarden a `dreadsAlso`) naming the bestiary creature that defeats ITS craft specifically — the fear is craft-specific, per Erik's ask. Creature ids resolve against the loaded content/packs/valley/bestiary.json.",
+ "note": "SNG (world-design 2026-07-22, Erik direction): every tradition's motivation and its stake in the world arcs. A few prominent traditions warrant their own arc; all 24 have a documented stake in an existing arc. The stake is the tradition's disposition UNDER PRESSURE; the villainy is its cultOfPurity (the extreme it pulls toward). This is the map the GM reads to know why a tradition acts, and the seed the wake engine (SNG-204) and future tradition-arcs (SNG-203 §4) draw from. | SNG-229 weave (Aevi 2026-07-22): each affected tradition gains a `dreads` (and ashwarden a `dreadsAlso`) naming the bestiary creature that defeats ITS craft specifically — the fear is craft-specific, per Erik's ask. Creature ids resolve against the loaded content/packs/valley/bestiary.json. | SNG-229 wants folded (Aevi 2026-07-24): each dreaded creature's WANT (who wants what about it) attached as creatureWants[] on the tradition that fears it — the want half of the fear->want->quest chain.",
  "theFrame": "The Poles Pull (arc_the_poles_pull) is EVERY tradition's arc — it is the world-scale statement of each pole intensifying. A tradition's stake in it is simply: does it pull toward its own extreme, or hold the middle? The other four arcs are where specific traditions have a HOME — a thread that is theirs before it is anyone's.",
  "traditions": {
   "blazeborn": {
@@ -39,7 +39,14 @@
    "dreadsAlso": {
     "creature": "the_bloom_that_hungers",
     "why": "Growth that grows to EAT — beauty as bait, a hill-sized mouth. The Rootkin's own gift of flourishing turned predator; proof that growth is not always good."
-   }
+   },
+   "creatureWants": [
+    {
+     "creature": "warpling_hare",
+     "who": "a downstream settlement",
+     "what": "the warplings cleared from the water-source before the wrongness spreads to the herd — desperate, and willing to trade real coin or standing"
+    }
+   ]
   },
   "ashwarden": {
    "axis": "death_life",
@@ -59,7 +66,14 @@
    "dreadsWithin": {
     "creature": "the_pure_of_ash",
     "why": "Not a fear of an outside thing but of what an Ashwarden CAN become: one who decided the mercy of stopping should be given to everyone, unasked. The cult-of-purity ate the warden. Every Ashwarden half-fears they could be hollowed the same way."
-   }
+   },
+   "creatureWants": [
+    {
+     "creature": "the_wrong_stag",
+     "who": "a Lattice-city broker (and quietly, a Figurist)",
+     "what": "the lattice-antler, intact — it hums with something that resolved wrong, and to the right buyer that's a key, a proof, or a fortune"
+    }
+   ]
   },
   "marcher": {
    "axis": "violence_peace",
@@ -123,7 +137,14 @@
    "dreadsAlso": {
     "creature": "the_unrefusing_blade",
     "why": "A person bound to a Lattice-contract they can no longer break — the order the Lattice loves, become a hand that will not stop. Their binding of possibility, worn by a spent assassin."
-   }
+   },
+   "creatureWants": [
+    {
+     "creature": "tessellith",
+     "who": "a Mason survey-crew",
+     "what": "the ground it crawls made safe again — they can't build on block-logic that bites, and they'll fund a clearing to get their site back"
+    }
+   ]
   },
   "enginewright": {
    "axis": "mechanical_spiritual",
@@ -159,7 +180,14 @@
    "dreadsAlso": {
     "creature": "weeping_stone",
     "why": "Grief with no one grieving it — Threnodist sorrow manifested into slow rock that drains everyone near into stopping. Their sacred feeling, become a thing that feels FOR you until you can't."
-   }
+   },
+   "creatureWants": [
+    {
+     "creature": "the_unmoored_choir",
+     "who": "everyone within reach of it",
+     "what": "it stopped before it grows — this is past 'want' into need; a domain-scale threat that will not stay where it is"
+    }
+   ]
   },
   "syllogist": {
    "axis": "emotional_logical",
@@ -179,7 +207,14 @@
    "dreads": {
     "creature": "glimmerling_swarm",
     "why": "A thing the eye can't fix in place long enough to be worked — and the one craft a Veilwright can't do is look away."
-   }
+   },
+   "creatureWants": [
+    {
+     "creature": "glimmerling_swarm",
+     "who": "lamp-keepers and night-market folk",
+     "what": "the swarms stripped from the trade-roads before they blind a caravan at the wrong moment — a standing bounty, low but steady"
+    }
+   ]
   },
   "verist": {
    "axis": "falsehood_truth",
@@ -271,7 +306,14 @@
    "dreads": {
     "creature": "hollow_pace",
     "why": "A made thing that outlived its maker and its purpose, still walking. The Wrights' own nightmare of their work: a creation that continues past all meaning."
-   }
+   },
+   "creatureWants": [
+    {
+     "creature": "hollow_pace",
+     "who": "the Enginewrights",
+     "what": "one taken INTACT — its rotted directive is a readable record of a pre-Transition system, worth more captured than broken; they'll pay well and ask no questions about the mess"
+    }
+   ]
   }
  },
  "prominentArcHolders": {

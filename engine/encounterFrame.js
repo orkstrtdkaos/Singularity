@@ -86,16 +86,26 @@ export function chaseFromFight(fightDef) {
 // craft slipping a chase, a KNOW craft cracking a puzzle). This is NOT an auto-win: it resolves along the
 // resolver's degree bands, and a foe too great can't be one-beat-ended (you fight the stages). All pure.
 
-/** §6c / OQ6: can this frame be ENDED in one beat by a finisher? Tier-gated — an epic (the Ashen Wyrm) never
- *  (you fight the stages); a danger-4 thing resists; riffraff/notable/ordinary yes. Extends canIncapacitate's
- *  spirit to "collapsible". Pure over the def's size signal. */
-export function frameCollapsible(def) {
+const DEGREE_RANK = { crit_failure: 0, failure: 1, partial: 2, success: 3, crit_success: 4 };
+
+/** §6c / OQ6 + Erik (easier vs weaker foes): how EASILY a foe collapses — the degree AT OR ABOVE which a
+ *  finisher ends it in one beat. A riffraff drops on a solid hit (`success`); a notable needs a clean crit; the
+ *  great ones (epic/regional/danger-4) never collapse (null) — you fight them through. Tier first, then danger.
+ *  Pure over the def's size signal. */
+export function collapseFloor(def) {
   const tier = def?.tier || null;
-  if (tier === "epic" || tier === "regional") return false; // the great ones aren't ended in a single stroke
-  if (tier === "riffraff" || tier === "notable") return true;
+  if (tier === "epic" || tier === "regional") return null;
+  if (tier === "riffraff") return "success";
+  if (tier === "notable") return "crit_success";
   const danger = [def?.danger, def?.minDanger, def?.dangerLevel].find(d => Number.isFinite(d));
-  if (Number.isFinite(danger)) return danger < 4;
-  return true;
+  if (Number.isFinite(danger)) return danger >= 4 ? null : danger >= 2 ? "crit_success" : "success";
+  return "crit_success"; // unknown → conservative (a clean crit only)
+}
+
+/** §6c: can this frame be ENDED in one beat AT ALL (by a good enough finisher)? A foe with no collapse floor
+ *  (epic/regional/danger-4) never can — surfaced so the frame can say "too great to end in one stroke". Pure. */
+export function frameCollapsible(def) {
+  return collapseFloor(def) !== null;
 }
 
 /** §6c: which crafts can ATTEMPT a collapse — FAMILY-driven (no per-ability list; per the P1 correction there is
@@ -110,20 +120,31 @@ export function collapseMode(families, kind) {
   return null;
 }
 
-/** §7a: the finisher resolves ALONG the resolver's existing degree bands (crit_success…crit_failure). The TOP
- *  collapses a collapsible target (instant end); the middle is graded (a hard/partial hit — the encounter
- *  continues from a better/worse spot); the BOTTOM morphs (the whiff hardens it). A NON-collapsible target caps
- *  at a hard hit — no one-beat end, however clean the strike. Returns one of:
+/** §7a (Erik: mitigated below a finish): the finisher resolves ALONG the resolver's degree bands, against the
+ *  foe's collapse `floor`. At/above the floor → COLLAPSE (instant end). BELOW it, the finisher is MITIGATED —
+ *  a hard/partial hit that advances but doesn't end; a whiff MORPHS (the botch hardens it / backfires). A foe
+ *  with no floor (too great) never collapses, however clean the strike. `floor` comes from collapseFloor(def) —
+ *  weaker foes have a lower floor, so a good-but-not-crit roll can still drop them. Returns one of:
  *  "collapse" | "hard" | "partial" | "morph" | "morph_bad". Pure. */
-export function collapseResult(degree, { collapsible = true } = {}) {
-  switch (degree) {
-    case "crit_success": return collapsible ? "collapse" : "hard";
-    case "success": return "hard";
-    case "partial": return "partial";
-    case "failure": return "morph";
-    case "crit_failure": return "morph_bad";
-    default: return "partial";
-  }
+export function collapseResult(degree, { floor = "crit_success" } = {}) {
+  const r = DEGREE_RANK[degree] ?? DEGREE_RANK.partial;
+  if (floor && r >= DEGREE_RANK[floor]) return "collapse";
+  if (degree === "crit_success" || degree === "success") return "hard";
+  if (degree === "partial") return "partial";
+  if (degree === "failure") return "morph";
+  return "morph_bad"; // crit_failure
+}
+
+/** §6b in the SKILL-BATTLE meter (Erik: a good roll can end a fight too): map a battle round's momentum SWING
+ *  (delta, vs meterMax) to a pseudo-degree, so a decisive finisher blow reads as crit/success and a glancing
+ *  one as partial/failure — then collapseResult(floor) decides. Keeps the ordinary meter untouched (§89): this
+ *  only ever ENDS a fight EARLY on a strong finisher against a collapsible foe; lesser swings run the meter. */
+export function swingDegree(delta, meterMax) {
+  const f = meterMax > 0 ? (delta || 0) / meterMax : 0;
+  if (f >= 0.6) return "crit_success";
+  if (f >= 0.35) return "success";
+  if (f >= 0.15) return "partial";
+  return "failure";
 }
 
 /** Which frame KIND an encounter is. def.type is the structural truth (duel/challenge/puzzle); flavor themes the

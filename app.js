@@ -64,12 +64,12 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
-import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, frameCollapsible } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe in one beat (§6b/§7a)
+import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a), easier vs weaker foes (floor) + in the skill-battle meter (swingDegree)
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.253";
+const APP_VERSION = "1.8.254";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4448,7 +4448,7 @@ async function onChoice(choice) {
       // reach here (their own meter — guard §89); this is the classic-duel / challenge / puzzle path.
       if (!outcome && choice.abilityId && frameCollapsible(enc.def)) {
         const mode = collapseMode(familiesOfAbility(fullCatalog()[choice.abilityId], FN_INDEX), encounterKind(enc.def));
-        if (mode && collapseResult(resolution.degree, { collapsible: true }) === "collapse") {
+        if (mode && collapseResult(resolution.degree, { floor: collapseFloor(enc.def) }) === "collapse") {
           outcome = mode === "solve" ? "solved" : (mode === "finish" && enc.def.type === "duel") ? "opponent_fell" : "completed";
           resolution.collapse = { mode, craft: fullCatalog()[choice.abilityId]?.name || null }; // the GM narrates the one-beat end
           rr.state.status = "ended";
@@ -7664,7 +7664,20 @@ function sbDeclare(skill, { intensity = "standard", scouting = false } = {}) {
   const enc = activeEnc(); if (!enc) return;
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   const decl = { function: skill.function, tier: skill.tier || 1, attribute: skill.attribute || "practical", intensity, name: skill.name };
-  const rr = skillBattleRound(enc.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
+  let rr = skillBattleRound(enc.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
+  // SNG-230 §6b (Erik: a good roll can end a fight too, easier vs weaker foes): a decisive HARM FINISHER can
+  // COLLAPSE the skill-battle EARLY — the round's momentum SWING is mapped to a degree and checked against the
+  // foe's collapse floor. A strong swing on the right craft ends it; a lesser swing runs the meter unchanged
+  // (§89 — the ordinary rounds are untouched; this only adds an early-finish on a decisive blow, and the great
+  // ones (epic/regional) have no floor, so they never collapse). Skipped while scouting (a read isn't a strike).
+  if (!rr.ended && !scouting && frameCollapsible(enc.def)) {
+    const fam = FN_INDEX?.verbToFamily?.[skill.function] || null;
+    const swing = (rr.state?.momentum ?? 0) - (enc.state?.momentum ?? 0);
+    const meterMax = sb.momentum?.meterMax ?? 10;
+    if (collapseMode([fam], "fight") === "finish" && swing > 0 && collapseResult(swingDegree(swing, meterMax), { floor: collapseFloor(enc.def) }) === "collapse") {
+      rr = { ...rr, ended: true, outcome: "opponent_fell", state: { ...rr.state, status: "ended" }, _collapse: true };
+    }
+  }
   if (!scouting) sbLastPlayerFn = skill.function; // reading doesn't show them a real tendency
   character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas?.health || 0)));
   character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
@@ -7702,7 +7715,9 @@ async function sbEnd(rr) {
     incapacitated: `You fall, overcome.`
   }[rr.outcome] || "The contest ends.";
   renderPlay(null, { thinking: "…" });
-  const result = await runGM({ resolution: null, playerInput: `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine} Narrate the aftermath in one beat and return to the scene.)` });
+  // SNG-230 §6b: a collapse is a DECISIVE one-beat finish, not a worn-down win — narrate it as such.
+  const finisherNote = rr._collapse ? " This was a single decisive finishing stroke — end it fast and hard, not as a drawn-out win." : "";
+  const result = await runGM({ resolution: null, playerInput: `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine}${finisherNote} Narrate the aftermath in one beat and return to the scene.)` });
   if (result) renderPlay(result.turn, {});
   else renderPlay(character.activeScene?.lastTurn || null, { aside: outLine });
 }

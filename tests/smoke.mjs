@@ -27,7 +27,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
-import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
+import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, collapseFloor, swingDegree, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -7966,13 +7966,23 @@ await (async () => {
   check("230 §6c: collapseMode is FAMILY-driven — HARM finishes a fight/hazard, MOVE slips a chase, KNOW cracks a puzzle; wrong family → null",
     collapseMode(["HARM"], "fight") === "finish" && collapseMode(["MOVE"], "chase") === "escape" && collapseMode(["KNOW"], "puzzle") === "solve" &&
     collapseMode(["MOVE"], "fight") === null && collapseMode(["HARM"], "chase") === null && collapseMode([], "fight") === null);
-  check("230 §7a: collapseResult walks the degree bands — crit collapses a collapsible foe, but only caps at 'hard' on a non-collapsible one; a whiff morphs",
-    collapseResult("crit_success", { collapsible: true }) === "collapse" && collapseResult("crit_success", { collapsible: false }) === "hard" &&
-    collapseResult("success") === "hard" && collapseResult("partial") === "partial" && collapseResult("failure") === "morph" && collapseResult("crit_failure") === "morph_bad");
+  // Erik: EASIER vs weaker foes + MITIGATED below a finish — a tier-scaled floor, graded by degree.
+  check("230 §7a: collapseFloor scales by foe — a riffraff drops on a solid 'success', a notable needs a crit, the great ones never collapse",
+    collapseFloor({ tier: "riffraff" }) === "success" && collapseFloor({ tier: "notable" }) === "crit_success" && collapseFloor({ tier: "epic" }) === null && collapseFloor({ tier: "regional" }) === null && collapseFloor({ danger: 4 }) === null);
+  check("230 §7a: collapseResult COLLAPSES at/above the floor, MITIGATES below it (hard/partial), MORPHS on a whiff",
+    collapseResult("success", { floor: "success" }) === "collapse" && collapseResult("success", { floor: "crit_success" }) === "hard" &&
+    collapseResult("crit_success", { floor: null }) === "hard" && collapseResult("partial", { floor: "success" }) === "partial" &&
+    collapseResult("failure", { floor: "success" }) === "morph" && collapseResult("crit_failure", { floor: "success" }) === "morph_bad");
+  check("230 §7a: a riffraff collapses on a solid success; a notable does NOT (same roll) — easier vs weaker foes",
+    collapseResult("success", { floor: collapseFloor({ tier: "riffraff" }) }) === "collapse" && collapseResult("success", { floor: collapseFloor({ tier: "notable" }) }) === "hard");
+  check("230 §6b: swingDegree maps a skill-battle momentum swing to a degree (a big swing reads as a decisive blow)",
+    swingDegree(7, 10) === "crit_success" && swingDegree(4, 10) === "success" && swingDegree(2, 10) === "partial" && swingDegree(0.5, 10) === "failure");
   check("230 §6b: frameModel surfaces collapsibility (the finisher gamble is on the table, legibly)",
     frameModel({ type: "duel", tier: "riffraff" }, {}, null).collapsible === true && frameModel({ type: "duel", tier: "epic" }, {}, null).collapsible === false);
-  check("230 §6b WIRING: onChoice applies a crit finisher COLLAPSE on the non-skill-battle path (guard §89), reading family + degree + collapsibility",
-    /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ collapsible: true \}\) === "collapse"/.test(appSrc230) && /resolution\.collapse = \{ mode/.test(appSrc230));
+  check("230 §6b WIRING: onChoice applies a finisher COLLAPSE on the non-skill-battle path (guard §89), reading family + degree + the foe's floor",
+    /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ floor: collapseFloor\(enc\.def\) \}\) === "collapse"/.test(appSrc230) && /resolution\.collapse = \{ mode/.test(appSrc230));
+  check("230 §6b WIRING: a decisive HARM finisher can END the SKILL-BATTLE early (Erik) — momentum swing → degree → floor, meter otherwise untouched",
+    /collapseMode\(\[fam\], "fight"\) === "finish" && swing > 0 && collapseResult\(swingDegree\(swing, meterMax\), \{ floor: collapseFloor\(enc\.def\) \}\) === "collapse"/.test(appSrc230) && /outcome: "opponent_fell", state: \{ \.\.\.rr\.state, status: "ended" \}, _collapse: true/.test(appSrc230));
   check("230 §6b: the finisher gamble is surfaced in the frame (collapsible vs too-great)",
     /enc-frame-collapse/.test(appSrc230) && /A decisive finisher could end this in one beat/.test(appSrc230));
 }

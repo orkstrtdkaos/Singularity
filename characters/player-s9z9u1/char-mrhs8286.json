@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 22,
-  "xp": 2116,
+  "xp": 2121,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -144,7 +144,7 @@
   "maxHealth": 135,
   "health": 135,
   "maxEnergy": 205,
-  "energy": 196,
+  "energy": 192,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1770,62 +1770,68 @@
         "player": "Cross to Huginn and knock on the mill's door — Crane needs to be met face to face.",
         "summary": "The party crosses to the mill and knocks — Crane opens the door.",
         "narration": "You step onto the plank and cross. The wood shifts once under your weight but holds, and you come up onto the far bank where Huginn stands near the foundation stones. The bird does not move aside for you. It simply angles its eye back toward the window, which is the whole of its instruction.\n\nPell crosses behind you. Veth follows last, her boots finding the same steady center of the plank without looking down. The three of you stand at the mill's north face for a moment — the wheel turning slow to your right, the lamp burning in the ground-floor window, the smell of the channel water close.\n\nThe door is plain timber, iron-banded, with a bar-slot on the inside but no lock visible from out here. You knock twice — not loud, not tentative. The knock of someone who expects to be heard.\n\nThere is a pause. Then the sound of a chair scraping back from a table. Then footsteps — measured, unhurried, not startled. The bar lifts from the inside and the door opens onto a man who looks at you the way a man looks at something he has been waiting to see, and is not certain whether that means good news or bad."
+      },
+      {
+        "player": "Hold back and read him first with Deathsense — understand what is ending inside this man before you say anything.",
+        "summary": "Silas reads Crane at the threshold — a slow ending in the chest, a long-held accounting behind the eyes. Crane speaks first.",
+        "narration": "You hold the threshold and let Deathsense open — quiet, restrained, the way you would check a patient's pulse before reaching for anything sharper.\n\nCrane is ending. Not today, not this season — but the trajectory is there, plain as a road: something in the chest, something slow, the kind of thing that announces itself in small ways before it begins to shout. You file it without showing it on your face. A man who has been calculating an answer for a long time, Veth said. The Deathsense agrees — he is not in a hurry because he has already done the accounting.\n\nHis eyes are steady on yours. He is not frightened of you. He is deciding whether you are useful.\n\n\"You are not from the committee,\" he says, and it is not quite a question. His voice is level, mid-range, the voice of someone who prefers facts to conclusions. He is still holding the door. He has not stepped back to invite you in and he has not moved to close it."
       }
     ],
     "lastTurn": {
-      "narration": "You step onto the plank and cross. The wood shifts once under your weight but holds, and you come up onto the far bank where Huginn stands near the foundation stones. The bird does not move aside for you. It simply angles its eye back toward the window, which is the whole of its instruction.\n\nPell crosses behind you. Veth follows last, her boots finding the same steady center of the plank without looking down. The three of you stand at the mill's north face for a moment — the wheel turning slow to your right, the lamp burning in the ground-floor window, the smell of the channel water close.\n\nThe door is plain timber, iron-banded, with a bar-slot on the inside but no lock visible from out here. You knock twice — not loud, not tentative. The knock of someone who expects to be heard.\n\nThere is a pause. Then the sound of a chair scraping back from a table. Then footsteps — measured, unhurried, not startled. The bar lifts from the inside and the door opens onto a man who looks at you the way a man looks at something he has been waiting to see, and is not certain whether that means good news or bad.",
-      "sceneSummary": "The party crosses to the mill and knocks — Crane opens the door.",
+      "narration": "You hold the threshold and let Deathsense open — quiet, restrained, the way you would check a patient's pulse before reaching for anything sharper.\n\nCrane is ending. Not today, not this season — but the trajectory is there, plain as a road: something in the chest, something slow, the kind of thing that announces itself in small ways before it begins to shout. You file it without showing it on your face. A man who has been calculating an answer for a long time, Veth said. The Deathsense agrees — he is not in a hurry because he has already done the accounting.\n\nHis eyes are steady on yours. He is not frightened of you. He is deciding whether you are useful.\n\n\"You are not from the committee,\" he says, and it is not quite a question. His voice is level, mid-range, the voice of someone who prefers facts to conclusions. He is still holding the door. He has not stepped back to invite you in and he has not moved to close it.",
+      "sceneSummary": "Silas reads Crane at the threshold — a slow ending in the chest, a long-held accounting behind the eyes. Crane speaks first.",
       "choices": [
         {
-          "label": "Name yourself plainly and tell him why you've come — the water, the contamination, the second thread.",
+          "label": "Name yourself plainly — warden and wright, here about the water, sent by your father's name and by the Waymarker.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "persuade"
           ],
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Hold back and read him first with Deathsense — understand what is ending inside this man before you say anything.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": true
-        },
-        {
-          "label": "Let Veth lead the introduction — she is Ashwarden, she carries the March's weight, and Crane may read that before he reads you.",
+          "label": "Answer his read honestly — you are not from the committee. Tell him what you ARE and let him decide what that means.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "careful"
+            "negotiate"
           ],
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Show him the Letter of Introduction from Warden Coll — let the committee's authority open the room before words do.",
-          "attribute": "practical",
+          "label": "Let the silence sit one breath longer and watch what he does with it — a man waiting for someone has already rehearsed what he means to say.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Let Huginn move first — step aside so Crane can see the bird clearly, and read his reaction to it.",
+          "attribute": "mental",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "study"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "energy": -2
+      },
       "scene": {
-        "setting": "North face of the mill, afternoon — the party on the bank side of the door, which is now open. The wheel turns slow to the right. Lamp burning in the ground-floor interior beyond the threshold.",
+        "setting": "North face of the mill, afternoon — the party at the threshold, door open, lamp burning in the ground-floor interior. Wheel turning slow to the right.",
         "npcsPresent": [
           {
             "name": "Edvar Crane",
-            "state": "Standing in the open doorway — bar lifted, door held, eyes on Silas. Waiting to hear what kind of visit this is."
+            "state": "Holding the door open, eyes on Silas — steady, deciding. Has spoken: 'You are not from the committee.'"
           },
           {
             "name": "Pell Ran Marsh",
@@ -1837,7 +1843,7 @@
           },
           {
             "name": "Huginn",
-            "state": "At the foundation stones, eye on the doorway now rather than the window."
+            "state": "At the foundation stones, eye on the doorway and on Crane."
           }
         ],
         "objects": [
@@ -1848,46 +1854,50 @@
           "Lamp burning in the ground-floor interior"
         ],
         "threads": [
-          "Crane opened the door as a man waiting for something — what does he know, and who did he expect?",
-          "Huginn's read: something is ending inside this mill, slow and long underway",
-          "The intake treatment's purpose still unread — Crane must speak it"
+          "Crane has not invited the party in — he is still deciding whether they are useful",
+          "Crane's read: 'You are not from the committee' — what does he know, and who did he expect?",
+          "Deathsense reading: something in the chest, slow, long underway — Crane has already done the accounting on his own time",
+          "Huginn's earlier read: something is ending inside this mill, slow and long underway — now confirmed at the body level"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "edvar-crane",
           "name": "Edvar Crane",
-          "role": "Mill resident, boards at the north-edge mill — buying sealed water rather than using the well",
-          "gender": "man",
-          "pronouns": "he/him",
-          "description": "A man of perhaps fifty, steady-handed, with the look of someone who has been calculating something for a long time and has reached an answer he is not glad of.",
-          "note": "Opened the door without alarm — the look of a man who has been expecting someone, not necessarily these three.",
+          "note": "Read with Deathsense at the threshold — a slow ending in the chest, long underway, no urgency in it. His first words: 'You are not from the committee.' He is still holding the door. Deciding.",
           "learned": [
-            "Opens the door to strangers without visible fear — suggests he may have been waiting for contact"
+            "Something ending in his chest — slow, the kind of thing that has been there a long time and has been accounted for",
+            "He expected someone, but not from the committee — he has categories for different kinds of visitors"
           ],
-          "statusNote": "At the mill's north-face door, holding it open — waiting to hear Silas's purpose.",
-          "relationshipDelta": 0
+          "statusNote": "At the mill's north-face door, holding it open — first words spoken, still deciding whether to let the party in"
         }
       ],
-      "generateRequest": [
+      "codexUpdates": [
         {
-          "type": "npc",
-          "hint": "Edvar Crane — a mill resident of around fifty, connected to the Waymarker's second thread and the water crisis, already treating his water; a man who knows something and has been waiting to be asked",
-          "why": "Crane opened the door — he is the direct subject of the Second Thread quest and needs a stable, fully authored identity to carry that weight"
+          "topic": "edvar-crane",
+          "label": "Edvar Crane",
+          "kind": "person",
+          "entityId": "edvar-crane",
+          "fact": "Deathsense at the threshold: a slow ending in the chest, trajectory long established — he has already done his own accounting. He speaks first: 'You are not from the committee.' He was expecting someone, and committee is not the right category.",
+          "links": [
+            "the-second-thread",
+            "what-the-water-remembers",
+            "the-water-crisis"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short crossing and a knock — a matter of minutes"
+        "why": "A brief approach and threshold read"
       }
     },
     "sceneState": {
-      "setting": "North face of the mill, afternoon — the party on the bank side of the door, which is now open. The wheel turns slow to the right. Lamp burning in the ground-floor interior beyond the threshold.",
+      "setting": "North face of the mill, afternoon — the party at the threshold, door open, lamp burning in the ground-floor interior. Wheel turning slow to the right.",
       "npcsPresent": [
         {
           "name": "Edvar Crane",
-          "state": "Standing in the open doorway — bar lifted, door held, eyes on Silas. Waiting to hear what kind of visit this is."
+          "state": "Holding the door open, eyes on Silas — steady, deciding. Has spoken: 'You are not from the committee.'"
         },
         {
           "name": "Pell Ran Marsh",
@@ -1899,7 +1909,7 @@
         },
         {
           "name": "Huginn",
-          "state": "At the foundation stones, eye on the doorway now rather than the window."
+          "state": "At the foundation stones, eye on the doorway and on Crane."
         }
       ],
       "objects": [
@@ -1910,9 +1920,10 @@
         "Lamp burning in the ground-floor interior"
       ],
       "threads": [
-        "Crane opened the door as a man waiting for something — what does he know, and who did he expect?",
-        "Huginn's read: something is ending inside this mill, slow and long underway",
-        "The intake treatment's purpose still unread — Crane must speak it"
+        "Crane has not invited the party in — he is still deciding whether they are useful",
+        "Crane's read: 'You are not from the committee' — what does he know, and who did he expect?",
+        "Deathsense reading: something in the chest, slow, long underway — Crane has already done the accounting on his own time",
+        "Huginn's earlier read: something is ending inside this mill, slow and long underway — now confirmed at the body level"
       ]
     }
   },
@@ -3788,16 +3799,19 @@
       },
       "relationship": 0,
       "history": [
-        "[d13] Opened the door without alarm — the look of a man who has been expecting someone, not necessarily these three."
+        "[d13] Opened the door without alarm — the look of a man who has been expecting someone, not necessarily these three.",
+        "[d13] Read with Deathsense at the threshold — a slow ending in the chest, long underway, no urgency in it. His first words: 'You are not from the committee.' He is still holding the door. Deciding."
       ],
       "knownFacts": [
-        "Opens the door to strangers without visible fear — suggests he may have been waiting for contact"
+        "Opens the door to strangers without visible fear — suggests he may have been waiting for contact",
+        "Something ending in his chest — slow, the kind of thing that has been there a long time and has been accounted for",
+        "He expected someone, but not from the committee — he has categories for different kinds of visitors"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the mill's north-face door, holding it open — waiting to hear Silas's purpose.",
+      "statusNote": "At the mill's north-face door, holding it open — first words spoken, still deciding whether to let the party in",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -4677,7 +4691,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 586,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 12,
     "recentOffers": [
       {
         "thing": "The stock shelter, plain and open on the lee side of the field-stone wall — exactly the kind of place Huginn will land first and inspect…",
@@ -6180,21 +6194,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.94641897880868,
-    "cerebral": 13.836836600577167,
-    "social": 12.702572168326084,
-    "generous": 4.6905870497067275,
-    "cautious": 4.079832252550834,
-    "physical": 0.6369316766595148,
-    "risky": 0.5597712477042335,
-    "ruthless": 0.4951241219789218,
-    "carousing": 0.11356275358092535,
-    "amorous": 1.9199128935368086,
-    "patient": 0.6811891051349935,
-    "stealth": 0.0011388309126062633,
-    "devotion": 0.6015289913069518,
-    "craft": 0.9476798155032505,
-    "leadership": 0.9189208513107576
+    "strategic": 16.522758504338462,
+    "cerebral": 14.490915685562737,
+    "social": 12.38500786411793,
+    "generous": 4.573322373464059,
+    "cautious": 3.9778364462370632,
+    "physical": 0.6210083847430269,
+    "risky": 0.5457769665116277,
+    "ruthless": 0.48274601892944874,
+    "carousing": 0.11072368474140222,
+    "amorous": 1.8719150711983883,
+    "patient": 0.6641593775066187,
+    "stealth": 0.0011103601397911068,
+    "devotion": 0.586490766524278,
+    "craft": 0.9239878201156693,
+    "leadership": 0.8959478300279886
   },
   "aptitudes": [
     "strategist",
@@ -6202,10 +6216,18 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 755,
+  "actionCount": 756,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Edvar Crane",
+      "url": "https://image.pollinations.ai/prompt/A%20heavyset%20man%20of%20around%20fifty%2C%20gone%20broad%20across%20the%20shoulders%20from%20decades%20at%20the%20mill%2C%20with%20hands%20that%20are%20always%20faintly%20stained%20from%20the%20wheel-grease%20he%20cannot%20fully%20wash%20out.%20Close-cropped%20grey%20%2C%20character%20portrait%2C%20named%20Edvar%20Crane%2C%20Mill%20resident%20and%20self-taught%20water-reader%20%E2%80%94%20the%20man%20who%20already%20knew%2C%20and%20has%20been%20waiting%20for%20some%2C%20Speaks%20in%20the%20unhurried%20cadence%20of%20a%20man%20who%20has%20thought%20something%20through%20alone%20for%20a%20long%20time%20and%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=88220&nologo=true",
+      "caption": "Edvar Crane",
+      "worldDay": 24,
+      "at": "2026-07-24T11:04:39.634Z"
+    },
     {
       "kind": "npc",
       "prompt": "Veth Coldarrow",
@@ -6581,19 +6603,11 @@
       "caption": "Silas Weir — level 7",
       "worldDay": 15,
       "at": "2026-07-15T19:36:49.371Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "Silas Weir",
-      "url": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20green%2Fblue%20power%20emanating%20from%20him%20with%20his%20undead%20Raven%20on%20his%20shoulder.%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13695&nologo=true",
-      "caption": "Silas Weir — reforged",
-      "worldDay": 14,
-      "at": "2026-07-14T14:46:52.114Z"
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784891054101,
-  "rev": 1222,
+  "updatedAt": 1784891210160,
+  "rev": 1224,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8016,6 +8030,89 @@
         "peopleSource": "generated",
         "domainsSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20stocky%20woman%20in%20her%20mid-forties%2C%20olive-dark%20from%20outdoor%20working%2C%20with%20short-cropped%20iron-grey%20hair%20held%20back%20by%20a%20strip%20of%20leather.%20Burn-scars%20patterned%20across%20both%20hands%20and%20the%20inside%20of%20her%20left%2C%20character%20portrait%2C%20named%20Veth%20Coldarrow%2C%20Jewelry%20smith%20of%20the%20waygate%20crescent%20%E2%80%94%20reads%20material%20before%20she%20reads%20people%2C%20quotes%20price%20and%20tru%2C%20Short%20sentences.%20No%20pleasantries%2C%20no%20flourish%20%E2%80%94%20she%20will%20name%20what%20a%20piece%20is%20before%20you%20finish%20desc%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=93637&nologo=true"
+      },
+      "edvar-crane": {
+        "schemaVersion": 1,
+        "id": "edvar-crane",
+        "name": "Edvar Crane",
+        "role": "Mill resident and self-taught water-reader — the man who already knew, and has been waiting for someone to finally ask",
+        "homeLocation": "waygate_valley",
+        "communityId": "valley.waygate",
+        "personality": {
+          "warmth": 0.55,
+          "trust": 0.3,
+          "candor": 0.75,
+          "patience": 0.65
+        },
+        "spectrum": {
+          "concrete_abstract": -0.4,
+          "falsehood_truth": 0.6,
+          "dark_light": 0.1,
+          "space_time": -0.2
+        },
+        "voiceHints": "Speaks in the unhurried cadence of a man who has thought something through alone for a long time and is relieved to say it aloud at last. Precise without being academic — the precision of a craftsman who learned by watching things go wrong. He will not exaggerate. He will also not soften. If he pauses, let him; he is choosing the right word, not stalling. Occasional dry wryness, never cruel. The faint bitterness of someone who tried to warn people quietly and was not heard.",
+        "knowledge": [
+          "The exact date the water changed — not roughly, exactly; he wrote it on the door-frame inside the mill",
+          "What boiling and settling with wood-ash does to the worst of it, and what it does not fix",
+          "That the discolouration runs heavier from the upper fork than the lower, which tells him something is wrong above the second weir",
+          "Two other mill families who are quietly doing what he does, and three more who are not and who look grey-tired in a way that worries him",
+          "Where the old Waymarker survey stones are set along the upper channel — he walks that ground every early spring to check the snowmelt rate"
+        ],
+        "wants": "Acknowledgment that the crisis is real, upstream, and getting worse — and someone with authority or reach to act on it before people start dying quietly and it gets called a bad season.",
+        "fears": "That he will be right about all of it and it will make no difference. That the people who did not listen in autumn will not listen now until the evidence is someone's child.",
+        "secondThreadRole": {
+          "function": "reveal",
+          "note": "Crane is the primary reveal-node for the Second Thread. He does not have answers — he has observations precise enough to point toward answers. His cooperation unlocks the upper-fork investigation and the names of the other affected families. He has been waiting to be believed, not to be told what he already knows."
+        },
+        "reactsToReputation": {
+          "trusted_by_valley": "opens immediately, brings out the door-frame record, names every family he knows",
+          "outsider_unknown": "measured — tests with one true thing before offering another",
+          "dismissive_of_concerns": "closes, politely, completely; will answer questions but volunteers nothing",
+          "already_treating_water": "recognises a peer; drops the last of his guardedness and speaks as one careful person to another"
+        },
+        "appearance": "A heavyset man of around fifty, gone broad across the shoulders from decades at the mill, with hands that are always faintly stained from the wheel-grease he cannot fully wash out. Close-cropped grey hair, a week's worth of beard he doesn't bother with. His face is weathered and watchful — not unfriendly, but accustomed to people not quite looking back. He keeps a tin cup on a hook by his door and never drinks without checking the bottom first. Early spring has him in a heavy canvas coat, unlaced at the collar, with a notebook tucked in the chest pocket.",
+        "people": "human",
+        "domains": {
+          "primary": "figurist",
+          "secondary": "hourkeeper",
+          "tertiary": "syllogist"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Crane practises no formal tradition — he is a miller who taught himself to read pattern, record time, and reason from evidence. Figurist primary reflects his intuitive map-reading and spatial memory of the watershed; hourkeeper secondary reflects his obsessive log-keeping and change-tracking; syllogist tertiary reflects the quiet deductive chain he has been building alone. Kind and domain are independent.",
+        "_gen": {
+          "entityId": "edvar-crane",
+          "type": "npc",
+          "birthWeight": 33,
+          "engagementScore": 3,
+          "tier": "established",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-waygate",
+            "day": 13,
+            "worldDay": null,
+            "hint": "Edvar Crane — a mill resident of around fifty, connected to the Waymarker's second thread and the water crisis, already ",
+            "why": "Crane opened the door — he is the direct subject of the Second Thread quest and needs a stable, fully authored identity "
+          },
+          "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 13
+            },
+            {
+              "kind": "fact",
+              "day": 13
+            }
+          ],
+          "createdDay": 13,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true,
+          "lastAttentionDay": 13
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20heavyset%20man%20of%20around%20fifty%2C%20gone%20broad%20across%20the%20shoulders%20from%20decades%20at%20the%20mill%2C%20with%20hands%20that%20are%20always%20faintly%20stained%20from%20the%20wheel-grease%20he%20cannot%20fully%20wash%20out.%20Close-cropped%20grey%20%2C%20character%20portrait%2C%20named%20Edvar%20Crane%2C%20Mill%20resident%20and%20self-taught%20water-reader%20%E2%80%94%20the%20man%20who%20already%20knew%2C%20and%20has%20been%20waiting%20for%20some%2C%20Speaks%20in%20the%20unhurried%20cadence%20of%20a%20man%20who%20has%20thought%20something%20through%20alone%20for%20a%20long%20time%20and%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=88220&nologo=true"
       }
     },
     "location": {
@@ -8640,7 +8737,7 @@
       "lightsense": 2,
       "order_sense": 80,
       "palework": 30,
-      "deathsense": 33,
+      "deathsense": 34,
       "shadowstep": 21,
       "the-attended-end": 39,
       "wildcraft": 6,
@@ -8710,7 +8807,7 @@
       }
     ],
     "lastUsed": {
-      "deathsense": 23,
+      "deathsense": 24,
       "the-attended-end": 24,
       "order_sense": 24,
       "boundary_stone": 23,
@@ -9155,7 +9252,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 489,
+    "valley": 490,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9290,10 +9387,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T11:04:14.087Z",
+      "lastAt": "2026-07-24T11:06:50.143Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 3
+      "beats": 4
     }
   ],
   "company": [
@@ -9493,15 +9590,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 124,
-    "choices": 124,
-    "characterDeltas": 49,
-    "scene": 124,
-    "npcUpdates": 108,
+    "sceneSummary": 125,
+    "choices": 125,
+    "characterDeltas": 50,
+    "scene": 125,
+    "npcUpdates": 109,
     "factUpdates": 7,
     "placeUpdates": 21,
-    "codexUpdates": 72,
-    "timeOps": 118,
+    "codexUpdates": 73,
+    "timeOps": 119,
     "imagePrompt": 3,
     "sceneEnded": 26,
     "itemUpdates": 2,
@@ -9516,7 +9613,7 @@
     "stageOps": 5,
     "generateRequest": 4
   },
-  "_opTurns": 124,
+  "_opTurns": 125,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

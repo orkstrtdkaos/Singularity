@@ -1,0 +1,121 @@
+{
+ "schemaVersion": 1,
+ "id": "encounter_frame_kinds",
+ "kind": "content",
+ "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths.",
+ "frameKinds": {
+  "fight": {
+   "icon": "⚔",
+   "title": "The Contest",
+   "winCondition": "Overcome it",
+   "meterLabel": "Momentum",
+   "exits": {
+    "defeat": "Strike",
+    "flee": "Break away",
+    "fail": "Yield"
+   },
+   "failStakes": "You are overcome — the fight's cost lands, and the story goes on from your defeat."
+  },
+  "chase": {
+   "icon": "🏃",
+   "title": "The Chase",
+   "winCondition": "Get away — or run it down",
+   "meterLabel": "Distance",
+   "exits": {
+    "defeat": "Press",
+    "flee": "—",
+    "fail": "Caught"
+   },
+   "failStakes": "The gap closes the wrong way — caught, or lost them. If you were fleeing a fight, it resumes.",
+   "note": "You cannot 'flee' a chase — shaking it IS the chase's defeat. Its flee slot is disabled."
+  },
+  "hazard": {
+   "icon": "⚠",
+   "title": "Hard Ground",
+   "winCondition": "Cross it",
+   "meterLabel": "Progress",
+   "exits": {
+    "defeat": "Commit",
+    "flee": "Turn back",
+    "fail": "Taken"
+   },
+   "failStakes": "The ground takes its toll — a hurt, a loss, a setback — and you're back where you started or worse."
+  },
+  "puzzle": {
+   "icon": "🧩",
+   "title": "The Sealed Thing",
+   "winCondition": "Solve it",
+   "meterLabel": "Insight",
+   "exits": {
+    "defeat": "Work it",
+    "flee": "Leave it",
+    "fail": "It holds"
+   },
+   "failStakes": "The thing stays sealed — or springs what it was guarding. You can walk away, or it beats you."
+  },
+  "standoff": {
+   "icon": "🗣",
+   "title": "The Standoff",
+   "winCondition": "Win the exchange",
+   "meterLabel": "Their Resolve",
+   "exits": {
+    "defeat": "Press",
+    "flee": "Withdraw",
+    "fail": "They prevail"
+   },
+   "failStakes": "They hold the line — you yield the point, or withdraw with it unresolved."
+  }
+ },
+ "exemplarEncounters": [
+  {
+   "id": "enc_the_sealed_door",
+   "kind": "puzzle",
+   "tier": "notable",
+   "flavor": "dangerous",
+   "routing": "challenge",
+   "premise": "pattern_puzzle",
+   "seed": "A door with no handle — a lattice of shifting marks that resolves only for the one who reads its order. It was made to keep something in, or out, and it has kept it a long time.",
+   "stages": [
+    {
+     "beat": "Read the marks — find the pattern under the shifting (KNOW/insight).",
+     "onFail": "a mark bites back — the door reads YOU, and something behind it stirs."
+    },
+    {
+     "beat": "Work the order you found — set the marks right (CRAFT/know).",
+     "onFail": "the pattern collapses; begin again, and it's warier now."
+    },
+    {
+     "beat": "The last turn — commit the solution (KNOW).",
+     "onSolve": "the door opens on what it kept."
+    }
+   ],
+   "trivializeNote": "A high KNOW/reveal craft lays this SIMPLE puzzle out whole (trivial, with the §8 acknowledgment). A HARDER sealed door raises resistDC and resists even the reading — opposed.",
+   "failStakes": "The door holds, and what it guards notices you tried."
+  },
+  {
+   "id": "enc_the_toll_keeper",
+   "kind": "standoff",
+   "tier": "notable",
+   "flavor": "theft",
+   "routing": "opposed",
+   "premise": null,
+   "seed": "Someone stands between you and where you're going, certain of their right to a price — a toll, a name, a thing you carry. Not a fight yet. A contest of who yields first.",
+   "stages": [
+    {
+     "beat": "Take their measure — what do they actually want, and what do they fear (INSIGHT/know).",
+     "onFail": "you misread them; they harden."
+    },
+    {
+     "beat": "Press your case — talk them down, buy them off, or face them down (SWAY/presence).",
+     "onFail": "the standoff tips toward a fight."
+    },
+    {
+     "beat": "The turn — they yield, or you do, or it breaks (SWAY).",
+     "onWin": "they stand aside."
+    }
+   ],
+   "morphNote": "A failed standoff can MORPH into a FIGHT (§6b) — press too hard and the toll-keeper draws. A SWAY-collapse (a commanding presence craft) can end it in one beat, opposed against their resolve.",
+   "failStakes": "They prevail — you pay, you turn back, or it becomes a fight on their terms."
+  }
+ ]
+}

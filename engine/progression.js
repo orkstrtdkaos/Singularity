@@ -161,13 +161,17 @@ export function seedInnateSubstrate(character, originRecord = {}, catalog = {}) 
   return seeded;
 }
 
-/** Practiced power costs less: -1 energy per two character levels and -1 per
- *  ability rank above 1, floored at half the base cost (data-driven). */
+/** SNG-227 §3a/§3c: practiced power costs less, but the CHARACTER-LEVEL discount no longer runs away — it is
+ *  -1 per TEN levels (was per two), so a skill never bottoms to the floor from level alone (L20 base-8 = 7,
+ *  not 4). The FLOOR is now a destination you EARN through the rank discount (-1 per ability rank, from
+ *  practice), floored at half the base. So a freshly-learned skill starts near BASE (expensive, §3c) and
+ *  audibly cheapens as you master it — energy stays a real resource all game. All three knobs live in
+ *  rules.leveling (§4, tunable — rebalance is a JSON edit). */
 export function effectiveEnergyCost(abilityDef, character, rules) {
   const base = abilityDef?.energyCost ?? rules.energy?.defaultActionCost ?? 5;
   const lv = rules.leveling || {};
   const owned = (character.abilities || []).find(a => a.abilityId === abilityDef?.id);
-  const levelDiscount = Math.floor(((character.level || 1) - 1) / 2) * (lv.energyEfficiencyPerTwoLevels ?? 1);
+  const levelDiscount = Math.floor(((character.level || 1) - 1) / 10) * (lv.energyEfficiencyPerTenLevels ?? 1);
   const rankDiscount = Math.max(0, (owned?.level ?? 1) - 1) * (lv.rankEnergyDiscount ?? 1);
   const floor = Math.max(1, Math.ceil(base * (lv.minEnergyCostFraction ?? 0.5)));
   return Math.max(floor, base - levelDiscount - rankDiscount);

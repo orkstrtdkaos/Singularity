@@ -80,6 +80,18 @@ export function braidTier(character, components, catalog = {}) { // registry:int
  *  braidTier, and scaffolds a `tier`-deep tree. `opts.authored` (from generate.js "braid" type) overrides
  *  name/description/tree when the model gave good ones; `opts.name` is the player's chosen name (wins over
  *  the model's suggestion). Pure. */
+/** SNG-227 §3d: a braid's BASE energy cost — the priciest parent PLUS a share (default half) of the cheaper.
+ *  Always > the priciest parent (the higher-power premium Erik wants), always < running both parts one after
+ *  the other (the efficiency reward of the combination). Computed at MINT from the parents' BASE costs (stable
+ *  — a braid's base shouldn't drift as the parents level); the braid's own base then runs through
+ *  effectiveEnergyCost (§3a/b/c) like any craft, so a freshly-discovered braid is EXPENSIVE and earns down.
+ *  8+10 → 14 · 10+10 → 15 · 6+8 → 11. `fraction` is tunable (rules.leveling.braidCheaperParentFraction). */
+export function braidBaseCost(sources = [], fraction = 0.5) {
+  const costs = (sources || []).map(s => s?.energyCost || 0).sort((a, b) => b - a);
+  const priciest = costs[0] || 4, cheaper = costs[1] || 0;
+  return Math.max(priciest + 1, priciest + Math.ceil(cheaper * (Number.isFinite(fraction) ? fraction : 0.5)));
+}
+
 export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   const sources = components.map(id => catalog[id]).filter(Boolean);
   if (sources.length !== 2) return null;
@@ -115,7 +127,7 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   }
   return {
     id, name, tradition, powerSystem: tradition,
-    levelReq, energyCost: Math.max(4, Math.min(15, 4 + maxRank * 2)), // from the craft depth (deeper parent), not the +1 display tier
+    levelReq, energyCost: braidBaseCost(sources, opts.braidFraction), // SNG-227 §3d: priciest parent + a share of the cheaper — a premium over either part, still < running both sequentially
     attribute: sources[0]?.attribute || "practical",
     functions, harmRung, effectTags: [], nativeOrCombination: "combination",
     description: smartClamp(String(authored.description || `A braid earned in play: ${srcNames.join(" and ")}, channelled together until they became one craft.`), 400),
@@ -153,7 +165,7 @@ export function mintBraid(character, def, { at = null } = {}) {
  *  fallback from the discovery's own name + description. Parents are DEDUPED (a 3-parent discovery with a
  *  repeated craft collapses to 2) and id-drift-tolerant (hyphen/underscore). Idempotent: skips a discovery
  *  already in `abilities[]`, OR whose parent-pairing was already braided (it's usable via that braid). Pure. */
-export function registerDiscoveryAbility(character, discovery, catalog = {}, { at = null } = {}) {
+export function registerDiscoveryAbility(character, discovery, catalog = {}, { at = null, braidFraction } = {}) {
   if (!character || !discovery?.id || !discovery?.name) return null;
   character.abilities = character.abilities || [];
   if (character.abilities.some(a => a.abilityId === discovery.id)) return null; // already usable under its own id
@@ -161,12 +173,12 @@ export function registerDiscoveryAbility(character, discovery, catalog = {}, { a
   const parents = [...new Set((discovery.abilities || []).map(resolve).filter(Boolean))];
   // already usable via a braid of the SAME pairing (e.g. a discovery that was also braided) → nothing to do.
   if (parents.length === 2 && (character.braids || []).some(b => braidKey(b.from) === braidKey(parents))) return null;
-  let def = parents.length === 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description } }) : null;
+  let def = parents.length === 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description }, braidFraction }) : null;
   if (!def) {
     // fallback: a minimal braid-shaped def from whatever resolved + the discovery's own words (rank 1, deepens).
     const sources = parents.map(id => catalog[id]).filter(Boolean);
     const functions = [...new Set(sources.flatMap(s => Array.isArray(s.functions) ? s.functions : []))];
-    const energyCost = Math.max(4, Math.min(15, (sources.reduce((m, s) => Math.max(m, s.energyCost || 0), 0) || 6) + 2));
+    const energyCost = braidBaseCost(sources, braidFraction); // SNG-227 §3d: a discovered braid gets the premium cost too (priciest parent + a share of the cheaper)
     const nm = smartClamp(String(discovery.name), 60);
     const desc = smartClamp(String(discovery.description || `A craft discovered in play: ${discovery.name}.`), 400);
     def = {

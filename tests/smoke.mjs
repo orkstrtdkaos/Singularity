@@ -351,11 +351,11 @@ check("ability law carries rank grants and limits", law.includes("Standing Wave"
 
 // --- SNG-103: the GM is fed the EFFECTIVE energy cost, not the raw base (was false-flagging correct sheets) ---
 {
-  const eRules = { leveling: { energyEfficiencyPerTwoLevels: 1, rankEnergyDiscount: 1, minEnergyCostFraction: 0.5 }, energy: { defaultActionCost: 5 } };
+  const eRules = { leveling: { energyEfficiencyPerTenLevels: 1, rankEnergyDiscount: 1, minEnergyCostFraction: 0.5 }, energy: { defaultActionCost: 5 } };
   const ab = { id: "palework", name: "Palework", energyCost: 6, tree: [{ rank: 1, name: "R1", grants: "g", cannot: "c" }, { rank: 2, name: "Reading the Rot", grants: "g", cannot: "c" }] };
   const leveled = { abilities: [{ abilityId: "palework", level: 2 }], attributes: {}, level: 5, discoveries: [] };
   const gmLeveled = abilitiesForGM(leveled, { palework: ab }, null, eRules);
-  check("SNG-103: GM sees the effective (discounted) energy, not base", /Palework.*3 energy/s.test(gmLeveled) && /base 6, discounted/.test(gmLeveled));
+  check("SNG-103: GM sees the effective (discounted) energy, not base (SNG-227: L5 rank-2 base-6 → 5, the rank discount now visible)", /Palework.*5 energy/s.test(gmLeveled) && /base 6, discounted/.test(gmLeveled));
   const fresh = { abilities: [{ abilityId: "palework", level: 1 }], attributes: {}, level: 1, discoveries: [] };
   const gmFresh = abilitiesForGM(fresh, { palework: ab }, null, eRules);
   check("SNG-103: an undiscounted ability still reads base (no phantom discount line)", /Palework.*6 energy\)/s.test(gmFresh) && !/discounted/.test(gmFresh));
@@ -513,8 +513,8 @@ retroLevelGrants(freshChar, rules);
 check("flagged characters get nothing extra", freshChar.pendingSubPoints === 2 && freshChar.skillPoints === 0);
 const sonicDef = abilityCatalog.sonic_resonance; // base 8
 check("level 1 rank 1 pays full cost", effectiveEnergyCost(sonicDef, { level: 1, abilities: [{ abilityId: "sonic_resonance", level: 1 }] }, rules) === 8);
-check("level 5 rank 3 pays discounted cost", effectiveEnergyCost(sonicDef, { level: 5, abilities: [{ abilityId: "sonic_resonance", level: 3 }] }, rules) === 4);
-check("discount floors at half base", effectiveEnergyCost(sonicDef, { level: 20, abilities: [{ abilityId: "sonic_resonance", level: 3 }] }, rules) === 4);
+check("level 5 rank 3 pays discounted cost (SNG-227: 8 - rank2 = 6; level discount now per-10, so mastery is what cheapens)", effectiveEnergyCost(sonicDef, { level: 5, abilities: [{ abilityId: "sonic_resonance", level: 3 }] }, rules) === 6);
+check("discount floors at half base (SNG-227: the floor is EARNED via level+rank, not dumped at L10 — L40 rank3 → 4)", effectiveEnergyCost(sonicDef, { level: 40, abilities: [{ abilityId: "sonic_resonance", level: 3 }] }, rules) === 4);
 const trivialIntent = sanitizeIntent({ label: "chat with the miller", attribute: "social", trivial: true, feasible: true }, { abilities: [] });
 check("trivial survives sanitization", trivialIntent.trivial === true);
 const trivialAbility = sanitizeIntent({ label: "x", abilityId: "prism_sight", trivial: true }, { abilities: [{ abilityId: "prism_sight", level: 1 }] });
@@ -6456,7 +6456,11 @@ await (async () => {
   check("197 §4: with no vocab to check against, an emergent verb is UNVERIFIABLE → rejected (not accepted-and-logged)", noVocab.minted.emergent === null);
   check("197 §4: isLegalEmergent — real verb ok, hallucination rejected, a parent's own verb is not 'emergent'", br.isLegalEmergent("bind", ["strike"], fnVocab) === true && br.isLegalEmergent("teleport", ["strike"], fnVocab) === false && br.isLegalEmergent("strike", ["strike"], fnVocab) === false);
   check("197 §1: even a stub names the NEW thing at the narration level (the rank-1 grant)", /the move only their joining makes/.test(def.tree[0].grants));
-  check("197 §5: energy derives from craft DEPTH (4 + maxRank*2), not the +1 display tier", def.energyCost === 4 + 3 * 2);
+  // SNG-227 §3d: a braid's base energy is now the PREMIUM rule (priciest parent + half the cheaper), from the
+  // parents' base costs — a premium over either part, still less than running both sequentially.
+  const costedCat = { p1: { id: "p1", name: "P1", energyCost: 8, functions: ["strike"] }, p2: { id: "p2", name: "P2", energyCost: 10, functions: ["ward"] } };
+  const costedBraid = br.buildBraidDef({ level: 6, abilities: [{ abilityId: "p1", level: 1 }, { abilityId: "p2", level: 1 }] }, ["p1", "p2"], costedCat);
+  check("197 §5 / SNG-227 §3d: a braid's base energy is the PREMIUM — priciest parent + half the cheaper (8+10 → 14)", costedBraid.energyCost === 14);
   check("197: provenance flags whether the def was model-enriched (drives re-presenting stubs)", def.minted.enriched === false && withEmergent.minted.enriched === true);
   // SNG-197 part 2: the braid AUTHORING path (generate.js) — prompt names only real available verbs; the
   // validator drops a hallucination and records the miss; a valid reply becomes the `authored` bag.
@@ -7756,6 +7760,35 @@ await (async () => {
   // wiring: travelIntentOf calls the belt only when the trusted travelTo resolves to no real place.
   const appSrc228 = readFileSync(join(root, "app.js"), "utf8");
   check("228: travelIntentOf runs the person belt when a trusted travelTo can't place (rejects/redirects, never phantom-mints a person)", /const person = personDestination\(ref, action, \{ npcRegistry: character\.npcRegistry, locations: CONTENT\.locations \}\)/.test(appSrc228) && /if \(person\.isPerson\) return person\.destId \?/.test(appSrc228));
+}
+
+// ---- SNG-227: energy economy — the level discount no longer runs away; braids cost a premium ----
+{
+  const R = { leveling: { energyEfficiencyPerTenLevels: 1, rankEnergyDiscount: 1, minEnergyCostFraction: 0.5 }, energy: { defaultActionCost: 5 } };
+  const ab8 = { id: "a8", energyCost: 8 };
+  const cost = (level, rank) => effectiveEnergyCost(ab8, { level, abilities: [{ abilityId: "a8", level: rank }] }, R);
+
+  // §3a: the CHARACTER-level discount is -1 per TEN levels — a base-8 skill never bottoms to the floor (4) from level.
+  check("227 §3a: level discount is now per-TEN-levels — L1 rank1 = base 8 (fresh skills BITE)", cost(1, 1) === 8);
+  check("227 §3a: L10 rank1 is NOT at the floor anymore (was 4; now 8 - level0 = 8)", cost(10, 1) === 8 && cost(15, 1) === 7);
+  check("227 §3a: L20 rank1 costs near base (7), not the floor (4) — energy stays a resource all game", cost(20, 1) === 7);
+
+  // §3c: freshly-learned bites; mastery (rank) earns it DOWN toward the 50% floor — the usage-discount is visible now.
+  check("227 §3c: a fresh skill (rank 1) is expensive; ranking it up cheapens it (rank 3 = -2)", cost(1, 1) === 8 && cost(1, 3) === 6);
+  check("227 §3b: the 50% floor still holds (base 8 → never below 4, earned via rank not dumped at L10)", cost(1, 5) === 4 && effectiveEnergyCost(ab8, { level: 50, abilities: [{ abilityId: "a8", level: 5 }] }, R) === 4);
+
+  // §3d: a braid's BASE = priciest parent + half the cheaper — always > priciest, always < both sequentially.
+  const { braidBaseCost } = await import("../engine/braids.js");
+  check("227 §3d: braid base = priciest + ceil(cheaper/2) (8+10→14, 10+10→15, 6+8→11)", braidBaseCost([{ energyCost: 8 }, { energyCost: 10 }]) === 14 && braidBaseCost([{ energyCost: 10 }, { energyCost: 10 }]) === 15 && braidBaseCost([{ energyCost: 6 }, { energyCost: 8 }]) === 11);
+  check("227 §3d GUARD: a braid is ALWAYS > its priciest parent, ALWAYS < running both parts sequentially", braidBaseCost([{ energyCost: 8 }, { energyCost: 10 }]) > 10 && braidBaseCost([{ energyCost: 8 }, { energyCost: 10 }]) < 18);
+  check("227 §4: the braid fraction is tunable (a smaller share → a cheaper braid)", braidBaseCost([{ energyCost: 8 }, { energyCost: 10 }], 0.25) === 12);
+
+  // wiring: buildBraidDef uses the premium rule; the knobs live in rules; the fraction threads from CONTENT.rules.
+  const brSrc227 = readFileSync(join(root, "engine/braids.js"), "utf8");
+  const appSrc227 = readFileSync(join(root, "app.js"), "utf8");
+  const resSrc227 = readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8");
+  check("227 §3d: buildBraidDef + the discovery fallback both use braidBaseCost (a discovered braid is premium too, ties SNG-226)", (brSrc227.match(/braidBaseCost\(sources/g) || []).length >= 2);
+  check("227 §4: the knobs are JSON-tunable (renamed PerTenLevels + a braid fraction) and threaded from CONTENT.rules", /"energyEfficiencyPerTenLevels"/.test(resSrc227) && /"braidCheaperParentFraction"/.test(resSrc227) && /braidFraction: CONTENT\.rules\?\.leveling\?\.braidCheaperParentFraction/.test(appSrc227));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

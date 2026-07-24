@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.239";
+const APP_VERSION = "1.8.240";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1568,7 +1568,7 @@ function migrate(c) {
   {
     const cat = { ...CONTENT.abilities, ...(c.customAbilities || {}) };
     let registered = 0;
-    for (const d of (c.discoveries || [])) if (d && !(c.abilities || []).some(a => a.abilityId === d.id) && registerDiscoveryAbility(c, d, cat, { at: null })) registered++;
+    for (const d of (c.discoveries || [])) if (d && !(c.abilities || []).some(a => a.abilityId === d.id) && registerDiscoveryAbility(c, d, cat, { at: null, braidFraction: CONTENT.rules?.leveling?.braidCheaperParentFraction })) registered++;
     if (registered) { try { saveCharacter(c); } catch { /* best-effort */ } }
   }
   // SNG-225 §4a: heal generated locations minted with a NULL dangerLevel (Silas's Waygate) — a null danger
@@ -3559,7 +3559,7 @@ async function authorAndMintBraid(m, catalog) {
   // SNG-201 §2: the world already found this pairing → adopt it, no LLM call, a recognition beat.
   const known = recipeFor(braidRecipeStore, m.components);
   if (known) {
-    const def = buildBraidDef(character, m.components, catalog, { authored: recipeToAuthored(known), functionVocab: vocab });
+    const def = buildBraidDef(character, m.components, catalog, { authored: recipeToAuthored(known), functionVocab: vocab, braidFraction: CONTENT.rules?.leveling?.braidCheaperParentFraction });
     if (!def) return null;
     def.minted.worldName = known.name;
     def.minted.adoptedFrom = known.contributedBy || null;
@@ -3578,7 +3578,7 @@ async function authorAndMintBraid(m, catalog) {
     authored = validateBraidAuthored(raw, { parentFunctions: [...new Set(m.sources.flatMap(s => s.functions || []))], vocab, maxRank: m.maxRank });
     if (authored._rejected?.emergentFunction) console.warn("[braid] rejected hallucinated emergent verb:", authored._rejected.emergentFunction);
   } catch (err) { console.warn("[braid] authoring skipped, minting stub:", err?.message); authored = {}; }
-  const def = buildBraidDef(character, m.components, catalog, { authored, functionVocab: vocab });
+  const def = buildBraidDef(character, m.components, catalog, { authored, functionVocab: vocab, braidFraction: CONTENT.rules?.leveling?.braidCheaperParentFraction });
   if (!def) return null;
   if (!mintBraid(character, def, { at: absoluteWorldDay() })) return null;
   def.minted.presented = true;
@@ -3596,7 +3596,7 @@ function braidDefByKey(key) {
  *  the player set a personal nickname, description/tree/emergent), the adopter's numbers unchanged. A player
  *  nickname (namedBy 'player') renders locally only and is NEVER overwritten by the world-name. */
 function adoptRecipeOntoLocal(def, recipe) {
-  const rebuilt = buildBraidDef(character, def.minted.from, fullCatalog(), { authored: recipeToAuthored(recipe), functionVocab: Object.keys(FN_INDEX?.verbToFamily || {}) });
+  const rebuilt = buildBraidDef(character, def.minted.from, fullCatalog(), { authored: recipeToAuthored(recipe), functionVocab: Object.keys(FN_INDEX?.verbToFamily || {}), braidFraction: CONTENT.rules?.leveling?.braidCheaperParentFraction });
   if (!rebuilt) return;
   rebuilt.minted.mintedAt = def.minted.mintedAt;
   rebuilt.minted.presented = def.minted.presented;
@@ -3782,7 +3782,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       abilityIds: resolution.discoveryAbilities || [], noveltyHint: resolution.action?.noveltyHint || "", day: dayNow
     });
     if (minted) {
-      registerDiscoveryAbility(character, minted, fullCatalog(), { at: dayNow }); // SNG-226: it's not just RECORDED, it's USABLE — the parser/wheel/resolver read abilities[]
+      registerDiscoveryAbility(character, minted, fullCatalog(), { at: dayNow, braidFraction: CONTENT.rules?.leveling?.braidCheaperParentFraction }); // SNG-226: it's not just RECORDED, it's USABLE — the parser/wheel/resolver read abilities[]
       turn.narration += `\n\n*✦ New technique discovered: **${minted.name}** — it's yours now, ready to use.*`;
       queueDiscoveryMoment(minted, character); // SNG-222: a discovery deserves the ceremony (+ its image, §5)
       setTimeout(flushBraidMoments, 450);       // after the turn renders (parallels the braid mint flush)

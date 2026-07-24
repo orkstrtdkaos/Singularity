@@ -60,7 +60,7 @@ import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncoun
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
-import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved
+import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.257";
+const APP_VERSION = "1.8.258";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2135,11 +2135,22 @@ function activeEnc() {
 }
 
 function listAvailableEncounters() {
-  const loc = CONTENT.locations[character.currentLocationId];
-  return (loc.encounterSeeds || []).map(seed => {
+  const loc = CONTENT.locations[character.currentLocationId] || {};
+  // Hand-authored, curated per-location seeds (a signature ambush at a signature place) — kept.
+  const seedLines = (loc.encounterSeeds || []).map(seed => {
     const def = CONTENT.encounters?.[seed.encounterId];
     return def ? `- id "${def.id}" (${def.type}): ${def.name} — ${seed.hint}. Setup: ${def.setup}` : null;
-  }).filter(Boolean).join("\n") || null;
+  }).filter(Boolean);
+  // SNG-231 §3 (the keystone): ADD the eligible random POOL (SNG-225, danger-gated) + the bestiary (SNG-229
+  // beast_ duels, already merged into the pool). The two encounter systems now TALK — the rich encounters we
+  // built are reachable through GM OFFERS (rule 18), not just the sparse hand-seeds. Danger-gated: a calm place
+  // surfaces little, a dangerous one real threats; the GM still only offers when the fiction invites.
+  const seeded = new Set((loc.encounterSeeds || []).map(s => s.encounterId));
+  const poolLines = eligibleEncountersFor(CONTENT.randomEncounters, loc)
+    .filter(e => !seeded.has(e.id))                              // don't duplicate a hand-seeded encounter
+    .map(e => `- id "${e.id}" (${e.routing}${e.flavor ? "/" + e.flavor : ""}): ${smartClamp(String(e.seed || e.look || e.id), 150)}`);
+  const lines = [...seedLines, ...poolLines];
+  return lines.length ? lines.join("\n") : null;
 }
 
 /** End an encounter: outcome XP, clear state, incapacitation floor. */
@@ -4317,6 +4328,13 @@ async function onChoice(choice) {
     if (result) renderPlay(result.turn, { playerBeat: { label: choice.label, playerWords: choice.playerWords || null }, degraded: result.degraded });
     if (isSB) renderSkillBattle(); // take over the rounds with the contest panel
     return;
+  }
+  // SNG-231 §3: the GM offered a POOL encounter (an id that isn't a pre-built def — a random-pool or bestiary
+  // entry surfaced by listAvailableEncounters). Route it through the normal FIRE path (buildOffer → the
+  // engage/decline offer beat, SNG-002b) so the rich pool is reachable through GM invites, decline path intact.
+  if (choice.encounterId && !character.activeEncounter && !(CONTENT.encounters?.[choice.encounterId] || character.customEncounters?.[choice.encounterId])) {
+    const entry = (CONTENT.randomEncounters?.encounters || []).find(e => e.id === choice.encounterId);
+    if (entry) { await fireEncounter(entry); return; }
   }
   // trivial actions — no real chance of failure, no cost: no dice, no energy
   if (choice.trivial && !choice.abilityId && !(choice.comboAbilities || []).length && !action.novel) {

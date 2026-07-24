@@ -26,7 +26,7 @@ import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconci
 import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
-import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, eligibleEncountersFor, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
 import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, collapseFloor, swingDegree, wardAgainst, wardBroken, trivializes, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
@@ -7859,6 +7859,28 @@ await (async () => {
   const riff = monsters.find(m => m.minDanger === 1);
   check("229 §2b × SNG-225: a synthesized riffraff is eligible at an ordinary danger-2 place (a monster in the world)", isEligible(riff, { tags: ["transitional"], regionId: "valley", dangerLevel: 2 }) === true);
   check("229: an empty/absent bestiary yields no monsters (tolerant — the pool is unchanged)", bestiaryEncounters({}).length === 0 && bestiaryEncounters({ roster: [] }).length === 0);
+
+  // ---- SNG-231 §3: the GM-offered path now draws from the POOL + bestiary, not just hand-authored seeds ----
+  const table231 = { encounters: [
+    { id: "d1", routing: "duel", flavor: "fight", minDanger: 1, weight: 1 },
+    { id: "c1", routing: "challenge", flavor: "chase", minDanger: 2, weight: 1 },
+    { id: "n1", routing: "narrative", flavor: "dangerous", minDanger: 1, weight: 1 },   // no def to start → not offerable
+    { id: "big", routing: "duel", flavor: "fight", minDanger: 4, weight: 1 },           // over-danger
+    { id: "beast_x", routing: "duel", flavor: "dangerous", minDanger: 1, weight: 1, seed: "a beast" }, // SNG-229 beast in the pool
+  ] };
+  const loc231 = { dangerLevel: 3, tags: [] };
+  const elig231 = eligibleEncountersFor(table231, loc231).map(e => e.id).sort();
+  check("231 §3: eligibleEncountersFor lists the STRUCTURED pool (duel/challenge incl. beast_), danger-gated; narrative/opposed + over-danger excluded",
+    elig231.join(",") === "beast_x,c1,d1" && !elig231.includes("n1") && !elig231.includes("big"));
+  check("231 §3: a calmer place surfaces fewer (danger-gated — the c1 chase (minDanger 2) drops at danger 1)",
+    eligibleEncountersFor(table231, { dangerLevel: 1, tags: [] }).map(e => e.id).sort().join(",") === "beast_x,d1");
+  check("231 §3: the list is capped (the prompt isn't flooded)",
+    eligibleEncountersFor({ encounters: Array.from({ length: 20 }, (_, i) => ({ id: "x" + i, routing: "duel", flavor: "fight", minDanger: 0, weight: 1 })) }, loc231, { cap: 5 }).length === 5);
+  const appSrc231 = readFileSync(join(root, "app.js"), "utf8");
+  check("231 §3: listAvailableEncounters offers authored seeds AND the eligible pool (the two encounter systems now talk)",
+    /eligibleEncountersFor\(CONTENT\.randomEncounters, loc\)/.test(appSrc231) && /don't duplicate a hand-seeded/.test(appSrc231));
+  check("231 §3: a GM-offered POOL id routes through fireEncounter (the decline/engage beat), not a silent no-op",
+    /const entry = \(CONTENT\.randomEncounters\?\.encounters \|\| \[\]\)\.find\(e => e\.id === choice\.encounterId\)/.test(appSrc231) && /if \(entry\) \{ await fireEncounter\(entry\); return; \}/.test(appSrc231));
 
   // §2c: tradition_motivations is LOADED (its own type, not dead location-lore) and surfaced SELECTIVELY —
   // only the traditions in play this beat, each with its want + the creature its craft DREADS.

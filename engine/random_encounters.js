@@ -164,6 +164,22 @@ export function classifyNarrativeKind({ intentTags = [], why = "", hoursPassed =
 
 /** Choose one encounter for this location. If a flavor is forced (dev trigger),
  *  restrict to it; ignoreDanger lets a dev fire a fight anywhere for testing. */
+/** SNG-231 §3: the OFFERABLE eligible pool for a location — the SAME danger+tag gate pickEncounter rolls
+ *  against, but the FULL list, so the GM-offered path (listAvailableEncounters) can surface real pool ids to
+ *  INVITE, not just the hand-authored encounterSeeds. Only STRUCTURED entries (routing duel/challenge — which
+ *  synthesize a real def, incl. the SNG-229 beast_ duels) are offerable by id; loose narrative/opposed rows have
+ *  no def to start, so they stay ambient narration (not offered). Weight-ordered + capped so the prompt isn't
+ *  flooded. Pure. */
+export function eligibleEncountersFor(table, location, { cap = 8 } = {}) {
+  const danger = dangerOf(location);
+  return (table?.encounters || [])
+    .filter(e => (e.routing === "duel" || e.routing === "challenge") && isEligible(e, location))
+    .map(e => ({ e, w: Math.max(0.01, (e.weight || 1) * flavorMultiplier(e.flavor, danger)) }))
+    .sort((a, b) => b.w - a.w)
+    .slice(0, Math.max(0, cap))
+    .map(x => x.e);
+}
+
 export function pickEncounter(table, location, rng = Math.random, { flavor = null, ignoreDanger = false } = {}) {
   let pool = (table?.encounters || []).filter(e => isEligible(e, location, { ignoreDanger }));
   if (flavor) pool = pool.filter(e => e.flavor === flavor);

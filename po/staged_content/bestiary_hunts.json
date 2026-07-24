@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "bestiary_hunts",
  "kind": "content",
- "note": "SNG-229 hunt quests, RE-AUTHORED CORRECTLY (Aevi 2026-07-22) after my first pass broke content_ci (invented givers, prose-only outcomes). Now: REAL NPC givers + machine-readable effects[]. STAGED not loaded because (1) creatureId resolves only once CCode fixes the provides.bestiary loader gap [current content_ci FAIL, CCode's §2a incomplete], (2) verify against the loaded bestiary before folding into quests.json. Drop into content/packs/valley/quests.json once the loader reads the bestiary. Schema matches quests.json exactly.",
+ "note": "SNG-229 hunt quests, RE-AUTHORED CORRECTLY (Aevi 2026-07-22) after my first pass broke content_ci (invented givers, prose-only outcomes). Now: REAL NPC givers + machine-readable effects[]. STAGED not loaded because (1) creatureId resolves only once CCode fixes the provides.bestiary loader gap [current content_ci FAIL, CCode's §2a incomplete], (2) verify against the loaded bestiary before folding into quests.json. Drop into content/packs/valley/quests.json once the loader reads the bestiary. Schema matches quests.json exactly. | Pass 2 (2026-07-22): +3 hunts for big new creatures (the Pure-of-Ash assassin, the Gearfather, the Ashen Wyrm dragon). Pure-hazard creatures (mire_gulper, cinder_mote_drift, gloamwolf_pack, quill_swarm, rust_choir_gnats, pale_reader, lantern_ambusher) are ENCOUNTER/location dressing, not craft-fears or hunts - they belong in the encounter generative pool (SNG-229 §2b), feared by PLACES not traditions.",
  "quests": [
   {
    "id": "the_stag_that_wont_die",
@@ -339,6 +339,208 @@
        "type": "world_arc",
        "arc": "the_unmoored_choir",
        "note": "becomes a standing epic-scale threat (ties the epic-arc system)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_mercy_that_wont_ask",
+   "name": "The Mercy That Won't Ask",
+   "region": "valley",
+   "tier": "regional",
+   "giver": "keeper_ilma",
+   "axis": "death_life",
+   "traditions": [
+    "ashwarden",
+    "seraphic"
+   ],
+   "creatureId": "the_pure_of_ash",
+   "premise": "An Ashwarden has been hollowed by the cult-of-purity of their own craft — the Pure-of-Ash, who decided the mercy of stopping should be given to everyone, unasked, and now administers death as doctrine. Keeper Ilma knows what they were, and knows there is no one left inside to reach. She asks you to end a thing wearing a warden's face.",
+   "stakes": "A master of real death-craft, killing as kindness; and every Ashwarden's fear of what they could become.",
+   "stages": [
+    "Find where the Pure-of-Ash walks its 'mercy' (KNOW).",
+    "Survive real Palework turned to murder (WARD).",
+    "Test whether any person remains — the answer is no (SWAY).",
+    "End it (HARM)."
+   ],
+   "routes": [
+    "End it swiftly, before it 'mercies' another",
+    "Try to reach the warden within first — and learn there is none"
+   ],
+   "outcomes": [
+    {
+     "id": "ended",
+     "name": "The Doctrine Ended",
+     "summary": "The Pure-of-Ash falls; the killing stops.",
+     "narration": [
+      "You end the Pure-of-Ash. The 'merciful' deaths stop.",
+      "Ilma does not thank you. She goes to sit with her order, and reminds them what they must never become."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_pure_of_ash",
+       "state": "slain",
+       "note": "the doctrine of unasked mercy ends"
+      },
+      {
+       "type": "ally",
+       "npc": "keeper_ilma",
+       "note": "bound to you by a grief only you share"
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": 2
+      },
+      {
+       "type": "codex_fact",
+       "topic": "cult_of_purity_ash",
+       "fact": "An Ashwarden can be hollowed into administering death as doctrine. The order guards against it now."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_maker_with_no_plan",
+   "name": "The Maker With No Plan",
+   "region": "valley",
+   "tier": "regional",
+   "giver": "maker_orrin",
+   "axis": "destruction_creation",
+   "traditions": [
+    "wright",
+    "enginewright",
+    "mason"
+   ],
+   "creatureId": "the_gearfather",
+   "premise": "The Gearfather has woken — a foundational pre-Transition engine, building-sized, still trying to 'complete' a project whose plans rotted a century ago, assembling anything nearby into its endless wrong construction. Maker Orrin is torn: it is the greatest pre-Transition machine anyone's seen, and it must be stopped before it builds the whole valley into its nothing.",
+   "stakes": "The ground itself is its body; a region assembled into meaningless construction if it isn't ended.",
+   "stages": [
+    "The terrain is alive — learn where the rotted core sits (KNOW).",
+    "Move through a landscape that reaches for you (MOVE).",
+    "Break the directive at the core (UNMAKE).",
+    "End the engine (HARM, at scale)."
+   ],
+   "routes": [
+    "Break it fully — the region is freed",
+    "Salvage its core for the Enginewrights before you end it"
+   ],
+   "outcomes": [
+    {
+     "id": "stilled",
+     "name": "The Gearfather Stilled",
+     "summary": "The engine stops; the ground is ground again.",
+     "narration": [
+      "You break the rotted directive at the core. The Gearfather goes still. The reaching stops.",
+      "The region can be walked, and built, and lived in again."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_gearfather",
+       "state": "slain",
+       "note": "the endless construction ends; region freed"
+      },
+      {
+       "type": "disposition",
+       "people": "wright",
+       "delta": 2
+      },
+      {
+       "type": "disposition",
+       "people": "mason",
+       "delta": 1
+      },
+      {
+       "type": "codex_fact",
+       "topic": "the_gearfather",
+       "fact": "A foundational engine that outlived its plans. Stilled at the core."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_wyrm_of_endings",
+   "name": "The Wyrm of Endings",
+   "region": "valley",
+   "tier": "epic",
+   "giver": "keeper_ilma",
+   "axis": "death_life",
+   "traditions": [
+    "ashwarden",
+    "marcher",
+    "seraphic",
+    "mason"
+   ],
+   "creatureId": "the_ashen_wyrm",
+   "premise": "The Ashen Wyrm has been seen on the far ridges — a dragon of the death-pole, hill-sized, its breath the grey stillness of everything stopping at once. Where it flies, the season ends. It does not hunt; it PASSES, and what it passes over is done. Keeper Ilma convenes the traditions: this dragon is the Ashwardens' own mercy become a weather, and it is a saga, not an encounter.",
+   "stakes": "Domain-scale. A valley's worth of endings on the wing. The largest mercy the valley will ever be asked to give.",
+   "stages": [
+    "Track a domain-scale flight; read where it will pass (KNOW).",
+    "Survive its stilling breath — craft and blood slow across a valley (WARD).",
+    "Wound a hill; find the one thing that touches it (UNMAKE).",
+    "End it together — no single hand does this (HARM, at scale)."
+   ],
+   "routes": [
+    "A campaign of position across seasons",
+    "A desperate single strike at terrible cost"
+   ],
+   "outcomes": [
+    {
+     "id": "felled",
+     "name": "The Wyrm Felled",
+     "summary": "The dragon falls; the stilled season returns.",
+     "narration": [
+      "Together, the traditions bring the Ashen Wyrm down. The ridges it stilled thaw back to life.",
+      "It is the largest ending anyone living has given. No one celebrates. They keep it, the way Ashwardens keep all endings."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_ashen_wyrm",
+       "state": "slain",
+       "note": "the stilled season returns to the ridges"
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": 3
+      },
+      {
+       "type": "disposition",
+       "people": "marcher",
+       "delta": 2
+      },
+      {
+       "type": "world_arc",
+       "arc": "the_ashen_wyrm",
+       "note": "a saga completed; the valley remembers who stood"
+      }
+     ]
+    },
+    {
+     "id": "passed_on",
+     "name": "It Passed On",
+     "summary": "Unslain; the wyrm moves beyond reach.",
+     "narration": [
+      "You cannot bring it down, but you turn it — the Ashen Wyrm flies on, beyond the valley's edge.",
+      "It is a saga left open. Somewhere else, a season is ending."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_ashen_wyrm",
+       "state": "departed",
+       "note": "unslain; a standing world-threat elsewhere"
+      },
+      {
+       "type": "world_arc",
+       "arc": "the_ashen_wyrm",
+       "note": "open saga; may return"
       }
      ]
     }

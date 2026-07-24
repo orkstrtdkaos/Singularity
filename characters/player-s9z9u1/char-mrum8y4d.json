@@ -60,9 +60,9 @@
   },
   "attunement": 1,
   "maxHealth": 30,
-  "health": 30,
+  "health": 26,
   "maxEnergy": 100,
-  "energy": 44,
+  "energy": 31,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -107,23 +107,25 @@
         "player": null,
         "summary": "A second Unlit figure detaches from the shadows and blocks the exit — a hostile meeting, still conversational, but with intent.",
         "narration": "The figure by the blue flame does not move. Then the blue flame bends.\n\nIt bends toward you, all at once, without a draft — and in the moment it bends, a second shape detaches from the far wall. Not the seated figure. Something else. It was waiting in the dark where the stone meets the bracket-shadows, and you simply could not see it.\n\nIt is a person, or was. Grey-robed like the first, but standing, and the way it stands is wrong — too still in the shoulders, too precise in the feet. It speaks in a voice that is almost friendly.\n\n\"You brought a light-thing,\" it says. \"We asked for no light-things.\"\n\nCy does not move. Its lens is open as wide as it goes, drinking the dark, watching.\n\nThe figure takes one step closer. The blue flame does not follow it. The seated figure by the bowl has not turned. This one is alone and it is between you and the passage out, and its hands are coming up from its robe — not with a weapon, exactly, but with an intention that makes the word weapon feel polite.\n\n\"You may leave the light-thing at the top of the stair,\" it says, still in that gentle voice. \"Or you may leave something else.\""
+      },
+      {
+        "player": null,
+        "summary": "Loki's misdirection found no purchase in the cult's absolute dark — the Standing Unlit waited it out and repeated the original demand.",
+        "narration": "The Standing Unlit does not raise its voice. It does not need to. The hands come up from the robe — steady, open, patient — and the gentleness in them is the worst part. You reach for the false position, the wrong read, the misdirection that should buy you a step back toward the passage. The words form. The posture shifts. And the figure simply waits for all of it to finish.\n\nWhen it speaks again, the voice is kind. \"You are very good at that,\" it says. \"We are not.\" It means something specific by 'not.' Not 'not good at seeing through it.' It means they do not have the reflex to be fooled. The dark, held this purely, leaves no room for a false signal to land. There is nothing here to catch the shape of it and believe. Your craft finds no purchase. It is like throwing a net into a room with nothing to catch.\n\nYou are still standing in the same spot. The passage out is still behind the figure. You have not been struck, not been touched. But you have spent something — energy, composure, the particular confidence that comes from knowing a trick will work — and the Standing Unlit has lost nothing at all. Cy's lens turns slowly toward you. The tiny irising of it is the only commentary it offers.\n\n\"Leave the light-thing at the stair,\" the Standing Unlit says. It is still gentle. \"Or tell us what you came for. Those are the two things you can do here.\""
       }
     ],
     "lastTurn": {
-      "narration": "The figure by the blue flame does not move. Then the blue flame bends.\n\nIt bends toward you, all at once, without a draft — and in the moment it bends, a second shape detaches from the far wall. Not the seated figure. Something else. It was waiting in the dark where the stone meets the bracket-shadows, and you simply could not see it.\n\nIt is a person, or was. Grey-robed like the first, but standing, and the way it stands is wrong — too still in the shoulders, too precise in the feet. It speaks in a voice that is almost friendly.\n\n\"You brought a light-thing,\" it says. \"We asked for no light-things.\"\n\nCy does not move. Its lens is open as wide as it goes, drinking the dark, watching.\n\nThe figure takes one step closer. The blue flame does not follow it. The seated figure by the bowl has not turned. This one is alone and it is between you and the passage out, and its hands are coming up from its robe — not with a weapon, exactly, but with an intention that makes the word weapon feel polite.\n\n\"You may leave the light-thing at the top of the stair,\" it says, still in that gentle voice. \"Or you may leave something else.\"",
-      "sceneSummary": "A second Unlit figure detaches from the shadows and blocks the exit — a hostile meeting, still conversational, but with intent.",
+      "narration": "The Standing Unlit does not raise its voice. It does not need to. The hands come up from the robe — steady, open, patient — and the gentleness in them is the worst part. You reach for the false position, the wrong read, the misdirection that should buy you a step back toward the passage. The words form. The posture shifts. And the figure simply waits for all of it to finish.\n\nWhen it speaks again, the voice is kind. \"You are very good at that,\" it says. \"We are not.\" It means something specific by 'not.' Not 'not good at seeing through it.' It means they do not have the reflex to be fooled. The dark, held this purely, leaves no room for a false signal to land. There is nothing here to catch the shape of it and believe. Your craft finds no purchase. It is like throwing a net into a room with nothing to catch.\n\nYou are still standing in the same spot. The passage out is still behind the figure. You have not been struck, not been touched. But you have spent something — energy, composure, the particular confidence that comes from knowing a trick will work — and the Standing Unlit has lost nothing at all. Cy's lens turns slowly toward you. The tiny irising of it is the only commentary it offers.\n\n\"Leave the light-thing at the stair,\" the Standing Unlit says. It is still gentle. \"Or tell us what you came for. Those are the two things you can do here.\"",
+      "sceneSummary": "Loki's misdirection found no purchase in the cult's absolute dark — the Standing Unlit waited it out and repeated the original demand.",
       "choices": [
         {
-          "label": "Hold your ground and talk — find out what they actually want before anything moves",
+          "label": "Tell them plainly what you came for — you are looking for someone the Unlit brought down from the city.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": -0.2
-          },
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "calm"
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -132,54 +134,51 @@
           "emergenceId": null
         },
         {
-          "label": "Use The Wrong Reality — give them a false read of the situation, make them think Cy is already gone",
+          "label": "Leave Cy at the stair — do what they ask, keep the peace, and go further in.",
           "attribute": "mental",
-          "subAttribute": "wits",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use The Better Story — give the Standing Unlit a version of why you are here that they can accept: the light-thing is a tool, not a doctrine, and you are not the Blaze.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": -0.4
+            "falsehood_truth": -0.2
           },
           "difficulty": 15,
           "intentTags": [
-            "deceive",
-            "feint"
+            "persuade"
           ],
-          "abilityId": "the_wrong_reality",
+          "abilityId": "the_better_story",
           "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Use The Misdirect — create a distraction toward the seated figure, buy a clean line to the passage",
-          "attribute": "social",
-          "subAttribute": "wits",
+          "label": "Read the Standing Unlit — use See the Made Thing to understand how their certainty is constructed and where it has a seam.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "falsehood_truth": -0.3
+            "falsehood_truth": 0.1
           },
           "difficulty": 15,
           "intentTags": [
-            "deceive",
-            "sneak"
+            "study"
           ],
-          "abilityId": "the_misdirect",
+          "abilityId": "see_the_made_thing",
           "energyCost": 1,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step back to the passage threshold — decline the confrontation and withdraw",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -187,21 +186,28 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -3,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
       "scene": {
-        "setting": "The outer chamber of the Unlit Deep — worked stone, ceiling invisible, empty lantern-brackets, the pale blue flame in its bowl thirty feet ahead. A second grey-robed figure now stands between Loki and the passage out. Early morning, no external light.",
+        "setting": "The outer chamber of the Unlit Deep — worked stone floor worn smooth, ceiling invisible, empty lantern-brackets, the pale blue flame in its stone bowl about thirty feet ahead. Early morning, no external light.",
         "npcsPresent": [
           {
             "name": "Robed Figure (Unlit — seated)",
-            "state": "Still by the blue flame, hands folded, has not turned."
+            "state": "Still by the blue flame, hands folded, facing away — has not turned or spoken."
           },
           {
-            "name": "Standing Unlit Figure",
-            "state": "Between Loki and the passage, hands rising from robe, speaking in a gentle voice."
+            "name": "Standing Unlit",
+            "state": "Between Loki and the passage out, hands raised from the robe, waiting with perfect patience."
+          },
+          {
+            "name": "Cy",
+            "state": "At Loki's heel, lamp shuttered, lens wide open, watching in silence."
           }
         ],
         "objects": [
@@ -211,33 +217,27 @@
           "Cy's shuttered lamp"
         ],
         "threads": [
-          "Who the Unlit have brought down here from the city",
-          "Why Cy shuttered the lamp without being asked",
-          "The standing figure blocks the exit and demands Cy be left behind or something else given",
+          "Who the Unlit have brought down from the city",
+          "Why Cy shuttered its lamp before the bottom step without being asked",
+          "The Standing Unlit's demand: leave Cy at the stair, or name your purpose",
           "The seated figure has still not acknowledged Loki"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "standing-unlit",
           "name": "Standing Unlit",
-          "role": "Cult member, guardian of the outer chamber",
-          "gender": "unknown",
-          "pronouns": "they/them",
-          "description": "Grey-robed, motionless until now — detached from the wall shadows. Precise, still, gentle-voiced. Hands coming up from the robe with an intent that doesn't need a weapon.",
-          "note": "Told Loki to leave Cy at the top of the stair or leave something else — phrased as a courtesy, delivered as a threat.",
+          "note": "Waited out Loki's misdirection without effort — the pure dark gives no purchase for false signals. Repeated the original demand, still gentle, still blocking the exit.",
           "learned": [
-            "Objects to Cy's presence — calls it a 'light-thing'",
-            "Speaks gently but the gentleness is a doctrine, not a warmth"
+            "Misdirection crafts find no grip in a space this purely held — not because they see through the trick but because there is nothing here to believe it"
           ],
           "skillsObserved": [
-            "Concealment in near-total dark",
-            "Calm threatening address"
+            "Immunity to social misdirection in pure-dark conditions",
+            "Absolute patience under attempted manipulation"
           ],
-          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Standing between Loki and the passage out, confrontation unresolved"
+          "statusNote": "Standing between Loki and the passage out, demand unresolved, waiting."
         }
       ],
       "codexUpdates": [
@@ -245,7 +245,7 @@
           "topic": "the-unlit",
           "label": "The Unlit",
           "kind": "faction",
-          "fact": "A second Unlit figure was concealed in the bracket-shadows of the outer chamber — patient, skilled at stillness, and gentle in address even while blocking the exit. They object to Cy's lamp on principle and call it a 'light-thing.'",
+          "fact": "Misdirection and false signals find no purchase in their space — not because they are perceptive, but because the pure dark they hold leaves nothing for a false read to land on. The craft simply has nothing to catch.",
           "links": [
             "the-unlit-deep"
           ]
@@ -253,20 +253,24 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Brief confrontation at the threshold"
+        "why": "A tense, brief exchange — the confrontation took only a few minutes."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The outer chamber of the Unlit Deep — worked stone, ceiling invisible, empty lantern-brackets, the pale blue flame in its bowl thirty feet ahead. A second grey-robed figure now stands between Loki and the passage out. Early morning, no external light.",
+      "setting": "The outer chamber of the Unlit Deep — worked stone floor worn smooth, ceiling invisible, empty lantern-brackets, the pale blue flame in its stone bowl about thirty feet ahead. Early morning, no external light.",
       "npcsPresent": [
         {
           "name": "Robed Figure (Unlit — seated)",
-          "state": "Still by the blue flame, hands folded, has not turned."
+          "state": "Still by the blue flame, hands folded, facing away — has not turned or spoken."
         },
         {
-          "name": "Standing Unlit Figure",
-          "state": "Between Loki and the passage, hands rising from robe, speaking in a gentle voice."
+          "name": "Standing Unlit",
+          "state": "Between Loki and the passage out, hands raised from the robe, waiting with perfect patience."
+        },
+        {
+          "name": "Cy",
+          "state": "At Loki's heel, lamp shuttered, lens wide open, watching in silence."
         }
       ],
       "objects": [
@@ -276,9 +280,9 @@
         "Cy's shuttered lamp"
       ],
       "threads": [
-        "Who the Unlit have brought down here from the city",
-        "Why Cy shuttered the lamp without being asked",
-        "The standing figure blocks the exit and demands Cy be left behind or something else given",
+        "Who the Unlit have brought down from the city",
+        "Why Cy shuttered its lamp before the bottom step without being asked",
+        "The Standing Unlit's demand: leave Cy at the stair, or name your purpose",
         "The seated figure has still not acknowledged Loki"
       ]
     }
@@ -365,20 +369,24 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Told Loki to leave Cy at the top of the stair or leave something else — phrased as a courtesy, delivered as a threat."
+        "[d1] Told Loki to leave Cy at the top of the stair or leave something else — phrased as a courtesy, delivered as a threat.",
+        "[d1] Waited out Loki's misdirection without effort — the pure dark gives no purchase for false signals. Repeated the original demand, still gentle, still blocking the exit."
       ],
       "knownFacts": [
         "Objects to Cy's presence — calls it a 'light-thing'",
-        "Speaks gently but the gentleness is a doctrine, not a warmth"
+        "Speaks gently but the gentleness is a doctrine, not a warmth",
+        "Misdirection crafts find no grip in a space this purely held — not because they see through the trick but because there is nothing here to believe it"
       ],
       "skillsObserved": [
         "Concealment in near-total dark",
-        "Calm threatening address"
+        "Calm threatening address",
+        "Immunity to social misdirection in pure-dark conditions",
+        "Absolute patience under attempted manipulation"
       ],
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Standing between Loki and the passage out, confrontation unresolved",
+      "statusNote": "Standing between Loki and the passage out, demand unresolved, waiting.",
       "domains": {
         "primary": "umbral"
       },
@@ -534,7 +542,7 @@
     "lastSharedReadAt": "2026-07-24T20:02:26.202Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -789,7 +797,8 @@
         "kind": "faction",
         "facts": [
           "[d1] A cult of the pure dark-pole. They are described as gentle. They want something that cannot be compromised with. The Umbrals go quiet when asked about them. They have apparently taken someone from the city.",
-          "[d1] A second Unlit figure was concealed in the bracket-shadows of the outer chamber — patient, skilled at stillness, and gentle in address even while blocking the exit. They object to Cy's lamp on principle and call it a 'light-thing.'"
+          "[d1] A second Unlit figure was concealed in the bracket-shadows of the outer chamber — patient, skilled at stillness, and gentle in address even while blocking the exit. They object to Cy's lamp on principle and call it a 'light-thing.'",
+          "[d1] Misdirection and false signals find no purchase in their space — not because they are perceptive, but because the pure dark they hold leaves nothing for a false read to land on. The craft simply has nothing to catch."
         ],
         "links": [
           "the-unlit-deep"
@@ -962,8 +971,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784923453317,
-  "rev": 69,
+  "updatedAt": 1784923604101,
+  "rev": 73,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1271,7 +1280,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 2
+    "umbral_depths": 3
   },
   "opLossPending": false,
   "sessions": [
@@ -1294,10 +1303,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-24T20:03:01.555Z",
-      "lastAt": "2026-07-24T20:04:13.315Z",
+      "lastAt": "2026-07-24T20:06:44.101Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [],
@@ -1310,21 +1319,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 31,
-    "choices": 31,
-    "characterDeltas": 10,
-    "scene": 31,
+    "sceneSummary": 32,
+    "choices": 32,
+    "characterDeltas": 11,
+    "scene": 32,
     "placeUpdates": 3,
-    "codexUpdates": 22,
-    "timeOps": 31,
+    "codexUpdates": 23,
+    "timeOps": 32,
     "offer": 3,
     "generateRequest": 2,
-    "sceneEnded": 9,
-    "npcUpdates": 25,
+    "sceneEnded": 10,
+    "npcUpdates": 26,
     "moveTo": 1,
     "gambitApt": 1
   },
-  "_opTurns": 31,
+  "_opTurns": 32,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {
@@ -1525,53 +1534,7 @@
       "danger": 5
     }
   },
-  "activeEncounter": {
-    "defId": "re-re_raider_duel",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-re_raider_duel",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [],
-      "opponentHealth": 6,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the aggressor",
-        "attributes": {
-          "practical": 4,
-          "physical": 4,
-          "mental": 4,
-          "social": 4
-        },
-        "energy": 94,
-        "maxEnergy": 94,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 3,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 3,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 94
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 24,
     "lastBeat": "witness_power"

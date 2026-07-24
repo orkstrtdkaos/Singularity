@@ -64,12 +64,12 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
-import { frameModel, frameSize } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — make a structured encounter OBVIOUS (kind + win-condition + the three exits); frameSize routes takeover-vs-banner by tier
+import { frameModel, frameSize, chaseFromFight } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — make a structured encounter OBVIOUS (kind + win-condition + the three exits); frameSize routes takeover-vs-banner by tier; chaseFromFight builds the chase you flee INTO (§6a)
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.251";
+const APP_VERSION = "1.8.252";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4223,6 +4223,13 @@ async function onChoice(choice) {
   // SNG-145: while an intent gate stands, the gate IS the choice — answer it first.
   if (character._pendingIntent) { renderPlay(character.activeScene?.lastTurn || null, { aside: "Answer the moment of intent first — it's waiting on you." }); return; }
   lastPlayerAction = choice?.label || choice?.exactWords || null; // SNG-066: for feedback forensics
+  // SNG-230 §6a (behavior): FLEE a fight → enter a CHASE (not a teleport — the chase IS the break-away, with its
+  // own frame/stages/freefield); a caught chained chase (abandon) → drop back into the FIGHT. Intercepted BEFORE
+  // the roll: the transition IS the resolution, GM-narrated. Only the classic (non-skill-battle) duel routes flee
+  // through here; the skill-battle fight's own #sb-flee button calls beginChaseFromFight directly.
+  { const encT = activeEnc();
+    if (encT?.def?.type === "duel" && choice.encounterAction === "flee") { await beginChaseFromFight(encT.def); return; }
+    if (encT?.def?.type === "challenge" && encT.def._chainedFrom?.kind === "fight" && choice.encounterAction === "abandon") { await beginFightFromChase(encT.def); return; } }
   let itemsAdvanced = [];
   const location = hereNow();
   const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
@@ -7633,7 +7640,7 @@ function renderSkillBattle(lastRound = null) {
   for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(lastRound); };
   for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => sbDeclare(window._sbSkills[Number(b.dataset.sbskill)], { intensity: sbIntensity });
   document.getElementById("sb-read").onclick = () => sbDeclare({ function: "shield", tier: 1, attribute: "mental", name: "reading them" }, { intensity: "conserve", scouting: true });
-  document.getElementById("sb-flee").onclick = () => sbFlee();
+  document.getElementById("sb-flee").onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE, not a quick roll
   document.getElementById("sb-yield").onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb, steps, yield: true }));
 }
 
@@ -7652,18 +7659,6 @@ function sbDeclare(skill, { intensity = "standard", scouting = false } = {}) {
   if (checkIncapacitation(character)) { sbEnd({ ...rr, ended: true, outcome: "incapacitated" }); return; }
   if (rr.ended) { sbEnd(rr); return; }
   renderSkillBattle({ opponent: rr.opponent, _scout: scouting });
-}
-
-/** Try to break away — a quick physical roll against the flee difficulty, resolved through the same lifecycle. */
-function sbFlee() {
-  const enc = activeEnc(); if (!enc) return;
-  const fleeAction = { label: "break away", attribute: "physical", axes: {}, difficulty: enc.def.opponent?.fleeDifficulty ?? 15, tags: [] };
-  const res = resolveAction({ character, action: fleeAction, location: hereNow(), rules: CONTENT.rules, aptitudeMods: aptitudeMods(character, CONTENT.rules.playerAptitudes) });
-  const rr = skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb: CONTENT.skillBattle.engine, steps: CONTENT.intensity.steps, flee: true, fleeResolution: res });
-  character.health = Math.max(0, character.health + (rr.deltas?.health || 0));
-  character.activeEncounter = rr.ended ? null : { defId: enc.def.id, state: rr.state };
-  saveCharacter(character);
-  if (rr.ended) sbEnd(rr); else renderSkillBattle(null);
 }
 
 /** The contest ends: clear it, then hand the outcome to the GM to narrate the aftermath and return to the scene. */
@@ -7696,6 +7691,53 @@ async function sbEnd(rr) {
   const result = await runGM({ resolution: null, playerInput: `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine} Narrate the aftermath in one beat and return to the scene.)` });
   if (result) renderPlay(result.turn, {});
   else renderPlay(character.activeScene?.lastTurn || null, { aside: outLine });
+}
+
+/** SNG-230 §6a (behavior): FLEE a fight → you enter a CHASE, not a teleport. Build the chase from the fight
+ *  (chaseFromFight), keep the fight def around so a caught chase can drop back into it, start the chase, and hand
+ *  the SHIFT to the GM to narrate — then the chase frame renders (renderPlay shows it; the freefield + exits
+ *  drive it). Robust: a GM hiccup still leaves the character in the chase, never wedged. */
+async function beginChaseFromFight(fightDef) {
+  if (!fightDef) return;
+  const chase = chaseFromFight(fightDef);
+  character.customEncounters = character.customEncounters || {};
+  character.customEncounters[chase.id] = chase;
+  if (fightDef.id && !character.customEncounters[fightDef.id] && !CONTENT.encounters?.[fightDef.id]) character.customEncounters[fightDef.id] = fightDef; // keep the fight to fall back into
+  character.activeEncounter = { defId: chase.id, state: startEncounter(chase) };
+  sbLastPlayerFn = null; sbIntensity = "standard";
+  saveCharacter(character);
+  const nm = fightDef.opponent?.name || "your foe";
+  renderPlay(null, { thinking: "You break and run…" });
+  try {
+    const result = await runGM({ resolution: null, playerInput: `(The character breaks off the fight with ${nm} and runs — it becomes a CHASE. Narrate the shift into a running chase in one beat: they give chase, the ground turns dangerous. Do NOT resolve the chase — it plays out in its own frame.)` });
+    if (result) renderPlay(result.turn, {}); else renderPlay(character.activeScene?.lastTurn || null, { aside: `You break away — ${nm} gives chase.` });
+  } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: `You break away — ${nm} gives chase.` }); }
+}
+
+/** SNG-230 §6a (behavior): CAUGHT. A chase chained from a fight, abandoned/run-down → back into the fight (or,
+ *  if the fight def is gone, a clean fail). Re-enters the ORIGINAL fight (kept in customEncounters), fresh — the
+ *  foe regrouped — and the GM narrates the catch. */
+async function beginFightFromChase(chaseDef) {
+  const from = chaseDef?._chainedFrom || {};
+  const nm = from.opponentName || "your foe";
+  const fightDef = CONTENT.encounters?.[from.fightDefId] || character.customEncounters?.[from.fightDefId] || null;
+  if (!fightDef) { // no fight to return to — fail out cleanly rather than dead-end
+    character.activeEncounter = null; saveCharacter(character);
+    renderPlay(null, { thinking: "…" });
+    const r = await runGM({ resolution: null, playerInput: `(${nm} runs the character down — the chase is lost. Narrate being caught and its cost in one beat, then return to the scene.)` }).catch(() => null);
+    renderPlay(r?.turn || character.activeScene?.lastTurn || null, r ? {} : { aside: `${nm} runs you down.` });
+    return;
+  }
+  const isSB = !!(CONTENT.skillBattle?.engine && fightDef.type === "duel" && fightDef.skillBattle !== false);
+  const oppSheet = isSB ? synthesizeOpponentSheet(fightDef.opponent, CONTENT.skillBattle.engine) : null;
+  character.activeEncounter = { defId: fightDef.id, state: startEncounter(fightDef, { oppSheet }) };
+  saveCharacter(character);
+  renderPlay(null, { thinking: "They run you down…" });
+  try {
+    const result = await runGM({ resolution: null, playerInput: `(The chase is lost — ${nm} runs the character down and it becomes a FIGHT again. Narrate the catch and turning to face them in one beat${isSB ? " (the contest plays out in a panel)" : ""}.)` });
+    if (result) renderPlay(result.turn, {}); else renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} catches you — you have to fight.` });
+  } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} catches you — you have to fight.` }); }
+  if (isSB) renderSkillBattle();
 }
 
 // ---------- play rendering ----------

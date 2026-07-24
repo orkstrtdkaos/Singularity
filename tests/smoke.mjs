@@ -27,7 +27,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
-import { frameModel, encounterKind, frameExits, frameSize, frameTransition, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
+import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -7921,7 +7921,7 @@ await (async () => {
   // routes takeover-vs-banner; the size signal is stamped onto the def at fire time.
   const appSrc230 = readFileSync(join(root, "app.js"), "utf8");
   check("230: frameModel + frameSize are WIRED into renderPlay (imported + header rendered + size-routed), not dead exports",
-    /import \{ frameModel, frameSize \} from "\.\/engine\/encounterFrame\.js"/.test(appSrc230) && /const fm = frameModel\(d, e\.state/.test(appSrc230) && /class="enc-frame/.test(appSrc230));
+    /import \{ frameModel, frameSize.*\} from "\.\/engine\/encounterFrame\.js"/.test(appSrc230) && /const fm = frameModel\(d, e\.state/.test(appSrc230) && /class="enc-frame/.test(appSrc230));
   check("230 P1b: renderPlay routes takeover-vs-banner via frameSize; fireEncounter stamps the size signal (danger) on the def",
     /frameSize\(d, e\.state\) === "takeover"/.test(appSrc230) && /enc-frame-takeover/.test(appSrc230) && /offer\.def\.danger = dl/.test(appSrc230));
 
@@ -7945,6 +7945,19 @@ await (async () => {
     fightExits[1].role === "flee" && fightExits[1].chainTo === "chase" && /becomes The Chase/i.test(fightExits[1].means));
   const hazardExits = frameExits("hazard", { stages: [{}] }, {});
   check("230 §6a: an unchained exit is not annotated (hazard flee has no chainTo)", !hazardExits[1].chainTo && !/it becomes/i.test(hazardExits[1].means));
+
+  // §6a BEHAVIOR: fleeing a fight becomes a real chase (chaseFromFight builds it), carrying _chainedFrom so a
+  // caught chase drops back into the fight. Pure def-builder tested here; the app wiring is source-asserted.
+  const fightDef230 = { id: "duel-raider", type: "duel", name: "A Road-Raider", opponent: { name: "the raider" }, danger: 3 };
+  const chase230 = chaseFromFight(fightDef230);
+  check("230 §6a: chaseFromFight builds a challenge/chase from the fight, carrying the pursuer + the fight to return to",
+    chase230.type === "challenge" && chase230.flavor === "chase" && chase230._chainedFrom?.kind === "fight" && chase230._chainedFrom.fightDefId === "duel-raider" && /raider/.test(chase230.name) && chase230.stages.length >= 3 && chase230.danger === 3);
+  check("230 §6a: the chase reads as a frame (kind chase, its own three exits) — the same frame machinery drives it",
+    frameModel(chase230, { stageIndex: 0 }, null).kind === "chase" && encounterKind(chase230) === "chase");
+  check("230 §6a WIRING: fleeing a fight starts a chase, and a caught chained chase re-enters the fight — GM-narrated",
+    /beginChaseFromFight\(activeEnc\(\)\?\.def\)/.test(appSrc230) && /encT\?\.def\?\.type === "duel" && choice\.encounterAction === "flee"/.test(appSrc230) && /_chainedFrom\?\.kind === "fight" && choice\.encounterAction === "abandon"/.test(appSrc230) && /async function beginChaseFromFight/.test(appSrc230) && /async function beginFightFromChase/.test(appSrc230));
+  check("230 §6a GUARD: the frame stays a legibility layer through the chain — the chase renders with the GM + freefield (no bespoke mini-loop)",
+    /character\.activeEncounter = \{ defId: chase\.id, state: startEncounter\(chase\)/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

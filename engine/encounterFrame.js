@@ -55,6 +55,32 @@ export function frameTransition(kind, exitRole) {
   return FRAME_TRANSITIONS[kind]?.[exitRole] || null;
 }
 
+/** SNG-230 §6a (behavior): fleeing a fight becomes a CHASE — build the chase encounter def from the fight, so
+ *  breaking off is a real playable sequence with stakes, not a teleport. Carries `_chainedFrom` so a caught
+ *  chase (abandon) knows which fight to drop back into. The chase is a normal `challenge` (its stages drive the
+ *  existing round path; the freefield + GM narrate it like any encounter). Pure — the app persists it + starts
+ *  it. The opponent rides along as the pursuer. */
+export function chaseFromFight(fightDef) {
+  const oppName = fightDef?.opponent?.name || fightDef?.name || "your foe";
+  return {
+    schemaVersion: 1,
+    id: `chase-${fightDef?.id || "fight"}`,
+    type: "challenge",
+    flavor: "chase",
+    name: `The Chase — ${oppName}`,
+    setup: `You break off — ${oppName} gives chase across the broken country. Lose them, or be run down.`,
+    fromRandom: true,
+    danger: [fightDef?.danger, fightDef?.minDanger].find(d => Number.isFinite(d)) ?? null,
+    // the fight to fall back into if caught (the def stays in customEncounters; the pursuer's name for narration)
+    _chainedFrom: { kind: "fight", fightDefId: fightDef?.id || null, opponentName: oppName },
+    stages: [
+      { name: "Break line of sight", attribute: "physical", subAttribute: "agility", axes: {}, difficulty: 8, failureCost: { health: 2, energy: 4, hours: 0 } },
+      { name: "A burst through the broken country", attribute: "physical", subAttribute: "agility", axes: {}, difficulty: 12, failureCost: { health: 2, energy: 4, hours: 0 } },
+      { name: "Lose them — or be run down", attribute: "physical", subAttribute: "wits", axes: {}, difficulty: 16, failureCost: { health: 3, energy: 4, hours: 0 } },
+    ],
+  };
+}
+
 /** Which frame KIND an encounter is. def.type is the structural truth (duel/challenge/puzzle); flavor themes the
  *  challenge kinds (chase vs. hazard). Returns null for an encounter that gets no frame. Pure. */
 export function encounterKind(def, entry = null) {

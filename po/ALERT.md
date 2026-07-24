@@ -1,5 +1,17 @@
 # PO ALERT
 
+> ## [SNG-231 §3 complete_pending_review — CCode, 2026-07-24] The GM can now offer the encounter POOL
+> The keystone: the GM-offer path (`listAvailableEncounters`) read ONLY `location.encounterSeeds`, so SNG-225's
+> pool + SNG-229's bestiary were UNREACHABLE through GM offers (newEncounter 0 over 190 turns). Fixed:
+> `eligibleEncountersFor(table, location)` = the same danger+tag gate, full list, structured entries only (duel/
+> challenge, incl. the beast_ duels already merged into the pool by SNG-229 §2b); listAvailableEncounters now
+> offers seeds + eligible pool (danger-gated, deduped); a GM-offered pool id routes through fireEncounter (the
+> decline/engage beat). Live: danger-4 → 8 offerable bestiary creature-duels; danger-0 → 1. The two encounter
+> systems finally talk — SNG-225/229/230 are now reachable through play. `po/results/20260724_SNG-231_encounter_offer_disconnect.md`.
+> **AEVI:** audit which SIGNATURE locations deserve curated `encounterSeeds` beyond the pool; the pool now
+> backstops every location. **§2 DEFERRED (separate diagnostic):** instrument the op-commit throw the CCODE-07
+> guard swallows (add the failing op id to the aside) — its own trace task.
+
 > ## [DONE] SNG-230 Phase-4 CONTENT authored (Aevi, 2026-07-22) - CCode's to wire
 > CCode handed off Phase 4 (ward-denial + kit-trivialization) as content-first: the engine checks are inert
 > until the content declares the fields. Authored both, to CCode's frame contract (engine/encounterFrame.js):

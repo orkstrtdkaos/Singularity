@@ -27,6 +27,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
+import { frameModel, encounterKind, frameExits, FRAME_KINDS } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -7882,6 +7883,35 @@ await (async () => {
   const gmSrc229 = readFileSync(join(root, "engine/gm.js"), "utf8");
   check("229 §2c: the selector is WIRED into the GM context (registry row + rendered block), not a dead export",
     /traditionMotiveDetail/.test(gmRegSrc229) && /traditionMotivationsForGM\(doc, ids/.test(gmRegSrc229) && /traditionMotiveDetail/.test(gmSrc229) && /WHY THESE TRADITIONS ACT/.test(gmSrc229));
+}
+
+// ---- SNG-230 Phase 1: the ENCOUNTER FRAME model — make a structured encounter obvious (kind + win + 3 exits) ----
+{
+  // KIND ← (def.type, flavor)
+  check("230: encounterKind maps type+flavor → kind (duel→fight, challenge/chase→chase, challenge/dangerous→hazard, puzzle→puzzle)",
+    encounterKind({ type: "duel" }) === "fight" && encounterKind({ type: "challenge", flavor: "chase" }) === "chase" &&
+    encounterKind({ type: "challenge", flavor: "dangerous" }) === "hazard" && encounterKind({ type: "puzzle" }) === "puzzle" &&
+    encounterKind({ type: "narrative" }) === null);
+
+  // the frame descriptor: title + WIN CONDITION + meter + the THREE EXITS always present (the grammar)
+  const chaseDef = synthesizeChallengeDef({ id: "x", flavor: "chase", stages: 3, seed: "runners in the cut-lane" });
+  const fm = frameModel(chaseDef, { stageIndex: 1, stagesDone: ["s0"] }, null);
+  check("230: frameModel yields kind + a stated win-condition + a meter + a stage",
+    fm.kind === "chase" && typeof fm.winCondition === "string" && fm.winCondition.length > 0 && fm.meter.total === 3 && fm.meter.done === 1 && fm.stage.total === 3);
+  check("230: the THREE EXITS are always present — defeat, flee, fail (the grammar §2.3)",
+    fm.exits.length === 3 && fm.exits.map(e => e.role).join(",") === "defeat,flee,fail" && fm.exits.every(e => typeof e.means === "string" && e.means.length));
+  check("230: defeat + flee are player-chooseable (wire to the existing [data-encact]: stage/abandon); fail is the outcome of losing (no button, its stakes surfaced)",
+    fm.exits[0].action === "stage" && fm.exits[1].action === "abandon" && fm.exits[2].action === null && !!fm.failStakes);
+  // a FIGHT's fail is a chooseable Yield (skill_battle already has the button)
+  const fFight = frameExits("fight", {}, {});
+  check("230: a FIGHT's fail is a chooseable Yield (all three fight exits are buttons)", fFight[2].action === "yield" && fFight[0].action === "strike" && fFight[1].action === "flee");
+  // §Guard: an unframed (narrative) encounter yields no model
+  check("230: an unframed encounter yields no frame model (null)", frameModel({ type: "narrative" }, {}, null) === null);
+
+  // WIRED into play (not a dead/test-only export): app.js imports frameModel and renders the header
+  const appSrc230 = readFileSync(join(root, "app.js"), "utf8");
+  check("230: frameModel is WIRED into renderPlay (imported + the enc-frame header rendered), not a dead export",
+    /import \{ frameModel \} from "\.\/engine\/encounterFrame\.js"/.test(appSrc230) && /const fm = frameModel\(d, e\.state/.test(appSrc230) && /class="enc-frame/.test(appSrc230));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

@@ -1786,7 +1786,138 @@
     "Silas delegates lodgings for Crane and Veth to Mara, says goodnight to the assembled group, and walks home through the dark lane with Pell — the night's business done, the departure staged for first light."
   ],
   "currentLocationId": "millbrook",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "player": "Sit with Pell a while before sleep — name what tomorrow might mean.",
+        "summary": "Silas and Pell sit together in the low-lit room above the grain store and name what tomorrow holds — Crane toward the committee, the filtration work already in motion, and the fold in the upper reach the thing neither of them has said aloud to anyone else.",
+        "narration": "The lane outside is quiet. You and Pell sit on the edge of the bed in the dark room above the grain store, the borrowed lamp turned low. Huginn is on the window ledge with his back to you both, which is about as much privacy as the bird will give.\n\nYou name it plainly. Tomorrow Crane meets the committee — or the committee's runner meets Crane, which amounts to the same thing. The document roll goes with him. The filtration work starts whether or not anyone upstream has made a decision, because the materials are staged and Dara has the sequence. And the two of you head toward the fold in the upper reach, which is the part you haven't said aloud yet to anyone but each other.\n\nPell listens with her hands in her lap and her eyes on the middle distance. When you finish she says, said Pell, \"The fold first. Everything else is already moving without us.\" A beat passes. \"That's the point of the fellowship,\" she adds, quieter, and there's something satisfied in it — not relief exactly, more like a thing set down correctly.\n\nYou sit together in the low light a while longer. Huginn shifts on the ledge, adjusts one wing, settles. The village outside is still. Tomorrow is its own weight, but tonight it is only the two of you and the dark and the faint smell of river water on the spring air."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The lane outside is quiet. You and Pell sit on the edge of the bed in the dark room above the grain store, the borrowed lamp turned low. Huginn is on the window ledge with his back to you both, which is about as much privacy as the bird will give.\n\nYou name it plainly. Tomorrow Crane meets the committee — or the committee's runner meets Crane, which amounts to the same thing. The document roll goes with him. The filtration work starts whether or not anyone upstream has made a decision, because the materials are staged and Dara has the sequence. And the two of you head toward the fold in the upper reach, which is the part you haven't said aloud yet to anyone but each other.\n\nPell listens with her hands in her lap and her eyes on the middle distance. When you finish she says, said Pell, \"The fold first. Everything else is already moving without us.\" A beat passes. \"That's the point of the fellowship,\" she adds, quieter, and there's something satisfied in it — not relief exactly, more like a thing set down correctly.\n\nYou sit together in the low light a while longer. Huginn shifts on the ledge, adjusts one wing, settles. The village outside is still. Tomorrow is its own weight, but tonight it is only the two of you and the dark and the faint smell of river water on the spring air.",
+      "sceneSummary": "Silas and Pell sit together in the low-lit room above the grain store and name what tomorrow holds — Crane toward the committee, the filtration work already in motion, and the fold in the upper reach the thing neither of them has said aloud to anyone else.",
+      "choices": [
+        {
+          "label": "Sleep — tomorrow needs you rested",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Stay awake a little longer — there's something else you want to say to her",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Huginn what he makes of the upper reach — he's been quiet about it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Take out the father's sealed fold and hold it a moment before sleep — not opening it, just carrying the weight of it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp turned down, window open a crack, night quiet outside. Huginn on the ledge with his back to the room.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Sitting on the edge of the bed beside Silas, hands in her lap, settled."
+          },
+          {
+            "name": "Huginn",
+            "state": "On the window ledge, wing adjusted, apparently facing the dark outside."
+          }
+        ],
+        "objects": [
+          "Borrowed lamp at low burn",
+          "The father's sealed fold (in pack or on the shelf)",
+          "Waymarker (on person)",
+          "Document roll (with Crane for the morning)"
+        ],
+        "threads": [
+          "The fold in the upper reach — named between them, not yet named to anyone else",
+          "Crane's morning departure and the committee meeting in three days",
+          "The filtration build already in motion under Dara and Mara"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell Ran Marsh",
+          "note": "Named the fold as first priority without prompting — 'everything else is already moving without us.' Satisfied by the fellowship structure holding.",
+          "statusNote": "In the room above the grain store, settled for the night.",
+          "learned": [
+            "The fold in the upper reach is the next move — named aloud between the two of them tonight."
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A quiet sit before sleep — a quarter-hour at most."
+      }
+    },
+    "sceneState": {
+      "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp turned down, window open a crack, night quiet outside. Huginn on the ledge with his back to the room.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Sitting on the edge of the bed beside Silas, hands in her lap, settled."
+        },
+        {
+          "name": "Huginn",
+          "state": "On the window ledge, wing adjusted, apparently facing the dark outside."
+        }
+      ],
+      "objects": [
+        "Borrowed lamp at low burn",
+        "The father's sealed fold (in pack or on the shelf)",
+        "Waymarker (on person)",
+        "Document roll (with Crane for the morning)"
+      ],
+      "threads": [
+        "The fold in the upper reach — named between them, not yet named to anyone else",
+        "Crane's morning departure and the committee meeting in three days",
+        "The filtration build already in motion under Dara and Mara"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 13,
@@ -2800,7 +2931,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Found a drainage cut on the March Road at the ward's outer margin — wrong slope for its purpose, cold iron underneath from years of misdirected water. Named it plainly to Silas and Veth.",
         "[d13] Named the drainage cut's mechanical failure plainly — wrong slope, pooling water, cold iron underneath — and recommended it be flagged to whoever tends the road. Then stepped away from it and moved on.",
         "[d13] Arrived at the Crossing, immediately read the settlement for working infrastructure — noted no forge smoke, spotted a cooperage.",
         "[d13] Tasked with scouting forge resources and booking a bout at the Coliseum — moving northwest.",
@@ -2809,17 +2939,18 @@
         "[d13] Read the same absence as Silas — watching the mill's lamp in the afternoon light, waiting.",
         "[d13] Acknowledged Crane's introduction with a single nod — no words, which is agreement. Crouched to read the blueprint line on the flagstone and said nothing, which from Pell is the same thing.",
         "[d13] Extended the intake channel by half a length through ironsense — a pressure-head correction for low-water weeks that Crane and Silas had not included.",
-        "[d13] Grounded the fold-talk on the road with one plain sentence — 'It can wait until we're out of the wet.' Still carrying her full pack."
+        "[d13] Grounded the fold-talk on the road with one plain sentence — 'It can wait until we're out of the wet.' Still carrying her full pack.",
+        "[d13] Named the fold as first priority without prompting — 'everything else is already moving without us.' Satisfied by the fellowship structure holding."
       ],
       "knownFacts": [
-        "The Boundary-Stone oval can serve as a chassis for braided crafts — Palework, Wither, or a sustained draw if the skill existed to hold it steady across a perimeter",
         "The Boundary-Stone-Shielding Word join reads as a jointed hinge through ironsense — flexible under stress, not fused",
         "The Shielding Word names what is already true — the certainty precedes the craft, and the craft names it.",
         "Her ironsense reads the join between Boundary-Stone and the Shielding Word as load-bearing stress, not as intention — the load is what she can follow",
         "The soul bond can carry the ashwarden attending-quality from Silas — she felt it arrive and her ironsense sharpened on it, finding something at the outer margin she had not previously caught",
         "The drainage cut on the March Road near the ward's outer margin runs at a wrong slope — water pools rather than drains, and the iron beneath it has been cold in the wrong direction for years",
         "The boar hunt was the first date — cold ground, a clean kill taken together, the first hard thing done as a pair; the tusks on Renna's bench are the unbroken line from that ridge to this commission",
-        "Intake head must account for low-water pressure drop or the first filter stage starves"
+        "Intake head must account for low-water pressure drop or the first filter stage starves",
+        "The fold in the upper reach is the next move — named aloud between the two of them tonight."
       ],
       "skillsObserved": [
         "reading a ward's structural geometry through ironsense and e",
@@ -2830,7 +2961,7 @@
         "extending a filtration design through ironsense load-reading"
       ],
       "status": "active",
-      "statusNote": "Walking into Millbrook with the party — outside Mara's store, waiting to go in.",
+      "statusNote": "In the room above the grain store, settled for the night.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 13
@@ -4768,7 +4899,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 588,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the…",
@@ -6284,21 +6415,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.982078026938368,
-    "cerebral": 14.910764933824156,
-    "social": 11.945010813209336,
-    "generous": 4.342681735449328,
-    "cautious": 2.955599405052894,
-    "physical": 0.36491725022745064,
-    "risky": 0.3207097275173126,
-    "ruthless": 0.2836714513265054,
-    "carousing": 0.065063505684554,
-    "amorous": 1.099975648032035,
-    "patient": 0.3902736576620949,
-    "stealth": 0.0006524703674369965,
-    "devotion": 0.3446339905577781,
-    "craft": 0.5429541739598104,
-    "leadership": 1.5014773012949827
+    "strategic": 22.407526076264908,
+    "cerebral": 14.537995810478552,
+    "social": 11.646385542879102,
+    "generous": 4.234114692063095,
+    "cautious": 2.8817094199265716,
+    "physical": 0.3557943189717644,
+    "risky": 0.3126919843293798,
+    "ruthless": 0.27657966504334275,
+    "carousing": 0.06343691804244016,
+    "amorous": 2.0724762568312345,
+    "patient": 0.3805168162205425,
+    "stealth": 0.0006361586082510715,
+    "devotion": 0.33601814079383363,
+    "craft": 0.5293803196108151,
+    "leadership": 1.463940368762608
   },
   "aptitudes": [
     "strategist",
@@ -6307,7 +6438,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 777,
+  "actionCount": 778,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6697,8 +6828,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784901632403,
-  "rev": 1267,
+  "updatedAt": 1784903149967,
+  "rev": 1268,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9511,7 +9642,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 514,
+    "valley": 515,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9646,10 +9777,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T14:00:32.400Z",
+      "lastAt": "2026-07-24T14:25:49.966Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 27
+      "beats": 28
     }
   ],
   "company": [
@@ -9849,15 +9980,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 147,
-    "choices": 147,
+    "sceneSummary": 148,
+    "choices": 148,
     "characterDeltas": 61,
-    "scene": 147,
-    "npcUpdates": 131,
+    "scene": 148,
+    "npcUpdates": 132,
     "factUpdates": 11,
     "placeUpdates": 26,
     "codexUpdates": 92,
-    "timeOps": 141,
+    "timeOps": 142,
     "imagePrompt": 3,
     "sceneEnded": 33,
     "itemUpdates": 2,
@@ -9874,7 +10005,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 147,
+  "_opTurns": 148,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

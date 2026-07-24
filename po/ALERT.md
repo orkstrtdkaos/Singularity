@@ -14,9 +14,14 @@
 > answered: PERILOUS-flavor triage. Phase plan in the results doc.
 > **AEVI — the frame shape is SET:** author per-kind copy (titles/verbs/meter labels in `FRAME_KINDS`) + PUZZLE/
 > STANDOFF exemplar encounters against the `frameModel` descriptor.
-> **ERIK ANSWERED OQ1 (2026-07-24) — SIZE BY TIER:** riffraff/notable → the compact inline banner (the Phase 1
-> header, refined); regional/epic → a full takeover panel like skill_battle/gambit. Phase 1b builds to this
-> (needs the encounter's tier/danger → size routing + a `renderEncounterFrame` takeover for the big ones).
+> **OQ1 ANSWERED + SHIPPED (Phase 1b, v1.8.250):** size by tier — `frameSize(def,state)` routes regional/epic or
+> danger≥3 → a dominant TAKEOVER card (buttons inside); riffraff/notable → the compact BANNER (buttons below).
+> fireEncounter stamps the place's dangerLevel onto a synthesized chase/hazard so it can be sized. Reuses the
+> existing [data-encact] handlers (no round-loop rework) — only presentation/placement change. Live-verified
+> both variants render with the real CSS.
+> **NEXT — Phase 2 (§6a) frame chaining:** FIGHT —flee→ CHASE —fail→ FIGHT/FAIL, as a data transition graph on
+> `FRAME_KINDS`. Then Phase 3 (§6b/§7a collapse/morph + degree bands), Phase 4 (§7b/§7c ward-denial +
+> kit-trivialization — Aevi content-heavy).
 > Deferred to later phases: narrative-promotion (shouldFrame/PERILOUS), chaining (§6a), collapse/morph+degrees
 > (§6b/§7a), ward-denial + kit-trivialization (§7b/§7c).
 

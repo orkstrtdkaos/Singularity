@@ -1865,58 +1865,80 @@
         "player": "Ask Veth directly whether the left branch admits a Blazeborn at all — before you commit to anything",
         "summary": "Veth names the Zone's interference logic — flame inside is the danger, not the man. The Blazeborn traveler extinguishes his fire without being asked.",
         "narration": "You turn to Veth, keeping the Blazeborn man in your peripheral view. \"The left branch,\" you say quietly. \"Does it admit him? Can a Blazeborn travel it without trouble?\"\n\nVeth answers without looking at you. Her eyes stay on the man and the tree-line behind him, reading them in the same short arcs. \"The Zone does not care what you are,\" she says. \"It cares what you carry. A Blazeborn with a living flame walks into interference the same as anyone else with an active working.\" She pauses. \"His fire.\" She names it flat and plain. \"He is burning it here, at the entrance, not inside. That is not accident.\"\n\nThe man on the stone has not moved. His copper-bright fire sits in the clay bowl before him and breathes its slow breath. He is watching you with the patient attention of someone who has been waiting long enough to stop being impatient about it. Huginn is still on your shoulder, facing him, as motionless as the mist.\n\n\"You want to ask me something,\" the man says. He does not make it a question. \"You are wondering whether I named your father's name, or your mother's side, or something else entirely. I will answer that.\" He tilts his head toward the bowl. \"But I am going to put this out first, because your bird is correct and I am not a fool.\" He cups both hands around the clay bowl, and the copper flame goes out between his palms without smoke or sound."
+      },
+      {
+        "player": "It's Pell's call - she's the best judge of iron around.",
+        "summary": "Pell reads the Blazeborn traveler by ironsense — no working iron, nothing primed. He waits with the lineage offer still open.",
+        "narration": "You step back half a pace and look at Pell. 'It's yours,' you say. 'You're the best judge of iron here.'\n\nPell does not look at you. Her eyes are already on the man. She crosses the last few feet of road at an even pace and crouches beside the clay bowl. She turns it over once in her hands — the extinguished fire gone cold, the clay plain and rough-made. Then she sets it down and looks at the man himself. She reads him the way she reads metal at the forge: not quickly, not with ceremony, just the flat attention of someone who has handled enough of a thing to know its character on sight.\n\n'The bowl is river clay,' she says, straightening. 'Fired low. No alloy in it, no wire, nothing seated.' She steps back to your shoulder. 'He carries nothing I can feel. If there is iron on him it is not working and it is not primed.' A pause. 'That is as much as I can tell you from here.'\n\nThe man on the stone has watched all of this without moving. His hands are still cupped around the cold bowl. When Pell finishes he gives a single, unhurried nod — the acknowledgment of someone who expected to be read and is not offended by it. Then he looks back at you, and the offer he made is still open in his expression. He said he would answer the lineage question. He is still waiting."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Veth, keeping the Blazeborn man in your peripheral view. \"The left branch,\" you say quietly. \"Does it admit him? Can a Blazeborn travel it without trouble?\"\n\nVeth answers without looking at you. Her eyes stay on the man and the tree-line behind him, reading them in the same short arcs. \"The Zone does not care what you are,\" she says. \"It cares what you carry. A Blazeborn with a living flame walks into interference the same as anyone else with an active working.\" She pauses. \"His fire.\" She names it flat and plain. \"He is burning it here, at the entrance, not inside. That is not accident.\"\n\nThe man on the stone has not moved. His copper-bright fire sits in the clay bowl before him and breathes its slow breath. He is watching you with the patient attention of someone who has been waiting long enough to stop being impatient about it. Huginn is still on your shoulder, facing him, as motionless as the mist.\n\n\"You want to ask me something,\" the man says. He does not make it a question. \"You are wondering whether I named your father's name, or your mother's side, or something else entirely. I will answer that.\" He tilts his head toward the bowl. \"But I am going to put this out first, because your bird is correct and I am not a fool.\" He cups both hands around the clay bowl, and the copper flame goes out between his palms without smoke or sound.",
-      "sceneSummary": "Veth names the Zone's interference logic — flame inside is the danger, not the man. The Blazeborn traveler extinguishes his fire without being asked.",
+      "narration": "You step back half a pace and look at Pell. 'It's yours,' you say. 'You're the best judge of iron here.'\n\nPell does not look at you. Her eyes are already on the man. She crosses the last few feet of road at an even pace and crouches beside the clay bowl. She turns it over once in her hands — the extinguished fire gone cold, the clay plain and rough-made. Then she sets it down and looks at the man himself. She reads him the way she reads metal at the forge: not quickly, not with ceremony, just the flat attention of someone who has handled enough of a thing to know its character on sight.\n\n'The bowl is river clay,' she says, straightening. 'Fired low. No alloy in it, no wire, nothing seated.' She steps back to your shoulder. 'He carries nothing I can feel. If there is iron on him it is not working and it is not primed.' A pause. 'That is as much as I can tell you from here.'\n\nThe man on the stone has watched all of this without moving. His hands are still cupped around the cold bowl. When Pell finishes he gives a single, unhurried nod — the acknowledgment of someone who expected to be read and is not offended by it. Then he looks back at you, and the offer he made is still open in his expression. He said he would answer the lineage question. He is still waiting.",
+      "sceneSummary": "Pell reads the Blazeborn traveler by ironsense — no working iron, nothing primed. He waits with the lineage offer still open.",
       "choices": [
         {
-          "label": "Ask him directly: who are you, and how do you know my lineage?",
+          "label": "Ask him plainly: who are you, how do you know my father's line, and what brought you to this road at this hour?",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
             "persuade",
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Read him with Order-Sense before he speaks again — see what design he is part of",
+          "label": "Use Order-Sense on the man himself — read what design he is part of before he speaks another word",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "scout"
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Let Huginn speak first — the bird has been watching him since you arrived and has said nothing yet",
+          "label": "Ask Huginn first — the bird has been watching him since he sat down; let it say what it sees",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Read him with Deathsense — not as a threat, but to understand what he is carrying",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "scout"
+            "careful"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Name yourself fully — Post Master of Stillwater's Trouble, Ashwarden-adjacent, bound south into the Zone — and invite him to do the same",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
       "scene": {
@@ -1924,11 +1946,11 @@
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Spread left across the road, Memory tilted down and forward in carry-grip, eyes on the seated man."
+            "state": "Returned to Silas's shoulder after her ironsense read — standing easy, Memory in carry-grip, eyes on the man."
           },
           {
             "name": "Veth Ondra",
-            "state": "Spread right, still reading the tree-line, eyes moving in short arcs — spoke without turning."
+            "state": "Still spread right, reading the tree-line in short arcs."
           },
           {
             "name": "Huginn",
@@ -1936,12 +1958,12 @@
           },
           {
             "name": "Blazeborn traveler",
-            "state": "Seated on the low stone, copper fire now extinguished — both hands still cupped around the cold clay bowl, watching the party without urgency."
+            "state": "Seated on the low stone, both hands cupped around the cold clay bowl, watching Silas — the lineage offer still open in his expression."
           }
         ],
         "objects": [
-          "Memory's shadow-twin — in Silas's right hand",
-          "Clay-bowl fire — extinguished, still in the man's hands",
+          "Memory — in Pell's carry-grip",
+          "Clay bowl — extinguished, cold, confirmed plain river clay by Pell's ironsense",
           "The thickening mist ahead where the road bends further west"
         ],
         "threads": [
@@ -1954,33 +1976,21 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Named the Zone's interference logic plainly: it is what you carry, not what you are — a Blazeborn with a living flame walks into interference; his fire at the entrance, not inside, is deliberate.",
+          "npcId": "pell",
+          "name": "Pell Ran Marsh",
+          "note": "Read the Blazeborn traveler by ironsense on Silas's deferral — confirmed no working iron, nothing primed. Stepped back to his shoulder and named her limit plainly.",
           "learned": [
-            "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean."
+            "The Blazeborn traveler carries no working or primed iron — confirmed by ironsense at close range"
           ],
           "skillsObserved": [
-            "reading a situation's structural logic from a single observed detail — the fire's placement as deliberate positioning, not habit"
+            "ironsense read of a person at close range — confirmed absence of working iron"
           ],
-          "statusNote": "On the March Road — two paces right of Silas, reading the tree-line, still watchful."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "disputed-zone-interference",
-          "label": "The Zone's Interference Logic",
-          "kind": "lore",
-          "fact": "The Disputed Zone does not discriminate by tradition — it responds to what you carry. An active working, a living flame, a craft in motion: these attract interference. A Blazeborn who extinguishes before entering walks in as clean as anyone else. The fire's placement at the entrance, not inside, is a practiced precaution.",
-          "links": [
-            "the-second-thread",
-            "what-the-water-remembers"
-          ]
+          "statusNote": "On the left branch road inside the Zone entrance — at Silas's shoulder after the ironsense read, Memory in carry-grip."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange at the road's edge — a question, an answer, and the fire going out."
+        "hoursPassed": 0.1,
+        "why": "a brief exchange and a close read — a few minutes at most"
       }
     },
     "sceneState": {
@@ -1988,11 +1998,11 @@
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Spread left across the road, Memory tilted down and forward in carry-grip, eyes on the seated man."
+          "state": "Returned to Silas's shoulder after her ironsense read — standing easy, Memory in carry-grip, eyes on the man."
         },
         {
           "name": "Veth Ondra",
-          "state": "Spread right, still reading the tree-line, eyes moving in short arcs — spoke without turning."
+          "state": "Still spread right, reading the tree-line in short arcs."
         },
         {
           "name": "Huginn",
@@ -2000,12 +2010,12 @@
         },
         {
           "name": "Blazeborn traveler",
-          "state": "Seated on the low stone, copper fire now extinguished — both hands still cupped around the cold clay bowl, watching the "
+          "state": "Seated on the low stone, both hands cupped around the cold clay bowl, watching Silas — the lineage offer still open in h"
         }
       ],
       "objects": [
-        "Memory's shadow-twin — in Silas's right hand",
-        "Clay-bowl fire — extinguished, still in the man's hands",
+        "Memory — in Pell's carry-grip",
+        "Clay bowl — extinguished, cold, confirmed plain river clay by Pell's ironsense",
         "The thickening mist ahead where the road bends further west"
       ],
       "threads": [
@@ -3034,7 +3044,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Held the shadow-twin through the caller-link test — named the change in weight plainly ('Something moved'). Steady and accurate as always.",
         "[d14] Accepted Memory into her hands without ceremony — named the arrangement plainly: 'Yours to call. Mine to carry.' The split design is acknowledged and held.",
         "[d14] Received Silas's declaration of love at the forge bench at dawn — answered it plainly, in her own register: 'Me too.' Both packed for the road without ceremony.",
         "[d14] At the forge door at dawn — packed and ready, Memory in hand, watching Silas for the direction.",
@@ -3043,30 +3052,31 @@
         "[d14] Stepped south without ceremony — Memory shouldered, road-ready.",
         "[d14] Stepped past the threshold without ceremony — Memory shouldered, road-ready beside Silas.",
         "[d14] Walking south at dawn, Memory on her back, road-quiet beside Silas.",
-        "[d14] Halted instantly on the road-signal, hand on Memory, watching the mist without instruction."
+        "[d14] Halted instantly on the road-signal, hand on Memory, watching the mist without instruction.",
+        "[d14] Read the Blazeborn traveler by ironsense on Silas's deferral — confirmed no working iron, nothing primed. Stepped back to his shoulder and named her limit plainly."
       ],
       "knownFacts": [
-        "The Shielding Word is not a thread on the blade but the condition of the conjuring — seated once, inherited by every subsequent call of the shadow-spear.",
         "The shadow-spear needs a Weirmark in the grain to answer a call across distance — otherwise the design is present but the caller is not identified",
         "The shadow-spear is fully sealed — Weirmark names the caller, Shielding Word locks the certainty, and the duplicate answers any call from any distance.",
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
         "The shadow-twin answers only the named caller — it can be held by another person but will not fly to their hand without the caller's word",
         "The shadow-twin shifted register when Silas spoke her name into the caller-link — it is now a permission-acknowledged hold, not a resisted one.",
         "Memory is now hers to carry; Silas holds the call. The shadow-twin on the bench is his half of the design.",
-        "Silas named his love to her plainly and directly, no hedging."
+        "Silas named his love to her plainly and directly, no hedging.",
+        "The Blazeborn traveler carries no working or primed iron — confirmed by ironsense at close range"
       ],
       "skillsObserved": [
-        "ironsense confirmation of channel-seat fit by touch alone",
         "anchor closure by ironsense feel under no direction",
         "copper-wire seating at a socket throat by thumbnail pressure",
         "ironsense confirmation of shadow-duplicate fidelity",
         "ironsense confirmation of a completed seal under working-for",
-        "accurate tactile reporting of a working's feel under hands-o"
+        "accurate tactile reporting of a working's feel under hands-o",
+        "ironsense read of a person at close range — confirmed absenc"
       ],
       "status": "active",
-      "statusNote": "On the March Road south of Millbrook — halted at the fork, hand on Memory, watching south.",
+      "statusNote": "On the left branch road inside the Zone entrance — at Silas's shoulder after the ironsense read, Memory in carry-grip.",
       "lastSeen": {
-        "locationId": "millbrook",
+        "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
       },
       "bondType": "romantic",
@@ -5070,11 +5080,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T19:48:10.149Z",
+    "lastSharedReadAt": "2026-07-24T20:33:21.473Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
-    "lastGenCount": 595,
-    "turnsSinceOffer": 1,
+    "lastGenCount": 596,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Huginn turns its head toward the high window at the moment the shadow-duplicate vanishes — not following the light, but listening. There…",
@@ -7077,8 +7087,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784922617821,
-  "rev": 1346,
+  "updatedAt": 1784925267722,
+  "rev": 1351,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10114,7 +10124,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 563,
+    "valley": 565,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10251,10 +10261,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T19:50:17.818Z",
+      "lastAt": "2026-07-24T20:34:27.719Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 76
+      "beats": 78
     }
   ],
   "company": [
@@ -10323,7 +10333,7 @@
   },
   "_intentAsked": null,
   "_turnApplyError": {
-    "at": "2026-07-24T19:46:05.827Z",
+    "at": "2026-07-24T19:56:20.379Z",
     "message": "Cannot read properties of undefined (reading 'split')",
     "stack": "TypeError: Cannot read properties of undefined (reading 'split') <-     at findExistingNpc (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:61:20) <-     at applyNpcUpdates (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:92:13) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.256:3763:3)"
   },
@@ -10466,15 +10476,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 190,
-    "choices": 190,
+    "sceneSummary": 191,
+    "choices": 191,
     "characterDeltas": 74,
-    "scene": 190,
-    "npcUpdates": 172,
+    "scene": 191,
+    "npcUpdates": 173,
     "factUpdates": 13,
     "placeUpdates": 33,
     "codexUpdates": 111,
-    "timeOps": 184,
+    "timeOps": 185,
     "imagePrompt": 3,
     "sceneEnded": 44,
     "itemUpdates": 5,
@@ -10491,7 +10501,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 190,
+  "_opTurns": 191,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

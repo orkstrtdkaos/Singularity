@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 22,
-  "xp": 2111,
+  "xp": 2116,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -144,7 +144,7 @@
   "maxHealth": 135,
   "health": 135,
   "maxEnergy": 205,
-  "energy": 198,
+  "energy": 196,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1760,51 +1760,53 @@
         "player": "Read the channel with Order-Sense — understand what the intake treatment is before you approach, and what it tells you about what Crane is filtering for.",
         "summary": "Order-Sense fails in the thin substrate — the intake treatment's purpose stays opaque; Crane must be met face to face.",
         "narration": "You reach for Order-Sense at the water's edge and the lattice gives you almost nothing.\n\nThe substrate here is thin — worked ground, settlement-old, the kind of place where the nanite density has been low for years and what remains is scattered. You feel the craft start, feel the familiar opening of design-sight, and then it closes. The channel is just a channel. The intake treatment reads as a blur — something is there, a purpose, a filter arrangement — but the resolution is not fine enough to tell you what it is for. You get the shape of a lid without knowing what it covers.\n\nHuginn is still on the far bank. It gives one more low sound and does not look away from the water.\n\nVeth steps up beside you. \"Thin here,\" she says quietly, without judgment. She is reading the same absence you are. \"We will need to ask him directly.\"\n\nPell says nothing, but her gaze has moved to the mill ahead — the wheel turning slow in the low water, a single lamp burning in the ground-floor window despite the afternoon light. Someone is working inside, or waiting."
+      },
+      {
+        "player": "Before you knock — let Huginn cross and tell you what it hears in the ending already present here.",
+        "summary": "Huginn crosses to the mill's foundation and reads what is ending inside — a slow process, long underway, nothing that hurries itself.",
+        "narration": "You hold at the bank and wait.\n\nHuginn crosses without lifting. It walks the water's edge to a fallen plank someone laid as a crossing, picks its way over with the deliberate care of something that has no intention of getting wet, and stops on the far side near the mill's foundation stones. It stands there for a long moment — still, head angled, one eye on the mill's lower window where the lamp is burning.\n\nThen it looks back at you.\n\nNot a sound this time. Just the look. But you have been reading Huginn long enough to know the difference between 'nothing here' and 'something here, pay attention.' This is the second one.\n\nAfter another breath it gives a single short croak — low, unhurried, the sound it makes when something is ending slowly, not fast. Not a crisis. A long process, well underway. Whatever is finishing inside that mill has been finishing for a while, and it is doing so on its own quiet schedule, aware of nothing that would interrupt it.\n\nPell does not speak. Veth stands beside you and watches the bird, and then watches you."
       }
     ],
     "lastTurn": {
-      "narration": "You reach for Order-Sense at the water's edge and the lattice gives you almost nothing.\n\nThe substrate here is thin — worked ground, settlement-old, the kind of place where the nanite density has been low for years and what remains is scattered. You feel the craft start, feel the familiar opening of design-sight, and then it closes. The channel is just a channel. The intake treatment reads as a blur — something is there, a purpose, a filter arrangement — but the resolution is not fine enough to tell you what it is for. You get the shape of a lid without knowing what it covers.\n\nHuginn is still on the far bank. It gives one more low sound and does not look away from the water.\n\nVeth steps up beside you. \"Thin here,\" she says quietly, without judgment. She is reading the same absence you are. \"We will need to ask him directly.\"\n\nPell says nothing, but her gaze has moved to the mill ahead — the wheel turning slow in the low water, a single lamp burning in the ground-floor window despite the afternoon light. Someone is working inside, or waiting.",
-      "sceneSummary": "Order-Sense fails in the thin substrate — the intake treatment's purpose stays opaque; Crane must be met face to face.",
-      "scene": {
-        "setting": "Packed-mud bank of the settlement's north water-channel, afternoon — the mill visible a minute's walk ahead, the channel running low and unusually clean, flat early-spring light.",
-        "npcsPresent": [
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Standing half a step to Silas's left, gaze on the mill's ground-floor window — a lamp burning inside."
-          },
-          {
-            "name": "Huginn",
-            "state": "On the far bank — still, looking at the water, a second low sound given."
-          },
-          {
-            "name": "Veth (Stillwater) Ondra",
-            "state": "Beside Silas, having named the substrate's thinness plainly."
-          }
-        ],
-        "objects": [
-          "The water-channel — low, running cleaner than the creek at the well",
-          "The mill — a minute's walk north, wheel turning slow, lamp burning in the ground-floor window",
-          "Packed mud bank with the mender's shed and grain store behind"
-        ],
-        "threads": [
-          "Crane is filtering for something specific — the intake purpose unread",
-          "Huginn gave a second low sound at the water — something is ending here, or near here",
-          "A lamp burns in the mill's ground-floor window in afternoon light — someone is inside"
-        ]
-      },
+      "narration": "You hold at the bank and wait.\n\nHuginn crosses without lifting. It walks the water's edge to a fallen plank someone laid as a crossing, picks its way over with the deliberate care of something that has no intention of getting wet, and stops on the far side near the mill's foundation stones. It stands there for a long moment — still, head angled, one eye on the mill's lower window where the lamp is burning.\n\nThen it looks back at you.\n\nNot a sound this time. Just the look. But you have been reading Huginn long enough to know the difference between 'nothing here' and 'something here, pay attention.' This is the second one.\n\nAfter another breath it gives a single short croak — low, unhurried, the sound it makes when something is ending slowly, not fast. Not a crisis. A long process, well underway. Whatever is finishing inside that mill has been finishing for a while, and it is doing so on its own quiet schedule, aware of nothing that would interrupt it.\n\nPell does not speak. Veth stands beside you and watches the bird, and then watches you.",
+      "sceneSummary": "Huginn crosses to the mill's foundation and reads what is ending inside — a slow process, long underway, nothing that hurries itself.",
       "choices": [
         {
-          "label": "Walk to the mill and knock — meet Crane face to face, no preamble.",
+          "label": "Cross to Huginn and knock on the mill's door — Crane needs to be met face to face.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "travel"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Before you knock — let Huginn cross and tell you what it hears in the ending already present here.",
+          "label": "Use Deathsense before you knock — read what is ending in Crane himself, so you know what you are walking into.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Ask Veth what she reads from here — her plain Ashwarden sense of the place, before the door opens.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Use The Attended End — let Marrow tell you plainly what is ending here and how long it has.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -1812,76 +1814,97 @@
             "study"
           ],
           "abilityId": "the-attended-end",
-          "trivial": true
-        },
-        {
-          "label": "Ask Veth: what does an Ashwarden read in water treated this carefully by someone who already knows?",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Try Deathsense on the water itself — read whether anything in it is ending, and how.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "deathsense",
           "energyCost": 2,
           "trivial": false
         }
       ],
+      "scene": {
+        "setting": "Packed-mud bank of the settlement's north water-channel, afternoon — Huginn now on the far bank near the mill's foundation stones, the lamp still burning in the mill's ground-floor window, flat early-spring light.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Standing half a step to Silas's left, watching Huginn on the far bank — quiet, waiting."
+          },
+          {
+            "name": "Huginn",
+            "state": "On the far bank near the mill's foundation stones — still, eye on the window, having given one short low croak."
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "Beside Silas, watching Huginn and then watching Silas — reading his read of the bird."
+          }
+        ],
+        "objects": [
+          "The water-channel — low, running cleaner than the creek at the well",
+          "A fallen plank laid as a crossing to the far bank",
+          "The mill — a minute's walk north, wheel turning slow, lamp burning in the ground-floor window",
+          "Packed mud bank with the mender's shed and grain store behind"
+        ],
+        "threads": [
+          "Huginn's single croak: something is ending inside the mill — slow, long underway, unhurried",
+          "Crane is filtering for something specific — the intake purpose still unread",
+          "A lamp burns in the mill's ground-floor window in afternoon light — someone is inside"
+        ]
+      },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Read the same absence as Silas — watching the mill's lamp in the afternoon light, waiting.",
-          "statusNote": "Standing at the channel bank north of the well lane — gaze on the mill, ready to move."
-        },
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Crossed to the mill's far bank on its own, read the mill's ending, returned one low short croak — something is finishing inside, slowly, long underway.",
+          "learned": [
+            "Something inside the mill is ending slowly — a long process, well underway, on its own schedule."
+          ],
+          "skillsObserved": [
+            "reading the presence and pace of an ending at a distance without being asked"
+          ],
+          "statusNote": "On the far bank near the mill's foundation stones — having delivered its read."
+        }
+      ],
+      "codexUpdates": [
         {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Named the substrate's thinness plainly without judgment — the craft simply could not resolve here.",
-          "statusNote": "Beside Silas at the channel bank, reading the same thin ground."
+          "topic": "edvar-crane",
+          "label": "Edvar Crane",
+          "kind": "person",
+          "fact": "Huginn's read at the mill's foundation: something is ending inside — slowly, long underway, on its own schedule. Not a crisis. A process. Crane is inside, and whatever is finishing in him has been doing so for a while.",
+          "links": [
+            "the-second-thread",
+            "what-the-water-remembers",
+            "huginn",
+            "millbrook"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief attempt at the water's edge — moments only."
+        "why": "a short wait while Huginn crosses and reads"
       }
     },
     "sceneState": {
-      "setting": "Packed-mud bank of the settlement's north water-channel, afternoon — the mill visible a minute's walk ahead, the channel running low and unusually clean, flat early-spring light.",
+      "setting": "Packed-mud bank of the settlement's north water-channel, afternoon — Huginn now on the far bank near the mill's foundation stones, the lamp still burning in the mill's ground-floor window, flat early-spring light.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing half a step to Silas's left, gaze on the mill's ground-floor window — a lamp burning inside."
+          "state": "Standing half a step to Silas's left, watching Huginn on the far bank — quiet, waiting."
         },
         {
           "name": "Huginn",
-          "state": "On the far bank — still, looking at the water, a second low sound given."
+          "state": "On the far bank near the mill's foundation stones — still, eye on the window, having given one short low croak."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Beside Silas, having named the substrate's thinness plainly."
+          "state": "Beside Silas, watching Huginn and then watching Silas — reading his read of the bird."
         }
       ],
       "objects": [
         "The water-channel — low, running cleaner than the creek at the well",
+        "A fallen plank laid as a crossing to the far bank",
         "The mill — a minute's walk north, wheel turning slow, lamp burning in the ground",
         "Packed mud bank with the mender's shed and grain store behind"
       ],
       "threads": [
-        "Crane is filtering for something specific — the intake purpose unread",
-        "Huginn gave a second low sound at the water — something is ending here, or near here",
+        "Huginn's single croak: something is ending inside the mill — slow, long underway, unhurried",
+        "Crane is filtering for something specific — the intake purpose still unread",
         "A lamp burns in the mill's ground-floor window in afternoon light — someone is inside"
       ]
     }
@@ -4621,7 +4644,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 586,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "The stock shelter, plain and open on the lee side of the field-stone wall — exactly the kind of place Huginn will land first and inspect…",
@@ -6124,21 +6147,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.826607735761925,
-    "cerebral": 13.529874136044358,
-    "social": 13.362337586667806,
-    "generous": 4.934213858994585,
-    "cautious": 4.291736754820076,
-    "physical": 0.6700135980639209,
-    "risky": 0.5888454939689504,
-    "ruthless": 0.5208406279857166,
-    "carousing": 0.1194611477511378,
-    "amorous": 2.019632235147202,
-    "patient": 0.7165697358422023,
-    "stealth": 0.001197981236140711,
-    "devotion": 0.6327721144583319,
-    "craft": 0.9969018440533866,
-    "leadership": 0.966649153252605
+    "strategic": 17.380942542367876,
+    "cerebral": 14.191627282643248,
+    "social": 13.028279147001111,
+    "generous": 4.8108585125197205,
+    "cautious": 4.184443335949574,
+    "physical": 0.6532632581123229,
+    "risky": 0.5741243566197266,
+    "ruthless": 0.5078196122860736,
+    "carousing": 0.11647461905735934,
+    "amorous": 1.9691414292685216,
+    "patient": 0.6986554924461472,
+    "stealth": 0.0011680317052371932,
+    "devotion": 0.6169528115968737,
+    "craft": 0.9719792979520518,
+    "leadership": 0.9424829244212899
   },
   "aptitudes": [
     "strategist",
@@ -6146,7 +6169,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 753,
+  "actionCount": 754,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6536,8 +6559,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784890853503,
-  "rev": 1220,
+  "updatedAt": 1784890960154,
+  "rev": 1221,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8586,7 +8609,7 @@
       "palework": 30,
       "deathsense": 33,
       "shadowstep": 21,
-      "the-attended-end": 38,
+      "the-attended-end": 39,
       "wildcraft": 6,
       "the_raised_thing": 12,
       "the_ended_threat": 4,
@@ -8655,7 +8678,7 @@
     ],
     "lastUsed": {
       "deathsense": 23,
-      "the-attended-end": 23,
+      "the-attended-end": 24,
       "order_sense": 24,
       "boundary_stone": 23,
       "palework": 24,
@@ -9099,7 +9122,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 487,
+    "valley": 488,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9234,10 +9257,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T11:00:53.492Z",
+      "lastAt": "2026-07-24T11:02:40.137Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -9437,15 +9460,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 122,
-    "choices": 122,
+    "sceneSummary": 123,
+    "choices": 123,
     "characterDeltas": 49,
-    "scene": 122,
-    "npcUpdates": 106,
+    "scene": 123,
+    "npcUpdates": 107,
     "factUpdates": 7,
     "placeUpdates": 21,
-    "codexUpdates": 71,
-    "timeOps": 116,
+    "codexUpdates": 72,
+    "timeOps": 117,
     "imagePrompt": 3,
     "sceneEnded": 26,
     "itemUpdates": 2,
@@ -9460,7 +9483,7 @@
     "stageOps": 5,
     "generateRequest": 3
   },
-  "_opTurns": 122,
+  "_opTurns": 123,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

@@ -4827,7 +4827,7 @@ await (async () => {
 {
   const appSrc155 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   // The structural guarantee: applyTurn is CALLED inside a try, and the catch preserves the beat.
-  const guarded = /try \{\s*applyTurn\(result\.turn, resolution, playerWords\);\s*\} catch \(err\) \{/.test(appSrc155);
+  const guarded = /applyTurn\(result\.turn, resolution, playerWords\)[\s\S]{0,1400}?\} catch \(err\) \{/.test(appSrc155) && /try \{[\s\S]{0,400}?applyTurn\(result\.turn, resolution, playerWords\)/.test(appSrc155);
   check("CCODE-07: applyTurn is wrapped so a throw cannot discard the rendered narration", guarded);
   check("CCODE-07: the catch persists activeScene.lastTurn so continuity survives a partial apply",
     /_applyFailed = true/.test(appSrc155) && /catch \(err\)[\s\S]{0,1100}?character\.activeScene = \{ locationId: character\.currentLocationId, turns: sceneTurns, lastTurn: result\.turn/.test(appSrc155));
@@ -7882,13 +7882,16 @@ await (async () => {
   check("231 §3: a GM-offered POOL id routes through fireEncounter (the decline/engage beat), not a silent no-op",
     /const entry = \(CONTENT\.randomEncounters\?\.encounters \|\| \[\]\)\.find\(e => e\.id === choice\.encounterId\)/.test(appSrc231) && /if \(entry\) \{ await fireEncounter\(entry\); return; \}/.test(appSrc231));
 
-  // §2: the intermittent op-commit throw the CCODE-07 guard swallows now NAMES the failing op-group (diagnosable).
-  check("231 §2: applyTurn tracks the op-group phase (characterDeltas / codexUpdates / questUpdates / …)",
-    /_applyPhase = "characterDeltas"/.test(appSrc231) && /_applyPhase = "codexUpdates"/.test(appSrc231) && /_applyPhase = "questUpdates"/.test(appSrc231) && /_applyPhase = "npcUpdates"/.test(appSrc231));
-  check("231 §2: the CCODE-07 guard reports WHICH op threw (op on the error report + the failed-op on the turn), not just 'something didn't land'",
-    /const phase = _applyPhase \|\| "unknown"/.test(appSrc231) && /op: phase/.test(appSrc231) && /result\.turn\._applyFailedOp = phase/.test(appSrc231));
-  check("231 §2: the player-facing aside names the failing step",
-    /the \$\{turn\._applyFailedOp[\s\S]*?\} step/.test(appSrc231));
+  // §2: the intermittent op-commit throw is now ISOLATED per op-group AND named — so the turn (and every OTHER
+  // op, crucially newEncounter → a duel starts) lands even when one op throws. This is the "duel won't start" fix.
+  check("231 §2: applyStep ISOLATES each op-group (npcUpdates / codexUpdates / newEncounter / …) so one throw doesn't abort the rest",
+    /function applyStep\(label, fn\)/.test(appSrc231) && /applyStep\("npcUpdates", \(\) => applyNpcUpdates/.test(appSrc231) && /applyStep\("codexUpdates"/.test(appSrc231) && /applyStep\("newEncounter"/.test(appSrc231));
+  check("231 §2: a fresh NPC's newEncounter (the duel/fight) SURVIVES an npcUpdates throw — the abort-cascade is gone",
+    /applyStep\("newEncounter", \(\) => \{ const nd = sanitizeNewEncounter/.test(appSrc231));
+  check("231 §2: isolated failures are NAMED (which op-group) on the report + the turn + the aside — not just 'something didn't land'",
+    /character\._applyFailures\?\.length/.test(appSrc231) && /result\.turn\._applyFailedOp = ops\.join/.test(appSrc231) && /the \$\{turn\._applyFailedOp[\s\S]*?\} step/.test(appSrc231));
+  check("231 §2: affiliation enrichment is best-effort — a throw there never breaks the meet (the person is still registered)",
+    /affiliation enrichment failed \(person still registered\)/.test(readFileSync(join(root, "engine/npcs.js"), "utf8")));
 
   // §2c: tradition_motivations is LOADED (its own type, not dead location-lore) and surfaced SELECTIVELY —
   // only the traditions in play this beat, each with its want + the creature its craft DREADS.

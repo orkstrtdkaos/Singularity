@@ -606,6 +606,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .point-row .pips { letter-spacing: 3px; color: var(--accent); min-width: 70px; }
 .point-row button { background: var(--panel2); border: 1px solid var(--border); color: var(--ink); border-radius: 4px; width: 26px; height: 26px; }
 .roster-item { display: flex; justify-content: space-between; align-items: center; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+/* SNG: character delete is a de-emphasized 🗑 (not a button beside Play) that expands to a two-step confirm */
+.roster-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.roster-del-icon { background: none; border: none; color: var(--ink-dim); opacity: .5; font-size: 15px; cursor: pointer; padding: 4px 6px; border-radius: 6px; line-height: 1; }
+.roster-del-icon:hover { opacity: 1; color: var(--danger); background: rgba(192,91,77,0.12); }
+.del-confirm-label { font-size: 12px; color: var(--ink-dim); }
+.btn.danger { border-color: var(--danger); color: var(--danger); }
+.btn.danger:hover { background: var(--danger); color: var(--bg); }
 .footer-note { margin-top: 20px; font-size: 12px; color: var(--ink-dim); text-align: center; }
 
 /* SNG-014 dev encounter test panel (dev flag only) */

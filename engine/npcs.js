@@ -187,9 +187,14 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     // can no longer disagree. Runs after role/skillsObserved are populated (its evidence), only fills
     // what is missing, and assigns nothing the record cannot support.
     if (ctx.affiliate && (!n.domains || !n.people)) {
-      const a = ctx.affiliate(n);
-      if (a.domains && !n.domains) { n.domains = a.domains; n.domainsSource = a.domainsSource; }
-      if (a.people && !n.people) { n.people = a.people; n.peopleSource = a.peopleSource; }
+      // SNG-231 §2: affiliation is ENRICHMENT — it derives domains/people from role/region for a fresh person.
+      // It must NEVER break the meet (the person is already registered above): a throw here is what aborted
+      // applyTurn on a fresh NPC, losing every later op incl. the newEncounter that starts a duel. Best-effort now.
+      try {
+        const a = ctx.affiliate(n);
+        if (a.domains && !n.domains) { n.domains = a.domains; n.domainsSource = a.domainsSource; }
+        if (a.people && !n.people) { n.people = a.people; n.peopleSource = a.peopleSource; }
+      } catch (err) { if (typeof console !== "undefined") console.warn("[npcUpdates] affiliation enrichment failed (person still registered):", err?.message); }
     }
     n.lastSeen = { locationId: ctx.locationId || null, day: ctx.day ?? null };
   }

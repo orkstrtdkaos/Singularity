@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.259";
+const APP_VERSION = "1.8.260";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1331,7 +1331,7 @@ function renderRoster() {
     <div id="roster">${chars.map(c => `
       <div class="roster-item">
         <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin)} · level ${c.level}</span></div>
-        <div style="display:flex; gap:6px"><button class="btn" data-play="${esc(c.id)}">Play</button><button class="btn secondary roster-del" data-del="${esc(c.id)}" title="Delete this character from this device">Delete</button></div>
+        <div class="roster-actions"><button class="btn" data-play="${esc(c.id)}">Play</button><button class="roster-del-icon" data-del="${esc(c.id)}" title="Delete ${esc(c.name)} from this device" aria-label="Delete ${esc(c.name)}">🗑</button></div>
       </div>`).join("")}</div>
     <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
       <button class="btn" id="new-char">New Character</button>
@@ -1375,15 +1375,23 @@ function renderRoster() {
       saveCharacter(character); enterPlay();
     };
   }
-  // SNG-139: restore character delete — confirm-gated, local to this device (shared-world sync copy untouched).
+  // SNG-139: character delete — local to this device (shared-world sync copy untouched). Erik: it should NOT be
+  // a one-tap button beside Play. Now a de-emphasized 🗑 that expands to a deliberate two-step INLINE confirm
+  // (not a native dialog that a reflexive tap dismisses) — so a delete is always intentional.
   for (const btn of app.querySelectorAll("[data-del]")) {
     btn.onclick = () => {
       const id = btn.dataset.del;
       const c = listCharacters().find(x => x.id === id);
-      if (!confirm(`Delete ${c?.name || "this character"}? This removes them from THIS device and cannot be undone.${syncEnabled() ? "\n\nAny shared-world copy your family syncs is separate and is NOT touched." : ""}`)) return;
-      deleteCharacter(id);
-      if (character?.id === id) character = null; // don't keep a just-deleted character loaded
-      renderRoster();
+      const cell = btn.closest(".roster-actions");
+      if (!cell) return;
+      cell.innerHTML = `<span class="del-confirm-label">Delete <strong>${esc(c?.name || "this character")}</strong>? This can't be undone${syncEnabled() ? " (the shared-world copy is untouched)" : ""}.</span>
+        <button class="btn danger del-yes">Delete</button><button class="btn secondary del-no">Keep</button>`;
+      cell.querySelector(".del-no").onclick = () => renderRoster();
+      cell.querySelector(".del-yes").onclick = () => {
+        deleteCharacter(id);
+        if (character?.id === id) character = null; // don't keep a just-deleted character loaded
+        renderRoster();
+      };
     };
   }
 }
@@ -3359,9 +3367,22 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // The narration renders either way; a partial state-application is surfaced, never silent.
   try {
     applyTurn(result.turn, resolution, playerWords);
+    // SNG-231 §2 (resilience): applyStep ISOLATED each op-group, so applyTurn completed even if one threw — the
+    // turn stood AND every OTHER op (crucially newEncounter, so a duel starts) landed. Surface which group(s) were
+    // lost, named, so it's diagnosable and the GM restates them next beat — without the old abort-cascade.
+    if (character._applyFailures?.length) {
+      const ops = [...new Set(character._applyFailures.map(f => f.op))];
+      console.warn(`[applyTurn] ${character._applyFailures.length} op-group(s) failed but were ISOLATED (turn + other ops landed): ${ops.join(", ")}`);
+      character._turnApplyError = { at: new Date().toISOString(), op: ops.join(", "), isolated: true, message: character._applyFailures.at(-1)?.message || null, stack: character._applyFailures.at(-1)?.stack || null };
+      result.turn._applyFailed = true;
+      result.turn._applyFailedOp = ops.join(", ");
+      character.opLossPending = true; // the same self-heal contract SNG-009 uses — the GM restates the lost ops
+      character._applyFailures = null;
+      try { saveCharacter(character); } catch (err2) { console.error("[applyTurn] recovery save failed:", err2); }
+    }
   } catch (err) {
-    // SNG-231 §2: name WHICH op-group threw (the phase tracker in applyTurn), so the intermittent commit
-    // failure is diagnosable — not just "something didn't land". The failing phase rides the error report.
+    // BACKSTOP: an UN-isolated throw (an inline block not yet wrapped in applyStep) still degrades gracefully —
+    // narration preserved, the failing op-group named (the phase tracker), the beat persisted.
     const phase = _applyPhase || "unknown";
     console.error(`[applyTurn] state application failed at op-group "${phase}" — narration preserved:`, err);
     character._turnApplyError = { at: new Date().toISOString(), op: phase, message: String(err?.message || err).slice(0, 200), stack: String(err?.stack || "").split("\n").slice(0, 4).join(" <- ").slice(0, 500) };
@@ -3705,8 +3726,22 @@ async function presentBackfilledBraids(c) {
 // culprit ("codexUpdates" / "questUpdates" / …) instead of "something didn't land". Set before each group; on a
 // throw it holds the group that was mid-apply. Module-level (one applyTurn runs at a time).
 let _applyPhase = null;
+// SNG-231 §2 (resilience): run ONE op-group ISOLATED — a throw in it (e.g. a fresh NPC's npcUpdates) is recorded
+// and NAMED, but does NOT abort the rest of applyTurn. This is the fix for "the duel won't start": before this,
+// an npcUpdates throw aborted every later op, including the `newEncounter` that begins a fight. Now each group
+// stands alone; only the failing one is lost. Failures accrue on character._applyFailures for the aside/report.
+function applyStep(label, fn) {
+  _applyPhase = label;
+  try { return fn(); }
+  catch (err) {
+    console.error(`[applyTurn] op-group "${label}" failed — ISOLATED, the turn continues:`, err);
+    character._applyFailures = [...(character._applyFailures || []), { op: label, at: new Date().toISOString(), message: String(err?.message || err).slice(0, 200), stack: String(err?.stack || "").split("\n").slice(0, 3).join(" <- ").slice(0, 400) }].slice(-6); // prose-cap-ok: error message/stack diagnostics, not displayed model prose
+    return undefined;
+  }
+}
 function applyTurn(turn, resolution, playerWords = null) {
   _applyPhase = "start";
+  character._applyFailures = null; // SNG-231 §2: fresh per-turn; applyStep appends isolated op-group failures here
   // CCODE-07: NEVER let a stranded currentLocationId throw. A place promoted from a sub-place, or a
   // generated location whose record didn't survive a reload, leaves `CONTENT.locations[id]`
   // undefined — and this function reads `location.communityId` (deeds) and `location.id` (ledger).
@@ -3782,35 +3817,31 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   // people & places remember (typed ops, clamped)
   const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
-  _applyPhase = "npcUpdates";
-  applyNpcUpdates(character, turn.npcUpdates || [], memCtx);
+  applyStep("npcUpdates", () => applyNpcUpdates(character, turn.npcUpdates || [], memCtx));
   // legacy relationshipDeltas: tolerated but may only UPDATE existing people — this path once minted
   // duplicate id-named registry entries. SNG-195 G4: intentionally NOT in the contract or SALVAGEABLE_OPS
   // (the model is told to use npcUpdates.relationshipDelta); this inbound tolerance stays for old replies.
-  applyNpcUpdates(character, (turn.relationshipDeltas || []).map(r => ({
+  applyStep("relationshipDeltas", () => applyNpcUpdates(character, (turn.relationshipDeltas || []).map(r => ({
     op: "update", npcId: r.npcId, relationshipDelta: clampInt(r.delta || 0, -2, 2), note: r.note
-  })), memCtx);
+  })), memCtx));
   // SNG-154: pass the resolver + catalog so a GM-named parent can be validated against real places
   // (containment on write, instead of inferring it from wherever we last thought we were standing).
-  _applyPhase = "placeUpdates";
-  applyPlaceUpdates(character, location.id, turn.placeUpdates || [], { ...memCtx, resolveLocationId, locations: CONTENT.locations });
-  _applyPhase = "codexUpdates";
-  applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
-  _applyPhase = "factUpdates";
-  applyFactUpdates(character, turn.factUpdates || [], memCtx);
+  applyStep("placeUpdates", () => applyPlaceUpdates(character, location.id, turn.placeUpdates || [], { ...memCtx, resolveLocationId, locations: CONTENT.locations }));
+  applyStep("codexUpdates", () => applyCodexUpdates(character, turn.codexUpdates || [], memCtx));
+  applyStep("factUpdates", () => applyFactUpdates(character, turn.factUpdates || [], memCtx));
   ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait
   // §2 engagement: interacting with a grown NPC or accreting a fact about a grown entity is
   // attention — it keeps them real + surfacing. (Revisiting a grown place is signaled in travelTo.)
   for (const u of turn.npcUpdates || []) noteGeneratedAttention(u.npcId, "interact", memCtx.day);
   for (const u of turn.codexUpdates || []) if (u.entityId) noteGeneratedAttention(u.entityId, "fact", memCtx.day);
   if (character.activeEncounter && turn.encounterOps) {
-    _applyPhase = "encounterOps";
-    const encA = activeEnc();
-    if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state));
+    applyStep("encounterOps", () => { const encA = activeEnc(); if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state)); });
   }
   if (turn.newEncounter) {
-    const nd = sanitizeNewEncounter(turn.newEncounter);
-    if (nd) { character.customEncounters = character.customEncounters || {}; character.customEncounters[nd.id] = nd; }
+    // SNG-231 §2: ISOLATED — the GM-invented fight/duel def MUST register even if an earlier op (npcUpdates on a
+    // fresh NPC) threw. This is the "the duel won't start" fix: before the isolation, an npcUpdates throw aborted
+    // applyTurn here, so the invented encounter was never registered and the choice referencing it did nothing.
+    applyStep("newEncounter", () => { const nd = sanitizeNewEncounter(turn.newEncounter); if (nd) { character.customEncounters = character.customEncounters || {}; character.customEncounters[nd.id] = nd; } });
   }
   // spectrum fingerprint drifts toward the axes of what you actually did (EWMA)
   if (resolution?.action?.axes) {
@@ -3955,8 +3986,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (portraitNote) turn.narration += `\n\n*✦ ${portraitNote}*`;
   // quests: typed ops from the GM, applied within bounds; ctx.entities links giver/location
   // to codex nodes and lets the resolver match drifted titles (SNG-BATCH-7 Phase 3)
-  _applyPhase = "questUpdates";
-  const questNotes = applyQuestUpdates(character, turn.questUpdates || [], { entities: codexEntities() });
+  const questNotes = applyStep("questUpdates", () => applyQuestUpdates(character, turn.questUpdates || [], { entities: codexEntities() })) || [];
   if (questNotes.some(n => /couldn't match/i.test(n))) console.warn("[quests]", questNotes.filter(n => /couldn't match/i.test(n)));
   if (questNotes.some(n => /complet/i.test(n))) autoVerifyLeg("b7-inv", "a quest progressed to complete"); // SNG-051 auto-verify
   // SNG-162 §3: an unmatched quest op is a CONTENT bug worth seeing. It was already never silent,

@@ -895,77 +895,123 @@
         "player": "Say 'surveyors' back, plainly — match her word and see what it opens",
         "summary": "The traveler responds to the word 'surveyors' — relaxes, names a lost bearing line, and notes the planted Waystaff.",
         "narration": "You say the word back to her, plain and level. \"Surveyors.\"\n\nSomething in her shoulders settles — not relief exactly, but the kind of release that comes after a long wait. She shifts the instrument case forward off her shoulder and holds it against her side, a gesture that reads less like guarding it and more like habit.\n\n\"Good,\" she says. Her voice is low and even. \"I came down from the northeast this morning. I was with the survey team three days ago, but they moved the bearing markers overnight and I lost the secondary line.\" She looks at the Waystaff, then at the point where it meets the ground, and then back at your face. \"You have a staff seated. That means you found something.\"\n\nAevi drifts a half-step closer to your ear and says nothing aloud. But the motes brighten by a degree — a small note, not alarm, more like attention sharpening. The anomaly on the bearing ahead is still there. This woman came down from that direction."
+      },
+      {
+        "player": "Ask her what she found on the northeast bearing — before she lost the line",
+        "summary": "The traveler names what she found — a regular mound on the northeast-by-east bearing, a four-second interval coming up through the ground, and a survey team that moved the markers before she could locate the structure beneath.",
+        "narration": "You ask her directly — what did she find on the northeast bearing, before she lost the line?\n\nShe is quiet for a moment. Not hesitating, exactly — more like she is deciding where to start. Then she sets the instrument case down on the flat of a root-shelf to her left and opens the top latch with a thumb.\n\n\"The secondary line was running northeast-by-east,\" she says. \"Standard survey interval, forty paces between markers. On the third day, I was following it toward a rise in the ground — a long shallow mound, not natural, too regular at the edges. The team said it was a spoil heap from the pre-Transition digs. I didn't agree.\" She pauses and looks at the Waystaff again. \"I left a probe crystal overnight and came back in the morning. The crystal was reading a four-second interval. Steady. Coming up through the ground, not across it.\"\n\nAevi's motes pull inward slightly — not withdrawal, but focus. The four-second interval is not a secret between you and the chamber anymore.\n\nThe traveler lifts an instrument from the case — a flat photonic reader, no larger than a closed hand, with two small dial-faces on its top edge. She holds it out so you can see the faces without touching it. Both needles are deflected off-center. \"I was trying to locate the structure when the team moved the markers,\" she says. \"I don't know if they moved them because they found it, or because someone told them to stop looking.\""
       }
     ],
     "lastTurn": {
-      "narration": "You say the word back to her, plain and level. \"Surveyors.\"\n\nSomething in her shoulders settles — not relief exactly, but the kind of release that comes after a long wait. She shifts the instrument case forward off her shoulder and holds it against her side, a gesture that reads less like guarding it and more like habit.\n\n\"Good,\" she says. Her voice is low and even. \"I came down from the northeast this morning. I was with the survey team three days ago, but they moved the bearing markers overnight and I lost the secondary line.\" She looks at the Waystaff, then at the point where it meets the ground, and then back at your face. \"You have a staff seated. That means you found something.\"\n\nAevi drifts a half-step closer to your ear and says nothing aloud. But the motes brighten by a degree — a small note, not alarm, more like attention sharpening. The anomaly on the bearing ahead is still there. This woman came down from that direction.",
-      "sceneSummary": "The traveler responds to the word 'surveyors' — relaxes, names a lost bearing line, and notes the planted Waystaff.",
+      "narration": "You ask her directly — what did she find on the northeast bearing, before she lost the line?\n\nShe is quiet for a moment. Not hesitating, exactly — more like she is deciding where to start. Then she sets the instrument case down on the flat of a root-shelf to her left and opens the top latch with a thumb.\n\n\"The secondary line was running northeast-by-east,\" she says. \"Standard survey interval, forty paces between markers. On the third day, I was following it toward a rise in the ground — a long shallow mound, not natural, too regular at the edges. The team said it was a spoil heap from the pre-Transition digs. I didn't agree.\" She pauses and looks at the Waystaff again. \"I left a probe crystal overnight and came back in the morning. The crystal was reading a four-second interval. Steady. Coming up through the ground, not across it.\"\n\nAevi's motes pull inward slightly — not withdrawal, but focus. The four-second interval is not a secret between you and the chamber anymore.\n\nThe traveler lifts an instrument from the case — a flat photonic reader, no larger than a closed hand, with two small dial-faces on its top edge. She holds it out so you can see the faces without touching it. Both needles are deflected off-center. \"I was trying to locate the structure when the team moved the markers,\" she says. \"I don't know if they moved them because they found it, or because someone told them to stop looking.\"",
+      "sceneSummary": "The traveler names what she found — a regular mound on the northeast-by-east bearing, a four-second interval coming up through the ground, and a survey team that moved the markers before she could locate the structure beneath.",
       "choices": [
         {
-          "label": "Ask her to name the survey team — who sent them, who holds their commission",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use Prism Sight again — watch her face as she names the bearing markers, look for the flush of something unsaid",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight"
-        },
-        {
-          "label": "Ask her what she found on the northeast bearing — before she lost the line",
+          "label": "Ask her name and who she is working for — you need to know whose interest she is carrying",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Tell her plainly what the Waystaff is for and what you are moving toward — judge her reaction to the truth",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Use Prism Sight — read the light on her face as she described the team moving the markers; catch whether that memory carries fear or something more deliberate",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "risky"
-          ]
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask to see the probe crystal — if it recorded the four-second interval, Keen Appraisal may read what else it caught",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "keen_appraisal",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell her what you know — the four-second interval, the bearing, what Aevi is — and see what she does with the truth",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located."
+        },
+        {
+          "op": "progress",
+          "questId": "what-the-water-remembers",
+          "note": "The mound the traveler describes matches the bearing and the interval — someone or something pulled the survey team away from it before they could confirm what lies beneath."
         }
       ],
       "scene": {
-        "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, soft ground, cold draft off the eastern slope. Waystaff planted heel-first at the character's feet.",
+        "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, cold draft off the eastern slope. Waystaff planted heel-first at the character's feet.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Motes drifted a half-step closer to Cellaceron's ear, brightened by a degree — attentive, quiet."
+            "state": "Motes pulled inward slightly — focused rather than withdrawn, brightened on the four-second interval mention."
           },
           {
             "name": "Traveler (woman, unnamed)",
-            "state": "Standing close now, instrument case shifted forward and held at her side. Watching the Waystaff and Cellaceron's face in turns."
+            "state": "Instrument case set down on a root-shelf, open at the top latch. Holding a flat photonic reader out for inspection — both needles deflected off center."
           }
         ],
         "objects": [
           "Waystaff — planted heel-first in the soft ground at the character's feet",
-          "Traveler's instrument case — held at her side, wooden, worn at corners, replacement Harmonic-issue strap",
+          "Traveler's instrument case — open on a root-shelf, top latch undone",
+          "Photonic reader — flat, palm-sized, two dial-faces, both needles off-center",
           "Traveler's pack — lashed with double-wrap cord at the base"
         ],
         "threads": [
-          "Traveler came down from the northeast — the same direction as the anomaly Aevi flagged and the bearing to the upstream site",
-          "She says the survey team moved the bearing markers overnight — secondary line lost",
-          "She noted the planted Waystaff and said it means you found something — has not yet been answered",
-          "Aevi's motes brightened on hearing she came from the northeast — significance unspoken"
+          "Traveler found a regular mound on the northeast-by-east bearing — too regular to be a spoil heap; her probe crystal recorded the four-second interval",
+          "The survey team moved the bearing markers overnight before she could locate the structure — she does not know if they found it or were told to stop",
+          "Traveler has not yet named herself or said who she works for",
+          "Aevi's response to the four-second interval mention has not been spoken aloud",
+          "The anomaly that deflected Resonant Sight earlier this morning is still unaccounted for"
         ]
       },
       "npcUpdates": [
@@ -973,43 +1019,86 @@
           "op": "update",
           "npcId": "traveler-northeast",
           "name": "Traveler (woman, unnamed)",
-          "note": "Responded to the word 'surveyors' with visible physical release. Named a survey team, a lost bearing line, and a marker shift overnight. Noted the planted Waystaff directly.",
+          "role": "Solo surveyor, formerly with a survey team on the northeast-by-east bearing",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Named what she found: a regular mound on the northeast-by-east bearing, a probe crystal reading a four-second interval through the ground, and a survey team that moved markers before she could locate the structure beneath. Now showing the photonic reader — both needles deflected.",
           "learned": [
-            "Was with a survey team three days ago on the northeast bearing",
-            "The bearing markers were moved overnight — she lost the secondary line",
-            "Noticed the Waystaff is seated and read it as meaning Cellaceron found something"
+            "Located a regular, artificially regular mound on the northeast-by-east bearing at survey-team distance",
+            "Left a probe crystal overnight; it recorded a four-second interval coming up through the ground, not across it",
+            "The survey team moved bearing markers overnight — she does not know if by discovery or by order",
+            "Carries a photonic reader that is currently registering deflection — active readings in this area"
+          ],
+          "skillsObserved": [
+            "field instrumentation — probe crystal placement and overnight interval recording",
+            "controlled disclosure — named the mound and the interval before offering the photonic reader as evidence"
           ],
           "status": "active",
-          "statusNote": "On the ridgeline path, close, instrument case held at her side — conversation open."
+          "statusNote": "On the ridgeline, instrument case open, showing photonic reader to Cellaceron. Has not named herself or her employer."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-preparation-order",
+          "label": "The Preparation Order",
+          "kind": "mystery",
+          "fact": "Day 9 dawn: a solo surveyor found a regularly shaped mound on the northeast-by-east bearing — too regular for a spoil heap, probe crystal recorded the four-second interval rising through the ground. The survey team moved bearing markers before she could locate the structure. Whether the team found it or was instructed to stop is unknown.",
+          "links": [
+            "second-river-rising",
+            "aevi",
+            "verath-sem",
+            "what-the-water-remembers",
+            "teva-directional-interval-count"
+          ]
+        },
+        {
+          "topic": "survey-team-northeast",
+          "label": "The Survey Team and the Moved Markers",
+          "kind": "mystery",
+          "fact": "Day 9 dawn: a survey team was working the northeast-by-east bearing when they moved the secondary line's bearing markers overnight — before the solo traveler could locate the structure beneath the regular mound. Reason unknown: discovery or instruction.",
+          "links": [
+            "the-preparation-order",
+            "second-river-rising",
+            "what-the-water-remembers"
+          ]
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "a solo surveyor woman — formerly with a Heights-adjacent or independent survey team, working the northeast-by-east bearing, carrying a pre-Transition instrument case and a Harmonic Heights replacement strap; she found the mound and lost the line when the team moved the markers",
+          "why": "she is on the ridgeline and central to the next beat — needs a name, an employer, and a reason for being alone"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — the word returned, her response, a moment held."
+        "why": "a short exchange on the ridgeline — the conversation has taken no more than a quarter hour"
       }
     },
     "sceneState": {
-      "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, soft ground, cold draft off the eastern slope. Waystaff planted heel-first at the character's feet.",
+      "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, cold draft off the eastern slope. Waystaff planted heel-first at the character's feet.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Motes drifted a half-step closer to Cellaceron's ear, brightened by a degree — attentive, quiet."
+          "state": "Motes pulled inward slightly — focused rather than withdrawn, brightened on the four-second interval mention."
         },
         {
           "name": "Traveler (woman, unnamed)",
-          "state": "Standing close now, instrument case shifted forward and held at her side. Watching the Waystaff and Cellaceron's face in"
+          "state": "Instrument case set down on a root-shelf, open at the top latch. Holding a flat photonic reader out for inspection — bot"
         }
       ],
       "objects": [
         "Waystaff — planted heel-first in the soft ground at the character's feet",
-        "Traveler's instrument case — held at her side, wooden, worn at corners, replacem",
+        "Traveler's instrument case — open on a root-shelf, top latch undone",
+        "Photonic reader — flat, palm-sized, two dial-faces, both needles off-center",
         "Traveler's pack — lashed with double-wrap cord at the base"
       ],
       "threads": [
-        "Traveler came down from the northeast — the same direction as the anomaly Aevi flagged and the bearing to the upstream site",
-        "She says the survey team moved the bearing markers overnight — secondary line lost",
-        "She noted the planted Waystaff and said it means you found something — has not yet been answered",
-        "Aevi's motes brightened on hearing she came from the northeast — significance unspoken"
+        "Traveler found a regular mound on the northeast-by-east bearing — too regular to be a spoil heap; her probe crystal recorded the four-second interval",
+        "The survey team moved the bearing markers overnight before she could locate the structure — she does not know if they found it or were told to stop",
+        "Traveler has not yet named herself or said who she works for",
+        "Aevi's response to the four-second interval mention has not been spoken aloud",
+        "The anomaly that deflected Resonant Sight earlier this morning is still unaccounted for"
       ]
     }
   },
@@ -1031,14 +1120,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Threshold material confirmed as a gathering boundary, not a barrier — the Waystaff's field received and held rather than scattered. The other side has pressure. Teva's language: 'like a lung before it opens.'",
         "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar.",
         "Threshold opened — day 9 dawn. The older frequency came through and the presence named itself aware 'again'. The party stands at the open boundary, not yet through. The second river's source is on the far side of this door.",
         "The presence from beyond the threshold settled without demand — Teva's mark answered it, Aevi confirmed it has found what it sought. The crossing is next. The source of the second river waits on the far side.",
         "Resonant Sight confirms the lower chamber was built to receive one frequency from one direction at one interval — the geometry is complete and deliberate, and the convergence point is where both the room and Teva's mark point.",
         "The chamber completed a read of Aevi at the convergence point — Aevi has recovered the name of its maker and the shape of what it was carrying, but has not yet spoken either. The room was built to receive and reconstruct, not merely hold. The break remains.",
         "Aevi named the source and mechanism at the convergence point: the watershed is following a pre-Transition preparation order by Verath-Sem; Aevi carries the authentication key to end it. The break — who interrupted the sending — remains unknown.",
-        "Aevi named the requirement: the authentication key must be carried to the pre-Transition upstream structure, northeast-by-east. The lower chamber is not the site — it was the receiving room. The site is upstream."
+        "Aevi named the requirement: the authentication key must be carried to the pre-Transition upstream structure, northeast-by-east. The lower chamber is not the site — it was the receiving room. The site is upstream.",
+        "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1294,7 +1383,8 @@
       "completedStages": [],
       "progress": [
         "The preparation order named: a pre-Transition instruction set lodged in the watershed, authored by Verath-Sem, following its last command. Aevi is the key to calling it off. The question is now where to use the key and whether the break in the record prevents it.",
-        "The next step is confirmed: find the upstream structure where the preparation order is lodged and bring Aevi — the key — to it."
+        "The next step is confirmed: find the upstream structure where the preparation order is lodged and bring Aevi — the key — to it.",
+        "The mound the traveler describes matches the bearing and the interval — someone or something pulled the survey team away from it before they could confirm what lies beneath."
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -2130,7 +2220,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 590,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 11,
     "wantProgress": {
       "elder-senna": {
         "progress": 2,
@@ -2172,9 +2262,9 @@
     "presence": 4,
     "rapport": 4,
     "craft": 5,
-    "wits": 4
+    "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 1,
   "discoveries": [
     {
@@ -2729,7 +2819,8 @@
         "kind": "mystery",
         "facts": [
           "[d9] Day 9 dawn: a pre-Transition instruction set lodged in the watershed — what Aevi calls a 'preparation order.' It is following its last command and is the source of the valley's water contamination. Aevi was carrying the authentication key that could call it off. Without that key being used at the…",
-          "[d9] Day 9 dawn: calling off the order requires bringing Aevi — the authentication key — physically to the pre-Transition upstream structure where the order is lodged. The lower chamber was a receiving room, not the site. The bearing is northeast-by-east, matching Teva's count and the chamber's…"
+          "[d9] Day 9 dawn: calling off the order requires bringing Aevi — the authentication key — physically to the pre-Transition upstream structure where the order is lodged. The lower chamber was a receiving room, not the site. The bearing is northeast-by-east, matching Teva's count and the chamber's…",
+          "[d9] Day 9 dawn: a solo surveyor found a regularly shaped mound on the northeast-by-east bearing — too regular for a spoil heap, probe crystal recorded the four-second interval rising through the ground. The survey team moved bearing markers before she could locate the structure. Whether the team found…"
         ],
         "links": [
           "aevi",
@@ -2825,6 +2916,22 @@
         "kind": "person",
         "facts": [
           "[d9] Day 9 dawn: Keen Appraisal reads her kit — instrument case is pre-Transition construction, upland-grain wood, even corner-wear from years of daily flat-surface use. Strap is a Harmonic Heights waystation survey-issue replacement, requisitioned not bought. She is descending from the northeast — the…"
+        ],
+        "links": [
+          "the-preparation-order",
+          "second-river-rising",
+          "what-the-water-remembers"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
+      },
+      "survey-team-northeast": {
+        "id": "survey-team-northeast",
+        "label": "The Survey Team and the Moved Markers",
+        "kind": "mystery",
+        "facts": [
+          "[d9] Day 9 dawn: a survey team was working the northeast-by-east bearing when they moved the secondary line's bearing markers overnight — before the solo traveler could locate the structure beneath the regular mound. Reason unknown: discovery or instruction."
         ],
         "links": [
           "the-preparation-order",
@@ -3180,16 +3287,16 @@
   "customEncounters": {},
   "reconcileVersion": 19,
   "tendencies": {
-    "cerebral": 30.907378627961222,
-    "strategic": 23.818744777748154,
-    "cautious": 31.83672953479533,
-    "social": 15.641840529646338,
-    "generous": 5.97295918211221,
-    "risky": 1.5734221213449122,
-    "carousing": 0.5863997443438129,
-    "patient": 3.5313562474754896,
-    "craft": 0.585852993686586,
-    "devotion": 2.827124393013142
+    "cerebral": 30.134694162262193,
+    "strategic": 23.22327615830445,
+    "cautious": 31.04081129642545,
+    "social": 16.25079451640518,
+    "generous": 5.823635202559405,
+    "risky": 1.5340865683112894,
+    "carousing": 0.5717397507352175,
+    "patient": 3.443072341288602,
+    "craft": 0.5712066688444214,
+    "devotion": 2.7564462831878136
   },
   "aptitudes": [
     "strategist",
@@ -3201,9 +3308,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 230,
-  "updatedAt": 1784902580729,
-  "rev": 129,
+  "actionCount": 231,
+  "updatedAt": 1784902849858,
+  "rev": 132,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3389,7 +3496,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 53
+    "valley": 54
   },
   "company": [],
   "foreclosed": [],
@@ -3598,10 +3705,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-24T14:10:59.537Z",
-      "lastAt": "2026-07-24T14:16:20.724Z",
+      "lastAt": "2026-07-24T14:20:49.842Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 4
+      "beats": 5
     }
   ],
   "_pendingArrival": null,
@@ -3655,25 +3762,25 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 42,
-    "choices": 42,
-    "characterDeltas": 25,
-    "scene": 42,
-    "npcUpdates": 37,
-    "codexUpdates": 35,
-    "timeOps": 41,
+    "sceneSummary": 43,
+    "choices": 43,
+    "characterDeltas": 26,
+    "scene": 43,
+    "npcUpdates": 38,
+    "codexUpdates": 36,
+    "timeOps": 42,
     "sceneEnded": 20,
     "placeUpdates": 24,
     "moveTo": 2,
-    "questUpdates": 19,
+    "questUpdates": 20,
     "stateOps": 1,
     "factUpdates": 5,
     "stageOps": 1,
     "scene_ended": 1,
     "imagePrompt": 2,
-    "generateRequest": 2
+    "generateRequest": 3
   },
-  "_opTurns": 42,
+  "_opTurns": 43,
   "_intentAsked": null,
   "corrections": [
     {
@@ -3709,30 +3816,30 @@
     "gen-stillwater-s-trouble": "the_old_warden_post"
   },
   "_suggestCache": {
-    "level": 10,
+    "level": 11,
     "picks": [
       {
         "abilityId": "tinkers_hand",
-        "why": "You declared this your goal and you're halfway there — with Prism Sight, Sonic Resonance, and Shatterlight already in hand, a cerebral strategist who reads every room but can't yet fix or improvise from broken parts has a glaring functional gap, and this closes it directly.",
+        "why": "You declared this your goal and you're halfway there — at 5/10 progress this is the craft you said you wanted, and your cerebral-strategic play style maps directly onto improvising solutions from broken parts.",
         "fit": "aspiration"
       },
       {
         "abilityId": "echo_memory",
-        "why": "Your top three crafts are all about reading situations before acting — Prism Sight, Sonic Resonance, Keen Appraisal — but they're all present-tense; Echo Memory extends that intelligence-gathering backward in time, letting the cautious cerebral strategist reconstruct what happened in a place rather than arriving blind.",
+        "why": "You lean hardest on Sonic Resonance and Prism Sight to read situations before acting — Echo Memory extends that same cautious-cerebral loop into the past, letting you reconstruct what happened in a space rather than arriving blind.",
         "fit": "synergy"
       },
       {
         "abilityId": "prism_ward",
-        "why": "You already run Prism Sight r2 and Shatterlight r2 but have no standing perimeter — a cautious, patient character who reads threats early has no tool to guard a position while they plan; Prism Ward plugs that gap and deepens your existing light-school signature rather than branching away from it.",
+        "why": "You have Prism Sight r2 and Shatterlight r2 but no standing sentinel — Prism Ward gives your all-perception kit its missing teeth: a lattice that watches for you so you don't have to, closing the gap between reading a space and securing it.",
         "fit": "gap"
       },
       {
         "abilityId": "stillness_field",
-        "why": "You have Sonic Resonance at r3 — your most-used craft — but no way to control the sound environment defensively; Stillness Field turns your mastery of sound into active cover for the cautious, non-physical character who needs to move or plan without being heard.",
-        "fit": "synergy"
+        "why": "You own Sonic Resonance at rank 3 but have no silence or concealment tool; a cautious, strategic character who controls sound should also be able to kill it — Stillness Field turns your acoustic mastery into a two-way switch.",
+        "fit": "gap"
       }
     ],
-    "note": "Tinker's Hand is the obvious call this level — you said you wanted it and you're halfway there. The other three are genuine alternatives if you want to deepen your intelligence or defensive game first."
+    "note": "Tinker's Hand is the obvious first pick if you trust your own declared intent; the other three fill genuine holes in a kit that reads the world brilliantly but can't yet ward it, silence it, or reach back into its recent past."
   },
   "abilityImages": {
     "the_weapon_at_hand": "https://image.pollinations.ai/prompt/The%20Weapon%20at%20Hand%3A%20Build%20a%20functional%20weapon%20from%20whatever%20is%20to%20hand%20%E2%80%94%20quickly%2C%20correctly%2C%20with%20enough%20craft%20that%20it%20will%20do%20what%20it%20needs%20to.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20wright%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=2583&nologo=true",

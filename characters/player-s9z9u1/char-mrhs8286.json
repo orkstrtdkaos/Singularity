@@ -1745,53 +1745,56 @@
         "player": "Wait for Veth to finish — give her the room to work",
         "summary": "Silas and Pell wait at the edge of the lane while Veth finishes working the water-seller for information.",
         "narration": "You slow your pace and stop a few steps back from the water-seller's cart, giving Veth the room she needs. Pell comes to a halt beside you without being asked — she reads the situation the same way you do.\n\nVeth is listening to the seller speak. He is a broad man with a sun-cracked face, standing behind a two-wheeled cart stacked with clay-sealed jugs. He is talking more than he means to, which is usually what happens when someone listens well enough. Veth's arms are loose at her sides. Her expression is level and unhurried, the kind of attention that makes people feel heard and keeps talking past the point they intended to stop.\n\nYou catch fragments. The seller says something about the creek running wrong since the cold broke. He says it in the way a man says something he has been saying for two weeks and has not yet gotten a satisfying answer to. Veth nods once, and he says something else — a name, or maybe a direction.\n\nPell leans slightly toward you without turning her head. \"She's good at that,\" she says quietly. It is not a compliment exactly — more a plain recognition, the way she names the grain in iron."
+      },
+      {
+        "player": "Let Veth report first — hear everything she learned before you decide what to ask next",
+        "summary": "Veth reports what Osten gave her — the metallic smell, the timing, and Crane's address at the mill.",
+        "narration": "Veth wraps up her conversation with the water-seller in a few more exchanges — she thanks him, he nods, and she turns away with the unhurried walk of someone who got what she came for.\n\nShe crosses the lane to where you and Pell are standing and stops beside you, facing the well. She does not look at the seller again.\n\n\"His name is Osten,\" she says. \"He sells to the settlement and to travelers, boiled or sealed — takes no position on where the gray-brown is coming from, but he knows when it started.\" She pauses. \"Four mornings after the cold broke. Not the creek's ordinary spring silt. He said it smells different. Metallic, he said, and then he said he wasn't sure if that was the right word for it.\"\n\nPell makes a small sound that is not quite agreement and not quite doubt.\n\n\"He knows Edvar Crane,\" Veth continues. \"Not well. Crane boards at the mill — the long building on the settlement's north edge. He said Crane doesn't come to the well much. Buys sealed jugs.\" She glances at the cart behind her. \"Which means he has something to seal water into, and he is treating his water more carefully than most.\"\n\nHuginn shifts on the rooftop above, settling its weight from one foot to the other. One sound, low and flat.\n\nVeth looks up briefly, then back at you. \"The mill is north,\" she says. \"We can walk it in ten minutes.\""
       }
     ],
     "lastTurn": {
-      "narration": "You slow your pace and stop a few steps back from the water-seller's cart, giving Veth the room she needs. Pell comes to a halt beside you without being asked — she reads the situation the same way you do.\n\nVeth is listening to the seller speak. He is a broad man with a sun-cracked face, standing behind a two-wheeled cart stacked with clay-sealed jugs. He is talking more than he means to, which is usually what happens when someone listens well enough. Veth's arms are loose at her sides. Her expression is level and unhurried, the kind of attention that makes people feel heard and keeps talking past the point they intended to stop.\n\nYou catch fragments. The seller says something about the creek running wrong since the cold broke. He says it in the way a man says something he has been saying for two weeks and has not yet gotten a satisfying answer to. Veth nods once, and he says something else — a name, or maybe a direction.\n\nPell leans slightly toward you without turning her head. \"She's good at that,\" she says quietly. It is not a compliment exactly — more a plain recognition, the way she names the grain in iron.",
-      "sceneSummary": "Silas and Pell wait at the edge of the lane while Veth finishes working the water-seller for information.",
+      "narration": "Veth wraps up her conversation with the water-seller in a few more exchanges — she thanks him, he nods, and she turns away with the unhurried walk of someone who got what she came for.\n\nShe crosses the lane to where you and Pell are standing and stops beside you, facing the well. She does not look at the seller again.\n\n\"His name is Osten,\" she says. \"He sells to the settlement and to travelers, boiled or sealed — takes no position on where the gray-brown is coming from, but he knows when it started.\" She pauses. \"Four mornings after the cold broke. Not the creek's ordinary spring silt. He said it smells different. Metallic, he said, and then he said he wasn't sure if that was the right word for it.\"\n\nPell makes a small sound that is not quite agreement and not quite doubt.\n\n\"He knows Edvar Crane,\" Veth continues. \"Not well. Crane boards at the mill — the long building on the settlement's north edge. He said Crane doesn't come to the well much. Buys sealed jugs.\" She glances at the cart behind her. \"Which means he has something to seal water into, and he is treating his water more carefully than most.\"\n\nHuginn shifts on the rooftop above, settling its weight from one foot to the other. One sound, low and flat.\n\nVeth looks up briefly, then back at you. \"The mill is north,\" she says. \"We can walk it in ten minutes.\"",
+      "sceneSummary": "Veth reports what Osten gave her — the metallic smell, the timing, and Crane's address at the mill.",
       "choices": [
         {
-          "label": "When Veth wraps up, step in and ask the seller directly what he knows about the creek running wrong — where the change started, when",
+          "label": "Head to the mill now — Crane is the thread, and Huginn just weighed in.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Veth what else Osten said before you move.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "persuade",
             "study"
           ],
           "trivial": true
         },
         {
-          "label": "Use Order-Sense quietly while you wait — read the settlement's water infrastructure as a design, see what the whole shape tells you",
+          "label": "Check the well itself on the way — read the water up close before any approach to Crane.",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "subAttribute": "wits",
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "scout",
+            "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
+          "abilityId": "the-attended-end",
           "trivial": false
         },
         {
-          "label": "Let Veth report first — hear everything she learned before you decide what to ask next",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Huginn — the bird has been above the settlement since you arrived; if something is ending here, it will have noticed",
+          "label": "Go, but let Huginn lead — follow where it goes, not straight to the mill.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "scout"
           ],
           "trivial": true
         }
@@ -1801,35 +1804,106 @@
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing beside Silas, watching Veth work the seller — coat straight, quiet."
+            "state": "Standing beside Silas, coat straight, listening to Veth's report."
           },
           {
             "name": "Huginn",
-            "state": "On the rooftop above, settled and watching the lane."
+            "state": "On the rooftop above — shifted weight, one low sound, now still."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "At the water-seller's cart — listening, the seller talking more than he planned to."
+            "state": "Standing with the party, report delivered, waiting for direction."
           },
           {
-            "name": "Water-seller",
-            "state": "Talking to Veth — a broad, sun-cracked man behind a cart of clay-sealed jugs, saying more than he intended."
+            "name": "Osten",
+            "state": "Behind the water-seller's cart — conversation done, back to arranging his jugs."
           }
         ],
         "objects": [
           "The well — rope-post, boiling-rags on the rail",
-          "Water-seller's cart — hand-lettered sign on the axle, stacked clay-sealed jugs",
+          "Osten's cart — hand-lettered sign on the axle, stacked clay-sealed jugs",
           "Two women filling jugs at a careful distance from each other"
         ],
         "threads": [
-          "Veth is mid-conversation with the water-seller — the seller mentioned the creek running wrong since the cold broke, and possibly a name or direction",
-          "Edvar Crane's whereabouts still unknown",
-          "Veth's full report not yet heard"
+          "Edvar Crane boards at the mill — north edge of the settlement, ten minutes' walk",
+          "The contamination started four mornings after the cold broke — metallic smell, not ordinary spring silt",
+          "Crane buys sealed jugs and avoids the well — treating his water more carefully than most"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "osten",
+          "name": "Osten",
+          "role": "Water-seller, the Crossing marketplace",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "A broad, sun-cracked man who sells boiled and sealed water from a two-wheeled cart — takes no public position on the crisis but knows its timing precisely.",
+          "note": "Gave Veth the contamination start-date and Edvar Crane's address at the mill without knowing he was providing either as intelligence.",
+          "learned": [
+            "The gray-brown started four mornings after the cold broke — not ordinary spring silt, metallic smell",
+            "Edvar Crane boards at the mill on the settlement's north edge and buys sealed jugs rather than using the well"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At his cart in the Crossing marketplace — conversation complete, back to his work."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Worked the water-seller cleanly — got the contamination timing, the smell description, and Crane's location from a man who didn't realize he was being interviewed.",
+          "learned": [
+            "Osten: contamination started four mornings after the cold broke, metallic smell, not ordinary silt",
+            "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here"
+          ],
+          "skillsObserved": [
+            "working a source until he gave more than he meant to, without pressure"
+          ],
+          "status": "active",
+          "statusNote": "With the party at the well lane — report delivered, ready to move."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "edvar-crane",
+          "label": "Edvar Crane",
+          "kind": "person",
+          "fact": "Crane boards at the mill on the Crossing's north edge. He buys sealed water rather than drawing from the well — treating the contamination as a known quantity, not a surprise.",
+          "links": [
+            "the-second-thread",
+            "what-the-water-remembers",
+            "millbrook"
+          ]
+        },
+        {
+          "topic": "what-the-water-remembers",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "The gray-brown contamination at the Crossing started four mornings after the cold broke — Osten describes the smell as metallic, not the ordinary spring silt. The timing is precise and the character of it is distinct.",
+          "links": [
+            "osten",
+            "the-water-crisis",
+            "edvar-crane",
+            "millbrook"
+          ]
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "what-the-water-remembers",
+          "note": "Contamination start-date fixed: four mornings after the cold broke. Metallic smell, not silt. Edvar Crane identified at the mill — he is already treating his water, which means he knows something."
+        },
+        {
+          "op": "progress",
+          "questId": "the-second-thread",
+          "note": "Edvar Crane located — boards at the Crossing mill, north edge of the settlement."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief pause in the lane while Veth finishes at the cart"
+        "why": "A short wait while Veth finished her conversation and reported back."
       }
     },
     "sceneState": {
@@ -1837,30 +1911,30 @@
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing beside Silas, watching Veth work the seller — coat straight, quiet."
+          "state": "Standing beside Silas, coat straight, listening to Veth's report."
         },
         {
           "name": "Huginn",
-          "state": "On the rooftop above, settled and watching the lane."
+          "state": "On the rooftop above — shifted weight, one low sound, now still."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "At the water-seller's cart — listening, the seller talking more than he planned to."
+          "state": "Standing with the party, report delivered, waiting for direction."
         },
         {
-          "name": "Water-seller",
-          "state": "Talking to Veth — a broad, sun-cracked man behind a cart of clay-sealed jugs, saying more than he intended."
+          "name": "Osten",
+          "state": "Behind the water-seller's cart — conversation done, back to arranging his jugs."
         }
       ],
       "objects": [
         "The well — rope-post, boiling-rags on the rail",
-        "Water-seller's cart — hand-lettered sign on the axle, stacked clay-sealed jugs",
+        "Osten's cart — hand-lettered sign on the axle, stacked clay-sealed jugs",
         "Two women filling jugs at a careful distance from each other"
       ],
       "threads": [
-        "Veth is mid-conversation with the water-seller — the seller mentioned the creek running wrong since the cold broke, and possibly a name or direction",
-        "Edvar Crane's whereabouts still unknown",
-        "Veth's full report not yet heard"
+        "Edvar Crane boards at the mill — north edge of the settlement, ten minutes' walk",
+        "The contamination started four mornings after the cold broke — metallic smell, not ordinary spring silt",
+        "Crane buys sealed jugs and avoids the well — treating his water more carefully than most"
       ]
     }
   },
@@ -2355,14 +2429,14 @@
         "s3"
       ],
       "progress": [
-        "↳ The Waymarker's second layer seated into the warden post, completing the bond between holder and post — the first structural step of the second thread closed.",
         "The Waymarker confirms the Crossing as the destination and names the pull beneath it as the unfinished work — Edvar Crane is load-bearing, not incidental.",
         "A real item enters inventory, unfinished, with its own evolution track. It is not a key and does not open anything yet.",
         "↳ Silas touched the Waymarker mid-road and let it read — it pulled clean toward the Crossing with a secondary lean toward the unfinished work, naming Edvar Crane as load-bearing.",
         "Party has arrived at the Crossing — Edvar Crane is here somewhere, holding the second thread of the Waymarker's unfinished work.",
         "Codex: what the post was, what it was doing, and what stopped it. A named cause where there was a euphemism.",
         "↳ Coll named Crane as a former fold-worker under Zone Remediation and directed Silas to the Ossian annex where Crane's commission files are held — the first concrete lead on what happened at the…",
-        "The suspension order names sub-registrar Holt and a ZR-OA-7 stamp — a deliberate, specific halt by a nameless authority above the district level. The design is clear: one thread cut, all others allowed to conclude."
+        "The suspension order names sub-registrar Holt and a ZR-OA-7 stamp — a deliberate, specific halt by a nameless authority above the district level. The design is clear: one thread cut, all others allowed to conclude.",
+        "Edvar Crane located — boards at the Crossing mill, north edge of the settlement."
       ],
       "aliases": [],
       "startedAt": "2026-07-20T19:28:38.637Z",
@@ -2598,14 +2672,14 @@
       "stageIndex": 0,
       "completedStages": [],
       "progress": [
-        "Stillwater's Trouble named to Mara as a resource and refuge — Silas asking her directly who he needs to convince. The network is beginning to reach back toward the source.",
         "Hub Council water committee formally contacted — Mara Wells named as relay, meeting requested ahead of schedule. The institutional thread is now live.",
         "Ossian persuaded — Warden Coll named as the Council Member who can act; a calling-slip in hand and the third floor ahead.",
         "Coll has heard the full briefing — he needs the document roll, a signed witness statement naming Grael, and a check-in protocol before he can move the committee.",
         "Coll received the document roll and Fendt's testimony — the shadow-architecture of the infrastructure demonstrated on his desk. He committed to drafting formal aid requests to the Rootkin and Cogitants tonight, conditional on a signed witness statement in Silas's hand with his Post Master mark.",
         "Aid framework drafted with two conditions: Cogitant contact named before Zone entry, Stillwater's Trouble offered to Rootkin as staging. Coll writing both into the requests before tonight's flag drop.",
         "Letter of introduction secured — Silas now carries Coll's name and the committee's standing into the Zone. Check-in protocol terms remain to be named before the scene closes.",
-        "Shadow-slate communication channel established with Warden Coll — check-in protocol terms are the final piece before the scene closes."
+        "Shadow-slate communication channel established with Warden Coll — check-in protocol terms are the final piece before the scene closes.",
+        "Contamination start-date fixed: four mornings after the cold broke. Metallic smell, not silt. Edvar Crane identified at the mill — he is already treating his water, which means he knows something."
       ],
       "aliases": [],
       "startedAt": "2026-07-22T20:49:54.189Z",
@@ -3427,7 +3501,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Named three potential Boundary-Stone braids: Palework-attunement for a mercy field, Wither for structural targeting, and a theoretical draw-commons. Then posed the second lesson question: belief before the Word, or belief from it?",
         "[d13] Received Silas's second-question answer — named it right and wrong simultaneously, without cruelty, and placed the decade of work between those two positions without explaining it. A teacher returning a tool to the shelf.",
         "[d13] Stepped aside to observe Pell's experiment — silent, watching the ward's join and Pell's hands simultaneously.",
         "[d13] Asked the cross-reference question — iron or intention — watching both Silas's report and Pell's feet simultaneously.",
@@ -3436,30 +3509,31 @@
         "[d13] Received Silas's note on the reciprocal teaching bond without ceremony — a nod, a contained response, nothing added.",
         "[d13] Arrived at the Crossing, standing quiet, reading the settlement in her own way — mill, well, long building.",
         "[d13] Tasked with finding workers, resources for Stillwater's Trouble or Millbrook, and asking after Edvar Crane — moving toward the water-seller cluster.",
-        "[d13] Found near the water-seller's cart at the Crossing well — mid-conversation, listening to someone tell her less than they think they are."
+        "[d13] Found near the water-seller's cart at the Crossing well — mid-conversation, listening to someone tell her less than they think they are.",
+        "[d13] Worked the water-seller cleanly — got the contamination timing, the smell description, and Crane's location from a man who didn't realize he was being interviewed."
       ],
       "knownFacts": [
-        "The distinction between a witnessed ending and one given room is the core ashwarden judgment — getting it wrong in either direction is a failure of craft, not merely a failure of feeling.",
-        "The second lesson is not delivered in a yard — it is given in the work; it asks the student to name, afterward, which kind of ending they attended",
         "The Held Place technique — watched the braid seat from outside",
         "Three Boundary-Stone braid candidates: Palework-attuned mercy field, Wither-framing for structural targets, and a theoretical sustained-draw commons across the perimeter",
         "The load-bearing hinge problem — the perimeter must pass the braid through without eating it; Pell's ironsense is currently doing that work",
         "Silas's answer: the Word names what is already true; belief precedes utterance. And Veth's counter: it is right, and also wrong, and the difference is a decade.",
         "The soul bond can carry an attending quality — the ashwarden disposition of unhurried, level reading — toward another person, functioning as a teaching assist that Veth has no prior category for",
-        "The attending-quality pass through the soul bond is a teaching tool she has no prior category for — she is still thinking about what it means."
+        "The attending-quality pass through the soul bond is a teaching tool she has no prior category for — she is still thinking about what it means.",
+        "Osten: contamination started four mornings after the cold broke, metallic smell, not ordinary silt",
+        "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here"
       ],
       "skillsObserved": [
-        "recognizing a third-thing emergence from two-craft braid — t",
         "naming three advanced braid candidates from a single observe",
         "identifying the structural hinge problem in Pell's ironsense",
         "placing a correct answer beside its own limitation without c",
         "cross-referencing an internal craft-read against its externa",
-        "naming a novel capability without pretending to have already"
+        "naming a novel capability without pretending to have already",
+        "working a source until he gave more than he meant to, withou"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the water-seller's cart near the Crossing well, in conversation.",
+      "statusNote": "With the party at the well lane — report delivered, ready to move.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -3693,6 +3767,33 @@
       "gender": "woman",
       "pronouns": "she/her",
       "statusNote": "At her stall — tusks in hand, work beginning, commission complete and settled",
+      "lastSeen": {
+        "locationId": "gen-waygate",
+        "day": 13
+      }
+    },
+    "osten": {
+      "id": "osten",
+      "name": "Osten",
+      "role": "Water-seller, the Crossing marketplace",
+      "description": "A broad, sun-cracked man who sells boiled and sealed water from a two-wheeled cart — takes no public position on the crisis but knows its timing precisely.",
+      "firstMet": {
+        "locationId": "gen-waygate",
+        "day": 13
+      },
+      "relationship": 0,
+      "history": [
+        "[d13] Gave Veth the contamination start-date and Edvar Crane's address at the mill without knowing he was providing either as intelligence."
+      ],
+      "knownFacts": [
+        "The gray-brown started four mornings after the cold broke — not ordinary spring silt, metallic smell",
+        "Edvar Crane boards at the mill on the settlement's north edge and buys sealed jugs rather than using the well"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "At his cart in the Crossing marketplace — conversation complete, back to his work.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -4572,7 +4673,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 579,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The stock shelter, plain and open on the lee side of the field-stone wall — exactly the kind of place Huginn will land first and inspect…",
@@ -5034,7 +5135,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Fen's intake CCW torque axis confirmed identical to east furlong — both valves are running the same mechanism in sequence. The structure behind the intake valve is not ending; it is operating as desig",
           "[d2] The Attended End confirms the vault head is ending — slow, structural, load-surrendering — on the same northeast bearing as the three-gate sequence, approximately a mile and a half up the hillside. A ",
           "[d2] Palework on the dying spruce stand north of the pass confirms the fungal die-off is natural and isolated — the buried structure's contamination has not begun seeping into the broader root-zone above t",
           "[d3] A passing traveler on the Edge District trade track reports gray seepage from the east-side stones at the lower ford crossing — the contamination is spreading into surface water beyond the main river ",
@@ -5057,17 +5157,18 @@
           "[d13] Warden Coll issued a formal letter of introduction — Post Master authority named explicitly, committee seal pressed beside his own. Valid for district-governed contacts in the Zone fringe. His caveat: anyone who does not recognize district governance is a different conversation the letter cannot…",
           "[d13] A permanent two-way shadow-slate bound to Silas's Weirmark is now seated on Warden Coll's desk — written contact established without runners. Check-in protocol terms are the last open item before the scene closes.",
           "[d13] The Attended End, read through Huginn at Day 13 afternoon: the aid framework has weight and will hold. But the source upstream is on its own schedule — something is finishing there, and the question is whether Silas arrives before it does. The clock has not been seen.",
-          "[d13] The shadow-slate channel is now live — Weirmark seated on both ends, check-in protocol in Coll's ledger margin. Contact with the Hub's formal accountability chain is permanent and two-way."
+          "[d13] The shadow-slate channel is now live — Weirmark seated on both ends, check-in protocol in Coll's ledger margin. Contact with the Hub's formal accountability chain is permanent and two-way.",
+          "[d13] The gray-brown contamination at the Crossing started four mornings after the cold broke — Osten describes the smell as metallic, not the ordinary spring silt. The timing is precise and the character of it is distinct."
         ],
         "links": [
-          "millbrook",
-          "the-edge-district-ledger",
-          "coll",
           "mara-wells",
           "find-the-engineer",
           "the-second-thread",
           "what-the-water-remembers",
-          "huginn"
+          "huginn",
+          "osten",
+          "edvar-crane",
+          "millbrook"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -6075,21 +6176,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.155766197824697,
-    "cerebral": 13.518635592421298,
-    "social": 14.416790666510554,
-    "generous": 5.3235841294636375,
-    "cautious": 4.6304076654779225,
-    "physical": 0.7228859265343471,
-    "risky": 0.6353126589122005,
-    "ruthless": 0.5619413710798541,
-    "carousing": 0.12888810425113065,
-    "amorous": 2.1790061034309565,
-    "patient": 0.7731159172255255,
-    "stealth": 0.0012925167166170286,
-    "devotion": 0.6827056310007459,
-    "craft": 1.075569682891093,
-    "leadership": 1.0429296820271199
+    "strategic": 17.72687204287908,
+    "cerebral": 13.180669702610764,
+    "social": 14.05637089984779,
+    "generous": 5.190494526227046,
+    "cautious": 4.5146474738409745,
+    "physical": 0.7048137783709885,
+    "risky": 0.6194298424393955,
+    "ruthless": 0.5478928368028577,
+    "carousing": 0.1256659016448524,
+    "amorous": 2.1245309508451826,
+    "patient": 0.7537880192948874,
+    "stealth": 0.0012602037987016028,
+    "devotion": 0.6656379902257272,
+    "craft": 1.0486804408188157,
+    "leadership": 1.016856439976442
   },
   "aptitudes": [
     "strategist",
@@ -6097,7 +6198,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 750,
+  "actionCount": 751,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6487,8 +6588,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784865104429,
-  "rev": 1214,
+  "updatedAt": 1784865237498,
+  "rev": 1215,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9050,7 +9151,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 484,
+    "valley": 485,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9177,10 +9278,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T03:51:44.420Z",
+      "lastAt": "2026-07-24T03:53:57.486Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 84
+      "beats": 85
     }
   ],
   "company": [
@@ -9380,19 +9481,19 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 120,
-    "choices": 120,
+    "sceneSummary": 121,
+    "choices": 121,
     "characterDeltas": 49,
-    "scene": 120,
-    "npcUpdates": 104,
+    "scene": 121,
+    "npcUpdates": 105,
     "factUpdates": 7,
     "placeUpdates": 21,
-    "codexUpdates": 70,
-    "timeOps": 114,
+    "codexUpdates": 71,
+    "timeOps": 115,
     "imagePrompt": 3,
     "sceneEnded": 26,
     "itemUpdates": 2,
-    "questUpdates": 12,
+    "questUpdates": 13,
     "offer": 11,
     "moveTo": 10,
     "delegateOps": 1,
@@ -9403,7 +9504,7 @@
     "stageOps": 5,
     "generateRequest": 3
   },
-  "_opTurns": 120,
+  "_opTurns": 121,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

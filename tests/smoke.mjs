@@ -7353,6 +7353,15 @@ await (async () => {
   const wtSrc211 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
   check("211 Q1: the ambient sources (want-move, wake-fade) stamp tier:'ambient' at emit", /tier: "ambient"/.test(wtSrc211) && /source === "legend" \|\| resolved \|\| outcome === "problem"/.test(wtSrc211));
   check("211: takeUnseenNews ranks via rankNews (surface shaped, ws.news log untouched)", /return rankNews\(items, opts\)/.test(wtSrc211));
+
+  // CCODE-18: takeUnseenNews clears the queue in memory; maybeTick must SAVE AFTER taking, or the cleared
+  // queue never persists and a hard refresh re-shows the same "while you were away" digest every time.
+  const appSrc218b = readFileSync(join(root, "app.js"), "utf8");
+  const tick = appSrc218b.slice(appSrc218b.indexOf("async function maybeTick()"), appSrc218b.indexOf("function hydrateCanonIntoContent"));
+  const takeAt = tick.indexOf("takeUnseenNews(character)");
+  const saveAt = tick.lastIndexOf("saveCharacter(character)");
+  check("CCODE-18: maybeTick takes-and-clears the unseen news BEFORE its final save (the clear persists, so a refresh won't re-show)",
+    takeAt > -1 && saveAt > takeAt && !/saveCharacter\(character\);\s*return takeUnseenNews\(character\);/.test(tick));
 }
 
 // ---- SNG-218 §2: the LLM "next crafts" suggestion — prompt carries the real signals; reachable-only guardrail ----

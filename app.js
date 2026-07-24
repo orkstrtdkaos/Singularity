@@ -68,7 +68,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.247";
+const APP_VERSION = "1.8.248";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2296,8 +2296,13 @@ async function maybeTick() {
   } catch (err) { console.warn("[canon] tick skipped:", err?.message); }
   // SNG-201: publish first-finder braids + adopt any the world found first; refresh the recipe cache.
   await syncBraidRecipes({ character, profile });
+  // CCODE-18: pull-and-CLEAR the unseen news BEFORE the save, so the emptied queue is what persists. The old
+  // order (save, THEN take) wrote the still-unread queue to storage and only cleared it in memory — so a hard
+  // refresh before the next turn's own save reloaded the full queue and re-showed the same "while you were
+  // away" digest every time. Taking first means this one save captures the tick's writes AND the empty queue.
+  const freshNews = takeUnseenNews(character);
   saveCharacter(character);
-  return takeUnseenNews(character);
+  return freshNews;
 }
 
 /** Make the viewer's rating-lensed shared canon revisitable: merge canonical entities from OTHER

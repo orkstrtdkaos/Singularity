@@ -100,3 +100,77 @@ SNG-229 (bestiary creatures become framed FIGHTS with real exits).
    content (Aevi)? Likely both: the generator for emergent ones, authored exemplars for signature ones.
 4. (Erik) Should FLEE always succeed (at a cost), or can you FAIL to flee (the chase catches you)? Fleeing a
    fight vs. fleeing a chase differ — fleeing the chase IS the fail. Erik's call on whether flee is guaranteed.
+
+
+---
+
+# §6 — REFINEMENT (Erik, 2026-07-22): the exits are LIVING, and skills can COLLAPSE the frame
+
+Erik sharpened the three exits from static buttons into a chaining, skill-responsive system. Two mechanics:
+
+## §6a — FLEE is not an escape hatch — it CONVERTS the fight into a CHASE (frames chain)
+Flee does NOT always succeed (correcting §OQ4). Choosing FLEE from a fight **transitions the encounter into a
+CHASE frame** — its own frame, its own three exits, its own stages (the chase machinery already exists,
+challenge-routing). Then:
+- **Win the chase (DEFEAT the chase)** → you got away. Flee succeeded.
+- **FAIL the chase** → it dumps you BACK into the fight (or into FAIL outright, if the flee burned your
+  position). "If you fail the chase you will have to fight, or fail." — Erik.
+So the frames **CHAIN**: FIGHT --flee--> CHASE --fail--> FIGHT (or FAIL). Fleeing is a real playable sequence
+with stakes, not a teleport. This is the outcome vocabulary already present (`fled`, `abandoned`,
+`opponent_fell`) wired into a transition graph:
+```
+  FIGHT ─(flee)→ CHASE ─(defeat)→ escaped (fled)
+                 CHASE ─(fail)→   back to FIGHT  (or FAIL if position lost)
+                 CHASE ─(flee)→   … you can't flee a chase; fleeing a chase IS trying to shake it
+```
+The KIND determines what its own flee means — you flee a fight INTO a chase; you can't "flee" a chase (shaking
+it IS the chase's defeat condition). Each frame's exits are themed by kind; the transition graph is the system.
+
+## §6b — a SKILL can COLLAPSE or MORPH the frame — via an OPPOSED check (the sharp one)
+Some skills don't grind the meter — they try to END the encounter in one beat. Cut the Thread, the_ended_threat,
+hunters_strike, and other instant-lethal / instant-escape crafts appear as an ACTION INSIDE the frame that, on
+success, COLLAPSES it immediately (skip the stages, the thing is done). BUT — Erik's key word — it is an
+**OPPOSED check, not an auto-win**:
+- **Instant-lethal vs. a weak/riffraff thing** → likely collapses the frame in one beat (DEFEAT, instantly).
+  This is the reward for the right skill on the right target — a glimmerling swarm doesn't survive Cut the
+  Thread.
+- **Instant-lethal vs. a strong/regional/epic thing** → the target RESISTS: the finisher becomes an OPPOSED
+  skill check (their resolve/threat vs. your craft). Succeed → collapse. **FAIL → the frame MORPHS**: you tried
+  to cut the thread and missed, and now it's a full FIGHT (the thing knows you tried to end it, and it's
+  angry). A missed finisher is the most dangerous opening move.
+- **The same for flee-skills:** a movement/transit craft (shadowstep, the_grey_road) can COLLAPSE the flee —
+  turn a chase into an instant escape on a successful opposed check (their reach vs. your craft); fail and the
+  chase continues from a worse position.
+So a skill can: **collapse** the frame (instant win/escape), or **morph** it (a failed finisher turns a soft
+encounter into a hard fight, a failed skill-flee worsens the chase). The frame is RESPONSIVE to what you
+throw at it, not a fixed meter-grind.
+
+## §6c — mechanics grounding (verified)
+- The OUTCOME vocabulary already exists (app.js:2023): `opponent_fell, fled, abandoned, solved, walked_away,
+  incapacitated, yielded, completed`. §6a/b wire these into a transition graph + a collapse path; the outcomes
+  are built, the TRANSITIONS between frames are the new machinery.
+- Instant-lethal/escape is a FUNCTION-FAMILY property (the 24-verb vocab), not per-ability hardcoding —
+  CCode keys the collapse-attempt off the skill's function family (a FINISH/END-family or MOVE/transit-family
+  craft offers the collapse action inside the frame); the OPPOSED check is the existing resolve.js opposed
+  path (my SNG-225 encounters already use `routing: opposed`).
+- `canIncapacitate` already gates whether an encounter is escapable — extend its spirit: whether a frame is
+  COLLAPSIBLE by a finisher (an epic dragon may be non-collapsible — no one-beat kill on the Ashen Wyrm; you
+  fight the stages), a riffraff always collapsible.
+
+## §6d — updated GUARDS
+- **Flee has stakes** — fleeing a fight starts a chase you can LOSE; never a free exit. (Corrects §OQ4.)
+- **Collapse is EARNED, not free** — a finisher is an opposed check scaled to the target; strong things resist,
+  epics may be non-collapsible. Cut the Thread isn't a win button; it's a high-risk high-reward opening.
+- **A failed collapse MORPHS, doesn't no-op** — miss the finisher and the encounter hardens (soft→fight,
+  chase→worse chase). The whiff has teeth.
+- **Function-family driven** — which skills offer collapse/flee-collapse comes from the 24-verb vocab, not a
+  hardcoded skill list; a new FINISH-family craft automatically gets the collapse action.
+
+## §OQ — updated for CCode/Erik ROUND 2
+5. (CCode) The transition GRAPH — is it authored per-kind (fight→chase, chase→fight/fail) as data, or hardcoded
+   in the frame? Data is cleaner (a new kind declares its own exits/transitions).
+6. (CCode) Collapse eligibility — a `collapsible` + `collapseDC-by-tier` on the encounter/creature (riffraff
+   low, epic non-collapsible), read against the finisher skill's function family + the opposed check. Where does
+   collapseDC live — bestiary tier, or computed from threat?
+7. (Erik) Should a MORPHED encounter (failed finisher → fight) be HARDER than if you'd just fought (a penalty
+   for the failed gambit), or the same fight from a worse position? Erik's call on how much the whiff costs.

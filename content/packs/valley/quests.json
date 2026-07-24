@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "quests_structured",
  "kind": "quests",
- "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess.",
+ "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess. | SNG-229 hunts folded (Aevi 2026-07-24): 7 creature-hunt quests, real givers + machine-readable effects[], creatureId resolves against the now-loaded bestiary.",
  "quests": [
   {
    "id": "the_edge_district_ledger",
@@ -1385,6 +1385,548 @@
       {
        "type": "xp",
        "amount": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_stag_that_wont_die",
+   "name": "The Stag That Won't Die",
+   "region": "valley",
+   "tier": "notable",
+   "giver": "keeper_ilma",
+   "axis": "death_life",
+   "traditions": [
+    "ashwarden",
+    "marcher"
+   ],
+   "creatureId": "the_wrong_stag",
+   "premise": "The wrong stag has taken three walkers at the tree-line, and the graze has been silent since it changed. Keeper Ilma, whose whole craft is the mercy of stopping, cannot end a thing already past dying-right — and it shames her. She asks you to do what Palework cannot. A Lattice broker will quietly pay for the humming antler.",
+   "stakes": "Three dead; the tree-line ground lost while it stands; and a keeper facing the one death she cannot give.",
+   "stages": [
+    "Read what the stag has become (KNOW).",
+    "Corner it — it does not flee like a beast (MOVE).",
+    "End it — a kill, not a keeping (HARM)."
+   ],
+   "routes": [
+    "Hunt it clean for Ilma's peace",
+    "Take the antler for the broker's coin",
+    "Both, if you can stomach her face"
+   ],
+   "outcomes": [
+    {
+     "id": "ended_clean",
+     "name": "Ended Clean",
+     "summary": "The stag falls; the graze reopens.",
+     "narration": [
+      "The wrong stag is put down. The tree-line ground is walkable again.",
+      "Keeper Ilma grieves the death she could not give — and trusts you with what her craft cannot reach."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_wrong_stag",
+       "state": "slain",
+       "note": "the changed ground reopens"
+      },
+      {
+       "type": "ally",
+       "npc": "keeper_ilma",
+       "note": "trusts you with the deaths her craft cannot keep"
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": 2
+      },
+      {
+       "type": "codex_fact",
+       "topic": "the_wrong_stag",
+       "fact": "A thing past dying-right; ended by a hand where Palework could not reach."
+      }
+     ]
+    },
+    {
+     "id": "antler_taken",
+     "name": "The Antler Taken",
+     "summary": "The stag falls; the humming antler changes hands.",
+     "narration": [
+      "You end the stag and cut the lattice-antler free. A Lattice broker pays well and asks nothing.",
+      "Ilma sees the stump. She says nothing. She remembers."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_wrong_stag",
+       "state": "slain",
+       "note": "antler taken"
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": -1
+      },
+      {
+       "type": "disposition",
+       "people": "lattice",
+       "delta": 1
+      },
+      {
+       "type": "codex_fact",
+       "topic": "lattice_antler",
+       "fact": "Cut from the wrong stag; hums with something resolved wrong. A key, a proof, or a fortune to the right buyer."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_walk_that_wont_stop",
+   "name": "The Walk That Won't Stop",
+   "region": "valley",
+   "tier": "notable",
+   "giver": "maker_orrin",
+   "axis": "destruction_creation",
+   "traditions": [
+    "wright",
+    "enginewright"
+   ],
+   "creatureId": "hollow_pace",
+   "premise": "A hollow-pace still walks the line of a wall that fell a century ago, and it has begun 'defending' the gap against anyone who crosses. Maker Orrin wants it taken INTACT — its rotted directive is a readable pre-Transition record, worth more captured than broken. Everyone else on the road wants it gone.",
+   "stakes": "The crossing closed while it patrols; and a Wright's dread of a made thing outliving its purpose.",
+   "stages": [
+    "Learn its dead patrol-pattern (KNOW).",
+    "Break the directive without destroying the core Orrin wants (UNMAKE).",
+    "End the frame — or bind it whole (HARM or WARD)."
+   ],
+   "routes": [
+    "Break it for the road",
+    "Take it intact for Orrin's coin and knowledge"
+   ],
+   "outcomes": [
+    {
+     "id": "broken",
+     "name": "Broken for the Road",
+     "summary": "The frame falls; the crossing reopens.",
+     "narration": [
+      "You break the hollow-pace. The road opens. A made thing stops walking at last.",
+      "Orrin is disappointed — but a Wright understands ending a thing that outlived its purpose."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "hollow_pace",
+       "state": "slain",
+       "note": "frame broken; crossing reopens"
+      },
+      {
+       "type": "disposition",
+       "people": "wright",
+       "delta": 1
+      },
+      {
+       "type": "codex_fact",
+       "topic": "hollow_pace",
+       "fact": "A made thing outliving maker and purpose. Broken, not studied."
+      }
+     ]
+    },
+    {
+     "id": "taken_intact",
+     "name": "Taken Intact",
+     "summary": "Bound whole; Orrin reads a century-old directive.",
+     "narration": [
+      "You bind the hollow-pace without breaking its core. Orrin reads its rotted directive — and goes very quiet.",
+      "Something in the record starts a new thread."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "hollow_pace",
+       "state": "captured",
+       "note": "intact; directive readable"
+      },
+      {
+       "type": "ally",
+       "npc": "maker_orrin",
+       "note": "in your debt; shares what the directive reveals"
+      },
+      {
+       "type": "disposition",
+       "people": "enginewright",
+       "delta": 2
+      },
+      {
+       "type": "quest_seed",
+       "seed": "The rotted directive names a place, or a purpose, that should not still exist."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_water_gone_wrong",
+   "name": "The Water Gone Wrong",
+   "region": "valley",
+   "tier": "notable",
+   "giver": "reed_mother_ossa",
+   "axis": "death_life",
+   "traditions": [
+    "rootkin",
+    "somatic"
+   ],
+   "creatureId": "warpling_hare",
+   "premise": "The warplings have gotten into the upper water, and the beasts that drink there move wrong now too. Reed Mother Ossa — watching her herd change — will trade coin or standing to have them cleared at the source before wrongness becomes the whole valley's problem.",
+   "stakes": "A spreading wrongness; a herd, then a valley, if unchecked.",
+   "stages": [
+    "Trace the warplings to the source pool (KNOW).",
+    "Clear them — they cannot be healed back (HARM).",
+    "Ward the water (WARD)."
+   ],
+   "routes": [
+    "Fast and rough",
+    "Clean, and ward the source"
+   ],
+   "outcomes": [
+    {
+     "id": "cleared",
+     "name": "Water Runs Right",
+     "summary": "Warplings cleared; the source warded.",
+     "narration": [
+      "You clear the source and ward the water. The herd settles within days.",
+      "Ossa is in your debt, and the valley never learns how close it came."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "warpling_hare",
+       "state": "slain",
+       "note": "source cleared and warded"
+      },
+      {
+       "type": "ally",
+       "npc": "reed_mother_ossa",
+       "note": "in your debt; the herd steadies"
+      },
+      {
+       "type": "disposition",
+       "people": "rootkin",
+       "delta": 2
+      },
+      {
+       "type": "codex_fact",
+       "topic": "warpling_hare",
+       "fact": "Life gone wrong past healing; cleared at the source before it spread."
+      }
+     ]
+    },
+    {
+     "id": "rushed",
+     "name": "Rushed",
+     "summary": "Warplings killed, source unwarded.",
+     "narration": [
+      "You kill the warplings but don't ward the pool. Ossa thanks you.",
+      "Weeks later, the wrongness seeps back — slower, and worse."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "warpling_hare",
+       "state": "slain",
+       "note": "source NOT warded"
+      },
+      {
+       "type": "quest_seed",
+       "seed": "The wrongness returns to the upper water — a second, harder clearing."
+      },
+      {
+       "type": "disposition",
+       "people": "rootkin",
+       "delta": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_choir_that_means_nothing",
+   "name": "The Choir That Means Nothing",
+   "region": "valley",
+   "tier": "epic",
+   "giver": "old_choirmaster",
+   "axis": "body_mind",
+   "traditions": [
+    "threnodist",
+    "numinous",
+    "seraphic"
+   ],
+   "creatureId": "the_unmoored_choir",
+   "premise": "The unmoored choir is spreading — a drifting region of voices that mean nothing, expression severed from feeling, its edge closer than it was. To the old choirmaster it is obscene: their art, unmoored from meaning, growing. Epic ground — a campaign, not a strike, and it takes more than one hand.",
+   "stakes": "A domain-scale drift that will not stay put. Everything within its growing reach.",
+   "stages": [
+    "Map the choir's growth; find what feeds it (KNOW).",
+    "Hold its edge — it must not spread while you work (WARD).",
+    "Reach its hollow center and unmake the drift (UNMAKE)."
+   ],
+   "routes": [
+    "Rally the traditions (a shared-world arc)",
+    "Strike the center alone"
+   ],
+   "outcomes": [
+    {
+     "id": "collapsed",
+     "name": "The Drift Collapses",
+     "summary": "The choir is unmade at its center.",
+     "narration": [
+      "You reach the hollow center and unmake it. The voices fall silent across the valley's edge.",
+      "The old choirmaster weeps — this time with meaning."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_unmoored_choir",
+       "state": "slain",
+       "note": "drift collapsed"
+      },
+      {
+       "type": "ally",
+       "npc": "old_choirmaster",
+       "note": "grief that means something again"
+      },
+      {
+       "type": "disposition",
+       "people": "threnodist",
+       "delta": 3
+      },
+      {
+       "type": "codex_fact",
+       "topic": "the_unmoored_choir",
+       "fact": "Expression severed from feeling, grown domain-scale; unmade at its hollow center."
+      }
+     ]
+    },
+    {
+     "id": "contained",
+     "name": "Contained, Not Ended",
+     "summary": "Held, but not destroyed.",
+     "narration": [
+      "You hold its edge but cannot reach the center alone. The drift stops spreading — for now.",
+      "It stands as a world-threat, waiting for a larger hand."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_unmoored_choir",
+       "state": "contained",
+       "note": "held, not ended; standing world-threat"
+      },
+      {
+       "type": "world_arc",
+       "arc": "the_unmoored_choir",
+       "note": "becomes a standing epic-scale threat (ties the epic-arc system)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_mercy_that_wont_ask",
+   "name": "The Mercy That Won't Ask",
+   "region": "valley",
+   "tier": "regional",
+   "giver": "keeper_ilma",
+   "axis": "death_life",
+   "traditions": [
+    "ashwarden",
+    "seraphic"
+   ],
+   "creatureId": "the_pure_of_ash",
+   "premise": "An Ashwarden has been hollowed by the cult-of-purity of their own craft — the Pure-of-Ash, who decided the mercy of stopping should be given to everyone, unasked, and now administers death as doctrine. Keeper Ilma knows what they were, and knows there is no one left inside to reach. She asks you to end a thing wearing a warden's face.",
+   "stakes": "A master of real death-craft, killing as kindness; and every Ashwarden's fear of what they could become.",
+   "stages": [
+    "Find where the Pure-of-Ash walks its 'mercy' (KNOW).",
+    "Survive real Palework turned to murder (WARD).",
+    "Test whether any person remains — the answer is no (SWAY).",
+    "End it (HARM)."
+   ],
+   "routes": [
+    "End it swiftly, before it 'mercies' another",
+    "Try to reach the warden within first — and learn there is none"
+   ],
+   "outcomes": [
+    {
+     "id": "ended",
+     "name": "The Doctrine Ended",
+     "summary": "The Pure-of-Ash falls; the killing stops.",
+     "narration": [
+      "You end the Pure-of-Ash. The 'merciful' deaths stop.",
+      "Ilma does not thank you. She goes to sit with her order, and reminds them what they must never become."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_pure_of_ash",
+       "state": "slain",
+       "note": "the doctrine of unasked mercy ends"
+      },
+      {
+       "type": "ally",
+       "npc": "keeper_ilma",
+       "note": "bound to you by a grief only you share"
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": 2
+      },
+      {
+       "type": "codex_fact",
+       "topic": "cult_of_purity_ash",
+       "fact": "An Ashwarden can be hollowed into administering death as doctrine. The order guards against it now."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_maker_with_no_plan",
+   "name": "The Maker With No Plan",
+   "region": "valley",
+   "tier": "regional",
+   "giver": "maker_orrin",
+   "axis": "destruction_creation",
+   "traditions": [
+    "wright",
+    "enginewright",
+    "mason"
+   ],
+   "creatureId": "the_gearfather",
+   "premise": "The Gearfather has woken — a foundational pre-Transition engine, building-sized, still trying to 'complete' a project whose plans rotted a century ago, assembling anything nearby into its endless wrong construction. Maker Orrin is torn: it is the greatest pre-Transition machine anyone's seen, and it must be stopped before it builds the whole valley into its nothing.",
+   "stakes": "The ground itself is its body; a region assembled into meaningless construction if it isn't ended.",
+   "stages": [
+    "The terrain is alive — learn where the rotted core sits (KNOW).",
+    "Move through a landscape that reaches for you (MOVE).",
+    "Break the directive at the core (UNMAKE).",
+    "End the engine (HARM, at scale)."
+   ],
+   "routes": [
+    "Break it fully — the region is freed",
+    "Salvage its core for the Enginewrights before you end it"
+   ],
+   "outcomes": [
+    {
+     "id": "stilled",
+     "name": "The Gearfather Stilled",
+     "summary": "The engine stops; the ground is ground again.",
+     "narration": [
+      "You break the rotted directive at the core. The Gearfather goes still. The reaching stops.",
+      "The region can be walked, and built, and lived in again."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_gearfather",
+       "state": "slain",
+       "note": "the endless construction ends; region freed"
+      },
+      {
+       "type": "disposition",
+       "people": "wright",
+       "delta": 2
+      },
+      {
+       "type": "disposition",
+       "people": "mason",
+       "delta": 1
+      },
+      {
+       "type": "codex_fact",
+       "topic": "the_gearfather",
+       "fact": "A foundational engine that outlived its plans. Stilled at the core."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_wyrm_of_endings",
+   "name": "The Wyrm of Endings",
+   "region": "valley",
+   "tier": "epic",
+   "giver": "keeper_ilma",
+   "axis": "death_life",
+   "traditions": [
+    "ashwarden",
+    "marcher",
+    "seraphic",
+    "mason"
+   ],
+   "creatureId": "the_ashen_wyrm",
+   "premise": "The Ashen Wyrm has been seen on the far ridges — a dragon of the death-pole, hill-sized, its breath the grey stillness of everything stopping at once. Where it flies, the season ends. It does not hunt; it PASSES, and what it passes over is done. Keeper Ilma convenes the traditions: this dragon is the Ashwardens' own mercy become a weather, and it is a saga, not an encounter.",
+   "stakes": "Domain-scale. A valley's worth of endings on the wing. The largest mercy the valley will ever be asked to give.",
+   "stages": [
+    "Track a domain-scale flight; read where it will pass (KNOW).",
+    "Survive its stilling breath — craft and blood slow across a valley (WARD).",
+    "Wound a hill; find the one thing that touches it (UNMAKE).",
+    "End it together — no single hand does this (HARM, at scale)."
+   ],
+   "routes": [
+    "A campaign of position across seasons",
+    "A desperate single strike at terrible cost"
+   ],
+   "outcomes": [
+    {
+     "id": "felled",
+     "name": "The Wyrm Felled",
+     "summary": "The dragon falls; the stilled season returns.",
+     "narration": [
+      "Together, the traditions bring the Ashen Wyrm down. The ridges it stilled thaw back to life.",
+      "It is the largest ending anyone living has given. No one celebrates. They keep it, the way Ashwardens keep all endings."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_ashen_wyrm",
+       "state": "slain",
+       "note": "the stilled season returns to the ridges"
+      },
+      {
+       "type": "disposition",
+       "people": "ashwarden",
+       "delta": 3
+      },
+      {
+       "type": "disposition",
+       "people": "marcher",
+       "delta": 2
+      },
+      {
+       "type": "world_arc",
+       "arc": "the_ashen_wyrm",
+       "note": "a saga completed; the valley remembers who stood"
+      }
+     ]
+    },
+    {
+     "id": "passed_on",
+     "name": "It Passed On",
+     "summary": "Unslain; the wyrm moves beyond reach.",
+     "narration": [
+      "You cannot bring it down, but you turn it — the Ashen Wyrm flies on, beyond the valley's edge.",
+      "It is a saga left open. Somewhere else, a season is ending."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "the_ashen_wyrm",
+       "state": "departed",
+       "note": "unslain; a standing world-threat elsewhere"
+      },
+      {
+       "type": "world_arc",
+       "arc": "the_ashen_wyrm",
+       "note": "open saga; may return"
       }
      ]
     }

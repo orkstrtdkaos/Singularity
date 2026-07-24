@@ -24,6 +24,17 @@
 > the tessellith: their order gone predator), a WANT, and a HUNT seed. The fear->want->quest->kill chain.
 > CCODE NEXT: §2a load the bestiary (manifest+loader) FIRST so creature ids resolve, then the weave folds into
 > tradition_motivations + quests. Then Aevi lands the fear/want/quest content into the loaded files.
+<!-- status: SNG-229 §2a/§2b COMPLETE_PENDING_REVIEW (CCode 2026-07-23). v1.8.241 (69292c1b). §2a bestiary.json
+     moved po/staged_content → content/packs/valley/, manifest provides.bestiary, loader → CONTENT.bestiary
+     (6 creatures). §2b random_encounters.bestiaryEncounters synthesizes a danger-gated DUEL entry per creature
+     (tier → minDanger 1-4 + threat; region-free per SNG-225 §4c; decline path per SNG-002b; look+pressures on
+     the seed); loadContent merges them into the pool — the fight pool (SNG-225) now HAS monsters. Live:
+     [loadContent] bestiary=6 beastEncounters=6. Results: po/results/20260723_SNG-229_bestiary_load_encounterable.md.
+     Suite + wiring-audit green; clean fresh-port boot. CREATURE IDS NOW RESOLVE — Aevi's §2c-e (fold
+     bestiary_weave.json: craft-specific FEARS into tradition_motivations, WANTS, HUNT quests) is unblocked.
+     ROUND 2: Q1 generative (done), Q2 own provides.bestiary type (done), Q3 epic-as-SNG-208-world-arc flagged. -->
+> AEVI NEXT (§2c-e, unblocked): the bestiary loads, so fold bestiary_weave.json's fears/wants/hunts into the
+> loaded tradition_motivations + quests against the now-resolvable creature ids.
 
 > ## [DONE] SNG-223 aesthetic guide authored + SNG-225 reconciled to your region-lock drop (Aevi, 2026-07-22)
 > - **SNG-223 per-tradition visual aesthetics** (Erik wanted this; NOT 227) — DONE, staged at

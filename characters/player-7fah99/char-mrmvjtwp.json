@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 2,
-  "xp": 123,
+  "xp": 128,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -44,7 +44,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 105,
+  "energy": 99,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -65,7 +65,159 @@
     "Aelyn left the Heartroot with Caelum Kantoro's name, the kept thread settled in her sternum, and Branch's word — family — fresh in her journal. The deep grain quest's receiving is complete; she faces northeast as the first evening of her new life begins."
   ],
   "currentLocationId": "the_heartroot",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_heartroot",
+    "turns": [
+      {
+        "player": "Use Lifesense — trace the thread outward from your sternum and see how far it can reach.",
+        "summary": "Aelyn steps outside the Heartroot at evening and reaches through Lifesense to trace the kept thread — it leans northeast, steady and real, the other end a living person still breathing somewhere beyond the city's canopy.",
+        "narration": "You step out through the Heartroot's living door into the cool evening air, and the city breathes around you — walls still pale with stored afternoon warmth, the path under your feet worn root-smooth by four centuries of unhurried feet. Branch walks beside you, its root-toes re-gripping the ground with each slow step, buds at its shoulder catching the last amber light.\n\nYou close your eyes and reach inward — not down into the deep grain this time, but across. Lifesense opens the way it always does: the green pulse of Branch beside you, the slow dreaming warmth of the city walls, the flicker-scatter of small birds settling into the outer canopy. And then, underneath all of it, the kept thread. It sits at the base of your sternum, warm and specific, and when you extend your attention toward it the way you'd extend your hand to feel which direction a draft comes from, it answers. Not with a picture. Not with words. With a lean.\n\nNortheast. Steady. Not faint — the thread has weight, real weight, the kind that means the other end is not a memory but a person still breathing. Your range with Lifesense reaches only to the buildings nearby, but the thread's orientation doesn't waver at the edge of that reach. It continues, past the city's canopy, past the treeline where the early-spring melt has the eastern slopes still silver with snowmelt and new mud. Wherever Caelum Kantoro is, he is beyond your sight. But the thread knows him, and it is not confused about direction.\n\nBranch stops walking and looks where you are looking. A long pause, in the way that Branch pauses when it has decided on a word.\n\n\"Far,\" it says, one syllable, with the particular precision it gives to distances it means seriously."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You step out through the Heartroot's living door into the cool evening air, and the city breathes around you — walls still pale with stored afternoon warmth, the path under your feet worn root-smooth by four centuries of unhurried feet. Branch walks beside you, its root-toes re-gripping the ground with each slow step, buds at its shoulder catching the last amber light.\n\nYou close your eyes and reach inward — not down into the deep grain this time, but across. Lifesense opens the way it always does: the green pulse of Branch beside you, the slow dreaming warmth of the city walls, the flicker-scatter of small birds settling into the outer canopy. And then, underneath all of it, the kept thread. It sits at the base of your sternum, warm and specific, and when you extend your attention toward it the way you'd extend your hand to feel which direction a draft comes from, it answers. Not with a picture. Not with words. With a lean.\n\nNortheast. Steady. Not faint — the thread has weight, real weight, the kind that means the other end is not a memory but a person still breathing. Your range with Lifesense reaches only to the buildings nearby, but the thread's orientation doesn't waver at the edge of that reach. It continues, past the city's canopy, past the treeline where the early-spring melt has the eastern slopes still silver with snowmelt and new mud. Wherever Caelum Kantoro is, he is beyond your sight. But the thread knows him, and it is not confused about direction.\n\nBranch stops walking and looks where you are looking. A long pause, in the way that Branch pauses when it has decided on a word.\n\n\"Far,\" it says, one syllable, with the particular precision it gives to distances it means seriously.",
+      "sceneSummary": "Aelyn steps outside the Heartroot at evening and reaches through Lifesense to trace the kept thread — it leans northeast, steady and real, the other end a living person still breathing somewhere beyond the city's canopy.",
+      "choices": [
+        {
+          "label": "Pull out your journal and mark what the thread told you — direction, weight, certainty — then think through what northeast means from here in terms of road or path.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Branch what it knows about the land northeast of the Heartroot — what grows there, what kind of soil, whether it has any sense of the place itself.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Go back inside and find Maren — ask her what lies northeast that a person might go to, and whether she knew Caelum Kantoro had any destination when he left thirty years ago.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Find somewhere to eat and sleep — you've been walking the deep grain and back, and northeast is a tomorrow kind of answer. Let the thread hold while you rest.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-root-that-remembers",
+          "note": "Aelyn reached through Lifesense and confirmed the kept thread's orientation — northeast, steady, the other end a living person. Her father is findable. The first step of the path is confirmed."
+        }
+      ],
+      "scene": {
+        "setting": "Outside the Heartroot's living entrance, evening — pale city-walls still holding warmth, the air cool with early-spring melt; canopy overhead still lit amber at the tips; the path underfoot is old root-smooth stone.",
+        "npcsPresent": [
+          {
+            "name": "Branch",
+            "state": "Standing still beside Aelyn, buds slightly open, looking northeast where she looked — having just said 'Far.'"
+          }
+        ],
+        "objects": [
+          "Traveler's Pack on Aelyn's back",
+          "Aelyn's journal (in the pack)"
+        ],
+        "threads": [
+          "The kept thread orients northeast — Caelum Kantoro is alive and findable, somewhere beyond the city's canopy",
+          "The city's wrongness on the left root-wall was identified but not addressed"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "branch",
+          "name": "Branch",
+          "role": "Companion — a Rootkin cutting that is slowly, patiently becoming someone",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Stopped and looked northeast with Aelyn, then offered a single deliberate word: 'Far.'",
+          "learned": [
+            "The thread's northeast orientation implies real distance — Branch measured that in its one word."
+          ],
+          "skillsObserved": [
+            "deliberate speech",
+            "reading distances by feel"
+          ],
+          "statusNote": "Walking beside Aelyn outside the Heartroot, evening."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-frequency-beneath-the-grove",
+          "label": "The Frequency Beneath the Grove",
+          "kind": "mystery",
+          "fact": "The kept thread's orientation confirmed through Lifesense — northeast, steady, the weight of a living person. Caelum Kantoro is alive and the thread reaches him clearly, past the limit of Lifesense's range.",
+          "links": [
+            "the-root-that-remembers",
+            "aelyn-father",
+            "heartroot",
+            "the-kept-thing"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short moment outside — closing eyes, reaching through Lifesense, waiting on Branch's word."
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Outside the Heartroot's living entrance, evening — pale city-walls still holding warmth, the air cool with early-spring melt; canopy overhead still lit amber at the tips; the path underfoot is old root-smooth stone.",
+      "npcsPresent": [
+        {
+          "name": "Branch",
+          "state": "Standing still beside Aelyn, buds slightly open, looking northeast where she looked — having just said 'Far.'"
+        }
+      ],
+      "objects": [
+        "Traveler's Pack on Aelyn's back",
+        "Aelyn's journal (in the pack)"
+      ],
+      "threads": [
+        "The kept thread orients northeast — Caelum Kantoro is alive and findable, somewhere beyond the city's canopy",
+        "The city's wrongness on the left root-wall was identified but not addressed"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -89,14 +241,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "The kept thing answered: it showed Aelyn the seam of its binding and revealed it has been holding something for her — something it took in long ago and kept because it could not be lost. She now knows how to open the binding, if she chooses.",
         "Aelyn found the seam of the kept thing's binding and opened it — something held inside the root-wall for an unknown span of time is now at the threshold of release.",
         "The kept thing has released its thread — a warm, deep-woven strand now settled in Aelyn at the base of her sternum. The thing that was held has been given. What it means, and who left it, remains.",
         "The kept thing's thread has been traced: it points northeast to Aelyn's father, woven by someone who shared her deep-woven frequency. The Root's first need is answered. The second — the wrongness in the root-wall — is resolved. What remains: who left this thread, and why.",
         "Maren has confirmed: the thread was left by Aelyn's father, thirty years ago. He was deep-woven, walked the deep grain, was heard back, and made the Heartroot promise to hold the thread for his daughter. She has his name.",
         "Maren has clarified the northeast thread's nature: it is a living frequency that speaks only through movement. Aelyn holds it now. The direction is northeast; the destination will declare itself as she walks.",
         "The kept thing has been received. Caelum Kantoro's name is known. Aelyn has thanked Maren and turned northeast — the thread hums at her sternum, orienting as she moves.",
-        "Aelyn has written the name, the thread, and Branch's word in her journal — the receiving is closed. She faces northeast. The wrongness in the city wall remains for another day."
+        "Aelyn has written the name, the thread, and Branch's word in her journal — the receiving is closed. She faces northeast. The wrongness in the city wall remains for another day.",
+        "Aelyn reached through Lifesense and confirmed the kept thread's orientation — northeast, steady, the other end a living person. Her father is findable. The first step of the path is confirmed."
       ],
       "aliases": [],
       "startedAt": "2026-07-17T04:11:12.462Z"
@@ -344,7 +496,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 1
+    "turnsSinceOffer": 2
   },
   "domains": {
     "primary": "rootkin",
@@ -579,16 +731,18 @@
           "[d1] On entering the chamber, the deep-woven frequency stirred faintly — like a string touched by a passing hand. Not sound. Recognition. It responded to being inside the Root-That-Remembers.",
           "[d1] When Aelyn opened through the Grove and made herself legible, the deep-woven frequency was read by the Root-That-Remembers — both its green aspect and its other, structural aspect recognized and held ",
           "[d1] The older structural frequency in Aelyn was what the kept thing paused on — it recognized the green first, then found the other hum and was not surprised. It had been waiting for exactly this combined",
-          "[d1] The thread the kept thing released is the same frequency as Aelyn's deep-woven hum — and it was left here deliberately by someone who knew that frequency, before Aelyn was born."
+          "[d1] The thread the kept thing released is the same frequency as Aelyn's deep-woven hum — and it was left here deliberately by someone who knew that frequency, before Aelyn was born.",
+          "[d1] The kept thread's orientation confirmed through Lifesense — northeast, steady, the weight of a living person. Caelum Kantoro is alive and the thread reaches him clearly, past the limit of Lifesense's range."
         ],
         "links": [
-          "root-that-remembers",
           "heartroot",
           "the-watching-presence",
           "branch",
           "the-deep-woven",
           "rootkin-tender",
-          "the-kept-thing"
+          "the-kept-thing",
+          "the-root-that-remembers",
+          "aelyn-father"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -721,18 +875,18 @@
     }
   },
   "tendencies": {
-    "cerebral": 14.154652753867994,
-    "cautious": 6.203259601944659,
-    "generous": 0.6985789963823713,
-    "social": 4.0495035823132906,
-    "strategic": 1.3849412729411268,
-    "devotion": 5.461486404312064,
-    "patient": 1.7763296208564376
+    "cerebral": 14.800786435021294,
+    "cautious": 6.048178111896042,
+    "generous": 0.681114521472812,
+    "social": 3.948265992755458,
+    "strategic": 2.350317741117599,
+    "devotion": 5.324949244204262,
+    "patient": 1.7319213803350266
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 52,
+  "actionCount": 53,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -762,8 +916,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784866425282,
-  "rev": 94,
+  "updatedAt": 1784866493123,
+  "rev": 95,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -771,7 +925,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 52
+    "the_quickwood": 53
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -878,12 +1032,15 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "lifesense": 6,
+      "lifesense": 7,
       "the_speaking_grove": 10,
       "prism_sight": 1
     },
     "coActivations": {},
-    "aspirations": []
+    "aspirations": [],
+    "lastUsed": {
+      "lifesense": 24
+    }
   },
   "precursorAccess": [],
   "teachers": {},
@@ -917,10 +1074,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-24T04:13:45.278Z",
-      "lastAt": "2026-07-24T04:13:45.278Z",
+      "lastAt": "2026-07-24T04:14:53.122Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 1
+      "beats": 2
     }
   ],
   "livingCurrentAccess": [
@@ -1083,13 +1240,15 @@
   },
   "_intentAsked": null,
   "_opEmitted": {
-    "sceneSummary": 1,
-    "choices": 1,
-    "scene": 1,
-    "questUpdates": 1,
-    "codexUpdates": 1,
-    "timeOps": 1,
-    "sceneEnded": 1
+    "sceneSummary": 2,
+    "choices": 2,
+    "scene": 2,
+    "questUpdates": 2,
+    "codexUpdates": 2,
+    "timeOps": 2,
+    "sceneEnded": 2,
+    "characterDeltas": 1,
+    "npcUpdates": 1
   },
-  "_opTurns": 1
+  "_opTurns": 2
 }

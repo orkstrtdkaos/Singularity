@@ -22,6 +22,7 @@ import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscover
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
+import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
@@ -67,7 +68,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.241";
+const APP_VERSION = "1.8.242";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6265,6 +6266,53 @@ function renderGallery() {
   document.getElementById("gal-back").onclick = () => renderCharacterScreen();
 }
 
+// SNG-168 §2: post the CURRENT turn to the family feed — a deliberate share (the per-post consent IS this
+// click + confirm; the value is the CHOOSING). Builds the post (narration + image + world-date + the poster's
+// RATING for the lens), then appends it to the ONE shared feed file via pushMergedFile (merge-safe, concurrent
+// writers never clobber). ⛔ NEVER canon — a feed post never hydrates into anyone's CONTENT (that's the
+// separate shared-canon path). Family-sync only (a shared feed needs the shared repo).
+async function postTurnToFeed(turn) {
+  if (!turn || !syncEnabled() || !character) return;
+  const post = buildFeedPost({
+    turn, character, playerKey: getPlayerKey(),
+    worldDay: absoluteWorldDay(), worldDateLabel: worldDate().label,
+    rating: ratingCeilingNow(), at: Date.now()
+  });
+  if (!post) { renderPlay(turn, { aside: "Nothing to post from this beat." }); return; }
+  const preview = smartClamp(post.narration, 160);
+  if (!confirm(`Post this moment to the family feed?\n\n"${preview}"\n\nThey'll see it lensed to their rating. It never changes anyone's game.`)) return;
+  const btn = document.getElementById("post-to-feed"); if (btn) { btn.disabled = true; btn.textContent = "Posting…"; }
+  try {
+    await pushMergedFile(FEED_PATH, (remote) => appendFeedPost(remote, post), `feed: ${character.name || character.id} shared a moment`);
+    renderPlay(turn, { aside: "📮 Posted to the family feed." });
+  } catch (e) {
+    renderPlay(turn, { aside: `Couldn't post right now — the moment is safe, try again. (${e?.message || "sync error"})` });
+  }
+}
+
+// SNG-168 §2: the FAMILY FEED — moments the family CHOSE to share, reverse-chron, RATING-LENSED on read (a post
+// above your ceiling is softened, or hidden entirely — the same lens shared canon uses). ⛔ NOT canon: reading
+// the feed never changes your game. Pulls the one shared feed file; the "family" is everyone on the shared valley.
+async function renderFeed() {
+  chrome(`<div class="screen" style="max-width:640px"><h2>📮 The Family Feed</h2>
+    <div class="hint">Moments the family chose to share — lensed to your rating. Nothing here is canon; it never touches your game.</div>
+    <div id="feed-body" class="feed-body" style="margin-top:12px"><div class="insight">Loading the feed…</div></div>
+    <button class="btn secondary" id="feed-back" style="margin-top:14px">Back</button></div>`);
+  document.getElementById("feed-back").onclick = () => renderPlay(character?.activeScene?.lastTurn || null, {});
+  const body = document.getElementById("feed-body");
+  try {
+    const store = await fetchRepoJSON(FEED_PATH);
+    const posts = feedForViewer(store || {}, profile);
+    if (!posts.length) { body.innerHTML = `<div class="insight">No posts yet. Share a moment you love — tap 📮 Post to feed on a turn.</div>`; return; }
+    body.innerHTML = posts.map(p => `<div class="feed-post${p.lensed ? " lensed" : ""}">
+      <div class="feed-head"><strong>${esc(p.characterName || "someone")}</strong>${p.location ? ` · <span class="hint">${esc(CONTENT.locations[p.location]?.name || p.location)}</span>` : ""}${p.worldDateLabel ? ` · <span class="hint">${esc(p.worldDateLabel)}</span>` : ""}</div>
+      ${p.image ? `<img class="feed-img" src="${esc(p.image)}" alt="a shared moment" data-lightbox="feed" loading="lazy" onerror="this.style.display='none'">` : ""}
+      <div class="feed-text">${p.narration.split(/\n\n+/).map(renderProseHtml).join("")}</div></div>`).join("");
+  } catch (e) {
+    body.innerHTML = `<div class="insight">The feed couldn't load right now (${esc(e?.message || "sync error")}). Try again in a moment.</div>`;
+  }
+}
+
 /** SNG-085: the Repair panel — expose engine/corrections.js DIRECTLY to the player. A bug the game
  *  gave you (a domain it guessed, an ability off the wrong pole, a background you never chose) must be
  *  fixable WITHOUT negotiating with a language model. Same engine, same guardrails, same ledger as the
@@ -7639,6 +7687,7 @@ function renderPlay(turn, opts = {}) {
     <div style="display:flex; gap:6px; margin:6px 0">
       <button class="opt" id="open-character" style="flex:1">Character</button>
       <button class="opt" id="open-inventory" style="flex:1">Inventory</button>
+      ${syncEnabled() ? `<button class="opt" id="open-feed" style="flex:1" title="The family feed — moments other players chose to share">📮 Feed</button>` : ""}
     </div>
     <div class="vital-row">Health <span class="vital-num" data-vital="health" tabindex="0" role="button" aria-label="Health ${character.health} of ${character.maxHealth}. Tap for detail.">${character.health} / ${character.maxHealth}</span></div>
     <div class="bar health"><div style="width:${pct(character.health, character.maxHealth)}%"></div></div>
@@ -7897,6 +7946,9 @@ function renderPlay(turn, opts = {}) {
       : "";
     main += `<div class="beat">${speakCtl}${turn.narration.split(/\n\n+/).map(renderProseHtml).join("")}</div>`;
     if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="${esc(turn.sceneSummary || "a moment")}" data-lightbox="moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035/053
+    // SNG-168 §2: post THIS turn to the family feed — the value is the CHOOSING (a moment you loved), never
+    // automatic. Only when family-sync is on (a shared feed needs the shared repo). Not canon — a scrapbook post.
+    if (syncEnabled() && turn.narration) main += `<div class="turn-post"><button class="opt" id="post-to-feed" title="Share this moment with the family — it appears in their feed, lensed to their rating. Not canon: it never changes anyone's game.">📮 Post to feed</button></div>`;
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
     for (const c of turn.choices || []) {
@@ -8133,6 +8185,8 @@ function renderPlay(turn, opts = {}) {
   const charBtn = document.getElementById("open-character"); if (charBtn) charBtn.onclick = () => renderCharacterScreen();
   const luBtn = document.getElementById("sidebar-levelup"); if (luBtn) luBtn.onclick = () => renderLevelUp();
   const invBtn = document.getElementById("open-inventory"); if (invBtn) invBtn.onclick = () => renderInventoryScreen();
+  const feedNav = document.getElementById("open-feed"); if (feedNav) feedNav.onclick = () => renderFeed();
+  const postBtn = document.getElementById("post-to-feed"); if (postBtn) postBtn.onclick = () => postTurnToFeed(turn); // SNG-168 §2
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");
   const setMode = (mode) => {

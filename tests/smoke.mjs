@@ -41,6 +41,7 @@ import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubE
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT, contributionsBy } from "../engine/canon.js";
 import { enterDeathState, deathDepth, isSealed, isRetrievable, deepenDeaths, resolveRetrieval, reachableDeadForGM, DEATH_DEPTH_NAMES } from "../engine/death.js";
+import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "../engine/feed.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId, deleteCharacter, saveCharacter, listCharacters } from "../engine/state.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM, repairPanelForGM } from "../engine/corrections.js";
@@ -7813,6 +7814,37 @@ await (async () => {
   const riff = monsters.find(m => m.minDanger === 1);
   check("229 §2b × SNG-225: a synthesized riffraff is eligible at an ordinary danger-2 place (a monster in the world)", isEligible(riff, { tags: ["transitional"], regionId: "valley", dangerLevel: 2 }) === true);
   check("229: an empty/absent bestiary yields no monsters (tolerant — the pool is unchanged)", bestiaryEncounters({}).length === 0 && bestiaryEncounters({ roster: [] }).length === 0);
+}
+
+// ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----
+{
+  const char168 = { id: "char-b", name: "Brooklyn", currentLocationId: "millbrook", playerKey: "player-b" };
+  const turn168 = { narration: "Brooklyn braided light and shadow and the lane went quiet to watch.", momentArt: "data:img", scene: { setting: "The Low Lamp Inn" } };
+  const post = buildFeedPost({ turn: turn168, character: char168, playerKey: "player-b", worldDay: 14, worldDateLabel: "World-day 14", rating: "PG-13", at: 1000 });
+  check("168 §2: buildFeedPost carries the narration, image, character, place, world-date + the poster's RATING (the lens key)", post && /braided light/.test(post.narration) && post.image === "data:img" && post.characterName === "Brooklyn" && post.rating === "PG-13" && post.worldDay === 14 && !!post.id);
+  check("168 §2: an empty turn yields no post (nothing to share)", buildFeedPost({ turn: { narration: "" }, character: char168, at: 2 }) === null);
+
+  // appendFeedPost: merge-safe append, idempotent, capped (the pushMergedFile callback body).
+  let store = appendFeedPost(null, post);
+  store = appendFeedPost(store, post); // same turn again → no double-post
+  check("168 §2: append is idempotent — re-posting the same turn is a no-op (one turn, one post)", store.posts.length === 1);
+  check("168 §2: append is merge-safe against a fresh remote (concurrent writers never clobber)", appendFeedPost({ schemaVersion: 1, posts: [{ id: "other" }] }, post).posts.length === 2);
+
+  // feedForViewer: reverse-chron + the RATING LENS (the same lens shared canon uses) applied on READ.
+  const rPost = buildFeedPost({ turn: { narration: "a graphic scene", momentArt: "data:x" }, character: char168, rating: "R", at: 2000 });
+  store = appendFeedPost(store, rPost);
+  const adult = feedForViewer(store, { rating: { preset: "R" } });
+  check("168 §2: an adult (R ceiling) sees every post in full, newest first (reverse-chron)", adult.length === 2 && adult[0].rating === "R" && adult.every(p => !p.lensed));
+  const lowView = feedForViewer(store, { rating: { preset: "PG" } });
+  const rSeen = lowView.find(p => p.rating === "R");
+  check("168 §2: a post ABOVE the viewer's ceiling is LENSED — softened, image withheld (never leaks unfiltered)", (!rSeen) || (rSeen.lensed === true && rSeen.image === null && !/graphic scene/.test(rSeen.narration)));
+
+  check("168 §2 GUARD: a feed post is NOT canon — the feed is its own file (FEED_PATH), never hydrated into CONTENT", FEED_PATH === "world/feed.json");
+  // app wiring: the post control on a turn, the feed view, the merge-safe push, the read lens — and the guard.
+  const appSrc168 = readFileSync(join(root, "app.js"), "utf8");
+  check("168 §2: a per-turn POST control (sync-gated) + a Feed nav both wire to the feed", /id="post-to-feed"/.test(appSrc168) && /id="open-feed"/.test(appSrc168) && /postTurnToFeed\(turn\)/.test(appSrc168));
+  check("168 §2: posting appends via pushMergedFile (merge-safe) to FEED_PATH, never CONTENT", /pushMergedFile\(FEED_PATH, \(remote\) => appendFeedPost\(remote, post\)/.test(appSrc168));
+  check("168 §2: the feed VIEW pulls the shared file + lenses it on read (feedForViewer(store, profile))", /function renderFeed\(\)/.test(appSrc168) && /feedForViewer\(store \|\| \{\}, profile\)/.test(appSrc168) && /fetchRepoJSON\(FEED_PATH\)/.test(appSrc168));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

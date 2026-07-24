@@ -68,7 +68,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.244";
+const APP_VERSION = "1.8.245";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6012,7 +6012,11 @@ function traditionFamilies(tradId) {
 // `CONTENT.trait_readouts[kind][id]` wins; otherwise DERIVE both from data that already exists (so it renders
 // before every readout is authored). Erik's ask: tell the player the FUNCTIONAL mechanics, not just the flavour.
 function traitReadout(kind, id) {
-  const authored = CONTENT.trait_readouts?.[kind]?.[id] || CONTENT.trait_readouts?.readouts?.[kind]?.[id] || null;
+  // SNG-215 §C: the authored doc keys traits by the PLURAL kind (backgrounds/origins); the call sites key
+  // by the SINGULAR (data-trait="background:…"). Check both (and a legacy .readouts wrapper) so Aevi's
+  // authored lore+mechanics actually resolve instead of silently falling through to the derived text.
+  const tr = CONTENT.trait_readouts || {};
+  const authored = tr[kind]?.[id] || tr[kind + "s"]?.[id] || tr.readouts?.[kind]?.[id] || tr.readouts?.[kind + "s"]?.[id] || null;
   let lore = authored?.lore || null, mech = authored?.mechanics || null;
   const rules = CONTENT.rules || {};
   if (kind === "background") {

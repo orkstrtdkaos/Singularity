@@ -7671,7 +7671,7 @@ await (async () => {
   const stateC = readFileSync(join(root, "engine/state.js"), "utf8");
 
   // the readout lookup: authored (trait_readouts) wins, else DERIVE from existing data for each trait kind.
-  check("215 §C: traitReadout(kind,id) — authored trait_readouts wins, else a derived fallback", /function traitReadout\(kind, id\)/.test(appSrcC) && /CONTENT\.trait_readouts\?\.\[kind\]\?\.\[id\]/.test(appSrcC));
+  check("215 §C: traitReadout(kind,id) — authored trait_readouts wins (singular OR plural key), else a derived fallback", /function traitReadout\(kind, id\)/.test(appSrcC) && /tr\[kind\]\?\.\[id\] \|\| tr\[kind \+ "s"\]\?\.\[id\]/.test(appSrcC));
   check("215 §C: MECHANICS are DERIVED for each trait — background affinity, origin native craft, tradition families, aspiration progress, form is cosmetic", /background.*affinity/is.test(appSrcC) && /native craft/.test(appSrcC) && /traditionFamilies\(id\)/.test(appSrcC) && /Cosmetic — your form leads/.test(appSrcC));
   check("215 §C: a tradition's granted FUNCTION FAMILIES are derived by unioning its abilities' families", /function traditionFamilies\(tradId\)/.test(appSrcC) && /familiesOfAbility\(ab, FN_INDEX\)/.test(appSrcC));
 

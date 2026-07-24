@@ -1808,7 +1808,182 @@
     "The party steps south from the waystation at dawn — Pell, Veth, Huginn, and Silas on the road toward the Disputed Zone."
   ],
   "currentLocationId": "millbrook",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "player": null,
+        "summary": "The party sets out south from the waystation at dawn — road, mist, and the Zone's first color ahead.",
+        "narration": "The March Road south of Millbrook runs through low country still holding the cold of the night before. The mud has frozen again at the edges of the ruts, and your breath comes out white in the early light. Pell walks a half-step to your left, Memory's wrapped shaft riding easy across her back. Veth is two paces ahead, reading the road with the flat attention of someone who has walked it before and knows where it lies. Huginn rides your right shoulder and says nothing, which means nothing is ending nearby — not yet.\n\nThe waystation's Boundary-Stone is behind you now, warded and seated. The road ahead drops into the valley's low middle ground, where the morning mist still sits heavy on the fields. A quarter-mile south the fog begins to thicken and take on color — not gray, not quite green — a faint mineral cast to the light that has nothing to do with the season. That is the Zone's edge, or its approach. The interference begins before the line does.\n\nThe road forks ahead where a dead oak stands split down the center, one half still upright and the other resting on the ground like something that gave up quietly years ago. Veth slows without stopping and glances back at you. \"Left branch follows the old March road into the Zone proper,\" she says. \"Right branch bends east along the valley floor — skirts the interference band, longer by two hours, keeps us out of the worst of it until the reclamation site.\"\n\nThe morning is early and clear. Whatever the day holds, you are moving toward it with the whole party assembled and the road open under your feet."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The March Road south of Millbrook runs through low country still holding the cold of the night before. The mud has frozen again at the edges of the ruts, and your breath comes out white in the early light. Pell walks a half-step to your left, Memory's wrapped shaft riding easy across her back. Veth is two paces ahead, reading the road with the flat attention of someone who has walked it before and knows where it lies. Huginn rides your right shoulder and says nothing, which means nothing is ending nearby — not yet.\n\nThe waystation's Boundary-Stone is behind you now, warded and seated. The road ahead drops into the valley's low middle ground, where the morning mist still sits heavy on the fields. A quarter-mile south the fog begins to thicken and take on color — not gray, not quite green — a faint mineral cast to the light that has nothing to do with the season. That is the Zone's edge, or its approach. The interference begins before the line does.\n\nThe road forks ahead where a dead oak stands split down the center, one half still upright and the other resting on the ground like something that gave up quietly years ago. Veth slows without stopping and glances back at you. \"Left branch follows the old March road into the Zone proper,\" she says. \"Right branch bends east along the valley floor — skirts the interference band, longer by two hours, keeps us out of the worst of it until the reclamation site.\"\n\nThe morning is early and clear. Whatever the day holds, you are moving toward it with the whole party assembled and the road open under your feet.",
+      "sceneSummary": "The party sets out south from the waystation at dawn — road, mist, and the Zone's first color ahead.",
+      "choices": [
+        {
+          "label": "Take the left branch — straight into the Zone along the old March road. Shorter, stranger, and the reclamation site is the target.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": -0.2,
+            "death_life": -0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "travel",
+            "risky"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take the right branch — the longer valley-floor route, skirting the worst interference until you reach the site from the east.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "chaos_order": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Veth what she knows of the left branch — she has walked this road before, and her read matters before the choice is made.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the fork itself — the road is a design, the split a choice point, and the whole structure ahead has a shape you can read before you step into it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": 0.15,
+            "chaos_order": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "The March Road south of Millbrook, early dawn — mist on the valley floor, the waystation behind, the road fork ahead at a split dead oak. The Zone's interference colors the light faintly a quarter-mile south.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Walking a half-step to Silas's left, Memory across her back, road-ready and quiet."
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "Two paces ahead, slowed at the fork, looking back and waiting for Silas's call."
+          },
+          {
+            "name": "Huginn",
+            "state": "Riding Silas's right shoulder, calm and silent."
+          }
+        ],
+        "objects": [
+          "Split dead oak at the road fork — one half upright, one resting on the ground",
+          "Left branch: old March road, into the Zone proper",
+          "Right branch: valley-floor route, bending east",
+          "Faint mineral-cast fog to the south — the Zone's approach"
+        ],
+        "threads": [
+          "Fork in the road — left into the Zone, right along the valley floor",
+          "Veth knows this road; her read of the left branch not yet given"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Walking south at dawn, Memory on her back, road-quiet beside Silas.",
+          "statusNote": "On the March Road south of Millbrook — moving with the party toward the Zone.",
+          "status": "active"
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short walk from the waystation to the fork — early dawn, still cold."
+      },
+      "codexUpdates": [
+        {
+          "topic": "the-zone-approach",
+          "label": "The Disputed Zone — Approach",
+          "kind": "place",
+          "fact": "At the fork south of Millbrook, the old March road goes left into the Zone proper (shorter); the right branch skirts east along the valley floor, adding two hours but avoiding the worst interference. The Zone's mineral-cast light begins before the boundary line.",
+          "links": [
+            "the-second-thread",
+            "what-the-water-remembers",
+            "veth-stillwater-ondra"
+          ]
+        }
+      ],
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The March Road south of Millbrook, early dawn — mist on the valley floor, the waystation behind, the road fork ahead at a split dead oak. The Zone's interference colors the light faintly a quarter-mile south.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Walking a half-step to Silas's left, Memory across her back, road-ready and quiet."
+        },
+        {
+          "name": "Veth Ondra",
+          "state": "Two paces ahead, slowed at the fork, looking back and waiting for Silas's call."
+        },
+        {
+          "name": "Huginn",
+          "state": "Riding Silas's right shoulder, calm and silent."
+        }
+      ],
+      "objects": [
+        "Split dead oak at the road fork — one half upright, one resting on the ground",
+        "Left branch: old March road, into the Zone proper",
+        "Right branch: valley-floor route, bending east",
+        "Faint mineral-cast fog to the south — the Zone's approach"
+      ],
+      "threads": [
+        "Fork in the road — left into the Zone, right along the valley floor",
+        "Veth knows this road; her read of the left branch not yet given"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 14,
@@ -2827,7 +3002,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Witnessed the shadow-twin dual presence and named it plainly: 'That's the thing.' Her highest register of recognition for a design doing exactly what it was made to do.",
         "[d14] Wielded the shadow-twin through four paces and reported its feel plainly — waiting-light, and yours the whole time she held it. Not a complaint; a reading.",
         "[d14] Held the shadow-twin through the caller-link test — named the change in weight plainly ('Something moved'). Steady and accurate as always.",
         "[d14] Accepted Memory into her hands without ceremony — named the arrangement plainly: 'Yours to call. Mine to carry.' The split design is acknowledged and held.",
@@ -2836,7 +3010,8 @@
         "[d14] Arrived at Silas's side without being asked. Leaning on the doorframe, Memory in hand, listening.",
         "[d14] Stepped out of Mara's store ahead of Silas — already ready, Memory on her back. Walking south without ceremony.",
         "[d14] Stepped south without ceremony — Memory shouldered, road-ready.",
-        "[d14] Stepped past the threshold without ceremony — Memory shouldered, road-ready beside Silas."
+        "[d14] Stepped past the threshold without ceremony — Memory shouldered, road-ready beside Silas.",
+        "[d14] Walking south at dawn, Memory on her back, road-quiet beside Silas."
       ],
       "knownFacts": [
         "The Shielding Word is not a thread on the blade but the condition of the conjuring — seated once, inherited by every subsequent call of the shadow-spear.",
@@ -2857,7 +3032,7 @@
         "accurate tactile reporting of a working's feel under hands-o"
       ],
       "status": "active",
-      "statusNote": "On the road south with the party, Memory on her back, heading toward the Zone.",
+      "statusNote": "On the March Road south of Millbrook — moving with the party toward the Zone.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -3915,12 +4090,12 @@
       "appearance": "A tall woman gone bony with age, weathered to the same grey-brown as the March Road itself. White hair cropped close under a wide felt hat. Staff cut from hedgerow hawthorn, worn smooth at the grip. Boots resoled so many times the layers are visible at the heel. A dog — large, pale, moves like water around the flock — that she addresses by name and in full sentences."
     },
     "grael": {
-      "name": "grael",
+      "name": "Grael",
       "questState": "fallen",
       "questNote": "stripped and removed; lieutenants scatter as riffraff-tier antagonists"
     },
     "keeper_ilma": {
-      "name": "keeper_ilma",
+      "name": "Keeper Ilma",
       "ally": true,
       "allyNote": "vindicated; will never lie to you"
     }
@@ -4830,11 +5005,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T18:24:26.812Z",
+    "lastSharedReadAt": "2026-07-24T18:39:57.704Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 594,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Huginn shifts on the crossbeam — the first movement it has made since the party entered — and its eye settles on Crane with the same…",
@@ -4970,10 +5145,13 @@
         "pressure": "The pattern is made public and holds. Grael falls.",
         "scale": "regional",
         "connectsTo": [],
-        "open": true,
+        "open": false,
         "depth": 0,
         "worldDay": 24,
-        "strength": 4
+        "strength": 4,
+        "spawned": true,
+        "spawnedId": "what-the-mill-keeps",
+        "spawnedWorldDay": 24
       }
     ],
     "wakeArcPushes": {}
@@ -6834,8 +7012,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784918195474,
-  "rev": 1313,
+  "updatedAt": 1784918435610,
+  "rev": 1316,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8979,7 +9157,44 @@
         }
       }
     },
-    "arc": {}
+    "arc": {
+      "what-the-mill-keeps": {
+        "id": "what-the-mill-keeps",
+        "name": "What the Mill Keeps",
+        "scale": "local",
+        "pressure": "Grael's fall has reached Millbrook not as rumor but as verified fact — a travelling assessor's writ nailed to the granary door, signed and counter-signed. The valley does not erupt. It exhales. Then, quietly, it begins to count. Every shortfall in the seed-ledger, every bridge timber that rotted faster than it should, every widow who could not make her tithe and lost the eastern field — all of it is suddenly legible. Millbrook is a community that trusts its records, and its records, read correctly now, tell a damning story. The pressure is not vengeance. It is restitution arithmetic, and the numbers do not yet balance.",
+        "tendency": "The valley moves toward orderly repair — petitions filed, parcels measured, debts formally disputed — but the process is generating unexpected friction between those who lost the most and those who administered Grael's arrangements locally, often in good faith. Old trust between neighbors is under quiet audit. The grain of Millbrook is that it will endure and regularize rather than break, but the regularizing is slow and the wounds of small betrayals are precise.",
+        "crossesRegions": [
+          "Millbrook"
+        ],
+        "hingeNpcs": [],
+        "ifIgnored": "The restitution process grinds through distant administrative channels without local witness or pressure. Durrick Soll's quiet acts of repair go unnamed and unformalized, so no reconciliation actually occurs — just awkwardness that calcifies. Oswen Fartle retires her ledger to a locked chest and says nothing. Maret Hohn gets a partial settlement in two years: coin value, not land. The valley remains peaceful and orderly and is permanently a little smaller than it was, in a way no single person can point to.",
+        "ifEngaged": "If someone convenes the assembly Oswen needs, or extends the named mercy Durrick cannot ask for, or presses the assessor's process on Maret's behalf with local testimony in hand — the valley demonstrates what strong order and strong peace actually accomplish together: a full accounting, a returned field, a neighbor restored to neighbor. Durrick becomes the first to sign the commons-reform covenant Oswen drafts. The Millbrook ledger becomes a model document cited two valleys over when the same pattern is discovered elsewhere. The place does not merely survive Grael's fall — it becomes the proof that the fall was worth making.",
+        "schemaVersion": 1,
+        "_gen": {
+          "entityId": "what-the-mill-keeps",
+          "type": "arc",
+          "birthWeight": 24,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": null,
+            "characterId": "char-mrhs8286",
+            "locationId": "millbrook",
+            "day": null,
+            "worldDay": null,
+            "hint": "a new thread that FOLLOWS FROM what just happened — the aftermath of it, not a fresh unrelated situation",
+            "why": "A significant outcome left a wake: The pattern is made public and holds. Grael falls.. Author the consequence the LORE I"
+          },
+          "attentionHistory": [],
+          "createdDay": null,
+          "repaired": true,
+          "stubbed": false,
+          "romanceEligible": true
+        }
+      }
+    }
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -9753,7 +9968,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 548,
+    "valley": 549,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9889,10 +10104,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T18:36:35.473Z",
+      "lastAt": "2026-07-24T18:40:35.606Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 61
+      "beats": 62
     }
   ],
   "company": [
@@ -10105,19 +10320,19 @@
   "_opEmitted": {
     "sceneSummary": 178,
     "choices": 178,
-    "characterDeltas": 69,
+    "characterDeltas": 68,
     "scene": 178,
     "npcUpdates": 162,
     "factUpdates": 13,
-    "placeUpdates": 31,
-    "codexUpdates": 102,
+    "placeUpdates": 30,
+    "codexUpdates": 103,
     "timeOps": 172,
     "imagePrompt": 3,
     "sceneEnded": 40,
     "itemUpdates": 5,
     "questUpdates": 24,
     "offer": 16,
-    "moveTo": 14,
+    "moveTo": 13,
     "delegateOps": 3,
     "deeds": 2,
     "standingOps": 1,

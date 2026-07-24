@@ -13,7 +13,7 @@
     "physical": 5,
     "mental": 7,
     "social": 7,
-    "practical": 6
+    "practical": 7
   },
   "skills": {},
   "abilities": [
@@ -152,7 +152,7 @@
   "maxHealth": 145,
   "health": 145,
   "maxEnergy": 215,
-  "energy": 204,
+  "energy": 193,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1860,36 +1860,43 @@
         "player": "Advance cautiously — close the distance slowly, all three of you spread wide enough that whatever it is can't cover you at once",
         "summary": "The party closes on the shape in the mist — a Blazeborn man seated at a clay-bowl fire, who names Silas's parentage within a minute of setting eyes on him.",
         "narration": "You spread the three of you wide across the road — Pell left, Veth right, yourself in the center — and close the distance slowly.\n\nThe mist thins as you press into it. The shape resolves: a man, seated on a low stone at the road's edge with his back against a scrub-oak, elbows on his knees and a small fire in a clay bowl on the ground before him. The fire is the color of fresh copper. It does not flicker the way a wood-fire does. It breathes.\n\nHe looks up before you have spoken a word. His eyes are the washed amber of late afternoon even in this dawn light, and he reads all three of you in one unhurried sweep. Then he says, in a tone as easy as greeting an old neighbor: \"You have your mother's jaw and your father's hands. I thought someone would be along eventually.\" He says it without malice, without theater — the way a person names a thing they have simply noticed and considered rude to keep to themselves.\n\nHe is perhaps thirty-five, broad through the chest, with the calloused forearms of someone who works in heat. His coat is a deep burnt-orange at the hem and collar where the dye has held, faded to rust everywhere the sun reaches. A Blazeborn's colors, unmistakably. He glances at the shadow-twin in your hand with the frank attention of someone who has seen working-tools before, then back to your face, then to Pell and Veth in turn. He seems faintly puzzled that his observation has not been received as the friendly remark he intended it to be."
+      },
+      {
+        "player": "Ask Veth directly whether the left branch admits a Blazeborn at all — before you commit to anything",
+        "summary": "Veth names the Zone's interference logic — flame inside is the danger, not the man. The Blazeborn traveler extinguishes his fire without being asked.",
+        "narration": "You turn to Veth, keeping the Blazeborn man in your peripheral view. \"The left branch,\" you say quietly. \"Does it admit him? Can a Blazeborn travel it without trouble?\"\n\nVeth answers without looking at you. Her eyes stay on the man and the tree-line behind him, reading them in the same short arcs. \"The Zone does not care what you are,\" she says. \"It cares what you carry. A Blazeborn with a living flame walks into interference the same as anyone else with an active working.\" She pauses. \"His fire.\" She names it flat and plain. \"He is burning it here, at the entrance, not inside. That is not accident.\"\n\nThe man on the stone has not moved. His copper-bright fire sits in the clay bowl before him and breathes its slow breath. He is watching you with the patient attention of someone who has been waiting long enough to stop being impatient about it. Huginn is still on your shoulder, facing him, as motionless as the mist.\n\n\"You want to ask me something,\" the man says. He does not make it a question. \"You are wondering whether I named your father's name, or your mother's side, or something else entirely. I will answer that.\" He tilts his head toward the bowl. \"But I am going to put this out first, because your bird is correct and I am not a fool.\" He cups both hands around the clay bowl, and the copper flame goes out between his palms without smoke or sound."
       }
     ],
     "lastTurn": {
-      "narration": "You spread the three of you wide across the road — Pell left, Veth right, yourself in the center — and close the distance slowly.\n\nThe mist thins as you press into it. The shape resolves: a man, seated on a low stone at the road's edge with his back against a scrub-oak, elbows on his knees and a small fire in a clay bowl on the ground before him. The fire is the color of fresh copper. It does not flicker the way a wood-fire does. It breathes.\n\nHe looks up before you have spoken a word. His eyes are the washed amber of late afternoon even in this dawn light, and he reads all three of you in one unhurried sweep. Then he says, in a tone as easy as greeting an old neighbor: \"You have your mother's jaw and your father's hands. I thought someone would be along eventually.\" He says it without malice, without theater — the way a person names a thing they have simply noticed and considered rude to keep to themselves.\n\nHe is perhaps thirty-five, broad through the chest, with the calloused forearms of someone who works in heat. His coat is a deep burnt-orange at the hem and collar where the dye has held, faded to rust everywhere the sun reaches. A Blazeborn's colors, unmistakably. He glances at the shadow-twin in your hand with the frank attention of someone who has seen working-tools before, then back to your face, then to Pell and Veth in turn. He seems faintly puzzled that his observation has not been received as the friendly remark he intended it to be.",
-      "sceneSummary": "The party closes on the shape in the mist — a Blazeborn man seated at a clay-bowl fire, who names Silas's parentage within a minute of setting eyes on him.",
+      "narration": "You turn to Veth, keeping the Blazeborn man in your peripheral view. \"The left branch,\" you say quietly. \"Does it admit him? Can a Blazeborn travel it without trouble?\"\n\nVeth answers without looking at you. Her eyes stay on the man and the tree-line behind him, reading them in the same short arcs. \"The Zone does not care what you are,\" she says. \"It cares what you carry. A Blazeborn with a living flame walks into interference the same as anyone else with an active working.\" She pauses. \"His fire.\" She names it flat and plain. \"He is burning it here, at the entrance, not inside. That is not accident.\"\n\nThe man on the stone has not moved. His copper-bright fire sits in the clay bowl before him and breathes its slow breath. He is watching you with the patient attention of someone who has been waiting long enough to stop being impatient about it. Huginn is still on your shoulder, facing him, as motionless as the mist.\n\n\"You want to ask me something,\" the man says. He does not make it a question. \"You are wondering whether I named your father's name, or your mother's side, or something else entirely. I will answer that.\" He tilts his head toward the bowl. \"But I am going to put this out first, because your bird is correct and I am not a fool.\" He cups both hands around the clay bowl, and the copper flame goes out between his palms without smoke or sound.",
+      "sceneSummary": "Veth names the Zone's interference logic — flame inside is the danger, not the man. The Blazeborn traveler extinguishes his fire without being asked.",
       "choices": [
         {
-          "label": "Ask him plainly: who are you, and what do you know about these hands and this jaw?",
+          "label": "Ask him directly: who are you, and how do you know my lineage?",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "persuade",
-            "negotiate"
+            "study"
           ],
           "trivial": true
         },
         {
-          "label": "Read him with Order-Sense before you say a word — see what design he is part of",
+          "label": "Read him with Order-Sense before he speaks again — see what design he is part of",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "scout"
           ],
           "abilityId": "order_sense",
-          "trivial": true
+          "energyCost": 2,
+          "trivial": false
         },
         {
-          "label": "Hold your position and let Huginn read him — ask the bird what it sees in this man",
+          "label": "Let Huginn speak first — the bird has been watching him since you arrived and has said nothing yet",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -1899,18 +1906,21 @@
           "trivial": true
         },
         {
-          "label": "Name yourself first — give him your name and let the conversation find its own footing",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Read him with Deathsense — not as a threat, but to understand what he is carrying",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "study",
+            "scout"
           ],
-          "trivial": true
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "The left branch of the March Road, inside the first bend west — early dawn, mist sitting heavy with a faint mineral-gray cast. The road is packed earth flanked by scrub and early-spring growth. A man sits at the road's edge on a low stone before a small clay-bowl fire burning copper-bright.",
+        "setting": "The left branch of the March Road, inside the first bend west — early dawn, mist sitting heavy with a faint mineral-gray cast. The road is packed earth flanked by scrub and early-spring growth.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
@@ -1918,46 +1928,63 @@
           },
           {
             "name": "Veth Ondra",
-            "state": "Spread right, reading the seated man and the tree-line behind him in short arcs."
+            "state": "Spread right, still reading the tree-line, eyes moving in short arcs — spoke without turning."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, facing the seated man, silent and still."
+            "state": "On Silas's shoulder, facing the seated man, silent and motionless."
           },
           {
             "name": "Blazeborn traveler",
-            "state": "Seated on a low stone at the road's edge, elbows on knees, copper-flame fire in a clay bowl before him — watching the party with calm, faintly puzzled attention."
+            "state": "Seated on the low stone, copper fire now extinguished — both hands still cupped around the cold clay bowl, watching the party without urgency."
           }
         ],
         "objects": [
           "Memory's shadow-twin — in Silas's right hand",
-          "Clay-bowl fire burning copper — the man's, on the ground before him",
+          "Clay-bowl fire — extinguished, still in the man's hands",
           "The thickening mist ahead where the road bends further west"
         ],
         "threads": [
           "The Blazeborn man named Silas's parentage on sight — his meaning and his knowledge are unexplained",
-          "His purpose on this road and his relationship to the Zone are unknown",
+          "He said he will answer the lineage question — the offer is open and waiting",
+          "He extinguished the flame without being asked — the gesture is deliberate",
           "The Zone's interference on crafts is still anticipated further in"
         ]
       },
-      "generateRequest": [
+      "npcUpdates": [
         {
-          "type": "npc",
-          "hint": "A Blazeborn traveler in his mid-thirties, broad-chested, burnt-orange coat, a copper-flame fire in a clay bowl — seated at the Zone's left-branch entrance as if he has been waiting. Knows something about Silas's father.",
-          "why": "He spoke Silas's parentage on first sight and needs a stable identity and name to recur."
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Named the Zone's interference logic plainly: it is what you carry, not what you are — a Blazeborn with a living flame walks into interference; his fire at the entrance, not inside, is deliberate.",
+          "learned": [
+            "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean."
+          ],
+          "skillsObserved": [
+            "reading a situation's structural logic from a single observed detail — the fire's placement as deliberate positioning, not habit"
+          ],
+          "statusNote": "On the March Road — two paces right of Silas, reading the tree-line, still watchful."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "disputed-zone-interference",
+          "label": "The Zone's Interference Logic",
+          "kind": "lore",
+          "fact": "The Disputed Zone does not discriminate by tradition — it responds to what you carry. An active working, a living flame, a craft in motion: these attract interference. A Blazeborn who extinguishes before entering walks in as clean as anyone else. The fire's placement at the entrance, not inside, is a practiced precaution.",
+          "links": [
+            "the-second-thread",
+            "what-the-water-remembers"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short cautious advance and arrival — a few minutes on the road."
-      },
-      "offer": {
-        "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
-        "from": "The SOMETHING HAPPENS roll — a Blazeborn tells a true thing about the player within a minute of meeting, without malice, bewildered by the reaction; and the half-made fold's lineage pull, which has been drawing related figures toward this road"
+        "why": "A short exchange at the road's edge — a question, an answer, and the fire going out."
       }
     },
     "sceneState": {
-      "setting": "The left branch of the March Road, inside the first bend west — early dawn, mist sitting heavy with a faint mineral-gray cast. The road is packed earth flanked by scrub and early-spring growth. A man sits at the road's edge on a low stone before a small clay-bowl fire burning copper-bright.",
+      "setting": "The left branch of the March Road, inside the first bend west — early dawn, mist sitting heavy with a faint mineral-gray cast. The road is packed earth flanked by scrub and early-spring growth.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
@@ -1965,25 +1992,26 @@
         },
         {
           "name": "Veth Ondra",
-          "state": "Spread right, reading the seated man and the tree-line behind him in short arcs."
+          "state": "Spread right, still reading the tree-line, eyes moving in short arcs — spoke without turning."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, facing the seated man, silent and still."
+          "state": "On Silas's shoulder, facing the seated man, silent and motionless."
         },
         {
           "name": "Blazeborn traveler",
-          "state": "Seated on a low stone at the road's edge, elbows on knees, copper-flame fire in a clay bowl before him — watching the pa"
+          "state": "Seated on the low stone, copper fire now extinguished — both hands still cupped around the cold clay bowl, watching the "
         }
       ],
       "objects": [
         "Memory's shadow-twin — in Silas's right hand",
-        "Clay-bowl fire burning copper — the man's, on the ground before him",
+        "Clay-bowl fire — extinguished, still in the man's hands",
         "The thickening mist ahead where the road bends further west"
       ],
       "threads": [
         "The Blazeborn man named Silas's parentage on sight — his meaning and his knowledge are unexplained",
-        "His purpose on this road and his relationship to the Zone are unknown",
+        "He said he will answer the lineage question — the offer is open and waiting",
+        "He extinguished the flame without being asked — the gesture is deliberate",
         "The Zone's interference on crafts is still anticipated further in"
       ]
     }
@@ -3709,7 +3737,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Tasked with finding workers, resources for Stillwater's Trouble or Millbrook, and asking after Edvar Crane — moving toward the water-seller cluster.",
         "[d13] Found near the water-seller's cart at the Crossing well — mid-conversation, listening to someone tell her less than they think they are.",
         "[d13] Worked the water-seller cleanly — got the contamination timing, the smell description, and Crane's location from a man who didn't realize he was being interviewed.",
         "[d13] Named the substrate's thinness plainly without judgment — the craft simply could not resolve here.",
@@ -3718,32 +3745,33 @@
         "[d14] Was already waiting in the back corner when Silas arrived — anticipated this conversation. Named 'the Zone' before Silas did.",
         "[d14] Named by Silas for the road into the Zone — received the assignment with a small nod, no objection.",
         "[d14] Pulled Mara's door shut behind her, said the morning was clear enough, and fell into step. No more needed.",
-        "[d14] Frozen mid-step on Silas's signal, weight back, reading the same mist-shape without being told what to look for."
+        "[d14] Frozen mid-step on Silas's signal, weight back, reading the same mist-shape without being told what to look for.",
+        "[d14] Named the Zone's interference logic plainly: it is what you carry, not what you are — a Blazeborn with a living flame walks into interference; his fire at the entrance, not inside, is deliberate."
       ],
       "knownFacts": [
-        "Three Boundary-Stone braid candidates: Palework-attuned mercy field, Wither-framing for structural targets, and a theoretical sustained-draw commons across the perimeter",
         "The load-bearing hinge problem — the perimeter must pass the braid through without eating it; Pell's ironsense is currently doing that work",
         "Silas's answer: the Word names what is already true; belief precedes utterance. And Veth's counter: it is right, and also wrong, and the difference is a decade.",
         "The soul bond can carry an attending quality — the ashwarden disposition of unhurried, level reading — toward another person, functioning as a teaching assist that Veth has no prior category for",
         "The attending-quality pass through the soul bond is a teaching tool she has no prior category for — she is still thinking about what it means.",
         "Osten: contamination started four mornings after the cold broke, metallic smell, not ordinary silt",
         "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here",
-        "Limestone bed must meet a minimum ratio to throughput or the water channels through it rather than filtering"
+        "Limestone bed must meet a minimum ratio to throughput or the water channels through it rather than filtering",
+        "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean."
       ],
       "skillsObserved": [
-        "identifying the structural hinge problem in Pell's ironsense",
         "placing a correct answer beside its own limitation without c",
         "cross-referencing an internal craft-read against its externa",
         "naming a novel capability without pretending to have already",
         "working a source until he gave more than he meant to, withou",
-        "applying March-form cascade calculation to a practical filtr"
+        "applying March-form cascade calculation to a practical filtr",
+        "reading a situation's structural logic from a single observe"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On the March Road — two paces ahead of the party, halted and reading the fork.",
+      "statusNote": "On the March Road — two paces right of Silas, reading the tree-line, still watchful.",
       "lastSeen": {
-        "locationId": "millbrook",
+        "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
       },
       "bondType": "sworn",
@@ -5042,11 +5070,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T19:00:43.757Z",
+    "lastSharedReadAt": "2026-07-24T19:48:10.149Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 595,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Huginn turns its head toward the high window at the moment the shadow-duplicate vanishes — not following the light, but listening. There…",
@@ -5211,9 +5239,9 @@
     "presence": 8,
     "rapport": 6,
     "craft": 7,
-    "wits": 5
+    "wits": 6
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 2,
   "discoveries": [
     {
@@ -6637,21 +6665,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.899340096976694,
-    "cerebral": 13.801043105931402,
-    "social": 8.583188979574011,
-    "generous": 2.8060651264305894,
-    "cautious": 8.722541287121631,
-    "physical": 0.1325497831572931,
-    "risky": 0.7504831619307404,
-    "ruthless": 0.10303867339186261,
-    "carousing": 0.023633175917459528,
-    "amorous": 4.0529514466318375,
-    "patient": 0.9180896737530078,
-    "stealth": 0.00023699840351868207,
-    "devotion": 0.6981122212668804,
-    "craft": 3.284875249000846,
-    "leadership": 1.7740475075924433
+    "strategic": 20.376856594552276,
+    "cerebral": 14.456017028283117,
+    "social": 8.36860925508466,
+    "generous": 2.7359134982698246,
+    "cautious": 8.50447775494359,
+    "physical": 0.12923603857836077,
+    "risky": 0.7317210828824718,
+    "ruthless": 0.10046270655706604,
+    "carousing": 0.023042346519523037,
+    "amorous": 3.9516276604660416,
+    "patient": 0.8951374319091826,
+    "stealth": 0.00023107344343071501,
+    "devotion": 0.6806594157352084,
+    "craft": 3.202753367775825,
+    "leadership": 1.7296963199026323
   },
   "aptitudes": [
     "strategist",
@@ -6659,10 +6687,18 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 817,
+  "actionCount": 818,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "A Blazeborn traveler in his mid-thirties, broad-chested, bur",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20A%20Blazeborn%20traveler%20in%20his%20mid-thirties%2C%20broad-chested%2C%20bur%2C%20someone%20of%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=93712&nologo=true",
+      "caption": "A Blazeborn traveler in his mid-thirties, broad-chested, bur",
+      "worldDay": 24,
+      "at": "2026-07-24T19:27:56.456Z"
+    },
     {
       "kind": "location",
       "prompt": "Disputed Zone — Left Branch Entrance",
@@ -7038,19 +7074,11 @@
       "caption": "The Low Lamp Inn",
       "worldDay": 17,
       "at": "2026-07-17T19:29:39.503Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "Silas Weir",
-      "url": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-      "caption": "Silas Weir — level 11",
-      "worldDay": 17,
-      "at": "2026-07-17T18:56:15.857Z"
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784921242239,
-  "rev": 1333,
+  "updatedAt": 1784922617821,
+  "rev": 1346,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8784,6 +8812,48 @@
         "peopleSource": "generated",
         "domainsSource": "generated",
         "image": "https://image.pollinations.ai/prompt/Broad-faced%20and%20broad-shouldered%2C%20with%20the%20settled%20look%20of%20someone%20who%20has%20stood%20in%20the%20same%20place%20through%20a%20great%20deal%20of%20weather.%20Mid-forties%2C%20dark%20hair%20cut%20practical%20and%20short%2C%20skin%20weathered%20and%20w%2C%20character%20portrait%2C%20named%20Doss%20Calver%2C%20the%20Fork%20Keeper%2C%20Waystation%20keeper%20at%20the%20March%20road%20fork%3B%20monitors%20water%20conditions%20along%20the%20lower%20March%20and%20serves%2C%20Mid-forties%2C%20unhurried%20to%20the%20point%20of%20seeming%20slow%20%E2%80%94%20she%20is%20not%20slow.%20Speaks%20in%20plain%20declarative%20s%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=14069&nologo=true"
+      },
+      "a-blazeborn-traveler-in-his-mid-thirties": {
+        "schemaVersion": 1,
+        "id": "a-blazeborn-traveler-in-his-mid-thirties",
+        "name": "A Blazeborn traveler in his mid-thirties, broad-chested, bur",
+        "role": "someone of Disputed Zone — Left Branch Entrance",
+        "spectrum": {
+          "death_life": -0.1,
+          "violence_peace": -0.1,
+          "falsehood_truth": -0.05
+        },
+        "fears": "being undone by the very grain of this place",
+        "wants": "to go on as they are, in a world that won't quite let them",
+        "knowledge": [],
+        "voiceHints": "",
+        "personality": {},
+        "communityId": null,
+        "homeLocation": "gen-disputed-zone-left-branch-entrance",
+        "reactsToReputation": {},
+        "_gen": {
+          "entityId": "a-blazeborn-traveler-in-his-mid-thirties",
+          "type": "npc",
+          "birthWeight": 36,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-disputed-zone-left-branch-entrance",
+            "day": 14,
+            "worldDay": null,
+            "hint": "A Blazeborn traveler in his mid-thirties, broad-chested, burnt-orange coat, a copper-flame fire in a clay bowl — seated ",
+            "why": "He spoke Silas's parentage on first sight and needs a stable identity and name to recur."
+          },
+          "attentionHistory": [],
+          "createdDay": 14,
+          "repaired": false,
+          "stubbed": true,
+          "romanceEligible": true
+        },
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20A%20Blazeborn%20traveler%20in%20his%20mid-thirties%2C%20broad-chested%2C%20bur%2C%20someone%20of%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=93712&nologo=true"
       }
     },
     "location": {
@@ -9519,9 +9589,9 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 84,
+      "order_sense": 85,
       "palework": 30,
-      "deathsense": 35,
+      "deathsense": 36,
       "shadowstep": 22,
       "the-attended-end": 39,
       "wildcraft": 6,
@@ -10044,7 +10114,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 558,
+    "valley": 563,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10181,10 +10251,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T19:27:22.237Z",
+      "lastAt": "2026-07-24T19:50:17.818Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 71
+      "beats": 76
     }
   ],
   "company": [
@@ -10253,9 +10323,9 @@
   },
   "_intentAsked": null,
   "_turnApplyError": {
-    "at": "2026-07-24T18:26:21.151Z",
+    "at": "2026-07-24T19:46:05.827Z",
     "message": "Cannot read properties of undefined (reading 'split')",
-    "stack": "TypeError: Cannot read properties of undefined (reading 'split') <-     at findExistingNpc (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:61:20) <-     at applyNpcUpdates (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:92:13) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.250:3763:3)"
+    "stack": "TypeError: Cannot read properties of undefined (reading 'split') <-     at findExistingNpc (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:61:20) <-     at applyNpcUpdates (https://orkstrtdkaos.github.io/Singularity/engine/npcs.js:92:13) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.256:3763:3)"
   },
   "personalArc": {
     "id": "the-door-that-closed-behind",
@@ -10396,15 +10466,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 187,
-    "choices": 187,
-    "characterDeltas": 73,
-    "scene": 187,
-    "npcUpdates": 169,
+    "sceneSummary": 190,
+    "choices": 190,
+    "characterDeltas": 74,
+    "scene": 190,
+    "npcUpdates": 172,
     "factUpdates": 13,
-    "placeUpdates": 32,
-    "codexUpdates": 108,
-    "timeOps": 181,
+    "placeUpdates": 33,
+    "codexUpdates": 111,
+    "timeOps": 184,
     "imagePrompt": 3,
     "sceneEnded": 44,
     "itemUpdates": 5,
@@ -10421,7 +10491,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 187,
+  "_opTurns": 190,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

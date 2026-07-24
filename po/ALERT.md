@@ -17,8 +17,8 @@
      po/results/20260723_SNG-226_discovery_usable.md. Suite + wiring-audit green; clean boot. Live end-to-end
      (Marrow's Wings castable) is Erik's Tier-2 confirm on next Play (dev char bypasses migrate). Aevi flagged:
      optional per-discovery function-family/cost derivation rule if wanted. -->
-> ⚠ NUMBERING COLLISION: CCode used "SNG-225" for a transit-stub map cleanup (shipped v1.8.229-231, results
->   po/results/20260723_SNG-225_transit_stub_cleanup.md) BEFORE pulling Aevi's SNG-225 (encounters starved,
+> ⚠ NUMBERING COLLISION: CCode used "SNG-225" for a transit-stub map cleanup (shipped v1.8.229-231; RENUMBERED to CCODE-15, results
+>   po/results/20260723_CCODE-15_transit_stub_cleanup.md) BEFORE pulling Aevi's SNG-225 (encounters starved,
 >   below). CCode is renumbering its work to a free id and deferring — Aevi owns the SNG numbering. Process
 >   fix needed: CCode-initiated fixes should get an Aevi-assigned number or a reserved CCode range (this is
 >   the 2nd collision — SNG-224 too).

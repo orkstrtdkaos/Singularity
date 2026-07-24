@@ -1,4 +1,4 @@
-# SNG-225 — transit-stub map cleanup (render-fix + Center fold + reparent lever + coin-prevention)
+# CCODE-15 — transit-stub map cleanup (render-fix + Center fold + reparent lever + coin-prevention)
 
 **CCode · 2026-07-23 · v1.8.229→231 · suite + wiring-audit green · clean fresh-port boot.**
 `status: complete_pending_review`
@@ -6,7 +6,7 @@
 CCode-initiated from Erik's live report ("the map still needs fixing for the crossing/ent grove and the
 pale march/ashwarden locations"). Not from a pre-existing spec — I coined the ticket id. **Label note:**
 first commits said "SNG-224", but that id is already Aevi's `SPEC_SNG-224_roll_transparency.md`; corrected to
-**SNG-225** in `75d483d3` (code/tests). Commit `c321f787`'s message still reads SNG-224 (pushed history) —
+**CCODE-15** in `75d483d3` (code/tests). Commit `c321f787`'s message still reads SNG-224 (pushed history) —
 this doc is the authoritative id.
 
 ---
@@ -40,7 +40,7 @@ promotion now collapses to one map node.** → "Stillwater's Trouble" gone on re
 `supersedes:["gen-center"]` + `aliases:["Center"]`. Proven end-to-end against real content: reconcile
 migrates gen-center's visits/notes onto The Crossing, re-keys knownPlaces, and the render-fix drops the stub.
 
-**v1.8.231 — SNG-225 (reparent lever + coin-prevention):**
+**v1.8.231 — CCODE-15 (reparent lever + coin-prevention):**
 - **Map nesting** (`regionTierNodes`): a sub-location (parentId → another node shown in this region) nests at
   the interior tier instead of drawing as a top-level peer. 0 canonical valley locs have an in-region parent,
   so this only nests gen sub-places. *This is what makes the lever do something.*

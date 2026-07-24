@@ -7566,7 +7566,7 @@ await (async () => {
   check("209 §4 GUARD: resolveDeath refuses a target that isn't in any registry", gres2.refused.some(x => /no dead figure/.test(x.reason)));
 }
 
-// ---- SNG-225: the reparent lever + map nesting — a stray transit-stub nests under its true place ----
+// ---- CCODE-15: the reparent lever + map nesting — a stray transit-stub nests under its true place ----
 {
   const wm225 = await import("../engine/worldmap.js");
   // MAP NESTING: a sub-location (parentId → another node IN this region) drops off the top-level region map.
@@ -7576,35 +7576,35 @@ await (async () => {
     millbrook: { id: "millbrook", name: "Millbrook", regionId: "valley" }
   } };
   const flat = wm225.regionTierNodes(CONTENT225, { placeMemory: {} }, "valley").locations.map(l => l.id);
-  check("225 nesting: a sub-location (in-region parentId) is nested, not a top-level peer node", !flat.includes("gen-the-ent-grove") && flat.includes("gen-waygate") && flat.includes("millbrook"));
+  check("CCODE-15 nesting: a sub-location (in-region parentId) is nested, not a top-level peer node", !flat.includes("gen-the-ent-grove") && flat.includes("gen-waygate") && flat.includes("millbrook"));
   // a parentId pointing OUTSIDE the region does NOT nest (the parent isn't shown here to nest under).
   const CONTENT225b = { locations: { "gen-x": { id: "gen-x", name: "X", regionId: "valley", parentId: "somewhere_else" }, millbrook: { id: "millbrook", name: "Millbrook", regionId: "valley" } } };
-  check("225 nesting: an OUT-of-region parentId keeps it top-level (no in-region parent to nest under)", wm225.regionTierNodes(CONTENT225b, {}, "valley").locations.map(l => l.id).includes("gen-x"));
+  check("CCODE-15 nesting: an OUT-of-region parentId keeps it top-level (no in-region parent to nest under)", wm225.regionTierNodes(CONTENT225b, {}, "valley").locations.map(l => l.id).includes("gen-x"));
 
   // THE REPARENT OP: nest a gen-location under another, aligning region; clear it; refuse canonical/unknown.
   const amod225 = await import("../engine/authormode.js");
-  check("225: 'reparentLocation' is in the AUTHOR_OPS vocabulary", amod225.AUTHOR_OPS.includes("reparentLocation"));
+  check("CCODE-15: 'reparentLocation' is in the AUTHOR_OPS vocabulary", amod225.AUTHOR_OPS.includes("reparentLocation"));
   const c225 = { generated: { location: {
     "gen-the-ent-grove": { id: "gen-the-ent-grove", name: "The Ent Grove", regionId: "valley" },
     "gen-waygate": { id: "gen-waygate", name: "Waygate", regionId: "the_center" }
   } }, authorEdits: [] };
   amod225.applyAuthorOps(c225, [{ op: "reparentLocation", locationId: "gen-the-ent-grove", parentId: "gen-waygate" }], {});
-  check("225: reparent sets parentId + inherits the parent's region (a sub-place shares its parent's region)", c225.generated.location["gen-the-ent-grove"].parentId === "gen-waygate" && c225.generated.location["gen-the-ent-grove"].regionId === "the_center" && c225.authorEdits.some(e => e.kind === "reparentLocation"));
+  check("CCODE-15: reparent sets parentId + inherits the parent's region (a sub-place shares its parent's region)", c225.generated.location["gen-the-ent-grove"].parentId === "gen-waygate" && c225.generated.location["gen-the-ent-grove"].regionId === "the_center" && c225.authorEdits.some(e => e.kind === "reparentLocation"));
   amod225.applyAuthorOps(c225, [{ op: "reparentLocation", locationId: "gen-the-ent-grove", parentId: "" }], {});
-  check("225: a falsy parentId CLEARS the parent (un-nest back to top-level)", !c225.generated.location["gen-the-ent-grove"].parentId);
+  check("CCODE-15: a falsy parentId CLEARS the parent (un-nest back to top-level)", !c225.generated.location["gen-the-ent-grove"].parentId);
   const r225a = amod225.applyAuthorOps(c225, [{ op: "reparentLocation", locationId: "the_crossing", parentId: "gen-waygate" }], { locations: { the_crossing: { id: "the_crossing" } } });
-  check("225 GUARD: a canonical location can't be reparented (fixed geography)", r225a.refused.some(x => /canonical places are fixed/.test(x.reason)));
+  check("CCODE-15 GUARD: a canonical location can't be reparented (fixed geography)", r225a.refused.some(x => /canonical places are fixed/.test(x.reason)));
   const r225b = amod225.applyAuthorOps(c225, [{ op: "reparentLocation", locationId: "gen-waygate", parentId: "gen-waygate" }], {});
-  check("225 GUARD: a place cannot be its own parent", r225b.refused.some(x => /own parent/.test(x.reason)));
+  check("CCODE-15 GUARD: a place cannot be its own parent", r225b.refused.some(x => /own parent/.test(x.reason)));
   const appSrc225 = readFileSync(join(root, "app.js"), "utf8");
-  check("225: the Author panel exposes the reparent lever (dev-gated) + passes CONTENT.locations to ctx", /data-au="reparentLocation"/.test(appSrc225) && /locations: CONTENT\.locations/.test(appSrc225));
+  check("CCODE-15: the Author panel exposes the reparent lever (dev-gated) + passes CONTENT.locations to ctx", /data-au="reparentLocation"/.test(appSrc225) && /locations: CONTENT\.locations/.test(appSrc225));
 
   // PREVENTION (root cause): the GM is told to REUSE an existing place's name, not coin a synonym (the mint
   // that made "Center" beside "The Crossing"); the travel directive reinforces it; the mint logs its coin-rate.
   const gmSrc225 = readFileSync(join(root, "engine/gm.js"), "utf8");
-  check("225 prevention: the moveTo directive forbids coining a NEW name for a place that already exists", /USE THE EXISTING NAME/.test(gmSrc225) && /coined synonym mints a DUPLICATE/.test(gmSrc225));
-  check("225 prevention: the travel directive tells the GM to reuse a reachable place's exact name/id", /do not coin a new synonym for a place you can already reach/.test(appSrc225));
-  check("225 observability: mintTransitLocation logs every coin (the coin-rate is measurable)", /\[transit-mint\] coined/.test(appSrc225));
+  check("CCODE-15 prevention: the moveTo directive forbids coining a NEW name for a place that already exists", /USE THE EXISTING NAME/.test(gmSrc225) && /coined synonym mints a DUPLICATE/.test(gmSrc225));
+  check("CCODE-15 prevention: the travel directive tells the GM to reuse a reachable place's exact name/id", /do not coin a new synonym for a place you can already reach/.test(appSrc225));
+  check("CCODE-15 observability: mintTransitLocation logs every coin (the coin-rate is measurable)", /\[transit-mint\] coined/.test(appSrc225));
 }
 
 // ---- SNG-215 §A: the ability sidebar — grouped by FUNCTION, and a player-set craft BOOST ----

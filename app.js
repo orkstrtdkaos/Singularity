@@ -1135,7 +1135,7 @@ function renderAuthorPanel() {
   const edits = character.authorEdits || [];
   const now = `L${character.level} · ${character.xp || 0} xp · ${character.skillPoints || 0} sp · ${character.health}/${character.maxHealth} hp · ${character.energy}/${character.maxEnergy} en · ${(character.abilities || []).length} crafts · ${(character.inventory || []).length} items`;
   const vitals = ["health", "energy", "maxHealth", "maxEnergy", "attunement"];
-  const genLocs = Object.values(character.generated?.location || {}).filter(l => l && !l.supersededBy); // SNG-225: reparentable stubs
+  const genLocs = Object.values(character.generated?.location || {}).filter(l => l && !l.supersededBy); // CCODE-15: reparentable stubs
   chrome(`<div class="screen" style="max-width:760px">
     <h2>⚙ Author — god-mode <span class="dev-badge">DEV</span></h2>
     <p class="hint" style="margin-bottom:6px">Erik-as-<strong>author</strong>, not the character. No fairness, no trace — this is the separate god-mode surface (SNG-207b), never the in-fiction GM. Safety (content-rating, minor-safety) lives in its own controls and is never touched here. Every edit is logged below.</p>
@@ -1152,7 +1152,7 @@ function renderAuthorPanel() {
     <div class="author-row"><label>Grant ability</label><input id="au-abil" placeholder="ability id (e.g. the_cut_thread)"><button class="btn secondary" data-au="grantAbility">Grant</button></div>
     <div class="author-row"><label>Grant item</label><input id="au-item" placeholder="item name"><button class="btn secondary" data-au="grantItem">Grant</button></div>
 
-    ${genLocs.length ? `<h3>Geography <span class="hint" style="font-weight:400">— nest a stray transit-stub under its true place (SNG-225)</span></h3>
+    ${genLocs.length ? `<h3>Geography <span class="hint" style="font-weight:400">— nest a stray transit-stub under its true place (CCODE-15)</span></h3>
     <div class="author-row"><label>Reparent place</label><select id="au-loc">${genLocs.map(l => `<option value="${esc(l.id)}">${esc(l.name)}</option>`).join("")}</select><select id="au-loc-parent"><option value="">— top-level (no parent) —</option>${genLocs.map(l => `<option value="${esc(l.id)}">under ${esc(l.name)}</option>`).join("")}</select><button class="btn secondary" data-au="reparentLocation">Nest</button></div>` : ""}
 
     ${arcs.length ? `<h3>World arcs</h3>${arcs.map(a => `<div class="author-row"><label>${esc(a.name)}</label><select id="au-arc-${esc(a.id)}">${Array.from({ length: (a.stages || []).length }, (_, i) => `<option value="${i + 1}">stage ${i + 1}${(a.stages[i]?.name) ? " — " + esc(a.stages[i].name) : ""}</option>`).join("")}</select><button class="btn secondary" data-au="setArcStage" data-arc="${esc(a.id)}">Set</button></div>`).join("")}` : ""}
@@ -4760,7 +4760,7 @@ function mintTransitLocation(moveRef) {
     _gen: { type: "location", tier: "fresh", engagementScore: 0, birthWeight: 1, rating: null, attentionHistory: [], createdDay: (() => { try { return readClock(character.clock).day; } catch { return null; } })(), provenance: { locationId: here?.id || null, day: null, hint: "transit" } },
     map: coordForGenerated(id, here?.map, existing)
   };
-  // SNG-225 observability: a mint means the GM named a place that matched NOTHING existing (resolveLocationId
+  // CCODE-15 observability: a mint means the GM named a place that matched NOTHING existing (resolveLocationId
   // already ran and missed). Log it so the coin-rate is measurable — a coined synonym for an existing place
   // (the "Center"/"The Crossing" duplicate) shows up here; the fix is an alias on the canonical file, or the
   // reparent lever if it's really a sub-place. A genuinely new place is expected and fine.

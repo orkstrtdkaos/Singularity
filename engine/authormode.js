@@ -132,7 +132,7 @@ export function applyAuthorOps(character, ops = [], ctx = {}) {
         break;
       }
       case "reparentLocation": {
-        // SNG-225: nest a stray gen-location under its true parent (or un-nest it) — the retroactive fix for
+        // CCODE-15: nest a stray gen-location under its true parent (or un-nest it) — the retroactive fix for
         // a transit-stub the mint left flat (Silas's Ent Grove → the crossroads). Only a GENERATED location
         // moves; canonical places are fixed geography. A falsy parentId clears the parent (back to top-level).
         const id = op.locationId, pid = op.parentId || null;

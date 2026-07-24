@@ -117,7 +117,7 @@ export function regionTierNodes(CONTENT, character, regionId) {
   const inRegion = Object.values(CONTENT?.locations || {})
     .filter(l => (l.regionId || l.region) === regionId)
     .filter(l => !l.supersededBy && !aliased[l.id]);
-  // SNG-225 nesting: a SUB-LOCATION (its parentId points at another place shown IN THIS region) belongs
+  // CCODE-15 nesting: a SUB-LOCATION (its parentId points at another place shown IN THIS region) belongs
   // nested under its parent at the interior tier, not as a top-level peer node. This is what makes the
   // reparent lever honest — reparenting a stray stub under its true parent actually removes it from the
   // region map. (No canonical valley loc has an in-region parent, so this only nests gen sub-places — e.g.

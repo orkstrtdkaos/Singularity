@@ -105,6 +105,66 @@
         "characterName": "Cellaceron"
       },
       "foundWorldDay": 23
+    },
+    "the-attended-end+the_shadow_work": {
+      "braidKey": "the-attended-end+the_shadow_work",
+      "name": "Marrow's Wings",
+      "description": "By combining The Shadow Work's persistent shaping with The Raised Thing's structural purpose, Silas can manifest and sustain death-shadow wings capable of open-air flight — not a step between two darks, but a carried passage through open ground. The hollow's attended-death quality is not required…",
+      "notFor": "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes.",
+      "emergentFunction": null,
+      "tree": [
+        {
+          "name": "Marrow's Wings I",
+          "grants": "The Attended End and The Shadow Work run as one craft: the move only their joining makes.",
+          "cannot": "What neither parent could do apart."
+        },
+        {
+          "name": "Marrow's Wings II",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart."
+        },
+        {
+          "name": "Marrow's Wings III",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart."
+        }
+      ],
+      "namedBy": "player",
+      "sourceNames": [
+        "The Attended End",
+        "The Shadow Work"
+      ],
+      "contributedBy": {
+        "playerKey": "player-s9z9u1",
+        "characterId": "char-mrhs8286",
+        "characterName": "Silas Weir"
+      },
+      "foundWorldDay": 24
+    },
+    "boundary_stone+the_shielding_word": {
+      "braidKey": "boundary_stone+the_shielding_word",
+      "name": "You Shall Not Pass",
+      "description": "A sustained dome-ward combining Boundary-Stone's geometric perimeter with the Shielding Word's declared certainty — the two crafts braid into a single form: a warded place held against a named external force (weather, casual harm, ambient threat). Costs the sum of both components. The ward holds…",
+      "notFor": "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes.",
+      "emergentFunction": null,
+      "tree": [
+        {
+          "name": "You Shall Not Pass I",
+          "grants": "Boundary-Stone and The Shielding Word run as one craft: the move only their joining makes.",
+          "cannot": "What neither parent could do apart."
+        }
+      ],
+      "namedBy": "player",
+      "sourceNames": [
+        "Boundary-Stone",
+        "The Shielding Word"
+      ],
+      "contributedBy": {
+        "playerKey": "player-s9z9u1",
+        "characterId": "char-mrhs8286",
+        "characterName": "Silas Weir"
+      },
+      "foundWorldDay": 24
     }
   }
 }

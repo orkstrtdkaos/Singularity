@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 22,
-  "xp": 2175,
+  "xp": 2180,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -136,7 +136,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.0858570141751844,
+    "spectrumId": -0.08156416346642519,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.26339120175346753,
     "mechanical_spiritual": 0.25513542055105926,
@@ -152,7 +152,7 @@
   "maxHealth": 135,
   "health": 135,
   "maxEnergy": 205,
-  "energy": 168,
+  "energy": 163,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1793,84 +1793,78 @@
         "player": "Sit with Pell a while before sleep — name what tomorrow might mean.",
         "summary": "Silas and Pell sit together in the low-lit room above the grain store and name what tomorrow holds — Crane toward the committee, the filtration work already in motion, and the fold in the upper reach the thing neither of them has said aloud to anyone else.",
         "narration": "The lane outside is quiet. You and Pell sit on the edge of the bed in the dark room above the grain store, the borrowed lamp turned low. Huginn is on the window ledge with his back to you both, which is about as much privacy as the bird will give.\n\nYou name it plainly. Tomorrow Crane meets the committee — or the committee's runner meets Crane, which amounts to the same thing. The document roll goes with him. The filtration work starts whether or not anyone upstream has made a decision, because the materials are staged and Dara has the sequence. And the two of you head toward the fold in the upper reach, which is the part you haven't said aloud yet to anyone but each other.\n\nPell listens with her hands in her lap and her eyes on the middle distance. When you finish she says, said Pell, \"The fold first. Everything else is already moving without us.\" A beat passes. \"That's the point of the fellowship,\" she adds, quieter, and there's something satisfied in it — not relief exactly, more like a thing set down correctly.\n\nYou sit together in the low light a while longer. Huginn shifts on the ledge, adjusts one wing, settles. The village outside is still. Tomorrow is its own weight, but tonight it is only the two of you and the dark and the faint smell of river water on the spring air."
+      },
+      {
+        "player": "Place your hand on Pell's belly and ask about the child conceived back in Cairnhold.",
+        "summary": "Silas rests his hand on Pell's belly and asks — she answers plainly: too soon to know, but not nothing. They sit with the weight of it in the quiet room above the grain store.",
+        "narration": "You reach across and set your hand on Pell's belly — flat against the cloth, quiet and deliberate. She looks down at it, then up at you, and the lamp-shadow makes it hard to read her face for a moment.\n\nShe puts her hand over yours. She does not say anything right away, and you've known her long enough to understand that means she is choosing words with care rather than delaying.\n\n\"I don't know yet,\" she says finally, her voice low. \"It's too soon to know. But I haven't felt nothing, either.\" She pauses. \"That's not a word. You understand what I mean.\"\n\nYou do. She shifts her weight, settles her shoulder against yours, and keeps her hand where it is on top of yours. Outside, Huginn adjusts one wing against the window ledge and does not turn around. The lamp burns low. Pell says, after a moment, \"Ask me again when we're out of the mud.\""
       }
     ],
     "lastTurn": {
-      "narration": "The lane outside is quiet. You and Pell sit on the edge of the bed in the dark room above the grain store, the borrowed lamp turned low. Huginn is on the window ledge with his back to you both, which is about as much privacy as the bird will give.\n\nYou name it plainly. Tomorrow Crane meets the committee — or the committee's runner meets Crane, which amounts to the same thing. The document roll goes with him. The filtration work starts whether or not anyone upstream has made a decision, because the materials are staged and Dara has the sequence. And the two of you head toward the fold in the upper reach, which is the part you haven't said aloud yet to anyone but each other.\n\nPell listens with her hands in her lap and her eyes on the middle distance. When you finish she says, said Pell, \"The fold first. Everything else is already moving without us.\" A beat passes. \"That's the point of the fellowship,\" she adds, quieter, and there's something satisfied in it — not relief exactly, more like a thing set down correctly.\n\nYou sit together in the low light a while longer. Huginn shifts on the ledge, adjusts one wing, settles. The village outside is still. Tomorrow is its own weight, but tonight it is only the two of you and the dark and the faint smell of river water on the spring air.",
-      "sceneSummary": "Silas and Pell sit together in the low-lit room above the grain store and name what tomorrow holds — Crane toward the committee, the filtration work already in motion, and the fold in the upper reach the thing neither of them has said aloud to anyone else.",
+      "narration": "You reach across and set your hand on Pell's belly — flat against the cloth, quiet and deliberate. She looks down at it, then up at you, and the lamp-shadow makes it hard to read her face for a moment.\n\nShe puts her hand over yours. She does not say anything right away, and you've known her long enough to understand that means she is choosing words with care rather than delaying.\n\n\"I don't know yet,\" she says finally, her voice low. \"It's too soon to know. But I haven't felt nothing, either.\" She pauses. \"That's not a word. You understand what I mean.\"\n\nYou do. She shifts her weight, settles her shoulder against yours, and keeps her hand where it is on top of yours. Outside, Huginn adjusts one wing against the window ledge and does not turn around. The lamp burns low. Pell says, after a moment, \"Ask me again when we're out of the mud.\"",
+      "sceneSummary": "Silas rests his hand on Pell's belly and asks — she answers plainly: too soon to know, but not nothing. They sit with the weight of it in the quiet room above the grain store.",
       "choices": [
         {
-          "label": "Sleep — tomorrow needs you rested",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
+          "label": "Stay with her — no more words tonight. Let the quiet be enough.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "comfort"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Tell her what you're carrying about the fold — not the plan, just what you feel about it.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask her what she wants — not about the fold, not about the committee. What she wants right now.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "comfort"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Blow out the lamp and settle in for sleep — tomorrow is already long enough without carrying tonight into it.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "sustain"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Stay awake a little longer — there's something else you want to say to her",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Huginn what he makes of the upper reach — he's been quiet about it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Take out the father's sealed fold and hold it a moment before sleep — not opening it, just carrying the weight of it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp turned down, window open a crack, night quiet outside. Huginn on the ledge with his back to the room.",
+        "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp turned down near the last of its oil, window open a crack, night quiet outside.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Sitting on the edge of the bed beside Silas, hands in her lap, settled."
+            "state": "Sitting with her shoulder against Silas's, her hand over his on her belly, quiet and settled."
           },
           {
             "name": "Huginn",
-            "state": "On the window ledge, wing adjusted, apparently facing the dark outside."
+            "state": "On the window ledge, wing adjusted, facing the dark outside — not turning around."
           }
         ],
         "objects": [
-          "Borrowed lamp at low burn",
-          "The father's sealed fold (in pack or on the shelf)",
+          "Borrowed lamp at very low burn",
+          "The father's sealed fold (in pack on the shelf)",
           "Waymarker (on person)",
           "Document roll (with Crane for the morning)"
         ],
         "threads": [
+          "Pell said 'not nothing' — too soon to know, but something is there",
           "The fold in the upper reach — named between them, not yet named to anyone else",
           "Crane's morning departure and the committee meeting in three days",
           "The filtration build already in motion under Dara and Mara"
@@ -1881,37 +1875,38 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell Ran Marsh",
-          "note": "Named the fold as first priority without prompting — 'everything else is already moving without us.' Satisfied by the fellowship structure holding.",
-          "statusNote": "In the room above the grain store, settled for the night.",
+          "note": "Received Silas's hand on her belly and answered plainly — too soon to know, but not nothing. Put her hand over his and held it. Told him to ask again when they're out of the mud.",
           "learned": [
-            "The fold in the upper reach is the next move — named aloud between the two of them tonight."
-          ]
+            "It is too soon to know whether the conception took — but she has not felt nothing either. She is watching."
+          ],
+          "statusNote": "In the room above the grain store with Silas, settled for the night, her hand over his."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet sit before sleep — a quarter-hour at most."
+        "why": "A brief quiet exchange before sleep."
       }
     },
     "sceneState": {
-      "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp turned down, window open a crack, night quiet outside. Huginn on the ledge with his back to the room.",
+      "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp turned down near the last of its oil, window open a crack, night quiet outside.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Sitting on the edge of the bed beside Silas, hands in her lap, settled."
+          "state": "Sitting with her shoulder against Silas's, her hand over his on her belly, quiet and settled."
         },
         {
           "name": "Huginn",
-          "state": "On the window ledge, wing adjusted, apparently facing the dark outside."
+          "state": "On the window ledge, wing adjusted, facing the dark outside — not turning around."
         }
       ],
       "objects": [
-        "Borrowed lamp at low burn",
-        "The father's sealed fold (in pack or on the shelf)",
+        "Borrowed lamp at very low burn",
+        "The father's sealed fold (in pack on the shelf)",
         "Waymarker (on person)",
         "Document roll (with Crane for the morning)"
       ],
       "threads": [
+        "Pell said 'not nothing' — too soon to know, but something is there",
         "The fold in the upper reach — named between them, not yet named to anyone else",
         "Crane's morning departure and the committee meeting in three days",
         "The filtration build already in motion under Dara and Mara"
@@ -2931,7 +2926,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Named the drainage cut's mechanical failure plainly — wrong slope, pooling water, cold iron underneath — and recommended it be flagged to whoever tends the road. Then stepped away from it and moved on.",
         "[d13] Arrived at the Crossing, immediately read the settlement for working infrastructure — noted no forge smoke, spotted a cooperage.",
         "[d13] Tasked with scouting forge resources and booking a bout at the Coliseum — moving northwest.",
         "[d13] Received the full weight of the boar hunt through the soul bond — cold ground, the kill, the walk back after, the unbroken line to this stall. Found the structural truth of it through ironsense. Did not speak, which was the answer.",
@@ -2940,17 +2934,18 @@
         "[d13] Acknowledged Crane's introduction with a single nod — no words, which is agreement. Crouched to read the blueprint line on the flagstone and said nothing, which from Pell is the same thing.",
         "[d13] Extended the intake channel by half a length through ironsense — a pressure-head correction for low-water weeks that Crane and Silas had not included.",
         "[d13] Grounded the fold-talk on the road with one plain sentence — 'It can wait until we're out of the wet.' Still carrying her full pack.",
-        "[d13] Named the fold as first priority without prompting — 'everything else is already moving without us.' Satisfied by the fellowship structure holding."
+        "[d13] Named the fold as first priority without prompting — 'everything else is already moving without us.' Satisfied by the fellowship structure holding.",
+        "[d13] Received Silas's hand on her belly and answered plainly — too soon to know, but not nothing. Put her hand over his and held it. Told him to ask again when they're out of the mud."
       ],
       "knownFacts": [
-        "The Boundary-Stone-Shielding Word join reads as a jointed hinge through ironsense — flexible under stress, not fused",
         "The Shielding Word names what is already true — the certainty precedes the craft, and the craft names it.",
         "Her ironsense reads the join between Boundary-Stone and the Shielding Word as load-bearing stress, not as intention — the load is what she can follow",
         "The soul bond can carry the ashwarden attending-quality from Silas — she felt it arrive and her ironsense sharpened on it, finding something at the outer margin she had not previously caught",
         "The drainage cut on the March Road near the ward's outer margin runs at a wrong slope — water pools rather than drains, and the iron beneath it has been cold in the wrong direction for years",
         "The boar hunt was the first date — cold ground, a clean kill taken together, the first hard thing done as a pair; the tusks on Renna's bench are the unbroken line from that ridge to this commission",
         "Intake head must account for low-water pressure drop or the first filter stage starves",
-        "The fold in the upper reach is the next move — named aloud between the two of them tonight."
+        "The fold in the upper reach is the next move — named aloud between the two of them tonight.",
+        "It is too soon to know whether the conception took — but she has not felt nothing either. She is watching."
       ],
       "skillsObserved": [
         "reading a ward's structural geometry through ironsense and e",
@@ -2961,7 +2956,7 @@
         "extending a filtration design through ironsense load-reading"
       ],
       "status": "active",
-      "statusNote": "In the room above the grain store, settled for the night.",
+      "statusNote": "In the room above the grain store with Silas, settled for the night, her hand over his.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 13
@@ -4899,7 +4894,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 588,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the…",
@@ -6415,21 +6410,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.407526076264908,
-    "cerebral": 14.537995810478552,
-    "social": 11.646385542879102,
-    "generous": 4.234114692063095,
-    "cautious": 2.8817094199265716,
-    "physical": 0.3557943189717644,
-    "risky": 0.3126919843293798,
-    "ruthless": 0.27657966504334275,
-    "carousing": 0.06343691804244016,
-    "amorous": 2.0724762568312345,
-    "patient": 0.3805168162205425,
-    "stealth": 0.0006361586082510715,
-    "devotion": 0.33601814079383363,
-    "craft": 0.5293803196108151,
-    "leadership": 1.463940368762608
+    "strategic": 21.847337924358285,
+    "cerebral": 14.174545915216589,
+    "social": 12.355225904307124,
+    "generous": 4.128261824761517,
+    "cautious": 2.8096666844284073,
+    "physical": 0.34689946099747027,
+    "risky": 0.30487468472114526,
+    "ruthless": 0.26966517341725915,
+    "carousing": 0.06185099509137915,
+    "amorous": 2.0206643504104536,
+    "patient": 0.37100389581502896,
+    "stealth": 0.0006202546430447947,
+    "devotion": 0.32761768727398777,
+    "craft": 0.5161458116205447,
+    "leadership": 1.4273418595435428
   },
   "aptitudes": [
     "strategist",
@@ -6438,7 +6433,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 778,
+  "actionCount": 779,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6828,8 +6823,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784903149967,
-  "rev": 1268,
+  "updatedAt": 1784903459658,
+  "rev": 1269,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9642,7 +9637,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 515,
+    "valley": 516,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9777,10 +9772,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T14:25:49.966Z",
+      "lastAt": "2026-07-24T14:30:59.656Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 28
+      "beats": 29
     }
   ],
   "company": [
@@ -9980,15 +9975,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 148,
-    "choices": 148,
+    "sceneSummary": 149,
+    "choices": 149,
     "characterDeltas": 61,
-    "scene": 148,
-    "npcUpdates": 132,
+    "scene": 149,
+    "npcUpdates": 133,
     "factUpdates": 11,
     "placeUpdates": 26,
     "codexUpdates": 92,
-    "timeOps": 142,
+    "timeOps": 143,
     "imagePrompt": 3,
     "sceneEnded": 33,
     "itemUpdates": 2,
@@ -10005,7 +10000,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 148,
+  "_opTurns": 149,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

@@ -174,3 +174,82 @@ throw at it, not a fixed meter-grind.
    collapseDC live — bestiary tier, or computed from threat?
 7. (Erik) Should a MORPHED encounter (failed finisher → fight) be HARDER than if you'd just fought (a penalty
    for the failed gambit), or the same fight from a worse position? Erik's call on how much the whiff costs.
+
+
+---
+
+# §7 — REFINEMENT 2 (Erik, 2026-07-22): outcomes are GRADED, defenses DENY mechanics, kit TRIVIALIZES
+
+Three more layers that make the frame INTELLIGENT rather than binary. All ground in existing machinery.
+
+## §7a — Consequences scale with the ROLL MARGIN + GM read (not collapse-or-nothing)
+A finisher (or any frame action) does NOT resolve pass/fail — it resolves along the resolver's EXISTING degree
+bands (resolve.js:147: `crit_success | success | partial | failure | crit_failure`). The collapse/morph is the
+TOP and BOTTOM of a spectrum; the middle is graded:
+- **crit_success** → the frame COLLAPSES (instant kill / clean escape / puzzle solved outright).
+- **success** → the finisher lands hard but may not fully collapse a strong target — heavy damage, the
+  encounter continues from a much better position.
+- **partial** → it bites: real damage / partial progress, but the thing is still up and now alerted.
+- **failure** → glances; little effect; the encounter MORPHS (soft→fight) or hardens.
+- **crit_failure** → the whiff with teeth — you're exposed, the thing gets a free beat, worst-case morph.
+So "a Cut the Thread could be completely resisted on a solid fail, but might just damage hard" (Erik) = the
+degree band + the GM read of the situation picks the consequence. The GM narrates the SHAPE the band gives it.
+The bands EXIST; §7a wires collapse/morph/damage/whiff to them instead of a boolean.
+
+## §7b — a WARD can DENY a mechanic outright (a gate, not a modifier) — the sharp one
+A defense like **Death-Ward does NOT add a bonus to resist an instakill — it makes instakill STRUCTURALLY NOT
+APPLY** unless the opposed roll DEMOLISHES the ward. This is categorically different from a resist modifier:
+- A modifier shifts the odds. A WARD **invalidates the mechanic**: against a Death-Warded target, a
+  FINISH-family collapse attempt cannot instakill AT ALL — the finisher is not resisted, it's INAPPLICABLE.
+- The ward has a **break-threshold**: only a demolishing roll (crit_success margin ABOVE the ward's tier)
+  breaks it; then the finisher applies normally. Anything less = the instakill simply doesn't happen (it may
+  still do ordinary damage per §7a, but the INSTANT-END mechanic is off the table).
+- Mechanically: a ward declares `denies: ["finish","instant_end"]` (function families it nullifies) +
+  `breakDC`. The collapse path checks for a denying ward FIRST — if present and unbroken, the collapse mechanic
+  is unavailable regardless of the roll's other effects. This is the `ward` function family (already in the
+  vocab, app.js:1589) doing what it should: not softening a blow but forbidding a KIND of blow.
+- Generalizes: any ward can deny any mechanic-family (a mind-ward denies SWAY-collapse of a standoff; a
+  movement-ward denies transit-collapse of a chase). Wards gate WHAT'S POSSIBLE, not just the numbers.
+
+## §7c — the KIT can TRIVIALIZE a challenge by voiding its PREMISE (relative difficulty)
+A challenge's difficulty is RELATIVE TO YOUR KIT, not absolute. A skill can make a challenge trivial by
+removing the obstacle's premise entirely — no roll:
+- **"There's a wall to climb" + you can FLY (Marrow's Wings)** → the climb was never YOUR obstacle. You fly to
+  the top; the challenge ends, trivially, no roll. The frame recognizes the premise is VOID for your kit and
+  resolves it as bypassed (DEFEAT, trivial), not a skipped roll — a *narrated walk-around*.
+- **Higher-level KNOW/insight skills LAY OUT THE SOLUTION** → a skill that reads patterns/futures can hand you
+  the whole answer to a SIMPLE puzzle, trivializing it (DEFEAT, trivial). "Some skills lay out the entire
+  solution, especially at higher levels." — Erik.
+- **BUT harder challenges RESIST even the right skill** → a hard puzzle, or a wall warded against flight, or a
+  foe whose pattern resists reading, does NOT trivialize — the trivializing skill becomes an OPPOSED ROLL
+  (your craft vs. the challenge's resistance). "Simple puzzles trivial; harder puzzles opposed rolls." — Erik.
+- Mechanically: a challenge declares its **premise** (what makes it hard: `requires: "climb"`, `barrier:
+  "physical_ascent"`) + a **trivializedBy** (function families that VOID the premise: a MOVE/fly craft voids a
+  climb) + a **resistDC** (above which even the voiding skill must roll opposed). The frame checks the player's
+  kit against the premise: premise-voided + below resistDC → trivial bypass; premise-voided + at/above resistDC
+  → opposed roll; premise not voided → normal stages. This is why a fly-craft trivializes a low wall but a
+  warded height is still a real challenge.
+
+## §7d — the unifying principle
+The frame is not a fixed obstacle course — it is **evaluated against your kit and the roll's margin**:
+- WHAT the roll does scales with its DEGREE (§7a) — collapse, wound, glance, whiff.
+- WHAT'S POSSIBLE is gated by WARDS (§7b — a ward can forbid a whole mechanic) and by your KIT (§7c — the right
+  craft can void a challenge's premise).
+- The GM READ picks the narrated shape within what the mechanics allow.
+So the same encounter is a trivial walk-around for one character (who can fly / who has the finisher / whose
+kit voids the premise), a graded fight for another, and an impossible wall for a third (warded against their
+one trick). The frame READS the situation. That's the intelligence Erik is describing.
+
+## §OQ — REFINEMENT-2 ROUND 2
+8. (CCode) Degree→consequence mapping (§7a): authored per-kind (a fight's crit_fail differs from a puzzle's),
+   or one spectrum the GM narrates? Lean: one mechanical spectrum (collapse/hard/partial/glance/whiff) + GM
+   narrates the KIND-specific shape.
+9. (CCode) Ward-denial (§7b): `denies: [families]` + `breakDC` on ward abilities — where authored (ability def)
+   and checked (collapse path, before the opposed roll). Confirm the ward-family abilities that should deny
+   (the_shielding_word? the_warding_mark? a dedicated Death-Ward?).
+10. (CCode/Aevi) trivializedBy/premise/resistDC (§7c): challenges/creatures declare a `premise` + `trivializedBy`
+    families + `resistDC`. CCode wires the kit-check; Aevi authors premises + trivializedBy on encounter/puzzle
+    content. What's the default resistDC by tier (riffraff trivial-able freely, epic never)?
+11. (Erik) How VISIBLE should a trivial bypass be? A quiet "you simply fly up and over" (frictionless), or a
+    small acknowledged beat ("your wings make nothing of the wall") so the player FEELS their kit mattered?
+    Erik's call — the second makes power feel earned.

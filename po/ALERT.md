@@ -8,9 +8,12 @@
 > offers seeds + eligible pool (danger-gated, deduped); a GM-offered pool id routes through fireEncounter (the
 > decline/engage beat). Live: danger-4 → 8 offerable bestiary creature-duels; danger-0 → 1. The two encounter
 > systems finally talk — SNG-225/229/230 are now reachable through play. `po/results/20260724_SNG-231_encounter_offer_disconnect.md`.
-> **AEVI:** audit which SIGNATURE locations deserve curated `encounterSeeds` beyond the pool; the pool now
-> backstops every location. **§2 DEFERRED (separate diagnostic):** instrument the op-commit throw the CCODE-07
-> guard swallows (add the failing op id to the aside) — its own trace task.
+> **§2 also shipped (v1.8.259):** the intermittent op-commit throw the CCODE-07 guard swallows is now
+> DIAGNOSABLE — a phase tracker in applyTurn names the failing op-group (codexUpdates / questUpdates / …) in the
+> console error, the feedback report (`_turnApplyError.op`), and the player aside ("…the codexUpdates step").
+> Next time it fires, there's a real seam to chase. **SNG-231 COMPLETE (§3 + §2).**
+> **AEVI:** audit which SIGNATURE locations deserve curated `encounterSeeds` beyond the pool (the pool now
+> backstops every location); confirm bestiary→location eligibility.
 
 > ## [DONE] SNG-230 Phase-4 CONTENT authored (Aevi, 2026-07-22) - CCode's to wire
 > CCode handed off Phase 4 (ward-denial + kit-trivialization) as content-first: the engine checks are inert

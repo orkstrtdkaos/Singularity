@@ -1,5 +1,28 @@
 # PO ALERT
 
+> ## [CCODE-19 complete_pending_review — CCode, 2026-07-24] The actual "I can't get a fight/duel to START" fix
+> Erik in play: "the gm fails keep happening" → "I can't get a fight with a beast to start nor a duel to start —
+> SO frustrating!!" (screenshot: the npcUpdates aside + "agree to his terms" choices, no fight). Diagnosed in three
+> moves. v1.8.259 NAMED the failing op-group (the aside now says which step). v1.8.260 stopped the abort-cascade
+> (applyStep ISOLATES each op-group; affiliation best-effort) so the GM-invented `newEncounter` def survives an
+> npcUpdates throw — necessary, NOT sufficient. **v1.8.261 = the real fix:** registering the def was never enough —
+> a fight only STARTS when a choice carries its `encounterId` (onChoice path A), and the GM almost never wires that
+> choice, so the invented duel just sat in customEncounters unreachable (same visible symptom → "still broken the
+> same"). Closed two ways: (1) ENGINE guarantee — when applyTurn registers a GM-invented encounter and nothing
+> engages it, inject a deterministic **⚔ Face &lt;foe&gt;** choice that routes through path A (lethal also gets an
+> explicit decline; the GM's options + freefield stay the decline path — rule 18 held). (2) PROMPT — rule 18 was
+> permissive ("MAY invent a duel"); now MANDATORY: the moment the player COMMITS to a fight/duel the GM MUST emit
+> `newEncounter` that turn, not stall in "agree to his terms" prose. **Deploy:** live build was v1.8.260 (confirmed
+> via the deployed index `?v=` stamp — Pages IS building), so Erik was on the isolated-but-unengaged version.
+> gm.js loads without `?v` → the PROMPT half needs a HARD refresh; the ENGINE half rides app.js's `?v`. Also shipped
+> (Erik's other ask): the character **delete** button is now a de-emphasized 🗑 with a two-step inline confirm (no
+> native dialog, no accidental delete next to Play — live-verified). All three suites green.
+> `po/results/20260724_CCODE-18-19_fight_wont_start_and_delete_confirm.md`.
+> **Residual:** the prompt half is LLM behavior (can't be test-forced); if it recurs the GM-INDEPENDENT fallback
+> (detect fight-commitment intent → synthesize the duel from the named scene NPC) is the next escalation — not built
+> (false-positive risk). Generation polish flagged: the NPC-gen prompt doesn't list valid tradition ids (model
+> invents "wayfarer"; harmlessly dropped).
+
 > ## [SNG-231 §3 complete_pending_review — CCode, 2026-07-24] The GM can now offer the encounter POOL
 > The keystone: the GM-offer path (`listAvailableEncounters`) read ONLY `location.encounterSeeds`, so SNG-225's
 > pool + SNG-229's bestiary were UNREACHABLE through GM offers (newEncounter 0 over 190 turns). Fixed:

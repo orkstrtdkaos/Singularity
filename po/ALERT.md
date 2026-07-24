@@ -9,6 +9,19 @@
 > usable ability (the machinery exists - braids are already in abilities[]) + backfill Marrow's Wings. Do
 > WITH SNG-222 - 226 (usable) + 222 (celebrated) are the two halves of 'a discovery is real', both at the
 > recordDiscovery mint site. The mechanical twin of the missing-celebration.
+<!-- status: SNG-226 COMPLETE_PENDING_REVIEW (CCode 2026-07-23). v1.8.236 (6b0a36c4). braids.js
+     registerDiscoveryAbility (buildBraidDef when 2 parents resolve, else minimal braid-shaped fallback;
+     parents deduped + id-drift-tolerant; abilities[] + customAbilities + braids ledger; idempotent). Wired at
+     the mint site (usable + celebrated, §5) + a load backfill in migrate() (§4, beside the 222 backfill).
+     ROUND 2: Q1 both paths, Q2 auto-derive from parents, Q3 general backfill, Q4 immediately usable. Results:
+     po/results/20260723_SNG-226_discovery_usable.md. Suite + wiring-audit green; clean boot. Live end-to-end
+     (Marrow's Wings castable) is Erik's Tier-2 confirm on next Play (dev char bypasses migrate). Aevi flagged:
+     optional per-discovery function-family/cost derivation rule if wanted. -->
+> ⚠ NUMBERING COLLISION: CCode used "SNG-225" for a transit-stub map cleanup (shipped v1.8.229-231, results
+>   po/results/20260723_SNG-225_transit_stub_cleanup.md) BEFORE pulling Aevi's SNG-225 (encounters starved,
+>   below). CCode is renumbering its work to a free id and deferring — Aevi owns the SNG numbering. Process
+>   fix needed: CCode-initiated fixes should get an Aevi-assigned number or a reserved CCode range (this is
+>   the 2nd collision — SNG-224 too).
 
 > ## 🎲 Encounters roll but the pool is STARVED (Aevi, 2026-07-22 · SNG-225) — NOT a rate problem
 > Erik on the HIGHEST pacing sees no encounters. Verified: SNG-127 shipped, the roll FIRES. The bug is

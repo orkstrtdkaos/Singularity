@@ -1785,168 +1785,209 @@
         "player": "Read the mill's interior with Order-Sense — understand the space and what it has been used for before Crane speaks.",
         "summary": "Silas reads the mill's interior with Order-Sense — a hidden filtration setup, sealed vessels, a diverted floor channel: Crane has been treating and measuring water here for years.",
         "narration": "The substrate is thin here, the same hollow feeling you noticed at the channel, but you have worked in worse. You let Order-Sense open carefully, drawing on what the space will give rather than pushing for more.\n\nThe mill's ground floor resolves into its design. A working mill, yes — the wheel's shaft, the stone housing, the channel-feed to the east — but this floor has been remade for a different purpose. The stone benches along the north wall are not for grain. The faint ring-marks left by sealed vessels, a row of them, are too regular for a miller's work. Filtering cloth has been stretched across the south window at some point — the pegs are still seated in the sill, the wood lighter where the cloth blocked the weather. Someone has been treating water here. Not recently, but regularly.\n\nAnd there is a second thing: a shallow channel has been cut into the floor's eastern edge, running from the main wheel-feed toward a sealed stone box set into the wall. A diversion. Whatever Crane has been measuring or collecting, he has been routing it separately from the mill's main output for long enough that the cut stone has worn smooth at its edges.\n\nCrane watches you take in the room. He does not ask what you see. He is the kind of man who already knows."
+      },
+      {
+        "player": "Ask first about his father's connection to yours — what Crane was told, and what he has been waiting for.",
+        "summary": "Crane names Silas's father plainly — Aldric Weir came twenty years ago, asked Crane to watch the water, and left a message: give the boy the record, and tell him the fold will not wait past his arrival.",
+        "narration": "You look at Crane directly and ask the question that has been sitting in your chest since your mother gave you his name.\n\n\"What were you told about my father?\" you say. \"And what were you waiting for?\"\n\nCrane is quiet for a moment. Not reluctant — gathering. He moves to the north-wall bench and sits on its edge, hands folded on his knees, in the way of a man who has rehearsed an answer so many times it has gone past rehearsal into something quieter.\n\n\"Your father's name was Aldric Weir,\" he says. \"He came to me twenty years ago — not about the water. About the fold.\"\n\nHe looks at the sealed stone box in the east wall as he says it, then back at you.\n\n\"He told me there was a structure in the upper reach — his word was 'fold,' though I would call it an array. He had read its design. He said it was unfinished and that unfinished was not safe. He said he was going to stop his part of the work, because he had a son and the son was more important than the closing.\" Crane pauses. \"He asked me to watch the water. Not fix it — watch it. Count the years. Keep the record clean.\"\n\nHe nods once toward the stone box.\n\n\"I have been counting,\" he says. \"The water started changing four mornings after the cold broke this year. Not silt. Not spring runoff. The fold is moving. It has begun finishing what your father stopped.\"\n\nPell says nothing behind you. Veth's gaze has not left the sealed box.\n\nCrane looks at the Waymarker in your coat pocket — or at where it was — and his voice when he speaks again is the voice of someone completing a sentence they started two decades ago.\n\n\"He said his son would come,\" he says. \"He said: give the boy the record, and tell him the fold will not wait past his arrival.\"\n\nHuginn shifts on its crossbeam above. Once. The timing is a comment."
       }
     ],
     "lastTurn": {
-      "narration": "The substrate is thin here, the same hollow feeling you noticed at the channel, but you have worked in worse. You let Order-Sense open carefully, drawing on what the space will give rather than pushing for more.\n\nThe mill's ground floor resolves into its design. A working mill, yes — the wheel's shaft, the stone housing, the channel-feed to the east — but this floor has been remade for a different purpose. The stone benches along the north wall are not for grain. The faint ring-marks left by sealed vessels, a row of them, are too regular for a miller's work. Filtering cloth has been stretched across the south window at some point — the pegs are still seated in the sill, the wood lighter where the cloth blocked the weather. Someone has been treating water here. Not recently, but regularly.\n\nAnd there is a second thing: a shallow channel has been cut into the floor's eastern edge, running from the main wheel-feed toward a sealed stone box set into the wall. A diversion. Whatever Crane has been measuring or collecting, he has been routing it separately from the mill's main output for long enough that the cut stone has worn smooth at its edges.\n\nCrane watches you take in the room. He does not ask what you see. He is the kind of man who already knows.",
-      "sceneSummary": "Silas reads the mill's interior with Order-Sense — a hidden filtration setup, sealed vessels, a diverted floor channel: Crane has been treating and measuring water here for years.",
+      "narration": "You look at Crane directly and ask the question that has been sitting in your chest since your mother gave you his name.\n\n\"What were you told about my father?\" you say. \"And what were you waiting for?\"\n\nCrane is quiet for a moment. Not reluctant — gathering. He moves to the north-wall bench and sits on its edge, hands folded on his knees, in the way of a man who has rehearsed an answer so many times it has gone past rehearsal into something quieter.\n\n\"Your father's name was Aldric Weir,\" he says. \"He came to me twenty years ago — not about the water. About the fold.\"\n\nHe looks at the sealed stone box in the east wall as he says it, then back at you.\n\n\"He told me there was a structure in the upper reach — his word was 'fold,' though I would call it an array. He had read its design. He said it was unfinished and that unfinished was not safe. He said he was going to stop his part of the work, because he had a son and the son was more important than the closing.\" Crane pauses. \"He asked me to watch the water. Not fix it — watch it. Count the years. Keep the record clean.\"\n\nHe nods once toward the stone box.\n\n\"I have been counting,\" he says. \"The water started changing four mornings after the cold broke this year. Not silt. Not spring runoff. The fold is moving. It has begun finishing what your father stopped.\"\n\nPell says nothing behind you. Veth's gaze has not left the sealed box.\n\nCrane looks at the Waymarker in your coat pocket — or at where it was — and his voice when he speaks again is the voice of someone completing a sentence they started two decades ago.\n\n\"He said his son would come,\" he says. \"He said: give the boy the record, and tell him the fold will not wait past his arrival.\"\n\nHuginn shifts on its crossbeam above. Once. The timing is a comment.",
+      "sceneSummary": "Crane names Silas's father plainly — Aldric Weir came twenty years ago, asked Crane to watch the water, and left a message: give the boy the record, and tell him the fold will not wait past his arrival.",
       "choices": [
         {
-          "label": "Name what you saw — the benches, the vessel rings, the diversion channel — and ask him plainly how long he has been doing this work.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask to see the record — every entry, every measurement, from the first day to this morning.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "study"
           ],
-          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Ask first about his father's connection to yours — what Crane was told, and what he has been waiting for.",
-          "attribute": "social",
+          "label": "Read the sealed stone box with Order-Sense — understand what has been collected there before Crane opens it.",
+          "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Read the sealed stone box in the eastern wall with Order-Sense — understand what has been diverted into it before you ask him anything.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Let Veth ask the first question — she worked a source cleanly at the well; let her work Crane the same way while you read the room.",
+          "label": "Ask what he knows about the fold itself — where it is, what it does, and what 'finishing' means.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "study"
           ],
-          "abilityId": null,
           "trivial": true
+        },
+        {
+          "label": "Use Deathsense on the stone box — read whether the water collected inside is ending something, or carrying something that ends others.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The party has entered; Crane stands in the interior watching Silas take in the space.",
+        "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The whole party is inside; Crane has moved to sit on the edge of the north-wall bench.",
         "npcsPresent": [
           {
             "name": "Edvar Crane",
-            "state": "Standing back from the door, watching Silas read the room. Not anxious. Waiting to see what the reading produces."
+            "state": "Seated on the north-wall bench, hands folded on his knees — the record given, waiting to see what Silas does next."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Inside the threshold, half a step behind Silas's left shoulder. Eyes moving between Crane and the north-wall benches."
+            "state": "Half a step behind Silas's left shoulder. Silent. Eyes on Crane."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Reading the interior air — her gaze has settled on the sealed stone box in the eastern wall."
+            "state": "Gaze fixed on the sealed stone box in the eastern wall — has not moved it since the name 'fold' was spoken."
           },
           {
             "name": "Huginn",
-            "state": "Settled on a high crossbeam above the wheel housing. Watching Crane."
+            "state": "On the high crossbeam above the wheel housing. Shifted once when Crane finished speaking. Still now."
           }
         ],
         "objects": [
-          "The open mill door — iron-banded timber, bar lifted from inside",
-          "The Waymarker — shown, not handed over, now back in Silas's coat",
+          "The open mill door — iron-banded timber, bar lifted",
+          "The Waymarker — back in Silas's coat",
           "Lamp burning on the ground floor",
           "The mill wheel turning slow outside",
-          "Stone benches along the north wall — ring-marks from sealed vessels, regular and old",
+          "Stone benches along the north wall — ring-marks from sealed vessels, regular and deliberate",
           "Filtering cloth peg-holes in the south window sill — wood lighter where cloth blocked weather",
-          "A shallow channel cut into the eastern floor edge, worn smooth at the edges, running to a sealed stone box in the wall",
-          "The sealed stone box set into the east wall — the diversion's destination"
+          "A shallow channel cut into the eastern floor edge, worn smooth at the edges",
+          "The sealed stone box set into the east wall — the diversion's destination, Crane's record-keeping endpoint"
         ],
         "threads": [
-          "Crane has been treating and measuring water here for years — what was he measuring, and why",
-          "His father told him to find Crane: what was Crane told in return?",
-          "The slow ending in the chest — Crane has already done the accounting; he knows his own time",
-          "The sealed stone box: what has been diverted into it"
+          "The record in the stone box — twenty years of water measurements, started at Aldric Weir's request",
+          "The fold in the upper reach — unfinished, now moving, beginning to complete itself",
+          "Crane's message from Aldric: give the boy the record, and tell him the fold will not wait past his arrival",
+          "Crane's slow ending in the chest — he has done his accounting and is at peace with it"
         ]
       },
-      "codexUpdates": [
-        {
-          "topic": "edvar-crane",
-          "label": "Edvar Crane",
-          "kind": "person",
-          "entityId": "edvar-crane",
-          "fact": "The mill's ground floor has been repurposed for water treatment and measurement — stone benches with vessel-ring marks, a diversion channel worn smooth with years of use, filtering cloth pegs still in the south window sill. Crane has been doing this work long enough for stone to wear smooth. A sealed box in the east wall receives the diverted flow. He knew what Silas was doing while Silas read the room, and did not interrupt.",
-          "links": [
-            "the-water-crisis",
-            "the-second-thread",
-            "what-the-water-remembers",
-            "millbrook"
-          ]
-        }
-      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "edvar-crane",
           "name": "Edvar Crane",
-          "role": "Mill resident, boards at the north-edge mill — secret long-term water monitoring operation",
-          "note": "Silas read the room with Order-Sense — the filtration setup, the vessel rings, the diversion channel, the sealed stone box. Crane watched him do it and said nothing. He is waiting to see what Silas makes of it.",
+          "note": "Named Aldric Weir plainly as the man who came to him twenty years ago. Explained his charge: watch the water, keep the record clean. Delivered Aldric's message — give the boy the record, and tell him the fold will not wait past his arrival.",
           "learned": [
-            "Has been treating and diverting water at the mill for years — the stone channel is worn smooth",
-            "Filtered water through cloth hung in the south window at some point — pegs still in the sill",
-            "Routes a portion of the mill's water intake to a sealed stone box in the east wall — separate from the main output"
+            "Aldric Weir's name — Crane knows it and was given it directly",
+            "The structure in the upper reach is called 'the fold' — Aldric called it that; Crane would call it an array",
+            "Aldric asked him to watch and record, not to fix — the record is in the sealed stone box",
+            "The water began changing four mornings after the cold broke — the fold is moving, beginning to finish what Aldric stopped",
+            "Aldric's message: give the boy the record, and tell him the fold will not wait past his arrival"
           ],
           "skillsObserved": [
-            "Letting a reader finish before speaking — composure under assessment"
+            "Delivering a twenty-year-held message without drama or self-importance"
           ],
-          "statusNote": "Inside the mill ground floor — watching Silas complete his reading of the space; has not yet spoken since letting the party in."
+          "status": "active",
+          "statusNote": "Seated at the mill, record delivered — waiting to see what Silas does next with it."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-second-thread",
+          "label": "The Second Thread — the Fold",
+          "kind": "mystery",
+          "fact": "Aldric Weir came to Crane twenty years ago and named the structure in the upper reach 'the fold.' He read its design, called it unfinished and unsafe, and chose to stop his part of the work rather than finish it — because he had a son. He asked Crane to watch the water. The fold has begun moving this spring, finishing what Aldric stopped. Crane's message from Aldric: give the boy the record, and tell him the fold will not wait past his arrival.",
+          "links": [
+            "what-the-water-remembers",
+            "the-water-crisis",
+            "edvar-crane",
+            "precursor-signs-in-the-valley",
+            "huginn",
+            "millbrook"
+          ]
+        },
+        {
+          "topic": "edvar-crane",
+          "label": "Edvar Crane",
+          "kind": "person",
+          "entityId": "edvar-crane",
+          "fact": "Crane was asked by Aldric Weir twenty years ago to watch the water and keep the record clean — not to fix it, only to count. He has been doing exactly that. The record lives in the sealed stone box in the east wall. He received Aldric's message for Silas and has held it: give the boy the record, and tell him the fold will not wait past his arrival.",
+          "links": [
+            "the-second-thread",
+            "what-the-water-remembers",
+            "millbrook",
+            "the-water-crisis"
+          ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Edvar Crane was charged by Aldric Weir twenty years ago to watch the Crossing's water and keep a record in the sealed stone box at the mill — the record of the fold's approach. Aldric left a message for his son: give the boy the record, and tell him the fold will not wait past his arrival.",
+          "subjectId": "edvar-crane"
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-second-thread",
+          "note": "Crane named the fold plainly — Aldric Weir's name, his charge, and the message he held for twenty years. The record is in the stone box. The fold began moving this spring."
+        },
+        {
+          "op": "progress",
+          "questId": "what-the-water-remembers",
+          "note": "Crane confirms the water change began four mornings after the cold broke — not spring runoff, not ordinary silt. The fold in the upper reach is moving and has begun to finish what Aldric stopped."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A careful reading of the room's design — a few quiet minutes at the threshold."
+        "why": "A short, direct exchange — Crane gathered himself and gave the full account without being drawn out."
       }
     },
     "sceneState": {
-      "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The party has entered; Crane stands in the interior watching Silas take in the space.",
+      "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The whole party is inside; Crane has moved to sit on the edge of the north-wall bench.",
       "npcsPresent": [
         {
           "name": "Edvar Crane",
-          "state": "Standing back from the door, watching Silas read the room. Not anxious. Waiting to see what the reading produces."
+          "state": "Seated on the north-wall bench, hands folded on his knees — the record given, waiting to see what Silas does next."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Inside the threshold, half a step behind Silas's left shoulder. Eyes moving between Crane and the north-wall benches."
+          "state": "Half a step behind Silas's left shoulder. Silent. Eyes on Crane."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Reading the interior air — her gaze has settled on the sealed stone box in the eastern wall."
+          "state": "Gaze fixed on the sealed stone box in the eastern wall — has not moved it since the name 'fold' was spoken."
         },
         {
           "name": "Huginn",
-          "state": "Settled on a high crossbeam above the wheel housing. Watching Crane."
+          "state": "On the high crossbeam above the wheel housing. Shifted once when Crane finished speaking. Still now."
         }
       ],
       "objects": [
-        "The open mill door — iron-banded timber, bar lifted from inside",
-        "The Waymarker — shown, not handed over, now back in Silas's coat",
+        "The open mill door — iron-banded timber, bar lifted",
+        "The Waymarker — back in Silas's coat",
         "Lamp burning on the ground floor",
         "The mill wheel turning slow outside",
         "Stone benches along the north wall — ring-marks from sealed vessels, regular and",
         "Filtering cloth peg-holes in the south window sill — wood lighter where cloth bl",
-        "A shallow channel cut into the eastern floor edge, worn smooth at the edges, run",
-        "The sealed stone box set into the east wall — the diversion's destination"
+        "A shallow channel cut into the eastern floor edge, worn smooth at the edges",
+        "The sealed stone box set into the east wall — the diversion's destination, Crane"
       ],
       "threads": [
-        "Crane has been treating and measuring water here for years — what was he measuring, and why",
-        "His father told him to find Crane: what was Crane told in return?",
-        "The slow ending in the chest — Crane has already done the accounting; he knows his own time",
-        "The sealed stone box: what has been diverted into it"
+        "The record in the stone box — twenty years of water measurements, started at Aldric Weir's request",
+        "The fold in the upper reach — unfinished, now moving, beginning to complete itself",
+        "Crane's message from Aldric: give the boy the record, and tell him the fold will not wait past his arrival",
+        "Crane's slow ending in the chest — he has done his accounting and is at peace with it"
       ]
     }
   },
@@ -2441,14 +2482,14 @@
         "s3"
       ],
       "progress": [
-        "A real item enters inventory, unfinished, with its own evolution track. It is not a key and does not open anything yet.",
         "↳ Silas touched the Waymarker mid-road and let it read — it pulled clean toward the Crossing with a secondary lean toward the unfinished work, naming Edvar Crane as load-bearing.",
         "Party has arrived at the Crossing — Edvar Crane is here somewhere, holding the second thread of the Waymarker's unfinished work.",
         "Codex: what the post was, what it was doing, and what stopped it. A named cause where there was a euphemism.",
         "↳ Coll named Crane as a former fold-worker under Zone Remediation and directed Silas to the Ossian annex where Crane's commission files are held — the first concrete lead on what happened at the…",
         "The suspension order names sub-registrar Holt and a ZR-OA-7 stamp — a deliberate, specific halt by a nameless authority above the district level. The design is clear: one thread cut, all others allowed to conclude.",
         "Edvar Crane located — boards at the Crossing mill, north edge of the settlement.",
-        "Crane recognized the Waymarker and opened the door — the meeting is made."
+        "Crane recognized the Waymarker and opened the door — the meeting is made.",
+        "Crane named the fold plainly — Aldric Weir's name, his charge, and the message he held for twenty years. The record is in the stone box. The fold began moving this spring."
       ],
       "aliases": [],
       "startedAt": "2026-07-20T19:28:38.637Z",
@@ -2684,14 +2725,14 @@
       "stageIndex": 0,
       "completedStages": [],
       "progress": [
-        "Hub Council water committee formally contacted — Mara Wells named as relay, meeting requested ahead of schedule. The institutional thread is now live.",
         "Ossian persuaded — Warden Coll named as the Council Member who can act; a calling-slip in hand and the third floor ahead.",
         "Coll has heard the full briefing — he needs the document roll, a signed witness statement naming Grael, and a check-in protocol before he can move the committee.",
         "Coll received the document roll and Fendt's testimony — the shadow-architecture of the infrastructure demonstrated on his desk. He committed to drafting formal aid requests to the Rootkin and Cogitants tonight, conditional on a signed witness statement in Silas's hand with his Post Master mark.",
         "Aid framework drafted with two conditions: Cogitant contact named before Zone entry, Stillwater's Trouble offered to Rootkin as staging. Coll writing both into the requests before tonight's flag drop.",
         "Letter of introduction secured — Silas now carries Coll's name and the committee's standing into the Zone. Check-in protocol terms remain to be named before the scene closes.",
         "Shadow-slate communication channel established with Warden Coll — check-in protocol terms are the final piece before the scene closes.",
-        "Contamination start-date fixed: four mornings after the cold broke. Metallic smell, not silt. Edvar Crane identified at the mill — he is already treating his water, which means he knows something."
+        "Contamination start-date fixed: four mornings after the cold broke. Metallic smell, not silt. Edvar Crane identified at the mill — he is already treating his water, which means he knows something.",
+        "Crane confirms the water change began four mornings after the cold broke — not spring runoff, not ordinary silt. The fold in the upper reach is moving and has begun to finish what Aldric stopped."
       ],
       "aliases": [],
       "startedAt": "2026-07-22T20:49:54.189Z",
@@ -3825,24 +3866,27 @@
         "[d13] Opened the door without alarm — the look of a man who has been expecting someone, not necessarily these three.",
         "[d13] Read with Deathsense at the threshold — a slow ending in the chest, long underway, no urgency in it. His first words: 'You are not from the committee.' He is still holding the door. Deciding.",
         "[d13] Recognized the Waymarker by sight — made his decision without ceremony and opened the door to all four visitors, including Huginn.",
-        "[d13] Silas read the room with Order-Sense — the filtration setup, the vessel rings, the diversion channel, the sealed stone box. Crane watched him do it and said nothing. He is waiting to see what Silas makes of it."
+        "[d13] Silas read the room with Order-Sense — the filtration setup, the vessel rings, the diversion channel, the sealed stone box. Crane watched him do it and said nothing. He is waiting to see what Silas makes of it.",
+        "[d13] Named Aldric Weir plainly as the man who came to him twenty years ago. Explained his charge: watch the water, keep the record clean. Delivered Aldric's message — give the boy the record, and tell him the fold will not wait past his arrival."
       ],
       "knownFacts": [
-        "Opens the door to strangers without visible fear — suggests he may have been waiting for contact",
-        "Something ending in his chest — slow, the kind of thing that has been there a long time and has been accounted for",
         "He expected someone, but not from the committee — he has categories for different kinds of visitors",
         "The Waymarker's shape was enough — he recognized it without being told what it was",
         "Has been treating and diverting water at the mill for years — the stone channel is worn smooth",
         "Filtered water through cloth hung in the south window at some point — pegs still in the sill",
-        "Routes a portion of the mill's water intake to a sealed stone box in the east wall — separate from the main output"
+        "Routes a portion of the mill's water intake to a sealed stone box in the east wall — separate from the main output",
+        "Aldric Weir's name — Crane knows it and was given it directly",
+        "The structure in the upper reach is called 'the fold' — Aldric called it that; Crane would call it an array",
+        "Aldric asked him to watch and record, not to fix — the record is in the sealed stone box"
       ],
       "skillsObserved": [
-        "Letting a reader finish before speaking — composure under as"
+        "Letting a reader finish before speaking — composure under as",
+        "Delivering a twenty-year-held message without drama or self-"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Inside the mill ground floor — watching Silas complete his reading of the space; has not yet spoken since letting the party in.",
+      "statusNote": "Seated at the mill, record delivered — waiting to see what Silas does next with it.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -4729,7 +4773,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 586,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Huginn's shift at the drainage cut — a single deliberate adjustment on the pack frame, the kind it makes when it has registered something…",
@@ -6232,21 +6276,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 15.706947303186748,
-    "cerebral": 14.775426723588076,
-    "social": 12.748498100827108,
-    "generous": 4.347514581274271,
-    "cautious": 4.781430771704108,
-    "physical": 0.5903460957463399,
-    "risky": 0.5188292287901161,
-    "ruthless": 0.45891043424480715,
-    "carousing": 0.10525670280729549,
-    "amorous": 1.7794892645579679,
-    "patient": 0.6313665082422293,
-    "stealth": 0.0010555361078889208,
-    "devotion": 0.5575327849271418,
-    "craft": 0.8783659214974581,
-    "leadership": 0.8517104059203566
+    "strategic": 15.314273620607079,
+    "cerebral": 15.406041055498374,
+    "social": 12.42978564830643,
+    "generous": 4.238826716742414,
+    "cautious": 4.661895002411505,
+    "physical": 0.5755874433526814,
+    "risky": 0.5058584980703631,
+    "ruthless": 0.44743767338868695,
+    "carousing": 0.1026252852371131,
+    "amorous": 1.7350020329440186,
+    "patient": 0.6155823455361735,
+    "stealth": 0.0010291477051916978,
+    "devotion": 0.5435944653039632,
+    "craft": 0.8564067734600216,
+    "leadership": 0.8304176457723477
   },
   "aptitudes": [
     "strategist",
@@ -6254,7 +6298,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 758,
+  "actionCount": 759,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6644,8 +6688,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784892191620,
-  "rev": 1227,
+  "updatedAt": 1784892399614,
+  "rev": 1228,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8120,7 +8164,7 @@
           "entityId": "edvar-crane",
           "type": "npc",
           "birthWeight": 33,
-          "engagementScore": 9,
+          "engagementScore": 12,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -8133,6 +8177,14 @@
             "why": "Crane opened the door — he is the direct subject of the Second Thread quest and needs a stable, fully authored identity "
           },
           "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 13
+            },
+            {
+              "kind": "fact",
+              "day": 13
+            },
             {
               "kind": "interact",
               "day": 13
@@ -8547,12 +8599,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "f42",
-      "text": "The complete accountability chain laid out in full at the Fell Pell on World-day 18 evening — every witness present, every thread spoken, document roll intact. The question of what the truth is for re",
-      "day": 5,
-      "subjectId": null
-    },
-    {
       "id": "millbrook",
       "text": "The valley's water-crisis response is formally delegated: Calvar leads repair crews, Dara runs crew logistics, Mara runs resupply and communications, Aldric anchors the accounts. Pell and Silas travel",
       "day": 5,
@@ -8785,6 +8831,12 @@
       "text": "A message sent to Mara Wells via Hub runner on Day 13 afternoon — Stillwater's Trouble named as a staging refuge, labor and goods welcomed in exchange, and a direct question asking who Silas needs to speak to personally. Morning run delivery.",
       "day": 13,
       "subjectId": "mara-wells"
+    },
+    {
+      "id": "edvar-crane",
+      "text": "Edvar Crane was charged by Aldric Weir twenty years ago to watch the Crossing's water and keep a record in the sealed stone box at the mill — the record of the fold's approach. Aldric left a message for his son: give the boy the record, and tell him the fold will not wait past his arrival.",
+      "day": 13,
+      "subjectId": "edvar-crane"
     }
   ],
   "practice": {
@@ -9309,7 +9361,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 492,
+    "valley": 493,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9444,10 +9496,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T11:23:11.609Z",
+      "lastAt": "2026-07-24T11:26:39.607Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 6
+      "beats": 7
     }
   ],
   "company": [
@@ -9647,19 +9699,19 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 127,
-    "choices": 127,
+    "sceneSummary": 128,
+    "choices": 128,
     "characterDeltas": 51,
-    "scene": 127,
-    "npcUpdates": 111,
-    "factUpdates": 7,
+    "scene": 128,
+    "npcUpdates": 112,
+    "factUpdates": 8,
     "placeUpdates": 22,
-    "codexUpdates": 75,
-    "timeOps": 121,
+    "codexUpdates": 76,
+    "timeOps": 122,
     "imagePrompt": 3,
     "sceneEnded": 27,
     "itemUpdates": 2,
-    "questUpdates": 14,
+    "questUpdates": 15,
     "offer": 12,
     "moveTo": 10,
     "delegateOps": 1,
@@ -9670,7 +9722,7 @@
     "stageOps": 5,
     "generateRequest": 4
   },
-  "_opTurns": 127,
+  "_opTurns": 128,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

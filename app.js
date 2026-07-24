@@ -68,7 +68,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.242";
+const APP_VERSION = "1.8.243";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6273,10 +6273,13 @@ function renderGallery() {
 // separate shared-canon path). Family-sync only (a shared feed needs the shared repo).
 async function postTurnToFeed(turn) {
   if (!turn || !syncEnabled() || !character) return;
+  // the turn's own image, else the most recent moment/scene image in the gallery (a turn re-rendered via an
+  // aside can lose turn.momentArt, but the gallery keeps it) — so a post carries its picture when one exists.
+  const galImg = [...(character.gallery || [])].reverse().find(g => g && g.url && (g.kind === "moment" || g.kind === "scene"))?.url || null;
   const post = buildFeedPost({
     turn, character, playerKey: getPlayerKey(),
     worldDay: absoluteWorldDay(), worldDateLabel: worldDate().label,
-    rating: ratingCeilingNow(), at: Date.now()
+    rating: ratingCeilingNow(), image: turn.momentArt || galImg, at: Date.now()
   });
   if (!post) { renderPlay(turn, { aside: "Nothing to post from this beat." }); return; }
   const preview = smartClamp(post.narration, 160);
@@ -6294,7 +6297,7 @@ async function postTurnToFeed(turn) {
 // above your ceiling is softened, or hidden entirely — the same lens shared canon uses). ⛔ NOT canon: reading
 // the feed never changes your game. Pulls the one shared feed file; the "family" is everyone on the shared valley.
 async function renderFeed() {
-  chrome(`<div class="screen" style="max-width:640px"><h2>📮 The Family Feed</h2>
+  chrome(`<div class="screen" style="max-width:1000px"><h2>📮 The Family Feed</h2>
     <div class="hint">Moments the family chose to share — lensed to your rating. Nothing here is canon; it never touches your game.</div>
     <div id="feed-body" class="feed-body" style="margin-top:12px"><div class="insight">Loading the feed…</div></div>
     <button class="btn secondary" id="feed-back" style="margin-top:14px">Back</button></div>`);
@@ -6306,8 +6309,10 @@ async function renderFeed() {
     if (!posts.length) { body.innerHTML = `<div class="insight">No posts yet. Share a moment you love — tap 📮 Post to feed on a turn.</div>`; return; }
     body.innerHTML = posts.map(p => `<div class="feed-post${p.lensed ? " lensed" : ""}">
       <div class="feed-head"><strong>${esc(p.characterName || "someone")}</strong>${p.location ? ` · <span class="hint">${esc(CONTENT.locations[p.location]?.name || p.location)}</span>` : ""}${p.worldDateLabel ? ` · <span class="hint">${esc(p.worldDateLabel)}</span>` : ""}</div>
-      ${p.image ? `<img class="feed-img" src="${esc(p.image)}" alt="a shared moment" data-lightbox="feed" loading="lazy" onerror="this.style.display='none'">` : ""}
-      <div class="feed-text">${p.narration.split(/\n\n+/).map(renderProseHtml).join("")}</div></div>`).join("");
+      <div class="feed-row">
+        ${p.image ? `<img class="feed-img" src="${esc(p.image)}" alt="a shared moment" data-lightbox="feed" loading="lazy" onerror="this.style.display='none'">` : ""}
+        <div class="feed-text">${p.narration.split(/\n\n+/).map(renderProseHtml).join("")}</div>
+      </div></div>`).join("");
   } catch (e) {
     body.innerHTML = `<div class="insight">The feed couldn't load right now (${esc(e?.message || "sync error")}). Try again in a moment.</div>`;
   }

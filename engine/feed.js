@@ -17,14 +17,14 @@ import { smartClamp } from "./namematch.js";
 
 export const FEED_PATH = "world/feed.json"; // one shared file (sync is global — one valley = the family group)
 const FEED_CAP = 200;        // the shared file keeps the most recent N posts (scrapbook, not an archive)
-const POST_MAX_CHARS = 1200; // a post is a moment, not a chapter
+const POST_MAX_CHARS = 6000; // a whole turn's narration fits — the words are never cut off (a runaway is still bounded)
 
 /** SNG-168 §2: build a feed POST from a turn the player chose to share. Carries the narration (or a
  *  poster-trimmed excerpt), the turn's image, the world-date, and the provenance + RATING needed to lens it on
  *  the family reader's side (stamped from the poster's ceiling, mirroring how canon records stamp their rating).
  *  `kind`: "player" (a shared turn) or "world" (a world-tick of consequence). Pure — `at` is passed in (the
  *  caller supplies Date.now()). Returns null when there's nothing to post. */
-export function buildFeedPost({ turn, character, playerKey = null, worldDay = null, worldDateLabel = "", rating = null, excerpt = null, at = 0, kind = "player" } = {}) {
+export function buildFeedPost({ turn, character, playerKey = null, worldDay = null, worldDateLabel = "", rating = null, excerpt = null, image = null, at = 0, kind = "player" } = {}) {
   if (!turn || !character) return null;
   const text = smartClamp(String(excerpt || turn.narration || turn.text || "").trim(), POST_MAX_CHARS);
   if (!text) return null;
@@ -38,7 +38,7 @@ export function buildFeedPost({ turn, character, playerKey = null, worldDay = nu
     worldDay, worldDateLabel,
     rating,                                                                // the poster's ceiling at post time — the lens key
     narration: text,
-    image: turn.momentArt || turn.image || null,
+    image: image || turn.momentArt || turn.image || null, // caller may pass the best image (gallery fallback); else the turn's own
     postedAt: at
   };
 }

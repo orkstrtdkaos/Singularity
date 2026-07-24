@@ -7823,6 +7823,10 @@ await (async () => {
   const post = buildFeedPost({ turn: turn168, character: char168, playerKey: "player-b", worldDay: 14, worldDateLabel: "World-day 14", rating: "PG-13", at: 1000 });
   check("168 §2: buildFeedPost carries the narration, image, character, place, world-date + the poster's RATING (the lens key)", post && /braided light/.test(post.narration) && post.image === "data:img" && post.characterName === "Brooklyn" && post.rating === "PG-13" && post.worldDay === 14 && !!post.id);
   check("168 §2: an empty turn yields no post (nothing to share)", buildFeedPost({ turn: { narration: "" }, character: char168, at: 2 }) === null);
+  // Erik feedback: the words must NOT be cut off (a whole turn's narration fits), and an explicit image wins.
+  const longNarr = "He finds the design Pell has in him. ".repeat(60); // ~2200 chars — was truncated at 1200
+  check("168 §2 (fix): a whole turn's narration is NOT cut off (a long post carries in full)", buildFeedPost({ turn: { narration: longNarr }, character: char168, at: 3 }).narration.length > 2000);
+  check("168 §2 (fix): the caller's chosen image wins (gallery fallback when turn.momentArt is missing)", buildFeedPost({ turn: { narration: "x", momentArt: null }, character: char168, image: "data:gallery", at: 4 }).image === "data:gallery");
 
   // appendFeedPost: merge-safe append, idempotent, capped (the pushMergedFile callback body).
   let store = appendFeedPost(null, post);

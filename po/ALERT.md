@@ -19,8 +19,14 @@
 > fireEncounter stamps the place's dangerLevel onto a synthesized chase/hazard so it can be sized. Reuses the
 > existing [data-encact] handlers (no round-loop rework) — only presentation/placement change. Live-verified
 > both variants render with the real CSS.
-> **NEXT — Phase 2 (§6a) frame chaining:** FIGHT —flee→ CHASE —fail→ FIGHT/FAIL, as a data transition graph on
-> `FRAME_KINDS`. Then Phase 3 (§6b/§7a collapse/morph + degree bands), Phase 4 (§7b/§7c ward-denial +
+> **Phase 2 §6a chaining SYSTEM shipped (v1.8.251):** `frameTransition(kind,exitRole)` — fight+flee→chase,
+> chase+fail→fight; the frame surfaces the chain legibly (a fight's FLEE reads "→ it becomes The Chase"). ALSO
+> (Erik's "make sure"): the frame stays a LEGIBILITY LAYER — verified a freeform action during an encounter is
+> resolved against the stage by the GM (the exit buttons are shortcuts for the same path), and every frame now
+> shows a freeform cue so it never reads as buttons-only.
+> **NEXT — Phase 2 BEHAVIOR wiring:** actually start the chained encounter on flee (flee a fight → a real
+> GM-narrated chase → escape, or caught → back to a fight). Touches the core flee flow → its own careful slice on
+> the graph. Then Phase 3 (§6b/§7a collapse/morph + degree bands), Phase 4 (§7b/§7c ward-denial +
 > kit-trivialization — Aevi content-heavy).
 > Deferred to later phases: narrative-promotion (shouldFrame/PERILOUS), chaining (§6a), collapse/morph+degrees
 > (§6b/§7a), ward-denial + kit-trivialization (§7b/§7c).

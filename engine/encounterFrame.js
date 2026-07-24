@@ -33,6 +33,28 @@ export const FRAME_KINDS = {
   standoff: { icon: "🗣", title: "A Standoff",  win: "Win the exchange — bend their resolve.",          meterLabel: "Their resolve" },
 };
 
+// THE FRAME IS A LEGIBILITY LAYER, NOT A CLOSED MINI-GAME (Erik, 2026-07-24). The bounded thing and its three
+// exits are surfaced for CLARITY — but the real interaction stays what it always was: the GM offers options AND
+// the player can describe ANY move in the freefield, which is resolved AGAINST the current stage (a freeform
+// action runs through the same round path as the exit buttons — the buttons are just shortcuts) and the GM
+// narrates the outcome and the next step. This cue rides on every frame so that never reads as buttons-only.
+export const FRAME_FREEFORM_CUE = "Or describe your own move below — the exits are shortcuts; the GM resolves whatever you try, against the stage.";
+
+// SNG-230 §6a: FRAMES CHAIN. An exit is not always an END — for some kinds it TRANSITIONS into another frame,
+// its own three exits, its own stages. Fleeing a FIGHT doesn't teleport you away; it turns the encounter into a
+// CHASE (win the chase → you got away; fail it → back to the fight, or fail). "The transition graph is the
+// system." Authored as DATA so a new kind declares its own chains. null/absent = that exit just ends.
+export const FRAME_TRANSITIONS = {
+  fight: { flee: "chase" },   // break from a fight → you're being chased
+  chase: { fail: "fight" },   // caught → you have to fight (or fail outright if position was lost)
+};
+
+/** SNG-230 §6a: what a given exit does from a given kind — the next frame KIND to transition INTO, or null when
+ *  the exit simply ends the encounter (its normal outcome). Pure. */
+export function frameTransition(kind, exitRole) {
+  return FRAME_TRANSITIONS[kind]?.[exitRole] || null;
+}
+
 /** Which frame KIND an encounter is. def.type is the structural truth (duel/challenge/puzzle); flavor themes the
  *  challenge kinds (chase vs. hazard). Returns null for an encounter that gets no frame. Pure. */
 export function encounterKind(def, entry = null) {
@@ -100,11 +122,20 @@ export function frameExits(kind, def, state) {
   const fail = kind === "fight"
     ? { label: "Yield", action: "yield", means: "Give up — you're overcome." }
     : { label: null,    action: null,    means: "Lose the stages and it takes its toll." };
-  return [
+  const exits = [
     { role: "defeat", ...defeat },
     { role: "flee", ...flee },
     { role: "fail", ...fail },
   ];
+  // SNG-230 §6a: surface where an exit CHAINS (frames chain — fleeing a fight becomes a chase; a caught chase
+  // becomes a fight). The exit carries `chainTo` and its `means` names the next frame, so the player SEES the
+  // chain before choosing it. This is the legibility half of §6a; the behavior wiring (actually starting the
+  // chained encounter) is the next slice — the graph + this surface are what it builds on.
+  for (const ex of exits) {
+    const to = frameTransition(kind, ex.role);
+    if (to) { ex.chainTo = to; ex.means = `${ex.means} → it becomes ${FRAME_KINDS[to]?.title || to}.`; }
+  }
+  return exits;
 }
 
 /** SNG-230 Phase 1b (Erik's OQ1 = size by tier): how BIG a frame presents — a full "takeover" card that takes
@@ -136,6 +167,7 @@ export function frameModel(def, state = {}, entry = null) {
     winCondition: theme.win,
     meter: frameMeter(kind, def, state),
     exits: frameExits(kind, def, state),
+    freeform: FRAME_FREEFORM_CUE, // the frame is a legibility layer — freeform play + the GM stay the real interaction
     stage: staged
       ? { index: state?.stageIndex ?? 0, total: def?.stages?.length || 0, name: def?.stages?.[state?.stageIndex ?? 0]?.name || null }
       : null,

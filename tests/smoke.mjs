@@ -27,7 +27,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
-import { frameModel, encounterKind, frameExits, frameSize, FRAME_KINDS } from "../engine/encounterFrame.js";
+import { frameModel, encounterKind, frameExits, frameSize, frameTransition, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -7924,6 +7924,27 @@ await (async () => {
     /import \{ frameModel, frameSize \} from "\.\/engine\/encounterFrame\.js"/.test(appSrc230) && /const fm = frameModel\(d, e\.state/.test(appSrc230) && /class="enc-frame/.test(appSrc230));
   check("230 P1b: renderPlay routes takeover-vs-banner via frameSize; fireEncounter stamps the size signal (danger) on the def",
     /frameSize\(d, e\.state\) === "takeover"/.test(appSrc230) && /enc-frame-takeover/.test(appSrc230) && /offer\.def\.danger = dl/.test(appSrc230));
+
+  // the frame is a LEGIBILITY LAYER, not a closed mini-game (Erik): the freefield + the GM stay the real
+  // interaction — the model carries a cue and the render shows it, so the frame never reads as buttons-only.
+  const fmCue = frameModel(chaseDef, { stageIndex: 1 }, null);
+  check("230: every frame carries the freeform cue (the buttons are shortcuts; the GM resolves what you type against the stage)",
+    typeof fmCue.freeform === "string" && fmCue.freeform === FRAME_FREEFORM_CUE && /describe your own move/i.test(fmCue.freeform));
+  check("230: renderPlay renders the freeform cue in the frame (banner + takeover), keeping it a legibility layer",
+    /class="enc-frame-cue"/.test(appSrc230) && /fm\.freeform/.test(appSrc230));
+
+  // §6a: FRAMES CHAIN — the transition graph is the system. Fleeing a fight → a chase; failing that chase → a
+  // fight (or fail). An exit with no transition just ends. Pure data + function (the flee→chase WIRING is next).
+  check("230 §6a: frameTransition — fight+flee → chase, chase+fail → fight (the chaining graph)",
+    frameTransition("fight", "flee") === "chase" && frameTransition("chase", "fail") === "fight");
+  check("230 §6a: an exit with no chain just ends (hazard/flee, chase/flee → null)",
+    frameTransition("hazard", "flee") === null && frameTransition("chase", "flee") === null && frameTransition("puzzle", "defeat") === null);
+  // the chain is LEGIBLE in the frame — the exit names where it goes (play-wired via frameExits → frameModel)
+  const fightExits = frameExits("fight", {}, {});
+  check("230 §6a: a fight's FLEE exit is marked as chaining into a chase (chainTo + named in its meaning)",
+    fightExits[1].role === "flee" && fightExits[1].chainTo === "chase" && /becomes The Chase/i.test(fightExits[1].means));
+  const hazardExits = frameExits("hazard", { stages: [{}] }, {});
+  check("230 §6a: an unchained exit is not annotated (hazard flee has no chainTo)", !hazardExits[1].chainTo && !/it becomes/i.test(hazardExits[1].means));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

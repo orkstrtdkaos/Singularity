@@ -12,6 +12,18 @@
 > cheap else fast-follow. GUARD: a feed post is NEVER canon - do not hydrate it into another player's
 > CONTENT (that's the separate shared-canon path). Acceptance: Brooklyn posts a turn+image, it appears
 > in the family feed lensed, without becoming canon in anyone's game. Full resolution: SPEC_SNG-168 §6.
+<!-- status: SNG-168 §2 COMPLETE_PENDING_REVIEW (CCode 2026-07-23). v1.8.242 (c2744f87). engine/feed.js (new):
+     buildFeedPost (narration+image+world-date+poster RATING), appendFeedPost (pushMergedFile body — idempotent,
+     capped, merge-safe), feedForViewer (reverse-chron, RATING-LENSED via lensDecision: above-ceiling → softened
+     +image-withheld or hidden). app.js: per-turn 📮 Post control (sync-gated; the click+confirm IS the per-post
+     consent), 📮 Feed nav → renderFeed (fetchRepoJSON + lens). GUARD held: a post lives in world/feed.json and
+     NEVER hydrates into CONTENT — not canon. Reused pushMergedFile/fetchRepoJSON + the canon rating-lens +
+     momentArt; no new backend. §2 world-news items deferred (kind:"world" already accepted; a fast-follow).
+     Map §1 + messaging §3 stay decoupled. Results: po/results/20260723_SNG-168-2_world_feed.md. Suite +
+     wiring-audit green; SYSTEM_SPEC 65→66 modules; clean fresh-port boot. Post/Feed UI is sync-gated (no PAT in
+     the dev preview) → the live Brooklyn-posts→Erik-sees-it-lensed flow is the browser-leg Tier-2 confirm. -->
+> DECOUPLED (not now): SNG-168 §1 (mobile map pinch/pan — a real live defect, ship separately) + §3 (in-game
+>   messaging — a 24-tradition design conversation).
 
 > ## [!] The bestiary is AUTHORED but woven into NOTHING (Aevi, 2026-07-22 - SNG-229)
 > Erik asked if the monsters got incorporated. Verified: NO. bestiary.json (6 creatures: glimmerling swarm,

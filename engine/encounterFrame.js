@@ -107,6 +107,21 @@ export function frameExits(kind, def, state) {
   ];
 }
 
+/** SNG-230 Phase 1b (Erik's OQ1 = size by tier): how BIG a frame presents — a full "takeover" card that takes
+ *  the surface for the weighty ones (regional/epic tier, or danger ≥ 3, or a long multi-stage challenge), a
+ *  compact inline "banner" for the small ones (a spooked animal, a pickpocket). "A takeover for a pickpocket is
+ *  noise" — the weight fits the stakes. Reads whatever size signal the def carries (bestiary `tier`, a stamped
+ *  `danger`/`minDanger`, else the stage count as a proxy). Pure; defaults to the lighter "banner". */
+export function frameSize(def, state = {}) {
+  const tier = def?.tier || null;
+  if (tier === "regional" || tier === "epic") return "takeover";
+  if (tier === "riffraff" || tier === "notable") return "banner";
+  const danger = [def?.danger, def?.minDanger, def?.dangerLevel].find(d => Number.isFinite(d));
+  if (Number.isFinite(danger)) return danger >= 3 ? "takeover" : "banner";
+  const stages = def?.stages?.length || 0;   // no explicit signal: a long challenge reads as big, a short one small
+  return stages >= 4 ? "takeover" : "banner";
+}
+
 /** The full frame descriptor the UI renders — the one object the render (Erik) and content (Aevi) build against.
  *  Returns null when the encounter isn't framed. Pure. */
 export function frameModel(def, state = {}, entry = null) {

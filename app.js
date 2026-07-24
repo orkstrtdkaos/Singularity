@@ -64,12 +64,12 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
-import { frameModel } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — make a structured encounter OBVIOUS (kind + win-condition + the three exits)
+import { frameModel, frameSize } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — make a structured encounter OBVIOUS (kind + win-condition + the three exits); frameSize routes takeover-vs-banner by tier
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.249";
+const APP_VERSION = "1.8.250";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4481,6 +4481,12 @@ async function fireEncounter(entryOrFlavor, { dev = false, news = [] } = {}) {
   if (!entry) { if (dev) renderPlay(character.activeScene?.lastTurn || null, { aside: `No ${entryOrFlavor} encounter fits here.` }); return false; }
   const offer = buildOffer(entry, character, fullCatalog(), CONTENT.rules);
   if (offer.def) {
+    // SNG-230 Phase 1b: stamp the size signal so the frame can route takeover-vs-banner (Erik's size-by-tier).
+    // A bestiary def already carries tier/minDanger; a synthesized chase/hazard gets THIS place's danger, so a
+    // dangerous crossing in a dangerous land reads as "big" and takes the surface, a minor one stays a banner.
+    if (offer.def.danger == null && offer.def.minDanger == null && offer.def.tier == null) {
+      const dl = hereNow()?.dangerLevel; if (Number.isFinite(dl)) offer.def.danger = dl;
+    }
     character.customEncounters = character.customEncounters || {};
     character.customEncounters[offer.def.id] = offer.def;
     saveCharacter(character);
@@ -8037,20 +8043,24 @@ function renderPlay(turn, opts = {}) {
         for (const [ui, u] of puzzleUnlocks(d, character).entries()) btns += mk(`◈ ${esc(u.note.slice(0, 80))}`, "unlock", ` data-unlock="${ui}"`);
         btns += mk("Walk away", "walkAway");
       }
-      // SNG-230 Phase 1: the ENCOUNTER FRAME header — make the bounded thing OBVIOUS above the action buttons:
-      // what KIND it is, what winning MEANS, how far through you are, and the THREE EXITS (defeat/flee/fail) stated.
-      // Erik's core want ("you KNOW you're in a chase, you SEE the three ways out"). The full takeover panel
-      // (Erik's visual, ROUND-2) generalizes this; the header lands the legibility now. Skill-battle fights don't
-      // reach here (their own richer panel), so this frames the classic duel / challenge / puzzle.
+      // SNG-230: the ENCOUNTER FRAME — make the bounded thing OBVIOUS: what KIND it is, what winning MEANS, how
+      // far through you are, and the THREE EXITS (defeat/flee/fail) stated. Erik's core want ("you KNOW you're in
+      // a chase, you SEE the three ways out"). Skill-battle fights don't reach here (their own richer panel); this
+      // frames the classic duel / challenge / puzzle. Phase 1b (Erik's OQ1 = size by tier): a weighty encounter
+      // (regional/epic, danger ≥ 3, long challenge) presents as a TAKEOVER card that takes the surface with the
+      // action buttons inside it; a small one stays a compact BANNER above the buttons. Same frame, sized to stakes.
       const fm = frameModel(d, e.state, null);
-      const head = fm ? `<div class="enc-frame enc-frame-${fm.kind}">
-        <div class="enc-frame-top"><span class="enc-frame-title">${fm.icon} ${esc(fm.title)}</span><span class="enc-frame-kind">${esc(fm.kind)}</span></div>
-        <div class="enc-frame-win">${esc(fm.winCondition)}</div>
-        ${fm.meter?.total ? `<div class="enc-frame-meter" title="${esc(fm.meter.label)}"><div class="enc-frame-meter-fill" style="width:${fm.meter.pct}%"></div></div>
-        <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.done}/${fm.meter.total}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : ""}
-        <div class="enc-frame-exits">${fm.exits.map(x => `<span class="enc-exit enc-exit-${x.role}"><b>${x.role}</b> ${esc(x.means)}</span>`).join("")}</div>
-      </div>` : "";
-      return head + btns;
+      if (!fm) return btns;
+      const meterHtml = fm.meter?.total ? `<div class="enc-frame-meter" title="${esc(fm.meter.label)}"><div class="enc-frame-meter-fill" style="width:${fm.meter.pct}%"></div></div>
+        <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.done}/${fm.meter.total}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : "";
+      const exitsHtml = `<div class="enc-frame-exits">${fm.exits.map(x => `<span class="enc-exit enc-exit-${x.role}"><b>${x.role}</b> ${esc(x.means)}</span>`).join("")}</div>`;
+      const topHtml = `<div class="enc-frame-top"><span class="enc-frame-title">${fm.icon} ${esc(fm.title)}</span><span class="enc-frame-kind">${esc(fm.kind)}</span></div>
+        <div class="enc-frame-win">${esc(fm.winCondition)}</div>`;
+      if (frameSize(d, e.state) === "takeover") {
+        // the weighty encounter takes the surface — the buttons live INSIDE the frame (still the same [data-encact])
+        return `<div class="enc-frame enc-frame-takeover enc-frame-${fm.kind}">${topHtml}${meterHtml}${exitsHtml}<div class="enc-frame-btns">${btns}</div></div>`;
+      }
+      return `<div class="enc-frame enc-frame-${fm.kind}">${topHtml}${meterHtml}${exitsHtml}</div>${btns}`;
     })()}</div>`;
   }
   main += `</div>`;

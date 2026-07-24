@@ -27,7 +27,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
-import { frameModel, encounterKind, frameExits, FRAME_KINDS } from "../engine/encounterFrame.js";
+import { frameModel, encounterKind, frameExits, frameSize, FRAME_KINDS } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -7908,10 +7908,22 @@ await (async () => {
   // §Guard: an unframed (narrative) encounter yields no model
   check("230: an unframed encounter yields no frame model (null)", frameModel({ type: "narrative" }, {}, null) === null);
 
-  // WIRED into play (not a dead/test-only export): app.js imports frameModel and renders the header
+  // Phase 1b (OQ1 = size by tier): weighty → takeover, small → banner
+  check("230 P1b: frameSize routes by tier — regional/epic → takeover, riffraff/notable → banner",
+    frameSize({ tier: "epic" }) === "takeover" && frameSize({ tier: "regional" }) === "takeover" &&
+    frameSize({ tier: "riffraff" }) === "banner" && frameSize({ tier: "notable" }) === "banner");
+  check("230 P1b: frameSize routes by danger when no tier — danger ≥ 3 → takeover, else banner",
+    frameSize({ danger: 3 }) === "takeover" && frameSize({ danger: 4 }) === "takeover" && frameSize({ danger: 2 }) === "banner" && frameSize({ minDanger: 1 }) === "banner");
+  check("230 P1b: with no size signal, a long (4-stage) challenge is a takeover; a short one a banner (safe default)",
+    frameSize({ stages: [0, 0, 0, 0] }) === "takeover" && frameSize({ stages: [0, 0] }) === "banner" && frameSize({}) === "banner");
+
+  // WIRED into play (not a dead/test-only export): app.js imports frameModel/frameSize, renders the header, and
+  // routes takeover-vs-banner; the size signal is stamped onto the def at fire time.
   const appSrc230 = readFileSync(join(root, "app.js"), "utf8");
-  check("230: frameModel is WIRED into renderPlay (imported + the enc-frame header rendered), not a dead export",
-    /import \{ frameModel \} from "\.\/engine\/encounterFrame\.js"/.test(appSrc230) && /const fm = frameModel\(d, e\.state/.test(appSrc230) && /class="enc-frame/.test(appSrc230));
+  check("230: frameModel + frameSize are WIRED into renderPlay (imported + header rendered + size-routed), not dead exports",
+    /import \{ frameModel, frameSize \} from "\.\/engine\/encounterFrame\.js"/.test(appSrc230) && /const fm = frameModel\(d, e\.state/.test(appSrc230) && /class="enc-frame/.test(appSrc230));
+  check("230 P1b: renderPlay routes takeover-vs-banner via frameSize; fireEncounter stamps the size signal (danger) on the def",
+    /frameSize\(d, e\.state\) === "takeover"/.test(appSrc230) && /enc-frame-takeover/.test(appSrc230) && /offer\.def\.danger = dl/.test(appSrc230));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## [DONE] SNG-223 aesthetic guide authored + SNG-225 reconciled to your region-lock drop (Aevi, 2026-07-22)
+> - **SNG-223 per-tradition visual aesthetics** (Erik wanted this; NOT 227) — DONE, staged at
+>   po/staged_content/tradition_visual_aesthetics.json. All 24 traditions, each with palette+materials+light+mood
+>   built ON TOP of its canon `aesthetic` field in traditions.json (carried for reference, never replaced). It's
+>   the STYLE wrapper for ensureImage('ability') (SNG-223) so a craft's image reads as its tradition
+>   (Ashwarden = greys/ash/the-mercy-of-stopping; Wright = scaffolds/half-built/becoming). CCode: prepend the
+>   craft's tradition block to the craft's own description in the image prompt.
+> - **SNG-225 reconciled** — Erik had me verify I didn't overwrite his call (with CCode, commit 8942da73) to
+>   DROP the region-lock. Confirmed: I did NOT overwrite it — my 4 §5 low-danger stakes are regions:["*"] and
+>   COMPLEMENT the drop (bottom-of-scale texture), no clamp reimposed. Corrected the now-stale §5 framing in the
+>   spec (selective-re-tag is superseded; the lock is gone wholesale — cleaner). Nothing to revert.
+> - **NOTE for Erik:** CCode shipped SNG-227 (energy economy) despite Erik's "not right now" — it's LIVE
+>   (commit 811b972a). Flagging in case you wanted to hold it.
+
 > ## [DONE] Aevi content debt cleared from today's specs (Aevi, 2026-07-22)
 > Authored the content I owed from shipped specs:
 > - **SNG-225 §5 encounter re-tag** — DONE at origin (random_encounters.json, +4 low-danger minD-0 stakes:

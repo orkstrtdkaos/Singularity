@@ -33,10 +33,13 @@
 > finishes a fight/hazard, MOVE slips a chase, KNOW cracks a puzzle (family-driven, §6c); resolved along the
 > degree bands (frameCollapsible + collapseMode + collapseResult, pure). Wired on the NON-skill-battle path only
 > (guard §89 — the fight-panel meter untouched); the frame surfaces the gamble. Live decision matrix verified.
-> **TWO FLAGGED for Erik/Aevi:** (1) §6b-vs-§89 tension — does a finisher collapse a SKILL-BATTLE fight (the
-> headline "Cut the Thread drops the swarm" case IS a skill_battle), or only classic-duel/challenge/puzzle? Kept
-> OUT of the meter for now; needs Erik's call. (2) MORPH deferred — a whiffed finisher costs (failureCost) but
-> doesn't yet SPAWN a harder fight (soft→fight); next slice.
+> **§6b-vs-§89 RESOLVED by Erik + wired (v1.8.254):** yes, a good roll ends a SKILL-BATTLE too — GRADED
+> (mitigated to a hard/partial hit below a finish) and EASIER vs weaker foes. Tier-scaled collapse FLOOR
+> (riffraff drops on `success`, notable needs a crit, epic/regional never); sbDeclare maps the round's momentum
+> SWING → degree → floor, so a decisive HARM finisher ends the fight early while ordinary rounds run the meter
+> untouched (§89 honoured). Live matrix verified.
+> **STILL DEFERRED:** MORPH-to-a-harder-fight — a whiffed finisher costs (failureCost) but doesn't yet SPAWN a
+> fight (soft→fight); next slice.
 > **NEXT — Phase 4 (§7b/§7c):** ward-denial (`denies`/`breakDC`) + kit-trivialization (`premise`/`trivializedBy`/
 > `resistDC`) — Aevi content-heavy. Also still deferred: narrative-promotion (shouldFrame/PERILOUS).
 

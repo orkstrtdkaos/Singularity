@@ -1751,27 +1751,26 @@
         "player": "Knock on the annex door and present the Letter of Introduction — name the Zone Remediation index and Warden Coll's committee authority plainly.",
         "summary": "Silas presented Coll's letter at the Ossian annex and was admitted to the deep index.",
         "narration": "You knock twice. The sound is flat and businesslike against the old wood. A pause — the kind that says someone is in the middle of something, not absent — and then the door opens.\n\nThe woman who opens it is perhaps fifty, with a ledger tucked under one arm and ink on two fingers of her right hand. She looks at you the way an archivist looks at an unscheduled visitor: not unfriendly, but not particularly pleased either. Her gaze moves to Huginn, settles there for one held breath, and then returns to your face without comment. That is a woman who has worked near enough to the March to know what a grey-black corvid sitting too calm on a man's shoulder usually means.\n\nYou produce the Letter of Introduction and hold it out. You name two things: the Zone Remediation index, and Warden Coll's committee authority. Her expression shifts. It does not warm exactly, but it focuses — the way a lens focuses, narrowing to a point. She takes the letter, reads it through once, folds it back on its crease, and hands it to you. 'Zone Remediation is the deep index,' she says. 'Classified series. The committee name opens it.' She steps back from the door and holds it. 'Come in. Close it behind you.'\n\nHuginn makes a single sound — low, considering — as you cross the threshold."
+      },
+      {
+        "player": "Thank you... for an archivist, I would have though that you would have a good memory... perhaps I'm just not a memorable guy?",
+        "summary": "Ossian deflects the self-deprecation plainly and opens Crane's Zone Remediation commission file on the desk.",
+        "narration": "Ossian sets the letter on her desk without looking for a place to put it — she has the hands of someone who never sets things down unless she means to. She looks at you for a moment after you say it. Then she says, 'You arrived in a shadow pool, with a corvid that smells of the March.' She moves toward the far shelving without hurrying. 'I remember the memorable things.' Huginn makes no sound at all. The dry refusal of the sound is itself a comment. Ossian runs a finger along the spines on the second shelf down, not reading them so much as feeling for the one she wants by position alone. She pulls a thick bound register, charcoal-grey cover, and sets it flat on the desk beside the lamp. 'Zone Remediation — classified series. Crane, Edvar.' She opens to an indexed page and turns it toward you. 'Commission issued under fold-work authority. Spatial bonding, disputed corridor.' She taps one line. 'And here — closed notation, post-Accord.' She steps back and folds her hands. The rest, her posture says, is yours to read."
       }
     ],
     "lastTurn": {
-      "narration": "You knock twice. The sound is flat and businesslike against the old wood. A pause — the kind that says someone is in the middle of something, not absent — and then the door opens.\n\nThe woman who opens it is perhaps fifty, with a ledger tucked under one arm and ink on two fingers of her right hand. She looks at you the way an archivist looks at an unscheduled visitor: not unfriendly, but not particularly pleased either. Her gaze moves to Huginn, settles there for one held breath, and then returns to your face without comment. That is a woman who has worked near enough to the March to know what a grey-black corvid sitting too calm on a man's shoulder usually means.\n\nYou produce the Letter of Introduction and hold it out. You name two things: the Zone Remediation index, and Warden Coll's committee authority. Her expression shifts. It does not warm exactly, but it focuses — the way a lens focuses, narrowing to a point. She takes the letter, reads it through once, folds it back on its crease, and hands it to you. 'Zone Remediation is the deep index,' she says. 'Classified series. The committee name opens it.' She steps back from the door and holds it. 'Come in. Close it behind you.'\n\nHuginn makes a single sound — low, considering — as you cross the threshold.",
-      "sceneSummary": "Silas presented Coll's letter at the Ossian annex and was admitted to the deep index.",
+      "narration": "Ossian sets the letter on her desk without looking for a place to put it — she has the hands of someone who never sets things down unless she means to. She looks at you for a moment after you say it. Then she says, 'You arrived in a shadow pool, with a corvid that smells of the March.' She moves toward the far shelving without hurrying. 'I remember the memorable things.' Huginn makes no sound at all. The dry refusal of the sound is itself a comment. Ossian runs a finger along the spines on the second shelf down, not reading them so much as feeling for the one she wants by position alone. She pulls a thick bound register, charcoal-grey cover, and sets it flat on the desk beside the lamp. 'Zone Remediation — classified series. Crane, Edvar.' She opens to an indexed page and turns it toward you. 'Commission issued under fold-work authority. Spatial bonding, disputed corridor.' She taps one line. 'And here — closed notation, post-Accord.' She steps back and folds her hands. The rest, her posture says, is yours to read.",
+      "sceneSummary": "Ossian deflects the self-deprecation plainly and opens Crane's Zone Remediation commission file on the desk.",
       "choices": [
         {
-          "label": "State your need plainly: Edvar Crane, Wright's commission, Zone Remediation — his files, whatever commission records survived the Accord.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Before you ask about Crane, let Order-Sense read the annex's filing architecture — understand what kind of index you're about to navigate.",
+          "label": "Read the commission file carefully — use Order-Sense to see the whole design Crane's work was part of, not just what the page says.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "axes": {
+            "chaos_order": 0.4,
+            "death_life": -0.1
+          },
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
@@ -1780,127 +1779,114 @@
           "trivial": false
         },
         {
-          "label": "Ask the archivist directly: is Crane's commission file intact, or was it redacted under the Accord?",
+          "label": "Read the file as written — dates, names, the closed notation, what the post-Accord entry actually says.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Ossian directly — what does the closed notation mean in practice, and is there a living contact listed anywhere in the file.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask whether anyone else has been in the Zone Remediation index recently — or asked after Crane's name.",
+          "label": "Let Huginn look at the file — hold the page open and watch what the corvid does with it.",
           "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "Interior of the Ossian annex, North Gate District, Hub — a narrow older building, entered. Lamplight from a desk at the far end. Shelving along both walls, ledgers spine-out. The afternoon street is behind the closed door.",
+        "setting": "Interior of the Ossian annex, North Gate District, Hub — narrow older building, lamplight from the archivist's desk at the far end. Shelving along both walls, ledgers spine-out. The afternoon street is behind the closed door.",
         "npcsPresent": [
           {
-            "name": "Ossian (annex archivist)",
-            "state": "standing between the door and her desk, letter returned, waiting to hear what the visitor actually needs"
+            "name": "Ossian",
+            "state": "standing back from the desk, hands folded, having opened the Zone Remediation file to Crane's indexed entry — waiting for Silas to read it"
           },
           {
             "name": "Huginn",
-            "state": "settled on Silas's shoulder, watching the archivist with the same unhurried eye"
+            "state": "on Silas's shoulder, watching the open file with the same unhurried eye it gives most things"
           }
         ],
         "objects": [
-          "Letter of Introduction — Warden Coll (returned to inventory)",
-          "shelved ledgers along both walls",
-          "archivist's desk with lamp",
-          "closed annex door behind Silas"
+          "Zone Remediation classified register — charcoal-grey cover, open to Crane's commission entry on the desk",
+          "Letter of Introduction — Warden Coll (set on Ossian's desk)",
+          "Archivist's lamp (lit, afternoon)",
+          "Shelved ledgers along both walls",
+          "Closed annex door behind Silas"
         ],
         "threads": [
-          "Zone Remediation index — Crane's commission files held here, committee name opens the deep index",
+          "Crane's commission file open — closed notation post-Accord visible, fold-work authority noted, full contents unread",
           "Pell moving toward Coliseum gate and forge district",
           "Veth moving through Hub plaza asking after Crane and resources"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "ossian-annex",
+          "op": "update",
+          "npcId": "ossian",
           "name": "Ossian",
-          "role": "Annex archivist, North Gate Registry — keeper of the deep Zone Remediation index",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "Perhaps fifty, ink on two fingers, a ledger always under one arm — the focused neutrality of someone who has spent decades deciding what gets filed and what gets lost.",
-          "note": "Admitted Silas on Coll's committee authority without argument; her gaze on Huginn held for one breath and returned to Silas's face without comment — she knows what the bird means.",
+          "note": "Deflected Silas's self-deprecation with exact precision — named what was actually memorable (shadow pool, March-corvid) — and opened the Zone Remediation classified file to Crane's commission entry without ceremony.",
           "learned": [
-            "Zone Remediation is the deep index — classified series; the committee name opens it",
-            "She is not surprised by an Ashwarden-touched corvid, which says something about her history near the March"
+            "She distinguishes memorable by specific detail, not by social impression — the March-corvid and the shadow pool registered; the man carrying them, less so"
           ],
           "skillsObserved": [
-            "reading a letter's authority and acting on it without ceremony"
+            "locating a classified series by spine-feel alone, without checking the index"
           ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "At her annex desk, having admitted Silas — waiting to hear the specific request"
+          "statusNote": "At her desk in the annex, file open, waiting for Silas to read or ask",
+          "relationshipDelta": 0
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "Silas Weir admitted to the annex interior on Day 13 afternoon on Warden Coll's committee authority — the Zone Remediation deep index is accessible.",
-          "subPlace": {
-            "name": "Ossian Annex Interior",
-            "parent": "North Gate Registry Ossian Office",
-            "note": "Narrow older building — shelving along both walls, archivist's desk with lamp at the far end. Deep index housed here.",
-            "visited": true
-          }
-        }
-      ],
-      "moveTo": {
-        "location": "North Gate Registry Ossian Office",
-        "why": "crossed the threshold into the annex interior"
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short walk and a brief exchange at the door"
-      },
-      "codexUpdates": [
-        {
-          "topic": "ossian-annex",
-          "label": "The Ossian Annex",
-          "kind": "place",
-          "fact": "A narrow building two streets north of the registry — green copper shutter, classified Zone Remediation deep index inside. The committee name opens it. The archivist knows what an Ashwarden-touched bird on a man's shoulder means, and did not remark on it.",
-          "links": [
-            "the-second-thread",
-            "find-the-engineer",
-            "the-edge-district-ledger",
-            "coll"
-          ]
-        }
-      ]
+        "why": "a brief exchange and file retrieval — a few minutes at most"
+      }
     },
     "sceneState": {
-      "setting": "Interior of the Ossian annex, North Gate District, Hub — a narrow older building, entered. Lamplight from a desk at the far end. Shelving along both walls, ledgers spine-out. The afternoon street is behind the closed door.",
+      "setting": "Interior of the Ossian annex, North Gate District, Hub — narrow older building, lamplight from the archivist's desk at the far end. Shelving along both walls, ledgers spine-out. The afternoon street is behind the closed door.",
       "npcsPresent": [
         {
-          "name": "Ossian (annex archivist)",
-          "state": "standing between the door and her desk, letter returned, waiting to hear what the visitor actually needs"
+          "name": "Ossian",
+          "state": "standing back from the desk, hands folded, having opened the Zone Remediation file to Crane's indexed entry — waiting fo"
         },
         {
           "name": "Huginn",
-          "state": "settled on Silas's shoulder, watching the archivist with the same unhurried eye"
+          "state": "on Silas's shoulder, watching the open file with the same unhurried eye it gives most things"
         }
       ],
       "objects": [
-        "Letter of Introduction — Warden Coll (returned to inventory)",
-        "shelved ledgers along both walls",
-        "archivist's desk with lamp",
-        "closed annex door behind Silas"
+        "Zone Remediation classified register — charcoal-grey cover, open to Crane's comm",
+        "Letter of Introduction — Warden Coll (set on Ossian's desk)",
+        "Archivist's lamp (lit, afternoon)",
+        "Shelved ledgers along both walls",
+        "Closed annex door behind Silas"
       ],
       "threads": [
-        "Zone Remediation index — Crane's commission files held here, committee name opens the deep index",
+        "Crane's commission file open — closed notation post-Accord visible, fold-work authority noted, full contents unread",
         "Pell moving toward Coliseum gate and forge district",
         "Veth moving through Hub plaza asking after Crane and resources"
       ]
@@ -3630,26 +3616,28 @@
         "[d13] Silas declared himself the message and named the water crisis as resolvable — she read it in one breath and wrote Warden Coll a calling-slip without argument",
         "[d13] Answered Silas's question about Coll's office light plainly and without ceremony — north window, lamp-lit by afternoon, stays until the flag drops — then returned her attention to her folio",
         "[d13] Silas departed her office without ceremony — the calling-slip in hand, no explanation given for the strange exit",
-        "[d13] Admitted Silas on Coll's committee authority without argument; her gaze on Huginn held for one breath and returned to Silas's face without comment — she knows what the bird means."
+        "[d13] Admitted Silas on Coll's committee authority without argument; her gaze on Huginn held for one breath and returned to Silas's face without comment — she knows what the bird means.",
+        "[d13] Deflected Silas's self-deprecation with exact precision — named what was actually memorable (shadow pool, March-corvid) — and opened the Zone Remediation classified file to Crane's commission entry without ceremony."
       ],
       "knownFacts": [
-        "She watches post volume by the registry flag's movement from her chair",
         "The path to her is brevity and evidence — she has already read the morning run and knows Silas's name",
         "Silas Weir can act on the water crisis, not merely report on it — she read this as distinct from the usual petitioners",
         "Warden Coll is the Council Member who can act; third floor, north-facing room, stays until the flag drops",
         "Warden Coll's office is north-facing with one wide window — lamp-lit by afternoon; a lamp on the desk's left corner and a hall sconce outside his door",
         "Coll stays until the registry flag drops",
         "Zone Remediation is the deep index — classified series; the committee name opens it",
-        "She is not surprised by an Ashwarden-touched corvid, which says something about her history near the March"
+        "She is not surprised by an Ashwarden-touched corvid, which says something about her history near the March",
+        "She distinguishes memorable by specific detail, not by social impression — the March-corvid and the shadow pool registered; the man carrying them, less so"
       ],
       "skillsObserved": [
         "writing a calling-slip under pressure without ceremony — fou",
-        "reading a letter's authority and acting on it without ceremo"
+        "reading a letter's authority and acting on it without ceremo",
+        "locating a classified series by spine-feel alone, without ch"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At her annex desk, having admitted Silas — waiting to hear the specific request",
+      "statusNote": "At her desk in the annex, file open, waiting for Silas to read or ask",
       "lastSeen": {
         "locationId": "gen-north-gate-registry-ossian-office",
         "day": 13
@@ -4567,11 +4555,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T00:12:25.449Z",
+    "lastSharedReadAt": "2026-07-24T01:50:20.919Z",
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
-    "lastGenCount": 576,
-    "turnsSinceOffer": 5,
+    "lastGenCount": 577,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Father's Sealed Letter — the post is claimed, the hollow is warded, the technique is real. The ground here is as right as ground gets. The…",
@@ -6072,21 +6060,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.398668228622885,
-    "cerebral": 14.931213803265713,
-    "social": 13.672526741105868,
-    "generous": 3.345903487185656,
-    "cautious": 5.195366871198693,
-    "physical": 0.9795224211845951,
-    "risky": 0.8608591909519394,
-    "ruthless": 0.7614398789070577,
-    "carousing": 0.17464551916679402,
-    "amorous": 1.7586901344850019,
-    "patient": 1.0475848917514015,
-    "stealth": 0.0017513815903872352,
-    "devotion": 0.9250774542536807,
-    "craft": 0.2933629636028435,
-    "leadership": 1.4131870185412236
+    "strategic": 17.938701522907312,
+    "cerebral": 14.55793345818407,
+    "social": 14.33071357257822,
+    "generous": 3.2622559000060147,
+    "cautious": 5.065482699418725,
+    "physical": 0.9550343606549802,
+    "risky": 0.8393377111781409,
+    "ruthless": 0.7424038819343812,
+    "carousing": 0.17027938118762417,
+    "amorous": 1.7147228811228767,
+    "patient": 1.0213952694576165,
+    "stealth": 0.0017075970506275542,
+    "devotion": 0.9019505178973387,
+    "craft": 0.2860288895127724,
+    "leadership": 1.377857343077693
   },
   "aptitudes": [
     "strategist",
@@ -6095,7 +6083,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 738,
+  "actionCount": 739,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6485,8 +6473,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784857746565,
-  "rev": 1190,
+  "updatedAt": 1784858283961,
+  "rev": 1195,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7824,7 +7812,9 @@
           "stubbed": false,
           "romanceEligible": true,
           "lastAttentionDay": 13,
-          "depthTier": "established"
+          "depthTier": "established",
+          "promotedWorldDay": 24,
+          "canonTier": "variant"
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -7972,7 +7962,8 @@
         "map": {
           "x": 409.5058087856015,
           "y": 397.4185998280231
-        }
+        },
+        "dangerLevel": 2
       },
       "gen-center": {
         "id": "gen-center",
@@ -8002,7 +7993,8 @@
         "map": {
           "x": 483.2482839825773,
           "y": 379.03253576244833
-        }
+        },
+        "dangerLevel": 2
       },
       "gen-the-ent-grove": {
         "id": "gen-the-ent-grove",
@@ -8032,7 +8024,8 @@
         "map": {
           "x": 439.5117053691912,
           "y": 333.07074694842095
-        }
+        },
+        "dangerLevel": 2
       },
       "gen-ashwarden-march-road": {
         "id": "gen-ashwarden-march-road",
@@ -8069,7 +8062,8 @@
         "map": {
           "x": 336.03134186125055,
           "y": 342.0516176980347
-        }
+        },
+        "dangerLevel": 2
       },
       "gen-stillwater-s-trouble": {
         "id": "gen-stillwater-s-trouble",
@@ -8108,7 +8102,8 @@
           "x": 297.8908972987956,
           "y": 384.4108727502462
         },
-        "supersededBy": "the_old_warden_post"
+        "supersededBy": "the_old_warden_post",
+        "dangerLevel": 2
       },
       "gen-north-gate-registry-ossian-office": {
         "id": "gen-north-gate-registry-ossian-office",
@@ -8151,7 +8146,8 @@
         "map": {
           "x": 284.42733036328025,
           "y": 347.5471840270921
-        }
+        },
+        "dangerLevel": 2
       },
       "gen-hub-north-gate-district-street": {
         "id": "gen-hub-north-gate-district-street",
@@ -8188,7 +8184,8 @@
         "map": {
           "x": 235.28658607124052,
           "y": 327.6930345760488
-        }
+        },
+        "dangerLevel": 2
       }
     },
     "arc": {}
@@ -8777,7 +8774,8 @@
         ],
         "discoveredFrom": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
         "shared": true,
-        "firstFinder": true
+        "firstFinder": true,
+        "presented": true
       }
     },
     "the-held-place": {
@@ -8958,7 +8956,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 90
+    "the_center": 91
   },
   "foreclosed": [
     "rootkin",
@@ -9083,10 +9081,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T01:49:06.562Z",
+      "lastAt": "2026-07-24T01:58:03.958Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 72
+      "beats": 73
     }
   ],
   "company": [
@@ -9292,15 +9290,15 @@
     "scene": 109,
     "npcUpdates": 95,
     "factUpdates": 7,
-    "placeUpdates": 21,
-    "codexUpdates": 67,
+    "placeUpdates": 20,
+    "codexUpdates": 66,
     "timeOps": 103,
     "imagePrompt": 3,
     "sceneEnded": 24,
     "itemUpdates": 2,
     "questUpdates": 11,
     "offer": 10,
-    "moveTo": 10,
+    "moveTo": 9,
     "delegateOps": 1,
     "deeds": 1,
     "standingOps": 1,

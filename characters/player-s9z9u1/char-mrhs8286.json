@@ -1804,197 +1804,11 @@
       ],
       "worldDay": 24,
       "at": "2026-07-24T18:26:21.114Z"
-    }
+    },
+    "The party steps south from the waystation at dawn — Pell, Veth, Huginn, and Silas on the road toward the Disputed Zone."
   ],
   "currentLocationId": "millbrook",
-  "activeScene": {
-    "locationId": "millbrook",
-    "turns": [
-      {
-        "player": "Set a Boundary-Stone at the waystation before leaving — mark this as a known staging point on the road back",
-        "summary": "Silas seats a Boundary-Stone at the waystation threshold — a known staging point on the road south, marked and held.",
-        "narration": "You crouch at the waystation's south threshold and press the Boundary-Stone into the packed earth between two fieldstones — a small disc of worked chalk, no ceremony. The mark goes in quietly. You feel the perimeter seat, the way you always do: a settled weight at the edge of your attention, like a door you have confirmed is latched. The ward will not stop a determined person. It will stop weather, animals, and the casual drift of things that have no business being here. For a road staging point, that is exactly what it needs to be.\n\nHuginn drops from the waystation's eave to the gate post, looks at the stone, looks at you. One eye. Then back at the road south.\n\nPell shoulders Memory's strap and steps out past you, boots already muddy from the morning. She does not ask if you are ready. She knows you are.\n\n*You feel it settle into you — a new steadiness. (Level 24: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
-      }
-    ],
-    "lastTurn": {
-      "narration": "You crouch at the waystation's south threshold and press the Boundary-Stone into the packed earth between two fieldstones — a small disc of worked chalk, no ceremony. The mark goes in quietly. You feel the perimeter seat, the way you always do: a settled weight at the edge of your attention, like a door you have confirmed is latched. The ward will not stop a determined person. It will stop weather, animals, and the casual drift of things that have no business being here. For a road staging point, that is exactly what it needs to be.\n\nHuginn drops from the waystation's eave to the gate post, looks at the stone, looks at you. One eye. Then back at the road south.\n\nPell shoulders Memory's strap and steps out past you, boots already muddy from the morning. She does not ask if you are ready. She knows you are.\n\n*You feel it settle into you — a new steadiness. (Level 24: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Silas seats a Boundary-Stone at the waystation threshold — a known staging point on the road south, marked and held.",
-      "choices": [
-        {
-          "label": "Read the waystation's condition — Order-Sense across the whole structure before leaving, to know what you are anchoring yourself to",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Move out — head south toward the Disputed Zone with the party, road first",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Veth what to expect at the Zone's edge — she knows the March Road south, and the approach matters",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Check the Father's Sealed Fold before the road — you are not yet at the source, but the waystation is as close to the fold's country as you have stood",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "scene": {
-        "setting": "The waystation south of Millbrook — a dry-stone shelter with a gate post and packed-earth threshold, early spring morning, low light, road running south into open country. The Zone's country is ahead; Millbrook is behind.",
-        "npcsPresent": [
-          {
-            "name": "Pell",
-            "state": "Stepped past the threshold, Memory on her back, boots in the mud, facing south."
-          },
-          {
-            "name": "Huginn",
-            "state": "Perched on the gate post, watching the southern road."
-          }
-        ],
-        "objects": [
-          "Boundary-Stone mark set in the earth between two fieldstones at the south threshold",
-          "The party's full kit — packs shouldered, Pell carrying Memory"
-        ],
-        "threads": [
-          "Road south to the Disputed Zone — the destination is ahead",
-          "Father's Sealed Fold — to be opened at the source, not yet"
-        ]
-      },
-      "placeUpdates": [
-        {
-          "note": "A Boundary-Stone is seated at the south threshold between two fieldstones — the waystation is now a known, warded staging point on the road south. Ward holds against weather, animals, and casual intrusion.",
-          "flag": {
-            "boundary_stone_seated": true
-          },
-          "subPlace": {
-            "name": "Waygate",
-            "parent": "Millbrook",
-            "note": "Boundary-Stone seated at south threshold by Silas Weir at dawn, Day 14. Ward active.",
-            "visited": true
-          }
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "A Boundary-Stone ward is seated at the waystation south of Millbrook — the threshold is now a marked, warded staging point on the road to the Disputed Zone. Ward holds against weather, animals, and casual intrusion.",
-          "subjectId": null
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-second-thread",
-          "note": "Party departs Millbrook at dawn — staged and moving south toward the Zone and the half-made fold."
-        }
-      ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Stepped south without ceremony — Memory shouldered, road-ready.",
-          "statusNote": "On the road south with the party, Memory on her back, heading for the Zone."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "waygate",
-          "label": "Waygate (south of Millbrook)",
-          "kind": "place",
-          "entityId": null,
-          "fact": "A Boundary-Stone ward now seats at the south threshold — a marked staging point on the road to the Disputed Zone, warded against weather, animals, and casual intrusion.",
-          "links": [
-            "the-second-thread",
-            "millbrook",
-            "what-the-water-remembers"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief working at the threshold — ward seated and the party ready to move."
-      },
-      "deeds": [],
-      "ledgerEvents": [],
-      "standingOps": [],
-      "sceneEnded": false
-    },
-    "sceneState": {
-      "setting": "The waystation south of Millbrook — a dry-stone shelter with a gate post and packed-earth threshold, early spring morning, low light, road running south into open country. The Zone's country is ahead; Millbrook is behind.",
-      "npcsPresent": [
-        {
-          "name": "Pell",
-          "state": "Stepped past the threshold, Memory on her back, boots in the mud, facing south."
-        },
-        {
-          "name": "Huginn",
-          "state": "Perched on the gate post, watching the southern road."
-        }
-      ],
-      "objects": [
-        "Boundary-Stone mark set in the earth between two fieldstones at the south thresh",
-        "The party's full kit — packs shouldered, Pell carrying Memory"
-      ],
-      "threads": [
-        "Road south to the Disputed Zone — the destination is ahead",
-        "Father's Sealed Fold — to be opened at the source, not yet"
-      ]
-    }
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 14,
@@ -3013,7 +2827,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Named the shadow-summon 'clean' — her highest register of approval for finished work. The night is done in her accounting.",
         "[d14] Witnessed the shadow-twin dual presence and named it plainly: 'That's the thing.' Her highest register of recognition for a design doing exactly what it was made to do.",
         "[d14] Wielded the shadow-twin through four paces and reported its feel plainly — waiting-light, and yours the whole time she held it. Not a complaint; a reading.",
         "[d14] Held the shadow-twin through the caller-link test — named the change in weight plainly ('Something moved'). Steady and accurate as always.",
@@ -3022,7 +2835,8 @@
         "[d14] At the forge door at dawn — packed and ready, Memory in hand, watching Silas for the direction.",
         "[d14] Arrived at Silas's side without being asked. Leaning on the doorframe, Memory in hand, listening.",
         "[d14] Stepped out of Mara's store ahead of Silas — already ready, Memory on her back. Walking south without ceremony.",
-        "[d14] Stepped south without ceremony — Memory shouldered, road-ready."
+        "[d14] Stepped south without ceremony — Memory shouldered, road-ready.",
+        "[d14] Stepped past the threshold without ceremony — Memory shouldered, road-ready beside Silas."
       ],
       "knownFacts": [
         "The Shielding Word is not a thread on the blade but the condition of the conjuring — seated once, inherited by every subsequent call of the shadow-spear.",
@@ -3043,7 +2857,7 @@
         "accurate tactile reporting of a working's feel under hands-o"
       ],
       "status": "active",
-      "statusNote": "On the road south with the party, Memory on her back, heading for the Zone.",
+      "statusNote": "On the road south with the party, Memory on her back, heading toward the Zone.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -4115,7 +3929,6 @@
     "millbrook": {
       "visits": 5,
       "notes": [
-        "[d5] The forge has been renamed the Fell Pell on World-day 18 evening — named aloud by Silas Weir at the opening of the gathering, received by Pell and the assembled group.",
         "[d5] The Fell Pell gathering on World-day 18 evening produced a formally delegated crisis-response structure — Calvar (repair lead), Dara (logistics), Mara (supply/comms/document delivery), Aldric (account",
         "[d5] The fellowship of the Fell was sealed at the Fell Pell on World-day 18 evening with a partial deathwork closing — 'Thus begins the fellowship of the Fell.' The gathering is complete. Seven members nam",
         "[d5] The brigandine and short sword — Pell's father's gear — pulled from the chest under the second bench on World-day 18 evening. Both sound and ready. The chest is open.",
@@ -4126,7 +3939,8 @@
         "[d6] Silas and Pell arrived at the waygate south of Millbrook on World-day 19 late morning — the threshold is the first sparring ground on the road south.",
         "[d14] Memory's shadow-spear completed and sealed at dawn on Day 14 — Weirmark drawn, Shielding Word spoken, shadow-duplicate sealed and ready. The forge's night work is finished.",
         "[d14] Dawn planning session held here — Silas, Pell, Veth, and Mara assembled to decide who goes into the Disputed Zone and who holds the Millbrook thread.",
-        "[d14] A Boundary-Stone is seated at the south threshold between two fieldstones — the waystation is now a known, warded staging point on the road south. Ward holds against weather, animals, and casual intrusion."
+        "[d14] A Boundary-Stone is seated at the south threshold between two fieldstones — the waystation is now a known, warded staging point on the road south. Ward holds against weather, animals, and casual intrusion.",
+        "[d14] Party departed the waystation south threshold at dawn on Day 14 — Boundary-Stone seated, road south engaged."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -4225,7 +4039,10 @@
         "chaos_order",
         "death_life"
       ],
-      "lastVisit": 14
+      "lastVisit": 14,
+      "_containmentNotes": [
+        "\"Road South — First Stretch\" was placed in gen-waygate (the fiction named it), not millbrook"
+      ]
     },
     "radiant_plateau_edge": {
       "visits": 2,
@@ -4504,6 +4321,13 @@
           "day": 13,
           "visited": true,
           "note": "Session complete — shadow models faded, blueprints rolled and packed, stone box empty and standing open in the east wall. Crane preparing to depart before morning."
+        },
+        "road-south-first-stretch": {
+          "name": "Road South — First Stretch",
+          "parentId": "gen-waygate",
+          "day": 14,
+          "visited": true,
+          "note": "The packed-earth road running south from the waystation into the narrowing valley, frost still in the ground, the Zone's interference country visible ahead as a quality in the air."
         }
       },
       "lastVisit": 13
@@ -5010,7 +4834,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 594,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Huginn shifts on the crossbeam — the first movement it has made since the party entered — and its eye settles on Crane with the same…",
@@ -6598,21 +6422,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.26021249481872,
-    "cerebral": 14.284396535988582,
-    "social": 9.83160216294962,
-    "generous": 3.6145279673020485,
-    "cautious": 4.202790331167817,
-    "physical": 0.17073905155269709,
-    "risky": 0.966706849473058,
-    "ruthless": 0.13272541794578388,
-    "carousing": 0.030442192700811405,
-    "amorous": 5.220658001121573,
-    "patient": 1.1826029164521406,
-    "stealth": 0.0003052806400163222,
-    "devotion": 0.8992471786619854,
-    "craft": 4.231289339928845,
-    "leadership": 2.285173024359595
+    "strategic": 20.72870718244825,
+    "cerebral": 13.927286622588868,
+    "social": 9.58581210887588,
+    "generous": 3.524164768119497,
+    "cautious": 4.097720572888622,
+    "physical": 0.16647057526387965,
+    "risky": 0.9425391782362315,
+    "ruthless": 0.1294072824971393,
+    "carousing": 0.02968113788329112,
+    "amorous": 5.0901415510935335,
+    "patient": 1.153037843540837,
+    "stealth": 0.00029764862401591416,
+    "devotion": 0.8767659991954357,
+    "craft": 4.125507106430624,
+    "leadership": 2.2280436987506054
   },
   "aptitudes": [
     "strategist",
@@ -6620,7 +6444,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 807,
+  "actionCount": 808,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -7010,8 +6834,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784917988235,
-  "rev": 1312,
+  "updatedAt": 1784918195474,
+  "rev": 1313,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9929,7 +9753,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 547,
+    "valley": 548,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10065,10 +9889,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T18:33:08.232Z",
+      "lastAt": "2026-07-24T18:36:35.473Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 60
+      "beats": 61
     }
   ],
   "company": [
@@ -10279,21 +10103,21 @@
     "gen-mara-wells-store": "https://image.pollinations.ai/prompt/Mara%20Wells%20Store%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Mara%20Wells%20Store.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=13548&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 177,
-    "choices": 177,
-    "characterDeltas": 68,
-    "scene": 177,
-    "npcUpdates": 161,
+    "sceneSummary": 178,
+    "choices": 178,
+    "characterDeltas": 69,
+    "scene": 178,
+    "npcUpdates": 162,
     "factUpdates": 13,
-    "placeUpdates": 30,
+    "placeUpdates": 31,
     "codexUpdates": 102,
-    "timeOps": 171,
+    "timeOps": 172,
     "imagePrompt": 3,
-    "sceneEnded": 39,
+    "sceneEnded": 40,
     "itemUpdates": 5,
     "questUpdates": 24,
     "offer": 16,
-    "moveTo": 13,
+    "moveTo": 14,
     "delegateOps": 3,
     "deeds": 2,
     "standingOps": 1,
@@ -10304,7 +10128,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 177,
+  "_opTurns": 178,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

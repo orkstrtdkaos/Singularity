@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 24,
-  "xp": 2308,
+  "xp": 2313,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -141,7 +141,7 @@
     "chaos_order": 0.27522164166579416,
     "mechanical_spiritual": 0.25513542055105926,
     "concrete_abstract": -0.03496367597441142,
-    "death_life": -0.1786535397673887,
+    "death_life": -0.18472086277901928,
     "emotional_logical": 0.008330843749999983,
     "falsehood_truth": 0.31248916266257776,
     "demonic_angelic": 0.013499999999999998,
@@ -152,7 +152,7 @@
   "maxHealth": 145,
   "health": 145,
   "maxEnergy": 215,
-  "energy": 212,
+  "energy": 208,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1830,114 +1830,82 @@
         "player": "Have Gweth move behind you and summon Memory's shadow twin into your hand - a beast is about to attack you out of the shadows.",
         "summary": "Silas signals Gweth behind him and calls Memory's shadow-twin to hand at the fork — something moves in the mist south of the dead oak.",
         "narration": "You say it low and clear, not raising your voice past what Gweth needs to hear. \"Behind me. Now.\"\n\nShe reads the tone and moves without argument — three quick steps back and to your left, crook still across her forearms, and then she is behind your shoulder and you have the road in front of you.\n\nYou open your right hand and say Memory's name quietly into the air. Not loudly. The shadow-twin answers without ceremony — the spear drawing itself from the dark between your feet and the mist in a single unhurried pull, settling into your grip with the weight of ash and iron, the runes along the fuller catching no light because there is none to catch. Conserved. Steady. The call cost little and the weapon is here.\n\nHuginn has not moved. He is watching the tree-line south of the fork, feathers still flat, and that is answer enough — whatever is in the mist is still ending nothing, which means it is not committed yet. You have a moment. Memory is in your hand and Gweth is at your back and the road is yours to hold."
+      },
+      {
+        "player": "Read the threat with Deathsense — let it tell you how close this thing is to acting, and what it is",
+        "summary": "Deathsense reads the mist — not a threat, but an old doe with two young, stopped and watching. Gweth names her.",
+        "narration": "The death-sense opens quietly, the way it always does — not a rush, but a settling, like a held breath let out slowly.\n\nWhat it finds in the mist is not close to dying. That is the first thing. Whatever is south of the fork is not a creature at the edge of an ending. It is healthy, its death a distant thing, and it knows exactly where you are. The second thing: it is large. Not boar-large. Larger. The death-shape it carries is old — not sick, not wounded — just the accumulated weight of years on a body that has survived by being careful. It stopped moving when you raised Memory's shadow-twin. It has been still for a full breath now.\n\nThe third thing, and the one that makes you let the shadow-twin drop an inch in your grip: it is not alone. Two more death-shapes, smaller, further back in the mist. Young. Following the large one's lead, which means she is a mother, and she stopped because you showed iron.\n\nHuginn makes one sound — dry, brief, unhurried. Not alarm.\n\nGweth Callow speaks from just behind your left shoulder, her voice level and very quiet. \"That will be Brist,\" she says. \"The old grey doe. She beds in the thicket at the south fork every melt-season.\" She pauses a moment. \"She is reading you right now.\""
       }
     ],
     "lastTurn": {
-      "narration": "You say it low and clear, not raising your voice past what Gweth needs to hear. \"Behind me. Now.\"\n\nShe reads the tone and moves without argument — three quick steps back and to your left, crook still across her forearms, and then she is behind your shoulder and you have the road in front of you.\n\nYou open your right hand and say Memory's name quietly into the air. Not loudly. The shadow-twin answers without ceremony — the spear drawing itself from the dark between your feet and the mist in a single unhurried pull, settling into your grip with the weight of ash and iron, the runes along the fuller catching no light because there is none to catch. Conserved. Steady. The call cost little and the weapon is here.\n\nHuginn has not moved. He is watching the tree-line south of the fork, feathers still flat, and that is answer enough — whatever is in the mist is still ending nothing, which means it is not committed yet. You have a moment. Memory is in your hand and Gweth is at your back and the road is yours to hold.",
-      "sceneSummary": "Silas signals Gweth behind him and calls Memory's shadow-twin to hand at the fork — something moves in the mist south of the dead oak.",
+      "narration": "The death-sense opens quietly, the way it always does — not a rush, but a settling, like a held breath let out slowly.\n\nWhat it finds in the mist is not close to dying. That is the first thing. Whatever is south of the fork is not a creature at the edge of an ending. It is healthy, its death a distant thing, and it knows exactly where you are. The second thing: it is large. Not boar-large. Larger. The death-shape it carries is old — not sick, not wounded — just the accumulated weight of years on a body that has survived by being careful. It stopped moving when you raised Memory's shadow-twin. It has been still for a full breath now.\n\nThe third thing, and the one that makes you let the shadow-twin drop an inch in your grip: it is not alone. Two more death-shapes, smaller, further back in the mist. Young. Following the large one's lead, which means she is a mother, and she stopped because you showed iron.\n\nHuginn makes one sound — dry, brief, unhurried. Not alarm.\n\nGweth Callow speaks from just behind your left shoulder, her voice level and very quiet. \"That will be Brist,\" she says. \"The old grey doe. She beds in the thicket at the south fork every melt-season.\" She pauses a moment. \"She is reading you right now.\"",
+      "sceneSummary": "Deathsense reads the mist — not a threat, but an old doe with two young, stopped and watching. Gweth names her.",
       "choices": [
         {
-          "label": "Read the threat with Deathsense — let it tell you how close this thing is to acting, and what it is",
+          "label": "Hold still — lower Memory's shadow-twin, hands visible, and wait for the doe to make her own choice",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
+            "careful"
           ],
-          "abilityId": "deathsense",
+          "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Read the whole design of this stretch of road with Order-Sense — where the threat is, where it came from, and what it is part of",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.2
-          },
+          "label": "Signal Veth and Pell to angle wide left — open a clear line south so the doe can take her fawns out of your path without feeling cornered",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
+            "careful",
+            "help"
           ],
-          "abilityId": "order_sense",
+          "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask Gweth plainly what she knows — she was here before dawn and saw something",
+          "label": "Ask Gweth plainly what brought her to the fork before dawn — she was waiting here before the light, and it was not for a deer",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "negotiate"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Hold the road and wait — Memory in hand, Gweth guarded, and let whatever is in the mist commit first",
+          "label": "Keep Memory ready and walk the party past at a measured pace — a doe with fawns is only dangerous if pressed, and you have road to cover",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.1
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "guard",
-            "defend",
+            "travel",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -1,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -2
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "gweth-callow",
-          "name": "Gweth Callow",
-          "role": "Shepherd of the South March",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Moved behind Silas without argument on a plain command — reads urgency and trusts it.",
-          "status": "active",
-          "statusNote": "Behind Silas at the fork, crook in hands, watching the mist south of the dead oak."
-        }
-      ],
       "scene": {
-        "setting": "The March Road south of Millbrook, at the fork marked by the split dead oak — early dawn, mist thick, frozen mud at rut-edges. Memory's shadow-twin is now in Silas's right hand. Gweth Callow stands close behind his left shoulder.",
+        "setting": "The March Road south of Millbrook, at the fork marked by the split dead oak — early dawn, mist thick, frozen mud at rut-edges. Memory's shadow-twin is in Silas's right hand, held lower now. Gweth Callow stands close behind his left shoulder.",
         "npcsPresent": [
           {
             "name": "Gweth Callow",
-            "state": "Behind Silas's left shoulder, crook across her forearms, watching the mist to the south without speaking."
+            "state": "Behind Silas's left shoulder, crook across her forearms, voice just dropped to quiet — she named the doe."
           },
           {
             "name": "Pell Ran Marsh",
@@ -1949,36 +1917,47 @@
           },
           {
             "name": "Huginn",
-            "state": "On Silas's right shoulder, feathers flat, watching the tree-line south of the fork — not moving."
+            "state": "On Silas's right shoulder, feathers still flat, one dry note given — watching the mist, settled."
           }
         ],
         "objects": [
-          "Memory's shadow-twin — in Silas's right hand, runes dark, steady",
-          "Split dead oak at the fork — standing half up, fallen half on the verge",
+          "Memory's shadow-twin — in Silas's right hand, runes dark, held lower",
+          "Split dead oak at the fork — standing half upright, fallen half on the verge",
           "Left branch: old March road into the Zone proper",
           "Right branch: valley-floor route bending east",
           "Faint mineral-cast fog to the south",
-          "Gweth's crook — long, resting across her forearms"
+          "Gweth's crook — long, resting across her forearms",
+          "Somewhere in the mist: an old grey doe and two young, stopped and watching"
         ],
         "threads": [
-          "Something in the mist south of the dead oak — uncommitted, not yet acting",
-          "Gweth's purpose at the fork still unstated",
-          "Huginn is watching the tree-line and has not spoken"
+          "The doe and her two young are stopped in the mist south of the fork — reading the party, not yet moving",
+          "Gweth's purpose at the fork still unstated — she arrived before dawn and it was not for a deer"
         ]
       },
-      "factUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "gweth-callow",
+          "name": "Gweth Callow",
+          "note": "Named the old grey doe in the mist — Brist, a regular at the south fork thicket each melt-season. Spoke low and level, no alarm in her voice.",
+          "learned": [
+            "Knows the south fork's regular animals by name and habit — Brist the old grey doe beds in the thicket here every melt-season"
+          ],
+          "statusNote": "At the south fork with the party at dawn — crook across her forearms, watching the mist, purpose at the fork still unstated."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.1,
-        "why": "a quick exchange and a short repositioning at the fork"
+        "why": "A brief pause at the fork — one held breath, one exchange of words"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The March Road south of Millbrook, at the fork marked by the split dead oak — early dawn, mist thick, frozen mud at rut-edges. Memory's shadow-twin is now in Silas's right hand. Gweth Callow stands close behind his left shoulder.",
+      "setting": "The March Road south of Millbrook, at the fork marked by the split dead oak — early dawn, mist thick, frozen mud at rut-edges. Memory's shadow-twin is in Silas's right hand, held lower now. Gweth Callow stands close behind his left shoulder.",
       "npcsPresent": [
         {
           "name": "Gweth Callow",
-          "state": "Behind Silas's left shoulder, crook across her forearms, watching the mist to the south without speaking."
+          "state": "Behind Silas's left shoulder, crook across her forearms, voice just dropped to quiet — she named the doe."
         },
         {
           "name": "Pell Ran Marsh",
@@ -1990,21 +1969,21 @@
         },
         {
           "name": "Huginn",
-          "state": "On Silas's right shoulder, feathers flat, watching the tree-line south of the fork — not moving."
+          "state": "On Silas's right shoulder, feathers still flat, one dry note given — watching the mist, settled."
         }
       ],
       "objects": [
-        "Memory's shadow-twin — in Silas's right hand, runes dark, steady",
-        "Split dead oak at the fork — standing half up, fallen half on the verge",
+        "Memory's shadow-twin — in Silas's right hand, runes dark, held lower",
+        "Split dead oak at the fork — standing half upright, fallen half on the verge",
         "Left branch: old March road into the Zone proper",
         "Right branch: valley-floor route bending east",
         "Faint mineral-cast fog to the south",
-        "Gweth's crook — long, resting across her forearms"
+        "Gweth's crook — long, resting across her forearms",
+        "Somewhere in the mist: an old grey doe and two young, stopped and watching"
       ],
       "threads": [
-        "Something in the mist south of the dead oak — uncommitted, not yet acting",
-        "Gweth's purpose at the fork still unstated",
-        "Huginn is watching the tree-line and has not spoken"
+        "The doe and her two young are stopped in the mist south of the fork — reading the party, not yet moving",
+        "Gweth's purpose at the fork still unstated — she arrived before dawn and it was not for a deer"
       ]
     }
   },
@@ -4089,18 +4068,20 @@
       "history": [
         "[d13] Named the coming rain precisely, recognized Silas as the Warden who named the hollow, let the party through without ceremony or price.",
         "[d14] Waited at the fork before first light. Named Silas's party from Millbrook without being told. Spoke first.",
-        "[d14] Moved behind Silas without argument on a plain command — reads urgency and trusts it."
+        "[d14] Moved behind Silas without argument on a plain command — reads urgency and trusts it.",
+        "[d14] Named the old grey doe in the mist — Brist, a regular at the south fork thicket each melt-season. Spoke low and level, no alarm in her voice."
       ],
       "knownFacts": [
         "Word of Stillwater's Trouble and the Warden's name has reached at least the March Road's shepherd circuit",
         "Heard the party would be coming south before the cold broke",
-        "Has been watching this fork since before first light"
+        "Has been watching this fork since before first light",
+        "Knows the south fork's regular animals by name and habit — Brist the old grey doe beds in the thicket here every melt-season"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Behind Silas at the fork, crook in hands, watching the mist south of the dead oak.",
+      "statusNote": "At the south fork with the party at dawn — crook across her forearms, watching the mist, purpose at the fork still unstated.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -5037,7 +5018,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 595,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The shadow-found settling basin — a detail none of them drew, surfaced by the craft itself",
@@ -6628,21 +6609,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.138221583681993,
-    "cerebral": 12.908636174458579,
-    "social": 8.88469982010013,
-    "generous": 3.266405154376257,
-    "cautious": 5.72363572911219,
-    "physical": 0.15429481334496997,
-    "risky": 0.8736012736530471,
-    "ruthless": 0.11994235297574694,
-    "carousing": 0.027510240907796028,
-    "amorous": 4.717845416708082,
-    "patient": 1.068703935015608,
-    "stealth": 0.0002758784176250002,
-    "devotion": 0.8126387860355321,
-    "craft": 3.8237649382243464,
-    "leadership": 2.0650831900966744
+    "strategic": 22.584766044089942,
+    "cerebral": 13.585920270097114,
+    "social": 8.662582324597626,
+    "generous": 3.1847450255168503,
+    "cautious": 5.580544835884385,
+    "physical": 0.1504374430113457,
+    "risky": 0.8517612418117209,
+    "ruthless": 0.11694379415135327,
+    "carousing": 0.026822484885101125,
+    "amorous": 4.59989928129038,
+    "patient": 1.0419863366402178,
+    "stealth": 0.00026898145718437516,
+    "devotion": 0.7923228163846437,
+    "craft": 3.728170814768738,
+    "leadership": 2.0134561103442574
   },
   "aptitudes": [
     "strategist",
@@ -6650,7 +6631,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 811,
+  "actionCount": 812,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -7040,8 +7021,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784919725181,
-  "rev": 1327,
+  "updatedAt": 1784919809095,
+  "rev": 1328,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9474,7 +9455,7 @@
       "lightsense": 2,
       "order_sense": 83,
       "palework": 30,
-      "deathsense": 34,
+      "deathsense": 35,
       "shadowstep": 22,
       "the-attended-end": 39,
       "wildcraft": 6,
@@ -9997,7 +9978,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 552,
+    "valley": 553,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10133,10 +10114,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T19:02:05.179Z",
+      "lastAt": "2026-07-24T19:03:29.094Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 65
+      "beats": 66
     }
   ],
   "company": [
@@ -10347,17 +10328,17 @@
     "gen-mara-wells-store": "https://image.pollinations.ai/prompt/Mara%20Wells%20Store%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Mara%20Wells%20Store.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=13548&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 181,
-    "choices": 181,
-    "characterDeltas": 69,
-    "scene": 181,
-    "npcUpdates": 165,
+    "sceneSummary": 182,
+    "choices": 182,
+    "characterDeltas": 70,
+    "scene": 182,
+    "npcUpdates": 166,
     "factUpdates": 13,
     "placeUpdates": 30,
     "codexUpdates": 104,
-    "timeOps": 175,
+    "timeOps": 176,
     "imagePrompt": 3,
-    "sceneEnded": 41,
+    "sceneEnded": 42,
     "itemUpdates": 5,
     "questUpdates": 24,
     "offer": 17,
@@ -10372,7 +10353,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 181,
+  "_opTurns": 182,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

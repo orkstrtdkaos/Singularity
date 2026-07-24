@@ -607,6 +607,84 @@
         "birthWeight": 2,
         "rivalId": "tessvel-cairn"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "warden-coll",
+      "name": "Warden Coll",
+      "role": "Hub Council Member — water and infrastructure portfolio; the official who can act when acting is still possible",
+      "homeLocation": "the_center",
+      "communityId": "council.northgate",
+      "personality": {
+        "warmth": 0.2,
+        "trust": 0.3,
+        "candor": 0.6,
+        "patience": 0.35
+      },
+      "spectrum": {
+        "body_mind": -0.3,
+        "emotional_logical": -0.5,
+        "concrete_abstract": -0.7,
+        "falsehood_truth": 0.4
+      },
+      "voiceHints": "Economical to the point of curtness — the man does not perform busyness, he is actually busy. Asks what you want before you have finished sitting down. Speaks in quantities and timelines: not 'the pipe is failing' but 'we lose forty percent flow by midsummer if the east culvert goes unpatched.' Warms slightly, not visibly, when the problem brought to him is real. Has no patience for preamble but considerable patience for a hard fact stated plainly. Will not be flattered. Will not be alarmed before he has the numbers. If Ossian sent you, he will not say it means anything — but he will read the calling-slip before he says anything else.",
+      "knowledge": [
+        "The full infrastructure map of the Hub's water system — not the public version, the one with the problem sections annotated in his own hand",
+        "Which repairs have been deferred for how many seasons and why, and what that deferral has cost in compounding risk",
+        "The political geometry of the Council well enough to know which votes he can call and which he cannot, and how to move without losing the ones he needs",
+        "Ossian's professional judgment well enough that her calling-slip carries weight he would not give a personal introduction",
+        "Early-spring thaw load — how much stress the melt season puts on aging infrastructure and exactly how little time there is before the window for intervention closes"
+      ],
+      "wants": "To hold the system together long enough that the next Warden inherits something workable. Not glory. Not gratitude. A functioning culvert network and a reserve fund that isn't a fiction.",
+      "fears": "That the Council will deliberate past the point where deliberation can fix anything — and that when the failure comes, it will be the people at the lowest pipes who drown first.",
+      "reactsToReputation": {
+        "competent": "grants more time and more candor than he grants anyone",
+        "time-waster": "ends the meeting without ending it — keeps working while you talk until you understand you are done",
+        "political": "becomes formally polite and shares nothing of consequence",
+        "referred_by_ossian": "reads first, judges after — she has not sent him noise before"
+      },
+      "appearance": "A broad-shouldered man in his late fifties, gone thick through the middle the way engineers do — not soft, just load-bearing. Hair cut close, iron-grey, the same way it has been cut for twenty years. Ink on the heel of his left hand from a map he was tracing when you knocked. Heavy wool coat hung on the back of the door; he works in shirtsleeves even in early spring because the brick hall holds the cold and he does not notice anymore. A north-facing room: the light is flat and good for reading documents. His desk is covered in papers arranged in a system that looks like chaos and is not. He looks up from them at Silas with the expression of a man calculating whether this interruption will cost him ten minutes or an afternoon.",
+      "people": "human",
+      "domains": {
+        "primary": "syllogist",
+        "secondary": "figurist",
+        "tertiary": "somatic"
+      },
+      "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Coll reasons by load and consequence — syllogist in practice, figurist in how he maps systems, somatic in the residual physical instinct of a man who spent his first decade in the field before he moved behind a desk. Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+      "functions": [
+        "reveal",
+        "bind",
+        "move"
+      ],
+      "functionsNote": "reveal — holds the true state of the infrastructure that public records obscure; bind — the authority to commit Council resources when he chooses to use it; move — the political leverage to unblock action that lower officials cannot. Scene need: the player requires someone who can convert information into institutional motion. Coll is that conversion point.",
+      "peopleSource": "generated",
+      "domainsSource": "generated",
+      "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20man%20in%20his%20late%20fifties%2C%20gone%20thick%20through%20the%20middle%20the%20way%20engineers%20do%20%E2%80%94%20not%20soft%2C%20just%20load-bearing.%20Hair%20cut%20close%2C%20iron-grey%2C%20the%20same%20way%20it%20has%20been%20cut%20for%20twenty%20years.%20%2C%20character%20portrait%2C%20named%20Warden%20Coll%2C%20Hub%20Council%20Member%20%E2%80%94%20water%20and%20infrastructure%20portfolio%3B%20the%20official%20who%20can%20act%20when%20acting%20is%20sti%2C%20Economical%20to%20the%20point%20of%20curtness%20%E2%80%94%20the%20man%20does%20not%20perform%20busyness%2C%20he%20is%20actually%20busy.%20Asks%20w%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8876&nologo=true",
+      "history": "Coll came to the infrastructure portfolio the way most people come to unglamorous work: nobody else wanted it badly enough to fight him for it. He had spent eleven years before his Council seat in the field survey corps, walking pipe routes in mud-season, taking depth readings in culverts that hadn't been inspected since before he was born. He wrote the annotated map himself over the course of…",
+      "relationships": "Ossian is the only professional referral he treats as a direct extension of his own judgment. He has met enough surveyors and engineers to know which ones write reports that confirm what the client wants to hear and which ones will put an uncomfortable finding in plain language and stand behind it. Ossian is the latter. When her calling-slip comes through his office he reads it the same day…",
+      "_canon": {
+        "entityId": "warden-coll",
+        "type": "npc",
+        "weight": 37,
+        "rating": "R+",
+        "tier": "variant",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "gen-north-gate-registry-ossian-office",
+          "day": 13,
+          "worldDay": null,
+          "hint": "Warden Coll — a Hub Council Member who handles water and infrastructure decisions, third floor, north-facing room, brick",
+          "why": "Ossian named him as the Council Member who can act on the water crisis — Silas is about to walk into his office with her"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 24,
+        "birthWeight": 32,
+        "rivalId": "warden-coll"
+      }
     }
   ]
 }

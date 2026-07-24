@@ -128,7 +128,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.12600676927878546,
+    "spectrumId": -0.11970643081484618,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.25620126500365004,
     "mechanical_spiritual": 0.25513542055105926,
@@ -1777,68 +1777,74 @@
         "player": "Tell her plainly - I am the message. She know's this.  I need to speak to a Council Member who can act - The water crisis is worsening and I can resolve it.",
         "summary": "Silas declares himself the message — Ossian, persuaded, writes him a calling-slip and names Warden Coll on the third floor as the Council Member who can act.",
         "narration": "You give Ossian one sentence.\n\n\"I am the message,\" you say. \"You already know that. I need to speak to a Council Member who can act — the water crisis is worsening and I can resolve it.\"\n\nOssian does not blink. She holds the doorframe for exactly one breath, reading you the way she reads her incoming slips — not for feeling, but for sequence. Then she steps back fully and opens the door wide.\n\n\"Warden Coll,\" she says, not to you but to the room, already moving to her desk. She picks up a clean slip and writes four words on it in a quick, practiced hand. \"He sits third floor, north-facing, and he does not take callers without a slip from this office.\" She folds it once and holds it out. \"He will see you. He will not like being seen, but that is his problem and not yours.\" She nods once toward the hall — east-facing stairs, third floor. \"He is there now. He stays until the flag drops.\""
+      },
+      {
+        "player": "Ossian - thank you. Now, tell me please, does Warden Coll have window?  I need to understand how the light falls in his office.",
+        "summary": "Silas asks Ossian about Warden Coll's office light; she answers plainly — north-facing, one window, lamp-lit by afternoon, stays until the flag drops.",
+        "narration": "Ossian pauses with her hand still extended, the calling-slip between two fingers. She looks at you the way she looked at the incoming slips — briefly, assessing whether the question belongs to the sequence or beside it.\n\n\"North-facing,\" she says. \"One window. Wide enough to read by, not wide enough to let in much afternoon light.\" She sets the slip on the edge of the desk rather than pulling it back. \"By this hour the room runs by lamp. He keeps one on the left corner of the desk and the hall sconce stays lit outside his door.\" A short pause. \"The flag drops when the light fails. He will be there until then.\"\n\nHuginn shifts on the window ledge outside, settling its weight from foot to foot. The registry flag moves in the early-spring wind. Ossian's attention has already returned to the half-finished folio, though her hand stays near the calling-slip — waiting for you to take it."
       }
     ],
     "lastTurn": {
-      "narration": "You give Ossian one sentence.\n\n\"I am the message,\" you say. \"You already know that. I need to speak to a Council Member who can act — the water crisis is worsening and I can resolve it.\"\n\nOssian does not blink. She holds the doorframe for exactly one breath, reading you the way she reads her incoming slips — not for feeling, but for sequence. Then she steps back fully and opens the door wide.\n\n\"Warden Coll,\" she says, not to you but to the room, already moving to her desk. She picks up a clean slip and writes four words on it in a quick, practiced hand. \"He sits third floor, north-facing, and he does not take callers without a slip from this office.\" She folds it once and holds it out. \"He will see you. He will not like being seen, but that is his problem and not yours.\" She nods once toward the hall — east-facing stairs, third floor. \"He is there now. He stays until the flag drops.\"",
-      "sceneSummary": "Silas declares himself the message — Ossian, persuaded, writes him a calling-slip and names Warden Coll on the third floor as the Council Member who can act.",
+      "narration": "Ossian pauses with her hand still extended, the calling-slip between two fingers. She looks at you the way she looked at the incoming slips — briefly, assessing whether the question belongs to the sequence or beside it.\n\n\"North-facing,\" she says. \"One window. Wide enough to read by, not wide enough to let in much afternoon light.\" She sets the slip on the edge of the desk rather than pulling it back. \"By this hour the room runs by lamp. He keeps one on the left corner of the desk and the hall sconce stays lit outside his door.\" A short pause. \"The flag drops when the light fails. He will be there until then.\"\n\nHuginn shifts on the window ledge outside, settling its weight from foot to foot. The registry flag moves in the early-spring wind. Ossian's attention has already returned to the half-finished folio, though her hand stays near the calling-slip — waiting for you to take it.",
+      "sceneSummary": "Silas asks Ossian about Warden Coll's office light; she answers plainly — north-facing, one window, lamp-lit by afternoon, stays until the flag drops.",
       "choices": [
         {
-          "label": "Go straight to Warden Coll — slip in hand, no delay",
+          "label": "Take the calling-slip and go directly to the third floor — meet Warden Coll now, while the flag is still up",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 30,
-          "intentTags": [
-            "persuade",
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask Ossian one question first — what does Coll actually need to hear to move on water?",
-          "attribute": "social",
-          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "travel"
           ],
           "trivial": true
         },
         {
-          "label": "Read the third floor before you step in — use Order-Sense to find the design Coll sits inside",
+          "label": "Take the calling-slip, but first use Order-Sense to read the building's design from here — where Coll's room sits in the larger structure, what approaches it",
           "attribute": "mental",
           "subAttribute": "insight",
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "difficulty": 0,
           "intentTags": [
             "scout",
             "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Thank Ossian briefly and go — but watch for the crisis angle: does Coll lean toward Harmonic or Radiant in the public blame?",
-          "attribute": "mental",
-          "subAttribute": "wits",
+          "label": "Use The Shadow Work now — shape the light in Coll's north-facing, lamp-lit room before you arrive, giving yourself a shadow to step from if the conversation goes wrong",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "abilityId": "the_shadow_work",
+          "energyCost": 1,
           "difficulty": 15,
           "intentTags": [
-            "study",
+            "plan",
             "careful"
           ],
           "trivial": false
+        },
+        {
+          "label": "Thank Ossian and step out — take a moment in the hall to think before going up",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Corner room, second floor, brick hall behind the north gate registry — lamp still burning, window showing the registry flag in early-spring wind, afternoon light. Ossian stands behind her desk, a folded calling-slip held out toward Silas.",
+        "setting": "Corner room, second floor, brick hall behind the north gate registry — lamp still burning, window showing the registry flag in early-spring wind, afternoon light falling short of the north-facing rooms above.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Standing behind her desk, folded calling-slip extended toward Silas — she has already returned her attention to the open folio; her decision is made"
+            "state": "Returned to her half-finished folio, hand resting near the calling-slip on the desk edge — waiting for Silas to take it"
           },
           {
             "name": "Huginn",
-            "state": "Still on the window ledge outside, watching the room without urgency"
+            "state": "Shifting weight on the window ledge outside, watching the room without urgency"
           }
         ],
         "objects": [
@@ -1846,12 +1852,12 @@
           "Incoming slips sorted left by sequence",
           "Ink pot on the right side of the writing surface",
           "Half-finished summary folio open on the desk",
-          "Registry flag visible through the window",
-          "Folded calling-slip for Warden Coll — in Ossian's hand, offered to Silas"
+          "Registry flag visible through the window — still raised",
+          "Calling-slip for Warden Coll — on the desk edge, within reach"
         ],
         "threads": [
-          "Calling-slip for Warden Coll — third floor, north-facing room, stays until the flag drops",
-          "Warden Coll has not yet been met — his disposition toward the water crisis unknown",
+          "Calling-slip for Warden Coll — on the desk edge, not yet taken",
+          "Warden Coll: third floor, north-facing room, lamp-lit by afternoon, stays until the flag drops",
           "Veth moving through the Hub plaza asking after Crane and resources",
           "Pell moving toward the Coliseum gate and forge district"
         ]
@@ -1861,17 +1867,12 @@
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Silas declared himself the message and named the water crisis as resolvable — she read it in one breath and wrote Warden Coll a calling-slip without argument",
+          "note": "Answered Silas's question about Coll's office light plainly and without ceremony — north window, lamp-lit by afternoon, stays until the flag drops — then returned her attention to her folio",
           "learned": [
-            "Silas Weir can act on the water crisis, not merely report on it — she read this as distinct from the usual petitioners",
-            "Warden Coll is the Council Member who can act; third floor, north-facing room, stays until the flag drops"
+            "Warden Coll's office is north-facing with one wide window — lamp-lit by afternoon; a lamp on the desk's left corner and a hall sconce outside his door",
+            "Coll stays until the registry flag drops"
           ],
-          "skillsObserved": [
-            "writing a calling-slip under pressure without ceremony — four words, one fold, handed over"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "In her corner office — has written Silas a calling-slip for Warden Coll and returned to her folio"
+          "statusNote": "In her corner office — folio open, calling-slip on the desk edge waiting for Silas to take it"
         }
       ],
       "codexUpdates": [
@@ -1879,53 +1880,29 @@
           "topic": "warden-coll",
           "label": "Warden Coll",
           "kind": "person",
-          "fact": "A Council Member who can act on the water crisis — sits third floor, north-facing room, brick hall behind the north gate registry. Does not take callers without a slip from Ossian's office. Stays until the registry flag drops.",
+          "fact": "Coll's office is third floor, north-facing — one wide window, lamp-lit by afternoon (desk lamp left corner, hall sconce outside the door). Stays until the registry flag drops.",
           "links": [
             "what-the-water-remembers",
-            "ossian",
-            "the-edge-district-ledger"
+            "the-edge-district-ledger",
+            "ossian"
           ]
-        }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "Warden Coll — a Hub Council Member who handles water and infrastructure decisions, third floor, north-facing room, brick hall; likely mid-to-late career, the kind of official who does not want to be interrupted but is capable of acting when he must",
-          "why": "Ossian named him as the Council Member who can act on the water crisis — Silas is about to walk into his office with her calling-slip"
-        }
-      ],
-      "characterDeltas": {
-        "inventoryAdd": [
-          {
-            "name": "Calling-Slip for Warden Coll",
-            "kind": "quest",
-            "description": "A small folded slip in Ossian's hand — four words, written fast. Gets Silas through Warden Coll's door without an argument.",
-            "consumable": true
-          }
-        ]
-      },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "what-the-water-remembers",
-          "note": "Ossian persuaded — Warden Coll named as the Council Member who can act; a calling-slip in hand and the third floor ahead."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange in Ossian's office — a minute or two at most"
+        "why": "A brief exchange — one question, one plain answer"
       }
     },
     "sceneState": {
-      "setting": "Corner room, second floor, brick hall behind the north gate registry — lamp still burning, window showing the registry flag in early-spring wind, afternoon light. Ossian stands behind her desk, a folded calling-slip held out toward Silas.",
+      "setting": "Corner room, second floor, brick hall behind the north gate registry — lamp still burning, window showing the registry flag in early-spring wind, afternoon light falling short of the north-facing rooms above.",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Standing behind her desk, folded calling-slip extended toward Silas — she has already returned her attention to the open"
+          "state": "Returned to her half-finished folio, hand resting near the calling-slip on the desk edge — waiting for Silas to take it"
         },
         {
           "name": "Huginn",
-          "state": "Still on the window ledge outside, watching the room without urgency"
+          "state": "Shifting weight on the window ledge outside, watching the room without urgency"
         }
       ],
       "objects": [
@@ -1933,12 +1910,12 @@
         "Incoming slips sorted left by sequence",
         "Ink pot on the right side of the writing surface",
         "Half-finished summary folio open on the desk",
-        "Registry flag visible through the window",
-        "Folded calling-slip for Warden Coll — in Ossian's hand, offered to Silas"
+        "Registry flag visible through the window — still raised",
+        "Calling-slip for Warden Coll — on the desk edge, within reach"
       ],
       "threads": [
-        "Calling-slip for Warden Coll — third floor, north-facing room, stays until the flag drops",
-        "Warden Coll has not yet been met — his disposition toward the water crisis unknown",
+        "Calling-slip for Warden Coll — on the desk edge, not yet taken",
+        "Warden Coll: third floor, north-facing room, lamp-lit by afternoon, stays until the flag drops",
         "Veth moving through the Hub plaza asking after Crane and resources",
         "Pell moving toward the Coliseum gate and forge district"
       ]
@@ -3658,17 +3635,18 @@
         "[d13] Named by the runner's boy as the committee's receiving clerk. Morning post only; in before the bell, gone by midday.",
         "[d13] Opened the door already knowing Silas's name from the morning run — stepped back and let him in rather than turning him away; her guard is practical, not hostile",
         "[d13] Silas read the room through Order-Sense — she is the committee's filter, not its member; brevity and evidence are the path. She is waiting for his first sentence.",
-        "[d13] Silas declared himself the message and named the water crisis as resolvable — she read it in one breath and wrote Warden Coll a calling-slip without argument"
+        "[d13] Silas declared himself the message and named the water crisis as resolvable — she read it in one breath and wrote Warden Coll a calling-slip without argument",
+        "[d13] Answered Silas's question about Coll's office light plainly and without ceremony — north window, lamp-lit by afternoon, stays until the flag drops — then returned her attention to her folio"
       ],
       "knownFacts": [
-        "She decides what reaches the committee and what gets filed",
-        "Silas Weir arrived at her landing via Marrow's Wings — she noted it, catalogued it, and did not make a scene of it",
         "She knew his name before he gave it — the morning run's message reached her",
         "She sorts incoming slips by sequence, not arrival — she compresses and filters before things move on",
         "She watches post volume by the registry flag's movement from her chair",
         "The path to her is brevity and evidence — she has already read the morning run and knows Silas's name",
         "Silas Weir can act on the water crisis, not merely report on it — she read this as distinct from the usual petitioners",
-        "Warden Coll is the Council Member who can act; third floor, north-facing room, stays until the flag drops"
+        "Warden Coll is the Council Member who can act; third floor, north-facing room, stays until the flag drops",
+        "Warden Coll's office is north-facing with one wide window — lamp-lit by afternoon; a lamp on the desk's left corner and a hall sconce outside his door",
+        "Coll stays until the registry flag drops"
       ],
       "skillsObserved": [
         "writing a calling-slip under pressure without ceremony — fou"
@@ -3676,7 +3654,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In her corner office — has written Silas a calling-slip for Warden Coll and returned to her folio",
+      "statusNote": "In her corner office — folio open, calling-slip on the desk edge waiting for Silas to take it",
       "lastSeen": {
         "locationId": "gen-north-gate-registry-ossian-office",
         "day": 13
@@ -4506,7 +4484,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 576,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The Father's Sealed Letter sits in inventory, unread — and the hollow, with the badger's circuit running quiet below and Huginn approving…",
@@ -6006,21 +5984,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.41064843662952,
-    "cerebral": 17.15419990273516,
-    "social": 11.026700163175834,
-    "generous": 3.9516879238288363,
-    "cautious": 4.186979713193577,
-    "physical": 0.45444525079593756,
-    "risky": 1.32389534061598,
-    "ruthless": 0.006948893929420705,
-    "carousing": 0.26858328460047265,
-    "amorous": 2.704648680183484,
-    "patient": 0.18566096616091057,
-    "stealth": 0.002693409040089707,
-    "devotion": 1.422655115107801,
-    "craft": 0.4511560830216919,
-    "leadership": 0.9173976415565739
+    "strategic": 21.90038222571378,
+    "cerebral": 17.725344905166782,
+    "social": 10.751032659096438,
+    "generous": 3.852895725733115,
+    "cautious": 4.082305220363738,
+    "physical": 0.4430841195260391,
+    "risky": 1.2907979571005803,
+    "ruthless": 0.006775171581185187,
+    "carousing": 0.26186870248546085,
+    "amorous": 2.6370324631788966,
+    "patient": 0.1810194420068878,
+    "stealth": 0.002626073814087464,
+    "devotion": 1.387088737230106,
+    "craft": 0.4398771809461496,
+    "leadership": 0.8944627005176595
   },
   "aptitudes": [
     "strategist",
@@ -6029,10 +6007,18 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 721,
+  "actionCount": 722,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Warden Coll",
+      "url": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20man%20in%20his%20late%20fifties%2C%20gone%20thick%20through%20the%20middle%20the%20way%20engineers%20do%20%E2%80%94%20not%20soft%2C%20just%20load-bearing.%20Hair%20cut%20close%2C%20iron-grey%2C%20the%20same%20way%20it%20has%20been%20cut%20for%20twenty%20years.%20%2C%20character%20portrait%2C%20named%20Warden%20Coll%2C%20Hub%20Council%20Member%20%E2%80%94%20water%20and%20infrastructure%20portfolio%3B%20the%20official%20who%20can%20act%20when%20acting%20is%20sti%2C%20Economical%20to%20the%20point%20of%20curtness%20%E2%80%94%20the%20man%20does%20not%20perform%20busyness%2C%20he%20is%20actually%20busy.%20Asks%20w%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8876&nologo=true",
+      "caption": "Warden Coll",
+      "worldDay": 24,
+      "at": "2026-07-24T00:30:25.485Z"
+    },
     {
       "kind": "moment",
       "prompt": "A wright stepping onto a narrow registry landing from shadow-dark wings folding into nothing — afternoon light, a brick hall roofline, a lamp burning in the corner window, a compact woman in the doorw",
@@ -6408,19 +6394,11 @@
       "caption": "Silas Weir — level 5",
       "worldDay": 14,
       "at": "2026-07-14T13:56:30.843Z"
-    },
-    {
-      "kind": "moment",
-      "prompt": "A forge bench in orange coal-light, deep night. A long iron-tipped spear laid flat between two people — a lean scarred man and a broad-shouldered woman with a chisel in her hand, both leaning over the",
-      "url": "https://image.pollinations.ai/prompt/A%20forge%20bench%20in%20orange%20coal-light%2C%20deep%20night.%20A%20long%20iron-tipped%20spear%20laid%20flat%20between%20two%20people%20%E2%80%94%20a%20lean%20scarred%20man%20and%20a%20broad-shouldered%20woman%20with%20a%20chisel%20in%20her%20hand%2C%20both%20leaning%20over%20the%20blade.%20A%20large%20grey-black%20corvid%20perches%20at%20the%20bench-end%2C%20utterly%20still%2C%20head%20angled%20down%20toward%20t%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=86034&nologo=true",
-      "caption": "The Deathbound Runic Spear upgraded through a full night's work — circuit deepened, maker'",
-      "worldDay": 14,
-      "at": "2026-07-14T13:29:32.224Z"
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784852997243,
-  "rev": 1165,
+  "updatedAt": 1784853211914,
+  "rev": 1167,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7661,6 +7639,81 @@
         },
         "peopleSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20woman%20somewhere%20in%20her%20middle%20fifties%2C%20broad%20through%20the%20shoulders%2C%20with%20Silas's%20same%20dark%20brow%20and%20the%20steadier%20version%20of%20his%20restlessness%20settled%20into%20competence.%20Her%20hair%20is%20iron-grey%2C%20braided%20c%2C%20character%20portrait%2C%20named%20Hesta%20Vorn%2C%20Cairn-keeper%20and%20mother%20%E2%80%94%20the%20still%20point%20a%20long%20road%20runs%20back%20to%2C%20Speaks%20in%20full%20sentences%20and%20means%20them.%20Unhurried.%20When%20Silas%20appears%20after%20a%20long%20absence%20she%20says%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=6879&nologo=true"
+      },
+      "warden-coll": {
+        "schemaVersion": 1,
+        "id": "warden-coll",
+        "name": "Warden Coll",
+        "role": "Hub Council Member — water and infrastructure portfolio; the official who can act when acting is still possible",
+        "homeLocation": "the_center",
+        "communityId": "council.northgate",
+        "personality": {
+          "warmth": 0.2,
+          "trust": 0.3,
+          "candor": 0.6,
+          "patience": 0.35
+        },
+        "spectrum": {
+          "body_mind": -0.3,
+          "emotional_logical": -0.5,
+          "concrete_abstract": -0.7,
+          "falsehood_truth": 0.4
+        },
+        "voiceHints": "Economical to the point of curtness — the man does not perform busyness, he is actually busy. Asks what you want before you have finished sitting down. Speaks in quantities and timelines: not 'the pipe is failing' but 'we lose forty percent flow by midsummer if the east culvert goes unpatched.' Warms slightly, not visibly, when the problem brought to him is real. Has no patience for preamble but considerable patience for a hard fact stated plainly. Will not be flattered. Will not be alarmed before he has the numbers. If Ossian sent you, he will not say it means anything — but he will read the calling-slip before he says anything else.",
+        "knowledge": [
+          "The full infrastructure map of the Hub's water system — not the public version, the one with the problem sections annotated in his own hand",
+          "Which repairs have been deferred for how many seasons and why, and what that deferral has cost in compounding risk",
+          "The political geometry of the Council well enough to know which votes he can call and which he cannot, and how to move without losing the ones he needs",
+          "Ossian's professional judgment well enough that her calling-slip carries weight he would not give a personal introduction",
+          "Early-spring thaw load — how much stress the melt season puts on aging infrastructure and exactly how little time there is before the window for intervention closes"
+        ],
+        "wants": "To hold the system together long enough that the next Warden inherits something workable. Not glory. Not gratitude. A functioning culvert network and a reserve fund that isn't a fiction.",
+        "fears": "That the Council will deliberate past the point where deliberation can fix anything — and that when the failure comes, it will be the people at the lowest pipes who drown first.",
+        "reactsToReputation": {
+          "competent": "grants more time and more candor than he grants anyone",
+          "time-waster": "ends the meeting without ending it — keeps working while you talk until you understand you are done",
+          "political": "becomes formally polite and shares nothing of consequence",
+          "referred_by_ossian": "reads first, judges after — she has not sent him noise before"
+        },
+        "appearance": "A broad-shouldered man in his late fifties, gone thick through the middle the way engineers do — not soft, just load-bearing. Hair cut close, iron-grey, the same way it has been cut for twenty years. Ink on the heel of his left hand from a map he was tracing when you knocked. Heavy wool coat hung on the back of the door; he works in shirtsleeves even in early spring because the brick hall holds the cold and he does not notice anymore. A north-facing room: the light is flat and good for reading documents. His desk is covered in papers arranged in a system that looks like chaos and is not. He looks up from them at Silas with the expression of a man calculating whether this interruption will cost him ten minutes or an afternoon.",
+        "people": "human",
+        "domains": {
+          "primary": "syllogist",
+          "secondary": "figurist",
+          "tertiary": "somatic"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Coll reasons by load and consequence — syllogist in practice, figurist in how he maps systems, somatic in the residual physical instinct of a man who spent his first decade in the field before he moved behind a desk. Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+        "functions": [
+          "reveal",
+          "bind",
+          "move"
+        ],
+        "functionsNote": "reveal — holds the true state of the infrastructure that public records obscure; bind — the authority to commit Council resources when he chooses to use it; move — the political leverage to unblock action that lower officials cannot. Scene need: the player requires someone who can convert information into institutional motion. Coll is that conversion point.",
+        "_gen": {
+          "entityId": "warden-coll",
+          "type": "npc",
+          "birthWeight": 32,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-north-gate-registry-ossian-office",
+            "day": 13,
+            "worldDay": null,
+            "hint": "Warden Coll — a Hub Council Member who handles water and infrastructure decisions, third floor, north-facing room, brick",
+            "why": "Ossian named him as the Council Member who can act on the water crisis — Silas is about to walk into his office with her"
+          },
+          "attentionHistory": [],
+          "createdDay": 13,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20man%20in%20his%20late%20fifties%2C%20gone%20thick%20through%20the%20middle%20the%20way%20engineers%20do%20%E2%80%94%20not%20soft%2C%20just%20load-bearing.%20Hair%20cut%20close%2C%20iron-grey%2C%20the%20same%20way%20it%20has%20been%20cut%20for%20twenty%20years.%20%2C%20character%20portrait%2C%20named%20Warden%20Coll%2C%20Hub%20Council%20Member%20%E2%80%94%20water%20and%20infrastructure%20portfolio%3B%20the%20official%20who%20can%20act%20when%20acting%20is%20sti%2C%20Economical%20to%20the%20point%20of%20curtness%20%E2%80%94%20the%20man%20does%20not%20perform%20busyness%2C%20he%20is%20actually%20busy.%20Asks%20w%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8876&nologo=true"
       }
     },
     "location": {
@@ -8741,7 +8794,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 73
+    "the_center": 74
   },
   "foreclosed": [
     "rootkin",
@@ -8865,10 +8918,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T00:29:57.239Z",
+      "lastAt": "2026-07-24T00:33:31.911Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 55
+      "beats": 56
     }
   ],
   "company": [
@@ -9067,15 +9120,15 @@
     "gen-north-gate-registry-ossian-office": "https://image.pollinations.ai/prompt/North%20Gate%20Registry%20Ossian%20Office%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20North%20Gate%20Registry%20Ossian%20Office.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=7567&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 92,
-    "choices": 92,
+    "sceneSummary": 93,
+    "choices": 93,
     "characterDeltas": 39,
-    "scene": 92,
-    "npcUpdates": 78,
+    "scene": 93,
+    "npcUpdates": 79,
     "factUpdates": 7,
     "placeUpdates": 16,
-    "codexUpdates": 53,
-    "timeOps": 86,
+    "codexUpdates": 54,
+    "timeOps": 87,
     "imagePrompt": 3,
     "sceneEnded": 20,
     "itemUpdates": 2,
@@ -9090,7 +9143,7 @@
     "stageOps": 1,
     "generateRequest": 1
   },
-  "_opTurns": 92,
+  "_opTurns": 93,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

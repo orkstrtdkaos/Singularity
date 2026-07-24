@@ -164,3 +164,28 @@ world does when nothing connects its events. Wake is the connection.
    flagging that they should be decided together.
 5. **Sequencing:** SNG-204 depends on SNG-203's tiers and `arc_stage` existing. It is the keystone but it
    builds *after* the SNG-203 engine. Confirm it queues there.
+
+
+---
+
+# §RESOLVED (Erik, 2026-07-22)
+
+## §OQ1 wake timing — BOTH, SPLIT BY SCALE (Erik's call)
+Small wakes fire IMMEDIATELY (at resolution) — a local choice's aftermath lands NOW, consequential in the
+moment. Big wakes fire on the WORLD-TICK (deferred, between visits) — a domain/arc-scale consequence surfaces
+as the world MOVING while you were away (alive, not a vending machine). Scale threshold rides the SNG-203
+tiers: quest-local = immediate; greater-arc/world = world-tick.
+
+## §OQ3 depth throttle — SCALE IT (Erik's call)
+Small threads: 2-3 steps self-propagate before requiring a player. Big arcs: 1 step, then wait. "A big thing
+shouldn't run far unwatched." The world stays alive without an arc resolving the whole world offscreen.
+
+## §OQ4 divergent wake resolution — NET-VECTOR (Erik's call — SAME as SNG-203 §OQ2)
+Two players resolving the same wake differently = the NET RESULTANT: each resolution a signed vector over the
+wake's pole-axes (weighted by play-realness), the aftermath follows the SUM. Opposed cancel, aligned reinforce.
+Framework structural-directionality-as-net-resultant. SAME rule and SAME resolver as SNG-203 §OQ2 — one
+mechanism both cases. NEW machinery (no netVector primitive yet).
+
+## §OQ2 (pressure) + §OQ5 (sequencing) — CCode-technical
+Aevi authors pressure for the 5 greater-arc transitions; generator infers its own (CCode: one-call vs two).
+204 builds AFTER 203's tiers/arc_stage. Confirmed.

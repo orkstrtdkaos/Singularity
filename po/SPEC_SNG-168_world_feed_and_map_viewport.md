@@ -160,3 +160,52 @@ implications across 24 traditions.
    changes the auth story completely and I would rather you priced it before I spec further.
 4. §3 — does message-in-flight want to be a first-class state object, or can it ride the existing
    quest/event machinery? I suspect the latter and I would rather not invent a system.
+
+---
+
+# §6 — RESOLVED (Erik, 2026-07-22) — BUILD THE FEED NOW (Brooklyn wants it)
+
+Erik's two calls, closing the ROUND 2 blocker (Q3) and scoping the build:
+
+## Decision 1 — WHERE the feed lives: **IN THE APP, shared per family group** (Q3 answered)
+Not a published web page. The feed is an in-app surface scoped to the family group — it rides the
+EXISTING family-sync substrate, so no new auth story:
+- **`syncSharedCanon`/`sharedCanonView`** (app.js:2164, worldtick.js) already syncs per family group
+  WITH the rating-lens. The feed uses the SAME group-sync channel + lens — a feed post is lensed on
+  read exactly as shared canon is. Verified present.
+- **`profile.sharedChronicle`** (app.js:6292, the "share my chronicle with the family" toggle) is the
+  existing family-consent model. The feed's per-post consent is a SECOND, separate opt-in (§2: "two
+  different consents; do not collapse them") but lives in the same family-group frame.
+- **Turn images** ride `imagePrompt`/`addGalleryImage` (app.js:1973) — a posted turn carries its
+  generated image the same way the gallery already stores one.
+So: no published surface, no new backend — the feed is a per-family-group in-app view on the sync
+channel that already exists. This is why it's now a SMALL build.
+
+## Decision 2 — SCOPE: **JUST THE FEED (§2).** Ship it alone, fastest path to Brooklyn.
+- **§1 (mobile map pinch/pan)** — still a real live defect, but DECOUPLED; ship separately, not
+  blocking the feed.
+- **§3 (in-game messaging)** — remains a design conversation (24-tradition implications); NOT now.
+- Build ONLY §2 §"What to build", scoped to the in-app per-family-group decision above.
+
+## The §2 build, now unblocked (for CCode)
+1. **Post-a-turn control** on any turn in the log → posts that turn to the family feed, carrying its
+   image (imagePrompt) if one exists. Poster picks; nothing automatic (the value is the CHOOSING).
+2. **The feed view** (in-app, per family group): each post shows poster's character, location,
+   world-date, the narration (or a poster-trimmed excerpt), and the image. Reverse-chron.
+3. **Per-post consent** — opt-in per post, SEPARATE from sharedChronicle (two consents). A post from
+   an R-rated session is rating-lensed on the family reader's side (reuse the sharedCanon lens).
+4. **World-news items** (§2, keep if cheap) — a worldtick of real consequence CAN appear as a
+   feed item so the world feels inhabited, not just shared. If it adds scope, defer to a fast-follow;
+   the PLAYER-post feed is the thing Brooklyn wants first.
+5. **MUST NOT** hydrate a feed post into another player's CONTENT — a feed post is NOT canon (§2 "What
+   it must NOT do"). The feed is a scrapbook surface; shared-canon is the separate real-in-your-game
+   path. Keep them apart — this is the whole reason they were specced together.
+
+## Acceptance (Erik/Brooklyn browser-leg)
+Brooklyn posts a turn she loves (with its image) from her character; it appears in the family feed;
+Erik (or another family character) sees it in-app, rating-lensed, WITHOUT it becoming canon in their
+game. That's the win condition.
+
+## OWNERSHIP
+CCode — the post control, the feed view, per-post consent, the lens reuse. All on existing substrate
+(sharedCanon sync + rating-lens + imagePrompt). No new content from Aevi; no new backend.

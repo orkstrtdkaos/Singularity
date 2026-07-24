@@ -415,6 +415,14 @@
       "qty": 1,
       "description": "A second fold bound with brass wire, marked in Aldric's hand: 'Open this at the source, not before. You will know when.' Whatever it contains was meant to be read standing at the fold itself.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Sealed Waystation Message (Mara)",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A folded and sealed slip in Mara's hand — a water-reading request for the lower waystation at the March road fork. If the post is occupied, deliver it. If dark, leave it on the door-hook.",
+      "consumable": true
     }
   ],
   "deeds": [
@@ -1814,53 +1822,64 @@
         "player": "Have Mara see to it that Gweth knows the truth and can act on Millbrook's behalf in the Heights and the Plateau.  This is where their food comes from, they should care.",
         "summary": "Silas instructs Mara to bring Gweth Callow the full truth about the water and food supply threat; Mara writes the note without argument and sets it with the morning errands.",
         "narration": "Silas straightens from the counter and looks at Mara. 'Gweth Callow,' he says. 'She needs to know the full picture — not a rumor, not a softened version. The truth about where the water is going and what it means for Millbrook's food supply. The Heights and the Plateau both feed this valley. If the flocks fail, or the growing terraces go dry, Millbrook starves before either of them notices.' He pauses. 'She should hear it from you. She'll trust it coming from you.'\n\nMara does not argue. She pulls the ledger back open and writes two lines at the bottom of the filtration sheet — a note, brief and direct, the kind she would send with Pip. 'I know where she camps when the flock is on the south pasture,' Mara says. 'She'll have word before morning.' She folds the note, presses it flat, and sets it to the left of the candle where the morning errands wait.\n\nCrane watches this without comment. Then he says, quietly, 'A shepherd who works that road knows which way the wind is coming from before the weather does. If she stands up at a gathering — even a small one — the smallholders who have never cared about politics will care.' He is not suggesting anything. He is naming what he sees, the way he has always named things: without drama, without urgency, with the flat precision of a man who has watched a system for a long time.\n\nMara sets her palm on the note. The candle holds steady. Outside, the air is heavy and still, and the rain that has been threatening all evening has not broken yet."
+      },
+      {
+        "player": "Tell Mara and Crane that the party moves at first light — and ask if there is anything Millbrook needs carried toward the Zone or passed to anyone along the route.",
+        "summary": "Silas names first light as departure; Mara hands over a sealed message for the march waystation; Crane passes the Crossing keeper's unwritten worsening readings.",
+        "narration": "Silas straightens and looks between Mara and Crane. 'We move at first light,' he says. 'The Zone and the source — that is the next step.' He lets that sit for a moment, then adds: 'If there is anything Millbrook needs carried toward the Zone, or passed to anyone along the route, name it now. We pass through what we pass through.'\n\nMara does not hesitate. She opens the ledger to a fresh margin and runs her finger down a short list she has been keeping in her head. 'Nothing for the Zone itself,' she says. 'But there is a sealed message for the lower waystation at the March road's fork — the warden-post there has been dark for two months, and I do not know if anyone is minding it. If you find it occupied, the message is a water-reading request, nothing more. If it is empty, leave it on the door-hook. Someone will come.' She folds and seals the slip before Silas can answer, working fast by candlelight with the practiced economy of a woman who writes three dozen such notes a season. She sets it on the counter beside the Waymarker.\n\nCrane clears his throat. 'The mill-gate keeper at the Crossing asked me to say, if I found anyone headed east — that his morning readings for the last four days have been worse, not better. He did not write it down. He did not want it written.' He pauses. 'You do not need to do anything with that. I thought you should know it.'\n\nPell, still at the door with her pack on, says, 'First light is early.' It is not a complaint. It is an accounting.\n\nHuginn shifts on the counter's edge and says nothing, which is agreement."
       }
     ],
     "lastTurn": {
-      "narration": "Silas straightens from the counter and looks at Mara. 'Gweth Callow,' he says. 'She needs to know the full picture — not a rumor, not a softened version. The truth about where the water is going and what it means for Millbrook's food supply. The Heights and the Plateau both feed this valley. If the flocks fail, or the growing terraces go dry, Millbrook starves before either of them notices.' He pauses. 'She should hear it from you. She'll trust it coming from you.'\n\nMara does not argue. She pulls the ledger back open and writes two lines at the bottom of the filtration sheet — a note, brief and direct, the kind she would send with Pip. 'I know where she camps when the flock is on the south pasture,' Mara says. 'She'll have word before morning.' She folds the note, presses it flat, and sets it to the left of the candle where the morning errands wait.\n\nCrane watches this without comment. Then he says, quietly, 'A shepherd who works that road knows which way the wind is coming from before the weather does. If she stands up at a gathering — even a small one — the smallholders who have never cared about politics will care.' He is not suggesting anything. He is naming what he sees, the way he has always named things: without drama, without urgency, with the flat precision of a man who has watched a system for a long time.\n\nMara sets her palm on the note. The candle holds steady. Outside, the air is heavy and still, and the rain that has been threatening all evening has not broken yet.",
-      "sceneSummary": "Silas instructs Mara to bring Gweth Callow the full truth about the water and food supply threat; Mara writes the note without argument and sets it with the morning errands.",
+      "narration": "Silas straightens and looks between Mara and Crane. 'We move at first light,' he says. 'The Zone and the source — that is the next step.' He lets that sit for a moment, then adds: 'If there is anything Millbrook needs carried toward the Zone, or passed to anyone along the route, name it now. We pass through what we pass through.'\n\nMara does not hesitate. She opens the ledger to a fresh margin and runs her finger down a short list she has been keeping in her head. 'Nothing for the Zone itself,' she says. 'But there is a sealed message for the lower waystation at the March road's fork — the warden-post there has been dark for two months, and I do not know if anyone is minding it. If you find it occupied, the message is a water-reading request, nothing more. If it is empty, leave it on the door-hook. Someone will come.' She folds and seals the slip before Silas can answer, working fast by candlelight with the practiced economy of a woman who writes three dozen such notes a season. She sets it on the counter beside the Waymarker.\n\nCrane clears his throat. 'The mill-gate keeper at the Crossing asked me to say, if I found anyone headed east — that his morning readings for the last four days have been worse, not better. He did not write it down. He did not want it written.' He pauses. 'You do not need to do anything with that. I thought you should know it.'\n\nPell, still at the door with her pack on, says, 'First light is early.' It is not a complaint. It is an accounting.\n\nHuginn shifts on the counter's edge and says nothing, which is agreement.",
+      "sceneSummary": "Silas names first light as departure; Mara hands over a sealed message for the march waystation; Crane passes the Crossing keeper's unwritten worsening readings.",
       "choices": [
         {
-          "label": "Ask Mara what she knows about the road to the Disputed Zone — the safest entry, the landmarks, the warnings.",
+          "label": "Accept the sealed message and the unwritten news, then ask if there is a place the party can sleep in Millbrook tonight before the early start.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "scout"
+            "help"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null
         },
         {
-          "label": "Use Order-Sense on the Waymarker while it sits on the counter — read whether the design of the filtration bond is holding cleanly, and whether the sealed fold's pull is still oriented toward the Zone.",
+          "label": "Before you leave the counter, use Order-Sense on the sealed message — read what kind of thing it is part of, whether the waystation thread is load-bearing.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
+          "trivial": false,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": true
+          "energyCost": 2
         },
         {
-          "label": "Tell Mara and Crane that the party moves at first light — and ask if there is anything Millbrook needs carried toward the Zone or passed to anyone along the route.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "lead"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Step outside for a moment — let Huginn lift and read the night air over the village before the party commits to tomorrow's road.",
+          "label": "Ask Mara and Crane together: the Crossing keeper said it is getting worse — do either of them have a read on how much worse, and how fast?",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "difficulty": 0,
+          "trivial": true,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null
+        },
+        {
+          "label": "Thank Mara, pocket the message, and step outside into the night air to let Huginn quarter the lane before the party settles for the night.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "trivial": true,
           "intentTags": [
             "scout"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null
         }
       ],
       "scene": {
@@ -1868,38 +1887,38 @@
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "palm on the folded note beside the candle, ledger open, morning errand stack set"
+            "state": "folding and sealing a slip of paper on the counter — the waystation message, now ready to hand over"
           },
           {
             "name": "Edvar Crane",
-            "state": "standing at the counter's near side, quiet after naming what Gweth's standing could do"
+            "state": "standing at the counter's near side, having passed the Crossing keeper's unwritten news, quiet again"
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "just inside the door, pack still on, watching Mara"
+            "state": "at the door, pack still on, accounting the early start"
           },
           {
             "name": "Veth Ondra",
-            "state": "to Silas's left, pack on, quiet"
+            "state": "to Silas's left, pack on, watching the exchange"
           },
           {
             "name": "Huginn",
-            "state": "on the counter's edge, wings folded, watching the room"
+            "state": "on the counter's edge, wings folded, silent in the way that is agreement"
           }
         ],
         "objects": [
-          "Mara's ledger — filtration sheet inside, summons slip in the margin, note for Gweth folded and set by the candle",
+          "Mara's ledger — filtration sheet inside, summons slip in the margin, note for Gweth set with morning errands",
           "Waymarker on the counter between Silas and Mara",
+          "Sealed waystation message — freshly written and folded, sitting on the counter beside the Waymarker",
           "Store shelves — dried goods, tools, cord, working inventory",
           "Window lamp — burning, visible from the lane outside",
           "Counter — the working space between Silas and Mara"
         ],
         "threads": [
-          "Three days to the committee meeting — no extension; Crane is named delegate",
-          "Filtration build staged — materials two days out, Crane to direct",
-          "Note for Gweth Callow set with morning errands — word before sunrise",
-          "The Zone and the source are the next move — first light is the question",
-          "Father's Sealed Fold — to be opened at the source, not before"
+          "Sealed message for the march waystation — dark two months, pick up or leave on the hook",
+          "Crossing keeper's unwritten worsening readings — four days worse, not better, not on paper",
+          "First light departure — the Zone and the source are the next move",
+          "Crane named as delegate; filtration build staged; note for Gweth with morning errands"
         ]
       },
       "npcUpdates": [
@@ -1907,42 +1926,62 @@
           "op": "update",
           "npcId": "mara-wells",
           "name": "Mara Wells",
-          "note": "Took Silas's instruction without argument — wrote the note for Gweth Callow herself and set it with the morning errands. Her read of Gweth as the human lever that can move smallholders is now in play.",
-          "learned": [
-            "Gweth Callow needs the full truth, not a softened version, to act effectively — and Mara has committed to delivering it before morning"
-          ],
-          "statusNote": "Behind her counter in Millbrook's store — note for Gweth written and staged for morning delivery, ledger open, filtration build in motion.",
-          "relationshipDelta": 0
+          "note": "Sealed a message for the march road waystation without hesitation — a water-reading request, leave it on the hook if the post is dark. Efficient, no ceremony.",
+          "statusNote": "Behind her counter in Millbrook's store — waystation message sealed and staged, ledger closed, filtration build in motion, note for Gweth set with morning errands."
         },
         {
           "op": "update",
           "npcId": "edvar-crane",
           "name": "Edvar Crane",
-          "note": "Named Gweth's standing plainly — the smallholders who have never cared about politics will care if she stands up. No advocacy, just the flat observation of a careful man.",
-          "learned": [
-            "Gweth Callow's influence with the south-road smallholders is a real political lever — named by Crane without drama"
-          ],
-          "statusNote": "At Mara's counter — delegate to the Hub committee, filtration build director, now part of the Millbrook response network.",
-          "relationshipDelta": 0
+          "note": "Passed the Crossing keeper's unwritten news — four days of worsening readings, not written down by the keeper himself. Named it plainly and left Silas to do what he would with it.",
+          "statusNote": "At Mara's store, Millbrook — named as delegate, filtration build to direct, committed to first-light departure with the party."
         }
       ],
+      "inventoryAdd": [
+        {
+          "name": "Sealed Waystation Message (Mara)",
+          "kind": "quest",
+          "description": "A folded and sealed slip in Mara's hand — a water-reading request for the lower waystation at the March road fork. If the post is occupied, deliver it. If dark, leave it on the door-hook.",
+          "consumable": true
+        }
+      ],
+      "characterDeltas": {
+        "inventoryAdd": [
+          {
+            "name": "Sealed Waystation Message (Mara)",
+            "kind": "quest",
+            "description": "A folded and sealed slip in Mara's hand — a water-reading request for the lower waystation at the March road fork. If the post is occupied, deliver it. If dark, leave it on the door-hook.",
+            "consumable": true
+          }
+        ]
+      },
       "codexUpdates": [
         {
-          "topic": "gweth-callow",
-          "label": "Gweth Callow, the Shepherd of the South March",
-          "kind": "person",
-          "fact": "Mara Wells has committed to sending Gweth the full truth about the water-and-food-supply threat before morning — a note written and staged. Crane named her standing with smallholders as a real political lever: when she stands at a gathering, people who have never cared about politics start to care.",
+          "topic": "march-waystation",
+          "label": "March Road Waystation",
+          "kind": "place",
+          "fact": "The lower waystation at the March road's fork has been dark for two months — no word, no warden confirmed. Mara sealed a water-reading request to leave at the door-hook if no one answers.",
           "links": [
-            "the-water-crisis",
-            "millbrook",
-            "mara-wells",
+            "what-the-water-remembers",
+            "millbrook"
+          ]
+        },
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "entityId": "millbrook",
+          "fact": "The Crossing mill-gate keeper's last four days of readings have been worse, not better — and he chose not to write it down. The rate is accelerating and the keeper knows it.",
+          "links": [
+            "find-the-engineer",
+            "edvar-crane",
             "what-the-water-remembers"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange at the counter, night still early"
+        "why": "A quick exchange at the counter — naming the departure, exchanging the message and the unwritten news."
       }
     },
     "sceneState": {
@@ -1950,38 +1989,38 @@
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "palm on the folded note beside the candle, ledger open, morning errand stack set"
+          "state": "folding and sealing a slip of paper on the counter — the waystation message, now ready to hand over"
         },
         {
           "name": "Edvar Crane",
-          "state": "standing at the counter's near side, quiet after naming what Gweth's standing could do"
+          "state": "standing at the counter's near side, having passed the Crossing keeper's unwritten news, quiet again"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "just inside the door, pack still on, watching Mara"
+          "state": "at the door, pack still on, accounting the early start"
         },
         {
           "name": "Veth Ondra",
-          "state": "to Silas's left, pack on, quiet"
+          "state": "to Silas's left, pack on, watching the exchange"
         },
         {
           "name": "Huginn",
-          "state": "on the counter's edge, wings folded, watching the room"
+          "state": "on the counter's edge, wings folded, silent in the way that is agreement"
         }
       ],
       "objects": [
         "Mara's ledger — filtration sheet inside, summons slip in the margin, note for Gw",
         "Waymarker on the counter between Silas and Mara",
+        "Sealed waystation message — freshly written and folded, sitting on the counter b",
         "Store shelves — dried goods, tools, cord, working inventory",
         "Window lamp — burning, visible from the lane outside",
         "Counter — the working space between Silas and Mara"
       ],
       "threads": [
-        "Three days to the committee meeting — no extension; Crane is named delegate",
-        "Filtration build staged — materials two days out, Crane to direct",
-        "Note for Gweth Callow set with morning errands — word before sunrise",
-        "The Zone and the source are the next move — first light is the question",
-        "Father's Sealed Fold — to be opened at the source, not before"
+        "Sealed message for the march waystation — dark two months, pick up or leave on the hook",
+        "Crossing keeper's unwritten worsening readings — four days worse, not better, not on paper",
+        "First light departure — the Zone and the source are the next move",
+        "Crane named as delegate; filtration build staged; note for Gweth with morning errands"
       ]
     }
   },
@@ -3059,7 +3098,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d9] Pip Cotter left with the document roll on schedule; Mara scratched the departure date into her ledger margin and has been watching the water wheel intake each morning since, noting the color.",
         "[d12] Mara recorded the gray-green intake on two of the past three mornings in her ledger margin and quietly reduced the volume she's drawing from the wheel cistern, rationing stored clean water without announcing it to the village.",
         "[d13] Relay notice received at Hub on day 13 — intake gray-green four of six mornings, document roll delivered with clerk's initials, two additional sleeve joints flagged by Calvar and Dara at east-bend, Pip's postscript noted.",
         "[d13] A message sent via the Hub runner: Stillwater's Trouble named as a potential refuge and staging post, labor and goods welcome in exchange, and a direct question — who needs to hear from Silas personally? Morning run carries it.",
@@ -3068,7 +3106,8 @@
         "[d13] Received Crane as Silas's named delegate — short nod, no ceremony. Reported east-bend status, committee timing, and creek readings without being asked. Closed the ledger on 'You find the source. We'll be here.'",
         "[d13] Received the four-stage filtration cascade from Crane's spoken account, wrote it out herself, corrected two numbers, and staged materials for the day after tomorrow. Named the Radiant factor's four-day-ago visit (looked, wrote, left nothing) and the Harmonic's formal note (monitoring, no person or…",
         "[d13] Named Crane's records-case and Gweth Callow's unspoken fury as the two levers that might move the Radiant or Harmonic to real action.",
-        "[d13] Took Silas's instruction without argument — wrote the note for Gweth Callow herself and set it with the morning errands. Her read of Gweth as the human lever that can move smallholders is now in play."
+        "[d13] Took Silas's instruction without argument — wrote the note for Gweth Callow herself and set it with the morning errands. Her read of Gweth as the human lever that can move smallholders is now in play.",
+        "[d13] Sealed a message for the march road waystation without hesitation — a water-reading request, leave it on the hook if the post is dark. Efficient, no ceremony."
       ],
       "knownFacts": [
         "Silas is heading into the Disputed Zone toward the contamination source",
@@ -3089,7 +3128,7 @@
         "reading a political situation plainly and naming it without "
       ],
       "status": "active",
-      "statusNote": "Behind her counter in Millbrook's store — note for Gweth written and staged for morning delivery, ledger open, filtration build in motion.",
+      "statusNote": "Behind her counter in Millbrook's store — waystation message sealed and staged, ledger closed, filtration build in motion, note for Gweth set with morning errands.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 13
@@ -4008,7 +4047,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d13] Walked Silas through the full twenty years of entries — eight clear, nine slow gray-tinge with one return visit from Aldric in year nine, then this spring's unbroken gray-brown. Aldric's final entry confirmed aloud.",
         "[d13] Named the three-stage filter cascade plainly — cloth, limestone bed, boiling. Confirmed scaling is possible if the intake is clean. Named that he has never approached the fold, on Aldric's explicit instruction.",
         "[d13] Accepted the commission without hesitation — his twenty-year watch complete, the guardedness gone. Named he will be packed before the creek runs gray again. Will travel to Stillwater's Trouble to work with Calvar on scaling the cascade.",
         "[d13] Formally introduced to Pell, Veth, and Huginn — received each in turn without ceremony. Walked Silas through a full community-scale cascade design and watched the blueprints take shape on the flagstone with evident satisfaction.",
@@ -4017,7 +4055,8 @@
         "[d13] Confirmed meeting at the waygate platform before first light — will be packed before the lamp needs filling. His manner is that of a man whose watch is complete and whose purpose is now in motion.",
         "[d13] Stepped forward and named himself plainly to Mara — first meeting, received with a short nod. Now formally Silas's delegate to the Millbrook thread.",
         "[d13] Stepped forward at Mara's look and directed the full four-stage cascade from memory — settling basin first, materials and quantities named, Mara writing. Accepted her commission to direct the build without ceremony.",
-        "[d13] Named Gweth's standing plainly — the smallholders who have never cared about politics will care if she stands up. No advocacy, just the flat observation of a careful man."
+        "[d13] Named Gweth's standing plainly — the smallholders who have never cared about politics will care if she stands up. No advocacy, just the flat observation of a careful man.",
+        "[d13] Passed the Crossing keeper's unwritten news — four days of worsening readings, not written down by the keeper himself. Named it plainly and left Silas to do what he would with it."
       ],
       "knownFacts": [
         "The shadow-slate can carry technical plans as well as words, compressed — Weirmark and fellowship name transmitted alongside the design",
@@ -4040,7 +4079,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At Mara's counter — delegate to the Hub committee, filtration build director, now part of the Millbrook response network.",
+      "statusNote": "At Mara's store, Millbrook — named as delegate, filtration build to direct, committed to first-light departure with the party.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 13
@@ -4966,7 +5005,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 588,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the…",
@@ -5118,7 +5157,6 @@
         "label": "Millbrook",
         "kind": "event",
         "facts": [
-          "[d1] Order-Sense on the bull track (World-day 14 pre-dawn): bull moved northwest toward drier scrub, unhurried, between midnight and first light — destination unclear past the canopy bend. Track and Huginn",
           "[d1] Sow taken in the north wood sedge strip on World-day 14 pre-dawn — clean kill, Corvin's strike. Huginn attended without prompting. Piglets and bull both northwest, direction of the unaccounted pattern",
           "[d1] Post-kill: bull track, scattered piglets, and Huginn's northward orientation all converge on the same corridor in the north wood — three independent signals pointing the same direction.",
           "[d1] Order-Sense read on World-day 14 pre-dawn: bull moved northwest overnight — unhurried, skirting river smell, favoring dry scrub. Destination confirmed as scrub oak ridge a quarter-mile north. Three in",
@@ -5141,17 +5179,18 @@
           "[d5] The brigandine's radiant mark now holds a partial Shielding Word in its outer ring — seated on World-day 18 evening with a depleted kit and a thin substrate. The full ward requires a stronger lattice to complete.",
           "[d6] Mara Wells placed both men: Bren on Aldric's smokehouse delivery run, Curis on Dara's irrigation ditch crew. Silas Weir's name was the introduction that made it possible.",
           "[d4] you have walked here",
-          "[d13] Mara Wells wrote out the four-stage filtration cascade from Crane's spoken account, corrected two numbers, and confirmed materials can be staged within two days. Crane will direct the build. The construction thread is now live and in Mara's hands."
+          "[d13] Mara Wells wrote out the four-stage filtration cascade from Crane's spoken account, corrected two numbers, and confirmed materials can be staged within two days. Crane will direct the build. The construction thread is now live and in Mara's hands.",
+          "[d13] The Crossing mill-gate keeper's last four days of readings have been worse, not better — and he chose not to write it down. The rate is accelerating and the keeper knows it."
         ],
         "links": [
-          "pell-ran-marsh",
-          "deathsense",
           "the-fell-pell",
           "aldric",
           "dara-holt",
           "mara-wells",
           "edvar-crane",
-          "the-water-crisis"
+          "the-water-crisis",
+          "find-the-engineer",
+          "what-the-water-remembers"
         ],
         "aliases": [
           "Millbrook's Elder Declaration",
@@ -6482,21 +6521,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 23.123816464892432,
-    "cerebral": 15.685222810071435,
-    "social": 12.565428863336582,
-    "generous": 4.5682385119782545,
-    "cautious": 3.1091118001871343,
-    "physical": 0.3838708746639849,
-    "risky": 0.33736723473221575,
-    "ruthless": 0.29840520849599517,
-    "carousing": 0.0684428725149812,
-    "amorous": 1.1571078480284394,
-    "patient": 0.41054428156433387,
-    "stealth": 0.0006863593608804697,
-    "devotion": 0.3625341123553221,
-    "craft": 0.5711549495961188,
-    "leadership": 0.5538222761814413
+    "strategic": 22.54572105327012,
+    "cerebral": 15.293092239819648,
+    "social": 12.251293141753166,
+    "generous": 4.454032549178798,
+    "cautious": 3.031384005182456,
+    "physical": 0.37427410279738527,
+    "risky": 0.32893305386391036,
+    "ruthless": 0.2909450782835953,
+    "carousing": 0.06673180070210667,
+    "amorous": 1.1281801518277284,
+    "patient": 0.40028067452522553,
+    "stealth": 0.000669200376858458,
+    "devotion": 0.3534707595464391,
+    "craft": 0.5568760758562158,
+    "leadership": 1.5399767192769054
   },
   "aptitudes": [
     "strategist",
@@ -6505,7 +6544,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 775,
+  "actionCount": 776,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6895,8 +6934,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784899863260,
-  "rev": 1265,
+  "updatedAt": 1784901037781,
+  "rev": 1266,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8371,7 +8410,7 @@
           "entityId": "edvar-crane",
           "type": "npc",
           "birthWeight": 33,
-          "engagementScore": 43,
+          "engagementScore": 45,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -8385,10 +8424,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 13
-            },
-            {
               "kind": "interact",
               "day": 13
             },
@@ -8466,6 +8501,10 @@
             },
             {
               "kind": "fact",
+              "day": 13
+            },
+            {
+              "kind": "interact",
               "day": 13
             },
             {
@@ -9709,7 +9748,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 512,
+    "valley": 513,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9844,10 +9883,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T13:31:03.254Z",
+      "lastAt": "2026-07-24T13:50:37.774Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 25
+      "beats": 26
     }
   ],
   "company": [
@@ -10047,15 +10086,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 145,
-    "choices": 145,
-    "characterDeltas": 60,
-    "scene": 145,
-    "npcUpdates": 129,
+    "sceneSummary": 146,
+    "choices": 146,
+    "characterDeltas": 61,
+    "scene": 146,
+    "npcUpdates": 130,
     "factUpdates": 11,
     "placeUpdates": 26,
-    "codexUpdates": 91,
-    "timeOps": 139,
+    "codexUpdates": 92,
+    "timeOps": 140,
     "imagePrompt": 3,
     "sceneEnded": 32,
     "itemUpdates": 2,
@@ -10069,10 +10108,10 @@
     "discovery": 2,
     "stageOps": 6,
     "generateRequest": 5,
-    "inventoryAdd": 1,
+    "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 145,
+  "_opTurns": 146,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

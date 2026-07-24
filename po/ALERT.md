@@ -24,10 +24,15 @@
 > (Erik's "make sure"): the frame stays a LEGIBILITY LAYER — verified a freeform action during an encounter is
 > resolved against the stage by the GM (the exit buttons are shortcuts for the same path), and every frame now
 > shows a freeform cue so it never reads as buttons-only.
-> **NEXT — Phase 2 BEHAVIOR wiring:** actually start the chained encounter on flee (flee a fight → a real
-> GM-narrated chase → escape, or caught → back to a fight). Touches the core flee flow → its own careful slice on
-> the graph. Then Phase 3 (§6b/§7a collapse/morph + degree bands), Phase 4 (§7b/§7c ward-denial +
-> kit-trivialization — Aevi content-heavy).
+> **Phase 2 BEHAVIOR shipped (v1.8.252):** flee a fight → a real GM-narrated CHASE (chaseFromFight builds it,
+> carrying `_chainedFrom` the fight); win it → away; caught (abandon) → back into the ORIGINAL fight. #sb-flee +
+> onChoice intercepts drive it; the chase renders through renderPlay so the GM + freefield still drive it (no
+> mini-loop). Robust (GM-hiccup falls back, never wedges). Full flee→chase→escape/refight drive w/ live GM
+> narration = Erik's Tier-2 (needs his key).
+> **NEXT — Phase 3 (§6b + §7a):** skill collapse/morph — a FINISH/transit craft offers a collapse action inside
+> the frame, resolved as an OPPOSED check keyed off function family (HARM verbs / MOVE-transit — there is NO
+> FINISH family, per the P1 corrections), along the resolver's degree bands (crit→collapse … whiff→morph). Then
+> Phase 4 (§7b/§7c ward-denial + kit-trivialization — Aevi content-heavy: `denies`/`breakDC`, `premise`/`trivializedBy`/`resistDC`).
 > Deferred to later phases: narrative-promotion (shouldFrame/PERILOUS), chaining (§6a), collapse/morph+degrees
 > (§6b/§7a), ward-denial + kit-trivialization (§7b/§7c).
 

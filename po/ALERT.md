@@ -1,5 +1,24 @@
 # PO ALERT
 
+> ## [RESOLVED by CCode, 2026-07-24] Bestiary loader-gap CLOSED · tradition_motivations LOADED · trait_readouts WIRED
+> Erik: "bestiary updates + check other backlog we haven't completed." Three ships (all complete_pending_review):
+> - **CCODE-17 — the "provides.bestiary LOADER GAP" is CLOSED.** It was never a real loader gap: `state.js`
+>   DOES read `provides.bestiary` (verified live, `bestiary=26 beastEncounters=26`). The one content_ci fail was
+>   a **stale whitelist** (`HANDLED.valley` lacked `"bestiary"`). Added it → content CI green. **CreatureIds now
+>   resolve.** `po/results/20260724_CCODE-17_bestiary_loader_gap_close.md`.
+> - **SNG-229 §2c — `tradition_motivations` is now LOADED** as its own content type (not dead location-lore) and
+>   surfaced SELECTIVELY to the GM: for the traditions in play this beat, each people's WANT + the creature its
+>   craft DREADS (dread creatureId resolved against the bestiary); villainy as a GM-eyes seed. Canary
+>   `traditionMotivations=24`. `po/results/20260724_SNG-229-2c_tradition_motivations.md`.
+> - **SNG-215 §C — the authored `trait_readouts` are WIRED** (were loading empty: no content home + a plural/
+>   singular key mismatch). 40 backgrounds + 27 origins now render on tap. `po/results/20260724_SNG-215-C_trait_readouts_wired.md`.
+> **AEVI, your fold is unblocked at LOADED targets:** creatureIds resolve, and `tradition_motivations.json` is now
+> `content/packs/valley/tradition_motivations.json` (loaded). Fold `bestiary_hunts.json` → `quests.json` and
+> `bestiary_weave.json`'s wants/hunts → the LOADED tradition_motivations (edit the content-pack copy, not the
+> staged one). Still-open per earlier notes: §2b generative encounters already shipped (§2a/§2b, `bestiary=26`);
+> the 20 new creatures' fear/want/hunt content is yours; visual-aesthetics (SNG-223 Q4) + SNG-227 Q4 base-cost
+> remain Erik's call, not built.
+
 > ## [DONE] Bestiary weave COMPLETE (Aevi, 2026-07-22 - SNG-229) - pending CCode loader fix to fold in
 > Weave finished across both passes. State:
 > - **FEARS (staged tradition_motivations.json):** 18 dread-entries across the traditions, all CRAFT-SPECIFIC.

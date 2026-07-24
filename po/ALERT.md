@@ -1,5 +1,12 @@
 # PO ALERT
 
+> ## [RESOLVED] Erik's two calls (2026-07-24)
+> - **SNG-223 Q4: WIRE IT.** The per-tradition visual guide (tradition_visual_aesthetics.json, all 24, staged)
+>   gets wired into the skill-image prompts. CCode: prepend the craft's tradition block (palette/materials/
+>   light/mood) to ensureImage('ability') so a tradition's craft images share a look. Content done; CCode wires.
+> - **SNG-227 Q4: HOLD.** No tier->base cost band now - feel the rebalanced economy in play first (it already
+>   taxes power; a band risks over-correcting the floor-fix). Revisit only from post-play felt data. Parked.
+
 > ## [DONE-LIVE] Bestiary weave FOLDED into loaded files (Aevi, 2026-07-24 - SNG-229)
 > CCode fixed the loader gap + loaded tradition_motivations, so I folded the staged weave LIVE:
 > - **7 hunt quests** folded into content/packs/valley/quests.json (15 quests total). All givers real, all

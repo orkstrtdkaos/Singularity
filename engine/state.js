@@ -208,7 +208,7 @@ export async function loadContent() {
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
   const [region, substrate, greaterArcs, genNpc, genLoc, genArc, originsDoc, backgroundsDoc, regionsDoc,
-         accords, helpDoc, substrateModel, prologue, legendsLoaded, traitReadoutsDoc] = await Promise.all([
+         accords, helpDoc, substrateModel, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
     fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
@@ -233,7 +233,8 @@ export async function loadContent() {
       for (const f of [...(lf.figures || []), ...(ef.epics || [])]) if (f?.id) byId[f.id] = f; // last wins → epics win on overlap
       return loadLegends({ ...lf, figures: Object.values(byId) });
     }).catch(() => ({ roster: [], beats: {}, tiers: {} })),
-    loadRule("trait_readouts", { readouts: {} })                                                  // SNG-215 §C: per-trait lore+mechanics (Aevi-authored; optional — derived fallback when absent)
+    loadRule("trait_readouts", { readouts: {} }),                                                 // SNG-215 §C: per-trait lore+mechanics (Aevi-authored; optional — derived fallback when absent)
+    loadRule("tradition_visual_aesthetics", { traditions: {} })                                    // SNG-223 Q4: per-tradition palette/materials/light/mood for the craft-image prompt (optional — bare tradition name when absent)
   ]);
   const genSchemas = {}; // SNG-BATCH-9 validation schemas that generate(type, context) authors against
   if (genNpc) genSchemas.npc = genNpc;
@@ -266,8 +267,8 @@ export async function loadContent() {
 
   // SNG-187: a content-count canary at boot — cheap observability, and the proof that parallelising
   // the loaders did not silently drop or reorder any manifest group (the counts must not move).
-  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length} traditionMotivations=${Object.keys(traditionMotivations?.traditions || {}).length}`);
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, bestiary, traditionMotivations, startingLocation: valley.startingLocation };
+  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length} traditionMotivations=${Object.keys(traditionMotivations?.traditions || {}).length} traditionAesthetics=${Object.keys(traditionAestheticsDoc?.traditions || {}).length}`);
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

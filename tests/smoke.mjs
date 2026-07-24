@@ -7498,6 +7498,23 @@ await (async () => {
   check("223: the detail panel generates + SHOWS the craft image on first contact (glyph fallback if none)", /const selImg = selAb && !sel\.closed \? ensureAbilityImage\(selAb\)/.test(appSrc223) && /class="craft-detail-art"/.test(appSrc223));
   const cssSrc223 = readFileSync(join(root, "style.css"), "utf8");
   check("223: the craft detail art is styled (lightbox)", /\.craft-detail-art/.test(cssSrc223) && /data-lightbox/.test(appSrc223));
+
+  // SNG-223 Q4: the per-tradition VISUAL block (palette/materials/light/mood) rides the prompt when loaded,
+  // so a people's crafts share a concrete look — and falls back to the bare tradition name when absent.
+  const aesDoc = JSON.parse(readFileSync(join(root, "content/packs/core/rules/tradition_visual_aesthetics.json"), "utf8"));
+  check("223 Q4: the aesthetics doc is loaded content (core/rules) with all 24 traditions", Object.keys(aesDoc.traditions).length === 24 && !!aesDoc.traditions.ashwarden?.palette);
+  const manC = JSON.parse(readFileSync(join(root, "content/packs/core/manifest.json"), "utf8"));
+  check("223 Q4: the manifest WHITELISTS it (STRICT core/rules dir)", (manC.provides.rules || []).includes("rules/tradition_visual_aesthetics.json"));
+  const aes = aesDoc.traditions.ashwarden;
+  const withA = assembleImagePrompt("ability", { name: "Undying Ledger", description: "read the death-pattern", tradition: "ashwarden" }, { aesthetic: aes });
+  check("223 Q4: WITH the aesthetic, the craft's palette + materials + light + mood ride the prompt",
+    withA.includes(aes.palette) && withA.includes(aes.materials) && withA.includes(aes.light) && withA.includes(aes.mood));
+  const noA = assembleImagePrompt("ability", { name: "Undying Ledger", description: "read the death-pattern", tradition: "ashwarden" }, {});
+  check("223 Q4: WITHOUT the doc, falls back to the bare tradition name (backward-safe)",
+    /rendered in the aesthetic of the ashwarden tradition$/.test(noA) && !noA.includes(aes.palette));
+  const stateSrc223 = readFileSync(join(root, "engine/state.js"), "utf8");
+  check("223 Q4: loadContent loads it into CONTENT.traditionVisualAesthetics + ensureAbilityImage passes it via promptOpts",
+    /loadRule\("tradition_visual_aesthetics"/.test(stateSrc223) && /traditionVisualAesthetics: traditionAestheticsDoc/.test(stateSrc223) && /CONTENT\.traditionVisualAesthetics\?\.\[tradId\]/.test(appSrc223) && /promptOpts: \{ aesthetic \}/.test(appSrc223));
 }
 
 // ---- SNG-214: the choice-prefill craft is DIVERSIFIED, not defaulted to the broad Order-Sense (prompt-side) ----

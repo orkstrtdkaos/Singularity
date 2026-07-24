@@ -215,7 +215,18 @@ export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
   if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
   if (kind === "item") return `single item on plain dark background, ${subject.name}: ${subject.description || subject.kind || ""}`;
   // SNG-223: a craft's image — its authored description IS the prompt, grounded in its tradition's aesthetic.
-  if (kind === "ability") return `${subject.name || "a craft"}: ${String(subject.description || subject.effect || "").slice(0, 260)}${subject.tradition ? ` — rendered in the aesthetic of the ${String(subject.tradition).replace(/[-_]+/g, " ")} tradition` : ""}`; // prose-cap-ok: an image PROMPT, not displayed prose (matches the sibling location/item/moment prompt caps)
+  // SNG-223 Q4: when the per-tradition visual block is loaded (ctx.aesthetic = palette/materials/light/mood),
+  // that CONCRETE style rides the prompt so a people's crafts share a look (Ashwarden = greys/ash; Wright =
+  // scaffolds/half-built). Absent the doc, fall back to the bare tradition name — backward-safe.
+  if (kind === "ability") {
+    const desc = String(subject.description || subject.effect || "").slice(0, 260); // prose-cap-ok: an image PROMPT, not displayed prose (matches the sibling location/item/moment prompt caps)
+    const tradName = subject.tradition ? String(subject.tradition).replace(/[-_]+/g, " ") : "";
+    const a = ctx.aesthetic || null;
+    const style = a
+      ? ` — rendered in the aesthetic of the ${tradName} tradition: ${[a.palette, a.materials, a.light, a.mood].filter(Boolean).join("; ")}`
+      : (tradName ? ` — rendered in the aesthetic of the ${tradName} tradition` : "");
+    return `${subject.name || "a craft"}: ${desc}${style}`;
+  }
   if (kind === "moment") return String(subject.prompt || subject).slice(0, 300);
   return String(subject.name || subject || "");
 }

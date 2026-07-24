@@ -68,7 +68,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.246";
+const APP_VERSION = "1.8.247";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1847,8 +1847,13 @@ function ensureAbilityImage(ab) {
   if (ab.image) return ab.image;                             // authored / born-with-image craft
   character.abilityImages = character.abilityImages || {};
   if (character.abilityImages[ab.id]) return character.abilityImages[ab.id]; // cached — never regen
-  const url = ensureImage({ id: `ability-${ab.id}`, name: ab.name, description: ab.description || ab.effect || "", tradition: ab.tradition },
-    "ability", { ratingLevel: viewerRatingLevel(), field: "image" });
+  // SNG-223 Q4: key the craft's tradition to its canonical id (traditionOf resolves it from the index — many
+  // abilities carry no bare .tradition), then pass that tradition's authored visual block so the image reads
+  // as its people. Absent the aesthetics doc, ensureImage falls back to the bare tradition name.
+  const tradId = abilityTradition(ab) || ab.tradition || null;
+  const aesthetic = tradId ? (CONTENT.traditionVisualAesthetics?.[tradId] || null) : null;
+  const url = ensureImage({ id: `ability-${ab.id}`, name: ab.name, description: ab.description || ab.effect || "", tradition: tradId },
+    "ability", { ratingLevel: viewerRatingLevel(), field: "image", promptOpts: { aesthetic } });
   if (url) {
     character.abilityImages[ab.id] = url;
     try { addGalleryImage(character, { kind: "ability", prompt: ab.name, url, caption: ab.name, worldDay: absoluteWorldDay() }); } catch { /* gallery is a convenience */ }

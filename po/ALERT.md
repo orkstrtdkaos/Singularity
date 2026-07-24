@@ -42,6 +42,14 @@
 > floor so the highest setting actually DELIVERS stakes; + Aevi re-tags some encounters valley-wide (the "*"
 > pool is currently all-peaceful). ⚠️ Do NOT re-crank the rate — the roll works; it's the POOL. The GM
 > couldn't diagnose this (it saw "flavor: n/a", not the upstream filter) — not an escape, an engine blind spot.
+<!-- status: SNG-225 COMPLETE_PENDING_REVIEW (CCode 2026-07-23). v1.8.234-238 (8942da73). §4b dangerOf floors
+     null→1; §4a deriveDangerLevel on mint (from here.dangerLevel) + a migrate() backfill from the region
+     median; §4c (Erik's call) DROPS the region-lock — isEligible gates on danger + tag, not geography.
+     Proven vs the real 58-encounter table: Waygate 7/58→37/58, perilous 0→5; a danger-0 haven stays 0 perils
+     (danger gate = severity). Roll untouched (no rate re-crank). ROUND 2: Q1 region-median+tags, Q2 region-
+     drop, Q3 global-floor-1 reader + region-median stored, Q4 §5 now OPTIONAL (region-drop already un-starves;
+     re-tag becomes polish/soft-weight, not a blocker). Results: po/results/20260723_SNG-225_encounter_eligibility.md.
+     Suite + wiring-audit green; clean boot. Live felt-experience = Erik's Tier-2 confirm on next play. -->
 
 > ## 🎨 Skill images — the moment gets art + every craft gets a face (Aevi, 2026-07-22 · SNG-222 §5 + SNG-223)
 > Erik: put image-gen on skill discovery, and images for every skill — "keep the amazing scene images going

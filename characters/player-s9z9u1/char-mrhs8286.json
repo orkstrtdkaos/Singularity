@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 24,
-  "xp": 2313,
+  "xp": 2316,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -152,7 +152,7 @@
   "maxHealth": 145,
   "health": 145,
   "maxEnergy": 215,
-  "energy": 208,
+  "energy": 204,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1840,71 +1840,71 @@
         "player": "Ok - let Gweth say what she came to, but make sure to keep your guard up.",
         "summary": "Gweth Callow names her purpose at the fork — she came to give the party safe guidance before they enter the Zone.",
         "narration": "You lower Memory's shadow-twin a few inches — not dismissing it, but no longer holding it like a threat. Your eyes stay on the tree-line to the south. The doe has not moved. Her two young stand just behind her flanks, patient and unreadable in the white air.\n\nGweth steps up beside your left shoulder, close enough to be heard without raising her voice. She does not look at the deer. She looks at you. \"I was not here for a deer,\" she says, and the flat certainty in it means she has been thinking about how to say this since before the mist came down. \"I know where the road you are on goes. I have walked the March since before your father named you. I know what is wrong with the water, and I know the fold in the Crossing's lower ground, and I know that the three of you going into that country this morning without a guide is how people do not come back.\"\n\nShe pauses. Behind you, Pell has not moved. Veth has not moved. Huginn makes no sound. The doe in the mist takes one slow step to the east, unhurried, and then another. Her young follow her without ceremony and the mist closes around all three of them like a door being drawn shut.\n\n\"I am not asking to come with you,\" Gweth says. \"I am telling you what I know about the ground ahead, and then you will choose.\" She shifts the crook in her forearms and names the first thing plainly. \"The March Road forks once more before it enters the Zone proper. The left branch goes to the fold. The right branch looks like it goes the same way and does not. People take the right branch and walk for three hours and end up at the same spot they started from, only turned around and in worse weather. I know which branch is which and I can mark it so you find it again on the return.\""
+      },
+      {
+        "player": "Use Order-Sense on the fork itself — read the design of both branches and confirm which one leads true",
+        "summary": "Order-Sense confirms the right branch is a false track. The left runs true into the Zone — but something large sits across the road inside, and the thinning lattice won't show what.",
+        "narration": "You let Order-Sense settle the way it does when you give it room — not pushed, just opened. The fork's design comes clear around you like a blueprint held up to the light.\n\nThe right branch reads immediately. It bends east within forty paces, and then it bends again, and within a quarter mile it has curved back north. Not toward the Zone. Toward the valley floor. The design of it is plain: a grazing track, old and honest, built for animals and the people who follow them. Gweth named it false, and the craft confirms it without hesitation.\n\nThe left branch is harder. The design is there — you can feel the load-bearing shape of it, a road that was made to go somewhere specific and still intends to. But the substrate here is thin, and what you get past the first turning is a smear rather than a line. You can say with certainty that the left branch runs into the Zone. You cannot say with certainty what it runs into once it is there. Something large sits across that line — not a wall, not a trap, but a structure of some kind, built or grown, that the design bends around. The lattice is too starved to give you more than the shape of it.\n\nHuginn shifts on your shoulder. Once. A short, dry sound that is not quite a word."
       }
     ],
     "lastTurn": {
-      "narration": "You lower Memory's shadow-twin a few inches — not dismissing it, but no longer holding it like a threat. Your eyes stay on the tree-line to the south. The doe has not moved. Her two young stand just behind her flanks, patient and unreadable in the white air.\n\nGweth steps up beside your left shoulder, close enough to be heard without raising her voice. She does not look at the deer. She looks at you. \"I was not here for a deer,\" she says, and the flat certainty in it means she has been thinking about how to say this since before the mist came down. \"I know where the road you are on goes. I have walked the March since before your father named you. I know what is wrong with the water, and I know the fold in the Crossing's lower ground, and I know that the three of you going into that country this morning without a guide is how people do not come back.\"\n\nShe pauses. Behind you, Pell has not moved. Veth has not moved. Huginn makes no sound. The doe in the mist takes one slow step to the east, unhurried, and then another. Her young follow her without ceremony and the mist closes around all three of them like a door being drawn shut.\n\n\"I am not asking to come with you,\" Gweth says. \"I am telling you what I know about the ground ahead, and then you will choose.\" She shifts the crook in her forearms and names the first thing plainly. \"The March Road forks once more before it enters the Zone proper. The left branch goes to the fold. The right branch looks like it goes the same way and does not. People take the right branch and walk for three hours and end up at the same spot they started from, only turned around and in worse weather. I know which branch is which and I can mark it so you find it again on the return.\"",
-      "sceneSummary": "Gweth Callow names her purpose at the fork — she came to give the party safe guidance before they enter the Zone.",
+      "narration": "You let Order-Sense settle the way it does when you give it room — not pushed, just opened. The fork's design comes clear around you like a blueprint held up to the light.\n\nThe right branch reads immediately. It bends east within forty paces, and then it bends again, and within a quarter mile it has curved back north. Not toward the Zone. Toward the valley floor. The design of it is plain: a grazing track, old and honest, built for animals and the people who follow them. Gweth named it false, and the craft confirms it without hesitation.\n\nThe left branch is harder. The design is there — you can feel the load-bearing shape of it, a road that was made to go somewhere specific and still intends to. But the substrate here is thin, and what you get past the first turning is a smear rather than a line. You can say with certainty that the left branch runs into the Zone. You cannot say with certainty what it runs into once it is there. Something large sits across that line — not a wall, not a trap, but a structure of some kind, built or grown, that the design bends around. The lattice is too starved to give you more than the shape of it.\n\nHuginn shifts on your shoulder. Once. A short, dry sound that is not quite a word.",
+      "sceneSummary": "Order-Sense confirms the right branch is a false track. The left runs true into the Zone — but something large sits across the road inside, and the thinning lattice won't show what.",
       "choices": [
         {
-          "label": "Ask Gweth to mark the fork and tell you everything she knows about the road ahead before you move",
+          "label": "Ask Gweth what sits on the left road past the first turning — she's walked this march since before your father named you",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "listen",
-            "careful"
+            "study"
           ],
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the fork itself — read the design of both branches and confirm which one leads true",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Ask Gweth what she knows about the fold itself — not just the road to it, but what she has seen there",
+          "label": "Tell the party what you read — the right is false, the left runs true, something sits across the road inside — and let Veth weigh in before you move",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "negotiate"
+            "lead"
           ],
           "trivial": true
         },
         {
-          "label": "Thank Gweth plainly and move out — you have the Waymarker and Veth knows the road; you do not need to delay",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
+          "label": "Take the left branch now — Gweth is here, Veth knows the road, you know the false right is out; press into the Zone before the mist lifts",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": 0.2,
+            "chaos_order": -0.1
+          },
+          "difficulty": 15,
           "intentTags": [
             "travel",
-            "careful"
+            "risky"
           ],
-          "trivial": true
+          "trivial": false
+        },
+        {
+          "label": "Use The Attended End on the left branch — ask plainly what is ending along that road right now",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
-      },
       "scene": {
         "setting": "The March Road south of Millbrook, at the fork marked by the split dead oak — early dawn, mist thick, frozen mud at rut-edges. Memory's shadow-twin is in Silas's right hand, held lower now. The doe and her two young have stepped east into the mist and are gone.",
         "npcsPresent": [
           {
             "name": "Gweth Callow",
-            "state": "Standing at Silas's left shoulder, crook across her forearms, having just named her purpose — waiting for his response."
+            "state": "Standing at Silas's left shoulder, crook across her forearms, watching him read the fork — waiting."
           },
           {
             "name": "Pell Ran Marsh",
@@ -1916,20 +1916,21 @@
           },
           {
             "name": "Huginn",
-            "state": "On Silas's right shoulder, feathers settled, watching the mist where the deer departed."
+            "state": "On Silas's right shoulder, feathers settled — just made a short, dry sound."
           }
         ],
         "objects": [
           "Memory's shadow-twin — in Silas's right hand, runes dark, held lower",
           "Split dead oak at the fork — standing half upright, fallen half on the verge",
           "Left branch: old March road into the Zone proper",
-          "Right branch: valley-floor route bending east",
+          "Right branch: valley-floor grazing track bending east — confirmed false by Order-Sense",
           "Faint mineral-cast fog to the south",
           "Gweth's crook — long, resting across her forearms"
         ],
         "threads": [
-          "Gweth has named one piece of guidance — the false right branch — and is waiting to see if Silas wants the rest",
-          "Veth is present and may have her own read on what Gweth is describing"
+          "The left branch leads true into the Zone — but something large sits across that road inside, and the lattice gave no more than its shape",
+          "Huginn made a sound after the reading — not quite a word, not quite nothing",
+          "Gweth has more to say; she came to give guidance, and the reading only confirmed what she warned"
         ]
       },
       "npcUpdates": [
@@ -1937,39 +1938,43 @@
           "op": "update",
           "npcId": "gweth-callow",
           "name": "Gweth Callow",
-          "note": "Named her purpose at the fork plainly — came before dawn to warn the party about the false right branch and to offer what she knows about the road ahead before they enter the Zone.",
-          "learned": [
-            "The March Road forks again before the Zone proper — the right branch looks correct but loops travelers back to their starting point after three hours; the left branch goes true to the fold.",
-            "She has walked the March since before Silas was born and has direct knowledge of the fold country."
-          ],
-          "statusNote": "At the fork with the party — has said her first piece, waiting for Silas to decide whether to hear the rest.",
-          "relationshipDelta": 1
+          "note": "Waited in silence while Silas read the fork with Order-Sense. Has more guidance to give; the reading confirmed her warning about the right branch.",
+          "statusNote": "At the fork on the March Road south of Millbrook — waiting to speak.",
+          "status": "active"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-second-thread",
-          "label": "The Second Thread",
-          "kind": "event",
-          "fact": "The March Road forks a second time before entering the Zone proper. The right branch loops travelers back to the start after three hours — a reliable false path. The left branch goes true to the fold. Gweth Callow knows which is which.",
+          "topic": "the-march-road-fork",
+          "label": "The March Road Fork",
+          "kind": "place",
+          "fact": "Order-Sense confirms the right branch is a grazing track bending back north — false. The left runs into the Zone with structural intent, but something large sits across that road past the first turning. The thinning lattice would not show what.",
           "links": [
+            "the-second-thread",
             "what-the-water-remembers",
-            "millbrook",
-            "veth-ondra"
+            "millbrook"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the fork — dawn still holding."
-      }
+        "why": "a few minutes at the fork while Silas read the design"
+      },
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "The March Road south of Millbrook, at the fork marked by the split dead oak — early dawn, mist thick, frozen mud at rut-edges. Memory's shadow-twin is in Silas's right hand, held lower now. The doe and her two young have stepped east into the mist and are gone.",
       "npcsPresent": [
         {
           "name": "Gweth Callow",
-          "state": "Standing at Silas's left shoulder, crook across her forearms, having just named her purpose — waiting for his response."
+          "state": "Standing at Silas's left shoulder, crook across her forearms, watching him read the fork — waiting."
         },
         {
           "name": "Pell Ran Marsh",
@@ -1981,20 +1986,21 @@
         },
         {
           "name": "Huginn",
-          "state": "On Silas's right shoulder, feathers settled, watching the mist where the deer departed."
+          "state": "On Silas's right shoulder, feathers settled — just made a short, dry sound."
         }
       ],
       "objects": [
         "Memory's shadow-twin — in Silas's right hand, runes dark, held lower",
         "Split dead oak at the fork — standing half upright, fallen half on the verge",
         "Left branch: old March road into the Zone proper",
-        "Right branch: valley-floor route bending east",
+        "Right branch: valley-floor grazing track bending east — confirmed false by Order",
         "Faint mineral-cast fog to the south",
         "Gweth's crook — long, resting across her forearms"
       ],
       "threads": [
-        "Gweth has named one piece of guidance — the false right branch — and is waiting to see if Silas wants the rest",
-        "Veth is present and may have her own read on what Gweth is describing"
+        "The left branch leads true into the Zone — but something large sits across that road inside, and the lattice gave no more than its shape",
+        "Huginn made a sound after the reading — not quite a word, not quite nothing",
+        "Gweth has more to say; she came to give guidance, and the reading only confirmed what she warned"
       ]
     }
   },
@@ -4081,7 +4087,8 @@
         "[d14] Waited at the fork before first light. Named Silas's party from Millbrook without being told. Spoke first.",
         "[d14] Moved behind Silas without argument on a plain command — reads urgency and trusts it.",
         "[d14] Named the old grey doe in the mist — Brist, a regular at the south fork thicket each melt-season. Spoke low and level, no alarm in her voice.",
-        "[d14] Named her purpose at the fork plainly — came before dawn to warn the party about the false right branch and to offer what she knows about the road ahead before they enter the Zone."
+        "[d14] Named her purpose at the fork plainly — came before dawn to warn the party about the false right branch and to offer what she knows about the road ahead before they enter the Zone.",
+        "[d14] Waited in silence while Silas read the fork with Order-Sense. Has more guidance to give; the reading confirmed her warning about the right branch."
       ],
       "knownFacts": [
         "Word of Stillwater's Trouble and the Warden's name has reached at least the March Road's shepherd circuit",
@@ -4095,7 +4102,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the fork with the party — has said her first piece, waiting for Silas to decide whether to hear the rest.",
+      "statusNote": "At the fork on the March Road south of Millbrook — waiting to speak.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -5032,7 +5039,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 595,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The shadow-found settling basin — a detail none of them drew, surfaced by the craft itself",
@@ -6623,21 +6630,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.020146892987693,
-    "cerebral": 14.246272263344686,
-    "social": 8.446017766482685,
-    "generous": 3.105126399878929,
-    "cautious": 6.441031214987276,
-    "physical": 0.14667650693606207,
-    "risky": 0.8304672107664278,
-    "ruthless": 0.11402019929756943,
-    "carousing": 0.026151922762973595,
-    "amorous": 4.484901799258121,
-    "patient": 1.0159366782242123,
-    "stealth": 0.00026225692075476577,
-    "devotion": 0.7725147459750277,
-    "craft": 3.634966544399519,
-    "leadership": 1.963119707585651
+    "strategic": 21.469643220663,
+    "cerebral": 14.890115456761068,
+    "social": 8.234867322320618,
+    "generous": 3.0274982398819557,
+    "cautious": 7.280005434612594,
+    "physical": 0.14300959426266052,
+    "risky": 0.8097055304972671,
+    "ruthless": 0.11116969431513019,
+    "carousing": 0.025498124693899255,
+    "amorous": 4.372779254276668,
+    "patient": 0.990538261268607,
+    "stealth": 0.00025570049773589664,
+    "devotion": 0.7532018773256519,
+    "craft": 3.544092380789531,
+    "leadership": 1.9140417148960096
   },
   "aptitudes": [
     "strategist",
@@ -6645,7 +6652,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 813,
+  "actionCount": 814,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -7035,8 +7042,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784920292665,
-  "rev": 1329,
+  "updatedAt": 1784920431321,
+  "rev": 1330,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9467,7 +9474,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 83,
+      "order_sense": 84,
       "palework": 30,
       "deathsense": 35,
       "shadowstep": 22,
@@ -9992,7 +9999,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 554,
+    "valley": 555,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10128,10 +10135,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T19:11:32.663Z",
+      "lastAt": "2026-07-24T19:13:51.318Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 67
+      "beats": 68
     }
   ],
   "company": [
@@ -10342,17 +10349,17 @@
     "gen-mara-wells-store": "https://image.pollinations.ai/prompt/Mara%20Wells%20Store%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Mara%20Wells%20Store.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=13548&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 183,
-    "choices": 183,
-    "characterDeltas": 71,
-    "scene": 183,
-    "npcUpdates": 167,
+    "sceneSummary": 184,
+    "choices": 184,
+    "characterDeltas": 72,
+    "scene": 184,
+    "npcUpdates": 168,
     "factUpdates": 13,
     "placeUpdates": 30,
-    "codexUpdates": 105,
-    "timeOps": 177,
+    "codexUpdates": 106,
+    "timeOps": 178,
     "imagePrompt": 3,
-    "sceneEnded": 42,
+    "sceneEnded": 43,
     "itemUpdates": 5,
     "questUpdates": 24,
     "offer": 17,
@@ -10367,7 +10374,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 183,
+  "_opTurns": 184,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

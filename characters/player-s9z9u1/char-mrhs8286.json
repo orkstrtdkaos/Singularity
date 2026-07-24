@@ -1750,24 +1750,79 @@
         "player": "Let Veth report first — hear everything she learned before you decide what to ask next",
         "summary": "Veth reports what Osten gave her — the metallic smell, the timing, and Crane's address at the mill.",
         "narration": "Veth wraps up her conversation with the water-seller in a few more exchanges — she thanks him, he nods, and she turns away with the unhurried walk of someone who got what she came for.\n\nShe crosses the lane to where you and Pell are standing and stops beside you, facing the well. She does not look at the seller again.\n\n\"His name is Osten,\" she says. \"He sells to the settlement and to travelers, boiled or sealed — takes no position on where the gray-brown is coming from, but he knows when it started.\" She pauses. \"Four mornings after the cold broke. Not the creek's ordinary spring silt. He said it smells different. Metallic, he said, and then he said he wasn't sure if that was the right word for it.\"\n\nPell makes a small sound that is not quite agreement and not quite doubt.\n\n\"He knows Edvar Crane,\" Veth continues. \"Not well. Crane boards at the mill — the long building on the settlement's north edge. He said Crane doesn't come to the well much. Buys sealed jugs.\" She glances at the cart behind her. \"Which means he has something to seal water into, and he is treating his water more carefully than most.\"\n\nHuginn shifts on the rooftop above, settling its weight from one foot to the other. One sound, low and flat.\n\nVeth looks up briefly, then back at you. \"The mill is north,\" she says. \"We can walk it in ten minutes.\""
+      },
+      {
+        "player": "Go, but let Huginn lead — follow where it goes, not straight to the mill.",
+        "summary": "Huginn leads the party north along the channel to the mill's intake — Veth reads the treated water without hesitation.",
+        "narration": "The crow lifts from the rooftop without being asked.\n\nYou watch it angle north along the lane — not the direct route to the mill but something adjacent. It passes the boiling-rags well, passes the two women with their jugs, and drops into the narrower passage between a grain store and a mender's shed where the light goes flat and the smell of the creek is stronger. Huginn does not circle or hesitate. It moves with the particular unhurry of something that knows where it is going and has no reason to rush.\n\nYou follow. Pell falls in half a step to your left, and Veth a step behind that. Nobody speaks.\n\nThe passage opens onto a short stretch of packed mud where a water-channel runs along the northern edge of the settlement toward the mill. The channel is low for the season. The melt should have it running full, but it is barely knee-deep. The color is wrong. Not the gray-brown of the creek at the well — this is cleaner. Cleaner than it should be, given everything else. Huginn lands on the far bank and stands there, looking at the water with the still, sidelong attention it reserves for things that are in the middle of something.\n\nVeth says quietly, \"It is treating the intake.\" She means the mill. She means Crane has done something upstream of the wheel to pull the water through before it reaches whatever he uses it for. She does not say this as a surprise. She says it the way she names most things — as a fact that was already there, waiting for someone to look at the right angle.\n\nHuginn gives one low sound. Then it is still."
       }
     ],
     "lastTurn": {
-      "narration": "Veth wraps up her conversation with the water-seller in a few more exchanges — she thanks him, he nods, and she turns away with the unhurried walk of someone who got what she came for.\n\nShe crosses the lane to where you and Pell are standing and stops beside you, facing the well. She does not look at the seller again.\n\n\"His name is Osten,\" she says. \"He sells to the settlement and to travelers, boiled or sealed — takes no position on where the gray-brown is coming from, but he knows when it started.\" She pauses. \"Four mornings after the cold broke. Not the creek's ordinary spring silt. He said it smells different. Metallic, he said, and then he said he wasn't sure if that was the right word for it.\"\n\nPell makes a small sound that is not quite agreement and not quite doubt.\n\n\"He knows Edvar Crane,\" Veth continues. \"Not well. Crane boards at the mill — the long building on the settlement's north edge. He said Crane doesn't come to the well much. Buys sealed jugs.\" She glances at the cart behind her. \"Which means he has something to seal water into, and he is treating his water more carefully than most.\"\n\nHuginn shifts on the rooftop above, settling its weight from one foot to the other. One sound, low and flat.\n\nVeth looks up briefly, then back at you. \"The mill is north,\" she says. \"We can walk it in ten minutes.\"",
-      "sceneSummary": "Veth reports what Osten gave her — the metallic smell, the timing, and Crane's address at the mill.",
+      "narration": "The crow lifts from the rooftop without being asked.\n\nYou watch it angle north along the lane — not the direct route to the mill but something adjacent. It passes the boiling-rags well, passes the two women with their jugs, and drops into the narrower passage between a grain store and a mender's shed where the light goes flat and the smell of the creek is stronger. Huginn does not circle or hesitate. It moves with the particular unhurry of something that knows where it is going and has no reason to rush.\n\nYou follow. Pell falls in half a step to your left, and Veth a step behind that. Nobody speaks.\n\nThe passage opens onto a short stretch of packed mud where a water-channel runs along the northern edge of the settlement toward the mill. The channel is low for the season. The melt should have it running full, but it is barely knee-deep. The color is wrong. Not the gray-brown of the creek at the well — this is cleaner. Cleaner than it should be, given everything else. Huginn lands on the far bank and stands there, looking at the water with the still, sidelong attention it reserves for things that are in the middle of something.\n\nVeth says quietly, \"It is treating the intake.\" She means the mill. She means Crane has done something upstream of the wheel to pull the water through before it reaches whatever he uses it for. She does not say this as a surprise. She says it the way she names most things — as a fact that was already there, waiting for someone to look at the right angle.\n\nHuginn gives one low sound. Then it is still.",
+      "sceneSummary": "Huginn leads the party north along the channel to the mill's intake — Veth reads the treated water without hesitation.",
+      "scene": {
+        "setting": "The packed-mud bank of the settlement's north water-channel, afternoon — the mill visible another minute's walk ahead, the channel running low and unusually clean, flat early-spring light.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Standing half a step to Silas's left, coat straight, watching Huginn on the far bank."
+          },
+          {
+            "name": "Huginn",
+            "state": "On the far bank of the channel — still, looking at the water, one low sound given."
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "A step behind the party, having named the intake treatment plainly."
+          }
+        ],
+        "objects": [
+          "The water-channel — low, running cleaner than the creek at the well",
+          "The mill — visible a minute's walk north along the channel",
+          "Packed mud bank with the mender's shed and grain store behind"
+        ],
+        "threads": [
+          "Crane has treated the intake — he is filtering for something specific",
+          "Huginn chose this route and gave one low sound at the water",
+          "Edvar Crane boards at the mill — still needs to be met"
+        ]
+      },
       "choices": [
         {
-          "label": "Head to the mill now — Crane is the thread, and Huginn just weighed in.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Go to the mill — knock and ask for Crane directly. You have his name and a reason. See who answers.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "persuade"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Veth what else Osten said before you move.",
+          "label": "Read the channel with Order-Sense — understand what the intake treatment is before you approach, and what it tells you about what Crane is filtering for.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Circle the mill's exterior — read the building, its access points, and who comes and goes, before committing to an approach.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Ask Veth what she makes of it. She named the intake treatment without being asked — she has a read already.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1775,166 +1830,42 @@
             "study"
           ],
           "trivial": true
-        },
-        {
-          "label": "Check the well itself on the way — read the water up close before any approach to Crane.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "the-attended-end",
-          "trivial": false
-        },
-        {
-          "label": "Go, but let Huginn lead — follow where it goes, not straight to the mill.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
         }
       ],
-      "scene": {
-        "setting": "The broad central lane of the Crossing marketplace, afternoon — the well ahead with boiling-rags on the rail, a water-seller's cart at the lane's east edge, flat early-spring light, faint smell of the creek.",
-        "npcsPresent": [
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Standing beside Silas, coat straight, listening to Veth's report."
-          },
-          {
-            "name": "Huginn",
-            "state": "On the rooftop above — shifted weight, one low sound, now still."
-          },
-          {
-            "name": "Veth (Stillwater) Ondra",
-            "state": "Standing with the party, report delivered, waiting for direction."
-          },
-          {
-            "name": "Osten",
-            "state": "Behind the water-seller's cart — conversation done, back to arranging his jugs."
-          }
-        ],
-        "objects": [
-          "The well — rope-post, boiling-rags on the rail",
-          "Osten's cart — hand-lettered sign on the axle, stacked clay-sealed jugs",
-          "Two women filling jugs at a careful distance from each other"
-        ],
-        "threads": [
-          "Edvar Crane boards at the mill — north edge of the settlement, ten minutes' walk",
-          "The contamination started four mornings after the cold broke — metallic smell, not ordinary spring silt",
-          "Crane buys sealed jugs and avoids the well — treating his water more carefully than most"
-        ]
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
       },
-      "npcUpdates": [
-        {
-          "op": "meet",
-          "npcId": "osten",
-          "name": "Osten",
-          "role": "Water-seller, the Crossing marketplace",
-          "gender": "man",
-          "pronouns": "he/him",
-          "description": "A broad, sun-cracked man who sells boiled and sealed water from a two-wheeled cart — takes no public position on the crisis but knows its timing precisely.",
-          "note": "Gave Veth the contamination start-date and Edvar Crane's address at the mill without knowing he was providing either as intelligence.",
-          "learned": [
-            "The gray-brown started four mornings after the cold broke — not ordinary spring silt, metallic smell",
-            "Edvar Crane boards at the mill on the settlement's north edge and buys sealed jugs rather than using the well"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At his cart in the Crossing marketplace — conversation complete, back to his work."
-        },
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Worked the water-seller cleanly — got the contamination timing, the smell description, and Crane's location from a man who didn't realize he was being interviewed.",
-          "learned": [
-            "Osten: contamination started four mornings after the cold broke, metallic smell, not ordinary silt",
-            "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here"
-          ],
-          "skillsObserved": [
-            "working a source until he gave more than he meant to, without pressure"
-          ],
-          "status": "active",
-          "statusNote": "With the party at the well lane — report delivered, ready to move."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "edvar-crane",
-          "label": "Edvar Crane",
-          "kind": "person",
-          "fact": "Crane boards at the mill on the Crossing's north edge. He buys sealed water rather than drawing from the well — treating the contamination as a known quantity, not a surprise.",
-          "links": [
-            "the-second-thread",
-            "what-the-water-remembers",
-            "millbrook"
-          ]
-        },
-        {
-          "topic": "what-the-water-remembers",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "The gray-brown contamination at the Crossing started four mornings after the cold broke — Osten describes the smell as metallic, not the ordinary spring silt. The timing is precise and the character of it is distinct.",
-          "links": [
-            "osten",
-            "the-water-crisis",
-            "edvar-crane",
-            "millbrook"
-          ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "what-the-water-remembers",
-          "note": "Contamination start-date fixed: four mornings after the cold broke. Metallic smell, not silt. Edvar Crane identified at the mill — he is already treating his water, which means he knows something."
-        },
-        {
-          "op": "progress",
-          "questId": "the-second-thread",
-          "note": "Edvar Crane located — boards at the Crossing mill, north edge of the settlement."
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short wait while Veth finished her conversation and reported back."
+        "why": "a short walk through the settlement's north lane to the channel bank"
       }
     },
     "sceneState": {
-      "setting": "The broad central lane of the Crossing marketplace, afternoon — the well ahead with boiling-rags on the rail, a water-seller's cart at the lane's east edge, flat early-spring light, faint smell of the creek.",
+      "setting": "The packed-mud bank of the settlement's north water-channel, afternoon — the mill visible another minute's walk ahead, the channel running low and unusually clean, flat early-spring light.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing beside Silas, coat straight, listening to Veth's report."
+          "state": "Standing half a step to Silas's left, coat straight, watching Huginn on the far bank."
         },
         {
           "name": "Huginn",
-          "state": "On the rooftop above — shifted weight, one low sound, now still."
+          "state": "On the far bank of the channel — still, looking at the water, one low sound given."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Standing with the party, report delivered, waiting for direction."
-        },
-        {
-          "name": "Osten",
-          "state": "Behind the water-seller's cart — conversation done, back to arranging his jugs."
+          "state": "A step behind the party, having named the intake treatment plainly."
         }
       ],
       "objects": [
-        "The well — rope-post, boiling-rags on the rail",
-        "Osten's cart — hand-lettered sign on the axle, stacked clay-sealed jugs",
-        "Two women filling jugs at a careful distance from each other"
+        "The water-channel — low, running cleaner than the creek at the well",
+        "The mill — visible a minute's walk north along the channel",
+        "Packed mud bank with the mender's shed and grain store behind"
       ],
       "threads": [
-        "Edvar Crane boards at the mill — north edge of the settlement, ten minutes' walk",
-        "The contamination started four mornings after the cold broke — metallic smell, not ordinary spring silt",
-        "Crane buys sealed jugs and avoids the well — treating his water more carefully than most"
+        "Crane has treated the intake — he is filtering for something specific",
+        "Huginn chose this route and gave one low sound at the water",
+        "Edvar Crane boards at the mill — still needs to be met"
       ]
     }
   },
@@ -4673,7 +4604,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 579,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "The stock shelter, plain and open on the lee side of the field-stone wall — exactly the kind of place Huginn will land first and inspect…",
@@ -6176,21 +6107,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.72687204287908,
-    "cerebral": 13.180669702610764,
-    "social": 14.05637089984779,
-    "generous": 5.190494526227046,
-    "cautious": 4.5146474738409745,
-    "physical": 0.7048137783709885,
-    "risky": 0.6194298424393955,
-    "ruthless": 0.5478928368028577,
-    "carousing": 0.1256659016448524,
-    "amorous": 2.1245309508451826,
-    "patient": 0.7537880192948874,
-    "stealth": 0.0012602037987016028,
-    "devotion": 0.6656379902257272,
-    "craft": 1.0486804408188157,
-    "leadership": 1.016856439976442
+    "strategic": 18.283700241807104,
+    "cerebral": 12.851152960045495,
+    "social": 13.704961627351596,
+    "generous": 5.0607321630713695,
+    "cautious": 4.40178128699495,
+    "physical": 0.6871934339117137,
+    "risky": 0.6039440963784106,
+    "ruthless": 0.5341955158827862,
+    "carousing": 0.12252425410373108,
+    "amorous": 2.071417677074053,
+    "patient": 0.7349433188125152,
+    "stealth": 0.0012286987037340626,
+    "devotion": 0.648997040470084,
+    "craft": 1.0224634297983453,
+    "leadership": 0.9914350289770308
   },
   "aptitudes": [
     "strategist",
@@ -6198,7 +6129,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 751,
+  "actionCount": 752,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6588,8 +6519,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784865237498,
-  "rev": 1215,
+  "updatedAt": 1784865356884,
+  "rev": 1217,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9151,7 +9082,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 485,
+    "valley": 486,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9278,10 +9209,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T03:53:57.486Z",
+      "lastAt": "2026-07-24T03:55:56.879Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 85
+      "beats": 86
     }
   ],
   "company": [
@@ -9481,15 +9412,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 121,
-    "choices": 121,
-    "characterDeltas": 49,
-    "scene": 121,
+    "sceneSummary": 122,
+    "choices": 122,
+    "characterDeltas": 50,
+    "scene": 122,
     "npcUpdates": 105,
     "factUpdates": 7,
     "placeUpdates": 21,
     "codexUpdates": 71,
-    "timeOps": 115,
+    "timeOps": 116,
     "imagePrompt": 3,
     "sceneEnded": 26,
     "itemUpdates": 2,
@@ -9504,7 +9435,7 @@
     "stageOps": 5,
     "generateRequest": 3
   },
-  "_opTurns": 121,
+  "_opTurns": 122,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -9579,30 +9510,30 @@
     ]
   },
   "_suggestCache": {
-    "level": 20,
+    "level": 22,
     "picks": [
       {
-        "abilityId": "hunters_strike",
-        "why": "You declared this an aspiration and have already invested 2/10 progress toward it — this is the thing you said you wanted, and at a kit built around reading and manipulating the field (Order-Sense, Deathsense, Wither), landing your own strike when the moment you've engineered arrives closes the one gap your cerebral-strategic play keeps running into: you can see everything but your personal offense is thin.",
-        "fit": "aspiration"
-      },
-      {
-        "abilityId": "echo_memory",
-        "why": "You are 74 uses deep into Order-Sense and hold scholar/sage aptitudes — your entire identity is reconstructing what happened and why; Echo Memory lets you pull recent sounds back out of a still space, which is exactly the forensic-reconstruction move a character this cerebral reaches for in every scene they can't be present for.",
-        "fit": "strength"
+        "abilityId": "mediators_tongue",
+        "why": "You're already silver-tongued and social-first (14+ social rating), but your entire INFLUENCE kit is death-domain flavoured — you have no neutral political or negotiation tool; Mediator's Tongue gives your strategist brain a craft to work deals and de-escalate situations where raising corpses or whispering to the dead would be the wrong move entirely.",
+        "fit": "gap"
       },
       {
         "abilityId": "prism_sight",
-        "why": "You own Light-Borne but have built almost no Luminal depth around it; Prism Sight extends your already-signature sensory stack (Order-Sense r3, Deathsense r3) into the hidden-light spectrum — concealed marks, tampering, lies of presentation — which feeds the strategist/tactician aptitudes without duplicating anything you already have.",
+        "why": "Order-Sense is your signature (79 uses) and your Pattern-Sense aspiration signals hunger for deeper perceptual tools; Prism Sight adds a new layer of analytical vision — heat traces, concealed marks, lies of light — that feeds the same cerebral 'read everything before acting' loop your strategist aptitude runs on.",
+        "fit": "synergy"
+      },
+      {
+        "abilityId": "echo_memory",
+        "why": "Your scholar aptitude and cerebral play-style lean heavily on information gathered before the moment of action; Echo Memory lets you reconstruct what was said and done in a space you weren't present for — closing the single biggest gap for a character who reads situations but can't always be there when they unfold.",
         "fit": "gap"
       },
       {
         "abilityId": "stillness_field",
-        "why": "Your unused owned crafts (The Grey Hand, The Grey Road, The Shielding Word) suggest protective and concealment tools sit idle because they don't fit how you play — but Stillness Field is both concealment and control, a tactical quiet-bubble that a 17-cerebral, 17-strategic character uses to shape the information environment of a scene rather than fight in it.",
+        "why": "Your cautious side (4.5) and your ownership of The Shielding Word and You Shall Not Pass show a recurring instinct to control terrain and protect — Stillness Field extends that into a soft-stealth/information-denial tool that pairs naturally with your existing Shadowstep mobility and the strategic habit of setting a stage before others enter it.",
         "fit": "synergy"
       }
     ],
-    "note": "The field is entirely school-unaligned this level — every reachable craft sits outside your three adopted schools, so none is a more natural extension of existing discipline. Hunter's Strike is the clear first pick: you said so yourself."
+    "note": "All four picks are information, influence, or environmental control — exactly the shape of a strategic, cerebral character who wins before the fight starts. None pile onto your already-deep death-harm axis."
   },
   "abilityImages": {
     "the_shielding_word": "https://image.pollinations.ai/prompt/The%20Shielding%20Word%3A%20Interpose%20a%20spoken%20certainty%20between%20harm%20and%20a%20person%20%E2%80%94%20the%20Seraphic%20ward%2C%20which%20is%20why%20the%20Orders%20are%20loved%20despite%20everything.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=9311&nologo=true",

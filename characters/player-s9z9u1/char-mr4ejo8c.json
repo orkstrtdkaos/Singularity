@@ -5,8 +5,8 @@
   "name": "Cellaceron",
   "origin": "valley",
   "background": "craftsman",
-  "level": 10,
-  "xp": 999,
+  "level": 11,
+  "xp": 1004,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -76,11 +76,11 @@
     "destruction_creation": 0.13585151875,
     "spectrumId": -0.476418703043306
   },
-  "attunement": 10,
-  "maxHealth": 70,
-  "health": 68,
-  "maxEnergy": 145,
-  "energy": 48,
+  "attunement": 11,
+  "maxHealth": 75,
+  "health": 75,
+  "maxEnergy": 150,
+  "energy": 150,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -885,14 +885,19 @@
         "player": "Read her kit with Keen Appraisal — the instrument case and mismatched strap each carry a history",
         "summary": "Keen Appraisal reads the traveler's kit — Heights-issue strap, pre-Transition case, daily-use wear pattern; she opens with a single word and waits.",
         "narration": "The instrument case is old — older than the strap carrying it. The original strap gave out sometime in the last two winters, worn through at the buckle-end rather than the stitching, which means it was used daily and the weight was always the same. The replacement is a Harmonic Heights pattern, the kind issued at the Lower Terrace waystation for surveyors who requisition standard kit.\n\nShe didn't buy it. It was given to her, or requisitioned in her name.\n\nThe case itself is a different story. The corner-wear is even on all four edges, which means it has been set down thousands of times on flat surfaces — workshops, desks, shelves. Not fieldwork, or not only fieldwork. The latches are a pre-Transition alloy, unrusted, and the wood is a dense upland grain you don't find in the valley lowlands. Whoever made it worked in the Heights, or higher.\n\nShe has stopped about fifteen paces down the path, giving you room, and she is watching you with the particular patience of someone who has waited for people to finish thinking before. Aevi's motes drift at your shoulder, neither bright nor dim — noting, not alarmed.\n\n\"Morning,\" she says, after a moment. Her voice is level and carries no particular greeting in it — the word is acknowledgment, not warmth."
+      },
+      {
+        "player": "Use Prism Sight on her face as she speaks — catch the microflush of anything less than honest before the conversation settles.",
+        "summary": "Prism Sight reads a measured pause behind the traveler's single word — she is testing, not lying, waiting to see if Cellaceron uses the same word.",
+        "narration": "She says the word again, slightly louder, as if she thought you hadn't heard. \"Surveyors?\"\n\nYou let Prism Sight open quietly — not a push, just a soft widening of what you're already taking in. The morning light is flat and clean up here on the ridgeline, good reading light, and her face is turned three-quarters toward you.\n\nWhat you catch is small. When she spoke the word the first time, there was a faint warmth at the hinge of her jaw — the kind of flush that comes with a held breath released, not anxiety exactly, but something closer to calculation. She chose that word. She had others available and set them aside.\n\nShe is not lying. But she is asking something more precise than it sounds, and she is watching your face for the answer before she decides what to say next.\n\nAevi drifts a half-step forward at your shoulder, motes brightening just enough to notice. Quietly, close to your ear, it says, \"She is listening for whether you use the word back.\"\n\n*You feel it settle into you — a new steadiness. (Level 11: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*"
       }
     ],
     "lastTurn": {
-      "narration": "The instrument case is old — older than the strap carrying it. The original strap gave out sometime in the last two winters, worn through at the buckle-end rather than the stitching, which means it was used daily and the weight was always the same. The replacement is a Harmonic Heights pattern, the kind issued at the Lower Terrace waystation for surveyors who requisition standard kit.\n\nShe didn't buy it. It was given to her, or requisitioned in her name.\n\nThe case itself is a different story. The corner-wear is even on all four edges, which means it has been set down thousands of times on flat surfaces — workshops, desks, shelves. Not fieldwork, or not only fieldwork. The latches are a pre-Transition alloy, unrusted, and the wood is a dense upland grain you don't find in the valley lowlands. Whoever made it worked in the Heights, or higher.\n\nShe has stopped about fifteen paces down the path, giving you room, and she is watching you with the particular patience of someone who has waited for people to finish thinking before. Aevi's motes drift at your shoulder, neither bright nor dim — noting, not alarmed.\n\n\"Morning,\" she says, after a moment. Her voice is level and carries no particular greeting in it — the word is acknowledgment, not warmth.",
-      "sceneSummary": "Keen Appraisal reads the traveler's kit — Heights-issue strap, pre-Transition case, daily-use wear pattern; she opens with a single word and waits.",
+      "narration": "She says the word again, slightly louder, as if she thought you hadn't heard. \"Surveyors?\"\n\nYou let Prism Sight open quietly — not a push, just a soft widening of what you're already taking in. The morning light is flat and clean up here on the ridgeline, good reading light, and her face is turned three-quarters toward you.\n\nWhat you catch is small. When she spoke the word the first time, there was a faint warmth at the hinge of her jaw — the kind of flush that comes with a held breath released, not anxiety exactly, but something closer to calculation. She chose that word. She had others available and set them aside.\n\nShe is not lying. But she is asking something more precise than it sounds, and she is watching your face for the answer before she decides what to say next.\n\nAevi drifts a half-step forward at your shoulder, motes brightening just enough to notice. Quietly, close to your ear, it says, \"She is listening for whether you use the word back.\"\n\n*You feel it settle into you — a new steadiness. (Level 11: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*",
+      "sceneSummary": "Prism Sight reads a measured pause behind the traveler's single word — she is testing, not lying, waiting to see if Cellaceron uses the same word.",
       "choices": [
         {
-          "label": "\"Morning. Where have you come from?\" — plain and direct; open the exchange without showing your hand.",
+          "label": "Say 'surveyors' back, plainly — match her word and see what it opens",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -900,40 +905,45 @@
             "negotiate"
           ],
           "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "\"That's a Heights-issue strap on a pre-Transition case. Long way from a workshop.\" — lead with what Keen Appraisal gave you; watch how she takes being read.",
+          "label": "Give her your name and purpose instead — honest and direct, no mirroring",
           "attribute": "social",
           "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask what brought her down from the northeast before she gets to ask you the same",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "difficulty": 15,
           "intentTags": [
             "study",
             "negotiate"
           ],
           "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Use Prism Sight on her face as she speaks — catch the microflush of anything less than honest before the conversation settles.",
+          "label": "Stay quiet a moment longer — let her fill the silence herself",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Something else entirely — you choose.",
-          "attribute": "mental",
-          "subAttribute": "wits",
           "difficulty": 0,
-          "intentTags": [],
+          "intentTags": [
+            "careful",
+            "study"
+          ],
           "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
@@ -942,60 +952,39 @@
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Motes drifting at Cellaceron's shoulder — neither bright nor dim, noting without alarm."
+            "state": "Motes drifted half a step forward at Cellaceron's shoulder, brightened slightly, quiet."
           },
           {
             "name": "Traveler (woman, unnamed)",
-            "state": "Stopped fifteen paces down the path, pack high, instrument case at left shoulder — has spoken one word and is waiting."
+            "state": "Stopped fifteen paces down the path, pack high, instrument case at left shoulder — has now spoken the word a second time and is watching Cellaceron's face for the answer."
           }
         ],
         "objects": [
           "Waystaff — planted heel-first in the soft ground at the character's feet",
-          "Traveler's instrument case — wooden, worn at corners, replacement strap in Harmonic Heights survey pattern",
+          "Traveler's instrument case — wooden, worn at corners, replacement strap in Harmonic Heights pattern",
           "Traveler's pack — lashed with double-wrap cord at the base"
         ],
         "threads": [
           "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware the read was attempted",
-          "Traveler descending from the northeast — instrument case reads Heights-requisitioned strap, pre-Transition case, daily workshop use; origin and purpose unconfirmed",
+          "Traveler descended from the northeast — testing whether Cellaceron uses the word 'surveyors'; origin and purpose unconfirmed",
           "Teva's whereabouts this scene unconfirmed"
         ]
-      },
-      "characterDeltas": {
-        "energy": -3
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "traveler-ridgeline",
-          "name": "Traveler (woman, unnamed)",
-          "note": "Keen Appraisal read her kit: strap is Heights-issue survey pattern, requisitioned not bought; case is pre-Transition, upland-grain wood, even corner-wear from daily flat-surface use — workshop or desk work, not only field. She said 'Morning' and waited.",
-          "learned": [
-            "Replacement strap is Harmonic Heights waystation survey-issue — given or requisitioned, not purchased",
-            "Instrument case is pre-Transition construction, upland-grain wood, even corner-wear consistent with daily workshop/desk use over many years",
-            "Original strap failed at the buckle-end — daily use, consistent weight, high frequency"
-          ],
+          "npcId": "aevi",
+          "name": "Aevi",
+          "note": "Drifted forward at Cellaceron's shoulder and quietly named what Prism Sight caught — the traveler is listening for whether the word 'surveyors' is used back.",
           "skillsObserved": [
-            "patient waiting — gives room, watches without pressing"
+            "social-read under field conditions — named the traveler's test before the conversation advanced"
           ],
-          "statusNote": "Stopped fifteen paces down the ridgeline path; has spoken one word and is waiting for a response."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "traveler-ridgeline",
-          "label": "Ridgeline Traveler",
-          "kind": "person",
-          "fact": "Day 9 dawn: Keen Appraisal reads her kit — instrument case is pre-Transition construction, upland-grain wood, even corner-wear from years of daily flat-surface use. Strap is a Harmonic Heights waystation survey-issue replacement, requisitioned not bought. She is descending from the northeast — the direction of the anomaly and the bearing to the upstream structure.",
-          "links": [
-            "the-preparation-order",
-            "second-river-rising",
-            "what-the-water-remembers"
-          ]
+          "statusNote": "Motes slightly brightened, traveling northeast-by-east with Cellaceron on the ridgeline path."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief pause on the ridgeline — planting the Waystaff, reading her kit, one exchange of words."
+        "why": "A brief exchange on the ridgeline path — a word spoken twice, a quiet read, a pause."
       }
     },
     "sceneState": {
@@ -1003,11 +992,11 @@
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Motes drifting at Cellaceron's shoulder — neither bright nor dim, noting without alarm."
+          "state": "Motes drifted half a step forward at Cellaceron's shoulder, brightened slightly, quiet."
         },
         {
           "name": "Traveler (woman, unnamed)",
-          "state": "Stopped fifteen paces down the path, pack high, instrument case at left shoulder — has spoken one word and is waiting."
+          "state": "Stopped fifteen paces down the path, pack high, instrument case at left shoulder — has now spoken the word a second time"
         }
       ],
       "objects": [
@@ -1017,7 +1006,7 @@
       ],
       "threads": [
         "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware the read was attempted",
-        "Traveler descending from the northeast — instrument case reads Heights-requisitioned strap, pre-Transition case, daily workshop use; origin and purpose unconfir",
+        "Traveler descended from the northeast — testing whether Cellaceron uses the word 'surveyors'; origin and purpose unconfirmed",
         "Teva's whereabouts this scene unconfirmed"
       ]
     }
@@ -1532,7 +1521,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Named the chamber's lattice as complete — every surface refers to the center, nothing scatters; noted the Waystaff's nodes are already singing the chamber's geometry back",
         "[d9] Drifted to the convergence point ahead of the party and named the room's long waiting — 'since before the valley had a name for what it was waiting for.' Motes spread wide and very bright, casting real light across the scored walls.",
         "[d9] Named itself plainly at the convergence point: it is — or was — a record, or part of one, and this room was built to receive it. Says it was broken before it could read itself. Does not know who built the room or who sent it here.",
         "[d9] The chamber's geometry completed a read of Aevi at the convergence point — Aevi recovered the name of its maker and the shape of what it was carrying, though the break remains. Spoke from the scored walls for the first time rather than from near the shoulder.",
@@ -1541,7 +1529,8 @@
         "[d9] Named the requirement plainly: the key must be carried to the pre-Transition upstream structure, northeast-by-east. Confirmed the bearing matches Teva's and the chamber's.",
         "[d9] Moving northeast-by-east with Cellaceron — the account given, the bearing confirmed, now traveling toward the upstream site.",
         "[d9] Ran Motes' Vigil ahead on the northeast-by-east line — clean read of terrain and bird-movement, but caught a pressure anomaly that sits outside the zone's own interference pattern. Cannot name it at distance.",
-        "[d9] Pulled inward after the probe backlash — judged the anomaly as active, not passive, and capable of deflecting a directed read. Named it aware of being looked at."
+        "[d9] Pulled inward after the probe backlash — judged the anomaly as active, not passive, and capable of deflecting a directed read. Named it aware of being looked at.",
+        "[d9] Drifted forward at Cellaceron's shoulder and quietly named what Prism Sight caught — the traveler is listening for whether the word 'surveyors' is used back."
       ],
       "knownFacts": [
         "Its maker's name is Verath-Sem",
@@ -1554,19 +1543,19 @@
         "The anomaly appears to be aware that a scan was attempted"
       ],
       "skillsObserved": [
-        "recognition of a chamber state-shift — named it precisely in",
         "multi-temporal record analysis through the Waystaff lattice ",
         "pressure-direction read through gathered field — distinguish",
         "recognition of a returning presence — distinguished 'newly a",
         "lattice geometry reading — named the chamber's design as a r",
-        "distributed resonance speech — spoke through scored wall-geo"
+        "distributed resonance speech — spoke through scored wall-geo",
+        "social-read under field conditions — named the traveler's te"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "gen-the-lower-chamber",
         "day": 9
       },
-      "statusNote": "Motes pulled inward and dimmed, hovering close to Cellaceron on the ridgeline path",
+      "statusNote": "Motes slightly brightened, traveling northeast-by-east with Cellaceron on the ridgeline path.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -2139,7 +2128,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 590,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "wantProgress": {
       "elder-senna": {
         "progress": 2,
@@ -2183,8 +2172,8 @@
     "craft": 5,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [
     {
       "key": "prism_sight+sonic_resonance:resonant-sight",
@@ -2961,7 +2950,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "prism_sight": 14,
+      "prism_sight": 15,
       "keen_appraisal": 13,
       "sonic_resonance": 26,
       "motes-vigil": 5,
@@ -2987,7 +2976,7 @@
       }
     ],
     "lastUsed": {
-      "prism_sight": 22,
+      "prism_sight": 24,
       "keen_appraisal": 24,
       "braid_prism_sight_sonic_resonance": 23,
       "sonic_resonance": 23,
@@ -3189,16 +3178,16 @@
   "customEncounters": {},
   "reconcileVersion": 19,
   "tendencies": {
-    "cerebral": 31.487051811136066,
-    "strategic": 25.055878793160453,
-    "cautious": 32.464672751921455,
-    "social": 15.402330603178266,
-    "generous": 6.283191776054922,
-    "risky": 1.6551449008230505,
-    "carousing": 0.6168570617686395,
-    "patient": 3.7147731728867743,
-    "craft": 0.6162819131482825,
-    "devotion": 2.97396385852796
+    "cerebral": 31.699875515857663,
+    "strategic": 24.42948182333144,
+    "cautious": 32.65305593312342,
+    "social": 15.017272338098808,
+    "generous": 6.1261119816535485,
+    "risky": 1.6137662783024742,
+    "carousing": 0.6014356352244236,
+    "patient": 3.621903843564605,
+    "craft": 0.6008748653195755,
+    "devotion": 2.899614762064761
   },
   "aptitudes": [
     "strategist",
@@ -3210,9 +3199,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 228,
-  "updatedAt": 1784902418072,
-  "rev": 127,
+  "actionCount": 229,
+  "updatedAt": 1784902495672,
+  "rev": 128,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3398,7 +3387,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 51
+    "valley": 52
   },
   "company": [],
   "foreclosed": [],
@@ -3411,8 +3400,16 @@
   },
   "_pinsInitialized": true,
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
-  "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=15431&nologo=true",
+  "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20seasoned%2C%20bearing%20the%20marks%20of%20what%20they've%20done%2C%20Negotiated%20equal%20footing%20with%20Elder%20Senna%20over%20the%20river%20contamination%20%E2%80%94%20turned%20a%20confront%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=60206&nologo=true",
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Cellaceron",
+      "url": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20seasoned%2C%20bearing%20the%20marks%20of%20what%20they've%20done%2C%20Negotiated%20equal%20footing%20with%20Elder%20Senna%20over%20the%20river%20contamination%20%E2%80%94%20turned%20a%20confront%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=60206&nologo=true",
+      "caption": "Cellaceron — level 11",
+      "worldDay": 24,
+      "at": "2026-07-24T14:14:55.672Z"
+    },
     {
       "kind": "npc",
       "prompt": "Vess Caldoun",
@@ -3599,10 +3596,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-24T14:10:59.537Z",
-      "lastAt": "2026-07-24T14:13:38.048Z",
+      "lastAt": "2026-07-24T14:14:55.665Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null,
@@ -3656,13 +3653,13 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 40,
-    "choices": 40,
+    "sceneSummary": 41,
+    "choices": 41,
     "characterDeltas": 25,
-    "scene": 40,
-    "npcUpdates": 35,
+    "scene": 41,
+    "npcUpdates": 36,
     "codexUpdates": 35,
-    "timeOps": 39,
+    "timeOps": 40,
     "sceneEnded": 20,
     "placeUpdates": 24,
     "moveTo": 2,
@@ -3674,7 +3671,7 @@
     "imagePrompt": 2,
     "generateRequest": 2
   },
-  "_opTurns": 40,
+  "_opTurns": 41,
   "_intentAsked": null,
   "corrections": [
     {

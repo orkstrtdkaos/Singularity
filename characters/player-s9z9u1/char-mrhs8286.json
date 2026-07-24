@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 21,
-  "xp": 2024,
+  "xp": 2029,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -144,7 +144,7 @@
   "maxHealth": 130,
   "health": 130,
   "maxEnergy": 200,
-  "energy": 183,
+  "energy": 178,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1792,81 +1792,91 @@
         "player": "Set the calling-slip on the desk's edge without ceremony — let the slip speak first, then follow it with one sentence",
         "summary": "Silas arrives in Coll's office via Shadowstep and sets the calling-slip on his desk — Coll looks up and registers both the slip and the bird.",
         "narration": "You set the calling-slip on the edge of Coll's desk with a quiet, deliberate hand. The paper makes a small sound against the wood. Then you wait one breath.\n\nColl looks up.\n\nHe is a broad man in his fifties, grey at the temples, with the particular stillness of someone who has spent years deciding what to pay attention to. His eyes go to the slip first — the four words in Ossian's fast, precise hand — then to you, standing behind the visitor's chair where no caller should be standing. His gaze moves to Huginn, gripping your forearm, and stays there for a moment longer than it stayed on the slip.\n\nHe does not reach for a bell. He does not stand. He sets his pen down on the left side of the ledger in front of him, the way a man sets something down when he intends to pick it up again later, and he says, plainly, \"Ossian sent you through the wall.\"\n\nIt is not quite a question. Huginn shifts its weight from foot to foot, once, and is still."
+      },
+      {
+        "player": "Answer directly — 'She sent me through the most efficient route. The water crisis is worsening. I have testimony, a document roll, and a contact in Millbrook. I need ten minutes and a decision.'",
+        "summary": "Silas answers Coll directly — ten minutes granted; Coll asks him to start with the contact.",
+        "narration": "You answer before Coll has finished forming his question.\n\n\"She sent me through the most efficient route,\" you say. \"The water crisis is worsening. I have testimony, a document roll, and a contact in Millbrook. I need ten minutes and a decision.\"\n\nColl looks at you for a long moment. His eyes move once to the calling-slip, then back to your face — filing the confirmation that Ossian wrote it, weighing it against what you just said. Huginn has not moved. The bird watches him with its too-calm eye, and Coll, to his credit, does not look away from it a second time.\n\nHe pulls his chair back half an inch and settles into it with the deliberate economy of a man who has decided to hear the case. \"Ten minutes,\" he says. \"Start with the contact. I can follow a thread forward if I know where it anchors.\"\n\nThe lamp on the left corner of his desk burns steady. Outside, the afternoon light has gone grey and flat against the wide window. He folds his hands on the open ledger and waits — not impatiently, but with the complete attention of someone who knows exactly how much time he has and has just chosen to spend some of it on you."
       }
     ],
     "lastTurn": {
-      "narration": "You set the calling-slip on the edge of Coll's desk with a quiet, deliberate hand. The paper makes a small sound against the wood. Then you wait one breath.\n\nColl looks up.\n\nHe is a broad man in his fifties, grey at the temples, with the particular stillness of someone who has spent years deciding what to pay attention to. His eyes go to the slip first — the four words in Ossian's fast, precise hand — then to you, standing behind the visitor's chair where no caller should be standing. His gaze moves to Huginn, gripping your forearm, and stays there for a moment longer than it stayed on the slip.\n\nHe does not reach for a bell. He does not stand. He sets his pen down on the left side of the ledger in front of him, the way a man sets something down when he intends to pick it up again later, and he says, plainly, \"Ossian sent you through the wall.\"\n\nIt is not quite a question. Huginn shifts its weight from foot to foot, once, and is still.",
-      "sceneSummary": "Silas arrives in Coll's office via Shadowstep and sets the calling-slip on his desk — Coll looks up and registers both the slip and the bird.",
+      "narration": "You answer before Coll has finished forming his question.\n\n\"She sent me through the most efficient route,\" you say. \"The water crisis is worsening. I have testimony, a document roll, and a contact in Millbrook. I need ten minutes and a decision.\"\n\nColl looks at you for a long moment. His eyes move once to the calling-slip, then back to your face — filing the confirmation that Ossian wrote it, weighing it against what you just said. Huginn has not moved. The bird watches him with its too-calm eye, and Coll, to his credit, does not look away from it a second time.\n\nHe pulls his chair back half an inch and settles into it with the deliberate economy of a man who has decided to hear the case. \"Ten minutes,\" he says. \"Start with the contact. I can follow a thread forward if I know where it anchors.\"\n\nThe lamp on the left corner of his desk burns steady. Outside, the afternoon light has gone grey and flat against the wide window. He folds his hands on the open ledger and waits — not impatiently, but with the complete attention of someone who knows exactly how much time he has and has just chosen to spend some of it on you.",
+      "sceneSummary": "Silas answers Coll directly — ten minutes granted; Coll asks him to start with the contact.",
       "choices": [
         {
-          "label": "Answer directly — 'She sent me through the most efficient route. The water crisis is worsening. I have testimony, a document roll, and a contact in Millbrook. I need ten minutes and a decision.'",
+          "label": "Start with Mara Wells — name her, name the relay protocol, name what she has reported: four mornings of gray-green intake water, a document roll at the district records office, and a third sleeve junction flagged by her engineer.",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "persuade",
             "negotiate"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Read Coll through Order-Sense first — see the design he sits inside and find what he is actually waiting for before you speak another word",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "abilityId": "order_sense",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Let Huginn's presence answer for you — say nothing yet, let Coll read the bird and draw his own conclusion about the kind of man who travels with one",
+          "label": "Start with the document roll itself — describe Fendt's testimony, the nine-day gap, Grael's name as receiving authority, and the chain of witnesses. Let the evidence carry the opening.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "plan"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Read the whole design Coll sits inside before you speak further — use Order-Sense to see where the committee's authority actually binds and where it runs thin. Let the reading shape what you say next.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Start with the shape of the problem, not the evidence — tell him plainly what you believe is happening upstream and what finishing it will require. Give him the conclusion first; let him ask for the proof.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Name it plainly and without apology — 'The short way. Your registry moves slower than the crisis does. I have the document roll, the testimony, and a contact on the ground. Tell me what you need to act.'",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 20,
-          "intentTags": [
             "persuade",
-            "lead"
+            "gamble"
           ],
+          "abilityId": null,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "Third floor, north-facing office — one wide window, grey afternoon light falling short of the room's interior; lamp burning on the left corner of Coll's desk; hall sconce lit through the door gap. The visitor's chair casts a steady shadow against the wall behind it.",
+        "setting": "Third floor, north-facing office — one wide window, grey afternoon light; lamp burning on the left corner of Coll's desk; hall sconce lit through the door gap.",
         "npcsPresent": [
           {
             "name": "Warden Coll",
-            "state": "Pen set down on the ledger; looking at Silas, then at Huginn — waiting, not alarmed"
+            "state": "Settled back in his chair, hands folded on the open ledger — full attention on Silas, ten minutes granted, waiting for the thread's anchor point."
           },
           {
             "name": "Huginn",
-            "state": "Gripping Silas's forearm, weight shifted, watching Coll with its too-calm eye"
+            "state": "Gripping Silas's forearm, watching Coll with its too-calm eye — still and unbothered."
           }
         ],
         "objects": [
-          "Calling-slip — now on the desk edge, in Coll's line of sight",
-          "Lamp on the left corner of Coll's desk — burning",
+          "Calling-slip — on the desk edge, Coll has read it",
+          "Lamp on the left corner of Coll's desk — burning steady",
           "Wide north-facing window — grey afternoon light",
           "Hall sconce visible through the door gap",
-          "Open ledger on Coll's desk — pen resting on its left edge",
-          "Shadow pool behind the visitor's chair — held, now settled"
+          "Open ledger on Coll's desk — pen set aside, hands folded over it",
+          "Shadow pool behind the visitor's chair — settled and holding"
         ],
         "threads": [
-          "Coll has named what he observed — waiting for Silas's answer",
-          "Huginn's presence in a sealed third-floor office has registered; Coll has not looked away from it without an explanation",
-          "The calling-slip is on the desk — its authority is in play but not yet accepted"
+          "Coll has granted ten minutes and asked for the contact first — Silas must open well",
+          "The document roll, Fendt's testimony, and Mara's relay are all in play",
+          "Huginn's presence is registered but not yet explained"
         ]
       },
       "npcUpdates": [
@@ -1874,47 +1884,47 @@
           "op": "update",
           "npcId": "warden-coll",
           "name": "Warden Coll",
-          "role": "Council Member, Hub Council water committee — the one who can act",
-          "note": "Looked up from the ledger, registered Silas behind the visitor's chair and Huginn on the forearm — named the method plainly without alarm; pen set down, waiting",
+          "note": "Received Silas's direct answer without visible alarm — granted ten minutes and asked him to start with the contact. Has decided to hear the case.",
           "learned": [
-            "Ossian's calling-slip reached his desk via an unusual route — he registered it without panic"
+            "Silas came through Ossian's most efficient route — which was Shadowstep; he has testimony, a document roll, and a Millbrook contact"
           ],
           "skillsObserved": [
-            "rapid situational assessment without visible alarm",
-            "deliberate non-escalation under a genuinely unusual entry"
+            "rapid threat-prioritization — moved straight to what he needs to follow the thread"
           ],
-          "statusNote": "At his desk in his third-floor office — pen down, looking at Silas and Huginn, waiting for an explanation"
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At his desk — ten minutes granted, waiting for Silas to open with the contact."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange — Silas landing, setting the slip, Coll looking up and naming what he saw"
+        "why": "A quick exchange — Silas's answer and Coll's response, the ten minutes now on the table."
       }
     },
     "sceneState": {
-      "setting": "Third floor, north-facing office — one wide window, grey afternoon light falling short of the room's interior; lamp burning on the left corner of Coll's desk; hall sconce lit through the door gap. The visitor's chair casts a steady shadow against the wall behind it.",
+      "setting": "Third floor, north-facing office — one wide window, grey afternoon light; lamp burning on the left corner of Coll's desk; hall sconce lit through the door gap.",
       "npcsPresent": [
         {
           "name": "Warden Coll",
-          "state": "Pen set down on the ledger; looking at Silas, then at Huginn — waiting, not alarmed"
+          "state": "Settled back in his chair, hands folded on the open ledger — full attention on Silas, ten minutes granted, waiting for t"
         },
         {
           "name": "Huginn",
-          "state": "Gripping Silas's forearm, weight shifted, watching Coll with its too-calm eye"
+          "state": "Gripping Silas's forearm, watching Coll with its too-calm eye — still and unbothered."
         }
       ],
       "objects": [
-        "Calling-slip — now on the desk edge, in Coll's line of sight",
-        "Lamp on the left corner of Coll's desk — burning",
+        "Calling-slip — on the desk edge, Coll has read it",
+        "Lamp on the left corner of Coll's desk — burning steady",
         "Wide north-facing window — grey afternoon light",
         "Hall sconce visible through the door gap",
-        "Open ledger on Coll's desk — pen resting on its left edge",
-        "Shadow pool behind the visitor's chair — held, now settled"
+        "Open ledger on Coll's desk — pen set aside, hands folded over it",
+        "Shadow pool behind the visitor's chair — settled and holding"
       ],
       "threads": [
-        "Coll has named what he observed — waiting for Silas's answer",
-        "Huginn's presence in a sealed third-floor office has registered; Coll has not looked away from it without an explanation",
-        "The calling-slip is on the desk — its authority is in play but not yet accepted"
+        "Coll has granted ten minutes and asked for the contact first — Silas must open well",
+        "The document roll, Fendt's testimony, and Mara's relay are all in play",
+        "Huginn's presence is registered but not yet explained"
       ]
     }
   },
@@ -3667,24 +3677,27 @@
         "locationId": "gen-north-gate-registry-ossian-office",
         "day": 13
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d13] Silas arrived in his office unannounced via Shadowstep — standing behind the visitor's chair before Coll has looked up",
-        "[d13] Looked up from the ledger, registered Silas behind the visitor's chair and Huginn on the forearm — named the method plainly without alarm; pen set down, waiting"
+        "[d13] Looked up from the ledger, registered Silas behind the visitor's chair and Huginn on the forearm — named the method plainly without alarm; pen set down, waiting",
+        "[d13] Received Silas's direct answer without visible alarm — granted ten minutes and asked him to start with the contact. Has decided to hear the case."
       ],
       "knownFacts": [
         "His office is north-facing, lamp-lit by afternoon, one wide window",
         "He works until the registry flag drops",
-        "Ossian's calling-slip reached his desk via an unusual route — he registered it without panic"
+        "Ossian's calling-slip reached his desk via an unusual route — he registered it without panic",
+        "Silas came through Ossian's most efficient route — which was Shadowstep; he has testimony, a document roll, and a Millbrook contact"
       ],
       "skillsObserved": [
         "rapid situational assessment without visible alarm",
-        "deliberate non-escalation under a genuinely unusual entry"
+        "deliberate non-escalation under a genuinely unusual entry",
+        "rapid threat-prioritization — moved straight to what he need"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At his desk in his third-floor office — pen down, looking at Silas and Huginn, waiting for an explanation",
+      "statusNote": "At his desk — ten minutes granted, waiting for Silas to open with the contact.",
       "lastSeen": {
         "locationId": "gen-north-gate-registry-ossian-office",
         "day": 13
@@ -4525,7 +4538,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 576,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The Father's Sealed Letter sits in inventory, unread — and the hollow, with the badger's circuit running quiet below and Huginn approving…",
@@ -6025,21 +6038,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.794050853319163,
-    "cerebral": 16.850156000474172,
-    "social": 11.220200421553551,
-    "generous": 3.6626589992750422,
-    "cautious": 4.880741400108278,
-    "physical": 1.3962068411244408,
-    "risky": 1.2270648079687392,
-    "ruthless": 0.0064406474843641676,
-    "carousing": 0.2489389353002412,
-    "amorous": 2.5068289853094385,
-    "patient": 0.1720816070577977,
-    "stealth": 0.0024964114195168956,
-    "devotion": 1.3186012308293695,
-    "craft": 0.4181582451369334,
-    "leadership": 0.8502986046796001
+    "strategic": 21.249199581986183,
+    "cerebral": 16.428902100462317,
+    "social": 12.939695411014712,
+    "generous": 3.571092524293166,
+    "cautious": 4.758722865105571,
+    "physical": 1.3613016700963299,
+    "risky": 1.1963881877695206,
+    "ruthless": 0.006279631297255063,
+    "carousing": 0.24271546191773516,
+    "amorous": 2.4441582606767027,
+    "patient": 0.16777956688135276,
+    "stealth": 0.002434001134028973,
+    "devotion": 1.2856362000586352,
+    "craft": 0.40770428900851,
+    "leadership": 0.82904113956261
   },
   "aptitudes": [
     "strategist",
@@ -6048,7 +6061,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 724,
+  "actionCount": 725,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6438,8 +6451,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784853889763,
-  "rev": 1174,
+  "updatedAt": 1784853972389,
+  "rev": 1175,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7734,7 +7747,7 @@
           "entityId": "warden-coll",
           "type": "npc",
           "birthWeight": 32,
-          "engagementScore": 5,
+          "engagementScore": 7,
           "tier": "established",
           "rating": "R+",
           "provenance": {
@@ -7753,6 +7766,10 @@
             },
             {
               "kind": "fact",
+              "day": 13
+            },
+            {
+              "kind": "interact",
               "day": 13
             },
             {
@@ -8853,7 +8870,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 76
+    "the_center": 77
   },
   "foreclosed": [
     "rootkin",
@@ -8977,10 +8994,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T00:44:49.762Z",
+      "lastAt": "2026-07-24T00:46:12.387Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 58
+      "beats": 59
     }
   ],
   "company": [
@@ -9181,15 +9198,15 @@
     "gen-north-gate-registry-ossian-office": "https://image.pollinations.ai/prompt/North%20Gate%20Registry%20Ossian%20Office%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20North%20Gate%20Registry%20Ossian%20Office.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=7567&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 95,
-    "choices": 95,
+    "sceneSummary": 96,
+    "choices": 96,
     "characterDeltas": 40,
-    "scene": 95,
-    "npcUpdates": 81,
+    "scene": 96,
+    "npcUpdates": 82,
     "factUpdates": 7,
     "placeUpdates": 17,
     "codexUpdates": 55,
-    "timeOps": 89,
+    "timeOps": 90,
     "imagePrompt": 3,
     "sceneEnded": 21,
     "itemUpdates": 2,
@@ -9204,7 +9221,7 @@
     "stageOps": 1,
     "generateRequest": 2
   },
-  "_opTurns": 95,
+  "_opTurns": 96,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

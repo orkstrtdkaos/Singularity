@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 22,
-  "xp": 2149,
+  "xp": 2162,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -152,7 +152,7 @@
   "maxHealth": 135,
   "health": 135,
   "maxEnergy": 205,
-  "energy": 178,
+  "energy": 171,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -371,9 +371,9 @@
       "name": "Waymarker (father's)",
       "kind": "tool",
       "qty": 1,
-      "description": "A small disc of pale grey material — neither quite stone nor quite metal — with a single groove worn into its face in a closed oval. His father's thumb wore that groove. Both layers seated: the first into Stillwater's Trouble, the second into the Raven's Home warden post. The bond between holder and post is complete. It is warm in the hand in a way stone should not be. Today it was warm at…",
+      "description": "A small disc of pale grey material — neither quite stone nor quite metal — with a single groove worn into its face in a closed oval. His father's thumb wore that groove. Three bonds now seated: the first into Stillwater's Trouble, the second into the Raven's Home warden post, and the third holding the complete four-stage community filtration cascade design — a design, not a place, the first time…",
       "consumable": false,
-      "provenance": "Left by Silas's father for Ama to hold until Silas came asking. Carried from Cairnhold to the March. Both layers now closed.",
+      "provenance": "Seated into two posts by Silas Weir; now also holding the filtration design as a novel third bond — a use his father likely intended but never wrote down.",
       "pinned": true
     },
     {
@@ -1736,6 +1736,21 @@
       "spread": [],
       "day": 13,
       "worldDay": 24
+    },
+    {
+      "at": "2026-07-24T12:17:44.408Z",
+      "locationId": "gen-waygate",
+      "communityId": "valley.millbrook",
+      "description": "Bound a complete four-stage community filtration cascade — including a detail the shadow found before any of them thought to draw it — into the Waymarker's memory",
+      "tags": [
+        "craft",
+        "community",
+        "water-crisis"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 13,
+      "worldDay": 24
     }
   ],
   "relationships": {},
@@ -1869,148 +1884,89 @@
         "player": "With the immediate business out of the way and Edvar agreed to join the fellowship - introduce him properly to Pell, Veth, and Huginn.  The have him do a detailed walkthough of a scaled design meant for communities... you will use 'The Working Model' to create detailed blueprints of the finished system, along with instructions on how to build and operate it and a list of materials. ",
         "summary": "Silas introduces Crane to the fellowship and drafts full community-scale filtration blueprints with him — a working document, not a sketch.",
         "narration": "You turn to the room. \"Edvar,\" you say, \"these are the people who hold Stillwater's Trouble with me.\" You name them in order: Pell first, half a step behind your left shoulder, who nods once and says nothing because nothing needs saying. Veth next, against the wall, who dips her chin in the plain Ashwarden way that means she has already been reading him and has reached a conclusion. Then Huginn, on the crossbeam above. Crane looks up at the bird for a long beat. Huginn looks back. \"It attends endings,\" you tell him. \"Not an omen. It is simply thorough.\" Crane takes that in and accepts it with the composure of a man who has spent twenty years at a mill wheel and learned not to argue with what is simply true.\n\nThen you set the water record aside and ask him to walk you through a design — not the single-mill cascade he has been running, but a system built for a full community. You want every stage named. You want the materials listed. You want someone with no prior knowledge to be able to read the instructions and build it.\n\nCrane talks for a long time. He is a careful man and the care shows in the ordering — intake position first, then the particulate cloth stage and its frame dimensions, then the limestone bed and how deep it must be to do its work, then the boil-vessel and the pressure the mill wheel provides for the first pass. He names the failure points. He names the materials that substitute when the preferred ones are not available. He names the difference between a system that serves fifty people and one that serves five hundred.\n\nWhile he talks, you work. The Working Model opens quietly — the craft costs almost nothing and its work is the kind of precise thinking that follows a practitioner who knows how to hold a design steady in the mind. You think through the whole cascade as Crane speaks it: each stage becomes a structure, each measurement becomes a constraint, each substitution becomes a branch in the design. By the time Crane finishes, the blueprint exists fully in your head — not as an approximation, but as a thing that could be handed to a builder and followed. You take out the chalk blanks from your pack and the brass wire coil for binding, and you set to work on the mill floor itself, using the flagstone as a drafting surface. Crane watches you draw the first stage and says, quietly, \"That is right. And the lip there wants a quarter-inch fall toward the channel, or it backs up.\" You correct it. He nods. Pell crouches and looks at the line of it without comment, which from Pell is agreement. The blueprints come out clean — annotated, staged, with a materials list in the margin and a plain-language operating note at the foot of each sheet.\n\n*✦ What the Water Remembers — Codex: the source is a structure, not a spill. Something built this..*"
+      },
+      {
+        "player": "Ask Pell and Veth each to evaluate the design and add what they will - Then use the Waymark to bind it into memory - and finally, use shadow work to bring scale working models of each size into physical shadow being for everyone to see.",
+        "summary": "Silas bound the full community-scale filtration design into the Waymarker and raised three shadow models of the cascade at different scales — Pell's intake correction and Veth's bed-ratio now part of the blueprints, and the shadow found a settling basin detail none of them had drawn.",
+        "narration": "You spread the two blueprint sheets flat on the flagstone and step back. \"Pell,\" you say. \"Veth. Look it over. Add what you see.\"\n\nPell crouches at the near edge and reads the intake line with her eyes first, then her hands flat on the stone beside it. Her ironsense moves through the chalk marks the way it moves through iron — not reading the lines but reading the load they describe. After a moment she picks up the chalk and extends the intake channel by half a length. \"Mill pressure drops at low water,\" she says. \"You need the extra head or the first stage starves in dry weeks.\" She sets the chalk down and does not elaborate. That is the whole of it.\n\nVeth comes off the wall and reads the limestone bed stage. She is quiet for longer. Then she takes the chalk and writes a single fraction beside the bed depth — a ratio, the proportion of bed to throughput, in the notation the March uses for cascade calculations. \"Below this and it channels,\" she says. \"The water finds the path of least resistance through the stone and the rest of the bed does nothing. Crane will know the number.\" She looks at Crane. He nods once, and adds his initials beside the figure.\n\nYou pull the Waymarker from your coat. The groove in its face is warm before you reach for it, which it sometimes is. You hold it over the blueprint sheets and open the bond — not to a place this time but to the design itself, the whole cascade as the sheets describe it, as Pell's extended intake and Veth's bed-ratio and Crane's twenty years of watching have shaped it. The Waymarker takes it. You feel the design seat into the disc the way a name seats into a post — not stored, but known. The sheets are still on the floor. The knowledge is also somewhere else now.\n\nThen you turn to the shadow. The lamp on the ground floor throws it wide and even, and you reach into The Shadow Work and pull the dark into shape — a slow build, not sudden. The first model rises at a scale for a single mill: the intake channel, the cloth stage, the limestone bed, the boil vessel with the mill wheel behind it giving pressure. Shadow-solid, not quite opaque, the whole mechanism present in three dimensions at ankle height on the flagstone. Then you build the second beside it: fifty people, the same cascade but wider, the limestone bed doubled, the cloth stage with its frame dimensions visible as separate members. Crane watches both models and does not speak, but he leans forward. The third rises last — five hundred, community scale, the intake split into two feeds, a settling basin before the cloth stage that neither of you drew on the sheets but that the shadow seems to know is necessary. You did not plan that third detail. The craft found it.\n\n\"That basin,\" says Crane quietly, looking at the five-hundred model. \"I've been running without it for twenty years because I only ever needed to supply the mill. At scale, you need it. The particulate load from that many intakes would blind the cloth in a week without a settle first.\" He looks at you. \"Add it to the sheets before I go.\"\n\nHuginn has not moved on the crossbeam. The shadow models hold their shape in the lamplight — the mill wheel turning in its shadow-form, the water moving through stages that have no water in them, the whole design present and plain for anyone in the room to read.\n\n*✦ Waymarker (father's) has changed — description, provenance.*"
       }
     ],
     "lastTurn": {
-      "narration": "You turn to the room. \"Edvar,\" you say, \"these are the people who hold Stillwater's Trouble with me.\" You name them in order: Pell first, half a step behind your left shoulder, who nods once and says nothing because nothing needs saying. Veth next, against the wall, who dips her chin in the plain Ashwarden way that means she has already been reading him and has reached a conclusion. Then Huginn, on the crossbeam above. Crane looks up at the bird for a long beat. Huginn looks back. \"It attends endings,\" you tell him. \"Not an omen. It is simply thorough.\" Crane takes that in and accepts it with the composure of a man who has spent twenty years at a mill wheel and learned not to argue with what is simply true.\n\nThen you set the water record aside and ask him to walk you through a design — not the single-mill cascade he has been running, but a system built for a full community. You want every stage named. You want the materials listed. You want someone with no prior knowledge to be able to read the instructions and build it.\n\nCrane talks for a long time. He is a careful man and the care shows in the ordering — intake position first, then the particulate cloth stage and its frame dimensions, then the limestone bed and how deep it must be to do its work, then the boil-vessel and the pressure the mill wheel provides for the first pass. He names the failure points. He names the materials that substitute when the preferred ones are not available. He names the difference between a system that serves fifty people and one that serves five hundred.\n\nWhile he talks, you work. The Working Model opens quietly — the craft costs almost nothing and its work is the kind of precise thinking that follows a practitioner who knows how to hold a design steady in the mind. You think through the whole cascade as Crane speaks it: each stage becomes a structure, each measurement becomes a constraint, each substitution becomes a branch in the design. By the time Crane finishes, the blueprint exists fully in your head — not as an approximation, but as a thing that could be handed to a builder and followed. You take out the chalk blanks from your pack and the brass wire coil for binding, and you set to work on the mill floor itself, using the flagstone as a drafting surface. Crane watches you draw the first stage and says, quietly, \"That is right. And the lip there wants a quarter-inch fall toward the channel, or it backs up.\" You correct it. He nods. Pell crouches and looks at the line of it without comment, which from Pell is agreement. The blueprints come out clean — annotated, staged, with a materials list in the margin and a plain-language operating note at the foot of each sheet.\n\n*✦ What the Water Remembers — Codex: the source is a structure, not a spill. Something built this..*",
-      "sceneSummary": "Silas introduces Crane to the fellowship and drafts full community-scale filtration blueprints with him — a working document, not a sketch.",
+      "narration": "You spread the two blueprint sheets flat on the flagstone and step back. \"Pell,\" you say. \"Veth. Look it over. Add what you see.\"\n\nPell crouches at the near edge and reads the intake line with her eyes first, then her hands flat on the stone beside it. Her ironsense moves through the chalk marks the way it moves through iron — not reading the lines but reading the load they describe. After a moment she picks up the chalk and extends the intake channel by half a length. \"Mill pressure drops at low water,\" she says. \"You need the extra head or the first stage starves in dry weeks.\" She sets the chalk down and does not elaborate. That is the whole of it.\n\nVeth comes off the wall and reads the limestone bed stage. She is quiet for longer. Then she takes the chalk and writes a single fraction beside the bed depth — a ratio, the proportion of bed to throughput, in the notation the March uses for cascade calculations. \"Below this and it channels,\" she says. \"The water finds the path of least resistance through the stone and the rest of the bed does nothing. Crane will know the number.\" She looks at Crane. He nods once, and adds his initials beside the figure.\n\nYou pull the Waymarker from your coat. The groove in its face is warm before you reach for it, which it sometimes is. You hold it over the blueprint sheets and open the bond — not to a place this time but to the design itself, the whole cascade as the sheets describe it, as Pell's extended intake and Veth's bed-ratio and Crane's twenty years of watching have shaped it. The Waymarker takes it. You feel the design seat into the disc the way a name seats into a post — not stored, but known. The sheets are still on the floor. The knowledge is also somewhere else now.\n\nThen you turn to the shadow. The lamp on the ground floor throws it wide and even, and you reach into The Shadow Work and pull the dark into shape — a slow build, not sudden. The first model rises at a scale for a single mill: the intake channel, the cloth stage, the limestone bed, the boil vessel with the mill wheel behind it giving pressure. Shadow-solid, not quite opaque, the whole mechanism present in three dimensions at ankle height on the flagstone. Then you build the second beside it: fifty people, the same cascade but wider, the limestone bed doubled, the cloth stage with its frame dimensions visible as separate members. Crane watches both models and does not speak, but he leans forward. The third rises last — five hundred, community scale, the intake split into two feeds, a settling basin before the cloth stage that neither of you drew on the sheets but that the shadow seems to know is necessary. You did not plan that third detail. The craft found it.\n\n\"That basin,\" says Crane quietly, looking at the five-hundred model. \"I've been running without it for twenty years because I only ever needed to supply the mill. At scale, you need it. The particulate load from that many intakes would blind the cloth in a week without a settle first.\" He looks at you. \"Add it to the sheets before I go.\"\n\nHuginn has not moved on the crossbeam. The shadow models hold their shape in the lamplight — the mill wheel turning in its shadow-form, the water moving through stages that have no water in them, the whole design present and plain for anyone in the room to read.\n\n*✦ Waymarker (father's) has changed — description, provenance.*",
+      "sceneSummary": "Silas bound the full community-scale filtration design into the Waymarker and raised three shadow models of the cascade at different scales — Pell's intake correction and Veth's bed-ratio now part of the blueprints, and the shadow found a settling basin detail none of them had drawn.",
       "choices": [
         {
-          "label": "Examine the smaller cloth-wrapped bundles beneath where the oilskin was — the ones with labels still unread.",
+          "label": "Add the settling basin to the sheets and then let Crane go — he has a road to walk before morning.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "craft"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Huginn plainly what it sees in Crane — before he walks out the door and into the road alone.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": "the-attended-end",
           "trivial": true
         },
         {
-          "label": "Use Order-Sense to read the blueprint as a design — see what stage the whole cascade is part of and whether anything is missing.",
+          "label": "Look at the cloth-wrapped bundles still beneath where the oilskin was — the labels are still unread.",
           "attribute": "mental",
           "subAttribute": "reason",
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2
+          "abilityId": null,
+          "trivial": true
         },
         {
-          "label": "Ask Crane directly what Aldric told him about the fold's purpose — not the instruction he was given, but whether his father ever said why the accumulation mattered.",
+          "label": "Ask Crane about Aldric's instruction — why did your father tell him never to approach the fold?",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": 15,
           "intentTags": [
-            "persuade"
+            "study",
+            "negotiate"
           ],
-          "trivial": true
-        },
-        {
-          "label": "The day is advancing and Crane is ready to travel. Thank him plainly, settle any final detail, and let the mill scene close — the road north calls.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "trivial": false
         }
       ],
       "characterDeltas": {
-        "energy": -1,
-        "xp": 5
+        "health": 0,
+        "energy": -2
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "edvar-crane",
-          "name": "Edvar Crane",
-          "note": "Formally introduced to Pell, Veth, and Huginn — received each in turn without ceremony. Walked Silas through a full community-scale cascade design and watched the blueprints take shape on the flagstone with evident satisfaction.",
-          "learned": [
-            "The community-scale cascade — intake position, particulate cloth stage with frame dimensions, limestone bed depth, boil-vessel with mill-wheel pressure, failure points, material substitutions, scaling difference between 50 and 500 people.",
-            "Pell Marsh, Veth Ondra, and Huginn are the fellowship's named members present — he has now met all three."
-          ],
-          "skillsObserved": [
-            "precise multi-stage engineering disclosure under collaborative drafting conditions",
-            "live correction of a blueprint mid-draw — naming the quarter-inch fall on the lip without being asked"
-          ],
-          "statusNote": "At the mill — introduced to the fellowship, community-scale blueprints drafted alongside Silas; packing for Stillwater's Trouble before morning.",
-          "relationshipDelta": 1
-        },
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Acknowledged Crane's introduction with a single nod — no words, which is agreement. Crouched to read the blueprint line on the flagstone and said nothing, which from Pell is the same thing.",
-          "statusNote": "At the mill ground floor — blueprints reviewed, fellowship introduction complete.",
-          "skillsObserved": [
-            "reading a technical blueprint's structural line without verbal comment — agreement through posture"
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Dipped her chin in the plain Ashwarden way at her introduction — had already been reading Crane and reached a conclusion before he spoke.",
-          "statusNote": "At the mill ground floor — fellowship introduction complete, watching."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Full community-scale filtration blueprints drafted by Silas Weir and Edvar Crane on the mill floor — annotated, staged, with materials list and plain-language operating notes. A working document a builder can follow.",
-          "subjectId": "edvar-crane"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "Community-scale three-stage filtration cascade fully documented — intake, particulate cloth, limestone bed, boil-vessel, with scaling notes from 50 to 500 people, failure points, and material substitutions. The engineering problem is now solved on paper. The source is still the problem.",
-          "links": [
-            "edvar-crane",
-            "find-the-engineer",
-            "what-the-water-remembers",
-            "millbrook"
-          ]
-        }
-      ],
-      "inventoryAdd": [
-        {
-          "name": "Community Filtration Blueprints",
-          "kind": "quest",
-          "description": "Two flagstone-drafted sheets transferred to chalk blanks and bound with brass wire — the full three-stage community cascade, annotated by Crane and drawn by Silas using The Working Model. Materials list in the margin. Operating notes in plain language at the foot of each stage. A builder with no prior knowledge could follow it.",
-          "consumable": false
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "what-the-water-remembers",
-          "note": "Community-scale filtration blueprints drafted with Crane — the engineering solution is documented and portable. The source of the contamination remains the only outstanding problem."
-        },
-        {
-          "op": "progress",
-          "questId": "the-second-thread",
-          "note": "Crane introduced to the full fellowship — Pell, Veth, Huginn, Silas. The agent is named, known, and departing before morning."
-        }
-      ],
       "scene": {
-        "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The sealed stone box stands open in the east wall, its hollow empty. Two chalk-drawn blueprint sheets on the flagstone floor, bound with brass wire.",
+        "setting": "Ground floor of the mill's north face — evening, the lamp burning low, the shadow models holding their shape on the flagstone. The mill wheel turns slow outside. The open stone box stands in the east wall. Blueprint sheets flat on the floor, annotated in three hands.",
         "npcsPresent": [
           {
             "name": "Edvar Crane",
-            "state": "On the bench — introduced to the fellowship, the blueprint session complete. A man at rest in a decision already made."
+            "state": "Leaning forward, studying the five-hundred-person shadow model — has just named the settling basin detail."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Half a step behind Silas's left shoulder — the blueprint reviewed, nothing unsatisfied in her posture."
+            "state": "Still crouched near the sheets — chalk set down, intake correction made, watching the shadow models."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Against the wall — her reading of Crane complete, settled."
+            "state": "Back against the wall — bed-ratio written, initials beside Crane's, settled."
           },
           {
             "name": "Huginn",
@@ -2018,60 +1974,157 @@
           }
         ],
         "objects": [
-          "Aldric's Water Record — open and flat, two decades of morning entries",
-          "Father's Sealed Fold — brass-wire bound, marked 'open at the source', on Silas's person",
-          "Community Filtration Blueprints — two chalk-drawn sheets on the flagstone, brass-wire bound",
-          "Several smaller cloth-wrapped bundles beneath where the oilskin was, each labeled",
-          "The open stone box — lid up, iron bar latch swung free, hollow now empty",
-          "Lamp burning on the ground floor",
-          "The mill wheel turning slow outside",
-          "Stone benches along the north wall — ring-marks from sealed vessels",
-          "A shallow channel cut into the eastern floor edge, worn smooth"
+          "Community Filtration Blueprints — two chalk-drawn sheets annotated in three hands (Silas, Pell, Veth, Crane)",
+          "Three shadow models on the flagstone — single mill, fifty-person, five-hundred-person — holding in the lamplight",
+          "Aldric's Water Record — open and flat",
+          "Father's Sealed Fold — brass-wire bound, marked 'open at the source', on Silas",
+          "The Waymarker — design now seated into it alongside the post-bonds",
+          "Several smaller cloth-wrapped bundles beneath where the oilskin was, each labeled but not yet opened",
+          "The open stone box — lid up, hollow empty",
+          "Lamp burning on the ground floor"
         ],
         "threads": [
-          "The smaller cloth-wrapped bundles — labels and contents not yet examined",
-          "The sealed fold — meant to be opened at the source, not here",
-          "Crane's instruction from Aldric: do not approach the fold — reason not yet given"
+          "Settling basin not yet added to the sheets — Crane named it, it needs to go in before he goes",
+          "The cloth-wrapped bundles — labels unread, contents unknown",
+          "Crane's departure before morning — the road and what waits on it",
+          "Aldric's instruction to Crane: never approach the fold — reason not yet given"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "edvar-crane",
+          "name": "Edvar Crane",
+          "note": "Watched the three shadow models, named the settling basin detail that the shadow found before any of them drew it — a twenty-year gap in his own practice, named without embarrassment.",
+          "learned": [
+            "A settling basin is required before the cloth stage at community scale — without it, the particulate load blinds the cloth in under a week"
+          ],
+          "skillsObserved": [
+            "naming a structural gap in his own method from a shadow model"
+          ],
+          "statusNote": "At the mill ground floor — named the settling basin detail; preparing to add it to the sheets and then depart before morning."
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell Ran Marsh",
+          "note": "Extended the intake channel by half a length through ironsense — a pressure-head correction for low-water weeks that Crane and Silas had not included.",
+          "learned": [
+            "Intake head must account for low-water pressure drop or the first filter stage starves"
+          ],
+          "skillsObserved": [
+            "extending a filtration design through ironsense load-reading"
+          ],
+          "statusNote": "At the mill ground floor — intake correction made, watching the shadow models."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Added the limestone bed-ratio in March notation — a cascade calculation that names the minimum bed depth below which the water channels and the bed does nothing.",
+          "learned": [
+            "Limestone bed must meet a minimum ratio to throughput or the water channels through it rather than filtering"
+          ],
+          "skillsObserved": [
+            "applying March-form cascade calculation to a practical filtration problem"
+          ],
+          "statusNote": "At the mill ground floor — bed-ratio written and initialled by Crane, settled against the wall."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "The complete community-scale filtration cascade now includes a fourth element the shadow work surfaced: a settling basin before the cloth stage, required at community scale to prevent the particulate load from blinding the cloth within a week. The design is now complete in four stages: settle, cloth, limestone bed, boil.",
+          "links": [
+            "what-the-water-remembers",
+            "edvar-crane",
+            "millbrook",
+            "the-second-thread"
+          ]
+        },
+        {
+          "topic": "what-the-water-remembers",
+          "label": "What the Water Remembers",
+          "kind": "event",
+          "fact": "The Waymarker now holds the full four-stage filtration cascade design — bound by novel combination of The Working Model and the Waymark's place-memory. The design can be recalled from the disc without reference to the sheets.",
+          "links": [
+            "the-water-crisis",
+            "edvar-crane",
+            "precursor-signs-in-the-valley",
+            "the-second-thread"
+          ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The four-stage filtration cascade design (settle, cloth, limestone bed, boil — with materials, staging, and operating notes) is bound into the Waymarker via novel combination of The Working Model and the held-place memory bond. The design survives the sheets.",
+          "subjectId": "edvar-crane"
+        }
+      ],
+      "itemUpdates": [
+        {
+          "name": "Waymarker (father's)",
+          "description": "A small disc of pale grey material — neither quite stone nor quite metal — with a single groove worn into its face in a closed oval. His father's thumb wore that groove. Three bonds now seated: the first into Stillwater's Trouble, the second into the Raven's Home warden post, and the third holding the complete four-stage community filtration cascade design — a design, not a place, the first time the disc has held something that is not ground. It is warm in the hand in a way stone should not be.",
+          "provenance": "Seated into two posts by Silas Weir; now also holding the filtration design as a novel third bond — a use his father likely intended but never wrote down."
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Community-scale filtration blueprints drafted on the mill floor flagstone by Silas Weir and Edvar Crane — chalk on stone, transferred and bound. Two sheets, annotated and complete.",
+          "note": "The settling basin detail surfaced in shadow during the Working Model / held-place combination — not on the original sheets. Crane named it aloud. Added to blueprints before his departure.",
           "subPlace": {
             "name": "Mill Ground Floor — Edvar Crane's Boards",
             "parent": "Waygate",
-            "note": "Blueprint session complete — two community-scale filtration sheets drafted, brass-wire bound, in Silas's possession.",
+            "note": "Blueprint session complete — four-stage design including settling basin, annotated in three hands plus Crane's initials. Shadow models still holding in lamplight.",
             "visited": true
           }
         }
       ],
-      "stageOps": [
+      "questUpdates": [
         {
+          "op": "progress",
           "questId": "what-the-water-remembers",
-          "stageId": "s1",
-          "evidence": "Silas and Crane drafted full community-scale filtration blueprints on the mill floor — a working document with materials list, staging, failure points, and operating notes, produced using The Working Model."
+          "note": "Four-stage filtration cascade fully documented and bound into the Waymarker — the engineering solution is complete and carried. The source upstream remains the open problem."
         }
       ],
       "timeOps": {
         "hoursPassed": 1,
-        "why": "Blueprint session with Crane — a careful, thorough walkthrough and drafting took the better part of an hour."
+        "why": "The design session — Pell's correction, Veth's notation, the shadow model build, Crane's basin observation."
       },
+      "offer": {
+        "thing": "The shadow-found settling basin — a detail none of them drew, surfaced by the craft itself",
+        "from": "The Working Model's precision finding what the eye missed; Crane's twenty years of watching the actual water"
+      },
+      "deeds": [
+        {
+          "description": "Bound a complete four-stage community filtration cascade — including a detail the shadow found before any of them thought to draw it — into the Waymarker's memory",
+          "tags": [
+            "craft",
+            "community",
+            "water-crisis"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The sealed stone box stands open in the east wall, its hollow empty. Two chalk-drawn blueprint sheets on the flagstone floor, bound with brass wire.",
+      "setting": "Ground floor of the mill's north face — evening, the lamp burning low, the shadow models holding their shape on the flagstone. The mill wheel turns slow outside. The open stone box stands in the east wall. Blueprint sheets flat on the floor, annotated in three hands.",
       "npcsPresent": [
         {
           "name": "Edvar Crane",
-          "state": "On the bench — introduced to the fellowship, the blueprint session complete. A man at rest in a decision already made."
+          "state": "Leaning forward, studying the five-hundred-person shadow model — has just named the settling basin detail."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Half a step behind Silas's left shoulder — the blueprint reviewed, nothing unsatisfied in her posture."
+          "state": "Still crouched near the sheets — chalk set down, intake correction made, watching the shadow models."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Against the wall — her reading of Crane complete, settled."
+          "state": "Back against the wall — bed-ratio written, initials beside Crane's, settled."
         },
         {
           "name": "Huginn",
@@ -2079,27 +2132,27 @@
         }
       ],
       "objects": [
-        "Aldric's Water Record — open and flat, two decades of morning entries",
-        "Father's Sealed Fold — brass-wire bound, marked 'open at the source', on Silas's",
-        "Community Filtration Blueprints — two chalk-drawn sheets on the flagstone, brass",
+        "Community Filtration Blueprints — two chalk-drawn sheets annotated in three hand",
+        "Three shadow models on the flagstone — single mill, fifty-person, five-hundred-p",
+        "Aldric's Water Record — open and flat",
+        "Father's Sealed Fold — brass-wire bound, marked 'open at the source', on Silas",
+        "The Waymarker — design now seated into it alongside the post-bonds",
         "Several smaller cloth-wrapped bundles beneath where the oilskin was, each labele",
-        "The open stone box — lid up, iron bar latch swung free, hollow now empty",
-        "Lamp burning on the ground floor",
-        "The mill wheel turning slow outside",
-        "Stone benches along the north wall — ring-marks from sealed vessels",
-        "A shallow channel cut into the eastern floor edge, worn smooth"
+        "The open stone box — lid up, hollow empty",
+        "Lamp burning on the ground floor"
       ],
       "threads": [
-        "The smaller cloth-wrapped bundles — labels and contents not yet examined",
-        "The sealed fold — meant to be opened at the source, not here",
-        "Crane's instruction from Aldric: do not approach the fold — reason not yet given"
+        "Settling basin not yet added to the sheets — Crane named it, it needs to go in before he goes",
+        "The cloth-wrapped bundles — labels unread, contents unknown",
+        "Crane's departure before morning — the road and what waits on it",
+        "Aldric's instruction to Crane: never approach the fold — reason not yet given"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 13,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -2832,16 +2885,14 @@
         "s1"
       ],
       "progress": [
-        "Coll received the document roll and Fendt's testimony — the shadow-architecture of the infrastructure demonstrated on his desk. He committed to drafting formal aid requests to the Rootkin and Cogitants tonight, conditional on a signed witness statement in Silas's hand with his Post Master mark.",
-        "Aid framework drafted with two conditions: Cogitant contact named before Zone entry, Stillwater's Trouble offered to Rootkin as staging. Coll writing both into the requests before tonight's flag drop.",
-        "Letter of introduction secured — Silas now carries Coll's name and the committee's standing into the Zone. Check-in protocol terms remain to be named before the scene closes.",
         "Shadow-slate communication channel established with Warden Coll — check-in protocol terms are the final piece before the scene closes.",
         "Contamination start-date fixed: four mornings after the cold broke. Metallic smell, not silt. Edvar Crane identified at the mill — he is already treating his water, which means he knows something.",
         "Crane confirms the water change began four mornings after the cold broke — not spring runoff, not ordinary silt. The fold in the upper reach is moving and has begun to finish what Aldric stopped.",
         "The three-stage cascade and its scalability now have a committed operator — Crane packing for Stillwater's Trouble before morning.",
         "Community-scale filtration blueprints drafted with Crane — the engineering solution is documented and portable. The source of the contamination remains the only outstanding problem.",
         "Codex: the source is a structure, not a spill. Something built this.",
-        "↳ Silas and Crane drafted full community-scale filtration blueprints on the mill floor — a working document with materials list, staging, failure points, and operating notes, produced using The…"
+        "↳ Silas and Crane drafted full community-scale filtration blueprints on the mill floor — a working document with materials list, staging, failure points, and operating notes, produced using The…",
+        "Four-stage filtration cascade fully documented and bound into the Waymarker — the engineering solution is complete and carried. The source upstream remains the open problem."
       ],
       "aliases": [],
       "startedAt": "2026-07-22T20:49:54.189Z",
@@ -2962,7 +3013,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Silas named what he felt through the bond as she worked — she is tracing the join's load-bearing hinge, reading load not shape, and it arrives through the bond as weight through a joint that is not rigid.",
         "[d13] Received the attending-quality pass through the soul bond and used it — her step slowed, her head dropped, she found something at the ward's outer margin she would not have found alone",
         "[d13] Found a drainage cut on the March Road at the ward's outer margin — wrong slope for its purpose, cold iron underneath from years of misdirected water. Named it plainly to Silas and Veth.",
         "[d13] Named the drainage cut's mechanical failure plainly — wrong slope, pooling water, cold iron underneath — and recommended it be flagged to whoever tends the road. Then stepped away from it and moved on.",
@@ -2971,28 +3021,29 @@
         "[d13] Received the full weight of the boar hunt through the soul bond — cold ground, the kill, the walk back after, the unbroken line to this stall. Found the structural truth of it through ironsense. Did not speak, which was the answer.",
         "[d13] Found at a hardware boutique — mid-read on a buckle, nothing worth buying. Rejoined Silas at the crescent's northern end.",
         "[d13] Read the same absence as Silas — watching the mill's lamp in the afternoon light, waiting.",
-        "[d13] Acknowledged Crane's introduction with a single nod — no words, which is agreement. Crouched to read the blueprint line on the flagstone and said nothing, which from Pell is the same thing."
+        "[d13] Acknowledged Crane's introduction with a single nod — no words, which is agreement. Crouched to read the blueprint line on the flagstone and said nothing, which from Pell is the same thing.",
+        "[d13] Extended the intake channel by half a length through ironsense — a pressure-head correction for low-water weeks that Crane and Silas had not included."
       ],
       "knownFacts": [
-        "Boundary-Stone and Shielding Word can braid into a sustained place-ward — she watched it seat",
         "The Boundary-Stone oval can serve as a chassis for braided crafts — Palework, Wither, or a sustained draw if the skill existed to hold it steady across a perimeter",
         "The Boundary-Stone-Shielding Word join reads as a jointed hinge through ironsense — flexible under stress, not fused",
         "The Shielding Word names what is already true — the certainty precedes the craft, and the craft names it.",
         "Her ironsense reads the join between Boundary-Stone and the Shielding Word as load-bearing stress, not as intention — the load is what she can follow",
         "The soul bond can carry the ashwarden attending-quality from Silas — she felt it arrive and her ironsense sharpened on it, finding something at the outer margin she had not previously caught",
         "The drainage cut on the March Road near the ward's outer margin runs at a wrong slope — water pools rather than drains, and the iron beneath it has been cold in the wrong direction for years",
-        "The boar hunt was the first date — cold ground, a clean kill taken together, the first hard thing done as a pair; the tusks on Renna's bench are the unbroken line from that ridge to this commission"
+        "The boar hunt was the first date — cold ground, a clean kill taken together, the first hard thing done as a pair; the tusks on Renna's bench are the unbroken line from that ridge to this commission",
+        "Intake head must account for low-water pressure drop or the first filter stage starves"
       ],
       "skillsObserved": [
-        "reading structural grain in a shadow-form across open-air fl",
         "reading a ward's structural geometry through ironsense and e",
         "naming the mechanical character of a craft-join through iron",
         "reading a ward's load-distribution hinge through ironsense r",
         "reading structural anomaly in road construction through iron",
-        "reading a technical blueprint's structural line without verb"
+        "reading a technical blueprint's structural line without verb",
+        "extending a filtration design through ironsense load-reading"
       ],
       "status": "active",
-      "statusNote": "At the mill ground floor — blueprints reviewed, fellowship introduction complete.",
+      "statusNote": "At the mill ground floor — intake correction made, watching the shadow models.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -3663,7 +3714,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Asked the cross-reference question — iron or intention — watching both Silas's report and Pell's feet simultaneously.",
         "[d13] Named the soul bond used as an attending-quality pass-through a teaching tool she has never encountered — said she needs to think about what it means that Silas has it",
         "[d13] Arrived at Pell's side to hear the drainage cut finding — listening, not yet speaking on what it might mean.",
         "[d13] Received Silas's note on the reciprocal teaching bond without ceremony — a nod, a contained response, nothing added.",
@@ -3672,30 +3722,31 @@
         "[d13] Found near the water-seller's cart at the Crossing well — mid-conversation, listening to someone tell her less than they think they are.",
         "[d13] Worked the water-seller cleanly — got the contamination timing, the smell description, and Crane's location from a man who didn't realize he was being interviewed.",
         "[d13] Named the substrate's thinness plainly without judgment — the craft simply could not resolve here.",
-        "[d13] Dipped her chin in the plain Ashwarden way at her introduction — had already been reading Crane and reached a conclusion before he spoke."
+        "[d13] Dipped her chin in the plain Ashwarden way at her introduction — had already been reading Crane and reached a conclusion before he spoke.",
+        "[d13] Added the limestone bed-ratio in March notation — a cascade calculation that names the minimum bed depth below which the water channels and the bed does nothing."
       ],
       "knownFacts": [
-        "The Held Place technique — watched the braid seat from outside",
         "Three Boundary-Stone braid candidates: Palework-attuned mercy field, Wither-framing for structural targets, and a theoretical sustained-draw commons across the perimeter",
         "The load-bearing hinge problem — the perimeter must pass the braid through without eating it; Pell's ironsense is currently doing that work",
         "Silas's answer: the Word names what is already true; belief precedes utterance. And Veth's counter: it is right, and also wrong, and the difference is a decade.",
         "The soul bond can carry an attending quality — the ashwarden disposition of unhurried, level reading — toward another person, functioning as a teaching assist that Veth has no prior category for",
         "The attending-quality pass through the soul bond is a teaching tool she has no prior category for — she is still thinking about what it means.",
         "Osten: contamination started four mornings after the cold broke, metallic smell, not ordinary silt",
-        "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here"
+        "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here",
+        "Limestone bed must meet a minimum ratio to throughput or the water channels through it rather than filtering"
       ],
       "skillsObserved": [
-        "naming three advanced braid candidates from a single observe",
         "identifying the structural hinge problem in Pell's ironsense",
         "placing a correct answer beside its own limitation without c",
         "cross-referencing an internal craft-read against its externa",
         "naming a novel capability without pretending to have already",
-        "working a source until he gave more than he meant to, withou"
+        "working a source until he gave more than he meant to, withou",
+        "applying March-form cascade calculation to a practical filtr"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the mill ground floor — fellowship introduction complete, watching.",
+      "statusNote": "At the mill ground floor — bed-ratio written and initialled by Crane, settled against the wall.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -3972,7 +4023,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d13] Silas read the room with Order-Sense — the filtration setup, the vessel rings, the diversion channel, the sealed stone box. Crane watched him do it and said nothing. He is waiting to see what Silas makes of it.",
         "[d13] Named Aldric Weir plainly as the man who came to him twenty years ago. Explained his charge: watch the water, keep the record clean. Delivered Aldric's message — give the boy the record, and tell him the fold will not wait past his arrival.",
         "[d13] Named the fold plainly: a pre-Transition array upstream, stopped mid-instruction by Aldric Weir fifteen years ago, now resuming. Finishing means the watershed instruction completes. The record is in the stone box.",
         "[d13] Answered the last question honestly — Aldric did not know who gave the original instruction, only that they were not people he had spoken to. Crane took it to mean dead. Later thought it might mean something else. Did not ask Aldric to explain.",
@@ -3981,28 +4031,30 @@
         "[d13] Walked Silas through the full twenty years of entries — eight clear, nine slow gray-tinge with one return visit from Aldric in year nine, then this spring's unbroken gray-brown. Aldric's final entry confirmed aloud.",
         "[d13] Named the three-stage filter cascade plainly — cloth, limestone bed, boiling. Confirmed scaling is possible if the intake is clean. Named that he has never approached the fold, on Aldric's explicit instruction.",
         "[d13] Accepted the commission without hesitation — his twenty-year watch complete, the guardedness gone. Named he will be packed before the creek runs gray again. Will travel to Stillwater's Trouble to work with Calvar on scaling the cascade.",
-        "[d13] Formally introduced to Pell, Veth, and Huginn — received each in turn without ceremony. Walked Silas through a full community-scale cascade design and watched the blueprints take shape on the flagstone with evident satisfaction."
+        "[d13] Formally introduced to Pell, Veth, and Huginn — received each in turn without ceremony. Walked Silas through a full community-scale cascade design and watched the blueprints take shape on the flagstone with evident satisfaction.",
+        "[d13] Watched the three shadow models, named the settling basin detail that the shadow found before any of them drew it — a twenty-year gap in his own practice, named without embarrassment."
       ],
       "knownFacts": [
-        "Aldric returned once in year nine — examined the record, wrote the final entry, said it was slower than expected but moving. Told Crane to keep watching; if it went gray-brown and stayed, someone…",
         "The filter cascade is three stages: cloth for particulate, limestone bed for the metallic tinge, boiling for biological contamination — two of three will do if you're short of one",
         "The mill wheel gives pressure for the first pass — the intake alone could supply a whole settlement if the source were clean",
         "Aldric told him never to approach the fold, and he never did — he does not know why",
         "Accepted the commission as Stillwater's agent the moment it was offered — he had been waiting for a purpose to match the watch",
         "Will depart before the next morning's gray reading",
         "The community-scale cascade — intake position, particulate cloth stage with frame dimensions, limestone bed depth, boil-vessel with mill-wheel pressure, failure points, material substitutions…",
-        "Pell Marsh, Veth Ondra, and Huginn are the fellowship's named members present — he has now met all three."
+        "Pell Marsh, Veth Ondra, and Huginn are the fellowship's named members present — he has now met all three.",
+        "A settling basin is required before the cloth stage at community scale — without it, the particulate load blinds the cloth in under a week"
       ],
       "skillsObserved": [
         "Letting a reader finish before speaking — composure under as",
         "Delivering a twenty-year-held message without drama or self-",
         "precise multi-stage engineering disclosure under collaborati",
-        "live correction of a blueprint mid-draw — naming the quarter"
+        "live correction of a blueprint mid-draw — naming the quarter",
+        "naming a structural gap in his own method from a shadow mode"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the mill — introduced to the fellowship, community-scale blueprints drafted alongside Silas; packing for Stillwater's Trouble before morning.",
+      "statusNote": "At the mill ground floor — named the settling basin detail; preparing to add it to the sheets and then depart before morning.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -4287,7 +4339,6 @@
     "gen-waygate": {
       "visits": 3,
       "notes": [
-        "[d6] A small abandoned cache found under the neighboring stall table — a dry hollow, something left by someone who did not come back to collect it.",
         "[d6] The dry hollow under the neighboring stall's table crossbar is now empty — a small sealed tin retrieved from it by Silas Weir on World-day 19 morning.",
         "[d6] A sealed tin of unfinished seventh-band lens-blanks retrieved from the dry hollow beneath the neighboring stall's crossbar — the hollow is now empty, the tin in Silas Weir's possession.",
         "[d6] A contact note left in the dry hollow beneath the neighboring stall's crossbar — folded bark-paper, stone-weighted, naming Silas Weir and the Fell Pell forge in Millbrook as the finder.",
@@ -4298,7 +4349,8 @@
         "[d13] Renna's jewelry stall is at the far end of the marketplace crescent, under a dark-green oilcloth awning — boar tusks left in commission, pickup in two days.",
         "[d13] The party crossed the threshold into the mill's ground floor — Crane opened the door to all four, Huginn included.",
         "[d13] The sealed stone box has been opened by Silas Weir — the oilskin packet retrieved, the box now empty. The hollow in the east wall stands open.",
-        "[d13] Community-scale filtration blueprints drafted on the mill floor flagstone by Silas Weir and Edvar Crane — chalk on stone, transferred and bound. Two sheets, annotated and complete."
+        "[d13] Community-scale filtration blueprints drafted on the mill floor flagstone by Silas Weir and Edvar Crane — chalk on stone, transferred and bound. Two sheets, annotated and complete.",
+        "[d13] The settling basin detail surfaced in shadow during the Working Model / held-place combination — not on the original sheets. Crane named it aloud. Added to blueprints before his departure."
       ],
       "flags": {
         "party_departed": "world-day-19-midday",
@@ -4401,7 +4453,7 @@
           "parentId": "gen-waygate",
           "day": 13,
           "visited": true,
-          "note": "Blueprint session complete — two community-scale filtration sheets drafted, brass-wire bound, in Silas's possession."
+          "note": "Blueprint session complete — four-stage design including settling basin, annotated in three hands plus Crane's initials. Shadow models still holding in lamplight."
         }
       },
       "lastVisit": 13
@@ -4891,12 +4943,8 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 588,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The half-finished sentence on Ossian's open folio is visible from the doorway — it mentions the Millbrook intake in Ossian's own hand…",
-        "from": "Ossian's role as the person who decides what reaches the committee — she has been reading the morning slips, and Mara's relay was among them"
-      },
       {
         "thing": "Coll, after a long silence, says one quiet thing: 'Your bird has better intelligence than my committee.' Not a joke — a plain statement…",
         "from": "Coll's established character — he grants more candor to those who demonstrate competence, and Huginn's reading is the most concrete thing…"
@@ -4912,6 +4960,10 @@
       {
         "thing": "Huginn shifts on the crossbeam — the first movement it has made since the party entered — and its eye settles on Crane with the same…",
         "from": "Huginn's nature: it attends endings, and Crane's twenty-year watch is one — a small, complete thing, and Huginn knows it"
+      },
+      {
+        "thing": "The shadow-found settling basin — a detail none of them drew, surfaced by the craft itself",
+        "from": "The Working Model's precision finding what the eye missed; Crane's twenty years of watching the actual water"
       }
     ],
     "wantProgress": {
@@ -5353,7 +5405,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d5] Order-Sense confirms the east-bank ford seepage is upstream contamination behaving exactly as the pre-Transition drainage design predicted — the system is reporting a saturated substrate, not a random",
           "[d5] Palework at the east-bank ford stones: contamination has been accumulating for weeks, bonding to mineral grain rather than washing free. Three tide-line cycles visible. Spread is lateral along grain, ",
           "[d5] The west channel at the lower ford remains clear as of World-day 18 morning — safe for crossing with a purification tab. The east-bank contamination is confined to that side for now, but the spread ra",
           "[d5] Pell's read on World-day 18 evening: the crisis-response structure buys time, but the source is still upstream in the Disputed Zone — the west channel will turn gray too if nothing finds it. The real next work is the Zone.",
@@ -5376,7 +5427,8 @@
           "[d13] The gray-brown contamination at the Crossing started four mornings after the cold broke — Osten describes the smell as metallic, not the ordinary spring silt. The timing is precise and the character of it is distinct.",
           "[d13] Crane's record confirms eight years of clear water, then nine years of slow gray-tinge beginning to grow, then this spring's unbroken gray-brown from the exact morning Osten named. Aldric's note in year nine: 'slower than expected, but moving.' The fold has been advancing for over a decade and…",
           "[d13] Crane names the three-stage filter cascade — cloth, limestone bed, boiling — and confirms the mill's pressure could supply a whole settlement. Scaling is a solved problem. The source is not. And Aldric told him never to approach the fold, without saying why.",
-          "[d13] Community-scale three-stage filtration cascade fully documented — intake, particulate cloth, limestone bed, boil-vessel, with scaling notes from 50 to 500 people, failure points, and material substitutions. The engineering problem is now solved on paper. The source is still the problem."
+          "[d13] Community-scale three-stage filtration cascade fully documented — intake, particulate cloth, limestone bed, boil-vessel, with scaling notes from 50 to 500 people, failure points, and material substitutions. The engineering problem is now solved on paper. The source is still the problem.",
+          "[d13] The complete community-scale filtration cascade now includes a fourth element the shadow work surfaced: a settling basin before the cloth stage, required at community scale to prevent the particulate load from blinding the cloth within a week. The design is now complete in four stages: settle…"
         ],
         "links": [
           "mara-wells",
@@ -6394,21 +6446,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.728966220175558,
-    "cerebral": 17.44907236220731,
-    "social": 13.361083968025374,
-    "generous": 3.550405624245616,
-    "cautious": 3.9047640637984014,
-    "physical": 0.48210720387622275,
-    "risky": 0.4237028254841485,
-    "ruthless": 0.37477003384545354,
-    "carousing": 0.08595807619512051,
-    "amorous": 1.453223117498896,
-    "patient": 0.5156065977279608,
-    "stealth": 0.000862005466338131,
-    "devotion": 0.4553101544115943,
-    "craft": 0.7173191140663638,
-    "leadership": 0.6955508391927764
+    "strategic": 18.310742064671167,
+    "cerebral": 18.01284555315213,
+    "social": 13.02705686882474,
+    "generous": 3.4616454836394754,
+    "cautious": 3.8071449622034415,
+    "physical": 0.47005452377931717,
+    "risky": 0.4131102548470448,
+    "ruthless": 0.3654007829993172,
+    "carousing": 0.0838091242902425,
+    "amorous": 1.4168925395614236,
+    "patient": 0.5027164327847617,
+    "stealth": 0.0008404553296796777,
+    "devotion": 0.4439274005513044,
+    "craft": 0.6993861362147047,
+    "leadership": 0.678162068212957
   },
   "aptitudes": [
     "strategist",
@@ -6417,7 +6469,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 766,
+  "actionCount": 767,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6807,8 +6859,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784895156904,
-  "rev": 1249,
+  "updatedAt": 1784895464413,
+  "rev": 1250,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8283,7 +8335,7 @@
           "entityId": "edvar-crane",
           "type": "npc",
           "birthWeight": 33,
-          "engagementScore": 30,
+          "engagementScore": 32,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -8362,6 +8414,10 @@
             },
             {
               "kind": "fact",
+              "day": 13
+            },
+            {
+              "kind": "interact",
               "day": 13
             },
             {
@@ -8761,12 +8817,6 @@
   "establishedFacts": [
     {
       "id": "fendt",
-      "text": "Aldric extended an informal vouch for Fendt to Mara's supply-and-communications thread at the Fell Pell gathering — Fendt's standing in Millbrook is beginning to take shape.",
-      "day": 5,
-      "subjectId": "fendt"
-    },
-    {
-      "id": "fendt",
       "text": "Fendt was formally named to the fellowship of the Fell at the Fell Pell gathering on World-day 18 evening — his testimony placed alongside all other witnesses by Silas Weir. His standing in the group ",
       "day": 5,
       "subjectId": "fendt"
@@ -8998,6 +9048,12 @@
       "text": "Full community-scale filtration blueprints drafted by Silas Weir and Edvar Crane on the mill floor — annotated, staged, with materials list and plain-language operating notes. A working document a builder can follow.",
       "day": 13,
       "subjectId": "edvar-crane"
+    },
+    {
+      "id": "edvar-crane",
+      "text": "The four-stage filtration cascade design (settle, cloth, limestone bed, boil — with materials, staging, and operating notes) is bound into the Waymarker via novel combination of The Working Model and the held-place memory bond. The design survives the sheets.",
+      "day": 13,
+      "subjectId": "edvar-crane"
     }
   ],
   "practice": {
@@ -9013,7 +9069,7 @@
       "wildcraft": 6,
       "the_raised_thing": 12,
       "the_ended_threat": 4,
-      "the_shadow_work": 12,
+      "the_shadow_work": 13,
       "draw_down": 1,
       "wither": 3,
       "the_grey_road": 1,
@@ -9025,7 +9081,8 @@
       "marrow-s-wings": 2,
       "ask_the_dead": 1,
       "the_warding_mark": 1,
-      "the_working_model": 1
+      "the_working_model": 2,
+      "the-held-place": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -9063,13 +9120,16 @@
       "boundary_stone+the_shielding_word": 1,
       "ask_the_dead+marrow-s-wings": 1,
       "palework+shadowstep": 1,
-      "the_shadow_work+the_warding_mark": 1
+      "the_shadow_work+the_warding_mark": 1,
+      "the_shadow_work+the_working_model": 1,
+      "the-held-place+the_shadow_work": 1,
+      "the-held-place+the_working_model": 1
     },
     "aspirations": [
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 3
+        "progress": 4
       },
       {
         "abilityId": "pattern_sense",
@@ -9092,7 +9152,8 @@
       "marrow-s-wings": 24,
       "ask_the_dead": 24,
       "the_warding_mark": 24,
-      "the_working_model": 24
+      "the_working_model": 24,
+      "the-held-place": 24
     }
   },
   "companionBonds": {
@@ -9524,7 +9585,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 502,
+    "valley": 503,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9659,10 +9720,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T12:12:36.899Z",
+      "lastAt": "2026-07-24T12:17:44.408Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 15
+      "beats": 16
     }
   ],
   "company": [
@@ -9862,23 +9923,23 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 136,
-    "choices": 136,
-    "characterDeltas": 57,
-    "scene": 136,
-    "npcUpdates": 120,
-    "factUpdates": 11,
-    "placeUpdates": 24,
-    "codexUpdates": 83,
-    "timeOps": 130,
+    "sceneSummary": 137,
+    "choices": 137,
+    "characterDeltas": 58,
+    "scene": 137,
+    "npcUpdates": 121,
+    "factUpdates": 12,
+    "placeUpdates": 25,
+    "codexUpdates": 84,
+    "timeOps": 131,
     "imagePrompt": 3,
-    "sceneEnded": 28,
-    "itemUpdates": 2,
-    "questUpdates": 18,
-    "offer": 13,
+    "sceneEnded": 29,
+    "itemUpdates": 3,
+    "questUpdates": 19,
+    "offer": 14,
     "moveTo": 10,
     "delegateOps": 1,
-    "deeds": 2,
+    "deeds": 3,
     "standingOps": 1,
     "ledgerEvents": 4,
     "discovery": 2,
@@ -9886,7 +9947,7 @@
     "generateRequest": 4,
     "inventoryAdd": 1
   },
-  "_opTurns": 136,
+  "_opTurns": 137,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -9894,7 +9955,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 14,
+      "applied": 15,
       "rejected": 0,
       "lastWhy": null
     },
@@ -9960,6 +10021,11 @@
       },
       {
         "text": "Commissioned Edvar Crane as an agent of Stillwater's Trouble — ending his twenty-year solitary watch and bringing his filtration knowledge into the fellowship's network.",
+        "weight": 2,
+        "day": 13
+      },
+      {
+        "text": "Bound a complete four-stage community filtration cascade — including a detail the shadow found before any of them thought to draw it — into the Waymarker's memory",
         "weight": 2,
         "day": 13
       }

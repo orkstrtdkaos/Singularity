@@ -1,0 +1,345 @@
+{
+ "schemaVersion": 1,
+ "id": "trait_readouts",
+ "kind": "content",
+ "note": "SNG-215 §C: per-trait player-facing readouts for the merged character sheet. Each trait shows LORE (from its own definition's description/gmHint) AND MECHANICS (authored here — what it DOES functionally). Aevi-authored 2026-07-22; CCode wires the merged view + a mechanics-lookup by trait id. Keyed to background/origin ids from backgrounds.json/origins.json. Traditions/schools/forms extend this map as those readouts are authored.",
+ "backgrounds": {
+  "duelist": {
+   "lore": "One blade, one opponent, one exchange. You were trained for the moment where it is only the two of you and everything is decided in about a second.",
+   "gmHint": "Reads a single opponent perfectly and a melee badly. Contemptuous of brawls. Has killed, formally, and it was witnessed.",
+   "mechanics": "Affinity: Fight — actions in this vein come a little easier. Grants the strategist aptitude at creation. A martial background: it shapes HOW you fight, not whether you can. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "line_soldier": {
+   "lore": "You stood in a line with people on either side of you and you did not step back. That is the whole art and it is harder than it sounds.",
+   "gmHint": "Thinks in formations. Trusts the person beside them instantly and completely, which has been exploited.",
+   "mechanics": "Affinity: Fight — actions in this vein come a little easier. Grants the rough and ready aptitude at creation. A martial background: it shapes HOW you fight, not whether you can. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "skirmisher": {
+   "lore": "You fought in the gaps — flanks, woods, night. Never a fair fight if you could help it, and you could usually help it.",
+   "gmHint": "Instinctively finds the angle nobody is watching. Uncomfortable in the open. Bad at ceremony.",
+   "mechanics": "Affinity: Fight, Chase — actions in this vein come a little easier. Grants the rough and ready aptitude at creation. A martial background: it shapes HOW you fight, not whether you can. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "warden": {
+   "lore": "You protected a place, or a person, or a road, for years, and mostly nothing happened, and you stayed ready anyway.",
+   "gmHint": "Watches doors. Has the specific patience of someone who has waited a decade for one bad night.",
+   "mechanics": "Affinity: Fight, Investigate — actions in this vein come a little easier. Grants the rough and ready aptitude at creation. A martial background: it shapes HOW you fight, not whether you can. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "hunter": {
+   "lore": "You tracked, waited, and killed what you needed and nothing you didn't. The old Valley ethic in a single motion.",
+   "gmHint": "Reads ground and weather. Uneasy about hunting people, and has, and doesn't discuss it.",
+   "mechanics": "Affinity: Explore, Fight — actions in this vein come a little easier. Grants the rough and ready aptitude at creation. A martial background: it shapes HOW you fight, not whether you can. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "bodyguard": {
+   "lore": "Your job was for somebody else to survive. Sometimes they did.",
+   "gmHint": "Places themselves between people and doors without noticing they are doing it. Cannot enjoy a meal facing away from the room.",
+   "mechanics": "Affinity: Fight, Social — actions in this vein come a little easier. Grants the rough and ready aptitude at creation. A martial background: it shapes HOW you fight, not whether you can. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "war_leader": {
+   "lore": "You gave the orders. Some of them got people killed and some of them were right and a few were both.",
+   "gmHint": "Assesses a fight as a problem of resources and morale. Carries a specific list of names.",
+   "mechanics": "Affinity: Fight, Social — actions in this vein come a little easier. Grants the banner aptitude at creation. A martial background: it shapes HOW you fight, not whether you can. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "arena_fighter": {
+   "lore": "You fought for a crowd, for money, under rules — and you have thought a great deal about the difference between a contest and a killing.",
+   "gmHint": "Performs. Knows exactly how to make a fight look better than it is. Has met the Coliseum's champions.",
+   "mechanics": "Affinity: Fight, Social — actions in this vein come a little easier. Grants the rough and ready aptitude at creation. A martial background: it shapes HOW you fight, not whether you can. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "temple_trained": {
+   "lore": "You learned your craft properly, in a house of it, from people who had done it for generations. You know the forms. You also know what the forms cost.",
+   "gmHint": "Cites the correct method. Genuinely pained by sloppy practice. Has a teacher whose approval still matters.",
+   "mechanics": "Affinity: Investigate — actions in this vein come a little easier. Grants the faithful aptitude at creation. A practitioner background: it shapes how you came to your craft and what it obliges. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "self_taught": {
+   "lore": "Nobody taught you. You worked it out, alone, from wreckage and stubbornness, and you have gaps a temple-trained practitioner would find horrifying and instincts they will never have.",
+   "gmHint": "Unorthodox and effective. Bristles at correction. Occasionally does something no trained practitioner would think to try, and it works.",
+   "mechanics": "Affinity: Explore — actions in this vein come a little easier. Grants the faithful aptitude at creation. A practitioner background: it shapes how you came to your craft and what it obliges. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "lineage_taught": {
+   "lore": "Your craft came down through your family, and it came with obligations, and you did not get to decline either.",
+   "gmHint": "Carries the family's reputation whether they want it or not. Someone, somewhere, is owed.",
+   "mechanics": "Affinity: Social — actions in this vein come a little easier. Grants the faithful aptitude at creation. A practitioner background: it shapes how you came to your craft and what it obliges. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "precursor_marked": {
+   "lore": "Something in the old lattice touched you and did not entirely let go. You did not ask for this and you cannot give it back.",
+   "gmHint": "The old works notice them. Address-Sense comes unbidden. Something is faintly, permanently different about them, and people can tell.",
+   "mechanics": "Affinity: Investigate, Explore — actions in this vein come a little easier. Grants the faithful aptitude at creation. A practitioner background: it shapes how you came to your craft and what it obliges. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "battlefield_taught": {
+   "lore": "You learned your craft while it was being used on you. There was no theory and there was no second attempt.",
+   "gmHint": "Fast, brutal, and effective under pressure; theoretically shaky. Cannot explain WHY it works, only THAT it does.",
+   "mechanics": "Affinity: Fight — actions in this vein come a little easier. Grants the faithful aptitude at creation. A practitioner background: it shapes how you came to your craft and what it obliges. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "apprenticed_to_a_legend": {
+   "lore": "You were taught by one of the great ones. You were not their best student. You are still better than almost everyone else.",
+   "gmHint": "Name-drops nothing, ever, and it comes out anyway. Measures themselves against an impossible standard, permanently.",
+   "mechanics": "Affinity: Investigate, Fight — actions in this vein come a little easier. Grants the faithful aptitude at creation. A practitioner background: it shapes how you came to your craft and what it obliges. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "found_it_by_accident": {
+   "lore": "You did a thing you should not have been able to do, once, in a bad moment, and you have spent every year since trying to understand what happened.",
+   "gmHint": "Genuinely does not know their own ceiling. Frightened of their own craft in a way trained practitioners find superstitious.",
+   "mechanics": "Affinity: Explore — actions in this vein come a little easier. Grants the faithful aptitude at creation. A practitioner background: it shapes how you came to your craft and what it obliges. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "craftsman": {
+   "lore": "Making, mending, material sense. Your hands know things your mouth cannot explain.",
+   "gmHint": "Assesses everything by how it was made. Physically pained by shoddy work.",
+   "mechanics": "Affinity: Explore, Investigate — actions in this vein come a little easier. Grants the artisan aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "mechanist": {
+   "lore": "Systems, pressure, tolerance, failure. You have taken apart things that were not supposed to be taken apart.",
+   "gmHint": "Sees the mechanism under everything, including institutions and people. This is sometimes a gift.",
+   "mechanics": "Affinity: Investigate — actions in this vein come a little easier. Grants the artisan aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "smith": {
+   "lore": "Heat, metal, and the specific stubbornness of a material that must be persuaded rather than forced.",
+   "gmHint": "Strong hands, long patience, and an unnerving stillness. Judges a person by their tools.",
+   "mechanics": "Affinity: Explore, Fight — actions in this vein come a little easier. Grants the artisan aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "builder": {
+   "lore": "Walls, roofs, bridges — things that must hold with people underneath them.",
+   "gmHint": "Assesses every structure for load and failure, unconsciously, always. Sleeps badly under bad beams.",
+   "mechanics": "Affinity: Explore — actions in this vein come a little easier. Grants the artisan aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "trader": {
+   "lore": "Roads, prices, and the exact moment a deal turns. You have been cheated and you learned from it.",
+   "gmHint": "Prices everything reflexively, including favors. Knows what a thing is worth to THIS person, which is different.",
+   "mechanics": "Affinity: Social — actions in this vein come a little easier. Grants the artisan aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "farmer": {
+   "lore": "Seasons, soil, animals, and the patience of people who cannot hurry the thing they depend on.",
+   "gmHint": "Unhurried in a way that infuriates cities. Right about the weather. Right about the animal.",
+   "mechanics": "Affinity: Explore — actions in this vein come a little easier. Grants the artisan aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "river_runner": {
+   "lore": "The waterways, the crossings, the currents. You have pulled people out and you have failed to.",
+   "gmHint": "Reads water the way others read faces. Uncomfortable far from it.",
+   "mechanics": "Affinity: Explore, Chase — actions in this vein come a little easier. Grants the artisan aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "survivalist": {
+   "lore": "You have been cold, hungry, and alone, and you came back, and you know exactly what that took.",
+   "gmHint": "Always knows the exits, the water, and the days of food. Finds comfort suspicious.",
+   "mechanics": "Affinity: Explore — actions in this vein come a little easier. Grants the artisan aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "scholar": {
+   "lore": "Years with the records, and the knowledge of how much of what everyone believes is simply not in them.",
+   "gmHint": "Cites sources unprompted. Delighted by a primary document. Distrusts a story with no paper.",
+   "mechanics": "Affinity: Investigate — actions in this vein come a little easier. Grants the scholar aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "archivist": {
+   "lore": "You keep what would otherwise be lost, and you have watched people try very hard to lose specific things.",
+   "gmHint": "Notices what is MISSING from a record, which is a rarer skill than reading one.",
+   "mechanics": "Affinity: Investigate — actions in this vein come a little easier. Grants the scholar aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "physician": {
+   "lore": "You have had your hands inside someone who was dying. Sometimes it worked.",
+   "gmHint": "Triages automatically, including people who did not ask. Does not flinch, and that unsettles people.",
+   "mechanics": "Affinity: Investigate, Social — actions in this vein come a little easier. Grants the scholar aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "lawspeaker": {
+   "lore": "You know what the rules actually say, as opposed to what everyone assumes, and the gap is where you live.",
+   "gmHint": "Finds the clause. Infuriating and indispensable in roughly equal measure.",
+   "mechanics": "Affinity: Social, Investigate — actions in this vein come a little easier. Grants the scholar aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "cartographer": {
+   "lore": "You made maps, which means you have been to the edges of them.",
+   "gmHint": "Cannot stop orienting. Deeply disturbed by a place that resists being mapped.",
+   "mechanics": "Affinity: Explore — actions in this vein come a little easier. Grants the scholar aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "envoy": {
+   "lore": "You spoke for people who could not be in the room, to people who did not want them there.",
+   "gmHint": "Reads a table instantly. Never says the first thing. Has sold something out and thinks about it.",
+   "mechanics": "Affinity: Social — actions in this vein come a little easier. Grants the silver tongue aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "performer": {
+   "lore": "You have held a room. You know the true thing and the thing they will listen to are not always the same.",
+   "gmHint": "Shapes events into narrative instinctively. Sometimes the shaping is the lie.",
+   "mechanics": "Affinity: Social — actions in this vein come a little easier. Grants the silver tongue aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "devotee": {
+   "lore": "You gave years to a practice, an order, or a certainty — and you either kept it or you did not, and either way it shaped you.",
+   "gmHint": "Has a discipline. Keeps it, or misses it. Reacts strongly to other people's faith.",
+   "mechanics": "Affinity: Social, Investigate — actions in this vein come a little easier. Grants the faithful aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "organizer": {
+   "lore": "You held a group of people together through something. It worked, mostly.",
+   "gmHint": "Reads a room's factions instantly. Cannot stop trying to fix them.",
+   "mechanics": "Affinity: Social — actions in this vein come a little easier. Grants the banner aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "broker": {
+   "lore": "You know who wants what and who has it, and you take a cut for closing the distance.",
+   "gmHint": "Knows a guy. Genuinely knows a guy. Owes and is owed, extensively.",
+   "mechanics": "Affinity: Social — actions in this vein come a little easier. Grants the silver tongue aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "spy": {
+   "lore": "You were somewhere you should not have been, listening, for years, and nobody ever knew.",
+   "gmHint": "Remembers everything anyone says near them. Lies smoothly and dislikes doing it.",
+   "mechanics": "Affinity: Social, Investigate — actions in this vein come a little easier. Grants the shadow aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "smuggler": {
+   "lore": "You moved what was not supposed to move. You were caught once, and only once.",
+   "gmHint": "Notices the locks, the sightlines, the guard's habits. Cannot walk into a room without casing it.",
+   "mechanics": "Affinity: Chase, Investigate — actions in this vein come a little easier. Grants the trickster aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "orphan": {
+   "lore": "Nobody raised you and you raised yourself, and you are not going to make a speech about it.",
+   "gmHint": "Trusts slowly and completely. Very hard to shock. Hoards small things.",
+   "mechanics": "Affinity: Chase, Social — actions in this vein come a little easier. Grants the shadow aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "exile": {
+   "lore": "You cannot go home. You know exactly why. You may or may not think it was fair.",
+   "gmHint": "Guarded about their own past in a way that reads as arrogance. Reacts badly to being judged by strangers.",
+   "mechanics": "Affinity: Social — actions in this vein come a little easier. Grants the shadow aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "ruin_picker": {
+   "lore": "You went into the Precursor places and came out with things, and you are still here, which puts you in a small category.",
+   "gmHint": "Fearless about old tech in a way that alarms sensible people. Has an unexplained scar and a rule about doors.",
+   "mechanics": "Affinity: Explore, Investigate — actions in this vein come a little easier. Grants the shadow aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "drifter": {
+   "lore": "You have been everywhere and stayed nowhere and it stopped being a phase some time ago.",
+   "gmHint": "Knows a little about everywhere and belongs nowhere. Leaves before it gets hard.",
+   "mechanics": "Affinity: Explore — actions in this vein come a little easier. Grants the shadow aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  },
+  "former_professional": {
+   "lore": "Pre-Transition career skills, and the connections that came with them — some of which still answer.",
+   "gmHint": "Knows procedure and who to call. Uneasy with how little of it still works.",
+   "mechanics": "Affinity: Social, Investigate — actions in this vein come a little easier. Grants the shadow aptitude at creation. Backgrounds are orthogonal to origin/domain — they never gate a craft, only color the approach."
+  }
+ },
+ "origins": {
+  "valleyfolk": {
+   "lore": "Born to the Valley floor — the near-center crossing where order, light, practical craft and making all cross faintly. Your people are generalists because the center holds a little of everything.",
+   "whyHere": "You never left. This is home, and the world is arriving at your door whether you asked it to or not.",
+   "mechanics": "Native tradition: Valley Craft — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Balanced — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Valley — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "harmonic": {
+   "lore": "Raised in the resonance-halls of the Heights — tuned stone, sung joints, sound as a working craft. A Valley folk-tradition, a foothill of the great mechanical and ordered peoples.",
+   "whyHere": "You came down. Something in the Heights stopped ringing true and you wanted to know why.",
+   "mechanics": "Native tradition: Harmonic — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Order · Sound — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Valley — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "radiant_plateau": {
+   "lore": "Raised on the Plateau among prisms and worked light — revelation as a craft, not as a burning. Folk-Radiance, the gentle cousin of the Blaze.",
+   "whyHere": "You came down the Plateau road and did not go back up it.",
+   "mechanics": "Native tradition: Radiant Folk — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Light · Order — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Valley — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "umbral": {
+   "lore": "Born in the Underlight, where sight is a thing you do without eyes and the dark is not an absence but a country. Your people harbor what the light would destroy.",
+   "whyHere": "You came up. You have not said why, and the surface hurts your eyes, and you have not gone back.",
+   "mechanics": "Native tradition: Umbral — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Dark — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Umbral Depths — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "blazeborn": {
+   "lore": "Born in the Blaze, where the light is so total it has burned the land to glass. Revelation is your inheritance and it is not always a kindness.",
+   "whyHere": "The Blaze is expanding. You walked out ahead of it, and you are the first of your people the Valley has seen.",
+   "mechanics": "Native tradition: Blazeborn — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Light — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Radiant Wastes — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "rootkin": {
+   "lore": "Born to the grove-cities that grow rather than build. Your people plant for grandchildren and measure a life in centuries.",
+   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
+   "mechanics": "Native tradition: Rootkin — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Life — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Quickwood — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "ashwarden": {
+   "lore": "Born to the Hollow March, where endings are tended the way the Rootkin tend growth. Your people are not morbid; they are simply unhurried and honest about where everything is going.",
+   "whyHere": "Something in the Valley is ending badly and untended, and your people noticed, and they sent you.",
+   "mechanics": "Native tradition: Ashwarden — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Death — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Palelands — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "marcher": {
+   "lore": "Born to the Riven Marches, a warrior culture that is honed conflict all the way down. You were taught the line, and how to hold it, and what it costs.",
+   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
+   "mechanics": "Native tradition: Marcher — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Violence — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Riven Marches — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "stillhold": {
+   "lore": "Born inside a peace so absolute it has become a kind of prison. You know how to bind, de-escalate, and make a truce that holds — and you know what perfect quiet costs.",
+   "whyHere": "You left the walls. You wanted a peace that was chosen rather than enforced, and you have not found it yet.",
+   "mechanics": "Native tradition: Stillhold — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Peace — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Stillhold — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "somatic": {
+   "lore": "Raised in the Flesh-Temples, where the body is the only instrument and movement is a language. You do not talk about what your body can do; you show people, once.",
+   "whyHere": "You are looking for something the perfected body cannot answer, and you have started to suspect there is one.",
+   "mechanics": "Native tradition: Somatic — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Body — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Somatic Reaches — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "cogitant": {
+   "lore": "Raised in the Cogitarium, among people who have nearly left their bodies behind for pure thought and pay for it daily.",
+   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
+   "mechanics": "Native tradition: Cogitant — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Mind — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Cogitarium — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "churnfolk": {
+   "lore": "Born in the Churn, where nothing is planned twice and living is improvisation. Your people are joyous, exhausting, and never bored.",
+   "whyHere": "You wanted to see whether a place where things STAY PUT was as dull as everyone said. The jury is out.",
+   "mechanics": "Native tradition: Churnfolk — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Chaos — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Unspooling — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "lattice": {
+   "lore": "Born in the arcologies, where nothing is unplanned and — this is the part nobody says aloud — nothing is free.",
+   "whyHere": "You did something unplanned. It was very small, and it was enough, and you are not going back.",
+   "mechanics": "Native tradition: Lattice — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Order — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Lattice-Cities — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "enginewright": {
+   "lore": "Born in the Gearlands, where the world is mechanism all the way down and every problem is, eventually, a maintenance problem.",
+   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
+   "mechanics": "Native tradition: Enginewright — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Mechanical — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Gearlands — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "numinous": {
+   "lore": "Raised where the veil is thin and most of material life has been dissolved into pure practice. You have seen things you cannot make a sentence out of.",
+   "whyHere": "You came back into the world to find out whether it still holds anything worth staying material for.",
+   "mechanics": "Native tradition: Numinous — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Spiritual — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Numinous Reach — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "threnodist": {
+   "lore": "Raised among the grief-houses and joy-halls, where feeling is held to be the only true knowing and nobody weeps privately.",
+   "whyHere": "You met someone who did not feel things out loud and you found it horrifying, and then you found it interesting.",
+   "mechanics": "Native tradition: Threnodist — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Emotional — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Feeling Coast — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "syllogist": {
+   "lore": "Raised in the Axiom, reasoning from first principles, taught that emotion is noise in the signal.",
+   "whyHere": "You encountered a true thing that reason could not reach. It is still bothering you. That is why you are here.",
+   "mechanics": "Native tradition: Syllogist — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Logical — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Reasoned Hold — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "veilwright": {
+   "lore": "Born to the Hall of Mirrors, where every truth is held to be a made thing, and your people simply make better ones.",
+   "whyHere": "Somebody made a truth about YOU, and you did not care for it, and you have developed a complicated relationship with your own craft.",
+   "mechanics": "Native tradition: Veilwright — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Falsehood — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Veiled Reach — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "verist": {
+   "lore": "Raised at the Unblinking Stone, where you say what is so, whatever it costs — and it costs.",
+   "whyHere": "You told the truth to the wrong person and it went exactly as your people said it would, and they were right, and you left anyway.",
+   "mechanics": "Native tradition: Verist — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Truth — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Stark Reach — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "abyssal": {
+   "lore": "Raised among people who name appetite plainly and strike bargains that are exactly, horribly fair. Your people are honest about want in a way the pious cannot manage.",
+   "whyHere": "You were owed something and collecting it would have cost more than it was worth, and you walked away from a fair bargain, which your people found shocking.",
+   "mechanics": "Native tradition: Abyssal — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Demonic — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Descent — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "seraphic": {
+   "lore": "Raised in the Choir-Height, luminous and hierarchical and certain. Your people's mercy is real. So is their judgment.",
+   "whyHere": "You were wrong about someone, and the judgment bound anyway, and you have been trying to unmake it ever since.",
+   "mechanics": "Native tradition: Seraphic — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Angelic — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Ascent — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "mason": {
+   "lore": "Born to the Bedrock, where only what can be touched is real. Your people build things that outlast the arguments about them.",
+   "whyHere": "There is a thing you cannot weigh that you are nonetheless certain is real, and you cannot say that at home.",
+   "mechanics": "Native tradition: Mason — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Concrete — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Given Land — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "figurist": {
+   "lore": "Raised in the Cloudform, among buildings that are arguments and a geography that resists being mapped. Matter, to your people, is the coarsest layer of the real.",
+   "whyHere": "You wanted to touch something. Simply that. It is considered a shameful appetite where you are from.",
+   "mechanics": "Native tradition: Figurist — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Abstract — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Pattern Reach — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "horizon": {
+   "lore": "Born to the road, to a people for whom everywhere is a place not yet arrived. You have no home region because your people do not have one.",
+   "whyHere": "You stopped. You do not know why yet, and neither do they, and it may be the most significant thing you have ever done.",
+   "mechanics": "Native tradition: Horizon — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Space — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Open Reach — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "hourkeeper": {
+   "lore": "Raised among clock-towers and archives that run forward. Your people remember and pre-remember, and pay for both.",
+   "whyHere": "You saw an hour that had not happened and it was terrible, and you have come to find out whether it is avoidable.",
+   "mechanics": "Native tradition: Hourkeeper — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Time — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Kept Reach — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "unmaker": {
+   "lore": "Born to the Scour, where ending a thing WELL is a craft and the world is held to be choked with what should have ended.",
+   "whyHere": "Something in the Valley should end and nobody there can bear to do it, and you can, and you have not decided whether you will.",
+   "mechanics": "Native tradition: Unmaker — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Destruction — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Unmade — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  },
+  "wright": {
+   "lore": "Raised in the Forge-Eternal, where the cities are never finished and that is the entire point. Your people cannot stop making.",
+   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
+   "mechanics": "Native tradition: Wright — you draw on it by right, and its crafts are yours to learn as you grow (innate substrate access). Pole-leaning: Creation — your home ground sits toward this end of the world's axes, coloring which crafts feel natural. Home region: The Making — where you begin, and where your people's standing starts warm. Origin sets your starting tradition access and homeland; it never caps what you can reach, only where you start from."
+  }
+ }
+}

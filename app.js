@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.260";
+const APP_VERSION = "1.8.261";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3841,7 +3841,23 @@ function applyTurn(turn, resolution, playerWords = null) {
     // SNG-231 §2: ISOLATED — the GM-invented fight/duel def MUST register even if an earlier op (npcUpdates on a
     // fresh NPC) threw. This is the "the duel won't start" fix: before the isolation, an npcUpdates throw aborted
     // applyTurn here, so the invented encounter was never registered and the choice referencing it did nothing.
-    applyStep("newEncounter", () => { const nd = sanitizeNewEncounter(turn.newEncounter); if (nd) { character.customEncounters = character.customEncounters || {}; character.customEncounters[nd.id] = nd; } });
+    let nd = null;
+    applyStep("newEncounter", () => { nd = sanitizeNewEncounter(turn.newEncounter); if (nd) { character.customEncounters = character.customEncounters || {}; character.customEncounters[nd.id] = nd; } });
+    // CCODE-19: registering the def is necessary but NOT sufficient — a fight only STARTS when a choice carries
+    // its encounterId (onChoice path A, ~4368). The GM invents the def yet rarely wires a matching choice, so the
+    // duel it just narrated never begins ("I can't get a fight/duel to start"). Guarantee the engage path: when
+    // nothing already engages this new encounter, inject a deterministic ENGAGE choice (routes through path A).
+    // The GM's other options + the freefield stay the decline path; for a LETHAL fight, add an explicit "step
+    // back" so decline-before-engagement (rule 18 — lethal is offered, never imposed) is never missing.
+    if (nd && !character.activeEncounter && !(turn.choices || []).some(c => c.encounterId === nd.id)) {
+      const foe = nd.opponent?.name || nd.name || "your opponent";
+      const engage = nd.type === "duel"
+        ? { label: `⚔ Face ${foe}${nd.lethal ? " — blood is on the table" : ""}`, encounterId: nd.id, attribute: "physical", subAttribute: "strength", axes: {}, difficulty: 0, intentTags: ["risky", "commit"] }
+        : { label: `▶ Take on ${nd.name || "the encounter"}`, encounterId: nd.id, attribute: "physical", subAttribute: "agility", axes: {}, difficulty: 0, intentTags: ["risky", "commit"] };
+      const inject = [engage];
+      if (nd.lethal) inject.push({ label: "Step back — not this fight", attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful", "retreat"], trivial: true });
+      turn.choices = [...inject, ...(turn.choices || [])];
+    }
   }
   // spectrum fingerprint drifts toward the axes of what you actually did (EWMA)
   if (resolution?.action?.axes) {

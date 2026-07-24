@@ -7887,7 +7887,19 @@ await (async () => {
   check("231 §2: applyStep ISOLATES each op-group (npcUpdates / codexUpdates / newEncounter / …) so one throw doesn't abort the rest",
     /function applyStep\(label, fn\)/.test(appSrc231) && /applyStep\("npcUpdates", \(\) => applyNpcUpdates/.test(appSrc231) && /applyStep\("codexUpdates"/.test(appSrc231) && /applyStep\("newEncounter"/.test(appSrc231));
   check("231 §2: a fresh NPC's newEncounter (the duel/fight) SURVIVES an npcUpdates throw — the abort-cascade is gone",
-    /applyStep\("newEncounter", \(\) => \{ const nd = sanitizeNewEncounter/.test(appSrc231));
+    /applyStep\("newEncounter", \(\) => \{ nd = sanitizeNewEncounter/.test(appSrc231));
+
+  // CCODE-19: registering the invented def is necessary but NOT sufficient — a fight only STARTS when a choice
+  // carries its encounterId. The GM rarely wires that choice, so the duel it narrated never began. Guarantee it:
+  // inject a deterministic ENGAGE choice for the new encounter when nothing already engages it. THIS is what
+  // finally makes "I can't get a fight/duel to start" go away — the isolation fix only kept the def alive.
+  check("CCODE-19: a GM-invented encounter gets a deterministic ENGAGE choice injected (routes through onChoice path A)",
+    /if \(nd && !character\.activeEncounter && !\(turn\.choices \|\| \[\]\)\.some\(c => c\.encounterId === nd\.id\)\)/.test(appSrc231)
+    && /encounterId: nd\.id/.test(appSrc231) && /turn\.choices = \[\.\.\.inject, \.\.\.\(turn\.choices \|\| \[\]\)\]/.test(appSrc231));
+  check("CCODE-19: NOT injected when the GM already wired a choice to this encounter (no duplicate engage button)",
+    /!\(turn\.choices \|\| \[\]\)\.some\(c => c\.encounterId === nd\.id\)/.test(appSrc231));
+  check("CCODE-19: a LETHAL invented fight also gets an explicit decline (rule 18 — offered, never imposed)",
+    /if \(nd\.lethal\) inject\.push\(\{ label: "Step back/.test(appSrc231));
   check("231 §2: isolated failures are NAMED (which op-group) on the report + the turn + the aside — not just 'something didn't land'",
     /character\._applyFailures\?\.length/.test(appSrc231) && /result\.turn\._applyFailedOp = ops\.join/.test(appSrc231) && /the \$\{turn\._applyFailedOp[\s\S]*?\} step/.test(appSrc231));
   check("231 §2: affiliation enrichment is best-effort — a throw there never breaks the meet (the person is still registered)",

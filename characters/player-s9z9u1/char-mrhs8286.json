@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 20,
-  "xp": 1980,
+  "xp": 1993,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -113,6 +113,18 @@
     {
       "abilityId": "hunters_strike",
       "level": 1
+    },
+    {
+      "abilityId": "marrow-s-wings",
+      "level": 1,
+      "braided": true,
+      "discovered": true
+    },
+    {
+      "abilityId": "the-held-place",
+      "level": 1,
+      "braided": true,
+      "discovered": true
     }
   ],
   "alignment": {
@@ -132,7 +144,7 @@
   "maxHealth": 125,
   "health": 125,
   "maxEnergy": 195,
-  "energy": 155,
+  "energy": 147,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1737,130 +1749,162 @@
         "player": "Ask the boy to also send a second note — to the Hub Council water committee, naming Mara Wells as the Millbrook relay contact and pressing for a meeting sooner than their scheduled three days",
         "summary": "Silas dictates a second message to the Hub Council water committee — naming Mara Wells as relay contact and pressing for a meeting before their scheduled three days.",
         "narration": "You ask the boy to take down a second message before he caps his pen. He looks up — not reluctant, just checking he heard the scope correctly — and dips back in when you nod.\n\nYou give him the Hub Council water committee as the address. You tell them that Mara Wells in Millbrook is the relay contact for the valley's east-channel situation, that her records go back six mornings of discoloration at the intake, and that the committee's three-day window is a luxury the water is not offering. You ask for a meeting sooner than that — you name yourself as the one requesting it, and you name Millbrook, and you let the weight of that stand without decoration.\n\nThe boy writes quickly, the pen scratching in the quiet of the post. When he reaches the end he reads it back without being asked — two sentences, the core of it, the weight intact. He caps the pen and holds both slips together. 'Morning run carries them both,' he says. 'Committee receives by midday if the roads hold.'\n\nHuginn shifts on your shoulder and looks at the pigeonhole shelf one more time, cataloguing whatever it catalogs. The runner's boy watches the bird with the mild wariness of someone who has decided to tolerate it and is not entirely comfortable with that decision. The afternoon light through the open door is beginning to angle lower."
+      },
+      {
+        "player": "No, that's not fast enough... ask him who on the council receives the posts? Where they can be found -- let's your Marrow's Wings emerge as you ask and prepare to fly there directly.",
+        "summary": "Silas draws Marrow's Wings in the runner's post — the boy names Clerk-Warden Ossian as the committee's gatekeeper, corner room behind the north gate registry, catchable now before midday ends.",
+        "narration": "You turn from the counter and ask the runner's boy one more question. Who on the Council actually receives these posts? Not the committee as a body — the person. The one who opens the slips.\n\nThe boy blinks. He is not certain he should answer that. But you are already shifting, and Huginn lifts from your shoulder with a short, dry croak as the wings come.\n\nMarrow's Wings do not announce themselves. The shadow simply gathers at your back — not dramatically, not with heat or sound — and takes the shape they take. Dark, quiet, the span of a long reach to either side. The boy's eyes go wide and he takes one step back from the counter, the pen still in his hand.\n\nYou ask again. Calmly. The wings are simply there.\n\nHe finds his voice. 'Clerk-Warden Ossian,' he says, precise and quick, the way people name things they want to finish naming. 'Corner room, second floor, the brick hall behind the north gate registry. Morning post only — she is usually in before the bell and gone by midday. You'd want to catch her now, if the slips run with the morning.' He pauses, then adds, with the careful honesty of someone who understands what he is looking at: 'She is the one who decides what gets to the committee and what gets filed.'"
       }
     ],
     "lastTurn": {
-      "narration": "You ask the boy to take down a second message before he caps his pen. He looks up — not reluctant, just checking he heard the scope correctly — and dips back in when you nod.\n\nYou give him the Hub Council water committee as the address. You tell them that Mara Wells in Millbrook is the relay contact for the valley's east-channel situation, that her records go back six mornings of discoloration at the intake, and that the committee's three-day window is a luxury the water is not offering. You ask for a meeting sooner than that — you name yourself as the one requesting it, and you name Millbrook, and you let the weight of that stand without decoration.\n\nThe boy writes quickly, the pen scratching in the quiet of the post. When he reaches the end he reads it back without being asked — two sentences, the core of it, the weight intact. He caps the pen and holds both slips together. 'Morning run carries them both,' he says. 'Committee receives by midday if the roads hold.'\n\nHuginn shifts on your shoulder and looks at the pigeonhole shelf one more time, cataloguing whatever it catalogs. The runner's boy watches the bird with the mild wariness of someone who has decided to tolerate it and is not entirely comfortable with that decision. The afternoon light through the open door is beginning to angle lower.",
-      "sceneSummary": "Silas dictates a second message to the Hub Council water committee — naming Mara Wells as relay contact and pressing for a meeting before their scheduled three days.",
+      "narration": "You turn from the counter and ask the runner's boy one more question. Who on the Council actually receives these posts? Not the committee as a body — the person. The one who opens the slips.\n\nThe boy blinks. He is not certain he should answer that. But you are already shifting, and Huginn lifts from your shoulder with a short, dry croak as the wings come.\n\nMarrow's Wings do not announce themselves. The shadow simply gathers at your back — not dramatically, not with heat or sound — and takes the shape they take. Dark, quiet, the span of a long reach to either side. The boy's eyes go wide and he takes one step back from the counter, the pen still in his hand.\n\nYou ask again. Calmly. The wings are simply there.\n\nHe finds his voice. 'Clerk-Warden Ossian,' he says, precise and quick, the way people name things they want to finish naming. 'Corner room, second floor, the brick hall behind the north gate registry. Morning post only — she is usually in before the bell and gone by midday. You'd want to catch her now, if the slips run with the morning.' He pauses, then adds, with the careful honesty of someone who understands what he is looking at: 'She is the one who decides what gets to the committee and what gets filed.'",
+      "sceneSummary": "Silas draws Marrow's Wings in the runner's post — the boy names Clerk-Warden Ossian as the committee's gatekeeper, corner room behind the north gate registry, catchable now before midday ends.",
       "choices": [
         {
-          "label": "Step out and head toward the Ent grove — check on the ward since the last visit",
+          "label": "Fly to the brick hall behind the north gate registry now — catch Ossian before she leaves",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "axes": {
+            "falsehood_truth": 0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 15,
           "intentTags": [
-            "scout",
-            "careful"
+            "travel",
+            "negotiate"
           ],
-          "abilityId": "order_sense",
-          "trivial": true
+          "abilityId": "light_borne",
+          "energyCost": 6,
+          "trivial": false
         },
         {
-          "label": "Ask the boy if the Hub Council meets anywhere nearby — find out where to show up in person rather than wait on a runner",
+          "label": "Go on foot — fold the wings and walk to the registry hall directly",
           "attribute": "social",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Wait here at the post a few minutes — see if Veth or Pell circles back with news of Crane before moving on",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Step out and walk toward the water-seller cluster — find Veth and compare what each of you has learned about Crane so far",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "travel",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask the boy what Ossian is like before you go — what gets her attention and what gets things filed",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Wait for Veth and Pell to check in first — coordinate before approaching the registry",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
             "plan"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "energy": -5
+      },
       "scene": {
-        "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door, angling lower now toward mid-afternoon.",
+        "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door angling lower toward mid-afternoon. Marrow's Wings are manifested at Silas's back, the shadow quiet and wide.",
         "npcsPresent": [
           {
             "name": "Runner's boy",
-            "state": "Holding both slips together — Mara's and the committee's — ready for the morning run. Watching Huginn with cautious tolerance."
+            "state": "One step back from the counter, pen still in hand, watching the wings with wide eyes and professional composure fighting each other."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, eye still on the pigeonhole shelf."
+            "state": "Airborne — circled once above the counter, now hanging near the door frame, watching."
           }
         ],
         "objects": [
-          "Two dictated slips held by the runner's boy — one for Mara Wells, one for the Hub Council water committee — morning run delivery",
+          "Two dictated slips held by the runner's boy — one for Mara Wells, one for the Hub Council water committee — ready for the morning run",
           "Freshly filed Millbrook slip in the cubby — Mara's original relay notice",
-          "Two additional slips already read and pocketed — Dara Holt's repair update and Pip's general notice",
+          "Two additional slips already read and pocketed — Dara Holt's repair update and Pip's notice",
           "Pigeonholed cubby shelf behind the counter, several other slips in various cubbies",
           "Runner's bell above the door",
           "Ink pot and pen on the counter edge, now capped"
         ],
         "threads": [
+          "Clerk-Warden Ossian named as the committee gatekeeper — corner room, second floor, brick hall behind the north gate registry; catchable now before midday ends",
           "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
           "Veth moving toward the water-seller cluster to ask after Crane and resources",
           "Pell moving toward the Coliseum gate and forge district",
-          "Ent grove ward unchecked since last visit",
-          "Morning run will carry both messages — committee reply will determine meeting timing"
+          "Morning run will carry both messages — committee reply depends on whether Ossian is reached first"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "note": "A second message sent naming her as relay contact to the Hub Council water committee — her information now formally entering the committee's line of sight.",
-          "statusNote": "In her store in Millbrook — relay protocol active; morning run will carry both Silas's message and his committee notice within the day."
+          "op": "meet",
+          "npcId": "ossian",
+          "name": "Ossian",
+          "role": "Clerk-Warden, Hub Council water committee gatekeeper",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "The person who decides what reaches the committee and what gets filed — corner room, second floor, brick hall behind the north gate registry.",
+          "note": "Named by the runner's boy as the committee's receiving clerk. Morning post only; in before the bell, gone by midday.",
+          "learned": [
+            "Corner room, second floor, brick hall behind the north gate registry",
+            "Morning post only — in before the bell, gone by midday",
+            "She decides what reaches the committee and what gets filed"
+          ],
+          "status": "active",
+          "statusNote": "Likely still in her office — catchable now before midday ends"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "Silas named Mara Wells to the Hub Council water committee as Millbrook's relay contact and pressed for a meeting sooner than their scheduled three days — the committee now has a named contact and a named urgency, delivered via the morning run.",
+          "topic": "what-the-water-remembers",
+          "label": "What the Water Remembers",
+          "kind": "event",
+          "fact": "Clerk-Warden Ossian is the committee's gatekeeper — corner room, second floor, brick hall behind the north gate registry. Morning post only; she decides what reaches the committee and what gets filed. Catchable before midday ends.",
           "links": [
-            "mara-wells",
-            "millbrook",
-            "the-edge-district-ledger",
-            "what-the-water-remembers"
+            "ossian",
+            "the-water-crisis",
+            "mara-wells"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the runner counter — two messages dictated and filed."
+        "why": "A brief exchange at the runner's counter"
       },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "what-the-water-remembers",
-          "note": "Hub Council water committee formally contacted — Mara Wells named as relay, meeting requested ahead of schedule. The institutional thread is now live."
-        }
-      ]
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door, angling lower now toward mid-afternoon.",
+      "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door angling lower toward mid-afternoon. Marrow's Wings are manifested at Silas's back, the shadow quiet and wide.",
       "npcsPresent": [
         {
           "name": "Runner's boy",
-          "state": "Holding both slips together — Mara's and the committee's — ready for the morning run. Watching Huginn with cautious tole"
+          "state": "One step back from the counter, pen still in hand, watching the wings with wide eyes and professional composure fighting"
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, eye still on the pigeonhole shelf."
+          "state": "Airborne — circled once above the counter, now hanging near the door frame, watching."
         }
       ],
       "objects": [
@@ -1872,11 +1916,11 @@
         "Ink pot and pen on the counter edge, now capped"
       ],
       "threads": [
+        "Clerk-Warden Ossian named as the committee gatekeeper — corner room, second floor, brick hall behind the north gate registry; catchable now before midday ends",
         "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
         "Veth moving toward the water-seller cluster to ask after Crane and resources",
         "Pell moving toward the Coliseum gate and forge district",
-        "Ent grove ward unchecked since last visit",
-        "Morning run will carry both messages — committee reply will determine meeting timing"
+        "Morning run will carry both messages — committee reply depends on whether Ossian is reached first"
       ]
     }
   },
@@ -3578,6 +3622,34 @@
       },
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Silas's%20Mother%2C%20woman%2C%20Mother%20%E2%80%94%20lives%20at%20the%20cairn-line%20house%20on%20Cairnhold's%20center%20lane%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=45292&nologo=true",
       "_portraitTier": "devoted"
+    },
+    "ossian": {
+      "id": "ossian",
+      "name": "Ossian",
+      "role": "Clerk-Warden, Hub Council water committee gatekeeper",
+      "description": "The person who decides what reaches the committee and what gets filed — corner room, second floor, brick hall behind the north gate registry.",
+      "firstMet": {
+        "locationId": "the_crossing",
+        "day": 13
+      },
+      "relationship": 0,
+      "history": [
+        "[d13] Named by the runner's boy as the committee's receiving clerk. Morning post only; in before the bell, gone by midday."
+      ],
+      "knownFacts": [
+        "Corner room, second floor, brick hall behind the north gate registry",
+        "Morning post only — in before the bell, gone by midday",
+        "She decides what reaches the committee and what gets filed"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "Likely still in her office — catchable now before midday ends",
+      "lastSeen": {
+        "locationId": "the_crossing",
+        "day": 13
+      }
     }
   },
   "placeMemory": {
@@ -4279,21 +4351,6 @@
     },
     "news": [
       {
-        "day": 9,
-        "worldDay": 19,
-        "text": "Word has spread beyond hub: Seated a ward in the Ent grove circle — a collective working with Pell, Veth, Siol, and Huginn — the grove's own shape as the structure, the Weirmark at the join. The Ent received it."
-      },
-      {
-        "day": 9,
-        "worldDay": 19,
-        "text": "Word has spread beyond ashwarden: Named and claimed the Raven's Home warden post as an Ashwarden base — Stillwater's Trouble — planting a working post on the March for the first time in eleven years."
-      },
-      {
-        "day": 9,
-        "worldDay": 19,
-        "text": "Word in Millbrook: the water wheel intake ran gray-green two mornings running — Mara Wells is keeping a written log now, and Aldric has started pulling his catch stock forward before the smell shifts."
-      },
-      {
         "day": 12,
         "worldDay": 19,
         "text": "Word from the smokehouse: Aldric's been asking deliverymen what color the river runs where they crossed — two of three said gray by the time it reached the low ford."
@@ -4377,14 +4434,32 @@
         "day": 13,
         "worldDay": 23,
         "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir has hit trouble — Someone at the plaza asked Siol directly where they were going and why, in a tone that made 'nowhere in particular' sound like an accusation — the world pressed in, and for a moment the going-on felt less possible than it had the day before."
+      },
+      {
+        "day": 13,
+        "worldDay": 24,
+        "text": "Pip Cotter, Mara's Errand-Runner: Pip reached the halfway waypoint ahead of schedule and, while waiting for the gate-keeper to log her passage, talked her way into carrying a sealed reply-note back — the return trip now has its small purpose, and she is quietly pleased with herself.",
+        "tier": "ambient"
+      },
+      {
+        "day": 13,
+        "worldDay": 24,
+        "text": "Calvar: A gap opened in the cloud cover at an hour when it shouldn't have, and the readings it produced don't match the model he has been trusting — not wrong enough to act on yet, but wrong enough that he wrote the discrepancy down, which is the first crack in his reason to stay.",
+        "tier": "ambient"
+      },
+      {
+        "day": 13,
+        "worldDay": 24,
+        "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir has hit trouble — A plaza vendor who had grown used to Siol's quiet presence reported them to a Hub registrar as a loiterer without a declared purpose, and now there is a notice requiring Siol to either state their business in writing or move on by the following morning.",
+        "tier": "event"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-23T21:42:04.199Z",
-    "lastTickWorldDay": 23,
-    "lastCanonWorldDay": 23,
-    "lastGenCount": 573,
-    "turnsSinceOffer": 8,
+    "lastSharedReadAt": "2026-07-24T00:12:25.449Z",
+    "lastTickWorldDay": 24,
+    "lastCanonWorldDay": 24,
+    "lastGenCount": 576,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean…",
@@ -4409,27 +4484,27 @@
     ],
     "wantProgress": {
       "pip-cotter-mara-s-errand-runner": {
-        "progress": 1,
+        "progress": 2,
         "status": "active",
-        "updatedWorldDay": 23,
+        "updatedWorldDay": 24,
         "lastOutcome": "progress"
       },
       "vash": {
         "progress": 1,
         "status": "active",
-        "updatedWorldDay": 23,
-        "lastOutcome": "progress"
+        "updatedWorldDay": 24,
+        "lastOutcome": "stall"
       },
       "calvar": {
-        "progress": 0,
+        "progress": 1,
         "status": "active",
-        "updatedWorldDay": 23,
-        "lastOutcome": "stall"
+        "updatedWorldDay": 24,
+        "lastOutcome": "progress"
       },
       "siol-elven-traveler-at-the-hub-plaza-tal": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 23,
+        "updatedWorldDay": 24,
         "lastOutcome": "problem"
       }
     },
@@ -5078,7 +5153,8 @@
           "[d12] [while away] On the return leg Pip talked her way into carrying a small bundle of waxed cord to a chandler two streets off her route, arriving back to Mara later than expected but plainly satisfied with herself.",
           "[d12] [while away] On the return leg Pip talked a market-stall keeper into letting her carry a folded note two streets over, which was small and unnecessary and made the whole trip feel properly used.",
           "[d12] [while away] On the return leg Pip talked a street-stall keeper into letting her carry a tied bundle of wax-paper parcels two blocks for a copper, arriving back at Mara's with the errand done and one small coin of her own to show for it.",
-          "[d13] [while away] Pip completed the delivery and, on the return leg, talked her way into carrying a folded notice back to Mara's quarter — small, but the journey now has weight in both directions."
+          "[d13] [while away] Pip completed the delivery and, on the return leg, talked her way into carrying a folded notice back to Mara's quarter — small, but the journey now has weight in both directions.",
+          "[d13] [while away] Pip reached the halfway waypoint ahead of schedule and, while waiting for the gate-keeper to log her passage, talked her way into carrying a sealed reply-note back — the return trip now has its small purpose, and she is quietly pleased with herself."
         ],
         "links": [],
         "aliases": [],
@@ -5460,7 +5536,6 @@
         "label": "Calvar — the Engineer",
         "kind": "person",
         "facts": [
-          "[d3] Order-Sense reads his room as a node, not a terminus — documents meant to reach other hands, chair angled toward the door for receiving. He arranged this space for an arrival he anticipated. He is par",
           "[d3] Left the diagram with Leth as a deliberate gambit — he wanted someone outside the Radiant hierarchy to follow the chain from the river end, not the council end, so it couldn't be traced back to him th",
           "[d3] Order-Sense reads his room as a deliberate transit node — papers organized for outward movement, space arranged for receiving, nothing built for hiding. He has one step left in a chain he started hims",
           "[d3] Silas laid out the complete evidence chain to Calvar — Leth, Vash, Rennic in the intake log, Fendt's written testimony, the gap in the calibration files as the one remaining unknown. Fendt's Testimony",
@@ -5483,7 +5558,8 @@
           "[d12] [while away] A subtle drift appeared in the seventh-band readings overnight — within tolerance, technically, but not within the pattern Calvar has memorized across fifteen years, and he has been sitting with that deviation since before dawn, deciding whether it is the window finally failing him or…",
           "[d12] [while away] Calvar recorded a seventh-band reading at the same hour he always does, but this time he wrote a small asterisk beside the value and did not immediately explain it in his log — the first annotation without an accompanying sentence in eleven years.",
           "[d3] Pre-Transition filtration engineer, traveling south with the party",
-          "[d13] [while away] The window gave him nothing that technically required him to move — the data stayed ambiguous, and so did he."
+          "[d13] [while away] The window gave him nothing that technically required him to move — the data stayed ambiguous, and so did he.",
+          "[d13] [while away] A gap opened in the cloud cover at an hour when it shouldn't have, and the readings it produced don't match the model he has been trusting — not wrong enough to act on yet, but wrong enough that he wrote the discrepancy down, which is the first crack in his reason to stay."
         ],
         "links": [
           "vash-lens-grinder-east-room",
@@ -5549,7 +5625,8 @@
           "[d12] [while away] Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since.",
           "[d12] [while away] Vash spent the quiet hours between grinds tracing back what she overheard against the small things she knows about the array's optical layer — a particular phrase she'd dismissed as jargon now sits wrong in her, not quite matching the geometry it should describe, and she has not yet…",
           "[d12] [while away] Vash spent part of the night re-grinding a lens she had declared finished, the repetitive motion giving her cover to turn the overheard fragment over and over until she isolated the one word in it she still cannot place — and now she is nearly certain it was a name, not a process term.",
-          "[d13] [while away] Vash placed the overheard phrase against something she already knew and felt the two pieces click together — she still doesn't have the whole shape, but she now knows the piece she held was real, and that it mattered."
+          "[d13] [while away] Vash placed the overheard phrase against something she already knew and felt the two pieces click together — she still doesn't have the whole shape, but she now knows the piece she held was real, and that it mattered.",
+          "[d13] [while away] She turned the overheard words over again today but reached no new edge — the piece still doesn't show her what it belongs to, and she is no closer to knowing whether her silence was an error or simply a pause."
         ],
         "links": [
           "leth-archive-complaint",
@@ -5882,21 +5959,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.42809001732552,
-    "cerebral": 16.877885258799346,
-    "social": 8.936796926193551,
-    "generous": 4.372845940312211,
-    "cautious": 3.554302040024171,
-    "physical": 0.5028785441416489,
-    "risky": 1.4649917901415723,
-    "ruthless": 0.0076894843911372735,
-    "carousing": 0.2972080154960554,
-    "amorous": 2.992901319406771,
-    "patient": 0.2054481066826131,
-    "stealth": 0.0029804637951128432,
-    "devotion": 1.5742770594434743,
-    "craft": 0.49923882758865745,
-    "leadership": 1.0151708914922963
+    "strategic": 20.94238776689238,
+    "cerebral": 17.45593812732936,
+    "social": 8.713377003038712,
+    "generous": 4.2635247918044055,
+    "cautious": 3.4654444890235667,
+    "physical": 0.49030658053810766,
+    "risky": 1.428366995388033,
+    "ruthless": 0.007497247281358842,
+    "carousing": 0.289777815108654,
+    "amorous": 2.9180787864216016,
+    "patient": 0.20031190401554777,
+    "stealth": 0.002905952200235022,
+    "devotion": 1.5349201329573874,
+    "craft": 0.486757856898941,
+    "leadership": 0.9897916192049889
   },
   "aptitudes": [
     "strategist",
@@ -5904,7 +5981,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 717,
+  "actionCount": 718,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6294,8 +6371,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784849677858,
-  "rev": 1144,
+  "updatedAt": 1784852067479,
+  "rev": 1156,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6530,6 +6607,11 @@
               "worldDay": 23,
               "note": "Pip completed the delivery and, on the return leg, talked her way into carrying a folded notice back to Mara's quarter — small, but the journey now has weight in both directions.",
               "outcome": "progress"
+            },
+            {
+              "worldDay": 24,
+              "note": "Pip reached the halfway waypoint ahead of schedule and, while waiting for the gate-keeper to log her passage, talked her way into carrying a sealed reply-note back — the return trip now has its small purpose, and she is quietly pleased with herself.",
+              "outcome": "progress"
             }
           ]
         },
@@ -6728,6 +6810,11 @@
               "worldDay": 23,
               "note": "The window gave him nothing that technically required him to move — the data stayed ambiguous, and so did he.",
               "outcome": "stall"
+            },
+            {
+              "worldDay": 24,
+              "note": "A gap opened in the cloud cover at an hour when it shouldn't have, and the readings it produced don't match the model he has been trusting — not wrong enough to act on yet, but wrong enough that he wrote the discrepancy down, which is the first crack in his reason to stay.",
+              "outcome": "progress"
             }
           ]
         },
@@ -6851,6 +6938,11 @@
               "worldDay": 23,
               "note": "Vash placed the overheard phrase against something she already knew and felt the two pieces click together — she still doesn't have the whole shape, but she now knows the piece she held was real, and that it mattered.",
               "outcome": "progress"
+            },
+            {
+              "worldDay": 24,
+              "note": "She turned the overheard words over again today but reached no new edge — the piece still doesn't show her what it belongs to, and she is no closer to knowing whether her silence was an error or simply a pause.",
+              "outcome": "stall"
             }
           ]
         },
@@ -7003,6 +7095,11 @@
             {
               "worldDay": 23,
               "note": "Someone at the plaza asked Siol directly where they were going and why, in a tone that made 'nowhere in particular' sound like an accusation — the world pressed in, and for a moment the going-on felt less possible than it had the day before.",
+              "outcome": "problem"
+            },
+            {
+              "worldDay": 24,
+              "note": "A plaza vendor who had grown used to Siol's quiet presence reported them to a Hub registrar as a loiterer without a declared purpose, and now there is a notice requiring Siol to either state their business in writing or move on by the following morning.",
               "outcome": "problem"
             }
           ]
@@ -7622,7 +7719,7 @@
         "id": "gen-waygate",
         "name": "Waygate",
         "regionId": "valley",
-        "parentId": "millbrook",
+        "parentId": "gen-ashwarden-march-road",
         "_promotedFromSubPlace": true,
         "descriptionSeed": "A place the road led to — Waygate. The fiction brought you here before the map knew its name.",
         "tags": [
@@ -8062,7 +8159,9 @@
       "the_shielding_word": 2,
       "boundary_stone": 6,
       "the_kept_breath": 2,
-      "light_borne": 2
+      "light_borne": 2,
+      "marrow-s-wings": 1,
+      "ask_the_dead": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -8097,7 +8196,8 @@
       "shadowstep+the_raised_thing": 1,
       "the-attended-end+the_shadow_work": 1,
       "deathsense+light_borne": 1,
-      "boundary_stone+the_shielding_word": 1
+      "boundary_stone+the_shielding_word": 1,
+      "ask_the_dead+marrow-s-wings": 1
     },
     "aspirations": [
       {
@@ -8122,7 +8222,9 @@
       "the_raised_thing": 23,
       "light_borne": 23,
       "shadowstep": 23,
-      "the_shielding_word": 23
+      "the_shielding_word": 23,
+      "marrow-s-wings": 24,
+      "ask_the_dead": 24
     }
   },
   "companionBonds": {
@@ -8301,6 +8403,134 @@
         "shared": true,
         "firstFinder": true
       }
+    },
+    "marrow-s-wings": {
+      "id": "marrow-s-wings",
+      "name": "Marrow's Wings",
+      "tradition": "learned",
+      "powerSystem": "learned",
+      "levelReq": 4,
+      "energyCost": 10,
+      "attribute": "mental",
+      "functions": [
+        "conceal",
+        "make",
+        "transform"
+      ],
+      "harmRung": "none",
+      "effectTags": [],
+      "nativeOrCombination": "combination",
+      "description": "By combining The Shadow Work's persistent shaping with The Raised Thing's structural purpose, Silas can manifest and sustain death-shadow wings capable of open-air flight — not a step between two darks, but a carried passage through open ground. The hollow's attended-death quality is not required…",
+      "notFor": "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes.",
+      "narrationHints": "By combining The Shadow Work's persistent shaping with The Raised Thing's structural purpose, Silas can manifest and sustain death-shadow wings capable of open-air flight — not a step between two…",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Marrow's Wings I",
+          "grants": "The Attended End and The Shadow Work run as one craft: the move only their joining makes.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "conceal",
+            "make",
+            "transform"
+          ]
+        },
+        {
+          "rank": 2,
+          "name": "Marrow's Wings II",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "conceal",
+            "make",
+            "transform"
+          ]
+        },
+        {
+          "rank": 3,
+          "name": "Marrow's Wings III",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "conceal",
+            "make",
+            "transform"
+          ]
+        }
+      ],
+      "minted": {
+        "kind": "discovery",
+        "from": [
+          "the-attended-end",
+          "the_shadow_work"
+        ],
+        "mintedAt": null,
+        "namedBy": "player",
+        "tier": 4,
+        "emergent": null,
+        "enriched": true,
+        "sourceNames": [
+          "The Attended End",
+          "The Shadow Work"
+        ],
+        "discoveredFrom": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
+        "shared": true,
+        "firstFinder": true
+      }
+    },
+    "the-held-place": {
+      "id": "the-held-place",
+      "name": "You Shall Not Pass",
+      "tradition": "valley_craft",
+      "powerSystem": "valley_craft",
+      "levelReq": 2,
+      "energyCost": 6,
+      "attribute": "practical",
+      "functions": [
+        "bind",
+        "ward",
+        "resist",
+        "shield"
+      ],
+      "harmRung": "none",
+      "effectTags": [],
+      "nativeOrCombination": "combination",
+      "description": "A sustained dome-ward combining Boundary-Stone's geometric perimeter with the Shielding Word's declared certainty — the two crafts braid into a single form: a warded place held against a named external force (weather, casual harm, ambient threat). Costs the sum of both components. The ward holds…",
+      "notFor": "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes.",
+      "narrationHints": "A sustained dome-ward combining Boundary-Stone's geometric perimeter with the Shielding Word's declared certainty — the two crafts braid into a single form: a warded place held against a named…",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "You Shall Not Pass I",
+          "grants": "Boundary-Stone and The Shielding Word run as one craft: the move only their joining makes.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "bind",
+            "ward",
+            "resist",
+            "shield"
+          ]
+        }
+      ],
+      "minted": {
+        "kind": "discovery",
+        "from": [
+          "boundary_stone",
+          "the_shielding_word"
+        ],
+        "mintedAt": null,
+        "namedBy": "player",
+        "tier": 2,
+        "emergent": null,
+        "enriched": true,
+        "sourceNames": [
+          "Boundary-Stone",
+          "The Shielding Word"
+        ],
+        "discoveredFrom": "boundary_stone+boundary_stone+the_shielding_word:braiding-protective-orde",
+        "shared": true,
+        "firstFinder": true
+      }
     }
   },
   "precursorAccess": [],
@@ -8426,7 +8656,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 69
+    "the_center": 70
   },
   "foreclosed": [
     "rootkin",
@@ -8549,10 +8779,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T23:34:37.857Z",
+      "lastAt": "2026-07-24T00:14:27.475Z",
       "startDay": 23,
-      "endDay": 23,
-      "beats": 51
+      "endDay": 24,
+      "beats": 52
     }
   ],
   "company": [
@@ -8752,7 +8982,7 @@
   "_opEmitted": {
     "sceneSummary": 89,
     "choices": 89,
-    "characterDeltas": 36,
+    "characterDeltas": 37,
     "scene": 89,
     "npcUpdates": 75,
     "factUpdates": 7,
@@ -8760,9 +8990,9 @@
     "codexUpdates": 51,
     "timeOps": 83,
     "imagePrompt": 2,
-    "sceneEnded": 18,
+    "sceneEnded": 19,
     "itemUpdates": 2,
-    "questUpdates": 6,
+    "questUpdates": 5,
     "offer": 8,
     "moveTo": 5,
     "delegateOps": 1,
@@ -8810,6 +9040,28 @@
       "name": "Undying Ledger",
       "tier": 3,
       "mintedAt": null
+    },
+    {
+      "id": "marrow-s-wings",
+      "from": [
+        "the-attended-end",
+        "the_shadow_work"
+      ],
+      "name": "Marrow's Wings",
+      "tier": 4,
+      "mintedAt": null,
+      "discovered": true
+    },
+    {
+      "id": "the-held-place",
+      "from": [
+        "boundary_stone",
+        "the_shielding_word"
+      ],
+      "name": "You Shall Not Pass",
+      "tier": 2,
+      "mintedAt": null,
+      "discovered": true
     }
   ],
   "locationAliases": {
@@ -8854,5 +9106,16 @@
     "the_shielding_word": "https://image.pollinations.ai/prompt/The%20Shielding%20Word%3A%20Interpose%20a%20spoken%20certainty%20between%20harm%20and%20a%20person%20%E2%80%94%20the%20Seraphic%20ward%2C%20which%20is%20why%20the%20Orders%20are%20loved%20despite%20everything.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=9311&nologo=true",
     "the_last_light": "https://image.pollinations.ai/prompt/The%20Last%20Light%3A%20The%20Blazeborn%20capstone%20%E2%80%94%20the%20whole%20of%20your%20inner%20fire%20spent%20at%20once%2C%20a%20light%20so%20absolute%20it%20unmakes%20any%20darkness%20in%20reach.%20The%20greatest%20thing%20they%20do%2C%20and%20the%20one%20that%20leaves%20them%20cold%20and%20empty%20after.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20blazeborn%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=47806&nologo=true",
     "the_ended_threat": "https://image.pollinations.ai/prompt/The%20Ended%20Threat%3A%20Protect%20by%20ending%20the%20threat%20before%20it%20can%20act%20%E2%80%94%20not%20blocking%20but%20prevention%20through%20precise%2C%20early%20intervention.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=79376&nologo=true"
-  }
+  },
+  "authorEdits": [
+    {
+      "kind": "reparentLocation",
+      "id": "gen-waygate",
+      "to": "gen-ashwarden-march-road",
+      "from": "millbrook",
+      "note": "author edit",
+      "at": "2026-07-23T23:44:09.619Z",
+      "worldDay": 23
+    }
+  ]
 }

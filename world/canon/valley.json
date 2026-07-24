@@ -405,6 +405,82 @@
         "birthWeight": 24,
         "overtook": "cassiel-ord"
       }
+    },
+    "edvar-crane": {
+      "schemaVersion": 1,
+      "id": "edvar-crane",
+      "name": "Edvar Crane",
+      "role": "Mill resident and self-taught water-reader — the man who already knew, and has been waiting for someone to finally ask",
+      "homeLocation": "waygate_valley",
+      "communityId": "valley.waygate",
+      "personality": {
+        "warmth": 0.55,
+        "trust": 0.3,
+        "candor": 0.75,
+        "patience": 0.65
+      },
+      "spectrum": {
+        "concrete_abstract": -0.4,
+        "falsehood_truth": 0.6,
+        "dark_light": 0.1,
+        "space_time": -0.2
+      },
+      "voiceHints": "Speaks in the unhurried cadence of a man who has thought something through alone for a long time and is relieved to say it aloud at last. Precise without being academic — the precision of a craftsman who learned by watching things go wrong. He will not exaggerate. He will also not soften. If he pauses, let him; he is choosing the right word, not stalling. Occasional dry wryness, never cruel. The faint bitterness of someone who tried to warn people quietly and was not heard.",
+      "knowledge": [
+        "The exact date the water changed — not roughly, exactly; he wrote it on the door-frame inside the mill",
+        "What boiling and settling with wood-ash does to the worst of it, and what it does not fix",
+        "That the discolouration runs heavier from the upper fork than the lower, which tells him something is wrong above the second weir",
+        "Two other mill families who are quietly doing what he does, and three more who are not and who look grey-tired in a way that worries him",
+        "Where the old Waymarker survey stones are set along the upper channel — he walks that ground every early spring to check the snowmelt rate"
+      ],
+      "wants": "Acknowledgment that the crisis is real, upstream, and getting worse — and someone with authority or reach to act on it before people start dying quietly and it gets called a bad season.",
+      "fears": "That he will be right about all of it and it will make no difference. That the people who did not listen in autumn will not listen now until the evidence is someone's child.",
+      "secondThreadRole": {
+        "function": "reveal",
+        "note": "Crane is the primary reveal-node for the Second Thread. He does not have answers — he has observations precise enough to point toward answers. His cooperation unlocks the upper-fork investigation and the names of the other affected families. He has been waiting to be believed, not to be told what he already knows."
+      },
+      "reactsToReputation": {
+        "trusted_by_valley": "opens immediately, brings out the door-frame record, names every family he knows",
+        "outsider_unknown": "measured — tests with one true thing before offering another",
+        "dismissive_of_concerns": "closes, politely, completely; will answer questions but volunteers nothing",
+        "already_treating_water": "recognises a peer; drops the last of his guardedness and speaks as one careful person to another"
+      },
+      "appearance": "A heavyset man of around fifty, gone broad across the shoulders from decades at the mill, with hands that are always faintly stained from the wheel-grease he cannot fully wash out. Close-cropped grey hair, a week's worth of beard he doesn't bother with. His face is weathered and watchful — not unfriendly, but accustomed to people not quite looking back. He keeps a tin cup on a hook by his door and never drinks without checking the bottom first. Early spring has him in a heavy canvas coat, unlaced at the collar, with a notebook tucked in the chest pocket.",
+      "people": "human",
+      "domains": {
+        "primary": "figurist",
+        "secondary": "hourkeeper",
+        "tertiary": "syllogist"
+      },
+      "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Crane practises no formal tradition — he is a miller who taught himself to read pattern, record time, and reason from evidence. Figurist primary reflects his intuitive map-reading and spatial memory of the watershed; hourkeeper secondary reflects his obsessive log-keeping and change-tracking; syllogist tertiary reflects the quiet deductive chain he has been building alone. Kind and domain are independent.",
+      "peopleSource": "generated",
+      "domainsSource": "generated",
+      "image": "https://image.pollinations.ai/prompt/A%20heavyset%20man%20of%20around%20fifty%2C%20gone%20broad%20across%20the%20shoulders%20from%20decades%20at%20the%20mill%2C%20with%20hands%20that%20are%20always%20faintly%20stained%20from%20the%20wheel-grease%20he%20cannot%20fully%20wash%20out.%20Close-cropped%20grey%20%2C%20character%20portrait%2C%20named%20Edvar%20Crane%2C%20Mill%20resident%20and%20self-taught%20water-reader%20%E2%80%94%20the%20man%20who%20already%20knew%2C%20and%20has%20been%20waiting%20for%20some%2C%20Speaks%20in%20the%20unhurried%20cadence%20of%20a%20man%20who%20has%20thought%20something%20through%20alone%20for%20a%20long%20time%20and%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=88220&nologo=true",
+      "history": "Edvar Crane was born in the mill — not metaphorically; his mother went into labour during the spring flood of a year the valley still measures other years against, and his father did not stop working the sluice gate until it was done. He grew up understanding water as a system before he had words for systems: that what comes down the upper fork is not the same as what comes down the lower, that…",
+      "relationships": "His nearest relationship is with Pell Sorche, whose family runs the second mill downstream — they do not talk often, but when Edvar shows up at her door before the morning work, she puts the kettle on and does not ask why, because she already knows it is about the water. The other two families who treat and settle as he does are the Anvers household and old Maret who has no family name anyone…",
+      "_canon": {
+        "entityId": "edvar-crane",
+        "type": "npc",
+        "weight": 47,
+        "rating": "R+",
+        "tier": "canonical",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "gen-waygate",
+          "day": 13,
+          "worldDay": null,
+          "hint": "Edvar Crane — a mill resident of around fifty, connected to the Waymarker's second thread and the water crisis, already ",
+          "why": "Crane opened the door — he is the direct subject of the Second Thread quest and needs a stable, fully authored identity "
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 24,
+        "birthWeight": 33,
+        "overtook": "edvar-crane"
+      }
     }
   },
   "variants": [

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 22,
-  "xp": 2126,
+  "xp": 2131,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -144,7 +144,7 @@
   "maxHealth": 135,
   "health": 135,
   "maxEnergy": 205,
-  "energy": 187,
+  "energy": 185,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1780,79 +1780,81 @@
         "player": "Name yourself plainly — warden and wright, here about the water, sent by your father's name and by the Waymarker.",
         "summary": "Silas names himself plainly — warden, wright, his father's name, the Waymarker shown. Crane opens the door.",
         "narration": "You give him the plain truth.\n\n\"Silas Weir,\" you say. \"Warden of Raven's Home. Wright of the March. I am here about the water — and I was sent by Edvar Crane's name, by a man who left a Waymarker in his son's keeping and told him to find you.\"\n\nYou lift the Waymarker from your coat pocket as you say it — the small pale disc, the worn groove, the faint warmth it holds. You do not hand it to him. You let him see it.\n\nCrane is still for a long breath. The decision behind his eyes finishes itself without showing the working. Then he steps back from the door and opens it the rest of the way.\n\n\"Come in,\" he says. He says it to you, and then his gaze moves once to Pell, once to Veth, and settles on Huginn at the foundation stones. A pause. \"The bird too, if it will.\"\n\nHuginn walks in without being asked twice."
+      },
+      {
+        "player": "Read the mill's interior with Order-Sense — understand the space and what it has been used for before Crane speaks.",
+        "summary": "Silas reads the mill's interior with Order-Sense — a hidden filtration setup, sealed vessels, a diverted floor channel: Crane has been treating and measuring water here for years.",
+        "narration": "The substrate is thin here, the same hollow feeling you noticed at the channel, but you have worked in worse. You let Order-Sense open carefully, drawing on what the space will give rather than pushing for more.\n\nThe mill's ground floor resolves into its design. A working mill, yes — the wheel's shaft, the stone housing, the channel-feed to the east — but this floor has been remade for a different purpose. The stone benches along the north wall are not for grain. The faint ring-marks left by sealed vessels, a row of them, are too regular for a miller's work. Filtering cloth has been stretched across the south window at some point — the pegs are still seated in the sill, the wood lighter where the cloth blocked the weather. Someone has been treating water here. Not recently, but regularly.\n\nAnd there is a second thing: a shallow channel has been cut into the floor's eastern edge, running from the main wheel-feed toward a sealed stone box set into the wall. A diversion. Whatever Crane has been measuring or collecting, he has been routing it separately from the mill's main output for long enough that the cut stone has worn smooth at its edges.\n\nCrane watches you take in the room. He does not ask what you see. He is the kind of man who already knows."
       }
     ],
     "lastTurn": {
-      "narration": "You give him the plain truth.\n\n\"Silas Weir,\" you say. \"Warden of Raven's Home. Wright of the March. I am here about the water — and I was sent by Edvar Crane's name, by a man who left a Waymarker in his son's keeping and told him to find you.\"\n\nYou lift the Waymarker from your coat pocket as you say it — the small pale disc, the worn groove, the faint warmth it holds. You do not hand it to him. You let him see it.\n\nCrane is still for a long breath. The decision behind his eyes finishes itself without showing the working. Then he steps back from the door and opens it the rest of the way.\n\n\"Come in,\" he says. He says it to you, and then his gaze moves once to Pell, once to Veth, and settles on Huginn at the foundation stones. A pause. \"The bird too, if it will.\"\n\nHuginn walks in without being asked twice.",
-      "sceneSummary": "Silas names himself plainly — warden, wright, his father's name, the Waymarker shown. Crane opens the door.",
+      "narration": "The substrate is thin here, the same hollow feeling you noticed at the channel, but you have worked in worse. You let Order-Sense open carefully, drawing on what the space will give rather than pushing for more.\n\nThe mill's ground floor resolves into its design. A working mill, yes — the wheel's shaft, the stone housing, the channel-feed to the east — but this floor has been remade for a different purpose. The stone benches along the north wall are not for grain. The faint ring-marks left by sealed vessels, a row of them, are too regular for a miller's work. Filtering cloth has been stretched across the south window at some point — the pegs are still seated in the sill, the wood lighter where the cloth blocked the weather. Someone has been treating water here. Not recently, but regularly.\n\nAnd there is a second thing: a shallow channel has been cut into the floor's eastern edge, running from the main wheel-feed toward a sealed stone box set into the wall. A diversion. Whatever Crane has been measuring or collecting, he has been routing it separately from the mill's main output for long enough that the cut stone has worn smooth at its edges.\n\nCrane watches you take in the room. He does not ask what you see. He is the kind of man who already knows.",
+      "sceneSummary": "Silas reads the mill's interior with Order-Sense — a hidden filtration setup, sealed vessels, a diverted floor channel: Crane has been treating and measuring water here for years.",
       "choices": [
         {
-          "label": "Step inside and let Crane lead — follow his pace, let him choose what to name first.",
+          "label": "Name what you saw — the benches, the vessel rings, the diversion channel — and ask him plainly how long he has been doing this work.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "help"
+            "negotiate"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Ask him directly: what did my father tell you, and how long have you been waiting?",
+          "label": "Ask first about his father's connection to yours — what Crane was told, and what he has been waiting for.",
           "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Read the mill's interior with Order-Sense — understand the space and what it has been used for before Crane speaks.",
-          "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Read the sealed stone box in the eastern wall with Order-Sense — understand what has been diverted into it before you ask him anything.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Name the ending you read in his chest — plainly, without softening it, as one careful person to another.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "label": "Let Veth ask the first question — she worked a source cleanly at the well; let her work Crane the same way while you read the room.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "help"
+            "plan"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false
+          "abilityId": null,
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The party has crossed the threshold; Crane stands in the interior, door held wide.",
+        "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The party has entered; Crane stands in the interior watching Silas take in the space.",
         "npcsPresent": [
           {
             "name": "Edvar Crane",
-            "state": "Stepped back from the door — door open, weight settled, decision made. Watching the party enter."
+            "state": "Standing back from the door, watching Silas read the room. Not anxious. Waiting to see what the reading produces."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Inside the threshold, half a step behind Silas's left shoulder. Eyes on the room."
+            "state": "Inside the threshold, half a step behind Silas's left shoulder. Eyes moving between Crane and the north-wall benches."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Following last, reading the interior air as she crosses the threshold."
+            "state": "Reading the interior air — her gaze has settled on the sealed stone box in the eastern wall."
           },
           {
             "name": "Huginn",
-            "state": "Walking past the door frame without ceremony — finding a high surface to settle on."
+            "state": "Settled on a high crossbeam above the wheel housing. Watching Crane."
           }
         ],
         "objects": [
@@ -1860,93 +1862,74 @@
           "The Waymarker — shown, not handed over, now back in Silas's coat",
           "Lamp burning on the ground floor",
           "The mill wheel turning slow outside",
-          "The water-channel to the south, running low"
+          "Stone benches along the north wall — ring-marks from sealed vessels, regular and old",
+          "Filtering cloth peg-holes in the south window sill — wood lighter where cloth blocked weather",
+          "A shallow channel cut into the eastern floor edge, worn smooth at the edges, running to a sealed stone box in the wall",
+          "The sealed stone box set into the east wall — the diversion's destination"
         ],
         "threads": [
-          "Crane has opened the door — the question now is what he knows and what he has been keeping",
+          "Crane has been treating and measuring water here for years — what was he measuring, and why",
           "His father told him to find Crane: what was Crane told in return?",
-          "The slow ending in the chest — Crane has already done the accounting; he knows his own time"
+          "The slow ending in the chest — Crane has already done the accounting; he knows his own time",
+          "The sealed stone box: what has been diverted into it"
         ]
       },
+      "codexUpdates": [
+        {
+          "topic": "edvar-crane",
+          "label": "Edvar Crane",
+          "kind": "person",
+          "entityId": "edvar-crane",
+          "fact": "The mill's ground floor has been repurposed for water treatment and measurement — stone benches with vessel-ring marks, a diversion channel worn smooth with years of use, filtering cloth pegs still in the south window sill. Crane has been doing this work long enough for stone to wear smooth. A sealed box in the east wall receives the diverted flow. He knew what Silas was doing while Silas read the room, and did not interrupt.",
+          "links": [
+            "the-water-crisis",
+            "the-second-thread",
+            "what-the-water-remembers",
+            "millbrook"
+          ]
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "edvar-crane",
           "name": "Edvar Crane",
-          "note": "Recognized the Waymarker by sight — made his decision without ceremony and opened the door to all four visitors, including Huginn.",
+          "role": "Mill resident, boards at the north-edge mill — secret long-term water monitoring operation",
+          "note": "Silas read the room with Order-Sense — the filtration setup, the vessel rings, the diversion channel, the sealed stone box. Crane watched him do it and said nothing. He is waiting to see what Silas makes of it.",
           "learned": [
-            "The Waymarker's shape was enough — he recognized it without being told what it was"
+            "Has been treating and diverting water at the mill for years — the stone channel is worn smooth",
+            "Filtered water through cloth hung in the south window at some point — pegs still in the sill",
+            "Routes a portion of the mill's water intake to a sealed stone box in the east wall — separate from the main output"
           ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Inside the mill — door open, party admitted, decision made."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-second-thread",
-          "label": "The Second Thread",
-          "kind": "mystery",
-          "entityId": "edvar-crane",
-          "fact": "Crane recognized the Waymarker on sight and opened the door without further explanation — he was expecting someone carrying it, or carrying what it represents.",
-          "links": [
-            "what-the-water-remembers",
-            "the-water-crisis",
-            "huginn"
-          ]
+          "skillsObserved": [
+            "Letting a reader finish before speaking — composure under assessment"
+          ],
+          "statusNote": "Inside the mill ground floor — watching Silas complete his reading of the space; has not yet spoken since letting the party in."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the threshold — a minute of recognition and a door opened."
-      },
-      "offer": {
-        "thing": "Huginn walked in without being invited — Crane acknowledged the bird directly and made room for it, which is not what a stranger does.",
-        "from": "Crane's own careful nature: a man who has been accounting for things does not ignore an Ashwarden bird at his threshold; his reaction to Huginn is its own kind of testimony."
-      },
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-second-thread",
-          "note": "Crane recognized the Waymarker and opened the door — the meeting is made."
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The party crossed the threshold into the mill's ground floor — Crane opened the door to all four, Huginn included.",
-          "subPlace": {
-            "name": "Mill Ground Floor — Edvar Crane's Boards",
-            "parent": "Waygate",
-            "note": "The north-face mill interior where Crane boards — lamp burning, wheel audible outside, the door to the channel behind.",
-            "visited": true
-          }
-        }
-      ],
-      "sceneEnded": false
+        "why": "A careful reading of the room's design — a few quiet minutes at the threshold."
+      }
     },
     "sceneState": {
-      "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The party has crossed the threshold; Crane stands in the interior, door held wide.",
+      "setting": "Ground floor of the mill's north face — afternoon light through the open door, lamp burning inside. The wheel turns slow outside. The party has entered; Crane stands in the interior watching Silas take in the space.",
       "npcsPresent": [
         {
           "name": "Edvar Crane",
-          "state": "Stepped back from the door — door open, weight settled, decision made. Watching the party enter."
+          "state": "Standing back from the door, watching Silas read the room. Not anxious. Waiting to see what the reading produces."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Inside the threshold, half a step behind Silas's left shoulder. Eyes on the room."
+          "state": "Inside the threshold, half a step behind Silas's left shoulder. Eyes moving between Crane and the north-wall benches."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Following last, reading the interior air as she crosses the threshold."
+          "state": "Reading the interior air — her gaze has settled on the sealed stone box in the eastern wall."
         },
         {
           "name": "Huginn",
-          "state": "Walking past the door frame without ceremony — finding a high surface to settle on."
+          "state": "Settled on a high crossbeam above the wheel housing. Watching Crane."
         }
       ],
       "objects": [
@@ -1954,12 +1937,16 @@
         "The Waymarker — shown, not handed over, now back in Silas's coat",
         "Lamp burning on the ground floor",
         "The mill wheel turning slow outside",
-        "The water-channel to the south, running low"
+        "Stone benches along the north wall — ring-marks from sealed vessels, regular and",
+        "Filtering cloth peg-holes in the south window sill — wood lighter where cloth bl",
+        "A shallow channel cut into the eastern floor edge, worn smooth at the edges, run",
+        "The sealed stone box set into the east wall — the diversion's destination"
       ],
       "threads": [
-        "Crane has opened the door — the question now is what he knows and what he has been keeping",
+        "Crane has been treating and measuring water here for years — what was he measuring, and why",
         "His father told him to find Crane: what was Crane told in return?",
-        "The slow ending in the chest — Crane has already done the accounting; he knows his own time"
+        "The slow ending in the chest — Crane has already done the accounting; he knows his own time",
+        "The sealed stone box: what has been diverted into it"
       ]
     }
   },
@@ -3827,7 +3814,7 @@
     "edvar-crane": {
       "id": "edvar-crane",
       "name": "Edvar Crane",
-      "role": "Mill resident, boards at the north-edge mill — buying sealed water rather than using the well",
+      "role": "Mill resident, boards at the north-edge mill — secret long-term water monitoring operation",
       "description": "A man of perhaps fifty, steady-handed, with the look of someone who has been calculating something for a long time and has reached an answer he is not glad of.",
       "firstMet": {
         "locationId": "gen-waygate",
@@ -3837,19 +3824,25 @@
       "history": [
         "[d13] Opened the door without alarm — the look of a man who has been expecting someone, not necessarily these three.",
         "[d13] Read with Deathsense at the threshold — a slow ending in the chest, long underway, no urgency in it. His first words: 'You are not from the committee.' He is still holding the door. Deciding.",
-        "[d13] Recognized the Waymarker by sight — made his decision without ceremony and opened the door to all four visitors, including Huginn."
+        "[d13] Recognized the Waymarker by sight — made his decision without ceremony and opened the door to all four visitors, including Huginn.",
+        "[d13] Silas read the room with Order-Sense — the filtration setup, the vessel rings, the diversion channel, the sealed stone box. Crane watched him do it and said nothing. He is waiting to see what Silas makes of it."
       ],
       "knownFacts": [
         "Opens the door to strangers without visible fear — suggests he may have been waiting for contact",
         "Something ending in his chest — slow, the kind of thing that has been there a long time and has been accounted for",
         "He expected someone, but not from the committee — he has categories for different kinds of visitors",
-        "The Waymarker's shape was enough — he recognized it without being told what it was"
+        "The Waymarker's shape was enough — he recognized it without being told what it was",
+        "Has been treating and diverting water at the mill for years — the stone channel is worn smooth",
+        "Filtered water through cloth hung in the south window at some point — pegs still in the sill",
+        "Routes a portion of the mill's water intake to a sealed stone box in the east wall — separate from the main output"
       ],
-      "skillsObserved": [],
+      "skillsObserved": [
+        "Letting a reader finish before speaking — composure under as"
+      ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Inside the mill — door open, party admitted, decision made.",
+      "statusNote": "Inside the mill ground floor — watching Silas complete his reading of the space; has not yet spoken since letting the party in.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -4736,7 +4729,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 586,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Huginn's shift at the drainage cut — a single deliberate adjustment on the pack frame, the kind it makes when it has registered something…",
@@ -6239,21 +6232,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.10968954173,
-    "cerebral": 14.128642793423667,
-    "social": 13.075382667514983,
-    "generous": 4.458989314127457,
-    "cautious": 3.8783905350811367,
-    "physical": 0.6054831751244512,
-    "risky": 0.532132542348837,
-    "ruthless": 0.4706773684562125,
-    "carousing": 0.10795559262286716,
-    "amorous": 1.8251171944184286,
-    "patient": 0.6475553930689532,
-    "stealth": 0.0010826011362963291,
-    "devotion": 0.571828497361171,
-    "craft": 0.9008881246127776,
-    "leadership": 0.8735491342772889
+    "strategic": 15.706947303186748,
+    "cerebral": 14.775426723588076,
+    "social": 12.748498100827108,
+    "generous": 4.347514581274271,
+    "cautious": 4.781430771704108,
+    "physical": 0.5903460957463399,
+    "risky": 0.5188292287901161,
+    "ruthless": 0.45891043424480715,
+    "carousing": 0.10525670280729549,
+    "amorous": 1.7794892645579679,
+    "patient": 0.6313665082422293,
+    "stealth": 0.0010555361078889208,
+    "devotion": 0.5575327849271418,
+    "craft": 0.8783659214974581,
+    "leadership": 0.8517104059203566
   },
   "aptitudes": [
     "strategist",
@@ -6261,7 +6254,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 757,
+  "actionCount": 758,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6651,8 +6644,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784891329245,
-  "rev": 1226,
+  "updatedAt": 1784892191620,
+  "rev": 1227,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8127,8 +8120,8 @@
           "entityId": "edvar-crane",
           "type": "npc",
           "birthWeight": 33,
-          "engagementScore": 6,
-          "tier": "established",
+          "engagementScore": 9,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -8140,6 +8133,14 @@
             "why": "Crane opened the door — he is the direct subject of the Second Thread quest and needs a stable, fully authored identity "
           },
           "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 13
+            },
+            {
+              "kind": "fact",
+              "day": 13
+            },
             {
               "kind": "interact",
               "day": 13
@@ -8791,7 +8792,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 80,
+      "order_sense": 81,
       "palework": 30,
       "deathsense": 34,
       "shadowstep": 21,
@@ -9308,7 +9309,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 491,
+    "valley": 492,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9443,10 +9444,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T11:08:49.233Z",
+      "lastAt": "2026-07-24T11:23:11.609Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 5
+      "beats": 6
     }
   ],
   "company": [
@@ -9646,15 +9647,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 126,
-    "choices": 126,
+    "sceneSummary": 127,
+    "choices": 127,
     "characterDeltas": 51,
-    "scene": 126,
-    "npcUpdates": 110,
+    "scene": 127,
+    "npcUpdates": 111,
     "factUpdates": 7,
     "placeUpdates": 22,
-    "codexUpdates": 74,
-    "timeOps": 120,
+    "codexUpdates": 75,
+    "timeOps": 121,
     "imagePrompt": 3,
     "sceneEnded": 27,
     "itemUpdates": 2,
@@ -9669,7 +9670,7 @@
     "stageOps": 5,
     "generateRequest": 4
   },
-  "_opTurns": 126,
+  "_opTurns": 127,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

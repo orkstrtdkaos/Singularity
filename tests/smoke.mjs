@@ -27,7 +27,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
-import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
+import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -7958,6 +7958,23 @@ await (async () => {
     /beginChaseFromFight\(activeEnc\(\)\?\.def\)/.test(appSrc230) && /encT\?\.def\?\.type === "duel" && choice\.encounterAction === "flee"/.test(appSrc230) && /_chainedFrom\?\.kind === "fight" && choice\.encounterAction === "abandon"/.test(appSrc230) && /async function beginChaseFromFight/.test(appSrc230) && /async function beginFightFromChase/.test(appSrc230));
   check("230 §6a GUARD: the frame stays a legibility layer through the chain — the chase renders with the GM + freefield (no bespoke mini-loop)",
     /character\.activeEncounter = \{ defId: chase\.id, state: startEncounter\(chase\)/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
+
+  // §6b/§7a: a SKILL can COLLAPSE (or morph) the frame — resolved along the degree bands, gated by collapsibility.
+  check("230 §6b: frameCollapsible — riffraff/notable + low danger can be one-beat-ended; epic/regional/danger-4 cannot",
+    frameCollapsible({ tier: "riffraff" }) === true && frameCollapsible({ tier: "notable" }) === true && frameCollapsible({ danger: 2 }) === true &&
+    frameCollapsible({ tier: "epic" }) === false && frameCollapsible({ tier: "regional" }) === false && frameCollapsible({ danger: 4 }) === false);
+  check("230 §6c: collapseMode is FAMILY-driven — HARM finishes a fight/hazard, MOVE slips a chase, KNOW cracks a puzzle; wrong family → null",
+    collapseMode(["HARM"], "fight") === "finish" && collapseMode(["MOVE"], "chase") === "escape" && collapseMode(["KNOW"], "puzzle") === "solve" &&
+    collapseMode(["MOVE"], "fight") === null && collapseMode(["HARM"], "chase") === null && collapseMode([], "fight") === null);
+  check("230 §7a: collapseResult walks the degree bands — crit collapses a collapsible foe, but only caps at 'hard' on a non-collapsible one; a whiff morphs",
+    collapseResult("crit_success", { collapsible: true }) === "collapse" && collapseResult("crit_success", { collapsible: false }) === "hard" &&
+    collapseResult("success") === "hard" && collapseResult("partial") === "partial" && collapseResult("failure") === "morph" && collapseResult("crit_failure") === "morph_bad");
+  check("230 §6b: frameModel surfaces collapsibility (the finisher gamble is on the table, legibly)",
+    frameModel({ type: "duel", tier: "riffraff" }, {}, null).collapsible === true && frameModel({ type: "duel", tier: "epic" }, {}, null).collapsible === false);
+  check("230 §6b WIRING: onChoice applies a crit finisher COLLAPSE on the non-skill-battle path (guard §89), reading family + degree + collapsibility",
+    /collapseMode\(familiesOfAbility\(fullCatalog\(\)\[choice\.abilityId\], FN_INDEX\), encounterKind\(enc\.def\)\)/.test(appSrc230) && /collapseResult\(resolution\.degree, \{ collapsible: true \}\) === "collapse"/.test(appSrc230) && /resolution\.collapse = \{ mode/.test(appSrc230));
+  check("230 §6b: the finisher gamble is surfaced in the frame (collapsible vs too-great)",
+    /enc-frame-collapse/.test(appSrc230) && /A decisive finisher could end this in one beat/.test(appSrc230));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

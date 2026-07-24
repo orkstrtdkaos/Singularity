@@ -81,6 +81,51 @@ export function chaseFromFight(fightDef) {
   };
 }
 
+// ---------- SNG-230 §6b/§7a: a SKILL can COLLAPSE or MORPH the frame ----------
+// Some crafts don't grind the meter — they try to END the encounter in ONE beat (Cut the Thread, a transit
+// craft slipping a chase, a KNOW craft cracking a puzzle). This is NOT an auto-win: it resolves along the
+// resolver's degree bands, and a foe too great can't be one-beat-ended (you fight the stages). All pure.
+
+/** §6c / OQ6: can this frame be ENDED in one beat by a finisher? Tier-gated — an epic (the Ashen Wyrm) never
+ *  (you fight the stages); a danger-4 thing resists; riffraff/notable/ordinary yes. Extends canIncapacitate's
+ *  spirit to "collapsible". Pure over the def's size signal. */
+export function frameCollapsible(def) {
+  const tier = def?.tier || null;
+  if (tier === "epic" || tier === "regional") return false; // the great ones aren't ended in a single stroke
+  if (tier === "riffraff" || tier === "notable") return true;
+  const danger = [def?.danger, def?.minDanger, def?.dangerLevel].find(d => Number.isFinite(d));
+  if (Number.isFinite(danger)) return danger < 4;
+  return true;
+}
+
+/** §6c: which crafts can ATTEMPT a collapse — FAMILY-driven (no per-ability list; per the P1 correction there is
+ *  no FINISH family, so a HARM craft is the finisher). A HARM craft tries to END a fight/hazard in one decisive
+ *  blow; a MOVE/transit craft tries to slip a CHASE into an instant escape; a KNOW craft tries to crack a PUZZLE
+ *  outright. Returns the collapse mode for (families, kind), or null. Pure. */
+export function collapseMode(families, kind) {
+  const fam = new Set(Array.isArray(families) ? families : []);
+  if (kind === "chase" && fam.has("MOVE")) return "escape";
+  if (kind === "puzzle" && fam.has("KNOW")) return "solve";
+  if ((kind === "fight" || kind === "hazard" || kind === "standoff") && fam.has("HARM")) return "finish";
+  return null;
+}
+
+/** §7a: the finisher resolves ALONG the resolver's existing degree bands (crit_success…crit_failure). The TOP
+ *  collapses a collapsible target (instant end); the middle is graded (a hard/partial hit — the encounter
+ *  continues from a better/worse spot); the BOTTOM morphs (the whiff hardens it). A NON-collapsible target caps
+ *  at a hard hit — no one-beat end, however clean the strike. Returns one of:
+ *  "collapse" | "hard" | "partial" | "morph" | "morph_bad". Pure. */
+export function collapseResult(degree, { collapsible = true } = {}) {
+  switch (degree) {
+    case "crit_success": return collapsible ? "collapse" : "hard";
+    case "success": return "hard";
+    case "partial": return "partial";
+    case "failure": return "morph";
+    case "crit_failure": return "morph_bad";
+    default: return "partial";
+  }
+}
+
 /** Which frame KIND an encounter is. def.type is the structural truth (duel/challenge/puzzle); flavor themes the
  *  challenge kinds (chase vs. hazard). Returns null for an encounter that gets no frame. Pure. */
 export function encounterKind(def, entry = null) {
@@ -194,6 +239,9 @@ export function frameModel(def, state = {}, entry = null) {
     meter: frameMeter(kind, def, state),
     exits: frameExits(kind, def, state),
     freeform: FRAME_FREEFORM_CUE, // the frame is a legibility layer — freeform play + the GM stay the real interaction
+    // §6b/§7a: whether a decisive finisher could END this in one beat (a foe too great can't be) — surfaced so
+    // the player knows the gamble is on the table. The actual collapse resolves along the degree bands.
+    collapsible: frameCollapsible(def),
     stage: staged
       ? { index: state?.stageIndex ?? 0, total: def?.stages?.length || 0, name: def?.stages?.[state?.stageIndex ?? 0]?.name || null }
       : null,

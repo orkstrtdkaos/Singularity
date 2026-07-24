@@ -64,12 +64,12 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
-import { frameModel, frameSize, chaseFromFight } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — make a structured encounter OBVIOUS (kind + win-condition + the three exits); frameSize routes takeover-vs-banner by tier; chaseFromFight builds the chase you flee INTO (§6a)
+import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, frameCollapsible } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe in one beat (§6b/§7a)
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.252";
+const APP_VERSION = "1.8.253";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4440,6 +4440,20 @@ async function onChoice(choice) {
       character.activeEncounter = { defId: enc.def.id, state: rr.state };
       let outcome = rr.ended ? rr.outcome : null;
       if (!rr.ended && checkIncapacitation(character)) { outcome = "incapacitated"; rr.state.status = "ended"; }
+      // SNG-230 §6b/§7a: a decisive FINISHER can COLLAPSE a collapsible encounter in ONE beat — a HARM craft ends
+      // a fight/hazard, a transit (MOVE) craft slips a chase, a KNOW craft cracks a puzzle. Family-driven (§6c),
+      // resolved ALONG the degree bands: a crit collapses it; lesser rolls fall through to the normal round; a
+      // whiff already bit via failureCost (the morph-to-a-harder-fight is the next slice). A foe too great
+      // (epic/regional/danger-4) can't be one-beat-ended — frameCollapsible says no. Skill-battle fights don't
+      // reach here (their own meter — guard §89); this is the classic-duel / challenge / puzzle path.
+      if (!outcome && choice.abilityId && frameCollapsible(enc.def)) {
+        const mode = collapseMode(familiesOfAbility(fullCatalog()[choice.abilityId], FN_INDEX), encounterKind(enc.def));
+        if (mode && collapseResult(resolution.degree, { collapsible: true }) === "collapse") {
+          outcome = mode === "solve" ? "solved" : (mode === "finish" && enc.def.type === "duel") ? "opponent_fell" : "completed";
+          resolution.collapse = { mode, craft: fullCatalog()[choice.abilityId]?.name || null }; // the GM narrates the one-beat end
+          rr.state.status = "ended";
+        }
+      }
       resolution.encounterReceipt = encounterReceiptForGM(rr.state, enc.def, resolution, { ...rr, outcome });
       if (outcome) endEncounter(outcome); else saveCharacter(character);
     }
@@ -8098,9 +8112,15 @@ function renderPlay(turn, opts = {}) {
       const exitsHtml = `<div class="enc-frame-exits">${fm.exits.map(x => `<span class="enc-exit enc-exit-${x.role}"><b>${x.role}</b> ${esc(x.means)}</span>`).join("")}</div>`;
       const topHtml = `<div class="enc-frame-top"><span class="enc-frame-title">${fm.icon} ${esc(fm.title)}</span><span class="enc-frame-kind">${esc(fm.kind)}</span></div>
         <div class="enc-frame-win">${esc(fm.winCondition)}</div>`;
+      // §6b/§7a: surface the FINISHER gamble — a collapsible foe can be ended in one decisive stroke (a HARM
+      // craft here, a transit craft in a chase, a KNOW craft on a puzzle); a foe too great cannot be. Legible so
+      // the player knows it's on the table; the collapse itself resolves along the degree bands (crit ends it).
+      const collapseHtml = fm.collapsible
+        ? `<div class="enc-frame-collapse">⚡ A decisive finisher could end this in one beat — an all-or-nothing stroke (a clean crit collapses it; a botch turns it worse).</div>`
+        : `<div class="enc-frame-collapse dim">⚑ Too great to end in one stroke — you'll have to work it through.</div>`;
       // the frame is a LEGIBILITY layer — the freefield + the GM stay the real interaction (Erik). The cue keeps
       // it from reading as buttons-only: you can describe ANY move and the GM resolves it against the stage.
-      const cueHtml = fm.freeform ? `<div class="enc-frame-cue">▸ ${esc(fm.freeform)}</div>` : "";
+      const cueHtml = `${collapseHtml}${fm.freeform ? `<div class="enc-frame-cue">▸ ${esc(fm.freeform)}</div>` : ""}`;
       if (frameSize(d, e.state) === "takeover") {
         // the weighty encounter takes the surface — the buttons live INSIDE the frame (still the same [data-encact])
         return `<div class="enc-frame enc-frame-takeover enc-frame-${fm.kind}">${topHtml}${meterHtml}${exitsHtml}<div class="enc-frame-btns">${btns}</div>${cueHtml}</div>`;

@@ -134,6 +134,8 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-frame-btns { display: flex; flex-direction: column; gap: 6px; }
 .enc-frame-btns .enc-choice { width: 100%; text-align: left; }
 .enc-frame-cue { margin-top: 8px; font-size: 11px; color: var(--ink-dim); font-style: italic; line-height: 1.4; }
+.enc-frame-collapse { margin-top: 8px; font-size: 11px; color: var(--accent); line-height: 1.4; }
+.enc-frame-collapse.dim { color: var(--ink-dim); }
 /* ---------- world map ---------- */
 .world-map { width: 100%; background: radial-gradient(ellipse at 50% 40%, #1e2129, var(--bg)); border: 1px solid var(--border); border-radius: 10px; }
 .map-title { fill: var(--accent); font-family: var(--font); font-size: 18px; letter-spacing: 3px; }

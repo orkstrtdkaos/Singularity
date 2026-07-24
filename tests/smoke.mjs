@@ -43,7 +43,7 @@ import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonColli
 import { enterDeathState, deathDepth, isSealed, isRetrievable, deepenDeaths, resolveRetrieval, reachableDeadForGM, DEATH_DEPTH_NAMES } from "../engine/death.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "../engine/feed.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
-import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId, deleteCharacter, saveCharacter, listCharacters } from "../engine/state.js";
+import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId, deleteCharacter, saveCharacter, listCharacters, traditionMotivationsForGM } from "../engine/state.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM, repairPanelForGM } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
@@ -7819,7 +7819,7 @@ await (async () => {
   const manifest = JSON.parse(readFileSync(join(root, "content/packs/valley/manifest.json"), "utf8"));
   check("229 §2a: the manifest WHITELISTS the bestiary (or it silently does not exist)", (manifest.provides.bestiary || []).includes("bestiary.json"));
   const stateSrc229 = readFileSync(join(root, "engine/state.js"), "utf8");
-  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /bestiary, startingLocation/.test(stateSrc229) && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
+  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /bestiary, traditionMotivations, startingLocation/.test(stateSrc229) && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
 
   // §2b: every creature becomes a danger-gated DUEL encounter — the fight pool finally has monsters.
   const monsters = bestiaryEncounters(bestiary);
@@ -7832,6 +7832,30 @@ await (async () => {
   const riff = monsters.find(m => m.minDanger === 1);
   check("229 §2b × SNG-225: a synthesized riffraff is eligible at an ordinary danger-2 place (a monster in the world)", isEligible(riff, { tags: ["transitional"], regionId: "valley", dangerLevel: 2 }) === true);
   check("229: an empty/absent bestiary yields no monsters (tolerant — the pool is unchanged)", bestiaryEncounters({}).length === 0 && bestiaryEncounters({ roster: [] }).length === 0);
+
+  // §2c: tradition_motivations is LOADED (its own type, not dead location-lore) and surfaced SELECTIVELY —
+  // only the traditions in play this beat, each with its want + the creature its craft DREADS.
+  const tmPath = join(root, "content/packs/valley/tradition_motivations.json");
+  const tmDoc = JSON.parse(readFileSync(tmPath, "utf8"));
+  check("229 §2c: the manifest WHITELISTS tradition_motivations (its own content type, not lore)", (manifest.provides.tradition_motivations || []).includes("tradition_motivations.json"));
+  check("229 §2c: loadContent loads it into CONTENT.traditionMotivations (parallel to the bestiary loader)",
+    /const traditionMotivationsP = jSettled\(\(valley\.provides\.tradition_motivations/.test(stateSrc229) && /traditionMotivations, startingLocation/.test(stateSrc229));
+  // the SELECTOR: bounded to who's in play, deduped, dread resolved to a creature name, villainy GM-eyes
+  const dreadCreature = tmDoc.traditions.ashwarden?.dreads?.creature;
+  const sel = traditionMotivationsForGM(tmDoc, ["ashwarden", "cogitant", "ashwarden", "not_a_tradition"], { bestiary, labelOf: id => id });
+  check("229 §2c: surfaces ONLY in-play traditions, deduped, unknown ids dropped",
+    (sel.match(/^- /gm) || []).length === 2 && sel.includes("ashwarden") && sel.includes("cogitant") && !sel.includes("not_a_tradition"));
+  check("229 §2c: a tradition's WANT and the creature its craft DREADS both surface (the bestiary fear)",
+    /wants:/.test(sel) && (!dreadCreature || sel.includes("DREADS")));
+  check("229 §2c: villainy rides as a GM-EYES antagonist seed, never stated to the player as fact",
+    !tmDoc.traditions.ashwarden?.villainy || /GM-eyes/.test(sel));
+  check("229 §2c: empty when nothing is in play or the doc is absent (tolerant)",
+    traditionMotivationsForGM(tmDoc, [], {}) === "" && traditionMotivationsForGM(null, ["ashwarden"], {}) === "");
+  // wired into the GM context registry + rendered (not a dead export)
+  const gmRegSrc229 = readFileSync(join(root, "engine/gm_registry.js"), "utf8");
+  const gmSrc229 = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("229 §2c: the selector is WIRED into the GM context (registry row + rendered block), not a dead export",
+    /traditionMotiveDetail/.test(gmRegSrc229) && /traditionMotivationsForGM\(doc, ids/.test(gmRegSrc229) && /traditionMotiveDetail/.test(gmSrc229) && /WHY THESE TRADITIONS ACT/.test(gmSrc229));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

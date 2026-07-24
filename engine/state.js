@@ -117,6 +117,7 @@ export async function loadContent() {
   const traditionArcsP = jSettled((valley.provides.tradition_arcs || []).map(valleyPath));
   const npcQuestsP = jSettled((valley.provides.npc_quests || []).map(valleyPath));
   const bestiaryP = jSettled((valley.provides.bestiary || []).map(valleyPath)); // SNG-229 §2a
+  const traditionMotivationsP = jSettled((valley.provides.tradition_motivations || []).map(valleyPath)); // SNG-229 §2c
 
   // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
   // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
@@ -163,6 +164,13 @@ export async function loadContent() {
     const monsters = bestiaryEncounters(bestiary);
     randomEncounters = { ...randomEncounters, encounters: [...(randomEncounters.encounters || []), ...monsters] };
   }
+
+  // SNG-229 §2c: WHY the traditions act — each tradition's want, the greater-arc it plays into, its
+  // cult-of-purity dark end (villainy), and the creature its craft DREADS (the bestiary fear, resolved by
+  // id). NOT plain lore: loreForLocation only surfaces what a location loreRefs, and no location names this —
+  // it would be dead content. Loaded as its own type + surfaced SELECTIVELY (traditionMotivationsForGM) for
+  // just the traditions in play this beat. Tolerant: a miss disables the surface.
+  const traditionMotivations = ((await traditionMotivationsP).find(r => r.status === "fulfilled")?.value) || null;
 
   const companions = {};
   for (const c of await companionsP) companions[c.id] = c;
@@ -258,8 +266,8 @@ export async function loadContent() {
 
   // SNG-187: a content-count canary at boot — cheap observability, and the proof that parallelising
   // the loaders did not silently drop or reorder any manifest group (the counts must not move).
-  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length}`);
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, bestiary, startingLocation: valley.startingLocation };
+  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length} traditionMotivations=${Object.keys(traditionMotivations?.traditions || {}).length}`);
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, bestiary, traditionMotivations, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }
@@ -342,6 +350,31 @@ export function loreForLocation(location, loreMap, { markMissing = false } = {})
     else if (markMissing) out.push(`[lore "${ref}" is referenced here but no such file is loaded]`);
   }
   return out.join("\n\n");
+}
+
+/** SNG-229 §2c: WHY the traditions in play act — surfaced ONLY for the traditions present this beat, so
+ *  the GM knows a people's want and, from the bestiary, the creature their craft DREADS (the fear the
+ *  bestiary gives them). `traditionIds` is the caller-selected in-play set (the character's own domains +
+ *  each scene NPC's primary craft) — the selection is what keeps this bounded instead of dumping all 24.
+ *  `villainy` is the GM-eyes dark end (the cult-of-purity antagonist seed) — marked private, never stated
+ *  to the player as fact. `bestiary` resolves a dread's creatureId to its name; `labelOf` names a tradition.
+ *  Pure over the doc + who's present. Returns "" when nothing is in play or the doc is absent. */
+export function traditionMotivationsForGM(doc, traditionIds, { bestiary = null, labelOf = null } = {}) {
+  const map = doc?.traditions || null;
+  if (!map) return "";
+  const creatureName = id => (bestiary?.roster || []).find(c => c.id === id)?.name || String(id || "").replace(/_/g, " ");
+  const seen = new Set(), lines = [];
+  for (const tid of traditionIds || []) {
+    if (!tid || seen.has(tid) || !map[tid]) continue;
+    seen.add(tid);
+    const m = map[tid];
+    const label = (labelOf && labelOf(tid)) || tid;
+    const parts = [`**${label}** wants: ${m.wants}`];
+    if (m.dreads?.creature) parts.push(`DREADS ${creatureName(m.dreads.creature)} — ${m.dreads.why}`);
+    if (m.villainy) parts.push(`(GM-eyes — its dark end, an antagonist seed, never stated to the player as fact: ${m.villainy})`);
+    lines.push("- " + parts.join(" · "));
+  }
+  return lines.join("\n");
 }
 
 /** Which of a location's loreRefs resolve, and which do not. Pure — the CI gate reads this. */

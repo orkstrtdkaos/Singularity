@@ -32,7 +32,7 @@
 // a key gm.js consumes that no row provides can never land — that is the exact
 // failure §23 exists to stop (challengeTypes: 45 values, read by nothing).
 
-import { loreForLocation, eventsForGM } from "./state.js";
+import { loreForLocation, eventsForGM, traditionMotivationsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
@@ -81,6 +81,21 @@ export const GM_CONTEXT = [
   { key: "lore", builder: "state.loreForLocation", carries: ["local lore"],
     reachedBy: "always", spec: "§9", views: ALL,
     build: (env) => loreForLocation(env.location, env.CONTENT.lore) },
+  { key: "traditionMotiveDetail", builder: "state.traditionMotivationsForGM", carries: ["why the in-play traditions act", "what their craft dreads (bestiary fear)"],
+    reachedBy: "when tradition_motivations is loaded + a tradition is in play", spec: "§9 / SNG-229 §2c", views: ALL,
+    build: (env) => {
+      const doc = env.CONTENT.traditionMotivations;
+      if (!doc) return "";
+      const d = env.character?.domains || {};
+      const ids = [d.primary, d.secondary, d.tertiary, ...(env.character?.domainsAcquired || [])];
+      const npcs = env.CONTENT.npcs || {};
+      for (const n of (env.sceneState?.npcsPresent || [])) {                 // the people in the scene: their craft's motive too
+        const rec = (n.id && npcs[n.id]) || Object.values(npcs).find(x => x && x.name === n.name);
+        if (rec?.domains?.primary) ids.push(rec.domains.primary);
+      }
+      const by = env.CONTENT.traditionIndex?.byId || {};
+      return traditionMotivationsForGM(doc, ids, { bestiary: env.CONTENT.bestiary, labelOf: id => by[id]?.name || by[id]?.label || null });
+    } },
   { key: "rules", builder: "CONTENT.rules", carries: ["world rules", "recovery", "precursor bands"],
     reachedBy: "always", spec: "§7", views: ALL,
     build: (env) => env.CONTENT.rules },

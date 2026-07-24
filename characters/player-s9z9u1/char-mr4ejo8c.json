@@ -890,124 +890,126 @@
         "player": "Use Prism Sight on her face as she speaks — catch the microflush of anything less than honest before the conversation settles.",
         "summary": "Prism Sight reads a measured pause behind the traveler's single word — she is testing, not lying, waiting to see if Cellaceron uses the same word.",
         "narration": "She says the word again, slightly louder, as if she thought you hadn't heard. \"Surveyors?\"\n\nYou let Prism Sight open quietly — not a push, just a soft widening of what you're already taking in. The morning light is flat and clean up here on the ridgeline, good reading light, and her face is turned three-quarters toward you.\n\nWhat you catch is small. When she spoke the word the first time, there was a faint warmth at the hinge of her jaw — the kind of flush that comes with a held breath released, not anxiety exactly, but something closer to calculation. She chose that word. She had others available and set them aside.\n\nShe is not lying. But she is asking something more precise than it sounds, and she is watching your face for the answer before she decides what to say next.\n\nAevi drifts a half-step forward at your shoulder, motes brightening just enough to notice. Quietly, close to your ear, it says, \"She is listening for whether you use the word back.\"\n\n*You feel it settle into you — a new steadiness. (Level 11: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*"
+      },
+      {
+        "player": "Say 'surveyors' back, plainly — match her word and see what it opens",
+        "summary": "The traveler responds to the word 'surveyors' — relaxes, names a lost bearing line, and notes the planted Waystaff.",
+        "narration": "You say the word back to her, plain and level. \"Surveyors.\"\n\nSomething in her shoulders settles — not relief exactly, but the kind of release that comes after a long wait. She shifts the instrument case forward off her shoulder and holds it against her side, a gesture that reads less like guarding it and more like habit.\n\n\"Good,\" she says. Her voice is low and even. \"I came down from the northeast this morning. I was with the survey team three days ago, but they moved the bearing markers overnight and I lost the secondary line.\" She looks at the Waystaff, then at the point where it meets the ground, and then back at your face. \"You have a staff seated. That means you found something.\"\n\nAevi drifts a half-step closer to your ear and says nothing aloud. But the motes brighten by a degree — a small note, not alarm, more like attention sharpening. The anomaly on the bearing ahead is still there. This woman came down from that direction."
       }
     ],
     "lastTurn": {
-      "narration": "She says the word again, slightly louder, as if she thought you hadn't heard. \"Surveyors?\"\n\nYou let Prism Sight open quietly — not a push, just a soft widening of what you're already taking in. The morning light is flat and clean up here on the ridgeline, good reading light, and her face is turned three-quarters toward you.\n\nWhat you catch is small. When she spoke the word the first time, there was a faint warmth at the hinge of her jaw — the kind of flush that comes with a held breath released, not anxiety exactly, but something closer to calculation. She chose that word. She had others available and set them aside.\n\nShe is not lying. But she is asking something more precise than it sounds, and she is watching your face for the answer before she decides what to say next.\n\nAevi drifts a half-step forward at your shoulder, motes brightening just enough to notice. Quietly, close to your ear, it says, \"She is listening for whether you use the word back.\"\n\n*You feel it settle into you — a new steadiness. (Level 11: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*",
-      "sceneSummary": "Prism Sight reads a measured pause behind the traveler's single word — she is testing, not lying, waiting to see if Cellaceron uses the same word.",
+      "narration": "You say the word back to her, plain and level. \"Surveyors.\"\n\nSomething in her shoulders settles — not relief exactly, but the kind of release that comes after a long wait. She shifts the instrument case forward off her shoulder and holds it against her side, a gesture that reads less like guarding it and more like habit.\n\n\"Good,\" she says. Her voice is low and even. \"I came down from the northeast this morning. I was with the survey team three days ago, but they moved the bearing markers overnight and I lost the secondary line.\" She looks at the Waystaff, then at the point where it meets the ground, and then back at your face. \"You have a staff seated. That means you found something.\"\n\nAevi drifts a half-step closer to your ear and says nothing aloud. But the motes brighten by a degree — a small note, not alarm, more like attention sharpening. The anomaly on the bearing ahead is still there. This woman came down from that direction.",
+      "sceneSummary": "The traveler responds to the word 'surveyors' — relaxes, names a lost bearing line, and notes the planted Waystaff.",
       "choices": [
         {
-          "label": "Say 'surveyors' back, plainly — match her word and see what it opens",
+          "label": "Ask her to name the survey team — who sent them, who holds their commission",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "negotiate",
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Give her your name and purpose instead — honest and direct, no mirroring",
+          "label": "Use Prism Sight again — watch her face as she names the bearing markers, look for the flush of something unsaid",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "prism_sight"
+        },
+        {
+          "label": "Ask her what she found on the northeast bearing — before she lost the line",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask what brought her down from the northeast before she gets to ask you the same",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
             "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Stay quiet a moment longer — let her fill the silence herself",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
+          "label": "Tell her plainly what the Waystaff is for and what you are moving toward — judge her reaction to the truth",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
           "intentTags": [
-            "careful",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+            "persuade",
+            "risky"
+          ]
         }
       ],
       "scene": {
-        "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Soft ground from snowmelt, eastern slope slow-draining. Pale clear light. Waystaff planted heel-first in the ground at the character's feet.",
+        "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, soft ground, cold draft off the eastern slope. Waystaff planted heel-first at the character's feet.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Motes drifted half a step forward at Cellaceron's shoulder, brightened slightly, quiet."
+            "state": "Motes drifted a half-step closer to Cellaceron's ear, brightened by a degree — attentive, quiet."
           },
           {
             "name": "Traveler (woman, unnamed)",
-            "state": "Stopped fifteen paces down the path, pack high, instrument case at left shoulder — has now spoken the word a second time and is watching Cellaceron's face for the answer."
+            "state": "Standing close now, instrument case shifted forward and held at her side. Watching the Waystaff and Cellaceron's face in turns."
           }
         ],
         "objects": [
           "Waystaff — planted heel-first in the soft ground at the character's feet",
-          "Traveler's instrument case — wooden, worn at corners, replacement strap in Harmonic Heights pattern",
+          "Traveler's instrument case — held at her side, wooden, worn at corners, replacement Harmonic-issue strap",
           "Traveler's pack — lashed with double-wrap cord at the base"
         ],
         "threads": [
-          "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware the read was attempted",
-          "Traveler descended from the northeast — testing whether Cellaceron uses the word 'surveyors'; origin and purpose unconfirmed",
-          "Teva's whereabouts this scene unconfirmed"
+          "Traveler came down from the northeast — the same direction as the anomaly Aevi flagged and the bearing to the upstream site",
+          "She says the survey team moved the bearing markers overnight — secondary line lost",
+          "She noted the planted Waystaff and said it means you found something — has not yet been answered",
+          "Aevi's motes brightened on hearing she came from the northeast — significance unspoken"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "note": "Drifted forward at Cellaceron's shoulder and quietly named what Prism Sight caught — the traveler is listening for whether the word 'surveyors' is used back.",
-          "skillsObserved": [
-            "social-read under field conditions — named the traveler's test before the conversation advanced"
+          "npcId": "traveler-northeast",
+          "name": "Traveler (woman, unnamed)",
+          "note": "Responded to the word 'surveyors' with visible physical release. Named a survey team, a lost bearing line, and a marker shift overnight. Noted the planted Waystaff directly.",
+          "learned": [
+            "Was with a survey team three days ago on the northeast bearing",
+            "The bearing markers were moved overnight — she lost the secondary line",
+            "Noticed the Waystaff is seated and read it as meaning Cellaceron found something"
           ],
-          "statusNote": "Motes slightly brightened, traveling northeast-by-east with Cellaceron on the ridgeline path."
+          "status": "active",
+          "statusNote": "On the ridgeline path, close, instrument case held at her side — conversation open."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange on the ridgeline path — a word spoken twice, a quiet read, a pause."
+        "why": "A brief exchange — the word returned, her response, a moment held."
       }
     },
     "sceneState": {
-      "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Soft ground from snowmelt, eastern slope slow-draining. Pale clear light. Waystaff planted heel-first in the ground at the character's feet.",
+      "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, soft ground, cold draft off the eastern slope. Waystaff planted heel-first at the character's feet.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Motes drifted half a step forward at Cellaceron's shoulder, brightened slightly, quiet."
+          "state": "Motes drifted a half-step closer to Cellaceron's ear, brightened by a degree — attentive, quiet."
         },
         {
           "name": "Traveler (woman, unnamed)",
-          "state": "Stopped fifteen paces down the path, pack high, instrument case at left shoulder — has now spoken the word a second time"
+          "state": "Standing close now, instrument case shifted forward and held at her side. Watching the Waystaff and Cellaceron's face in"
         }
       ],
       "objects": [
         "Waystaff — planted heel-first in the soft ground at the character's feet",
-        "Traveler's instrument case — wooden, worn at corners, replacement strap in Harmo",
+        "Traveler's instrument case — held at her side, wooden, worn at corners, replacem",
         "Traveler's pack — lashed with double-wrap cord at the base"
       ],
       "threads": [
-        "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware the read was attempted",
-        "Traveler descended from the northeast — testing whether Cellaceron uses the word 'surveyors'; origin and purpose unconfirmed",
-        "Teva's whereabouts this scene unconfirmed"
+        "Traveler came down from the northeast — the same direction as the anomaly Aevi flagged and the bearing to the upstream site",
+        "She says the survey team moved the bearing markers overnight — secondary line lost",
+        "She noted the planted Waystaff and said it means you found something — has not yet been answered",
+        "Aevi's motes brightened on hearing she came from the northeast — significance unspoken"
       ]
     }
   },
@@ -2128,7 +2130,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 590,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "wantProgress": {
       "elder-senna": {
         "progress": 2,
@@ -3178,16 +3180,16 @@
   "customEncounters": {},
   "reconcileVersion": 19,
   "tendencies": {
-    "cerebral": 31.699875515857663,
-    "strategic": 24.42948182333144,
-    "cautious": 32.65305593312342,
-    "social": 15.017272338098808,
-    "generous": 6.1261119816535485,
-    "risky": 1.6137662783024742,
-    "carousing": 0.6014356352244236,
-    "patient": 3.621903843564605,
-    "craft": 0.6008748653195755,
-    "devotion": 2.899614762064761
+    "cerebral": 30.907378627961222,
+    "strategic": 23.818744777748154,
+    "cautious": 31.83672953479533,
+    "social": 15.641840529646338,
+    "generous": 5.97295918211221,
+    "risky": 1.5734221213449122,
+    "carousing": 0.5863997443438129,
+    "patient": 3.5313562474754896,
+    "craft": 0.585852993686586,
+    "devotion": 2.827124393013142
   },
   "aptitudes": [
     "strategist",
@@ -3199,9 +3201,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 229,
-  "updatedAt": 1784902495672,
-  "rev": 128,
+  "actionCount": 230,
+  "updatedAt": 1784902580729,
+  "rev": 129,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3387,7 +3389,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 52
+    "valley": 53
   },
   "company": [],
   "foreclosed": [],
@@ -3596,10 +3598,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-24T14:10:59.537Z",
-      "lastAt": "2026-07-24T14:14:55.665Z",
+      "lastAt": "2026-07-24T14:16:20.724Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_pendingArrival": null,
@@ -3653,13 +3655,13 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 41,
-    "choices": 41,
+    "sceneSummary": 42,
+    "choices": 42,
     "characterDeltas": 25,
-    "scene": 41,
-    "npcUpdates": 36,
+    "scene": 42,
+    "npcUpdates": 37,
     "codexUpdates": 35,
-    "timeOps": 40,
+    "timeOps": 41,
     "sceneEnded": 20,
     "placeUpdates": 24,
     "moveTo": 2,
@@ -3671,7 +3673,7 @@
     "imagePrompt": 2,
     "generateRequest": 2
   },
-  "_opTurns": 41,
+  "_opTurns": 42,
   "_intentAsked": null,
   "corrections": [
     {

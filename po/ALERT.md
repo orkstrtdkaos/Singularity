@@ -13,8 +13,10 @@
 > the existing encounter buttons (classic duel/challenge/puzzle; skill_battle keeps its richer panel). OQ2
 > answered: PERILOUS-flavor triage. Phase plan in the results doc.
 > **AEVI — the frame shape is SET:** author per-kind copy (titles/verbs/meter labels in `FRAME_KINDS`) + PUZZLE/
-> STANDOFF exemplar encounters against the `frameModel` descriptor. **ERIK — the visual (OQ1) is the next fork:**
-> full takeover panel (like skill_battle) vs. compact banner vs. size-by-tier; the header is what to react to.
+> STANDOFF exemplar encounters against the `frameModel` descriptor.
+> **ERIK ANSWERED OQ1 (2026-07-24) — SIZE BY TIER:** riffraff/notable → the compact inline banner (the Phase 1
+> header, refined); regional/epic → a full takeover panel like skill_battle/gambit. Phase 1b builds to this
+> (needs the encounter's tier/danger → size routing + a `renderEncounterFrame` takeover for the big ones).
 > Deferred to later phases: narrative-promotion (shouldFrame/PERILOUS), chaining (§6a), collapse/morph+degrees
 > (§6b/§7a), ward-denial + kit-trivialization (§7b/§7c).
 

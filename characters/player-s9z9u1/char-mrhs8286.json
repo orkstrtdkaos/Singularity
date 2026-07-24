@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 21,
-  "xp": 2081,
+  "xp": 2086,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -130,10 +130,10 @@
   "alignment": {
     "spectrumId": -0.09750163606388479,
     "violence_peace": 0.1030845625,
-    "chaos_order": 0.25620126500365004,
+    "chaos_order": 0.26339120175346753,
     "mechanical_spiritual": 0.25513542055105926,
     "concrete_abstract": -0.021014395762538336,
-    "death_life": -0.18279319975514602,
+    "death_life": -0.1786535397673887,
     "emotional_logical": 0.008330843749999983,
     "falsehood_truth": 0.31248916266257776,
     "demonic_angelic": 0.013499999999999998,
@@ -144,7 +144,7 @@
   "maxHealth": 130,
   "health": 130,
   "maxEnergy": 200,
-  "energy": 154,
+  "energy": 152,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1756,68 +1756,58 @@
         "player": "Thank you... for an archivist, I would have though that you would have a good memory... perhaps I'm just not a memorable guy?",
         "summary": "Ossian deflects the self-deprecation plainly and opens Crane's Zone Remediation commission file on the desk.",
         "narration": "Ossian sets the letter on her desk without looking for a place to put it — she has the hands of someone who never sets things down unless she means to. She looks at you for a moment after you say it. Then she says, 'You arrived in a shadow pool, with a corvid that smells of the March.' She moves toward the far shelving without hurrying. 'I remember the memorable things.' Huginn makes no sound at all. The dry refusal of the sound is itself a comment. Ossian runs a finger along the spines on the second shelf down, not reading them so much as feeling for the one she wants by position alone. She pulls a thick bound register, charcoal-grey cover, and sets it flat on the desk beside the lamp. 'Zone Remediation — classified series. Crane, Edvar.' She opens to an indexed page and turns it toward you. 'Commission issued under fold-work authority. Spatial bonding, disputed corridor.' She taps one line. 'And here — closed notation, post-Accord.' She steps back and folds her hands. The rest, her posture says, is yours to read."
+      },
+      {
+        "player": "Read the commission file carefully — use Order-Sense to see the whole design Crane's work was part of, not just what the page says.",
+        "summary": "Silas reads Crane's commission file under Order-Sense — the fold-work was suspended, not completed, and no one was assigned to close it after him.",
+        "narration": "You open the file flat with both hands. The first page is a commission header — Edvar Crane, Wright's designation, spatial bonding authority, Zone Remediation subcommittee, pre-Accord. The dates are there. The fold-work designation is there. The closed notation at the bottom is stamped, not handwritten, which tells you something about how the Accord was administered.\n\nYou let Order-Sense settle in quietly — not a push, just attention. The lattice is thin here in the annex, and the craft runs a little lean, like a lamp turned low. But it is enough. The design opens around the page: Crane's commission was one thread in a larger spatial-bonding program along the disputed corridor. Three other commissions bracket his in the index. His is the only one with a closed notation that is not also marked 'completed.' The others say 'concluded.' His says 'suspended.' Someone knew the difference when they stamped it.\n\nOssian is standing back from the desk, hands folded, giving you room to read. She has not asked what you are looking for. She already understands the kind of person who comes in on Coll's committee authority and opens the Zone Remediation index — they are not browsing. Huginn shifts once on your shoulder, resettles, and is still. The file is not long. What it tells you is this: Crane did not finish. And no one else was assigned to finish it after him."
       }
     ],
     "lastTurn": {
-      "narration": "Ossian sets the letter on her desk without looking for a place to put it — she has the hands of someone who never sets things down unless she means to. She looks at you for a moment after you say it. Then she says, 'You arrived in a shadow pool, with a corvid that smells of the March.' She moves toward the far shelving without hurrying. 'I remember the memorable things.' Huginn makes no sound at all. The dry refusal of the sound is itself a comment. Ossian runs a finger along the spines on the second shelf down, not reading them so much as feeling for the one she wants by position alone. She pulls a thick bound register, charcoal-grey cover, and sets it flat on the desk beside the lamp. 'Zone Remediation — classified series. Crane, Edvar.' She opens to an indexed page and turns it toward you. 'Commission issued under fold-work authority. Spatial bonding, disputed corridor.' She taps one line. 'And here — closed notation, post-Accord.' She steps back and folds her hands. The rest, her posture says, is yours to read.",
-      "sceneSummary": "Ossian deflects the self-deprecation plainly and opens Crane's Zone Remediation commission file on the desk.",
+      "narration": "You open the file flat with both hands. The first page is a commission header — Edvar Crane, Wright's designation, spatial bonding authority, Zone Remediation subcommittee, pre-Accord. The dates are there. The fold-work designation is there. The closed notation at the bottom is stamped, not handwritten, which tells you something about how the Accord was administered.\n\nYou let Order-Sense settle in quietly — not a push, just attention. The lattice is thin here in the annex, and the craft runs a little lean, like a lamp turned low. But it is enough. The design opens around the page: Crane's commission was one thread in a larger spatial-bonding program along the disputed corridor. Three other commissions bracket his in the index. His is the only one with a closed notation that is not also marked 'completed.' The others say 'concluded.' His says 'suspended.' Someone knew the difference when they stamped it.\n\nOssian is standing back from the desk, hands folded, giving you room to read. She has not asked what you are looking for. She already understands the kind of person who comes in on Coll's committee authority and opens the Zone Remediation index — they are not browsing. Huginn shifts once on your shoulder, resettles, and is still. The file is not long. What it tells you is this: Crane did not finish. And no one else was assigned to finish it after him.",
+      "sceneSummary": "Silas reads Crane's commission file under Order-Sense — the fold-work was suspended, not completed, and no one was assigned to close it after him.",
       "choices": [
         {
-          "label": "Read the commission file carefully — use Order-Sense to see the whole design Crane's work was part of, not just what the page says.",
+          "label": "Ask Ossian if there is a location record — where the fold-work site actually is in the disputed corridor.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Read the three bracketing commissions in the index — see what the other fold-workers completed and what Crane's suspension left undone.",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.4,
-            "death_life": -0.1
-          },
-          "difficulty": 15,
+          "subAttribute": "reason",
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Read the file as written — dates, names, the closed notation, what the post-Accord entry actually says.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Ossian directly — what does the closed notation mean in practice, and is there a living contact listed anywhere in the file.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Let Huginn look at the file — hold the page open and watch what the corvid does with it.",
+          "label": "Check whether the file names any Zone Remediation authority who signed off on the suspension — someone who received the order to stop Crane's work.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.2
-          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Step back and tell Ossian plainly what you have found — see if she has heard the name Crane before, in this context or any other.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "persuade"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true
         }
       ],
       "scene": {
@@ -1825,22 +1815,23 @@
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "standing back from the desk, hands folded, having opened the Zone Remediation file to Crane's indexed entry — waiting for Silas to read it"
+            "state": "standing back from the desk, hands folded, giving Silas room to work through the file"
           },
           {
             "name": "Huginn",
-            "state": "on Silas's shoulder, watching the open file with the same unhurried eye it gives most things"
+            "state": "still on Silas's shoulder, resettled after one shift"
           }
         ],
         "objects": [
-          "Zone Remediation classified register — charcoal-grey cover, open to Crane's commission entry on the desk",
+          "Zone Remediation classified register — charcoal-grey cover, open to Crane's commission entry; closed notation stamped 'suspended', not 'completed'",
           "Letter of Introduction — Warden Coll (set on Ossian's desk)",
           "Archivist's lamp (lit, afternoon)",
           "Shelved ledgers along both walls",
           "Closed annex door behind Silas"
         ],
         "threads": [
-          "Crane's commission file open — closed notation post-Accord visible, fold-work authority noted, full contents unread",
+          "Crane's commission marked 'suspended' not 'completed' — no reassignment record visible",
+          "Three bracketing commissions in the index, all marked 'concluded'",
           "Pell moving toward Coliseum gate and forge district",
           "Veth moving through Hub plaza asking after Crane and resources"
         ]
@@ -1850,20 +1841,32 @@
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Deflected Silas's self-deprecation with exact precision — named what was actually memorable (shadow pool, March-corvid) — and opened the Zone Remediation classified file to Crane's commission entry without ceremony.",
+          "note": "Gave Silas room to work through the file without asking what he was looking for — professional restraint, possibly informed by the kind of visitor Coll's authority sends.",
           "learned": [
-            "She distinguishes memorable by specific detail, not by social impression — the March-corvid and the shadow pool registered; the man carrying them, less so"
+            "Crane's commission is the only one in the Zone Remediation spatial-bonding program marked 'suspended' rather than 'concluded' — no reassignment followed"
           ],
-          "skillsObserved": [
-            "locating a classified series by spine-feel alone, without checking the index"
-          ],
-          "statusNote": "At her desk in the annex, file open, waiting for Silas to read or ask",
-          "relationshipDelta": 0
+          "statusNote": "At her desk in the annex — file open, standing back while Silas reads"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-second-thread",
+          "label": "The Second Thread",
+          "kind": "mystery",
+          "fact": "Crane's Zone Remediation commission is marked 'suspended', not 'concluded' — the only one in the spatial-bonding program without either a completed or reassigned closure. Three other commissions bracket his, all properly concluded. Someone stamped 'suspended' knowing the difference between that word and 'completed.'",
+          "links": [
+            "edvar-crane",
+            "find-the-engineer",
+            "the-water-crisis",
+            "the-edge-district-ledger",
+            "coll",
+            "ossian"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange and file retrieval — a few minutes at most"
+        "why": "a careful reading of the commission file under Order-Sense"
       }
     },
     "sceneState": {
@@ -1871,11 +1874,11 @@
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "standing back from the desk, hands folded, having opened the Zone Remediation file to Crane's indexed entry — waiting fo"
+          "state": "standing back from the desk, hands folded, giving Silas room to work through the file"
         },
         {
           "name": "Huginn",
-          "state": "on Silas's shoulder, watching the open file with the same unhurried eye it gives most things"
+          "state": "still on Silas's shoulder, resettled after one shift"
         }
       ],
       "objects": [
@@ -1886,7 +1889,8 @@
         "Closed annex door behind Silas"
       ],
       "threads": [
-        "Crane's commission file open — closed notation post-Accord visible, fold-work authority noted, full contents unread",
+        "Crane's commission marked 'suspended' not 'completed' — no reassignment record visible",
+        "Three bracketing commissions in the index, all marked 'concluded'",
         "Pell moving toward Coliseum gate and forge district",
         "Veth moving through Hub plaza asking after Crane and resources"
       ]
@@ -3617,17 +3621,18 @@
         "[d13] Answered Silas's question about Coll's office light plainly and without ceremony — north window, lamp-lit by afternoon, stays until the flag drops — then returned her attention to her folio",
         "[d13] Silas departed her office without ceremony — the calling-slip in hand, no explanation given for the strange exit",
         "[d13] Admitted Silas on Coll's committee authority without argument; her gaze on Huginn held for one breath and returned to Silas's face without comment — she knows what the bird means.",
-        "[d13] Deflected Silas's self-deprecation with exact precision — named what was actually memorable (shadow pool, March-corvid) — and opened the Zone Remediation classified file to Crane's commission entry without ceremony."
+        "[d13] Deflected Silas's self-deprecation with exact precision — named what was actually memorable (shadow pool, March-corvid) — and opened the Zone Remediation classified file to Crane's commission entry without ceremony.",
+        "[d13] Gave Silas room to work through the file without asking what he was looking for — professional restraint, possibly informed by the kind of visitor Coll's authority sends."
       ],
       "knownFacts": [
-        "The path to her is brevity and evidence — she has already read the morning run and knows Silas's name",
         "Silas Weir can act on the water crisis, not merely report on it — she read this as distinct from the usual petitioners",
         "Warden Coll is the Council Member who can act; third floor, north-facing room, stays until the flag drops",
         "Warden Coll's office is north-facing with one wide window — lamp-lit by afternoon; a lamp on the desk's left corner and a hall sconce outside his door",
         "Coll stays until the registry flag drops",
         "Zone Remediation is the deep index — classified series; the committee name opens it",
         "She is not surprised by an Ashwarden-touched corvid, which says something about her history near the March",
-        "She distinguishes memorable by specific detail, not by social impression — the March-corvid and the shadow pool registered; the man carrying them, less so"
+        "She distinguishes memorable by specific detail, not by social impression — the March-corvid and the shadow pool registered; the man carrying them, less so",
+        "Crane's commission is the only one in the Zone Remediation spatial-bonding program marked 'suspended' rather than 'concluded' — no reassignment followed"
       ],
       "skillsObserved": [
         "writing a calling-slip under pressure without ceremony — fou",
@@ -3637,7 +3642,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At her desk in the annex, file open, waiting for Silas to read or ask",
+      "statusNote": "At her desk in the annex — file open, standing back while Silas reads",
       "lastSeen": {
         "locationId": "gen-north-gate-registry-ossian-office",
         "day": 13
@@ -4559,7 +4564,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 577,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Father's Sealed Letter — the post is claimed, the hollow is warded, the technique is real. The ground here is as right as ground gets. The…",
@@ -6060,21 +6065,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.938701522907312,
-    "cerebral": 14.55793345818407,
-    "social": 14.33071357257822,
-    "generous": 3.2622559000060147,
-    "cautious": 5.065482699418725,
-    "physical": 0.9550343606549802,
-    "risky": 0.8393377111781409,
-    "ruthless": 0.7424038819343812,
-    "carousing": 0.17027938118762417,
-    "amorous": 1.7147228811228767,
-    "patient": 1.0213952694576165,
-    "stealth": 0.0017075970506275542,
-    "devotion": 0.9019505178973387,
-    "craft": 0.2860288895127724,
-    "leadership": 1.377857343077693
+    "strategic": 17.490233984834628,
+    "cerebral": 15.193985121729469,
+    "social": 13.972445733263765,
+    "generous": 3.180699502505864,
+    "cautious": 4.9388456319332565,
+    "physical": 0.9311585016386056,
+    "risky": 0.8183542683986874,
+    "ruthless": 0.7238437848860216,
+    "carousing": 0.16602239665793356,
+    "amorous": 1.6718548090948049,
+    "patient": 0.995860387721176,
+    "stealth": 0.0016649071243618652,
+    "devotion": 0.8794017549499052,
+    "craft": 0.27887816727495307,
+    "leadership": 1.3434109095007507
   },
   "aptitudes": [
     "strategist",
@@ -6083,7 +6088,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 739,
+  "actionCount": 740,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6473,8 +6478,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784858283961,
-  "rev": 1195,
+  "updatedAt": 1784858385683,
+  "rev": 1196,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8438,7 +8443,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 78,
+      "order_sense": 79,
       "palework": 30,
       "deathsense": 33,
       "shadowstep": 21,
@@ -8956,7 +8961,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 91
+    "the_center": 92
   },
   "foreclosed": [
     "rootkin",
@@ -9081,10 +9086,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T01:58:03.958Z",
+      "lastAt": "2026-07-24T01:59:45.681Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 73
+      "beats": 74
     }
   ],
   "company": [
@@ -9284,15 +9289,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 109,
-    "choices": 109,
+    "sceneSummary": 110,
+    "choices": 110,
     "characterDeltas": 45,
-    "scene": 109,
-    "npcUpdates": 95,
+    "scene": 110,
+    "npcUpdates": 96,
     "factUpdates": 7,
     "placeUpdates": 20,
-    "codexUpdates": 66,
-    "timeOps": 103,
+    "codexUpdates": 67,
+    "timeOps": 104,
     "imagePrompt": 3,
     "sceneEnded": 24,
     "itemUpdates": 2,
@@ -9307,7 +9312,7 @@
     "stageOps": 5,
     "generateRequest": 2
   },
-  "_opTurns": 109,
+  "_opTurns": 110,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

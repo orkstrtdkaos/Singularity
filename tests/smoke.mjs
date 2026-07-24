@@ -4830,9 +4830,9 @@ await (async () => {
   const guarded = /try \{\s*applyTurn\(result\.turn, resolution, playerWords\);\s*\} catch \(err\) \{/.test(appSrc155);
   check("CCODE-07: applyTurn is wrapped so a throw cannot discard the rendered narration", guarded);
   check("CCODE-07: the catch persists activeScene.lastTurn so continuity survives a partial apply",
-    /_applyFailed = true/.test(appSrc155) && /catch \(err\)[\s\S]{0,700}?character\.activeScene = \{ locationId: character\.currentLocationId, turns: sceneTurns, lastTurn: result\.turn/.test(appSrc155));
+    /_applyFailed = true/.test(appSrc155) && /catch \(err\)[\s\S]{0,1100}?character\.activeScene = \{ locationId: character\.currentLocationId, turns: sceneTurns, lastTurn: result\.turn/.test(appSrc155));
   check("CCODE-07: a partial apply sets opLossPending so the GM restates the lost ops next turn (SNG-009 contract)",
-    /catch \(err\)[\s\S]{0,600}?character\.opLossPending = true/.test(appSrc155));
+    /catch \(err\)[\s\S]{0,1000}?character\.opLossPending = true/.test(appSrc155));
   check("CCODE-07: the player is TOLD the bookkeeping lagged — never a silent partial", /part of this turn's bookkeeping didn't land/.test(appSrc155));
   check("CCODE-07: the failure travels with the feedback report", /ctx\.turnApplyError = character\._turnApplyError/.test(appSrc155));
   // The specific trigger found in Erik's save class: a currentLocationId that resolves to nothing.
@@ -7881,6 +7881,14 @@ await (async () => {
     /eligibleEncountersFor\(CONTENT\.randomEncounters, loc\)/.test(appSrc231) && /don't duplicate a hand-seeded/.test(appSrc231));
   check("231 §3: a GM-offered POOL id routes through fireEncounter (the decline/engage beat), not a silent no-op",
     /const entry = \(CONTENT\.randomEncounters\?\.encounters \|\| \[\]\)\.find\(e => e\.id === choice\.encounterId\)/.test(appSrc231) && /if \(entry\) \{ await fireEncounter\(entry\); return; \}/.test(appSrc231));
+
+  // §2: the intermittent op-commit throw the CCODE-07 guard swallows now NAMES the failing op-group (diagnosable).
+  check("231 §2: applyTurn tracks the op-group phase (characterDeltas / codexUpdates / questUpdates / …)",
+    /_applyPhase = "characterDeltas"/.test(appSrc231) && /_applyPhase = "codexUpdates"/.test(appSrc231) && /_applyPhase = "questUpdates"/.test(appSrc231) && /_applyPhase = "npcUpdates"/.test(appSrc231));
+  check("231 §2: the CCODE-07 guard reports WHICH op threw (op on the error report + the failed-op on the turn), not just 'something didn't land'",
+    /const phase = _applyPhase \|\| "unknown"/.test(appSrc231) && /op: phase/.test(appSrc231) && /result\.turn\._applyFailedOp = phase/.test(appSrc231));
+  check("231 §2: the player-facing aside names the failing step",
+    /the \$\{turn\._applyFailedOp[\s\S]*?\} step/.test(appSrc231));
 
   // §2c: tradition_motivations is LOADED (its own type, not dead location-lore) and surfaced SELECTIVELY —
   // only the traditions in play this beat, each with its want + the creature its craft DREADS.

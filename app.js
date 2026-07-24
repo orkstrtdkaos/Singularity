@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.258";
+const APP_VERSION = "1.8.259";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3360,9 +3360,13 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   try {
     applyTurn(result.turn, resolution, playerWords);
   } catch (err) {
-    console.error("[applyTurn] state application failed — narration preserved:", err);
-    character._turnApplyError = { at: new Date().toISOString(), message: String(err?.message || err).slice(0, 200), stack: String(err?.stack || "").split("\n").slice(0, 4).join(" <- ").slice(0, 500) };
+    // SNG-231 §2: name WHICH op-group threw (the phase tracker in applyTurn), so the intermittent commit
+    // failure is diagnosable — not just "something didn't land". The failing phase rides the error report.
+    const phase = _applyPhase || "unknown";
+    console.error(`[applyTurn] state application failed at op-group "${phase}" — narration preserved:`, err);
+    character._turnApplyError = { at: new Date().toISOString(), op: phase, message: String(err?.message || err).slice(0, 200), stack: String(err?.stack || "").split("\n").slice(0, 4).join(" <- ").slice(0, 500) };
     result.turn._applyFailed = true;
+    result.turn._applyFailedOp = phase; // surfaced in the aside
     // Persist the beat so continuity holds even though some ops didn't land, and tell the GM next
     // turn that state lagged the fiction — the same self-heal contract SNG-009 uses for lost ops.
     try {
@@ -3697,7 +3701,12 @@ async function presentBackfilledBraids(c) {
   } catch (err) { console.warn("[braid] re-present skipped:", err?.message); }
 }
 
+// SNG-231 §2: the op-group applyTurn is CURRENTLY in — so a throw that the CCODE-07 guard swallows names the
+// culprit ("codexUpdates" / "questUpdates" / …) instead of "something didn't land". Set before each group; on a
+// throw it holds the group that was mid-apply. Module-level (one applyTurn runs at a time).
+let _applyPhase = null;
 function applyTurn(turn, resolution, playerWords = null) {
+  _applyPhase = "start";
   // CCODE-07: NEVER let a stranded currentLocationId throw. A place promoted from a sub-place, or a
   // generated location whose record didn't survive a reload, leaves `CONTENT.locations[id]`
   // undefined — and this function reads `location.communityId` (deeds) and `location.id` (ledger).
@@ -3713,6 +3722,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   try { touchSession(character, { nowISO: new Date().toISOString(), worldDay: absoluteWorldDay() }); } catch { /* session marker is best-effort */ }
 
   // deltas from the GM (bounded trust: clamp everything)
+  _applyPhase = "characterDeltas";
   const d = turn.characterDeltas || {};
   if (d.health) character.health = Math.max(0, Math.min(character.maxHealth, character.health + clampInt(d.health, -20, 15)));
   if (d.energy) character.energy = Math.max(0, Math.min(character.maxEnergy, character.energy + clampInt(d.energy, -20, 40)));
@@ -3725,6 +3735,7 @@ function applyTurn(turn, resolution, playerWords = null) {
 
   // deeds → reputation (day-stamped so news spread knows when they happened; SNG-041 also
   // stamps the shared absolute world-day so a deed dates the same on every character's calendar)
+  _applyPhase = "deeds";
   const wdNow = absoluteWorldDay();
   for (const deed of turn.deeds || []) {
     const recorded = recordDeed(character, { ...deed, locationId: location.id, communityId: deed.communityId ?? location.communityId }, mods);
@@ -3771,6 +3782,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   // people & places remember (typed ops, clamped)
   const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
+  _applyPhase = "npcUpdates";
   applyNpcUpdates(character, turn.npcUpdates || [], memCtx);
   // legacy relationshipDeltas: tolerated but may only UPDATE existing people — this path once minted
   // duplicate id-named registry entries. SNG-195 G4: intentionally NOT in the contract or SALVAGEABLE_OPS
@@ -3780,8 +3792,11 @@ function applyTurn(turn, resolution, playerWords = null) {
   })), memCtx);
   // SNG-154: pass the resolver + catalog so a GM-named parent can be validated against real places
   // (containment on write, instead of inferring it from wherever we last thought we were standing).
+  _applyPhase = "placeUpdates";
   applyPlaceUpdates(character, location.id, turn.placeUpdates || [], { ...memCtx, resolveLocationId, locations: CONTENT.locations });
+  _applyPhase = "codexUpdates";
   applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
+  _applyPhase = "factUpdates";
   applyFactUpdates(character, turn.factUpdates || [], memCtx);
   ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait
   // §2 engagement: interacting with a grown NPC or accreting a fact about a grown entity is
@@ -3789,6 +3804,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   for (const u of turn.npcUpdates || []) noteGeneratedAttention(u.npcId, "interact", memCtx.day);
   for (const u of turn.codexUpdates || []) if (u.entityId) noteGeneratedAttention(u.entityId, "fact", memCtx.day);
   if (character.activeEncounter && turn.encounterOps) {
+    _applyPhase = "encounterOps";
     const encA = activeEnc();
     if (encA) applyEncounterOps(encA.state, sanitizeEncounterOps(turn.encounterOps, encA.def, encA.state));
   }
@@ -3939,6 +3955,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (portraitNote) turn.narration += `\n\n*✦ ${portraitNote}*`;
   // quests: typed ops from the GM, applied within bounds; ctx.entities links giver/location
   // to codex nodes and lets the resolver match drifted titles (SNG-BATCH-7 Phase 3)
+  _applyPhase = "questUpdates";
   const questNotes = applyQuestUpdates(character, turn.questUpdates || [], { entities: codexEntities() });
   if (questNotes.some(n => /couldn't match/i.test(n))) console.warn("[quests]", questNotes.filter(n => /couldn't match/i.test(n)));
   if (questNotes.some(n => /complet/i.test(n))) autoVerifyLeg("b7-inv", "a quest progressed to complete"); // SNG-051 auto-verify
@@ -3950,6 +3967,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // engine adjudicates. Rejections are recorded (never silent) so a GM that keeps naming the wrong
   // stage is visible rather than mysteriously ineffective.
   if (turn.stageOps?.length) {
+    _applyPhase = "stageOps";
     const advanced = [], refusedStages = [];
     for (const op of turn.stageOps.slice(0, 3)) {
       const r = advanceStructuredQuest(character, op, { day: dayNow });
@@ -3969,6 +3987,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // timeOps.hoursPassed and the engine advances the clock to match, INSTEAD of the fixed
   // beat default. Narration LEADS the clock, never trails. Fallback = old beat behavior.
   const extraHours = Math.max(0, Math.min(12, Number(turn.timeAdvanceHours) || 0)); // SNG-195 G4: timeAdvanceHours is a legacy alias of timeOps (contract op) — inbound tolerance only, not advertised
+  _applyPhase = "late-ops"; // time / arcs / assignments / ledger — one label for the tail (the state-op culprits above are named)
   const beatDefault = (turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat) + extraHours;
   const declared = turn.timeOps && Number.isFinite(Number(turn.timeOps.hoursPassed));
   const declaredHours = declared ? Number(turn.timeOps.hoursPassed) : null;
@@ -4183,6 +4202,7 @@ function applyTurn(turn, resolution, playerWords = null) {
     if (pass.length) appendLedger(pass, character.id).catch(err => console.warn("[ledger]", err.message));
     backupSaves(character, profile);
   }
+  _applyPhase = "done"; // reached the end cleanly — a throw between the last labelled group and here reads "done"
 }
 
 /** SNG-013: the current location's flat + vector modifier for an action, plus its
@@ -7838,7 +7858,7 @@ function renderPlay(turn, opts = {}) {
   if (character?._correctionAside) { opts = { ...opts, aside: [opts.aside, character._correctionAside].filter(Boolean).join("\n\n") }; delete character._correctionAside; }
   // CCODE-07: the beat survived but some of its bookkeeping didn't — say so plainly rather than
   // letting the player discover a quest/NPC update silently missing. The GM restates next turn.
-  if (turn?._applyFailed) { opts = { ...opts, aside: [opts.aside, "*(The scene stands, but part of this turn's bookkeeping didn't land — the GM will restate it next beat.)*"].filter(Boolean).join("\n\n") }; }
+  if (turn?._applyFailed) { opts = { ...opts, aside: [opts.aside, `*(The scene stands, but part of this turn's bookkeeping didn't land${turn._applyFailedOp && turn._applyFailedOp !== "unknown" ? ` — the ${turn._applyFailedOp} step` : ""} — the GM will restate it next beat.)*`].filter(Boolean).join("\n\n") }; }
   const location = hereNow();
   const rules = CONTENT.rules;
   const mods = aptitudeMods(character, rules.playerAptitudes);

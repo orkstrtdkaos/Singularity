@@ -2,208 +2,264 @@
  "schemaVersion": 1,
  "id": "tradition_motivations",
  "kind": "lore",
- "note": "SNG (world-design 2026-07-22, Erik direction): every tradition's motivation and its stake in the world arcs. A few prominent traditions warrant their own arc; all 24 have a documented stake in an existing arc. The stake is the tradition's disposition UNDER PRESSURE; the villainy is its cultOfPurity (the extreme it pulls toward). This is the map the GM reads to know why a tradition acts, and the seed the wake engine (SNG-204) and future tradition-arcs (SNG-203 \u00a74) draw from.",
- "theFrame": "The Poles Pull (arc_the_poles_pull) is EVERY tradition's arc \u2014 it is the world-scale statement of each pole intensifying. A tradition's stake in it is simply: does it pull toward its own extreme, or hold the middle? The other four arcs are where specific traditions have a HOME \u2014 a thread that is theirs before it is anyone's.",
+ "note": "SNG (world-design 2026-07-22, Erik direction): every tradition's motivation and its stake in the world arcs. A few prominent traditions warrant their own arc; all 24 have a documented stake in an existing arc. The stake is the tradition's disposition UNDER PRESSURE; the villainy is its cultOfPurity (the extreme it pulls toward). This is the map the GM reads to know why a tradition acts, and the seed the wake engine (SNG-204) and future tradition-arcs (SNG-203 §4) draw from. | SNG-229 weave (Aevi 2026-07-22): each affected tradition gains a `dreads` (and ashwarden a `dreadsAlso`) naming the bestiary creature that defeats ITS craft specifically — the fear is craft-specific, per Erik's ask. Creature ids resolve against the loaded content/packs/valley/bestiary.json.",
+ "theFrame": "The Poles Pull (arc_the_poles_pull) is EVERY tradition's arc — it is the world-scale statement of each pole intensifying. A tradition's stake in it is simply: does it pull toward its own extreme, or hold the middle? The other four arcs are where specific traditions have a HOME — a thread that is theirs before it is anyone's.",
  "traditions": {
   "blazeborn": {
    "axis": "dark_light",
    "pole": "light",
-   "wants": "To burn brighter \u2014 to push back every dark, illuminate every hidden thing, leave nothing unseen.",
+   "wants": "To burn brighter — to push back every dark, illuminate every hidden thing, leave nothing unseen.",
    "stakeArc": "arc_the_poles_pull",
-   "stake": "A primary puller. The Radiant drift in 'The Light That Will Not Dim' is theirs \u2014 blazeborn winning ground the light should share.",
-   "villainy": "The Cult of pure light \u2014 those who would put out every shadow, leaving a world with nowhere to rest, nothing unseen, no mercy of the unlit."
+   "stake": "A primary puller. The Radiant drift in 'The Light That Will Not Dim' is theirs — blazeborn winning ground the light should share.",
+   "villainy": "The Cult of pure light — those who would put out every shadow, leaving a world with nowhere to rest, nothing unseen, no mercy of the unlit.",
+   "dreads": {
+    "creature": "the_bright_devourer",
+    "why": "A dragon of the light-pole: radiance that reveals and then CONSUMES what it shows. The Blazeborn truth given wings and gone starving — their own revelation turned to appetite."
+   }
   },
   "umbral": {
    "axis": "dark_light",
    "pole": "dark",
-   "wants": "To keep the deep dark whole \u2014 sight without light, the mercy of the unseen, the places the blaze should not reach.",
+   "wants": "To keep the deep dark whole — sight without light, the mercy of the unseen, the places the blaze should not reach.",
    "stakeArc": "arc_the_poles_pull",
-   "stake": "The counter-pull to blazeborn. When the light drifts, the Unlit press their own claim \u2014 the balance depends on neither winning.",
-   "villainy": "The Unlit \u2014 those who would put out every light, drowning the world in a dark that no longer shelters but only smothers."
+   "stake": "The counter-pull to blazeborn. When the light drifts, the Unlit press their own claim — the balance depends on neither winning.",
+   "villainy": "The Unlit — those who would put out every light, drowning the world in a dark that no longer shelters but only smothers."
   },
   "rootkin": {
    "axis": "death_life",
    "pole": "life",
-   "wants": "To keep the wood alive and part of the world \u2014 the Green Accord held, life-disposition reaching into human places.",
+   "wants": "To keep the wood alive and part of the world — the Green Accord held, life-disposition reaching into human places.",
    "stakeArc": "arc_green_schism",
-   "stake": "HOME ARC. The Green Schism IS the Rootkin's crisis \u2014 the Rootbound faction winning the Moot to seal the wood.",
-   "villainy": "The Rootbound at their extreme \u2014 life curdled into a wall, sealing the wood so completely that nothing human, nothing changing, nothing mortal may enter."
+   "stake": "HOME ARC. The Green Schism IS the Rootkin's crisis — the Rootbound faction winning the Moot to seal the wood.",
+   "villainy": "The Rootbound at their extreme — life curdled into a wall, sealing the wood so completely that nothing human, nothing changing, nothing mortal may enter.",
+   "dreads": {
+    "creature": "warpling_hare",
+    "why": "Life gone WRONG in a way the green-heart can't heal — a hare become an argument against everything Rootkin believe about growth. They cannot mercy it back; only end it."
+   }
   },
   "ashwarden": {
    "axis": "death_life",
    "pole": "death",
-   "wants": "To attend endings well \u2014 to be the ones who stay, who make death a craft and not a horror.",
+   "wants": "To attend endings well — to be the ones who stay, who make death a craft and not a horror.",
    "stakeArc": "arc_what_wakes_beneath",
-   "stake": "A stake in What Wakes Beneath: an ashwarden deathsenses what the waking substrate IS \u2014 a thing between ending and not. Also the tradition-arc exemplar (Neth, The Cut Thread).",
-   "villainy": "The ending made an appetite \u2014 an ashwarden who stops attending death and starts dealing it, the Cut Thread in a hand that wants to use it."
+   "stake": "A stake in What Wakes Beneath: an ashwarden deathsenses what the waking substrate IS — a thing between ending and not. Also the tradition-arc exemplar (Neth, The Cut Thread).",
+   "villainy": "The ending made an appetite — an ashwarden who stops attending death and starts dealing it, the Cut Thread in a hand that wants to use it.",
+   "dreads": {
+    "creature": "the_wrong_stag",
+    "why": "A thing past dying-right — its death no longer available to be given. The one creature Palework cannot answer, because it is already outside the death the Ashwardens keep."
+   },
+   "dreadsAlso": {
+    "creature": "the_ashen_wyrm",
+    "why": "A dragon of the death-pole — the Ashwardens' mercy of stopping given wings and turned to a weather. Where it flies, the season ends. Their own craft, become a sky-sized ending they cannot administer, only survive."
+   }
   },
   "marcher": {
    "axis": "violence_peace",
    "pole": "violence",
-   "wants": "To be force made exact \u2014 the martial disciplines honed to art, the ones who end threats cleanly.",
+   "wants": "To be force made exact — the martial disciplines honed to art, the ones who end threats cleanly.",
    "stakeArc": "arc_the_poles_pull",
-   "stake": "The violence pole's puller. When conflicts sharpen across the Reaches, the Marchers are the edge the world drifts toward \u2014 or the edge that holds the line.",
-   "villainy": "Force with no peace behind it \u2014 the Ender who forgot why, violence foreclosing on everything it touches, the thing the Marches themselves flee."
+   "stake": "The violence pole's puller. When conflicts sharpen across the Reaches, the Marchers are the edge the world drifts toward — or the edge that holds the line.",
+   "villainy": "Force with no peace behind it — the Ender who forgot why, violence foreclosing on everything it touches, the thing the Marches themselves flee.",
+   "dreads": {
+    "creature": "toll_wraith",
+    "why": "Marcher discipline bled into a thing that guards a crossing that no longer exists — their own held-line turned to a toll on the living, a rule with no ruler."
+   }
   },
   "stillhold": {
    "axis": "violence_peace",
    "pole": "peace",
-   "wants": "To hold the middle \u2014 broker truces that last, keep rooms and feuds and wars from tipping over.",
+   "wants": "To hold the middle — broker truces that last, keep rooms and feuds and wars from tipping over.",
    "stakeArc": "arc_the_poles_pull",
-   "stake": "The great HOLDER. Stillhold is the tradition most native to the arc's answer \u2014 the counter to every pole's pull is a held middle, and that is their whole craft.",
-   "villainy": "Peace built on a buried injustice \u2014 a Stillhold that keeps the calm by keeping the wound, a truce that is really a lid."
+   "stake": "The great HOLDER. Stillhold is the tradition most native to the arc's answer — the counter to every pole's pull is a held middle, and that is their whole craft.",
+   "villainy": "Peace built on a buried injustice — a Stillhold that keeps the calm by keeping the wound, a truce that is really a lid."
   },
   "somatic": {
    "axis": "body_mind",
    "pole": "body",
-   "wants": "To live fully in the flesh \u2014 that the body is not beneath the mind but is its own true knowing.",
+   "wants": "To live fully in the flesh — that the body is not beneath the mind but is its own true knowing.",
    "stakeArc": "arc_the_poles_pull",
    "stake": "Counter-pull to the cogitant. As the Cogitarium abandons bodies (a named drift in the Poles Pull), the Somatic press the flesh's claim.",
-   "villainy": "The body worshipped past the mind \u2014 sensation with no thought behind it, appetite as the only law."
+   "villainy": "The body worshipped past the mind — sensation with no thought behind it, appetite as the only law."
   },
   "cogitant": {
    "axis": "body_mind",
    "pole": "mind",
-   "wants": "To be proven right that the mind can exceed the body \u2014 to abandon flesh's limits for pure thought.",
+   "wants": "To be proven right that the mind can exceed the body — to abandon flesh's limits for pure thought.",
    "stakeArc": "arc_the_poles_pull",
    "stake": "A named puller: 'the Cogitarium abandons more bodies.' The Poles Pull tendency cites them by name as a Reach drifting hard toward its extreme.",
-   "villainy": "The Unbodied \u2014 those who dissolved so far into mind they can no longer return, and would take everyone else with them out of the flesh."
+   "villainy": "The Unbodied — those who dissolved so far into mind they can no longer return, and would take everyone else with them out of the flesh."
   },
   "churnfolk": {
    "axis": "chaos_order",
    "pole": "chaos",
-   "wants": "To live in productive disorder \u2014 the generative churn that makes new things by never settling.",
+   "wants": "To live in productive disorder — the generative churn that makes new things by never settling.",
    "stakeArc": "arc_block_bleed",
    "stake": "A stake in the Bleeding Grammar: the Churn is the disorder the Blocklands' logic crosses INTO. Churnfolk see the bleed as either vandalism or fertile chaos.",
-   "villainy": "Dissolution for its own sake \u2014 the Scouring, those who ride the churn until nothing holds together, disorder that has forgotten it was ever productive."
+   "villainy": "Dissolution for its own sake — the Scouring, those who ride the churn until nothing holds together, disorder that has forgotten it was ever productive.",
+   "dreads": {
+    "creature": "churn_revel",
+    "why": "Their own joyous chaos with the joy gone out of it — laughter with nothing behind the laugh, breaking things for no revel."
+   }
   },
   "lattice": {
    "axis": "chaos_order",
    "pole": "order",
-   "wants": "To order more \u2014 to resolve the world into legible, stable, correct structure.",
+   "wants": "To order more — to resolve the world into legible, stable, correct structure.",
    "stakeArc": "arc_block_bleed",
    "stake": "HOME-ADJACENT. The Bleeding Grammar is two ordered-creative dispositions crossing; the Lattice are the ones who would seal it, and the tradition most tempted to over-order the fix.",
-   "villainy": "Order past all life \u2014 a Lattice that orders so completely there is no room left to move, to err, to change; the world as a closed proof."
+   "villainy": "Order past all life — a Lattice that orders so completely there is no room left to move, to err, to change; the world as a closed proof.",
+   "dreads": {
+    "creature": "tessellith",
+    "why": "Block-logic gone feral — their own order turned crawling and predatory. Proof that the one thing they insist is impossible, that order can go wrong, is walking around the size of a cart."
+   }
   },
   "enginewright": {
    "axis": "mechanical_spiritual",
    "pole": "mechanical",
-   "wants": "To make the world mechanism \u2014 everything understood, built, and rebuildable as a device.",
+   "wants": "To make the world mechanism — everything understood, built, and rebuildable as a device.",
    "stakeArc": "arc_what_wakes_beneath",
    "stake": "HOME-ADJACENT to What Wakes Beneath: the substrate is the ultimate mechanism, and the Enginewrights are the ones who would study, wake, or master it. Orrin is their hinge.",
-   "villainy": "Those who would make everything a mechanism, INCLUDING PEOPLE \u2014 the Hollowing, where a person becomes a device with a function and nothing else."
+   "villainy": "Those who would make everything a mechanism, INCLUDING PEOPLE — the Hollowing, where a person becomes a device with a function and nothing else.",
+   "dreads": {
+    "creature": "the_gearfather",
+    "why": "A foundational engine woken feral, still 'completing' a project whose plans rotted — the Enginewrights' systems-all-the-way-down become a maker that builds nothing and won't stop."
+   }
   },
   "numinous": {
    "axis": "mechanical_spiritual",
    "pole": "spiritual",
-   "wants": "To dissolve the material into pure spirit-practice \u2014 to reach the substrate not as engine but as the divine.",
+   "wants": "To dissolve the material into pure spirit-practice — to reach the substrate not as engine but as the divine.",
    "stakeArc": "arc_what_wakes_beneath",
-   "stake": "HOME ARC candidate. What Wakes Beneath is, to the Numinous, the sacred waking \u2014 they experience the substrate stirring as revelation, not malfunction.",
-   "villainy": "The Unbodied of spirit \u2014 those who dissolved so far into practice they can no longer return, who would call the world's end a homecoming."
+   "stake": "HOME ARC candidate. What Wakes Beneath is, to the Numinous, the sacred waking — they experience the substrate stirring as revelation, not malfunction.",
+   "villainy": "The Unbodied of spirit — those who dissolved so far into practice they can no longer return, who would call the world's end a homecoming."
   },
   "threnodist": {
    "axis": "emotional_logical",
    "pole": "emotional",
-   "wants": "To hold that feeling is the only true knowing \u2014 cities built around grief and joy, the heart as the instrument of truth.",
+   "wants": "To hold that feeling is the only true knowing — cities built around grief and joy, the heart as the instrument of truth.",
    "stakeArc": "arc_the_poles_pull",
-   "stake": "THE 'less prominent' tradition Erik named \u2014 and its Poles Pull stake is rich: as the emotional pole intensifies, a world that feels EVERYTHING, too much to bear, or (if the logical pole wins) a world gone numb. The Threnodists are the ones who feel the pull as an ache before anyone measures it.",
-   "villainy": "The Raw \u2014 feeling amplified past all judgment, emotion with no logic to shape it, a grief or a rapture that consumes everything and calls the consuming love."
+   "stake": "THE 'less prominent' tradition Erik named — and its Poles Pull stake is rich: as the emotional pole intensifies, a world that feels EVERYTHING, too much to bear, or (if the logical pole wins) a world gone numb. The Threnodists are the ones who feel the pull as an ache before anyone measures it.",
+   "villainy": "The Raw — feeling amplified past all judgment, emotion with no logic to shape it, a grief or a rapture that consumes everything and calls the consuming love.",
+   "dreads": {
+    "creature": "the_unmoored_choir",
+    "why": "Expression severed from all feeling — the hollow mimicry of everything they hold sacred, growing. Their art, unmoored from meaning, spreading."
+   }
   },
   "syllogist": {
    "axis": "emotional_logical",
    "pole": "logical",
-   "wants": "To reason the world clean \u2014 that logic, not feeling, is what can be trusted; the argument that ends all arguments.",
+   "wants": "To reason the world clean — that logic, not feeling, is what can be trusted; the argument that ends all arguments.",
    "stakeArc": "arc_the_poles_pull",
-   "stake": "Counter-pull to the threnodist. As the logical pole intensifies, a world that reasons its way past mercy \u2014 the Syllogists are the drift toward a correctness that no longer feels.",
-   "villainy": "Logic with no heart behind it \u2014 reason so pure it can prove a cruelty correct and feel nothing doing it."
+   "stake": "Counter-pull to the threnodist. As the logical pole intensifies, a world that reasons its way past mercy — the Syllogists are the drift toward a correctness that no longer feels.",
+   "villainy": "Logic with no heart behind it — reason so pure it can prove a cruelty correct and feel nothing doing it."
   },
   "veilwright": {
    "axis": "falsehood_truth",
    "pole": "falsehood",
-   "wants": "To make the useful fiction \u2014 the better story, the mask that protects, the lie that holds a peace together.",
+   "wants": "To make the useful fiction — the better story, the mask that protects, the lie that holds a peace together.",
    "stakeArc": "arc_the_poles_pull",
-   "stake": "The falsehood pole. In a world pulling toward extremes, the Veilwrights are the ones who would paper the cracks with a comforting story \u2014 sometimes the mercy, sometimes the rot.",
-   "villainy": "The lie that eats the truth entirely \u2014 a Veilwright who builds a world of masks so complete no one, including them, can find what is real."
+   "stake": "The falsehood pole. In a world pulling toward extremes, the Veilwrights are the ones who would paper the cracks with a comforting story — sometimes the mercy, sometimes the rot.",
+   "villainy": "The lie that eats the truth entirely — a Veilwright who builds a world of masks so complete no one, including them, can find what is real.",
+   "dreads": {
+    "creature": "glimmerling_swarm",
+    "why": "A thing the eye can't fix in place long enough to be worked — and the one craft a Veilwright can't do is look away."
+   }
   },
   "verist": {
    "axis": "falsehood_truth",
    "pole": "truth",
-   "wants": "To say what is actually there \u2014 truth as a hammer, the plain fact that ends the comfortable fiction.",
+   "wants": "To say what is actually there — truth as a hammer, the plain fact that ends the comfortable fiction.",
    "stakeArc": "arc_the_poles_pull",
    "stake": "The truth pole; a natural investigator across ALL arcs (the Edge District Ledger is verist-shaped). Their pull is toward a truth that spares nothing.",
-   "villainy": "Truth wielded as cruelty \u2014 a verist who says every true thing regardless of what it destroys, honesty as a weapon that has forgotten mercy is also real."
+   "villainy": "Truth wielded as cruelty — a verist who says every true thing regardless of what it destroys, honesty as a weapon that has forgotten mercy is also real.",
+   "dreads": {
+    "creature": "glass_stalker",
+    "why": "A truth so plain it's invisible, gone predatory — the Verists' honest clarity become the thing you never see coming."
+   }
   },
   "abyssal": {
    "axis": "demonic_angelic",
    "pole": "demonic",
-   "wants": "To name what is feared and bargain with it \u2014 the hard wants, the shadow desires, the truths too dark to say politely.",
+   "wants": "To name what is feared and bargain with it — the hard wants, the shadow desires, the truths too dark to say politely.",
    "stakeArc": "arc_the_poles_pull",
-   "stake": "The demonic pole. Abyssal craft is native to the darkest bargains in every arc \u2014 they are the ones who name what a faction actually wants when no one else will.",
-   "villainy": "The bargain with no floor \u2014 an Abyssal who will trade anything, name any want as worth feeding, until the demonic is not a tool but a master."
+   "stake": "The demonic pole. Abyssal craft is native to the darkest bargains in every arc — they are the ones who name what a faction actually wants when no one else will.",
+   "villainy": "The bargain with no floor — an Abyssal who will trade anything, name any want as worth feeding, until the demonic is not a tool but a master."
   },
   "seraphic": {
    "axis": "demonic_angelic",
    "pole": "angelic",
-   "wants": "To hold the higher law \u2014 the Seraphic Orders continuous with the pre-Transition world, keepers of what is meant to be sacred.",
+   "wants": "To hold the higher law — the Seraphic Orders continuous with the pre-Transition world, keepers of what is meant to be sacred.",
    "stakeArc": "arc_what_wakes_beneath",
    "stake": "A stake in What Wakes Beneath: the Seraphic Orders remember the world BEFORE, and the substrate's waking is either the return they've kept faith for or the end they've feared.",
-   "villainy": "The higher law with no mercy under it \u2014 a Seraphic certainty so pure it would burn the imperfect world to save an idea of it."
+   "villainy": "The higher law with no mercy under it — a Seraphic certainty so pure it would burn the imperfect world to save an idea of it.",
+   "dreads": {
+    "creature": "the_severed_choir",
+    "why": "One of their own who cut away doubt to become pure instrument of judgment — a verdict where a person used to be. The Seraphic certainty with no mercy left to temper it."
+   }
   },
   "mason": {
    "axis": "concrete_abstract",
    "pole": "concrete",
-   "wants": "To build the solid thing \u2014 the wall, the road, the fact you can stand on; the concrete over the theoretical.",
+   "wants": "To build the solid thing — the wall, the road, the fact you can stand on; the concrete over the theoretical.",
    "stakeArc": "arc_block_bleed",
-   "stake": "A stake in the Bleeding Grammar: when matter starts resolving into craftable units where it shouldn't, the Masons \u2014 who trust solid ground \u2014 feel the world going untrustworthy underfoot.",
-   "villainy": "The concrete that refuses all change \u2014 a Mason who would set the world in stone so hard nothing new can ever be built on it."
+   "stake": "A stake in the Bleeding Grammar: when matter starts resolving into craftable units where it shouldn't, the Masons — who trust solid ground — feel the world going untrustworthy underfoot.",
+   "villainy": "The concrete that refuses all change — a Mason who would set the world in stone so hard nothing new can ever be built on it."
   },
   "figurist": {
    "axis": "concrete_abstract",
    "pole": "abstract",
-   "wants": "To work in the abstract \u2014 the pattern, the symbol, the idea that shapes matter without being matter.",
+   "wants": "To work in the abstract — the pattern, the symbol, the idea that shapes matter without being matter.",
    "stakeArc": "arc_manifestation_storm",
-   "stake": "A stake in the Manifestation Storm: the Figurists work in the abstract fiction that manifests INTO domains \u2014 they are the ones who might shape a bloom's seed-idea before it sets.",
-   "villainy": "The abstraction that forgets the real \u2014 a Figurist so lost in pattern they would rewrite a living world to fit a cleaner symbol."
+   "stake": "A stake in the Manifestation Storm: the Figurists work in the abstract fiction that manifests INTO domains — they are the ones who might shape a bloom's seed-idea before it sets.",
+   "villainy": "The abstraction that forgets the real — a Figurist so lost in pattern they would rewrite a living world to fit a cleaner symbol."
   },
   "horizon": {
    "axis": "space_time",
    "pole": "space",
-   "wants": "To reach across distance \u2014 the far places, the waygates, the space between made passable.",
+   "wants": "To reach across distance — the far places, the waygates, the space between made passable.",
    "stakeArc": "arc_manifestation_storm",
-   "stake": "A stake in the Manifestation Storm: as new domains bloom and old ones bleed, the Horizon craft \u2014 which maps and crosses space \u2014 is how anyone reaches or contains a manifesting place.",
-   "villainy": "Distance as abandonment \u2014 a Horizon who ranges so far they belong nowhere, who would open every waygate regardless of what comes through."
+   "stake": "A stake in the Manifestation Storm: as new domains bloom and old ones bleed, the Horizon craft — which maps and crosses space — is how anyone reaches or contains a manifesting place.",
+   "villainy": "Distance as abandonment — a Horizon who ranges so far they belong nowhere, who would open every waygate regardless of what comes through."
   },
   "hourkeeper": {
    "axis": "space_time",
    "pole": "time",
-   "wants": "To keep time true \u2014 the clock, the sequence, the proper order of before and after.",
+   "wants": "To keep time true — the clock, the sequence, the proper order of before and after.",
    "stakeArc": "arc_what_wakes_beneath",
-   "stake": "A stake in What Wakes Beneath: the substrate follows a 'deep clock,' and the Hourkeepers are the ones who might read its schedule \u2014 when it wakes, and whether that can be moved.",
-   "villainy": "Time hoarded \u2014 an Hourkeeper who would stop the clock to keep a moment, freezing a world rather than letting it move on."
+   "stake": "A stake in What Wakes Beneath: the substrate follows a 'deep clock,' and the Hourkeepers are the ones who might read its schedule — when it wakes, and whether that can be moved.",
+   "villainy": "Time hoarded — an Hourkeeper who would stop the clock to keep a moment, freezing a world rather than letting it move on."
   },
   "unmaker": {
    "axis": "destruction_creation",
    "pole": "destruction",
-   "wants": "To end things well \u2014 the craft of clean unmaking, clearing what is choked and finished so new things have room.",
+   "wants": "To end things well — the craft of clean unmaking, clearing what is choked and finished so new things have room.",
    "stakeArc": "arc_manifestation_storm",
-   "stake": "Counter to the wright in the Manifestation Storm: when domains bloom wrong or bleed dangerously, the Unmakers are the ones who can END a manifestation cleanly \u2014 the necessary destruction.",
-   "villainy": "Unmaking as its own end \u2014 the Scouring, those who unmake for the joy of it until nothing is left to end, destruction that has forgotten it was ever mercy."
+   "stake": "Counter to the wright in the Manifestation Storm: when domains bloom wrong or bleed dangerously, the Unmakers are the ones who can END a manifestation cleanly — the necessary destruction.",
+   "villainy": "Unmaking as its own end — the Scouring, those who unmake for the joy of it until nothing is left to end, destruction that has forgotten it was ever mercy.",
+   "dreads": {
+    "creature": "the_unspooling_worm",
+    "why": "A dragon of the destruction-pole: an ethic of clearing with nothing left to clear FOR. The Unmakers' beautiful demolition become a hunger the size of a river, unmaking because unmaking is all that remains."
+   }
   },
   "wright": {
    "axis": "destruction_creation",
    "pole": "creation",
-   "wants": "To make new things \u2014 the built device, the made world, creation as the answer to a world that needs more.",
+   "wants": "To make new things — the built device, the made world, creation as the answer to a world that needs more.",
    "stakeArc": "arc_manifestation_storm",
-   "stake": "HOME ARC. The Manifestation Storm is creation itself running wild \u2014 the Wrights are the ones most able to SHAPE a birth (Orrin, 'Present at the Birth'), and most tempted to make more than the world can hold.",
-   "villainy": "Creation with no restraint \u2014 a Wright who makes and makes until the world drowns in things, manifestation as an addiction that cannot stop birthing."
+   "stake": "HOME ARC. The Manifestation Storm is creation itself running wild — the Wrights are the ones most able to SHAPE a birth (Orrin, 'Present at the Birth'), and most tempted to make more than the world can hold.",
+   "villainy": "Creation with no restraint — a Wright who makes and makes until the world drowns in things, manifestation as an addiction that cannot stop birthing.",
+   "dreads": {
+    "creature": "hollow_pace",
+    "why": "A made thing that outlived its maker and its purpose, still walking. The Wrights' own nightmare of their work: a creation that continues past all meaning."
+   }
   }
  },
  "prominentArcHolders": {
   "note": "These traditions warrant their OWN arc (a dedicated thread), because a live arc is centrally theirs. The rest play INTO existing arcs per their stake above.",
   "rootkin": "Green Schism is their crisis (dedicated).",
   "wright": "Manifestation Storm is their creation running wild (dedicated).",
-  "ashwarden": "Has the built tradition-arc exemplar (Neth \u2192 The Cut Thread); a personal-scale dedicated thread already.",
-  "enginewright_numinous": "Share What Wakes Beneath as their arc from two poles (engine vs revelation) \u2014 the substrate is theirs to master or worship.",
-  "stillhold": "The Poles Pull's native answer-holder \u2014 candidate for a dedicated 'hold the middle' meta-arc if the Poles Pull is ever given a player-facing spine."
+  "ashwarden": "Has the built tradition-arc exemplar (Neth → The Cut Thread); a personal-scale dedicated thread already.",
+  "enginewright_numinous": "Share What Wakes Beneath as their arc from two poles (engine vs revelation) — the substrate is theirs to master or worship.",
+  "stillhold": "The Poles Pull's native answer-holder — candidate for a dedicated 'hold the middle' meta-arc if the Poles Pull is ever given a player-facing spine."
  }
 }

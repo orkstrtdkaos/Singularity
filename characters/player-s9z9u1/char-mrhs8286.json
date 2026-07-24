@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 23,
-  "xp": 2234,
+  "xp": 2247,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -152,7 +152,7 @@
   "maxHealth": 140,
   "health": 140,
   "maxEnergy": 210,
-  "energy": 200,
+  "energy": 196,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1804,101 +1804,86 @@
         "player": "Test the call once before you leave — draw Memory's shadow from across the forge floor, confirm the distance-summon works exactly as designed",
         "summary": "Silas called Memory across the forge floor at dawn — the shadow-summon ran clean, Pell named it good work, and the night's making is confirmed complete.",
         "narration": "You stand at the forge's threshold with Memory resting against the far wall, a room's width between you and the spear. The dawn is barely started — the sky through the high window is the color of ash and water. You hold out your hand, palm up, and speak the call quietly. No flourish. Just the name, just the mark.\n\nThe shadow under Memory's shaft shifts first. It pulls sideways, orienting toward you, and then the spear lifts — not thrown, not dropped — and crosses the room in a smooth glide through the shadow-channel the Weirmark opened, arriving handle-first into your grip without a sound. The iron tip is cold. The ash shaft settles into your palm the way it always does. It is the right weight in exactly the right place.\n\nPell is watching from the bench where she sat for the sealing. She says nothing for a moment. Then she says, \"That's clean,\" said Pell, which from her is the highest register of praise she gives to finished work. Huginn shifts on the rafter, tilts its head once at the spear, and looks away — the way it does when a thing has resolved correctly and there is nothing more to attend to.\n\nYou return Memory to your shoulder. The forge is cold now. The night's work is done and the road is open. Millbrook is waiting with its three active threads: the committee, the contamination, and the fold. First light is already here."
+      },
+      {
+        "player": "Now Memory in hand, shadow-twin called out of the forge's corner dark — both present at once. That's the move only this design makes.",
+        "summary": "Silas manifests Memory's shadow-twin from the forge corner dark — both spear and duplicate present at once, the design's unique move confirmed clean at dawn.",
+        "narration": "Memory is in your hand, still cold from the crossing. You turn toward the forge's darkest corner — the angle where the banked fire never quite reaches, behind the second post — and you speak the call again. Not the summoning call. The other one. The one the design makes possible because the Weirmark named you and the Shielding Word named the certainty and the shadow-channel runs both ways.\n\nThe corner dark thickens. It does not flare or rush. It gathers the way a held breath releases — unhurried, without drama — and Memory's shadow-twin resolves out of it: the same ash shaft, the same iron tip, the same worn leather wrap at the grip. It hangs in the air at shoulder height, oriented toward the threat-line by habit. In your hand, the original sits steady. Across the forge, the twin waits.\n\nBoth present at once. The design's one move that neither the spear nor the shadow could make alone. You feel the Weirmark holding the join — not straining, not burning, just holding, the way a good seat holds. Economical. Correct. Pell says nothing for a moment. Then she speaks. 'That's the thing,' said Pell, quiet and certain, watching from the bench.\n\nHuginn shifts on the rafter. Once. The forge is cold. First light is past the window. Crane is waiting at the waygate platform, and the road is open."
       }
     ],
     "lastTurn": {
-      "narration": "You stand at the forge's threshold with Memory resting against the far wall, a room's width between you and the spear. The dawn is barely started — the sky through the high window is the color of ash and water. You hold out your hand, palm up, and speak the call quietly. No flourish. Just the name, just the mark.\n\nThe shadow under Memory's shaft shifts first. It pulls sideways, orienting toward you, and then the spear lifts — not thrown, not dropped — and crosses the room in a smooth glide through the shadow-channel the Weirmark opened, arriving handle-first into your grip without a sound. The iron tip is cold. The ash shaft settles into your palm the way it always does. It is the right weight in exactly the right place.\n\nPell is watching from the bench where she sat for the sealing. She says nothing for a moment. Then she says, \"That's clean,\" said Pell, which from her is the highest register of praise she gives to finished work. Huginn shifts on the rafter, tilts its head once at the spear, and looks away — the way it does when a thing has resolved correctly and there is nothing more to attend to.\n\nYou return Memory to your shoulder. The forge is cold now. The night's work is done and the road is open. Millbrook is waiting with its three active threads: the committee, the contamination, and the fold. First light is already here.",
-      "sceneSummary": "Silas called Memory across the forge floor at dawn — the shadow-summon ran clean, Pell named it good work, and the night's making is confirmed complete.",
+      "narration": "Memory is in your hand, still cold from the crossing. You turn toward the forge's darkest corner — the angle where the banked fire never quite reaches, behind the second post — and you speak the call again. Not the summoning call. The other one. The one the design makes possible because the Weirmark named you and the Shielding Word named the certainty and the shadow-channel runs both ways.\n\nThe corner dark thickens. It does not flare or rush. It gathers the way a held breath releases — unhurried, without drama — and Memory's shadow-twin resolves out of it: the same ash shaft, the same iron tip, the same worn leather wrap at the grip. It hangs in the air at shoulder height, oriented toward the threat-line by habit. In your hand, the original sits steady. Across the forge, the twin waits.\n\nBoth present at once. The design's one move that neither the spear nor the shadow could make alone. You feel the Weirmark holding the join — not straining, not burning, just holding, the way a good seat holds. Economical. Correct. Pell says nothing for a moment. Then she speaks. 'That's the thing,' said Pell, quiet and certain, watching from the bench.\n\nHuginn shifts on the rafter. Once. The forge is cold. First light is past the window. Crane is waiting at the waygate platform, and the road is open.",
+      "sceneSummary": "Silas manifests Memory's shadow-twin from the forge corner dark — both spear and duplicate present at once, the design's unique move confirmed clean at dawn.",
       "choices": [
         {
-          "label": "Step out and walk to the waygate — the road to the committee meeting starts now",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "chaos_order": 0.3
-          },
+          "label": "Release the twin and step out — Crane is at the waygate and the road will not wait",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Find Edvar Crane before you go — confirm he's on the road and knows what he's walking into",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "lead"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Take a breath at the door and read the forge — Order-Sense, one last time, to confirm the design is whole",
+          "label": "Hold the dual presence a moment and read what Order-Sense says about both threads running at once",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.4
-          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Say a proper goodbye to the forge — it has been doing its work; a warden names that",
+          "label": "Dismiss the twin cleanly and say a word to Pell before you go — she sat up all night for this",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "mechanical_spiritual": 0.3
-          },
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "devote"
+            "comfort"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Step out with the twin at your shoulder and Memory in hand — let Huginn lead you to the waygate",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "travel",
+            "risky"
+          ],
+          "trivial": false
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
+      },
       "scene": {
-        "setting": "Inside the Fell Pell forge, Millbrook — dawn light through the high window, the fire cold and banked, Memory back at shoulder after the successful call-test.",
+        "setting": "Inside the Fell Pell forge, Millbrook — dawn light through the high window, fire cold and banked, Memory in hand and its shadow-twin hanging in the corner dark, both present.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Sitting on the bench, watching Silas with quiet satisfaction — the night's work confirmed good."
+            "state": "On the bench, watching with quiet certainty after naming the dual presence good."
           },
           {
             "name": "Huginn",
-            "state": "On the rafter above, settled and unbothered, having acknowledged the spear's clean arrival and moved on."
+            "state": "On the rafter, shifted once in acknowledgment, now settled."
           }
         ],
         "objects": [
-          "Memory (shadow-spear, fully sealed) — at shoulder",
+          "Memory (shadow-spear, fully sealed) — in hand",
+          "Memory's shadow-twin — manifested from corner dark, hovering at shoulder height",
           "Forge — cold, banked",
           "Bench where Pell sat through the sealing"
         ],
         "threads": [
-          "The road to Millbrook's committee meeting is open — first light is here",
-          "Edvar Crane is meant to have departed the mill and be waiting at the waygate platform"
+          "Edvar Crane is waiting at the waygate platform at first light",
+          "The road to Millbrook's committee meeting is open"
         ]
       },
       "npcUpdates": [
@@ -1906,37 +1891,60 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, traveling companion",
-          "note": "Named the shadow-summon 'clean' — her highest register of approval for finished work. The night is done in her accounting.",
-          "status": "active",
-          "statusNote": "At the Fell Pell forge, dawn — the making confirmed, ready to walk."
+          "note": "Witnessed the shadow-twin dual presence and named it plainly: 'That's the thing.' Her highest register of recognition for a design doing exactly what it was made to do.",
+          "learned": [
+            "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean."
+          ],
+          "statusNote": "At the Fell Pell forge, dawn — the making confirmed complete, watching Silas prepare to depart."
+        }
+      ],
+      "itemUpdates": [
+        {
+          "name": "Memory (their name for: Assembled Mid-Weight Spear)",
+          "description": "A seasoned ash shaft six feet long with a mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding. Four threads seated: ironsense as anchor, Huginn's Ashwarden ending-sense through the fuller, a shadow-harm focus at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The Weirmark names the caller; the Shielding Word locks the certainty. The shadow-twin can be drawn from any corner dark into presence alongside the original — both held at once. The maker's mark is Pell's.",
+          "provenance": "Completed and sealed at the Fell Pell at dawn on Day 14. The dual presence confirmed clean before the road."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "memory-spear-design",
+          "label": "Memory — the Dual Presence",
+          "kind": "lore",
+          "fact": "Memory's shadow-twin can be drawn from corner dark to stand alongside the original — both present at once, held by the Weirmark's named bond and the Shielding Word's certainty. The design's one move that neither spear nor shadow could make alone, confirmed clean at dawn in the Fell Pell.",
+          "links": [
+            "the-second-thread",
+            "the-fell-pell",
+            "pell-ran-marsh",
+            "millbrook"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief dawn test — one call, one arrival, one word from Pell."
+        "why": "A brief final confirmation in the forge at dawn before departure."
       }
     },
     "sceneState": {
-      "setting": "Inside the Fell Pell forge, Millbrook — dawn light through the high window, the fire cold and banked, Memory back at shoulder after the successful call-test.",
+      "setting": "Inside the Fell Pell forge, Millbrook — dawn light through the high window, fire cold and banked, Memory in hand and its shadow-twin hanging in the corner dark, both present.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Sitting on the bench, watching Silas with quiet satisfaction — the night's work confirmed good."
+          "state": "On the bench, watching with quiet certainty after naming the dual presence good."
         },
         {
           "name": "Huginn",
-          "state": "On the rafter above, settled and unbothered, having acknowledged the spear's clean arrival and moved on."
+          "state": "On the rafter, shifted once in acknowledgment, now settled."
         }
       ],
       "objects": [
-        "Memory (shadow-spear, fully sealed) — at shoulder",
+        "Memory (shadow-spear, fully sealed) — in hand",
+        "Memory's shadow-twin — manifested from corner dark, hovering at shoulder height",
         "Forge — cold, banked",
         "Bench where Pell sat through the sealing"
       ],
       "threads": [
-        "The road to Millbrook's committee meeting is open — first light is here",
-        "Edvar Crane is meant to have departed the mill and be waiting at the waygate platform"
+        "Edvar Crane is waiting at the waygate platform at first light",
+        "The road to Millbrook's committee meeting is open"
       ]
     }
   },
@@ -2954,7 +2962,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Woke at Silas's word without negotiation — forge first, then food. Walking beside him now.",
         "[d14] Received the modification sequence without question — file already in hand before Silas finished naming the steps.",
         "[d14] Read the shadow-duplicate of Memory's fuller modification and named the single-angle pass before Silas finished studying it.",
         "[d14] Named the socket-end channel-seat and the Raised Thing's existing presence as the weave — reading the shadow model with her ironsense, specific and economical.",
@@ -2963,17 +2970,18 @@
         "[d14] Took the anchor re-closure from Silas without being asked — read the channel by ironsense from socket to tip, pressed the wire home with her thumbnail, called it done in two words.",
         "[d14] Named the Weirmark as necessary for distance-summoning — without the caller's mark in the grain, the shadow knows the design but not who calls it and could drift. Confirmed the test: the shadow reads true, all threads present. Directed: seat the mark, then speak the Word.",
         "[d14] Confirmed the Weirmark seal and the Word settling — nodded once when the shadow acknowledged the mark and vanished. Put a hand briefly on Silas's shoulder when the work was done.",
-        "[d14] Named the shadow-summon 'clean' — her highest register of approval for finished work. The night is done in her accounting."
+        "[d14] Named the shadow-summon 'clean' — her highest register of approval for finished work. The night is done in her accounting.",
+        "[d14] Witnessed the shadow-twin dual presence and named it plainly: 'That's the thing.' Her highest register of recognition for a design doing exactly what it was made to do."
       ],
       "knownFacts": [
-        "Silas names her brilliance directly and means it, separate from any work she has done",
         "The Working Model sequence for Memory's upgrade: widen the fuller, seat the shadow-channel, re-close the anchor — in that order.",
         "The secondary thread needs a channel-end seat at the socket throat, not a shared node at the tip — tip is Hunter's Strike's ground; socket is the shadow's home when the spear is still.",
         "The Raised Thing is already the weave that holds the binding; it does not need to be added again.",
         "The Shielding Word built into the strike reads as certainty declared before the spear moves — power or delay depending on direction of use.",
         "The Shielding Word is not a thread on the blade but the condition of the conjuring — seated once, inherited by every subsequent call of the shadow-spear.",
         "The shadow-spear needs a Weirmark in the grain to answer a call across distance — otherwise the design is present but the caller is not identified",
-        "The shadow-spear is fully sealed — Weirmark names the caller, Shielding Word locks the certainty, and the duplicate answers any call from any distance."
+        "The shadow-spear is fully sealed — Weirmark names the caller, Shielding Word locks the certainty, and the duplicate answers any call from any distance.",
+        "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean."
       ],
       "skillsObserved": [
         "reading a conjuring-design's load-bearing condition and nami",
@@ -2984,7 +2992,7 @@
         "ironsense confirmation of a completed seal under working-for"
       ],
       "status": "active",
-      "statusNote": "At the Fell Pell forge, dawn — the making confirmed, ready to walk.",
+      "statusNote": "At the Fell Pell forge, dawn — the making confirmed complete, watching Silas prepare to depart.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 14
@@ -4932,7 +4940,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 591,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Huginn walked in without being invited — Crane acknowledged the bird directly and made room for it, which is not what a stranger does.",
@@ -6448,21 +6456,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.281203111705906,
-    "cerebral": 14.491373767803294,
-    "social": 9.491497340509223,
-    "generous": 3.611249919684934,
-    "cautious": 4.2313381737878855,
-    "physical": 0.22557039078104119,
-    "risky": 0.19824389918062443,
-    "ruthless": 0.1753490143019045,
-    "carousing": 0.040218434161996,
-    "amorous": 5.762275730889869,
-    "patient": 0.24124423116614482,
-    "stealth": 0.0004033188227305716,
-    "devotion": 1.1880324720963267,
-    "craft": 4.511218238749189,
-    "leadership": 1.8549843715324184
+    "strategic": 22.724173033913257,
+    "cerebral": 14.129089423608212,
+    "social": 9.254209906996493,
+    "generous": 3.5209686716928106,
+    "cautious": 4.125554719443188,
+    "physical": 0.21993113101151515,
+    "risky": 0.19328780170110882,
+    "ruthless": 0.1709652889443569,
+    "carousing": 0.0392129733079461,
+    "amorous": 5.618218837617622,
+    "patient": 0.23521312538699118,
+    "stealth": 0.0003932358521623073,
+    "devotion": 1.1583316602939184,
+    "craft": 4.398437782780459,
+    "leadership": 1.8086097622441077
   },
   "aptitudes": [
     "strategist",
@@ -6470,7 +6478,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 796,
+  "actionCount": 797,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6860,8 +6868,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784909838889,
-  "rev": 1292,
+  "updatedAt": 1784910427600,
+  "rev": 1293,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9153,7 +9161,7 @@
       "order_sense": 81,
       "palework": 30,
       "deathsense": 34,
-      "shadowstep": 21,
+      "shadowstep": 22,
       "the-attended-end": 39,
       "wildcraft": 6,
       "the_raised_thing": 15,
@@ -9674,7 +9682,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 534,
+    "valley": 535,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9809,10 +9817,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T16:17:18.887Z",
+      "lastAt": "2026-07-24T16:27:07.596Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 47
+      "beats": 48
     }
   ],
   "company": [
@@ -10012,18 +10020,18 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 166,
-    "choices": 166,
-    "characterDeltas": 64,
-    "scene": 166,
-    "npcUpdates": 150,
+    "sceneSummary": 167,
+    "choices": 167,
+    "characterDeltas": 65,
+    "scene": 167,
+    "npcUpdates": 151,
     "factUpdates": 11,
     "placeUpdates": 27,
-    "codexUpdates": 95,
-    "timeOps": 160,
+    "codexUpdates": 96,
+    "timeOps": 161,
     "imagePrompt": 3,
     "sceneEnded": 35,
-    "itemUpdates": 3,
+    "itemUpdates": 4,
     "questUpdates": 22,
     "offer": 15,
     "moveTo": 11,
@@ -10037,7 +10045,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 166,
+  "_opTurns": 167,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

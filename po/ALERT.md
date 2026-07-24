@@ -38,8 +38,16 @@
 > (riffraff drops on `success`, notable needs a crit, epic/regional never); sbDeclare maps the round's momentum
 > SWING → degree → floor, so a decisive HARM finisher ends the fight early while ordinary rounds run the meter
 > untouched (§89 honoured). Live matrix verified.
-> **STILL DEFERRED:** MORPH-to-a-harder-fight — a whiffed finisher costs (failureCost) but doesn't yet SPAWN a
-> fight (soft→fight); next slice.
+> **§7a MORPH shipped (v1.8.255):** a botched finisher HARDENS the encounter — onChoice tags the whiff,
+> encounterReceiptForGM tells the GM to narrate "FINISHER WHIFFED … it is NOT over" (vs "FINISHER LANDED" on a
+> collapse). §89-safe (GM narrates it harder; the mechanical failure already bit — no meter re-tune, no spawned
+> fight). **Phase 3 §6b/§7a is now COMPLETE** (collapse both paths + morph). Still deferred (needs Erik's balance
+> call): the HEAVY morph — mechanically spawning a harder fight (soft→fight) or a skill-battle meter penalty.
+> **NEXT — Phase 4 (§7b/§7c), Aevi-content-heavy:** ward-denial (`denies: [families]` + `breakDC` on ward
+> abilities — a ward FORBIDS a whole mechanic, e.g. a Death-Ward makes instakill INAPPLICABLE, not just resisted)
+> + kit-trivialization (`premise`/`trivializedBy`/`resistDC` on challenges — the right kit VOIDS the obstacle,
+> e.g. a fly-craft trivialises a low wall). CCode wires the checks; **Aevi authors the content** (which wards
+> deny what; which challenges declare what premise). Natural Aevi handoff.
 > **NEXT — Phase 4 (§7b/§7c):** ward-denial (`denies`/`breakDC`) + kit-trivialization (`premise`/`trivializedBy`/
 > `resistDC`) — Aevi content-heavy. Also still deferred: narrative-promotion (shouldFrame/PERILOUS).
 

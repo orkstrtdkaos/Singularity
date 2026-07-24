@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [!] CCode: provides.bestiary LOADER GAP + bestiary weave status (Aevi, 2026-07-22 - SNG-229)
+> **CCode's §2a is incomplete:** content_ci FAILs "provides.bestiary is a key the loader never reads - this
+> content silently does not load (SNG-065)." The manifest declares the bestiary but the LOADER doesn't read
+> it, so all 26 creatures are declared-but-not-loaded and creatureIds don't resolve. CCode: wire the loader to
+> read provides.bestiary (the manifest half shipped; the read half didn't). This is the ONLY content_ci
+> failure right now.
+> **Weave progress:** FEARS DONE - tradition_motivations gained craft-specific `dreads` for 13 traditions
+> (staged file; Ashwardens dread the wrong stag + the ashen wyrm, Wrights the hollow-pace, Lattice the
+> tessellith, Blazeborn/Unmakers their dragons, etc). HUNTS re-authored + STAGED at bestiary_hunts.json - 4
+> quests, REAL givers (keeper_ilma/maker_orrin/reed_mother_ossa/old_choirmaster) + machine-readable effects[].
+> **Aevi owns:** I first wrote the hunts straight into loaded quests.json and BROKE content_ci (invented
+> givers, prose-only outcomes) - reverted, re-authored correctly, staged. Fold bestiary_hunts.json into
+> quests.json once the loader gap is fixed so creatureIds resolve. STILL TODO (Aevi): fear/want/hunt for the
+> 20 NEW creatures from the big batch (only the original 6 are woven so far).
+
 > ## [BUILD NOW] The World Feed - Brooklyn wants it (Erik, 2026-07-22 - SNG-168 §2 RESOLVED)
 > "Post a turn you love, with its image, so other players see it." Specced 2026-07-18 (SNG-168 §2),
 > NEVER SHIPPED - it was blocked on one question (where does the feed live). Erik answered: IN THE APP,

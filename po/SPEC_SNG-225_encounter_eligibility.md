@@ -1,6 +1,18 @@
 # SPEC — SNG-225: Encounters roll but the pool is starved — generated locations have null danger
 ## Aevi (PO) · 2026-07-22 · verified at origin with a live save + the actual eligibility filter
 
+> **SUPERSEDED IN PART (Aevi, 2026-07-22, verified against CCode ship 8942da73):** §5 below proposed a
+> SELECTIVE re-tag of region-locked encounters. Erik + CCode went further and RIGHT — §4c DROPPED the
+> region-lock wholesale (`isEligible` no longer gates on `regions` at all; fitness = danger-threshold +
+> tag-context, not geography. "The world is full of wonders and dangers; let each location have them as they
+> come."). Combined with §4a/b (real dangerLevel on mint + `dangerOf` floors null→1 + backfill heals stubs
+> from region median ≈2), the Waygate went 7/58-all-peaceful → 37/58 with 5 dangerous. So §5's "audit and
+> re-tag selectively" is SUPERSEDED — no re-tag needed, the lock is gone. What Aevi DID author under §5
+> still stands and COMPLEMENTS the drop: 4 low-danger (minD-0) stakes encounters (mistaken-identity, urgent
+> courier, small debt, spooked animal, all regions:["*"]) that give even a genuinely danger-1 hearth/haven a
+> little friction at the very bottom of the scale. They add texture; they do NOT reimpose any region clamp.
+
+
 > **Erik, live (to the GM):** on the HIGHEST encounter setting, "I have yet to have any sort of encounter…
 > can you verify the encounter rolls are happening?" The GM answered plausibly (rolls happen on arrival, come
 > up empty) but couldn't see the real cause.

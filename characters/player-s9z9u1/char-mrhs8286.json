@@ -1855,155 +1855,136 @@
         "player": "Step onto the left branch — move into the Zone and toward what Order-Sense said sits across the road inside",
         "summary": "The party steps onto the left branch into the Disputed Zone — the mist thickens and the unnamed shape across the road draws closer.",
         "narration": "You step onto the left branch.\n\nThe road changes immediately. Not in any single dramatic way — it is still packed earth under your boots, still flanked by scrub and early-spring growth — but the light is different. The mist here does not catch the dawn the way it did at the fork. It sits. The gray-green cast you have seen at the creek each morning is present in the air itself, faint and mineral, like the inside of a well.\n\nPell falls in a half-step behind your right shoulder, Memory tilted down and forward in the carry-grip of someone who expects to need it. Veth is already reading the tree-line south, her eyes moving in short arcs, unhurried. Huginn does not circle. He rides your shoulder and faces forward, which is its own kind of statement.\n\nThe road curves west within the first thirty paces, just as Order-Sense showed it. The dead oak is already behind you. Gweth Callow is already gone from sight. The left branch opens ahead into a long shallow bend, and where it bends, the mist thickens into something closer to fog — and inside that fog, still too far to name, the shape that Order-Sense said sits across the road is waiting."
+      },
+      {
+        "player": "Advance cautiously — close the distance slowly, all three of you spread wide enough that whatever it is can't cover you at once",
+        "summary": "The party closes on the shape in the mist — a Blazeborn man seated at a clay-bowl fire, who names Silas's parentage within a minute of setting eyes on him.",
+        "narration": "You spread the three of you wide across the road — Pell left, Veth right, yourself in the center — and close the distance slowly.\n\nThe mist thins as you press into it. The shape resolves: a man, seated on a low stone at the road's edge with his back against a scrub-oak, elbows on his knees and a small fire in a clay bowl on the ground before him. The fire is the color of fresh copper. It does not flicker the way a wood-fire does. It breathes.\n\nHe looks up before you have spoken a word. His eyes are the washed amber of late afternoon even in this dawn light, and he reads all three of you in one unhurried sweep. Then he says, in a tone as easy as greeting an old neighbor: \"You have your mother's jaw and your father's hands. I thought someone would be along eventually.\" He says it without malice, without theater — the way a person names a thing they have simply noticed and considered rude to keep to themselves.\n\nHe is perhaps thirty-five, broad through the chest, with the calloused forearms of someone who works in heat. His coat is a deep burnt-orange at the hem and collar where the dye has held, faded to rust everywhere the sun reaches. A Blazeborn's colors, unmistakably. He glances at the shadow-twin in your hand with the frank attention of someone who has seen working-tools before, then back to your face, then to Pell and Veth in turn. He seems faintly puzzled that his observation has not been received as the friendly remark he intended it to be."
       }
     ],
     "lastTurn": {
-      "narration": "You step onto the left branch.\n\nThe road changes immediately. Not in any single dramatic way — it is still packed earth under your boots, still flanked by scrub and early-spring growth — but the light is different. The mist here does not catch the dawn the way it did at the fork. It sits. The gray-green cast you have seen at the creek each morning is present in the air itself, faint and mineral, like the inside of a well.\n\nPell falls in a half-step behind your right shoulder, Memory tilted down and forward in the carry-grip of someone who expects to need it. Veth is already reading the tree-line south, her eyes moving in short arcs, unhurried. Huginn does not circle. He rides your shoulder and faces forward, which is its own kind of statement.\n\nThe road curves west within the first thirty paces, just as Order-Sense showed it. The dead oak is already behind you. Gweth Callow is already gone from sight. The left branch opens ahead into a long shallow bend, and where it bends, the mist thickens into something closer to fog — and inside that fog, still too far to name, the shape that Order-Sense said sits across the road is waiting.",
-      "sceneSummary": "The party steps onto the left branch into the Disputed Zone — the mist thickens and the unnamed shape across the road draws closer.",
+      "narration": "You spread the three of you wide across the road — Pell left, Veth right, yourself in the center — and close the distance slowly.\n\nThe mist thins as you press into it. The shape resolves: a man, seated on a low stone at the road's edge with his back against a scrub-oak, elbows on his knees and a small fire in a clay bowl on the ground before him. The fire is the color of fresh copper. It does not flicker the way a wood-fire does. It breathes.\n\nHe looks up before you have spoken a word. His eyes are the washed amber of late afternoon even in this dawn light, and he reads all three of you in one unhurried sweep. Then he says, in a tone as easy as greeting an old neighbor: \"You have your mother's jaw and your father's hands. I thought someone would be along eventually.\" He says it without malice, without theater — the way a person names a thing they have simply noticed and considered rude to keep to themselves.\n\nHe is perhaps thirty-five, broad through the chest, with the calloused forearms of someone who works in heat. His coat is a deep burnt-orange at the hem and collar where the dye has held, faded to rust everywhere the sun reaches. A Blazeborn's colors, unmistakably. He glances at the shadow-twin in your hand with the frank attention of someone who has seen working-tools before, then back to your face, then to Pell and Veth in turn. He seems faintly puzzled that his observation has not been received as the friendly remark he intended it to be.",
+      "sceneSummary": "The party closes on the shape in the mist — a Blazeborn man seated at a clay-bowl fire, who names Silas's parentage within a minute of setting eyes on him.",
       "choices": [
         {
-          "label": "Open Order-Sense on the road ahead — read the design of whatever blocks it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Let Deathsense read the fog — is the thing ahead alive, dying, or something else entirely?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Advance cautiously — close the distance slowly, all three of you spread wide enough that whatever it is can't cover you at once",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Ask him plainly: who are you, and what do you know about these hands and this jaw?",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "scout"
+            "persuade",
+            "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Veth — she's been on this road before. What sits at this distance on the left branch?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Read him with Order-Sense before you say a word — see what design he is part of",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "order_sense",
+          "trivial": true
+        },
+        {
+          "label": "Hold your position and let Huginn read him — ask the bird what it sees in this man",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Name yourself first — give him your name and let the conversation find its own footing",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The left branch of the March Road fork, inside the first bend west — early dawn, mist thickening toward fog with a faint mineral-gray cast, scrub on both sides, the dead oak and the fork behind and out of sight.",
+        "setting": "The left branch of the March Road, inside the first bend west — early dawn, mist sitting heavy with a faint mineral-gray cast. The road is packed earth flanked by scrub and early-spring growth. A man sits at the road's edge on a low stone before a small clay-bowl fire burning copper-bright.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Half a step behind Silas's right shoulder, Memory in carry-grip, watching the road ahead."
+            "state": "Spread left across the road, Memory tilted down and forward in carry-grip, eyes on the seated man."
           },
           {
             "name": "Veth Ondra",
-            "state": "Reading the tree-line south in short arcs, steady and unhurried."
+            "state": "Spread right, reading the seated man and the tree-line behind him in short arcs."
           },
           {
             "name": "Huginn",
-            "state": "Riding Silas's shoulder, facing forward, silent."
+            "state": "On Silas's shoulder, facing the seated man, silent and still."
+          },
+          {
+            "name": "Blazeborn traveler",
+            "state": "Seated on a low stone at the road's edge, elbows on knees, copper-flame fire in a clay bowl before him — watching the party with calm, faintly puzzled attention."
           }
         ],
         "objects": [
-          "Memory's shadow-twin — in Silas's right hand, held at the side",
-          "The thickening fog ahead where the road bends west",
-          "Unnamed shape sitting across the road inside the fog — distance and nature unknown"
+          "Memory's shadow-twin — in Silas's right hand",
+          "Clay-bowl fire burning copper — the man's, on the ground before him",
+          "The thickening mist ahead where the road bends further west"
         ],
         "threads": [
-          "The shape across the road ahead — its nature still unread",
-          "The Zone's interference is already present in the air — its effect on crafts is unknown but anticipated"
+          "The Blazeborn man named Silas's parentage on sight — his meaning and his knowledge are unexplained",
+          "His purpose on this road and his relationship to the Zone are unknown",
+          "The Zone's interference on crafts is still anticipated further in"
         ]
       },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short walk from the fork into the first bend of the left branch."
-      },
-      "moveTo": {
-        "location": "Disputed Zone — Left Branch entrance",
-        "why": "Stepped off the March Road fork onto the left branch into the Zone."
-      },
-      "placeUpdates": [
+      "generateRequest": [
         {
-          "note": "The left branch enters the Zone immediately past the fork's dead oak — within thirty paces the light changes, the mist gains a mineral gray-green cast, and the road bends west into heavier fog. A shape sits across the road inside.",
-          "subPlace": {
-            "name": "Left Branch — Zone Entrance",
-            "parent": "March Road Fork",
-            "note": "First thirty paces of the left branch into the Disputed Zone — the light and air change here. An unnamed shape sits across the road further in.",
-            "visited": true
-          }
+          "type": "npc",
+          "hint": "A Blazeborn traveler in his mid-thirties, broad-chested, burnt-orange coat, a copper-flame fire in a clay bowl — seated at the Zone's left-branch entrance as if he has been waiting. Knows something about Silas's father.",
+          "why": "He spoke Silas's parentage on first sight and needs a stable identity and name to recur."
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "the-disputed-zone",
-          "label": "The Disputed Zone",
-          "kind": "place",
-          "fact": "The Zone's character is present from the first step inside — the mist gains a mineral gray-green quality identical to the contaminated creek water, and the light sits rather than moves. The interference that limits craft-reading is already felt as a texture in the air.",
-          "links": [
-            "the-water-crisis",
-            "what-the-water-remembers",
-            "the-second-thread"
-          ]
-        }
-      ]
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short cautious advance and arrival — a few minutes on the road."
+      },
+      "offer": {
+        "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
+        "from": "The SOMETHING HAPPENS roll — a Blazeborn tells a true thing about the player within a minute of meeting, without malice, bewildered by the reaction; and the half-made fold's lineage pull, which has been drawing related figures toward this road"
+      }
     },
     "sceneState": {
-      "setting": "The left branch of the March Road fork, inside the first bend west — early dawn, mist thickening toward fog with a faint mineral-gray cast, scrub on both sides, the dead oak and the fork behind and out of sight.",
+      "setting": "The left branch of the March Road, inside the first bend west — early dawn, mist sitting heavy with a faint mineral-gray cast. The road is packed earth flanked by scrub and early-spring growth. A man sits at the road's edge on a low stone before a small clay-bowl fire burning copper-bright.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Half a step behind Silas's right shoulder, Memory in carry-grip, watching the road ahead."
+          "state": "Spread left across the road, Memory tilted down and forward in carry-grip, eyes on the seated man."
         },
         {
           "name": "Veth Ondra",
-          "state": "Reading the tree-line south in short arcs, steady and unhurried."
+          "state": "Spread right, reading the seated man and the tree-line behind him in short arcs."
         },
         {
           "name": "Huginn",
-          "state": "Riding Silas's shoulder, facing forward, silent."
+          "state": "On Silas's shoulder, facing the seated man, silent and still."
+        },
+        {
+          "name": "Blazeborn traveler",
+          "state": "Seated on a low stone at the road's edge, elbows on knees, copper-flame fire in a clay bowl before him — watching the pa"
         }
       ],
       "objects": [
-        "Memory's shadow-twin — in Silas's right hand, held at the side",
-        "The thickening fog ahead where the road bends west",
-        "Unnamed shape sitting across the road inside the fog — distance and nature unkno"
+        "Memory's shadow-twin — in Silas's right hand",
+        "Clay-bowl fire burning copper — the man's, on the ground before him",
+        "The thickening mist ahead where the road bends further west"
       ],
       "threads": [
-        "The shape across the road ahead — its nature still unread",
-        "The Zone's interference is already present in the air — its effect on crafts is unknown but anticipated"
+        "The Blazeborn man named Silas's parentage on sight — his meaning and his knowledge are unexplained",
+        "His purpose on this road and his relationship to the Zone are unknown",
+        "The Zone's interference on crafts is still anticipated further in"
       ]
     }
   },
@@ -5065,12 +5046,8 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 595,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The old woman's plain recognition — the hollow's name is already moving through the valley without anyone carrying it",
-        "from": "The place's character: Millbrook and the March Road are small-valley circuits where news moves like water, and the warden post's naming…"
-      },
       {
         "thing": "Huginn turns its head toward the high window at the moment the shadow-duplicate vanishes — not following the light, but listening. There…",
         "from": "Huginn's established nature — it knows when something is ending, how, and roughly when, and it tracks that without commentary; its…"
@@ -5086,6 +5063,10 @@
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
         "from": "What Gweth Callow wants — safe passage for travelers on the March, and for trouble coming south to move without dragging harm back up — a…"
+      },
+      {
+        "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
+        "from": "The SOMETHING HAPPENS roll — a Blazeborn tells a true thing about the player within a minute of meeting, without malice, bewildered by the…"
       }
     ],
     "wantProgress": {
@@ -6656,21 +6637,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.409579586642764,
-    "cerebral": 14.15491600608349,
-    "social": 8.803270748281037,
-    "generous": 2.878015514287784,
-    "cautious": 7.9205551662785965,
-    "physical": 0.13594849554594166,
-    "risky": 0.7697263199289646,
-    "ruthless": 0.10568069065832063,
-    "carousing": 0.02423915478713798,
-    "amorous": 4.156873278596756,
-    "patient": 0.9416304346184695,
-    "stealth": 0.00024307528566018673,
-    "devotion": 0.7160125346326979,
-    "craft": 3.3691028194880475,
-    "leadership": 1.819535905223019
+    "strategic": 20.899340096976694,
+    "cerebral": 13.801043105931402,
+    "social": 8.583188979574011,
+    "generous": 2.8060651264305894,
+    "cautious": 8.722541287121631,
+    "physical": 0.1325497831572931,
+    "risky": 0.7504831619307404,
+    "ruthless": 0.10303867339186261,
+    "carousing": 0.023633175917459528,
+    "amorous": 4.0529514466318375,
+    "patient": 0.9180896737530078,
+    "stealth": 0.00023699840351868207,
+    "devotion": 0.6981122212668804,
+    "craft": 3.284875249000846,
+    "leadership": 1.7740475075924433
   },
   "aptitudes": [
     "strategist",
@@ -6678,7 +6659,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 816,
+  "actionCount": 817,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -7068,8 +7049,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784920930449,
-  "rev": 1332,
+  "updatedAt": 1784921242239,
+  "rev": 1333,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10063,7 +10044,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 557,
+    "valley": 558,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10200,10 +10181,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T19:22:10.444Z",
+      "lastAt": "2026-07-24T19:27:22.237Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 70
+      "beats": 71
     }
   ],
   "company": [
@@ -10415,20 +10396,20 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 186,
-    "choices": 186,
+    "sceneSummary": 187,
+    "choices": 187,
     "characterDeltas": 73,
-    "scene": 186,
+    "scene": 187,
     "npcUpdates": 169,
     "factUpdates": 13,
     "placeUpdates": 32,
     "codexUpdates": 108,
-    "timeOps": 180,
+    "timeOps": 181,
     "imagePrompt": 3,
     "sceneEnded": 44,
     "itemUpdates": 5,
     "questUpdates": 24,
-    "offer": 18,
+    "offer": 19,
     "moveTo": 14,
     "delegateOps": 3,
     "deeds": 2,
@@ -10436,11 +10417,11 @@
     "ledgerEvents": 4,
     "discovery": 2,
     "stageOps": 6,
-    "generateRequest": 6,
+    "generateRequest": 7,
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 186,
+  "_opTurns": 187,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -10448,7 +10429,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 20,
+      "applied": 21,
       "rejected": 0,
       "lastWhy": null
     },

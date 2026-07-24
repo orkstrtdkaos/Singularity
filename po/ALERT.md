@@ -1,5 +1,23 @@
 # PO ALERT
 
+> ## [SNG-230 Phase 1 complete_pending_review — CCode, 2026-07-24] The Encounter Frame CONTRACT is set
+> Erik: "start working on SNG-230." Verified the spec's "70% built" premises first — several are **wrong and
+> need the spec fixed** (full list in `po/results/20260724_SNG-230-P1_encounter_frame.md`): there is **NO
+> `buildStagedDef`** (it's `synthesizeChallengeDef`, random_encounters.js:219); **no FINISH or WARD function
+> family** (families are HARM/RESTORE/PROTECT/KNOW/SHAPE/INFLUENCE/MOVE/SUSTAIN — "ward" is a PROTECT verb,
+> "finish" doesn't exist); the outcome vocab is NOT at app.js:2023 (it's the endEncounter xpMap) and omits
+> opponent_yielded/player_overcome/stalemate; counts are narrative=52/opposed=4/challenge=4/duel=2. §6b–§7c are
+> entirely unbuilt (expected — reword "already present" → "to build").
+> **Shipped (v1.8.249):** `engine/encounterFrame.js` — `frameModel(def,state,entry)` → the kind-themed descriptor
+> (icon+title, WIN CONDITION, meter, the THREE EXITS defeat/flee/fail) + an `.enc-frame` legibility header above
+> the existing encounter buttons (classic duel/challenge/puzzle; skill_battle keeps its richer panel). OQ2
+> answered: PERILOUS-flavor triage. Phase plan in the results doc.
+> **AEVI — the frame shape is SET:** author per-kind copy (titles/verbs/meter labels in `FRAME_KINDS`) + PUZZLE/
+> STANDOFF exemplar encounters against the `frameModel` descriptor. **ERIK — the visual (OQ1) is the next fork:**
+> full takeover panel (like skill_battle) vs. compact banner vs. size-by-tier; the header is what to react to.
+> Deferred to later phases: narrative-promotion (shouldFrame/PERILOUS), chaining (§6a), collapse/morph+degrees
+> (§6b/§7a), ward-denial + kit-trivialization (§7b/§7c).
+
 > ## [RESOLVED] Erik's two calls (2026-07-24)
 > - **SNG-223 Q4: WIRE IT.** The per-tradition visual guide (tradition_visual_aesthetics.json, all 24, staged)
 >   gets wired into the skill-image prompts. CCode: prepend the craft's tradition block (palette/materials/

@@ -1,0 +1,273 @@
+{
+ "schemaVersion": 1,
+ "id": "tradition_visual_aesthetics",
+ "kind": "content",
+ "note": "SNG-223: per-tradition visual-prompt guidance so a craft's generated image READS as its tradition (Ashwarden crafts look Ashwarden, Wright crafts look Wright). Built ON TOP of each tradition's canon `aesthetic` field in traditions.json (never replacing it) - this translates that prose aesthetic into image-generator language: palette, materials, light, mood. CCode's ensureImage('ability') prompt (SNG-223) prepends the craft's tradition block here to the craft's own authored description. Aevi-authored 2026-07-22.",
+ "usage": "For a craft of tradition T: image_prompt = <craft.description> + ', in the visual style of ' + traditions[T].{palette, materials, light, mood}. The craft's OWN description is the subject; this is the STYLE wrapper so the whole tradition coheres.",
+ "traditions": {
+  "umbral": {
+   "name": "The Umbrals",
+   "craft": "Umbracraft",
+   "axis": "dark_light",
+   "pole": "dark",
+   "canonAesthetic": "lightless deeps, sight without light, soft-footed, everything felt not seen",
+   "palette": "near-black, cold indigo, faint bioluminescent teal",
+   "materials": "wet stone, unlit passages, soft cloth",
+   "light": "no light source — form implied by touch, edges felt not lit",
+   "mood": "soft-footed, sensed-in-the-dark, quiet"
+  },
+  "blazeborn": {
+   "name": "The Blazeborn",
+   "craft": "Radiance",
+   "axis": "dark_light",
+   "pole": "light",
+   "canonAesthetic": "glass plains, revelation as violence, the burning truth, no shadow permitted",
+   "palette": "white-gold, glare-blown highlights, no true shadow",
+   "materials": "glass, polished sun-metal, salt flats",
+   "light": "overexposed, revelation-as-violence, everything laid bare",
+   "mood": "burning clarity, nowhere to hide"
+  },
+  "rootkin": {
+   "name": "The Rootkin",
+   "craft": "Vivimancy",
+   "axis": "death_life",
+   "pole": "life",
+   "canonAesthetic": "grown not built, green-heart, sap and bark and slow enormous patience",
+   "palette": "deep green, bark-brown, sap-amber",
+   "materials": "living wood, moss, grown-not-built forms",
+   "light": "green-filtered canopy light, slow and warm",
+   "mood": "patient, enormous, growing"
+  },
+  "ashwarden": {
+   "name": "The Ashwardens",
+   "craft": "Palework",
+   "axis": "death_life",
+   "pole": "death",
+   "canonAesthetic": "grey ash-fields, the mercy of stopping, quiet keepers of last things",
+   "palette": "greys, bone-white, faded charcoal, a single quiet ember",
+   "materials": "ash, grave-stone, worn iron, chalk",
+   "light": "low, level, the grey light of a still morning",
+   "mood": "the mercy of stopping — solemn, tender, kept"
+  },
+  "marcher": {
+   "name": "The Marchers",
+   "craft": "The Edge",
+   "axis": "violence_peace",
+   "pole": "violence",
+   "canonAesthetic": "honed steel, the line that holds, scars worn as record",
+   "palette": "steel-grey, blood-rust, weathered leather",
+   "materials": "honed blades, scarred armor, the held line",
+   "light": "hard edge-light, a blade catching the sun",
+   "mood": "disciplined, scarred, holding"
+  },
+  "stillhold": {
+   "name": "The Stillhold",
+   "craft": "Stillcraft",
+   "axis": "violence_peace",
+   "pole": "peace",
+   "canonAesthetic": "white walls, unbroken quiet, a peace that has forgotten why it was needed",
+   "palette": "white-on-white, palest grey, no accent",
+   "materials": "smooth plaster, unbroken walls, empty rooms",
+   "light": "even, sourceless, a quiet that has forgotten its reason",
+   "mood": "unbroken peace, almost eerie in its calm"
+  },
+  "somatic": {
+   "name": "The Somatics",
+   "craft": "Soma",
+   "axis": "body_mind",
+   "pole": "body",
+   "canonAesthetic": "breath and sinew, movement as speech, the body as the only instrument",
+   "palette": "warm skin-tones, sweat-sheen, earth",
+   "materials": "breath, sinew, bare movement, no tools",
+   "light": "warm side-light modelling muscle and motion",
+   "mood": "the body as the only instrument — kinetic, present"
+  },
+  "cogitant": {
+   "name": "The Cogitants",
+   "craft": "Noesis",
+   "axis": "body_mind",
+   "pole": "mind",
+   "canonAesthetic": "thin bodies, vast interiors, memory-palaces, thought as force",
+   "palette": "cool slate, parchment, ink-blue",
+   "materials": "thin frames, vast implied interiors, memory-palaces",
+   "light": "dim, inward, the glow of thought not sun",
+   "mood": "still body, immense interior — thought as force"
+  },
+  "churnfolk": {
+   "name": "The Churnfolk",
+   "craft": "Wildcraft",
+   "axis": "chaos_order",
+   "pole": "chaos",
+   "canonAesthetic": "improvised everything, luck-riding, nothing twice, joyous mess",
+   "palette": "clashing brights, mismatched everything, dust-gold",
+   "materials": "improvised gear, patched cloth, lucky junk",
+   "light": "loose, sunlit, catch-as-catch-can",
+   "mood": "joyous mess, luck-riding, never twice the same"
+  },
+  "lattice": {
+   "name": "The Lattice-Cities",
+   "craft": "Latticework",
+   "axis": "chaos_order",
+   "pole": "order",
+   "canonAesthetic": "arcologies, perfect prediction, the binding of possibility, no accident permitted",
+   "palette": "cold white, glass-blue, precise grid-lines",
+   "materials": "arcology glass, seamless alloy, no accident",
+   "light": "flat perfect illumination, no unplanned shadow",
+   "mood": "total prediction, the binding of possibility"
+  },
+  "enginewright": {
+   "name": "The Enginewrights",
+   "craft": "Enginecraft",
+   "axis": "mechanical_spiritual",
+   "pole": "mechanical",
+   "canonAesthetic": "gear-teeth and pressure, systems all the way down, the Precursor arts at their most technical",
+   "palette": "oil-dark, brass, pressure-gauge red",
+   "materials": "gear-teeth, pistons, Precursor mechanisms",
+   "light": "forge-glow and gauge-light, systems all the way down",
+   "mood": "technical, dense, mechanical to the core"
+  },
+  "numinous": {
+   "name": "The Numinous",
+   "craft": "Numenwork",
+   "axis": "mechanical_spiritual",
+   "pole": "spiritual",
+   "canonAesthetic": "thinning veils, meaning without matter, the mystic disciplines the Valley only rumors",
+   "palette": "pale gold, veil-white, thinning-air blue",
+   "materials": "almost nothing — meaning without matter, thinning veils",
+   "light": "a light with no source, the mystic rumor",
+   "mood": "immaterial, half-there, reverent"
+  },
+  "threnodist": {
+   "name": "The Threnodists",
+   "craft": "Pathos",
+   "axis": "emotional_logical",
+   "pole": "emotional",
+   "canonAesthetic": "tidal, expressive, public weeping and public joy, architecture shaped for feeling",
+   "palette": "tidal blues and reds, tear-bright",
+   "materials": "flowing cloth, water, architecture shaped for feeling",
+   "light": "dramatic, swelling, emotion made visible",
+   "mood": "public weeping and public joy — tidal, expressive"
+  },
+  "syllogist": {
+   "name": "The Syllogists",
+   "craft": "Logos",
+   "axis": "emotional_logical",
+   "pole": "logical",
+   "canonAesthetic": "clean lines, argument as architecture, the cold pleasure of a proof",
+   "palette": "clean white, single ink-black line, cold blue",
+   "materials": "argument-as-architecture, clean geometry",
+   "light": "even and clear, the cold pleasure of a proof",
+   "mood": "precise, bloodless, satisfying"
+  },
+  "veilwright": {
+   "name": "The Veilwrights",
+   "craft": "Falsecraft",
+   "axis": "falsehood_truth",
+   "pole": "falsehood",
+   "canonAesthetic": "mirrors and masks, nothing quite where it appears, hospitality you cannot trust",
+   "palette": "mirror-silver, shifting hues, nothing fixed",
+   "materials": "mirrors, masks, surfaces that aren't where they seem",
+   "light": "reflected and doubled — you can't trust the source",
+   "mood": "beautiful, untrustworthy, nothing quite where it appears"
+  },
+  "verist": {
+   "name": "The Verists",
+   "craft": "Verity",
+   "axis": "falsehood_truth",
+   "pole": "truth",
+   "canonAesthetic": "unadorned stone, no ornament, a truth that does not care whether you can bear it",
+   "palette": "raw stone-grey, no ornament, honest brown",
+   "materials": "unadorned stone, plain wood, nothing decorative",
+   "light": "flat honest daylight, no flattering angle",
+   "mood": "a truth that doesn't care whether you can bear it"
+  },
+  "abyssal": {
+   "name": "The Abyssal Choir",
+   "craft": "Descent",
+   "axis": "demonic_angelic",
+   "pole": "demonic",
+   "canonAesthetic": "horned architecture, bargains, an honesty about appetite the pious lack",
+   "palette": "deep red, char-black, ember-orange",
+   "materials": "horned architecture, bargain-marks, appetite made stone",
+   "light": "low red glow from below, honest about hunger",
+   "mood": "frank appetite, bargains, an honesty the pious lack"
+  },
+  "seraphic": {
+   "name": "The Seraphic Orders",
+   "craft": "Ascent",
+   "axis": "demonic_angelic",
+   "pole": "angelic",
+   "canonAesthetic": "tiered spires, unbearable choral certainty, mercy administered from above",
+   "palette": "gold, white, tier-on-tier brightness",
+   "materials": "tiered spires, choral height, mercy-from-above",
+   "light": "radiant from above, unbearable choral certainty",
+   "mood": "administered mercy, height, certainty"
+  },
+  "mason": {
+   "name": "The Masons of the Given",
+   "craft": "Thingcraft",
+   "axis": "concrete_abstract",
+   "pole": "concrete",
+   "canonAesthetic": "stone, weight, ledgers, a deep suspicion of anything that cannot be weighed",
+   "palette": "grey stone, ledger-brown, weighted earth",
+   "materials": "cut stone, weight, ledgers, the measured and provable",
+   "light": "solid daylight on heavy things",
+   "mood": "suspicious of anything unweighable — grounded, dense"
+  },
+  "figurist": {
+   "name": "The Figurists",
+   "craft": "Formcraft",
+   "axis": "concrete_abstract",
+   "pole": "abstract",
+   "canonAesthetic": "impossible geometry, buildings that are arguments, a place that resists being mapped",
+   "palette": "impossible color-shifts, non-Euclidean tint",
+   "materials": "impossible geometry, buildings that are arguments",
+   "light": "light that bends wrong, a place resisting the map",
+   "mood": "abstract, disorienting, unmappable"
+  },
+  "horizon": {
+   "name": "The Horizon-Walkers",
+   "craft": "Spanwork",
+   "axis": "space_time",
+   "pole": "space",
+   "canonAesthetic": "tents and roads, distance as home, a people with no fixed anything",
+   "palette": "road-dust, open-sky blue, tent-canvas",
+   "materials": "tents, roads, distance itself as home",
+   "light": "wide horizon light, always-moving",
+   "mood": "no fixed anything — distance as home"
+  },
+  "hourkeeper": {
+   "name": "The Hourkeepers",
+   "craft": "Hourcraft",
+   "axis": "space_time",
+   "pole": "time",
+   "canonAesthetic": "clock-towers, archives that run forward, an unbearable patience",
+   "palette": "aged brass, archive-sepia, clock-face cream",
+   "materials": "clock-towers, forward-running archives, gears of time",
+   "light": "the patient light of a long-kept room",
+   "mood": "unbearable patience, time held and counted"
+  },
+  "unmaker": {
+   "name": "The Unmakers",
+   "craft": "Ruinwork",
+   "axis": "destruction_creation",
+   "pole": "destruction",
+   "canonAesthetic": "controlled ruin, beautiful demolitions, an ethic of clearing",
+   "palette": "dust-grey, controlled-rubble, clean break-line",
+   "materials": "beautiful demolition, ordered ruin, the cleared space",
+   "light": "light entering a thing just opened",
+   "mood": "an ethic of clearing — ruin made beautiful and deliberate"
+  },
+  "wright": {
+   "name": "The Wrights of the New",
+   "craft": "Makecraft",
+   "axis": "destruction_creation",
+   "pole": "creation",
+   "canonAesthetic": "scaffolds forever, half-built cathedrals, the joy and the waste of it",
+   "palette": "scaffold-timber, fresh-cut stone, work-lamp amber",
+   "materials": "scaffolds forever, half-built cathedrals, tools mid-use",
+   "light": "work-light on the unfinished, the joy and waste of it",
+   "mood": "never finished, and that's the point — becoming"
+  }
+ }
+}

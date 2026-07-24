@@ -1,810 +1,881 @@
 {
-  "schemaVersion": 1,
-  "note": "Flavored random-encounter table. On travel / rest / entering a location / world-tick, the engine may roll one encounter, weighted by flavor and gated by the location's dangerLevel + tags. Tonal spectrum, NOT just combat. Routing: narrative = a beat + optional choice; opposed = a single skill check; challenge = staged (encounters engine); duel = combat (encounters engine, ALWAYS avoidable per SNG-002b lethal clamp). Beautiful/beneficial/benign carry the valley's hopeful-strange; the Precursor is glimpsed, never explained. Authored by Aevi (PO). | SNG-064/065 (Aevi 2026-07-11): +43 REGIONAL encounters so each region FEELS like itself — travel through the Underlight must not read like a Valley road. Every region now has its own texture: the Umbrals' courteous dark, the Blazeborn's unbearable honesty, the Rootkin's patience, the Lattice's helpfulness, the Choir naming your want out loud. Kept the hopeful-strange register: even the pole-regions retain beauty and kindness.",
-  "flavors": [
-    "beneficial",
-    "benign",
-    "beautiful",
-    "dangerous",
-    "theft",
-    "chase",
-    "fight"
-  ],
-  "encounters": [
-    {
-      "id": "re_windfall_cache",
-      "flavor": "beneficial",
-      "weight": 3,
-      "minDanger": 0,
-      "regions": [
-        "*"
-      ],
-      "routing": "narrative",
-      "seed": "A small cache the country gave up — a dry hollow, a forgotten pack, a good tool left by someone who didn't come back. Offer the find; let the player take or leave it."
-    },
-    {
-      "id": "re_kind_stranger",
-      "flavor": "beneficial",
-      "weight": 3,
-      "minDanger": 0,
-      "regions": [
-        "*"
-      ],
-      "routing": "narrative",
-      "seed": "A traveler going the other way shares something freely — a warning about the road ahead, a hot meal, a piece of true news. No trick, no price. The valley is not only teeth."
-    },
-    {
-      "id": "re_shortcut_revealed",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "*"
-      ],
-      "routing": "opposed",
-      "seed": "The land offers a faster way — if it can be read. A Wayfinding/Stonewise/Rivercraft check finds the shortcut; success trims travel and reveals something, failure just costs the attempt.",
-      "check": {
-        "anyOf": [
-          "wayfinding",
-          "stonewise",
-          "rivercraft"
-        ],
-        "attribute": "practical",
-        "difficulty": 45
-      }
-    },
-    {
-      "id": "re_passing_flock",
-      "flavor": "benign",
-      "weight": 4,
-      "minDanger": 0,
-      "regions": [
-        "*"
-      ],
-      "routing": "narrative",
-      "seed": "A moment of ordinary life on the road — a shepherd and their flock, children racing a hoop, an old woman naming the weather. Atmosphere and a small human exchange; nothing is at stake, and that is the point."
-    },
-    {
-      "id": "re_weather_turn",
-      "flavor": "benign",
-      "weight": 3,
-      "minDanger": 0,
-      "regions": [
-        "*"
-      ],
-      "routing": "narrative",
-      "seed": "The sky changes its mind — a sudden squall, a fog, a hard clear cold. A choice: push through, shelter, or wait it out, each with a small texture but no danger."
-    },
-    {
-      "id": "re_precursor_light",
-      "flavor": "beautiful",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "*"
-      ],
-      "routing": "narrative",
-      "seed": "Something the old world left, being lovely for no one — light that was never lamplight moving under still water, a buried line briefly waking to hum a chord and going quiet. Wonder, not threat. Glimpsed, never explained.",
-      "loreTier": "precursor-glimpse"
-    },
-    {
-      "id": "re_valley_vista",
-      "flavor": "beautiful",
-      "weight": 3,
-      "minDanger": 0,
-      "regions": [
-        "*"
-      ],
-      "routing": "narrative",
-      "seed": "The country opens and offers itself — a vista, a field of something in bloom, a confluence where two rivers braid. A held breath. Optionally restores a little energy for the pause taken."
-    },
-    {
-      "id": "re_rockfall_hazard",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 2,
-      "regions": [
-        "*"
-      ],
-      "routing": "challenge",
-      "seed": "The land itself turns hazard — a rockslide, a rotten bridge, a flash current. A short challenge to cross safe; partial failure costs health/time, not the whole road.",
-      "stages": 2
-    },
-    {
-      "id": "re_wrong_ground",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 2,
-      "regions": [
-        "*"
-      ],
-      "routing": "narrative",
-      "seed": "A place that is subtly wrong — a stretch where the Precursor lattice runs too close, the compass-sense swims, something watches without eyes. Unnerving and mildly costly; leaving is a choice, not a fight.",
-      "loreTier": "precursor-glimpse"
-    },
-    {
-      "id": "re_cutpurse",
-      "flavor": "theft",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "*"
-      ],
-      "tags": [
-        "settled",
-        "market"
-      ],
-      "routing": "opposed",
-      "seed": "A quick hand goes for a pack, a purse, a visible item. Keen Appraisal/Quiet Step to catch it in time; on failure something is taken and the thief is gone into the crowd (a chase may follow if pursued).",
-      "check": {
-        "anyOf": [
-          "keen_appraisal",
-          "quiet_step"
-        ],
-        "attribute": "mental",
-        "difficulty": 50,
-        "onFail": "loseItemOrValuables"
-      }
-    },
-    {
-      "id": "re_toll_bandits",
-      "flavor": "theft",
-      "weight": 2,
-      "minDanger": 2,
-      "regions": [
-        "*"
-      ],
-      "tags": [
-        "road",
-        "wild"
-      ],
-      "routing": "narrative",
-      "seed": "Someone claims the road and asks a price to pass. It can be paid, talked down (Mediator's Tongue), slipped (Quiet Step), or refused into a fight. Always a way through that isn't blood.",
-      "avoidable": true,
-      "dangerNote": "Erik's ruling 2026-07-19: toll bandits belong on the old switchback. Danger is reduced LOCALLY — by someone clearing them out — never by a universal floor that keeps them out of the road they are named for. The stakes dial governs what a 'safe region' means now."
-    },
-    {
-      "id": "re_pursuit_flee",
-      "flavor": "chase",
-      "weight": 2,
-      "minDanger": 2,
-      "regions": [
-        "*"
-      ],
-      "routing": "challenge",
-      "seed": "Something gives chase — or the player runs one down. A staged chase: terrain reads, bursts of speed, a choice of route each stage; escape or catch, with cost for stumbles.",
-      "stages": 3,
-      "abilities": [
-        "quiet_step",
-        "wayfinding",
-        "drumline_stride"
-      ]
-    },
-    {
-      "id": "re_creature_chase",
-      "flavor": "chase",
-      "weight": 1,
-      "minDanger": 2,
-      "regions": [
-        "*"
-      ],
-      "tags": [
-        "wild"
-      ],
-      "routing": "challenge",
-      "seed": "A wary predator or spooked beast — a chase that Beastfriend can END instead of win, turning pursuit into parley. The peaceful out is always on the table.",
-      "stages": 2,
-      "peacefulOut": "beastfriend",
-      "lethal": false,
-      "lethalNote": "Erik's ruling 2026-07-19: the CHASE is not lethal — its whole design is that Beastfriend can end it and the peaceful out is always on the table. **Unless it turns into a fight.** A pursuit and a duel are different encounters: choosing to stand and fight a predator is choosing a lethal encounter, and wild animals are lethal because they are. That escalation must arrive through lethalOfferClamp (SNG-002b) — OFFERED and marked, never imposed by the chase itself.",
-      "dangerNote": "minDanger 3 -> 2 per Erik's ruling on re_toll_bandits: danger is reduced LOCALLY, never by a universal floor that keeps an encounter out of the country it belongs in."
-    },
-    {
-      "id": "re_raider_duel",
-      "flavor": "fight",
-      "weight": 2,
-      "minDanger": 3,
-      "regions": [
-        "*"
-      ],
-      "tags": [
-        "road",
-        "wild",
-        "zone"
-      ],
-      "routing": "duel",
-      "avoidable": true,
-      "opponent": {
-        "threat": 45,
-        "yieldAt": 0.25
-      },
-      "seed": "A hostile meeting that may come to blows — a raider, a desperate soul, a territorial thing. Offered with a clear decline/flee path (SNG-002b); the fight is a choice, and yielding is honored on both sides."
-    },
-    {
-      "id": "re_zone_hostile",
-      "flavor": "fight",
-      "weight": 1,
-      "minDanger": 4,
-      "regions": [
-        "disputed_zone"
-      ],
-      "tags": [
-        "zone"
-      ],
-      "routing": "duel",
-      "avoidable": true,
-      "opponent": {
-        "threat": 60,
-        "yieldAt": 0.2
-      },
-      "seed": "In the Disputed Zone the ground itself is contested — a harder hostile encounter, still avoidable, still yield-able. Lethal only if telegraphed and entered by choice."
-    },
-    {
-      "id": "re_center_opposites",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_center"
-      ],
-      "routing": "narrative",
-      "seed": "Two people from antipodal Reaches sharing a table — genuinely, awkwardly, without violence. In any other place on the world this would be a story. Here it is Tuesday, and that is the whole miracle of the Crossing. Let the player notice it or not."
-    },
-    {
-      "id": "re_center_champion",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_center"
-      ],
-      "routing": "narrative",
-      "seed": "A Coliseum champion, off-duty, unrecognized, being extremely ordinary — buying bread, arguing about the price. If the player is decent to them, they say something about their craft that is worth more than a purse."
-    },
-    {
-      "id": "re_center_bookmaker",
-      "flavor": "theft",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "the_center"
-      ],
-      "routing": "narrative",
-      "seed": "A bookmaker with odds on everything, including the player. The odds are unflattering and suspiciously specific. Somebody has been watching them.",
-      "tags": [
-        "market",
-        "social"
-      ]
-    },
-    {
-      "id": "re_center_recruiter",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_center"
-      ],
-      "routing": "narrative",
-      "seed": "A recruiter for one of the twenty-four, working the crowd, offering a place among their people. They are not lying and they are not disinterested. The offer is real and it has a price the player will not see until later.",
-      "tags": [
-        "social"
-      ]
-    },
-    {
-      "id": "re_umbral_courtesy",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "umbral_depths"
-      ],
-      "routing": "narrative",
-      "seed": "An Umbral steadies the player in the dark without being asked and without comment, and is faintly, courteously amused by the groping. Being helped by someone who can see you and whom you cannot see is its own particular feeling."
-    },
-    {
-      "id": "re_umbral_harbored",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "umbral_depths"
-      ],
-      "routing": "narrative",
-      "seed": "Someone harbored down here — a heretic, a refugee, a person the light condemned — who has no reason to trust the player and tells them something true anyway. The Harborward does not ask questions. Neither, it turns out, does its guest.",
-      "tags": [
-        "dark",
-        "refuge"
-      ]
-    },
-    {
-      "id": "re_umbral_lamp",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 2,
-      "regions": [
-        "umbral_depths"
-      ],
-      "routing": "narrative",
-      "seed": "Somebody has brought a lamp into the deep city. The Umbrals have not said anything. The silence is getting worse, and the player is standing in the light.",
-      "tags": [
-        "dark"
-      ]
-    },
-    {
-      "id": "re_unlit_whisper",
-      "flavor": "dangerous",
-      "weight": 1,
-      "minDanger": 3,
-      "regions": [
-        "umbral_depths"
-      ],
-      "routing": "narrative",
-      "seed": "Something from the Unlit Deep is talking, gently and reasonably, and it wants the player to put out just one light — a small one, one that will not be missed. It is right that it will not be missed. That is why it is asking.",
-      "tags": [
-        "dark",
-        "cult"
-      ]
-    },
-    {
-      "id": "re_blaze_honesty",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "radiant_wastes"
-      ],
-      "routing": "narrative",
-      "seed": "A Blazeborn tells the player something completely true about themselves within a minute of meeting, without malice, and is bewildered by the reaction. They were being friendly."
-    },
-    {
-      "id": "re_blaze_creep",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 2,
-      "regions": [
-        "radiant_wastes"
-      ],
-      "routing": "narrative",
-      "seed": "The Blaze has moved. Not far — a field's width since last season — but the ground here is glass now, and it was not, and someone's house is under it.",
-      "tags": [
-        "light"
-      ]
-    },
-    {
-      "id": "re_glass_vista",
-      "flavor": "beautiful",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "radiant_wastes"
-      ],
-      "routing": "narrative",
-      "seed": "The glass plain at dusk, and the light going through it sideways, and the whole ruined country lit from underneath like something holy. It cost a civilization to make this view. It is still one of the most beautiful things in the world."
-    },
-    {
-      "id": "re_rootkin_patience",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_quickwood"
-      ],
-      "routing": "narrative",
-      "seed": "A Rootkin answers a question the player asked twenty minutes ago, having thought about it properly, and is puzzled that this is remarkable."
-    },
-    {
-      "id": "re_grown_door",
-      "flavor": "beautiful",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_quickwood"
-      ],
-      "routing": "narrative",
-      "seed": "A door of living wood that knows the player now — third visit — and opens before they touch it. Nobody mentions it. It is simply how doors work here, once you have been enough times to matter."
-    },
-    {
-      "id": "re_orchard_stone",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_quickwood"
-      ],
-      "routing": "narrative",
-      "seed": "Someone in the Slow Orchard is planting a tree for a person not yet born, and will not see it fruit, and invites the player to help dig. It takes an hour. It is the most restful hour the player will have all season."
-    },
-    {
-      "id": "re_hollowing_edge",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 2,
-      "regions": [
-        "the_quickwood"
-      ],
-      "routing": "narrative",
-      "seed": "An Ashwarden at the Greenward, unhurried and kind, tells the player something is ending nearby that should not be ending yet — and asks, politely, whether the player intends to do anything about it.",
-      "tags": [
-        "border",
-        "death"
-      ]
-    },
-    {
-      "id": "re_marcher_measure",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "riven_marches"
-      ],
-      "routing": "narrative",
-      "seed": "A Marcher takes the player's measure in one long look and says a single sentence about how they would die. It is not a threat. It is a professional courtesy and it is accurate."
-    },
-    {
-      "id": "re_held_line",
-      "flavor": "beautiful",
-      "weight": 1,
-      "minDanger": 2,
-      "regions": [
-        "riven_marches"
-      ],
-      "routing": "narrative",
-      "seed": "A line of Marchers holding a breach against a rout — badly outnumbered, entirely unmoving — and the fighting bending around them. The player is not part of this. They are simply seeing what the best can do."
-    },
-    {
-      "id": "re_stillhold_quiet",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "riven_marches"
-      ],
-      "routing": "narrative",
-      "seed": "Inside the Stillhold's walls the player realizes they have not heard a raised voice in a day, and that this is the most unsettling thing that has happened to them all week.",
-      "tags": [
-        "peace"
-      ]
-    },
-    {
-      "id": "re_lattice_schedule",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_lattice_cities"
-      ],
-      "routing": "narrative",
-      "seed": "The player's day has been scheduled for them. Helpfully. Correctly. Better than they would have scheduled it. Nobody asked."
-    },
-    {
-      "id": "re_lattice_deviation",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "the_lattice_cities"
-      ],
-      "routing": "narrative",
-      "seed": "Someone has deviated from their schedule by four minutes and is being gently, thoroughly helped back onto it by people who love them."
-    },
-    {
-      "id": "re_wright_repair",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_gearlands"
-      ],
-      "routing": "narrative",
-      "seed": "An Enginewright repairs something of the player's, unasked, better than it was — and is genuinely hurt if the player objects. This is how affection is expressed here."
-    },
-    {
-      "id": "re_engine_noise",
-      "flavor": "dangerous",
-      "weight": 1,
-      "minDanger": 3,
-      "regions": [
-        "the_gearlands"
-      ],
-      "routing": "narrative",
-      "seed": "The Great Engine's noise gets into the teeth first and the thinking second. The player catches themselves, an hour later, having had a thought that was not entirely theirs.",
-      "tags": [
-        "mechanical"
-      ]
-    },
-    {
-      "id": "re_thin_moment",
-      "flavor": "beautiful",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_numinous_reach"
-      ],
-      "routing": "narrative",
-      "seed": "The veil goes thin for a moment, without warning, and the player sees something they will not be able to describe and will not stop trying to."
-    },
-    {
-      "id": "re_numen_pull",
-      "flavor": "dangerous",
-      "weight": 1,
-      "minDanger": 3,
-      "regions": [
-        "the_numinous_reach"
-      ],
-      "routing": "narrative",
-      "seed": "The pull to dissolve is real, and gentle, and the player will feel it, and it is not malicious — it is simply true that it would be easier.",
-      "tags": [
-        "spiritual",
-        "cult"
-      ]
-    },
-    {
-      "id": "re_public_grief",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_feeling_coast"
-      ],
-      "routing": "narrative",
-      "seed": "A public grieving in full flood, in a hall built to amplify it, and strangers sitting with a stranger's worst thing. The player is invited to sit. It is free. It has never turned anyone away."
-    },
-    {
-      "id": "re_named_feeling",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_feeling_coast"
-      ],
-      "routing": "narrative",
-      "seed": "A Threnodist asks the player what they are actually feeling and does not accept 'fine' — and keeps not accepting it, kindly, until something true comes out."
-    },
-    {
-      "id": "re_gentle_disproof",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_reasoned_hold"
-      ],
-      "routing": "narrative",
-      "seed": "A Syllogist disproves, gently and completely, something the player has believed their whole life — and then, seeing their face, abandons their own position the moment the player finds a hole in it. Both of these are the same virtue."
-    },
-    {
-      "id": "re_kind_host",
-      "flavor": "theft",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "the_veiled_reach"
-      ],
-      "routing": "narrative",
-      "seed": "A host of impeccable warmth who has told the player nine untrue things and one true one, and the true one is the dangerous one.",
-      "tags": [
-        "social"
-      ]
-    },
-    {
-      "id": "re_told_stone",
-      "flavor": "beautiful",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_stark_reach"
-      ],
-      "routing": "narrative",
-      "seed": "A field of plain stones, each carrying one true sentence somebody could not say in life. Anyone may add one. The player may add one. Nobody may ever remove it."
-    },
-    {
-      "id": "re_verist_look",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "the_stark_reach"
-      ],
-      "routing": "narrative",
-      "seed": "A Verist looks at the player and says the exact true thing about them that nobody has ever said. They are not cruel. They will not apologize. Years from now the player may be grateful.",
-      "tags": [
-        "social"
-      ]
-    },
-    {
-      "id": "re_named_want",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "the_descent"
-      ],
-      "routing": "narrative",
-      "seed": "Somebody from the Choir names, out loud and in public, what the player actually wants — the one under the one they would admit to. They are correct. It is the worst thing anyone has done to the player this year and it is not, technically, an attack.",
-      "tags": [
-        "social"
-      ]
-    },
-    {
-      "id": "re_fair_bargain",
-      "flavor": "theft",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "the_descent"
-      ],
-      "routing": "narrative",
-      "seed": "A bargain is offered that is exactly, perfectly fair — and the player wants it very badly, and the price is exactly what it is worth, and nobody is going to stop them.",
-      "tags": [
-        "social"
-      ]
-    },
-    {
-      "id": "re_mercy_borne",
-      "flavor": "beautiful",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_ascent"
-      ],
-      "routing": "narrative",
-      "seed": "A mercy-bearer sets down someone's twenty-year weight, and takes it up themselves, and walks away carrying it, and does not appear to think this is remarkable."
-    },
-    {
-      "id": "re_weighed",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "the_ascent"
-      ],
-      "routing": "narrative",
-      "seed": "A Seraph weighs the player without asking. The judgment is not spoken. It is simply made, and the player can feel it land.",
-      "tags": [
-        "social"
-      ]
-    },
-    {
-      "id": "re_weighed_true",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_given_land"
-      ],
-      "routing": "narrative",
-      "seed": "A Mason puts a hand on something of the player's and tells them exactly what it is, what it is worth, and where it will fail. They are right about all three."
-    },
-    {
-      "id": "re_walking_argument",
-      "flavor": "beautiful",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_pattern_reach"
-      ],
-      "routing": "narrative",
-      "seed": "A building that is an argument, and walking through it the player finds themselves agreeing, and cannot afterward reconstruct why."
-    },
-    {
-      "id": "re_walker_offer",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_open_reach"
-      ],
-      "routing": "narrative",
-      "seed": "A Horizon-Walker offers to take the player anywhere, and means it, and will not stay when they get there."
-    },
-    {
-      "id": "re_pre_remembered",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 1,
-      "regions": [
-        "the_kept_reach"
-      ],
-      "routing": "narrative",
-      "seed": "An Hourkeeper looks at the player with an expression of terrible sympathy and says nothing at all. They have pre-remembered something. They will not say what. They cannot stop knowing it."
-    },
-    {
-      "id": "re_good_ending",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_unmade"
-      ],
-      "routing": "narrative",
-      "seed": "An Unmaker is ending something beloved, correctly and well, and the people who loved it are watching and cannot argue because the Unmaker is right."
-    },
-    {
-      "id": "re_unfinished_glory",
-      "flavor": "beautiful",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_making"
-      ],
-      "routing": "narrative",
-      "seed": "The Half-Cathedral in its two-hundredth year and its fourth design, scaffolded to the sky, and it will never be finished, and that is what it is for."
-    },
-    {
-      "id": "re_helpful_wright",
-      "flavor": "benign",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "the_making"
-      ],
-      "routing": "narrative",
-      "seed": "A Wright improves something of the player's that the player did not want improved, cannot un-improve, and now has to live with. It IS better. That is not the point."
-    },
-    {
-      "id": "re_churn_road",
-      "flavor": "dangerous",
-      "weight": 2,
-      "minDanger": 2,
-      "regions": [
-        "unspooling"
-      ],
-      "routing": "narrative",
-      "seed": "The road was here yesterday. The Churnfolk think this is fine and interesting and are cheerfully unhelpful about where it went.",
-      "tags": [
-        "chaos"
-      ]
-    },
-    {
-      "id": "re_churn_luck",
-      "flavor": "beneficial",
-      "weight": 2,
-      "minDanger": 0,
-      "regions": [
-        "unspooling"
-      ],
-      "routing": "narrative",
-      "seed": "Something absurdly, improbably lucky happens, and a Churnfolk nearby nods as if this were the expected outcome, which — here — it was."
-    }
-  ],
-  "triggerRules": {
-    "onNarrativeTime": {
-      "ratePerHour": 0.14,
-      "maxChance": 0.6,
-      "minHoursPerBeat": 1,
-      "cooldown": 1,
-      "note": "SNG-127 — the MAIN path in normal narrative play (no travel/rest button click): time passing turns things up. minHoursPerBeat is what an UNDECLARED beat is worth (the GM usually omits timeOps for a normal beat, yet the clock still ticks +1h = ADVANCE.beat) — this stops the whole path from silently seeing 0h and never firing. A GM-DECLARED short beat (a 20-min exchange) still uses its real hours and stays quiet. cooldown = quiet beats required between narrative encounters (also a pacing default). Tune here, not in code."
-    },
-    "onTravel": {
-      "chance": 0.45,
-      "note": "per travel leg; weight by destination dangerLevel"
-    },
-    "onRest": {
-      "chance": 0.2,
-      "note": "wilderness rests only; a hearth/settled rest is safer"
-    },
-    "onEnterLocation": {
-      "chance": 0.2
-    },
-    "pacingModes": {
-      "note": "SNG-127 — player-selectable liveliness (profile.pacing). Each is a multiplier on every roll rate + a cooldown override. Default balanced; a new/family player may start on eventful.",
-      "calm": {
-        "mult": 0.5,
-        "cooldown": 3
-      },
-      "balanced": {
-        "mult": 1,
-        "cooldown": 1
-      },
-      "eventful": {
-        "mult": 1.6,
-        "cooldown": 1
-      },
-      "relentless": {
-        "mult": 2.4,
-        "cooldown": 0
-      }
-    },
-    "flavorWeightByDanger": "low-danger locations skew beneficial/benign/beautiful; high-danger skew dangerous/theft/chase/fight — but every location retains a chance of beauty and kindness. The valley is hopeful-strange, not grim.",
-    "lethalRule": "any fight/dangerous encounter that could incapacitate MUST present a decline/flee path before engagement (SNG-002b). No ambush-lethality."
+ "schemaVersion": 1,
+ "note": "Flavored random-encounter table. On travel / rest / entering a location / world-tick, the engine may roll one encounter, weighted by flavor and gated by the location's dangerLevel + tags. Tonal spectrum, NOT just combat. Routing: narrative = a beat + optional choice; opposed = a single skill check; challenge = staged (encounters engine); duel = combat (encounters engine, ALWAYS avoidable per SNG-002b lethal clamp). Beautiful/beneficial/benign carry the valley's hopeful-strange; the Precursor is glimpsed, never explained. Authored by Aevi (PO). | SNG-064/065 (Aevi 2026-07-11): +43 REGIONAL encounters so each region FEELS like itself — travel through the Underlight must not read like a Valley road. Every region now has its own texture: the Umbrals' courteous dark, the Blazeborn's unbearable honesty, the Rootkin's patience, the Lattice's helpfulness, the Choir naming your want out loud. Kept the hopeful-strange register: even the pole-regions retain beauty and kindness.",
+ "flavors": [
+  "beneficial",
+  "benign",
+  "beautiful",
+  "dangerous",
+  "theft",
+  "chase",
+  "fight"
+ ],
+ "encounters": [
+  {
+   "id": "re_windfall_cache",
+   "flavor": "beneficial",
+   "weight": 3,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "narrative",
+   "seed": "A small cache the country gave up — a dry hollow, a forgotten pack, a good tool left by someone who didn't come back. Offer the find; let the player take or leave it."
+  },
+  {
+   "id": "re_kind_stranger",
+   "flavor": "beneficial",
+   "weight": 3,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "narrative",
+   "seed": "A traveler going the other way shares something freely — a warning about the road ahead, a hot meal, a piece of true news. No trick, no price. The valley is not only teeth."
+  },
+  {
+   "id": "re_shortcut_revealed",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "opposed",
+   "seed": "The land offers a faster way — if it can be read. A Wayfinding/Stonewise/Rivercraft check finds the shortcut; success trims travel and reveals something, failure just costs the attempt.",
+   "check": {
+    "anyOf": [
+     "wayfinding",
+     "stonewise",
+     "rivercraft"
+    ],
+    "attribute": "practical",
+    "difficulty": 45
+   }
+  },
+  {
+   "id": "re_passing_flock",
+   "flavor": "benign",
+   "weight": 4,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "narrative",
+   "seed": "A moment of ordinary life on the road — a shepherd and their flock, children racing a hoop, an old woman naming the weather. Atmosphere and a small human exchange; nothing is at stake, and that is the point."
+  },
+  {
+   "id": "re_weather_turn",
+   "flavor": "benign",
+   "weight": 3,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "narrative",
+   "seed": "The sky changes its mind — a sudden squall, a fog, a hard clear cold. A choice: push through, shelter, or wait it out, each with a small texture but no danger."
+  },
+  {
+   "id": "re_precursor_light",
+   "flavor": "beautiful",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "narrative",
+   "seed": "Something the old world left, being lovely for no one — light that was never lamplight moving under still water, a buried line briefly waking to hum a chord and going quiet. Wonder, not threat. Glimpsed, never explained.",
+   "loreTier": "precursor-glimpse"
+  },
+  {
+   "id": "re_valley_vista",
+   "flavor": "beautiful",
+   "weight": 3,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "narrative",
+   "seed": "The country opens and offers itself — a vista, a field of something in bloom, a confluence where two rivers braid. A held breath. Optionally restores a little energy for the pause taken."
+  },
+  {
+   "id": "re_rockfall_hazard",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 2,
+   "regions": [
+    "*"
+   ],
+   "routing": "challenge",
+   "seed": "The land itself turns hazard — a rockslide, a rotten bridge, a flash current. A short challenge to cross safe; partial failure costs health/time, not the whole road.",
+   "stages": 2
+  },
+  {
+   "id": "re_wrong_ground",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 2,
+   "regions": [
+    "*"
+   ],
+   "routing": "narrative",
+   "seed": "A place that is subtly wrong — a stretch where the Precursor lattice runs too close, the compass-sense swims, something watches without eyes. Unnerving and mildly costly; leaving is a choice, not a fight.",
+   "loreTier": "precursor-glimpse"
+  },
+  {
+   "id": "re_cutpurse",
+   "flavor": "theft",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "*"
+   ],
+   "tags": [
+    "settled",
+    "market"
+   ],
+   "routing": "opposed",
+   "seed": "A quick hand goes for a pack, a purse, a visible item. Keen Appraisal/Quiet Step to catch it in time; on failure something is taken and the thief is gone into the crowd (a chase may follow if pursued).",
+   "check": {
+    "anyOf": [
+     "keen_appraisal",
+     "quiet_step"
+    ],
+    "attribute": "mental",
+    "difficulty": 50,
+    "onFail": "loseItemOrValuables"
+   }
+  },
+  {
+   "id": "re_toll_bandits",
+   "flavor": "theft",
+   "weight": 2,
+   "minDanger": 2,
+   "regions": [
+    "*"
+   ],
+   "tags": [
+    "road",
+    "wild"
+   ],
+   "routing": "narrative",
+   "seed": "Someone claims the road and asks a price to pass. It can be paid, talked down (Mediator's Tongue), slipped (Quiet Step), or refused into a fight. Always a way through that isn't blood.",
+   "avoidable": true,
+   "dangerNote": "Erik's ruling 2026-07-19: toll bandits belong on the old switchback. Danger is reduced LOCALLY — by someone clearing them out — never by a universal floor that keeps them out of the road they are named for. The stakes dial governs what a 'safe region' means now."
+  },
+  {
+   "id": "re_pursuit_flee",
+   "flavor": "chase",
+   "weight": 2,
+   "minDanger": 2,
+   "regions": [
+    "*"
+   ],
+   "routing": "challenge",
+   "seed": "Something gives chase — or the player runs one down. A staged chase: terrain reads, bursts of speed, a choice of route each stage; escape or catch, with cost for stumbles.",
+   "stages": 3,
+   "abilities": [
+    "quiet_step",
+    "wayfinding",
+    "drumline_stride"
+   ]
+  },
+  {
+   "id": "re_creature_chase",
+   "flavor": "chase",
+   "weight": 1,
+   "minDanger": 2,
+   "regions": [
+    "*"
+   ],
+   "tags": [
+    "wild"
+   ],
+   "routing": "challenge",
+   "seed": "A wary predator or spooked beast — a chase that Beastfriend can END instead of win, turning pursuit into parley. The peaceful out is always on the table.",
+   "stages": 2,
+   "peacefulOut": "beastfriend",
+   "lethal": false,
+   "lethalNote": "Erik's ruling 2026-07-19: the CHASE is not lethal — its whole design is that Beastfriend can end it and the peaceful out is always on the table. **Unless it turns into a fight.** A pursuit and a duel are different encounters: choosing to stand and fight a predator is choosing a lethal encounter, and wild animals are lethal because they are. That escalation must arrive through lethalOfferClamp (SNG-002b) — OFFERED and marked, never imposed by the chase itself.",
+   "dangerNote": "minDanger 3 -> 2 per Erik's ruling on re_toll_bandits: danger is reduced LOCALLY, never by a universal floor that keeps an encounter out of the country it belongs in."
+  },
+  {
+   "id": "re_raider_duel",
+   "flavor": "fight",
+   "weight": 2,
+   "minDanger": 3,
+   "regions": [
+    "*"
+   ],
+   "tags": [
+    "road",
+    "wild",
+    "zone"
+   ],
+   "routing": "duel",
+   "avoidable": true,
+   "opponent": {
+    "threat": 45,
+    "yieldAt": 0.25
+   },
+   "seed": "A hostile meeting that may come to blows — a raider, a desperate soul, a territorial thing. Offered with a clear decline/flee path (SNG-002b); the fight is a choice, and yielding is honored on both sides."
+  },
+  {
+   "id": "re_zone_hostile",
+   "flavor": "fight",
+   "weight": 1,
+   "minDanger": 4,
+   "regions": [
+    "disputed_zone"
+   ],
+   "tags": [
+    "zone"
+   ],
+   "routing": "duel",
+   "avoidable": true,
+   "opponent": {
+    "threat": 60,
+    "yieldAt": 0.2
+   },
+   "seed": "In the Disputed Zone the ground itself is contested — a harder hostile encounter, still avoidable, still yield-able. Lethal only if telegraphed and entered by choice."
+  },
+  {
+   "id": "re_center_opposites",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_center"
+   ],
+   "routing": "narrative",
+   "seed": "Two people from antipodal Reaches sharing a table — genuinely, awkwardly, without violence. In any other place on the world this would be a story. Here it is Tuesday, and that is the whole miracle of the Crossing. Let the player notice it or not."
+  },
+  {
+   "id": "re_center_champion",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_center"
+   ],
+   "routing": "narrative",
+   "seed": "A Coliseum champion, off-duty, unrecognized, being extremely ordinary — buying bread, arguing about the price. If the player is decent to them, they say something about their craft that is worth more than a purse."
+  },
+  {
+   "id": "re_center_bookmaker",
+   "flavor": "theft",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "the_center"
+   ],
+   "routing": "narrative",
+   "seed": "A bookmaker with odds on everything, including the player. The odds are unflattering and suspiciously specific. Somebody has been watching them.",
+   "tags": [
+    "market",
+    "social"
+   ]
+  },
+  {
+   "id": "re_center_recruiter",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_center"
+   ],
+   "routing": "narrative",
+   "seed": "A recruiter for one of the twenty-four, working the crowd, offering a place among their people. They are not lying and they are not disinterested. The offer is real and it has a price the player will not see until later.",
+   "tags": [
+    "social"
+   ]
+  },
+  {
+   "id": "re_umbral_courtesy",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "umbral_depths"
+   ],
+   "routing": "narrative",
+   "seed": "An Umbral steadies the player in the dark without being asked and without comment, and is faintly, courteously amused by the groping. Being helped by someone who can see you and whom you cannot see is its own particular feeling."
+  },
+  {
+   "id": "re_umbral_harbored",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "umbral_depths"
+   ],
+   "routing": "narrative",
+   "seed": "Someone harbored down here — a heretic, a refugee, a person the light condemned — who has no reason to trust the player and tells them something true anyway. The Harborward does not ask questions. Neither, it turns out, does its guest.",
+   "tags": [
+    "dark",
+    "refuge"
+   ]
+  },
+  {
+   "id": "re_umbral_lamp",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 2,
+   "regions": [
+    "umbral_depths"
+   ],
+   "routing": "narrative",
+   "seed": "Somebody has brought a lamp into the deep city. The Umbrals have not said anything. The silence is getting worse, and the player is standing in the light.",
+   "tags": [
+    "dark"
+   ]
+  },
+  {
+   "id": "re_unlit_whisper",
+   "flavor": "dangerous",
+   "weight": 1,
+   "minDanger": 3,
+   "regions": [
+    "umbral_depths"
+   ],
+   "routing": "narrative",
+   "seed": "Something from the Unlit Deep is talking, gently and reasonably, and it wants the player to put out just one light — a small one, one that will not be missed. It is right that it will not be missed. That is why it is asking.",
+   "tags": [
+    "dark",
+    "cult"
+   ]
+  },
+  {
+   "id": "re_blaze_honesty",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "radiant_wastes"
+   ],
+   "routing": "narrative",
+   "seed": "A Blazeborn tells the player something completely true about themselves within a minute of meeting, without malice, and is bewildered by the reaction. They were being friendly."
+  },
+  {
+   "id": "re_blaze_creep",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 2,
+   "regions": [
+    "radiant_wastes"
+   ],
+   "routing": "narrative",
+   "seed": "The Blaze has moved. Not far — a field's width since last season — but the ground here is glass now, and it was not, and someone's house is under it.",
+   "tags": [
+    "light"
+   ]
+  },
+  {
+   "id": "re_glass_vista",
+   "flavor": "beautiful",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "radiant_wastes"
+   ],
+   "routing": "narrative",
+   "seed": "The glass plain at dusk, and the light going through it sideways, and the whole ruined country lit from underneath like something holy. It cost a civilization to make this view. It is still one of the most beautiful things in the world."
+  },
+  {
+   "id": "re_rootkin_patience",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_quickwood"
+   ],
+   "routing": "narrative",
+   "seed": "A Rootkin answers a question the player asked twenty minutes ago, having thought about it properly, and is puzzled that this is remarkable."
+  },
+  {
+   "id": "re_grown_door",
+   "flavor": "beautiful",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_quickwood"
+   ],
+   "routing": "narrative",
+   "seed": "A door of living wood that knows the player now — third visit — and opens before they touch it. Nobody mentions it. It is simply how doors work here, once you have been enough times to matter."
+  },
+  {
+   "id": "re_orchard_stone",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_quickwood"
+   ],
+   "routing": "narrative",
+   "seed": "Someone in the Slow Orchard is planting a tree for a person not yet born, and will not see it fruit, and invites the player to help dig. It takes an hour. It is the most restful hour the player will have all season."
+  },
+  {
+   "id": "re_hollowing_edge",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 2,
+   "regions": [
+    "the_quickwood"
+   ],
+   "routing": "narrative",
+   "seed": "An Ashwarden at the Greenward, unhurried and kind, tells the player something is ending nearby that should not be ending yet — and asks, politely, whether the player intends to do anything about it.",
+   "tags": [
+    "border",
+    "death"
+   ]
+  },
+  {
+   "id": "re_marcher_measure",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "riven_marches"
+   ],
+   "routing": "narrative",
+   "seed": "A Marcher takes the player's measure in one long look and says a single sentence about how they would die. It is not a threat. It is a professional courtesy and it is accurate."
+  },
+  {
+   "id": "re_held_line",
+   "flavor": "beautiful",
+   "weight": 1,
+   "minDanger": 2,
+   "regions": [
+    "riven_marches"
+   ],
+   "routing": "narrative",
+   "seed": "A line of Marchers holding a breach against a rout — badly outnumbered, entirely unmoving — and the fighting bending around them. The player is not part of this. They are simply seeing what the best can do."
+  },
+  {
+   "id": "re_stillhold_quiet",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "riven_marches"
+   ],
+   "routing": "narrative",
+   "seed": "Inside the Stillhold's walls the player realizes they have not heard a raised voice in a day, and that this is the most unsettling thing that has happened to them all week.",
+   "tags": [
+    "peace"
+   ]
+  },
+  {
+   "id": "re_lattice_schedule",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_lattice_cities"
+   ],
+   "routing": "narrative",
+   "seed": "The player's day has been scheduled for them. Helpfully. Correctly. Better than they would have scheduled it. Nobody asked."
+  },
+  {
+   "id": "re_lattice_deviation",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "the_lattice_cities"
+   ],
+   "routing": "narrative",
+   "seed": "Someone has deviated from their schedule by four minutes and is being gently, thoroughly helped back onto it by people who love them."
+  },
+  {
+   "id": "re_wright_repair",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_gearlands"
+   ],
+   "routing": "narrative",
+   "seed": "An Enginewright repairs something of the player's, unasked, better than it was — and is genuinely hurt if the player objects. This is how affection is expressed here."
+  },
+  {
+   "id": "re_engine_noise",
+   "flavor": "dangerous",
+   "weight": 1,
+   "minDanger": 3,
+   "regions": [
+    "the_gearlands"
+   ],
+   "routing": "narrative",
+   "seed": "The Great Engine's noise gets into the teeth first and the thinking second. The player catches themselves, an hour later, having had a thought that was not entirely theirs.",
+   "tags": [
+    "mechanical"
+   ]
+  },
+  {
+   "id": "re_thin_moment",
+   "flavor": "beautiful",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_numinous_reach"
+   ],
+   "routing": "narrative",
+   "seed": "The veil goes thin for a moment, without warning, and the player sees something they will not be able to describe and will not stop trying to."
+  },
+  {
+   "id": "re_numen_pull",
+   "flavor": "dangerous",
+   "weight": 1,
+   "minDanger": 3,
+   "regions": [
+    "the_numinous_reach"
+   ],
+   "routing": "narrative",
+   "seed": "The pull to dissolve is real, and gentle, and the player will feel it, and it is not malicious — it is simply true that it would be easier.",
+   "tags": [
+    "spiritual",
+    "cult"
+   ]
+  },
+  {
+   "id": "re_public_grief",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_feeling_coast"
+   ],
+   "routing": "narrative",
+   "seed": "A public grieving in full flood, in a hall built to amplify it, and strangers sitting with a stranger's worst thing. The player is invited to sit. It is free. It has never turned anyone away."
+  },
+  {
+   "id": "re_named_feeling",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_feeling_coast"
+   ],
+   "routing": "narrative",
+   "seed": "A Threnodist asks the player what they are actually feeling and does not accept 'fine' — and keeps not accepting it, kindly, until something true comes out."
+  },
+  {
+   "id": "re_gentle_disproof",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_reasoned_hold"
+   ],
+   "routing": "narrative",
+   "seed": "A Syllogist disproves, gently and completely, something the player has believed their whole life — and then, seeing their face, abandons their own position the moment the player finds a hole in it. Both of these are the same virtue."
+  },
+  {
+   "id": "re_kind_host",
+   "flavor": "theft",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "the_veiled_reach"
+   ],
+   "routing": "narrative",
+   "seed": "A host of impeccable warmth who has told the player nine untrue things and one true one, and the true one is the dangerous one.",
+   "tags": [
+    "social"
+   ]
+  },
+  {
+   "id": "re_told_stone",
+   "flavor": "beautiful",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_stark_reach"
+   ],
+   "routing": "narrative",
+   "seed": "A field of plain stones, each carrying one true sentence somebody could not say in life. Anyone may add one. The player may add one. Nobody may ever remove it."
+  },
+  {
+   "id": "re_verist_look",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "the_stark_reach"
+   ],
+   "routing": "narrative",
+   "seed": "A Verist looks at the player and says the exact true thing about them that nobody has ever said. They are not cruel. They will not apologize. Years from now the player may be grateful.",
+   "tags": [
+    "social"
+   ]
+  },
+  {
+   "id": "re_named_want",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "the_descent"
+   ],
+   "routing": "narrative",
+   "seed": "Somebody from the Choir names, out loud and in public, what the player actually wants — the one under the one they would admit to. They are correct. It is the worst thing anyone has done to the player this year and it is not, technically, an attack.",
+   "tags": [
+    "social"
+   ]
+  },
+  {
+   "id": "re_fair_bargain",
+   "flavor": "theft",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "the_descent"
+   ],
+   "routing": "narrative",
+   "seed": "A bargain is offered that is exactly, perfectly fair — and the player wants it very badly, and the price is exactly what it is worth, and nobody is going to stop them.",
+   "tags": [
+    "social"
+   ]
+  },
+  {
+   "id": "re_mercy_borne",
+   "flavor": "beautiful",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_ascent"
+   ],
+   "routing": "narrative",
+   "seed": "A mercy-bearer sets down someone's twenty-year weight, and takes it up themselves, and walks away carrying it, and does not appear to think this is remarkable."
+  },
+  {
+   "id": "re_weighed",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "the_ascent"
+   ],
+   "routing": "narrative",
+   "seed": "A Seraph weighs the player without asking. The judgment is not spoken. It is simply made, and the player can feel it land.",
+   "tags": [
+    "social"
+   ]
+  },
+  {
+   "id": "re_weighed_true",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_given_land"
+   ],
+   "routing": "narrative",
+   "seed": "A Mason puts a hand on something of the player's and tells them exactly what it is, what it is worth, and where it will fail. They are right about all three."
+  },
+  {
+   "id": "re_walking_argument",
+   "flavor": "beautiful",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_pattern_reach"
+   ],
+   "routing": "narrative",
+   "seed": "A building that is an argument, and walking through it the player finds themselves agreeing, and cannot afterward reconstruct why."
+  },
+  {
+   "id": "re_walker_offer",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_open_reach"
+   ],
+   "routing": "narrative",
+   "seed": "A Horizon-Walker offers to take the player anywhere, and means it, and will not stay when they get there."
+  },
+  {
+   "id": "re_pre_remembered",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 1,
+   "regions": [
+    "the_kept_reach"
+   ],
+   "routing": "narrative",
+   "seed": "An Hourkeeper looks at the player with an expression of terrible sympathy and says nothing at all. They have pre-remembered something. They will not say what. They cannot stop knowing it."
+  },
+  {
+   "id": "re_good_ending",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_unmade"
+   ],
+   "routing": "narrative",
+   "seed": "An Unmaker is ending something beloved, correctly and well, and the people who loved it are watching and cannot argue because the Unmaker is right."
+  },
+  {
+   "id": "re_unfinished_glory",
+   "flavor": "beautiful",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_making"
+   ],
+   "routing": "narrative",
+   "seed": "The Half-Cathedral in its two-hundredth year and its fourth design, scaffolded to the sky, and it will never be finished, and that is what it is for."
+  },
+  {
+   "id": "re_helpful_wright",
+   "flavor": "benign",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "the_making"
+   ],
+   "routing": "narrative",
+   "seed": "A Wright improves something of the player's that the player did not want improved, cannot un-improve, and now has to live with. It IS better. That is not the point."
+  },
+  {
+   "id": "re_churn_road",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 2,
+   "regions": [
+    "unspooling"
+   ],
+   "routing": "narrative",
+   "seed": "The road was here yesterday. The Churnfolk think this is fine and interesting and are cheerfully unhelpful about where it went.",
+   "tags": [
+    "chaos"
+   ]
+  },
+  {
+   "id": "re_churn_luck",
+   "flavor": "beneficial",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "unspooling"
+   ],
+   "routing": "narrative",
+   "seed": "Something absurdly, improbably lucky happens, and a Churnfolk nearby nods as if this were the expected outcome, which — here — it was."
+  },
+  {
+   "id": "re_mistaken_for",
+   "flavor": "theft",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "opposed",
+   "seed": "Someone stops you certain you're another person — one who owes them, or wronged them, or promised them something. Mediator's Tongue/Keen Appraisal to set it straight before it hardens; on failure they take a token 'on account' or raise a fuss that costs you standing or a small item until it's untangled.",
+   "avoidable": true,
+   "check": {
+    "anyOf": [
+     "mediators_tongue",
+     "keen_appraisal"
+    ],
+    "attribute": "social",
+    "difficulty": 45,
+    "onFail": "loseItemOrValuables"
+   }
+  },
+  {
+   "id": "re_urgent_courier",
+   "flavor": "chase",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "challenge",
+   "seed": "A runner or rider comes through fast — a message that matters, and they're past before you can ask. If you want what they carry (or to warn them, or to keep pace), it's a short pursuit on foot: read their line, cut the angle, call out in time. Low stakes — you lose only the chance, not blood.",
+   "stages": 2,
+   "abilities": [
+    "quiet_step",
+    "wayfinding",
+    "drumline_stride"
+   ]
+  },
+  {
+   "id": "re_small_debt_called",
+   "flavor": "theft",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "narrative",
+   "seed": "A small claim comes due — a favor owed, a shared cost, a thing borrowed and not returned, surfacing at an inconvenient moment. It can be paid, talked down (Mediator's Tongue), worked off, or refused into a cooling of relations. Never violence — just the friction of a place where people remember what they're owed.",
+   "avoidable": true
+  },
+  {
+   "id": "re_spooked_animal",
+   "flavor": "dangerous",
+   "weight": 2,
+   "minDanger": 0,
+   "regions": [
+    "*"
+   ],
+   "routing": "opposed",
+   "seed": "A working animal bolts, or a loose one panics near you — a cart-beast, a herd-dog, something startled. Quick Step/Wildcraft to get clear or settle it before it knocks something (or someone) over; on failure a small hurt, a spilled load, or a debt to whoever's animal it was.",
+   "avoidable": true,
+   "check": {
+    "anyOf": [
+     "quiet_step",
+     "wildcraft"
+    ],
+    "attribute": "physical",
+    "difficulty": 40,
+    "onFail": "minorSetback"
+   }
   }
+ ],
+ "triggerRules": {
+  "onNarrativeTime": {
+   "ratePerHour": 0.14,
+   "maxChance": 0.6,
+   "minHoursPerBeat": 1,
+   "cooldown": 1,
+   "note": "SNG-127 — the MAIN path in normal narrative play (no travel/rest button click): time passing turns things up. minHoursPerBeat is what an UNDECLARED beat is worth (the GM usually omits timeOps for a normal beat, yet the clock still ticks +1h = ADVANCE.beat) — this stops the whole path from silently seeing 0h and never firing. A GM-DECLARED short beat (a 20-min exchange) still uses its real hours and stays quiet. cooldown = quiet beats required between narrative encounters (also a pacing default). Tune here, not in code."
+  },
+  "onTravel": {
+   "chance": 0.45,
+   "note": "per travel leg; weight by destination dangerLevel"
+  },
+  "onRest": {
+   "chance": 0.2,
+   "note": "wilderness rests only; a hearth/settled rest is safer"
+  },
+  "onEnterLocation": {
+   "chance": 0.2
+  },
+  "pacingModes": {
+   "note": "SNG-127 — player-selectable liveliness (profile.pacing). Each is a multiplier on every roll rate + a cooldown override. Default balanced; a new/family player may start on eventful.",
+   "calm": {
+    "mult": 0.5,
+    "cooldown": 3
+   },
+   "balanced": {
+    "mult": 1,
+    "cooldown": 1
+   },
+   "eventful": {
+    "mult": 1.6,
+    "cooldown": 1
+   },
+   "relentless": {
+    "mult": 2.4,
+    "cooldown": 0
+   }
+  },
+  "flavorWeightByDanger": "low-danger locations skew beneficial/benign/beautiful; high-danger skew dangerous/theft/chase/fight — but every location retains a chance of beauty and kindness. The valley is hopeful-strange, not grim.",
+  "lethalRule": "any fight/dangerous encounter that could incapacitate MUST present a decline/flee path before engagement (SNG-002b). No ambush-lethality."
+ }
 }

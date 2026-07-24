@@ -232,6 +232,9 @@
   ],
   "npc_quests": [
    "npc_quests.json"
+  ],
+  "bestiary": [
+   "bestiary.json"
   ]
  },
  "note": "SNG-064 FIX (Aevi 2026-07-11): this manifest is a WHITELIST — engine/state.js iterates provides.* and loads ONLY what is listed. It listed 6 of 89 locations, 5 of 31 NPCs, 3 of 26 lore files. The live game was running on SIX LOCATIONS. Now lists everything. ANY new content file MUST be added here or it silently does not exist."

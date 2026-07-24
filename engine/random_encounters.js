@@ -8,6 +8,8 @@
 // encounters.js unchanged. Any lethal-capable encounter is OFFERED with a decline
 // path built HERE (SNG-002b), not left to the model.
 
+import { smartClamp } from "./namematch.js"; // SNG-229: word-boundary clamp for a synthesized creature's seed prose
+
 const PEACEFUL = ["beneficial", "benign", "beautiful"];
 const PERILOUS = ["dangerous", "theft", "chase", "fight"];
 const RISKY_TAGS = ["disputed", "wild", "frontier", "march", "ruin", "raid", "contested", "border", "wilds", "deep", "dark", "waste", "broken", "haunt"];
@@ -34,6 +36,35 @@ export function deriveDangerLevel(location, { baseDanger = null } = {}) {
   if (tags.some(t => RISKY_TAGS.some(r => t.includes(r)))) d += 1;
   if (tags.some(t => SAFE_TAGS.some(s => t.includes(s)))) d -= 1;
   return Math.max(1, Math.min(4, d));
+}
+
+// SNG-229 §2b: tier → the danger gate + the opponent's threat + how often it turns up. A riffraff is a common
+// low-danger nuisance; an epic is a rare, deadly, danger-4 thing. Tunable-shaped (a plain table).
+const BEAST_TIER = {
+  riffraff: { minDanger: 1, threat: 22, weight: 3 },
+  notable:  { minDanger: 2, threat: 38, weight: 2 },
+  regional: { minDanger: 3, threat: 55, weight: 1 },
+  epic:     { minDanger: 4, threat: 78, weight: 1 }
+};
+
+/** SNG-229 §2b: turn each bestiary creature into a danger-gated ENCOUNTER entry — the generative hook that
+ *  gives the fight/dangerous pool an actual SOURCE of monsters (it had none; ties SNG-225). Tier sets the
+ *  danger gate + the opponent's threat; region-free (SNG-225 §4c) so a creature turns up anywhere its danger
+ *  admits; offered as a DUEL with a decline/flee path (SNG-002b — a hazard is a CHOICE to fight, not a trap).
+ *  The creature's look/danger/pressures ride on the entry so the GM narrates it and the player knows which
+ *  crafts answer it. A hazard, not a villain (the bestiary design law). Pure. */
+export function bestiaryEncounters(bestiary = {}) {
+  const roster = Array.isArray(bestiary.roster) ? bestiary.roster : [];
+  return roster.filter(c => c && c.id).map(c => {
+    const t = BEAST_TIER[c.tier] || BEAST_TIER.notable;
+    return {
+      id: `beast_${c.id}`, flavor: "dangerous", weight: t.weight, minDanger: t.minDanger,
+      regions: ["*"], tags: [], routing: "duel", avoidable: true,
+      opponent: { threat: t.threat, yieldAt: 0.25 },
+      creatureId: c.id, creatureClass: c.class || null, tier: c.tier || null, pressures: c.pressures || [],
+      seed: smartClamp(`${c.name || c.id} — ${c.look || ""}${c.danger ? " " + c.danger : ""}`.trim(), 400)
+    };
+  });
 }
 
 /** Settled/hearth rests are safe — wilderness rests are where the night has teeth. */

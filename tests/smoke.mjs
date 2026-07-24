@@ -26,7 +26,7 @@ import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconci
 import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
-import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -7789,6 +7789,30 @@ await (async () => {
   const resSrc227 = readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8");
   check("227 §3d: buildBraidDef + the discovery fallback both use braidBaseCost (a discovered braid is premium too, ties SNG-226)", (brSrc227.match(/braidBaseCost\(sources/g) || []).length >= 2);
   check("227 §4: the knobs are JSON-tunable (renamed PerTenLevels + a braid fraction) and threaded from CONTENT.rules", /"energyEfficiencyPerTenLevels"/.test(resSrc227) && /"braidCheaperParentFraction"/.test(resSrc227) && /braidFraction: CONTENT\.rules\?\.leveling\?\.braidCheaperParentFraction/.test(appSrc227));
+}
+
+// ---- SNG-229: the bestiary — LOADED (§2a) and ENCOUNTERABLE (§2b), a source of monsters for the fight pool ----
+{
+  // §2a: the bestiary is in the LOADED pack + on the manifest whitelist (was staged + inert).
+  const bpath = join(root, "content/packs/valley/bestiary.json");
+  const bestiary = JSON.parse(readFileSync(bpath, "utf8"));
+  check("229 §2a: the bestiary is loaded content (moved out of po/staged_content) with a roster", Array.isArray(bestiary.roster) && bestiary.roster.length >= 6);
+  const manifest = JSON.parse(readFileSync(join(root, "content/packs/valley/manifest.json"), "utf8"));
+  check("229 §2a: the manifest WHITELISTS the bestiary (or it silently does not exist)", (manifest.provides.bestiary || []).includes("bestiary.json"));
+  const stateSrc229 = readFileSync(join(root, "engine/state.js"), "utf8");
+  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /bestiary, startingLocation/.test(stateSrc229) && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
+
+  // §2b: every creature becomes a danger-gated DUEL encounter — the fight pool finally has monsters.
+  const monsters = bestiaryEncounters(bestiary);
+  check("229 §2b: every roster creature becomes an encounter entry (a source of monsters for the pool)", monsters.length === bestiary.roster.length && monsters.every(m => /^beast_/.test(m.id) && m.opponent && m.routing === "duel"));
+  check("229 §2b: tier gates danger — a riffraff is low-danger, an epic is danger-4 (rare, deadly)", monsters.some(m => m.minDanger === 1) && monsters.some(m => m.minDanger === 4) && monsters.every(m => m.opponent.threat > 0));
+  check("229 §2b: region-free (SNG-225 §4c) + offered as a DUEL with a decline/flee path (SNG-002b)", monsters.every(m => (m.regions || []).includes("*") && m.avoidable === true && m.opponent.yieldAt > 0));
+  check("229 §2b: the creature's look + which crafts answer it ride on the entry (GM narrates; player knows the pressures)", monsters.every(m => m.creatureId && Array.isArray(m.pressures) && typeof m.seed === "string" && m.seed.length > 0));
+
+  // the synthesized monsters are actually ELIGIBLE in the world (ties SNG-225 — a danger-2 place gets a monster).
+  const riff = monsters.find(m => m.minDanger === 1);
+  check("229 §2b × SNG-225: a synthesized riffraff is eligible at an ordinary danger-2 place (a monster in the world)", isEligible(riff, { tags: ["transitional"], regionId: "valley", dangerLevel: 2 }) === true);
+  check("229: an empty/absent bestiary yields no monsters (tolerant — the pool is unchanged)", bestiaryEncounters({}).length === 0 && bestiaryEncounters({ roster: [] }).length === 0);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

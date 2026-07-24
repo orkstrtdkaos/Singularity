@@ -7,6 +7,7 @@ import { reconcileContent } from "./reconcile.js";
 import { applySubstrateField } from "./substrate.js";
 import { loadLegends } from "./legends.js";
 import { buildTraditionIndex } from "./traditions.js";
+import { bestiaryEncounters } from "./random_encounters.js"; // SNG-229 §2b: synthesize monster encounters from the loaded bestiary
 
 const LS = {
   character: id => `singularity.character.${id}`,
@@ -115,6 +116,7 @@ export async function loadContent() {
   // (tier 6, the errand tier). Independent, tolerant fetches like everything else; a miss disables the tier.
   const traditionArcsP = jSettled((valley.provides.tradition_arcs || []).map(valleyPath));
   const npcQuestsP = jSettled((valley.provides.npc_quests || []).map(valleyPath));
+  const bestiaryP = jSettled((valley.provides.bestiary || []).map(valleyPath)); // SNG-229 §2a
 
   // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
   // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
@@ -151,6 +153,16 @@ export async function loadContent() {
     if (ev.id) events[ev.id] = ev;
     else if (path.includes("random_encounters")) randomEncounters = ev; // SNG-014 table (no id)
   }); }
+
+  // SNG-229 §2a/§2b: the bestiary — morally-clean adversaries, loaded so creatures can be referenced by id
+  // (the fear/want/quest weave, Aevi §2c-e, resolves against these), then SYNTHESIZED into danger-gated
+  // encounter entries and merged into the pool — so the fight/dangerous rolls (SNG-225) finally have a source
+  // of monsters. Tolerant: a missing bestiary just means no synthesized creatures (the pool is unchanged).
+  const bestiary = ((await bestiaryP).find(r => r.status === "fulfilled")?.value) || { roster: [], classes: {} };
+  if (randomEncounters && Array.isArray(bestiary.roster) && bestiary.roster.length) {
+    const monsters = bestiaryEncounters(bestiary);
+    randomEncounters = { ...randomEncounters, encounters: [...(randomEncounters.encounters || []), ...monsters] };
+  }
 
   const companions = {};
   for (const c of await companionsP) companions[c.id] = c;
@@ -246,8 +258,8 @@ export async function loadContent() {
 
   // SNG-187: a content-count canary at boot — cheap observability, and the proof that parallelising
   // the loaders did not silently drop or reorder any manifest group (the counts must not move).
-  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length}`);
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, startingLocation: valley.startingLocation };
+  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length}`);
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, bestiary, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

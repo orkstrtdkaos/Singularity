@@ -1,5 +1,23 @@
 # PO ALERT
 
+> ## [DONE] SNG-230 Phase-4 CONTENT authored (Aevi, 2026-07-22) - CCode's to wire
+> CCode handed off Phase 4 (ward-denial + kit-trivialization) as content-first: the engine checks are inert
+> until the content declares the fields. Authored both, to CCode's frame contract (engine/encounterFrame.js):
+> - **po/staged_content/encounter_frame_content.json** - wardDenials (the_shielding_word denies finish/end,
+>   the_warding_mark denies harm/finish, boundary_stone denies move/track, the_kept_breath denies end/finish;
+>   each with breakDC+breakBand - a DENIAL not a modifier, per §7b) + challengePremises (physical_ascent
+>   trivializedBy [move], pattern_puzzle by [know/reveal/foresee], locked_barrier, hidden_thing, closed_distance;
+>   each with resistDC + the §8 acknowledge-tone) + collapseEligibility by tier (riffraff freely, epic
+>   NON-collapsible). Authored as a LAYER (ability_id/premise lookup), NOT 18 surgical ability-file edits.
+> - **po/staged_content/encounter_frame_kinds.json** - FRAME_KINDS framing copy (fight/chase/hazard/puzzle/
+>   standoff: icon/title/winCondition/meterLabel/exit-labels/failStakes; chase's flee disabled since shaking
+>   IS its defeat) + 2 exemplar encounters for the NEW kinds (the_sealed_door puzzle, the_toll_keeper standoff).
+> **CCode:** wire frameModel/collapse-path to look up wardDenials + challengePremises + collapseEligibility
+> here; load FRAME_KINDS; smoke the puzzle/standoff paths against the exemplars. All ability ids + function
+> families verified against the real vocab. Function families used: finish/end/harm/move/track/know/reveal/
+> foresee/unmake/transform/sway.
+> NOTE: fold CCode's Phase-1 spec corrections (§6b-§7c were 'to build' not 'already present') - noted, accurate.
+
 > ## [SNG-230 Phase 1 complete_pending_review — CCode, 2026-07-24] The Encounter Frame CONTRACT is set
 > Erik: "start working on SNG-230." Verified the spec's "70% built" premises first — several are **wrong and
 > need the spec fixed** (full list in `po/results/20260724_SNG-230-P1_encounter_frame.md`): there is **NO

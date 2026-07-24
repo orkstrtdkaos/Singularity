@@ -1766,55 +1766,57 @@
         "player": "Check whether the file names any Zone Remediation authority who signed off on the suspension — someone who received the order to stop Crane's work.",
         "summary": "Silas reads the suspension order: signed by a bureaucratic middle hand and a ZR-OA-7 oversight stamp — no personal name, and the halt was specific to Crane's thread alone.",
         "narration": "You work through the file methodically. The pages are dense — requisition logs, grid coordinates, a surveyor's notation in a different hand. But the commission structure is clear once you know what to look for.\n\nCrane's suspension was signed by two hands. The first is a district sub-registrar named Holt — a bureaucratic middle signature, the kind that says 'I was present and I did what I was told.' The second is more interesting. It is a stamp rather than a signature, which means it came from above the sub-registrar level. The stamp reads 'Zone Remediation Oversight, Central Authority,' and below it, in smaller type, a reference code: ZR-OA-7. Not a name. A designation. Someone who signed through a stamp did not want to be found by the document later.\n\nOrder-Sense runs along the edges of the suspension order and finds the shape of the thing. The stop was not issued because the work was finished. The stop was issued because someone above the zone authority level decided the program should stop — and the stop was issued specifically to Crane's thread, not to the spatial-bonding program as a whole. The three bracketing commissions that are marked 'concluded' all concluded afterward. His was the only one halted mid-work. The design says: this was deliberate, this was specific, and whoever held the ZR-OA-7 stamp in the year the Accord was administered knew exactly which thread they were cutting.\n\nOssian has not moved from her position against the far shelving. She is giving you all the room you need. Huginn shifts once on your shoulder, slow and deliberate — not restlessness. Attention."
+      },
+      {
+        "player": "Note what you have found and close the file. You have the shape of it — a specific halt, a nameless authority, and a thread left open. That is enough to bring to Veth and the road.",
+        "summary": "Silas closes Crane's commission file with the suspension order's shape fixed in memory — ZR-OA-7, a nameless stamp, a single thread deliberately halted while all others concluded.",
+        "narration": "You read the suspension order one more time, then close it. The stamp sits exactly where it would sit on a document drafted to end a thread without naming who pulled it — central, official, traceable only to a designation. ZR-OA-7. You say it quietly, once, to seat it in memory. Huginn shifts on your shoulder. The sound it makes is not a word, but it lands like one.\n\nYou close the charcoal-grey register and set it squarely on the desk. Ossian does not reach for it immediately. She reads you instead, the way she read the letter — looking for what kind of visitor closes a file like that, with that particular expression.\n\nYou name what you have found aloud, for your own accounting: one thread suspended while three others were allowed to conclude. A mid-level signature to say it happened. A stamp to say it was ordered. No name above the stamp. And Crane's fold-work still open somewhere in the Zone, fifteen years later, untouched by anyone with authority to close it.\n\nOssian lifts the register and returns it to the shelf by feel, spine flush with its neighbors. She says nothing. She has given you what the index holds, and what the index holds is not an answer — it is the shape of where an answer was removed."
       }
     ],
     "lastTurn": {
-      "narration": "You work through the file methodically. The pages are dense — requisition logs, grid coordinates, a surveyor's notation in a different hand. But the commission structure is clear once you know what to look for.\n\nCrane's suspension was signed by two hands. The first is a district sub-registrar named Holt — a bureaucratic middle signature, the kind that says 'I was present and I did what I was told.' The second is more interesting. It is a stamp rather than a signature, which means it came from above the sub-registrar level. The stamp reads 'Zone Remediation Oversight, Central Authority,' and below it, in smaller type, a reference code: ZR-OA-7. Not a name. A designation. Someone who signed through a stamp did not want to be found by the document later.\n\nOrder-Sense runs along the edges of the suspension order and finds the shape of the thing. The stop was not issued because the work was finished. The stop was issued because someone above the zone authority level decided the program should stop — and the stop was issued specifically to Crane's thread, not to the spatial-bonding program as a whole. The three bracketing commissions that are marked 'concluded' all concluded afterward. His was the only one halted mid-work. The design says: this was deliberate, this was specific, and whoever held the ZR-OA-7 stamp in the year the Accord was administered knew exactly which thread they were cutting.\n\nOssian has not moved from her position against the far shelving. She is giving you all the room you need. Huginn shifts once on your shoulder, slow and deliberate — not restlessness. Attention.",
-      "sceneSummary": "Silas reads the suspension order: signed by a bureaucratic middle hand and a ZR-OA-7 oversight stamp — no personal name, and the halt was specific to Crane's thread alone.",
+      "narration": "You read the suspension order one more time, then close it. The stamp sits exactly where it would sit on a document drafted to end a thread without naming who pulled it — central, official, traceable only to a designation. ZR-OA-7. You say it quietly, once, to seat it in memory. Huginn shifts on your shoulder. The sound it makes is not a word, but it lands like one.\n\nYou close the charcoal-grey register and set it squarely on the desk. Ossian does not reach for it immediately. She reads you instead, the way she read the letter — looking for what kind of visitor closes a file like that, with that particular expression.\n\nYou name what you have found aloud, for your own accounting: one thread suspended while three others were allowed to conclude. A mid-level signature to say it happened. A stamp to say it was ordered. No name above the stamp. And Crane's fold-work still open somewhere in the Zone, fifteen years later, untouched by anyone with authority to close it.\n\nOssian lifts the register and returns it to the shelf by feel, spine flush with its neighbors. She says nothing. She has given you what the index holds, and what the index holds is not an answer — it is the shape of where an answer was removed.",
+      "sceneSummary": "Silas closes Crane's commission file with the suspension order's shape fixed in memory — ZR-OA-7, a nameless stamp, a single thread deliberately halted while all others concluded.",
       "choices": [
         {
-          "label": "Ask Ossian whether the ZR-OA-7 stamp designation appears anywhere else in the deep index — or whether it shows up in other classified series.",
+          "label": "Thank Ossian and ask whether ZR-OA-7 is a person, a committee, or something else entirely — she works this index every day and may know more than the file says.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
+            "negotiate",
             "study"
           ],
-          "abilityId": null,
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Use Order-Sense on the stamp designation itself — see what design it belongs to, what authority it was part of, and whether it is still active.",
+          "label": "Ask plainly whether any other commission in this index references ZR-OA-7 — if the same stamp appears elsewhere, the authority has a pattern.",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
-          "energyCost": 2
+          "trivial": false
         },
         {
-          "label": "Look for Holt — the sub-registrar who signed below the stamp. A bureaucratic middle signature means a person who was present. Ask Ossian if she knows where Holt is now.",
+          "label": "Thank Ossian and step out — you have what you came for. Find Veth in the plaza and compare what she learned about Crane from the other direction.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "intentTags": [
+            "travel"
+          ],
+          "difficulty": 0,
+          "trivial": true
+        },
+        {
+          "label": "Before you leave, ask Ossian whether sub-registrar Holt is still active in the district — that signature is a person who was present when the order came down.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "persuade"
+            "study"
           ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Note what you have found and close the file. You have the shape of it — a specific halt, a nameless authority, and a thread left open. That is enough to bring to Veth and the road.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
           "trivial": true
         }
       ],
@@ -1823,12 +1825,11 @@
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Standing back against the far shelving, arms folded, giving Silas full room to work — watching without pressing."
+            "state": "Standing back from the desk after returning the register to the shelf — arms at her sides, watching Silas without pressing."
           }
         ],
         "objects": [
-          "Zone Remediation classified register — charcoal-grey cover, open to Crane's commission file",
-          "Suspension order page — two signatures: sub-registrar Holt, and ZR-OA-7 oversight stamp",
+          "Zone Remediation classified register — returned to the shelf, spine flush",
           "Letter of Introduction — Warden Coll (set on Ossian's desk)",
           "Archivist's lamp (lit, afternoon)",
           "Shelved ledgers along both walls",
@@ -1847,11 +1848,8 @@
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "role": "Annex archivist, North Gate Registry",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Held her position while Silas read the suspension order — professional restraint, no commentary.",
-          "statusNote": "At her desk in the annex — file open, standing back while Silas reads the suspension order."
+          "note": "Returned the Crane register to the shelf without ceremony after Silas closed it — professional restraint maintained throughout; she gave the file and nothing beyond it.",
+          "statusNote": "At her desk in the annex — file returned, watching to see whether Silas has further questions or is done."
         }
       ],
       "codexUpdates": [
@@ -1859,31 +1857,18 @@
           "topic": "the-second-thread",
           "label": "The Second Thread",
           "kind": "mystery",
-          "fact": "Crane's suspension was signed by sub-registrar Holt and a ZR-OA-7 Zone Remediation Oversight stamp — no personal name. The halt was issued specifically to Crane's thread, not to the spatial-bonding program as a whole. The three bracketing commissions concluded afterward. Someone above the district level cut exactly one thread and used a designation rather than a name to do it.",
+          "fact": "The suspension order on Crane's Zone Remediation commission carries two signatures: sub-registrar Holt (a middle bureaucratic hand) and a stamp reading 'Zone Remediation Oversight, Central Authority — ZR-OA-7.' No personal name above the stamp. Crane's thread was the only one halted; three bracketing commissions were allowed to conclude. The halt was deliberate and specific.",
           "links": [
-            "find-the-engineer",
             "the-water-crisis",
+            "find-the-engineer",
             "coll",
-            "the-edge-district-ledger",
-            "ossian"
+            "what-the-water-remembers"
           ]
         }
       ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-second-thread",
-          "note": "The suspension order names sub-registrar Holt and a ZR-OA-7 stamp — a deliberate, specific halt by a nameless authority above the district level. The design is clear: one thread cut, all others allowed to conclude."
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2,
-        "xp": 0
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "careful reading of the commission file and suspension order"
+        "why": "A few minutes to finish reading and close the file — a short pause in the same afternoon."
       }
     },
     "sceneState": {
@@ -1891,12 +1876,11 @@
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Standing back against the far shelving, arms folded, giving Silas full room to work — watching without pressing."
+          "state": "Standing back from the desk after returning the register to the shelf — arms at her sides, watching Silas without pressi"
         }
       ],
       "objects": [
-        "Zone Remediation classified register — charcoal-grey cover, open to Crane's comm",
-        "Suspension order page — two signatures: sub-registrar Holt, and ZR-OA-7 oversigh",
+        "Zone Remediation classified register — returned to the shelf, spine flush",
         "Letter of Introduction — Warden Coll (set on Ossian's desk)",
         "Archivist's lamp (lit, afternoon)",
         "Shelved ledgers along both walls",
@@ -3627,7 +3611,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d13] Named by the runner's boy as the committee's receiving clerk. Morning post only; in before the bell, gone by midday.",
         "[d13] Opened the door already knowing Silas's name from the morning run — stepped back and let him in rather than turning him away; her guard is practical, not hostile",
         "[d13] Silas read the room through Order-Sense — she is the committee's filter, not its member; brevity and evidence are the path. She is waiting for his first sentence.",
         "[d13] Silas declared himself the message and named the water crisis as resolvable — she read it in one breath and wrote Warden Coll a calling-slip without argument",
@@ -3636,7 +3619,8 @@
         "[d13] Admitted Silas on Coll's committee authority without argument; her gaze on Huginn held for one breath and returned to Silas's face without comment — she knows what the bird means.",
         "[d13] Deflected Silas's self-deprecation with exact precision — named what was actually memorable (shadow pool, March-corvid) — and opened the Zone Remediation classified file to Crane's commission entry without ceremony.",
         "[d13] Gave Silas room to work through the file without asking what he was looking for — professional restraint, possibly informed by the kind of visitor Coll's authority sends.",
-        "[d13] Held her position while Silas read the suspension order — professional restraint, no commentary."
+        "[d13] Held her position while Silas read the suspension order — professional restraint, no commentary.",
+        "[d13] Returned the Crane register to the shelf without ceremony after Silas closed it — professional restraint maintained throughout; she gave the file and nothing beyond it."
       ],
       "knownFacts": [
         "Silas Weir can act on the water crisis, not merely report on it — she read this as distinct from the usual petitioners",
@@ -3656,7 +3640,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At her desk in the annex — file open, standing back while Silas reads the suspension order.",
+      "statusNote": "At her desk in the annex — file returned, watching to see whether Silas has further questions or is done.",
       "lastSeen": {
         "locationId": "gen-north-gate-registry-ossian-office",
         "day": 13
@@ -4578,7 +4562,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 577,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "Father's Sealed Letter — the post is claimed, the hollow is warded, the technique is real. The ground here is as right as ground gets. The…",
@@ -6079,21 +6063,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.052978135213763,
-    "cerebral": 15.814135493686232,
-    "social": 13.623134589932171,
-    "generous": 3.1011820149432174,
-    "cautious": 5.815374491134925,
-    "physical": 0.9078795390976404,
-    "risky": 0.7978954116887202,
-    "ruthless": 0.7057476902638711,
-    "carousing": 0.16187183674148523,
-    "amorous": 1.6300584388674346,
-    "patient": 0.9709638780281467,
-    "stealth": 0.0016232844462528186,
-    "devotion": 0.8574167110761576,
-    "craft": 0.2719062130930792,
-    "leadership": 1.309825636763232
+    "strategic": 17.626653681833417,
+    "cerebral": 15.418782106344075,
+    "social": 13.282556225183866,
+    "generous": 3.0236524645696368,
+    "cautious": 5.6699901288565515,
+    "physical": 0.8851825506201993,
+    "risky": 0.7779480263965022,
+    "ruthless": 0.6881039980072743,
+    "carousing": 0.1578250408229481,
+    "amorous": 1.5893069778957487,
+    "patient": 0.946689781077443,
+    "stealth": 0.0015827023350964981,
+    "devotion": 0.8359812932992536,
+    "craft": 0.2651085577657522,
+    "leadership": 1.2770799958441512
   },
   "aptitudes": [
     "strategist",
@@ -6102,7 +6086,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 741,
+  "actionCount": 742,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6492,8 +6476,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784858491220,
-  "rev": 1197,
+  "updatedAt": 1784858629091,
+  "rev": 1198,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8975,7 +8959,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 93
+    "the_center": 94
   },
   "foreclosed": [
     "rootkin",
@@ -9100,10 +9084,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T02:01:31.218Z",
+      "lastAt": "2026-07-24T02:03:49.089Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 75
+      "beats": 76
     }
   ],
   "company": [
@@ -9303,15 +9287,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 111,
-    "choices": 111,
+    "sceneSummary": 112,
+    "choices": 112,
     "characterDeltas": 46,
-    "scene": 111,
-    "npcUpdates": 97,
+    "scene": 112,
+    "npcUpdates": 98,
     "factUpdates": 7,
     "placeUpdates": 20,
-    "codexUpdates": 68,
-    "timeOps": 105,
+    "codexUpdates": 69,
+    "timeOps": 106,
     "imagePrompt": 3,
     "sceneEnded": 24,
     "itemUpdates": 2,
@@ -9326,7 +9310,7 @@
     "stageOps": 5,
     "generateRequest": 2
   },
-  "_opTurns": 111,
+  "_opTurns": 112,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

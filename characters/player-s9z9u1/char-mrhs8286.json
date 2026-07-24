@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 21,
-  "xp": 2091,
+  "xp": 2096,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -128,7 +128,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.09750163606388479,
+    "spectrumId": -0.09262655426069054,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.26339120175346753,
     "mechanical_spiritual": 0.25513542055105926,
@@ -144,7 +144,7 @@
   "maxHealth": 130,
   "health": 130,
   "maxEnergy": 200,
-  "energy": 145,
+  "energy": 140,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -223,14 +223,6 @@
       "customName": "Memory",
       "pinned": true,
       "provenance": "Rune-bound at the Fell Pell on World-day 18 evening, with Huginn as witness at the stone ring."
-    },
-    {
-      "id": null,
-      "name": "Boar Tusks (pair)",
-      "kind": "misc",
-      "qty": 1,
-      "description": "Ivory-yellow and dense at the base — a matched pair from the scrub oak ridge bull. Raw material for something, not yet decided.",
-      "consumable": false
     },
     {
       "id": null,
@@ -1730,7 +1722,148 @@
     "Silas thanks Ossian and walks south from the annex back to the waygate marketplace — ZR-OA-7, the suspension order's shape, and the letter all in hand."
   ],
   "currentLocationId": "gen-waygate",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-waygate",
+    "turns": [
+      {
+        "player": "Find the best jewelry smith you can find to turn the boar tusks into a paired set in preparation for a wedding ceremony with Pell. ",
+        "summary": "Silas finds Renna at the far end of the marketplace crescent and commissions a paired wedding set from the boar tusks — delivery in two days, terms agreed, material left in her hands.",
+        "narration": "The waygate marketplace runs along the south edge of the plaza in a loose crescent of covered stalls. In early spring the vendors are back but not yet settled — awnings half-tied, goods stacked rather than arranged. Silas walks the row once before he stops.\n\nThe smith he wants is not the loudest stall. She works at the far end of the crescent, under a dark-green oilcloth awning, and she does not look up when he approaches. Her name is on a small wooden board nailed to the post: Renna. Her hands are moving over a piece of antler with a fine iron needle, and she finishes the stroke before she looks at him.\n\nSilas sets the boar tusks on her workbench without preamble, because he can tell she is the kind of person who wants to see the material before she hears the request. She picks up both pieces and turns them toward the light. She checks the base density with her thumbnail and runs the needle along the curve of each one, feeling for consistency. She says nothing for a full minute. Then she sets them down and looks at him.\n\n\"Paired set,\" he says. \"Wedding jewelry.\" He does not explain more than that, because she has already decided whether she can do it.\n\nRenna names her terms — delivery in two days, half now, half on collection. She will work them as a matched set: same curve echoed in the mount, same metal, different enough in weight that a woman's piece and a man's piece sit right on the body. She asks once whether there is a preferred metal, and when he answers she writes it down without repeating it back. The tusks stay on her bench. The commission is made."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The waygate marketplace runs along the south edge of the plaza in a loose crescent of covered stalls. In early spring the vendors are back but not yet settled — awnings half-tied, goods stacked rather than arranged. Silas walks the row once before he stops.\n\nThe smith he wants is not the loudest stall. She works at the far end of the crescent, under a dark-green oilcloth awning, and she does not look up when he approaches. Her name is on a small wooden board nailed to the post: Renna. Her hands are moving over a piece of antler with a fine iron needle, and she finishes the stroke before she looks at him.\n\nSilas sets the boar tusks on her workbench without preamble, because he can tell she is the kind of person who wants to see the material before she hears the request. She picks up both pieces and turns them toward the light. She checks the base density with her thumbnail and runs the needle along the curve of each one, feeling for consistency. She says nothing for a full minute. Then she sets them down and looks at him.\n\n\"Paired set,\" he says. \"Wedding jewelry.\" He does not explain more than that, because she has already decided whether she can do it.\n\nRenna names her terms — delivery in two days, half now, half on collection. She will work them as a matched set: same curve echoed in the mount, same metal, different enough in weight that a woman's piece and a man's piece sit right on the body. She asks once whether there is a preferred metal, and when he answers she writes it down without repeating it back. The tusks stay on her bench. The commission is made.",
+      "sceneSummary": "Silas finds Renna at the far end of the marketplace crescent and commissions a paired wedding set from the boar tusks — delivery in two days, terms agreed, material left in her hands.",
+      "choices": [
+        {
+          "label": "Ask Renna what she reads in the material — what the tusks suggest to her as a smith",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Walk the marketplace and look for anything worth knowing — news, faces, goods moving",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Find Pell and tell her what you have done — not as a surprise, as a plain fact",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use the two days well — turn toward one of the open threads: the water source, the suspension order, or the road upstream",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        }
+      ],
+      "characterDeltas": {
+        "inventoryRemove": [
+          "Boar Tusks (pair)"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "renna",
+          "name": "Renna",
+          "role": "Jewelry smith, waygate marketplace crescent",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A precise-handed smith who finishes her current stroke before she looks at a customer — reads material before she hears the commission, and writes down the answer without repeating it back.",
+          "note": "Commissioned a paired wedding set from the boar tusks — same curve in the mount, matched metal, weight-differentiated for a woman's piece and a man's. Delivery in two days, terms agreed.",
+          "skillsObserved": [
+            "reading material quality by touch and needle before accepting a commission",
+            "setting clear terms without negotiation theater"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At her stall in the waygate marketplace crescent — the boar tusks are on her bench, commission in progress."
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "a precise jewelry smith at the waygate marketplace crescent — works under a dark-green oilcloth awning, reads material before she hears requests, plain terms, no ceremony",
+          "why": "Silas commissioned a paired wedding set from her and she will need to persist for the collection scene in two days"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Renna's jewelry stall is at the far end of the marketplace crescent, under a dark-green oilcloth awning — boar tusks left in commission, pickup in two days.",
+          "subPlace": {
+            "name": "Renna's Stall — Marketplace Crescent",
+            "parent": "Waygate",
+            "note": "Jewelry smith's stall at the crescent's far end — dark-green oilcloth awning, antler and bone work, plain terms.",
+            "visited": true
+          }
+        }
+      ],
+      "scene": {
+        "setting": "The waygate marketplace crescent, south edge of the plaza — early afternoon, spring light, awnings half-settled. Silas stands at Renna's stall at the far end of the row.",
+        "npcsPresent": [
+          {
+            "name": "Renna",
+            "state": "Writing down the metal preference — commission accepted, tusks on her bench, ready to begin."
+          }
+        ],
+        "objects": [
+          "Renna's workbench with the boar tusks now resting on it",
+          "Fine iron needles and working tools laid in order",
+          "Small wooden name-board on the awning post"
+        ],
+        "threads": [
+          "Commission placed — paired wedding jewelry, delivery in two days",
+          "The open quests: the water source upstream, the suspension order ZR-OA-7, Edvar Crane's thread"
+        ]
+      },
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "A short walk of the market row and the commission conversation"
+      },
+      "offer": {
+        "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the light, and the pause before she answered, suggested she had an opinion she did not offer unless asked",
+        "from": "What a precise craftsperson keeps back until they know a customer is worth the honesty — her read of Silas as someone who brought good material and did not over-explain it"
+      }
+    },
+    "sceneState": {
+      "setting": "The waygate marketplace crescent, south edge of the plaza — early afternoon, spring light, awnings half-settled. Silas stands at Renna's stall at the far end of the row.",
+      "npcsPresent": [
+        {
+          "name": "Renna",
+          "state": "Writing down the metal preference — commission accepted, tusks on her bench, ready to begin."
+        }
+      ],
+      "objects": [
+        "Renna's workbench with the boar tusks now resting on it",
+        "Fine iron needles and working tools laid in order",
+        "Small wooden name-board on the awning post"
+      ],
+      "threads": [
+        "Commission placed — paired wedding jewelry, delivery in two days",
+        "The open quests: the water source upstream, the suspension order ZR-OA-7, Edvar Crane's thread"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 13,
@@ -3530,6 +3663,33 @@
         "locationId": "gen-hub-north-gate-district-street",
         "day": 13
       }
+    },
+    "renna": {
+      "id": "renna",
+      "name": "Renna",
+      "role": "Jewelry smith, waygate marketplace crescent",
+      "description": "A precise-handed smith who finishes her current stroke before she looks at a customer — reads material before she hears the commission, and writes down the answer without repeating it back.",
+      "firstMet": {
+        "locationId": "gen-waygate",
+        "day": 13
+      },
+      "relationship": 1,
+      "history": [
+        "[d13] Commissioned a paired wedding set from the boar tusks — same curve in the mount, matched metal, weight-differentiated for a woman's piece and a man's. Delivery in two days, terms agreed."
+      ],
+      "knownFacts": [],
+      "skillsObserved": [
+        "reading material quality by touch and needle before acceptin",
+        "setting clear terms without negotiation theater"
+      ],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "At her stall in the waygate marketplace crescent — the boar tusks are on her bench, commission in progress.",
+      "lastSeen": {
+        "locationId": "gen-waygate",
+        "day": 13
+      }
     }
   },
   "placeMemory": {
@@ -3810,7 +3970,6 @@
     "gen-waygate": {
       "visits": 3,
       "notes": [
-        "[d6] Second bout concluded — Pell Marsh over Tane Solr, controlled finish, Orvil's call. Sand carries marks from both bouts.",
         "[d6] In full morning light, the seven arches read plainly as a measuring instrument — each slightly differently angled, differently spaced. The Hub grew up around something that was already here.",
         "[d6] Council Maven confirmed: two survey parties sent into the Disputed Zone came back early — craft interference prevents systematic water-source reading.",
         "[d6] A seller at the dark-cloth stall in the market row lays out bone-handled tools as a deliberate test for someone who can read their design — the kit is a teaching sequence, its center piece the seller herself.",
@@ -3821,7 +3980,8 @@
         "[d6] Party transited through the sixth waygate — the March setting confirmed north-by-northwest by the gate-keeper. Siol held the arch's edge as they departed.",
         "[d6] The March road runs north-by-northwest from the waygate — packed earth, foot traffic only, birch stands on both sides. First tributary ahead; marker stone at the branch, left for Raven's Home, right for the gone survey post.",
         "[d13] A drainage cut crosses the March Road at the ward's outer margin — wrong slope for its design, water pooling rather than draining to the verge. Cold iron underneath from years of misdirected flow. Pell read it through ironsense on Day 13.",
-        "[d13] The Crossing creek runs gray-brown on arrival, Day 13 afternoon — boiling-rags at the well confirm the locals have noticed and are treating the water. The contamination from the Disputed Zone is present here."
+        "[d13] The Crossing creek runs gray-brown on arrival, Day 13 afternoon — boiling-rags at the well confirm the locals have noticed and are treating the water. The contamination from the Disputed Zone is present here.",
+        "[d13] Renna's jewelry stall is at the far end of the marketplace crescent, under a dark-green oilcloth awning — boar tusks left in commission, pickup in two days."
       ],
       "flags": {
         "party_departed": "world-day-19-midday",
@@ -3909,6 +4069,13 @@
           "visited": true,
           "note": "Packed earth track through winter-grey birch, shallow rise behind, dark water thread ahead. Huginn walked this stretch first.",
           "parentUnresolved": "ashwarden-march-road"
+        },
+        "renna-s-stall-marketplace-crescent": {
+          "name": "Renna's Stall — Marketplace Crescent",
+          "parentId": "gen-waygate",
+          "day": 13,
+          "visited": true,
+          "note": "Jewelry smith's stall at the crescent's far end — dark-green oilcloth awning, antler and bone work, plain terms."
         }
       },
       "lastVisit": 13
@@ -4398,12 +4565,8 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 577,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Father's Sealed Letter — the post is claimed, the hollow is warded, the technique is real. The ground here is as right as ground gets. The…",
-        "from": "The scene reaching its natural weight — the technique confirmed, the hollow attended, the sentry set. This is where a sealed thing might…"
-      },
       {
         "thing": "The stock shelter, plain and open on the lee side of the field-stone wall — exactly the kind of place Huginn will land first and inspect…",
         "from": "Huginn's established habit of arriving at a place before the party does, reading what is ending or settled there — a companion's want, not…"
@@ -4419,6 +4582,10 @@
       {
         "thing": "Coll, after a long silence, says one quiet thing: 'Your bird has better intelligence than my committee.' Not a joke — a plain statement…",
         "from": "Coll's established character — he grants more candor to those who demonstrate competence, and Huginn's reading is the most concrete thing…"
+      },
+      {
+        "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the…",
+        "from": "What a precise craftsperson keeps back until they know a customer is worth the honesty — her read of Silas as someone who brought good…"
       }
     ],
     "wantProgress": {
@@ -5899,21 +6066,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.18598733978758,
-    "cerebral": 15.033312553685473,
-    "social": 12.950492319554268,
-    "generous": 2.948061152955396,
-    "cautious": 5.5282403756351375,
-    "physical": 0.8630529868546943,
-    "risky": 0.7584993257365896,
-    "ruthless": 0.6709013980570924,
-    "carousing": 0.15387941480237438,
-    "amorous": 1.549574303448355,
-    "patient": 0.9230225365505068,
-    "stealth": 0.0015431347767190856,
-    "devotion": 0.8150817609667723,
-    "craft": 0.2584808438216084,
-    "leadership": 1.2451529959480474
+    "strategic": 17.75633765629289,
+    "cerebral": 14.657479739843335,
+    "social": 12.62673001156541,
+    "generous": 2.874359624131511,
+    "cautious": 5.390034366244259,
+    "physical": 0.841476662183327,
+    "risky": 0.7395368425931749,
+    "ruthless": 0.6541288631056651,
+    "carousing": 0.150032429432315,
+    "amorous": 1.510834945862146,
+    "patient": 0.8999469731367441,
+    "stealth": 0.0015045564073011084,
+    "devotion": 0.794704716942603,
+    "craft": 1.2520188227260682,
+    "leadership": 1.2140241710493462
   },
   "aptitudes": [
     "strategist",
@@ -5922,7 +6089,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 743,
+  "actionCount": 744,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6312,8 +6479,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784858869480,
-  "rev": 1201,
+  "updatedAt": 1784859014392,
+  "rev": 1202,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8798,7 +8965,7 @@
   "syncedAt": 1784838745449,
   "teachers": {},
   "regionsKnown": {
-    "valley": 477,
+    "valley": 478,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -8925,10 +9092,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T02:07:49.477Z",
+      "lastAt": "2026-07-24T02:10:14.390Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 77
+      "beats": 78
     }
   ],
   "company": [
@@ -9128,20 +9295,20 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 113,
-    "choices": 113,
-    "characterDeltas": 46,
-    "scene": 113,
-    "npcUpdates": 99,
+    "sceneSummary": 114,
+    "choices": 114,
+    "characterDeltas": 47,
+    "scene": 114,
+    "npcUpdates": 100,
     "factUpdates": 7,
-    "placeUpdates": 20,
+    "placeUpdates": 21,
     "codexUpdates": 69,
-    "timeOps": 107,
+    "timeOps": 108,
     "imagePrompt": 3,
     "sceneEnded": 25,
     "itemUpdates": 2,
     "questUpdates": 12,
-    "offer": 10,
+    "offer": 11,
     "moveTo": 10,
     "delegateOps": 1,
     "deeds": 1,
@@ -9149,9 +9316,9 @@
     "ledgerEvents": 3,
     "discovery": 2,
     "stageOps": 5,
-    "generateRequest": 2
+    "generateRequest": 3
   },
-  "_opTurns": 113,
+  "_opTurns": 114,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -9159,7 +9326,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 11,
+      "applied": 12,
       "rejected": 0,
       "lastWhy": null
     },

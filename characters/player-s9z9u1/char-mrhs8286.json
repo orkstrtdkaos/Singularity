@@ -1740,51 +1740,58 @@
         "player": "Let's fi d Vesh first ",
         "summary": "Silas and Pell move from the hardware boutique toward the well to find Veth — she is near the water-seller's cart, listening to him speak.",
         "narration": "\"Veth first,\" you say, and Pell nods once without argument.\n\nYou told Veth to ask after Crane and look for workers or resources — that puts her at the water-seller cluster or somewhere near the well, where the talk runs practical and the people who know the settlement's supply lines tend to stand. You head that direction, Huginn lifting off the stall frame and finding the rooftop above you.\n\nThe crescent gives way to the broader lane that runs toward the settlement's center. The well is visible ahead — rope-post, boiling-rags still draped on the rail, the gray-brown smell of the creek faint in the air. Two women are filling jugs at a careful distance from each other, neither speaking. A water-seller has his cart at the lane's east edge, a hand-lettered sign nailed to the axle.\n\nVeth is standing near the cart. She has her arms loose at her sides and she is listening to the seller say something at length. Her expression is the one she uses when someone is telling her less than they think they are."
+      },
+      {
+        "player": "Wait for Veth to finish — give her the room to work",
+        "summary": "Silas and Pell wait at the edge of the lane while Veth finishes working the water-seller for information.",
+        "narration": "You slow your pace and stop a few steps back from the water-seller's cart, giving Veth the room she needs. Pell comes to a halt beside you without being asked — she reads the situation the same way you do.\n\nVeth is listening to the seller speak. He is a broad man with a sun-cracked face, standing behind a two-wheeled cart stacked with clay-sealed jugs. He is talking more than he means to, which is usually what happens when someone listens well enough. Veth's arms are loose at her sides. Her expression is level and unhurried, the kind of attention that makes people feel heard and keeps talking past the point they intended to stop.\n\nYou catch fragments. The seller says something about the creek running wrong since the cold broke. He says it in the way a man says something he has been saying for two weeks and has not yet gotten a satisfying answer to. Veth nods once, and he says something else — a name, or maybe a direction.\n\nPell leans slightly toward you without turning her head. \"She's good at that,\" she says quietly. It is not a compliment exactly — more a plain recognition, the way she names the grain in iron."
       }
     ],
     "lastTurn": {
-      "narration": "\"Veth first,\" you say, and Pell nods once without argument.\n\nYou told Veth to ask after Crane and look for workers or resources — that puts her at the water-seller cluster or somewhere near the well, where the talk runs practical and the people who know the settlement's supply lines tend to stand. You head that direction, Huginn lifting off the stall frame and finding the rooftop above you.\n\nThe crescent gives way to the broader lane that runs toward the settlement's center. The well is visible ahead — rope-post, boiling-rags still draped on the rail, the gray-brown smell of the creek faint in the air. Two women are filling jugs at a careful distance from each other, neither speaking. A water-seller has his cart at the lane's east edge, a hand-lettered sign nailed to the axle.\n\nVeth is standing near the cart. She has her arms loose at her sides and she is listening to the seller say something at length. Her expression is the one she uses when someone is telling her less than they think they are.",
-      "sceneSummary": "Silas and Pell move from the hardware boutique toward the well to find Veth — she is near the water-seller's cart, listening to him speak.",
+      "narration": "You slow your pace and stop a few steps back from the water-seller's cart, giving Veth the room she needs. Pell comes to a halt beside you without being asked — she reads the situation the same way you do.\n\nVeth is listening to the seller speak. He is a broad man with a sun-cracked face, standing behind a two-wheeled cart stacked with clay-sealed jugs. He is talking more than he means to, which is usually what happens when someone listens well enough. Veth's arms are loose at her sides. Her expression is level and unhurried, the kind of attention that makes people feel heard and keeps talking past the point they intended to stop.\n\nYou catch fragments. The seller says something about the creek running wrong since the cold broke. He says it in the way a man says something he has been saying for two weeks and has not yet gotten a satisfying answer to. Veth nods once, and he says something else — a name, or maybe a direction.\n\nPell leans slightly toward you without turning her head. \"She's good at that,\" she says quietly. It is not a compliment exactly — more a plain recognition, the way she names the grain in iron.",
+      "sceneSummary": "Silas and Pell wait at the edge of the lane while Veth finishes working the water-seller for information.",
       "choices": [
         {
-          "label": "Approach Veth and the seller — listen before stepping in",
+          "label": "When Veth wraps up, step in and ask the seller directly what he knows about the creek running wrong — where the change started, when",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense quietly while you wait — read the settlement's water infrastructure as a design, see what the whole shape tells you",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Step in beside Veth and let the seller know he has more audience now",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Hang back and use Order-Sense to read the well and water-cart's design — see what the infrastructure here is actually built for",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Wait for Veth to finish — give her the room to work",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Let Veth report first — hear everything she learned before you decide what to ask next",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Huginn — the bird has been above the settlement since you arrived; if something is ending here, it will have noticed",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
           ],
           "trivial": true
         }
@@ -1794,40 +1801,35 @@
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Walking beside Silas, coat tugged straight, watching the lane ahead."
+            "state": "Standing beside Silas, watching Veth work the seller — coat straight, quiet."
           },
           {
             "name": "Huginn",
-            "state": "On the rooftop above, moving with the party."
+            "state": "On the rooftop above, settled and watching the lane."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Standing near the water-seller's cart, arms loose, listening to the seller speak — her expression says she is getting less information than he thinks he is giving."
+            "state": "At the water-seller's cart — listening, the seller talking more than he planned to."
+          },
+          {
+            "name": "Water-seller",
+            "state": "Talking to Veth — a broad, sun-cracked man behind a cart of clay-sealed jugs, saying more than he intended."
           }
         ],
         "objects": [
           "The well — rope-post, boiling-rags on the rail",
-          "Water-seller's cart — hand-lettered sign on the axle",
+          "Water-seller's cart — hand-lettered sign on the axle, stacked clay-sealed jugs",
           "Two women filling jugs at a careful distance from each other"
         ],
         "threads": [
-          "Veth is mid-conversation with the water-seller — what has she learned?",
+          "Veth is mid-conversation with the water-seller — the seller mentioned the creek running wrong since the cold broke, and possibly a name or direction",
           "Edvar Crane's whereabouts still unknown",
-          "Veth's errand — workers, resources, asking after Crane — in progress"
+          "Veth's full report not yet heard"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Found near the water-seller's cart at the Crossing well — mid-conversation, listening to someone tell her less than they think they are.",
-          "statusNote": "At the water-seller's cart near the Crossing well, in conversation."
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk through the crescent to the well lane."
+        "why": "A brief pause in the lane while Veth finishes at the cart"
       }
     },
     "sceneState": {
@@ -1835,26 +1837,30 @@
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Walking beside Silas, coat tugged straight, watching the lane ahead."
+          "state": "Standing beside Silas, watching Veth work the seller — coat straight, quiet."
         },
         {
           "name": "Huginn",
-          "state": "On the rooftop above, moving with the party."
+          "state": "On the rooftop above, settled and watching the lane."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Standing near the water-seller's cart, arms loose, listening to the seller speak — her expression says she is getting le"
+          "state": "At the water-seller's cart — listening, the seller talking more than he planned to."
+        },
+        {
+          "name": "Water-seller",
+          "state": "Talking to Veth — a broad, sun-cracked man behind a cart of clay-sealed jugs, saying more than he intended."
         }
       ],
       "objects": [
         "The well — rope-post, boiling-rags on the rail",
-        "Water-seller's cart — hand-lettered sign on the axle",
+        "Water-seller's cart — hand-lettered sign on the axle, stacked clay-sealed jugs",
         "Two women filling jugs at a careful distance from each other"
       ],
       "threads": [
-        "Veth is mid-conversation with the water-seller — what has she learned?",
+        "Veth is mid-conversation with the water-seller — the seller mentioned the creek running wrong since the cold broke, and possibly a name or direction",
         "Edvar Crane's whereabouts still unknown",
-        "Veth's errand — workers, resources, asking after Crane — in progress"
+        "Veth's full report not yet heard"
       ]
     }
   },
@@ -4566,7 +4572,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 579,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The stock shelter, plain and open on the lee side of the field-stone wall — exactly the kind of place Huginn will land first and inspect…",
@@ -6069,21 +6075,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.59565763879456,
-    "cerebral": 13.865267274278255,
-    "social": 14.786451965651851,
-    "generous": 4.434445260988346,
-    "cautious": 4.749136067156844,
-    "physical": 0.741421463112151,
-    "risky": 0.6516027270894363,
-    "ruthless": 0.5763501241844657,
-    "carousing": 0.13219292743705707,
-    "amorous": 2.2348780548009812,
-    "patient": 0.7929394022825903,
-    "stealth": 0.0013256581708892602,
-    "devotion": 0.7002109035905086,
-    "craft": 1.1031483927088133,
-    "leadership": 1.069671468745764
+    "strategic": 17.155766197824697,
+    "cerebral": 13.518635592421298,
+    "social": 14.416790666510554,
+    "generous": 5.3235841294636375,
+    "cautious": 4.6304076654779225,
+    "physical": 0.7228859265343471,
+    "risky": 0.6353126589122005,
+    "ruthless": 0.5619413710798541,
+    "carousing": 0.12888810425113065,
+    "amorous": 2.1790061034309565,
+    "patient": 0.7731159172255255,
+    "stealth": 0.0012925167166170286,
+    "devotion": 0.6827056310007459,
+    "craft": 1.075569682891093,
+    "leadership": 1.0429296820271199
   },
   "aptitudes": [
     "strategist",
@@ -6091,7 +6097,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 749,
+  "actionCount": 750,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6481,8 +6487,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784865000852,
-  "rev": 1213,
+  "updatedAt": 1784865104429,
+  "rev": 1214,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9044,7 +9050,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 483,
+    "valley": 484,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9171,10 +9177,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T03:50:00.838Z",
+      "lastAt": "2026-07-24T03:51:44.420Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 83
+      "beats": 84
     }
   ],
   "company": [
@@ -9374,15 +9380,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 119,
-    "choices": 119,
+    "sceneSummary": 120,
+    "choices": 120,
     "characterDeltas": 49,
-    "scene": 119,
+    "scene": 120,
     "npcUpdates": 104,
     "factUpdates": 7,
     "placeUpdates": 21,
     "codexUpdates": 70,
-    "timeOps": 113,
+    "timeOps": 114,
     "imagePrompt": 3,
     "sceneEnded": 26,
     "itemUpdates": 2,
@@ -9397,7 +9403,7 @@
     "stageOps": 5,
     "generateRequest": 3
   },
-  "_opTurns": 119,
+  "_opTurns": 120,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

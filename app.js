@@ -18,7 +18,7 @@ import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
-import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment
+import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.235";
+const APP_VERSION = "1.8.236";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1562,6 +1562,15 @@ function migrate(c) {
   // SNG-197 p2: braids backfilled as stubs (before the moment existed) get the moment they never got —
   // enriched in place + re-presented, one per load. Best-effort, non-blocking.
   if ((c.braids || []).some(b => c.customAbilities?.[b.id]?.minted && c.customAbilities[b.id].minted.presented !== true)) presentBackfilledBraids(c);
+  // SNG-226: a discovery recorded before it was made USABLE (Erik's Marrow's Wings) gets registered as a
+  // usable craft on load — so the intent-parser/wheel/resolver (all read abilities[]) can finally see it.
+  // Idempotent; runs before the moment backfill so a re-presented discovery is already castable. Live layer.
+  {
+    const cat = { ...CONTENT.abilities, ...(c.customAbilities || {}) };
+    let registered = 0;
+    for (const d of (c.discoveries || [])) if (d && !(c.abilities || []).some(a => a.abilityId === d.id) && registerDiscoveryAbility(c, d, cat, { at: null })) registered++;
+    if (registered) { try { saveCharacter(c); } catch { /* best-effort */ } }
+  }
   // SNG-222: a discovery minted before the moment existed (Erik's Marrow's Wings) gets its moment on load.
   if ((c.discoveries || []).some(d => d && !d._momentShown)) presentBackfilledDiscoveries(c);
   return c;
@@ -3758,7 +3767,8 @@ function applyTurn(turn, resolution, playerWords = null) {
       abilityIds: resolution.discoveryAbilities || [], noveltyHint: resolution.action?.noveltyHint || "", day: dayNow
     });
     if (minted) {
-      turn.narration += `\n\n*✦ New technique discovered: **${minted.name}** — it's yours now.*`;
+      registerDiscoveryAbility(character, minted, fullCatalog(), { at: dayNow }); // SNG-226: it's not just RECORDED, it's USABLE — the parser/wheel/resolver read abilities[]
+      turn.narration += `\n\n*✦ New technique discovered: **${minted.name}** — it's yours now, ready to use.*`;
       queueDiscoveryMoment(minted, character); // SNG-222: a discovery deserves the ceremony (+ its image, §5)
       setTimeout(flushBraidMoments, 450);       // after the turn renders (parallels the braid mint flush)
     }

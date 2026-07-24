@@ -144,3 +144,48 @@ export function mintBraid(character, def, { at = null } = {}) {
   character.braids.push({ id: def.id, from: [...def.minted.from], name: def.name, tier: def.minted.tier, mintedAt: at });
   return def;
 }
+
+/** SNG-226: a discovery is a RECORDED FACT — make it a USABLE CRAFT. Registers the discovery in `abilities[]`
+ *  (+ `customAbilities`, so `fullCatalog()` resolves it) with a braid-shaped, rank-1 usable def — so every
+ *  reader of the ONE ability list (the intent-parser, the skill wheel, the roll resolver) finally SEES it,
+ *  fixing all three at once (§3). Reuses `buildBraidDef` when the discovery's parents resolve to 2 distinct
+ *  catalog crafts (the richest def: unioned functions, tree, cost, tradition); else a minimal braid-shaped
+ *  fallback from the discovery's own name + description. Parents are DEDUPED (a 3-parent discovery with a
+ *  repeated craft collapses to 2) and id-drift-tolerant (hyphen/underscore). Idempotent: skips a discovery
+ *  already in `abilities[]`, OR whose parent-pairing was already braided (it's usable via that braid). Pure. */
+export function registerDiscoveryAbility(character, discovery, catalog = {}, { at = null } = {}) {
+  if (!character || !discovery?.id || !discovery?.name) return null;
+  character.abilities = character.abilities || [];
+  if (character.abilities.some(a => a.abilityId === discovery.id)) return null; // already usable under its own id
+  const resolve = id => catalog[id] ? id : catalog[String(id).replace(/-/g, "_")] ? String(id).replace(/-/g, "_") : catalog[String(id).replace(/_/g, "-")] ? String(id).replace(/_/g, "-") : null;
+  const parents = [...new Set((discovery.abilities || []).map(resolve).filter(Boolean))];
+  // already usable via a braid of the SAME pairing (e.g. a discovery that was also braided) → nothing to do.
+  if (parents.length === 2 && (character.braids || []).some(b => braidKey(b.from) === braidKey(parents))) return null;
+  let def = parents.length === 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description } }) : null;
+  if (!def) {
+    // fallback: a minimal braid-shaped def from whatever resolved + the discovery's own words (rank 1, deepens).
+    const sources = parents.map(id => catalog[id]).filter(Boolean);
+    const functions = [...new Set(sources.flatMap(s => Array.isArray(s.functions) ? s.functions : []))];
+    const energyCost = Math.max(4, Math.min(15, (sources.reduce((m, s) => Math.max(m, s.energyCost || 0), 0) || 6) + 2));
+    const nm = smartClamp(String(discovery.name), 60);
+    const desc = smartClamp(String(discovery.description || `A craft discovered in play: ${discovery.name}.`), 400);
+    def = {
+      id: discovery.id, name: nm, powerSystem: "learned", tradition: "learned", levelReq: 1, energyCost,
+      attribute: sources[0]?.attribute || "practical", functions, harmRung: "none", effectTags: [], nativeOrCombination: "combination",
+      description: desc, notFor: "What lies outside this craft's own reach — the single new move your discovery made, no wider.",
+      narrationHints: smartClamp(String(discovery.description || discovery.name), 200),
+      tree: [{ rank: 1, name: nm, grants: smartClamp(String(discovery.description || "The discovered craft runs as one."), 200), cannot: "What it has not yet grown to do.", functions }],
+      minted: { kind: "discovery", from: [...(discovery.abilities || [])], mintedAt: at, sourceNames: [...(discovery.abilities || [])], enriched: !!discovery.description }
+    };
+  }
+  def.id = discovery.id;                                    // the ability shares the discovery's id (the name the player uses)
+  def.minted = def.minted || { from: [...(discovery.abilities || [])] };
+  def.minted.kind = def.minted.kind === "braid" ? "discovery" : (def.minted.kind || "discovery");
+  def.minted.discoveredFrom = discovery.key || null;
+  character.customAbilities = character.customAbilities || {};
+  character.customAbilities[def.id] = def;                  // resolvable everywhere via fullCatalog()
+  character.abilities.push({ abilityId: def.id, level: 1, braided: (def.minted.from || []).length >= 2, discovered: true });
+  character.braids = character.braids || [];                // provenance ledger (braid-shaped); dedupe by id
+  if (!character.braids.some(b => b.id === def.id)) character.braids.push({ id: def.id, from: [...(def.minted.from || [])], name: def.name, tier: def.minted.tier || null, mintedAt: at, discovered: true });
+  return def;
+}

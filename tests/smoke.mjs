@@ -7668,6 +7668,42 @@ await (async () => {
   check("215 §C-2: the tab bar is styled", /\.char-tabs \{ display: flex/.test(cssC) && /\.char-tab\.on \{/.test(cssC));
 }
 
+// ---- SNG-226: a discovery is RECORDED but must also be USABLE — register it in abilities[] (the one list) ----
+{
+  const br226 = await import("../engine/braids.js");
+  const cat226 = {
+    a: { id: "a", name: "Craft A", tradition: "ashwarden", levelReq: 2, functions: ["strike"], harmRung: "wounding", energyCost: 5 },
+    b: { id: "b", name: "Craft B", tradition: "ashwarden", levelReq: 3, functions: ["ward"], harmRung: "none", energyCost: 7 }
+  };
+  // Marrow's Wings shape: a 2-parent discovery recorded in discoveries[] but NOT in abilities[] (the live bug).
+  const ch = { level: 6, abilities: [{ abilityId: "a", level: 3 }, { abilityId: "b", level: 2 }] };
+  const disc = { key: "a+b:flight", id: "marrow-s-wings", name: "Marrow's Wings", description: "spread death-shadow wings and fly", abilities: ["a", "b"], discoveredDay: 13 };
+  const def = br226.registerDiscoveryAbility(ch, disc, cat226, { at: 13 });
+  check("226: a discovery REGISTERS as a usable craft in abilities[] under its own id (rank 1, deepens through use)", !!def && ch.abilities.some(a => a.abilityId === "marrow-s-wings" && a.level === 1 && a.discovered));
+  check("226: the usable def is resolvable via customAbilities (fullCatalog sees it) — real cost + the GM's description", ch.customAbilities?.["marrow-s-wings"]?.energyCost > 0 && /fly/.test(ch.customAbilities["marrow-s-wings"].description));
+  check("226 §3: functions carry over from the parents (the resolver/wheel read them)", Array.isArray(ch.customAbilities["marrow-s-wings"].functions));
+  check("226 GUARD: idempotent — a discovery already usable is not re-registered (no duplicate)", br226.registerDiscoveryAbility(ch, disc, cat226) === null && ch.abilities.filter(a => a.abilityId === "marrow-s-wings").length === 1);
+
+  // a 3-parent discovery with a repeated parent DEDUPES to 2 and still registers (You Shall Not Pass shape).
+  const ch3 = { level: 6, abilities: [{ abilityId: "a", level: 1 }, { abilityId: "b", level: 1 }] };
+  check("226: a 3-parent discovery (a repeated parent) dedupes to 2 and still registers usable", !!br226.registerDiscoveryAbility(ch3, { id: "you-shall-not-pass", name: "You Shall Not Pass", description: "hold the line", abilities: ["a", "a", "b"] }, cat226) && ch3.abilities.some(a => a.abilityId === "you-shall-not-pass"));
+
+  // already usable via a braid of the SAME pairing → skip (it's castable via that braid, don't double-register).
+  const chBr = { level: 6, abilities: [{ abilityId: "a", level: 1 }, { abilityId: "b", level: 1 }], braids: [{ id: "braid_a_b", from: ["a", "b"] }] };
+  check("226 GUARD: a discovery whose pairing is already braided is skipped (already castable via the braid)", br226.registerDiscoveryAbility(chBr, { id: "resonant-x", name: "Resonant X", abilities: ["a", "b"] }, cat226) === null);
+
+  // fallback: only ONE parent resolves (id-drift / missing) → still a minimal USABLE def from the discovery's words.
+  const ch1 = { level: 6, abilities: [{ abilityId: "b", level: 1 }] };
+  const def1 = br226.registerDiscoveryAbility(ch1, { id: "half-known", name: "Half Known", description: "a craft half-remembered", abilities: ["missing-parent", "b"] }, cat226);
+  check("226: a parent that doesn't resolve still yields a usable craft (a minimal fallback — never a dead reward)", !!def1 && ch1.customAbilities?.["half-known"]?.energyCost > 0 && ch1.abilities.some(a => a.abilityId === "half-known"));
+  check("226 GUARD: the discovery record is KEPT — registration ADDS the usable ability, discoveries[] is the moment/codex source", !!disc.id && !!disc.key); // the input discovery object is never mutated away
+
+  // app wiring: at the mint site + a load backfill.
+  const appSrc226 = readFileSync(join(root, "app.js"), "utf8");
+  check("226: mint-time — recordDiscovery is followed by registerDiscoveryAbility (usable + celebrated together, §5)", /registerDiscoveryAbility\(character, minted, fullCatalog\(\)/.test(appSrc226));
+  check("226 §4: a load BACKFILL registers any discovery not yet in abilities[] (Marrow's Wings heals on load)", /for \(const d of \(c\.discoveries \|\| \[\]\)\)[\s\S]{0,140}registerDiscoveryAbility\(c, d/.test(appSrc226));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

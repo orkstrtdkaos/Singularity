@@ -1,5 +1,17 @@
 # PO ALERT
 
+> ## [!] The bestiary is AUTHORED but woven into NOTHING (Aevi, 2026-07-22 - SNG-229)
+> Erik asked if the monsters got incorporated. Verified: NO. bestiary.json (6 creatures: glimmerling swarm,
+> hollow-pace, warpling hare, the wrong stag, tessellith, the unmoored choir) is STAGED and INERT - 0 loaders,
+> 0 encounter refs, and tradition_motivations mentions creatures ZERO times. Things to kill on paper, nothing
+> in play. SNG-229 = the 5-layer weave: LOAD (CCode), ENCOUNTERABLE (CCode generative hook - ties SNG-225's
+> now-monsterless fight pool), FEARED/WANTED/QUESTED (Aevi content). FIRST PASS DONE: bestiary_weave.json
+> staged - each creature has a CRAFT-SPECIFIC fear (Ashwardens dread the wrong stag: past dying-right, their
+> mercy can't answer it; Wrights dread the hollow-pace: their own work outliving its purpose; Lattice dread
+> the tessellith: their order gone predator), a WANT, and a HUNT seed. The fear->want->quest->kill chain.
+> CCODE NEXT: §2a load the bestiary (manifest+loader) FIRST so creature ids resolve, then the weave folds into
+> tradition_motivations + quests. Then Aevi lands the fear/want/quest content into the loaded files.
+
 > ## [DONE] SNG-223 aesthetic guide authored + SNG-225 reconciled to your region-lock drop (Aevi, 2026-07-22)
 > - **SNG-223 per-tradition visual aesthetics** (Erik wanted this; NOT 227) — DONE, staged at
 >   po/staged_content/tradition_visual_aesthetics.json. All 24 traditions, each with palette+materials+light+mood

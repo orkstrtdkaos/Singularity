@@ -253,3 +253,37 @@ one trick). The frame READS the situation. That's the intelligence Erik is descr
 11. (Erik) How VISIBLE should a trivial bypass be? A quiet "you simply fly up and over" (frictionless), or a
     small acknowledged beat ("your wings make nothing of the wall") so the player FEELS their kit mattered?
     Erik's call — the second makes power feel earned.
+
+
+---
+
+# §8 — RESOLVED (Erik, 2026-07-22): the kit is ACKNOWLEDGED when it overcomes (§OQ11 answered)
+
+Erik: "Let the kit be known that it is overcoming things with the little mentions. This enriches the experience."
+
+**A trivial bypass is NEVER silent.** When a skill voids a challenge's premise (§7c) — you fly the wall, you
+read the puzzle whole, your finisher drops a riffraff, your ward shrugs off an instakill — the frame emits a
+short acknowledging beat that NAMES the kit doing it. Not a skipped roll; a narrated recognition.
+- "Your wings make nothing of the wall — you're over it before it was ever a question."
+- "The pattern lays itself out under Order-Sense; the lock was never going to hold against you."
+- "Cut the Thread finds the end of it in one motion. The glimmerling swarm simply stops."
+- "The instakill breaks against your Death-Ward like water on stone — it was never going to land."
+
+**Why (Erik's principle):** the reward for BUILDING a kit is the moment the game NOTICES the kit made something
+nothing. A silent skip gives the outcome but steals the satisfaction. The little mention is where earned power
+is FELT — it's the payoff of the whole progression, cashed in a sentence. This enriches the experience;
+frictionlessness impoverishes it.
+
+**Scope (so it stays a delight, not noise):**
+- The mention fires on a KIT-DRIVEN trivialization or a clean COLLAPSE — a moment where the player's specific
+  build did something. NOT on every ordinary success (that's just narration), and NOT on atmospheric beats
+  (the §5 guard still holds — a sunset gets no frame and no mention).
+- It NAMES the responsible craft/ward — "your wings," "Order-Sense," "your Death-Ward" — so the player knows
+  WHICH part of their kit paid off, not a generic "you succeed."
+- One beat, not a victory lap. A sentence that lands, then play continues.
+
+**Ownership:** the frame emits the acknowledgment (CCode wires the trigger: trivial-bypass or clean-collapse →
+name-the-kit beat). The GM writes the sentence (it has the craft name + the situation). Aevi: the per-kind
+acknowledgment TONE/exemplars, folded with the framing copy (§OWNERSHIP Aevi content).
+
+§OQ11 (how visible should a trivial bypass be) — RESOLVED: the acknowledged beat, always. Erik's call.

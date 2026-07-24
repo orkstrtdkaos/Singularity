@@ -50,18 +50,16 @@ export function flavorMultiplier(flavor, danger) {
   return 0.15 + d * 0.6;                                    // 0.15 (safe) … 2.55 (deadly)
 }
 
-/** Does this encounter entry fit the location? minDanger gate + region + tag match. */
+/** Does this encounter entry fit the location? DANGER gate + tag match. SNG-225 §4c (Erik's call): the
+ *  region-lock is DROPPED — "the world is full of wonders and dangers; let each location have them as they
+ *  come." Region-anchoring was disqualifying 44/58 encounters and starving every location's pool; now an
+ *  encounter's fitness is its DANGER threshold (severity by the place's danger) + its TAG context, not its
+ *  geography. A dangerous encounter can find any place whose danger admits it — Millbrook defends itself when
+ *  the threat is near. (The entry's `regions` field is kept as data, no longer a hard gate.) */
 export function isEligible(entry, location, { ignoreDanger = false } = {}) {
   if (!ignoreDanger && (entry.minDanger || 0) > dangerOf(location)) return false;
-  const regions = entry.regions || ["*"];
-  if (!regions.includes("*")) {
-    const locRegion = location?.regionId || location?.id || "";
-    const locCommunity = location?.communityId || "";
-    if (!regions.some(r => locRegion.includes(r) || locCommunity.includes(r) || (location?.id || "").includes(r))) return false;
-  }
-  // entry.tags, when present, are a *preference* not a hard gate unless it also
-  // named regions — a cutpurse wants a crowd. Soft-match: if tags listed and NONE
-  // overlap the location's tags, it's ineligible ONLY for tag-anchored flavors.
+  // entry.tags, when present, are a *preference* not a hard gate — a cutpurse wants a crowd. Soft-match: if
+  // tags listed and NONE overlap the location's tags, it's ineligible ONLY for tag-anchored flavors.
   if (entry.tags && entry.tags.length) {
     const locTags = (location?.tags || []).map(t => String(t).toLowerCase());
     const overlap = entry.tags.some(t => locTags.some(lt => lt.includes(t) || t.includes(lt)));

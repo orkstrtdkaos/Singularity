@@ -7723,6 +7723,14 @@ await (async () => {
   const appSrc225b = readFileSync(join(root, "app.js"), "utf8");
   check("225 §4a: mintTransitLocation stamps a derived dangerLevel (never null again)", /dangerLevel: deriveDangerLevel\(\{ tags: \["transitional"\] \}, \{ baseDanger: here\?\.dangerLevel \}\)/.test(appSrc225b));
   check("225 §4a: a load BACKFILL heals any gen-location minted with null danger, from the region MEDIAN (Silas's Waygate → ~2)", /for \(const loc of Object\.values\(c\.generated\?\.location \|\| \{\}\)\)[\s\S]{0,160}loc\.dangerLevel = deriveDangerLevel\(loc, \{ baseDanger: regionMedian/.test(appSrc225b));
+
+  // §4c (Erik's call): the REGION-lock is dropped — a region-anchored encounter can find any place its DANGER admits.
+  const marchRaider = { id: "march-raider", flavor: "fight", minDanger: 2, regions: ["riven_marches"] };
+  check("225 §4c: a region-anchored encounter is ELIGIBLE outside its region now (the world's dangers travel)", isEligible(marchRaider, { tags: ["transitional"], regionId: "valley", dangerLevel: 2 }) === true);
+  check("225 §4c: but the DANGER gate still governs severity — that fight can't reach a danger-0 haven", isEligible(marchRaider, { tags: ["sanctuary"], regionId: "valley", dangerLevel: 0 }) === false);
+  const crowdTheft = { id: "cutpurse", flavor: "theft", minDanger: 1, regions: ["*"], tags: ["crowd"] };
+  check("225 §4c: the TAG soft-match still governs context — a cutpurse (wants a crowd) skips an empty road", isEligible(crowdTheft, { tags: ["transitional"], dangerLevel: 2 }) === false && isEligible(crowdTheft, { tags: ["crowd", "market"], dangerLevel: 2 }) === true);
+  check("225 §4c: isEligible no longer hard-gates on region (the region field is data, not a lock)", /region-lock is DROPPED/.test(readFileSync(join(root, "engine/random_encounters.js"), "utf8")));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

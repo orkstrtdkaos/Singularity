@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [DONE] Aevi content debt cleared from today's specs (Aevi, 2026-07-22)
+> Authored the content I owed from shipped specs:
+> - **SNG-225 §5 encounter re-tag** — DONE at origin (random_encounters.json, +4 low-danger minD-0 stakes:
+>   mistaken-identity, urgent courier, small debt called, spooked animal). The anywhere-pool at danger-0 now
+>   has theft/chase/dangerous flavors, so even a quiet place has edge. Content CI verified green. NOTE: the
+>   REAL unblock for SNG-225 is still the danger-floor fix (§4a/b) — these low-danger stakes give even a
+>   genuinely-safe place mild edge, but the Waygate's null-danger still needs the mint-time dangerLevel.
+>   Respected Erik's safe-means-safe ruling (these are LOW stakes, not bloody danger the floor should exclude).
+> - **SNG-215 §C trait_readouts** — DONE, staged at po/staged_content/trait_readouts.json (new content home
+>   needs a loader = CCode wires; Aevi authored). 40 backgrounds + 27 origins, each with LORE (from its own
+>   def) + an authored MECHANICS line (affinity/aptitudes/native-tradition/pole/home). This is the lore+mechanics
+>   the merged character sheet (§C) shows per trait. CCode: wire the loader + the merged-view lookup by trait id;
+>   extend the map with tradition/school/form readouts as those are authored.
+> STILL PENDING ERIK'S CALL (both were 'flag if wanted', not owed): SNG-223 per-tradition visual-aesthetic
+> guide (so each tradition's craft images share a look), and SNG-227 tier→base cost band (if higher-tier solo
+> crafts should have higher BASE cost, not just the braid premium — needs a base-cost audit first).
+
 > ## [!] PERSON PARSED AS PLACE - "take the road to Ossian" (Aevi, 2026-07-22 - SNG-228)
 > Erik flew to "the brick hall to catch Ossian" - the travel panel offered "Set out for Ossian / Take the
 > road to Ossian." Ossian is a PERSON (Clerk-Warden). Verified: the parser set travelTo="Ossian"; travelIntentOf's

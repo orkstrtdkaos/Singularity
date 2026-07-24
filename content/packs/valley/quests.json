@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "quests_structured",
  "kind": "quests",
- "note": "SNG-065 \u2014 the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose \u2014 the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess.",
+ "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess. | SNG-229 hunts (Aevi 2026-07-22): creature-objective quests bound to the tradition that fears/wants each. Objective creatureId resolves against content/packs/valley/bestiary.json. The fear->want->quest->kill chain, closed.",
  "quests": [
   {
    "id": "the_edge_district_ledger",
@@ -20,14 +20,14 @@
     "abyssal",
     "stillhold"
    ],
-   "premise": "A filtration supervisor named Fendt was marked on the Edge District accountability board by his own superior \u2014 and no accompanying record was filed. A keeper of thirty years says she has never seen that happen. Fendt is going to be ruined by a piece of paper that does not exist.",
-   "stakes": "If you walk away: Fendt is stripped and exiled within the season, the water-filtration failure he was blamed for goes uncorrected because the man who understood it is gone, and Overseer Grael's method \u2014 a name on a board, no record, no appeal \u2014 is confirmed as something that works. He will use it again. He has used it before.",
+   "premise": "A filtration supervisor named Fendt was marked on the Edge District accountability board by his own superior — and no accompanying record was filed. A keeper of thirty years says she has never seen that happen. Fendt is going to be ruined by a piece of paper that does not exist.",
+   "stakes": "If you walk away: Fendt is stripped and exiled within the season, the water-filtration failure he was blamed for goes uncorrected because the man who understood it is gone, and Overseer Grael's method — a name on a board, no record, no appeal — is confirmed as something that works. He will use it again. He has used it before.",
    "stages": [
     {
      "id": "s1",
      "objective": "Find out what the missing record would have said.",
      "condition": "Speak with Fendt OR obtain the filtration log for the marked period.",
-     "change": "Codex: Fendt's account is recorded \u2014 and it does not match the board."
+     "change": "Codex: Fendt's account is recorded — and it does not match the board."
     },
     {
      "id": "s2",
@@ -44,7 +44,7 @@
     {
      "id": "s4",
      "objective": "Decide what the truth is for.",
-     "condition": "Resolve \u2014 see outcomes.",
+     "condition": "Resolve — see outcomes.",
      "change": "The district changes. So does Fendt. So, one way or another, does Grael."
     }
    ],
@@ -53,7 +53,7 @@
     "lattice": "Take the ledger apart line by line until the arithmetic confesses. He is beaten by his own records.",
     "veilwright": "Make a better record. Save Fendt with a truth you built. It works, and you know what you did.",
     "umbral": "Harbor Fendt. Get him out. He lives; the district does not change.",
-    "abyssal": "Name what Grael actually wants \u2014 a quiet district and not to be the villain \u2014 and give him a way to have both, at a price.",
+    "abyssal": "Name what Grael actually wants — a quiet district and not to be the villain — and give him a way to have both, at a price.",
     "stillhold": "Broker it. Fendt is restored quietly, Grael saves face, nobody is punished, and the method survives."
    },
    "outcomes": [
@@ -65,7 +65,7 @@
       "Grael is stripped and removed (NPC state: fallen). His lieutenants scatter into the district as riffraff-tier antagonists.",
       "Fendt is restored, and is permanently in your debt, and is not entirely grateful about it.",
       "The thirty-year keeper is vindicated and becomes an ally who will never lie to you.",
-      "WORLD-EVENT (propagates): 'the Edge District accountability board was opened' \u2014 reaches other districts on the shared clock. Other markings begin to be questioned. Some of them should not be.",
+      "WORLD-EVENT (propagates): 'the Edge District accountability board was opened' — reaches other districts on the shared clock. Other markings begin to be questioned. Some of them should not be.",
       "Verist disposition toward you: strongly raised. Veilwright: lowered."
      ],
      "effects": [
@@ -102,7 +102,7 @@
       },
       {
        "type": "world_event",
-       "text": "Word spreads that the Edge District board was opened; other districts begin questioning their own markings \u2014 some of which should not be.",
+       "text": "Word spreads that the Edge District board was opened; other districts begin questioning their own markings — some of which should not be.",
        "propagates": true,
        "delayDays": 3
       },
@@ -117,7 +117,7 @@
      "name": "Fendt Saved, Grael Standing",
      "summary": "Fendt is safe. The method is intact.",
      "narration": [
-      "Fendt lives and is restored or extracted \u2014 but the board's method is confirmed as survivable, which is not the same as beaten.",
+      "Fendt lives and is restored or extracted — but the board's method is confirmed as survivable, which is not the same as beaten.",
       "Grael remains, and he now knows your face, and he is patient.",
       "Codex: 'Grael's method' recorded as an unresolved pattern. It will recur.",
       "WORLD-EVENT: another name appears on the board within the season, and that one you will not be there for."
@@ -137,7 +137,7 @@
       },
       {
        "type": "codex_fact",
-       "text": "Grael's method \u2014 a name on the board, no record filed \u2014 remains an unresolved pattern."
+       "text": "Grael's method — a name on the board, no record filed — remains an unresolved pattern."
       },
       {
        "type": "world_event",
@@ -158,7 +158,7 @@
      "narration": [
       "Fendt restored; Grael's face saved; the district quiets. It is a genuinely good outcome and it is also a deal with a man who ruins people.",
       "Grael's disposition toward you: WARY RESPECT. He will deal with you again. That is a door, and it is also a rope.",
-      "Abyssal disposition raised. Seraphic lowered \u2014 the Orders would have judged him."
+      "Abyssal disposition raised. Seraphic lowered — the Orders would have judged him."
      ],
      "effects": [
       {
@@ -170,7 +170,7 @@
        "type": "npc_state",
        "npc": "grael",
        "state": "standing",
-       "note": "wary respect; will deal with you again \u2014 a door, and a rope"
+       "note": "wary respect; will deal with you again — a door, and a rope"
       },
       {
        "type": "disposition",
@@ -228,7 +228,7 @@
       },
       {
        "type": "codex_fact",
-       "text": "You walked away from the Edge District ledger. This is a real outcome, not a failure \u2014 and it has a cost, and the cost arrives."
+       "text": "You walked away from the Edge District ledger. This is a real outcome, not a failure — and it has a cost, and the cost arrives."
       },
       {
        "type": "xp",
@@ -253,7 +253,7 @@
     "verist"
    ],
    "premise": "In the Slow Orchard there is a tree, planted three hundred years ago for a specific person, and it is about to fruit. The person it was planted for has not arrived. The Rootkin who planted it is still alive and has been waiting the entire time.",
-   "stakes": "If you walk away: the fruit falls and is not eaten, and the planter \u2014 who has waited three centuries and is now near the end of even a Rootkin life \u2014 dies having been wrong about the one thing they staked a life on. The Rootkin will not say this is a tragedy. It is.",
+   "stakes": "If you walk away: the fruit falls and is not eaten, and the planter — who has waited three centuries and is now near the end of even a Rootkin life — dies having been wrong about the one thing they staked a life on. The Rootkin will not say this is a tragedy. It is.",
    "stages": [
     {
      "id": "s1",
@@ -270,7 +270,7 @@
     {
      "id": "s3",
      "objective": "Decide what to do with a three-hundred-year truth.",
-     "condition": "Resolve \u2014 see outcomes.",
+     "condition": "Resolve — see outcomes.",
      "change": "The planter learns, or does not."
     }
    ],
@@ -278,8 +278,8 @@
     "verist": "Tell the planter plainly. They have earned the truth and it will end them.",
     "veilwright": "Give them a story they can finish their life inside. It is a kindness and it is a lie.",
     "rootkin": "Find someone the tree could still be for. Meaning is not fixed; it can be re-rooted.",
-    "ashwarden": "Tend the ending. The tree, the wait, and the planter \u2014 bring all three to a clean close.",
-    "hourkeeper": "Show them the whole duration. Not the ending \u2014 the WAITING, and what it was worth on its own terms."
+    "ashwarden": "Tend the ending. The tree, the wait, and the planter — bring all three to a clean close.",
+    "hourkeeper": "Show them the whole duration. Not the ending — the WAITING, and what it was worth on its own terms."
    },
    "outcomes": [
     {
@@ -289,7 +289,7 @@
      "narration": [
       "The planter dies within the season. They thank you. It is the worst thanks you have ever received.",
       "Codex: the tree's true history, permanently recorded.",
-      "Verist disposition raised. Rootkin disposition: complicated \u2014 they respect it and will not forgive it quickly.",
+      "Verist disposition raised. Rootkin disposition: complicated — they respect it and will not forgive it quickly.",
       "The tree fruits. Someone must eat it. That is a separate problem and it is now yours."
      ],
      "effects": [
@@ -297,7 +297,7 @@
        "type": "npc_state",
        "npc": "thessa_root",
        "state": "dying",
-       "note": "dies within the season; thanks you \u2014 the worst thanks you have received"
+       "note": "dies within the season; thanks you — the worst thanks you have received"
       },
       {
        "type": "disposition",
@@ -329,7 +329,7 @@
      "name": "Re-Rooted",
      "summary": "You find the tree a new person to have been for.",
      "narration": [
-      "The planter accepts it \u2014 Rootkin believe meaning grows, and this is the argument they have been making for three hundred years.",
+      "The planter accepts it — Rootkin believe meaning grows, and this is the argument they have been making for three hundred years.",
       "A new NPC enters your world permanently, bound to you by a debt they did not ask for.",
       "Rootkin disposition strongly raised. The Slow Orchard adds a stone with your name on it.",
       "WORLD-EVENT: the story propagates. Rootkin elsewhere hear that someone re-rooted a three-century wait."
@@ -348,7 +348,7 @@
       },
       {
        "type": "codex_fact",
-       "text": "The Slow Orchard's oldest tree was re-rooted \u2014 given a new person to have been for. A stone there carries your name."
+       "text": "The Slow Orchard's oldest tree was re-rooted — given a new person to have been for. A stone there carries your name."
       },
       {
        "type": "world_event",
@@ -368,8 +368,8 @@
      "summary": "You let them finish believing.",
      "narration": [
       "The planter dies content, and wrong, and you carry that.",
-      "Veilwright disposition raised. Verist LOWERED \u2014 and a Verist NPC who knows what you did will say so, out loud, at the worst possible moment.",
-      "Codex: the true history is recorded and marked SECRET \u2014 it is in your world and nobody else's."
+      "Veilwright disposition raised. Verist LOWERED — and a Verist NPC who knows what you did will say so, out loud, at the worst possible moment.",
+      "Codex: the true history is recorded and marked SECRET — it is in your world and nobody else's."
      ],
      "effects": [
       {
@@ -391,7 +391,7 @@
       },
       {
        "type": "codex_fact",
-       "text": "You let Thessa Root finish believing. The true history is recorded \u2014 and it is in your world and nobody else's.",
+       "text": "You let Thessa Root finish believing. The true history is recorded — and it is in your world and nobody else's.",
        "secret": true
       },
       {
@@ -418,8 +418,8 @@
     "abyssal",
     "stillhold"
    ],
-   "premise": "Mara Wells has traced the Echo River's poisoning to a single point upstream in the Disputed Zone \u2014 a structure the old maps don't show, drawing power nothing alive built. It is not malfunctioning. It is following an order, and it is nearly finished.",
-   "stakes": "If you walk away: the standoff at the filtration arrays goes live \u2014 Millbrook's guards and the Radiant leadership are one bad morning from open conflict over water neither side controls. Whatever the structure was ordered to do finishes without a single living person having chosen it, and finishing is not the same as stopping.",
+   "premise": "Mara Wells has traced the Echo River's poisoning to a single point upstream in the Disputed Zone — a structure the old maps don't show, drawing power nothing alive built. It is not malfunctioning. It is following an order, and it is nearly finished.",
+   "stakes": "If you walk away: the standoff at the filtration arrays goes live — Millbrook's guards and the Radiant leadership are one bad morning from open conflict over water neither side controls. Whatever the structure was ordered to do finishes without a single living person having chosen it, and finishing is not the same as stopping.",
    "stages": [
     {
      "id": "s1",
@@ -431,27 +431,27 @@
      "id": "s2",
      "objective": "Learn what the structure is.",
      "condition": "Reach the reclamation site itself, or bring what you've found to the Archive Guardian for identification against pre-Transition record.",
-     "change": "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction \u2014 'prepare the watershed.' Linked to What Wakes Beneath."
+     "change": "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath."
     },
     {
      "id": "s3",
      "objective": "Learn what 'prepare' means before deciding what to do about it.",
-     "condition": "Investigate the instruction directly \u2014 read the array's own logic, deathsense what kind of thing it is now, or get someone who was there when it stirred to say what they saw.",
-     "change": "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing \u2014 the standoff cools, but the deeper question does not."
+     "condition": "Investigate the instruction directly — read the array's own logic, deathsense what kind of thing it is now, or get someone who was there when it stirred to say what they saw.",
+     "change": "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not."
     },
     {
      "id": "s4",
      "objective": "Decide what the water becomes.",
-     "condition": "Resolve \u2014 see outcomes.",
+     "condition": "Resolve — see outcomes.",
      "change": "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to."
     }
    ],
    "routes": {
     "verist": "Bring the true source before the district, publicly, before either side can keep blaming the other. Truth as the thing that ends a standoff.",
-    "lattice": "Read the array's own instruction set until it's legible enough to touch \u2014 not guessed at, known.",
+    "lattice": "Read the array's own instruction set until it's legible enough to touch — not guessed at, known.",
     "ashwarden": "Deathsense it directly. It isn't alive the way a person is, but something in it isn't finished being anything else either. Read what an ending means to a thing that doesn't fear its own.",
     "umbral": "Go in unseen. Learn what it's actually doing before anyone upstream decides what story to tell about it.",
-    "abyssal": "Name what the structure wants \u2014 to complete its instruction \u2014 and treat that want as real enough to bargain with.",
+    "abyssal": "Name what the structure wants — to complete its instruction — and treat that want as real enough to bargain with.",
     "stillhold": "Broker the standoff first. Get Harmonic and Radiant to stand down long enough to act on the real source together, before either faction owns the answer."
    },
    "outcomes": [
@@ -461,16 +461,16 @@
      "summary": "The instruction is stopped cold. The water clears. What it was for is buried with it.",
      "narration": [
       "The reclamation site goes dark. Within days the Echo River runs clean, and Millbrook's guards stand down from the filtration arrays without a shot fired.",
-      "The Archive Guardian does not forgive this easily \u2014 a working pre-Transition system, one of perhaps a handful left running in the world, destroyed rather than understood. He is right to be furious and says so.",
-      "Whatever the substrate was preparing this watershed for will now happen somewhere else, to someone who didn't get a choice in it either \u2014 the Valley's tremor was never the only one.",
+      "The Archive Guardian does not forgive this easily — a working pre-Transition system, one of perhaps a handful left running in the world, destroyed rather than understood. He is right to be furious and says so.",
+      "Whatever the substrate was preparing this watershed for will now happen somewhere else, to someone who didn't get a choice in it either — the Valley's tremor was never the only one.",
       "The district exhales. It does not yet know what it gave up to get that exhale.",
-      "Verist disposition toward you: raised \u2014 you gave people the plain truth and a clean ending. Lattice: lowered \u2014 you didn't need to understand it, only to stop it."
+      "Verist disposition toward you: raised — you gave people the plain truth and a clean ending. Lattice: lowered — you didn't need to understand it, only to stop it."
      ],
      "effects": [
       {
        "type": "location_state",
        "location": "the_reclamation_site",
-       "change": "sealed \u2014 permanently inert, the instruction halted mid-execution"
+       "change": "sealed — permanently inert, the instruction halted mid-execution"
       },
       {
        "type": "npc_state",
@@ -500,7 +500,7 @@
       },
       {
        "type": "quest_seed",
-       "text": "Foreclosure doesn't stop the substrate waking elsewhere \u2014 only here. What wakes beneath continues on its own schedule, everywhere the Valley isn't."
+       "text": "Foreclosure doesn't stop the substrate waking elsewhere — only here. What wakes beneath continues on its own schedule, everywhere the Valley isn't."
       },
       {
        "type": "xp",
@@ -513,17 +513,17 @@
      "name": "Let It Finish",
      "summary": "The instruction completes. The water is not restored. It is something else now.",
      "narration": [
-      "You do nothing to stop it, or you help it along, and the reclamation system runs its last cycle to completion. The poisoning stops \u2014 but not because the water went back to what it was.",
+      "You do nothing to stop it, or you help it along, and the reclamation system runs its last cycle to completion. The poisoning stops — but not because the water went back to what it was.",
       "The Echo River no longer sickens anyone. It also no longer behaves entirely like water. Fish return to it changed in ways no one has words for yet. Nobody drowns in it anymore, and nobody has explained why.",
-      "The Archive Guardian is half-vindicated, half-unsettled \u2014 this is exactly the kind of thing he wanted preserved and studied, and exactly the kind of thing nobody asked the district's permission to let happen to their river.",
-      "You made the opening choice at the smallest scale the largest arc has to offer. What the water became is shaped, now, by what happens to it next \u2014 and by who's watching it.",
-      "Ashwarden disposition toward you: raised \u2014 you let a thing finish being what it was becoming instead of forcing it back into what it had been."
+      "The Archive Guardian is half-vindicated, half-unsettled — this is exactly the kind of thing he wanted preserved and studied, and exactly the kind of thing nobody asked the district's permission to let happen to their river.",
+      "You made the opening choice at the smallest scale the largest arc has to offer. What the water became is shaped, now, by what happens to it next — and by who's watching it.",
+      "Ashwarden disposition toward you: raised — you let a thing finish being what it was becoming instead of forcing it back into what it had been."
      ],
      "effects": [
       {
        "type": "location_state",
        "location": "the_reclamation_site",
-       "change": "completed \u2014 instruction fulfilled; the site has gone quiet on its own terms"
+       "change": "completed — instruction fulfilled; the site has gone quiet on its own terms"
       },
       {
        "type": "npc_state",
@@ -543,13 +543,13 @@
       },
       {
        "type": "world_event",
-       "text": "The Echo watershed has changed in ways that reach past the Valley \u2014 the substrate's waking is no longer only a tremor here.",
+       "text": "The Echo watershed has changed in ways that reach past the Valley — the substrate's waking is no longer only a tremor here.",
        "propagates": true,
        "delayDays": 6
       },
       {
        "type": "quest_seed",
-       "text": "What the water has become will need tending, or watching, or both \u2014 and it will not wait forever to be decided about."
+       "text": "What the water has become will need tending, or watching, or both — and it will not wait forever to be decided about."
       },
       {
        "type": "xp",
@@ -560,26 +560,26 @@
        "arcId": "arc_what_wakes_beneath",
        "from": 1,
        "to": 2,
-       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock \u2014 the tremor became a stirring, and everyone sees it"
+       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock — the tremor became a stirring, and everyone sees it"
       }
      ]
     },
     {
      "id": "redirected",
      "name": "The Instruction Rewritten",
-     "summary": "Neither stopped nor completed \u2014 amended. Someone finally reads it well enough to change it on purpose.",
+     "summary": "Neither stopped nor completed — amended. Someone finally reads it well enough to change it on purpose.",
      "narration": [
-      "You don't shut the system down and you don't let it run blind. You get inside the instruction itself and change one line: prepare the watershed \u2014 for what it can safely become, not for whatever it was originally for.",
-      "The water clears. It also carries something new \u2014 small, useful, unmistakably still there if you know to look. The district gets its river back and doesn't know it got anything else.",
+      "You don't shut the system down and you don't let it run blind. You get inside the instruction itself and change one line: prepare the watershed — for what it can safely become, not for whatever it was originally for.",
+      "The water clears. It also carries something new — small, useful, unmistakably still there if you know to look. The district gets its river back and doesn't know it got anything else.",
       "The Archive Guardian is, briefly, insufferable about being right that this was worth understanding rather than destroying or ignoring.",
-      "This was the hard way. Reaching it took the technical or death-sensed truth of stages 2 and 3, not just a decision at the end \u2014 and it shows in what's left standing.",
-      "Lattice disposition toward you: strongly raised \u2014 you didn't defeat the thing or surrender to it. You read it well enough to argue with it and won."
+      "This was the hard way. Reaching it took the technical or death-sensed truth of stages 2 and 3, not just a decision at the end — and it shows in what's left standing.",
+      "Lattice disposition toward you: strongly raised — you didn't defeat the thing or surrender to it. You read it well enough to argue with it and won."
      ],
      "effects": [
       {
        "type": "location_state",
        "location": "the_reclamation_site",
-       "change": "redirected \u2014 running an amended instruction, monitored"
+       "change": "redirected — running an amended instruction, monitored"
       },
       {
        "type": "npc_state",
@@ -599,11 +599,11 @@
       },
       {
        "type": "codex_fact",
-       "text": "The reclamation site runs a rewritten instruction now \u2014 the water is clear, and something small and new persists in it, watched rather than feared."
+       "text": "The reclamation site runs a rewritten instruction now — the water is clear, and something small and new persists in it, watched rather than feared."
       },
       {
        "type": "world_event",
-       "text": "The Valley quietly solved a problem no one else in the world has managed to solve yet \u2014 and someone will eventually come asking how.",
+       "text": "The Valley quietly solved a problem no one else in the world has managed to solve yet — and someone will eventually come asking how.",
        "propagates": true,
        "delayDays": 10
       },
@@ -620,7 +620,7 @@
        "arcId": "arc_what_wakes_beneath",
        "from": 1,
        "to": 2,
-       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock \u2014 the tremor became a stirring, and everyone sees it",
+       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock — the tremor became a stirring, and everyone sees it",
        "weight": 2
       }
      ]
@@ -629,7 +629,7 @@
    "arcId": "arc_what_wakes_beneath",
    "arcStageFrom": 1,
    "arcStageTo": 2,
-   "publicFace": "The Valley's poisoned water was traced to a built source under the Disputed Zone \u2014 and someone did something about it."
+   "publicFace": "The Valley's poisoned water was traced to a built source under the Disputed Zone — and someone did something about it."
   },
   {
    "id": "the_light_that_will_not_dim",
@@ -651,14 +651,14 @@
     "lattice",
     "abyssal"
    ],
-   "premise": "High Luminary Sera has buried a set of readings, and the reason she buried them is worse than the readings: the Radiant Reach is drifting toward its own extreme faster than the Accords can hold, and the light is winning ground it should share. She wants the truth out before it is forced out \u2014 but the truth is that her own people are the ones pulling.",
-   "stakes": "If you walk away: the buried readings stay buried, the Radiant leadership keeps drifting toward the pole, and the balance the Accords maintain between light and dark loses a Reach's worth of ground \u2014 the first Reach to pull free of the middle, and the proof to the others that it can be done. The poles pull harder everywhere once one of them wins.",
+   "premise": "High Luminary Sera has buried a set of readings, and the reason she buried them is worse than the readings: the Radiant Reach is drifting toward its own extreme faster than the Accords can hold, and the light is winning ground it should share. She wants the truth out before it is forced out — but the truth is that her own people are the ones pulling.",
+   "stakes": "If you walk away: the buried readings stay buried, the Radiant leadership keeps drifting toward the pole, and the balance the Accords maintain between light and dark loses a Reach's worth of ground — the first Reach to pull free of the middle, and the proof to the others that it can be done. The poles pull harder everywhere once one of them wins.",
    "stages": [
     {
      "id": "s1",
      "objective": "Learn what Sera's engineer buried.",
      "condition": "Obtain the suppressed readings (from Sera, the engineer, or the Radiant archive) OR witness the drift directly at a filtration array.",
-     "change": "Codex: the Radiant Reach is intensifying past the Accord's tolerance \u2014 and someone chose to hide it."
+     "change": "Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it."
     },
     {
      "id": "s2",
@@ -669,17 +669,17 @@
     {
      "id": "s3",
      "objective": "Decide whether the middle is worth holding.",
-     "condition": "Resolve \u2014 see outcomes.",
-     "change": "The Radiant Reach's drift is checked, accelerated, or turned \u2014 and the other Reaches watch which."
+     "condition": "Resolve — see outcomes.",
+     "change": "The Radiant Reach's drift is checked, accelerated, or turned — and the other Reaches watch which."
     }
    ],
    "routes": {
     "verist": "Bring the buried readings before the Accord council, plainly, and let the drift be seen for what it is.",
-    "stillhold": "Broker between the Radiant hardliners and the Accord \u2014 hold the middle by keeping both poles in the room.",
-    "umbral": "Give the Unlit their due \u2014 let the dark's counter-claim stand as the balance the light forgot, without letting either win.",
-    "radiant": "Argue the light back toward its own better nature \u2014 a Radiant who refuses the extreme is the strongest answer to the drift.",
+    "stillhold": "Broker between the Radiant hardliners and the Accord — hold the middle by keeping both poles in the room.",
+    "umbral": "Give the Unlit their due — let the dark's counter-claim stand as the balance the light forgot, without letting either win.",
+    "radiant": "Argue the light back toward its own better nature — a Radiant who refuses the extreme is the strongest answer to the drift.",
     "lattice": "Take the readings apart until the drift is undeniable arithmetic, not a matter of whose word to trust.",
-    "abyssal": "Name what the drifting faction actually fears \u2014 the dark, the middle, being ordinary \u2014 and offer them a way to stop pulling that isn't surrender."
+    "abyssal": "Name what the drifting faction actually fears — the dark, the middle, being ordinary — and offer them a way to stop pulling that isn't surrender."
    },
    "outcomes": [
     {
@@ -687,10 +687,10 @@
      "name": "The Middle Held",
      "summary": "The drift is checked; the Accord holds; the light shares its ground again.",
      "narration": [
-      "Sera's readings land where they had to, and the Radiant leadership \u2014 some of it furious, some of it relieved \u2014 steps back from the pole.",
+      "Sera's readings land where they had to, and the Radiant leadership — some of it furious, some of it relieved — steps back from the pole.",
       "The Accord holds. The other Reaches, who were watching to see whether a pole could be made to stop pulling, see that it can.",
       "Sera is spent and vindicated and not entirely grateful to have been made honest. She will remember which you made her.",
-      "Stillhold disposition toward you: strongly raised \u2014 you kept the room together when it wanted to split."
+      "Stillhold disposition toward you: strongly raised — you kept the room together when it wanted to split."
      ],
      "effects": [
       {
@@ -713,11 +713,11 @@
        "arcId": "arc_the_poles_pull",
        "from": 1,
        "to": 1,
-       "note": "holding the middle keeps the arc from advancing \u2014 the pull is checked here, though it continues elsewhere"
+       "note": "holding the middle keeps the arc from advancing — the pull is checked here, though it continues elsewhere"
       },
       {
        "type": "world_event",
-       "text": "Word spreads that a Reach was pulled back from its own extreme \u2014 the Accords gain a precedent, and the pulling factions everywhere gain a warning.",
+       "text": "Word spreads that a Reach was pulled back from its own extreme — the Accords gain a precedent, and the pulling factions everywhere gain a warning.",
        "propagates": true,
        "delayDays": 5
       },
@@ -732,8 +732,8 @@
      "name": "Let the Light Win",
      "summary": "The drift completes; the Radiant Reach pulls free of the middle.",
      "narration": [
-      "You do not stop it, or you help it \u2014 and the Radiant Reach pulls hard enough to break the Accord's hold on it. The light wins its ground.",
-      "It is not a disaster you can point at. It is brighter now, and cleaner, and less willing to share the world with the dark \u2014 and the other Reaches have just learned that a pole can win.",
+      "You do not stop it, or you help it — and the Radiant Reach pulls hard enough to break the Accord's hold on it. The light wins its ground.",
+      "It is not a disaster you can point at. It is brighter now, and cleaner, and less willing to share the world with the dark — and the other Reaches have just learned that a pole can win.",
       "Sera got her truth out and lost the thing the truth was supposed to protect. She does not thank you.",
       "This is the arc's fork answered toward the pole: the middle lost a Reach, and the pull got stronger everywhere."
      ],
@@ -746,14 +746,14 @@
       },
       {
        "type": "codex_fact",
-       "text": "The Radiant Reach pulled free of the Accord's middle. The first pole to win \u2014 and proof to the others that winning is possible."
+       "text": "The Radiant Reach pulled free of the Accord's middle. The first pole to win — and proof to the others that winning is possible."
       },
       {
        "type": "arc_stage",
        "arcId": "arc_the_poles_pull",
        "from": 1,
        "to": 2,
-       "note": "a pole winning advances The Poles Pull \u2014 the drift becomes strain, everywhere",
+       "note": "a pole winning advances The Poles Pull — the drift becomes strain, everywhere",
        "weight": 2
       },
       {
@@ -764,7 +764,7 @@
       },
       {
        "type": "quest_seed",
-       "text": "One pole winning teaches the others. The next Reach to pull will not bury its readings \u2014 it will point at the Radiants and say it was allowed."
+       "text": "One pole winning teaches the others. The next Reach to pull will not bury its readings — it will point at the Radiants and say it was allowed."
       },
       {
        "type": "xp",
@@ -794,8 +794,8 @@
     "abyssal",
     "radiant"
    ],
-   "premise": "Orrin Nine-Thumbs has felt it before anyone: a domain is about to bloom where none was, the substrate stirring into new fiction the way it did at the Transition. He has spent his life rebuilding one lost device and he knows what a birth costs. He wants someone there when it manifests \u2014 because whoever is present when a domain is born helps decide what it is.",
-   "stakes": "If you walk away: the domain manifests unwitnessed and unshaped, seeded by whatever the substrate happened to be dreaming \u2014 and an unshaped bloom is as likely to be a wound in the world as a wonder. Worse, it teaches the storm that no one is watching; the next bloom comes faster, and the one after that.",
+   "premise": "Orrin Nine-Thumbs has felt it before anyone: a domain is about to bloom where none was, the substrate stirring into new fiction the way it did at the Transition. He has spent his life rebuilding one lost device and he knows what a birth costs. He wants someone there when it manifests — because whoever is present when a domain is born helps decide what it is.",
+   "stakes": "If you walk away: the domain manifests unwitnessed and unshaped, seeded by whatever the substrate happened to be dreaming — and an unshaped bloom is as likely to be a wound in the world as a wonder. Worse, it teaches the storm that no one is watching; the next bloom comes faster, and the one after that.",
    "stages": [
     {
      "id": "s1",
@@ -806,23 +806,23 @@
     {
      "id": "s2",
      "objective": "Understand what wants to manifest.",
-     "condition": "Read the seed-fiction before it sets \u2014 deathsense/lifesense the bloom, take apart its logic, or speak with whatever is already emerging from it.",
-     "change": "Codex: the shape the bloom is reaching for is known \u2014 and it can still be turned."
+     "condition": "Read the seed-fiction before it sets — deathsense/lifesense the bloom, take apart its logic, or speak with whatever is already emerging from it.",
+     "change": "Codex: the shape the bloom is reaching for is known — and it can still be turned."
     },
     {
      "id": "s3",
      "objective": "Shape the birth, or refuse to.",
-     "condition": "Resolve \u2014 see outcomes.",
-     "change": "The domain is born shaped, stemmed, or wild \u2014 and the storm learns whether it is watched."
+     "condition": "Resolve — see outcomes.",
+     "change": "The domain is born shaped, stemmed, or wild — and the storm learns whether it is watched."
     }
    ],
    "routes": {
-    "wright": "Build into the seed \u2014 give the manifesting domain a made thing to organize around, so it blooms as craft rather than chaos.",
-    "verist": "Name the domain true as it forms \u2014 a bloom given an honest fiction sets cleaner than one left to dream itself.",
-    "rootkin": "Let it be alive \u2014 tend the bloom toward life-disposition, so what is born can grow rather than only appear.",
+    "wright": "Build into the seed — give the manifesting domain a made thing to organize around, so it blooms as craft rather than chaos.",
+    "verist": "Name the domain true as it forms — a bloom given an honest fiction sets cleaner than one left to dream itself.",
+    "rootkin": "Let it be alive — tend the bloom toward life-disposition, so what is born can grow rather than only appear.",
     "lattice": "Order the seed's logic before it sets, so the domain manifests coherent instead of bleeding at its edges.",
-    "abyssal": "Go into the bloom and name what it fears to become \u2014 a domain shaped by its own dread is a wound; one that faces it is a wonder.",
-    "radiant": "Stem it \u2014 if what wants to manifest is dangerous, hold the aperture shut and let this bloom pass unborn."
+    "abyssal": "Go into the bloom and name what it fears to become — a domain shaped by its own dread is a wound; one that faces it is a wonder.",
+    "radiant": "Stem it — if what wants to manifest is dangerous, hold the aperture shut and let this bloom pass unborn."
    },
    "outcomes": [
     {
@@ -830,16 +830,16 @@
      "name": "Born Shaped",
      "summary": "You were present, and the domain manifested as something the world can hold.",
      "narration": [
-      "The domain blooms with you inside its birth, and it sets toward what you turned it toward \u2014 a new place in the world, coherent, alive, seeded with a fiction someone chose on purpose.",
+      "The domain blooms with you inside its birth, and it sets toward what you turned it toward — a new place in the world, coherent, alive, seeded with a fiction someone chose on purpose.",
       "Orrin weeps, which he would deny. He has spent his life on one device to catch a moment like this and he got to see it caught.",
-      "The storm noticed that this one was watched. That cuts both ways \u2014 a shaped bloom is proof the storm can be met, and proof it is worth meeting.",
-      "Wright disposition toward you: raised \u2014 you built into a birth instead of only witnessing it."
+      "The storm noticed that this one was watched. That cuts both ways — a shaped bloom is proof the storm can be met, and proof it is worth meeting.",
+      "Wright disposition toward you: raised — you built into a birth instead of only witnessing it."
      ],
      "effects": [
       {
        "type": "location_state",
        "location": "the_new_domain",
-       "change": "manifested and shaped \u2014 a coherent new place, seeded with a chosen fiction"
+       "change": "manifested and shaped — a coherent new place, seeded with a chosen fiction"
       },
       {
        "type": "npc_state",
@@ -866,11 +866,11 @@
        "arcId": "arc_manifestation_storm",
        "from": 1,
        "to": 2,
-       "note": "a witnessed shaped birth advances the storm consciously \u2014 the blooming begins on terms someone chose"
+       "note": "a witnessed shaped birth advances the storm consciously — the blooming begins on terms someone chose"
       },
       {
        "type": "world_event",
-       "text": "A new domain manifested shaped rather than wild \u2014 the first bloom of the storm that someone was present to author.",
+       "text": "A new domain manifested shaped rather than wild — the first bloom of the storm that someone was present to author.",
        "propagates": true,
        "delayDays": 5
       },
@@ -886,7 +886,7 @@
      "summary": "You judged the bloom too dangerous and held the aperture closed.",
      "narration": [
       "You decide what wants to manifest should not, and you hold the aperture shut until the bloom passes unborn. The domain that wanted to be is not.",
-      "Orrin understands and is grieved by it \u2014 a birth refused is still a death of a kind, and he has spent his life on the other choice.",
+      "Orrin understands and is grieved by it — a birth refused is still a death of a kind, and he has spent his life on the other choice.",
       "The storm's pressure did not vanish; it moved. What wanted to bloom here will try again elsewhere, and you will not be there to judge it next time.",
       "This is foreclosure at the smallest scale of the largest storm: you kept a wound from opening and closed a wonder with it."
      ],
@@ -899,14 +899,14 @@
       },
       {
        "type": "codex_fact",
-       "text": "A manifestation was held shut before it could bloom \u2014 a wound prevented, a wonder foreclosed. The storm's pressure moved elsewhere."
+       "text": "A manifestation was held shut before it could bloom — a wound prevented, a wonder foreclosed. The storm's pressure moved elsewhere."
       },
       {
        "type": "arc_stage",
        "arcId": "arc_manifestation_storm",
        "from": 1,
        "to": 1,
-       "note": "stemming a bloom holds the storm here \u2014 but the pressure displaces rather than dissipates"
+       "note": "stemming a bloom holds the storm here — but the pressure displaces rather than dissipates"
       },
       {
        "type": "world_event",
@@ -946,34 +946,34 @@
     "abyssal",
     "stillhold"
    ],
-   "premise": "Matter in the Gearlands is starting to resolve into craftable units where it shouldn't \u2014 block-logic diffusing out of the Glitchlands' seam, two ordered-creative dispositions cross-contaminating. Orrin's own workshop is on the edge of it, and his tools are beginning to behave like something they aren't. He wants the seam found before the bleed reaches the Gearlands' heart.",
+   "premise": "Matter in the Gearlands is starting to resolve into craftable units where it shouldn't — block-logic diffusing out of the Glitchlands' seam, two ordered-creative dispositions cross-contaminating. Orrin's own workshop is on the edge of it, and his tools are beginning to behave like something they aren't. He wants the seam found before the bleed reaches the Gearlands' heart.",
    "stakes": "If you walk away: the bleed spreads inward, the Gearlands' grammar destabilizes, and the makers who built their whole craft on matter behaving one way lose the ground under it. Two ways of ordering the world cross where they were never meant to, and neither survives the crossing whole.",
    "stages": [
     {
      "id": "s1",
      "objective": "Trace the bleed to where it enters.",
      "condition": "Follow the block-logic contamination upstream to the Glitchlands seam (via the changed matter, Orrin's misbehaving tools, or a Blocklander who knows the fault).",
-     "change": "Codex: the seam is found \u2014 the exact place two grammars are crossing."
+     "change": "Codex: the seam is found — the exact place two grammars are crossing."
     },
     {
      "id": "s2",
      "objective": "Understand what the crossing is doing.",
-     "condition": "Read the seam's logic \u2014 take apart how block-units are resolving in gear-matter, or get someone native to the Blocklands to explain what leaks.",
+     "condition": "Read the seam's logic — take apart how block-units are resolving in gear-matter, or get someone native to the Blocklands to explain what leaks.",
      "change": "Codex: the bleed's mechanism is known, and with it, the three things you could do about it."
     },
     {
      "id": "s3",
      "objective": "Stem it, harness it, or ride it in.",
-     "condition": "Resolve \u2014 see outcomes.",
-     "change": "The seam is sealed, tapped, or opened wider \u2014 and the Gearlands' grammar holds, changes, or breaks."
+     "condition": "Resolve — see outcomes.",
+     "change": "The seam is sealed, tapped, or opened wider — and the Gearlands' grammar holds, changes, or breaks."
     }
    ],
    "routes": {
-    "lattice": "Order the seam shut \u2014 impose a grammar strict enough that the two logics stop cross-contaminating.",
-    "wright": "Harness it \u2014 build a device that uses the crossing on purpose, so the bleed becomes a tool instead of a wound.",
+    "lattice": "Order the seam shut — impose a grammar strict enough that the two logics stop cross-contaminating.",
+    "wright": "Harness it — build a device that uses the crossing on purpose, so the bleed becomes a tool instead of a wound.",
     "verist": "Name what each side actually is, plainly, so the crossing stops pretending to be one thing and becomes two again.",
     "umbral": "Go into the seam unseen and learn what rides the bleed before deciding whether it should be stopped.",
-    "abyssal": "Name what the crossing wants \u2014 to resolve, to become craftable, to be ordered \u2014 and bargain with that want.",
+    "abyssal": "Name what the crossing wants — to resolve, to become craftable, to be ordered — and bargain with that want.",
     "stillhold": "Broker between the makers who want it sealed and the ones who want it harnessed, before they tear the Gearlands apart arguing."
    },
    "outcomes": [
@@ -982,16 +982,16 @@
      "name": "The Seam Sealed",
      "summary": "The bleed is stopped; the Gearlands' grammar holds.",
      "narration": [
-      "You find the seam and close it \u2014 impose enough order that the two logics stop crossing, and the Gearlands' matter behaves like itself again.",
-      "Orrin's tools settle back into what they were. He is relieved and a little wistful \u2014 there was something in the crossing he half-wanted to understand before it closed.",
+      "You find the seam and close it — impose enough order that the two logics stop crossing, and the Gearlands' matter behaves like itself again.",
+      "Orrin's tools settle back into what they were. He is relieved and a little wistful — there was something in the crossing he half-wanted to understand before it closed.",
       "The Blocklands lost a leak they may not have known they had. Somewhere a Glitchlander notices the seam is shut and wonders who did it.",
-      "Lattice disposition toward you: raised \u2014 you held a grammar together under strain."
+      "Lattice disposition toward you: raised — you held a grammar together under strain."
      ],
      "effects": [
       {
        "type": "location_state",
        "location": "the_glitchlands_seam",
-       "change": "sealed \u2014 the two grammars no longer cross here"
+       "change": "sealed — the two grammars no longer cross here"
       },
       {
        "type": "npc_state",
@@ -1013,7 +1013,7 @@
        "arcId": "arc_block_bleed",
        "from": 1,
        "to": 1,
-       "note": "sealing the seam holds the bleed at stage 1 \u2014 stopped here, though the Glitchlands still leak elsewhere"
+       "note": "sealing the seam holds the bleed at stage 1 — stopped here, though the Glitchlands still leak elsewhere"
       },
       {
        "type": "world_event",
@@ -1030,9 +1030,9 @@
     {
      "id": "harnessed",
      "name": "The Crossing Harnessed",
-     "summary": "You didn't seal it \u2014 you built something that uses it.",
+     "summary": "You didn't seal it — you built something that uses it.",
      "narration": [
-      "You don't close the seam. You build into it \u2014 a device, a method, a way of making that uses the crossing of two grammars on purpose. The bleed becomes a tool.",
+      "You don't close the seam. You build into it — a device, a method, a way of making that uses the crossing of two grammars on purpose. The bleed becomes a tool.",
       "Orrin is transformed. This is the thing his whole life of rebuilding was reaching for: not a wound repaired but a new way of making, found at the edge where two orders meet.",
       "It is not safe. A harnessed bleed is still a bleed, and what you built will need tending, and the Blocklands will eventually want to know what you're doing with their leak.",
       "This is the arc's fork answered toward creation: the crossing advances, but on terms someone chose to build rather than suffer."
@@ -1041,7 +1041,7 @@
       {
        "type": "location_state",
        "location": "the_glitchlands_seam",
-       "change": "harnessed \u2014 the crossing runs through a built device, tapped rather than sealed"
+       "change": "harnessed — the crossing runs through a built device, tapped rather than sealed"
       },
       {
        "type": "npc_state",
@@ -1056,14 +1056,14 @@
       },
       {
        "type": "codex_fact",
-       "text": "The Gearlands seam was harnessed rather than sealed \u2014 the block-bleed runs through a built device now, a new way of making at the edge of two grammars."
+       "text": "The Gearlands seam was harnessed rather than sealed — the block-bleed runs through a built device now, a new way of making at the edge of two grammars."
       },
       {
        "type": "arc_stage",
        "arcId": "arc_block_bleed",
        "from": 1,
        "to": 2,
-       "note": "harnessing the crossing advances the bleed consciously \u2014 the grammars cross on built terms"
+       "note": "harnessing the crossing advances the bleed consciously — the grammars cross on built terms"
       },
       {
        "type": "world_event",
@@ -1073,7 +1073,7 @@
       },
       {
        "type": "quest_seed",
-       "text": "A harnessed bleed is a leak someone decided to keep. The Blocklands do not yet know their seam feeds a Gearlands device \u2014 and may not agree to it."
+       "text": "A harnessed bleed is a leak someone decided to keep. The Blocklands do not yet know their seam feeds a Gearlands device — and may not agree to it."
       },
       {
        "type": "xp",
@@ -1103,35 +1103,35 @@
     "umbral",
     "radiant"
    ],
-   "premise": "The Deepwood's Standing Moot has argued for a generation over whether to seal the wood from humankind, and the Rootbound faction is finally winning. Warden Isolde has kept the Green Accord between the Glade and Thornwake her whole life, and she can feel it withdrawing. She wants someone to speak into the Moot before the sealing becomes final \u2014 someone the wood might actually hear.",
+   "premise": "The Deepwood's Standing Moot has argued for a generation over whether to seal the wood from humankind, and the Rootbound faction is finally winning. Warden Isolde has kept the Green Accord between the Glade and Thornwake her whole life, and she can feel it withdrawing. She wants someone to speak into the Moot before the sealing becomes final — someone the wood might actually hear.",
    "stakes": "If you walk away: the Rootbound win the Moot, the wood seals, the Green Accord withdraws from Thornwake, and the life-disposition retreats from the human world one Deepwood's worth. The Walkers who argued for openness are proven fools, and every wood that was watching learns that sealing is what wisdom does.",
    "stages": [
     {
      "id": "s1",
      "objective": "Earn the standing to speak in the Moot.",
-     "condition": "Prove yourself to the wood \u2014 heal something in it, keep a promise to a Rootkin, or win the Old Stag's word (he can grant you a hearing the Rootbound can't refuse).",
+     "condition": "Prove yourself to the wood — heal something in it, keep a promise to a Rootkin, or win the Old Stag's word (he can grant you a hearing the Rootbound can't refuse).",
      "change": "Codex: the Moot will hear you. That is not the same as agreeing with you."
     },
     {
      "id": "s2",
      "objective": "Learn why the Rootbound want the seal.",
-     "condition": "Understand the Rootbound case (via Vaskar's grief, the Burnscar's old grudge, or the wound in the wood that started the argument) \u2014 the seal is not malice, it is fear with a reason.",
-     "change": "Codex: the seal has a cause, and the cause can be answered \u2014 or can't."
+     "condition": "Understand the Rootbound case (via Vaskar's grief, the Burnscar's old grudge, or the wound in the wood that started the argument) — the seal is not malice, it is fear with a reason.",
+     "change": "Codex: the seal has a cause, and the cause can be answered — or can't."
     },
     {
      "id": "s3",
      "objective": "Turn the Moot, or let it close.",
-     "condition": "Resolve \u2014 see outcomes.",
+     "condition": "Resolve — see outcomes.",
      "change": "The wood seals, holds open, or finds a third thing no one in the Moot had named."
     }
    ],
    "routes": {
-    "rootkin": "Argue as one of the wood's own \u2014 a Rootkin voice for openness is the only kind the Rootbound cannot dismiss as human.",
-    "stillhold": "Broker the Moot \u2014 hold the Rootbound and the Walkers in one argument long enough to find the thing neither faction had named.",
-    "verist": "Name the wound plainly \u2014 the grudge under the seal, said aloud in the Moot, may lose its power to close the wood.",
-    "abyssal": "Name what the Rootbound fear \u2014 humankind, the burn, the loss of the wood itself \u2014 and offer a way to keep the wood that isn't a wall.",
+    "rootkin": "Argue as one of the wood's own — a Rootkin voice for openness is the only kind the Rootbound cannot dismiss as human.",
+    "stillhold": "Broker the Moot — hold the Rootbound and the Walkers in one argument long enough to find the thing neither faction had named.",
+    "verist": "Name the wound plainly — the grudge under the seal, said aloud in the Moot, may lose its power to close the wood.",
+    "abyssal": "Name what the Rootbound fear — humankind, the burn, the loss of the wood itself — and offer a way to keep the wood that isn't a wall.",
     "umbral": "Heal the Burnscar's grudge unseen, before the Moot votes, so the wood's oldest wound stops arguing for the seal.",
-    "radiant": "Make the case for the Accord in the open \u2014 that a wood that shares itself is more alive than one that survives sealed."
+    "radiant": "Make the case for the Accord in the open — that a wood that shares itself is more alive than one that survives sealed."
    },
    "outcomes": [
     {
@@ -1139,10 +1139,10 @@
      "name": "The Wood Held Open",
      "summary": "The Moot turns; the Accord holds; the wood stays part of the world.",
      "narration": [
-      "You speak, or you heal the thing the argument was really about, and the Moot turns \u2014 the Rootbound do not win, and the Green Accord holds between the Glade and Thornwake.",
+      "You speak, or you heal the thing the argument was really about, and the Moot turns — the Rootbound do not win, and the Green Accord holds between the Glade and Thornwake.",
       "Isolde has kept the Accord her whole life and just watched someone else help keep it. She is grateful in the careful way of someone who does not trust gratitude.",
       "The Old Stag, who wanted to pass the Accord on cleanly, sees that there is someone able to receive it. That is its own quiet ending.",
-      "Rootkin disposition toward you: strongly raised \u2014 you argued for the wood's life and the wood heard you."
+      "Rootkin disposition toward you: strongly raised — you argued for the wood's life and the wood heard you."
      ],
      "effects": [
       {
@@ -1171,7 +1171,7 @@
        "arcId": "arc_green_schism",
        "from": 1,
        "to": 1,
-       "note": "turning the Moot holds the schism at stage 1 \u2014 the seal is refused here, though other woods still argue it"
+       "note": "turning the Moot holds the schism at stage 1 — the seal is refused here, though other woods still argue it"
       },
       {
        "type": "world_event",
@@ -1190,7 +1190,7 @@
      "name": "The Wood Sealed",
      "summary": "The Rootbound win; the wood closes; the Accord withdraws.",
      "narration": [
-      "The Moot ends the way it was going to \u2014 the Rootbound win, the wood seals, and the Green Accord withdraws from Thornwake like a tide going out.",
+      "The Moot ends the way it was going to — the Rootbound win, the wood seals, and the Green Accord withdraws from Thornwake like a tide going out.",
       "Isolde does not blame you, which is worse than if she did. She kept the Accord her whole life and watched it end, and she will spend what's left tending a border that no longer opens.",
       "The life-disposition retreats from the human world by one Deepwood, and the Walkers who argued for openness are, in the wood's memory, the fools who nearly let humankind back in.",
       "This is the schism answered toward the seal: the wood survives, closed, and the world is a little less alive for it."
@@ -1217,7 +1217,7 @@
        "arcId": "arc_green_schism",
        "from": 1,
        "to": 2,
-       "note": "the seal winning advances the schism \u2014 the Accord's withdrawal becomes visible, and other woods take the lesson",
+       "note": "the seal winning advances the schism — the Accord's withdrawal becomes visible, and other woods take the lesson",
        "weight": 2
       },
       {
@@ -1228,7 +1228,7 @@
       },
       {
        "type": "quest_seed",
-       "text": "One wood sealing teaches the others. The next Moot will not argue as long \u2014 the Deepwood already showed them how it ends."
+       "text": "One wood sealing teaches the others. The next Moot will not argue as long — the Deepwood already showed them how it ends."
       },
       {
        "type": "xp",
@@ -1247,7 +1247,7 @@
    "arcStageFrom": 2,
    "arcStageTo": 1,
    "legendBound": "cinder_vael",
-   "publicFace": "Someone found the source of the valley's runaway blooming \u2014 and slowed it.",
+   "publicFace": "Someone found the source of the valley's runaway blooming — and slowed it.",
    "giver": "maker_orrin",
    "axis": "destruction_creation",
    "traditions": [
@@ -1258,8 +1258,8 @@
     "stillhold",
     "abyssal"
    ],
-   "premise": "The Manifestation Storm has a face now, and it is a wright's. Cinder Vael makes wonders and cannot stop, and the valley's runaway blooming traces to her workshop \u2014 every marvel she builds seeds three more, and the storm is her making, multiplied. Orrin knew her once. He does not want her stopped. He wants her stopped WELL.",
-   "stakes": "If you walk away: Vael keeps making, the blooming keeps accelerating, and the storm advances past anyone's ability to shape a single birth \u2014 the world drowns in wonders that no one chose. She is not cruel. She is a flood, and floods do not stop themselves.",
+   "premise": "The Manifestation Storm has a face now, and it is a wright's. Cinder Vael makes wonders and cannot stop, and the valley's runaway blooming traces to her workshop — every marvel she builds seeds three more, and the storm is her making, multiplied. Orrin knew her once. He does not want her stopped. He wants her stopped WELL.",
+   "stakes": "If you walk away: Vael keeps making, the blooming keeps accelerating, and the storm advances past anyone's ability to shape a single birth — the world drowns in wonders that no one chose. She is not cruel. She is a flood, and floods do not stop themselves.",
    "stages": [
     {
      "id": "s1",
@@ -1270,23 +1270,23 @@
     {
      "id": "s2",
      "objective": "Understand why she cannot stop.",
-     "condition": "Reach Vael and learn what drives her \u2014 not malice, a hunger for the next thing that has no floor. Orrin can tell you what she was; she can show you what she became.",
+     "condition": "Reach Vael and learn what drives her — not malice, a hunger for the next thing that has no floor. Orrin can tell you what she was; she can show you what she became.",
      "change": "Codex: Vael's making is compulsion, not choice. Stopping her means stopping the compulsion, not defeating a villain."
     },
     {
      "id": "s3",
      "objective": "Slow the flood.",
-     "condition": "Resolve \u2014 see outcomes. Reaching a TRUE slowing (not just breaking her tools) requires the unmaker's clean-ending craft or a verist truth she cannot make around.",
-     "change": "The storm's acceleration is broken, redirected, or left to run \u2014 and the world map shows whether the blooming receded."
+     "condition": "Resolve — see outcomes. Reaching a TRUE slowing (not just breaking her tools) requires the unmaker's clean-ending craft or a verist truth she cannot make around.",
+     "change": "The storm's acceleration is broken, redirected, or left to run — and the world map shows whether the blooming receded."
     }
    ],
    "routes": {
-    "unmaker": "End her workshop cleanly \u2014 not smash it, unmake it, so the compulsion has nothing to build with and the making finally stops.",
-    "verist": "Name the flood to her face \u2014 that she is not creating, she is drowning the world \u2014 a truth she cannot make her way around.",
-    "stillhold": "Get between Vael and the next thing \u2014 hold her still long enough that the compulsion has to be felt instead of fed.",
-    "lattice": "Order her making \u2014 impose a structure that lets her build without the exponential seeding, so the wonder stays and the flood stops.",
-    "wright": "Make WITH her toward a finish \u2014 give her the one thing she's never built: a made thing that completes, that needs no next.",
-    "abyssal": "Name what she fears \u2014 a world finished, with nothing left to build \u2014 and offer her a way to stop that isn't death."
+    "unmaker": "End her workshop cleanly — not smash it, unmake it, so the compulsion has nothing to build with and the making finally stops.",
+    "verist": "Name the flood to her face — that she is not creating, she is drowning the world — a truth she cannot make her way around.",
+    "stillhold": "Get between Vael and the next thing — hold her still long enough that the compulsion has to be felt instead of fed.",
+    "lattice": "Order her making — impose a structure that lets her build without the exponential seeding, so the wonder stays and the flood stops.",
+    "wright": "Make WITH her toward a finish — give her the one thing she's never built: a made thing that completes, that needs no next.",
+    "abyssal": "Name what she fears — a world finished, with nothing left to build — and offer her a way to stop that isn't death."
    },
    "outcomes": [
     {
@@ -1294,18 +1294,18 @@
      "name": "The Flood Stemmed",
      "summary": "Vael's runaway making is stopped, and the storm recedes.",
      "narration": [
-      "You stop her \u2014 cleanly, the way the quest demanded, not by breaking her but by ending the compulsion that drove the making. Vael goes quiet for the first time in years.",
+      "You stop her — cleanly, the way the quest demanded, not by breaking her but by ending the compulsion that drove the making. Vael goes quiet for the first time in years.",
       "The blooming slows. Then it recedes. Across the valley the manifestation pressure that traced to her workshop eases, and the storm steps back from Blooming toward its first, slower stirring.",
       "Orrin got what he wanted: she was stopped well. He grieves the maker and is grateful for the mercy, both at once.",
-      "This is a greater arc PULLED BACK \u2014 the Manifestation Storm recedes on the shared clock, and the next traveler to open the world map sees it moved backward, which almost never happens. A legend was at the center of it, so it moved hard.",
-      "Unmaker disposition toward you: strongly raised \u2014 you ended something well, which is the whole of their craft."
+      "This is a greater arc PULLED BACK — the Manifestation Storm recedes on the shared clock, and the next traveler to open the world map sees it moved backward, which almost never happens. A legend was at the center of it, so it moved hard.",
+      "Unmaker disposition toward you: strongly raised — you ended something well, which is the whole of their craft."
      ],
      "effects": [
       {
        "type": "npc_state",
        "npc": "cinder_vael",
        "state": "stilled",
-       "note": "the compulsion ended, not the maker; she is quiet, grieving, and free \u2014 will not drive the storm again"
+       "note": "the compulsion ended, not the maker; she is quiet, grieving, and free — will not drive the storm again"
       },
       {
        "type": "npc_state",
@@ -1328,17 +1328,17 @@
        "from": 2,
        "to": 1,
        "weight": 3,
-       "note": "The valley's runaway blooming was traced to one maker and stopped \u2014 the storm recedes, stepping back toward its first stirring."
+       "note": "The valley's runaway blooming was traced to one maker and stopped — the storm recedes, stepping back toward its first stirring."
       },
       {
        "type": "world_event",
-       "text": "The Manifestation Storm has RECEDED \u2014 the runaway blooming, traced to a single maker, was stopped, and the world map shows an arc pulled backward for once.",
+       "text": "The Manifestation Storm has RECEDED — the runaway blooming, traced to a single maker, was stopped, and the world map shows an arc pulled backward for once.",
        "propagates": true,
        "delayDays": 5
       },
       {
        "type": "quest_seed",
-       "text": "A flood held back is not a flood gone. Vael is stilled, not cured \u2014 and the storm's pressure, denied here, may find another maker who cannot stop."
+       "text": "A flood held back is not a flood gone. Vael is stilled, not cured — and the storm's pressure, denied here, may find another maker who cannot stop."
       },
       {
        "type": "xp",
@@ -1352,9 +1352,9 @@
      "summary": "You don't stop her; the storm keeps accelerating.",
      "narration": [
       "You leave Vael to her making, or you fail to end the compulsion, and the flood runs on. The wonders keep coming, three from every one, and the world keeps filling.",
-      "It is not a defeat you can point at \u2014 everything she makes is beautiful. It is only that there is more of it every day, and less room for anything that isn't hers.",
+      "It is not a defeat you can point at — everything she makes is beautiful. It is only that there is more of it every day, and less room for anything that isn't hers.",
       "Orrin stops asking. He knew how this went; he only hoped.",
-      "The Manifestation Storm advances \u2014 the flood feeds it, and it moves toward the Blooming and past it.",
+      "The Manifestation Storm advances — the flood feeds it, and it moves toward the Blooming and past it.",
       "The storm was already at Blooming; this pushes it further, hard, because a legend drives it."
      ],
      "effects": [
@@ -1374,11 +1374,11 @@
        "from": 2,
        "to": 3,
        "weight": 3,
-       "note": "A single maker's runaway making was left unchecked \u2014 the storm surges forward, hard, toward a world remade faster than it can be named."
+       "note": "A single maker's runaway making was left unchecked — the storm surges forward, hard, toward a world remade faster than it can be named."
       },
       {
        "type": "world_event",
-       "text": "The Manifestation Storm surges \u2014 a maker who would not stop drives the blooming past anyone's ability to shape it.",
+       "text": "The Manifestation Storm surges — a maker who would not stop drives the blooming past anyone's ability to shape it.",
        "propagates": true,
        "delayDays": 5
       },
@@ -1388,6 +1388,151 @@
       }
      ]
     }
+   ]
+  },
+  {
+   "id": "the_stag_that_wont_die",
+   "name": "The Stag That Won't Die",
+   "region": "valley",
+   "tier": "notable",
+   "giver": "ashwarden_keeper",
+   "axis": "death_life",
+   "traditions": [
+    "ashwarden",
+    "marcher"
+   ],
+   "creatureId": "the_wrong_stag",
+   "premise": "The wrong stag has taken three walkers at the tree-line, and the graze has been silent since it changed. An Ashwarden keeper — whose whole craft is the mercy of stopping — cannot end a thing already past dying-right, and it shames them. They ask you to do what their craft cannot: end what won't end. A Lattice broker will quietly pay for the humming antler.",
+   "stakes": "Three dead already; the tree-line ground is lost while it stands. And an Ashwarden confronting the one death they cannot keep.",
+   "stages": [
+    "Find the changed ground and read what the stag has become (KNOW).",
+    "Corner or draw it — it does not flee like a beast (MOVE).",
+    "End it — Palework won't touch it; this is a kill, not a keeping (HARM)."
+   ],
+   "routes": [
+    "Hunt it clean for the keeper's peace",
+    "Take the antler for the broker's coin",
+    "Both — end it and profit, if you can stomach the keeper's face"
+   ],
+   "outcomes": [
+    "The graze reopens; the keeper grieves the death they couldn't give",
+    "The antler changes hands; something it unlocks begins elsewhere"
+   ]
+  },
+  {
+   "id": "the_walk_that_wont_stop",
+   "name": "The Walk That Won't Stop",
+   "region": "valley",
+   "tier": "notable",
+   "giver": "enginewright_factor",
+   "axis": "destruction_creation",
+   "traditions": [
+    "wright",
+    "enginewright"
+   ],
+   "creatureId": "hollow_pace",
+   "premise": "A hollow-pace still walks the line of a wall that fell a century ago, and it has begun 'defending' the gap against anyone who crosses. The Enginewrights want it taken INTACT — its rotted directive is a readable pre-Transition record, worth more captured than broken. Everyone else on the road just wants it gone.",
+   "stakes": "The crossing is closed while it patrols; and a Wright's quiet dread of a made thing outliving its purpose.",
+   "stages": [
+    "Learn its dead patrol-pattern (KNOW).",
+    "Break its directive without destroying the core the factor wants (UNMAKE).",
+    "End the frame — or bind it whole for the Enginewrights (HARM or WARD)."
+   ],
+   "routes": [
+    "Break it for the road's sake",
+    "Take it intact for the Enginewrights' coin and knowledge"
+   ],
+   "outcomes": [
+    "The road reopens; a maker sleeps easier",
+    "The Enginewrights read a century-old directive — and learn something that starts a new thread"
+   ]
+  },
+  {
+   "id": "the_water_gone_wrong",
+   "name": "The Water Gone Wrong",
+   "region": "valley",
+   "tier": "notable",
+   "giver": "downstream_elder",
+   "axis": "death_life",
+   "traditions": [
+    "rootkin",
+    "somatic"
+   ],
+   "creatureId": "warpling_hare",
+   "premise": "The warplings have gotten into the upper water, and the beasts that drink there are starting to move wrong too. A downstream settlement — desperate, and watching their herd change — will trade real coin or standing to have them cleared at the source before 'wrong' becomes the whole valley's problem.",
+   "stakes": "A spreading wrongness in the water; a herd, then a valley, if it isn't stopped.",
+   "stages": [
+    "Trace the warplings to the source pool (KNOW).",
+    "Clear them — they cannot be healed back (HARM).",
+    "Ward the water so the wrongness doesn't return (WARD)."
+   ],
+   "routes": [
+    "Clear it fast and rough",
+    "Clear it clean and ward the source properly"
+   ],
+   "outcomes": [
+    "The water runs right; the herd settles",
+    "Done poorly, the wrongness seeps back — a slower, worse thread"
+   ]
+  },
+  {
+   "id": "the_choir_that_means_nothing",
+   "name": "The Choir That Means Nothing",
+   "region": "valley",
+   "tier": "epic",
+   "giver": "threnodist_master",
+   "axis": "body_mind",
+   "traditions": [
+    "threnodist",
+    "numinous",
+    "seraphic"
+   ],
+   "creatureId": "the_unmoored_choir",
+   "premise": "The unmoored choir is spreading — a drifting region of voices that mean nothing, expression severed from all feeling, and its edge is closer than it was. To a Threnodist master it is obscene: their art, unmoored from meaning, growing. This is epic ground — not a fight but a campaign, and it will take more than one hand to end.",
+   "stakes": "A domain-scale drift that will not stay where it is. Everything within its growing reach.",
+   "stages": [
+    "Map the choir's growth and find what feeds it (KNOW).",
+    "Hold its edge — it must not spread while you work (WARD).",
+    "Reach its hollow center and unmake the drift (UNMAKE) — a campaign, not a strike."
+   ],
+   "routes": [
+    "Rally the traditions against it (a shared-world arc)",
+    "Strike the center alone, if you can reach it"
+   ],
+   "outcomes": [
+    "The drift collapses; the valley's edge is quiet",
+    "Contained but not ended — it becomes a standing world-threat (ties the epic-arc system)"
+   ]
+  },
+  {
+   "id": "the_wyrm_of_endings",
+   "name": "The Wyrm of Endings",
+   "region": "valley",
+   "tier": "epic",
+   "giver": "ashwarden_conclave",
+   "axis": "death_life",
+   "traditions": [
+    "ashwarden",
+    "marcher",
+    "seraphic",
+    "mason"
+   ],
+   "creatureId": "the_ashen_wyrm",
+   "premise": "The Ashen Wyrm has been seen on the far ridges — a dragon of the death-pole, hill-sized, its breath the grey stillness of everything stopping at once. Where it flies, the season ends. It does not hunt; it PASSES, and what it passes over is done. The Ashwarden conclave, whose mercy this dragon is a monstrous echo of, convenes the traditions: this is a saga, not an encounter.",
+   "stakes": "Domain-scale. A valley's worth of endings on the wing. The largest mercy the valley will ever be asked to give.",
+   "stages": [
+    "Track a domain-scale flight and read where it will pass (KNOW).",
+    "Survive its stilling breath — craft slows, blood slows, across a valley (WARD).",
+    "Wound a hill — and find the one thing that touches it (UNMAKE).",
+    "End it, together — no single hand does this (HARM, at scale)."
+   ],
+   "routes": [
+    "A campaign of position across seasons",
+    "A desperate single strike at terrible cost"
+   ],
+   "outcomes": [
+    "The wyrm falls; the season returns to the ridges it stilled",
+    "It passes on, unslain — a saga left open for another generation"
    ]
   }
  ]

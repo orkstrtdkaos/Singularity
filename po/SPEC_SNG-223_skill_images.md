@@ -86,3 +86,16 @@ crafts share a look), I author that as prompt-guidance content — flag if wante
    handled? Confirm and unify if so.
 4. Want a per-tradition visual-aesthetic guide (Aevi authors) so each tradition's crafts share a coherent
    look, or let the per-craft description carry it alone?
+
+
+---
+
+# §Q4 RESOLVED (Erik, 2026-07-24): WIRE THE AESTHETIC GUIDE
+Erik: YES — wire the per-tradition visual guide into the skill-image prompts.
+- Content is DONE + staged: `po/staged_content/tradition_visual_aesthetics.json` (all 24 traditions,
+  palette+materials+light+mood on each tradition's canon aesthetic).
+- **CCode:** in the ensureImage('ability') prompt (SNG-223 §2), look up the craft's tradition and PREPEND its
+  block from tradition_visual_aesthetics: `image_prompt = <craft.description> + ", in the visual style of " +
+  {palette, materials, light, mood}`. The craft's own description is the SUBJECT; the tradition block is the
+  STYLE wrapper so a whole tradition's crafts cohere (Ashwarden crafts read as grey ash + the-mercy-of-
+  stopping; Wright crafts as scaffolds + becoming). Load the guide like any content pack.

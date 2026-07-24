@@ -1820,149 +1820,159 @@
         "player": "Tell everyone to hold a second... you think somethin is out there past the split tree in the mist...",
         "summary": "Silas halts the party on the March Road — something waits in the mist past the split oak at the fork.",
         "narration": "You raise a fist — the road-signal for hold — and say it quietly, voice flat. \"Everyone stop. Something past the split tree.\"\n\nPell stops mid-stride without a word, her right hand moving to Memory's shaft without drawing it. Veth freezes two paces ahead, weight already shifted back onto her rear foot, her eyes on the mist beyond the oak. She does not look back at you. She is already reading the same space you are.\n\nHuginn turns his head. Not toward the dead oak — toward you. One eye, yellow and calm, holds on your face for a moment. Then he turns back south and settles his feathers down flat against his body, which means he is paying attention and has decided not to say anything yet. That is not nothing. That is a bird that knows exactly when a thing is ending and has chosen to wait.\n\nThe mist past the split tree is ordinary mist — low, white, the kind that sits in the hollows until the sun burns it off. But there is a shape in it that is not a branch, not a fence post, and not the right kind of still for something that has always been there. Someone is standing at the fork, and they have been there long enough to go quiet."
+      },
+      {
+        "player": "Step forward alone — slowly, hands open — and close the distance to where you can see the shape clearly",
+        "summary": "Silas steps forward and finds Gweth Callow waiting at the fork — old shepherd of the March Road, watching for them since before dawn.",
+        "narration": "You step forward alone, hands open at your sides, walking slowly toward the split oak. The mud crunches under your boots where the frost has made it rigid. Pell stays where she is. Veth stays where she is. Neither of them makes a sound.\n\nThe mist thickens slightly past the oak's two halves. The grounded trunk lies across the verge, bark long since gone gray and soft. The standing half reaches up into the white air like a post marking something. You move around the end of the fallen section and keep going south, eyes fixed on the shape in the mist ahead.\n\nIt is a woman. Old, broad-shouldered under a heavy wax-cloth coat, a long crook resting across her forearms rather than held upright. She has been standing still long enough that her boots have pressed shallow impressions into the frost. She is watching you come, and she does not look surprised. Her face is weathered and settled, the way a stone on a riverbank is settled — it has been exactly where it is for a long time and does not require your opinion on the matter.\n\nShe speaks first, her voice low and unhurried. \"The party from Millbrook,\" she says, as a statement of fact rather than a question. \"I heard you'd be coming south before the cold broke. I am Gweth Callow. I shepherd the March Road flocks, and I have been watching this fork since before first light.\""
       }
     ],
     "lastTurn": {
-      "narration": "You raise a fist — the road-signal for hold — and say it quietly, voice flat. \"Everyone stop. Something past the split tree.\"\n\nPell stops mid-stride without a word, her right hand moving to Memory's shaft without drawing it. Veth freezes two paces ahead, weight already shifted back onto her rear foot, her eyes on the mist beyond the oak. She does not look back at you. She is already reading the same space you are.\n\nHuginn turns his head. Not toward the dead oak — toward you. One eye, yellow and calm, holds on your face for a moment. Then he turns back south and settles his feathers down flat against his body, which means he is paying attention and has decided not to say anything yet. That is not nothing. That is a bird that knows exactly when a thing is ending and has chosen to wait.\n\nThe mist past the split tree is ordinary mist — low, white, the kind that sits in the hollows until the sun burns it off. But there is a shape in it that is not a branch, not a fence post, and not the right kind of still for something that has always been there. Someone is standing at the fork, and they have been there long enough to go quiet.",
-      "sceneSummary": "Silas halts the party on the March Road — something waits in the mist past the split oak at the fork.",
-      "scene": {
-        "setting": "The March Road south of Millbrook, early dawn — frozen mud at the rut-edges, white breath, mist still thick in the valley low. The party stands halted thirty feet short of the split dead oak at the road fork. A shape that is not a branch waits in the mist beyond the tree — unmoving, too still for something random.",
-        "npcsPresent": [
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Stopped mid-stride, right hand on Memory's shaft, watching the mist."
-          },
-          {
-            "name": "Veth Ondra",
-            "state": "Frozen two paces ahead, weight on her rear foot, eyes on the shape in the mist — not looking back."
-          },
-          {
-            "name": "Huginn",
-            "state": "On Silas's right shoulder, feathers flat and settled, watching south in silence."
-          }
-        ],
-        "objects": [
-          "Split dead oak at the fork — one half upright, one resting on the ground",
-          "Shape in the mist past the oak — person-sized, too still",
-          "Left branch: old March road into the Zone proper",
-          "Right branch: valley-floor route bending east",
-          "Faint mineral-cast fog to the south"
-        ],
-        "threads": [
-          "Unidentified figure in the mist beyond the fork — present, still, unknown intent",
-          "Fork choice not yet made — left into the Zone, right along the valley floor",
-          "Veth's read of the left branch still not given"
-        ]
-      },
+      "narration": "You step forward alone, hands open at your sides, walking slowly toward the split oak. The mud crunches under your boots where the frost has made it rigid. Pell stays where she is. Veth stays where she is. Neither of them makes a sound.\n\nThe mist thickens slightly past the oak's two halves. The grounded trunk lies across the verge, bark long since gone gray and soft. The standing half reaches up into the white air like a post marking something. You move around the end of the fallen section and keep going south, eyes fixed on the shape in the mist ahead.\n\nIt is a woman. Old, broad-shouldered under a heavy wax-cloth coat, a long crook resting across her forearms rather than held upright. She has been standing still long enough that her boots have pressed shallow impressions into the frost. She is watching you come, and she does not look surprised. Her face is weathered and settled, the way a stone on a riverbank is settled — it has been exactly where it is for a long time and does not require your opinion on the matter.\n\nShe speaks first, her voice low and unhurried. \"The party from Millbrook,\" she says, as a statement of fact rather than a question. \"I heard you'd be coming south before the cold broke. I am Gweth Callow. I shepherd the March Road flocks, and I have been watching this fork since before first light.\"",
+      "sceneSummary": "Silas steps forward and finds Gweth Callow waiting at the fork — old shepherd of the March Road, watching for them since before dawn.",
       "choices": [
         {
-          "label": "Read the figure — Order-Sense the fork and the road design, placing whatever is there within the structure of who should and shouldn't be on this road at this hour",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Ask Veth — she knows this road; see if she recognizes the shape or knows who waits at this fork",
+          "label": "Ask Gweth plainly what she is doing at the fork before dawn — what she is watching for, and whether she has something for you",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Read the road south past her — what is the Zone's approach like this morning, and has anything passed this fork in the night",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "trivial": true
+        },
+        {
+          "label": "Bring Pell and Veth forward — this is a conversation the whole party should hear, and Veth knows this road",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "lead"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let Gweth speak first — she waited here for a reason, and the reason is hers to name",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Hold the line and call out — name yourself, name your road, and give the figure a chance to answer plainly before anyone moves",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Step forward alone — slowly, hands open — and close the distance to where you can see the shape clearly",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "A brief halt on the road — seconds, not minutes"
+      "scene": {
+        "setting": "The March Road south of Millbrook, at the fork marked by the split dead oak — early dawn, mist thick in the valley low, frozen mud at the rut-edges. Silas stands thirty feet south of where the party halted, now face to face with Gweth Callow on the near side of the fork.",
+        "npcsPresent": [
+          {
+            "name": "Gweth Callow",
+            "state": "Standing still at the fork, wax-cloth coat, crook across her forearms, watching Silas with settled patience."
+          },
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Stopped where Silas left her, hand still on Memory's shaft, watching south."
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "Frozen two paces ahead of where Silas halted the party, weight on her rear foot, waiting."
+          },
+          {
+            "name": "Huginn",
+            "state": "On Silas's right shoulder, feathers flat, watching Gweth."
+          }
+        ],
+        "objects": [
+          "Split dead oak at the fork — standing half upright, fallen half on the verge",
+          "Left branch: old March road into the Zone proper",
+          "Right branch: valley-floor route bending east",
+          "Faint mineral-cast fog to the south",
+          "Gweth's crook — long, resting across her forearms"
+        ],
+        "threads": [
+          "Gweth Callow named herself and acknowledged the party — her purpose at the fork not yet stated",
+          "Fork choice not yet made — left into the Zone, right along the valley floor",
+          "Veth's read of the left branch still not given"
+        ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Halted instantly on the road-signal, hand on Memory, watching the mist without instruction.",
-          "statusNote": "On the March Road south of Millbrook — halted at the fork, hand on Memory, watching south."
-        },
-        {
-          "op": "update",
-          "npcId": "veth-ondra",
-          "name": "Veth Ondra",
-          "note": "Frozen mid-step on Silas's signal, weight back, reading the same mist-shape without being told what to look for.",
-          "statusNote": "On the March Road — two paces ahead of the party, halted and reading the fork."
+          "op": "meet",
+          "npcId": "gweth-callow",
+          "name": "Gweth Callow",
+          "role": "Shepherd of the March Road flocks",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "Old, broad-shouldered under a wax-cloth coat, crook across her forearms — settled as a river stone, and about as easily moved. She knew the party was coming and waited in the dark to meet them.",
+          "note": "Waited at the fork before first light. Named Silas's party from Millbrook without being told. Spoke first.",
+          "learned": [
+            "Heard the party would be coming south before the cold broke",
+            "Has been watching this fork since before first light"
+          ],
+          "status": "active",
+          "statusNote": "At the March Road fork, south of Millbrook — waiting for the party."
         }
       ],
-      "offer": {
-        "thing": "A Wright at the fork — someone who has been at work on something of the party's since they camped last night, and the improvement is already done",
-        "from": "The SOMETHING HAPPENS engine event: a Wright improves something of the player's that the player did not want improved and cannot un-improve — placed at the fork because that is where a road-wright would naturally wait for the people whose gear they worked on"
+      "codexUpdates": [
+        {
+          "topic": "gweth-callow",
+          "label": "Gweth Callow",
+          "kind": "person",
+          "entityId": "gweth-callow",
+          "fact": "Shepherd of the March Road flocks, old and broad-shouldered. Waited at the fork before first light knowing the Millbrook party would come south. Speaks plainly and is not surprised by much.",
+          "links": [
+            "millbrook",
+            "the-water-crisis",
+            "the-second-thread"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short walk down the road to the fork — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "The March Road south of Millbrook, early dawn — frozen mud at the rut-edges, white breath, mist still thick in the valley low. The party stands halted thirty feet short of the split dead oak at the road fork. A shape that is not a branch waits in the mist beyond the tree — unmoving, too still for something random.",
+      "setting": "The March Road south of Millbrook, at the fork marked by the split dead oak — early dawn, mist thick in the valley low, frozen mud at the rut-edges. Silas stands thirty feet south of where the party halted, now face to face with Gweth Callow on the near side of the fork.",
       "npcsPresent": [
         {
+          "name": "Gweth Callow",
+          "state": "Standing still at the fork, wax-cloth coat, crook across her forearms, watching Silas with settled patience."
+        },
+        {
           "name": "Pell Ran Marsh",
-          "state": "Stopped mid-stride, right hand on Memory's shaft, watching the mist."
+          "state": "Stopped where Silas left her, hand still on Memory's shaft, watching south."
         },
         {
           "name": "Veth Ondra",
-          "state": "Frozen two paces ahead, weight on her rear foot, eyes on the shape in the mist — not looking back."
+          "state": "Frozen two paces ahead of where Silas halted the party, weight on her rear foot, waiting."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's right shoulder, feathers flat and settled, watching south in silence."
+          "state": "On Silas's right shoulder, feathers flat, watching Gweth."
         }
       ],
       "objects": [
-        "Split dead oak at the fork — one half upright, one resting on the ground",
-        "Shape in the mist past the oak — person-sized, too still",
+        "Split dead oak at the fork — standing half upright, fallen half on the verge",
         "Left branch: old March road into the Zone proper",
         "Right branch: valley-floor route bending east",
-        "Faint mineral-cast fog to the south"
+        "Faint mineral-cast fog to the south",
+        "Gweth's crook — long, resting across her forearms"
       ],
       "threads": [
-        "Unidentified figure in the mist beyond the fork — present, still, unknown intent",
+        "Gweth Callow named herself and acknowledged the party — her purpose at the fork not yet stated",
         "Fork choice not yet made — left into the Zone, right along the valley floor",
         "Veth's read of the left branch still not given"
       ]
@@ -4039,7 +4049,7 @@
     "old-shepherd-woman": {
       "id": "old-shepherd-woman",
       "name": "Gweth Callow",
-      "role": "Smallholder shepherd, March Road south of Millbrook",
+      "role": "Shepherd of the March Road flocks",
       "description": "Small, shoulder-bent, even stride — hazel switch in hand and a single copper bell on the lead ewe. Reads travelers in one look and finds most of them satisfactory.",
       "firstMet": {
         "locationId": "millbrook",
@@ -4047,19 +4057,22 @@
       },
       "relationship": 0,
       "history": [
-        "[d13] Named the coming rain precisely, recognized Silas as the Warden who named the hollow, let the party through without ceremony or price."
+        "[d13] Named the coming rain precisely, recognized Silas as the Warden who named the hollow, let the party through without ceremony or price.",
+        "[d14] Waited at the fork before first light. Named Silas's party from Millbrook without being told. Spoke first."
       ],
       "knownFacts": [
-        "Word of Stillwater's Trouble and the Warden's name has reached at least the March Road's shepherd circuit"
+        "Word of Stillwater's Trouble and the Warden's name has reached at least the March Road's shepherd circuit",
+        "Heard the party would be coming south before the cold broke",
+        "Has been watching this fork since before first light"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On the March Road south of Millbrook, moving her flock east off the verge.",
+      "statusNote": "At the March Road fork, south of Millbrook — waiting for the party.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 13
+        "day": 14
       },
       "_filledFromGenerate": true,
       "_mergedFrom": "gweth-callow-the-shepherd-of-the-south-m",
@@ -4993,7 +5006,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 594,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The shadow-found settling basin — a detail none of them drew, surfaced by the craft itself",
@@ -6584,21 +6597,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.210489502887043,
-    "cerebral": 13.579104457024146,
-    "social": 9.346166806153983,
-    "generous": 3.4360606489165098,
-    "cautious": 4.995277558566406,
-    "physical": 0.16230881088228266,
-    "risky": 0.9189756987803257,
-    "ruthless": 0.1261721004347108,
-    "carousing": 0.02893910943620884,
-    "amorous": 4.962888012316195,
-    "patient": 1.124211897452316,
-    "stealth": 0.0002902074084155163,
-    "devotion": 0.8548468492155499,
-    "craft": 4.022369428769858,
-    "leadership": 2.1723426062818403
+    "strategic": 21.680227265314866,
+    "cerebral": 13.239626845598542,
+    "social": 9.112512636000133,
+    "generous": 3.350159132693597,
+    "cautious": 5.870395619602246,
+    "physical": 0.1582510906102256,
+    "risky": 0.8960013063108175,
+    "ruthless": 0.12301779792384303,
+    "carousing": 0.02821563170030362,
+    "amorous": 4.838815812008289,
+    "patient": 1.0961066000160082,
+    "stealth": 0.0002829522232051284,
+    "devotion": 0.8334756779851611,
+    "craft": 3.9218101930506117,
+    "leadership": 2.1180340411247944
   },
   "aptitudes": [
     "strategist",
@@ -6606,7 +6619,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 809,
+  "actionCount": 810,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6996,8 +7009,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784918626063,
-  "rev": 1317,
+  "updatedAt": 1784918827641,
+  "rev": 1318,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9952,7 +9965,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 550,
+    "valley": 551,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10088,10 +10101,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T18:43:46.062Z",
+      "lastAt": "2026-07-24T18:47:07.640Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 63
+      "beats": 64
     }
   ],
   "company": [
@@ -10302,15 +10315,15 @@
     "gen-mara-wells-store": "https://image.pollinations.ai/prompt/Mara%20Wells%20Store%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Mara%20Wells%20Store.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=13548&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 179,
-    "choices": 179,
+    "sceneSummary": 180,
+    "choices": 180,
     "characterDeltas": 68,
-    "scene": 179,
-    "npcUpdates": 163,
+    "scene": 180,
+    "npcUpdates": 164,
     "factUpdates": 13,
     "placeUpdates": 30,
-    "codexUpdates": 103,
-    "timeOps": 173,
+    "codexUpdates": 104,
+    "timeOps": 174,
     "imagePrompt": 3,
     "sceneEnded": 40,
     "itemUpdates": 5,
@@ -10327,7 +10340,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 179,
+  "_opTurns": 180,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

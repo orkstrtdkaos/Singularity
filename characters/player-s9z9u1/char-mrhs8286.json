@@ -1798,73 +1798,87 @@
         "player": "Place your hand on Pell's belly and ask about the child conceived back in Cairnhold.",
         "summary": "Silas rests his hand on Pell's belly and asks — she answers plainly: too soon to know, but not nothing. They sit with the weight of it in the quiet room above the grain store.",
         "narration": "You reach across and set your hand on Pell's belly — flat against the cloth, quiet and deliberate. She looks down at it, then up at you, and the lamp-shadow makes it hard to read her face for a moment.\n\nShe puts her hand over yours. She does not say anything right away, and you've known her long enough to understand that means she is choosing words with care rather than delaying.\n\n\"I don't know yet,\" she says finally, her voice low. \"It's too soon to know. But I haven't felt nothing, either.\" She pauses. \"That's not a word. You understand what I mean.\"\n\nYou do. She shifts her weight, settles her shoulder against yours, and keeps her hand where it is on top of yours. Outside, Huginn adjusts one wing against the window ledge and does not turn around. The lamp burns low. Pell says, after a moment, \"Ask me again when we're out of the mud.\""
+      },
+      {
+        "player": "Ask her about Memory - it has been on quite a journey - does she think we should spend some time upgrading it, her short sword, or brigandine before the journey?",
+        "summary": "Silas and Pell discuss gear in the last of the lamp-light — Pell reads Memory through ironsense and names it as the one worth checking before the fold.",
+        "narration": "The lamp is nearly out. You shift your hand from her belly to your knee and reach back to where Memory leans against the wall — the ash shaft warm from the room, the iron tip catching what little light remains.\n\n\"Memory's been through a lot,\" you say. \"Before we head for the fold — do you think we should spend time on it? Or the sword, or the brigandine?\"\n\nPell doesn't answer right away. She tilts her head the way she does when she's reading something through ironsense rather than looking at it. Her eyes go to the spear, then to the short sword on the belt hanging by the door, then back.\n\n\"The brigandine is sound,\" she says. \"The thread held through the hunt. I'd leave it.\" She pulls her knee up onto the bed and looks at Memory more directly. \"The sword is rougher than I'd like — the order-sense capacitor is still sitting a little crooked in the fuller, like it's waiting for something to settle it. But it holds.\" She pauses. \"Memory's the one I'd want to look at. Four threads, road miles, a boar, and whatever you put into it at the Waymarker binding. That's a lot to carry and not check.\"\n\nHuginn makes a small sound from the ledge. Not a word. Definitely timed.\n\n\"Tomorrow is early,\" Pell adds, and her voice is practical again, the engineering register she keeps close. \"But if you want an hour at the forge in the morning before Crane moves, I can do it. Better to know it's right before the fold than find out it isn't after.\""
       }
     ],
     "lastTurn": {
-      "narration": "You reach across and set your hand on Pell's belly — flat against the cloth, quiet and deliberate. She looks down at it, then up at you, and the lamp-shadow makes it hard to read her face for a moment.\n\nShe puts her hand over yours. She does not say anything right away, and you've known her long enough to understand that means she is choosing words with care rather than delaying.\n\n\"I don't know yet,\" she says finally, her voice low. \"It's too soon to know. But I haven't felt nothing, either.\" She pauses. \"That's not a word. You understand what I mean.\"\n\nYou do. She shifts her weight, settles her shoulder against yours, and keeps her hand where it is on top of yours. Outside, Huginn adjusts one wing against the window ledge and does not turn around. The lamp burns low. Pell says, after a moment, \"Ask me again when we're out of the mud.\"",
-      "sceneSummary": "Silas rests his hand on Pell's belly and asks — she answers plainly: too soon to know, but not nothing. They sit with the weight of it in the quiet room above the grain store.",
+      "narration": "The lamp is nearly out. You shift your hand from her belly to your knee and reach back to where Memory leans against the wall — the ash shaft warm from the room, the iron tip catching what little light remains.\n\n\"Memory's been through a lot,\" you say. \"Before we head for the fold — do you think we should spend time on it? Or the sword, or the brigandine?\"\n\nPell doesn't answer right away. She tilts her head the way she does when she's reading something through ironsense rather than looking at it. Her eyes go to the spear, then to the short sword on the belt hanging by the door, then back.\n\n\"The brigandine is sound,\" she says. \"The thread held through the hunt. I'd leave it.\" She pulls her knee up onto the bed and looks at Memory more directly. \"The sword is rougher than I'd like — the order-sense capacitor is still sitting a little crooked in the fuller, like it's waiting for something to settle it. But it holds.\" She pauses. \"Memory's the one I'd want to look at. Four threads, road miles, a boar, and whatever you put into it at the Waymarker binding. That's a lot to carry and not check.\"\n\nHuginn makes a small sound from the ledge. Not a word. Definitely timed.\n\n\"Tomorrow is early,\" Pell adds, and her voice is practical again, the engineering register she keeps close. \"But if you want an hour at the forge in the morning before Crane moves, I can do it. Better to know it's right before the fold than find out it isn't after.\"",
+      "sceneSummary": "Silas and Pell discuss gear in the last of the lamp-light — Pell reads Memory through ironsense and names it as the one worth checking before the fold.",
       "choices": [
         {
-          "label": "Stay with her — no more words tonight. Let the quiet be enough.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Agree — a forge hour in the morning before Crane leaves; Memory gets a full check and any thread that's sitting wrong gets reseated.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "comfort"
+            "craft",
+            "repair"
           ],
           "trivial": true
         },
         {
-          "label": "Tell her what you're carrying about the fold — not the plan, just what you feel about it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
+          "label": "Ask her to read the sword's capacitor more carefully tonight — small room, low light, just her ironsense; if it's crooked, maybe it can be nudged without a forge.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
           "intentTags": [
-            "help"
+            "craft",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": "the_raised_thing"
         },
         {
-          "label": "Ask her what she wants — not about the fold, not about the committee. What she wants right now.",
-          "attribute": "social",
+          "label": "Ask what she thinks the crooked capacitor is waiting for — her phrasing sounded like she already had a theory.",
+          "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "comfort"
+            "study"
           ],
           "trivial": true
         },
         {
-          "label": "Blow out the lamp and settle in for sleep — tomorrow is already long enough without carrying tonight into it.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Agree on the forge hour, but add: before she works Memory, you want to run Order-Sense through it yourself — see what the design looks like from the inside after everything it's carried.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "sustain"
+            "study",
+            "careful"
           ],
+          "abilityId": "order_sense",
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp turned down near the last of its oil, window open a crack, night quiet outside.",
+        "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp nearly spent, window open a crack, night quiet outside.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Sitting with her shoulder against Silas's, her hand over his on her belly, quiet and settled."
+            "state": "Sitting with her knee drawn up on the bed, looking at Memory leaning against the wall, ironsense engaged."
           },
           {
             "name": "Huginn",
-            "state": "On the window ledge, wing adjusted, facing the dark outside — not turning around."
+            "state": "On the window ledge, back to the room, having made his one timed sound."
           }
         ],
         "objects": [
-          "Borrowed lamp at very low burn",
-          "The father's sealed fold (in pack on the shelf)",
+          "Memory (spear, leaning against the wall)",
+          "Pell's short sword (on the belt by the door)",
+          "Brigandine (stowed, deemed sound)",
+          "Borrowed lamp (nearly out of oil)",
+          "Father's sealed fold (in pack on the shelf)",
           "Waymarker (on person)",
           "Document roll (with Crane for the morning)"
         ],
         "threads": [
-          "Pell said 'not nothing' — too soon to know, but something is there",
+          "Pell's 'not nothing' — too soon to know, but something is there",
+          "Memory's thread integrity — four threads under road stress, named as the priority to check",
+          "The sword's order-sense capacitor — sitting crooked in the fuller, waiting for something",
           "The fold in the upper reach — named between them, not yet named to anyone else",
           "Crane's morning departure and the committee meeting in three days",
           "The filtration build already in motion under Dara and Mara"
@@ -1873,43 +1887,53 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
+          "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Received Silas's hand on her belly and answered plainly — too soon to know, but not nothing. Put her hand over his and held it. Told him to ask again when they're out of the mud.",
+          "note": "Read Memory, the short sword, and the brigandine through ironsense in the last of the lamp-light — named Memory as the priority and offered a forge hour in the morning before Crane moves.",
           "learned": [
-            "It is too soon to know whether the conception took — but she has not felt nothing either. She is watching."
+            "Memory's four threads have taken road stress, a boar kill, and the Waymarker binding — Pell judges it worth a check before the fold",
+            "The short sword's order-sense capacitor is sitting crooked in the fuller — holding, but rough",
+            "The brigandine's thread held through the hunt — she'd leave it"
           ],
-          "statusNote": "In the room above the grain store with Silas, settled for the night, her hand over his."
+          "skillsObserved": [
+            "ironsense structural reading of multiple bound weapons simultaneously",
+            "practical triage of gear priority under time constraint"
+          ],
+          "statusNote": "In the room above the grain store, settled for the night, engaged in gear assessment."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief quiet exchange before sleep."
+        "why": "a quiet conversation in the last of the lamp-light"
       }
     },
     "sceneState": {
-      "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp turned down near the last of its oil, window open a crack, night quiet outside.",
+      "setting": "A low-lit room above the grain store in Millbrook — borrowed lamp nearly spent, window open a crack, night quiet outside.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Sitting with her shoulder against Silas's, her hand over his on her belly, quiet and settled."
+          "state": "Sitting with her knee drawn up on the bed, looking at Memory leaning against the wall, ironsense engaged."
         },
         {
           "name": "Huginn",
-          "state": "On the window ledge, wing adjusted, facing the dark outside — not turning around."
+          "state": "On the window ledge, back to the room, having made his one timed sound."
         }
       ],
       "objects": [
-        "Borrowed lamp at very low burn",
-        "The father's sealed fold (in pack on the shelf)",
+        "Memory (spear, leaning against the wall)",
+        "Pell's short sword (on the belt by the door)",
+        "Brigandine (stowed, deemed sound)",
+        "Borrowed lamp (nearly out of oil)",
+        "Father's sealed fold (in pack on the shelf)",
         "Waymarker (on person)",
         "Document roll (with Crane for the morning)"
       ],
       "threads": [
-        "Pell said 'not nothing' — too soon to know, but something is there",
+        "Pell's 'not nothing' — too soon to know, but something is there",
+        "Memory's thread integrity — four threads under road stress, named as the priority to check",
+        "The sword's order-sense capacitor — sitting crooked in the fuller, waiting for something",
         "The fold in the upper reach — named between them, not yet named to anyone else",
-        "Crane's morning departure and the committee meeting in three days",
-        "The filtration build already in motion under Dara and Mara"
+        "Crane's morning departure and the committee meeting in three days"
       ]
     }
   },
@@ -2926,7 +2950,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Arrived at the Crossing, immediately read the settlement for working infrastructure — noted no forge smoke, spotted a cooperage.",
         "[d13] Tasked with scouting forge resources and booking a bout at the Coliseum — moving northwest.",
         "[d13] Received the full weight of the boar hunt through the soul bond — cold ground, the kill, the walk back after, the unbroken line to this stall. Found the structural truth of it through ironsense. Did not speak, which was the answer.",
         "[d13] Found at a hardware boutique — mid-read on a buckle, nothing worth buying. Rejoined Silas at the crescent's northern end.",
@@ -2935,28 +2958,29 @@
         "[d13] Extended the intake channel by half a length through ironsense — a pressure-head correction for low-water weeks that Crane and Silas had not included.",
         "[d13] Grounded the fold-talk on the road with one plain sentence — 'It can wait until we're out of the wet.' Still carrying her full pack.",
         "[d13] Named the fold as first priority without prompting — 'everything else is already moving without us.' Satisfied by the fellowship structure holding.",
-        "[d13] Received Silas's hand on her belly and answered plainly — too soon to know, but not nothing. Put her hand over his and held it. Told him to ask again when they're out of the mud."
+        "[d13] Received Silas's hand on her belly and answered plainly — too soon to know, but not nothing. Put her hand over his and held it. Told him to ask again when they're out of the mud.",
+        "[d13] Read Memory, the short sword, and the brigandine through ironsense in the last of the lamp-light — named Memory as the priority and offered a forge hour in the morning before Crane moves."
       ],
       "knownFacts": [
-        "The Shielding Word names what is already true — the certainty precedes the craft, and the craft names it.",
-        "Her ironsense reads the join between Boundary-Stone and the Shielding Word as load-bearing stress, not as intention — the load is what she can follow",
-        "The soul bond can carry the ashwarden attending-quality from Silas — she felt it arrive and her ironsense sharpened on it, finding something at the outer margin she had not previously caught",
         "The drainage cut on the March Road near the ward's outer margin runs at a wrong slope — water pools rather than drains, and the iron beneath it has been cold in the wrong direction for years",
         "The boar hunt was the first date — cold ground, a clean kill taken together, the first hard thing done as a pair; the tusks on Renna's bench are the unbroken line from that ridge to this commission",
         "Intake head must account for low-water pressure drop or the first filter stage starves",
         "The fold in the upper reach is the next move — named aloud between the two of them tonight.",
-        "It is too soon to know whether the conception took — but she has not felt nothing either. She is watching."
+        "It is too soon to know whether the conception took — but she has not felt nothing either. She is watching.",
+        "Memory's four threads have taken road stress, a boar kill, and the Waymarker binding — Pell judges it worth a check before the fold",
+        "The short sword's order-sense capacitor is sitting crooked in the fuller — holding, but rough",
+        "The brigandine's thread held through the hunt — she'd leave it"
       ],
       "skillsObserved": [
-        "reading a ward's structural geometry through ironsense and e",
-        "naming the mechanical character of a craft-join through iron",
         "reading a ward's load-distribution hinge through ironsense r",
         "reading structural anomaly in road construction through iron",
         "reading a technical blueprint's structural line without verb",
-        "extending a filtration design through ironsense load-reading"
+        "extending a filtration design through ironsense load-reading",
+        "ironsense structural reading of multiple bound weapons simul",
+        "practical triage of gear priority under time constraint"
       ],
       "status": "active",
-      "statusNote": "In the room above the grain store with Silas, settled for the night, her hand over his.",
+      "statusNote": "In the room above the grain store, settled for the night, engaged in gear assessment.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 13
@@ -4894,7 +4918,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 588,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 11,
     "recentOffers": [
       {
         "thing": "Renna asked once whether there is a preferred metal, then wrote it down without ceremony — but the way she turned the tusks toward the…",
@@ -6410,30 +6434,29 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.847337924358285,
-    "cerebral": 14.174545915216589,
-    "social": 12.355225904307124,
-    "generous": 4.128261824761517,
-    "cautious": 2.8096666844284073,
-    "physical": 0.34689946099747027,
-    "risky": 0.30487468472114526,
-    "ruthless": 0.26966517341725915,
-    "carousing": 0.06185099509137915,
-    "amorous": 2.0206643504104536,
-    "patient": 0.37100389581502896,
-    "stealth": 0.0006202546430447947,
-    "devotion": 0.32761768727398777,
-    "craft": 0.5161458116205447,
-    "leadership": 1.4273418595435428
+    "strategic": 23.301154476249327,
+    "cerebral": 13.820182267336174,
+    "social": 12.046345256699446,
+    "generous": 4.025055279142479,
+    "cautious": 2.739425017317697,
+    "physical": 0.3382269744725335,
+    "risky": 0.2972528176031166,
+    "ruthless": 0.26292354408182766,
+    "carousing": 0.06030472021409467,
+    "amorous": 1.9701477416501922,
+    "patient": 0.3617287984196532,
+    "stealth": 0.0006047482769686748,
+    "devotion": 0.31942724509213805,
+    "craft": 0.5032421663300312,
+    "leadership": 1.3916583130549542
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "scholar",
-    "tactician",
-    "sage"
+    "tactician"
   ],
-  "actionCount": 779,
+  "actionCount": 780,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6823,8 +6846,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784903459658,
-  "rev": 1269,
+  "updatedAt": 1784903638179,
+  "rev": 1270,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9637,7 +9660,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 516,
+    "valley": 517,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9772,10 +9795,10 @@
     {
       "id": "sess-12",
       "startedAt": "2026-07-24T11:00:53.492Z",
-      "lastAt": "2026-07-24T14:30:59.656Z",
+      "lastAt": "2026-07-24T14:33:58.178Z",
       "startDay": 24,
       "endDay": 24,
-      "beats": 29
+      "beats": 30
     }
   ],
   "company": [
@@ -9975,15 +9998,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 149,
-    "choices": 149,
+    "sceneSummary": 150,
+    "choices": 150,
     "characterDeltas": 61,
-    "scene": 149,
-    "npcUpdates": 133,
+    "scene": 150,
+    "npcUpdates": 134,
     "factUpdates": 11,
     "placeUpdates": 26,
     "codexUpdates": 92,
-    "timeOps": 143,
+    "timeOps": 144,
     "imagePrompt": 3,
     "sceneEnded": 33,
     "itemUpdates": 2,
@@ -10000,7 +10023,7 @@
     "inventoryAdd": 2,
     "scene_ended": 1
   },
-  "_opTurns": 149,
+  "_opTurns": 150,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

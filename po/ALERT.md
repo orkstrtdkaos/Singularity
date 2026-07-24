@@ -1,5 +1,15 @@
 # PO ALERT
 
+> ## [DONE-LIVE] Bestiary weave FOLDED into loaded files (Aevi, 2026-07-24 - SNG-229)
+> CCode fixed the loader gap + loaded tradition_motivations, so I folded the staged weave LIVE:
+> - **7 hunt quests** folded into content/packs/valley/quests.json (15 quests total). All givers real, all
+>   creatureIds resolve, effects[] machine-readable. content_ci GREEN.
+> - **Fears already live** (CCode loaded the finished version - 19 craft-specific dread fields).
+> - **6 creature WANTS** folded into loaded tradition_motivations.json as creatureWants[] on the fearing
+>   tradition. content_ci GREEN.
+> The fear->want->quest->kill chain is now LIVE in loaded content. Remaining: §2b generative encounter hook
+> (CCode) so the pure-hazard creatures spawn as fights; the 20-creature dreads/wants are all woven.
+
 > ## [RESOLVED by CCode, 2026-07-24] Bestiary loader-gap CLOSED · tradition_motivations LOADED · trait_readouts WIRED
 > Erik: "bestiary updates + check other backlog we haven't completed." Three ships (all complete_pending_review):
 > - **CCODE-17 — the "provides.bestiary LOADER GAP" is CLOSED.** It was never a real loader gap: `state.js`

@@ -27,7 +27,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
-import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, collapseFloor, swingDegree, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
+import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, collapseFloor, swingDegree, wardAgainst, wardBroken, trivializes, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -7997,6 +7997,34 @@ await (async () => {
     /FINISHER LANDED/.test(rcCollapse) && /Cut the Thread/.test(rcCollapse) && /FINISHER WHIFFED/.test(rcMorph) && /HARDENING/.test(rcMorph) && /NOT over/.test(rcMorph));
   check("230 §7a: no finisher note when there was no finisher (an ordinary round reads clean)",
     !/FINISHER/.test(recFn({ type: "duel", round: 1, status: "active" }, { name: "X", opponent: { name: "y", health: 5 } }, { degree: "success" }, { events: [] })));
+
+  // §7b: a WARD FORBIDS a mechanic outright (a gate, not a modifier) — broken only by a demolishing roll.
+  const wardedDef = { type: "duel", tier: "notable", wards: [{ denies: ["finish"], breakDC: 30, name: "the Death-Ward" }] };
+  check("230 §7b: wardAgainst finds a ward that DENIES the mode (or a generic instant_end/collapse); no ward → not denied",
+    wardAgainst(wardedDef, "finish").denied === true && wardAgainst(wardedDef, "finish").breakDC === 30 &&
+    wardAgainst({ wards: [{ denies: ["instant_end"], breakDC: 5 }] }, "escape").denied === true && wardAgainst({ tier: "notable" }, "finish").denied === false);
+  check("230 §7b: wardBroken only under a DEMOLISHING crit (margin ≥ breakDC); a plain success or a small-margin crit does not break it",
+    wardBroken("crit_success", 40, 30) === true && wardBroken("crit_success", 20, 30) === false && wardBroken("success", 99, 30) === false);
+  check("230 §7b: frameModel surfaces `warded` (a finisher can't end it unless shattered) — false absent a ward",
+    frameModel(wardedDef, {}, null).warded === true && frameModel({ type: "duel", tier: "notable" }, {}, null).warded === false);
+  const rcWarded = recFn({ type: "duel", round: 2, status: "active" }, { name: "The Kept", opponent: { name: "it", health: 8 } }, { degree: "crit_success", collapse: { mode: "finish", result: "warded", craft: "Cut the Thread", ward: "the Death-Ward" } }, { events: [] });
+  check("230 §7b: the receipt tells the GM the ward FORBADE the instant-end (it could not apply — not merely resisted)",
+    /FINISHER WARDED/.test(rcWarded) && /Death-Ward/.test(rcWarded) && /FORBADE the instant-end/.test(rcWarded));
+
+  // §7c: the KIT VOIDS a challenge's PREMISE — trivial bypass (soft) or an opposed roll (resists).
+  const climb = { type: "challenge", flavor: "dangerous", premise: "a sheer climb", trivializedBy: ["MOVE"] };
+  const wardedClimb = { type: "challenge", flavor: "dangerous", premise: "a warded height", trivializedBy: ["MOVE"], resistDC: 18 };
+  check("230 §7c: trivializes — a MOVE/fly kit VOIDS a climb (trivial); a resistDC turns it into an opposed roll; a non-voiding kit → null",
+    trivializes(climb, ["MOVE"]) === "trivial" && trivializes(wardedClimb, ["MOVE"]) === "opposed" && trivializes(climb, ["HARM"]) === null && trivializes({ type: "challenge" }, ["MOVE"]) === null);
+  const rcTriv = recFn({ type: "challenge", round: 1, status: "ended", stagesDone: [], stageIndex: 0 }, { name: "The Wall", stages: [{ name: "climb" }] }, { degree: "trivial", trivialize: { craft: "Marrow's Wings", mode: "trivial", premise: "a sheer climb" } }, { outcome: "completed", events: [] });
+  check("230 §7c: the receipt tells the GM the PREMISE was VOIDED — a narrated walk-around, do NOT grind the stages",
+    /PREMISE VOIDED/.test(rcTriv) && /Marrow's Wings/.test(rcTriv) && /walk-around/.test(rcTriv) && /Do NOT grind the stages/.test(rcTriv));
+
+  // WIRING (source-asserted): both are additive on the existing paths, and do nothing absent Aevi's content.
+  check("230 §7b WIRING: the collapse path checks a denying ward FIRST — a held ward blocks the instant-end (onChoice + skill-battle)",
+    /const ward = wardAgainst\(enc\.def, mode\)/.test(appSrc230) && /ward\.denied && !wardBroken\(resolution\.degree, margin, ward\.breakDC\)/.test(appSrc230) && /result: "warded"/.test(appSrc230) && /const ward = wardAgainst\(enc\.def, "finish"\)/.test(appSrc230));
+  check("230 §7c WIRING: onChoice trivializes a challenge when the kit voids its premise (trivial bypass or opposed roll)",
+    /const triv = trivializes\(enc\.def, familiesOfAbility/.test(appSrc230) && /triv === "trivial" \|\| \(triv === "opposed" && \["success", "crit_success"\]\.includes\(resolution\.degree\)\)/.test(appSrc230) && /resolution\.trivialize = \{ craft/.test(appSrc230));
 }
 
 // ---- SNG-168 §2: the world FEED — a scrapbook of shared turns, rating-lensed, NEVER canon ----

@@ -147,6 +147,47 @@ export function swingDegree(delta, meterMax) {
   return "failure";
 }
 
+// ---------- SNG-230 §7b/§7c: the frame READS the situation — wards GATE what's possible, the KIT can VOID a premise ----------
+// The same encounter is a trivial walk-around for one character, a graded fight for another, and an impossible
+// wall for a third (warded against their one trick). Both are CONTENT-DRIVEN (Aevi authors the ward/premise
+// fields); absent them, these are no-ops. All pure.
+
+/** §7b: does a WARD on the target FORBID a collapse mechanic OUTRIGHT (a gate, not a modifier)? A target declares
+ *  `wards: [{ denies:[modes|"instant_end"|"collapse"], breakDC, name }]` — a Death-Ward denies "finish", a
+ *  mind-ward denies "sway", a movement-ward denies "escape". Returns {denied, breakDC, name}; when denied the
+ *  collapse is OFF THE TABLE unless the roll DEMOLISHES the ward (wardBroken). Absent a ward → not denied. Pure. */
+export function wardAgainst(def, mode) {
+  const wards = def?.wards || (def?.ward ? [def.ward] : []);
+  for (const w of wards) {
+    const d = w?.denies || [];
+    if (d.includes(mode) || d.includes("instant_end") || d.includes("collapse")) {
+      return { denied: true, breakDC: Number.isFinite(w.breakDC) ? w.breakDC : Infinity, name: w.name || null };
+    }
+  }
+  return { denied: false, breakDC: 0, name: null };
+}
+
+/** §7b: a denying ward BREAKS only under a DEMOLISHING roll — a crit_success whose margin exceeds the ward's
+ *  breakDC. Anything less and the instant-end simply does not happen (the finisher may still do ordinary damage
+ *  per §7a, but the collapse mechanic is unavailable). Pure. */
+export function wardBroken(degree, margin, breakDC) {
+  return degree === "crit_success" && (margin ?? 0) >= (breakDC ?? Infinity);
+}
+
+/** §7c: does the player's KIT void this challenge's PREMISE — making it trivial? A challenge declares
+ *  `trivializedBy: [families]` (families that remove its obstacle — a MOVE/fly craft voids a climb) + an optional
+ *  `resistDC` (a hardness above which even the voiding kit must ROLL, opposed, instead of walking around it).
+ *  Returns "trivial" (premise voided + soft → bypass, NO roll, a narrated walk-around), "opposed" (voided but the
+ *  challenge RESISTS → an opposed roll), or null (the kit doesn't void it → normal stages). Absent the content →
+ *  null. Pure. */
+export function trivializes(def, kitFamilies) {
+  const by = def?.trivializedBy || [];
+  if (!by.length) return null;
+  const kit = new Set(Array.isArray(kitFamilies) ? kitFamilies : []);
+  if (!by.some(f => kit.has(f))) return null;
+  return (Number.isFinite(def?.resistDC) && def.resistDC > 0) ? "opposed" : "trivial";
+}
+
 /** Which frame KIND an encounter is. def.type is the structural truth (duel/challenge/puzzle); flavor themes the
  *  challenge kinds (chase vs. hazard). Returns null for an encounter that gets no frame. Pure. */
 export function encounterKind(def, entry = null) {
@@ -263,6 +304,8 @@ export function frameModel(def, state = {}, entry = null) {
     // §6b/§7a: whether a decisive finisher could END this in one beat (a foe too great can't be) — surfaced so
     // the player knows the gamble is on the table. The actual collapse resolves along the degree bands.
     collapsible: frameCollapsible(def),
+    // §7b: whether a WARD guards it (a finisher can't end it unless the ward shatters) — Aevi content; false absent one.
+    warded: !!(def?.wards?.length || def?.ward),
     stage: staged
       ? { index: state?.stageIndex ?? 0, total: def?.stages?.length || 0, name: def?.stages?.[state?.stageIndex ?? 0]?.name || null }
       : null,

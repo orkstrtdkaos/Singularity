@@ -212,8 +212,13 @@ export function encounterReceiptForGM(state, def, resolution, roundResult) {
   const fin = resolution?.collapse;
   const finLine = !fin ? "" : fin.result === "collapse"
     ? `\nFINISHER LANDED: ${fin.craft || "a decisive craft"} ended this in ONE beat — narrate a single decisive ${fin.mode === "escape" ? "escape (you slip away clean)" : fin.mode === "solve" ? "solving stroke (it opens at once)" : "finishing stroke, fast and hard"}.`
+    : fin.result === "warded" // §7b: a ward FORBADE the instant-end — the strike landed but the one-beat kill was structurally off the table
+    ? `\nFINISHER WARDED: ${fin.craft || "the finisher"} struck true, but ${fin.ward || "a ward"} FORBADE the instant-end — the one-beat kill simply did not happen (it is not that it resisted; it could not apply). It may have done ordinary harm, but you must beat it down the hard way.`
     : `\nFINISHER WHIFFED: ${fin.craft || "the finisher"} tried to END this and MISSED — narrate the encounter HARDENING (it knows you tried to finish it; you're exposed${fin.result === "morph_bad" ? ", badly — a dangerous opening left wide" : ""}). It is NOT over.`;
-  return `${head}\n${sides}\n${events}${finLine}\nNarrate this receipt exactly — do not move health, stages, or hints yourself. Offer choices that fit the encounter (attack/press/defend, flee/yield/abandon where sensible, ability and item uses).`;
+  // §7c: the player's KIT VOIDED the challenge's premise — it was never their obstacle. A narrated walk-around.
+  const tv = resolution?.trivialize;
+  const tvLine = !tv ? "" : `\nPREMISE VOIDED: ${tv.craft || "the character's kit"} makes ${tv.premise ? `"${tv.premise}"` : "this obstacle"} a non-issue — narrate a ${tv.mode === "opposed" ? "decisive bypass earned against real resistance" : "frictionless walk-around (their kit makes nothing of it)"}, then it is done. Do NOT grind the stages.`;
+  return `${head}\n${sides}\n${events}${finLine}${tvLine}\nNarrate this receipt exactly — do not move health, stages, or hints yourself. Offer choices that fit the encounter (attack/press/defend, flee/yield/abandon where sensible, ability and item uses).`;
 }
 
 /** GM encounter ops: narrative-flavor only, clamped. */

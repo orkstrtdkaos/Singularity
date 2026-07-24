@@ -181,3 +181,17 @@ line. Today `GEN_TYPES = ["npc","location","arc"]`. This spec's tiers extend it:
 5. **Sequencing vs the braid arc and the codex ledger:** this is large and touches the shared clock like
    SNG-201. Does it queue behind the braid arc, or is the schema-authoring (my part) parallelizable while
    you finish braids? I can author schemas + the exemplar content independent of your build.
+
+
+---
+
+# §7 — RESOLVED (Erik, 2026-07-22)
+
+## §OQ2 contested advancement — NET-VECTOR (Erik's call)
+A world arc under multiple players' pushes advances by the NET RESULTANT of all pushes, per the framework:
+structural directionality is the net resultant of vector fields across a larger boundary (07_Mental_Models) —
+NOT any one player's push, NOT winner-take-all. Each player's action = a VECTOR (direction = which way they
+push the arc's poles; magnitude = play-realness, the SNG-128 weight). The arc advances along the SUM: aligned
+accelerate, opposed partially cancel. SAME rule as SNG-204 §OQ4 — one resolver for "many hands on one
+world-thing." NEW machinery (no netVector primitive exists, 0 hits). Other §OQ items stay CCode-technical;
+Aevi's schema/exemplar authoring is parallelizable; 203 first (204 builds on its tiers/arc_stage).

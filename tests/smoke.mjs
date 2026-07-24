@@ -7733,6 +7733,31 @@ await (async () => {
   check("225 §4c: isEligible no longer hard-gates on region (the region field is data, not a lock)", /region-lock is DROPPED/.test(readFileSync(join(root, "engine/random_encounters.js"), "utf8")));
 }
 
+// ---- SNG-228: a PERSON must never become a destination — "catch Ossian" minted Ossian as a place ----
+{
+  const { personDestination } = await import("../engine/intent.js");
+  const locs228 = { the_registry: { id: "the_registry", name: "the North Gate Registry" }, millbrook: { id: "millbrook", name: "Millbrook" } };
+
+  // THE BUG: a freshly-NAMED person (not registered) — flagged by a TITLE and a person-only VERB — is rejected.
+  const ossian = personDestination("Ossian", { label: "fly to the brick hall to catch Ossian", exactWords: "fly to the brick hall, catch Clerk-Warden Ossian before she leaves" }, { npcRegistry: {}, locations: locs228 });
+  check("228 §3b: a person named in the words (title 'Clerk-Warden' + verb 'catch') is caught — not a place", ossian.isPerson === true);
+  check("228: a person with no recoverable place is NOT a destination (no phantom person-place minted)", ossian.isPerson && ossian.destId === null);
+
+  // a KNOWN NPC in the registry is a person too.
+  const reg = { ossian: { name: "Ossian", statusNote: "at the North Gate Registry, deciding what reaches the committee" } };
+  check("228 §3b: a travelTo matching a registered NPC is a person", personDestination("Ossian", { label: "go to Ossian" }, { npcRegistry: reg, locations: locs228 }).isPerson === true);
+  // §3c: redirect to the person's PLACE when it's recoverable from their status.
+  check("228 §3c: when a registered person's status names a known place, travel THERE (not to the person)", personDestination("Ossian", { label: "go to Ossian" }, { npcRegistry: reg, locations: locs228 }).destId === "the_registry");
+
+  // NOT a false positive: a real PLACE reached by a place-verb ('find'/'reach') is NOT flagged as a person.
+  check("228 GUARD: a real place with a PLACE-verb ('find the old mill') is not mistaken for a person", personDestination("the old mill", { label: "find the old mill", exactWords: "go and find the old mill" }, { npcRegistry: {}, locations: locs228 }).isPerson === false);
+  check("228 GUARD: a plain new place name (no person signal) mints as a place", personDestination("Cairnhold", { label: "set out for Cairnhold" }, { npcRegistry: {}, locations: locs228 }).isPerson === false);
+
+  // wiring: travelIntentOf calls the belt only when the trusted travelTo resolves to no real place.
+  const appSrc228 = readFileSync(join(root, "app.js"), "utf8");
+  check("228: travelIntentOf runs the person belt when a trusted travelTo can't place (rejects/redirects, never phantom-mints a person)", /const person = personDestination\(ref, action, \{ npcRegistry: character\.npcRegistry, locations: CONTENT\.locations \}\)/.test(appSrc228) && /if \(person\.isPerson\) return person\.destId \?/.test(appSrc228));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

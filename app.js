@@ -37,7 +37,7 @@ import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
-import { harmGateFor, departureGateFor, isSpeechAct, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard
+import { harmGateFor, departureGateFor, isSpeechAct, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard
 import { resolveWaygateTransit, routeGmMoveTo } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.238";
+const APP_VERSION = "1.8.239";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4607,7 +4607,13 @@ function travelIntentOf(action) {
   let ref = action.travelTo && String(action.travelTo).trim();
   if (ref && !NOT_A_PLACE.test(ref.replace(/^the\s+/i, "").trim())) {
     const destId = resolveLocationId(ref, CONTENT.locations);
-    return { ref, name: destId ? CONTENT.locations[destId].name : titleize(ref), destId };
+    if (destId) return { ref, name: CONTENT.locations[destId].name, destId }; // a REAL place — trust it
+    // SNG-228: destId null → would mint `ref` as a phantom place. First check it isn't a PERSON (Ossian):
+    // a known NPC, or someone the words go to CATCH/CONFRONT or address by TITLE. A person is never a
+    // destination — redirect to their PLACE if it's recoverable (§3c), else no travel intent (no phantom).
+    const person = personDestination(ref, action, { npcRegistry: character.npcRegistry, locations: CONTENT.locations });
+    if (person.isPerson) return person.destId ? { ref: CONTENT.locations[person.destId].name, name: CONTENT.locations[person.destId].name, destId: person.destId } : null;
+    return { ref, name: titleize(ref), destId: null }; // a genuinely new PLACE — mint on arrival (SNG-117)
   }
   // (2) a GUESS from tag/phrase — must resolve to a real place to be trusted as a destination
   const tags = [...(action.intentTags || []), ...(action.tags || [])].map(t => String(t).toLowerCase());

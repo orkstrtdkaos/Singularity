@@ -71,6 +71,37 @@ export function isSpeechAct(label) {
   return SPEECH_ACT.test(String(label || "").trim());
 }
 
+// SNG-228: signals that a `travelTo` names a PERSON, not a place. TITLES that precede a name, and verbs that
+// almost always take a person as their object (you CATCH/CONFRONT/GREET a person, not a road). "find/reach/
+// stop" are excluded — they take places too, so they can't disambiguate. Twin of SPEECH_ACT.
+const PERSON_TITLE = "warden|clerk|clerk-warden|lord|lady|ser|sir|captain|elder|master|mistress|guard|scout|keeper|reverend|dame|goodman|goodwife|councillor|magistrate";
+const PERSON_VERB = "catch|confront|intercept|greet|warn|question|corner|speak to|talk to|meet with|apprehend";
+
+/** PURE. A trusted `travelTo` that resolves to NO real place — is it actually a PERSON, not a destination?
+ *  The code belt behind the §3a parser prompt, twin of isSpeechAct (the SNG-188 belt). A person is signalled
+ *  by: a match in the NPC registry, a TITLE before the name in the action's words, or a person-only VERB
+ *  reaching them. Returns { isPerson, destId } — destId is the person's PLACE when it's recoverable from a
+ *  registered NPC's status (§3c: travel THERE, not to the person), else null (a person with no known place is
+ *  never a destination — never mint a phantom person-place). A plain new PLACE returns { isPerson:false }.
+ *  ctx: { npcRegistry:{}, locations:{} }. */
+export function personDestination(ref, action = {}, ctx = {}) {
+  const name = String(ref || "").trim(); if (!name) return { isPerson: false };
+  const esc = name.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const eq = (a, b) => { a = String(a || "").toLowerCase().trim(); b = String(b || "").toLowerCase().trim(); return !!a && !!b && (a === b || a.includes(b) || b.includes(a)); };
+  const npc = Object.values(ctx.npcRegistry || {}).find(n => n && (eq(n.name, name) || (n.aliases || []).some(a => eq(a, name))));
+  const words = `${action.label || ""} ${action.exactWords || ""}`.toLowerCase();
+  const titled = new RegExp(`\\b(?:${PERSON_TITLE})\\s+${esc}\\b`).test(words);
+  const reached = new RegExp(`\\b(?:${PERSON_VERB})\\b[^.!?]*\\b${esc}\\b`).test(words);
+  if (!npc && !titled && !reached) return { isPerson: false };
+  // §3c: recover WHERE a registered person is, from their status prose (best-effort) — travel to the PLACE.
+  if (npc && npc.statusNote) {
+    const sn = String(npc.statusNote).toLowerCase();
+    const at = Object.values(ctx.locations || {}).find(l => String(l.name || "").length > 3 && sn.includes(String(l.name).toLowerCase()));
+    if (at) return { isPerson: true, destId: at.id };
+  }
+  return { isPerson: true, destId: null };
+}
+
 /** PURE. Should a departure gate fire for this travel intent? SNG-188: travel is OFFERED, never
  *  imposed (§4.1, the same contract lethal encounters carry). The gate now FAILS CLOSED — an
  *  unresolvable origin or destination is the case where the engine knows LEAST about the consequence

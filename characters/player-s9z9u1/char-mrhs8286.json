@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 22,
-  "xp": 2104,
+  "xp": 2109,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -128,7 +128,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.08359546522027321,
+    "spectrumId": -0.12941569195925956,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.26339120175346753,
     "mechanical_spiritual": 0.25513542055105926,
@@ -144,7 +144,7 @@
   "maxHealth": 135,
   "health": 135,
   "maxEnergy": 205,
-  "energy": 205,
+  "energy": 200,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1723,7 +1723,119 @@
     "Silas offers aid to Renna in exchange for the commission; she declines with even professional courtesy and turns to the work — the boar tusks on her bench, the commission complete, the scene at the stall closed."
   ],
   "currentLocationId": "gen-waygate",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-waygate",
+    "turns": [
+      {
+        "player": "Find Pell. She's either in a boutique or finishing shopping g.",
+        "summary": "Silas finds Pell at a hardware boutique in the crescent — she's mid-read on a buckle, unimpressed, and turns to meet him.",
+        "narration": "You cut back through the marketplace crescent, past Renna's stall with its dark-green awning, and head toward the cluster of small boutiques at the crescent's northern end. The afternoon light is flat and even, early-spring pale, and the foot traffic has thinned since midday.\n\nYou find Pell at the third stall in — a narrow shopfront with pressed-metal clasp-work and belt hardware hanging in rows from a wooden frame. She is standing with her back half-turned to the lane, holding a buckle up to the light between two fingers, reading the grain of it through ironsense the way she reads everything: quietly, from the inside out. She hasn't bought yet. The stall-keeper is waiting with the patient stillness of someone who has learned not to interrupt a smith mid-read.\n\nShe hears you before you speak — the slight shift of her shoulders that means she knew the step. She sets the buckle back on the frame without ceremony and turns. 'Nothing worth the price,' she says to you, not to the stall-keeper, which is her version of a farewell to the transaction. She falls into step beside you, close enough that her arm finds yours. 'How did the morning finish?'"
+      }
+    ],
+    "lastTurn": {
+      "narration": "You cut back through the marketplace crescent, past Renna's stall with its dark-green awning, and head toward the cluster of small boutiques at the crescent's northern end. The afternoon light is flat and even, early-spring pale, and the foot traffic has thinned since midday.\n\nYou find Pell at the third stall in — a narrow shopfront with pressed-metal clasp-work and belt hardware hanging in rows from a wooden frame. She is standing with her back half-turned to the lane, holding a buckle up to the light between two fingers, reading the grain of it through ironsense the way she reads everything: quietly, from the inside out. She hasn't bought yet. The stall-keeper is waiting with the patient stillness of someone who has learned not to interrupt a smith mid-read.\n\nShe hears you before you speak — the slight shift of her shoulders that means she knew the step. She sets the buckle back on the frame without ceremony and turns. 'Nothing worth the price,' she says to you, not to the stall-keeper, which is her version of a farewell to the transaction. She falls into step beside you, close enough that her arm finds yours. 'How did the morning finish?'",
+      "sceneSummary": "Silas finds Pell at a hardware boutique in the crescent — she's mid-read on a buckle, unimpressed, and turns to meet him.",
+      "choices": [
+        {
+          "label": "Tell her about Tane plainly — the bout, the yield, what he said about her",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask what she made of the crescent — whether anything was worth stopping for",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Walk her toward the waygate and talk on the move — the road to Edvar Crane still waits",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Stop here a moment — pull her into the quieter part of the lane and say what the morning actually cost you",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "The marketplace crescent's northern end, Waygate — a narrow hardware boutique with pressed-metal clasp-work on a wooden frame, afternoon light flat and pale, foot traffic thin.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Standing at the stall's edge, buckle set back on the frame, turning to meet Silas — unimpressed with the stock, ready to move."
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched somewhere above, unbothered."
+          }
+        ],
+        "objects": [
+          "Rows of pressed-metal clasp-work and belt hardware on a wooden frame",
+          "The buckle Pell set back — mid-grade iron, not worth the price",
+          "Renna's dark-green oilcloth awning visible farther down the crescent"
+        ],
+        "threads": [
+          "Pell has asked how the morning finished — waiting for Silas's account",
+          "The road to Edvar Crane and the Crossing remains ahead"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Found at a hardware boutique — mid-read on a buckle, nothing worth buying. Rejoined Silas at the crescent's northern end.",
+          "statusNote": "At the hardware boutique in the crescent's north end — buckle set down, turning to meet Silas, ready to move on."
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short walk through the crescent to find Pell"
+      }
+    },
+    "sceneState": {
+      "setting": "The marketplace crescent's northern end, Waygate — a narrow hardware boutique with pressed-metal clasp-work on a wooden frame, afternoon light flat and pale, foot traffic thin.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Standing at the stall's edge, buckle set back on the frame, turning to meet Silas — unimpressed with the stock, ready to"
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched somewhere above, unbothered."
+        }
+      ],
+      "objects": [
+        "Rows of pressed-metal clasp-work and belt hardware on a wooden frame",
+        "The buckle Pell set back — mid-grade iron, not worth the price",
+        "Renna's dark-green oilcloth awning visible farther down the crescent"
+      ],
+      "threads": [
+        "Pell has asked how the morning finished — waiting for Silas's account",
+        "The road to Edvar Crane and the Crossing remains ahead"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 13,
@@ -2586,7 +2698,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Named the ward's join as a jointed hinge, not welded — load-bearing without rigidity, more stress-tolerant than a weld.",
         "[d13] Her hand unclenched at her side as Silas answered — she heard something in it, through ironsense or through the plainness of the statement, and filed it without naming it aloud.",
         "[d13] Invited to experiment with ironsense against the live ward — took the invitation without asking what was meant, set her feet, and started working.",
         "[d13] Silas named what he felt through the bond as she worked — she is tracing the join's load-bearing hinge, reading load not shape, and it arrives through the bond as weight through a joint that is not rigid.",
@@ -2595,7 +2706,8 @@
         "[d13] Named the drainage cut's mechanical failure plainly — wrong slope, pooling water, cold iron underneath — and recommended it be flagged to whoever tends the road. Then stepped away from it and moved on.",
         "[d13] Arrived at the Crossing, immediately read the settlement for working infrastructure — noted no forge smoke, spotted a cooperage.",
         "[d13] Tasked with scouting forge resources and booking a bout at the Coliseum — moving northwest.",
-        "[d13] Received the full weight of the boar hunt through the soul bond — cold ground, the kill, the walk back after, the unbroken line to this stall. Found the structural truth of it through ironsense. Did not speak, which was the answer."
+        "[d13] Received the full weight of the boar hunt through the soul bond — cold ground, the kill, the walk back after, the unbroken line to this stall. Found the structural truth of it through ironsense. Did not speak, which was the answer.",
+        "[d13] Found at a hardware boutique — mid-read on a buckle, nothing worth buying. Rejoined Silas at the crescent's northern end."
       ],
       "knownFacts": [
         "Boundary-Stone and Shielding Word can braid into a sustained place-ward — she watched it seat",
@@ -2616,7 +2728,7 @@
         "reading structural anomaly in road construction through iron"
       ],
       "status": "active",
-      "statusNote": "At Renna's stall — still, ironsense turned inward, holding what the bond just carried",
+      "statusNote": "At the hardware boutique in the crescent's north end — buckle set down, turning to meet Silas, ready to move on.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 13
@@ -4432,7 +4544,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 579,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The stock shelter, plain and open on the lee side of the field-stone wall — exactly the kind of place Huginn will land first and inspect…",
@@ -5935,21 +6047,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.879618484513426,
-    "cerebral": 13.93376667768857,
-    "social": 15.953285217244368,
-    "generous": 3.7324381176900174,
-    "cautious": 5.123901419410949,
-    "physical": 0.7999287519880252,
-    "risky": 0.7030222109901368,
-    "ruthless": 0.6218312504898229,
-    "carousing": 0.14262457822909444,
-    "amorous": 2.4112374704102026,
-    "patient": 0.8555120913381172,
-    "stealth": 0.001430268934690616,
-    "devotion": 0.755466171543562,
-    "craft": 1.1902003933539687,
-    "leadership": 1.1540817276037847
+    "strategic": 17.45762802240059,
+    "cerebral": 14.585422510746357,
+    "social": 15.554453086813258,
+    "generous": 3.6391271647477668,
+    "cautious": 4.995803883925674,
+    "physical": 0.7799305331883245,
+    "risky": 0.6854466557153834,
+    "ruthless": 0.6062854692275773,
+    "carousing": 0.13905896377336707,
+    "amorous": 2.3509565336499474,
+    "patient": 0.8341242890546643,
+    "stealth": 0.0013945122113233506,
+    "devotion": 0.736579517254973,
+    "craft": 1.1604453835201194,
+    "leadership": 1.12522968441369
   },
   "aptitudes": [
     "strategist",
@@ -5957,7 +6069,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 746,
+  "actionCount": 747,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6347,8 +6459,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784864619213,
-  "rev": 1210,
+  "updatedAt": 1784864761830,
+  "rev": 1211,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8910,7 +9022,7 @@
   "syncedAt": 1784859433957,
   "teachers": {},
   "regionsKnown": {
-    "valley": 480,
+    "valley": 481,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -9037,10 +9149,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T03:43:39.195Z",
+      "lastAt": "2026-07-24T03:46:01.827Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 80
+      "beats": 81
     }
   ],
   "company": [
@@ -9240,15 +9352,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 116,
-    "choices": 116,
+    "sceneSummary": 117,
+    "choices": 117,
     "characterDeltas": 49,
-    "scene": 116,
-    "npcUpdates": 102,
+    "scene": 117,
+    "npcUpdates": 103,
     "factUpdates": 7,
     "placeUpdates": 21,
     "codexUpdates": 70,
-    "timeOps": 110,
+    "timeOps": 111,
     "imagePrompt": 3,
     "sceneEnded": 26,
     "itemUpdates": 2,
@@ -9263,7 +9375,7 @@
     "stageOps": 5,
     "generateRequest": 3
   },
-  "_opTurns": 116,
+  "_opTurns": 117,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

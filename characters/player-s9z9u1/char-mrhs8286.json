@@ -1729,7 +1729,140 @@
     "Silas Weir met Warden Coll in his registry office and built the full accountability chain — document roll, testimony, signed witness statement with Post Master mark, a shadow-architecture of the failing water system raised from the Waymarker, a permanent two-way shadow-slate bound to the Weirmark seated on Coll's desk, a formal Letter of Introduction sealed with Coll and committee authority, a weekly check-in protocol written into the ledger margin, Maren Ossitide's name given as the one legendary figure the Zone draws near, and Huginn's plain three-sound reading of the crisis: the plans hold weight and will move, but the thing upstream is on its own schedule and the clock has not been seen. The scene closes with the flag near dropping and Silas on the stairs."
   ],
   "currentLocationId": "gen-hub-north-gate-district-street",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-hub-north-gate-district-street",
+    "turns": [
+      {
+        "player": "Write the first word on the shadow-slate now — just your mark, so Coll knows the channel is live before you are two streets away",
+        "summary": "Silas presses his Weirmark into the shadow-slate — the channel opens, Coll confirms it, and the room holds its new permanence.",
+        "narration": "The shadow-slate is small enough to fit in one hand — a palm-width of dark material, smooth-edged, sitting on the corner of Coll's desk where the light from the narrow window catches it just enough to read by. You uncap the chalk blank and press your mark into its surface: the Weirmark, four strokes, the same one seated in the post at Stillwater's Trouble and in the Waymarker on your belt. It appears on the slate clean and crisp, and a breath later the twin mark surfaces on the paired slate already set before Coll.\n\nColl looks down at it. He does not say anything for a moment. Then he says, \"Good,\" in the tone of a man checking a box he has been waiting to check for some time.\n\nYou recap the chalk blank and slide it back into your coat pocket. Huginn shifts on the windowsill, tilts its head once at the slate, and makes no sound. The channel is live. The room has a different quality now — one open line running through it, small but permanent.\n\nColl's hand is already moving toward his ledger. The stairs are behind you. Outside the window, the afternoon is still early enough that the North Gate District is moving at full pace — carts, foot traffic, the particular clatter of a market street that has not yet turned toward evening."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The shadow-slate is small enough to fit in one hand — a palm-width of dark material, smooth-edged, sitting on the corner of Coll's desk where the light from the narrow window catches it just enough to read by. You uncap the chalk blank and press your mark into its surface: the Weirmark, four strokes, the same one seated in the post at Stillwater's Trouble and in the Waymarker on your belt. It appears on the slate clean and crisp, and a breath later the twin mark surfaces on the paired slate already set before Coll.\n\nColl looks down at it. He does not say anything for a moment. Then he says, \"Good,\" in the tone of a man checking a box he has been waiting to check for some time.\n\nYou recap the chalk blank and slide it back into your coat pocket. Huginn shifts on the windowsill, tilts its head once at the slate, and makes no sound. The channel is live. The room has a different quality now — one open line running through it, small but permanent.\n\nColl's hand is already moving toward his ledger. The stairs are behind you. Outside the window, the afternoon is still early enough that the North Gate District is moving at full pace — carts, foot traffic, the particular clatter of a market street that has not yet turned toward evening.",
+      "sceneSummary": "Silas presses his Weirmark into the shadow-slate — the channel opens, Coll confirms it, and the room holds its new permanence.",
+      "choices": [
+        {
+          "label": "Step out into the North Gate District street and take stock of where the party stands — Pell toward the Coliseum, Veth asking after Crane, and the afternoon still ahead.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Before you leave, ask Coll plainly: who in the Hub would know the name Edvar Crane, and where the Crossing's second thread connects back to district records.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Head for the Hub message post to see if Pip's notice drew any response — or if anything has come through on Mara's relay line.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Write a second line on the slate before you go — the check-in schedule, plain and brief — so the protocol has both ends confirmed while you are still in the room.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "Warden Coll's registry office, North Gate District, Hub — a narrow room with a window, the shadow-slate now live on the corner of the desk, midafternoon light coming in flat and steady.",
+        "npcsPresent": [
+          {
+            "name": "Warden Coll",
+            "state": "returning to his ledger, the twin mark confirmed on his slate"
+          },
+          {
+            "name": "Huginn",
+            "state": "perched on the windowsill, head tilted, watching the slate"
+          }
+        ],
+        "objects": [
+          "shadow-slate (live, Weirmark pressed, twin seated on Coll's desk)",
+          "Coll's ledger (check-in protocol written in the margin)",
+          "Letter of Introduction (Coll's seal, committee stamp)",
+          "Calling-Slip for Warden Coll (spent — access already used)"
+        ],
+        "threads": [
+          "Pell is moving toward the Coliseum gate and forge district",
+          "Veth is moving through the Hub plaza asking after Crane and resources",
+          "What the Water Remembers — upstream source on its own schedule",
+          "The Second Thread — Edvar Crane is at the Crossing, holding the unfinished work"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "coll",
+          "name": "Warden Coll",
+          "note": "Confirmed the shadow-slate channel live — the Weirmark appeared on his paired slate and he marked it in his ledger without ceremony.",
+          "statusNote": "At his desk in the North Gate Registry office — channel confirmed, ledger updated, the protocol now running.",
+          "relationshipDelta": 0
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief final exchange — the mark pressed, Coll's confirmation, nothing more."
+      },
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "The shadow-slate channel is now live — Weirmark seated on both ends, check-in protocol in Coll's ledger margin. Contact with the Hub's formal accountability chain is permanent and two-way.",
+          "links": [
+            "what-the-water-remembers",
+            "the-edge-district-ledger",
+            "coll",
+            "mara-wells"
+          ]
+        }
+      ]
+    },
+    "sceneState": {
+      "setting": "Warden Coll's registry office, North Gate District, Hub — a narrow room with a window, the shadow-slate now live on the corner of the desk, midafternoon light coming in flat and steady.",
+      "npcsPresent": [
+        {
+          "name": "Warden Coll",
+          "state": "returning to his ledger, the twin mark confirmed on his slate"
+        },
+        {
+          "name": "Huginn",
+          "state": "perched on the windowsill, head tilted, watching the slate"
+        }
+      ],
+      "objects": [
+        "shadow-slate (live, Weirmark pressed, twin seated on Coll's desk)",
+        "Coll's ledger (check-in protocol written in the margin)",
+        "Letter of Introduction (Coll's seal, committee stamp)",
+        "Calling-Slip for Warden Coll (spent — access already used)"
+      ],
+      "threads": [
+        "Pell is moving toward the Coliseum gate and forge district",
+        "Veth is moving through the Hub plaza asking after Crane and resources",
+        "What the Water Remembers — upstream source on its own schedule",
+        "The Second Thread — Edvar Crane is at the Crossing, holding the unfinished work"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 13,
@@ -3485,7 +3618,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d13] Received Silas's direct answer without visible alarm — granted ten minutes and asked him to start with the contact. Has decided to hear the case.",
         "[d13] Undying Ledger read confirms: binding authority at district level — can requisition repair crews, authorize emergency supply, compel filtration array disclosure without a full council vote. Needs evidence and a name in the accountability chain.",
         "[d13] Received the full briefing — Grael named, Post Master authority declared, resource needs stated. Asked for the document roll, a signed witness statement in Silas's hand with his Post Master mark, and a check-in protocol if Silas enters the Zone.",
         "[d13] Witnessed the shadow-architecture raised from the Waymarker and The Shadow Work — the valley's water infrastructure laid plain on his desk for thirty seconds. Said he has not seen the system's reach laid out like that in fifteen years. Committed to drafting formal aid requests to the Rootkin and…",
@@ -3494,7 +3626,8 @@
         "[d13] Received the shadow-slate with visible astonishment — touched its edge, pulled back, accepted it. Named nine years as a council member and said he has never had anything like it on his desk. Asking for the check-in protocol before the flag drops.",
         "[d13] Named Maren Ossitide as the one legendary figure the Zone draws near — said she cannot be summoned, but finds the work she recognizes. Wrote the check-in protocol into the ledger margin: seven days silence means act.",
         "[d13] Watched Huginn's three-sound reading of the crisis without comment — adding data, not discomfort. The bird's verdict on the upstream clock is now in the room and in Coll's ledger-reading mind.",
-        "[d13] Received Silas's thanks without ceremony and returned immediately to the draft aid requests — the work continues. The scene closed cleanly."
+        "[d13] Received Silas's thanks without ceremony and returned immediately to the draft aid requests — the work continues. The scene closed cleanly.",
+        "[d13] Confirmed the shadow-slate channel live — the Weirmark appeared on his paired slate and he marked it in his ledger without ceremony."
       ],
       "knownFacts": [
         "Silas is offering Stillwater's Trouble as a neutral staging point for Rootkin workers in the Zone fringe",
@@ -3517,9 +3650,9 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "In his office — draft aid requests begun, shadow-slate live on the desk, check-in protocol written into the ledger margin.",
+      "statusNote": "At his desk in the North Gate Registry office — channel confirmed, ledger updated, the protocol now running.",
       "lastSeen": {
-        "locationId": "gen-north-gate-registry-ossian-office",
+        "locationId": "gen-hub-north-gate-district-street",
         "day": 13
       }
     }
@@ -4370,7 +4503,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 576,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Father's Sealed Letter — the post is claimed, the hollow is warded, the technique is real. The ground here is as right as ground gets. The…",
@@ -4832,7 +4965,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Fen's intake: iron sleeve has three to four weeks before running open. The buried structure driving the valve is not ending — it has more work to do. The failure is a symptom, not the event.",
           "[d2] Fen's intake CCW torque axis confirmed identical to east furlong — both valves are running the same mechanism in sequence. The structure behind the intake valve is not ending; it is operating as desig",
           "[d2] The Attended End confirms the vault head is ending — slow, structural, load-surrendering — on the same northeast bearing as the three-gate sequence, approximately a mile and a half up the hillside. A ",
           "[d2] Palework on the dying spruce stand north of the pass confirms the fungal die-off is natural and isolated — the buried structure's contamination has not begun seeping into the broader root-zone above t",
@@ -4855,7 +4987,8 @@
           "[d13] Silas signed the witness statement with his Post Master mark on Day 13 afternoon. The design of the aid framework is clear: the Rootkin ask carries implicit expectation of return — Stillwater's Trouble offered as staging; the Cogitants will want a named accountable contact in the Zone. Both…",
           "[d13] Warden Coll issued a formal letter of introduction — Post Master authority named explicitly, committee seal pressed beside his own. Valid for district-governed contacts in the Zone fringe. His caveat: anyone who does not recognize district governance is a different conversation the letter cannot…",
           "[d13] A permanent two-way shadow-slate bound to Silas's Weirmark is now seated on Warden Coll's desk — written contact established without runners. Check-in protocol terms are the last open item before the scene closes.",
-          "[d13] The Attended End, read through Huginn at Day 13 afternoon: the aid framework has weight and will hold. But the source upstream is on its own schedule — something is finishing there, and the question is whether Silas arrives before it does. The clock has not been seen."
+          "[d13] The Attended End, read through Huginn at Day 13 afternoon: the aid framework has weight and will hold. But the source upstream is on its own schedule — something is finishing there, and the question is whether Silas arrives before it does. The clock has not been seen.",
+          "[d13] The shadow-slate channel is now live — Weirmark seated on both ends, check-in protocol in Coll's ledger margin. Contact with the Hub's formal accountability chain is permanent and two-way."
         ],
         "links": [
           "millbrook",
@@ -5871,21 +6004,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.359538309070594,
-    "cerebral": 16.522533894903837,
-    "social": 12.971183815464075,
-    "generous": 3.7024989732590026,
-    "cautious": 4.670159814003752,
-    "physical": 1.0839167276073016,
-    "risky": 0.9526067571366484,
-    "ruthless": 0.842591658919362,
-    "carousing": 0.1932586692580415,
-    "amorous": 1.9461255957172046,
-    "patient": 0.13359204876354658,
-    "stealth": 0.0019380381308152326,
-    "devotion": 1.0236691935905964,
-    "craft": 0.3246286319051488,
-    "leadership": 1.563799884010672
+    "strategic": 19.85054985134383,
+    "cerebral": 16.10947054753124,
+    "social": 12.646904220077472,
+    "generous": 3.6099364989275275,
+    "cautious": 4.553405818653658,
+    "physical": 1.0568188094171191,
+    "risky": 0.9287915882082322,
+    "ruthless": 0.8215268674463779,
+    "carousing": 0.18842720252659045,
+    "amorous": 1.8974724558242744,
+    "patient": 1.1302522475444579,
+    "stealth": 0.0018895871775448517,
+    "devotion": 0.9980774637508314,
+    "craft": 0.3165129161075201,
+    "leadership": 1.5247048869104052
   },
   "aptitudes": [
     "strategist",
@@ -5894,7 +6027,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 734,
+  "actionCount": 735,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6284,8 +6417,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784856869489,
-  "rev": 1184,
+  "updatedAt": 1784857177544,
+  "rev": 1185,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8752,7 +8885,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 86
+    "the_center": 87
   },
   "foreclosed": [
     "rootkin",
@@ -8877,10 +9010,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-24T01:34:29.484Z",
+      "lastAt": "2026-07-24T01:39:37.541Z",
       "startDay": 23,
       "endDay": 24,
-      "beats": 68
+      "beats": 69
     }
   ],
   "company": [
@@ -9080,15 +9213,15 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 105,
-    "choices": 105,
+    "sceneSummary": 106,
+    "choices": 106,
     "characterDeltas": 45,
-    "scene": 105,
-    "npcUpdates": 91,
+    "scene": 106,
+    "npcUpdates": 92,
     "factUpdates": 7,
     "placeUpdates": 19,
-    "codexUpdates": 63,
-    "timeOps": 99,
+    "codexUpdates": 64,
+    "timeOps": 100,
     "imagePrompt": 3,
     "sceneEnded": 24,
     "itemUpdates": 2,
@@ -9103,7 +9236,7 @@
     "stageOps": 4,
     "generateRequest": 2
   },
-  "_opTurns": 105,
+  "_opTurns": 106,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

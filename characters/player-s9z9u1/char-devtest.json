@@ -54,7 +54,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.0323125,
-    "spectrumId": -0.13738932206197238,
+    "spectrumId": -0.13051985595887375,
     "dark_light": 0.03,
     "emotional_logical": 0.015,
     "violence_peace": 0.04000000000000001,
@@ -173,7 +173,131 @@
     "On the Common Hall roof terrace, midday, the shared beat ended — Lira spent and deliberate at the coping wall, the Stillness Field barely holding, the ledger on the stone between them. She named the count-bell window and pointed the way to Vael without ceremony. The scene closes."
   ],
   "currentLocationId": "radiant_plateau_edge",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "radiant_plateau_edge",
+    "turns": [
+      {
+        "player": "Ask her if she wants to be fucked one more time, then do it.",
+        "summary": "On the roof terrace, before the count-bell window closed, Lira said yes — and meant it the same way she means everything.",
+        "narration": "You say it plainly, the way she would want — not dressed up, not soft-pedaled. Do you want to be fucked one more time?\n\nLira looks at you from the coping wall. She hasn't moved yet. Then she sets her jacket down on the bench without looking at it, and she says yes.\n\nThe terrace is bare stone and open sky, the count-bell window still ahead of you — enough time, if neither of you wastes it. She comes to you the way she moves through the district: reading the angle first, adjusting once, arriving exactly where she means to be. Her hands find your collar. She is unhurried and completely deliberate, the way she always is when she's decided something. When she pulls you down to her, her mouth is warm and her grip is certain and she makes a sound low in her throat that is not polite or decorative — it is simply what she sounds like when she wants something and has it.\n\nAfterward she rests her forehead against your shoulder for a moment. Just a moment. Then she straightens, picks up her jacket, and says the keeper's office closes one bell past the afternoon count. Her voice is level. She is already back in the world — and she says it without apology, which is the most Lira thing she could do."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You say it plainly, the way she would want — not dressed up, not soft-pedaled. Do you want to be fucked one more time?\n\nLira looks at you from the coping wall. She hasn't moved yet. Then she sets her jacket down on the bench without looking at it, and she says yes.\n\nThe terrace is bare stone and open sky, the count-bell window still ahead of you — enough time, if neither of you wastes it. She comes to you the way she moves through the district: reading the angle first, adjusting once, arriving exactly where she means to be. Her hands find your collar. She is unhurried and completely deliberate, the way she always is when she's decided something. When she pulls you down to her, her mouth is warm and her grip is certain and she makes a sound low in her throat that is not polite or decorative — it is simply what she sounds like when she wants something and has it.\n\nAfterward she rests her forehead against your shoulder for a moment. Just a moment. Then she straightens, picks up her jacket, and says the keeper's office closes one bell past the afternoon count. Her voice is level. She is already back in the world — and she says it without apology, which is the most Lira thing she could do.",
+      "sceneSummary": "On the roof terrace, before the count-bell window closed, Lira said yes — and meant it the same way she means everything.",
+      "choices": [
+        {
+          "label": "Head to Keeper Aldris Vael's office now — ledger in hand, eastern route behind array housing, before the window narrows further.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Lira to walk with you to Vael's office — her knowledge of district layout and the accountability board makes her a useful witness.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Prism Sight on the ledger one more time before you move — read its light-history and see whether anyone else handled it between Fendt and you.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Go down alone and find the accountability board first — look at Fendt's red-chalk marking with fresh eyes before you put anything in Vael's hands.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat stone underfoot, coping wall on three sides, open midday sky above. The valley floor is visible to the west. The iron stairs lead down to the street.",
+        "npcsPresent": [
+          {
+            "name": "Lira",
+            "state": "jacket in hand, composed, watching you — one eye already on the stairs and the afternoon ahead"
+          }
+        ],
+        "objects": [
+          "Lower Filtration Ledger — on the stone bench",
+          "Lira's jacket",
+          "iron exterior staircase leading down to the street"
+        ],
+        "threads": [
+          "The count-bell window to reach Keeper Aldris Vael is open — it closes one bell past the afternoon count.",
+          "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record."
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "lira",
+          "name": "Lira",
+          "note": "Said yes plainly and came to him without ceremony. Afterward she named the keeper's office closing time and stepped back into the world without apology.",
+          "learned": [
+            "She returns from intimacy the same way she approaches everything — a decision made, honored, and then the next thing."
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "On the roof terrace, composed, ready to move — named the keeper's window without being asked.",
+          "bondType": "romantic",
+          "bondStage": "together"
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "a second shared beat on the terrace before the count-bell window narrows"
+      },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-clean-numbers",
+          "note": "The count-bell window to reach Keeper Vael is still open. The ledger is in hand. Lira has named the closing time — one bell past the afternoon count."
+        }
+      ]
+    },
+    "sceneState": {
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat stone underfoot, coping wall on three sides, open midday sky above. The valley floor is visible to the west. The iron stairs lead down to the street.",
+      "npcsPresent": [
+        {
+          "name": "Lira",
+          "state": "jacket in hand, composed, watching you — one eye already on the stairs and the afternoon ahead"
+        }
+      ],
+      "objects": [
+        "Lower Filtration Ledger — on the stone bench",
+        "Lira's jacket",
+        "iron exterior staircase leading down to the street"
+      ],
+      "threads": [
+        "The count-bell window to reach Keeper Aldris Vael is open — it closes one bell past the afternoon count.",
+        "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record."
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -206,7 +330,8 @@
         "Ledger now in hand. Fendt's initials on three weeks of impossible entries. Next step: who receives this, and what do they do with it?",
         "Ledger in hand; plan mapped — deliver to Aldris Vael or carry it to the forge first. The cooling window and the evidence window are in direct tension.",
         "Lira received the full truth and confirmed she'd sensed the numbers were wrong for weeks. She warned that the supervisor's office faces the direct path — the window to reach Vael unobserved is closing. Afternoon count in minutes.",
-        "The count-bell has rung. The window to reach Keeper Aldris Vael is open — eastern route behind array housing, ledger in hand, Lira's last word guiding the approach."
+        "The count-bell has rung. The window to reach Keeper Aldris Vael is open — eastern route behind array housing, ledger in hand, Lira's last word guiding the approach.",
+        "The count-bell window to reach Keeper Vael is still open. The ledger is in hand. Lira has named the closing time — one bell past the afternoon count."
       ],
       "aliases": [],
       "startedAt": "2026-07-11T22:11:38.224Z"
@@ -224,26 +349,26 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Held the pace, held the afternoon, held attention entirely — then reached for the ledger the moment the bell rang. One press of her hand over his before she straightened.",
-        "[d1] Received the assurance — the ward set, the terrace made private, the invitation plain. She met it directly: 'Good. I was going to be anyway.'",
-        "[d1] Took his hands and corrected the angle — precise as she would with an apprentice, warm as she is not with apprentices. Demonstrated how hip motion draws a prism-arc. Said: the light goes where attention goes. You have to mean it.",
         "[d1] Felt the Drumline Stride lock into her rhythm — named it aloud as something new, voice not quite steady.",
         "[d1] Felt the Drumline Stride deepen by one degree and followed without hesitation — matched the new tempo and held it.",
         "[d1] Took the lead when it was offered — set her own pace without announcement, deliberate and sure. Said: 'You let go easily.' The tone was a verdict she found satisfying.",
         "[d1] Felt the break in the shared tempo when he pushed past her lead — went still and asked him plainly what he was reaching for. Not angry; evaluating.",
         "[d1] He resumed the beat without argument — restrained and open rather than demanding. She tested it, found the rhythm where she had left it, and came back. Said 'Don't stop' with her head down and her voice undone.",
         "[d1] She did exactly what he asked — fully, without restraint. Her voice bent the Stillness Field. Afterward she said something half breath and half his name, and her forehead went to the coping stone.",
-        "[d1] Collected herself at the coping wall, named the count-bell window without being asked, reached for her jacket and turned — voice level, one rough edge left in it. Said the ledger goes to Vael. Did not say whether she comes."
+        "[d1] Collected herself at the coping wall, named the count-bell window without being asked, reached for her jacket and turned — voice level, one rough edge left in it. Said the ledger goes to Vael. Did not say whether she comes.",
+        "[d1] Said yes plainly and came to him without ceremony. Afterward she named the keeper's office closing time and stepped back into the world without apology.",
+        "[d1] Your bond becomes romantic.",
+        "[d1] Your bond deepens — courting."
       ],
       "knownFacts": [
-        "Radiant weaving: attention directs light — motion is the vehicle, intent is the mechanism",
         "Drumline Stride used in synchronized rhythmic rapport — not a sprint, but a shared beat. She named it something no one has done before.",
         "The Drumline Stride can shift its depth mid-motion — she knows this now, from the inside",
         "She takes the lead without ceremony when it is genuinely given — precise about it, the same way she is precise about everything.",
         "He pushed past her lead when they had built something together — she named that clearly.",
         "A restrained return after the broken tempo landed better than a push would have — she recognised the difference and chose to meet it.",
         "The Stillness Field can be pushed to its edge from the inside — she knows what that sounds like now.",
-        "She returns to practicality after intimacy without ceremony — the next necessary thing is the next thing she names."
+        "She returns to practicality after intimacy without ceremony — the next necessary thing is the next thing she names.",
+        "She returns from intimacy the same way she approaches everything — a decision made, honored, and then the next thing."
       ],
       "skillsObserved": [
         "practical spatial awareness of district layout",
@@ -254,7 +379,7 @@
         "teaching by physical correction — exact and warm"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, jacket on, watching him — waiting to see what he does with the ledger.",
+      "statusNote": "On the roof terrace, composed, ready to move — named the keeper's window without being asked.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -262,7 +387,9 @@
       "gender": "woman",
       "pronouns": "she/her",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Lira%2C%20woman%2C%20Apprentice%20optics-weaver%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=44200&nologo=true",
-      "_portraitTier": "devoted"
+      "_portraitTier": "devoted",
+      "bondType": "romantic",
+      "bondStage": "courting"
     },
     "keeper-aldris-vael": {
       "id": "keeper-aldris-vael",
@@ -465,7 +592,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 14
+    "turnsSinceOffer": 15
   },
   "bio": null,
   "subAttributes": {
@@ -686,24 +813,24 @@
     }
   },
   "tendencies": {
-    "social": 10.060803333531535,
-    "strategic": 6.528126772581244,
-    "cautious": 3.7420269688322856,
-    "cerebral": 1.3898496079937765,
-    "physical": 0.6914414935259799,
-    "ruthless": 1.66644149352598,
-    "generous": 0.7306368123270301,
-    "amorous": 10.986820663505702,
-    "risky": 1.8786878906249997
+    "social": 9.809283250193246,
+    "strategic": 6.364923603266712,
+    "cautious": 3.6484762946114784,
+    "cerebral": 1.3551033677939321,
+    "physical": 0.6741554561878305,
+    "ruthless": 1.6247804561878303,
+    "generous": 0.7123708920188544,
+    "amorous": 12.71215014691806,
+    "risky": 1.8317206933593748
   },
   "aptitudes": [
     "charmer"
   ],
-  "actionCount": 29,
+  "actionCount": 30,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785023322173,
-  "rev": 74,
+  "updatedAt": 1785023408327,
+  "rev": 75,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -885,7 +1012,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 27
+    "valley": 28
   },
   "foreclosed": [],
   "company": [],
@@ -904,24 +1031,25 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-25T23:18:42.738Z",
-      "lastAt": "2026-07-25T23:48:42.155Z",
+      "lastAt": "2026-07-25T23:50:08.317Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 14
+      "beats": 15
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 13,
-    "choices": 13,
-    "scene": 13,
-    "npcUpdates": 13,
-    "timeOps": 13,
+    "sceneSummary": 14,
+    "choices": 14,
+    "scene": 14,
+    "npcUpdates": 14,
+    "timeOps": 14,
     "sceneEnded": 7,
     "characterDeltas": 4,
-    "codexUpdates": 2
+    "codexUpdates": 2,
+    "questUpdates": 1
   },
-  "_opTurns": 13,
+  "_opTurns": 14,
   "_intentAsked": null
 }

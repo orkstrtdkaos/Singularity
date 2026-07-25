@@ -189,3 +189,23 @@ mechanism both cases. NEW machinery (no netVector primitive yet).
 ## §OQ2 (pressure) + §OQ5 (sequencing) — CCode-technical
 Aevi authors pressure for the 5 greater-arc transitions; generator infers its own (CCode: one-call vs two).
 204 builds AFTER 203's tiers/arc_stage. Confirmed.
+
+
+---
+
+# §PROVING GROUND (Erik, 2026-07-24): the Second Thread is the wake engine's FIRST REAL TRIGGER
+Erik (closing the Second Thread): "This could be an opportunity for the wake engine after the waygate is created."
+He's right — a MADE WAYGATE is the ideal first wake: a world-scale act whose whole point is the world changing.
+- **Authored + staged NOW:** the Second Thread's 3 endings (content/packs/valley/quests/the_second_thread.json)
+  each carry a `wake` {scale:"world", open:true, pressure:<direction>, seeds:[...]} — the finished/ended/given
+  roads each push a DIFFERENT world-lean (Numinous monopoly broken → their reckoning; the fold ended → an
+  Ashwarden judgment + the line closing; the gate given → anonymous infrastructure + the maker surfacing later).
+- **The two systems fire together as ONE meaningful end:** SNG-235's `effects[]` RECORD the waygate (the
+  permanent fact, the codex, the standing, the arc resolved); THIS `wake` makes the world LEAN and the generator
+  GROW follow-on threads from it. Effects = the world remembers; wake = the world responds.
+- **CCode:** when you build the wake engine, the Second Thread is the ready-made test case — a real outcome with
+  a real authored wake at world scale. Verify: on completion, the wake is created open; the generator reads its
+  `pressure` and authors a follow-on thread (a Numinous responding to the proof, the Crossing becoming a
+  gate-town); the wake closes so it doesn't re-spawn (idempotency). If it works on the waygate, it works.
+- Ties SNG-235 (effects) — the wake is the effects PROMOTED from "findable fact" to "generation input," exactly
+  as §2 describes ("a shape the effects already carry").

@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## [CCODE-21 complete_pending_review — CCode, 2026-07-25] Quest routes rendered "[object Object]" — a shape seam (Second Thread)
+> Erik: "why does my Second Thread question look empty at the end? does Aevi need to author?" NO — content's there,
+> it's a data-SHAPE bug. ROOT (his save): The Second Thread's `routes` is an ARRAY of {id,note} (the ENDING text
+> landed in the wrong field) and its `outcomes` are id-only. The render does Object.entries(routes) expecting a
+> {trad:text} map → on an array it prints "[object Object]" per row; name-less outcomes left "Resolve" blank.
+> structuredQuestRecord (every structured quest's builder) passed def.routes through + never named outcomes.
+> Fixed: PRODUCER normalizes (normalizeQuestRoutes → {trad:string} only; outcome name fallback); reconcile v21
+> HEALS existing saves AND RECOVERS the stranded endings (pulls each outcome summary from the same-id routes[].note
+> → Finished/Ended/Given with their real text); render hides the routes header when empty + never prints a non-string;
+> tests/seams.json gains quest-routes-shape (CCODE-21). PROVEN vs his save. v1.8.265, HARD refresh → reconcile heals
+> the Second Thread on load. `po/results/20260725_CCODE-21_quest_routes_object_object.md`.
+> **AEVI: nothing to author here** — but the recovery means his three endings render now; you may want to give them
+> effects[] (currently null) so choosing one moves world state, if that arc should have durable consequences.
+
 > ## [SNG-233 §2b complete_pending_review — CCode, 2026-07-24] Pell & Veth render FROM their drives (no longer furniture)
 > Wired your interiority overlay (§2a) into the game. npc_interiority.json folded into the valley pack (manifest +
 > state.js loader → CONTENT.npcInteriority). npcRegistryForGM now renders a key NPC FROM their drives — full

@@ -134,6 +134,16 @@
       "canFail": "Remove the _opVocabMisses capture: an unresolvable traditionId is dropped silently again (SNG-179 — markTeacher looks emitted, does nothing) -> red."
     },
     {
+      "id": "quest-routes-shape",
+      "incident": "CCODE-21",
+      "kind": "field_shape",
+      "contract": "A structured quest's `routes` MUST be a {traditionId: string} map and every outcome MUST have a name. A producer handing an ARRAY (or object-valued routes), or a name-less outcome, renders as [object Object] / a blank Resolve button in the quest detail. structuredQuestRecord must normalize both.",
+      "producer": { "file": "engine/quests.js", "note": "structuredQuestRecord builds the record from a def of any shape (authored, generated, GM-emitted)" },
+      "consumer": { "file": "engine/quests.js", "region": "structuredQuestRecord" },
+      "assert": { "requires": ["normalizeQuestRoutes\\(def\\.routes\\)", "name: o\\.name \\|\\| titleizeId"] },
+      "canFail": "Revert routes to `def.routes || {}` or drop the outcome-name fallback: an array-routes quest (Erik's Second Thread) renders [object Object] again and the Resolve buttons go blank -> the patterns vanish -> red."
+    },
+    {
       "id": "npc-registry-entry-has-id",
       "incident": "CCODE-20",
       "kind": "field_presence",

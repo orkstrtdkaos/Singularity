@@ -7345,6 +7345,24 @@ await (async () => {
   check("217 §3a: structuredQuestRecord converts literal \\n → real newline in premise (no backslash-n left)", rec.premise.includes("\n") && !rec.premise.includes(litN));
   check("217 §3a: … and in stakes", rec.stakes.includes("\n") && !rec.stakes.includes(litN));
   check("217 §3a: … and in a stage condition + objective (the fields Erik's save carried)", !rec.stages[0].condition.includes(litN) && !rec.stages[0].objective.includes(litN));
+
+  // CCODE-21 / SNG-232 seam: a structured quest's `routes` MUST be a {trad:string} map and outcomes MUST have a
+  // name — a producer that hands an ARRAY (Erik's Second Thread put ending text there) rendered [object Object]
+  // in "How you might go through it", and name-less outcomes left the "Resolve" buttons blank.
+  {
+    const bad = structuredQuestRecord({
+      id: "arr-routes", name: "Arr", stages: [],
+      routes: [{ id: "finished", note: "the fold is closed" }, { id: "ended", note: "the fold is released" }], // ARRAY, not a {trad:text} map
+      outcomes: [{ id: "finished", narration: [], effects: null }] // no name
+    });
+    check("CCODE-21: structuredQuestRecord NORMALIZES array-shaped routes to {} (never [object Object])",
+      !Array.isArray(bad.routes) && typeof bad.routes === "object" && Object.keys(bad.routes).length === 0);
+    check("CCODE-21: a name-less outcome gets a titleized-id name fallback (the Resolve button is never blank)",
+      bad.outcomes[0].name === "Finished");
+    const good = structuredQuestRecord({ id: "g", name: "G", stages: [], routes: { verist: "say it plainly", lattice: "" }, outcomes: [{ id: "x", name: "Keep", summary: "s" }] });
+    check("CCODE-21: a well-formed {trad:string} route map is preserved; empty/non-string values dropped",
+      good.routes.verist === "say it plainly" && !("lattice" in good.routes) && good.outcomes[0].name === "Keep");
+  }
   check("217 §3a: … and in outcome summary + narration array", !rec.outcomes[0].summary.includes(litN) && !rec.outcomes[0].narration[0].includes(litN));
   check("217 §3a: markdown `**` is LEFT for the render layer (intent preserved, not stripped on write)", normalizeProse(`a ${bs}n **bold** b`).includes("**bold**"));
 

@@ -646,6 +646,37 @@ export const CHARACTER_STEPS = [
       if (healed) console.log(`[reconcile] ccode-20: stamped id on ${healed} id-less npcRegistry entr${healed === 1 ? "y" : "ies"} (were poisoning findExistingNpc → the name-won't-stick bug)`);
       return {}; // silent hygiene — no player-facing note
     }
+  },
+  {
+    version: 21, id: "quest-route-outcome-shape", playerFacing: false,
+    // CCODE-21 / SNG-232 seam. structuredQuestRecord now guarantees routes={trad:string} + named outcomes, but
+    // existing saves carry a structured quest (Silas's "The Second Thread") whose `routes` is an ARRAY of
+    // {id,note} — the ENDING text landed in the wrong field — and whose `outcomes` are id-only. So "How you
+    // might go through it" rendered [object Object] and "Resolve" was blank. Heal in place: recover each
+    // outcome's missing summary from a same-id routes[].note, name it from its id, then drop the malformed
+    // array routes to {}. A well-formed quest is untouched. Idempotent.
+    apply: (c) => {
+      const titleize = s => String(s || "").replace(/[-_]+/g, " ").replace(/\b\w/g, ch => ch.toUpperCase()).trim();
+      let healed = 0;
+      for (const q of (c.quests || [])) {
+        if (!q || !q.structured) continue;
+        if (Array.isArray(q.routes)) {
+          const byId = {};
+          for (const r of q.routes) if (r && r.id) byId[r.id] = r.note || r.text || r.summary || "";
+          for (const o of (q.outcomes || [])) {
+            if (!o) continue;
+            if (!o.summary && byId[o.id]) o.summary = byId[o.id]; // recover the ending text from the wrong field
+            if (!o.name && o.id) o.name = titleize(o.id);
+          }
+          q.routes = {}; // an array is not a tradition→text map — drop it (it rendered as [object Object])
+          healed++;
+        } else {
+          for (const o of (q.outcomes || [])) if (o && !o.name && o.id) o.name = titleize(o.id);
+        }
+      }
+      if (healed) console.log(`[reconcile] ccode-21: healed ${healed} quest(s) with array-shaped routes → recovered endings, emptied the bad routes`);
+      return {};
+    }
   }
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.

@@ -188,6 +188,19 @@ export function isRealQuest(def) {
 /** Normalize an authored quest into a not-yet-started character-quest record. Outcomes carry both
  *  `narration` (authored prose, the chronicle voice) and `effects[]` (machine-readable deltas the
  *  engine applies). Legacy outcomes with only `consequences[]` are still honored (prose fallback). */
+const titleizeId = s => String(s || "").replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()).trim();
+
+/** SNG-232 seam (CCODE-21): a structured quest's `routes` MUST be a { traditionId: "text" } map. A producer
+ *  that hands an ARRAY (or object values that aren't strings) put non-route data here, and rendering it as
+ *  routes prints the literal "[object Object]" (Erik's Second Thread). Keep only string values; drop the rest
+ *  so the section renders empty rather than garbage. */
+export function normalizeQuestRoutes(r) {
+  if (!r || typeof r !== "object" || Array.isArray(r)) return {};
+  const out = {};
+  for (const [k, v] of Object.entries(r)) if (typeof v === "string" && v.trim()) out[k] = v;
+  return out;
+}
+
 export function structuredQuestRecord(def) { // registry:internal
   return {
     id: slugify(def.id), title: def.name || def.id, structured: true, status: "available",
@@ -196,11 +209,11 @@ export function structuredQuestRecord(def) { // registry:internal
     region: def.region || null, tier: def.tier || null,
     arcId: def.arcId || null, locationId: def.locationId || null,   // SNG-112: shared-arc key + own place (parallel player quests)
     stages: (def.stages || []).map(s => ({ id: s.id, objective: normalizeProse(s.objective), condition: normalizeProse(s.condition), change: normalizeProse(s.change) })),
-    routes: def.routes || {},
+    routes: normalizeQuestRoutes(def.routes), // CCODE-21: never an array — that renders as [object Object]
     outcomes: (def.outcomes || []).map(o => {
       const narr = o.narration || o.consequences || [];
       return {
-        id: o.id, name: o.name, summary: normalizeProse(o.summary),
+        id: o.id, name: o.name || titleizeId(o.id), summary: normalizeProse(o.summary), // CCODE-21: name fallback → the Resolve button is never blank
         narration: Array.isArray(narr) ? narr.map(normalizeProse) : normalizeProse(narr),   // prose for the chronicle (legacy: consequences)
         effects: o.effects || null                          // machine-readable deltas (null → legacy prose parse)
       };

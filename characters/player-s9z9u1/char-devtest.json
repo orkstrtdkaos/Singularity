@@ -30,11 +30,31 @@
     {
       "abilityId": "boundary_stone",
       "level": 1
+    },
+    {
+      "abilityId": "echo_sense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "stillness_field",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "tremor_sense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "drumline_stride",
+      "level": 1,
+      "native": true
     }
   ],
   "alignment": {
     "falsehood_truth": 0.02875,
-    "spectrumId": -0.12228310937499998,
+    "spectrumId": -0.11616895390624997,
     "dark_light": 0.03
   },
   "attunement": 3,
@@ -64,7 +84,8 @@
       "effects": {
         "energy": 10
       },
-      "consumable": true
+      "consumable": true,
+      "pinned": true
     },
     {
       "id": "belt_knife",
@@ -76,7 +97,8 @@
         "attack",
         "force"
       ],
-      "consumable": false
+      "consumable": false,
+      "pinned": true
     },
     {
       "id": "hemp_rope",
@@ -98,7 +120,8 @@
       "effects": {
         "energy": 15
       },
-      "consumable": true
+      "consumable": true,
+      "pinned": true
     },
     {
       "id": null,
@@ -229,77 +252,86 @@
         "player": "You were amazing... the move on the bench was something special... what lessons specifically did you learn?",
         "summary": "Lira named her lesson — light-reading becomes people-reading — and sent him east behind the array housing with the ledger.",
         "narration": "The prism-arcs have slid another hand's width across the coping wall. Lira is still on the bench — jacket settled back on her shoulders, one knee drawn up, watching you with the same unhurried attention she brought to everything else this afternoon. The count is coming. Both of you know it. Neither of you is in a hurry yet.\n\n\"You were amazing,\" you tell her, and you mean it plainly. \"That move on the bench — the way you read where I was going before I'd finished getting there. Where did that come from?\"\n\nSomething crosses her face that isn't quite a smile and isn't quite embarrassment — it's the look of someone who has been asked a question they weren't expecting to find interesting, and found it interesting anyway. She tilts her head a fraction.\n\n\"Light-reading,\" she says. \"What I do in the arrays. You learn to catch the angle before the beam completes — extrapolate the arc from the first degree of bend.\" A pause. \"I suppose I stopped treating it as only an optics skill some time ago.\" She glances down at the ledger on the stone beside her, then back up. \"It's the same principle. You read what something is going to do from the very beginning of its movement, before it commits.\" The amber-grey eyes hold steady on yours. \"You telegraph clearly, if you're wondering. It isn't a criticism.\"\n\nShe stands — one smooth motion, no ceremony — and picks up the ledger herself. She holds it out to you.\n\n\"The count is in ten minutes. The supervisor's office faces the Common Hall direct path.\" She says it the same way she said it before: matter-of-fact, neither urgent nor cold. \"You should go through the wick-room side stairs and cut east behind the array housing. It adds two minutes but the angle keeps you out of sight until you're past the board.\"\n\nHer hand stays extended with the ledger until you take it."
+      },
+      {
+        "player": "I could take the ledger, but what we both want is for me to take you right here right now one more time.",
+        "summary": "One last time on the terrace — mutual, unhurried, real. Lira pressed the ledger into his hands as the count-bell rang and sent him east behind the array housing.",
+        "narration": "You pick up the ledger from the terrace stone — and then you set it back down.\n\nLira watches you do it. She reads the pause the way she reads everything: from the first degree of movement, extrapolating the rest. Her chin lifts a little. The amber-grey eyes don't look away.\n\n\"One more time,\" you say. Not a question.\n\nShe looks at you for a long moment — long enough that the prism-arcs drift another inch across the coping wall behind her. Then the corner of her mouth moves, and she reaches up and unbuttons the top two buttons of her jacket with the same unhurried precision she brings to everything else. A practical woman, doing a practical thing.\n\n\"The count starts when the bell sounds,\" she says. \"The bell hasn't sounded yet.\"\n\nShe reaches for your collar and draws you down to her. The bench takes your weight together, the stone warm beneath you, the valley floor a green-grey stripe far to the west and completely indifferent. What follows is unhurried and mutual and completely real — her hands certain, her attention total, the particular kind of quiet that belongs to someone who measures arcs for a living and has decided, this afternoon, that you are the most interesting angle in the district.\n\nAfterward, she sets her jacket straight with two economical motions and reaches past you for the ledger. She presses it into your hands without ceremony, fingers resting on yours for one beat longer than necessary.\n\n\"East behind the array housing,\" she says, still close enough that you feel the words as much as hear them. \"Don't let anyone see the cover.\"\n\nBelow, distantly, the bell begins to sound."
       }
     ],
     "lastTurn": {
-      "narration": "The prism-arcs have slid another hand's width across the coping wall. Lira is still on the bench — jacket settled back on her shoulders, one knee drawn up, watching you with the same unhurried attention she brought to everything else this afternoon. The count is coming. Both of you know it. Neither of you is in a hurry yet.\n\n\"You were amazing,\" you tell her, and you mean it plainly. \"That move on the bench — the way you read where I was going before I'd finished getting there. Where did that come from?\"\n\nSomething crosses her face that isn't quite a smile and isn't quite embarrassment — it's the look of someone who has been asked a question they weren't expecting to find interesting, and found it interesting anyway. She tilts her head a fraction.\n\n\"Light-reading,\" she says. \"What I do in the arrays. You learn to catch the angle before the beam completes — extrapolate the arc from the first degree of bend.\" A pause. \"I suppose I stopped treating it as only an optics skill some time ago.\" She glances down at the ledger on the stone beside her, then back up. \"It's the same principle. You read what something is going to do from the very beginning of its movement, before it commits.\" The amber-grey eyes hold steady on yours. \"You telegraph clearly, if you're wondering. It isn't a criticism.\"\n\nShe stands — one smooth motion, no ceremony — and picks up the ledger herself. She holds it out to you.\n\n\"The count is in ten minutes. The supervisor's office faces the Common Hall direct path.\" She says it the same way she said it before: matter-of-fact, neither urgent nor cold. \"You should go through the wick-room side stairs and cut east behind the array housing. It adds two minutes but the angle keeps you out of sight until you're past the board.\"\n\nHer hand stays extended with the ledger until you take it.",
-      "sceneSummary": "Lira named her lesson — light-reading becomes people-reading — and sent him east behind the array housing with the ledger.",
+      "narration": "You pick up the ledger from the terrace stone — and then you set it back down.\n\nLira watches you do it. She reads the pause the way she reads everything: from the first degree of movement, extrapolating the rest. Her chin lifts a little. The amber-grey eyes don't look away.\n\n\"One more time,\" you say. Not a question.\n\nShe looks at you for a long moment — long enough that the prism-arcs drift another inch across the coping wall behind her. Then the corner of her mouth moves, and she reaches up and unbuttons the top two buttons of her jacket with the same unhurried precision she brings to everything else. A practical woman, doing a practical thing.\n\n\"The count starts when the bell sounds,\" she says. \"The bell hasn't sounded yet.\"\n\nShe reaches for your collar and draws you down to her. The bench takes your weight together, the stone warm beneath you, the valley floor a green-grey stripe far to the west and completely indifferent. What follows is unhurried and mutual and completely real — her hands certain, her attention total, the particular kind of quiet that belongs to someone who measures arcs for a living and has decided, this afternoon, that you are the most interesting angle in the district.\n\nAfterward, she sets her jacket straight with two economical motions and reaches past you for the ledger. She presses it into your hands without ceremony, fingers resting on yours for one beat longer than necessary.\n\n\"East behind the array housing,\" she says, still close enough that you feel the words as much as hear them. \"Don't let anyone see the cover.\"\n\nBelow, distantly, the bell begins to sound.",
+      "sceneSummary": "One last time on the terrace — mutual, unhurried, real. Lira pressed the ledger into his hands as the count-bell rang and sent him east behind the array housing.",
       "choices": [
         {
-          "label": "Take the ledger and go — cut east behind the array housing as she suggested",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
+          "label": "Go east behind the array housing — reach Keeper Aldris Vael before the count clears the hall",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
             "careful",
-            "move"
+            "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "trivial": false
         },
         {
-          "label": "Take a moment before leaving — ask if she'll be all right with whatever comes after this",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "label": "Use Prism Sight on the way — read the path ahead for anyone watching the route",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
-            "help",
-            "connect"
+            "scout",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Ask one more question: does she know anything about Fendt herself — not the numbers, the person?",
+          "label": "Use Echo Sense before stepping off the terrace — count who's below, then move",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "gather"
+            "scout",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": "echo_sense",
+          "energyCost": 4,
+          "trivial": false
         },
         {
-          "label": "Go your own way — thank her and take the direct path, risk and all",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 15,
+          "label": "Ask Lira one last thing before you go — whether she knows Fendt personally, not just the numbers",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
           "intentTags": [
-            "risky",
-            "move"
+            "study"
           ],
-          "trivial": false
+          "abilityId": null,
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, prism-arcs from the towers below drifting slow across the coping wall. The afternoon count is now imminent — ten minutes at most.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, prism-arcs slow across the coping wall. The afternoon count-bell is now sounding from below.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Standing, holding the ledger extended toward him — jacket settled, composed, watching him with amber-grey eyes. Waiting for him to take it."
+            "state": "Sitting on the bench, jacket re-settled, ledger just pressed into his hands — composed, watching him go, close enough that the words carried as feeling."
           }
         ],
         "objects": [
-          "Lower Filtration Ledger — in Lira's extended hand, about to be returned to the character",
+          "Lower Filtration Ledger — now in Test Hero's hands",
           "Low coping wall — warm stone, slow prism-arcs",
           "Single worker's bench",
-          "Iron exterior staircase — at the terrace corner, the only direct access",
+          "Iron exterior staircase — at the terrace corner",
           "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
-          "Ledger delivery to Keeper Aldris Vael — window now very narrow; ten minutes to the count",
-          "Supervisor's office faces the direct path — the eastern route behind array housing is safer",
-          "Lira may know more about Fendt as a person, not just the numbers",
-          "Lira named her price: the real answer — received; the debt is settled, but the relationship is now real"
+          "Count-bell is sounding — the window to reach Vael is open now but closing fast",
+          "Eastern route behind array housing is the safer approach — Lira confirmed it",
+          "Lira may know Fendt as a person — not yet asked"
         ]
       },
       "npcUpdates": [
@@ -307,60 +339,43 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Named her light-reading skill as the root of how she reads people and movement — extrapolating the arc from the first degree of bend. Stood, retrieved the ledger, and handed it back with a specific safe route: wick-room side stairs, east behind the array housing.",
-          "learned": [
-            "Her precision with people is a direct extension of her optics training — she reads arc and angle, not just expression",
-            "She thinks in routes through the district instinctively — the supervisor's office angle, the array housing cover",
-            "She said he telegraphs clearly — meant as observation, not criticism; she reads him well"
-          ],
-          "skillsObserved": [
-            "spatial district navigation under pressure",
-            "translating technical skill (light-reading) into interpersonal perception"
-          ],
-          "relationshipDelta": 0,
+          "note": "One last time on the terrace — mutual, unhurried. She re-settled herself with two economical motions and pressed the ledger into his hands, fingers resting a beat too long. Sent him east behind the array housing before the bell finished sounding.",
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "On the roof terrace, ledger extended toward him, ten minutes before the afternoon count — composed, present, waiting for him to move."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "lira",
-          "label": "Lira — Edge District Apprentice",
-          "kind": "person",
-          "entityId": "lira",
-          "fact": "Her precision with people is a direct extension of optics training — she extrapolates arc and angle from the first degree of movement. She reads him clearly and said so without apology.",
-          "links": [
-            "radiant-plateau",
-            "the-clean-numbers",
-            "fendt-falsified-purity-reports"
-          ]
+          "statusNote": "On the roof terrace as the count-bell sounds — composing herself, watching him go."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange — compliment, question, her answer, the ledger returned. Less than a quarter-hour."
-      }
+        "hoursPassed": 0.5,
+        "why": "The terrace scene concluded — unhurried but the bell is now sounding, marking a meaningful half-hour passed."
+      },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-clean-numbers",
+          "note": "The count-bell has rung. The window to reach Keeper Aldris Vael is open — eastern route behind array housing, ledger in hand, Lira's last word guiding the approach."
+        }
+      ]
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, prism-arcs from the towers below drifting slow across the coping wall. The afternoon count is now imminent — ten minutes at most.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, prism-arcs slow across the coping wall. The afternoon count-bell is now sounding from below.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Standing, holding the ledger extended toward him — jacket settled, composed, watching him with amber-grey eyes. Waiting "
+          "state": "Sitting on the bench, jacket re-settled, ledger just pressed into his hands — composed, watching him go, close enough th"
         }
       ],
       "objects": [
-        "Lower Filtration Ledger — in Lira's extended hand, about to be returned to the c",
+        "Lower Filtration Ledger — now in Test Hero's hands",
         "Low coping wall — warm stone, slow prism-arcs",
         "Single worker's bench",
-        "Iron exterior staircase — at the terrace corner, the only direct access",
+        "Iron exterior staircase — at the terrace corner",
         "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
-        "Ledger delivery to Keeper Aldris Vael — window now very narrow; ten minutes to the count",
-        "Supervisor's office faces the direct path — the eastern route behind array housing is safer",
-        "Lira may know more about Fendt as a person, not just the numbers",
-        "Lira named her price: the real answer — received; the debt is settled, but the relationship is now real"
+        "Count-bell is sounding — the window to reach Vael is open now but closing fast",
+        "Eastern route behind array housing is the safer approach — Lira confirmed it",
+        "Lira may know Fendt as a person — not yet asked"
       ]
     }
   },
@@ -395,7 +410,8 @@
       "progress": [
         "Ledger now in hand. Fendt's initials on three weeks of impossible entries. Next step: who receives this, and what do they do with it?",
         "Ledger in hand; plan mapped — deliver to Aldris Vael or carry it to the forge first. The cooling window and the evidence window are in direct tension.",
-        "Lira received the full truth and confirmed she'd sensed the numbers were wrong for weeks. She warned that the supervisor's office faces the direct path — the window to reach Vael unobserved is closing. Afternoon count in minutes."
+        "Lira received the full truth and confirmed she'd sensed the numbers were wrong for weeks. She warned that the supervisor's office faces the direct path — the window to reach Vael unobserved is closing. Afternoon count in minutes.",
+        "The count-bell has rung. The window to reach Keeper Aldris Vael is open — eastern route behind array housing, ledger in hand, Lira's last word guiding the approach."
       ],
       "aliases": [],
       "startedAt": "2026-07-11T22:11:38.224Z"
@@ -413,7 +429,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Named what she noticed and what she wants — the ledger and the person. Closed the distance deliberately. Half-smile complete. Waiting.",
         "[d1] Accepted the character's advance on the roof terrace — touched his collar, said 'all right', set the ledger aside. The interest she'd been holding is now plainly in the room.",
         "[d1] Accepted the kiss without hesitation — met it, held his sleeve, breathed out. Eyes closed a half-beat too long afterward. Now her hand has moved past the collar.",
         "[d1] Second kiss, slower — she confirmed it with a sound, then pulled back and named what she's known since the corridor: 'You're not a paving contractor.' Hand still on his shirt. Watc",
@@ -422,7 +437,8 @@
         "[d1] The moment concluded on the terrace — mutual, unhurried, her choice made and comfortable in it. She set the ledger in his hands herself as the count approached, the practical and t",
         "[d1] The moment on the bench concluded — mutual, unhurried, honest. She re-composed afterward and named what she wants: the real answer, when he's ready. Then looked to the ledger — pra",
         "[d1] Heard the real answer — who he is, why he has the ledger, who sent him. Named that the filtration numbers felt wrong for weeks but she had no cause to say so. Gave him a warning an",
-        "[d1] Named her light-reading skill as the root of how she reads people and movement — extrapolating the arc from the first degree of bend. Stood, retrieved the ledger, and handed it bac"
+        "[d1] Named her light-reading skill as the root of how she reads people and movement — extrapolating the arc from the first degree of bend. Stood, retrieved the ledger, and handed it bac",
+        "[d1] One last time on the terrace — mutual, unhurried. She re-settled herself with two economical motions and pressed the ledger into his hands, fingers resting a beat too long. Sent him east behind the array housing before the bell finished sounding."
       ],
       "knownFacts": [
         "She marks the debt cleanly: 'The answer, when you're ready to give it' — patient, not pressuring",
@@ -443,11 +459,35 @@
         "translating technical skill (light-reading) into interperson"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, ledger extended toward him, ten minutes before the afternoon count — composed, present, waiting for him to move.",
+      "statusNote": "On the roof terrace as the count-bell sounds — composing herself, watching him go.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Lira%2C%20woman%2C%20Apprentice%20optics-weaver%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=44200&nologo=true",
+      "_portraitTier": "devoted"
+    },
+    "keeper-aldris-vael": {
+      "id": "keeper-aldris-vael",
+      "name": "Keeper Aldris Vael",
+      "role": "",
+      "description": "",
+      "firstMet": {
+        "locationId": null,
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Known from what has passed between you."
+      ],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": null,
+      "pronouns": null,
+      "_backfilledFrom": "establishedFacts"
     }
   },
   "placeMemory": {
@@ -480,19 +520,22 @@
           "name": "District Common Hall",
           "day": 1,
           "visited": true,
-          "note": "Has an accountability board on its exterior face — publicly visible; used for shift rosters, supply tallies, and rare di"
+          "note": "Has an accountability board on its exterior face — publicly visible; used for shift rosters, supply tallies, and rare di",
+          "parentId": "radiant_plateau_edge"
         },
         "array-office-behind-common-hall-": {
           "name": "Array Office (behind Common Hall)",
           "day": 1,
           "visited": true,
-          "note": "Sealed service office for lower filtration array records — ledger now missing, latch slightly marked."
+          "note": "Sealed service office for lower filtration array records — ledger now missing, latch slightly marked.",
+          "parentId": "radiant_plateau_edge"
         },
         "roof-terrace-common-hall-": {
           "name": "Roof Terrace (Common Hall)",
           "day": 1,
           "visited": true,
-          "note": "Flat terrace above the wick-room — quiet before the afternoon count, valley floor visible to the west. Lira brought the "
+          "note": "Flat terrace above the wick-room — quiet before the afternoon count, valley floor visible to the west. Lira brought the ",
+          "parentId": "radiant_plateau_edge"
         }
       }
     }
@@ -502,11 +545,15 @@
     "lastTickDay": 1,
     "eventStages": {
       "water_crisis": {
-        "stage": 1,
-        "sinceDay": 1
+        "stage": 2,
+        "sinceDay": 13
       }
     },
-    "spectrumDrift": {},
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
     "news": [
       {
         "day": 1,
@@ -557,12 +604,73 @@
         "day": 1,
         "worldDay": 13,
         "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 25,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 24,
+        "text": "Word reaches you: Silas Weir named Overseer Grael formally to Warden Coll as the receiving authority in the filtration accountability chain — on the record, in the Registry office, with a document roll in hand (near gen-north-gate-registry-ossian-office)",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 24,
+        "text": "Word reaches you: A persistent shadow-slate bound to Silas Weir's Weirmark is now seated on Warden Coll's desk — a two-way written channel that does not require runners. (near gen-north-gate-registry-ossian-office)",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 24,
+        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 24,
+        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 25,
+        "text": "This reaches your area — A new waygate stands on the left branch road in the Disputed Zone — the first made-gate since the Transition, built by a wright who tends endings. (near gen-disputed-zone-left-branch-entrance)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 25,
+        "text": "Lira: Lira secured a three-morning trial with a lens-grinder in the Edge District who agreed to let her sweep and observe in exchange for running deliveries — small, unglamorous, but she is now inside a working shop.",
+        "tier": "ambient"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-15T18:23:18.922Z",
-    "lastCanonWorldDay": 15,
-    "lastTickWorldDay": 15
+    "lastSharedReadAt": "2026-07-25T23:16:36.099Z",
+    "lastCanonWorldDay": 25,
+    "lastTickWorldDay": 25,
+    "lastGenCount": 623,
+    "wantProgress": {
+      "lira": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 25,
+        "lastOutcome": "progress"
+      },
+      "keeper-aldris-vael": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 25,
+        "lastOutcome": "stall"
+      }
+    },
+    "turnsSinceOffer": 1
   },
   "bio": null,
   "subAttributes": {
@@ -648,7 +756,9 @@
         "label": "Keeper Aldris Vael",
         "kind": "person",
         "facts": [
-          "[d1] Senior Marks-Keeper, Radiant Plateau Accountability Board"
+          "[d1] Senior Marks-Keeper, Radiant Plateau Accountability Board",
+          "[d1] met in play",
+          "[d1] [while away] Aldris drafted a short letter to the one colleague she trusts enough to ask, then held it unset for nine days — she cannot yet bring herself to commit the mark to writing, even in cautious terms, until she is more certain of what she is describing."
         ],
         "links": [],
         "aliases": [],
@@ -701,14 +811,18 @@
           "[d1] She meets physical moments the same way she meets everything else — fully present, without performance. The kiss was unhurried and mutual. Her hand moved past the collar.",
           "[d1] The moment on the terrace concluded — fully, mutually, without performance. She handed the ledger back into his hands herself as the afternoon count approached: practical and personal in the same gest",
           "[d1] She knew the filtration numbers felt wrong for weeks but had no formal cause to name it. When given the full truth she absorbed it cleanly and responded with practical help: a warning about the superv",
-          "[d1] Her precision with people is a direct extension of optics training — she extrapolates arc and angle from the first degree of movement. She reads him clearly and said so without apology."
+          "[d1] Her precision with people is a direct extension of optics training — she extrapolates arc and angle from the first degree of movement. She reads him clearly and said so without apology.",
+          "[d1] Apprentice optics-weaver, Edge District",
+          "[d1] [while away] Lira secured a three-morning trial with a lens-grinder in the Edge District who agreed to let her sweep and observe in exchange for running deliveries — small, unglamorous, but she is now inside a working shop."
         ],
         "links": [
           "radiant-plateau",
           "the-clean-numbers",
           "fendt-falsified-purity-reports"
         ],
-        "aliases": [],
+        "aliases": [
+          "Lira"
+        ],
         "createdDay": 1,
         "entityId": "lira",
         "updatedDay": 1
@@ -729,24 +843,38 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "radiant-plateau-edge": {
+        "id": "radiant-plateau-edge",
+        "label": "Radiant Plateau — Edge District",
+        "kind": "place",
+        "facts": [
+          "[d1] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "radiant-plateau-edge",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "social": 7.716590673070317,
-    "strategic": 7.4907034735817,
-    "cautious": 3.814598785690967,
-    "cerebral": 1.883269272693247,
-    "physical": 0.9369146928798039,
-    "ruthless": 0.9369146928798039,
-    "generous": 0.990025
+    "social": 7.523675906243559,
+    "strategic": 7.303435886742157,
+    "cautious": 3.7192338160486926,
+    "cerebral": 1.8361875408759158,
+    "physical": 0.9134918255578087,
+    "ruthless": 0.9134918255578087,
+    "generous": 0.965274375,
+    "amorous": 2
   },
   "aptitudes": [],
-  "actionCount": 17,
+  "actionCount": 18,
   "grantsVersion": 1,
-  "reconcileVersion": 5,
-  "updatedAt": 1784141011141,
-  "rev": 55,
+  "reconcileVersion": 21,
+  "updatedAt": 1785021522750,
+  "rev": 59,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -856,7 +984,14 @@
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 1
+          "lastAttentionDay": 1,
+          "offscreen": [
+            {
+              "worldDay": 25,
+              "note": "Aldris drafted a short letter to the one colleague she trusts enough to ask, then held it unset for nine days — she cannot yet bring herself to commit the mark to writing, even in cautious terms, until she is more certain of what she is describing.",
+              "outcome": "stall"
+            }
+          ]
         },
         "image": "https://image.pollinations.ai/prompt/character%20portrait%2C%20Keeper%20Aldris%20Vael%2C%20Senior%20Marks-Keeper%2C%20Radiant%20Plateau%20Accountability%20Board.%20Late%20sixties%2C%20broad-shouldered%20and%20unhurried%20in%20her%20movements.%20Her%20keeper's%20coat%20is%20old%20Plateau%20indigo%2C%20faded%20at%20the%20cuffs%20to%20something%20closer%20to%20dawn-grey.%20The%20prism-loupe%20hangs%20on%20a%20worn%20brass%20chain%20%E2%80%94%20hexagonal%2C%20hand-ground%2C%20notched%20along%20one%20edge%20from%20a%20fall%20she%20never%20explains.%20Her%20eyes%20carry%20the%20faint%20prismatic%20afterimage%20that%20long-term%20refraction%20work%20leaves%20in%20veteran%20keepers%3A%20a%20rim%20of%20spectral%20colour%20at%20the%20iris%20edge%2C%20visible%20in%20direct%20light.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49313&nologo=true"
       }
@@ -865,6 +1000,14 @@
     "arc": {}
   },
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Lira, woman, Apprentice optics-weaver, Edge District",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Lira%2C%20woman%2C%20Apprentice%20optics-weaver%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=44200&nologo=true",
+      "caption": "Lira — devoted",
+      "worldDay": 25,
+      "at": "2026-07-25T23:16:35.718Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Test Hero (dev)",
@@ -904,7 +1047,40 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 13
+    "valley": 14
   },
-  "foreclosed": []
+  "foreclosed": [],
+  "company": [],
+  "nativeGrantsVersion": 1,
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "schools": {},
+  "locationAliases": {
+    "gen-center": "the_crossing",
+    "gen-stillwater-s-trouble": "the_old_warden_post"
+  },
+  "_pinsInitialized": true,
+  "_applyFailures": null,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-07-25T23:18:42.738Z",
+      "lastAt": "2026-07-25T23:18:42.738Z",
+      "startDay": 25,
+      "endDay": 25,
+      "beats": 1
+    }
+  ],
+  "peopleDisposition": {},
+  "_pendingArrival": null,
+  "_opEmitted": {
+    "sceneSummary": 1,
+    "choices": 1,
+    "scene": 1,
+    "npcUpdates": 1,
+    "timeOps": 1,
+    "questUpdates": 1
+  },
+  "_opTurns": 1
 }

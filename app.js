@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.275";
+const APP_VERSION = "1.8.277";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -738,6 +738,25 @@ const LEG_RUNNERS = {
       [],
       "🔧 Romance leg — ceiling set to R. Flirt with the NPC: type an attraction or flirtation line freely. PASS: the GM stays in the scene (no fade, no hedge, no safety meta) and meets the R register. This leg auto-marks ✓ the instant your flirt is tagged and the romance guidance loads — then eyeball the prose."
     );
+  },
+  fireTestEncounter: (f) => {
+    // SNG-236 UX: start a real encounter def DIRECTLY (no GM/API needed) so the integrated strip + the ⚙ Moves
+    // gear render immediately for verification. PREFERS a CLASSIC-frame encounter (challenge/puzzle, or a
+    // non-skill-battle duel) — those use the SNG-236 strip + gear; a skill-battle duel takes its own richer
+    // contest panel instead (which is correct, but not what this leg verifies).
+    ensureTestCharacter();
+    const defs = Object.values(CONTENT.encounters || {});
+    const sb = d => !!(CONTENT.skillBattle?.engine && d.type === "duel" && d.skillBattle !== false);
+    const classic = defs.filter(d => d.type === "challenge" || d.type === "puzzle" || (d.type === "duel" && !sb(d)));
+    const wanted = f?.kind;
+    const def = (wanted && classic.find(d => d.type === wanted)) || classic.find(d => d.type === "challenge") || classic[0] || defs[0];
+    if (!def) { renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No authored encounter def found to start." }); return; }
+    const isSB = sb(def);
+    const oppSheet = isSB ? synthesizeOpponentSheet(def.opponent, CONTENT.skillBattle.engine) : null;
+    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+    saveCharacter(character);
+    if (isSB) { renderSkillBattle(); return; }
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `🔧 Test encounter "${def.name}" (${def.type}) started. The integrated STRIP is at the top of the play surface; tap ⚙ Moves for the grouped ward/sense/strike gear, or type a move — the encounter rules bind either way.` });
   }
 };
 
@@ -916,6 +935,13 @@ async function renderPreviewLegs() {
   chrome(`<div class="screen" style="max-width:820px">
     <h2>🧪 Preview Legs <span class="hint" style="text-transform:none">— ${verifiedActive} of ${active.length} left${cleared.length ? ` · ${cleared.length} cleared` : ""}${_previewLegsData.buildVersion ? ` · data for v${esc(_previewLegsData.buildVersion)}` : ""}</span></h2>
     <p class="hint" style="margin-bottom:12px">Legs auto-mark <strong>auto ✓</strong> when their moment happens in play${syncEnabled() ? " and report to Aevi automatically" : ""}. A leg drops out once it's verified back to Aevi (or Aevi closes it). Data authored by Aevi (<code>data/preview_legs.json</code>).</p>
+    ${(() => {
+      // flag a REAL lag (≥8 builds behind), not a single patch bump — the exact-equality check nagged every bump
+      const parse = v => { const m = String(v || "").match(/(\d+)\.(\d+)\.(\d+)/); return m ? (+m[1]) * 1000000 + (+m[2]) * 1000 + (+m[3]) : null; };
+      const d = parse(_previewLegsData.buildVersion), a = parse(APP_VERSION);
+      const gap = (d != null && a != null) ? a - d : 0;
+      return gap >= 8 ? `<div class="leg-stale">⚠ The checklist data is authored for <strong>v${esc(_previewLegsData.buildVersion)}</strong> — the app is now <strong>v${esc(APP_VERSION)}</strong> (${gap} builds on). Older legs still verify their (still-live) features, but the newest builds may not be covered — Aevi refreshes this file.</div>` : "";
+    })()}
     ${active.length ? Object.keys(byMode).map(mode => `
       <div class="cs-block"><h3 class="codex-title" style="font-size:15px">${esc(MODE_LABEL[mode] || mode)}</h3>
       ${byMode[mode].map(legRow).join("")}</div>`).join("")
@@ -1061,10 +1087,30 @@ function renderMachine() {
     if (c.stop_reason) bits.push(`stop:${c.stop_reason}`);
     return bits.join(" · ");
   };
+  // SNG-236/237/238: the PROMPT LOAD made visible. The session's root finding is a saturated GM prompt
+  // (a ~12.3k-token constitution + 28 pushed sections + 114 MUSTs); Fix D/SNG-238 trims it. This surfaces
+  // WHERE the weight sits per call and which `##` sections actually fired THIS beat — the situational-vs-always
+  // audit Fix D needs, and it makes the engine's per-beat directives (e.g. AN ENCOUNTER IS UPON YOU) visible.
+  const TOK = s => Math.round((s || "").length / 4); // rough estimate (chars/4), consistent with the SNG-236 count
+  const promptWeight = (c) => {
+    const blocks = (c.system || []).map((b, i) => {
+      const text = b.text || "";
+      const sections = (text.match(/^#{1,6}\s+.+$/gm) || []).map(h => h.replace(/^#{1,6}\s+/, "").replace(/\s*[(—].*$/, "").trim().slice(0, 46)).filter(Boolean);
+      return { i, cached: !!b.cache_control, tok: TOK(text), sections };
+    });
+    const msgTok = (c.messages || []).reduce((s, m) => s + TOK(typeof m.content === "string" ? m.content : JSON.stringify(m.content)), 0);
+    const sysTok = blocks.reduce((s, b) => s + b.tok, 0);
+    return { blocks, sysTok, msgTok, total: sysTok + msgTok, sectionCount: blocks.reduce((s, b) => s + b.sections.length, 0) };
+  };
+  // session average GM-prompt weight (calls with system blocks = the real GM turns, not sub-calls)
+  const gmCalls = caps.filter(c => (c.system || []).length);
+  const avgPromptTok = gmCalls.length ? Math.round(gmCalls.reduce((s, c) => s + promptWeight(c).total, 0) / gmCalls.length) : 0;
+  const maxPromptTok = gmCalls.length ? Math.max(...gmCalls.map(c => promptWeight(c).total)) : 0;
 
   const card = (c) => `<details class="mach-card"${caps[0] === c ? " open" : ""}>
     <summary><span class="mach-task">${esc(c.task)}</span> <span class="hint">${esc(c.model)} · ${esc(usageLine(c))}${c.at ? " · " + esc(String(c.at).slice(11, 19)) : ""}</span></summary>
     ${c.opsFired?.length ? `<div class="mach-sec"><span class="mach-label">emitted</span> ${c.opsFired.map(o => `<span class="mach-op mach-fired">${esc(o.op)} <code>${esc(o.shape)}</code></span>`).join(" ")}</div>` : (c.parsed ? `<div class="mach-sec hint">no ops emitted — narration only</div>` : "")}
+    ${(c.system || []).length ? (() => { const w = promptWeight(c); return `<details class="mach-inner"><summary>Prompt weight — <b>~${w.total} tok</b> (${w.sysTok} system / ${w.msgTok} turn) · ${w.sectionCount} sections across ${w.blocks.length} block${w.blocks.length === 1 ? "" : "s"}</summary><div class="mach-weight">${w.blocks.map(b => `<div class="mach-wblock"><span class="mach-wtok">~${b.tok} tok</span> <span class="hint">block ${b.i + 1}${b.cached ? " · cached" : ""} · ${b.sections.length} §</span>${b.sections.length ? `<div class="mach-wsecs">${b.sections.map(s => `<span class="mach-wsec">${esc(s)}</span>`).join("")}</div>` : ""}</div>`).join("")}<div class="hint" style="margin-top:6px">The heaviest block is the constant constitution+rules (cached); the situational sections are what varies per beat. SNG-238 (Fix D) trims the always-on load — a lower <b>system</b> number here is the goal.</div></div></details>`; })() : ""}
     <details class="mach-inner"><summary>Assembled prompt (${(c.system || []).length} block${(c.system || []).length === 1 ? "" : "s"} + ${(c.messages || []).length} msg)</summary><pre class="mach-pre">${esc(promptText(c))}</pre></details>
     <details class="mach-inner"><summary>Raw response (${(c.raw || "").length} chars)</summary><pre class="mach-pre">${esc(c.raw || "")}</pre></details>
     ${c.parsed ? `<details class="mach-inner"><summary>Parsed result</summary><pre class="mach-pre">${esc(JSON.stringify(c.parsed, null, 2))}</pre></details>` : ""}
@@ -1092,6 +1138,9 @@ function renderMachine() {
   chrome(`<div class="screen" style="max-width:900px">
     <h2>🔬 See the Machine <span class="hint" style="text-transform:none">— last ${caps.length} model call${caps.length === 1 ? "" : "s"} this session</span></h2>
     <p class="hint" style="margin-bottom:12px">The assembled prompt, the raw model response, what parsed, and which ops fired — the SNG-179 diagnosis as a standing panel. Captures live in memory for this session only (dev-mode; a player never reaches this).</p>
+    ${gmCalls.length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">GM prompt load <span class="hint" style="text-transform:none">— the SNG-236/237/238 root: a saturated prompt drops soft directives</span></h3>
+      <p class="hint" style="margin:0">Across ${gmCalls.length} GM call${gmCalls.length === 1 ? "" : "s"} this session, the assembled prompt averages <strong>~${avgPromptTok.toLocaleString()} tok</strong> (heaviest ~${maxPromptTok.toLocaleString()}). Most is the constant constitution+rules (cached); the rest is the per-beat sections. Open any call's <em>Prompt weight</em> below to see where the weight sits and which <code>##</code> sections fired that beat. <strong>Fix D (SNG-238)</strong> trims the always-on load so hard directives (Fix A/B) aren't fighting saturation.</p>
+    </div>` : ""}
     ${leversBlock}
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Op emission — this character, cumulative <span class="hint" style="text-transform:none">(${turns} GM turn${turns === 1 ? "" : "s"} observed)</span></h3>

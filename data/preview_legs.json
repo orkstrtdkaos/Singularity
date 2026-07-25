@@ -1,9 +1,46 @@
 {
   "schemaVersion": 1,
   "id": "preview_legs",
-  "note": "Dev/test checklist data for the in-app preview-legs panel (SNG-051). Solo legs run anytime; cross-player legs need GitHub sync configured on two profiles. Aevi owns this data file; CCode owns the panel that renders it.",
-  "buildVersion": "1.8.3",
+  "note": "Dev/test checklist data for the in-app preview-legs panel (SNG-051). Solo legs run anytime; cross-player legs need GitHub sync configured on two profiles. Aevi owns this data file; CCode owns the panel that renders it. The SNG-236/237 legs at the top were added by CCode (2026-07-25, Erik-directed) to cover the current-build encounter work — Aevi to review/refresh the rest (the older legs verify still-live features but predate SNG-19x→237).",
+  "buildVersion": "1.8.275",
   "legs": [
+    {
+      "id": "s236-frame",
+      "batch": "SNG-236",
+      "mode": "solo",
+      "title": "Encounter frame — integrated strip + ⚙ Moves gear",
+      "do": "Start an encounter (this leg fires one), or hit one in play.",
+      "pass": "The frame is an INTEGRATED strip at the top of the play surface (kind · win · the three exits · round) — not a takeover card. A ⚙ Moves button sits by ⚙ Plan; it opens the moves grouped by family (ward/sense/strike…) + a ways-out group. Typing a move in the free field works too; the encounter rules bind either way.",
+      "force": {
+        "intent": "fireTestEncounter",
+        "kind": "challenge",
+        "note": "starts a real CLASSIC-frame encounter (challenge/puzzle) directly, no API key — those use the SNG-236 strip + gear (a skill-battle duel takes its own contest panel instead)"
+      }
+    },
+    {
+      "id": "s236-offer",
+      "batch": "SNG-236/237",
+      "mode": "solo",
+      "title": "A recognizable encounter is PRESENTED, not woven invisibly",
+      "do": "Play through danger-bearing country for a stretch (travel, explore) with an API key set.",
+      "pass": "When the engine turns up a structured or DECISIVE encounter (a raider, a hazard, a hard passage) it is PRESENTED as a framed choice you can see and enter — you can TELL it's an encounter — not folded into ambient prose and gone. A grace/small thing still just weaves as colour. (Fix A/B.)",
+      "force": {
+        "intent": null,
+        "manual": "needs live play with a model — the roll + the GM presenting the framed offer"
+      }
+    },
+    {
+      "id": "s237-social",
+      "batch": "SNG-237",
+      "mode": "solo",
+      "title": "A stationary talk can turn up a NON-COMBAT frame (never a fight)",
+      "do": "Stay in a social/deliberation scene (a talk, a council, an archive) for several beats with an API key set.",
+      "pass": "A talker isn't exempt from encounters: a standoff/puzzle can arise from a conversation — but NEVER a duel mid-talk. NOTE: gated on C2 content (standoff/puzzle frames + the framed standoff type) which Aevi still owes; until then this stays correctly quiet. The rate is a dial (onSocialBeat.chance, Erik owes the number).",
+      "force": {
+        "intent": null,
+        "manual": "needs live play + Aevi's C2 non-combat frames to exist in the pool"
+      }
+    },
     {
       "id": "b5-crossclass",
       "batch": "BATCH-5",

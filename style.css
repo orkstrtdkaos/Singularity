@@ -338,6 +338,7 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .partner-adjacent .known-npc.partner { }
 .rep-band.bond { font-style: italic; }
 /* SNG-051 preview-legs panel */
+.leg-stale { border: 1px solid var(--danger); border-left: 3px solid var(--danger); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; background: rgba(192,91,77,0.08); font-size: 13px; color: var(--ink); }
 .leg-row { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; border-left: 3px solid var(--border); }
 .leg-row.leg-pass { border-left-color: #4a9d5b; }
 .leg-row.leg-fail { border-left-color: #c0524a; }
@@ -958,6 +959,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .mach-op.mach-rej { border-color: #c0a24a; color: #d8c07a; }
 .mach-op.mach-zero { border-color: var(--border); color: var(--ink-dim); }
 .mach-x { color: #c0524a; font-size: 11px; margin-left: 2px; }
+/* SNG-236/237/238: the prompt-weight breakdown — where the GM prompt's tokens sit + which sections fired */
+.mach-weight { padding: 4px 0 2px; }
+.mach-wblock { padding: 4px 0; border-bottom: 1px solid var(--border); }
+.mach-wblock:last-of-type { border-bottom: none; }
+.mach-wtok { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; color: var(--accent); font-weight: 700; }
+.mach-wsecs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.mach-wsec { font-size: 11px; padding: 1px 6px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink-dim); }
 .mach-lever { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 7px 0; }
 .mach-lever input { flex: 1 1 260px; min-width: 200px; padding: 5px 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--ink); font-size: 13px; }
 

@@ -1895,14 +1895,19 @@
         "player": "Ask him if he believes he won the pass.",
         "summary": "Silas asks from the ground whether the Blazeborn man believes he won the pass — the man names the Zone's interference plainly, refuses to claim the fall as his, and leaves the terms open.",
         "narration": "You are flat on your back on packed earth, the mist cold against your face, the Zone's interference a dull pressure behind your eyes. You look up at the Blazeborn man standing above you and ask him plainly: does he believe he won the pass?\n\nHe is quiet for a moment. He looks down at you with the same unhurried attention he has had since the road. Then he crouches — not to check on you, not to gloat, just to bring the conversation to a single level.\n\n'You went down on a bad step,' he says. 'The Zone moved the ground under your feet, not me.' He pauses. 'I have fought in the Zone before. You have not. That is not a win. That is a lesson on my schedule.'\n\nHe stands again and offers his hand, open palm down — the offer is there if you want it. 'The terms were first down or first to call it,' he says. 'You are down. But I will not take the answer if you want to say the Zone broke it.' He glances once at Huginn, who has not moved, then back to you. 'Your bird has not called it. Neither have I.'\n\nPell has not moved from the road's edge. Memory is still in carry-grip. Veth watches the tree-line. The mist thickens a little further west, where the road bends toward whatever the Zone's left branch holds."
+      },
+      {
+        "player": "I grant you that the zone messed with my step and that you did well to land your grip... but, Veth - what happens to a person when they make physical contact with someone with Ashwarden powers?  Such as the Grey hand, or Pale work?",
+        "summary": "Silas acknowledges the Zone's interference, then draws Veth out on Ashwarden contact craft — the Grey Hand and Palework named plainly, their felt qualities described, while the Blazeborn man listens.",
+        "narration": "You push yourself up onto one elbow and look at the Blazeborn man. 'I grant you that,' you say. 'The Zone moved the step. You read the grip well.' Then you turn your head to where Veth is standing two paces right of you, still watching the tree-line. 'Veth. What happens to a person when they make physical contact with someone using the Grey Hand? Or Palework?'\n\nVeth does not look away from the tree-line for a moment. Then she turns, takes you in — flat on the earth, watching her — and steps closer. 'The Grey Hand is felt immediately,' she says. 'The person being touched feels their own strength leaving them. It is not painful in the way a strike is painful. It is more like exhaustion arriving all at once, without the hours that should have built it. They feel it happening, and they know what is happening to them, and they cannot stop it.' She pauses. 'Palework at the third level is visible. The dying understand exactly what is being done and by whom. That is not a side effect — that is the point. An ashwarden who uses Palework on a healthy living person had better be certain. Because the person will know.'\n\nHuginn, sitting near where you landed, makes a short sound. Not a word. Just a sound with a particular timing to it — the timing of a comment.\n\nThe Blazeborn man is still standing above you with his hand extended. He has followed the exchange without moving. His expression has not shifted, but something in his attention has — he is listening to Veth with a quality that suggests he already knew the answer and was interested in whether she would give it plainly."
       }
     ],
     "lastTurn": {
-      "narration": "You are flat on your back on packed earth, the mist cold against your face, the Zone's interference a dull pressure behind your eyes. You look up at the Blazeborn man standing above you and ask him plainly: does he believe he won the pass?\n\nHe is quiet for a moment. He looks down at you with the same unhurried attention he has had since the road. Then he crouches — not to check on you, not to gloat, just to bring the conversation to a single level.\n\n'You went down on a bad step,' he says. 'The Zone moved the ground under your feet, not me.' He pauses. 'I have fought in the Zone before. You have not. That is not a win. That is a lesson on my schedule.'\n\nHe stands again and offers his hand, open palm down — the offer is there if you want it. 'The terms were first down or first to call it,' he says. 'You are down. But I will not take the answer if you want to say the Zone broke it.' He glances once at Huginn, who has not moved, then back to you. 'Your bird has not called it. Neither have I.'\n\nPell has not moved from the road's edge. Memory is still in carry-grip. Veth watches the tree-line. The mist thickens a little further west, where the road bends toward whatever the Zone's left branch holds.",
-      "sceneSummary": "Silas asks from the ground whether the Blazeborn man believes he won the pass — the man names the Zone's interference plainly, refuses to claim the fall as his, and leaves the terms open.",
+      "narration": "You push yourself up onto one elbow and look at the Blazeborn man. 'I grant you that,' you say. 'The Zone moved the step. You read the grip well.' Then you turn your head to where Veth is standing two paces right of you, still watching the tree-line. 'Veth. What happens to a person when they make physical contact with someone using the Grey Hand? Or Palework?'\n\nVeth does not look away from the tree-line for a moment. Then she turns, takes you in — flat on the earth, watching her — and steps closer. 'The Grey Hand is felt immediately,' she says. 'The person being touched feels their own strength leaving them. It is not painful in the way a strike is painful. It is more like exhaustion arriving all at once, without the hours that should have built it. They feel it happening, and they know what is happening to them, and they cannot stop it.' She pauses. 'Palework at the third level is visible. The dying understand exactly what is being done and by whom. That is not a side effect — that is the point. An ashwarden who uses Palework on a healthy living person had better be certain. Because the person will know.'\n\nHuginn, sitting near where you landed, makes a short sound. Not a word. Just a sound with a particular timing to it — the timing of a comment.\n\nThe Blazeborn man is still standing above you with his hand extended. He has followed the exchange without moving. His expression has not shifted, but something in his attention has — he is listening to Veth with a quality that suggests he already knew the answer and was interested in whether she would give it plainly.",
+      "sceneSummary": "Silas acknowledges the Zone's interference, then draws Veth out on Ashwarden contact craft — the Grey Hand and Palework named plainly, their felt qualities described, while the Blazeborn man listens.",
       "choices": [
         {
-          "label": "Take his hand and stand — the Zone broke the geometry, not you; call it even and ask for the lineage answer",
+          "label": "Take his hand and get up — the pass was what it was, and you still want the lineage answer",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -1912,7 +1917,7 @@
           "trivial": true
         },
         {
-          "label": "Stay down a moment and read him with Order-Sense — see what the pass actually was, from the design's view",
+          "label": "Stay down a moment longer — use Order-Sense to read what the Zone's interference did to the geometry of this stretch of road before you trust your footing again",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -1924,33 +1929,32 @@
           "trivial": false
         },
         {
-          "label": "Call the Zone's interference as a complication that voided the pass — ask to run it again on clean ground outside the entrance",
+          "label": "Ask him directly — what does his lineage have to do with Ashwarden craft, and why did he want to know what you carry before he named it",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "careful"
+            "persuade"
           ],
           "trivial": false
         },
         {
-          "label": "Say it plainly: you are down, the terms are met, the answer is owed — press for the lineage question now",
+          "label": "Tell him the pass is a draw and propose a second — this time you will not reach for the dark",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "negotiate"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Silas is flat on his back on packed earth, six feet from the Blazeborn man. The Zone's interference is a felt presence here.",
+        "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Silas is on one elbow on packed earth, six feet from the Blazeborn man. The Zone's interference is a felt presence here.",
         "npcsPresent": [
           {
             "name": "Blazeborn traveler",
-            "state": "Standing above Silas, has just crouched and risen again — open hand extended, waiting for a response to the terms question."
+            "state": "Standing above Silas, hand still extended, listening to Veth with focused attention."
           },
           {
             "name": "Pell Ran Marsh",
@@ -1958,11 +1962,11 @@
           },
           {
             "name": "Veth Ondra",
-            "state": "Two paces right, reading the tree-line, still watchful."
+            "state": "Two paces right, having turned to answer Silas's question, now watching his face."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the ground near where Silas landed — has not moved, has not called it."
+            "state": "Perched on the ground near where Silas landed — has not moved, has made one timed sound."
           }
         ],
         "objects": [
@@ -1972,42 +1976,64 @@
           "The Blazeborn man's open hand, extended"
         ],
         "threads": [
-          "The pass: Silas is down — the man refuses to claim it cleanly; the terms are technically met but contested by the Zone's interference",
-          "The Blazeborn man's lineage answer waits on the pass being called",
-          "Zone interference actively disrupted the Shadowstep — both ends of the geometry shifted"
+          "The pass: called as a draw by the Blazeborn man's own account — Zone interference named as the decisive factor; lineage answer still owed once the pass is resolved",
+          "The Blazeborn man's lineage question: still open, his attention now sharpened by Veth's answer about Ashwarden contact craft",
+          "Zone interference: actively disrupted the Shadowstep geometry — the road's geometry here is not reliable"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "blazeborn-traveler",
-          "name": "Blazeborn traveler",
-          "note": "Named the Zone's interference plainly — refused to claim the fall as a win, called it a lesson on his schedule instead. Left the terms open for Silas to call.",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Named the felt qualities of the Grey Hand and Palework plainly on Silas's question — both crafts described from the inside, no softening.",
           "learned": [
-            "He has fought in the Zone before and knows its interference patterns",
-            "He distinguishes between a genuine win and a positional advantage the ground gave him"
+            "The Grey Hand is felt immediately by the recipient — strength leaving all at once, like exhaustion without the hours; they feel it and know it and cannot stop it",
+            "Palework at rank 3 is visible — the dying understand exactly what is being done and by whom; that visibility is the point, not a side effect"
           ],
           "skillsObserved": [
-            "precise ethical accounting of combat terms under Zone conditions"
+            "plain technical description of Ashwarden contact craft under a direct question"
           ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Standing at the left branch entrance, hand extended, waiting for Silas to respond to the pass question"
+          "statusNote": "On the left branch road inside the Zone entrance — two paces right of Silas, having turned to answer, now watching his face."
+        },
+        {
+          "op": "update",
+          "npcId": "blazeborn-traveler",
+          "name": "Blazeborn traveler",
+          "note": "Listened to Veth's answer on Ashwarden contact craft with focused attention — a quality suggesting he already knew and was interested in whether she would say it plainly.",
+          "learned": [
+            "Listened to Veth's plain account of the Grey Hand and Palework without interrupting — his attention sharpened, not surprised"
+          ],
+          "statusNote": "Standing above Silas on the left branch road, hand extended, listening."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "ashwarden-contact-craft",
+          "label": "Ashwarden Contact Craft — What It Feels Like",
+          "kind": "lore",
+          "fact": "The Grey Hand is felt immediately — strength leaving all at once, like exhaustion without the hours, and the person knows what is happening to them. Palework at rank 3 is visible: the dying understand exactly what is being done and by whom, and that visibility is the craft's intent, not an accident.",
+          "links": [
+            "the-grey-hand",
+            "palework",
+            "ashwarden",
+            "veth-stillwater-ondra"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange on the ground after the fall"
+        "why": "A short exchange — question asked, answer given, the scene holds at the same moment."
       },
       "_applyFailed": true,
       "_applyFailedOp": "npcUpdates"
     },
     "sceneState": {
-      "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Silas is flat on his back on packed earth, six feet from the Blazeborn man. The Zone's interference is a felt presence here.",
+      "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Silas is on one elbow on packed earth, six feet from the Blazeborn man. The Zone's interference is a felt presence here.",
       "npcsPresent": [
         {
           "name": "Blazeborn traveler",
-          "state": "Standing above Silas, has just crouched and risen again — open hand extended, waiting for a response to the terms questi"
+          "state": "Standing above Silas, hand still extended, listening to Veth with focused attention."
         },
         {
           "name": "Pell Ran Marsh",
@@ -2015,11 +2041,11 @@
         },
         {
           "name": "Veth Ondra",
-          "state": "Two paces right, reading the tree-line, still watchful."
+          "state": "Two paces right, having turned to answer Silas's question, now watching his face."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the ground near where Silas landed — has not moved, has not called it."
+          "state": "Perched on the ground near where Silas landed — has not moved, has made one timed sound."
         }
       ],
       "objects": [
@@ -2029,9 +2055,9 @@
         "The Blazeborn man's open hand, extended"
       ],
       "threads": [
-        "The pass: Silas is down — the man refuses to claim it cleanly; the terms are technically met but contested by the Zone's interference",
-        "The Blazeborn man's lineage answer waits on the pass being called",
-        "Zone interference actively disrupted the Shadowstep — both ends of the geometry shifted"
+        "The pass: called as a draw by the Blazeborn man's own account — Zone interference named as the decisive factor; lineage answer still owed once the pass is resol",
+        "The Blazeborn man's lineage question: still open, his attention now sharpened by Veth's answer about Ashwarden contact craft",
+        "Zone interference: actively disrupted the Shadowstep geometry — the road's geometry here is not reliable"
       ]
     }
   },
@@ -3756,7 +3782,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Found near the water-seller's cart at the Crossing well — mid-conversation, listening to someone tell her less than they think they are.",
         "[d13] Worked the water-seller cleanly — got the contamination timing, the smell description, and Crane's location from a man who didn't realize he was being interviewed.",
         "[d13] Named the substrate's thinness plainly without judgment — the craft simply could not resolve here.",
         "[d13] Dipped her chin in the plain Ashwarden way at her introduction — had already been reading Crane and reached a conclusion before he spoke.",
@@ -3765,30 +3790,31 @@
         "[d14] Named by Silas for the road into the Zone — received the assignment with a small nod, no objection.",
         "[d14] Pulled Mara's door shut behind her, said the morning was clear enough, and fell into step. No more needed.",
         "[d14] Frozen mid-step on Silas's signal, weight back, reading the same mist-shape without being told what to look for.",
-        "[d14] Named the Zone's interference logic plainly: it is what you carry, not what you are — a Blazeborn with a living flame walks into interference; his fire at the entrance, not inside, is deliberate."
+        "[d14] Named the Zone's interference logic plainly: it is what you carry, not what you are — a Blazeborn with a living flame walks into interference; his fire at the entrance, not inside, is deliberate.",
+        "[d14] Named the felt qualities of the Grey Hand and Palework plainly on Silas's question — both crafts described from the inside, no softening."
       ],
       "knownFacts": [
-        "The load-bearing hinge problem — the perimeter must pass the braid through without eating it; Pell's ironsense is currently doing that work",
-        "Silas's answer: the Word names what is already true; belief precedes utterance. And Veth's counter: it is right, and also wrong, and the difference is a decade.",
         "The soul bond can carry an attending quality — the ashwarden disposition of unhurried, level reading — toward another person, functioning as a teaching assist that Veth has no prior category for",
         "The attending-quality pass through the soul bond is a teaching tool she has no prior category for — she is still thinking about what it means.",
         "Osten: contamination started four mornings after the cold broke, metallic smell, not ordinary silt",
         "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here",
         "Limestone bed must meet a minimum ratio to throughput or the water channels through it rather than filtering",
-        "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean."
+        "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean.",
+        "The Grey Hand is felt immediately by the recipient — strength leaving all at once, like exhaustion without the hours; they feel it and know it and cannot stop it",
+        "Palework at rank 3 is visible — the dying understand exactly what is being done and by whom; that visibility is the point, not a side effect"
       ],
       "skillsObserved": [
-        "placing a correct answer beside its own limitation without c",
         "cross-referencing an internal craft-read against its externa",
         "naming a novel capability without pretending to have already",
         "working a source until he gave more than he meant to, withou",
         "applying March-form cascade calculation to a practical filtr",
-        "reading a situation's structural logic from a single observe"
+        "reading a situation's structural logic from a single observe",
+        "plain technical description of Ashwarden contact craft under"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On the March Road — two paces right of Silas, reading the tree-line, still watchful.",
+      "statusNote": "On the left branch road inside the Zone entrance — two paces right of Silas, having turned to answer, now watching his face.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5093,7 +5119,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 596,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "Huginn turns its head toward the high window at the moment the shadow-duplicate vanishes — not following the light, but listening. There…",
@@ -6684,22 +6710,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.953960589661584,
-    "cerebral": 12.737134346750045,
-    "social": 9.204092839687501,
-    "generous": 2.410601600729324,
-    "cautious": 9.394508724151402,
-    "physical": 1.0888693170182198,
-    "risky": 0.6447162948680041,
-    "ruthless": 0.08851725809065752,
-    "carousing": 0.947161887283246,
-    "amorous": 3.481762113396411,
-    "patient": 0.7887017362199514,
-    "stealth": 0.00020359781585652413,
-    "devotion": 0.5997260798488006,
-    "craft": 2.821932199239513,
-    "leadership": 1.524027978285769,
-    "deception": 0.975
+    "strategic": 17.505111574920043,
+    "cerebral": 13.418705988081294,
+    "social": 8.973990518695313,
+    "generous": 2.350336560711091,
+    "cautious": 9.159646006047616,
+    "physical": 1.0616475840927642,
+    "risky": 0.6285983874963039,
+    "ruthless": 0.08630432663839109,
+    "carousing": 0.9234828401011649,
+    "amorous": 3.394718060561501,
+    "patient": 0.7689841928144526,
+    "stealth": 0.00019850787046011103,
+    "devotion": 0.5847329278525806,
+    "craft": 2.751383894258525,
+    "leadership": 1.4859272788286249,
+    "deception": 0.9506249999999999
   },
   "aptitudes": [
     "strategist",
@@ -6707,7 +6733,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 823,
+  "actionCount": 824,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -7097,8 +7123,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784945670608,
-  "rev": 1370,
+  "updatedAt": 1784945839074,
+  "rev": 1372,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10213,7 +10239,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 572,
+    "valley": 573,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10358,10 +10384,10 @@
     {
       "id": "sess-13",
       "startedAt": "2026-07-25T02:06:47.275Z",
-      "lastAt": "2026-07-25T02:14:30.602Z",
+      "lastAt": "2026-07-25T02:17:19.067Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -10430,7 +10456,7 @@
   },
   "_intentAsked": null,
   "_turnApplyError": {
-    "at": "2026-07-25T02:14:30.608Z",
+    "at": "2026-07-25T02:17:19.074Z",
     "op": "npcUpdates",
     "isolated": true,
     "message": "Cannot read properties of undefined (reading 'split')",
@@ -10575,15 +10601,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 197,
-    "choices": 197,
+    "sceneSummary": 198,
+    "choices": 198,
     "characterDeltas": 77,
-    "scene": 197,
-    "npcUpdates": 179,
+    "scene": 198,
+    "npcUpdates": 180,
     "factUpdates": 13,
     "placeUpdates": 33,
-    "codexUpdates": 113,
-    "timeOps": 191,
+    "codexUpdates": 114,
+    "timeOps": 192,
     "imagePrompt": 3,
     "sceneEnded": 45,
     "itemUpdates": 5,
@@ -10599,9 +10625,9 @@
     "generateRequest": 8,
     "inventoryAdd": 2,
     "scene_ended": 1,
-    "_applyFailedOp": 5
+    "_applyFailedOp": 6
   },
-  "_opTurns": 197,
+  "_opTurns": 198,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

@@ -77,3 +77,20 @@ did the thing. Especially the keystone arcs, whose whole theme IS the world chan
 3. The world_arc nudge (a quest ending moving a GREATER arc like The Second Manifestation) — does the arc
    system accept a quest-completion as an arc input? That's a strong "your personal quest moved the world's
    weather" feel; confirm it's wired (ties SNG-203/204's net-vector arc advancement).
+
+
+---
+
+# §4 — DONE (Aevi, 2026-07-24)
+All three remaining marquee quests now carry effects[] on every outcome, grounded in each ending's own text,
+CI green:
+- **the_reaching_light** (Aelyn's father, bound to Aelyn) — return/mercy/braid: world_fact + arc(aelyn_father_arc)
+  resolved + codex + seraphic/rootkin standing + poles_pull/second_manifestation nudge. The braid ending nudges
+  the Second Manifestation hard (a domain manifesting in a living person). + world-scale wakes.
+- **the_name_that_travels** (Saehara, bound to Saehara) — saint/teacher/tempered: world_fact + arc
+  (saehara_prestige_arc) resolved + codex + blazeborn/syllogist/cogitant standing + world wakes.
+- **what_grew_in_the_hollow** (Silas, major tier) — claimed/unfinished/released: world_fact + codex +
+  wright/ashwarden standing + regional wakes.
+All grounded in the prose (the effect is what the TEXT says happened), scaled to tier, findable. SNG-235 fully
+closed on Aevi's side — every marquee quest's ending now changes the world. CCode's §3 (completion path applies
+outcome.effects[]) is the only remaining piece; the flat quests assume it, so likely already live.

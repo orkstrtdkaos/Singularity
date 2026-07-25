@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 25,
-  "xp": 2457,
+  "xp": 2462,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -86,7 +86,7 @@
     },
     {
       "abilityId": "boundary_stone",
-      "level": 1
+      "level": 2
     },
     {
       "abilityId": "light_borne",
@@ -158,7 +158,7 @@
   "maxHealth": 150,
   "health": 150,
   "maxEnergy": 220,
-  "energy": 198,
+  "energy": 194,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1871,29 +1871,33 @@
         "player": "Name the gate's ward aloud — declare what it stands against before you leave it here unattended",
         "summary": "Silas names the gate's ward aloud — the declared threshold is complete, its purpose set, and the party turns north-and-west into the Zone.",
         "narration": "You face the gate and speak plainly.\n\n'This threshold stands against what would pass through without knowing what it passes through,' you say. 'Against the careless crossing. Against the one who comes to take without attending.'\n\nThe words are not loud. The mist is thin around your boots and the road is quiet. But the shadow-frame hears the declaration the way a lock hears a key — a slight, definite settling. The Weirmark at the seal brightens for a moment, then goes still. The ward has its purpose now. It is not fighting anything. It is simply present, with a name for what it refuses.\n\nVeth exhales once through her nose. 'Good,' she says quietly, and that is all. Pell shifts Memory across her back and looks north-and-west, ready. Huginn lifts from the gate's edge without ceremony, circles once above the threshold, and banks north. He does not look back. The gate stands behind you — framed, warded, declared, attended — and ahead the Zone opens into higher ground and thin mist and the searching threads you cannot see but know are there, pointing toward the watershed.\n\n*✦ What the Water Remembers — Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath..*"
+      },
+      {
+        "player": "Walk to the gate one more time and set a Boundary-Stone as a second layer — a deterrent beneath the warding declaration",
+        "summary": "Silas sets a quiet Boundary-Stone as a second layer beneath the gate's warding declaration — the threshold is now double-held, and the party turns toward the Zone.",
+        "narration": "You walk back to the gate and crouch at its base.\n\nThe shadow-frame is already present and holding — you feel it the way you feel a door closed at your back, that particular quality of weight. You do not need to look at the Weirmark to know it is seated. You have already done that work.\n\nWhat you are doing now is simpler and smaller. You press two fingers against the ground at the gate's left upright and let Boundary-Stone run quiet — not loud, not urgent, just present. The claim goes into the earth here the way a fence-post goes in: nothing dramatic, just a line the ground knows is there. It is not a challenge. It is an awareness. Something that crosses this threshold without attending will find, beneath the warding declaration, something older and more patient that has already noticed them.\n\nYou stand and step back. The gate looks the same. It always will. But it has two layers now — the declaration above, the claim below — and you are satisfied with the proportion of it. Veth watches without comment, which is her version of approval. Pell has her eyes north already, Memory steady across her back, ready to move."
       }
     ],
     "lastTurn": {
-      "narration": "You face the gate and speak plainly.\n\n'This threshold stands against what would pass through without knowing what it passes through,' you say. 'Against the careless crossing. Against the one who comes to take without attending.'\n\nThe words are not loud. The mist is thin around your boots and the road is quiet. But the shadow-frame hears the declaration the way a lock hears a key — a slight, definite settling. The Weirmark at the seal brightens for a moment, then goes still. The ward has its purpose now. It is not fighting anything. It is simply present, with a name for what it refuses.\n\nVeth exhales once through her nose. 'Good,' she says quietly, and that is all. Pell shifts Memory across her back and looks north-and-west, ready. Huginn lifts from the gate's edge without ceremony, circles once above the threshold, and banks north. He does not look back. The gate stands behind you — framed, warded, declared, attended — and ahead the Zone opens into higher ground and thin mist and the searching threads you cannot see but know are there, pointing toward the watershed.\n\n*✦ What the Water Remembers — Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath..*",
-      "sceneSummary": "Silas names the gate's ward aloud — the declared threshold is complete, its purpose set, and the party turns north-and-west into the Zone.",
+      "narration": "You walk back to the gate and crouch at its base.\n\nThe shadow-frame is already present and holding — you feel it the way you feel a door closed at your back, that particular quality of weight. You do not need to look at the Weirmark to know it is seated. You have already done that work.\n\nWhat you are doing now is simpler and smaller. You press two fingers against the ground at the gate's left upright and let Boundary-Stone run quiet — not loud, not urgent, just present. The claim goes into the earth here the way a fence-post goes in: nothing dramatic, just a line the ground knows is there. It is not a challenge. It is an awareness. Something that crosses this threshold without attending will find, beneath the warding declaration, something older and more patient that has already noticed them.\n\nYou stand and step back. The gate looks the same. It always will. But it has two layers now — the declaration above, the claim below — and you are satisfied with the proportion of it. Veth watches without comment, which is her version of approval. Pell has her eyes north already, Memory steady across her back, ready to move.\n\n*▲ Practiced — **Boundary-Stone** is fluent now (rank 2), earned through use.*",
+      "sceneSummary": "Silas sets a quiet Boundary-Stone as a second layer beneath the gate's warding declaration — the threshold is now double-held, and the party turns toward the Zone.",
       "choices": [
         {
-          "label": "Follow Huginn's line north-and-west — move toward where the threads are pointing",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Call Huginn back and ask what he has already read of the country ahead before we commit to a direction",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "scout"
           ],
           "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Read the road ahead with Deathsense before you commit — see if anything out there is already ending",
+          "label": "Use Deathsense as we move — read the country's character from what is already ending in it, and feel for the direction of the reclamation site",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "scout",
             "study"
@@ -1903,7 +1907,7 @@
           "trivial": false
         },
         {
-          "label": "Ask Veth what she knows about this stretch of the Zone — she held a south-facing post for eleven years and she knows this country",
+          "label": "Ask Veth what she knows of what lies north-and-west — she has walked the March before, and the threads in that direction are old ones",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1914,136 +1918,116 @@
           "trivial": true
         },
         {
-          "label": "Walk to the gate one more time and set a Boundary-Stone as a second layer — a deterrent beneath the warding declaration",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Move out — the direction is already named and the threads have told you what they know. Walk into the Zone",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "guard"
+            "travel"
           ],
-          "abilityId": "boundary_stone",
-          "energyCost": 2,
-          "trivial": false
+          "abilityId": null,
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "energy": -2
+      },
       "scene": {
-        "setting": "The left branch of the March road in early-spring mist, shortly after dawn. The made gate stands behind the party — warded, marked, declared, fully complete. Open Zone country stretches north-and-west into higher ground and thin mist.",
+        "setting": "The left-branch road at dawn, early-spring mist at ankle height. The made gate stands behind the party — shadow-framed, warded with the Weirmark, declared, and now Boundary-Stone seated beneath the declaration. Open Zone country stretches north-and-west into higher ground and thin mist.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Memory across her back, looking north-and-west, ready to move."
+            "state": "Standing north of the gate, Memory across her back, eyes on the country ahead — ready to move."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing still, satisfied with the declaration, her eyes already on the country ahead."
+            "state": "Watching Silas finish the second layer without comment — her eyes already moving to the ground ahead."
           },
           {
             "name": "Huginn",
-            "state": "Airborne — circled once above the gate and banked north, moving ahead of the party."
+            "state": "Airborne ahead of the party — his read of the country unshared."
           }
         ],
         "objects": [
-          "the made gate — shadow-framed, warded with the Weirmark, declaration now seated, Veth's open-hand at the left upright",
+          "the made gate — shadow-framed, warded with the Weirmark, declaration seated, Boundary-Stone now set beneath it as a second layer",
           "the left-branch March road stretching behind toward the waygate",
-          "open Zone country ahead — higher ground, thin mist, old lattice-threads pointing north-and-west toward the watershed",
-          "early-spring mist at ankle-height"
+          "open Zone country ahead — higher ground, thin mist, old lattice-threads pointing north-and-west",
+          "early-spring mist at ankle height"
         ],
         "threads": [
-          "The Zone's old threads are still executing their last instruction, pointed north-and-west toward the watershed and the reclamation site",
           "Huginn has moved ahead — his read of the country is unshared",
-          "What the filtration structure was ordered to do is still running, and the party is moving toward it"
+          "The Zone's old threads still execute their last instruction, pointed north-and-west toward the watershed and the reclamation site",
+          "What the filtration structure was ordered to do is still running — the party is moving toward it"
         ]
       },
+      "placeUpdates": [
+        {
+          "note": "A Boundary-Stone ward is now set beneath the gate's warding declaration — a second, quieter layer. Something that crosses this threshold without attending will find both the named declaration and the older ground-claim beneath it.",
+          "flag": {
+            "gate_boundary_stone": "true",
+            "gate_layers": "2"
+          }
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Received the gate's declaration with a single exhaled 'Good' — the warden's economy of approval.",
-          "statusNote": "Moving north-and-west with the party into the Zone."
+          "note": "Watched Silas set the Boundary-Stone without comment — her version of approval. Eyes already on the country ahead.",
+          "statusNote": "Moving north-and-west with the party into the Zone — the gate is complete and she is satisfied with it."
         },
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
+          "npcId": "pell",
           "name": "Pell Ran Marsh",
-          "note": "Memory settled across her back, ready to move, watching the country ahead.",
+          "note": "Eyes north already, Memory across her back — ready to move before Silas has finished.",
           "statusNote": "Moving north-and-west with the party into the Zone, Memory in hand."
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The gate's ward now has a declared purpose — it stands against the careless crossing, against the one who comes to take without attending. The declaration is sealed into the Weirmark.",
-          "flag": {
-            "gate_declared": true,
-            "gate_ward_purpose": "against_the_careless_crossing"
-          }
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-made-gate",
-          "label": "The Made Gate — Left Branch Road",
+          "label": "The Made Gate — Left Branch",
           "kind": "place",
-          "entityId": "disputed-zone-left-branch-entrance",
-          "fact": "The gate's ward has been declared aloud: it stands against the careless crossing and the one who comes to take without attending. The threshold is complete — framed, warded, marked, and now named in its purpose.",
+          "fact": "The gate now carries two protective layers: the warding declaration (against the careless crossing, against the one who comes to take without attending) above, and a Boundary-Stone claim set into the ground below — a quieter, older layer beneath the named one.",
           "links": [
             "what-the-water-remembers",
-            "the-second-thread",
-            "veth-stillwater-ondra"
+            "the-warden-s-charge"
           ]
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The made gate's ward has been declared aloud — it stands against the careless crossing, against the one who comes to take without attending. The threshold is fully complete: framed, warded, sealed with the Weirmark, marked by Veth's open-hand, and named in its purpose.",
-          "subjectId": "disputed-zone-left-branch-entrance"
-        }
-      ],
-      "stageOps": [
-        {
-          "questId": "what-the-water-remembers",
-          "stageId": "s2",
-          "evidence": "The gate is fully declared and complete — the party is turning north-and-west into the Zone toward the reclamation site, which is the stage's named destination."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief spoken declaration at the gate before moving out"
-      },
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
+        "why": "A brief, quiet working at the gate's base before the party turns north."
       }
     },
     "sceneState": {
-      "setting": "The left branch of the March road in early-spring mist, shortly after dawn. The made gate stands behind the party — warded, marked, declared, fully complete. Open Zone country stretches north-and-west into higher ground and thin mist.",
+      "setting": "The left-branch road at dawn, early-spring mist at ankle height. The made gate stands behind the party — shadow-framed, warded with the Weirmark, declared, and now Boundary-Stone seated beneath the declaration. Open Zone country stretches north-and-west into higher ground and thin mist.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Memory across her back, looking north-and-west, ready to move."
+          "state": "Standing north of the gate, Memory across her back, eyes on the country ahead — ready to move."
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing still, satisfied with the declaration, her eyes already on the country ahead."
+          "state": "Watching Silas finish the second layer without comment — her eyes already moving to the ground ahead."
         },
         {
           "name": "Huginn",
-          "state": "Airborne — circled once above the gate and banked north, moving ahead of the party."
+          "state": "Airborne ahead of the party — his read of the country unshared."
         }
       ],
       "objects": [
-        "the made gate — shadow-framed, warded with the Weirmark, declaration now seated,",
+        "the made gate — shadow-framed, warded with the Weirmark, declaration seated, Bou",
         "the left-branch March road stretching behind toward the waygate",
         "open Zone country ahead — higher ground, thin mist, old lattice-threads pointing",
-        "early-spring mist at ankle-height"
+        "early-spring mist at ankle height"
       ],
       "threads": [
-        "The Zone's old threads are still executing their last instruction, pointed north-and-west toward the watershed and the reclamation site",
         "Huginn has moved ahead — his read of the country is unshared",
-        "What the filtration structure was ordered to do is still running, and the party is moving toward it"
+        "The Zone's old threads still execute their last instruction, pointed north-and-west toward the watershed and the reclamation site",
+        "What the filtration structure was ordered to do is still running — the party is moving toward it"
       ]
     }
   },
@@ -3066,7 +3050,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Held her position at Silas's shoulder through the first contact — did not speak, did not move.",
         "[d14] Held her position without speaking — Memory in carry-grip, watching Silas work the join.",
         "[d14] Stepped up without hesitation at Silas's word — ironsense reading the fold through shoulder-contact. Confirmed: old, solid, not fighting him.",
         "[d14] Held ironsense contact through the closing — confirmed the joint held with a final check. Did not speak. Her hand stayed.",
@@ -3075,7 +3058,8 @@
         "[d14] Chin came up when the shadow-frame seated — recognition of craft done correctly, in her register.",
         "[d14] Pressed her palm to the right upright and confirmed its weight through ironsense — declined to draw a mark, named her mark as already in the spear.",
         "[d14] Asked what the gate looks like to Order-Sense — received the answer plainly, did not press further.",
-        "[d14] Memory settled across her back, ready to move, watching the country ahead."
+        "[d14] Memory settled across her back, ready to move, watching the country ahead.",
+        "[d14] Eyes north already, Memory across her back — ready to move before Silas has finished."
       ],
       "knownFacts": [
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
@@ -3769,7 +3753,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Watched the space around the join rather than the join itself — warden's instinct, reading the whole rather than the point.",
         "[d14] Watching the space around the join rather than the join itself — warden's instinct, reading the whole.",
         "[d14] Stepped forward to the join and read it as a warden — without touching, without prompting. Named what is there: patient, long-waiting, not surprised.",
         "[d14] Released the ending-space clean — warden's release spoken in silence, her part of the working complete.",
@@ -3778,7 +3761,8 @@
         "[d14] Made a short sound at the breakthrough — not quite surprise, entirely recognition.",
         "[d14] Drew the ashwarden open-hand mark into the shadow-frame at the gate's left upright — named it plainly as for the ones who come after.",
         "[d14] Confirmed Silas's read of the direction with a single word — she already knew where the threads pointed.",
-        "[d14] Received the gate's declaration with a single exhaled 'Good' — the warden's economy of approval."
+        "[d14] Received the gate's declaration with a single exhaled 'Good' — the warden's economy of approval.",
+        "[d14] Watched Silas set the Boundary-Stone without comment — her version of approval. Eyes already on the country ahead."
       ],
       "knownFacts": [
         "Limestone bed must meet a minimum ratio to throughput or the water channels through it rather than filtering",
@@ -3801,7 +3785,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Moving north-and-west with the party into the Zone.",
+      "statusNote": "Moving north-and-west with the party into the Zone — the gate is complete and she is satisfied with it.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -4972,7 +4956,8 @@
         "[d14] A made-gate now stands here — frameless, markless, built by Silas Weir's wright's close on the fold his father left unfinished. The first new passage since the Transition.",
         "[d14] The made gate now carries a warded shadow-frame — sealed with the Weirmark, structurally present though not visible in ordinary light. A declared threshold with maker and purpose named.",
         "[d14] The made gate now carries Veth Ondra's ashwarden open-hand mark at the left upright — the mark of attendance, for the ones who come after.",
-        "[d14] The gate's ward now has a declared purpose — it stands against the careless crossing, against the one who comes to take without attending. The declaration is sealed into the Weirmark."
+        "[d14] The gate's ward now has a declared purpose — it stands against the careless crossing, against the one who comes to take without attending. The declaration is sealed into the Weirmark.",
+        "[d14] A Boundary-Stone ward is now set beneath the gate's warding declaration — a second, quieter layer. Something that crosses this threshold without attending will find both the named declaration and the older ground-claim beneath it."
       ],
       "flags": {
         "gate_built": true,
@@ -4982,7 +4967,9 @@
         "gate_marked_veth": true,
         "gate_mark_pell_silent": true,
         "gate_declared": true,
-        "gate_ward_purpose": "against_the_careless_crossing"
+        "gate_ward_purpose": "against_the_careless_crossing",
+        "gate_boundary_stone": "true",
+        "gate_layers": "2"
       },
       "lastVisit": 14,
       "vectorsKnown": []
@@ -5125,7 +5112,7 @@
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
     "lastGenCount": 614,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "A Wright at the fork — someone who has been at work on something of the party's since they camped last night, and the improvement is…",
@@ -6732,22 +6719,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.476053555866645,
-    "cerebral": 12.743007473071641,
-    "social": 9.717977050634452,
-    "generous": 2.2331706931713677,
-    "cautious": 11.867006611875562,
-    "physical": 0.6398419196670802,
-    "risky": 0.3788485039496144,
-    "ruthless": 0.670155764895692,
-    "carousing": 0.5565717306227174,
-    "amorous": 2.0459547529176927,
-    "patient": 1.2397869201489373,
-    "stealth": 0.00011963824795283794,
-    "devotion": 1.3524113318351945,
-    "craft": 4.245693822582891,
-    "leadership": 1.8461750646515038,
-    "deception": 0.572929976008282
+    "strategic": 17.039152216969978,
+    "cerebral": 12.42443228624485,
+    "social": 9.475027624368591,
+    "generous": 2.1773414258420836,
+    "cautious": 13.570331446578672,
+    "physical": 0.6238458716754032,
+    "risky": 0.36937729135087405,
+    "ruthless": 0.6534018707732996,
+    "carousing": 0.5426574373571494,
+    "amorous": 1.9948058840947502,
+    "patient": 1.208792247145214,
+    "stealth": 0.00011664729175401699,
+    "devotion": 1.3186010485393145,
+    "craft": 4.139551477018318,
+    "leadership": 1.800020688035216,
+    "deception": 0.558606726608075
   },
   "aptitudes": [
     "strategist",
@@ -6756,7 +6743,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 844,
+  "actionCount": 845,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7146,8 +7133,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784993804769,
-  "rev": 1406,
+  "updatedAt": 1784993951828,
+  "rev": 1407,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9770,7 +9757,7 @@
       "the_grey_road": 1,
       "the_grey_hand": 2,
       "the_shielding_word": 2,
-      "boundary_stone": 7,
+      "boundary_stone": 8,
       "the_kept_breath": 2,
       "light_borne": 2,
       "marrow-s-wings": 2,
@@ -9839,7 +9826,7 @@
       "deathsense": 25,
       "the-attended-end": 24,
       "order_sense": 25,
-      "boundary_stone": 24,
+      "boundary_stone": 25,
       "palework": 24,
       "the_shadow_work": 25,
       "the_kept_breath": 22,
@@ -10346,7 +10333,7 @@
   "syncedAt": 1784946301565,
   "teachers": {},
   "regionsKnown": {
-    "valley": 593,
+    "valley": 594,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10499,10 +10486,10 @@
     {
       "id": "sess-14",
       "startedAt": "2026-07-25T14:39:49.681Z",
-      "lastAt": "2026-07-25T15:36:44.756Z",
+      "lastAt": "2026-07-25T15:39:11.805Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 10
+      "beats": 11
     }
   ],
   "company": [
@@ -10716,15 +10703,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 216,
-    "choices": 216,
-    "characterDeltas": 87,
-    "scene": 216,
-    "npcUpdates": 197,
+    "sceneSummary": 217,
+    "choices": 217,
+    "characterDeltas": 88,
+    "scene": 217,
+    "npcUpdates": 198,
     "factUpdates": 17,
-    "placeUpdates": 37,
-    "codexUpdates": 128,
-    "timeOps": 210,
+    "placeUpdates": 38,
+    "codexUpdates": 129,
+    "timeOps": 211,
     "imagePrompt": 5,
     "sceneEnded": 53,
     "itemUpdates": 5,
@@ -10742,7 +10729,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 216,
+  "_opTurns": 217,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

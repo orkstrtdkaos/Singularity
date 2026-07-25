@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 92,
+  "xp": 97,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -54,7 +54,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.0323125,
-    "spectrumId": -0.10484248090039058,
+    "spectrumId": -0.09960035685537105,
     "dark_light": 0.03,
     "emotional_logical": 0.015,
     "violence_peace": 0.04000000000000001,
@@ -64,7 +64,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 63,
+  "energy": 58,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -285,106 +285,83 @@
         "player": "Use stillness field then boundary stone to keep this area quiet and uninterrupted... tell her you still have a lot more to give her and that she can be as loud as she likes.",
         "summary": "A Stillness Field and Boundary-Stone laid down together — restrained, steady — giving the terrace privacy. Lira received the assurance plainly and met it in kind.",
         "narration": "You settle your attention inward, quiet and economical, the way a craftsman sets a tool rather than swings it. The Stillness Field comes first — a gentle dimming at the edges of the terrace, sound arriving from the streets below in the same way light arrives through heavy cloth. Then the Boundary-Stone, laid down alongside it without fuss, a deterring weight on the threshold of the iron staircase, the kind of ward that tells casual approach to find another route. You do not push either craft hard. You simply set them, the way you'd latch a door.\n\nThe prism-arcs still cross the warm coping wall. Lira is watching you from the bench, jacket still folded beside her, the amber-grey eyes reading the small shift in the air. She has noticed. Of course she has.\n\n\"Still have a lot more to give you,\" you say, quietly, to her and no one else. \"And no one is coming up those stairs. You can be as loud as you like.\"\n\nShe holds your gaze for one deliberate beat. Then the corner of her mouth moves — not a full smile, but the honest cousin of one. \"Good,\" said Lira. \"I was going to be anyway.\""
+      },
+      {
+        "player": "Press I to her while holding g her hips.  Ask her to teach you... have her show you how hip motion can draw light into being.",
+        "summary": "On the terrace, Lira demonstrates how hip motion draws light — precise, warm, and real.",
+        "narration": "You slide both hands to her hips and press in, deliberate and unhurried, the way she taught you the first hour of the afternoon. She makes a small sound in her throat — not surprise, never that — and her head turns just enough that you catch the corner of her mouth.\n\n\"Teach me,\" you say. \"Show me what your motion does to the light.\"\n\nShe is quiet for a moment. The prism-arcs cross the warm stone in their slow diagonals. Then she moves her hips — a slow, rolling draw, a deliberate arc — and the nearest prism-band bends. Not by much. Enough. The refracted stripe shifts across the coping wall a full handspan and holds there, tracking the motion as if light has decided she is worth following.\n\n\"It isn't about the light,\" she says. Her voice is low and even. \"The light goes where attention goes. You have to mean it.\" She moves again, slower, and the prism-arc follows. Her hands find yours at her hips and she adjusts the angle, a precise correction, the kind she'd give an apprentice — except this is not that, and she knows it, and there is warmth in the precision rather than distance. \"Feel where the motion starts,\" she says. \"Not the surface. Lower. There.\" She presses your hands to show you exactly where she means, and then she moves again, and the light moves with her, and the terrace is very warm, and the count-bell has not yet rung."
       }
     ],
     "lastTurn": {
-      "narration": "You settle your attention inward, quiet and economical, the way a craftsman sets a tool rather than swings it. The Stillness Field comes first — a gentle dimming at the edges of the terrace, sound arriving from the streets below in the same way light arrives through heavy cloth. Then the Boundary-Stone, laid down alongside it without fuss, a deterring weight on the threshold of the iron staircase, the kind of ward that tells casual approach to find another route. You do not push either craft hard. You simply set them, the way you'd latch a door.\n\nThe prism-arcs still cross the warm coping wall. Lira is watching you from the bench, jacket still folded beside her, the amber-grey eyes reading the small shift in the air. She has noticed. Of course she has.\n\n\"Still have a lot more to give you,\" you say, quietly, to her and no one else. \"And no one is coming up those stairs. You can be as loud as you like.\"\n\nShe holds your gaze for one deliberate beat. Then the corner of her mouth moves — not a full smile, but the honest cousin of one. \"Good,\" said Lira. \"I was going to be anyway.\"",
-      "sceneSummary": "A Stillness Field and Boundary-Stone laid down together — restrained, steady — giving the terrace privacy. Lira received the assurance plainly and met it in kind.",
+      "narration": "You slide both hands to her hips and press in, deliberate and unhurried, the way she taught you the first hour of the afternoon. She makes a small sound in her throat — not surprise, never that — and her head turns just enough that you catch the corner of her mouth.\n\n\"Teach me,\" you say. \"Show me what your motion does to the light.\"\n\nShe is quiet for a moment. The prism-arcs cross the warm stone in their slow diagonals. Then she moves her hips — a slow, rolling draw, a deliberate arc — and the nearest prism-band bends. Not by much. Enough. The refracted stripe shifts across the coping wall a full handspan and holds there, tracking the motion as if light has decided she is worth following.\n\n\"It isn't about the light,\" she says. Her voice is low and even. \"The light goes where attention goes. You have to mean it.\" She moves again, slower, and the prism-arc follows. Her hands find yours at her hips and she adjusts the angle, a precise correction, the kind she'd give an apprentice — except this is not that, and she knows it, and there is warmth in the precision rather than distance. \"Feel where the motion starts,\" she says. \"Not the surface. Lower. There.\" She presses your hands to show you exactly where she means, and then she moves again, and the light moves with her, and the terrace is very warm, and the count-bell has not yet rung.",
+      "sceneSummary": "On the terrace, Lira demonstrates how hip motion draws light — precise, warm, and real.",
       "choices": [
         {
-          "label": "Take your time — give her everything you said you would.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask her what she wants — let her direct it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Watch her closely — give her exactly what you read, nothing else.",
+          "label": "Follow her instruction — match her motion, let your attention go where she directs, try to feel the light shift yourself.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "romantic",
-            "careful"
+            "study",
+            "romantic"
           ],
           "abilityId": "prism_sight",
           "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "When you're done — take the ledger east, behind the array housing, to Keeper Vael.",
+          "label": "Stay with her — hands where she placed them, your pace matching hers, no attempt at craft. Let her have the light. Give her the slow she asked for.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask what she means by 'mean it' — what does attention feel like from the inside for a Radiant weaver? Let it be a real question, not just a reason to keep talking.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic",
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "When the count-bell rings — take the ledger and go. Keep the east route behind array housing, ledger in hand, Keeper Vael before the window closes.",
           "attribute": "practical",
           "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "travel",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -10,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active, the terrace quieted and the iron staircase passively deterred. Warm stone, slow prism-arcs crossing the coping wall.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active. Warm stone, slow prism-arcs crossing the coping wall — one band now shifted a handspan and holding.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "On the bench, jacket still set aside — meeting his eyes, a small honest expression at her mouth."
+            "state": "Hands over his at her hips, mid-lesson — voice low and even, the light following her motion."
           }
         ],
         "objects": [
           "Lower Filtration Ledger — on the terrace stone, within reach",
-          "Low coping wall — warm, slow prism-arcs",
+          "Low coping wall — warm, slow prism-arcs, one now shifted and held",
           "Single worker's bench",
-          "Iron exterior staircase — at the terrace corner, now warded",
+          "Iron exterior staircase — at the terrace corner, warded",
           "Lira's jacket — set aside on the bench",
           "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
           "Stillness Field and Boundary-Stone active — the terrace is private while they hold",
-          "Count-bell has rung — the window to reach Keeper Vael is open",
-          "Lira's assurance given and received — what comes next is the character's"
+          "Count-bell has not yet rung — the window to reach Keeper Vael is still open",
+          "Lira mid-lesson — showing how intent shapes light, hands over his at her hips"
         ]
       },
       "npcUpdates": [
@@ -392,45 +369,57 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "role": "Apprentice optics-weaver, Edge District",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Received the assurance — the ward set, the terrace made private, the invitation plain. She met it directly: 'Good. I was going to be anyway.'",
+          "note": "Took his hands and corrected the angle — precise as she would with an apprentice, warm as she is not with apprentices. Demonstrated how hip motion draws a prism-arc. Said: the light goes where attention goes. You have to mean it.",
           "learned": [
-            "She is entirely at ease with candor — gives it and receives it without ceremony."
+            "Radiant weaving: attention directs light — motion is the vehicle, intent is the mechanism"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
+          "skillsObserved": [
+            "light-channeling through deliberate hip motion",
+            "teaching by physical correction — exact and warm"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "On the terrace, bench, jacket still set aside — private and present."
+          "statusNote": "On the terrace, mid-lesson, hands guiding his — present and precise"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "radiant-weaving-attention",
+          "label": "Radiant Weaving — Attention Directs Light",
+          "kind": "lore",
+          "fact": "Lira demonstrated that prism-arcs track deliberate motion when genuine attention underlies it — 'the light goes where attention goes.' Motion is the vehicle; intent is the mechanism. A Radiant weaver does not push light; they mean it.",
+          "links": [
+            "radiant-plateau",
+            "lira",
+            "prism_sight"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "A short beat — the wards set and the words said; no time has passed yet."
-      },
-      "sceneEnded": false
+        "hoursPassed": 0.25,
+        "why": "a slow, unhurried beat on the terrace"
+      }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active, the terrace quieted and the iron staircase passively deterred. Warm stone, slow prism-arcs crossing the coping wall.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active. Warm stone, slow prism-arcs crossing the coping wall — one band now shifted a handspan and holding.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "On the bench, jacket still set aside — meeting his eyes, a small honest expression at her mouth."
+          "state": "Hands over his at her hips, mid-lesson — voice low and even, the light following her motion."
         }
       ],
       "objects": [
         "Lower Filtration Ledger — on the terrace stone, within reach",
-        "Low coping wall — warm, slow prism-arcs",
+        "Low coping wall — warm, slow prism-arcs, one now shifted and held",
         "Single worker's bench",
-        "Iron exterior staircase — at the terrace corner, now warded",
+        "Iron exterior staircase — at the terrace corner, warded",
         "Lira's jacket — set aside on the bench",
         "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
         "Stillness Field and Boundary-Stone active — the terrace is private while they hold",
-        "Count-bell has rung — the window to reach Keeper Vael is open",
-        "Lira's assurance given and received — what comes next is the character's"
+        "Count-bell has not yet rung — the window to reach Keeper Vael is still open",
+        "Lira mid-lesson — showing how intent shapes light, hands over his at her hips"
       ]
     }
   },
@@ -484,7 +473,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] The moment concluded on the terrace — mutual, unhurried, her choice made and comfortable in it. She set the ledger in his hands herself as the count approached, the practical and t",
         "[d1] The moment on the bench concluded — mutual, unhurried, honest. She re-composed afterward and named what she wants: the real answer, when he's ready. Then looked to the ledger — pra",
         "[d1] Heard the real answer — who he is, why he has the ledger, who sent him. Named that the filtration numbers felt wrong for weeks but she had no cause to say so. Gave him a warning an",
         "[d1] Named her light-reading skill as the root of how she reads people and movement — extrapolating the arc from the first degree of bend. Stood, retrieved the ledger, and handed it bac",
@@ -493,28 +481,29 @@
         "[d1] Unhurried in the afternoon sun on the terrace — gave herself to the moment entirely, precise and present as always.",
         "[d1] Asked for slow — said that's where people get careless if they rush. Eyes stayed forward on the valley; acknowledged entry with a single precise motion.",
         "[d1] Held the pace, held the afternoon, held attention entirely — then reached for the ledger the moment the bell rang. One press of her hand over his before she straightened.",
-        "[d1] Received the assurance — the ward set, the terrace made private, the invitation plain. She met it directly: 'Good. I was going to be anyway.'"
+        "[d1] Received the assurance — the ward set, the terrace made private, the invitation plain. She met it directly: 'Good. I was going to be anyway.'",
+        "[d1] Took his hands and corrected the angle — precise as she would with an apprentice, warm as she is not with apprentices. Demonstrated how hip motion draws a prism-arc. Said: the light goes where attention goes. You have to mean it."
       ],
       "knownFacts": [
-        "She acknowledged the ledger practically immediately after, which means she has not lost the thread of what matters outside the terrace",
         "She has known the filtration numbers felt wrong for weeks without a formal reason to name it",
         "She knows the supervisor's office faces the Common Hall direct path — she's navigated district politics long enough to think in routes",
         "She said the answer was worth waiting for — she received the truth without pulling back from it",
         "Her precision with people is a direct extension of her optics training — she reads arc and angle, not just expression",
         "She thinks in routes through the district instinctively — the supervisor's office angle, the array housing cover",
         "She said he telegraphs clearly — meant as observation, not criticism; she reads him well",
-        "She is entirely at ease with candor — gives it and receives it without ceremony."
+        "She is entirely at ease with candor — gives it and receives it without ceremony.",
+        "Radiant weaving: attention directs light — motion is the vehicle, intent is the mechanism"
       ],
       "skillsObserved": [
-        "reads people with quiet precision",
-        "rapid re-composition under pressure",
         "practical spatial awareness of district layout",
         "absorbs difficult information without visible alarm",
         "spatial district navigation under pressure",
-        "translating technical skill (light-reading) into interperson"
+        "translating technical skill (light-reading) into interperson",
+        "light-channeling through deliberate hip motion",
+        "teaching by physical correction — exact and warm"
       ],
       "status": "active",
-      "statusNote": "On the terrace, bench, jacket still set aside — private and present.",
+      "statusNote": "On the terrace, mid-lesson, hands guiding his — present and precise",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -725,7 +714,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 6
+    "turnsSinceOffer": 7
   },
   "bio": null,
   "subAttributes": {
@@ -911,25 +900,41 @@
         "createdDay": 1,
         "entityId": "radiant-plateau-edge",
         "updatedDay": 1
+      },
+      "radiant-weaving-attention": {
+        "id": "radiant-weaving-attention",
+        "label": "Radiant Weaving — Attention Directs Light",
+        "kind": "lore",
+        "facts": [
+          "[d1] Lira demonstrated that prism-arcs track deliberate motion when genuine attention underlies it — 'the light goes where attention goes.' Motion is the vehicle; intent is the mechanism. A Radiant weaver does not push light; they mean it."
+        ],
+        "links": [
+          "radiant-plateau",
+          "lira",
+          "prism-sight"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "social": 8.799054809459378,
-    "strategic": 6.600026570804946,
-    "cautious": 3.361026561966212,
-    "cerebral": 1.6593404456060623,
-    "physical": 0.8255115009415166,
-    "ruthless": 0.8255115009415166,
-    "generous": 0.8723067638181151,
-    "amorous": 6.61048515625
+    "social": 9.579078439222894,
+    "strategic": 6.435025906534823,
+    "cautious": 3.277000897917057,
+    "cerebral": 1.6178569344659106,
+    "physical": 0.8048737134179786,
+    "ruthless": 0.8048737134179786,
+    "generous": 0.8504990947226623,
+    "amorous": 8.44522302734375
   },
   "aptitudes": [],
-  "actionCount": 22,
+  "actionCount": 23,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785022274955,
-  "rev": 66,
+  "updatedAt": 1785022504544,
+  "rev": 67,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1108,7 +1113,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 19
+    "valley": 20
   },
   "foreclosed": [],
   "company": [],
@@ -1127,22 +1132,23 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-25T23:18:42.738Z",
-      "lastAt": "2026-07-25T23:31:14.947Z",
+      "lastAt": "2026-07-25T23:35:04.535Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 6
+      "beats": 7
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 5,
-    "choices": 5,
-    "scene": 5,
-    "npcUpdates": 5,
-    "timeOps": 5,
+    "sceneSummary": 6,
+    "choices": 6,
+    "scene": 6,
+    "npcUpdates": 6,
+    "timeOps": 6,
     "sceneEnded": 3,
-    "characterDeltas": 2
+    "characterDeltas": 2,
+    "codexUpdates": 1
   },
-  "_opTurns": 5
+  "_opTurns": 6
 }

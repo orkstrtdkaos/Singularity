@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 115,
+  "xp": 117,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -64,7 +64,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 36,
+  "energy": 31,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -305,73 +305,109 @@
         "player": "Let her have the lead — ease your own motion back and follow where she takes it.",
         "summary": "On the Common Hall terrace, the character eased back and gave Lira the lead — she took it without ceremony, set her own pace, and the prism-arc held steady on the coping wall.",
         "narration": "You ease back and let her have it.\n\nThe moment she feels the shift she takes it — not aggressively, not with any announcement, just a slow, certain deepening of the pace she was already keeping. Her weight moves into yours with more intention now, her hips setting the tempo the way a lens-grinder sets the angle: precise, unhurried, sure of the outcome. Her hands stay on the coping wall. The valley floor glows in the distance through the spring haze.\n\nShe does not speak for a long time. The prism-arc on the wall holds its shifted position, the light going where she takes it, patient and accurate. When she does speak, her voice is low and a little rough at the edges — the voice of someone who has stopped being careful with it.\n\n'You let go easily,' she says. Not a criticism. Something closer to a verdict she finds satisfying.\n\nThe count-bell is still quiet. The Stillness Field holds the air close. The terrace belongs to the two of you, and she seems in no hurry to return it."
+      },
+      {
+        "player": "Match her then take the lead back... pounding her hard... get her moaning and tits bouncing. ",
+        "summary": "A critical failure: the attempt to wrest the lead back broke the tempo they had built together; Lira went still and asked plainly what he was reaching for.",
+        "narration": "You try to match her and then surge past — to take the tempo back, to press harder into the pace she was keeping. Your body means it. The Drumline Stride, already running deep in your bones, flexes toward that intent.\n\nIt doesn't land. The beat stumbles. Not dramatically — there is no loud failure, no shatter — but the resonance you had built together, that clean locked-in tempo where her rhythm and yours were the same thing, simply slips. Your hips lose the angle. The timing goes ragged for one moment and then another. She feels it immediately.\n\nHer hands leave the coping wall. She doesn't step away — nothing so blunt as that — but she turns her head partway toward you, and the warmth that was in her expression a moment ago is replaced by something more cautious. Evaluating. She waits for a breath to see if you'll recover the thread, and when the thread does not come back, she goes still.\n\n'You pushed,' she says. Her voice is level. Not angry — more the tone of a lens-grinder noting that a surface has been scratched. 'We had it. You could feel that we had it.' A pause. 'What were you reaching for?' She is not asking rhetorically. She is genuinely asking — because to her, a moment of shared craft broken by force is a question worth understanding."
       }
     ],
     "lastTurn": {
-      "narration": "You ease back and let her have it.\n\nThe moment she feels the shift she takes it — not aggressively, not with any announcement, just a slow, certain deepening of the pace she was already keeping. Her weight moves into yours with more intention now, her hips setting the tempo the way a lens-grinder sets the angle: precise, unhurried, sure of the outcome. Her hands stay on the coping wall. The valley floor glows in the distance through the spring haze.\n\nShe does not speak for a long time. The prism-arc on the wall holds its shifted position, the light going where she takes it, patient and accurate. When she does speak, her voice is low and a little rough at the edges — the voice of someone who has stopped being careful with it.\n\n'You let go easily,' she says. Not a criticism. Something closer to a verdict she finds satisfying.\n\nThe count-bell is still quiet. The Stillness Field holds the air close. The terrace belongs to the two of you, and she seems in no hurry to return it.",
-      "sceneSummary": "On the Common Hall terrace, the character eased back and gave Lira the lead — she took it without ceremony, set her own pace, and the prism-arc held steady on the coping wall.",
+      "narration": "You try to match her and then surge past — to take the tempo back, to press harder into the pace she was keeping. Your body means it. The Drumline Stride, already running deep in your bones, flexes toward that intent.\n\nIt doesn't land. The beat stumbles. Not dramatically — there is no loud failure, no shatter — but the resonance you had built together, that clean locked-in tempo where her rhythm and yours were the same thing, simply slips. Your hips lose the angle. The timing goes ragged for one moment and then another. She feels it immediately.\n\nHer hands leave the coping wall. She doesn't step away — nothing so blunt as that — but she turns her head partway toward you, and the warmth that was in her expression a moment ago is replaced by something more cautious. Evaluating. She waits for a breath to see if you'll recover the thread, and when the thread does not come back, she goes still.\n\n'You pushed,' she says. Her voice is level. Not angry — more the tone of a lens-grinder noting that a surface has been scratched. 'We had it. You could feel that we had it.' A pause. 'What were you reaching for?' She is not asking rhetorically. She is genuinely asking — because to her, a moment of shared craft broken by force is a question worth understanding.",
+      "sceneSummary": "A critical failure: the attempt to wrest the lead back broke the tempo they had built together; Lira went still and asked plainly what he was reaching for.",
       "choices": [
         {
-          "label": "Stay in her tempo — give her the full afternoon, no end in sight.",
+          "label": "Answer her honestly — say what you were feeling when you pushed, and where it came from.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.8
+          },
           "difficulty": 0,
           "intentTags": [
+            "calm",
             "romantic"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Match her, then draw her attention back to the ledger — the count-bell will ring eventually.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask her quietly — what she thinks happens when this afternoon is over and you carry the ledger to Keeper Vael.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic",
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let her lead all the way to the end — and when the stillness settles, tell her what she is to you.",
+          "label": "Acknowledge the break without explaining it — ask if she is willing to find the thread again, from the beginning.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.5
+          },
           "difficulty": 15,
+          "intentTags": [
+            "romantic",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let the moment go — bring the conversation back to the ledger and Keeper Vael. The count-bell window is still open.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Hold her gaze and wait — let her question stay in the air, let her read whatever she finds there.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.6
+          },
+          "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
-          "trivial": false
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active. Warm stone underfoot, slow prism-arcs crossing the coping wall — the shifted band holding its new position, steady.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both still active. Warm stone underfoot, the prism-arc on the coping wall no longer held in its shifted position — it has drifted back toward its usual line.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Hands on the coping wall, weight settled into the new tempo she is setting — voice low, expression unhurried and certain."
+            "state": "Turned partway toward him, hands off the coping wall, expression level and evaluating — waiting for his answer."
           }
         ],
         "objects": [
           "Lower Filtration Ledger — on the terrace stone, within reach",
-          "Low coping wall — warm, prism-arc shifted and holding its position",
+          "Low coping wall — prism-arc drifted back to its default line",
           "Single worker's bench — Lira's jacket folded on it",
           "Iron exterior staircase — at the terrace corner, warded",
           "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
-          "Stillness Field and Boundary-Stone active — the terrace remains private while they hold",
-          "Count-bell has not yet rung — the window to reach Keeper Vael remains open",
-          "Lira named letting go easily as something she finds satisfying — the thread still in the warm air"
+          "Lira asked plainly what he was reaching for — her question is hanging in the air, unanswered",
+          "Stillness Field and Boundary-Stone still active — the terrace remains private",
+          "Count-bell window to reach Keeper Vael is still open",
+          "The ledger is still on the terrace stone, in reach"
         ]
       },
       "npcUpdates": [
@@ -379,38 +415,44 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Took the lead when it was offered — set her own pace without announcement, deliberate and sure. Said: 'You let go easily.' The tone was a verdict she found satisfying.",
+          "role": "Apprentice optics-weaver, Edge District",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Felt the break in the shared tempo when he pushed past her lead — went still and asked him plainly what he was reaching for. Not angry; evaluating.",
           "learned": [
-            "She takes the lead without ceremony when it is genuinely given — precise about it, the same way she is precise about everything."
+            "He pushed past her lead when they had built something together — she named that clearly."
           ],
-          "statusNote": "On the terrace, leading, hands on the coping wall — unhurried.",
-          "relationshipDelta": 1
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the terrace, turned toward him, hands off the wall — waiting for an honest answer."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a quiet, unhurried passage on the terrace"
+        "hoursPassed": 0.1,
+        "why": "a short beat — the attempt, the break, her question"
       }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active. Warm stone underfoot, slow prism-arcs crossing the coping wall — the shifted band holding its new position, steady.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both still active. Warm stone underfoot, the prism-arc on the coping wall no longer held in its shifted position — it has drifted back toward its usual line.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Hands on the coping wall, weight settled into the new tempo she is setting — voice low, expression unhurried and certain"
+          "state": "Turned partway toward him, hands off the coping wall, expression level and evaluating — waiting for his answer."
         }
       ],
       "objects": [
         "Lower Filtration Ledger — on the terrace stone, within reach",
-        "Low coping wall — warm, prism-arc shifted and holding its position",
+        "Low coping wall — prism-arc drifted back to its default line",
         "Single worker's bench — Lira's jacket folded on it",
         "Iron exterior staircase — at the terrace corner, warded",
         "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
-        "Stillness Field and Boundary-Stone active — the terrace remains private while they hold",
-        "Count-bell has not yet rung — the window to reach Keeper Vael remains open",
-        "Lira named letting go easily as something she finds satisfying — the thread still in the warm air"
+        "Lira asked plainly what he was reaching for — her question is hanging in the air, unanswered",
+        "Stillness Field and Boundary-Stone still active — the terrace remains private",
+        "Count-bell window to reach Keeper Vael is still open",
+        "The ledger is still on the terrace stone, in reach"
       ]
     }
   },
@@ -464,7 +506,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] One last time on the terrace — mutual, unhurried. She re-settled herself with two economical motions and pressed the ledger into his hands, fingers resting a beat too long. Sent him east behind the array housing before the bell finished sounding.",
         "[d1] Gave herself to the afternoon entirely — jacket off, blouse off, lit by prism-arcs, hands at his sides. Said she was still watching for the bell.",
         "[d1] Unhurried in the afternoon sun on the terrace — gave herself to the moment entirely, precise and present as always.",
         "[d1] Asked for slow — said that's where people get careless if they rush. Eyes stayed forward on the valley; acknowledged entry with a single precise motion.",
@@ -473,17 +514,18 @@
         "[d1] Took his hands and corrected the angle — precise as she would with an apprentice, warm as she is not with apprentices. Demonstrated how hip motion draws a prism-arc. Said: the light goes where attention goes. You have to mean it.",
         "[d1] Felt the Drumline Stride lock into her rhythm — named it aloud as something new, voice not quite steady.",
         "[d1] Felt the Drumline Stride deepen by one degree and followed without hesitation — matched the new tempo and held it.",
-        "[d1] Took the lead when it was offered — set her own pace without announcement, deliberate and sure. Said: 'You let go easily.' The tone was a verdict she found satisfying."
+        "[d1] Took the lead when it was offered — set her own pace without announcement, deliberate and sure. Said: 'You let go easily.' The tone was a verdict she found satisfying.",
+        "[d1] Felt the break in the shared tempo when he pushed past her lead — went still and asked him plainly what he was reaching for. Not angry; evaluating."
       ],
       "knownFacts": [
-        "Her precision with people is a direct extension of her optics training — she reads arc and angle, not just expression",
         "She thinks in routes through the district instinctively — the supervisor's office angle, the array housing cover",
         "She said he telegraphs clearly — meant as observation, not criticism; she reads him well",
         "She is entirely at ease with candor — gives it and receives it without ceremony.",
         "Radiant weaving: attention directs light — motion is the vehicle, intent is the mechanism",
         "Drumline Stride used in synchronized rhythmic rapport — not a sprint, but a shared beat. She named it something no one has done before.",
         "The Drumline Stride can shift its depth mid-motion — she knows this now, from the inside",
-        "She takes the lead without ceremony when it is genuinely given — precise about it, the same way she is precise about everything."
+        "She takes the lead without ceremony when it is genuinely given — precise about it, the same way she is precise about everything.",
+        "He pushed past her lead when they had built something together — she named that clearly."
       ],
       "skillsObserved": [
         "practical spatial awareness of district layout",
@@ -494,7 +536,7 @@
         "teaching by physical correction — exact and warm"
       ],
       "status": "active",
-      "statusNote": "On the terrace, leading, hands on the coping wall — unhurried.",
+      "statusNote": "On the terrace, turned toward him, hands off the wall — waiting for an honest answer.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -705,7 +747,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 10
+    "turnsSinceOffer": 11
   },
   "bio": null,
   "subAttributes": {
@@ -940,8 +982,8 @@
   "actionCount": 26,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785022828806,
-  "rev": 70,
+  "updatedAt": 1785022952912,
+  "rev": 71,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1122,7 +1164,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 23
+    "valley": 24
   },
   "foreclosed": [],
   "company": [],
@@ -1141,23 +1183,23 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-25T23:18:42.738Z",
-      "lastAt": "2026-07-25T23:40:28.800Z",
+      "lastAt": "2026-07-25T23:42:32.905Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 10
+      "beats": 11
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 9,
-    "choices": 9,
-    "scene": 9,
-    "npcUpdates": 9,
-    "timeOps": 9,
+    "sceneSummary": 10,
+    "choices": 10,
+    "scene": 10,
+    "npcUpdates": 10,
+    "timeOps": 10,
     "sceneEnded": 5,
     "characterDeltas": 4,
     "codexUpdates": 2
   },
-  "_opTurns": 9
+  "_opTurns": 10
 }

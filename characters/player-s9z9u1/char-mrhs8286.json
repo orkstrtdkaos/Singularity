@@ -136,7 +136,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.03977680171506455,
+    "spectrumId": -0.03778796162931132,
     "violence_peace": 0.09293033437499999,
     "chaos_order": 0.24840787227204963,
     "mechanical_spiritual": 0.25513542055105926,
@@ -1942,79 +1942,81 @@
         "player": "Hold the contact — let your presence seat fully into the hem before you ask anything of it",
         "summary": "Silas seats his wright's presence fully into the fold's join — the hem acknowledges the hand without moving; the work is ready to continue.",
         "narration": "You hold the contact and wait.\n\nThe hem does not resist. It simply takes time to know you — the way a door that has been shut a long time takes time to swing, not from rust but from settling. Your presence moves into the join slowly, filling the space your father's intent left open. The wright's attention you bring is not identical to his, and the fold notices the difference, the way a joint notices a new hand on the chisel. Not wrong. Just different. Present.\n\nThe near edge warms slightly under your fingers. That is the only sign. Pell does not shift. Veth watches the space around you, not the join itself — warden's work, reading the whole room rather than the point of contact. Somewhere behind you, Cael Dorn breathes once, slow.\n\nThe join has acknowledged you. It has not moved. That is correct — you did not ask it to move yet. You asked it to know you were here, and it does.\n\n*✦ The Second Thread — The world map changes, or a standing danger to the Crossing is removed. Either way it is permanent and public.. Every stage is done; how it ends is yours to choose.*"
+      },
+      {
+        "player": "Ask Pell to join you, then Huginn, then ask Veth to bring her Ashwarden sense to the fold... waiting to see what happens before inviting Cael.",
+        "summary": "Silas draws Pell, Huginn, and Veth into the working — the fold now attended by all four presences, the join held and patient.",
+        "narration": "You turn first to Pell.\n\n\"Come closer,\" you say. \"Put your hand on my shoulder. Let ironsense read what's here.\"\n\nShe steps up without hesitation, Memory shifting in her grip as she settles her free hand at your left shoulder. You feel the ironsense open — not in you, but through the contact point, the way a second opinion arrives from someone standing right beside you at a joint. The fold does not react. It simply becomes known to her too.\n\n\"It's old,\" she says quietly. \"Solid. Not fighting you.\"\n\nYou look up at Huginn. The bird is already close — perched on nothing visible in the mist to your right, watching the join rather than you. You do not ask it to come. You ask it to attend.\n\n\"Stay with this,\" you say. \"With me.\"\n\nHuginn makes no sound. But it does not look away. That is the answer.\n\nThen you turn to Veth.\n\n\"I need your warden's sense at the join,\" you tell her. \"Not the wright's side — the other half. The release. What it's been waiting to let go of.\"\n\nVeth steps forward from her two-pace distance and brings herself level with the join. She does not touch it. She does not touch you. She reads the way she always reads — the whole space, the weight of what is ending rather than the mechanics of how. A silence settles that is different from the silence before. More attended.\n\n\"There's something in it that wants to be finished,\" she says, plain and unhurried. \"Not desperate. Just... patient. Like it has been patient for a long time and is not surprised you're here.\"\n\nYou hold the contact with the hem and wait. Cael Dorn has not moved. You have not asked him yet."
       }
     ],
     "lastTurn": {
-      "narration": "You hold the contact and wait.\n\nThe hem does not resist. It simply takes time to know you — the way a door that has been shut a long time takes time to swing, not from rust but from settling. Your presence moves into the join slowly, filling the space your father's intent left open. The wright's attention you bring is not identical to his, and the fold notices the difference, the way a joint notices a new hand on the chisel. Not wrong. Just different. Present.\n\nThe near edge warms slightly under your fingers. That is the only sign. Pell does not shift. Veth watches the space around you, not the join itself — warden's work, reading the whole room rather than the point of contact. Somewhere behind you, Cael Dorn breathes once, slow.\n\nThe join has acknowledged you. It has not moved. That is correct — you did not ask it to move yet. You asked it to know you were here, and it does.\n\n*✦ The Second Thread — The world map changes, or a standing danger to the Crossing is removed. Either way it is permanent and public.. Every stage is done; how it ends is yours to choose.*",
-      "sceneSummary": "Silas seats his wright's presence fully into the fold's join — the hem acknowledges the hand without moving; the work is ready to continue.",
+      "narration": "You turn first to Pell.\n\n\"Come closer,\" you say. \"Put your hand on my shoulder. Let ironsense read what's here.\"\n\nShe steps up without hesitation, Memory shifting in her grip as she settles her free hand at your left shoulder. You feel the ironsense open — not in you, but through the contact point, the way a second opinion arrives from someone standing right beside you at a joint. The fold does not react. It simply becomes known to her too.\n\n\"It's old,\" she says quietly. \"Solid. Not fighting you.\"\n\nYou look up at Huginn. The bird is already close — perched on nothing visible in the mist to your right, watching the join rather than you. You do not ask it to come. You ask it to attend.\n\n\"Stay with this,\" you say. \"With me.\"\n\nHuginn makes no sound. But it does not look away. That is the answer.\n\nThen you turn to Veth.\n\n\"I need your warden's sense at the join,\" you tell her. \"Not the wright's side — the other half. The release. What it's been waiting to let go of.\"\n\nVeth steps forward from her two-pace distance and brings herself level with the join. She does not touch it. She does not touch you. She reads the way she always reads — the whole space, the weight of what is ending rather than the mechanics of how. A silence settles that is different from the silence before. More attended.\n\n\"There's something in it that wants to be finished,\" she says, plain and unhurried. \"Not desperate. Just... patient. Like it has been patient for a long time and is not surprised you're here.\"\n\nYou hold the contact with the hem and wait. Cael Dorn has not moved. You have not asked him yet.",
+      "sceneSummary": "Silas draws Pell, Huginn, and Veth into the working — the fold now attended by all four presences, the join held and patient.",
       "choices": [
         {
-          "label": "Ask Veth to place her warden's touch at the join now — her release is the second half of what the fold needs, and the hem is ready to receive it",
+          "label": "Ask Cael what he has felt here, and whether he will add his hand to the working",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "lead"
+            "help",
+            "careful"
           ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Before asking Veth — check the fold once more with the Double Register, maker's hand and warden's sense both open: confirm nothing has shifted in the join's structure since contact was made",
+          "label": "Do not ask Cael yet — begin the wright's closing while the three of you hold the join",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": "the_raised_thing"
+        },
+        {
+          "label": "Ask Veth specifically: what would a warden's release look like at this join — and is she ready to give it",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "help"
           ],
-          "trivial": false,
-          "abilityId": "braid_deathsense_order_sense",
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Ask Cael Dorn directly what he heard — the door trying to latch, four times — whether any of those times felt different from this one",
+          "label": "Run the Double Register one more time with everyone present — read the fold's full state before you commit to closing",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "study"
-          ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "Hold your position and say nothing yet — listen to what the fold does now that it knows you are here, before you move the work forward",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
+            "study",
             "careful"
           ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null
+          "abilityId": "braid_deathsense_order_sense",
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside the fold's mist on the left branch road — the entrance behind is no longer visible. Silas's hand is seated at the join's near edge, both hem-ends present and mapped, the wright's presence acknowledged. The air sits between temperatures, the mist structural and still.",
+        "setting": "Inside the fold's mist on the left branch road — the entrance behind is no longer visible. Silas's hand is seated at the join's near edge, both hem-ends present and mapped. The mist is structural and still.",
         "npcsPresent": [
           {
-            "name": "Huginn",
-            "state": "On the road close by, low — watching, not circling."
+            "name": "Pell Ran Marsh",
+            "state": "Hand on Silas's left shoulder, Memory in carry-grip, ironsense reading the join through the contact point."
           },
           {
-            "name": "Pell Ran Marsh",
-            "state": "At Silas's left shoulder, Memory in carry-grip, still and watchful."
+            "name": "Huginn",
+            "state": "Perched in the mist to the right, watching the join. Attending."
           },
           {
             "name": "Veth Ondra",
-            "state": "Two paces right, reading the space around the join, not the join itself."
+            "state": "Level with the join, not touching — reading the weight of what is ending, the warden's sense open."
           },
           {
             "name": "Cael Dorn",
-            "state": "Two paces back, arms loose, breathing slow — a man who has waited here before."
+            "state": "Two paces back, arms loose, breathing slow. Not yet asked."
           }
         ],
         "objects": [
@@ -2022,65 +2024,65 @@
           "Unwound brass wire at Silas's feet",
           "Memory — in Pell's carry-grip",
           "The mist ahead — structural, not weather",
-          "The join — both edges present, wright's hand now seated in contact, presence acknowledged"
+          "The join — both edges present, wright's hand seated in contact, presence acknowledged, all three companions now attending"
         ],
         "threads": [
-          "The warden's release is the second half of what the fold needs — Veth has not yet been asked",
-          "Cael Dorn's observation — the door trying to latch, four times — still unasked about",
-          "Veth has not spoken her own read of the space"
+          "Cael Dorn has not yet been asked — his role in the working is still open",
+          "Veth named what the fold is waiting to release — the warden's release is the remaining question",
+          "The wright's closing has not yet begun — the working is assembled but not started"
         ]
       },
-      "stageOps": [
-        {
-          "questId": "the-second-thread",
-          "stageId": "s6",
-          "evidence": "Silas held full wright's contact at the join and let his presence seat into the hem — the fold acknowledged him, both edges now known to the maker's hand."
-        }
-      ],
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
+          "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Held her position without speaking — Memory in carry-grip, watching Silas work the join.",
-          "statusNote": "At Silas's left shoulder inside the fold, Memory in carry-grip."
+          "note": "Stepped up without hesitation at Silas's word — ironsense reading the fold through shoulder-contact. Confirmed: old, solid, not fighting him.",
+          "learned": [
+            "The fold reads as old and solid through ironsense — not resisting the wright's contact."
+          ],
+          "skillsObserved": [
+            "ironsense read of the fold's quality through contact-point — confirmed non-resistant"
+          ],
+          "statusNote": "Hand on Silas's left shoulder inside the fold, Memory in carry-grip, ironsense open at the join."
         },
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth Ondra",
-          "note": "Watching the space around the join rather than the join itself — warden's instinct, reading the whole.",
-          "statusNote": "Two paces right of Silas inside the fold, watching the surrounding space."
+          "note": "Stepped forward to the join and read it as a warden — without touching, without prompting. Named what is there: patient, long-waiting, not surprised.",
+          "learned": [
+            "The fold holds something that wants to be finished — patient rather than desperate, and it has been waiting a long time."
+          ],
+          "skillsObserved": [
+            "warden's read of a fold's closing-quality — named its emotional weight without craft or touch"
+          ],
+          "statusNote": "Level with the join inside the fold, warden's sense open, reading what is ending."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short interval of stillness — holding contact and waiting for the fold to acknowledge."
-      },
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
+        "why": "A short exchange — the working assembled, three presences brought to the join, Cael not yet asked."
       }
     },
     "sceneState": {
-      "setting": "Inside the fold's mist on the left branch road — the entrance behind is no longer visible. Silas's hand is seated at the join's near edge, both hem-ends present and mapped, the wright's presence acknowledged. The air sits between temperatures, the mist structural and still.",
+      "setting": "Inside the fold's mist on the left branch road — the entrance behind is no longer visible. Silas's hand is seated at the join's near edge, both hem-ends present and mapped. The mist is structural and still.",
       "npcsPresent": [
         {
-          "name": "Huginn",
-          "state": "On the road close by, low — watching, not circling."
+          "name": "Pell Ran Marsh",
+          "state": "Hand on Silas's left shoulder, Memory in carry-grip, ironsense reading the join through the contact point."
         },
         {
-          "name": "Pell Ran Marsh",
-          "state": "At Silas's left shoulder, Memory in carry-grip, still and watchful."
+          "name": "Huginn",
+          "state": "Perched in the mist to the right, watching the join. Attending."
         },
         {
           "name": "Veth Ondra",
-          "state": "Two paces right, reading the space around the join, not the join itself."
+          "state": "Level with the join, not touching — reading the weight of what is ending, the warden's sense open."
         },
         {
           "name": "Cael Dorn",
-          "state": "Two paces back, arms loose, breathing slow — a man who has waited here before."
+          "state": "Two paces back, arms loose, breathing slow. Not yet asked."
         }
       ],
       "objects": [
@@ -2088,12 +2090,12 @@
         "Unwound brass wire at Silas's feet",
         "Memory — in Pell's carry-grip",
         "The mist ahead — structural, not weather",
-        "The join — both edges present, wright's hand now seated in contact, presence ack"
+        "The join — both edges present, wright's hand seated in contact, presence acknowl"
       ],
       "threads": [
-        "The warden's release is the second half of what the fold needs — Veth has not yet been asked",
-        "Cael Dorn's observation — the door trying to latch, four times — still unasked about",
-        "Veth has not spoken her own read of the space"
+        "Cael Dorn has not yet been asked — his role in the working is still open",
+        "Veth named what the fold is waiting to release — the warden's release is the remaining question",
+        "The wright's closing has not yet begun — the working is assembled but not started"
       ]
     }
   },
@@ -2555,35 +2557,28 @@
           "change": "The world map changes, or a standing danger to the Crossing is removed. Either way it is permanent and public."
         }
       ],
-      "routes": [
-        {
-          "id": "finished",
-          "note": "The fold is closed as a made thing. A new gate stands. It is his and it is the first in an age."
-        },
-        {
-          "id": "ended",
-          "note": "The fold is released. The danger is gone, the work is concluded, and nothing new stands where it was."
-        },
-        {
-          "id": "given",
-          "note": "He finishes it and gives it to someone else — the Numinous, the Cities, the Crossing itself. The making was his; the keeping is not."
-        }
-      ],
+      "routes": {},
       "outcomes": [
         {
           "id": "finished",
           "narration": [],
-          "effects": null
+          "effects": null,
+          "summary": "The fold is closed as a made thing. A new gate stands. It is his and it is the first in an age.",
+          "name": "Finished"
         },
         {
           "id": "ended",
           "narration": [],
-          "effects": null
+          "effects": null,
+          "summary": "The fold is released. The danger is gone, the work is concluded, and nothing new stands where it was.",
+          "name": "Ended"
         },
         {
           "id": "given",
           "narration": [],
-          "effects": null
+          "effects": null,
+          "summary": "He finishes it and gives it to someone else — the Numinous, the Cities, the Crossing itself. The making was his; the keeping is not.",
+          "name": "Given"
         }
       ],
       "stageIndex": 6,
@@ -3123,7 +3118,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Stepped south without ceremony — Memory shouldered, road-ready.",
         "[d14] Stepped past the threshold without ceremony — Memory shouldered, road-ready beside Silas.",
         "[d14] Walking south at dawn, Memory on her back, road-quiet beside Silas.",
         "[d14] Halted instantly on the road-signal, hand on Memory, watching the mist without instruction.",
@@ -3132,28 +3126,29 @@
         "[d14] Named aloud that Cael's account means the fold is trying to close on its own — a plain summary, not a question.",
         "[d14] Held still and silent while Silas ran the Double Register — Memory in carry-grip, reading him rather than the mist.",
         "[d14] Held her position at Silas's shoulder through the first contact — did not speak, did not move.",
-        "[d14] Held her position without speaking — Memory in carry-grip, watching Silas work the join."
+        "[d14] Held her position without speaking — Memory in carry-grip, watching Silas work the join.",
+        "[d14] Stepped up without hesitation at Silas's word — ironsense reading the fold through shoulder-contact. Confirmed: old, solid, not fighting him."
       ],
       "knownFacts": [
-        "The shadow-spear needs a Weirmark in the grain to answer a call across distance — otherwise the design is present but the caller is not identified",
         "The shadow-spear is fully sealed — Weirmark names the caller, Shielding Word locks the certainty, and the duplicate answers any call from any distance.",
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
         "The shadow-twin answers only the named caller — it can be held by another person but will not fly to their hand without the caller's word",
         "The shadow-twin shifted register when Silas spoke her name into the caller-link — it is now a permission-acknowledged hold, not a resisted one.",
         "Memory is now hers to carry; Silas holds the call. The shadow-twin on the bench is his half of the design.",
         "Silas named his love to her plainly and directly, no hedging.",
-        "The Blazeborn traveler carries no working or primed iron — confirmed by ironsense at close range"
+        "The Blazeborn traveler carries no working or primed iron — confirmed by ironsense at close range",
+        "The fold reads as old and solid through ironsense — not resisting the wright's contact."
       ],
       "skillsObserved": [
-        "anchor closure by ironsense feel under no direction",
         "copper-wire seating at a socket throat by thumbnail pressure",
         "ironsense confirmation of shadow-duplicate fidelity",
         "ironsense confirmation of a completed seal under working-for",
         "accurate tactile reporting of a working's feel under hands-o",
-        "ironsense read of a person at close range — confirmed absenc"
+        "ironsense read of a person at close range — confirmed absenc",
+        "ironsense read of the fold's quality through contact-point —"
       ],
       "status": "active",
-      "statusNote": "At Silas's left shoulder inside the fold, Memory in carry-grip.",
+      "statusNote": "Hand on Silas's left shoulder inside the fold, Memory in carry-grip, ironsense open at the join.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -3826,7 +3821,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Was already waiting in the back corner when Silas arrived — anticipated this conversation. Named 'the Zone' before Silas did.",
         "[d14] Named by Silas for the road into the Zone — received the assignment with a small nod, no objection.",
         "[d14] Pulled Mara's door shut behind her, said the morning was clear enough, and fell into step. No more needed.",
         "[d14] Frozen mid-step on Silas's signal, weight back, reading the same mist-shape without being told what to look for.",
@@ -3835,30 +3829,31 @@
         "[d14] Watched the backlash land. Her expression says she recognizes what happened — a reach-back on skin-contact read, the images arriving out of order.",
         "[d14] Held her position two paces right without instruction — steady, watching the space ahead.",
         "[d14] Watched the space around the join rather than the join itself — warden's instinct, reading the whole rather than the point.",
-        "[d14] Watching the space around the join rather than the join itself — warden's instinct, reading the whole."
+        "[d14] Watching the space around the join rather than the join itself — warden's instinct, reading the whole.",
+        "[d14] Stepped forward to the join and read it as a warden — without touching, without prompting. Named what is there: patient, long-waiting, not surprised."
       ],
       "knownFacts": [
-        "The soul bond can carry an attending quality — the ashwarden disposition of unhurried, level reading — toward another person, functioning as a teaching assist that Veth has no prior category for",
         "The attending-quality pass through the soul bond is a teaching tool she has no prior category for — she is still thinking about what it means.",
         "Osten: contamination started four mornings after the cold broke, metallic smell, not ordinary silt",
         "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here",
         "Limestone bed must meet a minimum ratio to throughput or the water channels through it rather than filtering",
         "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean.",
         "The Grey Hand is felt immediately by the recipient — strength leaving all at once, like exhaustion without the hours; they feel it and know it and cannot stop it",
-        "Palework at rank 3 is visible — the dying understand exactly what is being done and by whom; that visibility is the point, not a side effect"
+        "Palework at rank 3 is visible — the dying understand exactly what is being done and by whom; that visibility is the point, not a side effect",
+        "The fold holds something that wants to be finished — patient rather than desperate, and it has been waiting a long time."
       ],
       "skillsObserved": [
-        "cross-referencing an internal craft-read against its externa",
         "naming a novel capability without pretending to have already",
         "working a source until he gave more than he meant to, withou",
         "applying March-form cascade calculation to a practical filtr",
         "reading a situation's structural logic from a single observe",
-        "plain technical description of Ashwarden contact craft under"
+        "plain technical description of Ashwarden contact craft under",
+        "warden's read of a fold's closing-quality — named its emotio"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Two paces right of Silas inside the fold, watching the surrounding space.",
+      "statusNote": "Level with the join inside the fold, warden's sense open, reading what is ending.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5164,11 +5159,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-25T03:43:37.245Z",
+    "lastSharedReadAt": "2026-07-25T14:29:34.233Z",
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
-    "lastGenCount": 603,
-    "turnsSinceOffer": 6,
+    "lastGenCount": 614,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Huginn dropped to Silas's shoulder before the waygate — earlier than usual, heavier than usual. It has not spoken. But it has been…",
@@ -6761,22 +6756,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 13.589736632007316,
-    "cerebral": 14.079606891095539,
-    "social": 10.276321863706112,
-    "generous": 1.8246358910618647,
-    "cautious": 11.867076776679129,
-    "physical": 0.8241884664418886,
-    "risky": 0.4879995478359736,
-    "ruthless": 0.8632361137481576,
-    "carousing": 0.7169270831231636,
-    "amorous": 2.6354201848702106,
-    "patient": 1.5969852068522377,
-    "stealth": 0.00015410753981131683,
-    "devotion": 0.45394549218206864,
-    "craft": 3.110980815460229,
-    "leadership": 1.1535693609932642,
-    "deception": 0.7379983458266509
+    "strategic": 15.249993216207132,
+    "cerebral": 13.72761671881815,
+    "social": 10.01941381711346,
+    "generous": 1.7790199937853182,
+    "cautious": 11.570399857262151,
+    "physical": 0.8035837547808413,
+    "risky": 0.47579955914007427,
+    "ruthless": 0.8416552109044536,
+    "carousing": 0.6990039060450844,
+    "amorous": 2.5695346802484553,
+    "patient": 1.5570605766809318,
+    "stealth": 0.0001502548513160339,
+    "devotion": 0.44259685487751693,
+    "craft": 3.0332062950737235,
+    "leadership": 1.1247301269684327,
+    "deception": 0.7195483871809846
   },
   "aptitudes": [
     "strategist",
@@ -6784,9 +6779,9 @@
     "scholar",
     "stalwart"
   ],
-  "actionCount": 834,
+  "actionCount": 835,
   "grantsVersion": 1,
-  "reconcileVersion": 20,
+  "reconcileVersion": 21,
   "gallery": [
     {
       "kind": "npc",
@@ -7174,8 +7169,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784951744884,
-  "rev": 1389,
+  "updatedAt": 1784990389698,
+  "rev": 1392,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10312,7 +10307,7 @@
   "syncedAt": 1784946301565,
   "teachers": {},
   "regionsKnown": {
-    "valley": 583,
+    "valley": 584,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10461,6 +10456,14 @@
       "startDay": 25,
       "endDay": 25,
       "beats": 15
+    },
+    {
+      "id": "sess-14",
+      "startedAt": "2026-07-25T14:39:49.681Z",
+      "lastAt": "2026-07-25T14:39:49.681Z",
+      "startDay": 25,
+      "endDay": 25,
+      "beats": 1
     }
   ],
   "company": [
@@ -10676,7 +10679,7 @@
   "_opEmitted": {
     "sceneSummary": 207,
     "choices": 207,
-    "characterDeltas": 82,
+    "characterDeltas": 81,
     "scene": 207,
     "npcUpdates": 189,
     "factUpdates": 13,
@@ -10694,7 +10697,7 @@
     "standingOps": 1,
     "ledgerEvents": 4,
     "discovery": 2,
-    "stageOps": 9,
+    "stageOps": 8,
     "generateRequest": 9,
     "inventoryAdd": 2,
     "scene_ended": 1,

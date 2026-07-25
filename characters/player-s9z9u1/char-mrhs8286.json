@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 26,
-  "xp": 2501,
+  "xp": 2512,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -158,7 +158,7 @@
   "maxHealth": 155,
   "health": 155,
   "maxEnergy": 225,
-  "energy": 225,
+  "energy": 220,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1921,179 +1921,164 @@
         "player": "land nearby - use AFterimage with Shadowstep to step into it's shadow. CAll the shadow twin spear into your hand again and use hunter's strike from behind.",
         "summary": "Silas Shadowstepped through the wolverine's own shadow via Afterimage and struck from behind with Hunter's Strike — a partial but lethal blow, the wolverine dead on the frost-hard ground, at real cost to both arms.",
         "narration": "You drop from altitude — not a dive, a controlled fall, angled toward the shadow the wolverine's own broad body throws on the frost-hard ground. The morning light is low and flat. The shadow is real enough.\n\nAftimage takes the fall and replaces it: for one breath, your shape hangs in the air where you were, still descending in the eye. You step sideways into the wolverine's shadow through it, and the step is wrong in the way novel things are wrong — Shadowstep wants two darks it knows; this one it improvises from, and the join costs. Your arm burns. The resonance-burn from the thrown spear is still there, and the Afterimage's demand lands on top of it. You come out of the dark low and behind the animal, one knee on frozen ground, closer than you should be able to be.\n\nThe shadow-twin of Memory answers again — barely. It reforms thin and cold in your grip, less solid than it was, the threads pulling with the effort. You feel Pell two hundred yards south through the bond: her hand on Memory's shaft, a quick tightening, there-and-braced. The wolverine starts to turn. You bring the spear up in the one clean arc Hunter's Strike knows and drive for the back of the neck, where Zone-changed or not, the architecture is the same.\n\nThe blade connects. The wolverine lurches, drops its front legs, and goes down hard onto the downed tree's flank with a sound like a sack of wet clay. It does not rise. Its eyes are open and it is breathing — three breaths, shallow, slowing — and then it is not. Huginn, on the flat stone at the clearing's edge, makes one sound. Once. Low and even. The clearing is quiet after it.\n\nThe resonance-burn runs from your wrist to your elbow now, both arms. The shadow-twin dissolves in your hand. Veth's voice carries from the bank, flat and practical. \"That's the second thing dead on this stretch,\" said Veth. \"Zone reads that. Keep moving.\"\n\n*You feel it settle into you — a new steadiness. (Level 26: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "Use the attended end while healing yourself from the last bit of life from the giant wolverine using draw down",
+        "summary": "Silas drew the wolverine's last life-force through Draw Down to ease the resonance-burn — a careful taking at the ending's edge. The creature is dead. The party is still separated across two hundred yards of Zone ground.",
+        "narration": "The wolverine is not dead yet. That is the first thing The Attended End tells you, plainly and without softening — there is still something present in the broad chest, a thread of it, the last margin before the line. You could let it finish on its own. You kneel instead.\n\nDraw Down asks for touch, and you give it one hand on the coarse flank where the fur has not yet gone cold. The living warmth there is almost nothing. You take what is offered — carefully, the way you pour from a nearly-empty vessel, because there is almost nothing left and you have no interest in taking more than the ending has already freed. The burn along your forearms does not vanish. It recedes, the way a fire recedes when you move back from it — the damage still present, the worst edge gone. Your left arm steadies. Your right arm still aches from wrist to elbow, but you can close the hand cleanly.\n\nThe thread in the wolverine goes still. The Attended End notes it — the exact moment, plain and unhurried. You stay a breath past it, hand still on the flank, because that is what the craft is for. Huginn makes one sound from the clearing's edge and goes quiet again. Veth's voice carries across the two hundred yards between you, low and even: she has named the kill's Zone-weight to herself, you can tell, and she is already reading what a second death on this stretch means for your passage.\n\nFrom the south, Pell's voice comes across the distance. She does not shout. She pitches it to carry. \"Still standing?\" she says."
       }
     ],
     "lastTurn": {
-      "narration": "You drop from altitude — not a dive, a controlled fall, angled toward the shadow the wolverine's own broad body throws on the frost-hard ground. The morning light is low and flat. The shadow is real enough.\n\nAftimage takes the fall and replaces it: for one breath, your shape hangs in the air where you were, still descending in the eye. You step sideways into the wolverine's shadow through it, and the step is wrong in the way novel things are wrong — Shadowstep wants two darks it knows; this one it improvises from, and the join costs. Your arm burns. The resonance-burn from the thrown spear is still there, and the Afterimage's demand lands on top of it. You come out of the dark low and behind the animal, one knee on frozen ground, closer than you should be able to be.\n\nThe shadow-twin of Memory answers again — barely. It reforms thin and cold in your grip, less solid than it was, the threads pulling with the effort. You feel Pell two hundred yards south through the bond: her hand on Memory's shaft, a quick tightening, there-and-braced. The wolverine starts to turn. You bring the spear up in the one clean arc Hunter's Strike knows and drive for the back of the neck, where Zone-changed or not, the architecture is the same.\n\nThe blade connects. The wolverine lurches, drops its front legs, and goes down hard onto the downed tree's flank with a sound like a sack of wet clay. It does not rise. Its eyes are open and it is breathing — three breaths, shallow, slowing — and then it is not. Huginn, on the flat stone at the clearing's edge, makes one sound. Once. Low and even. The clearing is quiet after it.\n\nThe resonance-burn runs from your wrist to your elbow now, both arms. The shadow-twin dissolves in your hand. Veth's voice carries from the bank, flat and practical. \"That's the second thing dead on this stretch,\" said Veth. \"Zone reads that. Keep moving.\"\n\n*You feel it settle into you — a new steadiness. (Level 26: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Silas Shadowstepped through the wolverine's own shadow via Afterimage and struck from behind with Hunter's Strike — a partial but lethal blow, the wolverine dead on the frost-hard ground, at real cost to both arms.",
+      "narration": "The wolverine is not dead yet. That is the first thing The Attended End tells you, plainly and without softening — there is still something present in the broad chest, a thread of it, the last margin before the line. You could let it finish on its own. You kneel instead.\n\nDraw Down asks for touch, and you give it one hand on the coarse flank where the fur has not yet gone cold. The living warmth there is almost nothing. You take what is offered — carefully, the way you pour from a nearly-empty vessel, because there is almost nothing left and you have no interest in taking more than the ending has already freed. The burn along your forearms does not vanish. It recedes, the way a fire recedes when you move back from it — the damage still present, the worst edge gone. Your left arm steadies. Your right arm still aches from wrist to elbow, but you can close the hand cleanly.\n\nThe thread in the wolverine goes still. The Attended End notes it — the exact moment, plain and unhurried. You stay a breath past it, hand still on the flank, because that is what the craft is for. Huginn makes one sound from the clearing's edge and goes quiet again. Veth's voice carries across the two hundred yards between you, low and even: she has named the kill's Zone-weight to herself, you can tell, and she is already reading what a second death on this stretch means for your passage.\n\nFrom the south, Pell's voice comes across the distance. She does not shout. She pitches it to carry. \"Still standing?\" she says.",
+      "sceneSummary": "Silas drew the wolverine's last life-force through Draw Down to ease the resonance-burn — a careful taking at the ending's edge. The creature is dead. The party is still separated across two hundred yards of Zone ground.",
       "choices": [
         {
-          "label": "Use Deathsense on the dead wolverine — read what kind of thing it became, and whether the Zone's change in it was its ending or something still unresolved",
+          "label": "Cross back to Pell and Veth now — two hundred yards of frost-hard Zone ground between you; check on the party before anything else",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Examine what the wolverine was working at the base of the downed tree before you leave this clearing",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "order_sense",
+          "trivial": false
+        },
+        {
+          "label": "Use The Attended End on the wolverine now that it has passed — read what kind of thing it was, and what killed it before you arrived here",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "devote"
+          ],
+          "abilityId": "the-attended-end",
+          "trivial": false
+        },
+        {
+          "label": "Ask Huginn directly — it was present for both deaths on this stretch, and it knows when something's ending was made rather than natural",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Examine what the wolverine was working at the base of the downed tree — the unexamined thing is still there",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Signal the party to come up — close the two-hundred-yard gap and let Veth read the clearing before the Zone notices the kill",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "lead"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Tend the resonance-burn on both arms — rest a moment, use the Pine-Tar Salve Tin if needed, and let the shadow-twin's threads settle before calling it again",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "sustain"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": -6,
-        "energy": -10
+        "health": 3,
+        "energy": -3
       },
       "scene": {
-        "setting": "A frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges. Early-spring dawn, flat pale light. The wolverine is dead at the base of the downed tree.",
+        "setting": "Frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges, early-spring dawn, flat pale light. The wolverine is dead at Silas's hand at the base of the downed tree.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Two hundred yards south at the streambed — hand on Memory's shaft, standing, watching."
+            "state": "Two hundred yards south at the streambed — hand on Memory's shaft, voice just carried across the distance: 'Still standing?'"
           },
           {
             "name": "Veth Ondra",
-            "state": "At the far bank, calling across the distance — reading the clearing's implications."
+            "state": "At the far bank — reading the clearing's implications quietly to herself, second death on this stretch noted."
           },
           {
             "name": "Huginn",
-            "state": "On the flat stone at the clearing's edge — made one sound, now still."
+            "state": "On the flat stone at the clearing's edge — made one sound at the moment of death, now still."
           }
         ],
         "objects": [
-          "the Zone-changed wolverine — dead at the base of the downed tree, front legs folded under it",
-          "the downed dead tree — whatever the wolverine was working at its base is still unexamined",
-          "frost-hard ground with clear four-toed impressions",
-          "resonance-burn along both of Silas's forearms — the cost of the novel step and the partial strike"
+          "the Zone-changed wolverine — dead at the base of the downed tree, Silas's hand still on its flank",
+          "the downed dead tree — whatever the wolverine was working at its base remains unexamined",
+          "frost-hard ground with clear four-toed impressions leading to this spot",
+          "resonance-burn along both of Silas's forearms — wrist to elbow, eased but not gone"
         ],
         "threads": [
           "The shadow-twin has dissolved again — Memory's shadow-spear must reform before it can be called",
-          "The resonance-burn now runs both arms — wrist to elbow",
+          "The resonance-burn still runs both arms — wrist to elbow, reduced but present",
           "Whatever the wolverine was working at the base of the downed tree remains unexamined",
           "The party is still separated — two hundred yards of Zone ground between Silas and Pell, Veth, Huginn",
-          "Veth's warning: the Zone reads kills; keep moving"
+          "Veth's warning holds: the Zone reads kills; keep moving"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Made one sound at the wolverine's death — low and even, the ashwarden acknowledgment. Then silence.",
-          "status": "active",
-          "statusNote": "On the flat stone at the clearing's edge — present and attending."
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Called across two hundred yards of Zone ground to check whether Silas is still standing — her voice pitched to carry, not to shout.",
+          "statusNote": "Two hundred yards south at the streambed — hand on Memory's shaft, watching the clearing."
         },
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth Ondra",
-          "note": "Called across the distance to name the kill's Zone-weight — practical, not alarmed. Her second noted death on this stretch.",
-          "status": "active",
-          "statusNote": "At the far bank, two hundred yards south — watching the clearing, reading what a second kill here means."
+          "note": "Noted the second kill on this stretch quietly — reading what it means for the party's passage north.",
+          "statusNote": "At the far bank, two hundred yards south — reading the clearing, second death on this stretch named."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "zone-wolverine-clearing",
-          "label": "The Wolverine Clearing",
-          "kind": "event",
-          "fact": "The Zone-changed wolverine is dead at the base of the downed tree in the clearing two hundred yards north-and-west of the made gate. Veth's read: the Zone notices kills; two in one stretch is a pressure the ground registers.",
+          "topic": "draw-down",
+          "label": "Draw Down — careful taking",
+          "kind": "lore",
+          "fact": "Draw Down can take from a creature at the very edge of death — the last thread before the ending. Taking carefully from so little returns a partial mend only; the cost is real and the margin is narrow.",
           "links": [
-            "what-the-water-remembers",
-            "disputed-zone-left-branch-entrance"
+            "the-attended-end",
+            "what-the-water-remembers"
           ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The Zone-changed wolverine is dead at the base of the downed tree in the frost-hard clearing. Something was being worked at that base — unexamined.",
-          "flag": {
-            "wolverine_dead": true,
-            "downed_tree_base_unexamined": true
-          },
-          "subPlace": {
-            "name": "The Wolverine Clearing",
-            "parent": "Disputed Zone — Left Branch Entrance",
-            "note": "Frost-hard clearing two hundred yards north-and-west of the made gate — wolverine dead here, downed tree at the far side with unexamined workings at its base.",
-            "visited": true
-          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, fast engagement in the clearing — minutes, not more."
+        "why": "a brief attendant moment at the wolverine's death — kneeling, drawing, staying a breath past the ending"
+      },
+      "offer": {
+        "thing": "Huginn's single sound at the exact moment of the wolverine's death — timed, as Huginn's sounds always are, and a comment",
+        "from": "Huginn's nature: it attends endings and knows when they were made rather than natural — and this clearing has now had two"
       }
     },
     "sceneState": {
-      "setting": "A frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges. Early-spring dawn, flat pale light. The wolverine is dead at the base of the downed tree.",
+      "setting": "Frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges, early-spring dawn, flat pale light. The wolverine is dead at Silas's hand at the base of the downed tree.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Two hundred yards south at the streambed — hand on Memory's shaft, standing, watching."
+          "state": "Two hundred yards south at the streambed — hand on Memory's shaft, voice just carried across the distance: 'Still standi"
         },
         {
           "name": "Veth Ondra",
-          "state": "At the far bank, calling across the distance — reading the clearing's implications."
+          "state": "At the far bank — reading the clearing's implications quietly to herself, second death on this stretch noted."
         },
         {
           "name": "Huginn",
-          "state": "On the flat stone at the clearing's edge — made one sound, now still."
+          "state": "On the flat stone at the clearing's edge — made one sound at the moment of death, now still."
         }
       ],
       "objects": [
-        "the Zone-changed wolverine — dead at the base of the downed tree, front legs fol",
-        "the downed dead tree — whatever the wolverine was working at its base is still u",
-        "frost-hard ground with clear four-toed impressions",
-        "resonance-burn along both of Silas's forearms — the cost of the novel step and t"
+        "the Zone-changed wolverine — dead at the base of the downed tree, Silas's hand s",
+        "the downed dead tree — whatever the wolverine was working at its base remains un",
+        "frost-hard ground with clear four-toed impressions leading to this spot",
+        "resonance-burn along both of Silas's forearms — wrist to elbow, eased but not go"
       ],
       "threads": [
         "The shadow-twin has dissolved again — Memory's shadow-spear must reform before it can be called",
-        "The resonance-burn now runs both arms — wrist to elbow",
+        "The resonance-burn still runs both arms — wrist to elbow, reduced but present",
         "Whatever the wolverine was working at the base of the downed tree remains unexamined",
         "The party is still separated — two hundred yards of Zone ground between Silas and Pell, Veth, Huginn",
-        "Veth's warning: the Zone reads kills; keep moving"
+        "Veth's warning holds: the Zone reads kills; keep moving"
       ]
     }
   },
@@ -3116,7 +3101,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Watched the shadow-frame attempt dissolve and stopped her circuit of the gate — question on her face, waiting for what comes next",
         "[d14] Chin came up when the shadow-frame seated — recognition of craft done correctly, in her register.",
         "[d14] Pressed her palm to the right upright and confirmed its weight through ironsense — declined to draw a mark, named her mark as already in the spear.",
         "[d14] Asked what the gate looks like to Order-Sense — received the answer plainly, did not press further.",
@@ -3125,7 +3109,8 @@
         "[d14] Walking at Silas's left shoulder into the Zone — eyes on the ground ahead, Memory across her back.",
         "[d14] Watched Silas's scouting flight without comment — reading his descent as report, not spectacle.",
         "[d14] Held position on the far bank as anchor through the warpling engagement — called Silas's left shoulder at the opening rush, exhaled at the yield.",
-        "[d14] Read the track line's direction without being asked — named it matches the party's heading, plainly and without drama."
+        "[d14] Read the track line's direction without being asked — named it matches the party's heading, plainly and without drama.",
+        "[d14] Called across two hundred yards of Zone ground to check whether Silas is still standing — her voice pitched to carry, not to shout."
       ],
       "knownFacts": [
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
@@ -3146,7 +3131,7 @@
         "ironsense read of the fold's quality through contact-point —"
       ],
       "status": "active",
-      "statusNote": "Moving north-and-west with the party into the Zone — reading the ground ahead.",
+      "statusNote": "Two hundred yards south at the streambed — hand on Memory's shaft, watching the clearing.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -3819,7 +3804,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Made a short sound at the breakthrough — not quite surprise, entirely recognition.",
         "[d14] Drew the ashwarden open-hand mark into the shadow-frame at the gate's left upright — named it plainly as for the ones who come after.",
         "[d14] Confirmed Silas's read of the direction with a single word — she already knew where the threads pointed.",
         "[d14] Received the gate's declaration with a single exhaled 'Good' — the warden's economy of approval.",
@@ -3828,7 +3812,8 @@
         "[d14] Read the sky as Silas descended — warden's instinct, gauging what the flight saw.",
         "[d14] Came up over the bank edge at the fight's close — read the gravel in one look and named that the warpling turned rather than was broken.",
         "[d14] Named the tracks as pre-warpling in nature — heavier, older, walking with confidence or patience. Neither good company.",
-        "[d14] Called across the distance to name the kill's Zone-weight — practical, not alarmed. Her second noted death on this stretch."
+        "[d14] Called across the distance to name the kill's Zone-weight — practical, not alarmed. Her second noted death on this stretch.",
+        "[d14] Noted the second kill on this stretch quietly — reading what it means for the party's passage north."
       ],
       "knownFacts": [
         "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean.",
@@ -3851,7 +3836,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the far bank, two hundred yards south — watching the clearing, reading what a second kill here means.",
+      "statusNote": "At the far bank, two hundred yards south — reading the clearing, second death on this stretch named.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5189,12 +5174,8 @@
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
     "lastGenCount": 621,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "A Wright at the fork — someone who has been at work on something of the party's since they camped last night, and the improvement is…",
-        "from": "The SOMETHING HAPPENS engine event: a Wright improves something of the player's that the player did not want improved and cannot…"
-      },
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
         "from": "What Gweth Callow wants — safe passage for travelers on the March, and for trouble coming south to move without dragging harm back up — a…"
@@ -5210,6 +5191,10 @@
       {
         "thing": "The searching threads in the Zone all point north-and-west — and Huginn's head is tilted the same direction, tracking something…",
         "from": "Huginn knows when a thing is ending and roughly when — its attention on the Zone is purposeful, not ambient curiosity."
+      },
+      {
+        "thing": "Huginn's single sound at the exact moment of the wolverine's death — timed, as Huginn's sounds always are, and a comment",
+        "from": "Huginn's nature: it attends endings and knows when they were made rather than natural — and this clearing has now had two"
       }
     ],
     "wantProgress": {
@@ -6796,22 +6781,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.86458930964053,
-    "cerebral": 10.406600036965637,
-    "social": 7.936203486349093,
-    "generous": 1.8237228744641008,
-    "cautious": 14.196942806284676,
-    "physical": 4.3292487511142195,
-    "risky": 1.284387314065202,
-    "ruthless": 0.5472839141367294,
-    "carousing": 0.45452530768046867,
-    "amorous": 1.670832639181611,
-    "patient": 1.0124742244965104,
-    "stealth": 0.00009770279097767803,
-    "devotion": 1.1044491534364933,
-    "craft": 3.467253518010041,
-    "leadership": 1.5076821964239433,
-    "deception": 0.4678842982793399
+    "strategic": 17.417974576899514,
+    "cerebral": 10.146435036041495,
+    "social": 7.737798399190366,
+    "generous": 2.778129802602498,
+    "cautious": 13.842019236127559,
+    "physical": 5.221017532336364,
+    "risky": 1.252277631213572,
+    "ruthless": 0.5336018162833112,
+    "carousing": 0.44316217498845695,
+    "amorous": 1.6290618232020708,
+    "patient": 0.9871623688840976,
+    "stealth": 0.00009526022120323607,
+    "devotion": 1.076837924600581,
+    "craft": 3.38057218005979,
+    "leadership": 1.4699901415133447,
+    "deception": 0.4561871908223564
   },
   "aptitudes": [
     "strategist",
@@ -6820,7 +6805,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 852,
+  "actionCount": 853,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7210,8 +7195,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785017203218,
-  "rev": 1436,
+  "updatedAt": 1785017418250,
+  "rev": 1437,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9824,12 +9809,12 @@
       "palework": 30,
       "deathsense": 37,
       "shadowstep": 24,
-      "the-attended-end": 39,
+      "the-attended-end": 40,
       "wildcraft": 6,
       "the_raised_thing": 17,
       "the_ended_threat": 5,
       "the_shadow_work": 21,
-      "draw_down": 1,
+      "draw_down": 2,
       "wither": 3,
       "the_grey_road": 1,
       "the_grey_hand": 2,
@@ -9890,7 +9875,8 @@
       "the_warding_mark+the_working_model": 1,
       "afterimage+shadowstep": 1,
       "hunters_strike+shadowstep": 1,
-      "afterimage+hunters_strike": 1
+      "afterimage+hunters_strike": 1,
+      "draw_down+the-attended-end": 1
     },
     "aspirations": [
       {
@@ -9906,7 +9892,7 @@
     ],
     "lastUsed": {
       "deathsense": 25,
-      "the-attended-end": 24,
+      "the-attended-end": 25,
       "order_sense": 25,
       "boundary_stone": 25,
       "palework": 24,
@@ -9926,7 +9912,8 @@
       "braid_deathsense_order_sense": 25,
       "the-declared-threshold": 25,
       "afterimage": 25,
-      "hunters_strike": 25
+      "hunters_strike": 25,
+      "draw_down": 25
     }
   },
   "companionBonds": {
@@ -10418,7 +10405,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 603,
+    "valley": 604,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10579,10 +10566,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-25T22:06:43.215Z",
+      "lastAt": "2026-07-25T22:10:18.247Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 8
+      "beats": 9
     }
   ],
   "company": [
@@ -10829,20 +10816,20 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 224,
-    "choices": 224,
-    "characterDeltas": 92,
-    "scene": 224,
-    "npcUpdates": 202,
+    "sceneSummary": 225,
+    "choices": 225,
+    "characterDeltas": 93,
+    "scene": 225,
+    "npcUpdates": 203,
     "factUpdates": 17,
     "placeUpdates": 40,
-    "codexUpdates": 134,
-    "timeOps": 218,
+    "codexUpdates": 135,
+    "timeOps": 219,
     "imagePrompt": 5,
     "sceneEnded": 54,
     "itemUpdates": 5,
     "questUpdates": 27,
-    "offer": 21,
+    "offer": 22,
     "moveTo": 14,
     "delegateOps": 3,
     "deeds": 4,
@@ -10855,7 +10842,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 224,
+  "_opTurns": 225,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -10863,7 +10850,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 23,
+      "applied": 24,
       "rejected": 0,
       "lastWhy": null
     },

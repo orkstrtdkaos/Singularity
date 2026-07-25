@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 24,
-  "xp": 2324,
+  "xp": 2326,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -152,7 +152,7 @@
   "maxHealth": 145,
   "health": 145,
   "maxEnergy": 215,
-  "energy": 180,
+  "energy": 178,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1885,84 +1885,77 @@
         "player": "Accept — and take the pass seriously: use The Ended Threat to see how he intends to open before he opens it",
         "summary": "Silas reads the Blazeborn man's opening with the Ended Threat — a partial read, late on the detail — and survives the first exchange by a margin. The pass is still live.",
         "narration": "You face him across six feet of packed earth and let the Ended Threat open quietly — not a flare, just a listening. You are not casting at him. You are reading the space between you where his first move will have to travel.\n\nIt comes through in fragments. He leads with his weight on the left foot, and the right shoulder drops before the hand commits. There is a grab intended somewhere in the first beat — not a strike to land, a grip to control. He has done this before and he knows how to set the entry up without showing it. The read is partial, not clean. He is not telegraphing clearly, and some of it resolves late.\n\nThen he moves. The right shoulder drops exactly where the Ended Threat said it would, and you are already turning. The grab finds your arm rather than your collar — not where he wanted it. You pull through, use the motion, and the two of you circle a half-step before the pass resets. Neither of you is down. Neither of you has called it.\n\nPell does not move. Veth does not move. Huginn watches from your shoulder with the professional patience of a bird that has sat beside a great many conclusions and is prepared to wait for this one."
+      },
+      {
+        "player": "Use the reset — step into his blind side with Shadowstep before he can set the grip again",
+        "summary": "Silas reaches for the Shadowstep inside the Zone and arrives wrong — the interference unmoors the geometry and the Blazeborn man puts him on his back cleanly.",
+        "narration": "You reach for the dark.\n\nThe Shadowstep opens — you feel the familiar pull, the step between two touches of shadow, the packed earth on one side and the scrub-dark of the road's edge on the other. But the Zone's interference is not indifferent here. It does not fight you. It simply unmoors the geometry, and the two shadows you are stepping between stop being the same distance apart that they were a breath ago.\n\nYou arrive wrong. Half a step short, your weight forward and already committed, your left foot coming down on nothing solid — the packed earth angles where you did not expect it, and your shoulder is open to him instead of beside him.\n\nHe was already moving. His right hand finds your collar before you have your feet under you, and the grip is exactly what the Ended Threat described and you did not get clear of. He does not throw you hard. He does not need to. He steps through and lets your own misplaced momentum finish the work, and the ground comes up to meet your back with a flat, solid sound that the mist seems to swallow immediately.\n\nYou are down. The morning is very still. Six feet above your face, the Blazeborn man is standing with his hands loose at his sides, waiting. Veth has not moved. Pell has not moved. Huginn watches from your shoulder — or where your shoulder was — with the calm of something that has seen worse landings and will see worse still."
       }
     ],
     "lastTurn": {
-      "narration": "You face him across six feet of packed earth and let the Ended Threat open quietly — not a flare, just a listening. You are not casting at him. You are reading the space between you where his first move will have to travel.\n\nIt comes through in fragments. He leads with his weight on the left foot, and the right shoulder drops before the hand commits. There is a grab intended somewhere in the first beat — not a strike to land, a grip to control. He has done this before and he knows how to set the entry up without showing it. The read is partial, not clean. He is not telegraphing clearly, and some of it resolves late.\n\nThen he moves. The right shoulder drops exactly where the Ended Threat said it would, and you are already turning. The grab finds your arm rather than your collar — not where he wanted it. You pull through, use the motion, and the two of you circle a half-step before the pass resets. Neither of you is down. Neither of you has called it.\n\nPell does not move. Veth does not move. Huginn watches from your shoulder with the professional patience of a bird that has sat beside a great many conclusions and is prepared to wait for this one.",
-      "sceneSummary": "Silas reads the Blazeborn man's opening with the Ended Threat — a partial read, late on the detail — and survives the first exchange by a margin. The pass is still live.",
+      "narration": "You reach for the dark.\n\nThe Shadowstep opens — you feel the familiar pull, the step between two touches of shadow, the packed earth on one side and the scrub-dark of the road's edge on the other. But the Zone's interference is not indifferent here. It does not fight you. It simply unmoors the geometry, and the two shadows you are stepping between stop being the same distance apart that they were a breath ago.\n\nYou arrive wrong. Half a step short, your weight forward and already committed, your left foot coming down on nothing solid — the packed earth angles where you did not expect it, and your shoulder is open to him instead of beside him.\n\nHe was already moving. His right hand finds your collar before you have your feet under you, and the grip is exactly what the Ended Threat described and you did not get clear of. He does not throw you hard. He does not need to. He steps through and lets your own misplaced momentum finish the work, and the ground comes up to meet your back with a flat, solid sound that the mist seems to swallow immediately.\n\nYou are down. The morning is very still. Six feet above your face, the Blazeborn man is standing with his hands loose at his sides, waiting. Veth has not moved. Pell has not moved. Huginn watches from your shoulder — or where your shoulder was — with the calm of something that has seen worse landings and will see worse still.",
+      "sceneSummary": "Silas reaches for the Shadowstep inside the Zone and arrives wrong — the interference unmoors the geometry and the Blazeborn man puts him on his back cleanly.",
       "choices": [
         {
-          "label": "Press the advantage — you know his weight is on the left, take that foot",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "risky"
-          ],
-          "abilityId": null,
-          "trivial": false
-        },
-        {
-          "label": "Hold your ground and read him again — let him come to you a second time",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "defend",
-            "careful"
-          ],
-          "abilityId": "the_ended_threat",
-          "trivial": false
-        },
-        {
-          "label": "Use the reset — step into his blind side with Shadowstep before he can set the grip again",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 20,
-          "intentTags": [
-            "attack",
-            "feint"
-          ],
-          "abilityId": "shadowstep",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Call it even — you both know the pass was real; ask him the lineage question now",
+          "label": "Call it — you're down, the pass is done, and you name it plainly before he has to say it for you",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
-          "abilityId": null,
-          "trivial": false
+          "trivial": true
+        },
+        {
+          "label": "Take a breath and get back up without a word — the terms were first down or first to call it, and you haven't called it",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "endure",
+            "risky"
+          ]
+        },
+        {
+          "label": "Stay down a beat — read him with the Ended Threat again from this angle before you commit to anything",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "the_ended_threat"
+        },
+        {
+          "label": "Look up at him from the ground and laugh — a man who reads lineage in a stranger's face and sets a duel before breakfast deserves acknowledgment",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -1,
-        "xp": 0
-      },
       "scene": {
-        "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Six feet of packed earth between Silas and the Blazeborn man. Both still standing after the first exchange.",
+        "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Silas is flat on his back on packed earth, six feet from the Blazeborn man. The Zone's interference is a felt presence here.",
         "npcsPresent": [
           {
             "name": "Blazeborn traveler",
-            "state": "Circling half a step, weight resettled on the left foot, watching Silas's hands."
+            "state": "Standing above Silas with his hands loose at his sides, waiting — unhurried, no gloating in it."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Unmoving at the road's edge, Memory in carry-grip, eyes on the pass."
+            "state": "Unmoving at the road's edge, Memory in carry-grip, eyes on the pass and on Silas."
           },
           {
             "name": "Veth Ondra",
-            "state": "Two paces right, still as before, reading both fighters and the tree-line."
+            "state": "Two paces right, still, reading the outcome without moving."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, weight forward, watching with unhurried attention."
+            "state": "Perched on the ground near where Silas landed, watching with unhurried attention."
           }
         ],
         "objects": [
@@ -1971,9 +1964,9 @@
           "The thickening mist ahead where the road bends further west"
         ],
         "threads": [
-          "The pass is live — first down or first to call it",
+          "The pass: Silas is down — first down or first to call it was the terms",
           "The Blazeborn man's lineage answer waits for the pass to finish",
-          "The Ended Threat gave a partial read — the grab entry is known but detail resolved late"
+          "Zone interference actively disrupted the Shadowstep — both ends of the geometry shifted"
         ]
       },
       "npcUpdates": [
@@ -1981,40 +1974,66 @@
           "op": "update",
           "npcId": "blazeborn-traveler",
           "name": "Blazeborn traveler",
-          "note": "First exchange complete — his opening grab found Silas's arm, not the collar. Both standing. He is resetting his weight on the left foot, watching.",
-          "learned": [
-            "Leads with weight on the left foot; right shoulder drops before the hand commits — a grip entry, not a strike"
-          ],
+          "role": "Duel opponent, lineage-knower",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Put Silas on his back cleanly when the Shadowstep arrived wrong — the grip he was setting up landed exactly as the Ended Threat described it would. Waiting without ceremony for the call.",
           "skillsObserved": [
-            "controlled grab entry, set up without visible telegraph — resolved only partially by the Ended Threat"
+            "reading a disrupted approach and capitalizing without hesitation",
+            "maintaining his grip-entry through a craft-assisted dodge attempt"
+          ],
+          "status": "active",
+          "statusNote": "Standing over Silas on the left branch road — waiting for the pass to be called."
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Has not moved — Memory in carry-grip, watching the outcome of the pass without intervening.",
+          "status": "active",
+          "statusNote": "On the left branch road — unmoving at the road's edge, Memory in carry-grip."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "disputed-zone-interference",
+          "label": "Disputed Zone Interference",
+          "kind": "lore",
+          "fact": "The Zone's interference does not fight a craft outright — it unmoors the geometry. A Shadowstep inside the Zone entrance arrived half a step short because the two shadow-points stopped being the same distance apart between the casting and the landing. The Zone does not block; it shifts.",
+          "links": [
+            "the-second-thread",
+            "what-the-water-remembers"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A single exchange in the pass — barely a minute of real time"
+        "hoursPassed": 0.1,
+        "why": "A brief exchange — the pass's second beat, fast and physical"
       },
       "_applyFailed": true,
       "_applyFailedOp": "npcUpdates"
     },
     "sceneState": {
-      "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Six feet of packed earth between Silas and the Blazeborn man. Both still standing after the first exchange.",
+      "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Silas is flat on his back on packed earth, six feet from the Blazeborn man. The Zone's interference is a felt presence here.",
       "npcsPresent": [
         {
           "name": "Blazeborn traveler",
-          "state": "Circling half a step, weight resettled on the left foot, watching Silas's hands."
+          "state": "Standing above Silas with his hands loose at his sides, waiting — unhurried, no gloating in it."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Unmoving at the road's edge, Memory in carry-grip, eyes on the pass."
+          "state": "Unmoving at the road's edge, Memory in carry-grip, eyes on the pass and on Silas."
         },
         {
           "name": "Veth Ondra",
-          "state": "Two paces right, still as before, reading both fighters and the tree-line."
+          "state": "Two paces right, still, reading the outcome without moving."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, weight forward, watching with unhurried attention."
+          "state": "Perched on the ground near where Silas landed, watching with unhurried attention."
         }
       ],
       "objects": [
@@ -2023,9 +2042,9 @@
         "The thickening mist ahead where the road bends further west"
       ],
       "threads": [
-        "The pass is live — first down or first to call it",
+        "The pass: Silas is down — first down or first to call it was the terms",
         "The Blazeborn man's lineage answer waits for the pass to finish",
-        "The Ended Threat gave a partial read — the grab entry is known but detail resolved late"
+        "Zone interference actively disrupted the Shadowstep — both ends of the geometry shifted"
       ]
     }
   },
@@ -5087,7 +5106,7 @@
     "lastTickWorldDay": 24,
     "lastCanonWorldDay": 24,
     "lastGenCount": 596,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Huginn turns its head toward the high window at the moment the shadow-duplicate vanishes — not following the light, but listening. There…",
@@ -6678,21 +6697,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.886480567691347,
-    "cerebral": 13.398694907823847,
-    "social": 9.682148943786983,
-    "generous": 2.535807075060433,
-    "cautious": 9.882454936648418,
-    "physical": 0.11978363394421535,
-    "risky": 0.678202545554771,
-    "ruthless": 0.09311480141029063,
-    "carousing": 0.9963570148936185,
-    "amorous": 3.6626031436122672,
-    "patient": 0.8296665206784499,
-    "stealth": 0.00021417258735729035,
-    "devotion": 0.6308755606562004,
-    "craft": 2.968501984735846,
-    "leadership": 1.6031852500047539
+    "strategic": 18.41431855349906,
+    "cerebral": 13.063727535128251,
+    "social": 9.440095220192308,
+    "generous": 2.472411898183922,
+    "cautious": 9.635393563232208,
+    "physical": 1.11678904309561,
+    "risky": 0.6612474819159017,
+    "ruthless": 0.09078693137503337,
+    "carousing": 0.971448089521278,
+    "amorous": 3.5710380650219604,
+    "patient": 0.8089248576614887,
+    "stealth": 0.0002088182726733581,
+    "devotion": 0.6151036716397954,
+    "craft": 2.8942894351174497,
+    "leadership": 1.563105618754635,
+    "deception": 1
   },
   "aptitudes": [
     "strategist",
@@ -6700,7 +6720,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 821,
+  "actionCount": 822,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -7090,8 +7110,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784945404376,
-  "rev": 1366,
+  "updatedAt": 1784945543937,
+  "rev": 1368,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9683,7 +9703,7 @@
       "order_sense": 85,
       "palework": 30,
       "deathsense": 36,
-      "shadowstep": 22,
+      "shadowstep": 23,
       "the-attended-end": 39,
       "wildcraft": 6,
       "the_raised_thing": 15,
@@ -9766,7 +9786,7 @@
       "the_kept_breath": 22,
       "the_raised_thing": 24,
       "light_borne": 23,
-      "shadowstep": 24,
+      "shadowstep": 25,
       "the_shielding_word": 23,
       "marrow-s-wings": 24,
       "ask_the_dead": 24,
@@ -10206,7 +10226,7 @@
   "syncedAt": 1784894591697,
   "teachers": {},
   "regionsKnown": {
-    "valley": 570,
+    "valley": 571,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10351,10 +10371,10 @@
     {
       "id": "sess-13",
       "startedAt": "2026-07-25T02:06:47.275Z",
-      "lastAt": "2026-07-25T02:10:04.371Z",
+      "lastAt": "2026-07-25T02:12:23.930Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -10423,7 +10443,7 @@
   },
   "_intentAsked": null,
   "_turnApplyError": {
-    "at": "2026-07-25T02:10:04.376Z",
+    "at": "2026-07-25T02:12:23.937Z",
     "op": "npcUpdates",
     "isolated": true,
     "message": "Cannot read properties of undefined (reading 'split')",
@@ -10568,15 +10588,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 195,
-    "choices": 195,
+    "sceneSummary": 196,
+    "choices": 196,
     "characterDeltas": 77,
-    "scene": 195,
-    "npcUpdates": 177,
+    "scene": 196,
+    "npcUpdates": 178,
     "factUpdates": 13,
     "placeUpdates": 33,
-    "codexUpdates": 112,
-    "timeOps": 189,
+    "codexUpdates": 113,
+    "timeOps": 190,
     "imagePrompt": 3,
     "sceneEnded": 45,
     "itemUpdates": 5,
@@ -10592,9 +10612,9 @@
     "generateRequest": 8,
     "inventoryAdd": 2,
     "scene_ended": 1,
-    "_applyFailedOp": 3
+    "_applyFailedOp": 4
   },
-  "_opTurns": 195,
+  "_opTurns": 196,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

@@ -335,5 +335,20 @@
     "purpose": "SNG-201: found once, known forever — a braid pairing anyone has already found becomes a global RECIPE; a later finder ADOPTS its name/prose/emergent reach instead of minting a duplicate. The discovery stays theirs (bond, moment, rank-1); the craft is the world's, with first-finder attribution. A NEW store (not emergence_recipes, which is prescriptive) that stays DESCRIPTIVE — never a gate (the SNG-196 regression). Numbers are never shared: tier/levelReq/energy derive from each adopter.",
     "playerVisibleSurface": "When you braid a pairing someone found first, a RECOGNITION moment ('first found by <name> — and now yours too') instead of a creation one; the world learns the crafts you find first, under your name.",
     "whatMakesItFire": "A ripened pairing already present in the cached recipe store (adopt at mint, no authoring call); syncBraidRecipes publishes first-finder braids + adopts any landed meanwhile, riding pushMergedFile (first-PUT-wins, SHA-retry). A stub never promotes."
+  },
+  "death.js": {
+    "purpose": "SNG-209: death as a retrievable STATE, not a delete — a fallen figure enters a death-state at a computed DEPTH (threshold → near-dark → deep-dark → SEALED) that sinks on the world clock while untended, so a loss can be answered for a while and then becomes permanent.",
+    "playerVisibleSurface": "The “THE DEAD WHO ARE NOT GONE” GM block (who can still be reached, and how near the wall they are), and the author-panel return/seal control.",
+    "whatMakesItFire": "worldtick stamps a qualifying (epic-tier) kill into a death-state and runs deepenDeaths on the world count; gm_registry surfaces reachableDeadForGM every turn; authormode enacts a return or a seal. NOTE (SNG-209 follow-up): only epic kills stamp a deathState today, so ordinary dead NPCs read as reachable with no clock."
+  },
+  "encounterFrame.js": {
+    "purpose": "SNG-230: a pure LEGIBILITY layer over GM-narrated encounters — given a def + live state it yields the frame descriptor (KIND fight/chase/hazard/puzzle/standoff, the WIN condition, a 0–100 meter, the three always-named EXITS defeat/flee/fail) plus the pure rules for the finisher system (tier-gated one-beat COLLAPSE, WARD denial, KIT trivialization, and the fight→chase→fight chaining graph). No DOM, no engine calls.",
+    "playerVisibleSurface": "The .enc-frame header above the encounter buttons — the kind icon/title, win condition, meter and the three exits — with the GM narration and freefield staying the real interaction.",
+    "whatMakesItFire": "An active encounter renders through frameModel (app.js) each round; onChoice/sbDeclare consult collapse/ward/trivialize; frameTransition drives fight→chase chaining. Content-driven via encounter_frame_content.json + encounter_frame_kinds.json (ward denials, challenge premises, per-kind copy)."
+  },
+  "feed.js": {
+    "purpose": "SNG-168: the WORLD FEED — a family scrapbook of turns a player DELIBERATELY chose to share (narration + image + world-date + poster rating), appended merge-safe to one shared world/feed.json and rating-lensed on read. Explicitly NOT canon: a post never hydrates into another player’s CONTENT (that is the separate shared-canon path).",
+    "playerVisibleSurface": "The per-turn 📮 Post control and the 📮 Feed screen — other family members’ shared moments, reverse-chron, softened or image-withheld above the viewer’s content ceiling.",
+    "whatMakesItFire": "Posting a turn (buildFeedPost → appendFeedPost via pushMergedFile — the click+confirm IS the per-post consent) and opening the feed (fetchRepoJSON → feedForViewer lenses it). Sync-gated; no PAT → no post."
   }
 }

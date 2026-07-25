@@ -1,0 +1,108 @@
+{
+ "schemaVersion": 1,
+ "id": "seam_ledger",
+ "kind": "tooling_spec",
+ "note": "SNG-232 the Seam Auditor's declared-seam list, authored by Aevi (PO) from THIS session's tickets. Each seam is a REAL producer->consumer contract that broke or is knowingly load-bearing - NOT speculative (the §Guard: a seam check that can't fail is theater; every entry here has a real producer/consumer pair). CCode builds the auditor to check these; the ledger GROWS BY INCIDENT (a future seam bug = one new entry). kinds: field_shape (both ends must agree on TYPE), field_presence (a writer may omit a field a reader assumes -> the reader must floor/guard OR the writer must fill), cross_source (a consumer reads a source a related producer doesn't feed), enum_vocab (op/id vocab must be the SAME set across contract/handler/prompt).",
+ "seams": [
+  {
+   "id": "seam_gen_location_dangerLevel",
+   "kind": "field_presence",
+   "producer": "the location mint (generated locations, _gen path)",
+   "consumer": "dangerOf() / encounter isEligible (engine/random_encounters.js)",
+   "contract": "A location read for encounter-eligibility MUST have a usable dangerLevel. A generated location may omit it; the READER must floor null->1 (SNG-225 §4b) AND the writer should fill it on mint (§4a).",
+   "brokeAs": "SNG-225: gen-waygate had dangerLevel:null -> null read as 0 -> minDanger>0 eliminated all 24 dangerous encounters -> 7/58 eligible, all peaceful. Erik saw 'no encounters on highest setting'.",
+   "checkHint": "flag any location-reader that does arithmetic/comparison on dangerLevel without a null-floor; assert the mint path assigns dangerLevel."
+  },
+  {
+   "id": "seam_gen_location_worldPos",
+   "kind": "field_presence",
+   "producer": "the location authoring/mint",
+   "consumer": "the world-position schema + SNG-180 wiring audit + map/travel readers",
+   "contract": "A location that ships in the manifest MUST have worldPos {colatitude,longitude,depth} and axisVector[12]. A generated or hand-authored location may omit them; the schema+audit must catch it BEFORE ship.",
+   "brokeAs": "Aevi's the_old_warden_post shipped with worldPos/axisVector null -> broke content_ci across 4 commits. The null was 'schema-valid' as absence until SNG-180 caught it late.",
+   "checkHint": "assert every manifest-listed location has non-null worldPos+axisVector at content_ci time, not wiring-audit time (catch earlier)."
+  },
+  {
+   "id": "seam_gen_marker_shape",
+   "kind": "field_shape",
+   "producer": "the location mint (_gen marker)",
+   "consumer": "recordAttention / any _gen reader (app.js)",
+   "contract": "The _gen marker's TYPE must agree: writer sets `_gen:true` (boolean) but a reader guard checked it as an object (presence-not-type). Reader must handle boolean-or-object, or writer must always write the object form.",
+   "brokeAs": "SNG-216: every gen-location has _gen:true (boolean); the guard expected an object -> threw on travel to any gen-place -> aborted the location commit (the desync root).",
+   "checkHint": "flag a reader that does property-access on _gen without a typeof guard; or assert the mint writes a consistent _gen shape."
+  },
+  {
+   "id": "seam_poleIntensity_shape",
+   "kind": "field_shape",
+   "producer": "location content authoring",
+   "consumer": "the location schema (poleIntensity object)",
+   "contract": "poleIntensity MUST be an object {pole:0..1}, never a float. A content author may write a scalar by mistake.",
+   "brokeAs": "Aevi's warden_post wrote poleIntensity as a float -> schema fail. The type was wrong, not the value.",
+   "checkHint": "schema already catches this (object required); the seam entry documents it as a known author-error shape."
+  },
+  {
+   "id": "seam_encounter_offer_source",
+   "kind": "cross_source",
+   "producer": "the random-encounter POOL (pickEncounter/isEligible) + the bestiary",
+   "consumer": "listAvailableEncounters -> the GM's AVAILABLE ENCOUNTERS block (app.js:2010)",
+   "contract": "The GM-offered encounter block MUST draw from the same source the world actually spawns from. It reads location.encounterSeeds (hand-authored) ONLY; the pool+bestiary are a DIFFERENT source the GM never sees.",
+   "brokeAs": "SNG-231: newEncounter/encounterOps fired 0 times in 190 turns - the GM's offer-source is encounterSeeds (mostly empty), disconnected from the pool. The rich pool (225) + bestiary (229) are unreachable via GM offer.",
+   "checkHint": "assert the GM-offer builder reads from the same eligibility source as the tick-path spawn; flag a consumer of encounterSeeds that ignores the pool."
+  },
+  {
+   "id": "seam_discovery_usable",
+   "kind": "cross_source",
+   "producer": "recordDiscovery (writes character.discoveries[])",
+   "consumer": "the intent-parser + skill wheel + resolver (read character.abilities[])",
+   "contract": "A discovery the player can USE must be registered where usability is READ (abilities[]), not only where discoveries are recorded (discoveries[]). recordDiscovery must ALSO register a usable ability.",
+   "brokeAs": "SNG-226: Marrow's Wings landed in discoveries[] not abilities[]; the intent-parser reads abilities[], never saw it, refused the action feasible:false. Player earned a skill the game wouldn't let them cast.",
+   "checkHint": "assert that anything the parser/wheel treats as usable is written to abilities[]; flag a producer of a 'usable' record that writes only to discoveries[]."
+  },
+  {
+   "id": "seam_bestiary_loaded",
+   "kind": "cross_source",
+   "producer": "the manifest (provides.bestiary declaration)",
+   "consumer": "the content LOADER (must read provides.bestiary) + any creatureId reference",
+   "contract": "A manifest key MUST be read by the loader or the content silently doesn't load. provides.bestiary was declared but the loader never read it -> creatureIds don't resolve.",
+   "brokeAs": "SNG-229: content_ci FAILed 'provides.bestiary is a key the loader never reads (SNG-065)' - all 26 creatures declared-but-not-loaded. The weave's creatureIds pointed at unresolvable content.",
+   "checkHint": "content_ci already has the SNG-065 check (manifest key must be loader-read); this seam documents it applies to EVERY new provides.* key."
+  },
+  {
+   "id": "seam_travelTo_is_place",
+   "kind": "field_shape",
+   "producer": "the intent-parser (sets turn.travelTo)",
+   "consumer": "travelIntentOf trusted-path (mints travelTo as a destination, app.js:4425)",
+   "contract": "travelTo MUST be a PLACE, never a PERSON. The parser can set it to a person's name; the resolver's trusted-path mints ANY unmapped travelTo as a phantom place, with only a pronoun-guard (NOT_A_PLACE).",
+   "brokeAs": "SNG-228: 'fly to the brick hall to catch Ossian' set travelTo='Ossian' (a person) -> minted 'Ossian' as a phantom destination ('take the road to Ossian'). The pronoun guard doesn't catch proper-name people.",
+   "checkHint": "assert the travelTo consumer cross-checks against the NPC registry + this-turn's named people before minting a place; flag a place-mint that trusts travelTo without a person-check."
+  },
+  {
+   "id": "seam_aspirations_path",
+   "kind": "field_presence",
+   "producer": "the save (aspirations live at character.practice.aspirations)",
+   "consumer": "any reader looking them up (a top-level character.aspirations read finds nothing)",
+   "contract": "A reader of aspirations MUST read character.practice.aspirations, not character.aspirations (top-level). The nesting is load-bearing; a wrong-path read returns empty and 'proves' absence.",
+   "brokeAs": "Aevi read s['aspirations'] top-level (empty) and wrongly told Erik he had none; they live at practice.aspirations (hunters_strike 2/10). The UI showed them; the wrong-path read denied them.",
+   "checkHint": "documents the canonical path; flag any code/spec reading character.aspirations at top level."
+  },
+  {
+   "id": "seam_op_vocab_triples",
+   "kind": "enum_vocab",
+   "producer": "the GM op contract (gm.js op docs) + the handler set (app.js applyTurn) + SALVAGEABLE_OPS",
+   "consumer": "the model (emits ops) + See-the-Machine (counts emission)",
+   "contract": "Every op must exist in ALL THREE: the prompt contract (so the model knows it), the handler (so it applies), and the tracked vocab (so a false-zero is distinguishable from a dead path). A documented op with no handler, or a handler with no doc, is a silent dead path.",
+   "brokeAs": "SNG-190/179 built the emission tracker precisely because ops drifted between these three sets - 'a built op the model never reaches'. The See-the-Machine NOT-EMITTED panel is the runtime symptom of this seam.",
+   "checkHint": "assert: set(prompt-documented ops) == set(handled ops) == set(tracked vocab); flag any op present in one but not all three (excluding intentionally-internal, marked)."
+  },
+  {
+   "id": "seam_traditionId_vocab",
+   "kind": "enum_vocab",
+   "producer": "the GM (emits markTeacher/standingOps/offerAcquisition with a traditionId)",
+   "consumer": "app.js (resolves traditionId against CONTENT.traditionIndex; silently drops unknowns)",
+   "contract": "A traditionId the GM emits MUST be a real id from THE PEOPLES vocab block, or it's silently discarded. The prompt must SHOW the valid ids (it does, SNG-179) and the handler must not fail-silent without a vocab-miss log.",
+   "brokeAs": "SNG-179: four ops ask the model for a traditionId; app.js silently dropped anything unresolvable, so markTeacher looked emitted-but-inert. The _opVocabMisses capture exists BECAUSE of this seam.",
+   "checkHint": "assert the prompt's traditionId vocab block == CONTENT.traditionIndex ids; the handler logs a vocab-miss (already does) rather than fail-silent."
+  }
+ ],
+ "howItGrows": "Every future seam bug adds ONE entry here (producer, consumer, contract, brokeAs, checkHint) + one check in the auditor. A seam caught once is caught forever. Start with these 11 (the session's real breaks); do NOT pre-enumerate speculative seams (§Guard: a check that can't fail is theater)."
+}

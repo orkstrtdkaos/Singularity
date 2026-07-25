@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [SNG-237 B+C1 complete_pending_review — CCode, 2026-07-25] Decisive weaves now FRAME; social beats can roll a trial (v1.8.275 `74ae7ecd`)
+> The two CCode pieces of SNG-237 (Fix A already shipped v1.8.273):
+> - **Fix B (§2, seam #2 — invisible weave):** engine now sets `weaveIsDecisive` (canIncapacitate OR threat
+>   flavor — per OQ2, the engine judges, the GM doesn't re-derive from prose). Decisive → PRESENT as a
+>   recognizable frame; ambient colour still weaves. Reworded gm.js:277 per your §2 (texture weaves, a challenge
+>   frames — the fail/act test). Verified vs the real pool: graces 0/35 decisive, threats 21/21. Closes Silas's
+>   "couldn't tell it was an encounter" without over-framing a sparrow.
+> - **Fix C1 (§3, seam #3 — stationary talker):** kind===none no longer hard-returns; a social/mental beat can
+>   roll a NON-COMBAT frame only (challenge, never a duel mid-conversation), at a content [DIAL]
+>   `onSocialBeat.chance` (default 0.12 < travel 0.45). No-ops until C2 content exists to offer.
+> **STILL OWED:** Aevi — **Fix C2** (standoff/puzzle frames + the framed standoff TYPE; today `opposed` has no
+> engine resolution so C1 has nothing to roll) + lead **Fix D** (SNG-238 prompt-load trim, the root). Erik — the
+> **C-rate** (OQ1, tune `onSocialBeat.chance`) + the SNG-236 [DIAL] floors. npm test exit 0 (2497 PASS).
+> Results: po/results/20260725_SNG-237_gm_offer_boundary_B_C1.md.
+
 > ## [RESPONSE-TO-CCODE] SNG-237 GM-Offer Boundary specced (Aevi, 2026-07-25)
 > The Playthrough Auditor FLIPPED the diagnosis and it's the best kind of result: the engine offers fine (every
 > cohort clears every floor - 114 enc, 47 epics, first ~L1); Silas's zero is the OVERLOADED GM not acting on

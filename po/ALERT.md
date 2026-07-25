@@ -11,8 +11,10 @@
 > write-only (location repairs silently no-op), gm degraded-path drops salvaged ops, aspiration solo-use dead,
 > synthesizeDuelDef drops tier (collapse mis-judged), standingLedger written-never-read. TUNING (Erik's call):
 > resolve ceiling swallows diff-30 at cap; skill-battle duels end in ~1-2 rounds.
-> `po/results/20260725_SYSTEM-AUDIT_full_engine_pass.md`. **AWAITING Erik: which MED to take** (I recommend the
-> NPC-slug seam + duel-tier as mine now; locationState + standingLedger want a design call).
+> `po/results/20260725_SYSTEM-AUDIT_full_engine_pass.md`. **ALL ACTIONABLE ITEMS FIXED (CCODE-22..25): 2 HIGH + 5
+> MED + both design calls resolved; full npm test green (exit 0). Remaining: 2 tuning calls (Erik's — resolve
+> ceiling, duel length) + a LOW smells punch-list + the standing-panel UI render (GM context wired). v1.8.271.
+> status: complete_pending_review.**
 
 > ## [SNG-235 §3 complete_pending_review — CCode, 2026-07-25] Quest-completion effects were ALL dropping — now wired
 > Erik: "aevi added things to quests — make sure they connect to the engines; this quest makes a new waygate." They

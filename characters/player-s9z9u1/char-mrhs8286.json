@@ -1915,38 +1915,47 @@
         "player": "Tell him plainly what the fold is — a half-made thing, a wright's work stopped fifteen years ago — and ask what exactly he has observed about its ending.",
         "summary": "Silas names the fold plainly — unfinished wright's work, fifteen years standing — and Cael Dorn gives back what he has observed: four visits, a pull that shifts rather than fades, and two weeks ago, sounds from the left branch like a door trying to latch.",
         "narration": "You tell him plainly. The fold in the left branch is not a collapse and it is not a wound. It is unfinished work — a wright's making, stopped fifteen years ago before the close was reached. It has been ending slowly ever since, the way a house ends when the builder walks away mid-roof and the weather moves in. You tell him you came to read it, and then to finish it if the reading says it can be finished.\n\nCael Dorn listens without interrupting. When you are done, he is quiet for a moment, looking at the mist where the road bends west. Then he speaks. He says he first noticed the fold three seasons ago — a pull in the light, a smell like turned earth after rain, in a place that had no earth worth turning. He has come back four times since. Each time, the pull is slightly different. Not weaker and not stronger, he says — different. Like something searching for a shape it has not found yet.\n\nHuginn shifts on the ground near your feet. Cael Dorn looks at it again — the same careful look he gave it when he first named the ending. He says the last time he came, two weeks ago, there were sounds from the left branch at dusk. Not loud. Not animal. He describes them as the sound a door makes when the latch is almost caught — that almost-click, repeated, irregular.\n\nPell speaks from the road's edge, her voice level. 'He is saying it is trying to close on its own,' she says. She is not asking."
+      },
+      {
+        "player": "Ask Cael Dorn if he will come with you to the fold — a man who has watched it four times is worth having at your shoulder",
+        "summary": "Silas asks Cael Dorn to walk with the party to the fold — the veil goes thin for one breath, something old and patient visible in the mist — and he agrees.",
+        "narration": "You look at Cael Dorn in the gray dawn light and ask him plainly. A man who has watched the fold four times, who knows its pull and its sound, is worth more at your shoulder than left standing on the road with a story told and nowhere to put it.\n\nHe does not answer immediately. He looks west toward the mist where the road bends, his arms still loosely folded, and something in his expression shifts — not reluctance, exactly, but the calculation of a man deciding whether a thing that was his alone is still his alone.\n\nThen the veil goes thin.\n\nIt is not a sound, not a light, not anything the Zone has done before in your experience of it. It is simply that for one breath the mist opens slightly — not parts, not clears, but becomes less solid in a way you cannot describe except to say that for that one breath you can see the shape of what is in it. Not the fold itself. Something older than the fold, patient and entirely without threat, the way the space between two stones in a wall is not empty but is what holds the wall. Then the mist closes again and it is gone.\n\nPell does not move. Veth's chin tilts up half a degree, the gesture of someone who recognized what that was. Huginn turns its head away from Cael Dorn for the first time since the account began and looks west.\n\nCael Dorn uncrosses his arms. 'Yes,' he says. 'I will come.'"
       }
     ],
     "lastTurn": {
-      "narration": "You tell him plainly. The fold in the left branch is not a collapse and it is not a wound. It is unfinished work — a wright's making, stopped fifteen years ago before the close was reached. It has been ending slowly ever since, the way a house ends when the builder walks away mid-roof and the weather moves in. You tell him you came to read it, and then to finish it if the reading says it can be finished.\n\nCael Dorn listens without interrupting. When you are done, he is quiet for a moment, looking at the mist where the road bends west. Then he speaks. He says he first noticed the fold three seasons ago — a pull in the light, a smell like turned earth after rain, in a place that had no earth worth turning. He has come back four times since. Each time, the pull is slightly different. Not weaker and not stronger, he says — different. Like something searching for a shape it has not found yet.\n\nHuginn shifts on the ground near your feet. Cael Dorn looks at it again — the same careful look he gave it when he first named the ending. He says the last time he came, two weeks ago, there were sounds from the left branch at dusk. Not loud. Not animal. He describes them as the sound a door makes when the latch is almost caught — that almost-click, repeated, irregular.\n\nPell speaks from the road's edge, her voice level. 'He is saying it is trying to close on its own,' she says. She is not asking.",
-      "sceneSummary": "Silas names the fold plainly — unfinished wright's work, fifteen years standing — and Cael Dorn gives back what he has observed: four visits, a pull that shifts rather than fades, and two weeks ago, sounds from the left branch like a door trying to latch.",
+      "narration": "You look at Cael Dorn in the gray dawn light and ask him plainly. A man who has watched the fold four times, who knows its pull and its sound, is worth more at your shoulder than left standing on the road with a story told and nowhere to put it.\n\nHe does not answer immediately. He looks west toward the mist where the road bends, his arms still loosely folded, and something in his expression shifts — not reluctance, exactly, but the calculation of a man deciding whether a thing that was his alone is still his alone.\n\nThen the veil goes thin.\n\nIt is not a sound, not a light, not anything the Zone has done before in your experience of it. It is simply that for one breath the mist opens slightly — not parts, not clears, but becomes less solid in a way you cannot describe except to say that for that one breath you can see the shape of what is in it. Not the fold itself. Something older than the fold, patient and entirely without threat, the way the space between two stones in a wall is not empty but is what holds the wall. Then the mist closes again and it is gone.\n\nPell does not move. Veth's chin tilts up half a degree, the gesture of someone who recognized what that was. Huginn turns its head away from Cael Dorn for the first time since the account began and looks west.\n\nCael Dorn uncrosses his arms. 'Yes,' he says. 'I will come.'",
+      "sceneSummary": "Silas asks Cael Dorn to walk with the party to the fold — the veil goes thin for one breath, something old and patient visible in the mist — and he agrees.",
       "choices": [
         {
-          "label": "Ask Cael Dorn if he will come with you to the fold — a man who has watched it four times is worth having at your shoulder",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Lead the party west into the left branch — you have your reader and your guide. Move toward the fold.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "travel",
+            "careful"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Ask Huginn directly what it read when Cael named the ending — it has been watching this exchange and its silence has been a comment",
+          "label": "Before you move: ask Huginn plainly what it saw in that breath the veil thinned — it looked away from Cael, which means it looked toward something.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Use Order-Sense to read whether the fold trying to close on its own is working with the design or against it",
+          "label": "Use Order-Sense on the road ahead — read the design of the left branch entrance before you walk into it.",
           "attribute": "mental",
           "subAttribute": "reason",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
+            "scout",
             "study"
           ],
           "abilityId": "order_sense",
@@ -1954,34 +1963,35 @@
           "trivial": false
         },
         {
-          "label": "Thank Cael Dorn for what he has given and move on — you have what you need and the fold is waiting",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Cael one more thing before you walk: the sound he heard two weeks ago — a door trying to latch — was it once, or does it repeat?",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "study"
           ],
+          "abilityId": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Silas is on his feet facing Cael Dorn on packed earth. The Zone's interference is a felt presence here.",
+        "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. The veil thinned for one breath and closed again. All four people and Huginn are on their feet, facing west.",
         "npcsPresent": [
           {
             "name": "Cael Dorn",
-            "state": "Standing with arms loosely folded, eyes moving between Silas and the mist where the road bends west — a man who has given what he came with and is now deciding what to do next."
+            "state": "Standing with his arms uncrossed, facing west — he has agreed to come."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "At the road's edge, Memory in carry-grip — she has just named what Cael's account means, and she is watching Silas for the answer."
+            "state": "At the road's edge, Memory in carry-grip, still watching the mist where the veil thinned."
           },
           {
             "name": "Veth Ondra",
-            "state": "Two paces right, attentive — her expression has shifted slightly since Pell's summary."
+            "state": "Two paces right, chin tilted slightly upward — she recognized what moved through that breath."
           },
           {
             "name": "Huginn",
-            "state": "On the ground near Silas's feet — still, watching Cael Dorn with the unhurried attention it reserves for things it has already read."
+            "state": "Has turned its head away from Cael Dorn and is looking west, toward the fold."
           }
         ],
         "objects": [
@@ -1990,10 +2000,9 @@
           "The thickening mist ahead where the road bends further west"
         ],
         "threads": [
-          "Pell has named aloud that the fold may be trying to close on its own — the implication is hanging in the air",
-          "Huginn has looked at Cael Dorn twice when he named endings — its read has not been asked for",
-          "Cael Dorn's next move is undecided — he has given his account but has not named what he wants to do with it",
-          "The fold and the left branch lie ahead"
+          "Huginn looked away from Cael and toward the fold the moment the veil thinned — its read has not been asked for",
+          "The veil thinned for one breath: something old and patient was visible in the mist and is now gone",
+          "The fold and the left branch lie ahead — the party is assembled and Cael has agreed to walk with them"
         ]
       },
       "npcUpdates": [
@@ -2004,59 +2013,55 @@
           "role": "Blazeborn traveler, southern Plateau line",
           "gender": "man",
           "pronouns": "he/him",
-          "note": "Named the fold's pull in detail — four visits over three seasons, the quality shifting rather than fading, and sounds from the left branch two weeks ago like a door trying to latch.",
+          "note": "Agreed to accompany the party to the fold — his four visits and his read of its self-closing are worth having.",
           "learned": [
-            "Has observed the fold four times over three seasons — the pull shifts quality each visit, never simply weakening",
-            "Two weeks ago heard sounds from the left branch at dusk: irregular, not animal, like a latch almost catching",
-            "Received Silas's plain account of the fold as unfinished wright's work without surprise or contradiction"
+            "Agreed to walk with the party to the left branch fold — the veil thinning at that moment was not lost on him."
           ],
-          "statusNote": "On the left branch road at the Zone entrance — has given his account of the fold and is deciding whether to continue with the party or part ways."
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell Ran Marsh",
-          "note": "Named aloud that Cael's account means the fold is trying to close on its own — a plain summary, not a question.",
-          "statusNote": "On the left branch road inside the Zone entrance — Memory in carry-grip, watching Silas after naming the fold's self-closing attempt."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-second-thread",
-          "label": "The Second Thread",
-          "kind": "mystery",
-          "fact": "Cael Dorn has observed the fold four times over three seasons. The pull changes quality each visit — not fading, shifting. Two weeks ago: sounds like a door trying to latch, irregular, at dusk. Pell's read: it is trying to close on its own.",
-          "links": [
-            "what-the-water-remembers",
-            "millbrook",
-            "pell",
-            "cael-dorn"
-          ]
+          "status": "active",
+          "statusNote": "At the left branch entrance, now walking with the party toward the fold."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange on the road at dawn"
-      }
+        "why": "A brief exchange and the moment the veil thinned — the party is still at the entrance, just now turning west."
+      },
+      "codexUpdates": [
+        {
+          "topic": "the-second-thread",
+          "label": "The Second Thread",
+          "kind": "event",
+          "fact": "Cael Dorn has agreed to accompany the party to the fold. The veil thinned for one breath as he agreed — something old and patient in the mist, neither threat nor welcome, simply present. Huginn looked west rather than at Cael at the same moment.",
+          "links": [
+            "cael-dorn",
+            "what-the-water-remembers",
+            "the-second-thread"
+          ]
+        }
+      ],
+      "offer": {
+        "thing": "The veil thinning — a small grace, something old and patient visible for one breath in the mist",
+        "from": "The SOMETHING HAPPENS roll: the veil goes thin for a moment, without warning, and the player sees something they will not be able to describe — woven in at the natural close of the agreement beat"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. Silas is on his feet facing Cael Dorn on packed earth. The Zone's interference is a felt presence here.",
+      "setting": "Left branch of the March Road, inside the first bend west — early dawn, mist heavy with a mineral-gray cast. The veil thinned for one breath and closed again. All four people and Huginn are on their feet, facing west.",
       "npcsPresent": [
         {
           "name": "Cael Dorn",
-          "state": "Standing with arms loosely folded, eyes moving between Silas and the mist where the road bends west — a man who has give"
+          "state": "Standing with his arms uncrossed, facing west — he has agreed to come."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "At the road's edge, Memory in carry-grip — she has just named what Cael's account means, and she is watching Silas for t"
+          "state": "At the road's edge, Memory in carry-grip, still watching the mist where the veil thinned."
         },
         {
           "name": "Veth Ondra",
-          "state": "Two paces right, attentive — her expression has shifted slightly since Pell's summary."
+          "state": "Two paces right, chin tilted slightly upward — she recognized what moved through that breath."
         },
         {
           "name": "Huginn",
-          "state": "On the ground near Silas's feet — still, watching Cael Dorn with the unhurried attention it reserves for things it has a"
+          "state": "Has turned its head away from Cael Dorn and is looking west, toward the fold."
         }
       ],
       "objects": [
@@ -2065,10 +2070,9 @@
         "The thickening mist ahead where the road bends further west"
       ],
       "threads": [
-        "Pell has named aloud that the fold may be trying to close on its own — the implication is hanging in the air",
-        "Huginn has looked at Cael Dorn twice when he named endings — its read has not been asked for",
-        "Cael Dorn's next move is undecided — he has given his account but has not named what he wants to do with it",
-        "The fold and the left branch lie ahead"
+        "Huginn looked away from Cael and toward the fold the moment the veil thinned — its read has not been asked for",
+        "The veil thinned for one breath: something old and patient was visible in the mist and is now gone",
+        "The fold and the left branch lie ahead — the party is assembled and Cael has agreed to walk with them"
       ]
     }
   },
@@ -5135,12 +5139,8 @@
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
     "lastGenCount": 603,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Huginn turns its head toward the high window at the moment the shadow-duplicate vanishes — not following the light, but listening. There…",
-        "from": "Huginn's established nature — it knows when something is ending, how, and roughly when, and it tracks that without commentary; its…"
-      },
       {
         "thing": "Huginn dropped to Silas's shoulder before the waygate — earlier than usual, heavier than usual. It has not spoken. But it has been…",
         "from": "Huginn attends endings — it knows when a thing is ending, how, and roughly when. It was on the ridgepole before dawn, and it came to the…"
@@ -5156,6 +5156,10 @@
       {
         "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
         "from": "The SOMETHING HAPPENS roll — a Blazeborn tells a true thing about the player within a minute of meeting, without malice, bewildered by the…"
+      },
+      {
+        "thing": "The veil thinning — a small grace, something old and patient visible for one breath in the mist",
+        "from": "The SOMETHING HAPPENS roll: the veil goes thin for a moment, without warning, and the player sees something they will not be able to…"
       }
     ],
     "wantProgress": {
@@ -6728,22 +6732,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.224776773635657,
-    "cerebral": 12.437253445421787,
-    "social": 11.243252243413863,
-    "generous": 2.178431475700331,
-    "cautious": 8.48970377238654,
-    "physical": 0.9839980162624792,
-    "risky": 0.582622308560832,
-    "ruthless": 1.030616974247855,
-    "carousing": 0.8559387279993905,
-    "amorous": 3.146426259913244,
-    "patient": 0.712740208336883,
-    "stealth": 0.00018398888074723944,
-    "devotion": 0.541965196051363,
-    "craft": 2.5501459566175226,
-    "leadership": 1.37724562895055,
-    "deception": 0.8810956933593749
+    "strategic": 15.819157354294765,
+    "cerebral": 12.126322109286242,
+    "social": 11.962170937328516,
+    "generous": 2.1239706888078227,
+    "cautious": 8.277461178076875,
+    "physical": 0.9593980658559171,
+    "risky": 0.5680567508468112,
+    "ruthless": 1.0048515498916586,
+    "carousing": 0.8345402597994057,
+    "amorous": 3.067765603415413,
+    "patient": 0.6949217031284609,
+    "stealth": 0.00017938915872855844,
+    "devotion": 0.5284160661500789,
+    "craft": 2.4863923077020846,
+    "leadership": 1.342814488226786,
+    "deception": 0.8590683010253904
   },
   "aptitudes": [
     "strategist",
@@ -6751,7 +6755,7 @@
     "scholar",
     "tactician"
   ],
-  "actionCount": 827,
+  "actionCount": 828,
   "grantsVersion": 1,
   "reconcileVersion": 20,
   "gallery": [
@@ -7141,8 +7145,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784949761996,
-  "rev": 1379,
+  "updatedAt": 1784949959617,
+  "rev": 1380,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10277,7 +10281,7 @@
   "syncedAt": 1784946301565,
   "teachers": {},
   "regionsKnown": {
-    "valley": 576,
+    "valley": 577,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10422,10 +10426,10 @@
     {
       "id": "sess-13",
       "startedAt": "2026-07-25T02:06:47.275Z",
-      "lastAt": "2026-07-25T03:22:41.980Z",
+      "lastAt": "2026-07-25T03:25:59.601Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 8
+      "beats": 9
     }
   ],
   "company": [
@@ -10639,20 +10643,20 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 201,
-    "choices": 201,
+    "sceneSummary": 202,
+    "choices": 202,
     "characterDeltas": 78,
-    "scene": 201,
-    "npcUpdates": 183,
+    "scene": 202,
+    "npcUpdates": 184,
     "factUpdates": 13,
     "placeUpdates": 33,
-    "codexUpdates": 117,
-    "timeOps": 195,
+    "codexUpdates": 118,
+    "timeOps": 196,
     "imagePrompt": 3,
-    "sceneEnded": 45,
+    "sceneEnded": 46,
     "itemUpdates": 5,
     "questUpdates": 24,
-    "offer": 19,
+    "offer": 20,
     "moveTo": 14,
     "delegateOps": 3,
     "deeds": 2,
@@ -10665,7 +10669,7 @@
     "scene_ended": 1,
     "_applyFailedOp": 7
   },
-  "_opTurns": 201,
+  "_opTurns": 202,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -10673,7 +10677,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 21,
+      "applied": 22,
       "rejected": 0,
       "lastWhy": null
     },

@@ -316,7 +316,7 @@ export function isPartnerAdjacent(n, rules = null) {
 
 /** Registry block for the GM: people relevant to this scene/location first, then
  *  the strongest other bonds. The GM must treat these as established fact. */
-export function npcRegistryForGM(character, { locationId = null, sceneNpcNames = [] } = {}) {
+export function npcRegistryForGM(character, { locationId = null, sceneNpcNames = [], interiority = null } = {}) {
   const reg = character.npcRegistry || {};
   const all = Object.values(reg);
   if (!all.length) return null;
@@ -337,21 +337,43 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
   // which is what was silently severing text mid-word in the first place.
   const focus = new Set((sceneNpcNames || []).map(s => String(s).toLowerCase()));
   const inScene = n => focus.has(String(n.name).toLowerCase());
-  return pick.map(n => {
+  // SNG-233 §2b: a key NPC's DRIVES (authored interiority, keyed by npc id) OR interiority captured on the
+  // save (§2c). Rendered FROM here so an important person voices their own wants — not agreeable furniture.
+  const interNpcs = interiority?.npcs || {};
+  const driveOf = n => interNpcs[n.id] || (n.interiority && Object.keys(n.interiority).length ? n.interiority : null);
+  let anyDriven = false;
+  const block = pick.map(n => {
     // People actually present in the scene get the full budget; the rest are context, not cast.
     const wide = inScene(n);
     const desc = n.description ? smartClamp(n.description, wide ? 400 : 220) : "";
     const note = n.statusNote ? smartClamp(n.statusNote, wide ? 240 : 140) : "";
     const hist = n.history.slice(wide ? -4 : -2).map(h => smartClamp(h, wide ? 240 : 160));
     const facts = n.knownFacts.slice(wide ? -6 : -3).map(f => smartClamp(f, 160));
+    const d = driveOf(n);
+    let driveLine = "";
+    if (d) {
+      anyDriven = true;
+      // Full drives for someone in the scene (they act this beat); a one-line summary for offstage context.
+      driveLine = wide
+        ? ` ⟡ DRIVEN — render them FROM this, not as an agreeable mirror: ${d.driveSummary || ""}` +
+          (d.wants?.length ? ` WANTS (can pull against you): ${d.wants.join(" ")}` : "") +
+          (d.fears?.length ? ` FEARS: ${d.fears.join(" ")}` : "") +
+          (d.pushesBackWhen?.length ? ` PUSHES BACK WHEN: ${d.pushesBackWhen.join(" ")}` : "") +
+          (d.emotionalRange ? ` RANGE: ${d.emotionalRange}` : "") +
+          (d.acknowledgeTone ? ` TONE (earned approval; sharp when crossed): ${d.acknowledgeTone}` : "")
+        : ` ⟡ DRIVEN: ${d.driveSummary || (d.wants || [])[0] || "has their own wants"}`;
+    }
     return `- ${n.name}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
       (n.bondType && n.bondType !== "platonic" ? ` BOND: ${relationshipLabel(n)} — established fact; honor the KIND of this relationship.` : "") +
       (desc ? ` ${desc}` : "") +
       (note ? ` CURRENT SITUATION: ${note}.` : "") +
       (n.skillsObserved.length ? ` Skills seen: ${n.skillsObserved.join(", ")}.` : "") +
       (facts.length ? ` What they know/have experienced: ${facts.join("; ")}.` : "") +
-      (hist.length ? ` History with ${character.name}: ${hist.join(" | ")}` : "");
+      (hist.length ? ` History with ${character.name}: ${hist.join(" | ")}` : "") +
+      driveLine;
   }).join("\n");
+  // Append the directive ONLY when a driven NPC is actually in the block — it's the lever that makes drives fire.
+  return anyDriven && interiority?.drivenNpcDirective ? `${block}\n\n${interiority.drivenNpcDirective}` : block;
 }
 
 /** Cleanup migration: merge duplicate registry entries (same person under

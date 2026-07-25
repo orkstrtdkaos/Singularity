@@ -262,6 +262,28 @@ check("legacy relationships migrate", legacy.npcRegistry["water-keeper"]?.name =
     /npc-registry-id-backfill/.test(rec) && /n\.id = key/.test(rec));
 }
 
+// --- SNG-233 §2b: a key NPC renders FROM their authored drives, not as agreeable furniture ---
+// Erik: "Pell & Veth are dull — no opinions, agreeable furniture." The interiority overlay (wants/fears/
+// pushesBackWhen) folds into the GM NPC block for a driven NPC in scene, and the drivenNpcDirective (the lever
+// that makes drives FIRE — ups AND downs, regard you can lose/regain) is appended only when one is present.
+{
+  const interiority = { npcs: { pell: { driveSummary: "possessive of what's hers", wants: ["his undivided attention"], fears: ["being second"], pushesBackWhen: ["his attention goes elsewhere — she gets JEALOUS, confronting not sulking"], emotionalRange: "runs hot in both directions", acknowledgeTone: "spare and physical" } }, drivenNpcDirective: "Render driven NPCs FROM their wants; an important person whose regard you can LOSE and REGAIN is alive." };
+  const c = { name: "Silas", npcRegistry: {
+    pell: { id: "pell", name: "Pell", role: "blacksmith", relationship: 10, bondType: "romantic", bondStage: "partner", status: "active", history: [], knownFacts: [], skillsObserved: [], lastSeen: { locationId: "forge" } },
+    bob: { id: "bob", name: "Bob", role: "farmer", relationship: 2, status: "active", history: [], knownFacts: [], skillsObserved: [], lastSeen: { locationId: "forge" } }
+  } };
+  const block = npcRegistryForGM(c, { locationId: "forge", sceneNpcNames: ["Pell"], interiority });
+  const pellLine = block.split("\n").find(l => l.includes("Pell")) || "";
+  check("SNG-233 §2b: a driven NPC renders FROM their wants/fears/pushback (not agreeable furniture)",
+    /⟡ DRIVEN/.test(pellLine) && /JEALOUS/.test(pellLine) && /undivided attention/.test(pellLine));
+  check("SNG-233 §2b: the drivenNpcDirective is appended when a driven NPC is in the block (the lever fires)",
+    block.includes("regard you can LOSE and REGAIN"));
+  check("SNG-233 §2b: a NON-driven NPC (no interiority) stays plain — no bloat, no fabricated drives",
+    !/⟡ DRIVEN/.test(block.split("\n").find(l => l.includes("Bob")) || ""));
+  check("SNG-233 §2b: with NO interiority doc the block is unchanged (backward-safe, no directive)",
+    !/⟡ DRIVEN/.test(npcRegistryForGM(c, { locationId: "forge", sceneNpcNames: ["Pell"] })));
+}
+
 // --- place memory ---
 const traveler3 = {};
 notePlaceVisit(traveler3, "millbrook", 1);
@@ -7886,7 +7908,7 @@ await (async () => {
   const manifest = JSON.parse(readFileSync(join(root, "content/packs/valley/manifest.json"), "utf8"));
   check("229 §2a: the manifest WHITELISTS the bestiary (or it silently does not exist)", (manifest.provides.bestiary || []).includes("bestiary.json"));
   const stateSrc229 = readFileSync(join(root, "engine/state.js"), "utf8");
-  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /bestiary, traditionMotivations, encounterFrameContent/.test(stateSrc229) && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
+  check("229 §2a: loadContent loads it into CONTENT.bestiary + merges the synthesized monsters into the pool", /const bestiaryP = jSettled\(\(valley\.provides\.bestiary/.test(stateSrc229) && /bestiary, traditionMotivations,[^\n]*encounterFrameContent/.test(stateSrc229) && /bestiaryEncounters\(bestiary\)/.test(stateSrc229));
 
   // §2b: every creature becomes a danger-gated DUEL encounter — the fight pool finally has monsters.
   const monsters = bestiaryEncounters(bestiary);
@@ -7951,7 +7973,7 @@ await (async () => {
   const tmDoc = JSON.parse(readFileSync(tmPath, "utf8"));
   check("229 §2c: the manifest WHITELISTS tradition_motivations (its own content type, not lore)", (manifest.provides.tradition_motivations || []).includes("tradition_motivations.json"));
   check("229 §2c: loadContent loads it into CONTENT.traditionMotivations (parallel to the bestiary loader)",
-    /const traditionMotivationsP = jSettled\(\(valley\.provides\.tradition_motivations/.test(stateSrc229) && /traditionMotivations, encounterFrameContent/.test(stateSrc229));
+    /const traditionMotivationsP = jSettled\(\(valley\.provides\.tradition_motivations/.test(stateSrc229) && /traditionMotivations,[^\n]*encounterFrameContent/.test(stateSrc229));
   // the SELECTOR: bounded to who's in play, deduped, dread resolved to a creature name, villainy GM-eyes
   const dreadCreature = tmDoc.traditions.ashwarden?.dreads?.creature;
   const sel = traditionMotivationsForGM(tmDoc, ["ashwarden", "cogitant", "ashwarden", "not_a_tradition"], { bestiary, labelOf: id => id });

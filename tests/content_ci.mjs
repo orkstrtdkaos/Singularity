@@ -22,7 +22,7 @@ const check = (label, cond, detail = "") => cond ? ok(label) : fail(label + (det
 // this set is content the engine cannot see — exactly what bit quests. Keep in sync with state.js.
 const HANDLED = {
   core: new Set(["spectrums", "rules", "abilities", "items"]),
-  valley: new Set(["locations", "npcs", "events", "companions", "lore", "encounters", "items", "quests", "tradition_arcs", "npc_quests", "bestiary", "tradition_motivations"]),
+  valley: new Set(["locations", "npcs", "events", "companions", "lore", "encounters", "items", "quests", "tradition_arcs", "npc_quests", "bestiary", "tradition_motivations", "npc_interiority"]),
 };
 
 const PACKS = [

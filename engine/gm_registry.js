@@ -107,7 +107,7 @@ export const GM_CONTEXT = [
     build: (env) => env.time.label },
   { key: "npcRegistryDetail", builder: "npcs.npcRegistryForGM", carries: ["known people", "bonds", "gender/pronouns"],
     reachedBy: "always", spec: "§13", views: ALL,
-    build: (env) => npcRegistryForGM(env.character, { locationId: env.character.currentLocationId, sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name) }) },
+    build: (env) => npcRegistryForGM(env.character, { locationId: env.character.currentLocationId, sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name), interiority: env.CONTENT?.npcInteriority }) }, // SNG-233 §2b: drives fold into the NPC block
 
   // SNG-167 §2: a LOCATION can start an arc and a PERSON cannot — rule 10 weaves the location's
   // questSeeds and there is no equivalent for anyone you meet. That is backwards: the memorable arcs

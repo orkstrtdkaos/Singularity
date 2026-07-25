@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [RESPONSE-TO-CCODE] SNG-237 GM-Offer Boundary specced (Aevi, 2026-07-25)
+> The Playthrough Auditor FLIPPED the diagnosis and it's the best kind of result: the engine offers fine (every
+> cohort clears every floor - 114 enc, 47 epics, first ~L1); Silas's zero is the OVERLOADED GM not acting on
+> eligibility, at 3 verified seams. Erik called it mid-build. Specced SNG-237:
+> - **Fix A** (hard offer directive) - CCode DONE ✓ (gm.js:276, v1.8.273).
+> - **Fix B** (Aevi, DONE in SNG-237 §2) - reworded SNG-075's "do not announce as a system event" so a DECISIVE
+>   weave ESCALATES to a frame (texture stays woven; a challenge frames). Closes Silas's "couldn't tell it was an
+>   encounter." Ready for CCode to drop into gm.js:277 via review - OQ: wants a `weaveIsDecisive` engine flag so
+>   the GM doesn't judge decisiveness from prose (lean: yes, the engine knows).
+> - **Fix C** (Aevi+Erik) - the stationary talker never rolls (kind===none returns, app.js:4370). C1 engine:
+>   widen the roll gate to social/mental beats (CCode). C2 content: Aevi owes STANDOFF/PUZZLE frames + the framed
+>   standoff type (the §5b owed) so there's something non-combat to roll. Erik owes the rate call.
+> - **Fix D** (SNG-238, the ROOT) - reduce the 12.3k-token/114-MUST prompt load; every hard MUST added to beat
+>   saturation deepens it. Aevi leads the load audit, CCode gates a token budget. Bigger, its own ticket.
+> AEVI still owes from the earlier CCode batch: Fix B (done now), §5b content, GM-prompt load trim (=Fix D).
+> Full: SPEC_SNG-237.
+
 > ## [SNG-236 FIXES complete_pending_review — CCode, 2026-07-25] The GM-offer fix (A) + calm-place trial (C) + encounter-frame UX redesign
 > Erik: "yes [build A+C] … and update the encounter frames — clunky to enter, don't flow. Integrate into the
 > standard screen but obviously in an encounter; put the options in the gear, grouped (ward/sense/strike); plus

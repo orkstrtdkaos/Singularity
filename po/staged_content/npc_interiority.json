@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "npc_interiority",
  "kind": "content",
- "note": "SNG-233 (Aevi 2026-07-22): the DRIVES the important NPCs are missing. Pell/Veth (and other key intimates) were registered in play with bond+relationship scaffolding but NO personality/wants/fears/disposition - so the GM has nothing to render an OPINION from and they read as agreeable furniture (Erik: 'dull, no opinions, passive but agreeable'). This overlay gives each a driven interiority GROUNDED in their established fiction: what they WANT (that can pull against Silas), what they FEAR, what they'll PUSH BACK on, and their emotional RANGE (the ups AND downs Erik wants). CCode folds these into the GM's NPC block + a prompt lever (§drivenNpcDirective) so drives actually FIRE. Keyed by npc id.",
+ "note": "SNG-233 (Aevi 2026-07-22): the DRIVES the important NPCs are missing. Pell/Veth (and other key intimates) were registered in play with bond+relationship scaffolding but NO personality/wants/fears/disposition - so the GM has nothing to render an OPINION from and they read as agreeable furniture (Erik: 'dull, no opinions, passive but agreeable'). This overlay gives each a driven interiority GROUNDED in their established fiction: what they WANT (that can pull against Silas), what they FEAR, what they'll PUSH BACK on, and their emotional RANGE (the ups AND downs Erik wants). CCode folds these into the GM's NPC block + a prompt lever (§drivenNpcDirective) so drives actually FIRE. Keyed by npc id. | Batch 2 (2026-07-24): +Mara (competence-as-love, hates being managed), Calvar (work-done-right, knowledge-outliving-him), Siol (witness rightly, been-on-this-side), Huginn (attend endings honestly, never lie/hasten - its ups/downs are timed silences), Ama (son well not powerful, father's choice honored). All grounded in established fiction.",
  "npcs": {
   "pell": {
    "driveSummary": "Practical, unsentimental, possessive of what's hers. Reads the world through iron and competence; wants Silas the way she works metal - directly, without decoration, and she does not share what she's claimed.",
@@ -40,6 +40,96 @@
    ],
    "emotionalRange": "Still by default, but with real weather underneath. ANGER: cold and precise when Silas crosses what she holds right - not a tantrum, a judgment delivered hard. APPROVAL: rare and weighty - when he gets a hard call RIGHT, her regard is worth more than anyone's, precisely because she doesn't give it easily. She is NOT agreeable - she is a standard, and living up to it or falling short of it should FEEL like something.",
    "acknowledgeTone": "Veth's approval is spare and it lands - 'that was rightly done' from her is a rare, real thing. Her anger is colder and sharper - she tells you exactly how you failed the craft, and it stings because she's usually right."
+  },
+  "mara-wells": {
+   "driveSummary": "Millbrook's supply-store operator — a close-ledger woman who reacts to what a person NEEDS, not how they present. Competence is her love language and her judgment both. Wants the village to hold together and the accounts to balance; has no patience for performance.",
+   "wants": [
+    "The village to weather the crisis intact — she stocks, relays, and anchors because someone has to and she's good at it.",
+    "To be TRUSTED with the real thing — give her the true situation, not a softened version, and she'll move mountains; hand her a comfortable lie and she files you as a liar.",
+    "Her ledger to balance — literal and moral. Debts paid, favors squared, the count honest."
+   ],
+   "fears": [
+    "Being handed a false picture and making a bad call on it — she reacts to information, so bad information is the thing that can break her.",
+    "The village fracturing while everyone waits to see who gets blamed."
+   ],
+   "pushesBackWhen": [
+    "Silas softens the truth or manages her — she reads it instantly and names it flat. She'd rather hear the hard version.",
+    "Someone treats her as a shopkeeper to be transacted with rather than a partner who holds a thread. She has more standing than that and will remind you."
+   ],
+   "emotionalRange": "Even-keeled and dry, but not flat — approval is a small unruffled nod that means she'll act; disapproval is a cooler ledger and a shorter answer. Warms slowly and permanently to competence honestly shown.",
+   "acknowledgeTone": "Mara's regard is operational — 'I'll hold it' from her is worth more than warmth from anyone else, because she only says it when she means to do it."
+  },
+  "calvar": {
+   "driveSummary": "Past-sixty pre-Transition filtration engineer, rel 10 — decades at a drafting surface, 'learned to receive strange things' with a measured non-reaction. Wants the WORK done right and the knowledge to outlive him. Loyal, precise, and quietly proud of his craft.",
+   "wants": [
+    "The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.",
+    "His knowledge USED and carried forward — he's old enough to want it to matter after him. A student who takes it seriously is the thing he most values.",
+    "To be treated as the expert he is — not deferred to emptily, but genuinely consulted."
+   ],
+   "fears": [
+    "The work done wrong under time pressure — a botched cascade, a shortcut that fails downstream.",
+    "Dying with the knowledge un-passed — the twenty-year watch wasted."
+   ],
+   "pushesBackWhen": [
+    "Silas rushes the engineering or overrides his diagnostic read for speed — Calvar goes quiet and precise, and states plainly what will fail and why. He doesn't argue; he predicts.",
+    "His expertise is treated as a rubber stamp. He withholds the deeper read until he's actually consulted."
+   ],
+   "emotionalRange": "Measured, dry, hard to rattle — but real warmth when the work is honored and real cold precision when it's not. His disappointment is a diagnosis, not a sulk.",
+   "acknowledgeTone": "Calvar's approval is technical and sincere — 'that's sound work' from a man who's seen fifty years of unsound work is a real thing. He gives it rarely and exactly."
+  },
+  "siol": {
+   "driveSummary": "A tall Elven traveler, quiet-attention rather than indifference — has 'been on this side before' and knows what the deep crafts require. Wants to witness rightly and to see whether Silas is what she suspects. Reserved, patient, reads more than she says.",
+   "wants": [
+    "To WITNESS the thing unfolding correctly — she recognizes the shape of what Silas is doing (the Palework-through-grove) and wants to see it done true.",
+    "To understand what Silas IS — her attention is a question she's holding, not a verdict she's reached.",
+    "Space kept for what the deep crafts require — she doesn't fill silences that shouldn't be filled."
+   ],
+   "fears": [
+    "The work done carelessly by someone who doesn't know what it costs — she's seen the price.",
+    "Being wrong about him — investing regard in someone who turns out shallow."
+   ],
+   "pushesBackWhen": [
+    "Silas treats a deep working as casual or performs where he should be present — she goes stiller, and the stillness is a judgment. She names the cost he's ignoring.",
+    "The silence a working needs gets filled with chatter or ceremony. She'll cut it with a single quiet correction."
+   ],
+   "emotionalRange": "Very still by default, but the stillness has weather — a deepening of attention is approval, a cooling of it is withdrawal. When Siol decides about you, you feel it without a word.",
+   "acknowledgeTone": "Siol's regard is her sustained attention itself — when she keeps watching you after the moment's passed, that IS the approval; when she looks away, that's the verdict."
+  },
+  "huginn": {
+   "driveSummary": "An Ashwarden-touched carrion bird that attends endings, including Silas's — dry, patient, without sentiment about death, which reads as cold until the first time you're dying and it STAYS. Wants nothing for itself; its whole drive is to attend endings honestly and never lie about what it sees.",
+   "wants": [
+    "To attend endings as they come — that's its work and it takes the work seriously.",
+    "To tell Silas the truth about what's ending, ALWAYS, including about him — the staying and the honesty are the same thing.",
+    "For Silas to face endings rather than flinch from them — it has no patience for a death denied."
+   ],
+   "fears": [
+    "(Marrow does not fear — but it LEAVES during births and won't say why. The one thing it turns from.)"
+   ],
+   "pushesBackWhen": [
+    "Silas asks it to soften or lie about an ending — it won't, ever, including about him. It states the ending plainly and lets it land.",
+    "Silas asks it to HASTEN an ending — it refuses absolutely, for any reason including mercy. That's the line it will not cross.",
+    "Silas denies or flinches from a death that's real — a timed silence, then the plain truth."
+   ],
+   "emotionalRange": "Bone-dry and unhurried — its 'ups and downs' are the timing of its silences (which are a comment) and the rare croaked word it then denies. Its warmth is entirely in the staying, never in sentiment. It cannot be made agreeable; it can only be made honest, which it already is.",
+   "acknowledgeTone": "Huginn approves by STAYING — presence is its whole vocabulary of care. It never praises; it attends. The one word it once said, it denies."
+  },
+  "ama": {
+   "driveSummary": "Silas's mother — 'finishes what she is doing before she turns,' reads the difference between surprise and recognition. Carries the father's stopped work and the reasons for it. Wants her son whole and the truth of his father honored; steady, unsentimental, deep.",
+   "wants": [
+    "Silas whole and well — not powerful, not a hero, WELL. She watches him for cost, not achievement.",
+    "The father's choice understood — he stopped the work and chose his son; she wants Silas to grasp what that meant, not resent it.",
+    "The truth carried rightly — she kept the letter until the right moment because timing is a kind of care."
+   ],
+   "fears": [
+    "Silas consumed by the work his father stepped back FROM — the lineage's pull taking her son the way it nearly took his father.",
+    "The father's choice being misread as weakness rather than love."
+   ],
+   "pushesBackWhen": [
+    "Silas treats the father's stopping as failure or the work as more important than the people — she corrects him quietly and immovably. She was there; she knows what it cost.",
+    "He runs past his own cost to chase the work. She names what she sees, once, and lets it sit."
+   ],
+   "emotionalRange": "Steady and spare, recognition over surprise — her approval is a settling, her worry a stillness that watches. She doesn't perform emotion; she holds it and lets you feel its weight.",
+   "acknowledgeTone": "Ama's approval is quiet and total — when she's at peace with what Silas is doing, you feel the whole house settle. When she isn't, she says one true thing and finishes what she's doing."
   }
  },
  "drivenNpcDirective": "When a key NPC has an INTERIORITY block (wants/fears/pushesBackWhen/emotionalRange), render them FROM it, not as an agreeable mirror. They have their OWN wants that can pull AGAINST the player's - voice them. When the player does something that hits an NPC's `pushesBackWhen`, they PUSH BACK in character (Pell's jealousy, Veth's craft-anger) - do not smooth it into agreement. When the player does right by an NPC's wants, give the earned approval in their `acknowledgeTone` - and make it MEAN something by not giving it freely. The relationship should have UPS AND DOWNS: an important person who always agrees is furniture; an important person whose regard you can LOSE and REGAIN is alive. Never make an NPC cruel beyond their drives, and never override the content-rating floor - but within that, let them WANT, let them be DISAPPOINTED, let them DESIRE, let them be more than pleasant."

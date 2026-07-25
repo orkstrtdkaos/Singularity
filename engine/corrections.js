@@ -315,8 +315,13 @@ export function applyStateOps(character, ops = [], ctx = {}) {
           else rec[field] = smartClamp(String(to), field === "description" ? 600 : 120);
           target = { field, id: rec.id, name: rec.name };
         } else if (kind === "location") {
-          character.locationState = character.locationState || {};
-          character.locationState[id] = { ...(character.locationState[id] || {}), [field]: smartClamp(String(to), field === "description" ? 600 : 120) };
+          // CCODE-25: a location repair → a durable placeMemory note (READ on return + fed to the GM via
+          // placeMemoryForGM), not the write-only character.locationState store (which reported "the name was
+          // set right" and changed nothing the player or GM ever saw).
+          character.placeMemory = character.placeMemory || {};
+          const pm = character.placeMemory[id] || (character.placeMemory[id] = { visits: 0, notes: [], flags: {} });
+          const note = `[correction] this place's ${field} is: ${smartClamp(String(to), field === "description" ? 300 : 80)}`;
+          if (!pm.notes.includes(note)) pm.notes = [...(pm.notes || []), note].slice(-8);
           target = { field, id };
         } else if (kind === "quest") {
           const q = (character.quests || []).find(x => x.id === slug(String(id || "")) || x.title === id || x.id === id);

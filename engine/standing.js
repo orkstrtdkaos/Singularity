@@ -214,6 +214,13 @@ export function standingRoster(character, rules, { settlements = [] } = {}) {
 /** The GM's view — who regards you how, so a scene can act on it without being told separately. */
 export function standingForGM(character, rules, opts = {}) {
   const roster = standingRoster(character, rules, opts);
-  if (!roster.length) return "";
-  return roster.slice(0, 8).map(s => `${s.holderId} (${s.kind}): ${s.band}`).join(" · ");
+  const bands = roster.length ? roster.slice(0, 8).map(s => `${s.holderId} (${s.kind}): ${s.band}`).join(" · ") : "";
+  // CCODE-25: surface the RECENT reasons regard moved — the ledger's whole purpose ("standing that moves
+  // without a reason the player can read is standing they will not trust"). This was written on every change
+  // (note()) and read by NObody in production. Now the GM can VOICE the why ("the Wrights warmed to you —
+  // you made a gate"), which is the point of tracking it. The player-panel render of the full ledger is a
+  // separate UI surface (a follow-up); this gives the receipts their first real reader.
+  const recent = (character.standingLedger || []).filter(e => e?.text && e.kind === "act").slice(-3);
+  const why = recent.length ? `\n  RECENT SHIFTS (voice the reason if it comes up): ${recent.map(e => e.text).join(" · ")}` : "";
+  return bands + why;
 }

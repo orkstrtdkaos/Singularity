@@ -367,7 +367,14 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         break;
       }
       case "location_state": {
-        if (e.location) { const l = e.location; character.locationState[l] = { ...(character.locationState[l] || {}), change: e.change || null, questId: quest.id }; applied.push({ type: "location_state", location: e.location, change: e.change }); }
+        // CCODE-25: a durable place-change → placeMemory (READ on return + fed to the GM via placeMemoryForGM),
+        // not the write-only character.locationState store (nothing ever read it, so "a place changes" endings
+        // silently did nothing). Falls back to the old store only if the hook is absent.
+        if (e.location && e.change) {
+          if (typeof ctx.recordPlaceChange === "function") { try { ctx.recordPlaceChange(e.location, e.change); } catch { character.locationState[e.location] = { ...(character.locationState[e.location] || {}), change: e.change, questId: quest.id }; } }
+          else { character.locationState[e.location] = { ...(character.locationState[e.location] || {}), change: e.change, questId: quest.id }; }
+          applied.push({ type: "location_state", location: e.location, change: e.change });
+        }
         break;
       }
       // SNG-203 §3 / Phase 2B: a world_arc_quest is a signed PUSH on a greater arc — not a forward-only

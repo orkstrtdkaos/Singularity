@@ -7440,6 +7440,27 @@ await (async () => {
       types235.has("create_waygate") && gateSpec?.name === "The Made Gate" && gateSpec?.connectsTo?.[0] === "the_crossing");
   }
 
+  // CCODE-25 (audit design-call): a location_state quest effect must land in a store with a READER —
+  // placeMemory (read on return + fed to the GM), not the write-only character.locationState. Verify the
+  // effect routes through the ctx.recordPlaceChange hook.
+  {
+    const qd = { id: "loc-eff", name: "L", stages: [], outcomes: [{ id: "o", name: "O", summary: "s", effects: [{ type: "location_state", location: "the_crossing", change: "The old post now flies a new banner." }] }] };
+    const rl = structuredQuestRecord(qd);
+    const cl = { name: "S", quests: [{ ...rl, status: "active", awaitingResolution: true }], peopleDisposition: {}, worldState: {}, worldEvents: [] };
+    let placeChange = null;
+    resolveStructuredQuest(cl, rl.id, "o", { worldDay: 1, recordFact: () => {}, recordEvent: () => {}, recordCodex: () => {}, recordStanding: () => {}, recordPlaceChange: (loc, ch) => { placeChange = { loc, ch }; } });
+    check("CCODE-25: a location_state effect routes to placeMemory via recordPlaceChange (not the dead locationState)",
+      placeChange?.loc === "the_crossing" && /new banner/.test(placeChange?.ch || ""));
+  }
+  // CCODE-25 (audit design-call): the standing ledger (WHY regard moved) was written on every change and read
+  // by NObody in production. Now standingForGM surfaces recent act-receipts so the GM can voice the reason.
+  {
+    const { standingForGM } = await import("../engine/standing.js");
+    const cs = { standingLedger: [{ kind: "seed", text: "birth" }, { kind: "act", people: "wright", text: "The Wrights warmed to you — you made a gate." }] };
+    const g = standingForGM(cs, {}, {});
+    check("CCODE-25: standingForGM surfaces the recent act-receipt reason (the ledger's first real reader)", /made a gate/.test(g) && !/birth/.test(g));
+  }
+
   check("217 §3a: … and in outcome summary + narration array", !rec.outcomes[0].summary.includes(litN) && !rec.outcomes[0].narration[0].includes(litN));
   check("217 §3a: markdown `**` is LEFT for the render layer (intent preserved, not stripped on write)", normalizeProse(`a ${bs}n **bold** b`).includes("**bold**"));
 

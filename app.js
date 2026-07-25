@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.270";
+const APP_VERSION = "1.8.271";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6807,6 +6807,7 @@ function renderStructuredQuestDetail(q) {
       recordCodex: entry => applyCodexUpdates(character, [entry], { day }),
       recordStanding: ops => applyStandingOps(character, ops, { rules: CONTENT.rules, knownPeople: (() => { const k = new Set(Object.keys(CONTENT.traditionIndex?.byId || {})); return k.size ? k : null; })(), day, liaisonMult: liaisonFactions(character) }),
       createWaygate: spec => mintWaygate(spec), // SNG-235: an ending can MAKE a real, travelable waygate (Erik's Second Thread)
+      recordPlaceChange: (locId, change) => applyPlaceUpdates(character, locId, [{ note: change }], { day }), // CCODE-25: a location_state effect lands in placeMemory (READ on return + fed to the GM), not the dead locationState store
     });
     if (r.ok) {
       saveCharacter(character);

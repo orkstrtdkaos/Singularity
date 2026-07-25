@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [READY-FOR-CCODE] SNG-236 Cadence Intent + Playthrough Auditor (Aevi, 2026-07-24)
+> Silas L25 met 0 epics + hit 0 recognizable encounters - a built-but-silent failure no test caught. Two
+> deliverables authored:
+> - **DESIGN_INTENT_cadence.md** (the FIRST design-intent doc) - system-level TESTABLE cadence: encounters
+>   (floor every ~15 turns in danger locs, spans ALL kinds so a cerebral char isn't zero), epics (>=3 by L25,
+>   first by L10, >=1 face-to-face), quest/discovery/teacher floors, all playstyle-relative. Hooked into
+>   SYSTEM_SPEC §2b. Numbers are [DIAL] - ERIK RATIFIES.
+> - **SNG-236 spec** - the playthrough_sim.mjs contract: drive the REAL engine (not a reimpl) headless L1->25,
+>   read live dials from worldtick.js/random_encounters.js (single source of truth), cohorts by playstyle
+>   (social=Silas regression), assert floors, FAIL the build on a violation, localize the break (epic rolled
+>   N/offered 0 = the offer path, ties SNG-231/232). + §5b FINER INCREMENTS where dials are too coarse:
+>   fractional dangerLevel, an epic catch-up/first-meet boost (fixes Silas's flat-rate zero structurally), a
+>   playstyle-weighted encounter term (so a talker gets puzzle/standoff frames not decline-able fights).
+> CCODE: build playthrough_sim against current dials - it SHOULD fail first (reproducing Silas's zero = the
+> harness proving itself); then Erik tunes dials+increments to green; then it gates. ERIK owes: the [DIAL]
+> floors + which increments to add. Full: SPEC_SNG-236 + DESIGN_INTENT_cadence.
+
 > ## [DONE] SNG-235 §4 - all marquee quest ends now change the world (Aevi, 2026-07-24)
 > The 3 remaining marquee quests (reaching_light, name_that_travels, what_grew_in_the_hollow) now carry
 > effects[] + wakes on every outcome, grounded in each ending's text, CI green. Every marquee quest's ending

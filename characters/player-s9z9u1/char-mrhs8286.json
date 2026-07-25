@@ -1891,127 +1891,134 @@
         "player": "Move to intercept — close the distance to the warpling along the streambed before it reaches the alder",
         "summary": "Silas descends from his flight and cuts the warpling off before it reaches the dead alder — the creature is cornered between the party on the bank and the drop of the streambed.",
         "narration": "You come down from the flight in a long, controlled descent — not rushing, picking your line. The warpling is moving east along the dry streambed, close to the far bank, and from above you can read its pattern clearly: short stuttering bursts, three or four feet at a go, then a pause with its too-many legs bunched under it. It has not scented you yet. The dead alder stand is a hundred yards ahead of it.\n\nYou land on the near bank without a sound and move at a low crouching walk along the streambed's edge. The mud is firm enough here — old stone just beneath the surface — and your boots find the quiet line between the loose gravel and the soft patches. The warpling's back is to you. It pauses, legs cycling in that unsettling way, nose working at something in the dry gravel.\n\nBy the time it turns, you are thirty feet away and closing. It sees you. The body locks up for a single breath — and then it moves, fast and wrong, angling toward the alders.\n\nYou get there first. You angle hard left, cutting the distance at a diagonal, and when it jinks toward the dead trees you are already on the line between it and them. It pulls up short on the bank, all six legs braced, a sound rising from it that is less a noise than a pressure behind the teeth.\n\nPell arrives at the streambed's far edge a moment later, Memory leveled, reading the ground the way she reads iron. Behind you, Huginn drops from the sky to a dead branch at the alder's edge and sits very still."
+      },
+      {
+        "player": null,
+        "summary": "The warpling launches from the bank — six-legged, stuttering, fast — and the fight opens on the dry streambed.",
+        "narration": "The warpling moves first.\n\nIt was a hare once — that much is still visible in the long haunches and the twitching nose — but something in the Zone rewrote the rest. Six legs instead of four, the extra pair set too far back, and the way it moves is wrong: not a run but a stutter, each burst covering ground before your eye has finished registering the last position. It is three feet at the shoulder and it is hungry in a way that has nothing to do with its size.\n\nIt comes off the bank at you in a low flat rush, the gravel scattering under all six feet at once.\n\nPell does not flinch. She calls out from the far bank, clear and short, said Pell: \"Left shoulder.\" Memory is still on her back — she is reading the ground, not committing, holding position as anchor.\n\nVeth's footsteps sound on the track behind you — she is close now, coming up fast, but she is not yet at the bank's edge. You will not have her at your side for the first breath of this.\n\nHuginn lifts from the dead branch without sound. It does not flee. It climbs ten feet and holds there, wings spread, watching the warpling with the particular stillness it reserves for things that are close to ending. It is not an omen. It is simply doing its work."
       }
     ],
     "lastTurn": {
-      "narration": "You come down from the flight in a long, controlled descent — not rushing, picking your line. The warpling is moving east along the dry streambed, close to the far bank, and from above you can read its pattern clearly: short stuttering bursts, three or four feet at a go, then a pause with its too-many legs bunched under it. It has not scented you yet. The dead alder stand is a hundred yards ahead of it.\n\nYou land on the near bank without a sound and move at a low crouching walk along the streambed's edge. The mud is firm enough here — old stone just beneath the surface — and your boots find the quiet line between the loose gravel and the soft patches. The warpling's back is to you. It pauses, legs cycling in that unsettling way, nose working at something in the dry gravel.\n\nBy the time it turns, you are thirty feet away and closing. It sees you. The body locks up for a single breath — and then it moves, fast and wrong, angling toward the alders.\n\nYou get there first. You angle hard left, cutting the distance at a diagonal, and when it jinks toward the dead trees you are already on the line between it and them. It pulls up short on the bank, all six legs braced, a sound rising from it that is less a noise than a pressure behind the teeth.\n\nPell arrives at the streambed's far edge a moment later, Memory leveled, reading the ground the way she reads iron. Behind you, Huginn drops from the sky to a dead branch at the alder's edge and sits very still.",
-      "sceneSummary": "Silas descends from his flight and cuts the warpling off before it reaches the dead alder — the creature is cornered between the party on the bank and the drop of the streambed.",
+      "narration": "The warpling moves first.\n\nIt was a hare once — that much is still visible in the long haunches and the twitching nose — but something in the Zone rewrote the rest. Six legs instead of four, the extra pair set too far back, and the way it moves is wrong: not a run but a stutter, each burst covering ground before your eye has finished registering the last position. It is three feet at the shoulder and it is hungry in a way that has nothing to do with its size.\n\nIt comes off the bank at you in a low flat rush, the gravel scattering under all six feet at once.\n\nPell does not flinch. She calls out from the far bank, clear and short, said Pell: \"Left shoulder.\" Memory is still on her back — she is reading the ground, not committing, holding position as anchor.\n\nVeth's footsteps sound on the track behind you — she is close now, coming up fast, but she is not yet at the bank's edge. You will not have her at your side for the first breath of this.\n\nHuginn lifts from the dead branch without sound. It does not flee. It climbs ten feet and holds there, wings spread, watching the warpling with the particular stillness it reserves for things that are close to ending. It is not an omen. It is simply doing its work.",
+      "sceneSummary": "The warpling launches from the bank — six-legged, stuttering, fast — and the fight opens on the dry streambed.",
       "choices": [
         {
-          "label": "Fight it — engage the warpling directly before it recovers its footing",
+          "label": "Press forward — close the distance before it can reset and strike decisively with Memory",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "attack"
+            "attack",
+            "press"
           ],
           "abilityId": "hunters_strike",
           "energyCost": 2,
           "trivial": false,
-          "encounterId": "beast_warpling_hare"
+          "encounterId": "hard-ground"
         },
         {
-          "label": "Read the warpling with Deathsense before committing — know what is already in it",
+          "label": "Hold your ground — let it come to you and read its next stutter before it arrives",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null
-        },
-        {
-          "label": "Hold ground and let Pell close from her side — a pincer, not a charge",
-          "attribute": "practical",
-          "subAttribute": "wits",
           "difficulty": 15,
           "intentTags": [
             "defend",
             "careful"
           ],
           "abilityId": null,
-          "energyCost": null,
           "trivial": false,
-          "encounterId": "beast_warpling_hare"
+          "encounterId": "hard-ground"
         },
         {
-          "label": "Step back and let it go — you came looking for a fight, but this is its territory. Watch where it runs instead.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
+          "label": "Use The Grey Hand — reach out as it closes and drain the speed from it before it can bite",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
-            "scout"
+            "attack",
+            "risky"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null
+          "abilityId": "the_grey_hand",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": "hard-ground"
+        },
+        {
+          "label": "Step back and use The Ended Threat — read the rush and collapse its condition before it completes",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "defend",
+            "plan"
+          ],
+          "abilityId": "the_ended_threat",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": "hard-ground"
         }
       ],
       "scene": {
-        "setting": "The dry streambed, two hundred yards east of the rising track — early-spring morning, flat light, mist burned off. Silas stands on the near bank, thirty feet from the warpling, having cut off its line to the dead alder. The streambed floor is gravel and old stone.",
+        "setting": "The dry streambed, two hundred yards east of the rising track — early-spring morning, flat light. Silas stands on the near bank as the warpling launches its opening rush across the gravel and old stone.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing at the streambed's far edge, Memory leveled, watching the warpling — reading the ground."
+            "state": "Standing at the far bank, Memory still across her back — holding position as anchor, eyes tracking the warpling's line."
           },
           {
             "name": "Veth Ondra",
-            "state": "Coming up along the track behind, warden's pace — not yet at the bank."
+            "state": "Coming up fast along the track behind — footsteps audible, not yet at the bank's edge."
           },
           {
             "name": "Huginn",
-            "state": "Perched on a dead branch at the alder's edge, motionless, watching."
+            "state": "Lifted ten feet above the alder stand, wings spread, watching the warpling with the stillness of a thing attending an ending."
           }
         ],
         "objects": [
           "the dry streambed — gravel and old stone, no water",
           "the stand of dead alder — thirty feet behind the warpling",
-          "the warpling — cornered on the bank, six legs braced, pressure-sound rising from it",
-          "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath — behind and south",
+          "the warpling — airborne in its opening rush, six legs splayed, closing fast",
+          "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath — behind the party to the south-west",
           "deep four-toed tracks along the far bank"
         ],
         "threads": [
-          "The warpling is cornered between Silas and the dead alders — it will move in the next breath",
-          "Veth is not yet at the bank — the fight will begin without her at full position",
-          "Huginn is watching from the alder — its stillness is the particular kind it holds when something is ending"
+          "The warpling has committed to its opening rush — it will arrive in the next breath",
+          "Veth is not yet at the bank — the first round is Silas alone on the near bank",
+          "Huginn is holding above the alder — its stillness marks this as a thing close to ending"
         ]
       },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short flight, descent, and pursuit along the streambed"
+        "why": "a quick sharp engagement opening on the streambed — no more than a few minutes of movement and positioning"
       }
     },
     "sceneState": {
-      "setting": "The dry streambed, two hundred yards east of the rising track — early-spring morning, flat light, mist burned off. Silas stands on the near bank, thirty feet from the warpling, having cut off its line to the dead alder. The streambed floor is gravel and old stone.",
+      "setting": "The dry streambed, two hundred yards east of the rising track — early-spring morning, flat light. Silas stands on the near bank as the warpling launches its opening rush across the gravel and old stone.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at the streambed's far edge, Memory leveled, watching the warpling — reading the ground."
+          "state": "Standing at the far bank, Memory still across her back — holding position as anchor, eyes tracking the warpling's line."
         },
         {
           "name": "Veth Ondra",
-          "state": "Coming up along the track behind, warden's pace — not yet at the bank."
+          "state": "Coming up fast along the track behind — footsteps audible, not yet at the bank's edge."
         },
         {
           "name": "Huginn",
-          "state": "Perched on a dead branch at the alder's edge, motionless, watching."
+          "state": "Lifted ten feet above the alder stand, wings spread, watching the warpling with the stillness of a thing attending an en"
         }
       ],
       "objects": [
         "the dry streambed — gravel and old stone, no water",
         "the stand of dead alder — thirty feet behind the warpling",
-        "the warpling — cornered on the bank, six legs braced, pressure-sound rising from",
+        "the warpling — airborne in its opening rush, six legs splayed, closing fast",
         "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath —",
         "deep four-toed tracks along the far bank"
       ],
       "threads": [
-        "The warpling is cornered between Silas and the dead alders — it will move in the next breath",
-        "Veth is not yet at the bank — the fight will begin without her at full position",
-        "Huginn is watching from the alder — its stillness is the particular kind it holds when something is ending"
+        "The warpling has committed to its opening rush — it will arrive in the next breath",
+        "Veth is not yet at the bank — the first round is Silas alone on the near bank",
+        "Huginn is holding above the alder — its stillness marks this as a thing close to ending"
       ]
     }
   },
@@ -5092,11 +5099,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-25T19:39:48.637Z",
+    "lastSharedReadAt": "2026-07-25T19:54:55.844Z",
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
     "lastGenCount": 619,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "A Wright at the fork — someone who has been at work on something of the party's since they camped last night, and the improvement is…",
@@ -7117,8 +7124,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785009071958,
-  "rev": 1415,
+  "updatedAt": 1785009417513,
+  "rev": 1421,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10318,7 +10325,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 597,
+    "valley": 598,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10479,10 +10486,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-25T19:51:11.956Z",
+      "lastAt": "2026-07-25T19:56:57.511Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -10547,6 +10554,37 @@
           "read-your-flinch"
         ]
       }
+    },
+    "re-beast_warpling_hare": {
+      "schemaVersion": 1,
+      "id": "re-beast_warpling_hare",
+      "type": "duel",
+      "name": "Hard Ground",
+      "tier": "riffraff",
+      "minDanger": 1,
+      "setup": "a warpling — Was a hare. Is now too many legs and a hunger that doesn't match its size, moving in stutters the eye can't track. Fast, erratic, bites what it can't eat; travels in warped warrens.",
+      "lethal": false,
+      "avoidable": true,
+      "fromRandom": true,
+      "flavor": "dangerous",
+      "opponent": {
+        "name": "the aggressor",
+        "health": 4,
+        "threat": 22,
+        "yieldAt": 1,
+        "fleeDifficulty": 15,
+        "spectrum": {
+          "violence_peace": -0.3,
+          "chaos_order": -0.3
+        },
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
+      },
+      "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
   },
   "_intentAsked": null,
@@ -10881,5 +10919,56 @@
   ],
   "_pendingLedger": [],
   "locationState": {},
-  "_applyFailures": null
+  "_applyFailures": null,
+  "activeEncounter": {
+    "defId": "re-beast_warpling_hare",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-beast_warpling_hare",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 4,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 2,
+          "physical": 2,
+          "mental": 2,
+          "social": 2
+        },
+        "energy": 66,
+        "maxEnergy": 66,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 1,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 1,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 66
+    }
+  },
+  "legendGovernor": {
+    "lastDeployDay": 25,
+    "lastBeat": "witness_power"
+  }
 }

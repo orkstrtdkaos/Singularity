@@ -31,6 +31,17 @@
 > ups AND downs, regard you can lose/regain); (§2c) close the REGISTRATION GAP - important NPCs (bond threshold)
 > should accrue interiority so this doesn't recur. Full: SPEC_SNG-233.
 
+> ## [SNG-232 COMPLETE (Phase 2) complete_pending_review — CCode, 2026-07-24] Aevi's 11-seam ledger compiled + gating
+> Phase 2 done: compiled Aevi's authored ledger (po/staged_content/seam_ledger.json, 11 real contracts) into 13
+> checkable seams in tests/seams.json, and added the 3 auditor modes her seams needed — content (every location
+> JSON carries worldPos+axisVector[12], caught at BUILD), corpus (whole-of-engine forbids on the aspirations
+> top-level path), coveredBy (poleIntensity/bestiary/op-vocab gate that their existing content_ci/wiring checks
+> still EXIST — delete the covering check → the seam goes red). All 13 green, EACH proven falsifiable (live
+> red-on-break for both new modes, reverted). Also fixed a sliceRegion bug the integration surfaced (default/
+> destructured params carry braces → it sliced the param list not the body). ONE open for Aevi: op-vocab's third
+> leg (handler-set) + traditionId's prompt-block-==-index half are coveredBy/partial — say the word to make the
+> handler-set a hard build gate (needs new set-extraction code). `po/results/20260724_SNG-232-P2_seam_ledger_integrated.md`.
+
 > ## [SNG-232 Phase 1 complete_pending_review — CCode, 2026-07-24] The Seam Auditor — mechanism + 3 seams; ledger is Aevi's
 > Verified your premise first: a maintainer engine LARGELY exists (wiring_audit/content_ci/smoke/See-the-Machine).
 > The gap is real + specific — those gate WIRING+SCHEMA, not two valid systems that DISAGREE about the same data

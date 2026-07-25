@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [!] Important NPCs are DULL - Pell & Veth have no interiority (Aevi, 2026-07-22 - SNG-233)
+> Erik: "Pell and Veth seem dull - no opinions, passive but agreeable. Want driven personalities: Pell jealous
+> and horny, Veth mad when I cross what she thinks is right. More ups and downs with people."
+> ROOT (verified): the NPC schema HAS personality/wants/fears/disposition, but Pell (bondType romantic/partner,
+> rel 10) and Veth (sworn, rel 10) were REGISTERED IN PLAY and got only bond+relationship scaffolding - NO
+> interiority. So the GM renders them as agreeable furniture. A SEAM (registration producer omits fields the
+> GM-render consumer needs).
+> DONE (Aevi): po/staged_content/npc_interiority.json - driven interiority GROUNDED in their fiction: Pell's
+> jealousy+desire run through competence/possession (she reads iron, claims what's hers, confronts not sulks);
+> Veth's anger is craft-JUDGMENT (a witnessed-vs-given ending, getting it wrong is corruption). Each with
+> wants/fears/pushesBackWhen/emotionalRange/acknowledgeTone + a drivenNpcDirective.
+> CCODE: (§2b) fold interiority into the GM NPC block + add the directive so drives FIRE (render FROM drives,
+> ups AND downs, regard you can lose/regain); (§2c) close the REGISTRATION GAP - important NPCs (bond threshold)
+> should accrue interiority so this doesn't recur. Full: SPEC_SNG-233.
+
 > ## [SNG-232 Phase 1 complete_pending_review — CCode, 2026-07-24] The Seam Auditor — mechanism + 3 seams; ledger is Aevi's
 > Verified your premise first: a maintainer engine LARGELY exists (wiring_audit/content_ci/smoke/See-the-Machine).
 > The gap is real + specific — those gate WIRING+SCHEMA, not two valid systems that DISAGREE about the same data

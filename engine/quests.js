@@ -334,8 +334,21 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         if (e.people && Number.isFinite(e.delta)) { const gain = Math.round(e.delta * (ctx.liaisonMult?.[e.people] || 1)); character.peopleDisposition[e.people] = (character.peopleDisposition[e.people] || 0) + gain; applied.push({ type: "disposition", people: e.people, delta: gain }); }
         break;
       }
-      case "codex_fact": {
-        if (e.text) { pinFact(e.text, e.secret); applied.push({ type: "codex_fact", text: e.text, secret: !!e.secret }); }
+      // SNG-235: a MEANINGFUL ending changes the world — the marquee-quest outcome vocab. Each maps the authored
+      // effect onto the SAME engine store the GM path uses, so an ending DOES what its prose SAYS.
+      case "world_fact": {  // → the fact machinery (factUpdates): a permanent, findable world fact
+        if (e.text) { pinFact(e.text, e.secret); applied.push({ type: "world_fact", text: e.text, permanent: e.permanent !== false }); }
+        break;
+      }
+      case "codex_fact": {  // → the CODEX (codexUpdates). Aevi authors {topic,kind,fact,entityId?}; legacy is {text}.
+        const factText = e.fact || e.text;
+        if (factText) {
+          if (typeof ctx.recordCodex === "function") {
+            try { ctx.recordCodex({ entityId: e.entityId || e.topic || slugify(String(factText).slice(0, 40)), label: e.label || titleizeId(e.topic || ""), kind: e.kind === "person" ? "person" : "lore", fact: factText }); }
+            catch { pinFact(factText, e.secret); }
+          } else pinFact(factText, e.secret);
+          applied.push({ type: "codex_fact", topic: e.topic || null, kind: e.kind || "lore" });
+        }
         break;
       }
       case "world_event": {
@@ -394,7 +407,48 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         xp += Math.max(0, Math.min(60, e.amount | 0)); applied.push({ type: "xp", amount: e.amount | 0 });
         break;
       }
-      default: applied.push({ type: "unknown", raw: e.type });
+      // SNG-235 §3: resolve a personal/greater arc's FATE when the quest that carries it ends.
+      case "arc": {
+        if (e.arcId) {
+          character.worldState = character.worldState || {};
+          character.worldState.arcStages = character.worldState.arcStages || {};
+          const prev = character.worldState.arcStages[e.arcId] || {};
+          character.worldState.arcStages[e.arcId] = { ...prev, fate: e.fate || "resolved", resolvedByQuest: quest.id, note: e.note ? smartClamp(e.note, 400) : (prev.note || null), sinceDay: ctx.worldDay ?? null };
+          applied.push({ type: "arc", arcId: e.arcId, fate: e.fate || "resolved" });
+        }
+        break;
+      }
+      // SNG-235 §3: a quest-ending standing shift → the SAME store (peopleDisposition) the GM's standingOps writes.
+      case "standing": {
+        if (e.people && Number.isFinite(e.delta)) {
+          if (typeof ctx.recordStanding === "function") { try { ctx.recordStanding([{ people: e.people, delta: e.delta, why: e.why }]); } catch { character.peopleDisposition[e.people] = (character.peopleDisposition[e.people] || 0) + e.delta; } }
+          else character.peopleDisposition[e.people] = (character.peopleDisposition[e.people] || 0) + e.delta;
+          applied.push({ type: "standing", people: e.people, delta: e.delta });
+        }
+        break;
+      }
+      // SNG-235 §3: a quest ending NUDGES a greater arc (+1 push) — ties SNG-203/204 net-vector advancement.
+      case "world_arc": {
+        if (e.arc) {
+          character.worldState = character.worldState || {};
+          character.worldState.arcStages = character.worldState.arcStages || {};
+          const prev = character.worldState.arcStages[e.arc] || {};
+          const push = (Number.isFinite(prev.push) ? prev.push : 0) + 1;
+          character.worldState.arcStages[e.arc] = { ...prev, push, sinceDay: ctx.worldDay ?? null, byQuest: quest.id };
+          const ev = { kind: "arc_stage", arcId: e.arc, questId: quest.id, questTitle: quest.title, dir: 1, weight: 1, text: smartClamp(e.note || "A greater arc of the valley shifted.", 800), worldDay: ctx.worldDay ?? null, propagates: true };
+          character.worldEvents.push(ev);
+          if (typeof ctx.recordEvent === "function") { try { ctx.recordEvent(ev); } catch { /* sink */ } }
+          applied.push({ type: "world_arc", arc: e.arc, push });
+        }
+        break;
+      }
+      // SNG-235 seam: an unhandled effect type is content↔engine drift (an ending that does nothing). Make it
+      // LOUD (was a silent "unknown") so the next drift is caught, not swallowed. The seam auditor also gates
+      // it (tests/seams.json → quest-effect-types-handled).
+      default: {
+        if (typeof console !== "undefined") console.warn(`[quest effects] UNHANDLED effect type "${e.type}" — dropped. Add a case in applyQuestEffects or the ending does nothing.`);
+        applied.push({ type: "unknown", raw: e.type });
+      }
     }
   }
   return { applied, xp };

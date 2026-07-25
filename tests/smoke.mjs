@@ -7363,6 +7363,32 @@ await (async () => {
     check("CCODE-21: a well-formed {trad:string} route map is preserved; empty/non-string values dropped",
       good.routes.verist === "say it plainly" && !("lattice" in good.routes) && good.outcomes[0].name === "Keep");
   }
+
+  // SNG-235: a meaningful ENDING changes the world — the marquee-quest outcome effects[] must FIRE. Before this
+  // applyQuestEffects had no case for world_fact/arc/standing/world_arc, so each dropped to "unknown" (the
+  // keystone arc's prose promised proof; the world stayed empty). Each now maps to the real engine store.
+  {
+    const qdef = { id: "sng235-test", name: "T", stages: [], outcomes: [{ id: "finished", name: "Finished", summary: "s", effects: [
+      { type: "world_fact", text: "a gate was made", permanent: true },
+      { type: "arc", arcId: "test_arc", fate: "resolved" },
+      { type: "codex_fact", topic: "the_gate", kind: "lore", fact: "a made gate exists" },
+      { type: "standing", people: "wright", delta: 3, why: "made it" },
+      { type: "world_arc", arc: "the_second_manifestation", note: "the new way manifests" }
+    ] }] };
+    const rec235 = structuredQuestRecord(qdef);
+    const c235 = { name: "S", quests: [{ ...rec235, status: "active", awaitingResolution: true }], peopleDisposition: {}, worldState: {}, worldEvents: [] };
+    const r235 = resolveStructuredQuest(c235, rec235.id, "finished", {
+      worldDay: 10, recordFact: () => {}, recordEvent: () => {}, recordCodex: () => {},
+      recordStanding: ops => { for (const o of ops) c235.peopleDisposition[o.people] = (c235.peopleDisposition[o.people] || 0) + o.delta; }
+    });
+    const types235 = new Set((r235.applied || []).map(a => a.type));
+    check("SNG-235: all four new outcome-effect types FIRE (world_fact/arc/standing/world_arc — none dropped as unknown)",
+      types235.has("world_fact") && types235.has("arc") && types235.has("standing") && types235.has("world_arc") && !types235.has("unknown"));
+    check("SNG-235: standing lands in peopleDisposition (the same store standingWithPeople reads)", c235.peopleDisposition.wright === 3);
+    check("SNG-235: the arc fate is recorded + a greater arc is nudged (world changes, not narrative-only)",
+      c235.worldState.arcStages?.test_arc?.fate === "resolved" && c235.worldState.arcStages?.the_second_manifestation?.push === 1);
+  }
+
   check("217 §3a: … and in outcome summary + narration array", !rec.outcomes[0].summary.includes(litN) && !rec.outcomes[0].narration[0].includes(litN));
   check("217 §3a: markdown `**` is LEFT for the render layer (intent preserved, not stripped on write)", normalizeProse(`a ${bs}n **bold** b`).includes("**bold**"));
 

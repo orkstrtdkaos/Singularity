@@ -134,6 +134,16 @@
       "canFail": "Remove the _opVocabMisses capture: an unresolvable traditionId is dropped silently again (SNG-179 — markTeacher looks emitted, does nothing) -> red."
     },
     {
+      "id": "quest-effect-types-handled",
+      "incident": "SNG-235",
+      "kind": "enum_vocab",
+      "contract": "Every effect TYPE authored on a quest outcome must have a matching case in applyQuestEffects, or the ending silently does NOTHING (falls to default → \"unknown\"). Aevi's marquee-quest vocab (world_fact/arc/standing/world_arc, and codex_fact by its `fact` field) must each be handled — the prose says the world changes; the effect must make it true.",
+      "producer": { "file": "content/packs/valley/quests/the_second_thread.json", "note": "outcome effects[] author types world_fact/arc/codex_fact/standing/world_arc" },
+      "consumer": { "file": "engine/quests.js", "region": "applyQuestEffects" },
+      "assert": { "requires": ["case \"world_fact\"", "case \"arc\"", "case \"standing\"", "case \"world_arc\"", "e\\.fact \\|\\| e\\.text"] },
+      "canFail": "Remove a case (e.g. world_fact/standing) from applyQuestEffects: that authored effect drops to default → \"unknown\" and the ending changes nothing (SNG-235 — the keystone arc's prose promises proof, the world stays empty) -> the pattern vanishes -> red."
+    },
+    {
       "id": "quest-routes-shape",
       "incident": "CCODE-21",
       "kind": "field_shape",

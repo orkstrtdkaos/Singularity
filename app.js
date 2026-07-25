@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.265";
+const APP_VERSION = "1.8.266";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6771,6 +6771,10 @@ function renderStructuredQuestDetail(q) {
       // both sinks land the machine-readable effects[] durably: propagating world-events + pinned facts
       recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day }),
       recordFact: f => applyFactUpdates(character, [{ op: "add", text: f.text }], { day }),
+      // SNG-235 §3: an outcome's codex_fact / standing effects land in the SAME stores the GM path writes,
+      // so a meaningful ending is findable in the codex and moves real people-standing (not narrative-only).
+      recordCodex: entry => applyCodexUpdates(character, [entry], { day }),
+      recordStanding: ops => applyStandingOps(character, ops, { rules: CONTENT.rules, knownPeople: (() => { const k = new Set(Object.keys(CONTENT.traditionIndex?.byId || {})); return k.size ? k : null; })(), day, liaisonMult: liaisonFactions(character) }),
     });
     if (r.ok) {
       saveCharacter(character);

@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 97,
+  "xp": 110,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -54,7 +54,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.0323125,
-    "spectrumId": -0.09960035685537105,
+    "spectrumId": -0.14462033901260252,
     "dark_light": 0.03,
     "emotional_logical": 0.015,
     "violence_peace": 0.04000000000000001,
@@ -64,7 +64,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 58,
+  "energy": 47,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -290,69 +290,86 @@
         "player": "Press I to her while holding g her hips.  Ask her to teach you... have her show you how hip motion can draw light into being.",
         "summary": "On the terrace, Lira demonstrates how hip motion draws light — precise, warm, and real.",
         "narration": "You slide both hands to her hips and press in, deliberate and unhurried, the way she taught you the first hour of the afternoon. She makes a small sound in her throat — not surprise, never that — and her head turns just enough that you catch the corner of her mouth.\n\n\"Teach me,\" you say. \"Show me what your motion does to the light.\"\n\nShe is quiet for a moment. The prism-arcs cross the warm stone in their slow diagonals. Then she moves her hips — a slow, rolling draw, a deliberate arc — and the nearest prism-band bends. Not by much. Enough. The refracted stripe shifts across the coping wall a full handspan and holds there, tracking the motion as if light has decided she is worth following.\n\n\"It isn't about the light,\" she says. Her voice is low and even. \"The light goes where attention goes. You have to mean it.\" She moves again, slower, and the prism-arc follows. Her hands find yours at her hips and she adjusts the angle, a precise correction, the kind she'd give an apprentice — except this is not that, and she knows it, and there is warmth in the precision rather than distance. \"Feel where the motion starts,\" she says. \"Not the surface. Lower. There.\" She presses your hands to show you exactly where she means, and then she moves again, and the light moves with her, and the terrace is very warm, and the count-bell has not yet rung."
+      },
+      {
+        "player": "Use drumming stride as you meet her rhythm.",
+        "summary": "On the Common Hall terrace, the character matched Lira's rhythm with a restrained, economical draw of Drumline Stride — the beat locked in, the prism-arc held, and Lira named it something new.",
+        "narration": "You feel the pull of Drumline Stride the way a craftsman feels a familiar tool — not a reaching after it, but a settling into it. You let the rhythm your body is already keeping find the beat beneath it. The nanite field answers quietly, economically, a hum in the bones of your feet and up through your legs. Not a burst. Not a sprint. Just the deep, steady resonance of a pace locked in.\n\nHer rhythm becomes the tempo and you match it exactly — not following, not leading, the two of you arriving at the same moment together. She feels it. A small sound leaves her, not quite a word, and her hands find the coping wall for a breath. The prism-arc that she had bent and held a handspan out of true shivers once, then steadies again, tracking the shared motion as though the light is listening to both of you now.\n\nThe Stillness Field holds. Below, the district goes about its midday business — someone calls across a light-guide street, a cart rolls on stone — and none of it arrives as more than the dimmest suggestion. The terrace is its own place, warm and self-contained, the valley floor a green-grey stripe in the distance.\n\nLira says nothing for a long moment. When she speaks, her voice is even but not entirely steady. 'That,' she says, 'is not how anyone has ever used that craft before.'"
       }
     ],
     "lastTurn": {
-      "narration": "You slide both hands to her hips and press in, deliberate and unhurried, the way she taught you the first hour of the afternoon. She makes a small sound in her throat — not surprise, never that — and her head turns just enough that you catch the corner of her mouth.\n\n\"Teach me,\" you say. \"Show me what your motion does to the light.\"\n\nShe is quiet for a moment. The prism-arcs cross the warm stone in their slow diagonals. Then she moves her hips — a slow, rolling draw, a deliberate arc — and the nearest prism-band bends. Not by much. Enough. The refracted stripe shifts across the coping wall a full handspan and holds there, tracking the motion as if light has decided she is worth following.\n\n\"It isn't about the light,\" she says. Her voice is low and even. \"The light goes where attention goes. You have to mean it.\" She moves again, slower, and the prism-arc follows. Her hands find yours at her hips and she adjusts the angle, a precise correction, the kind she'd give an apprentice — except this is not that, and she knows it, and there is warmth in the precision rather than distance. \"Feel where the motion starts,\" she says. \"Not the surface. Lower. There.\" She presses your hands to show you exactly where she means, and then she moves again, and the light moves with her, and the terrace is very warm, and the count-bell has not yet rung.",
-      "sceneSummary": "On the terrace, Lira demonstrates how hip motion draws light — precise, warm, and real.",
+      "narration": "You feel the pull of Drumline Stride the way a craftsman feels a familiar tool — not a reaching after it, but a settling into it. You let the rhythm your body is already keeping find the beat beneath it. The nanite field answers quietly, economically, a hum in the bones of your feet and up through your legs. Not a burst. Not a sprint. Just the deep, steady resonance of a pace locked in.\n\nHer rhythm becomes the tempo and you match it exactly — not following, not leading, the two of you arriving at the same moment together. She feels it. A small sound leaves her, not quite a word, and her hands find the coping wall for a breath. The prism-arc that she had bent and held a handspan out of true shivers once, then steadies again, tracking the shared motion as though the light is listening to both of you now.\n\nThe Stillness Field holds. Below, the district goes about its midday business — someone calls across a light-guide street, a cart rolls on stone — and none of it arrives as more than the dimmest suggestion. The terrace is its own place, warm and self-contained, the valley floor a green-grey stripe in the distance.\n\nLira says nothing for a long moment. When she speaks, her voice is even but not entirely steady. 'That,' she says, 'is not how anyone has ever used that craft before.'",
+      "sceneSummary": "On the Common Hall terrace, the character matched Lira's rhythm with a restrained, economical draw of Drumline Stride — the beat locked in, the prism-arc held, and Lira named it something new.",
       "choices": [
         {
-          "label": "Follow her instruction — match her motion, let your attention go where she directs, try to feel the light shift yourself.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Hold the locked rhythm — keep giving her slow, exactly this, until she sets a different pace",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask her what she felt — the craft finding her rhythm, the light answering both of you",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Let the Drumline Stride deepen — push its tempo a single degree, see if she follows",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "study",
+            "romantic",
+            "risky"
+          ],
+          "abilityId": "drumline_stride",
+          "energyCost": 7,
+          "trivial": false
+        },
+        {
+          "label": "Turn her gently — face to face, still in the same tempo — and read what her expression holds",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
             "romantic"
           ],
           "abilityId": "prism_sight",
           "energyCost": 3,
           "trivial": false
-        },
-        {
-          "label": "Stay with her — hands where she placed them, your pace matching hers, no attempt at craft. Let her have the light. Give her the slow she asked for.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask what she means by 'mean it' — what does attention feel like from the inside for a Radiant weaver? Let it be a real question, not just a reason to keep talking.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "When the count-bell rings — take the ledger and go. Keep the east route behind array housing, ledger in hand, Keeper Vael before the window closes.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "careful"
-          ],
-          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -7
+      },
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active. Warm stone, slow prism-arcs crossing the coping wall — one band now shifted a handspan and holding.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active. Warm stone, slow prism-arcs crossing the coping wall — one band now shifted a handspan and holding, steady through the shared motion.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Hands over his at her hips, mid-lesson — voice low and even, the light following her motion."
+            "state": "Hands on the coping wall, steadying herself — voice not quite level after naming what just happened."
           }
         ],
         "objects": [
           "Lower Filtration Ledger — on the terrace stone, within reach",
-          "Low coping wall — warm, slow prism-arcs, one now shifted and held",
+          "Low coping wall — warm, prism-arc shifted and holding",
           "Single worker's bench",
           "Iron exterior staircase — at the terrace corner, warded",
           "Lira's jacket — set aside on the bench",
@@ -360,8 +377,8 @@
         ],
         "threads": [
           "Stillness Field and Boundary-Stone active — the terrace is private while they hold",
-          "Count-bell has not yet rung — the window to reach Keeper Vael is still open",
-          "Lira mid-lesson — showing how intent shapes light, hands over his at her hips"
+          "Count-bell has not yet rung — the window to reach Keeper Vael remains open",
+          "Lira named what just happened as something she has never seen done before — the thread hangs in the warm air"
         ]
       },
       "npcUpdates": [
@@ -369,48 +386,45 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Took his hands and corrected the angle — precise as she would with an apprentice, warm as she is not with apprentices. Demonstrated how hip motion draws a prism-arc. Said: the light goes where attention goes. You have to mean it.",
+          "note": "Felt the Drumline Stride lock into her rhythm — named it aloud as something new, voice not quite steady.",
           "learned": [
-            "Radiant weaving: attention directs light — motion is the vehicle, intent is the mechanism"
+            "Drumline Stride used in synchronized rhythmic rapport — not a sprint, but a shared beat. She named it something no one has done before."
           ],
-          "skillsObserved": [
-            "light-channeling through deliberate hip motion",
-            "teaching by physical correction — exact and warm"
-          ],
+          "skillsObserved": [],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "On the terrace, mid-lesson, hands guiding his — present and precise"
+          "statusNote": "On the terrace, hands on the coping wall, voice steadying after naming what she felt."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "radiant-weaving-attention",
-          "label": "Radiant Weaving — Attention Directs Light",
+          "topic": "drumline-stride-novel-use",
+          "label": "Drumline Stride — Synchronized Rapport",
           "kind": "lore",
-          "fact": "Lira demonstrated that prism-arcs track deliberate motion when genuine attention underlies it — 'the light goes where attention goes.' Motion is the vehicle; intent is the mechanism. A Radiant weaver does not push light; they mean it.",
+          "fact": "Drumline Stride can be used not as a sprint but as a locked shared rhythm — matching another person's tempo exactly, with the nanite field settling into pace rather than burst. Lira named it something she has never seen done before.",
           "links": [
-            "radiant-plateau",
             "lira",
-            "prism_sight"
+            "radiant-plateau"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a slow, unhurried beat on the terrace"
-      }
+        "why": "A brief held moment on the terrace — one exchange, one locked beat."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active. Warm stone, slow prism-arcs crossing the coping wall — one band now shifted a handspan and holding.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active. Warm stone, slow prism-arcs crossing the coping wall — one band now shifted a handspan and holding, steady through the shared motion.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Hands over his at her hips, mid-lesson — voice low and even, the light following her motion."
+          "state": "Hands on the coping wall, steadying herself — voice not quite level after naming what just happened."
         }
       ],
       "objects": [
         "Lower Filtration Ledger — on the terrace stone, within reach",
-        "Low coping wall — warm, slow prism-arcs, one now shifted and held",
+        "Low coping wall — warm, prism-arc shifted and holding",
         "Single worker's bench",
         "Iron exterior staircase — at the terrace corner, warded",
         "Lira's jacket — set aside on the bench",
@@ -418,8 +432,8 @@
       ],
       "threads": [
         "Stillness Field and Boundary-Stone active — the terrace is private while they hold",
-        "Count-bell has not yet rung — the window to reach Keeper Vael is still open",
-        "Lira mid-lesson — showing how intent shapes light, hands over his at her hips"
+        "Count-bell has not yet rung — the window to reach Keeper Vael remains open",
+        "Lira named what just happened as something she has never seen done before — the thread hangs in the warm air"
       ]
     }
   },
@@ -473,7 +487,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] The moment on the bench concluded — mutual, unhurried, honest. She re-composed afterward and named what she wants: the real answer, when he's ready. Then looked to the ledger — pra",
         "[d1] Heard the real answer — who he is, why he has the ledger, who sent him. Named that the filtration numbers felt wrong for weeks but she had no cause to say so. Gave him a warning an",
         "[d1] Named her light-reading skill as the root of how she reads people and movement — extrapolating the arc from the first degree of bend. Stood, retrieved the ledger, and handed it bac",
         "[d1] One last time on the terrace — mutual, unhurried. She re-settled herself with two economical motions and pressed the ledger into his hands, fingers resting a beat too long. Sent him east behind the array housing before the bell finished sounding.",
@@ -482,17 +495,18 @@
         "[d1] Asked for slow — said that's where people get careless if they rush. Eyes stayed forward on the valley; acknowledged entry with a single precise motion.",
         "[d1] Held the pace, held the afternoon, held attention entirely — then reached for the ledger the moment the bell rang. One press of her hand over his before she straightened.",
         "[d1] Received the assurance — the ward set, the terrace made private, the invitation plain. She met it directly: 'Good. I was going to be anyway.'",
-        "[d1] Took his hands and corrected the angle — precise as she would with an apprentice, warm as she is not with apprentices. Demonstrated how hip motion draws a prism-arc. Said: the light goes where attention goes. You have to mean it."
+        "[d1] Took his hands and corrected the angle — precise as she would with an apprentice, warm as she is not with apprentices. Demonstrated how hip motion draws a prism-arc. Said: the light goes where attention goes. You have to mean it.",
+        "[d1] Felt the Drumline Stride lock into her rhythm — named it aloud as something new, voice not quite steady."
       ],
       "knownFacts": [
-        "She has known the filtration numbers felt wrong for weeks without a formal reason to name it",
         "She knows the supervisor's office faces the Common Hall direct path — she's navigated district politics long enough to think in routes",
         "She said the answer was worth waiting for — she received the truth without pulling back from it",
         "Her precision with people is a direct extension of her optics training — she reads arc and angle, not just expression",
         "She thinks in routes through the district instinctively — the supervisor's office angle, the array housing cover",
         "She said he telegraphs clearly — meant as observation, not criticism; she reads him well",
         "She is entirely at ease with candor — gives it and receives it without ceremony.",
-        "Radiant weaving: attention directs light — motion is the vehicle, intent is the mechanism"
+        "Radiant weaving: attention directs light — motion is the vehicle, intent is the mechanism",
+        "Drumline Stride used in synchronized rhythmic rapport — not a sprint, but a shared beat. She named it something no one has done before."
       ],
       "skillsObserved": [
         "practical spatial awareness of district layout",
@@ -503,7 +517,7 @@
         "teaching by physical correction — exact and warm"
       ],
       "status": "active",
-      "statusNote": "On the terrace, mid-lesson, hands guiding his — present and precise",
+      "statusNote": "On the terrace, hands on the coping wall, voice steadying after naming what she felt.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -714,7 +728,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 7
+    "turnsSinceOffer": 8
   },
   "bio": null,
   "subAttributes": {
@@ -916,25 +930,40 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "drumline-stride-novel-use": {
+        "id": "drumline-stride-novel-use",
+        "label": "Drumline Stride — Synchronized Rapport",
+        "kind": "lore",
+        "facts": [
+          "[d1] Drumline Stride can be used not as a sprint but as a locked shared rhythm — matching another person's tempo exactly, with the nanite field settling into pace rather than burst. Lira named it something she has never seen done before."
+        ],
+        "links": [
+          "lira",
+          "radiant-plateau"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "social": 9.579078439222894,
-    "strategic": 6.435025906534823,
-    "cautious": 3.277000897917057,
-    "cerebral": 1.6178569344659106,
-    "physical": 0.8048737134179786,
-    "ruthless": 0.8048737134179786,
-    "generous": 0.8504990947226623,
-    "amorous": 8.44522302734375
+    "social": 10.33960147824232,
+    "strategic": 6.274150258871452,
+    "cautious": 3.19507587546913,
+    "cerebral": 1.577410511104263,
+    "physical": 0.7847518705825292,
+    "ruthless": 0.7847518705825292,
+    "generous": 0.8292366173545958,
+    "amorous": 8.234092451660157
   },
   "aptitudes": [],
-  "actionCount": 23,
+  "actionCount": 24,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785022504544,
-  "rev": 67,
+  "updatedAt": 1785022679573,
+  "rev": 68,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1092,7 +1121,8 @@
       "echo_memory": 4,
       "prism_sight": 9,
       "sonic_resonance": 4,
-      "stillness_field": 1
+      "stillness_field": 1,
+      "drumline_stride": 1
     },
     "coActivations": {
       "prism_sight+sonic_resonance": 2,
@@ -1101,7 +1131,8 @@
     "aspirations": [],
     "lastUsed": {
       "boundary_stone": 25,
-      "stillness_field": 25
+      "stillness_field": 25,
+      "drumline_stride": 25
     }
   },
   "syncedAt": 1783952796030,
@@ -1113,7 +1144,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 20
+    "valley": 21
   },
   "foreclosed": [],
   "company": [],
@@ -1132,23 +1163,23 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-25T23:18:42.738Z",
-      "lastAt": "2026-07-25T23:35:04.535Z",
+      "lastAt": "2026-07-25T23:37:59.560Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 7
+      "beats": 8
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 6,
-    "choices": 6,
-    "scene": 6,
-    "npcUpdates": 6,
-    "timeOps": 6,
-    "sceneEnded": 3,
-    "characterDeltas": 2,
-    "codexUpdates": 1
+    "sceneSummary": 7,
+    "choices": 7,
+    "scene": 7,
+    "npcUpdates": 7,
+    "timeOps": 7,
+    "sceneEnded": 4,
+    "characterDeltas": 3,
+    "codexUpdates": 2
   },
-  "_opTurns": 6
+  "_opTurns": 7
 }

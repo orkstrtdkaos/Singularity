@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 25,
-  "xp": 2467,
+  "xp": 2472,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -158,7 +158,7 @@
   "maxHealth": 150,
   "health": 150,
   "maxEnergy": 220,
-  "energy": 181,
+  "energy": 176,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1886,31 +1886,24 @@
         "player": "Take flights using Marrow's Wings - search the area for a beast or monster to fight.",
         "summary": "Silas takes a quiet scouting flight on Marrow's Wings and spots a warpling hunting along a dry streambed two hundred yards east.",
         "narration": "You stop on the rising track and look up.\n\nThe sky ahead is pale and open — flat morning light, no cloud, the mist already burning off the high ground. Room enough to fly, and reason to: Huginn is ahead on his boulder, watching the country, and you would see more from above than from the track.\n\nYou bring Marrow's Wings up quietly. The shadow-frame seats across your back the way it always does — not heavy, but present, the death-sense in it giving the air a slightly different weight. You do not push. You lift slowly, a few feet, then more, the ground pulling away beneath your boots as you climb. The wings are dark against the morning sky and they do not make a sound.\n\nPell watches you go without comment. Veth tilts her head back and reads the sky the way she reads country.\n\nFrom forty feet up, the Zone opens. The track runs north-and-west as a pale line through old grass and stone. To the east, a dry streambed where something disturbed the silt recently — tracks along the far bank, deep and four-toed, headed toward a stand of dead alder. A warpling. You have seen the pattern before: the stutter-tracks, the way the mud is pressed at uneven intervals. It is moving along the streambed away from you, maybe two hundred yards out, hunting the alder roots. Not close, not aware of you yet.\n\nYou hold altitude for a moment, reading the distance and the ground between, then descend back to the track."
+      },
+      {
+        "player": "Move to intercept — close the distance to the warpling along the streambed before it reaches the alder",
+        "summary": "Silas descends from his flight and cuts the warpling off before it reaches the dead alder — the creature is cornered between the party on the bank and the drop of the streambed.",
+        "narration": "You come down from the flight in a long, controlled descent — not rushing, picking your line. The warpling is moving east along the dry streambed, close to the far bank, and from above you can read its pattern clearly: short stuttering bursts, three or four feet at a go, then a pause with its too-many legs bunched under it. It has not scented you yet. The dead alder stand is a hundred yards ahead of it.\n\nYou land on the near bank without a sound and move at a low crouching walk along the streambed's edge. The mud is firm enough here — old stone just beneath the surface — and your boots find the quiet line between the loose gravel and the soft patches. The warpling's back is to you. It pauses, legs cycling in that unsettling way, nose working at something in the dry gravel.\n\nBy the time it turns, you are thirty feet away and closing. It sees you. The body locks up for a single breath — and then it moves, fast and wrong, angling toward the alders.\n\nYou get there first. You angle hard left, cutting the distance at a diagonal, and when it jinks toward the dead trees you are already on the line between it and them. It pulls up short on the bank, all six legs braced, a sound rising from it that is less a noise than a pressure behind the teeth.\n\nPell arrives at the streambed's far edge a moment later, Memory leveled, reading the ground the way she reads iron. Behind you, Huginn drops from the sky to a dead branch at the alder's edge and sits very still."
       }
     ],
     "lastTurn": {
-      "narration": "You stop on the rising track and look up.\n\nThe sky ahead is pale and open — flat morning light, no cloud, the mist already burning off the high ground. Room enough to fly, and reason to: Huginn is ahead on his boulder, watching the country, and you would see more from above than from the track.\n\nYou bring Marrow's Wings up quietly. The shadow-frame seats across your back the way it always does — not heavy, but present, the death-sense in it giving the air a slightly different weight. You do not push. You lift slowly, a few feet, then more, the ground pulling away beneath your boots as you climb. The wings are dark against the morning sky and they do not make a sound.\n\nPell watches you go without comment. Veth tilts her head back and reads the sky the way she reads country.\n\nFrom forty feet up, the Zone opens. The track runs north-and-west as a pale line through old grass and stone. To the east, a dry streambed where something disturbed the silt recently — tracks along the far bank, deep and four-toed, headed toward a stand of dead alder. A warpling. You have seen the pattern before: the stutter-tracks, the way the mud is pressed at uneven intervals. It is moving along the streambed away from you, maybe two hundred yards out, hunting the alder roots. Not close, not aware of you yet.\n\nYou hold altitude for a moment, reading the distance and the ground between, then descend back to the track.",
-      "sceneSummary": "Silas takes a quiet scouting flight on Marrow's Wings and spots a warpling hunting along a dry streambed two hundred yards east.",
+      "narration": "You come down from the flight in a long, controlled descent — not rushing, picking your line. The warpling is moving east along the dry streambed, close to the far bank, and from above you can read its pattern clearly: short stuttering bursts, three or four feet at a go, then a pause with its too-many legs bunched under it. It has not scented you yet. The dead alder stand is a hundred yards ahead of it.\n\nYou land on the near bank without a sound and move at a low crouching walk along the streambed's edge. The mud is firm enough here — old stone just beneath the surface — and your boots find the quiet line between the loose gravel and the soft patches. The warpling's back is to you. It pauses, legs cycling in that unsettling way, nose working at something in the dry gravel.\n\nBy the time it turns, you are thirty feet away and closing. It sees you. The body locks up for a single breath — and then it moves, fast and wrong, angling toward the alders.\n\nYou get there first. You angle hard left, cutting the distance at a diagonal, and when it jinks toward the dead trees you are already on the line between it and them. It pulls up short on the bank, all six legs braced, a sound rising from it that is less a noise than a pressure behind the teeth.\n\nPell arrives at the streambed's far edge a moment later, Memory leveled, reading the ground the way she reads iron. Behind you, Huginn drops from the sky to a dead branch at the alder's edge and sits very still.",
+      "sceneSummary": "Silas descends from his flight and cuts the warpling off before it reaches the dead alder — the creature is cornered between the party on the bank and the drop of the streambed.",
       "choices": [
         {
-          "label": "Move to intercept — close the distance to the warpling along the streambed before it reaches the alder",
+          "label": "Fight it — engage the warpling directly before it recovers its footing",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Strike from distance — use Hunter's Strike before it knows you are there",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "risky"
+            "attack"
           ],
           "abilityId": "hunters_strike",
           "energyCost": 2,
@@ -1918,122 +1911,107 @@
           "encounterId": "beast_warpling_hare"
         },
         {
-          "label": "Engage it directly — move in openly and take the fight on your terms",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Read the warpling with Deathsense before committing — know what is already in it",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "attack"
+            "study"
           ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null
+        },
+        {
+          "label": "Hold ground and let Pell close from her side — a pincer, not a charge",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 15,
+          "intentTags": [
+            "defend",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
           "encounterId": "beast_warpling_hare"
         },
         {
-          "label": "Leave it — note the warpling's position and continue toward the reclamation site",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Step back and let it go — you came looking for a fight, but this is its territory. Watch where it runs instead.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "scout"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null
         }
       ],
-      "characterDeltas": {
-        "energy": -8
-      },
       "scene": {
-        "setting": "Open Zone country north-and-west of the made gate — rising ground, early-spring mud over old stone, mist burning off the high ground. Flat morning light, mineral smell of iron-oxide faint on the air. The dry streambed is visible two hundred yards east, a stand of dead alder at its far end.",
+        "setting": "The dry streambed, two hundred yards east of the rising track — early-spring morning, flat light, mist burned off. Silas stands on the near bank, thirty feet from the warpling, having cut off its line to the dead alder. The streambed floor is gravel and old stone.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing on the track, watching Silas descend from his scout flight, Memory across her back."
+            "state": "Standing at the streambed's far edge, Memory leveled, watching the warpling — reading the ground."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing at Silas's right, head tilted back — reading the sky as he comes down."
+            "state": "Coming up along the track behind, warden's pace — not yet at the bank."
           },
           {
             "name": "Huginn",
-            "state": "Still perched on the lichen-covered boulder forty yards ahead, facing north-and-west."
+            "state": "Perched on a dead branch at the alder's edge, motionless, watching."
           }
         ],
         "objects": [
-          "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath — behind the party",
-          "the rising track, becoming suggestion past forty yards",
-          "a dry streambed two hundred yards east, deep four-toed tracks along the far bank",
-          "a stand of dead alder at the streambed's far end"
+          "the dry streambed — gravel and old stone, no water",
+          "the stand of dead alder — thirty feet behind the warpling",
+          "the warpling — cornered on the bank, six legs braced, pressure-sound rising from it",
+          "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath — behind and south",
+          "deep four-toed tracks along the far bank"
         ],
         "threads": [
-          "A warpling is moving along the dry streambed toward the dead alder — not yet aware of the party",
-          "Huginn has landed ahead and is facing north-and-west — his read of the country unshared",
-          "The Zone's old lattice-threads still execute their last instruction, pointed north-and-west toward the watershed",
-          "The mineral smell of iron-oxide is already faint on the air — the source is ahead"
+          "The warpling is cornered between Silas and the dead alders — it will move in the next breath",
+          "Veth is not yet at the bank — the fight will begin without her at full position",
+          "Huginn is watching from the alder — its stillness is the particular kind it holds when something is ending"
         ]
       },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief scouting flight and descent"
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Watched Silas's scouting flight without comment — reading his descent as report, not spectacle.",
-          "statusNote": "Moving north-and-west with the party into the Zone; warpling sighting now known.",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth Ondra",
-          "note": "Read the sky as Silas descended — warden's instinct, gauging what the flight saw.",
-          "statusNote": "Moving north-and-west with the party into the Zone; warpling sighting now known.",
-          "status": "active"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "zone-country",
-          "label": "The Zone — Left Branch Country",
-          "kind": "place",
-          "fact": "A warpling hunts the dry streambed two hundred yards east of the track — four-toed stutter-tracks, moving toward dead alder. The Zone's open ground is alive with things that were once something else.",
-          "links": [
-            "what-the-water-remembers",
-            "beast_warpling_hare"
-          ]
-        }
-      ]
+        "why": "a short flight, descent, and pursuit along the streambed"
+      }
     },
     "sceneState": {
-      "setting": "Open Zone country north-and-west of the made gate — rising ground, early-spring mud over old stone, mist burning off the high ground. Flat morning light, mineral smell of iron-oxide faint on the air. The dry streambed is visible two hundred yards east, a stand of dead alder at its far end.",
+      "setting": "The dry streambed, two hundred yards east of the rising track — early-spring morning, flat light, mist burned off. Silas stands on the near bank, thirty feet from the warpling, having cut off its line to the dead alder. The streambed floor is gravel and old stone.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing on the track, watching Silas descend from his scout flight, Memory across her back."
+          "state": "Standing at the streambed's far edge, Memory leveled, watching the warpling — reading the ground."
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing at Silas's right, head tilted back — reading the sky as he comes down."
+          "state": "Coming up along the track behind, warden's pace — not yet at the bank."
         },
         {
           "name": "Huginn",
-          "state": "Still perched on the lichen-covered boulder forty yards ahead, facing north-and-west."
+          "state": "Perched on a dead branch at the alder's edge, motionless, watching."
         }
       ],
       "objects": [
+        "the dry streambed — gravel and old stone, no water",
+        "the stand of dead alder — thirty feet behind the warpling",
+        "the warpling — cornered on the bank, six legs braced, pressure-sound rising from",
         "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath —",
-        "the rising track, becoming suggestion past forty yards",
-        "a dry streambed two hundred yards east, deep four-toed tracks along the far bank",
-        "a stand of dead alder at the streambed's far end"
+        "deep four-toed tracks along the far bank"
       ],
       "threads": [
-        "A warpling is moving along the dry streambed toward the dead alder — not yet aware of the party",
-        "Huginn has landed ahead and is facing north-and-west — his read of the country unshared",
-        "The Zone's old lattice-threads still execute their last instruction, pointed north-and-west toward the watershed",
-        "The mineral smell of iron-oxide is already faint on the air — the source is ahead"
+        "The warpling is cornered between Silas and the dead alders — it will move in the next breath",
+        "Veth is not yet at the bank — the fight will begin without her at full position",
+        "Huginn is watching from the alder — its stillness is the particular kind it holds when something is ending"
       ]
     }
   },
@@ -5118,7 +5096,7 @@
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
     "lastGenCount": 619,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "A Wright at the fork — someone who has been at work on something of the party's since they camped last night, and the improvement is…",
@@ -6725,22 +6703,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.197844076257084,
-    "cerebral": 11.81097594211151,
-    "social": 9.007198135415392,
-    "generous": 2.0698351929411305,
-    "cautious": 12.90029633140385,
-    "physical": 1.59304348176143,
-    "risky": 0.3511392875904246,
-    "ruthless": 0.6211401534038679,
-    "carousing": 0.5158637263876402,
-    "amorous": 1.896312343567572,
-    "patient": 1.149108129942419,
-    "stealth": 0.0001108878317236624,
-    "devotion": 1.2534951217676857,
-    "craft": 3.935161122840539,
-    "leadership": 1.711144666563477,
-    "deception": 0.5310255194818012
+    "strategic": 18.742897974350658,
+    "cerebral": 11.515701543558722,
+    "social": 8.782018182030006,
+    "generous": 2.0180893131176023,
+    "cautious": 13.577788923118753,
+    "physical": 1.5532173947173942,
+    "risky": 0.342360805400664,
+    "ruthless": 0.6056116495687711,
+    "carousing": 0.5029671332279492,
+    "amorous": 1.8489045349783826,
+    "patient": 1.1203804266938586,
+    "stealth": 0.00010811563593057085,
+    "devotion": 1.2221577437234936,
+    "craft": 3.8367820947695255,
+    "leadership": 1.6683660498993902,
+    "deception": 0.5177498814947562
   },
   "aptitudes": [
     "strategist",
@@ -6749,7 +6727,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 847,
+  "actionCount": 848,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7139,8 +7117,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785008660600,
-  "rev": 1414,
+  "updatedAt": 1785009071958,
+  "rev": 1415,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10340,7 +10318,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 596,
+    "valley": 597,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10501,10 +10479,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-25T19:44:20.594Z",
+      "lastAt": "2026-07-25T19:51:11.956Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -10718,15 +10696,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 219,
-    "choices": 219,
+    "sceneSummary": 220,
+    "choices": 220,
     "characterDeltas": 89,
-    "scene": 219,
+    "scene": 220,
     "npcUpdates": 200,
     "factUpdates": 17,
     "placeUpdates": 38,
     "codexUpdates": 130,
-    "timeOps": 213,
+    "timeOps": 214,
     "imagePrompt": 5,
     "sceneEnded": 53,
     "itemUpdates": 5,
@@ -10744,7 +10722,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 219,
+  "_opTurns": 220,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

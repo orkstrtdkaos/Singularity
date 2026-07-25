@@ -56,8 +56,12 @@ export function meetsRank3Gate(character, abilityId, attributeGates) {
  *  bond grants — are free growth and don't count against the cap. */
 export function breadthUsed(character) {
   // customAbilities are engine-granted (bond/learned); count only point/practice-chosen ones.
+  // CCODE-22: `native:true` grants are BY-RIGHT anchors given at creation (applyNativeGrants) — free
+  // growth that must NOT count as chosen breadth (progression.js docstring + skill_capacity.json note).
+  // The flag was written and never read, so a ≥3-anchor tradition (harmonic/radiant_folk 5, churnfolk/
+  // mason 3) blew past the level-1 cap of 2 → atCapacity → could learn NOTHING new until level 5.
   const custom = new Set(Object.keys(character.customAbilities || {}));
-  return (character.abilities || []).filter(a => !custom.has(a.abilityId)).length;
+  return (character.abilities || []).filter(a => !custom.has(a.abilityId) && !a.native).length;
 }
 
 export function breadthCap(character, skillCapacity) {

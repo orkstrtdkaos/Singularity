@@ -1121,6 +1121,16 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("at cap when breadth used == cap", atCapacity(c1, capTable));
   c1.customAbilities = { "motes-vigil": {} }; c1.abilities.push({ abilityId: "motes-vigil", level: 1 });
   check("earned techniques do not consume breadth", breadthUsed(c1) === 2 && atCapacity(c1, capTable));
+  // CCODE-22: by-right NATIVE grants (applyNativeGrants writes {native:true} into abilities) are free anchors —
+  // they must NOT consume breadth, or a 3+-anchor tradition (harmonic/radiant_folk 5) sits atCapacity at L1
+  // (cap 2) and can learn NOTHING new until L5. Regression witness for the dead `native` flag.
+  {
+    const nat = { level: 1, abilities: [{ abilityId: "a", level: 1, native: true }, { abilityId: "b", level: 1, native: true }, { abilityId: "c", level: 1, native: true }], customAbilities: {} };
+    check("CCODE-22: native by-right grants do NOT consume the breadth cap (a fresh multi-anchor tradition can still learn)",
+      breadthUsed(nat) === 0 && !atCapacity(nat, capTable));
+    nat.abilities.push({ abilityId: "d", level: 1 }); // one CHOSEN craft
+    check("CCODE-22: a chosen craft alongside natives counts as exactly 1 breadth", breadthUsed(nat) === 1);
+  }
   c1.level = 3;
   check("cap scales with level", breadthCap(c1, capTable) === 4 && !atCapacity(c1, capTable));
   // graph model
@@ -7362,6 +7372,12 @@ await (async () => {
     const good = structuredQuestRecord({ id: "g", name: "G", stages: [], routes: { verist: "say it plainly", lattice: "" }, outcomes: [{ id: "x", name: "Keep", summary: "s" }] });
     check("CCODE-21: a well-formed {trad:string} route map is preserved; empty/non-string values dropped",
       good.routes.verist === "say it plainly" && !("lattice" in good.routes) && good.outcomes[0].name === "Keep");
+    // CCODE-22: the record must CARRY the bound-arc identity — structuredQuestsForGM gates the legend directive
+    // (SNG-132/133) on (legend||legendNpc) && (boundToCharacter||boundToPlayer). The whitelist-record dropped
+    // all three, so a started personal/bound arc lost its "distant force turning toward you" framing.
+    const bound = structuredQuestRecord({ id: "b", name: "B", stages: [], boundToCharacter: "Silas Weir", boundToPlayer: "player-x", legendNpc: { name: "The Watcher" } });
+    check("CCODE-22: structuredQuestRecord carries boundToCharacter/boundToPlayer/legendNpc (the legend directive survives start)",
+      bound.boundToCharacter === "Silas Weir" && bound.boundToPlayer === "player-x" && bound.legendNpc?.name === "The Watcher");
   }
 
   // SNG-235: a meaningful ENDING changes the world — the marquee-quest outcome effects[] must FIRE. Before this

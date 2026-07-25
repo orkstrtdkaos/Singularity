@@ -208,6 +208,11 @@ export function structuredQuestRecord(def) { // registry:internal
     traditions: def.traditions || [], giver: def.giver || null, legend: def.legend || null,
     region: def.region || null, tier: def.tier || null,
     arcId: def.arcId || null, locationId: def.locationId || null,   // SNG-112: shared-arc key + own place (parallel player quests)
+    // CCODE-22: carry the BOUND-ARC identity — structuredQuestsForGM gates the legend directive (SNG-132/133:
+    // "a distant force turning toward you, the ending is yours") on (legend||legendNpc) && (boundToCharacter||
+    // boundToPlayer). This whitelist-record dropped all three, so the mechanic was dead for every started
+    // bound/personal arc (the def has them; the record didn't).
+    boundToCharacter: def.boundToCharacter || null, boundToPlayer: def.boundToPlayer || null, legendNpc: def.legendNpc || null,
     stages: (def.stages || []).map(s => ({ id: s.id, objective: normalizeProse(s.objective), condition: normalizeProse(s.condition), change: normalizeProse(s.change) })),
     routes: normalizeQuestRoutes(def.routes), // CCODE-21: never an array — that renders as [object Object]
     outcomes: (def.outcomes || []).map(o => {

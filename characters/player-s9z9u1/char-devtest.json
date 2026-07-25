@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 79,
+  "xp": 92,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -53,15 +53,18 @@
     }
   ],
   "alignment": {
-    "falsehood_truth": 0.02875,
+    "falsehood_truth": 0.0323125,
     "spectrumId": -0.10484248090039058,
-    "dark_light": 0.03
+    "dark_light": 0.03,
+    "emotional_logical": 0.015,
+    "violence_peace": 0.04000000000000001,
+    "body_mind": -0.03
   },
   "attunement": 3,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 79,
+  "energy": 63,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -277,65 +280,111 @@
         "player": "Give her slow — match her pace exactly, no hurry toward any end.",
         "summary": "One last unhurried afternoon on the terrace — the count-bell rang, and Lira put the ledger back in his hands.",
         "narration": "You give her slow.\n\nShe sets the pace with her breath — long and even, a working rhythm — and you match it without being asked. Your hands stay at her waist, not gripping, just present. The prism-arcs cross the warm stone of the coping wall and stripe her shoulders in slow gold. She watches the valley. Below, the green-grey stripe of the floor runs all the way to where the Echo River bends out of sight, and she looks at it the way she looks at everything: with full attention, missing nothing.\n\nAt some point she says, quietly, to the valley more than to you: \"There it is.\" She does not explain. You do not ask. The two of you hold the same unhurried beat, and it is enough.\n\nThe count-bell rings. It comes up from below — one clean tone, then the resonance fading into the warm air of the plateau — and Lira does not startle. She had been expecting it. She tilts her head slightly, listening to it go, and then she reaches back and covers your hand with hers for a moment. One press. Then she straightens, and reaches for the ledger where it sits on the terrace stone."
+      },
+      {
+        "player": "Use stillness field then boundary stone to keep this area quiet and uninterrupted... tell her you still have a lot more to give her and that she can be as loud as she likes.",
+        "summary": "A Stillness Field and Boundary-Stone laid down together — restrained, steady — giving the terrace privacy. Lira received the assurance plainly and met it in kind.",
+        "narration": "You settle your attention inward, quiet and economical, the way a craftsman sets a tool rather than swings it. The Stillness Field comes first — a gentle dimming at the edges of the terrace, sound arriving from the streets below in the same way light arrives through heavy cloth. Then the Boundary-Stone, laid down alongside it without fuss, a deterring weight on the threshold of the iron staircase, the kind of ward that tells casual approach to find another route. You do not push either craft hard. You simply set them, the way you'd latch a door.\n\nThe prism-arcs still cross the warm coping wall. Lira is watching you from the bench, jacket still folded beside her, the amber-grey eyes reading the small shift in the air. She has noticed. Of course she has.\n\n\"Still have a lot more to give you,\" you say, quietly, to her and no one else. \"And no one is coming up those stairs. You can be as loud as you like.\"\n\nShe holds your gaze for one deliberate beat. Then the corner of her mouth moves — not a full smile, but the honest cousin of one. \"Good,\" said Lira. \"I was going to be anyway.\""
       }
     ],
     "lastTurn": {
-      "narration": "You give her slow.\n\nShe sets the pace with her breath — long and even, a working rhythm — and you match it without being asked. Your hands stay at her waist, not gripping, just present. The prism-arcs cross the warm stone of the coping wall and stripe her shoulders in slow gold. She watches the valley. Below, the green-grey stripe of the floor runs all the way to where the Echo River bends out of sight, and she looks at it the way she looks at everything: with full attention, missing nothing.\n\nAt some point she says, quietly, to the valley more than to you: \"There it is.\" She does not explain. You do not ask. The two of you hold the same unhurried beat, and it is enough.\n\nThe count-bell rings. It comes up from below — one clean tone, then the resonance fading into the warm air of the plateau — and Lira does not startle. She had been expecting it. She tilts her head slightly, listening to it go, and then she reaches back and covers your hand with hers for a moment. One press. Then she straightens, and reaches for the ledger where it sits on the terrace stone.",
-      "sceneSummary": "One last unhurried afternoon on the terrace — the count-bell rang, and Lira put the ledger back in his hands.",
+      "narration": "You settle your attention inward, quiet and economical, the way a craftsman sets a tool rather than swings it. The Stillness Field comes first — a gentle dimming at the edges of the terrace, sound arriving from the streets below in the same way light arrives through heavy cloth. Then the Boundary-Stone, laid down alongside it without fuss, a deterring weight on the threshold of the iron staircase, the kind of ward that tells casual approach to find another route. You do not push either craft hard. You simply set them, the way you'd latch a door.\n\nThe prism-arcs still cross the warm coping wall. Lira is watching you from the bench, jacket still folded beside her, the amber-grey eyes reading the small shift in the air. She has noticed. Of course she has.\n\n\"Still have a lot more to give you,\" you say, quietly, to her and no one else. \"And no one is coming up those stairs. You can be as loud as you like.\"\n\nShe holds your gaze for one deliberate beat. Then the corner of her mouth moves — not a full smile, but the honest cousin of one. \"Good,\" said Lira. \"I was going to be anyway.\"",
+      "sceneSummary": "A Stillness Field and Boundary-Stone laid down together — restrained, steady — giving the terrace privacy. Lira received the assurance plainly and met it in kind.",
       "choices": [
         {
-          "label": "Take the ledger and head east behind the array housing toward Keeper Vael — the window is open now.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Linger a moment — say something to Lira before you go.",
+          "label": "Take your time — give her everything you said you would.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Lira if she wants to come with you to Vael — she knows the district better than you do.",
+          "label": "Ask her what she wants — let her direct it.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Watch her closely — give her exactly what you read, nothing else.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic",
+            "careful"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "When you're done — take the ledger east, behind the array housing, to Keeper Vael.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "lead"
+            "travel",
+            "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -10,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, slow prism-arcs crossing the coping wall. The count-bell has just rung and its tone is fading into the open air.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active, the terrace quieted and the iron staircase passively deterred. Warm stone, slow prism-arcs crossing the coping wall.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Reaching for the ledger on the terrace stone — composed, unhurried, jacket still set aside."
+            "state": "On the bench, jacket still set aside — meeting his eyes, a small honest expression at her mouth."
           }
         ],
         "objects": [
           "Lower Filtration Ledger — on the terrace stone, within reach",
           "Low coping wall — warm, slow prism-arcs",
           "Single worker's bench",
-          "Iron exterior staircase — at the terrace corner",
+          "Iron exterior staircase — at the terrace corner, now warded",
           "Lira's jacket — set aside on the bench",
           "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
+          "Stillness Field and Boundary-Stone active — the terrace is private while they hold",
           "Count-bell has rung — the window to reach Keeper Vael is open",
-          "Eastern route behind array housing confirmed as the safer approach",
-          "Lira is reaching for the ledger — handing it off is the next beat"
+          "Lira's assurance given and received — what comes next is the character's"
         ]
       },
       "npcUpdates": [
@@ -343,37 +392,45 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Held the pace, held the afternoon, held attention entirely — then reached for the ledger the moment the bell rang. One press of her hand over his before she straightened.",
-          "statusNote": "On the terrace, reaching for the ledger — composed, the bell just rung, the afternoon closing.",
-          "status": "active"
+          "role": "Apprentice optics-weaver, Edge District",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Received the assurance — the ward set, the terrace made private, the invitation plain. She met it directly: 'Good. I was going to be anyway.'",
+          "learned": [
+            "She is entirely at ease with candor — gives it and receives it without ceremony."
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the terrace, bench, jacket still set aside — private and present."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "The count-bell rang — a short final beat of the afternoon, the scene reaching its close."
+        "hoursPassed": 0,
+        "why": "A short beat — the wards set and the words said; no time has passed yet."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, slow prism-arcs crossing the coping wall. The count-bell has just rung and its tone is fading into the open air.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Stillness Field and Boundary-Stone both active, the terrace quieted and the iron staircase passively deterred. Warm stone, slow prism-arcs crossing the coping wall.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Reaching for the ledger on the terrace stone — composed, unhurried, jacket still set aside."
+          "state": "On the bench, jacket still set aside — meeting his eyes, a small honest expression at her mouth."
         }
       ],
       "objects": [
         "Lower Filtration Ledger — on the terrace stone, within reach",
         "Low coping wall — warm, slow prism-arcs",
         "Single worker's bench",
-        "Iron exterior staircase — at the terrace corner",
+        "Iron exterior staircase — at the terrace corner, now warded",
         "Lira's jacket — set aside on the bench",
         "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
+        "Stillness Field and Boundary-Stone active — the terrace is private while they hold",
         "Count-bell has rung — the window to reach Keeper Vael is open",
-        "Eastern route behind array housing confirmed as the safer approach",
-        "Lira is reaching for the ledger — handing it off is the next beat"
+        "Lira's assurance given and received — what comes next is the character's"
       ]
     }
   },
@@ -427,7 +484,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Third kiss — longer, less composed. She brought her hand to the back of his neck and came with the close without hesitation. Said 'all right' afterward in a register that meant som",
         "[d1] The moment concluded on the terrace — mutual, unhurried, her choice made and comfortable in it. She set the ledger in his hands herself as the count approached, the practical and t",
         "[d1] The moment on the bench concluded — mutual, unhurried, honest. She re-composed afterward and named what she wants: the real answer, when he's ready. Then looked to the ledger — pra",
         "[d1] Heard the real answer — who he is, why he has the ledger, who sent him. Named that the filtration numbers felt wrong for weeks but she had no cause to say so. Gave him a warning an",
@@ -436,17 +492,18 @@
         "[d1] Gave herself to the afternoon entirely — jacket off, blouse off, lit by prism-arcs, hands at his sides. Said she was still watching for the bell.",
         "[d1] Unhurried in the afternoon sun on the terrace — gave herself to the moment entirely, precise and present as always.",
         "[d1] Asked for slow — said that's where people get careless if they rush. Eyes stayed forward on the valley; acknowledged entry with a single precise motion.",
-        "[d1] Held the pace, held the afternoon, held attention entirely — then reached for the ledger the moment the bell rang. One press of her hand over his before she straightened."
+        "[d1] Held the pace, held the afternoon, held attention entirely — then reached for the ledger the moment the bell rang. One press of her hand over his before she straightened.",
+        "[d1] Received the assurance — the ward set, the terrace made private, the invitation plain. She met it directly: 'Good. I was going to be anyway.'"
       ],
       "knownFacts": [
-        "She marks the debt cleanly: 'The answer, when you're ready to give it' — patient, not pressuring",
         "She acknowledged the ledger practically immediately after, which means she has not lost the thread of what matters outside the terrace",
         "She has known the filtration numbers felt wrong for weeks without a formal reason to name it",
         "She knows the supervisor's office faces the Common Hall direct path — she's navigated district politics long enough to think in routes",
         "She said the answer was worth waiting for — she received the truth without pulling back from it",
         "Her precision with people is a direct extension of her optics training — she reads arc and angle, not just expression",
         "She thinks in routes through the district instinctively — the supervisor's office angle, the array housing cover",
-        "She said he telegraphs clearly — meant as observation, not criticism; she reads him well"
+        "She said he telegraphs clearly — meant as observation, not criticism; she reads him well",
+        "She is entirely at ease with candor — gives it and receives it without ceremony."
       ],
       "skillsObserved": [
         "reads people with quiet precision",
@@ -457,7 +514,7 @@
         "translating technical skill (light-reading) into interperson"
       ],
       "status": "active",
-      "statusNote": "On the terrace, reaching for the ledger — composed, the bell just rung, the afternoon closing.",
+      "statusNote": "On the terrace, bench, jacket still set aside — private and present.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -668,7 +725,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 5
+    "turnsSinceOffer": 6
   },
   "bio": null,
   "subAttributes": {
@@ -858,21 +915,21 @@
     }
   },
   "tendencies": {
-    "social": 6.973389548163463,
-    "strategic": 6.769258021338406,
-    "cautious": 3.447206730221756,
-    "cerebral": 1.7018876365190383,
-    "physical": 0.8466784625041196,
-    "ruthless": 0.8466784625041196,
-    "generous": 0.8946736039160156,
-    "amorous": 5.75434375
+    "social": 8.799054809459378,
+    "strategic": 6.600026570804946,
+    "cautious": 3.361026561966212,
+    "cerebral": 1.6593404456060623,
+    "physical": 0.8255115009415166,
+    "ruthless": 0.8255115009415166,
+    "generous": 0.8723067638181151,
+    "amorous": 6.61048515625
   },
   "aptitudes": [],
-  "actionCount": 21,
+  "actionCount": 22,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785022138770,
-  "rev": 65,
+  "updatedAt": 1785022274955,
+  "rev": 66,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1026,15 +1083,21 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "boundary_stone": 4,
+      "boundary_stone": 5,
       "echo_memory": 4,
       "prism_sight": 9,
-      "sonic_resonance": 4
+      "sonic_resonance": 4,
+      "stillness_field": 1
     },
     "coActivations": {
-      "prism_sight+sonic_resonance": 2
+      "prism_sight+sonic_resonance": 2,
+      "boundary_stone+stillness_field": 1
     },
-    "aspirations": []
+    "aspirations": [],
+    "lastUsed": {
+      "boundary_stone": 25,
+      "stillness_field": 25
+    }
   },
   "syncedAt": 1783952796030,
   "customAbilities": {},
@@ -1045,7 +1108,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 18
+    "valley": 19
   },
   "foreclosed": [],
   "company": [],
@@ -1064,22 +1127,22 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-25T23:18:42.738Z",
-      "lastAt": "2026-07-25T23:28:58.766Z",
+      "lastAt": "2026-07-25T23:31:14.947Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 5
+      "beats": 6
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 4,
-    "choices": 4,
-    "scene": 4,
-    "npcUpdates": 4,
-    "timeOps": 4,
-    "sceneEnded": 2,
-    "characterDeltas": 1
+    "sceneSummary": 5,
+    "choices": 5,
+    "scene": 5,
+    "npcUpdates": 5,
+    "timeOps": 5,
+    "sceneEnded": 3,
+    "characterDeltas": 2
   },
-  "_opTurns": 4
+  "_opTurns": 5
 }

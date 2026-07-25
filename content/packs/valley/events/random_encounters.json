@@ -856,6 +856,10 @@
   "onEnterLocation": {
    "chance": 0.2
   },
+  "onSocialBeat": {
+   "chance": 0.12,
+   "note": "SNG-237 C1 [DIAL — Erik owes the real rate, spec OQ1] — the rate a STATIONARY social/mental beat (a talk, a deliberation; classifies kind=none) rolls a NON-COMBAT frame only (challenge/standoff, never a duel mid-conversation). Deliberately LOWER than travel (0.45): a conversation can become a standoff, but not every conversation. No-ops until C2 content (standoff/puzzle frames + the framed standoff type) exists to offer. Set 0 to disable."
+  },
   "pacingModes": {
    "note": "SNG-127 — player-selectable liveliness (profile.pacing). Each is a multiplier on every roll rate + a cooldown override. Default balanced; a new/family player may start on eventful.",
    "calm": {

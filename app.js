@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.274";
+const APP_VERSION = "1.8.275";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3318,10 +3318,14 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   busy = true;
   // SNG-075: an encounter the narrative-time roll turned up last beat is WOVEN into this turn.
   const weave = pendingWeave; pendingWeave = null;
+  // SNG-237 Fix B: the ENGINE has judged texture-vs-challenge (weave.decisive; OQ2 — the GM must not re-derive
+  // decisiveness from prose). A DECISIVE weave ESCALATES to a recognizable framed encounter (closes Silas's
+  // "couldn't tell it was an encounter"); ambient colour still weaves as texture (no "A SYSTEM EVENT" for a
+  // sparrow — the SNG-043 over-framing mistake). Texture weaves; a challenge frames.
   const encounterWeaveDetail = weave ? (
-    `An encounter is occurring — weave it INTO the scene now, as part of what is happening (no aside, no genre-break): ${weave.seed}` +
-    (weave.perilous ? ` This could turn dangerous — you MUST present a way to decline, flee, or avoid it as a clear choice BEFORE any engagement. Never narrate the character as already fighting or already harmed.` : ` Let it be a small, real thing on the road${weave.flavor && /benef|benign|beaut/.test(weave.flavor) ? " — a grace, not a threat" : ""}.`) +
-    (weave.loreTier === "precursor-glimpse" ? ` This touches the Precursor — glimpsed, never explained.` : ``)
+    weave.decisive
+      ? `A real challenge has arisen: ${weave.seed} PRESENT it as a recognizable, bounded encounter the player can SEE and enter — state plainly what it is and give a clear choice to engage, flee, or avoid it BEFORE any engagement. Do NOT fold it into ambient prose and move on; never narrate the character as already fighting or already harmed.${weave.loreTier === "precursor-glimpse" ? " This touches the Precursor — glimpsed, never explained." : ""}`
+      : `Weave this into the scene as AMBIENT texture — colour, not a system event, no aside or genre-break: ${weave.seed}${weave.flavor && /benef|benign|beaut/.test(weave.flavor) ? " — a grace, not a threat" : ""}.${weave.loreTier === "precursor-glimpse" ? " This touches the Precursor — glimpsed, never explained." : ""}`
   ) : null;
   // SNG-236 fix A: a STRUCTURED encounter the roll turned up is offered HARD — the recognizable-encounter
   // offer no longer waits on the GM's soft "when the fiction invites it" judgment (the mechanism that
@@ -4762,8 +4766,25 @@ function maybeNarrativeEncounter(turn, resolution) {
   // whole narrative path never fires. A declared short beat keeps its real (quiet) hours.
   const hoursPassed = beatHours(turn, table);
   const kind = classifyNarrativeKind({ intentTags, why: turn?.timeOps?.why || "", hoursPassed });
-  if (kind === "none") return;
   const loc = hereNow();
+  if (kind === "none") {
+    // SNG-237 C1: a stationary SOCIAL/MENTAL beat (a talk, a deliberation) turns nothing up on the physical
+    // clock — but a cerebral character should still meet NON-COMBAT frames (a standoff in the hall, a puzzle in
+    // the archive), NEVER a fight erupting mid-conversation (spec GUARD). Widen the gate: a challengeable social/
+    // mental beat can roll, at a content-tunable [DIAL] rate (Erik owes the real number — the spec's OQ1, lower
+    // than travel), and ONLY a non-combat frame is offerable (routing challenge). No-ops when nothing non-combat
+    // is eligible here — C2 content (standoff/puzzle frames + the framed standoff type) is owed to Aevi; without
+    // it this stays correctly silent rather than forcing a fight.
+    const social = intentTags.some(t => /talk|speak|persuad|convinc|negotiat|argue|social|confront|deceiv|charm|question|interrogat|deliberat|debate|study|reason|analyz|mental|investigat|read/i.test(String(t)));
+    if (!social) return;
+    const rate = Number(table.triggerRules?.onSocialBeat?.chance ?? 0.12); // [DIAL] SNG-237 C1 — tune in content
+    if (rate <= 0 || Math.random() >= Math.min(0.9, rate * (pace.mult || 1))) return;
+    const trial = eligibleEncountersFor(table, loc, { cap: 8 }).find(e => e.routing === "challenge" && e.id);
+    if (!trial) return; // nothing NON-COMBAT eligible here yet (C2 content owed)
+    pendingEncounterOffer = { id: trial.id, name: smartClamp(String(trial.name || "a hard passage"), 80), kind: "trial" };
+    sceneEncounterFired = true; turnsSinceEncounter = 0;
+    return;
+  }
   const fired = kind === "rest" ? rollTrigger("onRest", loc, table, Math.random, pace.mult)
     : kind === "travel" ? rollTrigger("onTravel", loc, table, Math.random, pace.mult)
     : rollNarrativeTime(hoursPassed, loc, table, Math.random, pace.mult);
@@ -4794,7 +4815,12 @@ function maybeNarrativeEncounter(turn, resolution) {
     pendingEncounterOffer = { id: chosen.id, name: smartClamp(String(name), 80), kind };
   } else {
     // WEAVE, DO NOT INTERRUPT: no card, no scene change — stash the seed for the next GM turn.
-    pendingWeave = { seed: entry.seed, flavor: entry.flavor, perilous: canIncapacitate(entry), loreTier: entry.loreTier || null };
+    // SNG-237 Fix B: the ENGINE decides texture-vs-challenge (OQ2 — the GM must not re-derive decisiveness from
+    // prose). A loose pick is DECISIVE when it can incapacitate OR its flavor is a threat that moves on the
+    // player (fight/chase/dangerous/theft) — those ESCALATE to a recognizable frame downstream; a grace or a
+    // small thing (beautiful/benign/beneficial) stays ambient texture.
+    const decisive = canIncapacitate(entry) || /fight|chase|danger|theft|raid|hostile|ambush|threat/i.test(String(entry.flavor || ""));
+    pendingWeave = { seed: entry.seed, flavor: entry.flavor, perilous: canIncapacitate(entry), decisive, loreTier: entry.loreTier || null };
   }
   sceneEncounterFired = true;
   turnsSinceEncounter = 0;

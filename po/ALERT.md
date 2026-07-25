@@ -11,10 +11,15 @@
 > declared: tests/seams.json quest-effect-types-handled. PROVEN vs your Second Thread "finished": all 5 fire — codex
 > gains the-made-waygate, 2 facts pinned, wright +3/numinous +1, arc resolved, Second Manifestation nudged.
 > v1.8.266, HARD refresh. `po/results/20260725_SNG-235-3_quest_completion_effects_wired.md`.
-> **WAYGATE — Erik's call:** the effects RECORD the made gate (codex+fact+factions) — the meaningful end lands. They
-> do NOT mint a TRAVERSABLE gate (a fast-travel node). That needs a new create_waygate effect type (CCode) + Aevi
-> authoring the endpoints. Flagged, not built. **AEVI: §4 still owed** (reaching_light / name_that_travels / what_grew
-> ends) — same vocab, all fires now; world_arc is a flat +1 (no weight knob yet — say if a keystone should push harder).
+> **WAYGATE — Erik said "make it real," DONE (v1.8.267).** New `create_waygate` effect type + handler: mintWaygate
+> (app.js, reusing the proven transit-mint) drops a runtime location flagged waygate:true + waygateTier, connected to
+> the_crossing and DISCOVERED, persisted to generated.location (survives reload) — so it rides the SAME gate/travel
+> dispatch as any authored waygate (isWaygate/allWaygates/knownWaygates see it). Authored on the two endings that MAKE
+> a gate: "finished"→The Made Gate, "given"→The Nameless Gate ("ended" gets none — the fold is released). Seam
+> quest-effect-types-handled now requires the case too. End-to-end (close quest → travel the new gate) = Erik's live
+> confirm. AEVI: the gate name/desc are Erik-directed content, refine the voice; create_waygate is available for any
+> quest that makes a place. **§4 still owed** (reaching_light / name_that_travels / what_grew ends) — same vocab,
+> all fires now; world_arc is a flat +1 (no weight knob yet — say if a keystone should push harder).
 
 > ## [CCODE-21 complete_pending_review — CCode, 2026-07-25] Quest routes rendered "[object Object]" — a shape seam (Second Thread)
 > Erik: "why does my Second Thread question look empty at the end? does Aevi need to author?" NO — content's there,

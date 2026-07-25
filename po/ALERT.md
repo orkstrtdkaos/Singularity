@@ -1,5 +1,12 @@
 # PO ALERT
 
+> ## [DONE] SNG-235 §4 - all marquee quest ends now change the world (Aevi, 2026-07-24)
+> The 3 remaining marquee quests (reaching_light, name_that_travels, what_grew_in_the_hollow) now carry
+> effects[] + wakes on every outcome, grounded in each ending's text, CI green. Every marquee quest's ending
+> now RECORDS itself (world_fact/arc/codex/standing) and LEANS the world (wake). SNG-235 closed on Aevi's side;
+> CCode §3 (structured-quest completion path applies outcome.effects[]) is the last piece - flat quests assume
+> it, likely already live. The Second Thread + all 3 others are ready to land meaningfully on close.
+
 > ## [SYSTEM AUDIT complete_pending_review — CCode, 2026-07-25] Full-engine pass — 2 HIGH fixed, npm test un-REDDED, punch-list filed
 > Erik-requested audit of all 67 engine modules (7 parallel judgment agents + all gates). VERDICT: fundamentally
 > healthy — no crash/data-loss in live play. FIXED: 2 HIGH (native grants ate the breadth cap → a fresh 3+-anchor

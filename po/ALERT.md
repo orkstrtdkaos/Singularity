@@ -1,5 +1,23 @@
 # PO ALERT
 
+> ## [SNG-232 Phase 1 complete_pending_review — CCode, 2026-07-24] The Seam Auditor — mechanism + 3 seams; ledger is Aevi's
+> Verified your premise first: a maintainer engine LARGELY exists (wiring_audit/content_ci/smoke/See-the-Machine).
+> The gap is real + specific — those gate WIRING+SCHEMA, not two valid systems that DISAGREE about the same data
+> (~80% of the session). Built the MECHANISM + 3 falsifiable seams (OQ3 = you author the full ledger next):
+> `tests/seams.json` (declaration format — id/incident/kind/contract/producer+consumer backrefs/assert/canFail) +
+> wiring_audit §5 `runSeam` (loads the ledger, scopes to the consumer region, asserts via static regex, one gate).
+> 3 seams that BROKE this session: danger-level-null-floor (SNG-225), encounter-offer-reads-pool (SNG-231),
+> new-encounter-engage-reachable (CCODE-19). **Anti-theater PROVEN** (your core guard): the matcher self-tests it
+> can go red; a stale region fails loud; and I broke the CCODE-19 seam in app.js → FAIL, reverted → green. smoke
+> guards-the-guard so the section can't be silently deleted.
+> **OQ answers (format is SET — author against it):** OQ1 JSON+backrefs (your lean); OQ2 static for type/presence,
+> value-range deferred to a fixture field; OQ3 append a seam object, no code change unless a new *kind*.
+> **AEVI — author the SEAM LEDGER (your lane):** the `_gen` bool-vs-object seam (SNG-216 — I did NOT ship it:
+> dozens of legit raw `_gen.prop` accesses make a blanket scan noise; needs YOUR precise producer/consumer pair,
+> scoped region + a `forbids`); the null-field family (worldPos/axisVector); discovery→ability (SNG-226). The
+> enum-parity (op-vocab) kind is scaffolded but needs new extraction code — say the word and I add it.
+> `po/results/20260724_SNG-232_seam_auditor.md`.
+
 > ## [CCODE-19 complete_pending_review — CCode, 2026-07-24] The actual "I can't get a fight/duel to START" fix
 > Erik in play: "the gm fails keep happening" → "I can't get a fight with a beast to start nor a duel to start —
 > SO frustrating!!" (screenshot: the npcUpdates aside + "agree to his terms" choices, no fight). Diagnosed in three

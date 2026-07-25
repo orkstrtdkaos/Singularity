@@ -21,15 +21,20 @@ import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: meeting someone 
 export function reconcileGeneratedNpcWithMeet(character, npcUpdates, req, rec) {
   if (!rec?.id || !character?.npcRegistry) return rec?.id;
   const hint = normName(`${req?.hint || ""} ${req?.name || ""}`);
+  // CCODE-24: applyNpcUpdates stored the meet stub under slugify(u.npcId) (defensive — the model deviates from
+  // the kebab contract). Look it up the SAME way, or a non-kebab npcId (Uppercase/underscore/space) misses the
+  // stub and the same person double-mints (the SNG-190 recurrence). kebab ids slugify to themselves — no change.
   const meet = (npcUpdates || []).find(u => u?.op === "meet" && u.npcId && u.name
-    && character.npcRegistry[u.npcId] && !character.npcRegistry[u.npcId]._filledFromGenerate
+    && character.npcRegistry[slugify(u.npcId)] && !character.npcRegistry[slugify(u.npcId)]._filledFromGenerate
     && (() => { const n = normName(u.name); return n.length > 2 && hint.includes(n); })());
-  if (!meet || meet.npcId === rec.id) return rec.id;
+  if (!meet) return rec.id;
+  const metId = slugify(meet.npcId);
+  if (canonNpcId(metId) === canonNpcId(rec.id)) return rec.id;
   const oldId = rec.id;
   if (character.generated?.npc) { delete character.generated.npc[oldId]; }   // drop the second id generate() persisted
-  rec.id = meet.npcId;
+  rec.id = metId;
   if (character.generated?.npc) character.generated.npc[rec.id] = rec;       // re-home under the met id
-  const stub = character.npcRegistry[meet.npcId];
+  const stub = character.npcRegistry[metId];
   stub.name = rec.name; stub._filledFromGenerate = true; stub._mergedFrom = oldId; // the stub becomes the person
   for (const k of ["domains", "domainsSource", "people", "peopleSource", "appearance", "gender", "role"]) if (rec[k] != null && stub[k] == null) stub[k] = rec[k];
   return rec.id;
@@ -64,11 +69,22 @@ export function findExistingNpc(reg, id, name = "") {
     // stuck: the GM re-introduced the same character under a fresh name each turn). An id-less entry can't
     // match by id-prefix anyway (its name was already tried above), so guard both sides and skip it here.
     if (!n.id || !id) continue;
+    // CCODE-24: bridge the `_` ↔ `-` id-convention gap. A quest/hunt-effect giver stub keys the registry by the
+    // RAW content id (keeper_ilma — quests.js deliberately never slugifies content ids); a MEET keys by
+    // slugify (keeper-ilma). Without a normalized compare the same person forks into two registry entries
+    // (verified live in a real save), and the ally/questState marker strands on the orphan. Treat `_`≡`-`.
+    if (canonNpcId(n.id) === canonNpcId(id)) return n;
     const a = n.id.split("-")[0], b = id.split("-")[0];
     if (a === b && (n.id.startsWith(id) || id.startsWith(n.id) || a === id || b === n.id)) return n;
   }
   return null;
 }
+
+// CCODE-24: the ONE canonical form for comparing NPC ids across the `_` (content-id) and `-` (slugify)
+// conventions — so the registry write paths (applyNpcUpdates slugify, quest-effect raw underscore,
+// reconcileGeneratedNpcWithMeet raw npcId) can never fork the same person by keying differently. Module-local:
+// the reads normalize; the write sites keep their own convention (quests.js deliberately keeps content ids).
+const canonNpcId = x => String(x || "").toLowerCase().replace(/_/g, "-");
 
 /** Names that are really ids ("davan_channel_worker", "millbrook.elder_woman")
  *  become readable ("Davan Channel Worker", "Elder Woman"). */

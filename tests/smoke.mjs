@@ -539,6 +539,14 @@ check("199: prettify never exceeds 60 chars on a word boundary", prettifyNpcName
   const reg = { "hesta-vorn": { id: "hesta-vorn", name: "Hesta Vorn", aliases: ["Silas's Mother", "silas-mother"] } };
   check("199: findExistingNpc matches a known ALIAS, not just id/name (no duplicate fork)", findExistingNpc(reg, "new-id", "Silas's Mother")?.id === "hesta-vorn");
   check("199: an unrelated name still finds nothing (no over-merge)", findExistingNpc(reg, "veth", "Veth") === null);
+  // CCODE-24: a quest/hunt-effect giver stub keys by the RAW content id (keeper_ilma); a meet keys by slugify
+  // (keeper-ilma). Without a normalized compare the same person forked into two registry entries (verified live).
+  {
+    const forkReg = { keeper_ilma: { id: "keeper_ilma", name: "keeper_ilma", ally: true, aliases: [] } }; // the quest-effect stub, underscore id, no real name
+    check("CCODE-24: findExistingNpc bridges _ ↔ - so an underscore stub matches a hyphen meet (no fork)",
+      findExistingNpc(forkReg, "keeper-ilma", "Ilma of the Reeds")?.id === "keeper_ilma");
+    check("CCODE-24: an unrelated id still doesn't over-merge", findExistingNpc(forkReg, "orrin-smith", "Orrin") === null);
+  }
 }
 
 // --- v0.8.2: exhaustion + narrative rest ---

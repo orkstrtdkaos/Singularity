@@ -98,3 +98,63 @@ auditor proves the EXPERIENCE occurs. Wiring-correct + cadence-correct = the gam
    offer?) separately from the GM's offer-taking (does it?).
 3. (CCode) Cohort definition: how many playstyle cohorts, spanning the fingerprint how? At minimum
    combat/social/craft; Silas = social is the regression case.
+
+
+---
+
+# §5 — CONNECT TO LIVE SETTINGS + finer increments (Erik, 2026-07-24)
+The auditor must assert against the ACTUAL live configuration, not abstract intent — an intent number is only
+verifiable if it's tied to the real dial the engine reads. Verified where the live dials live:
+- **`engine/worldtick.js`** — `epicRate` (SNG-208, ~0.34), `minEpicGapDays` (~6). The epic cadence dials.
+- **`engine/random_encounters.js`** — the encounter WEIGHT formula: `dangerOf(location)` (0..4, floored per
+  SNG-225) drives `encounterWeight = PEACEFUL ? 1+(4-d)*0.35 : 0.15+d*0.6`. The encounter cadence dials are the
+  danger bands + these coefficients.
+
+## §5a — the auditor READS the live dials (single source of truth)
+`playthrough_sim.mjs` must import/read `epicRate`, `minEpicGapDays`, and the encounter-weight coefficients FROM
+their engine modules — never hardcode a copy. So when Erik tunes a dial, the auditor re-derives EXPECTED cadence
+from the new value and re-asserts against the intent FLOOR. The doc (DESIGN_INTENT §Provenance) explains the
+floor is set BELOW expectation; the auditor computes expectation from the LIVE dial and fails if the simulated
+result falls below the floor OR wildly below the dial's own expectation (a dial says 0.34 but the wired game
+produces 0.02 → the consumer is broken, SNG-231-style, even though the floor might technically pass on a lucky
+cohort).
+
+## §5b — FINER INCREMENTS where the current settings are too coarse to verify (Erik's ask)
+Some live dials are too coarse to express (or verify) the intent — add increments where needed:
+- **dangerLevel is an integer 0..4** — only 5 bands. If the intent floor needs "a light-danger location still
+  offers a recognizable encounter every ~15 turns," 5 integer bands may not resolve finely enough to tune the
+  curve. RECOMMEND: allow a fractional dangerLevel (0..4 continuous) OR add intermediate weight coefficients,
+  so the encounter curve can be tuned to hit the floor without over/under-shooting adjacent bands.
+- **epicRate is one global scalar** — it can't express "epics should appear MORE for a player who's never met
+  one" (a catch-up floor) vs. steady-state. RECOMMEND: add an increment — a `epicFirstMeetBoost` or a
+  level-gated `epicRate` curve — so the FIRST epic is more likely early (satisfying "first by ~L10") and the
+  rate settles after. This directly fixes the Silas case: a player at L25 with zero epics should have had the
+  rate ESCALATING, not flat. A catch-up increment makes the floor structurally reachable, not just hoped-for.
+- **encounter trigger has no per-playstyle term** — the same roll for a combatant and a talker. RECOMMEND: add
+  a playstyle-weighted increment so a cerebral character's danger-locations bias toward PUZZLE/STANDOFF frames
+  (the non-combat encounters they should still hit) rather than only fights they'll decline — so "recognizable
+  encounter" floor is met by the RIGHT KIND for the cohort. This is the increment that most directly fixes
+  Silas: he wasn't offered non-combat frames because the trigger doesn't know he's non-combat.
+Each increment is a DIAL Erik sets; the auditor verifies the increment achieves the floor it exists for. Add an
+increment ONLY where the current dial can't express the intent — not speculative granularity (the SNG-232
+lesson: a knob nothing needs is bloat).
+
+## §6 — READY FOR CCODE (handoff)
+State of the two deliverables:
+- **DESIGN_INTENT_cadence.md** — authored (Aevi). Testable ranges, playstyle-relative floors, [DIAL] numbers
+  Erik ratifies. Should be HOOKED INTO SYSTEM_SPEC.md as a new § (it's system-level intent, belongs with Vision
+  + Design Laws, not orphaned) — Aevi to add the SYSTEM_SPEC pointer.
+- **playthrough_sim.mjs** — CCode builds. Contract:
+  1. Drive the REAL engine (rollTrigger/pickEncounter/isEligible/listAvailableEncounters + the worldtick epic
+     stir), headless, L1→25, many runs. NOT a reimplementation (§Guard — a reimpl would've shown Silas meeting
+     epics while the real offer path dropped them).
+  2. Read the live dials from their modules (§5a) — single source of truth.
+  3. Cohorts across the SNG-113 fingerprint (min: combat / social / craft; social = the Silas regression).
+  4. Assert each cohort hits the DESIGN_INTENT floors; a violated floor EXITS 1 (build gate), like balance_sim.
+  5. Localize the break (§3): "epic rolled N times, offered 0 → the offer path" — ties SNG-231/232.
+  6. Where a floor is unreachable with current dials, that's the signal an INCREMENT (§5b) is needed — the sim
+     REPORTS "no setting of epicRate alone reaches the first-by-L10 floor; needs the catch-up increment."
+- **Erik owes**: the [DIAL] numbers (the floors) + ratifying which increments (§5b) to add. Aevi drafts, Erik tunes.
+- **Sequence:** CCode can build the sim harness against the current dials immediately (it'll FAIL, correctly —
+  proving the harness works by reproducing Silas's zero); then Erik tunes dials + increments until it passes;
+  then it gates the build. The first RED is the harness proving itself.

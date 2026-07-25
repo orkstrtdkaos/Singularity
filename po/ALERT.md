@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## [SYSTEM AUDIT complete_pending_review — CCode, 2026-07-25] Full-engine pass — 2 HIGH fixed, npm test un-REDDED, punch-list filed
+> Erik-requested audit of all 67 engine modules (7 parallel judgment agents + all gates). VERDICT: fundamentally
+> healthy — no crash/data-loss in live play. FIXED: 2 HIGH (native grants ate the breadth cap → a fresh 3+-anchor
+> character could learn nothing until L5; started bound/personal arcs lost their legend directive —
+> structuredQuestRecord dropped boundToCharacter/legendNpc); + the legibility layer was stale enough that the full
+> npm test was RED (engine_map --check: 64 vs 67 modules, 3 undocumented) — refreshed, npm test now exits 0.
+> PUNCH-LIST (verified, in the results doc): MED — NPC-identity slug seam (forks a person into 2 registry entries,
+> verified live in Silas's save), reconcile bumps version past a THROWING step (owed migration lost), locationState
+> write-only (location repairs silently no-op), gm degraded-path drops salvaged ops, aspiration solo-use dead,
+> synthesizeDuelDef drops tier (collapse mis-judged), standingLedger written-never-read. TUNING (Erik's call):
+> resolve ceiling swallows diff-30 at cap; skill-battle duels end in ~1-2 rounds.
+> `po/results/20260725_SYSTEM-AUDIT_full_engine_pass.md`. **AWAITING Erik: which MED to take** (I recommend the
+> NPC-slug seam + duel-tier as mine now; locationState + standingLedger want a design call).
+
 > ## [SNG-235 §3 complete_pending_review — CCode, 2026-07-25] Quest-completion effects were ALL dropping — now wired
 > Erik: "aevi added things to quests — make sure they connect to the engines; this quest makes a new waygate." They
 > did NOT connect. resolveStructuredQuest calls applyQuestEffects (path exists), but the switch had no case for your

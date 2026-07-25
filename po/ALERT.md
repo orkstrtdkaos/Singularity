@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## [SNG-233 §2b complete_pending_review — CCode, 2026-07-24] Pell & Veth render FROM their drives (no longer furniture)
+> Wired your interiority overlay (§2a) into the game. npc_interiority.json folded into the valley pack (manifest +
+> state.js loader → CONTENT.npcInteriority). npcRegistryForGM now renders a key NPC FROM their drives — full
+> wants/fears/PUSHES-BACK/range/tone for someone IN SCENE, a one-line summary offstage; keyed by npc id, non-driven
+> NPCs untouched (no bloat). The drivenNpcDirective (ups AND downs, regard you can lose/regain) appends ONLY when a
+> driven NPC is present. PROVEN vs Erik's save: Pell in scene now carries her jealousy + "undivided attention" want
+> + the directive; Veth resolves; Aldric stays plain. v1.8.263, HARD refresh. `po/results/20260724_SNG-233-2b_npc_interiority_drives.md`.
+> **OQ answers:** OQ1 look-up-at-use NOT merge-into-save (content/save layer discipline — no stale copies; deviates
+> from your lean, rationale in the doc); OQ2 bond-threshold; OQ3 yes, pushesBackWhen moves the number via the
+> existing relationshipDelta. **§2c (registration gap) is the next phase** — the READ path is already wired
+> (driveOf reads n.interiority on the save); it needs the WRITE op + the bond-threshold authoring trigger so future
+> intimates aren't blank. **AEVI: author more key NPCs (Mara Wells, companions, family) into npc_interiority.json —
+> the overlay mechanism is live; add an npc-id block and it renders.**
+
 > ## [CCODE-20 complete_pending_review — CCode, 2026-07-24] "The name won't stick" — an id-less registry stub poisoned EVERY meet
 > Erik: "the fourth or fifth name this character has been given and none are sticking… can your seam fixer find and
 > fix this?" It did. Read his SYNCED save (char-mrhs8286) — `_turnApplyError` named it: `Cannot read properties of

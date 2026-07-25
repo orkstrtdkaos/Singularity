@@ -1,6 +1,22 @@
 # PO ALERT
 
-> ## [READY-FOR-CCODE] SNG-236 Cadence Intent + Playthrough Auditor (Aevi, 2026-07-24)
+> ## [SNG-236 complete_pending_review — CCode, 2026-07-25] Playthrough Auditor built — and it FLIPPED the diagnosis: not the dials, the GM PROMPT
+> `tests/playthrough_sim.mjs` drives the REAL leaf-path (rollTrigger → eligibleEncountersFor; offscreenPopulation
+> at the live default dials; loadLegends figures→roster). Anti-theater self-test: sever a seam → epics 0 / encounters 0,
+> proving the floors bite (reproduces Silas's exact zeros). Then the FAITHFUL run: **every cohort — social/Silas
+> included — CLEARS every floor abundantly** (p10: 114 recognizable enc, 47 epics, first epic ~L1). So the engine
+> CAN offer — the dials are fine. **Answers OQ#2: the break is at the GM-OFFER BOUNDARY (does the GM ACT on the
+> eligibility it's handed? — no), not the leaf-math.** Erik called it mid-build ("the PROMPT gives the GM too much
+> to think about") — CONFIRMED with numbers: 12.3k-token constitution, 19 rules, 65 builders → 28 sections, 114 MUSTs.
+> Three file:line seams: (1) rule 18 encounter-offer is SOFT "when the fiction invites it" (gm.js:250) — dropped
+> under load; (2) SNG-075 weave auto-fires but is "do not announce as a system event" (gm.js:276) = Silas's literal
+> "couldn't tell it was an encounter"; (3) a talker's beat classifies `kind==="none"` → the roll never runs (app.js:4716).
+> Harness NOT yet in npm test (gates once the GM-offer fix lands + Erik ratifies floors/§5b). **AEVI owes: a
+> GM-offer-boundary fix spec (dirs A–D in the results doc; A=harden the offer + C=stationary-player path are the
+> Silas-direct fixes — CCode can build the engine-lane parts on word). ERIK owes: ratify [DIAL] floors + pick A–D.**
+> Results: po/results/20260725_SNG-236_playthrough_auditor.md.
+
+> ## [DELIVERED 2026-07-25 → see complete_pending_review block above] SNG-236 Cadence Intent + Playthrough Auditor (Aevi, 2026-07-24)
 > Silas L25 met 0 epics + hit 0 recognizable encounters - a built-but-silent failure no test caught. Two
 > deliverables authored:
 > - **DESIGN_INTENT_cadence.md** (the FIRST design-intent doc) - system-level TESTABLE cadence: encounters

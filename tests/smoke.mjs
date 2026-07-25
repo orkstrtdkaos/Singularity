@@ -1210,6 +1210,14 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // synthesized duel is a valid, non-lethal, avoidable stat block
   const dd = synthesizeDuelDef(fightEntry);
   check("duel def non-lethal + avoidable", dd.lethal === false && dd.avoidable === true);
+  // CCODE-23: a duel def must carry the CREATURE's tier/minDanger so the SNG-230 collapse/finisher is judged by
+  // the foe, not the location — before this a riffraff pest at a danger-4 place read "too great to end".
+  {
+    const td = synthesizeDuelDef({ id: "beast_x", flavor: "pest", seed: "s", tier: "riffraff", minDanger: 1, opponent: { name: "Pest" } });
+    check("CCODE-23: synthesizeDuelDef carries the creature's tier + minDanger (collapse judged by foe, not place)", td.tier === "riffraff" && td.minDanger === 1);
+    const td2 = synthesizeDuelDef({ id: "y", flavor: "brawl", seed: "s", opponent: {} });
+    check("CCODE-23: an entry with no tier stays clean (no phantom tier field)", !("tier" in td2) && !("minDanger" in td2));
+  }
   check("duel opponent health in 3..8", dd.opponent.health >= 3 && dd.opponent.health <= 8);
   check("duel yieldAt below full health", dd.opponent.yieldAt >= 0 && dd.opponent.yieldAt < dd.opponent.health);
 
@@ -1542,6 +1550,20 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   check("nothing fabricated (defaults are EMPTY)", oldSave.establishedFacts.length === 0 && Object.keys(oldSave.forkChoices).length === 0);
   check("player-facing merge surfaces a login note", r1.playerFacing === true && r1.notes.some(n => /codex/i.test(n)));
   check("reconcileVersion stamped", oldSave.reconcileVersion >= 2);
+  // CCODE-23: a THROWING step must not advance reconcileVersion past itself, or the owed migration never
+  // retries (silent grant loss). Stamp only below the lowest throw; heal on the next load.
+  {
+    const steps = [{ version: 1, id: "a", apply: () => ({}) }, { version: 2, id: "boom", apply: () => { throw new Error("transient"); } }, { version: 3, id: "c", apply: () => ({ notes: ["c"] }) }];
+    const e = { reconcileVersion: 0 };
+    reconcile(e, "character", {}, steps);
+    check("CCODE-23: a thrown reconcile step does NOT advance the version past it (owed migration retries)", e.reconcileVersion === 1);
+    reconcile(e, "character", {}, steps.map(s => s.id === "boom" ? { ...s, apply: () => ({ notes: ["healed"] }) } : s));
+    check("CCODE-23: once the step heals, the version advances to the top (3)", e.reconcileVersion === 3);
+  }
+  // CCODE-23: the resolution action must carry the primary abilityId so a SOLO same-tradition cast feeds an
+  // aspiration (recordAspirationProgress reads action.abilityId; before, only combos advanced it).
+  check("CCODE-23: onChoice's action carries abilityId (solo casts feed aspirations)",
+    /abilityId: choice\.abilityId \|\| null, comboAbilities/.test(readFileSync(new URL('../app.js', import.meta.url), 'utf8')));
   const r2 = reconcile(oldSave, "character", {});
   check("running reconcile twice changes nothing", r2.applied.length === 0 && r2.notes.length === 0);
 

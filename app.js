@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.268";
+const APP_VERSION = "1.8.269";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4355,7 +4355,7 @@ async function onChoice(choice) {
     subAttribute: SUBS.includes(choice.subAttribute) ? choice.subAttribute : null,
     axes: choice.axes || {}, difficulty: choice.difficulty || 0, intentTags: choice.intentTags || [], abilityLevel,
     tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
-    novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || "",
+    novel: !!choice.novel, abilityId: choice.abilityId || null, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || "", // CCODE-23: carry the primary abilityId — recordAspirationProgress reads action.abilityId; without it a SOLO same-tradition cast never fed an aspiration (only combos did)
     // SNG-140: a wild_current craft carries the tangled current's variance — the resolver widens both crit bands
     wildVariance: [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean).some(id => { const ab = fullCatalog()[id]; return !!(ab?.wildVariance || ab?.powerSystem === "wild_current"); }),
     travelTo: choice.travelTo || null, exactWords: choice.exactWords || null // SNG-122: travel destination + literal words for travel-intent detection

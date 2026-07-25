@@ -211,6 +211,11 @@ export function synthesizeDuelDef(entry) {
   const yieldAt = Math.max(0, Math.min(health - 1, Math.round(health * (o.yieldAt || 0.2))));
   return {
     schemaVersion: 1, id: "re-" + entry.id, type: "duel", name: titleFromFlavor(entry),
+    // CCODE-23: carry the CREATURE's tier/minDanger so the SNG-230 finisher/collapse is judged by the FOE, not
+    // the location — encounterFrame collapseFloor/frameCollapsible/frameSize read def.tier/minDanger. Without
+    // this a riffraff pest at a danger-4 frontier read "too great to end in one stroke," and Aevi's tier-keyed
+    // collapseEligibility applied to no random/bestiary duel. Undefined when the entry has none (unchanged).
+    ...(entry.tier != null ? { tier: entry.tier } : {}), ...(entry.minDanger != null ? { minDanger: entry.minDanger } : {}),
     setup: entry.seed, lethal: false, avoidable: true, fromRandom: true, flavor: entry.flavor,
     // SNG-138: a prestige-challenge entry carries these so the resolved duel can feed renown (harmless when absent)
     _challengeBand: entry._challengeBand || undefined, _challenger: entry._challenger || undefined,

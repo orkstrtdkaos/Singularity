@@ -740,12 +740,17 @@ export function reconcile(entity, kind, ctx = {}, steps = null) {
   const seen = entity.reconcileVersion || 0;
   const out = { applied: [], notes: [], offers: [], warnings: [], playerFacing: false };
   let top = seen;
+  // CCODE-23: a THROWN step must NOT advance reconcileVersion past itself, or the owed migration never retries
+  // and its grant is lost permanently + silently (the warning is console-only). Stamp only BELOW the lowest
+  // throw, so a step that failed on a transient (e.g. momentarily-partial CONTENT) runs again next load. Steps
+  // are asserted order-independent + idempotent, so re-running the succeeded ones above it is safe.
+  let lowestThrow = Infinity;
   for (const step of registry) {
-    top = Math.max(top, step.version);
-    if (step.version <= seen) continue;
+    if (step.version <= seen) { top = Math.max(top, step.version); continue; } // already applied — safe to keep
     let r = {};
     try { r = step.apply(entity, ctx) || {}; }
-    catch (err) { out.warnings.push(`${step.id}: ${err.message}`); continue; } // a broken step never blocks load
+    catch (err) { out.warnings.push(`${step.id}: ${err.message}`); lowestThrow = Math.min(lowestThrow, step.version); continue; } // a broken step never blocks load — and is never stamped as done
+    top = Math.max(top, step.version);
     if (r.notes?.length || r.offers?.length) {
       out.applied.push(step.id);
       if (r.notes) out.notes.push(...r.notes);
@@ -754,7 +759,7 @@ export function reconcile(entity, kind, ctx = {}, steps = null) {
     }
     if (r.warnings) out.warnings.push(...r.warnings);
   }
-  entity.reconcileVersion = top;
+  entity.reconcileVersion = Math.min(top, lowestThrow - 1);
   return out;
 }
 

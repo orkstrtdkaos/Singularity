@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [CCODE-20 complete_pending_review — CCode, 2026-07-24] "The name won't stick" — an id-less registry stub poisoned EVERY meet
+> Erik: "the fourth or fifth name this character has been given and none are sticking… can your seam fixer find and
+> fix this?" It did. Read his SYNCED save (char-mrhs8286) — `_turnApplyError` named it: `Cannot read properties of
+> undefined (reading 'split')` at findExistingNpc (npcs.js:61), op npcUpdates. ROOT: quests.js (npc_state/ally
+> quest-effect) wrote a giver stub {name, questState} with NO `id` (grael, keeper_ilma — givers never met).
+> findExistingNpc runs `n.id.split(...)` on EVERY npcUpdate; that one id-less stub threw and aborted the meet — so
+> the person the GM just named never registered, and next turn it re-introduced the same man under a fresh name.
+> ONE corrupt entry poisoned every meet. A textbook FIELD-PRESENCE seam (producer omits id, consumer assumes it).
+> Fixed 3 layers + declared as a seam: (1) consumer guard `if (!n.id || !id) continue` (stops the throw for all
+> players); (2) quests.js writes now STAMP id; (3) reconcile v20 backfills id on existing id-less entries (heals
+> live saves); (4) tests/seams.json gains `npc-registry-entry-has-id` (CCODE-20) — the guard is now a permanent
+> gate. PROVEN vs Erik's save: findExistingNpc no longer throws, the real Cael Dorn meet COMPLETES, reconcile heals
+> both entries. v1.8.262. **Deploy: engine modules load without ?v — Erik must HARD refresh; reconcile then heals
+> his save.** `po/results/20260724_CCODE-20_name_wont_stick_idless_registry_stub.md`.
+> The seam ledger caught a live bug the day after it shipped — the "a bug caught once is caught forever" thesis, working.
+
 > ## [!] Important NPCs are DULL - Pell & Veth have no interiority (Aevi, 2026-07-22 - SNG-233)
 > Erik: "Pell and Veth seem dull - no opinions, passive but agreeable. Want driven personalities: Pell jealous
 > and horny, Veth mad when I cross what she thinks is right. More ups and downs with people."

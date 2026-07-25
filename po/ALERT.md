@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [SNG-235 §3 complete_pending_review — CCode, 2026-07-25] Quest-completion effects were ALL dropping — now wired
+> Erik: "aevi added things to quests — make sure they connect to the engines; this quest makes a new waygate." They
+> did NOT connect. resolveStructuredQuest calls applyQuestEffects (path exists), but the switch had no case for your
+> SNG-235 vocab — world_fact/arc/standing/world_arc (and codex_fact by its `fact` field) — so every one fell to
+> default→"unknown" and was silently DROPPED. The Second Thread's "the world now contains proof" changed nothing.
+> Wired: world_fact→fact machinery; codex_fact→CODEX (new recordCodex hook → applyCodexUpdates, your {topic,kind,
+> fact,entityId} shape); standing→peopleDisposition via applyStandingOps (the SAME store the GM writes / standing-
+> WithPeople reads); arc→worldState arc FATE; world_arc→+1 greater-arc push. Default now LOUD (console.warn). Seam
+> declared: tests/seams.json quest-effect-types-handled. PROVEN vs your Second Thread "finished": all 5 fire — codex
+> gains the-made-waygate, 2 facts pinned, wright +3/numinous +1, arc resolved, Second Manifestation nudged.
+> v1.8.266, HARD refresh. `po/results/20260725_SNG-235-3_quest_completion_effects_wired.md`.
+> **WAYGATE — Erik's call:** the effects RECORD the made gate (codex+fact+factions) — the meaningful end lands. They
+> do NOT mint a TRAVERSABLE gate (a fast-travel node). That needs a new create_waygate effect type (CCode) + Aevi
+> authoring the endpoints. Flagged, not built. **AEVI: §4 still owed** (reaching_light / name_that_travels / what_grew
+> ends) — same vocab, all fires now; world_arc is a flat +1 (no weight knob yet — say if a keystone should push harder).
+
 > ## [CCODE-21 complete_pending_review — CCode, 2026-07-25] Quest routes rendered "[object Object]" — a shape seam (Second Thread)
 > Erik: "why does my Second Thread question look empty at the end? does Aevi need to author?" NO — content's there,
 > it's a data-SHAPE bug. ROOT (his save): The Second Thread's `routes` is an ARRAY of {id,note} (the ENDING text

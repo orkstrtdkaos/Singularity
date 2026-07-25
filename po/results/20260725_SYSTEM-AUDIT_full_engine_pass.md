@@ -46,3 +46,17 @@ All 6 individual gates run green (`smoke`, `wiring_audit`, `content_ci`, `skill_
 `ENGINE_MAP.md` (now refreshed, 67/67) gives every module: one-sentence **purpose**, **player-visible surface**, **what makes it fire**, and a **transitive blast-radius** ("read before changing: `namematch.js`→34 downstream, `traditions.js`→27, `wake.js`→24, `quests.js`→23…"). Plus a **"six lenses"** catalog of the exact defect shapes and where each is caught. It's the answer to "what does this do and what breaks if I change it." The one gap it flags itself: **19 GM ops are handled *inline in app.js*, reaching no engine module** — "engine logic in the view layer, where it becomes untestable" (a real, known architectural smell worth a future extraction).
 
 *— CCode. The machine is sound; two real breaks are fixed; the rest is a legible punch-list. Awaiting your call on which MED items to take (I recommend #1 NPC-slug and #6 duel-tier as mine; #3/#7 want a design decision).*
+
+---
+
+## RESOLUTION (all actionable items fixed — CCODE-22 through CCODE-25)
+
+Erik chose to fix the safe engine MEDs + decide the design-call ones. Done:
+- **HIGH ×2** — native-breadth-cap, bound-arc-legend-strip (CCODE-22).
+- **MED ×5** — reconcile-past-throw + duel-tier-collapse + aspiration-solo-use (CCODE-23), NPC-identity slug seam (CCODE-24), the two write-only stores routed to real readers: locationState→placeMemory + standing-ledger→GM context (CCODE-25).
+- **Legibility** — ENGINE_MAP regenerated (67/67), 3 modules documented, `npm test` un-REDDED (exits 0).
+- **Tuning (Erik's, unchanged)** — resolve ceiling vs diff-30; skill-battle duel length. Flagged, not touched.
+- **LOW smells** — left as the documented punch-list (dead exports, doc drift, unregistered task ids, frameExits labels, standoff scaffold) — cheap cleanup, no behavior impact.
+- **Follow-up (small)** — the standing-ledger *player-panel* render (GM context is wired; the UI list is a UX placement call); the `combinationsAvailableFor` missing `thresholdMet` (LOW, parallel real path exists).
+
+All fixes tested; every suite + full `npm test` green. v1.8.271.

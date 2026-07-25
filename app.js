@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.271";
+const APP_VERSION = "1.8.272";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3513,7 +3513,19 @@ function showBraidMoment(def) {
   const arrow = isDiscovery ? "found in the doing — a thing neither could do apart" : isRecognition ? "you have earned, together" : "braided together into";
   const pop = document.createElement("div");
   pop.id = "help-pop"; pop.className = "help-overlay";
-  const close = () => { pop.remove(); _braidMomentOpen = false; flushBraidMoments(); };
+  // CCODE-26: dismissing the moment — "Hold it close", tap-away, OR after "Make it mine" (all route through
+  // close) — MARKS it presented so it never re-pops. A 3-component DISCOVERY braid (Silas's "Declared
+  // Threshold") never got presented=true from the mint path, and NEITHER close NOR renameBraid set it — so it
+  // re-presented every single load even after he named + held it several times. Mark the def AND the real
+  // customAbility, then persist; the re-present is a nicety, so a save hiccup must never block the close.
+  const close = () => {
+    if (def?.minted && !def.minted.presented) {
+      def.minted.presented = true;
+      if (character?.customAbilities?.[def.id]?.minted) character.customAbilities[def.id].minted.presented = true;
+      try { saveCharacter(character); } catch (e) { console.warn("[braid] presented-flag save skipped:", e?.message); }
+    }
+    pop.remove(); _braidMomentOpen = false; flushBraidMoments();
+  };
   pop.innerHTML = `<div class="help-card braid-moment" role="dialog" aria-label="${isDiscovery ? "A technique discovered" : isRecognition ? "A braid recognised" : "A braid forms"}">
     <div class="braid-moment-kicker">✦ ${kicker} ✦</div>
     ${def.image ? `<img class="braid-moment-art" src="${esc(def.image)}" alt="${esc(def.name)}" data-lightbox="${esc(def.image)}">` : ""}

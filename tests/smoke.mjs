@@ -1572,6 +1572,15 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // aspiration (recordAspirationProgress reads action.abilityId; before, only combos advanced it).
   check("CCODE-23: onChoice's action carries abilityId (solo casts feed aspirations)",
     /abilityId: choice\.abilityId \|\| null, comboAbilities/.test(readFileSync(new URL('../app.js', import.meta.url), 'utf8')));
+  // CCODE-26: the braid-moment close (Hold it close / tap-away / after Make-it-mine — all route through close)
+  // MUST mark the moment presented, or a braid/discovery that arrived with presented=undefined (Silas's
+  // 3-component "Declared Threshold") re-pops every load no matter how many times it's dismissed.
+  {
+    const src = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+    const closeBlock = src.slice(src.indexOf("const close = () => {\n    if (def?.minted && !def.minted.presented)"));
+    check("CCODE-26: the braid-moment close() sets minted.presented on the def AND the customAbility, then saves",
+      /def\.minted\.presented = true;/.test(closeBlock.slice(0, 400)) && /customAbilities\[def\.id\]\.minted\.presented = true/.test(closeBlock.slice(0, 400)) && /saveCharacter\(character\)/.test(closeBlock.slice(0, 400)));
+  }
   const r2 = reconcile(oldSave, "character", {});
   check("running reconcile twice changes nothing", r2.applied.length === 0 && r2.notes.length === 0);
 

@@ -58,6 +58,12 @@ export function findExistingNpc(reg, id, name = "") {
     // registry already knew as an alias forked a second record. Match the alias ledger that was being
     // written all along. Exact slug-match only (an explicit prior name), never a lexical loosening.
     if (nameNorm && (n.aliases || []).some(a => slugify(a) === nameNorm)) return n;
+    // CCODE-20: a registry entry can LACK an `id` — a quest/hunt-effect giver stub (quests.js writes
+    // {name, questState} with no id). findExistingNpc runs on EVERY npcUpdate, so one id-less stub threw
+    // `n.id.split(...)` and aborted the whole meet — poisoning every SUBSEQUENT person too (no name ever
+    // stuck: the GM re-introduced the same character under a fresh name each turn). An id-less entry can't
+    // match by id-prefix anyway (its name was already tried above), so guard both sides and skip it here.
+    if (!n.id || !id) continue;
     const a = n.id.split("-")[0], b = id.split("-")[0];
     if (a === b && (n.id.startsWith(id) || id.startsWith(n.id) || a === id || b === n.id)) return n;
   }

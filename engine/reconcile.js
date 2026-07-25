@@ -627,6 +627,25 @@ export const CHARACTER_STEPS = [
       if (merged.length) notes.push(`Merged ${merged.length} place${merged.length === 1 ? "" : "s"} that had been recorded twice under a cut-off name: ${[...new Set(merged)].slice(0, 3).join(", ")}.`);
       return notes.length ? { notes } : {};
     }
+  },
+  {
+    version: 20, id: "npc-registry-id-backfill", playerFacing: false,
+    // CCODE-20. A quest/hunt-effect giver stub (quests.js npc_state/ally) was written {name, questState}
+    // with NO `id` field. findExistingNpc reads `n.id.split(...)` on EVERY npcUpdate, so ONE id-less stub
+    // threw and aborted the whole meet — the character the GM just introduced never registered, so its name
+    // never stuck ("the fourth or fifth name none of them sticking"). The writer now stamps id and
+    // findExistingNpc guards a missing id; this heals the DATA in saves that already carry an id-less stub.
+    // Idempotent: sets id from the registry KEY only where it's missing; a well-formed entry is untouched.
+    apply: (c) => {
+      const reg = c.npcRegistry;
+      if (!reg || typeof reg !== "object") return {};
+      let healed = 0;
+      for (const [key, n] of Object.entries(reg)) {
+        if (n && typeof n === "object" && !n.id) { n.id = key; healed++; }
+      }
+      if (healed) console.log(`[reconcile] ccode-20: stamped id on ${healed} id-less npcRegistry entr${healed === 1 ? "y" : "ies"} (were poisoning findExistingNpc → the name-won't-stick bug)`);
+      return {}; // silent hygiene — no player-facing note
+    }
   }
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.

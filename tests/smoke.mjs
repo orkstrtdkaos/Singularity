@@ -238,6 +238,30 @@ const legacy = { relationships: { water_keeper: { score: 3, notes: ["shared tea"
 migrateRelationships(legacy, { water_keeper: { name: "Mara Wells", role: "Water Keeper", homeLocation: "millbrook" } });
 check("legacy relationships migrate", legacy.npcRegistry["water-keeper"]?.name === "Mara Wells" && legacy.npcRegistry["water-keeper"].history[0] === "shared tea");
 
+// --- CCODE-20: an id-less registry stub must NEVER poison the whole matcher ---
+// A quest/hunt-effect giver stub (quests.js) was written {name, questState} with NO `id`. findExistingNpc
+// runs on EVERY npcUpdate and did `n.id.split(...)` — so one id-less stub threw and aborted the meet,
+// poisoning every subsequent person: the GM re-introduced the same character under a fresh name each turn
+// (Erik's "fourth or fifth name, none sticking"). The reader must guard; the writer must stamp id.
+{
+  const poisoned = { npcRegistry: { keeper_ilma: { name: "Keeper Ilma", questState: "active" } } }; // id-less stub, as quests.js wrote it
+  let threw = false;
+  try { findExistingNpc(poisoned.npcRegistry, "cael-dorn", "Cael Dorn"); } catch { threw = true; }
+  check("CCODE-20: findExistingNpc does NOT throw on an id-less registry entry (the guard holds)", !threw);
+  // the meet must COMPLETE despite the poison entry — the new person registers, so their name sticks
+  applyNpcUpdates(poisoned, [{ op: "meet", npcId: "cael-dorn", name: "Cael Dorn", role: "duelist" }], { locationId: "zone", day: 14 });
+  check("CCODE-20: a meet completes despite an id-less stub — the new person registers (name sticks)",
+    poisoned.npcRegistry["cael-dorn"]?.name === "Cael Dorn");
+  // the writer (quests.js npc_state/ally) now STAMPS id — a fresh giver stub is well-formed
+  const src = readFileSync(new URL('../engine/quests.js', import.meta.url), 'utf8');
+  check("CCODE-20: the quest-effect giver writer stamps `id` (no new id-less stubs)",
+    /id: character\.npcRegistry\[k\]\?\.id \|\| k,/.test(src));
+  // and the reconcile migration heals saves that already carry an id-less stub
+  const rec = readFileSync(new URL('../engine/reconcile.js', import.meta.url), 'utf8');
+  check("CCODE-20: a reconcile step backfills id on existing id-less registry entries (heals live saves)",
+    /npc-registry-id-backfill/.test(rec) && /n\.id = key/.test(rec));
+}
+
 // --- place memory ---
 const traveler3 = {};
 notePlaceVisit(traveler3, "millbrook", 1);

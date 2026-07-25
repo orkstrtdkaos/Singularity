@@ -311,7 +311,7 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
     switch (e.type) {
       // NPC + people keys are authored content ids (underscores intact) — never slugify them.
       case "npc_state": {
-        if (e.npc) { const k = e.npc; character.npcRegistry[k] = { ...(character.npcRegistry[k] || {}), name: character.npcRegistry[k]?.name || e.npc, questState: e.state, questNote: e.note || null }; }
+        if (e.npc) { const k = e.npc; character.npcRegistry[k] = { id: character.npcRegistry[k]?.id || k, ...(character.npcRegistry[k] || {}), name: character.npcRegistry[k]?.name || e.npc, questState: e.state, questNote: e.note || null }; } // CCODE-20: STAMP id — an id-less giver stub throws in findExistingNpc and poisons every meet
         applied.push({ type: "npc_state", npc: e.npc, state: e.state });
         break;
       }
@@ -374,7 +374,7 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         break;
       }
       case "ally": {
-        if (e.npc) { const k = e.npc; character.npcRegistry[k] = { ...(character.npcRegistry[k] || {}), name: character.npcRegistry[k]?.name || e.npc, ally: true, allyNote: e.note || null }; applied.push({ type: "ally", npc: e.npc }); }
+        if (e.npc) { const k = e.npc; character.npcRegistry[k] = { id: character.npcRegistry[k]?.id || k, ...(character.npcRegistry[k] || {}), name: character.npcRegistry[k]?.name || e.npc, ally: true, allyNote: e.note || null }; applied.push({ type: "ally", npc: e.npc }); } // CCODE-20: STAMP id (see npc_state)
         break;
       }
       case "xp": {

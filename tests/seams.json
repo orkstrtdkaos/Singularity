@@ -48,6 +48,16 @@
       "canFail": "Revert to a seeds-only offer list: eligibleEncountersFor leaves listAvailableEncounters -> red (the pool is unreachable again)."
     },
     {
+      "id": "npc-registry-entry-has-id",
+      "incident": "CCODE-20",
+      "kind": "field-presence",
+      "contract": "Every npcRegistry entry MUST carry an `id`. findExistingNpc reads `n.id.split(...)` on EVERY npcUpdate, so a single id-less entry throws and aborts the meet — poisoning every SUBSEQUENT person too (no name ever sticks). Writers must stamp id; the reader must guard its absence.",
+      "producer": { "file": "engine/quests.js", "note": "the npc_state/ally quest-effect writes a giver stub {name, questState} — it now stamps `id` (was omitting it, the poison source)" },
+      "consumer": { "file": "engine/npcs.js", "region": "findExistingNpc" },
+      "assert": { "requires": ["if \\(!n\\.id \\|\\| !id\\) continue"] },
+      "canFail": "Remove the id-guard from findExistingNpc: one id-less registry stub (a quest giver) throws `n.id.split` and every meet fails again — the CCODE-20 'fourth or fifth name, none sticking' bug returns; the guard pattern vanishes -> red."
+    },
+    {
       "id": "new-encounter-engage-reachable",
       "incident": "CCODE-19",
       "kind": "cross-ref",

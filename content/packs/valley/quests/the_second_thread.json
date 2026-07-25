@@ -94,6 +94,14 @@
      "summary": "A new way through the world, cut by a wright who tends endings — the first since the Transition, and by a route the builders never used.",
      "effects": [
       {
+       "type": "create_waygate",
+       "id": "the_made_gate",
+       "name": "The Made Gate",
+       "description": "The first waygate MADE rather than reached-for — cut at the Crossing by a wright who tends endings, standing where the fold once was. Proof that a gate can be made, not only reached.",
+       "connectsTo": ["the_crossing"],
+       "waygateTier": 2
+      },
+      {
        "type": "world_fact",
        "text": "Silas Weir made the first waygate since the Transition — not by Numinous reaching but MADE, by a wright who tends endings. The world contains proof that a gate can be made, not only reached-for.",
        "permanent": true
@@ -208,6 +216,14 @@
      "name": "Made, and handed on",
      "summary": "You cut it and gave it away. A gate that bears no name, used daily by people who will never ask who made it.",
      "effects": [
+      {
+       "type": "create_waygate",
+       "id": "the_nameless_gate",
+       "name": "The Nameless Gate",
+       "description": "A waygate made at the Crossing and given freely — it bears no maker's name and is used every day by people who will never ask who cut it. The last Waymarker's work, set down.",
+       "connectsTo": ["the_crossing"],
+       "waygateTier": 2
+      },
       {
        "type": "world_fact",
        "text": "Silas Weir made the waygate and handed it over — a gate that bears no name, used daily by people who will never ask who cut it. The Waymarkers' whole purpose, discharged by the last of them, then set down.",

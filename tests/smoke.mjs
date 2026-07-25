@@ -7373,13 +7373,16 @@ await (async () => {
       { type: "arc", arcId: "test_arc", fate: "resolved" },
       { type: "codex_fact", topic: "the_gate", kind: "lore", fact: "a made gate exists" },
       { type: "standing", people: "wright", delta: 3, why: "made it" },
-      { type: "world_arc", arc: "the_second_manifestation", note: "the new way manifests" }
+      { type: "world_arc", arc: "the_second_manifestation", note: "the new way manifests" },
+      { type: "create_waygate", id: "the_made_gate", name: "The Made Gate", connectsTo: ["the_crossing"], waygateTier: 2 }
     ] }] };
     const rec235 = structuredQuestRecord(qdef);
     const c235 = { name: "S", quests: [{ ...rec235, status: "active", awaitingResolution: true }], peopleDisposition: {}, worldState: {}, worldEvents: [] };
+    let gateSpec = null;
     const r235 = resolveStructuredQuest(c235, rec235.id, "finished", {
       worldDay: 10, recordFact: () => {}, recordEvent: () => {}, recordCodex: () => {},
-      recordStanding: ops => { for (const o of ops) c235.peopleDisposition[o.people] = (c235.peopleDisposition[o.people] || 0) + o.delta; }
+      recordStanding: ops => { for (const o of ops) c235.peopleDisposition[o.people] = (c235.peopleDisposition[o.people] || 0) + o.delta; },
+      createWaygate: spec => { gateSpec = spec; return "gen-" + spec.id; }
     });
     const types235 = new Set((r235.applied || []).map(a => a.type));
     check("SNG-235: all four new outcome-effect types FIRE (world_fact/arc/standing/world_arc — none dropped as unknown)",
@@ -7387,6 +7390,8 @@ await (async () => {
     check("SNG-235: standing lands in peopleDisposition (the same store standingWithPeople reads)", c235.peopleDisposition.wright === 3);
     check("SNG-235: the arc fate is recorded + a greater arc is nudged (world changes, not narrative-only)",
       c235.worldState.arcStages?.test_arc?.fate === "resolved" && c235.worldState.arcStages?.the_second_manifestation?.push === 1);
+    check("SNG-235: a create_waygate effect calls ctx.createWaygate with the authored spec (the gate is MADE, real + travelable)",
+      types235.has("create_waygate") && gateSpec?.name === "The Made Gate" && gateSpec?.connectsTo?.[0] === "the_crossing");
   }
 
   check("217 §3a: … and in outcome summary + narration array", !rec.outcomes[0].summary.includes(litN) && !rec.outcomes[0].narration[0].includes(litN));

@@ -442,6 +442,15 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         }
         break;
       }
+      // SNG-235: an ending that MAKES a waygate mints a REAL, travelable one (via the app's location machinery,
+      // injected as ctx.createWaygate so this module stays transport-free — same pattern as recordFact/Codex).
+      case "create_waygate": {
+        if (typeof ctx.createWaygate === "function") {
+          try { const gid = ctx.createWaygate({ id: e.id, name: e.name, description: e.description, connectsTo: e.connectsTo, waygateTier: e.waygateTier }); if (gid) applied.push({ type: "create_waygate", id: gid, name: e.name || null }); }
+          catch (err) { if (typeof console !== "undefined") console.warn("[quest effects] create_waygate failed:", err?.message); }
+        }
+        break;
+      }
       // SNG-235 seam: an unhandled effect type is content↔engine drift (an ending that does nothing). Make it
       // LOUD (was a silent "unknown") so the next drift is caught, not swallowed. The seam auditor also gates
       // it (tests/seams.json → quest-effect-types-handled).

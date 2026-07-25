@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "_doc": [
+    "SNG-232 — THE SEAM LEDGER. A 'seam' is a place where system A (producer) writes data that system B",
+    "(consumer) reads, under an UNSTATED contract both must honor. wiring_audit + content_ci catch WIRING and",
+    "SCHEMA; they do NOT catch two individually-valid systems that DISAGREE about the same data (the ~80% bug",
+    "class of the 2026-07 session: _gen boolean-vs-object, null-field readers, pool-vs-seed sources). This",
+    "ledger DECLARES the known producer->consumer contracts; tests/wiring_audit.mjs (runSeamAudit) gates on them.",
+    "",
+    "DISCIPLINE (mirrors the wiring_audit registry philosophy):",
+    "  - DECLARED, not inferred. We check the seams listed here; we do NOT try to discover every data handoff",
+    "    (undecidable + noisy). Start with the seams that BROKE, grow by incident.",
+    "  - GROWS BY INCIDENT. Every future seam bug adds ONE entry here + it becomes a permanent build gate.",
+    "  - A SEAM CHECK THAT CANNOT FAIL IS THEATER. Each entry reads REAL producer/consumer code that a future",
+    "    edit can break. runSeamAudit self-tests that its own matcher can go red before trusting a green.",
+    "",
+    "ENTRY SHAPE:",
+    "  id         kebab-case stable id",
+    "  incident   the ticket that proved this seam matters (SNG-NNN / CCODE-NN)",
+    "  kind       field-shape | cross-ref | enum-parity   (the class of disagreement)",
+    "  contract   one line: what both ends must agree on",
+    "  producer   { file, note }                 code-site backref: who writes the data",
+    "  consumer   { file, region? }              code-site backref: who reads it; region = a function name to",
+    "                                            scope the scan (omit for a whole-file scan with unique patterns)",
+    "  assert     { requires:[regex...], forbids?:[regex...] }  ALL requires must be present in the consumer",
+    "                                            region; NO forbids may be. Patterns are JS-RegExp source strings.",
+    "  canFail    human note: the edit that turns this red (the falsifiability witness)"
+  ],
+  "seams": [
+    {
+      "id": "danger-level-null-floor",
+      "incident": "SNG-225",
+      "kind": "field-shape",
+      "contract": "A generated location may OMIT dangerLevel; the consumer must floor a missing value (null is NOT 0 — a null-danger place could never roll a fight and starves the pool).",
+      "producer": { "file": "engine/generate.js", "note": "a minted location can leave dangerLevel null (deriveDangerLevel backfills, but the reader must not assume it ran)" },
+      "consumer": { "file": "engine/random_encounters.js", "region": "dangerOf" },
+      "assert": { "requires": ["dangerLevel", "DANGER_FLOOR"] },
+      "canFail": "Reintroduce SNG-225: read location.dangerLevel and coerce raw|0 with no null path (null->0). DANGER_FLOOR leaves dangerOf -> red."
+    },
+    {
+      "id": "encounter-offer-reads-pool",
+      "incident": "SNG-231",
+      "kind": "cross-ref",
+      "contract": "The GM-offer path must read the encounter POOL (eligibleEncountersFor), not ONLY location.encounterSeeds — else SNG-225's pool + SNG-229's bestiary are unreachable through GM offers.",
+      "producer": { "file": "engine/random_encounters.js", "note": "eligibleEncountersFor(table, location) = the danger+tag-gated offerable pool" },
+      "consumer": { "file": "app.js", "region": "listAvailableEncounters" },
+      "assert": { "requires": ["eligibleEncountersFor"] },
+      "canFail": "Revert to a seeds-only offer list: eligibleEncountersFor leaves listAvailableEncounters -> red (the pool is unreachable again)."
+    },
+    {
+      "id": "new-encounter-engage-reachable",
+      "incident": "CCODE-19",
+      "kind": "cross-ref",
+      "contract": "A GM-invented encounter (newEncounter) only REGISTERS a def; a fight STARTS only via a choice carrying its encounterId (onChoice path A). applyTurn must guarantee an engage choice when the GM didn't wire one.",
+      "producer": { "file": "app.js", "note": "the newEncounter op registers character.customEncounters[nd.id]" },
+      "consumer": { "file": "app.js", "note": "onChoice path A starts an encounter from a choice.encounterId; applyTurn injects the bridging choice" },
+      "assert": { "requires": ["encounterId: nd\\.id", "c\\.encounterId === nd\\.id"] },
+      "canFail": "Remove the engage-choice injection from the newEncounter block: the invented duel registers but nothing engages it -> the CCODE-19 'fight won't start' bug returns; the patterns vanish -> red."
+    }
+  ]
+}

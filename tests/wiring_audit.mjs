@@ -461,6 +461,78 @@ if (goneOrphans.length) console.log(`ok    ${goneOrphans.length} previously-orph
 if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export sweep: ${orphans.length} known un-consumed export(s), no change (advisory)`);
 
 
+// ---------- 5. SNG-232: THE SEAM AUDITOR ----------
+// Everything above answers "is each thing WIRED and SCHEMA-VALID?" — and does it well. What it does NOT catch:
+// two individually-valid systems that DISAGREE about the same data. That seam-contract failure was ~80% of the
+// 2026-07 session's bugs (_gen boolean-vs-object, null-field readers, pool-vs-seed sources, register-vs-engage).
+// A "seam" = a producer writes data a consumer reads under an UNSTATED contract. tests/seams.json DECLARES the
+// known contracts; this section gates on them. Grows by incident — a seam that broke once is a build gate
+// forever. It EXTENDS this audit (one gate), it does not replace it.
+//
+// GUARD — a seam check that cannot fail is theater (the registry:internal lesson). Two teeth: (a) the matcher
+// SELF-TESTS against a synthetic broken input before any real seam is trusted, and (b) a stale/renamed consumer
+// region FAILS loud rather than passing vacuously.
+{
+  // Extract a function/region body by name via brace-balance. Tries declaration forms in order (never a bare
+  // call site). Returns null if no declaration is found; returns to EOF if braces don't balance (a string with a
+  // lone brace) — conservative: a larger region only makes `requires` easier to satisfy, never a false red.
+  const sliceRegion = (src, name) => {
+    if (!name) return src;
+    let idx = -1;
+    for (const re of [
+      new RegExp(`function\\s+${name}\\s*\\(`),
+      new RegExp(`(?:const|let|var)\\s+${name}\\s*=\\s*(?:async\\s*)?(?:function|\\()`),
+      new RegExp(`\\b${name}\\s*[:=]\\s*(?:async\\s*)?function`),
+    ]) { const m = src.match(re); if (m) { idx = m.index; break; } }
+    if (idx < 0) return null;
+    const braceStart = src.indexOf("{", idx);
+    if (braceStart < 0) return null;
+    let depth = 0;
+    for (let i = braceStart; i < src.length; i++) {
+      if (src[i] === "{") depth++;
+      else if (src[i] === "}" && --depth === 0) return src.slice(idx, i + 1);
+    }
+    return src.slice(idx);
+  };
+
+  // Run one seam's assert block against a consumer region → { ok, detail }.
+  const runSeam = (regionSrc, assert = {}) => {
+    const missing = (assert.requires || []).filter(p => !new RegExp(p).test(regionSrc));
+    const present = (assert.forbids || []).filter(p => new RegExp(p).test(regionSrc));
+    const bits = [];
+    if (missing.length) bits.push(`missing required: ${missing.join(" | ")}`);
+    if (present.length) bits.push(`forbidden present: ${present.join(" | ")}`);
+    return { ok: missing.length === 0 && present.length === 0, detail: bits.join("; ") };
+  };
+
+  // (a) SELF-TEST — the matcher must go RED on a missing-required pattern and GREEN on a present one, or every
+  // seam verdict below is meaningless. This is the "can it actually fail?" tooth, run before trusting any green.
+  const selfRed = runSeam("a = b + c;", { requires: ["THIS_PATTERN_IS_ABSENT"] });
+  const selfGreen = runSeam("uses eligibleEncountersFor here", { requires: ["eligibleEncountersFor"] });
+  check("SNG-232 seam matcher can go RED (self-test: missing-required fails, present-required passes)",
+    !selfRed.ok && selfGreen.ok, "the seam matcher misbehaved — a green seam below would be theater");
+
+  // (b) the declared ledger — each seam reads REAL producer/consumer code; a broken contract goes red.
+  let seams = null;
+  try { seams = JSON.parse(read("tests/seams.json")).seams || []; }
+  catch (e) { check("SNG-232 tests/seams.json parses", false, e.message); }
+  if (seams) {
+    check(`SNG-232 seam ledger loaded (${seams.length} declared seam${seams.length === 1 ? "" : "s"})`,
+      seams.length > 0, "no seams declared — the auditor has nothing to gate (Aevi authors the full ledger)");
+    for (const s of seams) {
+      const file = s.consumer?.file;
+      let src = null;
+      try { src = read(file); } catch { /* handled next */ }
+      if (src == null) { check(`seam '${s.id}' (${s.incident}): consumer file ${file} exists`, false, "declared consumer file not found — stale seam"); continue; }
+      const region = sliceRegion(src, s.consumer?.region);
+      if (region == null) { check(`seam '${s.id}' (${s.incident}): consumer region ${s.consumer.region}() found in ${file}`, false, "declared region not found — renamed/removed function, stale seam"); continue; }
+      const { ok, detail } = runSeam(region, s.assert);
+      check(`seam '${s.id}' (${s.incident} · ${s.kind}): ${s.contract}`, ok, detail);
+    }
+  }
+}
+
+
 // CCODE-12: the suite is INTENTIONALLY RED right now. The PO asked to watch the seed guard fail
 // before repairing the content, and a deliberate red is only useful if it stays legible — otherwise
 // the next real regression hides inside "the suite is red anyway", which is worse than no gate.

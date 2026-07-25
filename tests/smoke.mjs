@@ -4278,6 +4278,22 @@ await (async () => {
     !/for \(const l of locs\) for \(const c of l\.connections \|\| \[\]\)/.test(appSrc12));
 }
 
+// --- SNG-232: the Seam Auditor survives (guard-the-guard) — a bug caught once must stay caught. The seam
+//     auditor's whole value is durability; if the section can be silently deleted from wiring_audit, the
+//     "caught forever" promise is empty. This gates that the section, its anti-theater self-test, and the
+//     declared ledger all remain present + well-formed. ---
+{
+  const auditSrc232 = readFileSync(new URL('../tests/wiring_audit.mjs', import.meta.url), 'utf8');
+  check("SNG-232: wiring_audit still runs the SEAM AUDITOR section (not silently deleted)",
+    /SNG-232: THE SEAM AUDITOR/.test(auditSrc232) && /const runSeam = /.test(auditSrc232) && /read\("tests\/seams\.json"\)/.test(auditSrc232));
+  check("SNG-232: the seam matcher self-tests it can go RED (the anti-theater tooth is present)",
+    /seam matcher can go RED/.test(auditSrc232) && /THIS_PATTERN_IS_ABSENT/.test(auditSrc232));
+  const seamLedger = JSON.parse(readFileSync(new URL('../tests/seams.json', import.meta.url), 'utf8'));
+  check("SNG-232: tests/seams.json parses + declares ≥1 seam, each with id/incident/kind/consumer.file/assert",
+    Array.isArray(seamLedger.seams) && seamLedger.seams.length >= 1 &&
+    seamLedger.seams.every(s => s.id && s.incident && s.kind && s.consumer?.file && s.assert));
+}
+
 // --- CCODE-11: three map tiers — zoom as NAVIGATION, and no two places share a coordinate ---
 {
   const wm = await import('../engine/worldmap.js');

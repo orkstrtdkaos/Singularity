@@ -1576,7 +1576,7 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   // MUST mark the moment presented, or a braid/discovery that arrived with presented=undefined (Silas's
   // 3-component "Declared Threshold") re-pops every load no matter how many times it's dismissed.
   {
-    const src = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+    const src = readFileSync(new URL('../app.js', import.meta.url), 'utf8').replace(/\r\n/g, "\n"); // normalize CRLF — autocrlf checkouts have \r\n in the working tree; this check's indexOf anchor is LF-only
     const closeBlock = src.slice(src.indexOf("const close = () => {\n    if (def?.minted && !def.minted.presented)"));
     check("CCODE-26: the braid-moment close() sets minted.presented on the def AND the customAbility, then saves",
       /def\.minted\.presented = true;/.test(closeBlock.slice(0, 400)) && /customAbilities\[def\.id\]\.minted\.presented = true/.test(closeBlock.slice(0, 400)) && /saveCharacter\(character\)/.test(closeBlock.slice(0, 400)));

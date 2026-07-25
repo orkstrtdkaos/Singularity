@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.272";
+const APP_VERSION = "1.8.273";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -284,6 +284,7 @@ let seenBeats = 0;       // remote beats already rendered
 // SNG-075: encounters in narrative play — an encounter selected by the narrative-time roll waits
 // here to be WOVEN into the next GM turn (never a modal). One per scene + a turn cooldown.
 let pendingWeave = null;        // { seed, flavor, perilous, loreTier } to inject next turn
+let pendingEncounterOffer = null;// SNG-236 fix A: a STRUCTURED encounter the roll turned up — offered HARD (a framed choice the GM MUST present), not woven invisibly. { id, name, kind }
 let sceneEncounterFired = false;// SNG-127: fired in THIS scene? (adds spacing after the first, not a hard cap)
 let turnsSinceEncounter = 99;   // cooldown counter (turns since the last narrative encounter)
 // SNG-127: the cooldown is now the player's pacing (resolvePacing → cooldown), read per-turn from config.
@@ -3281,6 +3282,13 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     (weave.perilous ? ` This could turn dangerous — you MUST present a way to decline, flee, or avoid it as a clear choice BEFORE any engagement. Never narrate the character as already fighting or already harmed.` : ` Let it be a small, real thing on the road${weave.flavor && /benef|benign|beaut/.test(weave.flavor) ? " — a grace, not a threat" : ""}.`) +
     (weave.loreTier === "precursor-glimpse" ? ` This touches the Precursor — glimpsed, never explained.` : ``)
   ) : null;
+  // SNG-236 fix A: a STRUCTURED encounter the roll turned up is offered HARD — the recognizable-encounter
+  // offer no longer waits on the GM's soft "when the fiction invites it" judgment (the mechanism that
+  // silenced Silas). Same engine-gated-directive pattern as travelDirective's MUST-emit moveTo.
+  const offer = pendingEncounterOffer; pendingEncounterOffer = null;
+  const encounterOfferDetail = offer ? (
+    `The world has turned up a recognizable ${offer.kind} — "${offer.name}". This is NOT ambient texture to fold into prose: it is a bounded encounter the player must be able to SEE and ENTER. You MUST, this beat, present it as a framed CHOICE carrying \`encounterId: "${offer.id}"\` (label it for what it is), beside a clear way to decline or avoid. Do not narrate past it — the engine takes the engage/decline and the frame from there.`
+  ) : null;
   const worldPressureDetail = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
   const substrateDetail = pendingSubstrateNote; pendingSubstrateNote = null; // SNG-090: lattice thin/crowded here
   // SNG-194 §4b: the ENGINE decides whether an unprompted OFFER has room this beat — the model never
@@ -3292,7 +3300,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
       encounterActive: !!activeEnc(),
       gambitOpen: !!gambitDraft,
       intentPending: !!character._pendingIntent,
-      worldActing: !!worldPressureDetail || !!encounterWeaveDetail,
+      worldActing: !!worldPressureDetail || !!encounterWeaveDetail || !!encounterOfferDetail,
       lull: quietTurns >= 1,
       arrived: (sceneTurns?.length || 0) <= 1,
       turnsSinceOffer: character.worldState?.turnsSinceOffer ?? Infinity
@@ -3344,7 +3352,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // env.ephemera so a registry row can never double-fire them.
   const env = gmEnv({
     resolution, playerInput, exactWords, itemAdvance, travelDirective,
-    ephemera: { encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
+    ephemera: { encounterWeaveDetail, encounterOfferDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
   });
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
@@ -4721,8 +4729,32 @@ function maybeNarrativeEncounter(turn, resolution) {
   if (!fired) return;
   const entry = pickEncounter(table, loc, Math.random, {});
   if (!entry) return;
-  // WEAVE, DO NOT INTERRUPT: no card, no scene change — stash the seed for the next GM turn.
-  pendingWeave = { seed: entry.seed, flavor: entry.flavor, perilous: canIncapacitate(entry), loreTier: entry.loreTier || null };
+  // SNG-236 fix A: a STRUCTURED pick (duel/challenge → a real fireable def, SNG-231 fire path) is a
+  // RECOGNIZABLE encounter — offer it HARD (a framed choice the GM MUST present), not woven invisibly.
+  // This is the Silas fix: the recognizable-encounter offer no longer depends on the GM's soft judgment
+  // ("when the fiction invites it") — the world turned it up, so the GM is DIRECTED to present it. Loose
+  // flavor (a grace on the road, a small thing) still WEAVES — ambient texture is not framed. The roll's
+  // own spacing/suppression already gate frequency, and structured picks are a danger-weighted subset, so
+  // this doesn't flood: a danger-courting player gets framed encounters, a quiet scene stays quiet.
+  if (entry.id && (entry.routing === "duel" || entry.routing === "challenge")) {
+    // SNG-236 fix C: in a LOW-danger place, a non-combat scene should meet a TRIAL, not a fight it will
+    // decline. If the roll landed on a duel but a structured CHALLENGE is also eligible here and danger is
+    // low, prefer the challenge — the recognizable NON-COMBAT frame a cerebral beat actually wants. (This
+    // is the safe, offerable-today slice of §5b. The fuller fix — a playstyle-weighted pick term + MORE
+    // authored non-combat frames + making `opposed`/standoff a framed type — is a DIAL/content matter for
+    // Erik + Aevi; only 4 challenge entries and 0 offerable standoffs exist today, so this bias is modest.)
+    let chosen = entry;
+    if (entry.routing === "duel" && (loc.dangerLevel || 0) <= 1) {
+      const trial = eligibleEncountersFor(table, loc, { cap: 8 }).find(e => e.routing === "challenge" && e.id);
+      if (trial) chosen = trial;
+    }
+    const kind = chosen.routing === "duel" ? "fight" : "trial";
+    const name = chosen.name || (chosen.routing === "duel" ? "a hostile meeting" : "a hard passage");
+    pendingEncounterOffer = { id: chosen.id, name: smartClamp(String(name), 80), kind };
+  } else {
+    // WEAVE, DO NOT INTERRUPT: no card, no scene change — stash the seed for the next GM turn.
+    pendingWeave = { seed: entry.seed, flavor: entry.flavor, perilous: canIncapacitate(entry), loreTier: entry.loreTier || null };
+  }
   sceneEncounterFired = true;
   turnsSinceEncounter = 0;
 }

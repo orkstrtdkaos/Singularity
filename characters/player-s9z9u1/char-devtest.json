@@ -54,7 +54,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.02875,
-    "spectrumId": -0.11036050621093746,
+    "spectrumId": -0.10484248090039058,
     "dark_light": 0.03
   },
   "attunement": 3,
@@ -267,14 +267,19 @@
         "player": "Caress her breasts and nipples in the sunshine... let the scen be detailed... then remove her panties and let her prepare herself for your entry ",
         "summary": "On the terrace above the Common Hall, unhurried and lit by slow prism-arcs, the afternoon deepened.",
         "narration": "The prism-arcs move across her skin like something deliberate. You bring your hands to her shoulders first — then lower, slow, following the line the sunlight is already tracing. She is warm from the stone and the season and the afternoon, and when your palms cup her she exhales through her nose, quiet and steady, the way she does everything.\n\nYou take your time with her. Your thumbs find her nipples and she tips her head back a degree — not much, just enough — and the amber-grey eyes go soft at the edges without losing their attention. She is watching the sky and she is watching you and she seems content to do both at once. When your touch firms she makes a small sound that stays between you and the coping wall and the open valley below.\n\nShe reaches down after a moment and does the rest herself. Her hands are deft and unhurried — the same hands that handled the ledger, the same precision — and she holds your gaze while she does it, because Lira does not look away from things. Then she sets her hands on the bench to either side of her and lifts her chin and waits, lit by slow prism-arcs, entirely at ease in the sunshine and in being seen."
+      },
+      {
+        "player": "Enter her slowly from behind as she watches, ask her how she wants it.",
+        "summary": "One last unhurried time on the terrace — she asked for slow, and meant it.",
+        "narration": "She is still on the bench, hands braced to either side, when you move behind her. The prism-arcs cross the coping wall in slow diagonals. She does not turn her head — but the line of her shoulders changes, a small adjustment, a readying, and you know she has tracked you from the moment you moved.\n\nYou find her waist with both hands and she draws a breath, slow and deliberate, the way she does everything. The amber-grey eyes stay forward, watching the valley floor laid out to the west — that green-grey stripe of spring below the plateau — and she waits. She is good at waiting. She has been watching you all afternoon, reading the arc from the first degree.\n\nYou enter her slowly. She tips her chin down once, a single precise acknowledgment, and her knuckles whiten where they press against the bench edge. The terrace is quiet around you — only the faint mineral smell of the paving, the warmth of the stone, the distant nothing of a district going about its count.\n\n\"How do you want it,\" you ask her — low, close to her ear.\n\nA pause. Her shoulders settle. Then, in the same unhurried tone she uses for everything else, she says, \"Slow. I want to feel the whole of it.\" She turns her head just enough to catch you with one amber-grey eye. \"Don't rush toward the end. That's where people get careless.\""
       }
     ],
     "lastTurn": {
-      "narration": "The prism-arcs move across her skin like something deliberate. You bring your hands to her shoulders first — then lower, slow, following the line the sunlight is already tracing. She is warm from the stone and the season and the afternoon, and when your palms cup her she exhales through her nose, quiet and steady, the way she does everything.\n\nYou take your time with her. Your thumbs find her nipples and she tips her head back a degree — not much, just enough — and the amber-grey eyes go soft at the edges without losing their attention. She is watching the sky and she is watching you and she seems content to do both at once. When your touch firms she makes a small sound that stays between you and the coping wall and the open valley below.\n\nShe reaches down after a moment and does the rest herself. Her hands are deft and unhurried — the same hands that handled the ledger, the same precision — and she holds your gaze while she does it, because Lira does not look away from things. Then she sets her hands on the bench to either side of her and lifts her chin and waits, lit by slow prism-arcs, entirely at ease in the sunshine and in being seen.",
-      "sceneSummary": "On the terrace above the Common Hall, unhurried and lit by slow prism-arcs, the afternoon deepened.",
+      "narration": "She is still on the bench, hands braced to either side, when you move behind her. The prism-arcs cross the coping wall in slow diagonals. She does not turn her head — but the line of her shoulders changes, a small adjustment, a readying, and you know she has tracked you from the moment you moved.\n\nYou find her waist with both hands and she draws a breath, slow and deliberate, the way she does everything. The amber-grey eyes stay forward, watching the valley floor laid out to the west — that green-grey stripe of spring below the plateau — and she waits. She is good at waiting. She has been watching you all afternoon, reading the arc from the first degree.\n\nYou enter her slowly. She tips her chin down once, a single precise acknowledgment, and her knuckles whiten where they press against the bench edge. The terrace is quiet around you — only the faint mineral smell of the paving, the warmth of the stone, the distant nothing of a district going about its count.\n\n\"How do you want it,\" you ask her — low, close to her ear.\n\nA pause. Her shoulders settle. Then, in the same unhurried tone she uses for everything else, she says, \"Slow. I want to feel the whole of it.\" She turns her head just enough to catch you with one amber-grey eye. \"Don't rush toward the end. That's where people get careless.\"",
+      "sceneSummary": "One last unhurried time on the terrace — she asked for slow, and meant it.",
       "choices": [
         {
-          "label": "Enter her — slowly, deliberately, still unhurried — and let the afternoon complete itself before the bell sounds.",
+          "label": "Give her slow — match her pace exactly, no hurry toward any end.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -284,18 +289,17 @@
           "trivial": true
         },
         {
-          "label": "Pause here — hold her gaze a moment longer before moving — and ask if she knows Fendt as a person, not just a name on the board.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Hold her gaze in the valley — let the light and the view be part of it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "persuade"
+            "romantic"
           ],
           "trivial": true
         },
         {
-          "label": "Let the moment stay what it is — no words, just the sunlight and her waiting — and give her your full attention.",
+          "label": "Listen to what her body is telling you — follow that instead of any plan.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -303,23 +307,25 @@
             "romantic"
           ],
           "trivial": true
+        },
+        {
+          "label": "When it's done — take a breath, then take the ledger and go.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "travel"
+          ],
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, prism-arcs slow across the coping wall. The afternoon count-bell has not yet sounded.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, slow prism-arcs crossing the coping wall. The count-bell has not yet rung.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "On the bench, blouse off, jacket set aside, hands braced to either side — still, unhurried, watching, lit by prism-arcs."
+            "state": "On the bench, hands braced to either side, facing the valley — entered from behind, eyes forward, shoulders settled and deliberate."
           }
         ],
         "objects": [
@@ -328,12 +334,13 @@
           "Single worker's bench",
           "Iron exterior staircase — at the terrace corner",
           "Lira's jacket — set aside on the bench",
+          "Lira's blouse — off",
           "Valley floor — visible to the west as a green-grey stripe"
         ],
         "threads": [
           "Count-bell has not yet sounded — window to Vael still open",
           "Eastern route behind array housing confirmed as safer approach",
-          "Lira may know Fendt as a person — not yet asked"
+          "Lira asked for slow — the scene is not yet finished"
         ]
       },
       "npcUpdates": [
@@ -341,22 +348,22 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Unhurried in the afternoon sun on the terrace — gave herself to the moment entirely, precise and present as always.",
-          "statusNote": "On the roof terrace with him, lit by prism-arcs, waiting.",
+          "note": "Asked for slow — said that's where people get careless if they rush. Eyes stayed forward on the valley; acknowledged entry with a single precise motion.",
+          "statusNote": "On the terrace, mid-afternoon, bench — present and unhurried.",
           "status": "active"
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A slow quarter-hour on the terrace, the count-bell not yet sounded."
+        "hoursPassed": 0,
+        "why": "A moment only — the scene continues."
       }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, prism-arcs slow across the coping wall. The afternoon count-bell has not yet sounded.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau — midday, early spring. Warm stone, slow prism-arcs crossing the coping wall. The count-bell has not yet rung.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "On the bench, blouse off, jacket set aside, hands braced to either side — still, unhurried, watching, lit by prism-arcs."
+          "state": "On the bench, hands braced to either side, facing the valley — entered from behind, eyes forward, shoulders settled and "
         }
       ],
       "objects": [
@@ -365,12 +372,13 @@
         "Single worker's bench",
         "Iron exterior staircase — at the terrace corner",
         "Lira's jacket — set aside on the bench",
+        "Lira's blouse — off",
         "Valley floor — visible to the west as a green-grey stripe"
       ],
       "threads": [
         "Count-bell has not yet sounded — window to Vael still open",
         "Eastern route behind array housing confirmed as safer approach",
-        "Lira may know Fendt as a person — not yet asked"
+        "Lira asked for slow — the scene is not yet finished"
       ]
     }
   },
@@ -424,7 +432,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Second kiss, slower — she confirmed it with a sound, then pulled back and named what she's known since the corridor: 'You're not a paving contractor.' Hand still on his shirt. Watc",
         "[d1] Accepted the deflection — weighed it, didn't throw it back. Named that she'll want the answer eventually. Hand still on his shirt. Patience with an edge of certainty.",
         "[d1] Third kiss — longer, less composed. She brought her hand to the back of his neck and came with the close without hesitation. Said 'all right' afterward in a register that meant som",
         "[d1] The moment concluded on the terrace — mutual, unhurried, her choice made and comfortable in it. She set the ledger in his hands herself as the count approached, the practical and t",
@@ -433,7 +440,8 @@
         "[d1] Named her light-reading skill as the root of how she reads people and movement — extrapolating the arc from the first degree of bend. Stood, retrieved the ledger, and handed it bac",
         "[d1] One last time on the terrace — mutual, unhurried. She re-settled herself with two economical motions and pressed the ledger into his hands, fingers resting a beat too long. Sent him east behind the array housing before the bell finished sounding.",
         "[d1] Gave herself to the afternoon entirely — jacket off, blouse off, lit by prism-arcs, hands at his sides. Said she was still watching for the bell.",
-        "[d1] Unhurried in the afternoon sun on the terrace — gave herself to the moment entirely, precise and present as always."
+        "[d1] Unhurried in the afternoon sun on the terrace — gave herself to the moment entirely, precise and present as always.",
+        "[d1] Asked for slow — said that's where people get careless if they rush. Eyes stayed forward on the valley; acknowledged entry with a single precise motion."
       ],
       "knownFacts": [
         "She marks the debt cleanly: 'The answer, when you're ready to give it' — patient, not pressuring",
@@ -454,7 +462,7 @@
         "translating technical skill (light-reading) into interperson"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace with him, lit by prism-arcs, waiting.",
+      "statusNote": "On the terrace, mid-afternoon, bench — present and unhurried.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -665,7 +673,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 3
+    "turnsSinceOffer": 4
   },
   "bio": null,
   "subAttributes": {
@@ -855,21 +863,21 @@
     }
   },
   "tendencies": {
-    "social": 7.33558400858747,
-    "strategic": 7.120849989573603,
-    "cautious": 3.6262529706474753,
-    "cerebral": 1.790282852354018,
-    "physical": 0.8906545299188635,
-    "ruthless": 0.8906545299188635,
-    "generous": 0.941142515625,
-    "amorous": 2.95
+    "social": 7.152194408372783,
+    "strategic": 6.942828739834263,
+    "cautious": 3.5355966463812885,
+    "cerebral": 1.7455257810451674,
+    "physical": 0.8683881666708919,
+    "ruthless": 0.8683881666708919,
+    "generous": 0.917613952734375,
+    "amorous": 4.876250000000001
   },
   "aptitudes": [],
-  "actionCount": 19,
+  "actionCount": 20,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785021827107,
-  "rev": 63,
+  "updatedAt": 1785022048561,
+  "rev": 64,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1042,7 +1050,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 16
+    "valley": 17
   },
   "foreclosed": [],
   "company": [],
@@ -1061,22 +1069,22 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-25T23:18:42.738Z",
-      "lastAt": "2026-07-25T23:23:47.098Z",
+      "lastAt": "2026-07-25T23:27:28.553Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 3
+      "beats": 4
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 2,
-    "choices": 2,
-    "scene": 2,
-    "npcUpdates": 2,
-    "timeOps": 2,
+    "sceneSummary": 3,
+    "choices": 3,
+    "scene": 3,
+    "npcUpdates": 3,
+    "timeOps": 3,
     "sceneEnded": 1,
     "characterDeltas": 1
   },
-  "_opTurns": 2
+  "_opTurns": 3
 }

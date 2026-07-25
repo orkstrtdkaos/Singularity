@@ -4313,9 +4313,9 @@ await (async () => {
   check("SNG-232: the seam matcher self-tests it can go RED (the anti-theater tooth is present)",
     /seam matcher can go RED/.test(auditSrc232) && /THIS_PATTERN_IS_ABSENT/.test(auditSrc232));
   const seamLedger = JSON.parse(readFileSync(new URL('../tests/seams.json', import.meta.url), 'utf8'));
-  check("SNG-232: tests/seams.json parses + declares ≥1 seam, each with id/incident/kind/consumer.file/assert",
+  check("SNG-232: tests/seams.json parses + declares ≥1 seam, each id/incident/kind/contract + one check mode",
     Array.isArray(seamLedger.seams) && seamLedger.seams.length >= 1 &&
-    seamLedger.seams.every(s => s.id && s.incident && s.kind && s.consumer?.file && s.assert));
+    seamLedger.seams.every(s => s.id && s.incident && s.kind && s.contract && (s.consumer?.file || s.corpus || s.content || s.coveredBy)));
 }
 
 // --- CCODE-11: three map tiers — zoom as NAVIGATION, and no two places share a coordinate ---

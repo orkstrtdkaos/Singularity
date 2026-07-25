@@ -1,71 +1,157 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "_doc": [
-    "SNG-232 — THE SEAM LEDGER. A 'seam' is a place where system A (producer) writes data that system B",
-    "(consumer) reads, under an UNSTATED contract both must honor. wiring_audit + content_ci catch WIRING and",
-    "SCHEMA; they do NOT catch two individually-valid systems that DISAGREE about the same data (the ~80% bug",
-    "class of the 2026-07 session: _gen boolean-vs-object, null-field readers, pool-vs-seed sources). This",
-    "ledger DECLARES the known producer->consumer contracts; tests/wiring_audit.mjs (runSeamAudit) gates on them.",
+    "SNG-232 — THE SEAM LEDGER (checkable form). A 'seam' is a place where system A (producer) writes data that",
+    "system B (consumer) reads, under an UNSTATED contract both must honor. wiring_audit + content_ci catch WIRING",
+    "and SCHEMA; they do NOT catch two individually-valid systems that DISAGREE about the same data (the ~80% bug",
+    "class of the 2026-07 session). tests/wiring_audit.mjs §5 (runSeam) gates on the seams declared here.",
     "",
-    "DISCIPLINE (mirrors the wiring_audit registry philosophy):",
-    "  - DECLARED, not inferred. We check the seams listed here; we do NOT try to discover every data handoff",
-    "    (undecidable + noisy). Start with the seams that BROKE, grow by incident.",
-    "  - GROWS BY INCIDENT. Every future seam bug adds ONE entry here + it becomes a permanent build gate.",
-    "  - A SEAM CHECK THAT CANNOT FAIL IS THEATER. Each entry reads REAL producer/consumer code that a future",
-    "    edit can break. runSeamAudit self-tests that its own matcher can go red before trusting a green.",
+    "This file is COMPILED from Aevi's authored ledger (po/staged_content/seam_ledger.json) — her prose contracts",
+    "+ checkHints, turned into machine-checkable asserts by CCode (SNG-232 ownership split). Add a future seam by",
+    "appending one entry here (grows by incident); author the intent in Aevi's ledger, CCode compiles the check.",
     "",
-    "ENTRY SHAPE:",
-    "  id         kebab-case stable id",
-    "  incident   the ticket that proved this seam matters (SNG-NNN / CCODE-NN)",
-    "  kind       field-shape | cross-ref | enum-parity   (the class of disagreement)",
-    "  contract   one line: what both ends must agree on",
-    "  producer   { file, note }                 code-site backref: who writes the data",
-    "  consumer   { file, region? }              code-site backref: who reads it; region = a function name to",
-    "                                            scope the scan (omit for a whole-file scan with unique patterns)",
-    "  assert     { requires:[regex...], forbids?:[regex...] }  ALL requires must be present in the consumer",
-    "                                            region; NO forbids may be. Patterns are JS-RegExp source strings.",
-    "  canFail    human note: the edit that turns this red (the falsifiability witness)"
+    "DISCIPLINE: DECLARED not inferred (we check listed seams, never auto-discover). GROWS BY INCIDENT. A SEAM",
+    "CHECK THAT CANNOT FAIL IS THEATER — every entry reads REAL code (or a REAL covering gate) that a future edit",
+    "can break; runSeam self-tests its matcher can go red before trusting any green.",
+    "",
+    "KINDS (Aevi's taxonomy): field_presence (a writer may OMIT a field a reader assumes → reader floors/guards OR",
+    "writer fills), field_shape (both ends must agree on TYPE), cross_source (a consumer reads a source a related",
+    "producer doesn't feed), enum_vocab (op/id vocab must be the SAME set across contract/handler/prompt).",
+    "",
+    "CHECK MODES (pick by which fields the entry declares):",
+    "  consumer{file,region?} + assert{requires[],forbids?[]}  — scope to a function (or whole file), regex-assert.",
+    "  corpus[dir|file...]      + assert                        — scan many files at once (whole-of-engine forbids).",
+    "  content{dir,requireFields[]}                             — every JSON record in a dir carries the fields",
+    "                                                             (dotted path = non-null; \"name[N]\" = array len N).",
+    "  coveredBy{gate,signature}                                — the seam is gated by ANOTHER mature check; assert",
+    "                                                             its signature is still present (delete it → red)."
   ],
   "seams": [
     {
-      "id": "danger-level-null-floor",
+      "id": "seam_gen_location_dangerLevel",
       "incident": "SNG-225",
-      "kind": "field-shape",
+      "kind": "field_presence",
       "contract": "A generated location may OMIT dangerLevel; the consumer must floor a missing value (null is NOT 0 — a null-danger place could never roll a fight and starves the pool).",
-      "producer": { "file": "engine/generate.js", "note": "a minted location can leave dangerLevel null (deriveDangerLevel backfills, but the reader must not assume it ran)" },
+      "producer": { "file": "engine/generate.js", "note": "a minted location can leave dangerLevel null" },
       "consumer": { "file": "engine/random_encounters.js", "region": "dangerOf" },
       "assert": { "requires": ["dangerLevel", "DANGER_FLOOR"] },
-      "canFail": "Reintroduce SNG-225: read location.dangerLevel and coerce raw|0 with no null path (null->0). DANGER_FLOOR leaves dangerOf -> red."
+      "canFail": "Coerce location.dangerLevel with raw|0 and no null path (null->0): DANGER_FLOOR leaves dangerOf -> red."
     },
     {
-      "id": "encounter-offer-reads-pool",
+      "id": "seam_gen_location_worldPos",
+      "incident": "SNG-180",
+      "kind": "field_presence",
+      "contract": "Every manifest-listed location MUST carry worldPos{colatitude,longitude} + axisVector[12]. A generated or hand-authored location may omit them; catch it at BUILD (content-time), not late at runtime.",
+      "producer": { "file": "engine/generate.js", "note": "location authoring/mint; Aevi's the_old_warden_post once shipped with null worldPos/axisVector" },
+      "content": { "dir": "content/packs/valley/locations", "requireFields": ["worldPos.colatitude", "worldPos.longitude", "axisVector[12]"] },
+      "canFail": "Ship a location JSON missing worldPos or axisVector[12] -> the record is named -> red (caught at build, not in map/travel at runtime)."
+    },
+    {
+      "id": "seam_gen_marker_shape",
+      "incident": "SNG-216",
+      "kind": "field_shape",
+      "contract": "The _gen marker's TYPE must agree: the mint writes an OBJECT, but old saves carried _gen:true (boolean); a reader that did property-access threw. The reconcile normalizer heals boolean/missing _gen -> tracking object so no reader crashes.",
+      "producer": { "file": "app.js", "note": "the location mint writes _gen as a tracking object" },
+      "consumer": { "file": "engine/reconcile.js", "note": "the gen-tracking-object step heals any non-object _gen before readers see it" },
+      "assert": { "requires": ["gen-tracking-object"] },
+      "canFail": "Remove the gen-tracking-object reconcile step: an old boolean-_gen save re-enters unhealed and the first _gen property-write throws again (SNG-216) -> red."
+    },
+    {
+      "id": "seam_poleIntensity_shape",
+      "incident": "SNG-216",
+      "kind": "field_shape",
+      "contract": "poleIntensity MUST be an object {pole:0..1}, never a float. A content author can write a scalar by mistake; the derived-schema validator catches it.",
+      "producer": { "file": "content/packs/valley/locations", "note": "location content authoring" },
+      "coveredBy": { "gate": "tests/content_ci.mjs", "signature": "poleIntensity" },
+      "canFail": "Delete the content_ci schema-validation check: a scalar poleIntensity would no longer be caught -> the signature leaves content_ci -> red."
+    },
+    {
+      "id": "seam_encounter_offer_source",
       "incident": "SNG-231",
-      "kind": "cross-ref",
+      "kind": "cross_source",
       "contract": "The GM-offer path must read the encounter POOL (eligibleEncountersFor), not ONLY location.encounterSeeds — else SNG-225's pool + SNG-229's bestiary are unreachable through GM offers.",
       "producer": { "file": "engine/random_encounters.js", "note": "eligibleEncountersFor(table, location) = the danger+tag-gated offerable pool" },
       "consumer": { "file": "app.js", "region": "listAvailableEncounters" },
       "assert": { "requires": ["eligibleEncountersFor"] },
-      "canFail": "Revert to a seeds-only offer list: eligibleEncountersFor leaves listAvailableEncounters -> red (the pool is unreachable again)."
+      "canFail": "Revert to a seeds-only offer list: eligibleEncountersFor leaves listAvailableEncounters -> the pool is unreachable again -> red."
+    },
+    {
+      "id": "seam_discovery_usable",
+      "incident": "SNG-226",
+      "kind": "cross_source",
+      "contract": "A discovery the player can USE must be registered where usability is READ (abilities[] + customAbilities), not only where discoveries are recorded. registerDiscoveryAbility must write the usable ability.",
+      "producer": { "file": "engine/braids.js", "note": "registerDiscoveryAbility mints the braid-shaped usable def" },
+      "consumer": { "file": "engine/braids.js", "region": "registerDiscoveryAbility" },
+      "assert": { "requires": ["abilities\\.push", "customAbilities"] },
+      "canFail": "Make registerDiscoveryAbility write only discoveries[] (drop the abilities.push): the intent-parser reads abilities[] and never sees the skill (SNG-226 — earned but uncastable) -> red."
+    },
+    {
+      "id": "seam_bestiary_loaded",
+      "incident": "SNG-229",
+      "kind": "cross_source",
+      "contract": "A manifest provides.* key MUST be read by the loader or the content silently doesn't load (provides.bestiary was declared, unread -> creatureIds unresolvable). The rule applies to EVERY new provides.* key.",
+      "producer": { "file": "content/packs/valley/manifest.json", "note": "provides.* declarations" },
+      "coveredBy": { "gate": "tests/content_ci.mjs", "signature": "provides\\.\\* key" },
+      "canFail": "Delete the content_ci provides-key/loader check (SNG-065): a declared-but-unread key would no longer fail -> the signature leaves content_ci -> red."
+    },
+    {
+      "id": "seam_travelTo_is_place",
+      "incident": "SNG-228",
+      "kind": "field_shape",
+      "contract": "travelTo MUST be a PLACE, never a PERSON. The parser can set it to a person's name; the resolver must cross-check the NPC registry before minting a phantom destination (a pronoun guard alone misses proper-name people).",
+      "producer": { "file": "engine/intent.js", "note": "the parser sets turn.travelTo" },
+      "consumer": { "file": "engine/intent.js", "region": "personDestination" },
+      "assert": { "requires": ["npcRegistry"] },
+      "canFail": "Strip the npcRegistry cross-check from personDestination: 'catch Ossian' mints 'Ossian' as a phantom place again (SNG-228) -> red."
+    },
+    {
+      "id": "seam_aspirations_path",
+      "incident": "SNG-232",
+      "kind": "field_presence",
+      "contract": "Aspirations live at character.practice.aspirations; a top-level character.aspirations read finds nothing and 'proves' absence. No code may read the top-level path.",
+      "producer": { "file": "engine/practice.js", "note": "the save nests aspirations under practice" },
+      "corpus": ["engine", "app.js"],
+      "assert": { "forbids": ["character\\.aspirations\\b"] },
+      "canFail": "Add a read of character.aspirations (top-level, not practice.aspirations) anywhere in engine/ or app.js -> the forbidden pattern appears -> red."
+    },
+    {
+      "id": "seam_op_vocab_triples",
+      "incident": "SNG-190",
+      "kind": "enum_vocab",
+      "contract": "Every GM op must exist in the prompt contract, the handler, AND the tracked vocab (SALVAGEABLE_OPS) — a documented op with no handler, or a documented op not salvageable, is a silent dead path.",
+      "producer": { "file": "engine/gm.js", "note": "the op contract + SALVAGEABLE_OPS" },
+      "coveredBy": { "gate": "tests/wiring_audit.mjs", "signature": "every documented contract op is salvageable" },
+      "canFail": "Delete the contract<->salvage parity check: a documented-but-unsalvageable op would no longer fail -> the signature leaves wiring_audit -> red. (Runtime emission drift is separately surfaced by See-the-Machine.)"
+    },
+    {
+      "id": "seam_traditionId_vocab",
+      "incident": "SNG-179",
+      "kind": "enum_vocab",
+      "contract": "A traditionId the GM emits must resolve against the canonical vocab (CONTENT.traditionIndex); an unresolvable id must be LOGGED as a vocab-miss, never silently dropped (which makes an op look emitted-but-inert).",
+      "producer": { "file": "engine/gm.js", "note": "the GM emits markTeacher/standingOps/offerAcquisition with a traditionId; THE PEOPLES block shows the valid ids" },
+      "consumer": { "file": "app.js" },
+      "assert": { "requires": ["_opVocabMisses", "traditionIndex"] },
+      "canFail": "Remove the _opVocabMisses capture: an unresolvable traditionId is dropped silently again (SNG-179 — markTeacher looks emitted, does nothing) -> red."
     },
     {
       "id": "npc-registry-entry-has-id",
       "incident": "CCODE-20",
-      "kind": "field-presence",
+      "kind": "field_presence",
       "contract": "Every npcRegistry entry MUST carry an `id`. findExistingNpc reads `n.id.split(...)` on EVERY npcUpdate, so a single id-less entry throws and aborts the meet — poisoning every SUBSEQUENT person too (no name ever sticks). Writers must stamp id; the reader must guard its absence.",
-      "producer": { "file": "engine/quests.js", "note": "the npc_state/ally quest-effect writes a giver stub {name, questState} — it now stamps `id` (was omitting it, the poison source)" },
+      "producer": { "file": "engine/quests.js", "note": "the npc_state/ally quest-effect giver stub now stamps `id` (was omitting it, the poison source)" },
       "consumer": { "file": "engine/npcs.js", "region": "findExistingNpc" },
       "assert": { "requires": ["if \\(!n\\.id \\|\\| !id\\) continue"] },
-      "canFail": "Remove the id-guard from findExistingNpc: one id-less registry stub (a quest giver) throws `n.id.split` and every meet fails again — the CCODE-20 'fourth or fifth name, none sticking' bug returns; the guard pattern vanishes -> red."
+      "canFail": "Remove the id-guard from findExistingNpc: one id-less registry stub throws `n.id.split` and every meet fails again — the CCODE-20 'fourth or fifth name, none sticking' bug returns -> red."
     },
     {
       "id": "new-encounter-engage-reachable",
       "incident": "CCODE-19",
-      "kind": "cross-ref",
+      "kind": "cross_source",
       "contract": "A GM-invented encounter (newEncounter) only REGISTERS a def; a fight STARTS only via a choice carrying its encounterId (onChoice path A). applyTurn must guarantee an engage choice when the GM didn't wire one.",
       "producer": { "file": "app.js", "note": "the newEncounter op registers character.customEncounters[nd.id]" },
       "consumer": { "file": "app.js", "note": "onChoice path A starts an encounter from a choice.encounterId; applyTurn injects the bridging choice" },
       "assert": { "requires": ["encounterId: nd\\.id", "c\\.encounterId === nd\\.id"] },
-      "canFail": "Remove the engage-choice injection from the newEncounter block: the invented duel registers but nothing engages it -> the CCODE-19 'fight won't start' bug returns; the patterns vanish -> red."
+      "canFail": "Remove the engage-choice injection from the newEncounter block: the invented duel registers but nothing engages it -> the CCODE-19 'fight won't start' bug returns -> red."
     }
   ]
 }

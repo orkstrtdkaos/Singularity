@@ -485,7 +485,17 @@ if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export 
       new RegExp(`\\b${name}\\s*[:=]\\s*(?:async\\s*)?function`),
     ]) { const m = src.match(re); if (m) { idx = m.index; break; } }
     if (idx < 0) return null;
-    const braceStart = src.indexOf("{", idx);
+    // Find the BODY brace, not a brace inside the parameter list — default/destructured params carry braces
+    // (`catalog = {}`, `{ at = null } = {}`). If params are in parens, balance the parens first, THEN take the
+    // next `{`; only fall back to the first `{` when there's no param-paren before it (e.g. a bare-arg arrow).
+    const firstBrace = src.indexOf("{", idx);
+    const firstParen = src.indexOf("(", idx);
+    let braceStart;
+    if (firstParen >= 0 && (firstBrace < 0 || firstParen < firstBrace)) {
+      let pd = 0, i = firstParen;
+      for (; i < src.length; i++) { if (src[i] === "(") pd++; else if (src[i] === ")" && --pd === 0) break; }
+      braceStart = src.indexOf("{", i);
+    } else { braceStart = firstBrace; }
     if (braceStart < 0) return null;
     let depth = 0;
     for (let i = braceStart; i < src.length; i++) {
@@ -495,7 +505,7 @@ if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export 
     return src.slice(idx);
   };
 
-  // Run one seam's assert block against a consumer region → { ok, detail }.
+  // Run one seam's assert block against a scanned source → { ok, detail }.
   const runSeam = (regionSrc, assert = {}) => {
     const missing = (assert.requires || []).filter(p => !new RegExp(p).test(regionSrc));
     const present = (assert.forbids || []).filter(p => new RegExp(p).test(regionSrc));
@@ -505,6 +515,27 @@ if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export 
     return { ok: missing.length === 0 && present.length === 0, detail: bits.join("; ") };
   };
 
+  // corpus SCAN — concat named files/dirs into one searchable string (for a whole-of-engine forbids/requires).
+  const corpusSrc = (list) => (list || []).map(entry => {
+    if (/\.(mjs|js)$/.test(entry)) { try { return read(entry); } catch { return ""; } }
+    try { return readdirSync(join(root, entry)).filter(f => f.endsWith(".js")).map(f => read(`${entry}/${f}`)).join("\n"); } catch { return ""; }
+  }).join("\n");
+
+  // content-presence — every JSON record in a dir must carry the required fields. `field` specs: a dotted path
+  // ("worldPos.colatitude") asserts non-null; a "[N]" suffix ("axisVector[12]") asserts an array of that length.
+  const walkField = (obj, spec) => {
+    const arr = spec.match(/^(.+)\[(\d+)\]$/);
+    if (arr) { const v = arr[1].split(".").reduce((o, k) => (o == null ? o : o[k]), obj); return Array.isArray(v) && v.length === Number(arr[2]); }
+    return spec.split(".").reduce((o, k) => (o == null ? o : o[k]), obj) != null;
+  };
+  const contentPresence = (dir, fields) => {
+    let files = [];
+    try { files = readdirSync(join(root, dir)).filter(f => f.endsWith(".json")); } catch { return { ok: false, detail: `content dir ${dir} not found` }; }
+    const bad = [];
+    for (const f of files) { let j; try { j = JSON.parse(read(`${dir}/${f}`)); } catch { continue; } for (const spec of (fields || [])) if (!walkField(j, spec)) bad.push(`${f}:${spec}`); }
+    return { ok: bad.length === 0, detail: bad.length ? `${bad.length} record(s) missing a required field: ${bad.slice(0, 6).join(", ")}${bad.length > 6 ? " …" : ""}` : "" };
+  };
+
   // (a) SELF-TEST — the matcher must go RED on a missing-required pattern and GREEN on a present one, or every
   // seam verdict below is meaningless. This is the "can it actually fail?" tooth, run before trusting any green.
   const selfRed = runSeam("a = b + c;", { requires: ["THIS_PATTERN_IS_ABSENT"] });
@@ -512,7 +543,13 @@ if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export 
   check("SNG-232 seam matcher can go RED (self-test: missing-required fails, present-required passes)",
     !selfRed.ok && selfGreen.ok, "the seam matcher misbehaved — a green seam below would be theater");
 
-  // (b) the declared ledger — each seam reads REAL producer/consumer code; a broken contract goes red.
+  // (b) the declared ledger — each seam reads REAL code (or a REAL covering gate); a broken contract goes red.
+  // Four modes, dispatched by which fields the entry declares:
+  //   coveredBy → the seam is gated by ANOTHER check; assert that check's signature is still present (so a
+  //               deleted covering gate turns THIS seam red — the seam is never silently un-gated).
+  //   content   → iterate JSON records in a dir, assert each carries the required fields (catch at BUILD, not play).
+  //   corpus    → concat named files/dirs, run assert.requires/forbids across the whole scan.
+  //   (default) → scope to consumer.file [+ region], run assert.requires/forbids.
   let seams = null;
   try { seams = JSON.parse(read("tests/seams.json")).seams || []; }
   catch (e) { check("SNG-232 tests/seams.json parses", false, e.message); }
@@ -520,14 +557,25 @@ if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export 
     check(`SNG-232 seam ledger loaded (${seams.length} declared seam${seams.length === 1 ? "" : "s"})`,
       seams.length > 0, "no seams declared — the auditor has nothing to gate (Aevi authors the full ledger)");
     for (const s of seams) {
+      const label = `seam '${s.id}' (${s.incident} · ${s.kind}): ${s.contract}`;
+      if (s.coveredBy) {
+        let gsrc = null; try { gsrc = read(s.coveredBy.gate); } catch { /* handled next */ }
+        if (gsrc == null) { check(`${label} [coveredBy ${s.coveredBy.gate}]`, false, "covering-gate file not found — stale seam"); continue; }
+        const present = new RegExp(s.coveredBy.signature).test(gsrc);
+        check(label, present, present ? "" : `the covering check's signature /${s.coveredBy.signature}/ is GONE from ${s.coveredBy.gate} — this seam is no longer gated anywhere`);
+        continue;
+      }
+      if (s.content) { const { ok, detail } = contentPresence(s.content.dir, s.content.requireFields); check(label, ok, detail); continue; }
+      if (s.corpus) { const { ok, detail } = runSeam(corpusSrc(s.corpus), s.assert); check(label, ok, detail); continue; }
+      // default: scope to the consumer file [+ region]
       const file = s.consumer?.file;
       let src = null;
       try { src = read(file); } catch { /* handled next */ }
-      if (src == null) { check(`seam '${s.id}' (${s.incident}): consumer file ${file} exists`, false, "declared consumer file not found — stale seam"); continue; }
+      if (src == null) { check(`${label} [consumer ${file}]`, false, "declared consumer file not found — stale seam"); continue; }
       const region = sliceRegion(src, s.consumer?.region);
-      if (region == null) { check(`seam '${s.id}' (${s.incident}): consumer region ${s.consumer.region}() found in ${file}`, false, "declared region not found — renamed/removed function, stale seam"); continue; }
+      if (region == null) { check(`${label} [region ${s.consumer.region}]`, false, "declared region not found — renamed/removed function, stale seam"); continue; }
       const { ok, detail } = runSeam(region, s.assert);
-      check(`seam '${s.id}' (${s.incident} · ${s.kind}): ${s.contract}`, ok, detail);
+      check(label, ok, detail);
     }
   }
 }

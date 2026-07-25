@@ -39,6 +39,19 @@ A single-player-and-family tabletop RPG run by a language model, in a world whos
 
 ---
 
+
+## 2b. Cadence Intent (SNG-236 — the game must DO what it intends)
+The system's intended EXPERIENCE cadence — how often a player should hit recognizable encounters, meet
+epic/legendary figures, be offered growth paths — is documented as TESTABLE intent in **`po/DESIGN_INTENT_cadence.md`**
+and VERIFIED by the Playthrough Auditor (`tests/playthrough_sim.mjs`, SNG-236). This exists because a devoted
+level-25 character (Silas) reached endgame having met ZERO epics and hit ZERO recognizable encounters — a
+built-but-silent failure no test caught. The rule this establishes: **a system that is BUILT must be PROVEN to
+OCCUR at its intended rate, per playstyle, in CI — not discovered missing by a human at level 25.** The auditor
+reads the live dials (`epicRate`/`minEpicGapDays` in worldtick.js, encounter-weight coefficients in
+random_encounters.js) as the single source of truth and fails the build when a cohort falls below an intent
+floor. Behavioral complement to the Wiring Contract (§23): the Wiring Contract proves the paths CONNECT; the
+Cadence Auditor proves the experience HAPPENS.
+
 ## 3. Architecture
 
 ```

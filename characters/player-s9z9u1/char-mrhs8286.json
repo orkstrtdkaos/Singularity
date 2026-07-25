@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 26,
-  "xp": 2512,
+  "xp": 2520,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -158,7 +158,7 @@
   "maxHealth": 155,
   "health": 155,
   "maxEnergy": 225,
-  "energy": 220,
+  "energy": 218,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1926,82 +1926,108 @@
         "player": "Use the attended end while healing yourself from the last bit of life from the giant wolverine using draw down",
         "summary": "Silas drew the wolverine's last life-force through Draw Down to ease the resonance-burn — a careful taking at the ending's edge. The creature is dead. The party is still separated across two hundred yards of Zone ground.",
         "narration": "The wolverine is not dead yet. That is the first thing The Attended End tells you, plainly and without softening — there is still something present in the broad chest, a thread of it, the last margin before the line. You could let it finish on its own. You kneel instead.\n\nDraw Down asks for touch, and you give it one hand on the coarse flank where the fur has not yet gone cold. The living warmth there is almost nothing. You take what is offered — carefully, the way you pour from a nearly-empty vessel, because there is almost nothing left and you have no interest in taking more than the ending has already freed. The burn along your forearms does not vanish. It recedes, the way a fire recedes when you move back from it — the damage still present, the worst edge gone. Your left arm steadies. Your right arm still aches from wrist to elbow, but you can close the hand cleanly.\n\nThe thread in the wolverine goes still. The Attended End notes it — the exact moment, plain and unhurried. You stay a breath past it, hand still on the flank, because that is what the craft is for. Huginn makes one sound from the clearing's edge and goes quiet again. Veth's voice carries across the two hundred yards between you, low and even: she has named the kill's Zone-weight to herself, you can tell, and she is already reading what a second death on this stretch means for your passage.\n\nFrom the south, Pell's voice comes across the distance. She does not shout. She pitches it to carry. \"Still standing?\" she says."
+      },
+      {
+        "player": "Use The Attended End on the wolverine now that it has passed — read what kind of thing it was, and what killed it before you arrived here",
+        "summary": "Silas reads the wolverine's ended life — Zone-changed but not Zone-broken, a mature female who lived healthy right to the moment of his blade. Huginn acknowledges. Veth calls the warning: keep moving.",
+        "narration": "The wolverine is still. You kneel beside it and set one hand flat on the broad chest.\n\nThe Attended End opens quietly. It does not need much from you here — the ending is already complete, and a complete ending is the clearest kind to read.\n\nWhat you find is this: it was not Zone-born. The bones say it lived eleven or twelve years in ordinary country, as wolverines do — bone-dense, full-grown, a female that had whelped twice. The Zone changed her somewhere in the middle years. Not a violent change. A slow one, the kind that rewires rather than breaks. The broad shoulders, the deliberate unfrightened way she held ground — those were hers already. The Zone only made them more.\n\nWhat killed her was your spear and your blade. Nothing else. She was not sick. She was not being eaten from inside by whatever the Zone had done to her. She was, as far as the ending can tell you, fine — right up to the moment she wasn't.\n\nHuginn makes one sound from the flat stone at the clearing's edge. Low, short, considered. Not mourning. Acknowledgment.\n\nVeth's voice carries across the distance from the far bank, measured and even. \"Silas. The Zone reads kills. Keep moving.\""
       }
     ],
     "lastTurn": {
-      "narration": "The wolverine is not dead yet. That is the first thing The Attended End tells you, plainly and without softening — there is still something present in the broad chest, a thread of it, the last margin before the line. You could let it finish on its own. You kneel instead.\n\nDraw Down asks for touch, and you give it one hand on the coarse flank where the fur has not yet gone cold. The living warmth there is almost nothing. You take what is offered — carefully, the way you pour from a nearly-empty vessel, because there is almost nothing left and you have no interest in taking more than the ending has already freed. The burn along your forearms does not vanish. It recedes, the way a fire recedes when you move back from it — the damage still present, the worst edge gone. Your left arm steadies. Your right arm still aches from wrist to elbow, but you can close the hand cleanly.\n\nThe thread in the wolverine goes still. The Attended End notes it — the exact moment, plain and unhurried. You stay a breath past it, hand still on the flank, because that is what the craft is for. Huginn makes one sound from the clearing's edge and goes quiet again. Veth's voice carries across the two hundred yards between you, low and even: she has named the kill's Zone-weight to herself, you can tell, and she is already reading what a second death on this stretch means for your passage.\n\nFrom the south, Pell's voice comes across the distance. She does not shout. She pitches it to carry. \"Still standing?\" she says.",
-      "sceneSummary": "Silas drew the wolverine's last life-force through Draw Down to ease the resonance-burn — a careful taking at the ending's edge. The creature is dead. The party is still separated across two hundred yards of Zone ground.",
+      "narration": "The wolverine is still. You kneel beside it and set one hand flat on the broad chest.\n\nThe Attended End opens quietly. It does not need much from you here — the ending is already complete, and a complete ending is the clearest kind to read.\n\nWhat you find is this: it was not Zone-born. The bones say it lived eleven or twelve years in ordinary country, as wolverines do — bone-dense, full-grown, a female that had whelped twice. The Zone changed her somewhere in the middle years. Not a violent change. A slow one, the kind that rewires rather than breaks. The broad shoulders, the deliberate unfrightened way she held ground — those were hers already. The Zone only made them more.\n\nWhat killed her was your spear and your blade. Nothing else. She was not sick. She was not being eaten from inside by whatever the Zone had done to her. She was, as far as the ending can tell you, fine — right up to the moment she wasn't.\n\nHuginn makes one sound from the flat stone at the clearing's edge. Low, short, considered. Not mourning. Acknowledgment.\n\nVeth's voice carries across the distance from the far bank, measured and even. \"Silas. The Zone reads kills. Keep moving.\"",
+      "sceneSummary": "Silas reads the wolverine's ended life — Zone-changed but not Zone-broken, a mature female who lived healthy right to the moment of his blade. Huginn acknowledges. Veth calls the warning: keep moving.",
       "choices": [
         {
-          "label": "Cross back to Pell and Veth now — two hundred yards of frost-hard Zone ground between you; check on the party before anything else",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Examine what the wolverine was working at the base of the downed tree before moving on",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "travel",
+            "study",
             "careful"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Examine what the wolverine was working at the base of the downed tree before you leave this clearing",
+          "label": "Use Order-Sense on the clearing and the downed tree — read what the wolverine was working at, and whether it fits the Zone's wider design here",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.3
+          },
+          "difficulty": 0,
           "intentTags": [
             "study",
-            "scout"
+            "careful"
           ],
           "abilityId": "order_sense",
-          "trivial": false
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use The Attended End on the wolverine now that it has passed — read what kind of thing it was, and what killed it before you arrived here",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Leave the tree unexamined. Reform the shadow-twin and walk south to rejoin Pell and Veth — the Zone reads kills, and the party has been separated long enough",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {
+            "violence_peace": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "devote"
-          ],
-          "abilityId": "the-attended-end",
-          "trivial": false
-        },
-        {
-          "label": "Ask Huginn directly — it was present for both deaths on this stretch, and it knows when something's ending was made rather than natural",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
+            "careful",
+            "travel"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Deathsense on the clearing itself — read whether anything else nearby is carrying an ending close to its surface",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "health": 3,
-        "energy": -3
-      },
       "scene": {
-        "setting": "Frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges, early-spring dawn, flat pale light. The wolverine is dead at Silas's hand at the base of the downed tree.",
+        "setting": "Frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges, early-spring dawn, flat pale light. The wolverine is dead and read at the base of the downed tree.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Two hundred yards south at the streambed — hand on Memory's shaft, voice just carried across the distance: 'Still standing?'"
+            "state": "Two hundred yards south at the streambed — hand on Memory's shaft, waiting."
           },
           {
             "name": "Veth Ondra",
-            "state": "At the far bank — reading the clearing's implications quietly to herself, second death on this stretch noted."
+            "state": "At the far bank — has called the warning to keep moving; watching the clearing."
           },
           {
             "name": "Huginn",
-            "state": "On the flat stone at the clearing's edge — made one sound at the moment of death, now still."
+            "state": "On the flat stone at the clearing's edge — made one acknowledgment sound, now still."
           }
         ],
         "objects": [
-          "the Zone-changed wolverine — dead at the base of the downed tree, Silas's hand still on its flank",
+          "the Zone-changed wolverine — dead at the base of the downed tree, read and complete",
           "the downed dead tree — whatever the wolverine was working at its base remains unexamined",
           "frost-hard ground with clear four-toed impressions leading to this spot",
           "resonance-burn along both of Silas's forearms — wrist to elbow, eased but not gone"
@@ -2017,58 +2043,62 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Called across two hundred yards of Zone ground to check whether Silas is still standing — her voice pitched to carry, not to shout.",
-          "statusNote": "Two hundred yards south at the streambed — hand on Memory's shaft, watching the clearing."
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion — Ashwarden-touched carrion bird",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Made one low acknowledgment sound at the wolverine's complete ending — not mourning, recognition.",
+          "statusNote": "On the flat stone at the clearing's edge — present and attending.",
+          "status": "active"
         },
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
-          "name": "Veth Ondra",
-          "note": "Noted the second kill on this stretch quietly — reading what it means for the party's passage north.",
-          "statusNote": "At the far bank, two hundred yards south — reading the clearing, second death on this stretch named."
+          "name": "Veth (Stillwater) Ondra",
+          "role": "Former Ashwarden warden, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Called the movement warning across the distance — measured and plain: the Zone reads kills, keep moving.",
+          "statusNote": "At the far bank, two hundred yards south — watching the clearing, waiting for Silas to return.",
+          "status": "active"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "draw-down",
-          "label": "Draw Down — careful taking",
+          "topic": "zone-wolverine-reading",
+          "label": "The Wolverine's Ending — What the Attended End Found",
           "kind": "lore",
-          "fact": "Draw Down can take from a creature at the very edge of death — the last thread before the ending. Taking carefully from so little returns a partial mend only; the cost is real and the margin is narrow.",
+          "fact": "The Zone-changed wolverine at the clearing was not Zone-born. Eleven or twelve years old, mature female, had whelped twice — lived ordinary wolverine years before the Zone changed her slowly, a rewiring rather than a breaking. She was not sick, not failing, not being consumed by whatever had changed her. She was healthy up to the moment Silas killed her. The Zone made her more of what she already was.",
           "links": [
-            "the-attended-end",
-            "what-the-water-remembers"
+            "what-the-water-remembers",
+            "zone-left-branch-entrance"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief attendant moment at the wolverine's death — kneeling, drawing, staying a breath past the ending"
-      },
-      "offer": {
-        "thing": "Huginn's single sound at the exact moment of the wolverine's death — timed, as Huginn's sounds always are, and a comment",
-        "from": "Huginn's nature: it attends endings and knows when they were made rather than natural — and this clearing has now had two"
+        "why": "a brief attended reading at the ending's edge"
       }
     },
     "sceneState": {
-      "setting": "Frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges, early-spring dawn, flat pale light. The wolverine is dead at Silas's hand at the base of the downed tree.",
+      "setting": "Frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges, early-spring dawn, flat pale light. The wolverine is dead and read at the base of the downed tree.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Two hundred yards south at the streambed — hand on Memory's shaft, voice just carried across the distance: 'Still standi"
+          "state": "Two hundred yards south at the streambed — hand on Memory's shaft, waiting."
         },
         {
           "name": "Veth Ondra",
-          "state": "At the far bank — reading the clearing's implications quietly to herself, second death on this stretch noted."
+          "state": "At the far bank — has called the warning to keep moving; watching the clearing."
         },
         {
           "name": "Huginn",
-          "state": "On the flat stone at the clearing's edge — made one sound at the moment of death, now still."
+          "state": "On the flat stone at the clearing's edge — made one acknowledgment sound, now still."
         }
       ],
       "objects": [
-        "the Zone-changed wolverine — dead at the base of the downed tree, Silas's hand s",
+        "the Zone-changed wolverine — dead at the base of the downed tree, read and compl",
         "the downed dead tree — whatever the wolverine was working at its base remains un",
         "frost-hard ground with clear four-toed impressions leading to this spot",
         "resonance-burn along both of Silas's forearms — wrist to elbow, eased but not go"
@@ -3804,7 +3834,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Drew the ashwarden open-hand mark into the shadow-frame at the gate's left upright — named it plainly as for the ones who come after.",
         "[d14] Confirmed Silas's read of the direction with a single word — she already knew where the threads pointed.",
         "[d14] Received the gate's declaration with a single exhaled 'Good' — the warden's economy of approval.",
         "[d14] Watched Silas set the Boundary-Stone without comment — her version of approval. Eyes already on the country ahead.",
@@ -3813,7 +3842,8 @@
         "[d14] Came up over the bank edge at the fight's close — read the gravel in one look and named that the warpling turned rather than was broken.",
         "[d14] Named the tracks as pre-warpling in nature — heavier, older, walking with confidence or patience. Neither good company.",
         "[d14] Called across the distance to name the kill's Zone-weight — practical, not alarmed. Her second noted death on this stretch.",
-        "[d14] Noted the second kill on this stretch quietly — reading what it means for the party's passage north."
+        "[d14] Noted the second kill on this stretch quietly — reading what it means for the party's passage north.",
+        "[d14] Called the movement warning across the distance — measured and plain: the Zone reads kills, keep moving."
       ],
       "knownFacts": [
         "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean.",
@@ -3836,7 +3866,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the far bank, two hundred yards south — reading the clearing, second death on this stretch named.",
+      "statusNote": "At the far bank, two hundred yards south — watching the clearing, waiting for Silas to return.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5174,7 +5204,7 @@
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
     "lastGenCount": 621,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
@@ -5338,10 +5368,10 @@
     "insight": 7,
     "presence": 8,
     "rapport": 6,
-    "craft": 7,
+    "craft": 8,
     "wits": 6
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 4,
   "discoveries": [
     {
@@ -6561,20 +6591,24 @@
         "facts": [
           "[d3] The Attended End can anchor a maker's mark — a permanent grain-signature sent as offer rather than claim — through Memory's rune-threshold. The craft stirs and holds it when something acquires permane",
           "[d5] The Attended End read both men at the limestone bend: no death in either frame. The broad man carries a bruised rib and will bury a sister come summer — the aggression is borrowed from grief not yet a",
-          "[d5] Named a man's coming grief — a sister, come summer — aloud in front of him, and he knew without asking how the Ashwarden knew. The reading, shown on the face, is its own argument."
+          "[d5] Named a man's coming grief — a sister, come summer — aloud in front of him, and he knew without asking how the Ashwarden knew. The reading, shown on the face, is its own argument.",
+          "[d14] The Zone-changed wolverine at the clearing was not Zone-born. Eleven or twelve years old, mature female, had whelped twice — lived ordinary wolverine years before the Zone changed her slowly, a rewiring rather than a breaking. She was not sick, not failing, not being consumed by whatever had…"
         ],
         "links": [
           "pell",
           "huginn",
           "deathsense",
           "find-the-engineer",
-          "millbrook"
+          "millbrook",
+          "what-the-water-remembers",
+          "zone-left-branch-entrance"
         ],
         "aliases": [
-          "The Attended End — Road Opportunists"
+          "The Attended End — Road Opportunists",
+          "The Wolverine's Ending — What the Attended End Found"
         ],
         "createdDay": 3,
-        "updatedDay": 5
+        "updatedDay": 14
       },
       "maret-doss": {
         "id": "maret-doss",
@@ -6781,22 +6815,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.417974576899514,
-    "cerebral": 10.146435036041495,
-    "social": 7.737798399190366,
-    "generous": 2.778129802602498,
-    "cautious": 13.842019236127559,
-    "physical": 5.221017532336364,
-    "risky": 1.252277631213572,
-    "ruthless": 0.5336018162833112,
-    "carousing": 0.44316217498845695,
-    "amorous": 1.6290618232020708,
-    "patient": 0.9871623688840976,
-    "stealth": 0.00009526022120323607,
-    "devotion": 1.076837924600581,
-    "craft": 3.38057218005979,
-    "leadership": 1.4699901415133447,
-    "deception": 0.4561871908223564
+    "strategic": 16.982525212477025,
+    "cerebral": 10.892774160140458,
+    "social": 7.544353439210607,
+    "generous": 2.7086765575374354,
+    "cautious": 13.49596875522437,
+    "physical": 5.0904920940279546,
+    "risky": 1.2209706904332327,
+    "ruthless": 0.5202617708762284,
+    "carousing": 0.4320831206137455,
+    "amorous": 1.588335277622019,
+    "patient": 0.9624833096619951,
+    "stealth": 0.00009287871567315517,
+    "devotion": 2.0499169764855667,
+    "craft": 3.2960578755582954,
+    "leadership": 1.4332403879755111,
+    "deception": 0.4447825110517975
   },
   "aptitudes": [
     "strategist",
@@ -6805,7 +6839,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 853,
+  "actionCount": 854,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7195,8 +7229,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785017418250,
-  "rev": 1437,
+  "updatedAt": 1785017600706,
+  "rev": 1439,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9809,7 +9843,7 @@
       "palework": 30,
       "deathsense": 37,
       "shadowstep": 24,
-      "the-attended-end": 40,
+      "the-attended-end": 41,
       "wildcraft": 6,
       "the_raised_thing": 17,
       "the_ended_threat": 5,
@@ -10405,7 +10439,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 604,
+    "valley": 605,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10566,10 +10600,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-25T22:10:18.247Z",
+      "lastAt": "2026-07-25T22:13:20.703Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 9
+      "beats": 10
     }
   ],
   "company": [
@@ -10816,15 +10850,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 225,
-    "choices": 225,
+    "sceneSummary": 226,
+    "choices": 226,
     "characterDeltas": 93,
-    "scene": 225,
-    "npcUpdates": 203,
+    "scene": 226,
+    "npcUpdates": 204,
     "factUpdates": 17,
     "placeUpdates": 40,
-    "codexUpdates": 135,
-    "timeOps": 219,
+    "codexUpdates": 136,
+    "timeOps": 220,
     "imagePrompt": 5,
     "sceneEnded": 54,
     "itemUpdates": 5,
@@ -10842,7 +10876,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 225,
+  "_opTurns": 226,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

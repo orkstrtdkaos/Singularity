@@ -1901,56 +1901,67 @@
         "player": null,
         "summary": "A warpling cornered on the dry streambed yielded and withdrew — the fight won without a killing blow, the creature still alive and gone east along the bank.",
         "narration": "The warpling stops.\n\nNot slowly — it simply stops, all six legs planted in the gravel, the stuttering rhythm gone still. Its haunches are still bunched. Its nose works the air. But the rush is over, and whatever drove it forward has gone somewhere else.\n\nYou are standing on the gravel with Memory in hand, and the warpling is three feet away, watching you with the flat bright eye of a thing that has just decided you are not worth the cost. It holds that still for two full breaths. Then it turns — not fast, not slow — and moves away east along the streambed, each step deliberate, the wrong number of legs carrying it in that stuttering slide until it reaches the shadow of the far bank's overhang and is gone.\n\nPell exhales through her nose, said Pell: \"Good.\" She does not move from her position on the far bank. Huginn descends from above the alder stand in a long unhurried spiral and lands on a stone three feet to your left. It watches the place where the warpling disappeared. Then it turns its head and looks at you, and says nothing, which from Huginn means the same as saying: that one was not finished yet. Veth comes up over the bank edge behind you, her boots finding the firm stone line without being told where it was. She reads the tracks in the gravel and the stillness of the streambed in one look, said Veth: \"It turned. Something in it still works.\""
+      },
+      {
+        "player": "Check the deep four-toed tracks along the far bank — something else has been through here recently, and it is larger than the warpling",
+        "summary": "The four-toed tracks read as something large, heavy, and unhurried — heading north-and-west, the same direction as the party.",
+        "narration": "You move to the far bank and crouch over the tracks.\n\nThey are clean impressions in the soft mud just above the waterline — four toes, deeply set, with the heel-pad pressing almost an inch into the ground. The stride is long. Whatever made these was heavy enough to sink through the gravel surface into the clay beneath, and it was walking, not running. You measure the spread of the nearest print against your spread hand. It is wider across the toes than your palm is long.\n\nVeth comes up beside you and studies the ground without touching anything. \"Weight like that, four-toed — not a warpling. Something older,\" said Veth, her voice even. \"The stride says it was not in a hurry. That is either confidence or patience, and neither is good company on this ground.\"\n\nHuginn drops from the boulder to a flat stone at the streambed's edge, three feet from the nearest track. He looks at the impression for a long moment. Then he looks north-and-west — the direction the tracks lead — and says nothing at all.\n\nPell drops down from the far bank and reads the line of the stride without being asked. \"It went the same way we are going,\" said Pell. She does not make it a question."
       }
     ],
     "lastTurn": {
-      "narration": "The warpling stops.\n\nNot slowly — it simply stops, all six legs planted in the gravel, the stuttering rhythm gone still. Its haunches are still bunched. Its nose works the air. But the rush is over, and whatever drove it forward has gone somewhere else.\n\nYou are standing on the gravel with Memory in hand, and the warpling is three feet away, watching you with the flat bright eye of a thing that has just decided you are not worth the cost. It holds that still for two full breaths. Then it turns — not fast, not slow — and moves away east along the streambed, each step deliberate, the wrong number of legs carrying it in that stuttering slide until it reaches the shadow of the far bank's overhang and is gone.\n\nPell exhales through her nose, said Pell: \"Good.\" She does not move from her position on the far bank. Huginn descends from above the alder stand in a long unhurried spiral and lands on a stone three feet to your left. It watches the place where the warpling disappeared. Then it turns its head and looks at you, and says nothing, which from Huginn means the same as saying: that one was not finished yet. Veth comes up over the bank edge behind you, her boots finding the firm stone line without being told where it was. She reads the tracks in the gravel and the stillness of the streambed in one look, said Veth: \"It turned. Something in it still works.\"",
-      "sceneSummary": "A warpling cornered on the dry streambed yielded and withdrew — the fight won without a killing blow, the creature still alive and gone east along the bank.",
+      "narration": "You move to the far bank and crouch over the tracks.\n\nThey are clean impressions in the soft mud just above the waterline — four toes, deeply set, with the heel-pad pressing almost an inch into the ground. The stride is long. Whatever made these was heavy enough to sink through the gravel surface into the clay beneath, and it was walking, not running. You measure the spread of the nearest print against your spread hand. It is wider across the toes than your palm is long.\n\nVeth comes up beside you and studies the ground without touching anything. \"Weight like that, four-toed — not a warpling. Something older,\" said Veth, her voice even. \"The stride says it was not in a hurry. That is either confidence or patience, and neither is good company on this ground.\"\n\nHuginn drops from the boulder to a flat stone at the streambed's edge, three feet from the nearest track. He looks at the impression for a long moment. Then he looks north-and-west — the direction the tracks lead — and says nothing at all.\n\nPell drops down from the far bank and reads the line of the stride without being asked. \"It went the same way we are going,\" said Pell. She does not make it a question.",
+      "sceneSummary": "The four-toed tracks read as something large, heavy, and unhurried — heading north-and-west, the same direction as the party.",
       "choices": [
         {
-          "label": "Read the warpling's tracks and the streambed — Deathsense the area for what drew it here and what it was hunting before you arrived",
+          "label": "Use Order-Sense on the tracks — read what design the creature is part of and where in the Zone that design runs",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.3
+            "death_life": -0.1,
+            "chaos_order": 0.2
           },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "deathsense",
+          "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Check the deep four-toed tracks along the far bank — something else has been through here recently, and it is larger than the warpling",
+          "label": "Use The Attended End — let it read whether the creature that made these tracks is in its ending, or far from it",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
         },
         {
-          "label": "Move on — the Zone's reclamation site is north-and-west and the warpling has shown you how the local wildlife reads a threat. Push the pace.",
+          "label": "Follow the tracks north-and-west at a careful distance — the direction is already yours; see what you share it with",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 0,
+          "axes": {
+            "violence_peace": -0.05
+          },
+          "difficulty": 15,
           "intentTags": [
+            "scout",
+            "careful",
             "travel"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Ask Veth what she made of the warpling's behavior — a warden read on a Zone creature that turned instead of pressed is worth having before you go deeper",
+          "label": "Ask Huginn plainly — it looked north-and-west and said nothing, which is a comment",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -1963,37 +1974,32 @@
           "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "The dry streambed, two hundred yards east of the rising track — early-spring morning, flat light, the gravel and old stone of the bed still, the warpling gone east under the far bank's overhang.",
+        "setting": "The far bank of the dry streambed, crouched over four-toed tracks in the soft mud — early-spring morning, flat light, the warpling gone east and out of sight under the overhang.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing on the far bank, Memory still across her back — exhaled once, watching the streambed's east end."
+            "state": "Standing over the track line, reading the stride direction — north-and-west, the same as the party's heading."
           },
           {
             "name": "Veth Ondra",
-            "state": "Stepped up over the bank edge behind Silas — reading the tracks in the gravel, named that the warpling turned."
+            "state": "Crouched beside Silas, studying the tracks without touching them — named their weight and quality plainly."
           },
           {
             "name": "Huginn",
-            "state": "Landed on a stone three feet to Silas's left after descending from above the alder — watching the place where the warpling disappeared."
+            "state": "Perched on a flat stone at the streambed's edge, watching the north-and-west horizon. Has not spoken."
           }
         ],
         "objects": [
+          "the four-toed tracks — wide as Silas's spread hand, heel-pad an inch deep, walking stride, leading north-and-west",
           "the dry streambed — gravel and old stone, no water",
-          "the stand of dead alder — thirty feet east, the warpling gone into shadow beneath the far bank",
-          "deep four-toed tracks along the far bank — something larger passed through here",
-          "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath — standing behind the party at the left branch entrance"
+          "the stand of dead alder — thirty feet east",
+          "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath — two hundred yards south"
         ],
         "threads": [
-          "The four-toed tracks along the far bank — something larger than the warpling has been through here recently",
-          "The Zone's reclamation site is north-and-west — the array and whatever 'prepare' means are still ahead",
-          "Huginn's silence after the warpling turned: the creature was not finished"
+          "Something large and unhurried has gone north-and-west ahead of the party — the same direction as the reclamation site",
+          "Huginn looked north-and-west and went silent — that silence is a comment",
+          "The Zone's reclamation site and whatever 'prepare' means are still ahead"
         ]
       },
       "npcUpdates": [
@@ -2001,68 +2007,64 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Held position on the far bank as anchor through the warpling engagement — called Silas's left shoulder at the opening rush, exhaled at the yield.",
-          "status": "active",
-          "statusNote": "Moving north-and-west with the party into the Zone — the warpling encounter resolved."
+          "note": "Read the track line's direction without being asked — named it matches the party's heading, plainly and without drama.",
+          "statusNote": "Moving north-and-west with the party into the Zone — reading the ground ahead."
         },
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth Ondra",
-          "note": "Came up over the bank edge at the fight's close — read the gravel in one look and named that the warpling turned rather than was broken.",
-          "learned": [
-            "A Zone warpling that turns rather than presses still has something working in it — not a dead thing reanimated, a living thing rewired."
-          ],
+          "note": "Named the tracks as pre-warpling in nature — heavier, older, walking with confidence or patience. Neither good company.",
           "skillsObserved": [
-            "warden's read of Zone creature behavior from track evidence and aftermath"
+            "reading Zone creature sign from track evidence — weight, stride, and behavioral intent"
           ],
-          "status": "active",
-          "statusNote": "Moving north-and-west with the party into the Zone — the warpling encounter resolved."
+          "statusNote": "Moving north-and-west with the party into the Zone — track-reading at the streambed."
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a short fight and its immediate aftermath on the streambed"
-      },
       "codexUpdates": [
         {
-          "topic": "zone-warpling-behavior",
-          "label": "Warpling — Zone Behavior",
-          "kind": "lore",
-          "fact": "A warpling cornered on the dry streambed yielded and withdrew rather than fight to the end — Veth named it: something in it still works. Not a dead thing reanimated; a living thing rewired.",
+          "topic": "zone-large-creature",
+          "label": "The Four-Toed Thing",
+          "kind": "mystery",
+          "fact": "A creature larger than a warpling — four-toed, heavy enough to sink through gravel into clay, walking unhurried — has passed through the left-branch streambed heading north-and-west, the same direction as the reclamation site. Veth reads it as old and confident. Huginn looked that direction and said nothing.",
           "links": [
             "what-the-water-remembers",
             "the-light-that-will-not-dim"
           ]
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a short examination of the tracks at the streambed"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The dry streambed, two hundred yards east of the rising track — early-spring morning, flat light, the gravel and old stone of the bed still, the warpling gone east under the far bank's overhang.",
+      "setting": "The far bank of the dry streambed, crouched over four-toed tracks in the soft mud — early-spring morning, flat light, the warpling gone east and out of sight under the overhang.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing on the far bank, Memory still across her back — exhaled once, watching the streambed's east end."
+          "state": "Standing over the track line, reading the stride direction — north-and-west, the same as the party's heading."
         },
         {
           "name": "Veth Ondra",
-          "state": "Stepped up over the bank edge behind Silas — reading the tracks in the gravel, named that the warpling turned."
+          "state": "Crouched beside Silas, studying the tracks without touching them — named their weight and quality plainly."
         },
         {
           "name": "Huginn",
-          "state": "Landed on a stone three feet to Silas's left after descending from above the alder — watching the place where the warpli"
+          "state": "Perched on a flat stone at the streambed's edge, watching the north-and-west horizon. Has not spoken."
         }
       ],
       "objects": [
+        "the four-toed tracks — wide as Silas's spread hand, heel-pad an inch deep, walki",
         "the dry streambed — gravel and old stone, no water",
-        "the stand of dead alder — thirty feet east, the warpling gone into shadow beneat",
-        "deep four-toed tracks along the far bank — something larger passed through here",
+        "the stand of dead alder — thirty feet east",
         "the made gate — shadow-framed, warded, declared, Boundary-Stone seated beneath —"
       ],
       "threads": [
-        "The four-toed tracks along the far bank — something larger than the warpling has been through here recently",
-        "The Zone's reclamation site is north-and-west — the array and whatever 'prepare' means are still ahead",
-        "Huginn's silence after the warpling turned: the creature was not finished"
+        "Something large and unhurried has gone north-and-west ahead of the party — the same direction as the reclamation site",
+        "Huginn looked north-and-west and went silent — that silence is a comment",
+        "The Zone's reclamation site and whatever 'prepare' means are still ahead"
       ]
     }
   },
@@ -3085,7 +3087,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Confirmed the gate holds solid at every angle — no seam between the father's joint and Silas's close. Named it plainly and directly, her highest register of approval.",
         "[d14] Watched the shadow-frame attempt dissolve and stopped her circuit of the gate — question on her face, waiting for what comes next",
         "[d14] Chin came up when the shadow-frame seated — recognition of craft done correctly, in her register.",
         "[d14] Pressed her palm to the right upright and confirmed its weight through ironsense — declined to draw a mark, named her mark as already in the spear.",
@@ -3094,7 +3095,8 @@
         "[d14] Eyes north already, Memory across her back — ready to move before Silas has finished.",
         "[d14] Walking at Silas's left shoulder into the Zone — eyes on the ground ahead, Memory across her back.",
         "[d14] Watched Silas's scouting flight without comment — reading his descent as report, not spectacle.",
-        "[d14] Held position on the far bank as anchor through the warpling engagement — called Silas's left shoulder at the opening rush, exhaled at the yield."
+        "[d14] Held position on the far bank as anchor through the warpling engagement — called Silas's left shoulder at the opening rush, exhaled at the yield.",
+        "[d14] Read the track line's direction without being asked — named it matches the party's heading, plainly and without drama."
       ],
       "knownFacts": [
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
@@ -3115,7 +3117,7 @@
         "ironsense read of the fold's quality through contact-point —"
       ],
       "status": "active",
-      "statusNote": "Moving north-and-west with the party into the Zone — the warpling encounter resolved.",
+      "statusNote": "Moving north-and-west with the party into the Zone — reading the ground ahead.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -3788,7 +3790,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Named the gate's significance plainly: the March has not had a new gate in eleven years, the Numinous stopped making them at the Transition, and people will want things from Silas when they learn of it. A warning offered as weight, not as caution against the act.",
         "[d14] Watching the place where the shadow went — still, not yet speaking",
         "[d14] Made a short sound at the breakthrough — not quite surprise, entirely recognition.",
         "[d14] Drew the ashwarden open-hand mark into the shadow-frame at the gate's left upright — named it plainly as for the ones who come after.",
@@ -3797,7 +3798,8 @@
         "[d14] Watched Silas set the Boundary-Stone without comment — her version of approval. Eyes already on the country ahead.",
         "[d14] Taking the right flank, warden's pace — watching the country without comment.",
         "[d14] Read the sky as Silas descended — warden's instinct, gauging what the flight saw.",
-        "[d14] Came up over the bank edge at the fight's close — read the gravel in one look and named that the warpling turned rather than was broken."
+        "[d14] Came up over the bank edge at the fight's close — read the gravel in one look and named that the warpling turned rather than was broken.",
+        "[d14] Named the tracks as pre-warpling in nature — heavier, older, walking with confidence or patience. Neither good company."
       ],
       "knownFacts": [
         "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean.",
@@ -3810,17 +3812,17 @@
         "A Zone warpling that turns rather than presses still has something working in it — not a dead thing reanimated, a living thing rewired."
       ],
       "skillsObserved": [
-        "applying March-form cascade calculation to a practical filtr",
         "reading a situation's structural logic from a single observe",
         "plain technical description of Ashwarden contact craft under",
         "warden's read of a fold's closing-quality — named its emotio",
         "ashwarden mark-setting into a shadow-frame",
-        "warden's read of Zone creature behavior from track evidence "
+        "warden's read of Zone creature behavior from track evidence ",
+        "reading Zone creature sign from track evidence — weight, str"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Moving north-and-west with the party into the Zone — the warpling encounter resolved.",
+      "statusNote": "Moving north-and-west with the party into the Zone — track-reading at the streambed.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5143,11 +5145,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-25T19:54:55.844Z",
+    "lastSharedReadAt": "2026-07-25T21:41:09.365Z",
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
-    "lastGenCount": 619,
-    "turnsSinceOffer": 7,
+    "lastGenCount": 621,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "A Wright at the fork — someone who has been at work on something of the party's since they camped last night, and the improvement is…",
@@ -6754,22 +6756,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.742897974350658,
-    "cerebral": 11.515701543558722,
-    "social": 8.782018182030006,
-    "generous": 2.0180893131176023,
-    "cautious": 13.577788923118753,
-    "physical": 1.5532173947173942,
-    "risky": 0.342360805400664,
-    "ruthless": 0.6056116495687711,
-    "carousing": 0.5029671332279492,
-    "amorous": 1.8489045349783826,
-    "patient": 1.1203804266938586,
-    "stealth": 0.00010811563593057085,
-    "devotion": 1.2221577437234936,
-    "craft": 3.8367820947695255,
-    "leadership": 1.6683660498993902,
-    "deception": 0.5177498814947562
+    "strategic": 19.27432552499189,
+    "cerebral": 11.227809004969753,
+    "social": 8.562467727479255,
+    "generous": 1.967637080289662,
+    "cautious": 14.238344200040784,
+    "physical": 1.5143869598494593,
+    "risky": 0.3338017852656474,
+    "ruthless": 0.5904713583295518,
+    "carousing": 0.49039295489725043,
+    "amorous": 1.802681921603923,
+    "patient": 1.092370916026512,
+    "stealth": 0.00010541274503230657,
+    "devotion": 1.1916038001304063,
+    "craft": 3.7408625424002873,
+    "leadership": 1.6266568986519054,
+    "deception": 0.5048061344573873
   },
   "aptitudes": [
     "strategist",
@@ -6778,7 +6780,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 848,
+  "actionCount": 849,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7168,8 +7170,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785009569206,
-  "rev": 1424,
+  "updatedAt": 1785016071239,
+  "rev": 1427,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10369,7 +10371,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 599,
+    "valley": 600,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10530,10 +10532,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-25T19:59:29.202Z",
+      "lastAt": "2026-07-25T21:47:51.235Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -10780,7 +10782,7 @@
   "_opEmitted": {
     "sceneSummary": 221,
     "choices": 221,
-    "characterDeltas": 90,
+    "characterDeltas": 89,
     "scene": 221,
     "npcUpdates": 201,
     "factUpdates": 17,
@@ -10788,7 +10790,7 @@
     "codexUpdates": 131,
     "timeOps": 215,
     "imagePrompt": 5,
-    "sceneEnded": 53,
+    "sceneEnded": 54,
     "itemUpdates": 5,
     "questUpdates": 27,
     "offer": 21,

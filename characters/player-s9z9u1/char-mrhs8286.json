@@ -7,7 +7,7 @@
   "nativeTradition": "wright",
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
-  "level": 24,
+  "level": 25,
   "xp": 2421,
   "attributes": {
     "physical": 5,
@@ -148,11 +148,11 @@
     "value": 0.053420408281249956,
     "spectrum": 0.11337499999999998
   },
-  "attunement": 24,
-  "maxHealth": 145,
-  "health": 137,
-  "maxEnergy": 215,
-  "energy": 129,
+  "attunement": 25,
+  "maxHealth": 150,
+  "health": 150,
+  "maxEnergy": 220,
+  "energy": 220,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1817,7 +1817,162 @@
     "Deep in the left-branch mist, with Cael's steadying grip at his wrist and Pell, Veth, and Huginn attending, Silas Weir brought the wright's close to his father's unfinished fold — the last joint pressed home, the passage made real and repeatable, a gate standing in open ground where none existed. The first made-gate since the Transition, built not by the Numinous, but by the man the lineage was for."
   ],
   "currentLocationId": "gen-disputed-zone-left-branch-entrance",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-disputed-zone-left-branch-entrance",
+    "turns": [
+      {
+        "player": "Invite the party to each give their own thoughts on the new gate.",
+        "summary": "The party gives their first readings of the made gate — Pell confirms it holds at every angle with no seam, Veth names the weight of what it means for the March and for the people who will learn of it, Huginn sits on its edge and watches.",
+        "narration": "The gate stands in the mist. It is frameless and markless — just an opening in the air where the fold closed, the passage settled into something real and repeatable. The left-branch road stretches away on either side of it, unchanged. You turn to face the others.\n\nPell is the first to speak. She walks a slow half-circle around the gate's edge, Memory across her back, and her ironsense is plainly working — you can see it in how her weight shifts as she passes through the space. 'It holds,' she says to Silas, not to the gate. 'Solid at every angle. Your father's joint and your close, and there's no seam between them. That's not easy to do, even with the original intention still in the material.' She stops. She does not offer more than that, and she does not need to.\n\nVeth stands where she has been standing since the gate settled — three feet back, still, hands at her sides. She studies it for a long moment before she speaks. 'A made gate,' she says quietly. Not awe exactly. Something more deliberate than awe, closer to reckoning. 'The March has not had a new one in eleven years. The Numinous stopped making them when the Transition came, and no one else has. You should understand what that means in terms of what people will want from you when they find out.' She pauses. 'And they will find out.' She is not warning him against it. She is naming the weight plainly, the way she names every weight plainly, so he can decide how to carry it.\n\nHuginn is on the gatepost — or rather, on the place where a gatepost would be if the gate had one, perched on the air's edge with its wings settled and its eye fixed on the passage. It makes one short sound. Not a word. Not quite not a word. Then it is silent again, looking at the gate the way it looks at things that are ending or beginning, unhurried and entirely certain of what it sees.\n\n*You feel it settle into you — a new steadiness. (Level 25: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      }
+    ],
+    "lastTurn": {
+      "narration": "The gate stands in the mist. It is frameless and markless — just an opening in the air where the fold closed, the passage settled into something real and repeatable. The left-branch road stretches away on either side of it, unchanged. You turn to face the others.\n\nPell is the first to speak. She walks a slow half-circle around the gate's edge, Memory across her back, and her ironsense is plainly working — you can see it in how her weight shifts as she passes through the space. 'It holds,' she says to Silas, not to the gate. 'Solid at every angle. Your father's joint and your close, and there's no seam between them. That's not easy to do, even with the original intention still in the material.' She stops. She does not offer more than that, and she does not need to.\n\nVeth stands where she has been standing since the gate settled — three feet back, still, hands at her sides. She studies it for a long moment before she speaks. 'A made gate,' she says quietly. Not awe exactly. Something more deliberate than awe, closer to reckoning. 'The March has not had a new one in eleven years. The Numinous stopped making them when the Transition came, and no one else has. You should understand what that means in terms of what people will want from you when they find out.' She pauses. 'And they will find out.' She is not warning him against it. She is naming the weight plainly, the way she names every weight plainly, so he can decide how to carry it.\n\nHuginn is on the gatepost — or rather, on the place where a gatepost would be if the gate had one, perched on the air's edge with its wings settled and its eye fixed on the passage. It makes one short sound. Not a word. Not quite not a word. Then it is silent again, looking at the gate the way it looks at things that are ending or beginning, unhurried and entirely certain of what it sees.\n\n*You feel it settle into you — a new steadiness. (Level 25: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "The party gives their first readings of the made gate — Pell confirms it holds at every angle with no seam, Veth names the weight of what it means for the March and for the people who will learn of it, Huginn sits on its edge and watches.",
+      "choices": [
+        {
+          "label": "Ask Veth plainly: who on the March will move first when word spreads — and what will they want?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Read the gate with Order-Sense — see what design it sits in now, what it is part of, what it connects to",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Ask Huginn directly: what does it see in the gate?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Step through the gate — test whether transit works, and see where it opens to on the other side",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "risky",
+            "scout"
+          ],
+          "abilityId": null,
+          "trivial": false
+        }
+      ],
+      "scene": {
+        "setting": "The left branch of the March road in early-spring mist, shortly after dawn. A made gate stands in open ground — frameless, markless, the fold Silas's father left unfinished now closed and settled into a real, repeatable passage.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "completing a slow half-circle around the gate's edge, Memory across her back, ironsense still reading"
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "standing three feet back, still, watching Silas after naming the gate's weight"
+          },
+          {
+            "name": "Huginn",
+            "state": "perched on the air's edge where a gatepost would be, watching the passage with its usual unhurried certainty"
+          }
+        ],
+        "objects": [
+          "the made gate — frameless, markless, standing in open ground",
+          "the left-branch March road stretching away on both sides",
+          "early-spring mist, thin but present"
+        ],
+        "threads": [
+          "Veth's warning: word will spread, and people will want things from the gate's maker — who moves first is an open question",
+          "What Huginn sees in the gate is unspoken",
+          "The gate's transit has not yet been tested"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Confirmed the gate holds solid at every angle — no seam between the father's joint and Silas's close. Named it plainly and directly, her highest register of approval.",
+          "statusNote": "Standing at the gate on the left-branch road, ironsense satisfied with the work.",
+          "learned": [
+            "The made gate holds at every angle with no seam between the original intention and Silas's close — named by ironsense as solid."
+          ]
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth Ondra",
+          "note": "Named the gate's significance plainly: the March has not had a new gate in eleven years, the Numinous stopped making them at the Transition, and people will want things from Silas when they learn of it. A warning offered as weight, not as caution against the act.",
+          "statusNote": "Standing at the made gate on the left-branch road, watching Silas after naming what the gate will cost him in attention.",
+          "learned": [
+            "The March has not had a new gate since the Transition — eleven years. The Numinous stopped making them. Word of this one will spread, and people will want things from its maker."
+          ]
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-made-gate",
+          "label": "The Made Gate",
+          "kind": "lore",
+          "fact": "Pell's ironsense confirms the gate holds at every angle with no seam between the father's original intention and Silas's wright's close. Veth names it plainly: the March has not had a new gate in eleven years, the Numinous stopped at the Transition, and when word spreads, people will want things from the maker.",
+          "links": [
+            "what-the-water-remembers",
+            "the-light-that-will-not-dim",
+            "pell-ran-marsh",
+            "veth-stillwater-ondra"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a short exchange around the gate at dawn"
+      }
+    },
+    "sceneState": {
+      "setting": "The left branch of the March road in early-spring mist, shortly after dawn. A made gate stands in open ground — frameless, markless, the fold Silas's father left unfinished now closed and settled into a real, repeatable passage.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "completing a slow half-circle around the gate's edge, Memory across her back, ironsense still reading"
+        },
+        {
+          "name": "Veth Ondra",
+          "state": "standing three feet back, still, watching Silas after naming the gate's weight"
+        },
+        {
+          "name": "Huginn",
+          "state": "perched on the air's edge where a gatepost would be, watching the passage with its usual unhurried certainty"
+        }
+      ],
+      "objects": [
+        "the made gate — frameless, markless, standing in open ground",
+        "the left-branch March road stretching away on both sides",
+        "early-spring mist, thin but present"
+      ],
+      "threads": [
+        "Veth's warning: word will spread, and people will want things from the gate's maker — who moves first is an open question",
+        "What Huginn sees in the gate is unspoken",
+        "The gate's transit has not yet been tested"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 14,
@@ -2834,7 +2989,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Walking south at dawn, Memory on her back, road-quiet beside Silas.",
         "[d14] Halted instantly on the road-signal, hand on Memory, watching the mist without instruction.",
         "[d14] Read the Blazeborn traveler by ironsense on Silas's deferral — confirmed no working iron, nothing primed. Stepped back to his shoulder and named her limit plainly.",
         "[d14] Watched the Deathsense backlash without moving — Memory in carry-grip, eyes on Silas.",
@@ -2843,17 +2997,18 @@
         "[d14] Held her position at Silas's shoulder through the first contact — did not speak, did not move.",
         "[d14] Held her position without speaking — Memory in carry-grip, watching Silas work the join.",
         "[d14] Stepped up without hesitation at Silas's word — ironsense reading the fold through shoulder-contact. Confirmed: old, solid, not fighting him.",
-        "[d14] Held ironsense contact through the closing — confirmed the joint held with a final check. Did not speak. Her hand stayed."
+        "[d14] Held ironsense contact through the closing — confirmed the joint held with a final check. Did not speak. Her hand stayed.",
+        "[d14] Confirmed the gate holds solid at every angle — no seam between the father's joint and Silas's close. Named it plainly and directly, her highest register of approval."
       ],
       "knownFacts": [
-        "The shadow-spear is fully sealed — Weirmark names the caller, Shielding Word locks the certainty, and the duplicate answers any call from any distance.",
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
         "The shadow-twin answers only the named caller — it can be held by another person but will not fly to their hand without the caller's word",
         "The shadow-twin shifted register when Silas spoke her name into the caller-link — it is now a permission-acknowledged hold, not a resisted one.",
         "Memory is now hers to carry; Silas holds the call. The shadow-twin on the bench is his half of the design.",
         "Silas named his love to her plainly and directly, no hedging.",
         "The Blazeborn traveler carries no working or primed iron — confirmed by ironsense at close range",
-        "The fold reads as old and solid through ironsense — not resisting the wright's contact."
+        "The fold reads as old and solid through ironsense — not resisting the wright's contact.",
+        "The made gate holds at every angle with no seam between the original intention and Silas's close — named by ironsense as solid."
       ],
       "skillsObserved": [
         "copper-wire seating at a socket throat by thumbnail pressure",
@@ -2864,7 +3019,7 @@
         "ironsense read of the fold's quality through contact-point —"
       ],
       "status": "active",
-      "statusNote": "Beside Silas at the new gate, Memory in carry-grip, ironsense satisfied.",
+      "statusNote": "Standing at the gate on the left-branch road, ironsense satisfied with the work.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -3537,7 +3692,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Pulled Mara's door shut behind her, said the morning was clear enough, and fell into step. No more needed.",
         "[d14] Frozen mid-step on Silas's signal, weight back, reading the same mist-shape without being told what to look for.",
         "[d14] Named the Zone's interference logic plainly: it is what you carry, not what you are — a Blazeborn with a living flame walks into interference; his fire at the entrance, not inside, is deliberate.",
         "[d14] Named the felt qualities of the Grey Hand and Palework plainly on Silas's question — both crafts described from the inside, no softening.",
@@ -3546,17 +3700,18 @@
         "[d14] Watched the space around the join rather than the join itself — warden's instinct, reading the whole rather than the point.",
         "[d14] Watching the space around the join rather than the join itself — warden's instinct, reading the whole.",
         "[d14] Stepped forward to the join and read it as a warden — without touching, without prompting. Named what is there: patient, long-waiting, not surprised.",
-        "[d14] Released the ending-space clean — warden's release spoken in silence, her part of the working complete."
+        "[d14] Released the ending-space clean — warden's release spoken in silence, her part of the working complete.",
+        "[d14] Named the gate's significance plainly: the March has not had a new gate in eleven years, the Numinous stopped making them at the Transition, and people will want things from Silas when they learn of it. A warning offered as weight, not as caution against the act."
       ],
       "knownFacts": [
-        "The attending-quality pass through the soul bond is a teaching tool she has no prior category for — she is still thinking about what it means.",
         "Osten: contamination started four mornings after the cold broke, metallic smell, not ordinary silt",
         "Edvar Crane boards at the mill and buys sealed jugs — treating his water more carefully than anyone else here",
         "Limestone bed must meet a minimum ratio to throughput or the water channels through it rather than filtering",
         "The Disputed Zone's interference responds to active workings and living craft — not to a person's tradition. A Blazeborn who burns outside the entrance and enters cold walks in clean.",
         "The Grey Hand is felt immediately by the recipient — strength leaving all at once, like exhaustion without the hours; they feel it and know it and cannot stop it",
         "Palework at rank 3 is visible — the dying understand exactly what is being done and by whom; that visibility is the point, not a side effect",
-        "The fold holds something that wants to be finished — patient rather than desperate, and it has been waiting a long time."
+        "The fold holds something that wants to be finished — patient rather than desperate, and it has been waiting a long time.",
+        "The March has not had a new gate since the Transition — eleven years. The Numinous stopped making them. Word of this one will spread, and people will want things from its maker."
       ],
       "skillsObserved": [
         "naming a novel capability without pretending to have already",
@@ -3569,7 +3724,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Stepped back from the join; the ending-space is let go.",
+      "statusNote": "Standing at the made gate on the left-branch road, watching Silas after naming what the gate will cost him in attention.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -4884,7 +5039,7 @@
     "lastTickWorldDay": 25,
     "lastCanonWorldDay": 25,
     "lastGenCount": 614,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 11,
     "recentOffers": [
       {
         "thing": "Huginn dropped to Silas's shoulder before the waygate — earlier than usual, heavier than usual. It has not spoken. But it has been…",
@@ -5051,8 +5206,8 @@
     "craft": 7,
     "wits": 6
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 2,
+  "pendingSubPoints": 1,
+  "skillPoints": 3,
   "discoveries": [
     {
       "key": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
@@ -6477,22 +6632,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 16.13459918112798,
-    "cerebral": 13.69857025224334,
-    "social": 10.286587628396145,
-    "generous": 2.599526359552364,
-    "cautious": 12.649758580202086,
-    "physical": 0.7448091367163239,
-    "risky": 0.44099928200984473,
-    "ruthless": 0.780096022744395,
-    "carousing": 0.6478783234795057,
-    "amorous": 2.3815973077759076,
-    "patient": 1.4431761929396278,
-    "stealth": 0.0001392651175814971,
-    "devotion": 0.410225044288741,
-    "craft": 2.811355690898097,
-    "leadership": 1.042466662525632,
-    "deception": 0.6669201684248254
+    "strategic": 16.731234201599783,
+    "cerebral": 13.356105995937256,
+    "social": 11.029422937686242,
+    "generous": 2.5345382005635546,
+    "cautious": 12.333514615697034,
+    "physical": 0.7261889082984158,
+    "risky": 0.4299742999595986,
+    "ruthless": 0.7605936221757852,
+    "carousing": 0.6316813653925181,
+    "amorous": 2.32205737508151,
+    "patient": 1.4070967881161371,
+    "stealth": 0.00013578348964195968,
+    "devotion": 0.3999694181815225,
+    "craft": 2.741071798625644,
+    "leadership": 1.0164049959624912,
+    "deception": 0.6502471642142047
   },
   "aptitudes": [
     "strategist",
@@ -6500,7 +6655,7 @@
     "scholar",
     "stalwart"
   ],
-  "actionCount": 838,
+  "actionCount": 839,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -6890,8 +7045,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784991909431,
-  "rev": 1397,
+  "updatedAt": 1784992188847,
+  "rev": 1399,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10028,7 +10183,7 @@
   "syncedAt": 1784946301565,
   "teachers": {},
   "regionsKnown": {
-    "valley": 587,
+    "valley": 588,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10181,10 +10336,10 @@
     {
       "id": "sess-14",
       "startedAt": "2026-07-25T14:39:49.681Z",
-      "lastAt": "2026-07-25T15:05:09.388Z",
+      "lastAt": "2026-07-25T15:09:48.834Z",
       "startDay": 25,
       "endDay": 25,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -10398,15 +10553,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 210,
-    "choices": 210,
+    "sceneSummary": 211,
+    "choices": 211,
     "characterDeltas": 83,
-    "scene": 210,
-    "npcUpdates": 191,
+    "scene": 211,
+    "npcUpdates": 192,
     "factUpdates": 14,
     "placeUpdates": 34,
-    "codexUpdates": 123,
-    "timeOps": 204,
+    "codexUpdates": 124,
+    "timeOps": 205,
     "imagePrompt": 4,
     "sceneEnded": 50,
     "itemUpdates": 5,
@@ -10424,7 +10579,7 @@
     "scene_ended": 1,
     "_applyFailedOp": 7
   },
-  "_opTurns": 210,
+  "_opTurns": 211,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -10564,29 +10719,7 @@
   "_stageOpRefusals": [
     "the-second-thread: no-such-quest"
   ],
-  "_pendingLedger": [
-    {
-      "schemaVersion": 1,
-      "at": "2026-07-25T15:05:09.418Z",
-      "worldDay": 25,
-      "who": "char-mrhs8286",
-      "playerKey": "player-s9z9u1",
-      "where": "gen-disputed-zone-left-branch-entrance",
-      "what": "A new waygate stands on the left branch road in the Disputed Zone — the first made-gate since the Transition, built by a wright who tends endings.",
-      "tags": [
-        "waygate",
-        "transition",
-        "craft",
-        "landmark"
-      ],
-      "spectrumDeltas": {
-        "chaos_order": 0.05,
-        "mechanical_spiritual": 0.03
-      },
-      "visibility": "witnessed",
-      "impactsLocal": true
-    }
-  ],
+  "_pendingLedger": [],
   "locationState": {},
   "_applyFailures": null
 }

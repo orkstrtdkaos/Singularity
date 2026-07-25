@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.273";
+const APP_VERSION = "1.8.274";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -258,6 +258,7 @@ let mapShowSub = false;  // SNG-082b: sub-place satellites toggle (off by defaul
 let _lightboxWired = false; // SNG-053: one-time lightbox click delegation (referenced by boot)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
+let movesOpen = false;           // SNG-236 UX: the encounter Moves gear (grouped ward/sense/strike) open?
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
 let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
 // SNG-120: per-section collapse state for the play sidebar, mirroring the npcGroups open-set pattern.
@@ -2162,6 +2163,45 @@ function listAvailableEncounters() {
   return lines.length ? lines.join("\n") : null;
 }
 
+/** SNG-236 UX: the ⚙ Moves gear for an active encounter. Groups the encounter's contextual actions (attempt/
+ *  stage/unlock + the ways out) and the player's owned abilities BY FUNCTION FAMILY (ward=PROTECT, sense=KNOW,
+ *  strike=HARM …, the 24-verb vocabulary) into one tidy panel. The exits/primary fire through the existing
+ *  [data-encact] path; an ability-move fires through onFreeform (parseIntent → onChoice) so the roll params are
+ *  derived correctly and — because an encounter is active — the encounter rules bind. The free-type field stays
+ *  the open path; this is grouped shortcuts, never a replacement (SNG-230: the frame is a legibility layer). */
+function encounterMovesPanel() {
+  const e = activeEnc(); if (!e) return "";
+  const d = e.def;
+  const mk = (label, act, extra = "") => `<button class="move-btn enc-move" data-encact="${act}"${extra}>${esc(label)}</button>`;
+  const primary = [], exits = [];
+  if (d.type === "duel") { exits.push(mk("⚑ Break away & flee", "flee"), mk("Yield", "yield")); }
+  if (d.type === "challenge") { primary.push(mk(`Attempt: ${d.stages[e.state.stageIndex]?.name || "the stage"}`, "stage")); exits.push(mk("Abandon", "abandon")); }
+  if (d.type === "puzzle") {
+    primary.push(mk("Work the mechanism", "attempt"));
+    for (const [ui, u] of puzzleUnlocks(d, character).entries()) primary.push(mk(`◈ ${String(u.note).slice(0, 56)}`, "unlock", ` data-unlock="${ui}"`));
+    exits.push(mk("Walk away", "walkAway"));
+  }
+  // owned abilities → grouped by function family (the 24-verb vocabulary; ward/sense/strike are its verbs)
+  const owned = (character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(Boolean);
+  const byFam = {};
+  for (const ab of owned) {
+    const fam = (familiesOfAbility(ab, FN_INDEX)[0]) || "SHAPE";
+    const verb = (ab.functions || [])[0] || "use";
+    (byFam[fam] = byFam[fam] || []).push({ ab, verb });
+  }
+  const famGroups = FUNCTION_FAMILIES.filter(f => byFam[f]?.length).map(f => {
+    const chips = byFam[f].slice(0, 6).map(({ ab, verb }) =>
+      `<button class="move-btn move-ability" data-moveab="${esc(ab.id)}" data-verb="${esc(verb)}" style="border-left-color:${FAMILY_COLOR[f]}" title="${esc(verb)} — ${esc(ab.name)}">${esc(ab.name)}</button>`).join("");
+    return `<div class="moves-group"><div class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(f.toLowerCase())}</div><div class="moves-chips">${chips}</div></div>`;
+  }).join("");
+  const ctx = [
+    primary.length ? `<div class="moves-group"><div class="moves-group-lbl">this ${esc(d.type === "duel" ? "fight" : d.type)}</div><div class="moves-chips">${primary.join("")}</div></div>` : "",
+    exits.length ? `<div class="moves-group"><div class="moves-group-lbl">ways out</div><div class="moves-chips">${exits.join("")}</div></div>` : ""
+  ].join("");
+  const kindWord = d.type === "duel" ? "fight's" : `${d.type}'s`;
+  return `<div class="moves-panel"><div class="moves-hint">Grouped moves — or just type your own below. The ${esc(kindWord)} rules bind either way.</div>${ctx}${famGroups || `<div class="moves-hint dim">No learned crafts to shortcut yet — describe your move below.</div>`}</div>`;
+}
+
 /** End an encounter: outcome XP, clear state, incapacitation floor. */
 function endEncounter(outcome) {
   const enc = activeEnc();
@@ -2171,6 +2211,7 @@ function endEncounter(outcome) {
   character.xp += Math.max(0, xpMap[outcome] ?? 0);
   for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules);
   character.activeEncounter = null;
+  movesOpen = false; // SNG-236 UX: the Moves gear closes with the encounter
   if (outcome === "incapacitated") {
     if (enc.def.lethal) { character.dead = true; }
     else { character.health = Math.max(1, character.health); character.energy = Math.max(5, character.energy); }
@@ -8174,7 +8215,28 @@ function renderPlay(turn, opts = {}) {
         status = `attempts: ${st.attempts} · understanding: ${revealed.length}/${(d.hintTiers || []).length}` +
           (revealed.length ? `<div class="enc-hints">${revealed.map(h => `<div>◈ ${esc(h)}</div>`).join("")}</div>` : "");
       }
-      return `<div class="encounter-bar"><span class="enc-name">⚔ ${esc(d.name)}</span> <span class="enc-round">round ${st.round}</span><div class="enc-status">${status}</div></div>`;
+      // SNG-236 UX: the frame is an INTEGRATED, persistent strip at the top of the play surface — obviously an
+      // encounter (kind, win, meter, the three exits) without a takeover card that interrupts the flow. Same
+      // frameModel content SNG-230 established, relocated + slimmed so it reads as "you are in an encounter,"
+      // and the MOVES (ward/sense/strike + the exits) live in the ⚙ Moves gear on the input row, not as loose
+      // buttons here. frameSize still routes prominence (a weighty encounter gets the bolder strip).
+      const fm = frameModel(d, e.state, null, CONTENT.frameKinds);
+      if (!fm) return `<div class="encounter-bar"><span class="enc-name">⚔ ${esc(d.name)}</span> <span class="enc-round">round ${st.round}</span><div class="enc-status">${status}</div></div>`;
+      const prom = frameSize(d, e.state) === "takeover" ? " enc-frame-takeover" : "";
+      const meterHtml = fm.meter?.total ? `<div class="enc-frame-meter" title="${esc(fm.meter.label)}"><div class="enc-frame-meter-fill" style="width:${fm.meter.pct}%"></div></div>
+        <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.done}/${fm.meter.total}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : "";
+      const exitsHtml = `<div class="enc-frame-exits">${fm.exits.map(x => `<span class="enc-exit enc-exit-${x.role}"><b>${x.role}</b> ${esc(x.means)}</span>`).join("")}</div>`;
+      const collapseHtml = fm.warded
+        ? `<div class="enc-frame-collapse dim">⚑ Warded — a finisher cannot end this unless the ward is shattered outright; work it through.</div>`
+        : fm.collapsible
+        ? `<div class="enc-frame-collapse">⚡ A decisive finisher could end this in one beat — an all-or-nothing stroke (a clean crit collapses it; a botch turns it worse).</div>`
+        : `<div class="enc-frame-collapse dim">⚑ Too great to end in one stroke — you'll have to work it through.</div>`;
+      const cueHtml = `${collapseHtml}${fm.freeform ? `<div class="enc-frame-cue">▸ ${esc(fm.freeform)} — or tap <b>⚙ Moves</b> below for grouped shortcuts.</div>` : ""}`;
+      return `<div class="enc-frame enc-strip${prom} enc-frame-${fm.kind}">
+        <div class="enc-frame-top"><span class="enc-frame-title">${fm.icon} ${esc(fm.title)}</span><span class="enc-frame-kind">${esc(fm.kind)} · round ${st.round}</span></div>
+        <div class="enc-frame-win">${esc(fm.winCondition)}</div>
+        ${status ? `<div class="enc-status">${status}</div>` : ""}
+        ${meterHtml}${exitsHtml}${cueHtml}</div>`;
     })()}<div class="transcript">`;
   if (opts.newsFlash?.length) {
     main += `<div class="news-flash"><div class="news-title">While you were away…</div>${opts.newsFlash.map(n => `<div class="news-item">◈ ${esc(n.text)}</div>`).join("")}</div>`;
@@ -8302,46 +8364,13 @@ function renderPlay(turn, opts = {}) {
           `<button class="tune-commit" data-tunecommit="${i}">Commit — ${esc(tuneSel.intensity)}${sel ? " " + esc(fullCatalog()[sel]?.name || sel) : ""}</button></div>`;
       }
       return `<div class="choice-wrap"><button class="choice" data-choice="${i}">${esc(c.label)}${abilityHtml}${senseHtml}</button>${gear}${panel}</div>`;
-    }).join("")}${(() => { const e = activeEnc(); if (!e) return ""; const d = e.def;
-      const mk = (label, act, extra = "") => `<button class="choice enc-choice" data-encact="${act}"${extra}>${label}</button>`;
-      let btns = "";
-      if (d.type === "duel") btns = mk("⚑ Try to flee", "flee") + mk("Yield", "yield");
-      if (d.type === "challenge") btns = mk(`Attempt: ${esc(d.stages[e.state.stageIndex]?.name || "")}`, "stage") + mk("Abandon the attempt", "abandon");
-      if (d.type === "puzzle") {
-        btns = mk("Work the mechanism", "attempt");
-        for (const [ui, u] of puzzleUnlocks(d, character).entries()) btns += mk(`◈ ${esc(u.note.slice(0, 80))}`, "unlock", ` data-unlock="${ui}"`);
-        btns += mk("Walk away", "walkAway");
-      }
-      // SNG-230: the ENCOUNTER FRAME — make the bounded thing OBVIOUS: what KIND it is, what winning MEANS, how
-      // far through you are, and the THREE EXITS (defeat/flee/fail) stated. Erik's core want ("you KNOW you're in
-      // a chase, you SEE the three ways out"). Skill-battle fights don't reach here (their own richer panel); this
-      // frames the classic duel / challenge / puzzle. Phase 1b (Erik's OQ1 = size by tier): a weighty encounter
-      // (regional/epic, danger ≥ 3, long challenge) presents as a TAKEOVER card that takes the surface with the
-      // action buttons inside it; a small one stays a compact BANNER above the buttons. Same frame, sized to stakes.
-      const fm = frameModel(d, e.state, null, CONTENT.frameKinds);
-      if (!fm) return btns;
-      const meterHtml = fm.meter?.total ? `<div class="enc-frame-meter" title="${esc(fm.meter.label)}"><div class="enc-frame-meter-fill" style="width:${fm.meter.pct}%"></div></div>
-        <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.done}/${fm.meter.total}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : "";
-      const exitsHtml = `<div class="enc-frame-exits">${fm.exits.map(x => `<span class="enc-exit enc-exit-${x.role}"><b>${x.role}</b> ${esc(x.means)}</span>`).join("")}</div>`;
-      const topHtml = `<div class="enc-frame-top"><span class="enc-frame-title">${fm.icon} ${esc(fm.title)}</span><span class="enc-frame-kind">${esc(fm.kind)}</span></div>
-        <div class="enc-frame-win">${esc(fm.winCondition)}</div>`;
-      // §6b/§7a: surface the FINISHER gamble — a collapsible foe can be ended in one decisive stroke (a HARM
-      // craft here, a transit craft in a chase, a KNOW craft on a puzzle); a foe too great cannot be. Legible so
-      // the player knows it's on the table; the collapse itself resolves along the degree bands (crit ends it).
-      const collapseHtml = fm.warded
-        ? `<div class="enc-frame-collapse dim">⚑ Warded — a finisher cannot end this unless the ward is shattered outright; work it through.</div>`
-        : fm.collapsible
-        ? `<div class="enc-frame-collapse">⚡ A decisive finisher could end this in one beat — an all-or-nothing stroke (a clean crit collapses it; a botch turns it worse).</div>`
-        : `<div class="enc-frame-collapse dim">⚑ Too great to end in one stroke — you'll have to work it through.</div>`;
-      // the frame is a LEGIBILITY layer — the freefield + the GM stay the real interaction (Erik). The cue keeps
-      // it from reading as buttons-only: you can describe ANY move and the GM resolves it against the stage.
-      const cueHtml = `${collapseHtml}${fm.freeform ? `<div class="enc-frame-cue">▸ ${esc(fm.freeform)}</div>` : ""}`;
-      if (frameSize(d, e.state) === "takeover") {
-        // the weighty encounter takes the surface — the buttons live INSIDE the frame (still the same [data-encact])
-        return `<div class="enc-frame enc-frame-takeover enc-frame-${fm.kind}">${topHtml}${meterHtml}${exitsHtml}<div class="enc-frame-btns">${btns}</div>${cueHtml}</div>`;
-      }
-      return `<div class="enc-frame enc-frame-${fm.kind}">${topHtml}${meterHtml}${exitsHtml}${cueHtml}</div>${btns}`;
-    })()}</div>`;
+    }).join("")}</div>`;
+    // SNG-236 UX: the encounter's action buttons (flee/yield/attempt/stage/unlock/walk-away) NO LONGER render
+    // as loose buttons here — they moved into the ⚙ Moves gear on the input row (encounterMovesPanel), grouped
+    // with the player's ability-moves (ward/sense/strike by function family). The frame itself renders as the
+    // integrated top strip above. The player still describes any move in the free-type field; the encounter
+    // rules bind either way (onChoice/onFreeform route through duelRound/challengeStage/puzzleAttempt on an
+    // active encounter). This is Erik's ask: obviously in an encounter, moves grouped in the gear, not clunky.
   }
   main += `</div>`;
   if (turn || opts.error || opts.gmAside || opts.aside || (!busy && !opts.thinking)) {
@@ -8352,13 +8381,16 @@ function renderPlay(turn, opts = {}) {
         <button class="opt" id="gambit-hint-go">⚙ Plan a Gambit</button>
         <button class="gambit-hint-x" id="gambit-hint-x" title="Not now">×</button></div>`;
     }
+    // SNG-236 UX: while an encounter is live, the ⚙ Moves gear opens the grouped move palette above the input.
+    if (activeEnc() && movesOpen) main += encounterMovesPanel();
     main += `<div class="freeform">
       <div class="mode-chips">
         <button id="mode-act" class="mode-chip ${askMode ? "" : "active"}" title="Act in the scene">Act</button>
         <button id="mode-ask" class="mode-chip ${askMode ? "active" : ""}" title="Ask the GM out-of-character — context, rules, what your character would know. Never advances the story.">Ask GM</button>
       </div>
-      <input id="freeform-input" placeholder="${askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
+      <input id="freeform-input" placeholder="${activeEnc() && !askMode ? "Describe your move — the encounter's rules bind it…" : askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
       <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
+      ${activeEnc() ? `<button id="moves-open" class="mode-toggle ${movesOpen ? "apt" : ""}" title="Encounter moves — grouped by family (ward / sense / strike …) + the ways out. Rules enforced." ${busy ? "disabled" : ""}>⚙ Moves</button>` : ""}
       <button id="gambit-open" class="mode-toggle ${apt ? "apt" : ""}" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
   }
   if (isDev()) {
@@ -8578,6 +8610,16 @@ function renderPlay(turn, opts = {}) {
   }
   const gambitBtn = document.getElementById("gambit-open");
   if (gambitBtn) gambitBtn.onclick = () => openGambitBuilder();
+  // SNG-236 UX: the ⚙ Moves gear — toggle the grouped move palette; an ability-move fires through onFreeform
+  // (parseIntent derives the roll params; the active encounter's rules bind), the exits/primary via [data-encact].
+  const movesBtn = document.getElementById("moves-open");
+  if (movesBtn) movesBtn.onclick = () => { movesOpen = !movesOpen; renderPlay(turn, opts); };
+  for (const btn of app.querySelectorAll("[data-moveab]")) btn.onclick = () => {
+    if (busy) return;
+    const ab = fullCatalog()[btn.dataset.moveab];
+    movesOpen = false;
+    onFreeform(`I use ${ab?.name || "my craft"} to ${btn.dataset.verb || "act"}.`);
+  };
   const ghGo = document.getElementById("gambit-hint-go");
   if (ghGo) ghGo.onclick = () => openGambitBuilder();
   const ghX = document.getElementById("gambit-hint-x");

@@ -1,5 +1,27 @@
 # PO ALERT
 
+> ## [SNG-236 FIXES complete_pending_review — CCode, 2026-07-25] The GM-offer fix (A) + calm-place trial (C) + encounter-frame UX redesign
+> Erik: "yes [build A+C] … and update the encounter frames — clunky to enter, don't flow. Integrate into the
+> standard screen but obviously in an encounter; put the options in the gear, grouped (ward/sense/strike); plus
+> the open type field; rules enforced." All shipped:
+> - **Fix A (engine, v1.8.273 `b73cbcdd`):** a STRUCTURED narrative-time roll now hands the GM a HARD
+>   `encounterOfferDetail` directive (present it as a framed encounterId choice this beat) instead of the soft
+>   rule-18 offer Silas's GM dropped. Loose flavor still weaves. Wired global→maybeNarrativeEncounter→runGM→
+>   gm_registry row→gm.js scene.push→worldActing gate.
+> - **Fix C (engine, v1.8.273):** in a low-danger place, prefer a structured CHALLENGE over a duel — a cerebral
+>   beat meets a trial. RESHAPED by investigation: the "stationary talker never rolls" idea is mostly false
+>   (minHoursPerBeat:1 → undeclared beats classify as "time" and DO roll). Real gap is POOL COMPOSITION (28
+>   fight/4 challenge; opposed/standoff not offerable). **Owed to you:** more non-combat frames + a framed
+>   standoff type + the §5b playstyle-weight term.
+> - **Encounter UX (app+css, v1.8.274):** de-takeover → an integrated persistent top STRIP (obviously an
+>   encounter); the moves grouped by function family in a new ⚙ Moves gear (ward=PROTECT/sense=KNOW/strike=HARM
+>   + exits); free-type stays; rules already bound on freeform. Revises SNG-230 P1b's takeover card (Erik's call);
+>   all SNG-230 legibility tokens preserved so smoke stays green.
+> npm test exit 0 (2497 PASS), boots clean on a fresh port. Also fixed: CCODE-26 smoke false-fail on autocrlf
+> checkouts (CRLF-normalized). **AEVI owes fix B** (reword the SNG-075 weave so a decisive one escalates to a
+> frame) + §5b content/standoff-type + the GM-prompt load trim.
+> Results: po/results/20260725_SNG-236_fixes_encounter_offer_and_ux.md.
+
 > ## [SNG-236 complete_pending_review — CCode, 2026-07-25] Playthrough Auditor built — and it FLIPPED the diagnosis: not the dials, the GM PROMPT
 > `tests/playthrough_sim.mjs` drives the REAL leaf-path (rollTrigger → eligibleEncountersFor; offscreenPopulation
 > at the live default dials; loadLegends figures→roster). Anti-theater self-test: sever a seam → epics 0 / encounters 0,

@@ -131,6 +131,27 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-frame-takeover .enc-frame-win { font-size: 14px; }
 .enc-frame-takeover .enc-frame-meter { height: 16px; }
 .enc-frame-takeover .enc-frame-exits { margin: 4px 0 12px; padding-top: 8px; border-top: 1px solid var(--border); }
+/* SNG-236 UX: the integrated encounter STRIP — the frame lives at the top of the play surface, obviously an
+   encounter, without a takeover card interrupting the flow. The exits read as a compact horizontal row here. */
+.enc-strip { margin: 0 0 12px; }
+.enc-strip .enc-frame-exits { flex-direction: row; flex-wrap: wrap; gap: 4px 14px; margin-top: 6px; }
+.enc-strip .enc-status { margin-top: 5px; }
+.enc-strip .enc-frame-cue { margin-top: 6px; font-size: 12px; color: var(--ink-dim); }
+.enc-strip .enc-frame-collapse { margin-top: 6px; font-size: 12px; }
+.enc-frame-collapse { color: var(--accent2, #7a9); }
+.enc-frame-collapse.dim { color: var(--ink-dim); }
+/* SNG-236 UX: the ⚙ Moves gear — grouped encounter moves (ward/sense/strike by family + the ways out) above the input */
+.moves-panel { border: 1px solid var(--danger); border-radius: 10px; background: linear-gradient(180deg, rgba(192,91,77,0.08), var(--panel)); padding: 10px 12px; margin: 8px 0; }
+.moves-hint { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; }
+.moves-hint.dim { opacity: .8; margin: 4px 0 0; }
+.moves-group { margin-bottom: 8px; }
+.moves-group:last-child { margin-bottom: 0; }
+.moves-group-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--ink-dim); margin-bottom: 5px; }
+.moves-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.move-btn { font-family: var(--font-ui); font-size: 12px; padding: 5px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--panel2); color: var(--ink); cursor: pointer; }
+.move-btn:hover:not(:disabled) { border-color: var(--accent); background: rgba(201,162,39,0.10); }
+.move-ability { border-left-width: 3px; }
+.enc-move { background: rgba(192,91,77,0.12); border-color: var(--danger); }
 .enc-frame-btns { display: flex; flex-direction: column; gap: 6px; }
 .enc-frame-btns .enc-choice { width: 100%; text-align: left; }
 .enc-frame-cue { margin-top: 8px; font-size: 11px; color: var(--ink-dim); font-style: italic; line-height: 1.4; }

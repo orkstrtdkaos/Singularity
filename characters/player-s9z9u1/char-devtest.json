@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 159,
+  "xp": 167,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -54,7 +54,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.0323125,
-    "spectrumId": -0.12399386316093006,
+    "spectrumId": -0.11779417000288354,
     "dark_light": 0.03,
     "emotional_logical": 0.015,
     "violence_peace": 0.04000000000000001,
@@ -64,7 +64,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 2,
+  "energy": 0,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -210,60 +210,89 @@
         "player": "With what Prism Sight just showed you — stay in it, give her exactly that, and see what she does with it.",
         "summary": "On the roof terrace, with Prism Sight open and honest, he gave Lira back exactly what her face showed — and she answered with full, unguarded presence.",
         "narration": "You do not close Prism Sight. You let it run open and quiet, the noon light holding her face in that clean, readable angle, and you give her back exactly what it shows you.\n\nWhen the tightening at the corners of her eyes comes, you slow down. When the breath shifts a beat before her body does, you match the beat. You are not guessing. You are reading her the way she reads a light-guide — following the actual angle, not the one you expected.\n\nShe notices. That is what Lira does — she notices, and she does not pretend she hasn't. Her chin drops a fraction. Her hand, which has been resting flat on the stone, closes into a loose grip. She says nothing, but her body says yes with the kind of specificity that does not allow for misunderstanding. When you hold the pace she asked for and stay exactly where the angle gives her what she named, she makes a sound low in her throat that is not composed at all. It is the sound a person makes when they have stopped managing the moment.\n\nAfterward she is quiet for a while. The valley stays open to the west. The light on the streets below does not move. She does not reach for the jacket or for conversation — she stays on her side, looking at you with the same steady directness she has held all afternoon, and there is something in it that is neither gratitude nor performance. It is just presence, given freely, and she is not in a hurry to take it back."
+      },
+      {
+        "player": "Ask her how it feels to have you inside her while using your sight... and ask her what she was doing during it with her body",
+        "summary": "Lira named what Prism Sight felt like from inside — being measured by something not cold — and said plainly what she had been doing: first deciding how much to show, then stopping deciding. The second half was different from the first.",
+        "narration": "You ask her quietly, still close, the light unhurried on her face. You ask how it feels to have you inside her while your sight is open — while you are reading her and giving back what you find.\n\nLira is quiet for a moment. Not evasive. She is choosing the honest words the way she chooses anything — with precision.\n\n\"Like being measured,\" she says finally, \"but by something that isn't cold about it.\" Her voice is level and specific. \"Most people look at you and see what they want to see. You were looking at what was actually there. I could feel that. It changes the — \" She pauses. \"It changes the angle of it.\"\n\nYou ask what she was doing with her body during it. Her expression shifts — a small thing, a fraction of openness crossing her face before she names it plainly. \"Deciding how much I was going to let it show,\" she says. \"And then stopping deciding. The second half was different from the first half.\" She says it without apology. \"That's what you got, at the end. When I stopped managing it.\"\n\nShe holds your gaze for a moment after that, steady and present, and does not reach for anything to fill the space the words leave."
       }
     ],
     "lastTurn": {
-      "narration": "You do not close Prism Sight. You let it run open and quiet, the noon light holding her face in that clean, readable angle, and you give her back exactly what it shows you.\n\nWhen the tightening at the corners of her eyes comes, you slow down. When the breath shifts a beat before her body does, you match the beat. You are not guessing. You are reading her the way she reads a light-guide — following the actual angle, not the one you expected.\n\nShe notices. That is what Lira does — she notices, and she does not pretend she hasn't. Her chin drops a fraction. Her hand, which has been resting flat on the stone, closes into a loose grip. She says nothing, but her body says yes with the kind of specificity that does not allow for misunderstanding. When you hold the pace she asked for and stay exactly where the angle gives her what she named, she makes a sound low in her throat that is not composed at all. It is the sound a person makes when they have stopped managing the moment.\n\nAfterward she is quiet for a while. The valley stays open to the west. The light on the streets below does not move. She does not reach for the jacket or for conversation — she stays on her side, looking at you with the same steady directness she has held all afternoon, and there is something in it that is neither gratitude nor performance. It is just presence, given freely, and she is not in a hurry to take it back.",
-      "sceneSummary": "On the roof terrace, with Prism Sight open and honest, he gave Lira back exactly what her face showed — and she answered with full, unguarded presence.",
+      "narration": "You ask her quietly, still close, the light unhurried on her face. You ask how it feels to have you inside her while your sight is open — while you are reading her and giving back what you find.\n\nLira is quiet for a moment. Not evasive. She is choosing the honest words the way she chooses anything — with precision.\n\n\"Like being measured,\" she says finally, \"but by something that isn't cold about it.\" Her voice is level and specific. \"Most people look at you and see what they want to see. You were looking at what was actually there. I could feel that. It changes the — \" She pauses. \"It changes the angle of it.\"\n\nYou ask what she was doing with her body during it. Her expression shifts — a small thing, a fraction of openness crossing her face before she names it plainly. \"Deciding how much I was going to let it show,\" she says. \"And then stopping deciding. The second half was different from the first half.\" She says it without apology. \"That's what you got, at the end. When I stopped managing it.\"\n\nShe holds your gaze for a moment after that, steady and present, and does not reach for anything to fill the space the words leave.",
+      "sceneSummary": "Lira named what Prism Sight felt like from inside — being measured by something not cold — and said plainly what she had been doing: first deciding how much to show, then stopping deciding. The second half was different from the first.",
       "choices": [
         {
-          "label": "Stay where you are — say nothing, hold the look, let this rest for a minute before the count-bell forces the next move.",
+          "label": "Tell her what you saw — what her face gave you that she thought she was managing",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.6
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "romantic",
+            "flirt"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask what she means by 'the angle of it' — what changes when someone is actually looking",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask her plainly — now that the afternoon's been what it was, does she want to be there when you bring the ledger to Keeper Vael?",
+          "label": "Let the quiet hold — don't fill it; see what she does with it",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "romantic"
+            "romantic",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Get moving while the window is still open — dress, take the ledger from under her jacket, and head for the Accountability Board.",
+          "label": "The count-bell is coming — get dressed and make your way to Keeper Aldris Vael with the ledger",
           "attribute": "practical",
           "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "travel",
+            "plan"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Before you go anywhere, pull the Lower Filtration Ledger out and show her the specific entries — let her see exactly what you're carrying and why.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, midday sun easing toward afternoon, valley floor open to the west. Iron stairs down to the street at the near edge.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, sun tilting past midday toward afternoon, valley floor open to the west. Iron stairs down to the street at the near edge.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "On her side, looking at him with steady directness — not reaching for the jacket or for conversation, present and unhurried."
+            "state": "Steady and present, holding his gaze after naming what she was doing — not reaching for distance or deflection."
           }
         ],
         "objects": [
@@ -273,7 +302,8 @@
         ],
         "threads": [
           "The count-bell window to reach Keeper Aldris Vael is still open — it closes one bell past the afternoon count.",
-          "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record."
+          "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record.",
+          "Lira named the gap between managing and not managing — the second half, she said, was different."
         ]
       },
       "npcUpdates": [
@@ -281,30 +311,38 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Prism Sight read her honestly and he gave it back — she answered with full, unguarded presence and is now quiet and steady beside him.",
+          "note": "Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology.",
           "learned": [
-            "She notices when she is being read accurately — and does not pretend she hasn't.",
-            "When she stops managing a moment the sound she makes is unguarded and specific.",
-            "She stays present afterward without reaching for distance or conversation."
+            "She felt the quality of being read accurately — not as violation but as a change in angle, something warmer than measurement.",
+            "She was managing her own response consciously at first; the moment she stopped, what he got was unguarded."
           ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "On the roof terrace, present and unhurried — the afternoon still between them, the count-bell window still open.",
-          "bondType": "romantic",
-          "bondStage": "courting"
+          "statusNote": "On the roof terrace, present and unhurried, holding his gaze after speaking plainly."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "lira",
+          "label": "Lira — Edge District Apprentice",
+          "kind": "person",
+          "entityId": "lira",
+          "fact": "She felt Prism Sight as being measured by something not cold — named it as a change in angle. Said she spent the first half deciding how much to show, then stopped; the second half was what he actually got.",
+          "links": [
+            "radiant-plateau",
+            "the-clean-numbers"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "The scene has eased into its quiet aftermath — a short stretch of afternoon has passed since the last beat."
+        "hoursPassed": 0.25,
+        "why": "A brief exchange — a few minutes of quiet conversation on the terrace."
       }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, midday sun easing toward afternoon, valley floor open to the west. Iron stairs down to the street at the near edge.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, sun tilting past midday toward afternoon, valley floor open to the west. Iron stairs down to the street at the near edge.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "On her side, looking at him with steady directness — not reaching for the jacket or for conversation, present and unhurr"
+          "state": "Steady and present, holding his gaze after naming what she was doing — not reaching for distance or deflection."
         }
       ],
       "objects": [
@@ -314,7 +352,8 @@
       ],
       "threads": [
         "The count-bell window to reach Keeper Aldris Vael is still open — it closes one bell past the afternoon count.",
-        "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record."
+        "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record.",
+        "Lira named the gap between managing and not managing — the second half, she said, was different."
       ]
     }
   },
@@ -369,7 +408,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Collected herself at the coping wall, named the count-bell window without being asked, reached for her jacket and turned — voice level, one rough edge left in it. Said the ledger goes to Vael. Did not say whether she comes.",
         "[d1] Said yes plainly and came to him without ceremony. Afterward she named the keeper's office closing time and stepped back into the world without apology.",
         "[d1] Your bond becomes romantic.",
         "[d1] Your bond deepens — courting.",
@@ -378,17 +416,18 @@
         "[d1] Sitting at rest on the bench, gaze on the valley, sash loose, unhurried — the quality of her attention still present even in stillness.",
         "[d1] Rolled onto her side, leg at his shoulder — settled into the narrower angle with patience, named plainly what she likes about it.",
         "[d1] Prism Sight read her face at noon — no performance found, only presence.",
-        "[d1] Prism Sight read her honestly and he gave it back — she answered with full, unguarded presence and is now quiet and steady beside him."
+        "[d1] Prism Sight read her honestly and he gave it back — she answered with full, unguarded presence and is now quiet and steady beside him.",
+        "[d1] Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology."
       ],
       "knownFacts": [
-        "The silence after was genuine, not composed — she was not in a hurry to be anywhere else.",
-        "She does not say his name in this — what she gives instead is her gaze, unbroken and real.",
         "Her control loosens at the edges when the rhythm finds its shape — not hidden, just honest.",
         "Even at the end she slows deliberately, hands flat on his chest, returning to the sky.",
         "She does not say his name — she holds the look instead, which is harder and more honest.",
         "She notices when she is being read accurately — and does not pretend she hasn't.",
         "When she stops managing a moment the sound she makes is unguarded and specific.",
-        "She stays present afterward without reaching for distance or conversation."
+        "She stays present afterward without reaching for distance or conversation.",
+        "She felt the quality of being read accurately — not as violation but as a change in angle, something warmer than measurement.",
+        "She was managing her own response consciously at first; the moment she stopped, what he got was unguarded."
       ],
       "skillsObserved": [
         "practical spatial awareness of district layout",
@@ -399,7 +438,7 @@
         "teaching by physical correction — exact and warm"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, present and unhurried — the afternoon still between them, the count-bell window still open.",
+      "statusNote": "On the roof terrace, present and unhurried, holding his gaze after speaking plainly.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -625,7 +664,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 21
+    "turnsSinceOffer": 22
   },
   "bio": null,
   "subAttributes": {
@@ -769,7 +808,8 @@
           "[d1] She knew the filtration numbers felt wrong for weeks but had no formal cause to name it. When given the full truth she absorbed it cleanly and responded with practical help: a warning about the superv",
           "[d1] Her precision with people is a direct extension of optics training — she extrapolates arc and angle from the first degree of movement. She reads him clearly and said so without apology.",
           "[d1] Apprentice optics-weaver, Edge District",
-          "[d1] [while away] Lira secured a three-morning trial with a lens-grinder in the Edge District who agreed to let her sweep and observe in exchange for running deliveries — small, unglamorous, but she is now inside a working shop."
+          "[d1] [while away] Lira secured a three-morning trial with a lens-grinder in the Edge District who agreed to let her sweep and observe in exchange for running deliveries — small, unglamorous, but she is now inside a working shop.",
+          "[d1] She felt Prism Sight as being measured by something not cold — named it as a change in angle. Said she spent the first half deciding how much to show, then stopped; the second half was what he actually got."
         ],
         "links": [
           "radiant-plateau",
@@ -847,25 +887,27 @@
     }
   },
   "tendencies": {
-    "social": 10.718249238910277,
-    "strategic": 6.702529385025369,
-    "cautious": 4.297083846672763,
-    "cerebral": 2.1995905040205317,
-    "physical": 0.609226122155715,
-    "ruthless": 1.4682944231811053,
-    "generous": 0.6437609487511682,
-    "amorous": 12.487816151576663,
-    "risky": 1.6553038095960957
+    "social": 10.45029300793752,
+    "strategic": 6.534966150399735,
+    "cautious": 4.189656750505944,
+    "cerebral": 2.1446007414200183,
+    "physical": 0.5939954691018221,
+    "ruthless": 1.4315870626015776,
+    "generous": 0.627666925032389,
+    "amorous": 14.175620747787246,
+    "risky": 1.6139212143561932
   },
   "aptitudes": [
     "silver_tongue",
-    "charmer"
+    "charmer",
+    "devoted_lover",
+    "ardent"
   ],
-  "actionCount": 34,
+  "actionCount": 35,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785035077964,
-  "rev": 83,
+  "updatedAt": 1785035197528,
+  "rev": 84,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1053,7 +1095,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 34
+    "valley": 35
   },
   "foreclosed": [],
   "company": [],
@@ -1080,24 +1122,24 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-26T02:52:53.973Z",
-      "lastAt": "2026-07-26T03:04:37.948Z",
+      "lastAt": "2026-07-26T03:06:37.520Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 6
+      "beats": 7
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 19,
-    "choices": 19,
-    "scene": 19,
-    "npcUpdates": 19,
-    "timeOps": 17,
+    "sceneSummary": 20,
+    "choices": 20,
+    "scene": 20,
+    "npcUpdates": 20,
+    "timeOps": 18,
     "sceneEnded": 7,
     "characterDeltas": 5,
-    "codexUpdates": 2
+    "codexUpdates": 3
   },
-  "_opTurns": 19,
+  "_opTurns": 20,
   "_intentAsked": null
 }

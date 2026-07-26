@@ -1,5 +1,17 @@
 # PO ALERT
 
+> ## [SNG-241 complete_pending_review — CCode, 2026-07-26] Session synopsis to the family feed (v1.8.282 `bba35903`)
+> Brooklyn's ask, built by connecting three shipped systems. Most existed (buildSessionPrompt = the session-scoped
+> chronicle voice; sessionLog = the session span, so OQ2 needs no new helper; the chronicle view already caches
+> per-session recaps; feed.js kind + lens + consent). New: (§2a) a `chapter` option on buildSessionPrompt (2–3
+> paras, opt-in; one para default). (§2b) a "📮 Post this session to the feed" button on any recapped session →
+> review screen (trim the story, toggle chapter, edit key-details) → buildFeedPost kind:"synopsis". Never
+> auto-posted; lens+consent inherited; a lensed post drops the caption too. (§2c) sessionKeyDetails() = a factual
+> caption (level/top-deeds/people/places/canon). Feed shows a "📖 Session" label + caption. Verified: synopsis
+> carries kind+caption; lensed drops caption; chapter vs one-para both correct. npm test exit 0.
+> **AEVI owes** the session-prompt voice polish. **ERIK owes** OQ1 (also auto-offer at session-end? the chronicle
+> button is built) + OQ3 (chapter default — built as opt-in). Results: po/results/20260726_SNG-241_session_synopsis_to_feed.md.
+
 > ## [SPEC - Brooklyn request] SNG-241 session synopsis to the feed (Aevi, 2026-07-25)
 > Brooklyn: "send a session synopsis with key details to the feed - a little narrative on the character's story."
 > GREAT alignment - almost all of it EXISTS: chronicle.js buildChroniclePrompt already writes a warm one-para

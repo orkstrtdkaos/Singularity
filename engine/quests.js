@@ -616,7 +616,13 @@ export function structuredQuestsForGM(character, opts = {}) {
     let line = `- [${q.id}] ${q.title} (axis: ${q.axis || "?"}) — STAKES: ${q.stakes}\n  Now: ${stage?.objective || "resolve"}${stage?.condition ? ` (${stage.condition})` : ""}${open.length ? `\n  This character's domains open: ${open.join(", ")}` : ""}`;
     // SNG-162 §1: the stage the model may report against, named explicitly. Without the id in the
     // prompt the GM cannot emit a stageOp that passes the current-stage gate.
-    if (stage?.id && !q.awaitingResolution) line += `\n  CURRENT STAGE ID: "${stage.id}" — if the character's actions THIS BEAT satisfy that condition, emit stageOps for it.`;
+    if (stage?.id && !q.awaitingResolution) {
+      line += `\n  CURRENT STAGE ID: "${stage.id}" — if the character's actions THIS BEAT satisfy that condition, emit stageOps for it.`;
+      // SNG-239: hand the GM the EARNED REVEAL this stage unlocks — the plain truth to STATE (not a secret to
+      // withhold). When the stage is satisfied, name this in the prose, concretely, first-read clear; a vivid
+      // image may accompany it but never replace it. This is the concrete payoff the quest exists to deliver.
+      if (stage.change) line += `\n  WHEN SATISFIED, STATE PLAINLY (the earned reveal — SNG-239, an EARNED truth, not a GM-eyes secret): ${stage.change}`;
+    }
     // SNG-162 §2: at the decision point the GM brings the choice into the FICTION rather than
     // leaving it to a panel the player may never open.
     if (q.awaitingResolution) {

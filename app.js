@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.278";
+const APP_VERSION = "1.8.279";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -286,6 +286,7 @@ let seenBeats = 0;       // remote beats already rendered
 // here to be WOVEN into the next GM turn (never a modal). One per scene + a turn cooldown.
 let pendingWeave = null;        // { seed, flavor, perilous, loreTier } to inject next turn
 let pendingEncounterOffer = null;// SNG-236 fix A: a STRUCTURED encounter the roll turned up — offered HARD (a framed choice the GM MUST present), not woven invisibly. { id, name, kind }
+let pendingStageReveal = null;   // SNG-239: a quest stage just completed — hand its EARNED reveal (change) to the next GM turn as a MUST-STATE-PLAINLY directive (the Fix-A pattern: a hard directive, not a soft rule under load). [{ title, change, atDecision }]
 let sceneEncounterFired = false;// SNG-127: fired in THIS scene? (adds spacing after the first, not a hard cap)
 let turnsSinceEncounter = 99;   // cooldown counter (turns since the last narrative encounter)
 // SNG-127: the cooldown is now the player's pacing (resolvePacing → cooldown), read per-turn from config.
@@ -3398,6 +3399,12 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // SNG-236 fix A: a STRUCTURED encounter the roll turned up is offered HARD — the recognizable-encounter
   // offer no longer waits on the GM's soft "when the fiction invites it" judgment (the mechanism that
   // silenced Silas). Same engine-gated-directive pattern as travelDirective's MUST-emit moveTo.
+  // SNG-239: a quest stage completed last beat — hand its EARNED reveal to this turn's GM as a HARD directive
+  // to state it plainly (the Fix-A pattern; the soft QUEST CLARITY rule alone gets dropped under the 114-MUST load).
+  const stageReveals = pendingStageReveal; pendingStageReveal = null;
+  const stageRevealDetail = (stageReveals && stageReveals.length) ? (
+    `The character just EARNED a quest reveal last beat — pay it out PLAINLY in your prose this turn, in concrete first-read terms (name the thing; a vivid image may accompany but never replace the plain truth). It is earned, not a secret to withhold: ${stageReveals.map(r => `[${r.title}] ${r.change}${r.atDecision ? " — and this is now the DECISION POINT: the player must fully understand what they are deciding and what each road does; close open questions, do not open new ones." : ""}`).join(" · ")}`
+  ) : null;
   const offer = pendingEncounterOffer; pendingEncounterOffer = null;
   const encounterOfferDetail = offer ? (
     `The world has turned up a recognizable ${offer.kind} — "${offer.name}". This is NOT ambient texture to fold into prose: it is a bounded encounter the player must be able to SEE and ENTER. You MUST, this beat, present it as a framed CHOICE carrying \`encounterId: "${offer.id}"\` (label it for what it is), beside a clear way to decline or avoid. Do not narrate past it — the engine takes the engage/decline and the frame from there.`
@@ -3465,7 +3472,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // env.ephemera so a registry row can never double-fire them.
   const env = gmEnv({
     resolution, playerInput, exactWords, itemAdvance, travelDirective,
-    ephemera: { encounterWeaveDetail, encounterOfferDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
+    ephemera: { encounterWeaveDetail, encounterOfferDetail, stageRevealDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
   });
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
@@ -4155,6 +4162,12 @@ function applyTurn(turn, resolution, playerWords = null) {
     for (const r of advanced) {
       turn.narration = (turn.narration || "") + `\n\n*✦ ${r.title} — ${r.change || "a step forward"}.${r.awaitingResolution ? " Every stage is done; how it ends is yours to choose." : ""}*`;
     }
+    // SNG-239: a stage just completed carries an EARNED reveal. The aside above records it, but the GM's own
+    // PROSE is what the player reads as the story — so hand the reveal to the NEXT beat as a HARD "state this
+    // plainly, progress narrows" directive (the Fix-A pattern: a hard directive beats the soft rule the 114-MUST
+    // load drops). Carries the change + whether it's now the decision point (where clarity matters most).
+    const reveals = advanced.filter(r => r.change).map(r => ({ title: r.title, change: r.change, atDecision: !!r.awaitingResolution }));
+    if (reveals.length) pendingStageReveal = reveals;
     if (refusedStages.length) {
       character._stageOpRefusals = refusedStages.map(r => `${r.questId || "?"}: ${r.why}${r.why === "not-current-stage" ? ` (named "${r.named}", current is "${r.expected}")` : ""}`).slice(-4);
       console.warn("[quests] stageOps refused:", character._stageOpRefusals);

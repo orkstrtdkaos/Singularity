@@ -54,7 +54,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.0323125,
-    "spectrumId": -0.11779417000288354,
+    "spectrumId": -0.11190446150273936,
     "dark_light": 0.03,
     "emotional_logical": 0.015,
     "violence_peace": 0.04000000000000001,
@@ -215,95 +215,77 @@
         "player": "Ask her how it feels to have you inside her while using your sight... and ask her what she was doing during it with her body",
         "summary": "Lira named what Prism Sight felt like from inside — being measured by something not cold — and said plainly what she had been doing: first deciding how much to show, then stopping deciding. The second half was different from the first.",
         "narration": "You ask her quietly, still close, the light unhurried on her face. You ask how it feels to have you inside her while your sight is open — while you are reading her and giving back what you find.\n\nLira is quiet for a moment. Not evasive. She is choosing the honest words the way she chooses anything — with precision.\n\n\"Like being measured,\" she says finally, \"but by something that isn't cold about it.\" Her voice is level and specific. \"Most people look at you and see what they want to see. You were looking at what was actually there. I could feel that. It changes the — \" She pauses. \"It changes the angle of it.\"\n\nYou ask what she was doing with her body during it. Her expression shifts — a small thing, a fraction of openness crossing her face before she names it plainly. \"Deciding how much I was going to let it show,\" she says. \"And then stopping deciding. The second half was different from the first half.\" She says it without apology. \"That's what you got, at the end. When I stopped managing it.\"\n\nShe holds your gaze for a moment after that, steady and present, and does not reach for anything to fill the space the words leave."
+      },
+      {
+        "player": "Ask her to show you again and walk you through it.",
+        "summary": "Lira walked him through the falsification evidence in the ledger — the missing noise, the impossible consistency — and turned it back to him as a question.",
+        "narration": "You ask her to show you again — and this time walk you through it.\n\nLira tilts her head. The question lands without surprise, which tells you she expected it, or something like it. She sits up a little, easy and unhurried, and reaches past you to lift the ledger off the bench. She sets it on her knee and opens it to the last page of entries.\n\n\"The falsification isn't in the numbers themselves,\" she says, tapping the column with one finger. \"It's in the absence. Real measurements have noise — a point high one morning, a point low the next, small drifts when a filter cakes up or the intake runs fast after rain.\" She traces a row. \"These land exactly at threshold every time. For three weeks. Nothing drifts. Nothing cakes. The river has been gray-green since before the solstice, and Fendt's numbers say clean.\" She turns the ledger toward you so you can read the column yourself. \"Show me what you see.\"\n\nHer voice is patient — the same patience she uses with difficult light, the kind that expects you to look at the actual thing and not the shape you expected."
       }
     ],
     "lastTurn": {
-      "narration": "You ask her quietly, still close, the light unhurried on her face. You ask how it feels to have you inside her while your sight is open — while you are reading her and giving back what you find.\n\nLira is quiet for a moment. Not evasive. She is choosing the honest words the way she chooses anything — with precision.\n\n\"Like being measured,\" she says finally, \"but by something that isn't cold about it.\" Her voice is level and specific. \"Most people look at you and see what they want to see. You were looking at what was actually there. I could feel that. It changes the — \" She pauses. \"It changes the angle of it.\"\n\nYou ask what she was doing with her body during it. Her expression shifts — a small thing, a fraction of openness crossing her face before she names it plainly. \"Deciding how much I was going to let it show,\" she says. \"And then stopping deciding. The second half was different from the first half.\" She says it without apology. \"That's what you got, at the end. When I stopped managing it.\"\n\nShe holds your gaze for a moment after that, steady and present, and does not reach for anything to fill the space the words leave.",
-      "sceneSummary": "Lira named what Prism Sight felt like from inside — being measured by something not cold — and said plainly what she had been doing: first deciding how much to show, then stopping deciding. The second half was different from the first.",
+      "narration": "You ask her to show you again — and this time walk you through it.\n\nLira tilts her head. The question lands without surprise, which tells you she expected it, or something like it. She sits up a little, easy and unhurried, and reaches past you to lift the ledger off the bench. She sets it on her knee and opens it to the last page of entries.\n\n\"The falsification isn't in the numbers themselves,\" she says, tapping the column with one finger. \"It's in the absence. Real measurements have noise — a point high one morning, a point low the next, small drifts when a filter cakes up or the intake runs fast after rain.\" She traces a row. \"These land exactly at threshold every time. For three weeks. Nothing drifts. Nothing cakes. The river has been gray-green since before the solstice, and Fendt's numbers say clean.\" She turns the ledger toward you so you can read the column yourself. \"Show me what you see.\"\n\nHer voice is patient — the same patience she uses with difficult light, the kind that expects you to look at the actual thing and not the shape you expected.",
+      "sceneSummary": "Lira walked him through the falsification evidence in the ledger — the missing noise, the impossible consistency — and turned it back to him as a question.",
       "choices": [
         {
-          "label": "Tell her what you saw — what her face gave you that she thought she was managing",
+          "label": "Read the column carefully — look for anything she hasn't named yet",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Prism Sight on the ledger itself — read what the page's light-history holds",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Ask who else would recognize this pattern — who inside the hierarchy would know what real numbers look like",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.6
-          },
           "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "flirt"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask what she means by 'the angle of it' — what changes when someone is actually looking",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let the quiet hold — don't fill it; see what she does with it",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "romantic",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "The count-bell is coming — get dressed and make your way to Keeper Aldris Vael with the ledger",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
             "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Thank her and move — take the ledger to Keeper Aldris Vael before the count-bell closes the window",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, sun tilting past midday toward afternoon, valley floor open to the west. Iron stairs down to the street at the near edge.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, sun tilting toward afternoon. Valley floor open to the west. Iron stairs down to the street at the near edge.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Steady and present, holding his gaze after naming what she was doing — not reaching for distance or deflection."
+            "state": "Sitting up, ledger open on her knee, pointing to the column of entries — patient and precise, waiting for him to look at the actual data."
           }
         ],
         "objects": [
-          "Lower Filtration Ledger — on the bench, partially under Lira's jacket",
-          "Lira's jacket — folded beneath her on the bench",
+          "Lower Filtration Ledger — open on Lira's knee, falsified entry column visible",
+          "Lira's jacket — folded on the bench",
           "Iron exterior staircase leading down to the street"
         ],
         "threads": [
           "The count-bell window to reach Keeper Aldris Vael is still open — it closes one bell past the afternoon count.",
           "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record.",
-          "Lira named the gap between managing and not managing — the second half, she said, was different."
+          "Lira has turned the reading of the ledger back to him as a question — waiting for what he notices."
         ]
       },
       "npcUpdates": [
@@ -311,49 +293,36 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology.",
-          "learned": [
-            "She felt the quality of being read accurately — not as violation but as a change in angle, something warmer than measurement.",
-            "She was managing her own response consciously at first; the moment she stopped, what he got was unguarded."
+          "note": "Walked him through the falsification evidence — the absence of noise in three weeks of entries — and turned it back to him as a question about what he sees.",
+          "skillsObserved": [
+            "reading falsified data by its missing variation",
+            "teaching by turning the evidence back to the student"
           ],
-          "statusNote": "On the roof terrace, present and unhurried, holding his gaze after speaking plainly."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "lira",
-          "label": "Lira — Edge District Apprentice",
-          "kind": "person",
-          "entityId": "lira",
-          "fact": "She felt Prism Sight as being measured by something not cold — named it as a change in angle. Said she spent the first half deciding how much to show, then stopped; the second half was what he actually got.",
-          "links": [
-            "radiant-plateau",
-            "the-clean-numbers"
-          ]
+          "statusNote": "On the roof terrace, ledger open on her knee, waiting for his observation."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — a few minutes of quiet conversation on the terrace."
+        "why": "a brief exchange on the terrace"
       }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, sun tilting past midday toward afternoon, valley floor open to the west. Iron stairs down to the street at the near edge.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, sun tilting toward afternoon. Valley floor open to the west. Iron stairs down to the street at the near edge.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Steady and present, holding his gaze after naming what she was doing — not reaching for distance or deflection."
+          "state": "Sitting up, ledger open on her knee, pointing to the column of entries — patient and precise, waiting for him to look at"
         }
       ],
       "objects": [
-        "Lower Filtration Ledger — on the bench, partially under Lira's jacket",
-        "Lira's jacket — folded beneath her on the bench",
+        "Lower Filtration Ledger — open on Lira's knee, falsified entry column visible",
+        "Lira's jacket — folded on the bench",
         "Iron exterior staircase leading down to the street"
       ],
       "threads": [
         "The count-bell window to reach Keeper Aldris Vael is still open — it closes one bell past the afternoon count.",
         "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record.",
-        "Lira named the gap between managing and not managing — the second half, she said, was different."
+        "Lira has turned the reading of the ledger back to him as a question — waiting for what he notices."
       ]
     }
   },
@@ -408,7 +377,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Said yes plainly and came to him without ceremony. Afterward she named the keeper's office closing time and stepped back into the world without apology.",
         "[d1] Your bond becomes romantic.",
         "[d1] Your bond deepens — courting.",
         "[d1] She showed how she works — guiding without apology or performance, precision the same in this as in everything. The silence after was unguarded, a real one.",
@@ -417,7 +385,8 @@
         "[d1] Rolled onto her side, leg at his shoulder — settled into the narrower angle with patience, named plainly what she likes about it.",
         "[d1] Prism Sight read her face at noon — no performance found, only presence.",
         "[d1] Prism Sight read her honestly and he gave it back — she answered with full, unguarded presence and is now quiet and steady beside him.",
-        "[d1] Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology."
+        "[d1] Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology.",
+        "[d1] Walked him through the falsification evidence — the absence of noise in three weeks of entries — and turned it back to him as a question about what he sees."
       ],
       "knownFacts": [
         "Her control loosens at the edges when the rhythm finds its shape — not hidden, just honest.",
@@ -430,15 +399,15 @@
         "She was managing her own response consciously at first; the moment she stopped, what he got was unguarded."
       ],
       "skillsObserved": [
-        "practical spatial awareness of district layout",
-        "absorbs difficult information without visible alarm",
         "spatial district navigation under pressure",
         "translating technical skill (light-reading) into interperson",
         "light-channeling through deliberate hip motion",
-        "teaching by physical correction — exact and warm"
+        "teaching by physical correction — exact and warm",
+        "reading falsified data by its missing variation",
+        "teaching by turning the evidence back to the student"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, present and unhurried, holding his gaze after speaking plainly.",
+      "statusNote": "On the roof terrace, ledger open on her knee, waiting for his observation.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -664,7 +633,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 22
+    "turnsSinceOffer": 23
   },
   "bio": null,
   "subAttributes": {
@@ -887,15 +856,15 @@
     }
   },
   "tendencies": {
-    "social": 10.45029300793752,
-    "strategic": 6.534966150399735,
-    "cautious": 4.189656750505944,
-    "cerebral": 2.1446007414200183,
-    "physical": 0.5939954691018221,
-    "ruthless": 1.4315870626015776,
-    "generous": 0.627666925032389,
-    "amorous": 14.175620747787246,
-    "risky": 1.6139212143561932
+    "social": 10.189035682739082,
+    "strategic": 6.371591996639742,
+    "cautious": 4.084915331743296,
+    "cerebral": 3.090985722884518,
+    "physical": 0.5791455823742765,
+    "ruthless": 1.3957973860365382,
+    "generous": 0.6119752519065792,
+    "amorous": 13.821230229092563,
+    "risky": 1.5735731839972884
   },
   "aptitudes": [
     "silver_tongue",
@@ -903,11 +872,11 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 35,
+  "actionCount": 36,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785035197528,
-  "rev": 84,
+  "updatedAt": 1785035286697,
+  "rev": 85,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1095,7 +1064,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 35
+    "valley": 36
   },
   "foreclosed": [],
   "company": [],
@@ -1122,24 +1091,24 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-26T02:52:53.973Z",
-      "lastAt": "2026-07-26T03:06:37.520Z",
+      "lastAt": "2026-07-26T03:08:06.692Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 7
+      "beats": 8
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 20,
-    "choices": 20,
-    "scene": 20,
-    "npcUpdates": 20,
-    "timeOps": 18,
+    "sceneSummary": 21,
+    "choices": 21,
+    "scene": 21,
+    "npcUpdates": 21,
+    "timeOps": 19,
     "sceneEnded": 7,
     "characterDeltas": 5,
     "codexUpdates": 3
   },
-  "_opTurns": 20,
+  "_opTurns": 21,
   "_intentAsked": null
 }

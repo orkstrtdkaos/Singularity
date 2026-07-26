@@ -677,6 +677,39 @@ export const CHARACTER_STEPS = [
       if (healed) console.log(`[reconcile] ccode-21: healed ${healed} quest(s) with array-shaped routes → recovered endings, emptied the bad routes`);
       return {};
     }
+  },
+  {
+    version: 22, id: "reopen-flat-completed-structured-quests", playerFacing: true,
+    // SNG-204/235 bug (Silas's waygate): before the applyQuestUpdates fix, a GM `complete` op FLAT-completed a
+    // structured quest (status "completed", no outcomeId) — bypassing the OUTCOME decision that is the sole path
+    // firing effects/wakes/waygates. So the quest read done while its ending was never chosen and its
+    // create_waygate/wake never fired. Recover: a structured quest marked "completed" with NO outcomeId and all
+    // stages done is re-opened to its DECISION (status active + awaitingResolution) so the player resolves it
+    // properly. Also refresh its outcomes' EFFECTS from the current def (a since-authored effect like SNG-235's
+    // create_waygate was never copied onto the started instance). A legitimately resolved quest (has outcomeId)
+    // is untouched. Idempotent (a re-opened quest has no outcomeId but IS active, so it won't re-trigger).
+    apply: (c, ctx) => {
+      const defsRaw = ctx?.content?.quests || [];
+      const defById = {};
+      for (const d of (Array.isArray(defsRaw) ? defsRaw : [])) if (d && d.id) defById[String(d.id).replace(/_/g, "-")] = d;
+      let reopened = 0, refreshed = 0;
+      for (const q of (c.quests || [])) {
+        if (!q || !q.structured) continue;
+        const allStagesDone = (q.completedStages || []).length >= (q.stages || []).length || (q.stageIndex || 0) >= (q.stages || []).length;
+        if (q.status !== "completed" || q.outcomeId || !allStagesDone) continue;
+        q.status = "active"; q.awaitingResolution = true; delete q.resolvedAt;
+        reopened++;
+        const def = defById[String(q.id).replace(/_/g, "-")];
+        if (def && Array.isArray(def.outcomes)) {
+          for (const o of (q.outcomes || [])) {
+            const dOut = def.outcomes.find(x => x.id === o.id);
+            if (dOut && Array.isArray(dOut.effects) && dOut.effects.length) { o.effects = dOut.effects; refreshed++; } // current authoring wins for an unresolved quest
+          }
+        }
+      }
+      if (reopened) console.log(`[reconcile] sng-204/235: re-opened ${reopened} flat-completed structured quest(s) to their decision (refreshed ${refreshed} outcome effect-set(s) from the current def)`);
+      return {};
+    }
   }
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.

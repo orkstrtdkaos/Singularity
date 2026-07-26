@@ -101,6 +101,15 @@ export function applyQuestUpdates(character, updates = [], ctx = {}) {
       if (op === "progress") {
         if (u.note) existing.progress = [...(existing.progress || []), clampNote(u.note)].slice(-8);
         notes.push(`Quest updated: ${existing.title}`);
+      } else if (op === "complete" && existing.structured) {
+        // SNG-204/235 bug (Silas's waygate): a STRUCTURED quest resolves ONLY via its OUTCOME decision
+        // (resolveStructuredQuest — the sole path that fires effects/wakes/waygates + records the ending). A
+        // flat GM `complete` op used to set status "completed" here, silently BYPASSING that — so the wake
+        // never fired and the create_waygate effect never minted. Redirect: surface the DECISION (the player
+        // chooses the ending, the engine pays out), never flat-complete a structured quest.
+        existing.awaitingResolution = true;
+        if (u.note) existing.progress = [...(existing.progress || []), clampNote(u.note)].slice(-8);
+        notes.push(`Quest ready to resolve: ${existing.title} — its ending is yours to choose (that's what fires its effects).`);
       } else if (op === "complete" || op === "fail") {
         existing.status = op === "complete" ? "completed" : "failed";
         existing.resolvedAt = new Date().toISOString();

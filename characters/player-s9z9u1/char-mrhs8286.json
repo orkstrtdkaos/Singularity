@@ -1851,7 +1851,163 @@
     "Silas Weir stood in the left-branch hollow at dawn with Pell, Veth, and Huginn at his back — claimed the watch aloud in plain words, received the warden's fifteen-year vigil as it completed, and sealed the hollow with You Shall Not Pass. The receiving-purpose holds; the warden is gone; the circuit waits for whoever tends it next."
   ],
   "currentLocationId": "gen-disputed-zone-left-branch-entrance",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-disputed-zone-left-branch-entrance",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Dawn at the sealed hollow — the warden's watch complete, the made gate standing, the relay node under Logana's guard, and the watershed question still unanswered.",
+        "narration": "Dawn is still thin on the left branch — the mist has not lifted, and the light arriving through it is the pale grey kind that shows ground without warming it. You stand at the hollow's sealed threshold, the You Shall Not Pass ward solid at your back, the Weirmark's faint impression in the shadow-frame the only mark that anything happened here. Pell stands three paces to your left, Memory across her shoulders, watching the tree-line. Veth is at your right, still reading the hollow the way a warden reads a post she is satisfied with — not lingering, just confirming. Huginn is somewhere above, out of sight in the grey, though you can place him by the silence around a particular branch.\n\nThe hollow is sealed and quiet. The relay node sits in the wolverine clearing two hundred yards north-and-west — Logana on watch at the downed tree's base, the Zone's lattice-thread in her warding alongside your own guardian-purpose. The made gate stands behind you on the left-branch road, frameless and markless, the first passage made since the Transition. The mist moves through it exactly as it moves through open ground, which is the only sign that it is real.\n\nWhat the hollow told you before it closed is still plain in your mind. The relay node to the south pointed a question at this receiver fifteen years ago — a watershed-readiness signal from the old reclamation system, waiting to know whether the circuit was attended. The warden held the ear open. You sealed it. The question was never sent, and the system that would have sent it is still running, still following its last instruction, still preparing the watershed for something. That thread is alive and unresolved, and the water in Millbrook's creek is the downstream edge of it.\n\nThe morning is yours. The road back to the made gate is thirty seconds of walking. Beyond the gate lies the broader Zone, and south of the Zone, the valley and everything you set moving there."
+      }
+    ],
+    "lastTurn": {
+      "narration": "Dawn is still thin on the left branch — the mist has not lifted, and the light arriving through it is the pale grey kind that shows ground without warming it. You stand at the hollow's sealed threshold, the You Shall Not Pass ward solid at your back, the Weirmark's faint impression in the shadow-frame the only mark that anything happened here. Pell stands three paces to your left, Memory across her shoulders, watching the tree-line. Veth is at your right, still reading the hollow the way a warden reads a post she is satisfied with — not lingering, just confirming. Huginn is somewhere above, out of sight in the grey, though you can place him by the silence around a particular branch.\n\nThe hollow is sealed and quiet. The relay node sits in the wolverine clearing two hundred yards north-and-west — Logana on watch at the downed tree's base, the Zone's lattice-thread in her warding alongside your own guardian-purpose. The made gate stands behind you on the left-branch road, frameless and markless, the first passage made since the Transition. The mist moves through it exactly as it moves through open ground, which is the only sign that it is real.\n\nWhat the hollow told you before it closed is still plain in your mind. The relay node to the south pointed a question at this receiver fifteen years ago — a watershed-readiness signal from the old reclamation system, waiting to know whether the circuit was attended. The warden held the ear open. You sealed it. The question was never sent, and the system that would have sent it is still running, still following its last instruction, still preparing the watershed for something. That thread is alive and unresolved, and the water in Millbrook's creek is the downstream edge of it.\n\nThe morning is yours. The road back to the made gate is thirty seconds of walking. Beyond the gate lies the broader Zone, and south of the Zone, the valley and everything you set moving there.",
+      "sceneSummary": "Dawn at the sealed hollow — the warden's watch complete, the made gate standing, the relay node under Logana's guard, and the watershed question still unanswered.",
+      "choices": [
+        {
+          "label": "Go to Logana — check the relay node at the downed tree before leaving the Zone.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Read the hollow's sealed threshold with The Attended End — confirm whether the ward is holding what it should, or whether something else is already ending here.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.15
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Head south — back through the made gate and out of the Zone toward Millbrook. The hollow is sealed; the water thread is what needs attending now.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Veth what she read, standing here now that the ward is set — a warden's read of a sealed post is different from a live one.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "The left-branch hollow threshold, outdoors, dawn. The You Shall Not Pass ward seals the hollow behind Silas. Pale grey mist, no direct sun yet, frost-hard ground. The made gate stands on the road behind the group.",
+        "npcsPresent": [
+          {
+            "name": "Pell",
+            "state": "Three paces left of Silas, Memory across her shoulders, watching the tree-line."
+          },
+          {
+            "name": "Veth",
+            "state": "At Silas's right, still reading the sealed hollow — a warden's final confirmation."
+          },
+          {
+            "name": "Huginn",
+            "state": "Somewhere above in the grey mist, audible only by the silence around a particular branch."
+          },
+          {
+            "name": "Logana",
+            "state": "Two hundred yards north-and-west in the wolverine clearing, at the downed tree's base — on watch at the relay node."
+          }
+        ],
+        "objects": [
+          "You Shall Not Pass ward at the hollow threshold — Weirmark in the shadow-frame",
+          "Made gate on the left-branch road — frameless, markless, real",
+          "Memory (spear) — carried by Pell"
+        ],
+        "threads": [
+          "The relay node at the downed tree — its circuit intact, the watershed question still unsent",
+          "The water crisis downstream — the reclamation system is still running its last instruction",
+          "Logana's watch — Zone-thread in her warding alongside the guardian-purpose"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Standing watch at the tree-line as the hollow sealing completes — Memory on her shoulders, present and steady.",
+          "statusNote": "At the sealed hollow threshold — Memory across her shoulders, watching the tree-line at dawn."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Reading the sealed hollow at dawn — a warden's final confirmation of a post properly closed.",
+          "statusNote": "At the sealed hollow threshold — confirming the ward's hold, warden's read."
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Scene opening — a brief beat at dawn, no significant time passing."
+      }
+    },
+    "sceneState": {
+      "setting": "The left-branch hollow threshold, outdoors, dawn. The You Shall Not Pass ward seals the hollow behind Silas. Pale grey mist, no direct sun yet, frost-hard ground. The made gate stands on the road behind the group.",
+      "npcsPresent": [
+        {
+          "name": "Pell",
+          "state": "Three paces left of Silas, Memory across her shoulders, watching the tree-line."
+        },
+        {
+          "name": "Veth",
+          "state": "At Silas's right, still reading the sealed hollow — a warden's final confirmation."
+        },
+        {
+          "name": "Huginn",
+          "state": "Somewhere above in the grey mist, audible only by the silence around a particular branch."
+        },
+        {
+          "name": "Logana",
+          "state": "Two hundred yards north-and-west in the wolverine clearing, at the downed tree's base — on watch at the relay node."
+        }
+      ],
+      "objects": [
+        "You Shall Not Pass ward at the hollow threshold — Weirmark in the shadow-frame",
+        "Made gate on the left-branch road — frameless, markless, real",
+        "Memory (spear) — carried by Pell"
+      ],
+      "threads": [
+        "The relay node at the downed tree — its circuit intact, the watershed question still unsent",
+        "The water crisis downstream — the reclamation system is still running its last instruction",
+        "Logana's watch — Zone-thread in her warding alongside the guardian-purpose"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 14,
@@ -3134,7 +3290,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Watched Silas's scouting flight without comment — reading his descent as report, not spectacle.",
         "[d14] Held position on the far bank as anchor through the warpling engagement — called Silas's left shoulder at the opening rush, exhaled at the yield.",
         "[d14] Read the track line's direction without being asked — named it matches the party's heading, plainly and without drama.",
         "[d14] Called across two hundred yards of Zone ground to check whether Silas is still standing — her voice pitched to carry, not to shout.",
@@ -3143,7 +3298,8 @@
         "[d14] Watching Silas's face as the warden's answer lands — hand still on Memory.",
         "[d14] Watching Silas's face through the braided cast — hand steady on Memory's grip.",
         "[d14] Stepped forward and put a hand on Silas's shoulder without being asked — bearing witness to the combined craft, present and steady.",
-        "[d14] Hand tightened once on Silas's shoulder as the warden's ending completed — witnessed the claim and the seal without a word."
+        "[d14] Hand tightened once on Silas's shoulder as the warden's ending completed — witnessed the claim and the seal without a word.",
+        "[d14] Standing watch at the tree-line as the hollow sealing completes — Memory on her shoulders, present and steady."
       ],
       "knownFacts": [
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
@@ -3164,7 +3320,7 @@
         "ironsense read of the fold's quality through contact-point —"
       ],
       "status": "active",
-      "statusNote": "At the hollow clearing — hand now off Silas's shoulder, Memory at her side, watching the hollow's quiet.",
+      "statusNote": "At the sealed hollow threshold — Memory across her shoulders, watching the tree-line at dawn.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -3837,7 +3993,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Noted the second kill on this stretch quietly — reading what it means for the party's passage north.",
         "[d14] Called the movement warning across the distance — measured and plain: the Zone reads kills, keep moving.",
         "[d14] Received the relay node briefing — drew a long breath and filed it. Walking north in silence.",
         "[d14] Named the one previous raising she has witnessed — a boar held for four days at a grief-sealed hollow, released cleanly at the burial's end. Marked Logana as categorically different: the Zone's claim sits in the warding alongside Silas's own purpose, and she does not know what that costs yet.",
@@ -3846,7 +4001,8 @@
         "[d14] Named the node's location — south, past Logana — plainly and without ceremony. Already thinking ahead.",
         "[d14] Held still through the braided read — watching, reading Silas rather than the hollow.",
         "[d14] Moved to Silas's right and went still — reading the hollow as the combined craft ran, not watching Silas but watching the structure.",
-        "[d14] Held still through the handoff — a warden's recognition of the watch received, no ceremony."
+        "[d14] Held still through the handoff — a warden's recognition of the watch received, no ceremony.",
+        "[d14] Reading the sealed hollow at dawn — a warden's final confirmation of a post properly closed."
       ],
       "knownFacts": [
         "The March has not had a new gate since the Transition — eleven years. The Numinous stopped making them. Word of this one will spread, and people will want things from its maker.",
@@ -3869,7 +4025,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the hollow clearing — standing at Silas's right, reading the now-quiet hollow.",
+      "statusNote": "At the sealed hollow threshold — confirming the ward's hold, warden's read.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5243,11 +5399,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-26T00:40:14.357Z",
+    "lastSharedReadAt": "2026-07-26T01:32:12.956Z",
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
-    "lastGenCount": 624,
-    "turnsSinceOffer": 17,
+    "lastGenCount": 625,
+    "turnsSinceOffer": 18,
     "recentOffers": [
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
@@ -7287,8 +7443,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785028639351,
-  "rev": 1474,
+  "updatedAt": 1785029570450,
+  "rev": 1480,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10476,7 +10632,7 @@
     },
     "the-received-ending": {
       "id": "the-received-ending",
-      "name": "The Received Ending",
+      "name": "Death's Purpose",
       "tradition": "ashwarden",
       "powerSystem": "ashwarden",
       "levelReq": 4,
@@ -10539,7 +10695,10 @@
           "Deathsense",
           "The Attended End"
         ],
-        "discoveredFrom": "deathsense+the-attended-end:braiding-death-read-with"
+        "discoveredFrom": "deathsense+the-attended-end:braiding-death-read-with",
+        "presented": true,
+        "shared": true,
+        "firstFinder": true
       }
     }
   },
@@ -10664,7 +10823,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 621,
+    "valley": 622,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10827,10 +10986,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-26T01:17:19.348Z",
+      "lastAt": "2026-07-26T01:32:50.448Z",
       "startDay": 25,
       "endDay": 26,
-      "beats": 26
+      "beats": 27
     }
   ],
   "company": [
@@ -11077,17 +11236,17 @@
   "_opEmitted": {
     "sceneSummary": 242,
     "choices": 242,
-    "characterDeltas": 104,
+    "characterDeltas": 103,
     "scene": 242,
     "npcUpdates": 216,
-    "factUpdates": 20,
-    "placeUpdates": 44,
-    "codexUpdates": 152,
+    "factUpdates": 19,
+    "placeUpdates": 43,
+    "codexUpdates": 151,
     "timeOps": 236,
     "imagePrompt": 6,
-    "sceneEnded": 60,
+    "sceneEnded": 59,
     "itemUpdates": 5,
-    "questUpdates": 35,
+    "questUpdates": 34,
     "offer": 22,
     "moveTo": 14,
     "delegateOps": 3,
@@ -11095,7 +11254,7 @@
     "standingOps": 1,
     "ledgerEvents": 6,
     "discovery": 4,
-    "stageOps": 13,
+    "stageOps": 12,
     "generateRequest": 9,
     "inventoryAdd": 2,
     "scene_ended": 2,
@@ -11190,7 +11349,7 @@
         "deathsense",
         "the-attended-end"
       ],
-      "name": "The Received Ending",
+      "name": "Death's Purpose",
       "tier": 4,
       "mintedAt": 14,
       "discovered": true

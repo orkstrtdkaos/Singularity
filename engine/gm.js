@@ -658,7 +658,7 @@ ${typed.length ? `WHAT THE PLAYER HAS ALREADY WRITTEN — preserve + enrich thes
 }
 
 /** Parse a freeform player action into a resolvable action spec (cheap model). */
-export async function parseIntent(playerText, character, location) {
+export async function parseIntent(playerText, character, location, catalog = {}) {
   const sys = `Classify a tabletop RPG player's freeform action into JSON. Reply with ONLY:
 {"label": "short restatement", "attribute": "physical|mental|social|practical", "subAttribute": "strength|agility|reason|insight|presence|rapport|craft|wits", "axes": {"spectrumId": -1..1}, "difficulty": 0|15|30, "intentTags": ["..."], "abilityId": "id or null", "comboAbilities": ["ids if the player is deliberately COMBINING two abilities, else []"], "novelUse": false, "noveltyHint": "2-4 words naming the novel application, only if novelUse", "trivial": false, "travelTo": "the place name the player is TRAVELING/GOING to, if this action moves them to another location (else null)", "feasible": true|false, "infeasibleReason": "only if false"}
 trivial=true when the action has no real chance of failure and no meaningful cost (ordinary talk, safe movement, looking around) — no dice will be rolled. Never trivial for ability use, risk, or contested acts.
@@ -667,8 +667,14 @@ Spectrum ids: emotional_logical, falsehood_truth, demonic_angelic, violence_peac
 Intent tags: plan, scout, prepare, attack, climb, force, persuade, charm, negotiate, comfort, study, investigate, analyze, gamble, drink, revel, risky, careful, retreat, help, give, rescue, heal, meditate, threaten, steal, rapport, finesse, discipline, romantic, flirt, travel.
 Use "travel" (and set travelTo to the destination) whenever the player is trying to GO/HEAD/JOURNEY/SET OUT to another place ("head to the edge district", "travel to Millbrook", "let's go back to the mill") — not for moving around within the current location, and NOT when they are only TALKING ABOUT a journey. A label whose governing verb is a speech verb — announce, tell, confide, discuss, propose, plan, promise, ask — is DISCUSSING travel, not doing it: "announce travel plans to Cairnhold" or "tell Veth I mean to leave" is a speech act, so travelTo stays null however many places it names. Set travelTo only when the character actually DEPARTS in this action.
 Use "romantic"/"flirt" when the action is attraction language, a flirtatious gesture, physical contact in a social/romantic (non-combat) context, or advancing a romantic thread with an NPC. Do NOT tag combat contact, a gesture with a plain non-romantic reading, or an NPC the player has no relationship thread with.
-abilityId must be one the character actually has, or null. novelUse=true when an ability is being pushed OUTSIDE its normal envelope (per its description) or two abilities are braided together — this is allowed and interesting, not infeasible. Mark infeasible only if impossible in-world (not merely hard).`;
-  const content = `Character abilities: ${(character.abilities || []).map(a => a.abilityId).join(", ") || "none"}. ` +
+abilityId must be the bracketed [id] of an ability the character HAS — match the player's words to the ability's NAME (they invoke a craft by its name, e.g. "Ashen Meridian", not its id) — or null if no owned ability fits. novelUse=true when an ability is being pushed OUTSIDE its normal envelope (per its description) or two abilities are braided together — this is allowed and interesting, not infeasible. Mark infeasible only if impossible in-world (not merely hard).`;
+  // SNG bug (Ashen Meridian): the parser was fed abilities BY ID only, so a braid/discovery invoked by its
+  // NAME (its id is "braid_order_sense_palework", the player says "Ashen Meridian") could never resolve → the
+  // GM then rejected a craft the character actually holds. List each owned ability as "Name [id]" (base from
+  // the catalog, braids/discoveries from the character's customAbilities) so the parser matches the name.
+  const cat = catalog || {};
+  const abLine = (character.abilities || []).map(a => { const nm = cat[a.abilityId]?.name || character.customAbilities?.[a.abilityId]?.name; return nm ? `${nm} [${a.abilityId}]` : a.abilityId; }).join(", ") || "none";
+  const content = `Character abilities (invoke by NAME; the parser returns the bracketed [id]): ${abLine}. ` +
     `Inventory: ${(character.inventory || []).map(i => i.name || i).join(", ") || "empty"}. ` +
     `Location: ${location.name} (${(location.tags || []).join(", ")}).\nPlayer action: "${playerText}"`;
   try {
@@ -684,6 +690,18 @@ abilityId must be one the character actually has, or null. novelUse=true when an
 export function sanitizeIntent(raw, character, playerText = "") {
   const SUBS8 = ["strength", "agility", "reason", "insight", "presence", "rapport", "craft", "wits"];
   const owned = id => (character.abilities || []).some(a => a.abilityId === id);
+  // SNG bug (Ashen Meridian): resolve a raw abilityId that may be a bare id, a "Name [id]" echo, or (if the
+  // model ignored the [id] instruction) a bare ability NAME — braids/discoveries carry their name in
+  // customAbilities, so a name-invocation still resolves to the owned id. Returns an owned id or null.
+  const resolveAb = v => {
+    if (!v) return null;
+    const s = String(v).trim();
+    const m = s.match(/\[([^\]]+)\]/);              // "Name [id]" → id
+    const cand = m ? m[1].trim() : s;
+    if (owned(cand)) return cand;
+    const byName = (character.abilities || []).find(a => (character.customAbilities?.[a.abilityId]?.name || "").toLowerCase() === s.toLowerCase());
+    return byName ? byName.abilityId : null;
+  };
   const axes = {};
   if (raw?.axes && typeof raw.axes === "object") {
     for (const [k, v] of Object.entries(raw.axes).slice(0, 6)) {
@@ -718,8 +736,8 @@ export function sanitizeIntent(raw, character, playerText = "") {
     })(),
     // SNG-122: the destination for a travel action (free text → a place name the engine resolves-or-mints).
     travelTo: raw?.travelTo && String(raw.travelTo).trim() && !/^(null|none|n\/a)$/i.test(String(raw.travelTo).trim()) ? String(raw.travelTo).trim().slice(0, 80) : null,
-    abilityId: owned(raw?.abilityId) ? raw.abilityId : null,
-    comboAbilities: (Array.isArray(raw?.comboAbilities) ? raw.comboAbilities : []).filter(owned).slice(0, 3),
+    abilityId: resolveAb(raw?.abilityId),
+    comboAbilities: (Array.isArray(raw?.comboAbilities) ? raw.comboAbilities : []).map(resolveAb).filter(Boolean).slice(0, 3),
     novelUse: !!raw?.novelUse,
     noveltyHint: String(raw?.noveltyHint || "").slice(0, 60),
     trivial: !!raw?.trivial && !raw?.abilityId && !raw?.novelUse,

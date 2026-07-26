@@ -9,6 +9,7 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validate } from "../engine/genschema.js";
+import { structuredQuestRecord } from "../engine/quests.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -546,6 +547,60 @@ for (const pack of PACKS) {
     else check(`SNG-113: earned aptitude "${a.id}" declares a tendency + threshold`, !!a.tendency && Number.isFinite(a.threshold), "an earned aptitude needs a tendency + threshold");
   }
   ok(`SNG-113: ${aps.length} aptitudes validated — ${checked} distinct mod keys, all with consumers`);
+}
+
+// ---------- SNG-238 §5b: the CONTENT-SHAPE SWEEP — catch "authored-but-under-shaped" content ----------
+// The class (from the string-stages bug): content authored to a shape a CONSUMER can't fully render — a
+// sub-field the consumer reads is absent or wrong-typed, so it renders empty/partial. It passes JSON validity
+// and even schema `required`, but breaks at the read. This sweeps the class across ALL structured quests,
+// driven by the REAL normalizer (structuredQuestRecord — the exact transform the game applies before the
+// render reads) + the real consumer-read fields. Because it checks the NORMALIZED output, a field-name the
+// normalizer bridges (content `name` → record `title`, outcome `text` → `summary` fallback) is NOT a false
+// positive — only a field that reaches the render EMPTY is. Reports EVERY offender (§5b: completeness, not
+// first-fail — the variant a one-quest patch misses). The consumer-required set is grown by incident, seam-
+// ledger style; Aevi owns the authoritative list (§5d). Ties SNG-232 (a producer wrote a shape a consumer
+// can't consume) generalized from one declared seam to a sweep.
+{
+  // consumer-read fields on the NORMALIZED quest record (verified from the render + engine reads, 2026-07-25)
+  const REQ = { self: ["title"], stages: ["id", "objective", "condition"], outcomes: ["name", "summary"] };
+  const S = v => typeof v === "string" && v.trim().length > 0;
+  const questDefs = [];
+  // every structured-quest source the loader concatenates (state.js: valley.provides.quests)
+  const qMain = "content/packs/valley/quests.json";
+  if (existsSync(join(root, qMain))) { const d = rj(qMain); for (const q of (Array.isArray(d) ? d : d.quests || [])) questDefs.push([qMain, q]); }
+  const qDir = join(root, "content/packs/valley/quests");
+  if (existsSync(qDir)) for (const f of readdirSync(qDir).filter(x => x.endsWith(".json"))) { const d = rj(`content/packs/valley/quests/${f}`); for (const q of (Array.isArray(d) ? d : d.quests || (d && d.id ? [d] : []))) questDefs.push([`quests/${f}`, q]); }
+  let swept = 0;
+  for (const [src, def] of questDefs) {
+    if (!def || (!def.stages && !def.outcomes)) continue; // structured quests only (flat GM quests have no stages)
+    swept++;
+    let rec; try { rec = structuredQuestRecord(def); } catch (e) { check(`[shape] quest "${def.id}" (${src}) normalizes without throwing`, false, String(e.message)); continue; }
+    const bad = [];
+    for (const f of REQ.self) if (!S(rec[f])) bad.push(`quest.${f}`);
+    (rec.stages || []).forEach((s, i) => { for (const f of REQ.stages) if (!S(s[f])) bad.push(`stage[${i}].${f}${typeof def.stages?.[i] === "string" ? " (STRING stage — must be an object)" : ""}`); });
+    (rec.outcomes || []).forEach((o, i) => { for (const f of REQ.outcomes) if (!S(o[f])) bad.push(`outcome[${i}].${f}`); });
+    check(`[shape] quest "${def.id}" renders fully — every consumer-read field survives normalization`, bad.length === 0,
+      `${src}: renders empty at ${bad.join(", ")} — the SNG-238 §5b "authored-but-under-shaped" class; the field a consumer reads must be authored (or normalizer-derived)`);
+  }
+  ok(`SNG-238 §5b: content-shape sweep — ${swept} structured quests checked against consumer-read fields (title / stage id+objective+condition / outcome name+summary)`);
+
+  // SNG-238 §5c (the "never again" proof, anti-theater — the SNG-232 discipline): the sweep must BITE, or a
+  // green run above proves nothing. Construct a def WITH the class (a STRING stage + a bare outcome) and confirm
+  // it's flagged; a well-shaped def passes clean. NOTE (spec_boundary): there is NO quest GENERATOR today — the
+  // generator makes only npc/location/arc (engine/state.js genSchemas) — so §5c's "born-whole for generated
+  // quests / add image to the quest gen template" has no target yet. When a quest generator lands, its `required`
+  // set MUST be these consumer-read fields (the same contract this sweep enforces on authored content). Flagged.
+  {
+    const issuesOf = def => { const r = structuredQuestRecord(def); const bad = [];
+      if (!S(r.title)) bad.push("title");
+      (r.stages || []).forEach(s => { for (const f of REQ.stages) if (!S(s[f])) bad.push(`stage.${f}`); });
+      (r.outcomes || []).forEach(o => { for (const f of REQ.outcomes) if (!S(o[f])) bad.push(`outcome.${f}`); });
+      return bad; };
+    const badDef = { id: "selftest-bad", name: "Self-test", stages: ["go to the tree and look"], outcomes: [{ id: "unnamed" }] }; // STRING stage + summary-less outcome = the class
+    const goodDef = { id: "selftest-good", name: "Self-test", stages: [{ id: "s1", objective: "Go to the tree-line", condition: "you reach the tree-line" }], outcomes: [{ id: "done", name: "Done", summary: "It ends." }] };
+    check("SNG-238 §5c: the shape sweep BITES — a string-stage / summary-less quest IS flagged (anti-theater)", issuesOf(badDef).length > 0, "the sweep missed a known-bad def — it would pass broken content, proving nothing");
+    check("SNG-238 §5c: a well-shaped quest passes the sweep clean (no false-flag)", issuesOf(goodDef).length === 0, "the sweep false-flagged a valid quest: " + issuesOf(goodDef).join(", "));
+  }
 }
 
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);

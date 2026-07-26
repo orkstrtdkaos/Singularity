@@ -217,8 +217,12 @@ export function structuredQuestRecord(def) { // registry:internal
     routes: normalizeQuestRoutes(def.routes), // CCODE-21: never an array — that renders as [object Object]
     outcomes: (def.outcomes || []).map(o => {
       const narr = o.narration || o.consequences || [];
+      // SNG-238 §5b: the decision-button HINT (o.summary) is a consumer-read field — never leave it blank. A
+      // marquee outcome carries `text` (the ending prose), not `summary`; fall back to it (clamped) so the
+      // Resolve button reads and the content-shape audit passes. Same never-blank pattern as the name fallback.
+      const summaryText = o.summary || o.text || (Array.isArray(narr) ? narr[0] : narr) || "";
       return {
-        id: o.id, name: o.name || titleizeId(o.id), summary: normalizeProse(o.summary), // CCODE-21: name fallback → the Resolve button is never blank
+        id: o.id, name: o.name || titleizeId(o.id), summary: smartClamp(normalizeProse(summaryText), 200), // CCODE-21: name fallback → the Resolve button is never blank; SNG-238: summary fallback → its hint is never blank
         narration: Array.isArray(narr) ? narr.map(normalizeProse) : normalizeProse(narr),   // prose for the chronicle (legacy: consequences)
         effects: o.effects || null                          // machine-readable deltas (null → legacy prose parse)
       };

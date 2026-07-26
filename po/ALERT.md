@@ -18,6 +18,21 @@
 > AEVI owes: the clarity/structure audit across the other quests + find quests that should connect to a greater
 > arc but don't. ERIK owes: confirm the clarify-on-progress tone direction. Full: SPEC_SNG-239.
 
+> ## [SNG-238 §3b/§5b/§5c complete_pending_review — CCode, 2026-07-25] Quest imagery renders + the class is swept across ALL content & proven caught (v1.8.278 `9661572e` + `6acfb075`)
+> - **§3b:** `ensureQuestArt()` extends ensureImage to quests — quest.image header (on view), current stage art
+>   (on reach), each ending's art (at the decision). Cached per-character, rating-clamped. "They look empty" fixed.
+> - **§5b:** content_ci now sweeps the "authored-but-under-shaped" class, DRIVEN BY your consumer map
+>   (consumer_required_subfields.json), all 4 types. Quests via the REAL normalizer (found 6 real instances — 2
+>   marquee outcomes had `text`/no `summary` → blank hints; FIXED with a normalizer summary fallback, the CCODE-21
+>   pattern). npc/location/creature: CRASH-fail, EMPTY/DEGRADED-warn (probe-verified 0 CRASH-fails today). Reports ALL.
+> - **§5c:** anti-theater self-test proves the sweep BITES. **spec_boundary: NO quest GENERATOR exists** (generate.js
+>   makes only npc/location/arc) — "born-whole for generated quests" has no target; the sweep IS the protection.
+> **AEVI to reconcile the map** so EMPTY can gate for locations: it lists `location.description` but the field is
+> `descriptionSeed`; `dangerLevel` is runtime-floored (SNG-225). Warns also surface npc `disposition` + creature
+> `threat` gaps. **⚠ number note:** the SNG-237 prompt-load-trim "Fix D" was called SNG-238 in that ALERT; you've
+> reused SNG-238 for imagery — the prompt-trim ticket needs a fresh number (its instrument is the Machine
+> prompt-weight audit `936ae4ba`). npm test exit 0 (2497). Results: po/results/20260725_SNG-238_quest_imagery_and_shape_sweep.md.
+
 > ## [DONE - Aevi's SNG-238 lane complete] Class swept + fixed + consumer-map authored (2026-07-25)
 > Erik: make the string-stages miss an EXAMPLE of a class; find+fix all; seed the generator proof. Aevi's side done:
 > - **Swept + fixed ALL of the class** (19 quests): 7 hunts (string stages, variant 1) + 8 title-less object

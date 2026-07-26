@@ -584,6 +584,35 @@ for (const pack of PACKS) {
   }
   ok(`SNG-238 §5b: content-shape sweep — ${swept} structured quests checked against consumer-read fields (title / stage id+objective+condition / outcome name+summary)`);
 
+  // --- SNG-238 §5b (all content types), DRIVEN BY Aevi's consumer-required-subfield map (§5d) ---
+  // po/staged_content/consumer_required_subfields.json is the authoritative seed. npc/location/creature load
+  // close to raw, so check raw fields. CRASH (a consumer THROWS on absence) FAILS the build; EMPTY/DEGRADED
+  // WARN for these types until the map is reconciled with runtime (the map lists location.description but the
+  // field is `descriptionSeed`; dangerLevel is runtime-floored per SNG-225) — probe-verified every CRASH field
+  // is present today, so this adds real protection without red-gating. Quests above use the NORMALIZER (it
+  // bridges name→title, text→summary, and drops stage.title), so their check is the normalized-output one, not
+  // the map's raw quest fields. The map grows by incident; the sweep picks up new fields automatically.
+  {
+    const mapDoc = existsSync(join(root, "po/staged_content/consumer_required_subfields.json")) ? rj("po/staged_content/consumer_required_subfields.json") : null;
+    const CT = mapDoc?.contentTypes || {};
+    const warnShape = m => console.log("warn  " + m);
+    const has = v => v != null && !(typeof v === "string" && !v.trim()) && !(Array.isArray(v) && !v.length);
+    const loadDir = (dir, key, keep) => { const out = []; const abs = join(root, dir); if (!existsSync(abs)) return out; for (const f of readdirSync(abs).filter(x => x.endsWith(".json"))) { const d = rj(`${dir}/${f}`); const arr = Array.isArray(d) ? d : (d[key] || (d && d.id ? [d] : [])); for (const x of arr) if (keep(x)) out.push(x); } return out; };
+    const sweepType = (label, items, spec) => {
+      if (!spec || !items.length) return;
+      let crashBad = 0, softBad = 0;
+      for (const it of items) for (const f of (spec.topLevel || [])) {
+        if (has(it[f.field])) continue;
+        if (f.severity === "CRASH") { check(`[shape:${label}] "${it.id || "?"}" has CRASH-required "${f.field}"`, false, `${f.read || ""} — a consumer THROWS on its absence (SNG-238 §5b, map-driven)`); crashBad++; }
+        else { softBad++; if (softBad <= 3) warnShape(`[shape:${label}] "${it.id || "?"}" missing ${f.severity} "${f.field}" — ${f.note || f.read || "hollow"} (warn: map field may need runtime reconcile)`); }
+      }
+      ok(`SNG-238 §5b: ${label} sweep vs consumer map — ${items.length} checked (${crashBad} CRASH-fail, ${softBad} EMPTY/DEGRADED warn)`);
+    };
+    sweepType("npc", loadDir("content/packs/valley/npcs", "npcs", n => n && n.id && !n.challengers && !Array.isArray(n.pool)), CT.npc);
+    sweepType("location", loadDir("content/packs/valley/locations", "locations", l => l && l.id), CT.location);
+    sweepType("creature", (mapDoc && existsSync(join(root, "content/packs/valley/bestiary.json"))) ? (rj("content/packs/valley/bestiary.json").roster || []) : [], CT.creature);
+  }
+
   // SNG-238 §5c (the "never again" proof, anti-theater — the SNG-232 discipline): the sweep must BITE, or a
   // green run above proves nothing. Construct a def WITH the class (a STRING stage + a bare outcome) and confirm
   // it's flagged; a well-shaped def passes clean. NOTE (spec_boundary): there is NO quest GENERATOR today — the

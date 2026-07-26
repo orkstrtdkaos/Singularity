@@ -1,5 +1,23 @@
 # PO ALERT
 
+> ## [FORWARD-OWED DONE - Aevi, 2026-07-25] cross-quest clarity audit + SNG-240 classification
+> - **SNG-239 §6d cross-quest audit:** swept all 17 quests. Engineer-speak: only 1 marginal flag
+>   (the_walk_that_wont_stop "directive" — fine in context); the jargon problem was isolated to water_remembers
+>   (already rewritten). Arc-orphans: found 3 quests sitting ON a greater arc without surfacing it (the
+>   water_remembers pattern) and WIRED them: the_maker_with_no_plan (Gearfather, woken pre-Transition engine) ->
+>   What Wakes Beneath; the_wyrm_of_endings (Ashen Wyrm, death-pole dragon) + the_choir_that_means_nothing
+>   (expression severed from feeling) -> The Poles Pull. Each got greaterArc + a tremor line in its premise so
+>   the connection surfaces. CI green. 9/17 quests now arc-connected (was 6).
+> - **SNG-240 section classification:** read gm.js buildTurnContext. KEY FINDING: almost every section is
+>   ALREADY if-gated, so SNG-240 is narrower than 'rebuild' - it's tightening LOOSE guards + capping
+>   UNBOUNDED-growth blocks (living world / shared canon / place history / known people / news - these dominate
+>   the late-game prompt) to scene-relevance, + gating heavy-but-marginal blocks (all-traditions/all-legends/
+>   all-reachable-dead) to actually-live-this-beat. The spine (scene/location/ability-law/active-quest/standing)
+>   stays ALWAYS. Full: po/SNG-240_section_classification.md. CCode measures per-block cost + tightens + gates a
+>   token budget.
+> AEVI still owes: SNG-238 §5b more standoff/puzzle content (the framed-standoff type for the stationary-talker
+> roll gate). ERIK owes: SNG-237 onSocialBeat rate; SNG-240 the capping trade; SNG-236 [DIAL] floors.
+
 > ## [OWED-BACK DONE - Aevi, 2026-07-25] change-statability audit + 2 reconciles + number collision
 > Cleared the three owed items:
 > - **SNG-239 §4 change-statability audit:** swept all 36 stage `change` fields. 30 statable; 5 false-positives

@@ -102,6 +102,15 @@
    "contract": "A traditionId the GM emits MUST be a real id from THE PEOPLES vocab block, or it's silently discarded. The prompt must SHOW the valid ids (it does, SNG-179) and the handler must not fail-silent without a vocab-miss log.",
    "brokeAs": "SNG-179: four ops ask the model for a traditionId; app.js silently dropped anything unresolvable, so markTeacher looked emitted-but-inert. The _opVocabMisses capture exists BECAUSE of this seam.",
    "checkHint": "assert the prompt's traditionId vocab block == CONTENT.traditionIndex ids; the handler logs a vocab-miss (already does) rather than fail-silent."
+  },
+  {
+   "id": "seam_quest_stages_are_objects",
+   "kind": "field_shape",
+   "producer": "quest content authoring (a quest's stages[] array)",
+   "consumer": "the quest-detail UI stageRow (app.js:6075, renders s.id/s.title/s.objective)",
+   "contract": "A quest stage MUST be an OBJECT {id,title,objective,...}, never a plain string. A string stage has no .id/.title, so the UI renders an empty row with a dead 'Mark this stage met' button and a blank radio.",
+   "brokeAs": "SNG-238: Aevi's 7 bestiary hunts wrote stages as plain strings -> rendered as empty rows + dead radios (Erik's screenshots of The Stag That Won't Die etc). Rebuilt as objects, CI green.",
+   "checkHint": "assert every quest.stages[] element is an object with id+title (not a string); flag a quest whose stages are strings before it reaches the renderer."
   }
  ],
  "howItGrows": "Every future seam bug adds ONE entry here (producer, consumer, contract, brokeAs, checkHint) + one check in the auditor. A seam caught once is caught forever. Start with these 11 (the session's real breaks); do NOT pre-enumerate speculative seams (§Guard: a check that can't fail is theater)."

@@ -1,0 +1,229 @@
+{
+ "schemaVersion": 1,
+ "id": "consumer_required_subfields",
+ "kind": "tooling_spec",
+ "note": "SNG-238 §5b/§5d (Aevi 2026-07-25): the CONSUMER-REQUIRED-SUBFIELD map - for each content type, which sub-fields a real CONSUMER reads, so CCode's content-shape SWEEP can flag any authored instance missing one (the 'authored-but-under-shaped' class: string-stages=variant1, title-less stages=variant2). Verified at origin by grepping the render/engine code for X.subfield reads on authored collections - NON-speculative, each field cites its consumer + file:line. Severity: CRASH (consumer throws/NaN), EMPTY (renders blank/dead control), DEGRADED (works but hollow - e.g. no image). The sweep asserts presence+type; a field a consumer READS is a field the author AND the generator (SNG-234/§5c) must SUPPLY. Grows by incident. Aevi owns this list (what-each-consumer-reads is content/PO knowledge); CCode builds the sweep against it.",
+ "contentTypes": {
+  "quest": {
+   "consumer": "the quest-detail card + stageRow + outcome render (app.js ~6070-6130, 7291) and the GM quest context (engine/quests.js questsForGM)",
+   "topLevel": [
+    {
+     "field": "title",
+     "severity": "EMPTY",
+     "read": "app.js:6107/6127 quest card header",
+     "note": "a quest with no title renders headerless"
+    },
+    {
+     "field": "stakes",
+     "severity": "DEGRADED",
+     "read": "app.js:6081 the WHAT'S AT STAKE band",
+     "note": "the stakes box is empty without it"
+    },
+    {
+     "field": "stages",
+     "severity": "EMPTY",
+     "read": "app.js:6084 q.stages.map(stageRow)",
+     "type": "array-of-OBJECTS",
+     "note": "VARIANT 1: string stages render empty (the hunts). Must be objects."
+    },
+    {
+     "field": "outcomes",
+     "severity": "DEGRADED",
+     "read": "app.js:6093/6097/6106 the endings",
+     "type": "array-of-objects"
+    },
+    {
+     "field": "image",
+     "severity": "DEGRADED",
+     "read": "SNG-238 quest card header art (once §3b wired)",
+     "note": "no header image = the empty look; DEGRADED now, EMPTY once the card expects it"
+    }
+   ],
+   "stageSubfields": [
+    {
+     "field": "id",
+     "severity": "CRASH",
+     "read": "app.js:6070/6075 data-stagedone + the key",
+     "note": "no id = the Mark-stage-met button wires to undefined"
+    },
+    {
+     "field": "title",
+     "severity": "EMPTY",
+     "read": "app.js stageRow bold header",
+     "note": "VARIANT 2: object stages missing title render headerless (the 8 quests the sweep found)"
+    },
+    {
+     "field": "objective",
+     "severity": "EMPTY",
+     "read": "app.js:6072 the stage's what-to-do line",
+     "note": "the player's concrete next step; empty without it"
+    },
+    {
+     "field": "condition",
+     "severity": "DEGRADED",
+     "read": "app.js:6073 how the stage is met"
+    },
+    {
+     "field": "imagePrompt",
+     "severity": "DEGRADED",
+     "read": "SNG-238 §3b stage art (once wired)",
+     "optional": true,
+     "note": "per-stage art; degraded (no image) not empty"
+    }
+   ],
+   "outcomeSubfields": [
+    {
+     "field": "id",
+     "severity": "CRASH",
+     "read": "app.js:6097/7428 the outcome key",
+     "note": "no id = outcome can't be selected/keyed"
+    },
+    {
+     "field": "name",
+     "severity": "EMPTY",
+     "read": "app.js:6107/6127 the ending's label"
+    },
+    {
+     "field": "text",
+     "severity": "EMPTY",
+     "read": "the ending prose",
+     "note": "an outcome with no text is a blank ending"
+    },
+    {
+     "field": "effects",
+     "severity": "DEGRADED",
+     "read": "the completion path (SNG-235)",
+     "type": "array",
+     "note": "no effects = a narrative-only end (SNG-235 - the world forgets)"
+    },
+    {
+     "field": "imagePrompt",
+     "severity": "DEGRADED",
+     "read": "SNG-238 §3b decision art",
+     "optional": true
+    }
+   ]
+  },
+  "npc": {
+   "consumer": "the GM NPC-render block (engine/gm.js buildTurnContext) + the drivenNpcDirective (SNG-233)",
+   "topLevel": [
+    {
+     "field": "name",
+     "severity": "CRASH",
+     "read": "gm.js 25x + the registry key (CCODE-20: an id-less/name-less NPC poisoned every meet)",
+     "note": "the single most-read field; also needs an id"
+    },
+    {
+     "field": "personality",
+     "severity": "DEGRADED",
+     "read": "the GM NPC block",
+     "note": "absent = agreeable furniture (SNG-233 - the Pell/Veth root)"
+    },
+    {
+     "field": "wants",
+     "severity": "DEGRADED",
+     "read": "the drivenNpcDirective (SNG-233)",
+     "type": "array",
+     "note": "no wants = no drives to render FROM"
+    },
+    {
+     "field": "fears",
+     "severity": "DEGRADED",
+     "read": "the drivenNpcDirective",
+     "type": "array"
+    },
+    {
+     "field": "disposition",
+     "severity": "DEGRADED",
+     "read": "the GM NPC block"
+    },
+    {
+     "field": "appearance",
+     "severity": "DEGRADED",
+     "read": "app.js/gm.js 2x the portrait/description"
+    }
+   ],
+   "note": "SNG-233 established that registered-in-play NPCs got name+bond but not the interiority the GM-render reads - THE SAME CLASS as quest under-shaping. The sweep should flag an important NPC (stable id, bond>threshold) missing personality/wants/fears."
+  },
+  "location": {
+   "consumer": "encounter eligibility (engine/random_encounters.js dangerOf) + map/travel (worldPos) + the GM scene (gm.js) + SNG-180 wiring audit",
+   "topLevel": [
+    {
+     "field": "name",
+     "severity": "CRASH",
+     "read": "app.js 7x the location header/key"
+    },
+    {
+     "field": "dangerLevel",
+     "severity": "EMPTY",
+     "read": "random_encounters.js dangerOf",
+     "note": "null guts encounter eligibility (SNG-225) - floored now, but the writer should supply it (seam_gen_location_dangerLevel)"
+    },
+    {
+     "field": "worldPos",
+     "severity": "CRASH",
+     "read": "map/travel + SNG-180",
+     "type": "object{colatitude,longitude,depth}",
+     "note": "null worldPos broke content_ci (seam_gen_location_worldPos)"
+    },
+    {
+     "field": "axisVector",
+     "severity": "CRASH",
+     "read": "the spectrum/axis system",
+     "type": "array[12]"
+    },
+    {
+     "field": "poleIntensity",
+     "severity": "DEGRADED",
+     "read": "app.js the pole render",
+     "type": "object"
+    },
+    {
+     "field": "description",
+     "severity": "EMPTY",
+     "read": "app.js the scene text"
+    }
+   ]
+  },
+  "creature": {
+   "consumer": "the encounter builder (random_encounters.js entryToEncounter) + the bestiary loader",
+   "topLevel": [
+    {
+     "field": "id",
+     "severity": "CRASH",
+     "read": "the roster key + encounter/quest creatureId refs"
+    },
+    {
+     "field": "name",
+     "severity": "EMPTY",
+     "read": "random_encounters.js the encounter label"
+    },
+    {
+     "field": "tier",
+     "severity": "DEGRADED",
+     "read": "collapseEligibility (SNG-230) + encounter scaling",
+     "note": "missing tier breaks collapse-eligibility + danger scaling"
+    },
+    {
+     "field": "class",
+     "severity": "DEGRADED",
+     "read": "the bestiary class grouping"
+    },
+    {
+     "field": "pressures",
+     "severity": "DEGRADED",
+     "read": "encounter frame + the weave",
+     "type": "object"
+    },
+    {
+     "field": "threat",
+     "severity": "DEGRADED",
+     "read": "random_encounters.js opponent.threat",
+     "note": "the fight's difficulty read"
+    }
+   ]
+  }
+ },
+ "howTheSweepUsesThis": "For each contentType, for each authored instance, assert every non-optional field here is PRESENT and (where typed) correctly TYPED. CRASH-severity missing = the build must fail (a consumer throws). EMPTY = fail (renders broken - the visible class). DEGRADED = warn (works but hollow - e.g. no image) unless Erik promotes it. The generator round-trip (§5c) runs its OUTPUT through this same map. Grows by incident: a new consumer.read that breaks on absence adds a line here + the sweep covers it.",
+ "provenance": "Every field verified at origin by grepping the consumer code for X.subfield reads (2026-07-25): quest reads app.js~6070-6130/7291; npc reads gm.js (25x .name) + SNG-233 directive; location reads random_encounters.js/SNG-180; creature reads random_encounters.js. Non-speculative - if a field isn't read by a real consumer, it's NOT here (no bloat, the SNG-232 lesson)."
+}

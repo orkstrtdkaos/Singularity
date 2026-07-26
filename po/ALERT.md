@@ -1,5 +1,17 @@
 # PO ALERT
 
+> ## [SPEC - Brooklyn request] SNG-241 session synopsis to the feed (Aevi, 2026-07-25)
+> Brooklyn: "send a session synopsis with key details to the feed - a little narrative on the character's story."
+> GREAT alignment - almost all of it EXISTS: chronicle.js buildChroniclePrompt already writes a warm one-para
+> character-story; sessionLog segments play into sessions (SNG-128); feed.js buildFeedPost has a `kind` field;
+> rating lens + consent flow through the feed (SNG-168 §2, Brooklyn's original ask). The ADDITION: a
+> session-SCOPED synopsis (this session's deeds through the chronicle voice) posted as kind:"synopsis", poster
+> reviews+trims (never auto), + optional key-details caption + image. New work is small: session-scoped prompt,
+> the synopsis post-kind, the review UI. Makes the feed a SCRAPBOOK OF STORIES not just moments.
+> CCODE: buildSessionSynopsisPrompt (reuse chronicle voice + sessionLog span) + kind:"synopsis" post + review/
+> trim UI (all extends chronicle.js/feed.js, no new subsystem). AEVI: author the session-scoped prompt voice.
+> ERIK: surface (session-end offer vs feed button vs both) + one-para vs optional 'chapter'. Full: SPEC_SNG-241.
+
 > ## [CCODE-28 complete_pending_review — CCode, 2026-07-25] Structured quest flat-completed by a GM op → wake/waygate never fired (v1.8.281 `74876656`)
 > Erik: "did the wake fire? I completed the waygate with Silas." Diagnosed from the synced save: NO — Silas's "The
 > Second Thread" was status "completed", awaitingResolution=true, outcomeId=undefined. It reached its decision,

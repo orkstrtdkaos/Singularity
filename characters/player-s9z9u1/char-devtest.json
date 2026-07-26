@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 154,
+  "xp": 159,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -64,7 +64,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 7,
+  "energy": 2,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -205,73 +205,65 @@
         "player": "Watch her face while you work — use Prism Sight to read what she won't say aloud",
         "summary": "Prism Sight read what Lira's face held without asking — presence confirmed, no performance found.",
         "narration": "You let Prism Sight open quietly — no push, just a gentle parting of the surface layer of the light. At this conserved draw the reading is lean and clear: the high angle of noon catches Lira's face exactly right.\n\nWhat you see there is not complicated. The slight darkening at the cheekbones when something lands well. The way her jaw loosens a fraction before she decides to hold it. A small tightening at the corners of her eyes that is not pain — it is the opposite of pain. Her breathing changes a beat before her body does, and the breath is what she cannot choose.\n\nShe does not say your name. What she does instead is look directly at you and hold the look, which is harder to hold than a name is — a name is a sound, and a sound ends. Her gaze is steady and present and asking nothing back from you, which is its own kind of answer.\n\nShe is here. All the way here. That much the light confirms without ambiguity."
+      },
+      {
+        "player": "With what Prism Sight just showed you — stay in it, give her exactly that, and see what she does with it.",
+        "summary": "On the roof terrace, with Prism Sight open and honest, he gave Lira back exactly what her face showed — and she answered with full, unguarded presence.",
+        "narration": "You do not close Prism Sight. You let it run open and quiet, the noon light holding her face in that clean, readable angle, and you give her back exactly what it shows you.\n\nWhen the tightening at the corners of her eyes comes, you slow down. When the breath shifts a beat before her body does, you match the beat. You are not guessing. You are reading her the way she reads a light-guide — following the actual angle, not the one you expected.\n\nShe notices. That is what Lira does — she notices, and she does not pretend she hasn't. Her chin drops a fraction. Her hand, which has been resting flat on the stone, closes into a loose grip. She says nothing, but her body says yes with the kind of specificity that does not allow for misunderstanding. When you hold the pace she asked for and stay exactly where the angle gives her what she named, she makes a sound low in her throat that is not composed at all. It is the sound a person makes when they have stopped managing the moment.\n\nAfterward she is quiet for a while. The valley stays open to the west. The light on the streets below does not move. She does not reach for the jacket or for conversation — she stays on her side, looking at you with the same steady directness she has held all afternoon, and there is something in it that is neither gratitude nor performance. It is just presence, given freely, and she is not in a hurry to take it back."
       }
     ],
     "lastTurn": {
-      "narration": "You let Prism Sight open quietly — no push, just a gentle parting of the surface layer of the light. At this conserved draw the reading is lean and clear: the high angle of noon catches Lira's face exactly right.\n\nWhat you see there is not complicated. The slight darkening at the cheekbones when something lands well. The way her jaw loosens a fraction before she decides to hold it. A small tightening at the corners of her eyes that is not pain — it is the opposite of pain. Her breathing changes a beat before her body does, and the breath is what she cannot choose.\n\nShe does not say your name. What she does instead is look directly at you and hold the look, which is harder to hold than a name is — a name is a sound, and a sound ends. Her gaze is steady and present and asking nothing back from you, which is its own kind of answer.\n\nShe is here. All the way here. That much the light confirms without ambiguity.",
-      "sceneSummary": "Prism Sight read what Lira's face held without asking — presence confirmed, no performance found.",
+      "narration": "You do not close Prism Sight. You let it run open and quiet, the noon light holding her face in that clean, readable angle, and you give her back exactly what it shows you.\n\nWhen the tightening at the corners of her eyes comes, you slow down. When the breath shifts a beat before her body does, you match the beat. You are not guessing. You are reading her the way she reads a light-guide — following the actual angle, not the one you expected.\n\nShe notices. That is what Lira does — she notices, and she does not pretend she hasn't. Her chin drops a fraction. Her hand, which has been resting flat on the stone, closes into a loose grip. She says nothing, but her body says yes with the kind of specificity that does not allow for misunderstanding. When you hold the pace she asked for and stay exactly where the angle gives her what she named, she makes a sound low in her throat that is not composed at all. It is the sound a person makes when they have stopped managing the moment.\n\nAfterward she is quiet for a while. The valley stays open to the west. The light on the streets below does not move. She does not reach for the jacket or for conversation — she stays on her side, looking at you with the same steady directness she has held all afternoon, and there is something in it that is neither gratitude nor performance. It is just presence, given freely, and she is not in a hurry to take it back.",
+      "sceneSummary": "On the roof terrace, with Prism Sight open and honest, he gave Lira back exactly what her face showed — and she answered with full, unguarded presence.",
       "choices": [
         {
-          "label": "Finish slowly and stay with her in the quiet after — no rush toward the count-bell yet.",
+          "label": "Stay where you are — say nothing, hold the look, let this rest for a minute before the count-bell forces the next move.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Finish, then get dressed and help her figure out the fastest way to reach Keeper Vael before the window closes.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "label": "Ask her plainly — now that the afternoon's been what it was, does she want to be there when you bring the ledger to Keeper Vael?",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "travel"
+            "persuade",
+            "romantic"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "With what Prism Sight just showed you — stay in it, give her exactly that, and see what she does with it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 15,
+          "label": "Get moving while the window is still open — dress, take the ledger from under her jacket, and head for the Accountability Board.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "careful"
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Before you go anywhere, pull the Lower Filtration Ledger out and show her the specific entries — let her see exactly what you're carrying and why.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, midday sun, valley floor open to the west. Iron stairs down to the street at the near edge.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, midday sun easing toward afternoon, valley floor open to the west. Iron stairs down to the street at the near edge.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "On her side, leg at his shoulder, gaze steady and direct — present, holding the look without asking anything back."
+            "state": "On her side, looking at him with steady directness — not reaching for the jacket or for conversation, present and unhurried."
           }
         ],
         "objects": [
@@ -289,24 +281,30 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Prism Sight read her face at noon — no performance found, only presence.",
+          "note": "Prism Sight read her honestly and he gave it back — she answered with full, unguarded presence and is now quiet and steady beside him.",
           "learned": [
-            "She does not say his name — she holds the look instead, which is harder and more honest."
+            "She notices when she is being read accurately — and does not pretend she hasn't.",
+            "When she stops managing a moment the sound she makes is unguarded and specific.",
+            "She stays present afterward without reaching for distance or conversation."
           ],
-          "statusNote": "On the roof terrace, on her side, present and unhurried."
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "On the roof terrace, present and unhurried — the afternoon still between them, the count-bell window still open.",
+          "bondType": "romantic",
+          "bondStage": "courting"
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a short, quiet beat on the terrace"
+        "hoursPassed": 0.5,
+        "why": "The scene has eased into its quiet aftermath — a short stretch of afternoon has passed since the last beat."
       }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, midday sun, valley floor open to the west. Iron stairs down to the street at the near edge.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District, Radiant Plateau. Flat warm stone, midday sun easing toward afternoon, valley floor open to the west. Iron stairs down to the street at the near edge.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "On her side, leg at his shoulder, gaze steady and direct — present, holding the look without asking anything back."
+          "state": "On her side, looking at him with steady directness — not reaching for the jacket or for conversation, present and unhurr"
         }
       ],
       "objects": [
@@ -371,7 +369,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] She did exactly what he asked — fully, without restraint. Her voice bent the Stillness Field. Afterward she said something half breath and half his name, and her forehead went to the coping stone.",
         "[d1] Collected herself at the coping wall, named the count-bell window without being asked, reached for her jacket and turned — voice level, one rough edge left in it. Said the ledger goes to Vael. Did not say whether she comes.",
         "[d1] Said yes plainly and came to him without ceremony. Afterward she named the keeper's office closing time and stepped back into the world without apology.",
         "[d1] Your bond becomes romantic.",
@@ -380,17 +377,18 @@
         "[d1] She rode him with full deliberate attention on the roof terrace — her body honest, her eyes steady and direct, no performance in any of it.",
         "[d1] Sitting at rest on the bench, gaze on the valley, sash loose, unhurried — the quality of her attention still present even in stillness.",
         "[d1] Rolled onto her side, leg at his shoulder — settled into the narrower angle with patience, named plainly what she likes about it.",
-        "[d1] Prism Sight read her face at noon — no performance found, only presence."
+        "[d1] Prism Sight read her face at noon — no performance found, only presence.",
+        "[d1] Prism Sight read her honestly and he gave it back — she answered with full, unguarded presence and is now quiet and steady beside him."
       ],
       "knownFacts": [
-        "She returns from intimacy the same way she approaches everything — a decision made, honored, and then the next thing.",
-        "She guides the way she corrects a lens — exact, unhurried, without drama.",
-        "When something lands right she stays with it rather than naming it.",
         "The silence after was genuine, not composed — she was not in a hurry to be anywhere else.",
         "She does not say his name in this — what she gives instead is her gaze, unbroken and real.",
         "Her control loosens at the edges when the rhythm finds its shape — not hidden, just honest.",
         "Even at the end she slows deliberately, hands flat on his chest, returning to the sky.",
-        "She does not say his name — she holds the look instead, which is harder and more honest."
+        "She does not say his name — she holds the look instead, which is harder and more honest.",
+        "She notices when she is being read accurately — and does not pretend she hasn't.",
+        "When she stops managing a moment the sound she makes is unguarded and specific.",
+        "She stays present afterward without reaching for distance or conversation."
       ],
       "skillsObserved": [
         "practical spatial awareness of district layout",
@@ -401,7 +399,7 @@
         "teaching by physical correction — exact and warm"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, on her side, present and unhurried.",
+      "statusNote": "On the roof terrace, present and unhurried — the afternoon still between them, the count-bell window still open.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -627,7 +625,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 20
+    "turnsSinceOffer": 21
   },
   "bio": null,
   "subAttributes": {
@@ -849,25 +847,25 @@
     }
   },
   "tendencies": {
-    "social": 10.993076142472079,
-    "strategic": 6.874389112846533,
-    "cautious": 3.3816244581259105,
-    "cerebral": 2.2559902605338786,
-    "physical": 0.6248473047750923,
-    "ruthless": 1.505942998134467,
-    "generous": 0.6602676397447879,
-    "amorous": 11.782375540078629,
-    "risky": 1.6977474970216366
+    "social": 10.718249238910277,
+    "strategic": 6.702529385025369,
+    "cautious": 4.297083846672763,
+    "cerebral": 2.1995905040205317,
+    "physical": 0.609226122155715,
+    "ruthless": 1.4682944231811053,
+    "generous": 0.6437609487511682,
+    "amorous": 12.487816151576663,
+    "risky": 1.6553038095960957
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 33,
+  "actionCount": 34,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785035009795,
-  "rev": 82,
+  "updatedAt": 1785035077964,
+  "rev": 83,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1055,7 +1053,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 33
+    "valley": 34
   },
   "foreclosed": [],
   "company": [],
@@ -1082,24 +1080,24 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-26T02:52:53.973Z",
-      "lastAt": "2026-07-26T03:03:29.793Z",
+      "lastAt": "2026-07-26T03:04:37.948Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 5
+      "beats": 6
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 18,
-    "choices": 18,
-    "scene": 18,
-    "npcUpdates": 18,
-    "timeOps": 16,
+    "sceneSummary": 19,
+    "choices": 19,
+    "scene": 19,
+    "npcUpdates": 19,
+    "timeOps": 17,
     "sceneEnded": 7,
     "characterDeltas": 5,
     "codexUpdates": 2
   },
-  "_opTurns": 18,
+  "_opTurns": 19,
   "_intentAsked": null
 }

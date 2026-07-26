@@ -165,6 +165,41 @@
         "characterName": "Silas Weir"
       },
       "foundWorldDay": 24
+    },
+    "deathsense+palework": {
+      "braidKey": "deathsense+palework",
+      "name": "The Hollowing Sight",
+      "description": "Five times the ashwarden stood at the threshold where death whispers and pale force strikes, and the two crafts listened to each other until they became one. Deathsense no longer merely foresees endings — it feeds them to Palework like coordinates. Palework no longer merely hinders and strikes — it operates on what the Sight has already identified as structurally doomed. Together they do…",
+      "notFor": "The Hollowing Sight cannot manufacture death where none was approaching — it finds no purchase on the hale and unbroken. It cannot heal, restore, or protect. It cannot be used without first perceiving the target's deathward tendency…",
+      "emergentFunction": "open",
+      "tree": [
+        {
+          "name": "Crack-Reading",
+          "grants": "The practitioner can perceive structural weakness in bodies, objects, and organisations — hairline faults invisible to ordinary senses — and strike or hinder along those exact lines, multiplying…",
+          "cannot": "Cannot open a collapse; can only identify and pressure the crack. The target must do the falling themselves."
+        },
+        {
+          "name": "Drawn Threshold",
+          "grants": "By holding both crafts in sustained attention, the practitioner can mark a living target with the precise moment of their forecasted death, making that moment legible to other ashwardens and making…",
+          "cannot": "Cannot accelerate the marked moment, only reveal and weaponise the knowledge of it. The mark dissolves if the practitioner loses concentration or the target's…"
+        },
+        {
+          "name": "The Hollow Strike",
+          "grants": "Once per encounter, the practitioner may open the death-seam identified by the Sight in a single converging blow of pale force. The target does not take ordinary damage — instead, whatever was most…",
+          "cannot": "Cannot be used twice in the same encounter. Cannot target the practitioner's own death-seam. Cannot be hidden — witnesses with any sensitivity to ashwarden…"
+        }
+      ],
+      "namedBy": "gm",
+      "sourceNames": [
+        "Deathsense",
+        "Palework"
+      ],
+      "contributedBy": {
+        "playerKey": "player-s9z9u1",
+        "characterId": "char-mrhs8286",
+        "characterName": "Silas Weir"
+      },
+      "foundWorldDay": 26
     }
   }
 }

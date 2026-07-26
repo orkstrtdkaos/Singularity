@@ -102,3 +102,53 @@ did. Ties SNG-237 (the overloaded prompt drops the quiet good rule) — this may
    image-plus-truth pairing every time? Lean: image optional, plain truth mandatory.
 3. (Aevi) The `change`-statability audit — how many quests have vague change fields vs. water_remembers'
    already-good ones? I'll sweep and report.
+
+
+---
+
+# §6 — SHARPENED (Erik, 2026-07-25): mystery-start is FINE; clarify on STEPS; and author the clear structure IN
+Erik: "The quest CAN start mysterious, but it needs to CLARIFY as you perform steps. And author the clear
+STRUCTURE in — the pre-Transition site is 'a waste-treatment facility' that went haywire; the player finds out
+X, to fix Y, then decides Z. But I'd hoped it was a dormant PRECURSOR coming alive — and I'd love to WALK it
+into the world AND fix the river."
+
+Two refinements + a demonstrated rewrite:
+
+## §6a — the arc is: START mysterious → CLARIFY each step → CLEAR by the decision
+The fix isn't "never be mysterious." A quest SHOULD open as a hook you don't understand. The rule is the
+TRAJECTORY: each satisfied stage makes it CLEARER, and by the decision the player fully understands what they're
+choosing. Mystery is the STARTING state, clarity is the EARNED state. The screenshot's failure was a quest that
+stayed mysterious AT THE DECISION — the arc never resolved the fog. So the QUEST CLARITY rule (§3) is
+specifically about the SLOPE: opacity must monotonically DECREASE as stages complete. A stage that leaves the
+player more confused than the last is the bug.
+
+## §6b — author the CLEAR STRUCTURE into the content, not just the prose
+Aevi's own miss (worth owning): I said "the quest IS clear" from reading the JSON — but "a nanite reclamation
+system preparing the watershed" is ENGINEER-SPEAK, not a story a player grasps. Erik's version — "a
+waste-treatment facility that went haywire and is now poisoning the river; find X, fix Y, decide Z" — is the
+CLEAR STRUCTURE, and it belongs IN the authored content (premise + stages), not left for the GM to derive. The
+content must carry the plain through-line so the GM has a clear thing to state (this is the content half of §4).
+Standing rule: a quest's premise + stages state the STRUCTURE plainly (what's wrong, what to find, what to fix,
+what to decide) in human terms, even if the fiction opens as a mystery.
+
+## §6c — DEMONSTRATED: what_the_water_remembers rewritten (Aevi, DONE)
+Rewrote the quest as the worked example of §6a+§6b — AND opened the precursor path Erik wanted (which turned out
+to be ALREADY IN THE WORLD: the `arc_what_wakes_beneath` greater-arc's stage 1 literally reads "the Valley's
+poisoned water is the nearest and least of them" — the poisoning IS the arc's first tremor; the quest just never
+surfaced it). The rewrite:
+- **Concrete + clarifying:** a pre-Transition WASTE-TREATMENT facility (built to cleanse, its instruction
+  curdled to poison) — s1 find the source (it's a structure) → s2 get inside (its instruction is curdled; and
+  something's IN the deep of it) → s3 what's waking (it's a dormant PRECURSOR, and the poison is it stretching)
+  → s4 decide, understanding fully. Opacity decreases every stage.
+- **Four real endings** (was 3 abstract + empty text): SLEEP (seal it back down), DIE (let the instruction
+  finish, killing it), REPAIR (rewrite the instruction to heal the river, presence left sleeping — the wright's
+  road), and Erik's **AWAKEN**: wake it fully, it cleanses the river as its first living act, and it WALKS the
+  world bonded to Silas as the one who midwifed it — a world-scale wake that ANSWERS What Wakes Beneath by
+  waking it. All four carry full text + durable effects. CI green.
+This is the template for the clarity fix: concrete structure authored in, mystery that resolves, endings that
+are real and different, tied to the greater arcs already in the world.
+
+## §6d — Aevi owes: the same treatment across quests
+The other quests need the §6b audit — is the premise+stages a plain human through-line, or engineer-speak /
+abstraction? Rewrite where it's opaque. And look for other quests that SHOULD connect to a greater arc but
+don't (water_remembers was sitting on top of What Wakes Beneath without surfacing it — there may be more).

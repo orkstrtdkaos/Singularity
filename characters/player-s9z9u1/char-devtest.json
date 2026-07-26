@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 141,
+  "xp": 146,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -64,7 +64,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 22,
+  "energy": 17,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -185,36 +185,29 @@
         "player": "Take her slowly... say her name, Lira.... have her show you how she works.",
         "summary": "Lira showed how she works — exact, unhurried, nothing hidden. The silence after was its own answer.",
         "narration": "You slow down. You say her name — Lira — and mean it as a question she can answer however she wants.\n\nShe stills. Not surprise, exactly. More like something she hadn't expected to be handed and doesn't quite know where to set. Then she takes your hand and moves it, exact and unhurried, the way she would correct a bad angle on a lens. Here. Like this. Her voice stays level but she watches your face when she says it, checking whether you're actually paying attention. You are.\n\nShe shows you. A pressure here, a pace there — she guides without apology and without performance, the same precision she brings to everything, nothing hidden or dressed up. When something lands right she doesn't dramatize it. She just stays with it, and her breathing changes, and you know. After a while she stops directing and simply lets it happen, her hand loose over yours, her eyes open.\n\nWhen it's done she is quiet for a moment — a real quiet, not a composed one. Then she exhales through her nose and looks at the sky, and her hand finds your arm without urgency, and she says nothing for a little while. That silence, too, is information. It says she is not in a hurry to be anywhere else just yet."
+      },
+      {
+        "player": "While she's riding you, watch he body for signs of truth, do he nipples go taught, what sounds come out, does she say you name?  How does she feel on you",
+        "summary": "On the roof terrace, midday, she rode him with her full deliberate attention — and he watched for the truth of it, and found it.",
+        "narration": "She moves over you with the same economy she brings to everything — no waste, no theater, weight settling through her hips in a rhythm that is entirely her own. You watch.\n\nHer nipples tighten early, before the pace has built to anything, the first honest signal her body gives before she decides to give anything else. The sounds she makes are low and held back at first — not hidden, just controlled, the way she controls most things. But as the rhythm finds its shape the control loosens at the edges. A catch of breath. A small sound, released without quite meaning to be. When something lands precisely right she exhales through her nose and presses down harder, seeking the angle again with the same deliberateness she uses for everything — the same instinct to repeat what works, to return to the exact degree.\n\nShe does not say your name. She says nothing for a long time. What she does is look at you — steady, direct, the amber-grey eyes not glancing away — and that watching is its own answer, more unguarded than words. She is not performing for you. She is here because she chose to be, and what you can read in her is simply that: a decision made and honored, attended to with her whole body. The warmth of her is real and close, and when she finally does make a sound that she doesn't bother to muffle, it is not your name but it is for you.\n\nAt the end she slows rather than stops, deliberate even in this, and rests her hands flat on your chest. The count-bell window is still ahead of you. She looks at the sky."
       }
     ],
     "lastTurn": {
-      "narration": "You slow down. You say her name — Lira — and mean it as a question she can answer however she wants.\n\nShe stills. Not surprise, exactly. More like something she hadn't expected to be handed and doesn't quite know where to set. Then she takes your hand and moves it, exact and unhurried, the way she would correct a bad angle on a lens. Here. Like this. Her voice stays level but she watches your face when she says it, checking whether you're actually paying attention. You are.\n\nShe shows you. A pressure here, a pace there — she guides without apology and without performance, the same precision she brings to everything, nothing hidden or dressed up. When something lands right she doesn't dramatize it. She just stays with it, and her breathing changes, and you know. After a while she stops directing and simply lets it happen, her hand loose over yours, her eyes open.\n\nWhen it's done she is quiet for a moment — a real quiet, not a composed one. Then she exhales through her nose and looks at the sky, and her hand finds your arm without urgency, and she says nothing for a little while. That silence, too, is information. It says she is not in a hurry to be anywhere else just yet.",
-      "sceneSummary": "Lira showed how she works — exact, unhurried, nothing hidden. The silence after was its own answer.",
+      "narration": "She moves over you with the same economy she brings to everything — no waste, no theater, weight settling through her hips in a rhythm that is entirely her own. You watch.\n\nHer nipples tighten early, before the pace has built to anything, the first honest signal her body gives before she decides to give anything else. The sounds she makes are low and held back at first — not hidden, just controlled, the way she controls most things. But as the rhythm finds its shape the control loosens at the edges. A catch of breath. A small sound, released without quite meaning to be. When something lands precisely right she exhales through her nose and presses down harder, seeking the angle again with the same deliberateness she uses for everything — the same instinct to repeat what works, to return to the exact degree.\n\nShe does not say your name. She says nothing for a long time. What she does is look at you — steady, direct, the amber-grey eyes not glancing away — and that watching is its own answer, more unguarded than words. She is not performing for you. She is here because she chose to be, and what you can read in her is simply that: a decision made and honored, attended to with her whole body. The warmth of her is real and close, and when she finally does make a sound that she doesn't bother to muffle, it is not your name but it is for you.\n\nAt the end she slows rather than stops, deliberate even in this, and rests her hands flat on your chest. The count-bell window is still ahead of you. She looks at the sky.",
+      "sceneSummary": "On the roof terrace, midday, she rode him with her full deliberate attention — and he watched for the truth of it, and found it.",
       "choices": [
         {
-          "label": "Stay in the quiet with her — let it hold before the count-bell moves you both",
+          "label": "Lie quiet with her for a few minutes — let the silence do what it does — then suggest it's time to move on Keeper Vael",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "comfort",
             "calm"
           ],
           "trivial": true
         },
         {
-          "label": "Ask her, plainly, what she wants to happen to Fendt — her read, not the keeper's",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Pick up the ledger and go — head for Keeper Aldris Vael before the window closes",
+          "label": "Kiss her once, dress, and move toward Keeper Aldris Vael's office — the ledger needs to land before the bell closes the window",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
@@ -224,12 +217,23 @@
           "trivial": true
         },
         {
-          "label": "Use Prism Sight on the ledger one more time — look at the light-history of the pages themselves, not just the numbers",
+          "label": "Tell her plainly what you read in her — what you saw — not as flattery, as observation",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Before you move — use Prism Sight on the accountability board below while you're still above it, reading whether anything has changed around Fendt's mark since this morning",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "prism_sight",
           "energyCost": 3,
@@ -241,7 +245,7 @@
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "quiet, hand resting on your arm, looking at the sky — not ready to leave yet"
+            "state": "hands flat on your chest, looking at the sky — breathing settling, unhurried"
           }
         ],
         "objects": [
@@ -259,23 +263,20 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "role": "Apprentice optics-weaver, Edge District",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "She showed how she works — guiding without apology or performance, precision the same in this as in everything. The silence after was unguarded, a real one.",
+          "note": "She rode him with full deliberate attention on the roof terrace — her body honest, her eyes steady and direct, no performance in any of it.",
           "learned": [
-            "She guides the way she corrects a lens — exact, unhurried, without drama.",
-            "When something lands right she stays with it rather than naming it.",
-            "The silence after was genuine, not composed — she was not in a hurry to be anywhere else."
+            "She does not say his name in this — what she gives instead is her gaze, unbroken and real.",
+            "Her control loosens at the edges when the rhythm finds its shape — not hidden, just honest.",
+            "Even at the end she slows deliberately, hands flat on his chest, returning to the sky."
           ],
-          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "On the roof terrace, quiet, hand on your arm — not yet ready to move toward the afternoon."
+          "statusNote": "On the roof terrace, hands on his chest, looking at the sky — present and unhurried.",
+          "relationshipDelta": 0
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "a slow, unhurried beat before the count-bell presses them both forward"
+        "hoursPassed": 0.25,
+        "why": "a deliberate, unhurried beat on the roof terrace"
       }
     },
     "sceneState": {
@@ -283,7 +284,7 @@
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "quiet, hand resting on your arm, looking at the sky — not ready to leave yet"
+          "state": "hands flat on your chest, looking at the sky — breathing settling, unhurried"
         }
       ],
       "objects": [
@@ -348,7 +349,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Felt the Drumline Stride deepen by one degree and followed without hesitation — matched the new tempo and held it.",
         "[d1] Took the lead when it was offered — set her own pace without announcement, deliberate and sure. Said: 'You let go easily.' The tone was a verdict she found satisfying.",
         "[d1] Felt the break in the shared tempo when he pushed past her lead — went still and asked him plainly what he was reaching for. Not angry; evaluating.",
         "[d1] He resumed the beat without argument — restrained and open rather than demanding. She tested it, found the rhythm where she had left it, and came back. Said 'Don't stop' with her head down and her voice undone.",
@@ -357,17 +357,18 @@
         "[d1] Said yes plainly and came to him without ceremony. Afterward she named the keeper's office closing time and stepped back into the world without apology.",
         "[d1] Your bond becomes romantic.",
         "[d1] Your bond deepens — courting.",
-        "[d1] She showed how she works — guiding without apology or performance, precision the same in this as in everything. The silence after was unguarded, a real one."
+        "[d1] She showed how she works — guiding without apology or performance, precision the same in this as in everything. The silence after was unguarded, a real one.",
+        "[d1] She rode him with full deliberate attention on the roof terrace — her body honest, her eyes steady and direct, no performance in any of it."
       ],
       "knownFacts": [
-        "He pushed past her lead when they had built something together — she named that clearly.",
-        "A restrained return after the broken tempo landed better than a push would have — she recognised the difference and chose to meet it.",
-        "The Stillness Field can be pushed to its edge from the inside — she knows what that sounds like now.",
         "She returns to practicality after intimacy without ceremony — the next necessary thing is the next thing she names.",
         "She returns from intimacy the same way she approaches everything — a decision made, honored, and then the next thing.",
         "She guides the way she corrects a lens — exact, unhurried, without drama.",
         "When something lands right she stays with it rather than naming it.",
-        "The silence after was genuine, not composed — she was not in a hurry to be anywhere else."
+        "The silence after was genuine, not composed — she was not in a hurry to be anywhere else.",
+        "She does not say his name in this — what she gives instead is her gaze, unbroken and real.",
+        "Her control loosens at the edges when the rhythm finds its shape — not hidden, just honest.",
+        "Even at the end she slows deliberately, hands flat on his chest, returning to the sky."
       ],
       "skillsObserved": [
         "practical spatial awareness of district layout",
@@ -378,7 +379,7 @@
         "teaching by physical correction — exact and warm"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, quiet, hand on your arm — not yet ready to move toward the afternoon.",
+      "statusNote": "On the roof terrace, hands on his chest, looking at the sky — present and unhurried.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -604,7 +605,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 16
+    "turnsSinceOffer": 17
   },
   "bio": null,
   "subAttributes": {
@@ -843,8 +844,8 @@
   "actionCount": 31,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785034373989,
-  "rev": 78,
+  "updatedAt": 1785034524067,
+  "rev": 79,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1031,7 +1032,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 29
+    "valley": 30
   },
   "foreclosed": [],
   "company": [],
@@ -1058,24 +1059,24 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-26T02:52:53.973Z",
-      "lastAt": "2026-07-26T02:52:53.973Z",
+      "lastAt": "2026-07-26T02:55:24.056Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 1
+      "beats": 2
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 14,
-    "choices": 14,
-    "scene": 14,
-    "npcUpdates": 14,
-    "timeOps": 14,
+    "sceneSummary": 15,
+    "choices": 15,
+    "scene": 15,
+    "npcUpdates": 15,
+    "timeOps": 15,
     "sceneEnded": 7,
     "characterDeltas": 4,
     "codexUpdates": 2
   },
-  "_opTurns": 14,
+  "_opTurns": 15,
   "_intentAsked": null
 }

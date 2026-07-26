@@ -255,14 +255,19 @@
         "player": "Help her remove her top, when she wants. Watch the slow release of her breasts.",
         "summary": "Lira's top comes away in the late-afternoon light; she stands present and unhurried, holding his forearms, her breathing steady and chosen.",
         "narration": "The afternoon light is doing something particular to the terrace now — low and angled, the kind that picks out texture, that makes ordinary stone look like it is lit from inside. Lira is close. The last of the distance went when she crossed it herself, and nothing about her posture suggests it is coming back.\n\nYou reach for the hem of her top — slowly, as you said you would — and she lifts her arms for you. Not passive. Decided. The fabric comes away and she lets it go without watching where it lands, because she is watching you instead. And there it is: the slow release you waited for — the weight of her settling, the small exhale that goes with it, her shoulders dropping a degree she had not known they were holding. She does not cover herself or move to arrange anything. She simply stands in the low amber light and lets you look, because she has decided that is what this is.\n\nHer skin is warm from the afternoon stone. There is a faint crease across her ribs from the fabric, and you can see her breathing — steadier than you might have expected, except her hands have found your forearms and are holding there with a quiet, particular grip that says the steadiness is something she is choosing, not something that came free. She looks at you the way she looked at the ledger numbers. But warmer. Like something she wants to get exactly right."
+      },
+      {
+        "player": "Trace the line of her collarbone downward — slow, deliberate, your hands doing the looking now.",
+        "summary": "Slow and deliberate on the terrace in the late-afternoon light — Lira present and unhurried, watching his face while his hand moved.",
+        "narration": "You trace the line of her collarbone with one fingertip. You start at the hollow of her throat and move outward, slowly, the way you said you would. She does not flinch. She does not rush to help you or to interpret what it means. She simply lets your hand be there, and her skin is warm in the afternoon light, and you can feel the small rise and fall of her breathing underneath your touch.\n\nShe watches your face more than your hand. That is the Lira thing — she measures from the source. Her own hands rest loosely on your forearms. Not gripping. Just present. The amber-grey of her eyes has gone a little dark in the way that has nothing to do with light.\n\nYou follow the line down, off the ridge of bone and onto the soft slope below it. Your palm opens a little. She draws one slow breath in through her nose and lets it go through her mouth, and her eyes stay on yours the whole time. She says nothing. She is not managing any part of this."
       }
     ],
     "lastTurn": {
-      "narration": "The afternoon light is doing something particular to the terrace now — low and angled, the kind that picks out texture, that makes ordinary stone look like it is lit from inside. Lira is close. The last of the distance went when she crossed it herself, and nothing about her posture suggests it is coming back.\n\nYou reach for the hem of her top — slowly, as you said you would — and she lifts her arms for you. Not passive. Decided. The fabric comes away and she lets it go without watching where it lands, because she is watching you instead. And there it is: the slow release you waited for — the weight of her settling, the small exhale that goes with it, her shoulders dropping a degree she had not known they were holding. She does not cover herself or move to arrange anything. She simply stands in the low amber light and lets you look, because she has decided that is what this is.\n\nHer skin is warm from the afternoon stone. There is a faint crease across her ribs from the fabric, and you can see her breathing — steadier than you might have expected, except her hands have found your forearms and are holding there with a quiet, particular grip that says the steadiness is something she is choosing, not something that came free. She looks at you the way she looked at the ledger numbers. But warmer. Like something she wants to get exactly right.",
-      "sceneSummary": "Lira's top comes away in the late-afternoon light; she stands present and unhurried, holding his forearms, her breathing steady and chosen.",
+      "narration": "You trace the line of her collarbone with one fingertip. You start at the hollow of her throat and move outward, slowly, the way you said you would. She does not flinch. She does not rush to help you or to interpret what it means. She simply lets your hand be there, and her skin is warm in the afternoon light, and you can feel the small rise and fall of her breathing underneath your touch.\n\nShe watches your face more than your hand. That is the Lira thing — she measures from the source. Her own hands rest loosely on your forearms. Not gripping. Just present. The amber-grey of her eyes has gone a little dark in the way that has nothing to do with light.\n\nYou follow the line down, off the ridge of bone and onto the soft slope below it. Your palm opens a little. She draws one slow breath in through her nose and lets it go through her mouth, and her eyes stay on yours the whole time. She says nothing. She is not managing any part of this.",
+      "sceneSummary": "Slow and deliberate on the terrace in the late-afternoon light — Lira present and unhurried, watching his face while his hand moved.",
       "choices": [
         {
-          "label": "Trace the line of her collarbone downward — slow, deliberate, your hands doing the looking now.",
+          "label": "Keep moving slower — let her feel the full attention of it, no destination yet.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -272,17 +277,7 @@
           "trivial": true
         },
         {
-          "label": "Stay still a moment longer — let her feel the weight of being seen before you move.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say something to her — not a compliment exactly, just naming what you are seeing, honestly.",
+          "label": "Meet her eyes and ask what she wants your hands to do next — put the choosing with her.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -292,9 +287,19 @@
           "trivial": true
         },
         {
-          "label": "Draw her closer — bodies together now, your arms around her, the warmth of the stone and the afternoon shared between you.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Bring your mouth to where your hand has been — collarbone, throat, whatever she angles toward.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Pause. Let the stillness hold. Give her the chance to move if she wants to.",
+          "attribute": "social",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -307,13 +312,13 @@
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Standing close, top removed, hands holding his forearms with a quiet deliberate grip — watching him with steady amber-grey eyes."
+            "state": "Standing close, top off, hands loose on his forearms — breathing slow and steady, watching his face with dark amber-grey eyes, entirely present."
           }
         ],
         "objects": [
           "Lower Filtration Ledger — on the bench",
           "Lira's jacket — on the bench",
-          "Lira's top — dropped somewhere nearby, not watched",
+          "Lira's top — dropped nearby, unwatched",
           "Iron exterior staircase leading down to the street"
         ],
         "threads": [
@@ -327,16 +332,16 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Lifted her arms for him without hesitation — decided, not passive. Stands in the afternoon light and lets him look, her hands on his forearms, breathing steady and chosen.",
-          "relationshipDelta": 1,
-          "statusNote": "On the roof terrace, present and unhurried, the last of the managing gone.",
+          "note": "Held still under his hand moving along her collarbone — watching his face the whole time, breathing slow, not managing any part of it.",
+          "status": "active",
+          "statusNote": "On the roof terrace, present and unhurried, watching him with steady dark eyes.",
           "bondType": "romantic",
           "bondStage": "courting"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet intimate beat on the terrace"
+        "why": "A slow, unhurried beat on the terrace — a few minutes of deliberate attention."
       }
     },
     "sceneState": {
@@ -344,13 +349,13 @@
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Standing close, top removed, hands holding his forearms with a quiet deliberate grip — watching him with steady amber-gr"
+          "state": "Standing close, top off, hands loose on his forearms — breathing slow and steady, watching his face with dark amber-grey"
         }
       ],
       "objects": [
         "Lower Filtration Ledger — on the bench",
         "Lira's jacket — on the bench",
-        "Lira's top — dropped somewhere nearby, not watched",
+        "Lira's top — dropped nearby, unwatched",
         "Iron exterior staircase leading down to the street"
       ],
       "threads": [
@@ -411,7 +416,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Prism Sight read her honestly and he gave it back — she answered with full, unguarded presence and is now quiet and steady beside him.",
         "[d1] Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology.",
         "[d1] Walked him through the falsification evidence — the absence of noise in three weeks of entries — and turned it back to him as a question about what he sees.",
         "[d1] Set the ledger aside and asked him to name what he was actually reaching for — precise and unhurried.",
@@ -420,7 +424,8 @@
         "[d1] Reconstructed the shared sequence in order — managing, then the moment of stopping — and turned it back to him as a question about what it registered from his side.",
         "[d1] Confirmed plainly what passed between them and what did not — no touch, no orgasm, only the Prism Sight exchange and her stopping managing herself. Named it as more than most people give her. Asked whether he is orienting to what was real or reaching for something that hasn't happened yet.",
         "[d1] Closed the distance herself. Said plainly she was not managing anything. Met the kiss without hesitation.",
-        "[d1] Lifted her arms for him without hesitation — decided, not passive. Stands in the afternoon light and lets him look, her hands on his forearms, breathing steady and chosen."
+        "[d1] Lifted her arms for him without hesitation — decided, not passive. Stands in the afternoon light and lets him look, her hands on his forearms, breathing steady and chosen.",
+        "[d1] Held still under his hand moving along her collarbone — watching his face the whole time, breathing slow, not managing any part of it."
       ],
       "knownFacts": [
         "She names the habit of holding a part of herself back as bracing — not against him, against being seen fully.",
@@ -441,7 +446,7 @@
         "emotional precision and recall — naming internal states in s"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, present and unhurried, the last of the managing gone.",
+      "statusNote": "On the roof terrace, present and unhurried, watching him with steady dark eyes.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -667,7 +672,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 30
+    "turnsSinceOffer": 31
   },
   "bio": null,
   "subAttributes": {
@@ -890,15 +895,15 @@
     }
   },
   "tendencies": {
-    "social": 8.753077573057743,
-    "strategic": 6.354728404739653,
-    "cautious": 3.509221273873283,
-    "cerebral": 3.6059928534521415,
-    "physical": 0.4975256114966301,
-    "ruthless": 1.19908528899809,
-    "generous": 0.5257285399249704,
-    "amorous": 15.65575655223732,
-    "risky": 1.3518068417156648
+    "social": 8.534250633731299,
+    "strategic": 6.1958601946211616,
+    "cautious": 3.421490742026451,
+    "cerebral": 3.515843032115838,
+    "physical": 0.48508747120921436,
+    "ruthless": 1.1691081567731378,
+    "generous": 0.5125853264268461,
+    "amorous": 16.264362638431386,
+    "risky": 1.3180116706727731
   },
   "aptitudes": [
     "silver_tongue",
@@ -906,11 +911,11 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 42,
+  "actionCount": 43,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785036533869,
-  "rev": 94,
+  "updatedAt": 1785036879019,
+  "rev": 95,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1098,7 +1103,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 43
+    "valley": 44
   },
   "foreclosed": [],
   "company": [],
@@ -1125,24 +1130,24 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-26T02:52:53.973Z",
-      "lastAt": "2026-07-26T03:28:53.866Z",
+      "lastAt": "2026-07-26T03:34:39.006Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 15
+      "beats": 16
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 27,
-    "choices": 27,
-    "scene": 27,
-    "npcUpdates": 27,
-    "timeOps": 24,
+    "sceneSummary": 28,
+    "choices": 28,
+    "scene": 28,
+    "npcUpdates": 28,
+    "timeOps": 25,
     "sceneEnded": 7,
     "characterDeltas": 6,
     "codexUpdates": 3
   },
-  "_opTurns": 27,
+  "_opTurns": 28,
   "_intentAsked": null
 }

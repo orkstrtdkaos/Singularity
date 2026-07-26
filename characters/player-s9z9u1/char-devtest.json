@@ -54,7 +54,7 @@
   ],
   "alignment": {
     "falsehood_truth": 0.0323125,
-    "spectrumId": -0.10630923842760238,
+    "spectrumId": -0.10099377650622227,
     "dark_light": 0.03,
     "emotional_logical": 0.015,
     "violence_peace": 0.04000000000000001,
@@ -230,55 +230,58 @@
         "player": "Tell her plainly — it's not the ledger, it's her. Ask her to walk you through what she was doing with her body the second time, now that you're both clearer.",
         "summary": "Lira named the difference between the first time and the second — managing herself versus stopping — and demonstrated it in the telling.",
         "narration": "You say it plainly. Not the ledger. Her.\n\nShe holds the look for a moment after you say it — the kind of hold that isn't deciding, because she already decided something a few exchanges back. Then the corner of her mouth moves, not quite a smile, something more specific than that.\n\n\"The second time,\" Lira says, \"I stopped managing it.\" She says it the way she names a measurement — not confessing, just reporting what was true. \"The first time I was still tracking what I was doing. Holding a small part of myself back to watch. That's habit.\" She shifts her weight on the bench, unhurried, and turns toward you a little more. \"The second time I didn't. You gave me back what you were seeing and I stopped watching myself and just — \" She pauses, and what she does with the pause is specific: she lets her breath out slowly, and her shoulder drops a fraction, and she is demonstrating rather than describing. \"That.\"\n\nHer hand is still flat on the warm stone between you. She doesn't move it. \"What I was doing with my body,\" she says, \"was letting the angle change. Every time I stopped bracing against it, the angle changed again. I kept finding that out fresh, over and over.\" She looks at you steadily. \"You felt that.\"\n\nIt is not a question. She is asking you to confirm it, which is different."
+      },
+      {
+        "player": "Show me again and tell me the words for the parts you're talking about while you do it.",
+        "summary": "Lira demonstrated the shift in plain words and plainer body — bracing, then the moment it left — and told him the rest was what he could already see.",
+        "narration": "You say it simply. Show me again, and tell me the words for the parts while you do it.\n\nLira looks at you for a moment. Not weighing — she is past weighing. She nods once, the way she nods when a measurement confirms what she already knew.\n\nShe sets both hands flat on the warm stone. Then she lifts one and rests it on her own sternum, fingers spread, and takes one breath — deliberate, not theatrical. \"This is the part I was still holding,\" she says. \"Right here. When you had Prism Sight open the first time, this was doing something — bracing, maybe. Not against you. Just against being seen fully.\" Her hand rises slightly on the inhale, then settles. \"That's the habit.\"\n\nShe moves her hand away and lets her shoulders drop — not slumping, more like a door unlatching. The quality of her stillness changes. It is the same thing you read in her face before, in the light: the difference between a surface that has been arranged and a surface that simply is. \"And this is the second part,\" she says. Her voice is the same level tone, but something underneath it is open in a way it was not a moment ago. \"I don't have a better word for it than stopping. You gave me back what you were actually seeing and I stopped making any decisions about it at all.\" She looks at him steadily. \"Watch where I carry the tension and watch it leave. That's all the words I have. The rest is what you can see.\""
       }
     ],
     "lastTurn": {
-      "narration": "You say it plainly. Not the ledger. Her.\n\nShe holds the look for a moment after you say it — the kind of hold that isn't deciding, because she already decided something a few exchanges back. Then the corner of her mouth moves, not quite a smile, something more specific than that.\n\n\"The second time,\" Lira says, \"I stopped managing it.\" She says it the way she names a measurement — not confessing, just reporting what was true. \"The first time I was still tracking what I was doing. Holding a small part of myself back to watch. That's habit.\" She shifts her weight on the bench, unhurried, and turns toward you a little more. \"The second time I didn't. You gave me back what you were seeing and I stopped watching myself and just — \" She pauses, and what she does with the pause is specific: she lets her breath out slowly, and her shoulder drops a fraction, and she is demonstrating rather than describing. \"That.\"\n\nHer hand is still flat on the warm stone between you. She doesn't move it. \"What I was doing with my body,\" she says, \"was letting the angle change. Every time I stopped bracing against it, the angle changed again. I kept finding that out fresh, over and over.\" She looks at you steadily. \"You felt that.\"\n\nIt is not a question. She is asking you to confirm it, which is different.",
-      "sceneSummary": "Lira named the difference between the first time and the second — managing herself versus stopping — and demonstrated it in the telling.",
+      "narration": "You say it simply. Show me again, and tell me the words for the parts while you do it.\n\nLira looks at you for a moment. Not weighing — she is past weighing. She nods once, the way she nods when a measurement confirms what she already knew.\n\nShe sets both hands flat on the warm stone. Then she lifts one and rests it on her own sternum, fingers spread, and takes one breath — deliberate, not theatrical. \"This is the part I was still holding,\" she says. \"Right here. When you had Prism Sight open the first time, this was doing something — bracing, maybe. Not against you. Just against being seen fully.\" Her hand rises slightly on the inhale, then settles. \"That's the habit.\"\n\nShe moves her hand away and lets her shoulders drop — not slumping, more like a door unlatching. The quality of her stillness changes. It is the same thing you read in her face before, in the light: the difference between a surface that has been arranged and a surface that simply is. \"And this is the second part,\" she says. Her voice is the same level tone, but something underneath it is open in a way it was not a moment ago. \"I don't have a better word for it than stopping. You gave me back what you were actually seeing and I stopped making any decisions about it at all.\" She looks at him steadily. \"Watch where I carry the tension and watch it leave. That's all the words I have. The rest is what you can see.\"",
+      "sceneSummary": "Lira demonstrated the shift in plain words and plainer body — bracing, then the moment it left — and told him the rest was what he could already see.",
       "choices": [
         {
-          "label": "Confirm you felt it — every shift, every time she stopped bracing. Stay close and show her you remember exactly where each one was.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "trivial": true,
-          "intentTags": [
-            "romantic"
-          ]
-        },
-        {
-          "label": "Use Prism Sight again — open it now, in this stillness, and read whether the managing is truly gone.",
+          "label": "Use Prism Sight now, while she's demonstrating — read exactly what she described as it happens.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "study",
-            "romantic"
+            "study"
           ],
           "abilityId": "prism_sight",
-          "energyCost": 3
+          "energyCost": 3,
+          "trivial": true
         },
         {
-          "label": "Ask her what stopping the watching felt like from inside — not what she did, but what the absence of the watching was.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "trivial": true,
-          "intentTags": [
-            "romantic"
-          ]
-        },
-        {
-          "label": "Don't answer in words. Move closer, let the angle change again, and see if she stops managing from the start this time.",
+          "label": "Tell her what you actually see in her right now — name it plainly, without the craft.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "romantic",
-            "woo"
-          ]
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Put a hand on hers on the stone — no words, just meet the moment she's made.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Tell her it's time — take the ledger and go find Keeper Aldris Vael before the count-bell closes the window.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
@@ -286,7 +289,7 @@
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Turned toward him on the bench, hand still flat on the stone between them, watching him with the same steady precision as before — waiting for him to confirm what she already believes he felt."
+            "state": "Sitting turned toward him, one hand now resting open on the stone — shoulders unlatched, watching him with the same steady precision as before but with nothing held back."
           }
         ],
         "objects": [
@@ -297,7 +300,7 @@
         "threads": [
           "The count-bell window to reach Keeper Aldris Vael is still open — it closes one bell past the afternoon count.",
           "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record.",
-          "Lira is waiting for him to confirm what she believes he felt — a question framed as a statement."
+          "Lira has shown him the shift in plain words and body — she is waiting to see what he does with it."
         ]
       },
       "npcUpdates": [
@@ -305,29 +308,23 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Named the difference between first and second time — managing herself versus stopping — and demonstrated it in the telling rather than just describing it. Asked him to confirm he felt each shift.",
+          "note": "Demonstrated the two states — bracing and stopping — in plain words and body, and told him the rest is what he can already see.",
           "learned": [
-            "She holds a small part of herself back to watch, by habit — and she knows it.",
-            "The second time she stopped doing that. The angle kept changing every time she let it.",
-            "She confirmed it plainly rather than waiting to see if he would notice — that is how she moves in this."
+            "She names the habit of holding a part of herself back as bracing — not against him, against being seen fully.",
+            "She has a word for the second state: stopping. No decisions about what he is seeing at all.",
+            "She carries tension high in the chest; it was visible when it left."
           ],
-          "status": "active",
-          "statusNote": "On the roof terrace, present and open, waiting for him to confirm he felt each shift as she stopped bracing.",
-          "pronouns": "she/her",
-          "gender": "woman"
+          "statusNote": "On the roof terrace, present and fully open — the demonstration complete, watching to see what he does next.",
+          "status": "active"
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief, close exchange on the terrace"
-      }
+      ]
     },
     "sceneState": {
       "setting": "Roof terrace above the Common Hall wick-room, Edge District. Flat warm stone, afternoon light angling in low from the west, the valley floor visible beyond the coping wall.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Turned toward him on the bench, hand still flat on the stone between them, watching him with the same steady precision a"
+          "state": "Sitting turned toward him, one hand now resting open on the stone — shoulders unlatched, watching him with the same stea"
         }
       ],
       "objects": [
@@ -338,14 +335,14 @@
       "threads": [
         "The count-bell window to reach Keeper Aldris Vael is still open — it closes one bell past the afternoon count.",
         "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record.",
-        "Lira is waiting for him to confirm what she believes he felt — a question framed as a statement."
+        "Lira has shown him the shift in plain words and body — she is waiting to see what he does with it."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [],
@@ -393,7 +390,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] She showed how she works — guiding without apology or performance, precision the same in this as in everything. The silence after was unguarded, a real one.",
         "[d1] She rode him with full deliberate attention on the roof terrace — her body honest, her eyes steady and direct, no performance in any of it.",
         "[d1] Sitting at rest on the bench, gaze on the valley, sash loose, unhurried — the quality of her attention still present even in stillness.",
         "[d1] Rolled onto her side, leg at his shoulder — settled into the narrower angle with patience, named plainly what she likes about it.",
@@ -402,17 +398,18 @@
         "[d1] Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology.",
         "[d1] Walked him through the falsification evidence — the absence of noise in three weeks of entries — and turned it back to him as a question about what he sees.",
         "[d1] Set the ledger aside and asked him to name what he was actually reaching for — precise and unhurried.",
-        "[d1] Named the difference between first and second time — managing herself versus stopping — and demonstrated it in the telling rather than just describing it. Asked him to confirm he felt each shift."
+        "[d1] Named the difference between first and second time — managing herself versus stopping — and demonstrated it in the telling rather than just describing it. Asked him to confirm he felt each shift.",
+        "[d1] Demonstrated the two states — bracing and stopping — in plain words and body, and told him the rest is what he can already see."
       ],
       "knownFacts": [
-        "She notices when she is being read accurately — and does not pretend she hasn't.",
-        "When she stops managing a moment the sound she makes is unguarded and specific.",
-        "She stays present afterward without reaching for distance or conversation.",
         "She felt the quality of being read accurately — not as violation but as a change in angle, something warmer than measurement.",
         "She was managing her own response consciously at first; the moment she stopped, what he got was unguarded.",
         "She holds a small part of herself back to watch, by habit — and she knows it.",
         "The second time she stopped doing that. The angle kept changing every time she let it.",
-        "She confirmed it plainly rather than waiting to see if he would notice — that is how she moves in this."
+        "She confirmed it plainly rather than waiting to see if he would notice — that is how she moves in this.",
+        "She names the habit of holding a part of herself back as bracing — not against him, against being seen fully.",
+        "She has a word for the second state: stopping. No decisions about what he is seeing at all.",
+        "She carries tension high in the chest; it was visible when it left."
       ],
       "skillsObserved": [
         "spatial district navigation under pressure",
@@ -423,7 +420,7 @@
         "teaching by turning the evidence back to the student"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, present and open, waiting for him to confirm he felt each shift as she stopped bracing.",
+      "statusNote": "On the roof terrace, present and fully open — the demonstration complete, watching to see what he does next.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -649,7 +646,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 25
+    "turnsSinceOffer": 26
   },
   "bio": null,
   "subAttributes": {
@@ -872,15 +869,15 @@
     }
   },
   "tendencies": {
-    "social": 9.68595204590384,
-    "strategic": 7.031994641805654,
-    "cautious": 3.8832226372384704,
-    "cerebral": 2.9383683028170946,
-    "physical": 0.5505502692445465,
-    "ruthless": 1.3268798901009842,
-    "generous": 0.5817589738436918,
-    "amorous": 15.138806986531119,
-    "risky": 1.4958780080374223
+    "social": 9.443803244756243,
+    "strategic": 6.856194775760512,
+    "cautious": 3.7861420713075087,
+    "cerebral": 2.8649090952466674,
+    "physical": 0.5367865125134329,
+    "ruthless": 1.2937078928484596,
+    "generous": 0.5672149994975995,
+    "amorous": 14.760336811867841,
+    "risky": 1.4584810578364866
   },
   "aptitudes": [
     "silver_tongue",
@@ -888,11 +885,11 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 38,
+  "actionCount": 39,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785035419955,
-  "rev": 87,
+  "updatedAt": 1785035513184,
+  "rev": 88,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1080,7 +1077,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 38
+    "valley": 39
   },
   "foreclosed": [],
   "company": [],
@@ -1107,24 +1104,24 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-26T02:52:53.973Z",
-      "lastAt": "2026-07-26T03:10:19.952Z",
+      "lastAt": "2026-07-26T03:11:53.177Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 10
+      "beats": 11
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 23,
-    "choices": 23,
-    "scene": 23,
-    "npcUpdates": 23,
+    "sceneSummary": 24,
+    "choices": 24,
+    "scene": 24,
+    "npcUpdates": 24,
     "timeOps": 21,
     "sceneEnded": 7,
     "characterDeltas": 5,
     "codexUpdates": 3
   },
-  "_opTurns": 23,
+  "_opTurns": 24,
   "_intentAsked": null
 }

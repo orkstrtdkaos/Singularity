@@ -225,63 +225,68 @@
         "player": "I was talking about the fucking... walk me through it again and explain it... there is more to expri3nce.",
         "summary": "Lira set the ledger aside and asked him to name what he was actually reaching for.",
         "narration": "She reads you clearly. The ledger is already in her hand, the column of entries still open, but she sets it back down on the bench without looking at it.\n\n\"You weren't asking about the numbers,\" Lira says. It is not a question. She shifts on the bench to face you more squarely, and the afternoon light comes in low and even across her collarbone. \"You want to go back into it.\"\n\nShe does not move immediately. She studies you for a moment the way she studies a light-guide joint — looking for where the angle is actually pointing, not where it appears to point. Then she sets one hand flat on the stone between you, deliberate, and says: \"Then ask me properly. Tell me what you want to understand better. I'll walk you through it again as many times as it takes — but I want to know which part you're reaching for.\""
+      },
+      {
+        "player": "Tell her plainly — it's not the ledger, it's her. Ask her to walk you through what she was doing with her body the second time, now that you're both clearer.",
+        "summary": "Lira named the difference between the first time and the second — managing herself versus stopping — and demonstrated it in the telling.",
+        "narration": "You say it plainly. Not the ledger. Her.\n\nShe holds the look for a moment after you say it — the kind of hold that isn't deciding, because she already decided something a few exchanges back. Then the corner of her mouth moves, not quite a smile, something more specific than that.\n\n\"The second time,\" Lira says, \"I stopped managing it.\" She says it the way she names a measurement — not confessing, just reporting what was true. \"The first time I was still tracking what I was doing. Holding a small part of myself back to watch. That's habit.\" She shifts her weight on the bench, unhurried, and turns toward you a little more. \"The second time I didn't. You gave me back what you were seeing and I stopped watching myself and just — \" She pauses, and what she does with the pause is specific: she lets her breath out slowly, and her shoulder drops a fraction, and she is demonstrating rather than describing. \"That.\"\n\nHer hand is still flat on the warm stone between you. She doesn't move it. \"What I was doing with my body,\" she says, \"was letting the angle change. Every time I stopped bracing against it, the angle changed again. I kept finding that out fresh, over and over.\" She looks at you steadily. \"You felt that.\"\n\nIt is not a question. She is asking you to confirm it, which is different."
       }
     ],
     "lastTurn": {
-      "narration": "She reads you clearly. The ledger is already in her hand, the column of entries still open, but she sets it back down on the bench without looking at it.\n\n\"You weren't asking about the numbers,\" Lira says. It is not a question. She shifts on the bench to face you more squarely, and the afternoon light comes in low and even across her collarbone. \"You want to go back into it.\"\n\nShe does not move immediately. She studies you for a moment the way she studies a light-guide joint — looking for where the angle is actually pointing, not where it appears to point. Then she sets one hand flat on the stone between you, deliberate, and says: \"Then ask me properly. Tell me what you want to understand better. I'll walk you through it again as many times as it takes — but I want to know which part you're reaching for.\"",
-      "sceneSummary": "Lira set the ledger aside and asked him to name what he was actually reaching for.",
+      "narration": "You say it plainly. Not the ledger. Her.\n\nShe holds the look for a moment after you say it — the kind of hold that isn't deciding, because she already decided something a few exchanges back. Then the corner of her mouth moves, not quite a smile, something more specific than that.\n\n\"The second time,\" Lira says, \"I stopped managing it.\" She says it the way she names a measurement — not confessing, just reporting what was true. \"The first time I was still tracking what I was doing. Holding a small part of myself back to watch. That's habit.\" She shifts her weight on the bench, unhurried, and turns toward you a little more. \"The second time I didn't. You gave me back what you were seeing and I stopped watching myself and just — \" She pauses, and what she does with the pause is specific: she lets her breath out slowly, and her shoulder drops a fraction, and she is demonstrating rather than describing. \"That.\"\n\nHer hand is still flat on the warm stone between you. She doesn't move it. \"What I was doing with my body,\" she says, \"was letting the angle change. Every time I stopped bracing against it, the angle changed again. I kept finding that out fresh, over and over.\" She looks at you steadily. \"You felt that.\"\n\nIt is not a question. She is asking you to confirm it, which is different.",
+      "sceneSummary": "Lira named the difference between the first time and the second — managing herself versus stopping — and demonstrated it in the telling.",
       "choices": [
         {
-          "label": "Tell her plainly — it's not the ledger, it's her. Ask her to walk you through what she was doing with her body the second time, now that you're both clearer.",
+          "label": "Confirm you felt it — every shift, every time she stopped bracing. Stay close and show her you remember exactly where each one was.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "romantic",
-            "flirt"
-          ],
-          "trivial": true
+            "romantic"
+          ]
         },
         {
-          "label": "Use Prism Sight again — open it quietly while she is watching you, and let her see you doing it. Give her the reading before you say anything.",
+          "label": "Use Prism Sight again — open it now, in this stillness, and read whether the managing is truly gone.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "difficulty": 0,
+          "trivial": true,
           "intentTags": [
             "study",
             "romantic"
           ],
           "abilityId": "prism_sight",
-          "energyCost": 3,
-          "trivial": false
+          "energyCost": 3
         },
         {
-          "label": "Ask her what she noticed about you — what she was reading while you were reading her.",
+          "label": "Ask her what stopping the watching felt like from inside — not what she did, but what the absence of the watching was.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
             "romantic"
-          ],
-          "trivial": true
+          ]
         },
         {
-          "label": "Tell her the count-bell window is still open — Vael won't wait. Ask her to finish this thought and then walk down with you.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Don't answer in words. Move closer, let the angle change again, and see if she stops managing from the start this time.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "plan"
-          ],
-          "trivial": true
+            "romantic",
+            "woo"
+          ]
         }
       ],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District. Flat warm stone, afternoon light angling in from the west. Iron stairs at the near edge leading down to the street.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District. Flat warm stone, afternoon light angling in low from the west, the valley floor visible beyond the coping wall.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Sitting up, ledger set aside on the bench, hand flat on the stone between them, watching him with patient precision — waiting for him to name what he is actually reaching for."
+            "state": "Turned toward him on the bench, hand still flat on the stone between them, watching him with the same steady precision as before — waiting for him to confirm what she already believes he felt."
           }
         ],
         "objects": [
@@ -292,7 +297,7 @@
         "threads": [
           "The count-bell window to reach Keeper Aldris Vael is still open — it closes one bell past the afternoon count.",
           "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record.",
-          "Lira is waiting for him to name which part of the experience he is reaching back toward."
+          "Lira is waiting for him to confirm what she believes he felt — a question framed as a statement."
         ]
       },
       "npcUpdates": [
@@ -300,22 +305,29 @@
           "op": "update",
           "npcId": "lira",
           "name": "Lira",
-          "note": "Set the ledger aside and asked him to name what he was actually reaching for — precise and unhurried.",
-          "statusNote": "On the roof terrace, ledger set aside, waiting for him to name his intent.",
-          "status": "active"
+          "note": "Named the difference between first and second time — managing herself versus stopping — and demonstrated it in the telling rather than just describing it. Asked him to confirm he felt each shift.",
+          "learned": [
+            "She holds a small part of herself back to watch, by habit — and she knows it.",
+            "The second time she stopped doing that. The angle kept changing every time she let it.",
+            "She confirmed it plainly rather than waiting to see if he would notice — that is how she moves in this."
+          ],
+          "status": "active",
+          "statusNote": "On the roof terrace, present and open, waiting for him to confirm he felt each shift as she stopped bracing.",
+          "pronouns": "she/her",
+          "gender": "woman"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange on the terrace."
+        "why": "a brief, close exchange on the terrace"
       }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District. Flat warm stone, afternoon light angling in from the west. Iron stairs at the near edge leading down to the street.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District. Flat warm stone, afternoon light angling in low from the west, the valley floor visible beyond the coping wall.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Sitting up, ledger set aside on the bench, hand flat on the stone between them, watching him with patient precision — wa"
+          "state": "Turned toward him on the bench, hand still flat on the stone between them, watching him with the same steady precision a"
         }
       ],
       "objects": [
@@ -326,7 +338,7 @@
       "threads": [
         "The count-bell window to reach Keeper Aldris Vael is still open — it closes one bell past the afternoon count.",
         "Fendt's red-chalk marking still sits on the accountability board below with no accompanying record.",
-        "Lira is waiting for him to name which part of the experience he is reaching back toward."
+        "Lira is waiting for him to confirm what she believes he felt — a question framed as a statement."
       ]
     }
   },
@@ -381,7 +393,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Your bond deepens — courting.",
         "[d1] She showed how she works — guiding without apology or performance, precision the same in this as in everything. The silence after was unguarded, a real one.",
         "[d1] She rode him with full deliberate attention on the roof terrace — her body honest, her eyes steady and direct, no performance in any of it.",
         "[d1] Sitting at rest on the bench, gaze on the valley, sash loose, unhurried — the quality of her attention still present even in stillness.",
@@ -390,17 +401,18 @@
         "[d1] Prism Sight read her honestly and he gave it back — she answered with full, unguarded presence and is now quiet and steady beside him.",
         "[d1] Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology.",
         "[d1] Walked him through the falsification evidence — the absence of noise in three weeks of entries — and turned it back to him as a question about what he sees.",
-        "[d1] Set the ledger aside and asked him to name what he was actually reaching for — precise and unhurried."
+        "[d1] Set the ledger aside and asked him to name what he was actually reaching for — precise and unhurried.",
+        "[d1] Named the difference between first and second time — managing herself versus stopping — and demonstrated it in the telling rather than just describing it. Asked him to confirm he felt each shift."
       ],
       "knownFacts": [
-        "Her control loosens at the edges when the rhythm finds its shape — not hidden, just honest.",
-        "Even at the end she slows deliberately, hands flat on his chest, returning to the sky.",
-        "She does not say his name — she holds the look instead, which is harder and more honest.",
         "She notices when she is being read accurately — and does not pretend she hasn't.",
         "When she stops managing a moment the sound she makes is unguarded and specific.",
         "She stays present afterward without reaching for distance or conversation.",
         "She felt the quality of being read accurately — not as violation but as a change in angle, something warmer than measurement.",
-        "She was managing her own response consciously at first; the moment she stopped, what he got was unguarded."
+        "She was managing her own response consciously at first; the moment she stopped, what he got was unguarded.",
+        "She holds a small part of herself back to watch, by habit — and she knows it.",
+        "The second time she stopped doing that. The angle kept changing every time she let it.",
+        "She confirmed it plainly rather than waiting to see if he would notice — that is how she moves in this."
       ],
       "skillsObserved": [
         "spatial district navigation under pressure",
@@ -411,7 +423,7 @@
         "teaching by turning the evidence back to the student"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, ledger set aside, waiting for him to name his intent.",
+      "statusNote": "On the roof terrace, present and open, waiting for him to confirm he felt each shift as she stopped bracing.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -637,7 +649,7 @@
         "lastOutcome": "progress"
       }
     },
-    "turnsSinceOffer": 24
+    "turnsSinceOffer": 25
   },
   "bio": null,
   "subAttributes": {
@@ -860,15 +872,15 @@
     }
   },
   "tendencies": {
-    "social": 9.934309790670605,
-    "strategic": 7.212302196723748,
-    "cautious": 3.9827924484497133,
-    "cerebral": 3.013711079812405,
-    "physical": 0.5646669428149196,
-    "ruthless": 1.3609024513856247,
-    "generous": 0.5966758706089147,
-    "amorous": 13.47569947336525,
-    "risky": 1.5342338543973562
+    "social": 9.68595204590384,
+    "strategic": 7.031994641805654,
+    "cautious": 3.8832226372384704,
+    "cerebral": 2.9383683028170946,
+    "physical": 0.5505502692445465,
+    "ruthless": 1.3268798901009842,
+    "generous": 0.5817589738436918,
+    "amorous": 15.138806986531119,
+    "risky": 1.4958780080374223
   },
   "aptitudes": [
     "silver_tongue",
@@ -876,11 +888,11 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 37,
+  "actionCount": 38,
   "grantsVersion": 1,
   "reconcileVersion": 21,
-  "updatedAt": 1785035356847,
-  "rev": 86,
+  "updatedAt": 1785035419955,
+  "rev": 87,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1068,7 +1080,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 37
+    "valley": 38
   },
   "foreclosed": [],
   "company": [],
@@ -1095,24 +1107,24 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-26T02:52:53.973Z",
-      "lastAt": "2026-07-26T03:09:16.837Z",
+      "lastAt": "2026-07-26T03:10:19.952Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 9
+      "beats": 10
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 22,
-    "choices": 22,
-    "scene": 22,
-    "npcUpdates": 22,
-    "timeOps": 20,
+    "sceneSummary": 23,
+    "choices": 23,
+    "scene": 23,
+    "npcUpdates": 23,
+    "timeOps": 21,
     "sceneEnded": 7,
     "characterDeltas": 5,
     "codexUpdates": 3
   },
-  "_opTurns": 22,
+  "_opTurns": 23,
   "_intentAsked": null
 }

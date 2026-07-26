@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [SPEC] SNG-242 model routing + PLAYER-CHOSEN quality (Aevi, 2026-07-25 · Erik)
+> Erik: "use Haiku more?" then "the player could select when they want a better description (Sonnet)."
+> Finding: the routing ARCHITECTURE exists (claude.js MODEL_MAP task->model; Haiku already on intent-parse +
+> chronicle-compress). §1-4 the per-task audit: KEEP Sonnet (gm-narrate/generate/codex-adjudicate); MOVE to
+> Haiku (world-tick - verified 'countable outcome not prose' + high-volume = best win; bio-gen; chronicle -
+> chronicle-compress already Haiku so likely a free win, decides SNG-241 synopsis routing); INVESTIGATE splitting
+> gm-meta. §5 the HEADLINE (Erik's refinement): a PLAYER quality-lever - a 'richer telling' toggle (pre-turn) + a
+> state-safe 'tell it again richer' re-narrate button (post, re-renders prose from the SAME committed outcome,
+> never re-rolls). INVERTS the default: narration can go Haiku-cheap BECAUSE the player spends up for beats they
+> care about - same cost win + flagship exactly where the only judge who knows targets it. Caveat: Haiku-default
+> must clear a quality floor (Aevi judges); else Sonnet-default + rich=longer.
+> CCODE: qualityTier turn option + 2 gm-narrate task ids; toggle + state-safe retell button; optional meter;
+> world-tick->Haiku first, A/B via See-the-Machine. AEVI: judge the Haiku-default quality floor + per-task
+> quality. ERIK: default tier + meter-or-open + cost-vs-latency priority. Full: SPEC_SNG-242.
+
 > ## [SNG-241 complete_pending_review — CCode, 2026-07-26] Session synopsis to the family feed (v1.8.282 `bba35903`)
 > Brooklyn's ask, built by connecting three shipped systems. Most existed (buildSessionPrompt = the session-scoped
 > chronicle voice; sessionLog = the session span, so OQ2 needs no new helper; the chronicle view already caches

@@ -61,7 +61,8 @@
    "objective": "Answer (or decline) the first challenger who sought you by name.",
    "condition": "A duelist finds Saehara specifically — not a random encounter, but someone who came because of the name. Face them (skill battle) or turn them away (there is always a decline path; even refusing writes something).",
    "change": "Codex: the name has begun to travel. Word of the ronin with the Honor-kanji is loose in the valley.",
-   "unlockHint": "Saehara's renown becomes a live, rising value — challengers now scale to it."
+   "unlockHint": "Saehara's renown becomes a live, rising value — challengers now scale to it.",
+   "imagePrompt": "The first to come looking: Answer (or decline) the first challenger who sought you by name."
   },
   {
    "id": "s2",
@@ -69,7 +70,8 @@
    "objective": "Meet the challenge of a ryūha — a sword-school defending its lineage.",
    "condition": "A school champion or rival ronin challenges not just Saehara but what his nameless, masterless way IMPLIES about their tradition. The duel is about more than the blade — it's about whether a ronin's road can stand against a lineage.",
    "change": "Codex: the ryūha have a position on Saehara now — some hostile, some curious. A rival may become a sworn one, or a student.",
-   "unlockHint": "Prestige crosses into 'renowned' — the challengers now include mages (blazeborn) who bring fire against steel, and duelists whose own names ride on the outcome."
+   "unlockHint": "Prestige crosses into 'renowned' — the challengers now include mages (blazeborn) who bring fire against steel, and duelists whose own names ride on the outcome.",
+   "imagePrompt": "The schools take notice: Meet the challenge of a ryūha — a sword-school defending its lineage."
   },
   {
    "id": "s3",
@@ -77,7 +79,8 @@
    "objective": "Face the challenge that decides what your name means.",
    "condition": "The defining duel — a blade (or a fire, or a mind) that may genuinely be his equal or better. This is the Ganryūjima beat: the one that the book will be about. The GM lets Saehara's whole arc of choices — how he's won, whom he's spared, whether he's killed for the name or refused to — shape who this last challenger is and what the duel costs.",
    "change": "Codex: the title of the book is written. Whether it reads as a saint's name, a killer's, or a teacher's is Saehara's to earn.",
-   "unlockHint": "This is the hinge. Climb / redefine / undone — the GM never forecloses which; Saehara's choices across every prior duel decide it."
+   "unlockHint": "This is the hinge. Climb / redefine / undone — the GM never forecloses which; Saehara's choices across every prior duel decide it.",
+   "imagePrompt": "The last blade: Face the challenge that decides what your name means."
   }
  ],
  "routes": [
@@ -140,7 +143,8 @@
      "imitators of his style",
      "the name as a target"
     ]
-   }
+   },
+   "imagePrompt": "saint ending: The valley's duelists measure themselves against Saehara Makashi the way sailors measure a storm. The wind he "
   },
   {
    "id": "teacher",
@@ -190,7 +194,8 @@
      "a rival who scorns the choice",
      "the book outliving him"
     ]
-   }
+   },
+   "imagePrompt": "teacher ending: The ronin who could have been the deadliest blade chose the quill. Students, not corpses, mark his road. The b"
   },
   {
    "id": "tempered",
@@ -234,8 +239,10 @@
      "a humbler teaching",
      "the story passing to its teller"
     ]
-   }
+   },
+   "imagePrompt": "tempered ending: He met the blade that was faster, and lived — or his story passed to the one who tells it. The name is humbler"
   }
  ],
- "notes_for_gm": "This arc is BOUND to Saehara Makashi (Brayden's character) — a cogitant RONIN (mind-tradition as blade-discipline: he reads the opponent, his stillness before the draw IS his power; honor the wicker hat, the Honor-kanji, the katana+tanto, the book he's writing, 'The Wind' as home, the village of Chisai). Pull from authentic samurai tradition: musha shugyō (the dueling pilgrimage), dōjō-yaburi (school-challenging), ryūha (sword-lineages), zanshin (lingering awareness), mushin (no-mind — his cogitant edge), the Ganryūjima duel as the s3 model. Magic/fantasy is welcome and canon: challengers can be blazeborn mages bringing fire, mind-duelists, fae blades — steel is only one language of the contest (only 2 of 24 traditions fight by hitting things; a duel here can be fought in any idiom). RECURRENCE is the heart: challengers surface as his deeds-driven reputation rises, scaling with the escalation bands; each runs as a SNG-098 skill battle with a guaranteed decline/flee path — never force a lethal duel, always let him choose the terms (this enables the 'brush' route where he WINS by refusing to cut). His book is the throughline — every duel is a page; its title is the arc's resolution. Let his choices (spare/kill/teach/refuse) steer which of the three roads the s3 'last blade' becomes; never foreclose it. Register: the quiet dignity of a good samurai story — restraint, honor, the weight of the draw — not gratuitous carnage. | SNG-235 §4 (Aevi 2026-07-24): outcomes now carry effects[] grounded in each ending's own text - the world RECORDS what was chosen. Legendary-tier endings also carry a world-scale wake (SNG-204)."
+ "notes_for_gm": "This arc is BOUND to Saehara Makashi (Brayden's character) — a cogitant RONIN (mind-tradition as blade-discipline: he reads the opponent, his stillness before the draw IS his power; honor the wicker hat, the Honor-kanji, the katana+tanto, the book he's writing, 'The Wind' as home, the village of Chisai). Pull from authentic samurai tradition: musha shugyō (the dueling pilgrimage), dōjō-yaburi (school-challenging), ryūha (sword-lineages), zanshin (lingering awareness), mushin (no-mind — his cogitant edge), the Ganryūjima duel as the s3 model. Magic/fantasy is welcome and canon: challengers can be blazeborn mages bringing fire, mind-duelists, fae blades — steel is only one language of the contest (only 2 of 24 traditions fight by hitting things; a duel here can be fought in any idiom). RECURRENCE is the heart: challengers surface as his deeds-driven reputation rises, scaling with the escalation bands; each runs as a SNG-098 skill battle with a guaranteed decline/flee path — never force a lethal duel, always let him choose the terms (this enables the 'brush' route where he WINS by refusing to cut). His book is the throughline — every duel is a page; its title is the arc's resolution. Let his choices (spare/kill/teach/refuse) steer which of the three roads the s3 'last blade' becomes; never foreclose it. Register: the quiet dignity of a good samurai story — restraint, honor, the weight of the draw — not gratuitous carnage. | SNG-235 §4 (Aevi 2026-07-24): outcomes now carry effects[] grounded in each ending's own text - the world RECORDS what was chosen. Legendary-tier endings also carry a world-scale wake (SNG-204).",
+ "image": "A duelist whose name has become weather — Saehara, blade drawn at a crossroads where every challenger who would make their name by ending his gathers. The paradox of a name that draws the blades that would take it. Wind, poise, a reputation that carries."
 }

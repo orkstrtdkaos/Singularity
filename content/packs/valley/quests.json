@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "quests_structured",
  "kind": "quests",
- "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess. | SNG-229 hunts folded (Aevi 2026-07-24): 7 creature-hunt quests, real givers + machine-readable effects[], creatureId resolves against the now-loaded bestiary. | SNG-238 (Aevi 2026-07-25): the 7 bestiary hunts had stages as PLAIN STRINGS (the UI's stageRow renders s.id/s.title/s.objective -> empty rows, dead radios, the broken screenshots). Rebuilt as real stage OBJECTS with concrete first steps (stage 1 always a clear 'go here, do this' action) + a per-stage imagePrompt + a quest-level image + per-outcome imagePrompt. Matches the working structured-quest schema.",
+ "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess. | SNG-229 hunts folded (Aevi 2026-07-24): 7 creature-hunt quests, real givers + machine-readable effects[], creatureId resolves against the now-loaded bestiary. | SNG-238 (Aevi 2026-07-25): the 7 bestiary hunts had stages as PLAIN STRINGS (the UI's stageRow renders s.id/s.title/s.objective -> empty rows, dead radios, the broken screenshots). Rebuilt as real stage OBJECTS with concrete first steps (stage 1 always a clear 'go here, do this' action) + a per-stage imagePrompt + a quest-level image + per-outcome imagePrompt. Matches the working structured-quest schema. | SNG-238 sweep (Aevi 2026-07-25): the audit-class sweep found 8 MORE quests with the same class as the hunts' string-stages - stage-objects MISSING title (render headerless). Added a title distilled from each stage's objective + quest image + per-stage/outcome imagePrompt. All quests now render with headers + carry image prompts. The hunts were the string variant; these were the incomplete-object variant - SAME CLASS.",
  "quests": [
   {
    "id": "the_edge_district_ledger",
@@ -25,27 +25,35 @@
    "stages": [
     {
      "id": "s1",
+     "title": "Find what the missing record would have said",
      "objective": "Find out what the missing record would have said.",
      "condition": "Speak with Fendt OR obtain the filtration log for the marked period.",
-     "change": "Codex: Fendt's account is recorded — and it does not match the board."
+     "change": "Codex: Fendt's account is recorded — and it does not match the board.",
+     "imagePrompt": "A hand tracing a scraped-blank row in a district ledger by lamplight, an engineer's account open beside it."
     },
     {
      "id": "s2",
+     "title": "Weigh Fendt's account against the board",
      "objective": "Find who marked him, and why there is no record.",
      "condition": "Identify Overseer Grael as the marking authority (via the board's own chain, the keeper's testimony, or Grael himself).",
-     "change": "Codex: Grael is entered as an entity, linked to Fendt. He becomes aware that someone is looking."
+     "change": "Codex: Grael is entered as an entity, linked to Fendt. He becomes aware that someone is looking.",
+     "imagePrompt": "Two accounts laid side by side under a lamp, one from a witness, one from the official board, a figure comparing them."
     },
     {
      "id": "s3",
+     "title": "Decide what the ledger will say",
      "objective": "Find out whether the marking is a pattern.",
      "condition": "Locate at least one prior unrecorded marking (the keeper remembers; the archive half-remembers; Grael's own ledger will say if you can reach it).",
-     "change": "Codex: the pattern is named. Grael moves from 'an official' to 'a regional power'. He begins to act against you."
+     "change": "Codex: the pattern is named. Grael moves from 'an official' to 'a regional power'. He begins to act against you.",
+     "imagePrompt": "A person at a counter facing a decision over an open ledger, the district quiet around them."
     },
     {
      "id": "s4",
+     "title": "Set the record — or let it stand",
      "objective": "Decide what the truth is for.",
      "condition": "Resolve — see outcomes.",
-     "change": "The district changes. So does Fendt. So, one way or another, does Grael."
+     "change": "The district changes. So does Fendt. So, one way or another, does Grael.",
+     "imagePrompt": "A ledger being amended — or closed unchanged — a clerk watching, the record settling."
     }
    ],
    "routes": {
@@ -110,7 +118,8 @@
        "type": "xp",
        "amount": 30
       }
-     ]
+     ],
+     "imagePrompt": "Grael Exposed: The pattern is made public and holds. Grael falls."
     },
     {
      "id": "saved_quietly",
@@ -149,7 +158,8 @@
        "type": "xp",
        "amount": 25
       }
-     ]
+     ],
+     "imagePrompt": "Fendt Saved, Grael Standing: Fendt is safe. The method is intact."
     },
     {
      "id": "bargained",
@@ -190,7 +200,8 @@
        "type": "xp",
        "amount": 25
       }
-     ]
+     ],
+     "imagePrompt": "The Bargain: Grael gets what he actually wanted. So does Fendt. So, in a smaller way, do you."
     },
     {
      "id": "walked_away",
@@ -234,9 +245,11 @@
        "type": "xp",
        "amount": 10
       }
-     ]
+     ],
+     "imagePrompt": "You Walked Away: You had other things to do."
     }
-   ]
+   ],
+   "image": "A supply-district office at dusk, a ledger board with one row conspicuously scraped blank, an old filtration engineer and a wary clerk on opposite sides of a counter, tension in the quiet. Muted lamplight, a mystery of missing accounts."
   },
   {
    "id": "the_tree_that_waits",
@@ -257,21 +270,27 @@
    "stages": [
     {
      "id": "s1",
+     "title": "Find who the tree was planted for",
      "objective": "Find out who the tree was planted for.",
      "condition": "Speak with the planter, or read the Orchard's own record.",
-     "change": "Codex: the name. It is a name from outside the Quickwood, and it is not a Rootkin name."
+     "change": "Codex: the name. It is a name from outside the Quickwood, and it is not a Rootkin name.",
+     "imagePrompt": "A weathered name-marker at the root of a solitary orchard tree, a figure kneeling to read the outsider's name."
     },
     {
      "id": "s2",
+     "title": "Learn why they never came",
      "objective": "Find out what became of them.",
      "condition": "Trace the name (the Hourkeepers' archive knows; the Ashwardens at the Hollowing know; someone in the Valley remembers).",
-     "change": "Codex: the truth. It is not a happy one and it has been true for a long time."
+     "change": "Codex: the truth. It is not a happy one and it has been true for a long time.",
+     "imagePrompt": "An orchard-keeper recounting an old story, the waiting tree behind them in green-gold light."
     },
     {
      "id": "s3",
+     "title": "Decide what the waiting tree is owed",
      "objective": "Decide what to do with a three-hundred-year truth.",
      "condition": "Resolve — see outcomes.",
-     "change": "The planter learns, or does not."
+     "change": "The planter learns, or does not.",
+     "imagePrompt": "A person standing before the waiting tree at a decision, the orchard hushed around them."
     }
    ],
    "routes": {
@@ -322,7 +341,8 @@
        "type": "xp",
        "amount": 30
       }
-     ]
+     ],
+     "imagePrompt": "Told: The planter learns the truth and does not survive it long."
     },
     {
      "id": "rerooted",
@@ -360,7 +380,8 @@
        "type": "xp",
        "amount": 35
       }
-     ]
+     ],
+     "imagePrompt": "Re-Rooted: You find the tree a new person to have been for."
     },
     {
      "id": "the_kind_story",
@@ -398,9 +419,11 @@
        "type": "xp",
        "amount": 25
       }
-     ]
+     ],
+     "imagePrompt": "The Kind Story: You let them finish believing."
     }
-   ]
+   ],
+   "image": "A single old tree in a Rootkin orchard standing apart, waiting, planted for someone who never came — a name-marker at its root weathered and not a Rootkin name. Green-gold orchard light, quiet melancholy, something owed and unclaimed."
   },
   {
    "id": "what_the_water_remembers",
@@ -423,27 +446,35 @@
    "stages": [
     {
      "id": "s1",
+     "title": "Reach the pool that remembers",
      "objective": "Find where the poisoning actually starts.",
      "condition": "Trace the contamination upstream past the Disputed Zone fringe (Mara's testimony, Kit Farrow's account of survey-grid lights at night) OR obtain the falsified purity reports from the Radiant filtration arrays.",
-     "change": "Codex: the source is a structure, not a spill. Something built this."
+     "change": "Codex: the source is a structure, not a spill. Something built this.",
+     "imagePrompt": "A figure climbing to a still upland pool that shimmers with a held image."
     },
     {
      "id": "s2",
+     "title": "Read what the water holds",
      "objective": "Learn what the structure is.",
      "condition": "Reach the reclamation site itself, or bring what you've found to the Archive Guardian for identification against pre-Transition record.",
-     "change": "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath."
+     "change": "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath.",
+     "imagePrompt": "A reader crouched at a pool's edge, a memory surfacing in the water like a reflection that isn't theirs."
     },
     {
      "id": "s3",
+     "title": "Learn whose memory it keeps",
      "objective": "Learn what 'prepare' means before deciding what to do about it.",
      "condition": "Investigate the instruction directly — read the array's own logic, deathsense what kind of thing it is now, or get someone who was there when it stirred to say what they saw.",
-     "change": "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not."
+     "change": "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not.",
+     "imagePrompt": "A face resolving in still water, a figure recognizing whose memory the pool keeps."
     },
     {
      "id": "s4",
+     "title": "Decide whether the memory is kept or released",
      "objective": "Decide what the water becomes.",
      "condition": "Resolve — see outcomes.",
-     "change": "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to."
+     "change": "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to.",
+     "imagePrompt": "A hand at the water's surface at a decision — to keep the memory, or let it dissolve into ripples."
     }
    ],
    "routes": {
@@ -506,7 +537,8 @@
        "type": "xp",
        "amount": 40
       }
-     ]
+     ],
+     "imagePrompt": "The Site Sealed: The instruction is stopped cold. The water clears. What it was for is buried with it."
     },
     {
      "id": "let_it_finish",
@@ -562,7 +594,8 @@
        "to": 2,
        "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock — the tremor became a stirring, and everyone sees it"
       }
-     ]
+     ],
+     "imagePrompt": "Let It Finish: The instruction completes. The water is not restored. It is something else now."
     },
     {
      "id": "redirected",
@@ -623,13 +656,15 @@
        "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock — the tremor became a stirring, and everyone sees it",
        "weight": 2
       }
-     ]
+     ],
+     "imagePrompt": "The Instruction Rewritten: Neither stopped nor completed — amended. Someone finally reads it well enough to change it on purpose."
     }
    ],
    "arcId": "arc_what_wakes_beneath",
    "arcStageFrom": 1,
    "arcStageTo": 2,
-   "publicFace": "The Valley's poisoned water was traced to a built source under the Disputed Zone — and someone did something about it."
+   "publicFace": "The Valley's poisoned water was traced to a built source under the Disputed Zone — and someone did something about it.",
+   "image": "A still upland pool that holds an image it should not — a memory in the water, a face or a moment from before, rippling when approached. A Somatic reader crouched at its edge. Cold clear light, water as memory, the uncanny."
   },
   {
    "id": "the_light_that_will_not_dim",
@@ -656,21 +691,27 @@
    "stages": [
     {
      "id": "s1",
+     "title": "Find the light that will not dim",
      "objective": "Learn what Sera's engineer buried.",
      "condition": "Obtain the suppressed readings (from Sera, the engineer, or the Radiant archive) OR witness the drift directly at a filtration array.",
-     "change": "Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it."
+     "change": "Codex: the Radiant Reach is intensifying past the Accord's tolerance — and someone chose to hide it.",
+     "imagePrompt": "A too-steady artificial light burning in an abandoned ruin, a figure approaching its unnatural glow."
     },
     {
      "id": "s2",
+     "title": "Learn why it still burns",
      "objective": "Find who benefits from the light winning.",
      "condition": "Identify the faction inside the Radiant leadership pushing the drift (via the readings' chain, a defector, or the Cult of the Unlit's mirror-accusation).",
-     "change": "Codex: the pull has a party behind it, not just a tendency. The middle has an enemy with a name."
+     "change": "Codex: the pull has a party behind it, not just a tendency. The middle has an enemy with a name.",
+     "imagePrompt": "A person examining a fabricated light-source that will not dim, reading the making that keeps it lit."
     },
     {
      "id": "s3",
+     "title": "Decide whether to let it burn or end it",
      "objective": "Decide whether the middle is worth holding.",
      "condition": "Resolve — see outcomes.",
-     "change": "The Radiant Reach's drift is checked, accelerated, or turned — and the other Reaches watch which."
+     "change": "The Radiant Reach's drift is checked, accelerated, or turned — and the other Reaches watch which.",
+     "imagePrompt": "A hand at a steady artificial light at a decision — to quench it, or leave it burning."
     }
    ],
    "routes": {
@@ -725,7 +766,8 @@
        "type": "xp",
        "amount": 45
       }
-     ]
+     ],
+     "imagePrompt": "The Middle Held: The drift is checked; the Accord holds; the light shares its ground again."
     },
     {
      "id": "let_it_win",
@@ -770,9 +812,11 @@
        "type": "xp",
        "amount": 45
       }
-     ]
+     ],
+     "imagePrompt": "Let the Light Win: The drift completes; the Radiant Reach pulls free of the middle."
     }
-   ]
+   ],
+   "image": "A fabricated light-source that should have gone dark long ago still burning steadily in an abandoned place, its glow too constant, too clean — a made thing outliving its purpose. A Blazeborn regarding it warily. Stark artificial radiance in ruin."
   },
   {
    "id": "present_at_the_birth",
@@ -799,21 +843,27 @@
    "stages": [
     {
      "id": "s1",
+     "title": "Reach the site before it blooms",
      "objective": "Reach the site before it blooms.",
      "condition": "Find the manifestation site Orrin sensed (follow the substrate-density signs, his device's reading, or a creature already appearing out of native context).",
-     "change": "Codex: a domain is about to be born, and you are close enough to matter to it."
+     "change": "Codex: a domain is about to be born, and you are close enough to matter to it.",
+     "imagePrompt": "A figure racing toward a site where the air warps and thins, substrate-density signs guiding them, a bloom imminent."
     },
     {
      "id": "s2",
+     "title": "Witness what is being born",
      "objective": "Understand what wants to manifest.",
      "condition": "Read the seed-fiction before it sets — deathsense/lifesense the bloom, take apart its logic, or speak with whatever is already emerging from it.",
-     "change": "Codex: the shape the bloom is reaching for is known — and it can still be turned."
+     "change": "Codex: the shape the bloom is reaching for is known — and it can still be turned.",
+     "imagePrompt": "A person witnessing a domain manifest — reality thinning, a creature appearing from nowhere, an engineer's device reading the impossible."
     },
     {
      "id": "s3",
+     "title": "Decide how to meet a domain's birth",
      "objective": "Shape the birth, or refuse to.",
      "condition": "Resolve — see outcomes.",
-     "change": "The domain is born shaped, stemmed, or wild — and the storm learns whether it is watched."
+     "change": "The domain is born shaped, stemmed, or wild — and the storm learns whether it is watched.",
+     "imagePrompt": "A figure at the threshold of a domain's birth at a decision, new reality blooming before them."
     }
    ],
    "routes": {
@@ -878,7 +928,8 @@
        "type": "xp",
        "amount": 50
       }
-     ]
+     ],
+     "imagePrompt": "Born Shaped: You were present, and the domain manifested as something the world can hold."
     },
     {
      "id": "stemmed",
@@ -922,9 +973,11 @@
        "type": "xp",
        "amount": 40
       }
-     ]
+     ],
+     "imagePrompt": "Held Shut: You judged the bloom too dangerous and held the aperture closed."
     }
-   ]
+   ],
+   "image": "A domain manifesting into the world for the first time — reality thinning at a bloom-site, substrate density warping the air, a creature appearing out of native context. An Enginewright with a reading-device present at the impossible birth. Awe, threshold, a new thing entering."
   },
   {
    "id": "the_seam_in_the_gears",
@@ -951,21 +1004,27 @@
    "stages": [
     {
      "id": "s1",
+     "title": "Find the seam where the gears fail",
      "objective": "Trace the bleed to where it enters.",
      "condition": "Follow the block-logic contamination upstream to the Glitchlands seam (via the changed matter, Orrin's misbehaving tools, or a Blocklander who knows the fault).",
-     "change": "Codex: the seam is found — the exact place two grammars are crossing."
+     "change": "Codex: the seam is found — the exact place two grammars are crossing.",
+     "imagePrompt": "A figure tracing a great mechanism to a seam where two systems grind wrong, sparks at the joint."
     },
     {
      "id": "s2",
+     "title": "Read why the two systems grind",
      "objective": "Understand what the crossing is doing.",
      "condition": "Read the seam's logic — take apart how block-units are resolving in gear-matter, or get someone native to the Blocklands to explain what leaks.",
-     "change": "Codex: the bleed's mechanism is known, and with it, the three things you could do about it."
+     "change": "Codex: the bleed's mechanism is known, and with it, the three things you could do about it.",
+     "imagePrompt": "An engineer reading a fault-line in a vast engine, the mismatch between two systems made visible."
     },
     {
      "id": "s3",
+     "title": "Decide how to mend the seam",
      "objective": "Stem it, harness it, or ride it in.",
      "condition": "Resolve — see outcomes.",
-     "change": "The seam is sealed, tapped, or opened wider — and the Gearlands' grammar holds, changes, or breaks."
+     "change": "The seam is sealed, tapped, or opened wider — and the Gearlands' grammar holds, changes, or breaks.",
+     "imagePrompt": "Hands at a mechanism's failing seam at a decision — to mend it, rebuild it, or let it break."
     }
    ],
    "routes": {
@@ -1025,7 +1084,8 @@
        "type": "xp",
        "amount": 40
       }
-     ]
+     ],
+     "imagePrompt": "The Seam Sealed: The bleed is stopped; the Gearlands' grammar holds."
     },
     {
      "id": "harnessed",
@@ -1079,9 +1139,11 @@
        "type": "xp",
        "amount": 50
       }
-     ]
+     ],
+     "imagePrompt": "The Crossing Harnessed: You didn't seal it — you built something that uses it."
     }
-   ]
+   ],
+   "image": "A vast mechanism with one seam where two systems meet and grind wrong — a fault-line in a great engine, sparks and stress at the joint. An Enginewright reading the failure. Industrial, precise, a hidden flaw made visible."
   },
   {
    "id": "the_moot_that_will_not_end",
@@ -1108,21 +1170,27 @@
    "stages": [
     {
      "id": "s1",
+     "title": "Reach the deadlocked moot",
      "objective": "Earn the standing to speak in the Moot.",
      "condition": "Prove yourself to the wood — heal something in it, keep a promise to a Rootkin, or win the Old Stag's word (he can grant you a hearing the Rootbound can't refuse).",
-     "change": "Codex: the Moot will hear you. That is not the same as agreeing with you."
+     "change": "Codex: the Moot will hear you. That is not the same as agreeing with you.",
+     "imagePrompt": "A great hall of many-craft figures locked in endless argument, a newcomer entering the deadlocked moot."
     },
     {
      "id": "s2",
+     "title": "Find what truly blocks the decision",
      "objective": "Learn why the Rootbound want the seal.",
      "condition": "Understand the Rootbound case (via Vaskar's grief, the Burnscar's old grudge, or the wound in the wood that started the argument) — the seal is not malice, it is fear with a reason.",
-     "change": "Codex: the seal has a cause, and the cause can be answered — or can't."
+     "change": "Codex: the seal has a cause, and the cause can be answered — or can't.",
+     "imagePrompt": "A mediator reading the room, finding the true block beneath the surface argument of a stalled council."
     },
     {
      "id": "s3",
+     "title": "Break the deadlock — or let it stand",
      "objective": "Turn the Moot, or let it close.",
      "condition": "Resolve — see outcomes.",
-     "change": "The wood seals, holds open, or finds a third thing no one in the Moot had named."
+     "change": "The wood seals, holds open, or finds a third thing no one in the Moot had named.",
+     "imagePrompt": "A figure at the center of a deadlocked moot at the moment of breaking — or failing to break — the stalemate."
     }
    ],
    "routes": {
@@ -1183,7 +1251,8 @@
        "type": "xp",
        "amount": 45
       }
-     ]
+     ],
+     "imagePrompt": "The Wood Held Open: The Moot turns; the Accord holds; the wood stays part of the world."
     },
     {
      "id": "let_it_seal",
@@ -1234,9 +1303,11 @@
        "type": "xp",
        "amount": 45
       }
-     ]
+     ],
+     "imagePrompt": "The Wood Sealed: The Rootbound win; the wood closes; the Accord withdraws."
     }
-   ]
+   ],
+   "image": "A tradition-moot gathered in endless deadlocked council — figures of many crafts arguing in a great hall, a decision that will not resolve, tension held past exhaustion. A mediator at the center. Charged, stalemated, many voices."
   },
   {
    "id": "the_maker_who_would_not_stop",
@@ -1263,21 +1334,27 @@
    "stages": [
     {
      "id": "s1",
+     "title": "Find the maker who would not stop",
      "objective": "Trace the runaway blooming to its source.",
      "condition": "Follow the manifestation-density back to Vael's workshop (via Orrin's reading, the pattern of the blooms, or a marvel that leads home).",
-     "change": "Codex: the storm has a maker. Cinder Vael, the Wright Who Would Not Stop."
+     "change": "Codex: the storm has a maker. Cinder Vael, the Wright Who Would Not Stop.",
+     "imagePrompt": "A figure entering a workshop overflowing with obsessive unfinished making, a hollow-eyed maker at its center."
     },
     {
      "id": "s2",
+     "title": "Learn what drives the endless making",
      "objective": "Understand why she cannot stop.",
      "condition": "Reach Vael and learn what drives her — not malice, a hunger for the next thing that has no floor. Orrin can tell you what she was; she can show you what she became.",
-     "change": "Codex: Vael's making is compulsion, not choice. Stopping her means stopping the compulsion, not defeating a villain."
+     "change": "Codex: Vael's making is compulsion, not choice. Stopping her means stopping the compulsion, not defeating a villain.",
+     "imagePrompt": "A person reading a driven maker's endless work, understanding the compulsion beneath it."
     },
     {
      "id": "s3",
+     "title": "Decide how to reach a maker who won't stop",
      "objective": "Slow the flood.",
      "condition": "Resolve — see outcomes. Reaching a TRUE slowing (not just breaking her tools) requires the unmaker's clean-ending craft or a verist truth she cannot make around.",
-     "change": "The storm's acceleration is broken, redirected, or left to run — and the world map shows whether the blooming receded."
+     "change": "The storm's acceleration is broken, redirected, or left to run — and the world map shows whether the blooming receded.",
+     "imagePrompt": "A hand reaching toward a maker who will not stop, at a decision of how to reach them."
     }
    ],
    "routes": {
@@ -1344,7 +1421,8 @@
        "type": "xp",
        "amount": 55
       }
-     ]
+     ],
+     "imagePrompt": "The Flood Stemmed: Vael's runaway making is stopped, and the storm recedes."
     },
     {
      "id": "let_her_make",
@@ -1386,9 +1464,11 @@
        "type": "xp",
        "amount": 40
       }
-     ]
+     ],
+     "imagePrompt": "Let the Flood Run: You don't stop her; the storm keeps accelerating."
     }
-   ]
+   ],
+   "image": "A craftsperson consumed by their work past all reason — a maker who would not stop, surrounded by obsessive unfinished making, hollow-eyed and driven. Someone reaching out to them. The cost of craft without ending."
   },
   {
    "id": "the_stag_that_wont_die",

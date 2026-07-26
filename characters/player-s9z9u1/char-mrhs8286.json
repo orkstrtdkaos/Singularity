@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 26,
-  "xp": 2569,
+  "xp": 2574,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -163,7 +163,7 @@
   "maxHealth": 155,
   "health": 155,
   "maxEnergy": 225,
-  "energy": 165,
+  "energy": 159,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1991,161 +1991,203 @@
         "player": "Move north to the site itself — the design will close when you are standing in it",
         "summary": "The party walks north to the response site — a shallow clearing where Huginn waits, Order-Sense closes on the full design, and the held-open death at the hollow's center stands plain.",
         "narration": "You start walking.\n\nVeth falls in beside you without a word, her stride adjusting to the frost-hard ground with the ease of someone who has walked this kind of country for a long time. Pell moves to your left, Memory angled back over her shoulder, her eyes on the treeline rather than the path. No one speaks. The Zone presses in at the margins — Zone-thickened canopy, branches angled wrong, the iron-and-ozone smell stronger now than it was at the gate.\n\nHuginn is nowhere overhead. He went north before any of you and has not come back, which means he found it first and is waiting.\n\nThe ground changes under your boots about a hundred yards on. The frost-hard pan gives way to something older — darker soil, packed flat not by weather but by time and weight, the way ground packs when something has stood in one place for a very long time. The trees thin here. A rough clearing opens ahead, not large, maybe thirty feet across, and in its center the land dips slightly — a shallow hollow, the kind a body makes when it has lain somewhere long enough. At its far edge, Huginn sits on a low broken branch, absolutely still, watching the hollow's center.\n\nHe does not croak. He does not move. His eye catches you as you step into the clearing and holds, and that held stillness is the plainest thing he could have said.\n\nYou step to the hollow's edge and let Order-Sense open — and this time it closes. The design is here. All of it, present and readable, the substrate thick enough now to carry the full shape. The relay node behind you at Logana's feet is one end of a thread. You are standing at the other end. The response point is not a machine, not a structure, not a second node in the ground. It is this clearing. It is the held-open death at the center of it. Whatever the relay node was waiting to receive, it was meant to receive something from here — and whatever was meant to answer has not answered for fifteen years, because the ending at the center of this hollow is still open."
+      },
+      {
+        "player": "Use Ask the Dead on the thing in the Hollow.",
+        "summary": "Ask the Dead opens the hollow's warden — a man who stayed until staying became death, an ear built to receive a question not yet asked, and his plain naming that the watch can end now.",
+        "narration": "You crouch at the hollow's edge and open Ask the Dead.\n\nNot to the wolverine — Logana has already given you what she had. You open it to the hollow itself, to the thing that has been held here longer than the Zone has been a Zone. The substrate is thick and close and it resists you for a moment, the way old grief resists the hand of a stranger. Then it gives.\n\nSomething answers.\n\nIt comes in broken pieces, the way the recently dead always do — badly, and with effort, and as truthfully as they can manage. You hear it less as words than as weight. An Ashwarden. A man. He was the last warden of this response site, before the post was abandoned. He did not die here so much as he stayed, and staying became the same thing over fifteen years. His name is gone — the Zone took it or he gave it — but what he wants you to know is still present, and it comes in three clear shapes.\n\nFirst: the hollow is not a tomb. It is an ear. Whatever the relay node to the south was built to transmit, this site was built to receive — and the question it was built to receive has not arrived yet. He waited for it. He is still waiting.\n\nSecond: the source is not the Zone. The Zone grew toward it the same way roots grow toward water — the held-open death attracted fifteen years of unattended endings because unattended things recognize each other. The hollow was here first.\n\nThird: he cannot hold this open much longer. He says it plainly, the way the dead say true things — without regret, with some relief. He held because no one came to attend. Someone is attending now. He names it directly, the way a man names the end of a long watch: you will do.\n\nHuginn shifts on his broken branch without making a sound. Veth is very still. Pell has not moved, but her hand has settled on Memory's grip, and she is watching your face."
       }
     ],
     "lastTurn": {
-      "narration": "You start walking.\n\nVeth falls in beside you without a word, her stride adjusting to the frost-hard ground with the ease of someone who has walked this kind of country for a long time. Pell moves to your left, Memory angled back over her shoulder, her eyes on the treeline rather than the path. No one speaks. The Zone presses in at the margins — Zone-thickened canopy, branches angled wrong, the iron-and-ozone smell stronger now than it was at the gate.\n\nHuginn is nowhere overhead. He went north before any of you and has not come back, which means he found it first and is waiting.\n\nThe ground changes under your boots about a hundred yards on. The frost-hard pan gives way to something older — darker soil, packed flat not by weather but by time and weight, the way ground packs when something has stood in one place for a very long time. The trees thin here. A rough clearing opens ahead, not large, maybe thirty feet across, and in its center the land dips slightly — a shallow hollow, the kind a body makes when it has lain somewhere long enough. At its far edge, Huginn sits on a low broken branch, absolutely still, watching the hollow's center.\n\nHe does not croak. He does not move. His eye catches you as you step into the clearing and holds, and that held stillness is the plainest thing he could have said.\n\nYou step to the hollow's edge and let Order-Sense open — and this time it closes. The design is here. All of it, present and readable, the substrate thick enough now to carry the full shape. The relay node behind you at Logana's feet is one end of a thread. You are standing at the other end. The response point is not a machine, not a structure, not a second node in the ground. It is this clearing. It is the held-open death at the center of it. Whatever the relay node was waiting to receive, it was meant to receive something from here — and whatever was meant to answer has not answered for fifteen years, because the ending at the center of this hollow is still open.",
-      "sceneSummary": "The party walks north to the response site — a shallow clearing where Huginn waits, Order-Sense closes on the full design, and the held-open death at the hollow's center stands plain.",
+      "narration": "You crouch at the hollow's edge and open Ask the Dead.\n\nNot to the wolverine — Logana has already given you what she had. You open it to the hollow itself, to the thing that has been held here longer than the Zone has been a Zone. The substrate is thick and close and it resists you for a moment, the way old grief resists the hand of a stranger. Then it gives.\n\nSomething answers.\n\nIt comes in broken pieces, the way the recently dead always do — badly, and with effort, and as truthfully as they can manage. You hear it less as words than as weight. An Ashwarden. A man. He was the last warden of this response site, before the post was abandoned. He did not die here so much as he stayed, and staying became the same thing over fifteen years. His name is gone — the Zone took it or he gave it — but what he wants you to know is still present, and it comes in three clear shapes.\n\nFirst: the hollow is not a tomb. It is an ear. Whatever the relay node to the south was built to transmit, this site was built to receive — and the question it was built to receive has not arrived yet. He waited for it. He is still waiting.\n\nSecond: the source is not the Zone. The Zone grew toward it the same way roots grow toward water — the held-open death attracted fifteen years of unattended endings because unattended things recognize each other. The hollow was here first.\n\nThird: he cannot hold this open much longer. He says it plainly, the way the dead say true things — without regret, with some relief. He held because no one came to attend. Someone is attending now. He names it directly, the way a man names the end of a long watch: you will do.\n\nHuginn shifts on his broken branch without making a sound. Veth is very still. Pell has not moved, but her hand has settled on Memory's grip, and she is watching your face.",
+      "sceneSummary": "Ask the Dead opens the hollow's warden — a man who stayed until staying became death, an ear built to receive a question not yet asked, and his plain naming that the watch can end now.",
       "choices": [
         {
-          "label": "Use Deathsense on the hollow itself — read the held-open ending at close range; find whose death this is and why it hasn't completed",
+          "label": "Attend his ending — give him the plain Ashwarden presence he has waited for, and let the watch close",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.4
+            "death_life": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "devote",
+            "sustain"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Ask him one more question before the link fades — what question was this hollow built to receive?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "death_life": -0.2
           },
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
+          "abilityId": "ask_the_dead",
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Ask Huginn plainly what he sees — he was here first, and he reads endings better than anyone present",
+          "label": "Read the hollow's full design with Order-Sense now that you're standing inside it — the ear's structure, what it was built to receive and from where",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Tell Veth and Pell what the dead man said — they need to hear the shape of this before you decide anything",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "death_life": -0.2
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
-        },
-        {
-          "label": "Step into the hollow's center — stand where the ending is and let the design tell you what it needs to close",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "death_life": -0.3,
-            "chaos_order": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "risky",
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Read the hollow's boundary first — use The Attended End to learn how long this death has been waiting and what it is waiting for",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.35
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false
         }
       ],
-      "scene": {
-        "setting": "A shallow clearing thirty feet across in the left-branch Zone, the ground packed dark and old at its center — a slight hollow where something has been a long time. Zone-thickened trees ring it on three sides, thinned to the south where the party entered. Early-spring dawn light, flat and grey. Iron-and-ozone on the air, heavier here than at the gate.",
-        "npcsPresent": [
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Standing at the clearing's edge to Silas's left, Memory angled back, watching the treeline."
-          },
-          {
-            "name": "Veth Ondra",
-            "state": "Standing at Silas's right, still, reading the hollow without moving toward it."
-          },
-          {
-            "name": "Huginn",
-            "state": "Perched on a low broken branch at the hollow's far edge, absolutely still, watching the center. Has not made a sound."
-          }
-        ],
-        "objects": [
-          "the hollow's center — a shallow depression in dark packed earth, the held-open death seated here",
-          "low broken branch at the far edge — Huginn's perch",
-          "Memory — Pell carrying it, hand near the grip",
-          "Zone-thickened treeline ringing the clearing on three sides"
-        ],
-        "threads": [
-          "Order-Sense has closed on the full design — the relay node to the south and this hollow are two ends of one thread; the response has not answered in fifteen years",
-          "Huginn arrived first and is waiting in silence — his stillness is a message",
-          "The held-open death at the hollow's center is the response point; its nature and whose it is remain unread",
-          "Logana holds the perimeter at the downed tree — the boundary between Silas's warding and the Zone's claim remains unresolved"
-        ]
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3,
+        "xp": 0
       },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a short walk north through the Zone to the response site"
-      },
-      "codexUpdates": [
-        {
-          "topic": "zone-left-branch-entrance",
-          "label": "Disputed Zone — Left Branch",
-          "kind": "place",
-          "entityId": "zone-left-branch-entrance",
-          "fact": "The response point for the relay node is a shallow clearing thirty feet across — ground packed dark by long occupation, a slight hollow at its center where an ending has been held open for years. The Zone's structure runs through it like a hub. Whatever was meant to answer the relay node has not answered in fifteen years.",
-          "links": [
-            "what-the-water-remembers",
-            "the-attended-end",
-            "deathsense"
-          ]
-        }
-      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "what-the-water-remembers",
-          "note": "Order-Sense closes on the full design at the response site — the relay node and the hollow are two ends of one thread. The held-open death at the hollow's center is the unanswered response point. The party stands at it now."
+          "note": "The hollow's warden named its nature: it is an ear, built to receive a question not yet sent from the relay node. The warden has held it open for fifteen years waiting for someone to attend — and has named Silas as the one who will do."
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      }
+      "stageOps": [],
+      "scene": {
+        "setting": "A shallow clearing thirty feet across in the left-branch Zone, the ground packed dark and old at its center — the hollow and its warden both present and plain now. Early-spring dawn light, flat and grey. Iron-and-ozone on the air.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Hand on Memory's grip, watching Silas's face."
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "Still at Silas's right, reading him."
+          },
+          {
+            "name": "Huginn",
+            "state": "Shifted silently on the broken branch."
+          }
+        ],
+        "objects": [
+          "the hollow's center — the held-open ending named and plain, the warden present in it",
+          "low broken branch at the far edge — Huginn's perch",
+          "Memory — Pell holding it, hand on the grip",
+          "Zone-thickened treeline on three sides"
+        ],
+        "threads": [
+          "The warden named three things: the hollow is an ear; the Zone is not the source; he cannot hold much longer and has named Silas as the attendant — the choice of how to answer sits with Silas now",
+          "The question the hollow was built to receive has not yet been sent — its nature remains unknown",
+          "Veth and Pell have not yet heard the account",
+          "Logana holds the perimeter at the downed tree"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth Ondra",
+          "note": "Held still through the Ask the Dead cast — watching Silas's face, reading him rather than the hollow.",
+          "statusNote": "Standing at Silas's right in the hollow clearing — present and attending the warden's response."
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Hand settled on Memory's grip without being asked — reading Silas's face through the cast.",
+          "statusNote": "At the hollow clearing — hand on Memory, watching Silas."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "what-the-water-remembers",
+          "label": "What the Water Remembers",
+          "kind": "mystery",
+          "fact": "The hollow is an ear, not a tomb — built to receive a specific question from the relay node to the south. An Ashwarden warden held it open for fifteen years waiting. He named the hollow's nature plainly: the Zone grew toward it because unattended endings recognize each other; the source is not the Zone. He cannot hold much longer, and named Silas as the one who will attend.",
+          "links": [
+            "zone-left-branch-entrance",
+            "the-attended-end",
+            "deathsense",
+            "ask_the_dead",
+            "millbrook",
+            "the-second-thread"
+          ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The hollow in the left-branch Zone is an ear — built to receive a question from the relay node to the south. A nameless Ashwarden warden held it open for fifteen years. He has named Silas Weir as the one who will attend the ending of his watch.",
+          "subjectId": "zone-left-branch-entrance"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The hollow's warden named: it is a receiver, built for a specific transmission from the relay node. The warden has held it open fifteen years. He has named Silas as the attending presence — the watch can end.",
+          "flag": {
+            "hollow_nature": "receiver_ear",
+            "hollow_warden_named": "true",
+            "hollow_watch_transfer": "silas-weir"
+          }
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a careful casting and the dead man's answer"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A shallow clearing thirty feet across in the left-branch Zone, the ground packed dark and old at its center — a slight hollow where something has been a long time. Zone-thickened trees ring it on three sides, thinned to the south where the party entered. Early-spring dawn light, flat and grey. Iron-and-ozone on the air, heavier here than at the gate.",
+      "setting": "A shallow clearing thirty feet across in the left-branch Zone, the ground packed dark and old at its center — the hollow and its warden both present and plain now. Early-spring dawn light, flat and grey. Iron-and-ozone on the air.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at the clearing's edge to Silas's left, Memory angled back, watching the treeline."
+          "state": "Hand on Memory's grip, watching Silas's face."
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing at Silas's right, still, reading the hollow without moving toward it."
+          "state": "Still at Silas's right, reading him."
         },
         {
           "name": "Huginn",
-          "state": "Perched on a low broken branch at the hollow's far edge, absolutely still, watching the center. Has not made a sound."
+          "state": "Shifted silently on the broken branch."
         }
       ],
       "objects": [
-        "the hollow's center — a shallow depression in dark packed earth, the held-open d",
+        "the hollow's center — the held-open ending named and plain, the warden present i",
         "low broken branch at the far edge — Huginn's perch",
-        "Memory — Pell carrying it, hand near the grip",
-        "Zone-thickened treeline ringing the clearing on three sides"
+        "Memory — Pell holding it, hand on the grip",
+        "Zone-thickened treeline on three sides"
       ],
       "threads": [
-        "Order-Sense has closed on the full design — the relay node to the south and this hollow are two ends of one thread; the response has not answered in fifteen yea",
-        "Huginn arrived first and is waiting in silence — his stillness is a message",
-        "The held-open death at the hollow's center is the response point; its nature and whose it is remain unread",
-        "Logana holds the perimeter at the downed tree — the boundary between Silas's warding and the Zone's claim remains unresolved"
+        "The warden named three things: the hollow is an ear; the Zone is not the source; he cannot hold much longer and has named Silas as the attendant — the choice of",
+        "The question the hollow was built to receive has not yet been sent — its nature remains unknown",
+        "Veth and Pell have not yet heard the account",
+        "Logana holds the perimeter at the downed tree"
       ]
     }
   },
@@ -2891,14 +2933,14 @@
         "s4"
       ],
       "progress": [
-        "↳ The gate is fully declared and complete — the party is turning north-and-west into the Zone toward the reclamation site, which is the stage's named destination.",
         "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not.",
         "↳ Order-Sense read the relay node at the downed tree's base as a load-bearing part of the Zone's lattice — one of the nodes the searching threads toward the watershed run through, with recent…",
         "A skeletal guardian now watches the relay node at the downed tree — Logana, raised from the wolverine that tended the node for years. The Zone's thread is in her warding. The node is no longer unattended.",
         "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to.",
         "↳ The Attended End read the relay node directly — it is not malfunctioning, it is following its last instruction to prepare the watershed for a receiver that never came; the water crisis has a source…",
         "Party briefed on the relay node's purpose and now moving north toward the unanswered response site — the next structural piece of the watershed preparation design.",
-        "Order-Sense closes on the full design at the response site — the relay node and the hollow are two ends of one thread. The held-open death at the hollow's center is the unanswered response point. The party stands at it now."
+        "Order-Sense closes on the full design at the response site — the relay node and the hollow are two ends of one thread. The held-open death at the hollow's center is the unanswered response point. The party stands at it now.",
+        "The hollow's warden named its nature: it is an ear, built to receive a question not yet sent from the relay node. The warden has held it open for fifteen years waiting for someone to attend — and has named Silas as the one who will do."
       ],
       "aliases": [],
       "startedAt": "2026-07-22T20:49:54.189Z",
@@ -3431,7 +3473,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Pressed her palm to the right upright and confirmed its weight through ironsense — declined to draw a mark, named her mark as already in the spear.",
         "[d14] Asked what the gate looks like to Order-Sense — received the answer plainly, did not press further.",
         "[d14] Memory settled across her back, ready to move, watching the country ahead.",
         "[d14] Eyes north already, Memory across her back — ready to move before Silas has finished.",
@@ -3440,7 +3481,8 @@
         "[d14] Held position on the far bank as anchor through the warpling engagement — called Silas's left shoulder at the opening rush, exhaled at the yield.",
         "[d14] Read the track line's direction without being asked — named it matches the party's heading, plainly and without drama.",
         "[d14] Called across two hundred yards of Zone ground to check whether Silas is still standing — her voice pitched to carry, not to shout.",
-        "[d14] Received the full briefing on the relay node's purpose — said nothing, looked north, looked at Silas. Walking north with Memory in a trail grip."
+        "[d14] Received the full briefing on the relay node's purpose — said nothing, looked north, looked at Silas. Walking north with Memory in a trail grip.",
+        "[d14] Hand settled on Memory's grip without being asked — reading Silas's face through the cast."
       ],
       "knownFacts": [
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
@@ -3461,7 +3503,7 @@
         "ironsense read of the fold's quality through contact-point —"
       ],
       "status": "active",
-      "statusNote": "Walking north with the party into the left-branch Zone — Memory in hand, watching the treeline.",
+      "statusNote": "At the hollow clearing — hand on Memory, watching Silas.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -4134,7 +4176,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Taking the right flank, warden's pace — watching the country without comment.",
         "[d14] Read the sky as Silas descended — warden's instinct, gauging what the flight saw.",
         "[d14] Came up over the bank edge at the fight's close — read the gravel in one look and named that the warpling turned rather than was broken.",
         "[d14] Named the tracks as pre-warpling in nature — heavier, older, walking with confidence or patience. Neither good company.",
@@ -4143,7 +4184,8 @@
         "[d14] Called the movement warning across the distance — measured and plain: the Zone reads kills, keep moving.",
         "[d14] Received the relay node briefing — drew a long breath and filed it. Walking north in silence.",
         "[d14] Named the one previous raising she has witnessed — a boar held for four days at a grief-sealed hollow, released cleanly at the burial's end. Marked Logana as categorically different: the Zone's claim sits in the warding alongside Silas's own purpose, and she does not know what that costs yet.",
-        "[d14] Read Silas's expression after the full Deathsense cast and named the response site aloud — not a question."
+        "[d14] Read Silas's expression after the full Deathsense cast and named the response site aloud — not a question.",
+        "[d14] Held still through the Ask the Dead cast — watching Silas's face, reading him rather than the hollow."
       ],
       "knownFacts": [
         "The fold holds something that wants to be finished — patient rather than desperate, and it has been waiting a long time.",
@@ -4166,7 +4208,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking north with the party — stopped when Silas stopped; watching and waiting for his account of the read.",
+      "statusNote": "Standing at Silas's right in the hollow clearing — present and attending the warden's response.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5375,7 +5417,8 @@
         "[d14] A Zone-changed wolverine holds a clearing two hundred yards north-and-west of the made gate — large, unhurried, working at a downed dead tree. Did not flee from Light-Borne.",
         "[d14] The Zone-changed wolverine is dead at the base of the downed tree in the frost-hard clearing. Something was being worked at that base — unexamined.",
         "[d14] A pre-Transition relay node is seated in a hollow at the base of the downed tree in the wolverine clearing — exposed by the wolverine's excavation, load-bearing in the Zone's lattice, and part of the thread pointing toward the watershed reclamation site.",
-        "[d14] The Zone-changed wolverine's skeletal frame now stands as a guardian — Logana — raised by Silas Weir at the downed tree's base. The Zone's lattice-thread has partial hold in her warding alongside the maker's purpose. She watches the relay node."
+        "[d14] The Zone-changed wolverine's skeletal frame now stands as a guardian — Logana — raised by Silas Weir at the downed tree's base. The Zone's lattice-thread has partial hold in her warding alongside the maker's purpose. She watches the relay node.",
+        "[d14] The hollow's warden named: it is a receiver, built for a specific transmission from the relay node. The warden has held it open fifteen years. He has named Silas as the attending presence — the watch can end."
       ],
       "flags": {
         "gate_built": true,
@@ -5542,7 +5585,7 @@
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
     "lastGenCount": 624,
-    "turnsSinceOffer": 12,
+    "turnsSinceOffer": 13,
     "recentOffers": [
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
@@ -7155,22 +7198,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.70342922140407,
-    "cerebral": 15.183334855585777,
-    "social": 5.710482418942598,
-    "generous": 2.050255198812364,
-    "cautious": 14.463672533277618,
-    "physical": 3.8531023023961803,
-    "risky": 0.924178820351333,
-    "ruthless": 0.3937972577471802,
-    "carousing": 0.327052952074422,
-    "amorous": 1.2022449307724763,
-    "patient": 0.7285241952987822,
-    "stealth": 0.00007030188567106907,
-    "devotion": 1.5516259874136593,
-    "craft": 2.494856676831721,
-    "leadership": 1.0848502928183326,
-    "deception": 0.3366653922142057
+    "strategic": 19.210843490868967,
+    "cerebral": 16.803751484196134,
+    "social": 5.567720358469033,
+    "generous": 1.9989988188420547,
+    "cautious": 14.102080719945677,
+    "physical": 3.756774744836276,
+    "risky": 0.9010743498425496,
+    "ruthless": 0.3839523263035007,
+    "carousing": 0.3188766282725614,
+    "amorous": 1.1721888075031643,
+    "patient": 0.7103110904163127,
+    "stealth": 0.00006854433852929234,
+    "devotion": 1.5128353377283177,
+    "craft": 2.4324852599109277,
+    "leadership": 1.0577290354978741,
+    "deception": 0.32824875740885057
   },
   "aptitudes": [
     "strategist",
@@ -7178,7 +7221,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 865,
+  "actionCount": 866,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7568,8 +7611,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785026653440,
-  "rev": 1466,
+  "updatedAt": 1785026836396,
+  "rev": 1467,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9945,12 +9988,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "veth-ondra",
-      "text": "Veth Ondra has accepted the open-palm compact and agreed to travel with Silas — destination named as the Raven's Home and the dead warden post, then the valley's water situation. She is folding the stall and will be ready in ten minutes.",
-      "day": 6,
-      "subjectId": "veth-ondra"
-    },
-    {
       "id": "veth-stillwater-ondra",
       "text": "Veth Ondra has been formally introduced to Pell Marsh at the south market row — the party is fully assembled: Silas, Pell, Veth, Siol, and Huginn.",
       "day": 6,
@@ -10183,6 +10220,12 @@
       "text": "Logana — the skeletal guardian raised from the Zone-changed wolverine — now stands watch at the downed tree's clearing. The Zone's lattice-thread has partial hold in her warding alongside Silas's own guardian-purpose. She is aware, not merely obedient.",
       "day": 14,
       "subjectId": "logana"
+    },
+    {
+      "id": "zone-left-branch-entrance",
+      "text": "The hollow in the left-branch Zone is an ear — built to receive a question from the relay node to the south. A nameless Ashwarden warden held it open for fifteen years. He has named Silas Weir as the one who will attend the ending of his watch.",
+      "day": 14,
+      "subjectId": "zone-left-branch-entrance"
     }
   ],
   "practice": {
@@ -10208,7 +10251,7 @@
       "the_kept_breath": 2,
       "light_borne": 3,
       "marrow-s-wings": 3,
-      "ask_the_dead": 1,
+      "ask_the_dead": 2,
       "the_warding_mark": 3,
       "the_working_model": 9,
       "the-held-place": 1,
@@ -10291,7 +10334,7 @@
       "shadowstep": 25,
       "the_shielding_word": 25,
       "marrow-s-wings": 25,
-      "ask_the_dead": 24,
+      "ask_the_dead": 26,
       "the_warding_mark": 25,
       "the_working_model": 25,
       "the-held-place": 24,
@@ -10875,7 +10918,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 616,
+    "valley": 617,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11038,10 +11081,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-26T00:44:13.437Z",
+      "lastAt": "2026-07-26T00:47:16.393Z",
       "startDay": 25,
       "endDay": 26,
-      "beats": 21
+      "beats": 22
     }
   ],
   "company": [
@@ -11288,19 +11331,19 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 237,
-    "choices": 237,
-    "characterDeltas": 100,
-    "scene": 237,
-    "npcUpdates": 211,
-    "factUpdates": 18,
-    "placeUpdates": 42,
-    "codexUpdates": 147,
-    "timeOps": 231,
+    "sceneSummary": 238,
+    "choices": 238,
+    "characterDeltas": 101,
+    "scene": 238,
+    "npcUpdates": 212,
+    "factUpdates": 19,
+    "placeUpdates": 43,
+    "codexUpdates": 148,
+    "timeOps": 232,
     "imagePrompt": 6,
-    "sceneEnded": 56,
+    "sceneEnded": 57,
     "itemUpdates": 5,
-    "questUpdates": 30,
+    "questUpdates": 31,
     "offer": 22,
     "moveTo": 14,
     "delegateOps": 3,
@@ -11314,7 +11357,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 237,
+  "_opTurns": 238,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

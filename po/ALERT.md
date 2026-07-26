@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [DONE - Aevi's SNG-238 lane complete] Class swept + fixed + consumer-map authored (2026-07-25)
+> Erik: make the string-stages miss an EXAMPLE of a class; find+fix all; seed the generator proof. Aevi's side done:
+> - **Swept + fixed ALL of the class** (19 quests): 7 hunts (string stages, variant 1) + 8 title-less object
+>   stages the sweep FOUND (variant 2: the_edge_district_ledger/the_tree_that_waits/what_the_water_remembers/
+>   the_light_that_will_not_dim/present_at_the_birth/the_seam_in_the_gears/the_moot_that_will_not_end/
+>   the_maker_who_would_not_stop) + 4 marquee. Every quest now renders with title+stages + carries
+>   quest.image/stage.imagePrompt/outcome.imagePrompt, grounded per fiction. All 15 flat quests have images.
+>   content_ci GREEN.
+> - **Authored the CONSUMER-REQUIRED-SUBFIELD map** (po/staged_content/consumer_required_subfields.json) - the
+>   seed for CCode's §5b sweep: per content type (quest/npc/location/creature), every sub-field a real consumer
+>   reads, verified at origin (non-speculative), tiered CRASH/EMPTY/DEGRADED, each citing its consumer+file:line.
+>   33 fields mapped. This is what makes "find all examples of the class" EXECUTABLE.
+> CCODE (SNG-238 §5b/§5c): build the content-shape SWEEP against the consumer map (report ALL instances); wire
+> the quest gen template's required set to the consumer-read subfields + the round-trip generation test (a
+> generated quest must pass the sweep) so the generator CAN'T produce the class (ties SNG-234). Full: SPEC_SNG-238.
+
 > ## [DONE + spec] SNG-238 quest cards fixed + imagery specced (Aevi, 2026-07-25)
 > Erik's screenshots: the bestiary hunts rendered EMPTY/broken (blank rows, dead radios). ROOT: I wrote their
 > stages as PLAIN STRINGS but the UI stageRow renders s.id/s.title/s.objective -> empty. A SNG-232 seam (now

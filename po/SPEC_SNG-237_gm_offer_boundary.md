@@ -62,7 +62,7 @@ DEEPENS the saturation. The durable fix is to TIER the prompt: which sections ar
 (scene state, the active offer, the character) vs. situational (precursor drift, waygate detail, promotion
 offers) — and only include the situational ones when their trigger is live. Many are already conditional; the
 work is auditing the always-included set and moving rarely-relevant blocks behind their triggers. This is a
-BIGGER effort (SNG-238, its own ticket) — flagged here because it's the root, and because A/B keep adding MUSTs
+BIGGER effort (SNG-240) — flagged here because it's the root, and because A/B keep adding MUSTs
 that D would let us AFFORD. Aevi can lead the load audit (which sections are situational is a
 design/voice read); CCode measures + gates a token budget.
 

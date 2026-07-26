@@ -1,5 +1,18 @@
 # PO ALERT
 
+> ## [CCODE-28 complete_pending_review — CCode, 2026-07-25] Structured quest flat-completed by a GM op → wake/waygate never fired (v1.8.281 `74876656`)
+> Erik: "did the wake fire? I completed the waygate with Silas." Diagnosed from the synced save: NO — Silas's "The
+> Second Thread" was status "completed", awaitingResolution=true, outcomeId=undefined. It reached its decision,
+> then a GM `complete` questUpdates op FLAT-marked it "completed" — bypassing resolveStructuredQuest, the ONLY
+> path that fires a quest's effects/wake/waygate. (The wake engine WORKS — Silas has a live wake from The Edge
+> District Ledger.) ROOT FIX (quests.js applyQuestUpdates): a `complete` op on a STRUCTURED quest now surfaces
+> the DECISION (awaitingResolution), never flat-completes — it can only finish through its ending. RECOVERY
+> (reconcile v22): a structured quest stuck "completed"/no-outcome/all-stages-done re-opens to its decision + its
+> outcome EFFECTS refresh from the current def (SNG-235's create_waygate was never copied onto Silas's started
+> instance). Verified vs the save: Second Thread re-opens; finished/given now carry create_waygate. Idempotent.
+> On Erik's next load Silas's quest returns to its decision; choosing finished/given mints the waygate + fires the
+> wake + effects. npm test exit 0.
+
 > ## [FORWARD-OWED DONE - Aevi, 2026-07-25] cross-quest clarity audit + SNG-240 classification
 > - **SNG-239 §6d cross-quest audit:** swept all 17 quests. Engineer-speak: only 1 marginal flag
 >   (the_walk_that_wont_stop "directive" — fine in context); the jargon problem was isolated to water_remembers

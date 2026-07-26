@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.281";
+const APP_VERSION = "1.8.282";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6693,12 +6693,12 @@ async function renderFeed() {
   try {
     const store = await fetchRepoJSON(FEED_PATH);
     const posts = feedForViewer(store || {}, profile);
-    if (!posts.length) { body.innerHTML = `<div class="insight">No posts yet. Share a moment you love — tap 📮 Post to feed on a turn.</div>`; return; }
-    body.innerHTML = posts.map(p => `<div class="feed-post${p.lensed ? " lensed" : ""}">
-      <div class="feed-head"><strong>${esc(p.characterName || "someone")}</strong>${p.location ? ` · <span class="hint">${esc(CONTENT.locations[p.location]?.name || p.location)}</span>` : ""}${p.worldDateLabel ? ` · <span class="hint">${esc(p.worldDateLabel)}</span>` : ""}</div>
+    if (!posts.length) { body.innerHTML = `<div class="insight">No posts yet. Share a moment you love — tap 📮 Post to feed on a turn — or a whole session's story from your Chronicle.</div>`; return; }
+    body.innerHTML = posts.map(p => `<div class="feed-post${p.lensed ? " lensed" : ""}${p.kind === "synopsis" ? " feed-synopsis" : ""}">
+      <div class="feed-head">${p.kind === "synopsis" ? `<span class="feed-kind">📖 Session</span> ` : ""}<strong>${esc(p.characterName || "someone")}</strong>${p.location ? ` · <span class="hint">${esc(CONTENT.locations[p.location]?.name || p.location)}</span>` : ""}${p.worldDateLabel ? ` · <span class="hint">${esc(p.worldDateLabel)}</span>` : ""}</div>
       <div class="feed-row">
         ${p.image ? `<img class="feed-img" src="${esc(p.image)}" alt="a shared moment" data-lightbox="feed" loading="lazy" onerror="this.style.display='none'">` : ""}
-        <div class="feed-text">${p.narration.split(/\n\n+/).map(renderProseHtml).join("")}</div>
+        <div class="feed-text">${p.narration.split(/\n\n+/).map(renderProseHtml).join("")}${p.caption ? `<div class="feed-caption">${esc(p.caption)}</div>` : ""}</div>
       </div></div>`).join("");
   } catch (e) {
     body.innerHTML = `<div class="insight">The feed couldn't load right now (${esc(e?.message || "sync error")}). Try again in a moment.</div>`;
@@ -7194,6 +7194,7 @@ function renderChronicle() {
         return `<details class="session-entry"><summary>${esc(title)}</summary><div class="sec-body">
           ${recap}
           ${getApiKey() && !raw.recap ? `<button class="btn secondary session-recap" data-sess="${esc(s.id)}" style="margin:2px 0 6px" ${raw._recapBusy ? "disabled" : ""}>✍ Write session recap</button>` : ""}
+          ${syncEnabled() && raw.recap ? `<button class="btn secondary session-post" data-postsess="${esc(s.id)}" style="margin:2px 0 6px" title="Share this session's story on the family feed — a little narrative of what happened, lensed to each viewer's rating. Never canon.">📮 Post this session to the feed</button>` : ""}
           ${s.deeds.length ? `${s.deeds.map(d => `<div class="chronicle-deed"><span class="rep-band ${d.weight >= 0 ? "trusted" : "wary"}">${d.weight > 0 ? "+" : ""}${d.weight}</span> ${esc(d.description)}</div>`).join("")}` : "<div class='insight'>a quiet span — no deeds of note</div>"}
           ${s.placesMinted.length ? `<div class="hint">✦ Places you made: ${s.placesMinted.map(esc).join(", ")}</div>` : ""}
           ${s.peopleMet.length ? `<div class="hint">✦ People first met: ${s.peopleMet.map(esc).join(", ")}</div>` : ""}
@@ -7213,6 +7214,7 @@ function renderChronicle() {
   const share = document.getElementById("chr-share"); if (share) share.onchange = (e) => { if (profile) { profile.sharedChronicle = e.target.checked; saveProfile(profile); } };
   const endBtn = document.getElementById("chr-endsession"); if (endBtn) endBtn.onclick = () => { endSession(character); saveCharacter(character); renderChronicle(); };
   for (const b of app.querySelectorAll(".session-recap")) b.onclick = () => ensureSessionRecap(b.dataset.sess);
+  for (const b of app.querySelectorAll(".session-post")) b.onclick = () => renderSessionSynopsisReview(b.dataset.postsess); // SNG-241
   // CCODE-06: ⭐ Keep straight from the progress row (+4 — usually the whole remaining gap).
   for (const b of app.querySelectorAll("[data-keepfrom]")) b.onclick = () => {
     const rec = findGenerated(character, b.dataset.keepfrom);
@@ -7248,6 +7250,84 @@ async function ensureSessionRecap(sessionId, force = false) {
   raw._recapBusy = false;
   saveCharacter(character);
   renderChronicle();
+}
+
+/** SNG-241: the structured "key details" caption for a session synopsis — factual, pulled from the session's
+ *  real state (level + top deeds + people/places + canon), never invented. The poster edits it before posting. */
+function sessionKeyDetails(entry) {
+  const bits = [];
+  if (character.level) bits.push(`Level ${character.level}`);
+  const topDeeds = (entry.deeds || []).slice().sort((a, b) => Math.abs(b.weight || 0) - Math.abs(a.weight || 0)).slice(0, 2).map(d => d.description);
+  if (topDeeds.length) bits.push(topDeeds.join("; "));
+  if ((entry.peopleMet || []).length) bits.push(`met ${entry.peopleMet.slice(0, 3).join(", ")}`);
+  if ((entry.placesMinted || []).length) bits.push(`found ${entry.placesMinted.slice(0, 3).join(", ")}`);
+  if ((entry.canonPromoted || []).length) bits.push(`★ ${entry.canonPromoted.join(", ")} became canon`);
+  return bits.join(" · ");
+}
+
+/** SNG-241: review + trim a session synopsis, then post it to the family feed as kind:"synopsis". The recap is
+ *  a DRAFT the poster shapes (never auto-posted); a "chapter" toggle regenerates it as 2–3 paragraphs. Lens +
+ *  consent inherit from the feed. */
+function renderSessionSynopsisReview(sessionId) {
+  const raw = (character.sessions || []).find(x => x.id === sessionId);
+  const entry = sessionLog(character).find(x => x.id === sessionId);
+  if (!raw || !entry) { renderChronicle(); return; }
+  const draft = raw._synopsisDraft != null ? raw._synopsisDraft : (raw.recap || "");
+  const details = raw._synopsisCaption != null ? raw._synopsisCaption : sessionKeyDetails(entry);
+  const span = entry.startDay != null && entry.endDay != null ? (entry.startDay === entry.endDay ? `day ${entry.startDay}` : `days ${entry.startDay}–${entry.endDay}`) : "";
+  chrome(`<div class="screen" style="max-width:680px">
+    <h2>📮 Share this session</h2>
+    <div class="hint">A little narrative of what happened this session — ${esc(span || entry.id)}. Trim the story, choose the key details, then post. It's lensed to each viewer's rating and is never canon.</div>
+    ${raw._synopsisBusy ? `<div class="insight" style="margin-top:8px">writing…</div>` : ""}
+    <section style="margin-top:12px"><h3>The story</h3>
+      <textarea id="syn-text" rows="8" style="width:100%; font-family:var(--font); font-size:15px; line-height:1.5" ${raw._synopsisBusy ? "disabled" : ""}>${esc(draft)}</textarea>
+      ${getApiKey() ? `<button class="btn secondary" id="syn-chapter" style="margin-top:6px" ${raw._synopsisBusy ? "disabled" : ""}>${raw._chapterMode ? "↺ Shorter — one paragraph" : "✍ Longer — a chapter (2–3 paragraphs)"}</button>` : ""}
+    </section>
+    <section style="margin-top:10px"><h3>Key details <span class="cost">shown under the story (optional — clear to omit)</span></h3>
+      <textarea id="syn-caption" rows="2" style="width:100%">${esc(details)}</textarea>
+    </section>
+    <div style="display:flex; gap:8px; margin-top:14px">
+      <button class="btn" id="syn-post" ${raw._synopsisBusy ? "disabled" : ""}>📮 Post to the feed</button>
+      <button class="btn secondary" id="syn-cancel">Cancel</button>
+    </div>
+  </div>`);
+  const stash = () => { const t = document.getElementById("syn-text"), cap = document.getElementById("syn-caption"); if (t) raw._synopsisDraft = t.value; if (cap) raw._synopsisCaption = cap.value; };
+  document.getElementById("syn-cancel").onclick = () => { delete raw._synopsisDraft; delete raw._synopsisCaption; delete raw._chapterMode; renderChronicle(); };
+  const chBtn = document.getElementById("syn-chapter");
+  if (chBtn) chBtn.onclick = async () => {
+    stash(); raw._chapterMode = !raw._chapterMode; raw._synopsisBusy = true; renderSessionSynopsisReview(sessionId);
+    try {
+      const { system, user } = buildSessionPrompt(character, entry, { ratingLine: ratingLineForGM(), chapter: raw._chapterMode });
+      const text = await callClaude([{ role: "user", content: user }], { task: "chronicle", system });
+      if (String(text || "").trim()) raw._synopsisDraft = String(text).trim();
+    } catch { /* keep the prior draft on failure */ }
+    raw._synopsisBusy = false; renderSessionSynopsisReview(sessionId);
+  };
+  document.getElementById("syn-post").onclick = () => { stash(); postSessionSynopsis(sessionId, raw._synopsisDraft || draft, raw._synopsisCaption != null ? raw._synopsisCaption : details, span); };
+}
+
+async function postSessionSynopsis(sessionId, text, caption, span) {
+  const raw = (character.sessions || []).find(x => x.id === sessionId);
+  if (!syncEnabled() || !String(text || "").trim()) { renderChronicle(); return; }
+  const galImg = [...(character.gallery || [])].reverse().find(g => g && g.url && (g.kind === "moment" || g.kind === "scene"))?.url || null;
+  const post = buildFeedPost({
+    turn: { narration: text, scene: {} }, character, playerKey: getPlayerKey(),
+    worldDay: absoluteWorldDay(), worldDateLabel: span || worldDate().label,
+    rating: ratingCeilingNow(), excerpt: text, caption: String(caption || "").trim() || null,
+    image: galImg, at: Date.now(), kind: "synopsis"
+  });
+  if (!post) { renderChronicle(); return; }
+  const btn = document.getElementById("syn-post"); if (btn) { btn.disabled = true; btn.textContent = "Posting…"; }
+  try {
+    await pushMergedFile(FEED_PATH, (remote) => appendFeedPost(remote, post), `feed: ${character.name || character.id} shared a session synopsis`);
+    if (raw) { delete raw._synopsisDraft; delete raw._synopsisCaption; delete raw._chapterMode; }
+    saveCharacter(character);
+    renderChronicle();
+    const host = document.querySelector(".screen"); if (host) { const d = document.createElement("div"); d.className = "insight"; d.style.marginTop = "6px"; d.textContent = "📮 Your session synopsis is on the family feed."; host.prepend(d); }
+  } catch (e) {
+    const b2 = document.getElementById("syn-post"); if (b2) { b2.disabled = false; b2.textContent = "📮 Post to the feed"; }
+    const host = document.querySelector(".screen"); if (host) { const d = document.createElement("div"); d.className = "insight"; d.style.marginTop = "6px"; d.textContent = `Couldn't post right now — the story is safe, try again. (${e?.message || "sync error"})`; host.prepend(d); }
+  }
 }
 
 // SNG-133: enrich the seeded personal arc via the model (best-effort) — a richer premise/stakes/stages/

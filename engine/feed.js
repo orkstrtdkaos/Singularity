@@ -24,7 +24,7 @@ const POST_MAX_CHARS = 6000; // a whole turn's narration fits — the words are 
  *  the family reader's side (stamped from the poster's ceiling, mirroring how canon records stamp their rating).
  *  `kind`: "player" (a shared turn) or "world" (a world-tick of consequence). Pure — `at` is passed in (the
  *  caller supplies Date.now()). Returns null when there's nothing to post. */
-export function buildFeedPost({ turn, character, playerKey = null, worldDay = null, worldDateLabel = "", rating = null, excerpt = null, image = null, at = 0, kind = "player" } = {}) {
+export function buildFeedPost({ turn, character, playerKey = null, worldDay = null, worldDateLabel = "", rating = null, excerpt = null, image = null, at = 0, kind = "player", caption = null } = {}) {
   if (!turn || !character) return null;
   const text = smartClamp(String(excerpt || turn.narration || turn.text || "").trim(), POST_MAX_CHARS);
   if (!text) return null;
@@ -38,6 +38,7 @@ export function buildFeedPost({ turn, character, playerKey = null, worldDay = nu
     worldDay, worldDateLabel,
     rating,                                                                // the poster's ceiling at post time — the lens key
     narration: text,
+    caption: caption ? smartClamp(String(caption).trim(), 400) : null,     // SNG-241: optional structured key-details (session synopsis)
     image: image || turn.momentArt || turn.image || null, // caller may pass the best image (gallery fallback); else the turn's own
     postedAt: at
   };
@@ -68,7 +69,7 @@ export function feedForViewer(store, profile, { cap = 60 } = {}) {
     if (!p || !p.id) continue;
     const decision = lensDecision(p.rating, viewerLevel, p.narration || "", { viewerIsMinor });
     if (decision === "filter") continue;                                  // no analog at the viewer's ceiling → gone
-    if (decision === "adapt") out.push({ ...p, lensed: true, narration: "⌁ A charged moment from an intenser scene — softened for your rating.", image: null });
+    if (decision === "adapt") out.push({ ...p, lensed: true, narration: "⌁ A charged moment from an intenser scene — softened for your rating.", image: null, caption: null });
     else out.push({ ...p, lensed: false });
     if (out.length >= cap) break;
   }

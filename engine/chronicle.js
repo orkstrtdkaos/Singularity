@@ -128,8 +128,13 @@ export function buildSessionPrompt(character, session, ctx = {}) {
   const deeds = (s.deeds || []).map(d => `- (${d.weight > 0 ? "+" : ""}${d.weight}) ${d.description}`).join("\n") || "- (a quiet span — no deeds of note)";
   const made = [...(s.placesMinted || []).map(p => `place: ${p}`), ...(s.peopleMet || []).map(p => `person: ${p}`)].join("; ") || "nothing new";
   const persisted = (s.canonPromoted || []).join(", ") || "none yet";
-  const system = `You are the chronicler of Singularity. Recap ONE play SESSION in warm, grounded second person, exactly ONE short paragraph (45–90 words) — what happened and what it changed, not a list. Use ONLY the facts given; invent nothing. ${ctx.ratingLine || "Keep it within a PG ceiling; never sexualize a minor."}`;
-  const user = `Character: ${name}. Session ${s.id || ""} (days ${s.startDay ?? "?"}–${s.endDay ?? "?"}, ${s.beats || 0} beats).\n\nDeeds this session:\n${deeds}\n\nNew to the world this session: ${made}\nBecame shared-world canon this session: ${persisted}\n\nWrite the one-paragraph session recap.`;
+  // SNG-241: a longer "chapter" (2–3 short paragraphs) is the poster's option for a big session, since a
+  // session can hold more than a life-portrait glance. Default stays the tight one-paragraph recap.
+  const lengthSys = ctx.chapter
+    ? `TWO or THREE short paragraphs — a beginning/middle/where-it-left-off arc of the session, what happened and what it changed`
+    : `exactly ONE short paragraph (45–90 words) — what happened and what it changed, not a list`;
+  const system = `You are the chronicler of Singularity. Recap ONE play SESSION in warm, grounded second person, ${lengthSys}. Use ONLY the facts given; invent nothing. ${ctx.ratingLine || "Keep it within a PG ceiling; never sexualize a minor."}`;
+  const user = `Character: ${name}. Session ${s.id || ""} (days ${s.startDay ?? "?"}–${s.endDay ?? "?"}, ${s.beats || 0} beats).\n\nDeeds this session:\n${deeds}\n\nNew to the world this session: ${made}\nBecame shared-world canon this session: ${persisted}\n\nWrite the ${ctx.chapter ? "session chapter (2–3 short paragraphs)" : "one-paragraph session recap"}.`;
   return { system, user };
 }
 

@@ -1,5 +1,23 @@
 # PO ALERT
 
+> ## [DONE + spec] SNG-239 quest clarity + water_remembers rewritten (Aevi, 2026-07-25)
+> Erik: quests are opaque; they must CLARIFY as you perform steps; author the clear structure IN; and he wanted
+> the water quest to be a dormant PRECURSOR waking that he could walk into the world.
+> - **Diagnosis:** the opacity is the GM WITHHOLDING the earned reveal (Rule 4 'reveal in fragments' mis-applied
+>   to earned stage `change`s; under the 114-MUST load 'be mysterious' beats 'report progress'). Specced the
+>   QUEST CLARITY rule: a stage's `change` is an EARNED reveal - STATE IT PLAINLY; metaphor names but never
+>   replaces plain truth; opacity DECREASES each stage, CLEAR by the decision.
+> - **Rewrote what_the_water_remembers** (was sterile 'nanite system' + empty abstract endings): now a concrete
+>   pre-Transition WASTE-TREATMENT facility, stages that clarify (machine -> curdled instruction -> a presence
+>   in the deep -> a waking PRECURSOR), tied to arc_what_wakes_beneath (whose stage-1 literally names this
+>   poisoned water as its first tremor - the precursor path Erik wanted was ALREADY in the world). +Erik's 4th
+>   ending AWAKEN: wake it, it heals the river as its first act, WALKS the world bonded to Silas, world-scale
+>   wake. Four real roads, full text+effects, CI green.
+> CCODE: drop the QUEST CLARITY rule into gm.js (review); the nudge - when a stageOp fires, hand the stage
+> `change` as MUST-STATE this turn (SNG-237 pattern, don't leave the reveal to a soft rule under load).
+> AEVI owes: the clarity/structure audit across the other quests + find quests that should connect to a greater
+> arc but don't. ERIK owes: confirm the clarify-on-progress tone direction. Full: SPEC_SNG-239.
+
 > ## [DONE - Aevi's SNG-238 lane complete] Class swept + fixed + consumer-map authored (2026-07-25)
 > Erik: make the string-stages miss an EXAMPLE of a class; find+fix all; seed the generator proof. Aevi's side done:
 > - **Swept + fixed ALL of the class** (19 quests): 7 hunts (string stages, variant 1) + 8 title-less object

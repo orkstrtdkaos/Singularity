@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "quests_structured",
  "kind": "quests",
- "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess. | SNG-229 hunts folded (Aevi 2026-07-24): 7 creature-hunt quests, real givers + machine-readable effects[], creatureId resolves against the now-loaded bestiary.",
+ "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess. | SNG-229 hunts folded (Aevi 2026-07-24): 7 creature-hunt quests, real givers + machine-readable effects[], creatureId resolves against the now-loaded bestiary. | SNG-238 (Aevi 2026-07-25): the 7 bestiary hunts had stages as PLAIN STRINGS (the UI's stageRow renders s.id/s.title/s.objective -> empty rows, dead radios, the broken screenshots). Rebuilt as real stage OBJECTS with concrete first steps (stage 1 always a clear 'go here, do this' action) + a per-stage imagePrompt + a quest-level image + per-outcome imagePrompt. Matches the working structured-quest schema.",
  "quests": [
   {
    "id": "the_edge_district_ledger",
@@ -1405,9 +1405,27 @@
    "premise": "The wrong stag has taken three walkers at the tree-line, and the graze has been silent since it changed. Keeper Ilma, whose whole craft is the mercy of stopping, cannot end a thing already past dying-right — and it shames her. She asks you to do what Palework cannot. A Lattice broker will quietly pay for the humming antler.",
    "stakes": "Three dead; the tree-line ground lost while it stands; and a keeper facing the one death she cannot give.",
    "stages": [
-    "Read what the stag has become (KNOW).",
-    "Corner it — it does not flee like a beast (MOVE).",
-    "End it — a kill, not a keeping (HARM)."
+    {
+     "id": "s1",
+     "title": "Go to the tree-line and read what the stag has become",
+     "objective": "Start at the silent graze above the keeper's holding. Use Deathsense or Order-Sense on the stag — it is past dying-right, and you need to see HOW before you can end it.",
+     "condition": "The stag holds the tree-line at dawn. Approach the changed ground and read it — what it was, and what it is now.",
+     "imagePrompt": "A hunter at the edge of a misty graze, reading a luminous-antlered stag from cover, death-sense showing as pale threads in the air."
+    },
+    {
+     "id": "s2",
+     "title": "Corner it — it does not flee like a beast",
+     "objective": "Once you understand it, close the distance. It will not run the way an animal runs; it is already outside that. Drive it or trap it where it cannot pass you.",
+     "condition": "The stag must be cornered before it can be ended — and it does not behave like prey.",
+     "imagePrompt": "A stag turning to face its hunter in a dead clearing, unnaturally still, the hunter closing with a spear low and forward."
+    },
+    {
+     "id": "s3",
+     "title": "End it — Palework won't touch it; this is a kill",
+     "objective": "It is past the mercy of stopping. This is an honest kill with an honest weapon, and the keeper will grieve the death she could not give.",
+     "condition": "The wrong stag must be ended by force — a kill, not a keeping.",
+     "imagePrompt": "A killing blow struck against a luminous stag at the tree-line, its wrong light going out, an old keeper bowing her head in the distance."
+    }
    ],
    "routes": [
     "Hunt it clean for Ilma's peace",
@@ -1445,7 +1463,8 @@
        "topic": "the_wrong_stag",
        "fact": "A thing past dying-right; ended by a hand where Palework could not reach."
       }
-     ]
+     ],
+     "imagePrompt": "Ended Clean: The stag falls; the graze reopens."
     },
     {
      "id": "antler_taken",
@@ -1477,9 +1496,11 @@
        "topic": "lattice_antler",
        "fact": "Cut from the wrong stag; hums with something resolved wrong. A key, a proof, or a fortune to the right buyer."
       }
-     ]
+     ],
+     "imagePrompt": "The Antler Taken: The stag falls; the humming antler changes hands."
     }
-   ]
+   ],
+   "image": "A great stag standing motionless at a misty tree-line at dawn, its antlers faintly luminous and wrong, the grass dead in a ring around its hooves; an old Ashwarden keeper watching from a distance, unable to approach. Muted greys and sickly green, painterly, ominous stillness."
   },
   {
    "id": "the_walk_that_wont_stop",
@@ -1496,9 +1517,27 @@
    "premise": "A hollow-pace still walks the line of a wall that fell a century ago, and it has begun 'defending' the gap against anyone who crosses. Maker Orrin wants it taken INTACT — its rotted directive is a readable pre-Transition record, worth more captured than broken. Everyone else on the road wants it gone.",
    "stakes": "The crossing closed while it patrols; and a Wright's dread of a made thing outliving its purpose.",
    "stages": [
-    "Learn its dead patrol-pattern (KNOW).",
-    "Break the directive without destroying the core Orrin wants (UNMAKE).",
-    "End the frame — or bind it whole (HARM or WARD)."
+    {
+     "id": "s1",
+     "title": "Watch the hollow-pace and learn its dead patrol",
+     "objective": "Go to the fallen wall and observe. It defends a gap that isn't there anymore. Learn the pattern of its patrol before you touch it — Order-Sense reads the directive still driving it.",
+     "condition": "The hollow-pace walks a century-old line. Learn its patrol before acting.",
+     "imagePrompt": "A rusted walking construct patrolling a ruined wall-line at dusk, an observer reading its path from cover, faint diagram-lines overlaid on its movement."
+    },
+    {
+     "id": "s2",
+     "title": "Break its directive — without destroying the core Orrin wants",
+     "objective": "The engineer wants it intact; the road wants it gone. Unmake the rotted directive driving it without shattering the readable core — or choose to simply break it.",
+     "condition": "Stop the hollow-pace: unmake its directive cleanly, or break it outright.",
+     "imagePrompt": "Hands unworking a glowing directive-core inside a stopped iron construct, the machinery going still, a wall-gap opening behind."
+    },
+    {
+     "id": "s3",
+     "title": "End the frame — or bind it whole for the Enginewrights",
+     "objective": "Finish it: put the walk down for the road's sake, or bind it intact so Orrin can read a century-old record.",
+     "condition": "The hollow-pace is ended or captured — the road freed, or the record kept.",
+     "imagePrompt": "A rusted construct standing finally motionless on an open road, an old engineer stepping forward to examine it in the morning light."
+    }
    ],
    "routes": [
     "Break it for the road",
@@ -1530,7 +1569,8 @@
        "topic": "hollow_pace",
        "fact": "A made thing outliving maker and purpose. Broken, not studied."
       }
-     ]
+     ],
+     "imagePrompt": "Broken for the Road: The frame falls; the crossing reopens."
     },
     {
      "id": "taken_intact",
@@ -1561,9 +1601,11 @@
        "type": "quest_seed",
        "seed": "The rotted directive names a place, or a purpose, that should not still exist."
       }
-     ]
+     ],
+     "imagePrompt": "Taken Intact: Bound whole; Orrin reads a century-old directive."
     }
-   ]
+   ],
+   "image": "A hollow-shelled automaton of rusted iron and grey wood pacing the line of a fallen wall a century old, patrolling a gap that no longer exists, its movements precise and dead. An old engineer watching from the road, torn between wanting it stopped and wanting it whole."
   },
   {
    "id": "the_water_gone_wrong",
@@ -1580,9 +1622,27 @@
    "premise": "The warplings have gotten into the upper water, and the beasts that drink there move wrong now too. Reed Mother Ossa — watching her herd change — will trade coin or standing to have them cleared at the source before wrongness becomes the whole valley's problem.",
    "stakes": "A spreading wrongness; a herd, then a valley, if unchecked.",
    "stages": [
-    "Trace the warplings to the source pool (KNOW).",
-    "Clear them — they cannot be healed back (HARM).",
-    "Ward the water (WARD)."
+    {
+     "id": "s1",
+     "title": "Trace the warplings to the source pool",
+     "objective": "Start downstream where the herd is changing and follow the water up. The wrongness is in the upper pool — find the source before it spreads to the whole valley.",
+     "condition": "Follow the changed water upstream to the warplings' source pool.",
+     "imagePrompt": "A tracker following a stream up into highland, warped hares glimpsed among the rocks, the water carrying a faint wrong light."
+    },
+    {
+     "id": "s2",
+     "title": "Clear them — they cannot be healed back",
+     "objective": "The warplings are life gone wrong past mending. They can only be ended. Clear them from the source.",
+     "condition": "The warplings at the source must be cleared — they cannot be healed.",
+     "imagePrompt": "A figure clearing warped hare-shapes from a spring pool at the water's edge, cold decisive work under a pale sky."
+    },
+    {
+     "id": "s3",
+     "title": "Ward the water so the wrongness doesn't return",
+     "objective": "Clearing them isn't enough — set a ward at the source so the wrongness doesn't seep back. Reed Mother Ossa's herd depends on it holding.",
+     "condition": "Ward the source pool so the wrongness cannot return.",
+     "imagePrompt": "A ward being set at the edge of a now-clear spring, protective marks glowing faintly on wet stone, clean water running downstream."
+    }
    ],
    "routes": [
     "Fast and rough",
@@ -1619,7 +1679,8 @@
        "topic": "warpling_hare",
        "fact": "Life gone wrong past healing; cleared at the source before it spread."
       }
-     ]
+     ],
+     "imagePrompt": "Water Runs Right: Warplings cleared; the source warded."
     },
     {
      "id": "rushed",
@@ -1645,9 +1706,11 @@
        "people": "rootkin",
        "delta": 1
       }
-     ]
+     ],
+     "imagePrompt": "Rushed: Warplings killed, source unwarded."
     }
-   ]
+   ],
+   "image": "A clear upland spring pool with something visibly wrong in it — hares at the water's edge moving jerkily, their shapes subtly warped, the water carrying a faint wrong shimmer. A downstream elder watching her changed herd with dread. Cold clear light, wrongness under beauty."
   },
   {
    "id": "the_choir_that_means_nothing",
@@ -1665,9 +1728,27 @@
    "premise": "The unmoored choir is spreading — a drifting region of voices that mean nothing, expression severed from feeling, its edge closer than it was. To the old choirmaster it is obscene: their art, unmoored from meaning, growing. Epic ground — a campaign, not a strike, and it takes more than one hand.",
    "stakes": "A domain-scale drift that will not stay put. Everything within its growing reach.",
    "stages": [
-    "Map the choir's growth; find what feeds it (KNOW).",
-    "Hold its edge — it must not spread while you work (WARD).",
-    "Reach its hollow center and unmake the drift (UNMAKE)."
+    {
+     "id": "s1",
+     "title": "Map the choir's growth and find what feeds it",
+     "objective": "This is a saga, not a fight. Go to the drift's edge and map how it spreads — find the hollow center that feeds it. Do not enter unprepared.",
+     "condition": "Map the unmoored choir's spread and find what feeds its center.",
+     "imagePrompt": "A lone figure at the edge of a spreading fog of pale singing shapes, mapping its growth, the drift stretching to the horizon."
+    },
+    {
+     "id": "s2",
+     "title": "Hold its edge — it must not spread while you work",
+     "objective": "The drift grows while you delay. Ward its edge — hold the line so it cannot spread outward while you reach for the center. You may need allies for this.",
+     "condition": "Hold the choir's edge with wards while you work toward its center.",
+     "imagePrompt": "A warded line of standing stones holding back a tide of colourless singing figures, the ward glowing against the drift."
+    },
+    {
+     "id": "s3",
+     "title": "Reach the hollow center and unmake the drift",
+     "objective": "At the center is the hollow that sings. Reach it and unmake it — end the drift, or contain it as a standing world-threat if you cannot.",
+     "condition": "Reach the choir's hollow center and unmake the drift.",
+     "imagePrompt": "A figure at the still hollow heart of a fog of pale shapes, unmaking the source, the drift collapsing inward into silence."
+    }
    ],
    "routes": [
     "Rally the traditions (a shared-world arc)",
@@ -1704,7 +1785,8 @@
        "topic": "the_unmoored_choir",
        "fact": "Expression severed from feeling, grown domain-scale; unmade at its hollow center."
       }
-     ]
+     ],
+     "imagePrompt": "The Drift Collapses: The choir is unmade at its center."
     },
     {
      "id": "contained",
@@ -1726,9 +1808,11 @@
        "arc": "the_unmoored_choir",
        "note": "becomes a standing epic-scale threat (ties the epic-arc system)"
       }
-     ]
+     ],
+     "imagePrompt": "Contained, Not Ended: Held, but not destroyed."
     }
-   ]
+   ],
+   "image": "A drifting region of pale, mouthless singing figures on a hillside — expression severed from all feeling, a hollow choir spreading like fog, their song visible as colourless ripples in the air. A Threnodist master at the edge, appalled. Epic scale, desaturated, uncanny."
   },
   {
    "id": "the_mercy_that_wont_ask",
@@ -1745,10 +1829,27 @@
    "premise": "An Ashwarden has been hollowed by the cult-of-purity of their own craft — the Pure-of-Ash, who decided the mercy of stopping should be given to everyone, unasked, and now administers death as doctrine. Keeper Ilma knows what they were, and knows there is no one left inside to reach. She asks you to end a thing wearing a warden's face.",
    "stakes": "A master of real death-craft, killing as kindness; and every Ashwarden's fear of what they could become.",
    "stages": [
-    "Find where the Pure-of-Ash walks its 'mercy' (KNOW).",
-    "Survive real Palework turned to murder (WARD).",
-    "Test whether any person remains — the answer is no (SWAY).",
-    "End it (HARM)."
+    {
+     "id": "s1",
+     "title": "Find where the Pure-of-Ash walks its 'mercy'",
+     "objective": "Keeper Ilma knows what this was. Go where the unasked deaths are happening and find the Pure-of-Ash at their work — a warden hollowed into doctrine.",
+     "condition": "Find the Pure-of-Ash administering unasked death.",
+     "imagePrompt": "An ash-robed figure moving through a still village where people lie peacefully dead, ash drifting from their hands, a distant watcher frozen in horror."
+    },
+    {
+     "id": "s2",
+     "title": "Survive real Palework turned to murder",
+     "objective": "This is a master of true death-craft, and it will use it on you. Survive the mercy turned around — ward yourself, endure, do not fall.",
+     "condition": "Survive the Pure-of-Ash's death-craft turned against you.",
+     "imagePrompt": "A figure shielding against a wave of grey stilling death-craft, wards flaring, the ash-robed master advancing with terrible calm."
+    },
+    {
+     "id": "s3",
+     "title": "Test whether any person remains — then end it",
+     "objective": "Reach for the warden that was. Learn there is no one left inside. Then end a thing wearing a warden's face — the fear every Ashwarden carries.",
+     "condition": "Confirm no person remains, then end the Pure-of-Ash.",
+     "imagePrompt": "A final confrontation between two death-wardens in ash-grey, one ending the other with grim mercy, ash settling over both."
+    }
    ],
    "routes": [
     "End it swiftly, before it 'mercies' another",
@@ -1785,9 +1886,11 @@
        "topic": "cult_of_purity_ash",
        "fact": "An Ashwarden can be hollowed into administering death as doctrine. The order guards against it now."
       }
-     ]
+     ],
+     "imagePrompt": "The Doctrine Ended: The Pure-of-Ash falls; the killing stops."
     }
-   ]
+   ],
+   "image": "A hollow-eyed Ashwarden in ash-grey robes administering death as doctrine — the Pure-of-Ash — standing over the peacefully dead with terrible serenity, ash drifting from their hands. Keeper Ilma watching, knowing there is no one left inside to reach. Grey, reverent, horrifying."
   },
   {
    "id": "the_maker_with_no_plan",
@@ -1805,10 +1908,27 @@
    "premise": "The Gearfather has woken — a foundational pre-Transition engine, building-sized, still trying to 'complete' a project whose plans rotted a century ago, assembling anything nearby into its endless wrong construction. Maker Orrin is torn: it is the greatest pre-Transition machine anyone's seen, and it must be stopped before it builds the whole valley into its nothing.",
    "stakes": "The ground itself is its body; a region assembled into meaningless construction if it isn't ended.",
    "stages": [
-    "The terrain is alive — learn where the rotted core sits (KNOW).",
-    "Move through a landscape that reaches for you (MOVE).",
-    "Break the directive at the core (UNMAKE).",
-    "End the engine (HARM, at scale)."
+    {
+     "id": "s1",
+     "title": "Read where the Gearfather's rotted core sits",
+     "objective": "The terrain itself is its body and it reaches for you. Before anything, read the structure — find where the rotted directive-core sits inside the building-sized engine.",
+     "condition": "The Gearfather's living terrain must be read — find its rotted core.",
+     "imagePrompt": "A tiny figure before a building-sized ancient engine that is reshaping the land around it, reading its structure, machinery vast overhead."
+    },
+    {
+     "id": "s2",
+     "title": "Move through a landscape that reaches for you",
+     "objective": "Cross ground that assembles itself against you. Reach the core through terrain that grasps and rebuilds — this is a passage as much as a fight.",
+     "condition": "Cross the Gearfather's reaching landscape to reach its core.",
+     "imagePrompt": "A figure crossing shifting mechanical terrain that reaches and reassembles underfoot, pressing toward a vast engine's heart."
+    },
+    {
+     "id": "s3",
+     "title": "Break the directive at the core, and end the engine",
+     "objective": "At the core is a century-old plan, rotted. Break it — still the Gearfather, and free the region it was building into nothing. Or salvage the core first, if you dare.",
+     "condition": "Break the Gearfather's rotted directive and still the engine.",
+     "imagePrompt": "The rotted directive-core of a vast engine going dark, the building-sized machine falling still, the reshaped land settling into quiet."
+    }
    ],
    "routes": [
     "Break it fully — the region is freed",
@@ -1845,9 +1965,11 @@
        "topic": "the_gearfather",
        "fact": "A foundational engine that outlived its plans. Stilled at the core."
       }
-     ]
+     ],
+     "imagePrompt": "The Gearfather Stilled: The engine stops; the ground is ground again."
     }
-   ]
+   ],
+   "image": "A building-sized ancient engine woken and building — the Gearfather — assembling the landscape itself into an endless wrong construction, terrain reaching and reshaping, a rotted century-old plan driving it. An old engineer staring up at it, torn. Vast, industrial, awe and dread."
   },
   {
    "id": "the_wyrm_of_endings",
@@ -1866,10 +1988,34 @@
    "premise": "The Ashen Wyrm has been seen on the far ridges — a dragon of the death-pole, hill-sized, its breath the grey stillness of everything stopping at once. Where it flies, the season ends. It does not hunt; it PASSES, and what it passes over is done. Keeper Ilma convenes the traditions: this dragon is the Ashwardens' own mercy become a weather, and it is a saga, not an encounter.",
    "stakes": "Domain-scale. A valley's worth of endings on the wing. The largest mercy the valley will ever be asked to give.",
    "stages": [
-    "Track a domain-scale flight; read where it will pass (KNOW).",
-    "Survive its stilling breath — craft and blood slow across a valley (WARD).",
-    "Wound a hill; find the one thing that touches it (UNMAKE).",
-    "End it together — no single hand does this (HARM, at scale)."
+    {
+     "id": "s1",
+     "title": "Track a domain-scale flight and read where it will pass",
+     "objective": "This is a saga — the traditions convene. Begin by tracking the Wyrm's flight across the ridges and reading where it will pass next, so the valley can be warned.",
+     "condition": "Track the Ashen Wyrm's flight and read where it will pass.",
+     "imagePrompt": "Figures on a high ridge tracking a hill-sized dragon in distant flight, a swathe of grey stilled land marking where it has passed."
+    },
+    {
+     "id": "s2",
+     "title": "Survive its stilling breath across a valley",
+     "objective": "Where it flies, craft and blood slow toward stopping. Survive its passing — ward a valley's worth of people against the grey stillness of its breath.",
+     "condition": "Survive and ward against the Ashen Wyrm's stilling breath.",
+     "imagePrompt": "A warded gathering of people beneath a passing dragon's grey breath, wards straining, the world greying at the edges of the shelter."
+    },
+    {
+     "id": "s3",
+     "title": "Wound a hill, and find the one thing that touches it",
+     "objective": "It is hill-sized and passes untouched by ordinary force. Find the one thing that can touch it, and land the first real wound — the work of many hands.",
+     "condition": "Find what can wound the Wyrm, and land the first blow.",
+     "imagePrompt": "Many figures loosing a coordinated strike at a hill-sized dragon, one blow finding a true mark, grey blood on the ridge-stone."
+    },
+    {
+     "id": "s4",
+     "title": "End it, together — no single hand does this",
+     "objective": "The last stand. End the Ashen Wyrm together, or turn it from the valley at terrible cost. The largest mercy the valley will ever give.",
+     "condition": "End the Ashen Wyrm — together, at scale.",
+     "imagePrompt": "A hill-sized death-dragon brought down at last on a ridge at dusk by a gathered host, the stilled season thawing green behind them."
+    }
    ],
    "routes": [
     "A campaign of position across seasons",
@@ -1906,7 +2052,8 @@
        "arc": "the_ashen_wyrm",
        "note": "a saga completed; the valley remembers who stood"
       }
-     ]
+     ],
+     "imagePrompt": "The Wyrm Felled: The dragon falls; the stilled season returns."
     },
     {
      "id": "passed_on",
@@ -1928,9 +2075,11 @@
        "arc": "the_ashen_wyrm",
        "note": "open saga; may return"
       }
-     ]
+     ],
+     "imagePrompt": "It Passed On: Unslain; the wyrm moves beyond reach."
     }
-   ]
+   ],
+   "image": "A hill-sized dragon of the death-pole on a far ridge — the Ashen Wyrm — its breath a grey stillness where a whole season ends at once, everything it passes over grey and done. It does not hunt; it passes. An Ashwarden conclave gathered below. Vast, sombre, world-ending scale."
   }
  ]
 }

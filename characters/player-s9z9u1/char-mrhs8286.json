@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 26,
-  "xp": 2553,
+  "xp": 2556,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -163,7 +163,7 @@
   "maxHealth": 155,
   "health": 155,
   "maxEnergy": 225,
-  "energy": 180,
+  "energy": 176,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1956,53 +1956,19 @@
         "player": "Use The Attended End once more — read not Logana, but the relay node itself; understand what it is doing and what it is preparing",
         "summary": "Silas reads the relay node through The Attended End — it is not failing, it is following its last order: prepare the watershed. The gray water is its work, faithful and unguided.",
         "narration": "You turn The Attended End away from Logana and toward the hollow at the base of the downed tree — toward the relay node seated in its nest of old wood and frost-cracked earth.\n\nThe reading comes in clean and quiet. The node is not ending. That is the first thing you understand, and it settles a fear you had not quite named. It is old — pre-Transition, built for a task that was given to it before any of you were born — and it is still doing that task. The task is: prepare the watershed. Not repair it. Not protect it. Prepare it. For something that has not yet arrived.\n\nThe node is not failing or leaking or damaged. It is running its last instruction faithfully, the way a well-made thing does when no one tells it to stop. The thread that runs north-and-west toward the upper Zone carries the same signal it has been carrying for fifteen years — a slow, patient readying of the water table, the soil, the ground-chemistry. It does not know that no one came to receive what it prepared. It only knows the work is not finished.\n\nHuginn shifts on the flat stone at the clearing's edge. You do not look up at it. The node's ending, when it comes, will not be soon — it has years left in it, maybe decades. But the water running gray through Millbrook's intake is the nearest edge of what it has been doing, all this time, without a hand to guide it.\n\n*✦ What the Water Remembers — The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to.. Every stage is done; how it ends is yours to choose.*"
+      },
+      {
+        "player": "Use Order-Sense on the node — read the full design it belongs to; find what it was waiting to receive",
+        "summary": "Order-Sense on the relay node: a receiving station built to gather and pass — north, to a response point that has not answered. The design extends beyond reach.",
+        "narration": "You open Order-Sense wide and push it into the relay node's structure — not just what the node is doing, but what it belongs to, what it was built inside. The craft runs thin here and you feel it: the substrate is starved, the reading costs more than it should, and the edges of what you reach blur where they should be sharp.\n\nWhat comes back is partial. The node is part of a larger lattice — you knew that already — but the design you are trying to read extends further north than your reach can carry. You can see the spoke you are standing on. You cannot see the wheel. The node was built as a receiving station, not a broadcasting one — it gathers, conditions, and holds what the watershed sends it, then passes it onward. What it passes it onward to is exactly the part that blurs out.\n\nYou catch one clear thing before the reading closes. The design has a relay interval — a timing built into it, not a malfunction. The node is not running continuously. It pulses. And the pulse pattern is not random. It is waiting for a response signal from somewhere north of here, and it has not received one in a very long time. What you cannot read is whether the absence of that signal means the receiver is gone, or whether it means the receiver has simply not yet arrived.\n\nHuginn shifts on the flat stone at the clearing's edge. Silas said the bird croaks once, low and unhurried. It does not repeat itself, and when you look at it, it is watching the northern treeline."
       }
     ],
     "lastTurn": {
-      "narration": "You turn The Attended End away from Logana and toward the hollow at the base of the downed tree — toward the relay node seated in its nest of old wood and frost-cracked earth.\n\nThe reading comes in clean and quiet. The node is not ending. That is the first thing you understand, and it settles a fear you had not quite named. It is old — pre-Transition, built for a task that was given to it before any of you were born — and it is still doing that task. The task is: prepare the watershed. Not repair it. Not protect it. Prepare it. For something that has not yet arrived.\n\nThe node is not failing or leaking or damaged. It is running its last instruction faithfully, the way a well-made thing does when no one tells it to stop. The thread that runs north-and-west toward the upper Zone carries the same signal it has been carrying for fifteen years — a slow, patient readying of the water table, the soil, the ground-chemistry. It does not know that no one came to receive what it prepared. It only knows the work is not finished.\n\nHuginn shifts on the flat stone at the clearing's edge. You do not look up at it. The node's ending, when it comes, will not be soon — it has years left in it, maybe decades. But the water running gray through Millbrook's intake is the nearest edge of what it has been doing, all this time, without a hand to guide it.\n\n*✦ What the Water Remembers — The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to.. Every stage is done; how it ends is yours to choose.*",
-      "sceneSummary": "Silas reads the relay node through The Attended End — it is not failing, it is following its last order: prepare the watershed. The gray water is its work, faithful and unguided.",
+      "narration": "You open Order-Sense wide and push it into the relay node's structure — not just what the node is doing, but what it belongs to, what it was built inside. The craft runs thin here and you feel it: the substrate is starved, the reading costs more than it should, and the edges of what you reach blur where they should be sharp.\n\nWhat comes back is partial. The node is part of a larger lattice — you knew that already — but the design you are trying to read extends further north than your reach can carry. You can see the spoke you are standing on. You cannot see the wheel. The node was built as a receiving station, not a broadcasting one — it gathers, conditions, and holds what the watershed sends it, then passes it onward. What it passes it onward to is exactly the part that blurs out.\n\nYou catch one clear thing before the reading closes. The design has a relay interval — a timing built into it, not a malfunction. The node is not running continuously. It pulses. And the pulse pattern is not random. It is waiting for a response signal from somewhere north of here, and it has not received one in a very long time. What you cannot read is whether the absence of that signal means the receiver is gone, or whether it means the receiver has simply not yet arrived.\n\nHuginn shifts on the flat stone at the clearing's edge. Silas said the bird croaks once, low and unhurried. It does not repeat itself, and when you look at it, it is watching the northern treeline.",
+      "sceneSummary": "Order-Sense on the relay node: a receiving station built to gather and pass — north, to a response point that has not answered. The design extends beyond reach.",
       "choices": [
         {
-          "label": "Ask Huginn plainly — does it know what the node was preparing the watershed for?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use Order-Sense on the node — read the full design it belongs to; find what it was waiting to receive",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "The node is still running — walk north-and-west, follow the thread it broadcasts, see where the signal leads",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "travel",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Return south to Pell and Veth — carry what you know, brief the party, and decide together what to do with a node still broadcasting to an empty watershed",
+          "label": "Pull back to Pell and Veth — carry what you know south and read the node's design with Veth's warden knowledge against yours",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -2010,22 +1976,53 @@
             "travel",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
+        },
+        {
+          "label": "Ask Huginn plainly — it is watching the north; ask what it sees ending in that direction",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Deathsense on the northern treeline — read whether anything up there is ending, or whether the absence of signal feels like a death or like an absence",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Use The Attended End on the node's pulse itself — read the interval it is waiting on; what kind of thing was supposed to answer it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
       "characterDeltas": {
-        "health": 0,
-        "energy": -2,
-        "xp": 0
+        "energy": -2
       },
       "scene": {
         "setting": "Frost-hard clearing two hundred yards north-and-west of the made gate — dead birch and alder at the edges, early-spring dawn, flat pale light. The relay node sits exposed in the hollow at the downed tree's base.",
         "npcsPresent": [
           {
             "name": "Huginn",
-            "state": "Shifted on the flat stone at the clearing's edge — turned toward Silas, still, waiting."
+            "state": "Shifted on the flat stone at the clearing's edge — watching the northern treeline, still."
           },
           {
             "name": "Logana",
@@ -2042,14 +2039,16 @@
         ],
         "objects": [
           "the downed dead tree — rotten wood excavated, hollow at its base",
-          "the pre-Transition relay node — seated in the hollow, broadcasting north-and-west toward the watershed",
+          "the pre-Transition relay node — seated in the hollow, pulsing at a timed interval, broadcasting north-and-west",
           "frost-hard ground with four-toed impressions",
           "Logana — skeletal wolverine guardian, two intentions braided in her bones",
           "resonance-burn along both of Silas's forearms — reduced but present"
         ],
         "threads": [
-          "The node is not failing — it is following its last order; the watershed preparation is active and ongoing",
-          "What was the node preparing the watershed to receive?",
+          "The node pulses on a timing interval, waiting for a response signal from somewhere north — the receiver has not answered",
+          "The design extends further north than Order-Sense could carry in this thin substrate",
+          "Whether the missing response means the receiver is gone or not yet arrived is unresolved",
+          "Huginn is watching the northern treeline and did not explain why",
           "The Zone's claim on Logana cannot be fully read in this substrate",
           "Veth's keep-moving warning is still live",
           "The party is still separated — two hundred yards of Zone ground between Silas and Pell, Veth, Huginn"
@@ -2057,29 +2056,29 @@
       },
       "codexUpdates": [
         {
-          "topic": "the-relay-node",
-          "label": "The Relay Node — Left Branch",
+          "topic": "what-the-water-remembers",
+          "label": "What the Water Remembers",
           "kind": "mystery",
-          "entityId": "zone-left-branch-entrance",
-          "fact": "The pre-Transition relay node at the downed tree's base is not failing or damaged — it is executing its last instruction: 'prepare the watershed.' It has been doing this faithfully for fifteen years, broadcasting a slow readying of the water table and ground-chemistry north-and-west toward the upper Zone. It does not know no one came to receive what it prepared. The gray water at Millbrook is the nearest edge of its work. Its ending is not soon — years or decades remain in it.",
+          "fact": "The relay node is a receiving station, not a broadcaster — it gathers, conditions, and passes the watershed north. It pulses on a timed interval, waiting for a response signal from somewhere north. The response has not come in a very long time. Whether the receiver is gone or simply not yet arrived cannot be read from here.",
           "links": [
-            "the-water-crisis",
-            "what-the-water-remembers",
             "zone-left-branch-entrance",
-            "millbrook"
+            "the-water-crisis",
+            "what-the-water-remembers"
           ]
         }
       ],
-      "stageOps": [
+      "npcUpdates": [
         {
-          "questId": "what-the-water-remembers",
-          "stageId": "s4",
-          "evidence": "The Attended End read the relay node directly — it is not malfunctioning, it is following its last instruction to prepare the watershed for a receiver that never came; the water crisis has a source, a purpose, and an intended recipient still unnamed."
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Shifted and croaked once at the northern treeline after Silas's Order-Sense on the node — watching north with the quality of something that has already read what is there.",
+          "statusNote": "On the flat stone at the clearing's edge — watching the northern treeline."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet, careful reading — a few minutes in the clearing"
+        "why": "a careful craft-read of the relay node"
       }
     },
     "sceneState": {
@@ -2087,7 +2086,7 @@
       "npcsPresent": [
         {
           "name": "Huginn",
-          "state": "Shifted on the flat stone at the clearing's edge — turned toward Silas, still, waiting."
+          "state": "Shifted on the flat stone at the clearing's edge — watching the northern treeline, still."
         },
         {
           "name": "Logana",
@@ -2104,17 +2103,17 @@
       ],
       "objects": [
         "the downed dead tree — rotten wood excavated, hollow at its base",
-        "the pre-Transition relay node — seated in the hollow, broadcasting north-and-wes",
+        "the pre-Transition relay node — seated in the hollow, pulsing at a timed interva",
         "frost-hard ground with four-toed impressions",
         "Logana — skeletal wolverine guardian, two intentions braided in her bones",
         "resonance-burn along both of Silas's forearms — reduced but present"
       ],
       "threads": [
-        "The node is not failing — it is following its last order; the watershed preparation is active and ongoing",
-        "What was the node preparing the watershed to receive?",
-        "The Zone's claim on Logana cannot be fully read in this substrate",
-        "Veth's keep-moving warning is still live",
-        "The party is still separated — two hundred yards of Zone ground between Silas and Pell, Veth, Huginn"
+        "The node pulses on a timing interval, waiting for a response signal from somewhere north — the receiver has not answered",
+        "The design extends further north than Order-Sense could carry in this thin substrate",
+        "Whether the missing response means the receiver is gone or not yet arrived is unresolved",
+        "Huginn is watching the northern treeline and did not explain why",
+        "The Zone's claim on Logana cannot be fully read in this substrate"
       ]
     }
   },
@@ -3024,6 +3023,268 @@
       "aliases": [],
       "startedAt": "2026-07-24T12:58:53.302Z",
       "startedWorldDay": 24
+    },
+    {
+      "id": "the-stag-that-wont-die",
+      "title": "The Stag That Won't Die",
+      "structured": true,
+      "status": "active",
+      "premise": "The wrong stag has taken three walkers at the tree-line, and the graze has been silent since it changed. Keeper Ilma, whose whole craft is the mercy of stopping, cannot end a thing already past dying-right — and it shames her. She asks you to do what Palework cannot. A Lattice broker will quietly pay for the humming antler.",
+      "stakes": "Three dead; the tree-line ground lost while it stands; and a keeper facing the one death she cannot give.",
+      "axis": "death_life",
+      "traditions": [
+        "ashwarden",
+        "marcher"
+      ],
+      "giver": "keeper_ilma",
+      "legend": null,
+      "region": "valley",
+      "tier": "notable",
+      "arcId": null,
+      "locationId": null,
+      "boundToCharacter": null,
+      "boundToPlayer": null,
+      "legendNpc": null,
+      "stages": [
+        {},
+        {},
+        {}
+      ],
+      "routes": {},
+      "outcomes": [
+        {
+          "id": "ended_clean",
+          "name": "Ended Clean",
+          "summary": "The stag falls; the graze reopens.",
+          "narration": [
+            "The wrong stag is put down. The tree-line ground is walkable again.",
+            "Keeper Ilma grieves the death she could not give — and trusts you with what her craft cannot reach."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "the_wrong_stag",
+              "state": "slain",
+              "note": "the changed ground reopens"
+            },
+            {
+              "type": "ally",
+              "npc": "keeper_ilma",
+              "note": "trusts you with the deaths her craft cannot keep"
+            },
+            {
+              "type": "disposition",
+              "people": "ashwarden",
+              "delta": 2
+            },
+            {
+              "type": "codex_fact",
+              "topic": "the_wrong_stag",
+              "fact": "A thing past dying-right; ended by a hand where Palework could not reach."
+            }
+          ]
+        },
+        {
+          "id": "antler_taken",
+          "name": "The Antler Taken",
+          "summary": "The stag falls; the humming antler changes hands.",
+          "narration": [
+            "You end the stag and cut the lattice-antler free. A Lattice broker pays well and asks nothing.",
+            "Ilma sees the stump. She says nothing. She remembers."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "the_wrong_stag",
+              "state": "slain",
+              "note": "antler taken"
+            },
+            {
+              "type": "disposition",
+              "people": "ashwarden",
+              "delta": -1
+            },
+            {
+              "type": "disposition",
+              "people": "lattice",
+              "delta": 1
+            },
+            {
+              "type": "codex_fact",
+              "topic": "lattice_antler",
+              "fact": "Cut from the wrong stag; hums with something resolved wrong. A key, a proof, or a fortune to the right buyer."
+            }
+          ]
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-26T00:14:30.501Z",
+      "startedWorldDay": 26
+    },
+    {
+      "id": "the-mercy-that-wont-ask",
+      "title": "The Mercy That Won't Ask",
+      "structured": true,
+      "status": "active",
+      "premise": "An Ashwarden has been hollowed by the cult-of-purity of their own craft — the Pure-of-Ash, who decided the mercy of stopping should be given to everyone, unasked, and now administers death as doctrine. Keeper Ilma knows what they were, and knows there is no one left inside to reach. She asks you to end a thing wearing a warden's face.",
+      "stakes": "A master of real death-craft, killing as kindness; and every Ashwarden's fear of what they could become.",
+      "axis": "death_life",
+      "traditions": [
+        "ashwarden",
+        "seraphic"
+      ],
+      "giver": "keeper_ilma",
+      "legend": null,
+      "region": "valley",
+      "tier": "regional",
+      "arcId": null,
+      "locationId": null,
+      "boundToCharacter": null,
+      "boundToPlayer": null,
+      "legendNpc": null,
+      "stages": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "routes": {},
+      "outcomes": [
+        {
+          "id": "ended",
+          "name": "The Doctrine Ended",
+          "summary": "The Pure-of-Ash falls; the killing stops.",
+          "narration": [
+            "You end the Pure-of-Ash. The 'merciful' deaths stop.",
+            "Ilma does not thank you. She goes to sit with her order, and reminds them what they must never become."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "the_pure_of_ash",
+              "state": "slain",
+              "note": "the doctrine of unasked mercy ends"
+            },
+            {
+              "type": "ally",
+              "npc": "keeper_ilma",
+              "note": "bound to you by a grief only you share"
+            },
+            {
+              "type": "disposition",
+              "people": "ashwarden",
+              "delta": 2
+            },
+            {
+              "type": "codex_fact",
+              "topic": "cult_of_purity_ash",
+              "fact": "An Ashwarden can be hollowed into administering death as doctrine. The order guards against it now."
+            }
+          ]
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-26T00:15:32.477Z",
+      "startedWorldDay": 26
+    },
+    {
+      "id": "the-wyrm-of-endings",
+      "title": "The Wyrm of Endings",
+      "structured": true,
+      "status": "active",
+      "premise": "The Ashen Wyrm has been seen on the far ridges — a dragon of the death-pole, hill-sized, its breath the grey stillness of everything stopping at once. Where it flies, the season ends. It does not hunt; it PASSES, and what it passes over is done. Keeper Ilma convenes the traditions: this dragon is the Ashwardens' own mercy become a weather, and it is a saga, not an encounter.",
+      "stakes": "Domain-scale. A valley's worth of endings on the wing. The largest mercy the valley will ever be asked to give.",
+      "axis": "death_life",
+      "traditions": [
+        "ashwarden",
+        "marcher",
+        "seraphic",
+        "mason"
+      ],
+      "giver": "keeper_ilma",
+      "legend": null,
+      "region": "valley",
+      "tier": "epic",
+      "arcId": null,
+      "locationId": null,
+      "boundToCharacter": null,
+      "boundToPlayer": null,
+      "legendNpc": null,
+      "stages": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "routes": {},
+      "outcomes": [
+        {
+          "id": "felled",
+          "name": "The Wyrm Felled",
+          "summary": "The dragon falls; the stilled season returns.",
+          "narration": [
+            "Together, the traditions bring the Ashen Wyrm down. The ridges it stilled thaw back to life.",
+            "It is the largest ending anyone living has given. No one celebrates. They keep it, the way Ashwardens keep all endings."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "the_ashen_wyrm",
+              "state": "slain",
+              "note": "the stilled season returns to the ridges"
+            },
+            {
+              "type": "disposition",
+              "people": "ashwarden",
+              "delta": 3
+            },
+            {
+              "type": "disposition",
+              "people": "marcher",
+              "delta": 2
+            },
+            {
+              "type": "world_arc",
+              "arc": "the_ashen_wyrm",
+              "note": "a saga completed; the valley remembers who stood"
+            }
+          ]
+        },
+        {
+          "id": "passed_on",
+          "name": "It Passed On",
+          "summary": "Unslain; the wyrm moves beyond reach.",
+          "narration": [
+            "You cannot bring it down, but you turn it — the Ashen Wyrm flies on, beyond the valley's edge.",
+            "It is a saga left open. Somewhere else, a season is ending."
+          ],
+          "effects": [
+            {
+              "type": "npc_state",
+              "npc": "the_ashen_wyrm",
+              "state": "departed",
+              "note": "unslain; a standing world-threat elsewhere"
+            },
+            {
+              "type": "world_arc",
+              "arc": "the_ashen_wyrm",
+              "note": "open saga; may return"
+            }
+          ]
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-26T00:16:07.511Z",
+      "startedWorldDay": 26
     }
   ],
   "npcRegistry": {
@@ -5250,7 +5511,7 @@
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
     "lastGenCount": 624,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
@@ -6863,22 +7124,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.14940238674924,
-    "cerebral": 13.696152478831834,
-    "social": 6.817740845609697,
-    "generous": 2.4477982046663915,
-    "cautious": 15.048627911349618,
-    "physical": 4.600216062695361,
-    "risky": 1.103376427752558,
-    "ruthless": 0.4701542622959658,
-    "carousing": 0.390468283842103,
-    "amorous": 1.4353593566395157,
-    "patient": 0.869784511870217,
-    "stealth": 0.00008393337065063272,
-    "devotion": 1.8524851484366192,
-    "craft": 2.9786075889411943,
-    "leadership": 1.2952019829681458,
-    "deception": 0.40194456919928956
+    "strategic": 18.67066732708051,
+    "cerebral": 14.353748666861039,
+    "social": 6.647297324469454,
+    "generous": 2.3866032495497316,
+    "cautious": 15.672412213565877,
+    "physical": 4.485210661127978,
+    "risky": 1.075792017058744,
+    "ruthless": 0.45840040573856666,
+    "carousing": 0.38070657674605046,
+    "amorous": 1.3994753727235278,
+    "patient": 0.8480398990734616,
+    "stealth": 0.00008183503638436689,
+    "devotion": 1.8061730197257035,
+    "craft": 2.9041423992176645,
+    "leadership": 1.262821933393942,
+    "deception": 0.3918959549693073
   },
   "aptitudes": [
     "strategist",
@@ -6886,7 +7147,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 858,
+  "actionCount": 859,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7276,8 +7537,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785024737783,
-  "rev": 1451,
+  "updatedAt": 1785025174166,
+  "rev": 1455,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9898,7 +10159,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 91,
+      "order_sense": 92,
       "palework": 31,
       "deathsense": 38,
       "shadowstep": 24,
@@ -10583,7 +10844,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 609,
+    "valley": 610,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -10744,10 +11005,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-26T00:12:17.781Z",
+      "lastAt": "2026-07-26T00:19:34.163Z",
       "startDay": 25,
       "endDay": 26,
-      "beats": 14
+      "beats": 15
     }
   ],
   "company": [
@@ -10994,15 +11255,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 230,
-    "choices": 230,
-    "characterDeltas": 96,
-    "scene": 230,
-    "npcUpdates": 206,
+    "sceneSummary": 231,
+    "choices": 231,
+    "characterDeltas": 97,
+    "scene": 231,
+    "npcUpdates": 207,
     "factUpdates": 18,
     "placeUpdates": 42,
-    "codexUpdates": 140,
-    "timeOps": 224,
+    "codexUpdates": 141,
+    "timeOps": 225,
     "imagePrompt": 6,
     "sceneEnded": 54,
     "itemUpdates": 5,
@@ -11020,7 +11281,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 230,
+  "_opTurns": 231,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

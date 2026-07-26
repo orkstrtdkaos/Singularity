@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 27,
-  "xp": 2631,
+  "xp": 2636,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -150,6 +150,22 @@
       "level": 1,
       "braided": true,
       "discovered": true
+    },
+    {
+      "abilityId": "dawn_surgery",
+      "level": 1
+    },
+    {
+      "abilityId": "prism_ward",
+      "level": 1
+    },
+    {
+      "abilityId": "radiant_lance",
+      "level": 1
+    },
+    {
+      "abilityId": "echo_memory",
+      "level": 1
     }
   ],
   "alignment": {
@@ -169,7 +185,7 @@
   "maxHealth": 160,
   "health": 160,
   "maxEnergy": 230,
-  "energy": 217,
+  "energy": 212,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1873,32 +1889,41 @@
         "player": "Walk south toward the reclamation site — follow the thread the model laid down",
         "summary": "The party walks south into the catchment, following the Working Model's thread toward the reclamation site.",
         "narration": "You pocket the Waymarker and turn south.\n\nThe thread the Working Model laid down is not a road — it is a direction held in your chest, the way you feel a seated bond when you move toward the place it points. The frost-hard ground crunches under your boots. Pell falls in at your left without being asked, Memory's weight balanced across her shoulders, her breath steady in the cold. Veth takes your right, one step behind, reading the tree-line the way she reads everything in the Zone — not with alarm, just with attention. Huginn drops from whatever branch he chose and traces a low arc ahead of you, disappearing into the mist.\n\nThe left-branch path is not a maintained road. It is a gap between stands of dark pine, the ground between them packed down by something that moved through regularly — the Zone's own traffic, not human feet. The mist sits lower here than it did at the hollow threshold, and the air has a faint mineral edge to it, the same taste the creek gives off when the grey-green runs. You do not need to name that aloud. Veth names it for you, quietly, without breaking stride.\n\n\"We are in the catchment now,\" she says. \"Everything from here drains south.\"\n\nThe thread pulls. The model held the reclamation site as a broad, low structure — pre-Transition, buried shallow, running a single instruction across the watershed it was built to serve. You can feel the relay node behind you, Logana steady over it, the Zone-thread in her warding like a wire still carrying current. Ahead, the mist thins just enough to show open ground beyond the treeline — low, frost-pale, and very still."
+      },
+      {
+        "player": "Push straight to the site — you know the shape, you know the question. Arrive and attend.",
+        "summary": "The party arrives at the reclamation site — a living pre-Transition ring, still running, waiting for an instruction to complete or stop.",
+        "narration": "The thread pulls you south through thinning mist and frost-hard ground, and you follow it without hesitation.\n\nThe pines open after twenty minutes of walking. The catchment drops into a shallow bowl — low ground where winter melt collects before it finds the creek downstream. The reclamation site is not a ruin. That is the first thing you understand when you see it. It is a working. A low ring of pale material, neither quite stone nor quite metal, flush with the earth so that the frost has built up around its lip in a continuous collar. Inside the ring, the ground is dark and wet, and the mineral smell you have been tracking since the gate is strongest here — clean, sharp, the smell of process rather than decay. The site breathes. Not metaphor — you can see the air above the ring moving slightly, warmer than the surrounding cold.\n\nVeth stops at the bowl's edge and says nothing. She already knew what it was.\n\nPell crouches and puts one hand near the ring without touching it. She straightens after a moment and looks at you. \"It's running,\" she said. Her voice is flat and certain. \"I can feel the order in it from here.\"\n\nHuginn lands on the ring's far lip and folds his wings. He does not call. He looks at the center of the ring, and then he looks at you, and the look is the kind he gives an ending when it has been waiting long enough.\n\nYou stand at the bowl's edge and the Working Model's thread releases — you are here, the bond has delivered you, and what is left is the question the site has been holding for fifteen years. The relay node's circuit runs through the ground beneath your feet right now. The site is active. It is not broken. It is waiting for an instruction, and it has been waiting since before the Transition, running its last order on an empty loop.\n\nThe Ashwarden part of you reads it plainly: this is a thing in the middle of its purpose. It has not finished. It has been finishing, slowly, for fifteen years. What you do next decides whether it finishes the right way, the wrong way, or whether it is told to stop."
       }
     ],
     "lastTurn": {
-      "narration": "You pocket the Waymarker and turn south.\n\nThe thread the Working Model laid down is not a road — it is a direction held in your chest, the way you feel a seated bond when you move toward the place it points. The frost-hard ground crunches under your boots. Pell falls in at your left without being asked, Memory's weight balanced across her shoulders, her breath steady in the cold. Veth takes your right, one step behind, reading the tree-line the way she reads everything in the Zone — not with alarm, just with attention. Huginn drops from whatever branch he chose and traces a low arc ahead of you, disappearing into the mist.\n\nThe left-branch path is not a maintained road. It is a gap between stands of dark pine, the ground between them packed down by something that moved through regularly — the Zone's own traffic, not human feet. The mist sits lower here than it did at the hollow threshold, and the air has a faint mineral edge to it, the same taste the creek gives off when the grey-green runs. You do not need to name that aloud. Veth names it for you, quietly, without breaking stride.\n\n\"We are in the catchment now,\" she says. \"Everything from here drains south.\"\n\nThe thread pulls. The model held the reclamation site as a broad, low structure — pre-Transition, buried shallow, running a single instruction across the watershed it was built to serve. You can feel the relay node behind you, Logana steady over it, the Zone-thread in her warding like a wire still carrying current. Ahead, the mist thins just enough to show open ground beyond the treeline — low, frost-pale, and very still.",
-      "sceneSummary": "The party walks south into the catchment, following the Working Model's thread toward the reclamation site.",
+      "narration": "The thread pulls you south through thinning mist and frost-hard ground, and you follow it without hesitation.\n\nThe pines open after twenty minutes of walking. The catchment drops into a shallow bowl — low ground where winter melt collects before it finds the creek downstream. The reclamation site is not a ruin. That is the first thing you understand when you see it. It is a working. A low ring of pale material, neither quite stone nor quite metal, flush with the earth so that the frost has built up around its lip in a continuous collar. Inside the ring, the ground is dark and wet, and the mineral smell you have been tracking since the gate is strongest here — clean, sharp, the smell of process rather than decay. The site breathes. Not metaphor — you can see the air above the ring moving slightly, warmer than the surrounding cold.\n\nVeth stops at the bowl's edge and says nothing. She already knew what it was.\n\nPell crouches and puts one hand near the ring without touching it. She straightens after a moment and looks at you. \"It's running,\" she said. Her voice is flat and certain. \"I can feel the order in it from here.\"\n\nHuginn lands on the ring's far lip and folds his wings. He does not call. He looks at the center of the ring, and then he looks at you, and the look is the kind he gives an ending when it has been waiting long enough.\n\nYou stand at the bowl's edge and the Working Model's thread releases — you are here, the bond has delivered you, and what is left is the question the site has been holding for fifteen years. The relay node's circuit runs through the ground beneath your feet right now. The site is active. It is not broken. It is waiting for an instruction, and it has been waiting since before the Transition, running its last order on an empty loop.\n\nThe Ashwarden part of you reads it plainly: this is a thing in the middle of its purpose. It has not finished. It has been finishing, slowly, for fifteen years. What you do next decides whether it finishes the right way, the wrong way, or whether it is told to stop.",
+      "sceneSummary": "The party arrives at the reclamation site — a living pre-Transition ring, still running, waiting for an instruction to complete or stop.",
       "choices": [
         {
-          "label": "Use Deathsense on the land ahead — read what the watershed is doing to itself",
+          "label": "Use Deathsense — read what the site has been doing to the watershed, and what it will do if it completes",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3
+          },
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
           "abilityId": "deathsense",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Use Order-Sense to read the reclamation site's design as you approach — see the whole structure before you enter it",
+          "label": "Use Order-Sense — read the full design: what the site was built to do, what instruction it is missing, and where the instruction should come from",
           "attribute": "mental",
           "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.3
+          },
           "difficulty": 15,
           "intentTags": [
-            "scout",
             "study"
           ],
           "abilityId": "order_sense",
@@ -1906,96 +1931,165 @@
           "trivial": false
         },
         {
-          "label": "Move carefully and let Veth lead — she has walked the Zone longer than you have",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Ask Veth what an Ashwarden warden would do here — she held a post for eleven years; she knows what it means to attend a thing that has been running too long",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "travel"
+            "study"
           ],
           "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Push straight to the site — you know the shape, you know the question. Arrive and attend.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
+          "label": "Reach through the relay node's circuit — the Waymarker already holds the system's shape; use that seated bond to speak to the site directly, and name what you have come to do",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "chaos_order": 0.2,
+            "death_life": -0.1
+          },
+          "difficulty": 30,
           "intentTags": [
-            "travel",
-            "plan"
+            "plan",
+            "risky"
           ],
-          "abilityId": null,
+          "abilityId": "the-held-place",
+          "energyCost": null,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "South of the sealed hollow, outdoors, dawn. Frost-hard ground in a gap between dark pine stands; low mist with a faint mineral edge. The party moves south along the catchment thread. Open ground visible ahead through thinning mist.",
+        "setting": "Outdoor, dawn, early spring. A shallow catchment bowl south of the left-branch path — frost at the lip of a low ring of pale material, flush with the earth. The air above the ring moves slightly, warmer than the surrounding cold. Mist is thinning. Mineral smell, clean and sharp.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Walking at Silas's left, Memory across her shoulders, breath steady."
+            "state": "Standing at the bowl's edge, one hand held near the ring without touching — confirmed it is running, now watching Silas."
           },
           {
             "name": "Veth",
-            "state": "One step behind at Silas's right, reading the tree-line steadily. Has just named the catchment."
+            "state": "Stopped at the bowl's edge, saying nothing — she already knew."
           },
           {
             "name": "Huginn",
-            "state": "Low arc ahead, disappeared into the mist — scouting the path forward."
+            "state": "Perched on the far lip of the ring, wings folded, watching the center and then Silas."
           }
         ],
         "objects": [
-          "Waymarker — pocketed, three bonds seated, fourth system-read held",
-          "Memory — carried by Pell",
-          "You Shall Not Pass ward — behind them, sealed at the hollow threshold",
-          "Logana — two hundred yards north-and-west, at the downed tree's base, watching the relay node"
+          "The reclamation ring — low, pale, flush with the earth, frost-collared, active",
+          "Waymarker — pocketed, four bonds seated including the system-read",
+          "Memory — across Pell's shoulders",
+          "Logana — two hundred yards north-and-west at the downed tree, watching the relay node"
         ],
         "threads": [
-          "The reclamation site — south, in the low open ground, still running its last instruction",
-          "The relay node's question — what was it built to send?",
-          "The decision — what to tell the site"
+          "The site is active and waiting for an instruction — complete or stop",
+          "The relay node's circuit runs through the ground here",
+          "The decision: what to tell the site"
         ]
-      },
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "a half-hour walk south through the catchment, steady pace in cold mist"
       },
       "questUpdates": [
         {
           "op": "progress",
           "questId": "what-the-water-remembers",
-          "note": "Party moving south through the catchment toward the reclamation site — the Working Model's thread held, the path clear."
+          "note": "The party has arrived at the reclamation site — active, not broken, waiting for a final instruction. The decision is now in front of them."
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Confirmed the reclamation site is running through ironsense — felt the order in it from the bowl's edge.",
+          "skillsObserved": [
+            "ironsense read of a pre-Transition working at range — confirmed active"
+          ],
+          "status": "active",
+          "statusNote": "At the reclamation site bowl's edge — Memory across her shoulders, watching Silas."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "role": "Former Ashwarden warden, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Stopped at the bowl's edge without speaking — she already knew what the site was.",
+          "status": "active",
+          "statusNote": "At the reclamation site bowl's edge — steady, watching Silas, the decision pending."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "what-the-water-remembers",
+          "label": "What the Water Remembers",
+          "kind": "event",
+          "fact": "The reclamation site is a working pre-Transition ring, flush with the earth in a shallow catchment bowl south of the left-branch path. It is active, not broken — running its last instruction on an empty loop for fifteen years. It smells of clean process. The air above it is warmer than the surrounding ground. It is waiting for a final instruction: complete or stop.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "zone-left-branch-entrance",
+            "the-second-thread"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The reclamation site has been located — a low ring of pale material, flush with the earth in a shallow catchment bowl south of the left-branch path. Active, not broken. Waiting for a final instruction.",
+          "subPlace": {
+            "name": "The Reclamation Ring",
+            "parent": "Disputed Zone — Left Branch Entrance",
+            "note": "A working pre-Transition reclamation ring in a shallow catchment bowl. Frost-collared, active, mineral-smelling. The relay node's circuit runs through the ground here.",
+            "visited": true
+          }
+        }
+      ],
+      "moveTo": {
+        "location": "The Reclamation Ring",
+        "why": "followed the Working Model's thread south through the catchment bowl to the site"
+      },
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "twenty minutes of walking south from the sealed hollow through the catchment"
+      },
+      "stageOps": [
+        {
+          "questId": "what-the-water-remembers",
+          "stageId": "arrive",
+          "evidence": "The party followed the Working Model's thread south and arrived at the reclamation site — active ring confirmed by ironsense, circuit running, the decision now in front of them."
         }
       ]
     },
     "sceneState": {
-      "setting": "South of the sealed hollow, outdoors, dawn. Frost-hard ground in a gap between dark pine stands; low mist with a faint mineral edge. The party moves south along the catchment thread. Open ground visible ahead through thinning mist.",
+      "setting": "Outdoor, dawn, early spring. A shallow catchment bowl south of the left-branch path — frost at the lip of a low ring of pale material, flush with the earth. The air above the ring moves slightly, warmer than the surrounding cold. Mist is thinning. Mineral smell, clean and sharp.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Walking at Silas's left, Memory across her shoulders, breath steady."
+          "state": "Standing at the bowl's edge, one hand held near the ring without touching — confirmed it is running, now watching Silas."
         },
         {
           "name": "Veth",
-          "state": "One step behind at Silas's right, reading the tree-line steadily. Has just named the catchment."
+          "state": "Stopped at the bowl's edge, saying nothing — she already knew."
         },
         {
           "name": "Huginn",
-          "state": "Low arc ahead, disappeared into the mist — scouting the path forward."
+          "state": "Perched on the far lip of the ring, wings folded, watching the center and then Silas."
         }
       ],
       "objects": [
-        "Waymarker — pocketed, three bonds seated, fourth system-read held",
-        "Memory — carried by Pell",
-        "You Shall Not Pass ward — behind them, sealed at the hollow threshold",
-        "Logana — two hundred yards north-and-west, at the downed tree's base, watching t"
+        "The reclamation ring — low, pale, flush with the earth, frost-collared, active",
+        "Waymarker — pocketed, four bonds seated including the system-read",
+        "Memory — across Pell's shoulders",
+        "Logana — two hundred yards north-and-west at the downed tree, watching the relay"
       ],
       "threads": [
-        "The reclamation site — south, in the low open ground, still running its last instruction",
-        "The relay node's question — what was it built to send?",
-        "The decision — what to tell the site"
+        "The site is active and waiting for an instruction — complete or stop",
+        "The relay node's circuit runs through the ground here",
+        "The decision: what to tell the site"
       ]
     }
   },
@@ -2879,14 +2973,14 @@
         "s4"
       ],
       "progress": [
-        "The hollow's warden named its nature: it is an ear, built to receive a question not yet sent from the relay node. The warden has held it open for fifteen years waiting for someone to attend — and has named Silas as the one who will do.",
         "The warden named the circuit's full purpose: the hollow receives a watershed-readiness question sent from the relay node south. The question was never sent. The node can send it — if someone prompts it.",
         "The warden's held ending is fully read — cause, meaning, and what it needs. The hollow waits for the receiving word before the circuit can close and the road south to the relay node opens clean.",
         "Order-Sense and Palework woven together at the hollow — the warden's ending fully read in both registers. The receiving word is all that remains.",
         "The hollow's watch received and sealed — the warden's fifteen-year vigil completed and the hollow held by You Shall Not Pass. The relay node circuit is intact and the watershed question remains unsent.",
         "The party named the full three-step plan: read the relay node's question, find the reclamation site, and decide what to tell it. Veth named plainly that the third step is not an engineering question.",
         "The full system is now mapped — relay node, hollow, and reclamation site — held in the Waymarker and the Working Model together. The decision is the only step remaining.",
-        "Party moving south through the catchment toward the reclamation site — the Working Model's thread held, the path clear."
+        "Party moving south through the catchment toward the reclamation site — the Working Model's thread held, the path clear.",
+        "The party has arrived at the reclamation site — active, not broken, waiting for a final instruction. The decision is now in front of them."
       ],
       "aliases": [],
       "startedAt": "2026-07-22T20:49:54.189Z",
@@ -3419,7 +3513,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Called across two hundred yards of Zone ground to check whether Silas is still standing — her voice pitched to carry, not to shout.",
         "[d14] Received the full briefing on the relay node's purpose — said nothing, looked north, looked at Silas. Walking north with Memory in a trail grip.",
         "[d14] Hand settled on Memory's grip without being asked — reading Silas's face through the cast.",
         "[d14] Watching Silas's face as the warden's answer lands — hand still on Memory.",
@@ -3428,7 +3521,8 @@
         "[d14] Hand tightened once on Silas's shoulder as the warden's ending completed — witnessed the claim and the seal without a word.",
         "[d14] Standing watch at the tree-line as the hollow sealing completes — Memory on her shoulders, present and steady.",
         "[d14] Asked who is supposed to be at the other end of the circuit — watching the tree-line throughout, present and steady.",
-        "[d14] Stopped watching the tree-line when the Working Model resolved — shifted her weight toward Silas, reading his face."
+        "[d14] Stopped watching the tree-line when the Working Model resolved — shifted her weight toward Silas, reading his face.",
+        "[d14] Confirmed the reclamation site is running through ironsense — felt the order in it from the bowl's edge."
       ],
       "knownFacts": [
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
@@ -3441,15 +3535,15 @@
         "The made gate holds at every angle with no seam between the original intention and Silas's close — named by ironsense as solid."
       ],
       "skillsObserved": [
-        "copper-wire seating at a socket throat by thumbnail pressure",
         "ironsense confirmation of shadow-duplicate fidelity",
         "ironsense confirmation of a completed seal under working-for",
         "accurate tactile reporting of a working's feel under hands-o",
         "ironsense read of a person at close range — confirmed absenc",
-        "ironsense read of the fold's quality through contact-point —"
+        "ironsense read of the fold's quality through contact-point —",
+        "ironsense read of a pre-Transition working at range — confir"
       ],
       "status": "active",
-      "statusNote": "At the sealed hollow threshold — Memory across her shoulders, attention now on Silas as the map settles.",
+      "statusNote": "At the reclamation site bowl's edge — Memory across her shoulders, watching Silas.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -4122,7 +4216,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Named the one previous raising she has witnessed — a boar held for four days at a grief-sealed hollow, released cleanly at the burial's end. Marked Logana as categorically different: the Zone's claim sits in the warding alongside Silas's own purpose, and she does not know what that costs yet.",
         "[d14] Read Silas's expression after the full Deathsense cast and named the response site aloud — not a question.",
         "[d14] Held still through the Ask the Dead cast — watching Silas's face, reading him rather than the hollow.",
         "[d14] Named the node's location — south, past Logana — plainly and without ceremony. Already thinking ahead.",
@@ -4131,7 +4224,8 @@
         "[d14] Held still through the handoff — a warden's recognition of the watch received, no ceremony.",
         "[d14] Reading the sealed hollow at dawn — a warden's final confirmation of a post properly closed.",
         "[d14] Named the three-step plan in warden's order — relay node first, reclamation site second, the decision third. Stated plainly that the third step is not an engineering question.",
-        "[d14] Named plainly that the Working Model will not answer what to decide — read Silas's face before he spoke."
+        "[d14] Named plainly that the Working Model will not answer what to decide — read Silas's face before he spoke.",
+        "[d14] Stopped at the bowl's edge without speaking — she already knew what the site was."
       ],
       "knownFacts": [
         "The made gate now carries the open-hand of attendance — the ashwarden mark that means a passage was seen rightly",
@@ -4154,7 +4248,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the sealed hollow threshold — steady, watching Silas, the decision pending.",
+      "statusNote": "At the reclamation site bowl's edge — steady, watching Silas, the decision pending.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5355,7 +5449,6 @@
     "gen-disputed-zone-left-branch-entrance": {
       "visits": 1,
       "notes": [
-        "[d14] A made-gate now stands here — frameless, markless, built by Silas Weir's wright's close on the fold his father left unfinished. The first new passage since the Transition.",
         "[d14] The made gate now carries a warded shadow-frame — sealed with the Weirmark, structurally present though not visible in ordinary light. A declared threshold with maker and purpose named.",
         "[d14] The made gate now carries Veth Ondra's ashwarden open-hand mark at the left upright — the mark of attendance, for the ones who come after.",
         "[d14] The gate's ward now has a declared purpose — it stands against the careless crossing, against the one who comes to take without attending. The declaration is sealed into the Weirmark.",
@@ -5366,7 +5459,8 @@
         "[d14] The Zone-changed wolverine's skeletal frame now stands as a guardian — Logana — raised by Silas Weir at the downed tree's base. The Zone's lattice-thread has partial hold in her warding alongside the maker's purpose. She watches the relay node.",
         "[d14] The hollow's warden named: it is a receiver, built for a specific transmission from the relay node. The warden has held it open fifteen years. He has named Silas as the attending presence — the watch can end.",
         "[d14] The hollow's fifteen-year watch is complete — the warden's vigil ended, the hollow sealed with You Shall Not Pass. The ward holds the perimeter against the untended crossing. The receiving-purpose and the circuit to the relay node remain intact.",
-        "[d14] The full system — relay node, hollow receiver, and reclamation site — was mapped here using the Waymarker and the Working Model on Day 14 at dawn. The system's shape is now known and held."
+        "[d14] The full system — relay node, hollow receiver, and reclamation site — was mapped here using the Waymarker and the Working Model on Day 14 at dawn. The system's shape is now known and held.",
+        "[d14] The reclamation site has been located — a low ring of pale material, flush with the earth in a shallow catchment bowl south of the left-branch path. Active, not broken. Waiting for a final instruction."
       ],
       "flags": {
         "gate_built": true,
@@ -5389,6 +5483,13 @@
           "day": 14,
           "visited": true,
           "note": "Logana now stands here — skeletal guardian, Zone-thread in her warding, relay node at the downed tree's base under her watch."
+        },
+        "the-reclamation-ring": {
+          "name": "The Reclamation Ring",
+          "parentId": "gen-disputed-zone-left-branch-entrance",
+          "day": 14,
+          "visited": true,
+          "note": "A working pre-Transition reclamation ring in a shallow catchment bowl. Frost-collared, active, mineral-smelling. The relay node's circuit runs through the ground here."
         }
       }
     }
@@ -5533,7 +5634,7 @@
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
     "lastGenCount": 636,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
@@ -5701,7 +5802,7 @@
     "wits": 6
   },
   "pendingSubPoints": 0,
-  "skillPoints": 5,
+  "skillPoints": 1,
   "discoveries": [
     {
       "key": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
@@ -7159,22 +7260,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.677560543241345,
-    "cerebral": 21.245172965576025,
-    "social": 5.614100767211108,
-    "generous": 1.6743446060780462,
-    "cautious": 12.811784261881485,
-    "physical": 3.1466429449470548,
-    "risky": 0.7547323005463775,
-    "ruthless": 0.3215952408164873,
-    "carousing": 0.26708838320464395,
-    "amorous": 0.9818154911591537,
-    "patient": 0.5949505981023484,
-    "stealth": 0.000057412161734136654,
-    "devotion": 1.2671381612306027,
-    "craft": 2.0374292050134613,
-    "leadership": 0.885944948333624,
-    "deception": 0.27493839978239387
+    "strategic": 22.135621529660312,
+    "cerebral": 20.714043641436625,
+    "social": 5.47374824803083,
+    "generous": 1.6324859909260951,
+    "cautious": 12.491489655334448,
+    "physical": 3.067976871323378,
+    "risky": 0.7358639930327181,
+    "ruthless": 0.31355535979607513,
+    "carousing": 0.26041117362452787,
+    "amorous": 0.9572701038801749,
+    "patient": 0.5800768331497896,
+    "stealth": 0.00005597685769078324,
+    "devotion": 1.2354597071998377,
+    "craft": 1.9864934748881247,
+    "leadership": 0.8637963246252834,
+    "deception": 0.268064939787834
   },
   "aptitudes": [
     "strategist",
@@ -7183,10 +7284,154 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 873,
+  "actionCount": 874,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "ability",
+      "prompt": "The Maintained Order",
+      "url": "https://image.pollinations.ai/prompt/The%20Maintained%20Order%3A%20Hold%20a%20structure%20in%20function%20across%20time%20%E2%80%94%20not%20by%20force%20but%20by%20constant%2C%20precise%20correction%20of%20everything%20that%20drifts.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20lattice%20tradition%3A%20cold%20white%2C%20glass-blue%2C%20precise%20grid-lines%3B%20arcology%20glass%2C%20seamless%20alloy%2C%20no%20accident%3B%20flat%20perfect%20illumination%2C%20no%20unplanned%20shadow%3B%20total%20prediction%2C%20the%20binding%20of%20possibility%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=46774&nologo=true",
+      "caption": "The Maintained Order",
+      "worldDay": 26,
+      "at": "2026-07-26T12:30:58.412Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Raised Form",
+      "url": "https://image.pollinations.ai/prompt/The%20Raised%20Form%3A%20Make%20through%20seraphic%20authority%20%E2%80%94%20what%20is%20raised%20embodies%20proper%20order%20and%20organizes%20what%20surrounds%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%3A%20gold%2C%20white%2C%20tier-on-tier%20brightness%3B%20tiered%20spires%2C%20choral%20height%2C%20mercy-from-above%3B%20radiant%20from%20above%2C%20unbearable%20choral%20certainty%3B%20administered%20mercy%2C%20height%2C%20certainty%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=33114&nologo=true",
+      "caption": "The Raised Form",
+      "worldDay": 26,
+      "at": "2026-07-26T12:30:30.038Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Riding Order",
+      "url": "https://image.pollinations.ai/prompt/The%20Riding%20Order%3A%20The%20braid-craft%3A%20unmake%20a%20structure%20and%20re-bind%20its%20falling%20pieces%20into%20a%20new%20form%20mid-collapse.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20lattice%20tradition%3A%20cold%20white%2C%20glass-blue%2C%20precise%20grid-lines%3B%20arcology%20glass%2C%20seamless%20alloy%2C%20no%20accident%3B%20flat%20perfect%20illumination%2C%20no%20unplanned%20shadow%3B%20total%20prediction%2C%20the%20binding%20of%20possibility%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=95367&nologo=true",
+      "caption": "The Riding Order",
+      "worldDay": 26,
+      "at": "2026-07-26T12:30:12.996Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Radiant Lance",
+      "url": "https://image.pollinations.ai/prompt/Radiant%20Lance%3A%20Focus%20light%20into%20a%20searing%20coherent%20beam%20%E2%80%94%20precise%2C%20silent%2C%20fast%20as%20sight.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=48556&nologo=true",
+      "caption": "Radiant Lance",
+      "worldDay": 26,
+      "at": "2026-07-26T12:29:20.133Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Prism Ward",
+      "url": "https://image.pollinations.ai/prompt/Prism%20Ward%3A%20String%20a%20standing%20lattice%20that%20reports%20whatever%20crosses%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=65789&nologo=true",
+      "caption": "Prism Ward",
+      "worldDay": 26,
+      "at": "2026-07-26T12:29:05.981Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Old Roads",
+      "url": "https://image.pollinations.ai/prompt/Old%20Roads%3A%20Sense%2C%20follow%2C%20and%20safely%20approach%20Precursor%20traces%20%E2%80%94%20the%20old%20roads%20under%20the%20valley's%20skin.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=13592&nologo=true",
+      "caption": "Old Roads",
+      "worldDay": 26,
+      "at": "2026-07-26T12:28:58.878Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Daybreak Mantle",
+      "url": "https://image.pollinations.ai/prompt/Daybreak%20Mantle%3A%20Gather%20a%20mantle%20of%20soft%20radiance%20that%20inspires%20the%20hopeless%20and%20commands%20a%20room.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=97108&nologo=true",
+      "caption": "Daybreak Mantle",
+      "worldDay": 26,
+      "at": "2026-07-26T12:28:33.559Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Dawn Surgery",
+      "url": "https://image.pollinations.ai/prompt/Dawn%20Surgery%3A%20Operate%20with%20focused%20light%3A%20clean%20cuts%2C%20sealed%20vessels%2C%20sight%20into%20the%20wound.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=4147&nologo=true",
+      "caption": "Dawn Surgery",
+      "worldDay": 26,
+      "at": "2026-07-26T12:28:18.250Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Clarity Lens",
+      "url": "https://image.pollinations.ai/prompt/Clarity%20Lens%3A%20Shape%20light%20into%20a%20floating%20lens%3A%20magnify%2C%20steady%2C%20and%20brighten%20fine%20detail.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=79700&nologo=true",
+      "caption": "Clarity Lens",
+      "worldDay": 26,
+      "at": "2026-07-26T12:28:12.581Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Chord of Mending",
+      "url": "https://image.pollinations.ai/prompt/Chord%20of%20Mending%3A%20Coax%20cracked%20or%20loosened%20things%20back%20toward%20wholeness%20by%20singing%20their%20grain.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20harmonic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=69998&nologo=true",
+      "caption": "Chord of Mending",
+      "worldDay": 26,
+      "at": "2026-07-26T12:27:44.955Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Blend In",
+      "url": "https://image.pollinations.ai/prompt/Blend%20In%3A%20Pass%20unnoticed%20in%20a%20crowd%20or%20settlement%20%E2%80%94%20look%20like%20you%20belong%2C%20be%20forgotten.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=9526&nologo=true",
+      "caption": "Blend In",
+      "worldDay": 26,
+      "at": "2026-07-26T12:27:39.304Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Light Bending",
+      "url": "https://image.pollinations.ai/prompt/Light%20Bending%3A%20Bend%20light%20around%20yourself%20or%20objects%20%E2%80%94%20concealment%2C%20mirage%2C%20or%20redirection.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=50115&nologo=true",
+      "caption": "Light Bending",
+      "worldDay": 26,
+      "at": "2026-07-26T12:27:31.204Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Light Well",
+      "url": "https://image.pollinations.ai/prompt/Light%20Well%3A%20Store%20light%20in%20a%20simple%20vessel%20and%20release%20it%20later%2C%20slow%20or%20sudden.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=89242&nologo=true",
+      "caption": "Light Well",
+      "worldDay": 26,
+      "at": "2026-07-26T12:27:22.917Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Storykeeper",
+      "url": "https://image.pollinations.ai/prompt/Storykeeper%3A%20Hold%2C%20recall%2C%20and%20deploy%20the%20valley's%20stories%20%E2%80%94%20living%20memory%20as%20a%20working%20tool.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=96412&nologo=true",
+      "caption": "Storykeeper",
+      "worldDay": 26,
+      "at": "2026-07-26T12:27:17.001Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Stand",
+      "url": "https://image.pollinations.ai/prompt/The%20Stand%3A%20Hold%20a%20position%20or%20protect%20another%20under%20assault%20%E2%80%94%20the%20guardian's%20discipline.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20marcher%20tradition%3A%20steel-grey%2C%20blood-rust%2C%20weathered%20leather%3B%20honed%20blades%2C%20scarred%20armor%2C%20the%20held%20line%3B%20hard%20edge-light%2C%20a%20blade%20catching%20the%20sun%3B%20disciplined%2C%20scarred%2C%20holding%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=21723&nologo=true",
+      "caption": "The Stand",
+      "worldDay": 26,
+      "at": "2026-07-26T12:27:10.039Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Ended Burden",
+      "url": "https://image.pollinations.ai/prompt/The%20Ended%20Burden%3A%20Sustain%20by%20precisely%20ending%20what's%20wearing%20you%20down%20%E2%80%94%20the%20habit%2C%20the%20wound%2C%20the%20relationship%2C%20the%20weight%20%E2%80%94%20rather%20than%20trying%20to%20carry%20it%20further.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%3A%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%3B%20beautiful%20demolition%2C%20ordered%20ruin%2C%20the%20cleared%20space%3B%20light%20entering%20a%20thing%20just%20opened%3B%20an%20ethic%20of%20clearing%20%E2%80%94%20ruin%20made%20beautiful%20and%20deliberate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99164&nologo=true",
+      "caption": "The Ended Burden",
+      "worldDay": 26,
+      "at": "2026-07-26T12:26:57.181Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Undoing Word",
+      "url": "https://image.pollinations.ai/prompt/The%20Undoing%20Word%3A%20The%20Unmaker%20art%20of%20the%20undoing%20%E2%80%94%20returning%20a%20made%20or%20bound%20thing%20to%20its%20unassembled%20state%2C%20so%20it%20is%20not%20destroyed%20but%20un-done%2C%20its%20making%20reversed.%20The%20clean%20art%20of%20those%20who%20end%20things%20properly.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%3A%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%3B%20beautiful%20demolition%2C%20ordered%20ruin%2C%20the%20cleared%20space%3B%20light%20entering%20a%20thing%20just%20opened%3B%20an%20ethic%20of%20clearing%20%E2%80%94%20ruin%20made%20beautiful%20and%20deliberate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=7516&nologo=true",
+      "caption": "The Undoing Word",
+      "worldDay": 26,
+      "at": "2026-07-26T12:26:38.960Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Cut Thread",
+      "url": "https://image.pollinations.ai/prompt/The%20Cut%20Thread%3A%20The%20Fates'%20shears.%20One%20life%2C%20one%20cut%2C%20done%20%E2%80%94%20not%20a%20wound%2C%20a%20CESSATION.%20This%20is%20the%20deepest%20thing%20the%20Ashwardens%20hold%20and%20they%20teach%20it%20to%20almost%20nobody%2C%20because%20the%20argument%20against%20it%20has%20never%20been%20answered%20and%20they%20keep%20doing%20it%20anyway.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=4728&nologo=true",
+      "caption": "The Cut Thread",
+      "worldDay": 26,
+      "at": "2026-07-26T12:26:01.950Z"
+    },
     {
       "kind": "moment",
       "prompt": "A man standing in pale grey dawn mist at a sealed threshold, one hand open and flat, a small worn disc of grey-white material resting on his palm catching the light — his eyes distant, reading somethi",
@@ -7426,155 +7671,11 @@
       "caption": "Ashwarden March Road",
       "worldDay": 23,
       "at": "2026-07-23T20:16:44.626Z"
-    },
-    {
-      "kind": "moment",
-      "prompt": "A lean man descending on broad dark wings into a circular hollow of close earth — wings drawing in at the last moment, feet meeting the dark ground without drama, a big grey-black corvid dropping onto",
-      "url": "https://image.pollinations.ai/prompt/A%20lean%20man%20descending%20on%20broad%20dark%20wings%20into%20a%20circular%20hollow%20of%20close%20earth%20%E2%80%94%20wings%20drawing%20in%20at%20the%20last%20moment%2C%20feet%20meeting%20the%20dark%20ground%20without%20drama%2C%20a%20big%20grey-black%20corvid%20dropping%20onto%20limestone%20to%20the%20left%20a%20half-breath%20after.%20Grey%20spring%20sky%20above%2C%20white%20birch%20at%20the%20rim%2C%20the%20air%20s%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=41849&nologo=true",
-      "caption": "Silas flies from the hollow to Stillwater's Trouble on death-shadow wings — the technique ",
-      "worldDay": 23,
-      "at": "2026-07-23T18:27:59.459Z"
-    },
-    {
-      "kind": "location",
-      "prompt": "Stillwater'S Trouble",
-      "url": "https://image.pollinations.ai/prompt/Stillwater'S%20Trouble%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Stillwater'S%20Trouble.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=9692&nologo=true",
-      "caption": "Stillwater'S Trouble",
-      "worldDay": 23,
-      "at": "2026-07-23T18:27:59.455Z"
-    },
-    {
-      "kind": "moment",
-      "prompt": "A low-lit kitchen at evening — a woman standing at a work counter, a deep-drawer open, setting a small oilcloth bundle and a folded sealed letter on a worn wooden table where three others sit in silen",
-      "url": "https://image.pollinations.ai/prompt/A%20low-lit%20kitchen%20at%20evening%20%E2%80%94%20a%20woman%20standing%20at%20a%20work%20counter%2C%20a%20deep-drawer%20open%2C%20setting%20a%20small%20oilcloth%20bundle%20and%20a%20folded%20sealed%20letter%20on%20a%20worn%20wooden%20table%20where%20three%20others%20sit%20in%20silence%20watching.%20A%20large%20grey-black%20bird%20on%20the%20back%20of%20a%20chair%20is%20very%20still.%20The%20fire%20is%20banked%20low.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=3086&nologo=true",
-      "caption": "Silas tells Ama his plans for Stillwater's Trouble — base, fellowship, the water crisis ah",
-      "worldDay": 20,
-      "at": "2026-07-20T16:11:33.551Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "a person, character portrait, named Silas's Mother, woman, Mother — lives at the cairn-line house on Cairnhold's center lane",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Silas's%20Mother%2C%20woman%2C%20Mother%20%E2%80%94%20lives%20at%20the%20cairn-line%20house%20on%20Cairnhold's%20center%20lane%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=45292&nologo=true",
-      "caption": "Silas's Mother — devoted",
-      "worldDay": 20,
-      "at": "2026-07-20T03:13:36.225Z"
-    },
-    {
-      "kind": "npc",
-      "prompt": "Hesta Vorn",
-      "url": "https://image.pollinations.ai/prompt/A%20woman%20somewhere%20in%20her%20middle%20fifties%2C%20broad%20through%20the%20shoulders%2C%20with%20Silas's%20same%20dark%20brow%20and%20the%20steadier%20version%20of%20his%20restlessness%20settled%20into%20competence.%20Her%20hair%20is%20iron-grey%2C%20braided%20c%2C%20character%20portrait%2C%20named%20Hesta%20Vorn%2C%20Cairn-keeper%20and%20mother%20%E2%80%94%20the%20still%20point%20a%20long%20road%20runs%20back%20to%2C%20Speaks%20in%20full%20sentences%20and%20means%20them.%20Unhurried.%20When%20Silas%20appears%20after%20a%20long%20absence%20she%20says%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=6879&nologo=true",
-      "caption": "Hesta Vorn",
-      "worldDay": 20,
-      "at": "2026-07-20T01:13:26.037Z"
-    },
-    {
-      "kind": "location",
-      "prompt": "The Crossing",
-      "url": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true",
-      "caption": "The Crossing",
-      "worldDay": 20,
-      "at": "2026-07-20T01:12:54.120Z"
-    },
-    {
-      "kind": "location",
-      "prompt": "Cairnhold",
-      "url": "https://image.pollinations.ai/prompt/Cairnhold%3A%20The%20Ashwardens'%20city%2C%20and%20the%20least%20frightening%20place%20in%20the%20world%20once%20you%20are%20inside%20it.%20Cairnhold%20is%20built%20along%20the%20cairn-lines%20%E2%80%94%20low%20grey%20terraces%20following%20the%20stone%20rows%20out%20onto%20the%20heath%20%E2%80%94%20and%20every%20house%20has%20a%20second%20door%20that%20opens%20toward%20the%20fields%2C%20because%20that%20is%20the%20door%20the%20dead%20leav%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=70150&nologo=true",
-      "caption": "Cairnhold",
-      "worldDay": 19,
-      "at": "2026-07-19T23:23:07.803Z"
-    },
-    {
-      "kind": "moment",
-      "prompt": "A lean figure in road-worn clothes stands at the door of an old timber warden post on a cold ridge. One hand flat on the weathered ash door. Below, a shallow hollow with dark earth and birch trees sto",
-      "url": "https://image.pollinations.ai/prompt/A%20lean%20figure%20in%20road-worn%20clothes%20stands%20at%20the%20door%20of%20an%20old%20timber%20warden%20post%20on%20a%20cold%20ridge.%20One%20hand%20flat%20on%20the%20weathered%20ash%20door.%20Below%2C%20a%20shallow%20hollow%20with%20dark%20earth%20and%20birch%20trees%20stopped%20at%20its%20edge.%20A%20big%20grey-black%20corvid%20perches%20on%20the%20post's%20crown%2C%20one%20foot%20to%20either%20side%20of%20a%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=33685&nologo=true",
-      "caption": "Silas claims Raven's Home warden post — names it Stillwater's Trouble, his own Ashwarden b",
-      "worldDay": 19,
-      "at": "2026-07-19T19:00:52.784Z"
-    },
-    {
-      "kind": "npc",
-      "prompt": "Cassiel Ord",
-      "url": "https://image.pollinations.ai/prompt/A%20lean%20man%20somewhere%20in%20his%20middle%20forties%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20habit%20%E2%80%94%20he%20has%20been%20moving%20through%20difficult%20ground%20for%20a%20long%20time%20and%20his%20body%20organized%20itself%20around%20that.%20March%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20Former%20march-warden%20who%20walked%20away%20from%20the%20post%20and%20sat%20down%20in%20the%20bowl%20and%20has%20not%20decided%20what%20%2C%20Economy%20of%20words%20born%20from%20years%20of%20writing%20terse%20post-reports%20nobody%20acted%20on.%20Does%20not%20explain%20him%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64922&nologo=true",
-      "caption": "Cassiel Ord",
-      "worldDay": 19,
-      "at": "2026-07-19T15:57:23.298Z"
-    },
-    {
-      "kind": "moment",
-      "prompt": "A man kneels at the base of a weathered grey timber post in a stand of birch and low heather, chalk dust on his hands, copper wire pressed into a freshly carved groove — two runes braided into the old",
-      "url": "https://image.pollinations.ai/prompt/A%20man%20kneels%20at%20the%20base%20of%20a%20weathered%20grey%20timber%20post%20in%20a%20stand%20of%20birch%20and%20low%20heather%2C%20chalk%20dust%20on%20his%20hands%2C%20copper%20wire%20pressed%20into%20a%20freshly%20carved%20groove%20%E2%80%94%20two%20runes%20braided%20into%20the%20old%20wood%2C%20frost-pale%20light%20overhead%2C%20a%20large%20grey-black%20bird%20perched%20on%20the%20roof-ridge%20above%20him%2C%20watch%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=48393&nologo=true",
-      "caption": "Silas binds Stillwater's Trouble at the post with compound rune-work — Wither and The Rais",
-      "worldDay": 19,
-      "at": "2026-07-19T15:38:10.719Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "a person, character portrait, named Fendt, Man, Filtration engineer, Edge District",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Fendt%2C%20Man%2C%20Filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11563&nologo=true",
-      "caption": "Fendt — devoted",
-      "worldDay": 19,
-      "at": "2026-07-19T14:26:15.290Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "a person, character portrait, named Veth Ondra, woman, Former Ashwarden warden, now teaching at the dark-cloth stall — has offered to join the party, sworn to Silas Weir",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Veth%20Ondra%2C%20woman%2C%20Former%20Ashwarden%20warden%2C%20now%20teaching%20at%20the%20dark-cloth%20stall%20%E2%80%94%20has%20offered%20to%20join%20the%20party%2C%20sworn%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66052&nologo=true",
-      "caption": "Veth Ondra — sworn · ally",
-      "worldDay": 18,
-      "at": "2026-07-18T23:59:23.709Z"
-    },
-    {
-      "kind": "npc",
-      "prompt": "Tane Solr",
-      "url": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true",
-      "caption": "Tane Solr",
-      "worldDay": 18,
-      "at": "2026-07-18T22:02:27.881Z"
-    },
-    {
-      "kind": "npc",
-      "prompt": "Maren Voss",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%20Voss%2C%20Liminal%20fighter%20who%20crosses%20thresholds%20to%20win%20%E2%80%94%20patient%20at%20every%20gate%2C%20lethal%20the%20moment%20one%20opens%2C%20Speaks%20the%20way%20someone%20waits%20%E2%80%94%20fully%2C%20without%20fidgeting.%20Grey%20coat%2C%20collar%20up%20against%20the%20early-spri%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5247&nologo=true",
-      "caption": "Maren Voss",
-      "worldDay": 18,
-      "at": "2026-07-18T21:58:01.712Z"
-    },
-    {
-      "kind": "npc",
-      "prompt": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Siol%20%E2%80%94%20Elven%20traveler%20at%20the%20Hub%20plaza%2C%20tall%2C%20pale%20coat%2C%20bir%2C%20someone%20of%20Waygate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4185&nologo=true",
-      "caption": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir",
-      "worldDay": 18,
-      "at": "2026-07-18T21:22:05.568Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "a person, character portrait, named Fendt, Filtration engineer, Edge District",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Fendt%2C%20Filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11563&nologo=true",
-      "caption": "Fendt — devoted",
-      "worldDay": 18,
-      "at": "2026-07-18T16:34:07.248Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "a person, character portrait, named Pell, woman, Village blacksmith, Millbrook — traveling companion, partner romantic to Silas Weir",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Pell%2C%20woman%2C%20Village%20blacksmith%2C%20Millbrook%20%E2%80%94%20traveling%20companion%2C%20partner%20romantic%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49264&nologo=true",
-      "caption": "Pell — partner · devoted",
-      "worldDay": 18,
-      "at": "2026-07-18T15:49:40.955Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "a person, character portrait, named Mara Wells, woman, Village supply store operator, Millbrook",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Mara%20Wells%2C%20woman%2C%20Village%20supply%20store%20operator%2C%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8967&nologo=true",
-      "caption": "Mara Wells — devoted",
-      "worldDay": 18,
-      "at": "2026-07-18T15:30:08.163Z"
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785068559835,
-  "rev": 1488,
+  "updatedAt": 1785069149991,
+  "rev": 1512,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10953,7 +11054,7 @@
   "syncedAt": 1785030018435,
   "teachers": {},
   "regionsKnown": {
-    "valley": 625,
+    "valley": 626,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11124,10 +11225,10 @@
     {
       "id": "sess-16",
       "startedAt": "2026-07-26T12:22:39.830Z",
-      "lastAt": "2026-07-26T12:22:39.830Z",
+      "lastAt": "2026-07-26T12:32:29.975Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -11372,33 +11473,33 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 245,
-    "choices": 245,
+    "sceneSummary": 246,
+    "choices": 246,
     "characterDeltas": 105,
-    "scene": 245,
-    "npcUpdates": 218,
+    "scene": 246,
+    "npcUpdates": 219,
     "factUpdates": 19,
-    "placeUpdates": 44,
-    "codexUpdates": 153,
-    "timeOps": 239,
+    "placeUpdates": 45,
+    "codexUpdates": 154,
+    "timeOps": 240,
     "imagePrompt": 7,
     "sceneEnded": 60,
     "itemUpdates": 5,
-    "questUpdates": 37,
+    "questUpdates": 38,
     "offer": 23,
-    "moveTo": 14,
+    "moveTo": 15,
     "delegateOps": 3,
     "deeds": 4,
     "standingOps": 1,
     "ledgerEvents": 6,
     "discovery": 4,
-    "stageOps": 12,
+    "stageOps": 13,
     "generateRequest": 9,
     "inventoryAdd": 2,
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 245,
+  "_opTurns": 246,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -11526,30 +11627,30 @@
     ]
   },
   "_suggestCache": {
-    "level": 26,
+    "level": 27,
     "picks": [
       {
-        "abilityId": "prism_ward",
-        "why": "You already run Boundary-Stone, The Declared Threshold, and The Warding Mark — you've built a character defined by controlling space and denying passage, but all three are active/placed wards; Prism Ward adds a standing lattice that *reports* crossings, giving your strategic, cautious mind the early-warning layer your perimeter work is currently missing.",
-        "fit": "gap"
-      },
-      {
-        "abilityId": "echo_sense",
-        "why": "Order-Sense and Deathsense (your two most-used crafts, 91 and 38 uses) give you deep metaphysical perception, but you have no physical-space awareness through obstruction — Echo Sense closes that blind spot and feeds directly into the advance-knowledge style your strategist aptitude demands.",
-        "fit": "gap"
-      },
-      {
         "abilityId": "prism_sight",
-        "why": "Your Pattern-Sense aspiration (2/10) is about reading hidden truths in what's in front of you — Prism Sight, which reveals heat traces, concealed marks, tampering, and lies of light, is the most direct available analogue to that declared intent and trains the perceptual habits that aspiration requires.",
+        "why": "You've built your entire kit around reading what others miss — Order-Sense, Deathsense, The Hollowing Sight — and Prism Sight plugs the one gap that kit has: mundane concealment and light-based deception. Heat traces and hidden marks are exactly the kind of thing a cerebral stalwart-scholar wants before committing, and it costs nothing in the school you already train.",
+        "fit": "gap"
+      },
+      {
+        "abilityId": "echo_memory",
+        "why": "Pattern-Sense is your declared aspiration, and Echo Memory is the closest reachable craft to how that goal plays: reconstructing what happened from environmental residue is exactly the forensic-reconstruction loop you're building toward. Your strategic/cerebral profile means you'll reach for 'what happened here' constantly, and you already burn Order-Sense 93 times doing exactly that.",
+        "fit": "aspiration"
+      },
+      {
+        "abilityId": "shatterpoint",
+        "why": "Hunter's Strike is your other aspiration at 5/10 progress and you own it but never use it — Shatterpoint is the analytical twin: find the structural weakness before you strike. It bridges your cerebral read-first approach to the Hunter's Strike aspiration you say you want to complete, and gives your tactician aptitude a precision-harm tool rather than another sustained effect.",
         "fit": "aspiration"
       },
       {
         "abilityId": "stillness_field",
-        "why": "You have Shadowstep for your own movement and a deep ward/boundary kit for static positions, but nothing that actively suppresses *information leakage* from a held location — Stillness Field is the missing operational security tool for a cautious, cerebral character who needs to hold ground quietly.",
-        "fit": "synergy"
+        "why": "You have deep ward-and-boundary craft (Boundary-Stone r2, The Warding Mark, You Shall Not Pass) but all of it is positional and declared — Stillness Field gives you a mobile, quiet operational perimeter that a cautious strategist can use before a situation becomes a confrontation, which is exactly the window your play-style targets.",
+        "fit": "gap"
       }
     ],
-    "note": "All reachable crafts this level are school-unmatched, so none is a more natural reach than another — lean on function-fit. The real question is whether you want to sharpen your perimeter intelligence (Prism Ward, Echo Sense) or begin building toward Pattern-Sense (Prism Sight)."
+    "note": "The reachable pool this level is all harmonic and valley-lore crafts with no school alignment to your existing methods — every pick here is a new discipline, so weigh which function family matters most rather than training continuity."
   },
   "abilityImages": {
     "the_shielding_word": "https://image.pollinations.ai/prompt/The%20Shielding%20Word%3A%20Interpose%20a%20spoken%20certainty%20between%20harm%20and%20a%20person%20%E2%80%94%20the%20Seraphic%20ward%2C%20which%20is%20why%20the%20Orders%20are%20loved%20despite%20everything.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=9311&nologo=true",
@@ -11560,7 +11661,25 @@
     "prism_sight": "https://image.pollinations.ai/prompt/Prism%20Sight%3A%20See%20the%20hidden%20spectra%20%E2%80%94%20heat%20traces%2C%20concealed%20marks%2C%20tampering%2C%20and%20lies%20of%20light.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=412&nologo=true",
     "mediators_tongue": "https://image.pollinations.ai/prompt/Mediator's%20Tongue%3A%20De-escalate%2C%20arbitrate%2C%20and%20find%20the%20shape%20of%20a%20deal%20both%20sides%20can%20live%20with.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=57690&nologo=true",
     "stillness_field": "https://image.pollinations.ai/prompt/Stillness%20Field%3A%20Weave%20a%20pocket%20of%20quiet%3A%20footsteps%20soften%2C%20voices%20die%20at%20its%20edge.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20harmonic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=94921&nologo=true",
-    "the_open_material": "https://image.pollinations.ai/prompt/The%20Open%20Material%3A%20Unmake%20the%20current%20form%20of%20a%20thing%20so%20completely%20that%20what%20remains%20is%20raw%20material%20%E2%80%94%20ready%20to%20become%20something%20else.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=79893&nologo=true"
+    "the_open_material": "https://image.pollinations.ai/prompt/The%20Open%20Material%3A%20Unmake%20the%20current%20form%20of%20a%20thing%20so%20completely%20that%20what%20remains%20is%20raw%20material%20%E2%80%94%20ready%20to%20become%20something%20else.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=79893&nologo=true",
+    "the_cut_thread": "https://image.pollinations.ai/prompt/The%20Cut%20Thread%3A%20The%20Fates'%20shears.%20One%20life%2C%20one%20cut%2C%20done%20%E2%80%94%20not%20a%20wound%2C%20a%20CESSATION.%20This%20is%20the%20deepest%20thing%20the%20Ashwardens%20hold%20and%20they%20teach%20it%20to%20almost%20nobody%2C%20because%20the%20argument%20against%20it%20has%20never%20been%20answered%20and%20they%20keep%20doing%20it%20anyway.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20ashwarden%20tradition%3A%20greys%2C%20bone-white%2C%20faded%20charcoal%2C%20a%20single%20quiet%20ember%3B%20ash%2C%20grave-stone%2C%20worn%20iron%2C%20chalk%3B%20low%2C%20level%2C%20the%20grey%20light%20of%20a%20still%20morning%3B%20the%20mercy%20of%20stopping%20%E2%80%94%20solemn%2C%20tender%2C%20kept%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=4728&nologo=true",
+    "the_undoing_word": "https://image.pollinations.ai/prompt/The%20Undoing%20Word%3A%20The%20Unmaker%20art%20of%20the%20undoing%20%E2%80%94%20returning%20a%20made%20or%20bound%20thing%20to%20its%20unassembled%20state%2C%20so%20it%20is%20not%20destroyed%20but%20un-done%2C%20its%20making%20reversed.%20The%20clean%20art%20of%20those%20who%20end%20things%20properly.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%3A%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%3B%20beautiful%20demolition%2C%20ordered%20ruin%2C%20the%20cleared%20space%3B%20light%20entering%20a%20thing%20just%20opened%3B%20an%20ethic%20of%20clearing%20%E2%80%94%20ruin%20made%20beautiful%20and%20deliberate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=7516&nologo=true",
+    "the_ended_burden": "https://image.pollinations.ai/prompt/The%20Ended%20Burden%3A%20Sustain%20by%20precisely%20ending%20what's%20wearing%20you%20down%20%E2%80%94%20the%20habit%2C%20the%20wound%2C%20the%20relationship%2C%20the%20weight%20%E2%80%94%20rather%20than%20trying%20to%20carry%20it%20further.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20unmaker%20tradition%3A%20dust-grey%2C%20controlled-rubble%2C%20clean%20break-line%3B%20beautiful%20demolition%2C%20ordered%20ruin%2C%20the%20cleared%20space%3B%20light%20entering%20a%20thing%20just%20opened%3B%20an%20ethic%20of%20clearing%20%E2%80%94%20ruin%20made%20beautiful%20and%20deliberate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=99164&nologo=true",
+    "the_stand": "https://image.pollinations.ai/prompt/The%20Stand%3A%20Hold%20a%20position%20or%20protect%20another%20under%20assault%20%E2%80%94%20the%20guardian's%20discipline.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20marcher%20tradition%3A%20steel-grey%2C%20blood-rust%2C%20weathered%20leather%3B%20honed%20blades%2C%20scarred%20armor%2C%20the%20held%20line%3B%20hard%20edge-light%2C%20a%20blade%20catching%20the%20sun%3B%20disciplined%2C%20scarred%2C%20holding%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=21723&nologo=true",
+    "storykeeper": "https://image.pollinations.ai/prompt/Storykeeper%3A%20Hold%2C%20recall%2C%20and%20deploy%20the%20valley's%20stories%20%E2%80%94%20living%20memory%20as%20a%20working%20tool.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=96412&nologo=true",
+    "light_well": "https://image.pollinations.ai/prompt/Light%20Well%3A%20Store%20light%20in%20a%20simple%20vessel%20and%20release%20it%20later%2C%20slow%20or%20sudden.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=89242&nologo=true",
+    "light_bending": "https://image.pollinations.ai/prompt/Light%20Bending%3A%20Bend%20light%20around%20yourself%20or%20objects%20%E2%80%94%20concealment%2C%20mirage%2C%20or%20redirection.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=50115&nologo=true",
+    "blend_in": "https://image.pollinations.ai/prompt/Blend%20In%3A%20Pass%20unnoticed%20in%20a%20crowd%20or%20settlement%20%E2%80%94%20look%20like%20you%20belong%2C%20be%20forgotten.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=9526&nologo=true",
+    "chord_of_mending": "https://image.pollinations.ai/prompt/Chord%20of%20Mending%3A%20Coax%20cracked%20or%20loosened%20things%20back%20toward%20wholeness%20by%20singing%20their%20grain.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20harmonic%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=69998&nologo=true",
+    "clarity_lens": "https://image.pollinations.ai/prompt/Clarity%20Lens%3A%20Shape%20light%20into%20a%20floating%20lens%3A%20magnify%2C%20steady%2C%20and%20brighten%20fine%20detail.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=79700&nologo=true",
+    "dawn_surgery": "https://image.pollinations.ai/prompt/Dawn%20Surgery%3A%20Operate%20with%20focused%20light%3A%20clean%20cuts%2C%20sealed%20vessels%2C%20sight%20into%20the%20wound.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=4147&nologo=true",
+    "daybreak_mantle": "https://image.pollinations.ai/prompt/Daybreak%20Mantle%3A%20Gather%20a%20mantle%20of%20soft%20radiance%20that%20inspires%20the%20hopeless%20and%20commands%20a%20room.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=97108&nologo=true",
+    "old_roads": "https://image.pollinations.ai/prompt/Old%20Roads%3A%20Sense%2C%20follow%2C%20and%20safely%20approach%20Precursor%20traces%20%E2%80%94%20the%20old%20roads%20under%20the%20valley's%20skin.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20valley%20craft%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=13592&nologo=true",
+    "prism_ward": "https://image.pollinations.ai/prompt/Prism%20Ward%3A%20String%20a%20standing%20lattice%20that%20reports%20whatever%20crosses%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=65789&nologo=true",
+    "radiant_lance": "https://image.pollinations.ai/prompt/Radiant%20Lance%3A%20Focus%20light%20into%20a%20searing%20coherent%20beam%20%E2%80%94%20precise%2C%20silent%2C%20fast%20as%20sight.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20radiant%20folk%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=48556&nologo=true",
+    "riding_order": "https://image.pollinations.ai/prompt/The%20Riding%20Order%3A%20The%20braid-craft%3A%20unmake%20a%20structure%20and%20re-bind%20its%20falling%20pieces%20into%20a%20new%20form%20mid-collapse.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20lattice%20tradition%3A%20cold%20white%2C%20glass-blue%2C%20precise%20grid-lines%3B%20arcology%20glass%2C%20seamless%20alloy%2C%20no%20accident%3B%20flat%20perfect%20illumination%2C%20no%20unplanned%20shadow%3B%20total%20prediction%2C%20the%20binding%20of%20possibility%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=95367&nologo=true",
+    "the_raised_form": "https://image.pollinations.ai/prompt/The%20Raised%20Form%3A%20Make%20through%20seraphic%20authority%20%E2%80%94%20what%20is%20raised%20embodies%20proper%20order%20and%20organizes%20what%20surrounds%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20seraphic%20tradition%3A%20gold%2C%20white%2C%20tier-on-tier%20brightness%3B%20tiered%20spires%2C%20choral%20height%2C%20mercy-from-above%3B%20radiant%20from%20above%2C%20unbearable%20choral%20certainty%3B%20administered%20mercy%2C%20height%2C%20certainty%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=33114&nologo=true",
+    "the_maintained_order": "https://image.pollinations.ai/prompt/The%20Maintained%20Order%3A%20Hold%20a%20structure%20in%20function%20across%20time%20%E2%80%94%20not%20by%20force%20but%20by%20constant%2C%20precise%20correction%20of%20everything%20that%20drifts.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20lattice%20tradition%3A%20cold%20white%2C%20glass-blue%2C%20precise%20grid-lines%3B%20arcology%20glass%2C%20seamless%20alloy%2C%20no%20accident%3B%20flat%20perfect%20illumination%2C%20no%20unplanned%20shadow%3B%20total%20prediction%2C%20the%20binding%20of%20possibility%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=46774&nologo=true"
   },
   "authorEdits": [
     {
@@ -11574,7 +11693,7 @@
     }
   ],
   "_stageOpRefusals": [
-    "what-the-water-remembers: not-current-stage (named \"resolve\", current is \"null\")"
+    "what-the-water-remembers: not-current-stage (named \"arrive\", current is \"null\")"
   ],
   "_pendingLedger": [],
   "locationState": {},

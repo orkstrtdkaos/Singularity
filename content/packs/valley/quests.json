@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "quests_structured",
  "kind": "quests",
- "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess. | SNG-229 hunts folded (Aevi 2026-07-24): 7 creature-hunt quests, real givers + machine-readable effects[], creatureId resolves against the now-loaded bestiary. | SNG-238 (Aevi 2026-07-25): the 7 bestiary hunts had stages as PLAIN STRINGS (the UI's stageRow renders s.id/s.title/s.objective -> empty rows, dead radios, the broken screenshots). Rebuilt as real stage OBJECTS with concrete first steps (stage 1 always a clear 'go here, do this' action) + a per-stage imagePrompt + a quest-level image + per-outcome imagePrompt. Matches the working structured-quest schema. | SNG-238 sweep (Aevi 2026-07-25): the audit-class sweep found 8 MORE quests with the same class as the hunts' string-stages - stage-objects MISSING title (render headerless). Added a title distilled from each stage's objective + quest image + per-stage/outcome imagePrompt. All quests now render with headers + carry image prompts. The hunts were the string variant; these were the incomplete-object variant - SAME CLASS.",
+ "note": "SNG-065 — the first authored STRUCTURED quests. Each obeys quest_structure.json: named stakes, testable stages, multi-route, branched outcomes with MANDATORY durable consequences. Authored by Aevi 2026-07-11. | SPEC BOUNDARY ACCEPTED (CCode, v1.8.24): consequences were authored as tagged PROSE, so mechanical application was best-effort ('Veilwright: lowered' was preserved but not parsed to a delta). FIXED by Aevi: every outcome now carries BOTH `narration` (the authored prose — the chronicle voice, kept) AND `effects[]` (machine-readable deltas the engine APPLIES). Aevi's authoring defect; CCode was right to flag rather than guess. | SNG-229 hunts folded (Aevi 2026-07-24): 7 creature-hunt quests, real givers + machine-readable effects[], creatureId resolves against the now-loaded bestiary. | SNG-238 (Aevi 2026-07-25): the 7 bestiary hunts had stages as PLAIN STRINGS (the UI's stageRow renders s.id/s.title/s.objective -> empty rows, dead radios, the broken screenshots). Rebuilt as real stage OBJECTS with concrete first steps (stage 1 always a clear 'go here, do this' action) + a per-stage imagePrompt + a quest-level image + per-outcome imagePrompt. Matches the working structured-quest schema. | SNG-238 sweep (Aevi 2026-07-25): the audit-class sweep found 8 MORE quests with the same class as the hunts' string-stages - stage-objects MISSING title (render headerless). Added a title distilled from each stage's objective + quest image + per-stage/outcome imagePrompt. All quests now render with headers + carry image prompts. The hunts were the string variant; these were the incomplete-object variant - SAME CLASS. | SNG-239 (Aevi 2026-07-25): rewrote what_the_water_remembers concrete + precursor-awakening + a 4th 'wake it and walk it into the world' ending, tied to arc_what_wakes_beneath.",
  "quests": [
   {
    "id": "the_edge_district_ledger",
@@ -441,40 +441,40 @@
     "abyssal",
     "stillhold"
    ],
-   "premise": "Mara Wells has traced the Echo River's poisoning to a single point upstream in the Disputed Zone — a structure the old maps don't show, drawing power nothing alive built. It is not malfunctioning. It is following an order, and it is nearly finished.",
-   "stakes": "If you walk away: the standoff at the filtration arrays goes live — Millbrook's guards and the Radiant leadership are one bad morning from open conflict over water neither side controls. Whatever the structure was ordered to do finishes without a single living person having chosen it, and finishing is not the same as stopping.",
+   "premise": "Mara Wells traced the Echo River's poisoning to a single point upstream — a pre-Transition WASTE-TREATMENT FACILITY the old maps don't show, running again after a century dark. At first it looks simple: an old machine malfunctioning, fouling the water. But the deeper you go, the less it reads like a machine. It is not malfunctioning. It is WAKING — and the poison is the first thing it does as it comes back to itself.",
+   "stakes": "The near stakes: the river is dying, and Millbrook's guards and the Radiant leadership are one bad morning from open conflict over water neither side controls. The deep stakes: this is the first tremor of What Wakes Beneath — the facility is not just a machine but a dormant PRECURSOR presence stirring, and the Valley's poisoned water is the nearest and least of what its waking could mean. What you decide here decides whether it sleeps again, dies, or walks.",
    "stages": [
     {
      "id": "s1",
-     "title": "Reach the pool that remembers",
-     "objective": "Find where the poisoning actually starts.",
-     "condition": "Trace the contamination upstream past the Disputed Zone fringe (Mara's testimony, Kit Farrow's account of survey-grid lights at night) OR obtain the falsified purity reports from the Radiant filtration arrays.",
-     "change": "Codex: the source is a structure, not a spill. Something built this.",
-     "imagePrompt": "A figure climbing to a still upland pool that shimmers with a held image."
+     "title": "Trace the poison to its source",
+     "objective": "Find where the river's poisoning actually starts.",
+     "condition": "Trace the contamination upstream past the Disputed Zone fringe — Mara's testimony, Kit Farrow's account of survey-grid lights at night — or obtain the falsified purity reports from the Radiant filtration arrays.",
+     "change": "The source is not a spill. It is a STRUCTURE — a pre-Transition waste-treatment facility, buried and forgotten, running again after a hundred years dark. Something turned it back on. Or something inside it woke.",
+     "imagePrompt": "A tracker following a poisoned river upstream to a half-buried pre-Transition structure emerging from a hillside, wrongness in the water, survey-grid lights faint in the dusk."
     },
     {
      "id": "s2",
-     "title": "Read what the water holds",
-     "objective": "Learn what the structure is.",
-     "condition": "Reach the reclamation site itself, or bring what you've found to the Archive Guardian for identification against pre-Transition record.",
-     "change": "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath.",
-     "imagePrompt": "A reader crouched at a pool's edge, a memory surfacing in the water like a reflection that isn't theirs."
+     "title": "Get inside and learn what it's doing",
+     "objective": "Reach the facility and learn what it is actually doing to the water.",
+     "condition": "Reach the reclamation site itself and read its workings, or bring what you've found to the Archive Guardian for identification against pre-Transition record.",
+     "change": "It is a waste-treatment facility — built to CLEANSE water, not poison it. But its instruction has curdled: it is 'preparing the watershed,' stripping the river down to something sterile and dead by a logic no living person set. And the deeper you read, the wronger it gets: the machine is following an instruction, but SOMETHING is following the machine. There is a presence in the deep of it that is not part of the design.",
+     "imagePrompt": "The interior of an ancient waste-treatment facility grinding back to life, pipes and tanks running, a faint wrong presence in the deepest chamber, a figure reading its workings by device-light."
     },
     {
      "id": "s3",
-     "title": "Learn whose memory it keeps",
-     "objective": "Learn what 'prepare' means before deciding what to do about it.",
-     "condition": "Investigate the instruction directly — read the array's own logic, deathsense what kind of thing it is now, or get someone who was there when it stirred to say what they saw.",
-     "change": "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not.",
-     "imagePrompt": "A face resolving in still water, a figure recognizing whose memory the pool keeps."
+     "title": "Find out what's really waking",
+     "objective": "Learn what the presence in the facility actually IS before you decide what to do about it.",
+     "condition": "Investigate the presence directly — read the facility's core with Order-Sense, Deathsense what kind of thing it has become, or find someone who was there the night it first stirred and get them to say what they saw.",
+     "change": "The facility didn't just switch on — it is the SHELL of a dormant PRECURSOR presence, a thing from before the Transition that has slept inside the machine for a century, and it is WAKING. The poisoning is not a malfunction; it is the presence stretching, the machine acting on its half-formed will. This is the first tremor of What Wakes Beneath. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools — but the real question is now enormous: something is coming back to life under the Valley, and you are the one standing over it.",
+     "imagePrompt": "A dormant precursor presence stirring in the heart of an ancient facility — vast, half-awake, not quite alive and not quite machine, a lone figure standing before its waking with device-light and drawn craft."
     },
     {
      "id": "s4",
-     "title": "Decide whether the memory is kept or released",
-     "objective": "Decide what the water becomes.",
-     "condition": "Resolve — see outcomes.",
-     "change": "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to.",
-     "imagePrompt": "A hand at the water's surface at a decision — to keep the memory, or let it dissolve into ripples."
+     "title": "Decide what wakes, sleeps, or dies",
+     "objective": "Decide what happens to the waking presence — and to the river.",
+     "condition": "Resolve — see the endings. You understand now what you are deciding: a precursor is coming alive under the Valley, poisoning the river as it wakes, and the choice of what it becomes is yours.",
+     "change": "The watershed changes, and so does the Valley's future — because what you choose here is the first answer anyone gives to What Wakes Beneath.",
+     "imagePrompt": "A figure at a decision point before a waking precursor presence in an ancient facility, the poisoned river behind them, the weight of a world-scale choice."
     }
    ],
    "routes": {
@@ -488,183 +488,193 @@
    "outcomes": [
     {
      "id": "sealed",
-     "name": "The Site Sealed",
-     "summary": "The instruction is stopped cold. The water clears. What it was for is buried with it.",
-     "narration": [
-      "The reclamation site goes dark. Within days the Echo River runs clean, and Millbrook's guards stand down from the filtration arrays without a shot fired.",
-      "The Archive Guardian does not forgive this easily — a working pre-Transition system, one of perhaps a handful left running in the world, destroyed rather than understood. He is right to be furious and says so.",
-      "Whatever the substrate was preparing this watershed for will now happen somewhere else, to someone who didn't get a choice in it either — the Valley's tremor was never the only one.",
-      "The district exhales. It does not yet know what it gave up to get that exhale.",
-      "Verist disposition toward you: raised — you gave people the plain truth and a clean ending. Lattice: lowered — you didn't need to understand it, only to stop it."
-     ],
+     "name": "Sealed — Put It Back to Sleep",
+     "when": "the player seals the facility / forces the presence back into dormancy",
+     "text": "You seal the facility and force the presence back down into the dark it climbed out of. The machine halts mid-instruction; the river begins, slowly, to clear. It is not dead — it is sleeping, and you are the one who knew and chose to let it sleep. What Wakes Beneath stirs a little quieter now, for a while.",
      "effects": [
       {
        "type": "location_state",
        "location": "the_reclamation_site",
-       "change": "sealed — permanently inert, the instruction halted mid-execution"
+       "change": "sealed — the facility inert, the presence forced back to dormancy"
       },
       {
-       "type": "npc_state",
-       "npc": "archive_guardian",
-       "state": "estranged",
-       "note": "a working pre-Transition system destroyed rather than studied; he will not easily trust your judgment on old things again"
-      },
-      {
-       "type": "disposition",
-       "people": "verist",
-       "delta": 2
-      },
-      {
-       "type": "disposition",
-       "people": "lattice",
-       "delta": -1
+       "type": "world_fact",
+       "text": "The waking presence beneath the Echo River was sealed back into sleep by Silas Weir — the river clears, and What Wakes Beneath is delayed, not answered.",
+       "permanent": true
       },
       {
        "type": "codex_fact",
-       "text": "The reclamation site beneath the Disputed Zone has been sealed. What it was preparing the Echo watershed for will never be known here."
+       "topic": "the_sealed_presence",
+       "kind": "lore",
+       "fact": "A dormant precursor waking under the Valley, poisoning the Echo River as it stirred — sealed back to sleep. It is not gone; it is delayed.",
+       "links": [
+        "what-the-water-remembers",
+        "arc_what_wakes_beneath"
+       ]
       },
       {
-       "type": "world_event",
-       "text": "Word spreads that the Valley's water crisis had a built source, not a natural one, and that it has been closed for good.",
-       "propagates": true,
-       "delayDays": 4
+       "type": "world_arc",
+       "arc": "arc_what_wakes_beneath",
+       "note": "the first tremor is pushed back down — the arc recedes, for now"
       },
       {
-       "type": "quest_seed",
-       "text": "Foreclosure doesn't stop the substrate waking elsewhere — only here. What wakes beneath continues on its own schedule, everywhere the Valley isn't."
-      },
-      {
-       "type": "xp",
-       "amount": 40
+       "type": "standing",
+       "people": "ashwarden",
+       "delta": 1,
+       "why": "chose to let a sleeping thing sleep rather than wake or end it — a warden's restraint"
       }
      ],
-     "imagePrompt": "The Site Sealed: The instruction is stopped cold. The water clears. What it was for is buried with it."
+     "imagePrompt": "An ancient facility sealed and going dark, a precursor presence sinking back into dormancy, a river beginning to clear behind a weary figure."
     },
     {
      "id": "let_it_finish",
-     "name": "Let It Finish",
-     "summary": "The instruction completes. The water is not restored. It is something else now.",
-     "narration": [
-      "You do nothing to stop it, or you help it along, and the reclamation system runs its last cycle to completion. The poisoning stops — but not because the water went back to what it was.",
-      "The Echo River no longer sickens anyone. It also no longer behaves entirely like water. Fish return to it changed in ways no one has words for yet. Nobody drowns in it anymore, and nobody has explained why.",
-      "The Archive Guardian is half-vindicated, half-unsettled — this is exactly the kind of thing he wanted preserved and studied, and exactly the kind of thing nobody asked the district's permission to let happen to their river.",
-      "You made the opening choice at the smallest scale the largest arc has to offer. What the water became is shaped, now, by what happens to it next — and by who's watching it.",
-      "Ashwarden disposition toward you: raised — you let a thing finish being what it was becoming instead of forcing it back into what it had been."
-     ],
+     "name": "Let It Die — Let the Instruction Finish",
+     "when": "the player lets the facility complete its instruction, killing the presence",
+     "text": "You let it finish. The machine completes what it was doing, and in finishing, the waking presence has nowhere left to wake into — it burns down to nothing with the last of the instruction. The river is left sterile where the work reached, but the thing that was coming back will never come back. You chose an ending over an unknown.",
      "effects": [
       {
        "type": "location_state",
        "location": "the_reclamation_site",
-       "change": "completed — instruction fulfilled; the site has gone quiet on its own terms"
+       "change": "completed — instruction fulfilled, the presence extinguished with it"
       },
       {
-       "type": "npc_state",
-       "npc": "archive_guardian",
-       "state": "watching",
-       "note": "fascinated and uneasy in equal measure; wants access to study what the water has become"
-      },
-      {
-       "type": "disposition",
-       "people": "ashwarden",
-       "delta": 2
+       "type": "world_fact",
+       "text": "Silas Weir let the facility finish its instruction — the waking presence died with it, at the cost of a stretch of sterile river. What Wakes Beneath lost its nearest stirring.",
+       "permanent": true
       },
       {
        "type": "codex_fact",
-       "text": "The Echo River is transformed, not restored. Something in the water is different now, and no one fully understands what.",
-       "secret": false
+       "topic": "the_ended_presence",
+       "kind": "lore",
+       "fact": "A waking precursor extinguished by letting the facility that shelled it complete its work — an ending chosen over an unknown, paid for with dead water.",
+       "links": [
+        "what-the-water-remembers",
+        "arc_what_wakes_beneath"
+       ]
       },
       {
-       "type": "world_event",
-       "text": "The Echo watershed has changed in ways that reach past the Valley — the substrate's waking is no longer only a tremor here.",
-       "propagates": true,
-       "delayDays": 6
+       "type": "world_arc",
+       "arc": "arc_what_wakes_beneath",
+       "note": "a stirring is ended outright — the arc loses a thread, but the Valley wonders what was lost"
       },
       {
-       "type": "quest_seed",
-       "text": "What the water has become will need tending, or watching, or both — and it will not wait forever to be decided about."
-      },
-      {
-       "type": "xp",
-       "amount": 45
-      },
-      {
-       "type": "arc_stage",
-       "arcId": "arc_what_wakes_beneath",
-       "from": 1,
-       "to": 2,
-       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock — the tremor became a stirring, and everyone sees it"
+       "type": "standing",
+       "people": "ashwarden",
+       "delta": 2,
+       "why": "gave a clean ending to a thing that had not yet fully woken — the Ashwarden's judgment on a hard, irreversible call"
       }
      ],
-     "imagePrompt": "Let It Finish: The instruction completes. The water is not restored. It is something else now."
+     "imagePrompt": "An ancient facility completing its final cycle, a half-woken presence guttering out, a stretch of river left grey and sterile, a figure watching an ending they chose."
     },
     {
      "id": "redirected",
-     "name": "The Instruction Rewritten",
-     "summary": "Neither stopped nor completed — amended. Someone finally reads it well enough to change it on purpose.",
-     "narration": [
-      "You don't shut the system down and you don't let it run blind. You get inside the instruction itself and change one line: prepare the watershed — for what it can safely become, not for whatever it was originally for.",
-      "The water clears. It also carries something new — small, useful, unmistakably still there if you know to look. The district gets its river back and doesn't know it got anything else.",
-      "The Archive Guardian is, briefly, insufferable about being right that this was worth understanding rather than destroying or ignoring.",
-      "This was the hard way. Reaching it took the technical or death-sensed truth of stages 2 and 3, not just a decision at the end — and it shows in what's left standing.",
-      "Lattice disposition toward you: strongly raised — you didn't defeat the thing or surrender to it. You read it well enough to argue with it and won."
-     ],
+     "name": "Rewritten — Fix the River, Keep It Sleeping",
+     "when": "the player rewrites the instruction so the facility cleanses instead of poisons, leaving the presence dormant",
+     "text": "You reach into the curdled instruction and rewrite it — turn 'prepare the watershed' back into what the facility was built for: CLEANSE it. The machine keeps running, but now it heals the river instead of stripping it. The presence stays dormant, undisturbed, sleeping under a machine that finally does right. You fixed the river without waking or killing the thing beneath it. The hardest road, and the kindest.",
      "effects": [
       {
        "type": "location_state",
        "location": "the_reclamation_site",
-       "change": "redirected — running an amended instruction, monitored"
+       "change": "redirected — running an amended instruction, cleansing the river; the presence left dormant"
       },
       {
-       "type": "npc_state",
-       "npc": "archive_guardian",
-       "state": "ally",
-       "note": "delighted, insufferable, genuinely grateful; will share pre-Transition knowledge more readily now"
-      },
-      {
-       "type": "ally",
-       "npc": "archive_guardian",
-       "note": "trusts your judgment on old and dangerous things going forward"
-      },
-      {
-       "type": "disposition",
-       "people": "lattice",
-       "delta": 3
+       "type": "world_fact",
+       "text": "Silas Weir rewrote the facility's instruction to cleanse the Echo River instead of poison it — the river heals, and the presence beneath sleeps on, undisturbed. A repair, not a reckoning.",
+       "permanent": true
       },
       {
        "type": "codex_fact",
-       "text": "The reclamation site runs a rewritten instruction now — the water is clear, and something small and new persists in it, watched rather than feared."
+       "topic": "the_rewritten_facility",
+       "kind": "lore",
+       "fact": "A pre-Transition waste-treatment facility, its curdled instruction rewritten to heal the Echo River — the dormant presence within left sleeping. The wright's answer: fix the harm, wake nothing.",
+       "links": [
+        "what-the-water-remembers",
+        "arc_what_wakes_beneath"
+       ]
       },
       {
-       "type": "world_event",
-       "text": "The Valley quietly solved a problem no one else in the world has managed to solve yet — and someone will eventually come asking how.",
-       "propagates": true,
-       "delayDays": 10
+       "type": "world_arc",
+       "arc": "arc_what_wakes_beneath",
+       "note": "the tremor is quieted without being resolved — the presence sleeps, the question defers"
       },
       {
-       "type": "quest_seed",
-       "text": "A system that can be argued with can be argued with by someone else, too. Not everyone who learns what you did will want the same outcome."
+       "type": "standing",
+       "people": "wright",
+       "delta": 3,
+       "why": "rewrote a curdled century-old instruction to heal instead of harm — the Wright's craft at its finest"
       },
       {
-       "type": "xp",
-       "amount": 50
-      },
-      {
-       "type": "arc_stage",
-       "arcId": "arc_what_wakes_beneath",
-       "from": 1,
-       "to": 2,
-       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock — the tremor became a stirring, and everyone sees it",
-       "weight": 2
+       "type": "standing",
+       "people": "rootkin",
+       "delta": 2,
+       "why": "chose to heal the water and let the sleeping thing sleep — the Rootkin's own value"
       }
      ],
-     "imagePrompt": "The Instruction Rewritten: Neither stopped nor completed — amended. Someone finally reads it well enough to change it on purpose."
+     "imagePrompt": "A figure reworking the glowing core-instruction of an ancient facility, the machine's output shifting from poison to clean water, a river healing downstream, a presence sleeping undisturbed below."
+    },
+    {
+     "id": "awakened",
+     "name": "Awakened — Wake It, and Walk It Into the World",
+     "when": "the player chooses to fully wake the precursor presence and midwife it into the world, healing the river as part of its waking",
+     "text": "You do the thing no one sane would counsel: you help it WAKE. Not the curdled half-will of the machine — the presence itself, fully, on its own terms. You reach into its stirring and steady it, and instead of a poisoning half-thing thrashing in its shell, something ancient and whole opens its eyes under the Valley. It cleanses the river as its first act of being alive — the poison was only a thing done in half-sleep. And then it MOVES: a precursor presence, awake and walking the world for the first time since before the Transition, with you as the one who midwifed it. What it becomes now, no one knows — but it is alive, it is free, and it remembers who woke it. What Wakes Beneath is no longer a question. It has an answer, and the answer is walking.",
+     "effects": [
+      {
+       "type": "location_state",
+       "location": "the_reclamation_site",
+       "change": "emptied — the presence has woken and departed the facility; the shell stands quiet"
+      },
+      {
+       "type": "world_fact",
+       "text": "Silas Weir chose to WAKE the dormant precursor beneath the Echo River and midwife it into the world — it cleansed the river as its first living act and now WALKS, awake and free for the first time since before the Transition, and it remembers who woke it. What Wakes Beneath has been answered by waking it.",
+       "permanent": true
+      },
+      {
+       "type": "codex_fact",
+       "topic": "the_awakened_precursor",
+       "kind": "lore",
+       "fact": "A precursor presence, dormant beneath the Valley since before the Transition, fully WOKEN and walked into the world by Silas Weir — it healed the Echo River in the waking and now moves through the Valley, ancient and whole, bound to the one who midwifed it. The largest and least reversible answer to What Wakes Beneath.",
+       "links": [
+        "what-the-water-remembers",
+        "arc_what_wakes_beneath"
+       ]
+      },
+      {
+       "type": "npc_state",
+       "npc": "the_awakened_precursor",
+       "state": "awakened",
+       "note": "a precursor presence now walking the world, bonded to Silas as the one who woke it — a new power loose in the Valley, its intentions its own"
+      },
+      {
+       "type": "world_arc",
+       "arc": "arc_what_wakes_beneath",
+       "note": "the arc is ANSWERED by waking — a precursor walks; this accelerates every other stirring and remakes the Valley's future"
+      },
+      {
+       "type": "standing",
+       "people": "numinous",
+       "delta": 1,
+       "why": "woke a precursor — the Numinous are unsettled and fascinated by a thing from before the Transition, alive again"
+      }
+     ],
+     "wake": {
+      "scale": "world",
+      "open": true,
+      "pressure": "A dormant precursor has been fully woken and walks the Valley for the first time since before the Transition, bonded to the one who woke it. This pushes toward: the Valley reckoning with a living ancient power loose among them (worship, fear, factions wanting to use or destroy it); the other stirrings of What Wakes Beneath ACCELERATING now that one has answered; and the presence itself developing a will, a want, a direction — a walking question the whole world will respond to.",
+      "seeds": [
+       "the Valley reacting to a living precursor in its midst",
+       "the other What-Wakes-Beneath stirrings accelerating",
+       "the awakened presence developing its own will and want"
+      ]
+     },
+     "imagePrompt": "An ancient precursor presence fully awake and rising from a facility for the first time in centuries, the river running clean in its wake, a figure standing with it as midwife and companion, a new power walking into the dawn world."
     }
    ],
    "arcId": "arc_what_wakes_beneath",
    "arcStageFrom": 1,
    "arcStageTo": 2,
    "publicFace": "The Valley's poisoned water was traced to a built source under the Disputed Zone — and someone did something about it.",
-   "image": "A still upland pool that holds an image it should not — a memory in the water, a face or a moment from before, rippling when approached. A Somatic reader crouched at its edge. Cold clear light, water as memory, the uncanny."
+   "image": "A still upland pool that holds an image it should not — a memory in the water, a face or a moment from before, rippling when approached. A Somatic reader crouched at its edge. Cold clear light, water as memory, the uncanny.",
+   "note_author": "SNG-239 rewrite (Aevi 2026-07-25, Erik-directed): was a sterile 'nanite reclamation system' with abstract endings. Rewritten CONCRETE (a pre-Transition WASTE-TREATMENT facility poisoning the river) AND opened the precursor truth Erik wanted (it's a dormant PRECURSOR waking - ties the What Wakes Beneath arc, whose stage 1 literally names this poisoned water as its first tremor). Stages CLARIFY as they progress (ordinary machine -> curdled instruction -> a presence in the deep -> a waking precursor). Added Erik's 4th ending: AWAKENED - wake it, heal the river as its first act, and walk it into the world bonded to Silas. Four real roads: sleep/die/repair-and-let-sleep/wake-and-walk."
   },
   {
    "id": "the_light_that_will_not_dim",

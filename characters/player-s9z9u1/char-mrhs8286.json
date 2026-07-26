@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 26,
-  "xp": 2566,
+  "xp": 2569,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -149,7 +149,7 @@
   "alignment": {
     "spectrumId": -0.03410363537045346,
     "violence_peace": 0.09293033437499999,
-    "chaos_order": 0.2509874786584471,
+    "chaos_order": 0.24843810472552474,
     "mechanical_spiritual": 0.25513542055105926,
     "concrete_abstract": -0.03496367597441142,
     "death_life": -0.20141254972516165,
@@ -163,7 +163,7 @@
   "maxHealth": 155,
   "health": 155,
   "maxEnergy": 225,
-  "energy": 167,
+  "energy": 165,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1981,89 +1981,78 @@
         "player": "Push Deathsense deeper — a full read north, not a walking scan; find whether the old death site is the response point or something that happened to it",
         "summary": "Full Deathsense push north — the old death site is an ending held open, not completed, the Zone organizing around it like a stone in still water.",
         "narration": "You stop walking. Pell takes two more steps before she notices and turns back, Memory loose in her hand, watching your face.\n\nYou open Deathsense all the way — not a walking read, not the careful scan you have been running for the last ten minutes. The full instrument. You let it go north.\n\nThe branch fills in like a map drawn in cold fire. The small deaths are still there — the warpling, the birch stand — but you push past them and the Zone's substrate rises around the sense like water rising in a well, thick and strange, a thousand small endings the land has absorbed over fifteen years without anyone attending them. It costs you. Your vision goes grey at the edges for a breath.\n\nThen you find it.\n\nSomething large died north of you, and it died years ago — not a clean death, not a sick death, not even a Zone-change unraveling into nothing. The reading is wrong in a specific way. The ending is present but not completed. A death held open. The shape of a thing that finished dying but was never — allowed — to become what a dead thing becomes. It sits in the substrate like a stone under still water, everything else running around it, and the Zone has organized part of itself around the fact of it.\n\nHuginn banks hard north. No sound. The timing of that is a comment.\n\nVeth has stopped walking too. She reads your face. \"The response site,\" she says, and it is not a question."
+      },
+      {
+        "player": "Read the design north with Order-Sense before you move — understand how the held-open death sits in the Zone's structure",
+        "summary": "Order-Sense reads the held-open death as a structural node — the Zone's spine runs through it — but the substrate is too thin to close on its purpose.",
+        "narration": "You hold still and let Order-Sense open northward — not wide, not reaching for everything at once, just the thread you already found with Deathsense. The design north of you comes in pieces, the way a thing seen through fog resolves slowly from the center out.\n\nThe held-open death is a node. That much is clear. The Zone's structure runs through it the way a wheel's spokes run through the hub — not incidentally, not because the death happened to be there, but because the Zone has been building toward it. Fifteen years of small endings absorbed, and this one held back, and the result is that the left branch has a spine. You are reading it now, and the spine runs through that site.\n\nWhat you cannot read is the purpose. The design has a shape — a gathering, an anchor, something held at tension — but the substrate here is too thin and too strange for Order-Sense to close on the intent. You can see the structure. You cannot yet see what the structure is for. It is like looking at a lock from the outside and knowing it is a lock without knowing what it guards or who made the key.\n\nVeth has not moved. She reads your face the same way she read it at the clearing — not waiting for you to explain, just filing the result. Pell's hand has not gone to Memory, but it is close. Huginn does not come back from the north. He is already there."
       }
     ],
     "lastTurn": {
-      "narration": "You stop walking. Pell takes two more steps before she notices and turns back, Memory loose in her hand, watching your face.\n\nYou open Deathsense all the way — not a walking read, not the careful scan you have been running for the last ten minutes. The full instrument. You let it go north.\n\nThe branch fills in like a map drawn in cold fire. The small deaths are still there — the warpling, the birch stand — but you push past them and the Zone's substrate rises around the sense like water rising in a well, thick and strange, a thousand small endings the land has absorbed over fifteen years without anyone attending them. It costs you. Your vision goes grey at the edges for a breath.\n\nThen you find it.\n\nSomething large died north of you, and it died years ago — not a clean death, not a sick death, not even a Zone-change unraveling into nothing. The reading is wrong in a specific way. The ending is present but not completed. A death held open. The shape of a thing that finished dying but was never — allowed — to become what a dead thing becomes. It sits in the substrate like a stone under still water, everything else running around it, and the Zone has organized part of itself around the fact of it.\n\nHuginn banks hard north. No sound. The timing of that is a comment.\n\nVeth has stopped walking too. She reads your face. \"The response site,\" she says, and it is not a question.",
-      "sceneSummary": "Full Deathsense push north — the old death site is an ending held open, not completed, the Zone organizing around it like a stone in still water.",
+      "narration": "You hold still and let Order-Sense open northward — not wide, not reaching for everything at once, just the thread you already found with Deathsense. The design north of you comes in pieces, the way a thing seen through fog resolves slowly from the center out.\n\nThe held-open death is a node. That much is clear. The Zone's structure runs through it the way a wheel's spokes run through the hub — not incidentally, not because the death happened to be there, but because the Zone has been building toward it. Fifteen years of small endings absorbed, and this one held back, and the result is that the left branch has a spine. You are reading it now, and the spine runs through that site.\n\nWhat you cannot read is the purpose. The design has a shape — a gathering, an anchor, something held at tension — but the substrate here is too thin and too strange for Order-Sense to close on the intent. You can see the structure. You cannot yet see what the structure is for. It is like looking at a lock from the outside and knowing it is a lock without knowing what it guards or who made the key.\n\nVeth has not moved. She reads your face the same way she read it at the clearing — not waiting for you to explain, just filing the result. Pell's hand has not gone to Memory, but it is close. Huginn does not come back from the north. He is already there.",
+      "sceneSummary": "Order-Sense reads the held-open death as a structural node — the Zone's spine runs through it — but the substrate is too thin to close on its purpose.",
       "choices": [
         {
-          "label": "Press north toward the held-open death — attend to what is there, whatever it is",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 15,
+          "label": "Move north to the site itself — the design will close when you are standing in it",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
           "intentTags": [
             "travel",
             "careful"
           ],
+          "trivial": true
+        },
+        {
+          "label": "Use The Attended End on the held-open death from here — read whether it is ending now, or being kept from ending",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
           "abilityId": "the-attended-end",
-          "energyCost": null,
+          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Ask Huginn what he saw from altitude — he banked north before you finished the read",
+          "label": "Ask Huginn directly what he went to find — call him back and hear what the old death is",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Tell Veth plainly what the reading found — a death held open, not completed — and ask if the ashwarden tradition has a name for it",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Read the design north with Order-Sense before you move — understand how the held-open death sits in the Zone's structure",
+          "label": "Push Order-Sense harder at the node from here — accept the cost of a thinner read to try to close on the design's intent",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": 15,
+          "difficulty": 30,
           "intentTags": [
-            "scout",
-            "study"
+            "study",
+            "risky"
           ],
           "abilityId": "order_sense",
-          "energyCost": null,
+          "energyCost": 2,
           "trivial": false
         }
       ],
-      "characterDeltas": {
-        "energy": -2
-      },
       "scene": {
-        "setting": "Left-branch Zone, frost-hard ground two hundred yards north of the streambed — the party has stopped moving. Zone-thickened canopy overhead, flat early-spring light, iron-and-ozone in the air.",
+        "setting": "Left-branch Zone, frost-hard ground two hundred yards north of the streambed — the party has stopped. Zone-thickened canopy overhead, flat early-spring light, iron-and-ozone in the air. Huginn is no longer visible overhead — he has gone further north.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Turned back to watch Silas's face — Memory loose in her hand, waiting."
+            "state": "Standing still, hand near Memory, watching Silas's face."
           },
           {
             "name": "Veth Ondra",
-            "state": "Stopped walking. Reading Silas's expression. Has named the response site aloud."
+            "state": "Has not moved. Reading Silas's expression quietly, filing the result."
           },
           {
             "name": "Huginn",
-            "state": "Banked hard north without a sound — already moving toward the old death site."
+            "state": "Gone north — already at or near the old death site."
           },
           {
             "name": "Logana",
@@ -2073,78 +2062,50 @@
         "objects": [
           "frost-hard ground with four-toed impressions",
           "Zone-thickened treetops angled wrong above the path",
-          "Memory — Pell carrying it",
+          "Memory — Pell carrying it, hand near the grip",
           "dead birch stand to the east — dead at the root, still standing"
         ],
         "threads": [
-          "A death to the north is held open — not completed, not allowed to become what a dead thing becomes; the Zone has organized around it",
-          "Huginn banked north before Silas finished the read — knows something",
-          "The response site to the north has not answered the relay node in at least fifteen years — its condition may now be understood",
-          "Veth named it without being told — her read of Silas's face was enough",
+          "The held-open death to the north is a structural node — the Zone's spine runs through it — but its purpose is unread",
+          "Huginn has gone ahead without a sound and has not returned",
+          "The substrate is too thin for Order-Sense to close on intent; the design's purpose remains locked",
           "Logana holds the perimeter — the boundary between Silas's warding and the Zone's claim remains unresolved"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "role": "Former Ashwarden warden, traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Read Silas's expression after the full Deathsense cast and named the response site aloud — not a question.",
-          "statusNote": "Walking north with the party — stopped when Silas stopped; watching and waiting for his account of the read.",
-          "learned": [
-            "The old death site to the north reads as an ending held open — not completed, the Zone organizing around it"
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion — Ashwarden-touched carrion bird",
-          "gender": "nonbinary",
-          "pronouns": "they/them",
-          "note": "Banked hard north the moment Silas finished the deep read — no sound, no prompting. The timing is deliberate.",
-          "statusNote": "Moving north toward the old death site ahead of the party.",
-          "learned": [
-            "The held-open death to the north — Huginn moved before Silas could describe it"
-          ]
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "zone-left-branch-entrance",
-          "label": "Disputed Zone — Left Branch",
+          "label": "Left Branch Zone — Structure",
           "kind": "place",
           "entityId": "zone-left-branch-entrance",
-          "fact": "A full Deathsense push north found an ending held open — not a recent death, not a Zone-change unraveling, but a death that finished and was never allowed to become what a dead thing becomes. The Zone has organized part of itself around it. Huginn banked north before the read was spoken aloud.",
+          "fact": "The held-open death to the north is a structural node. The Zone's design runs through it — fifteen years of small endings gathered and channeled to it, not incidentally but as a spine. The purpose of this gathering cannot be read from this distance in the thinned substrate.",
           "links": [
             "what-the-water-remembers",
             "the-attended-end",
-            "deathsense"
+            "deathsense",
+            "order_sense"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A full Deathsense push — a moment of stillness on the road, not a long halt"
+        "why": "a careful standing read, a few minutes on the road"
       }
     },
     "sceneState": {
-      "setting": "Left-branch Zone, frost-hard ground two hundred yards north of the streambed — the party has stopped moving. Zone-thickened canopy overhead, flat early-spring light, iron-and-ozone in the air.",
+      "setting": "Left-branch Zone, frost-hard ground two hundred yards north of the streambed — the party has stopped. Zone-thickened canopy overhead, flat early-spring light, iron-and-ozone in the air. Huginn is no longer visible overhead — he has gone further north.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Turned back to watch Silas's face — Memory loose in her hand, waiting."
+          "state": "Standing still, hand near Memory, watching Silas's face."
         },
         {
           "name": "Veth Ondra",
-          "state": "Stopped walking. Reading Silas's expression. Has named the response site aloud."
+          "state": "Has not moved. Reading Silas's expression quietly, filing the result."
         },
         {
           "name": "Huginn",
-          "state": "Banked hard north without a sound — already moving toward the old death site."
+          "state": "Gone north — already at or near the old death site."
         },
         {
           "name": "Logana",
@@ -2154,14 +2115,13 @@
       "objects": [
         "frost-hard ground with four-toed impressions",
         "Zone-thickened treetops angled wrong above the path",
-        "Memory — Pell carrying it",
+        "Memory — Pell carrying it, hand near the grip",
         "dead birch stand to the east — dead at the root, still standing"
       ],
       "threads": [
-        "A death to the north is held open — not completed, not allowed to become what a dead thing becomes; the Zone has organized around it",
-        "Huginn banked north before Silas finished the read — knows something",
-        "The response site to the north has not answered the relay node in at least fifteen years — its condition may now be understood",
-        "Veth named it without being told — her read of Silas's face was enough",
+        "The held-open death to the north is a structural node — the Zone's spine runs through it — but its purpose is unread",
+        "Huginn has gone ahead without a sound and has not returned",
+        "The substrate is too thin for Order-Sense to close on intent; the design's purpose remains locked",
         "Logana holds the perimeter — the boundary between Silas's warding and the Zone's claim remains unresolved"
       ]
     }
@@ -5559,7 +5519,7 @@
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
     "lastGenCount": 624,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 11,
     "recentOffers": [
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
@@ -7172,22 +7132,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.70117472337049,
-    "cerebral": 14.946308855317056,
-    "social": 6.0070820975070065,
-    "generous": 2.1567444563443674,
-    "cautious": 14.162969134282834,
-    "physical": 4.053230561363503,
-    "risky": 0.9721802186470302,
-    "ruthless": 0.41425089572352947,
-    "carousing": 0.34403992328670296,
-    "amorous": 1.2646889475581604,
-    "patient": 0.7663633875595343,
-    "stealth": 0.00007395333140940863,
-    "devotion": 1.6322166862997074,
-    "craft": 2.6244383188236378,
-    "leadership": 1.1411968892237556,
-    "deception": 0.35415162889068325
+    "strategic": 20.208645355286226,
+    "cerebral": 15.57265113393413,
+    "social": 5.856905045069332,
+    "generous": 2.102825844935758,
+    "cautious": 13.808894905925763,
+    "physical": 3.951899797329416,
+    "risky": 0.9478757131808544,
+    "ruthless": 0.40389462333044124,
+    "carousing": 0.3354389252045354,
+    "amorous": 1.2330717238692064,
+    "patient": 0.7472043028705458,
+    "stealth": 0.0000721044981241734,
+    "devotion": 1.5914112691422146,
+    "craft": 2.558827360853047,
+    "leadership": 1.1126669669931617,
+    "deception": 0.34529783816841614
   },
   "aptitudes": [
     "strategist",
@@ -7195,7 +7155,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 863,
+  "actionCount": 864,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7585,8 +7545,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785026065844,
-  "rev": 1459,
+  "updatedAt": 1785026190715,
+  "rev": 1460,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10207,7 +10167,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 92,
+      "order_sense": 93,
       "palework": 31,
       "deathsense": 40,
       "shadowstep": 24,
@@ -10892,7 +10852,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 614,
+    "valley": 615,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11053,10 +11013,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-26T00:34:25.841Z",
+      "lastAt": "2026-07-26T00:36:30.713Z",
       "startDay": 25,
       "endDay": 26,
-      "beats": 19
+      "beats": 20
     }
   ],
   "company": [
@@ -11303,15 +11263,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 235,
-    "choices": 235,
+    "sceneSummary": 236,
+    "choices": 236,
     "characterDeltas": 99,
-    "scene": 235,
+    "scene": 236,
     "npcUpdates": 211,
     "factUpdates": 18,
     "placeUpdates": 42,
-    "codexUpdates": 145,
-    "timeOps": 229,
+    "codexUpdates": 146,
+    "timeOps": 230,
     "imagePrompt": 6,
     "sceneEnded": 56,
     "itemUpdates": 5,
@@ -11329,7 +11289,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 235,
+  "_opTurns": 236,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

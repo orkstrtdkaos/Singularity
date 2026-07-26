@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "consumer_required_subfields",
  "kind": "tooling_spec",
- "note": "SNG-238 §5b/§5d (Aevi 2026-07-25): the CONSUMER-REQUIRED-SUBFIELD map - for each content type, which sub-fields a real CONSUMER reads, so CCode's content-shape SWEEP can flag any authored instance missing one (the 'authored-but-under-shaped' class: string-stages=variant1, title-less stages=variant2). Verified at origin by grepping the render/engine code for X.subfield reads on authored collections - NON-speculative, each field cites its consumer + file:line. Severity: CRASH (consumer throws/NaN), EMPTY (renders blank/dead control), DEGRADED (works but hollow - e.g. no image). The sweep asserts presence+type; a field a consumer READS is a field the author AND the generator (SNG-234/§5c) must SUPPLY. Grows by incident. Aevi owns this list (what-each-consumer-reads is content/PO knowledge); CCode builds the sweep against it.",
+ "note": "SNG-238 §5b/§5d (Aevi 2026-07-25): the CONSUMER-REQUIRED-SUBFIELD map - for each content type, which sub-fields a real CONSUMER reads, so CCode's content-shape SWEEP can flag any authored instance missing one (the 'authored-but-under-shaped' class: string-stages=variant1, title-less stages=variant2). Verified at origin by grepping the render/engine code for X.subfield reads on authored collections - NON-speculative, each field cites its consumer + file:line. Severity: CRASH (consumer throws/NaN), EMPTY (renders blank/dead control), DEGRADED (works but hollow - e.g. no image). The sweep asserts presence+type; a field a consumer READS is a field the author AND the generator (SNG-234/§5c) must SUPPLY. Grows by incident. Aevi owns this list (what-each-consumer-reads is content/PO knowledge); CCode builds the sweep against it. | Reconciled with CCode 2026-07-25: location.description->descriptionSeed (real consumer read); location.dangerLevel EMPTY->DEGRADED (dangerOf floors null->0, reader-guarded). These two now gate correctly.",
  "contentTypes": {
   "quest": {
    "consumer": "the quest-detail card + stageRow + outcome render (app.js ~6070-6130, 7291) and the GM quest context (engine/quests.js questsForGM)",
@@ -155,9 +155,9 @@
     },
     {
      "field": "dangerLevel",
-     "severity": "EMPTY",
-     "read": "random_encounters.js dangerOf",
-     "note": "null guts encounter eligibility (SNG-225) - floored now, but the writer should supply it (seam_gen_location_dangerLevel)"
+     "severity": "DEGRADED",
+     "read": "random_encounters.js:16 dangerOf — FLOORED (location?.dangerLevel | 0), so a missing one is 0 (safe), not a crash",
+     "note": "CCode-reconciled 2026-07-25: dangerOf floors null->0, so DEGRADED (starves encounters, SNG-225) not EMPTY/CRASH. The writer should still supply it (seam_gen_location_dangerLevel), but the reader guards it — so this GATES as a warn, not a build-fail."
     },
     {
      "field": "worldPos",
@@ -179,9 +179,10 @@
      "type": "object"
     },
     {
-     "field": "description",
+     "field": "descriptionSeed",
      "severity": "EMPTY",
-     "read": "app.js the scene text"
+     "read": "app.js:1749/2209/4894 the scene text (descriptionSeed, NOT description)",
+     "note": "CCode-reconciled 2026-07-25: the consumer reads descriptionSeed, not description"
     }
    ]
   },

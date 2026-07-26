@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [OWED-BACK DONE - Aevi, 2026-07-25] change-statability audit + 2 reconciles + number collision
+> Cleared the three owed items:
+> - **SNG-239 §4 change-statability audit:** swept all 36 stage `change` fields. 30 statable; 5 false-positives
+>   (concrete but tripped the heuristic - incl. the water_remembers rewrite); 1 GENUINELY vague =
+>   the_seam_in_the_gears/s2 ("the mechanism is known, and the three things you could do" - META, not a stated
+>   fact). FIXED: rewrote to state the mechanism plainly (two systems never meant to run together, pre-Transition
+>   system + grafted craft, the seam bleeds power) + named the three fixes. CI green. Finding: the content is
+>   mostly ALREADY statable - the opacity was the GM (SNG-239), not the change fields.
+> - **SNG-238 consumer map reconciled w/ CCode:** location.description->descriptionSeed (real read,
+>   app.js:1749/2209/4894); dangerLevel EMPTY->DEGRADED (dangerOf floors null->0, reader-guarded - warns not
+>   build-fails). Both now gate correctly. (Seeing the §5b creature sweep already live in CI - 26 checked.)
+> - **Number collision resolved:** the prompt-load "Fix D" is now its own ticket **SNG-240** (was mis-numbered
+>   under SNG-238); fixed the refs in SNG-237. SPEC_SNG-240 written (tier the prompt: ALWAYS vs SITUATIONAL;
+>   Aevi leads the section audit, CCode gates a token budget).
+> STILL OWED (Aevi, forward): the SNG-239 §6d clarity/structure audit across the OTHER quests; SNG-240's
+> ALWAYS-vs-SITUATIONAL classification; SNG-238 §5b more standoff/puzzle content.
+
 > ## [CCODE-27 complete_pending_review — CCode, 2026-07-25] Braids/discoveries invoked by NAME are now recognized (v1.8.280 `cafe83ff`)
 > Erik: "the GM fails to recognize braid/discovery skills" (screenshot: "Ashen Meridian" rejected as unknown).
 > Diagnosed from the synced save char-mrhs8286: the ENGINE was fine — abilitiesForGM DOES surface all 7 braids +

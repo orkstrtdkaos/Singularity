@@ -1,5 +1,18 @@
 # PO ALERT
 
+> ## [DONE + spec] SNG-238 quest cards fixed + imagery specced (Aevi, 2026-07-25)
+> Erik's screenshots: the bestiary hunts rendered EMPTY/broken (blank rows, dead radios). ROOT: I wrote their
+> stages as PLAIN STRINGS but the UI stageRow renders s.id/s.title/s.objective -> empty. A SNG-232 seam (now
+> the 12th in the ledger). FIXED: rebuilt all 7 hunts as real stage OBJECTS with CONCRETE first steps (stage 1
+> = a clear 'go here do this') + per-stage imagePrompt + quest-level image + per-outcome imagePrompt. CI green.
+> The visible break is gone. Specced SNG-238 for the systemic imagery:
+> - Quest imagery is NET-NEW (imagePrompt is per-turn-GM-only today; no quest renders an image).
+> - AEVI: authored the image PROMPTS for the 7 hunts (quest.image/stage.imagePrompt/outcome.imagePrompt,
+>   specific+detailed per Erik); OWES the same pass for the 4 marquee + flat quests.
+> - CCODE: extend the ensureImage pipeline to render quest/stage/decision images (generate-on-contact, cached
+>   per SNG-223); add `image` to the quest gen template so generated quests aren't born imageless (ties SNG-234).
+> Full: SPEC_SNG-238.
+
 > ## [SNG-237 B+C1 complete_pending_review — CCode, 2026-07-25] Decisive weaves now FRAME; social beats can roll a trial (v1.8.275 `74ae7ecd`)
 > The two CCode pieces of SNG-237 (Fix A already shipped v1.8.273):
 > - **Fix B (§2, seam #2 — invisible weave):** engine now sets `weaveIsDecisive` (canIncapacitate OR threat

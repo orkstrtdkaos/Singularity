@@ -1941,164 +1941,151 @@
         "player": "Let the skills come as they will... use this moment to deeply understand the system and its connections. You want the valley to have clear water AND you need to understand if you should modify the I sgructions... if this is connected to something bigger.",
         "summary": "Silas reads the full system — the fourth connection surfaces: the ring has been seeding the lower watershed's wells through a buried substrate-thread for fifteen years. The instruction is already given; the thread goes quiet when the site closes.",
         "narration": "You stay kneeling at the rim for a long moment after your palm lifts. The instruction is seated. The site is winding down. But you let the crafts rest easy rather than pulling them away — Deathsense and Order-Sense together, held loose, reading without pushing.\n\nWhat comes back is quiet and large. The reclamation site is one node in something that runs further than this bowl. The relay node to the north — the one Logana watches — is the site's upstream ear, the place it was built to receive signal from. And the hollow you sealed is the site's voice, the transmission point. The three of them form a single sentence: listen, relay, act. What you gave the site this morning was the period at the end of that sentence. Clean and final.\n\nBut the system was designed with a fourth connection you have not yet traced. The ring's matrix feeds downstream — not just contamination drawing inward, but clean water pushed outward — and the channel it uses is not the creek. It is something older. A substrate-thread running southwest, deeper than the frost-line, toward the lower watershed. The reclamation site has been seeding that thread with clean water for fifteen years, slowly, quietly, the way a root finds water. The valley's downstream wells are not recovering by accident. They are being fed. When the site closes, the feeding stops. The wells will hold what they have been given — but the thread goes quiet.\n\nVeth looks up from the rim. She has felt it too, in her own way. 'It is connected to more than the creek,' she says, her voice carrying no alarm — only the flat acknowledgment of something that deserves to be known. Pell says nothing. She is watching your face.\n\n*You feel it settle into you — a new steadiness. (Level 28: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "Modify the instruction so that both the wells and the watershed water is run clean.",
+        "summary": "Silas modified the closing instruction — both the watershed and the downstream wells will clear before the reclamation site goes silent.",
+        "narration": "You keep your palm on the rim a breath longer. The instruction is seated — complete and stop — but the fourth connection is still live under your hand, and you can feel the substrate-thread pulling southwest toward the lower wells like a slow current.\n\nThe site is winding down. It will finish the watershed work on its own schedule. But the wells are a separate matter, and the thread that has been seeding them for fifteen years will go quiet when the ring closes. You speak again, plainly, the same way you gave the first instruction.\n\n\"Before you close — run the substrate-thread clean. Purge what you've held and push clean water through to the wells. Then stop.\"\n\nVeth tilts her head at the rim. You feel the site receive it — not a shudder, not a sound, just that same settling quality, the frost collar easing another fraction. The dark ground inside the ring holds still. Huginn shifts on the far lip of the ring, turning one eye toward the southwest, then goes still again.\n\n\"Both threads,\" says Veth, her two fingers still resting on the rim. \"Watershed clears on its own. Wells get one clean push before the thread goes quiet.\" She looks at you. \"That's the whole job.\"\n\nPell says nothing. She has been watching your face since you knelt down, and now she is watching the ring. Memory rests across her shoulders, the iron of it catching the thin dawn light. The mist is still in the bowl. The mineral smell is almost gone."
       }
     ],
     "lastTurn": {
-      "narration": "You stay kneeling at the rim for a long moment after your palm lifts. The instruction is seated. The site is winding down. But you let the crafts rest easy rather than pulling them away — Deathsense and Order-Sense together, held loose, reading without pushing.\n\nWhat comes back is quiet and large. The reclamation site is one node in something that runs further than this bowl. The relay node to the north — the one Logana watches — is the site's upstream ear, the place it was built to receive signal from. And the hollow you sealed is the site's voice, the transmission point. The three of them form a single sentence: listen, relay, act. What you gave the site this morning was the period at the end of that sentence. Clean and final.\n\nBut the system was designed with a fourth connection you have not yet traced. The ring's matrix feeds downstream — not just contamination drawing inward, but clean water pushed outward — and the channel it uses is not the creek. It is something older. A substrate-thread running southwest, deeper than the frost-line, toward the lower watershed. The reclamation site has been seeding that thread with clean water for fifteen years, slowly, quietly, the way a root finds water. The valley's downstream wells are not recovering by accident. They are being fed. When the site closes, the feeding stops. The wells will hold what they have been given — but the thread goes quiet.\n\nVeth looks up from the rim. She has felt it too, in her own way. 'It is connected to more than the creek,' she says, her voice carrying no alarm — only the flat acknowledgment of something that deserves to be known. Pell says nothing. She is watching your face.\n\n*You feel it settle into you — a new steadiness. (Level 28: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Silas reads the full system — the fourth connection surfaces: the ring has been seeding the lower watershed's wells through a buried substrate-thread for fifteen years. The instruction is already given; the thread goes quiet when the site closes.",
+      "narration": "You keep your palm on the rim a breath longer. The instruction is seated — complete and stop — but the fourth connection is still live under your hand, and you can feel the substrate-thread pulling southwest toward the lower wells like a slow current.\n\nThe site is winding down. It will finish the watershed work on its own schedule. But the wells are a separate matter, and the thread that has been seeding them for fifteen years will go quiet when the ring closes. You speak again, plainly, the same way you gave the first instruction.\n\n\"Before you close — run the substrate-thread clean. Purge what you've held and push clean water through to the wells. Then stop.\"\n\nVeth tilts her head at the rim. You feel the site receive it — not a shudder, not a sound, just that same settling quality, the frost collar easing another fraction. The dark ground inside the ring holds still. Huginn shifts on the far lip of the ring, turning one eye toward the southwest, then goes still again.\n\n\"Both threads,\" says Veth, her two fingers still resting on the rim. \"Watershed clears on its own. Wells get one clean push before the thread goes quiet.\" She looks at you. \"That's the whole job.\"\n\nPell says nothing. She has been watching your face since you knelt down, and now she is watching the ring. Memory rests across her shoulders, the iron of it catching the thin dawn light. The mist is still in the bowl. The mineral smell is almost gone.",
+      "sceneSummary": "Silas modified the closing instruction — both the watershed and the downstream wells will clear before the reclamation site goes silent.",
       "choices": [
         {
-          "label": "Use Order-Sense to follow the substrate-thread southwest — trace where it ends and what it feeds",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.6,
-            "concrete_abstract": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Accept the fourth connection as known — the closing instruction stands. Name what you learned to Veth and Pell before you leave.",
+          "label": "Ask Veth plainly — is there anything left to do here, or is the work finished?",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Huginn — is this thread ending something that should end, or something that must be tended?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.2
-          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Begin the walk back north toward Logana and the relay node — you know what you needed to know. The road out is waiting.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Use Order-Sense one last time — confirm the full system is closing as intended before you leave the bowl",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": true
+        },
+        {
+          "label": "Stand up, face north — the relay node and Logana are still out there. Time to walk back to the gate.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Write a short line on the shadow-sheet to Mara — the work is done, the wells will clear, the watershed will follow",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2,
-        "xp": 0
-      },
       "scene": {
-        "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar unchanged, dark wet ground inside holding still. The mineral smell is fading. Mist still thin. Silas is kneeling at the ring's edge, palm recently lifted, crafts held loose.",
+        "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar eased, dark wet ground inside holding still, mineral smell almost gone. Mist still thin in the bowl.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the bowl's edge, Memory across her shoulders, watching Silas's face."
+            "state": "Standing at the bowl's edge, Memory across her shoulders, watching the ring."
           },
           {
             "name": "Veth",
-            "state": "Crouched beside Silas at the ring's rim, two fingers resting lightly on it. Has just spoken."
+            "state": "Crouched beside Silas at the ring's rim, two fingers still resting lightly on it. Has just confirmed both threads received."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the far lip of the ring, head still, watching southwest."
+            "state": "Perched on the far lip of the ring, one eye turned southwest, now still."
           }
         ],
         "objects": [
-          "The reclamation ring — low, pale, flush with the earth, frost-collared, winding down",
+          "The reclamation ring — low, pale, flush with the earth, frost collar easing, winding down",
           "Memory — across Pell's shoulders",
           "Waymarker — pocketed"
         ],
         "threads": [
-          "A fourth substrate-thread runs southwest from the ring toward the lower watershed — seeding the valley's downstream wells. It goes quiet when the site closes.",
-          "The system is closing — but the party is still in the Zone, with the relay node under Logana's watch to the north",
-          "Mara Wells and the Millbrook thread are waiting for news",
-          "The made gate and the road out are north of here"
+          "The substrate-thread to the lower wells is now charged for one clean push before the site closes",
+          "The relay node and Logana are still to the north — the party has not yet walked back to the gate",
+          "Mara Wells and the Millbrook thread are waiting for news"
         ]
       },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-water-crisis",
+          "note": "The reclamation site's closing instruction amended — both the watershed and the lower wells will clear before the ring goes silent. The full job is done."
+        }
+      ],
       "codexUpdates": [
         {
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "entityId": "the-water-crisis",
-          "fact": "The reclamation site has a fourth connection: a buried substrate-thread running southwest toward the lower watershed, seeding downstream wells with clean water for fifteen years. When the site closes, the feeding stops. The wells hold what they have, but the thread goes quiet.",
+          "fact": "The reclamation site's closing instruction was amended on Day 14 at dawn — complete the task, push clean water through the substrate-thread to the lower wells, then stop. Both the watershed and the downstream wells will clear. The substrate-thread goes quiet when the site closes, but the wells hold what they receive.",
           "links": [
-            "what-the-water-remembers",
-            "the-second-thread",
             "millbrook",
-            "veth-stillwater-ondra"
+            "mara-wells",
+            "veth-stillwater-ondra",
+            "the-second-thread",
+            "what-the-water-remembers"
           ]
         }
       ],
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "veth-stillwater-ondra",
+          "npcId": "veth",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Named plainly what the Order-Sense read confirmed — the site is connected to more than the creek. No alarm. Plain acknowledgment.",
-          "statusNote": "At the reclamation bowl — confirmed the system's fourth connection, the substrate-thread feeding downstream wells.",
+          "note": "Confirmed the amended instruction was received — both watershed and well-thread seating correctly. Named the outcome plainly: the whole job is done.",
+          "statusNote": "At the reclamation bowl — the work complete, two fingers still on the rim.",
           "learned": [
-            "The reclamation ring's matrix feeds a buried substrate-thread running southwest toward the lower watershed — seeding downstream wells with clean water for fifteen years."
+            "The reclamation site's closing instruction can be amended before the site fully winds down — both the watershed work and the well-seeding thread received their respective closings."
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet moment of held reading at the ring's edge after the instruction seated."
+        "why": "A short additional exchange at the ring's edge — the amended instruction given and confirmed."
       }
     },
     "sceneState": {
-      "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar unchanged, dark wet ground inside holding still. The mineral smell is fading. Mist still thin. Silas is kneeling at the ring's edge, palm recently lifted, crafts held loose.",
+      "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar eased, dark wet ground inside holding still, mineral smell almost gone. Mist still thin in the bowl.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the bowl's edge, Memory across her shoulders, watching Silas's face."
+          "state": "Standing at the bowl's edge, Memory across her shoulders, watching the ring."
         },
         {
           "name": "Veth",
-          "state": "Crouched beside Silas at the ring's rim, two fingers resting lightly on it. Has just spoken."
+          "state": "Crouched beside Silas at the ring's rim, two fingers still resting lightly on it. Has just confirmed both threads receiv"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the far lip of the ring, head still, watching southwest."
+          "state": "Perched on the far lip of the ring, one eye turned southwest, now still."
         }
       ],
       "objects": [
-        "The reclamation ring — low, pale, flush with the earth, frost-collared, winding ",
+        "The reclamation ring — low, pale, flush with the earth, frost collar easing, win",
         "Memory — across Pell's shoulders",
         "Waymarker — pocketed"
       ],
       "threads": [
-        "A fourth substrate-thread runs southwest from the ring toward the lower watershed — seeding the valley's downstream wells. It goes quiet when the site closes.",
-        "The system is closing — but the party is still in the Zone, with the relay node under Logana's watch to the north",
-        "Mara Wells and the Millbrook thread are waiting for news",
-        "The made gate and the road out are north of here"
+        "The substrate-thread to the lower wells is now charged for one clean push before the site closes",
+        "The relay node and Logana are still to the north — the party has not yet walked back to the gate",
+        "Mara Wells and the Millbrook thread are waiting for news"
       ]
     }
   },
@@ -4229,7 +4216,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Named the node's location — south, past Logana — plainly and without ceremony. Already thinking ahead.",
         "[d14] Held still through the braided read — watching, reading Silas rather than the hollow.",
         "[d14] Moved to Silas's right and went still — reading the hollow as the combined craft ran, not watching Silas but watching the structure.",
         "[d14] Held still through the handoff — a warden's recognition of the watch received, no ceremony.",
@@ -4238,17 +4224,18 @@
         "[d14] Named plainly that the Working Model will not answer what to decide — read Silas's face before he spoke.",
         "[d14] Stopped at the bowl's edge without speaking — she already knew what the site was.",
         "[d14] Crouched beside Silas and confirmed the instruction seated — two fingers on the rim, plain reading, no ceremony.",
-        "[d14] Named plainly what the Order-Sense read confirmed — the site is connected to more than the creek. No alarm. Plain acknowledgment."
+        "[d14] Named plainly what the Order-Sense read confirmed — the site is connected to more than the creek. No alarm. Plain acknowledgment.",
+        "[d14] Confirmed the amended instruction was received — both watershed and well-thread seating correctly. Named the outcome plainly: the whole job is done."
       ],
       "knownFacts": [
-        "A Zone warpling that turns rather than presses still has something working in it — not a dead thing reanimated, a living thing rewired.",
         "Witnessed one prior raising — a plain boar on the east branch, fourteen years ago, held for a grief-sealed hollow for four days then released at burial",
         "Logana's Zone-thread distinction is unlike anything she has seen — the claim is structural and does not release the way an ashwarden's own purpose would",
         "The old death site to the north reads as an ending held open — not completed, the Zone organizing around it",
         "The hollow was built as a receiver for a watershed-readiness signal from the relay node south. The question was never sent in fifteen years.",
         "The reclamation site is not broken — it is working, and it needs to be told what to do by a living warden",
         "The reclamation site received the closing instruction and is winding down — confirmed by contact read.",
-        "The reclamation ring's matrix feeds a buried substrate-thread running southwest toward the lower watershed — seeding downstream wells with clean water for fifteen years."
+        "The reclamation ring's matrix feeds a buried substrate-thread running southwest toward the lower watershed — seeding downstream wells with clean water for fifteen years.",
+        "The reclamation site's closing instruction can be amended before the site fully winds down — both the watershed work and the well-seeding thread received their respective closings."
       ],
       "skillsObserved": [
         "plain technical description of Ashwarden contact craft under",
@@ -4261,7 +4248,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the reclamation bowl — confirmed the system's fourth connection, the substrate-thread feeding downstream wells.",
+      "statusNote": "At the reclamation bowl — the work complete, two fingers still on the rim.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -4671,7 +4658,7 @@
     },
     "archive_guardian": {
       "id": "archive_guardian",
-      "name": "archive_guardian",
+      "name": "Archive Guardian",
       "questState": "ally",
       "questNote": "delighted, insufferable, genuinely grateful; will share pre-Transition knowledge more readily now",
       "ally": true,
@@ -5658,11 +5645,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-26T12:19:57.598Z",
+    "lastSharedReadAt": "2026-07-26T13:04:51.737Z",
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
-    "lastGenCount": 636,
-    "turnsSinceOffer": 5,
+    "lastGenCount": 637,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
@@ -5865,10 +5852,13 @@
           "arc_the_poles_pull",
           "arc_manifestation_storm"
         ],
-        "open": true,
+        "open": false,
         "depth": 0,
         "worldDay": 26,
-        "strength": 4
+        "strength": 4,
+        "spawned": true,
+        "spawnedId": "the-craft-that-drank-from-still-water",
+        "spawnedWorldDay": 26
       }
     ],
     "wakeArcPushes": {
@@ -5885,7 +5875,8 @@
       "arc_what_wakes_beneath": {
         "push": 1,
         "sinceDay": 26,
-        "byQuest": "what-the-water-remembers"
+        "byQuest": "what-the-water-remembers",
+        "othersPush": 0
       }
     }
   },
@@ -6316,7 +6307,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d13] A drainage cut on the March Road runs at a wrong slope — water pools rather than drains, and Pell's ironsense reads cold iron from years of water sitting in the wrong direction. Old work, possibly wrong from the start. May connect to upstream contamination.",
           "[d13] The drainage cut at the March Road's outer ward margin has the same iron-oxide failure pattern Pell named at the east-channel joints in Millbrook — wrong slope, pooling water, years of cold iron underneath. Earlier stage, same cause.",
           "[d13] The Crossing's creek runs gray-brown on Day 13 afternoon — downstream contamination from the Disputed Zone has reached this settlement. Boiling-rags at the well confirm the locals are treating the water.",
           "[d13] Millbrook's intake ran gray-green four of six mornings by day 13 — the discoloration is now a reliable pattern at the village level, not an anomaly. Mara has reduced draw volume accordingly.",
@@ -6339,7 +6329,8 @@
           "[d13] A Radiant factor visited Millbrook four days ago — looked at the creek, asked about boiling, wrote in a book, and left without offering anything. The Harmonic sent a formal note of 'monitoring' with no person, no goods, and no offer. Mara's read: both are waiting to see who gets blamed before…",
           "[d14] Order-Sense read of the assembled group confirms the division: Mara Wells holds the Millbrook thread (the node the four working threads run through), while Veth goes into the Zone as March-road guide. The design left no room for it to be otherwise.",
           "[d14] The reclamation site in the left-branch Zone received its closing instruction on Day 14 at dawn — complete the task and stop. The site is winding down. The watershed will clear within one to two weeks without further intervention.",
-          "[d14] The reclamation site has a fourth connection: a buried substrate-thread running southwest toward the lower watershed, seeding downstream wells with clean water for fifteen years. When the site closes, the feeding stops. The wells hold what they have, but the thread goes quiet."
+          "[d14] The reclamation site has a fourth connection: a buried substrate-thread running southwest toward the lower watershed, seeding downstream wells with clean water for fifteen years. When the site closes, the feeding stops. The wells hold what they have, but the thread goes quiet.",
+          "[d14] The reclamation site's closing instruction was amended on Day 14 at dawn — complete the task, push clean water through the substrate-thread to the lower wells, then stop. Both the watershed and the downstream wells will clear. The substrate-thread goes quiet when the site closes, but the wells…"
         ],
         "links": [
           "osten",
@@ -7368,22 +7359,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.5166083362175,
-    "cerebral": 23.149630543224674,
-    "social": 5.0733948800772,
-    "generous": 1.5130849452460162,
-    "cautious": 12.55285429476225,
-    "physical": 2.8435831254692414,
-    "risky": 0.6820424406673093,
-    "ruthless": 0.29062172480849024,
-    "carousing": 0.24136453762864635,
-    "amorous": 0.8872547701885639,
-    "patient": 0.5376496510251932,
-    "stealth": 0.00005188267533374329,
-    "devotion": 2.1200974120529246,
-    "craft": 1.8412001005763854,
-    "leadership": 0.8006177215694872,
-    "deception": 0.24845850255116445
+    "strategic": 21.978693127812065,
+    "cerebral": 22.570889779644055,
+    "social": 4.94656000807527,
+    "generous": 1.4752578216148657,
+    "cautious": 12.239032937393194,
+    "physical": 2.7724935473325103,
+    "risky": 0.6649913796506266,
+    "ruthless": 0.283356181688278,
+    "carousing": 0.23533042418793018,
+    "amorous": 0.8650734009338498,
+    "patient": 0.5242084097495634,
+    "stealth": 0.00005058560845039971,
+    "devotion": 2.0670949767516014,
+    "craft": 1.7951700980619758,
+    "leadership": 0.78060227853025,
+    "deception": 0.24224703998738534
   },
   "aptitudes": [
     "strategist",
@@ -7392,7 +7383,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 877,
+  "actionCount": 878,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7782,8 +7773,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785070088059,
-  "rev": 1518,
+  "updatedAt": 1785071380339,
+  "rev": 1521,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10153,6 +10144,44 @@
           "stubbed": false,
           "romanceEligible": true
         }
+      },
+      "the-craft-that-drank-from-still-water": {
+        "id": "the-craft-that-drank-from-still-water",
+        "name": "The Craft That Drank From Still Water",
+        "scale": "regional",
+        "pressure": "The waking beneath the substrate has changed the feel of the Left Branch Entrance — the valley hums at a frequency its practitioners never trained for. The Lodgekeepers of the Threshold, a loose compact of valley-born shapers who have drawn on the substrate for three generations of small, precise work (sealing passes, quieting rockslip, easing difficult births), are discovering their techniques no longer land true. Wards placed at dawn have inverted by dusk. A sealing that should have held a crumbling retaining wall instead sheared it clean. Two of their number felt something answer when they reached — something that was not the substrate they knew. The compact is fracturing along the only fault line that matters: those who believe they must stop working until they understand what they are now drinking from, and those who believe that stopping is itself the catastrophe, that the valley depends on them and that adapting in motion is the only survival.",
+        "tendency": "escalating — the longer the compact delays resolution, the more dependent valley infrastructure quietly fails. The waking does not pause to let practitioners catch up. Each week that passes without a new working model, one more load-bearing piece of the valley's subtle architecture slips. The pressure toward manifestation instability compounds: practitioners attempting old forms on the new substrate are generating the exact chaotic partial-manifestations that feed arc_manifestation_storm, without understanding they are doing so.",
+        "crossesRegions": [
+          "Left Branch Entrance (valley)",
+          "Disputed Zone (border outposts dependent on Lodgekeeper sealing work)",
+          "any settlement downstream of the valley's retaining infrastructure"
+        ],
+        "hingeNpcs": [],
+        "ifIgnored": "The Lodgekeeper compact quietly collapses — not dramatically, but by attrition. Practitioners stop working one by one, citing conscience or fear. The valley's subtle infrastructure degrades over the course of a season. A retaining slope fails in early autumn and takes a stretch of the left branch road with it, cutting one of the Disputed Zone's border outposts from resupply. The partial-manifestations generated by the compact's failed attempts during the fracture period have already seeded three unstable nodes in the valley floor, which feed arc_manifestation_storm without anyone in the valley understanding why strange weather now pools here. Veld Thrace leaves with her notes and no obligation to share them.",
+        "ifEngaged": "The players enter a compact that is three days from open fracture and does not know it. Senne's secret is the load-bearing element — getting her to speak, or discovering what she is hiding, determines whether the compact's crisis becomes a controlled break or a shattering. There is a genuine technical problem to solve: the substrate has changed, the old forms are unstable, and someone has to do the first working on the new ground or prove it cannot be done. Veld Thrace's knowledge of theoretical frameworks for substrate-shift is real and useful and costs something. Corryn's map is accurate and needs to reach the right ears at the right moment. Resolution can take several shapes — a reformed compact working cautiously with the new substrate, a legitimate stop-work while the valley learns to carry itself, or a compact that breaks but whose knowledge is preserved rather than lost. Each outcome has different weight on arc_manifestation_storm: a successful new working framework locally damps the instability; a chaotic fracture amplifies it. The waking beneath does not intervene, but Senne's account of it — if she speaks — is the first detailed witness testimony of what the waking is like from the inside of contact, which presses directly on The Second Manifestation.",
+        "schemaVersion": 1,
+        "_gen": {
+          "entityId": "the-craft-that-drank-from-still-water",
+          "type": "arc",
+          "birthWeight": 28,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": null,
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-disputed-zone-left-branch-entrance",
+            "day": null,
+            "worldDay": null,
+            "hint": "a new thread that FOLLOWS FROM what just happened to What Wakes Beneath — the aftermath of it, not a fresh unrelated sit",
+            "why": "A significant outcome left a wake: The stirring becoming a waking pushes toward: manifestation instability (feeds arc_ma"
+          },
+          "attentionHistory": [],
+          "createdDay": null,
+          "repaired": true,
+          "stubbed": false,
+          "romanceEligible": true
+        }
       }
     }
   },
@@ -11162,7 +11191,7 @@
   "syncedAt": 1785030018435,
   "teachers": {},
   "regionsKnown": {
-    "valley": 629,
+    "valley": 630,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11333,10 +11362,10 @@
     {
       "id": "sess-16",
       "startedAt": "2026-07-26T12:22:39.830Z",
-      "lastAt": "2026-07-26T12:48:08.052Z",
+      "lastAt": "2026-07-26T13:09:40.319Z",
       "startDay": 26,
       "endDay": 26,
-      "beats": 5
+      "beats": 6
     }
   ],
   "company": [
@@ -11602,7 +11631,7 @@
   "_opEmitted": {
     "sceneSummary": 249,
     "choices": 249,
-    "characterDeltas": 108,
+    "characterDeltas": 107,
     "scene": 249,
     "npcUpdates": 221,
     "factUpdates": 20,
@@ -11612,7 +11641,7 @@
     "imagePrompt": 7,
     "sceneEnded": 60,
     "itemUpdates": 5,
-    "questUpdates": 40,
+    "questUpdates": 41,
     "offer": 23,
     "moveTo": 15,
     "delegateOps": 3,
@@ -11834,5 +11863,8 @@
   "legendGovernor": {
     "lastDeployDay": 25,
     "lastBeat": "witness_power"
-  }
+  },
+  "_questMatchNotes": [
+    "(couldn't match a quest for \"the-water-crisis\" — not applied)"
+  ]
 }

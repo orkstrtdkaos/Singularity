@@ -93,3 +93,65 @@ assumed. Never move gm-narrate. The move is SURGICAL, per-task, measured — not
    never deliberate — likely a free win.
 4. (Erik/CCode) gm-meta split — worth the added task-id complexity, or leave whole on Sonnet? Depends on the
    internal-classification volume.
+
+
+---
+
+# §5 — PLAYER-CHOSEN QUALITY: let the player spend up to Sonnet for a beat that matters (Erik, 2026-07-25)
+Erik: "The player could select when they want a better description — i.e. use Sonnet."
+
+This REFRAMES the whole Haiku question and is the better design. Instead of US guessing which turns deserve the
+flagship, the PLAYER says "this moment matters — give me the good telling." It turns model-tier from a hidden
+cost-optimization into a PLAYER-FACING FEATURE.
+
+## §5a — the shape
+The narration path is clean (verified): `gmTurn(assembleGMContext("turn", env))` → `callClaude({task:"gm-narrate"})`
+→ MODEL_MAP picks the model from the task. So a quality choice = the turn passes a desired TIER that selects the
+task/model. Two surfaces, offer BOTH:
+- **Before the turn — a "richer telling" toggle.** A small control by the input: default = the standard tell;
+  toggled = "tell this one richly" (Sonnet, or a longer budget). The player arms it for a beat they know matters
+  (a confrontation, a reunion, a decision), then submits.
+- **After the turn — a "tell it again, richer" button.** On a rendered turn, a control to RE-NARRATE the same
+  beat at the higher tier — same mechanical outcome, richer prose. This is the killer version: the player reads
+  the quick telling, and if the moment lands, spends up to the beautiful one. (No existing retell path — this is
+  net-new, but the beat's state is unchanged, so it's a re-narrate of a fixed outcome, not a re-roll.)
+
+## §5b — this INVERTS the default (the elegant part)
+With a player quality-lever, the DEFAULT narration can drop to Haiku (fast, cheap) WITHOUT the SNG-242 worry
+about downgrading the narrator — because the player can always spend up for the beats they care about. The
+economics flip: cheap-by-default, pay-for-what-matters, chosen by the person who KNOWS what matters (the player,
+not a heuristic). This is strictly better than a fixed per-task model: it's the same cost win as Haiku-default
+PLUS the flagship exactly where it counts, targeted by the only judge who knows a beat mattered.
+CAVEAT (honest): the default-Haiku narrator must be GOOD ENOUGH that the standard telling isn't a letdown —
+Haiku narration has to clear a real quality floor (SNG-237/239's clarity+offer rules help here, since a cleaner
+prompt serves a smaller model better). A/B the Haiku default HARD before shipping it as default. If Haiku-default
+isn't good enough, keep Sonnet-default and offer a LONGER/richer Sonnet tell as the upgrade instead — the
+player-choice surface works either way.
+
+## §5c — the mechanic
+- A per-turn `qualityTier` in the turn options: "standard" | "rich". Maps to the task/model (and possibly a
+  bigger token budget): standard → gm-narrate-standard (Haiku or normal), rich → gm-narrate-rich (Sonnet + fuller
+  budget). MODEL_MAP + BUDGETS already key off task — add the two task ids.
+- **Re-narrate is state-safe:** the higher-tier retell uses the SAME resolved outcome/ops from the original turn
+  (the beat already happened) — it re-renders the PROSE only, never re-rolls or re-fires ops. A seam to respect
+  (SNG-232): the retell must read the committed turn result, not re-execute the turn.
+- **Optional: a budget/quota.** If cost is a concern, "rich" tells could be metered (N per session, or a visible
+  "richer telling" the player spends deliberately) — makes the choice feel like a resource, not a free lever.
+  Erik's call whether to meter or leave open.
+
+## §5d — why this is the RIGHT answer to "use Haiku more"
+It resolves the whole tension. §1-4 asked "which tasks can we cheapen without hurting quality?" and had to guess
++ A/B. §5 says: cheapen the DEFAULT, and hand the quality dial to the player for the moments a heuristic could
+never identify. The player knows a reunion or a death or a hard decision deserves the beautiful telling; no
+per-task rule does. It's more respectful of the player (agency over the experience) AND better economics
+(flagship spend targeted to felt-important beats). This should lead the SNG-242 work — the per-task moves
+(world-tick→Haiku etc.) are still good, but the player-quality lever is the headline.
+
+## §5e — ownership (added)
+- CCode: the qualityTier turn option + the two gm-narrate task ids in MODEL_MAP/BUDGETS; the "richer telling"
+  toggle (pre) + the state-safe "tell it again richer" re-narrate button (post, reads committed outcome); the
+  optional meter.
+- Aevi: judge the Haiku-DEFAULT narration quality floor (is the standard tell good enough to be default?) — the
+  gating content call. If not, default stays Sonnet and "rich" = longer/fuller.
+- Erik: default tier (Haiku vs Sonnet — depends on Aevi's quality read + your cost priority); meter the "rich"
+  tells or leave open; which surfaces (toggle, retell button, or both — lean both).

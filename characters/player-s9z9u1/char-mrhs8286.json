@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 26,
-  "xp": 2561,
+  "xp": 2566,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -163,7 +163,7 @@
   "maxHealth": 155,
   "health": 155,
   "maxEnergy": 225,
-  "energy": 172,
+  "energy": 167,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1976,76 +1976,94 @@
         "player": "Use Deathsense on the Zone itself as you walk — read what the left branch holds ahead; whether anything north of you is ending or has ended",
         "summary": "Deathsense reads the left branch ahead — small ordinary Zone-deaths, and something large that has been dead for years to the north.",
         "narration": "You let Deathsense open as you walk — not a full cast, just enough to read what the left branch is holding ahead of you. It costs little at this rank, and you have learned not to push it harder than the question needs.\n\nWhat comes back is quiet. The branch ahead is not full of endings. There is the ordinary small death of the Zone — a warpling somewhere in the canopy above, a few days out; a stand of birch to the east already dead at the root, standing only because nothing has pushed them yet. Nothing large. Nothing acute.\n\nThen, at the edge of what you can carry, something else. Not an ending underway — an ending that has already happened, but not recently. North of you, perhaps four hundred yards, perhaps five. Something large died there, and it has been dead long enough that the reading comes back cool and settled, the way old stone feels in the hand. Not days. Not weeks. Years.\n\nVeth reads your pace change. Said Veth quietly, without looking over: \"Something?\"\n\n\"Something old,\" you say. \"North. Dead for years, not days. Large.\" You keep walking. Huginn banks left ahead of you, turns north, and does not alter his speed — which tells you the bird already knew."
+      },
+      {
+        "player": "Push Deathsense deeper — a full read north, not a walking scan; find whether the old death site is the response point or something that happened to it",
+        "summary": "Full Deathsense push north — the old death site is an ending held open, not completed, the Zone organizing around it like a stone in still water.",
+        "narration": "You stop walking. Pell takes two more steps before she notices and turns back, Memory loose in her hand, watching your face.\n\nYou open Deathsense all the way — not a walking read, not the careful scan you have been running for the last ten minutes. The full instrument. You let it go north.\n\nThe branch fills in like a map drawn in cold fire. The small deaths are still there — the warpling, the birch stand — but you push past them and the Zone's substrate rises around the sense like water rising in a well, thick and strange, a thousand small endings the land has absorbed over fifteen years without anyone attending them. It costs you. Your vision goes grey at the edges for a breath.\n\nThen you find it.\n\nSomething large died north of you, and it died years ago — not a clean death, not a sick death, not even a Zone-change unraveling into nothing. The reading is wrong in a specific way. The ending is present but not completed. A death held open. The shape of a thing that finished dying but was never — allowed — to become what a dead thing becomes. It sits in the substrate like a stone under still water, everything else running around it, and the Zone has organized part of itself around the fact of it.\n\nHuginn banks hard north. No sound. The timing of that is a comment.\n\nVeth has stopped walking too. She reads your face. \"The response site,\" she says, and it is not a question."
       }
     ],
     "lastTurn": {
-      "narration": "You let Deathsense open as you walk — not a full cast, just enough to read what the left branch is holding ahead of you. It costs little at this rank, and you have learned not to push it harder than the question needs.\n\nWhat comes back is quiet. The branch ahead is not full of endings. There is the ordinary small death of the Zone — a warpling somewhere in the canopy above, a few days out; a stand of birch to the east already dead at the root, standing only because nothing has pushed them yet. Nothing large. Nothing acute.\n\nThen, at the edge of what you can carry, something else. Not an ending underway — an ending that has already happened, but not recently. North of you, perhaps four hundred yards, perhaps five. Something large died there, and it has been dead long enough that the reading comes back cool and settled, the way old stone feels in the hand. Not days. Not weeks. Years.\n\nVeth reads your pace change. Said Veth quietly, without looking over: \"Something?\"\n\n\"Something old,\" you say. \"North. Dead for years, not days. Large.\" You keep walking. Huginn banks left ahead of you, turns north, and does not alter his speed — which tells you the bird already knew.",
-      "sceneSummary": "Deathsense reads the left branch ahead — small ordinary Zone-deaths, and something large that has been dead for years to the north.",
+      "narration": "You stop walking. Pell takes two more steps before she notices and turns back, Memory loose in her hand, watching your face.\n\nYou open Deathsense all the way — not a walking read, not the careful scan you have been running for the last ten minutes. The full instrument. You let it go north.\n\nThe branch fills in like a map drawn in cold fire. The small deaths are still there — the warpling, the birch stand — but you push past them and the Zone's substrate rises around the sense like water rising in a well, thick and strange, a thousand small endings the land has absorbed over fifteen years without anyone attending them. It costs you. Your vision goes grey at the edges for a breath.\n\nThen you find it.\n\nSomething large died north of you, and it died years ago — not a clean death, not a sick death, not even a Zone-change unraveling into nothing. The reading is wrong in a specific way. The ending is present but not completed. A death held open. The shape of a thing that finished dying but was never — allowed — to become what a dead thing becomes. It sits in the substrate like a stone under still water, everything else running around it, and the Zone has organized part of itself around the fact of it.\n\nHuginn banks hard north. No sound. The timing of that is a comment.\n\nVeth has stopped walking too. She reads your face. \"The response site,\" she says, and it is not a question.",
+      "sceneSummary": "Full Deathsense push north — the old death site is an ending held open, not completed, the Zone organizing around it like a stone in still water.",
       "choices": [
         {
-          "label": "Press north at pace — reach the old death site and see what it is",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Read the dead-birch stand with The Attended End as you pass — understand what ended there and whether it connects to the relay node's work",
+          "label": "Press north toward the held-open death — attend to what is there, whatever it is",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3
+          },
           "difficulty": 15,
           "intentTags": [
-            "study"
+            "travel",
+            "careful"
           ],
           "abilityId": "the-attended-end",
-          "energyCost": 2,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Ask Huginn plainly — he already knew. What does he see from altitude that you can't read from the ground?",
+          "label": "Ask Huginn what he saw from altitude — he banked north before you finished the read",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Push Deathsense deeper — a full read north, not a walking scan; find whether the old death site is the response point or something that happened to it",
+          "label": "Tell Veth plainly what the reading found — a death held open, not completed — and ask if the ashwarden tradition has a name for it",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Read the design north with Order-Sense before you move — understand how the held-open death sits in the Zone's structure",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.2
+          },
           "difficulty": 15,
           "intentTags": [
+            "scout",
             "study"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
+          "abilityId": "order_sense",
+          "energyCost": null,
           "trivial": false
         }
       ],
       "characterDeltas": {
-        "health": 0,
         "energy": -2
       },
       "scene": {
-        "setting": "Left-branch Zone, moving north on frost-hard ground — Zone-thickened canopy angled wrong, flat early-spring light, iron-and-ozone in the air. Approximately two hundred yards north of the streambed, heading toward the unanswered response site.",
+        "setting": "Left-branch Zone, frost-hard ground two hundred yards north of the streambed — the party has stopped moving. Zone-thickened canopy overhead, flat early-spring light, iron-and-ozone in the air.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Walking at Silas's left, Memory in a loose trail grip, watching the treeline."
+            "state": "Turned back to watch Silas's face — Memory loose in her hand, waiting."
           },
           {
             "name": "Veth Ondra",
-            "state": "Walking at Silas's right — asked her question, now reading his answer."
+            "state": "Stopped walking. Reading Silas's expression. Has named the response site aloud."
           },
           {
             "name": "Huginn",
-            "state": "Banking left ahead of the party, turning north — already knew about the old death site."
+            "state": "Banked hard north without a sound — already moving toward the old death site."
           },
           {
             "name": "Logana",
@@ -2055,61 +2073,78 @@
         "objects": [
           "frost-hard ground with four-toed impressions",
           "Zone-thickened treetops angled wrong above the path",
-          "Memory — Pell carrying it, shadow-twin answering Silas",
+          "Memory — Pell carrying it",
           "dead birch stand to the east — dead at the root, still standing"
         ],
         "threads": [
-          "Something large died to the north, years ago — not days, not weeks; the old death site may be the unanswered response point",
-          "Huginn already knew about the old death site — has not said what he sees from altitude",
-          "The response site to the north has not answered the relay node in at least fifteen years — its condition is unknown",
-          "Logana holds the perimeter — the boundary between Silas's warding and the Zone's claim remains unresolved",
-          "Veth has named that the Zone's claim in Logana is an unknown cost"
+          "A death to the north is held open — not completed, not allowed to become what a dead thing becomes; the Zone has organized around it",
+          "Huginn banked north before Silas finished the read — knows something",
+          "The response site to the north has not answered the relay node in at least fifteen years — its condition may now be understood",
+          "Veth named it without being told — her read of Silas's face was enough",
+          "Logana holds the perimeter — the boundary between Silas's warding and the Zone's claim remains unresolved"
         ]
       },
-      "codexUpdates": [
-        {
-          "topic": "zone-left-branch-entrance",
-          "label": "Left Branch — Deathsense Read",
-          "kind": "place",
-          "entityId": "zone-left-branch-entrance",
-          "fact": "Deathsense walking scan of the left branch: small ordinary Zone-deaths in the canopy and a dead birch stand to the east. Four to five hundred yards north, something large died years ago — cool and settled, the read of old stone. Likely the unanswered response site. Huginn already knew.",
-          "links": [
-            "what-the-water-remembers",
-            "deathsense"
-          ]
-        }
-      ],
       "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "role": "Former Ashwarden warden, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Read Silas's expression after the full Deathsense cast and named the response site aloud — not a question.",
+          "statusNote": "Walking north with the party — stopped when Silas stopped; watching and waiting for his account of the read.",
+          "learned": [
+            "The old death site to the north reads as an ending held open — not completed, the Zone organizing around it"
+          ]
+        },
         {
           "op": "update",
           "npcId": "huginn",
           "name": "Huginn",
-          "note": "Banked left and turned north without altering speed when Silas named the old death site — already knew it was there.",
+          "role": "Companion — Ashwarden-touched carrion bird",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Banked hard north the moment Silas finished the deep read — no sound, no prompting. The timing is deliberate.",
+          "statusNote": "Moving north toward the old death site ahead of the party.",
           "learned": [
-            "The large old death to the north was already known to Huginn before Silas read it."
-          ],
-          "statusNote": "Aloft ahead of the party, leading north toward the old death site."
+            "The held-open death to the north — Huginn moved before Silas could describe it"
+          ]
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "zone-left-branch-entrance",
+          "label": "Disputed Zone — Left Branch",
+          "kind": "place",
+          "entityId": "zone-left-branch-entrance",
+          "fact": "A full Deathsense push north found an ending held open — not a recent death, not a Zone-change unraveling, but a death that finished and was never allowed to become what a dead thing becomes. The Zone has organized part of itself around it. Huginn banked north before the read was spoken aloud.",
+          "links": [
+            "what-the-water-remembers",
+            "the-attended-end",
+            "deathsense"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short stretch of walking north through the Zone."
+        "why": "A full Deathsense push — a moment of stillness on the road, not a long halt"
       }
     },
     "sceneState": {
-      "setting": "Left-branch Zone, moving north on frost-hard ground — Zone-thickened canopy angled wrong, flat early-spring light, iron-and-ozone in the air. Approximately two hundred yards north of the streambed, heading toward the unanswered response site.",
+      "setting": "Left-branch Zone, frost-hard ground two hundred yards north of the streambed — the party has stopped moving. Zone-thickened canopy overhead, flat early-spring light, iron-and-ozone in the air.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Walking at Silas's left, Memory in a loose trail grip, watching the treeline."
+          "state": "Turned back to watch Silas's face — Memory loose in her hand, waiting."
         },
         {
           "name": "Veth Ondra",
-          "state": "Walking at Silas's right — asked her question, now reading his answer."
+          "state": "Stopped walking. Reading Silas's expression. Has named the response site aloud."
         },
         {
           "name": "Huginn",
-          "state": "Banking left ahead of the party, turning north — already knew about the old death site."
+          "state": "Banked hard north without a sound — already moving toward the old death site."
         },
         {
           "name": "Logana",
@@ -2119,15 +2154,15 @@
       "objects": [
         "frost-hard ground with four-toed impressions",
         "Zone-thickened treetops angled wrong above the path",
-        "Memory — Pell carrying it, shadow-twin answering Silas",
+        "Memory — Pell carrying it",
         "dead birch stand to the east — dead at the root, still standing"
       ],
       "threads": [
-        "Something large died to the north, years ago — not days, not weeks; the old death site may be the unanswered response point",
-        "Huginn already knew about the old death site — has not said what he sees from altitude",
-        "The response site to the north has not answered the relay node in at least fifteen years — its condition is unknown",
-        "Logana holds the perimeter — the boundary between Silas's warding and the Zone's claim remains unresolved",
-        "Veth has named that the Zone's claim in Logana is an unknown cost"
+        "A death to the north is held open — not completed, not allowed to become what a dead thing becomes; the Zone has organized around it",
+        "Huginn banked north before Silas finished the read — knows something",
+        "The response site to the north has not answered the relay node in at least fifteen years — its condition may now be understood",
+        "Veth named it without being told — her read of Silas's face was enough",
+        "Logana holds the perimeter — the boundary between Silas's warding and the Zone's claim remains unresolved"
       ]
     }
   },
@@ -4116,7 +4151,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Watched Silas set the Boundary-Stone without comment — her version of approval. Eyes already on the country ahead.",
         "[d14] Taking the right flank, warden's pace — watching the country without comment.",
         "[d14] Read the sky as Silas descended — warden's instinct, gauging what the flight saw.",
         "[d14] Came up over the bank edge at the fight's close — read the gravel in one look and named that the warpling turned rather than was broken.",
@@ -4125,17 +4159,18 @@
         "[d14] Noted the second kill on this stretch quietly — reading what it means for the party's passage north.",
         "[d14] Called the movement warning across the distance — measured and plain: the Zone reads kills, keep moving.",
         "[d14] Received the relay node briefing — drew a long breath and filed it. Walking north in silence.",
-        "[d14] Named the one previous raising she has witnessed — a boar held for four days at a grief-sealed hollow, released cleanly at the burial's end. Marked Logana as categorically different: the Zone's claim sits in the warding alongside Silas's own purpose, and she does not know what that costs yet."
+        "[d14] Named the one previous raising she has witnessed — a boar held for four days at a grief-sealed hollow, released cleanly at the burial's end. Marked Logana as categorically different: the Zone's claim sits in the warding alongside Silas's own purpose, and she does not know what that costs yet.",
+        "[d14] Read Silas's expression after the full Deathsense cast and named the response site aloud — not a question."
       ],
       "knownFacts": [
-        "Palework at rank 3 is visible — the dying understand exactly what is being done and by whom; that visibility is the point, not a side effect",
         "The fold holds something that wants to be finished — patient rather than desperate, and it has been waiting a long time.",
         "The March has not had a new gate since the Transition — eleven years. The Numinous stopped making them. Word of this one will spread, and people will want things from its maker.",
         "The made gate now carries the open-hand of attendance — the ashwarden mark that means a passage was seen rightly",
         "The Zone's searching lattice-threads all point north-and-west toward the watershed — confirmed against her own read of this country.",
         "A Zone warpling that turns rather than presses still has something working in it — not a dead thing reanimated, a living thing rewired.",
         "Witnessed one prior raising — a plain boar on the east branch, fourteen years ago, held for a grief-sealed hollow for four days then released at burial",
-        "Logana's Zone-thread distinction is unlike anything she has seen — the claim is structural and does not release the way an ashwarden's own purpose would"
+        "Logana's Zone-thread distinction is unlike anything she has seen — the claim is structural and does not release the way an ashwarden's own purpose would",
+        "The old death site to the north reads as an ending held open — not completed, the Zone organizing around it"
       ],
       "skillsObserved": [
         "plain technical description of Ashwarden contact craft under",
@@ -4148,7 +4183,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking north with the party into the left-branch Zone — Logana's reckoning now named aloud, watching to see how Silas receives it.",
+      "statusNote": "Walking north with the party — stopped when Silas stopped; watching and waiting for his account of the read.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5524,7 +5559,7 @@
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
     "lastGenCount": 624,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
@@ -7137,22 +7172,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.20633304961076,
-    "cerebral": 14.303906518273905,
-    "social": 6.16110984359693,
-    "generous": 2.212045596250633,
-    "cautious": 14.526122189008035,
-    "physical": 4.157159550116414,
-    "risky": 0.9971079165610567,
-    "ruthless": 0.4248727135625943,
-    "carousing": 0.35286145978123384,
-    "amorous": 1.297116869290421,
-    "patient": 0.7860137308302916,
-    "stealth": 0.00007584957067631654,
-    "devotion": 1.6740683962048282,
-    "craft": 2.691731609049885,
-    "leadership": 1.1704583479218007,
-    "deception": 0.3632324398878803
+    "strategic": 19.70117472337049,
+    "cerebral": 14.946308855317056,
+    "social": 6.0070820975070065,
+    "generous": 2.1567444563443674,
+    "cautious": 14.162969134282834,
+    "physical": 4.053230561363503,
+    "risky": 0.9721802186470302,
+    "ruthless": 0.41425089572352947,
+    "carousing": 0.34403992328670296,
+    "amorous": 1.2646889475581604,
+    "patient": 0.7663633875595343,
+    "stealth": 0.00007395333140940863,
+    "devotion": 1.6322166862997074,
+    "craft": 2.6244383188236378,
+    "leadership": 1.1411968892237556,
+    "deception": 0.35415162889068325
   },
   "aptitudes": [
     "strategist",
@@ -7160,7 +7195,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 862,
+  "actionCount": 863,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7550,8 +7585,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785025836148,
-  "rev": 1458,
+  "updatedAt": 1785026065844,
+  "rev": 1459,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10174,7 +10209,7 @@
       "lightsense": 2,
       "order_sense": 92,
       "palework": 31,
-      "deathsense": 39,
+      "deathsense": 40,
       "shadowstep": 24,
       "the-attended-end": 42,
       "wildcraft": 6,
@@ -10857,7 +10892,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 613,
+    "valley": 614,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11018,10 +11053,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-26T00:30:36.145Z",
+      "lastAt": "2026-07-26T00:34:25.841Z",
       "startDay": 25,
       "endDay": 26,
-      "beats": 18
+      "beats": 19
     }
   ],
   "company": [
@@ -11268,15 +11303,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 234,
-    "choices": 234,
-    "characterDeltas": 98,
-    "scene": 234,
-    "npcUpdates": 210,
+    "sceneSummary": 235,
+    "choices": 235,
+    "characterDeltas": 99,
+    "scene": 235,
+    "npcUpdates": 211,
     "factUpdates": 18,
     "placeUpdates": 42,
-    "codexUpdates": 144,
-    "timeOps": 228,
+    "codexUpdates": 145,
+    "timeOps": 229,
     "imagePrompt": 6,
     "sceneEnded": 56,
     "itemUpdates": 5,
@@ -11294,7 +11329,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 234,
+  "_opTurns": 235,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

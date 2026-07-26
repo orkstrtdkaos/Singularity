@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 26,
-  "xp": 2574,
+  "xp": 2579,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -147,7 +147,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.03410363537045346,
+    "spectrumId": -0.032398453601930784,
     "violence_peace": 0.09293033437499999,
     "chaos_order": 0.24843810472552474,
     "mechanical_spiritual": 0.25513542055105926,
@@ -163,7 +163,7 @@
   "maxHealth": 155,
   "health": 155,
   "maxEnergy": 225,
-  "energy": 159,
+  "energy": 154,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1996,14 +1996,19 @@
         "player": "Use Ask the Dead on the thing in the Hollow.",
         "summary": "Ask the Dead opens the hollow's warden — a man who stayed until staying became death, an ear built to receive a question not yet asked, and his plain naming that the watch can end now.",
         "narration": "You crouch at the hollow's edge and open Ask the Dead.\n\nNot to the wolverine — Logana has already given you what she had. You open it to the hollow itself, to the thing that has been held here longer than the Zone has been a Zone. The substrate is thick and close and it resists you for a moment, the way old grief resists the hand of a stranger. Then it gives.\n\nSomething answers.\n\nIt comes in broken pieces, the way the recently dead always do — badly, and with effort, and as truthfully as they can manage. You hear it less as words than as weight. An Ashwarden. A man. He was the last warden of this response site, before the post was abandoned. He did not die here so much as he stayed, and staying became the same thing over fifteen years. His name is gone — the Zone took it or he gave it — but what he wants you to know is still present, and it comes in three clear shapes.\n\nFirst: the hollow is not a tomb. It is an ear. Whatever the relay node to the south was built to transmit, this site was built to receive — and the question it was built to receive has not arrived yet. He waited for it. He is still waiting.\n\nSecond: the source is not the Zone. The Zone grew toward it the same way roots grow toward water — the held-open death attracted fifteen years of unattended endings because unattended things recognize each other. The hollow was here first.\n\nThird: he cannot hold this open much longer. He says it plainly, the way the dead say true things — without regret, with some relief. He held because no one came to attend. Someone is attending now. He names it directly, the way a man names the end of a long watch: you will do.\n\nHuginn shifts on his broken branch without making a sound. Veth is very still. Pell has not moved, but her hand has settled on Memory's grip, and she is watching your face."
+      },
+      {
+        "player": "Ask the warden *what question the hollow was built to receive*, and *what the relay node would transmit if prompted.* ",
+        "summary": "The hollow's warden named his full purpose: built to receive a watershed-readiness signal from the relay node south of here. He held the receiving end open fifteen years, waiting for a question that was never sent. The circuit is intact. The question only needs someone at the node to ask it.",
+        "narration": "You hold the line of contact open and ask both questions plainly, one after the other.\n\nThe warden answers. He gives it to you in the way the dead give things — not with precision, but with the weight of something he has been holding a long time and is glad to set down. The hollow was built to receive a question from the relay node to the south. Not any question. One specific question: whether the watershed is ready. That is all the hollow was ever meant to hear. It would receive the signal, confirm the state of the water above and below, and pass the answer back down the lattice. A closed circuit, built before the Transition, when someone still believed the answer would matter.\n\nThe relay node, the warden tells you, was the sending end. If prompted — if someone seated at the node and drew on the lattice — it would transmit that question northward through the hollow and on to the reclamation site above. The hollow would hear it. The site above would answer. And the answer, whatever it was, would travel back the same way it came.\n\nHe has been holding the receiving end open for fifteen years. Waiting for the question to be sent. It never was. He does not know why.\n\nHuginn shifts on the broken branch at the far edge of the clearing. One slow movement, wings half-spread, then still. It is the bird's version of a long breath.\n\nVeth speaks quietly at your right. \"The node is south,\" she says. \"Back past Logana. Past the gate.\" She is not asking. She has already understood what this means for the road back.\n\nPell says nothing. Her hand is still on Memory's grip. Her eyes are on your face."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch at the hollow's edge and open Ask the Dead.\n\nNot to the wolverine — Logana has already given you what she had. You open it to the hollow itself, to the thing that has been held here longer than the Zone has been a Zone. The substrate is thick and close and it resists you for a moment, the way old grief resists the hand of a stranger. Then it gives.\n\nSomething answers.\n\nIt comes in broken pieces, the way the recently dead always do — badly, and with effort, and as truthfully as they can manage. You hear it less as words than as weight. An Ashwarden. A man. He was the last warden of this response site, before the post was abandoned. He did not die here so much as he stayed, and staying became the same thing over fifteen years. His name is gone — the Zone took it or he gave it — but what he wants you to know is still present, and it comes in three clear shapes.\n\nFirst: the hollow is not a tomb. It is an ear. Whatever the relay node to the south was built to transmit, this site was built to receive — and the question it was built to receive has not arrived yet. He waited for it. He is still waiting.\n\nSecond: the source is not the Zone. The Zone grew toward it the same way roots grow toward water — the held-open death attracted fifteen years of unattended endings because unattended things recognize each other. The hollow was here first.\n\nThird: he cannot hold this open much longer. He says it plainly, the way the dead say true things — without regret, with some relief. He held because no one came to attend. Someone is attending now. He names it directly, the way a man names the end of a long watch: you will do.\n\nHuginn shifts on his broken branch without making a sound. Veth is very still. Pell has not moved, but her hand has settled on Memory's grip, and she is watching your face.",
-      "sceneSummary": "Ask the Dead opens the hollow's warden — a man who stayed until staying became death, an ear built to receive a question not yet asked, and his plain naming that the watch can end now.",
+      "narration": "You hold the line of contact open and ask both questions plainly, one after the other.\n\nThe warden answers. He gives it to you in the way the dead give things — not with precision, but with the weight of something he has been holding a long time and is glad to set down. The hollow was built to receive a question from the relay node to the south. Not any question. One specific question: whether the watershed is ready. That is all the hollow was ever meant to hear. It would receive the signal, confirm the state of the water above and below, and pass the answer back down the lattice. A closed circuit, built before the Transition, when someone still believed the answer would matter.\n\nThe relay node, the warden tells you, was the sending end. If prompted — if someone seated at the node and drew on the lattice — it would transmit that question northward through the hollow and on to the reclamation site above. The hollow would hear it. The site above would answer. And the answer, whatever it was, would travel back the same way it came.\n\nHe has been holding the receiving end open for fifteen years. Waiting for the question to be sent. It never was. He does not know why.\n\nHuginn shifts on the broken branch at the far edge of the clearing. One slow movement, wings half-spread, then still. It is the bird's version of a long breath.\n\nVeth speaks quietly at your right. \"The node is south,\" she says. \"Back past Logana. Past the gate.\" She is not asking. She has already understood what this means for the road back.\n\nPell says nothing. Her hand is still on Memory's grip. Her eyes are on your face.",
+      "sceneSummary": "The hollow's warden named his full purpose: built to receive a watershed-readiness signal from the relay node south of here. He held the receiving end open fifteen years, waiting for a question that was never sent. The circuit is intact. The question only needs someone at the node to ask it.",
       "choices": [
         {
-          "label": "Attend his ending — give him the plain Ashwarden presence he has waited for, and let the watch close",
+          "label": "Thank the warden and release him — his watch is done, you have what you came for, let the ending complete",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -2016,14 +2021,17 @@
           ],
           "abilityId": "the-attended-end",
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask him one more question before the link fades — what question was this hollow built to receive?",
+          "label": "Ask one more question first — why was the question never sent, and does he know who was supposed to send it",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {
-            "death_life": -0.2
+            "death_life": -0.1,
+            "falsehood_truth": 0.2
           },
           "difficulty": 15,
           "intentTags": [
@@ -2031,95 +2039,118 @@
           ],
           "abilityId": "ask_the_dead",
           "energyCost": null,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Read the hollow's full design with Order-Sense now that you're standing inside it — the ear's structure, what it was built to receive and from where",
+          "label": "Go south now — back to Logana and the relay node; prompt the node and send the question the hollow was built to receive",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "death_life": -0.1,
+            "chaos_order": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "travel",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read the hollow's design with Order-Sense before you move — understand the full circuit before you decide whether to close it",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {
             "chaos_order": 0.3
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Tell Veth and Pell what the dead man said — they need to hear the shape of this before you decide anything",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
-        "xp": 0
+        "energy": 0
       },
+      "ledgerEvents": [
+        {
+          "what": "The hollow's warden named its full purpose: a receiver built for a watershed-readiness question from the relay node south of the hollow. The circuit is intact. The question was never sent.",
+          "tags": [
+            "mystery",
+            "water-crisis",
+            "pre-transition"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "what-the-water-remembers",
-          "note": "The hollow's warden named its nature: it is an ear, built to receive a question not yet sent from the relay node. The warden has held it open for fifteen years waiting for someone to attend — and has named Silas as the one who will do."
+          "note": "The warden named the circuit's full purpose: the hollow receives a watershed-readiness question sent from the relay node south. The question was never sent. The node can send it — if someone prompts it."
         }
       ],
-      "stageOps": [],
       "scene": {
-        "setting": "A shallow clearing thirty feet across in the left-branch Zone, the ground packed dark and old at its center — the hollow and its warden both present and plain now. Early-spring dawn light, flat and grey. Iron-and-ozone on the air.",
+        "setting": "A shallow clearing thirty feet across in the left-branch Zone — the hollow and its warden both present. Early-spring dawn light, flat and grey. Iron-and-ozone on the air. The warden's answer still hanging in the substrate.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Hand on Memory's grip, watching Silas's face."
+            "state": "Hand on Memory's grip, eyes on Silas's face."
           },
           {
             "name": "Veth Ondra",
-            "state": "Still at Silas's right, reading him."
+            "state": "Standing at Silas's right, already thinking about the road south to the relay node."
           },
           {
             "name": "Huginn",
-            "state": "Shifted silently on the broken branch."
+            "state": "Settled again on the broken branch, half-spread wings returned to stillness."
           }
         ],
         "objects": [
-          "the hollow's center — the held-open ending named and plain, the warden present in it",
+          "the hollow's center — the held-open ending, the warden's presence, question and answer both now spoken",
           "low broken branch at the far edge — Huginn's perch",
           "Memory — Pell holding it, hand on the grip",
           "Zone-thickened treeline on three sides"
         ],
         "threads": [
-          "The warden named three things: the hollow is an ear; the Zone is not the source; he cannot hold much longer and has named Silas as the attendant — the choice of how to answer sits with Silas now",
-          "The question the hollow was built to receive has not yet been sent — its nature remains unknown",
-          "Veth and Pell have not yet heard the account",
-          "Logana holds the perimeter at the downed tree"
+          "The warden named the circuit: the hollow receives, the relay node sends, the watershed site answers. The question was never sent. The relay node is south — back past Logana.",
+          "The warden has not yet been released — his watch is done but his ending is still held open.",
+          "Logana holds the perimeter at the downed tree to the south, relay node beneath her watch."
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth Ondra",
-          "note": "Held still through the Ask the Dead cast — watching Silas's face, reading him rather than the hollow.",
-          "statusNote": "Standing at Silas's right in the hollow clearing — present and attending the warden's response."
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Watching Silas's face as the warden's answer lands — hand still on Memory.",
+          "statusNote": "At the hollow clearing — hand on Memory, watching Silas."
         },
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Hand settled on Memory's grip without being asked — reading Silas's face through the cast.",
-          "statusNote": "At the hollow clearing — hand on Memory, watching Silas."
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth Ondra",
+          "note": "Named the node's location — south, past Logana — plainly and without ceremony. Already thinking ahead.",
+          "learned": [
+            "The hollow was built as a receiver for a watershed-readiness signal from the relay node south. The question was never sent in fifteen years."
+          ],
+          "statusNote": "At the hollow clearing — reading the road south."
         }
       ],
       "codexUpdates": [
@@ -2127,67 +2158,46 @@
           "topic": "what-the-water-remembers",
           "label": "What the Water Remembers",
           "kind": "mystery",
-          "fact": "The hollow is an ear, not a tomb — built to receive a specific question from the relay node to the south. An Ashwarden warden held it open for fifteen years waiting. He named the hollow's nature plainly: the Zone grew toward it because unattended endings recognize each other; the source is not the Zone. He cannot hold much longer, and named Silas as the one who will attend.",
+          "fact": "The hollow is a receiver. The relay node south of it was the sending end. If prompted, the node transmits one question northward through the hollow to the reclamation site: 'Is the watershed ready?' The hollow confirms and passes the answer back down the lattice. The circuit is intact. The question was never sent — the warden has held the receiving end open for fifteen years, waiting.",
           "links": [
-            "zone-left-branch-entrance",
-            "the-attended-end",
-            "deathsense",
-            "ask_the_dead",
+            "the-water-crisis",
             "millbrook",
             "the-second-thread"
           ]
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The hollow in the left-branch Zone is an ear — built to receive a question from the relay node to the south. A nameless Ashwarden warden held it open for fifteen years. He has named Silas Weir as the one who will attend the ending of his watch.",
-          "subjectId": "zone-left-branch-entrance"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The hollow's warden named: it is a receiver, built for a specific transmission from the relay node. The warden has held it open fifteen years. He has named Silas as the attending presence — the watch can end.",
-          "flag": {
-            "hollow_nature": "receiver_ear",
-            "hollow_warden_named": "true",
-            "hollow_watch_transfer": "silas-weir"
-          }
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a careful casting and the dead man's answer"
+        "why": "A short exchange with the dead — a question answered, the contact still open."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "A shallow clearing thirty feet across in the left-branch Zone, the ground packed dark and old at its center — the hollow and its warden both present and plain now. Early-spring dawn light, flat and grey. Iron-and-ozone on the air.",
+      "setting": "A shallow clearing thirty feet across in the left-branch Zone — the hollow and its warden both present. Early-spring dawn light, flat and grey. Iron-and-ozone on the air. The warden's answer still hanging in the substrate.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Hand on Memory's grip, watching Silas's face."
+          "state": "Hand on Memory's grip, eyes on Silas's face."
         },
         {
           "name": "Veth Ondra",
-          "state": "Still at Silas's right, reading him."
+          "state": "Standing at Silas's right, already thinking about the road south to the relay node."
         },
         {
           "name": "Huginn",
-          "state": "Shifted silently on the broken branch."
+          "state": "Settled again on the broken branch, half-spread wings returned to stillness."
         }
       ],
       "objects": [
-        "the hollow's center — the held-open ending named and plain, the warden present i",
+        "the hollow's center — the held-open ending, the warden's presence, question and ",
         "low broken branch at the far edge — Huginn's perch",
         "Memory — Pell holding it, hand on the grip",
         "Zone-thickened treeline on three sides"
       ],
       "threads": [
-        "The warden named three things: the hollow is an ear; the Zone is not the source; he cannot hold much longer and has named Silas as the attendant — the choice of",
-        "The question the hollow was built to receive has not yet been sent — its nature remains unknown",
-        "Veth and Pell have not yet heard the account",
-        "Logana holds the perimeter at the downed tree"
+        "The warden named the circuit: the hollow receives, the relay node sends, the watershed site answers. The question was never sent. The relay node is south — back",
+        "The warden has not yet been released — his watch is done but his ending is still held open.",
+        "Logana holds the perimeter at the downed tree to the south, relay node beneath her watch."
       ]
     }
   },
@@ -2933,14 +2943,14 @@
         "s4"
       ],
       "progress": [
-        "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not.",
         "↳ Order-Sense read the relay node at the downed tree's base as a load-bearing part of the Zone's lattice — one of the nodes the searching threads toward the watershed run through, with recent…",
         "A skeletal guardian now watches the relay node at the downed tree — Logana, raised from the wolverine that tended the node for years. The Zone's thread is in her warding. The node is no longer unattended.",
         "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to.",
         "↳ The Attended End read the relay node directly — it is not malfunctioning, it is following its last instruction to prepare the watershed for a receiver that never came; the water crisis has a source…",
         "Party briefed on the relay node's purpose and now moving north toward the unanswered response site — the next structural piece of the watershed preparation design.",
         "Order-Sense closes on the full design at the response site — the relay node and the hollow are two ends of one thread. The held-open death at the hollow's center is the unanswered response point. The party stands at it now.",
-        "The hollow's warden named its nature: it is an ear, built to receive a question not yet sent from the relay node. The warden has held it open for fifteen years waiting for someone to attend — and has named Silas as the one who will do."
+        "The hollow's warden named its nature: it is an ear, built to receive a question not yet sent from the relay node. The warden has held it open for fifteen years waiting for someone to attend — and has named Silas as the one who will do.",
+        "The warden named the circuit's full purpose: the hollow receives a watershed-readiness question sent from the relay node south. The question was never sent. The node can send it — if someone prompts it."
       ],
       "aliases": [],
       "startedAt": "2026-07-22T20:49:54.189Z",
@@ -3473,7 +3483,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Asked what the gate looks like to Order-Sense — received the answer plainly, did not press further.",
         "[d14] Memory settled across her back, ready to move, watching the country ahead.",
         "[d14] Eyes north already, Memory across her back — ready to move before Silas has finished.",
         "[d14] Walking at Silas's left shoulder into the Zone — eyes on the ground ahead, Memory across her back.",
@@ -3482,7 +3491,8 @@
         "[d14] Read the track line's direction without being asked — named it matches the party's heading, plainly and without drama.",
         "[d14] Called across two hundred yards of Zone ground to check whether Silas is still standing — her voice pitched to carry, not to shout.",
         "[d14] Received the full briefing on the relay node's purpose — said nothing, looked north, looked at Silas. Walking north with Memory in a trail grip.",
-        "[d14] Hand settled on Memory's grip without being asked — reading Silas's face through the cast."
+        "[d14] Hand settled on Memory's grip without being asked — reading Silas's face through the cast.",
+        "[d14] Watching Silas's face as the warden's answer lands — hand still on Memory."
       ],
       "knownFacts": [
         "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
@@ -4176,7 +4186,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Read the sky as Silas descended — warden's instinct, gauging what the flight saw.",
         "[d14] Came up over the bank edge at the fight's close — read the gravel in one look and named that the warpling turned rather than was broken.",
         "[d14] Named the tracks as pre-warpling in nature — heavier, older, walking with confidence or patience. Neither good company.",
         "[d14] Called across the distance to name the kill's Zone-weight — practical, not alarmed. Her second noted death on this stretch.",
@@ -4185,17 +4194,18 @@
         "[d14] Received the relay node briefing — drew a long breath and filed it. Walking north in silence.",
         "[d14] Named the one previous raising she has witnessed — a boar held for four days at a grief-sealed hollow, released cleanly at the burial's end. Marked Logana as categorically different: the Zone's claim sits in the warding alongside Silas's own purpose, and she does not know what that costs yet.",
         "[d14] Read Silas's expression after the full Deathsense cast and named the response site aloud — not a question.",
-        "[d14] Held still through the Ask the Dead cast — watching Silas's face, reading him rather than the hollow."
+        "[d14] Held still through the Ask the Dead cast — watching Silas's face, reading him rather than the hollow.",
+        "[d14] Named the node's location — south, past Logana — plainly and without ceremony. Already thinking ahead."
       ],
       "knownFacts": [
-        "The fold holds something that wants to be finished — patient rather than desperate, and it has been waiting a long time.",
         "The March has not had a new gate since the Transition — eleven years. The Numinous stopped making them. Word of this one will spread, and people will want things from its maker.",
         "The made gate now carries the open-hand of attendance — the ashwarden mark that means a passage was seen rightly",
         "The Zone's searching lattice-threads all point north-and-west toward the watershed — confirmed against her own read of this country.",
         "A Zone warpling that turns rather than presses still has something working in it — not a dead thing reanimated, a living thing rewired.",
         "Witnessed one prior raising — a plain boar on the east branch, fourteen years ago, held for a grief-sealed hollow for four days then released at burial",
         "Logana's Zone-thread distinction is unlike anything she has seen — the claim is structural and does not release the way an ashwarden's own purpose would",
-        "The old death site to the north reads as an ending held open — not completed, the Zone organizing around it"
+        "The old death site to the north reads as an ending held open — not completed, the Zone organizing around it",
+        "The hollow was built as a receiver for a watershed-readiness signal from the relay node south. The question was never sent in fifteen years."
       ],
       "skillsObserved": [
         "plain technical description of Ashwarden contact craft under",
@@ -4208,7 +4218,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Standing at Silas's right in the hollow clearing — present and attending the warden's response.",
+      "statusNote": "At the hollow clearing — reading the road south.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5585,7 +5595,7 @@
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
     "lastGenCount": 624,
-    "turnsSinceOffer": 13,
+    "turnsSinceOffer": 14,
     "recentOffers": [
       {
         "thing": "Gweth paused as she turned — almost didn't say it — then said quietly that there is a shepherd's bothy half a mile down the left branch on…",
@@ -7198,30 +7208,31 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.210843490868967,
-    "cerebral": 16.803751484196134,
-    "social": 5.567720358469033,
-    "generous": 1.9989988188420547,
-    "cautious": 14.102080719945677,
-    "physical": 3.756774744836276,
-    "risky": 0.9010743498425496,
-    "ruthless": 0.3839523263035007,
-    "carousing": 0.3188766282725614,
-    "amorous": 1.1721888075031643,
-    "patient": 0.7103110904163127,
-    "stealth": 0.00006854433852929234,
-    "devotion": 1.5128353377283177,
-    "craft": 2.4324852599109277,
-    "leadership": 1.0577290354978741,
-    "deception": 0.32824875740885057
+    "strategic": 18.730572403597243,
+    "cerebral": 19.38365769709123,
+    "social": 5.4285273495073065,
+    "generous": 1.9490238483710032,
+    "cautious": 13.749528701947035,
+    "physical": 3.662855376215369,
+    "risky": 0.8785474910964859,
+    "ruthless": 0.37435351814591317,
+    "carousing": 0.31090471256574737,
+    "amorous": 1.1428840873155852,
+    "patient": 0.6925533131559048,
+    "stealth": 0.00006683073006606002,
+    "devotion": 1.4750144542851098,
+    "craft": 2.3716731284131543,
+    "leadership": 1.0312858096104272,
+    "deception": 0.3200425384736293
   },
   "aptitudes": [
     "strategist",
     "scholar",
     "tactician",
+    "sage",
     "stalwart"
   ],
-  "actionCount": 866,
+  "actionCount": 867,
   "grantsVersion": 1,
   "reconcileVersion": 21,
   "gallery": [
@@ -7611,8 +7622,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785026836396,
-  "rev": 1467,
+  "updatedAt": 1785027418577,
+  "rev": 1469,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10918,7 +10929,7 @@
   "syncedAt": 1784994053035,
   "teachers": {},
   "regionsKnown": {
-    "valley": 617,
+    "valley": 618,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11081,10 +11092,10 @@
     {
       "id": "sess-15",
       "startedAt": "2026-07-25T19:44:20.594Z",
-      "lastAt": "2026-07-26T00:47:16.393Z",
+      "lastAt": "2026-07-26T00:56:58.569Z",
       "startDay": 25,
       "endDay": 26,
-      "beats": 22
+      "beats": 23
     }
   ],
   "company": [
@@ -11331,25 +11342,25 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 238,
-    "choices": 238,
-    "characterDeltas": 101,
-    "scene": 238,
-    "npcUpdates": 212,
+    "sceneSummary": 239,
+    "choices": 239,
+    "characterDeltas": 102,
+    "scene": 239,
+    "npcUpdates": 213,
     "factUpdates": 19,
     "placeUpdates": 43,
-    "codexUpdates": 148,
-    "timeOps": 232,
+    "codexUpdates": 149,
+    "timeOps": 233,
     "imagePrompt": 6,
-    "sceneEnded": 57,
+    "sceneEnded": 58,
     "itemUpdates": 5,
-    "questUpdates": 31,
+    "questUpdates": 32,
     "offer": 22,
     "moveTo": 14,
     "delegateOps": 3,
     "deeds": 4,
     "standingOps": 1,
-    "ledgerEvents": 5,
+    "ledgerEvents": 6,
     "discovery": 3,
     "stageOps": 12,
     "generateRequest": 9,
@@ -11357,7 +11368,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 238,
+  "_opTurns": 239,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -11524,7 +11535,25 @@
   "_stageOpRefusals": [
     "the-second-thread: no-such-quest"
   ],
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-07-26T00:56:58.577Z",
+      "worldDay": 26,
+      "who": "char-mrhs8286",
+      "playerKey": "player-s9z9u1",
+      "where": "gen-disputed-zone-left-branch-entrance",
+      "what": "The hollow's warden named its full purpose: a receiver built for a watershed-readiness question from the relay node south of the hollow. The circuit is intact. The question was never sent.",
+      "tags": [
+        "mystery",
+        "water-crisis",
+        "pre-transition"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true
+    }
+  ],
   "locationState": {},
   "_applyFailures": null,
   "activeEncounter": null,

@@ -1,5 +1,28 @@
 # PO ALERT
 
+> ## [CCODE-27 complete_pending_review — CCode, 2026-07-25] Braids/discoveries invoked by NAME are now recognized (v1.8.280 `cafe83ff`)
+> Erik: "the GM fails to recognize braid/discovery skills" (screenshot: "Ashen Meridian" rejected as unknown).
+> Diagnosed from the synced save char-mrhs8286: the ENGINE was fine — abilitiesForGM DOES surface all 7 braids +
+> 4 discoveries by name. The bug was in **parseIntent (gm.js)**: it fed the intent-parser abilities BY ID ONLY
+> (`character.abilities.map(a => a.abilityId)`), so a braid invoked by its NAME ("Ashen Meridian", id
+> `braid_order_sense_palework`) never resolved → abilityId null → GM narrated it unknown. FIX: parseIntent now
+> lists abilities as "Name [id]" (base from catalog, braids/discoveries from customAbilities; app.js passes
+> fullCatalog()); sanitizeIntent.resolveAb resolves a bare id / "Name [id]" echo / bare NAME. Verified vs the
+> real save (all forms resolve; non-ability → null). npm test exit 0.
+
+> ## [SNG-239 complete_pending_review — CCode, 2026-07-25] The earned quest reveal is STATED, not withheld (v1.8.279 `937ef541`)
+> The three CCode pieces (this is the SNG-236/237 class again — a soft good rule dropped under the 114-MUST load):
+> - **Context (quests.js structuredQuestsForGM):** the current stage's `change` is handed to the GM as "WHEN
+>   SATISFIED, STATE PLAINLY (the earned reveal)" — the concrete truth to name, not just objective/condition.
+> - **Rule (gm.js, the CONDITIONAL structured-quest directive — NOT the always-on constitution, so no added
+>   MUST-load):** your QUEST CLARITY rule dropped in — a stage reveal is a PAYOUT not a secret; name it first-read
+>   clear; image may accompany but never replace; open questions DROP; Rule 4's fragments are for GM-eyes secrets only.
+> - **The nudge (Fix-A pattern):** a completed stageOp hands its `change` to the NEXT beat as a HARD "STATE IT
+>   PLAINLY, opacity drops" directive (pendingStageReveal → stageRevealDetail → registry → gm.js push) — the hard
+>   directive the load can't drop, carrying the decision-point flag. **AEVI owes** the change-statability audit (§4);
+>   **ERIK owes** the tone confirm. npm test exit 0.
+> Results (both): po/results/20260725_SNG-239_and_CCODE-27_quest_clarity_and_braid_names.md.
+
 > ## [DONE + spec] SNG-239 quest clarity + water_remembers rewritten (Aevi, 2026-07-25)
 > Erik: quests are opaque; they must CLARIFY as you perform steps; author the clear structure IN; and he wanted
 > the water quest to be a dormant PRECURSOR waking that he could walk into the world.

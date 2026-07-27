@@ -5,6 +5,7 @@
 
 import { relationshipLabel, relationshipBand } from "./npcs.js";
 import { itemUses } from "./inventory.js";
+import { smartClamp } from "./namematch.js"; // CCODE-29: word-boundary clamp for the rank-ladder grant/cannot prose (not a raw .slice)
 
 /** A skill's detail block. `opts`: {tradition, tier, owned, level, maxRank, effCost, baseCost, families[],
  *  rankText, ripe}. Returns plain text (for the shared popover). Pure. */
@@ -16,9 +17,20 @@ export function skillDetail(ab = {}, opts = {}) {
   if (opts.ripe) lines.push("✦ ripe for mastery — a defining moment could raise it");
   if (opts.effCost != null) lines.push(`⚡ ${opts.effCost} energy to use${opts.baseCost != null && opts.baseCost !== opts.effCost ? ` (base ${opts.baseCost})` : ""}`);
   if ((opts.families || []).length) lines.push(`Function: ${opts.families.join(" · ")}`);
-  if (ab.description) lines.push(String(ab.description).slice(0, 160));
+  if (ab.description) lines.push(String(ab.description).slice(0, 200));
   if (ab.notFor) lines.push(`Cannot: ${String(ab.notFor).slice(0, 120)}`);
-  return lines.filter(Boolean).join("\n");
+  // CCODE-29: show HOW IT EVOLVES over time — each rank's name + what it grants + what it still can't do,
+  // with a ✓ on ranks the character already holds. Depth is earned through use, so this is the road ahead.
+  const ladder = (opts.ladder || []).filter(t => t && t.rank);
+  if (ladder.length) {
+    lines.push("");
+    lines.push("How it grows (depth is earned through use):");
+    for (const t of ladder) {
+      const have = opts.owned && (opts.level || 0) >= t.rank;
+      lines.push(`  ${have ? "✓" : "○"} Rank ${t.rank}${t.name ? ` — ${t.name}` : ""}${t.grants ? `: ${smartClamp(String(t.grants), 160)}` : ""}${t.cannot ? `  (still can't: ${smartClamp(String(t.cannot), 120)})` : ""}`);
+    }
+  }
+  return lines.filter(v => v != null).join("\n");
 }
 
 /** An NPC's detail block — current relationship, standing, last seen, where known from. `opts`: {locations}.

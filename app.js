@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.285";
+const APP_VERSION = "1.8.286";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -112,6 +112,8 @@ app.addEventListener("click", e => { const el = e.target.closest?.("[data-aptchi
 // SNG-134 Part 2: ONE hover/tap detail for a skill / name / item, everywhere they appear (data-entity="kind:id").
 // Same entity → same detail, no matter the render site (the consistency ask). Reuses the one popover surface.
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-entity]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = entityHover(el.dataset.entity); if (txt) showPopoverText(txt); } });
+// CCODE-29 (Erik): a function pill → the verb's mechanics (definition / what it's NOT / an example).
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-verb]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = verbDetail(el.dataset.verb); if (txt) showPopoverText(txt); } });
 // SNG-215 §A1: toggle a craft BOOST — a player nudge that WEIGHTS the GM's craft suggestions (SNG-214), never
 // an override, never a roll change. Targeted DOM update + persist; no full re-render (keeps sidebar scroll).
 app.addEventListener("click", e => {
@@ -145,13 +147,29 @@ function entityHover(spec) {
         owned: !!owned, level: owned?.level, maxRank: CONTENT.rules?.leveling?.maxAbilityRank ?? 3,
         effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
         baseCost: ab.energyCost ?? null, families: familiesOfAbility(ab, FN_INDEX),
-        rankText: rp?.text, ripe: !!rp?.ripe || aspirationRipe(character, id, CONTENT.rules)
+        rankText: rp?.text, ripe: !!rp?.ripe || aspirationRipe(character, id, CONTENT.rules),
+        ladder: (ab.tree || []).map(t => ({ rank: t.rank, name: t.name, grants: t.grants, cannot: t.cannot })) // CCODE-29: how it evolves rank-by-rank
       });
     }
     if (kind === "npc") { const n = character.npcRegistry?.[id]; return n ? npcDetail(n, { locations: CONTENT.locations }) : ""; }
     if (kind === "item") { const it = (character.inventory || []).find(x => (x.name === id || x.customName === id)); return it ? itemDetail(it) : ""; }
   } catch { /* a hover never throws */ }
   return "";
+}
+
+/** CCODE-29 (Erik): the mechanics of a function VERB (the 24-verb vocabulary) — its definition, what it is NOT
+ *  (the neighbour verbs it's confused with), and an example. Pulled from CONTENT.functionVocabulary. Plain text. */
+function verbDetail(verb) {
+  const fams = CONTENT?.functionVocabulary?.families || {};
+  let entry = null, family = null;
+  for (const [fam, list] of Object.entries(fams)) { const e = (Array.isArray(list) ? list : []).find(x => x?.verb === verb); if (e) { entry = e; family = fam; break; } }
+  if (!entry) return `${verb} — a function of the craft.`;
+  const strip = s => String(s || "").replace(/[`⛔*]/g, "").replace(/\s+/g, " ").trim();
+  const lines = [`${String(verb).toUpperCase()}${family ? ` — the ${String(family).toLowerCase()} family` : ""}`];
+  if (entry.definition) lines.push(strip(entry.definition));
+  if (entry.notTheSameAs) lines.push(`Not: ${strip(entry.notTheSameAs)}`);
+  if (entry.example) lines.push(`e.g. ${strip(entry.example)}`);
+  return lines.join("\n");
 }
 
 /** SNG-084: the authored one-sentence explanation for a mechanic, by id (helper_text.json). */
@@ -1802,7 +1820,8 @@ function fnFamilyClass(verb) { const fam = FN_INDEX?.verbToFamily?.[verb]; retur
 function functionChips(ab) {
   const fns = ab?.functions || [];
   if (!fns.length) return "";
-  return `<span class="fn-chips">${fns.map(f => `<span class="fn-chip ${fnFamilyClass(f)}" title="${esc(FN_INDEX?.verbToFamily?.[f] || "")}${FN_INDEX?.verbToFamily?.[f] ? " · " : ""}${esc(f)}">${FN_ICON[f] || "•"} ${esc(f)}</span>`).join("")}</span>`;
+  // CCODE-29 (Erik): each function pill is CLICKABLE → the verb's mechanics (definition + what it's NOT + example).
+  return `<span class="fn-chips">${fns.map(f => `<span class="fn-chip fn-chip-click ${fnFamilyClass(f)}" data-verb="${esc(f)}" title="${esc(FN_INDEX?.verbToFamily?.[f] || "")}${FN_INDEX?.verbToFamily?.[f] ? " · " : ""}${esc(f)} — tap for what it does">${FN_ICON[f] || "•"} ${esc(f)}</span>`).join("")}</span>`;
 }
 
 // SNG-124: the ONE gate for "is there anything to spend in the Level Up modal" — unspent skill points OR
@@ -6278,7 +6297,7 @@ function renderLevelUp(status = "") {
   const reasonedPicksHTML = (picks, note) => `<h3 class="codex-title" style="font-size:15px">✨ Suggested for you <span class="hint" style="text-transform:none">— reasoned from how you actually play</span></h3>
     ${picks.map(p => { const ab = cat0[p.abilityId]; const c = suggCost(p.abilityId); const ec = (() => { try { return effectiveEnergyCost(ab, character, rules); } catch { return ab?.energyCost ?? null; } })();
       return `<div class="cs-ability sug-row">
-        <div><strong>${esc(ab?.name || p.abilityId)}</strong> ${functionChips(ab)}${p.fit ? ` <span class="fit-tag fit-${esc(String(p.fit).replace(/[^a-z]/gi, ""))}">${esc(p.fit)}</span>` : ""}${ec != null ? ` <span class="hint" title="energy to use (effective)">⚡${ec}</span>` : ""}</div>
+        <div><strong class="entity-hover" data-entity="skill:${esc(p.abilityId)}" title="Tap to see how this craft grows rank by rank">${esc(ab?.name || p.abilityId)}</strong> ${functionChips(ab)}${p.fit ? ` <span class="fit-tag fit-${esc(String(p.fit).replace(/[^a-z]/gi, ""))}">${esc(p.fit)}</span>` : ""}${ec != null ? ` <span class="hint" title="energy to use (effective)">⚡${ec}</span>` : ""}</div>
         <div class="hint">✦ ${esc(p.why || "")}</div>
         <button class="btn" data-lvllearn="${esc(p.abilityId)}">Learn${c != null ? ` (${c} pt${c > 1 ? "s" : ""})` : ""}</button>
       </div>`; }).join("")}${note ? `<div class="hint" style="margin-top:6px">${esc(note)}</div>` : ""}`;
@@ -6307,7 +6326,7 @@ function renderLevelUp(status = "") {
       wheelRecommended = new Set(suggestions.map(s => s.abilityId)); // SNG-218 §3: the same picks light up ON the wheel
       const gap = cov.missing.length ? `Your kit has no <strong>${cov.missing.join(", ")}</strong> yet — gaps worth filling.` : `Your kit already touches all ${cov.covered.length} function families.`;
       const rows = suggestions.map(s => { const ab = fullCatalog()[s.abilityId]; const c = suggCost(s.abilityId); return `<div class="cs-ability sug-row">
-          <div><strong>${esc(s.name)}</strong> ${functionChips(ab)}${s.cost != null ? ` <span class="hint" title="energy to use (effective)">⚡${s.cost}</span>` : ""}</div>
+          <div><strong class="entity-hover" data-entity="skill:${esc(s.abilityId)}" title="Tap to see how this craft grows rank by rank">${esc(s.name)}</strong> ${functionChips(ab)}${s.cost != null ? ` <span class="hint" title="energy to use (effective)">⚡${s.cost}</span>` : ""}</div>
           <div class="hint">✦ ${esc(s.why)}</div>
           <button class="btn" data-lvllearn="${esc(s.abilityId)}">Learn${c != null ? ` (${c} pt${c > 1 ? "s" : ""})` : ""}</button>
         </div>`; }).join("");
@@ -6319,7 +6338,7 @@ function renderLevelUp(status = "") {
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Your crafts ${infoDot("ability.ranks")} <span class="hint" style="text-transform:none">— depth is earned through use, not points</span></h3>
       ${rankRows.map(r => { const p = rankProgress(character, r.a.abilityId); return `<div class="cs-ability">
-        <div><strong>${esc(r.ab.name)}</strong> <span class="cs-ranks">${[1, 2, 3].map(n => `<span class="${n <= r.a.level ? "cs-rank-on" : "cs-rank-off"}">${n <= r.a.level ? "●" : "○"}</span>`).join("")}</span> <span class="hint">${r.now ? esc(r.now.name) : ""}</span></div>
+        <div><strong class="entity-hover" data-entity="skill:${esc(r.a.abilityId)}" title="Tap to see how this craft grows rank by rank">${esc(r.ab.name)}</strong> ${functionChips(r.ab)} <span class="cs-ranks">${[1, 2, 3].map(n => `<span class="${n <= r.a.level ? "cs-rank-on" : "cs-rank-off"}">${n <= r.a.level ? "●" : "○"}</span>`).join("")}</span> <span class="hint">${r.now ? esc(r.now.name) : ""}</span></div>
         ${r.next ? `<div class="hint">→ ${esc(r.next.name)}: ${esc(r.next.grants || "")}</div>` : ""}
         <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div>
       </div>`; }).join("") || "<div class='insight'>no crafts yet — learn one below</div>"}

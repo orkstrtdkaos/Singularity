@@ -140,6 +140,16 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-strip .enc-frame-collapse { margin-top: 6px; font-size: 12px; }
 .enc-frame-collapse { color: var(--accent2, #7a9); }
 .enc-frame-collapse.dim { color: var(--ink-dim); }
+/* SNG-244: the in-play quest DECISION strip — reuses the SNG-230 integrated strip, gold-weighted so it reads as
+   a choice (not a fight). The roads are the outcome names, tappable straight through to the resolve. */
+.enc-frame-decision { border-color: #7a5f2a; background: linear-gradient(180deg, rgba(212,162,74,0.12), var(--panel)); }
+.enc-frame-decision .enc-frame-title { color: #e0b25a; }
+.dec-roads { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.dec-road { display: block; width: 100%; text-align: left; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; cursor: pointer; font-family: var(--font-ui); transition: border-color .15s, background .15s; }
+.dec-road:hover { border-color: #e0b25a; background: rgba(212,162,74,0.10); }
+.dec-road-name { display: block; font-size: 13px; color: var(--ink); }
+.dec-road-hint { display: block; font-size: 11px; color: var(--ink-dim); margin-top: 2px; line-height: 1.35; }
+.dec-more { margin-top: 8px; font-size: 11px; color: var(--ink-dim); }
 /* SNG-236 UX: the ⚙ Moves gear — grouped encounter moves (ward/sense/strike by family + the ways out) above the input */
 .moves-panel { border: 1px solid var(--danger); border-radius: 10px; background: linear-gradient(180deg, rgba(192,91,77,0.08), var(--panel)); padding: 10px 12px; margin: 8px 0; }
 .moves-hint { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; }

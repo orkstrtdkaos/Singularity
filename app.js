@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.286";
+const APP_VERSION = "1.8.287";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -114,6 +114,9 @@ app.addEventListener("click", e => { const el = e.target.closest?.("[data-aptchi
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-entity]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = entityHover(el.dataset.entity); if (txt) showPopoverText(txt); } });
 // CCODE-29 (Erik): a function pill → the verb's mechanics (definition / what it's NOT / an example).
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-verb]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = verbDetail(el.dataset.verb); if (txt) showPopoverText(txt); } });
+// SNG-244: tap a road in the in-play quest DECISION strip → the shared resolve path (same ending-selection as the
+// quest detail). data-qdecide = "questId::outcomeId". A shortcut to the existing resolve, never a parallel path.
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-qdecide]"); if (el) { e.preventDefault(); e.stopPropagation(); const [qid, oid] = String(el.dataset.qdecide).split("::"); resolveQuestOutcome(qid, oid); } });
 // SNG-215 §A1: toggle a craft BOOST — a player nudge that WEIGHTS the GM's craft suggestions (SNG-214), never
 // an override, never a roll change. Targeted DOM update + persist; no full re-render (keeps sidebar scroll).
 app.addEventListener("click", e => {
@@ -7013,6 +7016,51 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
 
 /** SNG-065: a structured quest — stakes, engine-testable stages, the routes this character's
  *  domains open, and branched outcomes that APPLY consequences on resolution. */
+// SNG-244: is this structured quest at its decision point — every stage behind you, the ending not yet chosen?
+// The SAME derivation the detail page uses (app.js atDecision below), lifted so the in-play decision strip can
+// ask it without rendering the detail. Reads existing state only (no new resolve/decision logic).
+function questAtDecision(q) {
+  if (!q || !q.structured || q.status !== "active") return false;
+  const allStagesDone = (q.completedStages || []).length >= (q.stages || []).length || (q.stageIndex || 0) >= (q.stages || []).length;
+  return !!(q.awaitingResolution || allStagesDone);
+}
+function questsAtDecision() { return (character?.quests || []).filter(questAtDecision); }
+
+// SNG-244: the ONE resolve action, shared by the quest-detail ending buttons AND the in-play decision strip — so
+// the strip is a genuine shortcut to the existing ending-selection, not a parallel resolve path (the spec guard).
+// De-dupes the SNG-235 ctx sink bundle that both callers need. onDone lets a caller override the after-render.
+function resolveQuestOutcome(questId, outcomeId, { onDone } = {}) {
+  const q = (character?.quests || []).find(x => x.id === questId);
+  const o = q && (q.outcomes || []).find(x => x.id === outcomeId);
+  if (!q || !o) return;
+  if (!confirm(`Resolve "${q.title}" as “${o.name}”? This is permanent and changes the world.`)) return;
+  const day = readClock(character.clock).day;
+  const r = resolveStructuredQuest(character, q.id, outcomeId, {
+    worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
+    content: CONTENT, // SNG-204: the arcs, so a significant outcome's wake knows its pressure + connectsTo
+    liaisonMult: liaisonFactions(character), // SNG-126: a company liaison speeds standing with their people
+    recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day }),
+    recordFact: f => applyFactUpdates(character, [{ op: "add", text: f.text }], { day }),
+    recordCodex: entry => applyCodexUpdates(character, [entry], { day }),
+    recordStanding: ops => applyStandingOps(character, ops, { rules: CONTENT.rules, knownPeople: (() => { const k = new Set(Object.keys(CONTENT.traditionIndex?.byId || {})); return k.size ? k : null; })(), day, liaisonMult: liaisonFactions(character) }),
+    createWaygate: spec => mintWaygate(spec), // SNG-235: an ending can MAKE a real, travelable waygate (Erik's Second Thread)
+    recordPlaceChange: (locId, change) => applyPlaceUpdates(character, locId, [{ note: change }], { day }),
+  });
+  if (r.ok) {
+    saveCharacter(character);
+    const say = a => a.type === "world_event" ? "a ripple spreads through the world"
+      : a.type === "disposition" ? `${String(a.people).replace(/_/g, " ")} feel ${a.delta >= 0 ? "warmer" : "colder"} toward you`
+      : a.type === "npc_state" ? `${String(a.npc).replace(/_/g, " ")} is ${a.state}`
+      : a.type === "ally" ? `${String(a.npc).replace(/_/g, " ")} stands with you`
+      : a.type === "location_state" ? "a place changes"
+      : a.type === "quest_seed" ? "a new thread opens"
+      : a.type === "codex_fact" ? "the record remembers" : null;
+    const changes = [...new Set((r.applied || []).map(say).filter(Boolean))];
+    if (onDone) onDone(r, q, o, changes);
+    else renderPlay(character.activeScene?.lastTurn || null, { aside: `${q.title} — ${o.name} (+${r.xp} xp).${changes.length ? "\n\nWhat changed: " + changes.join("; ") + "." : ""}` });
+  } else alert(r.why || "Couldn't resolve.");
+}
+
 function renderStructuredQuestDetail(q) {
   const resolved = q.status !== "active";
   const routes = routesForCharacter(q, character);
@@ -7063,37 +7111,8 @@ function renderStructuredQuestDetail(q) {
     const r = completeQuestStage(character, q.id, b.dataset.stagedone);
     if (r.ok) { saveCharacter(character); renderStructuredQuestDetail(character.quests.find(x => x.id === q.id)); }
   };
-  for (const b of app.querySelectorAll("[data-outcome]")) b.onclick = () => {
-    const o = q.outcomes.find(x => x.id === b.dataset.outcome);
-    if (!confirm(`Resolve "${q.title}" as “${o.name}”? This is permanent and changes the world.`)) return;
-    const day = readClock(character.clock).day;
-    const r = resolveStructuredQuest(character, q.id, b.dataset.outcome, {
-      worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
-      content: CONTENT, // SNG-204: the arcs, so a significant outcome's wake knows its pressure + connectsTo
-      liaisonMult: liaisonFactions(character), // SNG-126: a company liaison speeds standing with their people
-      // both sinks land the machine-readable effects[] durably: propagating world-events + pinned facts
-      recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day }),
-      recordFact: f => applyFactUpdates(character, [{ op: "add", text: f.text }], { day }),
-      // SNG-235 §3: an outcome's codex_fact / standing effects land in the SAME stores the GM path writes,
-      // so a meaningful ending is findable in the codex and moves real people-standing (not narrative-only).
-      recordCodex: entry => applyCodexUpdates(character, [entry], { day }),
-      recordStanding: ops => applyStandingOps(character, ops, { rules: CONTENT.rules, knownPeople: (() => { const k = new Set(Object.keys(CONTENT.traditionIndex?.byId || {})); return k.size ? k : null; })(), day, liaisonMult: liaisonFactions(character) }),
-      createWaygate: spec => mintWaygate(spec), // SNG-235: an ending can MAKE a real, travelable waygate (Erik's Second Thread)
-      recordPlaceChange: (locId, change) => applyPlaceUpdates(character, locId, [{ note: change }], { day }), // CCODE-25: a location_state effect lands in placeMemory (READ on return + fed to the GM), not the dead locationState store
-    });
-    if (r.ok) {
-      saveCharacter(character);
-      const say = a => a.type === "world_event" ? "a ripple spreads through the world"
-        : a.type === "disposition" ? `${String(a.people).replace(/_/g, " ")} feel ${a.delta >= 0 ? "warmer" : "colder"} toward you`
-        : a.type === "npc_state" ? `${String(a.npc).replace(/_/g, " ")} is ${a.state}`
-        : a.type === "ally" ? `${String(a.npc).replace(/_/g, " ")} stands with you`
-        : a.type === "location_state" ? "a place changes"
-        : a.type === "quest_seed" ? "a new thread opens"
-        : a.type === "codex_fact" ? "the record remembers" : null;
-      const changes = [...new Set(r.applied.map(say).filter(Boolean))];
-      renderPlay(character.activeScene?.lastTurn || null, { aside: `${q.title} — ${o.name} (+${r.xp} xp).${changes.length ? "\n\nWhat changed: " + changes.join("; ") + "." : ""}` });
-    } else alert(r.why || "Couldn't resolve.");
-  };
+  // SNG-244: the ending buttons and the in-play decision strip both route through resolveQuestOutcome — one path.
+  for (const b of app.querySelectorAll("[data-outcome]")) b.onclick = () => resolveQuestOutcome(q.id, b.dataset.outcome);
 }
 
 /** SNG-BATCH-7 Phase 3 + SNG-065: the full quest log — available (startable, structured) /
@@ -8504,6 +8523,24 @@ function renderPlay(turn, opts = {}) {
         <div class="enc-frame-win">${esc(fm.winCondition)}</div>
         ${status ? `<div class="enc-status">${status}</div>` : ""}
         ${meterHtml}${exitsHtml}${cueHtml}</div>`;
+    })()}
+    ${(() => {
+      // SNG-244: a quest that has reached its DECISION shows an integrated strip here — above the narration,
+      // in the same SNG-230 slot the encounter frame uses — so the most important beat of a quest can't be
+      // scrolled past or missed on a tab the player isn't looking at. Encounter-FIRST: if a fight is live, you
+      // resolve it before the decision surfaces (guard — never two takeover strips). Reads existing state only;
+      // each road taps through to the shared resolveQuestOutcome (the exact ending-selection the detail uses).
+      if (activeEnc()) return "";
+      const decs = questsAtDecision();
+      if (!decs.length) return "";
+      const q = decs[0]; // the primary decision; any others are noted below and remain on the Quests screen
+      const roads = (q.outcomes || []).map(o => `<button class="dec-road" data-qdecide="${esc(q.id)}::${esc(o.id)}" title="${esc(o.summary || o.name || "")}">
+        <span class="dec-road-name">${esc(o.name)}</span>${o.summary ? `<span class="dec-road-hint">${esc(smartClamp(String(o.summary), 96))}</span>` : ""}</button>`).join("");
+      const more = decs.length > 1 ? `<div class="dec-more">＋ ${decs.length - 1} other decision${decs.length - 1 > 1 ? "s are" : " is"} also ready — on the Quests screen</div>` : "";
+      return `<div class="enc-frame enc-strip enc-frame-decision">
+        <div class="enc-frame-top"><span class="enc-frame-title">⚖ ${esc(q.title)}</span><span class="enc-frame-kind">decision at hand</span></div>
+        <div class="enc-frame-win">Every stage is behind you — what it was all for is yours to decide. This is permanent.</div>
+        <div class="dec-roads">${roads}</div>${more}</div>`;
     })()}<div class="transcript">`;
   if (opts.newsFlash?.length) {
     main += `<div class="news-flash"><div class="news-title">While you were away…</div>${opts.newsFlash.map(n => `<div class="news-item">◈ ${esc(n.text)}</div>`).join("")}</div>`;

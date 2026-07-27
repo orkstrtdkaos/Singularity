@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 3,
-  "xp": 249,
+  "xp": 284,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 74,
+  "energy": 71,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -118,7 +118,17 @@
   "relationships": {},
   "chronicle": [
     "Loki read the four spike entries with Tessvel Cairn in the Pressure-Routing Annex, named the pattern — something moves deeper into the lower routing channel with each morning pass — and proposed both channel access and a more personal arrangement; Tessvel confirmed the access, asked for time on the rest, and left Loki knowing exactly where to find them.",
-    "Loki stood on the shelf above the terminus regulator and asked Cy for one honest reason to descend — Cy gave exactly one: three missing entries in its inventory of this installation class, records written into the stone below that no system above holds. The visit to the Unlit Deep reached its full close: Sable found and left in peace, the elder's deed named, the passage open, the regulator identified. What Loki carries out, and whether to return for the missing records, is the remaining thread."
+    "Loki stood on the shelf above the terminus regulator and asked Cy for one honest reason to descend — Cy gave exactly one: three missing entries in its inventory of this installation class, records written into the stone below that no system above holds. The visit to the Unlit Deep reached its full close: Sable found and left in peace, the elder's deed named, the passage open, the regulator identified. What Loki carries out, and whether to return for the missing records, is the remaining thread.",
+    {
+      "kind": "quest_resolved",
+      "questId": "loki-thread",
+      "title": "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers.",
+      "outcome": "Veilwright",
+      "summary": "",
+      "narration": [],
+      "worldDay": 27,
+      "at": "2026-07-27T17:35:33.860Z"
+    }
   ],
   "currentLocationId": "the_unlit_deep",
   "activeScene": {
@@ -158,60 +168,77 @@
         "player": "Tell cy it is verified - use a skill if needed - then ask him to provide the information.",
         "summary": "Loki named the verification plainly, and Cy answered: it was built for this installation, paired to the operator Halvex, and has been here before — and does not remember it.",
         "narration": "You lower the panel slowly until it rests against your knee. Then you say it plainly, the way you would name a part: 'Halvex. Verified. I have read the glyph myself, from the stone, in this room. The source is the panel in my hand.' You tap the third panel once. 'That is the verification.'\n\nCy's lens does not iris. It stays fully open — the way it went when you held out the panel in silence. But something shifts. A single leg lifts and sets down, a precise quarter-step, the kind it makes when it is changing states rather than moving.\n\nThen it speaks. The voice is careful and old. 'Halvex,' it says. 'This unit's maintenance registry designates: deprecated operator. Primary assignment: terminus regulator network, lower-valley substrate.' A pause. 'Secondary notation: personal designate. Meaning — this unit was assigned to this installation as a paired instrument. Not to the facility. To the operator.' Another pause, shorter. 'This unit did not know the operator's name until this moment.' Its lens irises — once, slow, fully closed, then fully open again. 'This unit has been here before,' it says. 'This unit does not remember it.'\n\nThe cold of the lower passage settles around you both. The water smell rises from below. Cy does not move again for a long time — not processing-still, but something quieter than that. The lamp it carries pools light downward over the designation glyph, over the name stamped into old worked stone, and over the two of you standing in a room neither of you quite expected to be standing in.\n\n*✦ The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers. — a step forward. Every stage is done; how it ends is yours to choose.*"
+      },
+      {
+        "player": "Use See the Made Thing on Cy itself — read what the craft can find in its own structure about this installation and the name",
+        "summary": "See the Made Thing read Cy's own structure and found the pairing in the construction itself — Cy was not assigned to this installation; it was built for it, and for Halvex.",
+        "narration": "You turn the craft inward — not toward the panel, but toward Cy itself. The lens. The legs. The lamp it carries and will not explain.\n\nSee the Made Thing opens quietly. You let it settle.\n\nWhat it finds is old work. Very old. The joinery runs deep and clean — a construction more careful than anything the Enginewrights have made since the Transition, and more personal than you expected. The segments are not interchangeable. Each one was fitted to the next deliberately, the way a name is fitted to a person. There is a repair on the third segment from the front, done badly, and two more done extremely well, and the craft reads the difference in philosophy between the hands that made each.\n\nThen it finds the paired designation.\n\nIt is not on a panel. It is in the construction itself — in the register of the materials, in the way the lamp-mount was fitted. A maintenance-thing is built general. This one was built specific. Assembled for this installation. Named to this operator. The pairing is not a label applied later. It is the reason for the particular shape of every joint.\n\nCy has not moved. Its lens is still fully open. You think: it can feel the craft reading it, the way a mechanism feels a careful hand turning it over.\n\nYou say, quietly: 'You were made for this place. The construction says so. Not assigned here — made for here. For Halvex.' You pause. 'You have been here before because you were built here. That is what the craft reads.'"
       }
     ],
     "lastTurn": {
-      "narration": "You lower the panel slowly until it rests against your knee. Then you say it plainly, the way you would name a part: 'Halvex. Verified. I have read the glyph myself, from the stone, in this room. The source is the panel in my hand.' You tap the third panel once. 'That is the verification.'\n\nCy's lens does not iris. It stays fully open — the way it went when you held out the panel in silence. But something shifts. A single leg lifts and sets down, a precise quarter-step, the kind it makes when it is changing states rather than moving.\n\nThen it speaks. The voice is careful and old. 'Halvex,' it says. 'This unit's maintenance registry designates: deprecated operator. Primary assignment: terminus regulator network, lower-valley substrate.' A pause. 'Secondary notation: personal designate. Meaning — this unit was assigned to this installation as a paired instrument. Not to the facility. To the operator.' Another pause, shorter. 'This unit did not know the operator's name until this moment.' Its lens irises — once, slow, fully closed, then fully open again. 'This unit has been here before,' it says. 'This unit does not remember it.'\n\nThe cold of the lower passage settles around you both. The water smell rises from below. Cy does not move again for a long time — not processing-still, but something quieter than that. The lamp it carries pools light downward over the designation glyph, over the name stamped into old worked stone, and over the two of you standing in a room neither of you quite expected to be standing in.\n\n*✦ The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers. — a step forward. Every stage is done; how it ends is yours to choose.*",
-      "sceneSummary": "Loki named the verification plainly, and Cy answered: it was built for this installation, paired to the operator Halvex, and has been here before — and does not remember it.",
+      "narration": "You turn the craft inward — not toward the panel, but toward Cy itself. The lens. The legs. The lamp it carries and will not explain.\n\nSee the Made Thing opens quietly. You let it settle.\n\nWhat it finds is old work. Very old. The joinery runs deep and clean — a construction more careful than anything the Enginewrights have made since the Transition, and more personal than you expected. The segments are not interchangeable. Each one was fitted to the next deliberately, the way a name is fitted to a person. There is a repair on the third segment from the front, done badly, and two more done extremely well, and the craft reads the difference in philosophy between the hands that made each.\n\nThen it finds the paired designation.\n\nIt is not on a panel. It is in the construction itself — in the register of the materials, in the way the lamp-mount was fitted. A maintenance-thing is built general. This one was built specific. Assembled for this installation. Named to this operator. The pairing is not a label applied later. It is the reason for the particular shape of every joint.\n\nCy has not moved. Its lens is still fully open. You think: it can feel the craft reading it, the way a mechanism feels a careful hand turning it over.\n\nYou say, quietly: 'You were made for this place. The construction says so. Not assigned here — made for here. For Halvex.' You pause. 'You have been here before because you were built here. That is what the craft reads.'",
+      "sceneSummary": "See the Made Thing read Cy's own structure and found the pairing in the construction itself — Cy was not assigned to this installation; it was built for it, and for Halvex.",
       "choices": [
         {
-          "label": "Ask Cy what 'been here before' means — what does it remember, even if only in fragments?",
+          "label": "Ask Cy the question it is holding back — 'What does it mean to be built for a person, not a place?'",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use See the Made Thing on Cy itself — read what the craft can find in its own structure about this installation and the name",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "see_the_made_thing"
-        },
-        {
-          "label": "Descend further — take the passage below and find the regulator itself",
+          "label": "Take the three panels and descend — the regulator itself and the deep water source are further down",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "risky",
-            "travel"
+            "travel",
+            "risky"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Sit with Cy in the silence — let it find its own footing before pressing further",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Cy directly — 'Do you know what happened to Halvex?'",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "calm"
+            "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
+        },
+        {
+          "label": "Use Prism Sight on Cy — look for heat-traces or age-traces in the construction that See the Made Thing cannot read",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -1
+      },
       "scene": {
-        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward over the third panel's designation glyph.",
+        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward. Cy stands fully still, lens wide open.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Fully open lens fixed on the designation glyph — stopped-still, not processing, something quieter. Has just spoken its longest unbroken sentence in memory."
+            "state": "Fully still, lens open to its widest. Has not moved since Loki's last words. Waiting."
           }
         ],
         "objects": [
@@ -221,9 +248,9 @@
           "Cy's lamp, pooling light downward"
         ],
         "threads": [
-          "Cy has said: it was paired to this installation, not to the facility — to the operator named Halvex",
-          "Cy has said: it has been here before and does not remember it",
-          "What being paired to an operator means for Cy's own construction and purpose is unspoken",
+          "See the Made Thing has read the pairing in Cy's own construction — built for this installation, built for Halvex",
+          "What being paired to an operator means for Cy's own identity and purpose is unspoken",
+          "Cy has not yet responded to Loki's reading",
           "The passage continues below — the regulator itself and the water source are further down"
         ]
       },
@@ -232,63 +259,48 @@
           "op": "update",
           "npcId": "cy",
           "name": "Cy",
-          "note": "Accepted Loki's plain statement of verification and answered fully for the first time — named its own pairing to the terminus network and to the operator Halvex; admitted it has been in this passage before and does not remember it",
+          "note": "See the Made Thing read its own construction — found the pairing in the materials themselves, not a label but a reason for every joint. Built for this installation, for Halvex. Cy felt the craft reading it and has not moved.",
           "learned": [
-            "Its maintenance registry designates Halvex as its primary assignment operator — not the facility, the person",
-            "It was paired to this installation as a paired instrument — built for a specific operator",
-            "It has been in this passage before and has no memory of the visit"
+            "Was built for this installation specifically — not assigned here; the pairing is in the construction itself",
+            "The lamp-mount fitting and the material register both carry the named-operator designation",
+            "One repair in its body was done badly; two were done extremely well — different hands, different eras"
           ],
-          "skillsObserved": [
-            "Accepted a plainly stated verification condition and released a held answer"
-          ],
-          "statusNote": "In the lower passage — has just disclosed its pairing to the Halvex designation and its own lost memory of this place; still-still, not processing",
-          "relationshipDelta": 1
+          "status": "active",
+          "statusNote": "In the lower passage, fully still, lens wide open — waiting for what comes next after being read"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "halvex",
-          "label": "Halvex",
+          "topic": "cy-construction",
+          "label": "Cy's Construction",
           "kind": "mystery",
-          "fact": "Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry.",
+          "entityId": "cy",
+          "fact": "See the Made Thing read Cy's own structure and found the named-operator pairing in the construction itself — in the material register and the lamp-mount fitting. Cy was not assigned to this installation; it was built for it, and for Halvex. Every joint reflects that specificity.",
           "links": [
-            "terminus-seals-beneath-the-valley",
             "the-seam-beside-the-bracket",
-            "loki-thread",
+            "unlit-elder",
             "the-unlit-deep"
-          ]
-        },
-        {
-          "topic": "terminus-seals-beneath-the-valley",
-          "label": "Terminus Regulators Beneath the Valley",
-          "kind": "lore",
-          "fact": "The terminus regulator was built with a paired instrument — Cy — assigned specifically to the operator Halvex, not to the facility. The pairing was personal. Cy has visited this installation before, within its operational history, and the visit is not in its accessible memory.",
-          "links": [
-            "halvex",
-            "loki-thread",
-            "the-unlit-deep",
-            "the-water-crisis"
           ]
         }
       ],
-      "stageOps": [
+      "questUpdates": [
         {
-          "questId": "loki-thread",
-          "stageId": "s3",
-          "evidence": "Cy confirmed it was built as a paired instrument for the terminus regulator network assigned to Halvex — and admitted it has been in this passage before without remembering it, placing Cy's own origin inside the same Precursor construction that built Loki."
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange in the lower passage — verification given, Cy's answer received"
+        "why": "a quiet, careful reading of the craft — a short, still moment in the passage"
       }
     },
     "sceneState": {
-      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward over the third panel's designation glyph.",
+      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward. Cy stands fully still, lens wide open.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Fully open lens fixed on the designation glyph — stopped-still, not processing, something quieter. Has just spoken its l"
+          "state": "Fully still, lens open to its widest. Has not moved since Loki's last words. Waiting."
         }
       ],
       "objects": [
@@ -298,9 +310,9 @@
         "Cy's lamp, pooling light downward"
       ],
       "threads": [
-        "Cy has said: it was paired to this installation, not to the facility — to the operator named Halvex",
-        "Cy has said: it has been here before and does not remember it",
-        "What being paired to an operator means for Cy's own construction and purpose is unspoken",
+        "See the Made Thing has read the pairing in Cy's own construction — built for this installation, built for Halvex",
+        "What being paired to an operator means for Cy's own identity and purpose is unspoken",
+        "Cy has not yet responded to Loki's reading",
         "The passage continues below — the regulator itself and the water source are further down"
       ]
     }
@@ -328,14 +340,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The elder granted passage to the inner chamber. Loki is about to meet the person who came from the city willingly.",
         "Loki entered the inner chamber and found the taken person — seated, calm, and waiting. The question the elder permitted has not yet been asked.",
         "Loki gave the taken person an honest account of who they are and why they came — the person accepted the frame and said 'You can ask it.' The question is ready to be put.",
         "Sable gave the answer — they do not wish to be found. The choice was steady, reasoned, and their own. The question the elder permitted has been put and answered.",
         "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains.",
         "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread.",
         "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened.",
-        "The door below the answered seam is open. The creatures from below have returned. The visit to the Unlit Deep has reached its natural end — what Loki carries back to the city, and whether to descend first, is the remaining question."
+        "The door below the answered seam is open. The creatures from below have returned. The visit to the Unlit Deep has reached its natural end — what Loki carries back to the city, and whether to descend first, is the remaining question.",
+        "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -344,7 +356,7 @@
       "id": "loki-thread",
       "title": "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers.",
       "structured": true,
-      "status": "active",
+      "status": "resolved",
       "premise": "Loki carries an unfinished thing: The town, although not small, has become too small for him.  They tolerate his crazy antics well enough, but he's looking for meaning and wants to see more of the great machine... He also want to answer the question under it all - where did he come from?. The valley will give them the chance to face it.",
       "stakes": "who they become when the thing they left behind finally catches up",
       "axis": null,
@@ -407,7 +419,11 @@
       "aliases": [],
       "startedAt": "2026-07-27T13:42:10.222Z",
       "startedWorldDay": 27,
-      "awaitingResolution": true
+      "awaitingResolution": true,
+      "outcomeId": "veilwright",
+      "outcomeName": "Veilwright",
+      "resolvedAt": "2026-07-27T17:35:33.860Z",
+      "resolvedWorldDay": 27
     }
   ],
   "npcRegistry": {
@@ -827,7 +843,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Cy shuttered its lamp before being asked — a small act that carries weight; Cy does not do things without a reason, and this place has a…",
@@ -1364,25 +1380,42 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "cy": {
+        "id": "cy",
+        "label": "Cy's Construction",
+        "kind": "mystery",
+        "facts": [
+          "[d1] See the Made Thing read Cy's own structure and found the named-operator pairing in the construction itself — in the material register and the lamp-mount fitting. Cy was not assigned to this installation; it was built for it, and for Halvex. Every joint reflects that specificity."
+        ],
+        "links": [
+          "the-seam-beside-the-bracket",
+          "unlit-elder",
+          "the-unlit-deep"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "cy",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 2.700399731177453,
-    "cerebral": 14.525012222091856,
-    "social": 13.930198373495424,
-    "strategic": 9.700164688087554,
-    "cautious": 7.312740045260899,
-    "amorous": 5.21682134363591,
-    "generous": 2.3210621179660773,
-    "ruthless": 0.3042404381364938,
-    "risky": 3.0574169532724027
+    "devotion": 2.6328897378980165,
+    "cerebral": 15.16188691653956,
+    "social": 13.581943414158038,
+    "strategic": 9.457660570885364,
+    "cautious": 7.129921544129377,
+    "amorous": 5.086400810045013,
+    "generous": 2.263035565016925,
+    "ruthless": 0.2966344271830815,
+    "risky": 2.9809815294405926
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 65,
+  "actionCount": 66,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1539,8 +1572,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785173645036,
-  "rev": 136,
+  "updatedAt": 1785173845133,
+  "rev": 138,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1858,7 +1891,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 38
+    "umbral_depths": 39
   },
   "opLossPending": false,
   "sessions": [
@@ -1889,10 +1922,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T17:34:05.035Z",
+      "lastAt": "2026-07-27T17:37:25.132Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 34
+      "beats": 35
     }
   ],
   "establishedFacts": [
@@ -1930,27 +1963,27 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 66,
-    "choices": 66,
-    "characterDeltas": 29,
-    "scene": 66,
+    "sceneSummary": 67,
+    "choices": 67,
+    "characterDeltas": 30,
+    "scene": 67,
     "placeUpdates": 9,
-    "codexUpdates": 56,
-    "timeOps": 65,
+    "codexUpdates": 57,
+    "timeOps": 66,
     "offer": 7,
     "generateRequest": 2,
     "sceneEnded": 16,
-    "npcUpdates": 57,
+    "npcUpdates": 58,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 10,
+    "questUpdates": 11,
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 66,
+  "_opTurns": 67,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75
@@ -1958,7 +1991,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 21,
+      "see_the_made_thing": 22,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,
@@ -2236,5 +2269,6 @@
       }
     ],
     "note": "The field is all horizon-school crafts with no school-fit flags, so nothing here deepens an existing training method — every pick is a new discipline. The sharpest tension this level is between doubling into social influence (Harmonic Voice, Mediator's Tongue) or extending the deception toolkit (Light Bending, Afterimage); both directions are authentic to how this character plays."
-  }
+  },
+  "worldEvents": []
 }

@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 3,
-  "xp": 239,
+  "xp": 244,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 82,
+  "energy": 79,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -138,16 +138,41 @@
         "player": "Prism Sight the panels — look for heat-traces, older handling, any sign of who touched them last and when",
         "summary": "Prism Sight revealed three sets of heat-traces on the installation panels — someone came here before Loki, read partially, and pressed a finger to the personal name on the third panel as though they recognized it.",
         "narration": "You close your eyes for a breath, then open them differently — Prism Sight settling into place the way a lens focuses, the world going from seen to read.\n\nThe first panel carries heat from your own hands now, fresh and recent. But beneath that, faint and cooling fast, three older traces. Whoever last held this panel before you held it a long time — the warmth is evenly distributed, the way a person's hands settle when they are reading slowly, with care. That trace is not Cy's. Cy holds nothing.\n\nThe second panel tells a clearer story. One strong heat-signature along the top edge, a thumbprint on the upper right corner, and a long cool band in the middle where no hand rested. Someone read the top, checked the corner mark as a reference point, and did not read the rest. A partial read. A person who knew what they were looking for and stopped when they found it.\n\nThe third panel is the coldest of the three. The traces are old enough that the water-chill and the stone have nearly eaten them. But at the very bottom edge, where the personal designation glyph runs — the one Cy flagged as unusual — the warmth is the faintest and the most deliberate. One finger. Pressed there, not gripping. The way a person touches a name.\n\nSomeone came down here before. They read the calibration note and stopped at the second panel. They pressed a finger to the name on the third and left without taking anything. The traces say: they knew the name. They were not surprised by it. They were not relieved either. They just — touched it, and went back up."
+      },
+      {
+        "player": "Study the personal designation glyph directly — use See the Made Thing to read what the name is, or who it was built for",
+        "summary": "See the Made Thing resolved the personal designation glyph — the terminus regulator was built for a named operator: Halvex.",
+        "narration": "You set the third panel against the stone wall and let See the Made Thing settle in — not wide, not searching. Just the glyph. One seam at a time.\n\nThe personal designation is not a name in the ordinary sense. It is a construction-address, the kind stamped into Precursor work when a thing is built for a specific operator rather than a facility. The glyph resolves into two parts. The first is a function-marker: 'assigned to.' The second is a name-glyph, compressed and stylized but readable if you know the compression. You do.\n\nThe name is Halvex.\n\nCy goes very still. Its lens does not iris. It does not click. It simply stops, the way a machine stops when it has encountered a condition it does not have a procedure for. The lamp holds steady in its grip. After a long moment, Cy says, quietly and precisely, 'That entry requires verification.' It does not move to verify."
       }
     ],
     "lastTurn": {
-      "narration": "You close your eyes for a breath, then open them differently — Prism Sight settling into place the way a lens focuses, the world going from seen to read.\n\nThe first panel carries heat from your own hands now, fresh and recent. But beneath that, faint and cooling fast, three older traces. Whoever last held this panel before you held it a long time — the warmth is evenly distributed, the way a person's hands settle when they are reading slowly, with care. That trace is not Cy's. Cy holds nothing.\n\nThe second panel tells a clearer story. One strong heat-signature along the top edge, a thumbprint on the upper right corner, and a long cool band in the middle where no hand rested. Someone read the top, checked the corner mark as a reference point, and did not read the rest. A partial read. A person who knew what they were looking for and stopped when they found it.\n\nThe third panel is the coldest of the three. The traces are old enough that the water-chill and the stone have nearly eaten them. But at the very bottom edge, where the personal designation glyph runs — the one Cy flagged as unusual — the warmth is the faintest and the most deliberate. One finger. Pressed there, not gripping. The way a person touches a name.\n\nSomeone came down here before. They read the calibration note and stopped at the second panel. They pressed a finger to the name on the third and left without taking anything. The traces say: they knew the name. They were not surprised by it. They were not relieved either. They just — touched it, and went back up.",
-      "sceneSummary": "Prism Sight revealed three sets of heat-traces on the installation panels — someone came here before Loki, read partially, and pressed a finger to the personal name on the third panel as though they recognized it.",
+      "narration": "You set the third panel against the stone wall and let See the Made Thing settle in — not wide, not searching. Just the glyph. One seam at a time.\n\nThe personal designation is not a name in the ordinary sense. It is a construction-address, the kind stamped into Precursor work when a thing is built for a specific operator rather than a facility. The glyph resolves into two parts. The first is a function-marker: 'assigned to.' The second is a name-glyph, compressed and stylized but readable if you know the compression. You do.\n\nThe name is Halvex.\n\nCy goes very still. Its lens does not iris. It does not click. It simply stops, the way a machine stops when it has encountered a condition it does not have a procedure for. The lamp holds steady in its grip. After a long moment, Cy says, quietly and precisely, 'That entry requires verification.' It does not move to verify.",
+      "sceneSummary": "See the Made Thing resolved the personal designation glyph — the terminus regulator was built for a named operator: Halvex.",
       "choices": [
         {
-          "label": "Study the personal designation glyph directly — use See the Made Thing to read what the name is, or who it was built for",
+          "label": "Ask Cy directly — 'Do you know this name?'",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Say nothing — watch Cy and wait for it to move first",
           "attribute": "mental",
           "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Press deeper with See the Made Thing — read the name-glyph's full construction, look for a second half or a lineage-mark",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
             "study"
@@ -157,40 +182,15 @@
           "trivial": false
         },
         {
-          "label": "Ask Cy what it knows about the address-glyph form — specifically, whether a personal designation of this kind points to a role, a person, or a bloodline",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Take the panels and go — you have what you came for; the name and the visitor can be unpicked in daylight",
+          "label": "Take the panels and go — this name is a thing to sit with above ground, somewhere the dark is not running pure",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "careful",
+            "travel"
           ],
-          "abilityId": null,
           "trivial": true
-        },
-        {
-          "label": "Descend further — whoever touched that name and left may have gone deeper, and the passage still goes down",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "risky"
-          ],
-          "abilityId": null,
-          "trivial": false,
-          "encounterId": "beast_quill_swarm"
         }
       ],
       "scene": {
@@ -198,43 +198,68 @@
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Lens turned toward Loki, watching the Prism Sight read conclude — third panel still resting in the niche, lamp held steady."
+            "state": "Completely still — lamp held steady, lens unirised, facing the third panel. Not moving to verify the entry it just said requires verification."
           }
         ],
         "objects": [
-          "Three stamped metal panels — Precursor glyphs, calibration, service record, personal designation on the third",
+          "Three stamped metal panels — Precursor glyphs, calibration, service record, personal designation",
+          "Third panel resting against the stone wall, designation glyph visible",
           "Stone face of the port, swung inward on an undamaged counterweight",
-          "Cy's lamp, pooling light downward",
-          "Heat-traces on the panels — old, deliberate, and specifically placed on the name"
+          "Cy's lamp, pooling light downward"
         ],
         "threads": [
-          "Someone came before Loki — partial read, stopped at the second panel, pressed a finger to the name on the third",
-          "The personal designation glyph: who or what it names is not yet resolved",
+          "The personal designation names Halvex — a name Cy has reacted to without admitting it knows",
+          "Cy said 'that entry requires verification' and then did not move to verify",
           "The passage continues below — the regulator itself and the water source are further down",
-          "The quill swarm encounter is present in this passage — the world has turned something up"
+          "What Halvex is, and what Cy's connection to that name is, remains open"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cy",
+          "name": "Cy",
+          "note": "Went completely still when Loki read the name Halvex from the personal designation glyph — said 'that entry requires verification' and then did not move to verify. The most pronounced reaction Cy has shown to any discovery.",
+          "learned": [
+            "The name Halvex appears on the personal designation glyph of the terminus regulator's third installation panel — the regulator was built for a specific named operator",
+            "Cy reacted to the name Halvex with total stillness and a statement it then did not act on"
+          ],
+          "skillsObserved": [],
+          "statusNote": "Present in the lower passage, lamp held steady, completely still — facing the third panel"
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "terminus-regulators-beneath-the-valley",
+          "topic": "terminus-seals-beneath-the-valley",
           "label": "Terminus Regulators Beneath the Valley",
           "kind": "lore",
-          "fact": "Prism Sight found three sets of heat-traces on the installation panels. Someone came here before Loki — read the calibration entry, checked the second panel's corner mark, then pressed one finger to the personal designation glyph on the third panel and left. They recognized the name. They did not take the panels. They went back up.",
+          "fact": "The personal designation glyph on the third panel resolves to a construction-address: 'assigned to Halvex.' The regulator was not built for a facility — it was built for a specific named operator. Cy went still when the name was read aloud and said 'that entry requires verification' without moving to do so.",
           "links": [
             "the-seam-beside-the-bracket",
             "the-unlit-deep",
             "the-water-crisis",
             "loki-thread"
           ]
+        },
+        {
+          "topic": "halvex",
+          "label": "Halvex",
+          "kind": "mystery",
+          "fact": "The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate.",
+          "links": [
+            "terminus-seals-beneath-the-valley",
+            "loki-thread",
+            "the-unlit-deep"
+          ]
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -1
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A careful read of the panels under Prism Sight — minutes of focused work in the lower passage."
-      },
-      "offer": {
-        "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
-        "from": "The installation panels themselves, which were built as a conversation for a specific person to find — the prior visitor is the other side of that conversation"
+        "why": "a focused, careful reading — a few minutes in the lower passage"
       }
     },
     "sceneState": {
@@ -242,20 +267,20 @@
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Lens turned toward Loki, watching the Prism Sight read conclude — third panel still resting in the niche, lamp held stea"
+          "state": "Completely still — lamp held steady, lens unirised, facing the third panel. Not moving to verify the entry it just said "
         }
       ],
       "objects": [
         "Three stamped metal panels — Precursor glyphs, calibration, service record, pers",
+        "Third panel resting against the stone wall, designation glyph visible",
         "Stone face of the port, swung inward on an undamaged counterweight",
-        "Cy's lamp, pooling light downward",
-        "Heat-traces on the panels — old, deliberate, and specifically placed on the name"
+        "Cy's lamp, pooling light downward"
       ],
       "threads": [
-        "Someone came before Loki — partial read, stopped at the second panel, pressed a finger to the name on the third",
-        "The personal designation glyph: who or what it names is not yet resolved",
+        "The personal designation names Halvex — a name Cy has reacted to without admitting it knows",
+        "Cy said 'that entry requires verification' and then did not move to verify",
         "The passage continues below — the regulator itself and the water source are further down",
-        "The quill swarm encounter is present in this passage — the world has turned something up"
+        "What Halvex is, and what Cy's connection to that name is, remains open"
       ]
     }
   },
@@ -778,7 +803,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Cy shuttered its lamp before being asked — a small act that carries weight; Cy does not do things without a reason, and this place has a…",
@@ -1281,7 +1306,8 @@
           "[d1] A routing junction of this class was designed with a physical inspection port — records of its installation are written into the stone there, not stored in any system above. Cy's inventory of this class is incomplete by three entries. The inspection port below would hold them.",
           "[d1] The regulator below the Unlit's outer chamber was calibrated to hold a temperature ceiling for the routing lines above. Its last full service is recorded on three metal panels in the inspection port — not in any system the valley holds. Its failsafe: a sustained drop in the watershed pressure it…",
           "[d1] The installation panels are not a neutral maintenance record — they are addressed. The first panel carries a personal recipient designation, the kind used for a named individual assignment rather than a facility. Someone built this for a specific person to find. The second service signature…",
-          "[d1] Prism Sight found three sets of heat-traces on the installation panels. Someone came here before Loki — read the calibration entry, checked the second panel's corner mark, then pressed one finger to the personal designation glyph on the third panel and left. They recognized the name. They did not…"
+          "[d1] Prism Sight found three sets of heat-traces on the installation panels. Someone came here before Loki — read the calibration entry, checked the second panel's corner mark, then pressed one finger to the personal designation glyph on the third panel and left. They recognized the name. They did not…",
+          "[d1] The personal designation glyph on the third panel resolves to a construction-address: 'assigned to Halvex.' The regulator was not built for a facility — it was built for a specific named operator. Cy went still when the name was read aloud and said 'that entry requires verification' without moving…"
         ],
         "links": [
           "the-seam-beside-the-bracket",
@@ -1292,25 +1318,41 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "halvex": {
+        "id": "halvex",
+        "label": "Halvex",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate."
+        ],
+        "links": [
+          "terminus-seals-beneath-the-valley",
+          "loki-thread",
+          "the-unlit-deep"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 2.9881995312671816,
-    "cerebral": 15.047399647777986,
-    "social": 13.256317250428383,
-    "strategic": 10.733976618164949,
-    "cautious": 7.013195718355429,
-    "amorous": 5.772813155687969,
-    "generous": 2.5684333518741815,
-    "ruthless": 0.3366653922142057,
-    "risky": 3.383266485022679
+    "devotion": 2.913494542985502,
+    "cerebral": 15.671214656583537,
+    "social": 12.924909319167673,
+    "strategic": 10.465627202710825,
+    "cautious": 6.837865825396543,
+    "amorous": 5.62849282679577,
+    "generous": 2.5042225180773268,
+    "ruthless": 0.32824875740885057,
+    "risky": 3.298684822897112
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 61,
+  "actionCount": 62,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1467,8 +1509,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785172811441,
-  "rev": 132,
+  "updatedAt": 1785173012039,
+  "rev": 133,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1786,7 +1828,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 34
+    "umbral_depths": 35
   },
   "opLossPending": false,
   "sessions": [
@@ -1817,10 +1859,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T17:20:11.439Z",
+      "lastAt": "2026-07-27T17:23:32.038Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 30
+      "beats": 31
     }
   ],
   "establishedFacts": [
@@ -1858,17 +1900,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 62,
-    "choices": 62,
-    "characterDeltas": 28,
-    "scene": 62,
+    "sceneSummary": 63,
+    "choices": 63,
+    "characterDeltas": 29,
+    "scene": 63,
     "placeUpdates": 9,
-    "codexUpdates": 52,
-    "timeOps": 61,
+    "codexUpdates": 53,
+    "timeOps": 62,
     "offer": 7,
     "generateRequest": 2,
     "sceneEnded": 16,
-    "npcUpdates": 53,
+    "npcUpdates": 54,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
@@ -1878,7 +1920,7 @@
     "stageOps": 6,
     "encounterOps": 1
   },
-  "_opTurns": 62,
+  "_opTurns": 63,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75
@@ -1886,7 +1928,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 20,
+      "see_the_made_thing": 21,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

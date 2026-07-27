@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 2,
-  "xp": 110,
+  "xp": 115,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -62,7 +62,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 103,
+  "energy": 98,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -143,44 +143,43 @@
         "player": "Ask about the seam in the stone — the thing the bracket was fitted over. What was here before?",
         "summary": "Loki asked about the seam in the stone — the elder declined, gently but absolutely, and the audience continues.",
         "narration": "You let the silence hold one beat longer, and then you ask. Your voice is quiet, and you aim it at the elder rather than the chamber. You say there is a seam in the stone behind the left-wall bracket — older than the bracket itself, older than the lantern that was never lit in it. You ask what was fitted there before.\n\nThe elder does not answer immediately. The pale blue flame burns without bending, and the hood does not rise. When the elder finally speaks, the voice is worn smooth to its purpose, and it is not unkind. \"That question,\" the elder says, \"belongs to the chamber. Not to a visitor.\"\n\nIt is not a rebuke. It is a door, closed gently. The elder's hands rest on the knees, unchanged. The posture says: the audience has not ended. Something else was invited here, and the seam was not it."
+      },
+      {
+        "player": "Ask what the Unlit have brought down from the city — the real reason you came.",
+        "summary": "Loki asked directly about the taken person; the elder confirmed someone came willingly, is now in the inner chamber, and offered to let Loki ask whether they wish to leave.",
+        "narration": "You ask. You keep your voice level and low, the way the chamber seems to want. You say that you heard something came down from the city. You say that the city is pretending it did not happen. You say that you came, in part, to know what that thing was.\n\nThe elder is quiet for a long moment. The pale blue flame burns without bending. Cy stands at your heel, lens turned toward the seated figure, irising once and then going still.\n\nThen the elder speaks. The voice is the same worn smoothness as before — a tool that has been used for exactly one thing for a very long time. \"Someone came,\" the elder says. \"They did not come against their will. That is the part the city finds difficult to say.\" A small pause. \"They are in the inner chamber. They have chosen the doctrine. The city sent no one for them, which tells you everything about whether the city truly believes they were taken.\"\n\nThe hands on the knees do not move. The hood does not rise. But something in the posture shifts — the way a door that was closed shifts when someone puts a hand on the far side of it. \"You may ask whether they wish to be found,\" the elder says. \"That question, I will allow. The answer belongs to them.\""
       }
     ],
     "lastTurn": {
-      "narration": "You let the silence hold one beat longer, and then you ask. Your voice is quiet, and you aim it at the elder rather than the chamber. You say there is a seam in the stone behind the left-wall bracket — older than the bracket itself, older than the lantern that was never lit in it. You ask what was fitted there before.\n\nThe elder does not answer immediately. The pale blue flame burns without bending, and the hood does not rise. When the elder finally speaks, the voice is worn smooth to its purpose, and it is not unkind. \"That question,\" the elder says, \"belongs to the chamber. Not to a visitor.\"\n\nIt is not a rebuke. It is a door, closed gently. The elder's hands rest on the knees, unchanged. The posture says: the audience has not ended. Something else was invited here, and the seam was not it.",
-      "sceneSummary": "Loki asked about the seam in the stone — the elder declined, gently but absolutely, and the audience continues.",
+      "narration": "You ask. You keep your voice level and low, the way the chamber seems to want. You say that you heard something came down from the city. You say that the city is pretending it did not happen. You say that you came, in part, to know what that thing was.\n\nThe elder is quiet for a long moment. The pale blue flame burns without bending. Cy stands at your heel, lens turned toward the seated figure, irising once and then going still.\n\nThen the elder speaks. The voice is the same worn smoothness as before — a tool that has been used for exactly one thing for a very long time. \"Someone came,\" the elder says. \"They did not come against their will. That is the part the city finds difficult to say.\" A small pause. \"They are in the inner chamber. They have chosen the doctrine. The city sent no one for them, which tells you everything about whether the city truly believes they were taken.\"\n\nThe hands on the knees do not move. The hood does not rise. But something in the posture shifts — the way a door that was closed shifts when someone puts a hand on the far side of it. \"You may ask whether they wish to be found,\" the elder says. \"That question, I will allow. The answer belongs to them.\"",
+      "sceneSummary": "Loki asked directly about the taken person; the elder confirmed someone came willingly, is now in the inner chamber, and offered to let Loki ask whether they wish to leave.",
       "choices": [
         {
-          "label": "Ask what the Unlit have brought down from the city — the real reason you came.",
+          "label": "Ask to speak with the person in the inner chamber — take the elder's offer.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Let the elder guide the conversation — wait for them to name their purpose first.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask about Cy — the elder granted passage because of it; press that thread directly.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Ask who this person was in the city — what they left behind, and why the city is staying silent.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "negotiate"
+            "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Use See the Made Thing to read the blue flame — no wick, no fuel, and it does not move.",
+          "label": "Use See the Made Thing — read the elder's words for the construction behind them. What is the elder not saying?",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 15,
@@ -190,34 +189,47 @@
           "abilityId": "see_the_made_thing",
           "energyCost": 1,
           "trivial": false
+        },
+        {
+          "label": "A cinder-mote drift is moving through the outer chamber — the orange sparks settling near the stone seam. Deal with it before it spreads.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "defend"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": "beast_cinder_mote_drift"
         }
       ],
       "scene": {
-        "setting": "The outer chamber of the Unlit Deep — worked stone floor worn evenly by many visitors, ceiling invisible, empty lantern-brackets. The pale blue flame burns without wick or fuel in its stone bowl. Early morning, no external light. Loki stands near the elder.",
+        "setting": "The outer chamber of the Unlit Deep — worked stone floor worn evenly by many visitors, ceiling invisible, empty lantern-brackets. The pale blue flame burns without wick or fuel in its stone bowl. Early morning, no external light.",
         "npcsPresent": [
           {
             "name": "Unlit Elder",
-            "state": "Seated by the pale blue flame, hands on knees, hood still lowered over the face. Has just spoken — the door on the seam question is closed, gently. Waiting."
+            "state": "Seated by the pale blue flame, hands on knees, hood still over the face. Has just spoken — the door to the inner chamber is now open, conditionally."
           },
           {
             "name": "Standing Unlit",
-            "state": "Remained near the passage behind, hands lowered, motionless, watching."
+            "state": "Near the passage behind, hands lowered, motionless, watching."
           },
           {
             "name": "Cy",
-            "state": "At Loki's heel, lamp shuttered, lens tracking the blue flame slowly — the way it tracks something it recognizes."
+            "state": "At Loki's heel, lamp shuttered, lens turned toward the elder and then gone still."
           }
         ],
         "objects": [
           "Blue flame in a stone bowl — pale, almost colorless, no visible wick or fuel",
           "Empty lantern-brackets on the walls",
           "Worked stone floor, worn smooth and evenly across many visitors",
-          "One lantern-bracket on the left wall with a seam in the stone around it — older than the bracket; something was there first",
+          "One lantern-bracket on the left wall with a seam in the stone around it — older",
           "Cy's shuttered lamp"
         ],
         "threads": [
-          "Who the Unlit have brought down from the city",
-          "Why Cy shuttered its lamp before the bottom step without being asked",
+          "The taken person is in the inner chamber — they came willingly; the city said nothing",
+          "The elder has offered to let Loki ask whether the person wishes to be found",
           "The elder's face — still below the hood",
           "What the blue flame burns on — no wick, no fuel visible",
           "The seam behind the left-wall bracket — the elder closed that question; it did not disappear"
@@ -228,24 +240,34 @@
           "op": "update",
           "npcId": "unlit-elder",
           "name": "Unlit Elder",
-          "note": "Declined Loki's question about the seam — 'that question belongs to the chamber, not to a visitor.' Gently, without hostility. The audience continues.",
+          "note": "Confirmed someone came from the city willingly. Said the city's silence tells its own story. Offered Loki the right to ask whether the person in the inner chamber wishes to be found.",
           "learned": [
-            "The seam is not a topic the elder will open to a visitor; the deflection was economical and absolute, with no anger in it"
+            "The person in the inner chamber came willingly — the elder is clear on this",
+            "The city sent no one, which the elder takes as evidence the city does not truly believe a taking occurred",
+            "The elder will permit a single question to the person in the inner chamber: do they wish to be found"
           ],
-          "statusNote": "Seated by the pale blue flame in the outer chamber; the audience is still open but the seam question is closed."
+          "status": "active",
+          "statusNote": "Seated by the pale blue flame in the outer chamber; has conditionally opened the path to the inner chamber.",
+          "relationshipDelta": 1
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "The elder confirmed the person came willingly and is in the inner chamber. The city's silence is now explained — they know. The elder permits one question: does the person wish to be found."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-unlit-deep",
-          "label": "The Unlit Deep",
-          "kind": "place",
-          "entityId": "unlit-elder",
-          "fact": "The elder declined to speak about the seam in the stone — 'that question belongs to the chamber, not to a visitor.' The refusal was gentle but absolute, with no hostility in it. The seam exists and is real; the elder knows what it is and has chosen not to say.",
+          "topic": "the-taken-from-the-city",
+          "label": "The Taken From the City",
+          "kind": "mystery",
+          "fact": "The person came willingly — the elder was explicit. The city sent no one to retrieve them, which the elder reads as proof the city knows this. The person is in the inner chamber and has chosen the doctrine. The elder permits Loki to ask whether they wish to be found.",
           "links": [
             "the-unlit",
             "unlit-elder",
-            "the-taken-from-the-city"
+            "the-unlit-deep"
           ]
         }
       ],
@@ -255,35 +277,35 @@
       },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange in the outer chamber"
+        "why": "a brief, weighted exchange with the elder"
       }
     },
     "sceneState": {
-      "setting": "The outer chamber of the Unlit Deep — worked stone floor worn evenly by many visitors, ceiling invisible, empty lantern-brackets. The pale blue flame burns without wick or fuel in its stone bowl. Early morning, no external light. Loki stands near the elder.",
+      "setting": "The outer chamber of the Unlit Deep — worked stone floor worn evenly by many visitors, ceiling invisible, empty lantern-brackets. The pale blue flame burns without wick or fuel in its stone bowl. Early morning, no external light.",
       "npcsPresent": [
         {
           "name": "Unlit Elder",
-          "state": "Seated by the pale blue flame, hands on knees, hood still lowered over the face. Has just spoken — the door on the seam "
+          "state": "Seated by the pale blue flame, hands on knees, hood still over the face. Has just spoken — the door to the inner chamber"
         },
         {
           "name": "Standing Unlit",
-          "state": "Remained near the passage behind, hands lowered, motionless, watching."
+          "state": "Near the passage behind, hands lowered, motionless, watching."
         },
         {
           "name": "Cy",
-          "state": "At Loki's heel, lamp shuttered, lens tracking the blue flame slowly — the way it tracks something it recognizes."
+          "state": "At Loki's heel, lamp shuttered, lens turned toward the elder and then gone still."
         }
       ],
       "objects": [
         "Blue flame in a stone bowl — pale, almost colorless, no visible wick or fuel",
         "Empty lantern-brackets on the walls",
         "Worked stone floor, worn smooth and evenly across many visitors",
-        "One lantern-bracket on the left wall with a seam in the stone around it — older ",
+        "One lantern-bracket on the left wall with a seam in the stone around it — older",
         "Cy's shuttered lamp"
       ],
       "threads": [
-        "Who the Unlit have brought down from the city",
-        "Why Cy shuttered its lamp before the bottom step without being asked",
+        "The taken person is in the inner chamber — they came willingly; the city said nothing",
+        "The elder has offered to let Loki ask whether the person wishes to be found",
         "The elder's face — still below the hood",
         "What the blue flame burns on — no wick, no fuel visible",
         "The seam behind the left-wall bracket — the elder closed that question; it did not disappear"
@@ -313,7 +335,8 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Passage granted after Loki's honest account of Cy's nature. The elder speaks; the inner chamber is now reachable."
+        "Passage granted after Loki's honest account of Cy's nature. The elder speaks; the inner chamber is now reachable.",
+        "The elder confirmed the person came willingly and is in the inner chamber. The city's silence is now explained — they know. The elder permits one question: does the person wish to be found."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -427,18 +450,22 @@
         "locationId": "the_unlit_deep",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d1] Spoke for the first time when Loki's framing landed — ordered the Standing Unlit to let Cy pass, and granted Loki an audience.",
         "[d1] Invited Loki to sit or stand — made the first social opening; still hooded, face unseen.",
-        "[d1] Declined Loki's question about the seam — 'that question belongs to the chamber, not to a visitor.' Gently, without hostility. The audience continues."
+        "[d1] Declined Loki's question about the seam — 'that question belongs to the chamber, not to a visitor.' Gently, without hostility. The audience continues.",
+        "[d1] Confirmed someone came from the city willingly. Said the city's silence tells its own story. Offered Loki the right to ask whether the person in the inner chamber wishes to be found."
       ],
       "knownFacts": [
         "Commands the Standing Unlit; their word is final here.",
         "Chose to hear Loki rather than dismiss — the truth in the right shape reached them.",
         "Gestures economically — a small hand-movement like punctuation",
         "Has seen many visitors in this spot; posture suggests students or the surrendered, not petitioners",
-        "The seam is not a topic the elder will open to a visitor; the deflection was economical and absolute, with no anger in it"
+        "The seam is not a topic the elder will open to a visitor; the deflection was economical and absolute, with no anger in it",
+        "The person in the inner chamber came willingly — the elder is clear on this",
+        "The city sent no one, which the elder takes as evidence the city does not truly believe a taking occurred",
+        "The elder will permit a single question to the person in the inner chamber: do they wish to be found"
       ],
       "skillsObserved": [
         "Absolute stillness",
@@ -447,7 +474,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber; the audience is still open but the seam question is closed.",
+      "statusNote": "Seated by the pale blue flame in the outer chamber; has conditionally opened the path to the inner chamber.",
       "domains": {
         "primary": "umbral"
       },
@@ -636,7 +663,7 @@
     "lastSharedReadAt": "2026-07-27T13:00:02.886Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -980,24 +1007,40 @@
         "createdDay": 1,
         "entityId": "unlit-elder",
         "updatedDay": 1
+      },
+      "the-taken-from-the-city": {
+        "id": "the-taken-from-the-city",
+        "label": "The Taken From the City",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The person came willingly — the elder was explicit. The city sent no one to retrieve them, which the elder reads as proof the city knows this. The person is in the inner chamber and has chosen the doctrine. The elder permits Loki to ask whether they wish to be found."
+        ],
+        "links": [
+          "the-unlit",
+          "unlit-elder",
+          "the-unlit-deep"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 5.771511762861594,
-    "cerebral": 10.587552233767722,
-    "social": 14.63530883161359,
-    "strategic": 5.754754265696349,
-    "cautious": 4.960987427328579,
-    "amorous": 11.149810675034287,
-    "generous": 1.146801499993379,
-    "ruthless": 0.6502471642142047
+    "devotion": 5.627223968790053,
+    "cerebral": 10.32286342792353,
+    "social": 15.26942611082325,
+    "strategic": 5.61088540905394,
+    "cautious": 4.836962741645364,
+    "amorous": 10.87106540815843,
+    "generous": 1.1181314624935446,
+    "ruthless": 0.6339909851088495
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 35,
+  "actionCount": 36,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1139,8 +1182,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785158965453,
-  "rev": 83,
+  "updatedAt": 1785159542578,
+  "rev": 84,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1458,7 +1501,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 6
+    "umbral_depths": 7
   },
   "opLossPending": false,
   "sessions": [
@@ -1489,10 +1532,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T13:29:25.450Z",
+      "lastAt": "2026-07-27T13:39:02.577Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -1512,25 +1555,25 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 35,
-    "choices": 35,
-    "characterDeltas": 13,
-    "scene": 35,
+    "sceneSummary": 36,
+    "choices": 36,
+    "characterDeltas": 14,
+    "scene": 36,
     "placeUpdates": 3,
-    "codexUpdates": 26,
-    "timeOps": 34,
+    "codexUpdates": 27,
+    "timeOps": 35,
     "offer": 3,
     "generateRequest": 2,
     "sceneEnded": 10,
-    "npcUpdates": 29,
+    "npcUpdates": 30,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 1,
+    "questUpdates": 2,
     "standingOps": 1,
     "factUpdates": 1
   },
-  "_opTurns": 35,
+  "_opTurns": 36,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5

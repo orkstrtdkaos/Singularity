@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 3,
-  "xp": 221,
+  "xp": 226,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 94,
+  "energy": 89,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -121,7 +121,174 @@
     "Loki stood on the shelf above the terminus regulator and asked Cy for one honest reason to descend — Cy gave exactly one: three missing entries in its inventory of this installation class, records written into the stone below that no system above holds. The visit to the Unlit Deep reached its full close: Sable found and left in peace, the elder's deed named, the passage open, the regulator identified. What Loki carries out, and whether to return for the missing records, is the remaining thread."
   ],
   "currentLocationId": "the_unlit_deep",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_unlit_deep",
+    "turns": [
+      {
+        "player": "Descend again — take Cy to the inspection port and recover the three missing entries",
+        "summary": "Loki descended to the inspection port below the Unlit's outer chamber and recovered the three missing entries — the terminus regulator's calibration, its last full service record, and the condition of its failsafe.",
+        "narration": "The passage smells of cold stone and something living — not rot, not decay, just the deep-water patience of a place that has been wet for a very long time. You descend with one hand trailing the left wall, where Prism Sight told you the creatures walk. Cy follows at your heel, its lamp held low so the light pools downward rather than outward. The Unlit above say nothing as you go. You do not look back to confirm the Standing Unlit is still there. You know they are.\n\nThe stair is not long, but it earns its depth. The worked stone changes character about halfway down — older cut, tighter joints, no sign of the Unlit's hand. This is the older floor. Cy's lens irises three times in quick succession when its feet touch the lower stones, and it does not close again. It recognizes the construction. It does not say so out loud, but the lens says it plainly enough.\n\nThe inspection port is not hidden. It sits in a recessed niche in the east wall, low enough that you have to crouch, sealed with a stone face that has a hand-worn depression in it — not a lock, a grip. You press your palm flat. The stone swings inward on a counterweight that has not corroded in the centuries since it was set. Behind it: three panels of worked metal, each stamped with a glyph you have seen on Cy's own housing. Line entries, precise and small. Cy steps forward, leans its lens within a finger's width of the first panel, and goes very still. After a moment it says, in its most careful voice, 'These were not in my inventory. They are in my inventory now.'\n\nYou do not rush it. The deep water sound is everywhere down here — not a stream, not a drip, but a continuous presence below the floor, as though the stone is floating on something patient and enormous. The three entries, you learn in pieces as Cy reads them aloud with the precise cadence of a thing reciting to itself: the regulator below this junction was calibrated to hold a temperature ceiling for the lines above; its last full service was recorded here, not in any system the valley holds; and its failsafe — the condition under which it would begin to wind down without external instruction — is a sustained drop in the watershed pressure it was built to monitor. The regulator is doing exactly what it was made to do. It has been doing it, alone, for a very long time.\n\n*✦ The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers. — a step forward.*"
+      }
+    ],
+    "lastTurn": {
+      "narration": "The passage smells of cold stone and something living — not rot, not decay, just the deep-water patience of a place that has been wet for a very long time. You descend with one hand trailing the left wall, where Prism Sight told you the creatures walk. Cy follows at your heel, its lamp held low so the light pools downward rather than outward. The Unlit above say nothing as you go. You do not look back to confirm the Standing Unlit is still there. You know they are.\n\nThe stair is not long, but it earns its depth. The worked stone changes character about halfway down — older cut, tighter joints, no sign of the Unlit's hand. This is the older floor. Cy's lens irises three times in quick succession when its feet touch the lower stones, and it does not close again. It recognizes the construction. It does not say so out loud, but the lens says it plainly enough.\n\nThe inspection port is not hidden. It sits in a recessed niche in the east wall, low enough that you have to crouch, sealed with a stone face that has a hand-worn depression in it — not a lock, a grip. You press your palm flat. The stone swings inward on a counterweight that has not corroded in the centuries since it was set. Behind it: three panels of worked metal, each stamped with a glyph you have seen on Cy's own housing. Line entries, precise and small. Cy steps forward, leans its lens within a finger's width of the first panel, and goes very still. After a moment it says, in its most careful voice, 'These were not in my inventory. They are in my inventory now.'\n\nYou do not rush it. The deep water sound is everywhere down here — not a stream, not a drip, but a continuous presence below the floor, as though the stone is floating on something patient and enormous. The three entries, you learn in pieces as Cy reads them aloud with the precise cadence of a thing reciting to itself: the regulator below this junction was calibrated to hold a temperature ceiling for the lines above; its last full service was recorded here, not in any system the valley holds; and its failsafe — the condition under which it would begin to wind down without external instruction — is a sustained drop in the watershed pressure it was built to monitor. The regulator is doing exactly what it was made to do. It has been doing it, alone, for a very long time.\n\n*✦ The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers. — a step forward.*",
+      "sceneSummary": "Loki descended to the inspection port below the Unlit's outer chamber and recovered the three missing entries — the terminus regulator's calibration, its last full service record, and the condition of its failsafe.",
+      "choices": [
+        {
+          "label": "Ask Cy what the pressure-drop failsafe means for the water crisis — whether the regulator is already winding down or still holding",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Read the metal panels yourself with See the Made Thing — find what Cy's literal reading might miss",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false
+        },
+        {
+          "label": "Press deeper — Prism Sight the passage beyond the niche, where the water sound is strongest",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "risky"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Take what you came for and ascend — the three entries are enough; carry them back to the city",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "loki-thread",
+          "note": "Three missing terminus regulator entries recovered: calibration record, last full service log, and the failsafe condition — a sustained drop in watershed pressure triggers autonomous wind-down. The regulator has been running alone, exactly as designed, for a very long time."
+        }
+      ],
+      "stageOps": [
+        {
+          "questId": "loki-thread",
+          "stageId": "s2",
+          "evidence": "Loki descended to the inspection port and recovered the three missing inventory entries — the regulator's calibration, its service record, and its failsafe condition — written into the installation stone below the Unlit's outer chamber."
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "standing-unlit",
+          "name": "Standing Unlit",
+          "note": "Did not impede the descent. Still present above.",
+          "statusNote": "In the outer chamber above — did not impede the descent to the inspection port."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "terminus-regulators-beneath-the-valley",
+          "label": "Terminus Regulators Beneath the Valley",
+          "kind": "lore",
+          "fact": "The regulator below the Unlit's outer chamber was calibrated to hold a temperature ceiling for the routing lines above. Its last full service is recorded on three metal panels in the inspection port — not in any system the valley holds. Its failsafe: a sustained drop in the watershed pressure it monitors triggers autonomous wind-down. It is doing exactly what it was designed to do.",
+          "links": [
+            "the-seam-beside-the-bracket",
+            "the-unlit-deep",
+            "the-water-crisis",
+            "loki-thread"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The inspection port niche below the outer chamber was opened — three metal-panel entries recovered by Cy. The counterweight mechanism is undamaged. The port closes cleanly.",
+          "flag": {
+            "inspection_port_accessed": true,
+            "three_entries_recovered": true
+          },
+          "subPlace": {
+            "name": "Inspection Port Niche",
+            "parent": "The Unlit Deep",
+            "note": "A low recessed niche in the east wall of the lower passage — older stone than the Unlit's chamber, a hand-worn grip in the stone face, three metal panels inside stamped with Precursor glyphs. Below the floor, a continuous water-presence.",
+            "visited": true
+          }
+        }
+      ],
+      "scene": {
+        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tighter joints, no Unlit hand in any of it. The inspection port niche stands open in the east wall. The deep water sound fills the air from below the floor.",
+        "npcsPresent": [
+          {
+            "name": "Cy",
+            "state": "Lens close to the third metal panel, reading in precise silence. Its inventory is now updated."
+          }
+        ],
+        "objects": [
+          "Three stamped metal panels in the open niche — Precursor glyphs, line entries, small and precise",
+          "Stone face of the port, swung inward on an undamaged counterweight",
+          "Cy's lamp, held low, pooling light downward"
+        ],
+        "threads": [
+          "The failsafe condition — watershed pressure drop triggers autonomous wind-down — and what that means for the water crisis above",
+          "The water sound below the floor: a large spring-fed source, continuous and patient"
+        ]
+      },
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "Time to descend, locate the inspection port, and wait for Cy to read all three panels aloud"
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tighter joints, no Unlit hand in any of it. The inspection port niche stands open in the east wall. The deep water sound fills the air from below the floor.",
+      "npcsPresent": [
+        {
+          "name": "Cy",
+          "state": "Lens close to the third metal panel, reading in precise silence. Its inventory is now updated."
+        }
+      ],
+      "objects": [
+        "Three stamped metal panels in the open niche — Precursor glyphs, line entries, s",
+        "Stone face of the port, swung inward on an undamaged counterweight",
+        "Cy's lamp, held low, pooling light downward"
+      ],
+      "threads": [
+        "The failsafe condition — watershed pressure drop triggers autonomous wind-down — and what that means for the water crisis above",
+        "The water sound below the floor: a large spring-fed source, continuous and patient"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -209,12 +376,15 @@
           "effects": []
         }
       ],
-      "stageIndex": 1,
+      "stageIndex": 2,
       "completedStages": [
-        "s1"
+        "s1",
+        "s2"
       ],
       "progress": [
-        "↳ Loki pressed the ancient seam fully and the door opened — a passage deeper than the Unlit's own chamber, older than their doctrine, answering a question that predates the valley. The town that was…"
+        "↳ Loki pressed the ancient seam fully and the door opened — a passage deeper than the Unlit's own chamber, older than their doctrine, answering a question that predates the valley. The town that was…",
+        "Three missing terminus regulator entries recovered: calibration record, last full service log, and the failsafe condition — a sustained drop in watershed pressure triggers autonomous wind-down. The regulator has been running alone, exactly as designed, for a very long time.",
+        "↳ Loki descended to the inspection port and recovered the three missing inventory entries — the regulator's calibration, its service record, and its failsafe condition — written into the installation…"
       ],
       "aliases": [],
       "startedAt": "2026-07-27T13:42:10.222Z",
@@ -290,7 +460,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d1] Remains beside the stair passage. Something the engine has flagged is near that exit.",
         "[d1] Has remained beside the stair passage throughout. Has not spoken since stepping aside.",
         "[d1] Remained motionless beside the stair passage throughout the Prism Sight attempt and Cy's tap. Has not spoken.",
         "[d1] Turned their head toward the stair passage when something began moving there — the first time they have attended to anything other than Loki since Loki arrived.",
@@ -299,7 +468,8 @@
         "[d1] Remained still and forward-facing through the passage read. The creatures' return and the open door are both closed matters for them.",
         "[d1] Did not react to the glass-stalker's presence — stillness changed quality, suggesting they already know it is here",
         "[d1] Did not react to the glass-stalker's yielding — the event closed the same way it opened, without alarm or acknowledgment",
-        "[d1] Did not react to Loki's descent attempt or the sounds of the slide — the passage event is closed for them as before"
+        "[d1] Did not react to Loki's descent attempt or the sounds of the slide — the passage event is closed for them as before",
+        "[d1] Did not impede the descent. Still present above."
       ],
       "knownFacts": [
         "Objects to Cy's presence — calls it a 'light-thing'",
@@ -318,7 +488,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "In the outer chamber above, beside the stair passage, still and forward-facing",
+      "statusNote": "In the outer chamber above — did not impede the descent to the inspection port.",
       "domains": {
         "primary": "umbral"
       },
@@ -457,7 +627,8 @@
         "[d1] The seam beside the bracket responded to direct hand-pressure with a faint waiting vibration — the cut is precise, three direction-changes, and the stone holds the quality of something expecting a particular asking. It did not open.",
         "[d1] The seam's asking-point is at its base — the lowest third of the cut runs warmer under Prism Sight, and Cy tapped the floor there to mark it. The door's mechanism, if there is one, answers low.",
         "[d1] The seam's asking-point was successfully pressed — the seam yielded and stands bright and open, but did not open fully. The question has been heard; the door waits for a second asking.",
-        "[d1] The seam door is now fully open — a passage descending into cold dark, smelling of water and living things, older than the Unlit. The door opened to a committed, full-weight press when the creatures from below were also present."
+        "[d1] The seam door is now fully open — a passage descending into cold dark, smelling of water and living things, older than the Unlit. The door opened to a committed, full-weight press when the creatures from below were also present.",
+        "[d1] The inspection port niche below the outer chamber was opened — three metal-panel entries recovered by Cy. The counterweight mechanism is undamaged. The port closes cleanly."
       ],
       "flags": {
         "seam_touched": true,
@@ -467,7 +638,9 @@
         "seam_answered": true,
         "seam_open_partial": true,
         "seam_fully_open": true,
-        "passage_below_revealed": true
+        "passage_below_revealed": true,
+        "inspection_port_accessed": true,
+        "three_entries_recovered": true
       },
       "lastVisit": 1,
       "vectorsKnown": [
@@ -482,6 +655,13 @@
           "day": 1,
           "visited": true,
           "note": "Small, bare worked stone, ceiling low. No flame. The taken person's place — floor worn narrow, a cup beside where they sat."
+        },
+        "inspection-port-niche": {
+          "name": "Inspection Port Niche",
+          "parentId": "the_unlit_deep",
+          "day": 1,
+          "visited": true,
+          "note": "A low recessed niche in the east wall of the lower passage — older stone than the Unlit's chamber, a hand-worn grip in the stone face, three metal panels inside stamped with Precursor glyphs. Below…"
         }
       }
     }
@@ -628,7 +808,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The pressure-gauge needle, which tapped once and stopped when Cy settled — Tessvel noticed and her pen moved toward it before she stopped…",
@@ -1128,7 +1308,8 @@
         "kind": "lore",
         "facts": [
           "[d1] Three Precursor terminus regulators were installed at routing junctions beneath the valley basin. Two were decommissioned. The third — below the Unlit's outer chamber — was not. It holds temperature to prevent thermal surge in the lines running upward. Cy completed the inventory for this class of…",
-          "[d1] A routing junction of this class was designed with a physical inspection port — records of its installation are written into the stone there, not stored in any system above. Cy's inventory of this class is incomplete by three entries. The inspection port below would hold them."
+          "[d1] A routing junction of this class was designed with a physical inspection port — records of its installation are written into the stone there, not stored in any system above. Cy's inventory of this class is incomplete by three entries. The inspection port below would hold them.",
+          "[d1] The regulator below the Unlit's outer chamber was calibrated to hold a temperature ceiling for the routing lines above. Its last full service is recorded on three metal panels in the inspection port — not in any system the valley holds. Its failsafe: a sustained drop in the watershed pressure it…"
         ],
         "links": [
           "the-seam-beside-the-bracket",
@@ -1143,22 +1324,22 @@
     }
   },
   "tendencies": {
-    "devotion": 3.224005293432115,
-    "cerebral": 14.103973051767413,
-    "social": 14.302404019410586,
-    "strategic": 10.50210731068556,
-    "cautious": 6.540982248095004,
-    "amorous": 6.228359243480673,
-    "generous": 2.771114390329365,
-    "ruthless": 0.3632324398878803,
-    "risky": 2.6246068720216367
+    "devotion": 3.1434051610963123,
+    "cerebral": 13.751373725473227,
+    "social": 13.94484391892532,
+    "strategic": 10.23955462791842,
+    "cautious": 7.377457691892628,
+    "amorous": 6.0726502623936565,
+    "generous": 2.701836530571131,
+    "ruthless": 0.35415162889068325,
+    "risky": 3.5589917002210956
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "charmer"
   ],
-  "actionCount": 58,
+  "actionCount": 59,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1315,8 +1496,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785170478688,
-  "rev": 129,
+  "updatedAt": 1785172355244,
+  "rev": 130,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1634,7 +1815,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 31
+    "umbral_depths": 32
   },
   "opLossPending": false,
   "sessions": [
@@ -1665,10 +1846,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T16:41:18.687Z",
+      "lastAt": "2026-07-27T17:12:35.242Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 27
+      "beats": 28
     }
   ],
   "establishedFacts": [
@@ -1706,27 +1887,27 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 59,
-    "choices": 59,
-    "characterDeltas": 26,
-    "scene": 59,
-    "placeUpdates": 8,
-    "codexUpdates": 49,
-    "timeOps": 58,
+    "sceneSummary": 60,
+    "choices": 60,
+    "characterDeltas": 27,
+    "scene": 60,
+    "placeUpdates": 9,
+    "codexUpdates": 50,
+    "timeOps": 59,
     "offer": 6,
     "generateRequest": 2,
-    "sceneEnded": 15,
-    "npcUpdates": 51,
+    "sceneEnded": 16,
+    "npcUpdates": 52,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 9,
+    "questUpdates": 10,
     "standingOps": 1,
     "factUpdates": 4,
-    "stageOps": 5,
+    "stageOps": 6,
     "encounterOps": 1
   },
-  "_opTurns": 59,
+  "_opTurns": 60,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75

@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [DIAGNOSIS + spec] SNG-246 encounter revamp (Aevi, 2026-07-27)
+> Erik (Slow Orchard screenshot - a fight resolved in PURE PROSE): "encounters need a fix - the action I chose
+> ended the fight similarly both times; don't want a separate screen; once in an encounter it should be
+> STRUCTURED with conditions to change/finish; and each action's mechanical effect needs to be SHOWN."
+> DIAGNOSIS (verified): (1) the fight NEVER WENT STRUCTURED - GM rule 18 mandates newEncounter + 'no freeform
+> prose' on a committed fight but the GM narrated it away (a rule dropped under the 114-MUST saturation, SNG-237
+> class) = 'one action ended it'; (2) the receipt is encounterReceiptForGM - fed to the GM, NEVER shown to the
+> player; (3) duelRound/frameModel/renderSkillBattle (an in-place structured takeover, but only for skill_battle)
+> all EXIST, fragmented+passive. FOUR fixes: A engine-ENFORCES fight-entry (not the saturated GM's memory - the
+> root); B generalize the skill-battle in-place takeover to ALL encounters (the play surface BECOMES the
+> encounter, no separate screen); C surface+enforce STRUCTURED finish/change conditions (defeat/yield/flee/
+> collapse/trivialize + morph-to-chase - multiple DISTINCT roads so the same action doesn't end every fight); D
+> render a player-facing RECEIPT LINE. DONE (Aevi): the receipt-line formats per kind (fight=hp/chase=ground/
+> standoff=resolve/puzzle=insight/hazard=progress, finish-proximity always shown).
+> CCODE: A (engine-enforced entry) is the ROOT - do first; then B/C/D. AEVI: receipt formats done, owes frame
+> condition copy. ERIK: receipt verbosity + takeover extent. Full: SPEC_SNG-246.
+
 > ## [DONE - Aevi's SNG-245 hooks] hook voice + producer-threshold design (2026-07-27)
 > CCode built the Pressure Queue (engine/pressure.js, v1.8.291); I owed the hooks. Both done:
 > - **Hook VOICE bank** (po/staged_content/pressure_hook_voice.json): CCode's producers emit a flat template

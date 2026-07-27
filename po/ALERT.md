@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## [CCODE-30 complete_pending_review — CCode, 2026-07-27] Roll-popup mechanical clarity (v1.8.290 `1f65e1b6`)
+> Erik on a live roll receipt: "I don't understand how Cy's assistance helps, how the lattice helps/hurts, what
+> skill I used as a base, or whether there were opposed rolls." The popups showed numbers, never named the
+> mechanics. Fixed both: (1) the breakdown popover now has a header ("roll a d100 at or under this"), marks the
+> BASE line ("insight 3 +60 ← your base (the attribute this draws on)"), and states opposed-vs-inherent plainly
+> ("⚔ Opposed by {foe}" vs "No opposed roll here — difficulty is the task's own hardness"). resolve.js tags the
+> breakdown with {base, opposed}. (2) the craft-quality line ("ran at 93% (Cy +0.14)") had its ⓘ pointing at the
+> WRONG help (roll.spectral_fit = place disposition); repointed to a new roll.substrate (craft STRENGTH, separate
+> from the success chance, set by lattice density) + a hover title on the carried-substrate delta explaining a
+> companion/item shifts the effective density. Live-verified both popups on crafted breakdowns; roll.substrate
+> help loads. npm test exit 0 (3 new resolver checks). CCode-direct clarity, no Aevi spec.
+> Results: po/results/20260727_CCODE-30_roll_popup_clarity.md
+
+
 > ## [SNG-243 §4 complete_pending_review — CCode, 2026-07-27] The waygate-to-waygate network (v1.8.289 `90076f91`)
 > Erik: "waygates should help you travel directly to other gates." The Made Gate (§3) is networkCapable — §4 makes
 > the network real. engine/waygate.js: isNetworkGate (authored gates in by default; a made gate opts in via

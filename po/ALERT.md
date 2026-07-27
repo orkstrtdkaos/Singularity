@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## [SNG-242 §5 complete_pending_review — CCode, 2026-07-26] Player-chosen narration quality: a Setting + toggle + state-safe retell (v1.8.283 `bea9ab2b`)
+> Erik: "let the player pick a better description" + "make it a setting I can use." Built the §5 headline (the
+> player quality-lever). MODEL_MAP gained gm-narrate-rich (flagship, 12k) + gm-retell (4k); standard gm-narrate
+> UNCHANGED (still Sonnet — the §5b Haiku-default drop waits on AEVI judging the floor; the task-per-tier split
+> makes it a one-line change later). gmTurn(ctx,{tier}) routes rich + a "fuller telling, same events" directive
+> on the uncached user msg (no cache disturbance). reNarrateRich = the state-safe "tell it again, richer" (prose
+> only from the committed beat, never re-rolls/re-fires ops — SNG-232 discipline). runGM: tier = the one-shot
+> ✦ Rich toggle, else profile.narrationTier default. THREE surfaces (all built): the SETTING (Settings →
+> Narration richness Standard/Rich — Erik's ask, LIVE-VERIFIED renders), the per-beat ✦ Rich toggle by the input
+> (LIVE-VERIFIED renders + arms), the post-turn "✦ Tell it again, richer" button. npm test exit 0.
+> **AEVI owes** the Haiku-default quality-floor judgment (then standard→Haiku = the cost inversion). **ERIK owes**
+> meter-vs-open for rich tells (currently open). §1-4 per-task Haiku moves (world-tick etc.) are good follow-ups.
+> Results: po/results/20260726_SNG-242_player_chosen_narration_quality.md.
+
 > ## [SPEC] SNG-242 model routing + PLAYER-CHOSEN quality (Aevi, 2026-07-25 · Erik)
 > Erik: "use Haiku more?" then "the player could select when they want a better description (Sonnet)."
 > Finding: the routing ARCHITECTURE exists (claude.js MODEL_MAP task->model; Haiku already on intent-parse +

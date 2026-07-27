@@ -7,8 +7,8 @@
   "nativeTradition": "enginewright",
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
-  "level": 3,
-  "xp": 294,
+  "level": 4,
+  "xp": 307,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -67,11 +67,11 @@
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
   },
-  "attunement": 3,
-  "maxHealth": 40,
-  "health": 40,
-  "maxEnergy": 110,
-  "energy": 65,
+  "attunement": 4,
+  "maxHealth": 45,
+  "health": 45,
+  "maxEnergy": 115,
+  "energy": 115,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -203,14 +203,19 @@
         "player": "Ask Cy what it remembers of this regulator — what Halvex told it, what it observed on its previous visits",
         "summary": "Cy recalled Halvex's words — the regulator counts how long the question has gone unasked, and Halvex died still learning the question's shape.",
         "narration": "You sit back on your heels and look at Cy. The lamp holds steady in its grip, the amber light of the regulator small and warm between you.\n\n\"Cy,\" you say. \"What do you remember of this place? What did Halvex tell you about it?\"\n\nCy is still for a moment. Its lens irises once, slowly, the way it does when it is not searching but retrieving.\n\n\"Halvex said the regulator does not measure the water,\" Cy says. Its voice is the faint dry click of old brass. \"Halvex said it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. Those are Halvex's words. I recorded them as given.\"\n\nAnother pause. The cold from below moves against your legs.\n\n\"On my first visit here, the duration field read two hundred and nine darks,\" Cy continues. \"On my second, four hundred and thirty-one. On my third, Halvex told me not to read it again. Halvex said the counter was not a record of how long the light had burned. Halvex said the counter was a record of how long the question had gone unasked.\" Cy's legs adjust slightly, resettling on the stone. \"I asked Halvex what the question was. Halvex said they did not yet know the right way to ask it. They said they were still learning the shape of it from the walls.\" The lens irises again. \"That was the last visit I made with Halvex present. I have not been told what the question is.\""
+      },
+      {
+        "player": "Run the Made Thing through Cy - so it shows HIM what the system's question is through his pre-cursor processor.,",
+        "summary": "Loki ran See the Made Thing through Cy's Precursor processor — the regulator's waiting question passed through the contact point and Cy received its structural shape: whether the water is prepared, and whether someone with authority to answer is present.",
+        "narration": "You do not cast the craft outward. You turn it inward — toward the junction where your hand rests on Cy's housing, the warm articulated metal under your fingers. A light hold. Economical. You let See the Made Thing run down through the contact point rather than out into the room.\n\nCy goes still. Not the stillness of waiting — the stillness of processing. Its lens irises wide, holds, then irises again in a slower rhythm than you have seen from it before. The lamp in its grip does not waver.\n\nWhat the craft finds in the regulator's construction is not quite a question in words. It is a structural shape — a waiting form, like a keyhole seen from the key's side. You do not understand it fully. But Cy's Precursor processing is a different instrument than yours, and you are not trying to understand it yourself. You are handing it through.\n\nCy clicks once. A long pause. Then: \"The question is not yet formed in terms I can give you cleanly.\" Its voice is careful — slower than usual. \"But I have the shape of it. The regulator is asking whether the water has been prepared for the thing it was built to carry. And it is asking whether someone with the authority to answer is present.\" Another iris. \"Halvex was working toward the second part when the records stop.\"\n\n*You feel it settle into you — a new steadiness. (Level 4: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You sit back on your heels and look at Cy. The lamp holds steady in its grip, the amber light of the regulator small and warm between you.\n\n\"Cy,\" you say. \"What do you remember of this place? What did Halvex tell you about it?\"\n\nCy is still for a moment. Its lens irises once, slowly, the way it does when it is not searching but retrieving.\n\n\"Halvex said the regulator does not measure the water,\" Cy says. Its voice is the faint dry click of old brass. \"Halvex said it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. Those are Halvex's words. I recorded them as given.\"\n\nAnother pause. The cold from below moves against your legs.\n\n\"On my first visit here, the duration field read two hundred and nine darks,\" Cy continues. \"On my second, four hundred and thirty-one. On my third, Halvex told me not to read it again. Halvex said the counter was not a record of how long the light had burned. Halvex said the counter was a record of how long the question had gone unasked.\" Cy's legs adjust slightly, resettling on the stone. \"I asked Halvex what the question was. Halvex said they did not yet know the right way to ask it. They said they were still learning the shape of it from the walls.\" The lens irises again. \"That was the last visit I made with Halvex present. I have not been told what the question is.\"",
-      "sceneSummary": "Cy recalled Halvex's words — the regulator counts how long the question has gone unasked, and Halvex died still learning the question's shape.",
+      "narration": "You do not cast the craft outward. You turn it inward — toward the junction where your hand rests on Cy's housing, the warm articulated metal under your fingers. A light hold. Economical. You let See the Made Thing run down through the contact point rather than out into the room.\n\nCy goes still. Not the stillness of waiting — the stillness of processing. Its lens irises wide, holds, then irises again in a slower rhythm than you have seen from it before. The lamp in its grip does not waver.\n\nWhat the craft finds in the regulator's construction is not quite a question in words. It is a structural shape — a waiting form, like a keyhole seen from the key's side. You do not understand it fully. But Cy's Precursor processing is a different instrument than yours, and you are not trying to understand it yourself. You are handing it through.\n\nCy clicks once. A long pause. Then: \"The question is not yet formed in terms I can give you cleanly.\" Its voice is careful — slower than usual. \"But I have the shape of it. The regulator is asking whether the water has been prepared for the thing it was built to carry. And it is asking whether someone with the authority to answer is present.\" Another iris. \"Halvex was working toward the second part when the records stop.\"\n\n*You feel it settle into you — a new steadiness. (Level 4: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Loki ran See the Made Thing through Cy's Precursor processor — the regulator's waiting question passed through the contact point and Cy received its structural shape: whether the water is prepared, and whether someone with authority to answer is present.",
       "choices": [
         {
-          "label": "Ask Cy what Halvex thought the question was — even an incomplete shape, a direction they were moving toward",
+          "label": "Ask Cy what 'authority to answer' means — is it a role, a key, a craft, a bloodline, or something else the regulator can read?",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -220,7 +225,7 @@
           "trivial": true
         },
         {
-          "label": "Use See the Made Thing on the regulator's question-field directly — read what it is structured to receive",
+          "label": "Use See the Made Thing on the regulator directly — look for the answer-mechanism itself, the slot or surface that receives a response",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
@@ -232,18 +237,7 @@
           "trivial": false
         },
         {
-          "label": "Ask the regulator the most honest question you can form — what is the water prepared to carry?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "risky"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Read the final entries of Halvex's journal on the left wall — find the last shape they gave the question before they stopped writing",
+          "label": "Check the last entries of Halvex's journal — the ones closest to where the records stop. That is where they were when they ran out of time.",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -251,25 +245,39 @@
             "study"
           ],
           "trivial": true
+        },
+        {
+          "label": "Tell Cy to read the question back in full — whatever shape it received, however partial. You want to hear it in Cy's own words.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -1
+      },
       "scene": {
-        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki crouches at the far end before the dark metal regulator housing, Cy's lamp held at the right angle beside them.",
+        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki crouches at the far end before the dark metal regulator housing, one hand resting on Cy's housing after the contact-point cast.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Lamp steady, lens irised after its recollection — now still, waiting."
+            "state": "Lens irising slowly in a processing rhythm — still, holding the lamp steady, processing what was passed through the contact point."
           }
         ],
         "objects": [
           "Long band of fine-cut notation along the left wall — Halvex's working journal",
           "Three metal panels from the inspection port niche, set against the wall",
-          "Dark metal regulator housing flush in the far wall — pre-Transition, single amber light",
+          "Dark metal regulator housing flush in the far wall — pre-Transition, single amber indicator light",
           "Cy's lamp — the only light source"
         ],
         "threads": [
-          "The question the regulator is built to receive — its shape not yet known",
-          "What the counter was counting toward — how high it was built to go",
+          "The question the regulator is built to receive — Cy now holds its structural shape: whether the water is prepared, and whether someone with authority to answer is present",
+          "What 'authority to answer' means — role, key, craft, or something the regulator reads directly",
           "Halvex's final journal entries — the last shape they gave the question before they stopped",
           "Cy's third visit — the last time Halvex was present; what came after"
         ]
@@ -279,13 +287,15 @@
           "op": "update",
           "npcId": "cy",
           "name": "Cy",
-          "note": "Recalled Halvex's exact words — the regulator measures the question of the water, not the water itself; the counter records how long the question has gone unasked. Halvex told Cy not to read the counter again on the third visit, and was not present after that.",
+          "note": "Received the regulator's structural question through a Precursor-to-craft contact-point pass — processed it and returned: the regulator asks whether the water is prepared, and whether someone with the authority to answer is present. Halvex was working toward the second part when the records stopped.",
           "learned": [
-            "The duration counter counts how long the question has gone unasked — Halvex's own phrasing",
-            "Halvex did not know the question's full shape at the time of the third and final visit — they were still learning it from the walls",
-            "Cy's three previous visits correspond to counter readings of 209, 431, and an unread third"
+            "The regulator's question has two parts: whether the water is prepared to carry what it was built for, and whether someone with the authority to answer is present.",
+            "Halvex was working toward determining what 'authority to answer' meant when their records stop."
           ],
-          "statusNote": "In the deep corridor, lamp held at working angle — present and still after recollection."
+          "skillsObserved": [
+            "Precursor signal processing — received and translated a structural question passed through a craft-contact junction"
+          ],
+          "statusNote": "In the deep corridor, lamp held steady, processing the received question shape."
         }
       ],
       "codexUpdates": [
@@ -293,40 +303,39 @@
           "topic": "halvex",
           "label": "Halvex",
           "kind": "mystery",
-          "fact": "Halvex's own words, preserved through Cy: the regulator does not measure the water — it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. The counter records how long the question has gone unasked, not how long the light has burned. Halvex was still learning the question's shape from the walls when they made their last visit — and told Cy not to read the counter again.",
+          "fact": "Halvex was working toward understanding what 'authority to answer' meant in the regulator's question — that was the unsolved part when their records stop. The question has two parts: whether the water is prepared, and whether the right person is present.",
           "links": [
-            "terminus-seals-beneath-the-valley",
             "the-seam-beside-the-bracket",
-            "the-water-crisis",
+            "the-unlit-deep",
             "cy-s-construction",
-            "the-unlit-deep"
+            "the-water-crisis"
           ]
         },
         {
-          "topic": "terminus-seals-beneath-the-valley",
-          "label": "The Regulator — The Question of the Water",
+          "topic": "the-regulator-question",
+          "label": "The Regulator's Question",
           "kind": "mystery",
-          "fact": "The regulator's purpose, in Halvex's words: it measures whether the water is ready to carry what it was prepared to carry. The question has gone unasked for at least 663 darks. Halvex died — or departed — still learning the right shape of the question. Cy visited three times; on the third, Halvex told it not to read the counter again.",
+          "fact": "The regulator holds a two-part question: (1) whether the water has been prepared to carry what it was built to carry, and (2) whether someone with the authority to answer is present. Cy received this shape through a craft-contact pass — Loki's See the Made Thing run through Cy's Precursor processor.",
           "links": [
             "halvex",
             "the-seam-beside-the-bracket",
-            "the-water-crisis",
             "cy-s-construction",
+            "the-water-crisis",
             "the-unlit-deep"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange in the corridor — Cy's recollection, a few quiet minutes."
+        "why": "A brief, focused cast and Cy's processing response — a matter of minutes"
       }
     },
     "sceneState": {
-      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki crouches at the far end before the dark metal regulator housing, Cy's lamp held at the right angle beside them.",
+      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki crouches at the far end before the dark metal regulator housing, one hand resting on Cy's housing after the contact-point cast.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Lamp steady, lens irised after its recollection — now still, waiting."
+          "state": "Lens irising slowly in a processing rhythm — still, holding the lamp steady, processing what was passed through the cont"
         }
       ],
       "objects": [
@@ -336,8 +345,8 @@
         "Cy's lamp — the only light source"
       ],
       "threads": [
-        "The question the regulator is built to receive — its shape not yet known",
-        "What the counter was counting toward — how high it was built to go",
+        "The question the regulator is built to receive — Cy now holds its structural shape: whether the water is prepared, and whether someone with authority to answer ",
+        "What 'authority to answer' means — role, key, craft, or something the regulator reads directly",
         "Halvex's final journal entries — the last shape they gave the question before they stopped",
         "Cy's third visit — the last time Halvex was present; what came after"
       ]
@@ -884,7 +893,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
@@ -990,8 +999,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1421,7 +1430,8 @@
           "[d1] Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry.",
           "[d1] Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated.",
           "[d1] Not operational logs — a working journal. Observation, question, hypothesis, revision, over a long period. Halvex was trying to determine when the regulator was built and by whom, and kept arriving at the same answer: it predates every record they could find, including the records that were…",
-          "[d1] Halvex's own words, preserved through Cy: the regulator does not measure the water — it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. The counter records how long the question has gone unasked, not how long the light has burned. Halvex was…"
+          "[d1] Halvex's own words, preserved through Cy: the regulator does not measure the water — it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. The counter records how long the question has gone unasked, not how long the light has burned. Halvex was…",
+          "[d1] Halvex was working toward understanding what 'authority to answer' meant in the regulator's question — that was the unsolved part when their records stop. The question has two parts: whether the water is prepared, and whether the right person is present."
         ],
         "links": [
           "loki-thread",
@@ -1478,25 +1488,43 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "the-regulator-question": {
+        "id": "the-regulator-question",
+        "label": "The Regulator's Question",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The regulator holds a two-part question: (1) whether the water has been prepared to carry what it was built to carry, and (2) whether someone with the authority to answer is present. Cy received this shape through a craft-contact pass — Loki's See the Made Thing run through Cy's Precursor processor."
+        ],
+        "links": [
+          "halvex",
+          "the-seam-beside-the-bracket",
+          "cy-s-construction",
+          "the-water-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 2.2618321139232354,
-    "cerebral": 16.831817127090112,
-    "social": 12.571504944048739,
-    "strategic": 8.124776398305317,
-    "cautious": 8.026948962359553,
-    "amorous": 4.369565702219539,
-    "generous": 1.9441021179991245,
-    "ruthless": 0.2548292333858097,
-    "risky": 2.5608667378846
+    "devotion": 2.2052863110751546,
+    "cerebral": 18.411021698912858,
+    "social": 12.25721732044752,
+    "strategic": 7.921656988347683,
+    "cautious": 7.826275238300564,
+    "amorous": 4.26032655966405,
+    "generous": 1.8954995650491464,
+    "ruthless": 0.24845850255116445,
+    "risky": 2.496845069437485
   },
   "aptitudes": [
     "silver_tongue",
-    "scholar"
+    "scholar",
+    "sage"
   ],
-  "actionCount": 72,
+  "actionCount": 73,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1661,8 +1689,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785178582399,
-  "rev": 144,
+  "updatedAt": 1785181043665,
+  "rev": 145,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2019,7 +2047,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 45
+    "umbral_depths": 46
   },
   "opLossPending": false,
   "sessions": [
@@ -2050,10 +2078,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T18:56:22.399Z",
+      "lastAt": "2026-07-27T19:37:23.663Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 41
+      "beats": 42
     }
   ],
   "establishedFacts": [
@@ -2091,17 +2119,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 73,
-    "choices": 73,
-    "characterDeltas": 32,
-    "scene": 73,
+    "sceneSummary": 74,
+    "choices": 74,
+    "characterDeltas": 33,
+    "scene": 74,
     "placeUpdates": 10,
-    "codexUpdates": 63,
-    "timeOps": 72,
+    "codexUpdates": 64,
+    "timeOps": 73,
     "offer": 8,
     "generateRequest": 2,
     "sceneEnded": 17,
-    "npcUpdates": 64,
+    "npcUpdates": 65,
     "moveTo": 2,
     "gambitApt": 1,
     "deeds": 1,
@@ -2111,7 +2139,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 73,
+  "_opTurns": 74,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75
@@ -2119,7 +2147,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 24,
+      "see_the_made_thing": 25,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

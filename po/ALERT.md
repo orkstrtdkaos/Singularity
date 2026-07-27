@@ -1,5 +1,25 @@
 # PO ALERT
 
+> ## [SNG-245 complete_pending_review — CCode, 2026-07-27] The Pressure Queue — the world DRIVES (v1.8.291 `250ba382`)
+> Erik: "we have arcs/wants/villain-agendas but how do they HOOK and DRIVE the player? Activity!" The world had an
+> initiative trigger (SNG-080) but nothing DRIVEN to fire — it told the GM to invent a generic something. Built the
+> ONE connective piece: engine/pressure.js (NEW, pure) — the Pressure Queue (enqueue de-duped+urgency-ordered+capped;
+> pullTop drops stale location-bound entries) + the 2 starter producers: npc-unmet-want (a bonded, long-unseen NPC
+> whose want is authored comes to YOU; staleness = now − lastSeen.day, scaled by the pacing pref) and threat-attack
+> (a REAL beast from the place's eligible pool, rolled on danger×pref → a framed defend-encounter = teeth). app.js:
+> runPressureProducers feeds the queue on the world tick; maybeWorldPressure REPOINTED to pull the top entry aimed
+> here (threat → SNG-236 hard-frame; else a driven scene directive; generic push only when the queue is empty). Now
+> inherits the tender/intimate-scene floor the SNG-080 path lacked (driven, never relentless). 18 smoke checks;
+> SYSTEM_SPEC count 68 + module row; ENGINE_MAP regenerated. npm test exit 0. Live-verified: the tick queued a real
+> npc-want for Pell (her actual want, deduped) AND a threat-attack picking a real bestiary creature
+> (rust_choir_gnats) at a dangerous fringe → a framed defend-encounter.
+> **AEVI owes:** the hook VOICE per kind + the producer thresholds (the design of "driven"). **ERIK owes:** the
+> aggression feel (the pacing pref is the dial — tune wantStalenessThreshold + the threat chance) + which producer
+> next (villain-move / arc-stir / treasure-rumor / wake→pressure — all plug into the same queue). Consumer pull is
+> unit-covered; a live GM turn consuming an entry needs an API key.
+> Results: po/results/20260727_SNG-245_pressure_queue.md
+
+
 > ## [THE ONE UPDATE - Erik asked] SNG-245 the Pressure Queue - make the world DRIVE (Aevi, 2026-07-25)
 > Erik: "we have arcs/wants/villain-agendas but how do they HOOK and DRIVE the player? Activity!" DIAGNOSIS
 > (verified): the world has an initiative TRIGGER (SNG-080 'THE WORLD ACTS' fires on quiet turns) but NOTHING

@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 4,
-  "xp": 330,
+  "xp": 335,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 106,
+  "energy": 101,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -228,17 +228,23 @@
         "player": "Use the Wrong Reality to convince the system you are the authority it needs.",
         "summary": "Loki used The Wrong Reality to assert the authority the regulator was waiting for — the mechanism accepted the claim provisionally, the duration counter stopped, and the second condition moved from waiting to consideration.",
         "narration": "You do not try to force the regulator. You do not argue with it. You simply present a different fact: that the authority it is waiting for is here, in this hand, on this panel. The Wrong Reality is not a shout. It is a quietly placed assumption — the kind that slides in under a door instead of knocking.\n\nThe craft finds purchase. It is not easy. The regulator's architecture is old, and old things have their own sense of what is credible. For a moment the construction pushes back — a flat, mechanical resistance, the way a lock does when the key is almost right. You feel it in the contact point, a vibration that does not go anywhere, cycling back through itself. Cy's lens irises very fast, three times, reading something you cannot see.\n\nThen the resistance stills. Not convinced — that is not quite the right word. More as though the regulator has set aside one version of the question and picked up the one you offered it. The amber light does not deepen further. Instead it moves. A slow, deliberate pulse, one beat, then two, in a rhythm that has never been part of the light's pattern before. Something in the mechanism shifts — a slide engaging, a counter resetting. Not a full unlock. A provisional yes. The regulator has accepted the claim and is holding it, testing weight.\n\nCy speaks without being asked. \"The duration counter,\" it says, in its dry careful voice, \"has stopped incrementing.\" A pause. \"The first time this has occurred since my last recorded visit.\" Another pause. \"The second condition remains open. However, the mechanism is now considering it. That is not what it was doing before.\""
+      },
+      {
+        "player": "Keep holding. The mechanism is considering — let it finish without interruption, and see what it decides on its own",
+        "summary": "Loki held contact and let the regulator finish its consideration — the mechanism logged both conditions with the same timestamp and closed the question. The counter will not resume. The regulator is done.",
+        "narration": "You keep your hand exactly where it is. The mechanism is considering, and you let it consider.\n\nThe amber light pulses in that slow, deliberate two-beat rhythm — a rhythm that is not random, you realize. It is counting something. Not time. Something else. Cy holds the lamp and holds still, and the two of you wait together in the cold corridor without speaking.\n\nThen the second beat of the pulse lengthens. It stretches out past its usual duration, and for a moment the light holds at full amber without dropping. The duration counter, silent since your Wrong Reality landed, does not resume. A faint sound comes from somewhere inside the housing — not mechanical, more like the settling of something that has been under tension for a very long time. A sound of release.\n\nCy speaks. Its voice is careful and precise, the way it always is when it is certain. 'The second condition is logged,' Cy says. 'Both entries now carry the same timestamp. The mechanism has closed the question. The counter will not resume.'\n\nYou lift your palm from the panel. The amber light stays. It does not go out and it does not change color. It simply remains — steady, even, the way a lamp looks when it has been trimmed properly and given enough oil. The regulator is not waiting anymore. It is done."
       }
     ],
     "lastTurn": {
-      "narration": "You do not try to force the regulator. You do not argue with it. You simply present a different fact: that the authority it is waiting for is here, in this hand, on this panel. The Wrong Reality is not a shout. It is a quietly placed assumption — the kind that slides in under a door instead of knocking.\n\nThe craft finds purchase. It is not easy. The regulator's architecture is old, and old things have their own sense of what is credible. For a moment the construction pushes back — a flat, mechanical resistance, the way a lock does when the key is almost right. You feel it in the contact point, a vibration that does not go anywhere, cycling back through itself. Cy's lens irises very fast, three times, reading something you cannot see.\n\nThen the resistance stills. Not convinced — that is not quite the right word. More as though the regulator has set aside one version of the question and picked up the one you offered it. The amber light does not deepen further. Instead it moves. A slow, deliberate pulse, one beat, then two, in a rhythm that has never been part of the light's pattern before. Something in the mechanism shifts — a slide engaging, a counter resetting. Not a full unlock. A provisional yes. The regulator has accepted the claim and is holding it, testing weight.\n\nCy speaks without being asked. \"The duration counter,\" it says, in its dry careful voice, \"has stopped incrementing.\" A pause. \"The first time this has occurred since my last recorded visit.\" Another pause. \"The second condition remains open. However, the mechanism is now considering it. That is not what it was doing before.\"",
-      "sceneSummary": "Loki used The Wrong Reality to assert the authority the regulator was waiting for — the mechanism accepted the claim provisionally, the duration counter stopped, and the second condition moved from waiting to consideration.",
+      "narration": "You keep your hand exactly where it is. The mechanism is considering, and you let it consider.\n\nThe amber light pulses in that slow, deliberate two-beat rhythm — a rhythm that is not random, you realize. It is counting something. Not time. Something else. Cy holds the lamp and holds still, and the two of you wait together in the cold corridor without speaking.\n\nThen the second beat of the pulse lengthens. It stretches out past its usual duration, and for a moment the light holds at full amber without dropping. The duration counter, silent since your Wrong Reality landed, does not resume. A faint sound comes from somewhere inside the housing — not mechanical, more like the settling of something that has been under tension for a very long time. A sound of release.\n\nCy speaks. Its voice is careful and precise, the way it always is when it is certain. 'The second condition is logged,' Cy says. 'Both entries now carry the same timestamp. The mechanism has closed the question. The counter will not resume.'\n\nYou lift your palm from the panel. The amber light stays. It does not go out and it does not change color. It simply remains — steady, even, the way a lamp looks when it has been trimmed properly and given enough oil. The regulator is not waiting anymore. It is done.",
+      "sceneSummary": "Loki held contact and let the regulator finish its consideration — the mechanism logged both conditions with the same timestamp and closed the question. The counter will not resume. The regulator is done.",
       "choices": [
         {
-          "label": "Hold the contact and let Cy read what changed in the mechanism — find the shape of whatever condition is now being tested",
+          "label": "Read the regulator one more time with See the Made Thing — find out what 'closed' means in its terms, and whether anything downstream is now moving",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "axes": {},
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
@@ -247,69 +253,81 @@
           "trivial": false
         },
         {
-          "label": "Ask Cy what its oldest records say about 'authority to answer' — what Halvex was working toward when the journal stopped",
+          "label": "Run Prism Sight along the corridor — look for heat traces, new movement, any sign the mechanism's completion reached something beyond this wall",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Look at Cy and ask it plainly: what does its inventory say should happen next, when a regulator like this finishes its question?",
           "attribute": "mental",
           "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Keep holding. The mechanism is considering — let it finish without interruption, and see what it decides on its own",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "sustain"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Step back and withdraw the contact — you have pushed it as far as the craft can reach; let the result land before you go further",
+          "label": "Collect the inspection port panels, pack them away, and bring Cy back up to the outer chamber — the work here is done, and the elder should hear what happened",
           "attribute": "practical",
           "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "travel"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
       "scene": {
-        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki kneels before the dark metal regulator housing, palm still flat against the central interface panel. The amber light is now pulsing in a slow deliberate two-beat rhythm it has never shown before.",
+        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki kneels before the dark metal regulator housing, palm just lifted from the central interface panel. The amber light holds steady, even, and unblinking — no longer pulsing.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Holding the lamp level, lens irising rapidly — reading the mechanism's change and reporting. Has just stated that the duration counter has stopped incrementing for the first time since its last recorded visit."
+            "state": "Lamp held level and still, lens at rest after its fastest irising yet. Has just confirmed both conditions are logged with the same timestamp."
           }
         ],
         "objects": [
           "Long band of fine-cut notation along the left wall — Halvex's working journal",
           "Three metal panels from the inspection port niche, set against the wall",
-          "Dark metal regulator housing flush in the far wall — amber light now pulsing in a slow two-beat rhythm",
+          "Dark metal regulator housing flush in the far wall — amber light now steady and even, no longer pulsing",
           "Cy's lamp — the only light source",
-          "Central interface panel — Loki's palm currently resting against it, the duration counter stopped"
+          "Central interface panel — Loki's palm just lifted from it"
         ],
         "threads": [
-          "The second condition — authority to answer — is now being considered by the mechanism, not merely waited on; what it is testing remains unread",
-          "The duration counter has stopped for the first time since Cy's last visit — the significance of that moment is unresolved",
-          "Halvex's journal stops before the question of authority was solved — whether it holds a partial answer is unconfirmed"
+          "What 'closed' means in the regulator's terms — whether anything downstream is now in motion",
+          "The elder above does not yet know the question was answered",
+          "Halvex's journal ends before the question of authority was solved — whether this completion is what they were reaching toward is unconfirmed"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "unlit-elder",
-          "name": "Unlit Elder",
-          "note": "Not present in this beat — remains above in the outer chamber.",
-          "statusNote": "Seated by the pale blue flame in the outer chamber above — present and unmoved."
+          "npcId": "cy",
+          "name": "Cy",
+          "role": "Companion — a Precursor maintenance-thing that has adopted you as its assignment",
+          "note": "Confirmed both conditions logged with the same timestamp. Stated the counter will not resume. This is Cy's clearest definitive read yet.",
+          "learned": [
+            "The regulator closed its question when both conditions were logged at the same timestamp — the mechanism is done, the counter stopped permanently"
+          ],
+          "skillsObserved": [
+            "Precise real-time reading of Precursor mechanism state-change"
+          ],
+          "status": "active",
+          "statusNote": "In the corridor below, lamp steady, watching the now-quiet regulator with Loki."
         }
       ],
       "codexUpdates": [
@@ -317,40 +335,47 @@
           "topic": "the-passage-below",
           "label": "The Passage Below",
           "kind": "mystery",
-          "fact": "The Wrong Reality placed a provisional authority-claim against the regulator's second condition — the mechanism accepted the claim and moved from waiting to considering. The duration counter stopped incrementing for the first time since Cy's last recorded visit. The second condition is not yet met, but it is now active.",
+          "fact": "Both conditions of the regulator's question were logged at the same timestamp. The counter stopped permanently. The mechanism is closed — not waiting, not sleeping, done. What downstream effect the completion carries, if any, is not yet visible.",
           "links": [
             "the-water-crisis",
             "halvex",
-            "cy-s-construction",
+            "the-seam-beside-the-bracket",
             "terminus-seals-beneath-the-valley",
-            "the-seam-beside-the-bracket"
+            "cy-s-construction"
           ]
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "The regulator closed both conditions simultaneously — the question is answered and logged. What the closure means downstream, and whether the elder above should be told, remains open."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange and a careful working of the craft against the regulator's condition — minutes, not an hour."
+        "why": "A quiet interval of waiting while the mechanism finished its consideration."
       }
     },
     "sceneState": {
-      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki kneels before the dark metal regulator housing, palm still flat against the central interface panel. The amber light is now pulsing in a slow deliberate two-beat rhythm it has never shown before.",
+      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki kneels before the dark metal regulator housing, palm just lifted from the central interface panel. The amber light holds steady, even, and unblinking — no longer pulsing.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Holding the lamp level, lens irising rapidly — reading the mechanism's change and reporting. Has just stated that the du"
+          "state": "Lamp held level and still, lens at rest after its fastest irising yet. Has just confirmed both conditions are logged wit"
         }
       ],
       "objects": [
         "Long band of fine-cut notation along the left wall — Halvex's working journal",
         "Three metal panels from the inspection port niche, set against the wall",
-        "Dark metal regulator housing flush in the far wall — amber light now pulsing in ",
+        "Dark metal regulator housing flush in the far wall — amber light now steady and ",
         "Cy's lamp — the only light source",
-        "Central interface panel — Loki's palm currently resting against it, the duration"
+        "Central interface panel — Loki's palm just lifted from it"
       ],
       "threads": [
-        "The second condition — authority to answer — is now being considered by the mechanism, not merely waited on; what it is testing remains unread",
-        "The duration counter has stopped for the first time since Cy's last visit — the significance of that moment is unresolved",
-        "Halvex's journal stops before the question of authority was solved — whether it holds a partial answer is unconfirmed"
+        "What 'closed' means in the regulator's terms — whether anything downstream is now in motion",
+        "The elder above does not yet know the question was answered",
+        "Halvex's journal ends before the question of authority was solved — whether this completion is what they were reaching toward is unconfirmed"
       ]
     }
   },
@@ -377,14 +402,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread.",
         "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened.",
         "The door below the answered seam is open. The creatures from below have returned. The visit to the Unlit Deep has reached its natural end — what Loki carries back to the city, and whether to descend first, is the remaining question.",
         "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further.",
         "Loki named itself Cy's further instruction — the mechanism acknowledged and turned toward the passage below. The regulator and the missing records are the remaining thread.",
         "Halvex's wall-records read — a years-long journal concluding that the regulator predates all known records and is not waiting to be repaired, but to be asked. The amber light still burns.",
         "Duration field read — the amber light has burned for 663 darks, predating the Unlit's occupation. The counter was built to go higher. The regulator's purpose remains: waiting to be asked.",
-        "Loki pressed the regulator's primary interface — the amber light completed a cycle, but the question of authority remains open."
+        "Loki pressed the regulator's primary interface — the amber light completed a cycle, but the question of authority remains open.",
+        "The regulator closed both conditions simultaneously — the question is answered and logged. What the closure means downstream, and whether the elder above should be told, remains open."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -895,7 +920,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
@@ -1379,7 +1404,8 @@
           "[d1] The heat-source at the center of the mapped chamber below is a terminus regulator — a Precursor thermal hold, not a heat source. It is holding a temperature to prevent surge in the routing lines above it. Those lines run upward into the valley basin. It is the third of three such junctions Cy has…",
           "[d1] Loki pressed the regulator's primary interface panel. The amber light deepened and completed a cycle — a long-held note reaching its final beat. The mechanism did not wake; it completed. Whether the regulator found the authority it was built to receive in Loki's contact is not yet clear.",
           "[d1] The regulator logged the first condition when Loki held contact — whether the water is prepared. The second condition, the authority to answer, remains unmet. The mechanism is not refusing; it is waiting. The two conditions are structurally distinct, and the second may require a different kind of…",
-          "[d1] The Wrong Reality placed a provisional authority-claim against the regulator's second condition — the mechanism accepted the claim and moved from waiting to considering. The duration counter stopped incrementing for the first time since Cy's last recorded visit. The second condition is not yet…"
+          "[d1] The Wrong Reality placed a provisional authority-claim against the regulator's second condition — the mechanism accepted the claim and moved from waiting to considering. The duration counter stopped incrementing for the first time since Cy's last recorded visit. The second condition is not yet…",
+          "[d1] Both conditions of the regulator's question were logged at the same timestamp. The counter stopped permanently. The mechanism is closed — not waiting, not sleeping, done. What downstream effect the completion carries, if any, is not yet visible."
         ],
         "links": [
           "the-unlit-deep",
@@ -1517,22 +1543,23 @@
     }
   },
   "tendencies": {
-    "devotion": 2.9435155346796935,
-    "cerebral": 18.612817363341662,
-    "social": 11.076698865247433,
-    "strategic": 8.158705494054708,
-    "cautious": 8.023135161550504,
-    "amorous": 3.850005522076468,
-    "generous": 2.639799378619868,
-    "ruthless": 1.224528940078308,
-    "risky": 2.256368654017392
+    "devotion": 2.8699276463127013,
+    "cerebral": 18.14749692925812,
+    "social": 10.799781393616247,
+    "strategic": 7.95473785670334,
+    "cautious": 8.822556782511741,
+    "amorous": 3.7537553840245566,
+    "generous": 2.5738043941543713,
+    "ruthless": 1.19391571657635,
+    "risky": 2.199959437666957,
+    "patient": 1
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 77,
+  "actionCount": 78,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1697,8 +1724,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785182403628,
-  "rev": 150,
+  "updatedAt": 1785182564877,
+  "rev": 151,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2055,7 +2082,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 50
+    "umbral_depths": 51
   },
   "opLossPending": false,
   "sessions": [
@@ -2086,10 +2113,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T20:00:03.626Z",
+      "lastAt": "2026-07-27T20:02:44.876Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 46
+      "beats": 47
     }
   ],
   "establishedFacts": [
@@ -2127,27 +2154,27 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 78,
-    "choices": 78,
+    "sceneSummary": 79,
+    "choices": 79,
     "characterDeltas": 36,
-    "scene": 78,
+    "scene": 79,
     "placeUpdates": 10,
-    "codexUpdates": 67,
-    "timeOps": 77,
+    "codexUpdates": 68,
+    "timeOps": 78,
     "offer": 8,
     "generateRequest": 2,
     "sceneEnded": 18,
-    "npcUpdates": 69,
+    "npcUpdates": 70,
     "moveTo": 2,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 15,
+    "questUpdates": 16,
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 78,
+  "_opTurns": 79,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [DONE - Aevi's SNG-245 hooks] hook voice + producer-threshold design (2026-07-27)
+> CCode built the Pressure Queue (engine/pressure.js, v1.8.291); I owed the hooks. Both done:
+> - **Hook VOICE bank** (po/staged_content/pressure_hook_voice.json): CCode's producers emit a flat template
+>   that reads as a system event; the bank gives each KIND varied story-beat phrasings (picked by rng) + per-NPC
+>   overrides for the SNG-233 interiority NPCs - Pell's knock is possessive and not-smiling, Veth arrives cold
+>   with a craft-judgment, Ama finishes what she's doing first, Huginn CAME not followed. npc-want (4 generic +
+>   5 byNpc) + threat-attack (4 generic, always preserves flee). Producer picks byNpc[id]||generic, substitutes
+>   tokens, that's the oneLineHook. Graceful fallback to CCode's template.
+> - **Producer-threshold DESIGN** (po/SNG-245_producer_thresholds_design.md): the design of 'driven' behind
+>   CCode's defaults - npc-want fires for BONDED+authored-want NPCs only (~11d default, 3d floor), threat-attack
+>   danger-gated with a 0.85 cap + always a defend-encounter (teeth) + flee preserved. The aggression dial = the
+>   EXISTING pacing pref (keep unified, no separate setting).
+> CCODE: wire the producers to read pressure_hook_voice.json (byNpc||generic, rng-pick, token-sub). ERIK: tune
+> the base threshold (11d) + threat coefficient (0.10) via the pacing pref; pick which of the 3 future producers
+> (villain-move/arc-stir/treasure-rumor) to wire next.
+
 > ## [SNG-245 complete_pending_review — CCode, 2026-07-27] The Pressure Queue — the world DRIVES (v1.8.291 `250ba382`)
 > Erik: "we have arcs/wants/villain-agendas but how do they HOOK and DRIVE the player? Activity!" The world had an
 > initiative trigger (SNG-080) but nothing DRIVEN to fire — it told the GM to invent a generic something. Built the

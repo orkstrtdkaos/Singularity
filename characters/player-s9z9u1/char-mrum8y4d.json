@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 3,
-  "xp": 216,
+  "xp": 221,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 96,
+  "energy": 94,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -267,94 +267,137 @@
         "player": "braid Prism Sight and See the Made Thing together to map the chamber below.  Ask Cy to brighten his light at the same time.",
         "summary": "Loki braided Prism Sight and See the Made Thing on the shelf above the deep passage — the twin-read mapped three deliberate turns of old stone, creature-traces worn by long use, and a large chamber below with a heat source at its center that reads like a maintained, very old working.",
         "narration": "You stop on the jutting shelf and plant your feet. The passage is too dark and too strange to descend blind, but it is not too dark to read.\n\nYou open both crafts at once — Prism Sight for the heat and the light-trace, See the Made Thing for the seams and the structure. The lattice crowds in hard, a noise of too much signal, and for a moment the two reads blur against each other like two voices speaking the same word at different pitches. Then they settle. Not cleanly — there is friction at the edge where each craft's attention wants to own the same surface — but enough. A shape begins to build behind your eyes.\n\nAt the same moment, you say to Cy: \"Brighten it.\"\n\nCy's lens irises wide. The lamp flares — one sharp pulse, then a steadier burn, fighting the lattice with simple honest fuel rather than craft. It does not win, but it buys you seconds.\n\nWhat the twin-read returns is this: The passage is old worked stone, not natural. Three direction-changes in the first eight meters, each turn deliberate — whoever cut this was routing around something, not following the rock's grain. The creature-traces go down the left wall in a single-file line, worn smooth, not by accident. The seam-work on the walls matches nothing the Unlit built above — different hands, different era, different intent. And below, at the edge of what the warmth-trace can reach, there is a chamber. Large. The diffuse heat that read as a spring-fed water source from above resolves into something more specific: a space that is warm from the center outward, not from one wall, not from flowing water. Something sits at the middle of it and generates heat the way a maintained thing does — steady, deliberate, very old.\n\nCy's lamp drops back to its ordinary dim. The companion clicks once and steps to your heel."
+      },
+      {
+        "player": "Mark the map in memory and ask Cy what it recognizes — a maintained heat-source this old, at a center, is Precursor work or Cy knows why it isn't",
+        "summary": "Cy identified the heat-source below as a terminus regulator — a Precursor thermal hold at the base of a routing junction that serves the lines above it. One of three such junctions beneath the valley basin was never decommissioned. Loki is standing above it.",
+        "narration": "You stand on the jutting shelf and hold the map in your mind — the three turns of old stone, the creature-traces worn into the left wall, the shape of the chamber below. The twin read is still fading at the edges of your attention, warm and precise, the way a good fire leaves light on the back of your eyelids after you look away.\n\nYou say the question plainly to Cy. \"A maintained heat-source at the center of a chamber this old. Tell me what you know.\"\n\nCy's lens irises to full and stays there. The lamp does not flicker. The companion is quiet for longer than its usual quiet — this is a different kind of pause, the kind that means it is searching something deeper than its ordinary reach. Then it speaks, and the voice is more formal than usual, old phrasing surfacing like a word you didn't know you remembered.\n\n\"Assignment,\" Cy says, \"that configuration is a terminus regulator. It is not heating the chamber. It is holding a temperature. The distinction matters.\" A single click. \"A regulator of this type is placed at the base of a routing junction to prevent thermal surge in the lines above it. The lines it serves would run upward.\" Another click, slower. \"This unit completed the inventory for that class of installation. There are three such junctions recorded beneath the valley basin. Two were decommissioned. One was not.\" The lens narrows by one degree. \"This unit believes the third one is what the assignment is standing above.\""
       }
     ],
     "lastTurn": {
-      "narration": "You stop on the jutting shelf and plant your feet. The passage is too dark and too strange to descend blind, but it is not too dark to read.\n\nYou open both crafts at once — Prism Sight for the heat and the light-trace, See the Made Thing for the seams and the structure. The lattice crowds in hard, a noise of too much signal, and for a moment the two reads blur against each other like two voices speaking the same word at different pitches. Then they settle. Not cleanly — there is friction at the edge where each craft's attention wants to own the same surface — but enough. A shape begins to build behind your eyes.\n\nAt the same moment, you say to Cy: \"Brighten it.\"\n\nCy's lens irises wide. The lamp flares — one sharp pulse, then a steadier burn, fighting the lattice with simple honest fuel rather than craft. It does not win, but it buys you seconds.\n\nWhat the twin-read returns is this: The passage is old worked stone, not natural. Three direction-changes in the first eight meters, each turn deliberate — whoever cut this was routing around something, not following the rock's grain. The creature-traces go down the left wall in a single-file line, worn smooth, not by accident. The seam-work on the walls matches nothing the Unlit built above — different hands, different era, different intent. And below, at the edge of what the warmth-trace can reach, there is a chamber. Large. The diffuse heat that read as a spring-fed water source from above resolves into something more specific: a space that is warm from the center outward, not from one wall, not from flowing water. Something sits at the middle of it and generates heat the way a maintained thing does — steady, deliberate, very old.\n\nCy's lamp drops back to its ordinary dim. The companion clicks once and steps to your heel.",
-      "sceneSummary": "Loki braided Prism Sight and See the Made Thing on the shelf above the deep passage — the twin-read mapped three deliberate turns of old stone, creature-traces worn by long use, and a large chamber below with a heat source at its center that reads like a maintained, very old working.",
+      "narration": "You stand on the jutting shelf and hold the map in your mind — the three turns of old stone, the creature-traces worn into the left wall, the shape of the chamber below. The twin read is still fading at the edges of your attention, warm and precise, the way a good fire leaves light on the back of your eyelids after you look away.\n\nYou say the question plainly to Cy. \"A maintained heat-source at the center of a chamber this old. Tell me what you know.\"\n\nCy's lens irises to full and stays there. The lamp does not flicker. The companion is quiet for longer than its usual quiet — this is a different kind of pause, the kind that means it is searching something deeper than its ordinary reach. Then it speaks, and the voice is more formal than usual, old phrasing surfacing like a word you didn't know you remembered.\n\n\"Assignment,\" Cy says, \"that configuration is a terminus regulator. It is not heating the chamber. It is holding a temperature. The distinction matters.\" A single click. \"A regulator of this type is placed at the base of a routing junction to prevent thermal surge in the lines above it. The lines it serves would run upward.\" Another click, slower. \"This unit completed the inventory for that class of installation. There are three such junctions recorded beneath the valley basin. Two were decommissioned. One was not.\" The lens narrows by one degree. \"This unit believes the third one is what the assignment is standing above.\"",
+      "sceneSummary": "Cy identified the heat-source below as a terminus regulator — a Precursor thermal hold at the base of a routing junction that serves the lines above it. One of three such junctions beneath the valley basin was never decommissioned. Loki is standing above it.",
       "choices": [
         {
-          "label": "Carry the map back to the city — what you read from this shelf is enough to bring to someone who will know what it means",
+          "label": "Take the knowledge and go up — you have what you came for, and the Unlit are still above",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
+            "careful",
             "travel"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Descend again — the map changes everything; three turns, left-wall traces, a maintained chamber. Go now while the door is open.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "risky",
-            "scout"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Go back up and tell the elder what the twin-read found — a maintained old working below their chamber, older than their doctrine. See what they say.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Mark the map in memory and ask Cy what it recognizes — a maintained heat-source this old, at a center, is Precursor work or Cy knows why it isn't",
+          "label": "Ask Cy: if the regulator is still holding temperature, what happens to the lines above if it ever fails?",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Cy which of the two decommissioned junctions it remembers — and how it remembers any of this at all",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
           "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false
+        },
+        {
+          "label": "Mark this place carefully and surface — you need to reach Tessvel before anything else, because the junction's routing lines run upward and the Intake is above",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The passage below the Unlit's outer chamber — three meters down on the jutting shelf, steep and wet, Cy's lamp at ordinary dim. The threshold above is a pale rectangle. The outer chamber with the elder and the Standing Unlit is just above.",
+        "setting": "The jutting stone shelf three meters below the Unlit's outer chamber — steep and wet, Cy's lamp at full iris, the threshold above a pale rectangle of dim light. The passage descends into cold dark below.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Lamp returned to ordinary dim, lens at half-iris, one step behind Loki's heel — clicked once after the read."
+            "state": "Lamp at full iris, lens narrowed by one degree after speaking — still and attentive at Loki's heel."
           },
           {
             "name": "Unlit Elder",
-            "state": "Above, in the outer chamber — seated by the pale blue flame, unmoved."
+            "state": "Above, seated by the pale blue flame — unmoved."
           },
           {
             "name": "Standing Unlit",
-            "state": "Above, in the outer chamber — beside the stair passage, forward-facing."
+            "state": "Above, beside the stair passage — forward-facing."
           }
         ],
         "objects": [
           "The threshold above — pale rectangle of the outer chamber's dim light",
           "The jutting stone shelf underfoot",
-          "The passage descending below — three mapped turns, left-wall creature-traces, a maintained chamber somewhere below",
-          "Cy's lamp — dimmed but burning"
+          "The passage descending below — three mapped turns, left-wall creature-traces",
+          "Cy's lamp — at full iris"
         ],
         "threads": [
-          "The mapped chamber below holds a heat source that reads like a maintained, very old working — Precursor or older",
-          "The passage is open; the door has not closed",
-          "The elder and the Standing Unlit are above, unchanged and reachable"
+          "Cy has named the heat-source: a terminus regulator, the third of three such junctions beneath the valley basin — the only one never decommissioned",
+          "The regulator holds temperature in the lines above it — the routing lines run upward toward the valley",
+          "Cy said it completed the inventory for that class of installation — but how Cy holds that record is unasked",
+          "The passage below is still open; the elder and the Standing Unlit are above"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cy",
+          "name": "Cy",
+          "note": "Identified the heat-source as a terminus regulator — a thermal hold at the base of a routing junction serving lines running upward. Stated that it completed the inventory for that class of installation. Believes this is the one of three valley-basin junctions that was never decommissioned.",
+          "learned": [
+            "Knows the classification and purpose of terminus regulators at a depth no living Enginewright holds",
+            "Holds an inventory record for this class of installation — three junctions, two decommissioned, one not",
+            "Understands the thermal-hold/heating distinction as operationally significant"
+          ],
+          "skillsObserved": [
+            "Deep Precursor classification recall",
+            "Operational inventory access"
+          ],
+          "statusNote": "On the shelf at Loki's heel, lamp at full iris, one degree narrowed after speaking."
+        }
+      ],
       "codexUpdates": [
         {
           "topic": "the-seam-beside-the-bracket",
           "label": "The Seam Beside the Bracket",
           "kind": "mystery",
-          "fact": "The passage below has three deliberate turns cut around something, not following the rock's grain. The creature-traces on the left wall are worn smooth by long and regular use. Below, a large chamber holds a heat source at its center — steady, outward-radiating warmth, the signature of something maintained and very old. Not a spring. Something that generates heat the way a working does.",
+          "fact": "The heat-source at the center of the mapped chamber below is a terminus regulator — a Precursor thermal hold, not a heat source. It is holding a temperature to prevent surge in the routing lines above it. Those lines run upward into the valley basin. It is the third of three such junctions Cy has recorded beneath the valley; the other two were decommissioned. This one was not.",
           "links": [
             "the-unlit-deep",
+            "unlit-elder",
+            "the-water-crisis",
             "terminus-seals-beneath-the-valley",
-            "the-creature-at-the-threshold",
+            "the-creature-at-the-threshold"
+          ]
+        },
+        {
+          "topic": "terminus-seals-beneath-the-valley",
+          "label": "Terminus Regulators Beneath the Valley",
+          "kind": "lore",
+          "fact": "Three Precursor terminus regulators were installed at routing junctions beneath the valley basin. Two were decommissioned. The third — below the Unlit's outer chamber — was not. It holds temperature to prevent thermal surge in the lines running upward. Cy completed the inventory for this class of installation and believes this is that third junction.",
+          "links": [
+            "the-seam-beside-the-bracket",
+            "the-unlit-deep",
             "the-water-crisis",
             "loki-thread"
           ]
@@ -362,35 +405,36 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A focused dual-craft read of the passage — minutes, not longer."
+        "why": "A deliberate pause on the shelf, twin-read fading, Cy's search and answer"
       }
     },
     "sceneState": {
-      "setting": "The passage below the Unlit's outer chamber — three meters down on the jutting shelf, steep and wet, Cy's lamp at ordinary dim. The threshold above is a pale rectangle. The outer chamber with the elder and the Standing Unlit is just above.",
+      "setting": "The jutting stone shelf three meters below the Unlit's outer chamber — steep and wet, Cy's lamp at full iris, the threshold above a pale rectangle of dim light. The passage descends into cold dark below.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Lamp returned to ordinary dim, lens at half-iris, one step behind Loki's heel — clicked once after the read."
+          "state": "Lamp at full iris, lens narrowed by one degree after speaking — still and attentive at Loki's heel."
         },
         {
           "name": "Unlit Elder",
-          "state": "Above, in the outer chamber — seated by the pale blue flame, unmoved."
+          "state": "Above, seated by the pale blue flame — unmoved."
         },
         {
           "name": "Standing Unlit",
-          "state": "Above, in the outer chamber — beside the stair passage, forward-facing."
+          "state": "Above, beside the stair passage — forward-facing."
         }
       ],
       "objects": [
         "The threshold above — pale rectangle of the outer chamber's dim light",
         "The jutting stone shelf underfoot",
-        "The passage descending below — three mapped turns, left-wall creature-traces, a ",
-        "Cy's lamp — dimmed but burning"
+        "The passage descending below — three mapped turns, left-wall creature-traces",
+        "Cy's lamp — at full iris"
       ],
       "threads": [
-        "The mapped chamber below holds a heat source that reads like a maintained, very old working — Precursor or older",
-        "The passage is open; the door has not closed",
-        "The elder and the Standing Unlit are above, unchanged and reachable"
+        "Cy has named the heat-source: a terminus regulator, the third of three such junctions beneath the valley basin — the only one never decommissioned",
+        "The regulator holds temperature in the lines above it — the routing lines run upward toward the valley",
+        "Cy said it completed the inventory for that class of installation — but how Cy holds that record is unasked",
+        "The passage below is still open; the elder and the Standing Unlit are above"
       ]
     }
   },
@@ -900,7 +944,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The pressure-gauge needle, which tapped once and stopped when Cy settled — Tessvel noticed and her pen moved toward it before she stopped…",
@@ -1378,39 +1422,58 @@
         "kind": "mystery",
         "facts": [
           "[d1] The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep…",
-          "[d1] The passage below has three deliberate turns cut around something, not following the rock's grain. The creature-traces on the left wall are worn smooth by long and regular use. Below, a large chamber holds a heat source at its center — steady, outward-radiating warmth, the signature of something…"
+          "[d1] The passage below has three deliberate turns cut around something, not following the rock's grain. The creature-traces on the left wall are worn smooth by long and regular use. Below, a large chamber holds a heat source at its center — steady, outward-radiating warmth, the signature of something…",
+          "[d1] The heat-source at the center of the mapped chamber below is a terminus regulator — a Precursor thermal hold, not a heat source. It is holding a temperature to prevent surge in the routing lines above it. Those lines run upward into the valley basin. It is the third of three such junctions Cy has…"
         ],
         "links": [
           "the-unlit-deep",
           "the-water-crisis",
           "the-creature-at-the-threshold",
-          "terminus-seals-beneath-the-valley"
+          "terminus-seals-beneath-the-valley",
+          "unlit-elder"
         ],
         "aliases": [
           "The Seam Beside the Bracket"
         ],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "terminus-seals-beneath-the-valley": {
+        "id": "terminus-seals-beneath-the-valley",
+        "label": "Terminus Regulators Beneath the Valley",
+        "kind": "lore",
+        "facts": [
+          "[d1] Three Precursor terminus regulators were installed at routing junctions beneath the valley basin. Two were decommissioned. The third — below the Unlit's outer chamber — was not. It holds temperature to prevent thermal surge in the lines running upward. Cy completed the inventory for this class of…"
+        ],
+        "links": [
+          "the-seam-beside-the-bracket",
+          "the-unlit-deep",
+          "the-water-crisis",
+          "loki-thread"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 3.3914585598233953,
-    "cerebral": 12.758946011063683,
-    "social": 15.045263925744207,
-    "strategic": 9.995642141418077,
-    "cautious": 6.88071768372913,
-    "amorous": 6.551857192353109,
-    "generous": 2.915044723554888,
-    "ruthless": 0.3820985560950746,
-    "risky": 2.7609276760253905
+    "devotion": 3.3066720958278104,
+    "cerebral": 13.43997236078709,
+    "social": 14.669132327600602,
+    "strategic": 9.745751087882626,
+    "cautious": 6.708699741635901,
+    "amorous": 6.3880607625442805,
+    "generous": 2.8421686054660156,
+    "ruthless": 0.37254609219269774,
+    "risky": 2.6919044841247555
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "charmer"
   ],
-  "actionCount": 56,
+  "actionCount": 57,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1567,8 +1630,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785170142920,
-  "rev": 127,
+  "updatedAt": 1785170314286,
+  "rev": 128,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1886,7 +1949,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 29
+    "umbral_depths": 30
   },
   "opLossPending": false,
   "sessions": [
@@ -1917,10 +1980,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T16:35:42.919Z",
+      "lastAt": "2026-07-27T16:38:34.285Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 25
+      "beats": 26
     }
   ],
   "establishedFacts": [
@@ -1958,17 +2021,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 57,
-    "choices": 57,
+    "sceneSummary": 58,
+    "choices": 58,
     "characterDeltas": 26,
-    "scene": 57,
+    "scene": 58,
     "placeUpdates": 8,
-    "codexUpdates": 47,
-    "timeOps": 56,
+    "codexUpdates": 48,
+    "timeOps": 57,
     "offer": 6,
     "generateRequest": 2,
     "sceneEnded": 14,
-    "npcUpdates": 49,
+    "npcUpdates": 50,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
@@ -1978,7 +2041,7 @@
     "stageOps": 5,
     "encounterOps": 1
   },
-  "_opTurns": 57,
+  "_opTurns": 58,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75
@@ -1986,7 +2049,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 18,
+      "see_the_made_thing": 19,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

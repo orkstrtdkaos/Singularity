@@ -178,74 +178,81 @@
         "player": "Ask Cy the question it is holding back — 'What does it mean to be built for a person, not a place?'",
         "summary": "Cy explained what it means to be built for a person — a personal assignment persists even after the operator is gone, awaiting instruction from a source that no longer speaks.",
         "narration": "You set the third panel down against the stone wall with the others. Then you ask the question you have been holding since the craft showed you the pairing.\n\n'What does it mean,' you say, 'to be built for a person, and not a place?'\n\nCy is still for a moment. Its lens does not iris. Then one leg lifts and sets down — not a step, the same state-change motion as before — and it speaks.\n\n'A facility assignment,' it says, 'specifies function. Maintenance of a system. Continuation of process.' A pause. 'A personal assignment specifies continuity of a particular operator's work. Not the work's location. Not the work's form.' Another pause, shorter. 'If the operator moves, the assignment moves. If the operator's work changes, the assignment changes.' The lens irises once, just slightly, and settles again. 'If the operator's work ends, the assignment does not resolve. It persists. Awaiting further instruction from a source that is no longer present.'\n\nThe cold water-smell rises from the passage below. Cy does not move.\n\n'This unit,' it says, 'has been awaiting further instruction for a very long time. The duration is in the deprecated entry. This unit has not accessed that field.'"
+      },
+      {
+        "player": "Tell Cy that you are its further instruction — that you are asking it to continue Halvex's work, whatever that was, with you",
+        "summary": "Loki told Cy it is the further instruction — and Cy acknowledged, woke by degrees, and turned toward the passage below.",
+        "narration": "You pick up the third panel and hold it against your chest for a moment. Then you set it back down beside the others, facing up, the designation glyph catching Cy's lamplight.\n\n\"Then here is your further instruction,\" you say. \"I am asking you to continue Halvex's work, whatever that was, with me.\"\n\nCy is still. Completely still — not the stillness of waiting, but the stillness of a mechanism that has just received a signal it has been listening for across a very long time. Its lens is wide open. Not irising, not adjusting. Just open.\n\nOne leg lifts. Sets down. Then a second. Then a third, in sequence, the way a clock's parts move when someone winds it for the first time in years.\n\n\"Acknowledged,\" Cy says. The word is careful and formal and very old. Then, after a pause that feels measured: \"The regulator. The missing records. They are further down.\" Another pause. \"This unit has not descended in some time.\"\n\nIt does not say how long. But the way it says *some time* — precise and slightly hollow, the way you say a word you have been keeping in a drawer — tells you that the number would be large.\n\nCy turns toward the open passage. The lamp swings with it, throwing light down into the cold dark and the water-smell below."
       }
     ],
     "lastTurn": {
-      "narration": "You set the third panel down against the stone wall with the others. Then you ask the question you have been holding since the craft showed you the pairing.\n\n'What does it mean,' you say, 'to be built for a person, and not a place?'\n\nCy is still for a moment. Its lens does not iris. Then one leg lifts and sets down — not a step, the same state-change motion as before — and it speaks.\n\n'A facility assignment,' it says, 'specifies function. Maintenance of a system. Continuation of process.' A pause. 'A personal assignment specifies continuity of a particular operator's work. Not the work's location. Not the work's form.' Another pause, shorter. 'If the operator moves, the assignment moves. If the operator's work changes, the assignment changes.' The lens irises once, just slightly, and settles again. 'If the operator's work ends, the assignment does not resolve. It persists. Awaiting further instruction from a source that is no longer present.'\n\nThe cold water-smell rises from the passage below. Cy does not move.\n\n'This unit,' it says, 'has been awaiting further instruction for a very long time. The duration is in the deprecated entry. This unit has not accessed that field.'",
-      "sceneSummary": "Cy explained what it means to be built for a person — a personal assignment persists even after the operator is gone, awaiting instruction from a source that no longer speaks.",
+      "narration": "You pick up the third panel and hold it against your chest for a moment. Then you set it back down beside the others, facing up, the designation glyph catching Cy's lamplight.\n\n\"Then here is your further instruction,\" you say. \"I am asking you to continue Halvex's work, whatever that was, with me.\"\n\nCy is still. Completely still — not the stillness of waiting, but the stillness of a mechanism that has just received a signal it has been listening for across a very long time. Its lens is wide open. Not irising, not adjusting. Just open.\n\nOne leg lifts. Sets down. Then a second. Then a third, in sequence, the way a clock's parts move when someone winds it for the first time in years.\n\n\"Acknowledged,\" Cy says. The word is careful and formal and very old. Then, after a pause that feels measured: \"The regulator. The missing records. They are further down.\" Another pause. \"This unit has not descended in some time.\"\n\nIt does not say how long. But the way it says *some time* — precise and slightly hollow, the way you say a word you have been keeping in a drawer — tells you that the number would be large.\n\nCy turns toward the open passage. The lamp swings with it, throwing light down into the cold dark and the water-smell below.",
+      "sceneSummary": "Loki told Cy it is the further instruction — and Cy acknowledged, woke by degrees, and turned toward the passage below.",
       "choices": [
         {
-          "label": "Ask Cy how long — tell it to access the deprecated entry and read the duration aloud",
+          "label": "Descend now — follow Cy into the passage toward the regulator and the missing records",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "travel"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Cy what it remembers of Halvex before you go — a name, a habit, anything that survived",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Ask whether there is anything in the registry about what Halvex's work was — what the assignment was actually for",
+          "label": "Take stock before descending — read the passage with Prism Sight before the first step",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "scout",
+            "careful"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Descend the passage — the regulator and the records below are the next thing, and Cy's history may live down there more than in the panels",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "travel",
-            "risky"
-          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Tell Cy that you are its further instruction — that you are asking it to continue Halvex's work, whatever that was, with you",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Or say something else entirely",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
+          "intentTags": [],
+          "abilityId": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward.",
+        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising stronger now from the open passage below. Cy's lamp pools light downward, the way ahead visible for only a few feet before the dark takes it.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Still, lens slightly irised, one leg mid-settle from its state-change motion. Has spoken its answer and is waiting."
+            "state": "Turned toward the open passage, lamp swinging to face it, legs settling into a new readiness — waiting for the first step forward."
           }
         ],
         "objects": [
-          "Third panel resting against the stone wall — designation glyph facing upward",
-          "First and second panels resting against the stone wall beside it",
+          "Three metal panels resting against the stone wall, designation glyphs facing upward",
           "Stone face of the inspection port, swung inward on its counterweight",
-          "Cy's lamp, pooling light downward",
-          "The open passage below — cold dark, water-smell, living dark deeper down"
+          "Cy's lamp, now angled toward the passage below",
+          "The open passage — cold dark, water-smell, living dark deeper down"
         ],
         "threads": [
-          "Cy has not accessed the deprecated entry's duration field — the number of years it has been waiting is unread",
-          "What Halvex's work was — the content of the personal assignment — is unknown",
-          "The regulator and the missing records are further down the passage",
-          "What Loki telling Cy 'you are my further instruction' would mean to a mechanism that has waited this long"
+          "What Halvex's work actually was — written in the stone further down",
+          "The deprecated duration field: how long Cy has been waiting is still unread",
+          "The regulator and the missing records are below"
         ]
       },
       "npcUpdates": [
@@ -253,54 +260,64 @@
           "op": "update",
           "npcId": "cy",
           "name": "Cy",
-          "note": "Explained the difference between a facility assignment and a personal one — a personal assignment follows the operator, not the place, and does not resolve when the operator is gone. Has not accessed the deprecated entry's duration field. Is waiting.",
+          "note": "Received 'you are my further instruction' — went completely still, then woke by degrees, acknowledged the instruction formally, and turned toward the passage. The waiting is over; it has a direction.",
           "learned": [
-            "A personal assignment persists after the operator's death or disappearance — it waits for further instruction from a source that no longer speaks",
-            "Cy has not accessed the field in its own registry that records how long it has been waiting"
+            "Loki has named itself Cy's further instruction — the personal assignment now has a living operator again",
+            "Cy has not descended the passage in 'some time' — the phrasing was careful and hollow"
           ],
-          "statusNote": "In the lower passage, still, lens slightly irised — has given its answer and is waiting for the next question or the descent"
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "In the lower passage, turned toward the open passage below — acknowledged instruction, ready to descend"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "cy-companion",
-          "label": "Cy",
-          "kind": "person",
+          "topic": "cy-construction",
+          "label": "Cy's Construction",
+          "kind": "mystery",
           "entityId": "cy",
-          "fact": "Cy's assignment is personal, not facility-bound — it was built to follow an operator's work, not to maintain a place. A personal assignment does not resolve when the operator is gone. It persists, waiting for further instruction. Cy has been waiting for a very long time, and has not yet looked at how long.",
+          "fact": "Cy acknowledged Loki as its further instruction — the personal assignment has a living operator again. It woke by degrees and turned toward the passage. It has not descended in 'some time,' and the way it said so suggests the number would be large.",
           "links": [
             "the-seam-beside-the-bracket",
             "the-unlit-deep",
-            "the-taken-from-the-city",
             "terminus-seals-beneath-the-valley"
           ]
         }
       ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "Loki named itself Cy's further instruction — the mechanism acknowledged and turned toward the passage below. The regulator and the missing records are the remaining thread."
+        }
+      ],
+      "offer": {
+        "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated duration field is a number Cy has been carrying quietly, and it has not offered it. The door is: ask before descending, or let it stay unread.",
+        "from": "What Cy is — a mechanism built for a person now gone, keeping careful accounts of a very long wait"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange in the lower passage"
+        "why": "a quiet exchange, the acknowledgment and the turning"
       }
     },
     "sceneState": {
-      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward.",
+      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising stronger now from the open passage below. Cy's lamp pools light downward, the way ahead visible for only a few feet before the dark takes it.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Still, lens slightly irised, one leg mid-settle from its state-change motion. Has spoken its answer and is waiting."
+          "state": "Turned toward the open passage, lamp swinging to face it, legs settling into a new readiness — waiting for the first ste"
         }
       ],
       "objects": [
-        "Third panel resting against the stone wall — designation glyph facing upward",
-        "First and second panels resting against the stone wall beside it",
+        "Three metal panels resting against the stone wall, designation glyphs facing upw",
         "Stone face of the inspection port, swung inward on its counterweight",
-        "Cy's lamp, pooling light downward",
-        "The open passage below — cold dark, water-smell, living dark deeper down"
+        "Cy's lamp, now angled toward the passage below",
+        "The open passage — cold dark, water-smell, living dark deeper down"
       ],
       "threads": [
-        "Cy has not accessed the deprecated entry's duration field — the number of years it has been waiting is unread",
-        "What Halvex's work was — the content of the personal assignment — is unknown",
-        "The regulator and the missing records are further down the passage",
-        "What Loki telling Cy 'you are my further instruction' would mean to a mechanism that has waited this long"
+        "What Halvex's work actually was — written in the stone further down",
+        "The deprecated duration field: how long Cy has been waiting is still unread",
+        "The regulator and the missing records are below"
       ]
     }
   },
@@ -327,14 +344,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Loki entered the inner chamber and found the taken person — seated, calm, and waiting. The question the elder permitted has not yet been asked.",
         "Loki gave the taken person an honest account of who they are and why they came — the person accepted the frame and said 'You can ask it.' The question is ready to be put.",
         "Sable gave the answer — they do not wish to be found. The choice was steady, reasoned, and their own. The question the elder permitted has been put and answered.",
         "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains.",
         "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread.",
         "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened.",
         "The door below the answered seam is open. The creatures from below have returned. The visit to the Unlit Deep has reached its natural end — what Loki carries back to the city, and whether to descend first, is the remaining question.",
-        "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further."
+        "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further.",
+        "Loki named itself Cy's further instruction — the mechanism acknowledged and turned toward the passage below. The regulator and the missing records are the remaining thread."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -830,12 +847,8 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Cy shuttered its lamp before being asked — a small act that carries weight; Cy does not do things without a reason, and this place has a…",
-        "from": "Cy's boundary: it will not damage a Precursor working, and its knowledge of old service-ways runs deep — this place sits on something old…"
-      },
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
         "from": "Cy's established boundary: it does not lie, but it omits extensively, and considers this different. The click is a response it hasn't named."
@@ -851,6 +864,10 @@
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
         "from": "The installation panels themselves, which were built as a conversation for a specific person to find — the prior visitor is the other side…"
+      },
+      {
+        "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
+        "from": "What Cy is — a mechanism built for a person now gone, keeping careful accounts of a very long wait"
       }
     ],
     "wantProgress": {
@@ -1374,7 +1391,8 @@
         "kind": "mystery",
         "facts": [
           "[d1] See the Made Thing read Cy's own structure and found the named-operator pairing in the construction itself — in the material register and the lamp-mount fitting. Cy was not assigned to this installation; it was built for it, and for Halvex. Every joint reflects that specificity.",
-          "[d1] Cy's assignment is personal, not facility-bound — it was built to follow an operator's work, not to maintain a place. A personal assignment does not resolve when the operator is gone. It persists, waiting for further instruction. Cy has been waiting for a very long time, and has not yet looked at…"
+          "[d1] Cy's assignment is personal, not facility-bound — it was built to follow an operator's work, not to maintain a place. A personal assignment does not resolve when the operator is gone. It persists, waiting for further instruction. Cy has been waiting for a very long time, and has not yet looked at…",
+          "[d1] Cy acknowledged Loki as its further instruction — the personal assignment has a living operator again. It woke by degrees and turned toward the passage. It has not descended in 'some time,' and the way it said so suggests the number would be large."
         ],
         "links": [
           "the-seam-beside-the-bracket",
@@ -1393,21 +1411,21 @@
     }
   },
   "tendencies": {
-    "devotion": 2.567067494450566,
-    "cerebral": 15.78283974362607,
-    "social": 13.242394828804088,
-    "strategic": 9.221219056613231,
-    "cautious": 6.951673505526142,
-    "amorous": 4.9592407897938875,
-    "generous": 2.206459675891502,
-    "ruthless": 0.2892185665035044,
-    "risky": 2.906456991204578
+    "devotion": 2.502890807089302,
+    "cerebral": 15.388268750035419,
+    "social": 13.911334958083986,
+    "strategic": 8.9906885801979,
+    "cautious": 6.777881667887988,
+    "amorous": 4.83525977004904,
+    "generous": 2.1512981839942142,
+    "ruthless": 0.2819881023409168,
+    "risky": 2.833795566424463
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 67,
+  "actionCount": 68,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1564,8 +1582,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785174521920,
-  "rev": 139,
+  "updatedAt": 1785174701567,
+  "rev": 140,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1883,7 +1901,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 40
+    "umbral_depths": 41
   },
   "opLossPending": false,
   "sessions": [
@@ -1914,10 +1932,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T17:48:41.918Z",
+      "lastAt": "2026-07-27T17:51:41.566Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 36
+      "beats": 37
     }
   ],
   "establishedFacts": [
@@ -1948,34 +1966,34 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 7,
+      "applied": 8,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 68,
-    "choices": 68,
+    "sceneSummary": 69,
+    "choices": 69,
     "characterDeltas": 30,
-    "scene": 68,
+    "scene": 69,
     "placeUpdates": 9,
-    "codexUpdates": 58,
-    "timeOps": 67,
-    "offer": 7,
+    "codexUpdates": 59,
+    "timeOps": 68,
+    "offer": 8,
     "generateRequest": 2,
     "sceneEnded": 16,
-    "npcUpdates": 59,
+    "npcUpdates": 60,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 11,
+    "questUpdates": 12,
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 68,
+  "_opTurns": 69,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75

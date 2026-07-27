@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## [DONE + spec] SNG-243 the Made Gate's destinations + waygate network (Aevi, 2026-07-25)
+> Erik asked the GM "does my made gate go to the Crossing?" - the GM IMPROVISED because the quest never authored
+> WHERE THE GATE GOES. Closed it:
+> - **DONE (Aevi):** authored the finished outcome's gate as a real travel node - the_crossing by DEFAULT (the
+>   father's long passage, the hub at r=0.00) + Stillwater's Trouble site by INTENT. CANON CARE: "Stillwater" is
+>   VETH's Raven name (live-play canon), so the intent-fold ties Silas's father's work to his bond with Veth -
+>   not a settlement. networkCapable. CI green. Erik's "Crossing by default, another by intent" memory is now REAL.
+> - CCODE: §3 consume the waygate effect -> a travelable node with default/intent connections (using the gate
+>   with no target = Crossing; naming a target = Stillwater); §4 the gate-to-gate NETWORK we discussed (SNG-148
+>   realized: attunement, hub-and-spoke from the Crossing, a travel cost - the Made Gate is Silas's first personal
+>   spoke). The Pale March/Stillwater site may need a resolvable location id (flag/author - a SNG-232 seam).
+> ERIK: is the Stillwater fold immediate or unlocks with Veth's thread (latter is richer); network cost dial;
+> ship the 2 destinations now + network as follow-on? Full: SPEC_SNG-243.
+
 > ## [SNG-242 §5 complete_pending_review — CCode, 2026-07-26] Player-chosen narration quality: a Setting + toggle + state-safe retell (v1.8.283 `bea9ab2b`)
 > Erik: "let the player pick a better description" + "make it a setting I can use." Built the §5 headline (the
 > player quality-lever). MODEL_MAP gained gm-narrate-rich (flagship, 12k) + gm-retell (4k); standard gm-narrate

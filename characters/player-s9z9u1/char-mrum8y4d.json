@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 2,
-  "xp": 108,
+  "xp": 110,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -62,7 +62,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 104,
+  "energy": 103,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -138,66 +138,70 @@
         "player": "Move forward but say nothing yet — read the chamber, read the elder, find the seam before speaking.",
         "summary": "Loki approached the elder in silence, read the chamber, and found the oldest seam in the room before the elder spoke.",
         "narration": "You walk forward. Thirty feet of worked stone pass under your boots, each step quieter than the last, because the chamber asks for quiet and you have enough sense to give it.\n\nThe pale blue flame does not move this time. It burns in its stone bowl without bending, without reaching, a color that is almost not a color — less a light than the memory of one. By it, the elder sits. You can see the robe now, darker than the Standing Unlit's, worn at the hem. Hands rest on the knees. The face is still below the hood, but the posture is one you recognize: the posture of someone who has been waiting a very long time and has made their peace with waiting.\n\nYou look for the seam — the thing the chamber is built around, the thing the elder is holding. The stone is old and the wear is even, which means people have sat here before you, many of them, and they all sat in roughly the same spot. Not petitioners. Students, maybe. Or the surrendered. The blue flame has no wick you can find and no fuel-source you can name, and Cy's lens has been tracking it since you entered, slowly, the way Cy tracks things it recognizes and will not explain. One of the lantern-brackets on the left wall has a seam in the stone around it that does not match the age of the bracket — something was there before the bracket, and the bracket was fitted over it. That seam is the oldest thing in this room.\n\nThe elder's hands move once, a small gesture, like a period at the end of a sentence that has not yet been spoken. Then a voice — quieter than the Standing Unlit's, worn to its work — says: \"Sit, if you want to. Or stand. It makes no difference here.\""
+      },
+      {
+        "player": "Ask about the seam in the stone — the thing the bracket was fitted over. What was here before?",
+        "summary": "Loki asked about the seam in the stone — the elder declined, gently but absolutely, and the audience continues.",
+        "narration": "You let the silence hold one beat longer, and then you ask. Your voice is quiet, and you aim it at the elder rather than the chamber. You say there is a seam in the stone behind the left-wall bracket — older than the bracket itself, older than the lantern that was never lit in it. You ask what was fitted there before.\n\nThe elder does not answer immediately. The pale blue flame burns without bending, and the hood does not rise. When the elder finally speaks, the voice is worn smooth to its purpose, and it is not unkind. \"That question,\" the elder says, \"belongs to the chamber. Not to a visitor.\"\n\nIt is not a rebuke. It is a door, closed gently. The elder's hands rest on the knees, unchanged. The posture says: the audience has not ended. Something else was invited here, and the seam was not it."
       }
     ],
     "lastTurn": {
-      "narration": "You walk forward. Thirty feet of worked stone pass under your boots, each step quieter than the last, because the chamber asks for quiet and you have enough sense to give it.\n\nThe pale blue flame does not move this time. It burns in its stone bowl without bending, without reaching, a color that is almost not a color — less a light than the memory of one. By it, the elder sits. You can see the robe now, darker than the Standing Unlit's, worn at the hem. Hands rest on the knees. The face is still below the hood, but the posture is one you recognize: the posture of someone who has been waiting a very long time and has made their peace with waiting.\n\nYou look for the seam — the thing the chamber is built around, the thing the elder is holding. The stone is old and the wear is even, which means people have sat here before you, many of them, and they all sat in roughly the same spot. Not petitioners. Students, maybe. Or the surrendered. The blue flame has no wick you can find and no fuel-source you can name, and Cy's lens has been tracking it since you entered, slowly, the way Cy tracks things it recognizes and will not explain. One of the lantern-brackets on the left wall has a seam in the stone around it that does not match the age of the bracket — something was there before the bracket, and the bracket was fitted over it. That seam is the oldest thing in this room.\n\nThe elder's hands move once, a small gesture, like a period at the end of a sentence that has not yet been spoken. Then a voice — quieter than the Standing Unlit's, worn to its work — says: \"Sit, if you want to. Or stand. It makes no difference here.\"",
-      "sceneSummary": "Loki approached the elder in silence, read the chamber, and found the oldest seam in the room before the elder spoke.",
+      "narration": "You let the silence hold one beat longer, and then you ask. Your voice is quiet, and you aim it at the elder rather than the chamber. You say there is a seam in the stone behind the left-wall bracket — older than the bracket itself, older than the lantern that was never lit in it. You ask what was fitted there before.\n\nThe elder does not answer immediately. The pale blue flame burns without bending, and the hood does not rise. When the elder finally speaks, the voice is worn smooth to its purpose, and it is not unkind. \"That question,\" the elder says, \"belongs to the chamber. Not to a visitor.\"\n\nIt is not a rebuke. It is a door, closed gently. The elder's hands rest on the knees, unchanged. The posture says: the audience has not ended. Something else was invited here, and the seam was not it.",
+      "sceneSummary": "Loki asked about the seam in the stone — the elder declined, gently but absolutely, and the audience continues.",
       "choices": [
         {
-          "label": "Sit. Let the elder set the pace — ask about the taken person only when there is an opening.",
+          "label": "Ask what the Unlit have brought down from the city — the real reason you came.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "negotiate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Sit, then ask directly: who was brought down from the city, and why.",
-          "attribute": "social",
-          "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "plan"
+            "negotiate"
           ],
           "trivial": false
         },
         {
-          "label": "Ask about the seam in the stone — the thing the bracket was fitted over. What was here before?",
+          "label": "Let the elder guide the conversation — wait for them to name their purpose first.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask about Cy — the elder granted passage because of it; press that thread directly.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Use See the Made Thing to read the blue flame — no wick, no fuel, and it does not move.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
           "abilityId": "see_the_made_thing",
+          "energyCost": 1,
           "trivial": false
-        },
-        {
-          "label": "Say nothing yet. Let Cy's lens finish its slow tracking of the blue flame — then ask what it found.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The outer chamber of the Unlit Deep — worked stone floor, worn evenly by many visitors, ceiling invisible, empty lantern-brackets. The pale blue flame burns without wick or fuel in its stone bowl roughly thirty feet from the entrance. Early morning, no external light. Loki has crossed the chamber and stands near the elder.",
+        "setting": "The outer chamber of the Unlit Deep — worked stone floor worn evenly by many visitors, ceiling invisible, empty lantern-brackets. The pale blue flame burns without wick or fuel in its stone bowl. Early morning, no external light. Loki stands near the elder.",
         "npcsPresent": [
           {
             "name": "Unlit Elder",
-            "state": "Seated by the pale blue flame, robed, hands on knees, face still below the hood. Has just spoken — waiting."
+            "state": "Seated by the pale blue flame, hands on knees, hood still lowered over the face. Has just spoken — the door on the seam question is closed, gently. Waiting."
           },
           {
             "name": "Standing Unlit",
-            "state": "Remained near the passage behind, watching, hands lowered, motionless."
+            "state": "Remained near the passage behind, hands lowered, motionless, watching."
           },
           {
             "name": "Cy",
@@ -208,7 +212,7 @@
           "Blue flame in a stone bowl — pale, almost colorless, no visible wick or fuel",
           "Empty lantern-brackets on the walls",
           "Worked stone floor, worn smooth and evenly across many visitors",
-          "One lantern-bracket on the left wall with a seam in the stone around it — older than the bracket; something was there before it",
+          "One lantern-bracket on the left wall with a seam in the stone around it — older than the bracket; something was there first",
           "Cy's shuttered lamp"
         ],
         "threads": [
@@ -216,8 +220,7 @@
           "Why Cy shuttered its lamp before the bottom step without being asked",
           "The elder's face — still below the hood",
           "What the blue flame burns on — no wick, no fuel visible",
-          "The seam behind the left-wall bracket — older than the bracket; something was there first",
-          "What Cy's lens is tracking in the flame — recognition, not curiosity"
+          "The seam behind the left-wall bracket — the elder closed that question; it did not disappear"
         ]
       },
       "npcUpdates": [
@@ -225,19 +228,11 @@
           "op": "update",
           "npcId": "unlit-elder",
           "name": "Unlit Elder",
-          "note": "Invited Loki to sit or stand — made the first social opening; still hooded, face unseen.",
-          "statusNote": "Seated by the pale blue flame in the outer chamber; has opened the audience formally.",
+          "note": "Declined Loki's question about the seam — 'that question belongs to the chamber, not to a visitor.' Gently, without hostility. The audience continues.",
           "learned": [
-            "Gestures economically — a small hand-movement like punctuation",
-            "Has seen many visitors in this spot; posture suggests students or the surrendered, not petitioners"
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "standing-unlit",
-          "name": "Standing Unlit",
-          "note": "Remained at the passage entrance; did not follow Loki forward.",
-          "statusNote": "Stationed near the passage, watching from behind."
+            "The seam is not a topic the elder will open to a visitor; the deflection was economical and absolute, with no anger in it"
+          ],
+          "statusNote": "Seated by the pale blue flame in the outer chamber; the audience is still open but the seam question is closed."
         }
       ],
       "codexUpdates": [
@@ -245,7 +240,8 @@
           "topic": "the-unlit-deep",
           "label": "The Unlit Deep",
           "kind": "place",
-          "fact": "The outer chamber floor is worn evenly across its full width — many visitors, all sitting in the same spot. The lantern-bracket on the left wall has a seam in the surrounding stone that predates the bracket itself; something else was fitted there before it. The blue flame has no visible wick or fuel source.",
+          "entityId": "unlit-elder",
+          "fact": "The elder declined to speak about the seam in the stone — 'that question belongs to the chamber, not to a visitor.' The refusal was gentle but absolute, with no hostility in it. The seam exists and is real; the elder knows what it is and has chosen not to say.",
           "links": [
             "the-unlit",
             "unlit-elder",
@@ -253,21 +249,25 @@
           ]
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet approach across the chamber and a brief opening exchange."
+        "why": "a short exchange in the outer chamber"
       }
     },
     "sceneState": {
-      "setting": "The outer chamber of the Unlit Deep — worked stone floor, worn evenly by many visitors, ceiling invisible, empty lantern-brackets. The pale blue flame burns without wick or fuel in its stone bowl roughly thirty feet from the entrance. Early morning, no external light. Loki has crossed the chamber and stands near the elder.",
+      "setting": "The outer chamber of the Unlit Deep — worked stone floor worn evenly by many visitors, ceiling invisible, empty lantern-brackets. The pale blue flame burns without wick or fuel in its stone bowl. Early morning, no external light. Loki stands near the elder.",
       "npcsPresent": [
         {
           "name": "Unlit Elder",
-          "state": "Seated by the pale blue flame, robed, hands on knees, face still below the hood. Has just spoken — waiting."
+          "state": "Seated by the pale blue flame, hands on knees, hood still lowered over the face. Has just spoken — the door on the seam "
         },
         {
           "name": "Standing Unlit",
-          "state": "Remained near the passage behind, watching, hands lowered, motionless."
+          "state": "Remained near the passage behind, hands lowered, motionless, watching."
         },
         {
           "name": "Cy",
@@ -286,7 +286,7 @@
         "Why Cy shuttered its lamp before the bottom step without being asked",
         "The elder's face — still below the hood",
         "What the blue flame burns on — no wick, no fuel visible",
-        "The seam behind the left-wall bracket — older than the bracket; something was there first"
+        "The seam behind the left-wall bracket — the elder closed that question; it did not disappear"
       ]
     }
   },
@@ -430,13 +430,15 @@
       "relationship": 1,
       "history": [
         "[d1] Spoke for the first time when Loki's framing landed — ordered the Standing Unlit to let Cy pass, and granted Loki an audience.",
-        "[d1] Invited Loki to sit or stand — made the first social opening; still hooded, face unseen."
+        "[d1] Invited Loki to sit or stand — made the first social opening; still hooded, face unseen.",
+        "[d1] Declined Loki's question about the seam — 'that question belongs to the chamber, not to a visitor.' Gently, without hostility. The audience continues."
       ],
       "knownFacts": [
         "Commands the Standing Unlit; their word is final here.",
         "Chose to hear Loki rather than dismiss — the truth in the right shape reached them.",
         "Gestures economically — a small hand-movement like punctuation",
-        "Has seen many visitors in this spot; posture suggests students or the surrendered, not petitioners"
+        "Has seen many visitors in this spot; posture suggests students or the surrendered, not petitioners",
+        "The seam is not a topic the elder will open to a visitor; the deflection was economical and absolute, with no anger in it"
       ],
       "skillsObserved": [
         "Absolute stillness",
@@ -445,7 +447,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber; has opened the audience formally.",
+      "statusNote": "Seated by the pale blue flame in the outer chamber; the audience is still open but the seam question is closed.",
       "domains": {
         "primary": "umbral"
       },
@@ -634,7 +636,7 @@
     "lastSharedReadAt": "2026-07-27T13:00:02.886Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -965,10 +967,16 @@
         "label": "Unlit Elder",
         "kind": "person",
         "facts": [
-          "[d1] Seated elder of the Unlit Deep's outer chamber"
+          "[d1] Seated elder of the Unlit Deep's outer chamber",
+          "[d1] The elder declined to speak about the seam in the stone — 'that question belongs to the chamber, not to a visitor.' The refusal was gentle but absolute, with no hostility in it. The seam exists and is real; the elder knows what it is and has chosen not to say."
         ],
-        "links": [],
-        "aliases": [],
+        "links": [
+          "the-unlit",
+          "the-taken-from-the-city"
+        ],
+        "aliases": [
+          "The Unlit Deep"
+        ],
         "createdDay": 1,
         "entityId": "unlit-elder",
         "updatedDay": 1
@@ -976,20 +984,20 @@
     }
   },
   "tendencies": {
-    "devotion": 5.919499243960609,
-    "cerebral": 9.833386906428434,
-    "social": 15.010573160629324,
-    "strategic": 5.902312067380871,
-    "cautious": 5.088192233157517,
-    "amorous": 11.435703256445423,
-    "generous": 1.176206666659876,
-    "ruthless": 0.6669201684248254
+    "devotion": 5.771511762861594,
+    "cerebral": 10.587552233767722,
+    "social": 14.63530883161359,
+    "strategic": 5.754754265696349,
+    "cautious": 4.960987427328579,
+    "amorous": 11.149810675034287,
+    "generous": 1.146801499993379,
+    "ruthless": 0.6502471642142047
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 34,
+  "actionCount": 35,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1131,8 +1139,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785158215459,
-  "rev": 82,
+  "updatedAt": 1785158965453,
+  "rev": 83,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1450,7 +1458,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 5
+    "umbral_depths": 6
   },
   "opLossPending": false,
   "sessions": [
@@ -1481,10 +1489,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T13:16:55.455Z",
+      "lastAt": "2026-07-27T13:29:25.450Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -1504,17 +1512,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 34,
-    "choices": 34,
-    "characterDeltas": 12,
-    "scene": 34,
+    "sceneSummary": 35,
+    "choices": 35,
+    "characterDeltas": 13,
+    "scene": 35,
     "placeUpdates": 3,
-    "codexUpdates": 25,
-    "timeOps": 33,
+    "codexUpdates": 26,
+    "timeOps": 34,
     "offer": 3,
     "generateRequest": 2,
     "sceneEnded": 10,
-    "npcUpdates": 28,
+    "npcUpdates": 29,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
@@ -1522,7 +1530,7 @@
     "standingOps": 1,
     "factUpdates": 1
   },
-  "_opTurns": 34,
+  "_opTurns": 35,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -1530,7 +1538,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 9,
+      "see_the_made_thing": 10,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

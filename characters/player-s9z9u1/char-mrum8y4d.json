@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 3,
-  "xp": 201,
+  "xp": 203,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -27,7 +27,7 @@
     },
     {
       "abilityId": "see_the_made_thing",
-      "level": 1,
+      "level": 2,
       "native": true
     },
     {
@@ -71,7 +71,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 105,
+  "energy": 101,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -257,82 +257,111 @@
         "player": null,
         "summary": "The glass-stalker yielded without a blow struck — the chamber returned to its ordinary stillness, the elder unmoved, the passage below still open. Loki stands at the threshold between what was found here and what comes next.",
         "narration": "The glass-stalker stops.\n\nNot a retreat — a pause. The wrongness in the air holds its geometry for one long breath, the gap in the pale flame's fall neither advancing nor withdrawing. Then, slowly, it folds. The correction the room has been making around it simply ceases, and the chamber is only itself again — worked stone, one flame, the smell of deep water rising from the open passage at your back.\n\nCy's legs unlock one by one, the lamp settling on its hook, the lens closing by half-degrees until it reaches something close to its ordinary aperture. The companion does not speak. It repositions itself one step closer to your heel and stays there.\n\nThe elder has not moved. The Standing Unlit has not moved. Neither of them marks the end of it with any gesture you can read — the thing came, the thing yielded, and the chamber holds that fact the way it holds everything else: without commentary. You are standing at the mouth of an open passage that smells of cold water and old stone. You have learned a name, opened a door, and declined to be eaten, all in the same morning. The Unlit Deep has nothing more to give you right now, and it knows it, and it is content."
+      },
+      {
+        "player": "Descend through the open passage — into the cold dark below the Unlit's chamber",
+        "summary": "Loki descended into the passage below the Unlit's chamber and was turned back by the dark — the grade shifted without warning, the lattice crowded Cy's lamp to near-nothing, and the stone gave no hold. The visit to the Unlit Deep has run its full course: what Loki carries out is what there is.",
+        "narration": "You step into the passage and the dark takes you immediately.\n\nNot the managed dark of the Unlit's chamber — that space has the pale blue flame and the measured stillness of a doctrine. This dark has weight. The cold comes up through your boots before you have taken three steps, and the smell of deep water grows from a suggestion into a fact. The walls press close. Your hand finds the left side and the stone is slick, not from moisture but from age — worn smooth by something passing here for longer than the Unlit have been keeping their doctrine above.\n\nCy's lamp flares, then dims. Not a failure of oil — a dimming that comes from outside the lamp, the lattice here so thick and strange that it crowds the small light back on itself. The lens irises wide and stays wide, which is Cy working, and then Cy clicks once, short and sharp. It is not an alarm sound. It is a stopped sound — the sound of the mechanism reaching the edge of what it was made for.\n\nYour foot finds the next step and it is not there. The grade changes without warning. Your weight goes forward and you catch the wall, but the slick stone gives you nothing and for one bad moment you are sliding — boots finding no purchase, one hand dragging on wet rock — before you fetch up hard against a jutting shelf of stone that stops you at the hip. Not a fall. Close enough to count.\n\nYou are three meters below the threshold. The passage above is a dim rectangle. The elder's chamber and the pale blue flame and the Standing Unlit are up there, unchanged. Below, the passage continues — you can smell it, you can feel the larger space the air is falling toward — but the stone underfoot is unreadable in Cy's crowded light and there is nothing to hold.\n\nCy clicks again. This one means: the current assignment has stopped moving. It is technically a question."
       }
     ],
     "lastTurn": {
-      "narration": "The glass-stalker stops.\n\nNot a retreat — a pause. The wrongness in the air holds its geometry for one long breath, the gap in the pale flame's fall neither advancing nor withdrawing. Then, slowly, it folds. The correction the room has been making around it simply ceases, and the chamber is only itself again — worked stone, one flame, the smell of deep water rising from the open passage at your back.\n\nCy's legs unlock one by one, the lamp settling on its hook, the lens closing by half-degrees until it reaches something close to its ordinary aperture. The companion does not speak. It repositions itself one step closer to your heel and stays there.\n\nThe elder has not moved. The Standing Unlit has not moved. Neither of them marks the end of it with any gesture you can read — the thing came, the thing yielded, and the chamber holds that fact the way it holds everything else: without commentary. You are standing at the mouth of an open passage that smells of cold water and old stone. You have learned a name, opened a door, and declined to be eaten, all in the same morning. The Unlit Deep has nothing more to give you right now, and it knows it, and it is content.",
-      "sceneSummary": "The glass-stalker yielded without a blow struck — the chamber returned to its ordinary stillness, the elder unmoved, the passage below still open. Loki stands at the threshold between what was found here and what comes next.",
+      "narration": "You step into the passage and the dark takes you immediately.\n\nNot the managed dark of the Unlit's chamber — that space has the pale blue flame and the measured stillness of a doctrine. This dark has weight. The cold comes up through your boots before you have taken three steps, and the smell of deep water grows from a suggestion into a fact. The walls press close. Your hand finds the left side and the stone is slick, not from moisture but from age — worn smooth by something passing here for longer than the Unlit have been keeping their doctrine above.\n\nCy's lamp flares, then dims. Not a failure of oil — a dimming that comes from outside the lamp, the lattice here so thick and strange that it crowds the small light back on itself. The lens irises wide and stays wide, which is Cy working, and then Cy clicks once, short and sharp. It is not an alarm sound. It is a stopped sound — the sound of the mechanism reaching the edge of what it was made for.\n\nYour foot finds the next step and it is not there. The grade changes without warning. Your weight goes forward and you catch the wall, but the slick stone gives you nothing and for one bad moment you are sliding — boots finding no purchase, one hand dragging on wet rock — before you fetch up hard against a jutting shelf of stone that stops you at the hip. Not a fall. Close enough to count.\n\nYou are three meters below the threshold. The passage above is a dim rectangle. The elder's chamber and the pale blue flame and the Standing Unlit are up there, unchanged. Below, the passage continues — you can smell it, you can feel the larger space the air is falling toward — but the stone underfoot is unreadable in Cy's crowded light and there is nothing to hold.\n\nCy clicks again. This one means: the current assignment has stopped moving. It is technically a question.\n\n*▲ Practiced — **See the Made Thing** is fluent now (rank 2), earned through use.*",
+      "sceneSummary": "Loki descended into the passage below the Unlit's chamber and was turned back by the dark — the grade shifted without warning, the lattice crowded Cy's lamp to near-nothing, and the stone gave no hold. The visit to the Unlit Deep has run its full course: what Loki carries out is what there is.",
       "choices": [
         {
-          "label": "Descend through the open passage — into the cold dark below the Unlit's chamber",
+          "label": "Climb back up — the passage wants more preparation than this; leave the Unlit Deep and take what was found back to the city",
           "attribute": "physical",
           "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "risky",
-            "travel"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Leave the Unlit Deep and carry what was learned back to the city — Sable's answer, the open door, and all of it",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "careful",
             "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Speak one last thing to the elder before going — name what was found below the seam and ask if they expected it",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Use Prism Sight one more time — read the chamber now that the glass-stalker is gone, see what trace it left",
+          "label": "Climb back up — but pause at the threshold and use Prism Sight to read the deeper dark one more time before the door closes",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "axes": {
+            "dark_light": -0.3
+          },
+          "difficulty": 15,
           "intentTags": [
             "scout",
             "study"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Climb back, take a moment at the threshold to breathe and read the passage with See the Made Thing — find what it was built for, if it was built at all",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cy — out loud, hand on the wall — what it sees down there that you don't",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands fully open, passage descending into old dark behind Loki. Morning, no natural light. The glass-stalker is gone — the wrongness in the light has ceased.",
+        "setting": "The passage below the Unlit's outer chamber — three meters down, steep and wet, Cy's lamp crowded dim by the dense lattice. The threshold above is visible as a pale rectangle. The outer chamber with the elder and the Standing Unlit is just above.",
         "npcsPresent": [
           {
+            "name": "Cy",
+            "state": "Lens wide, lamp dimmed, legs still — has clicked twice; waiting for the assignment to decide"
+          },
+          {
             "name": "Unlit Elder",
-            "state": "Seated by the pale blue flame, hands in lap. Has not moved. Has not spoken."
+            "state": "Above, in the outer chamber — seated, unmoved, silent"
           },
           {
             "name": "Standing Unlit",
-            "state": "Beside the stair passage. Still. Forward-facing. Neither marking the glass-stalker's departure nor ignoring it — simply present."
-          },
-          {
-            "name": "Cy",
-            "state": "Lens at half-aperture, repositioned one step closer to Loki's heel. Lamp settled. Still watchful."
+            "state": "Above, in the outer chamber — beside the stair passage, forward-facing"
           }
         ],
         "objects": [
-          "The pale blue flame — bracket-mounted, burning, no wick",
-          "The seam in the stone beside the bracket — fully open, passage descending beyond",
-          "The passage to the inner chamber — gap in worked stone, no door"
+          "The threshold above — pale rectangle of the outer chamber's dim light",
+          "The jutting stone shelf that stopped Loki's slide",
+          "The passage descending further below — smelling of cold water and living things",
+          "Cy's lamp — dimmed but burning"
         ],
         "threads": [
-          "The passage below remains open — the choice to descend or depart is still present",
-          "The elder has not spoken since the glass-stalker appeared — their silence is not discomfort"
+          "The passage below is still open — the descent failed, not the door",
+          "The elder and the Standing Unlit are above, unchanged — the outer chamber is reachable"
         ]
       },
       "npcUpdates": [
@@ -340,62 +369,65 @@
           "op": "update",
           "npcId": "standing-unlit",
           "name": "Standing Unlit",
-          "note": "Did not react to the glass-stalker's yielding — the event closed the same way it opened, without alarm or acknowledgment",
-          "statusNote": "Beside the stair passage, still and forward-facing; the glass-stalker's departure was not their concern",
-          "status": "active"
+          "note": "Did not react to Loki's descent attempt or the sounds of the slide — the passage event is closed for them as before",
+          "statusNote": "In the outer chamber above, beside the stair passage, still and forward-facing"
         },
         {
           "op": "update",
           "npcId": "unlit-elder",
           "name": "Unlit Elder",
-          "note": "Did not move or speak through the glass-stalker encounter or its yielding",
-          "statusNote": "Seated by the pale blue flame — present and unmoved; the chamber's business is closed for now",
-          "status": "active"
+          "note": "Has not moved through the descent attempt — the chamber's business is closed",
+          "statusNote": "Seated by the pale blue flame in the outer chamber above — present and unmoved"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-glass-stalker",
-          "label": "The Glass-Stalker",
+          "topic": "the-seam-beside-the-bracket",
+          "label": "The Passage Below",
           "kind": "mystery",
-          "fact": "The glass-stalker yielded without engagement — it paused, held, then withdrew. The Unlit marked none of it. Whatever governs it was satisfied by something Loki did or did not do.",
+          "fact": "The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep water is a fact, not a suggestion, and the larger space below is real — but this descent requires more than a single attempt.",
           "links": [
             "the-unlit-deep",
-            "the-unlit",
-            "standing-unlit",
-            "the-seam-beside-the-bracket"
+            "the-water-crisis",
+            "the-creature-at-the-threshold",
+            "terminus-seals-beneath-the-valley"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief stillness after the encounter resolved"
+        "why": "a brief failed descent and recovery — minutes, not a long effort"
+      },
+      "offer": {
+        "thing": "Cy's click in the dark — not alarm, not report; a question shaped like an old maintenance protocol, aimed at nothing Loki can see",
+        "from": "Cy's boundary: it will not explain what it knows, because it does not know that it knows it — but something in the passage below matches a procedure it cannot name"
       }
     },
     "sceneState": {
-      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands fully open, passage descending into old dark behind Loki. Morning, no natural light. The glass-stalker is gone — the wrongness in the light has ceased.",
+      "setting": "The passage below the Unlit's outer chamber — three meters down, steep and wet, Cy's lamp crowded dim by the dense lattice. The threshold above is visible as a pale rectangle. The outer chamber with the elder and the Standing Unlit is just above.",
       "npcsPresent": [
         {
+          "name": "Cy",
+          "state": "Lens wide, lamp dimmed, legs still — has clicked twice; waiting for the assignment to decide"
+        },
+        {
           "name": "Unlit Elder",
-          "state": "Seated by the pale blue flame, hands in lap. Has not moved. Has not spoken."
+          "state": "Above, in the outer chamber — seated, unmoved, silent"
         },
         {
           "name": "Standing Unlit",
-          "state": "Beside the stair passage. Still. Forward-facing. Neither marking the glass-stalker's departure nor ignoring it — simply "
-        },
-        {
-          "name": "Cy",
-          "state": "Lens at half-aperture, repositioned one step closer to Loki's heel. Lamp settled. Still watchful."
+          "state": "Above, in the outer chamber — beside the stair passage, forward-facing"
         }
       ],
       "objects": [
-        "The pale blue flame — bracket-mounted, burning, no wick",
-        "The seam in the stone beside the bracket — fully open, passage descending beyond",
-        "The passage to the inner chamber — gap in worked stone, no door"
+        "The threshold above — pale rectangle of the outer chamber's dim light",
+        "The jutting stone shelf that stopped Loki's slide",
+        "The passage descending further below — smelling of cold water and living things",
+        "Cy's lamp — dimmed but burning"
       ],
       "threads": [
-        "The passage below remains open — the choice to descend or depart is still present",
-        "The elder has not spoken since the glass-stalker appeared — their silence is not discomfort"
+        "The passage below is still open — the descent failed, not the door",
+        "The elder and the Standing Unlit are above, unchanged — the outer chamber is reachable"
       ]
     }
   },
@@ -567,7 +599,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d1] Remained at the passage entrance; did not follow Loki forward.",
         "[d1] Remains beside the stair passage. Something the engine has flagged is near that exit.",
         "[d1] Has remained beside the stair passage throughout. Has not spoken since stepping aside.",
         "[d1] Remained motionless beside the stair passage throughout the Prism Sight attempt and Cy's tap. Has not spoken.",
@@ -576,7 +607,8 @@
         "[d1] The creatures passed. The Standing Unlit faces forward again — the passage event is closed for them.",
         "[d1] Remained still and forward-facing through the passage read. The creatures' return and the open door are both closed matters for them.",
         "[d1] Did not react to the glass-stalker's presence — stillness changed quality, suggesting they already know it is here",
-        "[d1] Did not react to the glass-stalker's yielding — the event closed the same way it opened, without alarm or acknowledgment"
+        "[d1] Did not react to the glass-stalker's yielding — the event closed the same way it opened, without alarm or acknowledgment",
+        "[d1] Did not react to Loki's descent attempt or the sounds of the slide — the passage event is closed for them as before"
       ],
       "knownFacts": [
         "Objects to Cy's presence — calls it a 'light-thing'",
@@ -595,7 +627,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Beside the stair passage, still and forward-facing; the glass-stalker's departure was not their concern",
+      "statusNote": "In the outer chamber above, beside the stair passage, still and forward-facing",
       "domains": {
         "primary": "umbral"
       },
@@ -616,7 +648,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Refused to teach the blue flame — said it is not theirs to teach, and that the question is the wrong shape for the thing being asked. No hostility. The subject simply closed.",
         "[d1] Loki attempted to read the pale blue flame — the elder did not comment, did not warn, did not move. The silence after the failed read was itself the response.",
         "[d1] Received Loki's reframed request — not to be taught the flame, but to carry the right question outward. Lifted one hand and gestured to the seam beside the bracket: named it older than the flame, older than the Unlit, and waiting. Said Loki has shown they know how to carry a question honestly. Did…",
         "[d1] Sat still while Loki read the seam. Did not comment. The silence after the read is itself a kind of acknowledgment.",
@@ -625,7 +656,8 @@
         "[d1] The door opened fully. The elder made no comment. Their silence is acknowledgment of the completed act.",
         "[d1] Did not speak or move during the Prism Sight read of the passage. The visit has reached its end for them.",
         "[d1] Has not moved through the glass-stalker's surfacing",
-        "[d1] Did not move or speak through the glass-stalker encounter or its yielding"
+        "[d1] Did not move or speak through the glass-stalker encounter or its yielding",
+        "[d1] Has not moved through the descent attempt — the chamber's business is closed"
       ],
       "knownFacts": [
         "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
@@ -644,7 +676,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame — present and unmoved; the chamber's business is closed for now",
+      "statusNote": "Seated by the pale blue flame in the outer chamber above — present and unmoved",
       "domains": {
         "primary": "umbral"
       },
@@ -905,12 +937,8 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
-        "from": "What this place IS: Pressureholt is a city that documents its own failure modes in writing, and something is failing that has never failed…"
-      },
       {
         "thing": "The pressure-gauge needle, which tapped once and stopped when Cy settled — Tessvel noticed and her pen moved toward it before she stopped…",
         "from": "What Tessvel fears: that the system will grind her into the shape of the job it needs — here it is offering her something she has no…"
@@ -926,6 +954,10 @@
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
         "from": "Cy's companion boundary (it will not damage a Precursor working, but it will study one — and this is the deepest Precursor-adjacent thing…"
+      },
+      {
+        "thing": "Cy's click in the dark — not alarm, not report; a question shaped like an old maintenance protocol, aimed at nothing Loki can see",
+        "from": "Cy's boundary: it will not explain what it knows, because it does not know that it knows it — but something in the passage below matches a…"
       }
     ],
     "wantProgress": {
@@ -1376,26 +1408,43 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "the-seam-beside-the-bracket": {
+        "id": "the-seam-beside-the-bracket",
+        "label": "The Passage Below",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep…"
+        ],
+        "links": [
+          "the-unlit-deep",
+          "the-water-crisis",
+          "the-creature-at-the-threshold",
+          "terminus-seals-beneath-the-valley"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 3.5676092674013367,
-    "cerebral": 12.369699945892107,
-    "social": 15.82670761419509,
-    "strategic": 8.410931904187327,
-    "cautious": 7.238098812601321,
-    "amorous": 6.8921574673011,
-    "generous": 3.066450728262867,
-    "ruthless": 0.40194456919928956,
-    "risky": 1.8786878906249997
+    "devotion": 3.478419035716303,
+    "cerebral": 12.060457447244804,
+    "social": 15.431039923840213,
+    "strategic": 8.200658606582644,
+    "cautious": 7.057146342286288,
+    "amorous": 6.719853530618573,
+    "generous": 2.9897894600562953,
+    "ruthless": 0.3918959549693073,
+    "risky": 2.831720693359375
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "charmer"
   ],
-  "actionCount": 54,
+  "actionCount": 55,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1552,8 +1601,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785168545764,
-  "rev": 124,
+  "updatedAt": 1785169886803,
+  "rev": 126,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1871,7 +1920,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 27
+    "umbral_depths": 28
   },
   "opLossPending": false,
   "sessions": [
@@ -1902,10 +1951,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T16:09:05.763Z",
+      "lastAt": "2026-07-27T16:31:26.801Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 23
+      "beats": 24
     }
   ],
   "establishedFacts": [
@@ -1936,24 +1985,24 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 5,
+      "applied": 6,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 55,
-    "choices": 55,
+    "sceneSummary": 56,
+    "choices": 56,
     "characterDeltas": 26,
-    "scene": 55,
+    "scene": 56,
     "placeUpdates": 8,
-    "codexUpdates": 45,
-    "timeOps": 54,
-    "offer": 5,
+    "codexUpdates": 46,
+    "timeOps": 55,
+    "offer": 6,
     "generateRequest": 2,
     "sceneEnded": 14,
-    "npcUpdates": 48,
+    "npcUpdates": 49,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
@@ -1963,7 +2012,7 @@
     "stageOps": 5,
     "encounterOps": 1
   },
-  "_opTurns": 55,
+  "_opTurns": 56,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -1976,7 +2025,7 @@
       "the_wrong_reality": 2,
       "the_misdirect": 1,
       "the_better_story": 6,
-      "prism_sight": 4
+      "prism_sight": 5
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,

@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [SNG-243 §3 complete_pending_review — CCode, 2026-07-27] The Made Gate's destinations are travelable (v1.8.288 `98138d3f`)
+> Erik: "where does my made gate go?" The quest authored a network-shaped `waygate` effect (connects[]: the_crossing
+> default + Stillwater's Trouble intent, networkCapable) but applyQuestEffects had no `case "waygate"` — it fell to
+> default + was DROPPED, so the gate reached only the_crossing and the GM improvised. Fixed: added the case (via the
+> same ctx.createWaygate injection), extended mintWaygate to accept the richer shape AND AUGMENT the node the earlier
+> create_waygate minted (they converge on one gid) — resolving each connects[].to, storing waygateConnections +
+> waygateDefaultTo, dropping+warning any unresolvable target (SNG-232). Added alias "stillwaters_trouble_site" to
+> the_old_warden_post.json so the intent target resolves (canon: the Old Warden Post IS the Stillwater's Trouble
+> site Silas reclaimed). Two seams: quest-effect-types-handled now requires `case "waygate"`; new
+> waygate-connection-resolves. GM now reads committed connections — "where does it go?" has ONE answer.
+> Live-verified: resolving "Finish it" minted the gate with connections [the_crossing, the_old_warden_post],
+> default→the_crossing, networkCapable, discovered. npm test exit 0.
+> **AEVI (optional):** point the quest's connects[].to at `the_old_warden_post` directly (alias bridges it for now);
+> `at: the_left_branch_approach` has no location file (gate stands as its own node). **§4 (gate network) next.**
+> Results: po/results/20260727_SNG-243-part3_made_gate_travelable.md
+
+
 > ## [SNG-244 complete_pending_review — CCode, 2026-07-27] Quest decision strip in the play banner (v1.8.287 `a4a14abc`)
 > Erik: "when a quest hits its decision, present it in the banner ABOVE narration so it's obvious." The decision
 > was invisible in-scene — only on the Quests tab. Built the strip in the SNG-230 integrated-strip slot (same

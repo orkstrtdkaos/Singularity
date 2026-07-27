@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 4,
-  "xp": 307,
+  "xp": 312,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 115,
+  "energy": 113,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -213,80 +213,111 @@
         "player": "Tell Cy to help you answer the question now.. The water is ready",
         "summary": "Loki placed a hand on the regulator's primary interface to answer the question — the water is ready.",
         "narration": "You press your hand flat against Cy's housing and speak plainly. \"The water is ready,\" you say. \"Help me answer the question.\"\n\nCy's lens irises. Once, slow. The lamp in its grip holds absolutely still. Then it speaks, in that dry brass-click voice that sounds like something deciding. \"The regulator requires contact at the primary interface,\" it says. \"The panel in the center of the housing. The hand of the one answering. I will hold the lamp.\"\n\nIt does not ask whether you are certain. It has a job. It is doing the job.\n\nYou shift your crouch and bring your hand to the center panel of the dark metal housing. The metal is cold — properly cold, the cold of stone that has not seen sun in a very long time. The amber light is at eye level, steady as it has been for six hundred and sixty-three darks. You can feel the faint structural hum of the mechanism behind the panel, the same waiting quality the craft found when you read the regulator's shape through Cy. A keyhole, seen from the key's side. The question has been here a long time. You are the first thing that has come to answer it."
+      },
+      {
+        "player": "Press your palm to the panel — give the regulator what it is built to receive, and hold steady while it reads you",
+        "summary": "Loki pressed the interface panel — the amber light deepened and completed a cycle, but whether the regulator accepted the answering authority remains unclear.",
+        "narration": "Your palm meets the interface panel and the cold comes up through it immediately — not the cold of neglect, but the cold of something that has been waiting at a precise temperature for a very long time.\n\nFor a moment, nothing. Then the amber light shifts. It does not brighten. It deepens — a slower, warmer register, the color of a coal that has found good air. A sound comes with it: not a mechanism waking, but a mechanism completing. A long-held note reaching its final beat.\n\nCy does not move. Its lens holds at its widest. The lamp in its grip stays level and still.\n\nThen the amber light steadies again, and the sound stops. The regulator has registered the contact. The question's first part — whether the water is prepared — you have answered. The second part, the harder one, the one Halvex never solved: whether someone with the authority to answer is present. That part you cannot feel through the panel. You do not know whether the regulator found what it was looking for in you, or whether it is still looking."
       }
     ],
     "lastTurn": {
-      "narration": "You press your hand flat against Cy's housing and speak plainly. \"The water is ready,\" you say. \"Help me answer the question.\"\n\nCy's lens irises. Once, slow. The lamp in its grip holds absolutely still. Then it speaks, in that dry brass-click voice that sounds like something deciding. \"The regulator requires contact at the primary interface,\" it says. \"The panel in the center of the housing. The hand of the one answering. I will hold the lamp.\"\n\nIt does not ask whether you are certain. It has a job. It is doing the job.\n\nYou shift your crouch and bring your hand to the center panel of the dark metal housing. The metal is cold — properly cold, the cold of stone that has not seen sun in a very long time. The amber light is at eye level, steady as it has been for six hundred and sixty-three darks. You can feel the faint structural hum of the mechanism behind the panel, the same waiting quality the craft found when you read the regulator's shape through Cy. A keyhole, seen from the key's side. The question has been here a long time. You are the first thing that has come to answer it.",
-      "sceneSummary": "Loki placed a hand on the regulator's primary interface to answer the question — the water is ready.",
+      "narration": "Your palm meets the interface panel and the cold comes up through it immediately — not the cold of neglect, but the cold of something that has been waiting at a precise temperature for a very long time.\n\nFor a moment, nothing. Then the amber light shifts. It does not brighten. It deepens — a slower, warmer register, the color of a coal that has found good air. A sound comes with it: not a mechanism waking, but a mechanism completing. A long-held note reaching its final beat.\n\nCy does not move. Its lens holds at its widest. The lamp in its grip stays level and still.\n\nThen the amber light steadies again, and the sound stops. The regulator has registered the contact. The question's first part — whether the water is prepared — you have answered. The second part, the harder one, the one Halvex never solved: whether someone with the authority to answer is present. That part you cannot feel through the panel. You do not know whether the regulator found what it was looking for in you, or whether it is still looking.",
+      "sceneSummary": "Loki pressed the interface panel — the amber light deepened and completed a cycle, but whether the regulator accepted the answering authority remains unclear.",
       "choices": [
         {
-          "label": "Press your palm to the panel — give the regulator what it is built to receive, and hold steady while it reads you",
+          "label": "Hold the contact — keep your palm on the panel and let See the Made Thing read what the regulator is doing right now",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "careful",
-            "devote"
+            "study"
           ],
           "abilityId": "see_the_made_thing",
           "energyCost": 1,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Press your palm to the panel — but keep the Made Thing open while you do, so you can read what the regulator reads back",
+          "label": "Ask Cy directly — did it register a response? What does the regulator's construction say about whether the authority question was answered?",
           "attribute": "mental",
           "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Ask Cy first — what exactly does 'authority to answer' mean to this regulator? What did Halvex conclude?",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Hold at the brink — you are not certain the water is ready, only that you said it was. Consider what authority you actually have to make this answer.",
+          "label": "Wait and listen — lift your hand and give the regulator a moment to show what it does next on its own",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "careful"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Check the duration field again — see whether the counter changed when the amber light shifted",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "Loki pressed the regulator's primary interface — the amber light completed a cycle, but the question of authority remains open."
+        }
+      ],
+      "standingOps": [],
       "scene": {
-        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki crouches before the dark metal regulator housing, hand now resting at the edge of the central interface panel. The amber light is steady at eye level.",
+        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki kneels before the dark metal regulator housing, palm flat against the central interface panel. The amber light has deepened and steadied.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Holding the lamp still and level, lens wide and waiting — ready to help answer."
+            "state": "Holding the lamp level, lens at its widest, watching the regulator housing without moving."
           }
         ],
         "objects": [
           "Long band of fine-cut notation along the left wall — Halvex's working journal",
           "Three metal panels from the inspection port niche, set against the wall",
-          "Dark metal regulator housing flush in the far wall — pre-Transition, single amber light burning",
-          "Cy's lamp — the only light source",
-          "Central interface panel on the regulator housing — primary contact point, cold under the palm"
+          "Dark metal regulator housing flush in the far wall — amber light now deeper and steadier than before",
+          "Cy's lamp — the only other light source",
+          "Central interface panel — Loki's palm currently resting against it"
         ],
         "threads": [
-          "The regulator's primary interface waits — hand not yet fully pressed",
-          "What 'authority to answer' means — whether Loki has it, or only believes they do",
-          "Halvex's final conclusion about the second part of the question — never recorded, never resolved"
+          "Whether the regulator accepted the authority question — the panel gave no clear answer",
+          "What Halvex never solved: the shape of 'authority to answer'",
+          "The duration counter — whether it changed when the light shifted"
         ]
       },
       "npcUpdates": [
@@ -295,35 +326,50 @@
           "npcId": "unlit-elder",
           "name": "Unlit Elder",
           "role": "Seated elder of the Unlit Deep's outer chamber",
-          "pronouns": "they/them",
-          "note": "Not present — Loki is now below the outer chamber at the regulator.",
+          "note": "Not present — remains above.",
+          "status": "active",
           "statusNote": "Seated by the pale blue flame in the outer chamber above — present and unmoved."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-seam-beside-the-bracket",
+          "label": "The Seam Beside the Bracket",
+          "kind": "mystery",
+          "fact": "Loki pressed the regulator's primary interface panel. The amber light deepened and completed a cycle — a long-held note reaching its final beat. The mechanism did not wake; it completed. Whether the regulator found the authority it was built to receive in Loki's contact is not yet clear.",
+          "links": [
+            "halvex",
+            "cy-s-construction",
+            "the-water-crisis",
+            "the-taken-from-the-city"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange with Cy and repositioning at the interface panel."
-      }
+        "why": "A brief moment of contact and waiting at the regulator panel."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki crouches before the dark metal regulator housing, hand now resting at the edge of the central interface panel. The amber light is steady at eye level.",
+      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki kneels before the dark metal regulator housing, palm flat against the central interface panel. The amber light has deepened and steadied.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Holding the lamp still and level, lens wide and waiting — ready to help answer."
+          "state": "Holding the lamp level, lens at its widest, watching the regulator housing without moving."
         }
       ],
       "objects": [
         "Long band of fine-cut notation along the left wall — Halvex's working journal",
         "Three metal panels from the inspection port niche, set against the wall",
-        "Dark metal regulator housing flush in the far wall — pre-Transition, single ambe",
-        "Cy's lamp — the only light source",
-        "Central interface panel on the regulator housing — primary contact point, cold u"
+        "Dark metal regulator housing flush in the far wall — amber light now deeper and ",
+        "Cy's lamp — the only other light source",
+        "Central interface panel — Loki's palm currently resting against it"
       ],
       "threads": [
-        "The regulator's primary interface waits — hand not yet fully pressed",
-        "What 'authority to answer' means — whether Loki has it, or only believes they do",
-        "Halvex's final conclusion about the second part of the question — never recorded, never resolved"
+        "Whether the regulator accepted the authority question — the panel gave no clear answer",
+        "What Halvex never solved: the shape of 'authority to answer'",
+        "The duration counter — whether it changed when the light shifted"
       ]
     }
   },
@@ -350,14 +396,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains.",
         "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread.",
         "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened.",
         "The door below the answered seam is open. The creatures from below have returned. The visit to the Unlit Deep has reached its natural end — what Loki carries back to the city, and whether to descend first, is the remaining question.",
         "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further.",
         "Loki named itself Cy's further instruction — the mechanism acknowledged and turned toward the passage below. The regulator and the missing records are the remaining thread.",
         "Halvex's wall-records read — a years-long journal concluding that the regulator predates all known records and is not waiting to be repaired, but to be asked. The amber light still burns.",
-        "Duration field read — the amber light has burned for 663 darks, predating the Unlit's occupation. The counter was built to go higher. The regulator's purpose remains: waiting to be asked."
+        "Duration field read — the amber light has burned for 663 darks, predating the Unlit's occupation. The counter was built to go higher. The regulator's purpose remains: waiting to be asked.",
+        "Loki pressed the regulator's primary interface — the amber light completed a cycle, but the question of authority remains open."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -554,7 +600,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Sat still while Loki read the seam. Did not comment. The silence after the read is itself a kind of acknowledgment.",
         "[d1] Sat still while Loki touched the seam. Did not comment. Did not warn. Did not move.",
         "[d1] Did not move, did not comment on Cy's tap or the Prism Sight use. Sits watching or not watching.",
         "[d1] The door opened fully. The elder made no comment. Their silence is acknowledgment of the completed act.",
@@ -563,7 +608,8 @@
         "[d1] Did not move or speak through the glass-stalker encounter or its yielding",
         "[d1] Has not moved through the descent attempt — the chamber's business is closed",
         "[d1] Not present — remains above in the outer chamber.",
-        "[d1] Not present — Loki is now below the outer chamber at the regulator."
+        "[d1] Not present — Loki is now below the outer chamber at the regulator.",
+        "[d1] Not present — remains above."
       ],
       "knownFacts": [
         "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
@@ -868,7 +914,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
@@ -1349,14 +1395,18 @@
         "facts": [
           "[d1] The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep…",
           "[d1] The passage below has three deliberate turns cut around something, not following the rock's grain. The creature-traces on the left wall are worn smooth by long and regular use. Below, a large chamber holds a heat source at its center — steady, outward-radiating warmth, the signature of something…",
-          "[d1] The heat-source at the center of the mapped chamber below is a terminus regulator — a Precursor thermal hold, not a heat source. It is holding a temperature to prevent surge in the routing lines above it. Those lines run upward into the valley basin. It is the third of three such junctions Cy has…"
+          "[d1] The heat-source at the center of the mapped chamber below is a terminus regulator — a Precursor thermal hold, not a heat source. It is holding a temperature to prevent surge in the routing lines above it. Those lines run upward into the valley basin. It is the third of three such junctions Cy has…",
+          "[d1] Loki pressed the regulator's primary interface panel. The amber light deepened and completed a cycle — a long-held note reaching its final beat. The mechanism did not wake; it completed. Whether the regulator found the authority it was built to receive in Loki's contact is not yet clear."
         ],
         "links": [
           "the-unlit-deep",
           "the-water-crisis",
           "the-creature-at-the-threshold",
           "terminus-seals-beneath-the-valley",
-          "unlit-elder"
+          "unlit-elder",
+          "halvex",
+          "cy-s-construction",
+          "the-taken-from-the-city"
         ],
         "aliases": [
           "The Seam Beside the Bracket"
@@ -1484,22 +1534,22 @@
     }
   },
   "tendencies": {
-    "devotion": 2.1501541532982755,
-    "cerebral": 17.950746156440037,
-    "social": 11.950786887436331,
-    "strategic": 7.723615563638991,
-    "cautious": 7.6306183573430495,
-    "amorous": 4.153818395672449,
-    "generous": 2.8481120759229177,
-    "ruthless": 0.24224703998738534,
-    "risky": 2.4344239427015477
+    "devotion": 3.0964002994658184,
+    "cerebral": 17.501977502529034,
+    "social": 11.652017215250423,
+    "strategic": 7.530525174548016,
+    "cautious": 8.439852898409473,
+    "amorous": 4.049972935780637,
+    "generous": 2.776909274024845,
+    "ruthless": 0.2361908639877007,
+    "risky": 2.373563344134009
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 74,
+  "actionCount": 75,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1664,8 +1714,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785181177436,
-  "rev": 147,
+  "updatedAt": 1785182190112,
+  "rev": 148,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2022,7 +2072,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 47
+    "umbral_depths": 48
   },
   "opLossPending": false,
   "sessions": [
@@ -2053,10 +2103,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T19:39:37.436Z",
+      "lastAt": "2026-07-27T19:56:30.110Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 43
+      "beats": 44
     }
   ],
   "establishedFacts": [
@@ -2094,27 +2144,27 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 75,
-    "choices": 75,
-    "characterDeltas": 33,
-    "scene": 75,
+    "sceneSummary": 76,
+    "choices": 76,
+    "characterDeltas": 34,
+    "scene": 76,
     "placeUpdates": 10,
-    "codexUpdates": 64,
-    "timeOps": 74,
+    "codexUpdates": 65,
+    "timeOps": 75,
     "offer": 8,
     "generateRequest": 2,
-    "sceneEnded": 17,
-    "npcUpdates": 66,
+    "sceneEnded": 18,
+    "npcUpdates": 67,
     "moveTo": 2,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 14,
+    "questUpdates": 15,
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 75,
+  "_opTurns": 76,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75
@@ -2122,7 +2172,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 25,
+      "see_the_made_thing": 26,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

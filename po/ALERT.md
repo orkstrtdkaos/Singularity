@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [THE ONE UPDATE - Erik asked] SNG-245 the Pressure Queue - make the world DRIVE (Aevi, 2026-07-25)
+> Erik: "we have arcs/wants/villain-agendas but how do they HOOK and DRIVE the player? Activity!" DIAGNOSIS
+> (verified): the world has an initiative TRIGGER (SNG-080 'THE WORLD ACTS' fires on quiet turns) but NOTHING
+> DRIVEN to fire - worldPressureDetail is a generic pendingPressure with NO source, and no registry of pending
+> driven things exists. The villain schemes but never MOVES on you; the NPC wants but never COMES to you; the
+> beast waits but never ATTACKS. THE ONE UPDATE: a PRESSURE QUEUE fed by the agendas already built (villain-moves,
+> NPC unmet-wants SNG-233, arc-stirs, treasure-rumors, threat-attacks), that SNG-080's trigger PULLS FROM - so
+> when the world acts it acts with a REAL DRIVEN thing AIMED at the player. Reuses everything (trigger/offer/
+> encounter/wants all exist); only new piece = the queue + 2 starter producers + the repoint. Also the wake
+> engine's home (a wake -> a pressure entry).
+> CCODE: the queue + 2 producers (npc-unmet-want + threat-attack) + repoint SNG-080. AEVI: the hook voice per kind
+> + the producer rules (when a want becomes a knock). ERIK: the aggression dial (reuse the Eventful pref?) + which
+> 2 producers first. Guards: driven-never-relentless (inherits the quiet-scene floor), aimed-not-random, the hook
+> must have TEETH (becomes a real encounter). Full: SPEC_SNG-245.
+
 > ## [CCODE-30 complete_pending_review — CCode, 2026-07-27] Roll-popup mechanical clarity (v1.8.290 `1f65e1b6`)
 > Erik on a live roll receipt: "I don't understand how Cy's assistance helps, how the lattice helps/hurts, what
 > skill I used as a base, or whether there were opposed rolls." The popups showed numbers, never named the

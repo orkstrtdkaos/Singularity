@@ -8,11 +8,11 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 28,
-  "xp": 2701,
+  "xp": 2706,
   "attributes": {
     "physical": 5,
     "mental": 7,
-    "social": 7,
+    "social": 8,
     "practical": 8
   },
   "skills": {},
@@ -169,7 +169,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.032398453601930784,
+    "spectrumId": -0.030778530921834243,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.24843810472552474,
     "mechanical_spiritual": 0.25513542055105926,
@@ -185,7 +185,7 @@
   "maxHealth": 165,
   "health": 165,
   "maxEnergy": 235,
-  "energy": 235,
+  "energy": 230,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1951,29 +1951,22 @@
         "player": "Write a short line on the shadow-sheet to Mara — the work is done, the wells will clear, the watershed will follow",
         "summary": "Silas writes to Mara on the shadow-sheet — the work is done, the wells will clear, the watershed will follow.",
         "narration": "You pull the shadow-sheet from your coat pocket and lay it flat against your knee. The slate is cool against your palm in the dawn air. You write in plain words, pressing firm so the letters come clear.\n\n'The work is done. The wells will clear first — a week, maybe two. The watershed will follow. Come home when you can.'\n\nThe letters appear on your end and then disappear as they transmit, leaving the slate clean again. You fold it and put it away.\n\nPell has not moved from the bowl's edge. Memory lies quiet across her shoulders, and she is watching the ring with the same level attention she gives a cooling weld. Veth lifts her two fingers from the rim at last and straightens, brushing frost from her knees.\n\n'That's the whole job,' says Veth. Plain, final, satisfied.\n\nHuginn shifts on the far lip of the ring and turns one eye toward the northwest. Toward the gate, and the road back out."
+      },
+      {
+        "player": "look around for the radiant",
+        "summary": "Silas reads the reclamation bowl's edge and finds old radiant burn-marks in the frost — someone was here weeks ago, watching the site with a bright craft, and gave it nothing.",
+        "narration": "You straighten from the rim and turn slowly, reading the bowl and the ground around it. Dawn light is coming in low from the east, thin and pale, and you let Order-Sense run quiet and loose beneath your looking — not a push, just an open hand.\n\nYou find something. Not strong, not recent, but there. At the bowl's northwest edge, where the frost collar was thickest this morning, the ground holds a faint pattern of mineral displacement — the kind of line a focused radiant working leaves when it heats groundwater quickly from above. The burn pattern is old. Weeks, not days. Someone stood here and used a craft at range, pressing down into the ring from the outside. The reclamation site received it — or absorbed it — or simply kept running through it. You cannot tell which from the residue alone. But they were here, and they were looking at the same thing you were looking at, and they did not give it an instruction.\n\nPell crosses from the bowl's edge to your side without being asked. She crouches where you are looking and lays two fingers against the frost-edged ground. After a moment she says, quietly, \"Something was hot here. Not forge-hot. Brighter.\" She lifts her hand and looks at you. \"Recent enough that it sat in the frost, not under it.\"\n\nHuginn shifts on the ring's far lip and turns its good eye northwest — back along the path toward the gate and Logana — and holds still there, watching."
       }
     ],
     "lastTurn": {
-      "narration": "You pull the shadow-sheet from your coat pocket and lay it flat against your knee. The slate is cool against your palm in the dawn air. You write in plain words, pressing firm so the letters come clear.\n\n'The work is done. The wells will clear first — a week, maybe two. The watershed will follow. Come home when you can.'\n\nThe letters appear on your end and then disappear as they transmit, leaving the slate clean again. You fold it and put it away.\n\nPell has not moved from the bowl's edge. Memory lies quiet across her shoulders, and she is watching the ring with the same level attention she gives a cooling weld. Veth lifts her two fingers from the rim at last and straightens, brushing frost from her knees.\n\n'That's the whole job,' says Veth. Plain, final, satisfied.\n\nHuginn shifts on the far lip of the ring and turns one eye toward the northwest. Toward the gate, and the road back out.",
-      "sceneSummary": "Silas writes to Mara on the shadow-sheet — the work is done, the wells will clear, the watershed will follow.",
+      "narration": "You straighten from the rim and turn slowly, reading the bowl and the ground around it. Dawn light is coming in low from the east, thin and pale, and you let Order-Sense run quiet and loose beneath your looking — not a push, just an open hand.\n\nYou find something. Not strong, not recent, but there. At the bowl's northwest edge, where the frost collar was thickest this morning, the ground holds a faint pattern of mineral displacement — the kind of line a focused radiant working leaves when it heats groundwater quickly from above. The burn pattern is old. Weeks, not days. Someone stood here and used a craft at range, pressing down into the ring from the outside. The reclamation site received it — or absorbed it — or simply kept running through it. You cannot tell which from the residue alone. But they were here, and they were looking at the same thing you were looking at, and they did not give it an instruction.\n\nPell crosses from the bowl's edge to your side without being asked. She crouches where you are looking and lays two fingers against the frost-edged ground. After a moment she says, quietly, \"Something was hot here. Not forge-hot. Brighter.\" She lifts her hand and looks at you. \"Recent enough that it sat in the frost, not under it.\"\n\nHuginn shifts on the ring's far lip and turns its good eye northwest — back along the path toward the gate and Logana — and holds still there, watching.",
+      "sceneSummary": "Silas reads the reclamation bowl's edge and finds old radiant burn-marks in the frost — someone was here weeks ago, watching the site with a bright craft, and gave it nothing.",
       "choices": [
         {
-          "label": "Walk back north to the gate — collect Logana and take stock before leaving the Zone",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "careful"
-          ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Spend a moment here first — use Order-Sense to read the ring one last time as it winds down",
+          "label": "Use Order-Sense to read what purpose brought someone here — what were they looking for in the site's design?",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
@@ -1982,7 +1975,19 @@
           "trivial": false
         },
         {
-          "label": "Ask Huginn plainly what it sees ending from here — the site, the road, or something else",
+          "label": "Use The Attended End — read whether the burn-mark is ending (fading, gone soon) or if its pattern is still active in the ground",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Ask Huginn plainly what it saw — it has been watching this site longer than any of you, and it knows when something was ending here",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1993,108 +1998,117 @@
           "trivial": true
         },
         {
-          "label": "Name the morning's work aloud to the three of them — a brief accounting before you move",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
+          "label": "Walk the bowl's full perimeter — look for more sign, footprints, a direction they came from or left toward",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 15,
           "intentTags": [
-            "lead"
+            "scout"
           ],
           "abilityId": null,
-          "trivial": true
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar fully eased, dark wet ground inside the ring holding still, mineral smell nearly gone. Mist thins in the bowl as the light grows.",
+        "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar eased except at the northwest edge, which holds the oldest frost and the faint radiant burn-pattern. Pale dawn light from the east. Mist thinning.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the bowl's edge, Memory across her shoulders, watching the ring with level attention."
+            "state": "Crouched beside Silas at the northwest edge of the bowl, fingers lifted from the ground, watching him."
           },
           {
             "name": "Veth",
-            "state": "Straightened from her crouch at the ring's rim, brushing frost from her knees. The work complete in her bearing."
+            "state": "Standing a few paces back, watching Pell and Silas at the burn-mark with quiet attention."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the far lip of the ring, one eye turned northwest toward the gate and the road out."
+            "state": "Perched on the far lip of the ring, eye turned northwest toward the gate road, holding still."
           }
         ],
         "objects": [
-          "The reclamation ring — low, pale, flush with the earth, frost collar eased, winding down",
+          "The reclamation ring — low, pale, flush with the earth, frost collar eased except at the northwest edge",
+          "Radiant burn-pattern — a mineral displacement line at the bowl's northwest edge, weeks old, pressed from above",
           "Memory — across Pell's shoulders",
           "Waymarker — pocketed",
           "Shadow-sheet — folded and returned to coat pocket"
         ],
         "threads": [
-          "The party has not yet walked back to the gate and Logana",
-          "Mara Wells has received the update — the Millbrook thread is informed"
+          "Huginn is watching northwest toward the gate — something has its attention",
+          "The radiant presence was here weeks ago, watching the site, and gave it no instruction — their purpose is unknown",
+          "The party has not yet walked back to the gate and Logana"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "note": "Received the shadow-sheet message — the work is done, the wells will clear first, the watershed will follow.",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Read the radiant burn-mark through ironsense at the bowl's northwest edge — confirmed it as bright-heat, not forge-heat, sitting in the frost not under it. Moved to Silas's side without being asked.",
           "learned": [
-            "The reclamation work is complete — wells will clear in a week or two, watershed will follow after."
+            "The burn-mark at the reclamation bowl's northwest edge is bright-heat, not forge-heat — recent enough to sit in the frost layer, not beneath it."
           ],
-          "statusNote": "In her store at dawn — has received the shadow-sheet update confirming the Zone work is done."
-        },
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Lifted her fingers from the ring and named the morning's work complete. Plain and satisfied.",
-          "statusNote": "At the reclamation bowl — the work named done, ready to walk back to the gate."
+          "skillsObserved": [
+            "ironsense discrimination of radiant heat from forge-heat at a ground-level burn site"
+          ],
+          "statusNote": "At the bowl's northwest edge beside Silas, fingers lifted from the burn-mark, watching him."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "event",
-          "fact": "Mara Wells informed via shadow-sheet on Day 14 at dawn — the work is complete, the downstream wells will clear first, the watershed will follow on its own schedule.",
+          "topic": "the-light-that-will-not-dim",
+          "label": "The Light That Will Not Dim",
+          "kind": "mystery",
+          "fact": "A radiant burn-pattern was found at the reclamation bowl's northwest edge on Day 14 at dawn — weeks old, pressed from above, consistent with a focused radiant working at range. Someone stood here and used a bright craft to examine the reclamation site. They gave it no instruction. Pell confirmed through ironsense: bright-heat, sitting in the frost layer, not under it.",
           "links": [
-            "mara-wells",
-            "millbrook",
-            "what-the-water-remembers",
-            "the-second-thread"
+            "the-water-crisis",
+            "the-second-thread",
+            "millbrook"
           ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "A radiant burn-pattern was found at the bowl's northwest edge on Day 14 at dawn — weeks old, pressed from above. Someone used a radiant craft here to examine the reclamation site and gave it nothing.",
+          "flag": {
+            "radiant_presence_sign": "true",
+            "radiant_presence_age": "weeks",
+            "radiant_gave_no_instruction": "true"
+          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief moment to write the shadow-sheet message and read the ring's stillness"
+        "why": "a careful survey of the bowl's perimeter at dawn"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar fully eased, dark wet ground inside the ring holding still, mineral smell nearly gone. Mist thins in the bowl as the light grows.",
+      "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar eased except at the northwest edge, which holds the oldest frost and the faint radiant burn-pattern. Pale dawn light from the east. Mist thinning.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the bowl's edge, Memory across her shoulders, watching the ring with level attention."
+          "state": "Crouched beside Silas at the northwest edge of the bowl, fingers lifted from the ground, watching him."
         },
         {
           "name": "Veth",
-          "state": "Straightened from her crouch at the ring's rim, brushing frost from her knees. The work complete in her bearing."
+          "state": "Standing a few paces back, watching Pell and Silas at the burn-mark with quiet attention."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the far lip of the ring, one eye turned northwest toward the gate and the road out."
+          "state": "Perched on the far lip of the ring, eye turned northwest toward the gate road, holding still."
         }
       ],
       "objects": [
-        "The reclamation ring — low, pale, flush with the earth, frost collar eased, wind",
+        "The reclamation ring — low, pale, flush with the earth, frost collar eased excep",
+        "Radiant burn-pattern — a mineral displacement line at the bowl's northwest edge,",
         "Memory — across Pell's shoulders",
         "Waymarker — pocketed",
         "Shadow-sheet — folded and returned to coat pocket"
       ],
       "threads": [
-        "The party has not yet walked back to the gate and Logana",
-        "Mara Wells has received the update — the Millbrook thread is informed"
+        "Huginn is watching northwest toward the gate — something has its attention",
+        "The radiant presence was here weeks ago, watching the site, and gave it no instruction — their purpose is unknown",
+        "The party has not yet walked back to the gate and Logana"
       ]
     }
   },
@@ -3522,7 +3536,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Received the full briefing on the relay node's purpose — said nothing, looked north, looked at Silas. Walking north with Memory in a trail grip.",
         "[d14] Hand settled on Memory's grip without being asked — reading Silas's face through the cast.",
         "[d14] Watching Silas's face as the warden's answer lands — hand still on Memory.",
         "[d14] Watching Silas's face through the braided cast — hand steady on Memory's grip.",
@@ -3531,28 +3544,29 @@
         "[d14] Standing watch at the tree-line as the hollow sealing completes — Memory on her shoulders, present and steady.",
         "[d14] Asked who is supposed to be at the other end of the circuit — watching the tree-line throughout, present and steady.",
         "[d14] Stopped watching the tree-line when the Working Model resolved — shifted her weight toward Silas, reading his face.",
-        "[d14] Confirmed the reclamation site is running through ironsense — felt the order in it from the bowl's edge."
+        "[d14] Confirmed the reclamation site is running through ironsense — felt the order in it from the bowl's edge.",
+        "[d14] Read the radiant burn-mark through ironsense at the bowl's northwest edge — confirmed it as bright-heat, not forge-heat, sitting in the frost not under it. Moved to Silas's side without being asked."
       ],
       "knownFacts": [
-        "Memory can hold both original and shadow-twin present simultaneously — she witnessed the dual presence confirm clean.",
         "The shadow-twin answers only the named caller — it can be held by another person but will not fly to their hand without the caller's word",
         "The shadow-twin shifted register when Silas spoke her name into the caller-link — it is now a permission-acknowledged hold, not a resisted one.",
         "Memory is now hers to carry; Silas holds the call. The shadow-twin on the bench is his half of the design.",
         "Silas named his love to her plainly and directly, no hedging.",
         "The Blazeborn traveler carries no working or primed iron — confirmed by ironsense at close range",
         "The fold reads as old and solid through ironsense — not resisting the wright's contact.",
-        "The made gate holds at every angle with no seam between the original intention and Silas's close — named by ironsense as solid."
+        "The made gate holds at every angle with no seam between the original intention and Silas's close — named by ironsense as solid.",
+        "The burn-mark at the reclamation bowl's northwest edge is bright-heat, not forge-heat — recent enough to sit in the frost layer, not beneath it."
       ],
       "skillsObserved": [
-        "ironsense confirmation of shadow-duplicate fidelity",
         "ironsense confirmation of a completed seal under working-for",
         "accurate tactile reporting of a working's feel under hands-o",
         "ironsense read of a person at close range — confirmed absenc",
         "ironsense read of the fold's quality through contact-point —",
-        "ironsense read of a pre-Transition working at range — confir"
+        "ironsense read of a pre-Transition working at range — confir",
+        "ironsense discrimination of radiant heat from forge-heat at "
       ],
       "status": "active",
-      "statusNote": "At the reclamation site bowl's edge — Memory across her shoulders, watching Silas.",
+      "statusNote": "At the bowl's northwest edge beside Silas, fingers lifted from the burn-mark, watching him.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5466,7 +5480,6 @@
     "gen-disputed-zone-left-branch-entrance": {
       "visits": 1,
       "notes": [
-        "[d14] The made gate now carries Veth Ondra's ashwarden open-hand mark at the left upright — the mark of attendance, for the ones who come after.",
         "[d14] The gate's ward now has a declared purpose — it stands against the careless crossing, against the one who comes to take without attending. The declaration is sealed into the Weirmark.",
         "[d14] A Boundary-Stone ward is now set beneath the gate's warding declaration — a second, quieter layer. Something that crosses this threshold without attending will find both the named declaration and the older ground-claim beneath it.",
         "[d14] A Zone-changed wolverine holds a clearing two hundred yards north-and-west of the made gate — large, unhurried, working at a downed dead tree. Did not flee from Light-Borne.",
@@ -5477,7 +5490,8 @@
         "[d14] The hollow's fifteen-year watch is complete — the warden's vigil ended, the hollow sealed with You Shall Not Pass. The ward holds the perimeter against the untended crossing. The receiving-purpose and the circuit to the relay node remain intact.",
         "[d14] The full system — relay node, hollow receiver, and reclamation site — was mapped here using the Waymarker and the Working Model on Day 14 at dawn. The system's shape is now known and held.",
         "[d14] The reclamation site has been located — a low ring of pale material, flush with the earth in a shallow catchment bowl south of the left-branch path. Active, not broken. Waiting for a final instruction.",
-        "[d14] The reclamation ring received its closing instruction on Day 14 at dawn — complete and stop. The matrix is winding down. The watershed will clear within one to two weeks. The ring is no longer waiting."
+        "[d14] The reclamation ring received its closing instruction on Day 14 at dawn — complete and stop. The matrix is winding down. The watershed will clear within one to two weeks. The ring is no longer waiting.",
+        "[d14] A radiant burn-pattern was found at the bowl's northwest edge on Day 14 at dawn — weeks old, pressed from above. Someone used a radiant craft here to examine the reclamation site and gave it nothing."
       ],
       "flags": {
         "gate_built": true,
@@ -5658,7 +5672,7 @@
     "lastTickWorldDay": 26,
     "lastCanonWorldDay": 26,
     "lastGenCount": 644,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
@@ -5904,12 +5918,12 @@
     "agility": 5,
     "reason": 7,
     "insight": 7,
-    "presence": 8,
+    "presence": 9,
     "rapport": 6,
     "craft": 9,
     "wits": 6
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 2,
   "discoveries": [
     {
@@ -7368,22 +7382,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.429225799616763,
-    "cerebral": 22.006617535152955,
-    "social": 4.822896007873388,
-    "generous": 2.438376376074494,
-    "cautious": 11.933057113958364,
-    "physical": 2.7031812086491973,
-    "risky": 0.6483665951593609,
-    "ruthless": 0.276272277146071,
-    "carousing": 0.22944716358323192,
-    "amorous": 0.8434465659105035,
-    "patient": 0.5111031995058243,
-    "stealth": 0.00004932096823913971,
-    "devotion": 2.0154176023328114,
-    "craft": 1.7502908456104265,
-    "leadership": 0.7610872215669937,
-    "deception": 0.2361908639877007
+    "strategic": 21.893495154626343,
+    "cerebral": 22.456452096774132,
+    "social": 4.702323607676553,
+    "generous": 2.3774169666726315,
+    "cautious": 11.634730686109405,
+    "physical": 2.6356016784329674,
+    "risky": 0.6321574302803769,
+    "ruthless": 0.26936547021741925,
+    "carousing": 0.22371098449365112,
+    "amorous": 0.8223604017627408,
+    "patient": 0.49832561951817866,
+    "stealth": 0.000048087944033161216,
+    "devotion": 1.965032162274491,
+    "craft": 1.7065335744701657,
+    "leadership": 0.7420600410278189,
+    "deception": 0.23028609238800818
   },
   "aptitudes": [
     "strategist",
@@ -7392,7 +7406,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 879,
+  "actionCount": 880,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7782,8 +7796,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785097350060,
-  "rev": 1525,
+  "updatedAt": 1785113382221,
+  "rev": 1527,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11200,7 +11214,7 @@
   "syncedAt": 1785071380339,
   "teachers": {},
   "regionsKnown": {
-    "valley": 631,
+    "valley": 632,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11382,6 +11396,14 @@
       "lastAt": "2026-07-26T20:22:30.055Z",
       "startDay": 26,
       "endDay": 26,
+      "beats": 1
+    },
+    {
+      "id": "sess-18",
+      "startedAt": "2026-07-27T00:49:42.217Z",
+      "lastAt": "2026-07-27T00:49:42.217Z",
+      "startDay": 27,
+      "endDay": 27,
       "beats": 1
     }
   ],
@@ -11646,17 +11668,17 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 250,
-    "choices": 250,
+    "sceneSummary": 251,
+    "choices": 251,
     "characterDeltas": 107,
-    "scene": 250,
-    "npcUpdates": 222,
+    "scene": 251,
+    "npcUpdates": 223,
     "factUpdates": 20,
-    "placeUpdates": 46,
-    "codexUpdates": 158,
-    "timeOps": 244,
+    "placeUpdates": 47,
+    "codexUpdates": 159,
+    "timeOps": 245,
     "imagePrompt": 7,
-    "sceneEnded": 61,
+    "sceneEnded": 62,
     "itemUpdates": 5,
     "questUpdates": 41,
     "offer": 23,
@@ -11672,7 +11694,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 250,
+  "_opTurns": 251,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

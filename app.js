@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.289";
+const APP_VERSION = "1.8.290";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -222,14 +222,27 @@ function showPopoverText(text) {
   document.getElementById("help-close").onclick = close;
 }
 
-// SNG-106: format the resolver's retained breakdown into the shared popover — every signed component,
-// the opposed term named, the clamp only when it bit, and the number → roll → result in one place.
+// SNG-106 + CCODE-30: format the resolver's retained breakdown into the shared popover — every signed
+// component, the BASE the roll draws on named as such, the opposed term (or its absence) made explicit, the
+// clamp only when it bit, and the number → roll → result in one place. Every line is real retained math.
 function showBreakdownPopover(bd) {
   const sign = v => (v >= 0 ? "+" : "−") + Math.abs(Math.round(v));
-  const lines = (bd.components || []).map(c => `${c.label}   ${sign(c.value)}`);
+  const comps = bd.components || [];
+  const lines = comps.map(c => {
+    // CCODE-30: mark the BASE line so the player learns which attribute/sub-attribute the action drew on
+    // (Erik: "what skill did I use as a base?" — it's the sub-attribute, e.g. insight, not the ability).
+    const isBase = bd.base && String(c.label).startsWith(bd.base);
+    return `${c.label}   ${sign(c.value)}${isBase ? "   ← your base (the attribute this draws on)" : ""}`;
+  });
   if (bd.clampedFrom != null) lines.push(`clamped (from ${bd.clampedFrom})`);
+  // CCODE-30: was there an OPPOSED roll, or is the difficulty the task's own hardness? Say it plainly.
+  const oppLine = bd.opposed
+    ? `\n⚔ Opposed by ${bd.opposed} — that resistance above is their strength, not a fixed number.`
+    : comps.some(c => String(c.label) === "difficulty")
+      ? `\nNo opposed roll here — "difficulty" is the task's own hardness, set by the GM from the fiction.`
+      : "";
   const foot = `total   ${bd.total}%${bd.roll != null ? `   — rolled ${bd.roll} → ${String(bd.degree || "").replace("_", " ")}` : ""}`;
-  showPopoverText(`Success chance ${bd.total}%\n${lines.join("\n")}\n────────────\n${foot}`);
+  showPopoverText(`Success chance ${bd.total}% — roll a d100 at or under this to succeed.\n\n${lines.join("\n")}${oppLine}\n────────────\n${foot}`);
 }
 
 // SNG-104: what a Health/Energy number's tap/hover shows — how rest restores it, read from CONTENT.rules.recovery.
@@ -8629,8 +8642,10 @@ function renderPlay(turn, opts = {}) {
       // BATCH-13 invariant 5: name the CARRIED cause. The ground reading differently because of what
       // you walked in with is unexplainable at exactly the moment it matters, unless the receipt says so.
       const carriedBit = (r.substrate?.carriedBy || []).length
-        ? ` <span class="cost">(${esc(r.substrate.carriedBy.map(c => `${c.name} ${c.delta > 0 ? "+" : ""}${c.delta}`).join(", "))})</span>` : "";
-      const subBit = r.substrate ? `<div class="roll-affinity">${r.substrate.side === "starved" ? "the lattice is thin — your craft ran at" : "the lattice crowds your signal — your craft ran at"} ${r.substrate.percent}%${carriedBit} ${infoDot("roll.spectral_fit")}</div>` : "";
+        ? ` <span class="cost" title="Carried substrate — a companion's aura or a charged item you're holding — shifts the effective lattice density here by this much. It helps a craft that wants denser ground and hurts one that wants thinner; the sign is the shift, not a verdict.">(${esc(r.substrate.carriedBy.map(c => `${c.name} ${c.delta > 0 ? "+" : ""}${c.delta}`).join(", "))})</span>` : "";
+      // CCODE-30: this line is CRAFT STRENGTH (the % of full power the craft ran at, set by the lattice density),
+      // NOT the success roll and NOT spectral fit — so it points to roll.substrate, its own explanation.
+      const subBit = r.substrate ? `<div class="roll-affinity">${r.substrate.side === "starved" ? "the lattice is thin — your craft ran at" : "the lattice crowds your signal — your craft ran at"} ${r.substrate.percent}%${carriedBit} ${infoDot("roll.substrate")}</div>` : "";
       // SNG-084 Ph2: one contextual ⓘ on the roll — why it was hard (novel), suddenly easy (discovery), or the d100-vs-chance basics.
       const rollHelp = r.action?.novel ? infoDot("roll.novel") : (r.usedDiscovery || r.action?.discoveryBonus) ? infoDot("roll.discovery") : infoDot("roll.difficulty");
       // SNG-106: the chance is tappable → the full component breakdown (only when this turn retained one).

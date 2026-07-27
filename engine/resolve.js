@@ -120,7 +120,10 @@ export function successChance(ctx) {
   }
   const rounded = Math.round(chance);
   const total = Math.max(rules.d100.floorChance, Math.min(rules.d100.ceilingChance, rounded));
-  ctx._breakdown = { components, total, clampedFrom: total !== rounded ? rounded : null };
+  // CCODE-30: carry the two facts the breakdown popup needs to read PLAINLY — which line is the BASE (the
+  // attribute/sub-attribute the action draws on, so the player learns "insight is my base here"), and whether
+  // an actual OPPONENT rolled (difficultySource) vs. the difficulty being the task's own inherent hardness.
+  ctx._breakdown = { components, total, clampedFrom: total !== rounded ? rounded : null, base: attrName, opposed: action.difficultySource || null };
   return total;
 }
 

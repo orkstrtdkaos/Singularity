@@ -101,7 +101,13 @@
       "id": "roll.difficulty",
       "surface": "the difficulty read on an action",
       "short": "Routine · Hard · Very hard. The GM sets it from the fiction, not from your sheet.",
-      "more": "The world does not scale itself to you. Some things are simply beyond you right now, and the game will say so rather than quietly making them easy."
+      "more": "The world does not scale itself to you. Some things are simply beyond you right now, and the game will say so rather than quietly making them easy. When something is actively *fighting* you, the breakdown names it (\"the raider — threat 35\") instead; a plain \"difficulty\" line means the task itself is hard, with no one rolling against you."
+    },
+    {
+      "id": "roll.substrate",
+      "surface": "after a craft roll where the lattice was thin or crowded",
+      "short": "How STRONG your craft ran — not whether it landed. The lattice here is the wrong density for it.",
+      "more": "Every craft has a best ground. **Continuous** craft thrives where the lattice is dense (machine-thick country); **Returned** craft the reverse (thin, wild country). Off your ground the craft still works, but runs at a fraction of full strength — that's the %. This is separate from your success chance: the chance is *whether* it lands, this is *how much of it arrives*. A companion's aura or a charged item you carry can shift the effective density — that's the (name +value) beside it: what they add to, or drain from, the ground you stand on. A + helps a craft that wants it denser; it hurts one that wants it thinner."
     },
     {
       "id": "roll.exhaustion",

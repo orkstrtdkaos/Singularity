@@ -95,6 +95,18 @@ const r2 = resolveAction({ character: char, action, location: loc, rules }, () =
 check("roll 99 = crit_failure", r2.degree === "crit_failure");
 check("energy cost floors at 0", applyEnergyCost({ energy: 3 }, 8, rules) === 0);
 
+// --- CCODE-30: the breakdown carries what the clarity popup needs to read plainly — the BASE attribute and
+// whether an OPPONENT actually rolled (difficultySource) vs. the difficulty being the task's own hardness ---
+{
+  const bctx = { character: char, action, location: loc, rules };
+  successChance(bctx);
+  check("CCODE-30: the breakdown names the BASE the roll drew on (the attribute/sub-attribute)", bctx._breakdown?.base === "social");
+  check("CCODE-30: no difficultySource → opposed is null (inherent difficulty, no opponent rolling)", bctx._breakdown?.opposed === null);
+  const octx = { character: char, action: { ...action, difficulty: 20, difficultySource: "the raider (threat 20)" }, location: loc, rules };
+  successChance(octx);
+  check("CCODE-30: a difficultySource → opposed names the opponent, so the popup can say a foe rolled", octx._breakdown?.opposed === "the raider (threat 20)");
+}
+
 // --- sense tiers ---
 check("novice gets no read", senseTier({ character: { ...char, attunement: 0, alignment: {} }, action, location: { spectrum: {} }, rules }) === 0);
 check("attuned master gets precise read", senseTier({ character: { ...char, attunement: 9 }, action, location: loc, rules }) === 3);

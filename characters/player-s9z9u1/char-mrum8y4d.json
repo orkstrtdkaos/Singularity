@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 2,
-  "xp": 191,
+  "xp": 196,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -67,7 +67,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 47,
+  "energy": 46,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -233,56 +233,98 @@
         "player": "Read it again with See the Made Thing — find out if it was built or born",
         "summary": "See the Made Thing confirms it: the creature at the threshold was born, not built — it came from the deep below the answered door, and the Unlit hold no alarm about it.",
         "narration": "You let See the Made Thing settle on the creature rather than chase it. The craft reads construction — or the absence of it.\n\nThere are no seams. No joining, no tool-mark, no point where something was assembled from parts. It was not made the way the seam was made, or the flame's bracket, or even Cy, who is very much a made thing. It came to this form the way a root comes to its shape — by finding the space available and filling it. Born, not built.\n\nCy's lens irides once and returns to stillness. The Standing Unlit has not moved. Whatever this is, it belongs to the deep below the door that answered, and the Unlit know it and have no alarm about knowing it.\n\nThe three warm patches hold at the threshold. They are patient. They are waiting for the shape of the moment to become clear — for you to do something, or not do something, that tells them whether the space above is ready."
+      },
+      {
+        "player": "Step to the door itself — press it fully, see if it opens now that something from below is asking in return",
+        "summary": "Loki pressed the seam fully and the door opened — a passage to the deep, smelling of cold water and living things. Three many-legged creatures descended back into the dark. The Unlit sat in their silence. The visit was complete.",
+        "narration": "You step to the seam and press your full weight against it. Not a fingertip this time — the whole flat of your hand, your shoulder behind it, the kind of asking that admits you mean it.\n\nThe stone moves. It swings inward on an axis you cannot see, smooth enough that the Unlit must have used it before you were born, revealing a passage no wider than your shoulders and a darkness below that is not the darkness of the chamber. It is deeper. It smells of cold water and old stone and something living — damp and faintly sweet, the way a forest floor smells after rain.\n\nThe three warm patches cross the threshold one by one. They move past your feet at a careful distance, many legs working in their uneven line, and descend the stair without looking back — or whatever looking back would mean for a thing with no face you can name. They belong down there. They were simply visiting.\n\nThe elder has not moved. The Standing Unlit has not moved. The pale blue flame burns. The silence that follows is the silence of a question answered, and the only thing left to carry out of the Unlit Deep is what you came here knowing and what you came here to learn.\n\n*✦ The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers. — a step forward.*"
       }
     ],
     "lastTurn": {
-      "narration": "You let See the Made Thing settle on the creature rather than chase it. The craft reads construction — or the absence of it.\n\nThere are no seams. No joining, no tool-mark, no point where something was assembled from parts. It was not made the way the seam was made, or the flame's bracket, or even Cy, who is very much a made thing. It came to this form the way a root comes to its shape — by finding the space available and filling it. Born, not built.\n\nCy's lens irides once and returns to stillness. The Standing Unlit has not moved. Whatever this is, it belongs to the deep below the door that answered, and the Unlit know it and have no alarm about knowing it.\n\nThe three warm patches hold at the threshold. They are patient. They are waiting for the shape of the moment to become clear — for you to do something, or not do something, that tells them whether the space above is ready.",
-      "sceneSummary": "See the Made Thing confirms it: the creature at the threshold was born, not built — it came from the deep below the answered door, and the Unlit hold no alarm about it.",
+      "narration": "You step to the seam and press your full weight against it. Not a fingertip this time — the whole flat of your hand, your shoulder behind it, the kind of asking that admits you mean it.\n\nThe stone moves. It swings inward on an axis you cannot see, smooth enough that the Unlit must have used it before you were born, revealing a passage no wider than your shoulders and a darkness below that is not the darkness of the chamber. It is deeper. It smells of cold water and old stone and something living — damp and faintly sweet, the way a forest floor smells after rain.\n\nThe three warm patches cross the threshold one by one. They move past your feet at a careful distance, many legs working in their uneven line, and descend the stair without looking back — or whatever looking back would mean for a thing with no face you can name. They belong down there. They were simply visiting.\n\nThe elder has not moved. The Standing Unlit has not moved. The pale blue flame burns. The silence that follows is the silence of a question answered, and the only thing left to carry out of the Unlit Deep is what you came here knowing and what you came here to learn.\n\n*✦ The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers. — a step forward.*",
+      "sceneSummary": "Loki pressed the seam fully and the door opened — a passage to the deep, smelling of cold water and living things. Three many-legged creatures descended back into the dark. The Unlit sat in their silence. The visit was complete.",
       "choices": [
         {
-          "label": "Hold still and let it come to you — open the space, do nothing that closes it",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
+          "label": "Step through — descend into whatever is below the answered door",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 30,
           "intentTags": [
-            "careful"
+            "risky",
+            "scout"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Speak to it — a quiet word toward the threshold, not to command, just to be heard",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Look into the passage with Prism Sight before committing — read what's below",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 15,
           "intentTags": [
-            "calm"
+            "scout",
+            "careful"
           ],
-          "trivial": false
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Crouch and let Cy extend toward it — two old things meeting, with you as the setting",
+          "label": "Leave the door open and go — carry what you have back to the city",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Step to the door itself — press it fully, see if it opens now that something from below is asking in return",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Ask the elder — plainly — what is down there, before you choose",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 15,
           "intentTags": [
-            "risky"
+            "negotiate",
+            "careful"
           ],
-          "abilityId": "see_the_made_thing",
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "The door below the answered seam is open. The creatures from below have returned. The visit to the Unlit Deep has reached its natural end — what Loki carries back to the city, and whether to descend first, is the remaining question."
+        }
+      ],
+      "stageOps": [
+        {
+          "questId": "loki-thread",
+          "stageId": "s1",
+          "evidence": "Loki pressed the ancient seam fully and the door opened — a passage deeper than the Unlit's own chamber, older than their doctrine, answering a question that predates the valley. The town that was too small is behind him now; something far older than it is below."
         }
       ],
       "scene": {
-        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands open and bright beside the bracket. Morning, no natural light.",
+        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands fully open now, a passage revealed beyond it, dark and descending, smelling of cold water and living things. Morning, no natural light.",
         "npcsPresent": [
           {
             "name": "Unlit Elder",
@@ -290,31 +332,62 @@
           },
           {
             "name": "Standing Unlit",
-            "state": "Beside the stair passage. Still. Head turned toward the passage. Calm."
+            "state": "Beside the stair passage. Still. Head no longer turned — forward-facing again, settled."
           },
           {
             "name": "Cy",
-            "state": "Lens irised once. Returned to stillness. Foreleg drawn back slightly."
+            "state": "At Loki's side. Lens has not irised again. Waiting."
           }
         ],
         "objects": [
           "The pale blue flame — bracket-mounted, burning, no wick",
-          "The seam in the stone beside the bracket — standing open and bright, unanswered second asking still pending",
+          "The seam in the stone beside the bracket — fully open, passage revealed beyond it, descending into cold dark",
           "The passage to the inner chamber — gap in worked stone, no door",
-          "Three small warm heat-traces at the stair threshold — holding still, patient, alive"
+          "Three many-legged creatures — descended back below, gone from sight"
         ],
         "threads": [
-          "Something born, not built, waits at the threshold — patient, reading the room",
-          "The seam has answered but not fully opened — the second asking is still unknown",
-          "What Loki carries back to the city: Sable's answer, the seam's nature, the creature below"
+          "The passage below the door is open — the creatures descended; what else is down there is unknown",
+          "What Loki carries back to the city: Sable's answer, the seam's nature, the passage below",
+          "Whether to descend or depart — the door is open and will not ask again"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "unlit-elder",
+          "name": "Unlit Elder",
+          "note": "The door opened fully. The elder made no comment. Their silence is acknowledgment of the completed act.",
+          "status": "active",
+          "statusNote": "Seated by the pale blue flame in the outer chamber — the visit has reached its end; the elder is present but finished speaking."
+        },
+        {
+          "op": "update",
+          "npcId": "standing-unlit",
+          "name": "Standing Unlit",
+          "note": "The creatures passed. The Standing Unlit faces forward again — the passage event is closed for them.",
+          "status": "active",
+          "statusNote": "Beside the stair passage, settled and forward-facing — the creatures have returned below and the Unlit are at rest."
+        }
+      ],
       "codexUpdates": [
+        {
+          "topic": "the-seam-beside-the-bracket",
+          "label": "The Seam Beside the Bracket",
+          "kind": "mystery",
+          "fact": "The full press opened the door completely — a passage descending into cold water smell and living dark, older than the Unlit's own chamber. The three many-legged creatures descended back through it and were gone. The door answers pressure when the intent behind it is genuine.",
+          "links": [
+            "the-unlit-deep",
+            "unlit-elder",
+            "the-unlit",
+            "the-creature-at-the-threshold",
+            "the-taken-from-the-city"
+          ]
+        },
         {
           "topic": "the-creature-at-the-threshold",
           "label": "The Creature at the Threshold",
           "kind": "mystery",
-          "fact": "See the Made Thing found no seams, no joinery, no assembly — the creature was born, not built. It came to its form the way a root fills its space. It belongs to the deep below the answered door. The Unlit hold no alarm about it.",
+          "fact": "The three creatures crossed the outer chamber threshold when the door opened fully, passed Loki's feet at a careful distance, and descended without hesitation. They came up to see what was asking; the answered door was enough. They belong to whatever is below.",
           "links": [
             "the-seam-beside-the-bracket",
             "the-unlit-deep",
@@ -323,13 +396,31 @@
           ]
         }
       ],
+      "placeUpdates": [
+        {
+          "note": "The seam door is now fully open — a passage descending into cold dark, smelling of water and living things, older than the Unlit. The door opened to a committed, full-weight press when the creatures from below were also present.",
+          "flag": {
+            "seam_fully_open": true,
+            "passage_below_revealed": true,
+            "creatures_descended": true
+          }
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The seam door in the outer chamber of the Unlit Deep opened fully when Loki pressed it with full intent while the creatures from below were present — a passage descends into cold dark beyond it.",
+          "subjectId": "the-seam-beside-the-bracket"
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief read, a moment of stillness"
-      }
+        "why": "The moment of opening and the creatures' departure — a brief, significant exchange."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands open and bright beside the bracket. Morning, no natural light.",
+      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands fully open now, a passage revealed beyond it, dark and descending, smelling of cold water and living things. Morning, no natural light.",
       "npcsPresent": [
         {
           "name": "Unlit Elder",
@@ -337,23 +428,23 @@
         },
         {
           "name": "Standing Unlit",
-          "state": "Beside the stair passage. Still. Head turned toward the passage. Calm."
+          "state": "Beside the stair passage. Still. Head no longer turned — forward-facing again, settled."
         },
         {
           "name": "Cy",
-          "state": "Lens irised once. Returned to stillness. Foreleg drawn back slightly."
+          "state": "At Loki's side. Lens has not irised again. Waiting."
         }
       ],
       "objects": [
         "The pale blue flame — bracket-mounted, burning, no wick",
-        "The seam in the stone beside the bracket — standing open and bright, unanswered ",
+        "The seam in the stone beside the bracket — fully open, passage revealed beyond i",
         "The passage to the inner chamber — gap in worked stone, no door",
-        "Three small warm heat-traces at the stair threshold — holding still, patient, al"
+        "Three many-legged creatures — descended back below, gone from sight"
       ],
       "threads": [
-        "Something born, not built, waits at the threshold — patient, reading the room",
-        "The seam has answered but not fully opened — the second asking is still unknown",
-        "What Loki carries back to the city: Sable's answer, the seam's nature, the creature below"
+        "The passage below the door is open — the creatures descended; what else is down there is unknown",
+        "What Loki carries back to the city: Sable's answer, the seam's nature, the passage below",
+        "Whether to descend or depart — the door is open and will not ask again"
       ]
     }
   },
@@ -380,14 +471,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "The elder confirmed the person came willingly and is in the inner chamber. The city's silence is now explained — they know. The elder permits one question: does the person wish to be found.",
         "The elder granted passage to the inner chamber. Loki is about to meet the person who came from the city willingly.",
         "Loki entered the inner chamber and found the taken person — seated, calm, and waiting. The question the elder permitted has not yet been asked.",
         "Loki gave the taken person an honest account of who they are and why they came — the person accepted the frame and said 'You can ask it.' The question is ready to be put.",
         "Sable gave the answer — they do not wish to be found. The choice was steady, reasoned, and their own. The question the elder permitted has been put and answered.",
         "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains.",
         "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread.",
-        "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened."
+        "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened.",
+        "The door below the answered seam is open. The creatures from below have returned. The visit to the Unlit Deep has reached its natural end — what Loki carries back to the city, and whether to descend first, is the remaining question."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -444,9 +535,13 @@
           "effects": []
         }
       ],
-      "stageIndex": 0,
-      "completedStages": [],
-      "progress": [],
+      "stageIndex": 1,
+      "completedStages": [
+        "s1"
+      ],
+      "progress": [
+        "↳ Loki pressed the ancient seam fully and the door opened — a passage deeper than the Unlit's own chamber, older than their doctrine, answering a question that predates the valley. The town that was…"
+      ],
       "aliases": [],
       "startedAt": "2026-07-27T13:42:10.222Z",
       "startedWorldDay": 27
@@ -529,7 +624,8 @@
         "[d1] Has remained beside the stair passage throughout. Has not spoken since stepping aside.",
         "[d1] Remained motionless beside the stair passage throughout the Prism Sight attempt and Cy's tap. Has not spoken.",
         "[d1] Turned their head toward the stair passage when something began moving there — the first time they have attended to anything other than Loki since Loki arrived.",
-        "[d1] Went still again when the creature paused at the threshold — head still turned but no longer tracking. Knows what this is."
+        "[d1] Went still again when the creature paused at the threshold — head still turned but no longer tracking. Knows what this is.",
+        "[d1] The creatures passed. The Standing Unlit faces forward again — the passage event is closed for them."
       ],
       "knownFacts": [
         "Objects to Cy's presence — calls it a 'light-thing'",
@@ -547,7 +643,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Beside the stair passage, still and settled — they recognize whatever is waiting at the threshold.",
+      "statusNote": "Beside the stair passage, settled and forward-facing — the creatures have returned below and the Unlit are at rest.",
       "domains": {
         "primary": "umbral"
       },
@@ -568,7 +664,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Declined Loki's question about the seam — 'that question belongs to the chamber, not to a visitor.' Gently, without hostility. The audience continues.",
         "[d1] Confirmed someone came from the city willingly. Said the city's silence tells its own story. Offered Loki the right to ask whether the person in the inner chamber wishes to be found.",
         "[d1] Granted Loki passage to the inner chamber with a single economical gesture and the words 'Then you may go in.' Did not rise, did not instruct, did not offer accompaniment.",
         "[d1] Received Sable's name, answer, and the frame Loki left behind. Acknowledged that Loki came, asked, and left the answer where it landed — called this what they would have Loki carry. Thanked Loki for carrying it honestly.",
@@ -577,7 +672,8 @@
         "[d1] Received Loki's reframed request — not to be taught the flame, but to carry the right question outward. Lifted one hand and gestured to the seam beside the bracket: named it older than the flame, older than the Unlit, and waiting. Said Loki has shown they know how to carry a question honestly. Did…",
         "[d1] Sat still while Loki read the seam. Did not comment. The silence after the read is itself a kind of acknowledgment.",
         "[d1] Sat still while Loki touched the seam. Did not comment. Did not warn. Did not move.",
-        "[d1] Did not move, did not comment on Cy's tap or the Prism Sight use. Sits watching or not watching."
+        "[d1] Did not move, did not comment on Cy's tap or the Prism Sight use. Sits watching or not watching.",
+        "[d1] The door opened fully. The elder made no comment. Their silence is acknowledgment of the completed act."
       ],
       "knownFacts": [
         "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
@@ -596,7 +692,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber — the seam question has moved forward; the elder has said everything they intend to say this visit.",
+      "statusNote": "Seated by the pale blue flame in the outer chamber — the visit has reached its end; the elder is present but finished speaking.",
       "domains": {
         "primary": "umbral"
       },
@@ -685,7 +781,8 @@
         "[d1] The inner chamber of the Unlit Deep: a small room, ceiling low enough to touch, floor worn in a narrow track. No flame. The taken person sat here long enough to warm the stone at their back.",
         "[d1] The seam beside the bracket responded to direct hand-pressure with a faint waiting vibration — the cut is precise, three direction-changes, and the stone holds the quality of something expecting a particular asking. It did not open.",
         "[d1] The seam's asking-point is at its base — the lowest third of the cut runs warmer under Prism Sight, and Cy tapped the floor there to mark it. The door's mechanism, if there is one, answers low.",
-        "[d1] The seam's asking-point was successfully pressed — the seam yielded and stands bright and open, but did not open fully. The question has been heard; the door waits for a second asking."
+        "[d1] The seam's asking-point was successfully pressed — the seam yielded and stands bright and open, but did not open fully. The question has been heard; the door waits for a second asking.",
+        "[d1] The seam door is now fully open — a passage descending into cold dark, smelling of water and living things, older than the Unlit. The door opened to a committed, full-weight press when the creatures from below were also present."
       ],
       "flags": {
         "seam_touched": true,
@@ -693,7 +790,9 @@
         "seam_asking_point": "base",
         "seam_warmth_located": true,
         "seam_answered": true,
-        "seam_open_partial": true
+        "seam_open_partial": true,
+        "seam_fully_open": true,
+        "passage_below_revealed": true
       },
       "lastVisit": 1,
       "vectorsKnown": [
@@ -854,7 +953,7 @@
     "lastSharedReadAt": "2026-07-27T15:31:10.092Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -1273,14 +1372,16 @@
           "[d1] See the Made Thing confirmed it is a door-frame — cut with clear purpose, made for something to pass through. It predates the pale blue flame, predates the bracket beside it, and predates the Unlit's occupation of the chamber. The craft found no maker's fingerprint it could name. The purpose-shape…",
           "[d1] Physical contact confirmed: the seam is cut with precision — the tool changed direction exactly three times. Under a hand's pressure, it gives a faint vibration, like a thing waiting for the right asking. It did not open. The morning was not the right pressure. Cy extended one foreleg toward the…",
           "[d1] Prism Sight and Cy's combined attention found the seam's asking-point: the lowest third runs warmer than the rest — the quality of a mechanism recently queried and still waiting to answer. Cy tapped the floor at the seam's base to confirm. The door did not open, but the asking-point is now located.",
-          "[d1] Pressing the floor at the base of the seam — the asking-point Cy and Prism Sight located — caused it to yield downward slightly and the seam to stand open and visible. The vibration ceased; the stillness that replaced it is of a question heard, not waiting. The door has answered but has not…"
+          "[d1] Pressing the floor at the base of the seam — the asking-point Cy and Prism Sight located — caused it to yield downward slightly and the seam to stand open and visible. The vibration ceased; the stillness that replaced it is of a question heard, not waiting. The door has answered but has not…",
+          "[d1] The full press opened the door completely — a passage descending into cold water smell and living dark, older than the Unlit's own chamber. The three many-legged creatures descended back through it and were gone. The door answers pressure when the intent behind it is genuine."
         ],
         "links": [
           "the-unlit-deep",
           "unlit-elder",
           "the-unlit",
           "the-taken-from-the-city",
-          "terminus-seals-beneath-the-valley"
+          "terminus-seals-beneath-the-valley",
+          "the-creature-at-the-threshold"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1291,7 +1392,8 @@
         "label": "The Creature at the Threshold",
         "kind": "mystery",
         "facts": [
-          "[d1] See the Made Thing found no seams, no joinery, no assembly — the creature was born, not built. It came to its form the way a root fills its space. It belongs to the deep below the answered door. The Unlit hold no alarm about it."
+          "[d1] See the Made Thing found no seams, no joinery, no assembly — the creature was born, not built. It came to its form the way a root fills its space. It belongs to the deep below the answered door. The Unlit hold no alarm about it.",
+          "[d1] The three creatures crossed the outer chamber threshold when the door opened fully, passed Loki's feet at a careful distance, and descended without hesitation. They came up to see what was asking; the answered door was enough. They belong to whatever is below."
         ],
         "links": [
           "the-seam-beside-the-bracket",
@@ -1306,22 +1408,22 @@
     }
   },
   "tendencies": {
-    "devotion": 3.752909157029677,
-    "cerebral": 13.012176142950276,
-    "social": 16.648739107634547,
-    "strategic": 7.795852101709221,
-    "cautious": 6.562102629955367,
-    "amorous": 7.250132772966312,
-    "generous": 3.225720687193023,
-    "ruthless": 0.42282137456861496,
-    "risky": 0.9506249999999999
+    "devotion": 3.6590864281039353,
+    "cerebral": 12.68687173937652,
+    "social": 16.232520629943682,
+    "strategic": 7.60095579916649,
+    "cautious": 6.398050064206483,
+    "amorous": 7.068879453642154,
+    "generous": 3.145077670013197,
+    "ruthless": 0.41225084020439956,
+    "risky": 1.9268593749999998
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "charmer"
   ],
-  "actionCount": 52,
+  "actionCount": 53,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1470,8 +1572,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785167147206,
-  "rev": 109,
+  "updatedAt": 1785167608039,
+  "rev": 110,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1789,7 +1891,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 23
+    "umbral_depths": 24
   },
   "opLossPending": false,
   "sessions": [
@@ -1820,10 +1922,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T15:45:47.205Z",
+      "lastAt": "2026-07-27T15:53:28.035Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 19
+      "beats": 20
     }
   ],
   "establishedFacts": [
@@ -1844,6 +1946,12 @@
       "text": "Loki gave Sable a livable frame for their choice before leaving — not argument, not appeal; a true shape for what they chose. Sable acknowledged it. The parting was honest and unhostile.",
       "day": 1,
       "subjectId": "the-taken-person"
+    },
+    {
+      "id": "the-seam-beside-the-bracket",
+      "text": "The seam door in the outer chamber of the Unlit Deep opened fully when Loki pressed it with full intent while the creatures from below were present — a passage descends into cold dark beyond it.",
+      "day": 1,
+      "subjectId": "the-seam-beside-the-bracket"
     }
   ],
   "_opLedger": {
@@ -1855,26 +1963,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 51,
-    "choices": 51,
-    "characterDeltas": 24,
-    "scene": 51,
-    "placeUpdates": 7,
-    "codexUpdates": 41,
-    "timeOps": 50,
+    "sceneSummary": 52,
+    "choices": 52,
+    "characterDeltas": 25,
+    "scene": 52,
+    "placeUpdates": 8,
+    "codexUpdates": 42,
+    "timeOps": 51,
     "offer": 5,
     "generateRequest": 2,
-    "sceneEnded": 12,
-    "npcUpdates": 44,
+    "sceneEnded": 13,
+    "npcUpdates": 45,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 8,
+    "questUpdates": 9,
     "standingOps": 1,
-    "factUpdates": 3,
-    "stageOps": 4
+    "factUpdates": 4,
+    "stageOps": 5
   },
-  "_opTurns": 51,
+  "_opTurns": 52,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -1882,7 +1990,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 16,
+      "see_the_made_thing": 17,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

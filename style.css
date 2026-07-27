@@ -150,6 +150,15 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .dec-road-name { display: block; font-size: 13px; color: var(--ink); }
 .dec-road-hint { display: block; font-size: 11px; color: var(--ink-dim); margin-top: 2px; line-height: 1.35; }
 .dec-more { margin-top: 8px; font-size: 11px; color: var(--ink-dim); }
+/* SNG-243 §4: the gate-network panel on the map — fold direct to any known gate, hub-and-spoke, for a hop cost. */
+.net-panel { border: 1px solid #345a72; border-radius: 10px; background: linear-gradient(180deg, rgba(90,140,200,0.10), var(--panel)); padding: 10px 12px; margin: 12px 0; }
+.net-panel-title { font-family: var(--font); font-size: 15px; color: #6fb0d8; letter-spacing: 1px; }
+.net-hop { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; text-align: left; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; margin: 4px 0 0; cursor: pointer; font-family: var(--font-ui); transition: border-color .15s, background .15s; }
+.net-hop:hover { border-color: #6fb0d8; background: rgba(90,140,200,0.10); }
+.net-hop-name { font-size: 13px; color: var(--ink); }
+.net-hop-cost { font-size: 11px; color: var(--ink-dim); white-space: nowrap; }
+.net-tag { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-dim); border: 1px solid var(--border); border-radius: 6px; padding: 0 4px; margin-left: 4px; }
+.net-tag-default { color: #e0b25a; border-color: #7a5f2a; }
 /* SNG-236 UX: the ⚙ Moves gear — grouped encounter moves (ward/sense/strike by family + the ways out) above the input */
 .moves-panel { border: 1px solid var(--danger); border-radius: 10px; background: linear-gradient(180deg, rgba(192,91,77,0.08), var(--panel)); padding: 10px 12px; margin: 8px 0; }
 .moves-hint { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; }

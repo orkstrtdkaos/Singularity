@@ -182,6 +182,16 @@
       "consumer": { "file": "app.js", "region": "mintWaygate" },
       "assert": { "requires": ["resolveLocationId", "waygateConnections", "waygateDefaultTo", "SNG-232 seam"] },
       "canFail": "Remove the resolveLocationId guard in mintWaygate: a connects[].to that doesn't resolve mints a broken travel edge (the SNG-243 default/intent destinations become unreachable) instead of being dropped loudly -> red."
+    },
+    {
+      "id": "network-hop-costs",
+      "incident": "SNG-243",
+      "kind": "cross_source",
+      "contract": "A gate-NETWORK hop MUST pay the gate-hop cost — travelTo receives { cost } and applies both the hours AND the energy toll. A network hop wired without the cost is a free teleport, which the §4 guard forbids (the network stays infrastructure, not a cheat).",
+      "producer": { "file": "engine/waygate.js", "note": "networkGatesFrom returns each reachable gate with a priced cost (gateHopCost: hours + energy)" },
+      "consumer": { "file": "app.js", "region": "travelTo" },
+      "assert": { "requires": ["cost\\?\\.hours", "cost\\?\\.energy"] },
+      "canFail": "Remove the cost application in travelTo: a network hop advances only the flat ADVANCE.travel and costs no energy -> gate travel becomes a free teleport (SNG-243 §4 guard: network travel has a cost) -> red."
     }
   ]
 }

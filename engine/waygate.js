@@ -48,6 +48,53 @@ export function wayfaringTier(character) {
   return Math.max(1, Math.floor(wits / 2) + breadth);
 }
 
+// ---------- SNG-243 §4: the gate NETWORK (SNG-148 realized) ----------
+// A networkCapable gate reaches any OTHER network gate the character KNOWS (been to) and can aim at (skill),
+// gate-to-gate — the hub-and-spoke that turns waygates from convenience into infrastructure. The Made Gate
+// (SNG-243 §3) is the player's FIRST personal spoke: Silas made the first new gate, and it's his entry into
+// the network. Membership: authored gates ARE network nodes; a runtime (made) gate opts in via networkCapable.
+
+/** Is this gate a participant in the travel network? Authored gates are; a made/runtime gate opts in. */
+export function isNetworkGate(loc) {
+  if (!loc?.waygate) return false;
+  if (loc.networkCapable || loc.waygateHub) return true;
+  return !loc._gen; // authored gate → in the network; a runtime/made gate joins only if it declared networkCapable
+}
+
+// The gate-hop DIALS (Erik's to tune). A hop costs TIME — a fraction of the overland journey, because the gate's
+// whole point is that a season becomes an afternoon — plus a flat ENERGY toll (the wayfaring effort). Never free:
+// a cost keeps the network infrastructure, not a teleport cheat. Caps keep the shortest hop meaningful, the
+// longest sane. timeFraction 0.04 → a 300-day antipodal walk becomes ~12h (capped at maxHours regardless).
+export const GATE_HOP = { timeFraction: 0.04, minHours: 2, maxHours: 72, energy: 10 };
+/** Price a hop from an overland distance (days on foot) → { hours, energy, overlandDays }. Pure. */
+export function gateHopCost(overlandDays = 0) {
+  const d = Math.max(0, Number(overlandDays) || 0);
+  const hours = Math.max(GATE_HOP.minHours, Math.min(GATE_HOP.maxHours, Math.round(d * 24 * GATE_HOP.timeFraction)));
+  return { hours, energy: GATE_HOP.energy, overlandDays: Math.round(d) };
+}
+
+/** The network gates reachable FROM where the character stands (which must itself be a network gate): every
+ *  OTHER network gate they've DISCOVERED and can aim at (their wayfaring tier ≥ the gate's), plus the hub
+ *  (always findable). Each carries the overland distance + priced hop (gateHopCost) so the caller can surface
+ *  cost. Empty when not standing at a network gate. Pure over locations + knownPlaces/wayfaring. `walkingDays`
+ *  is injected (worldmap.js) so this module stays geometry-free; without it, cost is the minimum-hours floor. */
+export function networkGatesFrom(character, locations, { walkingDays } = {}) {
+  const origin = locations?.[character?.currentLocationId];
+  if (!isNetworkGate(origin)) return [];
+  const hub = hubWaygate(locations);
+  const known = new Set(character?.knownPlaces || []);
+  const tier = wayfaringTier(character);
+  const defaultTo = origin.waygateDefaultTo || null; // SNG-243 §3: the made gate's default endpoint
+  return Object.values(locations || {})
+    .filter(l => isNetworkGate(l) && l.id !== origin.id)
+    .filter(l => (hub && l.id === hub.id) || (known.has(l.id) && tier >= waygateTierOf(l)))
+    .map(l => {
+      const overlandDays = (typeof walkingDays === "function") ? (walkingDays(origin, l) || 0) : 0;
+      return { id: l.id, name: l.name, tier: waygateTierOf(l), isHub: !!(hub && l.id === hub.id), isDefault: l.id === defaultTo, overlandDays, cost: gateHopCost(overlandDays) };
+    })
+    .sort((a, b) => (a.isDefault !== b.isDefault ? (a.isDefault ? -1 : 1) : a.isHub !== b.isHub ? (a.isHub ? -1 : 1) : a.overlandDays - b.overlandDays));
+}
+
 /** PURE routing. From a gate, aiming at destId:
  *  { destId, routed: "named"|"hub", known, skilled } — or null when the origin
  *  isn't a gate / the network has no hub / no gates exist (standard travel).
@@ -119,11 +166,20 @@ export function waygateBlockForGM(character, locations) {
   const aimable = knownWaygates(character, locations)
     .filter(l => l.id !== origin.id && (l.id === hub.id || tier >= waygateTierOf(l)))
     .map(l => l.name);
+  // SNG-243 §4: if the character stands at a NETWORK gate, the committed connections + default are canon — the
+  // GM reads them instead of improvising where the gate goes. A networkCapable gate reaches the whole network.
+  const net = isNetworkGate(origin);
+  const defaultName = origin.waygateDefaultTo ? (locations?.[origin.waygateDefaultTo]?.name || null) : null;
+  const netLine = net
+    ? `This is a NETWORK gate — from it the character can fold directly to any gate they know across the network (hub-and-spoke), not only the hub. ` +
+      (defaultName ? `Its DEFAULT endpoint, if they step through without naming a destination, is ${defaultName}. ` : "")
+    : "";
   return `WAYGATE: the character stands at ${origin.name}, a living waygate. Transit is real travel (hours pass). ` +
+    netLine +
     (aimable.length
       ? `Gates they can aim true at: ${aimable.join(", ")}. Anywhere else through the gate lands at ${hub.name} — the hub; that is routing, not failure. `
       : `They cannot yet aim at a distant gate (undiscovered, or beyond their wayfaring) — the gate will carry them to ${hub.name}, the hub. `) +
     `You MAY surface the gate as a door woven into the fiction when travel is on the character's mind — never as a menu, never every beat. ` +
-    `⛔ IF THE CHARACTER STEPS THROUGH, your "moveTo" MUST NAME THE DESTINATION GATE — one of the gates listed above, or ${hub.name}. ` +
+    `⛔ IF THE CHARACTER STEPS THROUGH, your "moveTo" MUST NAME THE DESTINATION GATE — one of the gates listed above${defaultName ? `, ${defaultName} (the default)` : ""}, or ${hub.name}. ` +
     `Never emit a moveTo of "the waygate", "the gate", "the centre" or any other generic word for the transit itself: those are not places, and naming one lands the character in a room that does not exist. Name where they COME OUT.`;
 }

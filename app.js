@@ -39,7 +39,7 @@ import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, departureGateFor, isSpeechAct, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard
-import { resolveWaygateTransit, routeGmMoveTo } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
+import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.288";
+const APP_VERSION = "1.8.289";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5294,7 +5294,7 @@ function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, 
   return gid;
 }
 
-async function travelTo(locId) {
+async function travelTo(locId, { cost } = {}) {
   if (busy) return;
   noteGeneratedAttention(locId, "revisit", readClock(character.clock).day); // §2: returning to a grown place keeps it alive
   addKnownPlace(locId); // SNG-117: somewhere you've been is known
@@ -5302,7 +5302,10 @@ async function travelTo(locId) {
   character.activeScene = null;
   sceneTurns = [];
   sceneState = null;
-  advanceClock(character.clock, ADVANCE.travel);
+  // SNG-243 §4: a gate-NETWORK hop carries its own cost (a fraction of the overland time + an energy toll — the
+  // gate's whole point is that a season becomes an afternoon, but it's never free). Ordinary travel: ADVANCE.travel.
+  advanceClock(character.clock, cost?.hours != null ? cost.hours : ADVANCE.travel);
+  if (cost?.energy) character.energy = Math.max(0, (character.energy || 0) - cost.energy);
   notePlaceVisit(character, locId, readClock(character.clock).day, CONTENT.locations[locId]?.name);
   notePerception(character, locId, CONTENT.locations[locId], { visited: true, usedAbilityIds: [] }, CONTENT.rules);
   try { ensureLocationImage(locId); } catch { /* SNG-046 L3: art is a convenience; never block travel */ }
@@ -5605,6 +5608,18 @@ function renderMap(selectedId = null) {
       })()}
     </div>`;
   }
+  // SNG-243 §4: the gate NETWORK panel — when you STAND at a networked gate, fold direct to any gate you know,
+  // hub-and-spoke, for a hop cost (a fraction of the overland time + an energy toll). The made gate's default
+  // endpoint leads. This is the infrastructure surface: the network is legible, not buried in per-place routing.
+  const netGates = networkGatesFrom(character, CONTENT.locations, { walkingDays });
+  const netBlock = (isNetworkGate(CONTENT.locations[here]) && netGates.length) ? `
+    <div class="net-panel">
+      <div class="net-panel-title">◈ The gate network</div>
+      <div class="hint" style="margin:0 0 6px">You stand at ${esc(CONTENT.locations[here]?.name || "a gate")}, a networked waygate — fold direct to any gate you've reached. A hop costs a fraction of the road plus a wayfaring toll.</div>
+      ${netGates.map(g => `<button class="net-hop" data-nethop="${esc(g.id)}" title="${g.overlandDays ? `about ${g.overlandDays} day${g.overlandDays === 1 ? "" : "s"} on foot — the gate makes it ${g.cost.hours}h` : "a short fold"}">
+        <span class="net-hop-name">${esc(g.name)}${g.isHub ? ` <span class="net-tag">hub</span>` : ""}${g.isDefault ? ` <span class="net-tag net-tag-default">default</span>` : ""}</span>
+        <span class="net-hop-cost">+${g.cost.hours}h · ${g.cost.energy}⚡</span></button>`).join("")}
+    </div>` : "";
   chrome(`<div class="screen" style="max-width:900px">
     <h2>${esc((CONTENT.regions || []).find(r => r.regionId === focusRegion)?.name || "Region")}</h2>
     ${/* SNG-154 stage 6: this count is now the REGION's, not the world's — and it is derived, so it
@@ -5623,6 +5638,7 @@ function renderMap(selectedId = null) {
       </div>
       ${svg}
     </div>
+    ${netBlock}
     ${details}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
@@ -5642,6 +5658,11 @@ function renderMap(selectedId = null) {
   if (travelBtn) travelBtn.onclick = () => travelTo(travelBtn.dataset.dest);
   const wgBtn = document.getElementById("map-waygate");
   if (wgBtn) wgBtn.onclick = () => travelTo(wgBtn.dataset.wgdest); // SNG-148: the click IS the confirmed intent; transit is real travel
+  // SNG-243 §4: a network hop — fold to a known gate across the network, paying the gate-hop cost (not the flat travel hours).
+  for (const b of app.querySelectorAll("[data-nethop]")) b.onclick = () => {
+    const g = netGates.find(x => x.id === b.dataset.nethop);
+    travelTo(b.dataset.nethop, { cost: g ? g.cost : gateHopCost(0) });
+  };
   for (const b of app.querySelectorAll("[data-subgo]")) b.onclick = () => {
     const pm = character.placeMemory?.[b.dataset.subloc];
     const sp = pm?.subPlaces?.[b.dataset.subgo];

@@ -4987,6 +4987,32 @@ await (async () => {
   })());
 }
 
+// --- SNG-243 §4: the gate NETWORK (membership, attunement reach, hop cost) ---
+{
+  const { isNetworkGate, networkGatesFrom, gateHopCost, GATE_HOP } = await import('../engine/waygate.js');
+  const locs = {
+    the_crossing: { id: "the_crossing", name: "The Crossing", waygate: true, waygateHub: true, waygateTier: 1 },
+    far_gate: { id: "far_gate", name: "The Far Gate", waygate: true, waygateTier: 3 },
+    made_gate: { id: "made_gate", name: "The Made Gate", waygate: true, waygateTier: 2, networkCapable: true, waygateDefaultTo: "the_crossing", _gen: {} },
+    private_gate: { id: "private_gate", name: "A Private Door", waygate: true, waygateTier: 1, _gen: {} }, // a runtime gate that did NOT opt in
+    plain_town: { id: "plain_town", name: "Plain Town" }
+  };
+  check("243§4: an authored gate IS a network node", isNetworkGate(locs.the_crossing) && isNetworkGate(locs.far_gate));
+  check("243§4: a made/runtime gate joins the network only via networkCapable", isNetworkGate(locs.made_gate) === true && isNetworkGate(locs.private_gate) === false);
+  check("243§4: a non-gate (or nothing) is not a network node", isNetworkGate(locs.plain_town) === false && isNetworkGate(null) === false);
+  check("243§4: gateHopCost is a fraction of overland time + a flat energy toll, capped both ends", (() => {
+    const near = gateHopCost(1), far = gateHopCost(1000);
+    return near.hours === GATE_HOP.minHours && far.hours === GATE_HOP.maxHours && far.energy === GATE_HOP.energy && near.overlandDays === 1;
+  })());
+  const traveler = { currentLocationId: "made_gate", knownPlaces: ["made_gate", "the_crossing", "far_gate"], subAttributes: { wits: 6 }, regionsKnown: { a: 1, b: 1, c: 1, d: 1, e: 1 } };
+  const net = networkGatesFrom(traveler, locs);
+  check("243§4: from a network gate, the KNOWN network gates are reachable (hub always)", net.map(g => g.id).sort().join(",") === "far_gate,the_crossing");
+  check("243§4: the made gate's default endpoint sorts FIRST and is tagged (default + hub here)", net[0].id === "the_crossing" && net[0].isDefault === true && net[0].isHub === true);
+  check("243§4: a gate you have NOT reached is not in the network (attunement gate)", !networkGatesFrom({ ...traveler, knownPlaces: ["made_gate"] }, locs).some(g => g.id === "far_gate"));
+  check("243§4: too low a wayfaring drops a high-tier gate (skill gate)", !networkGatesFrom({ ...traveler, subAttributes: { wits: 2 }, regionsKnown: {} }, locs).some(g => g.id === "far_gate"));
+  check("243§4: not standing at a network gate → empty (no network from a plain place)", networkGatesFrom({ ...traveler, currentLocationId: "plain_town" }, locs).length === 0);
+}
+
 // --- SNG-145: intent confirmation for costly acts (Law 9 in the play loop) ---
 {
   const { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents, rungAtRank } = await import('../engine/intent.js');

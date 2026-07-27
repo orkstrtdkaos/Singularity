@@ -5,6 +5,8 @@
 
 const MODEL_MAP = {
   "gm-narrate": "claude-sonnet-4-6",
+  "gm-narrate-rich": "claude-sonnet-4-6", // SNG-242 §5: the player's "richer telling" — flagship + a fuller budget (standard may later drop to Haiku; rich always flagship)
+  "gm-retell": "claude-sonnet-4-6",       // SNG-242 §5c: the state-safe "tell it again, richer" — re-renders PROSE only from a committed beat, never re-rolls
   "gm-meta": "claude-sonnet-4-6",
   "bio-gen": "claude-sonnet-4-6",
   "world-tick": "claude-sonnet-4-6",
@@ -16,7 +18,7 @@ const MODEL_MAP = {
   _default: "claude-sonnet-4-6"
 };
 
-const BUDGETS = { "gm-narrate": 8000, "codex-adjudicate": 900, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "generate": 1500, "intent-parse": 1024, "chronicle-compress": 1024, "chronicle": 768, _default: 2048 };
+const BUDGETS = { "gm-narrate": 8000, "gm-narrate-rich": 12000, "gm-retell": 4000, "codex-adjudicate": 900, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "generate": 1500, "intent-parse": 1024, "chronicle-compress": 1024, "chronicle": 768, _default: 2048 };
 
 // Minimum cacheable prefix, per model (Anthropic silently skips caching below this,
 // with no write premium). A breakpoint on a sub-min block is wasted — we fold small

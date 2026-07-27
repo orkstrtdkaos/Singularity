@@ -9,7 +9,7 @@ import { recordDeed, standingWith, reputationSummary } from "./engine/reputation
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
-import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
+import { gmTurn, reNarrateRich, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
 import { namesToAvoid } from "./engine/namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.282";
+const APP_VERSION = "1.8.283";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -259,6 +259,7 @@ let _lightboxWired = false; // SNG-053: one-time lightbox click delegation (refe
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
 let movesOpen = false;           // SNG-236 UX: the encounter Moves gear (grouped ward/sense/strike) open?
+let _richNextTurn = false;       // SNG-242 §5: armed by the "✦ Rich" toggle — the NEXT turn is told at the flagship tier, then cleared
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
 let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
 // SNG-120: per-section collapse state for the play sidebar, mirroring the npcGroups open-set pattern.
@@ -1308,6 +1309,12 @@ function renderSettings(note = "") {
       <label class="rating-check"><input type="checkbox" id="set-minor" ${isMinorProfile(profile) ? "checked" : ""}> This profile is a minor — caps at PG-13; can never be set to R or R+</label>
       <label class="rating-check"><input type="checkbox" id="set-adultgate" ${profile.rating?.adultVerified ? "checked" : ""}> Adult gate — authorize R / R+ for this profile (required for R and above)</label>
       <div class="hint">Sets how intense narration and generated content get: G · PG · PG-13 · R · R+ (full intensity). Two floors are ALWAYS on regardless of ceiling: never any prohibited content, and a minor is never portrayed in romantic or sexual content.</div></div>
+    <div class="field"><label>Narration richness — the telling</label>
+      <select id="set-narrationtier">
+        <option value="standard" ${profile.narrationTier !== "rich" ? "selected" : ""}>Standard — the normal telling</option>
+        <option value="rich" ${profile.narrationTier === "rich" ? "selected" : ""}>Rich — fuller, more vivid prose every beat</option>
+      </select>
+      <div class="hint">SNG-242: how the GM tells each beat. <strong>Rich</strong> asks for a fuller, more sensory telling (a little slower + costlier). You can also arm just ONE beat with the <strong>✦ Rich</strong> toggle by the input, or tap <strong>✦ Tell it again, richer</strong> on any turn to re-tell that beat beautifully — same events, richer prose.</div></div>
     <div class="field"><label>Developer mode</label>
       <label class="rating-check"><input type="checkbox" id="set-dev" ${(() => { try { return localStorage.getItem("singularity.devPersist") === "1"; } catch { return false; } })() ? "checked" : ""}> Show developer tools (the 🧪 Legs panel, test-encounter buttons, the scenario runner)</label>
       <div class="hint">Off by default — normal play never shows dev tools. ${isDevMode() ? `<strong>Dev mode is currently ON</strong>${(() => { try { return new URLSearchParams(location.search).get("dev") === "1"; } catch { return false; } })() ? " for this URL (reload without <code>?dev=1</code> for a clean player view)" : /^(localhost|127\\.0\\.0\\.1)/.test(location.hostname) ? " because this is a local dev host" : ""}. ` : ""}Ticking this box is a deliberate, persistent opt-in on this browser; untick + Save to turn it fully off.</div></div>
@@ -1339,6 +1346,7 @@ function renderSettings(note = "") {
     profile.plainness = document.getElementById("set-plainness").value; // SNG-144: narration plainness dial
     profile.bluntness = document.getElementById("set-bluntness").value; // SNG-144: narration bluntness dial (rating-capped)
     profile.contentGenerator = document.getElementById("set-contentgen").checked; // SNG-134 P4: canon-author toggle (SNG-132 engine reads it)
+    profile.narrationTier = document.getElementById("set-narrationtier").value === "rich" ? "rich" : "standard"; // SNG-242 §5: default telling tier
     saveProfile(profile);
     setApiKey(document.getElementById("set-key").value);
     setArtMode(document.getElementById("set-art").value);
@@ -3477,7 +3485,11 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
   if (env.location?.regionId) { character.regionsKnown = character.regionsKnown || {}; character.regionsKnown[env.location.regionId] = (character.regionsKnown[env.location.regionId] || 0) + 1; }
-  const result = await gmTurn(assembleGMContext("turn", env));
+  // SNG-242 §5: the quality tier for THIS beat — the per-turn "richer telling" toggle wins, else the player's
+  // default from Settings (profile.narrationTier). The toggle is one-shot: consumed here so it doesn't stick.
+  const tier = (_richNextTurn || profile?.narrationTier === "rich") ? "rich" : "standard";
+  _richNextTurn = false;
+  const result = await gmTurn(assembleGMContext("turn", env), { tier });
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
   // SNG-009: track op loss so the next turn's GM restates missed updates
@@ -8514,6 +8526,9 @@ function renderPlay(turn, opts = {}) {
     // SNG-168 §2: post THIS turn to the family feed — the value is the CHOOSING (a moment you loved), never
     // automatic. Only when family-sync is on (a shared feed needs the shared repo). Not canon — a scrapbook post.
     if (syncEnabled() && turn.narration) main += `<div class="turn-post"><button class="opt" id="post-to-feed" title="Share this moment with the family — it appears in their feed, lensed to their rating. Not canon: it never changes anyone's game.">📮 Post to feed</button></div>`;
+    // SNG-242 §5c: re-tell THIS beat beautifully — same events, richer prose. State-safe (reads the committed
+    // outcome, never re-rolls). Shown when there's real narration + a key (not on a degraded/opless beat).
+    if (getApiKey() && turn.narration && !opts.degraded && !turn._retold) main += `<div class="turn-retell"><button class="opt" id="retell-rich" title="Re-tell this beat beautifully — the same events, a fuller telling. It never changes what happened.">✦ Tell it again, richer</button></div>`;
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
     for (const c of turn.choices || []) {
@@ -8584,6 +8599,7 @@ function renderPlay(turn, opts = {}) {
       <input id="freeform-input" placeholder="${activeEnc() && !askMode ? "Describe your move — the encounter's rules bind it…" : askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
       <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
       ${activeEnc() ? `<button id="moves-open" class="mode-toggle ${movesOpen ? "apt" : ""}" title="Encounter moves — grouped by family (ward / sense / strike …) + the ways out. Rules enforced." ${busy ? "disabled" : ""}>⚙ Moves</button>` : ""}
+      ${profile?.narrationTier !== "rich" ? `<button id="rich-toggle" class="mode-toggle ${_richNextTurn ? "apt" : ""}" title="Tell THIS next beat richly — a fuller, more vivid telling (SNG-242). One beat; set your default in Settings." ${busy ? "disabled" : ""}>✦ Rich</button>` : ""}
       <button id="gambit-open" class="mode-toggle ${apt ? "apt" : ""}" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
   }
   if (isDev()) {
@@ -8750,6 +8766,22 @@ function renderPlay(turn, opts = {}) {
   const invBtn = document.getElementById("open-inventory"); if (invBtn) invBtn.onclick = () => renderInventoryScreen();
   const feedNav = document.getElementById("open-feed"); if (feedNav) feedNav.onclick = () => renderFeed();
   const postBtn = document.getElementById("post-to-feed"); if (postBtn) postBtn.onclick = () => postTurnToFeed(turn); // SNG-168 §2
+  // SNG-242 §5: arm the NEXT beat for a rich telling (one-shot; consumed in runGM).
+  const richTgl = document.getElementById("rich-toggle"); if (richTgl) richTgl.onclick = () => { _richNextTurn = !_richNextTurn; renderPlay(turn, opts); };
+  // SNG-242 §5c: re-tell THIS beat richer — state-safe (prose only; the committed outcome/ops are untouched).
+  const retellBtn = document.getElementById("retell-rich");
+  if (retellBtn) retellBtn.onclick = async () => {
+    if (busy) return;
+    retellBtn.disabled = true; retellBtn.textContent = "✦ Retelling…";
+    try {
+      const richer = await reNarrateRich(turn.narration, { ratingLine: ratingLineForGM() });
+      if (richer) {
+        turn.narration = richer; turn._retold = true;
+        if (character.activeScene && character.activeScene.lastTurn === turn) { try { saveCharacter(character); } catch { /* display-only enrich */ } }
+        renderPlay(turn, opts);
+      } else { retellBtn.disabled = false; retellBtn.textContent = "✦ Tell it again, richer"; }
+    } catch { retellBtn.disabled = false; retellBtn.textContent = "✦ Tell it again, richer"; }
+  };
   const ff = document.getElementById("freeform-input");
   const go = document.getElementById("freeform-go");
   const setMode = (mode) => {

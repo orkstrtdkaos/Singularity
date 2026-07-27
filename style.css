@@ -299,6 +299,7 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .char-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
 /* SNG-168 §2: the world feed — the per-turn post control + the family feed view. */
 .turn-post { margin: 8px 0 4px; }
+.turn-retell { margin: 2px 0 6px; } /* SNG-242 §5c: the "tell it again, richer" control */
 .feed-body { display: flex; flex-direction: column; gap: 14px; }
 .feed-post { background: var(--panel2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
 .feed-post.lensed { opacity: .7; border-style: dashed; }

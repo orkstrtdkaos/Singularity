@@ -447,7 +447,7 @@ export function salvageOps(raw) {
 
 const PROSE_SYSTEM = `You are the Game Master for SINGULARITY, a narrative RPG in the Valley of Echoes. Narrate the current beat in 2-4 tight paragraphs of second-person present-tense prose. Honor the resolution outcome and scene state provided. Reply with PROSE ONLY — no JSON, no lists, no headers.`;
 
-export async function gmTurn(ctx) {
+export async function gmTurn(ctx, { tier = "standard" } = {}) {
   const content = buildTurnContext(ctx); // flat — used only by the prose fallback
   // Prompt-cache tiers (stable → volatile), each a cached system block: [1] GM system +
   // rules, [2] world model, [3] immediate scene, [4] rolling state + history. The player's
@@ -457,8 +457,13 @@ export async function gmTurn(ctx) {
     { text: GM_SYSTEM + (t.rules ? "\n\n" + t.rules : "") },
     { text: t.world }, { text: t.scene }, { text: t.state }
   ].filter(b => b.text && b.text.trim());
-  const userContent = (t.player && t.player.trim()) ? t.player : "(Continue the scene from the state above.)";
-  const gmOpts = { task: "gm-narrate", systemBlocks, cacheKey: "singularity-runtime" };
+  // SNG-242 §5: the player's quality tier. "rich" routes to gm-narrate-rich (flagship + a fuller budget) and
+  // asks for the beautiful telling of THIS beat — same outcome/ops/scene, richer prose. The directive rides the
+  // UNCACHED user message (after the last cache breakpoint), so it never disturbs the prompt cache.
+  const rich = tier === "rich";
+  const richDirective = rich ? "\n\n(RICH TELLING — the player chose the beautiful version of THIS beat: tell it fuller, more vivid and sensory, with more emotional weight, a little longer than usual (up to ~6 paragraphs). Honor the SAME resolution outcome, scene state, and EVERY op and rule exactly — richer prose, never different events. Still return the same JSON shape.)" : "";
+  const userContent = ((t.player && t.player.trim()) ? t.player : "(Continue the scene from the state above.)") + richDirective;
+  const gmOpts = { task: rich ? "gm-narrate-rich" : "gm-narrate", systemBlocks, cacheKey: "singularity-runtime" };
   let raw = "";
   try {
     raw = await callClaude([{ role: "user", content: userContent }], gmOpts);
@@ -502,6 +507,21 @@ export async function gmTurn(ctx) {
       return { ok: false, error: err3.message };
     }
   }
+}
+
+/** SNG-242 §5c: the STATE-SAFE "tell it again, richer" retell. Re-renders the PROSE of a COMMITTED beat at the
+ *  flagship tier — same events, outcome, people, places; adds nothing new; changes nothing that happened. It
+ *  NEVER re-rolls or re-fires ops (the beat already happened — this reads its result, the SNG-232 seam
+ *  discipline). Returns the richer prose, or null on failure (the caller keeps the original). */
+export async function reNarrateRich(narration, { ratingLine = "" } = {}) {
+  const text = String(narration || "").trim();
+  if (!text) return null;
+  const system = `You are the Game Master for SINGULARITY. RETELL the beat below in richer, fuller, more vivid second-person present-tense prose — the beautiful version the player asked for. Keep EVERY event, outcome, person, place and beat EXACTLY as given; add no new facts, people, or consequences, and change nothing that happened. Tell it more beautifully — more sensory detail, more emotional weight, a little longer. Reply with PROSE ONLY — no JSON, no lists, no headers. ${ratingLine || "Keep it within a PG ceiling; never sexualize a minor."}`;
+  const user = `The beat, as it happened:\n\n${text}\n\nRetell it richer — the same events, told more beautifully.`;
+  try {
+    const prose = await callClaude([{ role: "user", content: user }], { task: "gm-retell", system });
+    return String(prose || "").trim() || null;
+  } catch { return null; }
 }
 
 /** Clamp a GM-proposed scene state to sane bounds. Returns null for garbage —

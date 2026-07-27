@@ -1,0 +1,48 @@
+{
+ "schemaVersion": 1,
+ "id": "pressure_hook_voice",
+ "kind": "content",
+ "note": "SNG-245 (Aevi 2026-07-27): the HOOK VOICE bank for the Pressure Queue. CCode's producers emit a flat template ('X, unseen for N days, has come looking...') that reads as a system event. This bank gives each pressure KIND varied, story-beat phrasings the producer picks from (by rng), + per-NPC-drive overrides for the SNG-233 interiority NPCs so a driven knock sounds like THAT person. Tokens: {name} {absent} {want} {threat} {place}. The chosen string becomes the oneLineHook -> the GM's driven directive. Voice is a story beat arriving, never a notification.",
+ "npc-want": {
+  "generic": [
+   "{name} is here — not summoned, not stumbled upon. {absent} days unseen, and a want went unmet long enough to bring them to your door: {want} They've come to close the distance themselves.",
+   "You feel it before you see them: {name}, arrived. {absent} days is long enough. What they want has stopped waiting to be noticed — {want} — and now it's standing in front of you.",
+   "{name} came looking. Not idly — {absent} days of an unmet want will move a person, and theirs has moved them here: {want} They mean to have it out with you, one way or another.",
+   "Someone's been waiting on you, and stopped. {name} is here, {absent} days' worth of a want gone unanswered behind their eyes: {want} They didn't send word. They came."
+  ],
+  "byNpc": {
+   "pell": [
+    "Pell is here, and she is not smiling. {absent} days you've been elsewhere, and Pell does not wait well for what she considers hers — {want} She's come to find out where your attention went, and she'll want a straight answer.",
+    "You know that set of the shoulders. Pell, arrived unannounced, {absent} days of your absence gone hot in her: {want} She measures love in presence, and you've been short on it. Now she's standing in your doorway making that plain."
+   ],
+   "veth-ondra": [
+    "Veth is at your door, still as ever and twice as cold. {absent} days, and something in your conduct has failed the craft as she holds it — {want} She has come to say so to your face, because a warden does not let a wrong ending stand.",
+    "Stillwater has come to find you. {absent} days unseen, and Veth's judgment has hardened into a visit: {want} She will tell you exactly where you strayed, and she will be, as usual, mostly right."
+   ],
+   "mara-wells": [
+    "Mara's shut the store and come to you — which she does not do lightly. {absent} days, and something needs squaring that a message won't fix: {want} She's brought the true version, and she expects the same from you."
+   ],
+   "huginn": [
+    "The rook is here, and it did not follow — it CAME. {absent} days, and Huginn has settled where you'll see it, one eye steady: {want} It attends something ending, or about to, and it means for you to attend it too."
+   ],
+   "ama": [
+    "Your mother is here. She finished what she was doing first, then came — {absent} days, and something has pulled her from her own quiet to yours: {want} She won't perform the worry. She'll just be here, and let you feel its weight."
+   ]
+  }
+ },
+ "threat-attack": {
+  "generic": [
+   "A {threat} has come down onto you here — not blundered into, ARRIVED, and hunting. There's no easing away from this one. Defend, or drive it off.",
+   "The {threat} chose this. It came to where you are, deliberate and wrong, and it is between you and the way out. This is a fight you were brought, not one you went looking for — meet it or run it.",
+   "You have time for one breath before the {threat} is on you. It hunted here on purpose. Stand and defend, or break and flee — but decide now.",
+   "Something arrived at {place} with teeth and intent: a {threat}, come hunting, and it has found you. Not a chance encounter — a chosen one. Defend."
+  ],
+  "note": "threat-attack ALWAYS becomes a defend-encounter (teeth); the hook telegraphs the stakes + preserves flee (SNG-230 round-1 flee rule). Never remove the decline/flee path from the voice."
+ },
+ "_futureKinds": {
+  "villain-move": "(producer not yet wired) voice: the villain's scheme reaches the player's orbit - 'the Pure-of-Ash's mercy has reached a village you know; the killing is being called kindness, and it is coming your way.'",
+  "arc-stir": "(not yet wired) voice: a greater arc tremors AT the player - 'the deep under {place} shifted while you slept; What Wakes Beneath has turned toward you, and the water remembers.'",
+  "treasure-rumor": "(not yet wired) voice: a real reward rumors itself toward the player - 'a delver at the fire swears the vault you passed still holds its wardings unbroken - and what a pre-Transition maker sealed, no one since has opened.'"
+ },
+ "howProducersUse": "Each producer, when it builds an entry, picks a phrasing: for npc-want, use byNpc[npcId] if present (the SNG-233 interiority NPCs), else generic[]; pick by rng so repeats vary. Substitute tokens ({name}/{absent}/{want}/{threat}/{place}). The result is the oneLineHook. Fallback to CCode's current template if the bank is unavailable (graceful degrade). Keep {want} clamped ~160 as CCode does."
+}

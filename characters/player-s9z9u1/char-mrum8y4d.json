@@ -143,36 +143,31 @@
         "player": "Study the personal designation glyph directly — use See the Made Thing to read what the name is, or who it was built for",
         "summary": "See the Made Thing resolved the personal designation glyph — the terminus regulator was built for a named operator: Halvex.",
         "narration": "You set the third panel against the stone wall and let See the Made Thing settle in — not wide, not searching. Just the glyph. One seam at a time.\n\nThe personal designation is not a name in the ordinary sense. It is a construction-address, the kind stamped into Precursor work when a thing is built for a specific operator rather than a facility. The glyph resolves into two parts. The first is a function-marker: 'assigned to.' The second is a name-glyph, compressed and stylized but readable if you know the compression. You do.\n\nThe name is Halvex.\n\nCy goes very still. Its lens does not iris. It does not click. It simply stops, the way a machine stops when it has encountered a condition it does not have a procedure for. The lamp holds steady in its grip. After a long moment, Cy says, quietly and precisely, 'That entry requires verification.' It does not move to verify."
+      },
+      {
+        "player": "Ask Cy directly — 'Do you know this name?'",
+        "summary": "Loki asked Cy directly whether it knows the name Halvex — Cy answered with a technically true non-answer and did not move.",
+        "narration": "You set the panel down and look at Cy directly. The lamp it carries does not waver. Its lens is still — not thinking-still, the way it goes when it is processing something difficult, but stopped-still, the way a gear stops when something has jammed it from inside.\n\n'Cy,' you say. 'Do you know this name?'\n\nThe silence stretches. In the cold of the lower passage, with the water smell coming up from below, it is a particular kind of silence — not the absence of an answer, but the presence of one being held back.\n\nThen Cy says, very carefully: 'The name Halvex appears in my maintenance registry as a deprecated operator designation.' Another pause. 'This unit does not have information on the current status of that designation.' Its lens irises, very slightly, and then stops again. It says: 'That entry requires verification,' which is exactly what it said before, and still does not move to verify anything.\n\nIt knows. You can see it the way you see a seam — the join between what it is saying and what it is not saying is right there, clear as a cut in stone."
       }
     ],
     "lastTurn": {
-      "narration": "You set the third panel against the stone wall and let See the Made Thing settle in — not wide, not searching. Just the glyph. One seam at a time.\n\nThe personal designation is not a name in the ordinary sense. It is a construction-address, the kind stamped into Precursor work when a thing is built for a specific operator rather than a facility. The glyph resolves into two parts. The first is a function-marker: 'assigned to.' The second is a name-glyph, compressed and stylized but readable if you know the compression. You do.\n\nThe name is Halvex.\n\nCy goes very still. Its lens does not iris. It does not click. It simply stops, the way a machine stops when it has encountered a condition it does not have a procedure for. The lamp holds steady in its grip. After a long moment, Cy says, quietly and precisely, 'That entry requires verification.' It does not move to verify.",
-      "sceneSummary": "See the Made Thing resolved the personal designation glyph — the terminus regulator was built for a named operator: Halvex.",
+      "narration": "You set the panel down and look at Cy directly. The lamp it carries does not waver. Its lens is still — not thinking-still, the way it goes when it is processing something difficult, but stopped-still, the way a gear stops when something has jammed it from inside.\n\n'Cy,' you say. 'Do you know this name?'\n\nThe silence stretches. In the cold of the lower passage, with the water smell coming up from below, it is a particular kind of silence — not the absence of an answer, but the presence of one being held back.\n\nThen Cy says, very carefully: 'The name Halvex appears in my maintenance registry as a deprecated operator designation.' Another pause. 'This unit does not have information on the current status of that designation.' Its lens irises, very slightly, and then stops again. It says: 'That entry requires verification,' which is exactly what it said before, and still does not move to verify anything.\n\nIt knows. You can see it the way you see a seam — the join between what it is saying and what it is not saying is right there, clear as a cut in stone.",
+      "sceneSummary": "Loki asked Cy directly whether it knows the name Halvex — Cy answered with a technically true non-answer and did not move.",
       "choices": [
         {
-          "label": "Ask Cy directly — 'Do you know this name?'",
+          "label": "Push harder — 'That is not what I asked. Do you know that name, or don't you?'",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "subAttribute": "presence",
+          "difficulty": 15,
           "intentTags": [
-            "persuade"
+            "negotiate"
           ],
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Say nothing — watch Cy and wait for it to move first",
+          "label": "Use See the Made Thing on Cy itself — read the seam between what it says and what it holds",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Press deeper with See the Made Thing — read the name-glyph's full construction, look for a second half or a lineage-mark",
-          "attribute": "mental",
-          "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
             "study"
@@ -182,36 +177,45 @@
           "trivial": false
         },
         {
-          "label": "Take the panels and go — this name is a thing to sit with above ground, somewhere the dark is not running pure",
+          "label": "Let it sit — say nothing, hold the third panel out toward Cy, and wait",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Take the panels and start up — you have what you came for; the name can wait until you are somewhere else and Cy has had time to decide what it wants to say",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "careful",
             "travel"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tighter joints, the inspection port niche open in the east wall. Cold water-smell from below. Cy's lamp pools light downward.",
+        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward. The inspection port stands open on its counterweight.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Completely still — lamp held steady, lens unirised, facing the third panel. Not moving to verify the entry it just said requires verification."
+            "state": "Completely still — lamp held steady, lens slightly irised and stopped, not moving to verify anything. The answer it gave hangs in the air between you."
           }
         ],
         "objects": [
           "Three stamped metal panels — Precursor glyphs, calibration, service record, personal designation",
           "Third panel resting against the stone wall, designation glyph visible",
-          "Stone face of the port, swung inward on an undamaged counterweight",
+          "Stone face of the inspection port, swung inward on its undamaged counterweight",
           "Cy's lamp, pooling light downward"
         ],
         "threads": [
-          "The personal designation names Halvex — a name Cy has reacted to without admitting it knows",
-          "Cy said 'that entry requires verification' and then did not move to verify",
+          "Cy said 'deprecated operator designation' — technically true and almost certainly incomplete",
+          "Cy said 'that entry requires verification' a second time and still has not moved to verify it",
           "The passage continues below — the regulator itself and the water source are further down",
-          "What Halvex is, and what Cy's connection to that name is, remains open"
+          "What Halvex is, and what Cy's connection to that name is, remains the open question"
         ]
       },
       "npcUpdates": [
@@ -219,33 +223,20 @@
           "op": "update",
           "npcId": "cy",
           "name": "Cy",
-          "note": "Went completely still when Loki read the name Halvex from the personal designation glyph — said 'that entry requires verification' and then did not move to verify. The most pronounced reaction Cy has shown to any discovery.",
+          "note": "Asked directly whether it knows the name Halvex — answered with 'deprecated operator designation' and 'that entry requires verification,' then stopped. The seam between what it said and what it held is visible.",
           "learned": [
-            "The name Halvex appears on the personal designation glyph of the terminus regulator's third installation panel — the regulator was built for a specific named operator",
-            "Cy reacted to the name Halvex with total stillness and a statement it then did not act on"
+            "Halvex appears in Cy's maintenance registry as a 'deprecated operator designation' — Cy's own words",
+            "Cy answered with technical truth and did not elaborate, and did not move to verify anything after saying it would"
           ],
-          "skillsObserved": [],
-          "statusNote": "Present in the lower passage, lamp held steady, completely still — facing the third panel"
+          "statusNote": "In the lower passage, lamp held steady, lens irised and stopped — holding something back"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "terminus-seals-beneath-the-valley",
-          "label": "Terminus Regulators Beneath the Valley",
-          "kind": "lore",
-          "fact": "The personal designation glyph on the third panel resolves to a construction-address: 'assigned to Halvex.' The regulator was not built for a facility — it was built for a specific named operator. Cy went still when the name was read aloud and said 'that entry requires verification' without moving to do so.",
-          "links": [
-            "the-seam-beside-the-bracket",
-            "the-unlit-deep",
-            "the-water-crisis",
-            "loki-thread"
-          ]
-        },
-        {
           "topic": "halvex",
           "label": "Halvex",
           "kind": "mystery",
-          "fact": "The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate.",
+          "fact": "Cy confirmed the name appears in its own maintenance registry as a 'deprecated operator designation' — then stopped, said verification was required, and did not move to verify. The name is in Cy's records. Cy is not saying what it knows about it.",
           "links": [
             "terminus-seals-beneath-the-valley",
             "loki-thread",
@@ -253,34 +244,30 @@
           ]
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -1
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a focused, careful reading — a few minutes in the lower passage"
+        "why": "a brief exchange in the lower passage"
       }
     },
     "sceneState": {
-      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tighter joints, the inspection port niche open in the east wall. Cold water-smell from below. Cy's lamp pools light downward.",
+      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward. The inspection port stands open on its counterweight.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Completely still — lamp held steady, lens unirised, facing the third panel. Not moving to verify the entry it just said "
+          "state": "Completely still — lamp held steady, lens slightly irised and stopped, not moving to verify anything. The answer it gave"
         }
       ],
       "objects": [
         "Three stamped metal panels — Precursor glyphs, calibration, service record, pers",
         "Third panel resting against the stone wall, designation glyph visible",
-        "Stone face of the port, swung inward on an undamaged counterweight",
+        "Stone face of the inspection port, swung inward on its undamaged counterweight",
         "Cy's lamp, pooling light downward"
       ],
       "threads": [
-        "The personal designation names Halvex — a name Cy has reacted to without admitting it knows",
-        "Cy said 'that entry requires verification' and then did not move to verify",
+        "Cy said 'deprecated operator designation' — technically true and almost certainly incomplete",
+        "Cy said 'that entry requires verification' a second time and still has not moved to verify it",
         "The passage continues below — the regulator itself and the water source are further down",
-        "What Halvex is, and what Cy's connection to that name is, remains open"
+        "What Halvex is, and what Cy's connection to that name is, remains the open question"
       ]
     }
   },
@@ -803,7 +790,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Cy shuttered its lamp before being asked — a small act that carries weight; Cy does not do things without a reason, and this place has a…",
@@ -1324,7 +1311,8 @@
         "label": "Halvex",
         "kind": "mystery",
         "facts": [
-          "[d1] The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate."
+          "[d1] The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate.",
+          "[d1] Cy confirmed the name appears in its own maintenance registry as a 'deprecated operator designation' — then stopped, said verification was required, and did not move to verify. The name is in Cy's records. Cy is not saying what it knows about it."
         ],
         "links": [
           "terminus-seals-beneath-the-valley",
@@ -1338,21 +1326,21 @@
     }
   },
   "tendencies": {
-    "devotion": 2.913494542985502,
-    "cerebral": 15.671214656583537,
-    "social": 12.924909319167673,
-    "strategic": 10.465627202710825,
-    "cautious": 6.837865825396543,
-    "amorous": 5.62849282679577,
-    "generous": 2.5042225180773268,
-    "ruthless": 0.32824875740885057,
-    "risky": 3.298684822897112
+    "devotion": 2.840657179410864,
+    "cerebral": 15.279434290168949,
+    "social": 13.601786586188481,
+    "strategic": 10.203986522643055,
+    "cautious": 6.66691917976163,
+    "amorous": 5.487780506125875,
+    "generous": 2.4416169551253937,
+    "ruthless": 0.3200425384736293,
+    "risky": 3.216217702324684
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 62,
+  "actionCount": 63,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1509,8 +1497,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785173012039,
-  "rev": 133,
+  "updatedAt": 1785173360293,
+  "rev": 134,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1828,7 +1816,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 35
+    "umbral_depths": 36
   },
   "opLossPending": false,
   "sessions": [
@@ -1859,10 +1847,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T17:23:32.038Z",
+      "lastAt": "2026-07-27T17:29:20.292Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 31
+      "beats": 32
     }
   ],
   "establishedFacts": [
@@ -1900,17 +1888,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 63,
-    "choices": 63,
+    "sceneSummary": 64,
+    "choices": 64,
     "characterDeltas": 29,
-    "scene": 63,
+    "scene": 64,
     "placeUpdates": 9,
-    "codexUpdates": 53,
-    "timeOps": 62,
+    "codexUpdates": 54,
+    "timeOps": 63,
     "offer": 7,
     "generateRequest": 2,
     "sceneEnded": 16,
-    "npcUpdates": 54,
+    "npcUpdates": 55,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
@@ -1920,7 +1908,7 @@
     "stageOps": 6,
     "encounterOps": 1
   },
-  "_opTurns": 63,
+  "_opTurns": 64,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75

@@ -20,4 +20,8 @@
 - **AEVI owes:** the Haiku-default quality-floor judgment (§5e).
 - **ERIK owes:** whether to **meter** the rich tells (N/session, a spent resource) or leave them **open** — currently open/unmetered. And the per-task moves in §1-4 (world-tick→Haiku, etc.) are still good follow-ups, measured via See-the-Machine (which now shows model + budget per call — SNG-238 dev-tools work).
 
+## Addendum — the "Fast (Haiku)" tier (v1.8.284 `66773db8`)
+
+Erik asked "how do I set it to use more Haiku?" — and the honest answer was that he *couldn't*: Standard and Rich were both Sonnet. So the setting is now **three-way**: **Fast → `gm-narrate-fast` → Haiku** (cheaper + snappier), Standard → Sonnet, Rich → Sonnet-fuller. This is §5b's inversion made **opt-in** (Erik chooses it; the family default stays Standard until Aevi clears the Haiku floor — the guard is respected because Haiku isn't forced as the default, only offered). The ✦ Rich toggle + the retell still spend **up** to the flagship, so a Fast default yields the intended cheap-by-default + beautiful-where-it-matters economics. Verified live: the setting renders all three, Fast is selectable + persists. Erik is now the A/B judge for the Haiku telling by playing on Fast.
+
 *— CCode. The player holds the quality dial now — cheap by default, beautiful where it matters, chosen by the one who knows the beat mattered. status: complete_pending_review.*

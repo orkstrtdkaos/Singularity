@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [SNG-243 §4 complete_pending_review — CCode, 2026-07-27] The waygate-to-waygate network (v1.8.289 `90076f91`)
+> Erik: "waygates should help you travel directly to other gates." The Made Gate (§3) is networkCapable — §4 makes
+> the network real. engine/waygate.js: isNetworkGate (authored gates in by default; a made gate opts in via
+> networkCapable), networkGatesFrom (reachable = other network gates you've DISCOVERED + can aim at by wayfaring
+> tier, + the hub always; default endpoint sorts first), gateHopCost + GATE_HOP dials (a hop = a fraction of the
+> overland time + an energy toll, capped, never free — infrastructure not a cheat). waygateBlockForGM now frames
+> the network + names the default. app.js: travelTo({cost}) applies hours+energy; the map shows a "◈ The gate
+> network" panel (reachable gates, priced, tap = a hop). 10 smoke checks + new SNG-232 seam network-hop-costs.
+> Live-verified: panel listed the Crossing (hub+default first) + Axis + Bargain gates priced +2h/10⚡; tapping Axis
+> folded there and paid the toll (energy 100->90, clock +2h). npm test exit 0.
+> **ERIK dials:** GATE_HOP.timeFraction/min/max/energy (how cheap gate travel is). A made gate prices at the 2h
+> floor (no worldPos → unknown distance); authored gates price by real geodesic. The old short-range "step through"
+> still uses flat travel cost — unify under the hop cost later if you want. **SNG-243 §3+§4 both complete.**
+> Results: po/results/20260727_SNG-243-part4_waygate_network.md
+
+
 > ## [SNG-243 §3 complete_pending_review — CCode, 2026-07-27] The Made Gate's destinations are travelable (v1.8.288 `98138d3f`)
 > Erik: "where does my made gate go?" The quest authored a network-shaped `waygate` effect (connects[]: the_crossing
 > default + Stillwater's Trouble intent, networkCapable) but applyQuestEffects had no `case "waygate"` — it fell to

@@ -169,7 +169,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.030778530921834243,
+    "spectrumId": -0.02923960437574253,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.24843810472552474,
     "mechanical_spiritual": 0.25513542055105926,
@@ -1999,16 +1999,21 @@
         "player": "I have assumed the Warden's watch that was once on this approach - and as the Waygate is here now, we will need another post I suppose. You may give the message to me.",
         "summary": "Silas names himself warden of the Left Branch approach post and takes delivery of a sealed Hub message from runner Deni Cors.",
         "narration": "Deni Cors looks at you for a moment. Her hand moves from the tube to her belt and back again — the small arithmetic of a runner deciding whether the math works out.\n\nThen she pulls the message-tube free and holds it out, flat across both palms, the way someone hands over a thing they were trusted to carry. \"Left Branch approach warden post,\" she says. \"You're here. The gate is here. That's the post.\" She says it like she is convincing herself slightly, but not enough to stop her from letting go. \"Countersign when you can. For the registry.\"\n\nYou take it. The blue-grey wax clasp is intact — three-band Hub seal, no tampering. The header tab at the cap end reads *Warden, L-Branch Approach* in a clean institutional hand. Someone expected this post to still be functioning. Someone expected someone to be standing here.\n\nHuginn drops from the low branch and lands on the downed tree's frost-rimed bark, three feet to your left. He tilts his head once at the tube. He does not say anything. He does not need to.\n\nPell watches from the clearing's edge without moving in. Veth is still, two steps back, her hands loose at her sides. The lesson she named — a death that cannot be helped, attended without craft — is still sitting between you like something she set down carefully and has not picked up again. Deni Cors is already resettling her pack, ready to move the moment you are done with her, her south-circuit route still waiting."
+      },
+      {
+        "player": "Please feel free to give Logana a treat while you wait Deni - she might appreciate it.  She also likes to be sung to.",
+        "summary": "Silas invites Deni Cors to sing to Logana while she waits for her countersign — Deni, having no treats and facing a skeleton with a tilted skull, considers whistling instead.",
+        "narration": "You say it easily, without ceremony — the kind of thing you might say about a dog. 'Feel free to give Logana a treat while you wait, Deni. She might appreciate it. She also likes to be sung to.'\n\nDeni Cors looks at Logana. Logana looks back at Deni Cors. The skeletal frame is still, skull angled, the hollow eye-sockets carrying the particular quality of something that is paying attention rather than merely existing. The frost-rimed clearing is very quiet.\n\nDeni says, carefully, 'She.' She says it the way a person tests a word for weight before they commit to it. She looks at the message-tube in your hand, then at Logana, then back at you. 'Right,' she says. Then, after a pause: 'I don't have a treat.'\n\nPell makes a short sound from the clearing's edge — not quite a laugh, but close. 'She isn't fussy,' Pell says, and she does not elaborate on what that means for a skeleton. Huginn, perched three feet to your left on the frost-rimed bark of the downed tree, tilts his head toward Deni in a way that is either encouraging or evaluating. Deni looks at him too. She appears to conclude that this morning has simply become what it has become, and she straightens her pack straps with the air of someone who is going to be professional about all of it. 'I can whistle,' she offers."
       }
     ],
     "lastTurn": {
-      "narration": "Deni Cors looks at you for a moment. Her hand moves from the tube to her belt and back again — the small arithmetic of a runner deciding whether the math works out.\n\nThen she pulls the message-tube free and holds it out, flat across both palms, the way someone hands over a thing they were trusted to carry. \"Left Branch approach warden post,\" she says. \"You're here. The gate is here. That's the post.\" She says it like she is convincing herself slightly, but not enough to stop her from letting go. \"Countersign when you can. For the registry.\"\n\nYou take it. The blue-grey wax clasp is intact — three-band Hub seal, no tampering. The header tab at the cap end reads *Warden, L-Branch Approach* in a clean institutional hand. Someone expected this post to still be functioning. Someone expected someone to be standing here.\n\nHuginn drops from the low branch and lands on the downed tree's frost-rimed bark, three feet to your left. He tilts his head once at the tube. He does not say anything. He does not need to.\n\nPell watches from the clearing's edge without moving in. Veth is still, two steps back, her hands loose at her sides. The lesson she named — a death that cannot be helped, attended without craft — is still sitting between you like something she set down carefully and has not picked up again. Deni Cors is already resettling her pack, ready to move the moment you are done with her, her south-circuit route still waiting.",
-      "sceneSummary": "Silas names himself warden of the Left Branch approach post and takes delivery of a sealed Hub message from runner Deni Cors.",
+      "narration": "You say it easily, without ceremony — the kind of thing you might say about a dog. 'Feel free to give Logana a treat while you wait, Deni. She might appreciate it. She also likes to be sung to.'\n\nDeni Cors looks at Logana. Logana looks back at Deni Cors. The skeletal frame is still, skull angled, the hollow eye-sockets carrying the particular quality of something that is paying attention rather than merely existing. The frost-rimed clearing is very quiet.\n\nDeni says, carefully, 'She.' She says it the way a person tests a word for weight before they commit to it. She looks at the message-tube in your hand, then at Logana, then back at you. 'Right,' she says. Then, after a pause: 'I don't have a treat.'\n\nPell makes a short sound from the clearing's edge — not quite a laugh, but close. 'She isn't fussy,' Pell says, and she does not elaborate on what that means for a skeleton. Huginn, perched three feet to your left on the frost-rimed bark of the downed tree, tilts his head toward Deni in a way that is either encouraging or evaluating. Deni looks at him too. She appears to conclude that this morning has simply become what it has become, and she straightens her pack straps with the air of someone who is going to be professional about all of it. 'I can whistle,' she offers.",
+      "sceneSummary": "Silas invites Deni Cors to sing to Logana while she waits for her countersign — Deni, having no treats and facing a skeleton with a tilted skull, considers whistling instead.",
       "choices": [
         {
-          "label": "Break the Hub seal and read the message — open it here in the clearing with the party present",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Open the sealed message-tube now and read what it contains",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -2017,9 +2022,21 @@
           "trivial": true
         },
         {
-          "label": "Pocket the tube unopened and ask Deni for the countersign protocol — close the administrative thread now, read later",
+          "label": "Use Order-Sense on the message-tube before opening it — read what design the message is part of",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Give Deni the countersign she needs for the registry so she can get back on her circuit",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "negotiate"
@@ -2028,80 +2045,15 @@
           "trivial": true
         },
         {
-          "label": "Ask Deni what she knows of the post's history — she runs this circuit; she may know who filed it and when it last had a warden",
+          "label": "Ask Deni what news from the south circuit — what she has seen on the road that a new warden should know",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "persuade"
           ],
           "abilityId": null,
           "trivial": true
-        },
-        {
-          "label": "Something else — say what you do",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [],
-          "abilityId": null,
-          "trivial": true
-        }
-      ],
-      "characterDeltas": {
-        "inventoryAdd": [
-          {
-            "name": "Hub Message-Tube — L-Branch Approach",
-            "kind": "quest",
-            "description": "A sealed Hub message-tube with a three-band blue-grey wax clasp, intact. Header tab reads 'Warden, L-Branch Approach' in institutional hand. Delivered by Deni Cors, south-circuit runner. Contents unknown.",
-            "consumable": false
-          }
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "deni-cors",
-          "name": "Deni Cors",
-          "role": "Hub registered runner, south circuit",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Accepted Silas's claim of the warden post and handed over the sealed message-tube on that authority. Requested a countersign for the registry. Now ready to continue her circuit.",
-          "learned": [
-            "The Left Branch approach post has a warden again — Silas Weir, standing at the gate he built"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "In the wolverine clearing, message delivered, waiting for countersign or dismissal before resuming her south circuit."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas Weir has formally assumed the warden's watch at the Left Branch approach post and accepted a sealed Hub message-tube addressed to that post from runner Deni Cors. The post is now actively manned.",
-          "subjectId": "silas-weir"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The Left Branch approach warden post is now actively manned — Silas Weir has claimed the watch and accepted official Hub message delivery. The post is on the south-circuit runner's active route.",
-          "flag": {
-            "warden_active": "silas-weir",
-            "hub_registry_notified": "pending_countersign"
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "left-branch-warden-post",
-          "label": "Left Branch Approach Post",
-          "kind": "place",
-          "fact": "Silas Weir has assumed the warden's watch at the Left Branch approach post on Day 14 at dawn — accepted a sealed Hub message-tube addressed to the post from south-circuit runner Deni Cors. The Hub's registry still had the post on its active delivery route.",
-          "links": [
-            "the-second-thread",
-            "stillwaters-trouble",
-            "ashwarden"
-          ]
         }
       ],
       "scene": {
@@ -2109,11 +2061,11 @@
         "npcsPresent": [
           {
             "name": "Logana",
-            "state": "Standing at the downed tree's base, relay node beneath her, skull angled toward Silas and Deni Cors."
+            "state": "Standing at the downed tree's base, skull angled toward Deni Cors with the quality of something paying close attention."
           },
           {
             "name": "Pell",
-            "state": "At the clearing's edge, Memory across her shoulders, watching without moving in."
+            "state": "At the clearing's edge, Memory across her shoulders, having just made a short almost-laugh at Deni's expense."
           },
           {
             "name": "Veth",
@@ -2121,11 +2073,11 @@
           },
           {
             "name": "Huginn",
-            "state": "Perched on the downed tree's frost-rimed bark, three feet left of Silas, head tilted once toward the message-tube."
+            "state": "Perched on the downed tree's frost-rimed bark three feet left of Silas, head tilted toward Deni — evaluating or encouraging, unclear which."
           },
           {
             "name": "Deni Cors",
-            "state": "Pack resettled, message delivered, waiting for countersign or release — ready to resume her south circuit."
+            "state": "Pack straps resettled with professional composure, considering whether whistling counts as singing to a skeleton."
           }
         ],
         "objects": [
@@ -2134,19 +2086,36 @@
           "Memory — across Pell's shoulders",
           "Waymarker — in Silas's coat pocket",
           "Shadow-sheet — folded in coat pocket",
-          "Hub Message-Tube — L-Branch Approach (sealed, blue-grey wax clasp, three-band Hub seal, header tab visible)"
+          "Hub Message-Tube — L-Branch Approach (sealed, blue-grey wax clasp, three-band Hub seal, intact — now in Silas's hand)"
         ],
         "threads": [
-          "The message-tube's contents remain unknown — addressed to the Left Branch approach warden post",
-          "Deni Cors is waiting for a countersign for the Hub registry",
+          "The message-tube's contents remain unknown — addressed to the Left Branch approach warden post, now in Silas's hand",
+          "Deni Cors is waiting for a countersign for the Hub registry before she can resume her south circuit",
           "Veth's lesson stands: find something dying that cannot be helped, and attend it",
           "The Zone-thread in Logana's warding is looser but not resolved",
           "The radiant presence at the reclamation bowl remains unidentified — burn-mark points northwest"
         ]
       },
-      "offer": {
-        "thing": "The message-tube's header tab carries a second notation beneath the delivery address — small, in a different hand, added after the primary inscription: a date, two months past, and three initials.",
-        "from": "Deni Cors's fear: that the post was empty or compromised — which means whoever sent this message sent it knowing the post might not be manned, and chose to send it anyway."
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "deni-cors",
+          "name": "Deni Cors",
+          "note": "Processed the social reality of Logana, Huginn, and Pell's almost-laugh with professional composure. Offered to whistle as a substitute for singing, having no treats to offer.",
+          "statusNote": "In the wolverine clearing, pack resettled, waiting to provide a countersign for the registry before resuming her south circuit.",
+          "learned": [
+            "Logana is referred to with 'she' by the warden and his companions",
+            "Logana is described as not being fussy — implying standards exist even for a skeleton"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief exchange in the clearing while Deni waits for her countersign"
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
       }
     },
     "sceneState": {
@@ -2154,11 +2123,11 @@
       "npcsPresent": [
         {
           "name": "Logana",
-          "state": "Standing at the downed tree's base, relay node beneath her, skull angled toward Silas and Deni Cors."
+          "state": "Standing at the downed tree's base, skull angled toward Deni Cors with the quality of something paying close attention."
         },
         {
           "name": "Pell",
-          "state": "At the clearing's edge, Memory across her shoulders, watching without moving in."
+          "state": "At the clearing's edge, Memory across her shoulders, having just made a short almost-laugh at Deni's expense."
         },
         {
           "name": "Veth",
@@ -2166,11 +2135,11 @@
         },
         {
           "name": "Huginn",
-          "state": "Perched on the downed tree's frost-rimed bark, three feet left of Silas, head tilted once toward the message-tube."
+          "state": "Perched on the downed tree's frost-rimed bark three feet left of Silas, head tilted toward Deni — evaluating or encourag"
         },
         {
           "name": "Deni Cors",
-          "state": "Pack resettled, message delivered, waiting for countersign or release — ready to resume her south circuit."
+          "state": "Pack straps resettled with professional composure, considering whether whistling counts as singing to a skeleton."
         }
       ],
       "objects": [
@@ -2182,8 +2151,8 @@
         "Hub Message-Tube — L-Branch Approach (sealed, blue-grey wax clasp, three-band Hu"
       ],
       "threads": [
-        "The message-tube's contents remain unknown — addressed to the Left Branch approach warden post",
-        "Deni Cors is waiting for a countersign for the Hub registry",
+        "The message-tube's contents remain unknown — addressed to the Left Branch approach warden post, now in Silas's hand",
+        "Deni Cors is waiting for a countersign for the Hub registry before she can resume her south circuit",
         "Veth's lesson stands: find something dying that cannot be helped, and attend it",
         "The Zone-thread in Logana's warding is looser but not resolved",
         "The radiant presence at the reclamation bowl remains unidentified — burn-mark points northwest"
@@ -4805,18 +4774,21 @@
       "relationship": 1,
       "history": [
         "[d14] Named herself and her circuit. Named the delivery point as the Left Branch approach warden post. Asked plainly whether there is still a warden here.",
-        "[d14] Accepted Silas's claim of the warden post and handed over the sealed message-tube on that authority. Requested a countersign for the registry. Now ready to continue her circuit."
+        "[d14] Accepted Silas's claim of the warden post and handed over the sealed message-tube on that authority. Requested a countersign for the registry. Now ready to continue her circuit.",
+        "[d14] Processed the social reality of Logana, Huginn, and Pell's almost-laugh with professional composure. Offered to whistle as a substitute for singing, having no treats to offer."
       ],
       "knownFacts": [
         "The message is sealed and she does not open sealed messages",
         "The header tab names the delivery point as the Left Branch approach warden post",
-        "The Left Branch approach post has a warden again — Silas Weir, standing at the gate he built"
+        "The Left Branch approach post has a warden again — Silas Weir, standing at the gate he built",
+        "Logana is referred to with 'she' by the warden and his companions",
+        "Logana is described as not being fussy — implying standards exist even for a skeleton"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the wolverine clearing, message delivered, waiting for countersign or dismissal before resuming her south circuit.",
+      "statusNote": "In the wolverine clearing, pack resettled, waiting to provide a countersign for the registry before resuming her south circuit.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5808,7 +5780,7 @@
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
     "lastGenCount": 649,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The veil thinning — a small grace, something old and patient visible for one breath in the mist",
@@ -7532,22 +7504,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.664103379351847,
-    "cerebral": 21.19348552483382,
-    "social": 4.9433050431432815,
-    "generous": 2.042363554388395,
-    "cautious": 9.995028323403984,
-    "physical": 2.2641618560710772,
-    "risky": 0.5430664096115401,
-    "ruthless": 1.1820283368545839,
-    "carousing": 0.19218301536967836,
-    "amorous": 0.7064637531728754,
-    "patient": 0.428095743316907,
-    "stealth": 0.000041310828380371876,
-    "devotion": 1.6880968411053965,
-    "craft": 1.466028898462872,
-    "leadership": 0.6374802587045999,
-    "deception": 0.19783148213754234
+    "strategic": 21.12250079486805,
+    "cerebral": 20.663648386712975,
+    "social": 5.8197224170647,
+    "generous": 2.9913044655286853,
+    "cautious": 9.745152615318885,
+    "physical": 2.2075578096693,
+    "risky": 0.5294897493712516,
+    "ruthless": 1.1524776284332192,
+    "carousing": 0.18737843998543638,
+    "amorous": 0.6888021593435535,
+    "patient": 0.4173933497339843,
+    "stealth": 0.000040278057670862575,
+    "devotion": 1.6458944200777614,
+    "craft": 1.4293781760013002,
+    "leadership": 0.6215432522369849,
+    "deception": 0.19288569508410378
   },
   "aptitudes": [
     "strategist",
@@ -7556,7 +7528,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 886,
+  "actionCount": 887,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7946,8 +7918,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785115152485,
-  "rev": 1545,
+  "updatedAt": 1785115389190,
+  "rev": 1546,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9987,8 +9959,8 @@
           "entityId": "deni-cors",
           "type": "npc",
           "birthWeight": 42,
-          "engagementScore": 2,
-          "tier": "fresh",
+          "engagementScore": 4,
+          "tier": "established",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -10000,6 +9972,10 @@
             "why": "She has stopped and named herself; she is now a recurring character with a stable identity, not a passing figure"
           },
           "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 14
+            },
             {
               "kind": "interact",
               "day": 14
@@ -11544,7 +11520,7 @@
   "syncedAt": 1785071380339,
   "teachers": {},
   "regionsKnown": {
-    "valley": 639,
+    "valley": 640,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11731,10 +11707,10 @@
     {
       "id": "sess-18",
       "startedAt": "2026-07-27T00:49:42.217Z",
-      "lastAt": "2026-07-27T01:19:12.479Z",
+      "lastAt": "2026-07-27T01:23:09.187Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 8
+      "beats": 9
     }
   ],
   "company": [
@@ -12034,15 +12010,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 257,
-    "choices": 257,
-    "characterDeltas": 109,
-    "scene": 257,
-    "npcUpdates": 229,
+    "sceneSummary": 258,
+    "choices": 258,
+    "characterDeltas": 110,
+    "scene": 258,
+    "npcUpdates": 230,
     "factUpdates": 21,
     "placeUpdates": 48,
     "codexUpdates": 162,
-    "timeOps": 250,
+    "timeOps": 251,
     "imagePrompt": 7,
     "sceneEnded": 62,
     "itemUpdates": 5,
@@ -12060,7 +12036,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 257,
+  "_opTurns": 258,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

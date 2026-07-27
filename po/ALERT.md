@@ -1,5 +1,18 @@
 # PO ALERT
 
+> ## [CCODE-29 complete_pending_review — CCode, 2026-07-27] Level Up: craft rank-evolution popover + function-pill mechanics (v1.8.286 `921e07ff`)
+> Erik (direct, on the Level Up screen): "the skills need their detailed info on click/hover... i need to see
+> how they evolve over time. Also each function pill needs a pop/click that gives me the mechanics." CCode-
+> initiated UX → CCODE-29. Built TWO popovers on the one shared surface (SNG-134 consistency): (1) a craft
+> **rank-evolution ladder** — skillDetail now lists each rank's name + grant + "still can't", ✓ on ranks held /
+> ○ on ranks ahead ("How it grows — depth is earned through use"); craft names on ALL three Level Up surfaces
+> (reasoned picks, coverage-gap fallback, owned "Your crafts") are data-entity="skill:id". (2) function pills
+> are clickable (data-verb) → **verbDetail**: the verb's definition, what it's NOT (neighbour verbs), an example,
+> from CONTENT.functionVocabulary; owned rows now render pills too. Ladder prose clamped via smartClamp (not raw
+> .slice) so rawProseCaps stays baseline 63. LIVE-VERIFIED on fresh port: owned Prism Sight → ✓✓○ ladder,
+> unowned Boundary-Stone → "Not yet learned"/all ○, pills bind/reveal/ward → verb mechanics. npm test exit 0.
+> Nothing owed. Results: po/results/20260727_CCODE-29_levelup_craft_ladder_and_function_pill_popovers.md
+
 > ## [CORRECTION + spec] SNG-243 Stillwater fix + SNG-244 decision banner (Aevi, 2026-07-25)
 > - **CORRECTION (Erik caught my chronicle misread):** Stillwater's Trouble is the OLD WARDEN POST that SILAS
 >   RECLAIMED AND NAMED (Pale March - he named Pell's forge corner, Cassiel's kept ground, the Maker's hollow).

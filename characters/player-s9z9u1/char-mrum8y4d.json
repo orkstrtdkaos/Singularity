@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 3,
-  "xp": 203,
+  "xp": 216,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 101,
+  "energy": 96,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -262,172 +262,135 @@
         "player": "Descend through the open passage — into the cold dark below the Unlit's chamber",
         "summary": "Loki descended into the passage below the Unlit's chamber and was turned back by the dark — the grade shifted without warning, the lattice crowded Cy's lamp to near-nothing, and the stone gave no hold. The visit to the Unlit Deep has run its full course: what Loki carries out is what there is.",
         "narration": "You step into the passage and the dark takes you immediately.\n\nNot the managed dark of the Unlit's chamber — that space has the pale blue flame and the measured stillness of a doctrine. This dark has weight. The cold comes up through your boots before you have taken three steps, and the smell of deep water grows from a suggestion into a fact. The walls press close. Your hand finds the left side and the stone is slick, not from moisture but from age — worn smooth by something passing here for longer than the Unlit have been keeping their doctrine above.\n\nCy's lamp flares, then dims. Not a failure of oil — a dimming that comes from outside the lamp, the lattice here so thick and strange that it crowds the small light back on itself. The lens irises wide and stays wide, which is Cy working, and then Cy clicks once, short and sharp. It is not an alarm sound. It is a stopped sound — the sound of the mechanism reaching the edge of what it was made for.\n\nYour foot finds the next step and it is not there. The grade changes without warning. Your weight goes forward and you catch the wall, but the slick stone gives you nothing and for one bad moment you are sliding — boots finding no purchase, one hand dragging on wet rock — before you fetch up hard against a jutting shelf of stone that stops you at the hip. Not a fall. Close enough to count.\n\nYou are three meters below the threshold. The passage above is a dim rectangle. The elder's chamber and the pale blue flame and the Standing Unlit are up there, unchanged. Below, the passage continues — you can smell it, you can feel the larger space the air is falling toward — but the stone underfoot is unreadable in Cy's crowded light and there is nothing to hold.\n\nCy clicks again. This one means: the current assignment has stopped moving. It is technically a question."
+      },
+      {
+        "player": "braid Prism Sight and See the Made Thing together to map the chamber below.  Ask Cy to brighten his light at the same time.",
+        "summary": "Loki braided Prism Sight and See the Made Thing on the shelf above the deep passage — the twin-read mapped three deliberate turns of old stone, creature-traces worn by long use, and a large chamber below with a heat source at its center that reads like a maintained, very old working.",
+        "narration": "You stop on the jutting shelf and plant your feet. The passage is too dark and too strange to descend blind, but it is not too dark to read.\n\nYou open both crafts at once — Prism Sight for the heat and the light-trace, See the Made Thing for the seams and the structure. The lattice crowds in hard, a noise of too much signal, and for a moment the two reads blur against each other like two voices speaking the same word at different pitches. Then they settle. Not cleanly — there is friction at the edge where each craft's attention wants to own the same surface — but enough. A shape begins to build behind your eyes.\n\nAt the same moment, you say to Cy: \"Brighten it.\"\n\nCy's lens irises wide. The lamp flares — one sharp pulse, then a steadier burn, fighting the lattice with simple honest fuel rather than craft. It does not win, but it buys you seconds.\n\nWhat the twin-read returns is this: The passage is old worked stone, not natural. Three direction-changes in the first eight meters, each turn deliberate — whoever cut this was routing around something, not following the rock's grain. The creature-traces go down the left wall in a single-file line, worn smooth, not by accident. The seam-work on the walls matches nothing the Unlit built above — different hands, different era, different intent. And below, at the edge of what the warmth-trace can reach, there is a chamber. Large. The diffuse heat that read as a spring-fed water source from above resolves into something more specific: a space that is warm from the center outward, not from one wall, not from flowing water. Something sits at the middle of it and generates heat the way a maintained thing does — steady, deliberate, very old.\n\nCy's lamp drops back to its ordinary dim. The companion clicks once and steps to your heel."
       }
     ],
     "lastTurn": {
-      "narration": "You step into the passage and the dark takes you immediately.\n\nNot the managed dark of the Unlit's chamber — that space has the pale blue flame and the measured stillness of a doctrine. This dark has weight. The cold comes up through your boots before you have taken three steps, and the smell of deep water grows from a suggestion into a fact. The walls press close. Your hand finds the left side and the stone is slick, not from moisture but from age — worn smooth by something passing here for longer than the Unlit have been keeping their doctrine above.\n\nCy's lamp flares, then dims. Not a failure of oil — a dimming that comes from outside the lamp, the lattice here so thick and strange that it crowds the small light back on itself. The lens irises wide and stays wide, which is Cy working, and then Cy clicks once, short and sharp. It is not an alarm sound. It is a stopped sound — the sound of the mechanism reaching the edge of what it was made for.\n\nYour foot finds the next step and it is not there. The grade changes without warning. Your weight goes forward and you catch the wall, but the slick stone gives you nothing and for one bad moment you are sliding — boots finding no purchase, one hand dragging on wet rock — before you fetch up hard against a jutting shelf of stone that stops you at the hip. Not a fall. Close enough to count.\n\nYou are three meters below the threshold. The passage above is a dim rectangle. The elder's chamber and the pale blue flame and the Standing Unlit are up there, unchanged. Below, the passage continues — you can smell it, you can feel the larger space the air is falling toward — but the stone underfoot is unreadable in Cy's crowded light and there is nothing to hold.\n\nCy clicks again. This one means: the current assignment has stopped moving. It is technically a question.\n\n*▲ Practiced — **See the Made Thing** is fluent now (rank 2), earned through use.*",
-      "sceneSummary": "Loki descended into the passage below the Unlit's chamber and was turned back by the dark — the grade shifted without warning, the lattice crowded Cy's lamp to near-nothing, and the stone gave no hold. The visit to the Unlit Deep has run its full course: what Loki carries out is what there is.",
+      "narration": "You stop on the jutting shelf and plant your feet. The passage is too dark and too strange to descend blind, but it is not too dark to read.\n\nYou open both crafts at once — Prism Sight for the heat and the light-trace, See the Made Thing for the seams and the structure. The lattice crowds in hard, a noise of too much signal, and for a moment the two reads blur against each other like two voices speaking the same word at different pitches. Then they settle. Not cleanly — there is friction at the edge where each craft's attention wants to own the same surface — but enough. A shape begins to build behind your eyes.\n\nAt the same moment, you say to Cy: \"Brighten it.\"\n\nCy's lens irises wide. The lamp flares — one sharp pulse, then a steadier burn, fighting the lattice with simple honest fuel rather than craft. It does not win, but it buys you seconds.\n\nWhat the twin-read returns is this: The passage is old worked stone, not natural. Three direction-changes in the first eight meters, each turn deliberate — whoever cut this was routing around something, not following the rock's grain. The creature-traces go down the left wall in a single-file line, worn smooth, not by accident. The seam-work on the walls matches nothing the Unlit built above — different hands, different era, different intent. And below, at the edge of what the warmth-trace can reach, there is a chamber. Large. The diffuse heat that read as a spring-fed water source from above resolves into something more specific: a space that is warm from the center outward, not from one wall, not from flowing water. Something sits at the middle of it and generates heat the way a maintained thing does — steady, deliberate, very old.\n\nCy's lamp drops back to its ordinary dim. The companion clicks once and steps to your heel.",
+      "sceneSummary": "Loki braided Prism Sight and See the Made Thing on the shelf above the deep passage — the twin-read mapped three deliberate turns of old stone, creature-traces worn by long use, and a large chamber below with a heat source at its center that reads like a maintained, very old working.",
       "choices": [
         {
-          "label": "Climb back up — the passage wants more preparation than this; leave the Unlit Deep and take what was found back to the city",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Climb back up — but pause at the threshold and use Prism Sight to read the deeper dark one more time before the door closes",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "dark_light": -0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Climb back, take a moment at the threshold to breathe and read the passage with See the Made Thing — find what it was built for, if it was built at all",
+          "label": "Carry the map back to the city — what you read from this shelf is enough to bring to someone who will know what it means",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "mechanical_spiritual": -0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cy — out loud, hand on the wall — what it sees down there that you don't",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Descend again — the map changes everything; three turns, left-wall traces, a maintained chamber. Go now while the door is open.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "risky",
+            "scout"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Go back up and tell the elder what the twin-read found — a maintained old working below their chamber, older than their doctrine. See what they say.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate",
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Mark the map in memory and ask Cy what it recognizes — a maintained heat-source this old, at a center, is Precursor work or Cy knows why it isn't",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The passage below the Unlit's outer chamber — three meters down, steep and wet, Cy's lamp crowded dim by the dense lattice. The threshold above is visible as a pale rectangle. The outer chamber with the elder and the Standing Unlit is just above.",
+        "setting": "The passage below the Unlit's outer chamber — three meters down on the jutting shelf, steep and wet, Cy's lamp at ordinary dim. The threshold above is a pale rectangle. The outer chamber with the elder and the Standing Unlit is just above.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Lens wide, lamp dimmed, legs still — has clicked twice; waiting for the assignment to decide"
+            "state": "Lamp returned to ordinary dim, lens at half-iris, one step behind Loki's heel — clicked once after the read."
           },
           {
             "name": "Unlit Elder",
-            "state": "Above, in the outer chamber — seated, unmoved, silent"
+            "state": "Above, in the outer chamber — seated by the pale blue flame, unmoved."
           },
           {
             "name": "Standing Unlit",
-            "state": "Above, in the outer chamber — beside the stair passage, forward-facing"
+            "state": "Above, in the outer chamber — beside the stair passage, forward-facing."
           }
         ],
         "objects": [
           "The threshold above — pale rectangle of the outer chamber's dim light",
-          "The jutting stone shelf that stopped Loki's slide",
-          "The passage descending further below — smelling of cold water and living things",
+          "The jutting stone shelf underfoot",
+          "The passage descending below — three mapped turns, left-wall creature-traces, a maintained chamber somewhere below",
           "Cy's lamp — dimmed but burning"
         ],
         "threads": [
-          "The passage below is still open — the descent failed, not the door",
-          "The elder and the Standing Unlit are above, unchanged — the outer chamber is reachable"
+          "The mapped chamber below holds a heat source that reads like a maintained, very old working — Precursor or older",
+          "The passage is open; the door has not closed",
+          "The elder and the Standing Unlit are above, unchanged and reachable"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "standing-unlit",
-          "name": "Standing Unlit",
-          "note": "Did not react to Loki's descent attempt or the sounds of the slide — the passage event is closed for them as before",
-          "statusNote": "In the outer chamber above, beside the stair passage, still and forward-facing"
-        },
-        {
-          "op": "update",
-          "npcId": "unlit-elder",
-          "name": "Unlit Elder",
-          "note": "Has not moved through the descent attempt — the chamber's business is closed",
-          "statusNote": "Seated by the pale blue flame in the outer chamber above — present and unmoved"
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "the-seam-beside-the-bracket",
-          "label": "The Passage Below",
+          "label": "The Seam Beside the Bracket",
           "kind": "mystery",
-          "fact": "The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep water is a fact, not a suggestion, and the larger space below is real — but this descent requires more than a single attempt.",
+          "fact": "The passage below has three deliberate turns cut around something, not following the rock's grain. The creature-traces on the left wall are worn smooth by long and regular use. Below, a large chamber holds a heat source at its center — steady, outward-radiating warmth, the signature of something maintained and very old. Not a spring. Something that generates heat the way a working does.",
           "links": [
             "the-unlit-deep",
-            "the-water-crisis",
+            "terminus-seals-beneath-the-valley",
             "the-creature-at-the-threshold",
-            "terminus-seals-beneath-the-valley"
+            "the-water-crisis",
+            "loki-thread"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief failed descent and recovery — minutes, not a long effort"
-      },
-      "offer": {
-        "thing": "Cy's click in the dark — not alarm, not report; a question shaped like an old maintenance protocol, aimed at nothing Loki can see",
-        "from": "Cy's boundary: it will not explain what it knows, because it does not know that it knows it — but something in the passage below matches a procedure it cannot name"
+        "why": "A focused dual-craft read of the passage — minutes, not longer."
       }
     },
     "sceneState": {
-      "setting": "The passage below the Unlit's outer chamber — three meters down, steep and wet, Cy's lamp crowded dim by the dense lattice. The threshold above is visible as a pale rectangle. The outer chamber with the elder and the Standing Unlit is just above.",
+      "setting": "The passage below the Unlit's outer chamber — three meters down on the jutting shelf, steep and wet, Cy's lamp at ordinary dim. The threshold above is a pale rectangle. The outer chamber with the elder and the Standing Unlit is just above.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Lens wide, lamp dimmed, legs still — has clicked twice; waiting for the assignment to decide"
+          "state": "Lamp returned to ordinary dim, lens at half-iris, one step behind Loki's heel — clicked once after the read."
         },
         {
           "name": "Unlit Elder",
-          "state": "Above, in the outer chamber — seated, unmoved, silent"
+          "state": "Above, in the outer chamber — seated by the pale blue flame, unmoved."
         },
         {
           "name": "Standing Unlit",
-          "state": "Above, in the outer chamber — beside the stair passage, forward-facing"
+          "state": "Above, in the outer chamber — beside the stair passage, forward-facing."
         }
       ],
       "objects": [
         "The threshold above — pale rectangle of the outer chamber's dim light",
-        "The jutting stone shelf that stopped Loki's slide",
-        "The passage descending further below — smelling of cold water and living things",
+        "The jutting stone shelf underfoot",
+        "The passage descending below — three mapped turns, left-wall creature-traces, a ",
         "Cy's lamp — dimmed but burning"
       ],
       "threads": [
-        "The passage below is still open — the descent failed, not the door",
-        "The elder and the Standing Unlit are above, unchanged — the outer chamber is reachable"
+        "The mapped chamber below holds a heat source that reads like a maintained, very old working — Precursor or older",
+        "The passage is open; the door has not closed",
+        "The elder and the Standing Unlit are above, unchanged and reachable"
       ]
     }
   },
@@ -937,7 +900,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The pressure-gauge needle, which tapped once and stopped when Cy settled — Tessvel noticed and her pen moved toward it before she stopped…",
@@ -1414,7 +1377,8 @@
         "label": "The Passage Below",
         "kind": "mystery",
         "facts": [
-          "[d1] The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep…"
+          "[d1] The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep…",
+          "[d1] The passage below has three deliberate turns cut around something, not following the rock's grain. The creature-traces on the left wall are worn smooth by long and regular use. Below, a large chamber holds a heat source at its center — steady, outward-radiating warmth, the signature of something…"
         ],
         "links": [
           "the-unlit-deep",
@@ -1422,29 +1386,31 @@
           "the-creature-at-the-threshold",
           "terminus-seals-beneath-the-valley"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Seam Beside the Bracket"
+        ],
         "createdDay": 1,
         "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 3.478419035716303,
-    "cerebral": 12.060457447244804,
-    "social": 15.431039923840213,
-    "strategic": 8.200658606582644,
-    "cautious": 7.057146342286288,
-    "amorous": 6.719853530618573,
-    "generous": 2.9897894600562953,
-    "ruthless": 0.3918959549693073,
-    "risky": 2.831720693359375
+    "devotion": 3.3914585598233953,
+    "cerebral": 12.758946011063683,
+    "social": 15.045263925744207,
+    "strategic": 9.995642141418077,
+    "cautious": 6.88071768372913,
+    "amorous": 6.551857192353109,
+    "generous": 2.915044723554888,
+    "ruthless": 0.3820985560950746,
+    "risky": 2.7609276760253905
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "charmer"
   ],
-  "actionCount": 55,
+  "actionCount": 56,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1601,8 +1567,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785169886803,
-  "rev": 126,
+  "updatedAt": 1785170142920,
+  "rev": 127,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1920,7 +1886,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 28
+    "umbral_depths": 29
   },
   "opLossPending": false,
   "sessions": [
@@ -1951,10 +1917,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T16:31:26.801Z",
+      "lastAt": "2026-07-27T16:35:42.919Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 24
+      "beats": 25
     }
   ],
   "establishedFacts": [
@@ -1992,13 +1958,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 56,
-    "choices": 56,
+    "sceneSummary": 57,
+    "choices": 57,
     "characterDeltas": 26,
-    "scene": 56,
+    "scene": 57,
     "placeUpdates": 8,
-    "codexUpdates": 46,
-    "timeOps": 55,
+    "codexUpdates": 47,
+    "timeOps": 56,
     "offer": 6,
     "generateRequest": 2,
     "sceneEnded": 14,
@@ -2012,24 +1978,25 @@
     "stageOps": 5,
     "encounterOps": 1
   },
-  "_opTurns": 56,
+  "_opTurns": 57,
   "customAbilities": {},
   "companionBonds": {
-    "coil": 0.5
+    "coil": 0.75
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 17,
+      "see_the_made_thing": 18,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,
       "the_better_story": 6,
-      "prism_sight": 5
+      "prism_sight": 6
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
-      "see_the_made_thing+the_misdirect": 1
+      "see_the_made_thing+the_misdirect": 1,
+      "prism_sight+see_the_made_thing": 1
     },
     "aspirations": [
       {

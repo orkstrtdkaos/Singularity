@@ -198,98 +198,80 @@
         "player": "Read the deprecated duration field on the regulator housing — find out exactly how long the amber light has been burning",
         "summary": "Loki read the deprecated duration field — the amber light has burned for six hundred and sixty-three darks, unattended, since before the Unlit built their chamber above.",
         "narration": "You cross to the far end of the corridor and crouch in front of the regulator housing. The amber light is small — the size of a thumbnail, set flush in the dark metal. Cy follows and holds its lamp at the angle you need without being asked.\n\nThe deprecated duration field is on the lower-right face of the housing, below the main indicator panel. The designation glyph is worn but legible. You open See the Made Thing lightly, just enough to read the field's structure — the craft finds the counter, follows its seam back to its origin point, and closes.\n\nThe field reads six hundred and sixty-three darks. You do not know the conversion precisely, but you know the number is large. The amber light has been burning since before anyone in the valley above could remember it starting. It has been burning, unattended, in this passage since before the Unlit built their chamber over it.\n\nCy's lens irises once. It says, quietly, 'The current assignment may note that the counter has not rolled over. It was built to count higher than this.'"
+      },
+      {
+        "player": "Ask Cy what it remembers of this regulator — what Halvex told it, what it observed on its previous visits",
+        "summary": "Cy recalled Halvex's words — the regulator counts how long the question has gone unasked, and Halvex died still learning the question's shape.",
+        "narration": "You sit back on your heels and look at Cy. The lamp holds steady in its grip, the amber light of the regulator small and warm between you.\n\n\"Cy,\" you say. \"What do you remember of this place? What did Halvex tell you about it?\"\n\nCy is still for a moment. Its lens irises once, slowly, the way it does when it is not searching but retrieving.\n\n\"Halvex said the regulator does not measure the water,\" Cy says. Its voice is the faint dry click of old brass. \"Halvex said it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. Those are Halvex's words. I recorded them as given.\"\n\nAnother pause. The cold from below moves against your legs.\n\n\"On my first visit here, the duration field read two hundred and nine darks,\" Cy continues. \"On my second, four hundred and thirty-one. On my third, Halvex told me not to read it again. Halvex said the counter was not a record of how long the light had burned. Halvex said the counter was a record of how long the question had gone unasked.\" Cy's legs adjust slightly, resettling on the stone. \"I asked Halvex what the question was. Halvex said they did not yet know the right way to ask it. They said they were still learning the shape of it from the walls.\" The lens irises again. \"That was the last visit I made with Halvex present. I have not been told what the question is.\""
       }
     ],
     "lastTurn": {
-      "narration": "You cross to the far end of the corridor and crouch in front of the regulator housing. The amber light is small — the size of a thumbnail, set flush in the dark metal. Cy follows and holds its lamp at the angle you need without being asked.\n\nThe deprecated duration field is on the lower-right face of the housing, below the main indicator panel. The designation glyph is worn but legible. You open See the Made Thing lightly, just enough to read the field's structure — the craft finds the counter, follows its seam back to its origin point, and closes.\n\nThe field reads six hundred and sixty-three darks. You do not know the conversion precisely, but you know the number is large. The amber light has been burning since before anyone in the valley above could remember it starting. It has been burning, unattended, in this passage since before the Unlit built their chamber over it.\n\nCy's lens irises once. It says, quietly, 'The current assignment may note that the counter has not rolled over. It was built to count higher than this.'",
-      "sceneSummary": "Loki read the deprecated duration field — the amber light has burned for six hundred and sixty-three darks, unattended, since before the Unlit built their chamber above.",
+      "narration": "You sit back on your heels and look at Cy. The lamp holds steady in its grip, the amber light of the regulator small and warm between you.\n\n\"Cy,\" you say. \"What do you remember of this place? What did Halvex tell you about it?\"\n\nCy is still for a moment. Its lens irises once, slowly, the way it does when it is not searching but retrieving.\n\n\"Halvex said the regulator does not measure the water,\" Cy says. Its voice is the faint dry click of old brass. \"Halvex said it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. Those are Halvex's words. I recorded them as given.\"\n\nAnother pause. The cold from below moves against your legs.\n\n\"On my first visit here, the duration field read two hundred and nine darks,\" Cy continues. \"On my second, four hundred and thirty-one. On my third, Halvex told me not to read it again. Halvex said the counter was not a record of how long the light had burned. Halvex said the counter was a record of how long the question had gone unasked.\" Cy's legs adjust slightly, resettling on the stone. \"I asked Halvex what the question was. Halvex said they did not yet know the right way to ask it. They said they were still learning the shape of it from the walls.\" The lens irises again. \"That was the last visit I made with Halvex present. I have not been told what the question is.\"",
+      "sceneSummary": "Cy recalled Halvex's words — the regulator counts how long the question has gone unasked, and Halvex died still learning the question's shape.",
       "choices": [
         {
-          "label": "Ask the regulator directly — press it with a question and see what it does",
+          "label": "Ask Cy what Halvex thought the question was — even an incomplete shape, a direction they were moving toward",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "mechanical_spiritual": 0.3
-          },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Use See the Made Thing on the regulator housing itself — read what it was built to do",
+          "label": "Use See the Made Thing on the regulator's question-field directly — read what it is structured to receive",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
           "abilityId": "see_the_made_thing",
           "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Ask Cy what it remembers of this regulator — what Halvex told it, what it observed on its previous visits",
+          "label": "Ask the regulator the most honest question you can form — what is the water prepared to carry?",
           "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
-            "study"
+            "study",
+            "risky"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Read the final entry in Halvex's wall-journal — find the last thing they wrote before they stopped",
+          "label": "Read the final entries of Halvex's journal on the left wall — find the last shape they gave the question before they stopped writing",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -1
-      },
       "scene": {
         "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki crouches at the far end before the dark metal regulator housing, Cy's lamp held at the right angle beside them.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Holding lamp at the angle needed; lens irised once after the duration field was read; now still."
+            "state": "Lamp steady, lens irised after its recollection — now still, waiting."
           }
         ],
         "objects": [
           "Long band of fine-cut notation along the left wall — Halvex's working journal",
           "Three metal panels from the inspection port niche, set against the wall",
-          "Dark metal regulator housing flush in the far wall — pre-Transition, single amber indicator light, deprecated duration field on lower-right face reading 663 darks",
+          "Dark metal regulator housing flush in the far wall — pre-Transition, single amber light",
           "Cy's lamp — the only light source"
         ],
         "threads": [
-          "What the regulator is waiting to be asked, and whether asking it means anything",
-          "What Halvex's final entry means: 'not waiting to be repaired — waiting to be asked'",
-          "What Cy observed on its previous visits here, and what Halvex told it",
-          "The counter was built to count higher than 663 — what it was counting toward"
+          "The question the regulator is built to receive — its shape not yet known",
+          "What the counter was counting toward — how high it was built to go",
+          "Halvex's final journal entries — the last shape they gave the question before they stopped",
+          "Cy's third visit — the last time Halvex was present; what came after"
         ]
       },
       "npcUpdates": [
@@ -297,41 +279,46 @@
           "op": "update",
           "npcId": "cy",
           "name": "Cy",
-          "note": "Held the lamp at the correct angle without being asked; noted that the counter was built to count higher than 663 darks.",
+          "note": "Recalled Halvex's exact words — the regulator measures the question of the water, not the water itself; the counter records how long the question has gone unasked. Halvex told Cy not to read the counter again on the third visit, and was not present after that.",
           "learned": [
-            "The regulator's amber light has burned for 663 darks — since before the Unlit built their chamber above it."
+            "The duration counter counts how long the question has gone unasked — Halvex's own phrasing",
+            "Halvex did not know the question's full shape at the time of the third and final visit — they were still learning it from the walls",
+            "Cy's three previous visits correspond to counter readings of 209, 431, and an unread third"
           ],
-          "skillsObserved": [
-            "Anticipatory assistance — positions itself before being directed"
-          ],
-          "statusNote": "Present in the deep corridor, lamp held steady, attentive."
+          "statusNote": "In the deep corridor, lamp held at working angle — present and still after recollection."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "terminus-seals-beneath-the-valley",
-          "label": "Terminus Regulator — Deprecated Duration Field",
+          "topic": "halvex",
+          "label": "Halvex",
           "kind": "mystery",
-          "fact": "The deprecated duration field on the regulator housing reads 663 darks. The amber light has been burning unattended since before the Unlit built their chamber above. Cy noted that the counter was built to count higher than this — it was not near its ceiling.",
+          "fact": "Halvex's own words, preserved through Cy: the regulator does not measure the water — it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. The counter records how long the question has gone unasked, not how long the light has burned. Halvex was still learning the question's shape from the walls when they made their last visit — and told Cy not to read the counter again.",
           "links": [
+            "terminus-seals-beneath-the-valley",
             "the-seam-beside-the-bracket",
-            "halvex",
-            "the-unlit-deep",
+            "the-water-crisis",
             "cy-s-construction",
-            "the-water-crisis"
+            "the-unlit-deep"
           ]
-        }
-      ],
-      "questUpdates": [
+        },
         {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "Duration field read — the amber light has burned for 663 darks, predating the Unlit's occupation. The counter was built to go higher. The regulator's purpose remains: waiting to be asked."
+          "topic": "terminus-seals-beneath-the-valley",
+          "label": "The Regulator — The Question of the Water",
+          "kind": "mystery",
+          "fact": "The regulator's purpose, in Halvex's words: it measures whether the water is ready to carry what it was prepared to carry. The question has gone unasked for at least 663 darks. Halvex died — or departed — still learning the right shape of the question. Cy visited three times; on the third, Halvex told it not to read the counter again.",
+          "links": [
+            "halvex",
+            "the-seam-beside-the-bracket",
+            "the-water-crisis",
+            "cy-s-construction",
+            "the-unlit-deep"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A careful, focused read of the duration field — a few minutes of work."
+        "why": "A brief exchange in the corridor — Cy's recollection, a few quiet minutes."
       }
     },
     "sceneState": {
@@ -339,7 +326,7 @@
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Holding lamp at the angle needed; lens irised once after the duration field was read; now still."
+          "state": "Lamp steady, lens irised after its recollection — now still, waiting."
         }
       ],
       "objects": [
@@ -349,10 +336,10 @@
         "Cy's lamp — the only light source"
       ],
       "threads": [
-        "What the regulator is waiting to be asked, and whether asking it means anything",
-        "What Halvex's final entry means: 'not waiting to be repaired — waiting to be asked'",
-        "What Cy observed on its previous visits here, and what Halvex told it",
-        "The counter was built to count higher than 663 — what it was counting toward"
+        "The question the regulator is built to receive — its shape not yet known",
+        "What the counter was counting toward — how high it was built to go",
+        "Halvex's final journal entries — the last shape they gave the question before they stopped",
+        "Cy's third visit — the last time Halvex was present; what came after"
       ]
     }
   },
@@ -897,7 +884,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
@@ -1405,7 +1392,8 @@
           "[d1] Prism Sight found three sets of heat-traces on the installation panels. Someone came here before Loki — read the calibration entry, checked the second panel's corner mark, then pressed one finger to the personal designation glyph on the third panel and left. They recognized the name. They did not…",
           "[d1] The personal designation glyph on the third panel resolves to a construction-address: 'assigned to Halvex.' The regulator was not built for a facility — it was built for a specific named operator. Cy went still when the name was read aloud and said 'that entry requires verification' without moving…",
           "[d1] The terminus regulator was built with a paired instrument — Cy — assigned specifically to the operator Halvex, not to the facility. The pairing was personal. Cy has visited this installation before, within its operational history, and the visit is not in its accessible memory.",
-          "[d1] The deprecated duration field on the regulator housing reads 663 darks. The amber light has been burning unattended since before the Unlit built their chamber above. Cy noted that the counter was built to count higher than this — it was not near its ceiling."
+          "[d1] The deprecated duration field on the regulator housing reads 663 darks. The amber light has been burning unattended since before the Unlit built their chamber above. Cy noted that the counter was built to count higher than this — it was not near its ceiling.",
+          "[d1] The regulator's purpose, in Halvex's words: it measures whether the water is ready to carry what it was prepared to carry. The question has gone unasked for at least 663 darks. Halvex died — or departed — still learning the right shape of the question. Cy visited three times; on the third, Halvex…"
         ],
         "links": [
           "the-seam-beside-the-bracket",
@@ -1416,7 +1404,8 @@
           "cy-s-construction"
         ],
         "aliases": [
-          "Terminus Regulator — Deprecated Duration Field"
+          "Terminus Regulator — Deprecated Duration Field",
+          "The Regulator — The Question of the Water"
         ],
         "createdDay": 1,
         "updatedDay": 1
@@ -1431,17 +1420,18 @@
           "[d1] Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged 'do not resolve without verification.' Cy has not verified it — not for lack of ability, but because something in its own architecture is holding the step back.",
           "[d1] Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry.",
           "[d1] Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated.",
-          "[d1] Not operational logs — a working journal. Observation, question, hypothesis, revision, over a long period. Halvex was trying to determine when the regulator was built and by whom, and kept arriving at the same answer: it predates every record they could find, including the records that were…"
+          "[d1] Not operational logs — a working journal. Observation, question, hypothesis, revision, over a long period. Halvex was trying to determine when the regulator was built and by whom, and kept arriving at the same answer: it predates every record they could find, including the records that were…",
+          "[d1] Halvex's own words, preserved through Cy: the regulator does not measure the water — it measures the question of the water. Whether the water is ready to carry what it was prepared to carry. The counter records how long the question has gone unasked, not how long the light has burned. Halvex was…"
         ],
         "links": [
-          "terminus-seals-beneath-the-valley",
           "loki-thread",
           "the-unlit-deep",
           "the-seam-beside-the-bracket",
           "halvex-corridor",
           "cy-construction",
           "the-taken-from-the-city",
-          "cy-s-construction"
+          "cy-s-construction",
+          "the-water-crisis"
         ],
         "aliases": [
           "Halvex's Wall Records"
@@ -1492,21 +1482,21 @@
     }
   },
   "tendencies": {
-    "devotion": 2.319827809152036,
-    "cerebral": 16.23776115598986,
-    "social": 12.893851224665374,
-    "strategic": 8.333103998261864,
-    "cautious": 8.232768166522618,
-    "amorous": 4.481605848430297,
-    "generous": 1.9939508902555123,
-    "ruthless": 0.2613633162931382,
-    "risky": 2.626529987573949
+    "devotion": 2.2618321139232354,
+    "cerebral": 16.831817127090112,
+    "social": 12.571504944048739,
+    "strategic": 8.124776398305317,
+    "cautious": 8.026948962359553,
+    "amorous": 4.369565702219539,
+    "generous": 1.9441021179991245,
+    "ruthless": 0.2548292333858097,
+    "risky": 2.5608667378846
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 71,
+  "actionCount": 72,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1671,8 +1661,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785177434322,
-  "rev": 143,
+  "updatedAt": 1785178582399,
+  "rev": 144,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2029,7 +2019,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 44
+    "umbral_depths": 45
   },
   "opLossPending": false,
   "sessions": [
@@ -2060,10 +2050,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T18:37:14.320Z",
+      "lastAt": "2026-07-27T18:56:22.399Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 40
+      "beats": 41
     }
   ],
   "establishedFacts": [
@@ -2101,17 +2091,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 72,
-    "choices": 72,
+    "sceneSummary": 73,
+    "choices": 73,
     "characterDeltas": 32,
-    "scene": 72,
+    "scene": 73,
     "placeUpdates": 10,
-    "codexUpdates": 62,
-    "timeOps": 71,
+    "codexUpdates": 63,
+    "timeOps": 72,
     "offer": 8,
     "generateRequest": 2,
     "sceneEnded": 17,
-    "npcUpdates": 63,
+    "npcUpdates": 64,
     "moveTo": 2,
     "gambitApt": 1,
     "deeds": 1,
@@ -2121,7 +2111,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 72,
+  "_opTurns": 73,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75

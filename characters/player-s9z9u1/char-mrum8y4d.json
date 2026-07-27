@@ -168,78 +168,92 @@
         "player": "Use the Better Story to retell the entire echange, while you physically help plant the tree.",
         "summary": "Loki helped plant the tree and tried to retell the exchange as a better story — Ossivyn received the help and heard the telling, but the story found no wound to heal; the tree went into the ground as recorded.",
         "narration": "Loki takes up the spare spade from the fence post. The blade bites the loose mounded earth easily and he tosses the first scoop aside without being asked, stepping down into the hole beside the root space Ossivyn has prepared.\n\nHe begins to talk as he works. He reaches for The Better Story — the angle that is also true, the shape that heals differently. He tells the whole exchange back: the sapling, the name, the record, the made name recognized and written down honestly. He tries to frame it as something that worked out, as a gift that landed in the only form the orchard could receive.\n\nBut Ossivyn is already kneeling at the hole's edge, lowering the sapling's root ball into place with both hands. He is listening. His face is not closed or cold. He simply has no wound here for the story to find. A man who has been doing the same right work for forty years does not need a different angle on this morning. The story slides off him the way water slides off good planting clay — not resisted, just not absorbed.\n\nOssivyn firms the roots gently with his thumbs and looks up. 'You dug well,' he says. He means it. He reaches for Loki's spade with a nod — there is backfilling to do — and the tree is going into the ground right now, with the name as it was recorded: made, giver unknown, and waiting for whoever the child becomes."
+      },
+      {
+        "player": null,
+        "summary": "The planting finished and thanks given, Loki took to the road — and met a challenge in the Disputed Zone.",
+        "narration": "The backfilling is nearly done. Loki tosses the last loose scoop of earth around the root ball and tamps it down with the flat of the spade. Ossivyn pats the mounded soil once, firmly, the way a man closes something that is meant to last. Cy clicks twice on the fence post and irises its lens wide, then narrow, then wide again — its version of a long look at something it has filed away.\n\nOssivyn straightens and tucks his pencil behind his ear. 'Thank you for the hands,' he says simply, and he means it. He picks up the closed record book and carries it back toward the gate without hurry.\n\nThe Slow Orchard falls quiet behind Loki as the road opens again. The Disputed Zone lies ahead — the stretch of country between the valley's settled places where the ground belongs to no one and everyone traveling it is, for a moment, neither guest nor trespasser. The mud here is deep from the spring melt, and the morning light is thin through the trees.\n\nThe sound comes before the shape does. A footfall too deliberate to be accidental. Then a second. Someone steps out from the brush line to the left of the road — not running, not shouting, but moving with the flat-footed economy of a person who has done this before and knows the first move is presence. Their eyes are on Loki. Their hand is already near their belt. The Disputed Zone has its own rules, and one of them is that a stranger alone on this road is an invitation."
       }
     ],
     "lastTurn": {
-      "narration": "Loki takes up the spare spade from the fence post. The blade bites the loose mounded earth easily and he tosses the first scoop aside without being asked, stepping down into the hole beside the root space Ossivyn has prepared.\n\nHe begins to talk as he works. He reaches for The Better Story — the angle that is also true, the shape that heals differently. He tells the whole exchange back: the sapling, the name, the record, the made name recognized and written down honestly. He tries to frame it as something that worked out, as a gift that landed in the only form the orchard could receive.\n\nBut Ossivyn is already kneeling at the hole's edge, lowering the sapling's root ball into place with both hands. He is listening. His face is not closed or cold. He simply has no wound here for the story to find. A man who has been doing the same right work for forty years does not need a different angle on this morning. The story slides off him the way water slides off good planting clay — not resisted, just not absorbed.\n\nOssivyn firms the roots gently with his thumbs and looks up. 'You dug well,' he says. He means it. He reaches for Loki's spade with a nod — there is backfilling to do — and the tree is going into the ground right now, with the name as it was recorded: made, giver unknown, and waiting for whoever the child becomes.\n\n*▲ Practiced — **The Better Story** is fluent now (rank 2), earned through use.*",
-      "sceneSummary": "Loki helped plant the tree and tried to retell the exchange as a better story — Ossivyn received the help and heard the telling, but the story found no wound to heal; the tree went into the ground as recorded.",
+      "narration": "The backfilling is nearly done. Loki tosses the last loose scoop of earth around the root ball and tamps it down with the flat of the spade. Ossivyn pats the mounded soil once, firmly, the way a man closes something that is meant to last. Cy clicks twice on the fence post and irises its lens wide, then narrow, then wide again — its version of a long look at something it has filed away.\n\nOssivyn straightens and tucks his pencil behind his ear. 'Thank you for the hands,' he says simply, and he means it. He picks up the closed record book and carries it back toward the gate without hurry.\n\nThe Slow Orchard falls quiet behind Loki as the road opens again. The Disputed Zone lies ahead — the stretch of country between the valley's settled places where the ground belongs to no one and everyone traveling it is, for a moment, neither guest nor trespasser. The mud here is deep from the spring melt, and the morning light is thin through the trees.\n\nThe sound comes before the shape does. A footfall too deliberate to be accidental. Then a second. Someone steps out from the brush line to the left of the road — not running, not shouting, but moving with the flat-footed economy of a person who has done this before and knows the first move is presence. Their eyes are on Loki. Their hand is already near their belt. The Disputed Zone has its own rules, and one of them is that a stranger alone on this road is an invitation.",
+      "sceneSummary": "The planting finished and thanks given, Loki took to the road — and met a challenge in the Disputed Zone.",
       "choices": [
         {
-          "label": "Help backfill alongside Ossivyn and ask, plainly, whether any tree here was planted for you.",
+          "label": "Stand your ground and hold the stranger's gaze — let them speak first",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "subAttribute": "presence",
+          "difficulty": 15,
           "intentTags": [
-            "ask"
+            "defend",
+            "guard"
           ],
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Set down the spade and let the planting finish without another word — watch the orchard instead, looking for the tree planted three hundred years ago that is nearly ready to fruit.",
+          "label": "Use The Misdirect — snap their attention to something behind them and buy a step of ground",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
+          "subAttribute": "wits",
+          "difficulty": 15,
           "intentTags": [
-            "scout"
+            "feint",
+            "defend"
           ],
-          "trivial": true
+          "abilityId": "the_misdirect",
+          "energyCost": 1,
+          "trivial": false
         },
         {
-          "label": "Use Prism Sight on the sapling as the roots go into the ground — read whether anything warm has touched this soil recently, or whether the earth here has been prepared longer than today.",
+          "label": "Step sideways into the tree-shadow and let The False Target take your place on the road",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "study"
+            "hide",
+            "defend"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
+          "abilityId": "the_false_target",
+          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Ask Ossivyn directly — not about names, not about trees — about the person who planted the tree that is about to fruit, and whether they know it is nearly time.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
+          "label": "Accept the contest — you have read harder things than a stranger with a hand near their belt",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
-            "ask"
+            "attack",
+            "risky"
           ],
-          "trivial": true
+          "encounterId": "a-hostile-meeting",
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale soft light. Loki is in the knee-deep hole alongside Ossivyn, who is kneeling at the edge with the sapling's root ball seated in place, ready to backfill.",
+        "setting": "The road at the edge of the Disputed Zone — spring mud, thin morning light through bare-budded trees. A figure has stepped out of the brush line to the left of the road, moving deliberately toward Loki. The Slow Orchard is behind; open contested ground ahead.",
         "npcsPresent": [
           {
             "name": "Ossivyn Tallow",
-            "state": "Kneeling at the hole's edge, both hands steadying the root ball, nodding toward Loki's spade — backfilling is next."
+            "state": "Walking back toward the orchard gate with the closed record book — receding, not a factor now."
           },
           {
             "name": "Cy",
-            "state": "Still on the fence post, lens irised wide, watching the sapling go into the ground."
+            "state": "On Loki's shoulder or pack-strap — lens irised narrow, watching the stranger with the focused stillness of a thing cataloguing threat."
+          },
+          {
+            "name": "the aggressor",
+            "state": "Stepping out from the brush line to the left — flat-footed, hand near belt, eyes fixed on Loki. Has not spoken."
           }
         ],
         "objects": [
-          "spare spade (in Loki's hands)",
-          "sapling now seated in the hole, root ball in place",
-          "loose mounded earth ready to backfill",
-          "orchard record book closed on Ossivyn's knee",
-          "pencil tucked behind Ossivyn's ear"
+          "spare spade (still in Loki's hands — a tool, but a weighty one)",
+          "spring mud covering the road",
+          "brush line to the left where the stranger emerged"
         ],
         "threads": [
-          "Whether any tree in this orchard was planted for Loki — unasked",
-          "The tree planted three hundred years ago that is about to fruit, and the missing person it was planted for",
-          "The orchard record: the made name is written, giver recorded as unknown"
+          "The stranger's intent — hostile, testing, or something else entirely — unspoken",
+          "The planting is done; the orchard record holds the made name and its giver listed as unknown",
+          "The tree planted three hundred years ago that is about to fruit, and the missing person it was planted for — unaddressed"
         ]
       },
       "npcUpdates": [
@@ -247,39 +261,41 @@
           "op": "update",
           "npcId": "ossivyn-tallow",
           "name": "Ossivyn Tallow",
-          "note": "Received Loki's help digging without complaint — accepted the labor easily. Heard the retelling of the morning's exchange; it found no wound in him and he did not need it to. Thanked the help plainly. Now backfilling.",
-          "status": "active",
-          "statusNote": "At the hole's edge, seating the sapling, ready to backfill — the planting is nearly done."
+          "note": "Thanked Loki plainly for the help with the digging and returned to the orchard. The exchange is closed on his end.",
+          "statusNote": "Returning to the orchard gate with the closed record book — the planting is done."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A few minutes of digging and talking while the sapling is seated."
-      }
+        "hoursPassed": 0.5,
+        "why": "The backfilling finished, Ossivyn said his thanks, and Loki set out on the road — a short walk to the Disputed Zone edge."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale soft light. Loki is in the knee-deep hole alongside Ossivyn, who is kneeling at the edge with the sapling's root ball seated in place, ready to backfill.",
+      "setting": "The road at the edge of the Disputed Zone — spring mud, thin morning light through bare-budded trees. A figure has stepped out of the brush line to the left of the road, moving deliberately toward Loki. The Slow Orchard is behind; open contested ground ahead.",
       "npcsPresent": [
         {
           "name": "Ossivyn Tallow",
-          "state": "Kneeling at the hole's edge, both hands steadying the root ball, nodding toward Loki's spade — backfilling is next."
+          "state": "Walking back toward the orchard gate with the closed record book — receding, not a factor now."
         },
         {
           "name": "Cy",
-          "state": "Still on the fence post, lens irised wide, watching the sapling go into the ground."
+          "state": "On Loki's shoulder or pack-strap — lens irised narrow, watching the stranger with the focused stillness of a thing catal"
+        },
+        {
+          "name": "the aggressor",
+          "state": "Stepping out from the brush line to the left — flat-footed, hand near belt, eyes fixed on Loki. Has not spoken."
         }
       ],
       "objects": [
-        "spare spade (in Loki's hands)",
-        "sapling now seated in the hole, root ball in place",
-        "loose mounded earth ready to backfill",
-        "orchard record book closed on Ossivyn's knee",
-        "pencil tucked behind Ossivyn's ear"
+        "spare spade (still in Loki's hands — a tool, but a weighty one)",
+        "spring mud covering the road",
+        "brush line to the left where the stranger emerged"
       ],
       "threads": [
-        "Whether any tree in this orchard was planted for Loki — unasked",
-        "The tree planted three hundred years ago that is about to fruit, and the missing person it was planted for",
-        "The orchard record: the made name is written, giver recorded as unknown"
+        "The stranger's intent — hostile, testing, or something else entirely — unspoken",
+        "The planting is done; the orchard record holds the made name and its giver listed as unknown",
+        "The tree planted three hundred years ago that is about to fruit, and the missing person it was planted for — unaddressed"
       ]
     }
   },
@@ -608,7 +624,8 @@
         "[d1] Partial yielded to the combined working — he won't raise a plaque, but he agreed to write the name in the orchard's record with its giver and the date. Now holding the sapling and waiting for Loki to speak it.",
         "[d1] Heard the name Tree given plainly — no layered meaning reached him. Has his record book open and pencil ready, waiting for the giver's name.",
         "[d1] Recognized the false-shaped name as made — recorded it honestly as such, and closed the book without hostility. Said the child will know it was made, and will know someone wanted to be found.",
-        "[d1] Received Loki's help digging without complaint — accepted the labor easily. Heard the retelling of the morning's exchange; it found no wound in him and he did not need it to. Thanked the help plainly. Now backfilling."
+        "[d1] Received Loki's help digging without complaint — accepted the labor easily. Heard the retelling of the morning's exchange; it found no wound in him and he did not need it to. Thanked the help plainly. Now backfilling.",
+        "[d1] Thanked Loki plainly for the help with the digging and returned to the orchard. The exchange is closed on his end."
       ],
       "knownFacts": [
         "The tree names itself through the child who inherits it — a name given by a stranger ahead of time is not part of the gift being planted here.",
@@ -620,7 +637,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the hole's edge, seating the sapling, ready to backfill — the planting is nearly done.",
+      "statusNote": "Returning to the orchard gate with the closed record book — the planting is done.",
       "domains": {
         "primary": "rootkin"
       },
@@ -885,7 +902,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1744,8 +1761,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785192298339,
-  "rev": 164,
+  "updatedAt": 1785195064591,
+  "rev": 168,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2108,7 +2125,7 @@
           "entityId": "ossivyn-tallow",
           "type": "npc",
           "birthWeight": 6,
-          "engagementScore": 16,
+          "engagementScore": 18,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -2155,6 +2172,10 @@
             },
             {
               "kind": "fact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
               "day": 1
             },
             {
@@ -2223,7 +2244,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 6
+    "the_quickwood": 7
   },
   "opLossPending": false,
   "sessions": [
@@ -2254,10 +2275,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T22:44:58.338Z",
+      "lastAt": "2026-07-27T23:31:04.590Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 56
+      "beats": 57
     }
   ],
   "establishedFacts": [
@@ -2295,17 +2316,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 88,
-    "choices": 88,
+    "sceneSummary": 89,
+    "choices": 89,
     "characterDeltas": 38,
-    "scene": 88,
+    "scene": 89,
     "placeUpdates": 12,
     "codexUpdates": 75,
-    "timeOps": 87,
+    "timeOps": 88,
     "offer": 9,
     "generateRequest": 3,
-    "sceneEnded": 20,
-    "npcUpdates": 79,
+    "sceneEnded": 21,
+    "npcUpdates": 80,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -2315,7 +2336,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 88,
+  "_opTurns": 89,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2529,9 +2550,85 @@
         "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
       },
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
+    },
+    "re-re_zone_hostile": {
+      "schemaVersion": 1,
+      "id": "re-re_zone_hostile",
+      "type": "duel",
+      "name": "A Hostile Meeting",
+      "minDanger": 4,
+      "setup": "In the Disputed Zone the ground itself is contested — a harder hostile encounter, still avoidable, still yield-able. Lethal only if telegraphed and entered by choice.",
+      "lethal": false,
+      "avoidable": true,
+      "fromRandom": true,
+      "flavor": "fight",
+      "opponent": {
+        "name": "the aggressor",
+        "health": 7,
+        "threat": 60,
+        "yieldAt": 1,
+        "fleeDifficulty": 15,
+        "spectrum": {
+          "violence_peace": -0.3,
+          "chaos_order": -0.3
+        },
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
+      },
+      "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-re_zone_hostile",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-re_zone_hostile",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 7,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 5,
+          "physical": 5,
+          "mental": 5,
+          "social": 5
+        },
+        "energy": 112,
+        "maxEnergy": 112,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 4,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 4,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 112
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 24,
     "lastBeat": "witness_power"

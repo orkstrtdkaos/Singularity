@@ -173,26 +173,39 @@
         "player": "Use See the Made Thing on Cy itself — read what the craft can find in its own structure about this installation and the name",
         "summary": "See the Made Thing read Cy's own structure and found the pairing in the construction itself — Cy was not assigned to this installation; it was built for it, and for Halvex.",
         "narration": "You turn the craft inward — not toward the panel, but toward Cy itself. The lens. The legs. The lamp it carries and will not explain.\n\nSee the Made Thing opens quietly. You let it settle.\n\nWhat it finds is old work. Very old. The joinery runs deep and clean — a construction more careful than anything the Enginewrights have made since the Transition, and more personal than you expected. The segments are not interchangeable. Each one was fitted to the next deliberately, the way a name is fitted to a person. There is a repair on the third segment from the front, done badly, and two more done extremely well, and the craft reads the difference in philosophy between the hands that made each.\n\nThen it finds the paired designation.\n\nIt is not on a panel. It is in the construction itself — in the register of the materials, in the way the lamp-mount was fitted. A maintenance-thing is built general. This one was built specific. Assembled for this installation. Named to this operator. The pairing is not a label applied later. It is the reason for the particular shape of every joint.\n\nCy has not moved. Its lens is still fully open. You think: it can feel the craft reading it, the way a mechanism feels a careful hand turning it over.\n\nYou say, quietly: 'You were made for this place. The construction says so. Not assigned here — made for here. For Halvex.' You pause. 'You have been here before because you were built here. That is what the craft reads.'"
+      },
+      {
+        "player": "Ask Cy the question it is holding back — 'What does it mean to be built for a person, not a place?'",
+        "summary": "Cy explained what it means to be built for a person — a personal assignment persists even after the operator is gone, awaiting instruction from a source that no longer speaks.",
+        "narration": "You set the third panel down against the stone wall with the others. Then you ask the question you have been holding since the craft showed you the pairing.\n\n'What does it mean,' you say, 'to be built for a person, and not a place?'\n\nCy is still for a moment. Its lens does not iris. Then one leg lifts and sets down — not a step, the same state-change motion as before — and it speaks.\n\n'A facility assignment,' it says, 'specifies function. Maintenance of a system. Continuation of process.' A pause. 'A personal assignment specifies continuity of a particular operator's work. Not the work's location. Not the work's form.' Another pause, shorter. 'If the operator moves, the assignment moves. If the operator's work changes, the assignment changes.' The lens irises once, just slightly, and settles again. 'If the operator's work ends, the assignment does not resolve. It persists. Awaiting further instruction from a source that is no longer present.'\n\nThe cold water-smell rises from the passage below. Cy does not move.\n\n'This unit,' it says, 'has been awaiting further instruction for a very long time. The duration is in the deprecated entry. This unit has not accessed that field.'"
       }
     ],
     "lastTurn": {
-      "narration": "You turn the craft inward — not toward the panel, but toward Cy itself. The lens. The legs. The lamp it carries and will not explain.\n\nSee the Made Thing opens quietly. You let it settle.\n\nWhat it finds is old work. Very old. The joinery runs deep and clean — a construction more careful than anything the Enginewrights have made since the Transition, and more personal than you expected. The segments are not interchangeable. Each one was fitted to the next deliberately, the way a name is fitted to a person. There is a repair on the third segment from the front, done badly, and two more done extremely well, and the craft reads the difference in philosophy between the hands that made each.\n\nThen it finds the paired designation.\n\nIt is not on a panel. It is in the construction itself — in the register of the materials, in the way the lamp-mount was fitted. A maintenance-thing is built general. This one was built specific. Assembled for this installation. Named to this operator. The pairing is not a label applied later. It is the reason for the particular shape of every joint.\n\nCy has not moved. Its lens is still fully open. You think: it can feel the craft reading it, the way a mechanism feels a careful hand turning it over.\n\nYou say, quietly: 'You were made for this place. The construction says so. Not assigned here — made for here. For Halvex.' You pause. 'You have been here before because you were built here. That is what the craft reads.'",
-      "sceneSummary": "See the Made Thing read Cy's own structure and found the pairing in the construction itself — Cy was not assigned to this installation; it was built for it, and for Halvex.",
+      "narration": "You set the third panel down against the stone wall with the others. Then you ask the question you have been holding since the craft showed you the pairing.\n\n'What does it mean,' you say, 'to be built for a person, and not a place?'\n\nCy is still for a moment. Its lens does not iris. Then one leg lifts and sets down — not a step, the same state-change motion as before — and it speaks.\n\n'A facility assignment,' it says, 'specifies function. Maintenance of a system. Continuation of process.' A pause. 'A personal assignment specifies continuity of a particular operator's work. Not the work's location. Not the work's form.' Another pause, shorter. 'If the operator moves, the assignment moves. If the operator's work changes, the assignment changes.' The lens irises once, just slightly, and settles again. 'If the operator's work ends, the assignment does not resolve. It persists. Awaiting further instruction from a source that is no longer present.'\n\nThe cold water-smell rises from the passage below. Cy does not move.\n\n'This unit,' it says, 'has been awaiting further instruction for a very long time. The duration is in the deprecated entry. This unit has not accessed that field.'",
+      "sceneSummary": "Cy explained what it means to be built for a person — a personal assignment persists even after the operator is gone, awaiting instruction from a source that no longer speaks.",
       "choices": [
         {
-          "label": "Ask Cy the question it is holding back — 'What does it mean to be built for a person, not a place?'",
+          "label": "Ask Cy how long — tell it to access the deprecated entry and read the duration aloud",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Take the three panels and descend — the regulator itself and the deep water source are further down",
+          "label": "Ask whether there is anything in the registry about what Halvex's work was — what the assignment was actually for",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Descend the passage — the regulator and the records below are the next thing, and Cy's history may live down there more than in the panels",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 15,
@@ -200,58 +213,39 @@
             "travel",
             "risky"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Ask Cy directly — 'Do you know what happened to Halvex?'",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Tell Cy that you are its further instruction — that you are asking it to continue Halvex's work, whatever that was, with you",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "persuade"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
-        },
-        {
-          "label": "Use Prism Sight on Cy — look for heat-traces or age-traces in the construction that See the Made Thing cannot read",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -1
-      },
       "scene": {
-        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward. Cy stands fully still, lens wide open.",
+        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Fully still, lens open to its widest. Has not moved since Loki's last words. Waiting."
+            "state": "Still, lens slightly irised, one leg mid-settle from its state-change motion. Has spoken its answer and is waiting."
           }
         ],
         "objects": [
-          "Third panel resting against Loki's knee — designation glyph facing upward",
-          "First and second panels resting against the stone wall",
+          "Third panel resting against the stone wall — designation glyph facing upward",
+          "First and second panels resting against the stone wall beside it",
           "Stone face of the inspection port, swung inward on its counterweight",
-          "Cy's lamp, pooling light downward"
+          "Cy's lamp, pooling light downward",
+          "The open passage below — cold dark, water-smell, living dark deeper down"
         ],
         "threads": [
-          "See the Made Thing has read the pairing in Cy's own construction — built for this installation, built for Halvex",
-          "What being paired to an operator means for Cy's own identity and purpose is unspoken",
-          "Cy has not yet responded to Loki's reading",
-          "The passage continues below — the regulator itself and the water source are further down"
+          "Cy has not accessed the deprecated entry's duration field — the number of years it has been waiting is unread",
+          "What Halvex's work was — the content of the personal assignment — is unknown",
+          "The regulator and the missing records are further down the passage",
+          "What Loki telling Cy 'you are my further instruction' would mean to a mechanism that has waited this long"
         ]
       },
       "npcUpdates": [
@@ -259,61 +253,54 @@
           "op": "update",
           "npcId": "cy",
           "name": "Cy",
-          "note": "See the Made Thing read its own construction — found the pairing in the materials themselves, not a label but a reason for every joint. Built for this installation, for Halvex. Cy felt the craft reading it and has not moved.",
+          "note": "Explained the difference between a facility assignment and a personal one — a personal assignment follows the operator, not the place, and does not resolve when the operator is gone. Has not accessed the deprecated entry's duration field. Is waiting.",
           "learned": [
-            "Was built for this installation specifically — not assigned here; the pairing is in the construction itself",
-            "The lamp-mount fitting and the material register both carry the named-operator designation",
-            "One repair in its body was done badly; two were done extremely well — different hands, different eras"
+            "A personal assignment persists after the operator's death or disappearance — it waits for further instruction from a source that no longer speaks",
+            "Cy has not accessed the field in its own registry that records how long it has been waiting"
           ],
-          "status": "active",
-          "statusNote": "In the lower passage, fully still, lens wide open — waiting for what comes next after being read"
+          "statusNote": "In the lower passage, still, lens slightly irised — has given its answer and is waiting for the next question or the descent"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "cy-construction",
-          "label": "Cy's Construction",
-          "kind": "mystery",
+          "topic": "cy-companion",
+          "label": "Cy",
+          "kind": "person",
           "entityId": "cy",
-          "fact": "See the Made Thing read Cy's own structure and found the named-operator pairing in the construction itself — in the material register and the lamp-mount fitting. Cy was not assigned to this installation; it was built for it, and for Halvex. Every joint reflects that specificity.",
+          "fact": "Cy's assignment is personal, not facility-bound — it was built to follow an operator's work, not to maintain a place. A personal assignment does not resolve when the operator is gone. It persists, waiting for further instruction. Cy has been waiting for a very long time, and has not yet looked at how long.",
           "links": [
             "the-seam-beside-the-bracket",
-            "unlit-elder",
-            "the-unlit-deep"
+            "the-unlit-deep",
+            "the-taken-from-the-city",
+            "terminus-seals-beneath-the-valley"
           ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet, careful reading of the craft — a short, still moment in the passage"
+        "why": "a short exchange in the lower passage"
       }
     },
     "sceneState": {
-      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward. Cy stands fully still, lens wide open.",
+      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Fully still, lens open to its widest. Has not moved since Loki's last words. Waiting."
+          "state": "Still, lens slightly irised, one leg mid-settle from its state-change motion. Has spoken its answer and is waiting."
         }
       ],
       "objects": [
-        "Third panel resting against Loki's knee — designation glyph facing upward",
-        "First and second panels resting against the stone wall",
+        "Third panel resting against the stone wall — designation glyph facing upward",
+        "First and second panels resting against the stone wall beside it",
         "Stone face of the inspection port, swung inward on its counterweight",
-        "Cy's lamp, pooling light downward"
+        "Cy's lamp, pooling light downward",
+        "The open passage below — cold dark, water-smell, living dark deeper down"
       ],
       "threads": [
-        "See the Made Thing has read the pairing in Cy's own construction — built for this installation, built for Halvex",
-        "What being paired to an operator means for Cy's own identity and purpose is unspoken",
-        "Cy has not yet responded to Loki's reading",
-        "The passage continues below — the regulator itself and the water source are further down"
+        "Cy has not accessed the deprecated entry's duration field — the number of years it has been waiting is unread",
+        "What Halvex's work was — the content of the personal assignment — is unknown",
+        "The regulator and the missing records are further down the passage",
+        "What Loki telling Cy 'you are my further instruction' would mean to a mechanism that has waited this long"
       ]
     }
   },
@@ -843,7 +830,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Cy shuttered its lamp before being asked — a small act that carries weight; Cy does not do things without a reason, and this place has a…",
@@ -1386,14 +1373,19 @@
         "label": "Cy's Construction",
         "kind": "mystery",
         "facts": [
-          "[d1] See the Made Thing read Cy's own structure and found the named-operator pairing in the construction itself — in the material register and the lamp-mount fitting. Cy was not assigned to this installation; it was built for it, and for Halvex. Every joint reflects that specificity."
+          "[d1] See the Made Thing read Cy's own structure and found the named-operator pairing in the construction itself — in the material register and the lamp-mount fitting. Cy was not assigned to this installation; it was built for it, and for Halvex. Every joint reflects that specificity.",
+          "[d1] Cy's assignment is personal, not facility-bound — it was built to follow an operator's work, not to maintain a place. A personal assignment does not resolve when the operator is gone. It persists, waiting for further instruction. Cy has been waiting for a very long time, and has not yet looked at…"
         ],
         "links": [
           "the-seam-beside-the-bracket",
           "unlit-elder",
-          "the-unlit-deep"
+          "the-unlit-deep",
+          "the-taken-from-the-city",
+          "terminus-seals-beneath-the-valley"
         ],
-        "aliases": [],
+        "aliases": [
+          "Cy"
+        ],
         "createdDay": 1,
         "entityId": "cy",
         "updatedDay": 1
@@ -1401,21 +1393,21 @@
     }
   },
   "tendencies": {
-    "devotion": 2.6328897378980165,
-    "cerebral": 15.16188691653956,
-    "social": 13.581943414158038,
-    "strategic": 9.457660570885364,
-    "cautious": 7.129921544129377,
-    "amorous": 5.086400810045013,
-    "generous": 2.263035565016925,
-    "ruthless": 0.2966344271830815,
-    "risky": 2.9809815294405926
+    "devotion": 2.567067494450566,
+    "cerebral": 15.78283974362607,
+    "social": 13.242394828804088,
+    "strategic": 9.221219056613231,
+    "cautious": 6.951673505526142,
+    "amorous": 4.9592407897938875,
+    "generous": 2.206459675891502,
+    "ruthless": 0.2892185665035044,
+    "risky": 2.906456991204578
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 66,
+  "actionCount": 67,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1572,8 +1564,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785173845133,
-  "rev": 138,
+  "updatedAt": 1785174521920,
+  "rev": 139,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1891,7 +1883,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 39
+    "umbral_depths": 40
   },
   "opLossPending": false,
   "sessions": [
@@ -1922,10 +1914,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T17:37:25.132Z",
+      "lastAt": "2026-07-27T17:48:41.918Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 35
+      "beats": 36
     }
   ],
   "establishedFacts": [
@@ -1963,17 +1955,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 67,
-    "choices": 67,
+    "sceneSummary": 68,
+    "choices": 68,
     "characterDeltas": 30,
-    "scene": 67,
+    "scene": 68,
     "placeUpdates": 9,
-    "codexUpdates": 57,
-    "timeOps": 66,
+    "codexUpdates": 58,
+    "timeOps": 67,
     "offer": 7,
     "generateRequest": 2,
     "sceneEnded": 16,
-    "npcUpdates": 58,
+    "npcUpdates": 59,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
@@ -1983,7 +1975,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 67,
+  "_opTurns": 68,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75

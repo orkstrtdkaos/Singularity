@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 3,
-  "xp": 284,
+  "xp": 289,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 40,
   "health": 40,
   "maxEnergy": 110,
-  "energy": 71,
+  "energy": 68,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -188,19 +188,57 @@
         "player": "Descend now — follow Cy into the passage toward the regulator and the missing records",
         "summary": "Loki followed Cy into the passage below — the stone older, the air colder, and Halvex's records beginning on the wall.",
         "narration": "Cy moves first. Its legs find the first step of the descent without hesitation, lamp swinging forward, and the pool of light drops ahead of you into the dark.\n\nYou follow. The stone here is older than anything in the Unlit's chamber above — the joints are tighter, the cuts more precise, and the smell of cold water comes up strong and clean, the kind of clean that means a source no one has touched in a long time. The walls narrow slightly as you go, not enough to press, but enough to feel. Your hand trails the left wall. The stone is smooth there, worn smooth in a narrow band at shoulder height — not by the Unlit, not recently. By someone who made this trip many times.\n\nCy pauses at the base of the stairs. Its lens irises once — wide, then tight, then settling — and it angles the lamp left. The light catches a long stretch of worked stone, and then something set into it: a series of marks, cut fine and deliberate, running at eye level in a continuous band along the wall. Not glyphs exactly. Not language. Something in between — a system of notation you have not seen above ground.\n\nCy says, very quietly, 'The records begin here.' Then it turns its lamp a fraction further left and the light finds what is at the passage's end: a low housing set flush into the wall, dark metal, older than anything in this valley, with a single indicator still faintly lit — a pale amber thread of light, the color of old amber, the color of something that has been waiting for morning for a very long time."
+      },
+      {
+        "player": "Read the wall-notation with See the Made Thing — let the craft find the structure and purpose of Halvex's records",
+        "summary": "Loki read Halvex's wall-records with See the Made Thing — a working journal spanning years, concluding that the regulator predates all known records and is waiting not to be repaired, but to be asked.",
+        "narration": "You open the craft quietly, not pushing it — a light hold, the way you would cup a lamp against wind rather than shield it. The notation along the wall comes into focus in layers.\n\nThe structure resolves first. These are not operational records in the standard sense — not maintenance logs, not system diagnostics. They are something closer to a working journal. Each entry is dated in a notation system you do not fully recognize, but the craft finds the underlying grammar: observation, question, hypothesis, revision. Someone was thinking through something, here, in writing, over a long period of time.\n\nThe content comes slower. The entries concern the regulator at the far end of the corridor — but not its function. Its age. Halvex was trying to determine when the regulator was built, and by whom, and kept arriving at the same unsatisfying answer: it predates every record they could find, including the records that were supposed to be the oldest. Several entries return to this. The phrasing shifts over time from confident to careful to something quieter.\n\nThe last entry on the wall is shorter than the others. It does not offer a conclusion. It says: the regulator is not waiting to be repaired. It is waiting to be asked.\n\nCy has not moved. Its lens is fixed on a point about a third of the way down the wall, the same point it has been fixed on since you descended."
       }
     ],
     "lastTurn": {
-      "narration": "Cy moves first. Its legs find the first step of the descent without hesitation, lamp swinging forward, and the pool of light drops ahead of you into the dark.\n\nYou follow. The stone here is older than anything in the Unlit's chamber above — the joints are tighter, the cuts more precise, and the smell of cold water comes up strong and clean, the kind of clean that means a source no one has touched in a long time. The walls narrow slightly as you go, not enough to press, but enough to feel. Your hand trails the left wall. The stone is smooth there, worn smooth in a narrow band at shoulder height — not by the Unlit, not recently. By someone who made this trip many times.\n\nCy pauses at the base of the stairs. Its lens irises once — wide, then tight, then settling — and it angles the lamp left. The light catches a long stretch of worked stone, and then something set into it: a series of marks, cut fine and deliberate, running at eye level in a continuous band along the wall. Not glyphs exactly. Not language. Something in between — a system of notation you have not seen above ground.\n\nCy says, very quietly, 'The records begin here.' Then it turns its lamp a fraction further left and the light finds what is at the passage's end: a low housing set flush into the wall, dark metal, older than anything in this valley, with a single indicator still faintly lit — a pale amber thread of light, the color of old amber, the color of something that has been waiting for morning for a very long time.",
-      "sceneSummary": "Loki followed Cy into the passage below — the stone older, the air colder, and Halvex's records beginning on the wall.",
+      "narration": "You open the craft quietly, not pushing it — a light hold, the way you would cup a lamp against wind rather than shield it. The notation along the wall comes into focus in layers.\n\nThe structure resolves first. These are not operational records in the standard sense — not maintenance logs, not system diagnostics. They are something closer to a working journal. Each entry is dated in a notation system you do not fully recognize, but the craft finds the underlying grammar: observation, question, hypothesis, revision. Someone was thinking through something, here, in writing, over a long period of time.\n\nThe content comes slower. The entries concern the regulator at the far end of the corridor — but not its function. Its age. Halvex was trying to determine when the regulator was built, and by whom, and kept arriving at the same unsatisfying answer: it predates every record they could find, including the records that were supposed to be the oldest. Several entries return to this. The phrasing shifts over time from confident to careful to something quieter.\n\nThe last entry on the wall is shorter than the others. It does not offer a conclusion. It says: the regulator is not waiting to be repaired. It is waiting to be asked.\n\nCy has not moved. Its lens is fixed on a point about a third of the way down the wall, the same point it has been fixed on since you descended.",
+      "sceneSummary": "Loki read Halvex's wall-records with See the Made Thing — a working journal spanning years, concluding that the regulator predates all known records and is waiting not to be repaired, but to be asked.",
       "choices": [
         {
-          "label": "Read the wall-notation with See the Made Thing — let the craft find the structure and purpose of Halvex's records",
+          "label": "Approach the regulator and examine it directly — use Prism Sight to read what it has been doing, if anything, while it waited",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cy what it knows about the regulator — what Halvex told it, what it observed on previous visits, what the deprecated duration field might mean for how long this has been waiting",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
             "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read the deprecated duration field on the regulator housing — find out exactly how long the amber light has been burning",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
           ],
           "abilityId": "see_the_made_thing",
           "energyCost": 1,
@@ -209,144 +247,110 @@
           "emergenceId": null
         },
         {
-          "label": "Go to the regulator housing first — look at the indicator light and examine what Cy is maintaining",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cy what the notation system is — whether it can read it, and whether it recognizes Halvex's hand in the cuts",
+          "label": "Walk to the regulator and ask it — out loud, plainly — what it is waiting to be asked",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 15,
           "intentTags": [
-            "study"
+            "gamble",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight to read the passage — heat traces, recent movement, anything that has been down here since the passage opened",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -1,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "Halvex's wall-records read — a years-long journal concluding that the regulator predates all known records and is not waiting to be repaired, but to be asked. The amber light still burns."
+        }
+      ],
+      "standingOps": [],
       "scene": {
-        "setting": "The passage below the Unlit's outer chamber — older worked stone, joints tight and precise, cold water-smell strong. The stair has ended at a long horizontal corridor. The left wall bears a continuous band of fine-cut notation at eye height. At the passage's far end, a dark metal housing sits flush in the wall with a single amber indicator light still faintly burning.",
+        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Left wall carries Halvex's working journal in fine-cut notation. Far end: dark metal regulator housing, single amber indicator light burning faintly.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Lamp angled left toward the wall-notation, lens settled into a fixed focus, waiting — it has already read what is here and is holding the information until asked"
+            "state": "Lens fixed on a point about a third of the way down the wall-notation, lamp angled toward it, completely still."
           }
         ],
         "objects": [
-          "Long band of fine-cut notation along the left wall — not standard glyphs, a notation system in between language and diagram",
-          "Dark metal regulator housing flush in the far wall — old, pre-Transition, single amber indicator light still faintly lit",
-          "Three metal panels from the inspection port niche — carried down or left above (last placed against the wall upstairs)"
+          "Long band of fine-cut notation along the left wall — Halvex's working journal, structured as observation/question/hypothesis/revision",
+          "Three metal panels from the inspection port niche, set against the wall",
+          "Dark metal regulator housing flush in the far wall — pre-Transition, single amber indicator still burning",
+          "Cy's lamp — the only light source"
         ],
         "threads": [
-          "What Halvex's records on the wall actually say",
-          "What the amber indicator light means — whether the regulator is still running",
-          "The deprecated duration field: how long Cy has actually been here, still unread"
+          "What the deprecated duration field on the regulator actually reads — how long the amber light has been burning",
+          "What the regulator is waiting to be asked, and whether asking it means anything",
+          "What Halvex's final entry means: 'not waiting to be repaired — waiting to be asked'",
+          "What Cy observed on its previous visits here, and what Halvex told it"
         ]
       },
-      "moveTo": {
-        "location": "the-passage-below-the-unlit-deep",
-        "why": "followed Cy down the stairs from the lower passage into the deeper horizontal corridor"
-      },
-      "placeUpdates": [
+      "npcUpdates": [
         {
-          "note": "The passage descends to a horizontal corridor with Halvex's wall-notation running along the left side and a pre-Transition regulator housing at the far end — amber indicator still lit.",
-          "subPlace": {
-            "name": "Halvex's Corridor",
-            "parent": "The Unlit Deep",
-            "note": "The bottom of the descent — older stone than anything above, tight joints, a continuous band of fine notation cut into the left wall at eye height, and a dark metal regulator housing at the far end with a single amber light still burning.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "unlit-elder",
+          "name": "Unlit Elder",
+          "note": "Not present — remains above in the outer chamber.",
+          "status": "active",
+          "statusNote": "Seated by the pale blue flame in the outer chamber above — present and unmoved."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "halvex-corridor",
-          "label": "Halvex's Corridor",
-          "kind": "place",
-          "fact": "The passage below the Unlit's chamber ends in a horizontal corridor older than anything above — walls precisely jointed, a continuous band of notation cut into the left wall at eye height in a system between language and diagram, and a pre-Transition regulator housing at the far end still showing a faint amber indicator light.",
-          "links": [
-            "cy-construction",
-            "the-seam-beside-the-bracket",
-            "the-unlit-deep",
-            "the-water-crisis",
-            "terminus-seals-beneath-the-valley"
-          ]
-        },
-        {
-          "topic": "halvex-notation",
+          "topic": "halvex-wall-records",
           "label": "Halvex's Wall Records",
-          "kind": "mystery",
-          "fact": "Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated.",
+          "kind": "lore",
+          "fact": "Not operational logs — a working journal. Observation, question, hypothesis, revision, over a long period. Halvex was trying to determine when the regulator was built and by whom, and kept arriving at the same answer: it predates every record they could find, including the records that were supposed to be oldest. The final entry is short: the regulator is not waiting to be repaired. It is waiting to be asked.",
           "links": [
-            "halvex-corridor",
-            "cy-construction",
-            "the-seam-beside-the-bracket"
+            "the-seam-beside-the-bracket",
+            "the-taken-from-the-city",
+            "cy-s-construction",
+            "terminus-seals-beneath-the-valley",
+            "the-unlit-deep"
           ]
-        }
-      ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "cy",
-          "name": "Cy",
-          "role": "Precursor companion — now acknowledged as Loki's assigned mechanism",
-          "note": "Led the descent without hesitation, found the notation immediately, named where the records begin, and stopped — waiting for instruction rather than leading past that point.",
-          "learned": [
-            "The records on the wall are Halvex's — Cy named them directly",
-            "Cy moved to the notation first, before the regulator — it knows the wall matters"
-          ],
-          "statusNote": "Present in the corridor below the Unlit Deep — lamp angled at the wall-notation, waiting"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short descent, a slow walk through tighter stone"
-      }
+        "why": "A careful, restrained read of the wall-notation — some minutes in the corridor"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The passage below the Unlit's outer chamber — older worked stone, joints tight and precise, cold water-smell strong. The stair has ended at a long horizontal corridor. The left wall bears a continuous band of fine-cut notation at eye height. At the passage's far end, a dark metal housing sits flush in the wall with a single amber indicator light still faintly burning.",
+      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Left wall carries Halvex's working journal in fine-cut notation. Far end: dark metal regulator housing, single amber indicator light burning faintly.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Lamp angled left toward the wall-notation, lens settled into a fixed focus, waiting — it has already read what is here a"
+          "state": "Lens fixed on a point about a third of the way down the wall-notation, lamp angled toward it, completely still."
         }
       ],
       "objects": [
-        "Long band of fine-cut notation along the left wall — not standard glyphs, a nota",
-        "Dark metal regulator housing flush in the far wall — old, pre-Transition, single",
-        "Three metal panels from the inspection port niche — carried down or left above ("
+        "Long band of fine-cut notation along the left wall — Halvex's working journal, s",
+        "Three metal panels from the inspection port niche, set against the wall",
+        "Dark metal regulator housing flush in the far wall — pre-Transition, single ambe",
+        "Cy's lamp — the only light source"
       ],
       "threads": [
-        "What Halvex's records on the wall actually say",
-        "What the amber indicator light means — whether the regulator is still running",
-        "The deprecated duration field: how long Cy has actually been here, still unread"
+        "What the deprecated duration field on the regulator actually reads — how long the amber light has been burning",
+        "What the regulator is waiting to be asked, and whether asking it means anything",
+        "What Halvex's final entry means: 'not waiting to be repaired — waiting to be asked'",
+        "What Cy observed on its previous visits here, and what Halvex told it"
       ]
     }
   },
@@ -373,14 +377,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Loki gave the taken person an honest account of who they are and why they came — the person accepted the frame and said 'You can ask it.' The question is ready to be put.",
         "Sable gave the answer — they do not wish to be found. The choice was steady, reasoned, and their own. The question the elder permitted has been put and answered.",
         "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains.",
         "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread.",
         "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened.",
         "The door below the answered seam is open. The creatures from below have returned. The visit to the Unlit Deep has reached its natural end — what Loki carries back to the city, and whether to descend first, is the remaining question.",
         "See the Made Thing read Cy's own construction and confirmed what Cy could not say outright: it was built for this installation and for Halvex. The thread of Cy's origin is now woven into the visit's remaining question — whether to descend further.",
-        "Loki named itself Cy's further instruction — the mechanism acknowledged and turned toward the passage below. The regulator and the missing records are the remaining thread."
+        "Loki named itself Cy's further instruction — the mechanism acknowledged and turned toward the passage below. The regulator and the missing records are the remaining thread.",
+        "Halvex's wall-records read — a years-long journal concluding that the regulator predates all known records and is not waiting to be repaired, but to be asked. The amber light still burns."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -577,7 +581,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Loki attempted to read the pale blue flame — the elder did not comment, did not warn, did not move. The silence after the failed read was itself the response.",
         "[d1] Received Loki's reframed request — not to be taught the flame, but to carry the right question outward. Lifted one hand and gestured to the seam beside the bracket: named it older than the flame, older than the Unlit, and waiting. Said Loki has shown they know how to carry a question honestly. Did…",
         "[d1] Sat still while Loki read the seam. Did not comment. The silence after the read is itself a kind of acknowledgment.",
         "[d1] Sat still while Loki touched the seam. Did not comment. Did not warn. Did not move.",
@@ -586,7 +589,8 @@
         "[d1] Did not speak or move during the Prism Sight read of the passage. The visit has reached its end for them.",
         "[d1] Has not moved through the glass-stalker's surfacing",
         "[d1] Did not move or speak through the glass-stalker encounter or its yielding",
-        "[d1] Has not moved through the descent attempt — the chamber's business is closed"
+        "[d1] Has not moved through the descent attempt — the chamber's business is closed",
+        "[d1] Not present — remains above in the outer chamber."
       ],
       "knownFacts": [
         "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
@@ -605,13 +609,13 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber above — present and unmoved",
+      "statusNote": "Seated by the pale blue flame in the outer chamber above — present and unmoved.",
       "domains": {
         "primary": "umbral"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_unlit_deep",
+        "locationId": "gen-the-passage-below-the-unlit-deep",
         "day": 1
       }
     },
@@ -891,7 +895,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
@@ -1420,7 +1424,8 @@
           "[d1] Cy confirmed the name appears in its own maintenance registry as a 'deprecated operator designation' — then stopped, said verification was required, and did not move to verify. The name is in Cy's records. Cy is not saying what it knows about it.",
           "[d1] Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged 'do not resolve without verification.' Cy has not verified it — not for lack of ability, but because something in its own architecture is holding the step back.",
           "[d1] Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry.",
-          "[d1] Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated."
+          "[d1] Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated.",
+          "[d1] Not operational logs — a working journal. Observation, question, hypothesis, revision, over a long period. Halvex was trying to determine when the regulator was built and by whom, and kept arriving at the same answer: it predates every record they could find, including the records that were…"
         ],
         "links": [
           "terminus-seals-beneath-the-valley",
@@ -1428,7 +1433,9 @@
           "the-unlit-deep",
           "the-seam-beside-the-bracket",
           "halvex-corridor",
-          "cy-construction"
+          "cy-construction",
+          "the-taken-from-the-city",
+          "cy-s-construction"
         ],
         "aliases": [
           "Halvex's Wall Records"
@@ -1479,21 +1486,21 @@
     }
   },
   "tendencies": {
-    "devotion": 2.4403185369120695,
-    "cerebral": 15.003562031284533,
-    "social": 13.563551584131886,
-    "strategic": 8.765921365692954,
-    "cautious": 7.608434626190788,
-    "amorous": 4.714378275797814,
-    "generous": 2.0975157293943587,
-    "ruthless": 0.27493839978239387,
-    "risky": 2.7629506772638517
+    "devotion": 2.379310573489268,
+    "cerebral": 15.62847298050242,
+    "social": 13.22446279452859,
+    "strategic": 8.54677333155063,
+    "cautious": 7.418223760536018,
+    "amorous": 4.596518818902869,
+    "generous": 2.0450778361595,
+    "ruthless": 0.268064939787834,
+    "risky": 2.6938769103322553
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 69,
+  "actionCount": 70,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1658,8 +1665,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785175033838,
-  "rev": 141,
+  "updatedAt": 1785175231963,
+  "rev": 142,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2016,7 +2023,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 42
+    "umbral_depths": 43
   },
   "opLossPending": false,
   "sessions": [
@@ -2047,10 +2054,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T17:57:13.832Z",
+      "lastAt": "2026-07-27T18:00:31.961Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 38
+      "beats": 39
     }
   ],
   "establishedFacts": [
@@ -2088,27 +2095,27 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 70,
-    "choices": 70,
-    "characterDeltas": 30,
-    "scene": 70,
+    "sceneSummary": 71,
+    "choices": 71,
+    "characterDeltas": 31,
+    "scene": 71,
     "placeUpdates": 10,
-    "codexUpdates": 60,
-    "timeOps": 69,
+    "codexUpdates": 61,
+    "timeOps": 70,
     "offer": 8,
     "generateRequest": 2,
-    "sceneEnded": 16,
-    "npcUpdates": 61,
+    "sceneEnded": 17,
+    "npcUpdates": 62,
     "moveTo": 2,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 12,
+    "questUpdates": 13,
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 70,
+  "_opTurns": 71,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75
@@ -2116,7 +2123,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 22,
+      "see_the_made_thing": 23,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

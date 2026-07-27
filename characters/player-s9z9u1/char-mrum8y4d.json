@@ -153,77 +153,78 @@
         "player": "Let it sit — say nothing, hold the third panel out toward Cy, and wait",
         "summary": "Loki held the third panel out in silence — and Cy, facing the glyph, admitted for the first time that the entry exists in its own registry and that it has not verified it.",
         "narration": "You say nothing. You pick up the third panel and hold it out toward Cy, steady and level, the designation glyph facing the lens.\n\nThe lamp does not move. Cy does not move. The cold of the lower passage settles around you both, and the water smell rises from below, and you wait.\n\nCy's lens irises — very slowly, very precisely — until it is fully open. That is the only motion it makes for a long time.\n\nThen it says, quietly: 'The designation glyph indicates a construction-assignment. Built for a named operator. Not for a facility.' A pause. 'This unit's maintenance registry contains a deprecated entry under that name.' Another pause, shorter. 'The entry is flagged: do not resolve without verification.' Its lens does not close. 'This unit has not verified it.'\n\nThe last word lands in the silence and stays there. Cy has not looked away from the glyph. Its legs have not shifted on the stone. The lamp holds absolutely steady — but something in the quality of Cy's stillness has changed, the way a held breath is different from an empty lung. It is not refusing to tell you. It is waiting to find out if it is allowed to know."
+      },
+      {
+        "player": "Tell cy it is verified - use a skill if needed - then ask him to provide the information.",
+        "summary": "Loki named the verification plainly, and Cy answered: it was built for this installation, paired to the operator Halvex, and has been here before — and does not remember it.",
+        "narration": "You lower the panel slowly until it rests against your knee. Then you say it plainly, the way you would name a part: 'Halvex. Verified. I have read the glyph myself, from the stone, in this room. The source is the panel in my hand.' You tap the third panel once. 'That is the verification.'\n\nCy's lens does not iris. It stays fully open — the way it went when you held out the panel in silence. But something shifts. A single leg lifts and sets down, a precise quarter-step, the kind it makes when it is changing states rather than moving.\n\nThen it speaks. The voice is careful and old. 'Halvex,' it says. 'This unit's maintenance registry designates: deprecated operator. Primary assignment: terminus regulator network, lower-valley substrate.' A pause. 'Secondary notation: personal designate. Meaning — this unit was assigned to this installation as a paired instrument. Not to the facility. To the operator.' Another pause, shorter. 'This unit did not know the operator's name until this moment.' Its lens irises — once, slow, fully closed, then fully open again. 'This unit has been here before,' it says. 'This unit does not remember it.'\n\nThe cold of the lower passage settles around you both. The water smell rises from below. Cy does not move again for a long time — not processing-still, but something quieter than that. The lamp it carries pools light downward over the designation glyph, over the name stamped into old worked stone, and over the two of you standing in a room neither of you quite expected to be standing in.\n\n*✦ The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers. — a step forward. Every stage is done; how it ends is yours to choose.*"
       }
     ],
     "lastTurn": {
-      "narration": "You say nothing. You pick up the third panel and hold it out toward Cy, steady and level, the designation glyph facing the lens.\n\nThe lamp does not move. Cy does not move. The cold of the lower passage settles around you both, and the water smell rises from below, and you wait.\n\nCy's lens irises — very slowly, very precisely — until it is fully open. That is the only motion it makes for a long time.\n\nThen it says, quietly: 'The designation glyph indicates a construction-assignment. Built for a named operator. Not for a facility.' A pause. 'This unit's maintenance registry contains a deprecated entry under that name.' Another pause, shorter. 'The entry is flagged: do not resolve without verification.' Its lens does not close. 'This unit has not verified it.'\n\nThe last word lands in the silence and stays there. Cy has not looked away from the glyph. Its legs have not shifted on the stone. The lamp holds absolutely steady — but something in the quality of Cy's stillness has changed, the way a held breath is different from an empty lung. It is not refusing to tell you. It is waiting to find out if it is allowed to know.",
-      "sceneSummary": "Loki held the third panel out in silence — and Cy, facing the glyph, admitted for the first time that the entry exists in its own registry and that it has not verified it.",
+      "narration": "You lower the panel slowly until it rests against your knee. Then you say it plainly, the way you would name a part: 'Halvex. Verified. I have read the glyph myself, from the stone, in this room. The source is the panel in my hand.' You tap the third panel once. 'That is the verification.'\n\nCy's lens does not iris. It stays fully open — the way it went when you held out the panel in silence. But something shifts. A single leg lifts and sets down, a precise quarter-step, the kind it makes when it is changing states rather than moving.\n\nThen it speaks. The voice is careful and old. 'Halvex,' it says. 'This unit's maintenance registry designates: deprecated operator. Primary assignment: terminus regulator network, lower-valley substrate.' A pause. 'Secondary notation: personal designate. Meaning — this unit was assigned to this installation as a paired instrument. Not to the facility. To the operator.' Another pause, shorter. 'This unit did not know the operator's name until this moment.' Its lens irises — once, slow, fully closed, then fully open again. 'This unit has been here before,' it says. 'This unit does not remember it.'\n\nThe cold of the lower passage settles around you both. The water smell rises from below. Cy does not move again for a long time — not processing-still, but something quieter than that. The lamp it carries pools light downward over the designation glyph, over the name stamped into old worked stone, and over the two of you standing in a room neither of you quite expected to be standing in.\n\n*✦ The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers. — a step forward. Every stage is done; how it ends is yours to choose.*",
+      "sceneSummary": "Loki named the verification plainly, and Cy answered: it was built for this installation, paired to the operator Halvex, and has been here before — and does not remember it.",
       "choices": [
         {
-          "label": "Ask Cy what 'do not resolve without verification' means — what is the verification, and who was supposed to perform it",
+          "label": "Ask Cy what 'been here before' means — what does it remember, even if only in fragments?",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
+          "subAttribute": "insight",
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Use See the Made Thing on Cy itself — read what it is actually holding back, and where the seam in its answer is",
+          "label": "Use See the Made Thing on Cy itself — read what the craft can find in its own structure about this installation and the name",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": "see_the_made_thing",
+          "abilityId": "see_the_made_thing"
+        },
+        {
+          "label": "Descend further — take the passage below and find the regulator itself",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "risky",
+            "travel"
+          ],
           "trivial": false
         },
         {
-          "label": "Say quietly: 'Cy — I think you already know what that entry says. Tell me what you remember, even if you can't verify it.'",
+          "label": "Sit with Cy in the silence — let it find its own footing before pressing further",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "calm"
           ],
-          "abilityId": null,
-          "trivial": false
-        },
-        {
-          "label": "Set the panel down, take the lamp, and descend further — find the regulator itself and read what it says about Halvex directly",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "risky"
-          ],
-          "abilityId": null,
-          "trivial": false
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward. The inspection port stands open on its counterweight.",
+        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward over the third panel's designation glyph.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Fully open lens fixed on the designation glyph on the third panel — still, not thinking-still but held-still, the way a machine waits on a condition it cannot resolve alone."
+            "state": "Fully open lens fixed on the designation glyph — stopped-still, not processing, something quieter. Has just spoken its longest unbroken sentence in memory."
           }
         ],
         "objects": [
-          "Third panel held out toward Cy — designation glyph facing the lens",
+          "Third panel resting against Loki's knee — designation glyph facing upward",
           "First and second panels resting against the stone wall",
           "Stone face of the inspection port, swung inward on its counterweight",
           "Cy's lamp, pooling light downward"
         ],
         "threads": [
-          "Cy has admitted: the entry exists in its registry, flagged 'do not resolve without verification' — it has not verified it",
-          "What the verification is, and who was supposed to perform it, is unspoken",
-          "The passage continues below — the regulator itself and the water source are further down",
-          "What Halvex is, and what Cy's connection to that name is, remains the open question"
+          "Cy has said: it was paired to this installation, not to the facility — to the operator named Halvex",
+          "Cy has said: it has been here before and does not remember it",
+          "What being paired to an operator means for Cy's own construction and purpose is unspoken",
+          "The passage continues below — the regulator itself and the water source are further down"
         ]
       },
       "npcUpdates": [
@@ -231,12 +232,17 @@
           "op": "update",
           "npcId": "cy",
           "name": "Cy",
-          "note": "Faced the designation glyph in silence, then admitted the entry exists in its maintenance registry — flagged 'do not resolve without verification' — and said it has not verified it. The quality of its stillness changed: not refusal, but waiting.",
+          "note": "Accepted Loki's plain statement of verification and answered fully for the first time — named its own pairing to the terminus network and to the operator Halvex; admitted it has been in this passage before and does not remember it",
           "learned": [
-            "Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged: do not resolve without verification",
-            "Cy has not verified the entry — not cannot, but has not"
+            "Its maintenance registry designates Halvex as its primary assignment operator — not the facility, the person",
+            "It was paired to this installation as a paired instrument — built for a specific operator",
+            "It has been in this passage before and has no memory of the visit"
           ],
-          "statusNote": "In the lower passage with Loki — lens open, fixed on the designation glyph, holding something it is not yet sure it is allowed to know"
+          "skillsObserved": [
+            "Accepted a plainly stated verification condition and released a held answer"
+          ],
+          "statusNote": "In the lower passage — has just disclosed its pairing to the Halvex designation and its own lost memory of this place; still-still, not processing",
+          "relationshipDelta": 1
         }
       ],
       "codexUpdates": [
@@ -244,38 +250,58 @@
           "topic": "halvex",
           "label": "Halvex",
           "kind": "mystery",
-          "fact": "Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged 'do not resolve without verification.' Cy has not verified it — not for lack of ability, but because something in its own architecture is holding the step back.",
+          "fact": "Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry.",
           "links": [
             "terminus-seals-beneath-the-valley",
+            "the-seam-beside-the-bracket",
             "loki-thread",
             "the-unlit-deep"
           ]
+        },
+        {
+          "topic": "terminus-seals-beneath-the-valley",
+          "label": "Terminus Regulators Beneath the Valley",
+          "kind": "lore",
+          "fact": "The terminus regulator was built with a paired instrument — Cy — assigned specifically to the operator Halvex, not to the facility. The pairing was personal. Cy has visited this installation before, within its operational history, and the visit is not in its accessible memory.",
+          "links": [
+            "halvex",
+            "loki-thread",
+            "the-unlit-deep",
+            "the-water-crisis"
+          ]
+        }
+      ],
+      "stageOps": [
+        {
+          "questId": "loki-thread",
+          "stageId": "s3",
+          "evidence": "Cy confirmed it was built as a paired instrument for the terminus regulator network assigned to Halvex — and admitted it has been in this passage before without remembering it, placing Cy's own origin inside the same Precursor construction that built Loki."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A held silence in the lower passage — patient, deliberate, a full waiting beat"
+        "why": "a brief exchange in the lower passage — verification given, Cy's answer received"
       }
     },
     "sceneState": {
-      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward. The inspection port stands open on its counterweight.",
+      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising from below. Cy's lamp pools light downward over the third panel's designation glyph.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Fully open lens fixed on the designation glyph on the third panel — still, not thinking-still but held-still, the way a "
+          "state": "Fully open lens fixed on the designation glyph — stopped-still, not processing, something quieter. Has just spoken its l"
         }
       ],
       "objects": [
-        "Third panel held out toward Cy — designation glyph facing the lens",
+        "Third panel resting against Loki's knee — designation glyph facing upward",
         "First and second panels resting against the stone wall",
         "Stone face of the inspection port, swung inward on its counterweight",
         "Cy's lamp, pooling light downward"
       ],
       "threads": [
-        "Cy has admitted: the entry exists in its registry, flagged 'do not resolve without verification' — it has not verified it",
-        "What the verification is, and who was supposed to perform it, is unspoken",
-        "The passage continues below — the regulator itself and the water source are further down",
-        "What Halvex is, and what Cy's connection to that name is, remains the open question"
+        "Cy has said: it was paired to this installation, not to the facility — to the operator named Halvex",
+        "Cy has said: it has been here before and does not remember it",
+        "What being paired to an operator means for Cy's own construction and purpose is unspoken",
+        "The passage continues below — the regulator itself and the water source are further down"
       ]
     }
   },
@@ -366,19 +392,22 @@
           "effects": []
         }
       ],
-      "stageIndex": 2,
+      "stageIndex": 3,
       "completedStages": [
         "s1",
-        "s2"
+        "s2",
+        "s3"
       ],
       "progress": [
         "↳ Loki pressed the ancient seam fully and the door opened — a passage deeper than the Unlit's own chamber, older than their doctrine, answering a question that predates the valley. The town that was…",
         "Three missing terminus regulator entries recovered: calibration record, last full service log, and the failsafe condition — a sustained drop in watershed pressure triggers autonomous wind-down. The regulator has been running alone, exactly as designed, for a very long time.",
-        "↳ Loki descended to the inspection port and recovered the three missing inventory entries — the regulator's calibration, its service record, and its failsafe condition — written into the installation…"
+        "↳ Loki descended to the inspection port and recovered the three missing inventory entries — the regulator's calibration, its service record, and its failsafe condition — written into the installation…",
+        "↳ Cy confirmed it was built as a paired instrument for the terminus regulator network assigned to Halvex — and admitted it has been in this passage before without remembering it, placing Cy's own…"
       ],
       "aliases": [],
       "startedAt": "2026-07-27T13:42:10.222Z",
-      "startedWorldDay": 27
+      "startedWorldDay": 27,
+      "awaitingResolution": true
     }
   ],
   "npcRegistry": {
@@ -798,7 +827,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Cy shuttered its lamp before being asked — a small act that carries weight; Cy does not do things without a reason, and this place has a…",
@@ -1302,13 +1331,15 @@
           "[d1] The regulator below the Unlit's outer chamber was calibrated to hold a temperature ceiling for the routing lines above. Its last full service is recorded on three metal panels in the inspection port — not in any system the valley holds. Its failsafe: a sustained drop in the watershed pressure it…",
           "[d1] The installation panels are not a neutral maintenance record — they are addressed. The first panel carries a personal recipient designation, the kind used for a named individual assignment rather than a facility. Someone built this for a specific person to find. The second service signature…",
           "[d1] Prism Sight found three sets of heat-traces on the installation panels. Someone came here before Loki — read the calibration entry, checked the second panel's corner mark, then pressed one finger to the personal designation glyph on the third panel and left. They recognized the name. They did not…",
-          "[d1] The personal designation glyph on the third panel resolves to a construction-address: 'assigned to Halvex.' The regulator was not built for a facility — it was built for a specific named operator. Cy went still when the name was read aloud and said 'that entry requires verification' without moving…"
+          "[d1] The personal designation glyph on the third panel resolves to a construction-address: 'assigned to Halvex.' The regulator was not built for a facility — it was built for a specific named operator. Cy went still when the name was read aloud and said 'that entry requires verification' without moving…",
+          "[d1] The terminus regulator was built with a paired instrument — Cy — assigned specifically to the operator Halvex, not to the facility. The pairing was personal. Cy has visited this installation before, within its operational history, and the visit is not in its accessible memory."
         ],
         "links": [
           "the-seam-beside-the-bracket",
           "the-unlit-deep",
           "the-water-crisis",
-          "loki-thread"
+          "loki-thread",
+          "halvex"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1321,12 +1352,14 @@
         "facts": [
           "[d1] The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate.",
           "[d1] Cy confirmed the name appears in its own maintenance registry as a 'deprecated operator designation' — then stopped, said verification was required, and did not move to verify. The name is in Cy's records. Cy is not saying what it knows about it.",
-          "[d1] Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged 'do not resolve without verification.' Cy has not verified it — not for lack of ability, but because something in its own architecture is holding the step back."
+          "[d1] Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged 'do not resolve without verification.' Cy has not verified it — not for lack of ability, but because something in its own architecture is holding the step back.",
+          "[d1] Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry."
         ],
         "links": [
           "terminus-seals-beneath-the-valley",
           "loki-thread",
-          "the-unlit-deep"
+          "the-unlit-deep",
+          "the-seam-beside-the-bracket"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1335,21 +1368,21 @@
     }
   },
   "tendencies": {
-    "devotion": 2.7696407499255926,
-    "cerebral": 14.897448432914725,
-    "social": 13.261741921533769,
-    "strategic": 9.948886859576978,
-    "cautious": 7.500246200267589,
-    "amorous": 5.350585993472729,
-    "generous": 2.3805765312472587,
-    "ruthless": 0.3120414750117885,
-    "risky": 3.135812259766567
+    "devotion": 2.700399731177453,
+    "cerebral": 14.525012222091856,
+    "social": 13.930198373495424,
+    "strategic": 9.700164688087554,
+    "cautious": 7.312740045260899,
+    "amorous": 5.21682134363591,
+    "generous": 2.3210621179660773,
+    "ruthless": 0.3042404381364938,
+    "risky": 3.0574169532724027
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 64,
+  "actionCount": 65,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1506,8 +1539,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785173434672,
-  "rev": 135,
+  "updatedAt": 1785173645036,
+  "rev": 136,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1825,7 +1858,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 37
+    "umbral_depths": 38
   },
   "opLossPending": false,
   "sessions": [
@@ -1856,10 +1889,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T17:30:34.671Z",
+      "lastAt": "2026-07-27T17:34:05.035Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 33
+      "beats": 34
     }
   ],
   "establishedFacts": [
@@ -1897,27 +1930,27 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 65,
-    "choices": 65,
+    "sceneSummary": 66,
+    "choices": 66,
     "characterDeltas": 29,
-    "scene": 65,
+    "scene": 66,
     "placeUpdates": 9,
-    "codexUpdates": 55,
-    "timeOps": 64,
+    "codexUpdates": 56,
+    "timeOps": 65,
     "offer": 7,
     "generateRequest": 2,
     "sceneEnded": 16,
-    "npcUpdates": 56,
+    "npcUpdates": 57,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
     "questUpdates": 10,
     "standingOps": 1,
     "factUpdates": 4,
-    "stageOps": 6,
+    "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 65,
+  "_opTurns": 66,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75

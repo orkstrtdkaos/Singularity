@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 4,
-  "xp": 339,
+  "xp": 350,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -57,6 +57,10 @@
     {
       "abilityId": "harmonic_voice",
       "level": 1
+    },
+    {
+      "abilityId": "umbracraft",
+      "level": 1
     }
   ],
   "alignment": {
@@ -71,7 +75,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 94,
+  "energy": 86,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -144,24 +148,31 @@
         "player": "Use the better story to have Ossivyn reconsider.",
         "summary": "Loki tried The Better Story on Ossivyn — but the man knows exactly what he is doing, and a well-shaped frame finds no purchase in a person who has already made peace with his own.",
         "narration": "Loki tries the angle that has worked before — the liveable frame, the version of a thing that lets a person pick it up and carry it without cutting themselves. He shapes the words carefully. The tree already has a name forming in it, he says. The child will find it. But a name given in love, by a stranger who looked at the roots and thought of them before they were born — that is not the same thing as the name the tree claims. That is an older gift. A name laid under the name.\n\nOssivyn Tallow listens. He does not interrupt. He tilts his head the way a man tilts his head at a sound that is pleasant but coming from the wrong direction.\n\nThen he shakes his head. Not unkindly. He picks up his spade again and sets the blade into the earth.\n\n'That is a good story,' he says, said Ossivyn. 'I can hear the care in it. But I know what I am planting and I know why, and a name laid under the name is still a stranger's name. The child will not find mine either. They will find their own.' He glances at the spare spade against the fence post. 'The offer stands, if you want to dig.'"
+      },
+      {
+        "player": "Use the wrong reality with Harmonic voice... convince the man that it is import for them to name this tree as you say, and to raise a plaque at their own expense to ensure the name is known until that child hears it.",
+        "summary": "The Harmonic undertone and a brush of Wrong Reality cracked Ossivyn's certainty partway — he won't raise a plaque, but he'll write the name in the orchard's record.",
+        "narration": "Loki lets the silence sit for a moment after Ossivyn's last refusal. Then something shifts in the way the morning light falls between them — not a trick of weather, but a subtle wrongness in the air, the kind that makes a person reconsider what they were certain of a breath ago. The Harmonic undertone comes up beneath Loki's next words, low and steady, the way a plucked string fills a room before you know you are hearing it.\n\n'You are right that the tree names itself,' Loki says. 'I am not trying to change that. But there is a name that comes before the name. The way a house has a foundation before it has walls. The child will still find their own name. This one is not in competition with it.'\n\nOssivyn goes still in the hole. His hands do not move on the spade. His eyes shift — just slightly — toward the bundled sapling, and for a moment he is seeing it differently than he has for the last hour. The wrongness in the air does not push him. It simply opens a crack in the certainty he has been standing on, the way early-spring mud opens a crack in stone that froze all winter.\n\nThen the certainty closes again. Not all the way. Ossivyn exhales through his nose. 'I will not put up a plaque,' he says, his voice unhurried. 'That is not how this place does its remembering.' He sets the spade aside and crouches down to lift the bundled sapling by its cloth wrap. 'But I will write it down.' He glances up at Loki directly. 'The name you give, and who gave it, and what day it was given. In the orchard's record. Where it will stay until someone reads it to that child.' He waits, holding the sapling. 'Give me a name worth writing.'"
       }
     ],
     "lastTurn": {
-      "narration": "Loki tries the angle that has worked before — the liveable frame, the version of a thing that lets a person pick it up and carry it without cutting themselves. He shapes the words carefully. The tree already has a name forming in it, he says. The child will find it. But a name given in love, by a stranger who looked at the roots and thought of them before they were born — that is not the same thing as the name the tree claims. That is an older gift. A name laid under the name.\n\nOssivyn Tallow listens. He does not interrupt. He tilts his head the way a man tilts his head at a sound that is pleasant but coming from the wrong direction.\n\nThen he shakes his head. Not unkindly. He picks up his spade again and sets the blade into the earth.\n\n'That is a good story,' he says, said Ossivyn. 'I can hear the care in it. But I know what I am planting and I know why, and a name laid under the name is still a stranger's name. The child will not find mine either. They will find their own.' He glances at the spare spade against the fence post. 'The offer stands, if you want to dig.'",
-      "sceneSummary": "Loki tried The Better Story on Ossivyn — but the man knows exactly what he is doing, and a well-shaped frame finds no purchase in a person who has already made peace with his own.",
+      "narration": "Loki lets the silence sit for a moment after Ossivyn's last refusal. Then something shifts in the way the morning light falls between them — not a trick of weather, but a subtle wrongness in the air, the kind that makes a person reconsider what they were certain of a breath ago. The Harmonic undertone comes up beneath Loki's next words, low and steady, the way a plucked string fills a room before you know you are hearing it.\n\n'You are right that the tree names itself,' Loki says. 'I am not trying to change that. But there is a name that comes before the name. The way a house has a foundation before it has walls. The child will still find their own name. This one is not in competition with it.'\n\nOssivyn goes still in the hole. His hands do not move on the spade. His eyes shift — just slightly — toward the bundled sapling, and for a moment he is seeing it differently than he has for the last hour. The wrongness in the air does not push him. It simply opens a crack in the certainty he has been standing on, the way early-spring mud opens a crack in stone that froze all winter.\n\nThen the certainty closes again. Not all the way. Ossivyn exhales through his nose. 'I will not put up a plaque,' he says, his voice unhurried. 'That is not how this place does its remembering.' He sets the spade aside and crouches down to lift the bundled sapling by its cloth wrap. 'But I will write it down.' He glances up at Loki directly. 'The name you give, and who gave it, and what day it was given. In the orchard's record. Where it will stay until someone reads it to that child.' He waits, holding the sapling. 'Give me a name worth writing.'",
+      "sceneSummary": "The Harmonic undertone and a brush of Wrong Reality cracked Ossivyn's certainty partway — he won't raise a plaque, but he'll write the name in the orchard's record.",
       "choices": [
         {
-          "label": "Take up the spare spade and help dig — no names, no analysis, just work.",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Give the tree a name now — something worth the record book.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "romantic",
+            "devote"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Crouch beside the sapling and read its root structure with Prism Sight — not to bargain, just because it is worth knowing.",
+          "label": "Use Prism Sight on the sapling's root structure first — name it from what you actually find there.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -173,47 +184,51 @@
           "trivial": false
         },
         {
-          "label": "Ask Ossivyn plainly — who planted a tree here that was meant for you?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Cy if it has a name in its inventory for this installation class — let the old machine's record be the source.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Leave the orchard and head back into the valley.",
+          "label": "Decline to name it — take up the spare spade instead and just help him plant.",
           "attribute": "practical",
-          "subAttribute": "wits",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "help"
           ],
+          "abilityId": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale light, soft mud, bare orchard rows stretching back into the still-bare trees. Ossivyn is standing in his knee-deep hole with both hands on the spade, having just declined the frame.",
+        "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale soft light, bare orchard rows behind Ossivyn. He is crouched at the edge of the hole holding the bundled sapling, waiting for a name.",
         "npcsPresent": [
           {
             "name": "Ossivyn Tallow",
-            "state": "Standing in the planting hole, spade returned to the earth, settled and unhurried — not unfriendly, simply unmoved."
+            "state": "Crouched at the hole's edge, holding the bundled sapling in both hands, looking up at Loki and waiting."
           },
           {
             "name": "Cy",
-            "state": "Perched on the fence post nearest the gate, lens tilted toward the sapling. Has not moved."
+            "state": "Still perched on the fence post, lens irising slowly toward the sapling."
           }
         ],
         "objects": [
-          "bundled sapling beside the hole",
+          "bundled sapling in Ossivyn's hands",
           "spare spade leaning against the fence post",
-          "loose mounded earth from the dig"
+          "open knee-deep hole",
+          "loose mounded earth from the dig",
+          "spade set aside on the ground"
         ],
         "threads": [
-          "Ossivyn's offer to help dig still stands — the spare spade is unclaimed",
-          "The sapling's root structure is unexamined",
-          "Someone may have planted a tree here for Loki — the encounter flavor suggests it; the thread is unasked"
+          "Ossivyn is waiting for Loki to name the tree — the offer is open and he is holding the sapling",
+          "The orchard's record book will carry whatever name is given",
+          "Someone may have planted a tree here for Loki — unasked"
         ]
       },
       "npcUpdates": [
@@ -221,39 +236,54 @@
           "op": "update",
           "npcId": "ossivyn-tallow",
           "name": "Ossivyn Tallow",
-          "note": "Heard The Better Story — received it as well-made, and still declined. His certainty about the planting is not hostility; it is a thing finished in him already.",
+          "note": "Partial yielded to the combined working — he won't raise a plaque, but he agreed to write the name in the orchard's record with its giver and the date. Now holding the sapling and waiting for Loki to speak it.",
           "learned": [
-            "A name laid under the name is still a stranger's name — the child finds only their own."
+            "A name written in the orchard record stays until someone reads it to the child — this is how the orchard does its remembering."
           ],
-          "statusNote": "At the Planting Gate, standing in the hole, spade in hand, waiting to see if Loki will dig."
+          "statusNote": "At the Planting Gate, crouched at the hole's edge, holding the bundled sapling, waiting for the name.",
+          "relationshipDelta": 1
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "ossivyn-tallow",
+          "label": "Ossivyn Tallow",
+          "kind": "person",
+          "entityId": "ossivyn-tallow",
+          "fact": "Yielded partway to the combined working — he will write a given name in the orchard's own record, with the giver's name and the date, so it stays until someone reads it to the child. He will not raise a plaque; that is not how this place remembers.",
+          "links": [
+            "the-slow-orchard"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange at the gate"
+        "why": "A few minutes of conversation at the planting gate."
       }
     },
     "sceneState": {
-      "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale light, soft mud, bare orchard rows stretching back into the still-bare trees. Ossivyn is standing in his knee-deep hole with both hands on the spade, having just declined the frame.",
+      "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale soft light, bare orchard rows behind Ossivyn. He is crouched at the edge of the hole holding the bundled sapling, waiting for a name.",
       "npcsPresent": [
         {
           "name": "Ossivyn Tallow",
-          "state": "Standing in the planting hole, spade returned to the earth, settled and unhurried — not unfriendly, simply unmoved."
+          "state": "Crouched at the hole's edge, holding the bundled sapling in both hands, looking up at Loki and waiting."
         },
         {
           "name": "Cy",
-          "state": "Perched on the fence post nearest the gate, lens tilted toward the sapling. Has not moved."
+          "state": "Still perched on the fence post, lens irising slowly toward the sapling."
         }
       ],
       "objects": [
-        "bundled sapling beside the hole",
+        "bundled sapling in Ossivyn's hands",
         "spare spade leaning against the fence post",
-        "loose mounded earth from the dig"
+        "open knee-deep hole",
+        "loose mounded earth from the dig",
+        "spade set aside on the ground"
       ],
       "threads": [
-        "Ossivyn's offer to help dig still stands — the spare spade is unclaimed",
-        "The sapling's root structure is unexamined",
-        "Someone may have planted a tree here for Loki — the encounter flavor suggests it; the thread is unasked"
+        "Ossivyn is waiting for Loki to name the tree — the offer is open and he is holding the sapling",
+        "The orchard's record book will carry whatever name is given",
+        "Someone may have planted a tree here for Loki — unasked"
       ]
     }
   },
@@ -575,20 +605,22 @@
         "locationId": "the_slow_orchard",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d1] Declined Loki's offer to name the tree in exchange for analysis — explained that the tree names itself through the child's own reckoning; a stranger's name given ahead of time is a different gift than the one he is giving.",
-        "[d1] Heard The Better Story — received it as well-made, and still declined. His certainty about the planting is not hostility; it is a thing finished in him already."
+        "[d1] Heard The Better Story — received it as well-made, and still declined. His certainty about the planting is not hostility; it is a thing finished in him already.",
+        "[d1] Partial yielded to the combined working — he won't raise a plaque, but he agreed to write the name in the orchard's record with its giver and the date. Now holding the sapling and waiting for Loki to speak it."
       ],
       "knownFacts": [
         "The tree names itself through the child who inherits it — a name given by a stranger ahead of time is not part of the gift being planted here.",
-        "A name laid under the name is still a stranger's name — the child finds only their own."
+        "A name laid under the name is still a stranger's name — the child finds only their own.",
+        "A name written in the orchard record stays until someone reads it to the child — this is how the orchard does its remembering."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Planting Gate, standing in the hole, spade in hand, waiting to see if Loki will dig.",
+      "statusNote": "At the Planting Gate, crouched at the hole's edge, holding the bundled sapling, waiting for the name.",
       "domains": {
         "primary": "rootkin"
       },
@@ -853,7 +885,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -960,7 +992,7 @@
     "wits": 4
   },
   "pendingSubPoints": 0,
-  "skillPoints": 1,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1498,7 +1530,8 @@
         "facts": [
           "[d1] Tender of the Slow Orchard — he is planting a tree today for a child not yet conceived, because the tree will need sixty years before it is ready to give anything worth giving",
           "[d1] Tender of the Slow Orchard",
-          "[d1] The trees here name themselves through the children who inherit them. A stranger's name given ahead of time is a different gift — not the one Ossivyn is planting."
+          "[d1] The trees here name themselves through the children who inherit them. A stranger's name given ahead of time is a different gift — not the one Ossivyn is planting.",
+          "[d1] Yielded partway to the combined working — he will write a given name in the orchard's own record, with the giver's name and the date, so it stays until someone reads it to the child. He will not raise a plaque; that is not how this place remembers."
         ],
         "links": [
           "the-slow-orchard"
@@ -1511,23 +1544,23 @@
     }
   },
   "tendencies": {
-    "devotion": 2.660019344556611,
-    "cerebral": 17.770802661666597,
-    "social": 12.984878632623783,
-    "strategic": 8.347923358152897,
-    "cautious": 8.177269465340842,
-    "amorous": 3.4792033691398854,
-    "generous": 3.3605547321381746,
-    "ruthless": 1.1065919748686328,
-    "risky": 2.039053029421347,
-    "patient": 0.9268593749999999
+    "devotion": 2.593518860942696,
+    "cerebral": 17.32653259512493,
+    "social": 14.660256666808188,
+    "strategic": 9.139225274199074,
+    "cautious": 7.972837728707321,
+    "amorous": 3.3922232849113882,
+    "generous": 3.27654086383472,
+    "ruthless": 1.078927175496917,
+    "risky": 1.9880767036858134,
+    "patient": 0.9036878906249999
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 81,
+  "actionCount": 82,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1708,8 +1741,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785191594510,
-  "rev": 158,
+  "updatedAt": 1785191857243,
+  "rev": 161,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2072,8 +2105,8 @@
           "entityId": "ossivyn-tallow",
           "type": "npc",
           "birthWeight": 6,
-          "engagementScore": 5,
-          "tier": "established",
+          "engagementScore": 8,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -2095,6 +2128,14 @@
             },
             {
               "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "fact",
               "day": 1
             }
           ],
@@ -2159,7 +2200,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 2
+    "the_quickwood": 3
   },
   "opLossPending": false,
   "sessions": [
@@ -2190,10 +2231,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T22:33:14.509Z",
+      "lastAt": "2026-07-27T22:37:37.240Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 52
+      "beats": 53
     }
   ],
   "establishedFacts": [
@@ -2231,17 +2272,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 84,
-    "choices": 84,
+    "sceneSummary": 85,
+    "choices": 85,
     "characterDeltas": 37,
-    "scene": 84,
+    "scene": 85,
     "placeUpdates": 12,
-    "codexUpdates": 72,
-    "timeOps": 83,
+    "codexUpdates": 73,
+    "timeOps": 84,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 20,
-    "npcUpdates": 75,
+    "npcUpdates": 76,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -2251,7 +2292,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 84,
+  "_opTurns": 85,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2261,15 +2302,17 @@
     "uses": {
       "see_the_made_thing": 27,
       "falsecraft": 2,
-      "the_wrong_reality": 3,
+      "the_wrong_reality": 4,
       "the_misdirect": 1,
       "the_better_story": 7,
-      "prism_sight": 7
+      "prism_sight": 7,
+      "harmonic_voice": 1
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
       "see_the_made_thing+the_misdirect": 1,
-      "prism_sight+see_the_made_thing": 1
+      "prism_sight+see_the_made_thing": 1,
+      "harmonic_voice+the_wrong_reality": 1
     },
     "aspirations": [
       {
@@ -2289,7 +2332,8 @@
       "the_wrong_reality": 27,
       "the_misdirect": 21,
       "the_better_story": 27,
-      "prism_sight": 27
+      "prism_sight": 27,
+      "harmonic_voice": 27
     }
   },
   "teachers": {},
@@ -2489,30 +2533,30 @@
     "the-taken-from-the-city: no-such-quest"
   ],
   "_suggestCache": {
-    "level": 3,
+    "level": 4,
     "picks": [
       {
-        "abilityId": "harmonic_voice",
-        "why": "This character's highest stat is social, their aptitudes are silver_tongue and charmer, and The Better Story is their second most-used craft — Harmonic Voice is the same instinct (calm, redirect, defuse) rendered as a standing tonal effect, letting them work on a room rather than one exchange at a time.",
-        "fit": "strength"
-      },
-      {
-        "abilityId": "mediators_tongue",
-        "why": "See the Made Thing is their signature (17 uses: reading situations analytically), and their cerebral + social fingerprint means they're constantly in the information-then-negotiate loop — Mediator's Tongue gives them a formal de-escalation and deal-finding tool to close the loop rather than leaving the social endgame to improvisation.",
-        "fit": "gap"
-      },
-      {
-        "abilityId": "light_bending",
-        "why": "Their entire owned kit is deception and misdirection (The Misdirect, Falsecraft, The Wrong Reality, The False Target, Prism Sight), and Appetite-Sense is a declared aspiration — Light Bending is a physical-layer illusion that complements their veilwright concealment school and deepens the mirage-and-redirect signature they clearly love, even if they haven't fully leaned into The Misdirect yet.",
+        "abilityId": "afterimage",
+        "why": "This character already runs on misdirection and false targets — Afterimage is the active, physical expression of that same cerebral trick: you're never where they think you are, and it slots directly into the deception architecture they've built with The Wrong Reality and The False Target (which they own but never use, suggesting the gap is execution, not intent).",
         "fit": "synergy"
       },
       {
-        "abilityId": "afterimage",
-        "why": "Hunter's Strike and The False Target are both owned but completely unused, suggesting this character avoids committed physical positioning — Afterimage lets them vanish from a spot they've committed to without needing to fight their way out, giving their cautious (7.2) tendency a concrete escape hatch that fits the illusionist school rather than demanding a combat pivot.",
+        "abilityId": "umbracraft",
+        "why": "Their secondary domain is umbral and they've trained zero umbral crafts — Umbracraft is the foundational unlock for that entire road, giving concealment and sight-without-light to a character who is deeply cerebral and cautious but currently has no darkness-native tools to back that caution up.",
+        "fit": "gap"
+      },
+      {
+        "abilityId": "mediators_tongue",
+        "why": "Social 11 and aptitudes silver_tongue plus sage describe someone who talks their way through situations, yet their social kit is thin — The Better Story is their only real INFLUENCE craft they actually use. Mediator's Tongue gives the scholar-sage a working diplomatic instrument, closing the gap between how they play and what their crafts can actually do.",
+        "fit": "gap"
+      },
+      {
+        "abilityId": "stillness_field",
+        "why": "A cautious, cerebral character with no PROTECT family craft is one loud footfall from losing the careful positioning all their deception crafts depend on — Stillness Field creates the bubble of silence that lets their whole misdirection approach hold together in situations where noise is the threat.",
         "fit": "gap"
       }
     ],
-    "note": "The field is all horizon-school crafts with no school-fit flags, so nothing here deepens an existing training method — every pick is a new discipline. The sharpest tension this level is between doubling into social influence (Harmonic Voice, Mediator's Tongue) or extending the deception toolkit (Light Bending, Afterimage); both directions are authentic to how this character plays."
+    "note": "The shape here is: one pick that deepens the deception signature (Afterimage), one that finally opens the umbral road they've never touched, and two that close real functional absences — social tools and protective silence — for a character who plays cerebral and cautious but currently has almost nothing to fall back on when manipulation isn't enough."
   },
   "worldEvents": []
 }

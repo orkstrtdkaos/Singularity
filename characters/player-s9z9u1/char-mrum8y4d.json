@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 2,
-  "xp": 125,
+  "xp": 130,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -66,7 +66,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 86,
+  "energy": 84,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -167,52 +167,40 @@
         "player": "Give them The Better Story before you ask — name who you are and why you came, in a shape that makes the question easier to answer honestly",
         "summary": "Loki gave the taken person an honest frame — who they are, why they came — and the person opened the door to the question.",
         "narration": "You crouch down so your eye level meets theirs. The cold of the floor comes through your knees at once.\n\nYou tell them your name. You say that you came down from the city not because the city sent you, but because you heard something and wanted to know if it was true. You say that you are not here to pull anyone back against their will. You say that you would like to ask one question, and that the answer — whatever it is — is theirs to give.\n\nThe person is quiet. Their head stays tilted toward you. Their hands, folded across their knees, do not move. Then they say, in a voice that is steadier than you expected for someone who has been sitting in the dark for however many days this has been: 'You can ask it.'\n\nCy stands at your heel. Its lens irises once toward the seated figure and then turns, briefly, to the floor beside them — to the cup that has gone almost cool — and then it is still."
+      },
+      {
+        "player": "Use See the Made Thing on the cup or the room — let Cy's read and your own run together; find what the dark is built from",
+        "summary": "Loki read the cup and the chamber — the room predates the Unlit, someone down here made the cup by hand, and the taken person is fed and kept freely.",
+        "narration": "You let your attention drop to the cup on the floor beside them. Cy's lens is already there, irised to its smallest aperture, reading.\n\nSee the Made Thing opens behind your eyes — not light, but construction. The cup is ceramic, unglazed, hand-shaped with the particular slight asymmetry of someone making it for themselves rather than for trade. The inner surface has a faint mineral ring at the waterline — not particulate, not nanite deposition, just dried water from a deep source. The clay itself reads as local. Someone down here made this. Not brought it. Made it.\n\nThe room is the same. You let the read move out from the cup to the walls, the floor, the ceiling. The stonework is old — older than the Unlit, you are certain of that. The worked-stone seam here is the same as the one you noticed in the outer chamber, the same tool-mark character, the same depth of cut. Whatever this room was before the Unlit found it, it was already here and already waiting. The Unlit did not build their doctrine into this space. They moved into something that was already suited to it. And the person seated against the far wall — their heat trace reads warm and well-fed against the stone. Someone is bringing them food. Someone is bringing them water from that deep source. They are being kept, not in the sense of prisoners, but in the sense of a sustained life. They are not starving into doctrine. They chose it with a full stomach.\n\nThe person's voice is quiet in the dark. \"You said you have a question,\" they say."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch down so your eye level meets theirs. The cold of the floor comes through your knees at once.\n\nYou tell them your name. You say that you came down from the city not because the city sent you, but because you heard something and wanted to know if it was true. You say that you are not here to pull anyone back against their will. You say that you would like to ask one question, and that the answer — whatever it is — is theirs to give.\n\nThe person is quiet. Their head stays tilted toward you. Their hands, folded across their knees, do not move. Then they say, in a voice that is steadier than you expected for someone who has been sitting in the dark for however many days this has been: 'You can ask it.'\n\nCy stands at your heel. Its lens irises once toward the seated figure and then turns, briefly, to the floor beside them — to the cup that has gone almost cool — and then it is still.",
-      "sceneSummary": "Loki gave the taken person an honest frame — who they are, why they came — and the person opened the door to the question.",
+      "narration": "You let your attention drop to the cup on the floor beside them. Cy's lens is already there, irised to its smallest aperture, reading.\n\nSee the Made Thing opens behind your eyes — not light, but construction. The cup is ceramic, unglazed, hand-shaped with the particular slight asymmetry of someone making it for themselves rather than for trade. The inner surface has a faint mineral ring at the waterline — not particulate, not nanite deposition, just dried water from a deep source. The clay itself reads as local. Someone down here made this. Not brought it. Made it.\n\nThe room is the same. You let the read move out from the cup to the walls, the floor, the ceiling. The stonework is old — older than the Unlit, you are certain of that. The worked-stone seam here is the same as the one you noticed in the outer chamber, the same tool-mark character, the same depth of cut. Whatever this room was before the Unlit found it, it was already here and already waiting. The Unlit did not build their doctrine into this space. They moved into something that was already suited to it. And the person seated against the far wall — their heat trace reads warm and well-fed against the stone. Someone is bringing them food. Someone is bringing them water from that deep source. They are being kept, not in the sense of prisoners, but in the sense of a sustained life. They are not starving into doctrine. They chose it with a full stomach.\n\nThe person's voice is quiet in the dark. \"You said you have a question,\" they say.",
+      "sceneSummary": "Loki read the cup and the chamber — the room predates the Unlit, someone down here made the cup by hand, and the taken person is fed and kept freely.",
       "choices": [
         {
-          "label": "Ask the question the elder permitted: do you wish to be found?",
+          "label": "Ask the elder's question — do you wish to be found?",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "negotiate",
-            "careful"
+            "help",
+            "honest"
           ],
-          "trivial": false,
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Ask who brought the cup — someone has been here, or they made it themselves; either answer tells you something",
-          "attribute": "mental",
+          "label": "Ask who made the cup — and what else they have made down here",
+          "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Use See the Made Thing on the cup or the room — let Cy's read and your own run together; find what the dark is built from",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": false,
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1
-        },
-        {
-          "label": "Tell them what the city is actually saying — nothing; and let them decide if that changes their answer",
+          "label": "Tell them what you found — that the room is older than the Unlit, that it was already here waiting. See what that does to them.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
@@ -220,25 +208,32 @@
             "persuade",
             "careful"
           ],
-          "trivial": false,
-          "abilityId": null,
-          "energyCost": null
+          "abilityId": "the_better_story",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Ask what they came here looking for — before you ask whether they want to leave",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
       "scene": {
-        "setting": "The inner chamber of the Unlit Deep — smaller than the outer, ceiling low enough to touch, walls bare worked stone. No flame. The only light seeps through the passage from the outer chamber's pale blue flame. Loki is crouched at floor level; the taken person is seated against the far wall, knees up, face turned toward Loki.",
+        "setting": "The inner chamber of the Unlit Deep — small, bare worked stone, ceiling low enough to touch. No flame. Pale blue light seeps faintly from the outer chamber passage. Loki is crouched on the cold floor; the taken person is seated against the far wall, knees up, face turned toward Loki.",
         "npcsPresent": [
           {
             "name": "The Taken Person",
-            "state": "Seated against the far wall, hands folded on knees, head turned toward Loki. Voice steady. Has said: 'You can ask it.'"
+            "state": "Seated against the far wall, hands on knees, face toward Loki. Voice steady. Just acknowledged that Loki has a question."
           },
           {
             "name": "Cy",
-            "state": "At Loki's heel, lens irised once toward the person and then toward the cup on the floor, now still."
+            "state": "At Loki's heel, lens irised to smallest aperture — has completed its read of the cup."
           },
           {
             "name": "Unlit Elder",
@@ -250,15 +245,16 @@
           }
         ],
         "objects": [
-          "A cup on the floor beside the seated person — going cool",
+          "The cup — ceramic, hand-made, local clay, mineral ring at the waterline from deep-source water",
           "Cy's shuttered lamp",
           "The gap back to the outer chamber — faint seepage of pale blue light",
-          "Worn floor — a narrower track than the outer chamber"
+          "Worn floor — narrow track, the path of long sitting and occasional pacing"
         ],
         "threads": [
-          "The taken person has said 'You can ask it' — the elder's permitted question has not yet been put",
-          "The cup: someone brought it, or they made it themselves; either tells you something about the arrangement here",
-          "Cy irised toward the cup — it noticed something"
+          "The taken person has acknowledged the question — it has not yet been asked",
+          "The room predates the Unlit — something was here before them; the elder knows and will not say",
+          "Someone down here made the cup by hand — the taken person is fed and kept freely, not starved into doctrine",
+          "Cy completed its read of the cup alongside Loki's — it may have noticed something of its own"
         ]
       },
       "npcUpdates": [
@@ -266,61 +262,59 @@
           "op": "update",
           "npcId": "the-taken-person",
           "name": "The Taken Person",
-          "note": "Heard Loki's honest framing — name, reason, no coercion — and responded: 'You can ask it.' Voice steady. Has opened the door to the question.",
+          "note": "Acknowledged Loki's statement — said 'You said you have a question.' The question has not yet been put.",
           "learned": [
-            "Responded to honest framing with permission — not fear, not suspicion",
-            "Voice is steadier than expected for someone who has spent days here",
-            "Has said: 'You can ask it'"
+            "Is fed from a deep water source and kept freely — not starved or coerced into doctrine",
+            "The cup beside them was made here, by hand, from local clay — someone in this place is making things"
           ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "In the inner chamber of the Unlit Deep, seated and calm — came willingly, has not left, and has just opened the door to the question."
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "Loki gave the taken person an honest account of who they are and why they came — the person accepted the frame and said 'You can ask it.' The question is ready to be put."
+          "statusNote": "In the inner chamber, seated and calm — acknowledges Loki's presence and is waiting for the question.",
+          "status": "active"
         }
       ],
       "codexUpdates": [
+        {
+          "topic": "the-unlit-deep",
+          "label": "The Unlit Deep",
+          "kind": "place",
+          "entityId": "the-unlit-deep",
+          "fact": "The inner chamber predates the Unlit — the stonework and tool-marks are older than the doctrine, the same character as the seam in the outer chamber. The Unlit did not build this space; they moved into something already suited to it.",
+          "links": [
+            "the-unlit",
+            "unlit-elder",
+            "the-taken-from-the-city"
+          ]
+        },
         {
           "topic": "the-taken-from-the-city",
           "label": "The Taken From the City",
           "kind": "mystery",
           "entityId": "the-taken-person",
-          "fact": "The person accepted Loki's honest framing — name, purpose, no coercion — and said 'You can ask it.' The elder's permitted question has not yet been put, but the ground for it is clear.",
+          "fact": "The cup beside them was made here from local clay — someone in the Unlit Deep is making things by hand. The taken person is fed from a deep water source and kept freely. They are not being starved or pressured into doctrine; they came with a full stomach and are staying the same way.",
           "links": [
+            "the-unlit",
             "the-unlit-deep",
-            "unlit-elder",
-            "the-unlit"
+            "unlit-elder"
           ]
         }
       ],
+      "characterDeltas": {
+        "energy": -1
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange in the inner chamber — the framing and the response."
-      },
-      "stageOps": [
-        {
-          "questId": "the-taken-from-the-city",
-          "stageId": "s1",
-          "evidence": "Loki gave the taken person an honest account — name, reason, no coercion — and the person accepted it, saying 'You can ask it.'"
-        }
-      ],
-      "sceneEnded": false
+        "why": "a quiet moment of craft-reading in the inner chamber"
+      }
     },
     "sceneState": {
-      "setting": "The inner chamber of the Unlit Deep — smaller than the outer, ceiling low enough to touch, walls bare worked stone. No flame. The only light seeps through the passage from the outer chamber's pale blue flame. Loki is crouched at floor level; the taken person is seated against the far wall, knees up, face turned toward Loki.",
+      "setting": "The inner chamber of the Unlit Deep — small, bare worked stone, ceiling low enough to touch. No flame. Pale blue light seeps faintly from the outer chamber passage. Loki is crouched on the cold floor; the taken person is seated against the far wall, knees up, face turned toward Loki.",
       "npcsPresent": [
         {
           "name": "The Taken Person",
-          "state": "Seated against the far wall, hands folded on knees, head turned toward Loki. Voice steady. Has said: 'You can ask it.'"
+          "state": "Seated against the far wall, hands on knees, face toward Loki. Voice steady. Just acknowledged that Loki has a question."
         },
         {
           "name": "Cy",
-          "state": "At Loki's heel, lens irised once toward the person and then toward the cup on the floor, now still."
+          "state": "At Loki's heel, lens irised to smallest aperture — has completed its read of the cup."
         },
         {
           "name": "Unlit Elder",
@@ -332,15 +326,16 @@
         }
       ],
       "objects": [
-        "A cup on the floor beside the seated person — going cool",
+        "The cup — ceramic, hand-made, local clay, mineral ring at the waterline from dee",
         "Cy's shuttered lamp",
         "The gap back to the outer chamber — faint seepage of pale blue light",
-        "Worn floor — a narrower track than the outer chamber"
+        "Worn floor — narrow track, the path of long sitting and occasional pacing"
       ],
       "threads": [
-        "The taken person has said 'You can ask it' — the elder's permitted question has not yet been put",
-        "The cup: someone brought it, or they made it themselves; either tells you something about the arrangement here",
-        "Cy irised toward the cup — it noticed something"
+        "The taken person has acknowledged the question — it has not yet been asked",
+        "The room predates the Unlit — something was here before them; the elder knows and will not say",
+        "Someone down here made the cup by hand — the taken person is fed and kept freely, not starved into doctrine",
+        "Cy completed its read of the cup alongside Loki's — it may have noticed something of its own"
       ]
     }
   },
@@ -591,7 +586,8 @@
       "relationship": 1,
       "history": [
         "[d1] Loki entered the inner chamber and found them seated and waiting. Their face turned toward the sound. They have not yet spoken.",
-        "[d1] Heard Loki's honest framing — name, reason, no coercion — and responded: 'You can ask it.' Voice steady. Has opened the door to the question."
+        "[d1] Heard Loki's honest framing — name, reason, no coercion — and responded: 'You can ask it.' Voice steady. Has opened the door to the question.",
+        "[d1] Acknowledged Loki's statement — said 'You said you have a question.' The question has not yet been put."
       ],
       "knownFacts": [
         "Has been sitting long enough to warm the stone behind their back",
@@ -599,13 +595,15 @@
         "Not afraid. Not surprised. Waiting with the patience of someone who has already chosen their answer",
         "Responded to honest framing with permission — not fear, not suspicion",
         "Voice is steadier than expected for someone who has spent days here",
-        "Has said: 'You can ask it'"
+        "Has said: 'You can ask it'",
+        "Is fed from a deep water source and kept freely — not starved or coerced into doctrine",
+        "The cup beside them was made here, by hand, from local clay — someone in this place is making things"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "In the inner chamber of the Unlit Deep, seated and calm — came willingly, has not left, and has just opened the door to the question.",
+      "statusNote": "In the inner chamber, seated and calm — acknowledges Loki's presence and is waiting for the question.",
       "domains": {
         "primary": "umbral"
       },
@@ -807,7 +805,7 @@
     "lastSharedReadAt": "2026-07-27T14:12:10.208Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -1087,7 +1085,8 @@
           "[d1] The outer chamber is worked stone, ceiling invisible, lit only by a single pale blue flame the Unlit allow. Cy shuttered its lamp before the bottom step — unprompted, without explanation.",
           "[d1] The inner chamber is now accessible — the elder granted passage after Loki's honest account. The blue flame and the seated elder are the heart of the outer space; what lies beyond is unread.",
           "[d1] The outer chamber floor is worn evenly across its full width — many visitors, all sitting in the same spot. The lantern-bracket on the left wall has a seam in the surrounding stone that predates the bracket itself; something else was fitted there before it. The blue flame has no visible wick or…",
-          "[d1] The inner chamber is smaller than the outer — a room for one or two. The floor is worn in a narrower track than the outer chamber: the path of someone who has sat long and occasionally paced. Ceiling low enough to touch. No flame. Cold stone that holds a body's warmth once given it."
+          "[d1] The inner chamber is smaller than the outer — a room for one or two. The floor is worn in a narrower track than the outer chamber: the path of someone who has sat long and occasionally paced. Ceiling low enough to touch. No flame. Cold stone that holds a body's warmth once given it.",
+          "[d1] The inner chamber predates the Unlit — the stonework and tool-marks are older than the doctrine, the same character as the seam in the outer chamber. The Unlit did not build this space; they moved into something already suited to it."
         ],
         "links": [
           "the-water-crisis",
@@ -1159,7 +1158,8 @@
         "kind": "mystery",
         "facts": [
           "[d1] The person came willingly — the elder was explicit. The city sent no one to retrieve them, which the elder reads as proof the city knows this. The person is in the inner chamber and has chosen the doctrine. The elder permits Loki to ask whether they wish to be found.",
-          "[d1] The person accepted Loki's honest framing — name, purpose, no coercion — and said 'You can ask it.' The elder's permitted question has not yet been put, but the ground for it is clear."
+          "[d1] The person accepted Loki's honest framing — name, purpose, no coercion — and said 'You can ask it.' The elder's permitted question has not yet been put, but the ground for it is clear.",
+          "[d1] The cup beside them was made here from local clay — someone in the Unlit Deep is making things by hand. The taken person is fed from a deep water source and kept freely. They are not being starved or pressured into doctrine; they came with a full stomach and are staying the same way."
         ],
         "links": [
           "the-unlit",
@@ -1194,20 +1194,20 @@
     }
   },
   "tendencies": {
-    "devotion": 5.2156452906977675,
-    "cerebral": 9.567842745015561,
-    "social": 16.10323574168632,
-    "strategic": 7.150501743432353,
-    "cautious": 5.483184263619709,
-    "amorous": 10.07594888978984,
-    "generous": 1.0363506284946025,
-    "ruthless": 0.5876204882136226
+    "devotion": 5.085254158430323,
+    "cerebral": 10.328646676390171,
+    "social": 15.700654848144161,
+    "strategic": 6.971739199846544,
+    "cautious": 6.346104657029216,
+    "amorous": 9.824050167545094,
+    "generous": 1.0104418627822374,
+    "ruthless": 0.572929976008282
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 39,
+  "actionCount": 40,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1349,8 +1349,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785162585485,
-  "rev": 93,
+  "updatedAt": 1785162753274,
+  "rev": 94,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1668,7 +1668,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 10
+    "umbral_depths": 11
   },
   "opLossPending": false,
   "sessions": [
@@ -1699,10 +1699,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T14:29:45.483Z",
+      "lastAt": "2026-07-27T14:32:33.273Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -1722,17 +1722,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 39,
-    "choices": 39,
-    "characterDeltas": 17,
-    "scene": 39,
+    "sceneSummary": 40,
+    "choices": 40,
+    "characterDeltas": 18,
+    "scene": 40,
     "placeUpdates": 4,
-    "codexUpdates": 29,
-    "timeOps": 38,
+    "codexUpdates": 30,
+    "timeOps": 39,
     "offer": 3,
     "generateRequest": 2,
     "sceneEnded": 12,
-    "npcUpdates": 33,
+    "npcUpdates": 34,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
@@ -1741,7 +1741,7 @@
     "factUpdates": 1,
     "stageOps": 2
   },
-  "_opTurns": 39,
+  "_opTurns": 40,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -1749,7 +1749,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 10,
+      "see_the_made_thing": 11,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

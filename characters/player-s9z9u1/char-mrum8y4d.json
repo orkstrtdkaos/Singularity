@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 4,
-  "xp": 337,
+  "xp": 339,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -71,7 +71,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 96,
+  "energy": 94,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -139,50 +139,31 @@
         "player": "Ask to name the tree if you help by analyzing the sapling's root structure.  In 40 years let the child know that the tree has a name.",
         "summary": "Loki offers to name the tree in exchange for analyzing the sapling — Ossivyn declines, explaining the tree names itself through the child's own reckoning.",
         "narration": "The man at the gate is knee-deep in his hole when Loki crouches beside the bundled sapling and makes the offer. Help with the analysis, he says — he can read the root structure, tell whether the binding is sound, whether the sapling will take in this soil. In exchange, the tree gets a name. And in forty years, when the child is grown, someone tells them what that name is.\n\nOssivyn Tallow straightens up in the hole. He plants his spade and rests both hands on the handle and looks at Loki for a long moment. Not hostile. Not insulted. He looks the way a man looks when he has heard something that almost fits but doesn't.\n\n'The tree names itself,' he says finally, said Ossivyn. 'That's not how it works here. I plant it. It grows. The child finds out what kind of thing it is when they're old enough to sit with it. A name from a stranger forty years ahead of that — ' he pauses, and his hands shift on the spade handle. 'That's a different gift than the one I'm giving.'\n\nCy, perched on the fence post nearest the gate, tilts its lens toward the sapling without moving otherwise. The offer is declined cleanly. The hole is still there. The spare spade is still leaning against the post."
+      },
+      {
+        "player": "Use the better story to have Ossivyn reconsider.",
+        "summary": "Loki tried The Better Story on Ossivyn — but the man knows exactly what he is doing, and a well-shaped frame finds no purchase in a person who has already made peace with his own.",
+        "narration": "Loki tries the angle that has worked before — the liveable frame, the version of a thing that lets a person pick it up and carry it without cutting themselves. He shapes the words carefully. The tree already has a name forming in it, he says. The child will find it. But a name given in love, by a stranger who looked at the roots and thought of them before they were born — that is not the same thing as the name the tree claims. That is an older gift. A name laid under the name.\n\nOssivyn Tallow listens. He does not interrupt. He tilts his head the way a man tilts his head at a sound that is pleasant but coming from the wrong direction.\n\nThen he shakes his head. Not unkindly. He picks up his spade again and sets the blade into the earth.\n\n'That is a good story,' he says, said Ossivyn. 'I can hear the care in it. But I know what I am planting and I know why, and a name laid under the name is still a stranger's name. The child will not find mine either. They will find their own.' He glances at the spare spade against the fence post. 'The offer stands, if you want to dig.'"
       }
     ],
     "lastTurn": {
-      "narration": "The man at the gate is knee-deep in his hole when Loki crouches beside the bundled sapling and makes the offer. Help with the analysis, he says — he can read the root structure, tell whether the binding is sound, whether the sapling will take in this soil. In exchange, the tree gets a name. And in forty years, when the child is grown, someone tells them what that name is.\n\nOssivyn Tallow straightens up in the hole. He plants his spade and rests both hands on the handle and looks at Loki for a long moment. Not hostile. Not insulted. He looks the way a man looks when he has heard something that almost fits but doesn't.\n\n'The tree names itself,' he says finally, said Ossivyn. 'That's not how it works here. I plant it. It grows. The child finds out what kind of thing it is when they're old enough to sit with it. A name from a stranger forty years ahead of that — ' he pauses, and his hands shift on the spade handle. 'That's a different gift than the one I'm giving.'\n\nCy, perched on the fence post nearest the gate, tilts its lens toward the sapling without moving otherwise. The offer is declined cleanly. The hole is still there. The spare spade is still leaning against the post.",
-      "sceneSummary": "Loki offers to name the tree in exchange for analyzing the sapling — Ossivyn declines, explaining the tree names itself through the child's own reckoning.",
+      "narration": "Loki tries the angle that has worked before — the liveable frame, the version of a thing that lets a person pick it up and carry it without cutting themselves. He shapes the words carefully. The tree already has a name forming in it, he says. The child will find it. But a name given in love, by a stranger who looked at the roots and thought of them before they were born — that is not the same thing as the name the tree claims. That is an older gift. A name laid under the name.\n\nOssivyn Tallow listens. He does not interrupt. He tilts his head the way a man tilts his head at a sound that is pleasant but coming from the wrong direction.\n\nThen he shakes his head. Not unkindly. He picks up his spade again and sets the blade into the earth.\n\n'That is a good story,' he says, said Ossivyn. 'I can hear the care in it. But I know what I am planting and I know why, and a name laid under the name is still a stranger's name. The child will not find mine either. They will find their own.' He glances at the spare spade against the fence post. 'The offer stands, if you want to dig.'",
+      "sceneSummary": "Loki tried The Better Story on Ossivyn — but the man knows exactly what he is doing, and a well-shaped frame finds no purchase in a person who has already made peace with his own.",
       "choices": [
         {
-          "label": "Help dig anyway — no bargain, just work",
+          "label": "Take up the spare spade and help dig — no names, no analysis, just work.",
           "attribute": "physical",
           "subAttribute": "strength",
-          "axes": {
-            "death_life": 0.3
-          },
           "difficulty": 0,
           "intentTags": [
             "help"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Ossivyn what the tree is actually for — what the planting means to him",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "death_life": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use Prism Sight on the sapling — read its root structure quietly, without making it a trade",
+          "label": "Crouch beside the sapling and read its root structure with Prism Sight — not to bargain, just because it is worth knowing.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.2,
-            "mechanical_spiritual": -0.1
-          },
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -192,32 +173,36 @@
           "trivial": false
         },
         {
-          "label": "Ask him about the tree planted for someone not yet born — how does he know it will be received",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "death_life": 0.3,
-            "space_time": 0.2
-          },
+          "label": "Ask Ossivyn plainly — who planted a tree here that was meant for you?",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Leave the orchard and head back into the valley.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale light, soft mud, bare orchard rows stretching back into the still-bare trees. Ossivyn is standing in his knee-deep hole with both hands on the spade.",
+        "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale light, soft mud, bare orchard rows stretching back into the still-bare trees. Ossivyn is standing in his knee-deep hole with both hands on the spade, having just declined the frame.",
         "npcsPresent": [
           {
             "name": "Ossivyn Tallow",
-            "state": "Standing in the planting hole, spade in hand, looking at Loki steadily — not offended, just settled in his answer."
+            "state": "Standing in the planting hole, spade returned to the earth, settled and unhurried — not unfriendly, simply unmoved."
           },
           {
             "name": "Cy",
-            "state": "Perched on the fence post nearest the gate, lens tilted toward the sapling."
+            "state": "Perched on the fence post nearest the gate, lens tilted toward the sapling. Has not moved."
           }
         ],
         "objects": [
@@ -227,69 +212,37 @@
         ],
         "threads": [
           "Ossivyn's offer to help dig still stands — the spare spade is unclaimed",
-          "The sapling's root structure is unexamined"
+          "The sapling's root structure is unexamined",
+          "Someone may have planted a tree here for Loki — the encounter flavor suggests it; the thread is unasked"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "ossivyn-tallow",
           "name": "Ossivyn Tallow",
-          "role": "Tender of the Slow Orchard",
-          "gender": "man",
-          "pronouns": "he/him",
-          "description": "A broad-shouldered man in a worn planting coat, standing easy in a knee-deep hole with a spade. Patient in the way of someone who works in forty-year increments.",
-          "note": "Declined Loki's offer to name the tree in exchange for analysis — explained that the tree names itself through the child's own reckoning; a stranger's name given ahead of time is a different gift than the one he is giving.",
+          "note": "Heard The Better Story — received it as well-made, and still declined. His certainty about the planting is not hostility; it is a thing finished in him already.",
           "learned": [
-            "The tree names itself through the child who inherits it — a name given by a stranger ahead of time is not part of the gift being planted here."
+            "A name laid under the name is still a stranger's name — the child finds only their own."
           ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the Planting Gate, standing in the planting hole, spare spade against the post."
+          "statusNote": "At the Planting Gate, standing in the hole, spade in hand, waiting to see if Loki will dig."
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "Ossivyn Tallow is mid-planting at the gate — hole dug, sapling bundled, spare spade available.",
-          "subPlace": {
-            "name": "The Planting Gate",
-            "parent": "The Slow Orchard",
-            "note": "Where Ossivyn digs a forty-year tree for a child not yet born. Knee-deep hole, bundled sapling, spare spade against the fence post.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "ossivyn-tallow",
-          "label": "Ossivyn Tallow",
-          "kind": "person",
-          "entityId": "ossivyn-tallow",
-          "fact": "The trees here name themselves through the children who inherit them. A stranger's name given ahead of time is a different gift — not the one Ossivyn is planting.",
-          "links": [
-            "the-slow-orchard"
-          ]
-        }
-      ],
-      "offer": {
-        "thing": "Cy has tilted its lens toward the sapling's root ball without being asked — the beginning of an assessment it hasn't been told to make",
-        "from": "Cy's compulsion to assess and repair things, which runs ahead of any instruction"
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange at the gate"
+        "why": "a short exchange at the gate"
       }
     },
     "sceneState": {
-      "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale light, soft mud, bare orchard rows stretching back into the still-bare trees. Ossivyn is standing in his knee-deep hole with both hands on the spade.",
+      "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale light, soft mud, bare orchard rows stretching back into the still-bare trees. Ossivyn is standing in his knee-deep hole with both hands on the spade, having just declined the frame.",
       "npcsPresent": [
         {
           "name": "Ossivyn Tallow",
-          "state": "Standing in the planting hole, spade in hand, looking at Loki steadily — not offended, just settled in his answer."
+          "state": "Standing in the planting hole, spade returned to the earth, settled and unhurried — not unfriendly, simply unmoved."
         },
         {
           "name": "Cy",
-          "state": "Perched on the fence post nearest the gate, lens tilted toward the sapling."
+          "state": "Perched on the fence post nearest the gate, lens tilted toward the sapling. Has not moved."
         }
       ],
       "objects": [
@@ -299,7 +252,8 @@
       ],
       "threads": [
         "Ossivyn's offer to help dig still stands — the spare spade is unclaimed",
-        "The sapling's root structure is unexamined"
+        "The sapling's root structure is unexamined",
+        "Someone may have planted a tree here for Loki — the encounter flavor suggests it; the thread is unasked"
       ]
     }
   },
@@ -623,16 +577,18 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Declined Loki's offer to name the tree in exchange for analysis — explained that the tree names itself through the child's own reckoning; a stranger's name given ahead of time is a different gift than the one he is giving."
+        "[d1] Declined Loki's offer to name the tree in exchange for analysis — explained that the tree names itself through the child's own reckoning; a stranger's name given ahead of time is a different gift than the one he is giving.",
+        "[d1] Heard The Better Story — received it as well-made, and still declined. His certainty about the planting is not hostility; it is a thing finished in him already."
       ],
       "knownFacts": [
-        "The tree names itself through the child who inherits it — a name given by a stranger ahead of time is not part of the gift being planted here."
+        "The tree names itself through the child who inherits it — a name given by a stranger ahead of time is not part of the gift being planted here.",
+        "A name laid under the name is still a stranger's name — the child finds only their own."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Planting Gate, standing in the planting hole, spare spade against the post.",
+      "statusNote": "At the Planting Gate, standing in the hole, spade in hand, waiting to see if Loki will dig.",
       "domains": {
         "primary": "rootkin"
       },
@@ -897,7 +853,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1555,23 +1511,23 @@
     }
   },
   "tendencies": {
-    "devotion": 2.7282249687760114,
-    "cerebral": 18.226464268376,
-    "social": 11.266542187306444,
-    "strategic": 8.561972675028613,
-    "cautious": 8.386943041375224,
-    "amorous": 3.568413711938344,
-    "generous": 3.4467228021929994,
-    "ruthless": 1.1349661280703927,
-    "risky": 2.091336440432151,
-    "patient": 0.9506249999999999
+    "devotion": 2.660019344556611,
+    "cerebral": 17.770802661666597,
+    "social": 12.984878632623783,
+    "strategic": 8.347923358152897,
+    "cautious": 8.177269465340842,
+    "amorous": 3.4792033691398854,
+    "generous": 3.3605547321381746,
+    "ruthless": 1.1065919748686328,
+    "risky": 2.039053029421347,
+    "patient": 0.9268593749999999
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 80,
+  "actionCount": 81,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1752,8 +1708,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785191418779,
-  "rev": 156,
+  "updatedAt": 1785191594510,
+  "rev": 158,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2116,7 +2072,7 @@
           "entityId": "ossivyn-tallow",
           "type": "npc",
           "birthWeight": 6,
-          "engagementScore": 3,
+          "engagementScore": 5,
           "tier": "established",
           "rating": "R+",
           "provenance": {
@@ -2136,17 +2092,24 @@
             {
               "kind": "fact",
               "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
             }
           ],
           "createdDay": 1,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 1
+          "lastAttentionDay": 1,
+          "depthTier": "established"
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
-        "image": "https://image.pollinations.ai/prompt/A%20man%20in%20his%20late%20sixties%2C%20heavyset%20and%20deliberate%20in%20the%20way%20of%20someone%20who%20has%20carried%20things%20all%20his%20life%20and%20made%20peace%20with%20the%20carrying.%20Skin%20the%20colour%20of%20old%20heartwood%20%E2%80%94%20deep%20reddish-brown%2C%20we%2C%20character%20portrait%2C%20named%20Ossivyn%20Tallow%2C%20Tender%20of%20the%20Slow%20Orchard%20%E2%80%94%20he%20is%20planting%20a%20tree%20today%20for%20a%20child%20not%20yet%20conceived%2C%20because%20the%20%2C%20Unhurried%20but%20not%20dreamy%20%E2%80%94%20fully%20present%2C%20like%20a%20man%20who%20has%20decided%20time%20is%20not%20his%20enemy.%20Speaks%20i%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13169&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/A%20man%20in%20his%20late%20sixties%2C%20heavyset%20and%20deliberate%20in%20the%20way%20of%20someone%20who%20has%20carried%20things%20all%20his%20life%20and%20made%20peace%20with%20the%20carrying.%20Skin%20the%20colour%20of%20old%20heartwood%20%E2%80%94%20deep%20reddish-brown%2C%20we%2C%20character%20portrait%2C%20named%20Ossivyn%20Tallow%2C%20Tender%20of%20the%20Slow%20Orchard%20%E2%80%94%20he%20is%20planting%20a%20tree%20today%20for%20a%20child%20not%20yet%20conceived%2C%20because%20the%20%2C%20Unhurried%20but%20not%20dreamy%20%E2%80%94%20fully%20present%2C%20like%20a%20man%20who%20has%20decided%20time%20is%20not%20his%20enemy.%20Speaks%20i%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13169&nologo=true",
+        "history": "Ossivyn Tallow did not inherit the Slow Orchard. He arrived at it the way most things in the Orchard arrive — before anyone knew he was needed. The previous tender, a woman named Ceth Worrall, had been planting for forty years and said nothing when she left except that the records were in the split-bark box under the grafting bench and that the Quickwood near the eastern wall was in the middle…",
+        "relationships": "Ceth Worrall is gone in the way that people go when they have finished a thing and do not look back. Ossivyn does not know if she is dead. He knows her handwriting better than he knows most living faces, and he has amended her records in a hand he has tried to keep compatible with hers, so the box reads as one continuous document. He thinks of this as a kind of conversation. The family he is…"
       }
     },
     "location": {
@@ -2196,7 +2159,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 1
+    "the_quickwood": 2
   },
   "opLossPending": false,
   "sessions": [
@@ -2227,10 +2190,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T22:30:18.775Z",
+      "lastAt": "2026-07-27T22:33:14.509Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 51
+      "beats": 52
     }
   ],
   "establishedFacts": [
@@ -2268,17 +2231,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 83,
-    "choices": 83,
+    "sceneSummary": 84,
+    "choices": 84,
     "characterDeltas": 37,
-    "scene": 83,
+    "scene": 84,
     "placeUpdates": 12,
     "codexUpdates": 72,
-    "timeOps": 82,
+    "timeOps": 83,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 20,
-    "npcUpdates": 74,
+    "npcUpdates": 75,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -2288,7 +2251,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 83,
+  "_opTurns": 84,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2300,7 +2263,7 @@
       "falsecraft": 2,
       "the_wrong_reality": 3,
       "the_misdirect": 1,
-      "the_better_story": 6,
+      "the_better_story": 7,
       "prism_sight": 7
     },
     "coActivations": {

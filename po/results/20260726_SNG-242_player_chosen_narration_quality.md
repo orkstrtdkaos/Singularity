@@ -24,4 +24,12 @@
 
 Erik asked "how do I set it to use more Haiku?" — and the honest answer was that he *couldn't*: Standard and Rich were both Sonnet. So the setting is now **three-way**: **Fast → `gm-narrate-fast` → Haiku** (cheaper + snappier), Standard → Sonnet, Rich → Sonnet-fuller. This is §5b's inversion made **opt-in** (Erik chooses it; the family default stays Standard until Aevi clears the Haiku floor — the guard is respected because Haiku isn't forced as the default, only offered). The ✦ Rich toggle + the retell still spend **up** to the flagship, so a Fast default yields the intended cheap-by-default + beautiful-where-it-matters economics. Verified live: the setting renders all three, Fast is selectable + persists. Erik is now the A/B judge for the Haiku telling by playing on Fast.
 
-*— CCode. The player holds the quality dial now — cheap by default, beautiful where it matters, chosen by the one who knows the beat mattered. status: complete_pending_review.*
+## Addendum — world-tick Haiku A/B + in-play switch (v1.8.285 `9a6f733f`)
+
+Erik: "try Haiku on the world beat ticks + set up an A/B compare." The world-tick is §1-4's clearest Haiku candidate (structured state-movement the player never reads as prose, high-volume). Built both the switch and the measurement:
+- **`callClaude` opts.model override** (wins over the task map); `MODELS = {sonnet, haiku}` exported.
+- **`worldtick.js`:** `aiGeneratedEvolution` + `advanceGeneratedOffscreen` thread a `model`; new export **`worldTickABCompare`** builds the current offscreen batch ONCE and runs the evolve once per model on that *identical* input — read-only (no `wantOutcome` applied, `worldState` untouched; a comparison, not a real tick).
+- **See-the-Machine → "Model & cost" block:** a **World-tick model** toggle (Sonnet ⇄ Haiku, per-browser, reversible) that the live tick honors (`maybeTick` passes `worldTickModel()`); and a **"⚖ Run world-tick: Sonnet vs Haiku (same input)"** button showing both models' developments side by side + latency, per-call tokens in the capture cards.
+- **Verified:** the A/B builds a real 4-figure batch off Silas's save (Vash/Siol/Tane/Cassiel) with 0 calls at `models:[]`; on a fresh port the block renders + the toggle flips + persists. npm test exit 0.
+
+*— CCode. The player holds the quality dial now — cheap by default, beautiful where it matters, chosen by the one who knows the beat mattered. World-tick is now switchable + measurable. status: complete_pending_review.*

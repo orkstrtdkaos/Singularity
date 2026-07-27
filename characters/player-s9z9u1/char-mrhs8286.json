@@ -1956,86 +1956,92 @@
         "player": "look around for the radiant",
         "summary": "Silas reads the reclamation bowl's edge and finds old radiant burn-marks in the frost — someone was here weeks ago, watching the site with a bright craft, and gave it nothing.",
         "narration": "You straighten from the rim and turn slowly, reading the bowl and the ground around it. Dawn light is coming in low from the east, thin and pale, and you let Order-Sense run quiet and loose beneath your looking — not a push, just an open hand.\n\nYou find something. Not strong, not recent, but there. At the bowl's northwest edge, where the frost collar was thickest this morning, the ground holds a faint pattern of mineral displacement — the kind of line a focused radiant working leaves when it heats groundwater quickly from above. The burn pattern is old. Weeks, not days. Someone stood here and used a craft at range, pressing down into the ring from the outside. The reclamation site received it — or absorbed it — or simply kept running through it. You cannot tell which from the residue alone. But they were here, and they were looking at the same thing you were looking at, and they did not give it an instruction.\n\nPell crosses from the bowl's edge to your side without being asked. She crouches where you are looking and lays two fingers against the frost-edged ground. After a moment she says, quietly, \"Something was hot here. Not forge-hot. Brighter.\" She lifts her hand and looks at you. \"Recent enough that it sat in the frost, not under it.\"\n\nHuginn shifts on the ring's far lip and turns its good eye northwest — back along the path toward the gate and Logana — and holds still there, watching."
+      },
+      {
+        "player": "Pell, what shall we do next?  and Veth, what should i learn next?",
+        "summary": "Pell names the next move plainly — walk back to the gate, check Logana, go home. Veth names the next lesson: sit with a death that cannot be helped. Huginn watches northwest.",
+        "narration": "Pell is quiet for a moment, fingers still lifted from the ground where she read the burn-mark. Then she looks up at you with the direct, unsentimental attention she gives a piece of iron that has told her what it is.\n\n\"Walk back to the gate,\" she says. \"Check on Logana. Then go home and let Mara know in person what you told her on the sheet — a message is fine, but a face is better.\" She stands, brushing frost from her knee. \"The work here is done. Don't make it into something it isn't by standing over it.\"\n\nVeth turns away from the burn-mark and considers you with the same unhurried quality she brings to every question that actually matters.\n\n\"You read a death-site tonight — not a person, a system — and you gave it room to finish its own work rather than ending it by force,\" she says. \"That is the disposition. But you have not yet sat with something that cannot be helped. You have been very good at finding the thing that can be turned aside.\" She pauses. \"Find something dying that you can do nothing for, and attend it. Not to read it. Not to fix it. Just to be the one who stays. That is the next lesson. That is always the next lesson.\"\n\nHuginn shifts on the bowl's far rim and looks at you. It says nothing. It is watching northwest, toward the gate road, and the quality of its attention is the one it uses when an ending it has been expecting is arriving on schedule."
       }
     ],
     "lastTurn": {
-      "narration": "You straighten from the rim and turn slowly, reading the bowl and the ground around it. Dawn light is coming in low from the east, thin and pale, and you let Order-Sense run quiet and loose beneath your looking — not a push, just an open hand.\n\nYou find something. Not strong, not recent, but there. At the bowl's northwest edge, where the frost collar was thickest this morning, the ground holds a faint pattern of mineral displacement — the kind of line a focused radiant working leaves when it heats groundwater quickly from above. The burn pattern is old. Weeks, not days. Someone stood here and used a craft at range, pressing down into the ring from the outside. The reclamation site received it — or absorbed it — or simply kept running through it. You cannot tell which from the residue alone. But they were here, and they were looking at the same thing you were looking at, and they did not give it an instruction.\n\nPell crosses from the bowl's edge to your side without being asked. She crouches where you are looking and lays two fingers against the frost-edged ground. After a moment she says, quietly, \"Something was hot here. Not forge-hot. Brighter.\" She lifts her hand and looks at you. \"Recent enough that it sat in the frost, not under it.\"\n\nHuginn shifts on the ring's far lip and turns its good eye northwest — back along the path toward the gate and Logana — and holds still there, watching.",
-      "sceneSummary": "Silas reads the reclamation bowl's edge and finds old radiant burn-marks in the frost — someone was here weeks ago, watching the site with a bright craft, and gave it nothing.",
+      "narration": "Pell is quiet for a moment, fingers still lifted from the ground where she read the burn-mark. Then she looks up at you with the direct, unsentimental attention she gives a piece of iron that has told her what it is.\n\n\"Walk back to the gate,\" she says. \"Check on Logana. Then go home and let Mara know in person what you told her on the sheet — a message is fine, but a face is better.\" She stands, brushing frost from her knee. \"The work here is done. Don't make it into something it isn't by standing over it.\"\n\nVeth turns away from the burn-mark and considers you with the same unhurried quality she brings to every question that actually matters.\n\n\"You read a death-site tonight — not a person, a system — and you gave it room to finish its own work rather than ending it by force,\" she says. \"That is the disposition. But you have not yet sat with something that cannot be helped. You have been very good at finding the thing that can be turned aside.\" She pauses. \"Find something dying that you can do nothing for, and attend it. Not to read it. Not to fix it. Just to be the one who stays. That is the next lesson. That is always the next lesson.\"\n\nHuginn shifts on the bowl's far rim and looks at you. It says nothing. It is watching northwest, toward the gate road, and the quality of its attention is the one it uses when an ending it has been expecting is arriving on schedule.",
+      "sceneSummary": "Pell names the next move plainly — walk back to the gate, check Logana, go home. Veth names the next lesson: sit with a death that cannot be helped. Huginn watches northwest.",
       "choices": [
         {
-          "label": "Use Order-Sense to read what purpose brought someone here — what were they looking for in the site's design?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "label": "Walk back to the gate now — check on Logana and the relay node before leaving the Zone",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
           "intentTags": [
-            "study"
+            "travel",
+            "careful"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Use The Attended End — read whether the burn-mark is ending (fading, gone soon) or if its pattern is still active in the ground",
+          "label": "Ask Huginn what it sees to the northwest before you move",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use The Attended End on the reclamation site itself — read what it is ending, and let it be witnessed before you leave",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "devote"
           ],
           "abilityId": "the-attended-end",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Ask Huginn plainly what it saw — it has been watching this site longer than any of you, and it knows when something was ending here",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Walk the bowl's full perimeter — look for more sign, footprints, a direction they came from or left toward",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Go back to the burn-mark and read it more carefully with Order-Sense — you want to know the shape of the craft that made it",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
-            "scout"
+            "study",
+            "careful"
           ],
-          "abilityId": null,
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar eased except at the northwest edge, which holds the oldest frost and the faint radiant burn-pattern. Pale dawn light from the east. Mist thinning.",
+        "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — winding down, frost collar eased. Pale dawn light from the east. Mist thinning. The radiant burn-pattern at the northwest edge is the only thing here that does not yet have an answer.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Crouched beside Silas at the northwest edge of the bowl, fingers lifted from the ground, watching him."
+            "state": "Standing now, frost brushed from her knee, Memory across her shoulders, watching Silas with level attention."
           },
           {
             "name": "Veth",
-            "state": "Standing a few paces back, watching Pell and Silas at the burn-mark with quiet attention."
+            "state": "Turned from the burn-mark, her two-finger read complete, watching Silas with the patient weight of a teacher who has just named the lesson."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the far lip of the ring, eye turned northwest toward the gate road, holding still."
+            "state": "Perched on the far lip of the ring, watching northwest toward the gate road, still."
           }
         ],
         "objects": [
-          "The reclamation ring — low, pale, flush with the earth, frost collar eased except at the northwest edge",
-          "Radiant burn-pattern — a mineral displacement line at the bowl's northwest edge, weeks old, pressed from above",
+          "The reclamation ring — low, pale, flush with the earth, frost collar eased, winding down",
+          "Radiant burn-pattern — mineral displacement at the bowl's northwest edge, weeks old",
           "Memory — across Pell's shoulders",
           "Waymarker — pocketed",
           "Shadow-sheet — folded and returned to coat pocket"
         ],
         "threads": [
-          "Huginn is watching northwest toward the gate — something has its attention",
-          "The radiant presence was here weeks ago, watching the site, and gave it no instruction — their purpose is unknown",
-          "The party has not yet walked back to the gate and Logana"
+          "Huginn is watching northwest toward the gate — its attention has the quality of an expected ending arriving on schedule",
+          "The radiant presence was here weeks ago, watching the site — their purpose and identity remain unknown",
+          "Logana and the relay node at the wolverine clearing have not yet been checked since the reclamation work completed",
+          "Veth's lesson named plainly: find something dying that cannot be helped, and attend it"
         ]
       },
       "npcUpdates": [
@@ -2043,72 +2049,67 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Read the radiant burn-mark through ironsense at the bowl's northwest edge — confirmed it as bright-heat, not forge-heat, sitting in the frost not under it. Moved to Silas's side without being asked.",
+          "note": "Named the next move plainly — walk back to the gate, check Logana, go home. Stood and brushed frost from her knee. No ceremony.",
+          "statusNote": "Standing at the reclamation bowl, Memory across her shoulders, ready to walk back to the gate."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Named the next lesson to Silas: attend a death that cannot be helped. Recognized that Silas has been skilled at finding the thing that can be turned aside, and said plainly that the next lesson is always to sit with what cannot.",
           "learned": [
-            "The burn-mark at the reclamation bowl's northwest edge is bright-heat, not forge-heat — recent enough to sit in the frost layer, not beneath it."
+            "Silas has attended death-sites and mutable endings well; he has not yet sat with an ending that could not be turned aside."
           ],
-          "skillsObserved": [
-            "ironsense discrimination of radiant heat from forge-heat at a ground-level burn site"
-          ],
-          "statusNote": "At the bowl's northwest edge beside Silas, fingers lifted from the burn-mark, watching him."
+          "statusNote": "Standing at the reclamation bowl, the teaching given, watching Silas."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-light-that-will-not-dim",
-          "label": "The Light That Will Not Dim",
+          "topic": "the-ashwarden-thread",
+          "label": "The Ashwarden Thread",
           "kind": "mystery",
-          "fact": "A radiant burn-pattern was found at the reclamation bowl's northwest edge on Day 14 at dawn — weeks old, pressed from above, consistent with a focused radiant working at range. Someone stood here and used a bright craft to examine the reclamation site. They gave it no instruction. Pell confirmed through ironsense: bright-heat, sitting in the frost layer, not under it.",
+          "fact": "Veth named the next lesson plainly at the reclamation bowl at dawn: sit with something dying that cannot be helped. Not to read it, not to fix it — to be the one who stays. Silas has been good at finding the thing that can be turned aside; the lesson he has not yet taken is the one where nothing can be.",
           "links": [
-            "the-water-crisis",
-            "the-second-thread",
-            "millbrook"
+            "veth-stillwater-ondra",
+            "the-attended-end",
+            "deathsense",
+            "ashwarden"
           ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "A radiant burn-pattern was found at the bowl's northwest edge on Day 14 at dawn — weeks old, pressed from above. Someone used a radiant craft here to examine the reclamation site and gave it nothing.",
-          "flag": {
-            "radiant_presence_sign": "true",
-            "radiant_presence_age": "weeks",
-            "radiant_gave_no_instruction": "true"
-          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a careful survey of the bowl's perimeter at dawn"
-      },
-      "sceneEnded": false
+        "why": "A short conversation at the bowl's edge — a few minutes, no more."
+      }
     },
     "sceneState": {
-      "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — frost collar eased except at the northwest edge, which holds the oldest frost and the faint radiant burn-pattern. Pale dawn light from the east. Mist thinning.",
+      "setting": "Outdoor, dawn, early spring. The shallow catchment bowl south of the left-branch path. The reclamation ring is still and quiet — winding down, frost collar eased. Pale dawn light from the east. Mist thinning. The radiant burn-pattern at the northwest edge is the only thing here that does not yet have an answer.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Crouched beside Silas at the northwest edge of the bowl, fingers lifted from the ground, watching him."
+          "state": "Standing now, frost brushed from her knee, Memory across her shoulders, watching Silas with level attention."
         },
         {
           "name": "Veth",
-          "state": "Standing a few paces back, watching Pell and Silas at the burn-mark with quiet attention."
+          "state": "Turned from the burn-mark, her two-finger read complete, watching Silas with the patient weight of a teacher who has jus"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the far lip of the ring, eye turned northwest toward the gate road, holding still."
+          "state": "Perched on the far lip of the ring, watching northwest toward the gate road, still."
         }
       ],
       "objects": [
-        "The reclamation ring — low, pale, flush with the earth, frost collar eased excep",
-        "Radiant burn-pattern — a mineral displacement line at the bowl's northwest edge,",
+        "The reclamation ring — low, pale, flush with the earth, frost collar eased, wind",
+        "Radiant burn-pattern — mineral displacement at the bowl's northwest edge, weeks ",
         "Memory — across Pell's shoulders",
         "Waymarker — pocketed",
         "Shadow-sheet — folded and returned to coat pocket"
       ],
       "threads": [
-        "Huginn is watching northwest toward the gate — something has its attention",
-        "The radiant presence was here weeks ago, watching the site, and gave it no instruction — their purpose is unknown",
-        "The party has not yet walked back to the gate and Logana"
+        "Huginn is watching northwest toward the gate — its attention has the quality of an expected ending arriving on schedule",
+        "The radiant presence was here weeks ago, watching the site — their purpose and identity remain unknown",
+        "Logana and the relay node at the wolverine clearing have not yet been checked since the reclamation work completed",
+        "Veth's lesson named plainly: find something dying that cannot be helped, and attend it"
       ]
     }
   },
@@ -3536,7 +3537,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Hand settled on Memory's grip without being asked — reading Silas's face through the cast.",
         "[d14] Watching Silas's face as the warden's answer lands — hand still on Memory.",
         "[d14] Watching Silas's face through the braided cast — hand steady on Memory's grip.",
         "[d14] Stepped forward and put a hand on Silas's shoulder without being asked — bearing witness to the combined craft, present and steady.",
@@ -3545,7 +3545,8 @@
         "[d14] Asked who is supposed to be at the other end of the circuit — watching the tree-line throughout, present and steady.",
         "[d14] Stopped watching the tree-line when the Working Model resolved — shifted her weight toward Silas, reading his face.",
         "[d14] Confirmed the reclamation site is running through ironsense — felt the order in it from the bowl's edge.",
-        "[d14] Read the radiant burn-mark through ironsense at the bowl's northwest edge — confirmed it as bright-heat, not forge-heat, sitting in the frost not under it. Moved to Silas's side without being asked."
+        "[d14] Read the radiant burn-mark through ironsense at the bowl's northwest edge — confirmed it as bright-heat, not forge-heat, sitting in the frost not under it. Moved to Silas's side without being asked.",
+        "[d14] Named the next move plainly — walk back to the gate, check Logana, go home. Stood and brushed frost from her knee. No ceremony."
       ],
       "knownFacts": [
         "The shadow-twin answers only the named caller — it can be held by another person but will not fly to their hand without the caller's word",
@@ -3566,7 +3567,7 @@
         "ironsense discrimination of radiant heat from forge-heat at "
       ],
       "status": "active",
-      "statusNote": "At the bowl's northwest edge beside Silas, fingers lifted from the burn-mark, watching him.",
+      "statusNote": "Standing at the reclamation bowl, Memory across her shoulders, ready to walk back to the gate.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -4239,7 +4240,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Moved to Silas's right and went still — reading the hollow as the combined craft ran, not watching Silas but watching the structure.",
         "[d14] Held still through the handoff — a warden's recognition of the watch received, no ceremony.",
         "[d14] Reading the sealed hollow at dawn — a warden's final confirmation of a post properly closed.",
         "[d14] Named the three-step plan in warden's order — relay node first, reclamation site second, the decision third. Stated plainly that the third step is not an engineering question.",
@@ -4248,17 +4248,18 @@
         "[d14] Crouched beside Silas and confirmed the instruction seated — two fingers on the rim, plain reading, no ceremony.",
         "[d14] Named plainly what the Order-Sense read confirmed — the site is connected to more than the creek. No alarm. Plain acknowledgment.",
         "[d14] Confirmed the amended instruction was received — both watershed and well-thread seating correctly. Named the outcome plainly: the whole job is done.",
-        "[d14] Lifted her fingers from the ring and named the morning's work complete. Plain and satisfied."
+        "[d14] Lifted her fingers from the ring and named the morning's work complete. Plain and satisfied.",
+        "[d14] Named the next lesson to Silas: attend a death that cannot be helped. Recognized that Silas has been skilled at finding the thing that can be turned aside, and said plainly that the next lesson is always to sit with what cannot."
       ],
       "knownFacts": [
-        "Witnessed one prior raising — a plain boar on the east branch, fourteen years ago, held for a grief-sealed hollow for four days then released at burial",
         "Logana's Zone-thread distinction is unlike anything she has seen — the claim is structural and does not release the way an ashwarden's own purpose would",
         "The old death site to the north reads as an ending held open — not completed, the Zone organizing around it",
         "The hollow was built as a receiver for a watershed-readiness signal from the relay node south. The question was never sent in fifteen years.",
         "The reclamation site is not broken — it is working, and it needs to be told what to do by a living warden",
         "The reclamation site received the closing instruction and is winding down — confirmed by contact read.",
         "The reclamation ring's matrix feeds a buried substrate-thread running southwest toward the lower watershed — seeding downstream wells with clean water for fifteen years.",
-        "The reclamation site's closing instruction can be amended before the site fully winds down — both the watershed work and the well-seeding thread received their respective closings."
+        "The reclamation site's closing instruction can be amended before the site fully winds down — both the watershed work and the well-seeding thread received their respective closings.",
+        "Silas has attended death-sites and mutable endings well; he has not yet sat with an ending that could not be turned aside."
       ],
       "skillsObserved": [
         "plain technical description of Ashwarden contact craft under",
@@ -4271,7 +4272,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the reclamation bowl — the work named done, ready to walk back to the gate.",
+      "statusNote": "Standing at the reclamation bowl, the teaching given, watching Silas.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5549,17 +5550,6 @@
     "news": [
       {
         "day": 13,
-        "worldDay": 23,
-        "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir has hit trouble — Someone at the plaza asked Siol directly where they were going and why, in a tone that made 'nowhere in particular' sound like an accusation — the world pressed in, and for a moment the going-on felt less possible than it had the day before."
-      },
-      {
-        "day": 13,
-        "worldDay": 24,
-        "text": "Pip Cotter, Mara's Errand-Runner: Pip reached the halfway waypoint ahead of schedule and, while waiting for the gate-keeper to log her passage, talked her way into carrying a sealed reply-note back — the return trip now has its small purpose, and she is quietly pleased with herself.",
-        "tier": "ambient"
-      },
-      {
-        "day": 13,
         "worldDay": 24,
         "text": "Calvar: A gap opened in the cloud cover at an hour when it shouldn't have, and the readings it produced don't match the model he has been trusting — not wrong enough to act on yet, but wrong enough that he wrote the discrepancy down, which is the first crack in his reason to stay.",
         "tier": "ambient"
@@ -5665,14 +5655,26 @@
         "worldDay": 26,
         "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir has hit trouble — Someone at the plaza asked them, not unkindly, where they were headed — and Siol gave an answer that was true enough, but the question sat wrong afterward, because going on as they are requires not being asked to name it.",
         "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 27,
+        "text": "Calvar: A second instrument recorded a pressure differential Calvar had previously dismissed as sensor drift — the numbers now form a pattern he cannot attribute to noise, and he has been sitting with it for three hours without finding a counter-reading. — and that thread has run its course.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 27,
+        "text": "Vash: She found someone who was in the corridor at the same time and, without revealing what she heard, asked a careful sideways question — the answer confirmed that what she overheard was not routine, and the weight of that has settled into something she can no longer defer.",
+        "tier": "ambient"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-26T20:01:24.163Z",
-    "lastTickWorldDay": 26,
-    "lastCanonWorldDay": 26,
-    "lastGenCount": 644,
-    "turnsSinceOffer": 8,
+    "lastSharedReadAt": "2026-07-27T00:53:01.205Z",
+    "lastTickWorldDay": 27,
+    "lastCanonWorldDay": 27,
+    "lastGenCount": 648,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
@@ -5703,15 +5705,15 @@
         "lastOutcome": "done"
       },
       "vash": {
-        "progress": 1,
+        "progress": 2,
         "status": "active",
-        "updatedWorldDay": 26,
-        "lastOutcome": "stall"
+        "updatedWorldDay": 27,
+        "lastOutcome": "progress"
       },
       "calvar": {
-        "progress": 3,
-        "status": "active",
-        "updatedWorldDay": 26,
+        "progress": 4,
+        "status": "resolved",
+        "updatedWorldDay": 27,
         "lastOutcome": "progress"
       },
       "siol-elven-traveler-at-the-hub-plaza-tal": {
@@ -5719,6 +5721,12 @@
         "status": "active",
         "updatedWorldDay": 26,
         "lastOutcome": "problem"
+      },
+      "tane-solr": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 27,
+        "lastOutcome": "stall"
       }
     },
     "assignments": {
@@ -6950,7 +6958,6 @@
         "label": "Calvar — the Engineer",
         "kind": "person",
         "facts": [
-          "[d3] Silas laid out the complete evidence chain to Calvar — Leth, Vash, Rennic in the intake log, Fendt's written testimony, the gap in the calibration files as the one remaining unknown. Fendt's Testimony",
           "[d3] Calvar was taught the seventh-band specification method directly by Pell's father — a mentor relationship. He believed Pell's father dead. The name landing in the room visibly moved him: seven years o",
           "[d3] Calvar wrote to Pell's father after the Great Transition — letters that eventually stopped. He read the silence as death, held that assumption for seven years. The two men had a genuine mentor-student",
           "[d3] Calvar filed a copy of the seventh-band calibration files as personal correspondence — Pell's father's own letters with margin notations in his hand. Rennic missed it. Calvar sent copies to three loca",
@@ -6973,7 +6980,8 @@
           "[d13] [while away] The window gave him nothing that technically required him to move — the data stayed ambiguous, and so did he.",
           "[d13] [while away] A gap opened in the cloud cover at an hour when it shouldn't have, and the readings it produced don't match the model he has been trusting — not wrong enough to act on yet, but wrong enough that he wrote the discrepancy down, which is the first crack in his reason to stay.",
           "[d14] [while away] A gap in the cloud cover last night gave Calvar an unusually clean read, and the numbers came out slightly wrong — not wrong enough to be certain, but wrong enough that he wrote the figure down twice and underlined it.",
-          "[d14] [while away] A gap in the cloud cover this morning gave him the clearest read he has had in six days, and the numbers from it do not match the numbers from this window — not wildly, but enough that he wrote it down twice and underlined it."
+          "[d14] [while away] A gap in the cloud cover this morning gave him the clearest read he has had in six days, and the numbers from it do not match the numbers from this window — not wildly, but enough that he wrote it down twice and underlined it.",
+          "[d14] [while away] A second instrument recorded a pressure differential Calvar had previously dismissed as sensor drift — the numbers now form a pattern he cannot attribute to noise, and he has been sitting with it for three hours without finding a counter-reading."
         ],
         "links": [
           "vash-lens-grinder-east-room",
@@ -7042,7 +7050,8 @@
           "[d13] [while away] Vash placed the overheard phrase against something she already knew and felt the two pieces click together — she still doesn't have the whole shape, but she now knows the piece she held was real, and that it mattered.",
           "[d13] [while away] She turned the overheard words over again today but reached no new edge — the piece still doesn't show her what it belongs to, and she is no closer to knowing whether her silence was an error or simply a pause.",
           "[d14] [while away] Vash turned the overheard words over again today but without new context they remain the same shapeless fragment — she still cannot tell whether what she held was the edge of something or just noise.",
-          "[d14] [while away] She turned the overheard words over again through a long, quiet shift and still cannot place what kind of thing they were a piece of — the shape of it won't resolve."
+          "[d14] [while away] She turned the overheard words over again through a long, quiet shift and still cannot place what kind of thing they were a piece of — the shape of it won't resolve.",
+          "[d14] [while away] She found someone who was in the corridor at the same time and, without revealing what she heard, asked a careful sideways question — the answer confirmed that what she overheard was not routine, and the weight of that has settled into something she can no longer defer."
         ],
         "links": [
           "leth-archive-complaint",
@@ -7101,19 +7110,24 @@
         "kind": "mystery",
         "facts": [
           "[d3] Silas named aloud — to Calvar, Pell, and Huginn — that the Ashwarden work is his own track on the road. Huginn acknowledged it without denying it. The bird has not objected to being called his tie to ",
-          "[d3] Asked what it sees ending in Silas, Huginn chose one word after three breaths: 'Quiet.' It did not elaborate. The work has begun."
+          "[d3] Asked what it sees ending in Silas, Huginn chose one word after three breaths: 'Quiet.' It did not elaborate. The work has begun.",
+          "[d14] Veth named the next lesson plainly at the reclamation bowl at dawn: sit with something dying that cannot be helped. Not to read it, not to fix it — to be the one who stays. Silas has been good at finding the thing that can be turned aside; the lesson he has not yet taken is the one where nothing…"
         ],
         "links": [
           "huginn",
           "find-the-engineer",
           "the-edge-district-ledger",
-          "the-water-crisis"
+          "the-water-crisis",
+          "veth-stillwater-ondra",
+          "the-attended-end",
+          "deathsense",
+          "ashwarden"
         ],
         "aliases": [
           "Huginn — The Ashwarden Thread"
         ],
         "createdDay": 3,
-        "updatedDay": 3
+        "updatedDay": 14
       },
       "the-low-lamp-inn": {
         "id": "the-low-lamp-inn",
@@ -7382,22 +7396,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.893495154626343,
-    "cerebral": 22.456452096774132,
-    "social": 4.702323607676553,
-    "generous": 2.3774169666726315,
-    "cautious": 11.634730686109405,
-    "physical": 2.6356016784329674,
-    "risky": 0.6321574302803769,
-    "ruthless": 0.26936547021741925,
-    "carousing": 0.22371098449365112,
-    "amorous": 0.8223604017627408,
-    "patient": 0.49832561951817866,
-    "stealth": 0.000048087944033161216,
-    "devotion": 1.965032162274491,
-    "craft": 1.7065335744701657,
-    "leadership": 0.7420600410278189,
-    "deception": 0.23028609238800818
+    "strategic": 22.346157775760684,
+    "cerebral": 21.895040794354777,
+    "social": 4.584765517484639,
+    "generous": 2.3179815425058155,
+    "cautious": 11.34386241895667,
+    "physical": 2.5697116364721433,
+    "risky": 0.6163534945233674,
+    "ruthless": 0.26263133346198375,
+    "carousing": 0.21811820988130984,
+    "amorous": 0.8018013917186723,
+    "patient": 0.4858674790302242,
+    "stealth": 0.00004688574543233218,
+    "devotion": 1.9159063582176288,
+    "craft": 1.6638702351084116,
+    "leadership": 0.7235085400021234,
+    "deception": 0.22452894007830798
   },
   "aptitudes": [
     "strategist",
@@ -7406,7 +7420,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 880,
+  "actionCount": 881,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7796,8 +7810,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785113382221,
-  "rev": 1527,
+  "updatedAt": 1785113817376,
+  "rev": 1530,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8222,10 +8236,6 @@
           "canonTier": "variant",
           "offscreen": [
             {
-              "worldDay": 19,
-              "note": "Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window."
-            },
-            {
               "worldDay": 20,
               "note": "Calvar noticed a drift of 0.003 in the seventh-band baseline reading and spent the night re-checking his instruments rather than the sky, unwilling to admit whether he is hoping to find instrument error or confirm the drift is real."
             },
@@ -8255,6 +8265,11 @@
             {
               "worldDay": 26,
               "note": "A gap in the cloud cover this morning gave him the clearest read he has had in six days, and the numbers from it do not match the numbers from this window — not wildly, but enough that he wrote it down twice and underlined it.",
+              "outcome": "progress"
+            },
+            {
+              "worldDay": 27,
+              "note": "A second instrument recorded a pressure differential Calvar had previously dismissed as sensor drift — the numbers now form a pattern he cannot attribute to noise, and he has been sitting with it for three hours without finding a counter-reading.",
               "outcome": "progress"
             }
           ]
@@ -8356,10 +8371,6 @@
           "canonTier": "variant",
           "offscreen": [
             {
-              "worldDay": 19,
-              "note": "Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question."
-            },
-            {
               "worldDay": 20,
               "note": "Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since."
             },
@@ -8390,6 +8401,11 @@
               "worldDay": 26,
               "note": "She turned the overheard words over again through a long, quiet shift and still cannot place what kind of thing they were a piece of — the shape of it won't resolve.",
               "outcome": "stall"
+            },
+            {
+              "worldDay": 27,
+              "note": "She found someone who was in the corridor at the same time and, without revealing what she heard, asked a careful sideways question — the answer confirmed that what she overheard was not routine, and the weight of that has settled into something she can no longer defer.",
+              "outcome": "progress"
             }
           ]
         },
@@ -8789,6 +8805,11 @@
             {
               "worldDay": 19,
               "note": "Tane spent the early part of the day watching two apprentices spar and said nothing, but afterward he smoothed the sand at the center-line himself, a thing he normally leaves to the groundskeepers."
+            },
+            {
+              "worldDay": 27,
+              "note": "The opponent arranged for today fell through before they reached the floor, and Tane spent the morning hitting the post alone, which told him nothing he didn't already know about himself.",
+              "outcome": "stall"
             }
           ]
         },
@@ -11214,7 +11235,7 @@
   "syncedAt": 1785071380339,
   "teachers": {},
   "regionsKnown": {
-    "valley": 632,
+    "valley": 633,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11401,10 +11422,10 @@
     {
       "id": "sess-18",
       "startedAt": "2026-07-27T00:49:42.217Z",
-      "lastAt": "2026-07-27T00:49:42.217Z",
+      "lastAt": "2026-07-27T00:56:57.374Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -11674,11 +11695,11 @@
     "scene": 251,
     "npcUpdates": 223,
     "factUpdates": 20,
-    "placeUpdates": 47,
+    "placeUpdates": 46,
     "codexUpdates": 159,
     "timeOps": 245,
     "imagePrompt": 7,
-    "sceneEnded": 62,
+    "sceneEnded": 61,
     "itemUpdates": 5,
     "questUpdates": 41,
     "offer": 23,

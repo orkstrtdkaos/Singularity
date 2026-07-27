@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 28,
-  "xp": 2711,
+  "xp": 2728,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -185,7 +185,7 @@
   "maxHealth": 165,
   "health": 165,
   "maxEnergy": 235,
-  "energy": 226,
+  "energy": 224,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1976,28 +1976,39 @@
         "player": null,
         "summary": "A Hub runner cuts through the wolverine clearing at dawn — message-tube at her hip, headed south.",
         "narration": "The sound comes before the shape — boot-leather on frost-hard ground, fast and uneven, someone moving with purpose and not much care for who hears it. A figure breaks from the left-branch path into the clearing's western edge: a young woman, pack riding high on her back, a sealed message-tube bouncing at her hip. She takes in Logana in a single wide-eyed look, skips sideways without stopping, and keeps running — south, toward the made gate and the main branch road beyond it. She has not seen you yet, or has seen you and decided you are not her problem.\n\nThe message-tube is the thing. It is sealed with a banded clasp — not a trader's errand, not a neighbor's note. Something with enough weight behind it that someone paid for a runner at dawn in the Zone fringe. The tube catches the low eastern light as she rounds the downed tree's near end, and you can read the color of the clasp from here: the blue-grey of Hub registry wax.\n\nPell is already watching the line the runner is taking. Huginn drops one branch without sound and angles his head after her. You have a few breaths before she is through the clearing and onto the path."
+      },
+      {
+        "player": "Shadowstep into her path and call out to her to stop.",
+        "summary": "Silas Shadowsteps into the Hub runner's path and names himself plainly — the gate is new, take the right arch.",
+        "narration": "You step sideways into the shadow beneath the downed tree's canopy — one breath, one move, the dark between two patches of low morning shade — and you come out of it six feet ahead of her on the frost-hard ground, facing south, blocking the line she was running.\n\nShe pulls up hard. Her boots skid in the frost and she catches herself with one hand out, pack lurching. She stares at you. Her hand goes to the message-tube at her hip, not reaching for it, just touching it — the reflex of someone who knows what she is carrying.\n\n'Easy,' you say. 'I am not here for the tube. But if that message is bound south, you should know the gate on this branch is new and has a mark on it — take the right arch and you will clear through clean. I built it yesterday.' You keep your voice level. You do not move toward her."
       }
     ],
     "lastTurn": {
-      "narration": "The sound comes before the shape — boot-leather on frost-hard ground, fast and uneven, someone moving with purpose and not much care for who hears it. A figure breaks from the left-branch path into the clearing's western edge: a young woman, pack riding high on her back, a sealed message-tube bouncing at her hip. She takes in Logana in a single wide-eyed look, skips sideways without stopping, and keeps running — south, toward the made gate and the main branch road beyond it. She has not seen you yet, or has seen you and decided you are not her problem.\n\nThe message-tube is the thing. It is sealed with a banded clasp — not a trader's errand, not a neighbor's note. Something with enough weight behind it that someone paid for a runner at dawn in the Zone fringe. The tube catches the low eastern light as she rounds the downed tree's near end, and you can read the color of the clasp from here: the blue-grey of Hub registry wax.\n\nPell is already watching the line the runner is taking. Huginn drops one branch without sound and angles his head after her. You have a few breaths before she is through the clearing and onto the path.",
-      "sceneSummary": "A Hub runner cuts through the wolverine clearing at dawn — message-tube at her hip, headed south.",
+      "narration": "You step sideways into the shadow beneath the downed tree's canopy — one breath, one move, the dark between two patches of low morning shade — and you come out of it six feet ahead of her on the frost-hard ground, facing south, blocking the line she was running.\n\nShe pulls up hard. Her boots skid in the frost and she catches herself with one hand out, pack lurching. She stares at you. Her hand goes to the message-tube at her hip, not reaching for it, just touching it — the reflex of someone who knows what she is carrying.\n\n'Easy,' you say. 'I am not here for the tube. But if that message is bound south, you should know the gate on this branch is new and has a mark on it — take the right arch and you will clear through clean. I built it yesterday.' You keep your voice level. You do not move toward her.",
+      "sceneSummary": "Silas Shadowsteps into the Hub runner's path and names himself plainly — the gate is new, take the right arch.",
       "choices": [
         {
-          "label": "Read the ground and cut her angle — get ahead of her path and call out before she clears the tree-line",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
+          "label": "Ask where she is headed and what the message concerns — politely, no pressure",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "persuade"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": "the-chase"
+          "trivial": true
         },
         {
-          "label": "Use Order-Sense to read the tube's design from here — confirm what the clasp and seal actually are before committing to a chase",
+          "label": "Let her go — step aside and say nothing more",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Read her and the tube with Order-Sense — see what design she is part of and where this errand fits",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -2006,58 +2017,41 @@
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false,
-          "encounterId": "the-chase"
+          "trivial": false
         },
         {
-          "label": "Call out plainly from where you stand — your voice carries, and a runner who hears her name or the word 'Hub' may slow on her own",
+          "label": "Offer to walk her to the gate personally — she moves faster with someone who knows the ground",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": "the-chase"
-        },
-        {
-          "label": "Let her go — a Hub runner on a sealed errand is doing her job, and whatever she carries will reach its destination without you",
-          "attribute": "mental",
-          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "help"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Outdoor, dawn, early spring. The wolverine clearing, left-branch Disputed Zone. Frost-hard ground, downed dead tree at the far edge, pale eastern light. A young female runner is crossing the clearing's western edge at speed, headed south toward the made gate.",
+        "setting": "Outdoor, dawn, early spring. The wolverine clearing, left-branch Disputed Zone. Frost-hard ground, the downed dead tree at the clearing's far edge, pale eastern light through the canopy. The Hub runner has pulled up short in front of Silas, six feet from the tree's shadow.",
         "npcsPresent": [
           {
             "name": "Logana",
-            "state": "Standing at the downed tree's base, skull turning to track the runner's movement."
+            "state": "Standing at the downed tree's base, skull angled toward the stopped runner — still, watching."
           },
           {
             "name": "Pell",
-            "state": "On her feet at the clearing's edge, Memory across her shoulders, watching the runner's line."
+            "state": "On her feet at the clearing's edge, Memory across her shoulders, watching the confrontation without moving in."
           },
           {
             "name": "Veth",
-            "state": "Two steps behind Silas, still and unhurried, watching without comment."
+            "state": "Two steps behind where Silas was, still and unhurried, watching without comment."
           },
           {
             "name": "Huginn",
-            "state": "Dropped one branch, angling his head south after the runner. Not alarmed. Attentive."
+            "state": "On the low branch, head turned toward the runner — attentive, not alarmed."
           },
           {
             "name": "Hub runner",
-            "state": "Crossing the clearing at speed — pack high, sealed Hub-wax message-tube bouncing at her hip, headed south."
+            "state": "Pulled up short, one hand steadying the message-tube at her hip, staring at Silas. Breathing hard from the run. Not fleeing yet."
           }
         ],
         "objects": [
@@ -2066,65 +2060,53 @@
           "Memory — across Pell's shoulders",
           "Waymarker — in Silas's coat pocket",
           "Shadow-sheet — folded in coat pocket",
-          "Hub message-tube (sealed, blue-grey wax clasp) — at the runner's hip"
+          "Hub message-tube (sealed, blue-grey wax clasp) — at the runner's hip, her hand resting near it"
         ],
         "threads": [
-          "The runner is crossing the clearing and will reach the tree-line in a few breaths unless stopped",
-          "The message-tube carries Hub registry wax — its destination and contents unknown",
+          "The runner has stopped but not spoken — she is deciding whether to trust Silas or bolt",
+          "The message-tube's destination and contents remain unknown",
           "Veth's lesson stands: find something dying that cannot be helped, and attend it",
           "The Zone-thread in Logana's warding is looser but not resolved",
-          "The radiant presence at the reclamation bowl remains unidentified — burn-mark points northwest",
-          "Huginn has not looked away from the northwest"
+          "The radiant presence at the reclamation bowl remains unidentified — burn-mark points northwest"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "hub-runner-dawn",
+          "op": "update",
+          "npcId": "hub-runner",
           "name": "Hub Runner",
-          "role": "Message courier, Hub registry — moving fast through the Zone fringe at dawn",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "Young woman, pack riding high, a sealed Hub-wax message-tube at her hip. Moving with the urgency of someone on a timed errand, not looking for conversation.",
-          "note": "Cut through the wolverine clearing at dawn without slowing — wide-eyed at Logana, then kept running south.",
+          "note": "Pulled up short when Silas Shadowstepped into her path — hand on the message-tube, wary but not yet fleeing. Received a plain warning about the made gate.",
           "status": "active",
-          "statusNote": "Crossing the clearing at speed, headed south toward the made gate and the main branch road."
-        }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "A young Hub registry runner, female, carrying a sealed message-tube through the Zone fringe at dawn — on a timed errand, not expecting to be stopped",
-          "why": "She entered the scene with a specific purpose and a sealed Hub message; she needs a stable identity if intercepted"
+          "statusNote": "Stopped in the wolverine clearing, message-tube in hand, deciding whether to trust Silas or push through."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief moment — the runner's crossing, a few breaths of decision time"
+        "why": "A quick exchange at the clearing's edge — a few breaths of confrontation."
       }
     },
     "sceneState": {
-      "setting": "Outdoor, dawn, early spring. The wolverine clearing, left-branch Disputed Zone. Frost-hard ground, downed dead tree at the far edge, pale eastern light. A young female runner is crossing the clearing's western edge at speed, headed south toward the made gate.",
+      "setting": "Outdoor, dawn, early spring. The wolverine clearing, left-branch Disputed Zone. Frost-hard ground, the downed dead tree at the clearing's far edge, pale eastern light through the canopy. The Hub runner has pulled up short in front of Silas, six feet from the tree's shadow.",
       "npcsPresent": [
         {
           "name": "Logana",
-          "state": "Standing at the downed tree's base, skull turning to track the runner's movement."
+          "state": "Standing at the downed tree's base, skull angled toward the stopped runner — still, watching."
         },
         {
           "name": "Pell",
-          "state": "On her feet at the clearing's edge, Memory across her shoulders, watching the runner's line."
+          "state": "On her feet at the clearing's edge, Memory across her shoulders, watching the confrontation without moving in."
         },
         {
           "name": "Veth",
-          "state": "Two steps behind Silas, still and unhurried, watching without comment."
+          "state": "Two steps behind where Silas was, still and unhurried, watching without comment."
         },
         {
           "name": "Huginn",
-          "state": "Dropped one branch, angling his head south after the runner. Not alarmed. Attentive."
+          "state": "On the low branch, head turned toward the runner — attentive, not alarmed."
         },
         {
           "name": "Hub runner",
-          "state": "Crossing the clearing at speed — pack high, sealed Hub-wax message-tube bouncing at her hip, headed south."
+          "state": "Pulled up short, one hand steadying the message-tube at her hip, staring at Silas. Breathing hard from the run. Not flee"
         }
       ],
       "objects": [
@@ -2133,11 +2115,11 @@
         "Memory — across Pell's shoulders",
         "Waymarker — in Silas's coat pocket",
         "Shadow-sheet — folded in coat pocket",
-        "Hub message-tube (sealed, blue-grey wax clasp) — at the runner's hip"
+        "Hub message-tube (sealed, blue-grey wax clasp) — at the runner's hip, her hand r"
       ],
       "threads": [
-        "The runner is crossing the clearing and will reach the tree-line in a few breaths unless stopped",
-        "The message-tube carries Hub registry wax — its destination and contents unknown",
+        "The runner has stopped but not spoken — she is deciding whether to trust Silas or bolt",
+        "The message-tube's destination and contents remain unknown",
         "Veth's lesson stands: find something dying that cannot be helped, and attend it",
         "The Zone-thread in Logana's warding is looser but not resolved",
         "The radiant presence at the reclamation bowl remains unidentified — burn-mark points northwest"
@@ -4733,14 +4715,15 @@
       },
       "relationship": 0,
       "history": [
-        "[d14] Cut through the wolverine clearing at dawn without slowing — wide-eyed at Logana, then kept running south."
+        "[d14] Cut through the wolverine clearing at dawn without slowing — wide-eyed at Logana, then kept running south.",
+        "[d14] Pulled up short when Silas Shadowstepped into her path — hand on the message-tube, wary but not yet fleeing. Received a plain warning about the made gate."
       ],
       "knownFacts": [],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Crossing the clearing at speed, headed south toward the made gate and the main branch road.",
+      "statusNote": "Stopped in the wolverine clearing, message-tube in hand, deciding whether to trust Silas or push through.",
       "lastSeen": {
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
@@ -5732,7 +5715,7 @@
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
     "lastGenCount": 648,
-    "turnsSinceOffer": 12,
+    "turnsSinceOffer": 13,
     "recentOffers": [
       {
         "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
@@ -7456,22 +7439,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.2428162355825,
-    "cerebral": 21.81397315513351,
-    "social": 5.333392720058835,
-    "generous": 2.203531203844591,
-    "cautious": 10.783759212020684,
-    "physical": 2.442832124421331,
-    "risky": 0.5859210407312762,
-    "ruthless": 0.2496639113722983,
-    "carousing": 0.20734862326842016,
-    "amorous": 0.7622124480025628,
-    "patient": 0.4618777722531069,
-    "stealth": 0.00004457076175161078,
-    "devotion": 1.8213084817806333,
-    "craft": 1.5817166422499336,
-    "leadership": 0.6877853058395185,
-    "deception": 0.21344282366194153
+    "strategic": 20.711745829692937,
+    "cerebral": 21.268623826255173,
+    "social": 5.200057902057364,
+    "generous": 2.148442923748476,
+    "cautious": 10.514165231720167,
+    "physical": 2.381761321310798,
+    "risky": 0.5712730147129942,
+    "ruthless": 1.243422313587991,
+    "carousing": 0.20216490768670964,
+    "amorous": 0.7431571368024987,
+    "patient": 0.4503308279467792,
+    "stealth": 0.00004345649270782051,
+    "devotion": 1.7757757697361174,
+    "craft": 1.5421737261936852,
+    "leadership": 0.6705906731935305,
+    "deception": 0.208106753070393
   },
   "aptitudes": [
     "strategist",
@@ -7480,10 +7463,18 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 883,
+  "actionCount": 884,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Tiv Calser",
+      "url": "https://image.pollinations.ai/prompt/A%20girl%20of%20about%20seventeen%2C%20lean%20and%20unhurried-looking%20despite%20the%20pace%20she%20keeps.%20Early-spring%20mud%20has%20dried%20in%20a%20hem-stripe%20on%20her%20grey%20courier%20trousers.%20Ash-brown%20hair%20cut%20close%20on%20the%20sides%20and%20tie%2C%20character%20portrait%2C%20named%20Tiv%20Calser%2C%20Hub%20registry%20runner%20%E2%80%94%20timed%20courier%20on%20a%20sealed%20errand%20she%20is%20not%20supposed%20to%20explain%2C%20Brisk%20and%20practical%2C%20answers%20in%20the%20fewest%20words%20the%20situation%20allows.%20Not%20rude%20%E2%80%94%20just%20running%20on%20a%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=60286&nologo=true",
+      "caption": "Tiv Calser",
+      "worldDay": 27,
+      "at": "2026-07-27T01:05:52.520Z"
+    },
     {
       "kind": "ability",
       "prompt": "The Maintained Order",
@@ -7859,19 +7850,11 @@
       "caption": "Marrow's Wings",
       "worldDay": 23,
       "at": "2026-07-23T20:22:08.920Z"
-    },
-    {
-      "kind": "location",
-      "prompt": "Ashwarden March Road",
-      "url": "https://image.pollinations.ai/prompt/Ashwarden%20March%20Road%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Ashwarden%20March%20Road.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=9497&nologo=true",
-      "caption": "Ashwarden March Road",
-      "worldDay": 23,
-      "at": "2026-07-23T20:16:44.626Z"
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785114320148,
-  "rev": 1536,
+  "updatedAt": 1785114534252,
+  "rev": 1539,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -9764,6 +9747,90 @@
         },
         "peopleSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20broad-chested%20man%20in%20his%20mid-thirties%2C%20built%20for%20endurance%20rather%20than%20force%20%E2%80%94%20the%20kind%20of%20frame%20that%20still%20looks%20like%20it%20could%20cover%20forty%20miles%20and%20then%20split%20wood.%20Amber%20eyes%2C%20unhurried.%20Tawny%20sk%2C%20character%20portrait%2C%20named%20Bryn%20Callowell%2C%20Former%20south-circuit%20post%20rider%20turned%20deliberate%20messenger%20%E2%80%94%20the%20man%20who%20rode%20the%20Zone's%20margins%20lo%2C%20Unhurried%20in%20all%20things%20%E2%80%94%20speaks%20the%20way%20a%20man%20moves%20who%20has%20spent%20years%20in%20a%20saddle%20reading%20weather%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=29545&nologo=true"
+      },
+      "tiv-calser": {
+        "schemaVersion": 1,
+        "id": "tiv-calser",
+        "name": "Tiv Calser",
+        "role": "Hub registry runner — timed courier on a sealed errand she is not supposed to explain",
+        "homeLocation": "left_branch_entrance_valley",
+        "communityId": "hub.registry.runners",
+        "personality": {
+          "warmth": 0.4,
+          "trust": 0.2,
+          "candor": 0.5,
+          "patience": 0.3
+        },
+        "spectrum": {
+          "body_mind": -0.4,
+          "emotional_logical": -0.2,
+          "concrete_abstract": -0.6,
+          "falsehood_truth": 0.3
+        },
+        "voiceHints": "Brisk and practical, answers in the fewest words the situation allows. Not rude — just running on a clock she can hear ticking. When pressed she doesn't panic; she calculates. Lies by omission rather than invention: 'routine transit' is technically true. Genuinely dislikes being touched or searched. Voice goes flat and careful when she feels the conversation going sideways.",
+        "knowledge": [
+          "The Left Branch Entrance by pre-dawn light — which stones are slick, where the path-markers were moved last season, the sentry rotation she was told to expect and the one she has actually observed",
+          "Hub registry seal-protocols: she knows what she is carrying is sealed, who it is addressed to, and that she is not to break the seal under any circumstances short of her own death",
+          "The Zone fringe at dawn is the window — later in the morning the disputed stretches get watched more carefully, and she knows why without knowing all of it",
+          "How to read a checkpoint stop: whether the party blocking her is authorized, curious, or dangerous, and which of those this is"
+        ],
+        "wants": "To complete the run, log the delivery, and be back inside Hub boundaries before the morning cold burns off the valley. She has another errand this afternoon.",
+        "fears": "That the seal gets broken before it reaches the addressee — not because she knows what is inside but because a broken seal means a failed run and a failed run means she loses the routes she has spent two years earning. Also: that whoever has stopped her knows more about the tube's contents than she does.",
+        "reactsToReputation": {
+          "hub_affiliated": "cautious professionalism — she will confirm her authorization and expect them to confirm theirs",
+          "zone_local": "polite and minimal; she is not here to make friction with valley people",
+          "authority": "cooperative up to the line where cooperation would require surrendering the tube or breaking the seal; past that line she goes very still",
+          "threatening": "does not run immediately — calculates odds first, then decides; she is faster than she looks"
+        },
+        "appearance": "A girl of about seventeen, lean and unhurried-looking despite the pace she keeps. Early-spring mud has dried in a hem-stripe on her grey courier trousers. Ash-brown hair cut close on the sides and tied back in a tight knot that will not catch on anything. A runner's satchel worn diagonally, the message-tube slotted inside its own padded sleeve and closed with a brass catch she fingers without thinking whenever she pauses. Pale from a winter of indoor work with the Registry, but her eyes are already adapted to the low valley light. Small scar on her left jaw — old, not recent. She smells of cold air and wax seal.",
+        "equipment": {
+          "carried": "Sealed Hub message-tube (brass fittings, wax seal intact, addressee-marked in registry cipher); runner's satchel; a short transit-pass bearing the Hub registrar's stamp; a folding knife she will not lead with",
+          "worn": "Grey courier livery, unadorned; fingerless gloves; boots resoled no more than a month ago"
+        },
+        "currentStatus": {
+          "errand": "Sealed delivery, origin Hub Registry, destination not disclosed to intercepting parties",
+          "timing": "On schedule at intercept; has a delivery window she has not yet missed but is aware of",
+          "sealIntegrity": "Intact",
+          "mood": "Alert, mildly annoyed, not frightened yet"
+        },
+        "functions": [
+          "move",
+          "conceal",
+          "reveal"
+        ],
+        "functionsNote": "move — she is the vector; her function is to carry something across a contested threshold. conceal — she will not confirm contents, destination, or sender beyond what her transit-pass legally requires. reveal — if trust is established or the situation forces it, she becomes a thread that leads somewhere: the tube, the sender, the route, the timing of this particular dawn crossing.",
+        "people": "human",
+        "domains": {
+          "primary": "syllogist",
+          "secondary": "somatic",
+          "tertiary": "umbral"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). She reads situations like problems and solves them on her feet (syllogist primary); the work is physical and her body is her tool (somatic secondary); navigating the Zone fringe at first light, routing through shadow-windows and unmarked crossings, has given her an instinct for what is hidden and where the edges are (umbral tertiary). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+        "_gen": {
+          "entityId": "tiv-calser",
+          "type": "npc",
+          "birthWeight": 42,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-disputed-zone-left-branch-entrance",
+            "day": 14,
+            "worldDay": null,
+            "hint": "A young Hub registry runner, female, carrying a sealed message-tube through the Zone fringe at dawn — on a timed errand,",
+            "why": "She entered the scene with a specific purpose and a sealed Hub message; she needs a stable identity if intercepted"
+          },
+          "attentionHistory": [],
+          "createdDay": 14,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20girl%20of%20about%20seventeen%2C%20lean%20and%20unhurried-looking%20despite%20the%20pace%20she%20keeps.%20Early-spring%20mud%20has%20dried%20in%20a%20hem-stripe%20on%20her%20grey%20courier%20trousers.%20Ash-brown%20hair%20cut%20close%20on%20the%20sides%20and%20tie%2C%20character%20portrait%2C%20named%20Tiv%20Calser%2C%20Hub%20registry%20runner%20%E2%80%94%20timed%20courier%20on%20a%20sealed%20errand%20she%20is%20not%20supposed%20to%20explain%2C%20Brisk%20and%20practical%2C%20answers%20in%20the%20fewest%20words%20the%20situation%20allows.%20Not%20rude%20%E2%80%94%20just%20running%20on%20a%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=60286&nologo=true"
       }
     },
     "location": {
@@ -10540,7 +10607,7 @@
       "order_sense": 93,
       "palework": 31,
       "deathsense": 43,
-      "shadowstep": 24,
+      "shadowstep": 25,
       "the-attended-end": 44,
       "wildcraft": 6,
       "the_raised_thing": 18,
@@ -10636,7 +10703,7 @@
       "the_kept_breath": 22,
       "the_raised_thing": 25,
       "light_borne": 25,
-      "shadowstep": 25,
+      "shadowstep": 27,
       "the_shielding_word": 25,
       "marrow-s-wings": 25,
       "ask_the_dead": 26,
@@ -11295,7 +11362,7 @@
   "syncedAt": 1785071380339,
   "teachers": {},
   "regionsKnown": {
-    "valley": 636,
+    "valley": 637,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11482,10 +11549,10 @@
     {
       "id": "sess-18",
       "startedAt": "2026-07-27T00:49:42.217Z",
-      "lastAt": "2026-07-27T01:05:20.146Z",
+      "lastAt": "2026-07-27T01:08:54.249Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 5
+      "beats": 6
     }
   ],
   "company": [
@@ -11785,15 +11852,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 254,
-    "choices": 254,
+    "sceneSummary": 255,
+    "choices": 255,
     "characterDeltas": 108,
-    "scene": 254,
-    "npcUpdates": 226,
+    "scene": 255,
+    "npcUpdates": 227,
     "factUpdates": 20,
     "placeUpdates": 47,
     "codexUpdates": 161,
-    "timeOps": 248,
+    "timeOps": 249,
     "imagePrompt": 7,
     "sceneEnded": 62,
     "itemUpdates": 5,
@@ -11811,7 +11878,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 254,
+  "_opTurns": 255,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -12015,19 +12082,7 @@
   "_pendingLedger": [],
   "locationState": {},
   "_applyFailures": null,
-  "activeEncounter": {
-    "defId": "re-re_urgent_courier",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-re_urgent_courier",
-      "type": "challenge",
-      "status": "active",
-      "round": 1,
-      "log": [],
-      "stageIndex": 0,
-      "stagesDone": []
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 25,
     "lastBeat": "witness_power"

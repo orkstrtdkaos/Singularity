@@ -53,6 +53,10 @@
     {
       "abilityId": "prism_sight",
       "level": 1
+    },
+    {
+      "abilityId": "harmonic_voice",
+      "level": 1
     }
   ],
   "alignment": {
@@ -243,72 +247,81 @@
         "player": "Look into the passage with Prism Sight before committing — read what's below",
         "summary": "Loki read the passage with Prism Sight — old stone, creature-traces going down, a diffuse warmth deep below suggesting a spring-fed water source. The creatures are gone. The door stands open. The visit is complete.",
         "narration": "You bring Prism Sight up and lean into the passage's mouth without crossing the threshold.\n\nThe lattice crowds you the same as before — dense, noisy, nine signals for every one you want — but the craft settles into the dark below and begins to read.\n\nThe passage descends steeply. The walls are old worked stone, older than the chamber behind you, and they hold heat only where something has recently touched them. You find a broad smear of warmth at head-height on the left wall — the three creatures, going down single-file, each leaving a brief body-trace on the stone they brushed. The traces are fresh. They are already far below.\n\nDeeper, the passage opens into something wider. You can feel it from here the way you feel a room before you step into it — the heat-map diffuses and spreads rather than staying channeled. There are more warm traces on the floor of that wider space. Older ones. The creatures come up this way often. And there is a source of heat that is not the creatures and is not mechanical. It is low, diffuse, and continuous — the kind of warmth a large body of water holds when it is fed from a spring deep enough that it never fully chills. Whatever is down there has been down there a long time.\n\nCy's lens irides once beside your knee. There is nothing threatening in what you have read. There is also nothing that names itself or explains its business. The passage is real, the space below is real, and the passage will not ask again.\n\nThe elder of the Unlit Deep has not moved. The pale blue flame burns at their side. The Standing Unlit faces forward. The visit has given what it will give — and the open door is its last word.\n\n*You feel it settle into you — a new steadiness. (Level 3: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*"
+      },
+      {
+        "player": null,
+        "summary": "A glass-stalker surfaces in the outer chamber — visible only in the bracket's reflection — and the contest opens.",
+        "narration": "The passage below breathes cold air up around your ankles. You are still leaning into its mouth, Prism Sight open, when Cy's legs all lock at once — every segment going rigid, the lamp swinging on its hook, and the lens irising wide and staying there.\n\nYou have learned to read that particular stillness.\n\nThere is no sound. There is no shape. There is a wrongness in the air of the outer chamber behind you — a place where the pale blue flame's light should fall and does not, a gap in the room that has the wrong geometry. Not shadow. Not a body. A correction the space is making around something that isn't quite there.\n\nThe Standing Unlit has not moved. They are looking forward, not at the wrongness, and their stillness now has a different quality — the stillness of something that already knows.\n\nYou catch it in the bracket-face of the flame's housing. Polished metal, just enough surface to serve as a mirror. There: a shape that exists only in the reflection, a lean angled thing riding the edge between the seam you just opened and the elder's seated form. It is already oriented toward you. It was there before you noticed it. The angle you were not watching.\n\nThe glass-stalker does not wait to be seen. It moves the moment you see it."
       }
     ],
     "lastTurn": {
-      "narration": "You bring Prism Sight up and lean into the passage's mouth without crossing the threshold.\n\nThe lattice crowds you the same as before — dense, noisy, nine signals for every one you want — but the craft settles into the dark below and begins to read.\n\nThe passage descends steeply. The walls are old worked stone, older than the chamber behind you, and they hold heat only where something has recently touched them. You find a broad smear of warmth at head-height on the left wall — the three creatures, going down single-file, each leaving a brief body-trace on the stone they brushed. The traces are fresh. They are already far below.\n\nDeeper, the passage opens into something wider. You can feel it from here the way you feel a room before you step into it — the heat-map diffuses and spreads rather than staying channeled. There are more warm traces on the floor of that wider space. Older ones. The creatures come up this way often. And there is a source of heat that is not the creatures and is not mechanical. It is low, diffuse, and continuous — the kind of warmth a large body of water holds when it is fed from a spring deep enough that it never fully chills. Whatever is down there has been down there a long time.\n\nCy's lens irides once beside your knee. There is nothing threatening in what you have read. There is also nothing that names itself or explains its business. The passage is real, the space below is real, and the passage will not ask again.\n\nThe elder of the Unlit Deep has not moved. The pale blue flame burns at their side. The Standing Unlit faces forward. The visit has given what it will give — and the open door is its last word.\n\n*You feel it settle into you — a new steadiness. (Level 3: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*",
-      "sceneSummary": "Loki read the passage with Prism Sight — old stone, creature-traces going down, a diffuse warmth deep below suggesting a spring-fed water source. The creatures are gone. The door stands open. The visit is complete.",
+      "narration": "The passage below breathes cold air up around your ankles. You are still leaning into its mouth, Prism Sight open, when Cy's legs all lock at once — every segment going rigid, the lamp swinging on its hook, and the lens irising wide and staying there.\n\nYou have learned to read that particular stillness.\n\nThere is no sound. There is no shape. There is a wrongness in the air of the outer chamber behind you — a place where the pale blue flame's light should fall and does not, a gap in the room that has the wrong geometry. Not shadow. Not a body. A correction the space is making around something that isn't quite there.\n\nThe Standing Unlit has not moved. They are looking forward, not at the wrongness, and their stillness now has a different quality — the stillness of something that already knows.\n\nYou catch it in the bracket-face of the flame's housing. Polished metal, just enough surface to serve as a mirror. There: a shape that exists only in the reflection, a lean angled thing riding the edge between the seam you just opened and the elder's seated form. It is already oriented toward you. It was there before you noticed it. The angle you were not watching.\n\nThe glass-stalker does not wait to be seen. It moves the moment you see it.",
+      "sceneSummary": "A glass-stalker surfaces in the outer chamber — visible only in the bracket's reflection — and the contest opens.",
       "choices": [
         {
-          "label": "Descend — follow the passage down to whatever holds that warmth",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Hold the reflection — keep the bracket-face in your eye and track it by what it bends, not by where it is",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "risky",
-            "travel"
+            "defend",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": "hard-ground"
         },
         {
-          "label": "Take what you came for and go — you have Sable's answer; the city is waiting",
-          "attribute": "practical",
+          "label": "Cast the Wrong Reality — give it a false read of where you are standing so the strike lands on empty stone",
+          "attribute": "mental",
           "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask the elder one last thing before you leave — what is the warmth below",
-          "attribute": "social",
-          "subAttribute": "rapport",
           "difficulty": 15,
           "intentTags": [
-            "negotiate"
+            "feint",
+            "defend"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "the_wrong_reality",
+          "energyCost": 2,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": "hard-ground"
         },
         {
-          "label": "A glass-stalker is somewhere in this dark — you can feel it before you see it. Face it or give ground now.",
+          "label": "Throw the Misdirect — a sharp distraction aimed at the shape's reflected position, buy the half-second before it reaches you",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 15,
+          "intentTags": [
+            "feint",
+            "risky"
+          ],
+          "abilityId": "the_misdirect",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": "hard-ground"
+        },
+        {
+          "label": "Drop and press back against the open passage mouth — force it to come at you from one angle only",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
             "defend",
-            "guard"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": "beast_glass_stalker"
+          "encounterId": "hard-ground"
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands fully open, passage descending into old dark, smelling of cold water. Morning, no natural light.",
+        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands fully open, passage descending into old dark behind Loki. Morning, no natural light. A glass-stalker is present — visible only as a wrongness in the light and a lean shape in the bracket's polished face.",
         "npcsPresent": [
           {
             "name": "Unlit Elder",
@@ -316,62 +329,71 @@
           },
           {
             "name": "Standing Unlit",
-            "state": "Beside the stair passage. Still. Forward-facing. Settled."
+            "state": "Beside the stair passage. Still. Forward-facing. Looking nowhere near the wrongness — already knows."
           },
           {
             "name": "Cy",
-            "state": "At Loki's knee beside the passage mouth. Lens irised once; returned to stillness."
+            "state": "Legs locked rigid, lamp swinging, lens irised wide and holding — its alarm posture."
           }
         ],
         "objects": [
-          "The pale blue flame — bracket-mounted, burning, no wick",
+          "The pale blue flame — bracket-mounted, burning, no wick; its housing serves as a polished reflection surface",
           "The seam in the stone beside the bracket — fully open, passage descending beyond",
-          "The passage to the inner chamber — gap in worked stone, no door"
+          "The passage to the inner chamber — gap in worked stone, no door",
+          "The glass-stalker — present in the reflection; a lean angled shape riding the edge between seam and elder; not visible directly"
         ],
         "threads": [
-          "The passage below is open — a warm diffuse source and older creature-traces detected; what exactly lives there is unread",
-          "What Loki carries back to the city: Sable's answer, the seam's nature, the passage below",
-          "Whether to descend or depart — the door is open and will not ask again",
-          "A glass-stalker has surfaced in the dark nearby"
+          "The glass-stalker has oriented toward Loki and is already moving — the contest is joined",
+          "The passage below remains open — the choice to descend or depart is suspended mid-encounter",
+          "The Standing Unlit's stillness suggests this thing is known to the Unlit — they are not alarmed, only waiting"
         ]
       },
-      "codexUpdates": [
-        {
-          "topic": "the-seam-beside-the-bracket",
-          "label": "The Seam Beside the Bracket",
-          "kind": "mystery",
-          "fact": "Prism Sight read the passage beyond: old worked stone, creature-traces going down single-file on the left wall, and a diffuse continuous warmth deep below — the quality of a large spring-fed water source. The creatures use this passage regularly. Whatever is down there has been down there a long time.",
-          "links": [
-            "the-unlit-deep",
-            "the-creature-at-the-threshold",
-            "the-water-crisis",
-            "terminus-seals-beneath-the-valley"
-          ]
-        }
-      ],
       "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "unlit-elder",
-          "name": "Unlit Elder",
-          "note": "Did not speak or move during the Prism Sight read of the passage. The visit has reached its end for them.",
-          "statusNote": "Seated by the pale blue flame in the outer chamber — the visit is at its end; the elder is present but finished."
-        },
         {
           "op": "update",
           "npcId": "standing-unlit",
           "name": "Standing Unlit",
-          "note": "Remained still and forward-facing through the passage read. The creatures' return and the open door are both closed matters for them.",
-          "statusNote": "Beside the stair passage, settled and forward-facing — at rest."
+          "note": "Did not react to the glass-stalker's presence — stillness changed quality, suggesting they already know it is here",
+          "learned": [
+            "The glass-stalker's presence in the outer chamber did not alarm the Standing Unlit"
+          ],
+          "statusNote": "Beside the stair passage, forward-facing, in the particular stillness of a thing already known"
+        },
+        {
+          "op": "update",
+          "npcId": "unlit-elder",
+          "name": "Unlit Elder",
+          "note": "Has not moved through the glass-stalker's surfacing",
+          "statusNote": "Seated by the pale blue flame — present and motionless; the encounter is not their concern"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "glass-stalker",
+          "label": "The Glass-Stalker",
+          "kind": "mystery",
+          "fact": "A near-invisible predator visible only in reflective surfaces or by the wrongness it bends around itself. Oriented and moving the moment it is seen in the bracket's polished face — it strikes from the angle you are not watching. The Unlit know of it and hold no alarm.",
+          "links": [
+            "the-unlit-deep",
+            "the-unlit",
+            "standing-unlit"
+          ]
+        }
+      ],
+      "encounterOps": [
+        {
+          "op": "tactic",
+          "tag": "press-in"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a careful read of the passage with Prism Sight — a few minutes' concentration at the threshold"
-      }
+        "why": "a short, sharp moment — the stalker surfacing and the contest opening"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands fully open, passage descending into old dark, smelling of cold water. Morning, no natural light.",
+      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands fully open, passage descending into old dark behind Loki. Morning, no natural light. A glass-stalker is present — visible only as a wrongness in the light and a lean shape in the bracket's polished face.",
       "npcsPresent": [
         {
           "name": "Unlit Elder",
@@ -379,23 +401,23 @@
         },
         {
           "name": "Standing Unlit",
-          "state": "Beside the stair passage. Still. Forward-facing. Settled."
+          "state": "Beside the stair passage. Still. Forward-facing. Looking nowhere near the wrongness — already knows."
         },
         {
           "name": "Cy",
-          "state": "At Loki's knee beside the passage mouth. Lens irised once; returned to stillness."
+          "state": "Legs locked rigid, lamp swinging, lens irised wide and holding — its alarm posture."
         }
       ],
       "objects": [
-        "The pale blue flame — bracket-mounted, burning, no wick",
+        "The pale blue flame — bracket-mounted, burning, no wick; its housing serves as a",
         "The seam in the stone beside the bracket — fully open, passage descending beyond",
-        "The passage to the inner chamber — gap in worked stone, no door"
+        "The passage to the inner chamber — gap in worked stone, no door",
+        "The glass-stalker — present in the reflection; a lean angled shape riding the ed"
       ],
       "threads": [
-        "The passage below is open — a warm diffuse source and older creature-traces detected; what exactly lives there is unread",
-        "What Loki carries back to the city: Sable's answer, the seam's nature, the passage below",
-        "Whether to descend or depart — the door is open and will not ask again",
-        "A glass-stalker has surfaced in the dark nearby"
+        "The glass-stalker has oriented toward Loki and is already moving — the contest is joined",
+        "The passage below remains open — the choice to descend or depart is suspended mid-encounter",
+        "The Standing Unlit's stillness suggests this thing is known to the Unlit — they are not alarmed, only waiting"
       ]
     }
   },
@@ -567,7 +589,6 @@
       },
       "relationship": 1,
       "history": [
-        "[d1] Waited out Loki's misdirection without effort — the pure dark gives no purchase for false signals. Repeated the original demand, still gentle, still blocking the exit.",
         "[d1] Lowered their hands and stepped aside after Loki's honest framing — Cy as pre-doctrinal tool, older than the Blaze, choosing the dark on its own. The first time this figure yielded.",
         "[d1] Remained at the passage entrance; did not follow Loki forward.",
         "[d1] Remains beside the stair passage. Something the engine has flagged is near that exit.",
@@ -576,14 +597,16 @@
         "[d1] Turned their head toward the stair passage when something began moving there — the first time they have attended to anything other than Loki since Loki arrived.",
         "[d1] Went still again when the creature paused at the threshold — head still turned but no longer tracking. Knows what this is.",
         "[d1] The creatures passed. The Standing Unlit faces forward again — the passage event is closed for them.",
-        "[d1] Remained still and forward-facing through the passage read. The creatures' return and the open door are both closed matters for them."
+        "[d1] Remained still and forward-facing through the passage read. The creatures' return and the open door are both closed matters for them.",
+        "[d1] Did not react to the glass-stalker's presence — stillness changed quality, suggesting they already know it is here"
       ],
       "knownFacts": [
         "Objects to Cy's presence — calls it a 'light-thing'",
         "Speaks gently but the gentleness is a doctrine, not a warmth",
         "Misdirection crafts find no grip in a space this purely held — not because they see through the trick but because there is nothing here to believe it",
         "The Better Story found purchase where misdirection could not — they are not fooled by performance, but they can be reached by truth in the right shape.",
-        "Has gone calm at the creature's pause — this is not alarm; it is recognition"
+        "Has gone calm at the creature's pause — this is not alarm; it is recognition",
+        "The glass-stalker's presence in the outer chamber did not alarm the Standing Unlit"
       ],
       "skillsObserved": [
         "Concealment in near-total dark",
@@ -594,7 +617,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Beside the stair passage, settled and forward-facing — at rest.",
+      "statusNote": "Beside the stair passage, forward-facing, in the particular stillness of a thing already known",
       "domains": {
         "primary": "umbral"
       },
@@ -615,7 +638,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Granted Loki passage to the inner chamber with a single economical gesture and the words 'Then you may go in.' Did not rise, did not instruct, did not offer accompaniment.",
         "[d1] Received Sable's name, answer, and the frame Loki left behind. Acknowledged that Loki came, asked, and left the answer where it landed — called this what they would have Loki carry. Thanked Loki for carrying it honestly.",
         "[d1] Refused to teach the blue flame — said it is not theirs to teach, and that the question is the wrong shape for the thing being asked. No hostility. The subject simply closed.",
         "[d1] Loki attempted to read the pale blue flame — the elder did not comment, did not warn, did not move. The silence after the failed read was itself the response.",
@@ -624,7 +646,8 @@
         "[d1] Sat still while Loki touched the seam. Did not comment. Did not warn. Did not move.",
         "[d1] Did not move, did not comment on Cy's tap or the Prism Sight use. Sits watching or not watching.",
         "[d1] The door opened fully. The elder made no comment. Their silence is acknowledgment of the completed act.",
-        "[d1] Did not speak or move during the Prism Sight read of the passage. The visit has reached its end for them."
+        "[d1] Did not speak or move during the Prism Sight read of the passage. The visit has reached its end for them.",
+        "[d1] Has not moved through the glass-stalker's surfacing"
       ],
       "knownFacts": [
         "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
@@ -643,7 +666,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber — the visit is at its end; the elder is present but finished.",
+      "statusNote": "Seated by the pale blue flame — present and motionless; the encounter is not their concern",
       "domains": {
         "primary": "umbral"
       },
@@ -900,11 +923,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 663,
-    "lastSharedReadAt": "2026-07-27T15:31:10.092Z",
+    "lastGenCount": 664,
+    "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -954,7 +977,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -967,7 +990,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1011,7 +1034,7 @@
     "wits": 4
   },
   "pendingSubPoints": 1,
-  "skillPoints": 1,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1357,6 +1380,22 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "glass-stalker": {
+        "id": "glass-stalker",
+        "label": "The Glass-Stalker",
+        "kind": "mystery",
+        "facts": [
+          "[d1] A near-invisible predator visible only in reflective surfaces or by the wrongness it bends around itself. Oriented and moving the moment it is seen in the bracket's polished face — it strikes from the angle you are not watching. The Unlit know of it and hold no alarm."
+        ],
+        "links": [
+          "the-unlit-deep",
+          "the-unlit",
+          "standing-unlit"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
@@ -1533,8 +1572,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785167795468,
-  "rev": 111,
+  "updatedAt": 1785168244017,
+  "rev": 120,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1852,7 +1891,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 25
+    "umbral_depths": 26
   },
   "opLossPending": false,
   "sessions": [
@@ -1883,10 +1922,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T15:56:35.466Z",
+      "lastAt": "2026-07-27T16:04:04.015Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 21
+      "beats": 22
     }
   ],
   "establishedFacts": [
@@ -1924,26 +1963,27 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 53,
-    "choices": 53,
-    "characterDeltas": 25,
-    "scene": 53,
+    "sceneSummary": 54,
+    "choices": 54,
+    "characterDeltas": 26,
+    "scene": 54,
     "placeUpdates": 8,
-    "codexUpdates": 43,
-    "timeOps": 52,
+    "codexUpdates": 44,
+    "timeOps": 53,
     "offer": 5,
     "generateRequest": 2,
-    "sceneEnded": 13,
-    "npcUpdates": 46,
+    "sceneEnded": 14,
+    "npcUpdates": 47,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
     "questUpdates": 9,
     "standingOps": 1,
     "factUpdates": 4,
-    "stageOps": 5
+    "stageOps": 5,
+    "encounterOps": 1
   },
-  "_opTurns": 53,
+  "_opTurns": 54,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -2146,9 +2186,86 @@
       },
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything.",
       "danger": 5
+    },
+    "re-beast_glass_stalker": {
+      "schemaVersion": 1,
+      "id": "re-beast_glass_stalker",
+      "type": "duel",
+      "name": "Hard Ground",
+      "tier": "notable",
+      "minDanger": 2,
+      "setup": "a glass-stalker — A Verist-truth manifestation — a near-invisible predator of clear planes that you see only in reflection or by the wrongness it bends around itself. Strikes from the angle you're not looking; the only defense is knowing it's there before it moves.",
+      "lethal": false,
+      "avoidable": true,
+      "fromRandom": true,
+      "flavor": "dangerous",
+      "opponent": {
+        "name": "the aggressor",
+        "health": 6,
+        "threat": 38,
+        "yieldAt": 2,
+        "fleeDifficulty": 15,
+        "spectrum": {
+          "violence_peace": -0.3,
+          "chaos_order": -0.3
+        },
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
+      },
+      "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-beast_glass_stalker",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-beast_glass_stalker",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 6,
+      "tactic": "press-in",
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 3,
+          "physical": 3,
+          "mental": 3,
+          "social": 3
+        },
+        "energy": 86,
+        "maxEnergy": 86,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 2,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 2,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 86
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 24,
     "lastBeat": "witness_power"
@@ -2173,29 +2290,29 @@
     "the-taken-from-the-city: no-such-quest"
   ],
   "_suggestCache": {
-    "level": 2,
+    "level": 3,
     "picks": [
       {
         "abilityId": "harmonic_voice",
-        "why": "You're already a social 15 character built around The Better Story and The Misdirect — Harmonic Voice extends that same verbal dominance into emotion-management, letting you soften rooms before the deception lands rather than recovering after it goes wrong.",
+        "why": "This character's highest stat is social, their aptitudes are silver_tongue and charmer, and The Better Story is their second most-used craft — Harmonic Voice is the same instinct (calm, redirect, defuse) rendered as a standing tonal effect, letting them work on a room rather than one exchange at a time.",
         "fit": "strength"
       },
       {
         "abilityId": "mediators_tongue",
-        "why": "Silver_tongue and charmer are your recognised aptitudes, yet your kit is all fabrication and concealment with no tool for open negotiation — Mediator's Tongue gives you a craft for the moments your deceits are exposed and you need to talk your way through the truth.",
+        "why": "See the Made Thing is their signature (17 uses: reading situations analytically), and their cerebral + social fingerprint means they're constantly in the information-then-negotiate loop — Mediator's Tongue gives them a formal de-escalation and deal-finding tool to close the loop rather than leaving the social endgame to improvisation.",
         "fit": "gap"
       },
       {
-        "abilityId": "blend_in",
-        "why": "See the Made Thing is your most-used craft by a mile — you're constantly reading situations — but Hunter's Strike and The False Target go untouched because you're not a fighter; Blend In lets you act on what you observe by simply vanishing into a crowd, a pure social-stealth tool that fits how you actually play.",
+        "abilityId": "light_bending",
+        "why": "Their entire owned kit is deception and misdirection (The Misdirect, Falsecraft, The Wrong Reality, The False Target, Prism Sight), and Appetite-Sense is a declared aspiration — Light Bending is a physical-layer illusion that complements their veilwright concealment school and deepens the mirage-and-redirect signature they clearly love, even if they haven't fully leaned into The Misdirect yet.",
         "fit": "synergy"
       },
       {
-        "abilityId": "prism_sight",
-        "why": "See the Made Thing is your signature (10 uses) and you clearly play a reader of hidden truths; Prism Sight deepens that exact function — heat traces, concealed marks, lies of light — and directly advances Appetite-Sense, your declared aspiration around perceiving what others hide.",
-        "fit": "aspiration"
+        "abilityId": "afterimage",
+        "why": "Hunter's Strike and The False Target are both owned but completely unused, suggesting this character avoids committed physical positioning — Afterimage lets them vanish from a spot they've committed to without needing to fight their way out, giving their cautious (7.2) tendency a concrete escape hatch that fits the illusionist school rather than demanding a combat pivot.",
+        "fit": "gap"
       }
     ],
-    "note": "Every pick this level lives in the social-cerebral lane you already inhabit — the question is whether you deepen your influence (Harmonic Voice), fill the negotiation gap (Mediator's Tongue), extend your stealth-social reach (Blend In), or double down on your perception signature toward your Appetite-Sense aspiration (Prism Sight)."
+    "note": "The field is all horizon-school crafts with no school-fit flags, so nothing here deepens an existing training method — every pick is a new discipline. The sharpest tension this level is between doubling into social influence (Harmonic Voice, Mediator's Tongue) or extending the deception toolkit (Light Bending, Afterimage); both directions are authentic to how this character plays."
   }
 }

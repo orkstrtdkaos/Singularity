@@ -628,7 +628,7 @@ export function offscreenPopulation(character, content = {}, { worldDay = 0, rng
   return out;
 }
 
-export async function advanceGeneratedOffscreen({ character, content = {}, evolveFn = aiGeneratedEvolution, now = Date.now(), rng = Math.random } = {}) {
+export async function advanceGeneratedOffscreen({ character, content = {}, evolveFn = aiGeneratedEvolution, now = Date.now(), rng = Math.random, model = null } = {}) {
   if (!character) return [];
   if (!character.worldState) character.worldState = initWorldState(1);
   const ws = character.worldState;
@@ -665,7 +665,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   const batch = population.slice(0, 4);
 
   try {
-    const result = await evolveFn({ character, entities: batch, elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id) });
+    const result = await evolveFn({ character, entities: batch, elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id), model });
     for (const dev of (result?.developments || []).slice(0, 4)) {
       const fig = batch.find(e => e.id === dev.entityId);
       if (!fig || !dev.note) continue;
@@ -722,7 +722,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
 
 /** The AI pass: what an established generated figure/thread did offscreen, in-grain. SNG-198 §2: it is shown
  *  HOW FAR each want has already travelled (progressOf) and must return a countable OUTCOME, not just prose. */
-async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDay, progressOf = () => "just beginning" }) {
+async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDay, progressOf = () => "just beginning", model = null }) {
   const who = (e) => e.source === "legend" ? ", a GREAT FIGURE of the world — a rare, weighty stirring, not a small errand"
     : e.source === "met" ? ", someone the player has met"
     : e.source === "heardof" ? ", someone the player has only HEARD OF — a distant name; a small shift in it is how the world reads as alive when he finds it changed" : "";
@@ -731,7 +731,32 @@ async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDa
   ).join("\n");
   const sys = `You advance the OFFSCREEN lives of established figures and threads in an RPG while the player was away. ${elapsedWorldDays} world-days passed. Each figure has a want/tension and HOW FAR it has already travelled toward it. For AT MOST 4 of them, decide ONE small, grounded, IN-GRAIN development that follows from their want/tension + how far along they already are — no drastic turns, nothing that contradicts what's known, NOTHING set in the future. Choose an OUTCOME per figure: "progress" (moved closer), "stall" (no real movement this time), "problem" (a genuine setback — do not soften it), or "done" (the want is reached/resolved). Most figures move rarely — a "stall" is a fine, honest answer. Reply ONLY JSON: {"developments":[{"entityId":"exact-id","outcome":"progress|stall|problem|done","note":"one sentence: what moved (or didn't) for them while away"}]}`;
   const content = `World-days passed: ${elapsedWorldDays} (now world-day ${currentWorldDay}).\n\nESTABLISHED FIGURES & THREADS:\n${list}`;
-  return callClaudeJSON([{ role: "user", content }], { task: "world-tick", system: sys, maxTokens: 1024 });
+  return callClaudeJSON([{ role: "user", content }], { task: "world-tick", system: sys, maxTokens: 1024, model }); // SNG-242: model override (A/B + in-play switch)
+}
+
+/** SNG-242: A/B the world-tick across models on the SAME input (dev tool). Builds the current offscreen batch
+ *  exactly as advanceGeneratedOffscreen does, then runs the evolve ONCE PER MODEL on that IDENTICAL batch — the
+ *  only variable is the model, so the comparison is honest. READ-ONLY: never applies wantOutcomes or mutates
+ *  worldState (it's a comparison, not a real tick). Returns { batch, runs:[{model, developments, ms, error}] }.
+ *  Per-call token/latency also land in See-the-Machine (each is a real world-tick capture). */
+export async function worldTickABCompare({ character, content = {}, models = [], now = Date.now(), rng = Math.random } = {}) {
+  const ws = character?.worldState || {};
+  const currentWorldDay = absoluteWorldDay(now);
+  const batch = offscreenPopulation(character, content, { worldDay: currentWorldDay, rng, lastEpicDay: ws.lastEpicOffscreenDay })
+    .filter(e => ws.wantProgress?.[e.id]?.status !== "resolved")
+    .slice(0, 4);
+  const runs = [];
+  for (const model of models) {
+    const t0 = now; let developments = [], error = null, ms = 0;
+    try {
+      const started = Date.now();
+      const result = await aiGeneratedEvolution({ entities: batch, elapsedWorldDays: 3, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id), model });
+      ms = Date.now() - started;
+      developments = (result?.developments || []).slice(0, 4);
+    } catch (e) { error = e?.message || "call failed"; }
+    runs.push({ model, developments, ms, error });
+  }
+  return { batch: batch.map(e => ({ id: e.id, name: e.name, kind: e.kind, source: e.source, descriptor: e.descriptor })), runs };
 }
 
 /** SNG-211: rank the "while you were away" surface by STAKES so a real world event (an arc move, a crisis

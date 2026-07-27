@@ -3,6 +3,9 @@
 // site passes a task id; token budget + stop_reason logged per call.
 // API key lives in localStorage ONLY (settings screen) — never in committed files.
 
+// SNG-242: the two model tiers, exported so the A/B tool + in-play switch can name them without stringly-typing.
+export const MODELS = { sonnet: "claude-sonnet-4-6", haiku: "claude-haiku-4-5-20251001" };
+
 const MODEL_MAP = {
   "gm-narrate": "claude-sonnet-4-6",
   "gm-narrate-fast": "claude-haiku-4-5-20251001", // SNG-242 §5: the player's "Fast" telling — Haiku (cheap + snappy); opt-in via the narration-richness setting. The ✦ Rich toggle always spends up to the flagship for a beat.
@@ -59,7 +62,9 @@ export function setCallObserver(fn) { _callObserver = typeof fn === "function" ?
 /** Call Claude. messages: [{role, content}]. opts: { task, system, maxTokens }. Returns text. */
 export async function callClaude(messages, opts = {}) {
   const task = opts.task || "_default";
-  const model = MODEL_MAP[task] || MODEL_MAP._default;
+  // SNG-242: an explicit per-call model override wins over the task router — used by the world-tick A/B tool
+  // (force Sonnet vs Haiku on the SAME input) and the world-tick in-play switch. Falls back to the task map.
+  const model = opts.model || MODEL_MAP[task] || MODEL_MAP._default;
   const max_tokens = opts.maxTokens || BUDGETS[task] || BUDGETS._default;
   const key = getApiKey();
   if (!key) throw new Error("NO_API_KEY");

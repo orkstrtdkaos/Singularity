@@ -15,7 +15,7 @@ import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/a
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
-import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver } from "./engine/claude.js";
+import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
@@ -43,7 +43,7 @@ import { resolveWaygateTransit, routeGmMoveTo } from "./engine/waygate.js"; // S
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, worldTickABCompare, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic } from "./engine/worldtick.js";
 import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.284";
+const APP_VERSION = "1.8.285";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1037,6 +1037,28 @@ function devKnowNothing() {
  *  and which ops fired for the last two-dozen model calls this session — the by-hand SNG-179
  *  diagnosis (read the prompt, read the raw output, see what the engine did with it) made a standing
  *  button. Dev-only; captures live in memory for the session (armed at boot only under isDevMode()). */
+/** SNG-242: the in-play world-tick model — a per-browser dev/cost switch (the offscreen "while you were away"
+ *  tick, never player-read prose). Returns a model override for advanceGeneratedOffscreen, or null = task-default (Sonnet). */
+function worldTickModel() {
+  try { return localStorage.getItem("singularity.worldTickModel") === "haiku" ? MODELS.haiku : null; } catch { return null; }
+}
+
+/** SNG-242: run the world-tick A/B — the SAME offscreen batch through Sonnet AND Haiku, side by side. */
+async function runWorldTickAB() {
+  const out = document.getElementById("mach-ab-out"), btn = document.getElementById("mach-wt-ab");
+  if (!getApiKey()) { if (out) out.innerHTML = `<div class="insight">Add your API key in Settings first — the A/B makes two real model calls.</div>`; return; }
+  if (btn) { btn.disabled = true; btn.textContent = "Running both models…"; }
+  try {
+    const res = await worldTickABCompare({ character, content: CONTENT, models: [MODELS.sonnet, MODELS.haiku] });
+    if (!res.batch.length) { if (out) out.innerHTML = `<div class="insight">No offscreen figures to tick right now — meet some people or grow the world, then A/B. (The tick advances people you've met + figures you've heard of + your grown places.)</div>`; return; }
+    const label = m => m === MODELS.haiku ? "Haiku" : m === MODELS.sonnet ? "Sonnet" : String(m);
+    const nameOf = id => (res.batch.find(b => b.id === id) || {}).name || id;
+    const col = run => `<div class="mach-ab-col"><div class="mach-ab-h">${esc(label(run.model))} <span class="hint">· ${run.ms}ms</span></div>${run.error ? `<div class="insight">error: ${esc(run.error)}</div>` : (run.developments.length ? run.developments.map(d => `<div class="codex-fact"><strong>${esc(nameOf(d.entityId))}</strong> <span class="cost">${esc(d.outcome || "?")}</span><div>${esc(d.note || "")}</div></div>`).join("") : "<div class='insight'>(no developments this run)</div>")}</div>`;
+    out.innerHTML = `<div class="hint" style="margin:8px 0 4px">Same ${res.batch.length} offscreen figure(s), both models — the only variable is the model. (Per-call tokens + latency also land in the call cards below.)</div><div class="mach-ab-grid">${res.runs.map(col).join("")}</div>`;
+  } catch (e) { if (out) out.innerHTML = `<div class="insight">A/B failed: ${esc(e?.message || "error")}</div>`; }
+  finally { if (btn) { btn.disabled = false; btn.textContent = "⚖ Run world-tick: Sonnet vs Haiku (same input)"; } }
+}
+
 function renderMachine() {
   const caps = devCaptures();
   const ledger = character?._opLedger || {};
@@ -1137,6 +1159,20 @@ function renderMachine() {
       </div>
     </div>` : `<div class="cs-block hint">Load a character (open Play) to use Go-anywhere and Know — these levers act on the live save.</div>`;
 
+  // SNG-242: the world-tick model switch + the A/B compare (Sonnet vs Haiku on the same input). world-tick is
+  // structured state-movement the player never reads as prose — the textbook Haiku candidate. Measure, don't assume.
+  const wtHaiku = worldTickModel() != null;
+  const modelBlock = `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Model &amp; cost — SNG-242 <span class="hint" style="text-transform:none">world-tick routing + A/B</span></h3>
+    <div class="mach-lever"><span class="mach-label">World-tick model</span>
+      <button class="btn secondary" id="mach-wt-toggle">${wtHaiku ? "Haiku (trying it) — switch to Sonnet" : "Sonnet (default) — switch to Haiku"}</button>
+      <span class="hint">the offscreen "while you were away" tick — structured, never read as prose. ${wtHaiku ? "Currently <strong>Haiku</strong>." : "Currently <strong>Sonnet</strong>."} Per-browser; reversible.</span>
+    </div>
+    ${character ? `<div class="mach-lever"><span class="mach-label">A/B compare</span>
+      <button class="btn secondary" id="mach-wt-ab">⚖ Run world-tick: Sonnet vs Haiku (same input)</button>
+      <span class="hint">both models on your CURRENT offscreen figures — the honest side-by-side (needs an API key)</span>
+    </div><div id="mach-ab-out"></div>` : `<div class="hint">Load a character to A/B the world-tick on your real offscreen figures.</div>`}
+  </div>`;
+
   chrome(`<div class="screen" style="max-width:900px">
     <h2>🔬 See the Machine <span class="hint" style="text-transform:none">— last ${caps.length} model call${caps.length === 1 ? "" : "s"} this session</span></h2>
     <p class="hint" style="margin-bottom:12px">The assembled prompt, the raw model response, what parsed, and which ops fired — the SNG-179 diagnosis as a standing panel. Captures live in memory for this session only (dev-mode; a player never reaches this).</p>
@@ -1144,6 +1180,7 @@ function renderMachine() {
       <p class="hint" style="margin:0">Across ${gmCalls.length} GM call${gmCalls.length === 1 ? "" : "s"} this session, the assembled prompt averages <strong>~${avgPromptTok.toLocaleString()} tok</strong> (heaviest ~${maxPromptTok.toLocaleString()}). Most is the constant constitution+rules (cached); the rest is the per-beat sections. Open any call's <em>Prompt weight</em> below to see where the weight sits and which <code>##</code> sections fired that beat. <strong>Fix D (SNG-238)</strong> trims the always-on load so hard directives (Fix A/B) aren't fighting saturation.</p>
     </div>` : ""}
     ${leversBlock}
+    ${modelBlock}
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Op emission — this character, cumulative <span class="hint" style="text-transform:none">(${turns} GM turn${turns === 1 ? "" : "s"} observed)</span></h3>
       <p class="hint" style="margin-bottom:8px">Counts are <strong>emissions</strong> — the model putting an op in a turn — tracked for every op. Applied/rejected outcome (✓/✗) is instrumented only for <code>markTeacher</code>; for the rest the number is emission alone. ${turns > 0 ? `A persistent <strong>0 after ${turns} turn${turns === 1 ? "" : "s"}</strong> is the real signature — a built op the model never reaches.` : `<strong>No turns observed yet</strong> — a 0 here just means this character has not played; it is not a finding.`}</p>
@@ -1166,6 +1203,11 @@ function renderMachine() {
     try { await navigator.clipboard.writeText(text); b.textContent = "Copied ✓"; } catch { b.textContent = "Copy failed — select the text above"; }
   };
   document.getElementById("mach-clear").onclick = () => { clearCaptures(); renderMachine(); };
+  // SNG-242: world-tick model switch + A/B
+  const wtTgl = document.getElementById("mach-wt-toggle");
+  if (wtTgl) wtTgl.onclick = () => { try { const cur = localStorage.getItem("singularity.worldTickModel") === "haiku"; localStorage.setItem("singularity.worldTickModel", cur ? "sonnet" : "haiku"); } catch { /* ignore */ } renderMachine(); };
+  const wtAb = document.getElementById("mach-wt-ab");
+  if (wtAb) wtAb.onclick = () => runWorldTickAB();
   document.getElementById("mach-back").onclick = () => renderRoster();
   // SNG-186 §2a/§2b levers (only present when a character is loaded)
   const jumpBtn = document.getElementById("mach-jump-go");
@@ -2422,7 +2464,7 @@ async function maybeTick() {
     });
   } catch (e) { console.warn("[wake-gen] skipped:", e?.message); }
   await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)
-  const offscreen = await advanceGeneratedOffscreen({ character, content: CONTENT }); // SNG-BATCH-9 Phase 2 + SNG-198B: your grown world AND the people/great figures you know moved on while away
+  const offscreen = await advanceGeneratedOffscreen({ character, content: CONTENT, model: worldTickModel() }); // SNG-BATCH-9 Phase 2 + SNG-198B: your grown world AND the people/great figures you know moved on while away (SNG-242: in-play world-tick model switch)
   if (offscreen && offscreen.length) autoVerifyLeg("b9p2-offscreen", "an established entity advanced offscreen; away-digest dated"); // SNG-051 auto-verify
   // SNG-BATCH-9 Phase 3: earn nominated entities into shared canon + read the shared world back
   // through THIS viewer's rating-lens. No-op without sync. Never throws.

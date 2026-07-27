@@ -976,6 +976,11 @@ img[data-lightbox] { cursor: zoom-in; }
 .mach-wsecs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
 .mach-wsec { font-size: 11px; padding: 1px 6px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink-dim); }
 .mach-lever { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 7px 0; }
+/* SNG-242: the world-tick A/B (Sonnet vs Haiku on the same input) */
+.mach-ab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+@media (max-width: 640px) { .mach-ab-grid { grid-template-columns: 1fr; } }
+.mach-ab-col { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; background: var(--panel2); }
+.mach-ab-h { font-family: var(--font); font-size: 14px; color: var(--accent); margin-bottom: 6px; }
 .mach-lever input { flex: 1 1 260px; min-width: 200px; padding: 5px 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--ink); font-size: 13px; }
 
 /* SNG-190 §4 — engine-authored asides within a beat (was: raw *✦…* asterisks on screen, read aloud) */

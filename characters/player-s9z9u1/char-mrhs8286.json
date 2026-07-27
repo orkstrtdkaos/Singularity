@@ -1971,93 +1971,81 @@
         "player": "Check the relay node at the tree's base — see whether the node's thread has settled or shifted now that the reclamation site has closed",
         "summary": "Silas reads the relay node at dawn — the reclamation circuit has gone quiet and still, and the Zone-thread in Logana's warding has shifted subtly with the closed feed.",
         "narration": "The wolverine clearing is quiet in the dawn. Frost still holds the ground here, deeper under the canopy than out at the bowl. Logana stands at the base of the downed tree exactly as you left her — skull angled toward the party's approach, the deliberate tilt of something aware rather than merely placed.\n\nYou crouch at the tree's base beside her and let Order-Sense run shallow, just enough to read what is there. The relay node sits in its hollow, and you can feel it in the thin substrate like a hand on a rope that no longer has tension at the other end. The reclamation site's side of the circuit has gone quiet. The thread the site was feeding through the node has stopped its long pull. What remains is still, the way a well-made joint is still — it is not broken, it is done.\n\nThe Zone-thread in Logana's warding has shifted a little with that quieting. It was leaning against the active feed before; now it settles differently, like a post that was being pushed from one side and no longer is. The boundary between her guardian-purpose and the lattice-claim reads a shade cleaner. Not resolved — the Zone's partial hold is still there — but the knot is looser than it was this morning.\n\nVeth watches from two steps back. Huginn does not move from his limb above. Pell meets your eyes when you look up, and she gives you the short, practical nod that means she sees you finished the reading and is ready to go."
+      },
+      {
+        "player": null,
+        "summary": "A Hub runner cuts through the wolverine clearing at dawn — message-tube at her hip, headed south.",
+        "narration": "The sound comes before the shape — boot-leather on frost-hard ground, fast and uneven, someone moving with purpose and not much care for who hears it. A figure breaks from the left-branch path into the clearing's western edge: a young woman, pack riding high on her back, a sealed message-tube bouncing at her hip. She takes in Logana in a single wide-eyed look, skips sideways without stopping, and keeps running — south, toward the made gate and the main branch road beyond it. She has not seen you yet, or has seen you and decided you are not her problem.\n\nThe message-tube is the thing. It is sealed with a banded clasp — not a trader's errand, not a neighbor's note. Something with enough weight behind it that someone paid for a runner at dawn in the Zone fringe. The tube catches the low eastern light as she rounds the downed tree's near end, and you can read the color of the clasp from here: the blue-grey of Hub registry wax.\n\nPell is already watching the line the runner is taking. Huginn drops one branch without sound and angles his head after her. You have a few breaths before she is through the clearing and onto the path."
       }
     ],
     "lastTurn": {
-      "narration": "The wolverine clearing is quiet in the dawn. Frost still holds the ground here, deeper under the canopy than out at the bowl. Logana stands at the base of the downed tree exactly as you left her — skull angled toward the party's approach, the deliberate tilt of something aware rather than merely placed.\n\nYou crouch at the tree's base beside her and let Order-Sense run shallow, just enough to read what is there. The relay node sits in its hollow, and you can feel it in the thin substrate like a hand on a rope that no longer has tension at the other end. The reclamation site's side of the circuit has gone quiet. The thread the site was feeding through the node has stopped its long pull. What remains is still, the way a well-made joint is still — it is not broken, it is done.\n\nThe Zone-thread in Logana's warding has shifted a little with that quieting. It was leaning against the active feed before; now it settles differently, like a post that was being pushed from one side and no longer is. The boundary between her guardian-purpose and the lattice-claim reads a shade cleaner. Not resolved — the Zone's partial hold is still there — but the knot is looser than it was this morning.\n\nVeth watches from two steps back. Huginn does not move from his limb above. Pell meets your eyes when you look up, and she gives you the short, practical nod that means she sees you finished the reading and is ready to go.",
-      "sceneSummary": "Silas reads the relay node at dawn — the reclamation circuit has gone quiet and still, and the Zone-thread in Logana's warding has shifted subtly with the closed feed.",
+      "narration": "The sound comes before the shape — boot-leather on frost-hard ground, fast and uneven, someone moving with purpose and not much care for who hears it. A figure breaks from the left-branch path into the clearing's western edge: a young woman, pack riding high on her back, a sealed message-tube bouncing at her hip. She takes in Logana in a single wide-eyed look, skips sideways without stopping, and keeps running — south, toward the made gate and the main branch road beyond it. She has not seen you yet, or has seen you and decided you are not her problem.\n\nThe message-tube is the thing. It is sealed with a banded clasp — not a trader's errand, not a neighbor's note. Something with enough weight behind it that someone paid for a runner at dawn in the Zone fringe. The tube catches the low eastern light as she rounds the downed tree's near end, and you can read the color of the clasp from here: the blue-grey of Hub registry wax.\n\nPell is already watching the line the runner is taking. Huginn drops one branch without sound and angles his head after her. You have a few breaths before she is through the clearing and onto the path.",
+      "sceneSummary": "A Hub runner cuts through the wolverine clearing at dawn — message-tube at her hip, headed south.",
       "choices": [
         {
-          "label": "Ask Huginn — look northwest, where the burn-mark points. What does the bird read ending out there?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 0,
+          "label": "Read the ground and cut her angle — get ahead of her path and call out before she clears the tree-line",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
-            "study"
+            "travel",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false,
+          "encounterId": "the-chase"
         },
         {
-          "label": "Use Order-Sense to check whether Logana's Zone-thread and your guardian-purpose can be distinguished from each other now that the circuit is quieter",
+          "label": "Use Order-Sense to read the tube's design from here — confirm what the clasp and seal actually are before committing to a chase",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.3,
-            "death_life": -0.1
-          },
-          "difficulty": 15,
+          "subAttribute": "insight",
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": "the-chase"
         },
         {
-          "label": "A runner is moving fast down the left-branch road — catch them before they pass the gate",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Call out plainly from where you stand — your voice carries, and a runner who hears her name or the word 'Hub' may slow on her own",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "travel",
-            "risky"
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": "re_urgent_courier",
-          "emergenceId": null
+          "encounterId": "the-chase"
         },
         {
-          "label": "The reading is enough. Head for the gate and the road home — Pell said it plainly.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Let her go — a Hub runner on a sealed errand is doing her job, and whatever she carries will reach its destination without you",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": null
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
       "scene": {
-        "setting": "Outdoor, dawn, early spring. The wolverine clearing in the left-branch Disputed Zone. The downed dead tree occupies the far edge, frost-rimed and still. Pale light from the east. Mist gone. The relay node sits at the tree's base beneath Logana — its thread now quiet, the reclamation circuit closed.",
+        "setting": "Outdoor, dawn, early spring. The wolverine clearing, left-branch Disputed Zone. Frost-hard ground, downed dead tree at the far edge, pale eastern light. A young female runner is crossing the clearing's western edge at speed, headed south toward the made gate.",
         "npcsPresent": [
           {
             "name": "Logana",
-            "state": "Standing at the downed tree's base, skull angled toward the party. Guardian-purpose active. The Zone-thread in her warding has shifted slightly — looser against the now-quiet relay node."
+            "state": "Standing at the downed tree's base, skull turning to track the runner's movement."
           },
           {
             "name": "Pell",
-            "state": "Standing at the clearing's edge, Memory across her shoulders, meeting Silas's eyes with a short practical nod — ready to move."
+            "state": "On her feet at the clearing's edge, Memory across her shoulders, watching the runner's line."
           },
           {
             "name": "Veth",
@@ -2065,7 +2053,11 @@
           },
           {
             "name": "Huginn",
-            "state": "Motionless on the highest sound limb above Logana. Not looking at the node. Looking northwest."
+            "state": "Dropped one branch, angling his head south after the runner. Not alarmed. Attentive."
+          },
+          {
+            "name": "Hub runner",
+            "state": "Crossing the clearing at speed — pack high, sealed Hub-wax message-tube bouncing at her hip, headed south."
           }
         ],
         "objects": [
@@ -2073,56 +2065,54 @@
           "The relay node — at the tree's base beneath Logana, thread now quiet and still",
           "Memory — across Pell's shoulders",
           "Waymarker — in Silas's coat pocket",
-          "Shadow-sheet — folded in coat pocket"
+          "Shadow-sheet — folded in coat pocket",
+          "Hub message-tube (sealed, blue-grey wax clasp) — at the runner's hip"
         ],
         "threads": [
+          "The runner is crossing the clearing and will reach the tree-line in a few breaths unless stopped",
+          "The message-tube carries Hub registry wax — its destination and contents unknown",
           "Veth's lesson stands: find something dying that cannot be helped, and attend it",
-          "The Zone-thread in Logana's warding is looser but not resolved — the boundary between maker's purpose and lattice-claim is cleaner, not clean",
-          "The radiant presence at the reclamation bowl remains unidentified — the burn-mark points northwest",
-          "Huginn is watching northwest and has not looked away"
+          "The Zone-thread in Logana's warding is looser but not resolved",
+          "The radiant presence at the reclamation bowl remains unidentified — burn-mark points northwest",
+          "Huginn has not looked away from the northwest"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "logana",
-          "name": "Logana",
-          "note": "The relay node's circuit went quiet when the reclamation site closed. The Zone-thread in her warding has shifted with it — the knot between guardian-purpose and lattice-claim is looser than it was at dawn.",
-          "learned": [
-            "The Zone-thread's hold on her warding eases when the feed from the reclamation site stops — not resolved, but the boundary reads cleaner in the quieter substrate."
-          ],
-          "statusNote": "Standing watch at the downed tree's base. Guardian-purpose active. Zone-thread present but subtly shifted — looser against the now-closed circuit."
+          "op": "meet",
+          "npcId": "hub-runner-dawn",
+          "name": "Hub Runner",
+          "role": "Message courier, Hub registry — moving fast through the Zone fringe at dawn",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "Young woman, pack riding high, a sealed Hub-wax message-tube at her hip. Moving with the urgency of someone on a timed errand, not looking for conversation.",
+          "note": "Cut through the wolverine clearing at dawn without slowing — wide-eyed at Logana, then kept running south.",
+          "status": "active",
+          "statusNote": "Crossing the clearing at speed, headed south toward the made gate and the main branch road."
         }
       ],
-      "codexUpdates": [
+      "generateRequest": [
         {
-          "topic": "logana",
-          "label": "Logana",
-          "kind": "person",
-          "entityId": "logana",
-          "fact": "When the reclamation site's circuit closed, the Zone-thread in Logana's warding shifted — it was leaning against the active feed and now settles differently. The boundary between Silas's guardian-purpose and the lattice-claim reads a shade cleaner, though not fully resolved. The Zone's partial hold remains.",
-          "links": [
-            "the-second-thread",
-            "the-water-crisis",
-            "the-ashwarden-thread"
-          ]
+          "type": "npc",
+          "hint": "A young Hub registry runner, female, carrying a sealed message-tube through the Zone fringe at dawn — on a timed errand, not expecting to be stopped",
+          "why": "She entered the scene with a specific purpose and a sealed Hub message; she needs a stable identity if intercepted"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief, conserved Order-Sense reading of the relay node at dawn"
+        "why": "A brief moment — the runner's crossing, a few breaths of decision time"
       }
     },
     "sceneState": {
-      "setting": "Outdoor, dawn, early spring. The wolverine clearing in the left-branch Disputed Zone. The downed dead tree occupies the far edge, frost-rimed and still. Pale light from the east. Mist gone. The relay node sits at the tree's base beneath Logana — its thread now quiet, the reclamation circuit closed.",
+      "setting": "Outdoor, dawn, early spring. The wolverine clearing, left-branch Disputed Zone. Frost-hard ground, downed dead tree at the far edge, pale eastern light. A young female runner is crossing the clearing's western edge at speed, headed south toward the made gate.",
       "npcsPresent": [
         {
           "name": "Logana",
-          "state": "Standing at the downed tree's base, skull angled toward the party. Guardian-purpose active. The Zone-thread in her wardi"
+          "state": "Standing at the downed tree's base, skull turning to track the runner's movement."
         },
         {
           "name": "Pell",
-          "state": "Standing at the clearing's edge, Memory across her shoulders, meeting Silas's eyes with a short practical nod — ready to"
+          "state": "On her feet at the clearing's edge, Memory across her shoulders, watching the runner's line."
         },
         {
           "name": "Veth",
@@ -2130,7 +2120,11 @@
         },
         {
           "name": "Huginn",
-          "state": "Motionless on the highest sound limb above Logana. Not looking at the node. Looking northwest."
+          "state": "Dropped one branch, angling his head south after the runner. Not alarmed. Attentive."
+        },
+        {
+          "name": "Hub runner",
+          "state": "Crossing the clearing at speed — pack high, sealed Hub-wax message-tube bouncing at her hip, headed south."
         }
       ],
       "objects": [
@@ -2138,13 +2132,15 @@
         "The relay node — at the tree's base beneath Logana, thread now quiet and still",
         "Memory — across Pell's shoulders",
         "Waymarker — in Silas's coat pocket",
-        "Shadow-sheet — folded in coat pocket"
+        "Shadow-sheet — folded in coat pocket",
+        "Hub message-tube (sealed, blue-grey wax clasp) — at the runner's hip"
       ],
       "threads": [
+        "The runner is crossing the clearing and will reach the tree-line in a few breaths unless stopped",
+        "The message-tube carries Hub registry wax — its destination and contents unknown",
         "Veth's lesson stands: find something dying that cannot be helped, and attend it",
-        "The Zone-thread in Logana's warding is looser but not resolved — the boundary between maker's purpose and lattice-claim is cleaner, not clean",
-        "The radiant presence at the reclamation bowl remains unidentified — the burn-mark points northwest",
-        "Huginn is watching northwest and has not looked away"
+        "The Zone-thread in Logana's warding is looser but not resolved",
+        "The radiant presence at the reclamation bowl remains unidentified — burn-mark points northwest"
       ]
     }
   },
@@ -4725,6 +4721,30 @@
       "questNote": "delighted, insufferable, genuinely grateful; will share pre-Transition knowledge more readily now",
       "ally": true,
       "allyNote": "trusts your judgment on old and dangerous things going forward"
+    },
+    "hub-runner-dawn": {
+      "id": "hub-runner-dawn",
+      "name": "Hub Runner",
+      "role": "Message courier, Hub registry — moving fast through the Zone fringe at dawn",
+      "description": "Young woman, pack riding high, a sealed Hub-wax message-tube at her hip. Moving with the urgency of someone on a timed errand, not looking for conversation.",
+      "firstMet": {
+        "locationId": "gen-disputed-zone-left-branch-entrance",
+        "day": 14
+      },
+      "relationship": 0,
+      "history": [
+        "[d14] Cut through the wolverine clearing at dawn without slowing — wide-eyed at Logana, then kept running south."
+      ],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "Crossing the clearing at speed, headed south toward the made gate and the main branch road.",
+      "lastSeen": {
+        "locationId": "gen-disputed-zone-left-branch-entrance",
+        "day": 14
+      }
     }
   },
   "placeMemory": {
@@ -5712,7 +5732,7 @@
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
     "lastGenCount": 648,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 12,
     "recentOffers": [
       {
         "thing": "A Blazeborn stranger at the road's edge who names Silas's parentage without being asked",
@@ -7850,8 +7870,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785114130330,
-  "rev": 1532,
+  "updatedAt": 1785114320148,
+  "rev": 1536,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11275,7 +11295,7 @@
   "syncedAt": 1785071380339,
   "teachers": {},
   "regionsKnown": {
-    "valley": 635,
+    "valley": 636,
     "the_palelands": 6,
     "the_center": 95
   },
@@ -11462,10 +11482,10 @@
     {
       "id": "sess-18",
       "startedAt": "2026-07-27T00:49:42.217Z",
-      "lastAt": "2026-07-27T01:02:10.328Z",
+      "lastAt": "2026-07-27T01:05:20.146Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -11561,6 +11581,42 @@
         "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
       },
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
+    },
+    "re-re_urgent_courier": {
+      "schemaVersion": 1,
+      "id": "re-re_urgent_courier",
+      "type": "challenge",
+      "name": "The Chase",
+      "setup": "A runner or rider comes through fast — a message that matters, and they're past before you can ask. If you want what they carry (or to warn them, or to keep pace), it's a short pursuit on foot: read their line, cut the angle, call out in time. Low stakes — you lose only the chance, not blood.",
+      "fromRandom": true,
+      "flavor": "chase",
+      "stages": [
+        {
+          "name": "Read the ground and pick a line",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 5,
+          "failureCost": {
+            "health": 2,
+            "energy": 4,
+            "hours": 0
+          }
+        },
+        {
+          "name": "A burst through the broken country",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 10,
+          "failureCost": {
+            "health": 2,
+            "energy": 4,
+            "hours": 0
+          }
+        }
+      ],
+      "danger": 1
     }
   },
   "_intentAsked": null,
@@ -11729,15 +11785,15 @@
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 253,
-    "choices": 253,
+    "sceneSummary": 254,
+    "choices": 254,
     "characterDeltas": 108,
-    "scene": 253,
-    "npcUpdates": 225,
+    "scene": 254,
+    "npcUpdates": 226,
     "factUpdates": 20,
     "placeUpdates": 47,
     "codexUpdates": 161,
-    "timeOps": 247,
+    "timeOps": 248,
     "imagePrompt": 7,
     "sceneEnded": 62,
     "itemUpdates": 5,
@@ -11750,12 +11806,12 @@
     "ledgerEvents": 7,
     "discovery": 4,
     "stageOps": 14,
-    "generateRequest": 9,
+    "generateRequest": 10,
     "inventoryAdd": 2,
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 253,
+  "_opTurns": 254,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -11959,7 +12015,19 @@
   "_pendingLedger": [],
   "locationState": {},
   "_applyFailures": null,
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-re_urgent_courier",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-re_urgent_courier",
+      "type": "challenge",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "stageIndex": 0,
+      "stagesDone": []
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 25,
     "lastBeat": "witness_power"

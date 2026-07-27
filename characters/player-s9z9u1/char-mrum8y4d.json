@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 4,
-  "xp": 354,
+  "xp": 356,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -42,7 +42,7 @@
     },
     {
       "abilityId": "the_better_story",
-      "level": 1,
+      "level": 2,
       "native": true
     },
     {
@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 70,
+  "energy": 68,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -163,108 +163,83 @@
         "player": "Give a false name as the giver — a name the child could follow to find you anyway, even without the hidden layer.",
         "summary": "Loki gave a false-shaped name as the orchard giver — Ossivyn recognized it as made, recorded it plainly as such, and closed the book.",
         "narration": "Loki gives a name. Not his own name — a name shaped to sound like a road, like a direction, like something a child could follow when they were old enough to want to. He says it with presence, with the weight of a person who has done this before and knows how it lands.\n\nOssivyn writes it down. His pencil moves in the record book with the careful patience of a man who has written ten thousand names in forty years of this work. He does not look up while he writes. He spells it back, quietly, asking if he has it right.\n\nAnd then he looks at Loki with the patient, unhurried attention of someone who tends trees that take a lifetime to fruit. 'This is a made name,' he says simply. 'Not wrong. But made.' He does not say it with suspicion. He says it the way a craftsman names a thing they recognize — not accusing the craft, only naming what it is. His pencil rests on the page. 'The child will read this when they are old enough,' said Ossivyn, 'and they will know it is a made name, and they will know someone was here who wanted to be found. That is what will go into the record.' He closes the book with a soft click, and looks at the sapling in his other hand. The planting waits."
+      },
+      {
+        "player": "Use the Better Story to retell the entire echange, while you physically help plant the tree.",
+        "summary": "Loki helped plant the tree and tried to retell the exchange as a better story — Ossivyn received the help and heard the telling, but the story found no wound to heal; the tree went into the ground as recorded.",
+        "narration": "Loki takes up the spare spade from the fence post. The blade bites the loose mounded earth easily and he tosses the first scoop aside without being asked, stepping down into the hole beside the root space Ossivyn has prepared.\n\nHe begins to talk as he works. He reaches for The Better Story — the angle that is also true, the shape that heals differently. He tells the whole exchange back: the sapling, the name, the record, the made name recognized and written down honestly. He tries to frame it as something that worked out, as a gift that landed in the only form the orchard could receive.\n\nBut Ossivyn is already kneeling at the hole's edge, lowering the sapling's root ball into place with both hands. He is listening. His face is not closed or cold. He simply has no wound here for the story to find. A man who has been doing the same right work for forty years does not need a different angle on this morning. The story slides off him the way water slides off good planting clay — not resisted, just not absorbed.\n\nOssivyn firms the roots gently with his thumbs and looks up. 'You dug well,' he says. He means it. He reaches for Loki's spade with a nod — there is backfilling to do — and the tree is going into the ground right now, with the name as it was recorded: made, giver unknown, and waiting for whoever the child becomes."
       }
     ],
     "lastTurn": {
-      "narration": "Loki gives a name. Not his own name — a name shaped to sound like a road, like a direction, like something a child could follow when they were old enough to want to. He says it with presence, with the weight of a person who has done this before and knows how it lands.\n\nOssivyn writes it down. His pencil moves in the record book with the careful patience of a man who has written ten thousand names in forty years of this work. He does not look up while he writes. He spells it back, quietly, asking if he has it right.\n\nAnd then he looks at Loki with the patient, unhurried attention of someone who tends trees that take a lifetime to fruit. 'This is a made name,' he says simply. 'Not wrong. But made.' He does not say it with suspicion. He says it the way a craftsman names a thing they recognize — not accusing the craft, only naming what it is. His pencil rests on the page. 'The child will read this when they are old enough,' said Ossivyn, 'and they will know it is a made name, and they will know someone was here who wanted to be found. That is what will go into the record.' He closes the book with a soft click, and looks at the sapling in his other hand. The planting waits.",
-      "sceneSummary": "Loki gave a false-shaped name as the orchard giver — Ossivyn recognized it as made, recorded it plainly as such, and closed the book.",
+      "narration": "Loki takes up the spare spade from the fence post. The blade bites the loose mounded earth easily and he tosses the first scoop aside without being asked, stepping down into the hole beside the root space Ossivyn has prepared.\n\nHe begins to talk as he works. He reaches for The Better Story — the angle that is also true, the shape that heals differently. He tells the whole exchange back: the sapling, the name, the record, the made name recognized and written down honestly. He tries to frame it as something that worked out, as a gift that landed in the only form the orchard could receive.\n\nBut Ossivyn is already kneeling at the hole's edge, lowering the sapling's root ball into place with both hands. He is listening. His face is not closed or cold. He simply has no wound here for the story to find. A man who has been doing the same right work for forty years does not need a different angle on this morning. The story slides off him the way water slides off good planting clay — not resisted, just not absorbed.\n\nOssivyn firms the roots gently with his thumbs and looks up. 'You dug well,' he says. He means it. He reaches for Loki's spade with a nod — there is backfilling to do — and the tree is going into the ground right now, with the name as it was recorded: made, giver unknown, and waiting for whoever the child becomes.\n\n*▲ Practiced — **The Better Story** is fluent now (rank 2), earned through use.*",
+      "sceneSummary": "Loki helped plant the tree and tried to retell the exchange as a better story — Ossivyn received the help and heard the telling, but the story found no wound to heal; the tree went into the ground as recorded.",
       "choices": [
         {
-          "label": "Give your real name — let Ossivyn record it honestly and be done.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "honest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Ossivyn whether any tree here was planted for you — let the question sit in the air.",
+          "label": "Help backfill alongside Ossivyn and ask, plainly, whether any tree here was planted for you.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
+          "intentTags": [
+            "ask"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Set down the spade and let the planting finish without another word — watch the orchard instead, looking for the tree planted three hundred years ago that is nearly ready to fruit.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Prism Sight on the sapling as the roots go into the ground — read whether anything warm has touched this soil recently, or whether the earth here has been prepared longer than today.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
         },
         {
-          "label": "Let the planting go as it is — offer to help him place the sapling in the hole.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
+          "label": "Ask Ossivyn directly — not about names, not about trees — about the person who planted the tree that is about to fruit, and whether they know it is nearly time.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "ask"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use See the Made Thing on the orchard itself — read what is being built here, across all these decades.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale soft light, bare orchard rows stretching behind Ossivyn. He stands at the hole's edge, record book now closed on his knee, sapling in hand, looking at Loki.",
+        "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale soft light. Loki is in the knee-deep hole alongside Ossivyn, who is kneeling at the edge with the sapling's root ball seated in place, ready to backfill.",
         "npcsPresent": [
           {
             "name": "Ossivyn Tallow",
-            "state": "Standing at the hole's edge, record book closed, sapling bundled in one hand, looking at Loki with patient, unhurried attention."
+            "state": "Kneeling at the hole's edge, both hands steadying the root ball, nodding toward Loki's spade — backfilling is next."
           },
           {
             "name": "Cy",
-            "state": "Perched on the fence post, lens irising slowly, watching the closed record book."
+            "state": "Still on the fence post, lens irised wide, watching the sapling go into the ground."
           }
         ],
         "objects": [
-          "bundled sapling in Ossivyn's hand",
-          "spare spade leaning against the fence post",
-          "open knee-deep hole",
-          "loose mounded earth from the dig",
-          "closed orchard record book on Ossivyn's knee",
-          "pencil in Ossivyn's hand"
+          "spare spade (in Loki's hands)",
+          "sapling now seated in the hole, root ball in place",
+          "loose mounded earth ready to backfill",
+          "orchard record book closed on Ossivyn's knee",
+          "pencil tucked behind Ossivyn's ear"
         ],
         "threads": [
-          "Ossivyn has recorded the made name as made — the planting is ready but not yet done",
-          "Whether any tree here was planted for Loki remains unasked",
-          "The sapling is still in Ossivyn's hand — the hole waits"
+          "Whether any tree in this orchard was planted for Loki — unasked",
+          "The tree planted three hundred years ago that is about to fruit, and the missing person it was planted for",
+          "The orchard record: the made name is written, giver recorded as unknown"
         ]
       },
       "npcUpdates": [
@@ -272,56 +247,39 @@
           "op": "update",
           "npcId": "ossivyn-tallow",
           "name": "Ossivyn Tallow",
-          "note": "Recognized the false-shaped name as made — recorded it honestly as such, and closed the book without hostility. Said the child will know it was made, and will know someone wanted to be found.",
-          "learned": [
-            "A made name is a different kind of gift — not wrong, but legible as made to the child who reads it forty years from now."
-          ],
-          "relationshipDelta": 0,
+          "note": "Received Loki's help digging without complaint — accepted the labor easily. Heard the retelling of the morning's exchange; it found no wound in him and he did not need it to. Thanked the help plainly. Now backfilling.",
           "status": "active",
-          "statusNote": "At the Planting Gate, record book closed, sapling in hand, ready to plant — waiting to see what Loki does next."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "ossivyn-tallow",
-          "label": "Ossivyn Tallow",
-          "kind": "person",
-          "entityId": "ossivyn-tallow",
-          "fact": "Ossivyn recognized a made name on sight — recorded it as made, not as a deception, not with hostility. The orchard record will tell the child honestly: someone was here who wanted to be found.",
-          "links": [
-            "the-slow-orchard"
-          ]
+          "statusNote": "At the hole's edge, seating the sapling, ready to backfill — the planting is nearly done."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the planting gate."
+        "why": "A few minutes of digging and talking while the sapling is seated."
       }
     },
     "sceneState": {
-      "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale soft light, bare orchard rows stretching behind Ossivyn. He stands at the hole's edge, record book now closed on his knee, sapling in hand, looking at Loki.",
+      "setting": "The Planting Gate of the Slow Orchard — early spring morning, pale soft light. Loki is in the knee-deep hole alongside Ossivyn, who is kneeling at the edge with the sapling's root ball seated in place, ready to backfill.",
       "npcsPresent": [
         {
           "name": "Ossivyn Tallow",
-          "state": "Standing at the hole's edge, record book closed, sapling bundled in one hand, looking at Loki with patient, unhurried at"
+          "state": "Kneeling at the hole's edge, both hands steadying the root ball, nodding toward Loki's spade — backfilling is next."
         },
         {
           "name": "Cy",
-          "state": "Perched on the fence post, lens irising slowly, watching the closed record book."
+          "state": "Still on the fence post, lens irised wide, watching the sapling go into the ground."
         }
       ],
       "objects": [
-        "bundled sapling in Ossivyn's hand",
-        "spare spade leaning against the fence post",
-        "open knee-deep hole",
-        "loose mounded earth from the dig",
-        "closed orchard record book on Ossivyn's knee",
-        "pencil in Ossivyn's hand"
+        "spare spade (in Loki's hands)",
+        "sapling now seated in the hole, root ball in place",
+        "loose mounded earth ready to backfill",
+        "orchard record book closed on Ossivyn's knee",
+        "pencil tucked behind Ossivyn's ear"
       ],
       "threads": [
-        "Ossivyn has recorded the made name as made — the planting is ready but not yet done",
-        "Whether any tree here was planted for Loki remains unasked",
-        "The sapling is still in Ossivyn's hand — the hole waits"
+        "Whether any tree in this orchard was planted for Loki — unasked",
+        "The tree planted three hundred years ago that is about to fruit, and the missing person it was planted for",
+        "The orchard record: the made name is written, giver recorded as unknown"
       ]
     }
   },
@@ -649,7 +607,8 @@
         "[d1] Heard The Better Story — received it as well-made, and still declined. His certainty about the planting is not hostility; it is a thing finished in him already.",
         "[d1] Partial yielded to the combined working — he won't raise a plaque, but he agreed to write the name in the orchard's record with its giver and the date. Now holding the sapling and waiting for Loki to speak it.",
         "[d1] Heard the name Tree given plainly — no layered meaning reached him. Has his record book open and pencil ready, waiting for the giver's name.",
-        "[d1] Recognized the false-shaped name as made — recorded it honestly as such, and closed the book without hostility. Said the child will know it was made, and will know someone wanted to be found."
+        "[d1] Recognized the false-shaped name as made — recorded it honestly as such, and closed the book without hostility. Said the child will know it was made, and will know someone wanted to be found.",
+        "[d1] Received Loki's help digging without complaint — accepted the labor easily. Heard the retelling of the morning's exchange; it found no wound in him and he did not need it to. Thanked the help plainly. Now backfilling."
       ],
       "knownFacts": [
         "The tree names itself through the child who inherits it — a name given by a stranger ahead of time is not part of the gift being planted here.",
@@ -661,7 +620,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Planting Gate, record book closed, sapling in hand, ready to plant — waiting to see what Loki does next.",
+      "statusNote": "At the hole's edge, seating the sapling, ready to backfill — the planting is nearly done.",
       "domains": {
         "primary": "rootkin"
       },
@@ -926,7 +885,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1587,24 +1546,24 @@
     }
   },
   "tendencies": {
-    "devotion": 2.46546386718365,
-    "cerebral": 16.471035048240637,
-    "social": 14.911406493884533,
-    "strategic": 9.662976026285495,
-    "cautious": 7.5791788658523975,
-    "amorous": 3.224732260218888,
-    "generous": 3.114761658682881,
-    "ruthless": 1.0256551462067565,
-    "risky": 1.8899154164413263,
-    "patient": 0.8590683010253904,
-    "deception": 1
+    "devotion": 2.403827270504059,
+    "cerebral": 16.059259172034622,
+    "social": 14.538621331537419,
+    "strategic": 9.421401625628357,
+    "cautious": 7.389699394206088,
+    "amorous": 3.1441139537134157,
+    "generous": 4.036892617215809,
+    "ruthless": 1.0000137675515874,
+    "risky": 1.8426675310302931,
+    "patient": 0.8375915934997556,
+    "deception": 0.975
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 84,
+  "actionCount": 85,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1785,8 +1744,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785192185755,
-  "rev": 163,
+  "updatedAt": 1785192298339,
+  "rev": 164,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2149,7 +2108,7 @@
           "entityId": "ossivyn-tallow",
           "type": "npc",
           "birthWeight": 6,
-          "engagementScore": 14,
+          "engagementScore": 16,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -2196,6 +2155,10 @@
             },
             {
               "kind": "fact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
               "day": 1
             }
           ],
@@ -2260,7 +2223,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 5
+    "the_quickwood": 6
   },
   "opLossPending": false,
   "sessions": [
@@ -2291,10 +2254,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T22:43:05.755Z",
+      "lastAt": "2026-07-27T22:44:58.338Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 55
+      "beats": 56
     }
   ],
   "establishedFacts": [
@@ -2332,17 +2295,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 87,
-    "choices": 87,
+    "sceneSummary": 88,
+    "choices": 88,
     "characterDeltas": 38,
-    "scene": 87,
+    "scene": 88,
     "placeUpdates": 12,
     "codexUpdates": 75,
-    "timeOps": 86,
+    "timeOps": 87,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 20,
-    "npcUpdates": 78,
+    "npcUpdates": 79,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -2352,7 +2315,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 87,
+  "_opTurns": 88,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2364,7 +2327,7 @@
       "falsecraft": 4,
       "the_wrong_reality": 4,
       "the_misdirect": 1,
-      "the_better_story": 7,
+      "the_better_story": 8,
       "prism_sight": 7,
       "harmonic_voice": 1
     },

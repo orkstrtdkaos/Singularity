@@ -54,10 +54,10 @@
   ],
   "alignment": {
     "mechanical_spiritual": 0.15354095801898265,
-    "concrete_abstract": -0.019495049818819353,
+    "concrete_abstract": -0.0035202973278783863,
     "spectrumId": -0.3926277463508062,
     "dark_light": 0.23157616387893895,
-    "falsehood_truth": 0.5159260369268541,
+    "falsehood_truth": 0.5251297350805114,
     "violence_peace": 0.33483389400033525,
     "chaos_order": 0.22408982367334745,
     "death_life": 0.03
@@ -77,7 +77,8 @@
       "effects": {
         "energy": 10
       },
-      "consumable": true
+      "consumable": true,
+      "pinned": true
     },
     {
       "id": "trade_tokens",
@@ -123,7 +124,8 @@
       "effects": {
         "energy": 15
       },
-      "consumable": true
+      "consumable": true,
+      "pinned": true
     },
     {
       "id": null,
@@ -420,24 +422,40 @@
       {
         "summary": "Usnea attempts to sketch the disc's Precursor geometry but lacks the photonic craft vocabulary — the design refuses to resolve.",
         "narration": "The lamp's wick barely crests the oil-ring now, and the light it throws is thin and directionless — not a working beam, barely a warmth. You spread your hand on the bench beside the disc and try to pull the Prism Sight reading you took an hour ago into something useful: a schema, a construction note, something that says *here is where the Precursor geometry sits and here is how a maker could approach it deliberately*. The attempt is honest. Your reason knows the spiral's shape; your insight caught the six-count layering. What your craft cannot do is translate knowing into making. The light-design language — the precise shorthand of aperture angles, lattice-winding intervals, photonic deposition sequences — lives in Orla's hands and in the guild records you've never trained with. You trace a rough arc on the bench with one finger, feel it mean nothing, and stop.\n\nAevi holds its near-blue stillness without comment. The motes don't dim — they stay consolidated and watchful — but there is something in the quality of the silence that reads as *not the moment for this*. The disc sits three handspans away, its spiral inlay catching even the wick's dying light and returning it slightly wrong, slightly deeper than it should be. The geometry that printed itself into Orla's lattice is not hostile, but it is not passive either. It is doing something, right now, in the air of this workshop. Sketching around it without the technical foundation is less like drawing a map and more like trying to trace smoke.\n\nOrla's pen lifts. She reads back the last line of the settlement request silently, lips moving, unaware of what just passed in the few feet behind her. The lane outside has shifted — the flat gray-dark is separating now into actual pre-dawn blue, the first real light since the lamp was bright. She will finish soon. The disc is right there, carrying something neither of you fully understands, and the morning is coming on."
+      },
+      {
+        "player": "Ask Orla directly — before she finishes the settlement request — whether she can document the disc's geometry in guild-readable notation. She's the only one in this room who can.",
+        "summary": "Early morning at Orla's workshop — Usnea asks Orla to document the disc's Precursor geometry; Orla names the core problem: the pattern arrived unbidden, received rather than made.",
+        "narration": "You set the failed sketch aside and lean toward the workbench. Orla's pen has stilled; she's rereading the final line of the settlement request, lips moving silently. You wait for the breath between her words.\n\n\"Orla,\" you say quietly. \"Before you finish — can you document what's in the disc? In guild notation? Something a weaver could read the way you read it?\"\n\nShe lifts her head. Her eyes track from the parchment to the disc, then to you, and you watch the question land in her. She doesn't answer immediately. Instead she sets the pen down — the scratch of nib on stone stopping — and reaches for the disc with both hands, rotating it so the lamplight catches the spiral inlay at a different angle.\n\n\"The geometry *is* in the lattice,\" she says. Her voice has changed; it's the voice of someone solving a problem aloud. \"Not drawn. Received. Printed by something older than my hand.\"\n\nShe brings the disc closer to the lamp. The thin light catches the photonic structure — layer on layer, the six-fold count visible in the spacing, the spiral tightening toward a center you can't quite see.\n\n\"I can document the geometry,\" Orla says. \"But not in guild notation. Guild notation is for *made* things — aperture angles, lattice intervals, intentional specifications.\" She looks at you. \"This wasn't made. It was *received.* I can show you what arrived. I can't show you how to make it happen again — because I didn't make it happen at all.\"\n\nAevi's cluster brightens — a sharp, attentive flare. The motes hum a single, sustained note."
       }
     ],
     "lastTurn": {
-      "narration": "The lamp's wick barely crests the oil-ring now, and the light it throws is thin and directionless — not a working beam, barely a warmth. You spread your hand on the bench beside the disc and try to pull the Prism Sight reading you took an hour ago into something useful: a schema, a construction note, something that says *here is where the Precursor geometry sits and here is how a maker could approach it deliberately*. The attempt is honest. Your reason knows the spiral's shape; your insight caught the six-count layering. What your craft cannot do is translate knowing into making. The light-design language — the precise shorthand of aperture angles, lattice-winding intervals, photonic deposition sequences — lives in Orla's hands and in the guild records you've never trained with. You trace a rough arc on the bench with one finger, feel it mean nothing, and stop.\n\nAevi holds its near-blue stillness without comment. The motes don't dim — they stay consolidated and watchful — but there is something in the quality of the silence that reads as *not the moment for this*. The disc sits three handspans away, its spiral inlay catching even the wick's dying light and returning it slightly wrong, slightly deeper than it should be. The geometry that printed itself into Orla's lattice is not hostile, but it is not passive either. It is doing something, right now, in the air of this workshop. Sketching around it without the technical foundation is less like drawing a map and more like trying to trace smoke.\n\nOrla's pen lifts. She reads back the last line of the settlement request silently, lips moving, unaware of what just passed in the few feet behind her. The lane outside has shifted — the flat gray-dark is separating now into actual pre-dawn blue, the first real light since the lamp was bright. She will finish soon. The disc is right there, carrying something neither of you fully understands, and the morning is coming on.",
-      "sceneSummary": "Usnea attempts to sketch the disc's Precursor geometry but lacks the photonic craft vocabulary — the design refuses to resolve.",
+      "narration": "You set the failed sketch aside and lean toward the workbench. Orla's pen has stilled; she's rereading the final line of the settlement request, lips moving silently. You wait for the breath between her words.\n\n\"Orla,\" you say quietly. \"Before you finish — can you document what's in the disc? In guild notation? Something a weaver could read the way you read it?\"\n\nShe lifts her head. Her eyes track from the parchment to the disc, then to you, and you watch the question land in her. She doesn't answer immediately. Instead she sets the pen down — the scratch of nib on stone stopping — and reaches for the disc with both hands, rotating it so the lamplight catches the spiral inlay at a different angle.\n\n\"The geometry *is* in the lattice,\" she says. Her voice has changed; it's the voice of someone solving a problem aloud. \"Not drawn. Received. Printed by something older than my hand.\"\n\nShe brings the disc closer to the lamp. The thin light catches the photonic structure — layer on layer, the six-fold count visible in the spacing, the spiral tightening toward a center you can't quite see.\n\n\"I can document the geometry,\" Orla says. \"But not in guild notation. Guild notation is for *made* things — aperture angles, lattice intervals, intentional specifications.\" She looks at you. \"This wasn't made. It was *received.* I can show you what arrived. I can't show you how to make it happen again — because I didn't make it happen at all.\"\n\nAevi's cluster brightens — a sharp, attentive flare. The motes hum a single, sustained note.",
+      "sceneSummary": "Early morning at Orla's workshop — Usnea asks Orla to document the disc's Precursor geometry; Orla names the core problem: the pattern arrived unbidden, received rather than made.",
       "choices": [
         {
-          "label": "Ask Orla directly — before she finishes the settlement request — whether she can document the disc's geometry in guild-readable notation. She's the only one in this room who can.",
+          "label": "Ask Orla to show you how to *receive* rather than make — is there a technique, a readiness, something she did differently when the pattern began arriving?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell Orla what the tuning-warden saw three springs ago — light from inside the stone, the same six-count — and ask if the disc is *answering* something older that's already been calling.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.7,
-            "concrete_abstract": 0.3
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "direct"
+            "share"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -446,17 +464,13 @@
           "emergenceId": null
         },
         {
-          "label": "Wait for Orla to finish — then show her where Prism Sight read the geometry and let her own eyes find what yours couldn't capture in craft language.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.4,
-            "falsehood_truth": 0.6
-          },
+          "label": "Ask Orla what she needs — time, materials, something else — to finish the settlement request and decide on the expedition before the Plateau wakes.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "plan"
+            "lead"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -465,36 +479,15 @@
           "emergenceId": null
         },
         {
-          "label": "Let Aevi speak to what the disc is doing right now — the motes are oriented on it, consolidated and watching. Whatever they're reading, name it before the morning light changes the workshop.",
+          "label": "Step closer to the lamp and turn the disc yourself — look at the layers as Orla is looking at them, let Prism Sight read what's *receiving* the pattern in real time.",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.2,
-            "dark_light": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "motes-vigil",
-          "energyCost": 5,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step outside for a breath of dawn air — let the approaching full light reset your eyes before Orla looks up. A moment out of the workshop before the next question lands.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.7
-          },
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "study"
           ],
-          "abilityId": null,
+          "abilityId": "prism_sight",
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
@@ -502,43 +495,41 @@
         }
       ],
       "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
+      "characterDeltas": {},
       "ledgerEvents": [],
       "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "offer": {
+        "thing": "Orla names the distinction between making and receiving — a dividing line in craft philosophy that opens a new way of thinking about what the Precursor system is doing.",
+        "from": "Orla's own honest struggle to frame what happened at her workbench; the disc's arrival as a fact that cannot be unseen."
+      },
+      "stageOps": [],
       "scene": {
-        "setting": "Orla's workshop, Edge District lane, Radiant Plateau — wick floating in dying oil-ring, lane shutters showing true pre-dawn blue separation outside; full light perhaps twenty minutes away.",
+        "setting": "Orla's workshop, Edge District lane, Radiant Plateau — dawn now arriving in earnest; the pre-dawn blue separation at the shutters has warmed toward true morning light. The wick in the oil-ring has burned much lower; full workshop brightness will arrive within ten minutes.",
         "npcsPresent": [
           {
             "name": "Orla",
-            "state": "Pen lifted, reading back the last line of the settlement request silently — lips moving; nearly finished, unaware of Usnea's failed sketch attempt behind her."
+            "state": "Pen set down, disc in both hands, rotating it to catch the lamplight at different angles — solving the problem aloud, her attention entirely on the geometry and what it means."
           },
           {
             "name": "Aevi",
-            "state": "Consolidated into its tightest near-blue cluster, motes oriented on the disc and holding that stillness — watchful, not withdrawn."
+            "state": "Cluster brightened to maximum, motes humming a single sustained note — responding to Orla's naming of the received-not-made distinction."
           }
         ],
         "objects": [
-          "Accountability Notice Copy (unfolded on workbench — 'ask the river' annotation visible)",
-          "Clean parchment strip (settlement request nearly complete — Orla rereading final line)",
-          "Small lamp — wick floating in last of the oil-ring, light very thin",
-          "Half-finished photonic disc on main workbench — tight spiral inlay at one edge, lattice actively receiving six-count pulse",
-          "Orla's tools laid in precise order along the bench",
-          "Orla's Memory Glass (in Usnea's inventory)",
-          "Upper Zone Ridge Map (rolled, in inventory)",
-          "Accountability Notice Copy (in Usnea's inventory)"
+          "Accountability Notice Copy (unfolded on workbench)",
+          "Clean parchment strip (settlement request, pen now set beside it)",
+          "Small lamp (wick very low, light warming toward morning)",
+          "Half-finished photonic disc (in Orla's hands, spiral inlay now catching the angled lamplight)",
+          "Orla's tools (laid in precise order along the bench)",
+          "Failed sketch (set aside on the bench — attempt to capture the geometry in light-design notation)"
         ],
         "threads": [
-          "Orla nearly finished with the settlement request — expedition answer still pending",
-          "Disc carries Precursor geometry actively printing into its lattice — Orla does not know this",
-          "Aevi's near-blue stillness and orientation on the disc — what exactly it is reading, unsaid",
-          "Usnea's craft vocabulary too limited to sketch the geometry — that gap named but unresolved",
-          "Dawn arriving in earnest — full workshop light within twenty minutes"
+          "Orla's decision on the expedition — still pending, settlement request nearly finished but not signed",
+          "The distinction between made and received — now named by Orla; its implications for understanding the Precursor system unfolding",
+          "Full workshop daylight arriving within minutes — the lane will begin to stir, district normal beginning"
         ]
       },
       "npcUpdates": [
@@ -546,74 +537,83 @@
           "op": "update",
           "npcId": "orla",
           "name": "Orla",
-          "role": "Optics-weaver, Edge District, Radiant Plateau",
-          "note": "Pen lifted — rereading final line of settlement request. Unaware of Usnea's attempt to sketch the disc geometry behind her. Nearly done.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At workshop bench, settlement request nearly complete — expedition answer still pending her final word."
+          "note": "Pen set down; the settlement request nearly complete but deferred. Holding the disc and naming the core philosophical problem: the geometry arrived without being made. She can document what was received, but guild notation has no language for unrequested pattern.",
+          "learned": [
+            "The photonic pattern in the disc was received, not made — it arrived in her work before her intention shaped it",
+            "Guild notation cannot document received pattern, only intentional specification",
+            "The distinction between making and receiving may be central to understanding how the Precursor system operates"
+          ],
+          "relationshipDelta": 0
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Day 12 early morning: Usnea attempted to sketch the disc's Precursor geometry from Prism Sight memory — the craft vocabulary was insufficient; no schema produced. The disc continues to receive the six-count pulse as dawn light builds in the workshop."
-        }
-      ],
+      "placeUpdates": [],
       "codexUpdates": [
         {
-          "topic": "radiant-array-precursor-geometry",
-          "label": "Radiant Array — Precursor Geometry",
-          "kind": "mystery",
-          "entityId": "orla",
-          "fact": "Day 12 morning: Translating Prism Sight's reading of the disc's six-count geometry into a craft schema failed — the photonic design language belongs to guild-trained makers, not sight-readers. The geometry can be perceived but not yet documented without Orla's technical vocabulary.",
+          "topic": "received-vs-made-distinction",
+          "label": "The Received Versus the Made",
+          "kind": "lore",
+          "fact": "Orla drew the distinction between photonic work that is intentionally made (guild-notation specification) and pattern that arrives unbidden and is received. The disc's geometry is received — it printed itself into her photonic lattice before her conscious intention shaped it. Guild notation has no language for documenting received pattern, only made specification.",
           "links": [
             "the-six-fold-pattern",
-            "proposed-expedition-disputed-zone",
+            "radiant-plateau-edge-district",
             "orla",
-            "echo-river-contamination"
+            "proposed-expedition-disputed-zone"
           ]
         }
       ],
-      "timeAdvanceHours": 0,
-      "sceneEnded": false
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": {},
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "imagePrompt": "Orla holds the photonic disc close to the lamp's fading flame, the six-fold spiral inlay catching warm light in layers — her hands steady, her eyes tracking the pattern that arrived without her asking. Behind her, Aevi's cluster brightens to a steady glow, motes humming a single note. At the edge of the frame, the parchment settlement request lies unfinished, pen beside it.",
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/Orla%20holds%20the%20photonic%20disc%20close%20to%20the%20lamp's%20fading%20flame%2C%20the%20six-fold%20spiral%20inlay%20catching%20warm%20light%20in%20layers%20%E2%80%94%20her%20hands%20steady%2C%20her%20eyes%20tracking%20the%20pattern%20that%20arrived%20without%20her%20asking.%20Behind%20her%2C%20Aevi's%20cluster%20brightens%20to%20a%20steady%20glow%2C%20motes%20humming%20a%20single%20note.%20At%20the%20edge%20of%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=83824&nologo=true"
     },
     "sceneState": {
-      "setting": "Orla's workshop, Edge District lane, Radiant Plateau — wick floating in dying oil-ring, lane shutters showing true pre-dawn blue separation outside; full light perhaps twenty minutes away.",
+      "setting": "Orla's workshop, Edge District lane, Radiant Plateau — dawn now arriving in earnest; the pre-dawn blue separation at the shutters has warmed toward true morning light. The wick in the oil-ring has burned much lower; full workshop brightness will arrive within ten minutes.",
       "npcsPresent": [
         {
           "name": "Orla",
-          "state": "Pen lifted, reading back the last line of the settlement request silently — lips moving; nearly finished, unaware of Usn"
+          "state": "Pen set down, disc in both hands, rotating it to catch the lamplight at different angles — solving the problem aloud, he"
         },
         {
           "name": "Aevi",
-          "state": "Consolidated into its tightest near-blue cluster, motes oriented on the disc and holding that stillness — watchful, not "
+          "state": "Cluster brightened to maximum, motes humming a single sustained note — responding to Orla's naming of the received-not-m"
         }
       ],
       "objects": [
-        "Accountability Notice Copy (unfolded on workbench — 'ask the river' annotation v",
-        "Clean parchment strip (settlement request nearly complete — Orla rereading final",
-        "Small lamp — wick floating in last of the oil-ring, light very thin",
-        "Half-finished photonic disc on main workbench — tight spiral inlay at one edge, ",
-        "Orla's tools laid in precise order along the bench",
-        "Orla's Memory Glass (in Usnea's inventory)",
-        "Upper Zone Ridge Map (rolled, in inventory)",
-        "Accountability Notice Copy (in Usnea's inventory)"
+        "Accountability Notice Copy (unfolded on workbench)",
+        "Clean parchment strip (settlement request, pen now set beside it)",
+        "Small lamp (wick very low, light warming toward morning)",
+        "Half-finished photonic disc (in Orla's hands, spiral inlay now catching the angl",
+        "Orla's tools (laid in precise order along the bench)",
+        "Failed sketch (set aside on the bench — attempt to capture the geometry in light"
       ],
       "threads": [
-        "Orla nearly finished with the settlement request — expedition answer still pending",
-        "Disc carries Precursor geometry actively printing into its lattice — Orla does not know this",
-        "Aevi's near-blue stillness and orientation on the disc — what exactly it is reading, unsaid",
-        "Usnea's craft vocabulary too limited to sketch the geometry — that gap named but unresolved",
-        "Dawn arriving in earnest — full workshop light within twenty minutes"
+        "Orla's decision on the expedition — still pending, settlement request nearly finished but not signed",
+        "The distinction between made and received — now named by Orla; its implications for understanding the Precursor system unfolding",
+        "Full workshop daylight arriving within minutes — the lane will begin to stir, district normal beginning"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 12,
-    "hour": 9,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [
@@ -639,6 +639,67 @@
       ],
       "startedAt": "2026-07-04T14:13:57.286Z",
       "resolvedAt": "2026-07-09T18:14:47.027Z"
+    },
+    {
+      "id": "the-tree-that-walked-away",
+      "title": "The Tree That Walked Away",
+      "structured": true,
+      "status": "active",
+      "premise": "A baobab who became conscious — who pulled his own roots from African soil and wandered into a world that did not make him — searches for whether the meaning he could not find at home is something the world can give, or something only he can grow.",
+      "stakes": "To root again in something vast enough to be worth it, or to discover that a walking tree carries its home in its heartwood and always did.",
+      "axis": null,
+      "traditions": [],
+      "giver": null,
+      "legend": "the-mother-baobab",
+      "region": "valley",
+      "tier": "personal",
+      "arcId": "usnea-beard_personal_arc",
+      "locationId": null,
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "the hollow that follows — in every orchard he orders, every field he brings into abundance, Usnea finds the work complete and the meaning still absent, and something in the light he bends begins to sh"
+        },
+        {
+          "id": "s2",
+          "objective": "what the Mother holds — a signal, a pulse, a resonance through the nanite-threaded root-memory he did not know he carried: the Mother Baobab is dying, and the community that grew under her is failing "
+        },
+        {
+          "id": "s3",
+          "objective": "the rooting question — he arrives at the ground of his origin, the dying tree before him, the community that needs what he has become, the world behind him still hungry for what he gives, and the choi"
+        }
+      ],
+      "routes": {
+        "root": "root here — give himself back to the place that made him, let his nanite-threaded body become the new Mother, the living infrastructure the community rebuilds around, vast and still and finally enough",
+        "carry": "carry her forward — take a cutting, a seed, a fragment of the Mother's resonance into the world with him, so that every field he tends henceforth grows under something that remembers Africa, and the m",
+        "braid": "become the bridge — refuse the binary of home and horizon, establish a living network through the substrate connecting the Mother's ground to every orchard he has touched, so that the tree that walked"
+      },
+      "outcomes": [
+        {
+          "id": "root",
+          "name": "Root",
+          "narration": [],
+          "effects": []
+        },
+        {
+          "id": "carry",
+          "name": "Carry",
+          "narration": [],
+          "effects": []
+        },
+        {
+          "id": "braid",
+          "name": "Braid",
+          "narration": [],
+          "effects": []
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-19T13:17:00.495Z",
+      "startedWorldDay": 19
     }
   ],
   "npcRegistry": {
@@ -682,7 +743,9 @@
         "locationId": "millbrook",
         "day": 11
       },
-      "statusNote": "At the common house table — the narrowed ask has re-disturbed his settled fear; jaw working; not hostile but weighing."
+      "statusNote": "At the common house table — the narrowed ask has re-disturbed his settled fear; jaw working; not hostile but weighing.",
+      "gender": "man",
+      "pronouns": "he/him"
     },
     "renn": {
       "id": "renn",
@@ -722,7 +785,9 @@
         "locationId": "millbrook",
         "day": 11
       },
-      "statusNote": "At the common house table — both hands in lap, head settled, absorbing the Mantle's shift alongside the complete evidence."
+      "statusNote": "At the common house table — both hands in lap, head settled, absorbing the Mantle's shift alongside the complete evidence.",
+      "gender": "man",
+      "pronouns": "he/him"
     },
     "third-farmer": {
       "id": "third-farmer",
@@ -760,7 +825,9 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
-      }
+      },
+      "gender": "man",
+      "pronouns": "he/him"
     },
     "elder-woman": {
       "id": "elder-woman",
@@ -788,7 +855,9 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her"
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -835,7 +904,9 @@
         "locationId": "millbrook",
         "day": 11
       },
-      "statusNote": "At the common house table — the next task is taking shape around Dresh's three conditions; she is the room's quiet anchor for what comes after."
+      "statusNote": "At the common house table — the next task is taking shape around Dresh's three conditions; she is the room's quiet anchor for what comes after.",
+      "gender": "woman",
+      "pronouns": "she/her"
     },
     "dockside-child": {
       "id": "dockside-child",
@@ -886,7 +957,9 @@
       "aliases": [
         "Unknown (dockside Child)"
       ],
-      "nameRevealed": true
+      "nameRevealed": true,
+      "gender": "woman",
+      "pronouns": "she/her"
     },
     "gateline-warden": {
       "id": "gateline-warden",
@@ -933,7 +1006,13 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 11
-      }
+      },
+      "gender": "man",
+      "pronouns": "he/him",
+      "domains": {
+        "primary": "harmonic"
+      },
+      "domainsSource": "role"
     },
     "pell": {
       "id": "pell",
@@ -980,7 +1059,9 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 11
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her"
     },
     "orla": {
       "id": "orla",
@@ -993,7 +1074,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d11] Usnea has arrived at the Edge District lane and is approaching her patch — she does not yet know Millbrook's panel accepted the evidence and named her publicly.",
         "[d12] Door opened without hesitation at Usnea's knock — read something in the approach and stepped back immediately. Is not yet told anything; the workshop is open and she is waiting.",
         "[d12] Received the full sequence — Millbrook's acceptance, Fendt named in official record, supervisor-chalk addition, and the 'ask the river' annotation — in plain spoken briefing. Her r",
         "[d12] Agreed to write the weaver-guild settlement request naming the Plateau as a party — stated she read Dresh's condition before being asked. Flagged the 'ask the river' annotation as ",
@@ -1002,17 +1082,18 @@
         "[d12] Recognized the braided three-alignment geometry from Usnea's description of the Zone underfoot — revised her assumption that the Plateau's eastern armature copied pre-Transition in",
         "[d12] Writing the settlement request in quiet focus — Usnea waiting without interruption. The disc's geometry studied without her awareness.",
         "[d12] Writing the settlement request in focused quiet — set pen down to reread; unaware that Aevi identified the disc's spiral as Precursor geometry printing itself into her work before ",
-        "[d12] Pen lifted — rereading final line of settlement request. Unaware of Usnea's attempt to sketch the disc geometry behind her. Nearly done."
+        "[d12] Pen lifted — rereading final line of settlement request. Unaware of Usnea's attempt to sketch the disc geometry behind her. Nearly done.",
+        "[d12] Pen set down; the settlement request nearly complete but deferred. Holding the disc and naming the core philosophical problem: the geometry arrived without being made. She can document what was received, but guild notation has no language for unrequested pattern."
       ],
       "knownFacts": [
-        "She read and rehearsed this language before Usnea arrived — the drafting was not improvised tonight",
-        "An optics-weaver's presence in the Zone complicates the guild record that opens the path — she is weighing both sides of her own position",
-        "She wants to see the source — what the ford glass couldn't show — but won't let wanting override mandate",
         "Glanced at the half-finished disc during her calculation — it may be connected to her decision",
         "The photonic array's eastern armature shares geometry with the three braided Precursor alignments beneath the eastern rim path — she now suspects the array didn",
         "The braided alignment pulse travels directed toward the valley water table — not by gradient but by intent",
         "The photonic disc she is weaving carries the aperture's six-count spiral geometry in its photonic lattice — whether consciously sourced or not is unknown",
-        "The disc's photonic lattice was already receiving the Precursor six-count pulse when Orla began weaving — she laid her inlay into a pattern that arrived before "
+        "The disc's photonic lattice was already receiving the Precursor six-count pulse when Orla began weaving — she laid her inlay into a pattern that arrived before ",
+        "The photonic pattern in the disc was received, not made — it arrived in her work before her intention shaped it",
+        "Guild notation cannot document received pattern, only intentional specification",
+        "The distinction between making and receiving may be central to understanding how the Precursor system operates"
       ],
       "skillsObserved": [
         "translating institutional ambiguity into navigable language",
@@ -1027,7 +1108,15 @@
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 12
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Orla%2C%20woman%2C%20Optics-weaver%2C%20Edge%20District%2C%20Radiant%20Plateau%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=75356&nologo=true",
+      "_portraitTier": "devoted",
+      "domains": {
+        "primary": "radiant_folk"
+      },
+      "domainsSource": "role"
     },
     "amber-lath-keeper": {
       "id": "amber-lath-keeper",
@@ -1072,7 +1161,13 @@
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 12
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her",
+      "domains": {
+        "primary": "radiant_folk"
+      },
+      "domainsSource": "role"
     },
     "brynjar-andyrsson": {
       "id": "brynjar-andyrsson",
@@ -1119,7 +1214,9 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 11
-      }
+      },
+      "gender": "man",
+      "pronouns": "he/him"
     },
     "councilor-dresh": {
       "id": "councilor-dresh",
@@ -1166,7 +1263,9 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 11
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her"
     },
     "josset": {
       "id": "josset",
@@ -1194,6 +1293,46 @@
         "locationId": "millbrook",
         "day": 11
       }
+    },
+    "fendt-filtration-engineer": {
+      "id": "fendt-filtration-engineer",
+      "name": "Fendt",
+      "role": "",
+      "description": "",
+      "firstMet": {
+        "locationId": null,
+        "day": 8
+      },
+      "relationship": 0,
+      "history": [
+        "[d8] Known from what has passed between you."
+      ],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": null,
+      "pronouns": null,
+      "_backfilledFrom": "establishedFacts"
+    },
+    "tuning-warden-gateline": {
+      "id": "tuning-warden-gateline",
+      "name": "Tuning-Warden",
+      "role": "",
+      "description": "",
+      "firstMet": {
+        "locationId": null,
+        "day": 9
+      },
+      "relationship": 0,
+      "history": [
+        "[d9] Known from what has passed between you."
+      ],
+      "knownFacts": [],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": null,
+      "pronouns": null,
+      "_backfilledFrom": "establishedFacts"
     }
   },
   "placeMemory": {
@@ -1237,73 +1376,78 @@
           "name": "Lower Terrace Channel Junction",
           "day": 4,
           "visited": true,
-          "note": "Warden admitted prior sighting of channel light (three springs back); junction-stone crack visible from gate arch positi"
+          "note": "Warden admitted prior sighting of channel light (three springs back); junction-stone crack visible from gate arch positi",
+          "parentId": "millbrook"
         },
         "millbrook-dock-lowest-plank": {
           "name": "Millbrook Dock — Lowest Plank",
           "day": 4,
           "visited": true,
-          "note": "Six-fold pulse steady and cleaner at dock-level — Day 5 dawn. Sela's heel-print in the mud. Aevi at full ring, listening"
+          "note": "Six-fold pulse steady and cleaner at dock-level — Day 5 dawn. Sela's heel-print in the mud. Aevi at full ring, listening",
+          "parentId": "millbrook"
         },
         "common-house-side-entrance": {
           "name": "Common House Side Entrance",
           "day": 5,
           "visited": true,
-          "note": "Thursday's evidence order discussed here — five elders, Dresh leads, Sela speaks last."
+          "note": "Thursday's evidence order discussed here — five elders, Dresh leads, Sela speaks last.",
+          "parentId": "millbrook"
         },
         "common-house-back-room": {
           "name": "Common House Back Room",
           "day": 5,
           "visited": true,
-          "note": "Josen's traveler room — straw-tick, wool blanket; Usnea sleeping here night of Day 4."
+          "note": "Josen's traveler room — straw-tick, wool blanket; Usnea sleeping here night of Day 4.",
+          "parentId": "millbrook"
         },
         "old-stone-mill-weir": {
           "name": "Old Stone Mill Weir",
           "day": 5,
           "visited": true,
-          "note": "Day 5 dawn: six-fold pulse confirmed crossing both sides of the weir — mill-race and main channel. The pulse grows harde"
+          "note": "Day 5 dawn: six-fold pulse confirmed crossing both sides of the weir — mill-race and main channel. The pulse grows harde",
+          "parentId": "millbrook"
         },
         "millbrook-drinking-wells": {
           "name": "Millbrook Drinking Wells",
           "day": 5,
           "visited": false,
-          "note": "Day 5 dawn: six-fold pulse confirmed reaching well-mouths through south-bank loam — thermal record suggests the signal h"
+          "note": "Day 5 dawn: six-fold pulse confirmed reaching well-mouths through south-bank loam — thermal record suggests the signal h",
+          "parentId": "millbrook"
         },
         "pell-s-cord-stall-east-market": {
           "name": "Pell's Cord Stall — East Market",
           "day": 6,
           "visited": true,
-          "note": "Permission granted and closed here — Pell's condition (her veto at the door) stands. Cart driver a full witness to resol"
+          "note": "Permission granted and closed here — Pell's condition (her veto at the door) stands. Cart driver a full witness to resol",
+          "parentId": "millbrook"
         },
         "south-embankment-clay-pipe-run": {
           "name": "South Embankment Clay Pipe Run",
           "day": 6,
           "visited": true,
-          "note": "Day 6: Usnea pushed root-sense hard along the south embankment — pulse confirmed steady, full, and settled in the buried"
-        },
-        "common-house-yard": {
-          "name": "Common House Yard",
-          "day": 9,
-          "visited": true,
-          "note": "Outer gathering space — farmers and elders assemble here before formal sessions; low stone wall, packed earth, side entr"
+          "note": "Day 6: Usnea pushed root-sense hard along the south embankment — pulse confirmed steady, full, and settled in the buried",
+          "parentId": "millbrook"
         },
         "common-house-fireside": {
           "name": "Common House Fireside",
           "day": 9,
           "visited": true,
-          "note": "Brynjar risen from the fire, cup set down — witness to the opening of Thursday's elder presentation."
+          "note": "Brynjar risen from the fire, cup set down — witness to the opening of Thursday's elder presentation.",
+          "parentId": "millbrook"
         },
         "common-house-yard-outer-gathering-spac": {
           "name": "Common House Yard — Outer gathering spac",
           "day": 9,
           "visited": true,
-          "note": "Elder presentation opening moment — all yard witnesses assembled and still as Usnea steps forward."
+          "note": "Elder presentation opening moment — all yard witnesses assembled and still as Usnea steps forward.",
+          "parentId": "millbrook"
         },
         "common-house-table-elder-presentation": {
           "name": "Common House Table — Elder Presentation",
           "day": 9,
           "visited": true,
-          "note": "Three conditions for Zone survey mandate named by Dresh: two written settlement requests, Heights observer with gate-sen"
+          "note": "Three conditions for Zone survey mandate named by Dresh: two written settlement requests, Heights observer with gate-sen",
+          "parentId": "millbrook"
         }
       }
     },
@@ -1323,7 +1467,8 @@
           "name": "Lower Terrace Gateline",
           "day": 4,
           "visited": true,
-          "note": "Stone threshold entry point to the Heights, staffed by a tuning-warden with chord-staff. Practice-wall nearby."
+          "note": "Stone threshold entry point to the Heights, staffed by a tuning-warden with chord-staff. Practice-wall nearby.",
+          "parentId": "harmonic_heights_terrace"
         }
       }
     },
@@ -1368,73 +1513,78 @@
           "name": "Edge District Gate Notice Board",
           "day": 6,
           "visited": true,
-          "note": "Public posting point near the district entrance; current notice concerns filtration engineer accountability assembly in "
+          "note": "Public posting point near the district entrance; current notice concerns filtration engineer accountability assembly in ",
+          "parentId": "radiant_plateau_edge"
         },
         "edge-district-lane-orla-s-patch": {
           "name": "Edge District Lane — Orla's patch",
           "day": 6,
           "visited": true,
-          "note": "Usnea arrived here Day 11 late afternoon — Orla does not yet know the presentation outcome."
+          "note": "Usnea arrived here Day 11 late afternoon — Orla does not yet know the presentation outcome.",
+          "parentId": "radiant_plateau_edge"
         },
         "south-face-lower-switchback": {
           "name": "South-Face Lower Switchback",
           "day": 6,
           "visited": false,
-          "note": "Warden post here answers to Fendt's array supervisors during filtration runs — and a buried Precursor alignment runs ben"
-        },
-        "amber-lath-wayhouse": {
-          "name": "Amber Lath Wayhouse",
-          "day": 6,
-          "visited": true,
-          "note": "Keeper revealed: a supervisor, not a citizen, added the red chalk annotation and filed nothing. Parchment copy now in Us"
+          "note": "Warden post here answers to Fendt's array supervisors during filtration runs — and a buried Precursor alignment runs ben",
+          "parentId": "radiant_plateau_edge"
         },
         "eastern-rim-descent": {
           "name": "Eastern Rim Descent",
           "day": 6,
           "visited": false,
-          "note": "The clean route off the plateau — no filtration arrays, no switchback warden authority. Adds half a morning to the valle"
+          "note": "The clean route off the plateau — no filtration arrays, no switchback warden authority. Adds half a morning to the valle",
+          "parentId": "radiant_plateau_edge"
         },
         "amber-lath-wayhouse-upstairs-east-room": {
           "name": "Amber Lath Wayhouse — Upstairs East Room",
           "day": 7,
           "visited": true,
-          "note": "Small, clean room with cedar-resin plaster and a shutter cracked east for first light — Usnea's room for the night."
+          "note": "Small, clean room with cedar-resin plaster and a shutter cracked east for first light — Usnea's room for the night.",
+          "parentId": "radiant_plateau_edge"
         },
         "eastern-rim-path-precursor-crossing-po": {
           "name": "Eastern Rim Path — Precursor Crossing Po",
           "day": 7,
           "visited": true,
-          "note": "Three braided Precursor alignments cross beneath the rim path at regular intervals — six-count pulse confirmed by Old Ro"
+          "note": "Three braided Precursor alignments cross beneath the rim path at regular intervals — six-count pulse confirmed by Old Ro",
+          "parentId": "radiant_plateau_edge"
         },
         "south-road-lower-switchback-precursor-": {
           "name": "South Road Lower Switchback — Precursor ",
           "day": 7,
           "visited": false,
-          "note": "Older Precursor alignment terminates here beneath the filtration array access road — active node, six-count pulse confir"
+          "note": "Older Precursor alignment terminates here beneath the filtration array access road — active node, six-count pulse confir",
+          "parentId": "radiant_plateau_edge"
         },
         "eastern-rim-path-cliff-shoulder": {
           "name": "Eastern Rim Path — Cliff Shoulder",
           "day": 8,
           "visited": true,
-          "note": "The point where the rim path curves east and drops below south-road sightlines entirely — safe passage to the valley flo"
+          "note": "The point where the rim path curves east and drops below south-road sightlines entirely — safe passage to the valley flo",
+          "parentId": "radiant_plateau_edge"
         },
         "valley-floor-eastern-descent-egress": {
           "name": "Valley Floor — Eastern Descent Egress",
           "day": 8,
           "visited": true,
-          "note": "Where the eastern rim path meets the valley floor — Echo River visible ahead, Harmonic Heights across the valley, clean "
+          "note": "Where the eastern rim path meets the valley floor — Echo River visible ahead, Harmonic Heights across the valley, clean ",
+          "parentId": "radiant_plateau_edge"
         },
         "limestone-hollow-gravel-shoulder-rest": {
           "name": "Limestone Hollow — Gravel Shoulder Rest",
           "day": 8,
           "visited": true,
-          "note": "Old Roads confirmed alignment conduit structure here — six-fold pulse travels from upper Disputed Zone to valley water t"
+          "note": "Old Roads confirmed alignment conduit structure here — six-fold pulse travels from upper Disputed Zone to valley water t",
+          "parentId": "radiant_plateau_edge"
         },
         "valley-floor-eastern-egress-ford": {
           "name": "Valley Floor — Eastern Egress Ford",
           "day": 8,
           "visited": true,
-          "note": "Crossing point where eastern rim path meets the valley floor — six-fold pulse present in current underfoot, Day 8."
+          "note": "Crossing point where eastern rim path meets the valley floor — six-fold pulse present in current underfoot, Day 8.",
+          "parentId": "radiant_plateau_edge"
         }
       }
     }
@@ -1444,20 +1594,16 @@
     "lastTickDay": 12,
     "eventStages": {
       "water_crisis": {
-        "stage": 1,
-        "sinceDay": 1
+        "stage": 2,
+        "sinceDay": 13
       }
     },
-    "spectrumDrift": {},
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
     "news": [
-      {
-        "day": 4,
-        "text": "Word has spread beyond millbrook: Brokered a one-week irrigation truce between Holloway and Renn, reframing a personal dispute as a shared contamination problem for the village elders"
-      },
-      {
-        "day": 4,
-        "text": "Word has spread beyond millbrook: Walked the full eastern irrigation arm over two days and located the contamination's entry point — a warm seep beneath an old retaining wall with geometric patterning in the silt below"
-      },
       {
         "day": 8,
         "text": "Word has spread beyond millbrook: Traced the six-fold pulse south to Millbrook's drinking wells — confirmed the village water supply is inside the system's reach"
@@ -1469,10 +1615,152 @@
       {
         "day": 11,
         "text": "Word has spread beyond millbrook: Secured the tuning-warden's agreement to testify at Thursday's elder meeting — a Heights-side witness to the six-count pulse three springs before the crisis."
+      },
+      {
+        "day": 12,
+        "worldDay": 11,
+        "text": "This reaches your area — The lower filtration ledger — containing three weeks of falsified purity readings under Fendt's initials — has been removed from the array-office in the Edge District. (near radiant plateau edge)",
+        "impactsLocal": true
+      },
+      {
+        "day": 12,
+        "worldDay": 13,
+        "text": "Word reaches you: A death-binding ceremony was completed at Pell's forge in Millbrook — runes pressed into wood and iron with a maker's mark seated into the blade. The spear holds a nascent thread to Huginn and an open (near millbrook)"
+      },
+      {
+        "day": 12,
+        "worldDay": 13,
+        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
+      },
+      {
+        "day": 12,
+        "worldDay": 13,
+        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      },
+      {
+        "day": 12,
+        "worldDay": 17,
+        "text": "This reaches your area — Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements. (near radiant plateau edge)",
+        "impactsLocal": true
+      },
+      {
+        "day": 12,
+        "worldDay": 18,
+        "text": "This reaches your area — Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction (near millbrook)",
+        "impactsLocal": true
+      },
+      {
+        "day": 12,
+        "worldDay": 23,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations."
+      },
+      {
+        "day": 12,
+        "worldDay": 19,
+        "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
+      },
+      {
+        "day": 12,
+        "worldDay": 23,
+        "text": "Renn: Renn dug a shallow extension of the lower channel by hand, buying a little more reach toward the next field before the water runs out."
+      },
+      {
+        "day": 12,
+        "worldDay": 24,
+        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 12,
+        "worldDay": 24,
+        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 12,
+        "worldDay": 25,
+        "text": "This reaches your area — A new waygate stands on the left branch road in the Disputed Zone — the first made-gate since the Transition, built by a wright who tends endings. (near gen-disputed-zone-left-branch-entrance)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 12,
+        "worldDay": 26,
+        "text": "This reaches your area — The hollow's warden named its full purpose: a receiver built for a watershed-readiness question from the relay node south of the hollow. The circuit is intact. The question was never sent. (near gen-disputed-zone-left-branch-entrance)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 12,
+        "worldDay": 26,
+        "text": "This reaches your area — The left-branch reclamation site was given its final instruction and began winding down — the watershed contamination will clear on its own schedule within one to two weeks. (near gen-disputed-zone-left-branch-entrance)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 12,
+        "worldDay": 27,
+        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+        "tier": "event"
+      },
+      {
+        "day": 12,
+        "worldDay": 27,
+        "text": "Renn: Renn has cleared the worst of the sediment from the upper bend of the lower channel, and water now runs through roughly half its length without pooling.",
+        "tier": "ambient"
+      },
+      {
+        "day": 12,
+        "worldDay": 27,
+        "text": "Elder woman: The elder woman has quietly spoken with two of the other village families about whatever matter weighs on her, laying early groundwork for a broader conversation.",
+        "tier": "ambient"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-11T03:08:48.173Z"
+    "lastSharedReadAt": "2026-07-27T03:20:21.841Z",
+    "lastTickWorldDay": 27,
+    "lastCanonWorldDay": 27,
+    "lastGenCount": 651,
+    "wantProgress": {
+      "holloway": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 27,
+        "lastOutcome": "stall"
+      },
+      "renn": {
+        "progress": 2,
+        "status": "active",
+        "updatedWorldDay": 27,
+        "lastOutcome": "progress"
+      },
+      "elder-woman": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 27,
+        "lastOutcome": "progress"
+      },
+      "third-farmer": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 27,
+        "lastOutcome": "stall"
+      }
+    },
+    "arcStages": {
+      "arc_what_wakes_beneath": {
+        "othersPush": 1
+      }
+    },
+    "turnsSinceOffer": 0,
+    "recentOffers": [
+      {
+        "thing": "Orla names the distinction between making and receiving — a dividing line in craft philosophy that opens a new way of thinking about what…",
+        "from": "Orla's own honest struggle to frame what happened at her workbench; the disc's arrival as a fact that cannot be unseen."
+      }
+    ]
   },
   "bio": {
     "hometown": "A baobab tree from Africa",
@@ -1595,7 +1883,9 @@
         "label": "The Elder Woman",
         "kind": "person",
         "facts": [
-          "[d1] An unnamed Millbrook elder present at the well and the eastern field — watched Aevi with respectful recognition, not fear. Her dread at the channel mouth and her specific request for evidence suggests"
+          "[d1] An unnamed Millbrook elder present at the well and the eastern field — watched Aevi with respectful recognition, not fear. Her dread at the channel mouth and her specific request for evidence suggests",
+          "[d1] Millbrook elder (name unknown)",
+          "[d12] [while away] The elder woman has quietly spoken with two of the other village families about whatever matter weighs on her, laying early groundwork for a broader conversation."
         ],
         "links": [
           "millbrook",
@@ -1603,15 +1893,17 @@
           "aevi-reading-of-the-water"
         ],
         "createdDay": 1,
-        "updatedDay": 1,
-        "aliases": []
+        "updatedDay": 12,
+        "aliases": [],
+        "entityId": "elder-woman"
       },
       "mara-wells": {
         "id": "mara-wells",
         "label": "Mara Wells",
         "kind": "person",
         "facts": [
-          "[d1] Mara Wells is Millbrook's water-policy coordinator — has watched the Echo River for thirty years, noticed strange things before today, and came to the field already carrying a glass vial. She said thi"
+          "[d1] Mara Wells is Millbrook's water-policy coordinator — has watched the Echo River for thirty years, noticed strange things before today, and came to the field already carrying a glass vial. She said thi",
+          "[d1] Millbrook water-policy coordinator and elder"
         ],
         "links": [
           "echo-river-contamination",
@@ -1621,7 +1913,8 @@
         ],
         "createdDay": 1,
         "updatedDay": 1,
-        "aliases": []
+        "aliases": [],
+        "entityId": "mara-wells"
       },
       "contamination-evidence-for-the-elders": {
         "id": "contamination-evidence-for-the-elders",
@@ -1890,7 +2183,8 @@
         "kind": "place",
         "facts": [
           "[d3] The common house has a back traveler's room — straw-tick, wool blanket — kept by a man named Josen. Mara Wells can vouch for a visitor there by name.",
-          "[d11] Day 11: A hillside-fed cistern north of the mill weir provides clean water above the contamination's reach — the only confirmed secondary source inside the village. A market trader holds a partial pas"
+          "[d11] Day 11: A hillside-fed cistern north of the mill weir provides clean water above the contamination's reach — the only confirmed secondary source inside the village. A market trader holds a partial pas",
+          "[d9] you have walked here"
         ],
         "links": [
           "mara-wells",
@@ -1901,7 +2195,7 @@
           "proposed-expedition-disputed-zone"
         ],
         "createdDay": 3,
-        "updatedDay": 11,
+        "updatedDay": 9,
         "aliases": [
           "Millbrook"
         ],
@@ -1914,7 +2208,8 @@
         "facts": [
           "[d4] The Lower Terrace gateline is the entry point for valley-floor visitors. Radiant-origin travelers are met with practiced neutrality at best — wardens have been told to allow entry but haven't arrived ",
           "[d4] The Lower Terrace gateline has a stone-cut irrigation channel that, on Day 4 afternoon, showed a ribbon of pre-Transition light traveling upstream and sinking through a precisely straight crack in a j",
-          "[d4] The Heights' irrigation infrastructure is threaded through by the same pre-Transition system — the junction-stone at the gateline channel carries it, pulse and warmth, pointing upstream."
+          "[d4] The Heights' irrigation infrastructure is threaded through by the same pre-Transition system — the junction-stone at the gateline channel carries it, pulse and warmth, pointing upstream.",
+          "[d4] you have walked here"
         ],
         "links": [
           "echo-river-contamination",
@@ -1925,7 +2220,8 @@
         ],
         "createdDay": 4,
         "updatedDay": 4,
-        "aliases": []
+        "aliases": [],
+        "entityId": "harmonic-heights-terrace"
       },
       "precursor-light-ribbon": {
         "id": "precursor-light-ribbon",
@@ -1957,7 +2253,9 @@
           "[d6] Day 6 early morning: Pell heard the full speaker order named plainly — Sela is last, taps once, says nothing that needs explaining. She repeated 'last and briefly' aloud in her own voice. She is no lo",
           "[d6] Day 6 morning: Pell granted permission for Sela's Thursday testimony — her condition is that she stands at the common house door herself and holds the right to pull Sela if the room is wrong. Mara acc",
           "[d10] Day 10: Pell refused Sela's call forward — read the room as still-processing rather than ready. She distinguishes absorption from acceptance, and held her condition precisely as promised. Sela's testi",
-          "[d10] Day 10 night: Pell's arithmetic completed — she met Usnea's eyes across the common house and dipped her chin once toward the yard. Sela's call is live, contingent on timing and Dresh's first word."
+          "[d10] Day 10 night: Pell's arithmetic completed — she met Usnea's eyes across the common house and dipped her chin once toward the yard. Sela's call is live, contingent on timing and Dresh's first word.",
+          "[d4] Child witness — docks",
+          "[d6] Cord-and-hemp seller, east market; Sela's mother"
         ],
         "links": [
           "contamination-evidence-for-the-elders",
@@ -1968,8 +2266,12 @@
           "councilor-dresh"
         ],
         "createdDay": 4,
-        "updatedDay": 10,
-        "aliases": []
+        "updatedDay": 6,
+        "aliases": [
+          "Sela",
+          "Pell"
+        ],
+        "entityId": "dockside-child"
       },
       "thursday-elder-meeting": {
         "id": "thursday-elder-meeting",
@@ -1998,7 +2300,8 @@
           "[d7] Day 7 dusk: the district's mood on a filtration run night is deliberate uninvestment — apprentices working by rote, weavers incurious. A second anonymous annotation ('ask the river') appeared on the a",
           "[d7] The district board carries filtration output counts after each run — a local accountability mechanism. Three consecutive counts are off. The 'whose count?' annotation is standing unanswered, untouched",
           "[d11] Day 11 afternoon: Usnea returned to the Edge District via the eastern rim path — six-count pulse steady at each Precursor crossing underfoot. The district is in its late-afternoon working rhythm; no u",
-          "[d11] Day 11 night: The district accountability assembly board now carries Fendt's name in red chalk alongside the original filtration accountability notice. Supervisor inaction noted as meaningful by the A"
+          "[d11] Day 11 night: The district accountability assembly board now carries Fendt's name in red chalk alongside the original filtration accountability notice. Supervisor inaction noted as meaningful by the A",
+          "[d11] you have walked here"
         ],
         "links": [
           "echo-river-contamination",
@@ -2027,7 +2330,8 @@
           "[d12] Day 12 dawn: The half-finished photonic disc on Orla's main workbench carries a tight spiral inlay at one edge — same geometry as the vent aperture silt described at the contamination seep. Orla glanc",
           "[d12] Day 12 dawn: Prism Sight surge confirmed the half-finished disc on Orla's bench carries the vent aperture's six-count spiral geometry — each lamp-pass layered as a photonic afterprint in the lattice. ",
           "[d12] Day 12 dawn: Aevi confirmed the disc's photonic lattice was already receiving the Precursor six-count pulse before Orla laid her inlay — the geometry chose the disc, not the other way around. Orla doe",
-          "[d12] Day 12 morning: Translating Prism Sight's reading of the disc's six-count geometry into a craft schema failed — the photonic design language belongs to guild-trained makers, not sight-readers. The geo"
+          "[d12] Day 12 morning: Translating Prism Sight's reading of the disc's six-count geometry into a craft schema failed — the photonic design language belongs to guild-trained makers, not sight-readers. The geo",
+          "[d6] Optics-weaver, Edge District, Radiant Plateau"
         ],
         "links": [
           "contamination-evidence-for-the-elders",
@@ -2040,7 +2344,7 @@
           "echo-river-contamination"
         ],
         "createdDay": 6,
-        "updatedDay": 12,
+        "updatedDay": 6,
         "aliases": [
           "Orla",
           "Orla's Unfinished Disc",
@@ -2085,7 +2389,9 @@
           "[d10] Day 10 evening: Fendt's deliberate pour into the Echo River ford confirmed by photonic record before Millbrook's elder panel — the act is now public knowledge in the valley floor's governance body. A ",
           "[d11] Day 11 night: Fendt's name appeared in red chalk on the Edge District accountability assembly board — 'Fendt, south array.' The addition was made this afternoon; his supervisors had not removed it by ",
           "[d11] Day 11 night: Prism Sight confirmed the keeper is sequencing her information about the red-chalk addition and supervisor inaction — she has more than she led with, and is watching to see if the partia",
-          "[d11] A filtration array supervisor added 'Fendt, south array' to the district accountability board themselves and filed nothing — a deliberate act of internal exposure witnessed by the Amber Lath keeper of"
+          "[d11] A filtration array supervisor added 'Fendt, south array' to the district accountability board themselves and filed nothing — a deliberate act of internal exposure witnessed by the Amber Lath keeper of",
+          "[d7] Wayhouse keeper, Edge District, Radiant Plateau",
+          "[d8] met in play"
         ],
         "links": [
           "radiant-plateau-edge-district",
@@ -2098,9 +2404,10 @@
           "echo-river-contamination"
         ],
         "createdDay": 6,
-        "updatedDay": 11,
+        "updatedDay": 8,
         "aliases": [
-          "Amber Lath Keeper"
+          "Amber Lath Keeper",
+          "Fendt"
         ],
         "entityId": "amber-lath-keeper"
       },
@@ -2253,7 +2560,9 @@
           "[d8] Day 8 approach: the warden's three-springs-back channel sighting predates his post and predates the current contamination crisis — if the conduit connects the Heights' channels to the system, he may b",
           "[d8] Day 8: Confirmed — three springs ago, as an apprentice, he witnessed six-count channel light from inside the stone at a lower terrace flow-gate. Kept no record. He is a live Heights-side witness to th",
           "[d8] Day 8 afternoon: agreed to testify Thursday — will name the six-count channel light precisely and without embellishment. Needs gate-senior sanction first; taking that step himself.",
-          "[d8] Day 8 afternoon: Thursday logistics confirmed — eastern path, gate-senior sanction before morning review, Millbrook common house before noon or morning-tone word if denied. The commitment is complete "
+          "[d8] Day 8 afternoon: Thursday logistics confirmed — eastern path, gate-senior sanction before morning review, Millbrook common house before noon or morning-tone word if denied. The commitment is complete ",
+          "[d4] Gateline warden, Lower Terrace, Harmonic Heights",
+          "[d9] met in play"
         ],
         "links": [
           "the-six-fold-pattern",
@@ -2263,8 +2572,12 @@
           "millbrook"
         ],
         "createdDay": 8,
-        "updatedDay": 8,
-        "aliases": []
+        "updatedDay": 9,
+        "aliases": [
+          "Tuning-warden (gateline)",
+          "Tuning-Warden"
+        ],
+        "entityId": "gateline-warden"
       },
       "brynjar-andyrsson": {
         "id": "brynjar-andyrsson",
@@ -2273,7 +2586,8 @@
         "facts": [
           "[d9] Broad-shouldered traveler, arrived at Millbrook common house before sunrise on Thursday. Waited by the fire. Stake in the meeting unknown.",
           "[d9] Day 9 morning: accepted Usnea's invitation to stay for the elder presentation — his question about the deliberately placed marker beyond the new pass will surface in the room.",
-          "[d10] Day 10: Named the deliberately placed marker beyond the new mountain pass — above the high pasture fence, out of the Disputed Zone — to the full Millbrook elder panel. Came to Millbrook specifically b"
+          "[d10] Day 10: Named the deliberately placed marker beyond the new mountain pass — above the high pasture fence, out of the Disputed Zone — to the full Millbrook elder panel. Came to Millbrook specifically b",
+          "[d9] Traveler, arrived from beyond the new pass"
         ],
         "links": [
           "millbrook",
@@ -2282,8 +2596,9 @@
           "echo-river-contamination"
         ],
         "createdDay": 9,
-        "updatedDay": 10,
-        "aliases": []
+        "updatedDay": 9,
+        "aliases": [],
+        "entityId": "brynjar-andyrsson"
       },
       "the-new-pass-marker": {
         "id": "the-new-pass-marker",
@@ -2387,6 +2702,106 @@
           "radiant-plateau-edge-district",
           "orla",
           "echo-river-contamination"
+        ],
+        "aliases": [],
+        "createdDay": 12,
+        "updatedDay": 12
+      },
+      "holloway": {
+        "id": "holloway",
+        "label": "Holloway",
+        "kind": "person",
+        "facts": [
+          "[d1] Millbrook farmer, upper terraces",
+          "[d12] [while away] Holloway has kept to his upper terraces these four days, tending the same dry rows — no new ground broken, no help found.",
+          "[d12] [while away] Holloway has done little on the upper terraces — a lame ox has kept him occupied closer to home."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "holloway",
+        "updatedDay": 12
+      },
+      "renn": {
+        "id": "renn",
+        "label": "Renn",
+        "kind": "person",
+        "facts": [
+          "[d1] Millbrook farmer, lower channel",
+          "[d12] [while away] Renn dug a shallow extension of the lower channel by hand, buying a little more reach toward the next field before the water runs out.",
+          "[d12] [while away] Renn has cleared the worst of the sediment from the upper bend of the lower channel, and water now runs through roughly half its length without pooling."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "renn",
+        "updatedDay": 12
+      },
+      "third-farmer": {
+        "id": "third-farmer",
+        "label": "Unknown farmer",
+        "kind": "person",
+        "facts": [
+          "[d1] Millbrook farmer, bystander at the well",
+          "[d12] [while away] The unknown farmer has lingered near the well a few more times but taken no clear action, watching and waiting."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "third-farmer",
+        "updatedDay": 12
+      },
+      "councilor-dresh": {
+        "id": "councilor-dresh",
+        "label": "Councilor Dresh",
+        "kind": "person",
+        "facts": [
+          "[d9] Millbrook elder, leads the Thursday presentation"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 9,
+        "entityId": "councilor-dresh",
+        "updatedDay": 9
+      },
+      "josset": {
+        "id": "josset",
+        "label": "Josset",
+        "kind": "person",
+        "facts": [
+          "[d11] Provision stall keeper, Millbrook market quarter"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 11,
+        "entityId": "josset",
+        "updatedDay": 11
+      },
+      "companion-aevi": {
+        "id": "companion-aevi",
+        "label": "Aevi",
+        "kind": "person",
+        "facts": [
+          "[d?] Kindled Chorus — The motes have brightened and learned to move as one — condensing into near-shapes when speaking, casting real light in the dark, humming harmonics that other nanite fields answer. Old — and less alone than before."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "companion-aevi",
+        "updatedDay": null
+      },
+      "received-vs-made-distinction": {
+        "id": "received-vs-made-distinction",
+        "label": "The Received Versus the Made",
+        "kind": "lore",
+        "facts": [
+          "[d12] Orla drew the distinction between photonic work that is intentionally made (guild-notation specification) and pattern that arrives unbidden and is received. The disc's geometry is received — it printed itself into her photonic lattice before her conscious intention shaped it. Guild notation has no…"
+        ],
+        "links": [
+          "the-six-fold-pattern",
+          "radiant-plateau-edge-district",
+          "orla",
+          "proposed-expedition-disputed-zone"
         ],
         "aliases": [],
         "createdDay": 12,
@@ -2686,23 +3101,177 @@
   "sharedSceneId": null,
   "forkChoices": {},
   "customEncounters": {},
-  "reconcileVersion": 4,
+  "reconcileVersion": 22,
   "tendencies": {
-    "generous": 21.90772679234861,
-    "social": 28.432673244415522,
-    "cerebral": 34.01521903720864,
-    "cautious": 75.650664809456,
-    "strategic": 51.1442105917263,
-    "carousing": 1.1097964909039368,
-    "risky": 3.583742134934908
+    "generous": 22.36003362253989,
+    "social": 27.721856413305133,
+    "cerebral": 33.16483856127842,
+    "cautious": 73.7593981892196,
+    "strategic": 49.86560532693314,
+    "carousing": 1.0820515786313385,
+    "risky": 3.4941485815615354
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "scholar",
-    "good_samaritan"
+    "good_samaritan",
+    "tactician",
+    "orator",
+    "sage",
+    "stalwart",
+    "peacemaker"
   ],
-  "actionCount": 150,
-  "updatedAt": 1783740298397,
-  "rev": 7
+  "actionCount": 151,
+  "updatedAt": 1785122491079,
+  "rev": 30,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {}
+  },
+  "portrait": "https://image.pollinations.ai/prompt/A%20tree%20folk%20humanoid.%20baobab%20tree%20in%20appearance.%20wise%2C%20patient%2C%20many%20roots%2C%20full-body%20character%20portrait%2C%20named%20Usnea%20Beard%2C%20of%20the%20radiant%2C%20community%20organizer%2C%20carrying%20Waterskin%2C%20Trade%20Tokens%2C%20Pale%20Turnip%20Seedling%2C%20Wanted%20to%20try%20to%20make%20a%20broader%20impact%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13889&nologo=true",
+  "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Orla holds the photonic disc close to the lamp's fading flame, the six-fold spiral inlay catching warm light in layers — her hands steady, her eyes tracking the pattern that arrived without her asking",
+      "url": "https://image.pollinations.ai/prompt/Orla%20holds%20the%20photonic%20disc%20close%20to%20the%20lamp's%20fading%20flame%2C%20the%20six-fold%20spiral%20inlay%20catching%20warm%20light%20in%20layers%20%E2%80%94%20her%20hands%20steady%2C%20her%20eyes%20tracking%20the%20pattern%20that%20arrived%20without%20her%20asking.%20Behind%20her%2C%20Aevi's%20cluster%20brightens%20to%20a%20steady%20glow%2C%20motes%20humming%20a%20single%20note.%20At%20the%20edge%20of%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=83824&nologo=true",
+      "caption": "Early morning at Orla's workshop — Usnea asks Orla to document the disc's Precursor geomet",
+      "worldDay": 27,
+      "at": "2026-07-27T03:21:31.079Z"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Orla, woman, Optics-weaver, Edge District, Radiant Plateau",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Orla%2C%20woman%2C%20Optics-weaver%2C%20Edge%20District%2C%20Radiant%20Plateau%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=75356&nologo=true",
+      "caption": "Orla — devoted",
+      "worldDay": 19,
+      "at": "2026-07-19T13:14:04.436Z"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "Usnea Beard",
+      "url": "https://image.pollinations.ai/prompt/A%20tree%20folk%20humanoid.%20baobab%20tree%20in%20appearance.%20wise%2C%20patient%2C%20many%20roots%2C%20full-body%20character%20portrait%2C%20named%20Usnea%20Beard%2C%20of%20the%20radiant%2C%20community%20organizer%2C%20carrying%20Waterskin%2C%20Trade%20Tokens%2C%20Pale%20Turnip%20Seedling%2C%20Wanted%20to%20try%20to%20make%20a%20broader%20impact%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13889&nologo=true",
+      "caption": "Usnea Beard — reforged",
+      "worldDay": 12,
+      "at": "2026-07-12T03:34:16.956Z"
+    }
+  ],
+  "form": "A tree folk humanoid.  baobab tree in appearance.  wise, patient, many roots",
+  "teachers": {},
+  "regionsKnown": {
+    "valley": 1
+  },
+  "company": [],
+  "foreclosed": [],
+  "nativeGrantsVersion": 1,
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "personalArc": {
+    "id": "the-tree-that-walked-away",
+    "name": "The Tree That Walked Away",
+    "arcId": "usnea-beard_personal_arc",
+    "boundToCharacter": "Usnea Beard",
+    "boundToPlayer": "player-s9z9u1",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "A baobab who became conscious — who pulled his own roots from African soil and wandered into a world that did not make him — searches for whether the meaning he could not find at home is something the world can give, or something only he can grow.",
+    "stakes": "To root again in something vast enough to be worth it, or to discover that a walking tree carries its home in its heartwood and always did.",
+    "legendNpc": {
+      "name": "The Mother Baobab",
+      "role": "the tree he came from — still rooted, still silent, still the measure against which every field he tends is found either"
+    },
+    "legend": "the-mother-baobab",
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "the hollow that follows — in every orchard he orders, every field he brings into abundance, Usnea finds the work complete and the meaning still absent, and something in the light he bends begins to sh"
+      },
+      {
+        "id": "s2",
+        "objective": "what the Mother holds — a signal, a pulse, a resonance through the nanite-threaded root-memory he did not know he carried: the Mother Baobab is dying, and the community that grew under her is failing "
+      },
+      {
+        "id": "s3",
+        "objective": "the rooting question — he arrives at the ground of his origin, the dying tree before him, the community that needs what he has become, the world behind him still hungry for what he gives, and the choi"
+      }
+    ],
+    "routes": {
+      "root": "root here — give himself back to the place that made him, let his nanite-threaded body become the new Mother, the living infrastructure the community rebuilds around, vast and still and finally enough",
+      "carry": "carry her forward — take a cutting, a seed, a fragment of the Mother's resonance into the world with him, so that every field he tends henceforth grows under something that remembers Africa, and the m",
+      "braid": "become the bridge — refuse the binary of home and horizon, establish a living network through the substrate connecting the Mother's ground to every orchard he has touched, so that the tree that walked"
+    },
+    "outcomes": [
+      {
+        "id": "root",
+        "name": "Root",
+        "effects": []
+      },
+      {
+        "id": "carry",
+        "name": "Carry",
+        "effects": []
+      },
+      {
+        "id": "braid",
+        "name": "Braid",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal",
+    "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "_pinsInitialized": true,
+  "chronicleCache": {
+    "hash": "d12|b|c|q|L5|Wanted to try to make a broader impact",
+    "text": "You have become the person who understood that truth, to land, needs witnesses — and so you built the room before you spoke into it. When Orla pressed the memory glass into your hands, you didn't wield it as a weapon; you carried it carefully to Millbrook's common house and played Fendt's deliberate pour into the Echo River in silence, letting the elders watch a man choose the moment of a crisis with their own eyes. You held still while Dresh found the words himself. You gave Sela a plain invitation with no pressure behind it, and she trusted you enough to tap the six-count into the floor in front of everyone. You named the full chain — the vent aperture, the pour, the rhythm — linking Orla's evidence to Sela's body memory to the tuning-warden's account from three springs before the water failed, until the coordination wasn't a theory anymore but a shape the whole room could see. Mara Wells steadied the margins; Brynjar held the threshold; Aevi's hands made the count visible where words might have slipped past. The Edge District calls you revered now, and what that means, you're learning, is that people stopped waiting to see whether you'd flinch.",
+    "at": "2026-07-19T13:19:34.478Z"
+  },
+  "peopleDisposition": {
+    "radiant_folk": 2,
+    "valley_craft": 1
+  },
+  "_standingHistoryCredit": {
+    "radiant_folk": 2,
+    "valley_craft": 1
+  },
+  "schools": {},
+  "locationAliases": {
+    "gen-center": "the_crossing",
+    "gen-stillwater-s-trouble": "the_old_warden_post"
+  },
+  "_applyFailures": null,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-07-27T03:21:31.055Z",
+      "lastAt": "2026-07-27T03:21:31.055Z",
+      "startDay": 27,
+      "endDay": 27,
+      "beats": 1
+    }
+  ],
+  "_opLedger": {
+    "offer": {
+      "applied": 1,
+      "rejected": 0,
+      "lastWhy": null
+    }
+  },
+  "_pendingArrival": null,
+  "_opEmitted": {
+    "sceneSummary": 1,
+    "choices": 1,
+    "offer": 1,
+    "scene": 1,
+    "npcUpdates": 1,
+    "codexUpdates": 1,
+    "imagePrompt": 1,
+    "gambitApt": 1,
+    "sceneEnded": 1
+  },
+  "_opTurns": 1
 }

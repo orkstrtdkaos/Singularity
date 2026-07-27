@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 2,
-  "xp": 140,
+  "xp": 145,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -57,16 +57,17 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.034,
-    "falsehood_truth": -0.022038885,
+    "falsehood_truth": -0.005936940750000001,
     "spectrumId": -0.10091433844758492,
     "value": -0.04000000000000001,
-    "demonic_angelic": -0.020000000000000004
+    "demonic_angelic": -0.020000000000000004,
+    "dark_light": -0.015
   },
   "attunement": 2,
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 80,
+  "energy": 78,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -182,202 +183,170 @@
         "player": "Offer Sable The Better Story before you go — give them a way to think about what they've chosen that isn't just doctrine",
         "summary": "Loki gave Sable a way to carry their choice that was not doctrine and not reproach — and left the inner chamber with the answer the city cannot hear.",
         "narration": "You do not try to argue Sable back. You do not name a person waiting for them in the city, or a debt they owe to being found. You have the answer. What you do instead is offer them a frame for what they chose — not a lie, and not comfort, just a shape that holds.\n\nYou say that the city makes things legible. You say that is not the same thing as making them true. You say that choosing a thing the city cannot read is still choosing, and that there is a difference between hiding and arriving somewhere the light does not follow. You say you think Sable knows which one this is.\n\nSable is quiet for a moment. Then they say, quietly, that they did not expect that from someone who came down looking. Their voice does not warm exactly, but something in it settles, the way a piece of work settles when the last joint closes.\n\nYou stand. You tell Sable that if they ever want the city again, there are people who would hear from them without making it a return. Then you step back toward the faint pale blue that seeps under the passage gap, Cy at your heel, and leave the inner chamber to the cold and the dark and Sable's choice."
+      },
+      {
+        "player": "Bring the answer back to the elder before you leave — tell them what Sable said, and what you said, and ask if there is anything else the elder would have you carry out",
+        "summary": "Loki brought Sable's honest answer back to the elder — name, reason, and the frame left behind — and the elder acknowledged that the coming and the leaving without taking was itself the deed.",
+        "narration": "You step back through the gap into the outer chamber. The pale blue flame is exactly where you left it. The elder is exactly where you left them. You have the sense that this is always true.\n\nYou tell them what Sable said. You give them the name first, because Sable offered it freely and you see no reason to withhold it. You tell them the answer was no, given steadily, without hesitation or apology. Then you tell them what you said in return — not all of it, just the shape of it: that there is a difference between hiding and arriving somewhere the light does not follow. You do not embellish. The dark here does not reward embellishment.\n\nThe elder listens without moving. When you finish, there is a short silence. Then they say, in that worn-smooth voice: 'You did not try to take them.' It is not quite a question. They make a small economical gesture with one hand — not pointing anywhere, just completing a thought. 'That is what we would have you carry,' they say. 'That you came, you asked, and you left the answer where it landed.' They are quiet for another moment. Then they say: 'The elder of the outer chamber thanks you for carrying it honestly.'\n\nThe Standing Unlit near the passage has not moved. Cy is at your heel, lens at a careful half-aperture. The passage back up to the city is open. The elder does not rise to see you out."
       }
     ],
     "lastTurn": {
-      "narration": "You do not try to argue Sable back. You do not name a person waiting for them in the city, or a debt they owe to being found. You have the answer. What you do instead is offer them a frame for what they chose — not a lie, and not comfort, just a shape that holds.\n\nYou say that the city makes things legible. You say that is not the same thing as making them true. You say that choosing a thing the city cannot read is still choosing, and that there is a difference between hiding and arriving somewhere the light does not follow. You say you think Sable knows which one this is.\n\nSable is quiet for a moment. Then they say, quietly, that they did not expect that from someone who came down looking. Their voice does not warm exactly, but something in it settles, the way a piece of work settles when the last joint closes.\n\nYou stand. You tell Sable that if they ever want the city again, there are people who would hear from them without making it a return. Then you step back toward the faint pale blue that seeps under the passage gap, Cy at your heel, and leave the inner chamber to the cold and the dark and Sable's choice.",
-      "sceneSummary": "Loki gave Sable a way to carry their choice that was not doctrine and not reproach — and left the inner chamber with the answer the city cannot hear.",
+      "narration": "You step back through the gap into the outer chamber. The pale blue flame is exactly where you left it. The elder is exactly where you left them. You have the sense that this is always true.\n\nYou tell them what Sable said. You give them the name first, because Sable offered it freely and you see no reason to withhold it. You tell them the answer was no, given steadily, without hesitation or apology. Then you tell them what you said in return — not all of it, just the shape of it: that there is a difference between hiding and arriving somewhere the light does not follow. You do not embellish. The dark here does not reward embellishment.\n\nThe elder listens without moving. When you finish, there is a short silence. Then they say, in that worn-smooth voice: 'You did not try to take them.' It is not quite a question. They make a small economical gesture with one hand — not pointing anywhere, just completing a thought. 'That is what we would have you carry,' they say. 'That you came, you asked, and you left the answer where it landed.' They are quiet for another moment. Then they say: 'The elder of the outer chamber thanks you for carrying it honestly.'\n\nThe Standing Unlit near the passage has not moved. Cy is at your heel, lens at a careful half-aperture. The passage back up to the city is open. The elder does not rise to see you out.",
+      "sceneSummary": "Loki brought Sable's honest answer back to the elder — name, reason, and the frame left behind — and the elder acknowledged that the coming and the leaving without taking was itself the deed.",
       "choices": [
         {
-          "label": "Bring the answer back to the elder before you leave — tell them what Sable said, and what you said, and ask if there is anything else the elder would have you carry out",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "dark_light": -0.3,
-            "falsehood_truth": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "help"
-          ],
-          "abilityId": "the_better_story",
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask the elder, before you leave, what this place was before the Unlit came — the seam in the stone, the older tool-marks; you know you saw them",
+          "label": "Ask the elder one last thing — about the seam in the outer chamber stone, and what was fitted there before the lantern-bracket",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "dark_light": -0.2,
-            "mechanical_spiritual": -0.2
-          },
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Thank the elder and leave — take what you were given and carry it back up into the city",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask the elder what they would do if the city did send someone — not a visitor, but someone with authority and force",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Before you leave, use Prism Sight on the seam in the wall — read the stone yourself, without asking",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Leave without stopping at the elder — the answer was given, the question was put, and what the city does with silence is the city's problem; climb back up into the light",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell the elder that the answer was no — and ask, plainly, whether the Unlit would ever send word to the city if Sable changed their mind",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.2,
-            "dark_light": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "negotiate",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2,
-        "xp": 5
+        "energy": 0
       },
+      "scene": {
+        "setting": "The outer chamber of the Unlit Deep — worked stone, pale blue flame in the bracket, low and even light. Loki stands near the passage gap from the inner chamber. The elder is seated by the flame, robed and still. The Standing Unlit is near the passage to the stair, motionless.",
+        "npcsPresent": [
+          {
+            "name": "Unlit Elder",
+            "state": "Seated by the pale blue flame, hands in lap, face still hooded. Has just finished speaking — quiet, done, not dismissing."
+          },
+          {
+            "name": "Standing Unlit",
+            "state": "Near the passage to the stair, motionless, watching."
+          },
+          {
+            "name": "Cy",
+            "state": "At Loki's heel, lens at half-aperture, still."
+          }
+        ],
+        "objects": [
+          "The pale blue flame — no visible wick, bracket-mounted on the left wall",
+          "The seam in the stone beside the bracket — older than the bracket, older than the doctrine",
+          "The passage to the inner chamber — gap in the worked stone, no door",
+          "The passage to the stair — open, the Standing Unlit beside it"
+        ],
+        "threads": [
+          "The seam in the outer chamber stone — the elder will not speak of it; the read is still there to be made",
+          "What Loki carries back to the city: an honest answer the city cannot officially hear",
+          "The passage back up is open — departure is available"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "unlit-elder",
+          "name": "Unlit Elder",
+          "note": "Received Sable's name, answer, and the frame Loki left behind. Acknowledged that Loki came, asked, and left the answer where it landed — called this what they would have Loki carry. Thanked Loki for carrying it honestly.",
+          "learned": [
+            "Sable's name — given freely by Loki",
+            "That Loki offered Sable a frame that was not doctrine and not reproach before leaving",
+            "That Loki did not try to take Sable — this is the thing they named"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Seated by the pale blue flame in the outer chamber; audience concluded, did not rise to dismiss."
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-taken-from-the-city",
-          "note": "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains."
+          "note": "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread."
         }
       ],
-      "stageOps": [],
-      "npcUpdates": [
+      "stageOps": [
         {
-          "op": "update",
-          "npcId": "the-taken-person",
-          "name": "Sable",
-          "note": "Loki offered them a frame for their choice that was not doctrine — named the difference between hiding and arriving. Sable said they did not expect that. Voice settled rather than warmed. The moment closed with Loki leaving them to their choice.",
-          "learned": [
-            "Sable did not expect honest framing from someone who came looking — the offer landed on them differently than argument or appeal would have.",
-            "Sable's voice settled when the frame was offered — something in them recognized it as true."
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Remains in the inner chamber of the Unlit Deep, steady and settled in their choice. Not found, not coerced, not unhappy."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Loki gave Sable a livable frame for their choice before leaving — not argument, not appeal; a true shape for what they chose. Sable acknowledged it. The parting was honest and unhostile.",
-          "subjectId": "the-taken-person"
+          "questId": "the-taken-from-the-city",
+          "stageId": "s1",
+          "evidence": "Loki reported Sable's answer to the elder — name, the no, and the frame left behind — and the elder received it without dispute."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-taken-from-the-city",
-          "label": "The Taken From the City",
-          "kind": "mystery",
-          "entityId": "the-taken-person",
-          "fact": "Before leaving, Loki offered Sable a frame for what they chose — the difference between hiding and arriving somewhere the light does not follow. Sable said they had not expected that. The parting was settled and unhostile. No promise of return was made; no door was closed.",
+          "topic": "unlit-elder",
+          "label": "Unlit Elder",
+          "kind": "person",
+          "entityId": "unlit-elder",
+          "fact": "The elder named the deed: that Loki came, asked, and left the answer where it landed. They called this what they would have Loki carry. The elder thanks by naming the act, not by gesture or gift.",
           "links": [
+            "the-taken-from-the-city",
             "the-unlit",
-            "the-unlit-deep",
-            "unlit-elder"
+            "the-unlit-deep"
           ]
         }
       ],
-      "scene": {
-        "setting": "The inner chamber of the Unlit Deep — small, bare worked stone, ceiling low. No flame. Pale blue light seeps faintly from the outer chamber passage. Loki is near the passage gap, standing; Sable remains seated against the far wall.",
-        "npcsPresent": [
-          {
-            "name": "Sable",
-            "state": "Seated against the far wall, hands on knees, face turned toward where Loki stood — settled, quiet, alone again."
-          },
-          {
-            "name": "Cy",
-            "state": "At Loki's heel, lens at mid-aperture, watching the passage back to the outer chamber."
-          },
-          {
-            "name": "Unlit Elder",
-            "state": "In the outer chamber, seated by the pale blue flame. Did not follow."
-          },
-          {
-            "name": "Standing Unlit",
-            "state": "Near the passage entrance in the outer chamber, motionless, watching."
-          }
-        ],
-        "objects": [
-          "The cup — ceramic, hand-made, local clay, mineral ring at the waterline",
-          "Cy's shuttered lamp",
-          "The gap back to the outer chamber — faint seepage of pale blue light",
-          "Worn floor — narrow track, the path of long sitting and occasional pacing"
-        ],
-        "threads": [
-          "The elder is in the outer chamber — Loki can speak with them or pass through without stopping.",
-          "The seam in the outer chamber stone — older than the Unlit, the elder knows what it was and will not say.",
-          "What Loki carries back to the city: an honest answer the city cannot officially hear."
-        ]
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — a frame offered, a word received, a parting made."
+        "why": "A brief exchange with the elder in the outer chamber — measured, economical, quickly complete."
       }
     },
     "sceneState": {
-      "setting": "The inner chamber of the Unlit Deep — small, bare worked stone, ceiling low. No flame. Pale blue light seeps faintly from the outer chamber passage. Loki is near the passage gap, standing; Sable remains seated against the far wall.",
+      "setting": "The outer chamber of the Unlit Deep — worked stone, pale blue flame in the bracket, low and even light. Loki stands near the passage gap from the inner chamber. The elder is seated by the flame, robed and still. The Standing Unlit is near the passage to the stair, motionless.",
       "npcsPresent": [
         {
-          "name": "Sable",
-          "state": "Seated against the far wall, hands on knees, face turned toward where Loki stood — settled, quiet, alone again."
-        },
-        {
-          "name": "Cy",
-          "state": "At Loki's heel, lens at mid-aperture, watching the passage back to the outer chamber."
-        },
-        {
           "name": "Unlit Elder",
-          "state": "In the outer chamber, seated by the pale blue flame. Did not follow."
+          "state": "Seated by the pale blue flame, hands in lap, face still hooded. Has just finished speaking — quiet, done, not dismissing"
         },
         {
           "name": "Standing Unlit",
-          "state": "Near the passage entrance in the outer chamber, motionless, watching."
+          "state": "Near the passage to the stair, motionless, watching."
+        },
+        {
+          "name": "Cy",
+          "state": "At Loki's heel, lens at half-aperture, still."
         }
       ],
       "objects": [
-        "The cup — ceramic, hand-made, local clay, mineral ring at the waterline",
-        "Cy's shuttered lamp",
-        "The gap back to the outer chamber — faint seepage of pale blue light",
-        "Worn floor — narrow track, the path of long sitting and occasional pacing"
+        "The pale blue flame — no visible wick, bracket-mounted on the left wall",
+        "The seam in the stone beside the bracket — older than the bracket, older than th",
+        "The passage to the inner chamber — gap in the worked stone, no door",
+        "The passage to the stair — open, the Standing Unlit beside it"
       ],
       "threads": [
-        "The elder is in the outer chamber — Loki can speak with them or pass through without stopping.",
-        "The seam in the outer chamber stone — older than the Unlit, the elder knows what it was and will not say.",
-        "What Loki carries back to the city: an honest answer the city cannot officially hear."
+        "The seam in the outer chamber stone — the elder will not speak of it; the read is still there to be made",
+        "What Loki carries back to the city: an honest answer the city cannot officially hear",
+        "The passage back up is open — departure is available"
       ]
     }
   },
@@ -410,7 +379,8 @@
         "Loki entered the inner chamber and found the taken person — seated, calm, and waiting. The question the elder permitted has not yet been asked.",
         "Loki gave the taken person an honest account of who they are and why they came — the person accepted the frame and said 'You can ask it.' The question is ready to be put.",
         "Sable gave the answer — they do not wish to be found. The choice was steady, reasoned, and their own. The question the elder permitted has been put and answered.",
-        "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains."
+        "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains.",
+        "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -583,23 +553,24 @@
         "locationId": "the_unlit_deep",
         "day": 1
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d1] Spoke for the first time when Loki's framing landed — ordered the Standing Unlit to let Cy pass, and granted Loki an audience.",
         "[d1] Invited Loki to sit or stand — made the first social opening; still hooded, face unseen.",
         "[d1] Declined Loki's question about the seam — 'that question belongs to the chamber, not to a visitor.' Gently, without hostility. The audience continues.",
         "[d1] Confirmed someone came from the city willingly. Said the city's silence tells its own story. Offered Loki the right to ask whether the person in the inner chamber wishes to be found.",
-        "[d1] Granted Loki passage to the inner chamber with a single economical gesture and the words 'Then you may go in.' Did not rise, did not instruct, did not offer accompaniment."
+        "[d1] Granted Loki passage to the inner chamber with a single economical gesture and the words 'Then you may go in.' Did not rise, did not instruct, did not offer accompaniment.",
+        "[d1] Received Sable's name, answer, and the frame Loki left behind. Acknowledged that Loki came, asked, and left the answer where it landed — called this what they would have Loki carry. Thanked Loki for carrying it honestly."
       ],
       "knownFacts": [
-        "Commands the Standing Unlit; their word is final here.",
-        "Chose to hear Loki rather than dismiss — the truth in the right shape reached them.",
-        "Gestures economically — a small hand-movement like punctuation",
         "Has seen many visitors in this spot; posture suggests students or the surrendered, not petitioners",
         "The seam is not a topic the elder will open to a visitor; the deflection was economical and absolute, with no anger in it",
         "The person in the inner chamber came willingly — the elder is clear on this",
         "The city sent no one, which the elder takes as evidence the city does not truly believe a taking occurred",
-        "The elder will permit a single question to the person in the inner chamber: do they wish to be found"
+        "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
+        "Sable's name — given freely by Loki",
+        "That Loki offered Sable a frame that was not doctrine and not reproach before leaving",
+        "That Loki did not try to take Sable — this is the thing they named"
       ],
       "skillsObserved": [
         "Absolute stillness",
@@ -608,7 +579,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber; has opened the passage to the inner chamber and waits.",
+      "statusNote": "Seated by the pale blue flame in the outer chamber; audience concluded, did not rise to dismiss.",
       "domains": {
         "primary": "umbral"
       },
@@ -849,7 +820,7 @@
     "lastSharedReadAt": "2026-07-27T14:12:10.208Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -1187,11 +1158,13 @@
         "kind": "person",
         "facts": [
           "[d1] Seated elder of the Unlit Deep's outer chamber",
-          "[d1] The elder declined to speak about the seam in the stone — 'that question belongs to the chamber, not to a visitor.' The refusal was gentle but absolute, with no hostility in it. The seam exists and is real; the elder knows what it is and has chosen not to say."
+          "[d1] The elder declined to speak about the seam in the stone — 'that question belongs to the chamber, not to a visitor.' The refusal was gentle but absolute, with no hostility in it. The seam exists and is real; the elder knows what it is and has chosen not to say.",
+          "[d1] The elder named the deed: that Loki came, asked, and left the answer where it landed. They called this what they would have Loki carry. The elder thanks by naming the act, not by gesture or gift."
         ],
         "links": [
           "the-unlit",
-          "the-taken-from-the-city"
+          "the-taken-from-the-city",
+          "the-unlit-deep"
         ],
         "aliases": [
           "The Unlit Deep"
@@ -1246,20 +1219,20 @@
     }
   },
   "tendencies": {
-    "devotion": 4.834169734357826,
-    "cerebral": 9.818669746743407,
-    "social": 16.925435015017044,
-    "strategic": 6.62750957685412,
-    "cautious": 6.032765739588398,
-    "amorous": 9.338987690522554,
-    "generous": 1.9355512958073644,
-    "ruthless": 0.5446415584428731
+    "devotion": 4.71331549099888,
+    "cerebral": 9.573203003074822,
+    "social": 17.502299139641618,
+    "strategic": 6.461821837432767,
+    "cautious": 5.881946596098688,
+    "amorous": 9.10551299825949,
+    "generous": 2.8871625134121803,
+    "ruthless": 0.5310255194818012
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 42,
+  "actionCount": 43,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1401,8 +1374,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785163205449,
-  "rev": 96,
+  "updatedAt": 1785163370457,
+  "rev": 97,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1720,7 +1693,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 13
+    "umbral_depths": 14
   },
   "opLossPending": false,
   "sessions": [
@@ -1751,10 +1724,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T14:40:05.448Z",
+      "lastAt": "2026-07-27T14:42:50.455Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 9
+      "beats": 10
     }
   ],
   "establishedFacts": [
@@ -1786,26 +1759,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 42,
-    "choices": 42,
-    "characterDeltas": 20,
-    "scene": 42,
+    "sceneSummary": 43,
+    "choices": 43,
+    "characterDeltas": 21,
+    "scene": 43,
     "placeUpdates": 4,
-    "codexUpdates": 32,
-    "timeOps": 41,
+    "codexUpdates": 33,
+    "timeOps": 42,
     "offer": 4,
     "generateRequest": 2,
     "sceneEnded": 12,
-    "npcUpdates": 36,
+    "npcUpdates": 37,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 7,
+    "questUpdates": 8,
     "standingOps": 1,
     "factUpdates": 3,
-    "stageOps": 3
+    "stageOps": 4
   },
-  "_opTurns": 42,
+  "_opTurns": 43,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -1817,7 +1790,7 @@
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,
-      "the_better_story": 4,
+      "the_better_story": 5,
       "prism_sight": 1
     },
     "coActivations": {

@@ -1,5 +1,18 @@
 # PO ALERT
 
+> ## [CORRECTION + spec] SNG-243 Stillwater fix + SNG-244 decision banner (Aevi, 2026-07-25)
+> - **CORRECTION (Erik caught my chronicle misread):** Stillwater's Trouble is the OLD WARDEN POST that SILAS
+>   RECLAIMED AND NAMED (Pale March - he named Pell's forge corner, Cassiel's kept ground, the Maker's hollow).
+>   NOT "Veth's place." Fixed the Made Gate's intent-fold: "the father's work reaches the home the SON made" -
+>   Silas's own reclaimed ground. CI green. (I over-trusted a chronicle line; Erik was there - his canon wins.)
+> - **SNG-244 quest decision banner:** Erik - when a quest hits its decision it must show in the banner ABOVE
+>   narration, obvious. Gap: atDecision state exists (app.js:6950) but only on the quest DETAIL page - invisible
+>   in-scene. Fix: a DECISION STRIP in the play banner reusing the SNG-230 integrated-top-strip (the encounter
+>   frame) - quest name + decision-ready + the roads (outcome names), persistent until acted on, taps route to
+>   the existing resolve path. SNG-239 makes the GM STATE the reveal; SNG-244 makes the UI SURFACE the decision.
+>   CCODE: new strip type in the SNG-230 slot, reads existing atDecision+outcomes, no new resolve logic. AEVI:
+>   the strip copy. ERIK: roads-in-strip vs open-to-choose. Full: SPEC_SNG-244.
+
 > ## [DONE + spec] SNG-243 the Made Gate's destinations + waygate network (Aevi, 2026-07-25)
 > Erik asked the GM "does my made gate go to the Crossing?" - the GM IMPROVISED because the quest never authored
 > WHERE THE GATE GOES. Closed it:

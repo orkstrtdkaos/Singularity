@@ -461,9 +461,10 @@ export async function gmTurn(ctx, { tier = "standard" } = {}) {
   // asks for the beautiful telling of THIS beat — same outcome/ops/scene, richer prose. The directive rides the
   // UNCACHED user message (after the last cache breakpoint), so it never disturbs the prompt cache.
   const rich = tier === "rich";
+  const task = rich ? "gm-narrate-rich" : tier === "fast" ? "gm-narrate-fast" : "gm-narrate"; // fast = Haiku (opt-in); rich = flagship + fuller
   const richDirective = rich ? "\n\n(RICH TELLING — the player chose the beautiful version of THIS beat: tell it fuller, more vivid and sensory, with more emotional weight, a little longer than usual (up to ~6 paragraphs). Honor the SAME resolution outcome, scene state, and EVERY op and rule exactly — richer prose, never different events. Still return the same JSON shape.)" : "";
   const userContent = ((t.player && t.player.trim()) ? t.player : "(Continue the scene from the state above.)") + richDirective;
-  const gmOpts = { task: rich ? "gm-narrate-rich" : "gm-narrate", systemBlocks, cacheKey: "singularity-runtime" };
+  const gmOpts = { task, systemBlocks, cacheKey: "singularity-runtime" };
   let raw = "";
   try {
     raw = await callClaude([{ role: "user", content: userContent }], gmOpts);

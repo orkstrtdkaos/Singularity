@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.283";
+const APP_VERSION = "1.8.284";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1311,10 +1311,11 @@ function renderSettings(note = "") {
       <div class="hint">Sets how intense narration and generated content get: G · PG · PG-13 · R · R+ (full intensity). Two floors are ALWAYS on regardless of ceiling: never any prohibited content, and a minor is never portrayed in romantic or sexual content.</div></div>
     <div class="field"><label>Narration richness — the telling</label>
       <select id="set-narrationtier">
-        <option value="standard" ${profile.narrationTier !== "rich" ? "selected" : ""}>Standard — the normal telling</option>
-        <option value="rich" ${profile.narrationTier === "rich" ? "selected" : ""}>Rich — fuller, more vivid prose every beat</option>
+        <option value="fast" ${profile.narrationTier === "fast" ? "selected" : ""}>Fast — Haiku (cheaper + snappier)</option>
+        <option value="standard" ${(!profile.narrationTier || profile.narrationTier === "standard") ? "selected" : ""}>Standard — Sonnet, the normal telling</option>
+        <option value="rich" ${profile.narrationTier === "rich" ? "selected" : ""}>Rich — Sonnet, fuller + more vivid every beat</option>
       </select>
-      <div class="hint">SNG-242: how the GM tells each beat. <strong>Rich</strong> asks for a fuller, more sensory telling (a little slower + costlier). You can also arm just ONE beat with the <strong>✦ Rich</strong> toggle by the input, or tap <strong>✦ Tell it again, richer</strong> on any turn to re-tell that beat beautifully — same events, richer prose.</div></div>
+      <div class="hint">SNG-242: which model tells each beat. <strong>Fast</strong> = Haiku (cheaper &amp; faster — try it and see if the telling holds up for you). <strong>Standard</strong> = Sonnet. <strong>Rich</strong> = Sonnet, told fuller. Whatever your default, you can arm just ONE beat richer with the <strong>✦ Rich</strong> toggle by the input, or tap <strong>✦ Tell it again, richer</strong> on any turn to re-tell that beat beautifully — same events, richer prose. So: cheap by default, beautiful where it matters.</div></div>
     <div class="field"><label>Developer mode</label>
       <label class="rating-check"><input type="checkbox" id="set-dev" ${(() => { try { return localStorage.getItem("singularity.devPersist") === "1"; } catch { return false; } })() ? "checked" : ""}> Show developer tools (the 🧪 Legs panel, test-encounter buttons, the scenario runner)</label>
       <div class="hint">Off by default — normal play never shows dev tools. ${isDevMode() ? `<strong>Dev mode is currently ON</strong>${(() => { try { return new URLSearchParams(location.search).get("dev") === "1"; } catch { return false; } })() ? " for this URL (reload without <code>?dev=1</code> for a clean player view)" : /^(localhost|127\\.0\\.0\\.1)/.test(location.hostname) ? " because this is a local dev host" : ""}. ` : ""}Ticking this box is a deliberate, persistent opt-in on this browser; untick + Save to turn it fully off.</div></div>
@@ -1346,7 +1347,7 @@ function renderSettings(note = "") {
     profile.plainness = document.getElementById("set-plainness").value; // SNG-144: narration plainness dial
     profile.bluntness = document.getElementById("set-bluntness").value; // SNG-144: narration bluntness dial (rating-capped)
     profile.contentGenerator = document.getElementById("set-contentgen").checked; // SNG-134 P4: canon-author toggle (SNG-132 engine reads it)
-    profile.narrationTier = document.getElementById("set-narrationtier").value === "rich" ? "rich" : "standard"; // SNG-242 §5: default telling tier
+    profile.narrationTier = (v => ["fast", "standard", "rich"].includes(v) ? v : "standard")(document.getElementById("set-narrationtier").value); // SNG-242 §5: default telling tier (fast=Haiku)
     saveProfile(profile);
     setApiKey(document.getElementById("set-key").value);
     setArtMode(document.getElementById("set-art").value);
@@ -3487,7 +3488,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   if (env.location?.regionId) { character.regionsKnown = character.regionsKnown || {}; character.regionsKnown[env.location.regionId] = (character.regionsKnown[env.location.regionId] || 0) + 1; }
   // SNG-242 §5: the quality tier for THIS beat — the per-turn "richer telling" toggle wins, else the player's
   // default from Settings (profile.narrationTier). The toggle is one-shot: consumed here so it doesn't stick.
-  const tier = (_richNextTurn || profile?.narrationTier === "rich") ? "rich" : "standard";
+  const tier = _richNextTurn ? "rich" : (["fast", "standard", "rich"].includes(profile?.narrationTier) ? profile.narrationTier : "standard");
   _richNextTurn = false;
   const result = await gmTurn(assembleGMContext("turn", env), { tier });
   busy = false;

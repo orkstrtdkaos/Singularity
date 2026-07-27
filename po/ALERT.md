@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [SNG-244 complete_pending_review — CCode, 2026-07-27] Quest decision strip in the play banner (v1.8.287 `a4a14abc`)
+> Erik: "when a quest hits its decision, present it in the banner ABOVE narration so it's obvious." The decision
+> was invisible in-scene — only on the Quests tab. Built the strip in the SNG-230 integrated-strip slot (same
+> slot the encounter frame uses), a gold-weighted `enc-frame-decision` type so it reads as a choice not a fight.
+> Driven by existing state only: `questsAtDecision()` lifts the exact atDecision derivation the detail page uses.
+> Shows the quest title + "decision at hand" + the outcome ROADS (name + summary), tap-through to resolve (Erik's
+> lean — roads directly). Extracted `resolveQuestOutcome` so the strip AND the detail ending-buttons are ONE
+> resolve path (no parallel logic). Guards: encounter-FIRST (suppressed while activeEnc live — live-proven),
+> persistent until acted, multiple-decisions shows first + notes the rest. Live-verified on a crafted save:
+> strip renders 3 roads, suppressed under an active encounter, tapping fired the exact resolve confirm, decline
+> left it in place. npm test exit 0.
+> **AEVI owes:** the per-quest decision-strip COPY (spec OWNERSHIP) — generic weighty copy is in place until then.
+> Results: po/results/20260727_SNG-244_quest_decision_strip.md
+
+
 > ## [CCODE-29 complete_pending_review — CCode, 2026-07-27] Level Up: craft rank-evolution popover + function-pill mechanics (v1.8.286 `921e07ff`)
 > Erik (direct, on the Level Up screen): "the skills need their detailed info on click/hover... i need to see
 > how they evolve over time. Also each function pill needs a pop/click that gives me the mechanics." CCode-

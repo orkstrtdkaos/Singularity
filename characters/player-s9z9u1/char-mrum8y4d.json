@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 2,
-  "xp": 186,
+  "xp": 191,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -67,7 +67,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 49,
+  "energy": 47,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -228,84 +228,61 @@
         "player": "Turn toward the stair passage — use Prism Sight to read whatever is moving there before it arrives",
         "summary": "Prism Sight read the stair passage cleanly — three warm patches, small, many-legged, alive, pausing at the threshold and waiting to enter.",
         "narration": "You turn toward the stair passage and bring Prism Sight up in one motion. The lattice is dense here — it crowds the craft, nine signals for every one you want — but you push through the noise and let the heat-reading settle.\n\nWhat you find is small. Smaller than a fist. Three distinct warm patches move in the passage, each the size of a palm, arranged in a line — and they move with the irregular, hesitating cadence of something alive and many-legged, not mechanical. The heat-traces are fresh, minutes old at most. The thing has been coming up the stair slowly, as if uncertain of the space above, stopping at intervals to rest its weight against the cold stone wall. Each stop leaves a brief bloom of warmth where its body made contact, already cooling.\n\nThe traces cluster at the passage mouth. The thing is not yet in the chamber. It is at the threshold, paused, and its heat-signature is steady — no spike of alarm, no sudden stillness of ambush. It is simply waiting, the way a cautious creature waits before it enters an unfamiliar room.\n\nCy's lens swings toward you, irises once, and holds. The Standing Unlit has gone still again — head still turned toward the passage, but no longer tracking. Whatever this is, they know it."
+      },
+      {
+        "player": "Read it again with See the Made Thing — find out if it was built or born",
+        "summary": "See the Made Thing confirms it: the creature at the threshold was born, not built — it came from the deep below the answered door, and the Unlit hold no alarm about it.",
+        "narration": "You let See the Made Thing settle on the creature rather than chase it. The craft reads construction — or the absence of it.\n\nThere are no seams. No joining, no tool-mark, no point where something was assembled from parts. It was not made the way the seam was made, or the flame's bracket, or even Cy, who is very much a made thing. It came to this form the way a root comes to its shape — by finding the space available and filling it. Born, not built.\n\nCy's lens irides once and returns to stillness. The Standing Unlit has not moved. Whatever this is, it belongs to the deep below the door that answered, and the Unlit know it and have no alarm about knowing it.\n\nThe three warm patches hold at the threshold. They are patient. They are waiting for the shape of the moment to become clear — for you to do something, or not do something, that tells them whether the space above is ready."
       }
     ],
     "lastTurn": {
-      "narration": "You turn toward the stair passage and bring Prism Sight up in one motion. The lattice is dense here — it crowds the craft, nine signals for every one you want — but you push through the noise and let the heat-reading settle.\n\nWhat you find is small. Smaller than a fist. Three distinct warm patches move in the passage, each the size of a palm, arranged in a line — and they move with the irregular, hesitating cadence of something alive and many-legged, not mechanical. The heat-traces are fresh, minutes old at most. The thing has been coming up the stair slowly, as if uncertain of the space above, stopping at intervals to rest its weight against the cold stone wall. Each stop leaves a brief bloom of warmth where its body made contact, already cooling.\n\nThe traces cluster at the passage mouth. The thing is not yet in the chamber. It is at the threshold, paused, and its heat-signature is steady — no spike of alarm, no sudden stillness of ambush. It is simply waiting, the way a cautious creature waits before it enters an unfamiliar room.\n\nCy's lens swings toward you, irises once, and holds. The Standing Unlit has gone still again — head still turned toward the passage, but no longer tracking. Whatever this is, they know it.",
-      "sceneSummary": "Prism Sight read the stair passage cleanly — three warm patches, small, many-legged, alive, pausing at the threshold and waiting to enter.",
+      "narration": "You let See the Made Thing settle on the creature rather than chase it. The craft reads construction — or the absence of it.\n\nThere are no seams. No joining, no tool-mark, no point where something was assembled from parts. It was not made the way the seam was made, or the flame's bracket, or even Cy, who is very much a made thing. It came to this form the way a root comes to its shape — by finding the space available and filling it. Born, not built.\n\nCy's lens irides once and returns to stillness. The Standing Unlit has not moved. Whatever this is, it belongs to the deep below the door that answered, and the Unlit know it and have no alarm about knowing it.\n\nThe three warm patches hold at the threshold. They are patient. They are waiting for the shape of the moment to become clear — for you to do something, or not do something, that tells them whether the space above is ready.",
+      "sceneSummary": "See the Made Thing confirms it: the creature at the threshold was born, not built — it came from the deep below the answered door, and the Unlit hold no alarm about it.",
       "choices": [
         {
-          "label": "Hold still and let it come in on its own — watch what it does when it enters the chamber",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Crouch low and offer the opening — make yourself small, non-threatening, and let it approach you",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "calm",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read it again with See the Made Thing — find out if it was built or born",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Glance at the Standing Unlit — ask quietly if this is expected, or if it is new",
+          "label": "Hold still and let it come to you — open the space, do nothing that closes it",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Speak to it — a quiet word toward the threshold, not to command, just to be heard",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "calm"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Crouch and let Cy extend toward it — two old things meeting, with you as the setting",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Step to the door itself — press it fully, see if it opens now that something from below is asking in return",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "risky"
+          ],
+          "abilityId": "see_the_made_thing",
+          "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -4
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands open and bright. The stair passage is lit faintly in Loki's Prism Sight: three small warm patches just at the threshold, paused.",
+        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands open and bright beside the bracket. Morning, no natural light.",
         "npcsPresent": [
           {
             "name": "Unlit Elder",
@@ -313,59 +290,46 @@
           },
           {
             "name": "Standing Unlit",
-            "state": "Beside the stair passage. Gone still again — head turned toward the passage, no longer tracking. They know what this is."
+            "state": "Beside the stair passage. Still. Head turned toward the passage. Calm."
           },
           {
             "name": "Cy",
-            "state": "Lens turned toward Loki. Irised once. Holding still."
+            "state": "Lens irised once. Returned to stillness. Foreleg drawn back slightly."
           }
         ],
         "objects": [
           "The pale blue flame — bracket-mounted, burning, no wick",
-          "The seam in the stone beside the bracket — standing open and visible",
+          "The seam in the stone beside the bracket — standing open and bright, unanswered second asking still pending",
           "The passage to the inner chamber — gap in worked stone, no door",
-          "The passage to the stair — three small heat-traces paused at the threshold, alive and waiting"
+          "Three small warm heat-traces at the stair threshold — holding still, patient, alive"
         ],
         "threads": [
-          "Something small and many-legged is at the threshold of the stair passage — paused, not alarmed, waiting to enter",
-          "The seam has answered but not fully opened — the second asking is unknown",
-          "The Standing Unlit knows what the creature is and has gone calm",
-          "What Loki carries back to the city: Sable's answer, the seam's location and character, and now this"
+          "Something born, not built, waits at the threshold — patient, reading the room",
+          "The seam has answered but not fully opened — the second asking is still unknown",
+          "What Loki carries back to the city: Sable's answer, the seam's nature, the creature below"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "standing-unlit",
-          "name": "Standing Unlit",
-          "note": "Went still again when the creature paused at the threshold — head still turned but no longer tracking. Knows what this is.",
-          "statusNote": "Beside the stair passage, still and settled — they recognize whatever is waiting at the threshold.",
-          "learned": [
-            "Has gone calm at the creature's pause — this is not alarm; it is recognition"
-          ]
-        }
-      ],
       "codexUpdates": [
         {
-          "topic": "the-unlit-deep",
-          "label": "The Unlit Deep",
-          "kind": "place",
-          "entityId": "the-unlit-deep",
-          "fact": "Something alive and many-legged came up the stair from below — three warm patches the size of a palm, moving in an irregular cautious line. It paused at the threshold. The Standing Unlit recognized it and went calm.",
+          "topic": "the-creature-at-the-threshold",
+          "label": "The Creature at the Threshold",
+          "kind": "mystery",
+          "fact": "See the Made Thing found no seams, no joinery, no assembly — the creature was born, not built. It came to its form the way a root fills its space. It belongs to the deep below the answered door. The Unlit hold no alarm about it.",
           "links": [
+            "the-seam-beside-the-bracket",
+            "the-unlit-deep",
             "the-unlit",
-            "standing-unlit",
-            "the-seam-beside-the-bracket"
+            "the-water-crisis"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "a short moment of attention — Prism Sight read the passage"
+        "hoursPassed": 0.25,
+        "why": "a brief read, a moment of stillness"
       }
     },
     "sceneState": {
-      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands open and bright. The stair passage is lit faintly in Loki's Prism Sight: three small warm patches just at the threshold, paused.",
+      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left. The seam stands open and bright beside the bracket. Morning, no natural light.",
       "npcsPresent": [
         {
           "name": "Unlit Elder",
@@ -373,24 +337,23 @@
         },
         {
           "name": "Standing Unlit",
-          "state": "Beside the stair passage. Gone still again — head turned toward the passage, no longer tracking. They know what this is."
+          "state": "Beside the stair passage. Still. Head turned toward the passage. Calm."
         },
         {
           "name": "Cy",
-          "state": "Lens turned toward Loki. Irised once. Holding still."
+          "state": "Lens irised once. Returned to stillness. Foreleg drawn back slightly."
         }
       ],
       "objects": [
         "The pale blue flame — bracket-mounted, burning, no wick",
-        "The seam in the stone beside the bracket — standing open and visible",
+        "The seam in the stone beside the bracket — standing open and bright, unanswered ",
         "The passage to the inner chamber — gap in worked stone, no door",
-        "The passage to the stair — three small heat-traces paused at the threshold, aliv"
+        "Three small warm heat-traces at the stair threshold — holding still, patient, al"
       ],
       "threads": [
-        "Something small and many-legged is at the threshold of the stair passage — paused, not alarmed, waiting to enter",
-        "The seam has answered but not fully opened — the second asking is unknown",
-        "The Standing Unlit knows what the creature is and has gone calm",
-        "What Loki carries back to the city: Sable's answer, the seam's location and character, and now this"
+        "Something born, not built, waits at the threshold — patient, reading the room",
+        "The seam has answered but not fully opened — the second asking is still unknown",
+        "What Loki carries back to the city: Sable's answer, the seam's nature, the creature below"
       ]
     }
   },
@@ -891,7 +854,7 @@
     "lastSharedReadAt": "2026-07-27T15:31:10.092Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -1322,26 +1285,43 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "the-creature-at-the-threshold": {
+        "id": "the-creature-at-the-threshold",
+        "label": "The Creature at the Threshold",
+        "kind": "mystery",
+        "facts": [
+          "[d1] See the Made Thing found no seams, no joinery, no assembly — the creature was born, not built. It came to its form the way a root fills its space. It belongs to the deep below the answered door. The Unlit hold no alarm about it."
+        ],
+        "links": [
+          "the-seam-beside-the-bracket",
+          "the-unlit-deep",
+          "the-unlit",
+          "the-water-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 3.849137596953515,
-    "cerebral": 12.320180659436181,
-    "social": 17.07562985398415,
-    "strategic": 7.9957457453427905,
-    "cautious": 6.730361671749095,
-    "amorous": 7.436033613298782,
-    "generous": 3.308431474044126,
-    "ruthless": 0.43366294827550256,
-    "risky": 0.975
+    "devotion": 3.752909157029677,
+    "cerebral": 13.012176142950276,
+    "social": 16.648739107634547,
+    "strategic": 7.795852101709221,
+    "cautious": 6.562102629955367,
+    "amorous": 7.250132772966312,
+    "generous": 3.225720687193023,
+    "ruthless": 0.42282137456861496,
+    "risky": 0.9506249999999999
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "charmer"
   ],
-  "actionCount": 51,
+  "actionCount": 52,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1490,8 +1470,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785167013192,
-  "rev": 108,
+  "updatedAt": 1785167147206,
+  "rev": 109,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1809,7 +1789,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 22
+    "umbral_depths": 23
   },
   "opLossPending": false,
   "sessions": [
@@ -1840,10 +1820,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T15:43:33.191Z",
+      "lastAt": "2026-07-27T15:45:47.205Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 18
+      "beats": 19
     }
   ],
   "establishedFacts": [
@@ -1875,13 +1855,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 50,
-    "choices": 50,
+    "sceneSummary": 51,
+    "choices": 51,
     "characterDeltas": 24,
-    "scene": 50,
+    "scene": 51,
     "placeUpdates": 7,
-    "codexUpdates": 40,
-    "timeOps": 49,
+    "codexUpdates": 41,
+    "timeOps": 50,
     "offer": 5,
     "generateRequest": 2,
     "sceneEnded": 12,
@@ -1894,7 +1874,7 @@
     "factUpdates": 3,
     "stageOps": 4
   },
-  "_opTurns": 50,
+  "_opTurns": 51,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -1902,7 +1882,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 15,
+      "see_the_made_thing": 16,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

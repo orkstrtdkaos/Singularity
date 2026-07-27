@@ -130,9 +130,9 @@
       "at": "2026-07-27T17:35:33.860Z"
     }
   ],
-  "currentLocationId": "the_unlit_deep",
+  "currentLocationId": "gen-the-passage-below-the-unlit-deep",
   "activeScene": {
-    "locationId": "the_unlit_deep",
+    "locationId": "gen-the-passage-below-the-unlit-deep",
     "turns": [
       {
         "player": "Descend again — take Cy to the inspection port and recover the three missing entries",
@@ -183,141 +183,170 @@
         "player": "Tell Cy that you are its further instruction — that you are asking it to continue Halvex's work, whatever that was, with you",
         "summary": "Loki told Cy it is the further instruction — and Cy acknowledged, woke by degrees, and turned toward the passage below.",
         "narration": "You pick up the third panel and hold it against your chest for a moment. Then you set it back down beside the others, facing up, the designation glyph catching Cy's lamplight.\n\n\"Then here is your further instruction,\" you say. \"I am asking you to continue Halvex's work, whatever that was, with me.\"\n\nCy is still. Completely still — not the stillness of waiting, but the stillness of a mechanism that has just received a signal it has been listening for across a very long time. Its lens is wide open. Not irising, not adjusting. Just open.\n\nOne leg lifts. Sets down. Then a second. Then a third, in sequence, the way a clock's parts move when someone winds it for the first time in years.\n\n\"Acknowledged,\" Cy says. The word is careful and formal and very old. Then, after a pause that feels measured: \"The regulator. The missing records. They are further down.\" Another pause. \"This unit has not descended in some time.\"\n\nIt does not say how long. But the way it says *some time* — precise and slightly hollow, the way you say a word you have been keeping in a drawer — tells you that the number would be large.\n\nCy turns toward the open passage. The lamp swings with it, throwing light down into the cold dark and the water-smell below."
+      },
+      {
+        "player": "Descend now — follow Cy into the passage toward the regulator and the missing records",
+        "summary": "Loki followed Cy into the passage below — the stone older, the air colder, and Halvex's records beginning on the wall.",
+        "narration": "Cy moves first. Its legs find the first step of the descent without hesitation, lamp swinging forward, and the pool of light drops ahead of you into the dark.\n\nYou follow. The stone here is older than anything in the Unlit's chamber above — the joints are tighter, the cuts more precise, and the smell of cold water comes up strong and clean, the kind of clean that means a source no one has touched in a long time. The walls narrow slightly as you go, not enough to press, but enough to feel. Your hand trails the left wall. The stone is smooth there, worn smooth in a narrow band at shoulder height — not by the Unlit, not recently. By someone who made this trip many times.\n\nCy pauses at the base of the stairs. Its lens irises once — wide, then tight, then settling — and it angles the lamp left. The light catches a long stretch of worked stone, and then something set into it: a series of marks, cut fine and deliberate, running at eye level in a continuous band along the wall. Not glyphs exactly. Not language. Something in between — a system of notation you have not seen above ground.\n\nCy says, very quietly, 'The records begin here.' Then it turns its lamp a fraction further left and the light finds what is at the passage's end: a low housing set flush into the wall, dark metal, older than anything in this valley, with a single indicator still faintly lit — a pale amber thread of light, the color of old amber, the color of something that has been waiting for morning for a very long time."
       }
     ],
     "lastTurn": {
-      "narration": "You pick up the third panel and hold it against your chest for a moment. Then you set it back down beside the others, facing up, the designation glyph catching Cy's lamplight.\n\n\"Then here is your further instruction,\" you say. \"I am asking you to continue Halvex's work, whatever that was, with me.\"\n\nCy is still. Completely still — not the stillness of waiting, but the stillness of a mechanism that has just received a signal it has been listening for across a very long time. Its lens is wide open. Not irising, not adjusting. Just open.\n\nOne leg lifts. Sets down. Then a second. Then a third, in sequence, the way a clock's parts move when someone winds it for the first time in years.\n\n\"Acknowledged,\" Cy says. The word is careful and formal and very old. Then, after a pause that feels measured: \"The regulator. The missing records. They are further down.\" Another pause. \"This unit has not descended in some time.\"\n\nIt does not say how long. But the way it says *some time* — precise and slightly hollow, the way you say a word you have been keeping in a drawer — tells you that the number would be large.\n\nCy turns toward the open passage. The lamp swings with it, throwing light down into the cold dark and the water-smell below.",
-      "sceneSummary": "Loki told Cy it is the further instruction — and Cy acknowledged, woke by degrees, and turned toward the passage below.",
+      "narration": "Cy moves first. Its legs find the first step of the descent without hesitation, lamp swinging forward, and the pool of light drops ahead of you into the dark.\n\nYou follow. The stone here is older than anything in the Unlit's chamber above — the joints are tighter, the cuts more precise, and the smell of cold water comes up strong and clean, the kind of clean that means a source no one has touched in a long time. The walls narrow slightly as you go, not enough to press, but enough to feel. Your hand trails the left wall. The stone is smooth there, worn smooth in a narrow band at shoulder height — not by the Unlit, not recently. By someone who made this trip many times.\n\nCy pauses at the base of the stairs. Its lens irises once — wide, then tight, then settling — and it angles the lamp left. The light catches a long stretch of worked stone, and then something set into it: a series of marks, cut fine and deliberate, running at eye level in a continuous band along the wall. Not glyphs exactly. Not language. Something in between — a system of notation you have not seen above ground.\n\nCy says, very quietly, 'The records begin here.' Then it turns its lamp a fraction further left and the light finds what is at the passage's end: a low housing set flush into the wall, dark metal, older than anything in this valley, with a single indicator still faintly lit — a pale amber thread of light, the color of old amber, the color of something that has been waiting for morning for a very long time.",
+      "sceneSummary": "Loki followed Cy into the passage below — the stone older, the air colder, and Halvex's records beginning on the wall.",
       "choices": [
         {
-          "label": "Descend now — follow Cy into the passage toward the regulator and the missing records",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "travel"
-          ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Cy what it remembers of Halvex before you go — a name, a habit, anything that survived",
+          "label": "Read the wall-notation with See the Made Thing — let the craft find the structure and purpose of Halvex's records",
           "attribute": "mental",
           "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Go to the regulator housing first — look at the indicator light and examine what Cy is maintaining",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": null,
-          "trivial": true
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Take stock before descending — read the passage with Prism Sight before the first step",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Ask Cy what the notation system is — whether it can read it, and whether it recognizes Halvex's hand in the cuts",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight to read the passage — heat traces, recent movement, anything that has been down here since the passage opened",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
           ],
           "abilityId": "prism_sight",
           "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Or say something else entirely",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [],
-          "abilityId": null,
-          "trivial": true
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising stronger now from the open passage below. Cy's lamp pools light downward, the way ahead visible for only a few feet before the dark takes it.",
+        "setting": "The passage below the Unlit's outer chamber — older worked stone, joints tight and precise, cold water-smell strong. The stair has ended at a long horizontal corridor. The left wall bears a continuous band of fine-cut notation at eye height. At the passage's far end, a dark metal housing sits flush in the wall with a single amber indicator light still faintly burning.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Turned toward the open passage, lamp swinging to face it, legs settling into a new readiness — waiting for the first step forward."
+            "state": "Lamp angled left toward the wall-notation, lens settled into a fixed focus, waiting — it has already read what is here and is holding the information until asked"
           }
         ],
         "objects": [
-          "Three metal panels resting against the stone wall, designation glyphs facing upward",
-          "Stone face of the inspection port, swung inward on its counterweight",
-          "Cy's lamp, now angled toward the passage below",
-          "The open passage — cold dark, water-smell, living dark deeper down"
+          "Long band of fine-cut notation along the left wall — not standard glyphs, a notation system in between language and diagram",
+          "Dark metal regulator housing flush in the far wall — old, pre-Transition, single amber indicator light still faintly lit",
+          "Three metal panels from the inspection port niche — carried down or left above (last placed against the wall upstairs)"
         ],
         "threads": [
-          "What Halvex's work actually was — written in the stone further down",
-          "The deprecated duration field: how long Cy has been waiting is still unread",
-          "The regulator and the missing records are below"
+          "What Halvex's records on the wall actually say",
+          "What the amber indicator light means — whether the regulator is still running",
+          "The deprecated duration field: how long Cy has actually been here, still unread"
         ]
       },
+      "moveTo": {
+        "location": "the-passage-below-the-unlit-deep",
+        "why": "followed Cy down the stairs from the lower passage into the deeper horizontal corridor"
+      },
+      "placeUpdates": [
+        {
+          "note": "The passage descends to a horizontal corridor with Halvex's wall-notation running along the left side and a pre-Transition regulator housing at the far end — amber indicator still lit.",
+          "subPlace": {
+            "name": "Halvex's Corridor",
+            "parent": "The Unlit Deep",
+            "note": "The bottom of the descent — older stone than anything above, tight joints, a continuous band of fine notation cut into the left wall at eye height, and a dark metal regulator housing at the far end with a single amber light still burning.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "halvex-corridor",
+          "label": "Halvex's Corridor",
+          "kind": "place",
+          "fact": "The passage below the Unlit's chamber ends in a horizontal corridor older than anything above — walls precisely jointed, a continuous band of notation cut into the left wall at eye height in a system between language and diagram, and a pre-Transition regulator housing at the far end still showing a faint amber indicator light.",
+          "links": [
+            "cy-construction",
+            "the-seam-beside-the-bracket",
+            "the-unlit-deep",
+            "the-water-crisis",
+            "terminus-seals-beneath-the-valley"
+          ]
+        },
+        {
+          "topic": "halvex-notation",
+          "label": "Halvex's Wall Records",
+          "kind": "mystery",
+          "fact": "Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated.",
+          "links": [
+            "halvex-corridor",
+            "cy-construction",
+            "the-seam-beside-the-bracket"
+          ]
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "cy",
           "name": "Cy",
-          "note": "Received 'you are my further instruction' — went completely still, then woke by degrees, acknowledged the instruction formally, and turned toward the passage. The waiting is over; it has a direction.",
+          "role": "Precursor companion — now acknowledged as Loki's assigned mechanism",
+          "note": "Led the descent without hesitation, found the notation immediately, named where the records begin, and stopped — waiting for instruction rather than leading past that point.",
           "learned": [
-            "Loki has named itself Cy's further instruction — the personal assignment now has a living operator again",
-            "Cy has not descended the passage in 'some time' — the phrasing was careful and hollow"
+            "The records on the wall are Halvex's — Cy named them directly",
+            "Cy moved to the notation first, before the regulator — it knows the wall matters"
           ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "In the lower passage, turned toward the open passage below — acknowledged instruction, ready to descend"
+          "statusNote": "Present in the corridor below the Unlit Deep — lamp angled at the wall-notation, waiting"
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "cy-construction",
-          "label": "Cy's Construction",
-          "kind": "mystery",
-          "entityId": "cy",
-          "fact": "Cy acknowledged Loki as its further instruction — the personal assignment has a living operator again. It woke by degrees and turned toward the passage. It has not descended in 'some time,' and the way it said so suggests the number would be large.",
-          "links": [
-            "the-seam-beside-the-bracket",
-            "the-unlit-deep",
-            "terminus-seals-beneath-the-valley"
-          ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "Loki named itself Cy's further instruction — the mechanism acknowledged and turned toward the passage below. The regulator and the missing records are the remaining thread."
-        }
-      ],
-      "offer": {
-        "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated duration field is a number Cy has been carrying quietly, and it has not offered it. The door is: ask before descending, or let it stay unread.",
-        "from": "What Cy is — a mechanism built for a person now gone, keeping careful accounts of a very long wait"
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet exchange, the acknowledgment and the turning"
+        "why": "a short descent, a slow walk through tighter stone"
       }
     },
     "sceneState": {
-      "setting": "The lower passage beneath the Unlit's outer chamber — older worked stone, tight joints, cold water-smell rising stronger now from the open passage below. Cy's lamp pools light downward, the way ahead visible for only a few feet before the dark takes it.",
+      "setting": "The passage below the Unlit's outer chamber — older worked stone, joints tight and precise, cold water-smell strong. The stair has ended at a long horizontal corridor. The left wall bears a continuous band of fine-cut notation at eye height. At the passage's far end, a dark metal housing sits flush in the wall with a single amber indicator light still faintly burning.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Turned toward the open passage, lamp swinging to face it, legs settling into a new readiness — waiting for the first ste"
+          "state": "Lamp angled left toward the wall-notation, lens settled into a fixed focus, waiting — it has already read what is here a"
         }
       ],
       "objects": [
-        "Three metal panels resting against the stone wall, designation glyphs facing upw",
-        "Stone face of the inspection port, swung inward on its counterweight",
-        "Cy's lamp, now angled toward the passage below",
-        "The open passage — cold dark, water-smell, living dark deeper down"
+        "Long band of fine-cut notation along the left wall — not standard glyphs, a nota",
+        "Dark metal regulator housing flush in the far wall — old, pre-Transition, single",
+        "Three metal panels from the inspection port niche — carried down or left above ("
       ],
       "threads": [
-        "What Halvex's work actually was — written in the stone further down",
-        "The deprecated duration field: how long Cy has been waiting is still unread",
-        "The regulator and the missing records are below"
+        "What Halvex's records on the wall actually say",
+        "What the amber indicator light means — whether the regulator is still running",
+        "The deprecated duration field: how long Cy has actually been here, still unread"
       ]
     }
   },
@@ -667,7 +696,8 @@
         "[d1] The seam's asking-point is at its base — the lowest third of the cut runs warmer under Prism Sight, and Cy tapped the floor there to mark it. The door's mechanism, if there is one, answers low.",
         "[d1] The seam's asking-point was successfully pressed — the seam yielded and stands bright and open, but did not open fully. The question has been heard; the door waits for a second asking.",
         "[d1] The seam door is now fully open — a passage descending into cold dark, smelling of water and living things, older than the Unlit. The door opened to a committed, full-weight press when the creatures from below were also present.",
-        "[d1] The inspection port niche below the outer chamber was opened — three metal-panel entries recovered by Cy. The counterweight mechanism is undamaged. The port closes cleanly."
+        "[d1] The inspection port niche below the outer chamber was opened — three metal-panel entries recovered by Cy. The counterweight mechanism is undamaged. The port closes cleanly.",
+        "[d1] The passage descends to a horizontal corridor with Halvex's wall-notation running along the left side and a pre-Transition regulator housing at the far end — amber indicator still lit."
       ],
       "flags": {
         "seam_touched": true,
@@ -701,8 +731,22 @@
           "day": 1,
           "visited": true,
           "note": "A low recessed niche in the east wall of the lower passage — older stone than the Unlit's chamber, a hand-worn grip in the stone face, three metal panels inside stamped with Precursor glyphs. Below…"
+        },
+        "halvex-s-corridor": {
+          "name": "Halvex's Corridor",
+          "parentId": "the_unlit_deep",
+          "day": 1,
+          "visited": true,
+          "note": "The bottom of the descent — older stone than anything above, tight joints, a continuous band of fine notation cut into the left wall at eye height, and a dark metal regulator housing at the far end…"
         }
       }
+    },
+    "gen-the-passage-below-the-unlit-deep": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 1,
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -847,7 +891,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
@@ -1153,7 +1197,9 @@
           "standing-unlit",
           "the-seam-beside-the-bracket"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Passage Below The Unlit Deep"
+        ],
         "createdDay": 1,
         "entityId": "the-unlit-deep",
         "updatedDay": 1
@@ -1373,15 +1419,20 @@
           "[d1] The name stamped into the personal designation glyph of the terminus regulator below the Unlit Deep — a Precursor construction-address naming a specific operator the installation was built for. Cy reacted to this name with total stillness and refused to elaborate.",
           "[d1] Cy confirmed the name appears in its own maintenance registry as a 'deprecated operator designation' — then stopped, said verification was required, and did not move to verify. The name is in Cy's records. Cy is not saying what it knows about it.",
           "[d1] Cy's maintenance registry contains a deprecated entry under the name Halvex, flagged 'do not resolve without verification.' Cy has not verified it — not for lack of ability, but because something in its own architecture is holding the step back.",
-          "[d1] Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry."
+          "[d1] Cy was built as a paired instrument for this terminus regulator installation — assigned not to the facility but to the operator Halvex personally. Cy has been in this passage before and does not remember it. The pairing is in its own maintenance registry.",
+          "[d1] Halvex cut a notation system into the wall of the deep corridor — not standard glyphs, something between language and diagram. The records begin at the base of the stair and run continuously along the left wall. Cy said only 'the records begin here' and has not elaborated."
         ],
         "links": [
           "terminus-seals-beneath-the-valley",
           "loki-thread",
           "the-unlit-deep",
-          "the-seam-beside-the-bracket"
+          "the-seam-beside-the-bracket",
+          "halvex-corridor",
+          "cy-construction"
         ],
-        "aliases": [],
+        "aliases": [
+          "Halvex's Wall Records"
+        ],
         "createdDay": 1,
         "updatedDay": 1
       },
@@ -1407,25 +1458,42 @@
         "createdDay": 1,
         "entityId": "cy",
         "updatedDay": 1
+      },
+      "halvex-corridor": {
+        "id": "halvex-corridor",
+        "label": "Halvex's Corridor",
+        "kind": "place",
+        "facts": [
+          "[d1] The passage below the Unlit's chamber ends in a horizontal corridor older than anything above — walls precisely jointed, a continuous band of notation cut into the left wall at eye height in a system between language and diagram, and a pre-Transition regulator housing at the far end still showing…"
+        ],
+        "links": [
+          "cy-construction",
+          "the-seam-beside-the-bracket",
+          "the-unlit-deep",
+          "the-water-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 2.502890807089302,
-    "cerebral": 15.388268750035419,
-    "social": 13.911334958083986,
-    "strategic": 8.9906885801979,
-    "cautious": 6.777881667887988,
-    "amorous": 4.83525977004904,
-    "generous": 2.1512981839942142,
-    "ruthless": 0.2819881023409168,
-    "risky": 2.833795566424463
+    "devotion": 2.4403185369120695,
+    "cerebral": 15.003562031284533,
+    "social": 13.563551584131886,
+    "strategic": 8.765921365692954,
+    "cautious": 7.608434626190788,
+    "amorous": 4.714378275797814,
+    "generous": 2.0975157293943587,
+    "ruthless": 0.27493839978239387,
+    "risky": 2.7629506772638517
   },
   "aptitudes": [
     "silver_tongue",
     "scholar"
   ],
-  "actionCount": 68,
+  "actionCount": 69,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1486,6 +1554,14 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "The Passage Below The Unlit Deep",
+      "url": "https://image.pollinations.ai/prompt/The%20Passage%20Below%20The%20Unlit%20Deep%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Passage%20Below%20The%20Unlit%20Deep.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=93653&nologo=true",
+      "caption": "The Passage Below The Unlit Deep",
+      "worldDay": 27,
+      "at": "2026-07-27T17:57:13.838Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Loki",
@@ -1582,8 +1658,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785174701567,
-  "rev": 140,
+  "updatedAt": 1785175033838,
+  "rev": 141,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1894,14 +1970,53 @@
         }
       }
     },
-    "location": {},
+    "location": {
+      "gen-the-passage-below-the-unlit-deep": {
+        "id": "gen-the-passage-below-the-unlit-deep",
+        "name": "The Passage Below The Unlit Deep",
+        "regionId": "umbral_depths",
+        "descriptionSeed": "A place the road led to — The Passage Below The Unlit Deep. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "the_unlit_deep"
+        ],
+        "_mintedAs": "transit",
+        "dangerLevel": 4,
+        "_gen": {
+          "type": "location",
+          "tier": "fresh",
+          "engagementScore": 2,
+          "birthWeight": 1,
+          "rating": null,
+          "attentionHistory": [
+            {
+              "kind": "revisit",
+              "day": 1
+            }
+          ],
+          "createdDay": 1,
+          "provenance": {
+            "locationId": "the_unlit_deep",
+            "day": null,
+            "hint": "transit"
+          },
+          "lastAttentionDay": 1
+        },
+        "map": {
+          "x": 96.11510228365859,
+          "y": 400
+        }
+      }
+    },
     "arc": {}
   },
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 41
+    "umbral_depths": 42
   },
   "opLossPending": false,
   "sessions": [
@@ -1932,10 +2047,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T17:51:41.566Z",
+      "lastAt": "2026-07-27T17:57:13.832Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 37
+      "beats": 38
     }
   ],
   "establishedFacts": [
@@ -1973,18 +2088,18 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 69,
-    "choices": 69,
+    "sceneSummary": 70,
+    "choices": 70,
     "characterDeltas": 30,
-    "scene": 69,
-    "placeUpdates": 9,
-    "codexUpdates": 59,
-    "timeOps": 68,
+    "scene": 70,
+    "placeUpdates": 10,
+    "codexUpdates": 60,
+    "timeOps": 69,
     "offer": 8,
     "generateRequest": 2,
     "sceneEnded": 16,
-    "npcUpdates": 60,
-    "moveTo": 1,
+    "npcUpdates": 61,
+    "moveTo": 2,
     "gambitApt": 1,
     "deeds": 1,
     "questUpdates": 12,
@@ -1993,7 +2108,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 69,
+  "_opTurns": 70,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.75
@@ -2047,33 +2162,6 @@
     "gen-stillwater-s-trouble": "the_old_warden_post"
   },
   "knownPlaces": [
-    "archive_hollow",
-    "bedrock",
-    "cairnhold",
-    "choirheight",
-    "cloudform",
-    "disputed_zone_fringe",
-    "dw_the_burnscar",
-    "dw_the_moot",
-    "dw_the_thinedge",
-    "echo_river_crossing",
-    "ent_deepwood",
-    "glasshome",
-    "greywater_stilts",
-    "grovehome",
-    "harmonic_heights_terrace",
-    "kestrels_roost",
-    "millbrook",
-    "old_switchback",
-    "pressureholt",
-    "radiant_plateau_edge",
-    "spindrift_hollow",
-    "sunken_choir",
-    "the_appetite_halls",
-    "the_axiom",
-    "the_axis_gate",
-    "the_bargain_gate",
-    "the_blaze",
     "the_blocklands",
     "the_bloodless_hold",
     "the_ceaseless",
@@ -2152,7 +2240,8 @@
     "gen-north-gate-registry-ossian-office",
     "gen-hub-north-gate-district-street",
     "gen-mara-wells-store",
-    "gen-disputed-zone-left-branch-entrance"
+    "gen-disputed-zone-left-branch-entrance",
+    "gen-the-passage-below-the-unlit-deep"
   ],
   "_devActions": [
     {
@@ -2165,7 +2254,8 @@
     }
   ],
   "locationImages": {
-    "the_unlit_deep": "https://image.pollinations.ai/prompt/The%20Unlit%20Deep%3A%20Past%20the%20city%2C%20past%20the%20harbor%2C%20the%20dark%20stops%20being%20a%20home%20and%20becomes%20a%20doctrine.%20The%20Unlit%20live%20here%20%E2%80%94%20the%20cult%20of%20the%20pure%20pole%20%E2%80%94%20and%20they%20would%20put%20out%20every%20light%20in%20the%20world%2C%20beginning%20with%20the%20ones%20people%20love.%20The%20Umbrals%20do%20not%20disown%20them%2C%20exactly.%20They%20simply%20do%20not%20go%2C%20and%20they%20do%20not%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=83099&nologo=true"
+    "the_unlit_deep": "https://image.pollinations.ai/prompt/The%20Unlit%20Deep%3A%20Past%20the%20city%2C%20past%20the%20harbor%2C%20the%20dark%20stops%20being%20a%20home%20and%20becomes%20a%20doctrine.%20The%20Unlit%20live%20here%20%E2%80%94%20the%20cult%20of%20the%20pure%20pole%20%E2%80%94%20and%20they%20would%20put%20out%20every%20light%20in%20the%20world%2C%20beginning%20with%20the%20ones%20people%20love.%20The%20Umbrals%20do%20not%20disown%20them%2C%20exactly.%20They%20simply%20do%20not%20go%2C%20and%20they%20do%20not%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=83099&nologo=true",
+    "gen-the-passage-below-the-unlit-deep": "https://image.pollinations.ai/prompt/The%20Passage%20Below%20The%20Unlit%20Deep%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Passage%20Below%20The%20Unlit%20Deep.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=93653&nologo=true"
   },
   "customEncounters": {
     "re-re_raider_duel": {

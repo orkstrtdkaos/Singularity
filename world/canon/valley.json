@@ -761,6 +761,96 @@
         "birthWeight": 32,
         "rivalId": "warden-coll"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "deni-cors",
+      "name": "Deni Cors",
+      "role": "Hub-registered pack-runner, south circuit — stopped at the Left Branch entrance with a sealed message for the warden post",
+      "homeLocation": "left_branch_entrance",
+      "communityId": "disputed.leftbranch",
+      "personality": {
+        "warmth": 0.5,
+        "trust": 0.3,
+        "candor": 0.6,
+        "patience": 0.4
+      },
+      "spectrum": {
+        "body_mind": -0.5,
+        "emotional_logical": -0.2,
+        "concrete_abstract": -0.6
+      },
+      "voiceHints": "Practical and spare — she gives you what you need to know and stops there. Not unfriendly, just calibrated for efficiency; warmth comes out sideways, in small dry observations rather than openings. She is young enough to still find the Disputed Zone a little electric and old enough not to say so. When she names herself she does it plainly, no flourish: 'Deni Cors. South circuit, Hub registered. I'm carrying.' She will not surrender the sealed message to anyone who cannot prove they are warden-post, and she will wait you out on that point without visible anxiety.",
+      "knowledge": [
+        "Every reliable waymark and crossing-point on the south circuit from Hub out to the Left Branch valley mouth — in mud-season and in frost, which are different routes",
+        "Which warden posts are reliably staffed, which are not, and which have changed hands enough times that she files a note with Hub after each run",
+        "The valley's early-spring moods: where the meltwater crosses the path, where the ground still holds, where it will not",
+        "Hub registration protocol — seals, countersigns, chain-of-custody — well enough to spot a forgery and to refuse a handoff that doesn't satisfy the form"
+      ],
+      "wants": "To make the hand-off clean, log her arrival, and be back on the south circuit before the afternoon cloud comes in off the ridge.",
+      "fears": "That the warden post is empty or compromised again — because then she has to decide what to do with a sealed message she is not supposed to open, in a valley that does not fully belong to anyone.",
+      "reactsToReputation": {
+        "warden_affiliated": "produces the message immediately, requests a countersign, and relaxes by one visible degree",
+        "runner_peer": "brief solidarity — swaps a single piece of route intelligence, expects one back",
+        "authority_without_jurisdiction": "polite, immovable; she has heard every version of 'I'll take it from here'",
+        "threatening": "she does not run; she goes very still and very quiet and measures the gap to the tree line"
+      },
+      "appearance": "A young woman in her early twenties, lean and weathered past her age from the south circuit's exposure, with the particular muscle of someone who climbs as much as she runs. Skin brown-ruddy from wind and early-spring cold, dark hair pulled back with a cord, one loose strand she has stopped bothering with. Hub registration badge stitched to the left breast of a worn oilcloth coat — the coat has been re-waxed so many times the seams are stiff. Pack riding high and close, properly fitted. The sealed message is not visible; it is inside the coat, not in the pack. She is standing at the valley entrance rather than moving, which means she stopped deliberately — and she is watching the path ahead with the attention of someone who already noticed something before you arrived.",
+      "inventory": {
+        "sealed_message": {
+          "addressee": "Left Branch warden post",
+          "seal": "Hub dispatch, south circuit",
+          "contents": "unknown to Deni Cors",
+          "location": "inside coat, against the body"
+        },
+        "runner_kit": "route-marked oilskin, two-day rations, meltwater flask, short knife (tool not weapon), Hub log-book for delivery signatures"
+      },
+      "people": "human",
+      "domains": {
+        "primary": "wayfarer",
+        "secondary": "somatic",
+        "tertiary": "syllogist"
+      },
+      "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own. Wayfarer primary — the south circuit is her lived tradition; somatic secondary — running is a bodily discipline she has refined; syllogist tertiary — Hub registration protocol runs on precise procedure and she has absorbed it.",
+      "functions": [
+        "move",
+        "bind",
+        "reveal"
+      ],
+      "functionsNote": "move: she carries information across contested ground; bind: chain-of-custody protocol — she holds the message to the correct recipient and will not release it outside that constraint; reveal: once the hand-off is satisfied, she may surface route intelligence the party does not have.",
+      "season": "early-spring",
+      "recurringCharacterNote": "Deni Cors has named herself at this entrance and is now a stable recurring figure on the south circuit. She may be encountered again at any Hub-affiliated post between the valley mouth and the southern waystation chain. Her knowledge of the circuit updates between appearances.",
+      "peopleSource": "generated",
+      "image": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20early%20twenties%2C%20lean%20and%20weathered%20past%20her%20age%20from%20the%20south%20circuit's%20exposure%2C%20with%20the%20particular%20muscle%20of%20someone%20who%20climbs%20as%20much%20as%20she%20runs.%20Skin%20brown-ruddy%20from%20wind%2C%20character%20portrait%2C%20named%20Deni%20Cors%2C%20Hub-registered%20pack-runner%2C%20south%20circuit%20%E2%80%94%20stopped%20at%20the%20Left%20Branch%20entrance%20with%20a%20sealed%20messag%2C%20Practical%20and%20spare%20%E2%80%94%20she%20gives%20you%20what%20you%20need%20to%20know%20and%20stops%20there.%20Not%20unfriendly%2C%20just%20cali%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=862&nologo=true",
+      "history": "Deni Cors has been running the south circuit out of Hub for going on six years — long enough that she did her first mud-season crossing before the current waymark posts were driven in, navigating by the older blaze-cuts on the beech trunks that half the new runners don't know to look for. She came to the work sideways: she'd been a seasonal count-taker for a land assessor who went under, and the…",
+      "relationships": {
+        "Hub senior registrar": "The person who told her about the flagged file. She doesn't consider this a debt exactly, but she is more honest with Hub's senior staff than runners are usually required to be — she files detailed notes on warden-post irregularities where others would write 'post unstaffed, message returned.' The registrar reads those notes. Deni knows this because the questions she gets asked on return runs are specific.",
+        "The Left Branch valley mouth, as a place": "Not a person, but Deni has a runner's relationship with locations that functions like one. She does not trust the Left Branch entrance the way she trusts the mid-circuit crossings. It is a threshold that has been unreliable enough times that she arrives there already calculating her fallback — who holds the message, where she overnights if she can't hand off, what she tells Hub. She would not say she dislikes running it. She would say it keeps her sharp in a way the easier legs don't.",
+        "Other south-circuit runners": "Known by name and by habit. She knows who double-checks their seals and who doesn't, who files honest post-condition notes and who smooths them over. She doesn't socialize much on layovers but she talks shop freely, and other runners on the circuit tend to come to her when something feels off about a run they've been given. She usually has a prior note on the post in question."
+      },
+      "_canon": {
+        "entityId": "deni-cors",
+        "type": "npc",
+        "weight": 47,
+        "rating": "R+",
+        "tier": "variant",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "gen-disputed-zone-left-branch-entrance",
+          "day": 14,
+          "worldDay": null,
+          "hint": "Deni Cors — Hub registered runner, south circuit, young woman, pack-runner with a sealed message addressed to the Left B",
+          "why": "She has stopped and named herself; she is now a recurring character with a stable identity, not a passing figure"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 27,
+        "birthWeight": 42,
+        "rivalId": "deni-cors"
+      }
     }
   ]
 }

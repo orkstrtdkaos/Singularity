@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 2,
-  "xp": 149,
+  "xp": 154,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -67,7 +67,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 72,
+  "energy": 68,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -198,81 +198,92 @@
         "player": "Use See the Made Thing on the flame itself — read its construction before you leave",
         "summary": "Loki attempted to read the pale blue flame's construction — and found nothing to read.",
         "narration": "You turn your attention to the flame before you go. You have read cups, rooms, seams in stone — the construction of things is your ground. You let See the Made Thing settle into focus, the way you always do, looking for the joinery, the made shape, the point where intention meets material.\n\nThere is nothing to catch. Not because the flame hides itself — it does not. It sits exactly where it is, burning without a wick, giving off a light that is more like the absence of dark than the presence of anything. But the craft finds no edge to read. A made thing has seams. This has no seams. A made thing begins somewhere and ends somewhere. This does not seem to have begun.\n\nCy irises once at the bracket, then closes the lens and does not open it again. This is, you have learned, Cy's way of saying that it also found nothing, and that finding nothing is the more interesting result.\n\nThe elder does not look up. They do not say anything. They did not need to warn you — the flame already said what it had to say, which is that it is not available for this kind of conversation."
+      },
+      {
+        "player": "Use the better story.  Tell the elder that if you know the right question to ask, and you learn the secret of the blue flame... you can bring it's unlight to the world as you travel.",
+        "summary": "Loki offered the elder a frame — not a request to be taught, but a promise to carry the right question outward; the elder gestured to the seam in the stone and named it older than the flame, older than the Unlit, and waiting.",
+        "narration": "You do not ask again. You offer instead.\n\nYou tell the elder that you understand the flame is not a lesson. You tell them that you are not asking to be taught a technique. What you are asking is a different shape of thing: you want to know the right question. Because if you know the right question, you say, you can carry it with you. You have seen, already tonight, that the dark travels further than most people believe. You travel. You go into places where the light reaches too hard and crowds things out. If you carried the right question about the blue flame, you might find, somewhere in the world, the answer that fits it — and then you might bring that unlight to places that have never had it. You say this plainly, without flourish, because the elder has shown you that flourish finds no grip here.\n\nThe elder is quiet for a long moment. Then they say: the question is not yours yet to carry, but you have shown you know how to carry a question honestly. They lift one hand — the first real movement they have made — and they gesture, not at the flame, but at the seam in the stone beside the bracket. They say: that is older than the flame, and older than us, and it has been waiting for someone to ask the wrong question of the right thing. Then they lower the hand and are still again. The subject does not close, exactly. It rests.\n\nCy irises twice, a fast double-blink it only does when something does not fit any category it holds. It does not speak. But it has been looking at the seam since the elder's hand moved, and it has not looked away.\n\n*✦ The Umbrals: +0.99 — Offered the elder a true shape for what was being asked — not a request for craft, but a promise to carry the right question outward honestly; the elder acknowledged it with their first real movement (held at the band's edge).*"
       }
     ],
     "lastTurn": {
-      "narration": "You turn your attention to the flame before you go. You have read cups, rooms, seams in stone — the construction of things is your ground. You let See the Made Thing settle into focus, the way you always do, looking for the joinery, the made shape, the point where intention meets material.\n\nThere is nothing to catch. Not because the flame hides itself — it does not. It sits exactly where it is, burning without a wick, giving off a light that is more like the absence of dark than the presence of anything. But the craft finds no edge to read. A made thing has seams. This has no seams. A made thing begins somewhere and ends somewhere. This does not seem to have begun.\n\nCy irises once at the bracket, then closes the lens and does not open it again. This is, you have learned, Cy's way of saying that it also found nothing, and that finding nothing is the more interesting result.\n\nThe elder does not look up. They do not say anything. They did not need to warn you — the flame already said what it had to say, which is that it is not available for this kind of conversation.",
-      "sceneSummary": "Loki attempted to read the pale blue flame's construction — and found nothing to read.",
+      "narration": "You do not ask again. You offer instead.\n\nYou tell the elder that you understand the flame is not a lesson. You tell them that you are not asking to be taught a technique. What you are asking is a different shape of thing: you want to know the right question. Because if you know the right question, you say, you can carry it with you. You have seen, already tonight, that the dark travels further than most people believe. You travel. You go into places where the light reaches too hard and crowds things out. If you carried the right question about the blue flame, you might find, somewhere in the world, the answer that fits it — and then you might bring that unlight to places that have never had it. You say this plainly, without flourish, because the elder has shown you that flourish finds no grip here.\n\nThe elder is quiet for a long moment. Then they say: the question is not yours yet to carry, but you have shown you know how to carry a question honestly. They lift one hand — the first real movement they have made — and they gesture, not at the flame, but at the seam in the stone beside the bracket. They say: that is older than the flame, and older than us, and it has been waiting for someone to ask the wrong question of the right thing. Then they lower the hand and are still again. The subject does not close, exactly. It rests.\n\nCy irises twice, a fast double-blink it only does when something does not fit any category it holds. It does not speak. But it has been looking at the seam since the elder's hand moved, and it has not looked away.\n\n*✦ The Umbrals: +0.99 — Offered the elder a true shape for what was being asked — not a request for craft, but a promise to carry the right question outward honestly; the elder acknowledged it with their first real movement (held at the band's edge).*",
+      "sceneSummary": "Loki offered the elder a frame — not a request to be taught, but a promise to carry the right question outward; the elder gestured to the seam in the stone and named it older than the flame, older than the Unlit, and waiting.",
       "choices": [
         {
-          "label": "Leave the Unlit Deep and return to the city above — carry the answer that has no official home",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask the elder one final question before you go — not about the flame, but about the seam in the stone",
+          "label": "Examine the seam the elder just indicated — run See the Made Thing along it, this time with the question the elder's gesture shaped",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Sit with the elder a moment in silence — not asking anything, just being present before you go",
+          "label": "Ask the elder directly: what is the wrong question — the one that fits the right thing?",
           "attribute": "social",
           "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Leave now. You have what you came for, and the elder has given you more than you expected — carry it up into the light and think on it",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "calm"
+            "travel"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "There is a hostile presence near the passage — face what waits on the stair",
+          "label": "Turn to the stair passage — and face whatever the Standing Unlit has been guarding beside it",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "defend"
+            "careful"
           ],
-          "trivial": false,
-          "encounterId": "beast_lantern_ambusher"
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "The outer chamber of the Unlit Deep — worked stone, pale blue flame in the bracket, low and even light that does not seem to come from anywhere in particular. Loki stands near the passage gap from the inner chamber, having turned toward the flame and found nothing there to read.",
+        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left, no visible wick. The elder has lowered their hand and is still. The seam beside the bracket has been named aloud for the first time.",
         "npcsPresent": [
           {
             "name": "Unlit Elder",
-            "state": "Seated by the pale blue flame, hands in lap, face hooded. Has not moved. Has not spoken. The subject of the flame remains closed."
+            "state": "Seated, hands back in lap, face hooded — the gesture is done; they are still again."
           },
           {
             "name": "Standing Unlit",
-            "state": "Near the passage to the stair, motionless, watching. The encounter flagged there has not resolved."
+            "state": "Near the stair passage, motionless, watching."
           },
           {
             "name": "Cy",
-            "state": "Lens closed. Standing at Loki's heel. Has made its own assessment and is keeping it."
+            "state": "Lens locked on the seam in the stone. Has not looked away since the elder's hand moved."
           }
         ],
         "objects": [
-          "The pale blue flame — no visible wick, bracket-mounted on the left wall, burning without explanation, unreadable",
-          "The seam in the stone beside the bracket — older than the bracket, older than the doctrine; the elder declined it once",
-          "The passage to the inner chamber — gap in the worked stone, no door",
+          "The pale blue flame — bracket-mounted, no wick, burning",
+          "The seam in the stone beside the bracket — named by the elder; older than the flame, older than the Unlit",
+          "The passage to the inner chamber — gap in worked stone, no door",
           "The passage to the stair — open, the Standing Unlit beside it"
         ],
         "threads": [
-          "The seam in the outer chamber stone — the elder declined once; the read is still possible",
-          "What Loki carries back to the city: an honest answer the city cannot officially hear",
-          "The passage back up is open — departure is available",
-          "Something waits near the stair passage — a hostile meeting the engine has surfaced"
+          "The seam: the elder named it as older than everything here and waiting for someone to ask the wrong question of the right thing — uninvestigated",
+          "The stair passage: the Standing Unlit still guards it; something the engine flagged there has not resolved",
+          "What Loki carries back to the city: an honest answer the city cannot officially hear, and now a question about the right question"
         ]
       },
       "npcUpdates": [
@@ -280,65 +291,95 @@
           "op": "update",
           "npcId": "unlit-elder",
           "name": "Unlit Elder",
-          "note": "Loki attempted to read the pale blue flame — the elder did not comment, did not warn, did not move. The silence after the failed read was itself the response.",
+          "note": "Received Loki's reframed request — not to be taught the flame, but to carry the right question outward. Lifted one hand and gestured to the seam beside the bracket: named it older than the flame, older than the Unlit, and waiting. Said Loki has shown they know how to carry a question honestly. Did not close the subject — let it rest.",
+          "learned": [
+            "Loki travels into places where the light runs hard and crowds things out — the elder heard this and understood it",
+            "The seam beside the bracket is older than the flame and older than the Unlit — the elder named this plainly, unprompted, in response to the reframing"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Seated by the pale blue flame in the outer chamber; the flame-subject is closed; the elder awaits whatever Loki does next."
-        },
-        {
-          "op": "update",
-          "npcId": "standing-unlit",
-          "name": "Standing Unlit",
-          "note": "Remains beside the stair passage. Something the engine has flagged is near that exit.",
-          "status": "active",
-          "statusNote": "Stationed near the stair passage; a hostile meeting is flagged in that direction."
+          "statusNote": "Seated by the pale blue flame in the outer chamber; gestured to the seam; the subject rests rather than closes.",
+          "pronouns": "they/them"
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-unlit-deep",
           "label": "The Unlit Deep",
-          "kind": "place",
-          "entityId": "the-unlit-deep",
-          "fact": "The pale blue flame has no construction that See the Made Thing can read — no seams, no point of origin, no edge. It is not hiding its joinery; the joinery simply does not exist in a form the craft can find. Cy closed its lens and said nothing, which is Cy's conclusion that the absence is itself the answer.",
+          "kind": "mystery",
+          "entityId": "unlit-elder",
+          "fact": "The elder gestured at the seam in the stone beside the blue-flame bracket and named it: older than the flame, older than the Unlit, and waiting for someone to ask the wrong question of the right thing. The elder did not explain further. The subject rests, not closed.",
           "links": [
             "the-unlit",
             "unlit-elder",
             "ring-form-residue-at-eastern-intake"
           ]
+        },
+        {
+          "topic": "the-seam-in-the-unlit-stone",
+          "label": "The Seam Beside the Bracket",
+          "kind": "mystery",
+          "fact": "Named by the Unlit Elder as older than the flame, older than the Unlit themselves, and waiting for someone to ask the wrong question of the right thing. Cy locked its lens on it and has not looked away. This is the second stonework of this character in the Unlit Deep — the inner chamber walls bear the same old marks.",
+          "links": [
+            "the-unlit-deep",
+            "unlit-elder",
+            "the-unlit",
+            "the-taken-from-the-city"
+          ]
         }
       ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-taken-from-the-city",
+          "note": "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened."
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief attempt and its quiet aftermath"
-      }
+        "why": "A brief exchange with the elder — a frame offered, a gesture given, a subject set to rest."
+      },
+      "deeds": [],
+      "ledgerEvents": [],
+      "standingOps": [
+        {
+          "people": "umbral",
+          "delta": 1,
+          "why": "Offered the elder a true shape for what was being asked — not a request for craft, but a promise to carry the right question outward honestly; the elder acknowledged it with their first real movement"
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The outer chamber of the Unlit Deep — worked stone, pale blue flame in the bracket, low and even light that does not seem to come from anywhere in particular. Loki stands near the passage gap from the inner chamber, having turned toward the flame and found nothing there to read.",
+      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left, no visible wick. The elder has lowered their hand and is still. The seam beside the bracket has been named aloud for the first time.",
       "npcsPresent": [
         {
           "name": "Unlit Elder",
-          "state": "Seated by the pale blue flame, hands in lap, face hooded. Has not moved. Has not spoken. The subject of the flame remain"
+          "state": "Seated, hands back in lap, face hooded — the gesture is done; they are still again."
         },
         {
           "name": "Standing Unlit",
-          "state": "Near the passage to the stair, motionless, watching. The encounter flagged there has not resolved."
+          "state": "Near the stair passage, motionless, watching."
         },
         {
           "name": "Cy",
-          "state": "Lens closed. Standing at Loki's heel. Has made its own assessment and is keeping it."
+          "state": "Lens locked on the seam in the stone. Has not looked away since the elder's hand moved."
         }
       ],
       "objects": [
-        "The pale blue flame — no visible wick, bracket-mounted on the left wall, burning",
-        "The seam in the stone beside the bracket — older than the bracket, older than th",
-        "The passage to the inner chamber — gap in the worked stone, no door",
+        "The pale blue flame — bracket-mounted, no wick, burning",
+        "The seam in the stone beside the bracket — named by the elder; older than the fl",
+        "The passage to the inner chamber — gap in worked stone, no door",
         "The passage to the stair — open, the Standing Unlit beside it"
       ],
       "threads": [
-        "The seam in the outer chamber stone — the elder declined once; the read is still possible",
-        "What Loki carries back to the city: an honest answer the city cannot officially hear",
-        "The passage back up is open — departure is available",
-        "Something waits near the stair passage — a hostile meeting the engine has surfaced"
+        "The seam: the elder named it as older than everything here and waiting for someone to ask the wrong question of the right thing — uninvestigated",
+        "The stair passage: the Standing Unlit still guards it; something the engine flagged there has not resolved",
+        "What Loki carries back to the city: an honest answer the city cannot officially hear, and now a question about the right question"
       ]
     }
   },
@@ -365,14 +406,14 @@
       "locationEntityId": "the-unlit-deep",
       "status": "active",
       "progress": [
-        "Passage granted after Loki's honest account of Cy's nature. The elder speaks; the inner chamber is now reachable.",
         "The elder confirmed the person came willingly and is in the inner chamber. The city's silence is now explained — they know. The elder permits one question: does the person wish to be found.",
         "The elder granted passage to the inner chamber. Loki is about to meet the person who came from the city willingly.",
         "Loki entered the inner chamber and found the taken person — seated, calm, and waiting. The question the elder permitted has not yet been asked.",
         "Loki gave the taken person an honest account of who they are and why they came — the person accepted the frame and said 'You can ask it.' The question is ready to be put.",
         "Sable gave the answer — they do not wish to be found. The choice was steady, reasoned, and their own. The question the elder permitted has been put and answered.",
         "Loki gave Sable a livable frame for their choice and stepped out of the inner chamber. The answer — no — was freely given and honestly received. The question of what to carry back to the world above remains.",
-        "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread."
+        "Loki returned Sable's answer to the elder — name, reason, and frame — and the elder acknowledged the deed. The question of what to carry back to the city above is now the only remaining thread.",
+        "The elder received the full account — Sable's name, answer, and the frame Loki left behind. The elder acknowledged the deed and has now offered a further gesture: the seam beside the bracket, named as older than the Unlit and waiting. The thread of what to carry back to the city has deepened."
       ],
       "aliases": [],
       "startedAt": "2026-07-24T21:30:43.637Z"
@@ -546,7 +587,7 @@
         "locationId": "the_unlit_deep",
         "day": 1
       },
-      "relationship": 3,
+      "relationship": 4,
       "history": [
         "[d1] Spoke for the first time when Loki's framing landed — ordered the Standing Unlit to let Cy pass, and granted Loki an audience.",
         "[d1] Invited Loki to sit or stand — made the first social opening; still hooded, face unseen.",
@@ -555,17 +596,18 @@
         "[d1] Granted Loki passage to the inner chamber with a single economical gesture and the words 'Then you may go in.' Did not rise, did not instruct, did not offer accompaniment.",
         "[d1] Received Sable's name, answer, and the frame Loki left behind. Acknowledged that Loki came, asked, and left the answer where it landed — called this what they would have Loki carry. Thanked Loki for carrying it honestly.",
         "[d1] Refused to teach the blue flame — said it is not theirs to teach, and that the question is the wrong shape for the thing being asked. No hostility. The subject simply closed.",
-        "[d1] Loki attempted to read the pale blue flame — the elder did not comment, did not warn, did not move. The silence after the failed read was itself the response."
+        "[d1] Loki attempted to read the pale blue flame — the elder did not comment, did not warn, did not move. The silence after the failed read was itself the response.",
+        "[d1] Received Loki's reframed request — not to be taught the flame, but to carry the right question outward. Lifted one hand and gestured to the seam beside the bracket: named it older than the flame, older than the Unlit, and waiting. Said Loki has shown they know how to carry a question honestly. Did…"
       ],
       "knownFacts": [
-        "The seam is not a topic the elder will open to a visitor; the deflection was economical and absolute, with no anger in it",
-        "The person in the inner chamber came willingly — the elder is clear on this",
         "The city sent no one, which the elder takes as evidence the city does not truly believe a taking occurred",
         "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
         "Sable's name — given freely by Loki",
         "That Loki offered Sable a frame that was not doctrine and not reproach before leaving",
         "That Loki did not try to take Sable — this is the thing they named",
-        "The flame is not considered teachable craft by the elder — it belongs to the dark, not to doctrine or instruction"
+        "The flame is not considered teachable craft by the elder — it belongs to the dark, not to doctrine or instruction",
+        "Loki travels into places where the light runs hard and crowds things out — the elder heard this and understood it",
+        "The seam beside the bracket is older than the flame and older than the Unlit — the elder named this plainly, unprompted, in response to the reframing"
       ],
       "skillsObserved": [
         "Absolute stillness",
@@ -574,7 +616,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber; the flame-subject is closed; the elder awaits whatever Loki does next.",
+      "statusNote": "Seated by the pale blue flame in the outer chamber; gestured to the seam; the subject rests rather than closes.",
       "domains": {
         "primary": "umbral"
       },
@@ -820,7 +862,7 @@
     "lastSharedReadAt": "2026-07-27T14:12:10.208Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -1162,12 +1204,14 @@
         "facts": [
           "[d1] Seated elder of the Unlit Deep's outer chamber",
           "[d1] The elder declined to speak about the seam in the stone — 'that question belongs to the chamber, not to a visitor.' The refusal was gentle but absolute, with no hostility in it. The seam exists and is real; the elder knows what it is and has chosen not to say.",
-          "[d1] The elder named the deed: that Loki came, asked, and left the answer where it landed. They called this what they would have Loki carry. The elder thanks by naming the act, not by gesture or gift."
+          "[d1] The elder named the deed: that Loki came, asked, and left the answer where it landed. They called this what they would have Loki carry. The elder thanks by naming the act, not by gesture or gift.",
+          "[d1] The elder gestured at the seam in the stone beside the blue-flame bracket and named it: older than the flame, older than the Unlit, and waiting for someone to ask the wrong question of the right thing. The elder did not explain further. The subject rests, not closed."
         ],
         "links": [
           "the-unlit",
           "the-taken-from-the-city",
-          "the-unlit-deep"
+          "the-unlit-deep",
+          "ring-form-residue-at-eastern-intake"
         ],
         "aliases": [
           "The Unlit Deep"
@@ -1218,25 +1262,42 @@
         "createdDay": 1,
         "entityId": "taken-person",
         "updatedDay": 1
+      },
+      "the-seam-in-the-unlit-stone": {
+        "id": "the-seam-in-the-unlit-stone",
+        "label": "The Seam Beside the Bracket",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Named by the Unlit Elder as older than the flame, older than the Unlit themselves, and waiting for someone to ask the wrong question of the right thing. Cy locked its lens on it and has not looked away. This is the second stonework of this character in the Unlit Deep — the inner chamber walls bear…"
+        ],
+        "links": [
+          "the-unlit-deep",
+          "unlit-elder",
+          "the-unlit",
+          "the-taken-from-the-city"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 4.48059553863081,
-    "cerebral": 11.075526104798003,
-    "social": 16.638123119621813,
-    "strategic": 7.117769384209524,
-    "cautious": 5.591525482916315,
-    "amorous": 8.655928293970428,
-    "generous": 2.7446088643124535,
-    "ruthless": 0.5048061344573873
+    "devotion": 4.36858065016504,
+    "cerebral": 10.798637952178053,
+    "social": 17.222170041631266,
+    "strategic": 7.939825149604285,
+    "cautious": 5.451737345843407,
+    "amorous": 8.439530086621167,
+    "generous": 2.675993642704642,
+    "ruthless": 0.49218598109595263
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "charmer"
   ],
-  "actionCount": 45,
+  "actionCount": 46,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1247,7 +1308,7 @@
   ],
   "peopleDisposition": {
     "veilwright": 4,
-    "umbral": 3,
+    "umbral": 3.99,
     "horizon": 1,
     "verist": -1
   },
@@ -1285,6 +1346,13 @@
       "people": "umbral",
       "delta": 1,
       "text": "reached the Unlit elder through honest framing rather than craft or coercion — demonstrated the kind of precision the dark respects"
+    },
+    {
+      "at": 27,
+      "kind": "act",
+      "people": "umbral",
+      "delta": 0.99,
+      "text": "Offered the elder a true shape for what was being asked — not a request for craft, but a promise to carry the right question outward honestly; the elder acknowledged it with their first real movement"
     }
   ],
   "nativeGrantsVersion": 1,
@@ -1378,8 +1446,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785164156782,
-  "rev": 100,
+  "updatedAt": 1785164285941,
+  "rev": 101,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1697,7 +1765,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 16
+    "umbral_depths": 17
   },
   "opLossPending": false,
   "sessions": [
@@ -1728,10 +1796,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T14:55:56.781Z",
+      "lastAt": "2026-07-27T14:58:05.940Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 12
+      "beats": 13
     }
   ],
   "establishedFacts": [
@@ -1763,26 +1831,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 45,
-    "choices": 45,
-    "characterDeltas": 21,
-    "scene": 45,
+    "sceneSummary": 46,
+    "choices": 46,
+    "characterDeltas": 22,
+    "scene": 46,
     "placeUpdates": 4,
-    "codexUpdates": 35,
-    "timeOps": 44,
+    "codexUpdates": 36,
+    "timeOps": 45,
     "offer": 4,
     "generateRequest": 2,
     "sceneEnded": 12,
-    "npcUpdates": 39,
+    "npcUpdates": 40,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
-    "questUpdates": 8,
-    "standingOps": 1,
+    "questUpdates": 9,
+    "standingOps": 2,
     "factUpdates": 3,
     "stageOps": 4
   },
-  "_opTurns": 45,
+  "_opTurns": 46,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -1794,7 +1862,7 @@
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,
-      "the_better_story": 5,
+      "the_better_story": 6,
       "prism_sight": 1
     },
     "coActivations": {

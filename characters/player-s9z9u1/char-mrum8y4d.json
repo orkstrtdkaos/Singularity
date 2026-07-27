@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 2,
-  "xp": 159,
+  "xp": 164,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -67,7 +67,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 67,
+  "energy": 66,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -208,89 +208,85 @@
         "player": "Examine the seam the elder just indicated — run See the Made Thing along it, this time with the question the elder's gesture shaped",
         "summary": "Loki read the seam with See the Made Thing — found it is a door, cut with purpose, older than the Unlit and older than the flame, made for something to pass through.",
         "narration": "You turn from the flame to the seam. The elder's hand has settled back into their lap, but the gesture lingers in the air — it pointed at something specific, and you let that specificity guide you.\n\nYou bring See the Made Thing to bear the same way you did with the flame, but you ask a different question this time. Not what is this and how was it made — but what question does this answer? The seam is a straight vertical line in the worked stone beside the bracket, running from the floor to a hand-span above your eye level. It is cleaner than a natural crack and older than the bracket that now sits beside it. The stone on either side of it is the same stone, but the seam itself is a gap between two intentions — two separate placements of rock that were meant to meet here and were meant to be opened again.\n\nThe craft finds something. Not joinery exactly — not the fingerprint of a maker's hand, not the seam of an illusion or a lie — but a shape of purpose. It is a door, or it was meant to be one. The frame is cut for something to pass through. The cut is very old, and it is not the Unlit's work, and it is not the Precursor work Cy would recognize. It predates the bracket. It predates the pale blue flame that now burns beside it. Whatever this passage was made for, it was made before anyone in this chamber decided what the chamber was for.\n\nCy makes a small sound — a single click, low and slow. It has not moved its lens away from the seam since the elder's hand pointed at it, and it does not move it now. Beside the passage to the stairs, the Standing Unlit is absolutely still."
+      },
+      {
+        "player": "Put your hand to the seam — feel the edge of it, see if it responds to pressure or to the right kind of attention",
+        "summary": "Loki pressed a hand to the ancient seam beside the bracket — felt precision, intention, and a faint waiting vibration; the door is real, but it did not open. Cy extended one foreleg toward it and held still. The Unlit Deep has given everything it will give this visit.",
+        "narration": "You press your palm flat against the seam. The stone is cold — the deep, steady cold of rock that has never been warm, not even in summer. The cut edge of the seam is precise under your fingertip. Whoever made this did not rush. You can feel where the tool changed direction, three times, in a line no wider than a knife's edge.\n\nThen something shifts. Not movement — there is no movement. It is more like a held breath releasing slightly, the way a door will settle when the season changes and the wood contracts. Your hand does not pass through. The seam does not open. But the stone along the cut edge carries a faint vibration, barely there, the kind a thing makes when it is waiting for the right pressure in the right place. Not today's pressure. Not this morning's asking.\n\nCy makes two clicks in close succession. Its lens, which has not moved from the seam since the elder's gesture, irises down to a pinpoint and then opens again. It does not speak. But it shifts its weight to two legs and very carefully extends one foreleg toward the lower portion of the seam — stopping just short of touching, holding there, precise and patient.\n\nThe elder has not moved. The Standing Unlit has not moved. The pale blue flame offers nothing but its own light. The seam is real, purposeful, and waiting — and this morning is not the morning it opens."
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the flame to the seam. The elder's hand has settled back into their lap, but the gesture lingers in the air — it pointed at something specific, and you let that specificity guide you.\n\nYou bring See the Made Thing to bear the same way you did with the flame, but you ask a different question this time. Not what is this and how was it made — but what question does this answer? The seam is a straight vertical line in the worked stone beside the bracket, running from the floor to a hand-span above your eye level. It is cleaner than a natural crack and older than the bracket that now sits beside it. The stone on either side of it is the same stone, but the seam itself is a gap between two intentions — two separate placements of rock that were meant to meet here and were meant to be opened again.\n\nThe craft finds something. Not joinery exactly — not the fingerprint of a maker's hand, not the seam of an illusion or a lie — but a shape of purpose. It is a door, or it was meant to be one. The frame is cut for something to pass through. The cut is very old, and it is not the Unlit's work, and it is not the Precursor work Cy would recognize. It predates the bracket. It predates the pale blue flame that now burns beside it. Whatever this passage was made for, it was made before anyone in this chamber decided what the chamber was for.\n\nCy makes a small sound — a single click, low and slow. It has not moved its lens away from the seam since the elder's hand pointed at it, and it does not move it now. Beside the passage to the stairs, the Standing Unlit is absolutely still.",
-      "sceneSummary": "Loki read the seam with See the Made Thing — found it is a door, cut with purpose, older than the Unlit and older than the flame, made for something to pass through.",
+      "narration": "You press your palm flat against the seam. The stone is cold — the deep, steady cold of rock that has never been warm, not even in summer. The cut edge of the seam is precise under your fingertip. Whoever made this did not rush. You can feel where the tool changed direction, three times, in a line no wider than a knife's edge.\n\nThen something shifts. Not movement — there is no movement. It is more like a held breath releasing slightly, the way a door will settle when the season changes and the wood contracts. Your hand does not pass through. The seam does not open. But the stone along the cut edge carries a faint vibration, barely there, the kind a thing makes when it is waiting for the right pressure in the right place. Not today's pressure. Not this morning's asking.\n\nCy makes two clicks in close succession. Its lens, which has not moved from the seam since the elder's gesture, irises down to a pinpoint and then opens again. It does not speak. But it shifts its weight to two legs and very carefully extends one foreleg toward the lower portion of the seam — stopping just short of touching, holding there, precise and patient.\n\nThe elder has not moved. The Standing Unlit has not moved. The pale blue flame offers nothing but its own light. The seam is real, purposeful, and waiting — and this morning is not the morning it opens.",
+      "sceneSummary": "Loki pressed a hand to the ancient seam beside the bracket — felt precision, intention, and a faint waiting vibration; the door is real, but it did not open. Cy extended one foreleg toward it and held still. The Unlit Deep has given everything it will give this visit.",
       "choices": [
         {
-          "label": "Ask the elder plainly: what was this door made to open for?",
+          "label": "Take your leave of the elder — bow your head, say nothing more, and walk up the stair",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Put your hand to the seam — feel the edge of it, see if it responds to pressure or to the right kind of attention",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false
-        },
-        {
-          "label": "Ask Cy quietly — does this match anything in the old maintenance records it carries?",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Take your leave — you have what you came for and more; the seam will wait, and the city will not",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Tell Cy to note the seam's exact position and dimensions before you go — mark it for return",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask the elder one last thing — what wrong question would open this door, and what would come through",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Go — carry what you have. The seam will keep.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left, no visible wick. The elder is still, hands settled. The seam beside the bracket has now been read.",
+        "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left, no visible wick. Your right hand is still against the seam. The stone is cold and precise under your palm.",
         "npcsPresent": [
           {
             "name": "Unlit Elder",
-            "state": "Seated, still, hands in lap — the gesture is done; they are watching or waiting in the dark."
+            "state": "Seated still, hands settled in lap. Has not moved. The gesture is long done; they are watching or not watching — in the dark, it is the same."
           },
           {
             "name": "Standing Unlit",
-            "state": "Near the stair passage, motionless, watching."
+            "state": "Beside the stair passage. Motionless."
           },
           {
             "name": "Cy",
-            "state": "Lens locked on the seam. Has made one low click. Has not moved."
+            "state": "One foreleg extended toward the lower seam, held just short of touching. Two clicks given. Lens open to its widest."
           }
         ],
         "objects": [
-          "The pale blue flame — bracket-mounted, no wick, burning",
-          "The seam in the stone beside the bracket — now read: a door-frame, older than the Unlit, older than the flame, made for something to pass through",
-          "The passage to the inner chamber — gap in worked stone, no door",
+          "The pale blue flame — bracket-mounted, burning, no wick",
+          "The seam in the stone beside the bracket — a door-frame, older than the Unlit, carrying a faint waiting vibration under the hand",
+          "The passage to the inner chamber — gap in worked stone, no door (Sable's place)",
           "The passage to the stair — open, the Standing Unlit beside it"
         ],
         "threads": [
-          "The seam: now identified as a door-frame of unknown purpose — what it was made for is not yet known",
-          "The stair passage: the Standing Unlit guards it; the engine's flag there has not resolved",
-          "What Loki carries back to the city: Sable's answer, the seam, and the shape of the wrong question"
+          "The seam responded — not to open, but to confirm it is waiting for the right pressure in the right place; what that is remains unknown",
+          "Cy has extended one foreleg and is holding still — it has formed a judgment of some kind",
+          "What Loki carries back to the city: Sable's answer, the shape of the seam, and the vibration of a door not yet ready"
         ]
       },
       "codexUpdates": [
@@ -298,11 +294,12 @@
           "topic": "the-seam-beside-the-bracket",
           "label": "The Seam Beside the Bracket",
           "kind": "mystery",
-          "fact": "See the Made Thing confirmed it is a door-frame — cut with clear purpose, made for something to pass through. It predates the pale blue flame, predates the bracket beside it, and predates the Unlit's occupation of the chamber. The craft found no maker's fingerprint it could name. The purpose-shape is: passage.",
+          "fact": "Physical contact confirmed: the seam is cut with precision — the tool changed direction exactly three times. Under a hand's pressure, it gives a faint vibration, like a thing waiting for the right asking. It did not open. The morning was not the right pressure. Cy extended one foreleg toward the lower portion and held there.",
           "links": [
             "the-unlit-deep",
             "unlit-elder",
             "the-unlit",
+            "the-taken-from-the-city",
             "terminus-seals-beneath-the-valley"
           ]
         }
@@ -312,44 +309,63 @@
           "op": "update",
           "npcId": "unlit-elder",
           "name": "Unlit Elder",
-          "note": "Sat still while Loki read the seam. Did not comment. The silence after the read is itself a kind of acknowledgment.",
-          "statusNote": "Seated by the pale blue flame in the outer chamber; the seam has been read; the subject has not yet been named aloud.",
-          "learned": [
-            "The seam was read as a door-frame by See the Made Thing — the elder's gesture was a direction to a real thing, not a figure of speech"
-          ]
+          "note": "Sat still while Loki touched the seam. Did not comment. Did not warn. Did not move.",
+          "status": "active",
+          "statusNote": "Seated by the pale blue flame in the outer chamber — the seam has been touched; the elder has said everything they intend to say this visit."
+        },
+        {
+          "op": "update",
+          "npcId": "standing-unlit",
+          "name": "Standing Unlit",
+          "note": "Has remained beside the stair passage throughout. Has not spoken since stepping aside.",
+          "status": "active",
+          "statusNote": "Stationed beside the stair passage; motionless."
         }
       ],
+      "placeUpdates": [
+        {
+          "note": "The seam beside the bracket responded to direct hand-pressure with a faint waiting vibration — the cut is precise, three direction-changes, and the stone holds the quality of something expecting a particular asking. It did not open.",
+          "flag": {
+            "seam_touched": true,
+            "seam_vibration_confirmed": true
+          }
+        }
+      ],
+      "offer": {
+        "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
+        "from": "Cy's companion boundary (it will not damage a Precursor working, but it will study one — and this is the deepest Precursor-adjacent thing it has encountered since Loki found it)"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A focused moment of reading — a short beat, not a full turn"
+        "why": "A brief examination — a hand against stone, two clicks, a held breath of attention"
       }
     },
     "sceneState": {
-      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left, no visible wick. The elder is still, hands settled. The seam beside the bracket has now been read.",
+      "setting": "Outer chamber of the Unlit Deep — worked stone, pale blue flame bracket-mounted left, no visible wick. Your right hand is still against the seam. The stone is cold and precise under your palm.",
       "npcsPresent": [
         {
           "name": "Unlit Elder",
-          "state": "Seated, still, hands in lap — the gesture is done; they are watching or waiting in the dark."
+          "state": "Seated still, hands settled in lap. Has not moved. The gesture is long done; they are watching or not watching — in the "
         },
         {
           "name": "Standing Unlit",
-          "state": "Near the stair passage, motionless, watching."
+          "state": "Beside the stair passage. Motionless."
         },
         {
           "name": "Cy",
-          "state": "Lens locked on the seam. Has made one low click. Has not moved."
+          "state": "One foreleg extended toward the lower seam, held just short of touching. Two clicks given. Lens open to its widest."
         }
       ],
       "objects": [
-        "The pale blue flame — bracket-mounted, no wick, burning",
-        "The seam in the stone beside the bracket — now read: a door-frame, older than th",
-        "The passage to the inner chamber — gap in worked stone, no door",
+        "The pale blue flame — bracket-mounted, burning, no wick",
+        "The seam in the stone beside the bracket — a door-frame, older than the Unlit, c",
+        "The passage to the inner chamber — gap in worked stone, no door (Sable's place)",
         "The passage to the stair — open, the Standing Unlit beside it"
       ],
       "threads": [
-        "The seam: now identified as a door-frame of unknown purpose — what it was made for is not yet known",
-        "The stair passage: the Standing Unlit guards it; the engine's flag there has not resolved",
-        "What Loki carries back to the city: Sable's answer, the seam, and the shape of the wrong question"
+        "The seam responded — not to open, but to confirm it is waiting for the right pressure in the right place; what that is remains unknown",
+        "Cy has extended one foreleg and is holding still — it has formed a judgment of some kind",
+        "What Loki carries back to the city: Sable's answer, the shape of the seam, and the vibration of a door not yet ready"
       ]
     }
   },
@@ -521,7 +537,8 @@
         "[d1] Waited out Loki's misdirection without effort — the pure dark gives no purchase for false signals. Repeated the original demand, still gentle, still blocking the exit.",
         "[d1] Lowered their hands and stepped aside after Loki's honest framing — Cy as pre-doctrinal tool, older than the Blaze, choosing the dark on its own. The first time this figure yielded.",
         "[d1] Remained at the passage entrance; did not follow Loki forward.",
-        "[d1] Remains beside the stair passage. Something the engine has flagged is near that exit."
+        "[d1] Remains beside the stair passage. Something the engine has flagged is near that exit.",
+        "[d1] Has remained beside the stair passage throughout. Has not spoken since stepping aside."
       ],
       "knownFacts": [
         "Objects to Cy's presence — calls it a 'light-thing'",
@@ -538,7 +555,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Stationed near the stair passage; a hostile meeting is flagged in that direction.",
+      "statusNote": "Stationed beside the stair passage; motionless.",
       "domains": {
         "primary": "umbral"
       },
@@ -559,7 +576,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Spoke for the first time when Loki's framing landed — ordered the Standing Unlit to let Cy pass, and granted Loki an audience.",
         "[d1] Invited Loki to sit or stand — made the first social opening; still hooded, face unseen.",
         "[d1] Declined Loki's question about the seam — 'that question belongs to the chamber, not to a visitor.' Gently, without hostility. The audience continues.",
         "[d1] Confirmed someone came from the city willingly. Said the city's silence tells its own story. Offered Loki the right to ask whether the person in the inner chamber wishes to be found.",
@@ -568,7 +584,8 @@
         "[d1] Refused to teach the blue flame — said it is not theirs to teach, and that the question is the wrong shape for the thing being asked. No hostility. The subject simply closed.",
         "[d1] Loki attempted to read the pale blue flame — the elder did not comment, did not warn, did not move. The silence after the failed read was itself the response.",
         "[d1] Received Loki's reframed request — not to be taught the flame, but to carry the right question outward. Lifted one hand and gestured to the seam beside the bracket: named it older than the flame, older than the Unlit, and waiting. Said Loki has shown they know how to carry a question honestly. Did…",
-        "[d1] Sat still while Loki read the seam. Did not comment. The silence after the read is itself a kind of acknowledgment."
+        "[d1] Sat still while Loki read the seam. Did not comment. The silence after the read is itself a kind of acknowledgment.",
+        "[d1] Sat still while Loki touched the seam. Did not comment. Did not warn. Did not move."
       ],
       "knownFacts": [
         "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
@@ -587,7 +604,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber; the seam has been read; the subject has not yet been named aloud.",
+      "statusNote": "Seated by the pale blue flame in the outer chamber — the seam has been touched; the elder has said everything they intend to say this visit.",
       "domains": {
         "primary": "umbral"
       },
@@ -673,9 +690,13 @@
     "the_unlit_deep": {
       "visits": 1,
       "notes": [
-        "[d1] The inner chamber of the Unlit Deep: a small room, ceiling low enough to touch, floor worn in a narrow track. No flame. The taken person sat here long enough to warm the stone at their back."
+        "[d1] The inner chamber of the Unlit Deep: a small room, ceiling low enough to touch, floor worn in a narrow track. No flame. The taken person sat here long enough to warm the stone at their back.",
+        "[d1] The seam beside the bracket responded to direct hand-pressure with a faint waiting vibration — the cut is precise, three direction-changes, and the stone holds the quality of something expecting a particular asking. It did not open."
       ],
-      "flags": {},
+      "flags": {
+        "seam_touched": true,
+        "seam_vibration_confirmed": true
+      },
       "lastVisit": 1,
       "vectorsKnown": [
         "dark_light",
@@ -835,7 +856,7 @@
     "lastSharedReadAt": "2026-07-27T15:31:10.092Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 0,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -852,6 +873,10 @@
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
         "from": "Cy's established boundary: it does not lie, but it omits extensively, and considers this different. The click is a response it hasn't named."
+      },
+      {
+        "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
+        "from": "Cy's companion boundary (it will not damage a Precursor working, but it will study one — and this is the deepest Precursor-adjacent thing…"
       }
     ],
     "wantProgress": {
@@ -1244,7 +1269,8 @@
         "kind": "mystery",
         "facts": [
           "[d1] Named by the Unlit Elder as older than the flame, older than the Unlit themselves, and waiting for someone to ask the wrong question of the right thing. Cy locked its lens on it and has not looked away. This is the second stonework of this character in the Unlit Deep — the inner chamber walls bear…",
-          "[d1] See the Made Thing confirmed it is a door-frame — cut with clear purpose, made for something to pass through. It predates the pale blue flame, predates the bracket beside it, and predates the Unlit's occupation of the chamber. The craft found no maker's fingerprint it could name. The purpose-shape…"
+          "[d1] See the Made Thing confirmed it is a door-frame — cut with clear purpose, made for something to pass through. It predates the pale blue flame, predates the bracket beside it, and predates the Unlit's occupation of the chamber. The craft found no maker's fingerprint it could name. The purpose-shape…",
+          "[d1] Physical contact confirmed: the seam is cut with precision — the tool changed direction exactly three times. Under a hand's pressure, it gives a faint vibration, like a thing waiting for the right asking. It did not open. The morning was not the right pressure. Cy extended one foreleg toward the…"
         ],
         "links": [
           "the-unlit-deep",
@@ -1260,21 +1286,21 @@
     }
   },
   "tendencies": {
-    "devotion": 4.2593661339109135,
-    "cerebral": 11.528672003373602,
-    "social": 16.791615790590484,
-    "strategic": 7.741329520864178,
-    "cautious": 5.315443912197321,
-    "amorous": 8.228541834455637,
-    "generous": 2.6090938016370258,
-    "ruthless": 0.4798813315685538
+    "devotion": 4.152881980563141,
+    "cerebral": 12.240455203289262,
+    "social": 16.37182539582572,
+    "strategic": 7.547796282842573,
+    "cautious": 6.182557814392388,
+    "amorous": 8.022828288594246,
+    "generous": 2.5438664565961,
+    "ruthless": 0.4678842982793399
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "charmer"
   ],
-  "actionCount": 47,
+  "actionCount": 48,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1423,8 +1449,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785166363286,
-  "rev": 104,
+  "updatedAt": 1785166478853,
+  "rev": 105,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1742,7 +1768,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 18
+    "umbral_depths": 19
   },
   "opLossPending": false,
   "sessions": [
@@ -1773,10 +1799,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T15:32:43.283Z",
+      "lastAt": "2026-07-27T15:34:38.852Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 14
+      "beats": 15
     }
   ],
   "establishedFacts": [
@@ -1801,24 +1827,24 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 4,
+      "applied": 5,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 46,
-    "choices": 46,
+    "sceneSummary": 47,
+    "choices": 47,
     "characterDeltas": 21,
-    "scene": 46,
-    "placeUpdates": 4,
-    "codexUpdates": 36,
-    "timeOps": 45,
-    "offer": 4,
+    "scene": 47,
+    "placeUpdates": 5,
+    "codexUpdates": 37,
+    "timeOps": 46,
+    "offer": 5,
     "generateRequest": 2,
     "sceneEnded": 12,
-    "npcUpdates": 40,
+    "npcUpdates": 41,
     "moveTo": 1,
     "gambitApt": 1,
     "deeds": 1,
@@ -1827,7 +1853,7 @@
     "factUpdates": 3,
     "stageOps": 4
   },
-  "_opTurns": 46,
+  "_opTurns": 47,
   "customAbilities": {},
   "companionBonds": {
     "coil": 0.5
@@ -1835,7 +1861,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 13,
+      "see_the_made_thing": 14,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

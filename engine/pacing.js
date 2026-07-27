@@ -44,6 +44,16 @@ export function pressureDirective(tier, dangerLevel = 0, questTitles = []) {
   return `The scene has gone quiet, and the world must not let the player be bored. Introduce pressure INTO the fiction now — woven, never a system announcement: ${ESCALATION[t]}. ${place}${thread}`;
 }
 
+/** SNG-245: the GM directive for a DRIVEN pressure beat — the world acting with a SPECIFIC queued thing (a
+ *  bonded NPC's unmet want reaching out, an arc stirring at the player) rather than an invented generic. The
+ *  hook names the real subject; the GM weaves it as a story beat with real stakes, not a system announcement.
+ *  Pure. (A threat-attack entry does NOT route here — it becomes a framed defend-encounter via SNG-236.) */
+export function drivenPressureDirective(oneLineHook) {
+  const hook = String(oneLineHook || "").trim();
+  if (!hook) return "";
+  return `The scene has gone quiet, and the world MOVES — not with a random something, but with a specific thing that has been building toward the character. Weave it into the fiction now, never as a system announcement: ${hook} Let it land as a real beat with stakes the character must engage — a knock at the door, not a rumor of one.`;
+}
+
 // SNG-194: pressure PUSHES to fill dead air; an OFFER enriches a live beat — a gift, a person who simply
 // appears, a thing noticed, a thread the player could have seen coming. The world offering is what keeps
 // it from being a thing you can finish (§4): it generates faster than one player consumes.

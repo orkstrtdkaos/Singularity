@@ -62,14 +62,15 @@ import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentSt
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
-import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
+import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
+import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c)
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.290";
+const APP_VERSION = "1.8.291";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2513,6 +2514,7 @@ async function maybeTick() {
   } catch (err) { console.warn("[canon] tick skipped:", err?.message); }
   // SNG-201: publish first-finder braids + adopt any the world found first; refresh the recipe cache.
   await syncBraidRecipes({ character, profile });
+  try { runPressureProducers(); } catch (e) { console.warn("[pressure] producers skipped:", e?.message); } // SNG-245: feed the pressure queue from the agendas already in play
   // CCODE-18: pull-and-CLEAR the unseen news BEFORE the save, so the emptied queue is what persists. The old
   // order (save, THEN take) wrote the still-unread queue to storage and only cleared it in memory — so a hard
   // refresh before the next turn's own save reloaded the full queue and re-showed the same "while you were
@@ -4997,20 +4999,75 @@ function maybeNarrativeEncounter(turn, resolution) {
   turnsSinceEncounter = 0;
 }
 
-/** SNG-080: the world must PUSH. Count quiet turns; past the threshold, hand the NEXT GM turn a
- *  pressure directive (escalating, register/danger-aware, tightening a live quest thread). If the
- *  world already acted this beat (an encounter, a quest change, a scene end), the streak resets —
- *  the player never has to ask the world to be interesting, and never gets buried in it either. */
+/** SNG-245: feed the PRESSURE QUEUE from the agendas already in the game — run on the world tick (a boundary,
+ *  so it primes driven things without per-turn churn). The two starter producers: a bonded NPC's unmet want
+ *  (they come to YOU) and a threat that comes to your ground (becomes a real defend-encounter). Reuses the
+ *  pacing pref as the aggression dial (Calm waits long / drives gently; Relentless barely waits / drives hard).
+ *  Never throws (the caller wraps it) — the world driving is additive, never a blocker. */
+function runPressureProducers() {
+  if (!character?.worldState) return;
+  const queue = ensurePressureQueue(character.worldState);
+  const nowDay = readClock(character.clock).day;
+  const here = character.currentLocationId;
+  const pacingMult = (resolvePacing(profile?.pacing, CONTENT.randomEncounters)?.mult) || 1;
+
+  // Producer A — NPC unmet want (SNG-233): a bonded, long-unseen NPC whose want is authored (interiority overlay
+  // first, then the catalog want). subjectId = the npc id, so it's a REAL person reaching out, never invented.
+  const wantFor = id => {
+    const inter = CONTENT.npcInteriority?.npcs?.[id]?.wants || character.npcRegistry?.[id]?.interiority?.wants;
+    if (Array.isArray(inter) && inter.length) return inter[0];
+    const cat = CONTENT.npcs?.[id];
+    return cat?.want || (Array.isArray(cat?.wants) ? cat.wants[0] : cat?.wants) || null;
+  };
+  for (const e of npcWantPressures({ npcs: Object.values(character.npcRegistry || {}), wantFor, bandOf: relationshipBand, nowDay, hereId: here, pacingMult })) {
+    enqueuePressure(queue, e);
+  }
+
+  // Producer B — threat-attack: a real beast/threat from THIS place's eligible pool (never invented); it becomes
+  // a framed defend-encounter when the queue fires. Rolls on danger × the aggression pref, so a safe place is
+  // rarely troubled and a dangerous one often is.
+  const loc = hereNow();
+  const pool = (() => { try { return eligibleEncountersFor(CONTENT.randomEncounters, loc, { cap: 8 }); } catch { return []; } })();
+  const threat = threatAttackPressure({ pool, danger: Number(loc?.dangerLevel) || 0, hereId: here, nowDay, pacingMult, rng: Math.random });
+  if (threat) enqueuePressure(queue, threat);
+}
+
+/** SNG-080 + SNG-245: the world must PUSH. Count quiet turns; past the threshold, hand the NEXT GM turn a
+ *  pressure directive. SNG-245: it now PULLS the top entry from the Pressure Queue when one is aimed here — the
+ *  world acts with a REAL DRIVEN thing (a bonded NPC's want, a threat that comes to you) — and only falls back to
+ *  the generic escalating push when the queue is empty. If the world already acted this beat (an encounter, a
+ *  quest change, a scene end), the streak resets. DRIVEN, never RELENTLESS: a tender/charged beat is never broken. */
 function maybeWorldPressure(turn, resolution) {
   const woveEncounter = !!pendingWeave; // SNG-075 just set one → the world already acted this beat
   const questChanged = !!(turn?.questUpdates?.length || turn?.stateOps?.length);
   const eventful = isEventfulTurn({ encounterActive: !!activeEnc(), questChanged, woveEncounter, sceneEnded: turn?.sceneEnded });
   if (eventful) { quietTurns = 0; pressureStreak = 0; return; }
   if (gambitDraft) return; // don't interrupt a plan being built
+  if (pendingEncounterOffer) return; // SNG-245: an encounter already turned up this beat — never stack a second push
+  // SNG-245 guard — the tender-moment floor the SNG-080 path never had: a driven push obeys the same "never break
+  // an intimate/intense beat" rule the encounter path (SNG-075) does. Activity is not harassment.
+  if (sceneState?.intense || sceneState?.intimate) return;
+  const intentTags = resolution?.action?.intentTags || resolution?.intentTags || [];
+  if (intentTags.some(t => /intimate|climax|grief|vigil|mourn/.test(String(t).toLowerCase()))) return;
   quietTurns++;
   const tier = pressureTier(quietTurns, pressureStreak);
   if (tier <= 0) return;
   const loc = hereNow();
+  // SNG-245: pull a DRIVEN entry aimed at where the player stands (drop a threat aimed at a place they've left).
+  const entry = pullTopPressure(ensurePressureQueue(character.worldState), e => !e.locationId || e.locationId === character.currentLocationId);
+  if (entry) {
+    if (entry.becomes?.type === "encounter" && entry.becomes.encounterId) {
+      // TEETH: route the threat through the SNG-236 hard-frame — a framed choice carrying this encounterId, so
+      // "the beast attacks" becomes a real defend-encounter, not a line of flavor (the §GUARD: a hook has teeth).
+      pendingEncounterOffer = { id: entry.becomes.encounterId, name: smartClamp(String(entry.becomes.name || "a threat"), 80), kind: "fight" };
+    } else {
+      pendingPressure = drivenPressureDirective(entry.oneLineHook); // a driven scene beat (the NPC arrives, the want reaches out)
+    }
+    console.log(`[pressure] the world DRIVES: ${entry.kind} → ${entry.subjectId} (urgency ${entry.urgency})`);
+    pressureStreak++; quietTurns = 0;
+    return;
+  }
+  // Fallback (queue empty) — the generic escalating push, unchanged (SNG-080).
   const questTitles = (character.quests || []).filter(q => q.status === "active").map(q => q.title || q.id);
   pendingPressure = pressureDirective(tier, loc?.dangerLevel || 0, questTitles);
   pressureStreak++;   // the next pressure escalates

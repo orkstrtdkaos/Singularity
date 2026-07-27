@@ -301,6 +301,11 @@
     "playerVisibleSurface": "The woven THE WORLD ACTS pressure beat and the THERE IS ROOM offer cue — both in-fiction, never a system announcement.",
     "whatMakesItFire": "Quiet turns crossing a threshold (pressure); roomForAnOffer computing a positive opening off cooldown (offer)."
   },
+  "pressure.js": {
+    "purpose": "SNG-245 the PRESSURE QUEUE — a registry of driven things that WANT to happen to the player (a bonded NPC's unmet want reaching out, a threat that comes to your ground), fed by producers from the agendas already in play, that SNG-080's quiet-turn trigger PULLS FROM so the world acts with a real, aimed, specific thing rather than a generic invention. Pure.",
+    "playerVisibleSurface": "The woven THE WORLD ACTS beat now carries a DRIVEN thing — a named person at the door, a beast that becomes a framed defend-encounter — not a generic 'something happens'.",
+    "whatMakesItFire": "Producers run on the world tick (npc-want: a bonded, long-unseen NPC with an authored want; threat-attack: a real beast from the place's eligible pool, rolled on danger × the aggression pref); the quiet-turn trigger (maybeWorldPressure) pulls the top entry aimed at where the player stands."
+  },
   "random_encounters.js": {
     "purpose": "The living valley — on travel, rest, arrival or world-tick the engine MAY roll one flavored encounter, weighted by the place's dangerLevel and tags, across a tonal spectrum that is never grim by default.",
     "playerVisibleSurface": "The woven SOMETHING HAPPENS beat when a roll lands.",

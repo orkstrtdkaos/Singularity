@@ -3662,6 +3662,54 @@ await (async () => {
   check("SNG-080: pressure in a DANGEROUS place can have teeth, and tier 4 makes something ARRIVE", /can have teeth/.test(deadly) && /ARRIVES/.test(deadly));
 })();
 
+// --- SNG-245: the PRESSURE QUEUE — the world DRIVES with real, aimed, driven things ---
+await (async () => {
+  const { PRESSURE_CAP, ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure, wantStalenessThreshold } = await import("../engine/pressure.js");
+  const { drivenPressureDirective } = await import("../engine/pacing.js");
+  const bandOf = s => s >= 7 ? "devoted" : s >= 4 ? "ally" : s >= 1 ? "friendly" : "stranger";
+
+  // queue mechanics
+  const ws = {}; const q = ensurePressureQueue(ws);
+  check("245: ensurePressureQueue lazily makes the array", Array.isArray(ws.pressureQueue) && q === ws.pressureQueue);
+  enqueuePressure(q, { kind: "npc-want", subjectId: "pell", urgency: 2, oneLineHook: "a" });
+  enqueuePressure(q, { kind: "threat-attack", subjectId: "beast_x", urgency: 4, oneLineHook: "b" });
+  check("245: the queue is urgency-ordered (top = most urgent)", q[0].subjectId === "beast_x");
+  enqueuePressure(q, { kind: "npc-want", subjectId: "pell", urgency: 3, oneLineHook: "a2" });
+  check("245: enqueue DE-DUPES by (kind, subjectId), keeping the fresher (higher-urgency) copy", q.filter(e => e.subjectId === "pell").length === 1 && q.find(e => e.subjectId === "pell").urgency === 3);
+  check("245: a malformed entry (no subjectId) is refused — aimed, not random", enqueuePressure(q, { kind: "npc-want" }) && q.length === 2);
+  const bigQ = []; for (let i = 0; i < PRESSURE_CAP + 4; i++) enqueuePressure(bigQ, { kind: "threat-attack", subjectId: "t" + i, urgency: i });
+  check("245: the queue is capped (drops the lowest-urgency tail)", bigQ.length === PRESSURE_CAP && bigQ[0].urgency > bigQ[bigQ.length - 1].urgency);
+  // pull + stillApplies (drop a threat aimed at a place you left)
+  const pq = []; enqueuePressure(pq, { kind: "threat-attack", subjectId: "beast_here", urgency: 4, locationId: "millbrook" }); enqueuePressure(pq, { kind: "npc-want", subjectId: "veth", urgency: 1 });
+  const pulled = pullTopPressure(pq, e => !e.locationId || e.locationId === "cairnhold"); // player left millbrook
+  check("245: pull DROPS a location-bound entry the player walked away from, returns the next that applies", pulled.subjectId === "veth" && !pq.some(e => e.subjectId === "beast_here"));
+  check("245: pull from an empty/exhausted queue is null", pullTopPressure([], () => true) === null);
+
+  // Producer A — npc-unmet-want
+  check("245: staleness threshold scales with the aggression pref (Calm waits longer than Relentless)", wantStalenessThreshold(0.5) > wantStalenessThreshold(2.4));
+  const npcs = [
+    { id: "pell", name: "Pell", relationship: 8, bondType: "sworn", status: "active", lastSeen: { locationId: "forge", day: 2 } }, // devoted + long unseen → fires
+    { id: "stranger", name: "A Stranger", relationship: 1, status: "active", lastSeen: { locationId: "road", day: 2 } },            // not bonded → no
+    { id: "here_now", name: "Cassiel", relationship: 8, bondType: "sworn", status: "active", lastSeen: { locationId: "camp", day: 2 } } // bonded but WITH you now → not absent
+  ];
+  const wants = npcWantPressures({ npcs, wantFor: id => id === "pell" ? "Silas's undivided attention" : id === "here_now" ? "to be useful" : null, bandOf, nowDay: 30, hereId: "camp", pacingMult: 1 });
+  check("245: npc-want fires for a BONDED, long-unseen NPC with an authored want (aimed, real subjectId)", wants.length === 1 && wants[0].subjectId === "pell" && wants[0].aimedAtPlayer && wants[0].becomes.type === "scene");
+  check("245: npc-want does NOT fire for a stranger, nor for a bonded NPC who is WITH you (not absent)", !wants.some(w => w.subjectId === "stranger" || w.subjectId === "here_now"));
+  check("245: the npc-want hook names the person + the want (a story beat, not a system event)", /Pell/.test(wants[0].oneLineHook) && /undivided attention/.test(wants[0].oneLineHook));
+
+  // Producer B — threat-attack
+  const pool = [{ id: "beast_glimmerling", routing: "duel", opponent: { name: "a glimmerling swarm" } }, { id: "seed_lore", routing: "challenge" }];
+  const t = threatAttackPressure({ pool, danger: 4, hereId: "fringe", nowDay: 30, pacingMult: 2, rng: () => 0.01 });
+  check("245: threat-attack picks a REAL duel from the pool (never invented) and BECOMES an encounter (teeth)", t && /^beast_/.test(t.subjectId) && t.becomes.type === "encounter" && t.becomes.encounterId === "beast_glimmerling");
+  check("245: threat-attack is location-bound (aimed at your ground) + names the foe in the hook", t.locationId === "fringe" && /glimmerling/.test(t.oneLineHook));
+  check("245: a SAFE place (danger 0) never turns up a threat", threatAttackPressure({ pool, danger: 0, rng: () => 0.01 }) === null);
+  check("245: a low roll under the danger×pacing chance fires; a high roll does not", threatAttackPressure({ pool, danger: 4, pacingMult: 2, rng: () => 0.99 }) === null);
+
+  // the driven directive (a story beat, not a system announcement)
+  const dir = drivenPressureDirective(wants[0].oneLineHook);
+  check("245: drivenPressureDirective weaves the hook as a real beat, never a system announcement", /never as a system announcement/.test(dir) && /Pell/.test(dir) && drivenPressureDirective("") === "");
+})();
+
 // --- SNG-081: the player's words are KEPT — scene history is a dialogue, not the GM's monologue ---
 (() => {
   const flirt = "let's call this hunt a date";

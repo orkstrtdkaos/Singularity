@@ -238,88 +238,101 @@
         "player": "Look at Cy and ask it plainly: what does its inventory say should happen next, when a regulator like this finishes its question?",
         "summary": "The regulator closed, and Cy named what comes next: a signal to the downstream terminus and the relay node south of the hollow — the record is no longer incomplete.",
         "narration": "You lift your hand from the panel and look at Cy. The amber light holds steady behind you. You ask it plainly: what does its inventory say should happen next, when a regulator like this finishes its question?\n\nCy does not answer immediately. The lens irises twice — once inward, once out — the way it does when it is consulting something very old. Then it speaks, in that precise, slightly antique voice that sounds like a document reading itself aloud.\n\n'The inventory describes three subsequent states,' says Cy. 'First: a signal is issued to the downstream terminus. Second: a terminus warden, if present, receives the signal and acts on it. Third: the record is logged to the nearest relay node.' Cy pauses. 'The relay node south of this hollow was identified in Halvex's journal as the intended recipient of this installation's reports. The signal will have gone there. What the terminus warden does next is not within the inventory.'\n\nThen Cy adds, as if it had almost decided not to: 'The inventory has no record of this question being answered before. This entry was marked incomplete. It is no longer incomplete.' The lens holds very still. That is all it says."
+      },
+      {
+        "player": null,
+        "summary": "The regulator's completion thinned the veil for a moment — Loki glimpsed a mesh of old burning questions beneath the valley, too wide and old to hold, gone before it could be named.",
+        "narration": "The amber light holds. Cy holds the lamp. The corridor is as cold and quiet as it has been since you descended.\n\nThen the veil goes thin.\n\nThere is no warning and no sound. One moment the stone corridor is exactly what it is — old worked joints, the smell of deep water, the steady amber eye of the closed regulator. The next moment there is something else here too, occupying the same space without displacing it. Not a vision. Not a sound. Something the eye is not the right instrument for, and yet the eye is what you use, because it is the only instrument you have.\n\nYou see — or almost see — what the regulator was connected to. Not the downstream terminus alone. Something wider. A web of questions, still burning in the dark beneath the valley, each one a filament of amber patience, each one waiting with the same absolute stillness this one waited. The question that just closed was one thread in a mesh that runs in every direction, deep and old, and most of the threads are still open. You cannot count them. You cannot hold the shape of it long enough to count. The moment you reach for it the whole thing goes sideways in a way that language does not have a word for, and you are left holding the edge of the idea instead of the idea itself.\n\nThen it is gone. The corridor is just a corridor. The amber light is just a light. Cy stands exactly where it stood, lens trained on you, very still.\n\n'The current assignment,' says Cy, in a careful voice, 'has stopped moving.' It pauses. 'This is noted,' it adds, and does not say whether that is a question."
       }
     ],
     "lastTurn": {
-      "narration": "You lift your hand from the panel and look at Cy. The amber light holds steady behind you. You ask it plainly: what does its inventory say should happen next, when a regulator like this finishes its question?\n\nCy does not answer immediately. The lens irises twice — once inward, once out — the way it does when it is consulting something very old. Then it speaks, in that precise, slightly antique voice that sounds like a document reading itself aloud.\n\n'The inventory describes three subsequent states,' says Cy. 'First: a signal is issued to the downstream terminus. Second: a terminus warden, if present, receives the signal and acts on it. Third: the record is logged to the nearest relay node.' Cy pauses. 'The relay node south of this hollow was identified in Halvex's journal as the intended recipient of this installation's reports. The signal will have gone there. What the terminus warden does next is not within the inventory.'\n\nThen Cy adds, as if it had almost decided not to: 'The inventory has no record of this question being answered before. This entry was marked incomplete. It is no longer incomplete.' The lens holds very still. That is all it says.",
-      "sceneSummary": "The regulator closed, and Cy named what comes next: a signal to the downstream terminus and the relay node south of the hollow — the record is no longer incomplete.",
+      "narration": "The amber light holds. Cy holds the lamp. The corridor is as cold and quiet as it has been since you descended.\n\nThen the veil goes thin.\n\nThere is no warning and no sound. One moment the stone corridor is exactly what it is — old worked joints, the smell of deep water, the steady amber eye of the closed regulator. The next moment there is something else here too, occupying the same space without displacing it. Not a vision. Not a sound. Something the eye is not the right instrument for, and yet the eye is what you use, because it is the only instrument you have.\n\nYou see — or almost see — what the regulator was connected to. Not the downstream terminus alone. Something wider. A web of questions, still burning in the dark beneath the valley, each one a filament of amber patience, each one waiting with the same absolute stillness this one waited. The question that just closed was one thread in a mesh that runs in every direction, deep and old, and most of the threads are still open. You cannot count them. You cannot hold the shape of it long enough to count. The moment you reach for it the whole thing goes sideways in a way that language does not have a word for, and you are left holding the edge of the idea instead of the idea itself.\n\nThen it is gone. The corridor is just a corridor. The amber light is just a light. Cy stands exactly where it stood, lens trained on you, very still.\n\n'The current assignment,' says Cy, in a careful voice, 'has stopped moving.' It pauses. 'This is noted,' it adds, and does not say whether that is a question.",
+      "sceneSummary": "The regulator's completion thinned the veil for a moment — Loki glimpsed a mesh of old burning questions beneath the valley, too wide and old to hold, gone before it could be named.",
       "choices": [
         {
-          "label": "Gather the inspection port panels and head back up to the outer chamber — tell the elder what happened here.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Cy what it knows about the relay node south of the hollow — whether it can be reached, and what would be waiting there.",
+          "label": "Stand still and let the impression settle — try to hold even a fragment of what you almost saw before it fully fades",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Prism Sight — read the corridor and the regulator housing one more time before leaving, looking for anything the signal disturbed or changed.",
+          "label": "Tell Cy what you just saw — describe it out loud while it is still warm, and see if Cy's inventory holds any shape that fits",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
+          "subAttribute": "reason",
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "scout"
+            "study"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false
         },
         {
-          "label": "Leave the panels where they are and go — this corridor has given what it has; the signal is already moving without you.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Go back up — to the elder, who has not been told the question is closed, and who may recognize what you just touched",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Mark what you saw on the wall here — a rough notation beside Halvex's own journal, a record of the moment, before the words dissolve entirely",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "craft"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+      "scene": {
+        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki stands before the closed regulator housing, hand lifted, amber light steady. The veil has gone thin and returned to ordinary in the space of a breath.",
+        "npcsPresent": [
+          {
+            "name": "Cy",
+            "state": "Lamp held level, lens fixed on Loki, very still — waiting to see if the current assignment is going to move again."
+          }
+        ],
+        "objects": [
+          "Long band of fine-cut notation along the left wall — Halvex's working journal",
+          "Three metal panels from the inspection port niche, set against the wall",
+          "Dark metal regulator housing flush in the far wall — amber light steady and closed",
+          "Cy's lamp — the only light source",
+          "Central interface panel — palm just lifted from it"
+        ],
+        "threads": [
+          "A signal has been sent to the downstream terminus and the relay node south of the hollow — the terminus warden's response is unknown",
+          "The elder above does not yet know the question was answered",
+          "A mesh of old burning questions runs beneath the valley — most threads still open; the shape of it could not be held"
+        ]
       },
-      "ledgerEvents": [],
-      "questUpdates": [
+      "codexUpdates": [
         {
-          "op": "progress",
-          "questId": "the-taken-from-the-city",
-          "note": "Cy named the three downstream states: a signal to the terminus, a terminus warden who may act, and a record logged to the relay node south of the hollow. The inventory entry for this regulator is now marked complete for the first time."
+          "topic": "the-passage-below",
+          "label": "The Passage Below",
+          "kind": "mystery",
+          "fact": "When the regulator closed, the veil went thin for a moment without warning — a mesh of amber-burning questions became almost visible, running in every direction beneath the valley, deep and old, most of them still open. The closed regulator was one thread among many. The shape could not be held long enough to count or name.",
+          "links": [
+            "the-unlit-deep",
+            "the-water-crisis",
+            "terminus-seals-beneath-the-valley",
+            "halvex",
+            "cy-s-construction",
+            "unlit-elder"
+          ]
         }
       ],
       "npcUpdates": [
@@ -327,70 +340,34 @@
           "op": "update",
           "npcId": "unlit-elder",
           "name": "Unlit Elder",
-          "note": "Does not yet know the regulator closed — still seated above by the pale blue flame.",
-          "statusNote": "Seated by the pale blue flame in the outer chamber above — present, unmoved, and not yet informed of the regulator's completion."
+          "note": "Still seated above — does not yet know the question was answered or that the veil thinned in the passage below.",
+          "statusNote": "Seated by the pale blue flame in the outer chamber above — present, unmoved, and not yet informed of either the regulator's completion or the vision that followed."
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "the-passage-below",
-          "label": "The Passage Below",
-          "kind": "mystery",
-          "fact": "Cy's inventory describes three downstream states following a regulator's completion: a signal issued to the downstream terminus, a terminus warden receiving and acting on it, and a record logged to the relay node south of the hollow. This question had never been answered before — the inventory entry was marked incomplete until now.",
-          "links": [
-            "halvex",
-            "the-water-crisis",
-            "the-unlit-deep",
-            "terminus-seals-beneath-the-valley"
-          ]
-        }
-      ],
-      "scene": {
-        "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki kneels before the dark metal regulator housing, palm just lifted. The amber light holds steady and unblinking.",
-        "npcsPresent": [
-          {
-            "name": "Cy",
-            "state": "Lamp held level, lens very still after its last statement. Waiting."
-          }
-        ],
-        "objects": [
-          "Long band of fine-cut notation along the left wall — Halvex's working journal",
-          "Three metal panels from the inspection port niche, set against the wall",
-          "Dark metal regulator housing flush in the far wall — amber light now steady and unblinking",
-          "Cy's lamp — the only light source",
-          "Central interface panel — palm just lifted from it"
-        ],
-        "threads": [
-          "A signal has been sent to the downstream terminus and to the relay node south of the hollow — what the terminus warden does next is unknown",
-          "The elder above does not yet know the question was answered",
-          "The inventory entry is complete for the first time — what Cy makes of that, it has not said"
-        ]
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange in the corridor — Cy consulting its inventory and answering."
-      },
-      "sceneEnded": false
+        "why": "A short still moment in the corridor after the regulator closed"
+      }
     },
     "sceneState": {
-      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki kneels before the dark metal regulator housing, palm just lifted. The amber light holds steady and unblinking.",
+      "setting": "The horizontal corridor beneath the Unlit's outer chamber — older worked stone, cold water smell, tight precise joints. Loki stands before the closed regulator housing, hand lifted, amber light steady. The veil has gone thin and returned to ordinary in the space of a breath.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Lamp held level, lens very still after its last statement. Waiting."
+          "state": "Lamp held level, lens fixed on Loki, very still — waiting to see if the current assignment is going to move again."
         }
       ],
       "objects": [
         "Long band of fine-cut notation along the left wall — Halvex's working journal",
         "Three metal panels from the inspection port niche, set against the wall",
-        "Dark metal regulator housing flush in the far wall — amber light now steady and ",
+        "Dark metal regulator housing flush in the far wall — amber light steady and clos",
         "Cy's lamp — the only light source",
         "Central interface panel — palm just lifted from it"
       ],
       "threads": [
-        "A signal has been sent to the downstream terminus and to the relay node south of the hollow — what the terminus warden does next is unknown",
+        "A signal has been sent to the downstream terminus and the relay node south of the hollow — the terminus warden's response is unknown",
         "The elder above does not yet know the question was answered",
-        "The inventory entry is complete for the first time — what Cy makes of that, it has not said"
+        "A mesh of old burning questions runs beneath the valley — most threads still open; the shape of it could not be held"
       ]
     }
   },
@@ -621,7 +598,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] The door opened fully. The elder made no comment. Their silence is acknowledgment of the completed act.",
         "[d1] Did not speak or move during the Prism Sight read of the passage. The visit has reached its end for them.",
         "[d1] Has not moved through the glass-stalker's surfacing",
         "[d1] Did not move or speak through the glass-stalker encounter or its yielding",
@@ -630,7 +606,8 @@
         "[d1] Not present — Loki is now below the outer chamber at the regulator.",
         "[d1] Not present — remains above.",
         "[d1] Not present in this beat — remains above in the outer chamber.",
-        "[d1] Does not yet know the regulator closed — still seated above by the pale blue flame."
+        "[d1] Does not yet know the regulator closed — still seated above by the pale blue flame.",
+        "[d1] Still seated above — does not yet know the question was answered or that the veil thinned in the passage below."
       ],
       "knownFacts": [
         "The elder will permit a single question to the person in the inner chamber: do they wish to be found",
@@ -649,7 +626,7 @@
       "status": "active",
       "gender": "unknown",
       "pronouns": "they/them",
-      "statusNote": "Seated by the pale blue flame in the outer chamber above — present, unmoved, and not yet informed of the regulator's completion.",
+      "statusNote": "Seated by the pale blue flame in the outer chamber above — present, unmoved, and not yet informed of either the regulator's completion or the vision that followed.",
       "domains": {
         "primary": "umbral"
       },
@@ -935,7 +912,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 12,
     "recentOffers": [
       {
         "thing": "Cy clicked once at Sable's answer — a single, quiet sound it did not explain.",
@@ -1421,7 +1398,8 @@
           "[d1] The regulator logged the first condition when Loki held contact — whether the water is prepared. The second condition, the authority to answer, remains unmet. The mechanism is not refusing; it is waiting. The two conditions are structurally distinct, and the second may require a different kind of…",
           "[d1] The Wrong Reality placed a provisional authority-claim against the regulator's second condition — the mechanism accepted the claim and moved from waiting to considering. The duration counter stopped incrementing for the first time since Cy's last recorded visit. The second condition is not yet…",
           "[d1] Both conditions of the regulator's question were logged at the same timestamp. The counter stopped permanently. The mechanism is closed — not waiting, not sleeping, done. What downstream effect the completion carries, if any, is not yet visible.",
-          "[d1] Cy's inventory describes three downstream states following a regulator's completion: a signal issued to the downstream terminus, a terminus warden receiving and acting on it, and a record logged to the relay node south of the hollow. This question had never been answered before — the inventory…"
+          "[d1] Cy's inventory describes three downstream states following a regulator's completion: a signal issued to the downstream terminus, a terminus warden receiving and acting on it, and a record logged to the relay node south of the hollow. This question had never been answered before — the inventory…",
+          "[d1] When the regulator closed, the veil went thin for a moment without warning — a mesh of amber-burning questions became almost visible, running in every direction beneath the valley, deep and old, most of them still open. The closed regulator was one thread among many. The shape could not be held…"
         ],
         "links": [
           "the-unlit-deep",
@@ -1740,8 +1718,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785182671541,
-  "rev": 152,
+  "updatedAt": 1785183477324,
+  "rev": 153,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2098,7 +2076,7 @@
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
-    "umbral_depths": 52
+    "umbral_depths": 53
   },
   "opLossPending": false,
   "sessions": [
@@ -2129,10 +2107,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T20:04:31.540Z",
+      "lastAt": "2026-07-27T20:17:57.322Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 48
+      "beats": 49
     }
   ],
   "establishedFacts": [
@@ -2170,17 +2148,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 80,
-    "choices": 80,
+    "sceneSummary": 81,
+    "choices": 81,
     "characterDeltas": 37,
-    "scene": 80,
+    "scene": 81,
     "placeUpdates": 10,
-    "codexUpdates": 69,
-    "timeOps": 79,
+    "codexUpdates": 70,
+    "timeOps": 80,
     "offer": 8,
     "generateRequest": 2,
     "sceneEnded": 19,
-    "npcUpdates": 71,
+    "npcUpdates": 72,
     "moveTo": 2,
     "gambitApt": 1,
     "deeds": 1,
@@ -2190,7 +2168,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 80,
+  "_opTurns": 81,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

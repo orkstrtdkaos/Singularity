@@ -851,6 +851,44 @@
         "birthWeight": 42,
         "rivalId": "deni-cors"
       }
+    },
+    {
+      "id": "gen-stillwater-s-trouble",
+      "name": "Stillwater'S Trouble",
+      "regionId": "valley",
+      "parentId": "gen-ashwarden-march-road",
+      "_promotedFromSubPlace": true,
+      "descriptionSeed": "A place the road led to — Stillwater'S Trouble. The fiction brought you here before the map knew its name.",
+      "tags": [
+        "transitional"
+      ],
+      "connections": [
+        "gen-ashwarden-march-road"
+      ],
+      "_mintedAs": "transit",
+      "map": {
+        "x": 297.8908972987956,
+        "y": 384.4108727502462
+      },
+      "supersededBy": "the_old_warden_post",
+      "dangerLevel": 2,
+      "_canon": {
+        "entityId": "gen-stillwater-s-trouble",
+        "type": "location",
+        "weight": 6,
+        "rating": null,
+        "tier": "variant",
+        "provenance": {
+          "healed": "sng-216-backfill"
+        },
+        "contributedBy": {
+          "playerKey": null,
+          "characterId": null
+        },
+        "promotedWorldDay": 27,
+        "birthWeight": 1,
+        "rivalId": "gen-stillwater-s-trouble"
+      }
     }
   ]
 }

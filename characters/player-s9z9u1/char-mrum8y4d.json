@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 45,
   "maxEnergy": 115,
-  "energy": 68,
+  "energy": 63,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -173,129 +173,131 @@
         "player": null,
         "summary": "The planting finished and thanks given, Loki took to the road — and met a challenge in the Disputed Zone.",
         "narration": "The backfilling is nearly done. Loki tosses the last loose scoop of earth around the root ball and tamps it down with the flat of the spade. Ossivyn pats the mounded soil once, firmly, the way a man closes something that is meant to last. Cy clicks twice on the fence post and irises its lens wide, then narrow, then wide again — its version of a long look at something it has filed away.\n\nOssivyn straightens and tucks his pencil behind his ear. 'Thank you for the hands,' he says simply, and he means it. He picks up the closed record book and carries it back toward the gate without hurry.\n\nThe Slow Orchard falls quiet behind Loki as the road opens again. The Disputed Zone lies ahead — the stretch of country between the valley's settled places where the ground belongs to no one and everyone traveling it is, for a moment, neither guest nor trespasser. The mud here is deep from the spring melt, and the morning light is thin through the trees.\n\nThe sound comes before the shape does. A footfall too deliberate to be accidental. Then a second. Someone steps out from the brush line to the left of the road — not running, not shouting, but moving with the flat-footed economy of a person who has done this before and knows the first move is presence. Their eyes are on Loki. Their hand is already near their belt. The Disputed Zone has its own rules, and one of them is that a stranger alone on this road is an invitation."
+      },
+      {
+        "player": null,
+        "summary": "A stranger stepped out of the brush with intent and yielded without a word spoken between them — the Disputed Zone road is clear.",
+        "narration": "The aggressor stops moving. They do not run — they simply stop, the way a person stops when they realize the calculation has changed and does not favor them anymore. Their hand comes away from their belt. They look at Loki with something that is not quite fear and not quite respect, but lives in the neighborhood of both.\n\nCy makes a small sound from the pack-strap. One click. The lens is still narrow.\n\nThe stranger exhales through their nose and takes a half-step back toward the brush line. 'Not worth it,' they say, mostly to themselves. The words come out flat and honest — not an apology, not a threat, just the truth of what they have arrived at. They do not look away until they are two full strides back, and then they turn and are gone into the trees.\n\nThe road settles. The spring mud holds the flat morning light and the bare-budded branches are still. Behind Loki, the Slow Orchard is quiet. Ahead, the Disputed Zone opens on its own terms — contested ground, thin light, and the thread of the three-hundred-year tree still unaddressed somewhere further in."
       }
     ],
     "lastTurn": {
-      "narration": "The backfilling is nearly done. Loki tosses the last loose scoop of earth around the root ball and tamps it down with the flat of the spade. Ossivyn pats the mounded soil once, firmly, the way a man closes something that is meant to last. Cy clicks twice on the fence post and irises its lens wide, then narrow, then wide again — its version of a long look at something it has filed away.\n\nOssivyn straightens and tucks his pencil behind his ear. 'Thank you for the hands,' he says simply, and he means it. He picks up the closed record book and carries it back toward the gate without hurry.\n\nThe Slow Orchard falls quiet behind Loki as the road opens again. The Disputed Zone lies ahead — the stretch of country between the valley's settled places where the ground belongs to no one and everyone traveling it is, for a moment, neither guest nor trespasser. The mud here is deep from the spring melt, and the morning light is thin through the trees.\n\nThe sound comes before the shape does. A footfall too deliberate to be accidental. Then a second. Someone steps out from the brush line to the left of the road — not running, not shouting, but moving with the flat-footed economy of a person who has done this before and knows the first move is presence. Their eyes are on Loki. Their hand is already near their belt. The Disputed Zone has its own rules, and one of them is that a stranger alone on this road is an invitation.",
-      "sceneSummary": "The planting finished and thanks given, Loki took to the road — and met a challenge in the Disputed Zone.",
+      "narration": "The aggressor stops moving. They do not run — they simply stop, the way a person stops when they realize the calculation has changed and does not favor them anymore. Their hand comes away from their belt. They look at Loki with something that is not quite fear and not quite respect, but lives in the neighborhood of both.\n\nCy makes a small sound from the pack-strap. One click. The lens is still narrow.\n\nThe stranger exhales through their nose and takes a half-step back toward the brush line. 'Not worth it,' they say, mostly to themselves. The words come out flat and honest — not an apology, not a threat, just the truth of what they have arrived at. They do not look away until they are two full strides back, and then they turn and are gone into the trees.\n\nThe road settles. The spring mud holds the flat morning light and the bare-budded branches are still. Behind Loki, the Slow Orchard is quiet. Ahead, the Disputed Zone opens on its own terms — contested ground, thin light, and the thread of the three-hundred-year tree still unaddressed somewhere further in.",
+      "sceneSummary": "A stranger stepped out of the brush with intent and yielded without a word spoken between them — the Disputed Zone road is clear.",
       "choices": [
         {
-          "label": "Stand your ground and hold the stranger's gaze — let them speak first",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "defend",
-            "guard"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Use The Misdirect — snap their attention to something behind them and buy a step of ground",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "feint",
-            "defend"
-          ],
-          "abilityId": "the_misdirect",
-          "energyCost": 1,
-          "trivial": false
-        },
-        {
-          "label": "Step sideways into the tree-shadow and let The False Target take your place on the road",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "hide",
-            "defend"
-          ],
-          "abilityId": "the_false_target",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Accept the contest — you have read harder things than a stranger with a hand near their belt",
+          "label": "Push on into the Disputed Zone — the three-hundred-year tree and the missing person are still out there.",
           "attribute": "physical",
           "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Prism Sight on the brush line where the stranger disappeared — find out who sent them, or where they came from.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
           "difficulty": 15,
           "intentTags": [
-            "attack",
-            "risky"
+            "scout",
+            "study"
           ],
-          "encounterId": "a-hostile-meeting",
-          "trivial": false
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Call after them — you want to know what they were after, and a yielded foe is sometimes willing to say.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn back to the Slow Orchard — Ossivyn may know who watches this stretch of road.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "The road at the edge of the Disputed Zone — spring mud, thin morning light through bare-budded trees. A figure has stepped out of the brush line to the left of the road, moving deliberately toward Loki. The Slow Orchard is behind; open contested ground ahead.",
+        "setting": "The road at the edge of the Disputed Zone — spring mud, thin morning light through bare-budded trees. The stranger has retreated into the brush line and is gone. The Slow Orchard lies behind; open contested ground ahead.",
         "npcsPresent": [
           {
-            "name": "Ossivyn Tallow",
-            "state": "Walking back toward the orchard gate with the closed record book — receding, not a factor now."
-          },
-          {
             "name": "Cy",
-            "state": "On Loki's shoulder or pack-strap — lens irised narrow, watching the stranger with the focused stillness of a thing cataloguing threat."
-          },
-          {
-            "name": "the aggressor",
-            "state": "Stepping out from the brush line to the left — flat-footed, hand near belt, eyes fixed on Loki. Has not spoken."
+            "state": "On Loki's pack-strap, lens irising narrow then settling — watchful but no longer on alert."
           }
         ],
         "objects": [
-          "spare spade (still in Loki's hands — a tool, but a weighty one)",
+          "spare spade (still in Loki's hands)",
           "spring mud covering the road",
-          "brush line to the left where the stranger emerged"
+          "brush line to the left where the stranger disappeared"
         ],
         "threads": [
-          "The stranger's intent — hostile, testing, or something else entirely — unspoken",
-          "The planting is done; the orchard record holds the made name and its giver listed as unknown",
-          "The tree planted three hundred years ago that is about to fruit, and the missing person it was planted for — unaddressed"
+          "The stranger's purpose — yielded without explanation; origin and intent still unknown",
+          "The three-hundred-year tree about to fruit, and the missing person it was planted for — unaddressed ahead in the Disputed Zone",
+          "The planting is done; the orchard record holds the made name"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "ossivyn-tallow",
-          "name": "Ossivyn Tallow",
-          "note": "Thanked Loki plainly for the help with the digging and returned to the orchard. The exchange is closed on his end.",
-          "statusNote": "Returning to the orchard gate with the closed record book — the planting is done."
-        }
-      ],
+      "npcUpdates": [],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "The backfilling finished, Ossivyn said his thanks, and Loki set out on the road — a short walk to the Disputed Zone edge."
-      },
-      "sceneEnded": false
+        "hoursPassed": 0.25,
+        "why": "a brief confrontation on the road, quickly resolved"
+      }
     },
     "sceneState": {
-      "setting": "The road at the edge of the Disputed Zone — spring mud, thin morning light through bare-budded trees. A figure has stepped out of the brush line to the left of the road, moving deliberately toward Loki. The Slow Orchard is behind; open contested ground ahead.",
+      "setting": "The road at the edge of the Disputed Zone — spring mud, thin morning light through bare-budded trees. The stranger has retreated into the brush line and is gone. The Slow Orchard lies behind; open contested ground ahead.",
       "npcsPresent": [
         {
-          "name": "Ossivyn Tallow",
-          "state": "Walking back toward the orchard gate with the closed record book — receding, not a factor now."
-        },
-        {
           "name": "Cy",
-          "state": "On Loki's shoulder or pack-strap — lens irised narrow, watching the stranger with the focused stillness of a thing catal"
-        },
-        {
-          "name": "the aggressor",
-          "state": "Stepping out from the brush line to the left — flat-footed, hand near belt, eyes fixed on Loki. Has not spoken."
+          "state": "On Loki's pack-strap, lens irising narrow then settling — watchful but no longer on alert."
         }
       ],
       "objects": [
-        "spare spade (still in Loki's hands — a tool, but a weighty one)",
+        "spare spade (still in Loki's hands)",
         "spring mud covering the road",
-        "brush line to the left where the stranger emerged"
+        "brush line to the left where the stranger disappeared"
       ],
       "threads": [
-        "The stranger's intent — hostile, testing, or something else entirely — unspoken",
-        "The planting is done; the orchard record holds the made name and its giver listed as unknown",
-        "The tree planted three hundred years ago that is about to fruit, and the missing person it was planted for — unaddressed"
+        "The stranger's purpose — yielded without explanation; origin and intent still unknown",
+        "The three-hundred-year tree about to fruit, and the missing person it was planted for — unaddressed ahead in the Disputed Zone",
+        "The planting is done; the orchard record holds the made name"
       ]
     }
   },
@@ -902,7 +904,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1761,8 +1763,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785195064591,
-  "rev": 168,
+  "updatedAt": 1785195109408,
+  "rev": 171,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2244,7 +2246,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 7
+    "the_quickwood": 8
   },
   "opLossPending": false,
   "sessions": [
@@ -2275,10 +2277,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-27T23:31:04.590Z",
+      "lastAt": "2026-07-27T23:31:49.407Z",
       "startDay": 27,
       "endDay": 27,
-      "beats": 57
+      "beats": 58
     }
   ],
   "establishedFacts": [
@@ -2316,13 +2318,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 89,
-    "choices": 89,
-    "characterDeltas": 38,
-    "scene": 89,
+    "sceneSummary": 90,
+    "choices": 90,
+    "characterDeltas": 39,
+    "scene": 90,
     "placeUpdates": 12,
     "codexUpdates": 75,
-    "timeOps": 88,
+    "timeOps": 89,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 21,
@@ -2336,7 +2338,7 @@
     "stageOps": 7,
     "encounterOps": 1
   },
-  "_opTurns": 89,
+  "_opTurns": 90,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2582,53 +2584,7 @@
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
   },
-  "activeEncounter": {
-    "defId": "re-re_zone_hostile",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-re_zone_hostile",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [],
-      "opponentHealth": 7,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the aggressor",
-        "attributes": {
-          "practical": 5,
-          "physical": 5,
-          "mental": 5,
-          "social": 5
-        },
-        "energy": 112,
-        "maxEnergy": 112,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 4,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 4,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 112
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 24,
     "lastBeat": "witness_power"

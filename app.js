@@ -69,7 +69,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.287";
+const APP_VERSION = "1.8.288";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5226,34 +5226,71 @@ function mintTransitLocation(moveRef) {
   return id;
 }
 
-/** SNG-235: a quest ending that MAKES a waygate mints a REAL, travelable one — a runtime location flagged
- *  `waygate:true`, connected to its anchor(s) and DISCOVERED, so the player can actually step through it (it
- *  rides the same gate/travel dispatch as any authored gate — waygate.js). Reuses the transit-mint pattern
- *  (generated store persists + live CONTENT + bidirectional reach + knownPlaces). Idempotent by id. */
-function mintWaygate({ id, name, description, connectsTo, waygateTier } = {}) {
+/** SNG-235 + SNG-243 §3: a quest ending that MAKES a waygate mints a REAL, travelable one — a runtime location
+ *  flagged `waygate:true`, connected to its anchor(s) and DISCOVERED, so the player can actually step through it
+ *  (it rides the same gate/travel dispatch as any authored gate — waygate.js). Reuses the transit-mint pattern
+ *  (generated store persists + live CONTENT + bidirectional reach + knownPlaces). Idempotent by id — a SECOND
+ *  call (the SNG-243 network-shaped `waygate` effect, after the SNG-235 `create_waygate` one) AUGMENTS the same
+ *  node with resolved default/intent connections + networkCapable, rather than skipping. Accepts both shapes:
+ *  legacy {id, connectsTo[]} and the richer {gateId, connects[]:{to,kind,default,requires}, at, networkCapable}. */
+function mintWaygate({ id, gateId, name, description, connectsTo, connects, at, networkCapable, waygateTier } = {}) {
   ensureGenerated(character);
-  const gid = "gen-" + slugify(String(id || `waygate-${name || "made-gate"}`));
-  if (CONTENT.locations[gid]) { addKnownPlace(gid); return gid; } // idempotent — never dup
-  const anchors = (Array.isArray(connectsTo) && connectsTo.length ? connectsTo : ["the_crossing"]).filter(a => CONTENT.locations[a]);
-  if (!anchors.length && CONTENT.locations[character.currentLocationId]) anchors.push(character.currentLocationId);
-  const anchor = CONTENT.locations[anchors[0]] || null;
-  const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;
+  const gid = "gen-" + slugify(String(id || gateId || `waygate-${name || "made-gate"}`));
+
+  // SNG-243 §3: resolve each rich connection's `to` to a REAL location id (SNG-232 seam — a connection target
+  // that can't resolve would mint a broken travel edge; drop it loudly instead). Keep kind/default/requires.
+  const richConns = (Array.isArray(connects) ? connects : []).map(cn => {
+    const to = resolveLocationId(cn.to, CONTENT.locations);
+    if (!to) { console.warn(`[made-waygate] connection target "${cn.to}" does not resolve to a location — SNG-232 seam; edge dropped (author the location or fix the id).`); return null; }
+    return { to, kind: cn.kind || "passage", default: !!cn.default, requires: cn.requires || null, note: cn.note ? smartClamp(String(cn.note), 300) : null };
+  }).filter(Boolean);
+  if (at && !resolveLocationId(at, CONTENT.locations)) console.warn(`[made-waygate] anchor "at":"${at}" does not resolve to a location — the gate stands as its own node (SNG-232 seam; informational).`);
+
+  // The full target set = legacy connectsTo (resolved) ∪ rich connects targets. Default to the hub if empty.
+  const legacyTargets = (Array.isArray(connectsTo) ? connectsTo : []).map(a => resolveLocationId(a, CONTENT.locations)).filter(Boolean);
+  let targets = [...new Set([...legacyTargets, ...richConns.map(c => c.to)])];
+  if (!targets.length) targets = (CONTENT.locations["the_crossing"] ? ["the_crossing"] : (CONTENT.locations[character.currentLocationId] ? [character.currentLocationId] : []));
+  const defaultTo = (richConns.find(c => c.default)?.to) || (CONTENT.locations["the_crossing"] ? "the_crossing" : targets[0] || null);
+
+  const linkBack = a => { const al = CONTENT.locations[a]; if (al && Array.isArray(al.connections) && !al.connections.includes(gid)) al.connections = [...al.connections, gid]; }; // bidirectional reach
+
+  const existing = CONTENT.locations[gid];
+  if (existing) {
+    // AUGMENT — the create_waygate call minted the node first; fold in the richer default/intent connections.
+    existing.connections = [...new Set([...(existing.connections || []), ...targets])];
+    if (richConns.length) existing.waygateConnections = richConns;
+    if (networkCapable) existing.networkCapable = true;
+    if (defaultTo) existing.waygateDefaultTo = defaultTo;
+    for (const a of targets) linkBack(a);
+    addKnownPlace(gid);
+    const g = character.generated?.location?.[gid];
+    if (g) Object.assign(g, { connections: existing.connections, waygateConnections: existing.waygateConnections, networkCapable: existing.networkCapable, waygateDefaultTo: existing.waygateDefaultTo });
+    saveCharacter(character);
+    console.log(`[made-waygate] "${existing.name}" (${gid}) AUGMENTED → connections ${existing.connections.join(", ")}${networkCapable ? " · networkCapable" : ""}${defaultTo ? ` · default→${defaultTo}` : ""}`);
+    return gid;
+  }
+
+  const anchor = CONTENT.locations[targets[0]] || null;
+  const existingMaps = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existingMaps[l.id] = l.map;
   const rec = {
     id: gid, name: smartClamp(String(name || "The Made Gate"), 60),
     regionId: anchor?.regionId || anchor?.region || null,
     descriptionSeed: smartClamp(String(description || `A waygate — made, not reached-for. ${name || "The Made Gate"}.`), 400),
     tags: ["waygate", "made"], waygate: true, waygateTier: Math.max(1, Math.min(4, Number(waygateTier) || 2)),
-    connections: anchors.slice(),
+    connections: targets.slice(),
+    ...(richConns.length ? { waygateConnections: richConns } : {}),
+    ...(networkCapable ? { networkCapable: true } : {}),
+    ...(defaultTo ? { waygateDefaultTo: defaultTo } : {}),
     dangerLevel: deriveDangerLevel({ tags: ["waygate"] }, { baseDanger: anchor?.dangerLevel }),
     _gen: { type: "location", tier: "fresh", engagementScore: 0, birthWeight: 1, rating: null, attentionHistory: [], createdDay: (() => { try { return readClock(character.clock).day; } catch { return null; } })(), provenance: { hint: "made-waygate", questMade: true } },
     _mintedAs: "made_waygate",
-    map: coordForGenerated(gid, anchor?.map, existing)
+    map: coordForGenerated(gid, anchor?.map, existingMaps)
   };
   character.generated.location[gid] = rec;
   CONTENT.locations[gid] = rec;
-  for (const a of anchors) { const al = CONTENT.locations[a]; if (al && Array.isArray(al.connections) && !al.connections.includes(gid)) al.connections = [...al.connections, gid]; } // bidirectional reach
+  for (const a of targets) linkBack(a);
   addKnownPlace(gid);
-  console.log(`[made-waygate] "${rec.name}" (${gid}) minted + discovered, connected to ${anchors.join(", ") || "(nowhere yet)"}`);
+  console.log(`[made-waygate] "${rec.name}" (${gid}) minted + discovered → connections ${targets.join(", ") || "(nowhere yet)"}${networkCapable ? " · networkCapable" : ""}${defaultTo ? ` · default→${defaultTo}` : ""}`);
   return gid;
 }
 

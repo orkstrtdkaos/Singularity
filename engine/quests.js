@@ -476,6 +476,17 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         }
         break;
       }
+      // SNG-243 §3: the network-shaped waygate effect — the gate becomes a REAL travel node with default/intent
+      // connections (connects[]: each {to, kind, default, requires}) and, if networkCapable, joins the gate
+      // network (§4). Same ctx.createWaygate injection as create_waygate (this module stays transport-free); the
+      // app resolves each connection target to a real location id + AUGMENTS the minted node with the richer data.
+      case "waygate": {
+        if (typeof ctx.createWaygate === "function") {
+          try { const gid = ctx.createWaygate({ gateId: e.gateId, name: e.name, at: e.at, connects: e.connects, networkCapable: e.networkCapable }); if (gid) applied.push({ type: "waygate", id: gid, networkCapable: !!e.networkCapable }); }
+          catch (err) { if (typeof console !== "undefined") console.warn("[quest effects] waygate failed:", err?.message); }
+        }
+        break;
+      }
       // SNG-235 seam: an unhandled effect type is content↔engine drift (an ending that does nothing). Make it
       // LOUD (was a silent "unknown") so the next drift is caught, not swallowed. The seam auditor also gates
       // it (tests/seams.json → quest-effect-types-handled).

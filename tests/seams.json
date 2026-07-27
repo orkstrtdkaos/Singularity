@@ -140,7 +140,7 @@
       "contract": "Every effect TYPE authored on a quest outcome must have a matching case in applyQuestEffects, or the ending silently does NOTHING (falls to default → \"unknown\"). Aevi's marquee-quest vocab (world_fact/arc/standing/world_arc, and codex_fact by its `fact` field) must each be handled — the prose says the world changes; the effect must make it true.",
       "producer": { "file": "content/packs/valley/quests/the_second_thread.json", "note": "outcome effects[] author types world_fact/arc/codex_fact/standing/world_arc" },
       "consumer": { "file": "engine/quests.js", "region": "applyQuestEffects" },
-      "assert": { "requires": ["case \"world_fact\"", "case \"arc\"", "case \"standing\"", "case \"world_arc\"", "case \"create_waygate\"", "e\\.fact \\|\\| e\\.text"] },
+      "assert": { "requires": ["case \"world_fact\"", "case \"arc\"", "case \"standing\"", "case \"world_arc\"", "case \"create_waygate\"", "case \"waygate\"", "e\\.fact \\|\\| e\\.text"] },
       "canFail": "Remove a case (e.g. world_fact/standing) from applyQuestEffects: that authored effect drops to default → \"unknown\" and the ending changes nothing (SNG-235 — the keystone arc's prose promises proof, the world stays empty) -> the pattern vanishes -> red."
     },
     {
@@ -172,6 +172,16 @@
       "consumer": { "file": "app.js", "note": "onChoice path A starts an encounter from a choice.encounterId; applyTurn injects the bridging choice" },
       "assert": { "requires": ["encounterId: nd\\.id", "c\\.encounterId === nd\\.id"] },
       "canFail": "Remove the engage-choice injection from the newEncounter block: the invented duel registers but nothing engages it -> the CCODE-19 'fight won't start' bug returns -> red."
+    },
+    {
+      "id": "waygate-connection-resolves",
+      "incident": "SNG-243",
+      "kind": "cross_source",
+      "contract": "A made waygate's authored connect target (connects[].to) MUST resolve to a real location id before it becomes a travel edge — an unresolvable id (e.g. `stillwaters_trouble_site` before the_old_warden_post carried it as an alias) would mint a dangling connection the traveller can't reach. mintWaygate resolves each `to` via resolveLocationId and drops + warns on failure, and stores the resolved default/intent set in waygateConnections + waygateDefaultTo.",
+      "producer": { "file": "content/packs/valley/quests/the_second_thread.json", "note": "the `waygate` effect authors connects[]:{to,kind,default,requires}; a `to` must resolve (alias or id)" },
+      "consumer": { "file": "app.js", "region": "mintWaygate" },
+      "assert": { "requires": ["resolveLocationId", "waygateConnections", "waygateDefaultTo", "SNG-232 seam"] },
+      "canFail": "Remove the resolveLocationId guard in mintWaygate: a connects[].to that doesn't resolve mints a broken travel edge (the SNG-243 default/intent destinations become unreachable) instead of being dropped loudly -> red."
     }
   ]
 }

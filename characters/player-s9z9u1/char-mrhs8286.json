@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 28,
-  "xp": 2792,
+  "xp": 2797,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -175,8 +175,8 @@
   "alignment": {
     "spectrumId": -0.02638874294910763,
     "violence_peace": 0.09078381765624999,
-    "chaos_order": 0.24843810472552474,
-    "mechanical_spiritual": 0.25513542055105926,
+    "chaos_order": 0.2460161994892485,
+    "mechanical_spiritual": 0.25737864952350625,
     "concrete_abstract": -0.03496367597441142,
     "death_life": -0.17787615557957992,
     "emotional_logical": 0.008330843749999983,
@@ -189,7 +189,7 @@
   "maxHealth": 165,
   "health": 165,
   "maxEnergy": 235,
-  "energy": 195,
+  "energy": 191,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2004,94 +2004,109 @@
         "player": "Read the fallen warpling with Deathsense — understand what it was carrying and whether the ending was clean",
         "summary": "Silas read the fallen warpling with Deathsense — a clean ending, a Zone-change two weeks old, and two nights of waiting in the dark beneath the market boards.",
         "narration": "You crouch beside it and let Deathsense settle over the body like a held breath.\n\nThe reading comes in clean and without argument. The warpling died the way Zone-changed creatures die when struck true — the original hare's ending arriving all at once, the additions simply stopping when the host did. There is nothing left carrying. No second life, no half-measure, no Zone-thread still pulling at the flesh. The ending was complete and it was clean.\n\nWhat you feel in the reading is older than the blow. The creature had been in the market for at least two nights. Not hunting — not yet. Waiting in the dark under the boards with the animal patience of something that had not yet decided it was hungry enough to act. The Zone-change in it was fresh, a week or two at most, which means whatever bled through here recently was close enough to touch a hare and walk away.\n\nHuginn steps once to the left and looks at the gap beneath the counter. One step. No further verdict."
+      },
+      {
+        "player": "Look at the gap under the counter — use Order-Sense to read where the Zone-thread came from and how far it reaches",
+        "summary": "Order-Sense traces the warpling's Zone-thread back along a single line to the left-branch approach — the same ground the party already closed and warded.",
+        "narration": "You press two fingers to the market boards beside the warpling's body and let Order-Sense open — restrained, a quiet tuning rather than a full reach.\n\nThe thread comes back in a single clean line. It runs from the gap under the counter, back through the boards, down into the packed earth beneath the market row. It does not branch. It does not widen. It goes south-southwest, straight and purposeful, toward the left-branch road — toward the Zone. Toward the made gate.\n\nThe thread is thin. Recent. Two weeks old at most, which matches what the warpling's body told you. Something in the Zone shifted enough to seed this thread outward, and the market row happened to be where it surfaced. The gap under Bren's counter is not a door. It is where the thread found a crack, the way water finds a low spot.\n\nThe design does not show a source you have not already seen. It shows a tail — one end here, the other end at the left-branch approach, at the ground you already closed and warded.\n\nYou stand. Huginn is still watching the gap. You say to the bird, plainly: \"It came from there.\" Huginn turns one eye toward you, then back to the gap, and does not argue."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch beside it and let Deathsense settle over the body like a held breath.\n\nThe reading comes in clean and without argument. The warpling died the way Zone-changed creatures die when struck true — the original hare's ending arriving all at once, the additions simply stopping when the host did. There is nothing left carrying. No second life, no half-measure, no Zone-thread still pulling at the flesh. The ending was complete and it was clean.\n\nWhat you feel in the reading is older than the blow. The creature had been in the market for at least two nights. Not hunting — not yet. Waiting in the dark under the boards with the animal patience of something that had not yet decided it was hungry enough to act. The Zone-change in it was fresh, a week or two at most, which means whatever bled through here recently was close enough to touch a hare and walk away.\n\nHuginn steps once to the left and looks at the gap beneath the counter. One step. No further verdict.",
-      "sceneSummary": "Silas read the fallen warpling with Deathsense — a clean ending, a Zone-change two weeks old, and two nights of waiting in the dark beneath the market boards.",
+      "narration": "You press two fingers to the market boards beside the warpling's body and let Order-Sense open — restrained, a quiet tuning rather than a full reach.\n\nThe thread comes back in a single clean line. It runs from the gap under the counter, back through the boards, down into the packed earth beneath the market row. It does not branch. It does not widen. It goes south-southwest, straight and purposeful, toward the left-branch road — toward the Zone. Toward the made gate.\n\nThe thread is thin. Recent. Two weeks old at most, which matches what the warpling's body told you. Something in the Zone shifted enough to seed this thread outward, and the market row happened to be where it surfaced. The gap under Bren's counter is not a door. It is where the thread found a crack, the way water finds a low spot.\n\nThe design does not show a source you have not already seen. It shows a tail — one end here, the other end at the left-branch approach, at the ground you already closed and warded.\n\nYou stand. Huginn is still watching the gap. You say to the bird, plainly: \"It came from there.\" Huginn turns one eye toward you, then back to the gap, and does not argue.",
+      "sceneSummary": "Order-Sense traces the warpling's Zone-thread back along a single line to the left-branch approach — the same ground the party already closed and warded.",
       "choices": [
         {
-          "label": "Look at the gap under the counter — use Order-Sense to read where the Zone-thread came from and how far it reaches",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.3,
-            "chaos_order": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Tell Bren plainly what the reading found — the creature was here two nights, the Zone-change was recent, and the ending is complete",
+          "label": "Tell Bren plainly what you found — a thread from the Zone, the same ground now warded, no more likely to repeat",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.3
+            "falsehood_truth": 0.8
           },
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "help",
+            "truthful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Step back and read the market row — look for anyone who is not surprised by what just happened",
-          "attribute": "mental",
-          "subAttribute": "wits",
+          "label": "Check the gap itself — use The Open Material to take it apart and see what the thread is seated into",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "falsehood_truth": 0.2
+            "mechanical_spiritual": 0.4
           },
           "difficulty": 15,
           "intentTags": [
-            "scout",
-            "study"
+            "study",
+            "careful"
+          ],
+          "abilityId": "the_open_material",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Veth whether a thread like this one — thin, trailing, already cut at the source — leaves any work to do, or whether the warding at the gate is sufficient",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Veth what a Zone-change this fresh and this close to the Crossing means — she held a March post for eleven years",
-          "attribute": "social",
-          "subAttribute": "insight",
+          "label": "Move on — the thread is accounted for and the source is warded. Give the market row back its morning.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "characterDeltas": {
+        "health": 0,
         "energy": -2
       },
       "scene": {
-        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, crouched beside the fallen warpling on the market boards.",
+        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, crouched beside the fallen warpling, fingers on the market boards.",
         "npcsPresent": [
           {
             "name": "Bren Thalle",
-            "state": "Still at the rear board, knuckles pale, watching Silas crouch over the body. Has not moved."
+            "state": "Still at the rear board, knuckles pale, watching Silas with the focused attention of someone waiting to understand what just happened."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing to the right with Memory tilted against her shoulder, eyes on the row and the gap beneath the counter."
+            "state": "Standing to the right with Memory tilted against her shoulder, eyes on Silas now that the Zone-read is complete."
           },
           {
             "name": "Veth Ondra",
-            "state": "Straightened, breathing even, watching the bystanders and the gap beneath the counter in turn."
+            "state": "Straightened, breathing even, watching Silas's face for the read's result."
           },
           {
             "name": "Huginn",
-            "state": "Stepped one pace left, looking at the gap under the counter. Still."
+            "state": "Watching the gap under the counter. Has not moved."
           }
         ],
         "objects": [
@@ -2100,27 +2115,27 @@
           "Memory (spear) — in Pell's hand, butt-end wiped clean",
           "Ledger — still in Bren's hands against the rear board",
           "Pre-Transition Filter Cloth — stowed under Bren's counter",
-          "The gap beneath the counter — where the warpling came through, too small to have fit it",
+          "The gap beneath the counter — where the warpling came through",
           "Market row bystanders — a dozen faces turned, frozen, watching"
         ],
         "threads": [
-          "The market row has gone still — bystanders watching, waiting for what comes next.",
+          "The Zone-thread runs south-southwest from the gap — back to the left-branch approach, the same ground now warded.",
           "Bren and her children are present — she has not yet moved from the board.",
-          "The gap beneath the counter is real — something came through it that should not have fit.",
-          "The Zone-change in the warpling is only one or two weeks old — something bled through recently and close.",
-          "Huginn is watching the gap, not the body."
+          "The market row has gone still — bystanders watching, waiting for what comes next.",
+          "Huginn is still watching the gap, not the body."
         ]
       },
       "codexUpdates": [
         {
-          "topic": "zone-bleed-crossing-market",
-          "label": "Zone Bleed at the Crossing Market",
+          "topic": "the-zone-thread-at-the-market",
+          "label": "Zone Thread — Market Row Origin",
           "kind": "event",
-          "fact": "A warpling was living beneath the Sheaf and Bowl stall for at least two nights. Its Zone-change was one to two weeks old — recent enough that whatever bled through was close to the market row. The creature's ending was clean and complete: no second life, no residue.",
+          "fact": "The warpling's Zone-thread runs as a single, thin, recent line from the gap under Bren's counter south-southwest to the left-branch approach — the same ground Silas already closed and warded on Day 14. The market row gap is not a door; it is where the thread found a crack. The source is behind the made gate.",
           "links": [
-            "the-water-crisis",
             "millbrook",
-            "what-the-water-remembers"
+            "the-water-crisis",
+            "the-second-thread",
+            "bren-thalle"
           ]
         }
       ],
@@ -2129,34 +2144,33 @@
           "op": "update",
           "npcId": "bren-thalle",
           "name": "Bren Thalle",
-          "note": "Witnessed Silas crouch and read the warpling — has not moved from the rear board.",
-          "status": "active",
-          "statusNote": "At the Sheaf and Bowl stall — shaken but unhurt, children in the back house, watching Silas work."
+          "note": "Watching Silas complete the Zone-read — waiting, still at the rear board, not moving until she understands what it means.",
+          "statusNote": "At the Sheaf and Bowl stall — shaken but unhurt, children in the back house, watching Silas read the thread's source."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short reading over the fallen creature"
+        "why": "A brief crouch and Order-Sense read at the stall — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, crouched beside the fallen warpling on the market boards.",
+      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, crouched beside the fallen warpling, fingers on the market boards.",
       "npcsPresent": [
         {
           "name": "Bren Thalle",
-          "state": "Still at the rear board, knuckles pale, watching Silas crouch over the body. Has not moved."
+          "state": "Still at the rear board, knuckles pale, watching Silas with the focused attention of someone waiting to understand what "
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing to the right with Memory tilted against her shoulder, eyes on the row and the gap beneath the counter."
+          "state": "Standing to the right with Memory tilted against her shoulder, eyes on Silas now that the Zone-read is complete."
         },
         {
           "name": "Veth Ondra",
-          "state": "Straightened, breathing even, watching the bystanders and the gap beneath the counter in turn."
+          "state": "Straightened, breathing even, watching Silas's face for the read's result."
         },
         {
           "name": "Huginn",
-          "state": "Stepped one pace left, looking at the gap under the counter. Still."
+          "state": "Watching the gap under the counter. Has not moved."
         }
       ],
       "objects": [
@@ -2165,15 +2179,14 @@
         "Memory (spear) — in Pell's hand, butt-end wiped clean",
         "Ledger — still in Bren's hands against the rear board",
         "Pre-Transition Filter Cloth — stowed under Bren's counter",
-        "The gap beneath the counter — where the warpling came through, too small to have",
+        "The gap beneath the counter — where the warpling came through",
         "Market row bystanders — a dozen faces turned, frozen, watching"
       ],
       "threads": [
-        "The market row has gone still — bystanders watching, waiting for what comes next.",
+        "The Zone-thread runs south-southwest from the gap — back to the left-branch approach, the same ground now warded.",
         "Bren and her children are present — she has not yet moved from the board.",
-        "The gap beneath the counter is real — something came through it that should not have fit.",
-        "The Zone-change in the warpling is only one or two weeks old — something bled through recently and close.",
-        "Huginn is watching the gap, not the body."
+        "The market row has gone still — bystanders watching, waiting for what comes next.",
+        "Huginn is still watching the gap, not the body."
       ]
     }
   },
@@ -4099,7 +4112,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d5] Received the hatchet back — handle first, no catch. Tucked it at his belt and started north toward the ford without being asked twice.",
         "[d5] The Attended End read him: no death in frame, a sister to bury come summer, the plan already stalling. Silas's words have reached him.",
         "[d14] Named herself and her stall without hesitation. Passed the ledger over with particular care. The meal entry is genuine; the wait-courtesy sum is in a second hand.",
         "[d14] Watched Silas consult Huginn without surprise or mockery — absorbed it as plain fact. Her patience has not broken.",
@@ -4108,7 +4120,8 @@
         "[d14] Received the invitation to Stillwater's Trouble — plainly given, plainly filed. Knows the name now. Knows the face.",
         "[d14] Backed hard against the rear board of the stall when the warpling emerged — in immediate danger, her children in the back house behind her.",
         "[d14] Present at the warpling's emergence and its end — did not move from the rear board; children still in the back house.",
-        "[d14] Witnessed Silas crouch and read the warpling — has not moved from the rear board."
+        "[d14] Witnessed Silas crouch and read the warpling — has not moved from the rear board.",
+        "[d14] Watching Silas complete the Zone-read — waiting, still at the rear board, not moving until she understands what it means."
       ],
       "knownFacts": [
         "The wait-courtesy was added later in a different hand",
@@ -4124,7 +4137,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Sheaf and Bowl stall — shaken but unhurt, children in the back house, watching Silas work.",
+      "statusNote": "At the Sheaf and Bowl stall — shaken but unhurt, children in the back house, watching Silas read the thread's source.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -5839,7 +5852,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The Working Model's read of the reclamation site as a spread, not a point — intake valves, chambers, arrays — hints that the site could be…",
@@ -6120,19 +6133,6 @@
       }
     },
     "pressureQueue": [
-      {
-        "source": "npc-want",
-        "kind": "npc-want",
-        "subjectId": "siol",
-        "aimedAtPlayer": true,
-        "urgency": 2,
-        "oneLineHook": "Siol, unseen for 8 days, has come looking for you — driven by an unmet want: To WITNESS the thing unfolding correctly — she recognizes the shape of what Silas is doing (the Palework-through-grove) and wants to see it done true.. They arrive now, not content to keep waiting.",
-        "becomes": {
-          "type": "scene",
-          "who": "siol"
-        },
-        "addedDay": 14
-      },
       {
         "source": "npc-want",
         "kind": "npc-want",
@@ -7636,22 +7636,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.38965396583988,
-    "cerebral": 20.893749582036634,
-    "social": 9.54468515966695,
-    "generous": 4.349835919369212,
-    "cautious": 8.79033912780592,
-    "physical": 1.4354582055763834,
-    "risky": 0.3442992080091465,
-    "ruthless": 0.7493953097090127,
-    "carousing": 0.12184229923541155,
-    "amorous": 0.4478916508177664,
-    "patient": 0.27140884202639104,
-    "stealth": 0.000026190692780534587,
-    "devotion": 1.0702381792515474,
-    "craft": 0.929449105534518,
-    "leadership": 0.40415673720357365,
-    "deception": 0.12542337624592423
+    "strategic": 17.929912616693883,
+    "cerebral": 21.371405842485718,
+    "social": 9.306068030675275,
+    "generous": 4.241090021384982,
+    "cautious": 8.570580649610772,
+    "physical": 1.3995717504369738,
+    "risky": 0.3356917278089178,
+    "ruthless": 0.7306604269662874,
+    "carousing": 0.11879624175452626,
+    "amorous": 0.4366943595473222,
+    "patient": 0.2646236209757313,
+    "stealth": 0.00002553592546102122,
+    "devotion": 1.0434822247702586,
+    "craft": 0.906212877896155,
+    "leadership": 0.3940528187734843,
+    "deception": 0.12228779183977612
   },
   "aptitudes": [
     "strategist",
@@ -7660,7 +7660,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 904,
+  "actionCount": 905,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -8074,8 +8074,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785207936706,
-  "rev": 1612,
+  "updatedAt": 1785208046783,
+  "rev": 1613,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11160,7 +11160,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 94,
+      "order_sense": 95,
       "palework": 31,
       "deathsense": 45,
       "shadowstep": 25,
@@ -11920,7 +11920,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 110
+    "the_center": 111
   },
   "foreclosed": [
     "rootkin",
@@ -12114,10 +12114,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T03:05:36.703Z",
+      "lastAt": "2026-07-28T03:07:26.779Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 17
+      "beats": 18
     }
   ],
   "company": [
@@ -12465,15 +12465,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 277,
-    "choices": 276,
-    "characterDeltas": 118,
-    "scene": 277,
-    "npcUpdates": 247,
+    "sceneSummary": 278,
+    "choices": 277,
+    "characterDeltas": 119,
+    "scene": 278,
+    "npcUpdates": 248,
     "factUpdates": 22,
     "placeUpdates": 51,
-    "codexUpdates": 173,
-    "timeOps": 268,
+    "codexUpdates": 174,
+    "timeOps": 269,
     "imagePrompt": 7,
     "sceneEnded": 64,
     "itemUpdates": 5,
@@ -12493,7 +12493,7 @@
     "newEncounter": 1,
     "encounterOps": 1
   },
-  "_opTurns": 277,
+  "_opTurns": 278,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

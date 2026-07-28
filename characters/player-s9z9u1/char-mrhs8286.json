@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 29,
-  "xp": 2831,
+  "xp": 2836,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -170,6 +170,10 @@
     {
       "abilityId": "the_called_form",
       "level": 1
+    },
+    {
+      "abilityId": "death_ward",
+      "level": 1
     }
   ],
   "alignment": {
@@ -189,7 +193,7 @@
   "maxHealth": 170,
   "health": 170,
   "maxEnergy": 240,
-  "energy": 227,
+  "energy": 223,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2054,172 +2058,210 @@
         "player": "Head to the east-side well — read it with Order-Sense before anything stirs it",
         "summary": "Silas reads the east-side well with Order-Sense — a network node, upstream of the stall's spoke, channel still open south-by-southwest toward the hollow, waiting.",
         "narration": "You tell Bren plainly that the stall is safe, that whatever the ground held has been read and mapped, and that she and her children have nothing more to watch for. She gives a single nod — not relief exactly, but the kind of acknowledgment a practical person offers when a thing is finished correctly. Then you look at Pell and tip your head toward the east row.\n\nPell passes Memory back to you without a word and falls into step at your left. Veth takes your right. The market row is ordinary morning traffic now — a cartwheel, a dog, the smell of fresh bread from somewhere behind the milliner's stall. The east-side well sits at the row's far end against a low stone wall, a simple draw-well with a worn wooden cap and a rope that has been replaced more than once.\n\nYou set two fingers on the stone cap and open Order-Sense, quiet and measured, the way you would press a thumb against a joint to feel whether it seats true. The lattice here is thin and you do not push it — you let the design come to you instead of reaching.\n\nWhat comes is clean. The node is here, deep under the well's foundation, older than the well itself by a generation at least. It is not the same address as the one under the Sheaf and Bowl stall. It is upstream in the network's own logic — not a spoke but something closer to the rim of the hub. The channel it holds is still open, still oriented south-by-southwest toward the left-branch hollow, and it is waiting. Not restless. Waiting the way a door waits when someone has already turned the key but not pushed."
+      },
+      {
+        "player": "Set a Boundary-Stone ward at the well's cap — mark it and hold it before anything else comes up through the channel",
+        "summary": "Silas sets a Boundary-Stone ward at the east-side draw-well's cap — the open channel is sealed against uninvited passage, the mark seated into the old foundation stone.",
+        "narration": "You crouch at the well's stone cap and set your hand flat against it.\n\nThe channel below is open and oriented — south-by-southwest, the hollow's address still sitting in it like a letter waiting to be read. That is useful. An open channel under a public well, in the middle of a market row, is also a door.\n\nYou draw the Boundary-Stone's mark into the cap's worn face with your thumb, using the chalk dust from the tin at your belt. The motion is small and unhurried. A line, a crossing, a close. The stone takes it without resistance — old foundation, old habit, and the mark finds a seat in the material the way a key finds a lock it was cut for.\n\nThe ward seals into place. Quiet. Contained. It will hold against anything that tries to come up through the channel uninvited — not with force, but with refusal. A thing that reaches for this threshold will find it already spoken for.\n\nPell watches the cap until the mark settles, then looks up at you. \"Clean,\" she says simply. Veth nods once at the stone, reading the ward's weight the way she reads all completed work — without ceremony, but with attention.\n\nHuginn shifts on your shoulder and says nothing. The channel is warded. The well is still usable. The morning traffic moves behind you as if nothing changed, which is exactly how it should look."
       }
     ],
     "lastTurn": {
-      "narration": "You tell Bren plainly that the stall is safe, that whatever the ground held has been read and mapped, and that she and her children have nothing more to watch for. She gives a single nod — not relief exactly, but the kind of acknowledgment a practical person offers when a thing is finished correctly. Then you look at Pell and tip your head toward the east row.\n\nPell passes Memory back to you without a word and falls into step at your left. Veth takes your right. The market row is ordinary morning traffic now — a cartwheel, a dog, the smell of fresh bread from somewhere behind the milliner's stall. The east-side well sits at the row's far end against a low stone wall, a simple draw-well with a worn wooden cap and a rope that has been replaced more than once.\n\nYou set two fingers on the stone cap and open Order-Sense, quiet and measured, the way you would press a thumb against a joint to feel whether it seats true. The lattice here is thin and you do not push it — you let the design come to you instead of reaching.\n\nWhat comes is clean. The node is here, deep under the well's foundation, older than the well itself by a generation at least. It is not the same address as the one under the Sheaf and Bowl stall. It is upstream in the network's own logic — not a spoke but something closer to the rim of the hub. The channel it holds is still open, still oriented south-by-southwest toward the left-branch hollow, and it is waiting. Not restless. Waiting the way a door waits when someone has already turned the key but not pushed.",
-      "sceneSummary": "Silas reads the east-side well with Order-Sense — a network node, upstream of the stall's spoke, channel still open south-by-southwest toward the hollow, waiting.",
+      "narration": "You crouch at the well's stone cap and set your hand flat against it.\n\nThe channel below is open and oriented — south-by-southwest, the hollow's address still sitting in it like a letter waiting to be read. That is useful. An open channel under a public well, in the middle of a market row, is also a door.\n\nYou draw the Boundary-Stone's mark into the cap's worn face with your thumb, using the chalk dust from the tin at your belt. The motion is small and unhurried. A line, a crossing, a close. The stone takes it without resistance — old foundation, old habit, and the mark finds a seat in the material the way a key finds a lock it was cut for.\n\nThe ward seals into place. Quiet. Contained. It will hold against anything that tries to come up through the channel uninvited — not with force, but with refusal. A thing that reaches for this threshold will find it already spoken for.\n\nPell watches the cap until the mark settles, then looks up at you. \"Clean,\" she says simply. Veth nods once at the stone, reading the ward's weight the way she reads all completed work — without ceremony, but with attention.\n\nHuginn shifts on your shoulder and says nothing. The channel is warded. The well is still usable. The morning traffic moves behind you as if nothing changed, which is exactly how it should look.",
+      "sceneSummary": "Silas sets a Boundary-Stone ward at the east-side draw-well's cap — the open channel is sealed against uninvited passage, the mark seated into the old foundation stone.",
       "choices": [
         {
-          "label": "Set a Boundary-Stone ward at the well's cap — mark it and hold it before anything else comes up through the channel",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
+          "label": "Check the north gate registry foundation — the Working Model placed a node there; go read it before the morning gets older",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.3,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 0,
           "intentTags": [
-            "guard",
-            "careful"
+            "scout",
+            "study",
+            "travel"
           ],
-          "abilityId": "boundary_stone",
-          "energyCost": 2,
-          "trivial": false
+          "abilityId": "order_sense",
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Tell Veth what you read — the node is upstream, the channel runs south-by-southwest — and ask what that orientation means for the north gate registry",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Huginn plainly — was there an ending here recently, or is the channel just old and open?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Engage the weeping stone — a hostile meeting has turned up here; meet it squarely",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "attack",
+            "defend"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": "beast_weeping_stone",
+          "emergenceId": null
+        },
+        {
+          "label": "Step back and look at the row as a whole — five to seven nodes, and two are now warded; where do the others likely sit?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.2,
+            "mechanical_spiritual": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "study",
             "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use The Working Model again — fold this node's address into the map alongside the stall node and look for the hub beneath the north gate registry",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
           "abilityId": "the_working_model",
-          "energyCost": 1,
-          "trivial": false
-        },
-        {
-          "label": "Leave the well untouched for now — take what you have and head to the north gate registry while it is still early",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "careful"
-          ],
-          "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
+      },
       "scene": {
-        "setting": "The east end of the Crossing market row, morning — early spring light, flat and clear. Standing at the east-side draw-well against a low stone wall, the row's ordinary traffic behind you.",
+        "setting": "The east end of the Crossing market row, morning — early spring light, flat and clear. Standing at the east-side draw-well against a low stone wall, the Boundary-Stone mark now seated into the cap's worn face. Ordinary market traffic moves behind the group.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing at Silas's left, Memory at her side, watching the well cap."
+            "state": "Standing at Silas's left, Memory at her side, watching the sealed well cap."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing at Silas's right, eyes on the well, waiting."
+            "state": "Standing at Silas's right, reading the ward's weight with attention."
           },
           {
             "name": "Huginn",
-            "state": "Perched on Silas's shoulder, still, eye on the stonework."
+            "state": "Perched on Silas's shoulder, still, saying nothing."
+          },
+          {
+            "name": "Bren Thalle",
+            "state": "At the rear board of the Sheaf and Bowl stall — shoulders down, watching the row."
           }
         ],
         "objects": [
-          "East-side draw-well — stone cap, worn rope, low stone wall surround",
+          "East-side draw-well — stone cap, worn rope, low stone wall surround — Boundary-Stone mark now sealed into the cap",
           "Memory (spear) — in Pell's hand",
-          "Market row — ordinary morning traffic behind the group"
+          "Market row — ordinary morning traffic behind the group",
+          "Chalk dust tin — open at Silas's belt, used to draw the mark"
         ],
         "threads": [
-          "Relay node beneath the well is open, upstream of the stall node, channel oriented south-by-southwest toward the hollow — waiting",
-          "North gate registry still unread — the likely hub node",
-          "Bren and her children are still present at the Sheaf and Bowl stall",
-          "Warpling's partial instruction — arrival at Stillwater's Hollow uncertain"
+          "North gate registry — likely hub node, unread and unvisited",
+          "Weeping stone — a hostile presence has turned up on the row; nature and intent unknown",
+          "Channel beneath the well — warded but still open, oriented south-by-southwest toward the hollow",
+          "Warpling's partial instruction — arrival at Stillwater's Hollow still uncertain",
+          "Remaining relay nodes — two warded (stall, well), three to five others beneath old-foundation sites across the Crossing"
         ]
+      },
+      "placeUpdates": [
+        {
+          "note": "A Boundary-Stone ward is now seated at the east-side draw-well's cap — the open channel is warded against uninvited passage; the mark is in the stone.",
+          "flag": {
+            "east_well_warded": true
+          },
+          "subPlace": {
+            "name": "East-Side Draw-Well",
+            "parent": "The Crossing",
+            "note": "Relay node in the foundation; channel warded at the cap with Boundary-Stone mark, oriented south-by-southwest toward the hollow.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "crossing-relay-network",
+          "label": "The Crossing Relay Network",
+          "kind": "lore",
+          "fact": "The east-side draw-well's open channel is now warded with a Boundary-Stone mark — the second node secured, after the Sheaf and Bowl stall. The north gate registry remains unread and is the likely hub node.",
+          "links": [
+            "millbrook",
+            "the-water-crisis",
+            "what-the-water-remembers"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a few minutes at the well to set the ward"
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
+          "npcId": "pell",
           "name": "Pell Ran Marsh",
-          "note": "Fell into step without a word at Silas's signal — handed Memory back and walked with him to the east well.",
-          "statusNote": "At the east-side well, Memory in hand, watching the read."
+          "note": "Watched the Boundary-Stone ward seat into the well cap and named it clean without ceremony.",
+          "statusNote": "At the east-side well, Memory in hand, the ward complete."
         },
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Walked to the well at Silas's right — waiting on what he reads before adding her own knowledge.",
-          "statusNote": "At the east-side well, right side, watching."
-        },
-        {
-          "op": "update",
-          "npcId": "bren-thalle",
-          "name": "Bren Thalle",
-          "note": "Received Silas's plain word that the stall is safe — gave a single nod and remained at her post.",
-          "statusNote": "At the rear board of the Sheaf and Bowl stall — shoulders down, watching the row, not moving."
+          "note": "Read the completed ward's weight without ceremony — attention without comment.",
+          "statusNote": "At the east-side well, watching."
         }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "relay-network-crossing",
-          "label": "The Relay Network — Crossing Nodes",
-          "kind": "lore",
-          "fact": "The east-side well's node is upstream of the Sheaf and Bowl stall's spoke — closer to the hub in the network's own logic, older by a generation. Its channel is open and oriented south-by-southwest toward the left-branch hollow, and it is waiting. Not restless: waiting as a door waits after the key has turned.",
-          "links": [
-            "the-water-crisis",
-            "what-the-water-remembers",
-            "millbrook",
-            "the-second-thread"
-          ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "East-side draw-well confirmed as a relay network node — upstream of the Sheaf and Bowl stall spoke, channel open and oriented south-by-southwest toward the left-branch hollow.",
-          "subPlace": {
-            "name": "East-Side Draw-Well",
-            "parent": "The Crossing",
-            "note": "A simple draw-well at the market row's east end — relay node in the foundation, older than the well itself, channel still open toward the hollow.",
-            "visited": true
-          }
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "short walk to the east end of the market row and a careful Order-Sense read"
-      }
+      ]
     },
     "sceneState": {
-      "setting": "The east end of the Crossing market row, morning — early spring light, flat and clear. Standing at the east-side draw-well against a low stone wall, the row's ordinary traffic behind you.",
+      "setting": "The east end of the Crossing market row, morning — early spring light, flat and clear. Standing at the east-side draw-well against a low stone wall, the Boundary-Stone mark now seated into the cap's worn face. Ordinary market traffic moves behind the group.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at Silas's left, Memory at her side, watching the well cap."
+          "state": "Standing at Silas's left, Memory at her side, watching the sealed well cap."
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing at Silas's right, eyes on the well, waiting."
+          "state": "Standing at Silas's right, reading the ward's weight with attention."
         },
         {
           "name": "Huginn",
-          "state": "Perched on Silas's shoulder, still, eye on the stonework."
+          "state": "Perched on Silas's shoulder, still, saying nothing."
+        },
+        {
+          "name": "Bren Thalle",
+          "state": "At the rear board of the Sheaf and Bowl stall — shoulders down, watching the row."
         }
       ],
       "objects": [
-        "East-side draw-well — stone cap, worn rope, low stone wall surround",
+        "East-side draw-well — stone cap, worn rope, low stone wall surround — Boundary-S",
         "Memory (spear) — in Pell's hand",
-        "Market row — ordinary morning traffic behind the group"
+        "Market row — ordinary morning traffic behind the group",
+        "Chalk dust tin — open at Silas's belt, used to draw the mark"
       ],
       "threads": [
-        "Relay node beneath the well is open, upstream of the stall node, channel oriented south-by-southwest toward the hollow — waiting",
-        "North gate registry still unread — the likely hub node",
-        "Bren and her children are still present at the Sheaf and Bowl stall",
-        "Warpling's partial instruction — arrival at Stillwater's Hollow uncertain"
+        "North gate registry — likely hub node, unread and unvisited",
+        "Weeping stone — a hostile presence has turned up on the row; nature and intent unknown",
+        "Channel beneath the well — warded but still open, oriented south-by-southwest toward the hollow",
+        "Warpling's partial instruction — arrival at Stillwater's Hollow still uncertain",
+        "Remaining relay nodes — two warded (stall, well), three to five others beneath old-foundation sites across the Crossing"
       ]
     }
   },
@@ -3651,7 +3693,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Stopped watching the tree-line when the Working Model resolved — shifted her weight toward Silas, reading his face.",
         "[d14] Confirmed the reclamation site is running through ironsense — felt the order in it from the bowl's edge.",
         "[d14] Read the radiant burn-mark through ironsense at the bowl's northwest edge — confirmed it as bright-heat, not forge-heat, sitting in the frost not under it. Moved to Silas's side without being asked.",
         "[d14] Named the next move plainly — walk back to the gate, check Logana, go home. Stood and brushed frost from her knee. No ceremony.",
@@ -3660,7 +3701,8 @@
         "[d14] Fell into step at Silas's left shoulder for the walk to the gate. No words needed.",
         "[d14] Has Memory in both hands and is reading the warpling's stutter-pattern through ironsense — steady, not waiting to be told.",
         "[d14] Held Memory steady through the warpling's lunge; wiped the butt-end clean after the strike without being asked.",
-        "[d14] Fell into step without a word at Silas's signal — handed Memory back and walked with him to the east well."
+        "[d14] Fell into step without a word at Silas's signal — handed Memory back and walked with him to the east well.",
+        "[d14] Watched the Boundary-Stone ward seat into the well cap and named it clean without ceremony."
       ],
       "knownFacts": [
         "The shadow-twin shifted register when Silas spoke her name into the caller-link — it is now a permission-acknowledged hold, not a resisted one.",
@@ -3681,7 +3723,7 @@
         "ironsense discrimination of radiant heat from forge-heat at "
       ],
       "status": "active",
-      "statusNote": "At the east-side well, Memory in hand, watching the read.",
+      "statusNote": "At the east-side well, Memory in hand, the ward complete.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -4361,7 +4403,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Lifted her fingers from the ring and named the morning's work complete. Plain and satisfied.",
         "[d14] Named the next lesson to Silas: attend a death that cannot be helped. Recognized that Silas has been skilled at finding the thing that can be turned aside, and said plainly that the next lesson is always to sit with what cannot.",
         "[d14] Received Silas's account of the badger and the warden without ceremony. Named both as real, then held the lesson steady: what remains is a death that does not choose and cannot be turned.",
         "[d14] Took the right side of the road without prompting, eyes on the tree-line.",
@@ -4370,7 +4411,8 @@
         "[d14] Stepped closer as The Working Model completed — said 'You have the count.' plainly, confirming she already knows the number.",
         "[d14] Named the limits of what was done plainly — the instruction given, the holding uncertain. Teaching through observation, not intervention.",
         "[d14] Named two likely node-sites from the Working Model's shape — the east-side shallow-draw well and the north gate registry. Ordered her knowledge rather than reached for it.",
-        "[d14] Walked to the well at Silas's right — waiting on what he reads before adding her own knowledge."
+        "[d14] Walked to the well at Silas's right — waiting on what he reads before adding her own knowledge.",
+        "[d14] Read the completed ward's weight without ceremony — attention without comment."
       ],
       "knownFacts": [
         "Silas has attended death-sites and mutable endings well; he has not yet sat with an ending that could not be turned aside.",
@@ -4393,7 +4435,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the east-side well, right side, watching.",
+      "statusNote": "At the east-side well, watching.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -5536,10 +5578,12 @@
         "[d13] A message from Mara Wells's relay arrived at the Hub message-runner post — pinned to the board with her chalk seal, unopened as of this scene.",
         "[d13] Silas arrived at the landing outside Ossian's corner room via Marrow's Wings — the approach is now known to Ossian and anyone who glanced up from the market row",
         "[d14] A pre-Transition relay node, same construction as the wolverine-clearing node, is seated in the earth beneath the Sheaf and Bowl stall's third board from the gap's left edge — still holding an open channel address after the reclamation site's close",
-        "[d14] East-side draw-well confirmed as a relay network node — upstream of the Sheaf and Bowl stall spoke, channel open and oriented south-by-southwest toward the left-branch hollow."
+        "[d14] East-side draw-well confirmed as a relay network node — upstream of the Sheaf and Bowl stall spoke, channel open and oriented south-by-southwest toward the left-branch hollow.",
+        "[d14] A Boundary-Stone ward is now seated at the east-side draw-well's cap — the open channel is warded against uninvited passage; the mark is in the stone."
       ],
       "flags": {
-        "waymarker_seated": "stillwaters-trouble"
+        "waymarker_seated": "stillwaters-trouble",
+        "east_well_warded": true
       },
       "lastVisit": 14,
       "vectorsKnown": [],
@@ -5574,7 +5618,7 @@
           "parentId": "the_crossing",
           "day": 14,
           "visited": true,
-          "note": "A simple draw-well at the market row's east end — relay node in the foundation, older than the well itself, channel still open toward the hollow."
+          "note": "Relay node in the foundation; channel warded at the cap with Boundary-Stone mark, oriented south-by-southwest toward the hollow."
         }
       }
     },
@@ -5901,7 +5945,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 12,
+    "turnsSinceOffer": 13,
     "recentOffers": [
       {
         "thing": "The Working Model's read of the reclamation site as a spread, not a point — intake valves, chambers, arrays — hints that the site could be…",
@@ -6181,21 +6225,7 @@
         "lastMovedCount": 673
       }
     },
-    "pressureQueue": [
-      {
-        "source": "npc-want",
-        "kind": "npc-want",
-        "subjectId": "tane-solr",
-        "aimedAtPlayer": true,
-        "urgency": 2,
-        "oneLineHook": "Tane Solr, unseen for 8 days, has come looking for you — driven by an unmet want: A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.. They arrive now, not content to keep waiting.",
-        "becomes": {
-          "type": "scene",
-          "who": "tane-solr"
-        },
-        "addedDay": 14
-      }
-    ]
+    "pressureQueue": []
   },
   "domains": {
     "primary": "ashwarden",
@@ -6218,7 +6248,7 @@
     "wits": 6
   },
   "pendingSubPoints": 0,
-  "skillPoints": 1,
+  "skillPoints": 0,
   "discoveries": [
     {
       "key": "the-attended-end+the_shadow_work:aerial-transit-via-atten",
@@ -7686,22 +7716,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.11105120978193,
-    "cerebral": 22.11928089161269,
-    "social": 8.945173052338909,
-    "generous": 3.6433859991669335,
-    "cautious": 8.24380985082159,
-    "physical": 1.202327725811023,
-    "risky": 0.2883821222770849,
-    "ruthless": 0.6276872116204151,
-    "carousing": 0.10205408557226243,
-    "amorous": 0.37515028152368907,
-    "patient": 0.22732976448280837,
-    "stealth": 0.000021937104100910513,
-    "devotion": 0.8964225019835808,
-    "craft": 0.7784987573815796,
-    "leadership": 0.3385182855380032,
-    "deception": 0.10505356557194308
+    "strategic": 19.60827492953738,
+    "cerebral": 21.56629886932237,
+    "social": 8.721543726030436,
+    "generous": 3.55230134918776,
+    "cautious": 10.03771460455105,
+    "physical": 1.1722695326657473,
+    "risky": 0.28117256922015776,
+    "ruthless": 0.6119950313299047,
+    "carousing": 0.09950273343295588,
+    "amorous": 0.36577152448559686,
+    "patient": 0.22164652037073815,
+    "stealth": 0.00002138867649838775,
+    "devotion": 0.8740119394339912,
+    "craft": 0.7590362884470401,
+    "leadership": 0.33005532839955315,
+    "deception": 0.1024272264326445
   },
   "aptitudes": [
     "strategist",
@@ -7710,7 +7740,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 911,
+  "actionCount": 912,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -8124,8 +8154,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785242011440,
-  "rev": 1623,
+  "updatedAt": 1785242112383,
+  "rev": 1625,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11224,7 +11254,7 @@
       "the_grey_road": 1,
       "the_grey_hand": 2,
       "the_shielding_word": 3,
-      "boundary_stone": 8,
+      "boundary_stone": 9,
       "the_kept_breath": 2,
       "light_borne": 3,
       "marrow-s-wings": 3,
@@ -11293,7 +11323,7 @@
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 5
+        "progress": 6
       },
       {
         "abilityId": "pattern_sense",
@@ -11305,7 +11335,7 @@
       "deathsense": 28,
       "the-attended-end": 28,
       "order_sense": 28,
-      "boundary_stone": 25,
+      "boundary_stone": 28,
       "palework": 25,
       "the_shadow_work": 25,
       "the_kept_breath": 22,
@@ -11974,7 +12004,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 117
+    "the_center": 118
   },
   "foreclosed": [
     "rootkin",
@@ -12176,10 +12206,10 @@
     {
       "id": "sess-20",
       "startedAt": "2026-07-28T12:27:33.275Z",
-      "lastAt": "2026-07-28T12:33:31.436Z",
+      "lastAt": "2026-07-28T12:35:12.380Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -12527,15 +12557,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 284,
-    "choices": 283,
-    "characterDeltas": 122,
-    "scene": 284,
-    "npcUpdates": 254,
+    "sceneSummary": 285,
+    "choices": 284,
+    "characterDeltas": 123,
+    "scene": 285,
+    "npcUpdates": 255,
     "factUpdates": 22,
-    "placeUpdates": 53,
-    "codexUpdates": 179,
-    "timeOps": 275,
+    "placeUpdates": 54,
+    "codexUpdates": 180,
+    "timeOps": 276,
     "imagePrompt": 7,
     "sceneEnded": 65,
     "itemUpdates": 5,
@@ -12555,7 +12585,7 @@
     "newEncounter": 1,
     "encounterOps": 1
   },
-  "_opTurns": 284,
+  "_opTurns": 285,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

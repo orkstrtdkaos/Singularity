@@ -27,7 +27,7 @@ import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equi
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed } from "./engine/art.js";
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed, galleryCategory } from "./engine/art.js";
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.291";
+const APP_VERSION = "1.8.292";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1963,6 +1963,24 @@ function ensureBondPortraits(c) {
       }
     } catch { /* a milestone portrait is a grace, never a blocker */ }
   }
+}
+
+// CCODE-31 (Erik: "please do beasts!"): when a BEAST turns up (offered or engaged), mint a creature study for the
+// gallery under kind "beast". A beast is a bestiary creature — a hazard, not a person (no bond, no name-face) — so
+// it's recovered from the def id (synthesizeDuelDef mints "re-beast_<id>", dropping the creatureId) or by matching
+// the opponent name to the roster, and rendered from the creature's authored `look`. No bestiary match → it's a
+// person duel, not a beast, and nothing is minted. Stable seed per creature → one tile even on repeat encounters.
+function noteBeastImage(def) {
+  if (!def || !imagesEnabled()) return;
+  const roster = CONTENT.bestiary?.roster || (Array.isArray(CONTENT.bestiary) ? CONTENT.bestiary : []);
+  if (!roster.length) return;
+  const oppName = String(def.opponent?.name || def.name || "").toLowerCase();
+  const idGuess = /^re-beast_/.test(def.id || "") ? String(def.id).replace(/^re-beast_/, "") : null;
+  const creature = roster.find(c => c && (c.id === idGuess || (c.name && oppName && oppName.includes(String(c.name).toLowerCase()))));
+  if (!creature) return; // not a bestiary beast — a person duel; don't mint a "beast" tile
+  const seedKey = `beast-${creature.id}`;
+  const url = ensureImage({ id: seedKey, name: creature.name, look: creature.look }, "beast", { ratingLevel: viewerRatingLevel(), seedKey });
+  if (url) { try { addGalleryImage(character, { kind: "beast", prompt: creature.look || creature.name, url, caption: creature.name, worldDay: absoluteWorldDay() }); saveCharacter(character); } catch { /* the gallery is a convenience */ } }
 }
 
 /** SNG-136: drop any gallery entries that never resolved to a real image URL (the blank Vash-style tile
@@ -4626,6 +4644,7 @@ async function onChoice(choice) {
     const isSB = !!(CONTENT.skillBattle?.engine && def.type === "duel" && def.skillBattle !== false);
     const oppSheet = isSB ? synthesizeOpponentSheet(def.opponent, CONTENT.skillBattle.engine) : null;
     character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+    try { noteBeastImage(def); } catch { /* CCODE-31: a beast portrait is a grace, never a blocker */ }
     saveCharacter(character);
     renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, playerWords: choice.playerWords || null } });
     const result = await runGM({ resolution: null, playerInput: `(The encounter "${def.name}" begins: ${def.setup} Narrate the opening${isSB ? " of the contest (the mechanics play out in a panel — just set the scene and the stakes)" : " and offer round choices"}.)` });
@@ -4861,6 +4880,7 @@ async function fireEncounter(entryOrFlavor, { dev = false, news = [] } = {}) {
     }
     character.customEncounters = character.customEncounters || {};
     character.customEncounters[offer.def.id] = offer.def;
+    try { noteBeastImage(offer.def); } catch { /* CCODE-31: a beast portrait is a grace, never a blocker */ }
     saveCharacter(character);
   }
   if (offer.routing === "narrative" || offer.routing === "opposed") {
@@ -6824,23 +6844,36 @@ function regeneratePortraitFlow() {
 
 /** SNG-035: the Saga gallery — every image this character has accrued (portraits, born-with-image
  *  people/places, moment art), newest first. */
+// CCODE-31: the gallery's category filter — the order the chips render + their labels. "all" is implicit.
+const GALLERY_CATS = [["portraits", "Portraits"], ["people", "People"], ["skills", "Skills"], ["places", "Places"], ["beasts", "Beasts"], ["moments", "Moments"]];
+let galleryFilter = "all"; // CCODE-31: the active category chip (module state, survives re-renders)
 function renderGallery() {
   const gallery = character.gallery || [];
+  // CCODE-31: bucket every image by category so the chips can show counts + the grid can filter (Erik: skill
+  // images were flooding the portrait gallery uncategorized).
+  const counts = {}; for (const g of gallery) { const c = galleryCategory(g); counts[c] = (counts[c] || 0) + 1; }
+  const present = GALLERY_CATS.filter(([key]) => counts[key]);
+  if (galleryFilter !== "all" && !counts[galleryFilter]) galleryFilter = "all"; // the last filter emptied out → fall back
+  const shown = galleryFilter === "all" ? gallery : gallery.filter(g => galleryCategory(g) === galleryFilter);
+  const chip = (key, label, n) => `<button class="opt gal-cat ${galleryFilter === key ? "selected" : ""}" data-galcat="${key}">${galleryFilter === key ? "✓ " : ""}${esc(label)} <span class="cost">${n}</span></button>`;
   chrome(`<div class="screen" style="max-width:860px">
     <h2>${esc(character.name)} — Gallery</h2>
-    <p class="hint" style="margin-bottom:12px">${imagesEnabled()
-      ? "Portraits, people and places you've grown, and the moments worth a picture. New art is added as you play."
+    <p class="hint" style="margin-bottom:10px">${imagesEnabled()
+      ? "Portraits, the people and places you've grown, the crafts you wield, the beasts that came for you, and the moments worth a picture. New art is added as you play."
       : "Image generation is off. Turn on <strong>Settings → Scene &amp; item art → Generate</strong> to start seeing the world."}</p>
-    ${gallery.length ? `<div class="gallery-grid">${gallery.map((g, gi) => `
+    ${gallery.length ? `<div class="gal-cats" style="margin-bottom:12px">${chip("all", "All", gallery.length)}${present.map(([key, label]) => chip(key, label, counts[key])).join("")}</div>` : ""}
+    ${shown.length ? `<div class="gallery-grid">${shown.map(g => { const gi = gallery.indexOf(g); return `
       <figure class="gallery-item">
         <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" data-lightbox="gallery" data-lbgroup="gallery" data-lbindex="${gi}" loading="lazy" onerror="this.parentElement.style.display='none'">
         <button class="gallery-del" data-galdel="${esc(g.url)}" title="Remove this image">✕</button>
         ${character.portrait === g.url ? "" : `<button class="gallery-pick" data-galpick="${esc(g.url)}" title="Make this the character's portrait">★ Set as portrait</button>`}
         <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
-      </figure>`).join("")}</div>`
+      </figure>`; }).join("")}</div>`
+      : gallery.length ? "<div class='insight'>Nothing in this category yet.</div>"
       : "<div class='insight'>No images yet — a portrait is minted at creation (with art on), and the world fills in as you play.</div>"}
     <button class="btn secondary" id="gal-back" style="margin-top:14px">Back</button>
   </div>`);
+  for (const b of app.querySelectorAll("[data-galcat]")) b.onclick = () => { galleryFilter = b.dataset.galcat; renderGallery(); };
   for (const b of app.querySelectorAll("[data-galdel]")) b.onclick = () => {
     const url = b.dataset.galdel;
     if (!confirm("Remove this image?")) return;

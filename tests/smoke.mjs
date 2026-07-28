@@ -43,7 +43,7 @@ import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT, contributionsBy } from "../engine/canon.js";
 import { enterDeathState, deathDepth, isSealed, isRetrievable, deepenDeaths, resolveRetrieval, reachableDeadForGM, DEATH_DEPTH_NAMES } from "../engine/death.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "../engine/feed.js";
-import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
+import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage, galleryCategory, capGallery } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId, deleteCharacter, saveCharacter, listCharacters, traditionMotivationsForGM } from "../engine/state.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM, repairPanelForGM } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
@@ -2452,6 +2452,29 @@ await (async () => {
   addGalleryImage(c, { kind: "portrait", url: "u1", caption: "dup" }); // dedup by url
   addGalleryImage(c, { kind: "moment", url: "u2", caption: "two" });
   check("SNG-035: gallery dedupes by url + prepends newest-first", c.gallery.length === 2 && c.gallery[0].url === "u2");
+})();
+
+// --- CCODE-31: gallery categorization + the cap that no longer silently drops the record ---
+(() => {
+  // the classifier — kind → category (skills/places/people/portraits/beasts/moments)
+  check("CCODE-31: skills = crafts + discoveries", galleryCategory({ kind: "ability" }) === "skills" && galleryCategory({ kind: "discovery" }) === "skills");
+  check("CCODE-31: places = locations; beasts = creatures", galleryCategory({ kind: "location" }) === "places" && galleryCategory({ kind: "beast" }) === "beasts");
+  check("CCODE-31: a SELF portrait → portraits; an NPC portrait (Name — relationship caption) → people", galleryCategory({ kind: "portrait", caption: "" }) === "portraits" && galleryCategory({ kind: "portrait", caption: "Pell — devoted" }) === "people");
+  check("CCODE-31: a grown npc → people; a moment/scene/quest → moments", galleryCategory({ kind: "npc" }) === "people" && galleryCategory({ kind: "moment" }) === "moments" && galleryCategory({ kind: "quest" }) === "moments");
+
+  // the smart cap — never the current portrait, transient (moment/scene) evicted first, meaningful preserved
+  const mk = (kind, i) => ({ kind, url: `${kind}-${i}` });
+  const g = [];
+  for (let i = 0; i < 3; i++) g.unshift(mk("portrait", i));    // 3 portraits (older)
+  for (let i = 0; i < 5; i++) g.unshift(mk("moment", i));      // 5 moments (newer, transient)
+  // cap to 4 → must drop 4 items; the 5 moments are transient → 4 of them go, all 3 portraits survive
+  const capped = capGallery(g, 4, null);
+  check("CCODE-31: the cap evicts TRANSIENT (moment/scene) images first, preserving the meaningful record", capped.length === 4 && capped.filter(x => x.kind === "portrait").length === 3 && capped.filter(x => x.kind === "moment").length === 1);
+  // the current portrait is NEVER evicted, even when it is the oldest of its kind
+  const g2 = [mk("moment", 0), mk("moment", 1), mk("moment", 2), { kind: "portrait", url: "the-face" }];
+  const capped2 = capGallery(g2, 1, "the-face"); // keep only 1 — but the portrait is protected
+  check("CCODE-31: the CURRENT portrait is never evicted by the cap", capped2.some(x => x.url === "the-face"));
+  check("CCODE-31: under the cap, the gallery is returned untouched", capGallery(g2, 99, "the-face") === g2);
 })();
 
 // --- SNG-048: narrative register = f(disposition, rating) ---

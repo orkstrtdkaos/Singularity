@@ -139,7 +139,8 @@ const IMG_SIZES = {
   npc:       { width: 512, height: 640 },
   location:  { width: 1024, height: 320 },
   item:      { width: 400, height: 400 },
-  moment:    { width: 1024, height: 512 }
+  moment:    { width: 1024, height: 512 },
+  beast:     { width: 640, height: 512 } // CCODE-31: a creature study — wider than a portrait, a thing that comes AT you
 };
 
 /** SNG-053: the physical FORM of a subject — its species/lineage/embodiment, in words. This LEADS
@@ -228,6 +229,8 @@ export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
     return `${subject.name || "a craft"}: ${desc}${style}`;
   }
   if (kind === "moment") return String(subject.prompt || subject).slice(0, 300);
+  // CCODE-31: a beast/creature — its bestiary `look` IS the prompt (a hazard, not a person: no bond, no name-face).
+  if (kind === "beast") return `a dangerous creature, ${subject.name || "a beast"}: ${String(subject.look || subject.description || subject.flavor || "").slice(0, 300)} — dark fantasy creature art, ominous, no text`; // prose-cap-ok: an image PROMPT, not displayed prose (matches the sibling ability/location/moment prompt caps)
   return String(subject.name || subject || "");
 }
 
@@ -260,11 +263,51 @@ export function ensureImage(record, kind, { ratingLevel = 2, isMinor = null, see
 
 // ---------- SNG-035: the character gallery / Saga ----------
 
-const GALLERY_CAP = 48;
+// CCODE-31: a generous cap for a legacy document — was 48, which silently dropped a player's OLDER art (Erik:
+// "I don't see the ones from before") once skill/moment images flooded in. Now large, and when it IS reached the
+// eviction is smart (below): never the current portrait, transient beats (moment/scene) go first.
+const GALLERY_CAP = 240;
+// The transient kinds — a beat's snapshot — are the first to go when the gallery is genuinely full; the
+// meaningful record (portraits, people, places, skills, beasts) persists as long as possible.
+const TRANSIENT_KINDS = new Set(["moment", "scene"]);
+
+/** CCODE-31: the display CATEGORY of a gallery image, for the gallery's filter tabs (Erik's ask). Pure over the
+ *  entry. A self-portrait vs an NPC's portrait is told apart by the "Name — relationship" caption NPC portraits
+ *  carry (app.js ensureBondPortraits). Skills = crafts + discoveries; places = locations; beasts = creatures. */
+export function galleryCategory(g = {}) {
+  const k = g.kind;
+  if (k === "ability" || k === "discovery") return "skills";
+  if (k === "location") return "places";
+  if (k === "beast" || k === "creature") return "beasts";
+  if (k === "npc") return "people";
+  if (k === "portrait") return (g.caption && String(g.caption).includes(" — ")) ? "people" : "portraits";
+  return "moments"; // moment / scene / quest / anything else — the beats worth a picture
+}
 
 export function ensureGallery(character) {
   if (character && !Array.isArray(character.gallery)) character.gallery = [];
   return character;
+}
+
+/** CCODE-31: enforce the cap WITHOUT losing the meaningful record. Never evicts `keepUrl` (the current
+ *  portrait); drops the OLDEST transient beats (moment/scene) first, and only then the oldest of everything
+ *  else. Preserves the newest-first order of the survivors. Pure over the array. */
+export function capGallery(gallery, cap = GALLERY_CAP, keepUrl = null) {
+  if (!Array.isArray(gallery) || gallery.length <= cap) return gallery;
+  const over = gallery.length - cap;
+  // eviction candidates, ordered worst-to-keep first: transient before meaningful, then oldest before newest
+  // (the array is newest-first, so a HIGHER index is older). The kept portrait is never a candidate.
+  const evictUrls = new Set(
+    gallery.map((g, i) => ({ g, i }))
+      .filter(x => x.g.url !== keepUrl)
+      .sort((a, b) => {
+        const at = TRANSIENT_KINDS.has(a.g.kind) ? 0 : 1, bt = TRANSIENT_KINDS.has(b.g.kind) ? 0 : 1;
+        return at !== bt ? at - bt : b.i - a.i; // transient first, then oldest first
+      })
+      .slice(0, over)
+      .map(x => x.g.url)
+  );
+  return gallery.filter(g => !evictUrls.has(g.url));
 }
 
 /** Add an image to the character's gallery (dedup by url, newest-first, capped). Pure-ish
@@ -274,7 +317,7 @@ export function addGalleryImage(character, { kind, prompt = "", url, caption = "
   if (!url) return character.gallery;
   if (character.gallery.some(g => g.url === url)) return character.gallery;
   character.gallery.unshift({ kind, prompt: String(prompt).slice(0, 200), url, caption: String(caption).slice(0, 120), worldDay, at: nowStamp() });
-  character.gallery = character.gallery.slice(0, GALLERY_CAP);
+  character.gallery = capGallery(character.gallery, GALLERY_CAP, character.portrait); // CCODE-31: smart eviction — never the portrait, transient first
   return character.gallery;
 }
 

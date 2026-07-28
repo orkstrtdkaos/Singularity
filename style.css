@@ -349,6 +349,9 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .cs-header-text { flex: 1; min-width: 0; }
 .moment-art { margin: 4px 0 12px; }
 .moment-art img { width: 100%; max-height: 360px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); display: block; }
+/* CCODE-31: the gallery category filter chips (Portraits / People / Skills / Places / Beasts / Moments). */
+.gal-cats { display: flex; flex-wrap: wrap; gap: 6px; }
+.gal-cat .cost { opacity: 0.7; }
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
 .gallery-item { margin: 0; position: relative; }
 .gallery-item img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); display: block; }

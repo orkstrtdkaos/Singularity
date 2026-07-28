@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [LIVE BUGS - Erik played v1.8.290] SNG-246 §7 - frame works, 2 bugs (Aevi, 2026-07-27)
+> Erik played the revamp: "Stand and meet it" → the NICE in-place frame (Image 2 - finish conditions, meter). IT
+> WORKS. Two bugs:
+> - **BUG 1 (real):** the frame then JUMPS to the OLD clunky full-screen skill-battle panel (Image 3). Verified:
+>   duels route isSB→renderSkillBattle (app.js:4626/795) - TWO competing takeovers, the duel hits the wrong
+>   (separate-screen) one Erik rejected. FIX: the in-place frame is the ONLY takeover - render the skill-battle
+>   mechanics INSIDE the frame, kill the separate screen. (= SNG-246 §3 made specific.)
+> - **BUG 2 (Fix-D gap, confirmed live):** "Read them" (a defensive scout, no attack) let the raider
+>   (re_raider_duel=THEFT) take the Waterskin (Image 4). Arguably CORRECT (didn't stop the thief) but landed with
+>   NO mechanical readout = felt like a broken button. FIX: the receipt line (Fix D, formats authored) would show
+>   '👁 you read them · raider took the opening — Waterskin taken' + telegraph the risk on the move label ('a
+>   thief may use the opening'). The bug was the SILENCE, not the theft.
+> CCODE: BUG 1 (unify the two takeovers - the frame wins) is the priority; BUG 2 = ship Fix D receipt line + risk
+> label. ERIK: should a read be able to STOP a theft, or is 'you didn't act, they took it' honest (lean: honest,
+> but warn+explain). Full: SPEC_SNG-246 §7.
+
 > ## [DIAGNOSIS + spec] SNG-246 encounter revamp (Aevi, 2026-07-27)
 > Erik (Slow Orchard screenshot - a fight resolved in PURE PROSE): "encounters need a fix - the action I chose
 > ended the fight similarly both times; don't want a separate screen; once in an encounter it should be

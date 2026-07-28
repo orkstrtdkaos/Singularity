@@ -73,9 +73,9 @@
   },
   "attunement": 4,
   "maxHealth": 45,
-  "health": 45,
+  "health": 38,
   "maxEnergy": 115,
-  "energy": 65,
+  "energy": 62,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -88,18 +88,6 @@
         "careful"
       ],
       "consumable": false
-    },
-    {
-      "id": "waterskin",
-      "name": "Waterskin",
-      "kind": "consumable",
-      "qty": 1,
-      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
-      "effects": {
-        "energy": 10
-      },
-      "consumable": true,
-      "pinned": true
     }
   ],
   "deeds": [
@@ -183,14 +171,41 @@
         "player": null,
         "summary": "The stranger yielded and withdrew; the road opened onto a quiet confluence and a field in bloom.",
         "narration": "The stranger is gone into the brush, and the road breathes again. Spring mud, bare-budded trees, a thin morning light that hasn't decided yet whether it wants to be warm. Cy clicks once from the pack-strap and lets its lens iris back to a neutral width. The calculation settled without a blow.\n\nAhead, the Disputed Zone opens. The road bends around a low rise and the trees thin out, and there it is — not a dramatic thing, just a felt shift, the air a degree cooler and the ground a shade less certain underfoot. Spring mud here holds footprints longer than it should.\n\nAnd to the left, where the road crests the rise, the country opens. Two small rivers braid together in a shallow confluence below the bank, the water running clear over pale stone, and the far field is full of something low and white-flowering that Loki doesn't have a name for. The whole vista just sits there, giving nothing away, asking nothing back. Cy's lens widens all the way and stays wide. It does not click. It is, in its particular fashion, looking.\n\nThe spare spade is still in Loki's hands. The mud of the orchard is still on the blade."
+      },
+      {
+        "player": null,
+        "summary": "The stranger overcame Loki and took the Waterskin — then vanished into the brush without a word.",
+        "narration": "The stranger moves faster than you read them. One moment they are two steps back, and the next they are close — a hand at your coat, a boot behind your heel, and the road comes up hard. Loki goes down into the spring mud with a grunt and the spare spade skids sideways out of reach. The orchard mud is still on the blade.\n\nCy makes a sound. Not a click. A long, low tone, like a mechanism under strain. The lens is very narrow.\n\nThe stranger crouches just out of arm's reach and takes what they came for. They move quickly and without malice — this is work, not cruelty. When they straighten, they are holding the Waterskin. They look at it once, look at Loki once, and then they are back into the brush line. The road is empty again. Birdsong returns, indifferent.\n\nLoki sits up slowly in the mud. The confluence braids below the rise, unhurried. The white-flowering field sits where it was. Everything is exactly the same except the weight on the pack is slightly less, and the morning is colder than it was a moment ago."
       }
     ],
     "lastTurn": {
-      "narration": "The stranger is gone into the brush, and the road breathes again. Spring mud, bare-budded trees, a thin morning light that hasn't decided yet whether it wants to be warm. Cy clicks once from the pack-strap and lets its lens iris back to a neutral width. The calculation settled without a blow.\n\nAhead, the Disputed Zone opens. The road bends around a low rise and the trees thin out, and there it is — not a dramatic thing, just a felt shift, the air a degree cooler and the ground a shade less certain underfoot. Spring mud here holds footprints longer than it should.\n\nAnd to the left, where the road crests the rise, the country opens. Two small rivers braid together in a shallow confluence below the bank, the water running clear over pale stone, and the far field is full of something low and white-flowering that Loki doesn't have a name for. The whole vista just sits there, giving nothing away, asking nothing back. Cy's lens widens all the way and stays wide. It does not click. It is, in its particular fashion, looking.\n\nThe spare spade is still in Loki's hands. The mud of the orchard is still on the blade.",
-      "sceneSummary": "The stranger yielded and withdrew; the road opened onto a quiet confluence and a field in bloom.",
+      "narration": "The stranger moves faster than you read them. One moment they are two steps back, and the next they are close — a hand at your coat, a boot behind your heel, and the road comes up hard. Loki goes down into the spring mud with a grunt and the spare spade skids sideways out of reach. The orchard mud is still on the blade.\n\nCy makes a sound. Not a click. A long, low tone, like a mechanism under strain. The lens is very narrow.\n\nThe stranger crouches just out of arm's reach and takes what they came for. They move quickly and without malice — this is work, not cruelty. When they straighten, they are holding the Waterskin. They look at it once, look at Loki once, and then they are back into the brush line. The road is empty again. Birdsong returns, indifferent.\n\nLoki sits up slowly in the mud. The confluence braids below the rise, unhurried. The white-flowering field sits where it was. Everything is exactly the same except the weight on the pack is slightly less, and the morning is colder than it was a moment ago.",
+      "sceneSummary": "The stranger overcame Loki and took the Waterskin — then vanished into the brush without a word.",
       "choices": [
         {
-          "label": "Set down the spare spade here and continue into the Disputed Zone on foot, light and unburdened.",
+          "label": "Follow the brush line — try to track where they went.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Use Prism Sight — read the heat traces before they fade, and learn what you can about the stranger.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Let them go — stand up, take stock, and press on toward the road ahead.",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
@@ -200,85 +215,79 @@
           "trivial": true
         },
         {
-          "label": "Pause at the confluence — use Prism Sight to read the ground around the braid-point for recent passage or disturbance.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Keep moving — the three-hundred-year tree is close to fruiting and its person is missing; head toward wherever the orchard's records say it stands.",
+          "label": "Stay still a moment and let Cy look — it filed the stranger away. Ask what it noticed.",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "travel"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Sit at the confluence for a few minutes with the waterskin — take the pause the country is offering.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "difficulty": 0,
-          "intentTags": [
-            "sustain"
+            "study"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": -3,
+        "energy": 0,
+        "inventoryRemove": [
+          "Waterskin"
+        ]
+      },
       "scene": {
-        "setting": "The road at the crest of a low rise in the Disputed Zone — spring morning, thin light, two small rivers braiding in a confluence below the bank to the left, a field of low white-flowering plants in the far distance. The brush line behind is quiet.",
+        "setting": "The road at the crest of a low rise in the Disputed Zone — spring morning, thin light, Loki sitting in fresh spring mud, spare spade a few feet away. Two small rivers braid in a confluence below the bank to the left. A field of low white-flowering plants sits in the far distance. The brush line behind is still.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "On Loki's pack-strap, lens irised fully wide — looking at the confluence and the field, still and silent."
+            "state": "On Loki's pack-strap, lens very narrow, emitting a low sustained tone."
           }
         ],
         "objects": [
-          "spare spade (in Loki's hands, orchard mud on the blade)",
-          "spring mud road holding footprints",
+          "spare spade (orchard mud on the blade, skidded off the road)",
+          "spring mud road holding new scuff and fall marks",
           "braided confluence below the rise",
           "field of white-flowering plants to the far left"
         ],
         "threads": [
-          "The stranger's purpose — withdrawn without explanation; origin and intent unknown",
-          "The three-hundred-year tree about to fruit, and the missing person it was planted for",
-          "The planting is done; the orchard record holds the made name"
+          "The stranger took the Waterskin and vanished into the brush — their purpose still unknown.",
+          "The three-hundred-year tree about to fruit, and the missing person it was planted for.",
+          "The planting is done; the orchard record holds the made name."
         ]
       },
+      "ledgerEvents": [
+        {
+          "what": "A traveler in the Disputed Zone was overcome and robbed of their waterskin.",
+          "tags": [
+            "theft",
+            "violence",
+            "disputed-zone"
+          ],
+          "visibility": "private",
+          "spectrumDeltas": {},
+          "impactsLocal": false
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Short walk from the orchard gate to the rise — a few minutes on the road"
-      },
-      "characterDeltas": {
-        "energy": 2
+        "why": "A brief, sharp exchange on the road."
       }
     },
     "sceneState": {
-      "setting": "The road at the crest of a low rise in the Disputed Zone — spring morning, thin light, two small rivers braiding in a confluence below the bank to the left, a field of low white-flowering plants in the far distance. The brush line behind is quiet.",
+      "setting": "The road at the crest of a low rise in the Disputed Zone — spring morning, thin light, Loki sitting in fresh spring mud, spare spade a few feet away. Two small rivers braid in a confluence below the bank to the left. A field of low white-flowering plants sits in the far distance. The brush line behind is still.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "On Loki's pack-strap, lens irised fully wide — looking at the confluence and the field, still and silent."
+          "state": "On Loki's pack-strap, lens very narrow, emitting a low sustained tone."
         }
       ],
       "objects": [
-        "spare spade (in Loki's hands, orchard mud on the blade)",
-        "spring mud road holding footprints",
+        "spare spade (orchard mud on the blade, skidded off the road)",
+        "spring mud road holding new scuff and fall marks",
         "braided confluence below the rise",
         "field of white-flowering plants to the far left"
       ],
       "threads": [
-        "The stranger's purpose — withdrawn without explanation; origin and intent unknown",
-        "The three-hundred-year tree about to fruit, and the missing person it was planted for",
-        "The planting is done; the orchard record holds the made name"
+        "The stranger took the Waterskin and vanished into the brush — their purpose still unknown.",
+        "The three-hundred-year tree about to fruit, and the missing person it was planted for.",
+        "The planting is done; the orchard record holds the made name."
       ]
     }
   },
@@ -885,7 +894,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1744,8 +1753,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785197194027,
-  "rev": 175,
+  "updatedAt": 1785197291833,
+  "rev": 178,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2227,7 +2236,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 9
+    "the_quickwood": 10
   },
   "opLossPending": false,
   "sessions": [
@@ -2258,10 +2267,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-28T00:06:34.026Z",
+      "lastAt": "2026-07-28T00:08:11.832Z",
       "startDay": 27,
       "endDay": 28,
-      "beats": 59
+      "beats": 60
     }
   ],
   "establishedFacts": [
@@ -2299,13 +2308,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 91,
-    "choices": 91,
-    "characterDeltas": 40,
-    "scene": 91,
+    "sceneSummary": 92,
+    "choices": 92,
+    "characterDeltas": 41,
+    "scene": 92,
     "placeUpdates": 12,
     "codexUpdates": 75,
-    "timeOps": 90,
+    "timeOps": 91,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 21,
@@ -2317,9 +2326,10 @@
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
-    "encounterOps": 1
+    "encounterOps": 1,
+    "ledgerEvents": 1
   },
-  "_opTurns": 91,
+  "_opTurns": 92,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2565,53 +2575,7 @@
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
   },
-  "activeEncounter": {
-    "defId": "re-re_raider_duel",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-re_raider_duel",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [],
-      "opponentHealth": 6,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the aggressor",
-        "attributes": {
-          "practical": 4,
-          "physical": 4,
-          "mental": 4,
-          "social": 4
-        },
-        "energy": 94,
-        "maxEnergy": 94,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 3,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 3,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 94
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 24,
     "lastBeat": "witness_power"

@@ -118,3 +118,54 @@ the real structure OBVIOUS.
    area.
 4. (Aevi) Per-kind receipt formats — I'll author fight/chase/standoff/puzzle/hazard lines so each reads right
    for its meter (hp vs ground vs resolve vs insight).
+
+
+---
+
+# §7 — LIVE VERIFICATION (Erik, 2026-07-27, v1.8.290): the revamp WORKS, two bugs remain
+Erik played it. Progress + two precise bugs, both verified at origin:
+
+## §7a — WHAT WORKS (the revamp landed)
+"Stand and meet it" → the NEW in-place structured frame appears (Image 2): "A Hostile Meeting · FIGHT · ROUND 1",
+the meter, the STATED finish conditions (DEFEAT / FLEE / FAIL), the decisive-finisher line, the freeform cue.
+This is SNG-246 §3+§4 working — the banner-style in-place structured frame Erik wanted. Keep it. It's the target.
+
+## §7b — BUG 1 (the real bug): the frame JUMPS to the old clunky skill-battle panel
+Verified: a duel routes `isSB = (skillBattle.engine && def.type==="duel" && def.skillBattle!==false)` (app.js:4626)
+→ `if (isSB) { renderSkillBattle(); return; }` (795/3389). So after the nice frame (Image 2), the duel FALLS
+INTO the OLD full-screen skill-battle panel (Image 3 — the long ability list, Conserve/Standard/Surge, Read/Break/
+Yield). **There are TWO competing takeover systems** — the SNG-246 in-place frame AND the legacy renderSkillBattle
+panel — and the duel routes to the WRONG one (the separate-screen mode Erik explicitly rejected).
+- **FIX (CCode):** the SNG-246 in-place frame is the ONE takeover. Either (a) route ALL duels through the frame
+  (not renderSkillBattle), OR (b) make renderSkillBattle RENDER AS the in-place frame (same surface, the frame's
+  strip + the moves inline) rather than a separate full panel. Erik's preference (Image 2 over Image 3) is clear:
+  the in-place frame wins; the skill-battle MECHANICS can stay (the ability list is fine) but they must render
+  INSIDE the frame on the play surface, not as the clunky separate screen. Unify the two takeovers into one — the
+  frame is the container, the skill-battle rounds are its contents.
+- This is the SNG-246 §3 fix made specific: "generalize the in-place takeover to ALL encounters" = kill the
+  second (separate-screen) takeover path; the frame is the only one.
+
+## §7c — BUG 2 (really a Fix-D gap): "Read them" took the Waterskin with NO mechanical readout
+Verified: "Read them" → `sbDeclare({function:"shield"...}, {scouting:true})` — a DEFENSIVE SCOUT round, no attack.
+The encounter was `re_raider_duel` — a raider whose goal is THEFT, not killing. So when the player spent a round
+NOT stopping them, the raider did what a raider does: took what they came for and left (Image 4 — "they take what
+they came for... holding the Waterskin... back into the brush line"). **This outcome is arguably CORRECT** (you
+didn't stop the thief; the thief stole) — but it landed as a SURPRISE because there was NO MECHANICAL READOUT.
+The player clicked "read them" expecting information and got robbed with no line saying WHY.
+- **This is exactly the SNG-246 Fix D gap, confirmed LIVE:** the mechanical result wasn't SHOWN, so a legitimate
+  outcome FELT like a broken button. With the receipt line (Fix D), Image 4 would have carried:
+  `👁 you read them (no strike) · the raider took the opening — Waterskin taken · they break off`. The theft
+  becomes a legible consequence, not a mystery.
+- **Also (Aevi/CCode): telegraph the risk on the move.** "Read them" for a THEFT-flavored foe should hint the
+  cost — its label/subtext should read "spend the round reading — but a thief may use the opening" so the player
+  KNOWS reading a raider risks the grab. The move is fine; its RISK just needs surfacing (the SNG-246 principle:
+  make the mechanic legible, before AND after).
+- **Optional (Erik's call):** should a THEFT foe be stoppable by a read (you read them AND react), or is "you
+  didn't act, they took it" the honest outcome? Lean: honest — a read is not a defense; if you want to keep your
+  pack, strike or guard. But the LABEL must warn, and the RECEIPT must explain. The bug was never the theft — it
+  was the silence around it.
+
+## §7d — priority
+BUG 1 (the panel jump) is the real defect — fix the double-takeover so the frame is the only one (§7b). BUG 2 is
+the Fix D receipt line (already specced §5, formats authored) + a risk-telegraph on the move label. Both fold
+into SNG-246; no new ticket.

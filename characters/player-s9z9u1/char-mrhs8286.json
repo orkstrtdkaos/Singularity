@@ -173,7 +173,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.0277776241569554,
+    "spectrumId": -0.02638874294910763,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.24843810472552474,
     "mechanical_spiritual": 0.25513542055105926,
@@ -1969,71 +1969,104 @@
         "player": "Use The Attended End on Huginn's glance — read what is ending near the mill",
         "summary": "Silas read the mill's ending through The Attended End — a tenure near its close, a day or two left in it.",
         "narration": "You follow Huginn's gaze toward the mill. The bird has not looked away since the transaction closed, and that quality of attention — unhurried, final — is one you have learned to read correctly.\n\nYou let The Attended End open quietly. Conserved, not pushed: a single clean read, the way you might lay a hand on a door to feel what is behind it before you open it.\n\nWhat you receive is plain. Something at the mill is ending — not a person, not a life. A tenure. A long-held thing whose time has quietly run out, like a candle that has burned all the way to the tray and is still throwing light, only just. It has perhaps a day in it. Two at most.\n\nHuginn turns its head toward you. One slow blink. It already knew. It was waiting for you to know also."
+      },
+      {
+        "player": "Mention Stillwater's Trouble to Bren, if she ever wants a change of scenery and a place to cook good meals for a good purpose - safety for her kids too.",
+        "summary": "Silas named Stillwater's Trouble to Bren — a practical invitation, plainly given and plainly received.",
+        "narration": "You let the moment settle before you say the next thing. The filter cloth is already under Bren's counter. The ledger is closed. The transaction is done in every way that counts — and yet you find yourself standing there a breath longer than you need to.\n\nYou tell her there is a place called Stillwater's Trouble. A warden post on the Ashwarden March, a few hours north. It is being rebuilt — a proper fellowship, people doing real work, a purpose to it. You tell her plainly that if she ever finds herself wanting a change of scenery, there would be a place for her and for her children. Good meals cooked for good purpose, she said it herself — and you mean it the way she would mean it, not as flattery.\n\nBren is quiet for a moment. She looks at you the way she looked at the ledger, with both hands and full attention. Then she says she appreciates the saying of it. She does not say yes. She does not say no. She files it the way she filed the truth about the water — correctly, and without ceremony. Then she says: she knows the name now. Stillwater's Trouble. And she knows your face.\n\nVeth has not moved from her position a few paces off. She says nothing, but there is something in the angle of her head that suggests she is approving of the exchange without being willing to say so."
       }
     ],
     "lastTurn": {
-      "narration": "You follow Huginn's gaze toward the mill. The bird has not looked away since the transaction closed, and that quality of attention — unhurried, final — is one you have learned to read correctly.\n\nYou let The Attended End open quietly. Conserved, not pushed: a single clean read, the way you might lay a hand on a door to feel what is behind it before you open it.\n\nWhat you receive is plain. Something at the mill is ending — not a person, not a life. A tenure. A long-held thing whose time has quietly run out, like a candle that has burned all the way to the tray and is still throwing light, only just. It has perhaps a day in it. Two at most.\n\nHuginn turns its head toward you. One slow blink. It already knew. It was waiting for you to know also.",
-      "sceneSummary": "Silas read the mill's ending through The Attended End — a tenure near its close, a day or two left in it.",
+      "narration": "You let the moment settle before you say the next thing. The filter cloth is already under Bren's counter. The ledger is closed. The transaction is done in every way that counts — and yet you find yourself standing there a breath longer than you need to.\n\nYou tell her there is a place called Stillwater's Trouble. A warden post on the Ashwarden March, a few hours north. It is being rebuilt — a proper fellowship, people doing real work, a purpose to it. You tell her plainly that if she ever finds herself wanting a change of scenery, there would be a place for her and for her children. Good meals cooked for good purpose, she said it herself — and you mean it the way she would mean it, not as flattery.\n\nBren is quiet for a moment. She looks at you the way she looked at the ledger, with both hands and full attention. Then she says she appreciates the saying of it. She does not say yes. She does not say no. She files it the way she filed the truth about the water — correctly, and without ceremony. Then she says: she knows the name now. Stillwater's Trouble. And she knows your face.\n\nVeth has not moved from her position a few paces off. She says nothing, but there is something in the angle of her head that suggests she is approving of the exchange without being willing to say so.",
+      "sceneSummary": "Silas named Stillwater's Trouble to Bren — a practical invitation, plainly given and plainly received.",
       "choices": [
         {
-          "label": "Walk to the mill now and find out whose tenure it is.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Huginn plainly — is the ending at the mill one that needs attending, or one that should simply be allowed?",
+          "label": "Head toward the mill — find out whose tenure is ending and whether it needs attending",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "scout",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Bring Veth into it — describe what you read and ask what she would do with a tenure ending that close.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "label": "Something moved wrong in the market row — a warpling hare is cutting fast between the stalls, erratic and close",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": -0.3
+          },
+          "difficulty": 15,
           "intentTags": [
-            "help"
+            "attack",
+            "defend"
           ],
-          "trivial": true
+          "abilityId": "hunters_strike",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": "beast_warpling_hare",
+          "emergenceId": null
         },
         {
-          "label": "File it and move on. You read it; you know. The waygate and the road forward are what the morning is for.",
+          "label": "Use the waygate — the mill's ending can wait; there is other business pulling at you",
           "attribute": "practical",
           "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn directly — not what is ending, but what it thinks you should do with the day or two left in it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, transaction complete. Huginn is on the corner-post, still facing the mill.",
+        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, transaction and invitation both complete. Huginn is on the corner-post, still facing the mill.",
         "npcsPresent": [
           {
             "name": "Bren Thalle",
-            "state": "Behind the counter, ledger in hand, the filter cloth stowed — watching the row with the settled look of someone whose business is concluded."
+            "state": "Behind the counter, ledger closed, filter cloth stowed — the invitation received and filed, watching Silas with the settled look of a woman who now knows a name and a face."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "A step behind Silas, still, watching the mill now that Huginn's gaze has held there."
+            "state": "A step behind Silas, still, watching the mill."
           },
           {
             "name": "Veth Ondra",
-            "state": "A few paces off, her attention moving between the mill and Silas's face."
+            "state": "A few paces off, head angled slightly in quiet approval, attention on Silas and the mill in turns."
           },
           {
             "name": "Huginn",
-            "state": "On the corner-post, facing the mill — one slow blink given to Silas in acknowledgment, then back to watching."
+            "state": "On the corner-post, facing the mill — unhurried, waiting."
           }
         ],
         "objects": [
@@ -2044,44 +2077,60 @@
         ],
         "threads": [
           "Something at the mill is ending — a tenure, not a life. A day or two left in it.",
-          "Huginn was already watching and already knew — it waited for Silas to read it."
+          "Huginn was already watching and already knew — it waited for Silas to read it.",
+          "Bren has filed the name Stillwater's Trouble and the face that gave it."
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "bren-thalle",
+          "name": "Bren Thalle",
+          "note": "Received the invitation to Stillwater's Trouble — plainly given, plainly filed. Knows the name now. Knows the face.",
+          "learned": [
+            "Stillwater's Trouble exists — a warden post on the Ashwarden March being rebuilt as a fellowship, with a place for her and her children"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At her stall on the Crossing market row — the transaction complete, the invitation received without ceremony."
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "the-crossing-mill-tenure",
-          "label": "The Mill's Ending",
-          "kind": "event",
-          "fact": "The Attended End read a tenure ending at the Crossing mill — not a life, a long-held role or holding. A day or two remaining. Huginn had already marked it.",
+          "topic": "bren-thalle",
+          "label": "Bren Thalle",
+          "kind": "person",
+          "entityId": "bren-thalle",
+          "fact": "Given a plain invitation to Stillwater's Trouble — a place for her and her children if she ever wants a change of scenery and a purpose. She filed it correctly and without ceremony: she knows the name, she knows the face.",
           "links": [
-            "millbrook",
-            "the-water-crisis"
+            "stillwaters-trouble",
+            "the-crossing"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quick read at the stall's edge"
+        "why": "a short exchange at the stall after the transaction closed"
       }
     },
     "sceneState": {
-      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, transaction complete. Huginn is on the corner-post, still facing the mill.",
+      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, transaction and invitation both complete. Huginn is on the corner-post, still facing the mill.",
       "npcsPresent": [
         {
           "name": "Bren Thalle",
-          "state": "Behind the counter, ledger in hand, the filter cloth stowed — watching the row with the settled look of someone whose bu"
+          "state": "Behind the counter, ledger closed, filter cloth stowed — the invitation received and filed, watching Silas with the sett"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "A step behind Silas, still, watching the mill now that Huginn's gaze has held there."
+          "state": "A step behind Silas, still, watching the mill."
         },
         {
           "name": "Veth Ondra",
-          "state": "A few paces off, her attention moving between the mill and Silas's face."
+          "state": "A few paces off, head angled slightly in quiet approval, attention on Silas and the mill in turns."
         },
         {
           "name": "Huginn",
-          "state": "On the corner-post, facing the mill — one slow blink given to Silas in acknowledgment, then back to watching."
+          "state": "On the corner-post, facing the mill — unhurried, waiting."
         }
       ],
       "objects": [
@@ -2092,7 +2141,8 @@
       ],
       "threads": [
         "Something at the mill is ending — a tenure, not a life. A day or two left in it.",
-        "Huginn was already watching and already knew — it waited for Silas to read it."
+        "Huginn was already watching and already knew — it waited for Silas to read it.",
+        "Bren has filed the name Stillwater's Trouble and the face that gave it."
       ]
     }
   },
@@ -4016,7 +4066,7 @@
         "locationId": "millbrook",
         "day": 5
       },
-      "relationship": 3,
+      "relationship": 4,
       "history": [
         "[d5] Named himself under Huginn's gaze — Bren Thalle, lower Wick settlement, south-slope, three miles past the ford. Dry two seasons. Named the settlement's situation plainly as explana",
         "[d5] Received the hatchet back — handle first, no catch. Tucked it at his belt and started north toward the ford without being asked twice.",
@@ -4024,23 +4074,24 @@
         "[d14] Named herself and her stall without hesitation. Passed the ledger over with particular care. The meal entry is genuine; the wait-courtesy sum is in a second hand.",
         "[d14] Watched Silas consult Huginn without surprise or mockery — absorbed it as plain fact. Her patience has not broken.",
         "[d14] Accepted payment of both sums without argument. Asked plainly for one true thing: when does the water clear. Two children in the back house. Boiling everything, twice.",
-        "[d14] Received the truth about the water plainly — wells clear first, watershed follows. Accepted the Pre-Transition Filter Cloth without ceremony. Filed both correctly and nodded once in acknowledgment. The debt is settled and Bren is satisfied."
+        "[d14] Received the truth about the water plainly — wells clear first, watershed follows. Accepted the Pre-Transition Filter Cloth without ceremony. Filed both correctly and nodded once in acknowledgment. The debt is settled and Bren is satisfied.",
+        "[d14] Received the invitation to Stillwater's Trouble — plainly given, plainly filed. Knows the name now. Knows the face."
       ],
       "knownFacts": [
-        "The meal entry is genuine — same chalk, same hand as the rest of the season's record",
         "The wait-courtesy was added later in a different hand",
         "Huginn's confirmation of the meal was received without ceremony — she accepted the bird as a witness",
         "Has two children in the back house behind the stall",
         "Heard from the mill-gate keeper last week that the readings are worse, not better",
         "Is not asking for rescue — is asking for truth",
         "The downstream wells will clear before the watershed — a week or two of waiting, no more.",
-        "Silas Weir gave her a Pre-Transition Filter Cloth without being asked — a practical gift, not sentiment."
+        "Silas Weir gave her a Pre-Transition Filter Cloth without being asked — a practical gift, not sentiment.",
+        "Stillwater's Trouble exists — a warden post on the Ashwarden March being rebuilt as a fellowship, with a place for her and her children"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At her stall on the Crossing market row — business with Silas concluded, the cloth stowed, watching the row.",
+      "statusNote": "At her stall on the Crossing market row — the transaction complete, the invitation received without ceremony.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -5755,7 +5806,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The Working Model's read of the reclamation site as a spread, not a point — intake valves, chambers, arrays — hints that the site could be…",
@@ -7552,22 +7603,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.319162620212893,
-    "cerebral": 20.92702125658029,
-    "social": 9.014790437519475,
-    "generous": 4.5757642807302705,
-    "cautious": 9.246905065410566,
-    "physical": 1.5100152063919878,
-    "risky": 0.36218194136399373,
-    "ruthless": 0.7883185374979753,
-    "carousing": 0.1281707289787367,
-    "amorous": 0.47115492525208824,
-    "patient": 0.2855056852348624,
-    "stealth": 0.00002755102462120667,
-    "devotion": 1.1258258295874266,
-    "craft": 0.9777242398785199,
-    "leadership": 0.4251484415027731,
-    "deception": 0.13193780538690256
+    "strategic": 18.86118355470757,
+    "cerebral": 20.40384572516578,
+    "social": 9.789420676581488,
+    "generous": 4.461370173712013,
+    "cautious": 9.015732438775302,
+    "physical": 1.472264826232188,
+    "risky": 0.35312739282989386,
+    "ruthless": 0.7686105740605259,
+    "carousing": 0.12496646075426826,
+    "amorous": 0.459376052120786,
+    "patient": 0.2783680431039908,
+    "stealth": 0.000026862249005676502,
+    "devotion": 1.097680183847741,
+    "craft": 0.9532811338815569,
+    "leadership": 0.41451973046520374,
+    "deception": 0.12863936025223
   },
   "aptitudes": [
     "strategist",
@@ -7576,7 +7627,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 902,
+  "actionCount": 903,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7982,8 +8033,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785207441952,
-  "rev": 1601,
+  "updatedAt": 1785207563400,
+  "rev": 1602,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11828,7 +11879,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 106
+    "the_center": 107
   },
   "foreclosed": [
     "rootkin",
@@ -12022,10 +12073,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T02:57:21.951Z",
+      "lastAt": "2026-07-28T02:59:23.398Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 13
+      "beats": 14
     }
   ],
   "company": [
@@ -12353,15 +12404,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 273,
-    "choices": 272,
+    "sceneSummary": 274,
+    "choices": 273,
     "characterDeltas": 116,
-    "scene": 273,
-    "npcUpdates": 243,
+    "scene": 274,
+    "npcUpdates": 244,
     "factUpdates": 22,
     "placeUpdates": 51,
-    "codexUpdates": 171,
-    "timeOps": 264,
+    "codexUpdates": 172,
+    "timeOps": 265,
     "imagePrompt": 7,
     "sceneEnded": 64,
     "itemUpdates": 5,
@@ -12379,7 +12430,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 273,
+  "_opTurns": 274,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

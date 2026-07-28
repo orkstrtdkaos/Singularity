@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 29,
-  "xp": 2802,
+  "xp": 2807,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -175,8 +175,8 @@
   "alignment": {
     "spectrumId": -0.02638874294910763,
     "violence_peace": 0.09078381765624999,
-    "chaos_order": 0.2460161994892485,
-    "mechanical_spiritual": 0.26450971704733095,
+    "chaos_order": 0.24371538951478608,
+    "mechanical_spiritual": 0.2662842311949644,
     "concrete_abstract": -0.03496367597441142,
     "death_life": -0.17787615557957992,
     "emotional_logical": 0.008330843749999983,
@@ -189,7 +189,7 @@
   "maxHealth": 170,
   "health": 170,
   "maxEnergy": 240,
-  "energy": 240,
+  "energy": 238,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2014,84 +2014,69 @@
         "player": "Check the gap itself — use The Open Material to take it apart and see what the thread is seated into",
         "summary": "The Open Material reads the gap beneath the Sheaf and Bowl stall — a dormant pre-Transition relay node, same construction as the one below the wolverine clearing, still holding an open channel address after the reclamation site's close.",
         "narration": "You press your palm flat against the market boards at the edge of the gap and let The Open Material do its quiet work.\n\nThe boards come apart in your perception — not physically, but in the craft's own sense of it. Nails, grain, the compressed grit of fifteen years of foot traffic, the older timber beneath, and then the ground itself. Each layer separates cleanly in your reading, like pages turned back one at a time.\n\nThe thread is seated into a node. Not a crack, not a random seep — a deliberate anchor point, old pre-Transition work, roughly palm-sized, pressed into the earth beneath the third board from the gap's left edge. It is the same construction as the relay node below the wolverine clearing. Smaller. Quieter. But the same hand built it.\n\nThis one did not go silent when the reclamation site closed. It is still holding the thread's address — like a letter with nowhere left to send itself, keeping the channel open out of habit. The warpling found the channel. It did not make it. The channel was already here.\n\nVeth speaks from behind you. She says, quietly, that this is not the only one.\n\n*You feel it settle into you — a new steadiness. (Level 29: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "Use The Working Model to hold the node's architecture and map it against what the hollow contained — build a picture of how many nodes there might be and where they'd sit",
+        "summary": "The Working Model maps the relay node's architecture against known fixed points — a spoke-and-hub network of five to seven nodes beneath stable, old-foundation sites across the Crossing.",
+        "narration": "You stay crouched, palm still against the boards, and let The Working Model open over what The Open Material already mapped.\n\nThe node's architecture comes in whole — not in fragments but as a complete read, the kind of reading that arrives when the craft is working well and not fighting anything. The node beneath the stall is not a standalone piece. It is a spoke. You can feel in its construction the assumption of other nodes — the socket-joinery of a thing designed to sit in a network, not alone in the dark.\n\nYou hold it against what you already know: the node below the wolverine clearing, the hollow's receiving-purpose, the reclamation site's substrate-thread running southwest. Three fixed points. The Working Model finds the interval between them — the distance, the depth, the construction pattern — and begins to close the shape.\n\nA spoke-and-hub arrangement. The nodes ring something, or ring several somethings. If the interval holds, you are looking at perhaps five or six more. They would sit beneath stable market structures, old foundations, places that have not been disturbed in fifteen years. Places the network assumed would still be standing.\n\nVeth steps closer behind you and says, quietly, said Veth: \"You have the count.\" It is not a question."
       }
     ],
     "lastTurn": {
-      "narration": "You press your palm flat against the market boards at the edge of the gap and let The Open Material do its quiet work.\n\nThe boards come apart in your perception — not physically, but in the craft's own sense of it. Nails, grain, the compressed grit of fifteen years of foot traffic, the older timber beneath, and then the ground itself. Each layer separates cleanly in your reading, like pages turned back one at a time.\n\nThe thread is seated into a node. Not a crack, not a random seep — a deliberate anchor point, old pre-Transition work, roughly palm-sized, pressed into the earth beneath the third board from the gap's left edge. It is the same construction as the relay node below the wolverine clearing. Smaller. Quieter. But the same hand built it.\n\nThis one did not go silent when the reclamation site closed. It is still holding the thread's address — like a letter with nowhere left to send itself, keeping the channel open out of habit. The warpling found the channel. It did not make it. The channel was already here.\n\nVeth speaks from behind you. She says, quietly, that this is not the only one.\n\n*You feel it settle into you — a new steadiness. (Level 29: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "The Open Material reads the gap beneath the Sheaf and Bowl stall — a dormant pre-Transition relay node, same construction as the one below the wolverine clearing, still holding an open channel address after the reclamation site's close.",
+      "narration": "You stay crouched, palm still against the boards, and let The Working Model open over what The Open Material already mapped.\n\nThe node's architecture comes in whole — not in fragments but as a complete read, the kind of reading that arrives when the craft is working well and not fighting anything. The node beneath the stall is not a standalone piece. It is a spoke. You can feel in its construction the assumption of other nodes — the socket-joinery of a thing designed to sit in a network, not alone in the dark.\n\nYou hold it against what you already know: the node below the wolverine clearing, the hollow's receiving-purpose, the reclamation site's substrate-thread running southwest. Three fixed points. The Working Model finds the interval between them — the distance, the depth, the construction pattern — and begins to close the shape.\n\nA spoke-and-hub arrangement. The nodes ring something, or ring several somethings. If the interval holds, you are looking at perhaps five or six more. They would sit beneath stable market structures, old foundations, places that have not been disturbed in fifteen years. Places the network assumed would still be standing.\n\nVeth steps closer behind you and says, quietly, said Veth: \"You have the count.\" It is not a question.",
+      "sceneSummary": "The Working Model maps the relay node's architecture against known fixed points — a spoke-and-hub network of five to seven nodes beneath stable, old-foundation sites across the Crossing.",
       "choices": [
         {
-          "label": "Ask Veth what she means — how many of these nodes are there, and does she know where",
+          "label": "Ask Veth how many she knows — name it plainly: you have a picture, does it match hers?",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "negotiate"
           ],
-          "trivial": true,
           "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null,
-          "axes": {}
+          "trivial": true
         },
         {
-          "label": "Use The Working Model to hold the node's architecture and map it against what the hollow contained — build a picture of how many nodes there might be and where they'd sit",
+          "label": "Turn to Bren — name what you found beneath her stall, plainly, and ask how long the gap in the boards has been there",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "persuade"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Hold the model a moment longer — use Order-Sense to trace whether the channel address the node is still holding points to somewhere reachable",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
             "study",
-            "plan"
+            "careful"
           ],
-          "trivial": false,
-          "abilityId": "the_working_model",
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null,
-          "axes": {
-            "mechanical_spiritual": 0.3,
-            "chaos_order": 0.2
-          }
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
         },
         {
-          "label": "Close the node's channel now — use The Warding Mark to seal its address so nothing else finds it",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "guard"
-          ],
-          "trivial": false,
-          "abilityId": "the_warding_mark",
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null,
-          "axes": {
-            "chaos_order": 0.2,
-            "death_life": -0.1
-          }
-        },
-        {
-          "label": "Stand and address Bren directly — tell her what was under her stall, plainly, and what it means for her children",
+          "label": "Stand and address the market row — the bystanders have been watching; name what was here and what it means, plainly, before the story writes itself wrong",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "lead",
             "persuade"
           ],
-          "trivial": true,
           "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null,
-          "axes": {}
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The Crossing market row, morning — early spring light, flat and clear. Crouched beside the gap under the Sheaf and Bowl stall, palm on the boards, The Open Material's read just concluded.",
+        "setting": "The Crossing market row, morning — early spring light, flat and clear. Crouched beside the gap under the Sheaf and Bowl stall, palm still on the boards, The Working Model's read just concluded.",
         "npcsPresent": [
           {
             "name": "Bren Thalle",
@@ -2099,11 +2084,11 @@
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing to the right with Memory tilted against her shoulder, eyes on Veth now that she has spoken"
+            "state": "Standing to the right with Memory tilted against her shoulder, eyes on Veth"
           },
           {
             "name": "Veth Ondra",
-            "state": "Behind Silas, having just said quietly that this is not the only one — waiting for the question"
+            "state": "Has stepped closer behind Silas — just said 'You have the count.' Waiting for his answer"
           },
           {
             "name": "Huginn",
@@ -2116,15 +2101,15 @@
           "Memory (spear) — in Pell's hand, butt-end wiped clean",
           "Ledger — still in Bren's hands against the rear board",
           "Pre-Transition Filter Cloth — stowed under Bren's counter",
-          "The gap beneath the counter — where the warpling came through; the relay node is in the ground beneath the third board from the gap's left edge",
+          "The gap beneath the counter — relay node in the earth beneath the third board from the left edge",
           "Market row bystanders — a dozen faces turned, frozen, watching"
         ],
         "threads": [
-          "Veth has implied there are more nodes — has not named how many or where",
-          "The relay node beneath the stall is still holding an open channel address",
-          "Bren and her children are present — she has not yet moved from the board",
-          "The market row has gone still — bystanders watching, waiting for what comes next",
-          "Huginn is still watching the gap, not the body"
+          "Veth has confirmed the count — has not yet named her own number or the locations she knows",
+          "The relay node is still holding an open channel address",
+          "The Working Model holds a picture: five to seven more nodes, spaced at regular intervals beneath old stable foundations",
+          "Bren and her children are present — she has not moved from the rear board",
+          "The market row bystanders are still watching, waiting"
         ]
       },
       "npcUpdates": [
@@ -2132,57 +2117,37 @@
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Named quietly, unprompted, that the node beneath the stall is not the only one — has knowledge of the relay network's scope that she has not yet spoken aloud",
+          "note": "Stepped closer as The Working Model completed — said 'You have the count.' plainly, confirming she already knows the number.",
           "learned": [
-            "The relay node beneath the Sheaf and Bowl stall is not isolated — Veth knows of others"
+            "Silas's Working Model read produced a spoke-and-hub picture: five to seven nodes, old foundations, 15-year interval"
           ],
-          "statusNote": "Standing in the Crossing market row behind Silas — has just implied the node network is larger than one site"
-        },
-        {
-          "op": "update",
-          "npcId": "bren-thalle",
-          "name": "Bren Thalle",
-          "note": "Has now witnessed the Open Material read and Veth's statement — waiting to understand what it means for her stall and her children",
-          "statusNote": "At the rear board of the Sheaf and Bowl stall — still not moved, watching"
+          "skillsObserved": [
+            "reading when a working has completed and when to speak into its silence"
+          ],
+          "statusNote": "Behind Silas at the Sheaf and Bowl stall — has just confirmed she knows the node count, waiting for him to name it aloud"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-relay-network",
-          "label": "The Relay Network",
+          "topic": "relay-node-network",
+          "label": "The Relay Node Network",
           "kind": "mystery",
-          "fact": "A pre-Transition relay node — same construction as the one below the wolverine clearing — sits in the earth beneath the Sheaf and Bowl stall at the Crossing market row. It is still holding an open channel address after the reclamation site's close. Veth has implied this node is not alone.",
+          "fact": "The node beneath the Sheaf and Bowl stall is a spoke in a larger network. The Working Model maps the interval between three known fixed points — the stall node, the wolverine-clearing node, the hollow — and closes to a spoke-and-hub shape: five to seven more nodes, seated beneath stable old-foundation sites that have not been disturbed in fifteen years. Veth's response ('You have the count') confirms she already knows the number.",
           "links": [
             "the-water-crisis",
-            "millbrook",
+            "what-the-water-remembers",
             "veth-stillwater-ondra",
-            "what-the-water-remembers"
+            "millbrook"
           ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "A pre-Transition relay node, same construction as the wolverine-clearing node, is seated in the earth beneath the Sheaf and Bowl stall's third board from the gap's left edge — still holding an open channel address after the reclamation site's close",
-          "subPlace": {
-            "name": "Sheaf and Bowl Stall",
-            "parent": "The Crossing",
-            "note": "Site of the warpling emergence and the relay node discovery — the node is in the ground beneath the counter gap",
-            "visited": true
-          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief, focused reading at the stall gap"
-      },
-      "characterDeltas": {
-        "health": 0,
-        "energy": -1,
-        "xp": 0
+        "why": "a short working read, crouched at the stall gap"
       }
     },
     "sceneState": {
-      "setting": "The Crossing market row, morning — early spring light, flat and clear. Crouched beside the gap under the Sheaf and Bowl stall, palm on the boards, The Open Material's read just concluded.",
+      "setting": "The Crossing market row, morning — early spring light, flat and clear. Crouched beside the gap under the Sheaf and Bowl stall, palm still on the boards, The Working Model's read just concluded.",
       "npcsPresent": [
         {
           "name": "Bren Thalle",
@@ -2190,11 +2155,11 @@
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing to the right with Memory tilted against her shoulder, eyes on Veth now that she has spoken"
+          "state": "Standing to the right with Memory tilted against her shoulder, eyes on Veth"
         },
         {
           "name": "Veth Ondra",
-          "state": "Behind Silas, having just said quietly that this is not the only one — waiting for the question"
+          "state": "Has stepped closer behind Silas — just said 'You have the count.' Waiting for his answer"
         },
         {
           "name": "Huginn",
@@ -2207,15 +2172,15 @@
         "Memory (spear) — in Pell's hand, butt-end wiped clean",
         "Ledger — still in Bren's hands against the rear board",
         "Pre-Transition Filter Cloth — stowed under Bren's counter",
-        "The gap beneath the counter — where the warpling came through; the relay node is",
+        "The gap beneath the counter — relay node in the earth beneath the third board fr",
         "Market row bystanders — a dozen faces turned, frozen, watching"
       ],
       "threads": [
-        "Veth has implied there are more nodes — has not named how many or where",
-        "The relay node beneath the stall is still holding an open channel address",
-        "Bren and her children are present — she has not yet moved from the board",
-        "The market row has gone still — bystanders watching, waiting for what comes next",
-        "Huginn is still watching the gap, not the body"
+        "Veth has confirmed the count — has not yet named her own number or the locations she knows",
+        "The relay node is still holding an open channel address",
+        "The Working Model holds a picture: five to seven more nodes, spaced at regular intervals beneath old stable foundations",
+        "Bren and her children are present — she has not moved from the rear board",
+        "The market row bystanders are still watching, waiting"
       ]
     }
   },
@@ -4357,7 +4322,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Stopped at the bowl's edge without speaking — she already knew what the site was.",
         "[d14] Crouched beside Silas and confirmed the instruction seated — two fingers on the rim, plain reading, no ceremony.",
         "[d14] Named plainly what the Order-Sense read confirmed — the site is connected to more than the creek. No alarm. Plain acknowledgment.",
         "[d14] Confirmed the amended instruction was received — both watershed and well-thread seating correctly. Named the outcome plainly: the whole job is done.",
@@ -4366,30 +4330,31 @@
         "[d14] Received Silas's account of the badger and the warden without ceremony. Named both as real, then held the lesson steady: what remains is a death that does not choose and cannot be turned.",
         "[d14] Took the right side of the road without prompting, eyes on the tree-line.",
         "[d14] Named the node's silence plainly — the upstream pressure is gone, Logana is just holding the ground now.",
-        "[d14] Named quietly, unprompted, that the node beneath the stall is not the only one — has knowledge of the relay network's scope that she has not yet spoken aloud"
+        "[d14] Named quietly, unprompted, that the node beneath the stall is not the only one — has knowledge of the relay network's scope that she has not yet spoken aloud",
+        "[d14] Stepped closer as The Working Model completed — said 'You have the count.' plainly, confirming she already knows the number."
       ],
       "knownFacts": [
-        "The reclamation site is not broken — it is working, and it needs to be told what to do by a living warden",
         "The reclamation site received the closing instruction and is winding down — confirmed by contact read.",
         "The reclamation ring's matrix feeds a buried substrate-thread running southwest toward the lower watershed — seeding downstream wells with clean water for fifteen years.",
         "The reclamation site's closing instruction can be amended before the site fully winds down — both the watershed work and the well-seeding thread received their respective closings.",
         "Silas has attended death-sites and mutable endings well; he has not yet sat with an ending that could not be turned aside.",
         "The badger in the hollow and the warden's fifteen-year watch are both registered as attended endings — but neither was the kind that simply arrives without choosing.",
         "The relay node below the wolverine clearing has gone quiet — the reclamation site's withdrawal has stilled it.",
-        "The relay node beneath the Sheaf and Bowl stall is not isolated — Veth knows of others"
+        "The relay node beneath the Sheaf and Bowl stall is not isolated — Veth knows of others",
+        "Silas's Working Model read produced a spoke-and-hub picture: five to seven nodes, old foundations, 15-year interval"
       ],
       "skillsObserved": [
-        "plain technical description of Ashwarden contact craft under",
         "warden's read of a fold's closing-quality — named its emotio",
         "ashwarden mark-setting into a shadow-frame",
         "warden's read of Zone creature behavior from track evidence ",
         "reading Zone creature sign from track evidence — weight, str",
-        "precise naming of categorical difference between known craft"
+        "precise naming of categorical difference between known craft",
+        "reading when a working has completed and when to speak into "
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Standing in the Crossing market row behind Silas — has just implied the node network is larger than one site",
+      "statusNote": "Behind Silas at the Sheaf and Bowl stall — has just confirmed she knows the node count, waiting for him to name it aloud",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -5889,7 +5854,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "The Working Model's read of the reclamation site as a spread, not a point — intake valves, chambers, arrays — hints that the site could be…",
@@ -6201,11 +6166,11 @@
     "reason": 7,
     "insight": 7,
     "presence": 9,
-    "rapport": 6,
+    "rapport": 7,
     "craft": 9,
     "wits": 6
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 1,
   "discoveries": [
     {
@@ -7673,22 +7638,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.481664801276537,
-    "cerebral": 21.837120696423575,
-    "social": 9.073416329908394,
-    "generous": 4.135062770850357,
-    "cautious": 9.356316133370502,
-    "physical": 1.3645824566760494,
-    "risky": 0.3272994346136949,
-    "ruthless": 0.7123939162921302,
-    "carousing": 0.1158263357106631,
-    "amorous": 0.42577700055863915,
-    "patient": 0.25800803045133797,
-    "stealth": 0.00002489752732449569,
-    "devotion": 1.0173951691510021,
-    "craft": 0.8835575559487511,
-    "leadership": 0.3842014983041472,
-    "deception": 0.11923059704378171
+    "strategic": 18.044623181244624,
+    "cerebral": 22.291192679012987,
+    "social": 8.846580921660683,
+    "generous": 4.031686201579098,
+    "cautious": 9.122408230036239,
+    "physical": 1.3304678952591482,
+    "risky": 0.3191169487483525,
+    "ruthless": 0.694584068384827,
+    "carousing": 0.11293067731789652,
+    "amorous": 0.41513257554467314,
+    "patient": 0.2515578296900545,
+    "stealth": 0.000024275089141383298,
+    "devotion": 0.9919602899222271,
+    "craft": 0.8614686170500323,
+    "leadership": 0.37459646084654347,
+    "deception": 0.11624983211768716
   },
   "aptitudes": [
     "strategist",
@@ -7697,7 +7662,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 906,
+  "actionCount": 907,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -8111,8 +8076,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785208189817,
-  "rev": 1614,
+  "updatedAt": 1785208916883,
+  "rev": 1616,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11217,7 +11182,7 @@
       "marrow-s-wings": 3,
       "ask_the_dead": 2,
       "the_warding_mark": 3,
-      "the_working_model": 12,
+      "the_working_model": 13,
       "the-held-place": 1,
       "braid_deathsense_order_sense": 2,
       "the-declared-threshold": 1,
@@ -11302,7 +11267,7 @@
       "marrow-s-wings": 25,
       "ask_the_dead": 26,
       "the_warding_mark": 25,
-      "the_working_model": 27,
+      "the_working_model": 28,
       "the-held-place": 24,
       "the_grey_hand": 24,
       "the_ended_threat": 25,
@@ -11959,7 +11924,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 112
+    "the_center": 113
   },
   "foreclosed": [
     "rootkin",
@@ -12153,10 +12118,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T03:09:49.814Z",
+      "lastAt": "2026-07-28T03:21:56.881Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 19
+      "beats": 20
     }
   ],
   "company": [
@@ -12504,15 +12469,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 279,
-    "choices": 278,
+    "sceneSummary": 280,
+    "choices": 279,
     "characterDeltas": 120,
-    "scene": 279,
-    "npcUpdates": 249,
+    "scene": 280,
+    "npcUpdates": 250,
     "factUpdates": 22,
     "placeUpdates": 52,
-    "codexUpdates": 175,
-    "timeOps": 270,
+    "codexUpdates": 176,
+    "timeOps": 271,
     "imagePrompt": 7,
     "sceneEnded": 64,
     "itemUpdates": 5,
@@ -12532,7 +12497,7 @@
     "newEncounter": 1,
     "encounterOps": 1
   },
-  "_opTurns": 279,
+  "_opTurns": 280,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

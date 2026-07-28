@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 28,
-  "xp": 2763,
+  "xp": 2766,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -189,7 +189,7 @@
   "maxHealth": 165,
   "health": 165,
   "maxEnergy": 235,
-  "energy": 222,
+  "energy": 217,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1947,48 +1947,54 @@
         "player": "Speak to Logana directly — tell her what has changed upstream and what her watch is now",
         "summary": "Silas tells Logana what has changed — the node is quiet, the upstream claim is finished — and she receives it.",
         "narration": "You step up close to Logana and speak plainly, the way you would to anyone who deserved the truth of their situation.\n\n\"The reclamation site is closed,\" you tell her. \"The node below you has gone quiet. The upstream pressure is gone. You are not anchoring anything anymore — just holding the ground.\"\n\nShe does not move for a moment. Then her skull tilts, just slightly, the way it did when you gave her the perimeter charge the first time. Not a nod, exactly. A receipt.\n\n\"Your watch stands,\" you say. \"That has not changed. But the thing that was asking something of you is finished asking. Whatever you carry from the Zone now, you carry clean.\"\n\nVeth speaks from two paces behind you, her voice even. \"She heard it,\" said Veth. \"You can see it in how she settled.\"\n\nPell says nothing, but she has her arms crossed and is looking at Logana the way she looks at a piece of ironwork she is deciding whether to trust. Memory shifts against her back as she shifts her weight.\n\nAbove, Huginn makes one sound — not a croak, something shorter — and then is quiet again. Logana's eye-hollows remain fixed on you, and the morning is still around all of you, the frost softening, the mist beginning to lift from between the trees."
+      },
+      {
+        "player": "Actually Logana - I have a continuing need for a guardian.  I would like for you to travel along with us.  Still a protector and guardian, but now for our party... for myself and Pell in particular. ",
+        "summary": "Silas asks Logana to join the party as guardian — she accepts, but stands at the clearing's edge a moment longer, deciding what she carries forward from the watch she held.",
+        "narration": "You turn to face Logana directly and speak without preamble.\n\n\"Actually, Logana — I have a continuing need for a guardian. I would like for you to travel with us. Still a protector, still a guardian — but now for our party. For myself and Pell in particular.\"\n\nShe is still for a long moment. Her skull does not tilt. The bone-pale frame stands at the downed tree's edge and regards you with the patient attention of something that has been given one purpose and is being offered another.\n\nThen she steps forward — one deliberate pace, then a second, until she stands three feet in front of you. Her head drops a fraction, the way a dog's does when it presses toward a hand. Not subservience. Recognition. The Zone-thread in her warding has gone quiet with the node, but she is not empty because of it. She is simply more entirely yours than she was this morning.\n\nBut she does not fall into step behind you. She stays where she is and looks back once at the downed tree — at the clearing, at the ground she has been holding — and something in the angle of her skull reads as a question she is not yet done with. The old watch is finished. She accepts the new one. The hesitation is not refusal; it is the pause of something that has not decided yet whether a place can be left, or whether it carries forward in the frame.\n\nVeth speaks from behind you, quiet and plain. \"She says yes,\" Veth says. \"But she is deciding what she carries with her. Give her a moment.\"\n\nPell, arms still crossed, watches Logana's stationary frame and says nothing. But she shifts her weight forward — a fractional move, the kind that means she is paying closer attention now."
       }
     ],
     "lastTurn": {
-      "narration": "You step up close to Logana and speak plainly, the way you would to anyone who deserved the truth of their situation.\n\n\"The reclamation site is closed,\" you tell her. \"The node below you has gone quiet. The upstream pressure is gone. You are not anchoring anything anymore — just holding the ground.\"\n\nShe does not move for a moment. Then her skull tilts, just slightly, the way it did when you gave her the perimeter charge the first time. Not a nod, exactly. A receipt.\n\n\"Your watch stands,\" you say. \"That has not changed. But the thing that was asking something of you is finished asking. Whatever you carry from the Zone now, you carry clean.\"\n\nVeth speaks from two paces behind you, her voice even. \"She heard it,\" said Veth. \"You can see it in how she settled.\"\n\nPell says nothing, but she has her arms crossed and is looking at Logana the way she looks at a piece of ironwork she is deciding whether to trust. Memory shifts against her back as she shifts her weight.\n\nAbove, Huginn makes one sound — not a croak, something shorter — and then is quiet again. Logana's eye-hollows remain fixed on you, and the morning is still around all of you, the frost softening, the mist beginning to lift from between the trees.",
-      "sceneSummary": "Silas tells Logana what has changed — the node is quiet, the upstream claim is finished — and she receives it.",
+      "narration": "You turn to face Logana directly and speak without preamble.\n\n\"Actually, Logana — I have a continuing need for a guardian. I would like for you to travel with us. Still a protector, still a guardian — but now for our party. For myself and Pell in particular.\"\n\nShe is still for a long moment. Her skull does not tilt. The bone-pale frame stands at the downed tree's edge and regards you with the patient attention of something that has been given one purpose and is being offered another.\n\nThen she steps forward — one deliberate pace, then a second, until she stands three feet in front of you. Her head drops a fraction, the way a dog's does when it presses toward a hand. Not subservience. Recognition. The Zone-thread in her warding has gone quiet with the node, but she is not empty because of it. She is simply more entirely yours than she was this morning.\n\nBut she does not fall into step behind you. She stays where she is and looks back once at the downed tree — at the clearing, at the ground she has been holding — and something in the angle of her skull reads as a question she is not yet done with. The old watch is finished. She accepts the new one. The hesitation is not refusal; it is the pause of something that has not decided yet whether a place can be left, or whether it carries forward in the frame.\n\nVeth speaks from behind you, quiet and plain. \"She says yes,\" Veth says. \"But she is deciding what she carries with her. Give her a moment.\"\n\nPell, arms still crossed, watches Logana's stationary frame and says nothing. But she shifts her weight forward — a fractional move, the kind that means she is paying closer attention now.",
+      "sceneSummary": "Silas asks Logana to join the party as guardian — she accepts, but stands at the clearing's edge a moment longer, deciding what she carries forward from the watch she held.",
       "choices": [
         {
-          "label": "Ask Huginn what he reads in her now — whether the Zone-thread has settled or still claims part of her",
+          "label": "Wait. Let her take the moment she needs — then walk when she walks.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "careful",
+            "sustain"
           ],
           "trivial": true
         },
         {
-          "label": "Use The Attended End — read Logana plainly and name what is ending in her situation, if anything is",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Give her a new charge — name what her watch is for now that the node is quiet, in plain words",
+          "label": "Give her something plain to anchor to — name Pell aloud to her as the one she guards most closely, so she has a person, not just a purpose.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "lead"
+            "lead",
+            "command"
           ],
           "trivial": true
         },
         {
-          "label": "Head to the made gate — the work here is done; time to go home",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Use The Attended End — read what she is still holding from the old watch, so you know what she carries forward before she does.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2
+        },
+        {
+          "label": "Head to the made gate and step through — she will follow or she will not, and that is also an answer.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
             "travel"
@@ -1996,53 +2002,49 @@
           "trivial": true
         }
       ],
-      "scene": {
-        "setting": "The wolverine clearing on the left-branch road, Disputed Zone. Dawn, frost softening where light reaches, mist still low between trees. Downed tree at the clearing's edge.",
-        "npcsPresent": [
-          {
-            "name": "Logana",
-            "state": "Standing at the downed tree's edge, skull tilted slightly — the receipt of what was said. Still and aware."
-          },
-          {
-            "name": "Pell Ran Marsh",
-            "state": "Two paces back, arms crossed, watching Logana with a weighing look."
-          },
-          {
-            "name": "Veth (Stillwater) Ondra",
-            "state": "Two paces behind, having named aloud that Logana heard it."
-          },
-          {
-            "name": "Huginn",
-            "state": "On a branch above Logana, quiet after his one short sound."
-          }
-        ],
-        "objects": [
-          "Logana — bone-pale guardian frame, Zone-lattice thread present but settled",
-          "Downed tree at the clearing's edge",
-          "Relay node below the clearing floor — quiet, no longer active",
-          "Frost on the ground, softening in early light"
-        ],
-        "threads": [
-          "The Zone-thread's state in Logana — settled or still claiming her?",
-          "The waygate home stands a short walk back down the path"
-        ]
-      },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "logana",
           "name": "Logana",
-          "note": "Received plain news of the node's silence and her changed watch — acknowledged with a tilt of the skull.",
+          "note": "Accepted the offer to travel as party guardian — stepped forward in receipt, then paused at the clearing's edge, still deciding what she carries forward from the watch she held.",
           "learned": [
-            "The reclamation site is closed and the relay node has gone quiet — the upstream claim on her warding is finished.",
-            "Her guardian watch stands unchanged; what she carries from the Zone now, she carries clean."
+            "She is being asked to leave the watch-ground and carry her guardian-purpose forward into the world with the party; the old node-anchor is gone but the clearing still holds something for her."
           ],
-          "statusNote": "Standing watch at the downed tree's clearing. Node-anchor claim resolved; guardian-purpose active and settled."
+          "statusNote": "At the downed tree's clearing — accepted the new guardian charge, pausing before she follows.",
+          "relationshipDelta": 1
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short walk back and a plain exchange — a few minutes at most."
+      "scene": {
+        "setting": "The wolverine clearing on the left-branch road, Disputed Zone. Dawn, frost softening where light reaches, mist still low between trees. Downed tree at the clearing's edge.",
+        "npcsPresent": [
+          {
+            "name": "Logana",
+            "state": "Three feet in front of Silas — stepped forward in receipt of the new charge, but standing still, skull angled back once toward the downed tree and the clearing ground she held."
+          },
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Two paces back, weight shifted forward, watching Logana with close attention."
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "Behind the group — named Logana's hesitation plainly as a decision, not a refusal."
+          },
+          {
+            "name": "Huginn",
+            "state": "On a branch above the clearing, patient and still."
+          }
+        ],
+        "objects": [
+          "Logana — bone-pale guardian frame, Zone-lattice thread settled, new guardian-purpose received",
+          "Downed tree at the clearing's edge",
+          "Relay node below the clearing floor — quiet, no longer active",
+          "Frost on the ground, softening in early light"
+        ],
+        "threads": [
+          "Logana's pause — deciding what she carries forward from the old watch before she steps away from this ground",
+          "The waygate home stands a short walk back down the path"
+        ]
       },
       "codexUpdates": [
         {
@@ -2050,11 +2052,18 @@
           "label": "Logana",
           "kind": "person",
           "entityId": "logana",
-          "fact": "Told plainly at dawn that the relay node is quiet and the upstream claim on her warding is finished. She received it. Her watch continues, but she carries it clean now.",
+          "fact": "Accepted the charge of party guardian — stepped forward in receipt, then paused at the clearing's edge before leaving, deciding what she carries from the watch she held.",
           "links": [
-            "the-water-crisis",
+            "the-ashwarden-thread",
             "the-second-thread"
           ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Logana accepted the charge of party guardian on Day 14 at dawn — Silas Weir named her purpose plainly, she stepped forward in receipt. She now travels with the party as protector, with Silas and Pell named as her primary charges.",
+          "subjectId": "logana"
         }
       ]
     },
@@ -2063,29 +2072,29 @@
       "npcsPresent": [
         {
           "name": "Logana",
-          "state": "Standing at the downed tree's edge, skull tilted slightly — the receipt of what was said. Still and aware."
+          "state": "Three feet in front of Silas — stepped forward in receipt of the new charge, but standing still, skull angled back once "
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Two paces back, arms crossed, watching Logana with a weighing look."
+          "state": "Two paces back, weight shifted forward, watching Logana with close attention."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Two paces behind, having named aloud that Logana heard it."
+          "state": "Behind the group — named Logana's hesitation plainly as a decision, not a refusal."
         },
         {
           "name": "Huginn",
-          "state": "On a branch above Logana, quiet after his one short sound."
+          "state": "On a branch above the clearing, patient and still."
         }
       ],
       "objects": [
-        "Logana — bone-pale guardian frame, Zone-lattice thread present but settled",
+        "Logana — bone-pale guardian frame, Zone-lattice thread settled, new guardian-pur",
         "Downed tree at the clearing's edge",
         "Relay node below the clearing floor — quiet, no longer active",
         "Frost on the ground, softening in early light"
       ],
       "threads": [
-        "The Zone-thread's state in Logana — settled or still claiming her?",
+        "Logana's pause — deciding what she carries forward from the old watch before she steps away from this ground",
         "The waygate home stands a short walk back down the path"
       ]
     }
@@ -2093,7 +2102,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 14,
-    "hour": 6,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -4637,14 +4646,15 @@
         "locationId": "gen-disputed-zone-left-branch-entrance",
         "day": 14
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d14] Named Logana by Silas at the working's completion — the name seated into the ward. She turned toward the relay node, then Silas, then south. Not obedient; aware.",
         "[d14] Order-Sense surge-read reveals the Zone uses her as a structural anchor for the relay node — not hostile, but the boundary between maker's warding and lattice-claim cannot be fully resolved in this substrate.",
         "[d14] Given a plain verbal perimeter charge by Silas — acknowledged with a deliberate tilt of the skull. Now stationary at the downed tree's base.",
         "[d14] Found unchanged at the relay node — guardian-purpose active, Zone-thread present, skull angled toward the party's approach. Watched through the night. Nothing crossed.",
         "[d14] The relay node's circuit went quiet when the reclamation site closed. The Zone-thread in her warding has shifted with it — the knot between guardian-purpose and lattice-claim is looser than it was at dawn.",
-        "[d14] Received plain news of the node's silence and her changed watch — acknowledged with a tilt of the skull."
+        "[d14] Received plain news of the node's silence and her changed watch — acknowledged with a tilt of the skull.",
+        "[d14] Accepted the offer to travel as party guardian — stepped forward in receipt, then paused at the clearing's edge, still deciding what she carries forward from the watch she held."
       ],
       "knownFacts": [
         "Her bones hold eleven years of hard country and Zone-densening",
@@ -4653,7 +4663,8 @@
         "The boundary between Silas's guardian-purpose and the Zone's hold cannot be distinguished in the thin substrate without a longer, calmer reading.",
         "The Zone-thread's hold on her warding eases when the feed from the reclamation site stops — not resolved, but the boundary reads cleaner in the quieter substrate.",
         "The reclamation site is closed and the relay node has gone quiet — the upstream claim on her warding is finished.",
-        "Her guardian watch stands unchanged; what she carries from the Zone now, she carries clean."
+        "Her guardian watch stands unchanged; what she carries from the Zone now, she carries clean.",
+        "She is being asked to leave the watch-ground and carry her guardian-purpose forward into the world with the party; the old node-anchor is gone but the clearing still holds something for her."
       ],
       "skillsObserved": [
         "stood and oriented without command — the guardian-purpose is"
@@ -4661,7 +4672,7 @@
       "status": "active",
       "gender": "female creature",
       "pronouns": "she/her",
-      "statusNote": "Standing watch at the downed tree's clearing. Node-anchor claim resolved; guardian-purpose active and settled.",
+      "statusNote": "At the downed tree's clearing — accepted the new guardian charge, pausing before she follows.",
       "lastSeen": {
         "locationId": "gen-the-made-gate",
         "day": 14
@@ -5740,7 +5751,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Huginn's single sound at the exact moment of the wolverine's death — timed, as Huginn's sounds always are, and a comment",
@@ -7508,22 +7519,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.35312363072339,
-    "cerebral": 20.000834781796357,
-    "social": 6.659334157019846,
-    "generous": 4.409179364550107,
-    "cautious": 9.137457907963256,
-    "physical": 1.8490318635437393,
-    "risky": 0.44349616291765304,
-    "ruthless": 0.9653055732721996,
-    "carousing": 0.1569466061349,
-    "amorous": 0.5769348982506396,
-    "patient": 0.3496051609198887,
-    "stealth": 0.000033736562507612846,
-    "devotion": 1.3785873300452884,
-    "craft": 1.1972351441507032,
-    "leadership": 0.5205994030701968,
-    "deception": 0.16155943670880246
+    "strategic": 20.819295539955302,
+    "cerebral": 19.50081391225145,
+    "social": 8.492850803094349,
+    "generous": 4.298949880436354,
+    "cautious": 8.909021460264174,
+    "physical": 1.8028060669551458,
+    "risky": 0.4324087588447117,
+    "ruthless": 0.9411729339403946,
+    "carousing": 0.1530229409815275,
+    "amorous": 0.5625115257943736,
+    "patient": 0.3408650318968915,
+    "stealth": 0.000032893148444922524,
+    "devotion": 1.3441226467941563,
+    "craft": 1.1673042655469357,
+    "leadership": 0.5075844179934419,
+    "deception": 0.1575204507910824
   },
   "aptitudes": [
     "strategist",
@@ -7532,7 +7543,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 894,
+  "actionCount": 895,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7922,8 +7933,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785202266163,
-  "rev": 1586,
+  "updatedAt": 1785202391213,
+  "rev": 1587,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10609,12 +10620,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "cassiel-ord",
-      "text": "Veth Ondra named the hollow's eleven-year question aloud to Cassiel — a completion, not a beginning — and he received it without ceremony. The question is closed.",
-      "day": 6,
-      "subjectId": "cassiel-ord"
-    },
-    {
       "id": "stillwaters-trouble",
       "text": "Silas Weir named and claimed the Raven's Home warden post as his own Ashwarden base on World-day 19 — naming it Stillwater's Trouble aloud, hand on the door, Order-Sense seating the name into the March's design. The post now belongs to him.",
       "day": 6,
@@ -10847,6 +10852,12 @@
       "text": "a MADE gate is proof of the new domain's argument — nudges The Second Manifestation arc: a new way of making has manifested where none was",
       "day": 14,
       "subjectId": null
+    },
+    {
+      "id": "logana",
+      "text": "Logana accepted the charge of party guardian on Day 14 at dawn — Silas Weir named her purpose plainly, she stepped forward in receipt. She now travels with the party as protector, with Silas and Pell named as her primary charges.",
+      "day": 14,
+      "subjectId": "logana"
     }
   ],
   "practice": {
@@ -11614,7 +11625,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 97
+    "the_center": 98
   },
   "foreclosed": [
     "rootkin",
@@ -11808,10 +11819,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T01:31:06.162Z",
+      "lastAt": "2026-07-28T01:33:11.212Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -12139,14 +12150,14 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 265,
-    "choices": 264,
+    "sceneSummary": 266,
+    "choices": 265,
     "characterDeltas": 112,
-    "scene": 265,
-    "npcUpdates": 237,
-    "factUpdates": 21,
+    "scene": 266,
+    "npcUpdates": 238,
+    "factUpdates": 22,
     "placeUpdates": 51,
-    "codexUpdates": 168,
+    "codexUpdates": 169,
     "timeOps": 258,
     "imagePrompt": 7,
     "sceneEnded": 64,
@@ -12165,7 +12176,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 265,
+  "_opTurns": 266,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

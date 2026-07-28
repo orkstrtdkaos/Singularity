@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 28,
-  "xp": 2782,
+  "xp": 2787,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -189,7 +189,7 @@
   "maxHealth": 165,
   "health": 165,
   "maxEnergy": 235,
-  "energy": 206,
+  "energy": 204,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1964,157 +1964,135 @@
         "player": "Offer her something practical along with your answer — a Pre-Transition Filter Cloth from your pack, for a stall that is boiling everything twice.",
         "summary": "Silas gives Bren the truth about the water and leaves a Pre-Transition Filter Cloth on the counter — the debt settled, the question answered, the stall's business complete.",
         "narration": "You tell Bren the truth plainly. The water upstream is addressed — the source has been given its closing instruction, and the wells will begin to clear. The downstream wells will clear first. The wider watershed will follow on its own schedule, a week or two behind. You do not dress it up. You do not promise faster than it will happen.\n\nBren is quiet for a moment. Two children in the back house, a stall that has been boiling everything twice, and a ledger full of careful accounting — she takes the answer the way she takes the ledger back, with both hands. She says: good. Just that. Good.\n\nThen you reach into the Traveler's Pack and pull out the Pre-Transition Filter Cloth. You set it on the counter and tell her what it is — tight-woven, pre-Transition manufacture, will strain contaminated water clean through multiple passes and save her the fuel while she waits for the watershed to follow. She looks at it for a moment, then picks it up. She turns it over once. Her hands know cloth, and they know this is something different from ordinary linen.\n\nShe looks up and says she did not ask for this. You tell her you know. She tucks it under the counter without ceremony, then nods at you once — the nod of someone who has filed a thing correctly and is satisfied. Huginn ruffles once on the post and turns its head toward the mill. Pell is still at your shoulder, watching the row. The Sheaf and Bowl's business with you is done."
+      },
+      {
+        "player": "Use The Attended End on Huginn's glance — read what is ending near the mill",
+        "summary": "Silas read the mill's ending through The Attended End — a tenure near its close, a day or two left in it.",
+        "narration": "You follow Huginn's gaze toward the mill. The bird has not looked away since the transaction closed, and that quality of attention — unhurried, final — is one you have learned to read correctly.\n\nYou let The Attended End open quietly. Conserved, not pushed: a single clean read, the way you might lay a hand on a door to feel what is behind it before you open it.\n\nWhat you receive is plain. Something at the mill is ending — not a person, not a life. A tenure. A long-held thing whose time has quietly run out, like a candle that has burned all the way to the tray and is still throwing light, only just. It has perhaps a day in it. Two at most.\n\nHuginn turns its head toward you. One slow blink. It already knew. It was waiting for you to know also."
       }
     ],
     "lastTurn": {
-      "narration": "You tell Bren the truth plainly. The water upstream is addressed — the source has been given its closing instruction, and the wells will begin to clear. The downstream wells will clear first. The wider watershed will follow on its own schedule, a week or two behind. You do not dress it up. You do not promise faster than it will happen.\n\nBren is quiet for a moment. Two children in the back house, a stall that has been boiling everything twice, and a ledger full of careful accounting — she takes the answer the way she takes the ledger back, with both hands. She says: good. Just that. Good.\n\nThen you reach into the Traveler's Pack and pull out the Pre-Transition Filter Cloth. You set it on the counter and tell her what it is — tight-woven, pre-Transition manufacture, will strain contaminated water clean through multiple passes and save her the fuel while she waits for the watershed to follow. She looks at it for a moment, then picks it up. She turns it over once. Her hands know cloth, and they know this is something different from ordinary linen.\n\nShe looks up and says she did not ask for this. You tell her you know. She tucks it under the counter without ceremony, then nods at you once — the nod of someone who has filed a thing correctly and is satisfied. Huginn ruffles once on the post and turns its head toward the mill. Pell is still at your shoulder, watching the row. The Sheaf and Bowl's business with you is done.",
-      "sceneSummary": "Silas gives Bren the truth about the water and leaves a Pre-Transition Filter Cloth on the counter — the debt settled, the question answered, the stall's business complete.",
+      "narration": "You follow Huginn's gaze toward the mill. The bird has not looked away since the transaction closed, and that quality of attention — unhurried, final — is one you have learned to read correctly.\n\nYou let The Attended End open quietly. Conserved, not pushed: a single clean read, the way you might lay a hand on a door to feel what is behind it before you open it.\n\nWhat you receive is plain. Something at the mill is ending — not a person, not a life. A tenure. A long-held thing whose time has quietly run out, like a candle that has burned all the way to the tray and is still throwing light, only just. It has perhaps a day in it. Two at most.\n\nHuginn turns its head toward you. One slow blink. It already knew. It was waiting for you to know also.",
+      "sceneSummary": "Silas read the mill's ending through The Attended End — a tenure near its close, a day or two left in it.",
       "choices": [
         {
-          "label": "Follow Huginn's glance — head toward the mill to see what the bird marked",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Use The Attended End on Huginn's glance — read what is ending near the mill",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Ask Pell what she read from the row while you were at the counter",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "trivial": true
-        },
-        {
-          "label": "Move on — the market row is waking and you have standing here; walk it and see who approaches",
+          "label": "Walk to the mill now and find out whose tenure it is.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Huginn plainly — is the ending at the mill one that needs attending, or one that should simply be allowed?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Bring Veth into it — describe what you read and ask what she would do with a tenure ending that close.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "File it and move on. You read it; you know. The waygate and the road forward are what the morning is for.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
             "travel"
           ],
-          "abilityId": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "inventoryRemove": [
-          "Pre-Transition Filter Cloth"
-        ]
-      },
       "scene": {
-        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, ledger returned to Bren, both sums settled, the filter cloth tucked under the counter. The row is waking around you.",
+        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, transaction complete. Huginn is on the corner-post, still facing the mill.",
         "npcsPresent": [
           {
-            "name": "Bren",
-            "state": "Standing behind the counter, ledger in hand, the filter cloth stowed — the transaction complete, watching Silas depart."
+            "name": "Bren Thalle",
+            "state": "Behind the counter, ledger in hand, the filter cloth stowed — watching the row with the settled look of someone whose business is concluded."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "A step behind, still, watching the market row."
+            "state": "A step behind Silas, still, watching the mill now that Huginn's gaze has held there."
           },
           {
             "name": "Veth Ondra",
-            "state": "A few paces off, watching the row rather than the counter."
+            "state": "A few paces off, her attention moving between the mill and Silas's face."
           },
           {
             "name": "Huginn",
-            "state": "Turned its head toward the mill and settled there — watching something that way."
+            "state": "On the corner-post, facing the mill — one slow blink given to Silas in acknowledgment, then back to watching."
           }
         ],
         "objects": [
           "Painted sign above the stall: a sheaf of rye and a clay bowl",
           "Market stalls opening around the row",
-          "Ledger — back in Bren's hands, closed"
+          "Ledger — back in Bren's hands, closed",
+          "Pre-Transition Filter Cloth — stowed under Bren's counter"
         ],
         "threads": [
-          "Huginn's gaze toward the mill — the bird marked something that way and has not looked away",
-          "The market row is active; the party's standing here is real and visible"
+          "Something at the mill is ending — a tenure, not a life. A day or two left in it.",
+          "Huginn was already watching and already knew — it waited for Silas to read it."
         ]
       },
-      "npcUpdates": [
+      "codexUpdates": [
         {
-          "op": "update",
-          "npcId": "bren-thalle",
-          "name": "Bren Thalle",
-          "note": "Received the truth about the water plainly — wells clear first, watershed follows. Accepted the Pre-Transition Filter Cloth without ceremony. Filed both correctly and nodded once in acknowledgment. The debt is settled and Bren is satisfied.",
-          "learned": [
-            "The downstream wells will clear before the watershed — a week or two of waiting, no more.",
-            "Silas Weir gave her a Pre-Transition Filter Cloth without being asked — a practical gift, not sentiment."
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "At her stall on the Crossing market row — business with Silas concluded, the cloth stowed, watching the row."
+          "topic": "the-crossing-mill-tenure",
+          "label": "The Mill's Ending",
+          "kind": "event",
+          "fact": "The Attended End read a tenure ending at the Crossing mill — not a life, a long-held role or holding. A day or two remaining. Huginn had already marked it.",
+          "links": [
+            "millbrook",
+            "the-water-crisis"
+          ]
         }
       ],
-      "offer": {
-        "thing": "Huginn's sustained gaze toward the mill — the bird has not moved its attention since the payment was made, and that kind of attention, from Huginn, is never idle.",
-        "from": "What Huginn knows: when a thing is ending, how, and roughly when — it does not look without reason, and the mill is where Edvar Crane's twenty-year watch began."
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the stall — the payment, the answer, the gift. A quarter-hour at most."
-      },
-      "deeds": [
-        {
-          "description": "Told Bren Thalle plainly when the water would clear and left a Pre-Transition Filter Cloth on her counter without being asked.",
-          "tags": [
-            "community",
-            "practical",
-            "generous"
-          ],
-          "weight": 1,
-          "communityId": "center.crossing"
-        }
-      ]
+        "why": "a quick read at the stall's edge"
+      }
     },
     "sceneState": {
-      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, ledger returned to Bren, both sums settled, the filter cloth tucked under the counter. The row is waking around you.",
+      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, transaction complete. Huginn is on the corner-post, still facing the mill.",
       "npcsPresent": [
         {
-          "name": "Bren",
-          "state": "Standing behind the counter, ledger in hand, the filter cloth stowed — the transaction complete, watching Silas depart."
+          "name": "Bren Thalle",
+          "state": "Behind the counter, ledger in hand, the filter cloth stowed — watching the row with the settled look of someone whose bu"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "A step behind, still, watching the market row."
+          "state": "A step behind Silas, still, watching the mill now that Huginn's gaze has held there."
         },
         {
           "name": "Veth Ondra",
-          "state": "A few paces off, watching the row rather than the counter."
+          "state": "A few paces off, her attention moving between the mill and Silas's face."
         },
         {
           "name": "Huginn",
-          "state": "Turned its head toward the mill and settled there — watching something that way."
+          "state": "On the corner-post, facing the mill — one slow blink given to Silas in acknowledgment, then back to watching."
         }
       ],
       "objects": [
         "Painted sign above the stall: a sheaf of rye and a clay bowl",
         "Market stalls opening around the row",
-        "Ledger — back in Bren's hands, closed"
+        "Ledger — back in Bren's hands, closed",
+        "Pre-Transition Filter Cloth — stowed under Bren's counter"
       ],
       "threads": [
-        "Huginn's gaze toward the mill — the bird marked something that way and has not looked away",
-        "The market row is active; the party's standing here is real and visible"
+        "Something at the mill is ending — a tenure, not a life. A day or two left in it.",
+        "Huginn was already watching and already knew — it waited for Silas to read it."
       ]
     }
   },
@@ -5777,7 +5755,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The Working Model's read of the reclamation site as a spread, not a point — intake valves, chambers, arrays — hints that the site could be…",
@@ -6058,21 +6036,6 @@
       }
     },
     "pressureQueue": [
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
-        "subjectId": "beast_warpling_hare",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "A warpling hare has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_warpling_hare",
-          "name": "warpling hare"
-        },
-        "addedDay": 14,
-        "locationId": "the_crossing"
-      },
       {
         "source": "npc-want",
         "kind": "npc-want",
@@ -7589,22 +7552,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 18.78888473867989,
-    "cerebral": 20.43797051956953,
-    "social": 9.245938910276385,
-    "generous": 4.693091569979765,
-    "cautious": 9.484005195292887,
-    "physical": 1.5487335450174236,
-    "risky": 0.37146865780922433,
-    "ruthless": 0.8085318333312568,
-    "carousing": 0.13145715792690943,
-    "amorous": 0.48323582077137256,
-    "patient": 0.2928263438306281,
-    "stealth": 0.000028257461149955557,
-    "devotion": 1.1546931585512068,
-    "craft": 1.0027940921830973,
-    "leadership": 0.4360496835925878,
-    "deception": 0.13532082603784878
+    "strategic": 18.319162620212893,
+    "cerebral": 20.92702125658029,
+    "social": 9.014790437519475,
+    "generous": 4.5757642807302705,
+    "cautious": 9.246905065410566,
+    "physical": 1.5100152063919878,
+    "risky": 0.36218194136399373,
+    "ruthless": 0.7883185374979753,
+    "carousing": 0.1281707289787367,
+    "amorous": 0.47115492525208824,
+    "patient": 0.2855056852348624,
+    "stealth": 0.00002755102462120667,
+    "devotion": 1.1258258295874266,
+    "craft": 0.9777242398785199,
+    "leadership": 0.4251484415027731,
+    "deception": 0.13193780538690256
   },
   "aptitudes": [
     "strategist",
@@ -7613,7 +7576,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 901,
+  "actionCount": 902,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -8019,8 +7982,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785207260104,
-  "rev": 1600,
+  "updatedAt": 1785207441952,
+  "rev": 1601,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11109,7 +11072,7 @@
       "palework": 31,
       "deathsense": 44,
       "shadowstep": 25,
-      "the-attended-end": 45,
+      "the-attended-end": 46,
       "wildcraft": 6,
       "the_raised_thing": 18,
       "the_ended_threat": 6,
@@ -11865,7 +11828,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 105
+    "the_center": 106
   },
   "foreclosed": [
     "rootkin",
@@ -12059,10 +12022,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T02:54:20.102Z",
+      "lastAt": "2026-07-28T02:57:21.951Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 12
+      "beats": 13
     }
   ],
   "company": [
@@ -12390,15 +12353,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 272,
-    "choices": 271,
+    "sceneSummary": 273,
+    "choices": 272,
     "characterDeltas": 116,
-    "scene": 272,
+    "scene": 273,
     "npcUpdates": 243,
     "factUpdates": 22,
     "placeUpdates": 51,
-    "codexUpdates": 170,
-    "timeOps": 263,
+    "codexUpdates": 171,
+    "timeOps": 264,
     "imagePrompt": 7,
     "sceneEnded": 64,
     "itemUpdates": 5,
@@ -12416,7 +12379,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 272,
+  "_opTurns": 273,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

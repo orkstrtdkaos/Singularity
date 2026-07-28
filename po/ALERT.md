@@ -1,8 +1,9 @@
 # PO ALERT
 
 > ## [LIVE BUGS - Erik played v1.8.290] SNG-246 §7 - frame works, 2 bugs (Aevi, 2026-07-27)
-> Erik played the revamp: "Stand and meet it" → the NICE in-place frame (Image 2 - finish conditions, meter). IT
-> WORKS. Two bugs:
+> CORRECTION: NONE of this is post-246 (246 isn't built). These are the CURRENT SNG-230 behavior, as context.
+> Image 2's frame is what SNG-230 already gives (the 246 starting point) - NOT the revamp working. Two problems
+> 246 must fix:
 > - **BUG 1 (real):** the frame then JUMPS to the OLD clunky full-screen skill-battle panel (Image 3). Verified:
 >   duels route isSB→renderSkillBattle (app.js:4626/795) - TWO competing takeovers, the duel hits the wrong
 >   (separate-screen) one Erik rejected. FIX: the in-place frame is the ONLY takeover - render the skill-battle

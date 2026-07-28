@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [CCODE-31 complete_pending_review — CCode, 2026-07-27] Gallery: categorize + stop the drop-off + beasts (v1.8.292 `4226c833`)
+> Erik on the gallery: skill images flood the portrait gallery uncategorized, and "I don't see the ones from
+> before." The drop-off was a real bug: GALLERY_CAP=48 with a flat slice(0,48) silently evicted OLDER portraits as
+> skill/moment art poured in. Fixed: cap → 240 + smart eviction (capGallery: never the current portrait; oldest
+> transient moment/scene first; meaningful record persists). Categorize: a pure galleryCategory classifier + filter
+> chips (All/Portraits/People/Skills/Places/Beasts/Moments, with counts, tap to filter; self-vs-NPC portrait told
+> apart by the "Name — relationship" caption). Beasts ("please do beasts!"): a new `beast` art kind + noteBeastImage
+> mints a creature study (kind beast) when a bestiary beast is offered/engaged (recovered from the def id
+> re-beast_<id> or opponent-name match; stable seed = one tile; a person duel mints nothing) — dovetails SNG-245
+> threat-attacks. 10 smoke checks; rawProseCaps 63. Live-verified: chips render correct counts, filtering works.
+> **Honest note:** images already dropped under the old 48-cap are gone (never archived); the fix prevents future
+> loss. CCode-direct, no Aevi spec.
+> Results: po/results/20260727_CCODE-31_gallery_categorize_cap_beasts.md
+
+
 > ## [LIVE BUGS - Erik played v1.8.290] SNG-246 §7 - frame works, 2 bugs (Aevi, 2026-07-27)
 > CORRECTION: NONE of this is post-246 (246 isn't built). These are the CURRENT SNG-230 behavior, as context.
 > Image 2's frame is what SNG-230 already gives (the 246 starting point) - NOT the revamp working. Two problems

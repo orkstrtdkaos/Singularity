@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 28,
-  "xp": 2758,
+  "xp": 2763,
   "attributes": {
     "physical": 5,
     "mental": 7,
@@ -189,7 +189,7 @@
   "maxHealth": 165,
   "health": 165,
   "maxEnergy": 235,
-  "energy": 224,
+  "energy": 222,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1937,148 +1937,150 @@
         "player": "Head to the The Made Gate",
         "summary": "The party walks the short path from the wolverine clearing to the made gate at dawn — Pell, Veth, Huginn, and Silas arriving to find it standing exactly as left, warded and whole.",
         "narration": "The road from the wolverine clearing to the made gate is short — a few hundred paces along the left-branch path, through thinning mist and the wet-grass smell of early morning. The frost has not quite lifted from the ground. Your boots press prints into it as you walk.\n\nPell falls into step at your left shoulder without a word, Memory riding easy across her back. Veth takes the right side, unhurried, eyes on the tree-line the way a warden's eyes always find the tree-line. Huginn lifts off the downed log where he was resting and crosses overhead in two wingbeats, landing on the upper edge of the gate before any of you arrive.\n\nThe gate stands exactly as you left it. The gap between the trees holds its shape — frameless, no lintel, no posts driven in, just the air between two trunks holding as a threshold holds. The shadow-frame sits inside it, just visible in the angled dawn light: the warding present, the Weirmark legible at the top of the frame if you know to look. Veth's open-hand mark is at the left upright. The gate is still, and the gate is complete.\n\nHuginn settles on the upper edge and regards you with one pale eye. He does not say anything. He does not need to."
+      },
+      {
+        "player": "Check Logana — walk back to the wolverine clearing and see how the relay node reads now that the reclamation site has gone quiet",
+        "summary": "Silas reads Logana and the relay node at dawn — the reclamation site is quiet, the node has stopped asking, and the guardian holds.",
+        "narration": "The walk back to the wolverine clearing takes less than ten minutes. The mist is still low between the trees, and the frost underfoot has begun to soften where the early light reaches the path.\n\nLogana is where you left her — standing at the downed tree's edge, her bone-pale frame upright and still. She turns her head at your approach with the slow, deliberate movement of something that is aware rather than merely alert. Huginn drops from your shoulder to a branch above her and regards her with the same patient interest he gives most things that are ending or almost-ending. She is neither.\n\nYou open your Deathsense lightly, not a full cast — just enough to feel the shape of the relay node below her feet. It is quiet now. Where the reclamation site's churn used to run underneath like a low current, there is simply the settled weight of worked ground going back to itself. The node is still there, still present as a structure, but it has stopped asking. Said Veth, from two steps behind you, \"The upstream pressure is gone. She is just holding the ground now.\"\n\nLogana holds her position at the clearing's edge. The Zone's lattice-thread in her warding is steady. She is not restless, and she is not diminished — just attending, in the way a guardian attends when there is nothing yet that needs guarding."
       }
     ],
     "lastTurn": {
-      "narration": "The road from the wolverine clearing to the made gate is short — a few hundred paces along the left-branch path, through thinning mist and the wet-grass smell of early morning. The frost has not quite lifted from the ground. Your boots press prints into it as you walk.\n\nPell falls into step at your left shoulder without a word, Memory riding easy across her back. Veth takes the right side, unhurried, eyes on the tree-line the way a warden's eyes always find the tree-line. Huginn lifts off the downed log where he was resting and crosses overhead in two wingbeats, landing on the upper edge of the gate before any of you arrive.\n\nThe gate stands exactly as you left it. The gap between the trees holds its shape — frameless, no lintel, no posts driven in, just the air between two trunks holding as a threshold holds. The shadow-frame sits inside it, just visible in the angled dawn light: the warding present, the Weirmark legible at the top of the frame if you know to look. Veth's open-hand mark is at the left upright. The gate is still, and the gate is complete.\n\nHuginn settles on the upper edge and regards you with one pale eye. He does not say anything. He does not need to.",
-      "sceneSummary": "The party walks the short path from the wolverine clearing to the made gate at dawn — Pell, Veth, Huginn, and Silas arriving to find it standing exactly as left, warded and whole.",
+      "narration": "The walk back to the wolverine clearing takes less than ten minutes. The mist is still low between the trees, and the frost underfoot has begun to soften where the early light reaches the path.\n\nLogana is where you left her — standing at the downed tree's edge, her bone-pale frame upright and still. She turns her head at your approach with the slow, deliberate movement of something that is aware rather than merely alert. Huginn drops from your shoulder to a branch above her and regards her with the same patient interest he gives most things that are ending or almost-ending. She is neither.\n\nYou open your Deathsense lightly, not a full cast — just enough to feel the shape of the relay node below her feet. It is quiet now. Where the reclamation site's churn used to run underneath like a low current, there is simply the settled weight of worked ground going back to itself. The node is still there, still present as a structure, but it has stopped asking. Said Veth, from two steps behind you, \"The upstream pressure is gone. She is just holding the ground now.\"\n\nLogana holds her position at the clearing's edge. The Zone's lattice-thread in her warding is steady. She is not restless, and she is not diminished — just attending, in the way a guardian attends when there is nothing yet that needs guarding.",
+      "sceneSummary": "Silas reads Logana and the relay node at dawn — the reclamation site is quiet, the node has stopped asking, and the guardian holds.",
       "choices": [
         {
-          "label": "Step through the gate — cross from Zone-side to the south road",
+          "label": "Ask Huginn what he reads in her — whether there is any ending still approaching Logana",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use The Attended End to confirm the node's shape — name plainly what is ending here and what is not",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Speak to Logana directly — tell her what has changed upstream and what her watch is now",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Satisfied — walk back to the made gate and take the waygate home",
           "attribute": "practical",
-          "subAttribute": "craft",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
           "trivial": true
-        },
-        {
-          "label": "Read the gate's design with Order-Sense — see how it sits in the whole of the left-branch road's structure now",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Check Logana — walk back to the wolverine clearing and see how the relay node reads now that the reclamation site has gone quiet",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask Veth what she sees when she looks at the gate — what an ashwarden reads in a made threshold",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The made gate, left-branch road, Disputed Zone. Dawn light, frost still on the ground, thinning mist. The gate stands between two trees — frameless, warded, shadow-frame barely visible in the low light. Huginn perches on the upper edge.",
+        "setting": "The wolverine clearing on the left-branch road, Disputed Zone. Dawn, frost softening where light reaches, mist still low between trees. Downed tree at the clearing's edge.",
         "npcsPresent": [
           {
+            "name": "Logana",
+            "state": "Standing at the downed tree's edge, head turned toward the party, still and aware."
+          },
+          {
             "name": "Pell Ran Marsh",
-            "state": "Standing at Silas's left shoulder, Memory across her back, watching the gate."
+            "state": "At Silas's left shoulder, watching Logana."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "At Silas's right side, eyes moving along the tree-line."
+            "state": "Two steps behind, having named the node's silence."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the upper edge of the gate, regarding the party with one pale eye."
+            "state": "Perched on a branch above Logana, regarding her with unhurried patience."
           }
         ],
         "objects": [
-          "The made gate — the gap between two trees, holding as a threshold, shadow-frame seated inside it",
-          "The Weirmark — legible at the top of the frame",
-          "Veth's open-hand mark — at the left upright",
-          "Frost on the ground"
+          "Logana — bone-pale guardian frame, Zone-lattice thread steady in her warding",
+          "Downed tree at the clearing's edge",
+          "Relay node below the clearing floor — quiet, structure present, no longer active",
+          "Frost on the ground, softening in early light"
         ],
         "threads": [
-          "The relay node beneath Logana and the Zone-thread in her warding — unexamined since the reclamation site closed",
-          "The waypost called the Whistling Woman — named and intended, not yet built",
-          "Pell's message to Mara about workers and materials — underway"
+          "The relay node is confirmed quiet — its downstream purpose and the Zone-thread's behavior now to be named",
+          "The waygate home stands a short walk back down the path"
         ]
-      },
-      "moveTo": {
-        "location": "gen-the-made-gate",
-        "why": "walked the short path from the wolverine clearing along the left-branch road"
-      },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a short walk along the left-branch path — a few hundred paces"
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Fell into step at Silas's left shoulder for the walk to the gate. No words needed.",
-          "statusNote": "Walking with the party at the made gate — dawn, left-branch road."
-        },
-        {
-          "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Took the right side of the road without prompting, eyes on the tree-line.",
-          "statusNote": "Walking with the party at the made gate — warden's watch on the tree-line."
+          "note": "Named the node's silence plainly — the upstream pressure is gone, Logana is just holding the ground now.",
+          "learned": [
+            "The relay node below the wolverine clearing has gone quiet — the reclamation site's withdrawal has stilled it."
+          ],
+          "statusNote": "Walking with the party at the wolverine clearing — confirmed Logana's state and the node's silence."
         }
       ],
-      "placeUpdates": [
+      "codexUpdates": [
         {
-          "note": "Party returned to the made gate at dawn on Day 14 — the gate stands unchanged, warded and whole, Huginn on its upper edge.",
-          "subPlace": {
-            "name": "The Made Gate",
-            "parent": "Disputed Zone — Left Branch Entrance",
-            "note": "The frameless gate between two trees — shadow-warded, Weirmark seated, Veth's open-hand mark at the left upright. Huginn's perch.",
-            "visited": true
-          }
+          "topic": "logana-wolverine-guardian",
+          "label": "Logana — Guardian of the Wolverine Clearing",
+          "kind": "lore",
+          "fact": "On Day 14 at dawn, Deathsense confirmed the relay node below Logana's post has gone quiet — the reclamation site's closure has stilled the upstream pressure. Logana holds the ground steadily, lattice-thread intact, not diminished.",
+          "links": [
+            "the-water-crisis",
+            "the-second-thread",
+            "the-made-gate"
+          ]
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Short walk to the wolverine clearing and a brief deathsense read"
+      }
     },
     "sceneState": {
-      "setting": "The made gate, left-branch road, Disputed Zone. Dawn light, frost still on the ground, thinning mist. The gate stands between two trees — frameless, warded, shadow-frame barely visible in the low light. Huginn perches on the upper edge.",
+      "setting": "The wolverine clearing on the left-branch road, Disputed Zone. Dawn, frost softening where light reaches, mist still low between trees. Downed tree at the clearing's edge.",
       "npcsPresent": [
         {
+          "name": "Logana",
+          "state": "Standing at the downed tree's edge, head turned toward the party, still and aware."
+        },
+        {
           "name": "Pell Ran Marsh",
-          "state": "Standing at Silas's left shoulder, Memory across her back, watching the gate."
+          "state": "At Silas's left shoulder, watching Logana."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "At Silas's right side, eyes moving along the tree-line."
+          "state": "Two steps behind, having named the node's silence."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the upper edge of the gate, regarding the party with one pale eye."
+          "state": "Perched on a branch above Logana, regarding her with unhurried patience."
         }
       ],
       "objects": [
-        "The made gate — the gap between two trees, holding as a threshold, shadow-frame ",
-        "The Weirmark — legible at the top of the frame",
-        "Veth's open-hand mark — at the left upright",
-        "Frost on the ground"
+        "Logana — bone-pale guardian frame, Zone-lattice thread steady in her warding",
+        "Downed tree at the clearing's edge",
+        "Relay node below the clearing floor — quiet, structure present, no longer active",
+        "Frost on the ground, softening in early light"
       ],
       "threads": [
-        "The relay node beneath Logana and the Zone-thread in her warding — unexamined since the reclamation site closed",
-        "The waypost called the Whistling Woman — named and intended, not yet built",
-        "Pell's message to Mara about workers and materials — underway"
+        "The relay node is confirmed quiet — its downstream purpose and the Zone-thread's behavior now to be named",
+        "The waygate home stands a short walk back down the path"
       ]
     }
   },
@@ -4213,7 +4215,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d14] Named the three-step plan in warden's order — relay node first, reclamation site second, the decision third. Stated plainly that the third step is not an engineering question.",
         "[d14] Named plainly that the Working Model will not answer what to decide — read Silas's face before he spoke.",
         "[d14] Stopped at the bowl's edge without speaking — she already knew what the site was.",
         "[d14] Crouched beside Silas and confirmed the instruction seated — two fingers on the rim, plain reading, no ceremony.",
@@ -4222,17 +4223,18 @@
         "[d14] Lifted her fingers from the ring and named the morning's work complete. Plain and satisfied.",
         "[d14] Named the next lesson to Silas: attend a death that cannot be helped. Recognized that Silas has been skilled at finding the thing that can be turned aside, and said plainly that the next lesson is always to sit with what cannot.",
         "[d14] Received Silas's account of the badger and the warden without ceremony. Named both as real, then held the lesson steady: what remains is a death that does not choose and cannot be turned.",
-        "[d14] Took the right side of the road without prompting, eyes on the tree-line."
+        "[d14] Took the right side of the road without prompting, eyes on the tree-line.",
+        "[d14] Named the node's silence plainly — the upstream pressure is gone, Logana is just holding the ground now."
       ],
       "knownFacts": [
-        "The old death site to the north reads as an ending held open — not completed, the Zone organizing around it",
         "The hollow was built as a receiver for a watershed-readiness signal from the relay node south. The question was never sent in fifteen years.",
         "The reclamation site is not broken — it is working, and it needs to be told what to do by a living warden",
         "The reclamation site received the closing instruction and is winding down — confirmed by contact read.",
         "The reclamation ring's matrix feeds a buried substrate-thread running southwest toward the lower watershed — seeding downstream wells with clean water for fifteen years.",
         "The reclamation site's closing instruction can be amended before the site fully winds down — both the watershed work and the well-seeding thread received their respective closings.",
         "Silas has attended death-sites and mutable endings well; he has not yet sat with an ending that could not be turned aside.",
-        "The badger in the hollow and the warden's fifteen-year watch are both registered as attended endings — but neither was the kind that simply arrives without choosing."
+        "The badger in the hollow and the warden's fifteen-year watch are both registered as attended endings — but neither was the kind that simply arrives without choosing.",
+        "The relay node below the wolverine clearing has gone quiet — the reclamation site's withdrawal has stilled it."
       ],
       "skillsObserved": [
         "plain technical description of Ashwarden contact craft under",
@@ -4245,9 +4247,9 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking with the party at the made gate — warden's watch on the tree-line.",
+      "statusNote": "Walking with the party at the wolverine clearing — confirmed Logana's state and the node's silence.",
       "lastSeen": {
-        "locationId": "gen-disputed-zone-left-branch-entrance",
+        "locationId": "gen-the-made-gate",
         "day": 14
       },
       "bondType": "sworn",
@@ -5729,7 +5731,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Huginn's single sound at the exact moment of the wolverine's death — timed, as Huginn's sounds always are, and a comment",
@@ -7497,22 +7499,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 22.462194483338212,
-    "cerebral": 20.014027383875195,
-    "social": 7.005216733222718,
-    "generous": 3.5862504821039916,
-    "cautious": 8.586412000487318,
-    "physical": 1.9450696789414748,
-    "risky": 0.4665311378489447,
-    "ruthless": 1.0154430751055354,
-    "carousing": 0.16509833649956607,
-    "amorous": 0.6069006161742428,
-    "patient": 0.3677634828874569,
-    "stealth": 0.000035488823150677554,
-    "devotion": 1.4501904852547414,
-    "craft": 1.2594189550566242,
-    "leadership": 0.5476390827825871,
-    "deception": 0.1699507552492334
+    "strategic": 21.900639621254758,
+    "cerebral": 20.513676699278314,
+    "social": 6.83008631489215,
+    "generous": 3.4965942200513918,
+    "cautious": 9.371751700475135,
+    "physical": 1.8964429369679379,
+    "risky": 0.45486785940272106,
+    "ruthless": 0.9900569982278971,
+    "carousing": 0.1609708780870769,
+    "amorous": 0.5917281007698868,
+    "patient": 0.3585693958152705,
+    "stealth": 0.00003460160257191061,
+    "devotion": 1.413935723123373,
+    "craft": 1.2279334811802085,
+    "leadership": 0.5339481057130224,
+    "deception": 0.16570198636800254
   },
   "aptitudes": [
     "strategist",
@@ -7521,7 +7523,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 892,
+  "actionCount": 893,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7911,8 +7913,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785201926488,
-  "rev": 1584,
+  "updatedAt": 1785202129502,
+  "rev": 1585,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10845,7 +10847,7 @@
       "lightsense": 2,
       "order_sense": 93,
       "palework": 31,
-      "deathsense": 43,
+      "deathsense": 44,
       "shadowstep": 25,
       "the-attended-end": 44,
       "wildcraft": 6,
@@ -10933,7 +10935,7 @@
       }
     ],
     "lastUsed": {
-      "deathsense": 26,
+      "deathsense": 28,
       "the-attended-end": 26,
       "order_sense": 26,
       "boundary_stone": 25,
@@ -11603,7 +11605,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 95
+    "the_center": 96
   },
   "foreclosed": [
     "rootkin",
@@ -11797,10 +11799,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T01:25:26.484Z",
+      "lastAt": "2026-07-28T01:28:49.499Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -12128,15 +12130,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 263,
-    "choices": 262,
+    "sceneSummary": 264,
+    "choices": 263,
     "characterDeltas": 112,
-    "scene": 263,
-    "npcUpdates": 235,
+    "scene": 264,
+    "npcUpdates": 236,
     "factUpdates": 21,
     "placeUpdates": 51,
-    "codexUpdates": 166,
-    "timeOps": 256,
+    "codexUpdates": 167,
+    "timeOps": 257,
     "imagePrompt": 7,
     "sceneEnded": 64,
     "itemUpdates": 5,
@@ -12154,7 +12156,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 263,
+  "_opTurns": 264,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

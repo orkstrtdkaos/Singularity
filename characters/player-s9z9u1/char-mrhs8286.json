@@ -1942,68 +1942,72 @@
         "player": "Ask the woman's name and the name of her establishment.  Use ordersense and echosense on the ledger to glean authenticity.",
         "summary": "Silas questions Bren at the Sheaf and Bowl stall — the ledger is genuine, the meal is real, but the wait-courtesy was added by a second hand.",
         "narration": "You meet her eyes and ask her name. She says it without hesitation: Bren. The stall behind her has a painted sign — a sheaf of rye and a clay bowl — and she names it the Sheaf and Bowl, third stall on the east side, here since the long thaw. No defensiveness in it. Just the flat patience of someone who has given that answer a thousand times.\n\nYou ask if you may look at the ledger. She passes it over, one hand staying on the cover a breath longer than necessary — not reluctant, just particular about her things. The entry is there: the third of the melt, a line in brown chalk, your name spelled correctly, the rye bread and a bowl of the morning stew. The sum is written below it in a second hand, slightly smaller. That is the part that gives you a moment's pause.\n\nYou let Order-Sense move through the ledger without announcing it — a conserved read, not a full opening. The design of the thing is clear enough: a working trader's record, consistent entries going back a full season, the same chalk and the same hand throughout. Your name sits in a genuine ledger. The second-hand sum, though, is an addition — the courtesy charge for the wait, written in later, by someone else. Not falsified. Not wrong, exactly. Just not the original entry.\n\nPell says, behind you, without inflection: 'The sum.' That is all. She has been watching the ledger the way she watches ironwork — looking for the join."
+      },
+      {
+        "player": "Ask Huginn — it was here on the third of the melt; did it mark the ending of that meal?",
+        "summary": "Huginn confirms the meal on the third of the melt was real — the first line of the ledger stands; the second-hand wait-courtesy is still open.",
+        "narration": "You turn from the ledger and look toward the corner-post where Huginn sits. The bird has not moved. It is watching Bren with the same unhurried attention it gives everything that is in the process of concluding something.\n\nYou ask it plainly: were you here on the third of the melt? Did you mark the meal?\n\nHuginn turns its head toward you. A long pause — the kind that is timed, and the timing is a comment. Then it looks back at Bren. One slow, deliberate blink. Then it lifts one foot and sets it down again on the post, the way a person shifts their weight when they are confirming something they already knew.\n\nThat is a yes. You ate there. The meal happened.\n\nPell, a step behind you, has been watching the bird. She says, quietly, 'Well. That settles the first question.' Her eyes move to the second line — the wait-courtesy, in the other hand. She does not say the second question aloud. She does not need to."
       }
     ],
     "lastTurn": {
-      "narration": "You meet her eyes and ask her name. She says it without hesitation: Bren. The stall behind her has a painted sign — a sheaf of rye and a clay bowl — and she names it the Sheaf and Bowl, third stall on the east side, here since the long thaw. No defensiveness in it. Just the flat patience of someone who has given that answer a thousand times.\n\nYou ask if you may look at the ledger. She passes it over, one hand staying on the cover a breath longer than necessary — not reluctant, just particular about her things. The entry is there: the third of the melt, a line in brown chalk, your name spelled correctly, the rye bread and a bowl of the morning stew. The sum is written below it in a second hand, slightly smaller. That is the part that gives you a moment's pause.\n\nYou let Order-Sense move through the ledger without announcing it — a conserved read, not a full opening. The design of the thing is clear enough: a working trader's record, consistent entries going back a full season, the same chalk and the same hand throughout. Your name sits in a genuine ledger. The second-hand sum, though, is an addition — the courtesy charge for the wait, written in later, by someone else. Not falsified. Not wrong, exactly. Just not the original entry.\n\nPell says, behind you, without inflection: 'The sum.' That is all. She has been watching the ledger the way she watches ironwork — looking for the join.",
-      "sceneSummary": "Silas questions Bren at the Sheaf and Bowl stall — the ledger is genuine, the meal is real, but the wait-courtesy was added by a second hand.",
+      "narration": "You turn from the ledger and look toward the corner-post where Huginn sits. The bird has not moved. It is watching Bren with the same unhurried attention it gives everything that is in the process of concluding something.\n\nYou ask it plainly: were you here on the third of the melt? Did you mark the meal?\n\nHuginn turns its head toward you. A long pause — the kind that is timed, and the timing is a comment. Then it looks back at Bren. One slow, deliberate blink. Then it lifts one foot and sets it down again on the post, the way a person shifts their weight when they are confirming something they already knew.\n\nThat is a yes. You ate there. The meal happened.\n\nPell, a step behind you, has been watching the bird. She says, quietly, 'Well. That settles the first question.' Her eyes move to the second line — the wait-courtesy, in the other hand. She does not say the second question aloud. She does not need to.",
+      "sceneSummary": "Huginn confirms the meal on the third of the melt was real — the first line of the ledger stands; the second-hand wait-courtesy is still open.",
       "choices": [
         {
-          "label": "Pay the meal's amount — and ask plainly who added the second figure, and when",
+          "label": "Pay the meal — it is real and the debt is real — but say nothing yet about the second sum. Let Bren lead.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "negotiate",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Pay the full sum without comment — the difference is small, the morning is short",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
+            "negotiate"
           ],
           "trivial": true
         },
         {
-          "label": "Name the second hand plainly to Bren — ask her who made that addition to her ledger",
+          "label": "Ask Bren directly who added the wait-courtesy — the second hand, different chalk, added later. Name what you see.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "persuade"
+            "persuade",
+            "careful"
           ],
           "trivial": false
         },
         {
-          "label": "Ask Huginn — it was here on the third of the melt; did it mark the ending of that meal?",
+          "label": "Use The Attended End on the ledger itself — what is ending here, and how long has it had?",
           "attribute": "mental",
+          "subAttribute": "insight",
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Pay both sums without comment — the meal and the courtesy both — and watch her face when you do.",
+          "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
+            "careful",
             "study"
           ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "energy": -2
-      },
       "scene": {
-        "setting": "The Crossing market row, morning — early spring light, flat and clear. You are standing at the Sheaf and Bowl stall, third on the east side, ledger open in your hands.",
+        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, ledger open, facing Bren across the counter.",
         "npcsPresent": [
           {
-            "name": "Bren (Sheaf and Bowl stall-holder)",
-            "state": "Watching you with the ledger — patient, one hand ready to take it back."
+            "name": "Bren",
+            "state": "Watching Silas and Huginn — patient, one hand ready to take the ledger back. Her expression has not changed."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "A step behind, eyes on the sum line in the ledger. Has named it once. Waiting."
+            "state": "A step behind, eyes on the second sum line. Has named it once. Waiting."
           },
           {
             "name": "Veth Ondra",
@@ -2011,72 +2015,46 @@
           },
           {
             "name": "Huginn",
-            "state": "Still on the corner-post, regarding Bren with its usual unhurried stillness."
+            "state": "Settled back on the corner-post after its confirmation — foot placed, weight shifted, watching Bren."
           }
         ],
         "objects": [
-          "Open chalk ledger — genuine entries, one addition in a second hand",
+          "Open chalk ledger — genuine meal entry, second-hand wait-courtesy sum below it",
           "Painted sign above the stall: a sheaf of rye and a clay bowl",
           "Market stalls opening around the row"
         ],
         "threads": [
-          "The second-hand sum: added later, by someone else — not falsified, but not original",
-          "Pell has named it; the question is whether to press it"
+          "The meal is confirmed real — Huginn's weight-shift was a yes",
+          "The wait-courtesy is still unaddressed — second hand, added later, not original"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "bren",
-          "name": "Bren",
-          "role": "Sheaf and Bowl stall-holder, Crossing market row",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "Perhaps fifty, trader's apron, chalk-smudged ledger — the flat patience of someone who has waited for a moment to arrange itself naturally.",
-          "note": "Named herself and her stall without hesitation. Passed the ledger over with particular care. The meal entry is genuine; the wait-courtesy sum is in a second hand.",
+          "op": "update",
+          "npcId": "bren-thalle",
+          "name": "Bren Thalle",
+          "note": "Watched Silas consult Huginn without surprise or mockery — absorbed it as plain fact. Her patience has not broken.",
           "learned": [
-            "The stall is the Sheaf and Bowl, third on the east side, open since the long thaw",
-            "The meal entry is genuine — same chalk, same hand as the rest of the season's record",
-            "The wait-courtesy was added later in a different hand"
+            "Huginn's confirmation of the meal was received without ceremony — she accepted the bird as a witness"
           ],
-          "status": "active",
-          "statusNote": "At her stall on the Crossing market row — waiting for Silas to settle or question the ledger"
-        }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "Bren — Sheaf and Bowl stall-holder, Crossing market row, fifties, patient trader who keeps a careful ledger",
-          "why": "Named and met this beat; needs a stable record to recur"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "bren-sheaf-and-bowl",
-          "label": "Bren — Sheaf and Bowl",
-          "kind": "person",
-          "fact": "A stall-holder on the Crossing market row — third stall east, Sheaf and Bowl, open since the long thaw. The meal entry from the third of the melt is genuine; the wait-courtesy sum was added later in a second hand.",
-          "links": [
-            "millbrook",
-            "the-water-crisis"
-          ]
+          "statusNote": "At her stall on the Crossing market row — the ledger still in play, the wait-courtesy unaddressed."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at a market stall — a few minutes, no more"
+        "why": "A brief exchange at the stall — a question put to the bird and answered."
       }
     },
     "sceneState": {
-      "setting": "The Crossing market row, morning — early spring light, flat and clear. You are standing at the Sheaf and Bowl stall, third on the east side, ledger open in your hands.",
+      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, ledger open, facing Bren across the counter.",
       "npcsPresent": [
         {
-          "name": "Bren (Sheaf and Bowl stall-holder)",
-          "state": "Watching you with the ledger — patient, one hand ready to take it back."
+          "name": "Bren",
+          "state": "Watching Silas and Huginn — patient, one hand ready to take the ledger back. Her expression has not changed."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "A step behind, eyes on the sum line in the ledger. Has named it once. Waiting."
+          "state": "A step behind, eyes on the second sum line. Has named it once. Waiting."
         },
         {
           "name": "Veth Ondra",
@@ -2084,17 +2062,17 @@
         },
         {
           "name": "Huginn",
-          "state": "Still on the corner-post, regarding Bren with its usual unhurried stillness."
+          "state": "Settled back on the corner-post after its confirmation — foot placed, weight shifted, watching Bren."
         }
       ],
       "objects": [
-        "Open chalk ledger — genuine entries, one addition in a second hand",
+        "Open chalk ledger — genuine meal entry, second-hand wait-courtesy sum below it",
         "Painted sign above the stall: a sheaf of rye and a clay bowl",
         "Market stalls opening around the row"
       ],
       "threads": [
-        "The second-hand sum: added later, by someone else — not falsified, but not original",
-        "Pell has named it; the question is whether to press it"
+        "The meal is confirmed real — Huginn's weight-shift was a yes",
+        "The wait-courtesy is still unaddressed — second hand, added later, not original"
       ]
     }
   },
@@ -4023,23 +4001,24 @@
         "[d5] Named himself under Huginn's gaze — Bren Thalle, lower Wick settlement, south-slope, three miles past the ford. Dry two seasons. Named the settlement's situation plainly as explana",
         "[d5] Received the hatchet back — handle first, no catch. Tucked it at his belt and started north toward the ford without being asked twice.",
         "[d5] The Attended End read him: no death in frame, a sister to bury come summer, the plan already stalling. Silas's words have reached him.",
-        "[d14] Named herself and her stall without hesitation. Passed the ledger over with particular care. The meal entry is genuine; the wait-courtesy sum is in a second hand."
+        "[d14] Named herself and her stall without hesitation. Passed the ledger over with particular care. The meal entry is genuine; the wait-courtesy sum is in a second hand.",
+        "[d14] Watched Silas consult Huginn without surprise or mockery — absorbed it as plain fact. Her patience has not broken."
       ],
       "knownFacts": [
-        "Silas returned the hatchet as a tool, not a threat — intent named plainly",
         "Directed to Mara Wells in Millbrook for honest work",
         "Has a bruised rib he's been ignoring",
         "Will bury a sister come summer — not yet, but soon",
         "His plan on this track has already run past its best moment and he knows it",
         "The stall is the Sheaf and Bowl, third on the east side, open since the long thaw",
         "The meal entry is genuine — same chalk, same hand as the rest of the season's record",
-        "The wait-courtesy was added later in a different hand"
+        "The wait-courtesy was added later in a different hand",
+        "Huginn's confirmation of the meal was received without ceremony — she accepted the bird as a witness"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At her stall on the Crossing market row — waiting for Silas to settle or question the ledger",
+      "statusNote": "At her stall on the Crossing market row — the ledger still in play, the wait-courtesy unaddressed.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -5754,7 +5733,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 11,
     "recentOffers": [
       {
         "thing": "Huginn's single sound at the exact moment of the wolverine's death — timed, as Huginn's sounds always are, and a comment",
@@ -6035,19 +6014,6 @@
       }
     },
     "pressureQueue": [
-      {
-        "source": "npc-want",
-        "kind": "npc-want",
-        "subjectId": "calvar",
-        "aimedAtPlayer": true,
-        "urgency": 3,
-        "oneLineHook": "Calvar, unseen for 5 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
-        "becomes": {
-          "type": "scene",
-          "who": "calvar"
-        },
-        "addedDay": 14
-      },
       {
         "source": "threat-attack",
         "kind": "threat-attack",
@@ -7579,22 +7545,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 20.271559252103255,
-    "cerebral": 21.025137194700683,
-    "social": 7.871678387324276,
-    "generous": 3.984521999337564,
-    "cautious": 10.232410062522039,
-    "physical": 1.6709477044642544,
-    "risky": 0.4007821119673352,
-    "ruthless": 0.8723349573189103,
-    "carousing": 0.14183074743880045,
-    "amorous": 0.5213690812280694,
-    "patient": 0.3159339504233079,
-    "stealth": 0.000030487323009443108,
-    "devotion": 1.2458126763309774,
-    "craft": 1.0819269019996667,
-    "leadership": 0.4704593764211403,
-    "deception": 0.14599930656994087
+    "strategic": 19.764770270800675,
+    "cerebral": 21.499508764833166,
+    "social": 7.674886427641169,
+    "generous": 3.8849089493541245,
+    "cautious": 9.976599810958987,
+    "physical": 1.629174011852648,
+    "risky": 0.39076255916815184,
+    "ruthless": 0.8505265833859376,
+    "carousing": 0.13828497875283044,
+    "amorous": 0.5083348541973676,
+    "patient": 0.3080356016627252,
+    "stealth": 0.000029725139934207028,
+    "devotion": 1.2146673594227029,
+    "craft": 1.054878729449675,
+    "leadership": 0.45869789201061173,
+    "deception": 0.14234932390569235
   },
   "aptitudes": [
     "strategist",
@@ -7603,10 +7569,18 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 898,
+  "actionCount": 899,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Bren of the Sheaf and Bowl",
+      "url": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20man%20in%20his%20mid-fifties%2C%20gone%20soft%20at%20the%20middle%20but%20still%20strong%20through%20the%20hands.%20Skin%20weathered%20to%20a%20warm%20umber%20from%20years%20at%20an%20open%20stall.%20Grey%20at%20the%20temples%2C%20the%20rest%20still%20d%2C%20character%20portrait%2C%20named%20Bren%20of%20the%20Sheaf%20and%20Bowl%2C%20Stall-holder%20at%20the%20Crossing%20market%20row%20%E2%80%94%20patient%20measurer%20of%20grain%2C%20pulse%2C%20and%20people%2C%20Unhurried.%20Weighs%20words%20the%20way%20he%20weighs%20grain%20%E2%80%94%20no%20extras%2C%20none%20short.%20Answers%20slowly%20not%20from%20dul%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=72014&nologo=true",
+      "caption": "Bren of the Sheaf and Bowl",
+      "worldDay": 28,
+      "at": "2026-07-28T02:05:07.738Z"
+    },
     {
       "kind": "npc",
       "prompt": "Voss of the Chalk and Counter",
@@ -8001,8 +7975,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785204282963,
-  "rev": 1596,
+  "updatedAt": 1785204500744,
+  "rev": 1598,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -10202,6 +10176,77 @@
         "peopleSource": "generated",
         "domainsSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20woman%20in%20her%20mid-fifties%2C%20dark-complexioned%2C%20her%20grey-streaked%20hair%20pinned%20back%20under%20a%20linen%20wrap%20dyed%20the%20colour%20of%20old%20mustard.%20Trader's%20apron%20%E2%80%94%20heavy%20canvas%2C%20patched%20at%20the%20pock%2C%20character%20portrait%2C%20named%20Voss%20of%20the%20Chalk%20and%20Counter%2C%20Food-stall%20keeper%20at%20the%20Crossing%20%E2%80%94%20feeds%20half%20the%20market%20and%20forgets%20nothing%20she%20is%20owed%2C%20Unhurried%20and%20firm%20%E2%80%94%20the%20voice%20of%20someone%20who%20has%20already%20heard%20every%20excuse%20and%20found%20them%20all%20want%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=57046&nologo=true"
+      },
+      "bren-of-the-sheaf-and-bowl": {
+        "schemaVersion": 1,
+        "id": "bren-of-the-sheaf-and-bowl",
+        "name": "Bren of the Sheaf and Bowl",
+        "role": "Stall-holder at the Crossing market row — patient measurer of grain, pulse, and people",
+        "homeLocation": "the_center",
+        "communityId": "crossing.marketrow",
+        "personality": {
+          "warmth": 0.6,
+          "trust": 0.4,
+          "candor": 0.5,
+          "patience": 0.9
+        },
+        "spectrum": {
+          "concrete_abstract": -0.6,
+          "falsehood_truth": 0.5,
+          "emotional_logical": -0.3
+        },
+        "voiceHints": "Unhurried. Weighs words the way he weighs grain — no extras, none short. Answers slowly not from dullness but because he genuinely considers. Will repeat a price exactly once; after that he writes it in the ledger and turns it to face you. Has a habit of naming things by what they are used for rather than what they are called.",
+        "knowledge": [
+          "What the Crossing moves in early spring — which goods are scarce, which are flooding in, who is underselling and why",
+          "Faces: he has traded here long enough that he knows returning buyers by their first purchase, years back",
+          "The ledger — every transaction since he took the stall, cross-indexed by buyer, date, and commodity; he can find any entry in under a minute",
+          "Which neighbouring stall-holders are honest, which cut their measures, and which are having a hard season and won't say so"
+        ],
+        "wants": "A fair market — not a perfect one, just one where the weights are true and nobody goes home having been cheated without knowing it.",
+        "fears": "That the ledger will one day show him something he cannot balance: a pattern of small wrongs he enabled by saying nothing.",
+        "reactsToReputation": {
+          "honest": "easy credit, a better price on the second visit, remembered by name",
+          "known_cheat": "polite, correct, and will not sell in bulk — he writes the transaction down with extra care",
+          "newcomer": "patient, explains the Crossing's customs without being asked, assumes good faith until shown otherwise"
+        },
+        "appearance": "A broad-shouldered man in his mid-fifties, gone soft at the middle but still strong through the hands. Skin weathered to a warm umber from years at an open stall. Grey at the temples, the rest still dark brown, kept short. A canvas apron with deep pockets — one holds the ledger, one holds a folded cloth for wiping the scale pan. His eyes move to the scale when he is thinking and to your face when he has decided.",
+        "props": [
+          "A brass balance scale, old and well-maintained, kept level on a wooden block he planed flat himself",
+          "The ledger — thick, cloth-bound, pages soft with handling; the current year's entries in a small careful hand, older years in a hand that was looser before it learned to be precise",
+          "A row of clay jars behind the stall holding spelt, dried peas, millet, lentils, and early-spring barley — the first of the season, which he has priced honestly despite it being short"
+        ],
+        "people": "human",
+        "domains": {
+          "primary": "figurist",
+          "secondary": "syllogist",
+          "tertiary": "numinous"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Figurist primary: his world is counts, weights, and ledger-columns — the concrete record as truth. Syllogist secondary: he reasons from what the numbers show, draws quiet conclusions about people and seasons. Numinous tertiary: a residual, almost unconscious sense that honest measure is something close to sacred, inherited from whoever taught him the trade. Kind and domain are independent.",
+        "_gen": {
+          "entityId": "bren-of-the-sheaf-and-bowl",
+          "type": "npc",
+          "birthWeight": 42,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "the_crossing",
+            "day": 14,
+            "worldDay": null,
+            "hint": "Bren — Sheaf and Bowl stall-holder, Crossing market row, fifties, patient trader who keeps a careful ledger",
+            "why": "Named and met this beat; needs a stable record to recur"
+          },
+          "attentionHistory": [],
+          "createdDay": 14,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20man%20in%20his%20mid-fifties%2C%20gone%20soft%20at%20the%20middle%20but%20still%20strong%20through%20the%20hands.%20Skin%20weathered%20to%20a%20warm%20umber%20from%20years%20at%20an%20open%20stall.%20Grey%20at%20the%20temples%2C%20the%20rest%20still%20d%2C%20character%20portrait%2C%20named%20Bren%20of%20the%20Sheaf%20and%20Bowl%2C%20Stall-holder%20at%20the%20Crossing%20market%20row%20%E2%80%94%20patient%20measurer%20of%20grain%2C%20pulse%2C%20and%20people%2C%20Unhurried.%20Weighs%20words%20the%20way%20he%20weighs%20grain%20%E2%80%94%20no%20extras%2C%20none%20short.%20Answers%20slowly%20not%20from%20dul%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=72014&nologo=true"
       }
     },
     "location": {
@@ -11776,7 +11821,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 102
+    "the_center": 103
   },
   "foreclosed": [
     "rootkin",
@@ -11970,10 +12015,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T02:04:42.956Z",
+      "lastAt": "2026-07-28T02:08:20.741Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 9
+      "beats": 10
     }
   ],
   "company": [
@@ -12301,15 +12346,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 269,
-    "choices": 268,
+    "sceneSummary": 270,
+    "choices": 269,
     "characterDeltas": 114,
-    "scene": 269,
-    "npcUpdates": 240,
+    "scene": 270,
+    "npcUpdates": 241,
     "factUpdates": 22,
     "placeUpdates": 51,
     "codexUpdates": 170,
-    "timeOps": 260,
+    "timeOps": 261,
     "imagePrompt": 7,
     "sceneEnded": 64,
     "itemUpdates": 5,
@@ -12327,7 +12372,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 269,
+  "_opTurns": 270,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

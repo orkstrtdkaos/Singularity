@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 4,
-  "xp": 356,
+  "xp": 361,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 38,
   "maxEnergy": 115,
-  "energy": 62,
+  "energy": 57,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -176,24 +176,19 @@
         "player": null,
         "summary": "The stranger overcame Loki and took the Waterskin — then vanished into the brush without a word.",
         "narration": "The stranger moves faster than you read them. One moment they are two steps back, and the next they are close — a hand at your coat, a boot behind your heel, and the road comes up hard. Loki goes down into the spring mud with a grunt and the spare spade skids sideways out of reach. The orchard mud is still on the blade.\n\nCy makes a sound. Not a click. A long, low tone, like a mechanism under strain. The lens is very narrow.\n\nThe stranger crouches just out of arm's reach and takes what they came for. They move quickly and without malice — this is work, not cruelty. When they straighten, they are holding the Waterskin. They look at it once, look at Loki once, and then they are back into the brush line. The road is empty again. Birdsong returns, indifferent.\n\nLoki sits up slowly in the mud. The confluence braids below the rise, unhurried. The white-flowering field sits where it was. Everything is exactly the same except the weight on the pack is slightly less, and the morning is colder than it was a moment ago."
+      },
+      {
+        "player": "Follow the brush line — try to track where they went.",
+        "summary": "Loki tracked the stranger to the confluence — the trail ends at the water's edge, but something was left behind.",
+        "narration": "Loki gets up from the mud. The spring mud has already taken the fall's print — two clear heel-scuffs, a knee-impression, and a smear where the coat dragged. Cy's tone drops back to silence. The lens widens, just slightly.\n\nThe brush line holds the stranger's passage plainly enough. Bent stems at the entry point. A snapped low branch, still pale and wet at the break — recent. The mud inside the treeline has taken boot-prints going in, angled left, toward the confluence below. Whoever they are, they moved fast but not lightly. The prints are deep. They were carrying something they did not carry in.\n\nLoki follows the line twenty yards into the brush before the ground firms and the prints thin. But the direction holds — down toward the braided confluence, where the two rivers meet in a low hollow ringed with grey-barked willows. A smear of fresh mud on a root confirms it. The stranger went to the water's edge. Beyond that, the ground rises again into open country, and the trail loses itself on the rocky bank.\n\nAt the confluence, beside the root where the mud smear sits, there is something left behind. A small object half-pressed into the bank — not dropped carelessly, but set down. A flat river stone with a short mark scratched into it, recent enough that the scratch still shows pale against the grey surface. Cy drops from the pack-strap to the ground without being asked and walks to it on careful legs. The lens narrows to a thread."
       }
     ],
     "lastTurn": {
-      "narration": "The stranger moves faster than you read them. One moment they are two steps back, and the next they are close — a hand at your coat, a boot behind your heel, and the road comes up hard. Loki goes down into the spring mud with a grunt and the spare spade skids sideways out of reach. The orchard mud is still on the blade.\n\nCy makes a sound. Not a click. A long, low tone, like a mechanism under strain. The lens is very narrow.\n\nThe stranger crouches just out of arm's reach and takes what they came for. They move quickly and without malice — this is work, not cruelty. When they straighten, they are holding the Waterskin. They look at it once, look at Loki once, and then they are back into the brush line. The road is empty again. Birdsong returns, indifferent.\n\nLoki sits up slowly in the mud. The confluence braids below the rise, unhurried. The white-flowering field sits where it was. Everything is exactly the same except the weight on the pack is slightly less, and the morning is colder than it was a moment ago.",
-      "sceneSummary": "The stranger overcame Loki and took the Waterskin — then vanished into the brush without a word.",
+      "narration": "Loki gets up from the mud. The spring mud has already taken the fall's print — two clear heel-scuffs, a knee-impression, and a smear where the coat dragged. Cy's tone drops back to silence. The lens widens, just slightly.\n\nThe brush line holds the stranger's passage plainly enough. Bent stems at the entry point. A snapped low branch, still pale and wet at the break — recent. The mud inside the treeline has taken boot-prints going in, angled left, toward the confluence below. Whoever they are, they moved fast but not lightly. The prints are deep. They were carrying something they did not carry in.\n\nLoki follows the line twenty yards into the brush before the ground firms and the prints thin. But the direction holds — down toward the braided confluence, where the two rivers meet in a low hollow ringed with grey-barked willows. A smear of fresh mud on a root confirms it. The stranger went to the water's edge. Beyond that, the ground rises again into open country, and the trail loses itself on the rocky bank.\n\nAt the confluence, beside the root where the mud smear sits, there is something left behind. A small object half-pressed into the bank — not dropped carelessly, but set down. A flat river stone with a short mark scratched into it, recent enough that the scratch still shows pale against the grey surface. Cy drops from the pack-strap to the ground without being asked and walks to it on careful legs. The lens narrows to a thread.",
+      "sceneSummary": "Loki tracked the stranger to the confluence — the trail ends at the water's edge, but something was left behind.",
       "choices": [
         {
-          "label": "Follow the brush line — try to track where they went.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Use Prism Sight — read the heat traces before they fade, and learn what you can about the stranger.",
+          "label": "Examine the marked stone — let Cy look first, then apply Prism Sight to read what warmth or recent handling it holds.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -205,87 +200,87 @@
           "trivial": false
         },
         {
-          "label": "Let them go — stand up, take stock, and press on toward the road ahead.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Stay still a moment and let Cy look — it filed the stranger away. Ask what it noticed.",
+          "label": "Read the scratch-mark itself — look at what the mark is, and whether it means anything to someone who knows old workings.",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Look across the confluence — try to find where the stranger went after the water, whether they crossed or followed the bank.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Leave the stone where it is and head back to the road — the Waterskin is gone and the stranger's direction is known enough.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": -3,
-        "energy": 0,
-        "inventoryRemove": [
-          "Waterskin"
-        ]
+        "health": 0,
+        "energy": 0
       },
       "scene": {
-        "setting": "The road at the crest of a low rise in the Disputed Zone — spring morning, thin light, Loki sitting in fresh spring mud, spare spade a few feet away. Two small rivers braid in a confluence below the bank to the left. A field of low white-flowering plants sits in the far distance. The brush line behind is still.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, two small rivers meeting in a low hollow ringed with grey-barked willows. Loki stands at the water's edge where the trail ends. The rocky bank rises into open country beyond.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "On Loki's pack-strap, lens very narrow, emitting a low sustained tone."
+            "state": "Dropped from the pack-strap to the ground — walking on careful legs toward a flat marked stone half-pressed into the bank. Lens narrowed to a thread."
           }
         ],
         "objects": [
-          "spare spade (orchard mud on the blade, skidded off the road)",
-          "spring mud road holding new scuff and fall marks",
-          "braided confluence below the rise",
-          "field of white-flowering plants to the far left"
+          "flat river stone with a fresh pale scratch-mark, half-pressed into the bank",
+          "boot-prints in mud ending at the water's edge",
+          "mud smear on a root confirming the stranger's passage",
+          "spare spade (orchard mud on the blade, back on the road at the rise)"
         ],
         "threads": [
-          "The stranger took the Waterskin and vanished into the brush — their purpose still unknown.",
+          "The stranger took the Waterskin and left a marked stone at the confluence — their purpose still unknown.",
           "The three-hundred-year tree about to fruit, and the missing person it was planted for.",
           "The planting is done; the orchard record holds the made name."
         ]
       },
-      "ledgerEvents": [
-        {
-          "what": "A traveler in the Disputed Zone was overcome and robbed of their waterskin.",
-          "tags": [
-            "theft",
-            "violence",
-            "disputed-zone"
-          ],
-          "visibility": "private",
-          "spectrumDeltas": {},
-          "impactsLocal": false
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, sharp exchange on the road."
+        "why": "a short tracking run through the brush to the confluence"
       }
     },
     "sceneState": {
-      "setting": "The road at the crest of a low rise in the Disputed Zone — spring morning, thin light, Loki sitting in fresh spring mud, spare spade a few feet away. Two small rivers braid in a confluence below the bank to the left. A field of low white-flowering plants sits in the far distance. The brush line behind is still.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, two small rivers meeting in a low hollow ringed with grey-barked willows. Loki stands at the water's edge where the trail ends. The rocky bank rises into open country beyond.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "On Loki's pack-strap, lens very narrow, emitting a low sustained tone."
+          "state": "Dropped from the pack-strap to the ground — walking on careful legs toward a flat marked stone half-pressed into the ban"
         }
       ],
       "objects": [
-        "spare spade (orchard mud on the blade, skidded off the road)",
-        "spring mud road holding new scuff and fall marks",
-        "braided confluence below the rise",
-        "field of white-flowering plants to the far left"
+        "flat river stone with a fresh pale scratch-mark, half-pressed into the bank",
+        "boot-prints in mud ending at the water's edge",
+        "mud smear on a root confirming the stranger's passage",
+        "spare spade (orchard mud on the blade, back on the road at the rise)"
       ],
       "threads": [
-        "The stranger took the Waterskin and vanished into the brush — their purpose still unknown.",
+        "The stranger took the Waterskin and left a marked stone at the confluence — their purpose still unknown.",
         "The three-hundred-year tree about to fruit, and the missing person it was planted for.",
         "The planting is done; the orchard record holds the made name."
       ]
@@ -894,7 +889,7 @@
     "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
     "lastTickWorldDay": 27,
     "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1555,24 +1550,24 @@
     }
   },
   "tendencies": {
-    "devotion": 2.403827270504059,
-    "cerebral": 16.059259172034622,
-    "social": 14.538621331537419,
-    "strategic": 9.421401625628357,
-    "cautious": 7.389699394206088,
-    "amorous": 3.1441139537134157,
-    "generous": 4.036892617215809,
-    "ruthless": 1.0000137675515874,
-    "risky": 1.8426675310302931,
-    "patient": 0.8375915934997556,
-    "deception": 0.975
+    "devotion": 2.3437315887414574,
+    "cerebral": 15.657777692733756,
+    "social": 14.175155798248984,
+    "strategic": 10.185866584987648,
+    "cautious": 7.204956909350935,
+    "amorous": 3.06551110487058,
+    "generous": 3.9359703017854137,
+    "ruthless": 0.9750134233627977,
+    "risky": 1.7966008427545357,
+    "patient": 0.8166518036622618,
+    "deception": 0.9506249999999999
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 85,
+  "actionCount": 86,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1753,8 +1748,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785197291833,
-  "rev": 178,
+  "updatedAt": 1785197407961,
+  "rev": 179,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2236,7 +2231,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 10
+    "the_quickwood": 11
   },
   "opLossPending": false,
   "sessions": [
@@ -2267,10 +2262,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-27T13:16:55.455Z",
-      "lastAt": "2026-07-28T00:08:11.832Z",
+      "lastAt": "2026-07-28T00:10:07.960Z",
       "startDay": 27,
       "endDay": 28,
-      "beats": 60
+      "beats": 61
     }
   ],
   "establishedFacts": [
@@ -2308,13 +2303,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 92,
-    "choices": 92,
-    "characterDeltas": 41,
-    "scene": 92,
+    "sceneSummary": 93,
+    "choices": 93,
+    "characterDeltas": 42,
+    "scene": 93,
     "placeUpdates": 12,
     "codexUpdates": 75,
-    "timeOps": 91,
+    "timeOps": 92,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 21,
@@ -2329,7 +2324,7 @@
     "encounterOps": 1,
     "ledgerEvents": 1
   },
-  "_opTurns": 92,
+  "_opTurns": 93,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

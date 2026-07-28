@@ -122,13 +122,18 @@ the real structure OBVIOUS.
 
 ---
 
-# §7 — LIVE VERIFICATION (Erik, 2026-07-27, v1.8.290): the revamp WORKS, two bugs remain
-Erik played it. Progress + two precise bugs, both verified at origin:
+# §7 — PRE-246 CONTEXT (Erik, 2026-07-27, v1.8.290): the CURRENT behavior these screenshots show
+> Erik clarified: NONE of this is post-246 — 246 isn't built yet. These screenshots are the EXISTING (SNG-230)
+> behavior, given as context. Everything below describes the STATE 246 must fix, not a 246 result.
+Erik played the CURRENT (pre-246) build. It shows SNG-230's frame + two problems 246 must resolve, verified at origin:
 
-## §7a — WHAT WORKS (the revamp landed)
-"Stand and meet it" → the NEW in-place structured frame appears (Image 2): "A Hostile Meeting · FIGHT · ROUND 1",
-the meter, the STATED finish conditions (DEFEAT / FLEE / FAIL), the decisive-finisher line, the freeform cue.
-This is SNG-246 §3+§4 working — the banner-style in-place structured frame Erik wanted. Keep it. It's the target.
+## §7a — CORRECTION: this is the PRE-246 state, NOT the revamp (Erik clarified)
+SNG-246 is NOT yet implemented — these screenshots are the EXISTING behavior (SNG-230's frame + the legacy
+skill-battle panel), given as additional CONTEXT that motivates 246. Image 2's "A Hostile Meeting · FIGHT ·
+ROUND 1" frame (meter, DEFEAT/FLEE/FAIL, decisive-finisher, freeform cue) is what SNG-230 ALREADY built — good
+bones, and close to the 246 target, but NOT 246. The point of these images is: even with SNG-230's frame, the
+experience still (a) jumps to the clunky panel and (b) leaves a theft silent — which is exactly what 246 exists
+to fix. So the frame in Image 2 is the STARTING POINT 246 builds on, not evidence 246 works.
 
 ## §7b — BUG 1 (the real bug): the frame JUMPS to the old clunky skill-battle panel
 Verified: a duel routes `isSB = (skillBattle.engine && def.type==="duel" && def.skillBattle!==false)` (app.js:4626)
@@ -142,8 +147,9 @@ panel — and the duel routes to the WRONG one (the separate-screen mode Erik ex
   the in-place frame wins; the skill-battle MECHANICS can stay (the ability list is fine) but they must render
   INSIDE the frame on the play surface, not as the clunky separate screen. Unify the two takeovers into one — the
   frame is the container, the skill-battle rounds are its contents.
-- This is the SNG-246 §3 fix made specific: "generalize the in-place takeover to ALL encounters" = kill the
-  second (separate-screen) takeover path; the frame is the only one.
+- This IS a core part of what SNG-246 §3 must do: "generalize the in-place takeover to ALL encounters" = kill
+  the second (separate-screen) takeover path so SNG-230's frame is the only one. (Not yet done — this bug is
+  present in the PRE-246 build and is one of the things 246 resolves.)
 
 ## §7c — BUG 2 (really a Fix-D gap): "Read them" took the Waterskin with NO mechanical readout
 Verified: "Read them" → `sbDeclare({function:"shield"...}, {scouting:true})` — a DEFENSIVE SCOUT round, no attack.

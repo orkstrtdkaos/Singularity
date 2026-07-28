@@ -173,7 +173,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.02923960437574253,
+    "spectrumId": -0.0277776241569554,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.24843810472552474,
     "mechanical_spiritual": 0.25513542055105926,
@@ -1947,85 +1947,102 @@
         "player": "Ask Huginn — it was here on the third of the melt; did it mark the ending of that meal?",
         "summary": "Huginn confirms the meal on the third of the melt was real — the first line of the ledger stands; the second-hand wait-courtesy is still open.",
         "narration": "You turn from the ledger and look toward the corner-post where Huginn sits. The bird has not moved. It is watching Bren with the same unhurried attention it gives everything that is in the process of concluding something.\n\nYou ask it plainly: were you here on the third of the melt? Did you mark the meal?\n\nHuginn turns its head toward you. A long pause — the kind that is timed, and the timing is a comment. Then it looks back at Bren. One slow, deliberate blink. Then it lifts one foot and sets it down again on the post, the way a person shifts their weight when they are confirming something they already knew.\n\nThat is a yes. You ate there. The meal happened.\n\nPell, a step behind you, has been watching the bird. She says, quietly, 'Well. That settles the first question.' Her eyes move to the second line — the wait-courtesy, in the other hand. She does not say the second question aloud. She does not need to."
+      },
+      {
+        "player": "let her know that you will pay both sums - also ask her what additional courtesy you can do for her?",
+        "summary": "Silas pays Bren's full reckoning at the Sheaf and Bowl — both the meal and the wait-courtesy — and Bren asks not for help but for one true thing: when does the water clear?",
+        "narration": "You close the ledger and set it back on the counter with both hands, the way you would return something that belonged there. Then you look at Bren directly and tell her you will pay both sums — the meal and the wait-courtesy both, whatever the full reckoning comes to. You do not argue the second hand. The meal was real. She waited. That is enough.\n\nThen you ask her what further courtesy you can do for her.\n\nBren's expression changes — not broadly, but something in it settles. She takes the ledger back with the same particular care she gave it over, and for a moment she just looks at you. Then she says, quietly, that there is nothing she needs from a warden. But there is something she has been sitting with since the water went bad. She runs the stall on a knife-edge in a thin season, and the Crossing mill-gate keeper told her last week that the readings are worse. Not better. She has two children in the back house and she is boiling everything, twice, and she does not know how long that holds. She is not asking you to fix the river. She says that plainly. She is asking if you know something true about when it ends.\n\nPell has not moved. Huginn turns its head toward the mill, and then back. Its timing, as always, is a comment."
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the ledger and look toward the corner-post where Huginn sits. The bird has not moved. It is watching Bren with the same unhurried attention it gives everything that is in the process of concluding something.\n\nYou ask it plainly: were you here on the third of the melt? Did you mark the meal?\n\nHuginn turns its head toward you. A long pause — the kind that is timed, and the timing is a comment. Then it looks back at Bren. One slow, deliberate blink. Then it lifts one foot and sets it down again on the post, the way a person shifts their weight when they are confirming something they already knew.\n\nThat is a yes. You ate there. The meal happened.\n\nPell, a step behind you, has been watching the bird. She says, quietly, 'Well. That settles the first question.' Her eyes move to the second line — the wait-courtesy, in the other hand. She does not say the second question aloud. She does not need to.",
-      "sceneSummary": "Huginn confirms the meal on the third of the melt was real — the first line of the ledger stands; the second-hand wait-courtesy is still open.",
+      "narration": "You close the ledger and set it back on the counter with both hands, the way you would return something that belonged there. Then you look at Bren directly and tell her you will pay both sums — the meal and the wait-courtesy both, whatever the full reckoning comes to. You do not argue the second hand. The meal was real. She waited. That is enough.\n\nThen you ask her what further courtesy you can do for her.\n\nBren's expression changes — not broadly, but something in it settles. She takes the ledger back with the same particular care she gave it over, and for a moment she just looks at you. Then she says, quietly, that there is nothing she needs from a warden. But there is something she has been sitting with since the water went bad. She runs the stall on a knife-edge in a thin season, and the Crossing mill-gate keeper told her last week that the readings are worse. Not better. She has two children in the back house and she is boiling everything, twice, and she does not know how long that holds. She is not asking you to fix the river. She says that plainly. She is asking if you know something true about when it ends.\n\nPell has not moved. Huginn turns its head toward the mill, and then back. Its timing, as always, is a comment.",
+      "sceneSummary": "Silas pays Bren's full reckoning at the Sheaf and Bowl — both the meal and the wait-courtesy — and Bren asks not for help but for one true thing: when does the water clear?",
       "choices": [
         {
-          "label": "Pay the meal — it is real and the debt is real — but say nothing yet about the second sum. Let Bren lead.",
+          "label": "Tell her the truth plainly — the reclamation work upstream is done, the wells will clear first, the watershed will follow on its own schedule. You cannot name the day.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "negotiate"
+            "help",
+            "honest"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null
         },
         {
-          "label": "Ask Bren directly who added the wait-courtesy — the second hand, different chalk, added later. Name what you see.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Use The Attended End on the ledger itself — what is ending here, and how long has it had?",
+          "label": "Use Deathsense on Bren — read what the uncertainty is doing to her, and whether she is close to a breaking point you should know about.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
           "difficulty": 0,
+          "trivial": false,
           "intentTags": [
             "study"
           ],
-          "trivial": false
+          "abilityId": "deathsense",
+          "energyCost": 2
         },
         {
-          "label": "Pay both sums without comment — the meal and the courtesy both — and watch her face when you do.",
+          "label": "Ask what she has heard from the other stall-holders — others on this row know things; gather what the row knows before you answer.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "presence",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "careful",
-            "study"
+            "study",
+            "negotiate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null
+        },
+        {
+          "label": "Offer her something practical along with your answer — a Pre-Transition Filter Cloth from your pack, for a stall that is boiling everything twice.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "trivial": true,
+          "intentTags": [
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      },
       "scene": {
-        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, ledger open, facing Bren across the counter.",
+        "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, ledger returned to Bren, both sums agreed to. The row is waking around you.",
         "npcsPresent": [
           {
             "name": "Bren",
-            "state": "Watching Silas and Huginn — patient, one hand ready to take the ledger back. Her expression has not changed."
+            "state": "Ledger closed in both hands, watching Silas — the question out, waiting for an answer."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "A step behind, eyes on the second sum line. Has named it once. Waiting."
+            "state": "A step behind, still, listening."
           },
           {
             "name": "Veth Ondra",
-            "state": "A few paces off, giving the exchange room. Watching the row rather than the ledger."
+            "state": "A few paces off, watching the row rather than the counter."
           },
           {
             "name": "Huginn",
-            "state": "Settled back on the corner-post after its confirmation — foot placed, weight shifted, watching Bren."
+            "state": "Turned its head toward the mill and then back — settled, watching."
           }
         ],
         "objects": [
-          "Open chalk ledger — genuine meal entry, second-hand wait-courtesy sum below it",
+          "Closed chalk ledger — back in Bren's hands",
           "Painted sign above the stall: a sheaf of rye and a clay bowl",
           "Market stalls opening around the row"
         ],
         "threads": [
-          "The meal is confirmed real — Huginn's weight-shift was a yes",
-          "The wait-courtesy is still unaddressed — second hand, added later, not original"
+          "Payment agreed but not yet rendered — both sums",
+          "Bren's question: when does the water clear?",
+          "Huginn's glance toward the mill — a comment not yet spoken"
         ]
       },
       "npcUpdates": [
@@ -2033,46 +2050,51 @@
           "op": "update",
           "npcId": "bren-thalle",
           "name": "Bren Thalle",
-          "note": "Watched Silas consult Huginn without surprise or mockery — absorbed it as plain fact. Her patience has not broken.",
+          "note": "Accepted payment of both sums without argument. Asked plainly for one true thing: when does the water clear. Two children in the back house. Boiling everything, twice.",
           "learned": [
-            "Huginn's confirmation of the meal was received without ceremony — she accepted the bird as a witness"
+            "Has two children in the back house behind the stall",
+            "Heard from the mill-gate keeper last week that the readings are worse, not better",
+            "Is not asking for rescue — is asking for truth"
           ],
-          "statusNote": "At her stall on the Crossing market row — the ledger still in play, the wait-courtesy unaddressed."
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At her stall on the Crossing market row — the ledger settled, waiting for Silas's answer about the water."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the stall — a question put to the bird and answered."
+        "why": "A brief exchange at the stall — payment offered, question asked."
       }
     },
     "sceneState": {
-      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, ledger open, facing Bren across the counter.",
+      "setting": "The Crossing market row, morning — early spring light, flat and clear. Standing at the Sheaf and Bowl stall, third on the east side, ledger returned to Bren, both sums agreed to. The row is waking around you.",
       "npcsPresent": [
         {
           "name": "Bren",
-          "state": "Watching Silas and Huginn — patient, one hand ready to take the ledger back. Her expression has not changed."
+          "state": "Ledger closed in both hands, watching Silas — the question out, waiting for an answer."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "A step behind, eyes on the second sum line. Has named it once. Waiting."
+          "state": "A step behind, still, listening."
         },
         {
           "name": "Veth Ondra",
-          "state": "A few paces off, giving the exchange room. Watching the row rather than the ledger."
+          "state": "A few paces off, watching the row rather than the counter."
         },
         {
           "name": "Huginn",
-          "state": "Settled back on the corner-post after its confirmation — foot placed, weight shifted, watching Bren."
+          "state": "Turned its head toward the mill and then back — settled, watching."
         }
       ],
       "objects": [
-        "Open chalk ledger — genuine meal entry, second-hand wait-courtesy sum below it",
+        "Closed chalk ledger — back in Bren's hands",
         "Painted sign above the stall: a sheaf of rye and a clay bowl",
         "Market stalls opening around the row"
       ],
       "threads": [
-        "The meal is confirmed real — Huginn's weight-shift was a yes",
-        "The wait-courtesy is still unaddressed — second hand, added later, not original"
+        "Payment agreed but not yet rendered — both sums",
+        "Bren's question: when does the water clear?",
+        "Huginn's glance toward the mill — a comment not yet spoken"
       ]
     }
   },
@@ -3996,29 +4018,30 @@
         "locationId": "millbrook",
         "day": 5
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d5] Named himself under Huginn's gaze — Bren Thalle, lower Wick settlement, south-slope, three miles past the ford. Dry two seasons. Named the settlement's situation plainly as explana",
         "[d5] Received the hatchet back — handle first, no catch. Tucked it at his belt and started north toward the ford without being asked twice.",
         "[d5] The Attended End read him: no death in frame, a sister to bury come summer, the plan already stalling. Silas's words have reached him.",
         "[d14] Named herself and her stall without hesitation. Passed the ledger over with particular care. The meal entry is genuine; the wait-courtesy sum is in a second hand.",
-        "[d14] Watched Silas consult Huginn without surprise or mockery — absorbed it as plain fact. Her patience has not broken."
+        "[d14] Watched Silas consult Huginn without surprise or mockery — absorbed it as plain fact. Her patience has not broken.",
+        "[d14] Accepted payment of both sums without argument. Asked plainly for one true thing: when does the water clear. Two children in the back house. Boiling everything, twice."
       ],
       "knownFacts": [
-        "Directed to Mara Wells in Millbrook for honest work",
-        "Has a bruised rib he's been ignoring",
-        "Will bury a sister come summer — not yet, but soon",
         "His plan on this track has already run past its best moment and he knows it",
         "The stall is the Sheaf and Bowl, third on the east side, open since the long thaw",
         "The meal entry is genuine — same chalk, same hand as the rest of the season's record",
         "The wait-courtesy was added later in a different hand",
-        "Huginn's confirmation of the meal was received without ceremony — she accepted the bird as a witness"
+        "Huginn's confirmation of the meal was received without ceremony — she accepted the bird as a witness",
+        "Has two children in the back house behind the stall",
+        "Heard from the mill-gate keeper last week that the readings are worse, not better",
+        "Is not asking for rescue — is asking for truth"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At her stall on the Crossing market row — the ledger still in play, the wait-courtesy unaddressed.",
+      "statusNote": "At her stall on the Crossing market row — the ledger settled, waiting for Silas's answer about the water.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 14
@@ -5733,7 +5756,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 12,
     "recentOffers": [
       {
         "thing": "Huginn's single sound at the exact moment of the wolverine's death — timed, as Huginn's sounds always are, and a comment",
@@ -7545,22 +7568,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.764770270800675,
-    "cerebral": 21.499508764833166,
-    "social": 7.674886427641169,
-    "generous": 3.8849089493541245,
-    "cautious": 9.976599810958987,
-    "physical": 1.629174011852648,
-    "risky": 0.39076255916815184,
-    "ruthless": 0.8505265833859376,
-    "carousing": 0.13828497875283044,
-    "amorous": 0.5083348541973676,
-    "patient": 0.3080356016627252,
-    "stealth": 0.000029725139934207028,
-    "devotion": 1.2146673594227029,
-    "craft": 1.054878729449675,
-    "leadership": 0.45869789201061173,
-    "deception": 0.14234932390569235
+    "strategic": 19.27065101403066,
+    "cerebral": 20.962021045712337,
+    "social": 9.48301426695014,
+    "generous": 3.7877862256202715,
+    "cautious": 9.727184815685012,
+    "physical": 1.588444661556332,
+    "risky": 0.38099349518894804,
+    "ruthless": 0.8292634188012891,
+    "carousing": 0.13482785428400967,
+    "amorous": 0.4956264828424334,
+    "patient": 0.30033471162115705,
+    "stealth": 0.000028982011435851853,
+    "devotion": 1.1843006754371352,
+    "craft": 1.028506761213433,
+    "leadership": 0.44723044471034645,
+    "deception": 0.13879059080805004
   },
   "aptitudes": [
     "strategist",
@@ -7569,7 +7592,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 899,
+  "actionCount": 900,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7975,8 +7998,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785204500744,
-  "rev": 1598,
+  "updatedAt": 1785207141834,
+  "rev": 1599,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11821,7 +11844,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 103
+    "the_center": 104
   },
   "foreclosed": [
     "rootkin",
@@ -12015,10 +12038,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T02:08:20.741Z",
+      "lastAt": "2026-07-28T02:52:21.831Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 10
+      "beats": 11
     }
   ],
   "company": [
@@ -12346,15 +12369,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 270,
-    "choices": 269,
-    "characterDeltas": 114,
-    "scene": 270,
-    "npcUpdates": 241,
+    "sceneSummary": 271,
+    "choices": 270,
+    "characterDeltas": 115,
+    "scene": 271,
+    "npcUpdates": 242,
     "factUpdates": 22,
     "placeUpdates": 51,
     "codexUpdates": 170,
-    "timeOps": 261,
+    "timeOps": 262,
     "imagePrompt": 7,
     "sceneEnded": 64,
     "itemUpdates": 5,
@@ -12372,7 +12395,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 270,
+  "_opTurns": 271,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

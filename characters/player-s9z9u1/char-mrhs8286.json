@@ -1942,14 +1942,19 @@
         "player": "Check Logana — walk back to the wolverine clearing and see how the relay node reads now that the reclamation site has gone quiet",
         "summary": "Silas reads Logana and the relay node at dawn — the reclamation site is quiet, the node has stopped asking, and the guardian holds.",
         "narration": "The walk back to the wolverine clearing takes less than ten minutes. The mist is still low between the trees, and the frost underfoot has begun to soften where the early light reaches the path.\n\nLogana is where you left her — standing at the downed tree's edge, her bone-pale frame upright and still. She turns her head at your approach with the slow, deliberate movement of something that is aware rather than merely alert. Huginn drops from your shoulder to a branch above her and regards her with the same patient interest he gives most things that are ending or almost-ending. She is neither.\n\nYou open your Deathsense lightly, not a full cast — just enough to feel the shape of the relay node below her feet. It is quiet now. Where the reclamation site's churn used to run underneath like a low current, there is simply the settled weight of worked ground going back to itself. The node is still there, still present as a structure, but it has stopped asking. Said Veth, from two steps behind you, \"The upstream pressure is gone. She is just holding the ground now.\"\n\nLogana holds her position at the clearing's edge. The Zone's lattice-thread in her warding is steady. She is not restless, and she is not diminished — just attending, in the way a guardian attends when there is nothing yet that needs guarding."
+      },
+      {
+        "player": "Speak to Logana directly — tell her what has changed upstream and what her watch is now",
+        "summary": "Silas tells Logana what has changed — the node is quiet, the upstream claim is finished — and she receives it.",
+        "narration": "You step up close to Logana and speak plainly, the way you would to anyone who deserved the truth of their situation.\n\n\"The reclamation site is closed,\" you tell her. \"The node below you has gone quiet. The upstream pressure is gone. You are not anchoring anything anymore — just holding the ground.\"\n\nShe does not move for a moment. Then her skull tilts, just slightly, the way it did when you gave her the perimeter charge the first time. Not a nod, exactly. A receipt.\n\n\"Your watch stands,\" you say. \"That has not changed. But the thing that was asking something of you is finished asking. Whatever you carry from the Zone now, you carry clean.\"\n\nVeth speaks from two paces behind you, her voice even. \"She heard it,\" said Veth. \"You can see it in how she settled.\"\n\nPell says nothing, but she has her arms crossed and is looking at Logana the way she looks at a piece of ironwork she is deciding whether to trust. Memory shifts against her back as she shifts her weight.\n\nAbove, Huginn makes one sound — not a croak, something shorter — and then is quiet again. Logana's eye-hollows remain fixed on you, and the morning is still around all of you, the frost softening, the mist beginning to lift from between the trees."
       }
     ],
     "lastTurn": {
-      "narration": "The walk back to the wolverine clearing takes less than ten minutes. The mist is still low between the trees, and the frost underfoot has begun to soften where the early light reaches the path.\n\nLogana is where you left her — standing at the downed tree's edge, her bone-pale frame upright and still. She turns her head at your approach with the slow, deliberate movement of something that is aware rather than merely alert. Huginn drops from your shoulder to a branch above her and regards her with the same patient interest he gives most things that are ending or almost-ending. She is neither.\n\nYou open your Deathsense lightly, not a full cast — just enough to feel the shape of the relay node below her feet. It is quiet now. Where the reclamation site's churn used to run underneath like a low current, there is simply the settled weight of worked ground going back to itself. The node is still there, still present as a structure, but it has stopped asking. Said Veth, from two steps behind you, \"The upstream pressure is gone. She is just holding the ground now.\"\n\nLogana holds her position at the clearing's edge. The Zone's lattice-thread in her warding is steady. She is not restless, and she is not diminished — just attending, in the way a guardian attends when there is nothing yet that needs guarding.",
-      "sceneSummary": "Silas reads Logana and the relay node at dawn — the reclamation site is quiet, the node has stopped asking, and the guardian holds.",
+      "narration": "You step up close to Logana and speak plainly, the way you would to anyone who deserved the truth of their situation.\n\n\"The reclamation site is closed,\" you tell her. \"The node below you has gone quiet. The upstream pressure is gone. You are not anchoring anything anymore — just holding the ground.\"\n\nShe does not move for a moment. Then her skull tilts, just slightly, the way it did when you gave her the perimeter charge the first time. Not a nod, exactly. A receipt.\n\n\"Your watch stands,\" you say. \"That has not changed. But the thing that was asking something of you is finished asking. Whatever you carry from the Zone now, you carry clean.\"\n\nVeth speaks from two paces behind you, her voice even. \"She heard it,\" said Veth. \"You can see it in how she settled.\"\n\nPell says nothing, but she has her arms crossed and is looking at Logana the way she looks at a piece of ironwork she is deciding whether to trust. Memory shifts against her back as she shifts her weight.\n\nAbove, Huginn makes one sound — not a croak, something shorter — and then is quiet again. Logana's eye-hollows remain fixed on you, and the morning is still around all of you, the frost softening, the mist beginning to lift from between the trees.",
+      "sceneSummary": "Silas tells Logana what has changed — the node is quiet, the upstream claim is finished — and she receives it.",
       "choices": [
         {
-          "label": "Ask Huginn what he reads in her — whether there is any ending still approaching Logana",
+          "label": "Ask Huginn what he reads in her now — whether the Zone-thread has settled or still claims part of her",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -1959,29 +1964,29 @@
           "trivial": true
         },
         {
-          "label": "Use The Attended End to confirm the node's shape — name plainly what is ending here and what is not",
+          "label": "Use The Attended End — read Logana plainly and name what is ending in her situation, if anything is",
           "attribute": "mental",
           "subAttribute": "insight",
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Speak to Logana directly — tell her what has changed upstream and what her watch is now",
+          "label": "Give her a new charge — name what her watch is for now that the node is quiet, in plain words",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "lead"
           ],
           "trivial": true
         },
         {
-          "label": "Satisfied — walk back to the made gate and take the waygate home",
+          "label": "Head to the made gate — the work here is done; time to go home",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
@@ -1996,90 +2001,91 @@
         "npcsPresent": [
           {
             "name": "Logana",
-            "state": "Standing at the downed tree's edge, head turned toward the party, still and aware."
+            "state": "Standing at the downed tree's edge, skull tilted slightly — the receipt of what was said. Still and aware."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "At Silas's left shoulder, watching Logana."
+            "state": "Two paces back, arms crossed, watching Logana with a weighing look."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Two steps behind, having named the node's silence."
+            "state": "Two paces behind, having named aloud that Logana heard it."
           },
           {
             "name": "Huginn",
-            "state": "Perched on a branch above Logana, regarding her with unhurried patience."
+            "state": "On a branch above Logana, quiet after his one short sound."
           }
         ],
         "objects": [
-          "Logana — bone-pale guardian frame, Zone-lattice thread steady in her warding",
+          "Logana — bone-pale guardian frame, Zone-lattice thread present but settled",
           "Downed tree at the clearing's edge",
-          "Relay node below the clearing floor — quiet, structure present, no longer active",
+          "Relay node below the clearing floor — quiet, no longer active",
           "Frost on the ground, softening in early light"
         ],
         "threads": [
-          "The relay node is confirmed quiet — its downstream purpose and the Zone-thread's behavior now to be named",
+          "The Zone-thread's state in Logana — settled or still claiming her?",
           "The waygate home stands a short walk back down the path"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Named the node's silence plainly — the upstream pressure is gone, Logana is just holding the ground now.",
+          "npcId": "logana",
+          "name": "Logana",
+          "note": "Received plain news of the node's silence and her changed watch — acknowledged with a tilt of the skull.",
           "learned": [
-            "The relay node below the wolverine clearing has gone quiet — the reclamation site's withdrawal has stilled it."
+            "The reclamation site is closed and the relay node has gone quiet — the upstream claim on her warding is finished.",
+            "Her guardian watch stands unchanged; what she carries from the Zone now, she carries clean."
           ],
-          "statusNote": "Walking with the party at the wolverine clearing — confirmed Logana's state and the node's silence."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "logana-wolverine-guardian",
-          "label": "Logana — Guardian of the Wolverine Clearing",
-          "kind": "lore",
-          "fact": "On Day 14 at dawn, Deathsense confirmed the relay node below Logana's post has gone quiet — the reclamation site's closure has stilled the upstream pressure. Logana holds the ground steadily, lattice-thread intact, not diminished.",
-          "links": [
-            "the-water-crisis",
-            "the-second-thread",
-            "the-made-gate"
-          ]
+          "statusNote": "Standing watch at the downed tree's clearing. Node-anchor claim resolved; guardian-purpose active and settled."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Short walk to the wolverine clearing and a brief deathsense read"
-      }
+        "why": "A short walk back and a plain exchange — a few minutes at most."
+      },
+      "codexUpdates": [
+        {
+          "topic": "logana",
+          "label": "Logana",
+          "kind": "person",
+          "entityId": "logana",
+          "fact": "Told plainly at dawn that the relay node is quiet and the upstream claim on her warding is finished. She received it. Her watch continues, but she carries it clean now.",
+          "links": [
+            "the-water-crisis",
+            "the-second-thread"
+          ]
+        }
+      ]
     },
     "sceneState": {
       "setting": "The wolverine clearing on the left-branch road, Disputed Zone. Dawn, frost softening where light reaches, mist still low between trees. Downed tree at the clearing's edge.",
       "npcsPresent": [
         {
           "name": "Logana",
-          "state": "Standing at the downed tree's edge, head turned toward the party, still and aware."
+          "state": "Standing at the downed tree's edge, skull tilted slightly — the receipt of what was said. Still and aware."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "At Silas's left shoulder, watching Logana."
+          "state": "Two paces back, arms crossed, watching Logana with a weighing look."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Two steps behind, having named the node's silence."
+          "state": "Two paces behind, having named aloud that Logana heard it."
         },
         {
           "name": "Huginn",
-          "state": "Perched on a branch above Logana, regarding her with unhurried patience."
+          "state": "On a branch above Logana, quiet after his one short sound."
         }
       ],
       "objects": [
-        "Logana — bone-pale guardian frame, Zone-lattice thread steady in her warding",
+        "Logana — bone-pale guardian frame, Zone-lattice thread present but settled",
         "Downed tree at the clearing's edge",
-        "Relay node below the clearing floor — quiet, structure present, no longer active",
+        "Relay node below the clearing floor — quiet, no longer active",
         "Frost on the ground, softening in early light"
       ],
       "threads": [
-        "The relay node is confirmed quiet — its downstream purpose and the Zone-thread's behavior now to be named",
+        "The Zone-thread's state in Logana — settled or still claiming her?",
         "The waygate home stands a short walk back down the path"
       ]
     }
@@ -4637,14 +4643,17 @@
         "[d14] Order-Sense surge-read reveals the Zone uses her as a structural anchor for the relay node — not hostile, but the boundary between maker's warding and lattice-claim cannot be fully resolved in this substrate.",
         "[d14] Given a plain verbal perimeter charge by Silas — acknowledged with a deliberate tilt of the skull. Now stationary at the downed tree's base.",
         "[d14] Found unchanged at the relay node — guardian-purpose active, Zone-thread present, skull angled toward the party's approach. Watched through the night. Nothing crossed.",
-        "[d14] The relay node's circuit went quiet when the reclamation site closed. The Zone-thread in her warding has shifted with it — the knot between guardian-purpose and lattice-claim is looser than it was at dawn."
+        "[d14] The relay node's circuit went quiet when the reclamation site closed. The Zone-thread in her warding has shifted with it — the knot between guardian-purpose and lattice-claim is looser than it was at dawn.",
+        "[d14] Received plain news of the node's silence and her changed watch — acknowledged with a tilt of the skull."
       ],
       "knownFacts": [
         "Her bones hold eleven years of hard country and Zone-densening",
         "The Zone-thread from the relay node took partial hold in the warding — she carries both intentions",
         "The Zone's thread in her warding is a structural anchor for the relay node — it steadies the node's thread, not a hostile possession.",
         "The boundary between Silas's guardian-purpose and the Zone's hold cannot be distinguished in the thin substrate without a longer, calmer reading.",
-        "The Zone-thread's hold on her warding eases when the feed from the reclamation site stops — not resolved, but the boundary reads cleaner in the quieter substrate."
+        "The Zone-thread's hold on her warding eases when the feed from the reclamation site stops — not resolved, but the boundary reads cleaner in the quieter substrate.",
+        "The reclamation site is closed and the relay node has gone quiet — the upstream claim on her warding is finished.",
+        "Her guardian watch stands unchanged; what she carries from the Zone now, she carries clean."
       ],
       "skillsObserved": [
         "stood and oriented without command — the guardian-purpose is"
@@ -4652,9 +4661,9 @@
       "status": "active",
       "gender": "female creature",
       "pronouns": "she/her",
-      "statusNote": "Standing watch at the downed tree's base. Guardian-purpose active. Zone-thread present but subtly shifted — looser against the now-closed circuit.",
+      "statusNote": "Standing watch at the downed tree's clearing. Node-anchor claim resolved; guardian-purpose active and settled.",
       "lastSeen": {
-        "locationId": "gen-disputed-zone-left-branch-entrance",
+        "locationId": "gen-the-made-gate",
         "day": 14
       }
     },
@@ -5731,7 +5740,7 @@
     "lastTickWorldDay": 28,
     "lastCanonWorldDay": 28,
     "lastGenCount": 673,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Huginn's single sound at the exact moment of the wolverine's death — timed, as Huginn's sounds always are, and a comment",
@@ -7499,22 +7508,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 21.900639621254758,
-    "cerebral": 20.513676699278314,
-    "social": 6.83008631489215,
-    "generous": 3.4965942200513918,
-    "cautious": 9.371751700475135,
-    "physical": 1.8964429369679379,
-    "risky": 0.45486785940272106,
-    "ruthless": 0.9900569982278971,
-    "carousing": 0.1609708780870769,
-    "amorous": 0.5917281007698868,
-    "patient": 0.3585693958152705,
-    "stealth": 0.00003460160257191061,
-    "devotion": 1.413935723123373,
-    "craft": 1.2279334811802085,
-    "leadership": 0.5339481057130224,
-    "deception": 0.16570198636800254
+    "strategic": 21.35312363072339,
+    "cerebral": 20.000834781796357,
+    "social": 6.659334157019846,
+    "generous": 4.409179364550107,
+    "cautious": 9.137457907963256,
+    "physical": 1.8490318635437393,
+    "risky": 0.44349616291765304,
+    "ruthless": 0.9653055732721996,
+    "carousing": 0.1569466061349,
+    "amorous": 0.5769348982506396,
+    "patient": 0.3496051609198887,
+    "stealth": 0.000033736562507612846,
+    "devotion": 1.3785873300452884,
+    "craft": 1.1972351441507032,
+    "leadership": 0.5205994030701968,
+    "deception": 0.16155943670880246
   },
   "aptitudes": [
     "strategist",
@@ -7523,7 +7532,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 893,
+  "actionCount": 894,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
@@ -7913,8 +7922,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785202129502,
-  "rev": 1585,
+  "updatedAt": 1785202266163,
+  "rev": 1586,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -11605,7 +11614,7 @@
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 96
+    "the_center": 97
   },
   "foreclosed": [
     "rootkin",
@@ -11799,10 +11808,10 @@
     {
       "id": "sess-19",
       "startedAt": "2026-07-28T01:15:44.199Z",
-      "lastAt": "2026-07-28T01:28:49.499Z",
+      "lastAt": "2026-07-28T01:31:06.162Z",
       "startDay": 28,
       "endDay": 28,
-      "beats": 3
+      "beats": 4
     }
   ],
   "company": [
@@ -12130,15 +12139,15 @@
     "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 264,
-    "choices": 263,
+    "sceneSummary": 265,
+    "choices": 264,
     "characterDeltas": 112,
-    "scene": 264,
-    "npcUpdates": 236,
+    "scene": 265,
+    "npcUpdates": 237,
     "factUpdates": 21,
     "placeUpdates": 51,
-    "codexUpdates": 167,
-    "timeOps": 257,
+    "codexUpdates": 168,
+    "timeOps": 258,
     "imagePrompt": 7,
     "sceneEnded": 64,
     "itemUpdates": 5,
@@ -12156,7 +12165,7 @@
     "scene_ended": 2,
     "_applyFailedOp": 7
   },
-  "_opTurns": 264,
+  "_opTurns": 265,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

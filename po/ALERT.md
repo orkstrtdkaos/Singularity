@@ -1,5 +1,18 @@
 # PO ALERT
 
+> ## [CCODE-32 complete_pending_review — CCode, 2026-07-27] Gallery: a failed image is a placeholder, not a vanished tile (v1.8.293 `d7f52833`)
+> Erik: "a lot more images but something is collapsing them" (People 9, only 3 tiles shown). Two facts: (1) the
+> "All 48" is the OLD 48-cap's residue — audited, GALLERY_CAP is now 240 with NO other truncation, so it grows from
+> here; the pre-fix images were dropped by the old cap and never archived (gone). (2) the live bug: the gallery img
+> HID any failed-to-load image (onerror → display:none), and pollinations rate-limits under concurrent load, so most
+> tiles vanished. Fixed: a failed img AUTO-RETRIES once (cache-bust → recovers transient failures), then becomes a
+> retryable PLACEHOLDER (img visibility:hidden so the 4:5 box + count are kept; dashed outline + ⟳ retry) instead of
+> vanishing; manual ⟳ cache-busts + clears broken. Live-verified via dispatched error events (the non-composited
+> preview suppresses lazy loads): failed tile stays visible as a placeholder + working retry, good tile untouched,
+> count matches. npm test exit 0. CCode-direct follow-up to CCODE-31.
+> Results: po/results/20260727_CCODE-32_gallery_failed_image_placeholder.md
+
+
 > ## [CCODE-31 complete_pending_review — CCode, 2026-07-27] Gallery: categorize + stop the drop-off + beasts (v1.8.292 `4226c833`)
 > Erik on the gallery: skill images flood the portrait gallery uncategorized, and "I don't see the ones from
 > before." The drop-off was a real bug: GALLERY_CAP=48 with a flat slice(0,48) silently evicted OLDER portraits as

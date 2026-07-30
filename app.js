@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.292";
+const APP_VERSION = "1.8.293";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6864,7 +6864,12 @@ function renderGallery() {
     ${gallery.length ? `<div class="gal-cats" style="margin-bottom:12px">${chip("all", "All", gallery.length)}${present.map(([key, label]) => chip(key, label, counts[key])).join("")}</div>` : ""}
     ${shown.length ? `<div class="gallery-grid">${shown.map(g => { const gi = gallery.indexOf(g); return `
       <figure class="gallery-item">
-        <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" data-lightbox="gallery" data-lbgroup="gallery" data-lbindex="${gi}" loading="lazy" onerror="this.parentElement.style.display='none'">
+        ${/* CCODE-32: a flaky image (pollinations rate-limits when many load at once) used to HIDE its whole tile
+              (onerror → display:none), so a gallery of 48 looked like 3 — Erik's "something is collapsing them".
+              Now: auto-retry ONCE with a cache-bust (recovers the transient failures), then leave a PLACEHOLDER
+              tile (never hide it) so the count matches the grid and the image is retryable, not vanished. */""}
+        <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" data-lightbox="gallery" data-lbgroup="gallery" data-lbindex="${gi}" loading="lazy" onerror="if(!this.dataset.retried){this.dataset.retried=1;this.src=this.src+(this.src.includes('?')?'&':'?')+'_r='+Date.now()}else{this.closest('.gallery-item')?.classList.add('gallery-broken')}">
+        <button class="gallery-retry" data-galretry title="This image didn't load — try again">⟳ retry</button>
         <button class="gallery-del" data-galdel="${esc(g.url)}" title="Remove this image">✕</button>
         ${character.portrait === g.url ? "" : `<button class="gallery-pick" data-galpick="${esc(g.url)}" title="Make this the character's portrait">★ Set as portrait</button>`}
         <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
@@ -6874,6 +6879,14 @@ function renderGallery() {
     <button class="btn secondary" id="gal-back" style="margin-top:14px">Back</button>
   </div>`);
   for (const b of app.querySelectorAll("[data-galcat]")) b.onclick = () => { galleryFilter = b.dataset.galcat; renderGallery(); };
+  // CCODE-32: manually re-try a placeholder tile — cache-bust the src so pollinations serves it fresh (same seed
+  // → same image, just re-fetched). Clears the broken state; the img's own auto-retry counter resets on success.
+  for (const b of app.querySelectorAll("[data-galretry]")) b.onclick = () => {
+    const fig = b.closest(".gallery-item"); const img = fig?.querySelector("img"); if (!img) return;
+    fig.classList.remove("gallery-broken"); delete img.dataset.retried;
+    const base = String(img.getAttribute("src") || "").split(/[?&]_r=/)[0];
+    img.src = base + (base.includes("?") ? "&" : "?") + "_r=" + Date.now();
+  };
   for (const b of app.querySelectorAll("[data-galdel]")) b.onclick = () => {
     const url = b.dataset.galdel;
     if (!confirm("Remove this image?")) return;

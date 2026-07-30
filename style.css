@@ -360,6 +360,14 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .gallery-del { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer; font-size: 13px; line-height: 1; background: rgba(0,0,0,.55); color: #fff; opacity: 0; transition: opacity .12s; }
 .gallery-item:hover .gallery-del, .gallery-del:focus { opacity: 1; }
 .gallery-del:hover { background: rgba(160,30,30,.9); }
+/* CCODE-32: a failed image leaves a retryable PLACEHOLDER tile (never a hidden gap) — so a gallery of 48 that
+   pollinations flaked on doesn't look like 3. The img keeps its 4:5 box (visibility, not display) so the tile
+   holds its place; a dashed outline + a centered ⟳ retry read as "this one didn't load." */
+.gallery-item.gallery-broken img { visibility: hidden; }
+.gallery-item.gallery-broken { outline: 1px dashed var(--border); outline-offset: -1px; border-radius: 8px; }
+.gallery-retry { position: absolute; top: 42%; left: 50%; transform: translate(-50%, -50%); display: none; z-index: 3; font-family: var(--font-ui); font-size: 12px; padding: 5px 12px; background: var(--panel2); border: 1px solid var(--border); border-radius: 6px; color: var(--ink); cursor: pointer; }
+.gallery-item.gallery-broken .gallery-retry { display: block; }
+.gallery-retry:hover { border-color: var(--accent); }
 /* SNG-108/109 chronicle + bond surfaces */
 .chronicle-para { line-height: 1.55; margin: 4px 0 8px; }
 .chronicle-deed { font-size: 13px; margin: 3px 0; line-height: 1.4; }

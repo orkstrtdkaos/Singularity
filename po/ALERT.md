@@ -1,5 +1,38 @@
 # PO ALERT
 
+> ## [CCODE-35 complete_pending_review — CCode, 2026-07-31] Persistent combat effects — a landed move leaves something standing (v1.8.299 `0687ec17`)
+> Erik: *"Each action should produce something that could persist, such as raising a shield at the beginning, or
+> gaining a sense/insight gives you bonuses to defense or striking."* Built. **The rule that makes it honest:** an
+> effect is never a hidden fudge — it enters the next round's roll as a **named, signed contestMod on the SNG-106
+> self-summing breakdown**, so `guard up +4` sits in the same math as the matchup and intensity terms. If it isn't in
+> the breakdown, it isn't real. **Engine** (`skill_battle.js`, pure): `effectMods` (what standing effects contribute
+> to a roll) · `effectFrom` (what a LANDED move leaves — a miss leaves nothing; partial at half value; a crit buys a
+> round) · `tickEffects`/`addEffect` (expiry, same-kind refresh, per-side cap). An effect never modifies the round
+> that created it. **Definitions are CONTENT** (`skill_battle_system.json` → `engine.persistentEffects`): 13 functions
+> → `{kind,label,value,rounds,applies,target}`; `applies` = whenAttacked / whenAttacking / always; `target` = self
+> (boon) / opponent (hindrance). Code owns when they land and expire; content owns every number.
+> **The seam that would have killed it silently:** `skillBattleRound` rebuilds state field-by-field, so `effects` had
+> to be named in BOTH the inbound literal and the outbound `s` — miss either and the panel advertises "guard up" while
+> the roll never sees it (a feature that lies). Fixed both directions and **DECLARED** `seam_battle_effects_roundtrip`
+> (ledger → 18 seams) so it's machine-checked forever.
+> **Visible** in three places: panel chips ("on you / on them", exact signed value + rounds left), the receipt ("you
+> gain guard up +4 for 2 rounds"), and the machine log (`effectsApplied` / `effectsLanded` / `effectsStanding` — this
+> makes "why did that roll land?" answerable from a pasted log).
+> **Also fixed:** 👁 "Read them" was declaring `shield`, so under the new system it would have left a raised GUARD —
+> the opposite of Erik's ask. A read IS a reveal: it now declares `reveal`, leaves an INSIGHT, and the matchup term
+> becomes honest. **10 new sim checks**, incl. the load-bearing "a standing guard REACHES THE ROLL". That test caught
+> a real subtlety: an effect can push a strong character past the d100 ceiling, so the invariant is
+> `sum(components) === (clampedFrom ?? total)` and the breakdown must DISCLOSE the clamp — both now asserted.
+> npm test exit 0. Live: a read landed insight +3 (2r) and did NOT modify its own round; the next strike applied it
+> as "you have their measure (2 rounds) +3"; a guard landed +4 (2r, whenAttacked). No console errors.
+> **AEVI/ERIK — THE VALUES ARE CONTENT AND UNTUNED BY PLAY.** Guard +4/2r, insight +3/2r, bind −4/2r are estimates.
+> With `marginScale 0.20` a typical round's margin gap is ~6-7, so +4 is a real but not dominant thumb on the scale
+> (~two-thirds of an average exchange). Stacking is deliberately shallow (same kind refreshes, cap 3/side) — that cap
+> is the dial if you want turtle builds viable. **Watch:** the OPPONENT gets effects too (their policy declares
+> shields and binds), so defensive foes are genuinely harder now — tell me if they feel sticky.
+> Results: po/results/20260731_CCODE-35_persistent_combat_effects.md
+
+
 > ## [CCODE-34 complete_pending_review — CCode, 2026-07-31] The one-round-fight bug, MEASURED + skill target clarity (v1.8.298 `99c377b5`)
 > Erik pasted his combat log back from the new machine tab (CCODE-33) — **the instrument paid for itself on its first
 > use.** He was right that momentum was tripping too easily, and it was far worse than his two samples showed.

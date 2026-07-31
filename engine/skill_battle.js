@@ -95,6 +95,13 @@ function effectApplies(fx, side, ownDecl, oppDecl, sb) {
   return true;                                                                     // "always" — knowledge/hindrance cuts both ways
 }
 
+/** CCODE-41 (Erik): is `side` locked out of a phase this round by a standing effect? A craft can blind you to your
+ *  own senses — *"if the opposing skill has blinded you to the sense skills you might have"* — which denies the
+ *  SETUP phase and sends you straight to your action. Pure; content owns which effects deny what (deniesPhase). */
+export function phaseDenied(effects, side, phase) {
+  return (effects || []).some(fx => fx.side === side && fx.deniesPhase === phase);
+}
+
 /** The contestMod lines the active effects contribute to one side's roll — one honest labelled term each. */
 export function effectMods(effects, side, ownDecl, oppDecl, sb) {
   return (effects || [])
@@ -117,6 +124,9 @@ function effectFrom(decl, roll, actor, sb) {
   return {
     kind: def.kind, label: def.label, value, roundsLeft: rounds, applies: def.applies || "always",
     side: def.target === "opponent" ? other : actor,   // WHOSE roll this modifies
+    // CCODE-41: deniesPhase must ride from the content def onto the LIVE effect — without this copy, phaseDenied
+    // reads undefined on every effect and the blinding counterplay is inert while still advertised in content.
+    ...(def.deniesPhase ? { deniesPhase: def.deniesPhase } : {}),
     source: decl.name || decl.function, from: actor
   };
 }

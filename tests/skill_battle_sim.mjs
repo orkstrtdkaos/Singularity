@@ -6,7 +6,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { matchupBonus, synthesizeOpponentSheet, opponentPolicy, battleRound } from "../engine/skill_battle.js";
+import { matchupBonus, synthesizeOpponentSheet, opponentPolicy, battleRound, phaseDenied } from "../engine/skill_battle.js";
 import { senseOpponent } from "../engine/sense.js";
 import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engine/encounters.js";
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
@@ -343,6 +343,26 @@ check("CCODE-40: an unclamped roll is unaffected (rawChance === chance when the 
     const weak = battleRound({ ...evenDecls, playerSheet: { attributes: { physical: 1 }, energy: 100 }, oppSheet: { attributes: { physical: 1 }, energy: 100, skills: [] },
       state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.5, 0.5]) });
     return weak.player.rawChance === weak.player.chance && weak.player.margin === weak.player.chance - weak.player.roll;
+  })());
+
+// ---- CCODE-41 groundwork: an effect can DENY a phase (Erik: "blinded you to the sense skills you might have") ----
+check("CCODE-41: phaseDenied reads deniesPhase off a standing effect, for that side only",
+  phaseDenied([{ side: "player", deniesPhase: "setup" }], "player", "setup")
+  && !phaseDenied([{ side: "player", deniesPhase: "setup" }], "opponent", "setup")
+  && !phaseDenied([{ side: "player", deniesPhase: "setup" }], "player", "action"));
+check("CCODE-41: an ordinary effect denies nothing (no accidental phase locks)",
+  !phaseDenied([{ side: "player", kind: "guard", value: 4 }], "player", "setup"));
+check("CCODE-41: deniesPhase rides from the CONTENT def onto the live effect (else the counterplay is inert)",
+  (() => {
+    const def = sb.persistentEffects.byFunction.conceal_deep;
+    if (!def?.deniesPhase) return false;                       // content must declare it
+    const r = battleRound({
+      playerDecl: { function: "conceal_deep", tier: 3, attribute: "mental", intensity: "standard", name: "a deep fade" },
+      oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
+      playerSheet: { attributes: { mental: 5 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
+      state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.01, 0.99])
+    });
+    return phaseDenied(r.effects, "opponent", "setup");        // it landed ON the opponent and denies their setup
   })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

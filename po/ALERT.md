@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [SNG-246 Fix D + BUG2 complete_pending_review — CCode, 2026-07-27] The mechanical receipt is SHOWN (v1.8.294 `3d961adb`)
+> Erik: "each action's resolution needs to be KNOWN, not just narrated." + §7c BUG2 (the silent theft). Shipped
+> Fix D (1 of 4 SNG-246 fixes): each encounter round now shows a compact mechanical line BESIDE the prose —
+> "⚔ ✓ success · you hit for 2 · foe 4→2 hp · you −3 en · they're near breaking (yield)". Loaded your staged
+> encounter_receipt_line.json into CONTENT.receiptLine (manifest + SYSTEM_SPEC count 38); playerReceiptLine (pure,
+> encounterFrame.js) fills the per-kind template — meter in the RIGHT terms per kind (hp/insight/ground/resolve/
+> progress), finish-proximity always shown, generic fallback, "" when nothing to show; app.js computes the round
+> facts + renders under the roll receipt (fight/challenge/puzzle — the regular onChoice path). BUG2: GM
+> inventoryRemove now surfaces an italic mechanical note ("− Waterskin — taken from you.") so a theft is never
+> silent. 7 smoke checks, boots clean. The fight/skill-battle path gets the receipt when BUG1 unifies the takeovers.
+> **NEXT SHIPS (CCode):** BUG1/Fix B (unify the double-takeover — the priority defect: a duel jumps from the frame
+> to the rejected renderSkillBattle panel), Fix A (engine-enforced fight-entry — the rule-18 drop), Fix C
+> (structured finish/change conditions). These benefit from Erik playing (combat needs the GM) to verify.
+> **AEVI:** receipt format loaded as-authored. **ERIK:** OQ1 — the line is the tight one-liner you leaned toward.
+> Results: po/results/20260727_SNG-246-fixD_receipt_line_and_bug2.md
+
+
 > ## [CCODE-32 complete_pending_review — CCode, 2026-07-27] Gallery: a failed image is a placeholder, not a vanished tile (v1.8.293 `d7f52833`)
 > Erik: "a lot more images but something is collapsing them" (People 9, only 3 tiles shown). Two facts: (1) the
 > "All 48" is the OLD 48-cap's residue — audited, GALLERY_CAP is now 240 with NO other truncation, so it grows from

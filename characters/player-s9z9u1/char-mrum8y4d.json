@@ -181,106 +181,137 @@
         "player": "Follow the brush line — try to track where they went.",
         "summary": "Loki tracked the stranger to the confluence — the trail ends at the water's edge, but something was left behind.",
         "narration": "Loki gets up from the mud. The spring mud has already taken the fall's print — two clear heel-scuffs, a knee-impression, and a smear where the coat dragged. Cy's tone drops back to silence. The lens widens, just slightly.\n\nThe brush line holds the stranger's passage plainly enough. Bent stems at the entry point. A snapped low branch, still pale and wet at the break — recent. The mud inside the treeline has taken boot-prints going in, angled left, toward the confluence below. Whoever they are, they moved fast but not lightly. The prints are deep. They were carrying something they did not carry in.\n\nLoki follows the line twenty yards into the brush before the ground firms and the prints thin. But the direction holds — down toward the braided confluence, where the two rivers meet in a low hollow ringed with grey-barked willows. A smear of fresh mud on a root confirms it. The stranger went to the water's edge. Beyond that, the ground rises again into open country, and the trail loses itself on the rocky bank.\n\nAt the confluence, beside the root where the mud smear sits, there is something left behind. A small object half-pressed into the bank — not dropped carelessly, but set down. A flat river stone with a short mark scratched into it, recent enough that the scratch still shows pale against the grey surface. Cy drops from the pack-strap to the ground without being asked and walks to it on careful legs. The lens narrows to a thread."
+      },
+      {
+        "player": null,
+        "summary": "The stranger did not run — they waited at the confluence, Waterskin in hand, to see what following means.",
+        "narration": "The flat stone sits half-pressed into the bank, the fresh scratch-mark catching the thin morning light. Cy has reached it already, moving on careful legs across the wet mud. The lens irises once at the mark, then holds still.\n\nLoki looks up from the stone and finds that the stranger did not leave.\n\nThey are standing at the water's edge where the two rivers braid together, maybe eight paces out. The Waterskin hangs from one hand. They are looking at Loki the way a person looks at something they have not decided what to do with yet. Medium height, a coat the color of old bark, no obvious weapon drawn — but the way they are standing is the way someone stands when they have thought about this already and are waiting to see if you have too.\n\n\"You followed,\" the stranger says. Their voice is flat and even, carrying easily across the water sound. It is not quite a greeting and not quite a threat. It is an observation, with a question folded inside it.\n\nCy makes one quiet click. The lens does not move from the stranger.\n\nThe confluence is open ground — nowhere to circle without wading. The willows stand back from the bank and the light is still thin, still undecided. The stranger has the skin and is between Loki and the deeper water. They are waiting to find out what kind of following this is."
       }
     ],
     "lastTurn": {
-      "narration": "Loki gets up from the mud. The spring mud has already taken the fall's print — two clear heel-scuffs, a knee-impression, and a smear where the coat dragged. Cy's tone drops back to silence. The lens widens, just slightly.\n\nThe brush line holds the stranger's passage plainly enough. Bent stems at the entry point. A snapped low branch, still pale and wet at the break — recent. The mud inside the treeline has taken boot-prints going in, angled left, toward the confluence below. Whoever they are, they moved fast but not lightly. The prints are deep. They were carrying something they did not carry in.\n\nLoki follows the line twenty yards into the brush before the ground firms and the prints thin. But the direction holds — down toward the braided confluence, where the two rivers meet in a low hollow ringed with grey-barked willows. A smear of fresh mud on a root confirms it. The stranger went to the water's edge. Beyond that, the ground rises again into open country, and the trail loses itself on the rocky bank.\n\nAt the confluence, beside the root where the mud smear sits, there is something left behind. A small object half-pressed into the bank — not dropped carelessly, but set down. A flat river stone with a short mark scratched into it, recent enough that the scratch still shows pale against the grey surface. Cy drops from the pack-strap to the ground without being asked and walks to it on careful legs. The lens narrows to a thread.",
-      "sceneSummary": "Loki tracked the stranger to the confluence — the trail ends at the water's edge, but something was left behind.",
+      "narration": "The flat stone sits half-pressed into the bank, the fresh scratch-mark catching the thin morning light. Cy has reached it already, moving on careful legs across the wet mud. The lens irises once at the mark, then holds still.\n\nLoki looks up from the stone and finds that the stranger did not leave.\n\nThey are standing at the water's edge where the two rivers braid together, maybe eight paces out. The Waterskin hangs from one hand. They are looking at Loki the way a person looks at something they have not decided what to do with yet. Medium height, a coat the color of old bark, no obvious weapon drawn — but the way they are standing is the way someone stands when they have thought about this already and are waiting to see if you have too.\n\n\"You followed,\" the stranger says. Their voice is flat and even, carrying easily across the water sound. It is not quite a greeting and not quite a threat. It is an observation, with a question folded inside it.\n\nCy makes one quiet click. The lens does not move from the stranger.\n\nThe confluence is open ground — nowhere to circle without wading. The willows stand back from the bank and the light is still thin, still undecided. The stranger has the skin and is between Loki and the deeper water. They are waiting to find out what kind of following this is.",
+      "sceneSummary": "The stranger did not run — they waited at the confluence, Waterskin in hand, to see what following means.",
       "choices": [
         {
-          "label": "Examine the marked stone — let Cy look first, then apply Prism Sight to read what warmth or recent handling it holds.",
+          "label": "Ask plainly why they took it — and what the marked stone means.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Use See the Made Thing — read what version of this moment they are building, and what is already cracking in it.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
           "trivial": false
         },
         {
-          "label": "Read the scratch-mark itself — look at what the mark is, and whether it means anything to someone who knows old workings.",
+          "label": "Use The Wrong Reality — give them a false read of the situation that leaves them off-balance and opens a conversation.",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Look across the confluence — try to find where the stranger went after the water, whether they crossed or followed the bank.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "scout"
+            "feint",
+            "deceive"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "the_wrong_reality",
+          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Leave the stone where it is and head back to the road — the Waterskin is gone and the stranger's direction is known enough.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
+          "label": "Say nothing — hold your ground and let the silence ask the question for you.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
           "intentTags": [
+            "defend",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, two small rivers meeting in a low hollow ringed with grey-barked willows. Loki stands at the water's edge where the trail ends. The rocky bank rises into open country beyond.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, two small rivers meeting in a low hollow ringed with grey-barked willows. Loki stands at the bank; the stranger stands at the water's edge eight paces out, Waterskin in hand.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Dropped from the pack-strap to the ground — walking on careful legs toward a flat marked stone half-pressed into the bank. Lens narrowed to a thread."
+            "state": "On the mud near the flat marked stone, lens fixed on the stranger, very still."
+          },
+          {
+            "name": "The Stranger",
+            "state": "Standing at the water's edge, Waterskin hanging from one hand, watching Loki with flat, evaluating eyes."
           }
         ],
         "objects": [
           "flat river stone with a fresh pale scratch-mark, half-pressed into the bank",
           "boot-prints in mud ending at the water's edge",
           "mud smear on a root confirming the stranger's passage",
-          "spare spade (orchard mud on the blade, back on the road at the rise)"
+          "Waterskin (in the stranger's hand)"
         ],
         "threads": [
-          "The stranger took the Waterskin and left a marked stone at the confluence — their purpose still unknown.",
+          "The stranger waited — they want something, or they are deciding something.",
+          "The marked stone's meaning is still unknown.",
           "The three-hundred-year tree about to fruit, and the missing person it was planted for.",
           "The planting is done; the orchard record holds the made name."
         ]
       },
+      "newEncounter": {
+        "type": "duel",
+        "name": "A Hostile Meeting",
+        "setup": "A hostile meeting that may come to blows — a raider, a desperate soul, a territorial thing. Offered with a clear decline/flee path (SNG-002b); the fight is a choice, and yielding is honored on both sides.",
+        "lethal": false,
+        "opponent": {
+          "name": "the aggressor",
+          "health": 6,
+          "threat": 30,
+          "yieldAt": 2,
+          "fleeDifficulty": 15,
+          "tacticTags": [
+            "press-in",
+            "circle",
+            "feint"
+          ]
+        }
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short tracking run through the brush to the confluence"
+        "why": "a short pursuit and confrontation at the confluence"
       }
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, two small rivers meeting in a low hollow ringed with grey-barked willows. Loki stands at the water's edge where the trail ends. The rocky bank rises into open country beyond.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, two small rivers meeting in a low hollow ringed with grey-barked willows. Loki stands at the bank; the stranger stands at the water's edge eight paces out, Waterskin in hand.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Dropped from the pack-strap to the ground — walking on careful legs toward a flat marked stone half-pressed into the ban"
+          "state": "On the mud near the flat marked stone, lens fixed on the stranger, very still."
+        },
+        {
+          "name": "The Stranger",
+          "state": "Standing at the water's edge, Waterskin hanging from one hand, watching Loki with flat, evaluating eyes."
         }
       ],
       "objects": [
         "flat river stone with a fresh pale scratch-mark, half-pressed into the bank",
         "boot-prints in mud ending at the water's edge",
         "mud smear on a root confirming the stranger's passage",
-        "spare spade (orchard mud on the blade, back on the road at the rise)"
+        "Waterskin (in the stranger's hand)"
       ],
       "threads": [
-        "The stranger took the Waterskin and left a marked stone at the confluence — their purpose still unknown.",
+        "The stranger waited — they want something, or they are deciding something.",
+        "The marked stone's meaning is still unknown.",
         "The three-hundred-year tree about to fruit, and the missing person it was planted for.",
         "The planting is done; the orchard record holds the made name."
       ]
@@ -764,23 +795,6 @@
     "news": [
       {
         "day": 1,
-        "worldDay": 13,
-        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
-      },
-      {
-        "day": 1,
-        "worldDay": 17,
-        "text": "This reaches your area — Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements. (near radiant plateau edge)",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 18,
-        "text": "This reaches your area — Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction (near millbrook)",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
         "worldDay": 19,
         "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
       },
@@ -882,14 +896,32 @@
         "worldDay": 27,
         "text": "Something has been building in valley: A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 28,
+        "text": "Word reaches you: The Crossing market row was told plainly: Zone-creature source closed, reclamation work complete upstream, downstream wells clear in a week or two. (near the crossing)",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 31,
+        "text": "Vessa Torquen: Vessa spent two days cross-referencing Loki's movement pattern against the anomalous pressure readings near junction 7-C and has quietly ruled out equipment error — whatever Loki is, she is now treating her as a controlled variable rather than noise, and has added a second observation column to her fieldbook.",
+        "tier": "ambient"
+      },
+      {
+        "day": 1,
+        "worldDay": 31,
+        "text": "Tessvel Cairn has hit trouble — A routing memo Tessvel filed on day 28 used the deprecated valve-classification shorthand rather than the current standard, and a senior clerk flagged it — not loudly, but it is now sitting in a correction queue with her name on it, which is exactly the kind of mark she cannot afford.",
+        "tier": "event"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 664,
-    "lastSharedReadAt": "2026-07-27T16:02:30.014Z",
-    "lastTickWorldDay": 27,
-    "lastCanonWorldDay": 27,
-    "turnsSinceOffer": 10,
+    "lastGenCount": 758,
+    "lastSharedReadAt": "2026-07-31T14:10:43.951Z",
+    "lastTickWorldDay": 31,
+    "lastCanonWorldDay": 31,
+    "turnsSinceOffer": 11,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -914,21 +946,27 @@
     ],
     "wantProgress": {
       "vessa-torquen": {
-        "progress": 2,
+        "progress": 3,
         "status": "active",
-        "updatedWorldDay": 27,
+        "updatedWorldDay": 31,
         "lastOutcome": "progress"
       },
       "tessvel-cairn": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 27,
-        "lastOutcome": "stall"
+        "updatedWorldDay": 31,
+        "lastOutcome": "problem"
       },
       "standing-unlit": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 27,
+        "updatedWorldDay": 31,
+        "lastOutcome": "stall"
+      },
+      "ossivyn-tallow": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 31,
         "lastOutcome": "stall"
       }
     },
@@ -939,11 +977,11 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 3,
+        "stage": 5,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 660,
+        "lastMovedCount": 758,
         "surfacedAtCount": 663
       },
       "arc-valley-granary-rot": {
@@ -952,19 +990,63 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 3,
+        "stage": 5,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 660,
+        "lastMovedCount": 758,
         "surfacedAtCount": 663
+      },
+      "arc-inheritance-dispute": {
+        "id": "arc-inheritance-dispute",
+        "regionId": "the_reasoned_hold",
+        "kind": "feud",
+        "premise": "Two senior scholars are each separately drafting arguments that the other's methodology is fundamentally unsound, and the students loyal to each have begun refusing to share research.",
+        "cause": "The Reasoned Hold settles disputes through formal written disputation, which means a grievance can fester for months in manuscript form before anyone is…",
+        "stage": 0,
+        "seededAtCount": 758,
+        "surfaced": false,
+        "fate": "growing",
+        "lastMovedCount": 758
+      },
+      "arc-unraveling-record": {
+        "id": "arc-unraveling-record",
+        "regionId": "unspooling",
+        "kind": "rot",
+        "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
+        "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
+        "stage": 0,
+        "seededAtCount": 758,
+        "surfaced": false,
+        "fate": "growing",
+        "lastMovedCount": 758
       }
     },
     "arcStages": {
       "arc_what_wakes_beneath": {
         "othersPush": 1
+      },
+      "the_second_manifestation": {
+        "othersPush": 1
       }
-    }
+    },
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_warpling_hare",
+        "aimedAtPlayer": true,
+        "urgency": 2,
+        "oneLineHook": "A warpling hare has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_warpling_hare",
+          "name": "warpling hare"
+        },
+        "addedDay": 1,
+        "locationId": "the_slow_orchard"
+      }
+    ]
   },
   "domains": {
     "primary": "veilwright",
@@ -1031,7 +1113,8 @@
           "[d1] Not easily fooled — watched a Falsecraft-and-Wrong-Reality combination collapse in real time and named it calmly. She wants to understand things, not be managed.",
           "[d1] [while away] Vessa spent her evening cross-referencing Loki's observed behavior against her field notes, and has quietly added a new column to her intake log — unlabeled, written in her own shorthand — to track variables that don't fit standard assessment categories.",
           "[d1] [while away] Vessa spent a full day quietly retracing Loki's observed movements against her pipe-access logs and found two junction points the stranger visited that don't appear on any official schematic she holds — she has said nothing, but marked them in her personal field notes with a separate…",
-          "[d1] [while away] Vessa spent two of the three days cross-referencing her pressure-bleed readings against the Intake's older survey stakes, quietly folding in what she observed of Loki's movements as an unlabelled anomaly column — she still hasn't named it, but the column exists now, and she keeps…"
+          "[d1] [while away] Vessa spent two of the three days cross-referencing her pressure-bleed readings against the Intake's older survey stakes, quietly folding in what she observed of Loki's movements as an unlabelled anomaly column — she still hasn't named it, but the column exists now, and she keeps…",
+          "[d1] [while away] Vessa spent two days cross-referencing Loki's movement pattern against the anomalous pressure readings near junction 7-C and has quietly ruled out equipment error — whatever Loki is, she is now treating her as a controlled variable rather than noise, and has added a second observation…"
         ],
         "links": [
           "intake-plaza",
@@ -1078,7 +1161,8 @@
           "[d1] Her four salvaged coat-buttons each have a documented source — except the bone one, which she found and has never classified. It is the only gap in her otherwise meticulous record.",
           "[d1] Junior wright on posting-duty at the Eastern Intake notice board",
           "[d1] [while away] Tessvel filed her documents correctly as always but received no word on reassignment, and the posting-duty roster for the next fortnight went up with her name on it again — she is frustrated but has not yet found a lever to pull.",
-          "[d1] [while away] Tessvel filed everything correctly but was handed a third consecutive week of posting-duty rotation; she said nothing, stamped the schedule, and has begun keeping a private log of routing decisions she believes were made incorrectly by her seniors."
+          "[d1] [while away] Tessvel filed everything correctly but was handed a third consecutive week of posting-duty rotation; she said nothing, stamped the schedule, and has begun keeping a private log of routing decisions she believes were made incorrectly by her seniors.",
+          "[d1] [while away] A routing memo Tessvel filed on day 28 used the deprecated valve-classification shorthand rather than the current standard, and a senior clerk flagged it — not loudly, but it is now sitting in a correction queue with her name on it, which is exactly the kind of mark she cannot afford."
         ],
         "links": [
           "intake-plaza",
@@ -1227,7 +1311,8 @@
         "kind": "person",
         "facts": [
           "[d1] Cult member, guardian of the outer chamber",
-          "[d1] [while away] The guardian remained at their post through all three days without incident — no visitors, no orders from within, nothing to act on."
+          "[d1] [while away] The guardian remained at their post through all three days without incident — no visitors, no orders from within, nothing to act on.",
+          "[d1] [while away] Four days of the same threshold, the same stillness — Standing Unlit has neither been tested nor relieved, and remains exactly where they were."
         ],
         "links": [],
         "aliases": [],
@@ -1301,32 +1386,6 @@
         "entityId": "taken-person",
         "updatedDay": 1
       },
-      "the-seam-in-the-unlit-stone": {
-        "id": "the-seam-in-the-unlit-stone",
-        "label": "The Seam Beside the Bracket",
-        "kind": "mystery",
-        "facts": [
-          "[d1] Named by the Unlit Elder as older than the flame, older than the Unlit themselves, and waiting for someone to ask the wrong question of the right thing. Cy locked its lens on it and has not looked away. This is the second stonework of this character in the Unlit Deep — the inner chamber walls bear…",
-          "[d1] See the Made Thing confirmed it is a door-frame — cut with clear purpose, made for something to pass through. It predates the pale blue flame, predates the bracket beside it, and predates the Unlit's occupation of the chamber. The craft found no maker's fingerprint it could name. The purpose-shape…",
-          "[d1] Physical contact confirmed: the seam is cut with precision — the tool changed direction exactly three times. Under a hand's pressure, it gives a faint vibration, like a thing waiting for the right asking. It did not open. The morning was not the right pressure. Cy extended one foreleg toward the…",
-          "[d1] Prism Sight and Cy's combined attention found the seam's asking-point: the lowest third runs warmer than the rest — the quality of a mechanism recently queried and still waiting to answer. Cy tapped the floor at the seam's base to confirm. The door did not open, but the asking-point is now located.",
-          "[d1] Pressing the floor at the base of the seam — the asking-point Cy and Prism Sight located — caused it to yield downward slightly and the seam to stand open and visible. The vibration ceased; the stillness that replaced it is of a question heard, not waiting. The door has answered but has not…",
-          "[d1] The full press opened the door completely — a passage descending into cold water smell and living dark, older than the Unlit's own chamber. The three many-legged creatures descended back through it and were gone. The door answers pressure when the intent behind it is genuine.",
-          "[d1] Prism Sight read the passage beyond: old worked stone, creature-traces going down single-file on the left wall, and a diffuse continuous warmth deep below — the quality of a large spring-fed water source. The creatures use this passage regularly. Whatever is down there has been down there a long…"
-        ],
-        "links": [
-          "the-unlit-deep",
-          "unlit-elder",
-          "the-unlit",
-          "the-taken-from-the-city",
-          "terminus-seals-beneath-the-valley",
-          "the-creature-at-the-threshold",
-          "the-water-crisis"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
       "the-creature-at-the-threshold": {
         "id": "the-creature-at-the-threshold",
         "label": "The Creature at the Threshold",
@@ -1368,25 +1427,28 @@
         "label": "The Passage Below",
         "kind": "mystery",
         "facts": [
-          "[d1] The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep…",
-          "[d1] The passage below has three deliberate turns cut around something, not following the rock's grain. The creature-traces on the left wall are worn smooth by long and regular use. Below, a large chamber holds a heat source at its center — steady, outward-radiating warmth, the signature of something…",
-          "[d1] The heat-source at the center of the mapped chamber below is a terminus regulator — a Precursor thermal hold, not a heat source. It is holding a temperature to prevent surge in the routing lines above it. Those lines run upward into the valley basin. It is the third of three such junctions Cy has…",
-          "[d1] Loki pressed the regulator's primary interface panel. The amber light deepened and completed a cycle — a long-held note reaching its final beat. The mechanism did not wake; it completed. Whether the regulator found the authority it was built to receive in Loki's contact is not yet clear.",
           "[d1] The regulator logged the first condition when Loki held contact — whether the water is prepared. The second condition, the authority to answer, remains unmet. The mechanism is not refusing; it is waiting. The two conditions are structurally distinct, and the second may require a different kind of…",
           "[d1] The Wrong Reality placed a provisional authority-claim against the regulator's second condition — the mechanism accepted the claim and moved from waiting to considering. The duration counter stopped incrementing for the first time since Cy's last recorded visit. The second condition is not yet…",
           "[d1] Both conditions of the regulator's question were logged at the same timestamp. The counter stopped permanently. The mechanism is closed — not waiting, not sleeping, done. What downstream effect the completion carries, if any, is not yet visible.",
           "[d1] Cy's inventory describes three downstream states following a regulator's completion: a signal issued to the downstream terminus, a terminus warden receiving and acting on it, and a record logged to the relay node south of the hollow. This question had never been answered before — the inventory…",
-          "[d1] When the regulator closed, the veil went thin for a moment without warning — a mesh of amber-burning questions became almost visible, running in every direction beneath the valley, deep and old, most of them still open. The closed regulator was one thread among many. The shape could not be held…"
+          "[d1] When the regulator closed, the veil went thin for a moment without warning — a mesh of amber-burning questions became almost visible, running in every direction beneath the valley, deep and old, most of them still open. The closed regulator was one thread among many. The shape could not be held…",
+          "[d1] Named by the Unlit Elder as older than the flame, older than the Unlit themselves, and waiting for someone to ask the wrong question of the right thing. Cy locked its lens on it and has not looked away. This is the second stonework of this character in the Unlit Deep — the inner chamber walls bear…",
+          "[d1] See the Made Thing confirmed it is a door-frame — cut with clear purpose, made for something to pass through. It predates the pale blue flame, predates the bracket beside it, and predates the Unlit's occupation of the chamber. The craft found no maker's fingerprint it could name. The purpose-shape…",
+          "[d1] Physical contact confirmed: the seam is cut with precision — the tool changed direction exactly three times. Under a hand's pressure, it gives a faint vibration, like a thing waiting for the right asking. It did not open. The morning was not the right pressure. Cy extended one foreleg toward the…",
+          "[d1] Prism Sight and Cy's combined attention found the seam's asking-point: the lowest third runs warmer than the rest — the quality of a mechanism recently queried and still waiting to answer. Cy tapped the floor at the seam's base to confirm. The door did not open, but the asking-point is now located.",
+          "[d1] Pressing the floor at the base of the seam — the asking-point Cy and Prism Sight located — caused it to yield downward slightly and the seam to stand open and visible. The vibration ceased; the stillness that replaced it is of a question heard, not waiting. The door has answered but has not…",
+          "[d1] The full press opened the door completely — a passage descending into cold water smell and living dark, older than the Unlit's own chamber. The three many-legged creatures descended back through it and were gone. The door answers pressure when the intent behind it is genuine.",
+          "[d1] Prism Sight read the passage beyond: old worked stone, creature-traces going down single-file on the left wall, and a diffuse continuous warmth deep below — the quality of a large spring-fed water source. The creatures use this passage regularly. Whatever is down there has been down there a long…"
         ],
         "links": [
-          "the-unlit-deep",
           "the-water-crisis",
           "the-creature-at-the-threshold",
           "terminus-seals-beneath-the-valley",
           "unlit-elder",
           "halvex",
           "cy-s-construction",
-          "the-taken-from-the-city"
+          "the-taken-from-the-city",
+          "the-unlit"
         ],
         "aliases": [
           "The Seam Beside the Bracket"
@@ -1537,7 +1599,8 @@
           "[d1] The trees here name themselves through the children who inherit them. A stranger's name given ahead of time is a different gift — not the one Ossivyn is planting.",
           "[d1] Yielded partway to the combined working — he will write a given name in the orchard's own record, with the giver's name and the date, so it stays until someone reads it to the child. He will not raise a plaque; that is not how this place remembers.",
           "[d1] Accepted the name Tree without suspicion — the plain name is now going into the orchard record. The hidden instruction did not survive the thin substrate here.",
-          "[d1] Ossivyn recognized a made name on sight — recorded it as made, not as a deception, not with hostility. The orchard record will tell the child honestly: someone was here who wanted to be found."
+          "[d1] Ossivyn recognized a made name on sight — recorded it as made, not as a deception, not with hostility. The orchard record will tell the child honestly: someone was here who wanted to be found.",
+          "[d1] [while away] The planting soil is still damp from the last watering and the conditions are not yet right to move to the next step — Ossivyn has done nothing wrong, but nothing has moved either, and he is simply watching."
         ],
         "links": [
           "the-slow-orchard"
@@ -1547,7 +1610,67 @@
         "entityId": "ossivyn-tallow",
         "updatedDay": 1
       }
-    }
+    },
+    "mergeUndo": [
+      {
+        "at": "2026-07-31T14:10:37.673Z",
+        "source": {
+          "id": "the-seam-in-the-unlit-stone",
+          "label": "The Seam Beside the Bracket",
+          "kind": "mystery",
+          "facts": [
+            "[d1] Named by the Unlit Elder as older than the flame, older than the Unlit themselves, and waiting for someone to ask the wrong question of the right thing. Cy locked its lens on it and has not looked away. This is the second stonework of this character in the Unlit Deep — the inner chamber walls bear…",
+            "[d1] See the Made Thing confirmed it is a door-frame — cut with clear purpose, made for something to pass through. It predates the pale blue flame, predates the bracket beside it, and predates the Unlit's occupation of the chamber. The craft found no maker's fingerprint it could name. The purpose-shape…",
+            "[d1] Physical contact confirmed: the seam is cut with precision — the tool changed direction exactly three times. Under a hand's pressure, it gives a faint vibration, like a thing waiting for the right asking. It did not open. The morning was not the right pressure. Cy extended one foreleg toward the…",
+            "[d1] Prism Sight and Cy's combined attention found the seam's asking-point: the lowest third runs warmer than the rest — the quality of a mechanism recently queried and still waiting to answer. Cy tapped the floor at the seam's base to confirm. The door did not open, but the asking-point is now located.",
+            "[d1] Pressing the floor at the base of the seam — the asking-point Cy and Prism Sight located — caused it to yield downward slightly and the seam to stand open and visible. The vibration ceased; the stillness that replaced it is of a question heard, not waiting. The door has answered but has not…",
+            "[d1] The full press opened the door completely — a passage descending into cold water smell and living dark, older than the Unlit's own chamber. The three many-legged creatures descended back through it and were gone. The door answers pressure when the intent behind it is genuine.",
+            "[d1] Prism Sight read the passage beyond: old worked stone, creature-traces going down single-file on the left wall, and a diffuse continuous warmth deep below — the quality of a large spring-fed water source. The creatures use this passage regularly. Whatever is down there has been down there a long…"
+          ],
+          "links": [
+            "the-unlit-deep",
+            "unlit-elder",
+            "the-unlit",
+            "the-taken-from-the-city",
+            "terminus-seals-beneath-the-valley",
+            "the-creature-at-the-threshold",
+            "the-water-crisis"
+          ],
+          "aliases": [],
+          "createdDay": 1,
+          "updatedDay": 1
+        },
+        "targetId": "the-seam-beside-the-bracket",
+        "targetBefore": {
+          "facts": [
+            "[d1] The passage descends steeply on slick, age-worn stone — the grade shifts without warning and the lattice crowds all light back on itself. The passage cannot be navigated without preparation: a light-source the lattice cannot crowd, or a way to read the grade before it drops. The smell of deep…",
+            "[d1] The passage below has three deliberate turns cut around something, not following the rock's grain. The creature-traces on the left wall are worn smooth by long and regular use. Below, a large chamber holds a heat source at its center — steady, outward-radiating warmth, the signature of something…",
+            "[d1] The heat-source at the center of the mapped chamber below is a terminus regulator — a Precursor thermal hold, not a heat source. It is holding a temperature to prevent surge in the routing lines above it. Those lines run upward into the valley basin. It is the third of three such junctions Cy has…",
+            "[d1] Loki pressed the regulator's primary interface panel. The amber light deepened and completed a cycle — a long-held note reaching its final beat. The mechanism did not wake; it completed. Whether the regulator found the authority it was built to receive in Loki's contact is not yet clear.",
+            "[d1] The regulator logged the first condition when Loki held contact — whether the water is prepared. The second condition, the authority to answer, remains unmet. The mechanism is not refusing; it is waiting. The two conditions are structurally distinct, and the second may require a different kind of…",
+            "[d1] The Wrong Reality placed a provisional authority-claim against the regulator's second condition — the mechanism accepted the claim and moved from waiting to considering. The duration counter stopped incrementing for the first time since Cy's last recorded visit. The second condition is not yet…",
+            "[d1] Both conditions of the regulator's question were logged at the same timestamp. The counter stopped permanently. The mechanism is closed — not waiting, not sleeping, done. What downstream effect the completion carries, if any, is not yet visible.",
+            "[d1] Cy's inventory describes three downstream states following a regulator's completion: a signal issued to the downstream terminus, a terminus warden receiving and acting on it, and a record logged to the relay node south of the hollow. This question had never been answered before — the inventory…",
+            "[d1] When the regulator closed, the veil went thin for a moment without warning — a mesh of amber-burning questions became almost visible, running in every direction beneath the valley, deep and old, most of them still open. The closed regulator was one thread among many. The shape could not be held…"
+          ],
+          "links": [
+            "the-unlit-deep",
+            "the-water-crisis",
+            "the-creature-at-the-threshold",
+            "terminus-seals-beneath-the-valley",
+            "unlit-elder",
+            "halvex",
+            "cy-s-construction",
+            "the-taken-from-the-city"
+          ],
+          "aliases": [
+            "The Seam Beside the Bracket"
+          ],
+          "entityId": null
+        },
+        "relinked": []
+      }
+    ]
   },
   "tendencies": {
     "devotion": 2.3437315887414574,
@@ -1748,8 +1871,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785197407961,
-  "rev": 179,
+  "updatedAt": 1785507145632,
+  "rev": 185,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1850,6 +1973,11 @@
             {
               "worldDay": 27,
               "note": "Vessa spent two of the three days cross-referencing her pressure-bleed readings against the Intake's older survey stakes, quietly folding in what she observed of Loki's movements as an unlabelled anomaly column — she still hasn't named it, but the column exists now, and she keeps returning to it.",
+              "outcome": "progress"
+            },
+            {
+              "worldDay": 31,
+              "note": "Vessa spent two days cross-referencing Loki's movement pattern against the anomalous pressure readings near junction 7-C and has quietly ruled out equipment error — whatever Loki is, she is now treating her as a controlled variable rather than noise, and has added a second observation column to her fieldbook.",
               "outcome": "progress"
             }
           ]
@@ -2046,6 +2174,11 @@
               "worldDay": 27,
               "note": "Tessvel filed everything correctly but was handed a third consecutive week of posting-duty rotation; she said nothing, stamped the schedule, and has begun keeping a private log of routing decisions she believes were made incorrectly by her seniors.",
               "outcome": "stall"
+            },
+            {
+              "worldDay": 31,
+              "note": "A routing memo Tessvel filed on day 28 used the deprecated valve-classification shorthand rather than the current standard, and a senior clerk flagged it — not loudly, but it is now sitting in a correction queue with her name on it, which is exactly the kind of mark she cannot afford.",
+              "outcome": "problem"
             }
           ]
         },
@@ -2175,7 +2308,16 @@
           "stubbed": false,
           "romanceEligible": true,
           "lastAttentionDay": 1,
-          "depthTier": "established"
+          "depthTier": "established",
+          "offscreen": [
+            {
+              "worldDay": 31,
+              "note": "The planting soil is still damp from the last watering and the conditions are not yet right to move to the next step — Ossivyn has done nothing wrong, but nothing has moved either, and he is simply watching.",
+              "outcome": "stall"
+            }
+          ],
+          "promotedWorldDay": 31,
+          "canonTier": "variant"
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -2231,7 +2373,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 11
+    "the_quickwood": 12
   },
   "opLossPending": false,
   "sessions": [
@@ -2266,6 +2408,14 @@
       "startDay": 27,
       "endDay": 28,
       "beats": 61
+    },
+    {
+      "id": "sess-5",
+      "startedAt": "2026-07-31T14:12:25.631Z",
+      "lastAt": "2026-07-31T14:12:25.631Z",
+      "startDay": 31,
+      "endDay": 31,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -2305,7 +2455,7 @@
   "_opEmitted": {
     "sceneSummary": 93,
     "choices": 93,
-    "characterDeltas": 42,
+    "characterDeltas": 41,
     "scene": 93,
     "placeUpdates": 12,
     "codexUpdates": 75,
@@ -2322,7 +2472,8 @@
     "factUpdates": 4,
     "stageOps": 7,
     "encounterOps": 1,
-    "ledgerEvents": 1
+    "ledgerEvents": 1,
+    "newEncounter": 1
   },
   "_opTurns": 93,
   "customAbilities": {},
@@ -2568,9 +2719,75 @@
         "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
       },
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
+    },
+    "gm-a-hostile-meeting": {
+      "schemaVersion": 1,
+      "id": "gm-a-hostile-meeting",
+      "type": "duel",
+      "name": "A Hostile Meeting",
+      "setup": "A hostile meeting that may come to blows — a raider, a desperate soul, a territorial thing. Offered with a clear decline/flee path (SNG-002b); the fight is a choice, and yielding is honored on both sides.",
+      "lethal": false,
+      "opponent": {
+        "name": "the aggressor",
+        "health": 6,
+        "threat": 30,
+        "yieldAt": 2,
+        "fleeDifficulty": 15,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ]
+      }
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-re_raider_duel",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-re_raider_duel",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 6,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 4,
+          "physical": 4,
+          "mental": 4,
+          "social": 4
+        },
+        "energy": 94,
+        "maxEnergy": 94,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 3,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 3,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 94
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 24,
     "lastBeat": "witness_power"

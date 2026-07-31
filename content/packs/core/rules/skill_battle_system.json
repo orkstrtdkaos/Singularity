@@ -88,6 +88,21 @@
         "guardian": "out to stop you passing — no more than that"
       }
     },
+    "items": {
+      "note": "CCODE-43 (Erik): 'Item use itself needs to be weaved in as well... do I use my dagger, or my axe... my metal shield or my energy shield? Inventory becomes functional - throw a chemical at them or drink a potion.' Two ways an item reaches a fight. (1) WIELDED: what you carry quietly modifies the moves it suits — a blade helps a strike, a shield helps a guard — as a NAMED line in the roll, read off the item's own bonusTags (the same field normal play already uses, so nothing needs re-authoring). (2) USED: a consumable is a MOVE you spend a step on — drink it to restore, throw it to harm. Spending an item is the honest answer to being spent, which is why drinking is a real option when your crafts have gone quiet.",
+      "tagFunctions": {
+        "melee": ["strike", "break"], "blade": ["strike"], "axe": ["break", "strike"], "spear": ["strike"],
+        "bow": ["strike"], "thrown": ["strike"], "shield": ["shield", "ward"], "armor": ["resist", "shield"],
+        "focus": ["reveal", "foresee", "empower"], "light": ["reveal"], "rope": ["bind"], "tool": ["make", "open"]
+      },
+      "wieldBonusPerItem": 4,
+      "wieldBonusCap": 8,
+      "throwFunction": "strike",
+      "throwTier": 2,
+      "drinkFunction": "restore",
+      "restoreIsFreeOfContest": true,
+      "maxItemMovesShown": 6
+    },
     "senseStep": {
       "note": "CCODE-46 (Erik): 'During the sense action, you shouldn’t be able to use clearly attacks during the sense round — it should only allow skills that can sense, or an attribute based generic type sense.' senseFunctions gates the craft list for the SENSE step. genericSenses are the always-available attribute reads — you can always LOOK, even with no sensing craft — and the attribute you look WITH changes what you find: 'a wits sense could find a solution that a Reason based sense might miss.'",
       "senseFunctions": ["reveal", "foresee", "track"],

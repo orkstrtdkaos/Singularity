@@ -1104,3 +1104,5 @@ img[data-lightbox] { cursor: zoom-in; }
 @media (prefers-reduced-motion: reduce) { .sb-spinner { animation: none; } }
 /* the fast Haiku beat — the clash, while the full telling is still being written */
 .sb-quick { font-size: 13px; line-height: 1.5; font-style: italic; color: var(--ink); border-left: 3px solid var(--accent2, #7a9); background: color-mix(in srgb, var(--accent2, #7a9) 7%, var(--panel2)); border-radius: 4px; padding: 7px 10px; margin-bottom: 8px; }
+/* CCODE-43 — an item move: what spending it buys you. */
+.sb-item-note { color: var(--accent, #c9a227); font-style: italic; }

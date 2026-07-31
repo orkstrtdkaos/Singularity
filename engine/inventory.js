@@ -260,3 +260,49 @@ export function inventoryForGM(character) {
     `${i.customName ? `${i.customName} (their name for: ${i.name})` : i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""})`
   ).join("; ");
 }
+
+// ---------- CCODE-43: items in a fight ----------
+// Erik: "do I use my dagger, or my axe... my metal shield or my energy shield? Inventory becomes functional -
+// throw a chemical at them or drink a potion." Two doors, both read off fields items ALREADY carry, so nothing
+// needs re-authoring: bonusTags (what the thing is good for) and effects (what spending it does).
+
+/** Which battle functions does this item quietly help? Read from its own bonusTags. Pure. */
+export function itemCombatFunctions(item, cfg = {}) {
+  const map = cfg.tagFunctions || {};
+  const out = new Set();
+  for (const t of (item?.bonusTags || [])) for (const fn of (map[String(t).toLowerCase()] || [])) out.add(fn);
+  return [...out];
+}
+
+/** WIELDED: what you carry adds a NAMED line to the moves it suits — never a hidden fudge, and capped so a
+ *  full pack cannot out-weigh a craft. Best-first, like equipmentBonus in normal play. Pure. */
+export function wieldBonusFor(character, fn, cfg = {}) {
+  const per = cfg.wieldBonusPerItem ?? 4, cap = cfg.wieldBonusCap ?? 8;
+  // A CONSUMABLE is never a passive bonus — a flask you have not thrown is not helping you swing. It earns its
+  // keep by being SPENT as a move (usableCombatItems), which is the whole point of making inventory functional.
+  const helping = (character?.inventory || []).filter(i => (i.qty ?? 1) > 0
+    && !(i.consumable || i.kind === "consumable")
+    && itemCombatFunctions(i, cfg).includes(fn));
+  if (!helping.length) return null;
+  helping.sort((a, b) => (b.evoStage || 1) - (a.evoStage || 1));
+  const value = Math.min(cap, helping.length * per);
+  return { value, items: helping.map(i => i.customName || i.name), label: `wielding ${helping.map(i => i.customName || i.name).slice(0, 2).join(" + ")}` };
+}
+
+/** USED: the consumables you could spend as a MOVE this step — drink to restore, throw to harm. Pure. */
+export function usableCombatItems(character, cfg = {}) {
+  const out = [];
+  for (const i of (character?.inventory || [])) {
+    if ((i.qty ?? 1) <= 0) continue;
+    const consumable = i.consumable || i.kind === "consumable";
+    if (!consumable) continue;
+    const eff = i.effects || {};
+    const restores = Number(eff.energy) || Number(eff.health) || 0;
+    const throwable = (i.bonusTags || []).some(t => ["thrown", "chemical", "flask", "bomb"].includes(String(t).toLowerCase()))
+      || /oil|acid|flask|powder|dust|vial|bomb/i.test(i.name || "");
+    if (restores > 0) out.push({ item: i, mode: "drink", restores: { energy: Number(eff.energy) || 0, health: Number(eff.health) || 0 },
+      label: `Drink ${i.customName || i.name}`, note: `restores ${[Number(eff.energy) ? `${eff.energy}e` : "", Number(eff.health) ? `${eff.health} hp` : ""].filter(Boolean).join(" + ")}` });
+    else if (throwable) out.push({ item: i, mode: "throw", label: `Throw ${i.customName || i.name}`, note: "harms THEM — spends the item" });
+  }
+  return out.slice(0, cfg.maxItemMovesShown ?? 6);
+}

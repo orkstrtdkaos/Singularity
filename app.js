@@ -23,7 +23,7 @@ import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, merg
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
-import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
+import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.314";
+const APP_VERSION = "1.8.315";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8399,6 +8399,16 @@ function playerBattleSkills() {
   }
   out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
   out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
+  // CCODE-43 (Erik): "Item use itself needs to be weaved in as well... throw a chemical at them or drink a potion."
+  // A consumable is a MOVE you spend a step on. Drinking is also the honest answer to being spent — your crafts
+  // have gone quiet, but a flask has not. Item moves are reveal-less, so the sense-step filter drops them naturally.
+  for (const u of usableCombatItems(character, CONTENT.skillBattle?.engine?.items || {})) {
+    const icfg = CONTENT.skillBattle?.engine?.items || {};
+    out.push({ id: `_item_${slugify(u.item.name)}`, itemMove: u,
+      function: u.mode === "throw" ? (icfg.throwFunction || "strike") : (icfg.drinkFunction || "restore"),
+      tier: u.mode === "throw" ? (icfg.throwTier || 2) : 1, attribute: "practical",
+      name: u.label, finds: null, itemNote: u.note });
+  }
   // CCODE-46 (Erik): "or an attribute based generic type sense... a wits sense could find a solution that a Reason
   // based sense might miss." You can always LOOK, craft or no craft — and the attribute you look WITH changes what
   // you find. These are reveal-function, so they qualify for the SENSE step and cost nothing but the round.
@@ -8523,6 +8533,12 @@ function sbDeclFromSel(sel, skills, intensity) {
   const d = { function: lead.function, tier: lead.tier || 1, attribute: lead.attribute || "practical",
               intensity, name: lead.name, id: lead.id };
   if (picked[1]) d.woven = { function: picked[1].function, tier: picked[1].tier || 1, name: picked[1].name, id: picked[1].id };
+  // CCODE-43: what you are WIELDING rides on the declaration, so the engine can put it in the roll as its own
+  // named line. A dagger and an axe suit different verbs — that is the choice Erik wanted to be real.
+  const wield = wieldBonusFor(character, d.function, CONTENT.skillBattle?.engine?.items || {});
+  if (wield) d.wield = wield;
+  // CCODE-43: an ITEM move (drink / throw) carries what spending it does.
+  if (lead.itemMove) { d.itemMove = lead.itemMove; d.name = lead.name; }
   return d;
 }
 /** The step tracker: where you are in the turn, and what is already locked behind you. */
@@ -8658,7 +8674,8 @@ function skillBattlePanel() {
         ? `<span class="sb-fin" title="FINISHING POTENTIAL${fin.why === "innate" ? " — this craft can kill, so it has carried this from the start" : " — earned by reaching tier " + (s.tier || 1)}. Declare it as your ACTION and a decisive swing can end the fight in one beat.${fo ? "\n\nChance to END it outright: " + fo.pct + "%\n· " + fo.reasons.join("\n· ") : ""}${foKnown ? "" : "\n\n(Read them to see the number.)"}">\u26a1 finisher${foKnown ? ` \u00b7 ${fo.pct}% to end it` : ""}</span>`
         : (fin && fin.why === "needs-tier" ? `<span class="sb-fin dim" title="Not yet a finisher — this craft gains finishing potential at tier ${fin.needTier}.">\u26a1 at T${fin.needTier}</span>` : "");
       const oddsTag = odds ? `<span class="sb-odds sb-odds-${odds.show}" title="${esc(odds.tip)}">${esc(odds.label)}</span>` : "";
-      const findsLine = s.finds ? `<span class="sb-skill-does">finds ${esc(s.finds)}</span>` : "";
+      const findsLine = s.finds ? `<span class="sb-skill-does">finds ${esc(s.finds)}</span>` : ""
+        + (s.itemNote ? `<span class="sb-skill-does sb-item-note">${esc(s.itemNote)}</span>` : "");
       return `<div class="sb-skill-row${on ? " picked" : ""}" style="border-left:3px solid ${FAMILY_COLOR[f]}">
         <button class="btn secondary sb-skill${on ? " on" : ""}" data-sbskill="${i}" title="${on ? "Deselect" : selFull ? "Two crafts already chosen for this step — deselect one first" : "Choose this for the " + step.label.toLowerCase() + " step"}">${on ? `<span class="sb-pick-n">${pick + 1}</span> ` : ""}${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}${findsLine}${oddsTag}${finTag}</button>${info}
       </div>`;
@@ -8851,6 +8868,21 @@ async function sbExecuteTurn() {
     character.activeEncounter = { defId: enc.def.id, state: r.state }; // write THROUGH the activeEnc() wrapper
     const ids = [d.id, d.woven?.id].filter(x => x && !String(x).startsWith("_"));
     if (ids.length) { recordUse(character, ids, { day: absoluteWorldDay() }); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
+    // CCODE-43: an ITEM move is SPENT here — drinking restores, throwing is gone. The item leaves the pack either
+    // way; a consumable that survives its own use would make inventory decorative again.
+    if (d.itemMove) {
+      const it = d.itemMove.item, nm = it.customName || it.name;
+      if (d.itemMove.mode === "drink") {
+        const g = d.itemMove.restores || {};
+        // cap at maxEnergy — a drink tops you up, it never overfills you past your own pool
+        if (g.energy) character.energy = Math.max(0, Math.min(character.maxEnergy ?? 100, character.energy + g.energy));
+        if (g.health) character.health = Math.max(0, Math.min(character.maxHealth, character.health + g.health));
+        beats.push(`You drank ${nm} — ${[g.energy ? `+${g.energy} energy` : "", g.health ? `+${g.health} hp` : ""].filter(Boolean).join(", ")}.`);
+      } else {
+        beats.push(`You threw ${nm} at them.`);
+      }
+      try { consumeItem(character, it.customName || it.name); } catch { removeItem(character, it.name, 1); }
+    }
     sbLastRoundRolls = { you: r.player || null, them: r.opponent || null };
     sbLastRound = { opponent: r.opponent };
     character.activeEncounter.state.lastOppReceipt = r.opponent || null;

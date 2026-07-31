@@ -169,6 +169,9 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momM
       ...(momMod ? [{ label: momMod > 0 ? "momentum (you have the advantage)" : "momentum (you're on the back foot)", value: momMod }] : []),
       // CCODE-45: what your SENSE step bought this action — a named line, never a hidden fudge.
       ...(setupMod ? [{ label: setupMod > 0 ? "you read them first" : "they read you first", value: setupMod }] : []),
+      // CCODE-43: what you are WIELDING, when it suits this move. Its own named line, so a dagger and an axe are
+      // visibly different choices rather than an invisible thumb on the scale.
+      ...(decl.wield?.value ? [{ label: decl.wield.label || "wielded gear", value: decl.wield.value }] : []),
       ...fxMods
     ]
   };

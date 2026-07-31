@@ -187,6 +187,19 @@ const energyCost = (decl, sb, steps, rules) => Math.round(
   * (decl.woven ? (sb?.weave?.energyMultiplier ?? 1.8) : 1)
 );
 
+/** CCODE-39: can this side pay for what it declared? If not, the craft doesn't answer — the declaration falls back
+ *  to a plain effort in the same spirit (a guard stays a guard, everything else becomes a bare strike). Pure. */
+export function degradeIfSpent(decl, energy, sb, steps, rules) {
+  if (energyCost(decl, sb, steps, rules) <= energy) return decl;
+  const defensive = (sb?.functionMatchup?.defensiveFunctions) || ["shield", "ward", "resist"];
+  const guarding = defensive.includes(decl.function);
+  return {
+    function: guarding ? "shield" : "strike", tier: 1, attribute: decl.attribute || "physical",
+    intensity: "conserve", name: guarding ? "a last raised guard" : "a bare-handed effort",
+    spentFallback: true, wanted: decl.name || decl.function
+  };
+}
+
 /** One skill-battle ROUND. Both sides declare {function, tier, attribute, intensity}; both roll; compare
  *  margins; the higher shifts momentum by the difference; both pay energy (attrition). The engine computes
  *  BOTH full rolls — the returned `opponent` receipt is complete and identical regardless of who's watching;
@@ -196,6 +209,11 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   steps = steps || rules?.intensitySteps || DEFAULT_STEPS;
   // CCODE-35: standing effects modify THIS round's rolls as named contestMods, then tick; newly landed ones
   // are added after both sides roll (an effect never modifies the round that created it).
+  // CCODE-39: a side with nothing left in the pool cannot pay for a craft — its declaration DEGRADES to a plain
+  // effort (steel and wit: a bare strike or a raised guard, tier 1, conserve, no weave). You fight on; you just
+  // fight without your crafts until you find energy again. Enforced here so it binds both sides equally.
+  playerDecl = degradeIfSpent(playerDecl, state.playerEnergy ?? playerSheet.energy ?? 0, sb, steps, rules);
+  oppDecl = degradeIfSpent(oppDecl, state.opponentEnergy ?? oppSheet.energy ?? 0, sb, steps, rules);
   const standing = state.effects || [];
   const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb), momentumModifier(state.momentum || 0, "player", sb));
   const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb), momentumModifier(state.momentum || 0, "opponent", sb));
@@ -222,6 +240,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
 
   let playerEnergy = Math.max(0, (state.playerEnergy ?? playerSheet.energy ?? 0) - energyCost(playerDecl, sb, steps, rules));
   let opponentEnergy = Math.max(0, (state.opponentEnergy ?? oppSheet.energy ?? 0) - energyCost(oppDecl, sb, steps, rules));
+  // CCODE-39 (Erik: "if energy is depleted it shouldn't stop a fight cold… people can fight on with simple strikes
+  // and defends"): being spent is a STATE, not a verdict. It is surfaced so the player can yield BY CHOICE, drink
+  // something, or keep swinging steel — the engine never decides it for them.
+  const spent = { player: playerEnergy <= 0, opponent: opponentEnergy <= 0 };
 
   // CCODE-38 (Erik: "the momentum mechanic is ending fights it shouldn't — I took one hit, still tons of energy
   // and health"): filling the meter is now a PRESSURE EVENT, not a death. The dominated side is driven back — real
@@ -240,13 +262,15 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     momentum = (dominated === "opponent" ? 1 : -1) * meterMax * (pcfg.resetTo ?? 0.35); // driven back, still in it
   }
 
+  // CCODE-39: energy no longer ENDS a fight. Running dry means your crafts stop answering (a spent side can only
+  // make simple, costless moves — steel and wit), not that you lose. Yielding while spent is the player's call,
+  // and an energy item is a real answer to it. The opponent breaking is still the engine's own end condition.
   let resolved = null;
   if (pressure.opponent >= (pcfg.breakAtPressure ?? 3)) resolved = "player";                       // they finally break
-  else if (playerEnergy <= 0 && opponentEnergy <= 0) resolved = "stalemate";                       // both spent
-  else if (playerEnergy <= 0) resolved = "opponent";                                               // attrition
-  else if (opponentEnergy <= 0) resolved = "player";
-  // the PLAYER's exit is health, owned by the app (checkIncapacitation) — a meter never decides it.
+  // the PLAYER's exit is health, owned by the app (checkIncapacitation) — a meter never decides it, and neither
+  // does an empty energy pool.
 
-  const newState = { ...state, round: (state.round || 0) + 1, momentum, playerEnergy, opponentEnergy, effects, pressure, resolved, status: resolved ? "resolved" : "active" };
-  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, landed: [landedP, landedW, landedO].filter(Boolean) };
+  const newState = { ...state, round: (state.round || 0) + 1, momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, status: resolved ? "resolved" : "active" };
+  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, landed: [landedP, landedW, landedO].filter(Boolean),
+    degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback } };
 }

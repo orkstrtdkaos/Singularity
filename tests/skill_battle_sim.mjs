@@ -71,7 +71,11 @@ const drained = battleRound({
   playerSheet: { attributes: { practical: 3 }, energy: 100 }, oppSheet: { attributes: { practical: 3 }, energy: 3, skills: [] },
   state: { momentum: 0, playerEnergy: 100, opponentEnergy: 3 }, rules, sb, steps, rng: seqRng([0.5, 0.5])
 });
-check("SNG-098: a side that runs out of energy forfeits the contest (attrition is a real win condition)", drained.state.opponentEnergy <= 0 && drained.resolved === "player");
+// CCODE-39 REWRITES this rule (Erik: "if energy is depleted it shouldn't stop a fight cold… that is a yield
+// option, but people can fight on with simple strikes and defends, or use an item to restore energy"). Attrition is
+// still real — it strips your CRAFTS — but it no longer hands anyone the win.
+check("CCODE-39: attrition still bites (the pool empties) but no longer FORFEITS the contest",
+  drained.state.opponentEnergy <= 0 && drained.resolved !== "player" && drained.state.spent?.opponent === true);
 
 // ---- ⭐ THE FOG INVARIANT: presentation over TRUE state, never false state ----
 const viewerBlind = { attunement: 0 };   // tier 0
@@ -279,6 +283,33 @@ check("CCODE-38: the policy stays DETERMINISTIC (same state in → same move out
     const sheet = { skills: [{ function: "strike", name: "s", tier: 2 }, { function: "shield", name: "g", tier: 2 }], energy: 80, tacticTags: [] };
     const st = { momentum: -4, round: 3, opponentEnergy: 80, lastOppFn: "strike" };
     return opponentPolicy(sheet, st, null, sb).function === opponentPolicy(sheet, st, null, sb).function;
+  })());
+
+// ---- CCODE-39: an empty energy pool is a STATE, not a verdict (Erik: "it shouldn't stop a fight cold") ----
+const spentState = { momentum: 0, effects: [], pressure: { player: 0, opponent: 0 }, playerEnergy: 0, opponentEnergy: 60 };
+const spentRound = battleRound({
+  playerDecl: { function: "strike", tier: 3, attribute: "physical", intensity: "surge", name: "Hunter's Strike" },
+  oppDecl: { function: "strike", tier: 2, attribute: "physical", intensity: "standard", name: "a hard strike" },
+  playerSheet: { attributes: { physical: 4 }, energy: 0 }, oppSheet: { attributes: { physical: 3 }, energy: 60, skills: [] },
+  state: spentState, rules, sb, steps, rng: seqRng([0.5, 0.5])
+});
+check("CCODE-39: running out of energy does NOT end the fight", !spentRound.resolved);
+check("CCODE-39: a spent side's CRAFT doesn't answer — it degrades to steel and wit, and says so",
+  spentRound.degraded?.player === true && spentRound.state.spent?.player === true);
+check("CCODE-39: the spent side still ROLLS and still contests (they fight on, they don't stand still)",
+  Number.isFinite(spentRound.player?.roll) && Number.isFinite(spentRound.player?.margin));
+check("CCODE-39: an unspent side is untouched by the degrade rule",
+  spentRound.degraded?.opponent === false);
+check("CCODE-39: yielding while spent is still the PLAYER's call, and still works",
+  skillBattleRound({ ...sbState, playerEnergy: 0 }, duelDef, {}, { character: char, rules, sb, steps, yield: true }).outcome === "yielded");
+// ...and the fight must still TERMINATE — removing an exit must not create an unkillable stalemate.
+check("CCODE-39: fights still terminate — the opponent breaking remains a real end condition",
+  (() => {
+    const breakAt = sb.momentum.pressure.breakAtPressure;
+    const out = skillBattleRound({ ...sbState, momentum: 9, pressure: { player: 0, opponent: breakAt - 1 }, playerEnergy: 0 },
+      duelDef, { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" },
+      { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
+    return out.ended;
   })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

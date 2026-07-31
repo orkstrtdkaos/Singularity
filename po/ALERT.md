@@ -1,5 +1,35 @@
 # PO ALERT
 
+> ## [CCODE-45 complete_pending_review — CCode, 2026-07-31] THE TURN spec'd in full + the engine layer (v1.8.306 `dce2c7ed`)
+> Erik ruled on the last two questions — **two GM calls per turn**, and **the sense step LOCKS once narrated** (no
+> editing back) — so the turn design is complete. **`po/SPEC_CCODE-45_the_turn.md` SUPERSEDES SPEC_CCODE-41**: his
+> turn-flow message reframes the UI and folds braiding in, so the ⋈ arm-then-pick gesture is **replaced, not
+> patched** (*"The weave mechanic is not intuitive… we need to update some of the mechanics so it's simple to
+> understand"*). **THE TURN:** sense (optional · costs the ability used · locked after GM call #1) → action → bonus
+> (only if the sense earned it; a FULL action) → **Edit or Execute** → GM call #2 narrates the whole turn. Effects
+> tick ONCE, at the end.
+> **BUILT: the engine layer, deliberately ADDITIVE and INERT until the UI uses it** — nothing in the live game
+> changes on this commit. `battleRound` gains `phase` / `tickEffects` / `setupBonus`, all defaulting to today's
+> behaviour so every existing caller is byte-identical (there is an explicit backward-compat test). A **sense step
+> does not move momentum, apply pressure, or advance the round counter** — that is the fix for *"sensing gives the
+> opponent a free hit."* A sense returns `setupBonus` + `bonusEarned`, and the bonus reaches the ACTION roll as a
+> **named line** ("you read them first" / "they read you first"), never a hidden fudge. 11 new sim checks.
+> **MY FIVE ENGINEERING CALLS are named as mine in the spec and are ALL content dials**, so none is a decision Erik
+> can't reverse without code: `senseMovesMomentum: false` (else momentum swings 3×/turn and the measured CCODE-38
+> pacing is void), the setup-bonus scale/cap, the bonus granted on a **crit sense only** (a full extra action is a
+> large grant — **to be simulated before final tuning**, as CCODE-34/38 were), and the opponent getting the same rule.
+> **NEXT (build order in the spec):** simulate the bonus threshold → the stepped UI (per-step free text, braid as a
+> choice) → the two GM calls.
+> **⚠ PROCESS NOTE — I got this wrong today and it cost real time.** I shipped v1.8.303/.304/.305 on `npm test`
+> alone, then hit a boot failure and misdiagnosed it three times: blamed a stale module cache, then an invalid verb
+> I'd invented (`conceal_deep`), then CCODE-41 — and **reverted CCODE-44 (the pre-fight appraisal), which was
+> working code**. The actual cause: the preview browser's ES-module cache is **cross-port**, so "use a fresh port"
+> (my own standing note) is NOT sufficient — only a never-used port is. Proven: identical code failed on
+> 8366/8367/8368/8369 and booted on 8411 and in a worktree. Every step from here gets a **live boot check on a
+> never-used port before push**, not just green gates. **CCODE-44 is worth rebuilding — it was never broken.**
+> Results: po/results/20260731_CCODE-45_the_turn_engine.md
+
+
 > ## [CCODE-40 complete_pending_review + CCODE-41 SPEC READY — CCode, 2026-07-31] Stacks compare PRE-clamp; structured rounds specified (v1.8.304 `35be2fd0`, v1.8.305 `68aaff6e`)
 > **CCODE-40 — Erik found a real bug with exact arithmetic:** *"All of the bonuses and penalties need to be stacked
 > and compared PRIOR to a clamp. If I have +35 due to abilities and skills and the enemy has +25 but has also landed

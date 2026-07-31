@@ -9,6 +9,8 @@ import { dirname, join } from "node:path";
 import { matchupBonus, synthesizeOpponentSheet, opponentPolicy, battleRound } from "../engine/skill_battle.js";
 import { senseOpponent } from "../engine/sense.js";
 import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engine/encounters.js";
+import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
+import { recordUse } from "../engine/practice.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -178,6 +180,48 @@ check("CCODE-35: effects survive the skillBattleRound round-trip (the hand-built
     const st = { ...sbState, effects: [{ kind: "insight", label: "you have their measure", value: 3, roundsLeft: 3, applies: "always", side: "player", source: "t", from: "player" }] };
     const out = skillBattleRound(st, duelDef, { function: "strike", tier: 2, attribute: "practical", intensity: "standard", name: "a cut" }, { character: char, rules, sb, steps, rng: seqRng([0.4, 0.6]) });
     return (out.state.effects || []).some(f => f.kind === "insight") && (out.player.breakdown?.components || []).some(c => /measure/.test(c.label));
+  })());
+
+// ---- CCODE-37: the WEAVE — two crafts in one turn (Erik: "this is where braids really shine") ----
+// Turn-by-turn forces one move per turn; a weave is how a practised pairing beats that limit. It must cost for
+// both, show its second craft as a named line, and — the payoff — land BOTH effects from the one turn.
+const weaveCfg = sb.weave;
+check("CCODE-37: the weave dials are CONTENT (engine.weave)", !!weaveCfg && Number.isFinite(weaveCfg.bonusPerTier));
+const wovenRound = battleRound({
+  playerDecl: { function: "shield", tier: 3, attribute: "physical", intensity: "standard", name: "Raise a guard",
+                woven: { function: "reveal", tier: 2, name: "Prism Sight" } },
+  oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
+  playerSheet: { attributes: { physical: 3 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
+  state: { momentum: 0, effects: [], playerEnergy: 100 }, rules, sb, steps, rng: seqRng([0.01, 0.99])
+});
+check("CCODE-37: the woven craft is its OWN named line in the roll (not a hidden bonus)",
+  (wovenRound.player.breakdown?.components || []).some(c => /woven: Prism Sight/.test(c.label) && c.value > 0));
+check("CCODE-37: THE PAYOFF — one woven turn lands BOTH crafts' effects",
+  (() => { const k = (wovenRound.effects || []).filter(f => f.side === "player").map(f => f.kind); return k.includes("guard") && k.includes("insight"); })());
+check("CCODE-37: a woven round costs energy for BOTH crafts (weaving is a real price, not a free upgrade)",
+  (() => {
+    const plain = battleRound({
+      playerDecl: { function: "shield", tier: 3, attribute: "physical", intensity: "standard", name: "Raise a guard" },
+      oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
+      playerSheet: { attributes: { physical: 3 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
+      state: { momentum: 0, effects: [], playerEnergy: 100 }, rules, sb, steps, rng: seqRng([0.01, 0.99])
+    });
+    return wovenRound.state.playerEnergy < plain.state.playerEnergy;
+  })());
+check("CCODE-37: an unwoven round is unchanged (the weave is additive, never a tax on normal play)",
+  !(battleRound({
+    playerDecl: { function: "shield", tier: 3, attribute: "physical", intensity: "standard", name: "Raise a guard" },
+    oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
+    playerSheet: { attributes: { physical: 3 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
+    state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.5, 0.5])
+  }).player.breakdown?.components || []).some(c => /woven/.test(c.label)));
+// the braid economy: a weave is a CO-ACTIVATION, so weaving a pairing enough times earns it as a braid
+check("CCODE-37: weaving records a co-activation, so a pairing ripens toward a real braid (the whole arc)",
+  (() => {
+    const ch = { abilities: [{ abilityId: "a", level: 2 }, { abilityId: "b", level: 2 }], practice: null };
+    for (let i = 0; i < BRAID_RIPEN_AT; i++) recordUse(ch, ["a", "b"], { day: i });
+    const cat = { a: { id: "a", name: "A", functions: ["strike"] }, b: { id: "b", name: "B", functions: ["reveal"] } };
+    return mintableBraidsFor(ch, { catalog: cat }).some(m => m.components.includes("a") && m.components.includes("b"));
   })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

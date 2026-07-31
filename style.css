@@ -888,6 +888,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-skill-does { display: block; font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim); margin-top: 2px; line-height: 1.35; }
 .sb-skill-info { flex: 0 0 auto; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--ink-dim); cursor: pointer; font-size: 13px; padding: 0 8px; line-height: 1; }
 .sb-skill-info:hover, .sb-skill-info:focus { color: var(--accent); border-color: var(--accent); outline: none; }
+/* CCODE-37 — ⋈ weave: two crafts in one turn. The armed craft glows; the bar names what you're weaving. */
+.sb-weave-btn { flex: 0 0 auto; background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--ink-dim); cursor: pointer; font-size: 13px; padding: 0 8px; line-height: 1; }
+.sb-weave-btn:hover, .sb-weave-btn:focus { color: var(--accent2, #7a9); border-color: var(--accent2, #7a9); outline: none; }
+.sb-weave-btn.on { color: var(--accent2, #7a9); border-color: var(--accent2, #7a9); background: color-mix(in srgb, var(--accent2, #7a9) 18%, transparent); }
+.sb-skill-row.weaving { background: color-mix(in srgb, var(--accent2, #7a9) 10%, transparent); border-radius: 4px; }
+.sb-weave-bar { font-family: var(--font-ui); font-size: 12px; padding: 6px 9px; margin-bottom: 6px; border-radius: 4px; border: 1px dashed var(--accent2, #7a9); background: color-mix(in srgb, var(--accent2, #7a9) 8%, var(--panel2)); line-height: 1.45; }
+.sb-weave-cancel { background: none; border: none; color: var(--ink-dim); text-decoration: underline dotted; cursor: pointer; font-size: 11px; padding: 0; }
 .sb-intensity { font-family: var(--font-ui); font-size: 12px; margin-bottom: 6px; display: flex; gap: 6px; align-items: center; }
 .sb-int { text-transform: capitalize; }
 .sb-int.on { border-color: var(--accent); color: var(--accent); }

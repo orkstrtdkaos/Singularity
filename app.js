@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.300";
+const APP_VERSION = "1.8.301";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8393,6 +8393,7 @@ function playerBattleSkills() {
 let sbLastRound = null;
 let sbLastRoundReceipt = null; // SNG-246 (Erik): what JUST happened this round — both moves + the interaction + the swing, SHOWN.
 let sbLastRoundRolls = null;   // CCODE-36 (Erik): the ROLLS behind that round — same breakdown popover as normal play.
+let sbWeaveArmed = null;       // CCODE-37 (Erik: "this is where braids really shine"): index of the craft armed to WEAVE.
 
 // SNG-246 (Erik: "no rolls, no opposed rolls or descriptions… ended inexplicably"): a per-round MECHANICAL line
 // for the skill battle — names YOUR move and THEIRS, the interaction (blades lock / turned aside / you slip it),
@@ -8417,7 +8418,9 @@ function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
     : !pDef && oDef ? `they ${oPhrase} — your blow is turned aside`
     : !pDef && !oDef ? `they ${oPhrase} — the blows meet and both scatter`
     : `they ${oPhrase} — you both circle, testing`;
-  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name} · ${interaction} · ${gain} · momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}${fxBit}`;
+  // CCODE-37: a woven round says so — you did two things in one turn, and it cost you for both.
+  const wov = playerDecl.woven ? ` ⋈ woven with ${playerDecl.woven.name}` : "";
+  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name}${wov} · ${interaction} · ${gain} · momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}${fxBit}`;
 }
 
 // CCODE-36 (Erik): one round as a compact line for the END-OF-FIGHT narration. This is the GM's raw material for
@@ -8490,8 +8493,14 @@ function skillBattlePanel() {
       const info = known
         ? `<button class="sb-skill-info" data-entity="skill:${esc(s.id)}" title="What this craft is — full detail" aria-label="Explain ${esc(s.name)}">ⓘ</button>`
         : `<button class="sb-skill-info" data-verb="${esc(s.function)}" title="What ${esc(s.function)} does — the verb's mechanics" aria-label="Explain ${esc(s.function)}">ⓘ</button>`;
-      return `<div class="sb-skill-row" style="border-left:3px solid ${FAMILY_COLOR[f]}">
-        <button class="btn secondary sb-skill" data-sbskill="${i}">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}</button>${info}
+      // CCODE-37: ⋈ arms this craft to be WOVEN with the next one you pick — two crafts, one turn. Real crafts
+      // only (the steel-and-wit fallbacks aren't abilities and can't build a braid).
+      const armed = sbWeaveArmed === i;
+      const weaveBtn = known
+        ? `<button class="sb-weave-btn${armed ? " on" : ""}" data-sbweave="${i}" title="${armed ? "Cancel the weave" : `Weave ${esc(s.name)} with a second craft — one turn, both crafts. Costs energy for both, lands BOTH effects, and counts as a co-activation toward earning this pairing as a braid.`}">⋈</button>`
+        : "";
+      return `<div class="sb-skill-row${armed ? " weaving" : ""}" style="border-left:3px solid ${FAMILY_COLOR[f]}">
+        <button class="btn secondary sb-skill" data-sbskill="${i}">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}</button>${weaveBtn}${info}
       </div>`;
     }).join("");
     return `<div class="moves-group"><div class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())}</div>${chips}</div>`;
@@ -8523,7 +8532,13 @@ function skillBattlePanel() {
     })()}
     ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
     <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
-    <div class="sb-hint hint">Pick ONE thing this turn — it resolves, then the next. Type below to shape it in your own words.</div>
+    ${(() => { // CCODE-37 (Erik: "this is where braids really shine"): the weave banner — what's armed, how close
+      // this pairing is to becoming a real braid, and the honest cost of doing two things in one turn.
+      if (sbWeaveArmed == null) return "";
+      const lead = skills[sbWeaveArmed]; if (!lead) return "";
+      return `<div class="sb-weave-bar">⋈ Weaving <strong>${esc(lead.name)}</strong> with… <span class="hint">pick a second craft — one turn, both crafts, both effects; costs energy for both and counts toward earning the braid.</span> <button class="sb-weave-cancel" id="sb-weave-x">cancel</button></div>`;
+    })()}
+    <div class="sb-hint hint">Pick ONE thing this turn — it resolves, then the next. Type below to shape it in your own words. <strong>⋈</strong> weaves two crafts into one turn.</div>
     <div class="sb-skills">${groups}</div>
     <div class="sb-actions" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap">
       <button class="btn" id="sb-finish" title="Go for a DECISIVE finishing blow — an all-or-nothing stroke that can END it in one beat (a clean hit collapses it; a botch hardens it). Not a normal round — the gamble.">⚡ Finish it</button>
@@ -8571,7 +8586,25 @@ function wireSkillBattlePanel() {
   if (!enc || enc.state?.mode !== "skill_battle") return;
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(sbLastRound); };
-  for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => sbDeclare(window._sbSkills[Number(b.dataset.sbskill)], { intensity: sbIntensity });
+  // CCODE-37: ⋈ arms a craft; the NEXT craft you pick is woven with it (one turn, both crafts). Tapping ⋈ again,
+  // or the armed craft itself, cancels — you can never accidentally weave a craft with itself.
+  for (const b of app.querySelectorAll("[data-sbweave]")) b.onclick = () => {
+    const i = Number(b.dataset.sbweave);
+    sbWeaveArmed = (sbWeaveArmed === i) ? null : i;
+    renderSkillBattle(sbLastRound);
+  };
+  const wx = document.getElementById("sb-weave-x"); if (wx) wx.onclick = () => { sbWeaveArmed = null; renderSkillBattle(sbLastRound); };
+  for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => {
+    const i = Number(b.dataset.sbskill), skills = window._sbSkills || [];
+    if (sbWeaveArmed != null && sbWeaveArmed !== i) {
+      const lead = skills[sbWeaveArmed], second = skills[i];
+      sbWeaveArmed = null;
+      sbDeclare(lead, { intensity: sbIntensity, woven: second });
+      return;
+    }
+    if (sbWeaveArmed === i) { sbWeaveArmed = null; renderSkillBattle(sbLastRound); return; } // tapping the armed craft cancels
+    sbDeclare(skills[i], { intensity: sbIntensity });
+  };
   // CCODE-35: a read declares REVEAL, not shield. It was declared as a shield so the scout round played safe, but
   // a read IS a reveal — and Erik's ask ("gaining a sense/insight gives you bonuses") means the scout round should
   // leave an INSIGHT standing, not a raised guard. This also makes the matchup term honest (reveal beats conceal).
@@ -8597,11 +8630,14 @@ function renderSkillBattle(lastRound = null) {
 
 /** Resolve one declared round: apply the player's health/energy attrition, advance the state, and either
  *  re-render the panel (fog view of what just happened) or end the contest. */
-function sbDeclare(skill, { intensity = "standard", scouting = false, finisher = false } = {}) {
+function sbDeclare(skill, { intensity = "standard", scouting = false, finisher = false, woven = null } = {}) {
   const enc = activeEnc(); if (!enc) return;
   const beforeMom = enc.state?.momentum ?? 0; // SNG-246: for the per-round receipt (the swing this round)
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   const decl = { function: skill.function, tier: skill.tier || 1, attribute: skill.attribute || "practical", intensity, name: skill.name };
+  // CCODE-37: a WOVEN second craft rides on the declaration — the engine adds its named roll line, lands its
+  // effect, and charges for both. The lead craft's function still drives the matchup.
+  if (woven) decl.woven = { function: woven.function, tier: woven.tier || 1, name: woven.name, id: woven.id };
   let rr = skillBattleRound(enc.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
   // SNG-230 §6b (Erik: a good roll can end a fight too, easier vs weaker foes): a decisive HARM FINISHER can
   // COLLAPSE the skill-battle EARLY — the round's momentum SWING is mapped to a degree and checked against the
@@ -8623,6 +8659,16 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
     }
   }
   if (!scouting) sbLastPlayerFn = skill.function; // reading doesn't show them a real tendency
+  // CCODE-37 — THE GAP: a skill-battle round never recorded PRACTICE. recordUse (the single counting site) was
+  // called only from the classic-choice path and the gambit runner, so every craft used in a fight counted for
+  // NOTHING: no rank progress, no co-activations, no braid progress. Combat — where you lean on your crafts most —
+  // was invisible to the ledger, which is the real reason braids never showed up there. A woven round records
+  // BOTH ids, so the pair's co-activation climbs toward BRAID_RIPEN_AT and the pairing can be earned as a braid.
+  const usedIds = [skill.id, woven?.id].filter(id => id && !String(id).startsWith("_")); // _strike/_guard aren't real crafts
+  if (usedIds.length) {
+    recordUse(character, usedIds, { day: absoluteWorldDay() });
+    pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex }));
+  }
   sbLastRoundReceipt = sbRoundReceipt(rr, decl, beforeMom, scouting); // SNG-246: SHOW what happened this round
   // CCODE-36 (Erik: "let the player see the rolls and modifiers… a popup off of the action you chose"): keep BOTH
   // sides' full breakdowns from this round so the receipt can open the same math popover normal play uses.
@@ -8645,7 +8691,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
 async function sbEnd(rr) {
   const enc = activeEnc(); const def = enc?.def;
   character.activeEncounter = null; saveCharacter(character);
-  sbLastPlayerFn = null; sbIntensity = "standard";
+  sbLastPlayerFn = null; sbIntensity = "standard"; sbWeaveArmed = null; // CCODE-37: never carry a weave into the next fight
   const nm = def?.opponent?.name || "your opponent";
   // SNG-138: a resolved PRESTIGE-CHALLENGE duel feeds renown — band-scaled (beating a renowned duelist
   // counts more than a road-hopeful); a loss costs the name modestly; a clean break is neutral.

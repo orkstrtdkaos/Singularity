@@ -137,14 +137,28 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = []) {
     contestMods: [
       { label: `matchup (${decl.function} vs ${oppDecl.function})`, value: mu },
       ...(step.effectMod ? [{ label: decl.intensity, value: step.effectMod }] : []),
+      // CCODE-37: a WOVEN second craft is its own named line — the player can see exactly what folding it in bought.
+      ...(decl.woven ? [{ label: `woven: ${decl.woven.name || decl.woven.function}`, value: wovenBonus(decl.woven, sb) }] : []),
       ...fxMods
     ]
   };
   const res = resolveAction(ctx, rng);
-  return { ...res, margin: res.chance - res.roll, matchup: mu, intensity: decl.intensity, tier, function: decl.function, name: decl.name || decl.function, effectMods: fxMods };
+  return { ...res, margin: res.chance - res.roll, matchup: mu, intensity: decl.intensity, tier, function: decl.function, name: decl.name || decl.function, effectMods: fxMods, woven: decl.woven || null };
 }
 
-const energyCost = (decl, sb, steps, rules) => Math.round((rules.energy?.defaultActionCost ?? 5) * ((steps[decl.intensity] || steps.standard || {}).energyMult ?? 1));
+/** CCODE-37: what folding a second craft into the round is worth — scales with the woven craft's tier, capped. */
+export function wovenBonus(woven, sb) {
+  const w = sb?.weave || {};
+  return Math.min(w.maxBonus ?? 8, Math.round((woven?.tier || 1) * (w.bonusPerTier ?? 2)));
+}
+
+// CCODE-37: a WOVEN round pays for both crafts — doing two things in one turn is a real cost, not a free upgrade.
+// (Once the pairing is EARNED as a braid it becomes one craft at one craft's price — that's the payoff.)
+const energyCost = (decl, sb, steps, rules) => Math.round(
+  (rules.energy?.defaultActionCost ?? 5)
+  * ((steps[decl.intensity] || steps.standard || {}).energyMult ?? 1)
+  * (decl.woven ? (sb?.weave?.energyMultiplier ?? 1.8) : 1)
+);
 
 /** One skill-battle ROUND. Both sides declare {function, tier, attribute, intensity}; both roll; compare
  *  margins; the higher shifts momentum by the difference; both pay energy (attrition). The engine computes
@@ -160,8 +174,13 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb));
   let effects = tickEffects(standing);
   const landedP = effectFrom(playerDecl, p, "player", sb);
+  // CCODE-37: THE PAYOFF — a woven round lands the SECOND craft's effect too, so one turn leaves two things
+  // standing. This is what "braids shine in combat" means mechanically: turn-by-turn forces one move per turn,
+  // and a weave is how a practised pairing beats that limit.
+  const landedW = playerDecl.woven ? effectFrom({ ...playerDecl.woven, intensity: playerDecl.intensity }, p, "player", sb) : null;
   const landedO = effectFrom(oppDecl, o, "opponent", sb);
   effects = addEffect(effects, landedP, sb);
+  effects = addEffect(effects, landedW, sb);
   effects = addEffect(effects, landedO, sb);
 
   const mom = sb.momentum || {};
@@ -185,5 +204,5 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   else if (opponentEnergy <= 0) resolved = "player";
 
   const newState = { ...state, round: (state.round || 0) + 1, momentum, playerEnergy, opponentEnergy, effects, resolved, status: resolved ? "resolved" : "active" };
-  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, landed: [landedP, landedO].filter(Boolean) };
+  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, landed: [landedP, landedW, landedO].filter(Boolean) };
 }

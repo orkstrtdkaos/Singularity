@@ -1,5 +1,45 @@
 # PO ALERT
 
+> ## [CCODE-38 complete_pending_review — CCode, 2026-07-31] MOMENTUM IS A MODIFIER, NOT THE EXIT + 4 playtest fixes (v1.8.302 `c7ac0351`)
+> Erik, decisive: *"The momentum mechanic is ending fights it shouldn't… i took one hit - still tons of energy and
+> health… momentum should be a modifier mechanic not the primary exit encounter metric."* He was at **37/45 hp and
+> 90/115 energy** and the fight ended. He's right — and CCODE-34 was treating the symptom (how fast the meter
+> filled); the disease was the meter being an exit at all.
+> **Momentum now does two things and ends nothing:** (a) **MODIFIER** — ahead carries a named roll bonus ("momentum
+> (you have the advantage) +5"), behind carries the penalty, capped; zero adds no line. (b) **PRESSURE** — filling
+> the meter is an EVENT, not a death: the dominated side takes real attrition (player → health, opponent →
+> energy/composure), a counter ticks, and the meter RESETS to 35% — driven back, still in it. A crushing blow is
+> heavy pressure too. **A fight now ends only on what the player can feel and manage:** health gone, energy gone,
+> the opponent breaking after breakAtPressure, mutual exhaustion, or a deliberate exit.
+> **Re-measured on the REAL round path** (rebuilt the harness around `skillBattleRound` with player health tracked
+> as app.js does — the CCODE-34 harness never modelled hp, which is now a live exit). 1500 fights/dial: **no
+> configuration ends a fight by a meter any more.** Chose meterMax 10 / breakAtPressure 2 / oppEnergyLoss 22 —
+> vs a peer median 15 rounds with a genuine **32% player-loss rate**; vs weak foes 3-5. Shorter dials existed but
+> pushed the player to 90%+ wins; **danger beat brevity**, and the sim's player is deliberately dumb (no
+> effects/weave/intensity) so real fights run shorter than that floor.
+> **2. A craft now appears under EVERY function it has.** Erik: *"I can use harmonic voice to mend… will it show up
+> in the mend options?"* It couldn't — `playerBattleSkills` read `functions[0]` only, so Harmonic Voice
+> (command+empower+**heal**) was hidden from mend, as was every secondary use of every multi-function craft.
+> **Answering his rank guess directly: there is NO rank gate in the data — all three functions are available now.**
+> **3. The opponent is not a metronome.** *"they seem to always just strike."* The policy took `skills[0]` unless a
+> tendency was known, and that's a strike on nearly every synthesized sheet. Options are now SCORED (matchup +
+> situational lean + anti-repetition, round-varying tiebreak), still fully DETERMINISTIC. Live: strike/guard/strike/
+> guard/guard/strike.
+> **4. Collapsible move categories** (fold state persists across round re-renders) **+ Loki's backfill** (authorised):
+> his ledger was direct evidence of the CCODE-37 gap — `hunters_strike`, `the_false_target`, `umbracraft` all at
+> ZERO uses while his own combat logs show him fighting with the first two. Credited those two with 8 uses (the
+> rank-2 bar — the progress those fights earned and the ledger dropped). **`umbracraft` deliberately NOT credited:**
+> no evidence, and inventing progress is worse than under-crediting.
+> 9 new sim checks incl. Erik's exact scenario; the old "meter fills → fight ends" test was REWRITTEN to the new
+> rule, not deleted. npm test exit 0. Live: momentum swung 3.2 → −3.5 → 6.1 → −9.5 → 5.1 against a cap of 10 and the
+> fight CONTINUED; pressure ticked with hp 30→27→24; 13 rounds, ended on ENERGY.
+> **FLAGGED — the p90 tail is still ~20 rounds vs a peer.** Median 15 is fine, the tail isn't. Cheapest lever is
+> `breakAtPressure` (2 → 1), one number in content.
+> **OPEN — "the engine's text could use some tweaking":** the one item I could NOT act on, because I couldn't pin it
+> to a line. Erik: which phrasing grated — the receipt, the interaction clause, or the pressure lines?
+> Results: po/results/20260731_CCODE-38_momentum_is_a_modifier.md
+
+
 > ## [CCODE-36 + CCODE-37 complete_pending_review — CCode, 2026-07-31] Round rolls + whole-fight narration + BRAIDS IN COMBAT (v1.8.300 `30c1f337`, v1.8.301 `8071994b`)
 > Three asks from Erik's playtest, all shipped.
 > **1. "Let the player see the rolls and modifiers… a popup off of the action you chose."** Each round's receipt now

@@ -1,5 +1,44 @@
 # PO ALERT
 
+> ## [CCODE-40 complete_pending_review + CCODE-41 SPEC READY — CCode, 2026-07-31] Stacks compare PRE-clamp; structured rounds specified (v1.8.304 `35be2fd0`, v1.8.305 `68aaff6e`)
+> **CCODE-40 — Erik found a real bug with exact arithmetic:** *"All of the bonuses and penalties need to be stacked
+> and compared PRIOR to a clamp. If I have +35 due to abilities and skills and the enemy has +25 but has also landed
+> a bind on me (-15) the net difference would be (-5) to my roll."* `rollSide` computed `margin = chance - roll` from
+> the **CLAMPED** chance, so once a capable character hit the 95% ceiling **every further term was silently
+> discarded** — a bind laid on them, a woven craft, momentum, a standing guard — and a contest between two strong
+> sides read as a tie of two 95s. (I saw "clamped (from 98)" in the live popovers earlier and did not follow it
+> through.) **Fix keeps both truths:** DEGREE still uses the clamped chance (the ceiling exists so your own action
+> can always fail); the CONTEST margin now uses the RAW pre-clamp stack. Surfaced in the receipt when the ceiling
+> bites. **This retroactively makes CCODE-35 effects and the CCODE-37 weave bonus matter for high-level characters —
+> the exact players for whom they did nothing.** 7 new checks; one of my own assertions failed first and was wrong,
+> not the code.
+> **CCODE-41 — Erik answered all four open questions, so structured rounds are now FULLY SPECIFIED.** Captured
+> verbatim in `po/SPEC_CCODE-41_structured_rounds.md`: (1) the setup phase **carries the cost of the ability used**;
+> (2) you **can skip setup** — to conserve energy, if you have no sense skill, or **if an opposing craft has blinded
+> you to your sense skills**; (3) the **opponent gets a setup phase too**; (4) a bonus action is a **FULL action —
+> "it's the payoff."** Plus: a **braid that senses AND damages is viable as a setup with BOTH effects landing**;
+> effects tick **per round**, not per sub-action; and the **GM narrates the whole round** (sense + main + bonus, both
+> sides, tallied) with the net result setting up the next — which **supersedes CCODE-36's whole-fight-at-the-end**
+> for structured rounds.
+> **TWO RULINGS I NEED BEFORE BUILDING (mine, in the spec):** (a) does the SETUP exchange move momentum? I propose
+> **purely preparatory** — otherwise momentum swings up to 3× per round and the just-measured CCODE-38 pressure
+> pacing is void. (b) the **bonus-action grant threshold** (crit-success only, or any success?) is the balance lever;
+> I'll simulate it the way CCODE-34/38 were measured rather than guess.
+> **BUILT NOW — phase denial**, the one self-contained piece: an effect may carry `deniesPhase`, and
+> `phaseDenied(effects, side, phase)` reads it; content declares `conceal_deep` → "senses blinded" with
+> `deniesPhase: "setup"`. This is the counterplay to a setup-heavy build and why skipping setup must be first-class.
+> The load-bearing test: `deniesPhase` must be COPIED from the content def onto the LIVE effect or the counterplay
+> is inert while still advertised in content — same producer/consumer class as `seam_battle_effects_roundtrip`.
+> **ALSO QUEUED as specs:** **CCODE-42** — *"the Finish button isn't a player choice unless you have a finishing
+> potential move"*; Hunter's Strike has the potential but low odds **unless damage would exceed the foe's HP, then it
+> IS a finishing move**; Cut the Thread is an **opposed roll** — ~50/50 vs a healthy equal foe, **near-certain vs a
+> run-down one when you hold momentum**, low with momentum against you. **CCODE-43** — items in combat (dagger vs
+> axe, metal vs energy shield, throw a chemical, drink a potion); independent of round structure, and `equipmentBonus`
+> already exists for normal play — combat simply doesn't read it.
+> npm test exit 0 (all gates, rawProseCaps 63, 18 seams).
+> Results: po/results/20260731_CCODE-40-41_preclamp_stacks_and_round_spec.md
+
+
 > ## [CCODE-39 complete_pending_review — CCode, 2026-07-31] Energy is a STATE, not a verdict + Erik's round-restructure SCOPED (v1.8.303 `b31ca93c`)
 > Erik sent a substantial combat-design message mid-session. I built the one piece that was contained and
 > unambiguous, and **scoped the rest rather than half-building a redesign while he's playtesting.**

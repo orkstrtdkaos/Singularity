@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 31,
   "maxEnergy": 115,
-  "energy": 62,
+  "energy": 57,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -284,149 +284,176 @@
         "player": null,
         "summary": "Loki feinted a strike, read the aggressor through the Misdirect, and answered with Hunter's Strike — on their feet now, the gap reset, the question still open.",
         "narration": "You let them see what they expect to see. Your weight shifts forward — the beginning of a strike, the exact shape they have already decided you will make. Their guard comes up clean and hard, the way a practiced striker's guard does, and for a breath you are exactly where they thought you would be.\n\nThen you are not.\n\nThe Misdirect is already in the air between you — not a sound, not a gesture, just the wrong information landing in the right place. Their eye goes to where the strike should be arriving. You go sideways. The opening costs you ground; they feel the false read and press, and your shoulder takes it. It is not nothing. But you are moving now, and moving is different from lying in the mud.\n\nYou get your hand to the belt knife on the turn. Hunter's Strike comes up from the hip, low and without ceremony, the way it is supposed to — not a warrior's form, just honest force aimed at something real. They meet it hard. Their own strike comes in at the same moment and the two of you exchange it, shoulder to shoulder, neither clean. But you are on your feet. The knife has found the edge of the space between you and the stranger is three paces out rather than two, breathing a little faster than before.\n\nThe question is still open in the cold air. Veln Ashpause has not moved. Cy's lens stays at its smallest ring, but its numbers have shifted — you can hear it in the small change of its mechanism, a brief easing. The aggressor's guard is up and their weight has reset, and they are watching you differently now."
+      },
+      {
+        "player": null,
+        "summary": "At the confluence, Loki reads the aggressor's intent through Umbracraft and finds them already committed to another strike — a striker who does not doubt, and an Hourkeeper watching from the brush as though the ending is already written.",
+        "narration": "You sink into the dark-sense — not the light-dark of sun and shadow, but the warm-cold of a body moving through space, the pressure of intention gathering like heat before a strike. The stranger reads crystal-clear in your dark-sight: weight coiling, shoulder already committing to the next attack, no hesitation in their line. They think they have you measured. They think the next moment is already decided.\n\nBut there is something else in the dark-sense now — a third presence at the edge of the brush, and the Hourkeeper's grey coat is warm in a way that has nothing to do with spring air. They are watching with the weight of someone who has already seen this moment end. The knowledge sits on them like an old scar.\n\nThe stranger moves. The gap closes. Your knife is in your hand."
       }
     ],
     "lastTurn": {
-      "narration": "You let them see what they expect to see. Your weight shifts forward — the beginning of a strike, the exact shape they have already decided you will make. Their guard comes up clean and hard, the way a practiced striker's guard does, and for a breath you are exactly where they thought you would be.\n\nThen you are not.\n\nThe Misdirect is already in the air between you — not a sound, not a gesture, just the wrong information landing in the right place. Their eye goes to where the strike should be arriving. You go sideways. The opening costs you ground; they feel the false read and press, and your shoulder takes it. It is not nothing. But you are moving now, and moving is different from lying in the mud.\n\nYou get your hand to the belt knife on the turn. Hunter's Strike comes up from the hip, low and without ceremony, the way it is supposed to — not a warrior's form, just honest force aimed at something real. They meet it hard. Their own strike comes in at the same moment and the two of you exchange it, shoulder to shoulder, neither clean. But you are on your feet. The knife has found the edge of the space between you and the stranger is three paces out rather than two, breathing a little faster than before.\n\nThe question is still open in the cold air. Veln Ashpause has not moved. Cy's lens stays at its smallest ring, but its numbers have shifted — you can hear it in the small change of its mechanism, a brief easing. The aggressor's guard is up and their weight has reset, and they are watching you differently now.",
-      "sceneSummary": "Loki feinted a strike, read the aggressor through the Misdirect, and answered with Hunter's Strike — on their feet now, the gap reset, the question still open.",
+      "narration": "You sink into the dark-sense — not the light-dark of sun and shadow, but the warm-cold of a body moving through space, the pressure of intention gathering like heat before a strike. The stranger reads crystal-clear in your dark-sight: weight coiling, shoulder already committing to the next attack, no hesitation in their line. They think they have you measured. They think the next moment is already decided.\n\nBut there is something else in the dark-sense now — a third presence at the edge of the brush, and the Hourkeeper's grey coat is warm in a way that has nothing to do with spring air. They are watching with the weight of someone who has already seen this moment end. The knowledge sits on them like an old scar.\n\nThe stranger moves. The gap closes. Your knife is in your hand.",
+      "sceneSummary": "At the confluence, Loki reads the aggressor's intent through Umbracraft and finds them already committed to another strike — a striker who does not doubt, and an Hourkeeper watching from the brush as though the ending is already written.",
       "choices": [
         {
-          "label": "Press the opening — drive in hard before they reset, blade first.",
+          "label": "Strike at their committed shoulder — press the advantage while they are overextended.",
           "attribute": "physical",
           "subAttribute": "agility",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
             "attack",
-            "risky"
+            "press"
           ],
           "abilityId": "hunters_strike",
           "energyCost": 4,
           "trivial": false,
-          "encounterId": "a-hostile-meeting"
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Hold ground and let them come to you — read the next strike before it lands.",
+          "label": "Use the False Target — let them commit to where you appear to be, then move.",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 15,
+          "intentTags": [
+            "trick",
+            "feint"
+          ],
+          "abilityId": "the_false_target",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Drop and roll away — put ground between you and their strike, keep reading them.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 12,
           "intentTags": [
             "defend",
             "careful"
           ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false,
-          "encounterId": "a-hostile-meeting"
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Give them the wrong read again — show them a retreat, then don't retreat.",
+          "label": "Ask the Hourkeeper plainly — 'What did you see?' — interrupt the stranger's rhythm.",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 18,
           "intentTags": [
-            "feint",
-            "deceive"
-          ],
-          "abilityId": "the_wrong_reality",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": "a-hostile-meeting"
-        },
-        {
-          "label": "Call a stop — open your hands, let the knife hang loose, and ask your own question back.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "negotiate",
-            "calm"
+            "risky",
+            "threaten"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": "a-hostile-meeting"
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "health": -3,
-        "energy": -7
-      },
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": null,
+      "stageOps": [],
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet, knife in hand, three paces from the aggressor.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin cold light, mud underfoot still wet from the thaw. Loki stands with knife in hand, three paces from the aggressor.",
         "npcsPresent": [
           {
-            "name": "The Stranger (aggressor)",
-            "state": "Guard reset, weight back, watching Loki with a different quality of attention than before — faster breathing, eyes recalculated."
+            "name": "The Stranger",
+            "state": "Weight coiling, shoulder committing to the next strike, closing the gap with no hesitation"
           },
           {
             "name": "Veln Ashpause",
-            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki — unchanged."
+            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowledge fixed on Loki — warm in the dark-sense"
           },
           {
             "name": "Cy",
-            "state": "At Loki's left, lens still at its smallest ring but mechanism slightly eased — the numbers have shifted."
+            "state": "At Loki's left, mechanism slightly tense, lens at its smallest ring"
           }
         ],
         "objects": [
           "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
-          "Waterskin beside Loki in the mud",
+          "Waterskin in the mud",
           "boot-prints in mud ending at the water's edge",
-          "mud on Loki's coat, hands, hip, and both legs",
           "belt knife in Loki's hand"
         ],
         "threads": [
-          "The stranger's question — 'Why?' — still open, unanswered.",
-          "The Hourkeeper has pre-remembered something and will not say what.",
-          "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
-          "The three-hundred-year tree about to fruit and the missing person it was planted for."
+          "The stranger's question — 'Why?' — still unanswered",
+          "The Hourkeeper has pre-remembered something and will not say what",
+          "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken",
+          "The stranger is about to strike; Loki's read is clear but Veln's foreknowledge is clear too"
         ]
       },
-      "encounterOps": [
+      "npcUpdates": [
         {
-          "op": "tactic",
-          "tag": "circle"
+          "op": "update",
+          "npcId": "the-stranger",
+          "note": "Read through Umbracraft: they favour the strike, shoulder already committed, no hesitation — they think the next moment is decided. They read Loki better than Umbracraft can see. Intent is crystalline in the dark-sense."
+        },
+        {
+          "op": "update",
+          "npcId": "veln-ashpause",
+          "note": "Warm in the dark-sense at the edge of the brush — the foreknowledge sits on them like an old scar. They are watching as though the ending is already written."
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief, sharp exchange of blows"
-      }
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "timeOps": {},
+      "moveTo": null,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet, knife in hand, three paces from the aggressor.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin cold light, mud underfoot still wet from the thaw. Loki stands with knife in hand, three paces from the aggressor.",
       "npcsPresent": [
         {
-          "name": "The Stranger (aggressor)",
-          "state": "Guard reset, weight back, watching Loki with a different quality of attention than before — faster breathing, eyes recal"
+          "name": "The Stranger",
+          "state": "Weight coiling, shoulder committing to the next strike, closing the gap with no hesitation"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki — unchanged."
+          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowledge fixed on Loki — warm in the dark-se"
         },
         {
           "name": "Cy",
-          "state": "At Loki's left, lens still at its smallest ring but mechanism slightly eased — the numbers have shifted."
+          "state": "At Loki's left, mechanism slightly tense, lens at its smallest ring"
         }
       ],
       "objects": [
         "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
-        "Waterskin beside Loki in the mud",
+        "Waterskin in the mud",
         "boot-prints in mud ending at the water's edge",
-        "mud on Loki's coat, hands, hip, and both legs",
         "belt knife in Loki's hand"
       ],
       "threads": [
-        "The stranger's question — 'Why?' — still open, unanswered.",
-        "The Hourkeeper has pre-remembered something and will not say what.",
-        "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
-        "The three-hundred-year tree about to fruit and the missing person it was planted for."
+        "The stranger's question — 'Why?' — still unanswered",
+        "The Hourkeeper has pre-remembered something and will not say what",
+        "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken",
+        "The stranger is about to strike; Loki's read is clear but Veln's foreknowledge is clear too"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -1059,11 +1086,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 762,
-    "lastSharedReadAt": "2026-07-31T18:47:06.183Z",
+    "lastGenCount": 766,
+    "lastSharedReadAt": "2026-07-31T22:23:23.635Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 29,
+    "turnsSinceOffer": 30,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1119,7 +1146,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1132,7 +1159,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1157,7 +1184,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 4,
+        "stage": 5,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -2093,8 +2120,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785524050508,
-  "rev": 283,
+  "updatedAt": 1785536667495,
+  "rev": 289,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2669,7 +2696,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 30
+    "the_quickwood": 31
   },
   "opLossPending": false,
   "sessions": [
@@ -2712,6 +2739,14 @@
       "startDay": 31,
       "endDay": 31,
       "beats": 19
+    },
+    {
+      "id": "sess-6",
+      "startedAt": "2026-07-31T22:24:27.488Z",
+      "lastAt": "2026-07-31T22:24:27.488Z",
+      "startDay": 31,
+      "endDay": 31,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -2749,17 +2784,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 105,
-    "choices": 105,
+    "sceneSummary": 106,
+    "choices": 106,
     "characterDeltas": 47,
-    "scene": 105,
+    "scene": 106,
     "placeUpdates": 12,
     "codexUpdates": 76,
     "timeOps": 100,
     "offer": 9,
     "generateRequest": 4,
-    "sceneEnded": 22,
-    "npcUpdates": 81,
+    "sceneEnded": 23,
+    "npcUpdates": 82,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -2771,7 +2806,7 @@
     "ledgerEvents": 1,
     "newEncounter": 1
   },
-  "_opTurns": 105,
+  "_opTurns": 106,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3050,7 +3085,8 @@
       "log": [
         "r1: foresee vs strike → momentum 0",
         "r1: move vs shield → momentum -3",
-        "r2: strike vs strike → momentum 4"
+        "r2: strike vs strike → momentum 4",
+        "r3: reveal vs shield → momentum 4"
       ],
       "opponentHealth": 7,
       "tactic": "circle",
@@ -3087,11 +3123,13 @@
         "synthesized": true
       },
       "momentum": 3.5,
-      "opponentEnergy": 77,
+      "opponentEnergy": 69,
       "turn": {
-        "phase": "sense",
+        "phase": "action",
         "sel": {
-          "sense": [],
+          "sense": [
+            26
+          ],
           "action": [],
           "bonus": []
         },
@@ -3100,27 +3138,28 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
+        "setupBonus": -12,
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with Umbracraft — success. They read you better (-12 to your action). The opening is there — you have earned a BONUS action. You read the aggressor: they favour strike. Pick a craft that answers it.",
+        "readPayoff": "You read the aggressor: they favour strike. Pick a craft that answers it."
       },
       "effects": [
         {
           "kind": "insight",
-          "label": "reading their next beat",
-          "value": 4,
-          "roundsLeft": 1,
+          "label": "you have their measure",
+          "value": 3,
+          "roundsLeft": 2,
           "applies": "always",
           "side": "player",
-          "source": "See the Made Thing",
+          "source": "Umbracraft",
           "from": "player"
         },
         {
           "kind": "guard",
           "label": "guard up",
           "value": 4,
-          "roundsLeft": 1,
+          "roundsLeft": 2,
           "applies": "whenAttacked",
           "side": "opponent",
           "source": "a raised guard",
@@ -3135,15 +3174,15 @@
         "player": false,
         "opponent": false
       },
-      "lastOppFn": "strike",
+      "lastOppFn": "shield",
       "lastOppReceipt": {
-        "roll": 88,
+        "roll": 68,
         "chance": 95,
         "degree": "success",
         "action": {
           "attribute": "practical",
           "abilityLevel": 4,
-          "label": "a hard strike",
+          "label": "a raised guard",
           "axes": {}
         },
         "breakdown": {
@@ -3161,46 +3200,37 @@
               "value": 20
             },
             {
-              "label": "conserve",
-              "value": -8
+              "label": "surge",
+              "value": 10
             },
             {
-              "label": "momentum (you have the advantage)",
-              "value": 2
-            },
-            {
-              "label": "guard up (2 rounds)",
-              "value": 4
+              "label": "momentum (you're on the back foot)",
+              "value": -2
             }
           ],
           "total": 95,
-          "clampedFrom": 103,
+          "clampedFrom": 113,
           "base": "practical",
           "opposed": null
         },
-        "rawChance": 103,
-        "margin": 15,
+        "rawChance": 113,
+        "margin": 45,
         "matchup": 0,
-        "intensity": "conserve",
+        "intensity": "surge",
         "tier": 4,
-        "function": "strike",
-        "name": "a hard strike",
-        "effectMods": [
-          {
-            "label": "guard up (2 rounds)",
-            "value": 4
-          }
-        ],
+        "function": "shield",
+        "name": "a raised guard",
+        "effectMods": [],
         "woven": null
       },
-      "lastReadWasSense": false
+      "lastReadWasSense": true
     }
   },
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"
   },
-  "syncedAt": 1784928643641,
+  "syncedAt": 1785524050508,
   "_applyFailures": null,
   "companionMemory": {
     "coil": [

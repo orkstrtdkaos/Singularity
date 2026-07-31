@@ -86,7 +86,11 @@ export function duelRound(state, def, resolution, rules, opts = {}) {
  *  mapping to the familiar outcomes (opponent_fell/opponent_yielded/yielded/fled/player_overcome/stalemate).
  *  yield & flee reuse the classic exits. The returned `opponent` receipt is the TRUE round — the caller gates
  *  its display with senseOpponent (fog). Never advances beyond a resolution the engine actually computed. */
-export function skillBattleRound(state, def, playerDecl, { character, rules, sb, steps, seenTendency = null, rng = Math.random, flee = false, yield: doYield = false, fleeResolution = null } = {}) {
+export function skillBattleRound(state, def, playerDecl, { character, rules, sb, steps, seenTendency = null, rng = Math.random, flee = false, yield: doYield = false, fleeResolution = null,
+  // CCODE-45: the TURN options must be ACCEPTED here and FORWARDED below. This wrapper hand-builds its call to
+  // battleRound, so an option it does not name is silently dropped — which is exactly how the sense step ran as a
+  // normal action round the first time (the SECOND time this seam has bitten; see seam_battle_round_options).
+  phase = "action", tickEffects = true, setupBonus = 0 } = {}) {
   const cfg = rules.encounters?.duel || {};
   if (doYield) return { state: { ...state, status: "ended" }, ended: true, outcome: "yielded", deltas: { health: 0, energy: 0 }, events: ["You yield the contest."], player: null, opponent: null };
   if (flee) { // break away — reuse the classic flee check on an injected resolution
@@ -104,11 +108,13 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.
     // CCODE-35/38: `effects` and `pressure` must ride BOTH ways — into the round (they modify this roll / carry the
     // count) and back out onto the encounter state. This hand-built state object is the seam where they'd drop.
-    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 } }, rules, sb, steps, rng
+    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 } }, rules, sb, steps, rng,
+    phase, tickEffects, setupBonus
   });
   // CCODE-38: remember the foe's last verb so opponentPolicy's anti-repetition term has something to read —
   // without this write the "don't be a metronome" penalty never fires and the variety fix is inert.
-  const s = { ...state, round: state.round + 1, momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
+  const senseOnly = phase === "sense" && sb?.turn?.senseMovesMomentum !== true; // CCODE-45: a sense is part of the turn, not a round of its own
+  const s = { ...state, round: state.round + (senseOnly ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
   if (r.resolved === "player") { s.status = "ended"; ended = true; outcome = (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell"; events.push(`You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`); }
@@ -129,7 +135,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     }
   }
   s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);
-  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent, spent: r.spent, degraded: r.degraded };
+  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent, spent: r.spent, degraded: r.degraded, setupBonus: r.setupBonus, bonusEarned: r.bonusEarned };
 }
 
 /** Player incapacitation check (app calls after applying deltas). */

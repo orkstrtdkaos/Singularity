@@ -202,6 +202,16 @@
       "consumer": { "file": "engine/encounters.js", "region": "skillBattleRound" },
       "assert": { "requires": ["effects"] },
       "canFail": "Drop `effects` from either the inbound state literal or the outbound `s` in skillBattleRound: the standing effect never reaches the roll (or never survives the round) while the panel still advertises it -> red."
+    },
+    {
+      "id": "seam_battle_round_options",
+      "incident": "CCODE-45",
+      "kind": "field_presence",
+      "contract": "skillBattleRound HAND-BUILDS its call to battleRound, so any battleRound option it does not explicitly ACCEPT and FORWARD is silently dropped — the caller's intent vanishes with no error. This has now bitten TWICE: CCODE-35 (`effects`) and CCODE-45 (`phase`/`tickEffects`/`setupBonus`, where a SENSE step silently ran as a full ACTION round — moving momentum, costing the exchange, and defeating the entire point of the sense phase). Every battleRound option must be named in skillBattleRound's destructured params AND in the forwarded call.",
+      "producer": { "file": "app.js", "note": "the turn orchestrator passes phase/tickEffects/setupBonus into skillBattleRound" },
+      "consumer": { "file": "engine/encounters.js", "region": "skillBattleRound" },
+      "assert": { "requires": ["phase", "tickEffects", "setupBonus"] },
+      "canFail": "Remove `phase` (or tickEffects/setupBonus) from skillBattleRound's params or its forwarded battleRound call: the sense step resolves as a normal action round — momentum moves, the round advances, and sensing costs you the exchange again -> red."
     }
   ]
 }

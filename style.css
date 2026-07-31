@@ -1072,3 +1072,20 @@ img[data-lightbox] { cursor: zoom-in; }
 .appraise-line.worse { color: var(--danger); }
 .appraise-line.better { color: var(--accent2, #7a9); }
 .appraise-counsel { font-size: 12px; font-style: italic; color: var(--ink-dim); margin-top: 5px; line-height: 1.45; }
+/* CCODE-45 — THE TURN: sense → action → bonus, selected step by step. */
+.sb-steps { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; font-family: var(--font-ui); font-size: 11px; margin-bottom: 7px; }
+.sb-step { padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); color: var(--ink-dim); white-space: nowrap; }
+.sb-step.on { color: var(--accent, #c9a227); border-color: var(--accent, #c9a227); background: color-mix(in srgb, var(--accent, #c9a227) 12%, transparent); }
+.sb-step.done { color: var(--accent2, #7a9); border-color: color-mix(in srgb, var(--accent2, #7a9) 40%, var(--border)); }
+.sb-step-sep { color: var(--ink-dim); opacity: .6; }
+.sb-step-hint { font-size: 12px; line-height: 1.45; margin-bottom: 6px; }
+.sb-braid-note { color: var(--accent2, #7a9); }
+.sb-step-text { width: 100%; margin-top: 7px; padding: 7px 9px; border-radius: 5px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink); font-size: 13px; }
+.sb-step-text:focus { border-color: var(--accent, #c9a227); outline: none; }
+.sb-skill.on { border-color: var(--accent, #c9a227); background: color-mix(in srgb, var(--accent, #c9a227) 14%, transparent); }
+.sb-skill-row.picked { background: color-mix(in srgb, var(--accent, #c9a227) 8%, transparent); border-radius: 4px; }
+.sb-pick-n { display: inline-block; min-width: 15px; text-align: center; border-radius: 8px; background: var(--accent, #c9a227); color: #1a1a1a; font-size: 10px; font-weight: 700; margin-right: 3px; }
+.sb-review { border: 1px dashed var(--accent, #c9a227); border-radius: 6px; background: color-mix(in srgb, var(--accent, #c9a227) 7%, var(--panel2)); padding: 9px 11px; margin-bottom: 8px; }
+.sb-review-title { font-family: var(--font); font-size: 13px; color: var(--accent, #c9a227); letter-spacing: 1px; margin-bottom: 5px; }
+.sb-review-line { font-family: var(--font-ui); font-size: 12px; line-height: 1.55; text-transform: capitalize; }
+.sb-review-line.dim { color: var(--ink-dim); text-transform: none; }

@@ -413,5 +413,29 @@ check("CCODE-45: the new options DEFAULT to today's behaviour (no existing calle
     return a.state.momentum === b.state.momentum && a.player.chance === b.player.chance && a.setupBonus === undefined;
   })());
 
+// ---- CCODE-45: the turn options must SURVIVE skillBattleRound (seam_battle_round_options) ----
+// This seam has bitten TWICE. The wrapper hand-builds its battleRound call, so an option it does not forward
+// vanishes silently — and a SENSE step that quietly runs as an ACTION round defeats the whole sense phase.
+check("CCODE-45 SEAM: phase survives skillBattleRound — a sense does NOT advance the round or move momentum",
+  (() => {
+    const st = { ...sbState, momentum: 2, round: 5 };
+    const out = skillBattleRound(st, duelDef, { function: "reveal", tier: 2, attribute: "mental", intensity: "standard", name: "a read" },
+      { character: char, rules, sb, steps, rng: seqRng([0.4, 0.6]), phase: "sense", tickEffects: false });
+    return out.state.round === 5 && out.state.momentum === 2;
+  })());
+check("CCODE-45 SEAM: setupBonus + bonusEarned come back OUT of skillBattleRound",
+  (() => {
+    const out = skillBattleRound({ ...sbState, momentum: 0 }, duelDef, { function: "reveal", tier: 3, attribute: "mental", intensity: "standard", name: "a read" },
+      { character: char, rules, sb, steps, rng: seqRng([0.01, 0.99]), phase: "sense", tickEffects: false });
+    return Number.isFinite(out.setupBonus) && !!out.bonusEarned;
+  })());
+check("CCODE-45 SEAM: an ACTION step through the wrapper still advances the round (default unchanged)",
+  (() => {
+    const st = { ...sbState, round: 5 };
+    const out = skillBattleRound(st, duelDef, { function: "strike", tier: 2, attribute: "practical", intensity: "standard", name: "a cut" },
+      { character: char, rules, sb, steps, rng: seqRng([0.4, 0.6]) });
+    return out.state.round === 6;
+  })());
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

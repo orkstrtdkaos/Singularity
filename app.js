@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.307";
+const APP_VERSION = "1.8.310";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8408,6 +8408,7 @@ function playerBattleSkills() {
 let sbLastRound = null;
 let sbLastRoundReceipt = null; // SNG-246 (Erik): what JUST happened this round — both moves + the interaction + the swing, SHOWN.
 let sbLastRoundRolls = null;   // CCODE-36 (Erik): the ROLLS behind that round — same breakdown popover as normal play.
+let sbBusy = false;       // CCODE-45: a GM call is in flight for this turn — don't let a double-click double-resolve.
 let sbWeaveArmed = null;       // CCODE-37 (Erik: "this is where braids really shine"): index of the craft armed to WEAVE.
 const sbOpenFams = {};         // CCODE-38 (Erik: "can we make the categories collapsible?"): family → open?, kept across rounds.
 
@@ -8483,6 +8484,69 @@ function sbLogRound(enc, decl, rr, beforeMom, scouting) {
 /** SNG-246 BUG1: the skill-battle round CONTROLS, rendered inside the play surface — the fog read, the intensity
  *  dial, the declarable skills, and the three ways (read / break / yield). The frame strip above already shows the
  *  momentum meter + win-condition, so this is just the inputs. Returns "" when not in a skill battle. */
+// ---------- CCODE-45: THE TURN (Erik) — sense -> action -> bonus, two GM calls ----------
+// "The action selections need to be just that... making selections for that part of the turn's actions." Each step
+// is a SELECTION step: pick a craft (or two, to braid), type shaping text for THAT step, then proceed. The sense
+// step resolves and is NARRATED first, then LOCKS — "if you sense and do a GM call you can't edit back to it."
+// Action + bonus are only RECORDED until you Execute, which resolves them and narrates the whole turn.
+//
+// This REPLACES the arm-then-pick weave gesture Erik called unintuitive: braiding is now simply selecting a second
+// craft in the same step — the same mechanics (both effects land, both cost) with none of the modality.
+const SB_STEPS = [
+  { key: "sense",  label: "Sense",  glyph: "\u25ce", hint: "Read them first — it costs the craft's energy, but it is NOT a free hit for them any more. Skip it to conserve." },
+  { key: "action", label: "Action", glyph: "\u2694", hint: "Your real move this turn." },
+  { key: "bonus",  label: "Bonus",  glyph: "\u2726", hint: "Earned by a good read — a FULL extra action. The payoff." }
+];
+function sbFreshTurn() {
+  return { phase: "sense", sel: { sense: [], action: [], bonus: [] },
+    text: { sense: "", action: "", bonus: "" }, setupBonus: 0, bonusEarned: false, senseDone: false, senseLine: "" };
+}
+function sbTurn() {
+  const e = activeEnc(); if (!e || e.state?.mode !== "skill_battle") return null;
+  if (!e.state.turn) e.state.turn = sbFreshTurn();
+  return e.state.turn;
+}
+/** The declaration a step's selection makes: the first craft leads, a second is WOVEN in (CCODE-37 mechanics). */
+function sbDeclFromSel(sel, skills, intensity) {
+  const picked = (sel || []).map(i => skills[i]).filter(Boolean);
+  if (!picked.length) return null;
+  const lead = picked[0];
+  const d = { function: lead.function, tier: lead.tier || 1, attribute: lead.attribute || "practical",
+              intensity, name: lead.name, id: lead.id };
+  if (picked[1]) d.woven = { function: picked[1].function, tier: picked[1].tier || 1, name: picked[1].name, id: picked[1].id };
+  return d;
+}
+/** The step tracker: where you are in the turn, and what is already locked behind you. */
+function sbStepTracker(turn) {
+  const order = ["sense", "action", "bonus", "review"];
+  const at = order.indexOf(turn.phase);
+  const cells = SB_STEPS.filter(st => st.key !== "bonus" || turn.bonusEarned).map(st => {
+    const i = order.indexOf(st.key);
+    const cls = st.key === turn.phase ? "on" : (i < at ? "done" : "");
+    const lock = st.key === "sense" && turn.senseDone ? " \u2022 locked" : "";
+    return `<span class="sb-step ${cls}">${st.glyph} ${esc(st.label)}${lock}</span>`;
+  }).join('<span class="sb-step-sep">\u2192</span>');
+  const rev = `<span class="sb-step-sep">\u2192</span><span class="sb-step ${turn.phase === "review" ? "on" : ""}">\u2713 Execute</span>`;
+  return `<div class="sb-steps">${cells}${rev}</div>`;
+}
+/** The review card: the whole turn laid out before you commit it. */
+function sbReviewCard(turn, skills) {
+  const line = (k) => {
+    const picked = (turn.sel[k] || []).map(i => skills[i]).filter(Boolean);
+    if (!picked.length) return `<div class="sb-review-line dim">${esc(k)} — <em>skipped</em></div>`;
+    const names = picked.map(x => esc(x.name)).join(" \u22c8 ");
+    const txt = turn.text[k] ? ` <span class="hint">“${esc(turn.text[k])}”</span>` : "";
+    return `<div class="sb-review-line"><strong>${esc(k)}</strong> — ${names}${picked.length > 1 ? ' <span class="sb-braid-note">braided</span>' : ""}${txt}</div>`;
+  };
+  return `<div class="sb-review">
+    <div class="sb-review-title">The turn as it stands</div>
+    ${line("sense")}${turn.senseLine ? `<div class="sb-review-line dim">${esc(turn.senseLine)}</div>` : ""}
+    ${line("action")}
+    ${turn.bonusEarned ? line("bonus") : ""}
+    <div class="hint" style="margin-top:5px">Execute resolves the action${turn.bonusEarned ? " and bonus" : ""} and the GM narrates the whole turn. The sense step is already locked.</div>
+  </div>`;
+}
+
 function skillBattlePanel() {
   const enc = activeEnc();
   if (!enc || enc.state?.mode !== "skill_battle") return "";
@@ -8494,6 +8558,12 @@ function skillBattlePanel() {
   const fog = (sbLastRound?.opponent && st.round > 1) ? senseOpponent(character, sbLastRound.opponent, CONTENT.rules, sb, { scouting: scout, buyTier: scout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods }) : null;
   const skills = playerBattleSkills();
   window._sbSkills = skills; // handler lookup (data-sbskill = index into this flat list)
+  // CCODE-45: which STEP of the turn we are selecting for, and what is picked so far (2 = a braid).
+  const turn = sbTurn();
+  const step = SB_STEPS.find(x => x.key === turn.phase) || SB_STEPS[1];
+  const sel = turn.sel[turn.phase] || [];
+  const selCount = sel.length, selFull = selCount >= 2;
+  const busySB = !!sbBusy;
   const oppTired = st.opponentEnergy != null && fog && fog.tier >= 2 ? (st.opponentEnergy < 15 ? "spent" : st.opponentEnergy < 40 ? "tiring" : "still fresh") : null;
   // SNG-246 (Erik): group the moves by INTENT-family — you can do a lot of things a lot of ways, but each turn you
   // pick ONE. Same family grouping the ⚙ Moves gear uses, with combat-intent labels; free-text shaping is the field
@@ -8509,14 +8579,11 @@ function skillBattlePanel() {
       const info = known
         ? `<button class="sb-skill-info" data-entity="skill:${esc(s.id)}" title="What this craft is — full detail" aria-label="Explain ${esc(s.name)}">ⓘ</button>`
         : `<button class="sb-skill-info" data-verb="${esc(s.function)}" title="What ${esc(s.function)} does — the verb's mechanics" aria-label="Explain ${esc(s.function)}">ⓘ</button>`;
-      // CCODE-37: ⋈ arms this craft to be WOVEN with the next one you pick — two crafts, one turn. Real crafts
-      // only (the steel-and-wit fallbacks aren't abilities and can't build a braid).
-      const armed = sbWeaveArmed === i;
-      const weaveBtn = known
-        ? `<button class="sb-weave-btn${armed ? " on" : ""}" data-sbweave="${i}" title="${armed ? "Cancel the weave" : `Weave ${esc(s.name)} with a second craft — one turn, both crafts. Costs energy for both, lands BOTH effects, and counts as a co-activation toward earning this pairing as a braid.`}">⋈</button>`
-        : "";
-      return `<div class="sb-skill-row${armed ? " weaving" : ""}" style="border-left:3px solid ${FAMILY_COLOR[f]}">
-        <button class="btn secondary sb-skill" data-sbskill="${i}">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}</button>${weaveBtn}${info}
+      // CCODE-45: a craft is SELECTED for this step now, not fired instantly. Pick one; pick a second and they
+      // BRAID — the same weave mechanics (both effects land, both cost), with none of the arm-then-pick modality.
+      const pick = sel.indexOf(i), on = pick >= 0;
+      return `<div class="sb-skill-row${on ? " picked" : ""}" style="border-left:3px solid ${FAMILY_COLOR[f]}">
+        <button class="btn secondary sb-skill${on ? " on" : ""}" data-sbskill="${i}" title="${on ? "Deselect" : selFull ? "Two crafts already chosen for this step — deselect one first" : "Choose this for the " + step.label.toLowerCase() + " step"}">${on ? `<span class="sb-pick-n">${pick + 1}</span> ` : ""}${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}</button>${info}
       </div>`;
     }).join("");
     // CCODE-38 (Erik: "can we make the categories collapsible?"): each family is a <details> — open by default,
@@ -8558,17 +8625,17 @@ function skillBattlePanel() {
     <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
     ${st.spent?.player ? `<div class="sb-spent-bar">🕯 <strong>You are spent</strong> — your crafts will not answer until you find energy. <span class="hint">Steel and wit still work (a plain strike, a raised guard). This is the moment to <strong>Yield</strong> by choice, or use something that restores you — the fight no longer ends itself here.</span></div>` : ""}
     ${st.spent?.opponent ? `<div class="sb-spent-bar dim">🕯 <strong>${esc(def.opponent?.name || "They")} are spent</strong> — swinging on will alone. <span class="hint">Their crafts are done; press it.</span></div>` : ""}
-    ${(() => { // CCODE-37 (Erik: "this is where braids really shine"): the weave banner — what's armed, how close
-      // this pairing is to becoming a real braid, and the honest cost of doing two things in one turn.
-      if (sbWeaveArmed == null) return "";
-      const lead = skills[sbWeaveArmed]; if (!lead) return "";
-      return `<div class="sb-weave-bar">⋈ Weaving <strong>${esc(lead.name)}</strong> with… <span class="hint">pick a second craft — one turn, both crafts, both effects; costs energy for both and counts toward earning the braid.</span> <button class="sb-weave-cancel" id="sb-weave-x">cancel</button></div>`;
-    })()}
-    <div class="sb-hint hint">Pick ONE thing this turn — it resolves, then the next. Type below to shape it in your own words. <strong>⋈</strong> weaves two crafts into one turn.</div>
-    <div class="sb-skills">${groups}</div>
+    ${sbStepTracker(turn)}
+    ${turn.phase === "review" ? sbReviewCard(turn, skills) : `
+      <div class="sb-step-hint hint">${esc(step.hint)}${selCount === 2 ? ` <strong class="sb-braid-note">⋈ braided — both crafts, both effects, both costs.</strong>` : selCount === 1 ? ` <span class="hint">Pick a second craft to BRAID them.</span>` : ""}</div>
+      <div class="sb-skills">${groups}</div>
+      <input id="sb-step-text" class="sb-step-text" placeholder="Shape this ${esc(step.label.toLowerCase())} in your own words (optional)…" value="${esc(turn.text[turn.phase] || "")}">
+    `}
     <div class="sb-actions" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap">
-      <button class="btn" id="sb-finish" title="Go for a DECISIVE finishing blow — an all-or-nothing stroke that can END it in one beat (a clean hit collapses it; a botch hardens it). Not a normal round — the gamble.">⚡ Finish it</button>
-      <button class="btn secondary" id="sb-read" title="Spend the round reading them — no attack, but you see their next move more clearly">👁 Read them</button>
+      ${turn.phase === "sense" ? `<button class="btn" id="sb-proceed" ${busySB ? "disabled" : ""}>${selCount ? "Sense → then Action" : "Skip sense → Action"}</button>` : ""}
+      ${turn.phase === "action" ? `<button class="btn" id="sb-proceed" ${selCount ? "" : "disabled"} title="${selCount ? "" : "Choose your action first"}">${turn.bonusEarned ? "Proceed to Bonus →" : "Review the turn →"}</button>` : ""}
+      ${turn.phase === "bonus" ? `<button class="btn" id="sb-proceed">Review the turn →</button>` : ""}
+      ${turn.phase === "review" ? `<button class="btn" id="sb-execute" ${busySB ? "disabled" : ""}>⚔ Execute the turn</button><button class="btn secondary" id="sb-edit">Edit</button>` : ""}
       <button class="btn secondary" id="sb-flee">Break away</button>
       <button class="btn secondary" id="sb-yield">Yield</button>
     </div>
@@ -8611,41 +8678,122 @@ function wireSkillBattlePanel() {
   const enc = activeEnc();
   if (!enc || enc.state?.mode !== "skill_battle") return;
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
+  const turn = sbTurn();
   for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(sbLastRound); };
-  // CCODE-37: ⋈ arms a craft; the NEXT craft you pick is woven with it (one turn, both crafts). Tapping ⋈ again,
-  // or the armed craft itself, cancels — you can never accidentally weave a craft with itself.
-  for (const b of app.querySelectorAll("[data-sbweave]")) b.onclick = () => {
-    const i = Number(b.dataset.sbweave);
-    sbWeaveArmed = (sbWeaveArmed === i) ? null : i;
-    renderSkillBattle(sbLastRound);
-  };
-  const wx = document.getElementById("sb-weave-x"); if (wx) wx.onclick = () => { sbWeaveArmed = null; renderSkillBattle(sbLastRound); };
-  // CCODE-38: remember which move families the player folded away, so a re-render doesn't undo it every round.
-  for (const d of app.querySelectorAll("[data-sbfam]")) d.ontoggle = () => { sbOpenFams[d.dataset.sbfam] = d.open; };
+  // CCODE-45: a craft click SELECTS for this step (max 2 — the second braids). Nothing fires until you proceed.
   for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => {
-    const i = Number(b.dataset.sbskill), skills = window._sbSkills || [];
-    if (sbWeaveArmed != null && sbWeaveArmed !== i) {
-      const lead = skills[sbWeaveArmed], second = skills[i];
-      sbWeaveArmed = null;
-      sbDeclare(lead, { intensity: sbIntensity, woven: second });
-      return;
-    }
-    if (sbWeaveArmed === i) { sbWeaveArmed = null; renderSkillBattle(sbLastRound); return; } // tapping the armed craft cancels
-    sbDeclare(skills[i], { intensity: sbIntensity });
+    const i = Number(b.dataset.sbskill), cur = turn.sel[turn.phase] || (turn.sel[turn.phase] = []);
+    const at = cur.indexOf(i);
+    if (at >= 0) cur.splice(at, 1);
+    else if (cur.length < 2) cur.push(i);
+    else return; // two already chosen — deselect one first
+    saveCharacter(character); renderSkillBattle(sbLastRound);
   };
-  // CCODE-35: a read declares REVEAL, not shield. It was declared as a shield so the scout round played safe, but
-  // a read IS a reveal — and Erik's ask ("gaining a sense/insight gives you bonuses") means the scout round should
-  // leave an INSIGHT standing, not a raised guard. This also makes the matchup term honest (reveal beats conceal).
-  const rd = document.getElementById("sb-read"); if (rd) rd.onclick = () => sbDeclare({ function: "reveal", tier: 1, attribute: "mental", name: "reading them" }, { intensity: "conserve", scouting: true });
-  // SNG-246 (Erik): the DELIBERATE one-shot — go for a decisive finish with your best harm craft. This is the ONLY
-  // move that can collapse the fight in one beat (§6b); a normal strike is a normal round now (turn-by-turn combat).
-  const fin = document.getElementById("sb-finish"); if (fin) fin.onclick = () => {
-    const harm = (window._sbSkills || playerBattleSkills()).filter(s => sbFamilyOf(s) === "HARM").sort((a, b) => (b.tier || 1) - (a.tier || 1))[0]
-      || { id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "a finishing strike" };
-    sbDeclare(harm, { intensity: "surge", finisher: true });
+  // remember per-step shaping text as it is typed (it rides into that step's GM narration)
+  const ti = document.getElementById("sb-step-text");
+  // clamp at a word boundary — it is the player's own prose, so never cut them mid-word
+  if (ti) ti.oninput = () => { turn.text[turn.phase] = smartClamp(ti.value, 300); };
+  for (const d of app.querySelectorAll("[data-sbfam]")) d.ontoggle = () => { sbOpenFams[d.dataset.sbfam] = d.open; };
+  const proceed = document.getElementById("sb-proceed");
+  if (proceed) proceed.onclick = () => {
+    if (ti) turn.text[turn.phase] = smartClamp(ti.value, 300); // clamp at a word boundary — it is the player's own prose
+    if (turn.phase === "sense") { sbResolveSense(); return; }
+    if (turn.phase === "action") { turn.phase = turn.bonusEarned ? "bonus" : "review"; }
+    else if (turn.phase === "bonus") { turn.phase = "review"; }
+    saveCharacter(character); renderSkillBattle(sbLastRound);
   };
+  const exec = document.getElementById("sb-execute"); if (exec) exec.onclick = () => sbExecuteTurn();
+  // Edit goes back to ACTION — never to sense, which the GM has already narrated ("you can't edit back to it").
+  const ed = document.getElementById("sb-edit"); if (ed) ed.onclick = () => { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); };
   const fl = document.getElementById("sb-flee"); if (fl) fl.onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE
   const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb, steps, yield: true }));
+}
+
+/** CCODE-45 · GM CALL #1 — resolve the SENSE step, then narrate what you sensed and what they did. Skipping the
+ *  sense costs nothing and skips the call. Either way the step then LOCKS and we move to the action. */
+async function sbResolveSense() {
+  const enc = activeEnc(); if (!enc || sbBusy) return;
+  const turn = sbTurn(), sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
+  const skills = window._sbSkills || playerBattleSkills();
+  const decl = sbDeclFromSel(turn.sel.sense, skills, sbIntensity);
+  turn.senseDone = true;
+  if (!decl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
+  sbBusy = true; renderSkillBattle(sbLastRound);
+  const rr = skillBattleRound(character.activeEncounter.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps,
+    seenTendency: sbLastPlayerFn, rng: Math.random, phase: "sense", tickEffects: false });
+  character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
+  // activeEnc() hands back a FRESH wrapper each call, so `enc.state = ...` writes to a throwaway — the resolved
+  // state (effects, energy, pressure) would be silently discarded. Write through to the character, as sbDeclare does.
+  character.activeEncounter = { defId: enc.def.id, state: rr.state };
+  const t = sbTurn();
+  t.senseDone = true; t.setupBonus = rr.setupBonus || 0; t.bonusEarned = !!rr.bonusEarned?.player;
+  t.sel = turn.sel; t.text = turn.text;
+  t.senseLine = `You read with ${decl.name}${decl.woven ? ` \u22c8 ${decl.woven.name}` : ""} \u2014 ${(rr.player?.degree || "").replace("_", " ")}. ${t.setupBonus > 0 ? `You have the read (+${t.setupBonus} to your action).` : t.setupBonus < 0 ? `They read you better (${t.setupBonus} to your action).` : "Neither of you learns much."}${t.bonusEarned ? " The opening is there \u2014 you have earned a BONUS action." : ""}`;
+  t.phase = "action";
+  sbLastRoundRolls = { you: rr.player || null, them: rr.opponent || null };
+  sbLogRound(enc, decl, rr, enc.state.momentum ?? 0, true);
+  saveCharacter(character);
+  // GM call #1 — the sense beat. Needs a key; without one the mechanical line above still tells the story.
+  const nm = enc.def?.opponent?.name || "your opponent";
+  const shaped = turn.text.sense ? ` The player describes it: "${turn.text.sense}"` : "";
+  try {
+    const result = await runGM({ resolution: null, playerInput: `(SENSE STEP of a fight turn against ${nm}. Mechanically: ${t.senseLine}${shaped} Narrate ONLY this beat — what the character perceives, and what ${nm} is doing as they read them. Two or three sentences. Do NOT resolve the fight or narrate an attack; the player has not acted yet.)` });
+    if (result) renderPlay(result.turn, { aside: t.senseLine });
+    else renderPlay(character.activeScene?.lastTurn || null, { aside: t.senseLine });
+  } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: t.senseLine }); }
+  finally { sbBusy = false; renderSkillBattle(sbLastRound); }
+}
+
+/** CCODE-45 · GM CALL #2 — resolve the ACTION (and the BONUS if earned), then narrate the WHOLE turn. */
+async function sbExecuteTurn() {
+  const enc = activeEnc(); if (!enc || sbBusy) return;
+  const turn = sbTurn(), sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
+  const skills = window._sbSkills || playerBattleSkills();
+  const aDecl = sbDeclFromSel(turn.sel.action, skills, sbIntensity);
+  if (!aDecl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
+  const bDecl = turn.bonusEarned ? sbDeclFromSel(turn.sel.bonus, skills, sbIntensity) : null;
+  sbBusy = true; renderSkillBattle(sbLastRound);
+  const beats = [];
+  if (turn.senseLine) beats.push(turn.senseLine);
+  // ACTION — ticks the turn's effects only if there is no bonus step after it.
+  let rr = skillBattleRound(character.activeEncounter.state, enc.def, aDecl, { character, rules: CONTENT.rules, sb, steps,
+    seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl, setupBonus: turn.setupBonus || 0 });
+  sbLastPlayerFn = aDecl.function;
+  const applyRR = (r, d, label) => {
+    character.health = Math.max(0, Math.min(character.maxHealth, character.health + (r.deltas?.health || 0)));
+    character.energy = Math.max(0, character.energy + (r.deltas?.energy || 0));
+    character.activeEncounter = { defId: enc.def.id, state: r.state }; // write THROUGH the activeEnc() wrapper
+    const ids = [d.id, d.woven?.id].filter(x => x && !String(x).startsWith("_"));
+    if (ids.length) { recordUse(character, ids, { day: absoluteWorldDay() }); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
+    sbLastRoundRolls = { you: r.player || null, them: r.opponent || null };
+    sbLastRoundReceipt = sbRoundReceipt(r, d, (r.state?.momentum ?? 0) - 0, false);
+    sbLogRound(enc, d, r, enc.state.momentum ?? 0, false);
+    beats.push(`${label}: ${sbFightBeat(r, d, 0, false)}`);
+  };
+  applyRR(rr, aDecl, "Action");
+  saveCharacter(character);
+  let ended = rr.ended, endRR = rr;
+  // BONUS — a FULL action; it ticks the turn's effects, being the last step.
+  if (!ended && bDecl) {
+    const br = skillBattleRound(character.activeEncounter.state, enc.def, bDecl, { character, rules: CONTENT.rules, sb, steps,
+      seenTendency: sbLastPlayerFn, rng: Math.random, phase: "bonus", tickEffects: true });
+    applyRR(br, bDecl, "Bonus action");
+    saveCharacter(character);
+    ended = br.ended; endRR = br;
+  }
+  character.activeEncounter.state.turn = sbFreshTurn(); // the next turn starts clean
+  saveCharacter(character);
+  if (checkIncapacitation(character)) { sbBusy = false; sbEnd({ ...endRR, ended: true, outcome: "incapacitated" }); return; }
+  if (ended) { sbBusy = false; sbEnd(endRR); return; }
+  // GM call #2 — the WHOLE turn, in order.
+  const nm = enc.def?.opponent?.name || "your opponent";
+  const shaped = ["sense", "action", "bonus"].filter(k => turn.text[k]).map(k => `${k}: "${turn.text[k]}"`).join("; ");
+  try {
+    const result = await runGM({ resolution: null, playerInput: `(A full fight TURN against ${nm} has resolved. The engine already decided everything below \u2014 it is what HAPPENED and is not negotiable:\n${beats.map(b => `- ${b}`).join("\n")}\n${shaped ? `The player shaped it: ${shaped}\n` : ""}Narrate this ONE turn as a single continuous beat \u2014 the read, then the blow${bDecl ? ", then the opening they took" : ""}, and what ${nm} did through all of it. End with where the two of you now stand, because that sets up the next turn.)` });
+    if (result) renderPlay(result.turn, { aside: sbLastRoundReceipt });
+    else renderPlay(character.activeScene?.lastTurn || null, { aside: sbLastRoundReceipt });
+  } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: sbLastRoundReceipt }); }
+  finally { sbBusy = false; renderSkillBattle(sbLastRound); }
 }
 
 /** SNG-246 BUG1: renderSkillBattle is now a THIN ALIAS — there is no separate skill-battle screen. It carries the

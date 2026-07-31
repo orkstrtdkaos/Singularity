@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 4,
-  "xp": 361,
+  "xp": 371,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 23,
   "maxEnergy": 115,
-  "energy": 22,
+  "energy": 21,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -229,68 +229,80 @@
         "player": null,
         "summary": "The stranger overcame Loki at the confluence bank — a shoulder strike drove them to one knee in the mud, and the question 'Why?' still hangs unanswered in the morning air.",
         "narration": "Hunter's Strike is honest force and nothing more, and honest force is not enough today.\n\nYou commit to it — the weight behind it is real, the aim is real — and the stranger meets it with something that is not a block so much as a redirection. Your own momentum becomes the problem. Their counter lands on your shoulder and drives you sideways and your feet find the mud again, and this time the mud does not let go gracefully. You go down on one knee and stay there for a moment with the confluence loud in your ears and the cold coming up through your coat from the ground.\n\nCy does not move. Its lens is fixed on you with the particular stillness it reserves for damage assessment.\n\nThe stranger does not press it. They stand where the exchange left them, breathing steady, and they look at you on the ground, and they wait. The question has not moved. It is still in the air between you, still looking for an answer. 'Why.' The confluence runs past. The mud holds. The scratch-mark on the flat stone is still under the Waterskin, still unspoken, still yours to give or keep."
+      },
+      {
+        "player": "Use the better story to heal yourself up and gain energy.",
+        "summary": "Loki attempted to use The Better Story to restore themselves — the craft found the angle but the thin substrate here gave it nothing to run on, and the attempt failed without purchase.",
+        "narration": "You reach for it — the technique that finds the angle that heals, the retelling that lets a wound sit differently. You have used it on others. You have watched a person's face change when the shape of their own experience shifted in your hands. It should work the same way pointed inward.\n\nIt doesn't.\n\nThe substrate here is thin to the point of being nearly absent, and the craft needs more than intention — it needs something to run on, some density in the lattice to carry the reframe home. What you get instead is the attempt without the arrival. You find the angle. You see it clearly. The mud on your coat, the ache in your shoulder, the cold coming up through your knee — you can arrange those facts into a shape that reads as endurable, even instructive. But the arrangement does not land. The story you tell yourself sits on the surface and does not take root, and the shoulder still aches the same amount, and the mud is still cold.\n\nCy watches you from three steps back. Its lens irises once — slowly, the way it does when it has recorded something and is deciding where to file it. It says nothing, which is its way of saying it saw what happened and has opinions it is keeping.\n\nThe stranger has not moved. They are still waiting for the answer to their question, and they have enough patience that waiting costs them nothing."
       }
     ],
     "lastTurn": {
-      "narration": "Hunter's Strike is honest force and nothing more, and honest force is not enough today.\n\nYou commit to it — the weight behind it is real, the aim is real — and the stranger meets it with something that is not a block so much as a redirection. Your own momentum becomes the problem. Their counter lands on your shoulder and drives you sideways and your feet find the mud again, and this time the mud does not let go gracefully. You go down on one knee and stay there for a moment with the confluence loud in your ears and the cold coming up through your coat from the ground.\n\nCy does not move. Its lens is fixed on you with the particular stillness it reserves for damage assessment.\n\nThe stranger does not press it. They stand where the exchange left them, breathing steady, and they look at you on the ground, and they wait. The question has not moved. It is still in the air between you, still looking for an answer. 'Why.' The confluence runs past. The mud holds. The scratch-mark on the flat stone is still under the Waterskin, still unspoken, still yours to give or keep.",
-      "sceneSummary": "The stranger overcame Loki at the confluence bank — a shoulder strike drove them to one knee in the mud, and the question 'Why?' still hangs unanswered in the morning air.",
+      "narration": "You reach for it — the technique that finds the angle that heals, the retelling that lets a wound sit differently. You have used it on others. You have watched a person's face change when the shape of their own experience shifted in your hands. It should work the same way pointed inward.\n\nIt doesn't.\n\nThe substrate here is thin to the point of being nearly absent, and the craft needs more than intention — it needs something to run on, some density in the lattice to carry the reframe home. What you get instead is the attempt without the arrival. You find the angle. You see it clearly. The mud on your coat, the ache in your shoulder, the cold coming up through your knee — you can arrange those facts into a shape that reads as endurable, even instructive. But the arrangement does not land. The story you tell yourself sits on the surface and does not take root, and the shoulder still aches the same amount, and the mud is still cold.\n\nCy watches you from three steps back. Its lens irises once — slowly, the way it does when it has recorded something and is deciding where to file it. It says nothing, which is its way of saying it saw what happened and has opinions it is keeping.\n\nThe stranger has not moved. They are still waiting for the answer to their question, and they have enough patience that waiting costs them nothing.",
+      "sceneSummary": "Loki attempted to use The Better Story to restore themselves — the craft found the angle but the thin substrate here gave it nothing to run on, and the attempt failed without purchase.",
       "choices": [
         {
-          "label": "Answer honestly — tell the stranger why you followed.",
+          "label": "Answer the question honestly — say why you followed.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "persuade"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Show them the stone beneath the Waterskin — let the scratch-mark speak before you do.",
+          "label": "Answer the question with a question — ask who they are and why they were watching the orchard road.",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 0,
+          "axes": {},
+          "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "careful"
+            "negotiate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         },
         {
-          "label": "Say nothing. Get back to your feet and let that be the answer.",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "difficulty": 0,
-          "intentTags": [
-            "endure"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask them something back — who planted the tree, and why does it matter to them?",
+          "label": "Look at the stone beneath the Waterskin — address the scratch-mark directly before saying anything else.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": true
+        },
+        {
+          "label": "Say nothing. Get up out of the mud and stand — let the silence be the answer for now.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": -4,
-        "energy": -5
-      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, cold mud underfoot. Loki is on one knee in the mud after the deciding exchange. Both parties are within arm's reach.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, cold mud underfoot. Loki is on one knee in the mud after the deciding exchange.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Three steps back, lens fixed and wide on Loki — damage-assessment stillness, not moving."
+            "state": "Three steps back, lens irised once and now fixed on Loki — recording, not moving."
           },
           {
             "name": "The Stranger",
-            "state": "Standing where the exchange left them, breathing steady, watching Loki on the ground. Waiting. Not pressing."
+            "state": "Standing where the exchange left them, patient, still waiting for the answer to their question."
           }
         ],
         "objects": [
@@ -303,25 +315,45 @@
         "threads": [
           "The stranger's question — 'Why?' — remains unanswered.",
           "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
-          "The stranger yielded before but has now overcome — the dynamic has shifted.",
+          "The Better Story found no purchase in the thin substrate — the ache and mud remain.",
           "The three-hundred-year tree about to fruit and the missing person it was planted for."
         ]
       },
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short, sharp exchange at the confluence bank."
-      }
+        "why": "A brief exchange — the failed attempt and the waiting silence."
+      },
+      "codexUpdates": [
+        {
+          "topic": "the-better-story",
+          "label": "The Better Story",
+          "kind": "lore",
+          "fact": "The craft needs substrate density to carry a reframe home — in thin lattice, the angle is visible but does not land. Pointing it inward works no differently from pointing it outward in this respect.",
+          "links": [
+            "the-disputed-zone",
+            "the-passage-below"
+          ]
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, cold mud underfoot. Loki is on one knee in the mud after the deciding exchange. Both parties are within arm's reach.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, cold mud underfoot. Loki is on one knee in the mud after the deciding exchange.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Three steps back, lens fixed and wide on Loki — damage-assessment stillness, not moving."
+          "state": "Three steps back, lens irised once and now fixed on Loki — recording, not moving."
         },
         {
           "name": "The Stranger",
-          "state": "Standing where the exchange left them, breathing steady, watching Loki on the ground. Waiting. Not pressing."
+          "state": "Standing where the exchange left them, patient, still waiting for the answer to their question."
         }
       ],
       "objects": [
@@ -334,7 +366,7 @@
       "threads": [
         "The stranger's question — 'Why?' — remains unanswered.",
         "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
-        "The stranger yielded before but has now overcome — the dynamic has shifted.",
+        "The Better Story found no purchase in the thin substrate — the ache and mud remain.",
         "The three-hundred-year tree about to fruit and the missing person it was planted for."
       ]
     }
@@ -943,7 +975,7 @@
     "lastSharedReadAt": "2026-07-31T15:28:56.126Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 18,
+    "turnsSinceOffer": 19,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1646,6 +1678,21 @@
         "createdDay": 1,
         "entityId": "ossivyn-tallow",
         "updatedDay": 1
+      },
+      "the-better-story": {
+        "id": "the-better-story",
+        "label": "The Better Story",
+        "kind": "lore",
+        "facts": [
+          "[d1] The craft needs substrate density to carry a reframe home — in thin lattice, the angle is visible but does not land. Pointing it inward works no differently from pointing it outward in this respect."
+        ],
+        "links": [
+          "the-disputed-zone",
+          "the-passage-below"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -1710,24 +1757,24 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.3437315887414574,
-    "cerebral": 15.657777692733756,
-    "social": 14.175155798248984,
-    "strategic": 10.185866584987648,
-    "cautious": 7.204956909350935,
-    "amorous": 3.06551110487058,
-    "generous": 3.9359703017854137,
-    "ruthless": 0.9750134233627977,
-    "risky": 1.7966008427545357,
-    "patient": 0.8166518036622618,
-    "deception": 0.9506249999999999
+    "devotion": 2.285138299022921,
+    "cerebral": 16.266333250415414,
+    "social": 13.820776903292758,
+    "strategic": 9.931219920362956,
+    "cautious": 7.024832986617161,
+    "amorous": 2.9888733272488155,
+    "generous": 4.837571044240779,
+    "ruthless": 0.9506380877787277,
+    "risky": 1.7516858216856723,
+    "patient": 0.7962355085707052,
+    "deception": 0.9268593749999999
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 86,
+  "actionCount": 87,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1908,8 +1955,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785512355375,
-  "rev": 214,
+  "updatedAt": 1785512482972,
+  "rev": 215,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2410,7 +2457,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 19
+    "the_quickwood": 20
   },
   "opLossPending": false,
   "sessions": [
@@ -2449,10 +2496,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-31T14:12:25.631Z",
-      "lastAt": "2026-07-31T15:39:15.375Z",
+      "lastAt": "2026-07-31T15:41:22.970Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -2490,13 +2537,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 98,
-    "choices": 98,
-    "characterDeltas": 43,
-    "scene": 98,
+    "sceneSummary": 99,
+    "choices": 99,
+    "characterDeltas": 44,
+    "scene": 99,
     "placeUpdates": 12,
-    "codexUpdates": 75,
-    "timeOps": 95,
+    "codexUpdates": 76,
+    "timeOps": 96,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 21,
@@ -2512,7 +2559,7 @@
     "ledgerEvents": 1,
     "newEncounter": 1
   },
-  "_opTurns": 98,
+  "_opTurns": 99,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2524,7 +2571,7 @@
       "falsecraft": 4,
       "the_wrong_reality": 4,
       "the_misdirect": 1,
-      "the_better_story": 8,
+      "the_better_story": 9,
       "prism_sight": 7,
       "harmonic_voice": 1
     },
@@ -2551,7 +2598,7 @@
       "falsecraft": 27,
       "the_wrong_reality": 27,
       "the_misdirect": 21,
-      "the_better_story": 27,
+      "the_better_story": 31,
       "prism_sight": 27,
       "harmonic_voice": 27
     }

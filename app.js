@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.313";
+const APP_VERSION = "1.8.314";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8415,7 +8415,9 @@ function playerBattleSkills() {
 let sbLastRound = null;
 let sbLastRoundReceipt = null; // SNG-246 (Erik): what JUST happened this round — both moves + the interaction + the swing, SHOWN.
 let sbLastRoundRolls = null;   // CCODE-36 (Erik): the ROLLS behind that round — same breakdown popover as normal play.
-let sbBusy = false;       // CCODE-45: a GM call is in flight for this turn — don't let a double-click double-resolve.
+let sbBusy = false;      // CCODE-45/47: a call is in flight — the panel must SAY so, not just sit there.
+let sbBusyLabel = "";    // CCODE-47: what we are waiting ON, in the player's terms.
+let sbQuickBeat = "";    // CCODE-47: the fast Haiku read of the exchange, shown while the full telling renders.       // CCODE-45: a GM call is in flight for this turn — don't let a double-click double-resolve.
 let sbWeaveArmed = null;       // CCODE-37 (Erik: "this is where braids really shine"): index of the craft armed to WEAVE.
 const sbOpenFams = {};         // CCODE-38 (Erik: "can we make the categories collapsible?"): family → open?, kept across rounds.
 
@@ -8700,6 +8702,8 @@ function skillBattlePanel() {
     <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
     ${st.spent?.player ? `<div class="sb-spent-bar">🕯 <strong>You are spent</strong> — your crafts will not answer until you find energy. <span class="hint">Steel and wit still work (a plain strike, a raised guard). This is the moment to <strong>Yield</strong> by choice, or use something that restores you — the fight no longer ends itself here.</span></div>` : ""}
     ${st.spent?.opponent ? `<div class="sb-spent-bar dim">🕯 <strong>${esc(def.opponent?.name || "They")} are spent</strong> — swinging on will alone. <span class="hint">Their crafts are done; press it.</span></div>` : ""}
+    ${busySB ? `<div class="sb-waiting"><span class="sb-spinner"></span> ${esc(sbBusyLabel || "resolving…")}</div>` : ""}
+    ${sbQuickBeat && !busySB ? `<div class="sb-quick">${esc(sbQuickBeat)}</div>` : ""}
     ${sbStepTracker(turn)}
     ${turn.phase === "review" ? sbReviewCard(turn, skills) : `
       <div class="sb-step-hint hint">${esc(step.hint)}${selCount === 2 ? ` <strong class="sb-braid-note">⋈ braided — both crafts, both effects, both costs.</strong>` : selCount === 1 ? ` <span class="hint">Pick a second craft to BRAID them.</span>` : ""}</div>
@@ -8756,6 +8760,8 @@ function wireSkillBattlePanel() {
   const turn = sbTurn();
   for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(sbLastRound); };
   // CCODE-45: a craft click SELECTS for this step (max 2 — the second braids). Nothing fires until you proceed.
+  // CCODE-47: while a call is in flight nothing is clickable — a second click must not double-resolve a turn.
+  if (sbBusy) { for (const b of app.querySelectorAll("[data-sbskill], #sb-proceed, #sb-execute, #sb-edit")) b.disabled = true; return; }
   for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => {
     const i = Number(b.dataset.sbskill), cur = turn.sel[turn.phase] || (turn.sel[turn.phase] = []);
     const at = cur.indexOf(i);
@@ -8793,7 +8799,7 @@ async function sbResolveSense() {
   const decl = sbDeclFromSel(turn.sel.sense, skills, sbIntensity);
   turn.senseDone = true;
   if (!decl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
-  sbBusy = true; renderSkillBattle(sbLastRound);
+  sbBusy = true; sbBusyLabel = `Reading ${enc.def?.opponent?.name || "them"}…`; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
   const rr = skillBattleRound(character.activeEncounter.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps,
     seenTendency: sbLastPlayerFn, rng: Math.random, phase: "sense", tickEffects: false });
   character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
@@ -8821,7 +8827,7 @@ async function sbResolveSense() {
     if (result) renderPlay(result.turn, { aside: t.senseLine });
     else renderPlay(character.activeScene?.lastTurn || null, { aside: t.senseLine });
   } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: t.senseLine }); }
-  finally { sbBusy = false; renderSkillBattle(sbLastRound); }
+  finally { sbBusy = false; sbBusyLabel = ""; renderSkillBattle(sbLastRound); }
 }
 
 /** CCODE-45 · GM CALL #2 — resolve the ACTION (and the BONUS if earned), then narrate the WHOLE turn. */
@@ -8832,7 +8838,7 @@ async function sbExecuteTurn() {
   const aDecl = sbDeclFromSel(turn.sel.action, skills, sbIntensity);
   if (!aDecl) { turn.phase = "action"; saveCharacter(character); renderSkillBattle(sbLastRound); return; }
   const bDecl = turn.bonusEarned ? sbDeclFromSel(turn.sel.bonus, skills, sbIntensity) : null;
-  sbBusy = true; renderSkillBattle(sbLastRound);
+  sbBusy = true; sbBusyLabel = "Resolving the turn…"; sbQuickBeat = ""; renderSkillBattle(sbLastRound);
   const beats = [];
   if (turn.senseLine) beats.push(turn.senseLine);
   // ACTION — ticks the turn's effects only if there is no bonus step after it.
@@ -8868,15 +8874,27 @@ async function sbExecuteTurn() {
   saveCharacter(character);
   if (checkIncapacitation(character)) { sbBusy = false; sbEnd({ ...endRR, ended: true, outcome: "incapacitated" }); return; }
   if (ended) { sbBusy = false; sbEnd(endRR); return; }
-  // GM call #2 — the WHOLE turn, in order.
   const nm = enc.def?.opponent?.name || "your opponent";
+  // CCODE-47 (Erik): "you could have haiku do a short narration of the different skills each is using to describe
+  // the turn - and indicate the narration is processing - then show the big narrative result." So a FAST Haiku beat
+  // lands first — the clash of techniques, nothing more — while the panel keeps saying the full telling is coming.
+  // It is a GRACE, never a gate: a failure here leaves the turn and the full narration untouched.
+  sbBusyLabel = "Telling the turn…";
+  renderSkillBattle(sbLastRound);
+  try {
+    const quick = await callClaude([{ role: "user", content:
+      `In 2 short sentences, present tense, describe ONLY the clash of techniques in this exchange — name what each side DID. No outcome, no aftermath, no dialogue.\n${beats.map(b => `- ${b}`).join("\n")}\nThe opponent is ${nm}.` }],
+      { task: "combat-quick-beat", maxTokens: 160 });
+    if (quick) { sbQuickBeat = String(quick).trim(); renderPlay(character.activeScene?.lastTurn || null, { aside: sbQuickBeat }); }
+  } catch { /* a grace, never a gate */ }
+  // GM call #2 — the WHOLE turn, in order.
   const shaped = ["sense", "action", "bonus"].filter(k => turn.text[k]).map(k => `${k}: "${turn.text[k]}"`).join("; ");
   try {
     const result = await runGM({ resolution: null, playerInput: `(A full fight TURN against ${nm} has resolved. The engine already decided everything below \u2014 it is what HAPPENED and is not negotiable:\n${beats.map(b => `- ${b}`).join("\n")}\n${shaped ? `The player shaped it: ${shaped}\n` : ""}Narrate this ONE turn as a single continuous beat \u2014 the read, then the blow${bDecl ? ", then the opening they took" : ""}, and what ${nm} did through all of it. End with where the two of you now stand, because that sets up the next turn.)` });
     if (result) renderPlay(result.turn, { aside: sbLastRoundReceipt });
     else renderPlay(character.activeScene?.lastTurn || null, { aside: sbLastRoundReceipt });
   } catch { renderPlay(character.activeScene?.lastTurn || null, { aside: sbLastRoundReceipt }); }
-  finally { sbBusy = false; renderSkillBattle(sbLastRound); }
+  finally { sbBusy = false; sbBusyLabel = ""; sbQuickBeat = ""; renderSkillBattle(sbLastRound); }
 }
 
 /** SNG-246 BUG1: renderSkillBattle is now a THIN ALIAS — there is no separate skill-battle screen. It carries the

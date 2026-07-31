@@ -1097,3 +1097,10 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-odds-none { color: var(--ink-dim); opacity: .7; font-style: italic; }
 .sb-fin { display: inline-block; font-family: var(--font-ui); font-size: 10px; padding: 1px 6px; border-radius: 8px; border: 1px solid var(--danger); color: var(--danger); margin-top: 3px; cursor: help; }
 .sb-fin.dim { border-color: var(--border); color: var(--ink-dim); opacity: .75; }
+/* CCODE-47 — waiting states. A locked-in choice must SAY it is waiting, not sit there looking clickable. */
+.sb-waiting { display: flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-size: 12.5px; color: var(--accent, #c9a227); background: color-mix(in srgb, var(--accent, #c9a227) 10%, var(--panel2)); border: 1px dashed var(--accent, #c9a227); border-radius: 5px; padding: 7px 10px; margin-bottom: 8px; }
+.sb-spinner { width: 11px; height: 11px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--accent, #c9a227) 35%, transparent); border-top-color: var(--accent, #c9a227); animation: sb-spin .7s linear infinite; flex: 0 0 auto; }
+@keyframes sb-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .sb-spinner { animation: none; } }
+/* the fast Haiku beat — the clash, while the full telling is still being written */
+.sb-quick { font-size: 13px; line-height: 1.5; font-style: italic; color: var(--ink); border-left: 3px solid var(--accent2, #7a9); background: color-mix(in srgb, var(--accent2, #7a9) 7%, var(--panel2)); border-radius: 4px; padding: 7px 10px; margin-bottom: 8px; }

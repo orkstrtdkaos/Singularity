@@ -15,6 +15,10 @@ const MODEL_MAP = {
   "bio-gen": "claude-sonnet-4-6",
   "world-tick": "claude-sonnet-4-6",
   "generate": "claude-sonnet-4-6",
+  // CCODE-47 (Erik): "you could have haiku do a short narration of the different skills each is using to
+  // describe the turn - and indicate the narration is processing - then show the big narrative result."
+  // A fast, cheap beat that lands in a second, so the player is never staring at a dead panel.
+  "combat-quick-beat": "claude-haiku-4-5-20251001",
   "intent-parse": "claude-haiku-4-5-20251001",
   "codex-adjudicate": "claude-sonnet-4-6",   // SNG-153: identity judgement — worth Sonnet, one batched call
   "chronicle-compress": "claude-haiku-4-5-20251001",

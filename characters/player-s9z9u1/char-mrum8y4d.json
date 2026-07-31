@@ -73,9 +73,9 @@
   },
   "attunement": 4,
   "maxHealth": 45,
-  "health": 45,
+  "health": 37,
   "maxEnergy": 115,
-  "energy": 115,
+  "energy": 90,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -264,29 +264,56 @@
         "player": null,
         "summary": "An Hourkeeper appeared from the brush — silent, still, watching Loki with terrible foreknowledge and saying nothing.",
         "narration": "A sound comes from behind you — not from the direction of the road, not from the stranger. From somewhere off to your left, where the brush thins toward a flat stretch of pale mud.\n\nAn Hourkeeper is standing there. You did not see them arrive. They are wearing the plain grey coat the Hourkeepers favor, and they are looking directly at you with an expression of terrible, helpless sympathy — the kind that belongs to someone who already knows how a story ends and has no good way to say so.\n\nThey do not speak. They do not move toward you or toward the stranger. They simply stand in the mud with that expression fixed on their face, the way a person stands when they are carrying something they cannot put down and cannot explain.\n\nCy's lens swings toward them, irises once, and swings back to you. That is Cy's way of saying: I have noted it and I have no entry for it.\n\nThe stranger has not moved. They are still three paces away, still waiting on their question. But now there are three of you in this confluence — and the Hourkeeper's silence has weight."
+      },
+      {
+        "player": null,
+        "summary": "The stranger overcame Loki at the confluence — the final exchange drove them into the mud, Cy running unhappy numbers, the question 'Why?' still unanswered in the cold air.",
+        "narration": "The stranger's final strike comes in low and you raise a guard against it — and for a moment it looks like it will hold. Then it doesn't. They turn your arm with their wrist and the force redirects up through your elbow and into your shoulder, and you go down sideways into the cold mud. Not thrown. Not beaten senseless. Just — done.\n\nYou land on one hip and one palm. The mud is cold enough to sting. Cy is at your left, utterly still, its lens irised to the smallest ring it uses when it has run the numbers and found them not to its liking. The stranger stands three paces away and does not press forward. Their breathing has settled and their arms hang open at their sides, which is not a gesture of surrender — it is a gesture of having been answered.\n\nThe question is still there. 'Why?' It has not moved. It stands in the cold afternoon air between you like something they set down carefully and are willing to wait beside for as long as it takes. The Hourkeeper at the edge of the brush has not moved either. Their expression has not changed — that terrible foreknowing sympathy, fixed on you in the mud, carrying whatever they know and cannot say.\n\nThe waterskin is beside you. The flat stone is beneath it, its pale scratch-mark invisible from here. Somewhere north of you, the orchard tends its forty-year trees, and someone planted one today for a child not yet born. The spring mud is cold and the afternoon is not finished yet and the stranger is waiting."
       }
     ],
     "lastTurn": {
-      "narration": "A sound comes from behind you — not from the direction of the road, not from the stranger. From somewhere off to your left, where the brush thins toward a flat stretch of pale mud.\n\nAn Hourkeeper is standing there. You did not see them arrive. They are wearing the plain grey coat the Hourkeepers favor, and they are looking directly at you with an expression of terrible, helpless sympathy — the kind that belongs to someone who already knows how a story ends and has no good way to say so.\n\nThey do not speak. They do not move toward you or toward the stranger. They simply stand in the mud with that expression fixed on their face, the way a person stands when they are carrying something they cannot put down and cannot explain.\n\nCy's lens swings toward them, irises once, and swings back to you. That is Cy's way of saying: I have noted it and I have no entry for it.\n\nThe stranger has not moved. They are still three paces away, still waiting on their question. But now there are three of you in this confluence — and the Hourkeeper's silence has weight.",
-      "sceneSummary": "An Hourkeeper appeared from the brush — silent, still, watching Loki with terrible foreknowledge and saying nothing.",
+      "narration": "The stranger's final strike comes in low and you raise a guard against it — and for a moment it looks like it will hold. Then it doesn't. They turn your arm with their wrist and the force redirects up through your elbow and into your shoulder, and you go down sideways into the cold mud. Not thrown. Not beaten senseless. Just — done.\n\nYou land on one hip and one palm. The mud is cold enough to sting. Cy is at your left, utterly still, its lens irised to the smallest ring it uses when it has run the numbers and found them not to its liking. The stranger stands three paces away and does not press forward. Their breathing has settled and their arms hang open at their sides, which is not a gesture of surrender — it is a gesture of having been answered.\n\nThe question is still there. 'Why?' It has not moved. It stands in the cold afternoon air between you like something they set down carefully and are willing to wait beside for as long as it takes. The Hourkeeper at the edge of the brush has not moved either. Their expression has not changed — that terrible foreknowing sympathy, fixed on you in the mud, carrying whatever they know and cannot say.\n\nThe waterskin is beside you. The flat stone is beneath it, its pale scratch-mark invisible from here. Somewhere north of you, the orchard tends its forty-year trees, and someone planted one today for a child not yet born. The spring mud is cold and the afternoon is not finished yet and the stranger is waiting.",
+      "sceneSummary": "The stranger overcame Loki at the confluence — the final exchange drove them into the mud, Cy running unhappy numbers, the question 'Why?' still unanswered in the cold air.",
       "choices": [
         {
-          "label": "Step toward the Hourkeeper and ask them plainly what they know.",
+          "label": "Answer plainly — tell the stranger the true shape of why you were here and what you found.",
           "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": -0.3
+          },
+          "difficulty": 0,
           "intentTags": [
-            "negotiate",
-            "study"
+            "persuade"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Use See the Made Thing — look at the Hourkeeper and read what their silence is built from.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Give them a shaped answer — not a lie, but the version of the truth that lands as an explanation rather than an invitation.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.2
+          },
           "difficulty": 15,
           "intentTags": [
+            "persuade",
+            "careful"
+          ],
+          "abilityId": "falsecraft",
+          "energyCost": 6,
+          "trivial": false
+        },
+        {
+          "label": "Say nothing. Stay on the ground and let the silence ask something back of them.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "careful",
             "study"
           ],
           "abilityId": "see_the_made_thing",
@@ -294,48 +321,44 @@
           "trivial": false
         },
         {
-          "label": "Turn back to the stranger and answer 'Why?' — let the Hourkeeper witness whatever comes next.",
+          "label": "Look at the Hourkeeper. Ask them — since they clearly already know — what they're carrying.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "persuade"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Hold still and watch — see whether the Hourkeeper moves, speaks, or simply waits.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         }
       ],
+      "characterDeltas": {
+        "health": -4,
+        "energy": -5
+      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, two steps back from where they stood. The stranger stands three paces away. An Hourkeeper stands in the brush to the left, grey-coated, motionless, watching Loki with an expression of terrible sympathy.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, one palm down, one hip down, after the final exchange. The stranger stands three paces away, arms open at their sides, waiting.",
         "npcsPresent": [
           {
             "name": "The Stranger",
-            "state": "Standing three paces away, question still open — watching Loki and now the Hourkeeper."
+            "state": "Standing three paces away, arms loose at their sides — not pressing, waiting on the answer to 'Why?'"
           },
           {
-            "name": "The Hourkeeper",
-            "state": "Motionless at the edge of the brush, grey coat, looking at Loki with helpless foreknowledge — silent."
+            "name": "Veln Ashpause",
+            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki."
           },
           {
             "name": "Cy",
-            "state": "Two precise steps to Loki's left — lens swung toward the Hourkeeper, irised once, returned to Loki. Running numbers it finds unacceptable."
+            "state": "At Loki's left, perfectly still, lens irised to its tightest ring — running numbers it finds unacceptable."
           }
         ],
         "objects": [
           "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
-          "Waterskin set on top of the stone",
+          "Waterskin beside Loki in the mud",
           "boot-prints in mud ending at the water's edge",
-          "mud on Loki's coat, hands, and both legs from the falls",
+          "mud on Loki's coat, hands, hip, and both legs from the falls",
           "bent stems and snapped low branch marking the brush entry"
         ],
         "threads": [
@@ -343,71 +366,35 @@
           "The Hourkeeper has pre-remembered something and will not say what.",
           "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
           "The three-hundred-year tree about to fruit and the missing person it was planted for.",
-          "Loki is injured and below full energy — exhausted and sitting in cold mud."
+          "Loki is injured and below full energy — sitting in cold mud after being overcome."
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "meet",
-          "npcId": "hourkeeper-confluence",
-          "name": "The Hourkeeper",
-          "role": "An Hourkeeper present at the confluence — watching Loki with foreknowledge",
-          "gender": "unknown",
-          "pronouns": "they/them",
-          "description": "Grey-coated, motionless, arrived without sound from the brush. Watching with an expression of terrible sympathy that belongs to someone carrying knowledge they cannot share.",
-          "note": "Appeared from the brush during the encounter — fixed Loki with a look of helpless foreknowledge and has said nothing.",
-          "learned": [
-            "They have pre-remembered something about Loki's situation — they will not say what, and cannot stop knowing it."
-          ],
-          "status": "active",
-          "statusNote": "Standing at the edge of the brush at the confluence — silent, watching, carrying something they cannot explain."
-        }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "An Hourkeeper at the confluence in the Disputed Zone — grey-coated, bearing terrible foreknowledge of Loki's immediate situation, saying nothing",
-          "why": "The engine's something-happens event surfaced them as a real challenge: present, witnessed, radiating pre-remembered knowledge. They need a stable identity to recur."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "hourkeepers",
-          "label": "The Hourkeepers",
-          "kind": "mystery",
-          "fact": "An Hourkeeper appeared at the confluence without sound, fixed Loki with an expression of terrible sympathy, and said nothing. They have pre-remembered something and cannot stop knowing it — and cannot say what it is.",
-          "links": [
-            "the-hostile-meeting",
-            "the-disputed-zone"
-          ]
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief charged moment — the Hourkeeper's arrival and the silence that followed."
+        "why": "A brief, sharp exchange — the final round of the skill-battle."
       }
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, two steps back from where they stood. The stranger stands three paces away. An Hourkeeper stands in the brush to the left, grey-coated, motionless, watching Loki with an expression of terrible sympathy.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, one palm down, one hip down, after the final exchange. The stranger stands three paces away, arms open at their sides, waiting.",
       "npcsPresent": [
         {
           "name": "The Stranger",
-          "state": "Standing three paces away, question still open — watching Loki and now the Hourkeeper."
+          "state": "Standing three paces away, arms loose at their sides — not pressing, waiting on the answer to 'Why?'"
         },
         {
-          "name": "The Hourkeeper",
-          "state": "Motionless at the edge of the brush, grey coat, looking at Loki with helpless foreknowledge — silent."
+          "name": "Veln Ashpause",
+          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki."
         },
         {
           "name": "Cy",
-          "state": "Two precise steps to Loki's left — lens swung toward the Hourkeeper, irised once, returned to Loki. Running numbers it f"
+          "state": "At Loki's left, perfectly still, lens irised to its tightest ring — running numbers it finds unacceptable."
         }
       ],
       "objects": [
         "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
-        "Waterskin set on top of the stone",
+        "Waterskin beside Loki in the mud",
         "boot-prints in mud ending at the water's edge",
-        "mud on Loki's coat, hands, and both legs from the falls",
+        "mud on Loki's coat, hands, hip, and both legs from the falls",
         "bent stems and snapped low branch marking the brush entry"
       ],
       "threads": [
@@ -415,7 +402,7 @@
         "The Hourkeeper has pre-remembered something and will not say what.",
         "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
         "The three-hundred-year tree about to fruit and the missing person it was planted for.",
-        "Loki is injured and below full energy — exhausted and sitting in cold mud."
+        "Loki is injured and below full energy — sitting in cold mud after being overcome."
       ]
     }
   },
@@ -769,7 +756,7 @@
     },
     "hourkeeper-confluence": {
       "id": "hourkeeper-confluence",
-      "name": "The Hourkeeper",
+      "name": "Veln Ashpause",
       "role": "An Hourkeeper present at the confluence — watching Loki with foreknowledge",
       "description": "Grey-coated, motionless, arrived without sound from the brush. Watching with an expression of terrible sympathy that belongs to someone carrying knowledge they cannot share.",
       "firstMet": {
@@ -795,7 +782,12 @@
       "lastSeen": {
         "locationId": "the_slow_orchard",
         "day": 1
-      }
+      },
+      "_filledFromGenerate": true,
+      "_mergedFrom": "veln-ashpause",
+      "people": "human",
+      "peopleSource": "generated",
+      "appearance": "A human woman, late fifties, with the pale-olive complexion of someone who lives under canopy rather than sky. The grey coat falls to mid-calf, unmarked, unweathered, impossibly clean for the Orchard's mud-season — early spring has not touched it. Her hair is cut short and practical, silver at the temples, darker beneath. She carries no visible instrument of timekeeping; her hands are the instruments, folded at her waist, utterly still. Her eyes are already somewhere past you."
     }
   },
   "placeMemory": {
@@ -1054,7 +1046,7 @@
     "lastSharedReadAt": "2026-07-31T16:18:14.384Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 25,
+    "turnsSinceOffer": 26,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1801,6 +1793,19 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "veln-ashpause": {
+        "id": "veln-ashpause",
+        "label": "Veln Ashpause",
+        "kind": "person",
+        "facts": [
+          "[d1] Hourkeeper of the Confluence — she holds the moment before the moment, says nothing of what she carries, and the grey coat has never needed washing because nothing reaches it"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "veln-ashpause",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -1945,6 +1950,14 @@
   "gallery": [
     {
       "kind": "npc",
+      "prompt": "Veln Ashpause",
+      "url": "https://image.pollinations.ai/prompt/A%20human%20woman%2C%20late%20fifties%2C%20with%20the%20pale-olive%20complexion%20of%20someone%20who%20lives%20under%20canopy%20rather%20than%20sky.%20The%20grey%20coat%20falls%20to%20mid-calf%2C%20unmarked%2C%20unweathered%2C%20impossibly%20clean%20for%20the%20Orchard'%2C%20character%20portrait%2C%20named%20Veln%20Ashpause%2C%20Hourkeeper%20of%20the%20Confluence%20%E2%80%94%20she%20holds%20the%20moment%20before%20the%20moment%2C%20says%20nothing%20of%20what%20she%20carr%2C%20Almost%20nothing.%20What%20she%20does%20say%20comes%20out%20like%20the%20creak%20of%20a%20bough%20settling%20%E2%80%94%20not%20alarming%2C%20not%20c%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=12708&nologo=true",
+      "caption": "Veln Ashpause",
+      "worldDay": 31,
+      "at": "2026-07-31T16:21:39.719Z"
+    },
+    {
+      "kind": "npc",
       "prompt": "Ossivyn Tallow",
       "url": "https://image.pollinations.ai/prompt/A%20man%20in%20his%20late%20sixties%2C%20heavyset%20and%20deliberate%20in%20the%20way%20of%20someone%20who%20has%20carried%20things%20all%20his%20life%20and%20made%20peace%20with%20the%20carrying.%20Skin%20the%20colour%20of%20old%20heartwood%20%E2%80%94%20deep%20reddish-brown%2C%20we%2C%20character%20portrait%2C%20named%20Ossivyn%20Tallow%2C%20Tender%20of%20the%20Slow%20Orchard%20%E2%80%94%20he%20is%20planting%20a%20tree%20today%20for%20a%20child%20not%20yet%20conceived%2C%20because%20the%20%2C%20Unhurried%20but%20not%20dreamy%20%E2%80%94%20fully%20present%2C%20like%20a%20man%20who%20has%20decided%20time%20is%20not%20his%20enemy.%20Speaks%20i%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13169&nologo=true",
       "caption": "Ossivyn Tallow",
@@ -2063,8 +2076,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785514873420,
-  "rev": 253,
+  "updatedAt": 1785516319081,
+  "rev": 260,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2516,6 +2529,80 @@
         "image": "https://image.pollinations.ai/prompt/A%20man%20in%20his%20late%20sixties%2C%20heavyset%20and%20deliberate%20in%20the%20way%20of%20someone%20who%20has%20carried%20things%20all%20his%20life%20and%20made%20peace%20with%20the%20carrying.%20Skin%20the%20colour%20of%20old%20heartwood%20%E2%80%94%20deep%20reddish-brown%2C%20we%2C%20character%20portrait%2C%20named%20Ossivyn%20Tallow%2C%20Tender%20of%20the%20Slow%20Orchard%20%E2%80%94%20he%20is%20planting%20a%20tree%20today%20for%20a%20child%20not%20yet%20conceived%2C%20because%20the%20%2C%20Unhurried%20but%20not%20dreamy%20%E2%80%94%20fully%20present%2C%20like%20a%20man%20who%20has%20decided%20time%20is%20not%20his%20enemy.%20Speaks%20i%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13169&nologo=true",
         "history": "Ossivyn Tallow did not inherit the Slow Orchard. He arrived at it the way most things in the Orchard arrive — before anyone knew he was needed. The previous tender, a woman named Ceth Worrall, had been planting for forty years and said nothing when she left except that the records were in the split-bark box under the grafting bench and that the Quickwood near the eastern wall was in the middle…",
         "relationships": "Ceth Worrall is gone in the way that people go when they have finished a thing and do not look back. Ossivyn does not know if she is dead. He knows her handwriting better than he knows most living faces, and he has amended her records in a hand he has tried to keep compatible with hers, so the box reads as one continuous document. He thinks of this as a kind of conversation. The family he is…"
+      },
+      "hourkeeper-confluence": {
+        "schemaVersion": 1,
+        "id": "hourkeeper-confluence",
+        "name": "Veln Ashpause",
+        "role": "Hourkeeper of the Confluence — she holds the moment before the moment, says nothing of what she carries, and the grey coat has never needed washing because nothing reaches it",
+        "homeLocation": "the_quickwood",
+        "communityId": "independent",
+        "personality": {
+          "warmth": 0.3,
+          "trust": 0.2,
+          "candor": 0.05,
+          "patience": 0.95
+        },
+        "spectrum": {
+          "death_life": 0.65,
+          "space_time": 0.85,
+          "emotional_logical": 0.1
+        },
+        "voiceHints": "Almost nothing. What she does say comes out like the creak of a bough settling — not alarming, not comforting, simply structural. She does not withhold warmly. She withholds the way bark withholds: it is not cruelty, it is the skin of the thing. If pressed she will say 'yes' or 'I know' and both will land wrong. Her silences are not empty — they are pre-occupied.",
+        "knowledge": [
+          "What is about to happen to Loki — specifically, immediately, in the order it will happen",
+          "Why the Slow Orchard chose the confluence as its watch-point across three generations of sapwatch",
+          "Which trees in the Quickwood are old enough to remember the last Disputed Zone renegotiation, and what they concluded",
+          "The grey-coat tradition: who has worn it before her, what each of them did not say, and the weight of that accumulated silence"
+        ],
+        "wants": "To be present at the moment she has already witnessed in her bones — not to change it, not to mourn it, only to close the loop between knowing and having-known",
+        "fears": "That she will speak before it happens and fracture the seen-line — that her mouth will betray the orchard's patience and the future will fray at the seam she opened",
+        "reactsToReputation": {
+          "witnessed": "she holds eye contact for exactly one breath longer than is comfortable, then returns to the middle distance",
+          "demanding": "she goes very still, the way a deep-rooted thing goes still — she is not threatened, she is simply not moving",
+          "grieving": "she will stand beside you without touching you for as long as you need, and it will feel like standing at the edge of a very old forest"
+        },
+        "appearance": "A human woman, late fifties, with the pale-olive complexion of someone who lives under canopy rather than sky. The grey coat falls to mid-calf, unmarked, unweathered, impossibly clean for the Orchard's mud-season — early spring has not touched it. Her hair is cut short and practical, silver at the temples, darker beneath. She carries no visible instrument of timekeeping; her hands are the instruments, folded at her waist, utterly still. Her eyes are already somewhere past you.",
+        "people": "human",
+        "domains": {
+          "primary": "hourkeeper",
+          "secondary": "rootkin",
+          "tertiary": "threnodist"
+        },
+        "domainsNote": "An Hourkeeper grown up inside the Slow Orchard absorbs its temporal grammar — not mechanical time but sap-time, the long unsurprised rhythm of things that know they will outlast the question. Her rootkin secondary is practised not formal: she tends the confluence markers as though they are seedlings, knows what the ground remembers. Threnodist tertiary is latent — she has mourned before, will mourn again, holds the form ready.",
+        "affiliation": {
+          "alignment": "independent",
+          "communityTies": "She is known in the Orchard, permitted at the confluence, not enrolled in any Rootkin house — she arrived in early-spring twelve years ago, planted nothing, and was accepted by the trees before the wardens voted"
+        },
+        "seasonalNote": "Early spring. She arrived when the first frost-cracks in the bark were just sealing. This is noted. The Orchard trees that are oldest have been leaning very slightly toward the confluence since she came.",
+        "recurringPresenceNote": "She is here because something is about to happen to Loki. She will be here after. She will not have moved much. If Loki survives and looks for her later, she will be findable — same coat, same stillness, standing somewhere that makes sense in retrospect. She will not confirm that she knew. She will not need to.",
+        "teaches": null,
+        "curriculum": null,
+        "_gen": {
+          "entityId": "veln-ashpause",
+          "type": "npc",
+          "birthWeight": 6,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrum8y4d",
+            "locationId": "the_slow_orchard",
+            "day": 1,
+            "worldDay": null,
+            "hint": "An Hourkeeper at the confluence in the Disputed Zone — grey-coated, bearing terrible foreknowledge of Loki's immediate s",
+            "why": "The engine's something-happens event surfaced them as a real challenge: present, witnessed, radiating pre-remembered kno"
+          },
+          "attentionHistory": [],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20human%20woman%2C%20late%20fifties%2C%20with%20the%20pale-olive%20complexion%20of%20someone%20who%20lives%20under%20canopy%20rather%20than%20sky.%20The%20grey%20coat%20falls%20to%20mid-calf%2C%20unmarked%2C%20unweathered%2C%20impossibly%20clean%20for%20the%20Orchard'%2C%20character%20portrait%2C%20named%20Veln%20Ashpause%2C%20Hourkeeper%20of%20the%20Confluence%20%E2%80%94%20she%20holds%20the%20moment%20before%20the%20moment%2C%20says%20nothing%20of%20what%20she%20carr%2C%20Almost%20nothing.%20What%20she%20does%20say%20comes%20out%20like%20the%20creak%20of%20a%20bough%20settling%20%E2%80%94%20not%20alarming%2C%20not%20c%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=12708&nologo=true"
       }
     },
     "location": {
@@ -2565,7 +2652,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 26
+    "the_quickwood": 27
   },
   "opLossPending": false,
   "sessions": [
@@ -2604,10 +2691,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-31T14:12:25.631Z",
-      "lastAt": "2026-07-31T16:21:13.417Z",
+      "lastAt": "2026-07-31T16:45:19.079Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 15
+      "beats": 16
     }
   ],
   "establishedFacts": [
@@ -2645,13 +2732,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 103,
-    "choices": 103,
-    "characterDeltas": 46,
-    "scene": 103,
+    "sceneSummary": 104,
+    "choices": 104,
+    "characterDeltas": 47,
+    "scene": 104,
     "placeUpdates": 12,
     "codexUpdates": 76,
-    "timeOps": 99,
+    "timeOps": 100,
     "offer": 9,
     "generateRequest": 4,
     "sceneEnded": 22,
@@ -2667,7 +2754,7 @@
     "ledgerEvents": 1,
     "newEncounter": 1
   },
-  "_opTurns": 103,
+  "_opTurns": 104,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2933,53 +3020,7 @@
       }
     }
   },
-  "activeEncounter": {
-    "defId": "re-re_zone_hostile",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-re_zone_hostile",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [],
-      "opponentHealth": 7,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the aggressor",
-        "attributes": {
-          "practical": 5,
-          "physical": 5,
-          "mental": 5,
-          "social": 5
-        },
-        "energy": 112,
-        "maxEnergy": 112,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 4,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 4,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 112
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"

@@ -1,5 +1,29 @@
 # PO ALERT
 
+> ## [CCODE-33 complete_pending_review — CCode, 2026-07-31] Legible skill-battle rounds: receipt + machine log + fight takeover (v1.8.297 `1c04dab5`)
+> Erik playtest: *"I clicked deceiving skills… no rolls, no opposed rolls or descriptions… then the encounter ended
+> inexplicably with me on my back — frustrating."* Root cause: `sbDeclare` (the API-free round resolver) rendered
+> NOTHING per round and gave no reason on ending; the Fix-D receipt only lived in the classic onChoice path. Six
+> fixes: (1) **per-round receipt** — each round shows YOUR move + THEIRS + the interaction ("the blows meet and both
+> scatter" / "you turn it aside") + who took the exchange + the momentum swing + energy, engine-generated, in
+> `.sb-receipt`; scout gets its own line. (2) **ending reason** — the deciding exchange + outcome render as a
+> persistent aside AND feed the GM aftermath prompt, so a fight never ends inexplicably (works with no API key).
+> (3) **machine-tab combat log** (Erik's idea) — every round's full telemetry (both rolls/margins, momentum swing,
+> deltas, energy, outcome) mirrored to 🔬 Machine → ⚔ Combat rounds with a one-click **Copy combat log** to paste
+> back; new `recordCombatRound`/`combatRounds` ring, inert unless armed. (4) **fight takeover** — whole play surface
+> gets the red `.play-in-fight` outline; the GM's normal story-choices are suppressed during a skill battle (Ask GM
+> + free-type field stay). (5) **contextual engage label** — buildOffer's flat "Stand and meet it" → active/foe-named
+> "⚔ Meet {foe} — take the fight", swinging to "⚔ Press the attack on {foe}" when the player is the aggressor. (6) a
+> dev "⚔ attack (you start it)" test button. Live-verified fresh port (pure-engine, no API): receipt renders mid-fight
+> (strike + scout), machine log captures full telemetry + Copy, ending aside shows the deciding exchange, takeover +
+> choice-suppression + both engage labels confirmed, no console errors. npm test exit 0.
+> **FLAGGED (not shipped):** persistent effects (raise-shield → defense bonus) = a per-fight buff state-machine
+> follow-on; per-round GM prose would need a call per round (kept engine-only for speed); BRAIDS-in-combat still the
+> big one; the crush dial still ends on a big roll-margin gap (RNG, now fully explained on screen — a dials call for
+> Erik/Aevi). SNG-246 remaining: Fix A (engine-enforced fight-entry) + Fix C (structured finish/change conditions).
+> Results: po/results/20260731_CCODE-33_legible_skill_battle_rounds.md
+
+
 > ## [SNG-246 combat feedback complete_pending_review — CCode, 2026-07-27] Grouped moves + turn-by-turn (v1.8.296 `2df05cc6`)
 > Erik on the unified skill-battle panel (BUG1): (1) group the flat skill list by intent; (2) "chose hunter's
 > strike and the fight ended — so frustrating" (wants turn-by-turn, pick ONE, resolve, next). Fixed both: the

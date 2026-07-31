@@ -73,9 +73,9 @@
   },
   "attunement": 4,
   "maxHealth": 45,
-  "health": 37,
+  "health": 31,
   "maxEnergy": 115,
-  "energy": 85,
+  "energy": 62,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -279,59 +279,22 @@
         "player": null,
         "summary": "Loki reads the aggressor through See the Made Thing — a striker who has already decided what Loki will do next.",
         "narration": "See the Made Thing opens and the stranger becomes legible — all their seams at once. They favour the strike. You can see it in the way they weight their lead foot, in the slight forward lean of the shoulder, in the way their hands are never fully still. They are not waiting to read you. They have already decided what you are going to do, and they are positioned for it. They think you are going to get up swinging."
+      },
+      {
+        "player": null,
+        "summary": "Loki feinted a strike, read the aggressor through the Misdirect, and answered with Hunter's Strike — on their feet now, the gap reset, the question still open.",
+        "narration": "You let them see what they expect to see. Your weight shifts forward — the beginning of a strike, the exact shape they have already decided you will make. Their guard comes up clean and hard, the way a practiced striker's guard does, and for a breath you are exactly where they thought you would be.\n\nThen you are not.\n\nThe Misdirect is already in the air between you — not a sound, not a gesture, just the wrong information landing in the right place. Their eye goes to where the strike should be arriving. You go sideways. The opening costs you ground; they feel the false read and press, and your shoulder takes it. It is not nothing. But you are moving now, and moving is different from lying in the mud.\n\nYou get your hand to the belt knife on the turn. Hunter's Strike comes up from the hip, low and without ceremony, the way it is supposed to — not a warrior's form, just honest force aimed at something real. They meet it hard. Their own strike comes in at the same moment and the two of you exchange it, shoulder to shoulder, neither clean. But you are on your feet. The knife has found the edge of the space between you and the stranger is three paces out rather than two, breathing a little faster than before.\n\nThe question is still open in the cold air. Veln Ashpause has not moved. Cy's lens stays at its smallest ring, but its numbers have shifted — you can hear it in the small change of its mechanism, a brief easing. The aggressor's guard is up and their weight has reset, and they are watching you differently now."
       }
     ],
     "lastTurn": {
-      "narration": "See the Made Thing opens and the stranger becomes legible — all their seams at once. They favour the strike. You can see it in the way they weight their lead foot, in the slight forward lean of the shoulder, in the way their hands are never fully still. They are not waiting to read you. They have already decided what you are going to do, and they are positioned for it. They think you are going to get up swinging.",
-      "sceneSummary": "Loki reads the aggressor through See the Made Thing — a striker who has already decided what Loki will do next.",
+      "narration": "You let them see what they expect to see. Your weight shifts forward — the beginning of a strike, the exact shape they have already decided you will make. Their guard comes up clean and hard, the way a practiced striker's guard does, and for a breath you are exactly where they thought you would be.\n\nThen you are not.\n\nThe Misdirect is already in the air between you — not a sound, not a gesture, just the wrong information landing in the right place. Their eye goes to where the strike should be arriving. You go sideways. The opening costs you ground; they feel the false read and press, and your shoulder takes it. It is not nothing. But you are moving now, and moving is different from lying in the mud.\n\nYou get your hand to the belt knife on the turn. Hunter's Strike comes up from the hip, low and without ceremony, the way it is supposed to — not a warrior's form, just honest force aimed at something real. They meet it hard. Their own strike comes in at the same moment and the two of you exchange it, shoulder to shoulder, neither clean. But you are on your feet. The knife has found the edge of the space between you and the stranger is three paces out rather than two, breathing a little faster than before.\n\nThe question is still open in the cold air. Veln Ashpause has not moved. Cy's lens stays at its smallest ring, but its numbers have shifted — you can hear it in the small change of its mechanism, a brief easing. The aggressor's guard is up and their weight has reset, and they are watching you differently now.",
+      "sceneSummary": "Loki feinted a strike, read the aggressor through the Misdirect, and answered with Hunter's Strike — on their feet now, the gap reset, the question still open.",
       "choices": [
         {
-          "label": "You are expecting the wrong move — let them. Slip the anticipated strike and go somewhere they haven't planned for.",
-          "attribute": "social",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "feint",
-            "careful"
-          ],
-          "abilityId": "the_wrong_reality",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null
-        },
-        {
-          "label": "They want you to come in close — so don't. Hold your ground and make them come to you on your terms.",
+          "label": "Press the opening — drive in hard before they reset, blade first.",
           "attribute": "physical",
           "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "defend",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null
-        },
-        {
-          "label": "Use the false target — let them hit where you were, not where you are.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "feint",
-            "careful"
-          ],
-          "abilityId": "the_false_target",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null
-        },
-        {
-          "label": "They are a made thing too — answer the striker's shape with a Hunter's Strike aimed at their planted foot.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "attack",
             "risky"
@@ -339,74 +302,124 @@
           "abilityId": "hunters_strike",
           "energyCost": 4,
           "trivial": false,
-          "encounterId": null
+          "encounterId": "a-hostile-meeting"
+        },
+        {
+          "label": "Hold ground and let them come to you — read the next strike before it lands.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "defend",
+            "careful"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": "a-hostile-meeting"
+        },
+        {
+          "label": "Give them the wrong read again — show them a retreat, then don't retreat.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "feint",
+            "deceive"
+          ],
+          "abilityId": "the_wrong_reality",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": "a-hostile-meeting"
+        },
+        {
+          "label": "Call a stop — open your hands, let the knife hang loose, and ask your own question back.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "calm"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": "a-hostile-meeting"
         }
       ],
+      "characterDeltas": {
+        "health": -3,
+        "energy": -7
+      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet now, See the Made Thing open, reading the aggressor.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet, knife in hand, three paces from the aggressor.",
         "npcsPresent": [
           {
             "name": "The Stranger (aggressor)",
-            "state": "Three paces away, lead foot weighted, shoulder forward, hands restless — positioned for a striker's follow-through against an expected attack."
+            "state": "Guard reset, weight back, watching Loki with a different quality of attention than before — faster breathing, eyes recalculated."
           },
           {
             "name": "Veln Ashpause",
-            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki."
+            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki — unchanged."
           },
           {
             "name": "Cy",
-            "state": "At Loki's left, lens still at its smallest ring, running numbers it has not yet revised upward."
+            "state": "At Loki's left, lens still at its smallest ring but mechanism slightly eased — the numbers have shifted."
           }
         ],
         "objects": [
           "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
           "Waterskin beside Loki in the mud",
           "boot-prints in mud ending at the water's edge",
-          "mud on Loki's coat, hands, hip, and both legs"
+          "mud on Loki's coat, hands, hip, and both legs",
+          "belt knife in Loki's hand"
         ],
         "threads": [
-          "The stranger's question — 'Why?' — stands open, held as a door, not a demand.",
+          "The stranger's question — 'Why?' — still open, unanswered.",
           "The Hourkeeper has pre-remembered something and will not say what.",
           "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
-          "The three-hundred-year tree about to fruit and the missing person it was planted for.",
-          "Loki has a BONUS action from the successful read — the opening is there."
+          "The three-hundred-year tree about to fruit and the missing person it was planted for."
         ]
       },
       "encounterOps": [
         {
           "op": "tactic",
-          "tag": "press-in"
+          "tag": "circle"
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief, sharp exchange of blows"
+      }
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet now, See the Made Thing open, reading the aggressor.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet, knife in hand, three paces from the aggressor.",
       "npcsPresent": [
         {
           "name": "The Stranger (aggressor)",
-          "state": "Three paces away, lead foot weighted, shoulder forward, hands restless — positioned for a striker's follow-through again"
+          "state": "Guard reset, weight back, watching Loki with a different quality of attention than before — faster breathing, eyes recal"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki."
+          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki — unchanged."
         },
         {
           "name": "Cy",
-          "state": "At Loki's left, lens still at its smallest ring, running numbers it has not yet revised upward."
+          "state": "At Loki's left, lens still at its smallest ring but mechanism slightly eased — the numbers have shifted."
         }
       ],
       "objects": [
         "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
         "Waterskin beside Loki in the mud",
         "boot-prints in mud ending at the water's edge",
-        "mud on Loki's coat, hands, hip, and both legs"
+        "mud on Loki's coat, hands, hip, and both legs",
+        "belt knife in Loki's hand"
       ],
       "threads": [
-        "The stranger's question — 'Why?' — stands open, held as a door, not a demand.",
+        "The stranger's question — 'Why?' — still open, unanswered.",
         "The Hourkeeper has pre-remembered something and will not say what.",
         "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
-        "The three-hundred-year tree about to fruit and the missing person it was planted for.",
-        "Loki has a BONUS action from the successful read — the opening is there."
+        "The three-hundred-year tree about to fruit and the missing person it was planted for."
       ]
     }
   },
@@ -1050,7 +1063,7 @@
     "lastSharedReadAt": "2026-07-31T18:47:06.183Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 28,
+    "turnsSinceOffer": 29,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -2080,8 +2093,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785523724284,
-  "rev": 271,
+  "updatedAt": 1785524050508,
+  "rev": 283,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2656,7 +2669,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 29
+    "the_quickwood": 30
   },
   "opLossPending": false,
   "sessions": [
@@ -2695,10 +2708,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-31T14:12:25.631Z",
-      "lastAt": "2026-07-31T18:48:44.282Z",
+      "lastAt": "2026-07-31T18:54:10.506Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 18
+      "beats": 19
     }
   ],
   "establishedFacts": [
@@ -2736,13 +2749,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 104,
-    "choices": 104,
-    "characterDeltas": 46,
-    "scene": 104,
+    "sceneSummary": 105,
+    "choices": 105,
+    "characterDeltas": 47,
+    "scene": 105,
     "placeUpdates": 12,
     "codexUpdates": 76,
-    "timeOps": 99,
+    "timeOps": 100,
     "offer": 9,
     "generateRequest": 4,
     "sceneEnded": 22,
@@ -2754,11 +2767,11 @@
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
-    "encounterOps": 4,
+    "encounterOps": 5,
     "ledgerEvents": 1,
     "newEncounter": 1
   },
-  "_opTurns": 104,
+  "_opTurns": 105,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2769,10 +2782,11 @@
       "see_the_made_thing": 27,
       "falsecraft": 4,
       "the_wrong_reality": 4,
-      "the_misdirect": 1,
+      "the_misdirect": 2,
       "the_better_story": 10,
       "prism_sight": 7,
-      "harmonic_voice": 1
+      "harmonic_voice": 1,
+      "hunters_strike": 1
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -2796,10 +2810,11 @@
       "see_the_made_thing": 27,
       "falsecraft": 27,
       "the_wrong_reality": 27,
-      "the_misdirect": 21,
+      "the_misdirect": 31,
       "the_better_story": 31,
       "prism_sight": 27,
-      "harmonic_voice": 27
+      "harmonic_voice": 27,
+      "hunters_strike": 31
     }
   },
   "teachers": {},
@@ -3031,12 +3046,14 @@
       "encounterId": "re-re_zone_hostile",
       "type": "duel",
       "status": "active",
-      "round": 1,
+      "round": 3,
       "log": [
-        "r1: foresee vs strike → momentum 0"
+        "r1: foresee vs strike → momentum 0",
+        "r1: move vs shield → momentum -3",
+        "r2: strike vs strike → momentum 4"
       ],
       "opponentHealth": 7,
-      "tactic": "press-in",
+      "tactic": "circle",
       "mode": "skill_battle",
       "opponentSheet": {
         "name": "the aggressor",
@@ -3069,14 +3086,12 @@
         ],
         "synthesized": true
       },
-      "momentum": 0,
-      "opponentEnergy": 107,
+      "momentum": 3.5,
+      "opponentEnergy": 77,
       "turn": {
-        "phase": "action",
+        "phase": "sense",
         "sel": {
-          "sense": [
-            4
-          ],
+          "sense": [],
           "action": [],
           "bonus": []
         },
@@ -3085,27 +3100,36 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": -12,
-        "bonusEarned": true,
-        "senseDone": true,
-        "senseLine": "You read with See the Made Thing — success. They read you better (-12 to your action). The opening is there — you have earned a BONUS action. You read the aggressor: they favour strike. Pick a craft that answers it.",
-        "readPayoff": "You read the aggressor: they favour strike. Pick a craft that answers it."
+        "setupBonus": 0,
+        "bonusEarned": false,
+        "senseDone": false,
+        "senseLine": ""
       },
       "effects": [
         {
           "kind": "insight",
           "label": "reading their next beat",
           "value": 4,
-          "roundsLeft": 2,
+          "roundsLeft": 1,
           "applies": "always",
           "side": "player",
           "source": "See the Made Thing",
           "from": "player"
+        },
+        {
+          "kind": "guard",
+          "label": "guard up",
+          "value": 4,
+          "roundsLeft": 1,
+          "applies": "whenAttacked",
+          "side": "opponent",
+          "source": "a raised guard",
+          "from": "opponent"
         }
       ],
       "pressure": {
-        "player": 0,
-        "opponent": 0
+        "player": 1,
+        "opponent": 1
       },
       "spent": {
         "player": false,
@@ -3113,7 +3137,7 @@
       },
       "lastOppFn": "strike",
       "lastOppReceipt": {
-        "roll": 37,
+        "roll": 88,
         "chance": 95,
         "degree": "success",
         "action": {
@@ -3135,24 +3159,41 @@
             {
               "label": "ability rank 4",
               "value": 20
+            },
+            {
+              "label": "conserve",
+              "value": -8
+            },
+            {
+              "label": "momentum (you have the advantage)",
+              "value": 2
+            },
+            {
+              "label": "guard up (2 rounds)",
+              "value": 4
             }
           ],
           "total": 95,
-          "clampedFrom": 105,
+          "clampedFrom": 103,
           "base": "practical",
           "opposed": null
         },
-        "rawChance": 105,
-        "margin": 68,
+        "rawChance": 103,
+        "margin": 15,
         "matchup": 0,
-        "intensity": "standard",
+        "intensity": "conserve",
         "tier": 4,
         "function": "strike",
         "name": "a hard strike",
-        "effectMods": [],
+        "effectMods": [
+          {
+            "label": "guard up (2 rounds)",
+            "value": 4
+          }
+        ],
         "woven": null
       },
-      "lastReadWasSense": true
+      "lastReadWasSense": false
     }
   },
   "legendGovernor": {

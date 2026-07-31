@@ -1,0 +1,78 @@
+{
+ "schemaVersion": 1,
+ "id": "encounter_receipt_line",
+ "kind": "content",
+ "note": "SNG-246 Fix D (Aevi 2026-07-27): the PLAYER-FACING receipt line per encounter kind. Today encounterReceiptForGM feeds the GM only; this is the compact mechanical block SHOWN to the player each round, sourced from the SAME receipt. Format: [icon] DEGREE · what-you-did · meter-change · finish-proximity. Tight one-liner (Erik: streamline), finish-proximity ALWAYS shown so the player sees the end coming. Tokens filled by the engine from the receipt: {degree} {actorEffect} {meterFrom} {meterTo} {meterLabel} {energyDelta} {healthDelta} {finishHint}. NOT prose - the mechanical truth beside the prose.",
+ "degreeIcons": {
+  "crit_success": "✦",
+  "success": "✓",
+  "partial": "◐",
+  "failure": "✕",
+  "crit_failure": "✕✕"
+ },
+ "byKind": {
+  "fight": {
+   "meterLabel": "hp",
+   "icon": "⚔",
+   "line": "⚔ {degree} · {actorEffect} · foe {meterFrom}→{meterTo} hp · you {energyDelta} en{healthTaken} · {finishHint}",
+   "finishHints": {
+    "near_defeat": "one more solid hit ends it",
+    "near_yield": "they're near breaking (yield)",
+    "fleeable": "flee still open",
+    "steady": "the fight holds",
+    "you_hurt": "you're taking damage"
+   },
+   "note": "actorEffect = 'you hit for 2' / 'you miss' / 'you're staggered'. healthTaken shows only when you took damage (' · you −3 hp'). finishHint states the nearest live finish condition so a fight never ends 'the same' opaquely - the player sees WHICH road is closing."
+  },
+  "chase": {
+   "meterLabel": "ground",
+   "icon": "🏃",
+   "line": "🏃 {degree} · {actorEffect} · ground {meterFrom}→{meterTo} · you {energyDelta} en · {finishHint}",
+   "finishHints": {
+    "near_escape": "nearly clear",
+    "near_caught": "they're on you",
+    "closing": "you're gaining",
+    "losing": "they're gaining"
+   },
+   "note": "actorEffect = 'you gain ground' / 'you stumble'. The meter is distance, not hp - the receipt reflects the RIGHT meter per kind (that's why per-kind formats matter)."
+  },
+  "standoff": {
+   "meterLabel": "their resolve",
+   "icon": "🗣",
+   "line": "🗣 {degree} · {actorEffect} · their resolve {meterFrom}→{meterTo} · {finishHint}",
+   "finishHints": {
+    "near_bend": "they're about to yield the point",
+    "near_lose": "you're losing them",
+    "holding": "the exchange holds",
+    "you_faltering": "your position weakens"
+   },
+   "note": "a standoff has NO hp - the receipt shows RESOLVE moving. actorEffect = 'your point lands' / 'they counter'. This is the non-combat encounter the stationary-talker gets (SNG-237/238) - its receipt is resolve, not damage."
+  },
+  "puzzle": {
+   "meterLabel": "insight",
+   "icon": "🧩",
+   "line": "🧩 {degree} · {actorEffect} · insight {meterFrom}→{meterTo} · {finishHint}",
+   "finishHints": {
+    "near_solved": "the way through is almost clear",
+    "stuck": "no progress this attempt",
+    "progressing": "a piece falls into place",
+    "hint_available": "a hint is offered"
+   },
+   "note": "actorEffect = 'you read the mechanism' / 'the approach fails'. Insight accrues toward a solve; the receipt shows how close."
+  },
+  "hazard": {
+   "meterLabel": "progress across",
+   "icon": "⚠",
+   "line": "⚠ {degree} · {actorEffect} · across {meterFrom}→{meterTo} · you {energyDelta} en{healthTaken} · {finishHint}",
+   "finishHints": {
+    "near_across": "the far side is close",
+    "near_fail": "the ground is giving",
+    "crossing": "you press across",
+    "costly": "this is costing you"
+   },
+   "note": "actorEffect = 'you find footing' / 'you slip'. A hazard is crossed, not defeated - progress meter + the cost of a bad step."
+  }
+ },
+ "howEngineUses": "Each round, the engine has the receipt (degree band, deltas, state). It picks byKind[encounterKind], fills the tokens from the receipt data, picks the finishHint whose condition is nearest-live (from the frame's finish conditions - SNG-246 §4), and renders the line BESIDE the round prose (not merged). One line, always the finish-proximity shown. Falls back to a generic 'DEGREE · meter from→to' if kind is unknown. This is the SAME receipt the GM gets, formatted for the player - the mechanical truth SHOWN, per Erik.",
+ "designNote": "Per-kind formats matter because the MEALER differs (hp vs ground vs resolve vs insight vs progress) - a fight's 'foe 4→2 hp' and a standoff's 'their resolve 3→1' are both 'the meter moved', shown in the right terms. This is why a chase or standoff never reads like a mis-labeled fight. Ties SNG-230's per-kind frame."
+}

@@ -27,7 +27,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, deriveDangerLevel, bestiaryEncounters, eligibleEncountersFor, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
-import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, collapseFloor, swingDegree, wardAgainst, wardBroken, trivializes, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
+import { frameModel, encounterKind, frameExits, frameSize, frameTransition, chaseFromFight, frameCollapsible, collapseMode, collapseResult, collapseFloor, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_KINDS, FRAME_FREEFORM_CUE } from "../engine/encounterFrame.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
@@ -8248,6 +8248,21 @@ await (async () => {
   check("230: a FIGHT's fail is a chooseable Yield (all three fight exits are buttons)", fFight[2].action === "yield" && fFight[0].action === "strike" && fFight[1].action === "flee");
   // §Guard: an unframed (narrative) encounter yields no model
   check("230: an unframed encounter yields no frame model (null)", frameModel({ type: "narrative" }, {}, null) === null);
+
+  // --- SNG-246 Fix D: the PLAYER-FACING receipt line (the mechanical truth SHOWN each round) ---
+  {
+    const fmt = JSON.parse(readFileSync(new URL("../content/packs/core/rules/encounter_receipt_line.json", import.meta.url), "utf8"));
+    const fight = playerReceiptLine("fight", { degree: "success", actorEffect: "you hit for 2", meterFrom: 4, meterTo: 2, energyDelta: -3, healthDelta: 0, finishHint: "near_yield" }, fmt);
+    check("246 D: a fight receipt shows degree + effect + foe hp before→after + finish-proximity", /✓ success/.test(fight) && /you hit for 2/.test(fight) && /foe 4→2 hp/.test(fight) && /near breaking/.test(fight));
+    const hurt = playerReceiptLine("fight", { degree: "failure", actorEffect: "you miss", meterFrom: 4, meterTo: 4, energyDelta: -3, healthDelta: -2, finishHint: "you_hurt" }, fmt);
+    check("246 D: a fight receipt shows health taken only when you took damage", /you −2 hp/.test(hurt) && /taking damage/.test(hurt));
+    check("246 D: no health-taken segment when unharmed", !/hp · you −\d+ hp/.test(fight) && !/ · you −\d+ hp/.test(fight.replace(/foe \d+→\d+ hp/, "")));
+    const puz = playerReceiptLine("puzzle", { degree: "success", actorEffect: "a piece falls into place", meterFrom: 1, meterTo: 2, finishHint: "progressing" }, fmt);
+    check("246 D: a NON-fight kind reflects its OWN meter (puzzle = insight, not hp)", /🧩/.test(puz) && /insight 1→2/.test(puz) && !/hp/.test(puz));
+    check("246 D: an unknown kind falls back to a generic legible line", /partial/.test(playerReceiptLine("mystery", { degree: "partial", meterFrom: 1, meterTo: 2, meterLabel: "z" }, fmt)));
+    check("246 D: no degree → empty (nothing to show, never a broken line)", playerReceiptLine("fight", {}, fmt) === "" && playerReceiptLine("fight", { degree: null }, fmt) === "");
+    check("246 D: the loaded format carries all 5 encounter kinds", ["fight", "chase", "standoff", "puzzle", "hazard"].every(k => fmt.byKind[k]?.line));
+  }
 
   // Phase 1b (OQ1 = size by tier): weighty → takeover, small → banner
   check("230 P1b: frameSize routes by tier — regional/epic → takeover, riffraff/notable → banner",

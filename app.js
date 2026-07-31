@@ -65,12 +65,12 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
-import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c)
+import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.293";
+const APP_VERSION = "1.8.294";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4012,8 +4012,13 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (d.health) character.health = Math.max(0, Math.min(character.maxHealth, character.health + clampInt(d.health, -20, 15)));
   if (d.energy) character.energy = Math.max(0, Math.min(character.maxEnergy, character.energy + clampInt(d.energy, -20, 40)));
   if (d.xp) character.xp += Math.max(0, Math.min(25, d.xp | 0));
-  for (const item of d.inventoryAdd || []) addItem(character, item, CONTENT.items);
-  for (const item of d.inventoryRemove || []) removeItem(character, typeof item === "string" ? item : item?.name);
+  // SNG-246 BUG2: surface GM inventory changes as a mechanical note in the flow — a theft (inventoryRemove) was
+  // SILENT, so a legitimate outcome ("the raider took your Waterskin") felt like a broken button. Same italic
+  // mechanical-note convention as itemUpdates below, so the loss/gain is never a mystery.
+  const _invNotes = [];
+  for (const item of d.inventoryAdd || []) { addItem(character, item, CONTENT.items); const nm = typeof item === "string" ? item : item?.name; if (nm) _invNotes.push(`✦ ${nm} — added to your pack.`); }
+  for (const item of d.inventoryRemove || []) { const nm = typeof item === "string" ? item : item?.name; removeItem(character, nm); if (nm) _invNotes.push(`− ${nm} — taken from you.`); }
+  if (_invNotes.length) turn.narration = (turn.narration || "") + "\n\n" + _invNotes.map(n => `*${n}*`).join("\n");
   // SNG-137: items EVOLVE — the GM grows an owned item's story (description/name/provenance/use); bounded,
   // no power inflation. A light note so the player sees the thing they carry changed.
   if (turn.itemUpdates?.length) { const iu = applyItemUpdates(character, turn.itemUpdates); if (iu.length) turn.narration = (turn.narration || "") + "\n\n" + iu.map(u => `*✦ ${u.name} has changed — ${u.changed.join(", ")}.*`).join("\n"); }
@@ -4825,6 +4830,29 @@ async function onChoice(choice) {
         }
       }
       resolution.encounterReceipt = encounterReceiptForGM(rr.state, enc.def, resolution, { ...rr, outcome });
+      // SNG-246 Fix D: the PLAYER-FACING receipt line — the mechanical truth SHOWN each round (per kind: hp/stages/
+      // insight + how close a finish is), sourced from the SAME round data. Rendered beside the prose (§8756).
+      try {
+        const kind = encounterKind(enc.def), before = enc.state, after = rr.state;
+        const bag = { degree: resolution.degree, energyDelta: rr.deltas?.energy ?? null, healthDelta: rr.deltas?.health ?? null };
+        const STAGE_HINTS = { chase: ["near_escape", "closing", "losing"], hazard: ["near_across", "crossing", "near_fail"], standoff: ["near_bend", "holding", "near_lose"], puzzle: ["near_solved", "progressing", "stuck"] };
+        if (enc.def.type === "duel") {
+          const from = Math.max(0, before.opponentHealth ?? enc.def.opponent?.health ?? 0), to = Math.max(0, after.opponentHealth ?? from), dmg = from - to, yieldAt = enc.def.opponent?.yieldAt ?? 0;
+          bag.meterFrom = from; bag.meterTo = to;
+          bag.actorEffect = outcome === "opponent_yielded" ? "they break off" : dmg > 0 ? `you hit for ${dmg}` : (bag.healthDelta || 0) < 0 ? "they land one on you" : "you miss";
+          bag.finishHint = to <= 0 ? "near_defeat" : to <= yieldAt + 1 ? "near_yield" : (bag.healthDelta || 0) < 0 ? "you_hurt" : "steady";
+        } else if (enc.def.type === "challenge" || enc.def.type === "puzzle") {
+          const isPuz = enc.def.type === "puzzle";
+          const total = isPuz ? (enc.def.hintTiers?.length || 0) : (enc.def.stages?.length || 0);
+          const from = isPuz ? (before.hintsRevealed ?? 0) : (before.stagesDone?.length ?? 0);
+          const to = isPuz ? (after.hintsRevealed ?? from) : (after.stagesDone?.length ?? from);
+          bag.meterFrom = from; bag.meterTo = to;
+          bag.actorEffect = to > from ? (isPuz ? "a piece falls into place" : "you make ground") : "no ground this beat";
+          const hk = STAGE_HINTS[kind] || STAGE_HINTS.puzzle;
+          bag.finishHint = to >= total && total > 0 ? hk[0] : to > from ? hk[1] : hk[2];
+        }
+        resolution.encReceiptLine = playerReceiptLine(kind, bag, CONTENT.receiptLine);
+      } catch (e) { /* the receipt is a convenience — never block the round */ }
       if (outcome) endEncounter(outcome); else saveCharacter(character);
     }
   }
@@ -8754,6 +8782,8 @@ function renderPlay(turn, opts = {}) {
       // SNG-106: the chance is tappable → the full component breakdown (only when this turn retained one).
       const chanceCell = r.breakdown ? `<span class="roll-chance" data-breakdown="${esc(JSON.stringify({ ...r.breakdown, roll: r.roll, degree: r.degree }))}" tabindex="0" role="button" title="Why this number?">${r.chance}</span>` : `${r.chance}`;
       main += `<div class="roll-receipt">d100: ${r.roll} vs ${chanceCell} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${subBit}${blBit}`;
+      // SNG-246 Fix D: the encounter's mechanical receipt line — the round result SHOWN (not inferred from prose).
+      if (r.encReceiptLine) main += `<div class="enc-receipt">${esc(r.encReceiptLine)}</div>`;
     }
   }
   if (opts.itemsAdvanced?.length) main += opts.itemsAdvanced.map(a => `<div class="beat item-woke">✦ ${esc(a.itemName)} stirs — <em>${esc(a.stageName)}</em></div>`).join("");

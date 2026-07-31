@@ -360,6 +360,9 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .gallery-del { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer; font-size: 13px; line-height: 1; background: rgba(0,0,0,.55); color: #fff; opacity: 0; transition: opacity .12s; }
 .gallery-item:hover .gallery-del, .gallery-del:focus { opacity: 1; }
 .gallery-del:hover { background: rgba(160,30,30,.9); }
+/* SNG-246 Fix D: the encounter's mechanical receipt line — the round result shown beside the prose, distinct
+   from it (mono-ish, dim) so it reads as the mechanical truth, not narration. */
+.enc-receipt { font-family: var(--font-ui); font-size: 12px; color: var(--accent2, #7a9); margin: 2px 0 6px; letter-spacing: 0.2px; }
 /* CCODE-32: a failed image leaves a retryable PLACEHOLDER tile (never a hidden gap) — so a gallery of 48 that
    pollinations flaked on doesn't look like 3. The img keeps its 4:5 box (visibility, not display) so the tile
    holds its place; a dashed outline + a centered ⟳ retry read as "this one didn't load." */

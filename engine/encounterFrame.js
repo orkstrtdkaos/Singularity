@@ -344,3 +344,32 @@ export function frameModel(def, state = {}, entry = null, kinds = null) {
     failStakes: (a?.failStakes) || def?.stages?.[state?.stageIndex ?? 0]?.failureCost || null,
   };
 }
+
+// SNG-246 Fix D: the PLAYER-FACING mechanical receipt line for an encounter round — the mechanical truth SHOWN
+// beside the prose (never merged), so the player KNOWS the result and doesn't infer it from narration. Pure.
+// `data` carries the round's computed facts { degree, actorEffect, meterFrom, meterTo, energyDelta, healthDelta,
+// finishHint }; `format` is CONTENT.receiptLine (Aevi's per-kind template). Returns "" when nothing to show.
+export function playerReceiptLine(kind, data = {}, format = {}) {
+  if (!data || data.degree == null) return "";
+  const di = (format.degreeIcons || {})[data.degree] || "";
+  const degree = `${di} ${String(data.degree).replace(/_/g, " ")}`.trim();
+  const spec = (format.byKind || {})[kind];
+  const tidy = s => String(s).replace(/\s+·\s+·\s+/g, " · ").replace(/·\s*$/, "").replace(/\s{2,}/g, " ").trim();
+  if (!spec || !spec.line) { // generic fallback (unknown kind) — degree + meter move, still legible
+    const mv = (data.meterFrom != null && data.meterTo != null) ? ` · ${data.meterFrom}→${data.meterTo}${data.meterLabel ? " " + data.meterLabel : ""}` : "";
+    return tidy(`${degree}${data.actorEffect ? " · " + data.actorEffect : ""}${mv}`);
+  }
+  const signed = v => v == null ? "" : (v < 0 ? `−${Math.abs(v)}` : `+${v}`);
+  const healthTaken = (data.healthDelta != null && data.healthDelta < 0) ? ` · you −${Math.abs(data.healthDelta)} hp` : "";
+  const finishHint = spec.finishHints?.[data.finishHint] || data.finishHint || "";
+  return tidy(spec.line
+    .replace(/\{degree\}/g, degree)
+    .replace(/\{actorEffect\}/g, data.actorEffect || "")
+    .replace(/\{meterFrom\}/g, data.meterFrom ?? "")
+    .replace(/\{meterTo\}/g, data.meterTo ?? "")
+    .replace(/\{meterLabel\}/g, spec.meterLabel || "")
+    .replace(/\{energyDelta\}/g, data.energyDelta == null ? "0" : signed(data.energyDelta))
+    .replace(/\{healthDelta\}/g, signed(data.healthDelta))
+    .replace(/\{healthTaken\}/g, healthTaken)
+    .replace(/\{finishHint\}/g, finishHint));
+}

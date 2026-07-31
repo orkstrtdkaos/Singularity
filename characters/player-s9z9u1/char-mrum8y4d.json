@@ -269,34 +269,33 @@
         "player": null,
         "summary": "The stranger overcame Loki at the confluence — the final exchange drove them into the mud, Cy running unhappy numbers, the question 'Why?' still unanswered in the cold air.",
         "narration": "The stranger's final strike comes in low and you raise a guard against it — and for a moment it looks like it will hold. Then it doesn't. They turn your arm with their wrist and the force redirects up through your elbow and into your shoulder, and you go down sideways into the cold mud. Not thrown. Not beaten senseless. Just — done.\n\nYou land on one hip and one palm. The mud is cold enough to sting. Cy is at your left, utterly still, its lens irised to the smallest ring it uses when it has run the numbers and found them not to its liking. The stranger stands three paces away and does not press forward. Their breathing has settled and their arms hang open at their sides, which is not a gesture of surrender — it is a gesture of having been answered.\n\nThe question is still there. 'Why?' It has not moved. It stands in the cold afternoon air between you like something they set down carefully and are willing to wait beside for as long as it takes. The Hourkeeper at the edge of the brush has not moved either. Their expression has not changed — that terrible foreknowing sympathy, fixed on you in the mud, carrying whatever they know and cannot say.\n\nThe waterskin is beside you. The flat stone is beneath it, its pale scratch-mark invisible from here. Somewhere north of you, the orchard tends its forty-year trees, and someone planted one today for a child not yet born. The spring mud is cold and the afternoon is not finished yet and the stranger is waiting."
+      },
+      {
+        "player": null,
+        "summary": "Loki sits in the mud at the confluence — the stranger waiting, the Hourkeeper watching, Cy's numbers unhappy, the question 'Why?' still open in the cold spring air.",
+        "narration": "The mud is cold through your coat. Your palm is flat against the ground and the stone is still beneath the waterskin, and the stranger has not moved. They are waiting. Not impatiently. The way a person waits who has been waiting longer than this before.\n\nCy makes a small sound beside you — not a word, not a click, just a brief tightening of its mechanism the way a person might draw a breath before they speak and then decide not to. Its lens stays at its smallest ring. The numbers it has been running have not improved.\n\nThe Hourkeeper at the edge of the brush has not moved either. Their expression has not changed. Whatever they are carrying, they are carrying it the same way they were before — without relief, without any sign that the situation has reached the moment they were dreading or the moment they were hoping for. Just the same terrible, quiet foreknowledge, fixed on you.\n\nThe stranger's question is still in the air. 'Why?' Not a taunt. Not a demand. A door held open with patience and no particular expectation that you will walk through it. You are sitting in the mud in the cold afternoon, Cy at your left, an Hourkeeper at your back, and a person three paces away who has put you on the ground twice and still has not told you why."
       }
     ],
     "lastTurn": {
-      "narration": "The stranger's final strike comes in low and you raise a guard against it — and for a moment it looks like it will hold. Then it doesn't. They turn your arm with their wrist and the force redirects up through your elbow and into your shoulder, and you go down sideways into the cold mud. Not thrown. Not beaten senseless. Just — done.\n\nYou land on one hip and one palm. The mud is cold enough to sting. Cy is at your left, utterly still, its lens irised to the smallest ring it uses when it has run the numbers and found them not to its liking. The stranger stands three paces away and does not press forward. Their breathing has settled and their arms hang open at their sides, which is not a gesture of surrender — it is a gesture of having been answered.\n\nThe question is still there. 'Why?' It has not moved. It stands in the cold afternoon air between you like something they set down carefully and are willing to wait beside for as long as it takes. The Hourkeeper at the edge of the brush has not moved either. Their expression has not changed — that terrible foreknowing sympathy, fixed on you in the mud, carrying whatever they know and cannot say.\n\nThe waterskin is beside you. The flat stone is beneath it, its pale scratch-mark invisible from here. Somewhere north of you, the orchard tends its forty-year trees, and someone planted one today for a child not yet born. The spring mud is cold and the afternoon is not finished yet and the stranger is waiting.",
-      "sceneSummary": "The stranger overcame Loki at the confluence — the final exchange drove them into the mud, Cy running unhappy numbers, the question 'Why?' still unanswered in the cold air.",
+      "narration": "The mud is cold through your coat. Your palm is flat against the ground and the stone is still beneath the waterskin, and the stranger has not moved. They are waiting. Not impatiently. The way a person waits who has been waiting longer than this before.\n\nCy makes a small sound beside you — not a word, not a click, just a brief tightening of its mechanism the way a person might draw a breath before they speak and then decide not to. Its lens stays at its smallest ring. The numbers it has been running have not improved.\n\nThe Hourkeeper at the edge of the brush has not moved either. Their expression has not changed. Whatever they are carrying, they are carrying it the same way they were before — without relief, without any sign that the situation has reached the moment they were dreading or the moment they were hoping for. Just the same terrible, quiet foreknowledge, fixed on you.\n\nThe stranger's question is still in the air. 'Why?' Not a taunt. Not a demand. A door held open with patience and no particular expectation that you will walk through it. You are sitting in the mud in the cold afternoon, Cy at your left, an Hourkeeper at your back, and a person three paces away who has put you on the ground twice and still has not told you why.",
+      "sceneSummary": "Loki sits in the mud at the confluence — the stranger waiting, the Hourkeeper watching, Cy's numbers unhappy, the question 'Why?' still open in the cold spring air.",
       "choices": [
         {
-          "label": "Answer plainly — tell the stranger the true shape of why you were here and what you found.",
+          "label": "Answer honestly — say why you came to this place and what you are looking for.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": -0.3
-          },
           "difficulty": 0,
           "intentTags": [
             "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Give them a shaped answer — not a lie, but the version of the truth that lands as an explanation rather than an invitation.",
+          "label": "Shape the answer — give them a true version of your reasons, but the version that lands best on a stranger who fights like that.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.2
-          },
           "difficulty": 15,
           "intentTags": [
             "persuade",
@@ -307,39 +306,33 @@
           "trivial": false
         },
         {
-          "label": "Say nothing. Stay on the ground and let the silence ask something back of them.",
+          "label": "Ask your own question first — who are they, and why did they stop you here?",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "study"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false
-        },
-        {
-          "label": "Look at the Hourkeeper. Ask them — since they clearly already know — what they're carrying.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true
+        },
+        {
+          "label": "Rise and stand — say nothing yet. Let the silence hold a moment longer while you get your feet under you.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "defend",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": -4,
-        "energy": -5
-      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, one palm down, one hip down, after the final exchange. The stranger stands three paces away, arms open at their sides, waiting.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, one palm down, one hip down, after the final exchange.",
         "npcsPresent": [
           {
             "name": "The Stranger",
@@ -351,7 +344,7 @@
           },
           {
             "name": "Cy",
-            "state": "At Loki's left, perfectly still, lens irised to its tightest ring — running numbers it finds unacceptable."
+            "state": "At Loki's left, utterly still, lens irised to its smallest ring — running numbers it finds unacceptable."
           }
         ],
         "objects": [
@@ -369,13 +362,13 @@
           "Loki is injured and below full energy — sitting in cold mud after being overcome."
         ]
       },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief, sharp exchange — the final round of the skill-battle."
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
       }
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, one palm down, one hip down, after the final exchange. The stranger stands three paces away, arms open at their sides, waiting.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, one palm down, one hip down, after the final exchange.",
       "npcsPresent": [
         {
           "name": "The Stranger",
@@ -387,7 +380,7 @@
         },
         {
           "name": "Cy",
-          "state": "At Loki's left, perfectly still, lens irised to its tightest ring — running numbers it finds unacceptable."
+          "state": "At Loki's left, utterly still, lens irised to its smallest ring — running numbers it finds unacceptable."
         }
       ],
       "objects": [
@@ -409,7 +402,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 15,
+    "hour": 16,
     "realAnchor": null
   },
   "companions": [
@@ -1042,11 +1035,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 760,
-    "lastSharedReadAt": "2026-07-31T16:18:14.384Z",
+    "lastGenCount": 761,
+    "lastSharedReadAt": "2026-07-31T17:22:31.819Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 26,
+    "turnsSinceOffer": 27,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1102,7 +1095,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 7,
+        "stage": 8,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1115,7 +1108,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 7,
+        "stage": 8,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1140,7 +1133,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 2,
+        "stage": 3,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -2076,8 +2069,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785516319081,
-  "rev": 260,
+  "updatedAt": 1785518585340,
+  "rev": 266,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2652,7 +2645,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 27
+    "the_quickwood": 28
   },
   "opLossPending": false,
   "sessions": [
@@ -2691,10 +2684,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-31T14:12:25.631Z",
-      "lastAt": "2026-07-31T16:45:19.079Z",
+      "lastAt": "2026-07-31T17:23:05.338Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 16
+      "beats": 17
     }
   ],
   "establishedFacts": [
@@ -2738,7 +2731,7 @@
     "scene": 104,
     "placeUpdates": 12,
     "codexUpdates": 76,
-    "timeOps": 100,
+    "timeOps": 99,
     "offer": 9,
     "generateRequest": 4,
     "sceneEnded": 22,
@@ -2768,9 +2761,7 @@
       "the_misdirect": 1,
       "the_better_story": 10,
       "prism_sight": 7,
-      "harmonic_voice": 1,
-      "hunters_strike": 8,
-      "the_false_target": 8
+      "harmonic_voice": 1
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -3022,7 +3013,53 @@
       }
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-re_zone_hostile",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-re_zone_hostile",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 7,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 5,
+          "physical": 5,
+          "mental": 5,
+          "social": 5
+        },
+        "energy": 112,
+        "maxEnergy": 112,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 4,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 4,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 112
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"

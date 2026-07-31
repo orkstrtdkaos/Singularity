@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [SNG-246 BUG1/Fix B complete_pending_review — CCode, 2026-07-27] Unify the takeovers — skill battle renders IN place (v1.8.295 `8490b504`)
+> Erik's priority defect (§7b): a duel showed the SNG-230 frame, then JUMPED to the separate full-screen
+> renderSkillBattle panel he rejected — two competing takeovers. Killed it: the in-place frame is the ONLY one.
+> The skill-battle controls (fog/intensity/skills/Read/Break/Yield) are extracted into skillBattlePanel() and
+> render in the play surface's option area, under the frame strip; renderSkillBattle is now a thin alias →
+> renderPlay (all legacy call sites + sbDeclare's re-render land on the one takeover, no more .sb-screen). Round
+> routing kept safe: a skill-battle round goes through sbDeclare (never duelRound, which would corrupt the momentum
+> state) — onChoice skips the classic block for skill_battle, a typed move is intercepted in onFreeform→sbDeclare
+> (freefield stays open, API-free); ⚙ gear hidden. Live-verified (fresh port, injected duels, no API): renders as
+> .sb-panel inside .play with the frame on top, skill buttons + intensity + Read/Break/Yield, NO .sb-screen ever;
+> a skill click drove a real round and resolved cleanly. Round mechanics byte-identical to before (only the render
+> surface moved). npm test exit 0. **2 of 4 SNG-246 fixes done.**
+> **NEXT (CCode):** Fix A (engine-enforced fight-entry) + Fix C (structured finish/change conditions — also where
+> "fights resolve too fast/samey" is addressed). Both benefit from Erik playing (real opponent sheets + the GM).
+> Results: po/results/20260727_SNG-246-bug1_unify_takeovers.md
+
+
 > ## [SNG-246 Fix D + BUG2 complete_pending_review — CCode, 2026-07-27] The mechanical receipt is SHOWN (v1.8.294 `3d961adb`)
 > Erik: "each action's resolution needs to be KNOWN, not just narrated." + §7c BUG2 (the silent theft). Shipped
 > Fix D (1 of 4 SNG-246 fixes): each encounter round now shows a compact mechanical line BESIDE the prose —

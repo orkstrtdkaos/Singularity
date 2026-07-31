@@ -870,6 +870,10 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-log summary { cursor: pointer; color: var(--ink-dim); }
 /* SNG-246 (Erik): the per-round "what just happened" line — both moves + the interaction + the momentum swing. */
 .sb-receipt { font-family: var(--font-ui); font-size: 12.5px; line-height: 1.45; color: var(--ink); background: color-mix(in srgb, var(--danger) 10%, var(--panel2)); border-left: 3px solid var(--danger); border-radius: 4px; padding: 6px 9px; margin-bottom: 8px; }
+/* CCODE-36 (Erik: "let the player see the rolls and modifiers… a popup off of the action you chose") — the round's
+   two rolls, opening the same breakdown popover normal play uses. Theirs stays behind the fog until you read them. */
+.sb-rolls { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; }
+.sb-roll-fog { font-size: 11px; font-style: italic; }
 /* CCODE-35 — what's STANDING: a raised guard, an insight, a bind laid on them. The signed value on each chip is
    the real number going into the next roll (it appears as its own line in the roll breakdown). */
 .sb-fx-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin-bottom: 8px; }

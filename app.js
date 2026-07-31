@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.299";
+const APP_VERSION = "1.8.300";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8392,6 +8392,7 @@ function playerBattleSkills() {
 // sbLastRound carries the previous round's fog across renders (renderPlay has no lastRound of its own).
 let sbLastRound = null;
 let sbLastRoundReceipt = null; // SNG-246 (Erik): what JUST happened this round — both moves + the interaction + the swing, SHOWN.
+let sbLastRoundRolls = null;   // CCODE-36 (Erik): the ROLLS behind that round — same breakdown popover as normal play.
 
 // SNG-246 (Erik: "no rolls, no opposed rolls or descriptions… ended inexplicably"): a per-round MECHANICAL line
 // for the skill battle — names YOUR move and THEIRS, the interaction (blades lock / turned aside / you slip it),
@@ -8417,6 +8418,19 @@ function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
     : !pDef && !oDef ? `they ${oPhrase} — the blows meet and both scatter`
     : `they ${oPhrase} — you both circle, testing`;
   return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name} · ${interaction} · ${gain} · momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}${fxBit}`;
+}
+
+// CCODE-36 (Erik): one round as a compact line for the END-OF-FIGHT narration. This is the GM's raw material for
+// telling the WHOLE fight — so it carries what a narrator needs (who did what, how well, who gained, what stuck),
+// in plain terms, not the full telemetry (that's the machine tab's job).
+function sbFightBeat(rr, decl, beforeMom, scouting) {
+  const deg = (rr.player?.degree || "").replace("_", " ");
+  const after = rr.state?.momentum ?? beforeMom, swing = after - beforeMom;
+  const who = swing > 0.5 ? "you gained" : swing < -0.5 ? "they gained" : "neither gained";
+  const hurt = (rr.deltas?.health || 0) < 0 ? `, you took ${Math.abs(rr.deltas.health)} damage` : "";
+  const stuck = (rr.landed || []).map(f => `${f.from === "player" ? "you" : "they"} gained ${f.label}`).join("; ");
+  const mine = scouting ? `you read them (${deg})` : `you used ${decl.name} — a ${decl.function} at ${decl.intensity} (${deg})`;
+  return `Round ${rr.state?.round ? rr.state.round - 1 : "?"}: ${mine}; they used ${rr.oppDecl?.name || rr.oppDecl?.function || "a strike"} (${(rr.opponent?.degree || "").replace("_", " ")}). ${who} ground${hurt}.${stuck ? ` ${stuck}.` : ""}`;
 }
 
 // SNG-246 (Erik: "some output specifically going to the machine tab… I could gather it"): mirror each skill-battle
@@ -8488,7 +8502,18 @@ function skillBattlePanel() {
       <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
       ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${esc(JSON.stringify(fog.revealed.breakdown))}'>see their math</button>` : ""}</div>` : ""}` :
       `<div class="hint">You size each other up. Choose ONE move — or read them first.</div>`}</div>
-    ${sbLastRoundReceipt && st.round > 1 ? `<div class="sb-receipt">${esc(sbLastRoundReceipt)}</div>` : ""}
+    ${sbLastRoundReceipt && st.round > 1 ? `<div class="sb-receipt">${esc(sbLastRoundReceipt)}${(() => {
+      // CCODE-36 (Erik): the ROLLS behind this round, in the same breakdown popover normal play uses. Your own math
+      // is always yours to see; THEIR math stays behind the same fog gate the fog-line uses — reading them buys it.
+      const r = sbLastRoundRolls; if (!r) return "";
+      const mk = (side, bd, roll, chance, deg) => bd
+        ? `<button class="data-link" data-breakdown='${esc(JSON.stringify(bd))}' title="The full math for ${side === "you" ? "your" : "their"} roll this round">⚄ ${side === "you" ? "your" : "their"} roll ${roll}/${chance}${deg ? ` · ${String(deg).replace("_", " ")}` : ""}</button>`
+        : "";
+      const yours = mk("you", r.you?.breakdown, r.you?.roll, r.you?.chance, r.you?.degree);
+      const theirs = fog?.revealed?.breakdown ? mk("them", r.them?.breakdown, r.them?.roll, r.them?.chance, r.them?.degree)
+        : `<span class="hint sb-roll-fog">their math is fogged — 👁 read them to see it</span>`;
+      return `<div class="sb-rolls">${yours}${theirs}</div>`;
+    })()}</div>` : ""}
     ${(() => { // CCODE-35: what's STANDING right now — a raised guard, an insight, a bind laid on them. Each
       // chip carries the exact signed value + rounds left, because that number is really in the next roll.
       const fx = st.effects || []; if (!fx.length) return "";
@@ -8599,7 +8624,14 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
   }
   if (!scouting) sbLastPlayerFn = skill.function; // reading doesn't show them a real tendency
   sbLastRoundReceipt = sbRoundReceipt(rr, decl, beforeMom, scouting); // SNG-246: SHOW what happened this round
+  // CCODE-36 (Erik: "let the player see the rolls and modifiers… a popup off of the action you chose"): keep BOTH
+  // sides' full breakdowns from this round so the receipt can open the same math popover normal play uses.
+  sbLastRoundRolls = { you: rr.player || null, them: rr.opponent || null };
   sbLogRound(enc, decl, rr, beforeMom, scouting); // SNG-246 (Erik): mirror round telemetry to the machine tab
+  // CCODE-36 (Erik: "it didn't narrate the whole fight, just the last move — if the engine is fast and lite then
+  // we need the entire narration at the end"): accumulate a round-by-round record ON THE ENCOUNTER STATE so sbEnd
+  // can hand the GM the WHOLE fight to narrate, not just the final exchange. Capped so a long fight stays bounded.
+  rr.state.transcript = [...(enc.state.transcript || []), sbFightBeat(rr, decl, beforeMom, scouting)].slice(-24);
   character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas?.health || 0)));
   character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
   character.activeEncounter = { defId: enc.def.id, state: rr.state };
@@ -8641,12 +8673,23 @@ async function sbEnd(rr) {
   const decidingLine = sbLastRoundReceipt || "";
   const eventLine = (rr.events || []).slice(-1)[0] || "";
   const reason = [decidingLine, `${outLine}`].filter(Boolean).join("  ·  ");
-  sbLastRoundReceipt = null;
-  renderPlay(null, { thinking: "…" });
+  // CCODE-36 (Erik: "it didn't narrate the whole fight, just the last move — if we make the engine fast and lite
+  // like it is now, then we need the entire narration at the end"): the rounds resolved silently and mechanically,
+  // so the ONE narration owes the player the WHOLE fight. Hand the GM the round-by-round record and ask for a
+  // continuous blow-by-blow, not an aftermath beat.
+  const transcript = (enc?.state?.transcript || []).slice();
+  sbLastRoundReceipt = null; sbLastRoundRolls = null;
+  renderPlay(null, { thinking: transcript.length > 1 ? "Telling the whole fight…" : "…" });
   // SNG-230 §6b: a collapse is a DECISIVE one-beat finish, not a worn-down win — narrate it as such.
   const finisherNote = rr._collapse ? " This was a single decisive finishing stroke — end it fast and hard, not as a drawn-out win." : "";
   const mechForGM = decidingLine ? ` The deciding exchange, mechanically: ${decidingLine}. ${eventLine}` : "";
-  const result = await runGM({ resolution: null, playerInput: `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine}${mechForGM}${finisherNote} Narrate the aftermath in one beat, describing how that final exchange landed, and return to the scene.)` });
+  const fightStory = transcript.length > 1
+    ? `\n\nTHE FIGHT, ROUND BY ROUND (the engine already resolved every exchange — this is what HAPPENED, and it is not negotiable):\n${transcript.map(t => `- ${t}`).join("\n")}\n\nNarrate the WHOLE fight as one continuous scene, start to finish — every round above in order, each exchange given its own physical beat, the momentum swinging as the record says it swung, ending in the outcome below. The player watched this resolve as bare numbers; the prose is where they finally SEE it. Do not summarize it as "you fought and won" and do not narrate only the last exchange.`
+    : "";
+  const ask = transcript.length > 1
+    ? `(The skill-battle with ${nm} is over — outcome: ${rr.outcome}. ${outLine}${finisherNote}${fightStory}\n\nEnd by returning to the scene.)`
+    : `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine}${mechForGM}${finisherNote} Narrate the aftermath in one beat, describing how that final exchange landed, and return to the scene.)`;
+  const result = await runGM({ resolution: null, playerInput: ask });
   if (result) renderPlay(result.turn, { aside: reason }); // keep the mechanical WHY visible alongside the GM's prose
   else renderPlay(character.activeScene?.lastTurn || null, { aside: reason });
 }

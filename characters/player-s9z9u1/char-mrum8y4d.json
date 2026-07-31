@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 28,
   "maxEnergy": 115,
-  "energy": 40,
+  "energy": 34,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -294,225 +294,172 @@
         "player": null,
         "summary": "At the confluence, Loki and the stranger exchanged real blows — Loki landed a strike through the dark-sense, but the aggressor answered with trained precision and closed the distance. The Hourkeeper watches from the brush with foreknowledge neither of them can touch. The question 'Why?' still hangs unanswered.",
         "narration": "The dark-sense opens and the stranger becomes a heat-map of decision — weight coiling, shoulder already committed, no hesitation in their line. They think the moment is already decided. But there is something else in the dark-sense: the Hourkeeper's grey coat warm at the edge of the brush, the weight of someone who has already seen this moment end. The knowledge sits on them like a thing too heavy to set down.\n\nYou move.\n\nYour knife comes up from low — not a feint this time, but the real strike, the opening their own commitment has given you. The blade finds the angle between their guard and their ribs. It lands clean. They hiss and roll with it, using the momentum to reset, but there is blood on your steel now and they have felt the weight of what you are.\n\nThey do not hesitate. The stranger's shoulder drops and they come in again — not a strike this time but a grapple-read, trying to close the distance and make your blade useless. Their guard comes up hard and high, eating your follow-up. They are better at this than you are. You feel it in the way they move, the way they do not waste energy on anything but the next thing. They gain ground, their hands steady, and suddenly the gap between you is half what it was and narrowing.\n\nCy's lens clicks tight. The Hourkeeper does not move."
+      },
+      {
+        "player": null,
+        "summary": "At the confluence, a trained stranger demanded answers with a knife. Loki cut and broke contact — now running toward the orchard with a pursuer who will not quit, while an Hourkeeper watches from the brush as though the ending is already known.",
+        "narration": "You turn and run.\n\nIt is not a retreat — it is a choice, sharp and clean. The mud underfoot breaks into spray behind you as you find your footing on the slope and drive upward, away from the confluence, toward the rise and the path that leads back to the orchard. Your shoulder throbs where the stranger's guard landed, but the cut on your side is shallow and already stopped bleeding in the spring air. The real wound is in the not-knowing: *Why?* — a question with no shape, no face to address, no reason given.\n\nBehind you, boots hit the mud. They are running too. Trained. Committed. Not hesitating the way someone without a fixed purpose hesitates — this is pursuit, not panic. Cy's legs go tight, clicking in that particular frequency that means *calculating escape routes*, and the little machine stays pressed low at your left shoulder as you crest the rise.\n\nThe path ahead splits three ways: left toward the dense brush where the Hourkeeper appeared; straight ahead, the long open track back toward the planting gate and the orchard; right, downslope into the ravine where the spring runoff is still high and loud and cold. Veln Ashpause is no longer visible at the brush-line, but the grey coat's warmth lingers in your dark-sense memory — they *know* what comes next, and they did not move to stop it.\n\nThe stranger's footfall is maybe thirty paces back, steady, not tiring. The question still hangs unanswered: *Why?* What are they chasing? What do they want? And why does the Hourkeeper watch the moment as though it is already written?"
       }
     ],
     "lastTurn": {
-      "narration": "The dark-sense opens and the stranger becomes a heat-map of decision — weight coiling, shoulder already committed, no hesitation in their line. They think the moment is already decided. But there is something else in the dark-sense: the Hourkeeper's grey coat warm at the edge of the brush, the weight of someone who has already seen this moment end. The knowledge sits on them like a thing too heavy to set down.\n\nYou move.\n\nYour knife comes up from low — not a feint this time, but the real strike, the opening their own commitment has given you. The blade finds the angle between their guard and their ribs. It lands clean. They hiss and roll with it, using the momentum to reset, but there is blood on your steel now and they have felt the weight of what you are.\n\nThey do not hesitate. The stranger's shoulder drops and they come in again — not a strike this time but a grapple-read, trying to close the distance and make your blade useless. Their guard comes up hard and high, eating your follow-up. They are better at this than you are. You feel it in the way they move, the way they do not waste energy on anything but the next thing. They gain ground, their hands steady, and suddenly the gap between you is half what it was and narrowing.\n\nCy's lens clicks tight. The Hourkeeper does not move.",
-      "sceneSummary": "At the confluence, Loki and the stranger exchanged real blows — Loki landed a strike through the dark-sense, but the aggressor answered with trained precision and closed the distance. The Hourkeeper watches from the brush with foreknowledge neither of them can touch. The question 'Why?' still hangs unanswered.",
+      "narration": "You turn and run.\n\nIt is not a retreat — it is a choice, sharp and clean. The mud underfoot breaks into spray behind you as you find your footing on the slope and drive upward, away from the confluence, toward the rise and the path that leads back to the orchard. Your shoulder throbs where the stranger's guard landed, but the cut on your side is shallow and already stopped bleeding in the spring air. The real wound is in the not-knowing: *Why?* — a question with no shape, no face to address, no reason given.\n\nBehind you, boots hit the mud. They are running too. Trained. Committed. Not hesitating the way someone without a fixed purpose hesitates — this is pursuit, not panic. Cy's legs go tight, clicking in that particular frequency that means *calculating escape routes*, and the little machine stays pressed low at your left shoulder as you crest the rise.\n\nThe path ahead splits three ways: left toward the dense brush where the Hourkeeper appeared; straight ahead, the long open track back toward the planting gate and the orchard; right, downslope into the ravine where the spring runoff is still high and loud and cold. Veln Ashpause is no longer visible at the brush-line, but the grey coat's warmth lingers in your dark-sense memory — they *know* what comes next, and they did not move to stop it.\n\nThe stranger's footfall is maybe thirty paces back, steady, not tiring. The question still hangs unanswered: *Why?* What are they chasing? What do they want? And why does the Hourkeeper watch the moment as though it is already written?",
+      "sceneSummary": "At the confluence, a trained stranger demanded answers with a knife. Loki cut and broke contact — now running toward the orchard with a pursuer who will not quit, while an Hourkeeper watches from the brush as though the ending is already known.",
       "choices": [
         {
-          "label": "Press the advantage — keep moving forward, force them to react rather than lead.",
+          "label": "Run straight for the orchard gate — speed and known ground; the planting gate is close and Ossivyn is there.",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "attack",
-            "press",
-            "risky"
-          ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read their guard — use See the Made Thing again while their hands are committed high, find where the seams open.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 12,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Break contact — use The False Target to step out of where they think you are, reset the gap.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 14,
-          "intentTags": [
-            "defend",
-            "careful",
-            "feint"
-          ],
-          "abilityId": "the_false_target",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask them plainly — 'Why? Why are you here? Why now?' — try to reach past the motion, past the Hourkeeper's watch.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 18,
-          "intentTags": [
-            "negotiate",
+            "travel",
             "risky"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": null
+        },
+        {
+          "label": "Cut left into the dense brush where Veln appeared — break line of sight, use the dark-sense to navigate places the stranger cannot follow cleanly.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 16,
+          "intentTags": [
+            "sneak",
+            "careful"
+          ],
+          "abilityId": "umbracraft",
+          "energyCost": 6,
+          "trivial": false,
+          "encounterId": null
+        },
+        {
+          "label": "Drop into the ravine — the runoff is chaos and cold, and the stranger may not know the far side of it.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
+          "difficulty": 17,
+          "intentTags": [
+            "risky",
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null
+        },
+        {
+          "label": "Stop and turn — demand they answer their own question: *Why are you chasing me?* Face them on your terms, not theirs.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 18,
+          "intentTags": [
+            "threaten",
+            "stand"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null
         }
       ],
       "deeds": [],
       "characterDeltas": {
-        "health": -3,
-        "energy": -7,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "health": 0,
+        "energy": -6
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring evening now, the light going thin and gold. Mud underfoot, the water running high and cold from the thaw. The gap between Loki and the stranger has narrowed to arm's reach.",
+        "setting": "The rise above the confluence, spring evening fading toward dusk. The path splits three ways: left into dense brush, straight toward the distant planting gate and orchard, right down into a ravine where snowmelt runs high and loud. Behind, muddy footfalls closing distance. Cy clinging low at your shoulder, mechanism tense.",
         "npcsPresent": [
           {
             "name": "The Stranger",
-            "state": "Close now, guard high and committed, blood on their own shoulder but moving with the precision of someone who has done this many times. Breathing steady. Not speaking."
+            "state": "Running hard behind you, thirty paces back, trained stride, not tiring — pursuit, not panic"
           },
           {
             "name": "Veln Ashpause",
-            "state": "Motionless at the edge of the brush, grey coat, watching Loki with the weight of foreknowledge. Warm in the dark-sense. Silent."
-          },
-          {
-            "name": "Cy",
-            "state": "At Loki's left, lens compressed tight, mechanism tense. Running unhappy numbers."
+            "state": "No longer visible at the brush-line, but the grey coat's warmth lingers in the dark-sense memory — present in knowing, not in sight"
           }
         ],
         "objects": [
-          "Waterskin (in the mud)",
-          "River stone with pale scratch-mark (beneath the Waterskin)",
-          "Belt knife (in Loki's hand, bloodied)",
-          "Boot-prints in mud (ending at water's edge)"
+          "The path ahead splitting three ways",
+          "Spring runoff loud and cold in the ravine below",
+          "Dense brush to the left, older and thick"
         ],
         "threads": [
-          "The stranger's question — 'Why?' — still unanswered",
-          "The Hourkeeper's foreknowledge — what do they already know will happen",
-          "The scratch-mark on the stone — its meaning unspoken",
-          "The gap is closing; the stranger is trained and committed",
-          "Veln's watch — they know something about this moment"
+          "The stranger's question unanswered: 'Why?'",
+          "The Hourkeeper's foreknowledge — what do they already see",
+          "Pursuit closing distance — where does this end",
+          "Cy's unhappy calculations — three escape routes, three problems"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "the-aggressor",
-          "name": "The Stranger",
-          "role": "An unknown combatant who appeared at the confluence with a question",
-          "gender": "unknown",
-          "pronouns": "they/them",
-          "description": "A trained striker with steady hands and no hesitation. Moves with precision. Blood on their shoulder now, but it has not slowed them.",
-          "note": "Landed real blows; Loki read their form and struck cleanly, but they answered with guard and pressed. They do not speak — only the single question, 'Why?', and then motion.",
+          "op": "update",
+          "npcId": "the-stranger",
+          "note": "Broke contact at the confluence after exchanging real strikes — Loki cut, they pressed, Loki ran. Now in pursuit up the slope, thirty paces back, trained stride, not tiring. Still no words spoken except the original question: 'Why?' They are chasing with precision, not anger.",
           "learned": [
-            "They favour strike and grapple-read in sequence",
-            "They are trained to precision — this is not a street fighter",
-            "They do not hesitate even when injured",
-            "They read where Loki will move and position for it",
-            "They think they know what Loki will do next"
-          ],
-          "skillsObserved": [
-            "Trained striking form",
-            "Guard discipline",
-            "Grapple-read technique",
-            "Commitment without doubt"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Present at the confluence, armed, closed distance, bleeding slightly but moving with full precision"
+            "They do not stop pursuing when wounded — commitment runs deeper than pain",
+            "They are trained well enough to run hard terrain without breaking stride",
+            "They seem to know the country — not flailing, but following with purpose"
+          ]
+        },
+        {
+          "op": "update",
+          "npcId": "veln-ashpause",
+          "note": "Still present in the dark-sense as memory — the grey coat's warmth lingers. Did not move to stop the stranger's pursuit. Watching as though the moment is already written. No longer visible at the brush-line, but the foreknowledge remains.",
+          "learned": [
+            "They knew the stranger would pursue — it is part of what they already-saw",
+            "They do not act to prevent it — their role is witness, not intervener",
+            "The grey coat carries the weight of someone who has lived this ending already"
+          ]
         }
       ],
       "factUpdates": [],
       "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [
-        {
-          "topic": "the-aggressor-at-confluence",
-          "label": "The Stranger at the Confluence",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "A trained combatant appeared at the confluence with a single question — 'Why?' — and did not answer when asked in return. They move with precision and do not hesitate even when wounded. They read Loki's form and think they already know what will happen next. The Hourkeeper Veln Ashpause watches from the brush with the weight of foreknowledge.",
-          "links": [
-            "veln-ashpause",
-            "hourkeeper",
-            "the-disputed-zone",
-            "the-confluence"
-          ]
-        }
-      ],
-      "generateRequest": [],
+      "codexUpdates": [],
       "encounterOps": [
         {
           "op": "tactic",
-          "tag": "press-in"
+          "tag": "relentless"
         }
       ],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
-      "timeOps": null,
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "imagePrompt": "Loki and the stranger at the confluence in failing spring light — gap narrowed to arm's reach, both breathing hard, blood bright on shoulders, the Hourkeeper a grey motionless figure at the edge of the brush watching with the weight of something already known. Cy's lens compressed. The water high and cold behind them.",
-      "newAbility": null,
-      "gambitOps": null,
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "The encounter to the chase took minutes in running and exchange"
+      },
       "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/Loki%20and%20the%20stranger%20at%20the%20confluence%20in%20failing%20spring%20light%20%E2%80%94%20gap%20narrowed%20to%20arm's%20reach%2C%20both%20breathing%20hard%2C%20blood%20bright%20on%20shoulders%2C%20the%20Hourkeeper%20a%20grey%20motionless%20figure%20at%20the%20edge%20of%20the%20brush%20watching%20with%20the%20weight%20of%20something%20already%20known.%20Cy's%20lens%20compressed.%20The%20water%20high%20an%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=83138&nologo=true"
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring evening now, the light going thin and gold. Mud underfoot, the water running high and cold from the thaw. The gap between Loki and the stranger has narrowed to arm's reach.",
+      "setting": "The rise above the confluence, spring evening fading toward dusk. The path splits three ways: left into dense brush, straight toward the distant planting gate and orchard, right down into a ravine where snowmelt runs high and loud. Behind, muddy footfalls closing distance. Cy clinging low at your shoulder, mechanism tense.",
       "npcsPresent": [
         {
           "name": "The Stranger",
-          "state": "Close now, guard high and committed, blood on their own shoulder but moving with the precision of someone who has done t"
+          "state": "Running hard behind you, thirty paces back, trained stride, not tiring — pursuit, not panic"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Motionless at the edge of the brush, grey coat, watching Loki with the weight of foreknowledge. Warm in the dark-sense. "
-        },
-        {
-          "name": "Cy",
-          "state": "At Loki's left, lens compressed tight, mechanism tense. Running unhappy numbers."
+          "state": "No longer visible at the brush-line, but the grey coat's warmth lingers in the dark-sense memory — present in knowing, n"
         }
       ],
       "objects": [
-        "Waterskin (in the mud)",
-        "River stone with pale scratch-mark (beneath the Waterskin)",
-        "Belt knife (in Loki's hand, bloodied)",
-        "Boot-prints in mud (ending at water's edge)"
+        "The path ahead splitting three ways",
+        "Spring runoff loud and cold in the ravine below",
+        "Dense brush to the left, older and thick"
       ],
       "threads": [
-        "The stranger's question — 'Why?' — still unanswered",
-        "The Hourkeeper's foreknowledge — what do they already know will happen",
-        "The scratch-mark on the stone — its meaning unspoken",
-        "The gap is closing; the stranger is trained and committed",
-        "Veln's watch — they know something about this moment"
+        "The stranger's question unanswered: 'Why?'",
+        "The Hourkeeper's foreknowledge — what do they already see",
+        "Pursuit closing distance — where does this end",
+        "Cy's unhappy calculations — three escape routes, three problems"
       ]
     }
   },
@@ -1192,7 +1139,7 @@
     "lastSharedReadAt": "2026-07-31T22:23:23.635Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 31,
+    "turnsSinceOffer": 32,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -2260,8 +2207,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785536783524,
-  "rev": 298,
+  "updatedAt": 1785536865625,
+  "rev": 300,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2836,7 +2783,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 32
+    "the_quickwood": 33
   },
   "opLossPending": false,
   "sessions": [
@@ -2883,10 +2830,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-07-31T22:24:27.488Z",
-      "lastAt": "2026-07-31T22:26:23.498Z",
+      "lastAt": "2026-07-31T22:27:45.624Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -2924,30 +2871,30 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 107,
-    "choices": 107,
-    "characterDeltas": 48,
-    "scene": 107,
+    "sceneSummary": 108,
+    "choices": 108,
+    "characterDeltas": 49,
+    "scene": 108,
     "placeUpdates": 12,
     "codexUpdates": 77,
-    "timeOps": 100,
+    "timeOps": 101,
     "offer": 9,
     "generateRequest": 4,
-    "sceneEnded": 24,
-    "npcUpdates": 83,
+    "sceneEnded": 25,
+    "npcUpdates": 84,
     "moveTo": 3,
-    "gambitApt": 2,
+    "gambitApt": 3,
     "deeds": 1,
     "questUpdates": 17,
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
-    "encounterOps": 6,
+    "encounterOps": 7,
     "ledgerEvents": 1,
     "newEncounter": 1,
     "imagePrompt": 1
   },
-  "_opTurns": 107,
+  "_opTurns": 108,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3213,166 +3160,72 @@
           "feint"
         ]
       }
+    },
+    "chase-re-re_zone_hostile": {
+      "schemaVersion": 1,
+      "id": "chase-re-re_zone_hostile",
+      "type": "challenge",
+      "flavor": "chase",
+      "name": "The Chase — the aggressor",
+      "setup": "You break off — the aggressor gives chase across the broken country. Lose them, or be run down.",
+      "fromRandom": true,
+      "danger": 4,
+      "_chainedFrom": {
+        "kind": "fight",
+        "fightDefId": "re-re_zone_hostile",
+        "opponentName": "the aggressor"
+      },
+      "stages": [
+        {
+          "name": "Break line of sight",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 8,
+          "failureCost": {
+            "health": 2,
+            "energy": 4,
+            "hours": 0
+          }
+        },
+        {
+          "name": "A burst through the broken country",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 12,
+          "failureCost": {
+            "health": 2,
+            "energy": 4,
+            "hours": 0
+          }
+        },
+        {
+          "name": "Lose them — or be run down",
+          "attribute": "physical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 16,
+          "failureCost": {
+            "health": 3,
+            "energy": 4,
+            "hours": 0
+          }
+        }
+      ]
     }
   },
   "activeEncounter": {
-    "defId": "re-re_zone_hostile",
+    "defId": "chase-re-re_zone_hostile",
     "state": {
       "schemaVersion": 1,
-      "encounterId": "re-re_zone_hostile",
-      "type": "duel",
+      "encounterId": "chase-re-re_zone_hostile",
+      "type": "challenge",
       "status": "active",
-      "round": 5,
-      "log": [
-        "r1: foresee vs strike → momentum 0",
-        "r1: move vs shield → momentum -3",
-        "r2: strike vs strike → momentum 4",
-        "r3: reveal vs shield → momentum 4",
-        "r3: strike vs strike → momentum 4",
-        "r4: strike vs shield → momentum -8"
-      ],
-      "opponentHealth": 7,
-      "tactic": "press-in",
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the aggressor",
-        "attributes": {
-          "practical": 5,
-          "physical": 5,
-          "mental": 5,
-          "social": 5
-        },
-        "energy": 112,
-        "maxEnergy": 112,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 4,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 4,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": -7.700000000000001,
-      "opponentEnergy": 53,
-      "turn": {
-        "phase": "sense",
-        "sel": {
-          "sense": [],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
-      },
-      "effects": [
-        {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 3,
-          "roundsLeft": 1,
-          "applies": "always",
-          "side": "player",
-          "source": "Umbracraft",
-          "from": "player"
-        },
-        {
-          "kind": "guard",
-          "label": "guard up",
-          "value": 4,
-          "roundsLeft": 2,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "source": "a raised guard",
-          "from": "opponent"
-        }
-      ],
-      "pressure": {
-        "player": 1,
-        "opponent": 1
-      },
-      "spent": {
-        "player": false,
-        "opponent": false
-      },
-      "lastOppFn": "shield",
-      "lastOppReceipt": {
-        "roll": 6,
-        "chance": 95,
-        "degree": "success",
-        "action": {
-          "attribute": "practical",
-          "abilityLevel": 4,
-          "label": "a raised guard",
-          "axes": {}
-        },
-        "breakdown": {
-          "components": [
-            {
-              "label": "practical 5",
-              "value": 80
-            },
-            {
-              "label": "practical mastery (beyond 4)",
-              "value": 5
-            },
-            {
-              "label": "ability rank 4",
-              "value": 20
-            },
-            {
-              "label": "surge",
-              "value": 10
-            },
-            {
-              "label": "momentum (you're on the back foot)",
-              "value": -2
-            },
-            {
-              "label": "guard up (2 rounds)",
-              "value": 4
-            }
-          ],
-          "total": 95,
-          "clampedFrom": 117,
-          "base": "practical",
-          "opposed": null
-        },
-        "rawChance": 117,
-        "margin": 111,
-        "matchup": 0,
-        "intensity": "surge",
-        "tier": 4,
-        "function": "shield",
-        "name": "a raised guard",
-        "effectMods": [
-          {
-            "label": "guard up (2 rounds)",
-            "value": 4
-          }
-        ],
-        "woven": null
-      },
-      "lastReadWasSense": false
+      "round": 1,
+      "log": [],
+      "stageIndex": 0,
+      "stagesDone": []
     }
   },
   "legendGovernor": {

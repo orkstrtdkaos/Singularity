@@ -184,6 +184,68 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momM
   return { ...res, rawChance, margin: rawChance - res.roll, matchup: mu, intensity: decl.intensity, tier, function: decl.function, name: decl.name || decl.function, effectMods: fxMods, woven: decl.woven || null };
 }
 
+
+// ---------- CCODE-46: what the player can SEE before committing ----------
+// Erik: "The skills should also bring in the players read of how likely each are to succeed. just like normal play,
+// but with all the opposed and conditions incorporated. If the enemy uses umbracraft then I might not be able to
+// tell certain success chances as well - unless of course i have a radiant skill."
+//
+// Two honest halves:
+//   1. the ESTIMATE — a real contested win-chance, not a solo success roll. You win the exchange when your margin
+//      beats theirs, i.e. when (theirRoll - yourRoll) > (theirStack - yourStack). Both rolls are d100, so the
+//      difference is triangular and the probability is closed-form.
+//   2. the CONFIDENCE — itself fogged. Reading them buys precision; holding a COUNTER-craft to what they use buys
+//      it too (light finds shadow: a reveal-user can price a concealer). At low confidence we show a BAND, never a
+//      fabricated number — the fog hides what you know, it never lies about it.
+
+/** P(D > g) where D = d2 - d1, both uniform 1..100. Closed form; pure. */
+export function pDiffExceeds(g) {
+  const n = 100;
+  if (g <= -n) return 1;
+  if (g >= n) return 0;
+  if (g >= 0) { const k = n - g; return (k * (k - 1)) / (2 * n * n); }
+  const k = n + g; return 1 - (k * (k - 1)) / (2 * n * n);
+}
+
+/** Do I hold a craft that COUNTERS what they are doing? That is the "unless of course i have a radiant skill"
+ *  clause — a favourable matchup against their function means I can price this exchange far better. */
+export function hasCounterCraft(mySkills, theirFunction, sb) {
+  return (mySkills || []).some(s => matchupBonus(s.function, theirFunction, sb) > 0);
+}
+
+/** The player's READ on one candidate move: an estimated chance to win the exchange, and how much to trust it.
+ *  `theirStack` is the engine's honest estimate of the opponent's raw total; confidence gates how it is shown. */
+export function estimateExchange({ myStack, theirStack, fogTier = 0, counterCraft = false, sb }) {
+  const cfg = sb?.oddsPreview || {};
+  const conf = Math.min(3, (cfg.confidenceByFogTier?.[Math.max(0, Math.min(3, fogTier))] ?? fogTier)
+    + (counterCraft ? (cfg.counterCraftBonus ?? 1) : 0));
+  const pct = Math.round(pDiffExceeds((theirStack || 0) - (myStack || 0)) * 100);
+  const bands = cfg.bands || [{ at: 80, label: "near certain" }, { at: 62, label: "likely" },
+    { at: 45, label: "even odds" }, { at: 28, label: "unlikely" }, { at: 0, label: "a long shot" }];
+  const band = (bands.find(b => pct >= b.at) || bands[bands.length - 1]).label;
+  // conf 0 = you cannot price them at all; 1 = a band only; 2 = a band + a rough number; 3 = the number.
+  return { pct, band, confidence: conf,
+    show: conf <= 0 ? "none" : conf === 1 ? "band" : conf === 2 ? "rough" : "exact",
+    label: conf <= 0 ? (cfg.unreadableLabel || "you cannot price this yet")
+      : conf === 1 ? band
+      : conf === 2 ? `${band} (~${Math.round(pct / 10) * 10}%)`
+      : `${pct}%` };
+}
+
+/** CCODE-46 (Erik): "the finish It button should be an indicator on skills instead of a button. any harm skill,
+ *  even the basic, could eventually be tagged with finish it. Instakill skills have that from the beginning."
+ *  A craft that CAN kill carries the potential from the start; an ordinary harm craft EARNS it by tier. Pure. */
+export function finisherPotential(skill, def, sb) {
+  const cfg = sb?.finisher || {};
+  const harm = (sb?.persistentEffects?.attackFunctions || ["strike", "break"]).includes(skill?.function);
+  if (!harm) return null;
+  const rung = def?.harmRung || skill?.harmRung || "none";
+  if ((cfg.alwaysAtHarmRung || ["lethal", "atrocity"]).includes(rung)) return { can: true, why: "innate", rung };
+  const at = cfg.finisherTierAt ?? 3;
+  if ((skill?.tier || 1) >= at) return { can: true, why: "earned", rung };
+  return { can: false, why: "needs-tier", needTier: at, rung };
+}
+
 /** CCODE-37: what folding a second craft into the round is worth — scales with the woven craft's tier, capped. */
 export function wovenBonus(woven, sb) {
   const w = sb?.weave || {};

@@ -4,7 +4,7 @@
 import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
-import { synthesizeOpponentSheet } from "./engine/skill_battle.js";
+import { synthesizeOpponentSheet, estimateExchange, finisherPotential, hasCounterCraft, matchupBonus } from "./engine/skill_battle.js"; // CCODE-46: priced moves + finisher tags
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.310";
+const APP_VERSION = "1.8.312";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8399,6 +8399,13 @@ function playerBattleSkills() {
   }
   out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
   out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
+  // CCODE-46 (Erik): "or an attribute based generic type sense... a wits sense could find a solution that a Reason
+  // based sense might miss." You can always LOOK, craft or no craft — and the attribute you look WITH changes what
+  // you find. These are reveal-function, so they qualify for the SENSE step and cost nothing but the round.
+  for (const g of (CONTENT.skillBattle?.engine?.senseStep?.genericSenses || [])) {
+    out.push({ id: `_sense_${g.sub}`, function: "reveal", tier: 1, attribute: SUB_OF?.[g.sub] || "mental",
+      subAttribute: g.sub, name: g.name, finds: g.finds, generic: true });
+  }
   return out.slice(0, 40); // was 12 — a multi-function craft now occupies a slot per function; groups collapse
 }
 
@@ -8547,6 +8554,50 @@ function sbReviewCard(turn, skills) {
   </div>`;
 }
 
+/** CCODE-46: price ONE move as the player would see it — a contested win-chance, fogged by what they actually
+ *  know. Returns null when there is nothing honest to say. The opponent's stack is ESTIMATED from their sheet;
+ *  the confidence (not the number) is what the fog gates, so we never fabricate precision we do not have. */
+function sbPriceMove(allSkills, fog, st, sb) {
+  const oppSheet = st.opponentSheet || {};
+  const theirFn = st.lastOppFn || (oppSheet.skills || [])[0]?.function || "strike";
+  const counter = hasCounterCraft(allSkills, theirFn, sb);
+  const fogTier = fog?.tier ?? 0;
+  // their raw stack, estimated the way the engine builds one: attribute base + tier rank.
+  const theirAttr = Math.max(0, ...Object.values(oppSheet.attributes || {}).map(Number).filter(Number.isFinite));
+  const theirTier = Math.max(1, ...((oppSheet.skills || []).map(x => Number(x.tier) || 1)));
+  const theirStack = theirAttr * 16 + theirTier * 5;
+  return (s) => {
+    const myAttr = Number((character.attributes || {})[s.attribute]) || 0;
+    const mine = myAttr * 16 + (s.tier || 1) * 5 + matchupBonus(s.function, theirFn, sb);
+    const est = estimateExchange({ myStack: mine, theirStack, fogTier, counterCraft: counter, sb });
+    est.tip = est.show === "none"
+      ? `You cannot price this yet — read them first. ${counter ? "" : "A craft that counters what they are doing would also let you judge it."}`
+      : `Your read of the odds you WIN this exchange (opposed, with matchup and standing effects). Confidence ${est.confidence}/3${counter ? " — you hold a craft that counters what they are doing, so you can judge this well" : fogTier ? " — from what your read bought you" : ""}.`;
+    return est;
+  };
+}
+
+/** CCODE-46 (Erik): "Even no success might give you some idea of what you COULD read if you succeeded. successful
+ *  read should tell you something about them you can take advantage of. crit success even better still."
+ *  So a read ALWAYS returns something: a failure names what was almost within reach; a success names a real,
+ *  usable fact; a crit names the exploitable weakness outright. */
+function sbReadPayoff(degree, oppSheet, st, def) {
+  const name = def?.opponent?.name || "they";
+  const skills = oppSheet?.skills || [];
+  const theirBest = skills.slice().sort((a, b) => (b.tier || 1) - (a.tier || 1))[0];
+  const tired = (st.opponentEnergy ?? 99) < 30;
+  if (degree === "crit_success") {
+    return `You have them: ${name} leans on ${theirBest?.name || "one line of attack"} (${theirBest?.function || "strike"}), and ${tired ? "they are running out of wind" : "their guard opens when they commit to it"}. Counter that function and the exchange is yours.`;
+  }
+  if (degree === "success") {
+    return `You read ${name}: they favour ${theirBest?.function || "the direct attack"}${tired ? ", and they are tiring" : ""}. Pick a craft that answers it.`;
+  }
+  if (degree === "partial") {
+    return `A glimpse only — ${name} tends toward ${theirBest?.function || "the direct"}, but you cannot see the shape of it yet.`;
+  }
+  return `You learn nothing usable this time. Had it landed you would have seen which craft ${name} leans on, and whether their wind is going — enough to pick the counter.`;
+}
+
 function skillBattlePanel() {
   const enc = activeEnc();
   if (!enc || enc.state?.mode !== "skill_battle") return "";
@@ -8555,7 +8606,12 @@ function skillBattlePanel() {
   const scout = !!sbLastRound?._scout;
   // fog only after the first exchange (round > 1) — a fresh fight has nothing revealed yet, and this avoids a
   // stale prior-fight read leaking into a new one's opening beat.
-  const fog = (sbLastRound?.opponent && st.round > 1) ? senseOpponent(character, sbLastRound.opponent, CONTENT.rules, sb, { scouting: scout, buyTier: scout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods }) : null;
+  // CCODE-46: the fog reads from a receipt PERSISTED on the encounter state, not from module-level sbLastRound
+  // behind a `round > 1` gate — the SENSE step deliberately does not advance the round, so that gate never
+  // opened and a read bought the player nothing they could SEE. A read also buys the scouting tier.
+  const oppReceipt = st.lastOppReceipt || ((sbLastRound?.opponent && st.round > 1) ? sbLastRound.opponent : null);
+  const readScout = scout || !!st.lastReadWasSense;
+  const fog = oppReceipt ? senseOpponent(character, oppReceipt, CONTENT.rules, sb, { scouting: readScout, buyTier: readScout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods }) : null;
   const skills = playerBattleSkills();
   window._sbSkills = skills; // handler lookup (data-sbskill = index into this flat list)
   // CCODE-45: which STEP of the turn we are selecting for, and what is picked so far (2 = a braid).
@@ -8568,8 +8624,16 @@ function skillBattlePanel() {
   // SNG-246 (Erik): group the moves by INTENT-family — you can do a lot of things a lot of ways, but each turn you
   // pick ONE. Same family grouping the ⚙ Moves gear uses, with combat-intent labels; free-text shaping is the field
   // below (a typed move → sbDeclare, API-free). "⚡ Finish it" is the DELIBERATE one-shot (below), not a normal strike.
+  // CCODE-46 (Erik): "During the sense action, you shouldn't be able to use clearly attacks during the sense round
+  // — it should only allow skills that can sense." The SENSE step shows only sense-capable crafts + the generic
+  // attribute reads; every other step shows the full set.
+  const senseFns = CONTENT.skillBattle?.engine?.senseStep?.senseFunctions || ["reveal", "foresee", "track"];
+  const stepSkills = turn.phase === "sense" ? skills.filter(x => senseFns.includes(x.function)) : skills;
+  // CCODE-46: PRICE each move — an estimated chance to win the exchange, with the confidence itself fogged.
+  // Reading them buys precision; holding a counter-craft to what they are doing buys it too.
+  const priceOf = sbPriceMove(skills, fog, st, sb);
   const byFam = {};
-  skills.forEach((s, i) => { const f = sbFamilyOf(s); (byFam[f] = byFam[f] || []).push({ s, i }); });
+  stepSkills.forEach((s) => { const i = skills.indexOf(s); const f = sbFamilyOf(s); (byFam[f] = byFam[f] || []).push({ s, i }); });
   const groups = FUNCTION_FAMILIES.filter(f => byFam[f]?.length).map(f => {
     // CCODE-34: each move carries a WHAT-IT-DOES line (target clarity) + an ⓘ that opens the full craft detail.
     // The ⓘ is a SIBLING of the declare-button, never a child — inside it, a tap would also declare the move.
@@ -8582,8 +8646,15 @@ function skillBattlePanel() {
       // CCODE-45: a craft is SELECTED for this step now, not fired instantly. Pick one; pick a second and they
       // BRAID — the same weave mechanics (both effects land, both cost), with none of the arm-then-pick modality.
       const pick = sel.indexOf(i), on = pick >= 0;
+      const odds = priceOf(s);
+      const fin = finisherPotential(s, fullCatalog()[s.id], sb);
+      const finTag = fin?.can
+        ? `<span class="sb-fin" title="FINISHING POTENTIAL${fin.why === "innate" ? " — this craft can kill, so it has carried this from the start" : " — earned by reaching tier " + (s.tier || 1)}. Declare it as your ACTION and a decisive swing can end the fight in one beat.">\u26a1 finisher</span>`
+        : (fin && fin.why === "needs-tier" ? `<span class="sb-fin dim" title="Not yet a finisher — this craft gains finishing potential at tier ${fin.needTier}.">\u26a1 at T${fin.needTier}</span>` : "");
+      const oddsTag = odds ? `<span class="sb-odds sb-odds-${odds.show}" title="${esc(odds.tip)}">${esc(odds.label)}</span>` : "";
+      const findsLine = s.finds ? `<span class="sb-skill-does">finds ${esc(s.finds)}</span>` : "";
       return `<div class="sb-skill-row${on ? " picked" : ""}" style="border-left:3px solid ${FAMILY_COLOR[f]}">
-        <button class="btn secondary sb-skill${on ? " on" : ""}" data-sbskill="${i}" title="${on ? "Deselect" : selFull ? "Two crafts already chosen for this step — deselect one first" : "Choose this for the " + step.label.toLowerCase() + " step"}">${on ? `<span class="sb-pick-n">${pick + 1}</span> ` : ""}${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}</button>${info}
+        <button class="btn secondary sb-skill${on ? " on" : ""}" data-sbskill="${i}" title="${on ? "Deselect" : selFull ? "Two crafts already chosen for this step — deselect one first" : "Choose this for the " + step.label.toLowerCase() + " step"}">${on ? `<span class="sb-pick-n">${pick + 1}</span> ` : ""}${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}${findsLine}${oddsTag}${finTag}</button>${info}
       </div>`;
     }).join("");
     // CCODE-38 (Erik: "can we make the categories collapsible?"): each family is a <details> — open by default,
@@ -8728,10 +8799,15 @@ async function sbResolveSense() {
   const t = sbTurn();
   t.senseDone = true; t.setupBonus = rr.setupBonus || 0; t.bonusEarned = !!rr.bonusEarned?.player;
   t.sel = turn.sel; t.text = turn.text;
-  t.senseLine = `You read with ${decl.name}${decl.woven ? ` \u22c8 ${decl.woven.name}` : ""} \u2014 ${(rr.player?.degree || "").replace("_", " ")}. ${t.setupBonus > 0 ? `You have the read (+${t.setupBonus} to your action).` : t.setupBonus < 0 ? `They read you better (${t.setupBonus} to your action).` : "Neither of you learns much."}${t.bonusEarned ? " The opening is there \u2014 you have earned a BONUS action." : ""}`;
+  t.readPayoff = sbReadPayoff(rr.player?.degree, character.activeEncounter.state.opponentSheet, character.activeEncounter.state, enc.def);
+  t.senseLine = `You read with ${decl.name}${decl.woven ? ` \u22c8 ${decl.woven.name}` : ""} \u2014 ${(rr.player?.degree || "").replace("_", " ")}. ${t.setupBonus > 0 ? `You have the read (+${t.setupBonus} to your action).` : t.setupBonus < 0 ? `They read you better (${t.setupBonus} to your action).` : "Neither of you learns much."}${t.bonusEarned ? " The opening is there \u2014 you have earned a BONUS action." : ""} ${t.readPayoff}`;
   t.phase = "action";
   sbLastRoundRolls = { you: rr.player || null, them: rr.opponent || null };
-  sbLogRound(enc, decl, rr, enc.state.momentum ?? 0, true);
+  sbLastRound = { opponent: rr.opponent, _scout: true };
+  // persist what the read bought, so the fog — and every move's PRICE — survives the re-render
+  character.activeEncounter.state.lastOppReceipt = rr.opponent || null;
+  character.activeEncounter.state.lastReadWasSense = true;
+  sbLogRound(enc, decl, rr, character.activeEncounter.state.momentum ?? 0, true);
   saveCharacter(character);
   // GM call #1 — the sense beat. Needs a key; without one the mechanical line above still tells the story.
   const nm = enc.def?.opponent?.name || "your opponent";
@@ -8766,6 +8842,9 @@ async function sbExecuteTurn() {
     const ids = [d.id, d.woven?.id].filter(x => x && !String(x).startsWith("_"));
     if (ids.length) { recordUse(character, ids, { day: absoluteWorldDay() }); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
     sbLastRoundRolls = { you: r.player || null, them: r.opponent || null };
+    sbLastRound = { opponent: r.opponent };
+    character.activeEncounter.state.lastOppReceipt = r.opponent || null;
+    character.activeEncounter.state.lastReadWasSense = false;
     sbLastRoundReceipt = sbRoundReceipt(r, d, (r.state?.momentum ?? 0) - 0, false);
     sbLogRound(enc, d, r, enc.state.momentum ?? 0, false);
     beats.push(`${label}: ${sbFightBeat(r, d, 0, false)}`);
@@ -8867,7 +8946,7 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
 async function sbEnd(rr) {
   const enc = activeEnc(); const def = enc?.def;
   character.activeEncounter = null; saveCharacter(character);
-  sbLastPlayerFn = null; sbIntensity = "standard"; sbWeaveArmed = null; // CCODE-37: never carry a weave into the next fight
+  sbLastPlayerFn = null; sbIntensity = "standard"; sbWeaveArmed = null; sbLastRound = null; // CCODE-46: never leak a read into the next fight // CCODE-37: never carry a weave into the next fight
   const nm = def?.opponent?.name || "your opponent";
   // SNG-138: a resolved PRESTIGE-CHALLENGE duel feeds renown — band-scaled (beating a renowned duelist
   // counts more than a road-hopeful); a loss costs the name modestly; a clean break is neutral.

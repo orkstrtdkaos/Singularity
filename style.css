@@ -1089,3 +1089,11 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-review-title { font-family: var(--font); font-size: 13px; color: var(--accent, #c9a227); letter-spacing: 1px; margin-bottom: 5px; }
 .sb-review-line { font-family: var(--font-ui); font-size: 12px; line-height: 1.55; text-transform: capitalize; }
 .sb-review-line.dim { color: var(--ink-dim); text-transform: none; }
+/* CCODE-46 — priced moves, finisher tags, and the generic attribute senses. */
+.sb-odds { display: inline-block; font-family: var(--font-ui); font-size: 10px; padding: 1px 6px; border-radius: 8px; border: 1px solid var(--border); color: var(--ink-dim); margin-top: 3px; margin-right: 4px; cursor: help; }
+.sb-odds-exact { color: var(--accent2, #7a9); border-color: color-mix(in srgb, var(--accent2, #7a9) 45%, var(--border)); }
+.sb-odds-rough { color: var(--ink); }
+.sb-odds-band { color: var(--ink-dim); font-style: italic; }
+.sb-odds-none { color: var(--ink-dim); opacity: .7; font-style: italic; }
+.sb-fin { display: inline-block; font-family: var(--font-ui); font-size: 10px; padding: 1px 6px; border-radius: 8px; border: 1px solid var(--danger); color: var(--danger); margin-top: 3px; cursor: help; }
+.sb-fin.dim { border-color: var(--border); color: var(--ink-dim); opacity: .75; }

@@ -88,6 +88,33 @@
         "guardian": "out to stop you passing — no more than that"
       }
     },
+    "senseStep": {
+      "note": "CCODE-46 (Erik): 'During the sense action, you shouldn’t be able to use clearly attacks during the sense round — it should only allow skills that can sense, or an attribute based generic type sense.' senseFunctions gates the craft list for the SENSE step. genericSenses are the always-available attribute reads — you can always LOOK, even with no sensing craft — and the attribute you look WITH changes what you find: 'a wits sense could find a solution that a Reason based sense might miss.'",
+      "senseFunctions": ["reveal", "foresee", "track"],
+      "genericSenses": [
+        { "sub": "wits",    "name": "Size them up (Wits)",     "finds": "the opening, the trick, the thing they are not guarding" },
+        { "sub": "reason",  "name": "Reason it out (Reason)",  "finds": "the pattern in how they fight, and where it breaks" },
+        { "sub": "insight", "name": "Read them (Insight)",     "finds": "their intent and how much resolve is behind it" }
+      ]
+    },
+    "oddsPreview": {
+      "note": "CCODE-46 (Erik): 'The skills should also bring in the players read of how likely each are to succeed. just like normal play, but with all the opposed and conditions incorporated. If the enemy uses umbracraft then I might not be able to tell certain success chances as well — unless of course i have a radiant skill.' So each move shows an ESTIMATED chance to win the exchange, and the CONFIDENCE in that estimate is itself fogged: reading them buys precision, and holding a counter-craft to what they are using buys it too (light finds shadow — a reveal-user can price a concealer). Never a lie: low confidence shows a band, not a fake number.",
+      "confidenceByFogTier": [0, 1, 2, 3],
+      "counterCraftBonus": 1,
+      "bands": [
+        { "at": 80, "label": "near certain" },
+        { "at": 62, "label": "likely" },
+        { "at": 45, "label": "even odds" },
+        { "at": 28, "label": "unlikely" },
+        { "at": 0,  "label": "a long shot" }
+      ],
+      "unreadableLabel": "you cannot price this yet"
+    },
+    "finisher": {
+      "note": "CCODE-46 (Erik): 'the finish It button should be an indicator on skills instead of a button. any harm skill, even the basic, could eventually be tagged with finish it. Instakill skills have that from the beginning.' A craft that CAN kill carries finishing potential from the start (harmRung lethal/atrocity); an ordinary harm craft EARNS it by reaching finisherTierAt. The tag is shown on the move itself, and declaring a tagged move in the ACTION step is what arms the one-beat collapse — no separate button.",
+      "alwaysAtHarmRung": ["lethal", "atrocity"],
+      "finisherTierAt": 3
+    },
     "turn": {
       "note": "CCODE-45 (Erik): a TURN is sense -> action -> bonus, not a single exchange. 'the sense action, the main action, then the bonus action - for each player and opponent get tallied up and then narrated - the net result sets up the next round.' The sense step is OPTIONAL (skip to conserve energy, if you have no sense skill, or if a craft has blinded you), carries the cost of the ability used, and is LOCKED once its GM narration lands. A good sense buys a NAMED bonus on the action roll — never a hidden fudge. CCode's calls, all dials: senseMovesMomentum false (else momentum swings 3x/turn and the measured CCODE-38 pacing is void); the bonus step grant threshold was MEASURED, not guessed — CCode first proposed crit-only, and the simulation overturned it: crit-only left 20% of peer fights UNRESOLVED at 30 turns (median 21). crit+success gives median 13 turns, 0% unresolved, 82% player win / 18% down. The sim also proved the sense step is worth taking at all: sensing every turn raises the peer win-rate from 53% to 71%.",
       "senseMovesMomentum": false,

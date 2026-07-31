@@ -75,3 +75,57 @@ function marginBand(margin) {
   if (margin >= -20) return "a weak move";
   return "a faltering move";
 }
+
+// ---------- CCODE-44: sizing up a fight BEFORE you take it ----------
+// Erik: "When a fight offer is given… stand and fight, or run away. You should be able to tell something about how
+// hard the opponent will be to beat - perhaps even a breakdown of why (relative skill level to yours = high, same,
+// low, - relative Physical prowess = high, same, low, - disposition: out to kill/steal/harm/flee - overall threat
+// level)." Rule 18 OFFERS a lethal fight rather than imposing it — but a decline you cannot inform is not really a
+// choice. This is the read that makes "back away" a decision instead of a coin flip.
+//
+// RELATIVE, always: every line is measured against THIS character, so the same raider reads "outmatches you" to a
+// novice and "beneath you" to a veteran. Pure — no I/O, no rng; app.js owns where it renders.
+
+const APPR_REL = (mine, theirs, tol) => {
+  const d = (theirs || 0) - (mine || 0);
+  if (d > tol) return "high";
+  if (d < -tol) return "low";
+  return "same";
+};
+const APPR_WORD = { high: "outmatches you", same: "a match for you", low: "beneath you" };
+const apprPeak = (attrs = {}, keys) => Math.max(0, ...keys.map(k => Number(attrs[k]) || 0));
+
+/** What is this opponent AFTER? Read from the def's own tags — never invented. */
+export function dispositionOf(def = {}, content = {}) {
+  const tags = (def.opponent?.tacticTags || []).map(t => String(t).toLowerCase());
+  const map = content.dispositionByTag || {};
+  for (const t of tags) if (map[t]) return map[t];
+  if (def.lethal) return "out to kill";
+  if (def.flavor === "theft" || tags.includes("thief")) return "out to take what you carry";
+  if (def.type === "chase") return "looking to run you down";
+  return "out to hurt you";
+}
+
+/** The pre-fight read: relative craft, relative prowess, disposition, and an overall threat band.
+ *  `oppSheet` is the synthesized battle sheet, so the numbers are the ones the fight will actually use. */
+export function appraiseOpponent(character, def, oppSheet, rules, sb, content = {}) {
+  const tol = content.relativeTolerance ?? 1;
+  const prowess = APPR_REL(apprPeak(character?.attributes || {}, ["physical", "practical"]),
+                           apprPeak(oppSheet?.attributes || {}, ["physical", "practical"]), tol);
+  // "craft" is depth: the best rank you can bring vs the best tier they can.
+  const myTier = Math.max(0, ...(character?.abilities || []).map(a => Number(a.level) || 0));
+  const theirTier = Math.max(0, ...((oppSheet?.skills || []).map(s => Number(s.tier) || 0)));
+  const skill = APPR_REL(myTier, theirTier, tol);
+  const threat = Number(def?.opponent?.threat) || 0;
+  const bands = content.threatBands || [{ at: 80, label: "deadly" }, { at: 60, label: "dangerous" },
+    { at: 40, label: "serious" }, { at: 20, label: "modest" }, { at: 0, label: "slight" }];
+  const band = (bands.find(b => threat >= b.at) || bands[bands.length - 1]).label;
+  const against = [skill, prowess].filter(r => r === "high").length;
+  const counsel = against === 2 ? "They have the better of you on both counts — this is a fight you may not win."
+    : against === 1 ? "They have an edge on you. Winnable, but it will cost."
+    : (skill === "low" && prowess === "low") ? "You have the better of them on both counts."
+    : "An even contest.";
+  return { skill, prowess, disposition: dispositionOf(def, content), threat: band, threatScore: threat, counsel,
+    lines: [{ label: "craft", rel: skill, text: `Their craft ${APPR_WORD[skill]}` },
+            { label: "prowess", rel: prowess, text: `Their physical prowess ${APPR_WORD[prowess]}` }] };
+}

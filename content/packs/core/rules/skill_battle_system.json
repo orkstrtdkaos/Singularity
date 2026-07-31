@@ -67,12 +67,33 @@
       "redesignNote": "CCODE-38 (Erik, decisive): 'momentum should be a MODIFIER mechanic, not the primary exit encounter metric.' He ended a fight at 37/45 hp and 90/115 energy — beaten by a meter while holding every real resource. So momentum no longer ENDS anything. It does two things now: (1) asModifier — whoever is ahead carries a named roll bonus (pressure/advantage), the side behind carries the penalty, capped at ±max; (2) filling the meter is a PRESSURE EVENT, not a death — the dominated side takes real attrition (the player loses health, the opponent loses energy/composure), a pressure counter ticks, and the meter resets to resetTo so they are driven back but still IN it. The fight now ends only on things the player can feel and manage: health gone, energy gone, the opponent breaking after breakAtPressure pressure events, a stalemate of mutual exhaustion, or a deliberate exit (Yield / Break away / Finish it).",
       "note": "CCODE-34 (Erik, MEASURED — the SNG-246 widening was not enough because marginScale stayed at 0.5): two d100 rolls differ by ~33 on average, so a TYPICAL round's delta was ~16.5 — past BOTH meterMax and the crush threshold at once. Simulated 4000 fights/dial against the real battleRound: the old 16/0.5/16 ended 47% of fights in ONE round and 90.6% by crush. 16/0.20/20 gives median 4-5 rounds, ~5% one-round ends (mostly vs weak foes — correct), and ~4% crush ends, so an overwhelming blow stays a rare real beat. bidirectional -meterMax..+meterMax; a round shifts it toward the winner by round-margin * marginScale; reaching +/-meterMax resolves. The deliberate Finish-it (the §6b collapse) is a SEPARATE path and still ends a fight in one beat BY CHOICE. DIAL: Aevi/Erik tune to taste." },
     "attrition": { "outOfEnergyLosesContest": true, "note": "a side that cannot pay a round's energy cost can only Conserve; at 0 energy it forfeits the contest even if ahead on rolls — attrition is the second win condition." },
+    "appraisal": {
+      "note": "CCODE-44 (Erik): 'When a fight offer is given… stand and fight, or run away. You should be able to tell something about how hard the opponent will be to beat.' Rule 18 offers a lethal fight rather than imposing it — but a decline you cannot inform is not a real choice. The comparison is CODE (always relative to THIS character); the wording is content. dispositionByTag maps an opponent's own tacticTags to what they are after — read, never invented.",
+      "relativeTolerance": 1,
+      "threatBands": [
+        { "at": 80, "label": "deadly" },
+        { "at": 60, "label": "dangerous" },
+        { "at": 40, "label": "serious" },
+        { "at": 20, "label": "modest" },
+        { "at": 0, "label": "slight" }
+      ],
+      "dispositionByTag": {
+        "berserker": "out to kill — they will not stop",
+        "duelist": "out to beat you, not to murder you",
+        "thief": "out to take what you carry",
+        "brigand": "out to take what you carry",
+        "ambusher": "out to end it before you are ready",
+        "skirmisher": "out to wound you and withdraw",
+        "coward": "looking for a way out already",
+        "guardian": "out to stop you passing — no more than that"
+      }
+    },
     "turn": {
-      "note": "CCODE-45 (Erik): a TURN is sense -> action -> bonus, not a single exchange. 'the sense action, the main action, then the bonus action - for each player and opponent get tallied up and then narrated - the net result sets up the next round.' The sense step is OPTIONAL (skip to conserve energy, if you have no sense skill, or if a craft has blinded you), carries the cost of the ability used, and is LOCKED once its GM narration lands. A good sense buys a NAMED bonus on the action roll — never a hidden fudge. CCode's calls, all dials: senseMovesMomentum false (else momentum swings 3x/turn and the measured CCODE-38 pacing is void); the bonus step is granted on a crit sense only (a full extra action is a large grant — to be simulated before final tuning).",
+      "note": "CCODE-45 (Erik): a TURN is sense -> action -> bonus, not a single exchange. 'the sense action, the main action, then the bonus action - for each player and opponent get tallied up and then narrated - the net result sets up the next round.' The sense step is OPTIONAL (skip to conserve energy, if you have no sense skill, or if a craft has blinded you), carries the cost of the ability used, and is LOCKED once its GM narration lands. A good sense buys a NAMED bonus on the action roll — never a hidden fudge. CCode's calls, all dials: senseMovesMomentum false (else momentum swings 3x/turn and the measured CCODE-38 pacing is void); the bonus step grant threshold was MEASURED, not guessed — CCode first proposed crit-only, and the simulation overturned it: crit-only left 20% of peer fights UNRESOLVED at 30 turns (median 21). crit+success gives median 13 turns, 0% unresolved, 82% player win / 18% down. The sim also proved the sense step is worth taking at all: sensing every turn raises the peer win-rate from 53% to 71%.",
       "senseMovesMomentum": false,
       "setupBonusScale": 0.3,
       "setupBonusMax": 12,
-      "bonusOnDegrees": ["crit_success"],
+      "bonusOnDegrees": ["crit_success", "success"],
       "gmCallsPerTurn": 2
     },
     "weave": {

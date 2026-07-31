@@ -249,14 +249,19 @@
         "player": "Use the better story to heal yourself.",
         "summary": "Loki turned The Better Story inward at the confluence and stood again — the morning reshaped as arrival rather than defeat, the stranger's question still open.",
         "narration": "You stop fighting the craft outward and turn it all the way in.\n\nThe angle finds you before you find it — the mud on your hands, the ache in your shoulder, the stranger still standing three paces away with their question open. You let the whole morning sit in a different light for a moment. Not a lie. Not a retelling that softens the fall. A true shape that also functions: you came down the road looking for something, the stranger came from wherever they came from looking for something, and the confluence is exactly where two things that are looking for each other tend to arrive. The mud is not failure. It is the texture of having arrived.\n\nThe craft catches. Not the way it does in thick substrate — no clean surge, no warmth spreading from the center out. Something thinner and more effortful, like pulling water uphill through a reed. But it catches. The ache in your shoulder does not leave, but it settles back to a place where it stops shaping every breath. The cold in your knee stops reading as damage and starts reading as ground. You rise to one foot and then both, slowly, and your hands come out of the mud.\n\nCy's lens eases — not all the way, but one degree. Across the confluence, the stranger is watching you stand. They have not moved. Their question is still in the air, and now you are upright in it."
+      },
+      {
+        "player": null,
+        "summary": "The hostile meeting ended without resolution — Loki back on their feet, the stranger still waiting, the question 'Why?' still open between them.",
+        "narration": "The stranger has not closed the distance. They stand three paces away, shoulders dropping from the height of the exchange, breath still steadying. Their eyes are on you — not hunting, not finished, just waiting. The question has not moved.\n\nYou are back on your feet. The mud on your coat and hands is cold and drying at the edges. Your shoulder remembers the strike. Cy stands at its precise distance behind you, lens irised to the tightest ring it uses when it is running numbers it finds unacceptable.\n\nThe stranger says nothing. They let the silence hold the shape of 'Why?' — still a door, not a threat. The flat stone is beneath the waterskin. The confluence moves past all of you without comment.\n\nThe morning has its answer ready if you want to give it."
       }
     ],
     "lastTurn": {
-      "narration": "You stop fighting the craft outward and turn it all the way in.\n\nThe angle finds you before you find it — the mud on your hands, the ache in your shoulder, the stranger still standing three paces away with their question open. You let the whole morning sit in a different light for a moment. Not a lie. Not a retelling that softens the fall. A true shape that also functions: you came down the road looking for something, the stranger came from wherever they came from looking for something, and the confluence is exactly where two things that are looking for each other tend to arrive. The mud is not failure. It is the texture of having arrived.\n\nThe craft catches. Not the way it does in thick substrate — no clean surge, no warmth spreading from the center out. Something thinner and more effortful, like pulling water uphill through a reed. But it catches. The ache in your shoulder does not leave, but it settles back to a place where it stops shaping every breath. The cold in your knee stops reading as damage and starts reading as ground. You rise to one foot and then both, slowly, and your hands come out of the mud.\n\nCy's lens eases — not all the way, but one degree. Across the confluence, the stranger is watching you stand. They have not moved. Their question is still in the air, and now you are upright in it.",
-      "sceneSummary": "Loki turned The Better Story inward at the confluence and stood again — the morning reshaped as arrival rather than defeat, the stranger's question still open.",
+      "narration": "The stranger has not closed the distance. They stand three paces away, shoulders dropping from the height of the exchange, breath still steadying. Their eyes are on you — not hunting, not finished, just waiting. The question has not moved.\n\nYou are back on your feet. The mud on your coat and hands is cold and drying at the edges. Your shoulder remembers the strike. Cy stands at its precise distance behind you, lens irised to the tightest ring it uses when it is running numbers it finds unacceptable.\n\nThe stranger says nothing. They let the silence hold the shape of 'Why?' — still a door, not a threat. The flat stone is beneath the waterskin. The confluence moves past all of you without comment.\n\nThe morning has its answer ready if you want to give it.",
+      "sceneSummary": "The hostile meeting ended without resolution — Loki back on their feet, the stranger still waiting, the question 'Why?' still open between them.",
       "choices": [
         {
-          "label": "Answer the stranger plainly — tell them why you were here, what you were doing, what you found.",
+          "label": "Answer plainly — tell the stranger exactly why you were here.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
@@ -264,18 +269,19 @@
           },
           "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "careful"
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Ask what the scratch on the stone means before answering anything.",
+          "label": "Let See the Made Thing read them — find the shape of what they actually want before you answer.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "axes": {
+            "falsehood_truth": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -285,50 +291,45 @@
           "trivial": false
         },
         {
-          "label": "Give them a true enough answer — not the whole of it, but the shape that holds — and watch how they take it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Give them The Wrong Read — let them believe you were here by accident, sent by someone else.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "falsehood_truth": -0.1
+            "falsehood_truth": -0.3
           },
           "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "deceive"
+            "deceive",
+            "feint"
           ],
-          "abilityId": "falsecraft",
-          "energyCost": 6,
+          "abilityId": "the_wrong_reality",
+          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Pick up the Waterskin. Offer them a drink. Let the silence answer first.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Pick up the waterskin, show them the scratch-mark on the stone — let the object speak before you do.",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "help"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 4,
-        "energy": -3
-      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki has risen to both feet; the stranger stands three paces away, watching.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is back on both feet; the stranger stands three paces away, breathing steadily, question still open.",
         "npcsPresent": [
           {
             "name": "The Stranger",
-            "state": "Standing where the last exchange left them, breathing steadily, watching Loki rise — the question still open in the air between them."
+            "state": "Standing where the exchange ended, shoulders dropped from their fighting height, eyes on Loki — waiting for an answer, not pressing for one."
           },
           {
             "name": "Cy",
-            "state": "Three steps back, lens eased one degree from its tightest iris — still running its numbers, still unhappy with them."
+            "state": "Three steps back, lens at its tightest iris — still running numbers it does not like."
           }
         ],
         "objects": [
@@ -339,27 +340,35 @@
           "bent stems and snapped low branch marking the brush entry"
         ],
         "threads": [
-          "The stranger's question — 'Why?' — stands open and is being held as a door, not a demand.",
+          "The stranger's question — 'Why?' — stands open, held as a door, not a demand.",
           "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
           "The three-hundred-year tree about to fruit and the missing person it was planted for.",
           "Loki is injured and still below full — the recovery helped but the body remembers."
         ]
       },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief inward moment — the reframing takes the time of a long breath held and released."
-      }
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki has risen to both feet; the stranger stands three paces away, watching.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is back on both feet; the stranger stands three paces away, breathing steadily, question still open.",
       "npcsPresent": [
         {
           "name": "The Stranger",
-          "state": "Standing where the last exchange left them, breathing steadily, watching Loki rise — the question still open in the air "
+          "state": "Standing where the exchange ended, shoulders dropped from their fighting height, eyes on Loki — waiting for an answer, n"
         },
         {
           "name": "Cy",
-          "state": "Three steps back, lens eased one degree from its tightest iris — still running its numbers, still unhappy with them."
+          "state": "Three steps back, lens at its tightest iris — still running numbers it does not like."
         }
       ],
       "objects": [
@@ -370,7 +379,7 @@
         "bent stems and snapped low branch marking the brush entry"
       ],
       "threads": [
-        "The stranger's question — 'Why?' — stands open and is being held as a door, not a demand.",
+        "The stranger's question — 'Why?' — stands open, held as a door, not a demand.",
         "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
         "The three-hundred-year tree about to fruit and the missing person it was planted for.",
         "Loki is injured and still below full — the recovery helped but the body remembers."
@@ -380,7 +389,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -855,11 +864,6 @@
     "news": [
       {
         "day": 1,
-        "worldDay": 19,
-        "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
-      },
-      {
-        "day": 1,
         "worldDay": 22,
         "text": "Vessa Torquen: Vessa spent her evening cross-referencing Loki's observed behavior against her field notes, and has quietly added a new column to her intake log — unlabeled, written in her own shorthand — to track variables that don't fit standard assessment categories."
       },
@@ -974,14 +978,20 @@
         "worldDay": 31,
         "text": "Tessvel Cairn has hit trouble — A routing memo Tessvel filed on day 28 used the deprecated valve-classification shorthand rather than the current standard, and a senior clerk flagged it — not loudly, but it is now sitting in a correction queue with her name on it, which is exactly the kind of mark she cannot afford.",
         "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 31,
+        "text": "Something has been building in unspooling: A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
+        "tier": "event"
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 759,
-    "lastSharedReadAt": "2026-07-31T15:55:33.153Z",
+    "lastGenCount": 760,
+    "lastSharedReadAt": "2026-07-31T16:10:50.422Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 22,
+    "turnsSinceOffer": 23,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1037,7 +1047,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1050,7 +1060,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1075,11 +1085,12 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 1,
+        "stage": 2,
         "seededAtCount": 758,
-        "surfaced": false,
+        "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 758
+        "lastMovedCount": 758,
+        "surfacedAtCount": 760
       }
     },
     "arcStages": {
@@ -1961,8 +1972,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785514046950,
-  "rev": 231,
+  "updatedAt": 1785514423782,
+  "rev": 237,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2463,7 +2474,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 23
+    "the_quickwood": 24
   },
   "opLossPending": false,
   "sessions": [
@@ -2502,10 +2513,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-31T14:12:25.631Z",
-      "lastAt": "2026-07-31T16:07:26.948Z",
+      "lastAt": "2026-07-31T16:13:43.780Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 12
+      "beats": 13
     }
   ],
   "establishedFacts": [
@@ -2549,10 +2560,10 @@
     "scene": 101,
     "placeUpdates": 12,
     "codexUpdates": 75,
-    "timeOps": 98,
+    "timeOps": 97,
     "offer": 9,
     "generateRequest": 3,
-    "sceneEnded": 21,
+    "sceneEnded": 22,
     "npcUpdates": 80,
     "moveTo": 3,
     "gambitApt": 1,
@@ -2831,7 +2842,53 @@
       }
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-re_raider_duel",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-re_raider_duel",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 6,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 4,
+          "physical": 4,
+          "mental": 4,
+          "social": 4
+        },
+        "energy": 94,
+        "maxEnergy": 94,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 3,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 3,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 94
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"

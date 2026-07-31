@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 37,
   "maxEnergy": 115,
-  "energy": 90,
+  "energy": 85,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -274,51 +274,33 @@
         "player": null,
         "summary": "Loki sits in the mud at the confluence — the stranger waiting, the Hourkeeper watching, Cy's numbers unhappy, the question 'Why?' still open in the cold spring air.",
         "narration": "The mud is cold through your coat. Your palm is flat against the ground and the stone is still beneath the waterskin, and the stranger has not moved. They are waiting. Not impatiently. The way a person waits who has been waiting longer than this before.\n\nCy makes a small sound beside you — not a word, not a click, just a brief tightening of its mechanism the way a person might draw a breath before they speak and then decide not to. Its lens stays at its smallest ring. The numbers it has been running have not improved.\n\nThe Hourkeeper at the edge of the brush has not moved either. Their expression has not changed. Whatever they are carrying, they are carrying it the same way they were before — without relief, without any sign that the situation has reached the moment they were dreading or the moment they were hoping for. Just the same terrible, quiet foreknowledge, fixed on you.\n\nThe stranger's question is still in the air. 'Why?' Not a taunt. Not a demand. A door held open with patience and no particular expectation that you will walk through it. You are sitting in the mud in the cold afternoon, Cy at your left, an Hourkeeper at your back, and a person three paces away who has put you on the ground twice and still has not told you why."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the aggressor through See the Made Thing — a striker who has already decided what Loki will do next.",
+        "narration": "See the Made Thing opens and the stranger becomes legible — all their seams at once. They favour the strike. You can see it in the way they weight their lead foot, in the slight forward lean of the shoulder, in the way their hands are never fully still. They are not waiting to read you. They have already decided what you are going to do, and they are positioned for it. They think you are going to get up swinging."
       }
     ],
     "lastTurn": {
-      "narration": "The mud is cold through your coat. Your palm is flat against the ground and the stone is still beneath the waterskin, and the stranger has not moved. They are waiting. Not impatiently. The way a person waits who has been waiting longer than this before.\n\nCy makes a small sound beside you — not a word, not a click, just a brief tightening of its mechanism the way a person might draw a breath before they speak and then decide not to. Its lens stays at its smallest ring. The numbers it has been running have not improved.\n\nThe Hourkeeper at the edge of the brush has not moved either. Their expression has not changed. Whatever they are carrying, they are carrying it the same way they were before — without relief, without any sign that the situation has reached the moment they were dreading or the moment they were hoping for. Just the same terrible, quiet foreknowledge, fixed on you.\n\nThe stranger's question is still in the air. 'Why?' Not a taunt. Not a demand. A door held open with patience and no particular expectation that you will walk through it. You are sitting in the mud in the cold afternoon, Cy at your left, an Hourkeeper at your back, and a person three paces away who has put you on the ground twice and still has not told you why.",
-      "sceneSummary": "Loki sits in the mud at the confluence — the stranger waiting, the Hourkeeper watching, Cy's numbers unhappy, the question 'Why?' still open in the cold spring air.",
+      "narration": "See the Made Thing opens and the stranger becomes legible — all their seams at once. They favour the strike. You can see it in the way they weight their lead foot, in the slight forward lean of the shoulder, in the way their hands are never fully still. They are not waiting to read you. They have already decided what you are going to do, and they are positioned for it. They think you are going to get up swinging.",
+      "sceneSummary": "Loki reads the aggressor through See the Made Thing — a striker who has already decided what Loki will do next.",
       "choices": [
         {
-          "label": "Answer honestly — say why you came to this place and what you are looking for.",
+          "label": "You are expecting the wrong move — let them. Slip the anticipated strike and go somewhere they haven't planned for.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Shape the answer — give them a true version of your reasons, but the version that lands best on a stranger who fights like that.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
+            "feint",
             "careful"
           ],
-          "abilityId": "falsecraft",
-          "energyCost": 6,
-          "trivial": false
+          "abilityId": "the_wrong_reality",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null
         },
         {
-          "label": "Ask your own question first — who are they, and why did they stop you here?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Rise and stand — say nothing yet. Let the silence hold a moment longer while you get your feet under you.",
+          "label": "They want you to come in close — so don't. Hold your ground and make them come to you on your terms.",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
@@ -328,15 +310,44 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false,
+          "encounterId": null
+        },
+        {
+          "label": "Use the false target — let them hit where you were, not where you are.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "feint",
+            "careful"
+          ],
+          "abilityId": "the_false_target",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null
+        },
+        {
+          "label": "They are a made thing too — answer the striker's shape with a Hunter's Strike aimed at their planted foot.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "attack",
+            "risky"
+          ],
+          "abilityId": "hunters_strike",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null
         }
       ],
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, one palm down, one hip down, after the final exchange.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet now, See the Made Thing open, reading the aggressor.",
         "npcsPresent": [
           {
-            "name": "The Stranger",
-            "state": "Standing three paces away, arms loose at their sides — not pressing, waiting on the answer to 'Why?'"
+            "name": "The Stranger (aggressor)",
+            "state": "Three paces away, lead foot weighted, shoulder forward, hands restless — positioned for a striker's follow-through against an expected attack."
           },
           {
             "name": "Veln Ashpause",
@@ -344,35 +355,36 @@
           },
           {
             "name": "Cy",
-            "state": "At Loki's left, utterly still, lens irised to its smallest ring — running numbers it finds unacceptable."
+            "state": "At Loki's left, lens still at its smallest ring, running numbers it has not yet revised upward."
           }
         ],
         "objects": [
           "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
           "Waterskin beside Loki in the mud",
           "boot-prints in mud ending at the water's edge",
-          "mud on Loki's coat, hands, hip, and both legs from the falls",
-          "bent stems and snapped low branch marking the brush entry"
+          "mud on Loki's coat, hands, hip, and both legs"
         ],
         "threads": [
           "The stranger's question — 'Why?' — stands open, held as a door, not a demand.",
           "The Hourkeeper has pre-remembered something and will not say what.",
           "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
           "The three-hundred-year tree about to fruit and the missing person it was planted for.",
-          "Loki is injured and below full energy — sitting in cold mud after being overcome."
+          "Loki has a BONUS action from the successful read — the opening is there."
         ]
       },
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      }
+      "encounterOps": [
+        {
+          "op": "tactic",
+          "tag": "press-in"
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is sitting in the mud, one palm down, one hip down, after the final exchange.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet now, See the Made Thing open, reading the aggressor.",
       "npcsPresent": [
         {
-          "name": "The Stranger",
-          "state": "Standing three paces away, arms loose at their sides — not pressing, waiting on the answer to 'Why?'"
+          "name": "The Stranger (aggressor)",
+          "state": "Three paces away, lead foot weighted, shoulder forward, hands restless — positioned for a striker's follow-through again"
         },
         {
           "name": "Veln Ashpause",
@@ -380,29 +392,28 @@
         },
         {
           "name": "Cy",
-          "state": "At Loki's left, utterly still, lens irised to its smallest ring — running numbers it finds unacceptable."
+          "state": "At Loki's left, lens still at its smallest ring, running numbers it has not yet revised upward."
         }
       ],
       "objects": [
         "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
         "Waterskin beside Loki in the mud",
         "boot-prints in mud ending at the water's edge",
-        "mud on Loki's coat, hands, hip, and both legs from the falls",
-        "bent stems and snapped low branch marking the brush entry"
+        "mud on Loki's coat, hands, hip, and both legs"
       ],
       "threads": [
         "The stranger's question — 'Why?' — stands open, held as a door, not a demand.",
         "The Hourkeeper has pre-remembered something and will not say what.",
         "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
         "The three-hundred-year tree about to fruit and the missing person it was planted for.",
-        "Loki is injured and below full energy — sitting in cold mud after being overcome."
+        "Loki has a BONUS action from the successful read — the opening is there."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -1035,11 +1046,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 761,
-    "lastSharedReadAt": "2026-07-31T17:22:31.819Z",
+    "lastGenCount": 762,
+    "lastSharedReadAt": "2026-07-31T18:47:06.183Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 27,
+    "turnsSinceOffer": 28,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1095,7 +1106,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1108,7 +1119,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 8,
+        "stage": 9,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1133,7 +1144,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 3,
+        "stage": 4,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -2069,8 +2080,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785518585340,
-  "rev": 266,
+  "updatedAt": 1785523724284,
+  "rev": 271,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2645,7 +2656,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 28
+    "the_quickwood": 29
   },
   "opLossPending": false,
   "sessions": [
@@ -2684,10 +2695,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-31T14:12:25.631Z",
-      "lastAt": "2026-07-31T17:23:05.338Z",
+      "lastAt": "2026-07-31T18:48:44.282Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 17
+      "beats": 18
     }
   ],
   "establishedFacts": [
@@ -2727,7 +2738,7 @@
   "_opEmitted": {
     "sceneSummary": 104,
     "choices": 104,
-    "characterDeltas": 47,
+    "characterDeltas": 46,
     "scene": 104,
     "placeUpdates": 12,
     "codexUpdates": 76,
@@ -2743,7 +2754,7 @@
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
-    "encounterOps": 3,
+    "encounterOps": 4,
     "ledgerEvents": 1,
     "newEncounter": 1
   },
@@ -3021,9 +3032,11 @@
       "type": "duel",
       "status": "active",
       "round": 1,
-      "log": [],
+      "log": [
+        "r1: foresee vs strike → momentum 0"
+      ],
       "opponentHealth": 7,
-      "tactic": null,
+      "tactic": "press-in",
       "mode": "skill_battle",
       "opponentSheet": {
         "name": "the aggressor",
@@ -3057,7 +3070,89 @@
         "synthesized": true
       },
       "momentum": 0,
-      "opponentEnergy": 112
+      "opponentEnergy": 107,
+      "turn": {
+        "phase": "action",
+        "sel": {
+          "sense": [
+            4
+          ],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": -12,
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with See the Made Thing — success. They read you better (-12 to your action). The opening is there — you have earned a BONUS action. You read the aggressor: they favour strike. Pick a craft that answers it.",
+        "readPayoff": "You read the aggressor: they favour strike. Pick a craft that answers it."
+      },
+      "effects": [
+        {
+          "kind": "insight",
+          "label": "reading their next beat",
+          "value": 4,
+          "roundsLeft": 2,
+          "applies": "always",
+          "side": "player",
+          "source": "See the Made Thing",
+          "from": "player"
+        }
+      ],
+      "pressure": {
+        "player": 0,
+        "opponent": 0
+      },
+      "spent": {
+        "player": false,
+        "opponent": false
+      },
+      "lastOppFn": "strike",
+      "lastOppReceipt": {
+        "roll": 37,
+        "chance": 95,
+        "degree": "success",
+        "action": {
+          "attribute": "practical",
+          "abilityLevel": 4,
+          "label": "a hard strike",
+          "axes": {}
+        },
+        "breakdown": {
+          "components": [
+            {
+              "label": "practical 5",
+              "value": 80
+            },
+            {
+              "label": "practical mastery (beyond 4)",
+              "value": 5
+            },
+            {
+              "label": "ability rank 4",
+              "value": 20
+            }
+          ],
+          "total": 95,
+          "clampedFrom": 105,
+          "base": "practical",
+          "opposed": null
+        },
+        "rawChance": 105,
+        "margin": 68,
+        "matchup": 0,
+        "intensity": "standard",
+        "tier": 4,
+        "function": "strike",
+        "name": "a hard strike",
+        "effectMods": [],
+        "woven": null
+      },
+      "lastReadWasSense": true
     }
   },
   "legendGovernor": {

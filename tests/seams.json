@@ -192,6 +192,16 @@
       "consumer": { "file": "app.js", "region": "travelTo" },
       "assert": { "requires": ["cost\\?\\.hours", "cost\\?\\.energy"] },
       "canFail": "Remove the cost application in travelTo: a network hop advances only the flat ADVANCE.travel and costs no energy -> gate travel becomes a free teleport (SNG-243 §4 guard: network travel has a cost) -> red."
+    },
+    {
+      "id": "seam_battle_effects_roundtrip",
+      "incident": "CCODE-35",
+      "kind": "field_presence",
+      "contract": "A persistent battle effect must ride BOTH ways through skillBattleRound's hand-built state object: INTO battleRound (so a standing effect modifies this round's roll) and back OUT onto the encounter state (so it persists). skillBattleRound rebuilds state field-by-field, so an effect written by battleRound is silently dropped unless `effects` is named in both the inbound state literal and the outbound `s`. A dropped effect is worse than no feature: the panel would show 'guard up' while the roll never sees it.",
+      "producer": { "file": "engine/skill_battle.js", "note": "battleRound writes state.effects (ticked + newly landed) and returns them" },
+      "consumer": { "file": "engine/encounters.js", "region": "skillBattleRound" },
+      "assert": { "requires": ["effects"] },
+      "canFail": "Drop `effects` from either the inbound state literal or the outbound `s` in skillBattleRound: the standing effect never reaches the roll (or never survives the round) while the panel still advertises it -> red."
     }
   ]
 }

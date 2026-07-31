@@ -64,9 +64,69 @@ export function opponentPolicy(oppSheet, state = {}, seenPlayerTendency = null, 
   return { function: pick.function, name: pick.name, tier: pick.tier || 1, attribute: pick.attribute || "practical", intensity };
 }
 
+// ---------- CCODE-35: persistent effects (Erik: "each action should produce something that could persist") ----------
+// A move that LANDS leaves a standing effect for a few rounds. The load-bearing rule: an effect is never a hidden
+// fudge — it enters the next round's roll as a NAMED, SIGNED contestMod on the SNG-106 self-summing breakdown, so
+// "guard up +4" sits in the same honest math as the matchup and intensity terms. Definitions are content
+// (skill_battle_system.json engine.persistentEffects); the code owns only when they land, apply, and expire.
+
+/** Does this effect modify `side`'s roll THIS round, given who declared what? Pure. */
+function effectApplies(fx, side, ownDecl, oppDecl, sb) {
+  if (fx.side !== side) return false;
+  const attacks = (sb?.persistentEffects?.attackFunctions) || ["strike", "break"];
+  if (fx.applies === "whenAttacked") return attacks.includes(oppDecl.function);   // it answers incoming harm
+  if (fx.applies === "whenAttacking") return attacks.includes(ownDecl.function);  // it sharpens your own blow
+  return true;                                                                     // "always" — knowledge/hindrance cuts both ways
+}
+
+/** The contestMod lines the active effects contribute to one side's roll — one honest labelled term each. */
+export function effectMods(effects, side, ownDecl, oppDecl, sb) {
+  return (effects || [])
+    .filter(fx => effectApplies(fx, side, ownDecl, oppDecl, sb))
+    .map(fx => ({ label: `${fx.label}${fx.roundsLeft > 1 ? ` (${fx.roundsLeft} rounds)` : ""}`, value: fx.value }));
+}
+
+/** The effect a landed move leaves behind, or null. `roll` is that side's resolved receipt; `actor` is the side
+ *  that declared it. A miss leaves nothing — a botched guard is not a raised shield. */
+function effectFrom(decl, roll, actor, sb) {
+  const cfg = sb?.persistentEffects; if (!cfg) return null;
+  const def = cfg.byFunction?.[decl.function]; if (!def) return null;
+  const ok = (cfg.requiresDegree || ["crit_success", "success", "partial"]).includes(roll.degree);
+  if (!ok) return null;
+  const partial = roll.degree === "partial";
+  const value = Math.round((def.value || 0) * (partial ? (cfg.partialValueMult ?? 0.5) : 1));
+  if (!value) return null;
+  const rounds = Math.max(1, (def.rounds || 1) + (roll.degree === "crit_success" ? (cfg.critBonusRounds ?? 0) : 0));
+  const other = actor === "player" ? "opponent" : "player";
+  return {
+    kind: def.kind, label: def.label, value, roundsLeft: rounds, applies: def.applies || "always",
+    side: def.target === "opponent" ? other : actor,   // WHOSE roll this modifies
+    source: decl.name || decl.function, from: actor
+  };
+}
+
+/** Tick every effect down one round and drop the expired. Pure. */
+function tickEffects(effects) {
+  return (effects || []).map(fx => ({ ...fx, roundsLeft: fx.roundsLeft - 1 })).filter(fx => fx.roundsLeft > 0);
+}
+
+/** Add a landed effect: the same kind on the same side REFRESHES rather than stacking, and each side is capped. */
+function addEffect(effects, fx, sb) {
+  if (!fx) return effects;
+  const cfg = sb?.persistentEffects || {};
+  let out = effects.slice();
+  if (cfg.refreshesSameKind !== false) out = out.filter(e => !(e.kind === fx.kind && e.side === fx.side));
+  out.push(fx);
+  const cap = cfg.maxActivePerSide ?? 3;
+  const mine = out.filter(e => e.side === fx.side);
+  if (mine.length > cap) { const drop = mine.slice(0, mine.length - cap); out = out.filter(e => !drop.includes(e)); }
+  return out;
+}
+
 /** Roll ONE side through successChance (SNG-106 rails): attribute + tier + matchup + intensity as named,
- *  self-summing contest mods. Returns the full receipt + the round margin (chance − roll). */
-function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng) {
+ *  self-summing contest mods — plus any standing persistent effects (CCODE-35), each its own honest line.
+ *  Returns the full receipt + the round margin (chance − roll). */
+function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = []) {
   const tier = decl.tier || 1;
   const mu = matchupBonus(decl.function, oppDecl.function, sb);
   const step = steps[decl.intensity] || steps.standard || {};
@@ -76,11 +136,12 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng) {
     rules,
     contestMods: [
       { label: `matchup (${decl.function} vs ${oppDecl.function})`, value: mu },
-      ...(step.effectMod ? [{ label: decl.intensity, value: step.effectMod }] : [])
+      ...(step.effectMod ? [{ label: decl.intensity, value: step.effectMod }] : []),
+      ...fxMods
     ]
   };
   const res = resolveAction(ctx, rng);
-  return { ...res, margin: res.chance - res.roll, matchup: mu, intensity: decl.intensity, tier, function: decl.function, name: decl.name || decl.function };
+  return { ...res, margin: res.chance - res.roll, matchup: mu, intensity: decl.intensity, tier, function: decl.function, name: decl.name || decl.function, effectMods: fxMods };
 }
 
 const energyCost = (decl, sb, steps, rules) => Math.round((rules.energy?.defaultActionCost ?? 5) * ((steps[decl.intensity] || steps.standard || {}).energyMult ?? 1));
@@ -92,8 +153,16 @@ const energyCost = (decl, sb, steps, rules) => Math.round((rules.energy?.default
 export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state = {}, rules, sb, steps, rng = Math.random }) {
   sb = sb || {};
   steps = steps || rules?.intensitySteps || DEFAULT_STEPS;
-  const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng);
-  const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng);
+  // CCODE-35: standing effects modify THIS round's rolls as named contestMods, then tick; newly landed ones
+  // are added after both sides roll (an effect never modifies the round that created it).
+  const standing = state.effects || [];
+  const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb));
+  const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb));
+  let effects = tickEffects(standing);
+  const landedP = effectFrom(playerDecl, p, "player", sb);
+  const landedO = effectFrom(oppDecl, o, "opponent", sb);
+  effects = addEffect(effects, landedP, sb);
+  effects = addEffect(effects, landedO, sb);
 
   const mom = sb.momentum || {};
   const meterMax = mom.meterMax ?? 10, marginScale = mom.marginScale ?? 0.5, crush = mom.surgeCrushEndsIt ?? 8;
@@ -115,6 +184,6 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   else if (playerEnergy <= 0) resolved = "opponent";                                               // attrition
   else if (opponentEnergy <= 0) resolved = "player";
 
-  const newState = { ...state, round: (state.round || 0) + 1, momentum, playerEnergy, opponentEnergy, resolved, status: resolved ? "resolved" : "active" };
-  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved };
+  const newState = { ...state, round: (state.round || 0) + 1, momentum, playerEnergy, opponentEnergy, effects, resolved, status: resolved ? "resolved" : "active" };
+  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, landed: [landedP, landedO].filter(Boolean) };
 }

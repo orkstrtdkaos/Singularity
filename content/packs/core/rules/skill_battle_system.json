@@ -63,6 +63,30 @@
     "intensityLevels": ["conserve", "standard", "surge"],
     "momentum": { "meterMax": 16, "marginScale": 0.2, "surgeCrushEndsIt": 20, "note": "CCODE-34 (Erik, MEASURED — the SNG-246 widening was not enough because marginScale stayed at 0.5): two d100 rolls differ by ~33 on average, so a TYPICAL round's delta was ~16.5 — past BOTH meterMax and the crush threshold at once. Simulated 4000 fights/dial against the real battleRound: the old 16/0.5/16 ended 47% of fights in ONE round and 90.6% by crush. 16/0.20/20 gives median 4-5 rounds, ~5% one-round ends (mostly vs weak foes — correct), and ~4% crush ends, so an overwhelming blow stays a rare real beat. bidirectional -meterMax..+meterMax; a round shifts it toward the winner by round-margin * marginScale; reaching +/-meterMax resolves. The deliberate Finish-it (the §6b collapse) is a SEPARATE path and still ends a fight in one beat BY CHOICE. DIAL: Aevi/Erik tune to taste." },
     "attrition": { "outOfEnergyLosesContest": true, "note": "a side that cannot pay a round's energy cost can only Conserve; at 0 energy it forfeits the contest even if ahead on rolls — attrition is the second win condition." },
+    "persistentEffects": {
+      "note": "CCODE-35 (Erik): 'Each action should produce something that could persist, such as raising a shield at the beginning, or gaining a sense/insight gives you bonuses to defense or striking.' A move that LANDS leaves a standing effect for a few rounds. The effect is not a hidden fudge: it enters the next round's roll as a NAMED, SIGNED contestMod on the SNG-106 self-summing breakdown, so 'guard up +4' is visible in the same math as the matchup and intensity terms. applies: whenAttacked (it answers incoming harm) / whenAttacking (it sharpens your own blow) / always (knowledge and hindrance cut both ways). target: self (a boon on the actor) / opponent (a hindrance laid on the other side).",
+      "requiresDegree": ["crit_success", "success", "partial"],
+      "partialValueMult": 0.5,
+      "critBonusRounds": 1,
+      "maxActivePerSide": 3,
+      "refreshesSameKind": true,
+      "byFunction": {
+        "shield":  { "kind": "guard",     "label": "guard up",            "value": 4,  "rounds": 2, "applies": "whenAttacked",  "target": "self" },
+        "ward":    { "kind": "ward",      "label": "warded",              "value": 4,  "rounds": 2, "applies": "whenAttacked",  "target": "self" },
+        "resist":  { "kind": "brace",     "label": "braced",              "value": 3,  "rounds": 2, "applies": "whenAttacked",  "target": "self" },
+        "conceal": { "kind": "unseen",    "label": "hard to find",        "value": 3,  "rounds": 1, "applies": "whenAttacked",  "target": "self" },
+        "reveal":  { "kind": "insight",   "label": "you have their measure", "value": 3, "rounds": 2, "applies": "always",     "target": "self" },
+        "foresee": { "kind": "insight",   "label": "reading their next beat", "value": 4, "rounds": 2, "applies": "always",    "target": "self" },
+        "track":   { "kind": "insight",   "label": "on their line",       "value": 3,  "rounds": 2, "applies": "always",       "target": "self" },
+        "empower": { "kind": "empowered", "label": "empowered",           "value": 4,  "rounds": 2, "applies": "whenAttacking", "target": "self" },
+        "sustain": { "kind": "steady",    "label": "steadied",            "value": 3,  "rounds": 3, "applies": "always",       "target": "self" },
+        "bind":    { "kind": "bound",     "label": "bound",               "value": -4, "rounds": 2, "applies": "always",       "target": "opponent" },
+        "hinder":  { "kind": "hampered",  "label": "hampered",            "value": -3, "rounds": 2, "applies": "always",       "target": "opponent" },
+        "command": { "kind": "swayed",    "label": "swayed",              "value": -3, "rounds": 2, "applies": "always",       "target": "opponent" },
+        "deceive": { "kind": "misled",    "label": "misled",              "value": -3, "rounds": 1, "applies": "always",       "target": "opponent" }
+      },
+      "attackFunctions": ["strike", "break"]
+    },
     "opponentPolicy": {
       "note": "deterministic + seeded — the ENGINE picks the opponent's skill+intensity, never the narrative GM. Behind on momentum -> press (Surge); ahead -> pace (Conserve); tacticTags bias it. Skill pick: the function that matches up best against the player's last-SHOWN tendency (only what fog let them reveal to the engine's memory of the player).",
       "behindSurgeAt": -3,

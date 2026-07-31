@@ -100,9 +100,11 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const r = battleRound({
     playerDecl, oppDecl,
     playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before },
-    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy }, rules, sb, steps, rng
+    // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
+    // encounter state (they persist). This hand-built state object is the seam where they would silently drop.
+    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy, effects: state.effects || [] }, rules, sb, steps, rng
   });
-  const s = { ...state, round: state.round + 1, momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy };
+  const s = { ...state, round: state.round + 1, momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [] };
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
   if (r.resolved === "player") { s.status = "ended"; ended = true; outcome = (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell"; events.push(`You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`); }
@@ -110,7 +112,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   else if (r.resolved === "stalemate") { s.status = "ended"; ended = true; outcome = "stalemate"; events.push("Both of you are spent — it ends unresolved."); }
   else events.push(r.roundWinner === "player" ? "You press the advantage." : r.roundWinner === "opponent" ? "You give ground." : "Neither gains an inch.");
   s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);
-  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner };
+  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [] };
 }
 
 /** Player incapacitation check (app calls after applying deltas). */

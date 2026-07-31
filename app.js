@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.298";
+const APP_VERSION = "1.8.299";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8407,13 +8407,16 @@ function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
   const enBit = rr.deltas?.energy ? ` · you ${rr.deltas.energy}e` : "";
   const hpBit = (rr.deltas?.health || 0) < 0 ? ` · you −${Math.abs(rr.deltas.health)} hp` : "";
   const prox = after >= meterMax * 0.7 ? " · they're nearly done" : after <= -meterMax * 0.7 ? " · you're nearly overcome" : "";
-  if (scouting) return `👁 You read them — they ${oPhrase}. You give nothing away. Momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${prox}`;
+  // CCODE-35: name what STUCK. An effect that lands silently is the same failure as a round that resolves
+  // silently — the player has to see the thing their move left standing.
+  const fxBit = (rr.landed || []).map(f => ` · ${f.from === "player" ? "you gain" : "they gain"} ${f.label} ${f.value >= 0 ? "+" : ""}${f.value} for ${f.roundsLeft} round${f.roundsLeft === 1 ? "" : "s"}`).join("");
+  if (scouting) return `👁 You read them — they ${oPhrase}. You give nothing away. Momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${prox}${fxBit}`;
   const pDef = SB_DEFENSIVE.has(pVerb), oDef = SB_DEFENSIVE.has(oVerb);
   const interaction = pDef && !oDef ? `they ${oPhrase} — you turn it aside`
     : !pDef && oDef ? `they ${oPhrase} — your blow is turned aside`
     : !pDef && !oDef ? `they ${oPhrase} — the blows meet and both scatter`
     : `they ${oPhrase} — you both circle, testing`;
-  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name} · ${interaction} · ${gain} · momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}`;
+  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name} · ${interaction} · ${gain} · momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}${fxBit}`;
 }
 
 // SNG-246 (Erik: "some output specifically going to the machine tab… I could gather it"): mirror each skill-battle
@@ -8435,6 +8438,11 @@ function sbLogRound(enc, decl, rr, beforeMom, scouting) {
     ended: rr.ended || false,
     outcome: rr.outcome || null,
     events: rr.events || [],
+    // CCODE-35: the effects in play — what modified THIS roll (each side's named contestMods) and what the
+    // round left standing. This is the part that makes a "why did that roll land?" question answerable.
+    effectsApplied: { you: (p?.effectMods || []).map(m => `${m.label} ${m.value >= 0 ? "+" : ""}${m.value}`), them: (o?.effectMods || []).map(m => `${m.label} ${m.value >= 0 ? "+" : ""}${m.value}`) },
+    effectsLanded: (rr.landed || []).map(f => `${f.from === "player" ? "you" : "them"}: ${f.label} ${f.value >= 0 ? "+" : ""}${f.value} × ${f.roundsLeft}r`),
+    effectsStanding: (rr.state?.effects || []).map(f => `${f.side === "player" ? "you" : "them"}: ${f.label} ${f.value >= 0 ? "+" : ""}${f.value} (${f.roundsLeft}r, ${f.applies})`),
     receipt: sbLastRoundReceipt
   });
 }
@@ -8481,6 +8489,13 @@ function skillBattlePanel() {
       ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${esc(JSON.stringify(fog.revealed.breakdown))}'>see their math</button>` : ""}</div>` : ""}` :
       `<div class="hint">You size each other up. Choose ONE move — or read them first.</div>`}</div>
     ${sbLastRoundReceipt && st.round > 1 ? `<div class="sb-receipt">${esc(sbLastRoundReceipt)}</div>` : ""}
+    ${(() => { // CCODE-35: what's STANDING right now — a raised guard, an insight, a bind laid on them. Each
+      // chip carries the exact signed value + rounds left, because that number is really in the next roll.
+      const fx = st.effects || []; if (!fx.length) return "";
+      const chip = f => `<span class="sb-fx sb-fx-${f.value >= 0 ? "boon" : "bane"}" title="${esc(f.label)} — ${f.value >= 0 ? "+" : ""}${f.value} to ${f.side === "player" ? "your" : "their"} roll ${f.applies === "whenAttacked" ? "when they attack" : f.applies === "whenAttacking" ? "when you strike" : "every round"}, ${f.roundsLeft} more round${f.roundsLeft === 1 ? "" : "s"} (from ${esc(f.source)})">${esc(f.label)} ${f.value >= 0 ? "+" : ""}${f.value} · ${f.roundsLeft}r</span>`;
+      const mine = fx.filter(f => f.side === "player"), theirs = fx.filter(f => f.side === "opponent");
+      return `<div class="sb-fx-row">${mine.length ? `<span class="sb-fx-lbl">on you</span>${mine.map(chip).join("")}` : ""}${theirs.length ? `<span class="sb-fx-lbl">on them</span>${theirs.map(chip).join("")}` : ""}</div>`;
+    })()}
     ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
     <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
     <div class="sb-hint hint">Pick ONE thing this turn — it resolves, then the next. Type below to shape it in your own words.</div>
@@ -8532,7 +8547,10 @@ function wireSkillBattlePanel() {
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(sbLastRound); };
   for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => sbDeclare(window._sbSkills[Number(b.dataset.sbskill)], { intensity: sbIntensity });
-  const rd = document.getElementById("sb-read"); if (rd) rd.onclick = () => sbDeclare({ function: "shield", tier: 1, attribute: "mental", name: "reading them" }, { intensity: "conserve", scouting: true });
+  // CCODE-35: a read declares REVEAL, not shield. It was declared as a shield so the scout round played safe, but
+  // a read IS a reveal — and Erik's ask ("gaining a sense/insight gives you bonuses") means the scout round should
+  // leave an INSIGHT standing, not a raised guard. This also makes the matchup term honest (reveal beats conceal).
+  const rd = document.getElementById("sb-read"); if (rd) rd.onclick = () => sbDeclare({ function: "reveal", tier: 1, attribute: "mental", name: "reading them" }, { intensity: "conserve", scouting: true });
   // SNG-246 (Erik): the DELIBERATE one-shot — go for a decisive finish with your best harm craft. This is the ONLY
   // move that can collapse the fight in one beat (§6b); a normal strike is a normal round now (turn-by-turn combat).
   const fin = document.getElementById("sb-finish"); if (fin) fin.onclick = () => {

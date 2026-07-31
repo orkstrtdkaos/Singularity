@@ -109,5 +109,76 @@ check("SNG-098 B: yielding ends the contest via the classic lifecycle outcome", 
 const crush = skillBattleRound({ ...sbState, momentum: 9 }, duelDef, { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" }, { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
 check("SNG-098 B: a decisive skill-battle win maps to a classic duel outcome (opponent_fell/yielded) + ends", crush.ended && /opponent_(fell|yielded)/.test(crush.outcome || ""));
 
+// ---- CCODE-35: persistent effects (Erik: "each action should produce something that could persist") ----
+// The load-bearing guard is NOT "an effect appears on state" — it's "the effect REACHES THE ROLL as an honest,
+// named line." A feature that shows "guard up" while the math never sees it is worse than no feature at all.
+const fxCfg = sb.persistentEffects;
+check("CCODE-35: the effect definitions are CONTENT, not code (engine.persistentEffects.byFunction)",
+  !!fxCfg && !!fxCfg.byFunction?.shield && !!fxCfg.byFunction?.bind);
+// a landed shield leaves a standing guard on the ACTOR; a landed bind lands on the OTHER side
+const guardRound = battleRound({
+  playerDecl: { function: "shield", tier: 3, attribute: "physical", intensity: "standard", name: "Raise a guard" },
+  oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
+  playerSheet: { attributes: { physical: 5 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
+  state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.01, 0.99]) // player crits, opponent botches
+});
+const guardFx = (guardRound.effects || []).find(f => f.kind === "guard");
+check("CCODE-35: a landed shield leaves a standing guard on the ACTOR's side", !!guardFx && guardFx.side === "player" && guardFx.roundsLeft > 0);
+check("CCODE-35: an effect never modifies the round that created it (it enters state, not this roll)",
+  !(guardRound.player.effectMods || []).some(m => /guard up/.test(m.label)));
+// THE SEAM: carry that state into the next round and prove the bonus is a NAMED line in the breakdown
+const nextRound = battleRound({
+  playerDecl: { function: "shield", tier: 3, attribute: "physical", intensity: "standard", name: "Raise a guard" },
+  oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
+  playerSheet: { attributes: { physical: 5 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
+  state: { momentum: 0, effects: guardRound.effects }, rules, sb, steps, rng: seqRng([0.5, 0.5])
+});
+check("CCODE-35: a standing guard REACHES THE ROLL as a named, signed contestMod (not a hidden fudge)",
+  (nextRound.player.breakdown?.components || []).some(c => /guard up/.test(c.label) && c.value > 0));
+// SNG-106 self-summing WITH an effect line. `total` is the POST-clamp chance, so the honest invariant is
+// sum === (clampedFrom ?? total) — and when an effect pushes a strong character past the d100 ceiling, the
+// breakdown must DISCLOSE the clamp rather than quietly swallowing the difference.
+check("CCODE-35: sum(components) === (clampedFrom ?? total) WITH an effect line (SNG-106 self-summing)",
+  (() => { const b = nextRound.player.breakdown; return b.components.reduce((s, c) => s + c.value, 0) === (b.clampedFrom ?? b.total); })());
+check("CCODE-35: an effect that pushes past the d100 ceiling DISCLOSES the clamp (clampedFrom set, never silent)",
+  (() => { const b = nextRound.player.breakdown; const sum = b.components.reduce((s, c) => s + c.value, 0); return sum <= b.total || b.clampedFrom === sum; })());
+// whenAttacked gating: a guard does NOT apply when the opponent isn't attacking
+const vsNonAttack = battleRound({
+  playerDecl: { function: "shield", tier: 3, attribute: "physical", intensity: "standard", name: "Raise a guard" },
+  oppDecl: { function: "conceal", tier: 1, attribute: "practical", intensity: "standard", name: "a fade" },
+  playerSheet: { attributes: { physical: 5 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
+  state: { momentum: 0, effects: guardRound.effects }, rules, sb, steps, rng: seqRng([0.5, 0.5])
+});
+check("CCODE-35: a whenAttacked guard does NOT fire when the opponent isn't attacking",
+  !(vsNonAttack.player.breakdown?.components || []).some(c => /guard up/.test(c.label)));
+// a MISS leaves nothing — a botched guard is not a raised shield
+const missed = battleRound({
+  playerDecl: { function: "shield", tier: 1, attribute: "physical", intensity: "standard", name: "Raise a guard" },
+  oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
+  playerSheet: { attributes: { physical: 1 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
+  state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.99, 0.5]) // player botches
+});
+check("CCODE-35: a MISSED move leaves no effect (a botched guard is not a raised shield)",
+  !(missed.effects || []).some(f => f.side === "player"));
+// effects expire
+check("CCODE-35: an effect ticks down and EXPIRES (it is not permanent)",
+  (() => {
+    let st = { momentum: 0, effects: [{ kind: "guard", label: "guard up", value: 4, roundsLeft: 1, applies: "whenAttacked", side: "player", source: "t", from: "player" }] };
+    const r = battleRound({
+      playerDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "s" },
+      oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "s" },
+      playerSheet: { attributes: { physical: 3 }, energy: 100 }, oppSheet: { attributes: { physical: 3 }, energy: 100, skills: [] },
+      state: st, rules, sb, steps, rng: seqRng([0.99, 0.99]) // both botch, so nothing new lands
+    });
+    return !(r.effects || []).some(f => f.kind === "guard");
+  })());
+// THE ROUND-TRIP SEAM (seam_battle_effects_roundtrip): effects survive skillBattleRound's hand-built state
+check("CCODE-35: effects survive the skillBattleRound round-trip (the hand-built state object keeps them)",
+  (() => {
+    const st = { ...sbState, effects: [{ kind: "insight", label: "you have their measure", value: 3, roundsLeft: 3, applies: "always", side: "player", source: "t", from: "player" }] };
+    const out = skillBattleRound(st, duelDef, { function: "strike", tier: 2, attribute: "practical", intensity: "standard", name: "a cut" }, { character: char, rules, sb, steps, rng: seqRng([0.4, 0.6]) });
+    return (out.state.effects || []).some(f => f.kind === "insight") && (out.player.breakdown?.components || []).some(c => /measure/.test(c.label));
+  })());
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

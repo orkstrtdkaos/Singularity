@@ -261,7 +261,7 @@ export function synthesizeChallengeDef(entry) {
  *  - challenge / duel     → { routing, def, narration, choices } (engine-built OFFER with
  *    a guaranteed decline path BEFORE engagement, plus any peaceful-out the player owns).
  */
-export function buildOffer(entry, character, catalog = {}, rules = {}) {
+export function buildOffer(entry, character, catalog = {}, rules = {}, opts = {}) {
   const owns = id => (character?.abilities || []).some(a => a.abilityId === id);
   if (entry.routing === "narrative" || entry.routing === "opposed") {
     let prompt = `(A ${entry.flavor} encounter arises: ${entry.seed}`;
@@ -277,8 +277,12 @@ export function buildOffer(entry, character, catalog = {}, rules = {}) {
 
   // challenge / duel — build the def and a deterministic offer beat
   const def = entry.routing === "duel" ? synthesizeDuelDef(entry) : synthesizeChallengeDef(entry);
+  // SNG-246 (Erik: "I'm the one moving forward to attack — the button shouldn't say 'stand and meet it'"): the
+  // engage label reads as an ACTION and names the foe, and swings to the aggressor's voice when the PLAYER is the
+  // one closing in (opts.aggressor). The old flat defensive "Stand and meet it" only fit the it-comes-to-you case.
+  const foeName = def?.opponent?.name || "them";
   const engageLabel = entry.routing === "duel"
-    ? "Stand and meet it"
+    ? (opts.aggressor ? `⚔ Press the attack on ${foeName}` : `⚔ Meet ${foeName} — take the fight`)
     : (entry.flavor === "chase" ? "Commit to the chase" : "Take the crossing on");
   const choices = [
     { label: engageLabel, encounterId: def.id, attribute: "physical", subAttribute: def.type === "duel" ? "strength" : "agility", axes: {}, difficulty: 0, intentTags: ["risky", "commit"] },

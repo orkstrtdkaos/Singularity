@@ -16,7 +16,7 @@ import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, comp
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
-import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
+import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.296";
+const APP_VERSION = "1.8.297";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1208,6 +1208,31 @@ function renderMachine() {
     </div><div id="mach-ab-out"></div>` : `<div class="hint">Load a character to A/B the world-tick on your real offscreen figures.</div>`}
   </div>`;
 
+  // SNG-246 (Erik): skill-battle rounds are pure engine (no model call), but he plays test fights and wants to
+  // gather the telemetry here to diagnose "the fight ended inexplicably." Each round: both rolls, the momentum
+  // swing, deltas, and the outcome. One-click "Copy combat log" gives him the whole fight to paste back.
+  const rounds = combatRounds();
+  const combatText = () => rounds.slice().reverse().map(r => {
+    const t = r.at ? new Date(r.at).toTimeString().slice(0, 8) : "";
+    const yr = r.you?.roll ? ` — roll ${r.you.roll.rolled}/${r.you.roll.chance} (margin ${r.you.roll.margin}, matchup ${r.you.roll.matchup})` : "";
+    const tr = r.them?.roll ? ` — roll ${r.them.roll.rolled}/${r.them.roll.chance} (margin ${r.them.roll.margin})` : "";
+    return `[${t}] vs ${r.opponent} · round ${r.round} · ${r.kind}\n`
+      + `  you : ${r.you?.move} (${r.you?.fn} T${r.you?.tier} ${r.you?.intensity})${yr}\n`
+      + `  them: ${r.them?.move} (${r.them?.fn})${tr}\n`
+      + `  momentum ${r.momentum?.before}→${r.momentum?.after} (swing ${r.momentum?.swing}, winner ${r.momentum?.winner || "tie"}) · hp ${r.deltas?.health || 0} en ${r.deltas?.energy || 0} · energy you ${r.energyLeft?.you}/them ${r.energyLeft?.them}${r.ended ? ` · ENDED → ${r.outcome}` : ""}\n`
+      + `  ${r.receipt || ""}`;
+  }).join("\n\n");
+  const roundCard = (r) => `<details class="mach-card">
+    <summary><span class="mach-task">round ${r.round} — ${esc(r.kind)}</span> <span class="hint">vs ${esc(r.opponent)} · momentum ${r.momentum?.before}→${r.momentum?.after} (${(r.momentum?.swing ?? 0) >= 0 ? "+" : ""}${r.momentum?.swing})${r.ended ? ` · ENDED ${esc(r.outcome || "")}` : ""}${r.at ? " · " + esc(new Date(r.at).toTimeString().slice(0, 8)) : ""}</span></summary>
+    ${r.receipt ? `<div class="mach-sec">${esc(r.receipt)}</div>` : ""}
+    <pre class="mach-pre">${esc(JSON.stringify(r, null, 2))}</pre>
+  </details>`;
+  const combatBlock = `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">⚔ Combat rounds — SNG-246 <span class="hint" style="text-transform:none">skill-battle telemetry (pure engine, no model call)</span></h3>
+    ${rounds.length ? `<p class="hint" style="margin:0 0 8px"><strong>${rounds.length}</strong> round${rounds.length === 1 ? "" : "s"} this session — each shows both rolls, the momentum swing, and how it ended. Copy the log and paste it back to diagnose a fight that felt off.</p>
+      <button class="btn secondary" id="mach-combat-copy" style="margin-bottom:8px">Copy combat log</button>
+      ${rounds.map(roundCard).join("")}` : "<div class='hint'>No skill-battle rounds yet — run a 🧪 Legs fight or a test encounter, take a few rounds, then return.</div>"}
+  </div>`;
+
   chrome(`<div class="screen" style="max-width:900px">
     <h2>🔬 See the Machine <span class="hint" style="text-transform:none">— last ${caps.length} model call${caps.length === 1 ? "" : "s"} this session</span></h2>
     <p class="hint" style="margin-bottom:12px">The assembled prompt, the raw model response, what parsed, and which ops fired — the SNG-179 diagnosis as a standing panel. Captures live in memory for this session only (dev-mode; a player never reaches this).</p>
@@ -1216,6 +1241,7 @@ function renderMachine() {
     </div>` : ""}
     ${leversBlock}
     ${modelBlock}
+    ${combatBlock}
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Op emission — this character, cumulative <span class="hint" style="text-transform:none">(${turns} GM turn${turns === 1 ? "" : "s"} observed)</span></h3>
       <p class="hint" style="margin-bottom:8px">Counts are <strong>emissions</strong> — the model putting an op in a turn — tracked for every op. Applied/rejected outcome (✓/✗) is instrumented only for <code>markTeacher</code>; for the rest the number is emission alone. ${turns > 0 ? `A persistent <strong>0 after ${turns} turn${turns === 1 ? "" : "s"}</strong> is the real signature — a built op the model never reaches.` : `<strong>No turns observed yet</strong> — a 0 here just means this character has not played; it is not a finding.`}</p>
@@ -1238,6 +1264,11 @@ function renderMachine() {
     try { await navigator.clipboard.writeText(text); b.textContent = "Copied ✓"; } catch { b.textContent = "Copy failed — select the text above"; }
   };
   document.getElementById("mach-clear").onclick = () => { clearCaptures(); renderMachine(); };
+  const combatCopy = document.getElementById("mach-combat-copy");
+  if (combatCopy) combatCopy.onclick = async () => {
+    try { await navigator.clipboard.writeText(combatText()); combatCopy.textContent = "Copied ✓"; }
+    catch { combatCopy.textContent = "Copy failed — expand a round and select it"; }
+  };
   // SNG-242: world-tick model switch + A/B
   const wtTgl = document.getElementById("mach-wt-toggle");
   if (wtTgl) wtTgl.onclick = () => { try { const cur = localStorage.getItem("singularity.worldTickModel") === "haiku"; localStorage.setItem("singularity.worldTickModel", cur ? "sonnet" : "haiku"); } catch { /* ignore */ } renderMachine(); };
@@ -4905,14 +4936,14 @@ function isDev() { return isDevMode(); }
 /** Fire a specific random encounter (entry object) or a forced flavor (dev). Registers
  *  any synthesized encounter def, then either opens a GM scene (narrative/opposed) or
  *  renders an engine-built OFFER beat with a guaranteed decline path (challenge/duel). */
-async function fireEncounter(entryOrFlavor, { dev = false, news = [] } = {}) {
+async function fireEncounter(entryOrFlavor, { dev = false, news = [], aggressor = false } = {}) {
   const table = CONTENT.randomEncounters;
   if (!table) return false;
   const entry = typeof entryOrFlavor === "string"
     ? pickEncounter(table, hereNow(), Math.random, { flavor: entryOrFlavor, ignoreDanger: dev })
     : entryOrFlavor;
   if (!entry) { if (dev) renderPlay(character.activeScene?.lastTurn || null, { aside: `No ${entryOrFlavor} encounter fits here.` }); return false; }
-  const offer = buildOffer(entry, character, fullCatalog(), CONTENT.rules);
+  const offer = buildOffer(entry, character, fullCatalog(), CONTENT.rules, { aggressor });
   if (offer.def) {
     // SNG-230 Phase 1b: stamp the size signal so the frame can route takeover-vs-banner (Erik's size-by-tier).
     // A bestiary def already carries tier/minDanger; a synthesized chase/hazard gets THIS place's danger, so a
@@ -8360,6 +8391,53 @@ function playerBattleSkills() {
 // SNG-230 frame strip on top carries the kind/momentum-meter/win/exits; these controls live in the option area).
 // sbLastRound carries the previous round's fog across renders (renderPlay has no lastRound of its own).
 let sbLastRound = null;
+let sbLastRoundReceipt = null; // SNG-246 (Erik): what JUST happened this round — both moves + the interaction + the swing, SHOWN.
+
+// SNG-246 (Erik: "no rolls, no opposed rolls or descriptions… ended inexplicably"): a per-round MECHANICAL line
+// for the skill battle — names YOUR move and THEIRS, the interaction (blades lock / turned aside / you slip it),
+// who took the exchange, and the momentum swing. Engine-generated (no per-round GM call), so every round is legible.
+const SB_VERB = { strike: "strike", break: "shatter at", hinder: "hamper", shield: "guard", ward: "ward", resist: "brace", reveal: "read", foresee: "foresee", track: "track", conceal: "slip aside", deceive: "feint", command: "command", bind: "bind", move: "reposition", travel: "reposition", open: "open a way", heal: "steady", mend: "mend", restore: "restore", empower: "empower", make: "conjure", transform: "reshape", summon: "call", sustain: "hold" };
+const SB_DEFENSIVE = new Set(["shield", "ward", "resist", "conceal", "deceive"]);
+function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
+  const meterMax = CONTENT.skillBattle?.engine?.momentum?.meterMax ?? 16;
+  const after = rr.state?.momentum ?? beforeMom, swing = after - beforeMom;
+  const oVerb = rr.oppDecl?.function || "press in", pVerb = playerDecl.function;
+  const oPhrase = SB_VERB[oVerb] || oVerb;
+  const gain = swing > 0.5 ? "you take the exchange" : swing < -0.5 ? "they take the exchange" : "neither gains — it's even";
+  const enBit = rr.deltas?.energy ? ` · you ${rr.deltas.energy}e` : "";
+  const hpBit = (rr.deltas?.health || 0) < 0 ? ` · you −${Math.abs(rr.deltas.health)} hp` : "";
+  const prox = after >= meterMax * 0.7 ? " · they're nearly done" : after <= -meterMax * 0.7 ? " · you're nearly overcome" : "";
+  if (scouting) return `👁 You read them — they ${oPhrase}. You give nothing away. Momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${prox}`;
+  const pDef = SB_DEFENSIVE.has(pVerb), oDef = SB_DEFENSIVE.has(oVerb);
+  const interaction = pDef && !oDef ? `they ${oPhrase} — you turn it aside`
+    : !pDef && oDef ? `they ${oPhrase} — your blow is turned aside`
+    : !pDef && !oDef ? `they ${oPhrase} — the blows meet and both scatter`
+    : `they ${oPhrase} — you both circle, testing`;
+  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name} · ${interaction} · ${gain} · momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}`;
+}
+
+// SNG-246 (Erik: "some output specifically going to the machine tab… I could gather it"): mirror each skill-battle
+// round's full telemetry to the machine tab's combat log — the rolls both sides made, the margins, the momentum
+// swing, energy/health deltas, and how (if) it ended. Dev-only (recordCombatRound is inert unless armed).
+function sbLogRound(enc, decl, rr, beforeMom, scouting) {
+  const p = rr.player, o = rr.opponent;
+  const num = (v) => Number.isFinite(v) ? Math.round(v * 10) / 10 : v;
+  recordCombatRound({
+    at: Date.now(),
+    opponent: enc.def?.opponent?.name || "opponent",
+    round: enc.state?.round ?? 0,
+    kind: scouting ? "read" : (rr._collapse ? "finisher" : "strike"),
+    you: { move: decl.name, fn: decl.function, tier: decl.tier, attr: decl.attribute, intensity: decl.intensity, roll: p ? { chance: num(p.chance), rolled: num(p.roll), margin: num(p.margin), matchup: num(p.matchup) } : null },
+    them: { move: rr.oppDecl?.name || rr.oppDecl?.function, fn: rr.oppDecl?.function, tier: rr.oppDecl?.tier, intensity: rr.oppDecl?.intensity, roll: o ? { chance: num(o.chance), rolled: num(o.roll), margin: num(o.margin), matchup: num(o.matchup) } : null },
+    momentum: { before: num(beforeMom), after: num(rr.state?.momentum), swing: num((rr.state?.momentum ?? 0) - beforeMom), winner: rr.roundWinner },
+    deltas: rr.deltas,
+    energyLeft: { you: character.energy, them: num(rr.state?.opponentEnergy) },
+    ended: rr.ended || false,
+    outcome: rr.outcome || null,
+    events: rr.events || [],
+    receipt: sbLastRoundReceipt
+  });
+}
 
 /** SNG-246 BUG1: the skill-battle round CONTROLS, rendered inside the play surface — the fog read, the intensity
  *  dial, the declarable skills, and the three ways (read / break / yield). The frame strip above already shows the
@@ -8391,6 +8469,7 @@ function skillBattlePanel() {
       <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
       ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${esc(JSON.stringify(fog.revealed.breakdown))}'>see their math</button>` : ""}</div>` : ""}` :
       `<div class="hint">You size each other up. Choose ONE move — or read them first.</div>`}</div>
+    ${sbLastRoundReceipt && st.round > 1 ? `<div class="sb-receipt">${esc(sbLastRoundReceipt)}</div>` : ""}
     ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
     <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
     <div class="sb-hint hint">Pick ONE thing this turn — it resolves, then the next. Type below to shape it in your own words.</div>
@@ -8447,6 +8526,7 @@ function renderSkillBattle(lastRound = null) {
  *  re-render the panel (fog view of what just happened) or end the contest. */
 function sbDeclare(skill, { intensity = "standard", scouting = false, finisher = false } = {}) {
   const enc = activeEnc(); if (!enc) return;
+  const beforeMom = enc.state?.momentum ?? 0; // SNG-246: for the per-round receipt (the swing this round)
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   const decl = { function: skill.function, tier: skill.tier || 1, attribute: skill.attribute || "practical", intensity, name: skill.name };
   let rr = skillBattleRound(enc.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
@@ -8470,6 +8550,8 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
     }
   }
   if (!scouting) sbLastPlayerFn = skill.function; // reading doesn't show them a real tendency
+  sbLastRoundReceipt = sbRoundReceipt(rr, decl, beforeMom, scouting); // SNG-246: SHOW what happened this round
+  sbLogRound(enc, decl, rr, beforeMom, scouting); // SNG-246 (Erik): mirror round telemetry to the machine tab
   character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas?.health || 0)));
   character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
   character.activeEncounter = { defId: enc.def.id, state: rr.state };
@@ -8505,12 +8587,20 @@ async function sbEnd(rr) {
     stalemate: `Neither of you can finish it — you both break, spent.`,
     incapacitated: `You fall, overcome.`
   }[rr.outcome] || "The contest ends.";
+  // SNG-246 (Erik: "ended inexplicably"): surface WHY. The deciding round's receipt + the reason the meter tipped,
+  // shown as a persistent aside AND fed to the GM so the aftermath prose describes the real finishing exchange
+  // (not a generic "the fight ends"). Cleared so it can't leak into the next fight.
+  const decidingLine = sbLastRoundReceipt || "";
+  const eventLine = (rr.events || []).slice(-1)[0] || "";
+  const reason = [decidingLine, `${outLine}`].filter(Boolean).join("  ·  ");
+  sbLastRoundReceipt = null;
   renderPlay(null, { thinking: "…" });
   // SNG-230 §6b: a collapse is a DECISIVE one-beat finish, not a worn-down win — narrate it as such.
   const finisherNote = rr._collapse ? " This was a single decisive finishing stroke — end it fast and hard, not as a drawn-out win." : "";
-  const result = await runGM({ resolution: null, playerInput: `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine}${finisherNote} Narrate the aftermath in one beat and return to the scene.)` });
-  if (result) renderPlay(result.turn, {});
-  else renderPlay(character.activeScene?.lastTurn || null, { aside: outLine });
+  const mechForGM = decidingLine ? ` The deciding exchange, mechanically: ${decidingLine}. ${eventLine}` : "";
+  const result = await runGM({ resolution: null, playerInput: `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine}${mechForGM}${finisherNote} Narrate the aftermath in one beat, describing how that final exchange landed, and return to the scene.)` });
+  if (result) renderPlay(result.turn, { aside: reason }); // keep the mechanical WHY visible alongside the GM's prose
+  else renderPlay(character.activeScene?.lastTurn || null, { aside: reason });
 }
 
 /** SNG-230 §6a (behavior): FLEE a fight → you enter a CHASE, not a teleport. Build the chase from the fight
@@ -8754,7 +8844,7 @@ function renderPlay(turn, opts = {}) {
 
   const banner = sceneImage(location, sceneState, { ratingLevel: viewerRatingLevel() });
   const time = readClock(character.clock);
-  let main = `<div class="play">
+  let main = `<div class="play${activeEnc()?.state?.mode === "skill_battle" ? " play-in-fight" : ""}">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
     <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}<span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span></div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
@@ -8899,6 +8989,10 @@ function renderPlay(turn, opts = {}) {
     // outcome, never re-rolls). Shown when there's real narration + a key (not on a degraded/opless beat).
     if (getApiKey() && turn.narration && !opts.degraded && !turn._retold) main += `<div class="turn-retell"><button class="opt" id="retell-rich" title="Re-tell this beat beautifully — the same events, a fuller telling. It never changes what happened.">✦ Tell it again, richer</button></div>`;
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
+    // SNG-246 (Erik: "the encounter should remove most of the normal actions… keep the ask the GM"): during a
+    // SKILL BATTLE the fight IS the option set (skillBattlePanel below) — the GM's stale story-choices are
+    // suppressed so they don't sit under the moves. Ask-GM + the free-type field stay.
+    if (activeEnc()?.state?.mode !== "skill_battle") {
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
     for (const c of turn.choices || []) {
       if (c.emergenceId && !validEmergenceId(character, CONTENT.emergence, CONTENT.rules, c.emergenceId)) c.emergenceId = null;
@@ -8942,6 +9036,7 @@ function renderPlay(turn, opts = {}) {
       }
       return `<div class="choice-wrap"><button class="choice" data-choice="${i}">${esc(c.label)}${abilityHtml}${senseHtml}</button>${gear}${panel}</div>`;
     }).join("")}</div>`;
+    } // end skill-battle choice suppression (SNG-246)
     // SNG-236 UX: the encounter's action buttons (flee/yield/attempt/stage/unlock/walk-away) NO LONGER render
     // as loose buttons here — they moved into the ⚙ Moves gear on the input row (encounterMovesPanel), grouped
     // with the player's ability-moves (ward/sense/strike by function family). The frame itself renders as the
@@ -8978,7 +9073,7 @@ function renderPlay(turn, opts = {}) {
     const flavors = ["beneficial", "benign", "beautiful", "dangerous", "theft", "chase", "fight"];
     main += `<div class="dev-panel"><div class="dev-title">🔧 Test encounters (dev only)</div><div class="dev-btns">${
       flavors.map(f => `<button class="dev-fire" data-fire="${f}">${f}</button>`).join("")
-    }</div><div class="dev-hint">Fires the flavor here (danger gate bypassed for testing). Fight/chase/dangerous show a decline/flee choice before anything starts.</div></div>`;
+    }<button class="dev-fire" data-fire-aggro="fight" title="SNG-246: fire a fight as the AGGRESSOR — the engage button reads 'Press the attack', not 'stand and meet it'">⚔ attack (you start it)</button></div><div class="dev-hint">Fires the flavor here (danger gate bypassed for testing). Fight/chase/dangerous show a decline/flee choice before anything starts. <b>⚔ attack</b> frames YOU as the aggressor. Each combat round now writes a receipt + machine-tab log (🔬 Machine → Combat rounds → Copy).</div></div>`;
   }
   main += `</div>`;
 
@@ -9021,6 +9116,7 @@ function renderPlay(turn, opts = {}) {
   }
   for (const btn of app.querySelectorAll("[data-travel]")) btn.onclick = () => travelTo(btn.dataset.travel);
   for (const btn of app.querySelectorAll("[data-fire]")) btn.onclick = () => { if (!busy) fireEncounter(btn.dataset.fire, { dev: true }); };
+  for (const btn of app.querySelectorAll("[data-fire-aggro]")) btn.onclick = () => { if (!busy) fireEncounter(btn.dataset.fireAggro, { dev: true, aggressor: true }); };
   for (const btn of app.querySelectorAll("[data-join]")) btn.onclick = async () => {
     if (busy) return;
     const c = CONTENT.companions[btn.dataset.join];

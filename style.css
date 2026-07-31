@@ -342,6 +342,9 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 
 /* ---------- play area ---------- */
 .play { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; min-height: 70vh; display: flex; flex-direction: column; }
+/* SNG-246 (Erik): during a skill battle the WHOLE interactive window carries the fight's red outline — you are
+   unmistakably in combat, not looking at a normal scene with a strip on top. */
+.play-in-fight { border-color: var(--danger); box-shadow: 0 0 0 1px var(--danger), 0 0 22px rgba(192,91,77,0.20); }
 .scene-banner { width: calc(100% + 48px); margin: -20px -24px 14px; border-radius: 10px 10px 0 0; max-height: 220px; object-fit: cover; display: block; }
 /* SNG-035 imagery */
 .cs-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 6px; }
@@ -865,6 +868,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-fog-line { font-size: 13px; line-height: 1.4; }
 .sb-log { margin-bottom: 8px; font-size: 12px; }
 .sb-log summary { cursor: pointer; color: var(--ink-dim); }
+/* SNG-246 (Erik): the per-round "what just happened" line — both moves + the interaction + the momentum swing. */
+.sb-receipt { font-family: var(--font-ui); font-size: 12.5px; line-height: 1.45; color: var(--ink); background: color-mix(in srgb, var(--danger) 10%, var(--panel2)); border-left: 3px solid var(--danger); border-radius: 4px; padding: 6px 9px; margin-bottom: 8px; }
 .sb-intensity { font-family: var(--font-ui); font-size: 12px; margin-bottom: 6px; display: flex; gap: 6px; align-items: center; }
 .sb-int { text-transform: capitalize; }
 .sb-int.on { border-color: var(--accent); color: var(--accent); }

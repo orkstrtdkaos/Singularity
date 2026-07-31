@@ -13,10 +13,25 @@
 
 const RING = [];
 const MAX = 24;          // last two-dozen model calls — a full scene's worth of turns and sub-calls
+const CRING = [];        // SNG-246 (Erik): skill-battle ROUNDS — pure-engine, no model call, but he wants them visible
+const CMAX = 40;         // a couple of long fights' worth of rounds
 let armed = false;
 let seq = 0;             // monotonic; ids stay stable after the ring shifts old entries out
+let cseq = 0;
 
 export function armDevCapture(on) { armed = !!on; }
+
+/** SNG-246: record one skill-battle round's telemetry for the machine tab. Erik plays test fights and copies
+ *  this back to diagnose "the fight ended inexplicably" — every round's rolls, momentum swing, and outcome. */
+export function recordCombatRound(entry) {
+  if (!armed) return null;
+  const id = String(++cseq);
+  CRING.push({ id, ...(entry || {}) });
+  while (CRING.length > CMAX) CRING.shift();
+  return id;
+}
+/** Newest-first snapshot of the combat-round log for the dev screen. */
+export function combatRounds() { return CRING.slice().reverse(); }
 
 /** Record one model call as it returns from the transport. Returns a stable id (or null when
  *  disarmed) so a caller can later annotate this exact exchange with its parsed result + ops. */
@@ -54,4 +69,4 @@ export function annotateLatest(task, patch) {
 
 /** Newest-first snapshot for the dev screen. A shallow copy so a render can't mutate the ring. */
 export function devCaptures() { return RING.slice().reverse(); }
-export function clearCaptures() { RING.length = 0; }
+export function clearCaptures() { RING.length = 0; CRING.length = 0; }

@@ -852,6 +852,9 @@ img[data-lightbox] { cursor: zoom-in; }
 .roll-chance:hover, .roll-chance:focus { color: var(--accent); outline: none; }
 
 /* SNG-098 C — the skill-battle contest panel */
+/* SNG-246 BUG1: the skill battle now renders IN the play surface (the option area), not a separate screen — a
+   bordered panel that sits above the input, distinct from the narration. The sub-styles below are reused. */
+.sb-panel { border: 1px solid var(--danger); border-radius: 10px; background: linear-gradient(180deg, rgba(192,91,77,0.08), var(--panel2)); padding: 10px 12px; margin: 8px 0 10px; }
 .sb-screen h2 { margin-bottom: 4px; }
 .sb-opponent { font-size: 14px; color: var(--ink); margin-bottom: 8px; }
 .sb-meter { position: relative; height: 14px; border: 1px solid var(--border); border-radius: 7px; background: var(--panel2); overflow: hidden; margin-bottom: 6px; }

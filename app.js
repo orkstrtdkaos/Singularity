@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.294";
+const APP_VERSION = "1.8.295";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4772,8 +4772,11 @@ async function onChoice(choice) {
   }
 
   // active encounter: map the receipt onto encounter state (engine-owned)
+  // SNG-246 BUG1: a SKILL BATTLE is driven by sbDeclare (momentum/opponent-sheet state), NEVER duelRound (which
+  // reads opponentHealth and would corrupt it — the two resolvers aren't interchangeable). Its inputs come from
+  // the skill-battle panel (sbDeclare direct) + the onFreeform intercept below; this block is the CLASSIC path.
   const enc = activeEnc();
-  if (enc) {
+  if (enc && enc.state?.mode !== "skill_battle") {
     const opts = { flee: choice.encounterAction === "flee", yield: choice.encounterAction === "yield", abandon: choice.encounterAction === "abandon", walkAway: choice.encounterAction === "walkAway" };
     let rr = null;
     if (enc.def.type === "duel") rr = duelRound(enc.state, enc.def, resolution, CONTENT.rules, opts);
@@ -4864,6 +4867,17 @@ async function onChoice(choice) {
 async function onFreeform(text) {
   if (busy || !text.trim()) return;
   if (character._pendingIntent) { renderPlay(character.activeScene?.lastTurn || null, { aside: "Answer the moment of intent first — it's waiting on you." }); return; } // SNG-145
+  // SNG-246 BUG1: in a SKILL BATTLE, a typed move is declared through sbDeclare — the skill-battle round driver —
+  // never the freeform→parseIntent→onChoice→duelRound path (that would corrupt the momentum state, double-spend
+  // energy, and needs the model). A craft the character owns, named in the text, is declared as that craft; else a
+  // plain strike. The structured panel carries the full move set; this just keeps the free field open + API-free.
+  const sbEnc = activeEnc();
+  if (sbEnc?.state?.mode === "skill_battle") {
+    const t = text.toLowerCase();
+    const sk = playerBattleSkills().find(s => s.name && t.includes(String(s.name).toLowerCase())) || { id: "_strike", function: "strike", tier: 1, attribute: "physical", name: text.slice(0, 60) };
+    sbDeclare(sk, { intensity: sbIntensity });
+    return;
+  }
   lastPlayerText = text;
   renderPlay(null, { thinking: "Reading your intent…", playerBeat: { label: text } });
   const location = CONTENT.locations[character.currentLocationId];
@@ -8342,25 +8356,28 @@ function playerBattleSkills() {
   return out.slice(0, 12);
 }
 
-function renderSkillBattle(lastRound = null) {
+// SNG-246 BUG1: the skill battle no longer takes over a SEPARATE screen — it renders IN the play surface (the
+// SNG-230 frame strip on top carries the kind/momentum-meter/win/exits; these controls live in the option area).
+// sbLastRound carries the previous round's fog across renders (renderPlay has no lastRound of its own).
+let sbLastRound = null;
+
+/** SNG-246 BUG1: the skill-battle round CONTROLS, rendered inside the play surface — the fog read, the intensity
+ *  dial, the declarable skills, and the three ways (read / break / yield). The frame strip above already shows the
+ *  momentum meter + win-condition, so this is just the inputs. Returns "" when not in a skill battle. */
+function skillBattlePanel() {
   const enc = activeEnc();
-  if (!enc || enc.state?.mode !== "skill_battle") { renderPlay(character.activeScene?.lastTurn || null, {}); return; }
-  const st = enc.state, def = enc.def, sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
-  const meterMax = sb.momentum?.meterMax ?? 10;
+  if (!enc || enc.state?.mode !== "skill_battle") return "";
+  const st = enc.state, def = enc.def, sb = CONTENT.skillBattle.engine;
   const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
-  const scout = !!lastRound?._scout;
-  const fog = lastRound?.opponent ? senseOpponent(character, lastRound.opponent, CONTENT.rules, sb, { scouting: scout, buyTier: scout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods }) : null;
+  const scout = !!sbLastRound?._scout;
+  // fog only after the first exchange (round > 1) — a fresh fight has nothing revealed yet, and this avoids a
+  // stale prior-fight read leaking into a new one's opening beat.
+  const fog = (sbLastRound?.opponent && st.round > 1) ? senseOpponent(character, sbLastRound.opponent, CONTENT.rules, sb, { scouting: scout, buyTier: scout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods }) : null;
   const skills = playerBattleSkills();
   window._sbSkills = skills; // handler lookup
-  const momPct = Math.round(((st.momentum + meterMax) / (2 * meterMax)) * 100);
   const oppTired = st.opponentEnergy != null && fog && fog.tier >= 2 ? (st.opponentEnergy < 15 ? "spent" : st.opponentEnergy < 40 ? "tiring" : "still fresh") : null;
-  chrome(`<div class="screen sb-screen" style="max-width:640px">
-    <h2>⚔ ${esc(def.name || "The contest")}</h2>
-    <div class="sb-opponent">${esc(def.opponent?.name || "your opponent")}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""}</div>
-    <div class="sb-meter" title="Momentum — fill it to prevail; empty it and you are overcome.">
-      <div class="sb-meter-fill" style="width:${Math.max(0, Math.min(100, momPct))}%"></div><div class="sb-meter-mid"></div>
-    </div>
-    <div class="sb-vitals">You: ${character.health}/${character.maxHealth} hp · ${character.energy} energy</div>
+  return `<div class="sb-panel">
+    <div class="sb-opponent">${esc(def.opponent?.name || "your opponent")}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
     <div class="sb-fog">${fog ? `
       <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
       ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${esc(JSON.stringify(fog.revealed.breakdown))}'>see their math</button>` : ""}</div>` : ""}` :
@@ -8368,17 +8385,33 @@ function renderSkillBattle(lastRound = null) {
     ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
     <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
     <div class="sb-skills">${skills.map((s, i) => `<button class="btn secondary sb-skill" data-sbskill="${i}" style="display:block; width:100%; text-align:left; margin:4px 0">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span></button>`).join("")}</div>
-    <div class="sb-actions" style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
+    <div class="sb-actions" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap">
       <button class="btn secondary" id="sb-read" title="Spend the round reading them — no attack, but you see their next move more clearly">👁 Read them</button>
       <button class="btn secondary" id="sb-flee">Break away</button>
       <button class="btn secondary" id="sb-yield">Yield</button>
     </div>
-  </div>`);
-  for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(lastRound); };
+  </div>`;
+}
+
+/** SNG-246 BUG1: wire the skill-battle panel's controls (renderPlay calls this after chrome() when in a skill
+ *  battle). Same handlers the old separate screen had — sbDeclare drives every round; NEVER duelRound. */
+function wireSkillBattlePanel() {
+  const enc = activeEnc();
+  if (!enc || enc.state?.mode !== "skill_battle") return;
+  const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
+  for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(sbLastRound); };
   for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => sbDeclare(window._sbSkills[Number(b.dataset.sbskill)], { intensity: sbIntensity });
-  document.getElementById("sb-read").onclick = () => sbDeclare({ function: "shield", tier: 1, attribute: "mental", name: "reading them" }, { intensity: "conserve", scouting: true });
-  document.getElementById("sb-flee").onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE, not a quick roll
-  document.getElementById("sb-yield").onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb, steps, yield: true }));
+  const rd = document.getElementById("sb-read"); if (rd) rd.onclick = () => sbDeclare({ function: "shield", tier: 1, attribute: "mental", name: "reading them" }, { intensity: "conserve", scouting: true });
+  const fl = document.getElementById("sb-flee"); if (fl) fl.onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE
+  const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb, steps, yield: true }));
+}
+
+/** SNG-246 BUG1: renderSkillBattle is now a THIN ALIAS — there is no separate skill-battle screen. It carries the
+ *  round's fog forward (sbLastRound) and renders the PLAY surface, which draws skillBattlePanel() in place. Every
+ *  legacy call site (dev/reload/engage/chase-refight) + sbDeclare's re-render now land on the one takeover. */
+function renderSkillBattle(lastRound = null) {
+  sbLastRound = lastRound;
+  renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
 /** Resolve one declared round: apply the player's health/energy attrition, advance the state, and either
@@ -8895,7 +8928,10 @@ function renderPlay(turn, opts = {}) {
         <button class="gambit-hint-x" id="gambit-hint-x" title="Not now">×</button></div>`;
     }
     // SNG-236 UX: while an encounter is live, the ⚙ Moves gear opens the grouped move palette above the input.
-    if (activeEnc() && movesOpen) main += encounterMovesPanel();
+    // SNG-246 BUG1: a SKILL BATTLE renders its structured controls (fog/intensity/skills/read/break/yield) HERE,
+    // in the play surface — no separate screen. It's always shown (the fight IS the option set), not gear-gated.
+    if (activeEnc()?.state?.mode === "skill_battle") main += skillBattlePanel();
+    else if (activeEnc() && movesOpen) main += encounterMovesPanel();
     main += `<div class="freeform">
       <div class="mode-chips">
         <button id="mode-act" class="mode-chip ${askMode ? "" : "active"}" title="Act in the scene">Act</button>
@@ -8903,7 +8939,7 @@ function renderPlay(turn, opts = {}) {
       </div>
       <input id="freeform-input" placeholder="${activeEnc() && !askMode ? "Describe your move — the encounter's rules bind it…" : askMode ? "Ask the GM anything — context, rules, what you'd know…" : "Or do something else — describe it…"}" ${busy ? "disabled" : ""}>
       <button id="freeform-go" ${busy ? "disabled" : ""}>${askMode ? "Ask" : "Act"}</button>
-      ${activeEnc() ? `<button id="moves-open" class="mode-toggle ${movesOpen ? "apt" : ""}" title="Encounter moves — grouped by family (ward / sense / strike …) + the ways out. Rules enforced." ${busy ? "disabled" : ""}>⚙ Moves</button>` : ""}
+      ${activeEnc() && activeEnc().state?.mode !== "skill_battle" ? `<button id="moves-open" class="mode-toggle ${movesOpen ? "apt" : ""}" title="Encounter moves — grouped by family (ward / sense / strike …) + the ways out. Rules enforced." ${busy ? "disabled" : ""}>⚙ Moves</button>` : ""}
       ${profile?.narrationTier !== "rich" ? `<button id="rich-toggle" class="mode-toggle ${_richNextTurn ? "apt" : ""}" title="Tell THIS next beat richly — a fuller, more vivid telling (SNG-242). One beat; set your default in Settings." ${busy ? "disabled" : ""}>✦ Rich</button>` : ""}
       <button id="gambit-open" class="mode-toggle ${apt ? "apt" : ""}" title="Plan a multi-step gambit" ${busy ? "disabled" : ""}>⚙ Plan</button></div>`;
   }
@@ -9144,6 +9180,7 @@ function renderPlay(turn, opts = {}) {
   // (parseIntent derives the roll params; the active encounter's rules bind), the exits/primary via [data-encact].
   const movesBtn = document.getElementById("moves-open");
   if (movesBtn) movesBtn.onclick = () => { movesOpen = !movesOpen; renderPlay(turn, opts); };
+  wireSkillBattlePanel(); // SNG-246 BUG1: wire the in-place skill-battle controls when a skill battle is active (no-op otherwise)
   for (const btn of app.querySelectorAll("[data-moveab]")) btn.onclick = () => {
     if (busy) return;
     const ab = fullCatalog()[btn.dataset.moveab];

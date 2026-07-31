@@ -61,7 +61,7 @@
       "default": 0
     },
     "intensityLevels": ["conserve", "standard", "surge"],
-    "momentum": { "meterMax": 10, "marginScale": 0.5, "surgeCrushEndsIt": 8, "note": "bidirectional -meterMax..+meterMax; a round shifts it toward the winner by round-margin * marginScale; reaching +/-meterMax resolves. A single round-margin >= surgeCrushEndsIt ends it in one blow." },
+    "momentum": { "meterMax": 16, "marginScale": 0.5, "surgeCrushEndsIt": 16, "note": "SNG-246 (Erik): combat is TURN-BY-TURN — you pick ONE thing and resolve it, then the next. meterMax 16 (was 10) makes a fight several exchanges, not one; surgeCrushEndsIt 16 (was 8) means a single round no longer instantly ends it — only a truly overwhelming blow, or the deliberate ⚡ Finish-it, ends it fast. bidirectional -meterMax..+meterMax; a round shifts it toward the winner by round-margin * marginScale; reaching +/-meterMax resolves. DIAL: Aevi/Erik tune to taste." },
     "attrition": { "outOfEnergyLosesContest": true, "note": "a side that cannot pay a round's energy cost can only Conserve; at 0 energy it forfeits the contest even if ahead on rolls — attrition is the second win condition." },
     "opponentPolicy": {
       "note": "deterministic + seeded — the ENGINE picks the opponent's skill+intensity, never the narrative GM. Behind on momentum -> press (Surge); ahead -> pace (Conserve); tacticTags bias it. Skill pick: the function that matches up best against the player's last-SHOWN tendency (only what fog let them reveal to the engine's memory of the player).",

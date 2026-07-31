@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.295";
+const APP_VERSION = "1.8.296";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8374,24 +8374,46 @@ function skillBattlePanel() {
   // stale prior-fight read leaking into a new one's opening beat.
   const fog = (sbLastRound?.opponent && st.round > 1) ? senseOpponent(character, sbLastRound.opponent, CONTENT.rules, sb, { scouting: scout, buyTier: scout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods }) : null;
   const skills = playerBattleSkills();
-  window._sbSkills = skills; // handler lookup
+  window._sbSkills = skills; // handler lookup (data-sbskill = index into this flat list)
   const oppTired = st.opponentEnergy != null && fog && fog.tier >= 2 ? (st.opponentEnergy < 15 ? "spent" : st.opponentEnergy < 40 ? "tiring" : "still fresh") : null;
+  // SNG-246 (Erik): group the moves by INTENT-family — you can do a lot of things a lot of ways, but each turn you
+  // pick ONE. Same family grouping the ⚙ Moves gear uses, with combat-intent labels; free-text shaping is the field
+  // below (a typed move → sbDeclare, API-free). "⚡ Finish it" is the DELIBERATE one-shot (below), not a normal strike.
+  const byFam = {};
+  skills.forEach((s, i) => { const f = sbFamilyOf(s); (byFam[f] = byFam[f] || []).push({ s, i }); });
+  const groups = FUNCTION_FAMILIES.filter(f => byFam[f]?.length).map(f => {
+    const chips = byFam[f].map(({ s, i }) => `<button class="btn secondary sb-skill" data-sbskill="${i}" style="display:block; width:100%; text-align:left; margin:3px 0; border-left:3px solid ${FAMILY_COLOR[f]}">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span></button>`).join("");
+    return `<div class="moves-group"><div class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())}</div>${chips}</div>`;
+  }).join("");
   return `<div class="sb-panel">
     <div class="sb-opponent">${esc(def.opponent?.name || "your opponent")}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
     <div class="sb-fog">${fog ? `
       <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
       ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${esc(JSON.stringify(fog.revealed.breakdown))}'>see their math</button>` : ""}</div>` : ""}` :
-      `<div class="hint">You size each other up. Strike — or read them first.</div>`}</div>
+      `<div class="hint">You size each other up. Choose ONE move — or read them first.</div>`}</div>
     ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
     <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
-    <div class="sb-skills">${skills.map((s, i) => `<button class="btn secondary sb-skill" data-sbskill="${i}" style="display:block; width:100%; text-align:left; margin:4px 0">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span></button>`).join("")}</div>
+    <div class="sb-hint hint">Pick ONE thing this turn — it resolves, then the next. Type below to shape it in your own words.</div>
+    <div class="sb-skills">${groups}</div>
     <div class="sb-actions" style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap">
+      <button class="btn" id="sb-finish" title="Go for a DECISIVE finishing blow — an all-or-nothing stroke that can END it in one beat (a clean hit collapses it; a botch hardens it). Not a normal round — the gamble.">⚡ Finish it</button>
       <button class="btn secondary" id="sb-read" title="Spend the round reading them — no attack, but you see their next move more clearly">👁 Read them</button>
       <button class="btn secondary" id="sb-flee">Break away</button>
       <button class="btn secondary" id="sb-yield">Yield</button>
     </div>
   </div>`;
 }
+
+// SNG-246 (Erik): the intent-family a battle skill belongs to (for the grouped panel). The steel-and-wit
+// fallbacks are HARM (a strike) / PROTECT (a guard); an ability's own function-family otherwise.
+function sbFamilyOf(s) {
+  if (s.id === "_strike") return "HARM";
+  if (s.id === "_guard") return "PROTECT";
+  const ab = fullCatalog()[s.id];
+  return (ab ? familiesOfAbility(ab, FN_INDEX)[0] : null) || FN_INDEX?.verbToFamily?.[s.function] || "SHAPE";
+}
+// Combat-intent labels for the families (Erik's "read/sense, hinder, harm, position…"); falls back to the family name.
+const SB_FAM_LABEL = { KNOW: "read / sense", HARM: "harm", INFLUENCE: "hinder / sway", MOVE: "position", PROTECT: "guard", RESTORE: "mend", SHAPE: "shape", SUSTAIN: "sustain" };
 
 /** SNG-246 BUG1: wire the skill-battle panel's controls (renderPlay calls this after chrome() when in a skill
  *  battle). Same handlers the old separate screen had — sbDeclare drives every round; NEVER duelRound. */
@@ -8402,6 +8424,13 @@ function wireSkillBattlePanel() {
   for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(sbLastRound); };
   for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => sbDeclare(window._sbSkills[Number(b.dataset.sbskill)], { intensity: sbIntensity });
   const rd = document.getElementById("sb-read"); if (rd) rd.onclick = () => sbDeclare({ function: "shield", tier: 1, attribute: "mental", name: "reading them" }, { intensity: "conserve", scouting: true });
+  // SNG-246 (Erik): the DELIBERATE one-shot — go for a decisive finish with your best harm craft. This is the ONLY
+  // move that can collapse the fight in one beat (§6b); a normal strike is a normal round now (turn-by-turn combat).
+  const fin = document.getElementById("sb-finish"); if (fin) fin.onclick = () => {
+    const harm = (window._sbSkills || playerBattleSkills()).filter(s => sbFamilyOf(s) === "HARM").sort((a, b) => (b.tier || 1) - (a.tier || 1))[0]
+      || { id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "a finishing strike" };
+    sbDeclare(harm, { intensity: "surge", finisher: true });
+  };
   const fl = document.getElementById("sb-flee"); if (fl) fl.onclick = () => beginChaseFromFight(activeEnc()?.def); // SNG-230 §6a: FLEE a fight → a real CHASE
   const yl = document.getElementById("sb-yield"); if (yl) yl.onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb, steps, yield: true }));
 }
@@ -8416,7 +8445,7 @@ function renderSkillBattle(lastRound = null) {
 
 /** Resolve one declared round: apply the player's health/energy attrition, advance the state, and either
  *  re-render the panel (fog view of what just happened) or end the contest. */
-function sbDeclare(skill, { intensity = "standard", scouting = false } = {}) {
+function sbDeclare(skill, { intensity = "standard", scouting = false, finisher = false } = {}) {
   const enc = activeEnc(); if (!enc) return;
   const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
   const decl = { function: skill.function, tier: skill.tier || 1, attribute: skill.attribute || "practical", intensity, name: skill.name };
@@ -8426,7 +8455,9 @@ function sbDeclare(skill, { intensity = "standard", scouting = false } = {}) {
   // foe's collapse floor. A strong swing on the right craft ends it; a lesser swing runs the meter unchanged
   // (§89 — the ordinary rounds are untouched; this only adds an early-finish on a decisive blow, and the great
   // ones (epic/regional) have no floor, so they never collapse). Skipped while scouting (a read isn't a strike).
-  if (!rr.ended && !scouting && frameCollapsible(enc.def)) {
+  // SNG-246 (Erik: "chose hunter's strike and the fight ended — so frustrating"): the one-beat collapse now fires
+  // ONLY on the DELIBERATE "⚡ Finish it" (finisher), never a normal strike — so ordinary combat is turn-by-turn.
+  if (!rr.ended && !scouting && finisher && frameCollapsible(enc.def)) {
     const fam = FN_INDEX?.verbToFamily?.[skill.function] || null;
     const swing = (rr.state?.momentum ?? 0) - (enc.state?.momentum ?? 0);
     const meterMax = sb.momentum?.meterMax ?? 10;

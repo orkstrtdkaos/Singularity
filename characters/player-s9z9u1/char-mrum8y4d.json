@@ -73,9 +73,9 @@
   },
   "attunement": 4,
   "maxHealth": 45,
-  "health": 38,
+  "health": 31,
   "maxEnergy": 115,
-  "energy": 52,
+  "energy": 42,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -204,127 +204,141 @@
         "player": null,
         "summary": "The stranger returned from the willows and squared off at the confluence bank — a hostile meeting, no words, still a choice.",
         "narration": "The stranger does not stay gone.\n\nThey step back out of the willows ten paces upstream — same bark-colored coat, same flat evaluating eyes — and this time they are not holding the Waterskin. They are holding nothing at all, which is somehow more considered than a drawn blade. They plant their feet in the soft bank and face Loki across the ground between them.\n\nCy stops moving. The lens narrows to a tight iris and does not expand.\n\nThe stranger says nothing, but the body says plenty: squared shoulders, weight forward, the particular stillness of someone who has made a decision and is waiting for you to catch up to it. Whatever the scratch-mark meant, whatever the yielding meant, something about Loki following brought them back. They are not running. They are not speaking. They are beginning."
+      },
+      {
+        "player": null,
+        "summary": "The stranger put Loki on the ground at the confluence and asked, plainly and without malice, why they followed.",
+        "narration": "The stranger closes the distance faster than the gap between you suggested was possible. There is no preamble and no wasted motion — a hand at your collar, a foot behind your ankle, and the ground arrives hard through your shoulder. The mud takes the impact with a cold, wet slap. You lie there for a moment with the breath knocked out of you and the smell of river silt close. Cy backs three precise steps. The lens is wide open, unblinking. The stranger stands over you and looks down. Their expression has not changed — the same flat, evaluating look, only now you are the thing being evaluated from a different angle. They do not offer a hand. After a breath, they crouch — not to help, but to bring their face level with yours — and they say, quietly and without heat, 'You followed. Why?' The question sits in the cool spring air between you. The scratch on the stone, the Waterskin, the yielding, the return — all of it was leading to this. They are waiting."
       }
     ],
     "lastTurn": {
-      "narration": "The stranger does not stay gone.\n\nThey step back out of the willows ten paces upstream — same bark-colored coat, same flat evaluating eyes — and this time they are not holding the Waterskin. They are holding nothing at all, which is somehow more considered than a drawn blade. They plant their feet in the soft bank and face Loki across the ground between them.\n\nCy stops moving. The lens narrows to a tight iris and does not expand.\n\nThe stranger says nothing, but the body says plenty: squared shoulders, weight forward, the particular stillness of someone who has made a decision and is waiting for you to catch up to it. Whatever the scratch-mark meant, whatever the yielding meant, something about Loki following brought them back. They are not running. They are not speaking. They are beginning.",
-      "sceneSummary": "The stranger returned from the willows and squared off at the confluence bank — a hostile meeting, no words, still a choice.",
+      "narration": "The stranger closes the distance faster than the gap between you suggested was possible. There is no preamble and no wasted motion — a hand at your collar, a foot behind your ankle, and the ground arrives hard through your shoulder. The mud takes the impact with a cold, wet slap. You lie there for a moment with the breath knocked out of you and the smell of river silt close. Cy backs three precise steps. The lens is wide open, unblinking. The stranger stands over you and looks down. Their expression has not changed — the same flat, evaluating look, only now you are the thing being evaluated from a different angle. They do not offer a hand. After a breath, they crouch — not to help, but to bring their face level with yours — and they say, quietly and without heat, 'You followed. Why?' The question sits in the cool spring air between you. The scratch on the stone, the Waterskin, the yielding, the return — all of it was leading to this. They are waiting.",
+      "sceneSummary": "The stranger put Loki on the ground at the confluence and asked, plainly and without malice, why they followed.",
       "choices": [
         {
-          "label": "Press in — meet them on the bank before they can set their ground.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "risky"
-          ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": "a-hostile-meeting"
-        },
-        {
-          "label": "Hold ground and read them — study their posture and intent before committing.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "defend",
-            "careful",
-            "study"
-          ],
-          "abilityId": null,
-          "trivial": false,
-          "encounterId": "a-hostile-meeting"
-        },
-        {
-          "label": "Give them something wrong to read — a false opening, an apparent hesitation, let them commit to a mistake.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "feint",
-            "deceive"
-          ],
-          "abilityId": "the_wrong_reality",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": "a-hostile-meeting"
-        },
-        {
-          "label": "Step back and raise a hand — offer to end this before it goes further.",
+          "label": "Tell them the truth — you followed because of the scratch-mark and you want to know what it means.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "calm",
             "negotiate"
           ],
           "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Give them the shape of an answer — not the scratch-mark, but something true enough: you followed because they left, and leaving after a thing like that is itself a kind of invitation.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": -0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": "the_better_story",
+          "energyCost": 1,
           "trivial": false,
-          "encounterId": "a-hostile-meeting"
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read what the stranger is actually building here — what version of this moment are they holding, and where is the seam in it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stay down a moment longer. Get your breath. Then sit up slowly and say nothing — let them fill the silence.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": -3,
+        "energy": 0
+      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, two small rivers meeting in a low hollow ringed with grey-barked willows. Loki stands at the bank. The stranger has stepped back out of the willows ten paces upstream and planted their feet, facing Loki across open ground.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light. Loki is on their back in the cold mud at the bank. The stranger crouches over them, face level, waiting for an answer.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "Motionless on the mud near the flat stone, lens narrowed to a tight iris, tracking the stranger without moving."
+            "state": "Three steps back, lens wide open, tracking the stranger without moving."
           },
           {
             "name": "The Stranger",
-            "state": "Squared off at the bank, empty-handed, weight forward — still, decided, waiting."
+            "state": "Crouching over Loki, expression flat and evaluating, asking 'Why?'"
           }
         ],
         "objects": [
-          "flat river stone with a fresh pale scratch-mark, the Waterskin now set on top of it",
+          "flat river stone with fresh pale scratch-mark, Waterskin set on top of it",
           "boot-prints in mud ending at the water's edge",
-          "mud smear on a root confirming the stranger's earlier passage",
-          "bent stems and a snapped low branch marking the brush entry"
+          "mud smear on a root confirming earlier passage",
+          "bent stems and snapped low branch marking the brush entry"
         ],
         "threads": [
-          "The scratch-mark on the stone is hidden beneath the Waterskin — its meaning still unknown.",
-          "The stranger returned and is squaring off — their purpose still unspoken.",
-          "The three-hundred-year tree about to fruit, and the missing person it was planted for.",
-          "The planting is done; the orchard record holds the made name."
+          "The scratch-mark on the stone is still hidden beneath the Waterskin — its meaning unspoken.",
+          "The stranger's question hangs in the air: 'Why?'",
+          "The stranger's purpose here — beyond this confrontation — is still unspoken.",
+          "The three-hundred-year tree about to fruit and the missing person it was planted for."
         ]
       },
-      "encounterOps": [
-        {
-          "op": "tactic",
-          "tag": "press-in"
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a tense return and square-off at the confluence bank"
+        "why": "A brief, sharp confrontation at the bank — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light, two small rivers meeting in a low hollow ringed with grey-barked willows. Loki stands at the bank. The stranger has stepped back out of the willows ten paces upstream and planted their feet, facing Loki across open ground.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light. Loki is on their back in the cold mud at the bank. The stranger crouches over them, face level, waiting for an answer.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "Motionless on the mud near the flat stone, lens narrowed to a tight iris, tracking the stranger without moving."
+          "state": "Three steps back, lens wide open, tracking the stranger without moving."
         },
         {
           "name": "The Stranger",
-          "state": "Squared off at the bank, empty-handed, weight forward — still, decided, waiting."
+          "state": "Crouching over Loki, expression flat and evaluating, asking 'Why?'"
         }
       ],
       "objects": [
-        "flat river stone with a fresh pale scratch-mark, the Waterskin now set on top of",
+        "flat river stone with fresh pale scratch-mark, Waterskin set on top of it",
         "boot-prints in mud ending at the water's edge",
-        "mud smear on a root confirming the stranger's earlier passage",
-        "bent stems and a snapped low branch marking the brush entry"
+        "mud smear on a root confirming earlier passage",
+        "bent stems and snapped low branch marking the brush entry"
       ],
       "threads": [
-        "The scratch-mark on the stone is hidden beneath the Waterskin — its meaning still unknown.",
-        "The stranger returned and is squaring off — their purpose still unspoken.",
-        "The three-hundred-year tree about to fruit, and the missing person it was planted for.",
-        "The planting is done; the orchard record holds the made name."
+        "The scratch-mark on the stone is still hidden beneath the Waterskin — its meaning unspoken.",
+        "The stranger's question hangs in the air: 'Why?'",
+        "The stranger's purpose here — beyond this confrontation — is still unspoken.",
+        "The three-hundred-year tree about to fruit and the missing person it was planted for."
       ]
     }
   },
@@ -932,7 +946,7 @@
     "lastSharedReadAt": "2026-07-31T14:44:42.398Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 13,
+    "turnsSinceOffer": 14,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1882,8 +1896,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785509230301,
-  "rev": 194,
+  "updatedAt": 1785509614631,
+  "rev": 198,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2384,7 +2398,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 14
+    "the_quickwood": 15
   },
   "opLossPending": false,
   "sessions": [
@@ -2423,10 +2437,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-31T14:12:25.631Z",
-      "lastAt": "2026-07-31T14:47:10.300Z",
+      "lastAt": "2026-07-31T14:53:34.630Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -2464,13 +2478,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 94,
-    "choices": 94,
-    "characterDeltas": 41,
-    "scene": 94,
+    "sceneSummary": 95,
+    "choices": 95,
+    "characterDeltas": 42,
+    "scene": 95,
     "placeUpdates": 12,
     "codexUpdates": 75,
-    "timeOps": 93,
+    "timeOps": 94,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 21,
@@ -2486,7 +2500,7 @@
     "ledgerEvents": 1,
     "newEncounter": 1
   },
-  "_opTurns": 94,
+  "_opTurns": 95,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2752,53 +2766,7 @@
       }
     }
   },
-  "activeEncounter": {
-    "defId": "re-re_raider_duel",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-re_raider_duel",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [],
-      "opponentHealth": 6,
-      "tactic": "press-in",
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the aggressor",
-        "attributes": {
-          "practical": 4,
-          "physical": 4,
-          "mental": 4,
-          "social": 4
-        },
-        "energy": 94,
-        "maxEnergy": 94,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 3,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 3,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 94
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"

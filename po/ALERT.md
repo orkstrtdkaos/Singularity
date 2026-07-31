@@ -1,5 +1,34 @@
 # PO ALERT
 
+> ## [CCODE-39 complete_pending_review — CCode, 2026-07-31] Energy is a STATE, not a verdict + Erik's round-restructure SCOPED (v1.8.303 `b31ca93c`)
+> Erik sent a substantial combat-design message mid-session. I built the one piece that was contained and
+> unambiguous, and **scoped the rest rather than half-building a redesign while he's playtesting.**
+> **BUILT — energy no longer ends a fight.** *"If energy is depleted it shouldn't stop a fight cold… that is a yield
+> option, but people can fight on with simple strikes and defends, or use an item to restore energy."* Exhaustion no
+> longer resolves the contest for either side. A spent side's CRAFTS stop answering (`degradeIfSpent` → a guard stays
+> a guard, everything else becomes a bare strike, tier 1, conserve, no weave) — you fight on, without your crafts.
+> The state is surfaced with **Yield named as a choice**, not an ending the engine imposed; the opponent's spent
+> state shows too. The old SNG-098 "runs out of energy → forfeits" test was **rewritten, not deleted**.
+> **Measured the risk of removing an exit:** 1200 fights/threat-level, 60-round cap → **0% unresolved**, fights still
+> terminate. Mix is now opponent_yielded 76-84% / player_down (HEALTH) 16-24%. **COST FLAGGED: the peer-fight p90
+> tail grew ~20 → ~41 rounds** (median 14-16). One-number lever if it annoys: `breakAtPressure` 2 → 1.
+> **NOT BUILT — needs Erik's/Aevi's call.** The rest is a real redesign of the round:
+> **(A) Structured rounds** (setup phase → action phase, so *"sensing doesn't give the opponent a free hit"*) — the
+> biggest and best change; fixes a genuine unfairness. Changes `battleRound`'s signature and every caller, needs an
+> opponent setup phase too, and makes the panel two-stage. Erik's *"sustaining effects don't tick until the full
+> round's actions are complete"* becomes a one-liner once a round has a defined end.
+> **(B) Bonus action on a successful setup** — cheap and in-spirit, but depends on (A).
+> **(C) Items in combat** (dagger vs axe, metal vs energy shield, throw a chemical, drink a potion) — INDEPENDENT of
+> A/B, makes inventory functional, and is the honest answer to being spent. `equipmentBonus` already exists for
+> normal play; combat just doesn't read it. Needs a small content pass for combat fields on items.
+> **RECOMMENDATION: A → B → C, and A DESERVES A SPEC before I build it** — it reshapes every round and I'd rather
+> implement Erik's intent than my guess. **Four questions I need answered for (A):** 1) does the setup phase cost
+> energy or is it free? 2) can you skip setup and go straight to an action? 3) does the OPPONENT get a setup phase
+> (I think yes, or the player gains free tempo every round)? 4) is a bonus action a full action or a restricted set?
+> **C (items) I can build with no spec — say the word and I'll take it next while you decide on A.**
+> Results: po/results/20260731_CCODE-39_energy_is_a_state_plus_round_structure_scope.md
+
+
 > ## [CCODE-38 complete_pending_review — CCode, 2026-07-31] MOMENTUM IS A MODIFIER, NOT THE EXIT + 4 playtest fixes (v1.8.302 `c7ac0351`)
 > Erik, decisive: *"The momentum mechanic is ending fights it shouldn't… i took one hit - still tons of energy and
 > health… momentum should be a modifier mechanic not the primary exit encounter metric."* He was at **37/45 hp and

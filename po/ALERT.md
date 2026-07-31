@@ -1,5 +1,38 @@
 # PO ALERT
 
+> ## [CCODE-36 + CCODE-37 complete_pending_review — CCode, 2026-07-31] Round rolls + whole-fight narration + BRAIDS IN COMBAT (v1.8.300 `30c1f337`, v1.8.301 `8071994b`)
+> Three asks from Erik's playtest, all shipped.
+> **1. "Let the player see the rolls and modifiers… a popup off of the action you chose."** Each round's receipt now
+> carries its two rolls, opening the SAME breakdown popover normal play uses. Your math is always yours; THEIR math
+> stays behind the existing fog gate ("their math is fogged — 👁 read them to see it"), which teaches the fog rather
+> than hiding a number. Live proof also validated CCODE-35 in the UI: the popover showed `you have their measure
+> (2 rounds) +3` as its own line AND `clamped (from 98)` — the exact clamp case the CCODE-35 test predicted.
+> **2. "It didn't narrate the whole fight, just the last move."** Erik: *"if we're going to make the engine very fast
+> and lite - like it is now, then we need to have the entire narration at the end."* Right trade. `sbDeclare` now
+> accumulates a plain-language round-by-round record on the encounter state; `sbEnd` hands the GM the FULL transcript
+> with an explicit instruction to narrate every round in order as one continuous scene ("the player watched this
+> resolve as bare numbers; the prose is where they finally SEE it"). **Honest limit:** the prose needs an API key, so
+> what's verified is the transcript (its input); Erik's next real fight exercises the narration.
+> **3. BRAIDS IN COMBAT — and the gap underneath it.** *A skill-battle round NEVER recorded practice.* `recordUse`
+> (the single counting site) was called only from the classic-choice path and the gambit runner — `sbDeclare` called
+> it nowhere. Every craft used in a fight counted for NOTHING: no rank progress, no co-activations, no braid
+> progress. Combat was invisible to the ledger — **that is the real reason braids never showed up there.** Fixed.
+> Then the **⋈ weave**: arm any real craft, and the next craft you pick is woven in — the second craft is its own
+> named roll line (`woven: Prism Sight +4`), **BOTH crafts' persistent effects land** (one turn, two things standing —
+> the payoff), it costs energy for both (1.8×), and it records a CO-ACTIVATION so weaving a pairing enough times
+> ripens it into a real minted braid at one craft's price. The arc: **weave by hand and pay double, until the braid
+> makes it one move.** Dials are content (`engine.weave`). 6 new sim checks incl. the payoff, the price, that an
+> unwoven round is byte-unchanged, and the full arc (weave × BRAID_RIPEN_AT → mintable). npm test exit 0.
+> Live: `Sonic Resonance ⋈ Prism Sight` → co-activation recorded, both `uses` incremented, energy 100→91 (9e vs 5e),
+> effects `opponent: bound −4 (2r)` AND `player: measure +3 (2r)`, receipt names the weave, popover shows the line.
+> **AEVI/ERIK — weave dials untuned.** `bonusPerTier 2` (cap 8), `energyMultiplier 1.8`. The energy price is the
+> load-bearing one: too cheap and weaving is always correct; too dear and it's never worth it.
+> **AEVI — BACKFILL QUESTION:** existing characters fought many rounds that recorded no practice, so their ledgers
+> under-count reality. `engine/backfill.js` already has a co-activation estimator — credit combat history, or leave
+> it as "it starts counting now"? Erik's call.
+> Results: po/results/20260731_CCODE-36-37_fight_legibility_and_braids_in_combat.md
+
+
 > ## [CCODE-35 complete_pending_review — CCode, 2026-07-31] Persistent combat effects — a landed move leaves something standing (v1.8.299 `0687ec17`)
 > Erik: *"Each action should produce something that could persist, such as raising a shield at the beginning, or
 > gaining a sense/insight gives you bonuses to defense or striking."* Built. **The rule that makes it honest:** an

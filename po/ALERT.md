@@ -1,5 +1,44 @@
 # PO ALERT
 
+> ## [CCODE-43 + CCODE-47 complete_pending_review — CCode, 2026-07-31] Items are functional in a fight · waiting is visible · a Haiku beat before the big telling (v1.8.314 `9aff593f`, v1.8.315 `f81f4a5c`)
+> **CCODE-47 — waiting is visible.** Erik: *"locking in the sense choice didn't indicate we were waiting for the
+> results.... might want to have it be obvious somehow."* A dashed banner with a spinner names what is in flight —
+> **"Reading the aggressor…" / "Resolving the turn…" / "Telling the turn…"** — and every control is hard-disabled
+> while a call is out, so a second click can never double-resolve a turn.
+> **And a fast Haiku beat before the big narration.** Erik: *"you could have haiku do a short narration of the
+> different skills each is using to describe the turn - and indicate the narration is processing - then show the big
+> narrative result."* On Execute a HAIKU call (new `combat-quick-beat` task, 160 tokens) writes two sentences naming
+> ONLY the clash of techniques, landing in ~1s while the banner still reads "Telling the turn…"; the flagship
+> narration then replaces it. It is a **GRACE, not a gate** — try/catch, and a failure leaves the turn untouched.
+> *(The quick beat itself needs an API key, so Erik's next real fight is its first true exercise; the code path and
+> its failure path are what is verified.)*
+> **CCODE-43 — INVENTORY IS FUNCTIONAL.** Erik: *"do I use my dagger, or my axe... my metal shield or my energy
+> shield? Inventory becomes functional - throw a chemical at them or drink a potion."* Two doors, both reading
+> fields items **already carry** (`bonusTags`, `effects`) — no content needed re-authoring.
+> **(1) WIELDED:** an item's tags map to battle functions (blade→strike, axe→break+strike, shield→shield+ward,
+> focus→reveal/foresee/empower, rope→bind…), adding a **named line** to the roll (*"wielding Iron Dagger + Bearded
+> Axe"*), capped so a full pack never out-weighs a craft. That is what makes dagger-vs-axe a REAL choice: they suit
+> different verbs, and you can see which. **(2) USED:** a consumable is a MOVE — drink to restore, throw to harm.
+> Item moves appear in ACTION/BONUS and are filtered out of SENSE automatically (you cannot drink a potion as a
+> read). **Drinking is the honest answer to being spent** (CCODE-39): your crafts have gone quiet, a flask has not.
+> A consumable gives **no passive wield bonus** — a flask you have not thrown is not helping you swing.
+> **Two bugs the live walkthrough caught:** the acid flask was counting toward the wielded STRIKE bonus (its "thrown"
+> tag maps to strike) — consumables are now excluded from `wieldBonusFor`; and a drink was **uncapped**, able to push
+> energy past `maxEnergy` — now clamped.
+> npm test exit 0 (19 seams, rawProseCaps 63). Live on never-used ports 8422/8423: the waiting banner was caught by a
+> MutationObserver (`{waiting:true, label:"Reading the aggressor…", spinner:true}` — the window is milliseconds
+> without a key); with a real kit, wield@strike = "Iron Dagger + Bearded Axe" (+8 capped), wield@shield = "Round
+> Shield" (+4), wield@reveal = null; item moves showed in ACTION and not in SENSE; drinking the Waterskin restored
+> energy and REMOVED it from the pack. No console errors.
+> **ERIK'S LIST IS NOW CLEAR** — 42 and 43 were the last two. **Dials:** `po/COMBAT_DIALS.md` (30 knobs, live values,
+> regenerate with `python scripts/gen_combat_dials.py`); the new item knobs are `items.tagFunctions`,
+> `items.wieldBonusPerItem/Cap`, `items.throwTier`, `items.maxItemMovesShown`.
+> **NOT DONE / worth a look:** a thrown item resolves as a plain tier-2 strike — it does not yet carry item-specific
+> harm (acid vs a rock should differ). That wants a `combat` block on item content, which is an authoring pass
+> (Aevi), not code.
+> Results: po/results/20260731_CCODE-43-47_items_and_waiting.md
+
+
 > ## [CCODE-46 complete_pending_review — CCode, 2026-07-31] The sense step is a real sense · moves are PRICED · finisher is a tag (v1.8.312 `6fae08bf`)
 > Erik's four asks from the preview screenshot, all built.
 > **1. The SENSE step only allows senses.** *"During the sense action, you shouldn't be able to use clearly attacks

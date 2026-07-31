@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [SNG-246 combat feedback complete_pending_review — CCode, 2026-07-27] Grouped moves + turn-by-turn (v1.8.296 `2df05cc6`)
+> Erik on the unified skill-battle panel (BUG1): (1) group the flat skill list by intent; (2) "chose hunter's
+> strike and the fight ended — so frustrating" (wants turn-by-turn, pick ONE, resolve, next). Fixed both: the
+> panel now GROUPS moves by intent-family (harm/mend/guard/read-sense/hinder-sway/position/shape — the 24-verb
+> families with combat labels + glyphs, like the ⚙ gear); free-text shaping stays the field (typed → sbDeclare,
+> API-free). Turn-by-turn: the §6b one-beat collapse now fires ONLY on a deliberate "⚡ Finish it" (go-for-broke),
+> never a normal strike; momentum dials widened (meterMax 10→16, surgeCrushEndsIt 8→16 in skill_battle_system.json)
+> so a normal exchange builds the meter over rounds. Live-verified: grouped panel in the play surface; vs a
+> near-peer the fight ran MULTIPLE rounds (momentum 0→8→3, panel re-rendered in place each round, no separate
+> screen — completes BUG1's multi-round proof); a weak foe still falls fast (OP hero, correct). npm test exit 0.
+> **DIALS/FOLLOW-ONS:** AEVI/ERIK tune the momentum dials; the intent-category taxonomy is open (Erik: "not sure
+> these are the only ones"); and BRAIDS-in-combat (a combined craft in one turn — Erik: "this is where braids
+> really shine") is the big design+build follow-on — the turn-by-turn structure is its foundation.
+> SNG-246 remaining: Fix A (engine-enforced fight-entry) + Fix C (structured finish/change conditions).
+> Results: po/results/20260727_SNG-246_grouped_combat_and_turn_by_turn.md
+
+
 > ## [SNG-246 BUG1/Fix B complete_pending_review — CCode, 2026-07-27] Unify the takeovers — skill battle renders IN place (v1.8.295 `8490b504`)
 > Erik's priority defect (§7b): a duel showed the SNG-230 frame, then JUMPED to the separate full-screen
 > renderSkillBattle panel he rejected — two competing takeovers. Killed it: the in-place frame is the ONLY one.

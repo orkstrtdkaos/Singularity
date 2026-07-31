@@ -152,7 +152,7 @@ function addEffect(effects, fx, sb) {
 /** Roll ONE side through successChance (SNG-106 rails): attribute + tier + matchup + intensity as named,
  *  self-summing contest mods — plus any standing persistent effects (CCODE-35), each its own honest line.
  *  Returns the full receipt + the round margin (chance − roll). */
-function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momMod = 0) {
+function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momMod = 0, setupMod = 0) {
   const tier = decl.tier || 1;
   const mu = matchupBonus(decl.function, oppDecl.function, sb);
   const step = steps[decl.intensity] || steps.standard || {};
@@ -167,6 +167,8 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momM
       ...(decl.woven ? [{ label: `woven: ${decl.woven.name || decl.woven.function}`, value: wovenBonus(decl.woven, sb) }] : []),
       // CCODE-38: momentum is a MODIFIER now — being ahead presses your advantage, being behind costs you.
       ...(momMod ? [{ label: momMod > 0 ? "momentum (you have the advantage)" : "momentum (you're on the back foot)", value: momMod }] : []),
+      // CCODE-45: what your SENSE step bought this action — a named line, never a hidden fudge.
+      ...(setupMod ? [{ label: setupMod > 0 ? "you read them first" : "they read you first", value: setupMod }] : []),
       ...fxMods
     ]
   };
@@ -222,7 +224,12 @@ export function degradeIfSpent(decl, energy, sb, steps, rules) {
  *  margins; the higher shifts momentum by the difference; both pay energy (attrition). The engine computes
  *  BOTH full rolls — the returned `opponent` receipt is complete and identical regardless of who's watching;
  *  the fog is applied later by senseOpponent over this true state. Pure; rng injectable. */
-export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state = {}, rules, sb, steps, rng = Math.random }) {
+export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state = {}, rules, sb, steps, rng = Math.random,
+  // CCODE-45: a TURN is sense -> action -> bonus. Both options DEFAULT to today's behaviour, so every existing
+  // caller is untouched: phase "action" resolves exactly as before, and tickEffects true ticks per exchange.
+  // The turn orchestrator passes phase:"sense" (no momentum, no pressure — it PREPARES) and tickEffects:false on
+  // every step but the last, so a turn's effects tick exactly once.
+  phase = "action", tickEffects: doTick = true, setupBonus = 0 }) {
   sb = sb || {};
   steps = steps || rules?.intensitySteps || DEFAULT_STEPS;
   // CCODE-35: standing effects modify THIS round's rolls as named contestMods, then tick; newly landed ones
@@ -233,9 +240,11 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   playerDecl = degradeIfSpent(playerDecl, state.playerEnergy ?? playerSheet.energy ?? 0, sb, steps, rules);
   oppDecl = degradeIfSpent(oppDecl, state.opponentEnergy ?? oppSheet.energy ?? 0, sb, steps, rules);
   const standing = state.effects || [];
-  const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb), momentumModifier(state.momentum || 0, "player", sb));
-  const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb), momentumModifier(state.momentum || 0, "opponent", sb));
-  let effects = tickEffects(standing);
+  const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb), momentumModifier(state.momentum || 0, "player", sb), setupBonus);
+  const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb), momentumModifier(state.momentum || 0, "opponent", sb), -setupBonus);
+  // CCODE-45: effects tick ONCE PER TURN, not per step — Erik: "the sustaining effects would not tick down a count
+  // until the full round's actions are complete." The orchestrator passes tickEffects:false on every step but the last.
+  let effects = doTick ? tickEffects(standing) : standing.slice();
   const landedP = effectFrom(playerDecl, p, "player", sb);
   // CCODE-37: THE PAYOFF — a woven round lands the SECOND craft's effect too, so one turn leaves two things
   // standing. This is what "braids shine in combat" means mechanically: turn-by-turn forces one move per turn,
@@ -248,11 +257,15 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
 
   const mom = sb.momentum || {};
   const meterMax = mom.meterMax ?? 10, marginScale = mom.marginScale ?? 0.5, crush = mom.surgeCrushEndsIt ?? 8;
+  // CCODE-45: a SENSE step PREPARES — it never moves the meter. Otherwise momentum swings up to 3× per turn and
+  // the CCODE-38 pressure pacing (measured over 1200 fights/threat-level) is invalidated. Content dial.
+  const turnCfg = sb.turn || {};
+  const senseStep = phase === "sense" && turnCfg.senseMovesMomentum !== true;
   let momentum = state.momentum || 0, roundWinner = null, delta = 0;
   if (p.margin !== o.margin) {
     roundWinner = p.margin > o.margin ? "player" : "opponent";
     delta = Math.abs(p.margin - o.margin) * marginScale;
-    momentum += roundWinner === "player" ? delta : -delta;
+    if (!senseStep) momentum += roundWinner === "player" ? delta : -delta;
   }
   momentum = clamp(momentum, -meterMax, meterMax);
 
@@ -271,7 +284,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   const pcfg = mom.pressure || {};
   const pressure = { player: state.pressure?.player || 0, opponent: state.pressure?.opponent || 0 };
   let pressureEvent = null;
-  const overwhelmed = Math.abs(momentum) >= meterMax || (delta >= crush && roundWinner);
+  const overwhelmed = !senseStep && (Math.abs(momentum) >= meterMax || (delta >= crush && roundWinner));
   if (overwhelmed) {
     const dominated = (momentum > 0 || (momentum === 0 && roundWinner === "player")) ? "opponent" : "player";
     pressure[dominated] += 1;
@@ -288,7 +301,17 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // the PLAYER's exit is health, owned by the app (checkIncapacitation) — a meter never decides it, and neither
   // does an empty energy pool.
 
-  const newState = { ...state, round: (state.round || 0) + 1, momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, status: resolved ? "resolved" : "active" };
-  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, landed: [landedP, landedW, landedO].filter(Boolean),
+  // CCODE-45: a sense step doesn't advance the ROUND counter either — the whole turn is one round.
+  const newState = { ...state, round: (state.round || 0) + (senseStep ? 0 : 1), momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, status: resolved ? "resolved" : "active" };
+  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback } };
+  // What the SENSE step bought: a named bonus on the coming action (signed toward whoever read better), and —
+  // on a crit read — the bonus step. "It's the payoff." Both are content dials.
+  if (phase === "sense") {
+    const scale = turnCfg.setupBonusScale ?? 0.3, cap = turnCfg.setupBonusMax ?? 12;
+    out.setupBonus = clamp(Math.round((p.margin - o.margin) * scale), -cap, cap);
+    const grants = turnCfg.bonusOnDegrees || ["crit_success"];
+    out.bonusEarned = { player: grants.includes(p.degree), opponent: grants.includes(o.degree) };
+  }
+  return out;
 }

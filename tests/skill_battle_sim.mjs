@@ -365,5 +365,53 @@ check("CCODE-41: deniesPhase rides from the CONTENT def onto the live effect (el
     return phaseDenied(r.effects, "opponent", "setup");        // it landed ON the opponent and denies their setup
   })());
 
+// ---- CCODE-45: THE TURN — sense → action → bonus (Erik: "sensing doesn't give the opponent a free hit") ----
+const turnSheets = { playerSheet: { attributes: { mental: 5, physical: 4 }, energy: 100 },
+                     oppSheet: { attributes: { mental: 2, physical: 3 }, energy: 100, skills: [] } };
+const senseDecls = { playerDecl: { function: "reveal", tier: 3, attribute: "mental", intensity: "standard", name: "Prism Sight" },
+                     oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" } };
+const baseState = { momentum: 4, effects: [], pressure: { player: 0, opponent: 0 }, round: 3 };
+const senseOut = battleRound({ ...senseDecls, ...turnSheets, state: baseState, rules, sb, steps, rng: seqRng([0.01, 0.99]), phase: "sense", tickEffects: false });
+check("CCODE-45: the turn dials are CONTENT (engine.turn)", !!sb.turn && Array.isArray(sb.turn.bonusOnDegrees));
+check("CCODE-45 (the whole point): a SENSE step does NOT move momentum — sensing is not a free hit for them",
+  senseOut.state.momentum === baseState.momentum);
+check("CCODE-45: a SENSE step applies no pressure and does not advance the round (the turn is one round)",
+  !senseOut.pressureEvent && senseOut.state.round === baseState.round);
+check("CCODE-45: a winning sense returns a positive setupBonus for the reader",
+  Number.isFinite(senseOut.setupBonus) && senseOut.setupBonus > 0);
+check("CCODE-45: a CRIT sense earns the bonus step ('it's the payoff')",
+  senseOut.player.degree === "crit_success" && senseOut.bonusEarned?.player === true);
+check("CCODE-45: the sense step still LANDS its effect (a read leaves insight standing)",
+  (senseOut.effects || []).some(f => f.side === "player" && f.kind === "insight"));
+// the setup bonus must REACH the action roll as a named line, signed against the opponent
+const actionOut = battleRound({
+  playerDecl: { function: "strike", tier: 2, attribute: "physical", intensity: "standard", name: "Hunter's Strike" },
+  oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
+  ...turnSheets, state: senseOut.state, rules, sb, steps, rng: seqRng([0.5, 0.5]),
+  phase: "action", tickEffects: true, setupBonus: senseOut.setupBonus
+});
+check("CCODE-45: the setup bonus is a NAMED line on the ACTION roll (never a hidden fudge)",
+  (actionOut.player.breakdown?.components || []).some(c => /you read them first/.test(c.label) && c.value === senseOut.setupBonus));
+check("CCODE-45: the setup bonus is SIGNED against the opponent (their read of you cost them)",
+  (actionOut.opponent.breakdown?.components || []).some(c => /they read you first/.test(c.label) && c.value === -senseOut.setupBonus));
+check("CCODE-45: an ACTION step still moves momentum normally (the turn's real exchange)",
+  actionOut.state.momentum !== senseOut.state.momentum);
+// effects tick ONCE per turn, not per step
+check("CCODE-45: tickEffects:false holds an effect's counter across a step; the last step ticks it",
+  (() => {
+    const fx = [{ kind: "guard", label: "guard up", value: 4, roundsLeft: 3, applies: "always", side: "player", source: "t", from: "player" }];
+    const held = battleRound({ ...senseDecls, ...turnSheets, state: { ...baseState, effects: fx }, rules, sb, steps, rng: seqRng([0.5, 0.5]), phase: "sense", tickEffects: false });
+    const ticked = battleRound({ ...senseDecls, ...turnSheets, state: { ...baseState, effects: fx }, rules, sb, steps, rng: seqRng([0.5, 0.5]), phase: "action", tickEffects: true });
+    return held.effects.find(f => f.kind === "guard")?.roundsLeft === 3
+        && ticked.effects.find(f => f.kind === "guard")?.roundsLeft === 2;
+  })());
+// BACKWARD COMPATIBILITY: the defaults must leave every existing caller byte-identical
+check("CCODE-45: the new options DEFAULT to today's behaviour (no existing caller changes)",
+  (() => {
+    const a = battleRound({ ...senseDecls, ...turnSheets, state: baseState, rules, sb, steps, rng: seqRng([0.4, 0.6]) });
+    const b = battleRound({ ...senseDecls, ...turnSheets, state: baseState, rules, sb, steps, rng: seqRng([0.4, 0.6]), phase: "action", tickEffects: true, setupBonus: 0 });
+    return a.state.momentum === b.state.momentum && a.player.chance === b.player.chance && a.setupBonus === undefined;
+  })());
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

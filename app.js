@@ -4,7 +4,7 @@
 import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
-import { synthesizeOpponentSheet, estimateExchange, finisherPotential, hasCounterCraft, matchupBonus } from "./engine/skill_battle.js"; // CCODE-46: priced moves + finisher tags
+import { synthesizeOpponentSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.312";
+const APP_VERSION = "1.8.313";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8571,7 +8571,7 @@ function sbPriceMove(allSkills, fog, st, sb) {
     const mine = myAttr * 16 + (s.tier || 1) * 5 + matchupBonus(s.function, theirFn, sb);
     const est = estimateExchange({ myStack: mine, theirStack, fogTier, counterCraft: counter, sb });
     est.tip = est.show === "none"
-      ? `You cannot price this yet — read them first. ${counter ? "" : "A craft that counters what they are doing would also let you judge it."}`
+      ? `Your senses do not reach this yet — read them first. ${counter ? "" : "A craft that counters what they are doing would also let you judge it."}`
       : `Your read of the odds you WIN this exchange (opposed, with matchup and standing effects). Confidence ${est.confidence}/3${counter ? " — you hold a craft that counters what they are doing, so you can judge this well" : fogTier ? " — from what your read bought you" : ""}.`;
     return est;
   };
@@ -8648,8 +8648,12 @@ function skillBattlePanel() {
       const pick = sel.indexOf(i), on = pick >= 0;
       const odds = priceOf(s);
       const fin = finisherPotential(s, fullCatalog()[s.id], sb);
+      // CCODE-42: a finisher shows its SITUATIONAL chance to end it outright — and the reasons, so the number is
+      // never bare. Fogged like every other estimate: unread, you get the tag without a number.
+      const fo = fin?.can ? finishOdds({ skill: s, def: fullCatalog()[s.id], oppSheet: st.opponentSheet, state: st, sb }) : null;
+      const foKnown = fo && (priceOf(s)?.confidence ?? 0) >= 2;
       const finTag = fin?.can
-        ? `<span class="sb-fin" title="FINISHING POTENTIAL${fin.why === "innate" ? " — this craft can kill, so it has carried this from the start" : " — earned by reaching tier " + (s.tier || 1)}. Declare it as your ACTION and a decisive swing can end the fight in one beat.">\u26a1 finisher</span>`
+        ? `<span class="sb-fin" title="FINISHING POTENTIAL${fin.why === "innate" ? " — this craft can kill, so it has carried this from the start" : " — earned by reaching tier " + (s.tier || 1)}. Declare it as your ACTION and a decisive swing can end the fight in one beat.${fo ? "\n\nChance to END it outright: " + fo.pct + "%\n· " + fo.reasons.join("\n· ") : ""}${foKnown ? "" : "\n\n(Read them to see the number.)"}">\u26a1 finisher${foKnown ? ` \u00b7 ${fo.pct}% to end it` : ""}</span>`
         : (fin && fin.why === "needs-tier" ? `<span class="sb-fin dim" title="Not yet a finisher — this craft gains finishing potential at tier ${fin.needTier}.">\u26a1 at T${fin.needTier}</span>` : "");
       const oddsTag = odds ? `<span class="sb-odds sb-odds-${odds.show}" title="${esc(odds.tip)}">${esc(odds.label)}</span>` : "";
       const findsLine = s.finds ? `<span class="sb-skill-does">finds ${esc(s.finds)}</span>` : "";

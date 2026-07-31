@@ -246,6 +246,46 @@ export function finisherPotential(skill, def, sb) {
   return { can: false, why: "needs-tier", needTier: at, rung };
 }
 
+/** CCODE-42 (Erik): a finisher's chance to END the fight outright is SITUATIONAL, not flat.
+ *  "against a healthy foe of equal level it might be a 50/50 ... but against a run down opponent when you have the
+ *  momentum it's a near certainty ... just like it's a lower chance with the momentum against you or against a high
+ *  level opponent." Base by how lethal the craft is, then moved by their condition, your momentum, and the tier gap.
+ *  Pure. Returns { pct, reasons[] } so the UI can show WHY, never just a number. */
+export function finishOdds({ skill, def, oppSheet, state = {}, sb }) {
+  const cfg = sb?.finisher?.odds || {};
+  const pot = finisherPotential(skill, def, sb);
+  if (!pot?.can) return null;
+  const rung = pot.rung || "none";
+  let pct = (cfg.baseByRung || {})[rung] ?? 10;
+  const reasons = [`${rung === "none" ? "a plain blow" : rung} — base ${pct}%`];
+  // momentum: yours raises it, theirs lowers it
+  const mom = state.momentum || 0;
+  if (mom) {
+    const d = Math.round(mom * (cfg.perMomentumPoint ?? 2.5));
+    pct += d;
+    reasons.push(`${d >= 0 ? "you hold the momentum" : "the momentum is against you"} ${d >= 0 ? "+" : ""}${d}`);
+  }
+  // tier gap: out-classing them helps, being out-classed hurts
+  const myTier = skill?.tier || 1;
+  const theirTier = Math.max(1, ...((oppSheet?.skills || []).map(x => Number(x.tier) || 1)));
+  if (myTier !== theirTier) {
+    const d = (myTier - theirTier) * (cfg.perTierGap ?? 7);
+    pct += d;
+    reasons.push(`${d >= 0 ? "you out-class them" : "they out-class you"} ${d >= 0 ? "+" : ""}${d}`);
+  }
+  // their condition: a run-down foe is far easier to finish — "near certainty"
+  const maxE = oppSheet?.maxEnergy || oppSheet?.energy || 0;
+  const nowE = state.opponentEnergy ?? maxE;
+  if (maxE > 0 && nowE / maxE <= (cfg.wornDownAtEnergyPct ?? 0.3)) {
+    pct += cfg.wornDownBonus ?? 30;
+    reasons.push(`they are run down +${cfg.wornDownBonus ?? 30}`);
+  }
+  const pressed = state.pressure?.opponent || 0;
+  if (pressed) { const d = pressed * (cfg.pressureBonus ?? 12); pct += d; reasons.push(`you have driven them back ${pressed}\u00d7 +${d}`); }
+  pct = Math.max(cfg.floor ?? 2, Math.min(cfg.ceiling ?? 95, Math.round(pct)));
+  return { pct, reasons, rung };
+}
+
 /** CCODE-37: what folding a second craft into the round is worth — scales with the woven craft's tier, capped. */
 export function wovenBonus(woven, sb) {
   const w = sb?.weave || {};

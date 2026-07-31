@@ -108,12 +108,23 @@
         { "at": 28, "label": "unlikely" },
         { "at": 0,  "label": "a long shot" }
       ],
-      "unreadableLabel": "you cannot price this yet"
+      "unreadableLabel": "you can't sense this yet"
     },
     "finisher": {
       "note": "CCODE-46 (Erik): 'the finish It button should be an indicator on skills instead of a button. any harm skill, even the basic, could eventually be tagged with finish it. Instakill skills have that from the beginning.' A craft that CAN kill carries finishing potential from the start (harmRung lethal/atrocity); an ordinary harm craft EARNS it by reaching finisherTierAt. The tag is shown on the move itself, and declaring a tagged move in the ACTION step is what arms the one-beat collapse — no separate button.",
       "alwaysAtHarmRung": ["lethal", "atrocity"],
-      "finisherTierAt": 3
+      "finisherTierAt": 3,
+      "odds": {
+        "note": "CCODE-42 (Erik): 'hunter's strike has that potential, but it's a lower percent chance to end it completely unless the damage output would exceed the enemies HP... then it's a finishing move. The cut thread is an opposed roll, so against a healthy foe of equal level it might be a 50/50 ... but against a run down opponent when you have the momentum it's a near certainty of success... just like it's a lower chance with the momentum against you or against a high level opponent.' So a finisher's chance to END the fight outright is SITUATIONAL: base by how lethal the craft is, then moved by the foe's condition (spent/pressured), the momentum you hold, and the tier gap between you.",
+        "baseByRung": { "atrocity": 55, "lethal": 48, "wounding": 22, "restraint": 10, "none": 6 },
+        "perMomentumPoint": 2.5,
+        "perTierGap": 7,
+        "wornDownBonus": 30,
+        "pressureBonus": 12,
+        "floor": 2,
+        "ceiling": 95,
+        "wornDownAtEnergyPct": 0.3
+      }
     },
     "turn": {
       "note": "CCODE-45 (Erik): a TURN is sense -> action -> bonus, not a single exchange. 'the sense action, the main action, then the bonus action - for each player and opponent get tallied up and then narrated - the net result sets up the next round.' The sense step is OPTIONAL (skip to conserve energy, if you have no sense skill, or if a craft has blinded you), carries the cost of the ability used, and is LOCKED once its GM narration lands. A good sense buys a NAMED bonus on the action roll — never a hidden fudge. CCode's calls, all dials: senseMovesMomentum false (else momentum swings 3x/turn and the measured CCODE-38 pacing is void); the bonus step grant threshold was MEASURED, not guessed — CCode first proposed crit-only, and the simulation overturned it: crit-only left 20% of peer fights UNRESOLVED at 30 turns (median 21). crit+success gives median 13 turns, 0% unresolved, 82% player win / 18% down. The sim also proved the sense step is worth taking at all: sensing every turn raises the peer win-rate from 53% to 71%.",

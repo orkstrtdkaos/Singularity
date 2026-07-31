@@ -1,5 +1,39 @@
 # PO ALERT
 
+> ## [CCODE-45 complete_pending_review — CCode, 2026-07-31] THE TURN IS PLAYABLE + CCODE-44 rebuilt + the bonus dial MEASURED (v1.8.307 `b2fa0a29`, v1.8.310 `0036d023`)
+> Erik: *"do all of this."* All four shipped.
+> **1. THE BONUS DIAL, MEASURED — and my guess was wrong.** I proposed crit-only in the spec and flagged it for
+> simulation. 1200 fights/config on the real turn shape: **crit-only left 20% of peer fights UNRESOLVED** at 30
+> turns (median 21) — too stingy to close a fight. **crit + success**: median 13 turns, 0% unresolved, 82% win /
+> 18% down. Set to crit+success. The sim also answered the design's core question — **does sensing pay? Yes:**
+> senses-every-turn 71% win vs never-senses 53%.
+> **2. THE TURN IS PLAYABLE.** sense (optional) → [Proceed] → **GM call #1** narrates the read → **the step LOCKS**
+> → action → bonus (if earned) → **review (Edit or Execute)** → Execute → **GM call #2** narrates the whole turn →
+> next turn. Each step is a SELECTION step (*"The action selections need to be just that"*), with **its own
+> free-text field** riding into that step's prompt. **Braiding is now just selecting a second craft** — same
+> mechanics, none of the ⋈ modality Erik called unintuitive.
+> **3. CCODE-44 REBUILT** (the pre-fight appraisal I wrongly reverted — it was never broken): relative craft,
+> relative prowess, disposition, threat band and a counsel line, above stand-and-fight / back-away.
+> **TWO REAL BUGS THE LIVE WALKTHROUGH CAUGHT THAT TESTS DID NOT:**
+> **(a) THE SEAM, AGAIN.** `skillBattleRound` hand-builds its `battleRound` call and silently dropped
+> `phase`/`tickEffects`/`setupBonus` — **the SENSE step ran as a full ACTION round**, moving momentum and costing
+> the exchange, defeating the whole phase. **Second time this wrapper has eaten an option** (CCODE-35 was
+> `effects`), so it is now a DECLARED seam — `seam_battle_round_options` (19 seams) + 3 sim checks.
+> **(b) WRITE-THROUGH.** `activeEnc()` returns a **fresh wrapper each call**, so `enc.state = rr.state` wrote to a
+> throwaway and the turn's resolved state (effects, energy, pressure) was **discarded**. `sbDeclare` had always done
+> it correctly; my new code did not. Fixed in five sites.
+> Neither was reachable from unit tests — the first needed the real wrapper, the second the real character object.
+> **This is why the live walkthrough is not optional**, and it is the discipline I committed to after today's miss.
+> **Live-verified on never-used ports** (8412/8415), full turn walked: sense costs its craft (100→95e) but **round
+> and momentum DO NOT move** — sensing is no longer a free hit for them; setupBonus +5; the bonus step appears;
+> tracker reads "◎ Sense • locked"; braid selects as 1 / 2; Execute → energy 95→85, hp 30→27, momentum 0→−3.5,
+> **effects tick ONCE across the turn** (2r→1r), practice recorded, turn resets. No console errors. npm test exit 0.
+> **NEXT (my read):** CCODE-42 (Finish-it gated on a finishing-potential craft, with honest situational odds) and
+> CCODE-43 (items in combat) are both still unbuilt and both independent. **Erik's dials to play with:**
+> `turn.setupBonusScale/Max`, `turn.bonusOnDegrees`, `weave.energyMultiplier`, `momentum.pressure.breakAtPressure`.
+> Results: po/results/20260731_CCODE-45_the_turn_playable.md
+
+
 > ## [CCODE-45 complete_pending_review — CCode, 2026-07-31] THE TURN spec'd in full + the engine layer (v1.8.306 `dce2c7ed`)
 > Erik ruled on the last two questions — **two GM calls per turn**, and **the sense step LOCKS once narrated** (no
 > editing back) — so the turn design is complete. **`po/SPEC_CCODE-45_the_turn.md` SUPERSEDES SPEC_CCODE-41**: his

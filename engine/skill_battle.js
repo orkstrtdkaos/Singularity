@@ -55,9 +55,25 @@ export function opponentPolicy(oppSheet, state = {}, seenPlayerTendency = null, 
   for (const t of (oppSheet.tacticTags || [])) { const b = pol.tacticBias?.[t]; if (b?.surge) intensity = "surge"; else if (b?.pace && intensity === "surge") intensity = "standard"; }
   const skills = oppSheet.skills || [];
   let pick = skills[0] || { function: "strike", name: "a strike", tier: 1 };
-  if (seenPlayerTendency && skills.length) {
+  // CCODE-38 (Erik: "they seem to always just strike"): the old policy took skills[0] unless a tendency was known,
+  // and skills[0] is a strike for nearly every synthesized sheet — so every foe was a metronome. Now each option is
+  // SCORED: the matchup edge when we've read a tendency, a situational lean (behind → press; ahead → consolidate),
+  // and an anti-repetition penalty so a foe doesn't hammer the same verb twice running. The tiebreak varies with
+  // the round number, so behaviour differs across rounds while staying fully DETERMINISTIC (no rng — duels stay
+  // reproducible and PvP stays symmetric).
+  if (skills.length > 1) {
+    const attacks = (sb?.persistentEffects?.attackFunctions) || ["strike", "break"];
+    const defensive = (sb?.functionMatchup?.defensiveFunctions) || ["shield", "ward", "resist"];
+    const behind = oppMomentum < 0, ahead = oppMomentum > 0;
     let best = -Infinity;
-    for (const s of skills) { const b = matchupBonus(s.function, seenPlayerTendency, sb); if (b > best) { best = b; pick = s; } }
+    skills.forEach((s, i) => {
+      let score = seenPlayerTendency ? matchupBonus(s.function, seenPlayerTendency, sb) * 2 : 0;
+      if (behind && attacks.includes(s.function)) score += 2;        // losing → press
+      if (ahead && defensive.includes(s.function)) score += 2;       // winning → protect the lead
+      if (s.function === state.lastOppFn) score -= 3;                // don't be a metronome
+      score += ((state.round || 0) * 7 + i * 3) % 5 * 0.4;           // deterministic variety
+      if (score > best) { best = score; pick = s; }
+    });
   }
   // attrition: can't afford a Surge on a near-empty pool → drop to Standard/Conserve
   if (intensity === "surge" && (state.opponentEnergy ?? oppSheet.energy ?? 0) < 12) intensity = "standard";
@@ -126,7 +142,7 @@ function addEffect(effects, fx, sb) {
 /** Roll ONE side through successChance (SNG-106 rails): attribute + tier + matchup + intensity as named,
  *  self-summing contest mods — plus any standing persistent effects (CCODE-35), each its own honest line.
  *  Returns the full receipt + the round margin (chance − roll). */
-function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = []) {
+function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momMod = 0) {
   const tier = decl.tier || 1;
   const mu = matchupBonus(decl.function, oppDecl.function, sb);
   const step = steps[decl.intensity] || steps.standard || {};
@@ -139,6 +155,8 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = []) {
       ...(step.effectMod ? [{ label: decl.intensity, value: step.effectMod }] : []),
       // CCODE-37: a WOVEN second craft is its own named line — the player can see exactly what folding it in bought.
       ...(decl.woven ? [{ label: `woven: ${decl.woven.name || decl.woven.function}`, value: wovenBonus(decl.woven, sb) }] : []),
+      // CCODE-38: momentum is a MODIFIER now — being ahead presses your advantage, being behind costs you.
+      ...(momMod ? [{ label: momMod > 0 ? "momentum (you have the advantage)" : "momentum (you're on the back foot)", value: momMod }] : []),
       ...fxMods
     ]
   };
@@ -150,6 +168,15 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = []) {
 export function wovenBonus(woven, sb) {
   const w = sb?.weave || {};
   return Math.min(w.maxBonus ?? 8, Math.round((woven?.tier || 1) * (w.bonusPerTier ?? 2)));
+}
+
+/** CCODE-38 (Erik: "momentum should be a MODIFIER mechanic, not the primary exit encounter metric"): the roll
+ *  bonus/penalty a side carries for being ahead/behind on the meter. `momentum` is always +player; pass
+ *  side="opponent" to mirror it. Capped, and its own named line in the breakdown. Pure. */
+export function momentumModifier(momentum, side, sb) {
+  const m = sb?.momentum?.asModifier || {};
+  const signed = (side === "opponent" ? -1 : 1) * (momentum || 0);
+  return clamp(Math.round(signed * (m.perPoint ?? 0.5)), -(m.max ?? 8), m.max ?? 8);
 }
 
 // CCODE-37: a WOVEN round pays for both crafts — doing two things in one turn is a real cost, not a free upgrade.
@@ -170,8 +197,8 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // CCODE-35: standing effects modify THIS round's rolls as named contestMods, then tick; newly landed ones
   // are added after both sides roll (an effect never modifies the round that created it).
   const standing = state.effects || [];
-  const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb));
-  const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb));
+  const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb), momentumModifier(state.momentum || 0, "player", sb));
+  const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb), momentumModifier(state.momentum || 0, "opponent", sb));
   let effects = tickEffects(standing);
   const landedP = effectFrom(playerDecl, p, "player", sb);
   // CCODE-37: THE PAYOFF — a woven round lands the SECOND craft's effect too, so one turn leaves two things
@@ -193,16 +220,33 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   }
   momentum = clamp(momentum, -meterMax, meterMax);
 
-  const playerEnergy = Math.max(0, (state.playerEnergy ?? playerSheet.energy ?? 0) - energyCost(playerDecl, sb, steps, rules));
-  const opponentEnergy = Math.max(0, (state.opponentEnergy ?? oppSheet.energy ?? 0) - energyCost(oppDecl, sb, steps, rules));
+  let playerEnergy = Math.max(0, (state.playerEnergy ?? playerSheet.energy ?? 0) - energyCost(playerDecl, sb, steps, rules));
+  let opponentEnergy = Math.max(0, (state.opponentEnergy ?? oppSheet.energy ?? 0) - energyCost(oppDecl, sb, steps, rules));
+
+  // CCODE-38 (Erik: "the momentum mechanic is ending fights it shouldn't — I took one hit, still tons of energy
+  // and health"): filling the meter is now a PRESSURE EVENT, not a death. The dominated side is driven back — real
+  // attrition, a pressure tick — and the meter RESETS so they are still in the fight. A crushing single blow is
+  // heavy pressure too, not an instant end. What ENDS a fight is now only what the player can feel and manage:
+  // health gone, energy gone, the opponent breaking after breakAtPressure, mutual exhaustion, or a deliberate exit.
+  const pcfg = mom.pressure || {};
+  const pressure = { player: state.pressure?.player || 0, opponent: state.pressure?.opponent || 0 };
+  let pressureEvent = null;
+  const overwhelmed = Math.abs(momentum) >= meterMax || (delta >= crush && roundWinner);
+  if (overwhelmed) {
+    const dominated = (momentum > 0 || (momentum === 0 && roundWinner === "player")) ? "opponent" : "player";
+    pressure[dominated] += 1;
+    pressureEvent = { side: dominated, healthLoss: dominated === "player" ? (pcfg.playerHealthLoss ?? 3) : 0, pressure: pressure[dominated] };
+    if (dominated === "opponent") opponentEnergy = Math.max(0, opponentEnergy - (pcfg.opponentEnergyLoss ?? 14));
+    momentum = (dominated === "opponent" ? 1 : -1) * meterMax * (pcfg.resetTo ?? 0.35); // driven back, still in it
+  }
 
   let resolved = null;
-  if (Math.abs(momentum) >= meterMax) resolved = momentum > 0 ? "player" : "opponent";           // meter filled
-  else if (delta >= crush && roundWinner) resolved = roundWinner;                                  // a single crushing blow
+  if (pressure.opponent >= (pcfg.breakAtPressure ?? 3)) resolved = "player";                       // they finally break
   else if (playerEnergy <= 0 && opponentEnergy <= 0) resolved = "stalemate";                       // both spent
   else if (playerEnergy <= 0) resolved = "opponent";                                               // attrition
   else if (opponentEnergy <= 0) resolved = "player";
+  // the PLAYER's exit is health, owned by the app (checkIncapacitation) — a meter never decides it.
 
-  const newState = { ...state, round: (state.round || 0) + 1, momentum, playerEnergy, opponentEnergy, effects, resolved, status: resolved ? "resolved" : "active" };
-  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, landed: [landedP, landedW, landedO].filter(Boolean) };
+  const newState = { ...state, round: (state.round || 0) + 1, momentum, playerEnergy, opponentEnergy, effects, pressure, resolved, status: resolved ? "resolved" : "active" };
+  return { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, landed: [landedP, landedW, landedO].filter(Boolean) };
 }

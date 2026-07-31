@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.301";
+const APP_VERSION = "1.8.302";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8378,13 +8378,19 @@ function playerBattleSkills() {
   const out = [];
   for (const a of character.abilities || []) {
     const def = fullCatalog()[a.abilityId];
-    const fn = (def?.functions || [])[0];
-    if (!fn) continue;
-    out.push({ id: a.abilityId, function: fn, tier: a.level || 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules) });
+    const fns = def?.functions || [];
+    if (!fns.length) continue;
+    // CCODE-38 (Erik: "I can use harmonic voice to mend… will it show up in the mend options?"): YES — a craft is
+    // listed under EVERY function it has, not just functions[0]. Harmonic Voice is command+empower+HEAL, so it
+    // belongs in mend as well as hinder/sway; the old functions[0] read hid every secondary use a craft had.
+    // Each entry declares with THAT function, so picking it from MEND actually mends.
+    for (const fn of fns) {
+      out.push({ id: a.abilityId, function: fn, tier: a.level || 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules), multi: fns.length > 1 });
+    }
   }
   out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
   out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
-  return out.slice(0, 12);
+  return out.slice(0, 40); // was 12 — a multi-function craft now occupies a slot per function; groups collapse
 }
 
 // SNG-246 BUG1: the skill battle no longer takes over a SEPARATE screen — it renders IN the play surface (the
@@ -8394,6 +8400,7 @@ let sbLastRound = null;
 let sbLastRoundReceipt = null; // SNG-246 (Erik): what JUST happened this round — both moves + the interaction + the swing, SHOWN.
 let sbLastRoundRolls = null;   // CCODE-36 (Erik): the ROLLS behind that round — same breakdown popover as normal play.
 let sbWeaveArmed = null;       // CCODE-37 (Erik: "this is where braids really shine"): index of the craft armed to WEAVE.
+const sbOpenFams = {};         // CCODE-38 (Erik: "can we make the categories collapsible?"): family → open?, kept across rounds.
 
 // SNG-246 (Erik: "no rolls, no opposed rolls or descriptions… ended inexplicably"): a per-round MECHANICAL line
 // for the skill battle — names YOUR move and THEIRS, the interaction (blades lock / turned aside / you slip it),
@@ -8503,7 +8510,11 @@ function skillBattlePanel() {
         <button class="btn secondary sb-skill" data-sbskill="${i}">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}</button>${weaveBtn}${info}
       </div>`;
     }).join("");
-    return `<div class="moves-group"><div class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())}</div>${chips}</div>`;
+    // CCODE-38 (Erik: "can we make the categories collapsible?"): each family is a <details> — open by default,
+    // and the open/closed choice persists across the round re-renders via sbOpenFams so a fight doesn't keep
+    // re-expanding what you just folded away.
+    const open = sbOpenFams[f] !== false;
+    return `<details class="moves-group" data-sbfam="${esc(f)}"${open ? " open" : ""}><summary class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())} <span class="hint">(${byFam[f].length})</span></summary>${chips}</details>`;
   }).join("");
   return `<div class="sb-panel">
     <div class="sb-opponent">${esc(def.opponent?.name || "your opponent")}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
@@ -8594,6 +8605,8 @@ function wireSkillBattlePanel() {
     renderSkillBattle(sbLastRound);
   };
   const wx = document.getElementById("sb-weave-x"); if (wx) wx.onclick = () => { sbWeaveArmed = null; renderSkillBattle(sbLastRound); };
+  // CCODE-38: remember which move families the player folded away, so a re-render doesn't undo it every round.
+  for (const d of app.querySelectorAll("[data-sbfam]")) d.ontoggle = () => { sbOpenFams[d.dataset.sbfam] = d.open; };
   for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => {
     const i = Number(b.dataset.sbskill), skills = window._sbSkills || [];
     if (sbWeaveArmed != null && sbWeaveArmed !== i) {

@@ -107,9 +107,18 @@ const rr = skillBattleRound(sbState, duelDef, { function: "reveal", tier: 3, att
 check("SNG-098 B: a skill-battle round returns a fog-gateable opponent receipt + shifts momentum + spends the player's energy",
   !!rr.opponent?.breakdown && rr.state.momentum !== 0 && rr.deltas.energy < 0);
 check("SNG-098 B: yielding ends the contest via the classic lifecycle outcome", skillBattleRound(sbState, duelDef, {}, { character: char, rules, sb, steps, yield: true }).outcome === "yielded");
-// a decisive momentum swing resolves to a duel outcome (opponent_fell / opponent_yielded)
+// CCODE-38: a decisive swing no longer ENDS the fight — it is PRESSURE. Sustained domination does end it: once the
+// opponent has been driven back breakAtPressure times they break, and THAT maps to the classic duel outcome.
 const crush = skillBattleRound({ ...sbState, momentum: 9 }, duelDef, { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" }, { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
-check("SNG-098 B: a decisive skill-battle win maps to a classic duel outcome (opponent_fell/yielded) + ends", crush.ended && /opponent_(fell|yielded)/.test(crush.outcome || ""));
+check("CCODE-38: a single decisive swing PRESSURES rather than ends (Erik: a meter must not decide a fight)",
+  !crush.ended && crush.pressureEvent?.side === "opponent");
+check("CCODE-38: sustained domination DOES end it — the opponent breaks, mapped to a classic duel outcome",
+  (() => {
+    const breakAt = sb.momentum.pressure.breakAtPressure;
+    const st = { ...sbState, momentum: 9, pressure: { player: 0, opponent: breakAt - 1 } };
+    const out = skillBattleRound(st, duelDef, { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" }, { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
+    return out.ended && /opponent_(fell|yielded)/.test(out.outcome || "");
+  })());
 
 // ---- CCODE-35: persistent effects (Erik: "each action should produce something that could persist") ----
 // The load-bearing guard is NOT "an effect appears on state" — it's "the effect REACHES THE ROLL as an honest,
@@ -222,6 +231,54 @@ check("CCODE-37: weaving records a co-activation, so a pairing ripens toward a r
     for (let i = 0; i < BRAID_RIPEN_AT; i++) recordUse(ch, ["a", "b"], { day: i });
     const cat = { a: { id: "a", name: "A", functions: ["strike"] }, b: { id: "b", name: "B", functions: ["reveal"] } };
     return mintableBraidsFor(ch, { catalog: cat }).some(m => m.components.includes("a") && m.components.includes("b"));
+  })());
+
+// ---- CCODE-38: momentum is a MODIFIER, not the exit (Erik: "I took one hit - still tons of energy and health") ----
+const bigSheets = { playerSheet: { attributes: { physical: 4 }, energy: 100 }, oppSheet: { attributes: { physical: 4 }, energy: 100, skills: [] } };
+const decls = { playerDecl: { function: "strike", tier: 2, attribute: "physical", intensity: "standard", name: "a cut" },
+                oppDecl: { function: "strike", tier: 2, attribute: "physical", intensity: "standard", name: "a hard strike" } };
+check("CCODE-38: momentum enters the roll as a NAMED modifier line (ahead presses, behind costs)",
+  (() => {
+    const r = battleRound({ ...decls, ...bigSheets, state: { momentum: 10, effects: [] }, rules, sb, steps, rng: seqRng([0.5, 0.5]) });
+    return (r.player.breakdown?.components || []).some(c => /momentum \(you have the advantage\)/.test(c.label) && c.value > 0)
+        && (r.opponent.breakdown?.components || []).some(c => /momentum \(you're on the back foot\)/.test(c.label) && c.value < 0);
+  })());
+check("CCODE-38: momentum at zero adds NO line (no zero-value noise in the breakdown)",
+  !(battleRound({ ...decls, ...bigSheets, state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.5, 0.5]) })
+    .player.breakdown?.components || []).some(c => /momentum/.test(c.label)));
+// THE ONE THAT MATTERS: a full meter must not end a fight fought by someone with resources left
+check("CCODE-38 (Erik's fight): filling the meter does NOT end it — it pressures, and the meter RESETS",
+  (() => {
+    const r = battleRound({ ...decls, ...bigSheets, state: { momentum: -15, effects: [], pressure: { player: 0, opponent: 0 } }, rules, sb, steps, rng: seqRng([0.99, 0.01]) });
+    const meterMax = sb.momentum.meterMax;
+    return !r.resolved && r.pressureEvent?.side === "player" && Math.abs(r.state.momentum) < meterMax;
+  })());
+check("CCODE-38: a pressure event costs the PLAYER real health via skillBattleRound (attrition, not a verdict)",
+  (() => {
+    const st = { ...sbState, momentum: -15, pressure: { player: 0, opponent: 0 } };
+    const out = skillBattleRound(st, duelDef, { function: "strike", tier: 1, attribute: "practical", intensity: "standard", name: "a cut" }, { character: char, rules, sb, steps, rng: seqRng([0.99, 0.01]) });
+    return !out.ended && out.deltas.health < 0;
+  })());
+check("CCODE-38: pressure survives the skillBattleRound round-trip (the seam that would silently drop it)",
+  (() => {
+    const st = { ...sbState, momentum: -15, pressure: { player: 1, opponent: 0 } };
+    const out = skillBattleRound(st, duelDef, { function: "strike", tier: 1, attribute: "practical", intensity: "standard", name: "a cut" }, { character: char, rules, sb, steps, rng: seqRng([0.99, 0.01]) });
+    return (out.state.pressure?.player || 0) >= 2;
+  })());
+// ---- CCODE-38: the opponent is not a metronome (Erik: "they seem to always just strike") ----
+check("CCODE-38: opponentPolicy VARIES its verb across rounds instead of always picking skills[0]",
+  (() => {
+    const sheet = { skills: [{ function: "strike", name: "a hard strike", tier: 2 }, { function: "shield", name: "a raised guard", tier: 2 }, { function: "bind", name: "a grapple", tier: 2 }], energy: 80, tacticTags: [] };
+    const picks = new Set();
+    let last = null;
+    for (let round = 0; round < 6; round++) { const d = opponentPolicy(sheet, { momentum: 0, round, opponentEnergy: 80, lastOppFn: last }, null, sb); picks.add(d.function); last = d.function; }
+    return picks.size > 1;
+  })());
+check("CCODE-38: the policy stays DETERMINISTIC (same state in → same move out; duels stay reproducible)",
+  (() => {
+    const sheet = { skills: [{ function: "strike", name: "s", tier: 2 }, { function: "shield", name: "g", tier: 2 }], energy: 80, tacticTags: [] };
+    const st = { momentum: -4, round: 3, opponentEnergy: 80, lastOppFn: "strike" };
+    return opponentPolicy(sheet, st, null, sb).function === opponentPolicy(sheet, st, null, sb).function;
   })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

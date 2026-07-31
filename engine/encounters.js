@@ -102,17 +102,30 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before },
     // CCODE-35: `effects` must ride BOTH ways — into the round (they modify this roll) and back out onto the
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.
-    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy, effects: state.effects || [] }, rules, sb, steps, rng
+    // CCODE-35/38: `effects` and `pressure` must ride BOTH ways — into the round (they modify this roll / carry the
+    // count) and back out onto the encounter state. This hand-built state object is the seam where they'd drop.
+    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 } }, rules, sb, steps, rng
   });
-  const s = { ...state, round: state.round + 1, momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [] };
+  // CCODE-38: remember the foe's last verb so opponentPolicy's anti-repetition term has something to read —
+  // without this write the "don't be a metronome" penalty never fires and the variety fix is inert.
+  const s = { ...state, round: state.round + 1, momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, lastOppFn: oppDecl.function };
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
   if (r.resolved === "player") { s.status = "ended"; ended = true; outcome = (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell"; events.push(`You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`); }
   else if (r.resolved === "opponent") { s.status = "ended"; ended = true; outcome = "player_overcome"; deltas.health -= (cfg.playerHealthPerHit ?? 4); events.push(`${def.opponent.name} overwhelms you.`); }
   else if (r.resolved === "stalemate") { s.status = "ended"; ended = true; outcome = "stalemate"; events.push("Both of you are spent — it ends unresolved."); }
   else events.push(r.roundWinner === "player" ? "You press the advantage." : r.roundWinner === "opponent" ? "You give ground." : "Neither gains an inch.");
+  // CCODE-38: a PRESSURE event — the meter filled, so someone was driven back hard. Real attrition, not an ending.
+  if (r.pressureEvent) {
+    if (r.pressureEvent.side === "player") {
+      deltas.health -= r.pressureEvent.healthLoss || 0;
+      events.push(`${def.opponent.name} drives you back hard — you give ground but you are still standing.`);
+    } else {
+      events.push(`You drive ${def.opponent.name} back hard — they are shaken, but not done.`);
+    }
+  }
   s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);
-  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [] };
+  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent };
 }
 
 /** Player incapacitation check (app calls after applying deltas). */

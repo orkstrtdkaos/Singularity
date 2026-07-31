@@ -1,5 +1,39 @@
 # PO ALERT
 
+> ## [CCODE-46 complete_pending_review — CCode, 2026-07-31] The sense step is a real sense · moves are PRICED · finisher is a tag (v1.8.312 `6fae08bf`)
+> Erik's four asks from the preview screenshot, all built.
+> **1. The SENSE step only allows senses.** *"During the sense action, you shouldn't be able to use clearly attacks
+> during the sense round."* Now lists only sense-capable crafts (reveal/foresee/track, from content) **plus three
+> GENERIC ATTRIBUTE SENSES** — *"a wits sense could find a solution that a Reason based sense might miss"*:
+> **Size them up (Wits)** finds the opening/the trick/what they aren't guarding · **Reason it out (Reason)** finds
+> the pattern and where it breaks · **Read them (Insight)** finds intent and resolve. You can always LOOK, craft or
+> no craft — and the attribute you look WITH changes what you find.
+> **2. The read now PAYS, and the fogged math shows.** *"I don't see it giving me the fogged math at all - even
+> though I did a read step."* **Root cause:** the fog gate was `sbLastRound?.opponent && st.round > 1`, but the
+> sense step deliberately no longer advances the round — **so that gate never opened and a read bought the player
+> nothing they could see.** Fog now reads a receipt PERSISTED on encounter state, and a read buys the scouting tier.
+> Per *"Even no success might give you some idea of what you COULD read"*: **fail** names what you would have seen ·
+> **partial** a glimpse · **success** *"they favour strike. Pick a craft that answers it."* · **crit** *"they lean on
+> <craft>, and their guard opens when they commit. Counter that function and the exchange is yours."*
+> **3. Every move is PRICED, and the confidence is itself fogged.** *"If the enemy uses umbracraft then I might not
+> be able to tell certain success chances as well - unless of course i have a radiant skill."* Each move shows an
+> estimated chance to **win the exchange** — a real opposed calculation (closed form: two d100s, so the difference is
+> triangular), including matchup and standing effects. The **confidence** is what the fog gates: unread → *"you
+> cannot price this yet"*; a read buys a band, then a rough number, then the number. **Holding a counter-craft buys
+> confidence too** — light finds shadow. Low confidence shows a BAND, never a fabricated number.
+> **4. Finish-it is a TAG on the move, not a button.** A craft that CAN kill (harmRung lethal/atrocity) carries the
+> potential from the start; an ordinary harm craft **earns** it at tier 3 and shows **"⚡ at T3"** until then. The
+> separate ⚡ Finish it button is gone.
+> npm test exit 0 (19 seams, rawProseCaps 63). Live on **never-used ports 8416/8417**: sense step lists 6 sense-only
+> moves incl. all three attribute senses; odds go *"you cannot price this yet"* → **"likely (~70%)"** after the read;
+> the crit read named the tendency and the counter; "⚡ at T3" renders. No console errors.
+> **DIALS:** `senseStep.senseFunctions/genericSenses`, `oddsPreview.confidenceByFogTier/counterCraftBonus/bands`,
+> `finisher.finisherTierAt/alwaysAtHarmRung`.
+> **STILL UNBUILT:** CCODE-42 (Finish-it *odds* — Cut-the-Thread as an opposed roll, near-certain vs a run-down foe
+> when you hold momentum; the TAG is done, the situational odds are not) and CCODE-43 (items in combat).
+> Results: po/results/20260731_CCODE-46_sense_odds_finisher.md
+
+
 > ## [CCODE-45 complete_pending_review — CCode, 2026-07-31] THE TURN IS PLAYABLE + CCODE-44 rebuilt + the bonus dial MEASURED (v1.8.307 `b2fa0a29`, v1.8.310 `0036d023`)
 > Erik: *"do all of this."* All four shipped.
 > **1. THE BONUS DIAL, MEASURED — and my guess was wrong.** I proposed crit-only in the spec and flagged it for

@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-34 complete_pending_review — CCode, 2026-07-31] The one-round-fight bug, MEASURED + skill target clarity (v1.8.298 `99c377b5`)
+> Erik pasted his combat log back from the new machine tab (CCODE-33) — **the instrument paid for itself on its first
+> use.** He was right that momentum was tripping too easily, and it was far worse than his two samples showed.
+> **The bug:** `delta = |margin_p − margin_o| × marginScale`. Two d100 rolls differ by ~33 on average, so with
+> `marginScale 0.5` a TYPICAL round produced delta ≈16.5 — past BOTH `meterMax` (16) AND `surgeCrushEndsIt` (16) at
+> once. My SNG-246 widening (10→16, 8→16) didn't help because **marginScale stayed at 0.5** — I widened the goalposts
+> and left the step size that overshoots them. **Measured instead of guessing** (4000 sim fights/dial against the real
+> `battleRound`): the shipped 16/0.5/16 ended **47% of fights in ONE round and 90.6% by crush**. Erik's experience was
+> the system, not bad luck. **Now 16 / 0.20 / 20** — median 4-5 rounds, ~5% one-round ends (concentrated vs weak foes,
+> which is correct), ~4% crush so an overwhelming blow stays a rare real beat. Rejected 16/0.15/18 (median 7, crush
+> 0% — removes a genuine outcome). The deliberate **Finish it** (§6b collapse) is a separate path, untouched.
+> Live: a real **13-round fight**, momentum −8.8 → −15.4 (nearly overcome) → +3.4 → −11.4 → +13.8 → won.
+> **Skill target clarity** (Erik: *"if i use the better story, am i trying to heal myself or the enemy??"*): every move
+> now carries a one-line what-it-does naming the TARGET — "mends YOU — not them" / "harms THEM" / "misdirects THEM —
+> you slip the exchange entirely" — derived from the function so it covers every craft incl. the fallbacks. Beside each
+> move (**never inside** the button, where a tap would fire the move) an **ⓘ** opens the *already-built* shared popover:
+> the craft detail for an owned craft, the verb mechanics for a fallback. Verified live that ⓘ does NOT declare a move.
+> npm test exit 0.
+> **AEVI/ERIK — THE DIALS ARE YOURS.** 16/0.20/20 is a measured starting point, not a verdict. Fights feel long → raise
+> `marginScale` toward 0.25; too fast → lower it. The p90 tail is ~11-12 rounds (Break away / Yield / Finish it are
+> always available, and energy attrition caps it).
+> **OPEN (Erik's "suggestion like the level-up GM suggestions"):** I built a derived line + the existing popover rather
+> than a GM call — the fight panel is deliberately API-free. An AI-authored per-craft combat hint would be a CONTENT
+> pass (author `combatHint` per ability), not a live call. Say the word if you want it.
+> Results: po/results/20260731_CCODE-34_fight_length_dials_and_skill_target_clarity.md
+
+
 > ## [CCODE-33 complete_pending_review — CCode, 2026-07-31] Legible skill-battle rounds: receipt + machine log + fight takeover (v1.8.297 `1c04dab5`)
 > Erik playtest: *"I clicked deceiving skills… no rolls, no opposed rolls or descriptions… then the encounter ended
 > inexplicably with me on my back — frustrating."* Root cause: `sbDeclare` (the API-free round resolver) rendered

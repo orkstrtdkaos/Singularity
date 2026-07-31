@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.297";
+const APP_VERSION = "1.8.298";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8460,7 +8460,18 @@ function skillBattlePanel() {
   const byFam = {};
   skills.forEach((s, i) => { const f = sbFamilyOf(s); (byFam[f] = byFam[f] || []).push({ s, i }); });
   const groups = FUNCTION_FAMILIES.filter(f => byFam[f]?.length).map(f => {
-    const chips = byFam[f].map(({ s, i }) => `<button class="btn secondary sb-skill" data-sbskill="${i}" style="display:block; width:100%; text-align:left; margin:3px 0; border-left:3px solid ${FAMILY_COLOR[f]}">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span></button>`).join("");
+    // CCODE-34: each move carries a WHAT-IT-DOES line (target clarity) + an ⓘ that opens the full craft detail.
+    // The ⓘ is a SIBLING of the declare-button, never a child — inside it, a tap would also declare the move.
+    const chips = byFam[f].map(({ s, i }) => {
+      const does = SB_DOES[s.function] || "";
+      const known = !!fullCatalog()[s.id];
+      const info = known
+        ? `<button class="sb-skill-info" data-entity="skill:${esc(s.id)}" title="What this craft is — full detail" aria-label="Explain ${esc(s.name)}">ⓘ</button>`
+        : `<button class="sb-skill-info" data-verb="${esc(s.function)}" title="What ${esc(s.function)} does — the verb's mechanics" aria-label="Explain ${esc(s.function)}">ⓘ</button>`;
+      return `<div class="sb-skill-row" style="border-left:3px solid ${FAMILY_COLOR[f]}">
+        <button class="btn secondary sb-skill" data-sbskill="${i}">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}</button>${info}
+      </div>`;
+    }).join("");
     return `<div class="moves-group"><div class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())}</div>${chips}</div>`;
   }).join("");
   return `<div class="sb-panel">
@@ -8493,6 +8504,25 @@ function sbFamilyOf(s) {
 }
 // Combat-intent labels for the families (Erik's "read/sense, hinder, harm, position…"); falls back to the family name.
 const SB_FAM_LABEL = { KNOW: "read / sense", HARM: "harm", INFLUENCE: "hinder / sway", MOVE: "position", PROTECT: "guard", RESTORE: "mend", SHAPE: "shape", SUSTAIN: "sustain" };
+
+// CCODE-34 (Erik: "if I use The Better Story, am I trying to heal myself or the enemy??"): a one-line WHAT-THIS-DOES
+// per move, keyed by function — the load-bearing part is naming the TARGET (you vs them), which the craft's own name
+// never tells you. Derived, so it covers every craft including the steel-and-wit fallbacks; the ⓘ beside each move
+// opens the full craft detail (the same shared popover used everywhere else).
+const SB_DOES = {
+  strike: "harms THEM", break: "shatters THEIR guard — harm through defence",
+  hinder: "hampers THEM — costs them the exchange, not blood", bind: "pins THEM — takes their footing",
+  command: "bends THEM — makes them answer you instead of acting",
+  shield: "guards YOU — blunts what they send", ward: "wards YOU — turns a specific harm aside",
+  resist: "braces YOU — you weather it instead of trading",
+  conceal: "hides YOU — they swing at where you were", deceive: "misdirects THEM — you slip the exchange entirely",
+  reveal: "reads THEM — sharpens the fog and sets up your next move", foresee: "reads THEIR next beat before it lands",
+  track: "follows THEM — they can't break your line",
+  heal: "mends YOU — not them", mend: "mends YOU — not them", restore: "restores YOU — recovers what the fight took",
+  empower: "strengthens YOU for the beats after this one", sustain: "holds YOU — pays the attrition war down",
+  move: "repositions YOU", travel: "moves YOU — ground, not blood", open: "opens a way — an exit or an angle",
+  make: "shapes the ground between you", transform: "reshapes the terms of the fight", summon: "calls something in on your side"
+};
 
 /** SNG-246 BUG1: wire the skill-battle panel's controls (renderPlay calls this after chrome() when in a skill
  *  battle). Same handlers the old separate screen had — sbDeclare drives every round; NEVER duelRound. */

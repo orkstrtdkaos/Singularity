@@ -161,7 +161,15 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momM
     ]
   };
   const res = resolveAction(ctx, rng);
-  return { ...res, margin: res.chance - res.roll, matchup: mu, intensity: decl.intensity, tier, function: decl.function, name: decl.name || decl.function, effectMods: fxMods, woven: decl.woven || null };
+  // CCODE-40 (Erik, exact): "All of the bonuses and penalties need to be stacked and compared PRIOR to a clamp. If
+  // I have +35 due to abilities and skills and the enemy has +25 but has also landed a bind on me (-15) the net
+  // difference would be (-5) to my roll." The margin was computed from the CLAMPED chance, so once a capable
+  // character hit the 95% ceiling every further term — a bind laid on them, a woven craft, momentum, a guard —
+  // was silently discarded and the contest read as a tie of two 95s. The fix is surgical and keeps both truths:
+  //   • DEGREE still uses the clamped chance — the ceiling exists so your own action can always fail.
+  //   • The CONTEST margin uses the RAW pre-clamp stack, so every named term actually reaches the comparison.
+  const rawChance = res.breakdown?.clampedFrom ?? res.chance;
+  return { ...res, rawChance, margin: rawChance - res.roll, matchup: mu, intensity: decl.intensity, tier, function: decl.function, name: decl.name || decl.function, effectMods: fxMods, woven: decl.woven || null };
 }
 
 /** CCODE-37: what folding a second craft into the round is worth — scales with the woven craft's tier, capped. */

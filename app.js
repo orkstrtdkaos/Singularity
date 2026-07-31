@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.303";
+const APP_VERSION = "1.8.304";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8529,7 +8529,11 @@ function skillBattlePanel() {
       const mk = (side, bd, roll, chance, deg) => bd
         ? `<button class="data-link" data-breakdown='${esc(JSON.stringify(bd))}' title="The full math for ${side === "you" ? "your" : "their"} roll this round">⚄ ${side === "you" ? "your" : "their"} roll ${roll}/${chance}${deg ? ` · ${String(deg).replace("_", " ")}` : ""}</button>`
         : "";
-      const yours = mk("you", r.you?.breakdown, r.you?.roll, r.you?.chance, r.you?.degree);
+      // CCODE-40: when the ceiling bit, say so plainly — the number that DECIDED the exchange is the raw stack,
+      // not the 95 you rolled against. Otherwise "95 vs 95" reads as a tie when one side was really far ahead.
+      const rawNote = (r.you?.rawChance != null && r.you.rawChance !== r.you.chance)
+        ? `<span class="hint sb-raw-note">your stack totalled <strong>${r.you.rawChance}</strong> before the ${r.you.chance}% ceiling — the contest is decided on the full stack, so every bonus and penalty counts</span>` : "";
+      const yours = mk("you", r.you?.breakdown, r.you?.roll, r.you?.chance, r.you?.degree) + rawNote;
       const theirs = fog?.revealed?.breakdown ? mk("them", r.them?.breakdown, r.them?.roll, r.them?.chance, r.them?.degree)
         : `<span class="hint sb-roll-fog">their math is fogged — 👁 read them to see it</span>`;
       return `<div class="sb-rolls">${yours}${theirs}</div>`;

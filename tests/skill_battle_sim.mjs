@@ -312,5 +312,38 @@ check("CCODE-39: fights still terminate — the opponent breaking remains a real
     return out.ended;
   })());
 
+// ---- CCODE-40: stacks are compared PRIOR to the clamp (Erik's exact arithmetic) ----
+// "If I have +35 due to abilities and skills and the enemy has +25 but has also landed a bind on me (-15) the net
+// difference would be (-5) to my roll." Before this, both sides clamped at the 95% ceiling and the bind did NOTHING.
+const strongP = { attributes: { physical: 6 }, energy: 100 };   // deep into the clamp on its own
+const strongO = { attributes: { physical: 6 }, energy: 100, skills: [] };
+const evenDecls = { playerDecl: { function: "strike", tier: 3, attribute: "physical", intensity: "standard", name: "a cut" },
+                    oppDecl: { function: "strike", tier: 3, attribute: "physical", intensity: "standard", name: "a hard strike" } };
+const noBind = battleRound({ ...evenDecls, playerSheet: strongP, oppSheet: strongO, state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.5, 0.5]) });
+const withBind = battleRound({ ...evenDecls, playerSheet: strongP, oppSheet: strongO,
+  state: { momentum: 0, effects: [{ kind: "bound", label: "bound", value: -15, roundsLeft: 2, applies: "always", side: "player", source: "a grapple", from: "opponent" }] },
+  rules, sb, steps, rng: seqRng([0.5, 0.5]) });
+check("CCODE-40: both sides are ABOVE the ceiling here (the clamp really is biting — the bug's precondition)",
+  noBind.player.breakdown?.clampedFrom > noBind.player.chance && noBind.opponent.breakdown?.clampedFrom > noBind.opponent.chance);
+check("CCODE-40: a bind laid on you now MOVES the contest (it was silently discarded by the clamp before)",
+  withBind.player.margin < noBind.player.margin);
+check("CCODE-40: the bind's full -15 reaches the margin, undiluted by the ceiling",
+  (noBind.player.margin - withBind.player.margin) === 15);
+// margin is ALWAYS rawChance - roll; and on the still-clamped side raw and clamped genuinely differ.
+// (With the -15 applied the player drops back UNDER the ceiling — which is the point: the penalty now bites.)
+check("CCODE-40: the contest margin is always rawChance − roll, on both sides",
+  withBind.player.margin === (withBind.player.rawChance - withBind.player.roll)
+  && withBind.opponent.margin === (withBind.opponent.rawChance - withBind.opponent.roll));
+check("CCODE-40: on a side the ceiling DID bite, the raw stack outranks the clamped chance",
+  noBind.player.rawChance > noBind.player.chance && withBind.opponent.rawChance > withBind.opponent.chance);
+check("CCODE-40: DEGREE still uses the clamped chance — the ceiling still lets your own action fail",
+  noBind.player.chance <= rules.d100.ceilingChance);
+check("CCODE-40: an unclamped roll is unaffected (rawChance === chance when the ceiling never bit)",
+  (() => {
+    const weak = battleRound({ ...evenDecls, playerSheet: { attributes: { physical: 1 }, energy: 100 }, oppSheet: { attributes: { physical: 1 }, energy: 100, skills: [] },
+      state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.5, 0.5]) });
+    return weak.player.rawChance === weak.player.chance && weak.player.margin === weak.player.chance - weak.player.roll;
+  })());
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

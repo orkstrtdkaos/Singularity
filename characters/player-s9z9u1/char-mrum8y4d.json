@@ -209,85 +209,76 @@
         "player": null,
         "summary": "The stranger put Loki on the ground at the confluence and asked, plainly and without malice, why they followed.",
         "narration": "The stranger closes the distance faster than the gap between you suggested was possible. There is no preamble and no wasted motion — a hand at your collar, a foot behind your ankle, and the ground arrives hard through your shoulder. The mud takes the impact with a cold, wet slap. You lie there for a moment with the breath knocked out of you and the smell of river silt close. Cy backs three precise steps. The lens is wide open, unblinking. The stranger stands over you and looks down. Their expression has not changed — the same flat, evaluating look, only now you are the thing being evaluated from a different angle. They do not offer a hand. After a breath, they crouch — not to help, but to bring their face level with yours — and they say, quietly and without heat, 'You followed. Why?' The question sits in the cool spring air between you. The scratch on the stone, the Waterskin, the yielding, the return — all of it was leading to this. They are waiting."
+      },
+      {
+        "player": null,
+        "summary": "Loki rises from the mud and faces the stranger without answering — the hostile meeting is joined.",
+        "narration": "The stranger's question is one word, but it holds weight. It sits in the mud between you like a stone dropped into still water.\n\nYou look up at the flat evaluating face. Cy is three steps back, lens wide and unblinking, tracking everything and committing to nothing. The confluence moves past you both, cold and indifferent. The scratch-mark on the flat river stone is still hidden beneath the Waterskin, its meaning unspoken.\n\nYou do not answer the question. You get up.\n\nIt is not fast and it is not graceful — the mud holds your coat for a moment before it lets go — but you find your feet and you face them at close range, and that is its own kind of answer. The stranger watches this without stepping back. Their weight is still forward. The decision they made at the willows is still in their body, waiting.\n\nCy clicks once, very quietly."
       }
     ],
     "lastTurn": {
-      "narration": "The stranger closes the distance faster than the gap between you suggested was possible. There is no preamble and no wasted motion — a hand at your collar, a foot behind your ankle, and the ground arrives hard through your shoulder. The mud takes the impact with a cold, wet slap. You lie there for a moment with the breath knocked out of you and the smell of river silt close. Cy backs three precise steps. The lens is wide open, unblinking. The stranger stands over you and looks down. Their expression has not changed — the same flat, evaluating look, only now you are the thing being evaluated from a different angle. They do not offer a hand. After a breath, they crouch — not to help, but to bring their face level with yours — and they say, quietly and without heat, 'You followed. Why?' The question sits in the cool spring air between you. The scratch on the stone, the Waterskin, the yielding, the return — all of it was leading to this. They are waiting.",
-      "sceneSummary": "The stranger put Loki on the ground at the confluence and asked, plainly and without malice, why they followed.",
+      "narration": "The stranger's question is one word, but it holds weight. It sits in the mud between you like a stone dropped into still water.\n\nYou look up at the flat evaluating face. Cy is three steps back, lens wide and unblinking, tracking everything and committing to nothing. The confluence moves past you both, cold and indifferent. The scratch-mark on the flat river stone is still hidden beneath the Waterskin, its meaning unspoken.\n\nYou do not answer the question. You get up.\n\nIt is not fast and it is not graceful — the mud holds your coat for a moment before it lets go — but you find your feet and you face them at close range, and that is its own kind of answer. The stranger watches this without stepping back. Their weight is still forward. The decision they made at the willows is still in their body, waiting.\n\nCy clicks once, very quietly.",
+      "sceneSummary": "Loki rises from the mud and faces the stranger without answering — the hostile meeting is joined.",
       "choices": [
         {
-          "label": "Tell them the truth — you followed because of the scratch-mark and you want to know what it means.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.4
-          },
-          "difficulty": 0,
+          "label": "Press forward — close the distance and make the stranger work for every inch of ground.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
-            "negotiate"
+            "attack",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Give them the shape of an answer — not the scratch-mark, but something true enough: you followed because they left, and leaving after a thing like that is itself a kind of invitation.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": -0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade"
-          ],
-          "abilityId": "the_better_story",
-          "energyCost": 1,
           "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "encounterId": "a-hostile-meeting"
         },
         {
-          "label": "Read what the stranger is actually building here — what version of this moment are they holding, and where is the seam in it.",
+          "label": "Hold your ground and read them — let the stranger commit first, then answer it.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.2
-          },
           "difficulty": 15,
           "intentTags": [
-            "study"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stay down a moment longer. Get your breath. Then sit up slowly and say nothing — let them fill the silence.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
+            "defend",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false,
+          "encounterId": "a-hostile-meeting"
+        },
+        {
+          "label": "Give them the wrong position — let them strike at where you were, not where you are.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 15,
+          "intentTags": [
+            "feint",
+            "defend"
+          ],
+          "abilityId": "the_false_target",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": "a-hostile-meeting"
+        },
+        {
+          "label": "Step back and show empty hands — yield the ground before a blow lands and ask the question back.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "calm",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": "a-hostile-meeting"
         }
       ],
-      "characterDeltas": {
-        "health": -3,
-        "energy": 0
-      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light. Loki is on their back in the cold mud at the bank. The stranger crouches over them, face level, waiting for an answer.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light. Loki has risen from the cold mud and stands facing the stranger at close range on the bank.",
         "npcsPresent": [
           {
             "name": "Cy",
@@ -295,29 +286,32 @@
           },
           {
             "name": "The Stranger",
-            "state": "Crouching over Loki, expression flat and evaluating, asking 'Why?'"
+            "state": "Weight forward, squared shoulders, watching Loki rise — the decision to fight still in their body, waiting."
           }
         ],
         "objects": [
           "flat river stone with fresh pale scratch-mark, Waterskin set on top of it",
           "boot-prints in mud ending at the water's edge",
           "mud smear on a root confirming earlier passage",
-          "bent stems and snapped low branch marking the brush entry"
+          "bent stems and snapped low branch marking the brush entry",
+          "mud on Loki's coat from the fall"
         ],
         "threads": [
           "The scratch-mark on the stone is still hidden beneath the Waterskin — its meaning unspoken.",
-          "The stranger's question hangs in the air: 'Why?'",
-          "The stranger's purpose here — beyond this confrontation — is still unspoken.",
+          "The stranger's question — 'Why?' — was not answered; Loki rose instead.",
+          "The stranger's purpose here beyond this confrontation is still unspoken.",
           "The three-hundred-year tree about to fruit and the missing person it was planted for."
         ]
       },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief, sharp confrontation at the bank — a few minutes at most."
-      }
+      "encounterOps": [
+        {
+          "op": "tactic",
+          "tag": "press-in"
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light. Loki is on their back in the cold mud at the bank. The stranger crouches over them, face level, waiting for an answer.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring morning, thin light. Loki has risen from the cold mud and stands facing the stranger at close range on the bank.",
       "npcsPresent": [
         {
           "name": "Cy",
@@ -325,19 +319,20 @@
         },
         {
           "name": "The Stranger",
-          "state": "Crouching over Loki, expression flat and evaluating, asking 'Why?'"
+          "state": "Weight forward, squared shoulders, watching Loki rise — the decision to fight still in their body, waiting."
         }
       ],
       "objects": [
         "flat river stone with fresh pale scratch-mark, Waterskin set on top of it",
         "boot-prints in mud ending at the water's edge",
         "mud smear on a root confirming earlier passage",
-        "bent stems and snapped low branch marking the brush entry"
+        "bent stems and snapped low branch marking the brush entry",
+        "mud on Loki's coat from the fall"
       ],
       "threads": [
         "The scratch-mark on the stone is still hidden beneath the Waterskin — its meaning unspoken.",
-        "The stranger's question hangs in the air: 'Why?'",
-        "The stranger's purpose here — beyond this confrontation — is still unspoken.",
+        "The stranger's question — 'Why?' — was not answered; Loki rose instead.",
+        "The stranger's purpose here beyond this confrontation is still unspoken.",
         "The three-hundred-year tree about to fruit and the missing person it was planted for."
       ]
     }
@@ -345,7 +340,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 9,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [
@@ -942,11 +937,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 758,
-    "lastSharedReadAt": "2026-07-31T14:44:42.398Z",
+    "lastGenCount": 759,
+    "lastSharedReadAt": "2026-07-31T15:28:56.126Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 14,
+    "turnsSinceOffer": 15,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -1002,7 +997,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 5,
+        "stage": 6,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1015,7 +1010,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 5,
+        "stage": 6,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1040,7 +1035,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 0,
+        "stage": 1,
         "seededAtCount": 758,
         "surfaced": false,
         "fate": "growing",
@@ -1067,6 +1062,21 @@
           "type": "encounter",
           "encounterId": "beast_warpling_hare",
           "name": "warpling hare"
+        },
+        "addedDay": 1,
+        "locationId": "the_slow_orchard"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_glimmerling_swarm",
+        "aimedAtPlayer": true,
+        "urgency": 2,
+        "oneLineHook": "A glimmerling swarm has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_glimmerling_swarm",
+          "name": "glimmerling swarm"
         },
         "addedDay": 1,
         "locationId": "the_slow_orchard"
@@ -1896,8 +1906,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785509614631,
-  "rev": 198,
+  "updatedAt": 1785511781107,
+  "rev": 204,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2398,7 +2408,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 15
+    "the_quickwood": 16
   },
   "opLossPending": false,
   "sessions": [
@@ -2437,10 +2447,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-31T14:12:25.631Z",
-      "lastAt": "2026-07-31T14:53:34.630Z",
+      "lastAt": "2026-07-31T15:29:41.105Z",
       "startDay": 31,
       "endDay": 31,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -2480,11 +2490,11 @@
   "_opEmitted": {
     "sceneSummary": 95,
     "choices": 95,
-    "characterDeltas": 42,
+    "characterDeltas": 41,
     "scene": 95,
     "placeUpdates": 12,
     "codexUpdates": 75,
-    "timeOps": 94,
+    "timeOps": 93,
     "offer": 9,
     "generateRequest": 3,
     "sceneEnded": 21,
@@ -2496,7 +2506,7 @@
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
-    "encounterOps": 2,
+    "encounterOps": 3,
     "ledgerEvents": 1,
     "newEncounter": 1
   },
@@ -2766,7 +2776,53 @@
       }
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-re_raider_duel",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-re_raider_duel",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 6,
+      "tactic": "press-in",
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 4,
+          "physical": 4,
+          "mental": 4,
+          "social": 4
+        },
+        "energy": 94,
+        "maxEnergy": 94,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 3,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 3,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 94
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"

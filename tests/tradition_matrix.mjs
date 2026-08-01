@@ -64,7 +64,16 @@ function buildKit(tradition, level) {
   const pool = (byTradition[tradition] || []).filter(a => (a.levelReq || 1) <= Math.ceil(level / 5));
   const cap = Number(capacity[String(level)] ?? capacity[String(Math.min(25, level))] ?? 6) || 6;
   const kit = pool.slice().sort((a, b) => (b.levelReq || 1) - (a.levelReq || 1)).slice(0, cap);
-  return kit.map(a => ({ ...a, intensity: "standard", tier: a.levelReq || 1 }));
+  // ONE MOVE PER VERB, exactly as playerBattleSkills does. An ability carries `functions` (a PLURAL array)
+  // and rollSide reads `decl.function` (SINGULAR) — so a kit built straight from ability records declares
+  // `function: undefined`, every matchup resolves to 0, and every tradition plays identically no matter what
+  // the matrix says. That was a bug in THIS harness, and it hid the entire point of the file: the first run
+  // after Aevi landed 110 matchup edges produced byte-identical results to the 7-edge run, which is what
+  // exposed it. The app also lists a craft under EVERY function it has (a command+empower+heal craft is
+  // three moves, not one), so expanding here is the faithful shape as well as the working one.
+  return kit.flatMap(a => (a.functions || []).map(fn => ({
+    ...a, function: fn, intensity: "standard", tier: a.levelReq || 1, name: `${a.name} (${fn})`
+  }))).filter(m => m.function);
 }
 function sheetFor(level) {
   const attr = Math.max(2, Math.min(8, 2 + Math.floor(level / 4)));
@@ -133,9 +142,25 @@ let pairs = 0, nonzero = 0;
 for (const a of VERBS) for (const d of VERBS) { pairs++; const v = edges[a]?.[d]; if (Number.isFinite(v) && v !== 0) nonzero++; }
 const noEdges = VERBS.filter(v => !edges[v]);
 console.log(`\n      MATCHUP COVERAGE: ${nonzero} of ${pairs} verb pairs (${pct(nonzero, pairs)}%) carry a non-zero edge; ${noEdges.length} of ${VERBS.length} verbs have NO edges at all.`);
-console.log(`      Verbs with no matchup at all: ${noEdges.join(", ")}`);
-console.log(`      ⇒ a tradition's chosen VERBS barely change a fight, which is why ${UNDER_TEST.length} independently-authored kits`);
-console.log(`        land within ${(overall(ranked[0]) - overall(ranked[ranked.length - 1])).toFixed(1)} points of each other. The differentiation is authored in the FICTION but not yet in the MATH.`);
+if (noEdges.length) console.log(`      Verbs with no matchup at all: ${noEdges.join(", ")}`);
+
+// INERT PAIRS — the subtle failure in a matchup table, and one a coverage count cannot see.
+// `rollSide` gives EACH side matchupBonus(ownVerb, theirVerb) and the round is decided by comparing
+// margins, so only the DIFFERENCE can change an outcome. A pair scored equally in both directions adds
+// the same number to both margins and cancels EXACTLY — it reads as a designed relationship and is
+// mechanically nothing. Aevi's SNG-254 note names track↔conceal as "a real CYCLE not a hierarchy"; a
+// cycle needs A>B>C>A, and a mutual +3/+3 is not a cycle, it is a no-op.
+const inert = [], seenPair = new Set();
+for (const a of VERBS) for (const d of VERBS) {
+  if (a === d) continue;
+  const k = [a, d].sort().join("|"); if (seenPair.has(k)) continue; seenPair.add(k);
+  const A = edges[a]?.[d], D = edges[d]?.[a];
+  if (A == null && D == null) continue;
+  if ((Number(A) || 0) - (Number(D) || 0) === 0) inert.push(`${a}↔${d}`);
+}
+console.log(`      INERT PAIRS (equal in both directions ⇒ cancels in the margin ⇒ no mechanical effect): ${inert.length}${inert.length ? ` — ${inert.join(", ")}` : ""}`);
+const spread = overall(ranked[0]) - overall(ranked[ranked.length - 1]);
+console.log(`      ⇒ ${UNDER_TEST.length} independently-authored kits span ${spread.toFixed(1)} points.`);
 
 // ---------- THE GATES (structural truths no design intent excuses) ----------
 console.log("");
@@ -162,8 +187,12 @@ check("no tradition makes THREAT IRRELEVANT — none wins ~everything at the epi
 // failing the build on today's 7 edges would be imposing a backlog item as a regression. But it may only
 // go UP: if someone deletes edges, the little differentiation that exists gets quieter still, and that
 // should be loud.
-check(`matchup coverage may only GROW — ${nonzero} non-zero verb-pair edges (baseline 7)`,
+check(`matchup coverage may only GROW — ${nonzero} non-zero verb-pair edges (baseline 7, SNG-254 took it to 110+)`,
   nonzero >= 7, `coverage fell to ${nonzero}; traditions are now even less mechanically distinct than they were`);
+// A ratchet, not a wall: the 7 inert pairs are Aevi's to tune and several look like a cycle she intended.
+// It may only go DOWN, so a future edit cannot quietly add more relationships that read real and do nothing.
+check(`INERT matchup pairs may only go DOWN — ${inert.length} pairs cancel to zero (baseline 7)`,
+  inert.length <= 7, `${inert.length} inert pairs: ${inert.join(", ")} — each reads as a designed relationship and has no mechanical effect at all`);
 
 check("threat still MEANS something across the whole matrix — riffraff beats epic on average, everywhere",
   [...UNDER_TEST, CONTROL].every(t => {

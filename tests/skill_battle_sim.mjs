@@ -29,10 +29,17 @@ const check = (label, cond) => { console.log((cond ? "PASS  " : "FAIL  ") + labe
 const seqRng = (vals) => { let i = 0; return () => vals[i++ % vals.length]; };
 
 // ---- matchup edges (structured, from content) ----
-check("SNG-098: reveal beats conceal (+2 for the reveal)", matchupBonus("reveal", "conceal", sb) === 2);
-check("SNG-098: conceal is at a disadvantage vs reveal (-2)", matchupBonus("conceal", "reveal", sb) === -2);
+// SNG-254 (Aevi): the matchup matrix grew 7 -> 110 edges and she stated plainly that "relationships are
+// the design; magnitudes tunable". These checks asserted exact NUMBERS (=== 2, === -2), so they gated a
+// DIAL and went red the moment she tuned it — a test that blocks the author from doing the thing the test
+// exists to protect. Rewritten to assert the RELATIONSHIP, which is the durable claim: a seer has the NET
+// advantage over someone hiding. Net, not one-directional, because BOTH sides receive their own bonus and
+// the round is decided by comparing margins — so only the DIFFERENCE can change an outcome.
+const netEdge = (a, d) => matchupBonus(a, d, sb) - matchupBonus(d, a, sb);
+check("SNG-098/254: a seer has the NET advantage over someone concealing", netEdge("reveal", "conceal") > 0,
+  `reveal>conceal ${matchupBonus("reveal", "conceal", sb)} vs conceal>reveal ${matchupBonus("conceal", "reveal", sb)} — net ${netEdge("reveal", "conceal")}`);
 check("SNG-098: a shield BLUNTS a strike — no edge, never a penalty (0)", matchupBonus("strike", "shield", sb) === 0);
-check("SNG-098: bind pins move (+2)", matchupBonus("bind", "move", sb) === 2);
+check("SNG-098/254: a bind has the NET advantage over movement", netEdge("bind", "move") > 0, `net ${netEdge("bind", "move")}`);
 check("SNG-098: an unknown matchup falls to the default (0)", matchupBonus("waffle", "nonsense", sb) === 0);
 
 // ---- opponent sheet synthesis from threat + tacticTags ----

@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "encounter_frame_kinds",
  "kind": "content",
- "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths. | SNG-238/237 (Aevi 2026-07-27): expanded from 2 seed exemplars to a real LIBRARY - standoffs (grieving-warden/toll-of-names/rival-claim - the non-combat exchange with stakes, the stationary-talker SNG-237 Fix C needs) + puzzles (stopped-mechanism/warded-cache/flooded-works), all grounded in the Valley's real fiction (precursor works, wards, named prices, contested claims). Matches the enc_the_sealed_door shape exactly.",
+ "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths. | SNG-238/237 (Aevi 2026-07-27): expanded from 2 seed exemplars to a real LIBRARY - standoffs (grieving-warden/toll-of-names/rival-claim - the non-combat exchange with stakes, the stationary-talker SNG-237 Fix C needs) + puzzles (stopped-mechanism/warded-cache/flooded-works), all grounded in the Valley's real fiction (precursor works, wards, named prices, contested claims). Matches the enc_the_sealed_door shape exactly. | SNG-247 chase-direction fix (Aevi 2026-07-27): chase copy was pursuer-assumed ('run it down') but chaseFromFight mints a FLEEING chase (the common case) - added byDirection.fleeing/pursuing so the frame reads right whether you're running or hunting.",
  "frameKinds": {
   "fight": {
    "icon": "⚔",
@@ -19,15 +19,42 @@
   "chase": {
    "icon": "🏃",
    "title": "The Chase",
-   "winCondition": "Get away — or run it down",
+   "winCondition": "Break contact — or run it down",
    "meterLabel": "Distance",
    "exits": {
-    "defeat": "Press",
-    "flee": "—",
-    "fail": "Caught"
+    "defeat": "Push",
+    "flee": "Break off",
+    "fail": "It ends the wrong way"
    },
-   "failStakes": "The gap closes the wrong way — caught, or lost them. If you were fleeing a fight, it resumes.",
-   "note": "You cannot 'flee' a chase — shaking it IS the chase's defeat. Its flee slot is disabled."
+   "failStakes": "The gap closes the wrong way — caught if you ran, lost them if you chased.",
+   "note": "You cannot 'flee' a chase — shaking it IS the chase's defeat. Its flee slot is disabled.",
+   "byDirection": {
+    "fleeing": {
+     "title": "The Chase — Running",
+     "winCondition": "Break contact — lose them",
+     "meterLabel": "Distance",
+     "exits": {
+      "defeat": "Push on",
+      "flee": "—",
+      "fail": "Caught"
+     },
+     "failStakes": "They close the gap — caught. If you were fleeing a fight, it resumes here, on worse footing.",
+     "note": "You're the one running. 'Push on' presses for distance; you cannot 'flee' a chase you're already fleeing — breaking contact IS the win. Caught = the fight resumes."
+    },
+    "pursuing": {
+     "title": "The Chase — Running Them Down",
+     "winCondition": "Run them down — close the gap",
+     "meterLabel": "Distance",
+     "exits": {
+      "defeat": "Press",
+      "flee": "Let them go",
+      "fail": "Lost them"
+     },
+     "failStakes": "They break your line of sight — lost. Whatever you were chasing them for goes with them.",
+     "note": "You're the pursuer. 'Press' closes the gap; 'Let them go' is the flee slot (you can always call off a hunt). Lost them = they escape."
+    }
+   },
+   "directionNote": "engine picks byDirection.fleeing when the chase came from chaseFromFight (you fled a fight — the common case) or a threat-attack you're escaping; byDirection.pursuing when the player initiated the chase. Falls back to the top-level copy if direction is unknown."
   },
   "hazard": {
    "icon": "⚠",

@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 91,
+  "energy": 76,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -118,122 +118,119 @@
         "player": null,
         "summary": "Loki reads the toll keeper through Prism Sight — the right shoulder betrays a pending strike.",
         "narration": "You open your sight and let the spectrum layer over the keeper. Heat blooms at their shoulder — the right shoulder, the leading one — warmer than the rest of them by a clear margin. That is where they carry their weight when they mean to move forward. Their jaw is set and their breathing is shallow, and the warmth at that shoulder is already shifting forward, a fraction, like a door beginning to open."
+      },
+      {
+        "player": null,
+        "summary": "At the Slow Orchard gate, the keeper of the toll pressed and found the line held — a bound exchange that scattered both blows — and stepped aside when the arithmetic didn't add up in their favor.",
+        "narration": "The keeper's right shoulder drops first — the tell you already read. They drive forward with a short, hard shove, weight committed, certain of it. You let the resonance come up through your chest and release it as a blunt push that meets their force at the midpoint between you. The sound is a flat, ugly crack — not loud, but felt — and the impact shudders back through both of you at once. Your boots skid an inch in the lane mud. Their boots skid an inch the other way. Neither of you goes down.\n\nFor a moment it is simply two people standing in the same lane, breathing.\n\nThen something goes out of the keeper's face. Not fear exactly. More like the arithmetic of it settled: they had pressed, you had held, and the lane had not given them anything new to work with. Their jaw unclenches. Their right shoulder drops to level — the weight shifting back, off the leading foot.\n\n\"Lane's open,\" the keeper says, quietly, and steps aside to the verge.\n\nCy moves up to your left heel without a word. Ossivyn is already well into the orchard behind you, not looking back. The long gold light is nearly gone now, and the village lane stretches ahead toward the first lit windows of Millbrook."
       }
     ],
     "lastTurn": {
-      "narration": "You open your sight and let the spectrum layer over the keeper. Heat blooms at their shoulder — the right shoulder, the leading one — warmer than the rest of them by a clear margin. That is where they carry their weight when they mean to move forward. Their jaw is set and their breathing is shallow, and the warmth at that shoulder is already shifting forward, a fraction, like a door beginning to open.",
-      "sceneSummary": "Loki reads the toll keeper through Prism Sight — the right shoulder betrays a pending strike.",
+      "narration": "The keeper's right shoulder drops first — the tell you already read. They drive forward with a short, hard shove, weight committed, certain of it. You let the resonance come up through your chest and release it as a blunt push that meets their force at the midpoint between you. The sound is a flat, ugly crack — not loud, but felt — and the impact shudders back through both of you at once. Your boots skid an inch in the lane mud. Their boots skid an inch the other way. Neither of you goes down.\n\nFor a moment it is simply two people standing in the same lane, breathing.\n\nThen something goes out of the keeper's face. Not fear exactly. More like the arithmetic of it settled: they had pressed, you had held, and the lane had not given them anything new to work with. Their jaw unclenches. Their right shoulder drops to level — the weight shifting back, off the leading foot.\n\n\"Lane's open,\" the keeper says, quietly, and steps aside to the verge.\n\nCy moves up to your left heel without a word. Ossivyn is already well into the orchard behind you, not looking back. The long gold light is nearly gone now, and the village lane stretches ahead toward the first lit windows of Millbrook.",
+      "sceneSummary": "At the Slow Orchard gate, the keeper of the toll pressed and found the line held — a bound exchange that scattered both blows — and stepped aside when the arithmetic didn't add up in their favor.",
       "choices": [
         {
-          "label": "Push the air between you — a sonic pulse aimed at that forward shoulder before they close the gap",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "press"
-          ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 8,
-          "trivial": false
-        },
-        {
-          "label": "Step back and hold your ground — make them come to you and meet the rush on your terms",
+          "label": "Walk on toward the village lights — the lane is open",
           "attribute": "physical",
           "subAttribute": "agility",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "defend",
-            "careful"
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Name what you saw — speak the read aloud and let the certainty in your voice give them pause",
+          "label": "Hold a moment and look at the keeper — read what just passed in their face",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "trivial": true
+        },
+        {
+          "label": "Ask the keeper plainly — who sent them to this lane tonight",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "threaten",
-            "feint"
+            "persuade"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Yield the ground — step aside, hands open, and let the will-contest dissolve before a blow lands",
+          "label": "Catch up to Ossivyn before he disappears into the orchard — he saw everything",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "defend"
+            "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "energy": -5
+      },
       "scene": {
-        "setting": "The lower lane beyond the Slow Orchard's planting gate — early evening, long gold light fading, cool spring air. The muddy crossing is behind. The keeper of the toll stands ahead on the lane.",
+        "setting": "The lower lane beyond the Slow Orchard's planting gate — the last gold light is nearly gone, cool spring dusk settling in. The muddy crossing is behind. The lane ahead toward Millbrook is open, first lit windows visible in the distance.",
         "npcsPresent": [
           {
             "name": "The keeper of the toll",
-            "state": "Weight forward on the right shoulder, jaw set, breathing shallow — holding but on the edge of moving."
+            "state": "Standing on the verge to the side of the lane, weight settled back, jaw unclenched — watching but no longer blocking."
           },
           {
             "name": "Ossivyn Tallow",
-            "state": "Retreating into the orchard proper, record book under his arm, not looking back."
+            "state": "Withdrawing into the orchard proper with his record book, not looking back."
           },
           {
             "name": "Cy",
-            "state": "At Loki's left heel, still, watching."
+            "state": "At Loki's left heel, still, lens catching the last light."
           }
         ],
         "objects": [
-          "Muddy lane now behind — crossing done",
+          "Muddy lane behind — the crossing done",
           "Iron marker stake and sapling visible back through the gate",
-          "The lane ahead toward the village"
+          "Open lane ahead toward Millbrook, first lit windows in the distance"
         ],
         "threads": [
-          "The keeper of the toll — will contest, right shoulder leading, strike coming",
           "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
+          "The keeper of the toll — who put them here tonight",
           "The regulator signal moving downstream — no one upstream knows",
           "A tree planted three hundred years ago said to be nearly ready to fruit — its person missing"
         ]
       },
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "A sense-step in a duel — only a breath of time."
+        "hoursPassed": 0.25,
+        "why": "A brief exchange at the lane's end — minutes, not more"
       }
     },
     "sceneState": {
-      "setting": "The lower lane beyond the Slow Orchard's planting gate — early evening, long gold light fading, cool spring air. The muddy crossing is behind. The keeper of the toll stands ahead on the lane.",
+      "setting": "The lower lane beyond the Slow Orchard's planting gate — the last gold light is nearly gone, cool spring dusk settling in. The muddy crossing is behind. The lane ahead toward Millbrook is open, first lit windows visible in the distance.",
       "npcsPresent": [
         {
           "name": "The keeper of the toll",
-          "state": "Weight forward on the right shoulder, jaw set, breathing shallow — holding but on the edge of moving."
+          "state": "Standing on the verge to the side of the lane, weight settled back, jaw unclenched — watching but no longer blocking."
         },
         {
           "name": "Ossivyn Tallow",
-          "state": "Retreating into the orchard proper, record book under his arm, not looking back."
+          "state": "Withdrawing into the orchard proper with his record book, not looking back."
         },
         {
           "name": "Cy",
-          "state": "At Loki's left heel, still, watching."
+          "state": "At Loki's left heel, still, lens catching the last light."
         }
       ],
       "objects": [
-        "Muddy lane now behind — crossing done",
+        "Muddy lane behind — the crossing done",
         "Iron marker stake and sapling visible back through the gate",
-        "The lane ahead toward the village"
+        "Open lane ahead toward Millbrook, first lit windows in the distance"
       ],
       "threads": [
-        "The keeper of the toll — will contest, right shoulder leading, strike coming",
         "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
+        "The keeper of the toll — who put them here tonight",
         "The regulator signal moving downstream — no one upstream knows",
         "A tree planted three hundred years ago said to be nearly ready to fruit — its person missing"
       ]
@@ -267,7 +264,7 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 8
+    "turnsSinceOffer": 9
   },
   "bio": null,
   "subAttributes": {
@@ -311,142 +308,9 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785603515335,
-  "rev": 46,
-  "activeEncounter": {
-    "defId": "re-enc_the_toll_keeper",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-enc_the_toll_keeper",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [
-        "r1: reveal vs strike → momentum 0"
-      ],
-      "opponentHealth": 6,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the keeper of the toll",
-        "attributes": {
-          "practical": 3,
-          "physical": 3,
-          "mental": 3,
-          "social": 3
-        },
-        "energy": 88,
-        "maxEnergy": 88,
-        "tacticTags": [
-          "hold-the-line",
-          "name-a-price",
-          "read-you"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 2,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 2,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 83,
-      "turn": {
-        "phase": "action",
-        "sel": {
-          "sense": [
-            4,
-            9
-          ],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 12,
-        "bonusEarned": true,
-        "senseDone": true,
-        "senseLine": "You read with Prism Sight ⋈ Reason it out (Reason) — success. You have the read (+12 to your action). The opening is there — you have earned a BONUS action. You read the keeper of the toll: they favour strike. Pick a craft that answers it.",
-        "readPayoff": "You read the keeper of the toll: they favour strike. Pick a craft that answers it."
-      },
-      "effects": [
-        {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 3,
-          "roundsLeft": 2,
-          "applies": "always",
-          "side": "player",
-          "source": "Reason it out (Reason)",
-          "from": "player"
-        }
-      ],
-      "pressure": {
-        "player": 0,
-        "opponent": 0
-      },
-      "spent": {
-        "player": false,
-        "opponent": false
-      },
-      "lastOppFn": "strike",
-      "lastOppReceipt": {
-        "roll": 10,
-        "chance": 70,
-        "degree": "success",
-        "action": {
-          "attribute": "practical",
-          "abilityLevel": 2,
-          "label": "a hard strike",
-          "axes": {}
-        },
-        "breakdown": {
-          "components": [
-            {
-              "label": "practical 3",
-              "value": 60
-            },
-            {
-              "label": "ability rank 2",
-              "value": 10
-            }
-          ],
-          "total": 70,
-          "clampedFrom": null,
-          "base": "practical",
-          "opposed": null
-        },
-        "rawChance": 70,
-        "margin": 60,
-        "matchup": 0,
-        "intensity": "standard",
-        "tier": 2,
-        "function": "strike",
-        "name": "a hard strike",
-        "effectMods": [],
-        "woven": null
-      },
-      "lastReadWasSense": true,
-      "senseTierEarned": 3,
-      "senseResist": {
-        "value": 9,
-        "label": "their natural guardedness",
-        "from": "passive"
-      }
-    }
-  },
+  "updatedAt": 1785604497493,
+  "rev": 55,
+  "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
       "schemaVersion": 1,
@@ -540,7 +404,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 8
+    "valley": 9
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -548,10 +412,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T16:58:35.333Z",
+      "lastAt": "2026-08-01T17:14:57.491Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -576,19 +440,19 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 6,
-    "choices": 6,
-    "scene": 6,
+    "sceneSummary": 7,
+    "choices": 7,
+    "scene": 7,
     "stateOps": 1,
-    "characterDeltas": 3,
-    "timeOps": 4,
+    "characterDeltas": 4,
+    "timeOps": 5,
     "sceneEnded": 1
   },
-  "_opTurns": 6,
+  "_opTurns": 7,
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "sonic_resonance": 2,
+      "sonic_resonance": 4,
       "hunters_strike": 1
     },
     "coActivations": {},

@@ -9,7 +9,7 @@
   "xp": 27,
   "attributes": {
     "physical": 6,
-    "mental": 7,
+    "mental": 8,
     "social": 6,
     "practical": 6
   },
@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 90,
+  "energy": 91,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -113,107 +113,129 @@
         "player": "Attempt: Commit to the crossing",
         "summary": "The muddy crossing made cleanly along the root-held right line; the lane behind them now.",
         "narration": "You angle right at the gate, stepping where the old tree roots have knitted the ground. The first step is solid underfoot. The second holds just as well. The mud sucks at the air around your boots but not at your feet, and you walk the root-held line cleanly to the far side of the lane. Cy follows in your exact footprints without comment, lens catching the last of the gold light.\n\nOssivyn has half-turned to watch. He gives a short nod — not approval exactly, more acknowledgment — and turns back toward the orchard proper."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the toll keeper through Prism Sight — the right shoulder betrays a pending strike.",
+        "narration": "You open your sight and let the spectrum layer over the keeper. Heat blooms at their shoulder — the right shoulder, the leading one — warmer than the rest of them by a clear margin. That is where they carry their weight when they mean to move forward. Their jaw is set and their breathing is shallow, and the warmth at that shoulder is already shifting forward, a fraction, like a door beginning to open."
       }
     ],
     "lastTurn": {
-      "narration": "You angle right at the gate, stepping where the old tree roots have knitted the ground. The first step is solid underfoot. The second holds just as well. The mud sucks at the air around your boots but not at your feet, and you walk the root-held line cleanly to the far side of the lane. Cy follows in your exact footprints without comment, lens catching the last of the gold light.\n\nOssivyn has half-turned to watch. He gives a short nod — not approval exactly, more acknowledgment — and turns back toward the orchard proper.",
-      "sceneSummary": "The muddy crossing made cleanly along the root-held right line; the lane behind them now.",
-      "scene": {
-        "setting": "The lower lane beyond the Slow Orchard's planting gate — early evening, long gold light fading at the tree-line, cool early-spring air. The muddy crossing is behind. The lane opens ahead toward the village proper.",
-        "npcsPresent": [
-          {
-            "name": "Ossivyn Tallow",
-            "state": "Heading back into the orchard proper, record book under his arm, not lingering."
-          },
-          {
-            "name": "Cy",
-            "state": "At Loki's left heel, picking the same line through the mud without fuss."
-          }
-        ],
-        "objects": [
-          "Muddy lane now behind — the crossing is done",
-          "Iron marker stake and sapling visible back through the gate in the orchard",
-          "The lane ahead toward the village, empty in the evening light"
-        ],
-        "threads": [
-          "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
-          "The regulator signal moving downstream — no one upstream knows to expect it",
-          "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
-        ]
-      },
+      "narration": "You open your sight and let the spectrum layer over the keeper. Heat blooms at their shoulder — the right shoulder, the leading one — warmer than the rest of them by a clear margin. That is where they carry their weight when they mean to move forward. Their jaw is set and their breathing is shallow, and the warmth at that shoulder is already shifting forward, a fraction, like a door beginning to open.",
+      "sceneSummary": "Loki reads the toll keeper through Prism Sight — the right shoulder betrays a pending strike.",
       "choices": [
         {
-          "label": "Head toward the village well — the day's last gossip gathers there",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "label": "Push the air between you — a sonic pulse aimed at that forward shoulder before they close the gap",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
           "intentTags": [
-            "travel"
+            "attack",
+            "press"
           ],
-          "trivial": true
+          "abilityId": "sonic_resonance",
+          "energyCost": 8,
+          "trivial": false
         },
         {
-          "label": "Turn back and ask Ossivyn directly about the missing person — the one whose tree is almost ready to fruit",
+          "label": "Step back and hold your ground — make them come to you and meet the rush on your terms",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "defend",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Name what you saw — speak the read aloud and let the certainty in your voice give them pause",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "study"
+            "threaten",
+            "feint"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Follow the lane toward the lower Annex — find out who paid for the false charge",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "plan"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Find a quiet spot off the lane and use Prism Sight — see if anyone has passed this way recently",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Yield the ground — step aside, hands open, and let the will-contest dissolve before a blow lands",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
+            "defend"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null
         }
       ],
+      "scene": {
+        "setting": "The lower lane beyond the Slow Orchard's planting gate — early evening, long gold light fading, cool spring air. The muddy crossing is behind. The keeper of the toll stands ahead on the lane.",
+        "npcsPresent": [
+          {
+            "name": "The keeper of the toll",
+            "state": "Weight forward on the right shoulder, jaw set, breathing shallow — holding but on the edge of moving."
+          },
+          {
+            "name": "Ossivyn Tallow",
+            "state": "Retreating into the orchard proper, record book under his arm, not looking back."
+          },
+          {
+            "name": "Cy",
+            "state": "At Loki's left heel, still, watching."
+          }
+        ],
+        "objects": [
+          "Muddy lane now behind — crossing done",
+          "Iron marker stake and sapling visible back through the gate",
+          "The lane ahead toward the village"
+        ],
+        "threads": [
+          "The keeper of the toll — will contest, right shoulder leading, strike coming",
+          "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
+          "The regulator signal moving downstream — no one upstream knows",
+          "A tree planted three hundred years ago said to be nearly ready to fruit — its person missing"
+        ]
+      },
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a short crossing and a moment's pause at the lane end"
+        "hoursPassed": 0,
+        "why": "A sense-step in a duel — only a breath of time."
       }
     },
     "sceneState": {
-      "setting": "The lower lane beyond the Slow Orchard's planting gate — early evening, long gold light fading at the tree-line, cool early-spring air. The muddy crossing is behind. The lane opens ahead toward the village proper.",
+      "setting": "The lower lane beyond the Slow Orchard's planting gate — early evening, long gold light fading, cool spring air. The muddy crossing is behind. The keeper of the toll stands ahead on the lane.",
       "npcsPresent": [
         {
+          "name": "The keeper of the toll",
+          "state": "Weight forward on the right shoulder, jaw set, breathing shallow — holding but on the edge of moving."
+        },
+        {
           "name": "Ossivyn Tallow",
-          "state": "Heading back into the orchard proper, record book under his arm, not lingering."
+          "state": "Retreating into the orchard proper, record book under his arm, not looking back."
         },
         {
           "name": "Cy",
-          "state": "At Loki's left heel, picking the same line through the mud without fuss."
+          "state": "At Loki's left heel, still, watching."
         }
       ],
       "objects": [
-        "Muddy lane now behind — the crossing is done",
-        "Iron marker stake and sapling visible back through the gate in the orchard",
-        "The lane ahead toward the village, empty in the evening light"
+        "Muddy lane now behind — crossing done",
+        "Iron marker stake and sapling visible back through the gate",
+        "The lane ahead toward the village"
       ],
       "threads": [
+        "The keeper of the toll — will contest, right shoulder leading, strike coming",
         "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
-        "The regulator signal moving downstream — no one upstream knows to expect it",
-        "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
+        "The regulator signal moving downstream — no one upstream knows",
+        "A tree planted three hundred years ago said to be nearly ready to fruit — its person missing"
       ]
     }
   },
@@ -245,20 +267,20 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 7
+    "turnsSinceOffer": 8
   },
   "bio": null,
   "subAttributes": {
     "strength": 6,
     "agility": 6,
-    "reason": 8,
+    "reason": 10,
     "insight": 6,
     "presence": 6,
     "rapport": 6,
     "craft": 6,
     "wits": 6
   },
-  "pendingSubPoints": 2,
+  "pendingSubPoints": 0,
   "skillPoints": 3,
   "discoveries": [],
   "codex": {
@@ -289,9 +311,142 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785603129142,
-  "rev": 38,
-  "activeEncounter": null,
+  "updatedAt": 1785603515335,
+  "rev": 46,
+  "activeEncounter": {
+    "defId": "re-enc_the_toll_keeper",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-enc_the_toll_keeper",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [
+        "r1: reveal vs strike → momentum 0"
+      ],
+      "opponentHealth": 6,
+      "tactic": null,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the keeper of the toll",
+        "attributes": {
+          "practical": 3,
+          "physical": 3,
+          "mental": 3,
+          "social": 3
+        },
+        "energy": 88,
+        "maxEnergy": 88,
+        "tacticTags": [
+          "hold-the-line",
+          "name-a-price",
+          "read-you"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 2,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 2,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 83,
+      "turn": {
+        "phase": "action",
+        "sel": {
+          "sense": [
+            4,
+            9
+          ],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": 12,
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with Prism Sight ⋈ Reason it out (Reason) — success. You have the read (+12 to your action). The opening is there — you have earned a BONUS action. You read the keeper of the toll: they favour strike. Pick a craft that answers it.",
+        "readPayoff": "You read the keeper of the toll: they favour strike. Pick a craft that answers it."
+      },
+      "effects": [
+        {
+          "kind": "insight",
+          "label": "you have their measure",
+          "value": 3,
+          "roundsLeft": 2,
+          "applies": "always",
+          "side": "player",
+          "source": "Reason it out (Reason)",
+          "from": "player"
+        }
+      ],
+      "pressure": {
+        "player": 0,
+        "opponent": 0
+      },
+      "spent": {
+        "player": false,
+        "opponent": false
+      },
+      "lastOppFn": "strike",
+      "lastOppReceipt": {
+        "roll": 10,
+        "chance": 70,
+        "degree": "success",
+        "action": {
+          "attribute": "practical",
+          "abilityLevel": 2,
+          "label": "a hard strike",
+          "axes": {}
+        },
+        "breakdown": {
+          "components": [
+            {
+              "label": "practical 3",
+              "value": 60
+            },
+            {
+              "label": "ability rank 2",
+              "value": 10
+            }
+          ],
+          "total": 70,
+          "clampedFrom": null,
+          "base": "practical",
+          "opposed": null
+        },
+        "rawChance": 70,
+        "margin": 60,
+        "matchup": 0,
+        "intensity": "standard",
+        "tier": 2,
+        "function": "strike",
+        "name": "a hard strike",
+        "effectMods": [],
+        "woven": null
+      },
+      "lastReadWasSense": true,
+      "senseTierEarned": 3,
+      "senseResist": {
+        "value": 9,
+        "label": "their natural guardedness",
+        "from": "passive"
+      }
+    }
+  },
   "customEncounters": {
     "re-enc_the_sealed_door": {
       "schemaVersion": 1,
@@ -349,12 +504,43 @@
           }
         }
       ]
+    },
+    "re-enc_the_toll_keeper": {
+      "schemaVersion": 1,
+      "id": "re-enc_the_toll_keeper",
+      "type": "duel",
+      "name": "The Toll Keeper",
+      "tier": "notable",
+      "minDanger": 1,
+      "setup": "Someone stands between you and where you're going, certain of their right to a price — a toll, a name, a thing you carry. Not a fight yet. A contest of who yields first.",
+      "lethal": false,
+      "avoidable": true,
+      "fromRandom": true,
+      "flavor": "standoff",
+      "opponent": {
+        "name": "the keeper of the toll",
+        "health": 6,
+        "threat": 40,
+        "yieldAt": 1,
+        "fleeDifficulty": 15,
+        "spectrum": {
+          "violence_peace": -0.3,
+          "chaos_order": -0.3
+        },
+        "tacticTags": [
+          "hold-the-line",
+          "name-a-price",
+          "read-you"
+        ],
+        "notes": "Contests by will, not by blade — wants something from you and is certain of the right to it. Yields the point when their certainty cracks."
+      },
+      "stakes": "Losing costs you the point — you pay, you turn back, or it becomes a fight on their terms. It does not cost you blood."
     }
   },
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 7
+    "valley": 8
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -362,10 +548,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T16:52:09.141Z",
+      "lastAt": "2026-08-01T16:58:35.333Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 7
+      "beats": 8
     }
   ],
   "establishedFacts": [
@@ -413,5 +599,9 @@
     }
   },
   "_pendingIntent": null,
-  "_intentAsked": null
+  "_intentAsked": null,
+  "legendGovernor": {
+    "lastDeployDay": 32,
+    "lastBeat": "witness_power"
+  }
 }

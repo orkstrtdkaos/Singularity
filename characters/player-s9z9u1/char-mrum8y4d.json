@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 5,
-  "xp": 415,
+  "xp": 420,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -79,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 108,
+  "energy": 103,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -159,70 +159,92 @@
         "player": "Use descent and name what carnal pleasures you both want and can give eachother.",
         "summary": "Loki used Descent to name the want plainly — the craft landed true but the answer was no; the door to something slower is still open.",
         "narration": "You let Descent do what it does — name the want aloud, plainly, without the softening that makes such things easier to say and easier to refuse. You name hers first, because that is the order the craft demands: someone who wants warmth without strings, a night away from the calculation, the feeling of being interesting to a person who does not already have a reason to find them so. Then you name your own, just as plainly. You are not quiet about either.\n\nShe listens. She does not look away. When you are finished she is quiet for a moment, and the quiet is not embarrassed — it is considered. The knife rests still in her hand.\n\nThen she says, clearly and without heat, \"No.\" She says it the way someone says a thing they have decided before you finished speaking. \"You named it right,\" she adds, and she sounds almost like she means that as a compliment. \"That's a rare thing. But naming it right doesn't change my answer, which is that I don't know you, and what you named is the kind of thing I do with people I know.\" She looks at you steadily. \"The ease in my foot — that was something. Ask me something else.\""
+      },
+      {
+        "player": "Tell her what you are — not where you came from, but what you actually are — and see what she does with that.",
+        "summary": "Loki told Vessin plainly what she is — made, not born, the specification unfound — and Vessin answered with a fact she had been carrying: she has met one person like that before. The door between them opened a little more.",
+        "narration": "You sit down on the fallen stone beside her — not too close, but closer than a stranger would. The lanterns up in the scaffold move slowly. Neither of you watches them.\n\nYou tell her what you are. Not the performance of it, not the careful version — the plain one. That you were made, not born. That somewhere in the record of the old world there is a specification for you and you have never found it. That the nanites in you are not a tool you learned to use but something closer to a language you were born already speaking, and you are still learning what it says. You tell her that you have an adopted father who is a giant now and a mother who is a nymph-touched enchantress, and that neither of them made you, and that this is the most interesting thing and also the worst thing you know about yourself, depending on the hour.\n\nVessin is quiet through all of it. The knife rests across her knee. She is looking at you the way she was not looking at you a moment ago — not appraising now, not pricing. She says, after a pause that is long enough to mean something, \"I've met one person who might have been like you. Older. He did not know what he was either.\" She says it without pity. She says it the way someone names a fact they have been carrying a while and are glad to set down somewhere. Then she tilts her head and says, \"What do you do with not knowing?\"\n\nCy, at the base of the arch across the nave, opens its lens a single degree. It does not comment. The scaffold workers above shift a lantern, and the light moves across the stone ribs of the ceiling like a slow thought."
       }
     ],
     "lastTurn": {
-      "narration": "You let Descent do what it does — name the want aloud, plainly, without the softening that makes such things easier to say and easier to refuse. You name hers first, because that is the order the craft demands: someone who wants warmth without strings, a night away from the calculation, the feeling of being interesting to a person who does not already have a reason to find them so. Then you name your own, just as plainly. You are not quiet about either.\n\nShe listens. She does not look away. When you are finished she is quiet for a moment, and the quiet is not embarrassed — it is considered. The knife rests still in her hand.\n\nThen she says, clearly and without heat, \"No.\" She says it the way someone says a thing they have decided before you finished speaking. \"You named it right,\" she adds, and she sounds almost like she means that as a compliment. \"That's a rare thing. But naming it right doesn't change my answer, which is that I don't know you, and what you named is the kind of thing I do with people I know.\" She looks at you steadily. \"The ease in my foot — that was something. Ask me something else.\"",
-      "sceneSummary": "Loki used Descent to name the want plainly — the craft landed true but the answer was no; the door to something slower is still open.",
+      "narration": "You sit down on the fallen stone beside her — not too close, but closer than a stranger would. The lanterns up in the scaffold move slowly. Neither of you watches them.\n\nYou tell her what you are. Not the performance of it, not the careful version — the plain one. That you were made, not born. That somewhere in the record of the old world there is a specification for you and you have never found it. That the nanites in you are not a tool you learned to use but something closer to a language you were born already speaking, and you are still learning what it says. You tell her that you have an adopted father who is a giant now and a mother who is a nymph-touched enchantress, and that neither of them made you, and that this is the most interesting thing and also the worst thing you know about yourself, depending on the hour.\n\nVessin is quiet through all of it. The knife rests across her knee. She is looking at you the way she was not looking at you a moment ago — not appraising now, not pricing. She says, after a pause that is long enough to mean something, \"I've met one person who might have been like you. Older. He did not know what he was either.\" She says it without pity. She says it the way someone names a fact they have been carrying a while and are glad to set down somewhere. Then she tilts her head and says, \"What do you do with not knowing?\"\n\nCy, at the base of the arch across the nave, opens its lens a single degree. It does not comment. The scaffold workers above shift a lantern, and the light moves across the stone ribs of the ceiling like a slow thought.",
+      "sceneSummary": "Loki told Vessin plainly what she is — made, not born, the specification unfound — and Vessin answered with a fact she had been carrying: she has met one person like that before. The door between them opened a little more.",
       "choices": [
         {
-          "label": "Ask her something else — her name, her road, what brought her to a cathedral being built by people who will outlive her grandchildren.",
+          "label": "Ask about the person she met — the one who might have been like you.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "flirt",
-            "negotiate"
+            "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Tell her what you are — not where you came from, but what you actually are — and see what she does with that.",
+          "label": "Answer her question honestly — tell her what you actually do with not knowing.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask who is working the scaffold at this hour — and why.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Rust choir gnats have found the warmth of two bodies in the cold nave — deal with them before they become a problem.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "romantic",
-            "risky"
+            "defend"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Accept the no gracefully and ask what she meant — what is the 'something else' she'd be willing to offer instead.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let it rest. Sit with her in the open nave for a while — quiet company, no further ask — and see if the night changes anything.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "calm",
-            "careful"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": "beast_rust_choir_gnats",
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "energy": -6
-      },
       "scene": {
         "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Seated on the fallen stone, boot back on and laced, knife resting loosely in her hand — looking at Loki steadily after her answer, neither hostile nor closed."
+            "state": "Seated on the fallen stone beside Loki, knife across her knee, looking at Loki with the door a little more open than before — waiting for an answer to her question."
           },
           {
             "name": "Unknown workers",
             "state": "Two lanterns still moving slowly in the scaffold above the south transept — faces not visible."
+          },
+          {
+            "name": "Cy",
+            "state": "At the base of a rib-arch across the nave, lens open one degree — present, not commenting."
           }
         ],
         "objects": [
@@ -231,12 +253,13 @@
           "Eastern tower — finished, taller; western tower — finished shorter, different generation",
           "Two slow-moving lanterns high in the scaffold",
           "Low run of fallen stone at the nave's eastern edge",
-          "Small knife — resting loosely in Vessin's hand"
+          "Small knife — resting across Vessin's knee"
         ],
         "threads": [
-          "Vessin declined the direct proposition but held the door open — she said 'ask me something else'",
-          "Cy is settled at the base of a rib-arch with its lens closed",
-          "Who is working on the scaffold at this hour, and on which design's problem"
+          "Vessin asked: 'What do you do with not knowing?' — the question is open",
+          "Vessin has met someone like Loki before — the name and circumstances are not yet given",
+          "Who is working on the scaffold at this hour, and on which design's problem",
+          "Rust choir gnats gathering in the warmth of the nave"
         ]
       },
       "npcUpdates": [
@@ -244,26 +267,49 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Heard Descent's full naming — her want and Loki's — said no plainly and without hostility; acknowledged the craft ('you named it right'), but said this kind of thing is for people she knows. Held the door open: 'ask me something else.'",
+          "note": "Heard Loki's plain account of what she is — made, not born, the specification unfound. Answered with a real fact: she has met one person who might have been the same. Did not ask follow-up; asked instead what Loki does with not knowing. The knife is still across her knee; the appraising register has shifted into something quieter.",
           "learned": [
-            "Intimacy is something she reserves for people she knows — the want being named correctly is not sufficient; the person behind it has to be real to her first."
+            "Loki was made, not born — a construct from before the Transition; the specification has not been found",
+            "Loki has an adopted giant father and a nymph-touched enchantress mother, neither of whom made her",
+            "Vessin has met one person who might have been like Loki — she did not give a name"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Seated at the fallen stone, boot laced, watching Loki — declined the proposition but remains open to conversation."
+          "statusNote": "Seated beside Loki on the fallen stone at the Half-Cathedral nave, knife across knee, the door between them a little more open — waiting for an answer."
         }
-      ]
+      ],
+      "codexUpdates": [
+        {
+          "topic": "vessin-tallow-bark",
+          "label": "Vessin Tallow-bark",
+          "kind": "person",
+          "entityId": "vessin-tallow-bark",
+          "fact": "Has met one other person who might have been a construct like Loki — older, also without knowledge of what they were. She named this without pity, as a fact she was glad to set down.",
+          "links": [
+            "grovehome",
+            "the-half-cathedral"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short exchange of truths in the cold nave — a few minutes, no more."
+      }
     },
     "sceneState": {
       "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Seated on the fallen stone, boot back on and laced, knife resting loosely in her hand — looking at Loki steadily after h"
+          "state": "Seated on the fallen stone beside Loki, knife across her knee, looking at Loki with the door a little more open than bef"
         },
         {
           "name": "Unknown workers",
           "state": "Two lanterns still moving slowly in the scaffold above the south transept — faces not visible."
+        },
+        {
+          "name": "Cy",
+          "state": "At the base of a rib-arch across the nave, lens open one degree — present, not commenting."
         }
       ],
       "objects": [
@@ -272,12 +318,13 @@
         "Eastern tower — finished, taller; western tower — finished shorter, different ge",
         "Two slow-moving lanterns high in the scaffold",
         "Low run of fallen stone at the nave's eastern edge",
-        "Small knife — resting loosely in Vessin's hand"
+        "Small knife — resting across Vessin's knee"
       ],
       "threads": [
-        "Vessin declined the direct proposition but held the door open — she said 'ask me something else'",
-        "Cy is settled at the base of a rib-arch with its lens closed",
-        "Who is working on the scaffold at this hour, and on which design's problem"
+        "Vessin asked: 'What do you do with not knowing?' — the question is open",
+        "Vessin has met someone like Loki before — the name and circumstances are not yet given",
+        "Who is working on the scaffold at this hour, and on which design's problem",
+        "Rust choir gnats gathering in the warmth of the nave"
       ]
     }
   },
@@ -705,20 +752,24 @@
         "locationId": "grovehome",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d1] Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation.",
-        "[d1] Heard Descent's full naming — her want and Loki's — said no plainly and without hostility; acknowledged the craft ('you named it right'), but said this kind of thing is for people she knows. Held the door open: 'ask me something else.'"
+        "[d1] Heard Descent's full naming — her want and Loki's — said no plainly and without hostility; acknowledged the craft ('you named it right'), but said this kind of thing is for people she knows. Held the door open: 'ask me something else.'",
+        "[d1] Heard Loki's plain account of what she is — made, not born, the specification unfound. Answered with a real fact: she has met one person who might have been the same. Did not ask follow-up; asked instead what Loki does with not knowing. The knife is still across her knee; the appraising register…"
       ],
       "knownFacts": [
         "Noticed the craft in the air — the easing of tiredness — and marked it consciously",
-        "Intimacy is something she reserves for people she knows — the want being named correctly is not sufficient; the person behind it has to be real to her first."
+        "Intimacy is something she reserves for people she knows — the want being named correctly is not sufficient; the person behind it has to be real to her first.",
+        "Loki was made, not born — a construct from before the Transition; the specification has not been found",
+        "Loki has an adopted giant father and a nymph-touched enchantress mother, neither of whom made her",
+        "Vessin has met one person who might have been like Loki — she did not give a name"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated at the fallen stone, boot laced, watching Loki — declined the proposition but remains open to conversation.",
+      "statusNote": "Seated beside Loki on the fallen stone at the Half-Cathedral nave, knife across knee, the door between them a little more open — waiting for an answer.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1015,7 +1066,7 @@
     "lastSharedReadAt": "2026-08-01T19:55:26.911Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1838,9 +1889,13 @@
         "label": "Vessin Tallow-bark",
         "kind": "person",
         "facts": [
-          "[d1] Itinerant assessor of salvage, ruins, and risk — she prices things so others don't have to learn the hard way"
+          "[d1] Itinerant assessor of salvage, ruins, and risk — she prices things so others don't have to learn the hard way",
+          "[d1] Has met one other person who might have been a construct like Loki — older, also without knowledge of what they were. She named this without pity, as a fact she was glad to set down."
         ],
-        "links": [],
+        "links": [
+          "grovehome",
+          "the-half-cathedral"
+        ],
         "aliases": [],
         "createdDay": 1,
         "entityId": "vessin-tallow-bark",
@@ -1909,24 +1964,23 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.013425513999663,
-    "cerebral": 14.332196173689423,
-    "social": 17.95614575837197,
-    "strategic": 9.700980101636633,
-    "cautious": 6.189550091077256,
-    "amorous": 5.559108416635637,
-    "generous": 6.141050904025564,
-    "ruthless": 0.8376031250852283,
-    "risky": 1.5434028336059236,
-    "patient": 0.70155967750146,
-    "deception": 0.8166518036622618
+    "devotion": 1.9630898761496713,
+    "cerebral": 13.973891269347188,
+    "social": 17.507242114412673,
+    "strategic": 9.458455599095716,
+    "cautious": 6.034811338800324,
+    "amorous": 6.420130706219746,
+    "generous": 5.987524631424924,
+    "ruthless": 0.8166630469580975,
+    "risky": 2.5048177627657755,
+    "patient": 0.6840206855639235,
+    "deception": 0.7962355085707052
   },
   "aptitudes": [
     "silver_tongue",
-    "scholar",
-    "sage"
+    "scholar"
   ],
-  "actionCount": 92,
+  "actionCount": 93,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2219,8 +2273,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785614754802,
-  "rev": 339,
+  "updatedAt": 1785614918263,
+  "rev": 340,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2990,7 +3044,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 38
+    "the_quickwood": 39
   },
   "opLossPending": false,
   "sessions": [
@@ -3045,10 +3099,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T20:05:54.800Z",
+      "lastAt": "2026-08-01T20:08:38.262Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [
@@ -3086,17 +3140,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 110,
-    "choices": 110,
+    "sceneSummary": 111,
+    "choices": 111,
     "characterDeltas": 50,
-    "scene": 110,
+    "scene": 111,
     "placeUpdates": 13,
-    "codexUpdates": 77,
-    "timeOps": 103,
+    "codexUpdates": 78,
+    "timeOps": 104,
     "offer": 10,
     "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 83,
+    "npcUpdates": 84,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3110,7 +3164,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 110,
+  "_opTurns": 111,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

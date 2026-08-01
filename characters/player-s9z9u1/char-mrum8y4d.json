@@ -79,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 98,
+  "energy": 83,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -174,89 +174,74 @@
         "player": null,
         "summary": "Loki reads the aggressor's pattern through Falsecraft — strike-first, committed, no recalibration.",
         "narration": "The aggressor fills the nave's cold air with a particular kind of confidence — the leading shoulder, the weight shifting forward before the hands come up. Falsecraft reads the construction of it: this is a person who hits first and adjusts after, who has learned that the first blow usually settles the question and has never met a situation where it didn't. The seam is exactly there, in the gap between the commitment and the reconsideration — they are already deciding they have won."
+      },
+      {
+        "player": null,
+        "summary": "The aggressor met Loki in the nave and lost — shaken by an elbow to the neck, they yielded without a word and left through the entrance into the night.",
+        "narration": "The aggressor comes in hard — leading shoulder, full commitment, exactly the way Falsecraft said they would. You meet them without retreating a step. The strike lands on your forearm as you turn into it, bone-first, and the impact rings up to your shoulder. Your own blow goes wide but keeps going — you pivot with it, using the momentum, and your elbow finds the side of their neck. Not a killing thing. A stopping thing.\n\nThey stagger back two steps and catch themselves on the edge of a stone rib-arch, one hand going up to that neck. The aggression drains out of their posture the way water drains — fast, and then all at once. Their weight shifts back. Their eyes find yours and do the math.\n\nFor a moment the nave holds its breath. The rust-choir gnats continue their indifferent work somewhere above the south transept. Vessin has not moved, knife still up, watching.\n\nThe aggressor's hands come down. They do not say anything. They take two more steps back toward the nave's entrance, keeping you in sight the whole way — careful, now, the way they were not before — and then they are through the doorway and gone into the cold spring dark outside."
       }
     ],
     "lastTurn": {
-      "narration": "The aggressor fills the nave's cold air with a particular kind of confidence — the leading shoulder, the weight shifting forward before the hands come up. Falsecraft reads the construction of it: this is a person who hits first and adjusts after, who has learned that the first blow usually settles the question and has never met a situation where it didn't. The seam is exactly there, in the gap between the commitment and the reconsideration — they are already deciding they have won.",
-      "sceneSummary": "Loki reads the aggressor's pattern through Falsecraft — strike-first, committed, no recalibration.",
+      "narration": "The aggressor comes in hard — leading shoulder, full commitment, exactly the way Falsecraft said they would. You meet them without retreating a step. The strike lands on your forearm as you turn into it, bone-first, and the impact rings up to your shoulder. Your own blow goes wide but keeps going — you pivot with it, using the momentum, and your elbow finds the side of their neck. Not a killing thing. A stopping thing.\n\nThey stagger back two steps and catch themselves on the edge of a stone rib-arch, one hand going up to that neck. The aggression drains out of their posture the way water drains — fast, and then all at once. Their weight shifts back. Their eyes find yours and do the math.\n\nFor a moment the nave holds its breath. The rust-choir gnats continue their indifferent work somewhere above the south transept. Vessin has not moved, knife still up, watching.\n\nThe aggressor's hands come down. They do not say anything. They take two more steps back toward the nave's entrance, keeping you in sight the whole way — careful, now, the way they were not before — and then they are through the doorway and gone into the cold spring dark outside.",
+      "sceneSummary": "The aggressor met Loki in the nave and lost — shaken by an elbow to the neck, they yielded without a word and left through the entrance into the night.",
       "choices": [
         {
-          "label": "Step inside the commitment — The Wrong Reality plants a false read of where you are as they swing",
+          "label": "Check on Vessin — the knife is still up, and the fight ending doesn't mean the room is settled.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "calm",
+            "comfort"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Prism Sight to read the nave — someone sent that person; heat-traces might say which way they came from and whether anyone else is waiting.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": -0.3
-          },
           "difficulty": 15,
           "intentTags": [
-            "feint",
-            "defend"
+            "scout",
+            "study"
           ],
-          "abilityId": "the_wrong_reality",
-          "energyCost": 2,
-          "trivial": false
+          "abilityId": "prism_sight",
+          "energyCost": 4
         },
         {
-          "label": "Let them close and answer with Hunter's Strike — the seam you read is real, use it",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "risky"
-          ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Drop into the shadows the scaffold throws — Umbracraft, vanish before the strike lands",
+          "label": "Step outside and see where the aggressor goes — the man in the lower Annex sent one hired striker already; knowing where this one reports back to narrows who that man is.",
           "attribute": "mental",
           "subAttribute": "wits",
-          "axes": {
-            "dark_light": -0.2
-          },
           "difficulty": 15,
           "intentTags": [
-            "hide",
-            "defend"
-          ],
-          "abilityId": "umbracraft",
-          "energyCost": 6,
-          "trivial": false
+            "scout",
+            "careful"
+          ]
         },
         {
-          "label": "Give them a false position to commit to — The False Target, appear to be a step left while you are not",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": -0.2
-          },
-          "difficulty": 15,
+          "label": "Stay exactly where you are and let the moment settle — the gnats, the nave, Vessin still holding a knife, and the question of who that was and why.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
           "intentTags": [
-            "feint",
-            "deceive"
+            "sustain"
           ],
-          "abilityId": "the_false_target",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "energy": -5
+      },
       "scene": {
-        "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. A cloud of rust-choir gnats still moves through the warm air. The aggressor is in the nave, closing distance.",
+        "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. Stone rib-arches frame the dark above. The south transept scaffold stands quiet. The aggressor is gone.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "On her feet, knife raised, watching both the swarm and the aggressor — holding her ground."
+            "state": "Still on her feet, knife raised, watching Loki — not yet certain the room is safe."
           },
           {
             "name": "Cy",
-            "state": "Lens at full iris, pressed to the edge of the nave — not moving, filing everything."
-          },
-          {
-            "name": "the aggressor",
-            "state": "Leaning into the approach — leading shoulder, weight forward, already certain."
+            "state": "Lens at full iris, pressed to the edge of the nave — recording, still."
           }
         ],
         "objects": [
@@ -264,36 +249,36 @@
           "Scaffold of pale lashed timber over the south transept",
           "Eastern tower doorway — darker, quieter",
           "Low run of fallen stone at the nave's eastern edge",
-          "Cloud of rust-choir gnats — still moving through the warm air"
+          "Cloud of rust-choir gnats — still moving through the warm air near the south transept"
         ],
         "threads": [
-          "The aggressor is committed to a first strike — the seam Falsecraft found is open",
-          "Vessin is present and armed — her position is uncertain",
-          "Rust-choir gnats are still working the nave",
-          "Who is working the scaffold at this hour — unanswered"
+          "Who sent the aggressor — the man in the lower Annex, still unnamed",
+          "Vessin is armed and the room has not quite settled",
+          "Who is working the scaffold at this hour — still unanswered"
         ]
       },
-      "encounterOps": [
+      "npcUpdates": [
         {
-          "op": "tactic",
-          "tag": "press-in"
+          "op": "update",
+          "npcId": "vessin-tallow-bark",
+          "note": "Watched Loki drive the aggressor back and out of the nave without escalating to lethal force — the knife is still up but she is reassessing.",
+          "statusNote": "Standing in the nave, knife raised, watching Loki — the threat has left but she has not yet stood down.",
+          "learned": [
+            "Loki fights with practical economy — stopped the aggressor with one blow and did not chase"
+          ]
         }
       ]
     },
     "sceneState": {
-      "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. A cloud of rust-choir gnats still moves through the warm air. The aggressor is in the nave, closing distance.",
+      "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. Stone rib-arches frame the dark above. The south transept scaffold stands quiet. The aggressor is gone.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "On her feet, knife raised, watching both the swarm and the aggressor — holding her ground."
+          "state": "Still on her feet, knife raised, watching Loki — not yet certain the room is safe."
         },
         {
           "name": "Cy",
-          "state": "Lens at full iris, pressed to the edge of the nave — not moving, filing everything."
-        },
-        {
-          "name": "the aggressor",
-          "state": "Leaning into the approach — leading shoulder, weight forward, already certain."
+          "state": "Lens at full iris, pressed to the edge of the nave — recording, still."
         }
       ],
       "objects": [
@@ -301,20 +286,19 @@
         "Scaffold of pale lashed timber over the south transept",
         "Eastern tower doorway — darker, quieter",
         "Low run of fallen stone at the nave's eastern edge",
-        "Cloud of rust-choir gnats — still moving through the warm air"
+        "Cloud of rust-choir gnats — still moving through the warm air near the south tra"
       ],
       "threads": [
-        "The aggressor is committed to a first strike — the seam Falsecraft found is open",
-        "Vessin is present and armed — her position is uncertain",
-        "Rust-choir gnats are still working the nave",
-        "Who is working the scaffold at this hour — unanswered"
+        "Who sent the aggressor — the man in the lower Annex, still unnamed",
+        "Vessin is armed and the room has not quite settled",
+        "Who is working the scaffold at this hour — still unanswered"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 1,
-    "hour": 23,
+    "day": 2,
+    "hour": 0,
     "realAnchor": null
   },
   "companions": [
@@ -1046,11 +1030,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 787,
-    "lastSharedReadAt": "2026-08-01T19:55:26.911Z",
+    "lastGenCount": 788,
+    "lastSharedReadAt": "2026-08-01T20:47:09.472Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1106,7 +1090,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 14,
+        "stage": 15,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1119,7 +1103,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 14,
+        "stage": 15,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1144,7 +1128,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 9,
+        "stage": 10,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -2280,8 +2264,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785615152431,
-  "rev": 349,
+  "updatedAt": 1785617313542,
+  "rev": 360,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3051,7 +3035,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 41
+    "the_quickwood": 42
   },
   "opLossPending": false,
   "sessions": [
@@ -3106,10 +3090,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T20:12:32.431Z",
+      "lastAt": "2026-08-01T20:48:33.540Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 7
+      "beats": 8
     }
   ],
   "establishedFacts": [
@@ -3149,7 +3133,7 @@
   "_opEmitted": {
     "sceneSummary": 113,
     "choices": 113,
-    "characterDeltas": 50,
+    "characterDeltas": 51,
     "scene": 113,
     "placeUpdates": 13,
     "codexUpdates": 79,
@@ -3157,7 +3141,7 @@
     "offer": 10,
     "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 85,
+    "npcUpdates": 86,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3165,7 +3149,7 @@
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
-    "encounterOps": 8,
+    "encounterOps": 7,
     "ledgerEvents": 1,
     "newEncounter": 1,
     "imagePrompt": 1,
@@ -3181,12 +3165,12 @@
     "uses": {
       "see_the_made_thing": 27,
       "falsecraft": 5,
-      "the_wrong_reality": 4,
+      "the_wrong_reality": 5,
       "the_misdirect": 2,
       "the_better_story": 11,
       "prism_sight": 7,
       "harmonic_voice": 2,
-      "hunters_strike": 2,
+      "hunters_strike": 3,
       "descent": 1
     },
     "coActivations": {
@@ -3211,7 +3195,7 @@
     "lastUsed": {
       "see_the_made_thing": 27,
       "falsecraft": 32,
-      "the_wrong_reality": 27,
+      "the_wrong_reality": 32,
       "the_misdirect": 31,
       "the_better_story": 32,
       "prism_sight": 27,
@@ -3474,139 +3458,7 @@
       "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
   },
-  "activeEncounter": {
-    "defId": "re-beast_rust_choir_gnats",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-beast_rust_choir_gnats",
-      "type": "duel",
-      "status": "active",
-      "round": 1,
-      "log": [
-        "r1: reveal vs strike → momentum 0"
-      ],
-      "opponentHealth": 4,
-      "tactic": "press-in",
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the aggressor",
-        "attributes": {
-          "practical": 2,
-          "physical": 2,
-          "mental": 2,
-          "social": 2
-        },
-        "energy": 66,
-        "maxEnergy": 66,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 1,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 1,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 0,
-      "opponentEnergy": 61,
-      "turn": {
-        "phase": "action",
-        "sel": {
-          "sense": [
-            9
-          ],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 4,
-        "bonusEarned": true,
-        "senseDone": true,
-        "senseLine": "You read with Falsecraft — success. You have the read (+4 to your action). The opening is there — you have earned a BONUS action. You read the aggressor: they favour strike. Pick a craft that answers it.",
-        "readPayoff": "You read the aggressor: they favour strike. Pick a craft that answers it."
-      },
-      "effects": [
-        {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 3,
-          "roundsLeft": 2,
-          "applies": "always",
-          "side": "player",
-          "source": "Falsecraft",
-          "from": "player"
-        }
-      ],
-      "pressure": {
-        "player": 0,
-        "opponent": 0
-      },
-      "spent": {
-        "player": false,
-        "opponent": false
-      },
-      "lastOppFn": "strike",
-      "lastOppReceipt": {
-        "roll": 5,
-        "chance": 45,
-        "degree": "crit_success",
-        "action": {
-          "attribute": "practical",
-          "abilityLevel": 1,
-          "label": "a hard strike",
-          "axes": {}
-        },
-        "breakdown": {
-          "components": [
-            {
-              "label": "practical 2",
-              "value": 40
-            },
-            {
-              "label": "ability rank 1",
-              "value": 5
-            }
-          ],
-          "total": 45,
-          "clampedFrom": null,
-          "base": "practical",
-          "opposed": null
-        },
-        "rawChance": 45,
-        "margin": 40,
-        "matchup": 0,
-        "intensity": "standard",
-        "tier": 1,
-        "function": "strike",
-        "name": "a hard strike",
-        "effectMods": [],
-        "woven": null
-      },
-      "lastReadWasSense": true,
-      "senseTierEarned": 2,
-      "senseResist": {
-        "value": 6,
-        "label": "their natural guardedness",
-        "from": "passive"
-      }
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"

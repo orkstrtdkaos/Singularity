@@ -1,5 +1,56 @@
 # PO ALERT
 
+> ## [SNG-249 THREAT BALANCE open - spec by CCode 2026-08-01, AUTHORING FOR AEVI] Level sets the MEAN, region sets the CAST
+> **ERIK'S RULING (load-bearing - build to this, not to a level-range gate):**
+> *"A region should never really be only one level range. The player's chronicle can drive things - so a lvl 5 in
+> Millbrook will fight boars and maybe a warpling is a big threat... but a larger monster or villain who they
+> encounter needs to be avoided or escaped. When they come back to Millbrook at lvl 15 the monster is easy to slay
+> and the villain is the quest they're on to take down - achievable... but an epic villain might take an interest
+> and get in the way or need to be run from. All of these things exist everywhere in the world - but areas have
+> their own beasts and villains - it's just that your level sets the mean about which the encounters revolve. A
+> boar at lvl 20 isn't really an encounter anymore, unless it's a special encounter."*
+> **THE MODEL, STATED ONCE:** encounters are drawn from a DISTRIBUTION centred on the player's power. The region
+> supplies the **cast** (which beasts and villains live here - its identity); the player's level supplies the
+> **mean**. Both TAILS always exist: an upper tail you must avoid or escape, and a lower tail that falls below a
+> relevance floor and stops being an encounter at all. That is what keeps the world from being a treadmill AND
+> keeps "run away" a real move rather than a failure state.
+> **WHY THIS MATTERS NOW:** the current engine caps every foe at threat ~70 (`attributeCeiling 6` / `tierCeiling 4`),
+> so an epic is mechanically identical to a threat-70 raider - there is no upper tail to flee from. And per the
+> `contest_math_report`, the test character beats the threat-40 aggressor in ~96% of fights, so there is no mean
+> either. Both halves are broken; this fixes them together.
+>
+> ### >> AEVI AUTHORS (two pieces, both genuinely yours) <<
+> **1. THE BAND LADDER + ITS VOICE.** `appraiseOpponent` currently has a three-word placeholder ladder
+> (*outmatches you / a match for you / beneath you*). It needs ~6 rungs spanning **beneath notice → trivial → a
+> real fight → hard → do not take this → flee on sight**, each in the Valley's voice. **The top rung is the
+> highest-stakes prose in the system** - it is the line that stops a player walking into a death, and it has to
+> land as a warning without reading as a difficulty label. Author names + the one-line read for each rung.
+> Deliver as `po/staged_content/threat_bands.json`; CCode wires it to the appraisal + the encounter frame.
+> **2. THE GREATER / WARPED VARIANT FICTION.** Erik: *"unless of course you are now fighting a warped version, a
+> larger version, etc."* **What makes a thing warped in the Valley is LORE I should not invent** - substrate?
+> precursor-marking? something else of yours. Author the variant AXES (2-4 of them: e.g. warped / greater / ancient
+> / swarm), what each means in the fiction, what it does to the creature's presence, and **which bestiary creatures
+> take which axis**. CCode builds the mechanism (a modifier applied to a base creature); you name the axes and the
+> assignments. This is also the answer to *"a boar at lvl 20 isn't an encounter anymore, unless it's a SPECIAL
+> encounter"* - a variant is one of the things that makes it special again.
+> **Optional third, if you want it:** the "why is this here" line for a far-above-mean encounter - the fiction that
+> explains an epic villain taking an interest in a level-8 character, so the upper tail reads as story rather than
+> as a bad roll.
+>
+> ### CCODE BUILDS (no dependency on the above - defaults ship plain, as with SNG-247)
+> - **Uncapped scaling:** threat -> attributes/tier/health/energy on a curve with no ceiling, so threat 200 is a
+> real thing. Measured, not guessed - the `contest_math_report` harness already exists for exactly this.
+> - **`characterPower`:** an honest power number from attributes + craft tiers + kit, so the BAND readout tells the
+> truth about YOU. (Erik's call, 2026-08-01: **built power for the band readout, level for the world's mean** -
+> a well-built character punches above their level and feels it.)
+> - **The distribution sampler:** encounter selection draws around the player's mean with real tails, plus a
+> RELEVANCE FLOOR that retires trivial foes unless they carry a variant/quest/swarm reason to appear.
+> - **The variant mechanism:** a modifier applied to a base creature (stats, presence, and the frame's read).
+> - **Escapability:** the upper tail is only fair if fleeing WORKS. SNG-247 already made a fled fight become a real
+> chase; this checks that an over-mean foe is escapable rather than a death sentence.
+> **Erik owes nothing further** - the ruling above is the spec.
+
+
 > ## [SNG-247 TRY-EACH-KIND complete_pending_review - CCode, 2026-08-01] The dev buttons - and the two bugs clicking them found (v1.8.325 `f798a6f0`)
 > Erik: *"update the test encounters so I can try each of the new updates... maybe put a matching colored border
 > around the button."* Five buttons at the top of 🧪 Legs, one per kind, each with its icon, name and a one-line

@@ -209,39 +209,29 @@
         "player": "Use Descent to name what she actually wants from this conversation — not the surface question, but the real one underneath it.",
         "summary": "Loki named Vessin's real want — not the man's name, but a test of whether Loki is worth knowing — and she acknowledged it plainly.",
         "narration": "Vessin is watching you with the particular patience of someone who has learned to wait for the real question. Her knife is sheathed. Her hands are loose in her lap. She asked who sent the aggressor, and she is still waiting for that answer — but underneath it, the Descent opens the thing she actually wants, and it is not the man's name.\n\nWhat she wants is to know whether you are worth knowing. Not whether you are useful, not whether you are safe. Whether the thing she half-glimpsed in the nave — the way you moved, the way the aggressor broke and left without a word — was real, or a performance. She has met a lot of performances. She prices them quickly and sets them down. She came into this alcove because something did not price out as a performance, and she is here to find out if she was wrong.\n\nYou do not say this to her as a speech. You say it quietly, the way the Descent works — naming the thing underneath the thing, so the person hears it without the framing of being read. You say something like: \"You did not follow me here for the answer about who sent him. You followed me here to see if I was worth following.\"\n\nVessin is quiet for a moment. Her eyes do not change — they are still the same appraising eyes — but something behind them settles, the way a scale settles when the right weight has been placed on it. \"Yes,\" she says simply, as though the word costs her nothing now that it is true. Then: \"So. Who sent him, and is there a second. And then we'll see.\""
+      },
+      {
+        "player": "Answer both questions plainly — the man in the lower Annex, the false charge, and what you think it means.",
+        "summary": "Loki gave Vessin the full account — the man in the lower Annex, the false charge, the hired stranger's own telling of it — and Vessin returned it with something she had not meant to offer: she was in the lower Annex this morning, and she saw a man watching the posting board.",
+        "narration": "You give Vessin the whole shape of it, plainly and in order.\n\nA man in the lower Annex hired the stranger you met at the confluence, you tell her. He paid in coin and gave a false charge — that you had pulled something sealed loose from the Deep and were carrying it out. The stranger told you this himself when the fight was finished. He had no particular anger in it; he had a debt, and someone offered to clear it.\n\nYou tell her what you think it means. Someone in the lower Annex knows you went to the Unlit Deep, and knows enough about what is down there to build a charge that would sound credible to a hired hand. That is a narrow group of people. It is not a random threat. Whoever sent him wanted you slowed or frightened, not necessarily killed — because if they wanted you dead, they would have sent someone better.\n\nVessin listens to all of it without moving. When you finish, she is quiet for a moment. Then she says, \"The lower Annex.\" She says it the way someone says a place they already know, not the way someone hears a name for the first time. \"I was there this morning,\" she says. \"Pricing salvage on a routing component someone wanted moved quietly.\" She pauses. \"A man with a grey coat and a split seam on the left shoulder was watching the board when I left.\""
       }
     ],
     "lastTurn": {
-      "narration": "Vessin is watching you with the particular patience of someone who has learned to wait for the real question. Her knife is sheathed. Her hands are loose in her lap. She asked who sent the aggressor, and she is still waiting for that answer — but underneath it, the Descent opens the thing she actually wants, and it is not the man's name.\n\nWhat she wants is to know whether you are worth knowing. Not whether you are useful, not whether you are safe. Whether the thing she half-glimpsed in the nave — the way you moved, the way the aggressor broke and left without a word — was real, or a performance. She has met a lot of performances. She prices them quickly and sets them down. She came into this alcove because something did not price out as a performance, and she is here to find out if she was wrong.\n\nYou do not say this to her as a speech. You say it quietly, the way the Descent works — naming the thing underneath the thing, so the person hears it without the framing of being read. You say something like: \"You did not follow me here for the answer about who sent him. You followed me here to see if I was worth following.\"\n\nVessin is quiet for a moment. Her eyes do not change — they are still the same appraising eyes — but something behind them settles, the way a scale settles when the right weight has been placed on it. \"Yes,\" she says simply, as though the word costs her nothing now that it is true. Then: \"So. Who sent him, and is there a second. And then we'll see.\"",
-      "sceneSummary": "Loki named Vessin's real want — not the man's name, but a test of whether Loki is worth knowing — and she acknowledged it plainly.",
+      "narration": "You give Vessin the whole shape of it, plainly and in order.\n\nA man in the lower Annex hired the stranger you met at the confluence, you tell her. He paid in coin and gave a false charge — that you had pulled something sealed loose from the Deep and were carrying it out. The stranger told you this himself when the fight was finished. He had no particular anger in it; he had a debt, and someone offered to clear it.\n\nYou tell her what you think it means. Someone in the lower Annex knows you went to the Unlit Deep, and knows enough about what is down there to build a charge that would sound credible to a hired hand. That is a narrow group of people. It is not a random threat. Whoever sent him wanted you slowed or frightened, not necessarily killed — because if they wanted you dead, they would have sent someone better.\n\nVessin listens to all of it without moving. When you finish, she is quiet for a moment. Then she says, \"The lower Annex.\" She says it the way someone says a place they already know, not the way someone hears a name for the first time. \"I was there this morning,\" she says. \"Pricing salvage on a routing component someone wanted moved quietly.\" She pauses. \"A man with a grey coat and a split seam on the left shoulder was watching the board when I left.\"",
+      "sceneSummary": "Loki gave Vessin the full account — the man in the lower Annex, the false charge, the hired stranger's own telling of it — and Vessin returned it with something she had not meant to offer: she was in the lower Annex this morning, and she saw a man watching the posting board.",
       "choices": [
         {
-          "label": "Answer both questions plainly — the man in the lower Annex, the false charge, and what you think it means.",
+          "label": "Ask Vessin to describe the man in more detail — what else she noticed about him.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Answer, and then ask your own question — she said she met someone who might have been like you. Ask about them now.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "negotiate",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Use Prism Sight — read her face in the candlelight for how much she already knows or suspects about who sent the aggressor.",
+          "label": "Use Prism Sight — read Vessin's face as she describes the man, looking for the moment her recall sharpens or wavers.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
@@ -254,17 +244,24 @@
           "trivial": false
         },
         {
-          "label": "Tell her what you are — not a performance, not a preamble. Just the plain fact of it. Let that be the test she came here to run.",
+          "label": "Name what this changes — someone in the Annex has eyes on both of you now, and that is a shared problem.",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "negotiate",
-            "risky"
+            "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
+          "trivial": true
+        },
+        {
+          "label": "Ask what she was moving — the routing component, and who wanted it moved quietly.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
@@ -272,7 +269,7 @@
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Seated against the far wall on the canvas drop-cloth, back straight, knife sheathed, scale-settled — she has acknowledged the naming and is waiting for the answers now."
+            "state": "Seated against the far wall on the canvas drop-cloth, back straight, knife sheathed — she has just offered a detail she had not planned to: a man with a grey coat and a split seam on the left shoulder, watching the posting board in the lower Annex this morning."
           },
           {
             "name": "Cy",
@@ -287,10 +284,10 @@
           "The open nave beyond — quiet"
         ],
         "threads": [
-          "Who sent the aggressor — the man in the lower Annex, still unnamed",
+          "The man in the lower Annex — grey coat, split seam on the left shoulder — still unnamed",
+          "What Vessin was pricing in the lower Annex, and who commissioned the move",
           "Whether there is a second aggressor",
           "Vessin's account of the person she met who might have been like Loki — not yet given",
-          "A low, patient voice heard in the nave earlier — not yet identified",
           "Vessin's test: whether Loki is worth knowing — named and acknowledged, not yet answered by deed"
         ]
       },
@@ -299,30 +296,35 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Loki named her real want — not the attacker's name, but whether Loki was worth knowing — and she acknowledged it with a plain yes and then refocused: asked for the answers and said 'then we'll see.'",
+          "note": "Received the full account of the aggressor's employer and the false charge. Returned it with an unplanned detail: she was in the lower Annex this morning, pricing a routing component someone wanted moved quietly, and saw a man in a grey coat with a split seam on the left shoulder watching the posting board.",
           "learned": [
-            "Vessin's real question in this conversation is whether Loki is worth knowing — she confirmed this when it was named."
+            "The man in the lower Annex hired the stranger with a false charge — that Loki had pulled something sealed from the Deep.",
+            "Loki's read: the threat was meant to slow or frighten, not to kill."
           ],
-          "relationshipDelta": 1,
-          "statusNote": "Seated in the dry storage alcove, scale-settled, waiting for Loki to answer who sent the aggressor and whether there is a second."
+          "status": "active",
+          "statusNote": "Seated in the alcove, scale-settled — has just offered an unexpected lead from her own morning in the lower Annex."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "vessin-tallow-bark",
-          "label": "Vessin Tallow-bark",
-          "kind": "person",
-          "entityId": "vessin-tallow-bark",
-          "fact": "Her real want in this conversation is not the aggressor's employer — it is whether Loki is worth knowing. She confirmed this when Descent named it, and she did not resent the naming.",
+          "topic": "the-man-in-the-lower-annex",
+          "label": "The Man in the Lower Annex",
+          "kind": "mystery",
+          "fact": "Vessin was in the lower Annex this morning, pricing a routing component someone wanted moved quietly. A man in a grey coat with a split seam on the left shoulder was watching the posting board when she left. This is the first partial physical description of the person who hired the aggressor.",
           "links": [
-            "grovehome",
-            "the-half-cathedral"
+            "vessin-tallow-bark",
+            "the-water-crisis",
+            "ring-form-residue-at-eastern-intake"
           ]
         }
       ],
+      "offer": {
+        "thing": "Vessin's unplanned detail — she was in the lower Annex this morning, and she saw the man",
+        "from": "Vessin's fear of making the same mistake a third time — the account Loki gave was precise and without performance, and the assessor in her could not let a relevant fact sit unspoken when someone was being honest with her"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange in the alcove — a moment's naming and a settling."
+        "why": "A short exchange — the account given, the detail returned."
       }
     },
     "sceneState": {
@@ -330,7 +332,7 @@
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Seated against the far wall on the canvas drop-cloth, back straight, knife sheathed, scale-settled — she has acknowledge"
+          "state": "Seated against the far wall on the canvas drop-cloth, back straight, knife sheathed — she has just offered a detail she "
         },
         {
           "name": "Cy",
@@ -345,10 +347,10 @@
         "The open nave beyond — quiet"
       ],
       "threads": [
-        "Who sent the aggressor — the man in the lower Annex, still unnamed",
+        "The man in the lower Annex — grey coat, split seam on the left shoulder — still unnamed",
+        "What Vessin was pricing in the lower Annex, and who commissioned the move",
         "Whether there is a second aggressor",
         "Vessin's account of the person she met who might have been like Loki — not yet given",
-        "A low, patient voice heard in the nave earlier — not yet identified",
         "Vessin's test: whether Loki is worth knowing — named and acknowledged, not yet answered by deed"
       ]
     }
@@ -787,7 +789,8 @@
         "[d2] Agreed to follow Loki out of the open nave — sheathed the knife, but kept the decision on her own terms. Not a full yes; a yes to moving.",
         "[d2] Followed Loki into the eastern tower landing; settled with her back to the wall where she can watch both exits. Knife sheathed. Present and cautious.",
         "[d2] Chose the alcove herself — read the space fully before settling, back to the wall, drop-cloth down. Now asking who sent the aggressor.",
-        "[d2] Loki named her real want — not the attacker's name, but whether Loki was worth knowing — and she acknowledged it with a plain yes and then refocused: asked for the answers and said 'then we'll see.'"
+        "[d2] Loki named her real want — not the attacker's name, but whether Loki was worth knowing — and she acknowledged it with a plain yes and then refocused: asked for the answers and said 'then we'll see.'",
+        "[d2] Received the full account of the aggressor's employer and the false charge. Returned it with an unplanned detail: she was in the lower Annex this morning, pricing a routing component someone wanted moved quietly, and saw a man in a grey coat with a split seam on the left shoulder watching the…"
       ],
       "knownFacts": [
         "Noticed the craft in the air — the easing of tiredness — and marked it consciously",
@@ -795,13 +798,15 @@
         "Loki was made, not born — a construct from before the Transition; the specification has not been found",
         "Loki has an adopted giant father and a nymph-touched enchantress mother, neither of whom made her",
         "Vessin has met one person who might have been like Loki — she did not give a name",
-        "Vessin's real question in this conversation is whether Loki is worth knowing — she confirmed this when it was named."
+        "Vessin's real question in this conversation is whether Loki is worth knowing — she confirmed this when it was named.",
+        "The man in the lower Annex hired the stranger with a false charge — that Loki had pulled something sealed from the Deep.",
+        "Loki's read: the threat was meant to slow or frighten, not to kill."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated in the dry storage alcove, scale-settled, waiting for Loki to answer who sent the aggressor and whether there is a second.",
+      "statusNote": "Seated in the alcove, scale-settled — has just offered an unexpected lead from her own morning in the lower Annex.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1138,12 +1143,8 @@
     "lastSharedReadAt": "2026-08-01T21:06:04.486Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 13,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
-        "from": "The installation panels themselves, which were built as a conversation for a specific person to find — the prior visitor is the other side…"
-      },
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
         "from": "What Cy is — a mechanism built for a person now gone, keeping careful accounts of a very long wait"
@@ -1159,6 +1160,10 @@
       {
         "thing": "The Half-Cathedral itself — in its patient, patient incompletion",
         "from": "The player named this place and its nature; the world is honoring exactly what they said it is"
+      },
+      {
+        "thing": "Vessin's unplanned detail — she was in the lower Annex this morning, and she saw the man",
+        "from": "Vessin's fear of making the same mistake a third time — the account Loki gave was precise and without performance, and the assessor in her…"
       }
     ],
     "wantProgress": {
@@ -1889,17 +1894,20 @@
         "label": "The Man in the Lower Annex",
         "kind": "mystery",
         "facts": [
-          "[d1] A man in the lower Annex hired the stranger at the confluence — told them Loki had pulled something sealed from the Deep and was carrying it out. The charge was fabricated well enough to buy a hired blade. His name and appearance are not yet known."
+          "[d1] A man in the lower Annex hired the stranger at the confluence — told them Loki had pulled something sealed from the Deep and was carrying it out. The charge was fabricated well enough to buy a hired blade. His name and appearance are not yet known.",
+          "[d2] Vessin was in the lower Annex this morning, pricing a routing component someone wanted moved quietly. A man in a grey coat with a split seam on the left shoulder was watching the posting board when she left. This is the first partial physical description of the person who hired the aggressor."
         ],
         "links": [
           "the-unlit-deep",
           "the-passage-below",
           "the-water-crisis",
-          "the-taken-from-the-city"
+          "the-taken-from-the-city",
+          "vessin-tallow-bark",
+          "ring-form-residue-at-eastern-intake"
         ],
         "aliases": [],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "grovehome": {
         "id": "grovehome",
@@ -2053,24 +2061,24 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.6864282846640424,
-    "cerebral": 13.004527031471627,
-    "social": 18.679013213478033,
-    "strategic": 10.026709381839249,
-    "cautious": 7.989862389456955,
-    "amorous": 5.515330778153138,
-    "generous": 5.143692612465887,
-    "ruthless": 0.7015693362605115,
-    "risky": 2.1518095398374144,
-    "patient": 0.5876204882136226,
-    "deception": 0.6840206855639235
+    "devotion": 1.6442675775474414,
+    "cerebral": 12.679413855684835,
+    "social": 19.212037883141083,
+    "strategic": 9.776041647293267,
+    "cautious": 7.7901158297205315,
+    "amorous": 5.377447508699309,
+    "generous": 5.015100297154239,
+    "ruthless": 0.6840301028539988,
+    "risky": 2.098014301341479,
+    "patient": 0.572929976008282,
+    "deception": 0.6669201684248254
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "orator"
   ],
-  "actionCount": 99,
+  "actionCount": 100,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2371,8 +2379,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785619196311,
-  "rev": 368,
+  "updatedAt": 1785619312383,
+  "rev": 369,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3142,7 +3150,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 48
+    "the_quickwood": 49
   },
   "opLossPending": false,
   "sessions": [
@@ -3197,10 +3205,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T21:19:56.309Z",
+      "lastAt": "2026-08-01T21:21:52.382Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 14
+      "beats": 15
     }
   ],
   "establishedFacts": [
@@ -3231,24 +3239,24 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 11,
+      "applied": 12,
       "rejected": 0,
       "lastWhy": null
     }
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 118,
-    "choices": 118,
+    "sceneSummary": 119,
+    "choices": 119,
     "characterDeltas": 51,
-    "scene": 118,
+    "scene": 119,
     "placeUpdates": 17,
-    "codexUpdates": 81,
-    "timeOps": 110,
-    "offer": 10,
+    "codexUpdates": 82,
+    "timeOps": 111,
+    "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 90,
+    "npcUpdates": 91,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3262,7 +3270,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 118,
+  "_opTurns": 119,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

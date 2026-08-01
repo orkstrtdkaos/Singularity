@@ -4,7 +4,7 @@
 import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
-import { synthesizeOpponentSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
+import { synthesizeOpponentSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.315";
+const APP_VERSION = "1.8.316";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8634,6 +8634,13 @@ function skillBattlePanel() {
   window._sbSkills = skills; // handler lookup (data-sbskill = index into this flat list)
   // CCODE-45: which STEP of the turn we are selecting for, and what is picked so far (2 = a braid).
   const turn = sbTurn();
+  // CCODE-41/48: a craft can BLIND you to your own senses (deniesPhase). If the sense step is denied this turn,
+  // the engine skips you past it rather than offering a step you cannot take — the counterplay to a setup-heavy
+  // build, and the reason skipping sense had to be first-class. Without this consumer the whole thing was inert.
+  if (turn.phase === "sense" && phaseDenied(st.effects, "player", "sense")) {
+    turn.phase = "action"; turn.senseDone = true; turn.senseBlinded = true;
+    turn.senseLine = "Your senses are shut — you cannot read them this turn.";
+  }
   const step = SB_STEPS.find(x => x.key === turn.phase) || SB_STEPS[1];
   const sel = turn.sel[turn.phase] || [];
   const selCount = sel.length, selFull = selCount >= 2;
@@ -8721,6 +8728,7 @@ function skillBattlePanel() {
     ${st.spent?.opponent ? `<div class="sb-spent-bar dim">🕯 <strong>${esc(def.opponent?.name || "They")} are spent</strong> — swinging on will alone. <span class="hint">Their crafts are done; press it.</span></div>` : ""}
     ${busySB ? `<div class="sb-waiting"><span class="sb-spinner"></span> ${esc(sbBusyLabel || "resolving…")}</div>` : ""}
     ${sbQuickBeat && !busySB ? `<div class="sb-quick">${esc(sbQuickBeat)}</div>` : ""}
+    ${turn.senseBlinded ? `<div class="sb-spent-bar">◉ <strong>Blinded</strong> — your senses are shut this turn. <span class="hint">You go straight to your action; the read is denied you.</span></div>` : ""}
     ${sbStepTracker(turn)}
     ${turn.phase === "review" ? sbReviewCard(turn, skills) : `
       <div class="sb-step-hint hint">${esc(step.hint)}${selCount === 2 ? ` <strong class="sb-braid-note">⋈ braided — both crafts, both effects, both costs.</strong>` : selCount === 1 ? ` <span class="hint">Pick a second craft to BRAID them.</span>` : ""}</div>

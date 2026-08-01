@@ -114,7 +114,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // CCODE-38: remember the foe's last verb so opponentPolicy's anti-repetition term has something to read —
   // without this write the "don't be a metronome" penalty never fires and the variety fix is inert.
   const senseOnly = phase === "sense" && sb?.turn?.senseMovesMomentum !== true; // CCODE-45: a sense is part of the turn, not a round of its own
-  const s = { ...state, round: state.round + (senseOnly ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
+  // CCODE-48 (Erik): a ROUND is a TURN, not a step. Sense never advanced it; now action/bonus only advance it on
+  // the step that ENDS the turn (the same signal that ticks effects), so "round 3" means three turns, not six steps.
+  const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
   if (r.resolved === "player") { s.status = "ended"; ended = true; outcome = (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell"; events.push(`You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`); }

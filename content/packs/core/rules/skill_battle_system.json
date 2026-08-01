@@ -175,8 +175,7 @@
         "bind":    { "kind": "bound",     "label": "bound",               "value": -4, "rounds": 2, "applies": "always",       "target": "opponent" },
         "hinder":  { "kind": "hampered",  "label": "hampered",            "value": -3, "rounds": 2, "applies": "always",       "target": "opponent" },
         "command": { "kind": "swayed",    "label": "swayed",              "value": -3, "rounds": 2, "applies": "always",       "target": "opponent" },
-        "deceive": { "kind": "misled",    "label": "misled",              "value": -3, "rounds": 1, "applies": "always",       "target": "opponent" },
-        "conceal_deep": { "kind": "blinded", "label": "senses blinded",   "value": -3, "rounds": 1, "applies": "always",       "target": "opponent", "deniesPhase": "setup" }
+        "deceive": { "kind": "misled",    "label": "misled — cannot read you", "value": -3, "rounds": 1, "applies": "always", "target": "opponent", "deniesPhase": "setup" }
       },
       "phaseDenialNote": "CCODE-41 (Erik): 'perhaps if the opposing skill has blinded you to the sense skills you might have' — an effect may carry deniesPhase, which locks that phase for the side it sits on. A blinded fighter cannot take a SETUP this round: they go straight to their action. This is the counterplay to a setup-heavy build, and the reason skipping setup has to be a first-class option rather than an error state.",
       "attackFunctions": ["strike", "break"]

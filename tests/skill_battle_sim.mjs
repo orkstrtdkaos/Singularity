@@ -354,10 +354,10 @@ check("CCODE-41: an ordinary effect denies nothing (no accidental phase locks)",
   !phaseDenied([{ side: "player", kind: "guard", value: 4 }], "player", "setup"));
 check("CCODE-41: deniesPhase rides from the CONTENT def onto the live effect (else the counterplay is inert)",
   (() => {
-    const def = sb.persistentEffects.byFunction.conceal_deep;
+    const def = sb.persistentEffects.byFunction.deceive;
     if (!def?.deniesPhase) return false;                       // content must declare it
     const r = battleRound({
-      playerDecl: { function: "conceal_deep", tier: 3, attribute: "mental", intensity: "standard", name: "a deep fade" },
+      playerDecl: { function: "deceive", tier: 3, attribute: "mental", intensity: "standard", name: "a deep feint" },
       oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" },
       playerSheet: { attributes: { mental: 5 }, energy: 100 }, oppSheet: { attributes: { physical: 2 }, energy: 100, skills: [] },
       state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.01, 0.99])
@@ -435,6 +435,31 @@ check("CCODE-45 SEAM: an ACTION step through the wrapper still advances the roun
     const out = skillBattleRound(st, duelDef, { function: "strike", tier: 2, attribute: "practical", intensity: "standard", name: "a cut" },
       { character: char, rules, sb, steps, rng: seqRng([0.4, 0.6]) });
     return out.state.round === 6;
+  })());
+
+// ---- CCODE-48: the cleanups have real consumers, not just exports ----
+check("CCODE-48: every persistentEffects key is a REAL verb from the 24-verb vocabulary (no invented functions)",
+  (() => {
+    const vocab = rj("content/packs/core/rules/function_vocabulary.json");
+    const verbs = new Set(Object.values(vocab.families).flat().map(e => e.verb));
+    return Object.keys(sb.persistentEffects.byFunction).every(k => verbs.has(k));
+  })());
+check("CCODE-48: deniesPhase sits on a real verb, so the blinding counterplay can actually fire",
+  (() => {
+    const withDeny = Object.entries(sb.persistentEffects.byFunction).filter(([, v]) => v.deniesPhase);
+    const vocab = rj("content/packs/core/rules/function_vocabulary.json");
+    const verbs = new Set(Object.values(vocab.families).flat().map(e => e.verb));
+    return withDeny.length > 0 && withDeny.every(([k]) => verbs.has(k));
+  })());
+check("CCODE-48: a ROUND is a TURN — sense and a mid-turn action do not advance it; the closing step does",
+  (() => {
+    const base = { ...sbState, round: 7 };
+    const decl = { function: "strike", tier: 2, attribute: "practical", intensity: "standard", name: "a cut" };
+    const o = { character: char, rules, sb, steps, rng: seqRng([0.4, 0.6]) };
+    const sense = skillBattleRound(base, duelDef, { function: "reveal", tier: 2, attribute: "mental", intensity: "standard", name: "a read" }, { ...o, phase: "sense", tickEffects: false });
+    const mid   = skillBattleRound(base, duelDef, decl, { ...o, phase: "action", tickEffects: false }); // a bonus follows
+    const close = skillBattleRound(base, duelDef, decl, { ...o, phase: "action", tickEffects: true });  // ends the turn
+    return sense.state.round === 7 && mid.state.round === 7 && close.state.round === 8;
   })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

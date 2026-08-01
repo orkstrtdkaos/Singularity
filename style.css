@@ -110,13 +110,23 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-choice { border-color: var(--danger); }
 .enc-choice:hover:not(:disabled) { border-color: var(--danger); background: rgba(192,91,77,0.12); }
 /* SNG-230: the ENCOUNTER FRAME header — the bounded thing made obvious above its action buttons */
-.enc-frame { border: 1px solid var(--danger); border-radius: 10px; background: linear-gradient(180deg, rgba(192,91,77,0.10), var(--panel)); padding: 10px 12px; margin: 10px 0 8px; }
+/* SNG-247 Tier 0 (Erik): THE FRAME IS COLOUR-CODED BY KIND. The `enc-frame-<kind>` class was already emitted on
+   every frame and had no rules at all, so every encounter rendered in fight-red — a chase and a sealed door read
+   as the same thing. `--enc-hue` is set on BOTH the play wrapper (`enc-kind-<kind>`, so the skill-battle panel
+   inherits it) and the frame itself (so the strip is self-contained wherever it renders). Colour is a THIRD
+   channel only — the icon and the title already name the kind, so nothing depends on telling red from orange. */
+.enc-kind-fight,    .enc-frame-fight    { --enc-hue: #c05b4d; }  /* blood */
+.enc-kind-chase,    .enc-frame-chase    { --enc-hue: #e07b39; }  /* orange — pushed well clear of the gold decision strip */
+.enc-kind-hazard,   .enc-frame-hazard   { --enc-hue: #6f7b8c; }  /* stone — hard ground */
+.enc-kind-puzzle,   .enc-frame-puzzle   { --enc-hue: #7c6bd4; }  /* indigo — the sealed thing */
+.enc-kind-standoff, .enc-frame-standoff { --enc-hue: #5aa8a0; }  /* teal — a contest of words, not heat */
+.enc-frame { border: 1px solid var(--enc-hue, var(--danger)); border-radius: 10px; background: linear-gradient(180deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 12%, transparent), var(--panel)); padding: 10px 12px; margin: 10px 0 8px; }
 .enc-frame-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .enc-frame-title { font-family: var(--font); font-size: 15px; color: var(--accent); letter-spacing: 1px; }
 .enc-frame-kind { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--ink-dim); }
 .enc-frame-win { font-size: 13px; color: var(--ink); font-style: italic; margin: 3px 0 8px; }
 .enc-frame-meter { position: relative; height: 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--panel2); overflow: hidden; margin-bottom: 4px; }
-.enc-frame-meter-fill { height: 100%; background: linear-gradient(90deg, var(--accent2, #7a9), var(--accent)); transition: width .25s; }
+.enc-frame-meter-fill { height: 100%; background: linear-gradient(90deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 45%, var(--panel2)), var(--enc-hue, var(--danger))); transition: width .25s; }
 .enc-frame-stage { font-size: 11px; color: var(--ink-dim); margin-bottom: 8px; }
 .enc-frame-stage em { color: var(--ink); font-style: italic; }
 .enc-frame-exits { display: flex; flex-direction: column; gap: 3px; }
@@ -126,7 +136,7 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-exit-flee b { color: var(--accent2, #7a9); }
 .enc-exit-fail b { color: var(--danger); }
 /* SNG-230 Phase 1b: the TAKEOVER card — a weighty encounter takes the surface (buttons inside) vs. the small banner */
-.enc-frame-takeover { border-width: 2px; padding: 16px 16px 14px; margin: 14px 0; box-shadow: 0 6px 28px rgba(0,0,0,0.45), 0 0 0 4px rgba(192,91,77,0.06); background: linear-gradient(180deg, rgba(192,91,77,0.16), var(--panel)); }
+.enc-frame-takeover { border-width: 2px; padding: 16px 16px 14px; margin: 14px 0; box-shadow: 0 6px 28px rgba(0,0,0,0.45), 0 0 0 4px color-mix(in srgb, var(--enc-hue, var(--danger)) 8%, transparent); background: linear-gradient(180deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 18%, transparent), var(--panel)); }
 .enc-frame-takeover .enc-frame-title { font-size: 19px; }
 .enc-frame-takeover .enc-frame-win { font-size: 14px; }
 .enc-frame-takeover .enc-frame-meter { height: 16px; }
@@ -142,7 +152,8 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-frame-collapse.dim { color: var(--ink-dim); }
 /* SNG-244: the in-play quest DECISION strip — reuses the SNG-230 integrated strip, gold-weighted so it reads as
    a choice (not a fight). The roads are the outcome names, tappable straight through to the resolve. */
-.enc-frame-decision { border-color: #7a5f2a; background: linear-gradient(180deg, rgba(212,162,74,0.12), var(--panel)); }
+/* the decision strip is NOT an encounter — it pins its own gold hue so a live encounter's colour can't bleed in */
+.enc-frame-decision { --enc-hue: #7a5f2a; border-color: #7a5f2a; background: linear-gradient(180deg, rgba(212,162,74,0.12), var(--panel)); }
 .enc-frame-decision .enc-frame-title { color: #e0b25a; }
 .dec-roads { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
 .dec-road { display: block; width: 100%; text-align: left; background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; cursor: pointer; font-family: var(--font-ui); transition: border-color .15s, background .15s; }
@@ -857,7 +868,9 @@ img[data-lightbox] { cursor: zoom-in; }
 /* SNG-098 C — the skill-battle contest panel */
 /* SNG-246 BUG1: the skill battle now renders IN the play surface (the option area), not a separate screen — a
    bordered panel that sits above the input, distinct from the narration. The sub-styles below are reused. */
-.sb-panel { border: 1px solid var(--danger); border-radius: 10px; background: linear-gradient(180deg, rgba(192,91,77,0.08), var(--panel2)); padding: 10px 12px; margin: 8px 0 10px; }
+/* SNG-247: the contest panel takes the kind's hue from the .play wrapper — so when a chase or a standoff runs on
+   the battle engine (Tier 2) its panel follows its border automatically, with no second colour decision. */
+.sb-panel { border: 1px solid var(--enc-hue, var(--danger)); border-radius: 10px; background: linear-gradient(180deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 9%, transparent), var(--panel2)); padding: 10px 12px; margin: 8px 0 10px; }
 .sb-screen h2 { margin-bottom: 4px; }
 .sb-opponent { font-size: 14px; color: var(--ink); margin-bottom: 8px; }
 .sb-meter { position: relative; height: 14px; border: 1px solid var(--border); border-radius: 7px; background: var(--panel2); overflow: hidden; margin-bottom: 6px; }
@@ -869,7 +882,7 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-log { margin-bottom: 8px; font-size: 12px; }
 .sb-log summary { cursor: pointer; color: var(--ink-dim); }
 /* SNG-246 (Erik): the per-round "what just happened" line — both moves + the interaction + the momentum swing. */
-.sb-receipt { font-family: var(--font-ui); font-size: 12.5px; line-height: 1.45; color: var(--ink); background: color-mix(in srgb, var(--danger) 10%, var(--panel2)); border-left: 3px solid var(--danger); border-radius: 4px; padding: 6px 9px; margin-bottom: 8px; }
+.sb-receipt { font-family: var(--font-ui); font-size: 12.5px; line-height: 1.45; color: var(--ink); background: color-mix(in srgb, var(--enc-hue, var(--danger)) 10%, var(--panel2)); border-left: 3px solid var(--enc-hue, var(--danger)); border-radius: 4px; padding: 6px 9px; margin-bottom: 8px; }
 /* CCODE-36 (Erik: "let the player see the rolls and modifiers… a popup off of the action you chose") — the round's
    two rolls, opening the same breakdown popover normal play uses. Theirs stays behind the fog until you read them. */
 .sb-rolls { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 5px; }

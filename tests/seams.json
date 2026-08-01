@@ -212,6 +212,26 @@
       "consumer": { "file": "engine/encounters.js", "region": "skillBattleRound" },
       "assert": { "requires": ["phase", "tickEffects", "setupBonus"] },
       "canFail": "Remove `phase` (or tickEffects/setupBonus) from skillBattleRound's params or its forwarded battleRound call: the sense step resolves as a normal action round — momentum moves, the round advances, and sensing costs you the exchange again -> red."
+    },
+    {
+     "id": "seam_encounter_kind_single_source",
+     "incident": "SNG-247",
+     "kind": "field_presence",
+     "contract": "The EXIT RULE (skill_battle.js reads sb.kinds[kind] for what a pressure tick costs) and the BORDER COLOUR (app.js stamps enc-kind-<kind> on the play surface) must both derive the kind from encounterKind(def). Hardcode it in either place and the mechanics and the colour silently disagree — a chase running on a fight's exit rule while flying an orange border, or the reverse. `kind` is also the FOURTH option skillBattleRound has had to carry into its hand-built battleRound call (see seam_battle_round_options), so it is DERIVED here rather than forwarded: a value the wrapper computes from what it already holds cannot be dropped on the way in.",
+     "producer": {
+      "file": "engine/encounterFrame.js",
+      "note": "encounterKind(def) is the one answer to 'what kind of bounded thing is this'"
+     },
+     "consumer": {
+      "file": "engine/encounters.js",
+      "region": "skillBattleRound"
+     },
+     "assert": {
+      "requires": [
+       "encounterKind\\(def\\)",
+       "kind:"
+      ]
+     }
     }
   ]
 }

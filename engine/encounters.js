@@ -6,6 +6,7 @@
 // Incapacitation, never engine-imposed death.
 
 import { battleRound, opponentPolicy } from "./skill_battle.js";
+import { encounterKind } from "./encounterFrame.js"; // SNG-247: which bounded thing this is — it picks the exit rule
 import { smartClamp } from "./namematch.js"; // SNG-152
 
 // ---------- lifecycle ----------
@@ -109,7 +110,12 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // CCODE-35/38: `effects` and `pressure` must ride BOTH ways — into the round (they modify this roll / carry the
     // count) and back out onto the encounter state. This hand-built state object is the seam where they'd drop.
     oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 } }, rules, sb, steps, rng,
-    phase, tickEffects, setupBonus
+    phase, tickEffects, setupBonus,
+    // SNG-247: DERIVED here, never passed in. This wrapper has now silently eaten a forwarded option twice
+    // (CCODE-35 `effects`, CCODE-45 `phase`) — a value the wrapper computes from what it already holds cannot be
+    // dropped on the way in. `encounterKind(def)` is the same function the frame uses, so the exit rule and the
+    // border colour can never disagree about what kind of thing you are in.
+    kind: encounterKind(def) || "fight"
   });
   // CCODE-38: remember the foe's last verb so opponentPolicy's anti-repetition term has something to read —
   // without this write the "don't be a metronome" penalty never fires and the variety fix is inert.
@@ -128,12 +134,19 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   if (r.degraded?.player) events.push("You are spent — your crafts will not answer. Steel and wit still will.");
   if (r.degraded?.opponent) events.push(`${def.opponent.name} is spent — swinging on will alone now.`);
   // CCODE-38: a PRESSURE event — the meter filled, so someone was driven back hard. Real attrition, not an ending.
+  // SNG-247: what a tick COSTS and what it is CALLED are both per-kind content now — a chase takes your wind, a
+  // standoff your composure, a fight your blood. The player's energy loss rides in deltas alongside the health.
   if (r.pressureEvent) {
+    // The label is a per-side CLAUSE, not one phrase bent into two slots — "they open the gap" and "you lose
+    // ground" are not the same sentence with the subject swapped. `{them}` interpolates the other side's name.
+    const pl = r.pressureEvent.label || {};
+    const say = (s, fallback) => (s ? String(s).replace(/\{them\}/g, def.opponent.name) : fallback);
     if (r.pressureEvent.side === "player") {
       deltas.health -= r.pressureEvent.healthLoss || 0;
-      events.push(`${def.opponent.name} drives you back hard — you give ground but you are still standing.`);
+      deltas.energy -= r.pressureEvent.energyLoss || 0;
+      events.push(say(pl.player, `${def.opponent.name} drives you back hard — you give ground but you are still standing.`));
     } else {
-      events.push(`You drive ${def.opponent.name} back hard — they are shaken, but not done.`);
+      events.push(say(pl.opponent, `You drive ${def.opponent.name} back hard — they are shaken, but not done.`));
     }
   }
   s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);

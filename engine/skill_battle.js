@@ -334,7 +334,11 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // caller is untouched: phase "action" resolves exactly as before, and tickEffects true ticks per exchange.
   // The turn orchestrator passes phase:"sense" (no momentum, no pressure — it PREPARES) and tickEffects:false on
   // every step but the last, so a turn's effects tick exactly once.
-  phase = "action", tickEffects: doTick = true, setupBonus = 0 }) {
+  // SNG-247 Tier 1: WHICH BOUNDED THING this is. The contest core is already kind-agnostic — two sheets, two
+  // rolls, a margin delta driving a meter. The one fight-shaped thing in it was the EXIT RULE (what a pressure
+  // tick costs each side, how many ticks break them), and that is now per-kind CONTENT. Defaults to "fight", so
+  // every existing caller resolves EXACTLY as before.
+  phase = "action", tickEffects: doTick = true, setupBonus = 0, kind = "fight" }) {
   sb = sb || {};
   steps = steps || rules?.intensitySteps || DEFAULT_STEPS;
   // CCODE-35: standing effects modify THIS round's rolls as named contestMods, then tick; newly landed ones
@@ -386,15 +390,33 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // attrition, a pressure tick — and the meter RESETS so they are still in the fight. A crushing single blow is
   // heavy pressure too, not an instant end. What ENDS a fight is now only what the player can feel and manage:
   // health gone, energy gone, the opponent breaking after breakAtPressure, mutual exhaustion, or a deliberate exit.
-  const pcfg = mom.pressure || {};
+  // SNG-247 Tier 1: THE EXIT RULE IS PER-KIND CONTENT, NOT FIGHT-SHAPED CODE. A pressure tick costs what the
+  // bounded thing actually takes from you — a fight costs blood, a chase costs wind, a standoff costs composure,
+  // a sealed thing costs only the effort of trying again. `sb.kinds[kind]` names that; absent an entry the
+  // fight's own numbers hold, so kind:"fight" (the default) is bit-identical to before.
+  const kcfg = (sb.kinds || {})[kind] || {};
+  const pcfg = { ...(mom.pressure || {}), ...(kcfg.pressure || {}) };
+  // What a tick TAKES from a side. An explicit per-kind {health, energy} wins; else the fight's legacy keys —
+  // the player pays in health (applied by the app, which owns the player's body), the opponent in energy.
+  const lossFor = (side) => {
+    const explicit = side === "player" ? kcfg.playerLoss : kcfg.opponentLoss;
+    if (explicit) return { health: explicit.health || 0, energy: explicit.energy || 0 };
+    return side === "player"
+      ? { health: pcfg.playerHealthLoss ?? 3, energy: pcfg.playerEnergyLoss ?? 0 }
+      : { health: pcfg.opponentHealthLoss ?? 0, energy: pcfg.opponentEnergyLoss ?? 14 };
+  };
   const pressure = { player: state.pressure?.player || 0, opponent: state.pressure?.opponent || 0 };
   let pressureEvent = null;
   const overwhelmed = !senseStep && (Math.abs(momentum) >= meterMax || (delta >= crush && roundWinner));
   if (overwhelmed) {
     const dominated = (momentum > 0 || (momentum === 0 && roundWinner === "player")) ? "opponent" : "player";
     pressure[dominated] += 1;
-    pressureEvent = { side: dominated, healthLoss: dominated === "player" ? (pcfg.playerHealthLoss ?? 3) : 0, pressure: pressure[dominated] };
-    if (dominated === "opponent") opponentEnergy = Math.max(0, opponentEnergy - (pcfg.opponentEnergyLoss ?? 14));
+    const loss = lossFor(dominated);
+    // `label` is what a tick is CALLED in this kind ("driven back" / "ground lost" / "your point gives") — the
+    // receipt's word for it, so a chase never reads as a mis-labelled fight.
+    pressureEvent = { side: dominated, healthLoss: loss.health, energyLoss: loss.energy, pressure: pressure[dominated], label: kcfg.pressureLabel || null };
+    if (dominated === "opponent") opponentEnergy = Math.max(0, opponentEnergy - loss.energy);
+    else playerEnergy = Math.max(0, playerEnergy - loss.energy);
     momentum = (dominated === "opponent" ? 1 : -1) * meterMax * (pcfg.resetTo ?? 0.35); // driven back, still in it
   }
 

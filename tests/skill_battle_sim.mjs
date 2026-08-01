@@ -11,6 +11,7 @@ import { senseOpponent } from "../engine/sense.js";
 import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engine/encounters.js";
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
 import { recordUse } from "../engine/practice.js";
+import { FRAME_KINDS } from "../engine/encounterFrame.js";   // SNG-247: the kind list the colour gate checks
 import { harmTargetFor } from "../engine/intent.js";   // SNG-246 Fix A: who the player committed harm against
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -485,6 +486,56 @@ check("SNG-246 A: a minted duel from a resolved target is a REAL skill battle (r
     const st = startEncounter(def, { oppSheet: sheet });
     return st.mode === "skill_battle" && st.momentum === 0 && !!st.opponentSheet;
   })());
+
+// ---- SNG-247 Tier 1: THE EXIT RULE IS PER-KIND CONTENT, NOT FIGHT-SHAPED CODE ----
+// The contest core was already kind-agnostic except for ONE block: what a pressure tick costs each side and what
+// it is called. The load-bearing property is that lifting it into content did NOT move the fight — a chase can
+// cost wind instead of blood without a fight round resolving one point differently.
+const sbCrush = { ...sb, momentum: { ...sb.momentum, surgeCrushEndsIt: 0 } }; // any decisive round is a pressure tick
+const kindRound = (kind, sbUse, rngVals) => battleRound({
+  playerDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+  oppDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+  playerSheet: { attributes: { practical: 4 }, energy: 100 },
+  oppSheet: synthesizeOpponentSheet({ threat: 30, tacticTags: ["duelist"] }, sb),
+  state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 } },
+  rules, sb: sbUse, steps, rng: seqRng(rngVals), ...(kind ? { kind } : {}),
+});
+const pLoses = [0.95, 0.05], pWins = [0.05, 0.95];   // lower roll = bigger margin (see the SNG-098 round above)
+const noKind = kindRound(null, sbCrush, pLoses), asFight = kindRound("fight", sbCrush, pLoses), unknown = kindRound("wombat", sbCrush, pLoses);
+check("SNG-247: the player-side tick fires and costs the fight's authored blood (health 3, no energy)",
+  noKind.pressureEvent?.side === "player" && noKind.pressureEvent.healthLoss === 3 && noKind.pressureEvent.energyLoss === 0);
+check("SNG-247 (the one that matters): kind defaults to fight, and an UNKNOWN kind falls back to it — the numbers never move",
+  JSON.stringify([noKind.pressureEvent.healthLoss, noKind.pressureEvent.energyLoss, noKind.state.momentum])
+  === JSON.stringify([asFight.pressureEvent.healthLoss, asFight.pressureEvent.energyLoss, asFight.state.momentum])
+  && JSON.stringify([noKind.pressureEvent.healthLoss, noKind.pressureEvent.energyLoss])
+  === JSON.stringify([unknown.pressureEvent.healthLoss, unknown.pressureEvent.energyLoss]));
+check("SNG-247: the fight's authored pressure PROSE rides on the event, per side, with {them} left for the caller",
+  /drives you back hard/.test(asFight.pressureEvent.label?.player || "")
+  && asFight.pressureEvent.label.player.includes("{them}")
+  && unknown.pressureEvent.label === null);   // prose authored for one kind never leaks onto another
+check("SNG-247: the opponent-side tick spends their energy, not their blood (still the live momentum.pressure dial)",
+  kindRound("fight", sbCrush, pWins).pressureEvent?.energyLoss === (sb.momentum.pressure.opponentEnergyLoss ?? 14));
+// A kind whose cost is a genuinely different CURRENCY — the Tier-2 shape, proven against the real code now, so
+// authoring a chase later is content-only work.
+const sbChase = { ...sbCrush, kinds: { ...(sb.kinds || {}), chase: { playerLoss: { health: 0, energy: 12 }, pressure: { breakAtPressure: 1 } } } };
+const chase = kindRound("chase", sbChase, pLoses);
+check("SNG-247: a per-kind playerLoss SHADOWS the fight's defaults — a chase takes wind, not blood",
+  chase.pressureEvent.healthLoss === 0 && chase.pressureEvent.energyLoss === 12);
+check("SNG-247: a per-kind playerLoss actually drains the pool it names (reported AND applied)",
+  chase.state.playerEnergy === kindRound("fight", sbCrush, pLoses).state.playerEnergy - 12);
+check("SNG-247: a per-kind breakAtPressure ends it sooner — one decisive gain shakes a pursuer, two break a fighter",
+  kindRound("chase", sbChase, pWins).resolved === "player" && kindRound("fight", sbCrush, pWins).resolved === null);
+
+// SNG-247 Tier 0: EVERY frame kind must have a border colour. The `enc-frame-<kind>` hook shipped with SNG-230 and
+// then sat completely unstyled, so every encounter rendered fight-red. This is the gate that stops a NEW kind
+// shipping colourless the same way.
+const cssText = readFileSync(join(root, "style.css"), "utf8");
+const kindsMissingHue = Object.keys(FRAME_KINDS).filter(k =>
+  !(cssText.includes(`.enc-kind-${k}`) && cssText.includes(`.enc-frame-${k}`)));
+check(`SNG-247: every frame kind has an --enc-hue rule on BOTH hooks (missing: ${kindsMissingHue.join(", ") || "none"})`,
+  kindsMissingHue.length === 0);
+check("SNG-247: the frame + the contest panel read the SAME hue variable — one colour decision, not two",
+  /\.enc-frame\s*\{[^}]*var\(--enc-hue/.test(cssText) && /\.sb-panel\s*\{[^}]*var\(--enc-hue/.test(cssText));
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

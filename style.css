@@ -115,12 +115,26 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
    as the same thing. `--enc-hue` is set on BOTH the play wrapper (`enc-kind-<kind>`, so the skill-battle panel
    inherits it) and the frame itself (so the strip is self-contained wherever it renders). Colour is a THIRD
    channel only — the icon and the title already name the kind, so nothing depends on telling red from orange. */
+/* the per-kind hues also live as free-standing vars, so the SNG-247 Tier 4 MORPH line can show the hue it came
+   FROM beside the one it became — the transition is a fact about two kinds, not one. */
+:root { --enc-hue-fight: #c05b4d; --enc-hue-chase: #e07b39; --enc-hue-hazard: #6f7b8c; --enc-hue-puzzle: #7c6bd4; --enc-hue-standoff: #5aa8a0; }
 .enc-kind-fight,    .enc-frame-fight    { --enc-hue: #c05b4d; }  /* blood */
 .enc-kind-chase,    .enc-frame-chase    { --enc-hue: #e07b39; }  /* orange — pushed well clear of the gold decision strip */
 .enc-kind-hazard,   .enc-frame-hazard   { --enc-hue: #6f7b8c; }  /* stone — hard ground */
 .enc-kind-puzzle,   .enc-frame-puzzle   { --enc-hue: #7c6bd4; }  /* indigo — the sealed thing */
 .enc-kind-standoff, .enc-frame-standoff { --enc-hue: #5aa8a0; }  /* teal — a contest of words, not heat */
 .enc-frame { border: 1px solid var(--enc-hue, var(--danger)); border-radius: 10px; background: linear-gradient(180deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 12%, transparent), var(--panel)); padding: 10px 12px; margin: 10px 0 8px; }
+/* SNG-247 Tier 4: THE MORPH LINE. Frames have chained since SNG-230, but nothing ever said so — the border changed
+   colour and the player was left to infer that the rules had changed under them. The bar reads left-to-right from
+   the kind it WAS to the kind it IS, in both kinds' own hues. */
+.enc-frame-morph { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin-bottom: 7px; padding: 4px 8px;
+  border-radius: 6px; font-family: var(--font-ui); font-size: 11.5px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--enc-hue-from, var(--ink-dim)) 22%, transparent), color-mix(in srgb, var(--enc-hue, var(--danger)) 22%, transparent));
+  border: 1px solid color-mix(in srgb, var(--enc-hue, var(--danger)) 40%, transparent); }
+.enc-frame-morph .morph-from { color: var(--enc-hue-from, var(--ink-dim)); text-decoration: line-through; opacity: .8; }
+.enc-frame-morph .morph-arrow { color: var(--ink-dim); }
+.enc-frame-morph .morph-to { color: var(--enc-hue, var(--danger)); font-weight: 600; }
+.enc-frame-morph .morph-said { color: var(--ink-dim); font-style: italic; }
 .enc-frame-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .enc-frame-title { font-family: var(--font); font-size: 15px; color: var(--accent); letter-spacing: 1px; }
 .enc-frame-kind { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--ink-dim); }

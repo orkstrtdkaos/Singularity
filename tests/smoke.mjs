@@ -8319,7 +8319,7 @@ await (async () => {
     // clicking away from it, so the drop-back fires from sbEnd as well.
     /beginChaseFromFight\(activeEnc\(\)\?\.def\)/.test(appSrc230) && /kindT === "fight" && choice\.encounterAction === "flee"/.test(appSrc230) && /kindT === "chase" && encT\.def\._chainedFrom\?\.kind === "fight"/.test(appSrc230) && /encounterKind\(def\) === "chase" && def\?\._chainedFrom\?\.kind === "fight"/.test(appSrc230) && /async function beginChaseFromFight/.test(appSrc230) && /async function beginFightFromChase/.test(appSrc230));
   check("230 §6a GUARD: the frame stays a legibility layer through the chain — the chase renders with the GM + freefield (no bespoke mini-loop)",
-    /character\.activeEncounter = \{ defId: chase\.id, state: startEncounter\(chase, \{ oppSheet: chaseSheet \}\)/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
+    /character\.activeEncounter = \{ defId: chase\.id, state: \{ \.\.\.startEncounter\(chase, \{ oppSheet: chaseSheet \}\)/.test(appSrc230) && /_morphedFrom: \{ kind: "fight"/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
 
   // §6b/§7a: a SKILL can COLLAPSE (or morph) the frame — resolved along the degree bands, gated by collapsibility.
   check("230 §6b: frameCollapsible — riffraff/notable/regional + low danger can be one-beat-ended (regional only on a demolishing crit); an EPIC/danger-4 cannot",

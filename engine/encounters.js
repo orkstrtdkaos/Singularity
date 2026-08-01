@@ -20,7 +20,16 @@ export function startEncounter(def, { oppSheet = null } = {}) {
     return { ...base, opponentHealth: def.opponent.health, tactic: null };
   }
   if (def.type === "challenge") return { ...base, stageIndex: 0, stagesDone: [] };
-  if (def.type === "puzzle") return { ...base, attempts: 0, hintsRevealed: 0, solved: false };
+  if (def.type === "puzzle") {
+    // SNG-247 Tier 3: a puzzle given a STATIC sheet runs the contest engine — the turn structure, priced moves,
+    // persistent effects and items all apply to working a sealed thing. Its hint state rides ALONG rather than
+    // being replaced: puzzleHints/puzzleUnlocks are pure over the def, so understanding still accumulates and
+    // still renders. Without a sheet it stays the classic attempt path, so an authored puzzle is never stranded.
+    const p = { ...base, attempts: 0, hintsRevealed: 0, solved: false };
+    if (oppSheet) return { ...p, mode: "skill_battle", opponentSheet: oppSheet, momentum: 0,
+      opponentHealth: def.opponent?.health ?? 5, opponentEnergy: oppSheet.energy ?? 60 };
+    return p;
+  }
   return null;
 }
 
@@ -93,6 +102,10 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // normal action round the first time (the SECOND time this seam has bitten; see seam_battle_round_options).
   phase = "action", tickEffects = true, setupBonus = 0 } = {}) {
   const cfg = rules.encounters?.duel || {};
+  // SNG-247 Tier 3: a PUZZLE promoted onto the contest engine has no `opponent` block — the thing itself is the
+  // other side. Normalized once, here, so every `def.opponent.name` below reads "the sealed door" instead of
+  // throwing. One line at the door beats guarding five call sites inside.
+  if (!def.opponent) def = { ...def, opponent: { name: def.name || "the thing", health: 5, yieldAt: 0 } };
   if (doYield) return { state: { ...state, status: "ended" }, ended: true, outcome: "yielded", deltas: { health: 0, energy: 0 }, events: ["You yield the contest."], player: null, opponent: null };
   if (flee) { // break away — reuse the classic flee check on an injected resolution
     const clean = fleeResolution && ["crit_success", "success", "partial"].includes(fleeResolution.degree);
@@ -123,8 +136,15 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   // CCODE-48 (Erik): a ROUND is a TURN, not a step. Sense never advanced it; now action/bonus only advance it on
   // the step that ENDS the turn (the same signal that ticks effects), so "round 3" means three turns, not six steps.
   const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
+  // SNG-247 Tier 3 (Erik's per-kind weighting: "a puzzle's sense step is the whole game — insight IS the meter"):
+  // on a sealed thing, WINNING THE READ buys a layer of understanding. That is what makes a puzzle play differently
+  // from a fight on the same engine rather than being a reskin of it — and it keeps the hint ladder the authored
+  // puzzles already carry, instead of replacing it with a second progress mechanic.
+  const senseBoughtALayer = phase === "sense" && state.hintsRevealed != null && r.player?.margin > (r.opponent?.margin ?? 0);
+  if (senseBoughtALayer) s.hintsRevealed = Math.min((def.hintTiers || []).length || Infinity, (state.hintsRevealed || 0) + 1);
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
+  if (senseBoughtALayer && s.hintsRevealed > (state.hintsRevealed || 0)) events.push("A layer gives — you understand it better than you did.");
   // SNG-247 Tier 2a: the ENDING is per-kind too. A standoff does not "break" and a chase does not "fall", and —
   // the part that matters mechanically — losing a standoff must not cost BLOOD. `outcomes.losingCostsHealth:
   // false` is the ruling that a contest of wills cannot hurt you; being pressed until someone draws is a MORPH

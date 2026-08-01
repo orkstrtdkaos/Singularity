@@ -225,7 +225,7 @@ export function encounterKind(def, entry = null) {
   // flavor here is what lets all three run the one contest engine while keeping their own exit rule, meter, colour
   // and outcome words. Verified safe against the content: every `routing:"duel"` entry today carries
   // flavor:"fight", so no existing duel changes kind. An absent or unknown flavor stays a fight.
-  if (type === "duel") return flavor === "standoff" ? "standoff" : flavor === "chase" ? "chase" : "fight";
+  if (type === "duel") return flavor === "standoff" ? "standoff" : flavor === "chase" ? "chase" : flavor === "puzzle" ? "puzzle" : "fight";
   if (type === "puzzle") return "puzzle";
   if (type === "standoff") return "standoff";   // a hand-authored standoff def; the duel+flavor form is the minted one
   if (type === "challenge") {

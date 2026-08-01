@@ -4,7 +4,7 @@
 import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent, appraiseOpponent } from "./engine/sense.js"; // CCODE-44: size a fight up BEFORE taking it
-import { synthesizeOpponentSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
+import { synthesizeOpponentSheet, synthesizeStaticSheet, estimateExchange, finisherPotential, finishOdds, hasCounterCraft, matchupBonus, phaseDenied } from "./engine/skill_battle.js"; // CCODE-46/42: priced moves + situational finisher odds
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.319";
+const APP_VERSION = "1.8.320";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -791,8 +791,8 @@ const LEG_RUNNERS = {
     const wanted = f?.kind;
     const def = (wanted && classic.find(d => d.type === wanted)) || classic.find(d => d.type === "challenge") || classic[0] || defs[0];
     if (!def) { renderPlay(character.activeScene?.lastTurn || null, { aside: "🔧 No authored encounter def found to start." }); return; }
-    const isSB = sb(def);
-    const oppSheet = isSB ? synthesizeOpponentSheet(def.opponent, CONTENT.skillBattle.engine) : null;
+    const oppSheet = contestSheetFor(def);   // SNG-247: one place decides the other side (duel -> foe, puzzle -> static)
+    const isSB = !!oppSheet;
     character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
     saveCharacter(character);
     if (isSB) { renderSkillBattle(); return; }
@@ -4693,8 +4693,8 @@ async function onChoice(choice) {
     const def = CONTENT.encounters?.[choice.encounterId] || character.customEncounters[choice.encounterId];
     // SNG-098 C: a duel runs as a two-sided SKILL BATTLE (the contest panel) when the engine is loaded and
     // the def doesn't opt out; the classic single-margins duel stays the fallback (skillBattle:false).
-    const isSB = !!(CONTENT.skillBattle?.engine && def.type === "duel" && def.skillBattle !== false);
-    const oppSheet = isSB ? synthesizeOpponentSheet(def.opponent, CONTENT.skillBattle.engine) : null;
+    const oppSheet = contestSheetFor(def);   // SNG-247: one place decides the other side (duel -> foe, puzzle -> static)
+    const isSB = !!oppSheet;
     character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
     try { noteBeastImage(def); } catch { /* CCODE-31: a beast portrait is a grace, never a blocker */ }
     saveCharacter(character);
@@ -8493,6 +8493,9 @@ function sbMeterWord() {
   return (CONTENT.frameKinds?.[k]?.meterLabel || FRAME_KINDS_FALLBACK[k] || "momentum").toLowerCase();
 }
 const FRAME_KINDS_FALLBACK = { fight: "Momentum", chase: "Distance", hazard: "Progress", puzzle: "Insight", standoff: "Their Resolve" };
+// SNG-247 Tier 4: icon + title per kind for the MORPH line, used only when Aevi's frameKinds copy isn't loaded.
+const FRAME_KINDS_FALLBACK_FULL = { fight: { icon: "⚔", title: "The Contest" }, chase: { icon: "🏃", title: "The Chase" },
+  hazard: { icon: "⚠", title: "Hard Ground" }, puzzle: { icon: "🧩", title: "The Sealed Thing" }, standoff: { icon: "🗣", title: "The Standoff" } };
 
 function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
   const meterMax = CONTENT.skillBattle?.engine?.momentum?.meterMax ?? 16;
@@ -9123,6 +9126,22 @@ async function sbEnd(rr) {
   else renderPlay(character.activeScene?.lastTurn || null, { aside: reason });
 }
 
+/** SNG-247 Tier 3: THE ONE PLACE that decides whether an encounter runs on the contest engine, and with what other
+ *  side. A duel gets the opponent's sheet; a PUZZLE gets a STATIC sheet — a thing that resists at one number and
+ *  never chooses. Centralised because the `isSB` derivation had been hand-copied at four call sites already, and a
+ *  fifth divergence is how a kind ends up half-promoted (engine here, classic path there). Returns null when the
+ *  encounter stays on its classic path, which is also the safe answer for anything unrecognised. */
+function contestSheetFor(def) {
+  const eng = CONTENT.skillBattle?.engine;
+  if (!eng || !def || def.skillBattle === false) return null;
+  if (def.type === "duel") return synthesizeOpponentSheet(def.opponent, eng);
+  if (def.type === "puzzle" && eng.kinds?.puzzle) {
+    return synthesizeStaticSheet({ resist: def.resist ?? def.difficulty, tier: def.tier,
+      holdName: def.holdName || "it holds", give: def.give }, eng);
+  }
+  return null;
+}
+
 /** SNG-230 §6a (behavior): FLEE a fight → you enter a CHASE, not a teleport. Build the chase from the fight
  *  (chaseFromFight), keep the fight def around so a caught chase can drop back into it, start the chase, and hand
  *  the SHIFT to the GM to narrate — then the chase frame renders (renderPlay shows it; the freefield + exits
@@ -9130,6 +9149,7 @@ async function sbEnd(rr) {
 async function beginChaseFromFight(fightDef) {
   if (!fightDef) return;
   const chase = chaseFromFight(fightDef);
+  const nm = fightDef.opponent?.name || "your foe";
   character.customEncounters = character.customEncounters || {};
   character.customEncounters[chase.id] = chase;
   if (fightDef.id && !character.customEncounters[fightDef.id] && !CONTENT.encounters?.[fightDef.id]) character.customEncounters[fightDef.id] = fightDef; // keep the fight to fall back into
@@ -9137,10 +9157,12 @@ async function beginChaseFromFight(fightDef) {
   // does. Without this it would start with no sheet and fall back to the classic single-margin path — the chase
   // would look like a chase and play like the old one-roll ladder.
   const chaseSheet = CONTENT.skillBattle?.engine ? synthesizeOpponentSheet(chase.opponent, CONTENT.skillBattle.engine) : null;
-  character.activeEncounter = { defId: chase.id, state: startEncounter(chase, { oppSheet: chaseSheet }) };
+  // SNG-247 Tier 4: stamp WHERE THIS CAME FROM so the frame can say the fight became a chase, rather than the
+  // player noticing only that the border went red -> amber and the rules quietly changed under them.
+  character.activeEncounter = { defId: chase.id, state: { ...startEncounter(chase, { oppSheet: chaseSheet }),
+    _morphedFrom: { kind: "fight", note: `you broke from ${nm} — now it is ground, not blades` } } };
   sbLastPlayerFn = null; sbIntensity = "standard";
   saveCharacter(character);
-  const nm = fightDef.opponent?.name || "your foe";
   renderPlay(null, { thinking: "You break and run…" });
   try {
     const result = await runGM({ resolution: null, playerInput: `(The character breaks off the fight with ${nm} and runs — it becomes a CHASE. Narrate the shift into a running chase in one beat: they give chase, the ground turns dangerous. Do NOT resolve the chase — it plays out in its own frame.)` });
@@ -9164,7 +9186,8 @@ async function beginFightFromChase(chaseDef) {
   }
   const isSB = !!(CONTENT.skillBattle?.engine && fightDef.type === "duel" && fightDef.skillBattle !== false);
   const oppSheet = isSB ? synthesizeOpponentSheet(fightDef.opponent, CONTENT.skillBattle.engine) : null;
-  character.activeEncounter = { defId: fightDef.id, state: startEncounter(fightDef, { oppSheet }) };
+  character.activeEncounter = { defId: fightDef.id, state: { ...startEncounter(fightDef, { oppSheet }),
+    _morphedFrom: { kind: "chase", note: `${nm} ran you down — the ground is gone and it is blades again` } } };
   saveCharacter(character);
   renderPlay(null, { thinking: "They run you down…" });
   try {
@@ -9403,6 +9426,19 @@ function renderPlay(turn, opts = {}) {
         : `<div class="enc-frame-collapse dim">⚑ Too great to end in one stroke — you'll have to work it through.</div>`;
       const cueHtml = `${collapseHtml}${fm.freeform ? `<div class="enc-frame-cue">▸ ${esc(fm.freeform)} — or tap <b>⚙ Moves</b> below for grouped shortcuts.</div>` : ""}`;
       return `<div class="enc-frame enc-strip${prom} enc-frame-${fm.kind}">
+        ${(() => {
+          // SNG-247 Tier 4 (the morph made VISIBLE). Frames have chained since SNG-230 — flee a fight and you ARE
+          // dropped into a chase — but nothing ever SAID SO. The border silently changed colour and the player was
+          // left to infer that the rules had changed under them. This names the transition, in both kinds' own
+          // icons and words, and carries the OLD hue so the strip shows where it came from.
+          const mf = st._morphedFrom; if (!mf) return "";
+          const from = CONTENT.frameKinds?.[mf.kind] || FRAME_KINDS_FALLBACK_FULL[mf.kind] || {};
+          return `<div class="enc-frame-morph" style="--enc-hue-from:var(--enc-hue-${esc(mf.kind)}, var(--ink-dim))">
+            <span class="morph-from">${esc(from.icon || "")} ${esc(from.title || mf.kind)}</span>
+            <span class="morph-arrow">→</span>
+            <span class="morph-to">${fm.icon} ${esc(fm.title)}</span>
+            <span class="morph-said">${esc(mf.note || "it became something else")}</span></div>`;
+        })()}
         <div class="enc-frame-top"><span class="enc-frame-title">${fm.icon} ${esc(fm.title)}</span><span class="enc-frame-kind">${esc(fm.kind)} · round ${st.round}</span></div>
         <div class="enc-frame-win">${esc(fm.winCondition)}</div>
         ${status ? `<div class="enc-status">${status}</div>` : ""}

@@ -6,7 +6,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { matchupBonus, synthesizeOpponentSheet, opponentPolicy, battleRound, phaseDenied } from "../engine/skill_battle.js";
+import { matchupBonus, synthesizeOpponentSheet, synthesizeStaticSheet, opponentPolicy, battleRound, phaseDenied } from "../engine/skill_battle.js";
 import { senseOpponent } from "../engine/sense.js";
 import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engine/encounters.js";
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
@@ -628,6 +628,74 @@ check("SNG-247 2b: a FIGHT still has NO player-break dial — health owns the pl
     return fightPressure.playerBreaksAtPressure === undefined
       && cfg.chase.pressure.playerBreaksAtPressure > 0 && cfg.standoff.pressure.playerBreaksAtPressure > 0;
   })());
+
+// ---- SNG-247 Tier 3: THE STATIC ANTAGONIST ----
+// A sealed door has no turn. Giving it a sheet that CHOOSES would mean inventing an agent — the SNG-246-A error
+// class. But rollSide produces a margin, and a fixed margin is exactly what a DC is.
+const doorSheet = synthesizeStaticSheet({ resist: 20, tier: 3, holdName: "the marks hold" }, sb);
+check("SNG-247 3: a static sheet resists at ONE number and holds with one craft",
+  doorSheet.static === true && doorSheet.staticResist === 20 && doorSheet.skills[0].name === "the marks hold");
+check("SNG-247 3 (the one that matters): a static antagonist never CHOOSES — same declaration every round, whatever it is shown",
+  (() => {
+    const a = opponentPolicy(doorSheet, { momentum: -8, round: 1, lastOppFn: "ward" }, "conceal", sb);
+    const b = opponentPolicy(doorSheet, { momentum: 9, round: 7, lastOppFn: "ward" }, "strike", sb);
+    return JSON.stringify(a) === JSON.stringify(b) && a.intensity === "standard" && a.static === true;
+  })());
+const doorRound = (playerDecl, extraState = {}) => battleRound({
+  playerDecl, oppDecl: opponentPolicy(doorSheet, {}, null, sb),
+  playerSheet: { attributes: { mental: 4 }, energy: 100 }, oppSheet: doorSheet,
+  state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 60, effects: [], pressure: { player: 0, opponent: 0 }, ...extraState },
+  rules, sb, steps, rng: seqRng([0.40, 0.40]), kind: "puzzle",
+});
+const dr = doorRound({ function: "reveal", tier: 3, attribute: "mental", intensity: "standard", name: "the read" });
+check("SNG-247 3: the door does not roll — its resistance IS its margin, and it is the SAME every time",
+  dr.opponent.static === true && dr.opponent.roll === 0
+  && doorRound({ function: "reveal", tier: 3, attribute: "mental", intensity: "standard", name: "x" }).opponent.margin === dr.opponent.margin);
+check("SNG-247 3 (SNG-106 held): the door's resistance is a NAMED line on the self-summing breakdown, not a hidden number",
+  (() => {
+    const mods = dr.opponent.breakdown.contestMods;
+    return mods.some(m => /resists/i.test(m.label) && m.value === 20)
+      && mods.reduce((a, m) => a + (m.value || 0), 0) === dr.opponent.margin;
+  })());
+check("SNG-247 3: a bind laid on the door still WEAKENS it — the static side is not immune to the contest, only unmoving",
+  (() => {
+    const bound = doorRound({ function: "reveal", tier: 3, attribute: "mental", intensity: "standard", name: "the read" },
+      { effects: [{ id: "b", label: "bound", side: "opponent", value: -9, roundsLeft: 2, from: "player" }] });
+    return bound.opponent.margin < dr.opponent.margin;
+  })());
+// A puzzle promoted onto the engine: the hint ladder rides ALONG rather than being replaced.
+const doorDef = { id: "door", type: "puzzle", name: "The Sealed Door",
+  hintTiers: ["the marks repeat", "the repeat is an order", "the order is a name"] };
+const doorSt = startEncounter(doorDef, { oppSheet: doorSheet });
+check("SNG-247 3: a puzzle with a static sheet runs the contest engine AND keeps its hint state",
+  doorSt.mode === "skill_battle" && doorSt.hintsRevealed === 0 && doorSt.solved === false);
+check("SNG-247 3: a puzzle with NO sheet stays on its classic attempt path — an authored puzzle is never stranded",
+  startEncounter(doorDef, {}).mode === undefined && startEncounter(doorDef, {}).attempts === 0);
+check("SNG-247 3 (Erik's per-kind weighting): on a sealed thing, WINNING THE READ buys a layer — the sense step is the game",
+  (() => {
+    const rr = skillBattleRound(doorSt, doorDef, { function: "reveal", tier: 5, attribute: "mental", intensity: "surge", name: "the read" },
+      { character: { attributes: { mental: 6 }, subAttributes: { mental: { insight: 4 } }, energy: 100, health: 40, skills: {} },
+        rules, sb, steps, rng: seqRng([0.01, 0.01]), phase: "sense", tickEffects: false });
+    return rr.state.hintsRevealed === 1 && /a layer gives/i.test(rr.events.join(" "));
+  })());
+check("SNG-247 3: a puzzle def with no `opponent` block does not throw — the thing itself is the other side",
+  (() => {
+    const rr = skillBattleRound(doorSt, doorDef, { function: "break", tier: 2, attribute: "practical", intensity: "standard", name: "force it" },
+      { character: { attributes: { practical: 3 }, energy: 100, health: 40, skills: {} }, rules, sb, steps, rng: seqRng([0.5, 0.5]) });
+    return typeof rr.events.join(" ") === "string" && rr.deltas.health === 0;
+  })());
+
+// ---- SNG-247 Tier 4: THE MORPH MADE VISIBLE ----
+// The chain has worked since SNG-230 and never SAID so — the border silently changed colour and the player was
+// left to infer that the rules had changed under them. Source-asserted (it is a render), plus the CSS it needs.
+const appSrc247 = readFileSync(join(root, "app.js"), "utf8");
+const cssSrc247 = readFileSync(join(root, "style.css"), "utf8");
+check("SNG-247 4: both chain points stamp WHERE THIS CAME FROM, so the frame can name the transition",
+  /_morphedFrom: \{ kind: "fight"/.test(appSrc247) && /_morphedFrom: \{ kind: "chase"/.test(appSrc247));
+check("SNG-247 4: the frame renders the morph in BOTH kinds' icons and words (not just a colour change)",
+  /st\._morphedFrom/.test(appSrc247) && /enc-frame-morph/.test(appSrc247) && /morph-from/.test(appSrc247) && /morph-to/.test(appSrc247));
+check("SNG-247 4: the line can show the hue it came FROM — every kind has a free-standing hue var for it",
+  Object.keys(FRAME_KINDS).every(k => cssSrc247.includes(`--enc-hue-${k}:`)) && /\.enc-frame-morph\s*\{[^}]*--enc-hue-from/.test(cssSrc247));
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

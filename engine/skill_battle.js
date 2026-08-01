@@ -47,6 +47,13 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
  *  → press (Surge); ahead → pace (Conserve); tacticTags bias it. Skill pick: the function that matches up
  *  best against the player's last-SHOWN tendency (only what the fog let the opponent read of the player). */
 export function opponentPolicy(oppSheet, state = {}, seenPlayerTendency = null, sb) {
+  // SNG-247 Tier 3: a STATIC antagonist makes no choices — it holds, the same way, every round. Returning early is
+  // the point: running the scoring loop on a door would give it tactics it does not have, and the variety term
+  // would make it "vary" its response to being read, which is a lie about what a sealed thing is.
+  if (oppSheet?.static) {
+    const hold = (oppSheet.skills || [])[0] || { function: "ward", name: "it holds", tier: 2 };
+    return { function: hold.function, name: hold.name, tier: hold.tier || 2, attribute: "practical", intensity: "standard", static: true };
+  }
   const pol = sb?.opponentPolicy || {};
   const oppMomentum = -(state.momentum || 0); // state.momentum is +player; the opponent is mirror
   let intensity = pol.defaultIntensity || "standard";
@@ -152,6 +159,40 @@ function addEffect(effects, fx, sb) {
 /** Roll ONE side through successChance (SNG-106 rails): attribute + tier + matchup + intensity as named,
  *  self-summing contest mods — plus any standing persistent effects (CCODE-35), each its own honest line.
  *  Returns the full receipt + the round margin (chance − roll). */
+// ---------- SNG-247 Tier 3: THE STATIC ANTAGONIST ----------
+// A sealed door and a stretch of hard ground have no turn. Giving them an opponent SHEET that chooses and rolls
+// would mean inventing an agent — the same error class as inventing a fight target (SNG-246 A). But `rollSide`
+// produces a MARGIN, and a fixed margin is exactly what a DC is. So an unopposed thing is a side that never
+// chooses and never rolls: it resists at one number, forever, and everything else about the contest still applies.
+// It stays honest under SNG-106 because its resistance enters as a NAMED contestMod like every other term — a bind
+// laid on the door still weakens it, visibly, on the same self-summing breakdown.
+
+/** SNG-247 Tier 3: a sheet for a thing that resists but never acts. `resist` is its standing margin (its DC). Pure. */
+export function synthesizeStaticSheet(thing = {}, sb) {
+  const cfg = sb?.staticAntagonist || {};
+  return {
+    static: true,
+    staticResist: clamp(Math.round(thing.resist ?? thing.threat ?? cfg.defaultResist ?? 18), -50, 90),
+    resistLabel: thing.resistLabel || cfg.resistLabel || "it resists, unmoving",
+    attributes: {}, subAttributes: {}, alignment: {}, skills: [
+      { function: thing.holdFunction || cfg.holdFunction || "ward", name: thing.holdName || "it holds", tier: thing.tier || 2 },
+    ],
+    // its "energy" is how much give is left in it — pressure ticks spend it down, which IS understanding it better
+    energy: thing.give ?? cfg.defaultGive ?? 60,
+    tacticTags: ["unmoving"],
+  };
+}
+
+/** SNG-247 Tier 3: margin → degree for a side that never rolled. Content-dialled; pure. */
+function staticDegree(margin, sb) {
+  const b = sb?.staticAntagonist?.degreeBands || {};
+  if (margin >= (b.crit ?? 40)) return "crit_success";
+  if (margin >= (b.success ?? 15)) return "success";
+  if (margin >= (b.partial ?? 0)) return "partial";
+  if (margin >= (b.failure ?? -15)) return "failure";
+  return "crit_failure";
+}
+
 function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momMod = 0, setupMod = 0) {
   const tier = decl.tier || 1;
   const mu = matchupBonus(decl.function, oppDecl.function, sb);
@@ -175,6 +216,15 @@ function rollSide(sheet, decl, oppDecl, sb, steps, rules, rng, fxMods = [], momM
       ...fxMods
     ]
   };
+  // SNG-247 Tier 3: a STATIC side never rolls — it resists at one number. Its resistance is a NAMED line on the
+  // same self-summing breakdown, so a bind laid on the door still weakens it and you can SEE that it did.
+  if (sheet.static) {
+    const mods = [{ label: sheet.resistLabel || "it resists, unmoving", value: sheet.staticResist ?? 0 }, ...ctx.contestMods];
+    const margin = mods.reduce((a, m) => a + (m.value || 0), 0);
+    return { roll: 0, chance: margin, rawChance: margin, margin, degree: staticDegree(margin, sb),
+      breakdown: { contestMods: mods, static: true }, matchup: mu, intensity: decl.intensity, tier,
+      function: decl.function, name: decl.name || decl.function, effectMods: fxMods, woven: null, static: true };
+  }
   const res = resolveAction(ctx, rng);
   // CCODE-40 (Erik, exact): "All of the bonuses and penalties need to be stacked and compared PRIOR to a clamp. If
   // I have +35 due to abilities and skills and the enemy has +25 but has also landed a bind on me (-15) the net

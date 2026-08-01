@@ -44,10 +44,36 @@
   ],
 
   "engine": {
+    "staticAntagonist": {
+      "note": "SNG-247 Tier 3. The other side of an UNOPPOSED encounter - a sealed door, hard ground. It never chooses (opponentPolicy returns early) and never rolls (rollSide returns its standing resistance). Its resistance enters as a NAMED contestMod on the same self-summing breakdown as every other term, so a bind laid on the door still weakens it AND the player can see that it did.",
+      "defaultResist": 18,
+      "resistLabel": "it resists, unmoving",
+      "holdFunction": "ward",
+      "defaultGive": 60,
+      "giveNote": "its 'energy' is how much give is left in it - pressure ticks spend it down, which IS understanding it better",
+      "degreeBands": { "crit": 40, "success": 15, "partial": 0, "failure": -15 }
+    },
     "kinds": {
       "note": "SNG-247 Tier 1: THE EXIT RULE, PER BOUNDED-THING KIND. The contest core (battleRound) is symmetric and kind-agnostic - two sheets, two rolls, a margin delta driving a meter. The ONE fight-shaped thing left in it was what a PRESSURE TICK costs each side and what it is called. That now lives here, keyed by encounterKind(def) - the SAME function the frame uses to pick its border colour, so the exit rule and the colour can never disagree about what kind of thing you are in. An absent kind falls back to the fight's numbers, so a kind works before anyone authors it.",
       "dialDiscipline": "The fight deliberately authors NO playerLoss/opponentLoss here - its tick costs keep flowing from momentum.pressure (playerHealthLoss / opponentEnergyLoss / breakAtPressure) so those COMBAT_DIALS knobs stay live. An explicit playerLoss/opponentLoss on a kind SHADOWS those dials for that kind - use it only where the cost is a genuinely different currency (a chase takes wind, not blood; a standoff takes composure and cannot hurt you at all).",
       "lossShape": "playerLoss / opponentLoss: { health, energy } - what ONE pressure tick takes from that side. pressure: {} - per-kind overrides of momentum.pressure (breakAtPressure, resetTo).",
+      "puzzle": {
+        "note": "SNG-247 Tier 3. A puzzle is UNOPPOSED - the sealed thing has no turn - so its other side is a STATIC ANTAGONIST: it resists at one number and never chooses. That is honest rather than a fudge, because a fixed margin is exactly what a DC is. Per Erik's per-kind weighting the SENSE step is the whole game here: winning the read buys a layer of understanding, which is what keeps the authored hint ladder alive inside the contest instead of replacing it. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
+        "playerLoss": { "health": 0, "energy": 8 },
+        "opponentLoss": { "health": 0, "energy": 25 },
+        "pressure": { "breakAtPressure": 2, "playerBreaksAtPressure": 3 },
+        "pressureLabel": {
+          "player": "The thing defeats your reading - you have spent effort and learned only what does not work.",
+          "opponent": "It gives a little - the shape under the shifting is clearer than it was."
+        },
+        "outcomes": {
+          "opponentYields": "It gives - the mechanism yields its answer.",
+          "opponentBreaks": "It gives - the mechanism yields its answer.",
+          "playerOvercome": "The thing holds. You have nothing left to try with today - it stays sealed.",
+          "losingCostsHealth": false,
+          "healthNote": "A sealed thing that BITES is a hazard wearing a puzzle's clothes - author the bite as a landed effect (persistentEffects) rather than as damage on the loss, so the player sees what hurt them."
+        }
+      },
       "chase": {
         "note": "SNG-247 Tier 2b. A chase is an OPPOSED contest - the same person who was swinging at you is running you down, with their own wind and their own choices - so it runs the one contest engine. What differs is the CURRENCY: ground is bought with WIND, not blood. Short by design: breakAtPressure 1, because a chase that grinds is a fight with extra steps. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
         "playerLoss": { "health": 0, "energy": 12 },

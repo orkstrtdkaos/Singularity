@@ -8909,6 +8909,27 @@ await (async () => {
       const d = re251.synthesizeDuelDef(g); return d.opponent.name === "the pale thing" && d.name === "The Pale Thing"; })());
 }
 
+// ---------- ERIK'S BUG (2026-08-01, live): "this is a weird result to exit the fight" ----------
+// It was not weird — it was INVISIBLE. Momentum stopped being an exit at CCODE-38 ("momentum should be a
+// MODIFIER mechanic, not the primary exit metric"); what ends a fight now is the PRESSURE counter, and
+// `breakAtPressure` is 2. That counter was rendered NOWHERE, so the player watched the one meter that cannot
+// end the fight and never saw the one that does — and a round reported as "neither gains — it's even" was
+// followed by the fight ending, with the cause never stated.
+{
+  const appE = readFileSync(join(root, "app.js"), "utf8");
+  const mom = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_battle_system.json"), "utf8")).engine.momentum;
+  check("ERIK-BUG: the PRESSURE counter — the thing that actually ends a fight — is rendered to the player",
+    /class="sb-pressure"/.test(appE) && /driven back \$\{pip\(theirs, brk\)\}/.test(appE),
+    "the exit condition is still invisible; the player can only watch momentum, which CCODE-38 made unable to end anything");
+  check("ERIK-BUG: the pressure readout reads breakAtPressure from CONTENT, never a hardcoded 2",
+    /momentum\?\.pressure\?\.breakAtPressure \?\? 2/.test(appE) && mom?.pressure?.breakAtPressure != null,
+    "a hardcoded threshold would silently disagree with the dial Erik and Aevi tune");
+  check("ERIK-BUG: an ending says WHY — a pressure-break is named, not left as a non-sequitur after 'it's even'",
+    /brokeOnPressure/.test(appE) && /driven back \$\{brkAt\} times and will not come again/.test(appE));
+  check("ERIK-BUG: the cause is read from the ROUND RESULT, not the pre-round state (which misses the tick that ended it)",
+    /rr\?\.pressure\?\.opponent \|\| 0\) >= brkAt/.test(appE));
+}
+
 // ---------- SNG-253 (engine half): the opponent's move vocabulary can be KIND-NATIVE ----------
 // Scoped from the post-252 re-look Aevi asked for, and grounded in what the engine ACTUALLY declared rather
 // than what the spec predicted: a standoff opponent declared "a hard strike" and held "a raised guard" — in a

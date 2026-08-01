@@ -9228,7 +9228,21 @@ function skillBattlePanel() {
     return `<details class="moves-group" data-sbfam="${esc(f)}"${open ? " open" : ""}><summary class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())} <span class="hint">(${byFam[f].length})</span>${sharedDoes ? `<span class="moves-group-hint"> · ${esc(sharedDoes)}</span>` : ""}</summary>${chips}</details>`;
   }).join("");
   return `<div class="sb-panel">
-    <div class="sb-opponent">${esc(def.opponent?.name || sbLex().other)}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
+    ${/* ERIK (2026-08-01, live): "this is a weird result to exit the fight." The round said "neither gains —
+          it's even" and the fight ENDED. It was not weird — it was INVISIBLE. Momentum stopped being an exit
+          at CCODE-38; what actually ends a fight now is the PRESSURE counter, and `breakAtPressure` is 2, so
+          a foe breaks on the SECOND time they are overwhelmed. That counter was never rendered anywhere. The
+          player watched the one meter that cannot end the fight and never saw the one that does. */""}
+    <div class="sb-opponent">${esc(def.opponent?.name || sbLex().other)}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""}${(() => {
+      const brk = CONTENT.skillBattle?.engine?.momentum?.pressure?.breakAtPressure ?? 2;
+      const mine = st.pressure?.player || 0, theirs = st.pressure?.opponent || 0;
+      if (!mine && !theirs) return "";
+      const pip = (n, max) => "◆".repeat(Math.min(n, max)) + "◇".repeat(Math.max(0, max - n));
+      return ` <span class="sb-pressure" title="A fight ends when one side is OVERWHELMED ${brk} times — not when the momentum meter fills (momentum is a roll modifier, CCODE-38). This is the real exit.">`
+        + (theirs ? `driven back ${pip(theirs, brk)} ${theirs}/${brk}` : "")
+        + (theirs && mine ? " · " : "")
+        + (mine ? `you ${pip(mine, brk)} ${mine}/${brk}` : "") + `</span>`;
+    })()} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
     ${(() => {
       // SNG-247 (Erik: "I want to see what options the aggressor has for skills too — fighting an NPC or
       // anything should include that the opponent has skills they can use, just like you do"). They always DID —
@@ -9602,9 +9616,17 @@ async function sbEnd(rr) {
       saveCharacter(character);
     }
   }
+  // ERIK: an ending must say WHY. "…yields to you" landing straight after "neither gains — it's even" reads as
+  // a non-sequitur, because the CAUSE (they were overwhelmed for the last time their nerve could take) was
+  // never stated. Health-zero and pressure-break are two different endings and had one sentence between them.
+  const brkAt = CONTENT.skillBattle?.engine?.momentum?.pressure?.breakAtPressure ?? 2;
+  // `rr` is the ROUND RESULT — its pressure is the post-round value that actually resolved the fight. Reading
+  // enc.state here would read the PRE-round state and miss the very tick that ended it.
+  const brokeOnPressure = (rr?.pressure?.opponent || 0) >= brkAt;
+  const why = brokeOnPressure ? ` They have been driven back ${brkAt} times and will not come again.` : "";
   const outLine = {
     opponent_fell: `You have beaten ${nm} — they go down.`,
-    opponent_yielded: `${nm} yields to you.`,
+    opponent_yielded: `${nm} yields to you.${why}`,
     yielded: `You yield the contest to ${nm}.`,
     fled: `You break away from the fight.`,
     player_overcome: `${nm} overcomes you.`,

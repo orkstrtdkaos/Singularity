@@ -172,9 +172,9 @@
   "chronicle": [
     "On the Common Hall roof terrace, midday, the shared beat ended — Lira spent and deliberate at the coping wall, the Stillness Field barely holding, the ledger on the stone between them. She named the count-bell window and pointed the way to Vael without ceremony. The scene closes."
   ],
-  "currentLocationId": "radiant_plateau_edge",
+  "currentLocationId": "gen-object-object",
   "activeScene": {
-    "locationId": "radiant_plateau_edge",
+    "locationId": "gen-object-object",
     "turns": [
       {
         "player": "Ask her if she wants to be fucked one more time, then do it.",
@@ -260,59 +260,94 @@
         "player": "Trace the line of her collarbone downward — slow, deliberate, your hands doing the looking now.",
         "summary": "Slow and deliberate on the terrace in the late-afternoon light — Lira present and unhurried, watching his face while his hand moved.",
         "narration": "You trace the line of her collarbone with one fingertip. You start at the hollow of her throat and move outward, slowly, the way you said you would. She does not flinch. She does not rush to help you or to interpret what it means. She simply lets your hand be there, and her skin is warm in the afternoon light, and you can feel the small rise and fall of her breathing underneath your touch.\n\nShe watches your face more than your hand. That is the Lira thing — she measures from the source. Her own hands rest loosely on your forearms. Not gripping. Just present. The amber-grey of her eyes has gone a little dark in the way that has nothing to do with light.\n\nYou follow the line down, off the ridge of bone and onto the soft slope below it. Your palm opens a little. She draws one slow breath in through her nose and lets it go through her mouth, and her eyes stay on yours the whole time. She says nothing. She is not managing any part of this."
+      },
+      {
+        "player": "Keep moving slower — let her feel the full attention of it, no destination yet.",
+        "summary": "On the roof terrace above the Common Hall in the Edge District, late afternoon: Lira lets you move slowly, deliberately, learning the shape of her without reaching for anything yet. The moment is unhurried and present. The count-bell window holds.",
+        "narration": "Your hand moves slowly down the line of her ribs, deliberately deliberate, the way you said you would move. Not reaching yet. Just feeling the shape of her under your palm — the small rise of bone, the give of breath underneath it. She holds still under your touch. Her breathing stays chosen and steady. She watches your face the whole time, the way she watches measurements, the way she watches things she is deciding to trust.\n\nThe afternoon is cooling now. The light off the terrace stone has gone a particular gold. It is just you and her and the valley falling away to the west beyond the coping wall. The count-bell will ring in a while. Keeper Aldris Vael is still waiting. The ledger is still on the bench. None of that has changed, and none of it is what is happening right now.\n\nYour hand reaches her waist. She does not move. Her hands on your forearms stay loose and present, not pulling, not pushing — just there, the way you have learned she is there when she has stopped managing."
       }
     ],
     "lastTurn": {
-      "narration": "You trace the line of her collarbone with one fingertip. You start at the hollow of her throat and move outward, slowly, the way you said you would. She does not flinch. She does not rush to help you or to interpret what it means. She simply lets your hand be there, and her skin is warm in the afternoon light, and you can feel the small rise and fall of her breathing underneath your touch.\n\nShe watches your face more than your hand. That is the Lira thing — she measures from the source. Her own hands rest loosely on your forearms. Not gripping. Just present. The amber-grey of her eyes has gone a little dark in the way that has nothing to do with light.\n\nYou follow the line down, off the ridge of bone and onto the soft slope below it. Your palm opens a little. She draws one slow breath in through her nose and lets it go through her mouth, and her eyes stay on yours the whole time. She says nothing. She is not managing any part of this.",
-      "sceneSummary": "Slow and deliberate on the terrace in the late-afternoon light — Lira present and unhurried, watching his face while his hand moved.",
+      "narration": "Your hand moves slowly down the line of her ribs, deliberately deliberate, the way you said you would move. Not reaching yet. Just feeling the shape of her under your palm — the small rise of bone, the give of breath underneath it. She holds still under your touch. Her breathing stays chosen and steady. She watches your face the whole time, the way she watches measurements, the way she watches things she is deciding to trust.\n\nThe afternoon is cooling now. The light off the terrace stone has gone a particular gold. It is just you and her and the valley falling away to the west beyond the coping wall. The count-bell will ring in a while. Keeper Aldris Vael is still waiting. The ledger is still on the bench. None of that has changed, and none of it is what is happening right now.\n\nYour hand reaches her waist. She does not move. Her hands on your forearms stay loose and present, not pulling, not pushing — just there, the way you have learned she is there when she has stopped managing.",
+      "sceneSummary": "On the roof terrace above the Common Hall in the Edge District, late afternoon: Lira lets you move slowly, deliberately, learning the shape of her without reaching for anything yet. The moment is unhurried and present. The count-bell window holds.",
       "choices": [
         {
-          "label": "Keep moving slower — let her feel the full attention of it, no destination yet.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Meet her eyes and ask what she wants your hands to do next — put the choosing with her.",
+          "label": "Keep moving down — slow, all the way.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Bring your mouth to where your hand has been — collarbone, throat, whatever she angles toward.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Pause. Let the stillness hold. Give her the chance to move if she wants to.",
+          "label": "Stop here and look at her — really look, nothing else.",
           "attribute": "social",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Pull her closer — let her feel what this is doing to you.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask her what she wants next — step back and let her decide.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {},
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": {},
+      "offer": {},
+      "stageOps": [],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light, low and amber, angling in from the west. The valley floor visible beyond the coping wall.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light, amber and low, angling in from the west. The valley floor visible beyond the coping wall. The light is cooling into gold.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Standing close, top off, hands loose on his forearms — breathing slow and steady, watching his face with dark amber-grey eyes, entirely present."
+            "state": "Close to him, top off, hands loose on his forearms, watching his face — breathing steady and chosen, present and unhurried"
           }
         ],
         "objects": [
@@ -323,33 +358,55 @@
         ],
         "threads": [
           "The count-bell window to reach Keeper Aldris Vael is still open — one bell past the afternoon count.",
-          "Fendt's red-chalk marking sits on the accountability board below with no accompanying record.",
-          "The two of them are here now, unhurried, the afternoon holding them."
+          "The moment is unhurried and present."
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "lira",
-          "name": "Lira",
-          "note": "Held still under his hand moving along her collarbone — watching his face the whole time, breathing slow, not managing any part of it.",
+          "note": "On the roof terrace in late-afternoon light, present and unhurried — breathing steady and chosen, watching his face while his hand moved along her ribs. No management left. Decided.",
+          "learned": [
+            "When she stops managing, she is fully present — her attention unguarded",
+            "She watches from the source — measures the person, not the gesture"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On the roof terrace, present and unhurried, watching him with steady dark eyes.",
-          "bondType": "romantic",
-          "bondStage": "courting"
+          "statusNote": "On the roof terrace with the player, present and unhurried, in the late-afternoon light."
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A slow, unhurried beat on the terrace — a few minutes of deliberate attention."
-      }
+      "factUpdates": [],
+      "placeUpdates": [],
+      "discovery": {},
+      "codexUpdates": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
+      "timeOps": {},
+      "moveTo": {},
+      "stateOps": [],
+      "itemUpdates": [],
+      "imagePrompt": "Late-afternoon gold light on a rooftop terrace in the Edge District: a woman with amber-grey eyes, top off, standing present and unhurried in the slow amber light, a man's hand traced down the line of her ribs, both of them present in the moment without rush or management, the valley falling away beyond the stone wall.",
+      "newAbility": {},
+      "gambitOps": {},
+      "gambitApt": false,
+      "markDefiningMoment": {},
+      "markTeacher": {},
+      "offerPromotion": {},
+      "offerAcquisition": {},
+      "offerIntent": {},
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/Late-afternoon%20gold%20light%20on%20a%20rooftop%20terrace%20in%20the%20Edge%20District%3A%20a%20woman%20with%20amber-grey%20eyes%2C%20top%20off%2C%20standing%20present%20and%20unhurried%20in%20the%20slow%20amber%20light%2C%20a%20man's%20hand%20traced%20down%20the%20line%20of%20her%20ribs%2C%20both%20of%20them%20present%20in%20the%20moment%20without%20rush%20or%20management%2C%20the%20valley%20falling%20away%20be%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=91222&nologo=true"
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light, low and amber, angling in from the west. The valley floor visible beyond the coping wall.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light, amber and low, angling in from the west. The valley floor visible beyond the coping wall. The light is cooling into gold.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Standing close, top off, hands loose on his forearms — breathing slow and steady, watching his face with dark amber-grey"
+          "state": "Close to him, top off, hands loose on his forearms, watching his face — breathing steady and chosen, present and unhurri"
         }
       ],
       "objects": [
@@ -360,15 +417,14 @@
       ],
       "threads": [
         "The count-bell window to reach Keeper Aldris Vael is still open — one bell past the afternoon count.",
-        "Fendt's red-chalk marking sits on the accountability board below with no accompanying record.",
-        "The two of them are here now, unhurried, the afternoon holding them."
+        "The moment is unhurried and present."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [],
@@ -416,7 +472,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Named plainly what Prism Sight felt like from inside — being measured by something not cold — and said she spent the first half deciding how much to show, then stopped deciding. The second half was different, and she said so without apology.",
         "[d1] Walked him through the falsification evidence — the absence of noise in three weeks of entries — and turned it back to him as a question about what he sees.",
         "[d1] Set the ledger aside and asked him to name what he was actually reaching for — precise and unhurried.",
         "[d1] Named the difference between first and second time — managing herself versus stopping — and demonstrated it in the telling rather than just describing it. Asked him to confirm he felt each shift.",
@@ -425,17 +480,18 @@
         "[d1] Confirmed plainly what passed between them and what did not — no touch, no orgasm, only the Prism Sight exchange and her stopping managing herself. Named it as more than most people give her. Asked whether he is orienting to what was real or reaching for something that hasn't happened yet.",
         "[d1] Closed the distance herself. Said plainly she was not managing anything. Met the kiss without hesitation.",
         "[d1] Lifted her arms for him without hesitation — decided, not passive. Stands in the afternoon light and lets him look, her hands on his forearms, breathing steady and chosen.",
-        "[d1] Held still under his hand moving along her collarbone — watching his face the whole time, breathing slow, not managing any part of it."
+        "[d1] Held still under his hand moving along her collarbone — watching his face the whole time, breathing slow, not managing any part of it.",
+        "[d1] On the roof terrace in late-afternoon light, present and unhurried — breathing steady and chosen, watching his face while his hand moved along her ribs. No management left. Decided."
       ],
       "knownFacts": [
-        "She names the habit of holding a part of herself back as bracing — not against him, against being seen fully.",
-        "She has a word for the second state: stopping. No decisions about what he is seeing at all.",
         "She carries tension high in the chest; it was visible when it left.",
         "She can reconstruct shared experience with the same precision she applies to measurements — ordered, honest, in sequence.",
         "She draws a clear line between what was real and what didn't happen — and names both without embarrassment.",
         "She considers the Prism Sight exchange more intimate than surface touch, and said so directly.",
         "She moves first when she has decided — the choosing is internal and the action follows without ceremony.",
-        "She names her own state in real time: 'I am not managing anything right now.'"
+        "She names her own state in real time: 'I am not managing anything right now.'",
+        "When she stops managing, she is fully present — her attention unguarded",
+        "She watches from the source — measures the person, not the gesture"
       ],
       "skillsObserved": [
         "translating technical skill (light-reading) into interperson",
@@ -446,7 +502,7 @@
         "emotional precision and recall — naming internal states in s"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace, present and unhurried, watching him with steady dark eyes.",
+      "statusNote": "On the roof terrace with the player, present and unhurried, in the late-afternoon light.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 1
@@ -527,6 +583,13 @@
           "parentId": "radiant_plateau_edge"
         }
       }
+    },
+    "gen-object-object": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 1,
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -544,26 +607,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 1,
-        "worldDay": 11,
-        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
-      },
-      {
-        "day": 1,
-        "worldDay": 9,
-        "text": "Word reaches you: Sela tapped the six-fold rhythm into the Millbrook common house floor before the assembled elder panel — the youngest witness named the pattern from the inside of the stone, confirmed by three vantage ("
-      },
-      {
-        "day": 1,
-        "worldDay": 9,
-        "text": "Word reaches you: Millbrook's elder panel formally accepted the evidence of an operating Precursor system beneath the valley — the first official governance body in the valley to name it publicly. (near millbrook)"
-      },
-      {
-        "day": 1,
-        "worldDay": 9,
-        "text": "Word reaches you: Usnea proposed leading a multi-settlement expedition into the Disputed Zone before Millbrook's assembled elder panel — the room could not follow; the gap between evidence and action named openly. (near "
-      },
       {
         "day": 1,
         "worldDay": 10,
@@ -651,28 +694,74 @@
         "worldDay": 26,
         "text": "Keeper Aldris Vael: Aldris spent the evening re-examining the mark under three different lens-stacks and made a quiet, indirect inquiry to retired Keeper Suven — not showing the mark yet, only asking whether he still reviews authentication requests, laying groundwork for the second pair of eyes she needs.",
         "tier": "ambient"
+      },
+      {
+        "day": 1,
+        "worldDay": 26,
+        "text": "This reaches your area — The left-branch reclamation site was given its final instruction and began winding down — the watershed contamination will clear on its own schedule within one to two weeks. (near gen-disputed-zone-left-branch-entrance)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 27,
+        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+        "tier": "event"
+      },
+      {
+        "day": 1,
+        "worldDay": 27,
+        "text": "Keeper Aldris Vael: Aldris quietly sent a short, carefully worded note — no specifics, no mention of the mark — to Keeper Fennow in the Tallow Quarter, whose eyes she has trusted for thirty years, asking if he might find an hour for her this week.",
+        "tier": "ambient"
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "Keeper Aldris Vael: Aldris quietly arranged a private viewing with Conservator Mette Orvyn — an old colleague she trusts above guild politics — who examined the mark under side-lit glass and said nothing for a long moment before giving a single, careful nod.",
+        "tier": "ambient"
+      },
+      {
+        "day": 1,
+        "worldDay": 32,
+        "text": "Lira: Lira was taken on for two mornings as an informal runner for a lens-grinder in the Edge District, close enough to the work to watch the shaping process and ask one question that got a real answer.",
+        "tier": "ambient"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-26T03:21:20.713Z",
-    "lastCanonWorldDay": 26,
-    "lastTickWorldDay": 26,
-    "lastGenCount": 627,
+    "lastSharedReadAt": "2026-08-01T04:05:45.578Z",
+    "lastCanonWorldDay": 32,
+    "lastTickWorldDay": 32,
+    "lastGenCount": 772,
     "wantProgress": {
       "lira": {
-        "progress": 1,
+        "progress": 2,
         "status": "active",
-        "updatedWorldDay": 25,
+        "updatedWorldDay": 32,
         "lastOutcome": "progress"
       },
       "keeper-aldris-vael": {
-        "progress": 1,
+        "progress": 3,
         "status": "active",
-        "updatedWorldDay": 26,
+        "updatedWorldDay": 32,
         "lastOutcome": "progress"
+      },
+      "the_open_figure": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 32,
+        "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 31
+    "turnsSinceOffer": 32,
+    "arcStages": {
+      "arc_what_wakes_beneath": {
+        "othersPush": 1
+      },
+      "the_second_manifestation": {
+        "othersPush": 1
+      }
+    },
+    "pressureQueue": []
   },
   "bio": null,
   "subAttributes": {
@@ -761,7 +850,9 @@
           "[d1] Senior Marks-Keeper, Radiant Plateau Accountability Board",
           "[d1] met in play",
           "[d1] [while away] Aldris drafted a short letter to the one colleague she trusts enough to ask, then held it unset for nine days — she cannot yet bring herself to commit the mark to writing, even in cautious terms, until she is more certain of what she is describing.",
-          "[d1] [while away] Aldris spent the evening re-examining the mark under three different lens-stacks and made a quiet, indirect inquiry to retired Keeper Suven — not showing the mark yet, only asking whether he still reviews authentication requests, laying groundwork for the second pair of eyes she needs."
+          "[d1] [while away] Aldris spent the evening re-examining the mark under three different lens-stacks and made a quiet, indirect inquiry to retired Keeper Suven — not showing the mark yet, only asking whether he still reviews authentication requests, laying groundwork for the second pair of eyes she needs.",
+          "[d1] [while away] Aldris quietly sent a short, carefully worded note — no specifics, no mention of the mark — to Keeper Fennow in the Tallow Quarter, whose eyes she has trusted for thirty years, asking if he might find an hour for her this week.",
+          "[d1] [while away] Aldris quietly arranged a private viewing with Conservator Mette Orvyn — an old colleague she trusts above guild politics — who examined the mark under side-lit glass and said nothing for a long moment before giving a single, careful nod."
         ],
         "links": [],
         "aliases": [],
@@ -817,7 +908,9 @@
           "[d1] Her precision with people is a direct extension of optics training — she extrapolates arc and angle from the first degree of movement. She reads him clearly and said so without apology.",
           "[d1] Apprentice optics-weaver, Edge District",
           "[d1] [while away] Lira secured a three-morning trial with a lens-grinder in the Edge District who agreed to let her sweep and observe in exchange for running deliveries — small, unglamorous, but she is now inside a working shop.",
-          "[d1] She felt Prism Sight as being measured by something not cold — named it as a change in angle. Said she spent the first half deciding how much to show, then stopped; the second half was what he actually got."
+          "[d1] She felt Prism Sight as being measured by something not cold — named it as a change in angle. Said she spent the first half deciding how much to show, then stopped; the second half was what he actually got.",
+          "[d1] [while away] Lira spent the day running routine deliveries for her current employer and had no opportunity to pursue the apprenticeship contact she's been building toward.",
+          "[d1] [while away] Lira was taken on for two mornings as an informal runner for a lens-grinder in the Edge District, close enough to the work to watch the shaping process and ask one question that got a real answer."
         ],
         "links": [
           "radiant-plateau",
@@ -891,19 +984,45 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "the-open-figure": {
+        "id": "the-open-figure",
+        "label": "The Open Figure",
+        "kind": "person",
+        "facts": [
+          "[d1] [while away] The Open Figure stirs at the edges of awareness but has found no clear seam to press against — the world's symbols sit undisturbed enough that there is nothing yet to resist."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "the-open-figure",
+        "updatedDay": 1
+      },
+      "gen-object-object": {
+        "id": "gen-object-object",
+        "label": "[Object Object]",
+        "kind": "place",
+        "facts": [
+          "[d1] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "gen-object-object",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "social": 8.534250633731299,
-    "strategic": 6.1958601946211616,
-    "cautious": 3.421490742026451,
-    "cerebral": 3.515843032115838,
-    "physical": 0.48508747120921436,
-    "ruthless": 1.1691081567731378,
-    "generous": 0.5125853264268461,
-    "amorous": 16.264362638431386,
-    "risky": 1.3180116706727731
+    "social": 8.320894367888016,
+    "strategic": 6.040963689755633,
+    "cautious": 3.3359534734757896,
+    "cerebral": 3.4279469563129417,
+    "physical": 0.47296028442898397,
+    "ruthless": 1.1398804528538093,
+    "generous": 0.4997706932661749,
+    "amorous": 16.8577535724706,
+    "risky": 1.2850613789059537
   },
   "aptitudes": [
     "silver_tongue",
@@ -911,11 +1030,11 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 43,
+  "actionCount": 44,
   "grantsVersion": 1,
-  "reconcileVersion": 21,
-  "updatedAt": 1785036879019,
-  "rev": 95,
+  "reconcileVersion": 22,
+  "updatedAt": 1785557315902,
+  "rev": 103,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1036,16 +1155,81 @@
               "worldDay": 26,
               "note": "Aldris spent the evening re-examining the mark under three different lens-stacks and made a quiet, indirect inquiry to retired Keeper Suven — not showing the mark yet, only asking whether he still reviews authentication requests, laying groundwork for the second pair of eyes she needs.",
               "outcome": "progress"
+            },
+            {
+              "worldDay": 27,
+              "note": "Aldris quietly sent a short, carefully worded note — no specifics, no mention of the mark — to Keeper Fennow in the Tallow Quarter, whose eyes she has trusted for thirty years, asking if he might find an hour for her this week.",
+              "outcome": "progress"
+            },
+            {
+              "worldDay": 32,
+              "note": "Aldris quietly arranged a private viewing with Conservator Mette Orvyn — an old colleague she trusts above guild politics — who examined the mark under side-lit glass and said nothing for a long moment before giving a single, careful nod.",
+              "outcome": "progress"
             }
           ]
         },
         "image": "https://image.pollinations.ai/prompt/character%20portrait%2C%20Keeper%20Aldris%20Vael%2C%20Senior%20Marks-Keeper%2C%20Radiant%20Plateau%20Accountability%20Board.%20Late%20sixties%2C%20broad-shouldered%20and%20unhurried%20in%20her%20movements.%20Her%20keeper's%20coat%20is%20old%20Plateau%20indigo%2C%20faded%20at%20the%20cuffs%20to%20something%20closer%20to%20dawn-grey.%20The%20prism-loupe%20hangs%20on%20a%20worn%20brass%20chain%20%E2%80%94%20hexagonal%2C%20hand-ground%2C%20notched%20along%20one%20edge%20from%20a%20fall%20she%20never%20explains.%20Her%20eyes%20carry%20the%20faint%20prismatic%20afterimage%20that%20long-term%20refraction%20work%20leaves%20in%20veteran%20keepers%3A%20a%20rim%20of%20spectral%20colour%20at%20the%20iris%20edge%2C%20visible%20in%20direct%20light.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49313&nologo=true"
       }
     },
-    "location": {},
+    "location": {
+      "gen-object-object": {
+        "id": "gen-object-object",
+        "name": "[Object Object]",
+        "regionId": "valley",
+        "descriptionSeed": "A place the road led to — [Object Object]. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "radiant_plateau_edge"
+        ],
+        "_mintedAs": "transit",
+        "dangerLevel": 1,
+        "_gen": {
+          "type": "location",
+          "tier": "fresh",
+          "engagementScore": 2,
+          "birthWeight": 1,
+          "rating": null,
+          "attentionHistory": [
+            {
+              "kind": "revisit",
+              "day": 1
+            }
+          ],
+          "createdDay": 1,
+          "provenance": {
+            "locationId": "radiant_plateau_edge",
+            "day": null,
+            "hint": "transit"
+          },
+          "lastAttentionDay": 1
+        },
+        "map": {
+          "x": 231.24568211039406,
+          "y": 250.19909545986675
+        }
+      }
+    },
     "arc": {}
   },
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "Late-afternoon gold light on a rooftop terrace in the Edge District: a woman with amber-grey eyes, top off, standing present and unhurried in the slow amber light, a man's hand traced down the line of",
+      "url": "https://image.pollinations.ai/prompt/Late-afternoon%20gold%20light%20on%20a%20rooftop%20terrace%20in%20the%20Edge%20District%3A%20a%20woman%20with%20amber-grey%20eyes%2C%20top%20off%2C%20standing%20present%20and%20unhurried%20in%20the%20slow%20amber%20light%2C%20a%20man's%20hand%20traced%20down%20the%20line%20of%20her%20ribs%2C%20both%20of%20them%20present%20in%20the%20moment%20without%20rush%20or%20management%2C%20the%20valley%20falling%20away%20be%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=91222&nologo=true",
+      "caption": "On the roof terrace above the Common Hall in the Edge District, late afternoon: Lira lets ",
+      "worldDay": 32,
+      "at": "2026-08-01T04:08:35.902Z"
+    },
+    {
+      "kind": "location",
+      "prompt": "[Object Object]",
+      "url": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true",
+      "caption": "[Object Object]",
+      "worldDay": 32,
+      "at": "2026-08-01T04:08:35.893Z"
+    },
     {
       "kind": "portrait",
       "prompt": "a person, character portrait, named Lira, woman, Apprentice optics-weaver, Edge District",
@@ -1103,7 +1287,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 44
+    "valley": 45
   },
   "foreclosed": [],
   "company": [],
@@ -1134,6 +1318,14 @@
       "startDay": 26,
       "endDay": 26,
       "beats": 16
+    },
+    {
+      "id": "sess-3",
+      "startedAt": "2026-08-01T04:08:35.880Z",
+      "lastAt": "2026-08-01T04:08:35.880Z",
+      "startDay": 32,
+      "endDay": 32,
+      "beats": 1
     }
   ],
   "peopleDisposition": {},
@@ -1143,11 +1335,26 @@
     "choices": 28,
     "scene": 28,
     "npcUpdates": 28,
-    "timeOps": 25,
-    "sceneEnded": 7,
+    "timeOps": 24,
+    "sceneEnded": 8,
     "characterDeltas": 6,
-    "codexUpdates": 3
+    "codexUpdates": 3,
+    "imagePrompt": 1,
+    "gambitApt": 1
   },
   "_opTurns": 28,
-  "_intentAsked": null
+  "_intentAsked": null,
+  "_opLedger": {
+    "offer": {
+      "applied": 0,
+      "rejected": 1,
+      "lastWhy": "rejected-shape"
+    }
+  },
+  "knownPlaces": [
+    "gen-object-object"
+  ],
+  "locationImages": {
+    "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
+  }
 }

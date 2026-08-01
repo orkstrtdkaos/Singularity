@@ -1,0 +1,86 @@
+{
+ "schemaVersion": 1,
+ "id": "memory_worked_example",
+ "kind": "reference",
+ "note": "SNG-251 worked example (Aevi 2026-07-27): Memory's CORRECT evolved record - the four threads as explicit CLAMPED grants scaled to Silas (L29; order_sense/deathsense/palework at ability-rank 3; braids Ashen Meridian + Undying Ledger). The grants are the MECHANICAL translation of powers Silas already earned, FOCUSED through the spear - not invented power, and reasonable-for-level per Erik's §4 ruling. Plus the shadow twin as a derived item, and the corrected chronology. CCode validates the SNG-251 prose+image+mechanics+derive mechanism against THIS; it is not a direct write to Erik's live save (that's an in-play evolution beat).",
+ "parentItem": {
+  "name": "Assembled Mid-Weight Spear",
+  "customName": "Memory",
+  "kind": "weapon",
+  "evoStage": 4,
+  "evoStageName": "The Sealed Shadow-Spear",
+  "description": "A seasoned ash shaft six feet long, the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding gone dark with handling. Four rune-threads seated and answering: ironsense along the shaft as anchor, Huginn's Ashwarden ending-sense worked through the fuller, a shadow-harm focus cut at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The Weirmark is drawn at the collar; the Shielding Word is spoken into the haft. Pell's maker's mark sits in the blade. A death comes off it dry — no blood in the channels.",
+  "provenance": "Reforged from a light hunting point to the mid-weight tip at Pell's forge; rune-bound at the Fell Pell with Huginn as witness at the stone ring; named Memory, Weirmark drawn and Shielding Word spoken, and split — the shadow-twin sealed — at dawn in Pell's forge. 'Yours to call. Mine to carry.'",
+  "imagePrompt": "A six-foot ash war-spear with a wide mid-weight iron blade, four faintly-glowing rune-threads worked into shaft, fuller, quillon and collar — one cold iron-grey, one ashen death-pale, one shadow-black, one ordered blue — a smith's maker's-mark stamped in the blade, dark oiled-leather binding, held upright in a dim forge at dawn. Runic, deathbound, real.",
+  "grants": [
+   {
+    "id": "mem_ironsense_anchor",
+    "name": "Anchored Read",
+    "from": "order_sense (ironsense) — rank 3",
+    "effect": "Read the structure of what the blade touches or points at — the order in a thing, a site, a foe's form. The spear is a reading instrument, not only a weapon.",
+    "band": "reasonable @ L29 / order_sense 3",
+    "clamp": "a read, not a strike — no damage, no compulsion"
+   },
+   {
+    "id": "mem_ending_sense",
+    "name": "The Ending Through the Blade",
+    "from": "deathsense + Huginn's Ashwarden ending-sense — rank 3",
+    "effect": "Reads endings through the fuller: a death taken with Memory is read cleanly and CLOSED — comes off the blade dry, no blood in the rune-channels. Extends Huginn's ending-texture through the collar rune at conserved cost.",
+    "band": "reasonable @ L29 / deathsense 3",
+    "clamp": "reads + closes an ending; does not itself deal extra damage"
+   },
+   {
+    "id": "mem_shadow_harm",
+    "name": "The Shadow-Harm Strike (Palework channel)",
+    "from": "palework — rank 3 (Ashen Meridian braid: order_sense × palework)",
+    "effect": "The spear's offensive register: a strike routed through the shadow-harm focus at the quillon, Palework fed coordinates by the ironsense read — harm that OPERATES on what it's aimed at, not merely blunt force. The one grant that raises the weapon's effective strike.",
+    "band": "reasonable @ L29 / palework 3 + braid — CLAMPED: a focused strike, not an execute; no runaway scaling",
+    "clamp": "+strike through Palework, bounded by the daily-evolution ceiling; never an instakill"
+   },
+   {
+    "id": "mem_order_capacitor",
+    "name": "The Held Read",
+    "from": "order_sense capacitor on Pell's idiom (Undying Ledger braid: deathsense × order_sense)",
+    "effect": "Holds one order-read charged in the capacitor — a reading seated earlier can be released later, on Pell's idiom. Memory remembers one thing at a time.",
+    "band": "reasonable @ L29 / order_sense 3 + braid",
+    "clamp": "holds ONE read; releasing spends it"
+   }
+  ],
+  "derivedInto": [
+   "memory_shadow_twin"
+  ]
+ },
+ "derivedItem": {
+  "id": "memory_shadow_twin",
+  "name": "Memory's Shadow-Twin",
+  "customName": "the Called Spear",
+  "kind": "weapon",
+  "parent": "Memory",
+  "description": "The sealed shadow-duplicate of Memory, split from it by design at Pell's forge. No iron in it — a spear of held shadow that answers Silas's call from any distance, forms in his hand, and carries Memory's threads in echo. Pell holds the iron; Silas calls the shadow. Two bodies, one binding.",
+  "provenance": "Sealed from Memory at dawn on the completion of the rune-work — 'Yours to call. Mine to carry.' The physical Memory is in Pell's hand; this is Silas's to summon.",
+  "imagePrompt": "A spear made of held shadow and faint rune-light, no metal — a translucent dark echo of a runic war-spear forming in an open hand, threads of cold light where the iron blade would be, summoned from nothing in a dim space. Shadow-craft, called, sealed.",
+  "grants": [
+   {
+    "id": "twin_call",
+    "name": "Call From Any Distance",
+    "from": "the sealed shadow-binding + palework",
+    "effect": "Silas can summon the shadow-twin to his hand from any distance — it forms sealed and ready. The 'yours to call' half of the split.",
+    "band": "reasonable @ L29",
+    "clamp": "a summon, not a teleport of Silas; the spear comes to him, once ready"
+   },
+   {
+    "id": "twin_echo",
+    "name": "Echoed Threads",
+    "from": "Memory's threads in shadow-echo",
+    "effect": "Carries Memory's reads/ending-sense in echo (lighter than the iron original); the shadow-harm strike answers when called.",
+    "band": "reasonable @ L29 — CLAMPED: an echo, weaker than the iron Memory",
+    "clamp": "echoes the parent's grants at reduced strength; not a second full weapon"
+   }
+  ]
+ },
+ "chronologyCorrection": {
+  "issue": "The save dates the naming/split to d14 but the thread-binding provenance to World-day 18 evening — backwards (can't name+split before the threads are bound).",
+  "resolution": "NEEDS ERIK - he was there. Two readings: (a) the assembly/tip + first threads across d1-d14, binding COMPLETED d18, naming+split d18+ (the provenance is right, the d14 naming notes are drift); or (b) the naming/split was d14 and the 'd18' provenance stamp is the drift. Aevi's lean from the notes: the binding-then-naming order is real, so the d14 naming timestamps are likely the drift - but ERIK'S CANON DECIDES. Flagged, not silently 'fixed'.",
+  "owner": "Erik"
+ }
+}

@@ -102,6 +102,34 @@ export function personDestination(ref, action = {}, ctx = {}) {
   return { isPerson: true, destId: null };
 }
 
+/** SNG-246 Fix A (Erik ruled: option c, with b as the fallback) — WHO is the player committing harm against?
+ *  The old harmGateFor knew only that a craft could kill, never at whom, so the engine could not mint a fight
+ *  without INVENTING an opponent — the same guess that once minted a person as a travel destination
+ *  (seam_travelTo_is_place). This resolves the target from what the player actually chose, never from thin air:
+ *    1. an explicit target on the choice (targetNpcId / targetName) — the strongest signal;
+ *    2. a REGISTERED npc whose name or alias appears in the choice label or the player's own words.
+ *  Returns null when nothing resolves — and null is the whole point: the caller then falls back to a directive
+ *  rather than fighting a phantom. Pure; mirrors personDestination's matching so both agree on what a person is.
+ */
+export function harmTargetFor(action = {}, ctx = {}) {
+  const reg = ctx.npcRegistry || {};
+  const byId = (id) => { const n = reg[id] || Object.values(reg).find(x => x && x.id === id); return n || null; };
+  // 1. the choice named them outright
+  const explicit = action.targetNpcId ? byId(action.targetNpcId) : null;
+  if (explicit) return { id: explicit.id, name: explicit.name, threat: explicit.threat ?? null, source: "explicit" };
+  if (action.targetName) {
+    const t = String(action.targetName).trim();
+    if (t) return { id: null, name: t, threat: null, source: "explicit-name" };
+  }
+  // 2. a registered person the player's own words point at
+  const words = `${action.label || ""} ${action.exactWords || ""}`.toLowerCase();
+  if (!words.trim()) return null;
+  const eq = (a) => { a = String(a || "").toLowerCase().trim(); return a.length > 2 && words.includes(a); };
+  const hit = Object.values(reg).find(n => n && (eq(n.name) || (n.aliases || []).some(eq)));
+  if (hit) return { id: hit.id, name: hit.name, threat: hit.threat ?? null, source: "registry" };
+  return null;
+}
+
 /** PURE. Should a departure gate fire for this travel intent? SNG-188: travel is OFFERED, never
  *  imposed (§4.1, the same contract lethal encounters carry). The gate now FAILS CLOSED — an
  *  unresolvable origin or destination is the case where the engine knows LEAST about the consequence

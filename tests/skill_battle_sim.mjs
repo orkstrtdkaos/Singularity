@@ -11,6 +11,7 @@ import { senseOpponent } from "../engine/sense.js";
 import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engine/encounters.js";
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
 import { recordUse } from "../engine/practice.js";
+import { harmTargetFor } from "../engine/intent.js";   // SNG-246 Fix A: who the player committed harm against
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -460,6 +461,29 @@ check("CCODE-48: a ROUND is a TURN — sense and a mid-turn action do not advanc
     const mid   = skillBattleRound(base, duelDef, decl, { ...o, phase: "action", tickEffects: false }); // a bonus follows
     const close = skillBattleRound(base, duelDef, decl, { ...o, phase: "action", tickEffects: true });  // ends the turn
     return sense.state.round === 7 && mid.state.round === 7 && close.state.round === 8;
+  })());
+
+// ---- SNG-246 FIX A: engine-enforced fight entry (Erik's ruling: c, with b as the fallback) ----
+// The load-bearing property is NOT that it finds a target — it is that it REFUSES TO INVENT ONE. A resolver that
+// guesses produces phantom opponents, the same class as seam_travelTo_is_place (a person minted as a destination).
+const REG = { "mara-wells": { id: "mara-wells", name: "Mara Wells" },
+              "grey": { id: "grey", name: "Grey-braided woman", aliases: ["the grey woman"] } };
+check("SNG-246 A: an explicit targetNpcId resolves (the strongest signal)",
+  harmTargetFor({ targetNpcId: "mara-wells" }, { npcRegistry: REG })?.id === "mara-wells");
+check("SNG-246 A: a REGISTERED person named in the player's own choice resolves",
+  harmTargetFor({ label: "Strike at Mara Wells with the Edge" }, { npcRegistry: REG })?.name === "Mara Wells");
+check("SNG-246 A: an ALIAS in the player's exact words resolves",
+  harmTargetFor({ label: "attack", exactWords: "I go for the grey woman" }, { npcRegistry: REG })?.id === "grey");
+check("SNG-246 A (the one that matters): an unresolvable target returns NULL — the engine never invents a person",
+  harmTargetFor({ label: "Strike at the shadows" }, { npcRegistry: REG }) === null
+  && harmTargetFor({}, { npcRegistry: REG }) === null
+  && harmTargetFor({ label: "kill them" }, { npcRegistry: {} }) === null);
+check("SNG-246 A: a minted duel from a resolved target is a REAL skill battle (rounds, not one prose roll)",
+  (() => {
+    const def = { id: "harm-mara", type: "duel", opponent: { name: "Mara Wells", threat: 40, health: 5, yieldAt: 1 } };
+    const sheet = synthesizeOpponentSheet(def.opponent, sb);
+    const st = startEncounter(def, { oppSheet: sheet });
+    return st.mode === "skill_battle" && st.momentum === 0 && !!st.opponentSheet;
   })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

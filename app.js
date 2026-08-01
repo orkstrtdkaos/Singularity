@@ -38,7 +38,7 @@ import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
-import { harmGateFor, departureGateFor, isSpeechAct, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard
+import { harmGateFor, harmTargetFor, departureGateFor, isSpeechAct, personDestination, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard; SNG-228: person-as-place guard
 import { resolveWaygateTransit, routeGmMoveTo, isNetworkGate, networkGatesFrom, gateHopCost } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row. SNG-243 §4: the gate network
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.316";
+const APP_VERSION = "1.8.317";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -322,6 +322,9 @@ let seenBeats = 0;       // remote beats already rendered
 // here to be WOVEN into the next GM turn (never a modal). One per scene + a turn cooldown.
 let pendingWeave = null;        // { seed, flavor, perilous, loreTier } to inject next turn
 let pendingEncounterOffer = null;// SNG-236 fix A: a STRUCTURED encounter the roll turned up — offered HARD (a framed choice the GM MUST present), not woven invisibly. { id, name, kind }
+// SNG-246 Fix A, fallback (b): the player committed a killing blow but the engine could NOT resolve who at — so
+// rather than invent an opponent, it hands the next GM turn a hard directive to frame the fight it just narrated.
+let pendingFightFraming = null;  // { rung, what }
 let pendingStageReveal = null;   // SNG-239: a quest stage just completed — hand its EARNED reveal (change) to the next GM turn as a MUST-STATE-PLAINLY directive (the Fix-A pattern: a hard directive, not a soft rule under load). [{ title, change, atDecision }]
 let sceneEncounterFired = false;// SNG-127: fired in THIS scene? (adds spacing after the first, not a hard cap)
 let turnsSinceEncounter = 99;   // cooldown counter (turns since the last narrative encounter)
@@ -3546,6 +3549,14 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const encounterOfferDetail = offer ? (
     `The world has turned up a recognizable ${offer.kind} — "${offer.name}". This is NOT ambient texture to fold into prose: it is a bounded encounter the player must be able to SEE and ENTER. You MUST, this beat, present it as a framed CHOICE carrying \`encounterId: "${offer.id}"\` (label it for what it is), beside a clear way to decline or avoid. Do not narrate past it — the engine takes the engage/decline and the frame from there.`
   ) : null;
+  // SNG-246 Fix A, fallback (b): the player committed a killing blow the engine could not attribute to a NAMED
+  // person. It refuses to invent one — so it hands this turn a HARD directive to frame the fight the GM itself
+  // just narrated. Same engine-gated-directive pattern as encounterOfferDetail; the engine still decides that a
+  // fight must be structured, it only borrows the GM's knowledge of who is standing there.
+  const fightFraming = pendingFightFraming; pendingFightFraming = null;
+  const fightFramingDetail = fightFraming ? (
+    `The player has COMMITTED to violence this beat — "${fightFraming.what}"${fightFraming.rung === "lethal" ? ", and answered that they intend to KILL" : ", intending to put them down, not out"}. This is NOT a single narrated blow: you MUST, this beat, present it as a bounded FIGHT the player can see and act inside — emit \`newEncounter\` for the person they are attacking (name them from what you have already narrated; give them a threat that fits) so the engine can take the rounds from there. Do not resolve the fight in prose, and do not narrate them as already dead or already victorious.`
+  ) : null;
   const worldPressureDetail = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
   const substrateDetail = pendingSubstrateNote; pendingSubstrateNote = null; // SNG-090: lattice thin/crowded here
   // SNG-194 §4b: the ENGINE decides whether an unprompted OFFER has room this beat — the model never
@@ -3557,7 +3568,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
       encounterActive: !!activeEnc(),
       gambitOpen: !!gambitDraft,
       intentPending: !!character._pendingIntent,
-      worldActing: !!worldPressureDetail || !!encounterWeaveDetail || !!encounterOfferDetail,
+      worldActing: !!worldPressureDetail || !!encounterWeaveDetail || !!encounterOfferDetail || !!fightFramingDetail,
       lull: quietTurns >= 1,
       arrived: (sceneTurns?.length || 0) <= 1,
       turnsSinceOffer: character.worldState?.turnsSinceOffer ?? Infinity
@@ -3609,7 +3620,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // env.ephemera so a registry row can never double-fire them.
   const env = gmEnv({
     resolution, playerInput, exactWords, itemAdvance, travelDirective,
-    ephemera: { encounterWeaveDetail, encounterOfferDetail, stageRevealDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
+    ephemera: { encounterWeaveDetail, encounterOfferDetail, fightFramingDetail, stageRevealDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
   });
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
@@ -4726,6 +4737,15 @@ async function onChoice(choice) {
     }
   }
   if (choice.intentRung) action.intentRung = choice.intentRung; // the harm answer, carried back through the resume (dedupe marked in answerIntent)
+  // SNG-246 FIX A — ENGINE-ENFORCED FIGHT ENTRY. A committed killing blow must not resolve as a single prose roll;
+  // that was the root of "one action ended it in pure prose." The ENGINE escalates it, not the GM's memory of
+  // rule 18. Erik's ruling: resolve the TARGET the player actually chose (c), and fall back to a hard directive
+  // (b) when none resolves — inventing an opponent is worse than asking the GM to frame the one it just narrated.
+  if (choice.intentRung && !activeEnc()) {
+    const tgt = harmTargetFor({ ...action, label: choice.label, exactWords: choice.exactWords }, { npcRegistry: character.npcRegistry || {} });
+    if (tgt) { escalateToFight(tgt, choice); return; }
+    pendingFightFraming = { rung: choice.intentRung, what: choice.label || "a killing blow" }; // (b) fallback
+  }
   const encD = activeEnc();
   if (encD) {
     const encDiff = encounterDifficulty(encD.state, encD.def, CONTENT.rules, { flee: choice.encounterAction === "flee" });
@@ -4936,6 +4956,29 @@ function isDev() { return isDevMode(); }
 /** Fire a specific random encounter (entry object) or a forced flavor (dev). Registers
  *  any synthesized encounter def, then either opens a GM scene (narrative/opposed) or
  *  renders an engine-built OFFER beat with a guaranteed decline path (challenge/duel). */
+/** SNG-246 Fix A (Erik's option c): the player committed a killing blow at someone the engine could NAME — so the
+ *  engine MINTS the fight and ENTERS it structured, right now. No prose-only duel, no waiting on the GM to
+ *  remember rule 18. Threat comes from the registry when it knows, else this place's danger, else a plain default —
+ *  never from nothing, and never an invented PERSON (harmTargetFor already refused to guess at that). */
+function escalateToFight(target, choice) {
+  const here = hereNow();
+  const threat = Number(target.threat) || Math.max(20, Math.min(70, Math.round((Number(here?.dangerLevel) || 3) * 12)));
+  const entry = { id: `harm-${slugify(target.name || "foe")}-${(character.activeEncounter?.state?.round || 0)}`,
+    flavor: "fight", seed: `You have committed to violence against ${target.name}.`,
+    opponent: { name: target.name, threat, tacticTags: [] } };
+  const def = synthesizeDuelDef(entry);
+  def.opponent.name = target.name;              // synthesizeDuelDef keeps the entry's opponent; be explicit
+  def.lethal = choice?.intentRung === "lethal"; // the rung the player just answered with
+  if (here?.dangerLevel != null) def.danger = here.dangerLevel;
+  character.customEncounters = character.customEncounters || {};
+  character.customEncounters[def.id] = def;
+  const sb = CONTENT.skillBattle?.engine;
+  const oppSheet = sb ? synthesizeOpponentSheet(def.opponent, sb) : null;
+  character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+  saveCharacter(character);
+  renderSkillBattle();
+}
+
 async function fireEncounter(entryOrFlavor, { dev = false, news = [], aggressor = false } = {}) {
   const table = CONTENT.randomEncounters;
   if (!table) return false;

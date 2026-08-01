@@ -1,6 +1,21 @@
 # PO ALERT
 
-> ## [DONE - SNG-254 the matchup matrix] traditions feel distinct in a fight (Aevi, 2026-08-01)
+> ## [DONE - newAbility guidance realigned] (Aevi, 2026-08-01)
+> CCode flagged (alongside proving earned-power/offer-boundary/standoff all pass first-time now): newAbility's
+> guidance said "RARE" - written when NOTHING enforced it, so the prose was the only brake and leaned hard. Now
+> the engine enforces a real scaled cap (applyNewAbility: floor(level/2)+1, refuses over-cap + duplicates), so
+> "RARE" FIGHTS the mechanism - a GM reading "almost never" under-emits a genuinely-earned ability even when the
+> cap has room. REWROTE: the BAR is EARNING (real teacher/trial/reward; "feels stronger" earns nothing); the RATE
+> is the ENGINE's - emit when earned, let the cap clamp cleanly. Prose + mechanism now pull the SAME way (the
+> itemUpdates-grants pattern applied to abilities). CI green.
+> THE PATTERN (CCode's 3 first-pass confirmations, now a reusable rule): a SOFT/conditional/prose-only
+> instruction does NOT survive this prompt; an ENGINE-ENFORCED, unconditional, front-loaded directive does -
+> every time. Corollary Aevi carries: when the engine takes over enforcement of something the prose used to
+> ration, the prose must be REALIGNED to describe the BAR and defer the RATE to the engine - stale rationing
+> prose left in place will fight the mechanism (itemUpdates ban → earned-power; newAbility "RARE" → engine cap).
+> Watch for the next instance.
+> CCode backlog empty of buildable work; open items wait on Erik's eyes (ribbon see-it-built, SNG-251 numbers,
+> design-docs-to-docs/) + the not-built generation work (quest/encounter gen, SNG-249 §5 coherence).> ## [DONE - SNG-254 the matchup matrix] traditions feel distinct in a fight (Aevi, 2026-08-01)
 > CCode's highest-leverage content ticket: functionMatchup covered 7/576 pairs (1.2%), 17 verbs with NO edges,
 > every round read 'matchup 0' - the rock-paper-scissors layer that makes a people's chosen verbs MATTER was in
 > the fiction, not the math, so 26 kits landed within 4pts of each other. AUTHORED the matrix: 110 edges (7→110,

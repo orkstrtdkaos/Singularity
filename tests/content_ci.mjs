@@ -585,7 +585,12 @@ for (const pack of PACKS) {
   ok(`SNG-238 §5b: content-shape sweep — ${swept} structured quests checked against consumer-read fields (title / stage id+objective+condition / outcome name+summary)`);
 
   // --- SNG-238 §5b (all content types), DRIVEN BY Aevi's consumer-required-subfield map (§5d) ---
-  // po/staged_content/consumer_required_subfields.json is the authoritative seed. npc/location/creature load
+  // CCODE-55 (SNG-250 §4): the map was PROMOTED out of po/staged_content into
+  // content/packs/core/rules/consumer_required_subfields.json and registered in the core manifest, so it is
+  // ONE source for both halves of the contract — this CI sweep over AUTHORED content, and the birth gate over
+  // GENERATED content in the browser. While it lived under po/ only this half could reach it (the browser
+  // cannot fetch po/), which is why SNG-250's "the consumer map is the source of truth" had no runtime teeth.
+  // npc/location/creature load
   // close to raw, so check raw fields. CRASH (a consumer THROWS on absence) FAILS the build; EMPTY/DEGRADED
   // WARN for these types until the map is reconciled with runtime (the map lists location.description but the
   // field is `descriptionSeed`; dangerLevel is runtime-floored per SNG-225) — probe-verified every CRASH field
@@ -593,7 +598,17 @@ for (const pack of PACKS) {
   // bridges name→title, text→summary, and drops stage.title), so their check is the normalized-output one, not
   // the map's raw quest fields. The map grows by incident; the sweep picks up new fields automatically.
   {
-    const mapDoc = existsSync(join(root, "po/staged_content/consumer_required_subfields.json")) ? rj("po/staged_content/consumer_required_subfields.json") : null;
+    // CCODE-55: the map is now REGISTERED content, so its absence is a build failure, not a silent skip.
+    // A missing map used to disable this whole sweep with a green run (the SNG-064 class: unlisted content
+    // silently does not exist). It must also be reachable the way the ENGINE reaches it — through the core
+    // manifest's provides.rules — or the browser half loads nothing while CI stays green.
+    const MAP_PATH = "content/packs/core/rules/consumer_required_subfields.json";
+    check("CCODE-55: the consumer map is promoted to registered content (one source for CI + generation)",
+      existsSync(join(root, MAP_PATH)), `${MAP_PATH} is missing — the born-whole contract has no source`);
+    check("CCODE-55: the consumer map is registered in the core manifest provides.rules (state.js loadRule finds it)",
+      (rj("content/packs/core/manifest.json").provides?.rules || []).some(r => r.includes("consumer_required_subfields")),
+      "unregistered = the engine never fetches it (SNG-064: the manifest is a WHITELIST), so the generation half of the gate is dead while this sweep stays green");
+    const mapDoc = existsSync(join(root, MAP_PATH)) ? rj(MAP_PATH) : null;
     const CT = mapDoc?.contentTypes || {};
     const warnShape = m => console.log("warn  " + m);
     const has = v => v != null && !(typeof v === "string" && !v.trim()) && !(Array.isArray(v) && !v.length);

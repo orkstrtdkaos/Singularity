@@ -303,9 +303,32 @@ export function puzzleAttempt(state, def, resolution, rules, opts = {}) {
 export function encounterReceiptForGM(state, def, resolution, roundResult) {
   const head = `ENCOUNTER — ${def.name} (${state.type}), round ${state.round}${state.status === "ended" ? " — ENDED: " + (roundResult?.outcome || "") : ""}`;
   let sides = "";
-  if (state.type === "duel") sides = `Opponent: ${def.opponent.name} — ${Math.max(0, state.opponentHealth)}/${def.opponent.health} hits${state.tactic ? `, current tactic: ${state.tactic}` : ""}. Opponent style: ${(def.opponent.tacticTags || []).join(", ")}.`;
-  if (state.type === "challenge") sides = `Progress: ${state.stagesDone.length}/${def.stages.length} stages (next: ${def.stages[state.stageIndex]?.name || "done"}).`;
-  if (state.type === "puzzle") sides = `Attempts: ${state.attempts}. Understanding gained: ${state.hintsRevealed} of ${(def.hintTiers || []).length} layers.`;
+  // SNG-250 (Erik: "this is a sealed door right? not a stranger with feet"). THIS LINE was the cause. It handed
+  // the GM `Opponent: The Sealed Door — 5/5 hits. Opponent style: …` — a combatant with a hit track and a fighting
+  // style — so the GM narrated a person: planted feet, a warding stance, a half-step back, "the two of you stand
+  // in the cold mud." It did exactly what it was told. The receipt is per-KIND now, and for an unopposed thing it
+  // opens by saying what the thing is NOT, because that is the instruction the GM was missing.
+  const kind = encounterKind(def) || "fight";
+  if (state.type === "duel" || state.mode === "skill_battle") {
+    const who = def.opponent?.name || def.name || "it";
+    const hp = state.opponentHealth != null && def.opponent?.health
+      ? ` — ${Math.max(0, state.opponentHealth)}/${def.opponent.health}` : "";
+    if (kind === "puzzle") {
+      sides = `THE SEALED THING: ${who}${hp} of its resistance left. Understanding gained: ${state.hintsRevealed ?? 0} of ${(def.hintTiers || []).length} layers.
+IT IS NOT A PERSON. It has no stance, no footing, no face, no intent, and it does not attack — it RESISTS, the same way, every time. Narrate the character working it: what they try, what the thing gives, what it withholds. Never give it a body, a gaze, or a reaction to being looked at.`;
+    } else if (kind === "chase") {
+      sides = `THE PURSUIT: ${who}${hp} of their wind left. This is GROUND and BREATH, not blades — narrate distance, footing, lungs, the route. Nobody is trading blows.`;
+    } else if (kind === "standoff") {
+      sides = `THE STANDOFF: ${who}${hp} of their certainty left. This is a contest of WILL — narrate what is said, what is held back, what shifts behind the eyes. NOBODY IS HURT: no weapon lands and no blood is drawn unless this becomes a fight.`;
+    } else {
+      sides = `Opponent: ${who}${hp} hits${state.tactic ? `, current tactic: ${state.tactic}` : ""}. Opponent style: ${(def.opponent?.tacticTags || []).join(", ")}.`;
+    }
+  }
+  // SNG-250: the CLASSIC-path lines only fire when the kind-shaped receipt above did NOT produce one. Otherwise a
+  // puzzle on the contest engine had its "it is not a person" instruction silently overwritten by the old attempts
+  // line — which is this same bug, one layer deeper, and is why the first fix didn't take.
+  if (!sides && state.type === "challenge") sides = `Progress: ${state.stagesDone.length}/${def.stages.length} stages (next: ${def.stages[state.stageIndex]?.name || "done"}).`;
+  if (!sides && state.type === "puzzle") sides = `Attempts: ${state.attempts}. Understanding gained: ${state.hintsRevealed} of ${(def.hintTiers || []).length} layers.`;
   const events = roundResult?.events?.length ? `This round: ${roundResult.events.join(" ")}` : "";
   // SNG-230 §6b/§7a: a FINISHER attempt — narrate the one-beat COLLAPSE, or the botched finisher MORPH (it
   // hardens; the thing knows you tried). The mechanical state already moved; this only shapes the narration.

@@ -71,7 +71,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.328";
+const APP_VERSION = "1.8.329";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8546,6 +8546,38 @@ const SB_DEFENSIVE = new Set(["shield", "ward", "resist", "conceal", "deceive"])
 /** SNG-247 Tier 2a: what the meter is CALLED in this contest — Momentum in a fight, Their Resolve in a standoff,
  *  Distance in a chase. Reads the same per-kind framing copy the frame strip's meter uses, so the receipt and the
  *  bar above it can never name the same number two different things. */
+// ---------- SNG-250 (Erik: "this is a sealed door right? not a stranger with feet") ----------
+// The MECHANICS went per-kind in SNG-247/248; the VOCABULARY did not. Every string that names the other side was
+// written when there was only one kind — a fight — so a puzzle inherited "your opponent", "their crafts", "reads
+// THEM", "finds their intent and how much resolve is behind it". A door has no intent and no resolve.
+// The lexicon is per-kind CONTENT (kinds.<kind>.lexicon), read everywhere a person-word used to be hardcoded.
+// Absent a lexicon the fight's words hold, so fights are untouched — and a kind that only authors SOME keys keeps
+// the fight's word for the rest, so a half-authored lexicon is never worse than none.
+const FIGHT_LEXICON = {
+  other: "your opponent",       // what the other side IS
+  them: "them", their: "their", they: "they", it: "they",
+  craftsLabel: "their crafts",
+  fullKit: "their full kit",
+  unreadNote: "unread — a sense read shows you the verbs",
+  readVerb: "reads THEM — sharpens the fog and sets up your next move",
+  senseHint: "Read them first — it costs the craft's energy, but it is NOT a free hit for them any more. Skip it to conserve.",
+  actionHint: "Your real move this turn.",
+};
+/** SNG-250: the words for the kind you are actually in. Pure over the loaded content. */
+/** SNG-250: a step's hint, in the words of the kind you are in — falls back to the step's own fight phrasing. */
+function sbStepHint(step) {
+  const L = sbLex();
+  if (step?.key === "sense" && L.senseHint) return L.senseHint;
+  if (step?.key === "action" && L.actionHint) return L.actionHint;
+  return step?.hint || "";
+}
+
+function sbLex() {
+  const e = activeEnc(); if (!e) return FIGHT_LEXICON;
+  const k = encounterKind(e.def) || "fight";
+  return { ...FIGHT_LEXICON, ...(CONTENT.skillBattle?.engine?.kinds?.[k]?.lexicon || {}) };
+}
+
 function sbMeterWord() {
   const e = activeEnc(); if (!e) return "momentum";
   const k = encounterKind(e.def) || "fight";
@@ -8860,7 +8892,7 @@ function skillBattlePanel() {
     return `<details class="moves-group" data-sbfam="${esc(f)}"${open ? " open" : ""}><summary class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())} <span class="hint">(${byFam[f].length})</span></summary>${chips}</details>`;
   }).join("");
   return `<div class="sb-panel">
-    <div class="sb-opponent">${esc(def.opponent?.name || "your opponent")}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
+    <div class="sb-opponent">${esc(def.opponent?.name || sbLex().other)}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
     ${(() => {
       // SNG-247 (Erik: "I want to see what options the aggressor has for skills too — fighting an NPC or
       // anything should include that the opponent has skills they can use, just like you do"). They always DID —
@@ -8877,8 +8909,9 @@ function skillBattlePanel() {
         const why = t >= 1 ? `They can ${esc(s.function)} — matchup applies when they use it.` : "Unread — you know they have a craft here, not what it is.";
         return `<span class="sb-oppcraft" title="${why}">${body}</span>`;
       }).join("");
-      const note = t >= 3 ? "their full kit" : t >= 1 ? "the verbs you can read — names need tier 3" : `unread — a sense read shows you the verbs`;
-      return `<div class="sb-oppcrafts"><span class="sb-fx-lbl">their crafts</span>${chips}<span class="hint">${esc(note)}</span></div>`;
+      const L = sbLex();
+      const note = t >= 3 ? L.fullKit : t >= 1 ? "the verbs you can read — names need tier 3" : L.unreadNote;
+      return `<div class="sb-oppcrafts"><span class="sb-fx-lbl">${esc(sbLex().craftsLabel)}</span>${chips}<span class="hint">${esc(note)}</span></div>`;
     })()}
     <div class="sb-fog">${fog ? `
       <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
@@ -8921,7 +8954,7 @@ function skillBattlePanel() {
     ${turn.senseBlinded ? `<div class="sb-spent-bar">◉ <strong>Blinded</strong> — your senses are shut this turn. <span class="hint">You go straight to your action; the read is denied you.</span></div>` : ""}
     ${sbStepTracker(turn)}
     ${turn.phase === "review" ? sbReviewCard(turn, skills) : `
-      <div class="sb-step-hint hint">${esc(step.hint)}${selCount === 2 ? ` <strong class="sb-braid-note">⋈ braided — both crafts, both effects, both costs.</strong>` : selCount === 1 ? ` <span class="hint">Pick a second craft to BRAID them.</span>` : ""}</div>
+      <div class="sb-step-hint hint">${esc(sbStepHint(step))}${selCount === 2 ? ` <strong class="sb-braid-note">⋈ braided — both crafts, both effects, both costs.</strong>` : selCount === 1 ? ` <span class="hint">Pick a second craft to BRAID them.</span>` : ""}</div>
       <div class="sb-skills">${groups}</div>
       <input id="sb-step-text" class="sb-step-text" placeholder="Shape this ${esc(step.label.toLowerCase())} in your own words (optional)…" value="${esc(turn.text[turn.phase] || "")}">
     `}
@@ -9269,7 +9302,7 @@ function contestSheetFor(def) {
   if (!eng || !def || def.skillBattle === false) return null;
   if (def.type === "duel") return synthesizeOpponentSheet(def.opponent, eng);
   if (def.type === "puzzle" && eng.kinds?.puzzle) {
-    return synthesizeStaticSheet({ resist: def.resist ?? def.difficulty, tier: def.tier,
+    return synthesizeStaticSheet({ resist: def.resist ?? def.difficulty, tier: def.holdTier,   // SNG-250: the NUMERIC craft tier, not the bestiary word
       holdName: def.holdName || "it holds", give: def.give }, eng);
   }
   return null;

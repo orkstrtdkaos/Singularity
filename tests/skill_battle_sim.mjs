@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { matchupBonus, synthesizeOpponentSheet, synthesizeStaticSheet, opponentPolicy, battleRound, phaseDenied } from "../engine/skill_battle.js";
 import { senseOpponent } from "../engine/sense.js";
-import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engine/encounters.js";
+import { startEncounter, skillBattleRound, sanitizeNewEncounter, encounterReceiptForGM } from "../engine/encounters.js";
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
 import { recordUse } from "../engine/practice.js";
 import { FRAME_KINDS, encounterKind, chaseFromFight, frameModel } from "../engine/encounterFrame.js";   // SNG-247: the kind list the colour gate checks
@@ -898,6 +898,41 @@ check("SNG-249: the appraisal COUNSEL escalates on the hard rungs — the line t
     const def = { opponent: { name: "x", threat: 900 } };
     const a = appraiseOpponent(lvl20, def, synthesizeOpponentSheet(def.opponent, sb), rules, sb, {});
     return /run|escape|do not/i.test(a.counsel) && a.band.key === "flee" && a.power === p20;
+  })());
+
+// ---- SNG-250 (Erik: "this is a sealed door right? not a stranger with feet") ----
+// The mechanics went per-kind; the VOCABULARY did not, so a puzzle inherited "your opponent / their crafts /
+// finds their intent and how much resolve is behind it". The GM was then HANDED a combatant and narrated one:
+// planted feet, a warding stance, "the two of you stand in the cold mud". That receipt line was the cause.
+const doorDef250 = { id: "d250", type: "puzzle", name: "The Sealed Door", hintTiers: ["a", "b", "c"],
+  opponent: { name: "The Sealed Door", health: 5 } };
+const gmSaw = encounterReceiptForGM({ type: "puzzle", mode: "skill_battle", round: 2, opponentHealth: 4, hintsRevealed: 1, status: "active" },
+  doorDef250, null, { events: [] });
+check("SNG-250 (the one that matters): the GM is TOLD a sealed thing is not a person — no stance, no intent, no attack",
+  /NOT A PERSON/i.test(gmSaw) && /no stance/i.test(gmSaw) && /does not attack/i.test(gmSaw)
+  && !/Opponent style/i.test(gmSaw));
+check("SNG-250: a FIGHT's receipt is unchanged — it still gets an opponent with hits and a style",
+  (() => {
+    const f = encounterReceiptForGM({ type: "duel", mode: "skill_battle", round: 2, opponentHealth: 3, status: "active" },
+      { name: "A Hostile Meeting", flavor: "fight", type: "duel", opponent: { name: "the raider", health: 5, tacticTags: ["press-in"] } }, null, {});
+    return /Opponent: the raider/.test(f) && /Opponent style/.test(f);
+  })());
+check("SNG-250: a chase reads as ground and breath, a standoff as will with nobody hurt",
+  (() => {
+    const c = encounterReceiptForGM({ type: "duel", mode: "skill_battle", round: 1, status: "active" },
+      { name: "The Chase", type: "duel", flavor: "chase", opponent: { name: "the raider", health: 5 } }, null, {});
+    const so = encounterReceiptForGM({ type: "duel", mode: "skill_battle", round: 1, status: "active" },
+      { name: "The Standoff", type: "duel", flavor: "standoff", opponent: { name: "the toll-keeper", health: 5 } }, null, {});
+    return /GROUND and BREATH/.test(c) && /not blades/.test(c) && /NOBODY IS HURT/.test(so);
+  })());
+check("SNG-250: every kind that needs its own words HAS them, and a fight keeps the default",
+  ["puzzle", "chase", "standoff"].every(k => sb.kinds[k]?.lexicon?.other)
+  && !sb.kinds.fight?.lexicon);
+check("SNG-250: the craft chip no longer prints 'ward tnotable' — a numeric craft tier, not the bestiary word",
+  (() => {
+    const e = (liveKinds.exemplarEncounters || []).find(x => x.kind === "puzzle" && x.tier);
+    const d = synthesizePuzzleDef(e);
+    return typeof d.holdTier === "number" && d.holdTier > 0;
   })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

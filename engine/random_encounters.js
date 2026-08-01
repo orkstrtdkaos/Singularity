@@ -333,6 +333,10 @@ export function synthesizePuzzleDef(entry) {
     ...(entry.tier != null ? { tier: entry.tier } : {}), ...(entry.minDanger != null ? { minDanger: entry.minDanger } : {}),
     resist: Number.isFinite(entry.resist) ? entry.resist : (tierResist[entry.tier] ?? 18),
     holdName: entry.holdName || "it holds its order",
+    // SNG-250: the craft chip rendered "ward tnotable" because `tier` here is the BESTIARY tier (a word:
+    // riffraff/notable/regional/epic) while the sheet wants a NUMBER. Carry a numeric craft tier separately
+    // rather than overloading one field with two vocabularies.
+    holdTier: { riffraff: 1, notable: 2, regional: 3, epic: 4 }[entry.tier] || 2,
     hintTiers: entry.hintTiers?.length ? entry.hintTiers : (entry.stages || []).map(s => s.beat).filter(Boolean),
     codexUnlocks: entry.codexUnlocks || [],
     ...(entry.premise ? { premise: entry.premise } : {}), ...(entry.wards ? { wards: entry.wards } : {}),

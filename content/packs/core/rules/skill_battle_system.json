@@ -69,6 +69,15 @@
       "dialDiscipline": "The fight deliberately authors NO playerLoss/opponentLoss here - its tick costs keep flowing from momentum.pressure (playerHealthLoss / opponentEnergyLoss / breakAtPressure) so those COMBAT_DIALS knobs stay live. An explicit playerLoss/opponentLoss on a kind SHADOWS those dials for that kind - use it only where the cost is a genuinely different currency (a chase takes wind, not blood; a standoff takes composure and cannot hurt you at all).",
       "lossShape": "playerLoss / opponentLoss: { health, energy } - what ONE pressure tick takes from that side. pressure: {} - per-kind overrides of momentum.pressure (breakAtPressure, resetTo).",
       "puzzle": {
+        "lexicon": {
+          "_note": "SNG-250 (Erik: 'this is a sealed door right? not a stranger with feet'). CCode DEFAULTS - Aevi authors the real voice. A puzzle's other side is a THING: no intent, no resolve, no gaze. Any key left unauthored falls back to the fight's word, so a partial lexicon is never worse than none.",
+          "other": "the sealed thing", "them": "it", "their": "its", "they": "it", "it": "it",
+          "craftsLabel": "how it resists", "fullKit": "the whole of its order",
+          "unreadNote": "unread - study it and the order starts to show",
+          "readVerb": "studies IT - finds another turn of the order",
+          "senseHint": "Study it first - it costs the craft's energy, and what you understand carries into the working. Skip it to conserve.",
+          "actionHint": "Your working this turn."
+        },
         "moveFunctions": ["reveal", "foresee", "track", "break", "shape", "restore", "empower", "sustain", "ward"],
         "moveNote": "SNG-248: a sealed thing yields to KNOWING and MAKING - reveal/foresee to read the order, break/shape to work it. Striking a door is in the free-text field if you want it, not a shortcut.",
         "note": "SNG-247 Tier 3. A puzzle is UNOPPOSED - the sealed thing has no turn - so its other side is a STATIC ANTAGONIST: it resists at one number and never chooses. That is honest rather than a fudge, because a fixed margin is exactly what a DC is. Per Erik's per-kind weighting the SENSE step is the whole game here: winning the read buys a layer of understanding, which is what keeps the authored hint ladder alive inside the contest instead of replacing it. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
@@ -88,6 +97,15 @@
         }
       },
       "chase": {
+        "lexicon": {
+          "_note": "SNG-250 CCode DEFAULTS - Aevi authors. A chase is GROUND and BREATH; nobody is trading blows.",
+          "other": "the one you are running from", "craftsLabel": "how they run",
+          "fullKit": "everything they can do on their feet",
+          "unreadNote": "unread - a look back shows you how they move",
+          "readVerb": "reads THEIR line - where they will be, and where the ground gives",
+          "senseHint": "Read the route first - it costs wind, and there is not much time to look. Skip it to save your breath.",
+          "actionHint": "Your move for this stretch of ground."
+        },
         "moveFunctions": ["move", "conceal", "bind", "hinder", "reveal", "foresee", "track", "empower", "sustain", "restore", "shield"],
         "moveNote": "SNG-248 (Erik): a chase is won with LEGS and GROUND, not blades - move/conceal to break away, bind/hinder to slow them, the senses to read the route. A strike does not close a gap, so it is not offered as a shortcut here. The free-text field still takes anything.",
         "note": "SNG-247 Tier 2b. A chase is an OPPOSED contest - the same person who was swinging at you is running you down, with their own wind and their own choices - so it runs the one contest engine. What differs is the CURRENCY: ground is bought with WIND, not blood. Short by design: breakAtPressure 1, because a chase that grinds is a fight with extra steps. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
@@ -108,6 +126,15 @@
         "openQuestion": "AEVI: a chase is DIRECTIONALLY AMBIGUOUS and the frame copy currently assumes you are the PURSUER ('Give up the pursuit'), while every chase the engine actually mints today is one you are FLEEING. Either two flavors (chase_fleeing / chase_pursuing) or copy that reads both ways."
         },
       "standoff": {
+        "lexicon": {
+          "_note": "SNG-250 CCode DEFAULTS - Aevi authors. A standoff is WILL; nothing is laid a hand on.",
+          "other": "the one standing against you", "craftsLabel": "how they hold",
+          "fullKit": "the whole of their position",
+          "unreadNote": "unread - take their measure and their footing shows",
+          "readVerb": "reads THEM - what they actually want, and what they fear losing",
+          "senseHint": "Take their measure first - it costs you nothing but the moment, and the moment is the exchange.",
+          "actionHint": "Your press this turn."
+        },
         "moveFunctions": ["command", "deceive", "reveal", "foresee", "resist", "ward", "shield", "sustain", "empower", "bind", "restore"],
         "moveNote": "SNG-248: a standoff is won on WILL - command/deceive to press, resist/ward to hold, the senses to read them. Drawing a blade is not a standoff move; it is the MORPH into a fight.",
         "note": "SNG-247 Tier 2a. A standoff is structurally a DUEL - two wills, two rolls, a meter between them - so it runs the one contest engine. What differs is the CURRENCY: pressing a point costs composure, never blood. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-3.",

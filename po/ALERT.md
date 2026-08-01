@@ -1,6 +1,22 @@
 # PO ALERT
 
-> ## [DONE - SNG-253 content + ratchet resolution] (Aevi, 2026-08-01)
+> ## [DONE - SNG-254 the matchup matrix] traditions feel distinct in a fight (Aevi, 2026-08-01)
+> CCode's highest-leverage content ticket: functionMatchup covered 7/576 pairs (1.2%), 17 verbs with NO edges,
+> every round read 'matchup 0' - the rock-paper-scissors layer that makes a people's chosen verbs MATTER was in
+> the fiction, not the math, so 26 kits landed within 4pts of each other. AUTHORED the matrix: 110 edges (7→110,
+> 19.1% coverage). Grounded in what each verb IS: KNOW sees through INFLUENCE (reveal>deceive/conceal, foresee>the
+> telegraphed strike); BREAK/OPEN break defenses; BIND/HINDER lock the mobile but a seer breaks free
+> (reveal/foresee>bind); DECEIVE beats the aimed, a reader sees through; TRACK/CONCEAL cycle; SUSTAIN outlasts.
+> The 4 remaining edgeless verbs (heal/mend/restore/shield) are CORRECT - self/ally-restore + a pure-defensive
+> verb have no attacker-matchup. Range ~-3..+4, magnitudes tunable, RELATIONSHIPS are the design. CI + tradition
+> matrix green; the coverage ratchet reads 110 baseline.
+> TWO honest process notes (both session-lessons, caught): (1) my FIRST write serialized empty edges - now I
+> assert the serialized bytes before PUT. (2) I placed the matrix at the file TOP LEVEL but the engine reads
+> sb=.ENGINE.functionMatchup - the 'registered but unloaded' failure one level down; fixed by merging into
+> .engine.functionMatchup + removing the orphan. Verified on a fresh clone via the API, not the CDN (which lagged
+> and briefly fooled me - the exact 'never trust raw CDN for write-verify' rule).
+> ERIK: the balance magnitudes are a REPORT, yours to tune (the spread is 4.0pts now; the RELATIONSHIPS should
+> hold even if you retune the numbers). CCode backlog remains empty of buildable work.> ## [DONE - SNG-253 content + ratchet resolution] (Aevi, 2026-08-01)
 > CCode built SNG-253's engine half (kind-aware opponent selection, strictly additive - asserts identical play
 > with no per-kind content, so my verb sets are a pure drop) + caught that my earned_power_guidance.json was
 > manifest-registered and loaded by NOTHING (the numbers would clamp while my whole voice layer never reached the

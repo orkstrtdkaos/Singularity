@@ -60,7 +60,7 @@ import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncoun
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
-import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
+import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.323";
+const APP_VERSION = "1.8.325";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -667,6 +667,52 @@ async function seedGrownEntity() {
   return null;
 }
 
+// ---------- SNG-247: TRY EACH KIND (dev) ----------
+// Erik: "update the test encounters so I can try each of the new updates." One button per frame kind, each in its
+// own hue. Deliberately minted from the LIVE POOL rather than from synthetic defs — the authored standoffs and
+// puzzles only became reachable this build, so testing the real content is what actually proves the promotion.
+const KIND_TRY = [
+  { kind: "fight",    icon: "⚔",  label: "A fight",     watch: "the contest panel: sense → action → bonus, the pre-clamp roll breakdown, braids" },
+  { kind: "chase",    icon: "🏃", label: "A chase",     watch: "the MORPH line naming what it was, a Distance meter, losing costs wind not blood" },
+  { kind: "standoff", icon: "🗣", label: "A standoff",  watch: "Their Resolve as the meter — and it cannot hurt you, however badly it goes" },
+  { kind: "puzzle",   icon: "🧩", label: "A sealed thing", watch: "the sense step IS the game: win the read and a layer gives; the door never chooses" },
+  { kind: "hazard",   icon: "⚠",  label: "Hard ground", watch: "deliberately the FAST one — a short brutal crossing, not a five-step turn" },
+];
+
+/** SNG-247 (dev): mint and enter one encounter of the given frame KIND, from the live pool where possible. */
+function fireEncounterKind(kind) {
+  ensureTestCharacter();
+  const pool = CONTENT.randomEncounters?.encounters || [];
+  const pick = pred => pool.find(pred) || null;
+  let def = null, note = "";
+
+  if (kind === "standoff" || kind === "puzzle") {
+    const entry = pick(e => e.kind === kind) || pick(e => kind === "standoff" && e.routing === "opposed");
+    if (entry) { def = kind === "standoff" ? synthesizeStandoffDef(entry) : synthesizePuzzleDef(entry); note = entry.id; }
+  } else if (kind === "hazard") {
+    const entry = pick(e => e.routing === "challenge" && !e.kind && e.flavor !== "chase");
+    if (entry) { def = synthesizeChallengeDef(entry); note = entry.id; }
+  } else { // fight, and the fight a chase is built FROM
+    const entry = pick(e => e.routing === "duel") || pick(e => /^beast_/.test(e.id));
+    if (entry) { def = synthesizeDuelDef(entry); note = entry.id; }
+  }
+  if (!def) { renderPlay(character.activeScene?.lastTurn || null, { aside: `🔧 No pooled encounter found for kind "${kind}".` }); return; }
+
+  // A CHASE is entered the way the game enters one — by breaking from a fight — so this exercises the real chain
+  // (chaseFromFight + the pursuer's sheet + the morph stamp), not a shortcut that only looks like it.
+  if (kind === "chase") { beginChaseFromFight(def); return; }
+
+  const oppSheet = contestSheetFor(def);
+  character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+  character.customEncounters = character.customEncounters || {};
+  character.customEncounters[def.id] = def;   // the round path resolves the def by id
+  saveCharacter(character);
+  const k = KIND_TRY.find(x => x.kind === kind);
+  renderPlay(character.activeScene?.lastTurn || null, {
+    aside: `${k?.icon || "🔧"} ${esc(def.name)} — ${esc(kind)}${note ? ` (${esc(note)})` : ""}. Watch for: ${esc(k?.watch || "")}`,
+  });
+}
+
 const LEG_RUNNERS = {
   openSkillPicker: () => {
     // "spend 2 skill points / take a cross-class ability" — grant the points so it's runnable
@@ -974,6 +1020,13 @@ async function renderPreviewLegs() {
 
   chrome(`<div class="screen" style="max-width:820px">
     <h2>🧪 Preview Legs <span class="hint" style="text-transform:none">— ${verifiedActive} of ${active.length} left${cleared.length ? ` · ${cleared.length} cleared` : ""}${_previewLegsData.buildVersion ? ` · data for v${esc(_previewLegsData.buildVersion)}` : ""}</span></h2>
+    <div class="cs-block">
+      <h3 class="codex-title" style="font-size:15px">Try each kind <span class="hint" style="text-transform:none">— SNG-247: five kinds, five colours, five exit rules</span></h3>
+      <p class="hint" style="margin-bottom:8px">Each starts a real encounter of that kind, minted from the LIVE pool — so these are the authored standoffs and puzzles that only became reachable this build, not stand-ins. The button's border is the colour its frame will fly.</p>
+      <div class="kind-try-row">${KIND_TRY.map(k => `<button class="kind-try enc-kind-${k.kind}" data-firekind="${k.kind}" title="${esc(k.watch)}">
+        <span class="kind-try-name">${k.icon} ${esc(k.label)}</span>
+        <span class="kind-try-watch">${esc(k.watch)}</span></button>`).join("")}</div>
+    </div>
     <p class="hint" style="margin-bottom:12px">Legs auto-mark <strong>auto ✓</strong> when their moment happens in play${syncEnabled() ? " and report to Aevi automatically" : ""}. A leg drops out once it's verified back to Aevi (or Aevi closes it). Data authored by Aevi (<code>data/preview_legs.json</code>).</p>
     ${(() => {
       // flag a REAL lag (≥8 builds behind), not a single patch bump — the exact-equality check nagged every bump
@@ -994,6 +1047,9 @@ async function renderPreviewLegs() {
     </div>
     <div class="hint" id="legs-copied" style="margin-top:8px"></div>
   </div>`);
+
+  // SNG-247 (Erik): one button per frame kind, wired straight to the real mint-and-enter path.
+  for (const b of app.querySelectorAll("[data-firekind]")) b.onclick = () => fireEncounterKind(b.dataset.firekind);
 
   for (const b of app.querySelectorAll("[data-leg]")) b.onclick = () => {
     const map = loadLegStatus();
@@ -9416,8 +9472,12 @@ function renderPlay(turn, opts = {}) {
       const fm = frameModel(d, e.state, null, CONTENT.frameKinds);
       if (!fm) return `<div class="encounter-bar"><span class="enc-name">⚔ ${esc(d.name)}</span> <span class="enc-round">round ${st.round}</span><div class="enc-status">${status}</div></div>`;
       const prom = frameSize(d, e.state) === "takeover" ? " enc-frame-takeover" : "";
-      const meterHtml = fm.meter?.total ? `<div class="enc-frame-meter" title="${esc(fm.meter.label)}"><div class="enc-frame-meter-fill" style="width:${fm.meter.pct}%"></div></div>
-        <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.done}/${fm.meter.total}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : "";
+      // SNG-247: the meter shows whenever there IS one. The old gate was `meter.total` — a STAGE COUNT — so every
+      // kind running on the contest engine (which has a pct but no stages) rendered no meter at all: a chase with
+      // no Distance bar, a standoff with no Resolve bar. Caught by clicking the new dev buttons. The done/total
+      // text still only appears when there are stages to count.
+      const meterHtml = Number.isFinite(fm.meter?.pct) ? `<div class="enc-frame-meter" title="${esc(fm.meter.label)}"><div class="enc-frame-meter-fill" style="width:${fm.meter.pct}%"></div></div>
+        <div class="enc-frame-stage">${esc(fm.meter.label)} — ${fm.meter.total ? `${fm.meter.done}/${fm.meter.total}` : `${fm.meter.pct}%`}${fm.stage?.name ? ` · <em>${esc(fm.stage.name)}</em>` : ""}</div>` : "";
       const exitsHtml = `<div class="enc-frame-exits">${fm.exits.map(x => `<span class="enc-exit enc-exit-${x.role}"><b>${x.role}</b> ${esc(x.means)}</span>`).join("")}</div>`;
       const collapseHtml = fm.warded
         ? `<div class="enc-frame-collapse dim">⚑ Warded — a finisher cannot end this unless the ward is shattered outright; work it through.</div>`

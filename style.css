@@ -124,6 +124,18 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-kind-puzzle,   .enc-frame-puzzle   { --enc-hue: #7c6bd4; }  /* indigo — the sealed thing */
 .enc-kind-standoff, .enc-frame-standoff { --enc-hue: #5aa8a0; }  /* teal — a contest of words, not heat */
 .enc-frame { border: 1px solid var(--enc-hue, var(--danger)); border-radius: 10px; background: linear-gradient(180deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 12%, transparent), var(--panel)); padding: 10px 12px; margin: 10px 0 8px; }
+/* SNG-247 (dev): TRY-EACH-KIND buttons. Each carries the same `enc-kind-<kind>` class the play surface uses, so
+   its border is literally the hue the frame will fly — you can see which colour you're about to be in before you
+   click. One source for the colour, so a button can never advertise a hue the frame doesn't use. */
+.kind-try-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.kind-try { flex: 1 1 220px; text-align: left; display: flex; flex-direction: column; gap: 3px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 12%, transparent), var(--panel2));
+  border: 1px solid var(--enc-hue, var(--danger)); border-left-width: 4px; border-radius: 8px;
+  padding: 8px 10px; cursor: pointer; transition: background .15s, transform .08s; }
+.kind-try:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--enc-hue, var(--danger)) 24%, transparent), var(--panel2)); }
+.kind-try:active { transform: translateY(1px); }
+.kind-try-name { font-family: var(--font); font-size: 14px; color: var(--enc-hue, var(--danger)); letter-spacing: .5px; }
+.kind-try-watch { font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim); line-height: 1.35; }
 /* SNG-247 Tier 4: THE MORPH LINE. Frames have chained since SNG-230, but nothing ever said so — the border changed
    colour and the player was left to infer that the rules had changed under them. The bar reads left-to-right from
    the kind it WAS to the kind it IS, in both kinds' own hues. */

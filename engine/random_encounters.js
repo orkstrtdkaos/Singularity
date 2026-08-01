@@ -196,6 +196,15 @@ export function pickEncounter(table, location, rng = Math.random, { flavor = nul
 
 // ---------- routing: synthesize typed defs for the encounters engine ----------
 
+/** SNG-247: a readable name from an authored encounter id — `enc_the_stopped_mechanism` -> "The Stopped
+ *  Mechanism". Used where the FLAVOR title would be wrong (a puzzle's flavor is "dangerous", which the flavor map
+ *  turns into "Hard Ground"), and so each authored encounter carries its own name rather than a shared kind label. */
+function nameFromId(id) {
+  const core = String(id || "").replace(/^(enc_|re-)/, "").replace(/[_-]+/g, " ").trim();
+  if (!core) return null;
+  return core.split(" ").map((w, i) => (i && ["the", "of", "a", "an", "and"].includes(w)) ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+}
+
 function titleFromFlavor(entry) {
   const map = {
     fight: "A Hostile Meeting", chase: "The Chase", dangerous: "Hard Ground",
@@ -245,7 +254,7 @@ export function synthesizeStandoffDef(entry) {
   return {
     ...base,
     flavor: "standoff",
-    name: entry.name || "The Standoff",
+    name: entry.name || nameFromId(entry.id) || "The Standoff",
     lethal: false,
     opponent: {
       ...base.opponent, name: who,
@@ -295,7 +304,10 @@ export function frameExemplarEncounters(doc) {
 export function synthesizePuzzleDef(entry) {
   const tierResist = { riffraff: 8, notable: 18, regional: 30, epic: 42 };
   return {
-    schemaVersion: 1, id: "re-" + entry.id, type: "puzzle", name: entry.name || titleFromFlavor(entry) || "The Sealed Thing",
+    // NOT titleFromFlavor: Aevi's puzzles carry flavor "dangerous", which that map turns into "Hard Ground" — so a
+    // sealed precursor mechanism rendered under a hazard's name (caught by clicking the dev button, 2026-08-01).
+    // The authored ID is the best name available and gives each puzzle its OWN, rather than four "Sealed Thing"s.
+    schemaVersion: 1, id: "re-" + entry.id, type: "puzzle", name: entry.name || nameFromId(entry.id) || "The Sealed Thing",
     setup: entry.seed, lethal: false, avoidable: true, fromRandom: true,
     ...(entry.tier != null ? { tier: entry.tier } : {}), ...(entry.minDanger != null ? { minDanger: entry.minDanger } : {}),
     resist: Number.isFinite(entry.resist) ? entry.resist : (tierResist[entry.tier] ?? 18),

@@ -769,5 +769,36 @@ check("AEVI-247: it HOLDS rather than fights — the resist line reads as a made
   && /yield/i.test(sb.staticAntagonist.giveNote)
   && /clear|loosen|understood/i.test(Object.values(sb.staticAntagonist.degreeVoice).join(" ")));
 
+// ---- SNG-247 (Erik): TRY-EACH-KIND dev buttons ----
+// The value of these buttons is that they mint from the LIVE POOL — a button that fires a synthetic def would
+// "pass" while the authored content stayed unreachable, which is the exact thing this build fixed.
+const appTry = readFileSync(join(root, "app.js"), "utf8");
+const cssTry = readFileSync(join(root, "style.css"), "utf8");
+check("SNG-247 dev: there is one try-button per frame kind, and no kind is missing one",
+  Object.keys(FRAME_KINDS).every(k => new RegExp(`kind: "${k}"`).test(appTry.slice(appTry.indexOf("const KIND_TRY")))));
+check("SNG-247 dev: the buttons mint from the LIVE POOL, not from synthetic defs",
+  /CONTENT\.randomEncounters\?\.encounters/.test(appTry.slice(appTry.indexOf("function fireEncounterKind"), appTry.indexOf("const LEG_RUNNERS"))));
+check("SNG-247 dev: the CHASE button goes through the real chain (beginChaseFromFight), not a shortcut that only looks like one",
+  /if \(kind === "chase"\) \{ beginChaseFromFight\(def\); return; \}/.test(appTry));
+check("SNG-247 dev: each button wears the SAME enc-kind-<kind> class the play surface does — it cannot advertise a hue the frame won't fly",
+  /class="kind-try enc-kind-\$\{k\.kind\}"/.test(appTry) && /\.kind-try\s*\{[^}]*var\(--enc-hue/.test(cssTry));
+check("SNG-247 dev: every button is wired to a handler (a dev button that does nothing is worse than no button)",
+  /\[data-firekind\]/.test(appTry) && /fireEncounterKind\(b\.dataset\.firekind\)/.test(appTry));
+
+// Two bugs the dev buttons found the moment they were clicked (2026-08-01) — both invisible to every prior test.
+check("SNG-247 dev-found: an authored puzzle gets its OWN name, not the flavor map's (a sealed mechanism read as 'Hard Ground')",
+  (() => {
+    const p = (liveKinds.exemplarEncounters || []).find(e => e.id === "enc_the_stopped_mechanism");
+    return p && synthesizePuzzleDef(p).name === "The Stopped Mechanism";
+  })());
+check("SNG-247 dev-found: every authored exemplar mints a DISTINCT name — four puzzles are not four 'Sealed Thing's",
+  (() => {
+    const names = (liveKinds.exemplarEncounters || []).map(e =>
+      (e.kind === "puzzle" ? synthesizePuzzleDef(e) : e.kind === "standoff" ? synthesizeStandoffDef(e) : { name: e.id }).name);
+    return new Set(names).size === names.length;
+  })());
+check("SNG-247 dev-found: the frame's meter renders on a CONTEST-engine kind — the old gate was a stage count, so a chase had no Distance bar",
+  /Number\.isFinite\(fm\.meter\?\.pct\)/.test(readFileSync(join(root, "app.js"), "utf8")));
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -1,5 +1,37 @@
 # PO ALERT
 
+> ## [CCODE-48 complete_pending_review + SNG-246 Fix A NEEDS A RULING - CCode, 2026-07-31] The debris cleaned (v1.8.316 `13e29e46`)
+> Erik: *"clean all that up and do the fixes."* Three cleanups done. All three were **"advertised but inert"** - the
+> worst class, because the content AND the tests both claimed the feature existed.
+> **1. An invented verb, and a counterplay that could never fire.** CCODE-41 added `conceal_deep` to
+> `persistentEffects.byFunction`. It is **not one of the 24 canonical verbs - I made it up** - so no craft could ever
+> carry it and "senses blinded" could never land. I "fixed" it once mid-session on a wrong theory, the fix was lost
+> in a revert, **and my own status report then repeated the claim that it was fixed.** Now on `deceive` (a real verb),
+> invented key deleted, and a new test asserts **every** key in byFunction is a real verb - so the class cannot recur.
+> **2. `phaseDenied` had ZERO consumers.** I built the helper, exported it, authored its content and wrote three
+> tests - and never called it. The blinding counterplay was decorative. Now consumed in `skillBattlePanel`: a blinded
+> fighter is skipped past SENSE with a visible **"Blinded - your senses are shut this turn"** bar. *The wiring
+> audit's "NEW export with no consumer" note had been listing it every run; I read past it because tests were green.*
+> **3. A round is a TURN, not a step.** Action and bonus each advanced the counter, so a three-turn fight read as
+> round 6. Only the step that ENDS the turn advances it now.
+> npm test exit 0 (19 seams, rawProseCaps 63) + 3 new checks. Boot verified on never-used port 8424, no console errors.
+> **SNG-246 FIX A - NOT BUILT, AND I NEED A RULING.** The ticket is "a committed fight goes structured by ENGINE,
+> not the GM's memory of rule 18." The clean hook exists: `harmGateFor` already fires when a player commits a
+> lethal-rung craft. **But it does not name a TARGET** - it only knows the craft can kill. So minting a duel from a
+> committed harm action means the engine inventing *who* is being fought - exactly the guess that produces phantom
+> entities (cf. `seam_travelTo_is_place`, where a person got minted as a destination). **Three options:**
+> **(a)** mint a duel against the most recently-met NPC - cheap, wrong whenever the scene holds more than one person;
+> **(b)** the engine sets a HARD directive next turn ("you MUST frame this as a bounded encounter carrying
+> encounterId") - reuses the proven `encounterOfferDetail` machinery and invents nothing, but is a directive rather
+> than true enforcement; **(c)** extend `harmGateFor` to carry the target the player actually chose - the right fix,
+> and the largest. **My recommendation: (c), with (b) as the fallback** when a target still cannot be resolved.
+> I did not guess at it: having just spent this ticket correcting three things I had previously reported as done,
+> inventing an opponent-resolution rule at the tail of a long session is the wrong instinct.
+> **SNG-246 Fix C** is now largely covered - `frameExits` surfaces defeat/flee/fail and CCODE-42 gave finish
+> conditions honest situational odds. What remains is the fight->chase morph being *visible*, which is small.
+> Results: po/results/20260731_CCODE-48_cleanup.md
+
+
 > ## [CCODE-43 + CCODE-47 complete_pending_review — CCode, 2026-07-31] Items are functional in a fight · waiting is visible · a Haiku beat before the big telling (v1.8.314 `9aff593f`, v1.8.315 `f81f4a5c`)
 > **CCODE-47 — waiting is visible.** Erik: *"locking in the sense choice didn't indicate we were waiting for the
 > results.... might want to have it be obvious somehow."* A dashed banner with a spinner names what is in flight —

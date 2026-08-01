@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 91,
+  "energy": 95,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -106,64 +106,64 @@
       },
       {
         "player": null,
-        "summary": "Loki reads the sealed door — it is bracing, not barring, weight-heavy on the right.",
-        "narration": "The door tells you everything, if you look rather than push. The resistance is not even — there is a slight give on the left side, a hairline's worth, where the rightward brace takes more of the load. Whatever holds it is bracing, not barring: it is set to absorb force, not to stop a mind. Cy's lens irises, reading the same geometry you are, and says nothing."
+        "summary": "Loki reads the keeper with Prism Sight — striker's heat, forward weight, coiled arm.",
+        "narration": "You let your eyes ease out of focus and open the Prism Sight. Heat blooms off the keeper in faint copper-rose layers — the tight flush of held breath at the throat, a bright smear of warmth along the right forearm where the muscle is already wound. Their weight has shifted forward onto the balls of their feet. They are not waiting to be persuaded. They are waiting for an opening."
       }
     ],
     "lastTurn": {
-      "narration": "The door tells you everything, if you look rather than push. The resistance is not even — there is a slight give on the left side, a hairline's worth, where the rightward brace takes more of the load. Whatever holds it is bracing, not barring: it is set to absorb force, not to stop a mind. Cy's lens irises, reading the same geometry you are, and says nothing.",
-      "sceneSummary": "Loki reads the sealed door — it is bracing, not barring, weight-heavy on the right.",
+      "narration": "You let your eyes ease out of focus and open the Prism Sight. Heat blooms off the keeper in faint copper-rose layers — the tight flush of held breath at the throat, a bright smear of warmth along the right forearm where the muscle is already wound. Their weight has shifted forward onto the balls of their feet. They are not waiting to be persuaded. They are waiting for an opening.",
+      "sceneSummary": "Loki reads the keeper with Prism Sight — striker's heat, forward weight, coiled arm.",
       "choices": [
         {
-          "label": "Strike the weaker left side with a focused sonic pulse — bypass the brace where it gives",
-          "attribute": "practical",
+          "label": "Throw a pulse of sound at their weapon hand before they can strike — knock it wide.",
+          "attribute": "mental",
           "subAttribute": "craft",
           "difficulty": 15,
           "intentTags": [
             "attack",
-            "press"
+            "feint"
           ],
           "abilityId": "sonic_resonance",
           "energyCost": 8,
           "trivial": false
         },
         {
-          "label": "Study the right brace more carefully before committing — find where the ward actually anchors",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Use Prism Sight to read the heat trace on the door's surface — something or someone worked this lock recently",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Drive in close and land the first blow yourself — press the opening before they find theirs.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "scout",
-            "study"
+            "attack"
           ],
-          "abilityId": "prism_sight",
+          "abilityId": "hunters_strike",
           "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Abandon the door for now — note what you've learned and come back with more information",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
+          "label": "Step back and let them commit — absorb their strike and make them pay for missing.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
+            "defend",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false
+        },
+        {
+          "label": "Break eye contact and yield the standoff — walk away before this becomes blood.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "defend"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null
         }
       ],
       "scene": {
@@ -171,59 +171,71 @@
         "npcsPresent": [
           {
             "name": "Ossivyn Tallow",
-            "state": "Moving back from the gate toward the orchard proper, record book closed under one arm, unhurried."
+            "state": "Stopped — watching the standoff from several paces back, record book still under one arm."
           },
           {
             "name": "Cy",
-            "state": "Lens irising, reading the door geometry alongside Loki, silent."
+            "state": "Motionless at Loki's left heel, lens locked on the keeper."
+          },
+          {
+            "name": "The Keeper of the Toll",
+            "state": "Weight forward on the balls of both feet, right arm wound tight with coiled intent — waiting for an opening."
           }
         ],
         "objects": [
           "Freshly-planted sapling in tamped earth",
           "Small unlabeled iron marker stake driven beside the root base",
           "Closed record book (carried by Ossivyn)",
-          "Gate post with newly-straightened hinge",
-          "The sealed door — resistance concentrated on the right brace, slight give on the left"
+          "Gate post with newly-straightened hinge"
         ],
         "threads": [
-          "The door's right brace bears the load — the ward is absorbing force, not simply blocking passage",
-          "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
-          "The regulator signal moving downstream — no one upstream knows to expect it",
-          "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
+          "The keeper's intent is plain — they mean to strike first if given a chance.",
+          "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed.",
+          "The regulator signal moving downstream — no one upstream knows to expect it.",
+          "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing."
         ]
-      }
+      },
+      "encounterOps": [
+        {
+          "op": "tactic",
+          "tag": "striker"
+        }
+      ]
     },
     "sceneState": {
       "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
       "npcsPresent": [
         {
           "name": "Ossivyn Tallow",
-          "state": "Moving back from the gate toward the orchard proper, record book closed under one arm, unhurried."
+          "state": "Stopped — watching the standoff from several paces back, record book still under one arm."
         },
         {
           "name": "Cy",
-          "state": "Lens irising, reading the door geometry alongside Loki, silent."
+          "state": "Motionless at Loki's left heel, lens locked on the keeper."
+        },
+        {
+          "name": "The Keeper of the Toll",
+          "state": "Weight forward on the balls of both feet, right arm wound tight with coiled intent — waiting for an opening."
         }
       ],
       "objects": [
         "Freshly-planted sapling in tamped earth",
         "Small unlabeled iron marker stake driven beside the root base",
         "Closed record book (carried by Ossivyn)",
-        "Gate post with newly-straightened hinge",
-        "The sealed door — resistance concentrated on the right brace, slight give on the"
+        "Gate post with newly-straightened hinge"
       ],
       "threads": [
-        "The door's right brace bears the load — the ward is absorbing force, not simply blocking passage",
-        "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
-        "The regulator signal moving downstream — no one upstream knows to expect it",
-        "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
+        "The keeper's intent is plain — they mean to strike first if given a chance.",
+        "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed.",
+        "The regulator signal moving downstream — no one upstream knows to expect it.",
+        "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 11,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [],
@@ -248,7 +260,7 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 10
+    "turnsSinceOffer": 11
   },
   "bio": null,
   "subAttributes": {
@@ -261,7 +273,7 @@
     "craft": 6,
     "wits": 8
   },
-  "pendingSubPoints": 0,
+  "pendingSubPoints": 2,
   "skillPoints": 3,
   "discoveries": [],
   "codex": {
@@ -292,51 +304,60 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785608420941,
-  "rev": 63,
+  "updatedAt": 1785613610804,
+  "rev": 68,
   "activeEncounter": {
-    "defId": "re-enc_the_sealed_door",
+    "defId": "re-enc_the_toll_keeper",
     "state": {
       "schemaVersion": 1,
-      "encounterId": "re-enc_the_sealed_door",
-      "type": "puzzle",
+      "encounterId": "re-enc_the_toll_keeper",
+      "type": "duel",
       "status": "active",
       "round": 1,
       "log": [
-        "r1: reveal vs ward → momentum 0"
+        "r1: reveal vs strike → momentum 0"
       ],
-      "attempts": 0,
-      "hintsRevealed": 1,
-      "solved": false,
+      "opponentHealth": 6,
+      "tactic": null,
       "mode": "skill_battle",
       "opponentSheet": {
-        "static": true,
-        "staticResist": 18,
-        "resistLabel": "it holds — not fighting you, simply made to hold, and made well",
-        "attributes": {},
-        "subAttributes": {},
-        "alignment": {},
+        "name": "the keeper of the toll",
+        "attributes": {
+          "practical": 3,
+          "physical": 3,
+          "mental": 3,
+          "social": 3
+        },
+        "energy": 88,
+        "maxEnergy": 88,
+        "tacticTags": [
+          "hold-the-line",
+          "name-a-price",
+          "read-you"
+        ],
         "skills": [
           {
-            "function": "ward",
-            "name": "it holds its order",
-            "tier": 2
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 2,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 2,
+            "attribute": "practical"
           }
         ],
-        "energy": 60,
-        "tacticTags": [
-          "unmoving"
-        ]
+        "synthesized": true
       },
       "momentum": 0,
-      "opponentHealth": 5,
-      "opponentEnergy": 55,
+      "opponentEnergy": 83,
       "turn": {
         "phase": "action",
         "sel": {
           "sense": [
-            8,
-            9
+            4
           ],
           "action": [],
           "bonus": []
@@ -346,11 +367,11 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": 8,
+        "setupBonus": 9,
         "bonusEarned": true,
         "senseDone": true,
-        "senseLine": "You read with Size them up (Wits) ⋈ Reason it out (Reason) — success. You have the read (+8 to your action). The opening is there — you have earned a BONUS action. You read they: they favour ward. Pick a craft that answers it.",
-        "readPayoff": "You read they: they favour ward. Pick a craft that answers it."
+        "senseLine": "You read with Prism Sight — success. You have the read (+9 to your action). The opening is there — you have earned a BONUS action. You read the keeper of the toll: they favour strike. Pick a craft that answers it.",
+        "readPayoff": "You read the keeper of the toll: they favour strike. Pick a craft that answers it."
       },
       "effects": [
         {
@@ -360,18 +381,8 @@
           "roundsLeft": 2,
           "applies": "always",
           "side": "player",
-          "source": "Reason it out (Reason)",
+          "source": "Prism Sight",
           "from": "player"
-        },
-        {
-          "kind": "ward",
-          "label": "warded",
-          "value": 4,
-          "roundsLeft": 2,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "source": "it holds its order",
-          "from": "opponent"
         }
       ],
       "pressure": {
@@ -382,39 +393,47 @@
         "player": false,
         "opponent": false
       },
-      "lastOppFn": "ward",
+      "lastOppFn": "strike",
       "lastOppReceipt": {
-        "roll": 0,
-        "chance": 18,
-        "rawChance": 18,
-        "margin": 18,
+        "roll": 59,
+        "chance": 70,
         "degree": "success",
+        "action": {
+          "attribute": "practical",
+          "abilityLevel": 2,
+          "label": "a hard strike",
+          "axes": {}
+        },
         "breakdown": {
-          "contestMods": [
+          "components": [
             {
-              "label": "it holds — not fighting you, simply made to hold, and made well",
-              "value": 18
+              "label": "practical 3",
+              "value": 60
             },
             {
-              "label": "matchup (ward vs reveal)",
-              "value": 0
+              "label": "ability rank 2",
+              "value": 10
             }
           ],
-          "static": true
+          "total": 70,
+          "clampedFrom": null,
+          "base": "practical",
+          "opposed": null
         },
+        "rawChance": 70,
+        "margin": 11,
         "matchup": 0,
         "intensity": "standard",
         "tier": 2,
-        "function": "ward",
-        "name": "it holds its order",
+        "function": "strike",
+        "name": "a hard strike",
         "effectMods": [],
-        "woven": null,
-        "static": true
+        "woven": null
       },
       "lastReadWasSense": true,
       "senseTierEarned": 3,
       "senseResist": {
-        "value": 0,
+        "value": 9,
         "label": "their natural guardedness",
         "from": "passive"
       }
@@ -514,7 +533,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 10
+    "valley": 11
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -522,10 +541,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T18:20:20.939Z",
+      "lastAt": "2026-08-01T19:46:50.802Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 10
+      "beats": 11
     }
   ],
   "establishedFacts": [
@@ -556,7 +575,8 @@
     "stateOps": 1,
     "characterDeltas": 3,
     "timeOps": 4,
-    "sceneEnded": 1
+    "sceneEnded": 1,
+    "encounterOps": 1
   },
   "_opTurns": 7,
   "practice": {

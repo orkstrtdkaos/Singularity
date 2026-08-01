@@ -654,7 +654,7 @@ check("SNG-247 3: the door does not roll — its resistance IS its margin, and i
 check("SNG-247 3 (SNG-106 held): the door's resistance is a NAMED line on the self-summing breakdown, not a hidden number",
   (() => {
     const mods = dr.opponent.breakdown.contestMods;
-    return mods.some(m => /resists/i.test(m.label) && m.value === 20)
+    return mods.some(m => m.label === sb.staticAntagonist.resistLabel && m.value === 20)
       && mods.reduce((a, m) => a + (m.value || 0), 0) === dr.opponent.margin;
   })());
 check("SNG-247 3: a bind laid on the door still WEAKENS it — the static side is not immune to the contest, only unmoving",
@@ -736,6 +736,38 @@ check("SNG-247: the pool's eligibility filter admits `opposed` — without it th
   })());
 check("SNG-247: a quiet place does NOT surface the weightier ones — tier became minDanger, so they are danger-gated like every other entry",
   eligibleEncountersFor({ encounters: pooled }, { dangerLevel: 0 }, { cap: 50 }).length < pooled.length);
+
+// ---- AEVI-247-AUTHOR: the per-kind VOICE merged, mechanics untouched ----
+// Aevi authored the four judgment calls as voice. Two things had to be got right in the merge: her `playerBreaks`
+// is the engine's `playerOvercome` (one vocabulary, not two), and her `degreeVoice` needed a READER or it would
+// have been authored-and-inert — the exact class this whole ticket keeps closing.
+check("AEVI-247: each kind now sounds like ITSELF — a puzzle is UNDERSTOOD, a chase is WIND, a standoff is COMPOSURE",
+  /understanding closer to open|comes clear/i.test(sb.kinds.puzzle.pressureLabel.opponent)
+  && /wind|breath/i.test(sb.kinds.chase.outcomes.playerOvercome)
+  && /certainty|PERSUADED/i.test(sb.kinds.standoff.outcomes.opponentYields));
+check("AEVI-247 (the merge could have broken this): the voice pass did NOT undo the no-blood rulings",
+  ["puzzle", "chase", "standoff"].every(k => sb.kinds[k].outcomes.losingCostsHealth === false)
+  && sb.momentum.pressure.playerHealthLoss === 3);   // and the fight still pays in blood
+check("AEVI-247: her `playerBreaks` landed under the engine's `playerOvercome` — one vocabulary, so the line actually prints",
+  ["puzzle", "chase", "standoff"].every(k => typeof sb.kinds[k].outcomes.playerOvercome === "string"
+    && sb.kinds[k].outcomes.playerOvercome.length > 20));
+check("AEVI-247: the static antagonist's degreeVoice has a READER — an authored voice nothing prints is the inert class",
+  (() => {
+    const sheet = synthesizeStaticSheet({ resist: 60 }, sb);   // resists hard -> a high band
+    const def = { id: "d2", type: "puzzle", name: "The Sealed Door", hintTiers: ["a"] };
+    const rr = skillBattleRound(startEncounter(def, { oppSheet: sheet }), def,
+      { function: "break", tier: 1, attribute: "practical", intensity: "conserve", name: "force it" },
+      { character: { attributes: { practical: 1 }, energy: 100, health: 40, skills: {} },
+        rules, sb, steps, rng: seqRng([0.9, 0.9]) });
+    const said = rr.events.join(" ");
+    return Object.values(sb.staticAntagonist.degreeVoice).some(v => said.includes(v));
+  })());
+check("AEVI-247: it HOLDS rather than fights — the resist line reads as a made thing, not an opponent",
+  // assert what the voice IS, not a keyword ban — Aevi's line legitimately contains "not fighting you", and a
+  // naive blocklist would have rejected the very phrasing that makes her point.
+  /hold/i.test(sb.staticAntagonist.resistLabel)
+  && /yield/i.test(sb.staticAntagonist.giveNote)
+  && /clear|loosen|understood/i.test(Object.values(sb.staticAntagonist.degreeVoice).join(" ")));
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

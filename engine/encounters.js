@@ -145,6 +145,15 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
   if (senseBoughtALayer && s.hintsRevealed > (state.hintsRevealed || 0)) events.push("A layer gives — you understand it better than you did.");
+  // SNG-247 (AEVI-247-AUTHOR): a STATIC antagonist gets Aevi's degree VOICE — "a piece gives — you feel the thing
+  // loosen toward you" rather than a foe's win/loss line. Her whole ruling for this kind is that a sealed thing
+  // YIELDS to being understood and never fights, so the round has to say that in its own register. Wired here
+  // rather than merged as content-with-no-reader: an authored voice nothing prints is the inert class again.
+  if (r.opponent?.static) {
+    const band = { crit_success: "crit", success: "success", partial: "partial", failure: "failure", crit_failure: "failure" }[r.opponent.degree];
+    const line = sb?.staticAntagonist?.degreeVoice?.[band];
+    if (line) events.push(line);
+  }
   // SNG-247 Tier 2a: the ENDING is per-kind too. A standoff does not "break" and a chase does not "fall", and —
   // the part that matters mechanically — losing a standoff must not cost BLOOD. `outcomes.losingCostsHealth:
   // false` is the ruling that a contest of wills cannot hurt you; being pressed until someone draws is a MORPH

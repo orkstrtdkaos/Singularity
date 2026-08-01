@@ -47,10 +47,11 @@
     "staticAntagonist": {
       "note": "SNG-247 Tier 3. The other side of an UNOPPOSED encounter - a sealed door, hard ground. It never chooses (opponentPolicy returns early) and never rolls (rollSide returns its standing resistance). Its resistance enters as a NAMED contestMod on the same self-summing breakdown as every other term, so a bind laid on the door still weakens it AND the player can see that it did.",
       "defaultResist": 18,
-      "resistLabel": "it resists, unmoving",
+      "resistLabel": "it holds — not fighting you, simply made to hold, and made well",
+      "degreeVoice": {"crit": "the whole order comes clear at once — it has no answer to being understood", "success": "a piece gives — you feel the thing loosen toward you", "partial": "it holds, but you've learned the shape of how", "failure": "it holds, and closes a little — it has taken your measure now"},
       "holdFunction": "ward",
       "defaultGive": 60,
-      "giveNote": "its 'energy' is how much give is left in it - pressure ticks spend it down, which IS understanding it better",
+      "giveNote": "each thing you understand about it is give taken out of it; it does not tire, it YIELDS — the door was always going to open for whoever read it right",
       "degreeBands": { "crit": 40, "success": 15, "partial": 0, "failure": -15 }
     },
     "kinds": {
@@ -63,13 +64,13 @@
         "opponentLoss": { "health": 0, "energy": 25 },
         "pressure": { "breakAtPressure": 2, "playerBreaksAtPressure": 3 },
         "pressureLabel": {
-          "player": "The thing defeats your reading - you have spent effort and learned only what does not work.",
-          "opponent": "It gives a little - the shape under the shifting is clearer than it was."
+          "player": "the sealed thing gives you nothing back — an approach fails, and you've spent effort learning it was the wrong one",
+          "opponent": "a piece of the order comes clear — {them} loosens toward you, one understanding closer to open"
         },
         "outcomes": {
-          "opponentYields": "It gives - the mechanism yields its answer.",
-          "opponentBreaks": "It gives - the mechanism yields its answer.",
-          "playerOvercome": "The thing holds. You have nothing left to try with today - it stays sealed.",
+          "opponentYields": "the last of it gives — {them} opens on what it kept, and it was always going to be whoever read it right",
+          "opponentBreaks": "the last of it gives — {them} opens on what it kept, and it was always going to be whoever read it right",
+          "playerOvercome": "you're spent on it — the thing stays sealed, and it has learned you now; come back warier or leave it to its keeping",
           "losingCostsHealth": false,
           "healthNote": "A sealed thing that BITES is a hazard wearing a puzzle's clothes - author the bite as a landed effect (persistentEffects) rather than as damage on the loss, so the player sees what hurt them."
         }
@@ -80,13 +81,13 @@
         "opponentLoss": { "health": 0, "energy": 18 },
         "pressure": { "breakAtPressure": 1, "playerBreaksAtPressure": 1 },
         "pressureLabel": {
-          "player": "{them} closes the gap - you are losing ground, and your wind with it.",
-          "opponent": "You open real ground on {them} - they are falling behind."
+          "player": "{them} closes — the gap shrinks the wrong way and your wind goes with it",
+          "opponent": "you open the gap — {them} is losing you, breath by hard breath"
         },
         "outcomes": {
-          "opponentYields": "You are away clean - {them} gives it up.",
-          "opponentBreaks": "You are away clean - {them} has nothing left to give chase with.",
-          "playerOvercome": "{them} runs you down - the gap closes and the ground is gone.",
+          "opponentYields": "{them} falls off the pace — blown, or beaten to the ground you needed; either way, clear",
+          "opponentBreaks": "{them} falls off the pace — blown, or beaten to the ground you needed; either way, clear",
+          "playerOvercome": "your wind goes — {them} runs you down, or you lose them and the thing you were chasing both; if you were fleeing a fight, it's on you again",
           "losingCostsHealth": false,
           "healthNote": "losingCostsHealth:false because being CAUGHT is not damage - it is the fight resuming (FRAME_TRANSITIONS chase.fail = fight). The toll comes from the fight you dropped back into."
         },
@@ -102,9 +103,9 @@
           "opponent": "{them}'s certainty cracks - they are closer to standing aside than they were."
         },
         "outcomes": {
-          "opponentYields": "{them} yields the point and stands aside.",
-          "opponentBreaks": "{them}'s certainty gives out - they stand aside.",
-          "playerOvercome": "{them} prevails - you yield the point, or withdraw with it unresolved.",
+          "opponentYields": "{them}'s certainty gives — they stand aside, or grant the point; not beaten, PERSUADED, and they'll remember it went to you clean",
+          "opponentBreaks": "{them}'s certainty gives — they stand aside, or grant the point; not beaten, PERSUADED, and they'll remember it went to you clean",
+          "playerOvercome": "your position collapses — you've lost the exchange, and {them} holds the ground you were contesting; nothing was laid a hand on, and you feel it anyway",
           "losingCostsHealth": false,
           "healthNote": "losingCostsHealth:false is the RULING that a contest of wills cannot hurt you. A toll-keeper who draws is a MORPH into a fight - a different mechanic - not a standoff that deals damage."
         }

@@ -284,14 +284,19 @@
         "player": "Bring your mouth to hers",
         "summary": "In the dry storage alcove of the Half-Cathedral's eastern tower, deep in early-spring night, Loki kissed Vessin Tallow-bark and she met it without hesitation — her hand at their face, her other hand finding their coat — and after, she said she was going to stop calculating the cost of this. Just for now.",
         "narration": "You lean in and bring your mouth to hers.\n\nShe meets it. Not with surprise — she is past surprise — but with the directness of someone who has decided, and this is what a decision looks like when it has finished becoming one. Her hand, still at the side of your face, stays there. The other one comes up to find the front of your coat.\n\nThe candle in the wall-crack burns on, indifferent. Cy does not stir. The open nave beyond the door holds its deep-night quiet, and the scaffold above says nothing, and the tower says nothing, and neither do you — there is nothing left to say that the kiss is not already saying better.\n\nShe pulls back a half-inch, eventually, not to end it but to breathe. Her eyes open. The dry voice, when it comes, has something underneath it that was not there before tonight. She says, quietly, that she thinks she is going to stop calculating the cost of this. Just for now. She says it as if testing a new instrument — careful, and a little amazed that it works."
+      },
+      {
+        "player": "Ask her if she would like to be the one in control, or to be the one receiving, or to share jointly for the next act.",
+        "summary": "Loki asked plainly; Vessin answered plainly — neither leading, neither apart.",
+        "narration": "You pull back enough to speak, and you ask her plainly — her eyes are still on yours, and the question deserves a straight answer. Do you want to be the one in control, you say, or the one being taken care of, or something in between where neither of you is leading?\n\nVessin considers it. Not long — she is not someone who needs long for a real question. She exhales once through her nose, and the corner of her mouth moves in a way that is not quite a smile.\n\n\"In between,\" she says. Her voice is steady and quiet and means it. \"I have spent enough of today in charge of things.\"\n\nShe brings her hand back to your coat, deliberate and unhurried, and the look in her eyes has settled into something clear and comfortable — a person who has named what she wants and is not embarrassed to have named it."
       }
     ],
     "lastTurn": {
-      "narration": "You lean in and bring your mouth to hers.\n\nShe meets it. Not with surprise — she is past surprise — but with the directness of someone who has decided, and this is what a decision looks like when it has finished becoming one. Her hand, still at the side of your face, stays there. The other one comes up to find the front of your coat.\n\nThe candle in the wall-crack burns on, indifferent. Cy does not stir. The open nave beyond the door holds its deep-night quiet, and the scaffold above says nothing, and the tower says nothing, and neither do you — there is nothing left to say that the kiss is not already saying better.\n\nShe pulls back a half-inch, eventually, not to end it but to breathe. Her eyes open. The dry voice, when it comes, has something underneath it that was not there before tonight. She says, quietly, that she thinks she is going to stop calculating the cost of this. Just for now. She says it as if testing a new instrument — careful, and a little amazed that it works.",
-      "sceneSummary": "In the dry storage alcove of the Half-Cathedral's eastern tower, deep in early-spring night, Loki kissed Vessin Tallow-bark and she met it without hesitation — her hand at their face, her other hand finding their coat — and after, she said she was going to stop calculating the cost of this. Just for now.",
+      "narration": "You pull back enough to speak, and you ask her plainly — her eyes are still on yours, and the question deserves a straight answer. Do you want to be the one in control, you say, or the one being taken care of, or something in between where neither of you is leading?\n\nVessin considers it. Not long — she is not someone who needs long for a real question. She exhales once through her nose, and the corner of her mouth moves in a way that is not quite a smile.\n\n\"In between,\" she says. Her voice is steady and quiet and means it. \"I have spent enough of today in charge of things.\"\n\nShe brings her hand back to your coat, deliberate and unhurried, and the look in her eyes has settled into something clear and comfortable — a person who has named what she wants and is not embarrassed to have named it.",
+      "sceneSummary": "Loki asked plainly; Vessin answered plainly — neither leading, neither apart.",
       "choices": [
         {
-          "label": "Stay quiet and let the night be what it is — no more words, no more naming",
+          "label": "Take the lead gently — hands and attention directed toward her, taking your cues from her breathing and the small signals her body gives.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -301,45 +306,42 @@
           "trivial": true
         },
         {
-          "label": "Ask her, softly, what she means by 'just for now' — whether there is a version of this that is not temporary",
+          "label": "Start where you left off — no ceremony, just the easy continuation of the alcove's quiet and what was already working.",
           "attribute": "social",
-          "subAttribute": "insight",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "study"
+            "romantic"
           ],
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Use Descent — name what she just did in offering that phrase, what she is actually testing with it",
+          "label": "Ask her one more thing first — what she wants you to know, before the words stop mattering.",
           "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
-          "abilityId": "descent",
-          "energyCost": 6,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Let the scene close — morning will come, and there is still a man with a crooked jaw and a grey coat somewhere in Grovehome",
-          "attribute": "mental",
-          "subAttribute": "wits",
+          "label": "Let the silence do it — no further words, just follow where her hands and her stillness are already pointing.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "romantic"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight from the landing wall-crack steady through the open door.",
+        "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight steady through the open door from the landing wall-crack.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "A half-inch back from the kiss, eyes open, one hand still at Loki's face and one at the front of their coat — quiet, and a little amazed at herself."
+            "state": "Her hand returned to Loki's coat, eyes clear and settled — has named what she wants and is at ease with having named it."
           },
           {
             "name": "Cy",
@@ -367,42 +369,24 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Met the kiss directly and without hesitation — hand at Loki's face, hand at their coat. Pulled back to breathe and said she is going to stop calculating the cost of this, just for now. Said it like someone testing a new instrument.",
+          "note": "Named her preference plainly — neither leading nor being led, something shared. Said she has spent enough of today in charge of things.",
           "learned": [
-            "She is capable of choosing not to calculate — she did it, and said so aloud.",
-            "The phrase 'just for now' may be a hedge or may be the most honest thing she has said — she does not yet know which."
+            "She knows what she wants and is not embarrassed to say it directly when asked plainly"
           ],
-          "relationshipDelta": 1,
-          "statusNote": "In the dry storage alcove, a half-inch back from the kiss, present and decided and a little amazed.",
-          "bondType": "romantic",
-          "bondStage": "courting"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "vessin-tallow-bark",
-          "label": "Vessin Tallow-bark",
-          "kind": "person",
-          "entityId": "vessin-tallow-bark",
-          "fact": "Met the kiss without hesitation — and afterward said she was going to stop calculating the cost of this, just for now. Said it like someone testing a new instrument and finding it works. The 'just for now' is either her last hedge or the most honest thing she has said tonight.",
-          "links": [
-            "grovehome",
-            "the-half-cathedral",
-            "the-man-in-the-lower-annex"
-          ]
+          "statusNote": "In the dry storage alcove, hand returned to Loki's coat, settled and clear-eyed — has named what she wants and is ready."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet, close moment — a kiss and a few words after"
+        "why": "a brief exchange in the alcove"
       }
     },
     "sceneState": {
-      "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight from the landing wall-crack steady through the open door.",
+      "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight steady through the open door from the landing wall-crack.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "A half-inch back from the kiss, eyes open, one hand still at Loki's face and one at the front of their coat — quiet, and"
+          "state": "Her hand returned to Loki's coat, eyes clear and settled — has named what she wants and is at ease with having named it."
         },
         {
           "name": "Cy",
@@ -852,7 +836,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Called the compliment the strangest she has ever received and said she will think about it a long time. Gave a plain yes to more, shifted forward, pulled her collar aside.",
         "[d2] Coat removed without hesitation; settled between Loki's legs with a long exhale, arms given over to the massage, still talking about the Rootkin in a steady voice.",
         "[d2] Descent named the true word for what she is doing. She went still, held the canvas, and said: she has not done this. The distinction from 'does not' was deliberate and she knew it. She did not move away.",
         "[d2] Named the shape of what she wants tonight: to stop somewhere without calculating the cost, to have something only for having. Admitted she stopped mapping the exit without knowing when she stopped.",
@@ -861,23 +844,24 @@
         "[d2] Turned to face Loki and put one hand against their face — held it without speaking. The appraisal is gone from her eyes. She has decided something and is not afraid of having decided it.",
         "[d2] Met the kiss directly and without hesitation — hand at Loki's face, hand at their coat. Pulled back to breathe and said she is going to stop calculating the cost of this, just for now. Said it like someone testing a new instrument.",
         "[d2] Your bond becomes romantic.",
-        "[d2] Your bond deepens — courting."
+        "[d2] Your bond deepens — courting.",
+        "[d2] Named her preference plainly — neither leading nor being led, something shared. Said she has spent enough of today in charge of things."
       ],
       "knownFacts": [
-        "Received 'priceless' as a compliment — found it strange and genuine rather than flattering; will sit with it",
         "She has not let herself want something unpriced in a long time — the distinction between 'does not' and 'has not' is the whole of it, and she named it herself.",
         "She wants, tonight, to stay somewhere without the exit already mapped — to have something that is only for having.",
         "She does not know when she stopped calculating the cost of this alcove. That is the thing she named.",
         "She did not feel the moment she stopped mapping the exit — the not-noticing is the thing that was revealed, and she knows it now.",
         "She can choose to stay somewhere without mapping the exit — she has now done it",
         "She is capable of choosing not to calculate — she did it, and said so aloud.",
-        "The phrase 'just for now' may be a hedge or may be the most honest thing she has said — she does not yet know which."
+        "The phrase 'just for now' may be a hedge or may be the most honest thing she has said — she does not yet know which.",
+        "She knows what she wants and is not embarrassed to say it directly when asked plainly"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the dry storage alcove, a half-inch back from the kiss, present and decided and a little amazed.",
+      "statusNote": "In the dry storage alcove, hand returned to Loki's coat, settled and clear-eyed — has named what she wants and is ready.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1218,7 +1202,7 @@
     "lastSharedReadAt": "2026-08-01T22:13:09.571Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 14,
+    "turnsSinceOffer": 15,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -2158,17 +2142,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.0346475247896647,
-    "cerebral": 9.652286875836824,
-    "social": 20.44004726683644,
-    "strategic": 6.858476625315907,
-    "cautious": 5.465231149197756,
-    "amorous": 16.7116912693112,
-    "generous": 5.134381828469421,
-    "ruthless": 0.4798879383595419,
-    "risky": 1.4718822366425792,
-    "patient": 0.40194456919928956,
-    "deception": 0.4678842982793399
+    "devotion": 1.983781336669923,
+    "cerebral": 9.410979703940903,
+    "social": 21.929046085165528,
+    "strategic": 6.687014709683009,
+    "cautious": 5.328600370467812,
+    "amorous": 16.29389898757842,
+    "generous": 5.0060222827576855,
+    "ruthless": 0.46789073990055335,
+    "risky": 1.4350851807265148,
+    "patient": 0.3918959549693073,
+    "deception": 0.4561871908223564
   },
   "aptitudes": [
     "silver_tongue",
@@ -2178,7 +2162,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 114,
+  "actionCount": 115,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2487,8 +2471,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785622705272,
-  "rev": 389,
+  "updatedAt": 1785622859845,
+  "rev": 390,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3258,7 +3242,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 63
+    "the_quickwood": 64
   },
   "opLossPending": false,
   "sessions": [
@@ -3313,10 +3297,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T22:18:25.271Z",
+      "lastAt": "2026-08-01T22:20:59.845Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 29
+      "beats": 30
     }
   ],
   "establishedFacts": [
@@ -3354,17 +3338,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 130,
-    "choices": 130,
+    "sceneSummary": 131,
+    "choices": 131,
     "characterDeltas": 53,
-    "scene": 130,
+    "scene": 131,
     "placeUpdates": 17,
     "codexUpdates": 87,
-    "timeOps": 121,
+    "timeOps": 122,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 25,
-    "npcUpdates": 102,
+    "npcUpdates": 103,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3378,7 +3362,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 130,
+  "_opTurns": 131,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

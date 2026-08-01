@@ -179,69 +179,88 @@
         "player": null,
         "summary": "The aggressor met Loki in the nave and lost — shaken by an elbow to the neck, they yielded without a word and left through the entrance into the night.",
         "narration": "The aggressor comes in hard — leading shoulder, full commitment, exactly the way Falsecraft said they would. You meet them without retreating a step. The strike lands on your forearm as you turn into it, bone-first, and the impact rings up to your shoulder. Your own blow goes wide but keeps going — you pivot with it, using the momentum, and your elbow finds the side of their neck. Not a killing thing. A stopping thing.\n\nThey stagger back two steps and catch themselves on the edge of a stone rib-arch, one hand going up to that neck. The aggression drains out of their posture the way water drains — fast, and then all at once. Their weight shifts back. Their eyes find yours and do the math.\n\nFor a moment the nave holds its breath. The rust-choir gnats continue their indifferent work somewhere above the south transept. Vessin has not moved, knife still up, watching.\n\nThe aggressor's hands come down. They do not say anything. They take two more steps back toward the nave's entrance, keeping you in sight the whole way — careful, now, the way they were not before — and then they are through the doorway and gone into the cold spring dark outside."
+      },
+      {
+        "player": "Check on Vessin — the knife is still up, and the fight ending doesn't mean the room is settled.",
+        "summary": "The aggressor is gone; Vessin lowers the knife but keeps it out, and puts the real question plainly: who sent him, and is there another.",
+        "narration": "Vessin has not lowered the knife.\n\nShe is watching the place where the aggressor stood — the doorway, the dark beyond it — with the careful attention of someone who has learned not to trust a thing just because it stopped moving. Her grip on the handle is relaxed. This is not panic. This is habit.\n\nYou step toward her slowly, keeping your hands visible. The gnats are still drifting near the south transept, drawn by warmth the aggressor left behind. Cy presses a little closer to the rib-arch on your left, lens open, recording the quiet.\n\n\"He's gone,\" you say to Vessin. You say it plainly, not as reassurance but as information — the kind she can use.\n\nShe lets out a breath through her nose. Her eyes move from the doorway to you, and then to the space behind you, and then back to the doorway once more before the knife finally comes down. She does not sheathe it. She holds it loose at her side, which is a different thing — present but not raised.\n\n\"I know he's gone,\" she says. \"I watched him decide to leave.\" She looks at you then with the eyes she uses for pricing things. \"What I don't know,\" she says, \"is who sent him, and whether there's a second one.\""
       }
     ],
     "lastTurn": {
-      "narration": "The aggressor comes in hard — leading shoulder, full commitment, exactly the way Falsecraft said they would. You meet them without retreating a step. The strike lands on your forearm as you turn into it, bone-first, and the impact rings up to your shoulder. Your own blow goes wide but keeps going — you pivot with it, using the momentum, and your elbow finds the side of their neck. Not a killing thing. A stopping thing.\n\nThey stagger back two steps and catch themselves on the edge of a stone rib-arch, one hand going up to that neck. The aggression drains out of their posture the way water drains — fast, and then all at once. Their weight shifts back. Their eyes find yours and do the math.\n\nFor a moment the nave holds its breath. The rust-choir gnats continue their indifferent work somewhere above the south transept. Vessin has not moved, knife still up, watching.\n\nThe aggressor's hands come down. They do not say anything. They take two more steps back toward the nave's entrance, keeping you in sight the whole way — careful, now, the way they were not before — and then they are through the doorway and gone into the cold spring dark outside.",
-      "sceneSummary": "The aggressor met Loki in the nave and lost — shaken by an elbow to the neck, they yielded without a word and left through the entrance into the night.",
+      "narration": "Vessin has not lowered the knife.\n\nShe is watching the place where the aggressor stood — the doorway, the dark beyond it — with the careful attention of someone who has learned not to trust a thing just because it stopped moving. Her grip on the handle is relaxed. This is not panic. This is habit.\n\nYou step toward her slowly, keeping your hands visible. The gnats are still drifting near the south transept, drawn by warmth the aggressor left behind. Cy presses a little closer to the rib-arch on your left, lens open, recording the quiet.\n\n\"He's gone,\" you say to Vessin. You say it plainly, not as reassurance but as information — the kind she can use.\n\nShe lets out a breath through her nose. Her eyes move from the doorway to you, and then to the space behind you, and then back to the doorway once more before the knife finally comes down. She does not sheathe it. She holds it loose at her side, which is a different thing — present but not raised.\n\n\"I know he's gone,\" she says. \"I watched him decide to leave.\" She looks at you then with the eyes she uses for pricing things. \"What I don't know,\" she says, \"is who sent him, and whether there's a second one.\"",
+      "sceneSummary": "The aggressor is gone; Vessin lowers the knife but keeps it out, and puts the real question plainly: who sent him, and is there another.",
       "choices": [
         {
-          "label": "Check on Vessin — the knife is still up, and the fight ending doesn't mean the room is settled.",
+          "label": "Tell her what you know — the man in the lower Annex, the false charge, the coin. Give her the full shape of it.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "calm",
-            "comfort"
+            "help"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Prism Sight to read the nave — someone sent that person; heat-traces might say which way they came from and whether anyone else is waiting.",
+          "label": "Use See the Made Thing — read the construction of the attack itself. What was it built to accomplish, and does it point toward a larger plan?",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "scout",
             "study"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Step outside and see where the aggressor goes — the man in the lower Annex sent one hired striker already; knowing where this one reports back to narrows who that man is.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ]
-        },
-        {
-          "label": "Stay exactly where you are and let the moment settle — the gnats, the nave, Vessin still holding a knife, and the question of who that was and why.",
+          "label": "Ask Vessin what she knows — she was here before you, she priced the room. Did she see anything before the aggressor arrived?",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "sustain"
+            "negotiate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step to the doorway and look out — check whether the aggressor left alone, and whether the dark outside holds any other warmth.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "energy": -5
-      },
       "scene": {
-        "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. Stone rib-arches frame the dark above. The south transept scaffold stands quiet. The aggressor is gone.",
+        "setting": "The Half-Cathedral nave, deep night, early spring — cold, open to the sky. Stone rib-arches frame the dark above. The south transept scaffold stands quiet. The entrance doorway is dark and still.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Still on her feet, knife raised, watching Loki — not yet certain the room is safe."
+            "state": "Standing, knife lowered to her side but not sheathed — watching the doorway, then Loki, with careful appraising eyes."
           },
           {
             "name": "Cy",
-            "state": "Lens at full iris, pressed to the edge of the nave — recording, still."
+            "state": "Pressed to the rib-arch on Loki's left, lens open, recording the quiet."
           }
         ],
         "objects": [
@@ -249,11 +268,11 @@
           "Scaffold of pale lashed timber over the south transept",
           "Eastern tower doorway — darker, quieter",
           "Low run of fallen stone at the nave's eastern edge",
-          "Cloud of rust-choir gnats — still moving through the warm air near the south transept"
+          "Cloud of rust-choir gnats — drifting near the south transept, drawn by residual warmth"
         ],
         "threads": [
           "Who sent the aggressor — the man in the lower Annex, still unnamed",
-          "Vessin is armed and the room has not quite settled",
+          "Vessin's question: is there a second one",
           "Who is working the scaffold at this hour — still unanswered"
         ]
       },
@@ -261,24 +280,27 @@
         {
           "op": "update",
           "npcId": "vessin-tallow-bark",
-          "note": "Watched Loki drive the aggressor back and out of the nave without escalating to lethal force — the knife is still up but she is reassessing.",
-          "statusNote": "Standing in the nave, knife raised, watching Loki — the threat has left but she has not yet stood down.",
-          "learned": [
-            "Loki fights with practical economy — stopped the aggressor with one blow and did not chase"
-          ]
+          "name": "Vessin Tallow-bark",
+          "note": "Lowered the knife after confirming the aggressor left — but kept it out. Asked the practical question: who sent him, and is there a second.",
+          "statusNote": "Standing in the nave, knife lowered to her side, watching the doorway — not yet settled.",
+          "relationshipDelta": 0
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short exchange while the room settles after the fight."
+      }
     },
     "sceneState": {
-      "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. Stone rib-arches frame the dark above. The south transept scaffold stands quiet. The aggressor is gone.",
+      "setting": "The Half-Cathedral nave, deep night, early spring — cold, open to the sky. Stone rib-arches frame the dark above. The south transept scaffold stands quiet. The entrance doorway is dark and still.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Still on her feet, knife raised, watching Loki — not yet certain the room is safe."
+          "state": "Standing, knife lowered to her side but not sheathed — watching the doorway, then Loki, with careful appraising eyes."
         },
         {
           "name": "Cy",
-          "state": "Lens at full iris, pressed to the edge of the nave — recording, still."
+          "state": "Pressed to the rib-arch on Loki's left, lens open, recording the quiet."
         }
       ],
       "objects": [
@@ -286,11 +308,11 @@
         "Scaffold of pale lashed timber over the south transept",
         "Eastern tower doorway — darker, quieter",
         "Low run of fallen stone at the nave's eastern edge",
-        "Cloud of rust-choir gnats — still moving through the warm air near the south tra"
+        "Cloud of rust-choir gnats — drifting near the south transept, drawn by residual "
       ],
       "threads": [
         "Who sent the aggressor — the man in the lower Annex, still unnamed",
-        "Vessin is armed and the room has not quite settled",
+        "Vessin's question: is there a second one",
         "Who is working the scaffold at this hour — still unanswered"
       ]
     }
@@ -724,7 +746,8 @@
         "[d1] Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation.",
         "[d1] Heard Descent's full naming — her want and Loki's — said no plainly and without hostility; acknowledged the craft ('you named it right'), but said this kind of thing is for people she knows. Held the door open: 'ask me something else.'",
         "[d1] Heard Loki's plain account of what she is — made, not born, the specification unfound. Answered with a real fact: she has met one person who might have been the same. Did not ask follow-up; asked instead what Loki does with not knowing. The knife is still across her knee; the appraising register…",
-        "[d1] On her feet the moment the gnats found her boot-seam — knife up, dry-voiced, waiting on Loki to identify the threat."
+        "[d1] On her feet the moment the gnats found her boot-seam — knife up, dry-voiced, waiting on Loki to identify the threat.",
+        "[d2] Lowered the knife after confirming the aggressor left — but kept it out. Asked the practical question: who sent him, and is there a second."
       ],
       "knownFacts": [
         "Noticed the craft in the air — the easing of tiredness — and marked it consciously",
@@ -737,14 +760,14 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Standing in the nave, knife raised, watching the gnat-cloud and Loki both.",
+      "statusNote": "Standing in the nave, knife lowered to her side, watching the doorway — not yet settled.",
       "domains": {
         "primary": "rootkin"
       },
       "domainsSource": "derived",
       "lastSeen": {
         "locationId": "grovehome",
-        "day": 1
+        "day": 2
       },
       "_filledFromGenerate": true,
       "_mergedFrom": "vessin-tallow-bark",
@@ -1034,7 +1057,7 @@
     "lastSharedReadAt": "2026-08-01T20:47:09.472Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1947,23 +1970,24 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.9630898761496713,
-    "cerebral": 13.973891269347188,
-    "social": 17.507242114412673,
-    "strategic": 9.458455599095716,
-    "cautious": 6.034811338800324,
-    "amorous": 6.420130706219746,
-    "generous": 5.987524631424924,
-    "ruthless": 0.8166630469580975,
-    "risky": 2.5048177627657755,
-    "patient": 0.6840206855639235,
-    "deception": 0.7962355085707052
+    "devotion": 1.9140126292459294,
+    "cerebral": 13.624543987613508,
+    "social": 18.069561061552356,
+    "strategic": 9.221994209118323,
+    "cautious": 5.8839410553303155,
+    "amorous": 6.2596274385642525,
+    "generous": 5.837836515639301,
+    "ruthless": 0.7962464707841451,
+    "risky": 2.442197318696631,
+    "patient": 0.6669201684248254,
+    "deception": 0.7763296208564376
   },
   "aptitudes": [
     "silver_tongue",
-    "scholar"
+    "scholar",
+    "orator"
   ],
-  "actionCount": 93,
+  "actionCount": 94,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2264,8 +2288,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785617313542,
-  "rev": 360,
+  "updatedAt": 1785617537959,
+  "rev": 361,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3035,7 +3059,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 42
+    "the_quickwood": 43
   },
   "opLossPending": false,
   "sessions": [
@@ -3090,10 +3114,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T20:48:33.540Z",
+      "lastAt": "2026-08-01T20:52:17.959Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 8
+      "beats": 9
     }
   ],
   "establishedFacts": [
@@ -3131,17 +3155,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 113,
-    "choices": 113,
+    "sceneSummary": 114,
+    "choices": 114,
     "characterDeltas": 51,
-    "scene": 113,
+    "scene": 114,
     "placeUpdates": 13,
     "codexUpdates": 79,
-    "timeOps": 105,
+    "timeOps": 106,
     "offer": 10,
     "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 86,
+    "npcUpdates": 87,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3155,7 +3179,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 113,
+  "_opTurns": 114,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

@@ -9,7 +9,7 @@
   "xp": 0,
   "attributes": {
     "physical": 6,
-    "mental": 6,
+    "mental": 7,
     "social": 6,
     "practical": 6
   },
@@ -29,7 +29,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 70,
+  "energy": 56,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -256,16 +256,21 @@
         "player": null,
         "summary": "Loki reads the warding stranger with Prism Sight, breaks their footing with a ground-resonance pulse, then reads the reason beneath the technique — caution, not cruelty — and carries that knowledge into the closing dark.",
         "narration": "The read comes first.\n\nYou let Prism Sight do its quiet work — eyes gone soft, light already-passed doing the telling. The stranger's heat-trace shows you the same thing the last two rounds have shown: weight back, arms wide, everything arranged to receive and redirect. They are not going to come at you. They are going to wait for you to come at them, and they are going to answer what arrives.\n\nSo you do not arrive.\n\nYou pull in a slow breath and find the resonance — not the blunt push of a thrown fist, but the specific frequency of cold air and river silt and the thin skin of mud between you. You release it low and sideways, a sharp percussive wave that hits the ground between your feet and theirs, not their body. The earth shudders. Their footing shifts. A warding stance needs the ground to be where the ground was, and for one small moment it is not.\n\nThey hold. Barely. The warded posture bends but does not break, and they absorb it with a half-step back and a short, sharp exhale.\n\nThen you follow it with the only tool that does not care about a warding stance. You stop trying to read the fight and start reading them — the reason underneath the technique, the pattern that made this particular person plant this particular way. It surfaces fast: not aggression, not anger. Caution. Every choice they have made in this fight has been the choice of someone who does not want to hurt you badly.\n\nYou have their measure now. You carry it like a held note.\n\nThe two of you stand in the cold mud of the confluence, both breathing, the light almost gone from the sky. The stranger is still in their ward. You are still on your feet. The question is still unanswered."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the stranger through Prism Sight and sees a warding fighter who is tiring.",
+        "narration": "You let Prism Sight open wide, and the stranger's last few minutes write themselves across the cold air in layered heat-traces. Their weight is still back, the warding stance still there, but the traces are thinning at the edges — the warmth behind their knees, the faint bleed of effort from their shoulders — and you can see where the commitment has gone out of it. They are still standing in the shape of a fighter, but the heat-signature of someone truly ready looks different from this, and theirs does not look like that anymore."
       }
     ],
     "lastTurn": {
-      "narration": "The read comes first.\n\nYou let Prism Sight do its quiet work — eyes gone soft, light already-passed doing the telling. The stranger's heat-trace shows you the same thing the last two rounds have shown: weight back, arms wide, everything arranged to receive and redirect. They are not going to come at you. They are going to wait for you to come at them, and they are going to answer what arrives.\n\nSo you do not arrive.\n\nYou pull in a slow breath and find the resonance — not the blunt push of a thrown fist, but the specific frequency of cold air and river silt and the thin skin of mud between you. You release it low and sideways, a sharp percussive wave that hits the ground between your feet and theirs, not their body. The earth shudders. Their footing shifts. A warding stance needs the ground to be where the ground was, and for one small moment it is not.\n\nThey hold. Barely. The warded posture bends but does not break, and they absorb it with a half-step back and a short, sharp exhale.\n\nThen you follow it with the only tool that does not care about a warding stance. You stop trying to read the fight and start reading them — the reason underneath the technique, the pattern that made this particular person plant this particular way. It surfaces fast: not aggression, not anger. Caution. Every choice they have made in this fight has been the choice of someone who does not want to hurt you badly.\n\nYou have their measure now. You carry it like a held note.\n\nThe two of you stand in the cold mud of the confluence, both breathing, the light almost gone from the sky. The stranger is still in their ward. You are still on your feet. The question is still unanswered.",
-      "sceneSummary": "Loki reads the warding stranger with Prism Sight, breaks their footing with a ground-resonance pulse, then reads the reason beneath the technique — caution, not cruelty — and carries that knowledge into the closing dark.",
+      "narration": "You let Prism Sight open wide, and the stranger's last few minutes write themselves across the cold air in layered heat-traces. Their weight is still back, the warding stance still there, but the traces are thinning at the edges — the warmth behind their knees, the faint bleed of effort from their shoulders — and you can see where the commitment has gone out of it. They are still standing in the shape of a fighter, but the heat-signature of someone truly ready looks different from this, and theirs does not look like that anymore.",
+      "sceneSummary": "Loki reads the stranger through Prism Sight and sees a warding fighter who is tiring.",
       "choices": [
         {
-          "label": "Break the ward — use the ground-read to press low and hard, force them to absorb or yield",
+          "label": "Drive into the ward — Sonic Resonance to break the stance from inside it",
           "attribute": "physical",
-          "subAttribute": "agility",
+          "subAttribute": "craft",
           "difficulty": 15,
           "intentTags": [
             "attack",
@@ -276,52 +281,48 @@
           "trivial": false
         },
         {
-          "label": "Speak across the stance — 'You don't want to hurt me. I don't want to hurt you. Tell me why you came.'",
+          "label": "Wait them out — hold still and let the exhaustion finish what the fight started",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "defend",
+            "careful"
+          ],
+          "abilityId": null,
+          "trivial": false
+        },
+        {
+          "label": "Step aside and speak — name what you saw, give them a way to put the ward down without losing face",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "calm"
+            "calm",
+            "negotiate"
           ],
           "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Lower the knife — not a surrender, but an offer. Let them choose what happens next.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "label": "Feint low — draw the ward down, then go over it",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "careful"
+            "feint",
+            "attack"
           ],
           "abilityId": null,
-          "trivial": false
-        },
-        {
-          "label": "Use Prism Sight one more time — read what they are carrying, not how they fight",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
           "trivial": false
         }
       ],
-      "characterDeltas": {
-        "energy": -12
-      },
       "scene": {
         "setting": "The braided confluence below the rise in the Disputed Zone — near-dark now, cold mud underfoot, the last thin light going out of the spring sky.",
         "npcsPresent": [
           {
             "name": "The Stranger",
-            "state": "Still in the warding stance — weight back, arms wide — breathing, holding, not pressing."
+            "state": "Still in the warding stance — weight back, arms wide — but the heat-signature of genuine readiness is thinning; they are tiring."
           },
           {
             "name": "Veln Ashpause",
@@ -336,7 +337,6 @@
           "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
           "Waterskin beside Loki in the mud",
           "boot-prints in mud ending at the water's edge",
-          "mud on Loki's coat, hands, hip, and both legs",
           "belt knife in Loki's hand"
         ],
         "threads": [
@@ -345,8 +345,12 @@
           "The Hourkeeper has pre-remembered something and will not say what.",
           "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
           "The three-hundred-year tree about to fruit and the missing person it was planted for.",
-          "You have their measure now: caution, not cruelty — but what drove them to come at you at all?"
+          "The stranger is tiring — the ward is still up but the heat behind it is going out."
         ]
+      },
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "a single read-moment, no time passes"
       }
     },
     "sceneState": {
@@ -354,7 +358,7 @@
       "npcsPresent": [
         {
           "name": "The Stranger",
-          "state": "Still in the warding stance — weight back, arms wide — breathing, holding, not pressing."
+          "state": "Still in the warding stance — weight back, arms wide — but the heat-signature of genuine readiness is thinning; they are"
         },
         {
           "name": "Veln Ashpause",
@@ -369,7 +373,6 @@
         "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
         "Waterskin beside Loki in the mud",
         "boot-prints in mud ending at the water's edge",
-        "mud on Loki's coat, hands, hip, and both legs",
         "belt knife in Loki's hand"
       ],
       "threads": [
@@ -405,20 +408,20 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 2
+    "turnsSinceOffer": 3
   },
   "bio": null,
   "subAttributes": {
     "strength": 6,
     "agility": 6,
-    "reason": 6,
+    "reason": 8,
     "insight": 6,
     "presence": 6,
     "rapport": 6,
     "craft": 6,
     "wits": 6
   },
-  "pendingSubPoints": 2,
+  "pendingSubPoints": 0,
   "skillPoints": 3,
   "discoveries": [],
   "codex": {
@@ -430,8 +433,8 @@
   "actionCount": 0,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785594840060,
-  "rev": 13,
+  "updatedAt": 1785596144458,
+  "rev": 19,
   "activeEncounter": {
     "defId": "re-enc_the_sealed_door",
     "state": {
@@ -443,10 +446,11 @@
       "log": [
         "r1: reveal vs ward → momentum 0",
         "r1: break vs ward → momentum 6",
-        "r1: reveal vs ward → momentum 4"
+        "r1: reveal vs ward → momentum 4",
+        "r2: reveal vs ward → momentum 4"
       ],
       "attempts": 0,
-      "hintsRevealed": 1,
+      "hintsRevealed": 2,
       "solved": false,
       "mode": "skill_battle",
       "opponentSheet": {
@@ -470,11 +474,14 @@
       },
       "momentum": 3.5,
       "opponentHealth": 5,
-      "opponentEnergy": 20,
+      "opponentEnergy": 15,
       "turn": {
-        "phase": "sense",
+        "phase": "action",
         "sel": {
-          "sense": [],
+          "sense": [
+            4,
+            9
+          ],
           "action": [],
           "bonus": []
         },
@@ -483,10 +490,11 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
+        "setupBonus": 7,
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with Prism Sight ⋈ Reason it out (Reason) — success. You have the read (+7 to your action). The opening is there — you have earned a BONUS action. You read they: they favour ward, and they are tiring. Pick a craft that answers it.",
+        "readPayoff": "You read they: they favour ward, and they are tiring. Pick a craft that answers it."
       },
       "effects": [
         {
@@ -521,9 +529,9 @@
       "lastOppFn": "ward",
       "lastOppReceipt": {
         "roll": 0,
-        "chance": 15,
-        "rawChance": 15,
-        "margin": 15,
+        "chance": 16,
+        "rawChance": 16,
+        "margin": 16,
         "degree": "success",
         "breakdown": {
           "contestMods": [
@@ -537,7 +545,7 @@
             },
             {
               "label": "momentum (you're on the back foot)",
-              "value": -3
+              "value": -2
             }
           ],
           "static": true
@@ -551,8 +559,8 @@
         "woven": null,
         "static": true
       },
-      "lastReadWasSense": false,
-      "senseTierEarned": null,
+      "lastReadWasSense": true,
+      "senseTierEarned": 2,
       "senseResist": {
         "value": 0,
         "label": "their natural guardedness",
@@ -587,7 +595,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 2
+    "valley": 3
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -595,10 +603,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T14:34:00.060Z",
+      "lastAt": "2026-08-01T14:55:44.456Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [],
@@ -616,14 +624,14 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 2,
-    "choices": 2,
-    "scene": 2,
+    "sceneSummary": 3,
+    "choices": 3,
+    "scene": 3,
     "stateOps": 1,
     "characterDeltas": 2,
-    "timeOps": 1
+    "timeOps": 2
   },
-  "_opTurns": 2,
+  "_opTurns": 3,
   "practice": {
     "schemaVersion": 1,
     "uses": {

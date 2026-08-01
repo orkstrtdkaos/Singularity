@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Creature",
+  "description": "One bestiary creature — a HAZARD, not a villain (the bestiary design law). DERIVED from the authored content/packs/valley/bestiary.json roster (26 entries, CCODE-55 / SNG-250 §4) so generate('creature', ctx) validates against the same shape the hand-authored creatures have. `required` is the load-bearing core every authored entry carries and every consumer reads: bestiaryEncounters (random_encounters.js) turns each into a danger-gated encounter entry, noteBeastImage (app.js) renders it from `look`, and traditionMotivationsForGM (state.js) resolves a craft's DREAD by id. Authored entries also carry `clean` (how it dies), which no consumer reads today — deliberately NOT required here, so generation is not taught to fill a field the engine ignores.",
+  "type": "object",
+  "required": ["schemaVersion", "id", "name", "tier", "class", "look", "danger", "pressures"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "id": { "type": "string", "description": "stable slug; the roster key + the creatureId encounters and quest dreads refer to. An id-less creature is FILTERED OUT of the encounter pool entirely (random_encounters.js:59) — it would not exist." },
+    "name": { "type": "string", "description": "what it is called in play — the encounter label and the image caption. Lowercase common-noun style like the authored roster ('glimmerlings', 'warpling hare'), not a proper name: it is a kind of thing, not a person." },
+    "tier": {
+      "type": "string",
+      "enum": ["riffraff", "notable", "regional", "epic"],
+      "description": "THE load-bearing field: it IS the fight's difficulty. BEAST_TIER maps it to the opponent's threat, the entry's weight, and its minDanger gate. An unknown value silently resolves to `notable`, so it must be one of these four — a creature tiered 'legendary' would fight as mid-tier without any error."
+    },
+    "class": { "type": "string", "description": "the bestiary grouping (e.g. manifested_creature, beast, precursor_construct) — rides on the encounter entry as creatureClass." },
+    "look": { "type": "string", "description": "what it looks like — read by the beast-image prompt (art.js) and folded into the encounter seed the GM narrates from. Concrete and visual; this is the only description the art has to work with." },
+    "danger": { "type": "string", "description": "what it DOES to you — the threat in prose, not a number (the number comes from tier). Folded into the encounter seed so the GM knows how it hurts." },
+    "pressures": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "which crafts answer it — the mechanics the encounter frame runs (e.g. 'KNOW (sense which are real)', 'WARD (shield the eyes)'). An empty list is the hollow-monster case: a scary description with nothing the player's crafts can engage."
+    },
+    "clean": { "type": "string", "description": "how it dies / what it leaves. Authored on all 26 roster entries but read by NO consumer today — optional, and not part of the born-whole contract." },
+    "readsAlsoFrom": { "type": "array", "items": { "type": "string" } },
+    "epicNote": { "type": "string" }
+  }
+}

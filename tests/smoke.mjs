@@ -1,6 +1,6 @@
 // Node smoke test for the pure engine modules (no browser needed).
 // Run: node tests/smoke.mjs
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from "../engine/resolve.js";
@@ -8174,12 +8174,16 @@ await (async () => {
     eligibleEncountersFor({ encounters: Array.from({ length: 20 }, (_, i) => ({ id: "x" + i, routing: "duel", flavor: "fight", minDanger: 0, weight: 1 })) }, loc231, { cap: 5 }).length === 5);
   const appSrc231 = readFileSync(join(root, "app.js"), "utf8");
   check("231 §3: listAvailableEncounters offers authored seeds AND the eligible pool (the two encounter systems now talk)",
-    // CCODE-52: the call now carries the player's POWER (the pool revolves around it). The property this check
-    // protects — seeds AND the eligible pool both reach the offer — is unchanged; only the signature moved.
-    /eligibleEncountersFor\(CONTENT\.randomEncounters, loc(,|\))/.test(appSrc231) && /don't duplicate a hand-seeded/.test(appSrc231)
+    // CCODE-52: the call now carries the player's POWER (the pool revolves around it). CCODE-55: the table
+    // argument moved from CONTENT.randomEncounters to encounterTable() — the ONE merge point that folds this
+    // character's GENERATED creatures into the authored pool. The property this check protects — seeds AND
+    // the eligible pool both reach the offer — is unchanged; only where the pool comes from moved.
+    /eligibleEncountersFor\(encounterTable\(\), loc(,|\))/.test(appSrc231) && /don't duplicate a hand-seeded/.test(appSrc231)
     && /power: characterPower\(character/.test(appSrc231));
   check("231 §3: a GM-offered POOL id routes through fireEncounter (the decline/engage beat), not a silent no-op",
-    /const entry = \(CONTENT\.randomEncounters\?\.encounters \|\| \[\]\)\.find\(e => e\.id === choice\.encounterId\)/.test(appSrc231) && /if \(entry\) \{ await fireEncounter\(entry\); return; \}/.test(appSrc231));
+    // CCODE-55: reads encounterTable() rather than CONTENT.randomEncounters, so a GM-offered GENERATED
+    // creature resolves here too — reading the raw pool would make every grown monster un-engageable.
+    /const entry = \(encounterTable\(\)\?\.encounters \|\| \[\]\)\.find\(e => e\.id === choice\.encounterId\)/.test(appSrc231) && /if \(entry\) \{ await fireEncounter\(entry\); return; \}/.test(appSrc231));
 
   // §2: the intermittent op-commit throw is now ISOLATED per op-group AND named — so the turn (and every OTHER
   // op, crucially newEncounter → a duel starts) lands even when one op throws. This is the "duel won't start" fix.
@@ -8439,7 +8443,7 @@ await (async () => {
 // runs against the REAL contract file the engine ships, not a fixture — so a map edit that guts a rule
 // turns these red rather than quietly disarming the gate in production.
 {
-  const { checkBorn, hasValue, contractedTypes } = await import("../engine/borncontract.js");
+  const { checkBorn, hasValue, contractedTypes, describeBorn } = await import("../engine/borncontract.js");
   const contract = JSON.parse(readFileSync(join(root, "content/packs/core/rules/consumer_required_subfields.json"), "utf8"));
   const VERBS = Object.values(JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8")).families || {})
     .flatMap(l => (Array.isArray(l) ? l : []).map(v => (typeof v === "string" ? v : v?.verb))).filter(Boolean);
@@ -8575,6 +8579,41 @@ await (async () => {
     "items do not go through generate(); ungated here means ungated everywhere");
   check("SNG-250 §3: a thin item is KEPT, never rejected — the fiction handed it over and §3 rates it DEGRADED",
     !/verdict === "reject"[^\n]*item/.test(appSrc250) && /added\._contract = \{/.test(appSrc250));
+
+  // CCODE-55: CREATURE generation, and the seam that makes it mean anything. §3's bar for this type is the
+  // strictest in the spec — "a whole monster is FIGHTABLE" — so minting one is only half the work.
+  {
+    const re = await import("../engine/random_encounters.js");
+    const gen = await import("../engine/generate.js");
+    check("SNG-250 §4: creature is a GEN_TYPE and its store is ensured on the character",
+      gen.GEN_TYPES.includes("creature") && !!gen.ensureGenerated({}).generated.creature);
+    check("SNG-250 §4: a derived creature schema exists (registering it is what OPENS the type)",
+      existsSync(join(root, "schemas/creature.schema.json")) &&
+      /if \(genCreature\) genSchemas\.creature = genCreature/.test(readFileSync(join(root, "engine/state.js"), "utf8")));
+    // The stub is the fallback path; if IT is hollow the contract is reintroduced-by-the-back-door.
+    const stub = gen.stubEntity("creature", { location: { name: "the Wend" } }, {});
+    check("SNG-250 §3: even the STUBBED creature is born whole AND concrete (the fallback cannot smuggle a hollow monster back in)",
+      born(stub, "creature").verdict === "clean", describeBorn(born(stub, "creature")));
+    check("SNG-250 §3: the stub tiers as `riffraff`, not `notable` — BEAST_TIER's silent fallback IS notable, so a stub tiered notable is indistinguishable from a tier-less one",
+      stub.tier === "riffraff");
+    // THE SEAM. A generated creature must reach the pool, or it is minted and no fight can ever run.
+    const charC = { generated: { creature: { "gen-thing": { id: "gen-thing", name: "the thing", tier: "notable", class: "beast", look: "l", danger: "d", pressures: ["HARM"] } } } };
+    const grown = re.generatedCreatureEncounters(charC);
+    check("SNG-250 §4 SEAM: a GENERATED creature becomes a real encounter entry (else it is minted un-fightable — the SNG-229 seam_bestiary_loaded failure, restated for generation)",
+      grown.length === 1 && grown[0].routing === "duel" && grown[0].creatureId === "gen-thing" && grown[0].fromGenerated === true);
+    check("SNG-250 §4 SEAM: a grown monster gets its threat/weight/minDanger from BEAST_TIER exactly as an authored one does (one difficulty curve, not two)",
+      (() => { const authored = re.bestiaryEncounters({ roster: [{ id: "thing", name: "the thing", tier: "notable", class: "beast", look: "l", danger: "d", pressures: ["HARM"] }] })[0];
+        return grown[0].opponent.threat === authored.opponent.threat && grown[0].minDanger === authored.minDanger && grown[0].weight === authored.weight; })());
+    check("SNG-250 §4 SEAM: a generated id can never collide with an authored one in the pool",
+      grown[0].id === "gen_beast_gen-thing" && grown[0].id !== re.bestiaryEncounters({ roster: [{ id: "gen-thing", name: "x", tier: "notable" }] })[0].id);
+    check("SNG-250 §4 SEAM: no character / no generated creatures is a clean no-op (never throws into a turn)",
+      re.generatedCreatureEncounters(null).length === 0 && re.generatedCreatureEncounters({}).length === 0);
+    check("SNG-250 §4 SEAM: EVERY app read of the encounter pool goes through the ONE merge point",
+      !/CONTENT\.randomEncounters\?\.encounters/.test(appSrc250) &&
+      !/eligibleEncountersFor\(CONTENT\.randomEncounters/.test(appSrc250) &&
+      /function encounterTable\(\)/.test(appSrc250) && /generatedCreatureEncounters\(character\)/.test(appSrc250),
+      "a raw CONTENT.randomEncounters read is back — it silently excludes every grown monster, and nothing errors");
+  }
 
   check("SNG-250 §5: the generatable set is DERIVED from genSchemas, not a hardcoded type literal",
     /GENERATABLE_TYPES = new Set\(Object\.keys\(CONTENT\.genSchemas \|\| \{\}\)\)/.test(appSrc250) &&

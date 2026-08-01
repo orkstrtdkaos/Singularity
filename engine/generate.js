@@ -23,13 +23,18 @@ import { validate, missingRequired, defaultFor } from "./genschema.js";
 import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
 import { checkBorn, describeBorn } from "./borncontract.js";  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
 
-export const GEN_TYPES = ["npc", "location", "arc"];
+// SNG-250 §4 (CCODE-55): `creature` joins npc/location/arc. It is the type §6e calls out as the one
+// generatable-ish thing that was frozen, and §3's bar for it is the strictest — "a whole monster is
+// FIGHTABLE" — which is why opening it needed the encounter-pool seam wired at the same time (a minted
+// creature that never reaches the pool is content that exists and silently does not; see
+// generatedCreatureEncounters below).
+export const GEN_TYPES = ["npc", "location", "arc", "creature"];
 const DEFAULT_SESSION_CAP = 6; // governor: mints per scene/session before we prefer reuse-only
 
 /** Ensure the per-save generated-content store exists. Lives on the character so it syncs
  *  and participates in cross-device load-latest (SNG-BATCH-7). */
 export function ensureGenerated(character) {
-  if (!character.generated) character.generated = { schemaVersion: 1, npc: {}, location: {}, arc: {} };
+  if (!character.generated) character.generated = { schemaVersion: 1, npc: {}, location: {}, arc: {}, creature: {} };
   for (const t of GEN_TYPES) if (!character.generated[t]) character.generated[t] = {};
   return character;
 }
@@ -91,6 +96,20 @@ export function stubEntity(type, context = {}, schema = {}) {
       tags: [], connections: loc.id ? [loc.id] : [], descriptionSeed: name,
       loreRefs: loc.loreRefs ? [...loc.loreRefs] : [], encounterFlavor: "",
       questSeeds: [], map: nearMap(loc.map)
+    });
+  } else if (type === "creature") {
+    // SNG-250 §3: even the STUB must be born whole — a stubbed monster still has to be fightable, or
+    // the fallback path quietly reintroduces exactly the hollow creature the contract exists to ban.
+    // `tier` defaults to riffraff, NOT notable: an unearned stub should be the least dangerous thing in
+    // the pool, and BEAST_TIER's own silent fallback is notable, so choosing it here would be
+    // indistinguishable from having no tier at all. pressures names a real craft the encounter engine
+    // runs rather than inventing flavour.
+    Object.assign(base, {
+      tier: context.tier || "riffraff",
+      class: context.creatureClass || "beast",
+      look: `something native to ${loc.name || "this place"}, hard to fix in the eye`,
+      danger: "it is dangerous the way the country around it is dangerous — it does not hunt you, it simply does not yield",
+      pressures: ["KNOW (read what it is)", "WARD (keep it off you)"]
     });
   } else if (type === "arc") {
     Object.assign(base, {
@@ -300,6 +319,9 @@ export function persistGenerated(character, type, record, deps = {}) { // regist
         entityId: record.id, label: record.name, kind,
         fact: type === "npc" ? (record.role || "met in play")
           : type === "location" ? (record.descriptionSeed || "").slice(0, 160)
+          // a creature's codex line is what it DOES to you, not its arc-tendency (it has none). smartClamp,
+          // not a raw slice: this is player-visible prose and a hard cut lands mid-word (SNG-152).
+          : type === "creature" ? smartClamp(String(record.danger || record.look || "a thing met in the wild"), 160)
           : (record.tendency || "a thread taking shape").slice(0, 160)
       }], deps.codexCtx || {});
     } catch { /* codex is a convenience mirror — never let it break persistence */ }

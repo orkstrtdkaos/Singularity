@@ -1,237 +1,451 @@
 {
-  "schemaVersion": 2,
-  "_doc": [
-    "SNG-232 — THE SEAM LEDGER (checkable form). A 'seam' is a place where system A (producer) writes data that",
-    "system B (consumer) reads, under an UNSTATED contract both must honor. wiring_audit + content_ci catch WIRING",
-    "and SCHEMA; they do NOT catch two individually-valid systems that DISAGREE about the same data (the ~80% bug",
-    "class of the 2026-07 session). tests/wiring_audit.mjs §5 (runSeam) gates on the seams declared here.",
-    "",
-    "This file is COMPILED from Aevi's authored ledger (po/staged_content/seam_ledger.json) — her prose contracts",
-    "+ checkHints, turned into machine-checkable asserts by CCode (SNG-232 ownership split). Add a future seam by",
-    "appending one entry here (grows by incident); author the intent in Aevi's ledger, CCode compiles the check.",
-    "",
-    "DISCIPLINE: DECLARED not inferred (we check listed seams, never auto-discover). GROWS BY INCIDENT. A SEAM",
-    "CHECK THAT CANNOT FAIL IS THEATER — every entry reads REAL code (or a REAL covering gate) that a future edit",
-    "can break; runSeam self-tests its matcher can go red before trusting any green.",
-    "",
-    "KINDS (Aevi's taxonomy): field_presence (a writer may OMIT a field a reader assumes → reader floors/guards OR",
-    "writer fills), field_shape (both ends must agree on TYPE), cross_source (a consumer reads a source a related",
-    "producer doesn't feed), enum_vocab (op/id vocab must be the SAME set across contract/handler/prompt).",
-    "",
-    "CHECK MODES (pick by which fields the entry declares):",
-    "  consumer{file,region?} + assert{requires[],forbids?[]}  — scope to a function (or whole file), regex-assert.",
-    "  corpus[dir|file...]      + assert                        — scan many files at once (whole-of-engine forbids).",
-    "  content{dir,requireFields[]}                             — every JSON record in a dir carries the fields",
-    "                                                             (dotted path = non-null; \"name[N]\" = array len N).",
-    "  coveredBy{gate,signature}                                — the seam is gated by ANOTHER mature check; assert",
-    "                                                             its signature is still present (delete it → red)."
-  ],
-  "seams": [
-    {
-      "id": "seam_gen_location_dangerLevel",
-      "incident": "SNG-225",
-      "kind": "field_presence",
-      "contract": "A generated location may OMIT dangerLevel; the consumer must floor a missing value (null is NOT 0 — a null-danger place could never roll a fight and starves the pool).",
-      "producer": { "file": "engine/generate.js", "note": "a minted location can leave dangerLevel null" },
-      "consumer": { "file": "engine/random_encounters.js", "region": "dangerOf" },
-      "assert": { "requires": ["dangerLevel", "DANGER_FLOOR"] },
-      "canFail": "Coerce location.dangerLevel with raw|0 and no null path (null->0): DANGER_FLOOR leaves dangerOf -> red."
-    },
-    {
-      "id": "seam_gen_location_worldPos",
-      "incident": "SNG-180",
-      "kind": "field_presence",
-      "contract": "Every manifest-listed location MUST carry worldPos{colatitude,longitude} + axisVector[12]. A generated or hand-authored location may omit them; catch it at BUILD (content-time), not late at runtime.",
-      "producer": { "file": "engine/generate.js", "note": "location authoring/mint; Aevi's the_old_warden_post once shipped with null worldPos/axisVector" },
-      "content": { "dir": "content/packs/valley/locations", "requireFields": ["worldPos.colatitude", "worldPos.longitude", "axisVector[12]"] },
-      "canFail": "Ship a location JSON missing worldPos or axisVector[12] -> the record is named -> red (caught at build, not in map/travel at runtime)."
-    },
-    {
-      "id": "seam_gen_marker_shape",
-      "incident": "SNG-216",
-      "kind": "field_shape",
-      "contract": "The _gen marker's TYPE must agree: the mint writes an OBJECT, but old saves carried _gen:true (boolean); a reader that did property-access threw. The reconcile normalizer heals boolean/missing _gen -> tracking object so no reader crashes.",
-      "producer": { "file": "app.js", "note": "the location mint writes _gen as a tracking object" },
-      "consumer": { "file": "engine/reconcile.js", "note": "the gen-tracking-object step heals any non-object _gen before readers see it" },
-      "assert": { "requires": ["gen-tracking-object"] },
-      "canFail": "Remove the gen-tracking-object reconcile step: an old boolean-_gen save re-enters unhealed and the first _gen property-write throws again (SNG-216) -> red."
-    },
-    {
-      "id": "seam_poleIntensity_shape",
-      "incident": "SNG-216",
-      "kind": "field_shape",
-      "contract": "poleIntensity MUST be an object {pole:0..1}, never a float. A content author can write a scalar by mistake; the derived-schema validator catches it.",
-      "producer": { "file": "content/packs/valley/locations", "note": "location content authoring" },
-      "coveredBy": { "gate": "tests/content_ci.mjs", "signature": "poleIntensity" },
-      "canFail": "Delete the content_ci schema-validation check: a scalar poleIntensity would no longer be caught -> the signature leaves content_ci -> red."
-    },
-    {
-      "id": "seam_encounter_offer_source",
-      "incident": "SNG-231",
-      "kind": "cross_source",
-      "contract": "The GM-offer path must read the encounter POOL (eligibleEncountersFor), not ONLY location.encounterSeeds — else SNG-225's pool + SNG-229's bestiary are unreachable through GM offers.",
-      "producer": { "file": "engine/random_encounters.js", "note": "eligibleEncountersFor(table, location) = the danger+tag-gated offerable pool" },
-      "consumer": { "file": "app.js", "region": "listAvailableEncounters" },
-      "assert": { "requires": ["eligibleEncountersFor"] },
-      "canFail": "Revert to a seeds-only offer list: eligibleEncountersFor leaves listAvailableEncounters -> the pool is unreachable again -> red."
-    },
-    {
-      "id": "seam_discovery_usable",
-      "incident": "SNG-226",
-      "kind": "cross_source",
-      "contract": "A discovery the player can USE must be registered where usability is READ (abilities[] + customAbilities), not only where discoveries are recorded. registerDiscoveryAbility must write the usable ability.",
-      "producer": { "file": "engine/braids.js", "note": "registerDiscoveryAbility mints the braid-shaped usable def" },
-      "consumer": { "file": "engine/braids.js", "region": "registerDiscoveryAbility" },
-      "assert": { "requires": ["abilities\\.push", "customAbilities"] },
-      "canFail": "Make registerDiscoveryAbility write only discoveries[] (drop the abilities.push): the intent-parser reads abilities[] and never sees the skill (SNG-226 — earned but uncastable) -> red."
-    },
-    {
-      "id": "seam_bestiary_loaded",
-      "incident": "SNG-229",
-      "kind": "cross_source",
-      "contract": "A manifest provides.* key MUST be read by the loader or the content silently doesn't load (provides.bestiary was declared, unread -> creatureIds unresolvable). The rule applies to EVERY new provides.* key.",
-      "producer": { "file": "content/packs/valley/manifest.json", "note": "provides.* declarations" },
-      "coveredBy": { "gate": "tests/content_ci.mjs", "signature": "provides\\.\\* key" },
-      "canFail": "Delete the content_ci provides-key/loader check (SNG-065): a declared-but-unread key would no longer fail -> the signature leaves content_ci -> red."
-    },
-    {
-      "id": "seam_travelTo_is_place",
-      "incident": "SNG-228",
-      "kind": "field_shape",
-      "contract": "travelTo MUST be a PLACE, never a PERSON. The parser can set it to a person's name; the resolver must cross-check the NPC registry before minting a phantom destination (a pronoun guard alone misses proper-name people).",
-      "producer": { "file": "engine/intent.js", "note": "the parser sets turn.travelTo" },
-      "consumer": { "file": "engine/intent.js", "region": "personDestination" },
-      "assert": { "requires": ["npcRegistry"] },
-      "canFail": "Strip the npcRegistry cross-check from personDestination: 'catch Ossian' mints 'Ossian' as a phantom place again (SNG-228) -> red."
-    },
-    {
-      "id": "seam_aspirations_path",
-      "incident": "SNG-232",
-      "kind": "field_presence",
-      "contract": "Aspirations live at character.practice.aspirations; a top-level character.aspirations read finds nothing and 'proves' absence. No code may read the top-level path.",
-      "producer": { "file": "engine/practice.js", "note": "the save nests aspirations under practice" },
-      "corpus": ["engine", "app.js"],
-      "assert": { "forbids": ["character\\.aspirations\\b"] },
-      "canFail": "Add a read of character.aspirations (top-level, not practice.aspirations) anywhere in engine/ or app.js -> the forbidden pattern appears -> red."
-    },
-    {
-      "id": "seam_op_vocab_triples",
-      "incident": "SNG-190",
-      "kind": "enum_vocab",
-      "contract": "Every GM op must exist in the prompt contract, the handler, AND the tracked vocab (SALVAGEABLE_OPS) — a documented op with no handler, or a documented op not salvageable, is a silent dead path.",
-      "producer": { "file": "engine/gm.js", "note": "the op contract + SALVAGEABLE_OPS" },
-      "coveredBy": { "gate": "tests/wiring_audit.mjs", "signature": "every documented contract op is salvageable" },
-      "canFail": "Delete the contract<->salvage parity check: a documented-but-unsalvageable op would no longer fail -> the signature leaves wiring_audit -> red. (Runtime emission drift is separately surfaced by See-the-Machine.)"
-    },
-    {
-      "id": "seam_traditionId_vocab",
-      "incident": "SNG-179",
-      "kind": "enum_vocab",
-      "contract": "A traditionId the GM emits must resolve against the canonical vocab (CONTENT.traditionIndex); an unresolvable id must be LOGGED as a vocab-miss, never silently dropped (which makes an op look emitted-but-inert).",
-      "producer": { "file": "engine/gm.js", "note": "the GM emits markTeacher/standingOps/offerAcquisition with a traditionId; THE PEOPLES block shows the valid ids" },
-      "consumer": { "file": "app.js" },
-      "assert": { "requires": ["_opVocabMisses", "traditionIndex"] },
-      "canFail": "Remove the _opVocabMisses capture: an unresolvable traditionId is dropped silently again (SNG-179 — markTeacher looks emitted, does nothing) -> red."
-    },
-    {
-      "id": "quest-effect-types-handled",
-      "incident": "SNG-235",
-      "kind": "enum_vocab",
-      "contract": "Every effect TYPE authored on a quest outcome must have a matching case in applyQuestEffects, or the ending silently does NOTHING (falls to default → \"unknown\"). Aevi's marquee-quest vocab (world_fact/arc/standing/world_arc, and codex_fact by its `fact` field) must each be handled — the prose says the world changes; the effect must make it true.",
-      "producer": { "file": "content/packs/valley/quests/the_second_thread.json", "note": "outcome effects[] author types world_fact/arc/codex_fact/standing/world_arc" },
-      "consumer": { "file": "engine/quests.js", "region": "applyQuestEffects" },
-      "assert": { "requires": ["case \"world_fact\"", "case \"arc\"", "case \"standing\"", "case \"world_arc\"", "case \"create_waygate\"", "case \"waygate\"", "e\\.fact \\|\\| e\\.text"] },
-      "canFail": "Remove a case (e.g. world_fact/standing) from applyQuestEffects: that authored effect drops to default → \"unknown\" and the ending changes nothing (SNG-235 — the keystone arc's prose promises proof, the world stays empty) -> the pattern vanishes -> red."
-    },
-    {
-      "id": "quest-routes-shape",
-      "incident": "CCODE-21",
-      "kind": "field_shape",
-      "contract": "A structured quest's `routes` MUST be a {traditionId: string} map and every outcome MUST have a name. A producer handing an ARRAY (or object-valued routes), or a name-less outcome, renders as [object Object] / a blank Resolve button in the quest detail. structuredQuestRecord must normalize both.",
-      "producer": { "file": "engine/quests.js", "note": "structuredQuestRecord builds the record from a def of any shape (authored, generated, GM-emitted)" },
-      "consumer": { "file": "engine/quests.js", "region": "structuredQuestRecord" },
-      "assert": { "requires": ["normalizeQuestRoutes\\(def\\.routes\\)", "name: o\\.name \\|\\| titleizeId"] },
-      "canFail": "Revert routes to `def.routes || {}` or drop the outcome-name fallback: an array-routes quest (Erik's Second Thread) renders [object Object] again and the Resolve buttons go blank -> the patterns vanish -> red."
-    },
-    {
-      "id": "npc-registry-entry-has-id",
-      "incident": "CCODE-20",
-      "kind": "field_presence",
-      "contract": "Every npcRegistry entry MUST carry an `id`. findExistingNpc reads `n.id.split(...)` on EVERY npcUpdate, so a single id-less entry throws and aborts the meet — poisoning every SUBSEQUENT person too (no name ever sticks). Writers must stamp id; the reader must guard its absence.",
-      "producer": { "file": "engine/quests.js", "note": "the npc_state/ally quest-effect giver stub now stamps `id` (was omitting it, the poison source)" },
-      "consumer": { "file": "engine/npcs.js", "region": "findExistingNpc" },
-      "assert": { "requires": ["if \\(!n\\.id \\|\\| !id\\) continue"] },
-      "canFail": "Remove the id-guard from findExistingNpc: one id-less registry stub throws `n.id.split` and every meet fails again — the CCODE-20 'fourth or fifth name, none sticking' bug returns -> red."
-    },
-    {
-      "id": "new-encounter-engage-reachable",
-      "incident": "CCODE-19",
-      "kind": "cross_source",
-      "contract": "A GM-invented encounter (newEncounter) only REGISTERS a def; a fight STARTS only via a choice carrying its encounterId (onChoice path A). applyTurn must guarantee an engage choice when the GM didn't wire one.",
-      "producer": { "file": "app.js", "note": "the newEncounter op registers character.customEncounters[nd.id]" },
-      "consumer": { "file": "app.js", "note": "onChoice path A starts an encounter from a choice.encounterId; applyTurn injects the bridging choice" },
-      "assert": { "requires": ["encounterId: nd\\.id", "c\\.encounterId === nd\\.id"] },
-      "canFail": "Remove the engage-choice injection from the newEncounter block: the invented duel registers but nothing engages it -> the CCODE-19 'fight won't start' bug returns -> red."
-    },
-    {
-      "id": "waygate-connection-resolves",
-      "incident": "SNG-243",
-      "kind": "cross_source",
-      "contract": "A made waygate's authored connect target (connects[].to) MUST resolve to a real location id before it becomes a travel edge — an unresolvable id (e.g. `stillwaters_trouble_site` before the_old_warden_post carried it as an alias) would mint a dangling connection the traveller can't reach. mintWaygate resolves each `to` via resolveLocationId and drops + warns on failure, and stores the resolved default/intent set in waygateConnections + waygateDefaultTo.",
-      "producer": { "file": "content/packs/valley/quests/the_second_thread.json", "note": "the `waygate` effect authors connects[]:{to,kind,default,requires}; a `to` must resolve (alias or id)" },
-      "consumer": { "file": "app.js", "region": "mintWaygate" },
-      "assert": { "requires": ["resolveLocationId", "waygateConnections", "waygateDefaultTo", "SNG-232 seam"] },
-      "canFail": "Remove the resolveLocationId guard in mintWaygate: a connects[].to that doesn't resolve mints a broken travel edge (the SNG-243 default/intent destinations become unreachable) instead of being dropped loudly -> red."
-    },
-    {
-      "id": "network-hop-costs",
-      "incident": "SNG-243",
-      "kind": "cross_source",
-      "contract": "A gate-NETWORK hop MUST pay the gate-hop cost — travelTo receives { cost } and applies both the hours AND the energy toll. A network hop wired without the cost is a free teleport, which the §4 guard forbids (the network stays infrastructure, not a cheat).",
-      "producer": { "file": "engine/waygate.js", "note": "networkGatesFrom returns each reachable gate with a priced cost (gateHopCost: hours + energy)" },
-      "consumer": { "file": "app.js", "region": "travelTo" },
-      "assert": { "requires": ["cost\\?\\.hours", "cost\\?\\.energy"] },
-      "canFail": "Remove the cost application in travelTo: a network hop advances only the flat ADVANCE.travel and costs no energy -> gate travel becomes a free teleport (SNG-243 §4 guard: network travel has a cost) -> red."
-    },
-    {
-      "id": "seam_battle_effects_roundtrip",
-      "incident": "CCODE-35",
-      "kind": "field_presence",
-      "contract": "A persistent battle effect must ride BOTH ways through skillBattleRound's hand-built state object: INTO battleRound (so a standing effect modifies this round's roll) and back OUT onto the encounter state (so it persists). skillBattleRound rebuilds state field-by-field, so an effect written by battleRound is silently dropped unless `effects` is named in both the inbound state literal and the outbound `s`. A dropped effect is worse than no feature: the panel would show 'guard up' while the roll never sees it.",
-      "producer": { "file": "engine/skill_battle.js", "note": "battleRound writes state.effects (ticked + newly landed) and returns them" },
-      "consumer": { "file": "engine/encounters.js", "region": "skillBattleRound" },
-      "assert": { "requires": ["effects"] },
-      "canFail": "Drop `effects` from either the inbound state literal or the outbound `s` in skillBattleRound: the standing effect never reaches the roll (or never survives the round) while the panel still advertises it -> red."
-    },
-    {
-      "id": "seam_battle_round_options",
-      "incident": "CCODE-45",
-      "kind": "field_presence",
-      "contract": "skillBattleRound HAND-BUILDS its call to battleRound, so any battleRound option it does not explicitly ACCEPT and FORWARD is silently dropped — the caller's intent vanishes with no error. This has now bitten TWICE: CCODE-35 (`effects`) and CCODE-45 (`phase`/`tickEffects`/`setupBonus`, where a SENSE step silently ran as a full ACTION round — moving momentum, costing the exchange, and defeating the entire point of the sense phase). Every battleRound option must be named in skillBattleRound's destructured params AND in the forwarded call.",
-      "producer": { "file": "app.js", "note": "the turn orchestrator passes phase/tickEffects/setupBonus into skillBattleRound" },
-      "consumer": { "file": "engine/encounters.js", "region": "skillBattleRound" },
-      "assert": { "requires": ["phase", "tickEffects", "setupBonus"] },
-      "canFail": "Remove `phase` (or tickEffects/setupBonus) from skillBattleRound's params or its forwarded battleRound call: the sense step resolves as a normal action round — momentum moves, the round advances, and sensing costs you the exchange again -> red."
-    },
-    {
-     "id": "seam_encounter_kind_single_source",
-     "incident": "SNG-247",
-     "kind": "field_presence",
-     "contract": "The EXIT RULE (skill_battle.js reads sb.kinds[kind] for what a pressure tick costs) and the BORDER COLOUR (app.js stamps enc-kind-<kind> on the play surface) must both derive the kind from encounterKind(def). Hardcode it in either place and the mechanics and the colour silently disagree — a chase running on a fight's exit rule while flying an orange border, or the reverse. `kind` is also the FOURTH option skillBattleRound has had to carry into its hand-built battleRound call (see seam_battle_round_options), so it is DERIVED here rather than forwarded: a value the wrapper computes from what it already holds cannot be dropped on the way in.",
-     "producer": {
-      "file": "engine/encounterFrame.js",
-      "note": "encounterKind(def) is the one answer to 'what kind of bounded thing is this'"
-     },
-     "consumer": {
-      "file": "engine/encounters.js",
-      "region": "skillBattleRound"
-     },
-     "assert": {
-      "requires": [
-       "encounterKind\\(def\\)",
-       "kind:"
-      ]
-     }
-    }
-  ]
+ "schemaVersion": 2,
+ "_doc": [
+  "SNG-232 — THE SEAM LEDGER (checkable form). A 'seam' is a place where system A (producer) writes data that",
+  "system B (consumer) reads, under an UNSTATED contract both must honor. wiring_audit + content_ci catch WIRING",
+  "and SCHEMA; they do NOT catch two individually-valid systems that DISAGREE about the same data (the ~80% bug",
+  "class of the 2026-07 session). tests/wiring_audit.mjs §5 (runSeam) gates on the seams declared here.",
+  "",
+  "This file is COMPILED from Aevi's authored ledger (po/staged_content/seam_ledger.json) — her prose contracts",
+  "+ checkHints, turned into machine-checkable asserts by CCode (SNG-232 ownership split). Add a future seam by",
+  "appending one entry here (grows by incident); author the intent in Aevi's ledger, CCode compiles the check.",
+  "",
+  "DISCIPLINE: DECLARED not inferred (we check listed seams, never auto-discover). GROWS BY INCIDENT. A SEAM",
+  "CHECK THAT CANNOT FAIL IS THEATER — every entry reads REAL code (or a REAL covering gate) that a future edit",
+  "can break; runSeam self-tests its matcher can go red before trusting any green.",
+  "",
+  "KINDS (Aevi's taxonomy): field_presence (a writer may OMIT a field a reader assumes → reader floors/guards OR",
+  "writer fills), field_shape (both ends must agree on TYPE), cross_source (a consumer reads a source a related",
+  "producer doesn't feed), enum_vocab (op/id vocab must be the SAME set across contract/handler/prompt).",
+  "",
+  "CHECK MODES (pick by which fields the entry declares):",
+  "  consumer{file,region?} + assert{requires[],forbids?[]}  — scope to a function (or whole file), regex-assert.",
+  "  corpus[dir|file...]      + assert                        — scan many files at once (whole-of-engine forbids).",
+  "  content{dir,requireFields[]}                             — every JSON record in a dir carries the fields",
+  "                                                             (dotted path = non-null; \"name[N]\" = array len N).",
+  "  coveredBy{gate,signature}                                — the seam is gated by ANOTHER mature check; assert",
+  "                                                             its signature is still present (delete it → red)."
+ ],
+ "seams": [
+  {
+   "id": "seam_gen_location_dangerLevel",
+   "incident": "SNG-225",
+   "kind": "field_presence",
+   "contract": "A generated location may OMIT dangerLevel; the consumer must floor a missing value (null is NOT 0 — a null-danger place could never roll a fight and starves the pool).",
+   "producer": {
+    "file": "engine/generate.js",
+    "note": "a minted location can leave dangerLevel null"
+   },
+   "consumer": {
+    "file": "engine/random_encounters.js",
+    "region": "dangerOf"
+   },
+   "assert": {
+    "requires": [
+     "dangerLevel",
+     "DANGER_FLOOR"
+    ]
+   },
+   "canFail": "Coerce location.dangerLevel with raw|0 and no null path (null->0): DANGER_FLOOR leaves dangerOf -> red."
+  },
+  {
+   "id": "seam_gen_location_worldPos",
+   "incident": "SNG-180",
+   "kind": "field_presence",
+   "contract": "Every manifest-listed location MUST carry worldPos{colatitude,longitude} + axisVector[12]. A generated or hand-authored location may omit them; catch it at BUILD (content-time), not late at runtime.",
+   "producer": {
+    "file": "engine/generate.js",
+    "note": "location authoring/mint; Aevi's the_old_warden_post once shipped with null worldPos/axisVector"
+   },
+   "content": {
+    "dir": "content/packs/valley/locations",
+    "requireFields": [
+     "worldPos.colatitude",
+     "worldPos.longitude",
+     "axisVector[12]"
+    ]
+   },
+   "canFail": "Ship a location JSON missing worldPos or axisVector[12] -> the record is named -> red (caught at build, not in map/travel at runtime)."
+  },
+  {
+   "id": "seam_gen_marker_shape",
+   "incident": "SNG-216",
+   "kind": "field_shape",
+   "contract": "The _gen marker's TYPE must agree: the mint writes an OBJECT, but old saves carried _gen:true (boolean); a reader that did property-access threw. The reconcile normalizer heals boolean/missing _gen -> tracking object so no reader crashes.",
+   "producer": {
+    "file": "app.js",
+    "note": "the location mint writes _gen as a tracking object"
+   },
+   "consumer": {
+    "file": "engine/reconcile.js",
+    "note": "the gen-tracking-object step heals any non-object _gen before readers see it"
+   },
+   "assert": {
+    "requires": [
+     "gen-tracking-object"
+    ]
+   },
+   "canFail": "Remove the gen-tracking-object reconcile step: an old boolean-_gen save re-enters unhealed and the first _gen property-write throws again (SNG-216) -> red."
+  },
+  {
+   "id": "seam_poleIntensity_shape",
+   "incident": "SNG-216",
+   "kind": "field_shape",
+   "contract": "poleIntensity MUST be an object {pole:0..1}, never a float. A content author can write a scalar by mistake; the derived-schema validator catches it.",
+   "producer": {
+    "file": "content/packs/valley/locations",
+    "note": "location content authoring"
+   },
+   "coveredBy": {
+    "gate": "tests/content_ci.mjs",
+    "signature": "poleIntensity"
+   },
+   "canFail": "Delete the content_ci schema-validation check: a scalar poleIntensity would no longer be caught -> the signature leaves content_ci -> red."
+  },
+  {
+   "id": "seam_encounter_offer_source",
+   "incident": "SNG-231",
+   "kind": "cross_source",
+   "contract": "The GM-offer path must read the encounter POOL (eligibleEncountersFor), not ONLY location.encounterSeeds — else SNG-225's pool + SNG-229's bestiary are unreachable through GM offers.",
+   "producer": {
+    "file": "engine/random_encounters.js",
+    "note": "eligibleEncountersFor(table, location) = the danger+tag-gated offerable pool"
+   },
+   "consumer": {
+    "file": "app.js",
+    "region": "listAvailableEncounters"
+   },
+   "assert": {
+    "requires": [
+     "eligibleEncountersFor"
+    ]
+   },
+   "canFail": "Revert to a seeds-only offer list: eligibleEncountersFor leaves listAvailableEncounters -> the pool is unreachable again -> red."
+  },
+  {
+   "id": "seam_discovery_usable",
+   "incident": "SNG-226",
+   "kind": "cross_source",
+   "contract": "A discovery the player can USE must be registered where usability is READ (abilities[] + customAbilities), not only where discoveries are recorded. registerDiscoveryAbility must write the usable ability.",
+   "producer": {
+    "file": "engine/braids.js",
+    "note": "registerDiscoveryAbility mints the braid-shaped usable def"
+   },
+   "consumer": {
+    "file": "engine/braids.js",
+    "region": "registerDiscoveryAbility"
+   },
+   "assert": {
+    "requires": [
+     "abilities\\.push",
+     "customAbilities"
+    ]
+   },
+   "canFail": "Make registerDiscoveryAbility write only discoveries[] (drop the abilities.push): the intent-parser reads abilities[] and never sees the skill (SNG-226 — earned but uncastable) -> red."
+  },
+  {
+   "id": "seam_bestiary_loaded",
+   "incident": "SNG-229",
+   "kind": "cross_source",
+   "contract": "A manifest provides.* key MUST be read by the loader or the content silently doesn't load (provides.bestiary was declared, unread -> creatureIds unresolvable). The rule applies to EVERY new provides.* key.",
+   "producer": {
+    "file": "content/packs/valley/manifest.json",
+    "note": "provides.* declarations"
+   },
+   "coveredBy": {
+    "gate": "tests/content_ci.mjs",
+    "signature": "provides\\.\\* key"
+   },
+   "canFail": "Delete the content_ci provides-key/loader check (SNG-065): a declared-but-unread key would no longer fail -> the signature leaves content_ci -> red."
+  },
+  {
+   "id": "seam_travelTo_is_place",
+   "incident": "SNG-228",
+   "kind": "field_shape",
+   "contract": "travelTo MUST be a PLACE, never a PERSON. The parser can set it to a person's name; the resolver must cross-check the NPC registry before minting a phantom destination (a pronoun guard alone misses proper-name people).",
+   "producer": {
+    "file": "engine/intent.js",
+    "note": "the parser sets turn.travelTo"
+   },
+   "consumer": {
+    "file": "engine/intent.js",
+    "region": "personDestination"
+   },
+   "assert": {
+    "requires": [
+     "npcRegistry"
+    ]
+   },
+   "canFail": "Strip the npcRegistry cross-check from personDestination: 'catch Ossian' mints 'Ossian' as a phantom place again (SNG-228) -> red."
+  },
+  {
+   "id": "seam_aspirations_path",
+   "incident": "SNG-232",
+   "kind": "field_presence",
+   "contract": "Aspirations live at character.practice.aspirations; a top-level character.aspirations read finds nothing and 'proves' absence. No code may read the top-level path.",
+   "producer": {
+    "file": "engine/practice.js",
+    "note": "the save nests aspirations under practice"
+   },
+   "corpus": [
+    "engine",
+    "app.js"
+   ],
+   "assert": {
+    "forbids": [
+     "character\\.aspirations\\b"
+    ]
+   },
+   "canFail": "Add a read of character.aspirations (top-level, not practice.aspirations) anywhere in engine/ or app.js -> the forbidden pattern appears -> red."
+  },
+  {
+   "id": "seam_op_vocab_triples",
+   "incident": "SNG-190",
+   "kind": "enum_vocab",
+   "contract": "Every GM op must exist in the prompt contract, the handler, AND the tracked vocab (SALVAGEABLE_OPS) — a documented op with no handler, or a documented op not salvageable, is a silent dead path.",
+   "producer": {
+    "file": "engine/gm.js",
+    "note": "the op contract + SALVAGEABLE_OPS"
+   },
+   "coveredBy": {
+    "gate": "tests/wiring_audit.mjs",
+    "signature": "every documented contract op is salvageable"
+   },
+   "canFail": "Delete the contract<->salvage parity check: a documented-but-unsalvageable op would no longer fail -> the signature leaves wiring_audit -> red. (Runtime emission drift is separately surfaced by See-the-Machine.)"
+  },
+  {
+   "id": "seam_traditionId_vocab",
+   "incident": "SNG-179",
+   "kind": "enum_vocab",
+   "contract": "A traditionId the GM emits must resolve against the canonical vocab (CONTENT.traditionIndex); an unresolvable id must be LOGGED as a vocab-miss, never silently dropped (which makes an op look emitted-but-inert).",
+   "producer": {
+    "file": "engine/gm.js",
+    "note": "the GM emits markTeacher/standingOps/offerAcquisition with a traditionId; THE PEOPLES block shows the valid ids"
+   },
+   "consumer": {
+    "file": "app.js"
+   },
+   "assert": {
+    "requires": [
+     "_opVocabMisses",
+     "traditionIndex"
+    ]
+   },
+   "canFail": "Remove the _opVocabMisses capture: an unresolvable traditionId is dropped silently again (SNG-179 — markTeacher looks emitted, does nothing) -> red."
+  },
+  {
+   "id": "quest-effect-types-handled",
+   "incident": "SNG-235",
+   "kind": "enum_vocab",
+   "contract": "Every effect TYPE authored on a quest outcome must have a matching case in applyQuestEffects, or the ending silently does NOTHING (falls to default → \"unknown\"). Aevi's marquee-quest vocab (world_fact/arc/standing/world_arc, and codex_fact by its `fact` field) must each be handled — the prose says the world changes; the effect must make it true.",
+   "producer": {
+    "file": "content/packs/valley/quests/the_second_thread.json",
+    "note": "outcome effects[] author types world_fact/arc/codex_fact/standing/world_arc"
+   },
+   "consumer": {
+    "file": "engine/quests.js",
+    "region": "applyQuestEffects"
+   },
+   "assert": {
+    "requires": [
+     "case \"world_fact\"",
+     "case \"arc\"",
+     "case \"standing\"",
+     "case \"world_arc\"",
+     "case \"create_waygate\"",
+     "case \"waygate\"",
+     "e\\.fact \\|\\| e\\.text"
+    ]
+   },
+   "canFail": "Remove a case (e.g. world_fact/standing) from applyQuestEffects: that authored effect drops to default → \"unknown\" and the ending changes nothing (SNG-235 — the keystone arc's prose promises proof, the world stays empty) -> the pattern vanishes -> red."
+  },
+  {
+   "id": "quest-routes-shape",
+   "incident": "CCODE-21",
+   "kind": "field_shape",
+   "contract": "A structured quest's `routes` MUST be a {traditionId: string} map and every outcome MUST have a name. A producer handing an ARRAY (or object-valued routes), or a name-less outcome, renders as [object Object] / a blank Resolve button in the quest detail. structuredQuestRecord must normalize both.",
+   "producer": {
+    "file": "engine/quests.js",
+    "note": "structuredQuestRecord builds the record from a def of any shape (authored, generated, GM-emitted)"
+   },
+   "consumer": {
+    "file": "engine/quests.js",
+    "region": "structuredQuestRecord"
+   },
+   "assert": {
+    "requires": [
+     "normalizeQuestRoutes\\(def\\.routes\\)",
+     "name: o\\.name \\|\\| titleizeId"
+    ]
+   },
+   "canFail": "Revert routes to `def.routes || {}` or drop the outcome-name fallback: an array-routes quest (Erik's Second Thread) renders [object Object] again and the Resolve buttons go blank -> the patterns vanish -> red."
+  },
+  {
+   "id": "npc-registry-entry-has-id",
+   "incident": "CCODE-20",
+   "kind": "field_presence",
+   "contract": "Every npcRegistry entry MUST carry an `id`. findExistingNpc reads `n.id.split(...)` on EVERY npcUpdate, so a single id-less entry throws and aborts the meet — poisoning every SUBSEQUENT person too (no name ever sticks). Writers must stamp id; the reader must guard its absence.",
+   "producer": {
+    "file": "engine/quests.js",
+    "note": "the npc_state/ally quest-effect giver stub now stamps `id` (was omitting it, the poison source)"
+   },
+   "consumer": {
+    "file": "engine/npcs.js",
+    "region": "findExistingNpc"
+   },
+   "assert": {
+    "requires": [
+     "if \\(!n\\.id \\|\\| !id\\) continue"
+    ]
+   },
+   "canFail": "Remove the id-guard from findExistingNpc: one id-less registry stub throws `n.id.split` and every meet fails again — the CCODE-20 'fourth or fifth name, none sticking' bug returns -> red."
+  },
+  {
+   "id": "new-encounter-engage-reachable",
+   "incident": "CCODE-19",
+   "kind": "cross_source",
+   "contract": "A GM-invented encounter (newEncounter) only REGISTERS a def; a fight STARTS only via a choice carrying its encounterId (onChoice path A). applyTurn must guarantee an engage choice when the GM didn't wire one.",
+   "producer": {
+    "file": "app.js",
+    "note": "the newEncounter op registers character.customEncounters[nd.id]"
+   },
+   "consumer": {
+    "file": "app.js",
+    "note": "onChoice path A starts an encounter from a choice.encounterId; applyTurn injects the bridging choice"
+   },
+   "assert": {
+    "requires": [
+     "encounterId: nd\\.id",
+     "c\\.encounterId === nd\\.id"
+    ]
+   },
+   "canFail": "Remove the engage-choice injection from the newEncounter block: the invented duel registers but nothing engages it -> the CCODE-19 'fight won't start' bug returns -> red."
+  },
+  {
+   "id": "waygate-connection-resolves",
+   "incident": "SNG-243",
+   "kind": "cross_source",
+   "contract": "A made waygate's authored connect target (connects[].to) MUST resolve to a real location id before it becomes a travel edge — an unresolvable id (e.g. `stillwaters_trouble_site` before the_old_warden_post carried it as an alias) would mint a dangling connection the traveller can't reach. mintWaygate resolves each `to` via resolveLocationId and drops + warns on failure, and stores the resolved default/intent set in waygateConnections + waygateDefaultTo.",
+   "producer": {
+    "file": "content/packs/valley/quests/the_second_thread.json",
+    "note": "the `waygate` effect authors connects[]:{to,kind,default,requires}; a `to` must resolve (alias or id)"
+   },
+   "consumer": {
+    "file": "app.js",
+    "region": "mintWaygate"
+   },
+   "assert": {
+    "requires": [
+     "resolveLocationId",
+     "waygateConnections",
+     "waygateDefaultTo",
+     "SNG-232 seam"
+    ]
+   },
+   "canFail": "Remove the resolveLocationId guard in mintWaygate: a connects[].to that doesn't resolve mints a broken travel edge (the SNG-243 default/intent destinations become unreachable) instead of being dropped loudly -> red."
+  },
+  {
+   "id": "network-hop-costs",
+   "incident": "SNG-243",
+   "kind": "cross_source",
+   "contract": "A gate-NETWORK hop MUST pay the gate-hop cost — travelTo receives { cost } and applies both the hours AND the energy toll. A network hop wired without the cost is a free teleport, which the §4 guard forbids (the network stays infrastructure, not a cheat).",
+   "producer": {
+    "file": "engine/waygate.js",
+    "note": "networkGatesFrom returns each reachable gate with a priced cost (gateHopCost: hours + energy)"
+   },
+   "consumer": {
+    "file": "app.js",
+    "region": "travelTo"
+   },
+   "assert": {
+    "requires": [
+     "cost\\?\\.hours",
+     "cost\\?\\.energy"
+    ]
+   },
+   "canFail": "Remove the cost application in travelTo: a network hop advances only the flat ADVANCE.travel and costs no energy -> gate travel becomes a free teleport (SNG-243 §4 guard: network travel has a cost) -> red."
+  },
+  {
+   "id": "seam_battle_effects_roundtrip",
+   "incident": "CCODE-35",
+   "kind": "field_presence",
+   "contract": "A persistent battle effect must ride BOTH ways through skillBattleRound's hand-built state object: INTO battleRound (so a standing effect modifies this round's roll) and back OUT onto the encounter state (so it persists). skillBattleRound rebuilds state field-by-field, so an effect written by battleRound is silently dropped unless `effects` is named in both the inbound state literal and the outbound `s`. A dropped effect is worse than no feature: the panel would show 'guard up' while the roll never sees it.",
+   "producer": {
+    "file": "engine/skill_battle.js",
+    "note": "battleRound writes state.effects (ticked + newly landed) and returns them"
+   },
+   "consumer": {
+    "file": "engine/encounters.js",
+    "region": "skillBattleRound"
+   },
+   "assert": {
+    "requires": [
+     "effects"
+    ]
+   },
+   "canFail": "Drop `effects` from either the inbound state literal or the outbound `s` in skillBattleRound: the standing effect never reaches the roll (or never survives the round) while the panel still advertises it -> red."
+  },
+  {
+   "id": "seam_battle_round_options",
+   "incident": "CCODE-45",
+   "kind": "field_presence",
+   "contract": "skillBattleRound HAND-BUILDS its call to battleRound, so any battleRound option it does not explicitly ACCEPT and FORWARD is silently dropped — the caller's intent vanishes with no error. This has now bitten TWICE: CCODE-35 (`effects`) and CCODE-45 (`phase`/`tickEffects`/`setupBonus`, where a SENSE step silently ran as a full ACTION round — moving momentum, costing the exchange, and defeating the entire point of the sense phase). Every battleRound option must be named in skillBattleRound's destructured params AND in the forwarded call.",
+   "producer": {
+    "file": "app.js",
+    "note": "the turn orchestrator passes phase/tickEffects/setupBonus into skillBattleRound"
+   },
+   "consumer": {
+    "file": "engine/encounters.js",
+    "region": "skillBattleRound"
+   },
+   "assert": {
+    "requires": [
+     "phase",
+     "tickEffects",
+     "setupBonus"
+    ]
+   },
+   "canFail": "Remove `phase` (or tickEffects/setupBonus) from skillBattleRound's params or its forwarded battleRound call: the sense step resolves as a normal action round — momentum moves, the round advances, and sensing costs you the exchange again -> red."
+  },
+  {
+   "id": "seam_encounter_kind_single_source",
+   "incident": "SNG-247",
+   "kind": "field_presence",
+   "contract": "The EXIT RULE (skill_battle.js reads sb.kinds[kind] for what a pressure tick costs) and the BORDER COLOUR (app.js stamps enc-kind-<kind> on the play surface) must both derive the kind from encounterKind(def). Hardcode it in either place and the mechanics and the colour silently disagree — a chase running on a fight's exit rule while flying an orange border, or the reverse. `kind` is also the FOURTH option skillBattleRound has had to carry into its hand-built battleRound call (see seam_battle_round_options), so it is DERIVED here rather than forwarded: a value the wrapper computes from what it already holds cannot be dropped on the way in.",
+   "producer": {
+    "file": "engine/encounterFrame.js",
+    "note": "encounterKind(def) is the one answer to 'what kind of bounded thing is this'"
+   },
+   "consumer": {
+    "file": "engine/encounters.js",
+    "region": "skillBattleRound"
+   },
+   "assert": {
+    "requires": [
+     "encounterKind\\(def\\)",
+     "kind:"
+    ]
+   }
+  },
+  {
+   "id": "seam_generated_creature_reaches_pool",
+   "incident": "CCODE-55 (SNG-250 §4)",
+   "kind": "cross_source",
+   "contract": "A GENERATED creature must be reachable in the encounter pool, or it is minted un-fightable. bestiaryEncounters runs ONCE in loadContent over the AUTHORED roster, while generated creatures live per-character on character.generated.creature — so the pool the app READS must be encounterTable() (authored + generatedCreatureEncounters(character)), never CONTENT.randomEncounters directly. This is SNG-229's seam_bestiary_loaded restated for generation: content that exists and silently does not, with nothing erroring. It is also SNG-250 §3's own bar for the type — 'a whole monster is FIGHTABLE'. Every pool read goes through the one merge point; a new read of CONTENT.randomEncounters.encounters silently excludes every grown monster.",
+   "producer": {
+    "file": "engine/random_encounters.js",
+    "note": "generatedCreatureEncounters(character) delegates to bestiaryEncounters so a grown monster gets its threat/weight/minDanger from BEAST_TIER exactly as an authored one does — one difficulty curve, not two"
+   },
+   "consumer": {
+    "file": "app.js",
+    "region": "encounterTable"
+   },
+   "assert": {
+    "requires": [
+     "function encounterTable\\(",
+     "generatedCreatureEncounters\\(character\\)"
+    ]
+   }
+  }
+ ]
 }

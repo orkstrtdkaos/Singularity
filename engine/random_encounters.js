@@ -287,6 +287,32 @@ export function synthesizeStandoffDef(entry) {
   };
 }
 
+/** SNG-250 §4 / CCODE-55: THE GENERATED-CREATURE SEAM.
+ *
+ *  Opening creature generation without this is worse than not opening it. `bestiaryEncounters` is called
+ *  ONCE, in loadContent, over the AUTHORED roster — so a creature the world grows lands in
+ *  `character.generated.creature` and is never in `CONTENT.randomEncounters`. It would be minted,
+ *  described, imaged, stored, synced… and no fight could ever run: content that exists and silently does
+ *  not, which is the exact SNG-229 `seam_bestiary_loaded` failure ("a manifest provides.* key MUST be read
+ *  by the loader or the content silently doesn't load"). It also fails SNG-250 §3's own bar for the type:
+ *  "a whole monster is FIGHTABLE — the encounter engine has stats and a behavior to run."
+ *
+ *  The pool is GLOBAL (built at load) and generated creatures are PER-CHARACTER (they ride the save and
+ *  sync, and reach shared canon only through the BATCH-9 Phase 3 nomination path like every other grown
+ *  entity). So the merge cannot happen at load; it happens where the table is read, per character.
+ *
+ *  Deliberately delegates to `bestiaryEncounters` rather than re-deriving the entry shape — one precedent,
+ *  not a second mechanism (the same note frameExemplarEncounters carries). A generated creature therefore
+ *  gets its threat/weight/minDanger from BEAST_TIER exactly as an authored one does; there is no second
+ *  difficulty curve for grown monsters. Pure. */
+export function generatedCreatureEncounters(character) {
+  const roster = Object.values(character?.generated?.creature || {}).filter(c => c && c.id);
+  if (!roster.length) return [];
+  // `gen_` marks provenance without changing behaviour — the id must stay stable and distinct from an
+  // authored `beast_<id>` so the two can never collide in the pool.
+  return bestiaryEncounters({ roster }).map(e => ({ ...e, id: `gen_${e.id}`, fromGenerated: true }));
+}
+
 /** SNG-247 promotion: the frame-kind EXEMPLARS as encounter-pool entries.
  *
  *  `exemplarEncounters` had been authored since SNG-230 and read by NOTHING — loadContent takes `frameKinds` off

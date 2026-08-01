@@ -212,7 +212,7 @@ export async function loadContent() {
   // model (SNG-090), the Prologue (SNG-062), and the legends (SNG-042). Load them as ONE wave, then
   // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
   // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
-  const [region, substrate, greaterArcs, genNpc, genLoc, genArc, originsDoc, backgroundsDoc, regionsDoc,
+  const [region, substrate, greaterArcs, genNpc, genLoc, genArc, genCreature, originsDoc, backgroundsDoc, regionsDoc,
          accords, helpDoc, substrateModel, prologue, legendsLoaded, traitReadoutsDoc, traditionAestheticsDoc, frameContentDoc, frameKindsDoc, receiptLineDoc, consumerMapDoc] = await Promise.all([
     fetchJSON("world/regions/valley.json"),
     fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
@@ -220,6 +220,7 @@ export async function loadContent() {
     fetchJSON("schemas/npc.schema.json").catch(() => null),
     fetchJSON("schemas/location.schema.json").catch(() => null),
     fetchJSON("schemas/arc.schema.json").catch(() => null),
+    fetchJSON("schemas/creature.schema.json").catch(() => null),   // SNG-250 §4 (CCODE-55): creature generation
     loadRule("origins", {}),
     loadRule("backgrounds", {}),
     loadRule("regions", {}),                                                                       // SNG-082 authored terrain
@@ -254,6 +255,9 @@ export async function loadContent() {
   if (genNpc) genSchemas.npc = genNpc;
   if (genLoc) genSchemas.location = genLoc;
   if (genArc) genSchemas.arc = genArc;
+  // SNG-250 §4 (CCODE-55): registering the schema is what OPENS the type — the app's generatable set is
+  // derived from genSchemas, so no allow-list edit is needed (and none should be made).
+  if (genCreature) genSchemas.creature = genCreature;
   const origins = originsDoc.origins || [];       // SNG-063: origins (27 peoples) via the manifest
   const backgrounds = backgroundsDoc.backgrounds || [];
   const regions = regionsDoc.regions || [];

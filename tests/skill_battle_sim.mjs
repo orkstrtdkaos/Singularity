@@ -804,8 +804,11 @@ const appTry = readFileSync(join(root, "app.js"), "utf8");
 const cssTry = readFileSync(join(root, "style.css"), "utf8");
 check("SNG-247 dev: there is one try-button per frame kind, and no kind is missing one",
   Object.keys(FRAME_KINDS).every(k => new RegExp(`kind: "${k}"`).test(appTry.slice(appTry.indexOf("const KIND_TRY")))));
+// CCODE-55: the live pool is now encounterTable() — the ONE merge point folding this character's GENERATED
+// creatures into the authored pool. The property protected here (mint from the live pool, never a synthetic
+// def) is unchanged, and in fact strengthened: the dev buttons now reach grown monsters too.
 check("SNG-247 dev: the buttons mint from the LIVE POOL, not from synthetic defs",
-  /CONTENT\.randomEncounters\?\.encounters/.test(appTry.slice(appTry.indexOf("function fireEncounterKind"), appTry.indexOf("const LEG_RUNNERS"))));
+  /encounterTable\(\)\?\.encounters/.test(appTry.slice(appTry.indexOf("function fireEncounterKind"), appTry.indexOf("const LEG_RUNNERS"))));
 check("SNG-247 dev: the CHASE button goes through the real chain (beginChaseFromFight), not a shortcut that only looks like one",
   /if \(kind === "chase"\) \{ beginChaseFromFight\(def\); return; \}/.test(appTry));
 check("SNG-247 dev: each button wears the SAME enc-kind-<kind> class the play surface does — it cannot advertise a hue the frame won't fly",

@@ -61,7 +61,7 @@ import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncoun
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
-import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
+import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours, deriveDangerLevel, eligibleEncountersFor, generatedCreatureEncounters, synthesizeDuelDef, synthesizeChallengeDef, synthesizeStandoffDef, synthesizePuzzleDef } from "./engine/random_encounters.js"; // SNG-225: mint/backfill a real dangerLevel so the encounter pool isn't starved; SNG-231: eligibleEncountersFor = the offerable pool the GM can invite
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
@@ -686,7 +686,7 @@ const KIND_TRY = [
 /** SNG-247 (dev): mint and enter one encounter of the given frame KIND, from the live pool where possible. */
 function fireEncounterKind(kind) {
   ensureTestCharacter();
-  const pool = CONTENT.randomEncounters?.encounters || [];
+  const pool = encounterTable()?.encounters || [];
   const pick = pred => pool.find(pred) || null;
   let def = null, note = "";
 
@@ -2349,6 +2349,21 @@ function genContractDeps() {
  *  (state.js builds CONTENT.genSchemas from schemas/<type>.schema.json). Built once at load. */
 let GENERATABLE_TYPES = new Set();
 
+/** CCODE-55 (SNG-250 §4): THE encounter table — authored pool + this character's GENERATED creatures.
+ *
+ *  `CONTENT.randomEncounters` is built once at load from authored content, but a grown creature lives on
+ *  the character. Every read of the pool goes through here so a generated monster is reachable by the
+ *  SAME paths an authored one is — the offer list, the trigger roll, the dev buttons, the engage lookup.
+ *  Reading `CONTENT.randomEncounters` directly anywhere is the bug this function exists to prevent: the
+ *  creature would be minted and un-fightable (SNG-229 seam_bestiary_loaded, restated for generation), and
+ *  it would be invisible in a way nothing errors on. Cheap — a map over a handful of records per read. */
+function encounterTable() {
+  const base = CONTENT.randomEncounters;
+  if (!base) return base;
+  const grown = (() => { try { return generatedCreatureEncounters(character); } catch { return []; } })();
+  return grown.length ? { ...base, encounters: [...(base.encounters || []), ...grown] } : base;
+}
+
 /** SNG-250 §4 — the two halves must not drift apart, in EITHER direction, and both directions are real:
  *   • generatable but UNCONTRACTED = the engine can mint the type and nothing checks it is born whole.
  *     checkBorn reports `gated:false` for it, so it passes silently — the hollow-content hole this
@@ -2471,7 +2486,7 @@ function listAvailableEncounters() {
   const seeded = new Set((loc.encounterSeeds || []).map(s => s.encounterId));
   // CCODE-52: the pool the GM is offered revolves around THIS character's power — the region supplies the cast,
   // the player's power supplies the mean, and a foe they have outgrown drops out unless it is special.
-  const poolLines = eligibleEncountersFor(CONTENT.randomEncounters, loc, { power: characterPower(character, CONTENT.rules?.threat || {}) })
+  const poolLines = eligibleEncountersFor(encounterTable(), loc, { power: characterPower(character, CONTENT.rules?.threat || {}) })
     .filter(e => !seeded.has(e.id))                              // don't duplicate a hand-seeded encounter
     .map(e => `- id "${e.id}" (${e.routing}${e.flavor ? "/" + e.flavor : ""}): ${smartClamp(String(e.seed || e.look || e.id), 150)}`);
   const lines = [...seedLines, ...poolLines];
@@ -4842,7 +4857,7 @@ async function onChoice(choice) {
   // entry surfaced by listAvailableEncounters). Route it through the normal FIRE path (buildOffer → the
   // engage/decline offer beat, SNG-002b) so the rich pool is reachable through GM invites, decline path intact.
   if (choice.encounterId && !character.activeEncounter && !(CONTENT.encounters?.[choice.encounterId] || character.customEncounters?.[choice.encounterId])) {
-    const entry = (CONTENT.randomEncounters?.encounters || []).find(e => e.id === choice.encounterId);
+    const entry = (encounterTable()?.encounters || []).find(e => e.id === choice.encounterId);
     if (entry) { await fireEncounter(entry); return; }
   }
   // trivial actions — no real chance of failure, no cost: no dice, no energy
@@ -5138,7 +5153,7 @@ function escalateToFight(target, choice) {
 }
 
 async function fireEncounter(entryOrFlavor, { dev = false, news = [], aggressor = false } = {}) {
-  const table = CONTENT.randomEncounters;
+  const table = encounterTable();
   if (!table) return false;
   const entry = typeof entryOrFlavor === "string"
     ? pickEncounter(table, hereNow(), Math.random, { flavor: entryOrFlavor, ignoreDanger: dev })
@@ -5205,7 +5220,7 @@ function challengerOfferFor(trigger, paceMult) {
 /** On a trigger (travel/rest/enter/tick), maybe roll one encounter. Returns true if
  *  one fired (so the caller skips the normal arrival/rest scene). */
 async function maybeRandomEncounter(trigger, news = []) {
-  const table = CONTENT.randomEncounters;
+  const table = encounterTable();
   if (!table) return false;
   const pace = resolvePacing(profile?.pacing, table); // SNG-127: click-paths honor the player's pacing too
   // SNG-138: a prestige challenger gets its own paced roll, ahead of the generic encounter
@@ -5222,7 +5237,7 @@ async function maybeRandomEncounter(trigger, news = []) {
  *  scene, on a cooldown, and on an intense/intimate beat. Stashes a seed; the next runGM injects it. */
 function maybeNarrativeEncounter(turn, resolution) {
   turnsSinceEncounter++;
-  const table = CONTENT.randomEncounters;
+  const table = encounterTable();
   if (!table) return;
   // SNG-127: the player's chosen pacing (Calm→Relentless) resolves a rate multiplier + a cooldown; a
   // config-tunable rate/floor means "crank it" is a JSON edit or a setting, never a code hunt.
@@ -5330,7 +5345,7 @@ function runPressureProducers() {
   // a framed defend-encounter when the queue fires. Rolls on danger × the aggression pref, so a safe place is
   // rarely troubled and a dangerous one often is.
   const loc = hereNow();
-  const pool = (() => { try { return eligibleEncountersFor(CONTENT.randomEncounters, loc, { cap: 8 }); } catch { return []; } })();
+  const pool = (() => { try { return eligibleEncountersFor(encounterTable(), loc, { cap: 8 }); } catch { return []; } })();
   const threat = threatAttackPressure({ pool, danger: Number(loc?.dangerLevel) || 0, hereId: here, nowDay, pacingMult, rng: Math.random });
   if (threat) enqueuePressure(queue, threat);
 }

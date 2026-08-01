@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [SPEC - Erik's live frustration] SNG-251 story-driven item evolution (Aevi, 2026-07-27)
+> Erik bound runes into Memory in-fiction; the GM won't update the description, re-run the image to show the
+> runes, or split the shadow twin into its own callable item. DIAGNOSIS (verified) - 4 gaps: (1) the GM emits
+> itemUpdates UNRELIABLY (1 of 114 MUSTs, drops under saturation - SNG-237/246 class); (2) itemUpdates is
+> FORBIDDEN from granting power (gm.js:88 'does NOT grant new power') but Erik GENERATED real power (runes/
+> death-binding) = the core mismatch, story-earned power can't be recorded as mechanics; (3) NO re-imaging on
+> evolution (stale image never invalidates); (4) NO derived-item spawn (can't split the shadow twin). FIX: §2a
+> engine-ENFORCED evolution trigger + player 'evolve this item' action (not GM-memory); §2b image invalidation +
+> re-mint on evolution (show the runes); §2c LIFT the no-power ban for EARNED power (a bound rune grants real
+> explicit CLAMPED effects; the item shows its mechanical grants - 'no unearned power; earned power explicit +
+> clamped'); §2d a deriveItem op (shadow twin = its own linked callable item). Under SNG-250 §6 (the item case
+> done right - the template for all evolution). Guards: earned-not-handwaved, explicit+clamped, engine-enforced
+> trigger, prose+image+mechanics in SYNC, derived items real+linked.
+> CCODE: the enforced trigger + image-invalidation + allow-earned-effects + deriveItem. AEVI: the gm.js:88 rewrite
+> (earned-power distinction) + item-mechanics display copy + Memory's correct record as the worked example (fixes
+> the d14/d18 chronology flag too). ERIK: the clamp ceiling + player-evolution gating. Full: SPEC_SNG-251.
+
 > ## >> NEXT SESSION STARTS HERE << [SNG-250 UNIVERSAL GENERATION CONTRACT - Erik, 2026-08-01]
 > **Erik's directive: open the next session on the SNG-250 gate.** Spec:
 > `po/SPEC_SNG-250_universal_generation_contract.md`. Do this BEFORE anything else, including any live-play bug

@@ -15,7 +15,7 @@
  },
  "movesHeader": {
   "note": "the in-ribbon header for the moves section (replaces the separate panel's hint). Present when the ribbon is engaged.",
-  "text": "Your moves — grouped by what they do. Or describe your own below; the {kind} rules bind either way.",
+  "text": "Your moves — grouped by what they do. Or describe your own above; the {kind} rules bind either way.",
   "waysOutLabel": "ways out",
   "thisEncounterLabel": {
    "fight": "this fight",
@@ -26,9 +26,11 @@
   }
  },
  "freeform": {
-  "note": "the freeform-cue line stays IN the ribbon - moves are shortcuts to intent, never a cage.",
-  "text": "▸ {freeform} — or pick a move above; type anything and the {kind} resolves it against the stage.",
-  "shortcutNote": "the moves are shortcuts; a typed move routes through the same rules."
+  "note": "CORRECTED (Aevi 2026-08-01): this is the FRAGMENT the frame WRAPS, not a whole line. The frame template renders: ▸ {cue} {wrapSuffix}. So `cue` is the bare freeform phrase and `wrapSuffix` is the moves pointer - the frame supplies the ▸. Previously `text` was a full self-contained line (its own ▸ + its own moves clause) that DOUBLED the frame's wrapper and still said 'Moves below' when moves are now IN the ribbon. Now it composes cleanly.",
+  "cue": "describe your own move — the exits are shortcuts; the {kind} resolves whatever you try, against the stage",
+  "wrapSuffix": "— or pick a grouped move above",
+  "shortcutNote": "the moves are shortcuts to intent; a typed move routes through the same rules — never a cage",
+  "replaces": "FRAME_FREEFORM_CUE (encounterFrame.js:334) + the '— or tap ⚙ Moves below' suffix in the app.js:8648 template. The moves moved INTO the ribbon (SNG-252), so the suffix points 'above', not 'below'."
  },
  "wardDisabled": {
   "note": "a move the encounter FORBIDS (SNG-230 §7b ward) reads disabled-with-reason IN the moves, not offered-then-refused.",

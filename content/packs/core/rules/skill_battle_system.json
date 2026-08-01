@@ -287,7 +287,7 @@
   },
   "note": "SNG-098 machine layer — structured so skill_battle.js reads NUMBERS, never the prose above (the §7b lesson). The prose stays as the design record; this is what the engine executes.",
   "functionMatchup": {
-   "note": "SNG-254 (Aevi 2026-08-01): the full function MATCHUP MATRIX (was 7 baseline edges). edges[attacker][defender]=signed bonus for attacker. KNOW sees through INFLUENCE (reveal>deceive/conceal, foresee>the telegraphed strike); BREAK/OPEN break defenses (break>shield/ward, open>ward/seal); BIND/HINDER lock the mobile but a seer breaks free (reveal/foresee>bind); DECEIVE beats the aimed, a reader sees through; TRACK/CONCEAL cycle. Range ~-3..+4; PROTECT blunted (engine caps 0..bluntCap). Relationships are the design; magnitudes tunable.",
+   "note": "SNG-254 (Aevi 2026-08-01): the function MATCHUP MATRIX. edges[attacker][defender]=signed bonus for attacker. Only the MARGIN (my edge minus theirs) decides a round, so a pair must be ASYMMETRIC to do anything - equal-both-ways cancels to a no-op (the SNG-254b inert-pair fix). KNOW sees through INFLUENCE (reveal>deceive/conceal, foresee>the telegraphed strike); BREAK/OPEN break defenses (break>shield/ward, break>bind); BIND/HINDER lock the mobile but a seer breaks free (reveal/foresee>bind, foresee>hinder); DECEIVE beats the aimed but a reader sees through; TRACK/CONCEAL LEAN to the hider (conceal>track slightly - not a cycle, a lean; a true cycle would need a third verb A>B>C>A); SUSTAIN outlasts a burst (sustain>break). Range ~-3..+4; PROTECT blunted. Relationships are the design; magnitudes tunable.",
    "edges": {
     "strike": {
      "heal": 2,
@@ -315,8 +315,7 @@
      "summon": 2,
      "transform": 1,
      "bind": 2,
-     "heal": 1,
-     "sustain": 1
+     "heal": 1
     },
     "hinder": {
      "move": 3,
@@ -326,7 +325,6 @@
      "heal": 1,
      "restore": 1,
      "track": 2,
-     "foresee": 1,
      "summon": 1
     },
     "empower": {
@@ -363,7 +361,7 @@
      "transform": 1
     },
     "track": {
-     "conceal": 3,
+     "conceal": 2,
      "move": 2,
      "travel": 2,
      "deceive": 2,
@@ -381,15 +379,13 @@
      "make": 1
     },
     "summon": {
-     "move": 1,
-     "hinder": 1,
      "strike": -1
     },
     "bind": {
      "move": 3,
      "travel": 3,
      "strike": 2,
-     "break": 2,
+     "break": 1,
      "summon": 2,
      "reveal": -2,
      "foresee": -2
@@ -404,7 +400,7 @@
     },
     "deceive": {
      "strike": 2,
-     "track": 2,
+     "track": 1,
      "command": 1,
      "reveal": -3,
      "foresee": -2

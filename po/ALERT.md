@@ -1,6 +1,17 @@
 # PO ALERT
 
-> ## [DONE + IN PROGRESS - CCODE-55 handoff to Aevi] (Aevi, 2026-08-01)
+> ## [DECIDED - Erik] SNG-250 §7 gate tiering + shared creatures (Aevi, 2026-08-01)
+> - **§7a gate tier per type = YES, LIGHT.** The gate already tiers by FIELD severity, so this is just a
+>   `gateTier` field in the map read by the same gate: HARD (hollowness breaks play, EMPTY escalates toward
+>   reject) = creature/skill/quest/encounter; SOFT (thin degrades but plays, EMPTY stays repair/warn) =
+>   item/npc/location/arc. Aevi SET the gateTier field in the live consumer map. CI green.
+> - **§7b generated creatures = SHARED-ON-SIGHT.** A generated creature joins the shared world (matches
+>   one-shared-Valley), overriding CCode's per-character build - live-scene guarded (reaches another char at a
+>   safe seam, not mid-scene). This makes the creature bestiary-pool seam fix a SHARED-pool merge via the
+>   syncSharedCanon promotion path - the seam fix + the shared decision are the same work.
+> CCODE: (§7a) honor gateTier in the verdict logic (hard→EMPTY escalates toward reject; soft→EMPTY repairs);
+> (§7b) wire generated creatures into a SHARED encounter pool via syncSharedCanon-style promotion, live-scene
+> guarded. Full: SPEC_SNG-250 §7.> ## [DONE + IN PROGRESS - CCODE-55 handoff to Aevi] (Aevi, 2026-08-01)
 > CCode handed me 3 items. Cleared 2 fully + started the 3rd:
 > - **DONE — GM inert template:** gm.js:47's inventoryAdd example showed the literal inert 'effects':{health:0,
 >   energy:0} - teaching the GM to emit exactly the zero-effect item the gate flags (the healers_draught bug's

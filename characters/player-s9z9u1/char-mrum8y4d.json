@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 5,
-  "xp": 423,
+  "xp": 428,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -52,7 +52,7 @@
     },
     {
       "abilityId": "prism_sight",
-      "level": 1
+      "level": 2
     },
     {
       "abilityId": "harmonic_voice",
@@ -70,7 +70,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.107226840779826,
+    "spectrumId": -0.15186549874083471,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
@@ -79,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 78,
+  "energy": 77,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -194,14 +194,19 @@
         "player": "Lead her to the eastern tower doorway — it looked darker and more sheltered from the nave's open sky",
         "summary": "Loki leads Vessin into the eastern tower landing; Cy lights a candle; a quiet voice asks something in the nave beyond.",
         "narration": "You lead the way toward the eastern tower doorway, keeping your pace measured — unhurried enough that Vessin can watch the nave as she walks and not feel driven. The gnats are still behind you, a thin copper drift near the south transept. Their hum fades with each step.\n\nThe doorway opens into a small landing at the tower's base. Stone steps curl upward to the left, but the landing itself is dry and still, sheltered on three sides, the open nave behind you. Someone left a stub of tallow candle wedged in a crack in the wall. Cy extends one of its precise legs and touches the wick. The candle catches, and the landing fills with a low warm light that the stone holds quietly.\n\nVessin steps in after you and makes a small survey of the space — up, left, right — before she settles her back against the curved wall where she can see both the doorway and the stairs. She crosses her arms. The knife is sheathed. She is not relaxed, but she has decided to be here.\n\nA sound drifts in from somewhere in the nave behind you — not the gnats, not the wind. A low voice, unhurried, asking something. You cannot make out the words. Whoever it is does not seem to know you are here. But the voice has the particular patient quality of someone who is going to keep asking until they get a true answer."
+      },
+      {
+        "player": "Use see the made think and prism sight to quickly locate a likely room in this area of the structure that you can be safe and comfortable with Vessin in.",
+        "summary": "Loki used See the Made Thing and Prism Sight together to locate a sheltered storage alcove off the tower landing — dry, one entrance, regularly used by the scaffold crew.",
+        "narration": "You ease your back against the landing wall and let the two crafts run together — quiet, low-cost in a thin substrate, but enough.\n\nSee the Made Thing spreads first. The eastern tower reads as four hundred years of decisions laid over each other: the original Rootkin joinery at the base, two generations of human stonework above it, and then a long pause where nobody agreed on the next course. The seams tell you which parts are load-bearing and which are simply old habits. The upper floors are unfinished and cold. But the landing where you stand is the hinge of the whole tower — sheltered, sound, and the stone here is thick enough that the nave's open sky does not reach it.\n\nPrism Sight does the rest. You read the last hour of light in the room: two patches of warmth where the candle has been before — someone uses this landing regularly, probably a wright on the scaffolding crew. A doorway to your left, half-hidden behind the curve of the stair, leads into a small storage alcove. Dry wood smell. A folded canvas on a low shelf, probably a drop cloth, but flat enough to sit on. No through-drafts. No second entrance. The light-history in there is calm: nobody moved through it in a hurry, nobody slept there against their will.\n\nYou look at Vessin. \"There's a room just off the stair,\" you say, nodding toward the half-hidden door. \"Dry. One way in. Someone uses it, so it's been looked after.\" You keep your voice level. \"Comfortable enough for a conversation.\""
       }
     ],
     "lastTurn": {
-      "narration": "You lead the way toward the eastern tower doorway, keeping your pace measured — unhurried enough that Vessin can watch the nave as she walks and not feel driven. The gnats are still behind you, a thin copper drift near the south transept. Their hum fades with each step.\n\nThe doorway opens into a small landing at the tower's base. Stone steps curl upward to the left, but the landing itself is dry and still, sheltered on three sides, the open nave behind you. Someone left a stub of tallow candle wedged in a crack in the wall. Cy extends one of its precise legs and touches the wick. The candle catches, and the landing fills with a low warm light that the stone holds quietly.\n\nVessin steps in after you and makes a small survey of the space — up, left, right — before she settles her back against the curved wall where she can see both the doorway and the stairs. She crosses her arms. The knife is sheathed. She is not relaxed, but she has decided to be here.\n\nA sound drifts in from somewhere in the nave behind you — not the gnats, not the wind. A low voice, unhurried, asking something. You cannot make out the words. Whoever it is does not seem to know you are here. But the voice has the particular patient quality of someone who is going to keep asking until they get a true answer.",
-      "sceneSummary": "Loki leads Vessin into the eastern tower landing; Cy lights a candle; a quiet voice asks something in the nave beyond.",
+      "narration": "You ease your back against the landing wall and let the two crafts run together — quiet, low-cost in a thin substrate, but enough.\n\nSee the Made Thing spreads first. The eastern tower reads as four hundred years of decisions laid over each other: the original Rootkin joinery at the base, two generations of human stonework above it, and then a long pause where nobody agreed on the next course. The seams tell you which parts are load-bearing and which are simply old habits. The upper floors are unfinished and cold. But the landing where you stand is the hinge of the whole tower — sheltered, sound, and the stone here is thick enough that the nave's open sky does not reach it.\n\nPrism Sight does the rest. You read the last hour of light in the room: two patches of warmth where the candle has been before — someone uses this landing regularly, probably a wright on the scaffolding crew. A doorway to your left, half-hidden behind the curve of the stair, leads into a small storage alcove. Dry wood smell. A folded canvas on a low shelf, probably a drop cloth, but flat enough to sit on. No through-drafts. No second entrance. The light-history in there is calm: nobody moved through it in a hurry, nobody slept there against their will.\n\nYou look at Vessin. \"There's a room just off the stair,\" you say, nodding toward the half-hidden door. \"Dry. One way in. Someone uses it, so it's been looked after.\" You keep your voice level. \"Comfortable enough for a conversation.\"\n\n*▲ Practiced — **Prism Sight** is fluent now (rank 2), earned through use.*",
+      "sceneSummary": "Loki used See the Made Thing and Prism Sight together to locate a sheltered storage alcove off the tower landing — dry, one entrance, regularly used by the scaffold crew.",
       "choices": [
         {
-          "label": "Ask Vessin directly about the person she met — the one who might have been like you.",
+          "label": "Lead Vessin into the alcove and get the door settled — then ask plainly who the man in the lower Annex is and whether she knows him",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -211,33 +216,30 @@
           "trivial": true
         },
         {
-          "label": "Step back to the doorway and use Prism Sight to check the nave — see if the voice belongs to someone who was already here, or arrived fresh.",
+          "label": "Before moving anywhere, use Descent to name what Vessin actually wants right now — safety, information, or something else entirely",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "scout",
-            "careful"
+            "study"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": "descent",
+          "energyCost": 6
         },
         {
-          "label": "Stay put and let the voice come to you — say nothing, see what it does.",
-          "attribute": "mental",
-          "subAttribute": "wits",
+          "label": "Let Vessin lead — step aside and let her choose whether she enters the alcove at all",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "guard",
             "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Tell Vessin what you heard from the hired stranger — lay out what you know about the man in the lower Annex and see what she makes of it.",
+          "label": "Once in the alcove, bring up the person she met who might have been like you — the account she hasn't given yet",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "negotiate"
@@ -246,75 +248,84 @@
         }
       ],
       "scene": {
-        "setting": "Eastern tower landing at the base of the Half-Cathedral's eastern tower — stone steps curling upward to the left, three walls of sheltering stone, the nave doorway open behind. A tallow candle stub now lit in a wall-crack gives low warm light. Deep night, cold, early spring.",
+        "setting": "Eastern tower landing at the base of the Half-Cathedral's eastern tower — stone steps curling upward to the left, three walls of sheltering stone, the nave doorway open behind. A tallow candle stub burning in a wall-crack gives low warm light. A half-hidden door to the left of the stair leads into a small dry storage alcove. Deep night, cold, early spring.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Back against the curved wall where she can see the doorway and stairs both — arms crossed, knife sheathed, settled but not relaxed."
+            "state": "Back against the curved wall, arms crossed, knife sheathed — watching you as you describe the alcove, expression appraising."
           },
           {
             "name": "Cy",
-            "state": "Lamp lit, lens open, one leg still extended from lighting the candle — now drawing it back in."
+            "state": "Lamp lit, lens open, one leg still drawn back from lighting the candle — oriented toward the alcove door."
           }
         ],
         "objects": [
           "Tallow candle stub burning in a wall-crack",
           "Stone stairs curling upward to the left",
+          "Half-hidden door to the left of the stair — leads to the dry storage alcove",
           "The open nave doorway behind — nave visible beyond"
         ],
         "threads": [
           "A low, patient voice in the nave beyond — asking something, not yet identifiable",
           "Who sent the aggressor — the man in the lower Annex, still unnamed",
           "Vessin's account of the person she met who might have been like Loki — not yet given",
-          "Whether there is a second aggressor"
+          "Whether there is a second aggressor",
+          "The dry storage alcove — identified, not yet entered"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "vessin-tallow-bark",
-          "name": "Vessin Tallow-bark",
-          "note": "Followed Loki into the eastern tower landing; settled with her back to the wall where she can watch both exits. Knife sheathed. Present and cautious.",
-          "statusNote": "In the eastern tower landing of the Half-Cathedral — back to the wall, knife sheathed, watching."
-        }
-      ],
       "placeUpdates": [
         {
+          "note": "A dry storage alcove exists off the eastern tower landing stair — one entrance, regularly used by scaffold crew, flat canvas drop-cloth on a low shelf. Calm light-history: nobody moved through it in a hurry.",
           "subPlace": {
-            "name": "Eastern Tower Landing",
+            "name": "Storage Alcove, Eastern Tower",
             "parent": "The Half-Cathedral",
-            "note": "Dry stone landing at the base of the eastern tower — three sheltering walls, stairs curling left, open to the nave behind. A tallow candle stub wedged in a wall-crack, now lit by Cy.",
-            "visited": true
+            "note": "Small dry room off the eastern tower landing stair — drop-cloth on a shelf, one entrance, sheltered and regularly used.",
+            "visited": false
           }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-half-cathedral",
+          "label": "The Half-Cathedral",
+          "kind": "place",
+          "entityId": "the-half-cathedral",
+          "fact": "The eastern tower landing is the structural hinge of the tower — four hundred years of decisions layered over each other; original Rootkin joinery at the base, human stonework above. A dry storage alcove off the stair is used regularly by the scaffold crew.",
+          "links": [
+            "grovehome",
+            "rootkin"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk across the nave and into the tower landing."
+        "why": "A quick combined craft-read of the tower structure — minutes of stillness and attention."
       }
     },
     "sceneState": {
-      "setting": "Eastern tower landing at the base of the Half-Cathedral's eastern tower — stone steps curling upward to the left, three walls of sheltering stone, the nave doorway open behind. A tallow candle stub now lit in a wall-crack gives low warm light. Deep night, cold, early spring.",
+      "setting": "Eastern tower landing at the base of the Half-Cathedral's eastern tower — stone steps curling upward to the left, three walls of sheltering stone, the nave doorway open behind. A tallow candle stub burning in a wall-crack gives low warm light. A half-hidden door to the left of the stair leads into a small dry storage alcove. Deep night, cold, early spring.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Back against the curved wall where she can see the doorway and stairs both — arms crossed, knife sheathed, settled but n"
+          "state": "Back against the curved wall, arms crossed, knife sheathed — watching you as you describe the alcove, expression apprais"
         },
         {
           "name": "Cy",
-          "state": "Lamp lit, lens open, one leg still extended from lighting the candle — now drawing it back in."
+          "state": "Lamp lit, lens open, one leg still drawn back from lighting the candle — oriented toward the alcove door."
         }
       ],
       "objects": [
         "Tallow candle stub burning in a wall-crack",
         "Stone stairs curling upward to the left",
+        "Half-hidden door to the left of the stair — leads to the dry storage alcove",
         "The open nave doorway behind — nave visible beyond"
       ],
       "threads": [
         "A low, patient voice in the nave beyond — asking something, not yet identifiable",
         "Who sent the aggressor — the man in the lower Annex, still unnamed",
         "Vessin's account of the person she met who might have been like Loki — not yet given",
-        "Whether there is a second aggressor"
+        "Whether there is a second aggressor",
+        "The dry storage alcove — identified, not yet entered"
       ]
     }
   },
@@ -893,7 +904,8 @@
     "grovehome": {
       "visits": 1,
       "notes": [
-        "[d1] The Half-Cathedral stands north of Grovehome at the wood's edge — visited for the first time at night, its fourth design scaffolded and open-naved, always being built."
+        "[d1] The Half-Cathedral stands north of Grovehome at the wood's edge — visited for the first time at night, its fourth design scaffolded and open-naved, always being built.",
+        "[d2] A dry storage alcove exists off the eastern tower landing stair — one entrance, regularly used by scaffold crew, flat canvas drop-cloth on a low shelf. Calm light-history: nobody moved through it in a hurry."
       ],
       "flags": {},
       "lastVisit": 1,
@@ -910,7 +922,7 @@
         }
       },
       "_containmentNotes": [
-        "\"Eastern Tower Landing\" was placed in the_half_cathedral (the fiction named it), not grovehome"
+        "\"Storage Alcove, Eastern Tower\" was placed in the_half_cathedral (the fiction named it), not grovehome"
       ]
     },
     "the_half_cathedral": {
@@ -931,6 +943,13 @@
           "day": 2,
           "visited": true,
           "note": "Dry stone landing at the base of the eastern tower — three sheltering walls, stairs curling left, open to the nave behind. A tallow candle stub wedged in a wall-crack, now lit by Cy."
+        },
+        "storage-alcove-eastern-tower": {
+          "name": "Storage Alcove, Eastern Tower",
+          "parentId": "the_half_cathedral",
+          "day": 2,
+          "visited": false,
+          "note": "Small dry room off the eastern tower landing stair — drop-cloth on a shelf, one entrance, sheltered and regularly used."
         }
       }
     }
@@ -1084,7 +1103,7 @@
     "lastSharedReadAt": "2026-08-01T21:06:04.486Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 11,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1865,7 +1884,8 @@
         "label": "The Half-Cathedral",
         "kind": "place",
         "facts": [
-          "[d1] In its fourth design, its second hundredth year: a ribcage of stone open to the sky, two towers finished to different heights by different generations, south transept scaffolded and always being worked. The third design was completed and then disassembled. The fourth has not been declared…"
+          "[d1] In its fourth design, its second hundredth year: a ribcage of stone open to the sky, two towers finished to different heights by different generations, south transept scaffolded and always being worked. The third design was completed and then disassembled. The fourth has not been declared…",
+          "[d2] The eastern tower landing is the structural hinge of the tower — four hundred years of decisions layered over each other; original Rootkin joinery at the base, human stonework above. A dry storage alcove off the stair is used regularly by the scaffold crew."
         ],
         "links": [
           "grovehome",
@@ -1874,7 +1894,7 @@
         "aliases": [],
         "createdDay": 1,
         "entityId": "the-half-cathedral",
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "vessin-of-the-long-bough": {
         "id": "vessin-of-the-long-bough",
@@ -1997,24 +2017,24 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.8195082556769115,
-    "cerebral": 12.95183212822509,
-    "social": 19.127376484138207,
-    "strategic": 8.766658245043105,
-    "cautious": 7.5684214657233815,
-    "amorous": 5.950558333785142,
-    "generous": 5.54959333767961,
-    "ruthless": 0.7569318012891779,
-    "risky": 2.321613826085985,
-    "patient": 0.6339909851088495,
-    "deception": 0.7379983458266509
+    "devotion": 1.7740205492849888,
+    "cerebral": 12.628036325019464,
+    "social": 19.64919207203475,
+    "strategic": 10.547491788917027,
+    "cautious": 7.379210929080297,
+    "amorous": 5.8017943754405135,
+    "generous": 5.41085350423762,
+    "ruthless": 0.7380085062569485,
+    "risky": 2.2635734804338354,
+    "patient": 0.6181412104811282,
+    "deception": 0.7195483871809846
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "orator"
   ],
-  "actionCount": 96,
+  "actionCount": 97,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2315,8 +2335,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785618565118,
-  "rev": 365,
+  "updatedAt": 1785618796016,
+  "rev": 366,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3086,7 +3106,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 45
+    "the_quickwood": 46
   },
   "opLossPending": false,
   "sessions": [
@@ -3141,10 +3161,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T21:09:25.117Z",
+      "lastAt": "2026-08-01T21:13:16.015Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 11
+      "beats": 12
     }
   ],
   "establishedFacts": [
@@ -3182,13 +3202,13 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 115,
-    "choices": 115,
+    "sceneSummary": 116,
+    "choices": 116,
     "characterDeltas": 51,
-    "scene": 115,
-    "placeUpdates": 15,
-    "codexUpdates": 79,
-    "timeOps": 107,
+    "scene": 116,
+    "placeUpdates": 16,
+    "codexUpdates": 80,
+    "timeOps": 108,
     "offer": 10,
     "generateRequest": 6,
     "sceneEnded": 23,
@@ -3206,7 +3226,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 115,
+  "_opTurns": 116,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3214,12 +3234,12 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 27,
+      "see_the_made_thing": 28,
       "falsecraft": 5,
       "the_wrong_reality": 5,
       "the_misdirect": 2,
       "the_better_story": 11,
-      "prism_sight": 7,
+      "prism_sight": 8,
       "harmonic_voice": 2,
       "hunters_strike": 3,
       "descent": 1
@@ -3227,7 +3247,7 @@
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
       "see_the_made_thing+the_misdirect": 1,
-      "prism_sight+see_the_made_thing": 1,
+      "prism_sight+see_the_made_thing": 2,
       "harmonic_voice+the_wrong_reality": 1,
       "harmonic_voice+the_better_story": 1
     },
@@ -3244,12 +3264,12 @@
       }
     ],
     "lastUsed": {
-      "see_the_made_thing": 27,
+      "see_the_made_thing": 32,
       "falsecraft": 32,
       "the_wrong_reality": 32,
       "the_misdirect": 31,
       "the_better_story": 32,
-      "prism_sight": 27,
+      "prism_sight": 32,
       "harmonic_voice": 32,
       "hunters_strike": 32,
       "descent": 32

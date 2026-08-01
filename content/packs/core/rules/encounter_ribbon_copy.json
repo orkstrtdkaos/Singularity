@@ -42,5 +42,32 @@
   "closedLabel": "⚙ moves",
   "openByDefault": true
  },
- "howCCodeUses": "When the ribbon is engaged (§2b), render as ONE enc-frame: header → subtitle (byKind) → win/meter/receipt → exits → movesHeader + the grouped moves (SNG-252 §2c, hints from encounter_move_hints.json) → freeform. The moves are open by default; ⚙ collapses. No separate moves-panel append - it's all inside the one container."
+ "howCCodeUses": "When the ribbon is engaged (§2b), render as ONE enc-frame: header → subtitle (byKind) → win/meter/receipt → exits → movesHeader + the grouped moves (SNG-252 §2c, hints from encounter_move_hints.json) → freeform. The moves are open by default; ⚙ collapses. No separate moves-panel append - it's all inside the one container.",
+ "collapsedMoves": {
+  "note": "SNG-252b (Aevi): the COLLAPSED moves affordance - shown by default; the cards expand on tap. Summarizes what's available by family so the player knows what's there without the wall. CCode builds the count string from the owned-by-family tally.",
+  "summary": "⚙ Your moves — {summary} · tap to open",
+  "summaryFormat": "{n} {familyWord}, joined by ' · ' — e.g. '4 reads, 1 strike'; use the family's plain word (reveal→reads, strike→strikes, ward→guards, heal→mends, etc.)",
+  "empty": "⚙ No learned crafts to shortcut — describe your move below",
+  "openLabel": "⚙ hide moves"
+ },
+ "turnDetail": {
+  "note": "SNG-252b: intensity + the Sense→Action→Bonus→Execute chain are ADVANCED controls; tuck them behind this toggle so they don't compete with the scene. Default hidden.",
+  "label": "⚙ turn detail",
+  "openLabel": "⚙ hide turn detail",
+  "hint": "intensity + the action chain — for fine control of the turn"
+ },
+ "hierarchy": {
+  "note": "SNG-252b: the ribbon render ORDER (importance top to bottom).",
+  "order": [
+   "header (label)",
+   "SCENE / narration (prominent — what's happening)",
+   "where you stand (win + meter + receipt, ONE compact row)",
+   "what you can do (⚙ moves collapsed + freeform line)",
+   "ways out (quiet, bottom)",
+   "turn detail (tucked behind ⚙)"
+  ]
+ },
+ "familyBlurbRule": {
+  "note": "SNG-252b §2d: the family-level blurb (e.g. 'reads THEM — sharpens the fog') shows ONCE as the family group header, NOT on every chip. Each move card shows only its OWN distinguishing line ('finds the opening, the trick' vs 'finds the pattern in how they fight'). Family blurb once per group; per-move line per move."
+ }
 }

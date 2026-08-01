@@ -8879,6 +8879,36 @@ await (async () => {
     (appSrc251.match(/itemEvolveDeps\(/g) || []).length >= 3);
 }
 
+// ---------- ERIK'S BUG (2026-08-01, live): a bestiary monster fought as "the aggressor" ----------
+// "wth is going on here? I thought i was supposed to be fighting rust nanites." He was. The engine had the
+// creature the whole way — loaded, weighted, danger-gated, seeded with its own prose — and ANONYMISED it at
+// the last hop, because the pool entry carried no `name` and no `opponent.name` and synthesizeDuelDef reads
+// exactly those two. One missing pair of fields defeated SNG-229's whole purpose at the final step.
+{
+  const re251 = await import("../engine/random_encounters.js");
+  const roster = JSON.parse(readFileSync(join(root, "content/packs/valley/bestiary.json"), "utf8")).roster || [];
+  const gnats = roster.filter(c => c.id === "rust_choir_gnats");
+  const entry = re251.bestiaryEncounters({ roster: gnats })[0];
+  const def = re251.synthesizeDuelDef(entry);
+  check("ERIK-BUG: a bestiary creature keeps its NAME as the encounter title — not the flavor map's 'Hard Ground'",
+    def.name === "Rust-Choir Gnats", `got "${def.name}"`);
+  check("ERIK-BUG: the foe is the CREATURE, never 'the aggressor'",
+    def.opponent.name === "rust-choir gnats", `got "${def.opponent.name}"`);
+  check("ERIK-BUG: the duel carries creatureId through, instead of downstream re-parsing it out of the def id",
+    def.creatureId === "rust_choir_gnats");
+  check("ERIK-BUG: EVERY roster creature is named in both places — no monster in the game fights anonymously",
+    re251.bestiaryEncounters({ roster }).map(e => re251.synthesizeDuelDef(e))
+      .every(d => d.name && d.name !== "Hard Ground" && d.opponent.name && d.opponent.name !== "the aggressor"),
+    "some creature still synthesizes to the flavor title / the generic aggressor");
+  check("ERIK-BUG: a non-creature entry is UNCHANGED — the generic fallbacks still apply where they belong",
+    (() => { const d = re251.synthesizeDuelDef({ id: "x", flavor: "fight", opponent: { threat: 30 } });
+      return d.name === "A Hostile Meeting" && d.opponent.name === "the aggressor" && d.creatureId === undefined; })());
+  // The same path serves GENERATED creatures (SNG-250 §7b), so the fix covers them for free — assert it.
+  check("ERIK-BUG: a GENERATED creature is named too (it rides the same synthesis path)",
+    (() => { const g = re251.generatedCreatureEncounters({ generated: { creature: { thing: { id: "thing", name: "the pale thing", tier: "notable", class: "beast", look: "l", danger: "d", pressures: ["HARM"] } } } })[0];
+      const d = re251.synthesizeDuelDef(g); return d.opponent.name === "the pale thing" && d.name === "The Pale Thing"; })());
+}
+
 // ---------- SNG-253 (engine half): the opponent's move vocabulary can be KIND-NATIVE ----------
 // Scoped from the post-252 re-look Aevi asked for, and grounded in what the engine ACTUALLY declared rather
 // than what the spec predicted: a standoff opponent declared "a hard strike" and held "a raised guard" — in a

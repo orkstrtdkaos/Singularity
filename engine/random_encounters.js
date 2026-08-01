@@ -54,6 +54,12 @@ const BEAST_TIER = {
  *  admits; offered as a DUEL with a decline/flee path (SNG-002b — a hazard is a CHOICE to fight, not a trap).
  *  The creature's look/danger/pressures ride on the entry so the GM narrates it and the player knows which
  *  crafts answer it. A hazard, not a villain (the bestiary design law). Pure. */
+/** Title-case a creature's authored common-noun name for the frame HEADER ("rust-choir gnats" → "Rust-Choir
+ *  Gnats"). The authored lowercase form is kept for mid-sentence use; only the header wants capitals. */
+function titleCase(s) {
+  return String(s || "").replace(/\b[a-z]/g, m => m.toUpperCase());
+}
+
 export function bestiaryEncounters(bestiary = {}) {
   const roster = Array.isArray(bestiary.roster) ? bestiary.roster : [];
   return roster.filter(c => c && c.id).map(c => {
@@ -61,7 +67,19 @@ export function bestiaryEncounters(bestiary = {}) {
     return {
       id: `beast_${c.id}`, flavor: "dangerous", weight: t.weight, minDanger: t.minDanger,
       regions: ["*"], tags: [], routing: "duel", avoidable: true,
-      opponent: { threat: t.threat, yieldAt: 0.25 },
+      // ERIK'S BUG (2026-08-01, live): "wth is going on here? I thought i was supposed to be fighting rust
+      // nanites." He was — and the engine had the creature the whole way: loaded, weighted, danger-gated,
+      // seeded with its own prose. It was ANONYMISED at the last hop. This entry carried `creatureId` and a
+      // `seed` naming the thing, but NEITHER a `name` NOR an `opponent.name`, and synthesizeDuelDef reads
+      // exactly those two. So every bestiary monster in the game arrived as:
+      //   title    -> titleFromFlavor(entry) with no entry.name -> the FLAVOR map -> "Hard Ground"
+      //               (a HAZARD title, on an encounter that runs as a FIGHT — the mismatch he saw)
+      //   opponent -> o.name || "the aggressor"
+      // One missing pair of fields defeated the whole point of SNG-229 (give the fight pool a real source of
+      // monsters) at the final step. NAME is title-cased for the frame header; `opponent.name` keeps the
+      // authored lowercase common-noun form, because it reads mid-sentence ("rust-choir gnats driven back").
+      name: titleCase(c.name || c.id.replace(/_/g, " ")),
+      opponent: { name: c.name || c.id.replace(/_/g, " "), threat: t.threat, yieldAt: 0.25 },
       creatureId: c.id, creatureClass: c.class || null, tier: c.tier || null, pressures: c.pressures || [],
       seed: smartClamp(`${c.name || c.id} — ${c.look || ""}${c.danger ? " " + c.danger : ""}`.trim(), 400)
     };
@@ -249,6 +267,11 @@ export function synthesizeDuelDef(entry) {
     // collapseEligibility applied to no random/bestiary duel. Undefined when the entry has none (unchanged).
     ...(entry.tier != null ? { tier: entry.tier } : {}), ...(entry.minDanger != null ? { minDanger: entry.minDanger } : {}),
     setup: entry.seed, lethal: false, avoidable: true, fromRandom: true, flavor: entry.flavor,
+    // Erik's bug: the duel dropped `creatureId`, so downstream had to RECONSTRUCT the creature by parsing it
+    // back out of the minted def id ("re-beast_<id>" — see the noteBeastImage comment in app.js). Carried
+    // through now, so the thing the player is fighting keeps its identity instead of being re-derived from a
+    // string. Undefined for non-creature entries, exactly as before.
+    ...(entry.creatureId ? { creatureId: entry.creatureId, creatureClass: entry.creatureClass || null } : {}),
     // SNG-138: a prestige-challenge entry carries these so the resolved duel can feed renown (harmless when absent)
     _challengeBand: entry._challengeBand || undefined, _challenger: entry._challenger || undefined,
     opponent: {

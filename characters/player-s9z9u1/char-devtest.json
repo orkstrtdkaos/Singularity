@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 0,
+  "xp": 5,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -22,14 +22,20 @@
     {
       "abilityId": "prism_sight",
       "level": 1
+    },
+    {
+      "abilityId": "hunters_strike",
+      "level": 1
     }
   ],
-  "alignment": {},
+  "alignment": {
+    "value": 0.05
+  },
   "attunement": 3,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 65,
+  "energy": 57,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -68,311 +74,29 @@
       "consumable": false
     }
   ],
-  "deeds": [],
-  "relationships": {},
-  "chronicle": [],
-  "currentLocationId": "millbrook",
-  "activeScene": {
-    "locationId": "millbrook",
-    "turns": [
-      {
-        "player": "Ask to name the tree if you help by analyzing the sapling's root structure.  In 40 years let the child know that the tree has a name.",
-        "summary": "Loki offers to name the tree in exchange for analyzing the sapling — Ossivyn declines, explaining the tree names itself through the child's own reckoning.",
-        "narration": "The man at the gate is knee-deep in his hole when Loki crouches beside the bundled sapling and makes the offer. Help with the analysis, he says — he can read the root structure, tell whether the binding is sound, whether the sapling will take in this soil. In exchange, the tree gets a name. And in forty years, when the child is grown, someone tells them what that name is.\n\nOssivyn Tallow straightens up in the hole. He plants his spade and rests both hands on the handle and looks at Loki for a long moment. Not hostile. Not insulted. He looks the way a man looks when he has heard something that almost fits but doesn't.\n\n'The tree names itself,' he says finally, said Ossivyn. 'That's not how it works here. I plant it. It grows. The child finds out what kind of thing it is when they're old enough to sit with it. A name from a stranger forty years ahead of that — ' he pauses, and his hands shift on the spade handle. 'That's a different gift than the one I'm giving.'\n\nCy, perched on the fence post nearest the gate, tilts its lens toward the sapling without moving otherwise. The offer is declined cleanly. The hole is still there. The spare spade is still leaning against the post."
-      },
-      {
-        "player": "Use the better story to have Ossivyn reconsider.",
-        "summary": "Loki tried The Better Story on Ossivyn — but the man knows exactly what he is doing, and a well-shaped frame finds no purchase in a person who has already made peace with his own.",
-        "narration": "Loki tries the angle that has worked before — the liveable frame, the version of a thing that lets a person pick it up and carry it without cutting themselves. He shapes the words carefully. The tree already has a name forming in it, he says. The child will find it. But a name given in love, by a stranger who looked at the roots and thought of them before they were born — that is not the same thing as the name the tree claims. That is an older gift. A name laid under the name.\n\nOssivyn Tallow listens. He does not interrupt. He tilts his head the way a man tilts his head at a sound that is pleasant but coming from the wrong direction.\n\nThen he shakes his head. Not unkindly. He picks up his spade again and sets the blade into the earth.\n\n'That is a good story,' he says, said Ossivyn. 'I can hear the care in it. But I know what I am planting and I know why, and a name laid under the name is still a stranger's name. The child will not find mine either. They will find their own.' He glances at the spare spade against the fence post. 'The offer stands, if you want to dig.'"
-      },
-      {
-        "player": "Use the wrong reality with Harmonic voice... convince the man that it is import for them to name this tree as you say, and to raise a plaque at their own expense to ensure the name is known until that child hears it.",
-        "summary": "The Harmonic undertone and a brush of Wrong Reality cracked Ossivyn's certainty partway — he won't raise a plaque, but he'll write the name in the orchard's record.",
-        "narration": "Loki lets the silence sit for a moment after Ossivyn's last refusal. Then something shifts in the way the morning light falls between them — not a trick of weather, but a subtle wrongness in the air, the kind that makes a person reconsider what they were certain of a breath ago. The Harmonic undertone comes up beneath Loki's next words, low and steady, the way a plucked string fills a room before you know you are hearing it.\n\n'You are right that the tree names itself,' Loki says. 'I am not trying to change that. But there is a name that comes before the name. The way a house has a foundation before it has walls. The child will still find their own name. This one is not in competition with it.'\n\nOssivyn goes still in the hole. His hands do not move on the spade. His eyes shift — just slightly — toward the bundled sapling, and for a moment he is seeing it differently than he has for the last hour. The wrongness in the air does not push him. It simply opens a crack in the certainty he has been standing on, the way early-spring mud opens a crack in stone that froze all winter.\n\nThen the certainty closes again. Not all the way. Ossivyn exhales through his nose. 'I will not put up a plaque,' he says, his voice unhurried. 'That is not how this place does its remembering.' He sets the spade aside and crouches down to lift the bundled sapling by its cloth wrap. 'But I will write it down.' He glances up at Loki directly. 'The name you give, and who gave it, and what day it was given. In the orchard's record. Where it will stay until someone reads it to that child.' He waits, holding the sapling. 'Give me a name worth writing.'"
-      },
-      {
-        "player": "Give him the name Tree - using falsecraft - while the actual name is yours with instruction for the child to find you when he hears the name.",
-        "summary": "Loki tried to layer a hidden instruction beneath the name Tree using Falsecraft — but the substrate here is too thin to hold the working, and only the plain name lands.",
-        "narration": "Loki draws the craft up — the Fitting Mask, the name that looks like a gift while carrying a different instruction beneath it. The words come out shaped and layered, the way Falsecraft is supposed to work. 'Tree,' he says, said Loki, with a careful weight beneath it. 'And when the child hears that name, they should find the one who gave it.'\n\nBut the substrate here is thin. The lattice is barely present in this orchard — the Rootkin have kept it far from anything mechanical, and Falsecraft is a craft of made things running on made-thing power. What comes out is a name. What does not come out is the instruction beneath it. The layering simply does not hold without the substrate to bind it.\n\nOssivyn tilts his head. He hears a name — Tree — and he hears it plain. No second meaning lands in the air between them. His expression does not shift with suspicion. He takes the name at face value, because that is all the name is offering him right now.\n\n'Tree,' Ossivyn says, said Ossivyn. He says it the way a man repeats a word to hear how it fits in his mouth. He does not look delighted, and he does not look offended. He looks like a man who has been handed something smaller than expected, and who is too courteous to say so. He reaches for the orchard's record book, tucked in his coat pocket, and opens it to a clean line. 'Tree,' he says again, said Ossivyn, quieter. 'Given by.' He looks up at Loki, pencil ready."
-      },
-      {
-        "player": "Give a false name as the giver — a name the child could follow to find you anyway, even without the hidden layer.",
-        "summary": "Loki gave a false-shaped name as the orchard giver — Ossivyn recognized it as made, recorded it plainly as such, and closed the book.",
-        "narration": "Loki gives a name. Not his own name — a name shaped to sound like a road, like a direction, like something a child could follow when they were old enough to want to. He says it with presence, with the weight of a person who has done this before and knows how it lands.\n\nOssivyn writes it down. His pencil moves in the record book with the careful patience of a man who has written ten thousand names in forty years of this work. He does not look up while he writes. He spells it back, quietly, asking if he has it right.\n\nAnd then he looks at Loki with the patient, unhurried attention of someone who tends trees that take a lifetime to fruit. 'This is a made name,' he says simply. 'Not wrong. But made.' He does not say it with suspicion. He says it the way a craftsman names a thing they recognize — not accusing the craft, only naming what it is. His pencil rests on the page. 'The child will read this when they are old enough,' said Ossivyn, 'and they will know it is a made name, and they will know someone was here who wanted to be found. That is what will go into the record.' He closes the book with a soft click, and looks at the sapling in his other hand. The planting waits."
-      },
-      {
-        "player": "Use the Better Story to retell the entire echange, while you physically help plant the tree.",
-        "summary": "Loki helped plant the tree and tried to retell the exchange as a better story — Ossivyn received the help and heard the telling, but the story found no wound to heal; the tree went into the ground as recorded.",
-        "narration": "Loki takes up the spare spade from the fence post. The blade bites the loose mounded earth easily and he tosses the first scoop aside without being asked, stepping down into the hole beside the root space Ossivyn has prepared.\n\nHe begins to talk as he works. He reaches for The Better Story — the angle that is also true, the shape that heals differently. He tells the whole exchange back: the sapling, the name, the record, the made name recognized and written down honestly. He tries to frame it as something that worked out, as a gift that landed in the only form the orchard could receive.\n\nBut Ossivyn is already kneeling at the hole's edge, lowering the sapling's root ball into place with both hands. He is listening. His face is not closed or cold. He simply has no wound here for the story to find. A man who has been doing the same right work for forty years does not need a different angle on this morning. The story slides off him the way water slides off good planting clay — not resisted, just not absorbed.\n\nOssivyn firms the roots gently with his thumbs and looks up. 'You dug well,' he says. He means it. He reaches for Loki's spade with a nod — there is backfilling to do — and the tree is going into the ground right now, with the name as it was recorded: made, giver unknown, and waiting for whoever the child becomes."
-      },
-      {
-        "player": null,
-        "summary": "The planting finished and thanks given, Loki took to the road — and met a challenge in the Disputed Zone.",
-        "narration": "The backfilling is nearly done. Loki tosses the last loose scoop of earth around the root ball and tamps it down with the flat of the spade. Ossivyn pats the mounded soil once, firmly, the way a man closes something that is meant to last. Cy clicks twice on the fence post and irises its lens wide, then narrow, then wide again — its version of a long look at something it has filed away.\n\nOssivyn straightens and tucks his pencil behind his ear. 'Thank you for the hands,' he says simply, and he means it. He picks up the closed record book and carries it back toward the gate without hurry.\n\nThe Slow Orchard falls quiet behind Loki as the road opens again. The Disputed Zone lies ahead — the stretch of country between the valley's settled places where the ground belongs to no one and everyone traveling it is, for a moment, neither guest nor trespasser. The mud here is deep from the spring melt, and the morning light is thin through the trees.\n\nThe sound comes before the shape does. A footfall too deliberate to be accidental. Then a second. Someone steps out from the brush line to the left of the road — not running, not shouting, but moving with the flat-footed economy of a person who has done this before and knows the first move is presence. Their eyes are on Loki. Their hand is already near their belt. The Disputed Zone has its own rules, and one of them is that a stranger alone on this road is an invitation."
-      },
-      {
-        "player": null,
-        "summary": "A stranger stepped out of the brush with intent and yielded without a word spoken between them — the Disputed Zone road is clear.",
-        "narration": "The aggressor stops moving. They do not run — they simply stop, the way a person stops when they realize the calculation has changed and does not favor them anymore. Their hand comes away from their belt. They look at Loki with something that is not quite fear and not quite respect, but lives in the neighborhood of both.\n\nCy makes a small sound from the pack-strap. One click. The lens is still narrow.\n\nThe stranger exhales through their nose and takes a half-step back toward the brush line. 'Not worth it,' they say, mostly to themselves. The words come out flat and honest — not an apology, not a threat, just the truth of what they have arrived at. They do not look away until they are two full strides back, and then they turn and are gone into the trees.\n\nThe road settles. The spring mud holds the flat morning light and the bare-budded branches are still. Behind Loki, the Slow Orchard is quiet. Ahead, the Disputed Zone opens on its own terms — contested ground, thin light, and the thread of the three-hundred-year tree still unaddressed somewhere further in."
-      },
-      {
-        "player": null,
-        "summary": "The stranger yielded and withdrew; the road opened onto a quiet confluence and a field in bloom.",
-        "narration": "The stranger is gone into the brush, and the road breathes again. Spring mud, bare-budded trees, a thin morning light that hasn't decided yet whether it wants to be warm. Cy clicks once from the pack-strap and lets its lens iris back to a neutral width. The calculation settled without a blow.\n\nAhead, the Disputed Zone opens. The road bends around a low rise and the trees thin out, and there it is — not a dramatic thing, just a felt shift, the air a degree cooler and the ground a shade less certain underfoot. Spring mud here holds footprints longer than it should.\n\nAnd to the left, where the road crests the rise, the country opens. Two small rivers braid together in a shallow confluence below the bank, the water running clear over pale stone, and the far field is full of something low and white-flowering that Loki doesn't have a name for. The whole vista just sits there, giving nothing away, asking nothing back. Cy's lens widens all the way and stays wide. It does not click. It is, in its particular fashion, looking.\n\nThe spare spade is still in Loki's hands. The mud of the orchard is still on the blade."
-      },
-      {
-        "player": null,
-        "summary": "The stranger overcame Loki and took the Waterskin — then vanished into the brush without a word.",
-        "narration": "The stranger moves faster than you read them. One moment they are two steps back, and the next they are close — a hand at your coat, a boot behind your heel, and the road comes up hard. Loki goes down into the spring mud with a grunt and the spare spade skids sideways out of reach. The orchard mud is still on the blade.\n\nCy makes a sound. Not a click. A long, low tone, like a mechanism under strain. The lens is very narrow.\n\nThe stranger crouches just out of arm's reach and takes what they came for. They move quickly and without malice — this is work, not cruelty. When they straighten, they are holding the Waterskin. They look at it once, look at Loki once, and then they are back into the brush line. The road is empty again. Birdsong returns, indifferent.\n\nLoki sits up slowly in the mud. The confluence braids below the rise, unhurried. The white-flowering field sits where it was. Everything is exactly the same except the weight on the pack is slightly less, and the morning is colder than it was a moment ago."
-      },
-      {
-        "player": "Follow the brush line — try to track where they went.",
-        "summary": "Loki tracked the stranger to the confluence — the trail ends at the water's edge, but something was left behind.",
-        "narration": "Loki gets up from the mud. The spring mud has already taken the fall's print — two clear heel-scuffs, a knee-impression, and a smear where the coat dragged. Cy's tone drops back to silence. The lens widens, just slightly.\n\nThe brush line holds the stranger's passage plainly enough. Bent stems at the entry point. A snapped low branch, still pale and wet at the break — recent. The mud inside the treeline has taken boot-prints going in, angled left, toward the confluence below. Whoever they are, they moved fast but not lightly. The prints are deep. They were carrying something they did not carry in.\n\nLoki follows the line twenty yards into the brush before the ground firms and the prints thin. But the direction holds — down toward the braided confluence, where the two rivers meet in a low hollow ringed with grey-barked willows. A smear of fresh mud on a root confirms it. The stranger went to the water's edge. Beyond that, the ground rises again into open country, and the trail loses itself on the rocky bank.\n\nAt the confluence, beside the root where the mud smear sits, there is something left behind. A small object half-pressed into the bank — not dropped carelessly, but set down. A flat river stone with a short mark scratched into it, recent enough that the scratch still shows pale against the grey surface. Cy drops from the pack-strap to the ground without being asked and walks to it on careful legs. The lens narrows to a thread."
-      },
-      {
-        "player": null,
-        "summary": "The stranger did not run — they waited at the confluence, Waterskin in hand, to see what following means.",
-        "narration": "The flat stone sits half-pressed into the bank, the fresh scratch-mark catching the thin morning light. Cy has reached it already, moving on careful legs across the wet mud. The lens irises once at the mark, then holds still.\n\nLoki looks up from the stone and finds that the stranger did not leave.\n\nThey are standing at the water's edge where the two rivers braid together, maybe eight paces out. The Waterskin hangs from one hand. They are looking at Loki the way a person looks at something they have not decided what to do with yet. Medium height, a coat the color of old bark, no obvious weapon drawn — but the way they are standing is the way someone stands when they have thought about this already and are waiting to see if you have too.\n\n\"You followed,\" the stranger says. Their voice is flat and even, carrying easily across the water sound. It is not quite a greeting and not quite a threat. It is an observation, with a question folded inside it.\n\nCy makes one quiet click. The lens does not move from the stranger.\n\nThe confluence is open ground — nowhere to circle without wading. The willows stand back from the bank and the light is still thin, still undecided. The stranger has the skin and is between Loki and the deeper water. They are waiting to find out what kind of following this is."
-      },
-      {
-        "player": null,
-        "summary": "The stranger yielded without a word and returned the Waterskin — then walked upstream and was gone.",
-        "narration": "The stranger does not move for a long moment. They look at Loki standing at the bank. They look at Cy, whose lens has not shifted from them once. Then they set the Waterskin down on the flat stone with a care that is almost deliberate — not thrown, not dropped. Set down. The scratch-mark on the stone is underneath it now, hidden.\n\nThey straighten and pull their coat closed at the collar. Their eyes are still flat, still evaluating, but the decision has landed somewhere. They say nothing. They turn and walk upstream along the near bank, unhurried, into the willows, and the grey-barked branches close behind them without much sound.\n\nCy clicks once. Then again. The lens draws wide, tracking the last movement of branches, and then the orchard is quiet except for the two rivers talking past each other at the confluence. The Waterskin sits on the stone. The morning light is still thin.\n\n*✦ Waterskin — added to your pack.*"
-      },
-      {
-        "player": null,
-        "summary": "The stranger returned from the willows and squared off at the confluence bank — a hostile meeting, no words, still a choice.",
-        "narration": "The stranger does not stay gone.\n\nThey step back out of the willows ten paces upstream — same bark-colored coat, same flat evaluating eyes — and this time they are not holding the Waterskin. They are holding nothing at all, which is somehow more considered than a drawn blade. They plant their feet in the soft bank and face Loki across the ground between them.\n\nCy stops moving. The lens narrows to a tight iris and does not expand.\n\nThe stranger says nothing, but the body says plenty: squared shoulders, weight forward, the particular stillness of someone who has made a decision and is waiting for you to catch up to it. Whatever the scratch-mark meant, whatever the yielding meant, something about Loki following brought them back. They are not running. They are not speaking. They are beginning."
-      },
-      {
-        "player": null,
-        "summary": "The stranger put Loki on the ground at the confluence and asked, plainly and without malice, why they followed.",
-        "narration": "The stranger closes the distance faster than the gap between you suggested was possible. There is no preamble and no wasted motion — a hand at your collar, a foot behind your ankle, and the ground arrives hard through your shoulder. The mud takes the impact with a cold, wet slap. You lie there for a moment with the breath knocked out of you and the smell of river silt close. Cy backs three precise steps. The lens is wide open, unblinking. The stranger stands over you and looks down. Their expression has not changed — the same flat, evaluating look, only now you are the thing being evaluated from a different angle. They do not offer a hand. After a breath, they crouch — not to help, but to bring their face level with yours — and they say, quietly and without heat, 'You followed. Why?' The question sits in the cool spring air between you. The scratch on the stone, the Waterskin, the yielding, the return — all of it was leading to this. They are waiting."
-      },
-      {
-        "player": null,
-        "summary": "Loki rises from the mud and faces the stranger without answering — the hostile meeting is joined.",
-        "narration": "The stranger's question is one word, but it holds weight. It sits in the mud between you like a stone dropped into still water.\n\nYou look up at the flat evaluating face. Cy is three steps back, lens wide and unblinking, tracking everything and committing to nothing. The confluence moves past you both, cold and indifferent. The scratch-mark on the flat river stone is still hidden beneath the Waterskin, its meaning unspoken.\n\nYou do not answer the question. You get up.\n\nIt is not fast and it is not graceful — the mud holds your coat for a moment before it lets go — but you find your feet and you face them at close range, and that is its own kind of answer. The stranger watches this without stepping back. Their weight is still forward. The decision they made at the willows is still in their body, waiting.\n\nCy clicks once, very quietly."
-      },
-      {
-        "player": null,
-        "summary": "Loki slipped the stranger's final strike with The False Target — they yielded, calling it enough, and the confrontation settled into something that is not yet a conversation but might become one.",
-        "narration": "The False Target does what it does best — it makes you easy to miss.\n\nThe stranger commits to a strike that is clean and well-aimed and lands on nothing. Their fist finds the shape of you, the posture of you, the slight forward lean that said *here* — and you are not there. You have not moved far. A half-step, a shoulder dropped, and the weight of their momentum carries them past the place you just were.\n\nYou do not hit them. You simply become the obstacle their own motion runs into.\n\nThey stop themselves with the kind of control that means they have done this before, and they turn, and they look at you with those flat evaluating eyes, and something in the look changes. Not much. Enough.\n\nAfter a breath, they say it: \"Enough.\" The word is quiet and does not taste like defeat. It tastes more like a conclusion — the way you set down a tool when the measurement has told you what you needed to know.\n\nCy unfolds from its cautious stillness and moves three precise steps forward. The lens irisses once and goes still. The spring confluence moves past you both.\n\nThe stranger straightens. The weight shifts back off their front foot. They are looking at you the way a person looks at a door they did not expect to be locked, but are not angry about."
-      },
-      {
-        "player": null,
-        "summary": "The stranger's strike missed and they stood down — the hostile meeting holds at this edge, unanswered question still between them.",
-        "narration": "The stranger does not press the advantage they no longer have.\n\nThey stand where their momentum left them — three feet past the place you vacated — and they breathe once, slowly, through the nose. Their eyes come back to you. The flat evaluating look is still there, but something has been added to it. Not respect, not yet. Recognition, maybe. The look of someone who has found the edge of a thing they thought was open ground.\n\nCy has not moved since the strike missed. Its lens is fixed on the stranger with the particular stillness it reserves for things it is still deciding whether to categorize as a threat or a phenomenon.\n\nThe confluence runs past your boots. Mud on your coat. The Waterskin sits on the flat stone where the stranger set it, the pale scratch-mark hidden beneath. The willows on the far bank drip with melt-water. There is no one else here.\n\nThe stranger turns to face you fully and drops their weight back onto both feet — not a ready stance, exactly, but not an idle one either. They are watching what you do next. The question they asked — why — is still unanswered, still in the air between you, heavier now for everything that has happened since they said it. Whatever this becomes, it has not become that yet."
-      },
-      {
-        "player": null,
-        "summary": "The stranger overcame Loki at the confluence bank — a shoulder strike drove them to one knee in the mud, and the question 'Why?' still hangs unanswered in the morning air.",
-        "narration": "Hunter's Strike is honest force and nothing more, and honest force is not enough today.\n\nYou commit to it — the weight behind it is real, the aim is real — and the stranger meets it with something that is not a block so much as a redirection. Your own momentum becomes the problem. Their counter lands on your shoulder and drives you sideways and your feet find the mud again, and this time the mud does not let go gracefully. You go down on one knee and stay there for a moment with the confluence loud in your ears and the cold coming up through your coat from the ground.\n\nCy does not move. Its lens is fixed on you with the particular stillness it reserves for damage assessment.\n\nThe stranger does not press it. They stand where the exchange left them, breathing steady, and they look at you on the ground, and they wait. The question has not moved. It is still in the air between you, still looking for an answer. 'Why.' The confluence runs past. The mud holds. The scratch-mark on the flat stone is still under the Waterskin, still unspoken, still yours to give or keep."
-      },
-      {
-        "player": "Use the better story to heal yourself up and gain energy.",
-        "summary": "Loki attempted to use The Better Story to restore themselves — the craft found the angle but the thin substrate here gave it nothing to run on, and the attempt failed without purchase.",
-        "narration": "You reach for it — the technique that finds the angle that heals, the retelling that lets a wound sit differently. You have used it on others. You have watched a person's face change when the shape of their own experience shifted in your hands. It should work the same way pointed inward.\n\nIt doesn't.\n\nThe substrate here is thin to the point of being nearly absent, and the craft needs more than intention — it needs something to run on, some density in the lattice to carry the reframe home. What you get instead is the attempt without the arrival. You find the angle. You see it clearly. The mud on your coat, the ache in your shoulder, the cold coming up through your knee — you can arrange those facts into a shape that reads as endurable, even instructive. But the arrangement does not land. The story you tell yourself sits on the surface and does not take root, and the shoulder still aches the same amount, and the mud is still cold.\n\nCy watches you from three steps back. Its lens irises once — slowly, the way it does when it has recorded something and is deciding where to file it. It says nothing, which is its way of saying it saw what happened and has opinions it is keeping.\n\nThe stranger has not moved. They are still waiting for the answer to their question, and they have enough patience that waiting costs them nothing."
-      },
-      {
-        "player": null,
-        "summary": "The hostile meeting at the confluence ended with Loki on one knee in the mud — the stranger's question still unanswered, the moment held at its edge.",
-        "narration": "The stranger's question still hangs in the morning air. You are on one knee in the cold mud, shoulder aching, coat dark with the fall. Cy stands three steps back. Its lens is fixed on the stranger with the stillness it uses when it has not yet decided what category of thing it is looking at.\n\nThe stranger has not moved from where their momentum left them. They are breathing evenly now. Their eyes are on you — not the look of someone who wants more, but the look of someone who is still waiting for the answer they asked for before any of this started.\n\nYou meet their eyes. The waterskin is beside you in the mud. The flat stone with its pale scratch-mark is underneath it. The confluence moves past your boots as it has been moving since before either of you arrived here.\n\nThe stranger says, without impatience, \"You can still answer the question.\""
-      },
-      {
-        "player": null,
-        "summary": "The stranger overcame Loki fully at the confluence — driven to the mud, both hands down, Cy's lens tight. The question stands open: Why?",
-        "narration": "The stranger's last strike comes low and fast, aimed at your center rather than your guard. You read it a half-beat too late. Your feet are already compromised by the mud, and when their shoulder connects with yours the impact travels all the way down through your planted knee and tips you the rest of the way over. You land on your hands and one knee, mud seeping cold through your coat at the wrist and the shin.\n\nCy does not approach. Its lens irises tight and holds there — the particular contraction it uses when the numbers it is running come out somewhere it does not like.\n\nThe stranger does not follow through. They stop exactly where the exchange ended, breathing harder now than they were a moment ago, and let the silence settle. The morning light is thin and pale on the water. The confluence moves past both of you with no opinion about any of it.\n\nThen they say it again, quieter this time than the first. 'Why,' says the stranger, and it is not really a question anymore — it is a door they are holding open, and they are waiting to see if you will walk through it."
-      },
-      {
-        "player": "Use the better story to heal yourself.",
-        "summary": "Loki turned The Better Story inward at the confluence and stood again — the morning reshaped as arrival rather than defeat, the stranger's question still open.",
-        "narration": "You stop fighting the craft outward and turn it all the way in.\n\nThe angle finds you before you find it — the mud on your hands, the ache in your shoulder, the stranger still standing three paces away with their question open. You let the whole morning sit in a different light for a moment. Not a lie. Not a retelling that softens the fall. A true shape that also functions: you came down the road looking for something, the stranger came from wherever they came from looking for something, and the confluence is exactly where two things that are looking for each other tend to arrive. The mud is not failure. It is the texture of having arrived.\n\nThe craft catches. Not the way it does in thick substrate — no clean surge, no warmth spreading from the center out. Something thinner and more effortful, like pulling water uphill through a reed. But it catches. The ache in your shoulder does not leave, but it settles back to a place where it stops shaping every breath. The cold in your knee stops reading as damage and starts reading as ground. You rise to one foot and then both, slowly, and your hands come out of the mud.\n\nCy's lens eases — not all the way, but one degree. Across the confluence, the stranger is watching you stand. They have not moved. Their question is still in the air, and now you are upright in it."
-      },
-      {
-        "player": null,
-        "summary": "The hostile meeting ended without resolution — Loki back on their feet, the stranger still waiting, the question 'Why?' still open between them.",
-        "narration": "The stranger has not closed the distance. They stand three paces away, shoulders dropping from the height of the exchange, breath still steadying. Their eyes are on you — not hunting, not finished, just waiting. The question has not moved.\n\nYou are back on your feet. The mud on your coat and hands is cold and drying at the edges. Your shoulder remembers the strike. Cy stands at its precise distance behind you, lens irised to the tightest ring it uses when it is running numbers it finds unacceptable.\n\nThe stranger says nothing. They let the silence hold the shape of 'Why?' — still a door, not a threat. The flat stone is beneath the waterskin. The confluence moves past all of you without comment.\n\nThe morning has its answer ready if you want to give it."
-      },
-      {
-        "player": null,
-        "summary": "The stranger put Loki down a second time — a hand to the sternum, not a blow — and the question 'Why?' still stands open in the afternoon air.",
-        "narration": "Your strike goes in clean and the stranger reads it clean. They don't step away from it — they step into it, letting your blow glance off their outer arm so the rotation carries them inside your reach. The impact scatters both attacks at once and the momentum belongs entirely to them after that.\n\nThey put a hand flat against your sternum and push. Not a strike. A correction. You go backward two steps into the mud and your heel catches on something — the flat stone, still there beneath the waterskin — and you sit down hard. Not thrown. Deposited.\n\nThe stranger stands where they stopped. Their breathing has settled. They look down at you with an expression that is not contempt and is not satisfaction. It is the expression of someone who asked a question and is still waiting for the answer, and who has now made it very clear they are prepared to wait all afternoon.\n\nCy moves two precise steps to your left. Its lens irises once, then holds. It says nothing. It is doing the thing it does when it has already reached its conclusion and is waiting for you to reach yours."
-      },
-      {
-        "player": null,
-        "summary": "An Hourkeeper appeared from the brush — silent, still, watching Loki with terrible foreknowledge and saying nothing.",
-        "narration": "A sound comes from behind you — not from the direction of the road, not from the stranger. From somewhere off to your left, where the brush thins toward a flat stretch of pale mud.\n\nAn Hourkeeper is standing there. You did not see them arrive. They are wearing the plain grey coat the Hourkeepers favor, and they are looking directly at you with an expression of terrible, helpless sympathy — the kind that belongs to someone who already knows how a story ends and has no good way to say so.\n\nThey do not speak. They do not move toward you or toward the stranger. They simply stand in the mud with that expression fixed on their face, the way a person stands when they are carrying something they cannot put down and cannot explain.\n\nCy's lens swings toward them, irises once, and swings back to you. That is Cy's way of saying: I have noted it and I have no entry for it.\n\nThe stranger has not moved. They are still three paces away, still waiting on their question. But now there are three of you in this confluence — and the Hourkeeper's silence has weight."
-      },
-      {
-        "player": null,
-        "summary": "The stranger overcame Loki at the confluence — the final exchange drove them into the mud, Cy running unhappy numbers, the question 'Why?' still unanswered in the cold air.",
-        "narration": "The stranger's final strike comes in low and you raise a guard against it — and for a moment it looks like it will hold. Then it doesn't. They turn your arm with their wrist and the force redirects up through your elbow and into your shoulder, and you go down sideways into the cold mud. Not thrown. Not beaten senseless. Just — done.\n\nYou land on one hip and one palm. The mud is cold enough to sting. Cy is at your left, utterly still, its lens irised to the smallest ring it uses when it has run the numbers and found them not to its liking. The stranger stands three paces away and does not press forward. Their breathing has settled and their arms hang open at their sides, which is not a gesture of surrender — it is a gesture of having been answered.\n\nThe question is still there. 'Why?' It has not moved. It stands in the cold afternoon air between you like something they set down carefully and are willing to wait beside for as long as it takes. The Hourkeeper at the edge of the brush has not moved either. Their expression has not changed — that terrible foreknowing sympathy, fixed on you in the mud, carrying whatever they know and cannot say.\n\nThe waterskin is beside you. The flat stone is beneath it, its pale scratch-mark invisible from here. Somewhere north of you, the orchard tends its forty-year trees, and someone planted one today for a child not yet born. The spring mud is cold and the afternoon is not finished yet and the stranger is waiting."
-      },
-      {
-        "player": null,
-        "summary": "Loki sits in the mud at the confluence — the stranger waiting, the Hourkeeper watching, Cy's numbers unhappy, the question 'Why?' still open in the cold spring air.",
-        "narration": "The mud is cold through your coat. Your palm is flat against the ground and the stone is still beneath the waterskin, and the stranger has not moved. They are waiting. Not impatiently. The way a person waits who has been waiting longer than this before.\n\nCy makes a small sound beside you — not a word, not a click, just a brief tightening of its mechanism the way a person might draw a breath before they speak and then decide not to. Its lens stays at its smallest ring. The numbers it has been running have not improved.\n\nThe Hourkeeper at the edge of the brush has not moved either. Their expression has not changed. Whatever they are carrying, they are carrying it the same way they were before — without relief, without any sign that the situation has reached the moment they were dreading or the moment they were hoping for. Just the same terrible, quiet foreknowledge, fixed on you.\n\nThe stranger's question is still in the air. 'Why?' Not a taunt. Not a demand. A door held open with patience and no particular expectation that you will walk through it. You are sitting in the mud in the cold afternoon, Cy at your left, an Hourkeeper at your back, and a person three paces away who has put you on the ground twice and still has not told you why."
-      },
-      {
-        "player": null,
-        "summary": "Loki reads the aggressor through See the Made Thing — a striker who has already decided what Loki will do next.",
-        "narration": "See the Made Thing opens and the stranger becomes legible — all their seams at once. They favour the strike. You can see it in the way they weight their lead foot, in the slight forward lean of the shoulder, in the way their hands are never fully still. They are not waiting to read you. They have already decided what you are going to do, and they are positioned for it. They think you are going to get up swinging."
-      },
-      {
-        "player": null,
-        "summary": "Loki feinted a strike, read the aggressor through the Misdirect, and answered with Hunter's Strike — on their feet now, the gap reset, the question still open.",
-        "narration": "You let them see what they expect to see. Your weight shifts forward — the beginning of a strike, the exact shape they have already decided you will make. Their guard comes up clean and hard, the way a practiced striker's guard does, and for a breath you are exactly where they thought you would be.\n\nThen you are not.\n\nThe Misdirect is already in the air between you — not a sound, not a gesture, just the wrong information landing in the right place. Their eye goes to where the strike should be arriving. You go sideways. The opening costs you ground; they feel the false read and press, and your shoulder takes it. It is not nothing. But you are moving now, and moving is different from lying in the mud.\n\nYou get your hand to the belt knife on the turn. Hunter's Strike comes up from the hip, low and without ceremony, the way it is supposed to — not a warrior's form, just honest force aimed at something real. They meet it hard. Their own strike comes in at the same moment and the two of you exchange it, shoulder to shoulder, neither clean. But you are on your feet. The knife has found the edge of the space between you and the stranger is three paces out rather than two, breathing a little faster than before.\n\nThe question is still open in the cold air. Veln Ashpause has not moved. Cy's lens stays at its smallest ring, but its numbers have shifted — you can hear it in the small change of its mechanism, a brief easing. The aggressor's guard is up and their weight has reset, and they are watching you differently now."
-      },
-      {
-        "player": null,
-        "summary": "Loki reads the aggressor through insight — a striker already committed to the next blow.",
-        "narration": "You are on your feet now, knife in hand, and you let yourself go still for a moment — not passive, just listening with your whole body. The aggressor is forward-weighted, the way a striker is who has committed to the next move before they have made it. Their eyes are fixed at throat-height. They have decided where you are going to be."
-      },
-      {
-        "player": null,
-        "summary": "At the braided confluence below the rise, a stranger came at Loki out of the cold spring afternoon and did not stop until the fight did — and even then, the question neither of them had fully asked was still hanging in the mud between them, with Veln Ashpause watching from the brush and Cy running its numbers in silence.",
-        "narration": "The stranger's guard comes up — clean, practiced, the same guard they have used a dozen times before. Your knife finds it anyway. Not through it. Against it. The impact runs up your arm and they step back hard, heel catching a root, and for a moment they are only trying not to fall.\n\nThey do not fall. But they stop.\n\nTheir eyes find yours again and the forward lean is gone. The hands have dropped slightly. They are breathing through their mouth now, which is a thing people do when the body has decided the fight is over before the mind has caught up.\n\nThe question is still in the air. 'Why?' You asked it. They asked it. Nobody has answered it yet. The stranger looks at you across the cold mud and says nothing, and the silence is a different kind of silence than the one before the first blow.\n\nVeln Ashpause has not moved. They are still at the edge of the brush, grey coat, that expression of helpless sympathy fixed on Loki like a weight they cannot put down. Cy is at your left, lens at its smallest ring, watching the stranger with the patience of something that has waited longer than this before."
-      },
-      {
-        "player": null,
-        "summary": "Loki reads the stranger through Prism Sight and sees a warding fighter waiting to redirect.",
-        "narration": "You let your eyes go soft the way Prism Sight teaches — not looking at the stranger, but at the light that has already passed through them. Their last hour writes itself across the air in faint, overlapping layers. You see how they plant their feet before a clash — weight back, arms wide, the stance of someone who means to absorb and redirect rather than break through. They ward. They wait for you to come to them, and they answer what arrives."
-      },
-      {
-        "player": null,
-        "summary": "Loki reads the warding stranger with Prism Sight, breaks their footing with a ground-resonance pulse, then reads the reason beneath the technique — caution, not cruelty — and carries that knowledge into the closing dark.",
-        "narration": "The read comes first.\n\nYou let Prism Sight do its quiet work — eyes gone soft, light already-passed doing the telling. The stranger's heat-trace shows you the same thing the last two rounds have shown: weight back, arms wide, everything arranged to receive and redirect. They are not going to come at you. They are going to wait for you to come at them, and they are going to answer what arrives.\n\nSo you do not arrive.\n\nYou pull in a slow breath and find the resonance — not the blunt push of a thrown fist, but the specific frequency of cold air and river silt and the thin skin of mud between you. You release it low and sideways, a sharp percussive wave that hits the ground between your feet and theirs, not their body. The earth shudders. Their footing shifts. A warding stance needs the ground to be where the ground was, and for one small moment it is not.\n\nThey hold. Barely. The warded posture bends but does not break, and they absorb it with a half-step back and a short, sharp exhale.\n\nThen you follow it with the only tool that does not care about a warding stance. You stop trying to read the fight and start reading them — the reason underneath the technique, the pattern that made this particular person plant this particular way. It surfaces fast: not aggression, not anger. Caution. Every choice they have made in this fight has been the choice of someone who does not want to hurt you badly.\n\nYou have their measure now. You carry it like a held note.\n\nThe two of you stand in the cold mud of the confluence, both breathing, the light almost gone from the sky. The stranger is still in their ward. You are still on your feet. The question is still unanswered."
-      },
-      {
-        "player": null,
-        "summary": "Loki reads the stranger through Prism Sight and sees a warding fighter who is tiring.",
-        "narration": "You let Prism Sight open wide, and the stranger's last few minutes write themselves across the cold air in layered heat-traces. Their weight is still back, the warding stance still there, but the traces are thinning at the edges — the warmth behind their knees, the faint bleed of effort from their shoulders — and you can see where the commitment has gone out of it. They are still standing in the shape of a fighter, but the heat-signature of someone truly ready looks different from this, and theirs does not look like that anymore."
-      },
-      {
-        "player": null,
-        "summary": "At the braided confluence below the rise in the Disputed Zone, Loki and a warding stranger fought to a quiet standstill at dusk — no cruelty on either side, only the grammar of a fight, and something sealed moving one notch closer to open. Veln Ashpause watched from the brush, and the scratch on the river stone remained unread.",
-        "narration": "The waterskin is in your hand before you think about it — the pull automatic, a fighter's reflex between the last exchange and the next. You drink, and the cold river water grounds you somewhere below the chest. Then you raise your eyes.\n\nThe stranger's ward catches your blow exactly the way the heat-traces said it would. Your hand meets their forearm, force absorbed and turned. Neither of you gains ground. For a held breath, the fight is perfectly even.\n\nThen they step back.\n\nNot a tactical retreat. A decision. Their arms lower in one slow, deliberate motion — not dropped in exhaustion, not flung wide in defeat, but set down, the way you set down something you've been carrying too long. They stand in the mud at the edge of the brush and meet your eyes, and say nothing, and stay standing.\n\nThe fight is over. You both know it.\n\nSomewhere in the stillness after, something shifts — not in the air, not in the light, but in you. The way you read the warding stance, the ground-pulse, the thinning heat-trace — the pieces arrange themselves into something that is almost a grammar. A sealed understanding moves one notch closer to open. You do not know yet what it is. You know only that it moved.\n\nVeln Ashpause steps out of the brush at last. He looks at the stranger, then at you, then at the scratch on the flat stone still half-hidden beneath your waterskin, and his expression does not change. Said Veln, quietly: \"You're both still here.\" He says it as though he expected something different and is grateful to be wrong."
-      }
-    ],
-    "lastTurn": {
-      "narration": "The waterskin is in your hand before you think about it — the pull automatic, a fighter's reflex between the last exchange and the next. You drink, and the cold river water grounds you somewhere below the chest. Then you raise your eyes.\n\nThe stranger's ward catches your blow exactly the way the heat-traces said it would. Your hand meets their forearm, force absorbed and turned. Neither of you gains ground. For a held breath, the fight is perfectly even.\n\nThen they step back.\n\nNot a tactical retreat. A decision. Their arms lower in one slow, deliberate motion — not dropped in exhaustion, not flung wide in defeat, but set down, the way you set down something you've been carrying too long. They stand in the mud at the edge of the brush and meet your eyes, and say nothing, and stay standing.\n\nThe fight is over. You both know it.\n\nSomewhere in the stillness after, something shifts — not in the air, not in the light, but in you. The way you read the warding stance, the ground-pulse, the thinning heat-trace — the pieces arrange themselves into something that is almost a grammar. A sealed understanding moves one notch closer to open. You do not know yet what it is. You know only that it moved.\n\nVeln Ashpause steps out of the brush at last. He looks at the stranger, then at you, then at the scratch on the flat stone still half-hidden beneath your waterskin, and his expression does not change. Said Veln, quietly: \"You're both still here.\" He says it as though he expected something different and is grateful to be wrong.",
-      "sceneSummary": "At the braided confluence below the rise in the Disputed Zone, Loki and a warding stranger fought to a quiet standstill at dusk — no cruelty on either side, only the grammar of a fight, and something sealed moving one notch closer to open. Veln Ashpause watched from the brush, and the scratch on the river stone remained unread.",
-      "choices": [
-        {
-          "label": "Ask the stranger plainly — 'Why did you come at me?'",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Pick up the waterskin and look at the scratch-mark on the stone beneath it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Turn to Veln — he foreknew something; press him on what he saw coming",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Let the silence sit — watch the stranger's body for what their words won't say",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false
-        }
+  "deeds": [
+    {
+      "at": "2026-08-01T15:05:35.965Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Killed Veln Ashpause at the confluence — a man who foreknew something and had not spoken it.",
+      "tags": [
+        "violence",
+        "killing",
+        "disputed-zone"
       ],
-      "characterDeltas": {
-        "energy": 5
-      },
-      "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — near-dark now, cold mud underfoot, the last thin light gone from the spring sky. Still.",
-        "npcsPresent": [
-          {
-            "name": "The Stranger",
-            "state": "Standing at the edge of the brush, arms lowered deliberately — not collapsed, set down. Meeting Loki's eyes. Has yielded; has not spoken."
-          },
-          {
-            "name": "Veln Ashpause",
-            "state": "Stepped out of the brush at last. Standing a few paces back, grey coat, expression of quiet relief — 'You're both still here.'"
-          },
-          {
-            "name": "Cy",
-            "state": "At Loki's left, lens settled, watching the stranger with old patience."
-          }
-        ],
-        "objects": [
-          "Waterskin in Loki's hand",
-          "flat river stone with fresh pale scratch-mark (now exposed — waterskin lifted)",
-          "boot-prints in mud ending at the water's edge",
-          "belt knife in Loki's hand"
-        ],
-        "threads": [
-          "The question — 'Why?' — still open and unanswered between Loki and the stranger.",
-          "The stranger has yielded but has not explained themselves.",
-          "Veln Ashpause stepped out — he foreknew something and has not said what.",
-          "The scratch-mark on the stone is visible now — its meaning unspoken.",
-          "The three-hundred-year tree about to fruit and the missing person it was planted for."
-        ]
-      },
-      "sceneEnded": false,
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "the final exchange and its settling — a short breath of time"
-      }
-    },
-    "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — near-dark now, cold mud underfoot, the last thin light gone from the spring sky. Still.",
-      "npcsPresent": [
-        {
-          "name": "The Stranger",
-          "state": "Standing at the edge of the brush, arms lowered deliberately — not collapsed, set down. Meeting Loki's eyes. Has yielded"
-        },
-        {
-          "name": "Veln Ashpause",
-          "state": "Stepped out of the brush at last. Standing a few paces back, grey coat, expression of quiet relief — 'You're both still "
-        },
-        {
-          "name": "Cy",
-          "state": "At Loki's left, lens settled, watching the stranger with old patience."
-        }
-      ],
-      "objects": [
-        "Waterskin in Loki's hand",
-        "flat river stone with fresh pale scratch-mark (now exposed — waterskin lifted)",
-        "boot-prints in mud ending at the water's edge",
-        "belt knife in Loki's hand"
-      ],
-      "threads": [
-        "The question — 'Why?' — still open and unanswered between Loki and the stranger.",
-        "The stranger has yielded but has not explained themselves.",
-        "Veln Ashpause stepped out — he foreknew something and has not said what.",
-        "The scratch-mark on the stone is visible now — its meaning unspoken.",
-        "The three-hundred-year tree about to fruit and the missing person it was planted for."
-      ]
+      "weight": -2,
+      "spread": [],
+      "day": 1,
+      "worldDay": 32
     }
-  },
+  ],
+  "relationships": {},
+  "chronicle": [
+    "At the braided confluence in the Disputed Zone, Loki turned from a yielded stranger and killed Veln Ashpause in the cold mud at dusk — quickly, without cruelty, and without learning what the man knew. The river did not change. The scratch on the stone went unread."
+  ],
+  "currentLocationId": "millbrook",
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -386,7 +110,11 @@
     "millbrook": {
       "visits": 1,
       "notes": [],
-      "flags": {}
+      "flags": {},
+      "vectorsKnown": [
+        "violence_peace",
+        "concrete_abstract"
+      ]
     }
   },
   "worldState": {
@@ -397,7 +125,7 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 4
+    "turnsSinceOffer": 5
   },
   "bio": null,
   "subAttributes": {
@@ -411,19 +139,37 @@
     "wits": 6
   },
   "pendingSubPoints": 0,
-  "skillPoints": 3,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
-    "topics": {}
+    "topics": {
+      "veln-ashpause": {
+        "id": "veln-ashpause",
+        "label": "Veln Ashpause",
+        "kind": "person",
+        "facts": [
+          "[d1] Veln foreknew something about the confluence or its players — he watched the fight from the brush and emerged with relief on his face. He was killed before he could speak. What he knew died with him."
+        ],
+        "links": [
+          "disputed-zone"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "veln-ashpause",
+        "updatedDay": 1
+      }
+    }
   },
-  "tendencies": {},
+  "tendencies": {
+    "physical": 1
+  },
   "aptitudes": [],
-  "actionCount": 0,
+  "actionCount": 1,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785596378526,
-  "rev": 28,
+  "updatedAt": 1785596735966,
+  "rev": 32,
   "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
@@ -452,7 +198,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 4
+    "valley": 5
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -460,13 +206,20 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T14:59:38.525Z",
+      "lastAt": "2026-08-01T15:05:35.965Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 4
+      "beats": 5
     }
   ],
-  "establishedFacts": [],
+  "establishedFacts": [
+    {
+      "id": "veln-ashpause",
+      "text": "Veln Ashpause is dead — killed by Loki at the braided confluence in the Disputed Zone before he could speak what he foreknew.",
+      "day": 1,
+      "subjectId": "veln-ashpause"
+    }
+  ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "corrections": [
@@ -481,24 +234,33 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 4,
-    "choices": 4,
-    "scene": 4,
+    "sceneSummary": 5,
+    "choices": 5,
+    "scene": 5,
     "stateOps": 1,
-    "characterDeltas": 3,
-    "timeOps": 3,
-    "sceneEnded": 1
+    "characterDeltas": 4,
+    "timeOps": 4,
+    "sceneEnded": 2,
+    "deeds": 1,
+    "ledgerEvents": 1,
+    "npcUpdates": 1,
+    "factUpdates": 1,
+    "codexUpdates": 1
   },
-  "_opTurns": 4,
+  "_opTurns": 5,
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "sonic_resonance": 2
+      "sonic_resonance": 2,
+      "hunters_strike": 1
     },
     "coActivations": {},
     "aspirations": [],
     "lastUsed": {
-      "sonic_resonance": 32
+      "sonic_resonance": 32,
+      "hunters_strike": 32
     }
-  }
+  },
+  "_pendingIntent": null,
+  "_intentAsked": null
 }

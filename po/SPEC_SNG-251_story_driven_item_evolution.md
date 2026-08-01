@@ -121,3 +121,23 @@ no inflation). Get this right for items and it's the template for creature/npc/e
 4. (Erik) Player-initiated evolution — always available ("evolve my item"), or only when a real story beat backs
    it (so it can't be used to free-mint power)? Lean: available but it must CITE the fiction that earned it (the
    concreteness gate applies to player-driven evolution too).
+
+
+---
+
+# §4 — DECIDED (Erik, 2026-07-27): the earned-power economy
+Two rulings that close §251's open questions — earned power is a real, LEVEL-SCALED, RATE-LIMITED economy, not
+a free lever:
+- **Power scales to the player's level + craft/skill.** Earned power is REASONABLE FOR THE PLAYER'S POWER AND
+  SKILL LEVEL — a master smith with deep craft earns a stronger binding than a novice; crafting and skills make
+  meaningful evolution ACHIEVABLE, and the reward tracks what the player has actually built. The clamp ceiling is
+  a FUNCTION OF level + the relevant craft/ability rank, not a flat cap. (This makes item evolution a payoff for
+  investment in crafting/skills — a reason to build them.)
+- **Always available, but RATE-LIMITED: ~1 evolution attempt per day, capped by level/ability.** Player-initiated
+  evolution is always on (Erik shouldn't have to beg the GM), BUT an item can be meaningfully evolved about once
+  per in-game day, and how much it can gain per attempt is bounded by level/ability. So it can't be farmed
+  (no ten-runes-in-an-afternoon), and it stays earned — a deliberate act, cited to the fiction, once a day, scaled
+  to who you are.
+These REPLACE OQ1 (clamp ceiling = level+craft function) and OQ4 (always-available, gated by the daily cap + the
+concreteness cite). CCode: the per-day evolution counter + the level/craft-scaled grant ceiling. Aevi: the
+grant-strength guidance per level band (what a binding at level N / craft-rank R can reasonably grant).

@@ -1,5 +1,18 @@
 # PO ALERT
 
+> ## [SPEC - Erik's Hard Ground test] SNG-252 unified encounter ribbon + Moves (Aevi, 2026-08-01)
+> Three issues from the screenshot, verified: (1) hazard's border is PARTIAL - the enc-frame-hazard 'stone' hue
+> is missing/incomplete in style.css (contest kinds got their hue; hazard on the classic path was the gap) - CSS,
+> not structural. (2) the ribbon is split STRUCTURALLY - the frame is one div (app.js:8650), the moves panel a
+> SEPARATE sibling appended at 8822, flavor line orphaned between = 3 fragments. Erik wants ONE container owning
+> all of it when engaged. (3) MOVES is alive + good (encounterMovesPanel: function-family grouping + ways-out) -
+> 'work it back in' = PROMOTE it into the ribbon + enrich. FIX: §2a hazard hue; §2b ONE enc-frame container
+> (header/win/meter/RECEIPT/exits/MOVES/flavor, remove the sibling append + nest); §2c moves robust - kind-aware
+> ordering (SNG-247), consequence hints (SNG-246 receipt), ward-disabled (SNG-230 §7b), open-by-default-in-ribbon,
+> freeform stays (moves are shortcuts not a cage). Hazard gets the ribbon too (fast != frameless).
+> CCODE: hazard hue + the one-container restructure + the moves enrichment (extend encounterMovesPanel, don't
+> rebuild). AEVI: ribbon copy + per-family×kind consequence-hint phrasings + flavor-as-subtitle voice. ERIK:
+> mobile height + keep the ⚙ collapse. Full: SPEC_SNG-252.
 > ## [DONE - CCODE-55 authoring asks] SNG-250 gate content (Aevi, 2026-08-01)
 > CCode built the SNG-250 universal born-whole gate (engine/borncontract.js - ONE gate, keyed by the consumer
 > map, serving both generation + CI) and flagged 5 Aevi items + a content bug. Cleared the concrete ones:

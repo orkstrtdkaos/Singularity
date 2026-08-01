@@ -11,7 +11,7 @@
     "physical": 6,
     "mental": 8,
     "social": 6,
-    "practical": 7
+    "practical": 8
   },
   "skills": {},
   "abilities": [
@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 77,
+  "energy": 72,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -113,64 +113,66 @@
         "player": null,
         "summary": "Loki reads the keeper's strike before it lands and steps clear — the keeper resets, shaken but not down.",
         "narration": "You hold still and let the Prism Sight do its work. The keeper's right arm burns copper-bright — the muscle already committed, the heat of a decision made before any word was spoken. You have seen enough.\n\nYou read them plainly, out loud, the way you'd state weather. \"You've already decided,\" you say to the keeper. \"Your arm's wound for it. Your weight's already forward.\" You let that sit. Not a threat — a fact, offered like a stone turned over so both of you can see what's under it. The keeper's jaw tightens. The guard doesn't drop. But something behind their eyes recalculates.\n\nThey swing. It's fast and it's committed and it's everything the heat-trace promised — the right arm driving forward the way a person moves when they've stopped thinking and started doing. You've already stepped left. The blow finds the empty air where your shoulder was. Cy doesn't move. Ossivyn, three paces back, presses against the gate post without a word.\n\nThe keeper plants their back foot to reset. Their breath comes out hard through their nose. The calculation in their eyes has changed — you are no longer a problem they can solve quickly. They are still in this. But you have their measure, and they know it."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the keeper mid-reset — the arm wants another strike.",
+        "narration": "The keeper's weight is wrong for someone who has just missed. The right shoulder has already begun its return arc — that arm wants to go again, and soon. The feet say it plainly: they are squared, not braced, already angling for the next commit."
       }
     ],
     "lastTurn": {
-      "narration": "You hold still and let the Prism Sight do its work. The keeper's right arm burns copper-bright — the muscle already committed, the heat of a decision made before any word was spoken. You have seen enough.\n\nYou read them plainly, out loud, the way you'd state weather. \"You've already decided,\" you say to the keeper. \"Your arm's wound for it. Your weight's already forward.\" You let that sit. Not a threat — a fact, offered like a stone turned over so both of you can see what's under it. The keeper's jaw tightens. The guard doesn't drop. But something behind their eyes recalculates.\n\nThey swing. It's fast and it's committed and it's everything the heat-trace promised — the right arm driving forward the way a person moves when they've stopped thinking and started doing. You've already stepped left. The blow finds the empty air where your shoulder was. Cy doesn't move. Ossivyn, three paces back, presses against the gate post without a word.\n\nThe keeper plants their back foot to reset. Their breath comes out hard through their nose. The calculation in their eyes has changed — you are no longer a problem they can solve quickly. They are still in this. But you have their measure, and they know it.",
-      "sceneSummary": "Loki reads the keeper's strike before it lands and steps clear — the keeper resets, shaken but not down.",
+      "narration": "The keeper's weight is wrong for someone who has just missed. The right shoulder has already begun its return arc — that arm wants to go again, and soon. The feet say it plainly: they are squared, not braced, already angling for the next commit.",
+      "sceneSummary": "Loki reads the keeper mid-reset — the arm wants another strike.",
       "choices": [
         {
-          "label": "Press the opening — hit them with a pulse of Sonic Resonance while they're resetting their footing.",
+          "label": "Answer the strike with sound — push them off their line before the arm can unwind again.",
           "attribute": "practical",
           "subAttribute": "craft",
           "difficulty": 15,
           "intentTags": [
-            "attack",
-            "press"
+            "defend",
+            "attack"
           ],
           "abilityId": "sonic_resonance",
           "energyCost": 8,
           "trivial": false
         },
         {
-          "label": "Hold ground — let them come again and read the second blow the way you read the first.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Step into the gap and press with the hunter's read — meet them before they reset fully.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 15,
+          "intentTags": [
+            "attack",
+            "risky"
+          ],
+          "abilityId": "hunters_strike",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Hold ground and speak — name what you see out loud, again, and let the certainty in your voice do the work.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "defend"
+          ],
+          "abilityId": null,
+          "trivial": false
+        },
+        {
+          "label": "Step back toward Ossivyn and the gate — break the geometry of the fight without striking.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
           "intentTags": [
             "defend",
             "careful"
           ],
           "abilityId": null,
-          "energyCost": null,
           "trivial": false
-        },
-        {
-          "label": "Speak past the keeper — tell Ossivyn plainly that whoever sent this person is still out there, and watch what that does to the keeper's face.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "threaten",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Yield the standoff — step back, hands open, and name terms: you leave the orchard, they put the matter to whoever gave them the charge.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null
         }
       ],
       "scene": {
@@ -186,7 +188,7 @@
           },
           {
             "name": "The Keeper of the Toll",
-            "state": "Back foot planted, resetting after a missed strike — breathing hard, still in it, but recalculating."
+            "state": "Squared up, right shoulder coming back, feet repositioning — resetting for another strike."
           }
         ],
         "objects": [
@@ -196,7 +198,7 @@
           "Gate post with newly-straightened hinge"
         ],
         "threads": [
-          "The keeper reset and is still in this — the standoff continues.",
+          "The keeper is resetting — the arm wants to go again.",
           "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed.",
           "The regulator signal moving downstream — no one upstream knows to expect it.",
           "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing."
@@ -204,14 +206,8 @@
       },
       "characterDeltas": {
         "health": 0,
-        "energy": -4
-      },
-      "encounterOps": [
-        {
-          "op": "tactic",
-          "tag": "striker"
-        }
-      ]
+        "energy": 0
+      }
     },
     "sceneState": {
       "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
@@ -226,7 +222,7 @@
         },
         {
           "name": "The Keeper of the Toll",
-          "state": "Back foot planted, resetting after a missed strike — breathing hard, still in it, but recalculating."
+          "state": "Squared up, right shoulder coming back, feet repositioning — resetting for another strike."
         }
       ],
       "objects": [
@@ -236,7 +232,7 @@
         "Gate post with newly-straightened hinge"
       ],
       "threads": [
-        "The keeper reset and is still in this — the standoff continues.",
+        "The keeper is resetting — the arm wants to go again.",
         "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed.",
         "The regulator signal moving downstream — no one upstream knows to expect it.",
         "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing."
@@ -246,7 +242,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 13,
+    "hour": 14,
     "realAnchor": null
   },
   "companions": [],
@@ -271,7 +267,7 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 12
+    "turnsSinceOffer": 13
   },
   "bio": null,
   "subAttributes": {
@@ -282,9 +278,9 @@
     "presence": 6,
     "rapport": 6,
     "craft": 6,
-    "wits": 8
+    "wits": 10
   },
-  "pendingSubPoints": 2,
+  "pendingSubPoints": 0,
   "skillPoints": 3,
   "discoveries": [],
   "codex": {
@@ -315,8 +311,8 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785613679184,
-  "rev": 77,
+  "updatedAt": 1785613759500,
+  "rev": 82,
   "activeEncounter": {
     "defId": "re-enc_the_toll_keeper",
     "state": {
@@ -328,7 +324,8 @@
       "log": [
         "r1: reveal vs strike → momentum 0",
         "r1: reveal vs shield → momentum 4",
-        "r1: reveal vs strike → momentum 10"
+        "r1: reveal vs strike → momentum 10",
+        "r2: reveal vs shield → momentum 10"
       ],
       "opponentHealth": 6,
       "tactic": null,
@@ -365,11 +362,13 @@
         "synthesized": true
       },
       "momentum": 9.5,
-      "opponentEnergy": 50,
+      "opponentEnergy": 42,
       "turn": {
-        "phase": "sense",
+        "phase": "action",
         "sel": {
-          "sense": [],
+          "sense": [
+            8
+          ],
           "action": [],
           "bonus": []
         },
@@ -378,22 +377,13 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
+        "setupBonus": 7,
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with Size them up (Wits) — success. You have the read (+7 to your action). The opening is there — you have earned a BONUS action. You read the keeper of the toll: they favour strike. Pick a craft that answers it.",
+        "readPayoff": "You read the keeper of the toll: they favour strike. Pick a craft that answers it."
       },
       "effects": [
-        {
-          "kind": "guard",
-          "label": "guard up",
-          "value": 4,
-          "roundsLeft": 1,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "source": "a raised guard",
-          "from": "opponent"
-        },
         {
           "kind": "insight",
           "label": "you have their measure",
@@ -401,8 +391,18 @@
           "roundsLeft": 2,
           "applies": "always",
           "side": "player",
-          "source": "Reason it out (Reason)",
+          "source": "Size them up (Wits)",
           "from": "player"
+        },
+        {
+          "kind": "guard",
+          "label": "guard up",
+          "value": 4,
+          "roundsLeft": 2,
+          "applies": "whenAttacked",
+          "side": "opponent",
+          "source": "a raised guard",
+          "from": "opponent"
         }
       ],
       "pressure": {
@@ -413,15 +413,15 @@
         "player": false,
         "opponent": false
       },
-      "lastOppFn": "strike",
+      "lastOppFn": "shield",
       "lastOppReceipt": {
-        "roll": 63,
-        "chance": 78,
+        "roll": 42,
+        "chance": 75,
         "degree": "success",
         "action": {
           "attribute": "practical",
           "abilityLevel": 2,
-          "label": "a hard strike",
+          "label": "a raised guard",
           "axes": {}
         },
         "breakdown": {
@@ -440,26 +440,26 @@
             },
             {
               "label": "momentum (you're on the back foot)",
-              "value": -2
+              "value": -5
             }
           ],
-          "total": 78,
+          "total": 75,
           "clampedFrom": null,
           "base": "practical",
           "opposed": null
         },
-        "rawChance": 78,
-        "margin": 15,
+        "rawChance": 75,
+        "margin": 33,
         "matchup": 0,
         "intensity": "surge",
         "tier": 2,
-        "function": "strike",
-        "name": "a hard strike",
+        "function": "shield",
+        "name": "a raised guard",
         "effectMods": [],
         "woven": null
       },
-      "lastReadWasSense": false,
-      "senseTierEarned": null,
+      "lastReadWasSense": true,
+      "senseTierEarned": 2,
       "senseResist": {
         "value": 9,
         "label": "their natural guardedness",
@@ -561,7 +561,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 12
+    "valley": 13
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -569,10 +569,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T19:47:59.184Z",
+      "lastAt": "2026-08-01T19:49:19.500Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 12
+      "beats": 13
     }
   ],
   "establishedFacts": [
@@ -597,16 +597,16 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 8,
-    "choices": 8,
-    "scene": 8,
+    "sceneSummary": 9,
+    "choices": 9,
+    "scene": 9,
     "stateOps": 1,
-    "characterDeltas": 4,
+    "characterDeltas": 5,
     "timeOps": 4,
     "sceneEnded": 1,
     "encounterOps": 2
   },
-  "_opTurns": 8,
+  "_opTurns": 9,
   "practice": {
     "schemaVersion": 1,
     "uses": {

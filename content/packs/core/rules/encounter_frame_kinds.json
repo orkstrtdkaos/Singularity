@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "encounter_frame_kinds",
  "kind": "content",
- "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths. | PROMOTED staged->live 2026-07-27 (Aevi): merged the 8-exemplar non-combat library so the standoff/puzzle encounters are LOADABLE (were stranded in staged per CCode's SNG-247 handoff). frameKinds copy synced.",
+ "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths. | SNG-238/237 (Aevi 2026-07-27): expanded from 2 seed exemplars to a real LIBRARY - standoffs (grieving-warden/toll-of-names/rival-claim - the non-combat exchange with stakes, the stationary-talker SNG-237 Fix C needs) + puzzles (stopped-mechanism/warded-cache/flooded-works), all grounded in the Valley's real fiction (precursor works, wards, named prices, contested claims). Matches the enc_the_sealed_door shape exactly.",
  "frameKinds": {
   "fight": {
    "icon": "⚔",

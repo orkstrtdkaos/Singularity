@@ -7,7 +7,7 @@ import { reconcileContent } from "./reconcile.js";
 import { applySubstrateField } from "./substrate.js";
 import { loadLegends } from "./legends.js";
 import { buildTraditionIndex } from "./traditions.js";
-import { bestiaryEncounters } from "./random_encounters.js"; // SNG-229 §2b: synthesize monster encounters from the loaded bestiary
+import { bestiaryEncounters, frameExemplarEncounters } from "./random_encounters.js"; // SNG-229 §2b: synthesize monster encounters from the loaded bestiary
 
 const LS = {
   character: id => `singularity.character.${id}`,
@@ -275,7 +275,15 @@ export async function loadContent() {
 
   // SNG-187: a content-count canary at boot — cheap observability, and the proof that parallelising
   // the loaders did not silently drop or reorder any manifest group (the counts must not move).
-  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length} traditionMotivations=${Object.keys(traditionMotivations?.traditions || {}).length} npcInteriority=${Object.keys(npcInteriority?.npcs || {}).length} traditionAesthetics=${Object.keys(traditionAestheticsDoc?.traditions || {}).length} wardDenials=${Object.keys(frameContentDoc?.wardDenials || {}).filter(k => k[0] !== "_").length} challengePremises=${Object.keys(frameContentDoc?.challengePremises || {}).filter(k => k[0] !== "_").length} frameKinds=${Object.keys(frameKindsDoc?.frameKinds || {}).length}`);
+  // SNG-247: and the FRAME-KIND EXEMPLARS — the standoffs and puzzles Aevi authored. `exemplarEncounters` has
+  // been on this doc since SNG-230 and read by nothing: the line below took `frameKinds` and dropped the
+  // encounters on the floor, so the sealed door and the toll-keeper were never once reachable in play. Merged
+  // through the SAME point and pattern as the bestiary, so there is one way encounters reach the pool, not two.
+  if (randomEncounters && frameKindsDoc?.exemplarEncounters?.length) {
+    randomEncounters = { ...randomEncounters, encounters: [...(randomEncounters.encounters || []), ...frameExemplarEncounters(frameKindsDoc)] };
+  }
+
+  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length} traditionMotivations=${Object.keys(traditionMotivations?.traditions || {}).length} npcInteriority=${Object.keys(npcInteriority?.npcs || {}).length} traditionAesthetics=${Object.keys(traditionAestheticsDoc?.traditions || {}).length} wardDenials=${Object.keys(frameContentDoc?.wardDenials || {}).filter(k => k[0] !== "_").length} challengePremises=${Object.keys(frameContentDoc?.challengePremises || {}).filter(k => k[0] !== "_").length} frameKinds=${Object.keys(frameKindsDoc?.frameKinds || {}).length} frameExemplarEncounters=${(randomEncounters?.encounters || []).filter(e => e.fromFrameExemplar).length}`);
   const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.

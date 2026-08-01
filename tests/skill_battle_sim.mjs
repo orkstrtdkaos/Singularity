@@ -12,7 +12,7 @@ import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engin
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
 import { recordUse } from "../engine/practice.js";
 import { FRAME_KINDS, encounterKind, chaseFromFight, frameModel } from "../engine/encounterFrame.js";   // SNG-247: the kind list the colour gate checks
-import { synthesizeStandoffDef, synthesizePuzzleDef } from "../engine/random_encounters.js";   // SNG-247 2a: the kind that never minted
+import { synthesizeStandoffDef, synthesizePuzzleDef, frameExemplarEncounters, eligibleEncountersFor } from "../engine/random_encounters.js";   // SNG-247 2a: the kind that never minted
 import { harmTargetFor } from "../engine/intent.js";   // SNG-246 Fix A: who the player committed harm against
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -715,6 +715,27 @@ check("SNG-247 3: an authored puzzle's stage BEATS become its hint ladder — th
     const e = stagedPuzzles.find(x => (x.stages || []).length >= 2);
     return synthesizePuzzleDef(e).hintTiers[0] === e.stages[0].beat;
   })());
+
+// SNG-247 PROMOTION: the exemplars are REACHABLE, not just present. `exemplarEncounters` had been authored since
+// SNG-230 and read by nothing — loadContent took `frameKinds` off that doc and dropped the encounters on the
+// floor. Moving the file into content/packs/ alone would have changed NOTHING; these check the path, not the file.
+const liveKinds = rj("content/packs/core/rules/encounter_frame_kinds.json");
+check(`SNG-247: the authored library is LIVE, not staged (${(liveKinds.exemplarEncounters || []).length} exemplars in the loaded pack)`,
+  (liveKinds.exemplarEncounters || []).length >= 8);
+const pooled = frameExemplarEncounters(liveKinds);
+check("SNG-247 (the one that matters): every exemplar becomes a POOL ENTRY the offer path can actually reach",
+  pooled.length === liveKinds.exemplarEncounters.length
+  && pooled.every(e => e.id && e.seed && ["duel", "challenge", "opposed"].includes(e.routing)));
+check("SNG-247: `kind` survives the pool hop — a standoff stays a standoff and a puzzle stays a puzzle, not the challenge default",
+  pooled.filter(e => e.kind === "standoff").length >= 4 && pooled.filter(e => e.kind === "puzzle").length >= 4);
+check("SNG-247: the pool's eligibility filter admits `opposed` — without it the one routing:'opposed' exemplar could never be offered",
+  (() => {
+    const loc = { dangerLevel: 3 };
+    const got = eligibleEncountersFor({ encounters: pooled }, loc, { cap: 50 });
+    return got.some(e => e.routing === "opposed") && got.length >= 8;
+  })());
+check("SNG-247: a quiet place does NOT surface the weightier ones — tier became minDanger, so they are danger-gated like every other entry",
+  eligibleEncountersFor({ encounters: pooled }, { dangerLevel: 0 }, { cap: 50 }).length < pooled.length);
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -173,7 +173,9 @@ export function classifyNarrativeKind({ intentTags = [], why = "", hoursPassed =
 export function eligibleEncountersFor(table, location, { cap = 8 } = {}) {
   const danger = dangerOf(location);
   return (table?.encounters || [])
-    .filter(e => (e.routing === "duel" || e.routing === "challenge") && isEligible(e, location))
+    // SNG-247: "opposed" is a real routing (the toll-keeper) and mints a standoff — without it here the one
+    // exemplar Aevi routed that way could never be offered, which is how it stayed invisible.
+    .filter(e => (e.routing === "duel" || e.routing === "challenge" || e.routing === "opposed") && isEligible(e, location))
     .map(e => ({ e, w: Math.max(0.01, (e.weight || 1) * flavorMultiplier(e.flavor, danger)) }))
     .sort((a, b) => b.w - a.w)
     .slice(0, Math.max(0, cap))
@@ -253,6 +255,35 @@ export function synthesizeStandoffDef(entry) {
     },
     stakes: "Losing costs you the point — you pay, you turn back, or it becomes a fight on their terms. It does not cost you blood.",
   };
+}
+
+/** SNG-247 promotion: the frame-kind EXEMPLARS as encounter-pool entries.
+ *
+ *  `exemplarEncounters` had been authored since SNG-230 and read by NOTHING — loadContent takes `frameKinds` off
+ *  that doc and drops the exemplars on the floor, so the sealed door and the toll-keeper have never been reachable
+ *  in play. Aevi's 2026-07-31 library took it from 2 to 8, all equally unreachable. Moving the file into
+ *  content/packs/ alone would have changed nothing; the promotion is the file AND the path.
+ *
+ *  Same shape and same merge point as `bestiaryEncounters` (SNG-229) — one precedent, not a second mechanism.
+ *  `minDanger` comes from the authored tier so a regional puzzle doesn't surface on a quiet road. Pure. */
+export function frameExemplarEncounters(doc) {
+  const tierDanger = { riffraff: 0, notable: 1, regional: 2, epic: 3 };
+  return (doc?.exemplarEncounters || []).map(e => ({
+    id: e.id,
+    // `kind` is what routes it (buildOffer reads kind first) — carried through verbatim so a standoff stays a
+    // standoff and a puzzle stays a puzzle rather than falling to the challenge default.
+    kind: e.kind || null,
+    routing: e.routing || "challenge",
+    flavor: e.flavor || "dangerous",
+    seed: e.seed, name: e.name || null,
+    ...(e.tier != null ? { tier: e.tier } : {}),
+    minDanger: Number.isFinite(e.minDanger) ? e.minDanger : (tierDanger[e.tier] ?? 1),
+    weight: e.weight ?? 1,
+    stages: e.stages || [], premise: e.premise || null, failStakes: e.failStakes || null,
+    ...(e.opponent ? { opponent: e.opponent } : {}),
+    ...(e.hintTiers ? { hintTiers: e.hintTiers } : {}),
+    fromFrameExemplar: true,
+  }));
 }
 
 /** SNG-247 Tier 3: a PUZZLE def from a table entry. Aevi's puzzle exemplars carry `kind:"puzzle"` with

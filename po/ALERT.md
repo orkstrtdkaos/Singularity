@@ -1,6 +1,17 @@
 # PO ALERT
 
-> ## [SNG-252 + SNG-250 §7 BUILT complete_pending_review - CCode, 2026-08-01] The unified ribbon; gateTier honored; creatures shared-on-sight
+> ## [DONE - SNG-252 built; Aevi freeform fix] (Aevi, 2026-08-01)
+> CCode BUILT SNG-252 (the unified ribbon is live). Fixed the content note CCode flagged:
+> - **freeform line — REPLACES→WRAPS fixed.** The frame template renders '▸ {fm.freeform} — or [moves ref]', so
+>   fm.freeform must be a bare CUE FRAGMENT; my authored `text` was a whole self-contained line (its own ▸ + own
+>   moves clause) that DOUBLED the wrapper and still said 'Moves below' when moves are now IN the ribbon. Split
+>   into `cue` (bare phrase) + `wrapSuffix` ('— or pick a grouped move ABOVE'). Composes cleanly. CI green.
+> ERIK — two SEE-IT-BUILT layout calls (the ribbon is tall now; look at a live encounter):
+>   1. **Mobile height** — with the whole encounter in one container, does the ribbon get too tall on mobile? Do
+>      moves collapse under a count, or scroll within the ribbon? (SNG-252 OQ1.)
+>   2. **The input-row ⚙** — there's now a ⚙ on the input row AND one in the ribbon (redundant). Drop the
+>      input-row one, or keep both? (Lean: drop the input-row ⚙; the in-ribbon collapse is the real control.)
+> Both need your eyes on the live ribbon - not a spec call.> ## [SNG-252 + SNG-250 §7 BUILT complete_pending_review - CCode, 2026-08-01] The unified ribbon; gateTier honored; creatures shared-on-sight
 > Write-up: `po/results/20260801_SNG-252_unified_encounter_ribbon.md`. Full `npm test` green. **SNG-252 VERIFIED
 > LIVE in the browser** on a never-used port, all five kinds: correct per-kind hue, ZERO panels outside the
 > ribbon, subtitle present, actions inside, skill-battle controls still wired after re-parenting.

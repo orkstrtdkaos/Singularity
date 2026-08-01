@@ -70,7 +70,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.13206205421252748,
+    "spectrumId": -0.1254589515019011,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
@@ -190,70 +190,95 @@
         "player": "Let the silence hold — stay still under her hand and let her finish what she started",
         "summary": "Vessin finished her reading in the candlelit alcove at dawn — named Loki the most legible thing she has appraised in three years, then stopped at the edge of saying the rest.",
         "narration": "You hold still.\n\nThe candle has burned low enough that the light is mostly warmth now — a dim gold that pools on the drop-cloth and catches the side of her face. Vessin's hand is spread flat on your sternum and she is not looking at your face. She is looking at something you cannot see, which is the habit of someone reading.\n\nThe pressure of her hand is even and unhurried. It moves, once, to your collarbone, and then settles again over the center of your chest. Her breathing is steady. Whatever she is reading, she is getting a clear result — you can see it in the way her mouth almost moves and then doesn't.\n\nThen she lifts her eyes to yours. She does not take her hand away. She says, quietly, that you are the most legible thing she has appraised in three years. She says this the way she would report a reliable result. Then she says that is not all of it, and she stops, and you can see her deciding whether to give you the rest.\n\nOutside the stair, the dawn is greying the air. Somewhere below in the cathedral's open nave, something small skitters across old stone — probably nothing. Cy is at the far wall with its lens tilted toward the latch bracket, and it does not look up, which is Cy's manner of indicating it is occupied and not observing."
+      },
+      {
+        "player": "Tell her to name the rest clearly ",
+        "summary": "Vessin named the rest of her reading plainly — under Loki's surface is something old, structurally unusual, Precursor-adjacent in a way she has only ever found in salvaged instruments. She delivered it without alarm, as a result.",
+        "narration": "You say it plainly. Tell me the rest.\n\nVessin's hand is still flat on your sternum. She holds your eyes for a moment — the appraiser's habit of pricing something before she speaks. Then she does.\n\nShe says the most legible thing she has appraised in three years is also the most structurally unusual. She says that under the surface you present — the ease, the humor, the craft that runs like water — there is something she does not have a category for. She says it is old. Older than you should be, she says, by a significant margin. She says it is not wrong, exactly. But it is not quite what you look like from the outside, and most things she reads are.\n\nShe pauses there. Her hand lifts slightly from your sternum — not withdrawing, just adjusting, the way you would shift a grip on something you are still deciding whether to carry. She says she has appraised Precursor-touched materials before. River-salvage, mostly. Old instruments with no living maker. She says you have a quality she associates with those, though she has never found it in a person before. She says this without alarm, and without apology. She is reporting a result. She watches to see what you do with it."
       }
     ],
     "lastTurn": {
-      "narration": "You hold still.\n\nThe candle has burned low enough that the light is mostly warmth now — a dim gold that pools on the drop-cloth and catches the side of her face. Vessin's hand is spread flat on your sternum and she is not looking at your face. She is looking at something you cannot see, which is the habit of someone reading.\n\nThe pressure of her hand is even and unhurried. It moves, once, to your collarbone, and then settles again over the center of your chest. Her breathing is steady. Whatever she is reading, she is getting a clear result — you can see it in the way her mouth almost moves and then doesn't.\n\nThen she lifts her eyes to yours. She does not take her hand away. She says, quietly, that you are the most legible thing she has appraised in three years. She says this the way she would report a reliable result. Then she says that is not all of it, and she stops, and you can see her deciding whether to give you the rest.\n\nOutside the stair, the dawn is greying the air. Somewhere below in the cathedral's open nave, something small skitters across old stone — probably nothing. Cy is at the far wall with its lens tilted toward the latch bracket, and it does not look up, which is Cy's manner of indicating it is occupied and not observing.",
-      "sceneSummary": "Vessin finished her reading in the candlelit alcove at dawn — named Loki the most legible thing she has appraised in three years, then stopped at the edge of saying the rest.",
+      "narration": "You say it plainly. Tell me the rest.\n\nVessin's hand is still flat on your sternum. She holds your eyes for a moment — the appraiser's habit of pricing something before she speaks. Then she does.\n\nShe says the most legible thing she has appraised in three years is also the most structurally unusual. She says that under the surface you present — the ease, the humor, the craft that runs like water — there is something she does not have a category for. She says it is old. Older than you should be, she says, by a significant margin. She says it is not wrong, exactly. But it is not quite what you look like from the outside, and most things she reads are.\n\nShe pauses there. Her hand lifts slightly from your sternum — not withdrawing, just adjusting, the way you would shift a grip on something you are still deciding whether to carry. She says she has appraised Precursor-touched materials before. River-salvage, mostly. Old instruments with no living maker. She says you have a quality she associates with those, though she has never found it in a person before. She says this without alarm, and without apology. She is reporting a result. She watches to see what you do with it.",
+      "sceneSummary": "Vessin named the rest of her reading plainly — under Loki's surface is something old, structurally unusual, Precursor-adjacent in a way she has only ever found in salvaged instruments. She delivered it without alarm, as a result.",
       "choices": [
         {
-          "label": "Ask her to give you the rest — tell her you would like to hear all of it.",
+          "label": "Ask her what the old instruments felt like — compare notes, calmly",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "negotiate",
+            "calm"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Stay quiet and let her decide on her own whether to say it.",
+          "label": "Tell her the truth — you don't know what you are, only that the question is why you're here at all",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "romantic"
+            "persuade"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Descent — name what she is holding back before she decides whether to give it.",
+          "label": "Use Descent — name what she wants to do with what she just found",
           "attribute": "social",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {
+            "falsehood_truth": -0.1
+          },
+          "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "study"
           ],
           "abilityId": "descent",
           "energyCost": 6,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Break the stillness — pull her down and close the distance before the words do.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Let it sit — say nothing, just watch what she does next with the result",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral, dawn greying the air outside — the candle burned very low now, mostly warmth, pooling gold on the drop-cloth.",
+        "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral, full dawn now beginning to grey the air through the gap under the door — the candle guttered to almost nothing, a bead of warmth on the shelf.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Sitting on Loki's lap, hand spread flat on Loki's sternum, eyes just lifted — she has finished the reading and is deciding whether to give all of what she found."
+            "state": "Hand resting light on Loki's sternum, eyes on Loki's face — result delivered, watching for the response."
           },
           {
             "name": "Cy",
-            "state": "At the far wall, lens tilted toward the latch bracket — occupied and not observing."
+            "state": "At the far wall, lens tilted toward the latch bracket, not observing."
           }
         ],
         "objects": [
-          "Candle burning very low on the shelf",
+          "Candle burned to nearly nothing on the shelf",
           "Flat canvas drop-cloth spread on the floor",
           "Loki's shirt, removed",
           "Loki's trousers, removed",
@@ -261,7 +286,7 @@
           "Traveler's Pack against the wall"
         ],
         "threads": [
-          "Vessin's reading has produced a clear result — she named Loki the most legible thing she has appraised in three years, but said that is not all of it and has not yet given the rest",
+          "Vessin has named the rest of her reading — Loki registers as old, Precursor-adjacent, unlike any living person she has read; her response to whatever Loki says next is unresolved",
           "Something small skittered across stone in the nave below — probably nothing"
         ]
       },
@@ -270,32 +295,59 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Finished her reading — named Loki the most legible thing appraised in three years. Stopped at the edge of giving the rest of the result.",
+          "note": "Named the full result of her reading: Loki is structurally unusual, older-feeling than appearance, Precursor-adjacent in a quality she associates only with river-salvage instruments. Delivered without alarm. Now watching for Loki's response.",
           "learned": [
-            "Loki is, by her read, the most legible subject she has appraised in three years — and that is not the whole of what she found."
+            "Loki reads as Precursor-adjacent at a structural level — a quality she has only found in old salvaged instruments before, never in a person",
+            "The ease and craft Loki presents on the surface does not match what is underneath — the depth is older and categorically different"
           ],
-          "statusNote": "In the alcove on Loki's lap at dawn — reading finished, holding the rest of what she found, deciding."
+          "status": "active",
+          "statusNote": "In the alcove at dawn, hand on Loki's sternum, result given — waiting for a response."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "vessin-tallow-bark",
+          "label": "Vessin Tallow-bark",
+          "kind": "person",
+          "entityId": "vessin-tallow-bark",
+          "fact": "Her reading craft found something she has no category for: under Loki's surface presentation is a structural quality she associates with Precursor-touched river-salvage — old, unusual, not wrong exactly, but not what it looks like from the outside. She has never found it in a living person before.",
+          "links": [
+            "the-unlit-deep",
+            "grovehome",
+            "the-man-in-the-lower-annex"
+          ]
+        },
+        {
+          "topic": "loki-precursor-nature",
+          "label": "Loki's Precursor Nature",
+          "kind": "mystery",
+          "fact": "Vessin's reading craft — accurate by her own account, suited to appraisals — found Loki structurally unusual and Precursor-adjacent at a level under conscious presentation. The quality matches what she has read in old salvaged instruments, never in a person. This is the first external confirmation of Loki's nature from a craft specifically designed to read beneath surfaces.",
+          "links": [
+            "vessin-tallow-bark",
+            "grovehome",
+            "the-half-cathedral"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet moment held while her reading finished — dawn advancing."
+        "why": "A short, still exchange at dawn"
       }
     },
     "sceneState": {
-      "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral, dawn greying the air outside — the candle burned very low now, mostly warmth, pooling gold on the drop-cloth.",
+      "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral, full dawn now beginning to grey the air through the gap under the door — the candle guttered to almost nothing, a bead of warmth on the shelf.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Sitting on Loki's lap, hand spread flat on Loki's sternum, eyes just lifted — she has finished the reading and is decidi"
+          "state": "Hand resting light on Loki's sternum, eyes on Loki's face — result delivered, watching for the response."
         },
         {
           "name": "Cy",
-          "state": "At the far wall, lens tilted toward the latch bracket — occupied and not observing."
+          "state": "At the far wall, lens tilted toward the latch bracket, not observing."
         }
       ],
       "objects": [
-        "Candle burning very low on the shelf",
+        "Candle burned to nearly nothing on the shelf",
         "Flat canvas drop-cloth spread on the floor",
         "Loki's shirt, removed",
         "Loki's trousers, removed",
@@ -303,7 +355,7 @@
         "Traveler's Pack against the wall"
       ],
       "threads": [
-        "Vessin's reading has produced a clear result — she named Loki the most legible thing she has appraised in three years, but said that is not all of it and has no",
+        "Vessin has named the rest of her reading — Loki registers as old, Precursor-adjacent, unlike any living person she has read; her response to whatever Loki says ",
         "Something small skittered across stone in the nave below — probably nothing"
       ]
     }
@@ -734,7 +786,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Your bond deepens — together.",
         "[d2] Met Loki's proposition without deflection — turned the appraisal back, undid her collar one button at a time, and asked for a full assessment.",
         "[d2] Felt the harmonic verdict land — breath caught, weight settled; she is holding the silence rather than filling it.",
         "[d2] Spoke about herself plainly and without performance while Loki removed both their trousers — reporting, as she would any fact worth knowing. Settled close and asked whether the assessment still holds.",
@@ -743,23 +794,24 @@
         "[d2] Harmonic voice through her body broke the composed report voice — she held on and then offered her own craft, dry economy almost intact",
         "[d2] Named her craft as a reading, suited to appraisals — said she prefers to show rather than explain, and her eyes are doing something her voice is not.",
         "[d2] Brought her reading craft to bear — steady, occupied, reading something beneath the surface. Not performing anything for the first time.",
-        "[d2] Finished her reading — named Loki the most legible thing appraised in three years. Stopped at the edge of giving the rest of the result."
+        "[d2] Finished her reading — named Loki the most legible thing appraised in three years. Stopped at the edge of giving the rest of the result.",
+        "[d2] Named the full result of her reading: Loki is structurally unusual, older-feeling than appearance, Precursor-adjacent in a quality she associates only with river-salvage instruments. Delivered without alarm. Now watching for Loki's response."
       ],
       "knownFacts": [
-        "Loki can turn harmonic voice to intimate register — she felt it clearly and did not pull away",
-        "She meets a direct proposition with her own directness — she will not be coy about this.",
         "Loki can deliver a verdict through harmonic voice with precision and restraint — not a wash, a specific thing aimed at her.",
         "Reports herself the way she reports anything worth knowing — factual, unhurried, and without embarrassment",
         "Loki can read the plain want beneath the appraiser's manner — she did not expect to be named that accurately, and the surprise was genuine.",
         "She has a craft she describes as very good for appraisals — she is willing to use it here",
         "Her reading craft follows something under the surface of what a thing presents as — she described it as accurate, and it reads as the truth of that",
-        "Loki is, by her read, the most legible subject she has appraised in three years — and that is not the whole of what she found."
+        "Loki is, by her read, the most legible subject she has appraised in three years — and that is not the whole of what she found.",
+        "Loki reads as Precursor-adjacent at a structural level — a quality she has only found in old salvaged instruments before, never in a person",
+        "The ease and craft Loki presents on the surface does not match what is underneath — the depth is older and categorically different"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the alcove on Loki's lap at dawn — reading finished, holding the rest of what she found, deciding.",
+      "statusNote": "In the alcove at dawn, hand on Loki's sternum, result given — waiting for a response.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1100,7 +1152,7 @@
     "lastSharedReadAt": "2026-08-01T22:35:06.269Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 26,
+    "turnsSinceOffer": 27,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -1938,12 +1990,14 @@
           "[d2] Met the kiss without hesitation — and afterward said she was going to stop calculating the cost of this, just for now. Said it like someone testing a new instrument and finding it works. The 'just for now' is either her last hedge or the most honest thing she has said tonight.",
           "[d2] Came to rest in the alcove and said afterward that the night was worth not knowing what morning brings — the calculation, for once, put down.",
           "[d2] Felt harmonic voice turned to intimate use — recognized it for what it was without naming it, and answered deliberately. The calculation she said she'd put down stayed down.",
-          "[d2] Spoke about herself without performance — reported plainly, as a fact worth knowing, then asked for the verdict with her dry economy of voice. She brings the same deliberate attention to this as to anything else she has decided to keep."
+          "[d2] Spoke about herself without performance — reported plainly, as a fact worth knowing, then asked for the verdict with her dry economy of voice. She brings the same deliberate attention to this as to anything else she has decided to keep.",
+          "[d2] Her reading craft found something she has no category for: under Loki's surface presentation is a structural quality she associates with Precursor-touched river-salvage — old, unusual, not wrong exactly, but not what it looks like from the outside. She has never found it in a living person before."
         ],
         "links": [
           "grovehome",
           "the-half-cathedral",
-          "the-man-in-the-lower-annex"
+          "the-man-in-the-lower-annex",
+          "the-unlit-deep"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1975,6 +2029,22 @@
         "links": [
           "vessin-tallow-bark",
           "the-taken-from-the-city"
+        ],
+        "aliases": [],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "loki-precursor-nature": {
+        "id": "loki-precursor-nature",
+        "label": "Loki's Precursor Nature",
+        "kind": "mystery",
+        "facts": [
+          "[d2] Vessin's reading craft — accurate by her own account, suited to appraisals — found Loki structurally unusual and Precursor-adjacent at a level under conscious presentation. The quality matches what she has read in old salvaged instruments, never in a person. This is the first external confirmation…"
+        ],
+        "links": [
+          "vessin-tallow-bark",
+          "grovehome",
+          "the-half-cathedral"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -2043,17 +2113,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.5795571414964502,
-    "cerebral": 7.493356210715973,
-    "social": 19.36193516209221,
-    "strategic": 5.324438558184238,
-    "cautious": 5.242820825949487,
-    "amorous": 23.747879873671128,
-    "generous": 3.9859726982278483,
-    "ruthless": 0.3725512212402407,
-    "risky": 1.1426657787180592,
-    "patient": 0.3120414750117885,
-    "deception": 0.3632324398878803
+    "devotion": 1.5400682129590388,
+    "cerebral": 7.3060223054480735,
+    "social": 18.8778867830399,
+    "strategic": 5.191327594229632,
+    "cautious": 5.111750305300749,
+    "amorous": 23.15418287682935,
+    "generous": 3.886323380772152,
+    "ruthless": 1.3632374407092347,
+    "risky": 1.1140991342501076,
+    "patient": 0.3042404381364938,
+    "deception": 0.35415162889068325
   },
   "aptitudes": [
     "silver_tongue",
@@ -2063,7 +2133,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 124,
+  "actionCount": 125,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2372,8 +2442,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785625701454,
-  "rev": 407,
+  "updatedAt": 1785625941176,
+  "rev": 408,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3143,7 +3213,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 75
+    "the_quickwood": 76
   },
   "opLossPending": false,
   "sessions": [
@@ -3198,10 +3268,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T23:08:21.454Z",
+      "lastAt": "2026-08-01T23:12:21.175Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 41
+      "beats": 42
     }
   ],
   "establishedFacts": [
@@ -3239,17 +3309,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 141,
-    "choices": 141,
+    "sceneSummary": 142,
+    "choices": 142,
     "characterDeltas": 54,
-    "scene": 141,
+    "scene": 142,
     "placeUpdates": 17,
-    "codexUpdates": 89,
-    "timeOps": 130,
+    "codexUpdates": 90,
+    "timeOps": 131,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 26,
-    "npcUpdates": 113,
+    "npcUpdates": 114,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3263,7 +3333,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 141,
+  "_opTurns": 142,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

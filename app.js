@@ -2619,6 +2619,16 @@ function movesSummaryLine(copy = {}) {
   return String(c.summary || "⚙ Your moves — {summary} · tap to open").replace("{summary}", summary);
 }
 
+/** SNG-253 (engine half): stamp the encounter KIND onto the opponent before its sheet is synthesized, so the
+ *  opponent's move VOCABULARY can be kind-native ("press a point" in a standoff, "cut you off" in a chase)
+ *  instead of falling to the fight default. The kind comes from `encounterKind(def)` — the ONE source
+ *  (seam_encounter_kind_single_source), never re-derived here — and rides on the opponent because that is what
+ *  the synthesizer receives. Additive: with no per-kind archetypes authored yet, nothing changes. */
+function withKind(opponent, def) {
+  try { const k = encounterKind(def); return k ? { ...(opponent || {}), encounterKind: k } : opponent; }
+  catch { return opponent; }
+}
+
 /** SNG-252b §2a: the family's plain word for the collapsed summary — "4 reads", not "4 KNOW". */
 const FAMILY_PLAIN_WORD = { HARM: "strike", PROTECT: "guard", KNOW: "read", INFLUENCE: "press", SHAPE: "shaping", MOVE: "move", RESTORE: "mend", SUSTAIN: "steadying" };
 
@@ -5315,7 +5325,7 @@ function escalateToFight(target, choice) {
   character.customEncounters = character.customEncounters || {};
   character.customEncounters[def.id] = def;
   const sb = CONTENT.skillBattle?.engine;
-  const oppSheet = sb ? synthesizeOpponentSheet(def.opponent, sb) : null;
+  const oppSheet = sb ? synthesizeOpponentSheet(withKind(def.opponent, def), sb) : null; // SNG-253: kind-aware opponent vocab
   character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
   saveCharacter(character);
   renderSkillBattle();
@@ -5352,7 +5362,7 @@ async function fireEncounter(entryOrFlavor, { dev = false, news = [], aggressor 
   const offerTurn = { narration: offer.narration, choices: offer.choices, sceneEnded: false };
   if (offer.def?.type === "duel" && offer.def.opponent) {
     try {
-      const _sheet = synthesizeOpponentSheet(offer.def.opponent, CONTENT.skillBattle?.engine || {});
+      const _sheet = synthesizeOpponentSheet(withKind(offer.def.opponent, offer.def), CONTENT.skillBattle?.engine || {});
       offerTurn._appraisal = appraiseOpponent(character, offer.def, _sheet, CONTENT.rules, CONTENT.skillBattle?.engine || {}, CONTENT.skillBattle?.engine?.appraisal || {});
     } catch { /* a read is a grace, never a blocker on the offer */ }
   }
@@ -9627,7 +9637,7 @@ async function sbEnd(rr) {
 function contestSheetFor(def) {
   const eng = CONTENT.skillBattle?.engine;
   if (!eng || !def || def.skillBattle === false) return null;
-  if (def.type === "duel") return synthesizeOpponentSheet(def.opponent, eng);
+  if (def.type === "duel") return synthesizeOpponentSheet(withKind(def.opponent, def), eng);
   if (def.type === "puzzle" && eng.kinds?.puzzle) {
     return synthesizeStaticSheet({ resist: def.resist ?? def.difficulty, tier: def.holdTier,   // CCODE-53: the NUMERIC craft tier, not the bestiary word
       holdName: def.holdName || "it holds", give: def.give }, eng);
@@ -9649,7 +9659,7 @@ async function beginChaseFromFight(fightDef) {
   // SNG-247 Tier 2b: the chase runs on the CONTEST engine, so it needs the pursuer's sheet the same way a fight
   // does. Without this it would start with no sheet and fall back to the classic single-margin path — the chase
   // would look like a chase and play like the old one-roll ladder.
-  const chaseSheet = CONTENT.skillBattle?.engine ? synthesizeOpponentSheet(chase.opponent, CONTENT.skillBattle.engine) : null;
+  const chaseSheet = CONTENT.skillBattle?.engine ? synthesizeOpponentSheet(withKind(chase.opponent, chase), CONTENT.skillBattle.engine) : null;
   // SNG-247 Tier 4: stamp WHERE THIS CAME FROM so the frame can say the fight became a chase, rather than the
   // player noticing only that the border went red -> amber and the rules quietly changed under them.
   character.activeEncounter = { defId: chase.id, state: { ...startEncounter(chase, { oppSheet: chaseSheet }),
@@ -9678,7 +9688,7 @@ async function beginFightFromChase(chaseDef) {
     return;
   }
   const isSB = !!(CONTENT.skillBattle?.engine && fightDef.type === "duel" && fightDef.skillBattle !== false);
-  const oppSheet = isSB ? synthesizeOpponentSheet(fightDef.opponent, CONTENT.skillBattle.engine) : null;
+  const oppSheet = isSB ? synthesizeOpponentSheet(withKind(fightDef.opponent, fightDef), CONTENT.skillBattle.engine) : null;
   character.activeEncounter = { defId: fightDef.id, state: { ...startEncounter(fightDef, { oppSheet }),
     _morphedFrom: { kind: "chase", note: `${nm} ran you down — the ground is gone and it is blades again` } } };
   saveCharacter(character);

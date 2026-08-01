@@ -44,8 +44,21 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills, authored: true };
   }
+  // SNG-253 (scoped from the post-252 re-look): the opponent's move VOCABULARY was kind-blind. Verified against
+  // this engine rather than predicted — a STANDOFF opponent declared "a hard strike" and held "a raised guard",
+  // in a contest the ribbon had just told the player "cannot hurt you"; a CHASE pursuer did the same instead of
+  // closing or cutting you off. All five authored archetypes (berserker/duelist/trickster/warden/default) are
+  // fight verbs, and tacticTags was the only selector, so every non-fight kind fell through to the fight default.
+  //
+  // Selection order: the KIND's archetype, then an explicit tacticTag — a tag is the most specific thing an
+  // author can say about THIS opponent, so it still wins. Kind is THREADED IN, never inferred here, so one
+  // source decides it (seam_encounter_kind_single_source). Purely additive: with no per-kind archetypes
+  // authored this resolves exactly as it did before, so the engine half lands safely ahead of the content.
+  // Aevi owns the per-kind verb sets.
   const arche = syn.archetypeSkills || {};
   let defs = arche.default || [{ function: "strike", name: "a hard strike" }, { function: "shield", name: "a raised guard" }];
+  const kindDefs = opponent.encounterKind ? arche[`kind:${opponent.encounterKind}`] : null;
+  if (Array.isArray(kindDefs) && kindDefs.length) defs = kindDefs;
   for (const t of tags) if (arche[t]) { defs = arche[t]; break; }
   const skills = defs.map(s => ({ function: s.function, name: s.name, tier, attribute: s.attribute || "practical" }));
   return { name: opponent.name || "the opponent", attributes: { practical: attr, physical: attr, mental: attr, social: attr },

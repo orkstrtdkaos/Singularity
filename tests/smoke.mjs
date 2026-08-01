@@ -8879,6 +8879,39 @@ await (async () => {
     (appSrc251.match(/itemEvolveDeps\(/g) || []).length >= 3);
 }
 
+// ---------- SNG-253 (engine half): the opponent's move vocabulary can be KIND-NATIVE ----------
+// Scoped from the post-252 re-look Aevi asked for, and grounded in what the engine ACTUALLY declared rather
+// than what the spec predicted: a standoff opponent declared "a hard strike" and held "a raised guard" — in a
+// contest the ribbon had just told the player cannot hurt them — and a chase pursuer did the same.
+{
+  const sb253 = await import("../engine/skill_battle.js");
+  const base = JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_battle_system.json"), "utf8")).engine;
+  const cfg = JSON.parse(JSON.stringify(base));
+  const names = o => sb253.synthesizeOpponentSheet(o, cfg).skills.map(s => s.name).join(" , ");
+
+  check("SNG-253: with NO per-kind archetypes authored, synthesis is UNCHANGED — the engine half lands safely ahead of the content",
+    names({ name: "x", threat: 40, encounterKind: "standoff" }) === names({ name: "x", threat: 40 }),
+    "the engine half changed behaviour before Aevi's verb sets exist — that is a silent content regression");
+  cfg.opponentSheetSynthesis.archetypeSkills["kind:standoff"] = [{ function: "influence", name: "a pressed point" }, { function: "ward", name: "the held line" }];
+  check("SNG-253: a per-kind archetype, once authored, gives the opponent KIND-NATIVE verbs",
+    names({ name: "x", threat: 40, encounterKind: "standoff" }) === "a pressed point , the held line");
+  check("SNG-253: an explicit tacticTag still WINS over the kind — it is the most specific thing an author can say about THIS opponent",
+    names({ name: "x", threat: 40, encounterKind: "standoff", tacticTags: ["duelist"] }) === "the measured cut , the turned guard");
+  check("SNG-253: the kind is THREADED from encounterKind(def), never re-derived inside the synthesizer (one source)",
+    /function withKind\(opponent, def\)/.test(readFileSync(join(root, "app.js"), "utf8")) &&
+    /const k = encounterKind\(def\)/.test(readFileSync(join(root, "app.js"), "utf8")) &&
+    !/encounterKind\(/.test(readFileSync(join(root, "engine/skill_battle.js"), "utf8")));
+  check("SNG-253: EVERY opponent-sheet synthesis call site threads the kind (a missed one silently keeps fight verbs)",
+    (() => { const s = readFileSync(join(root, "app.js"), "utf8");
+      const calls = s.match(/synthesizeOpponentSheet\(([^,]+),/g) || [];
+      return calls.length > 0 && calls.every(c => /withKind\(/.test(c)); })(),
+    "a call site passes the raw opponent — that encounter keeps the fight default no matter what Aevi authors");
+  // The evidence that motivated the ticket, kept as a live assertion so nobody has to re-derive it.
+  check("SNG-253 EVIDENCE: today every authored archetype is a FIGHT vocabulary (no standoff/chase verb set exists yet)",
+    Object.keys(base.opponentSheetSynthesis?.archetypeSkills || {}).every(k => !k.startsWith("kind:")),
+    "per-kind verb sets have landed — update this check and the SNG-253 scope note; the fight-default fallback is no longer the whole story");
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

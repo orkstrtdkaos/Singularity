@@ -7,8 +7,8 @@
   "nativeTradition": "enginewright",
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
-  "level": 5,
-  "xp": 495,
+  "level": 6,
+  "xp": 500,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -75,11 +75,11 @@
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
   },
-  "attunement": 5,
-  "maxHealth": 50,
-  "health": 50,
-  "maxEnergy": 120,
-  "energy": 18,
+  "attunement": 6,
+  "maxHealth": 55,
+  "health": 55,
+  "maxEnergy": 125,
+  "energy": 125,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -150,38 +150,21 @@
         "player": "Whisper in her ear.  Ask here to impress you with any skills of her own. that you want to appraise her breasts and nipples the way she looked at you.",
         "summary": "In the alcove candlelight, Vessin met Loki's proposition directly — turning the appraisal back, unhurried, watching for the verdict.",
         "narration": "You lean close, your lips at her ear, her hair against your cheek. You speak quietly enough that the words are only for her. You say you want her to impress you. You say you want to appraise her the way she appraised you — the slow look, the decision to keep.\n\nShe goes still for a moment. Not pulling away. Considering.\n\nThen she makes a sound that is almost a laugh, dry and low, and she pulls back just far enough to look at your face. She is checking whether you are serious. She decides you are.\n\nShe straightens her spine. She holds your gaze — that appraising look, turned back on you now, steady and unhurried. Her hands move to the buttons at her collar, and she undoes them one at a time, with the same precision she uses for everything, without looking down. When she is done she lets the cloth fall open and she watches your face the way someone watches a scale for where it settles.\n\nShe says, quietly, that she has been told she is thorough. She says she would like a full assessment."
+      },
+      {
+        "player": "Turn harmonic voice to a lower register again — let her feel the verdict before she hears it.",
+        "summary": "Loki turned harmonic voice to its quiet register and delivered the verdict without words — Vessin felt it, and the silence after was its own answer.",
+        "narration": "You let the voice drop the same way you did before — slow, below speech, shaped inward rather than outward. Not a wash of sound. A single, precise frequency, aimed.\n\nShe feels it before she expects to. You watch it move through her — a small arrested breath, a shift of weight, her spine settling rather than straightening. The verdict lands without a word.\n\nYou let the silence hold for a moment after. Then you speak, low and close. You tell her the assessment is favorable. You tell her the appraisal holds.\n\nShe does not say anything right away. She just looks at you — steady, and something just past composed.\n\n*You feel it settle into you — a new steadiness. (Level 6: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You lean close, your lips at her ear, her hair against your cheek. You speak quietly enough that the words are only for her. You say you want her to impress you. You say you want to appraise her the way she appraised you — the slow look, the decision to keep.\n\nShe goes still for a moment. Not pulling away. Considering.\n\nThen she makes a sound that is almost a laugh, dry and low, and she pulls back just far enough to look at your face. She is checking whether you are serious. She decides you are.\n\nShe straightens her spine. She holds your gaze — that appraising look, turned back on you now, steady and unhurried. Her hands move to the buttons at her collar, and she undoes them one at a time, with the same precision she uses for everything, without looking down. When she is done she lets the cloth fall open and she watches your face the way someone watches a scale for where it settles.\n\nShe says, quietly, that she has been told she is thorough. She says she would like a full assessment.",
-      "sceneSummary": "In the alcove candlelight, Vessin met Loki's proposition directly — turning the appraisal back, unhurried, watching for the verdict.",
+      "narration": "You let the voice drop the same way you did before — slow, below speech, shaped inward rather than outward. Not a wash of sound. A single, precise frequency, aimed.\n\nShe feels it before she expects to. You watch it move through her — a small arrested breath, a shift of weight, her spine settling rather than straightening. The verdict lands without a word.\n\nYou let the silence hold for a moment after. Then you speak, low and close. You tell her the assessment is favorable. You tell her the appraisal holds.\n\nShe does not say anything right away. She just looks at you — steady, and something just past composed.\n\n*You feel it settle into you — a new steadiness. (Level 6: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Loki turned harmonic voice to its quiet register and delivered the verdict without words — Vessin felt it, and the silence after was its own answer.",
       "choices": [
         {
-          "label": "Give the assessment she asked for — slowly, plainly, with your full attention on her.",
+          "label": "Pull her closer and let the night continue without calculation.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic",
-            "flirt"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Tell her what you see — not flattery, something true and specific. Let her hear it land.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic",
-            "woo"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say nothing. Let your hands speak for the assessment instead.",
-          "attribute": "physical",
-          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -189,10 +172,30 @@
           "trivial": true
         },
         {
-          "label": "Turn harmonic voice to a lower register again — let her feel the verdict before she hears it.",
+          "label": "Say something — a true thing, plainly — and see what she does with it.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let the quiet be the answer and wait for her to move first.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Turn the harmonic voice lower still — not a verdict, a question.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
           "intentTags": [
             "romantic"
           ],
@@ -206,11 +209,11 @@
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Seated on Loki's lap, collar open, holding Loki's gaze — waiting for the assessment she asked for."
+            "state": "Seated on Loki's lap, collar open, holding Loki's gaze — the verdict received, something just past composed in her expression."
           },
           {
             "name": "Cy",
-            "state": "Stationed at the far wall, inspecting the latch bracket with focused and repeated attention."
+            "state": "Stationed at the far wall, still inspecting the latch bracket with focused and repeated attention."
           }
         ],
         "objects": [
@@ -220,7 +223,7 @@
           "Traveler's Pack against the wall"
         ],
         "threads": [
-          "Vessin has opened her collar and asked for a full assessment — the verdict is hers to receive"
+          "Vessin has received the verdict — the silence after is hers to answer"
         ]
       },
       "npcUpdates": [
@@ -228,21 +231,17 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Met Loki's proposition without deflection — turned the appraisal back, undid her collar one button at a time, and asked for a full assessment.",
+          "note": "Felt the harmonic verdict land — breath caught, weight settled; she is holding the silence rather than filling it.",
           "learned": [
-            "She meets a direct proposition with her own directness — she will not be coy about this."
+            "Loki can deliver a verdict through harmonic voice with precision and restraint — not a wash, a specific thing aimed at her."
           ],
-          "statusNote": "Seated on Loki's lap in the alcove, collar open, waiting for the assessment she requested.",
-          "relationshipDelta": 0
+          "status": "active",
+          "statusNote": "Seated on Loki's lap in the alcove, collar open, holding the silence after the verdict."
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short charged exchange in the candlelight"
+        "why": "a quiet beat in the alcove — a moment held"
       }
     },
     "sceneState": {
@@ -250,11 +249,11 @@
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Seated on Loki's lap, collar open, holding Loki's gaze — waiting for the assessment she asked for."
+          "state": "Seated on Loki's lap, collar open, holding Loki's gaze — the verdict received, something just past composed in her expre"
         },
         {
           "name": "Cy",
-          "state": "Stationed at the far wall, inspecting the latch bracket with focused and repeated attention."
+          "state": "Stationed at the far wall, still inspecting the latch bracket with focused and repeated attention."
         }
       ],
       "objects": [
@@ -264,7 +263,7 @@
         "Traveler's Pack against the wall"
       ],
       "threads": [
-        "Vessin has opened her collar and asked for a full assessment — the verdict is hers to receive"
+        "Vessin has received the verdict — the silence after is hers to answer"
       ]
     }
   },
@@ -694,7 +693,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Descent named the last held-back thing — that she did not notice the moment the calculation dissolved — and she acknowledged it plainly. Said 'yes, that is the one.' The armor in her voice is present but no longer performing.",
         "[d2] Turned to face Loki and put one hand against their face — held it without speaking. The appraisal is gone from her eyes. She has decided something and is not afraid of having decided it.",
         "[d2] Met the kiss directly and without hesitation — hand at Loki's face, hand at their coat. Pulled back to breathe and said she is going to stop calculating the cost of this, just for now. Said it like someone testing a new instrument.",
         "[d2] Your bond becomes romantic.",
@@ -703,23 +701,24 @@
         "[d2] Lay quiet in the candlelight afterward — said the night was worth the not-knowing. The ease in her voice is new and small and real.",
         "[d2] Felt the harmonic current turned inward on her — recognized it without naming it, answered with intent. Forehead against Loki's. Has chosen to be here fully.",
         "[d2] Your bond deepens — together.",
-        "[d2] Met Loki's proposition without deflection — turned the appraisal back, undid her collar one button at a time, and asked for a full assessment."
+        "[d2] Met Loki's proposition without deflection — turned the appraisal back, undid her collar one button at a time, and asked for a full assessment.",
+        "[d2] Felt the harmonic verdict land — breath caught, weight settled; she is holding the silence rather than filling it."
       ],
       "knownFacts": [
-        "She did not feel the moment she stopped mapping the exit — the not-noticing is the thing that was revealed, and she knows it now.",
         "She can choose to stay somewhere without mapping the exit — she has now done it",
         "She is capable of choosing not to calculate — she did it, and said so aloud.",
         "The phrase 'just for now' may be a hedge or may be the most honest thing she has said — she does not yet know which.",
         "She knows what she wants and is not embarrassed to say it directly when asked plainly",
         "She can hold something without calculating its cost — and she did, and she knows it now.",
         "Loki can turn harmonic voice to intimate register — she felt it clearly and did not pull away",
-        "She meets a direct proposition with her own directness — she will not be coy about this."
+        "She meets a direct proposition with her own directness — she will not be coy about this.",
+        "Loki can deliver a verdict through harmonic voice with precision and restraint — not a wash, a specific thing aimed at her."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated on Loki's lap in the alcove, collar open, waiting for the assessment she requested.",
+      "statusNote": "Seated on Loki's lap in the alcove, collar open, holding the silence after the verdict.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1060,7 +1059,7 @@
     "lastSharedReadAt": "2026-08-01T22:35:06.269Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 18,
+    "turnsSinceOffer": 19,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -1201,8 +1200,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -2002,17 +2001,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.8386863298425495,
-    "cerebral": 8.72265476653235,
-    "social": 20.325141948842717,
-    "strategic": 6.1979222744326,
-    "cautious": 4.938863208996564,
-    "amorous": 20.002778031940064,
-    "generous": 4.639878684232861,
-    "ruthless": 0.43366891875251445,
-    "risky": 1.3301221536799397,
-    "patient": 0.3632324398878803,
-    "deception": 0.42282137456861496
+    "devotion": 1.7927191715964859,
+    "cerebral": 8.504588397369043,
+    "social": 19.81701340012165,
+    "strategic": 6.0429742175717855,
+    "cautious": 4.81539162877165,
+    "amorous": 20.50270858114156,
+    "generous": 4.52388171712704,
+    "ruthless": 0.4228271957837016,
+    "risky": 1.296869099837941,
+    "patient": 0.35415162889068325,
+    "deception": 0.41225084020439956
   },
   "aptitudes": [
     "silver_tongue",
@@ -2022,7 +2021,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 118,
+  "actionCount": 119,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2331,8 +2330,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785623841276,
-  "rev": 395,
+  "updatedAt": 1785624143013,
+  "rev": 397,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3102,7 +3101,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 67
+    "the_quickwood": 68
   },
   "opLossPending": false,
   "sessions": [
@@ -3157,10 +3156,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T22:37:21.275Z",
+      "lastAt": "2026-08-01T22:42:23.011Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 33
+      "beats": 34
     }
   ],
   "establishedFacts": [
@@ -3198,17 +3197,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 133,
-    "choices": 133,
+    "sceneSummary": 134,
+    "choices": 134,
     "characterDeltas": 54,
-    "scene": 133,
+    "scene": 134,
     "placeUpdates": 17,
     "codexUpdates": 88,
-    "timeOps": 124,
+    "timeOps": 125,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 26,
-    "npcUpdates": 105,
+    "npcUpdates": 106,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3222,7 +3221,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 133,
+  "_opTurns": 134,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3236,7 +3235,7 @@
       "the_misdirect": 2,
       "the_better_story": 11,
       "prism_sight": 8,
-      "harmonic_voice": 4,
+      "harmonic_voice": 5,
       "hunters_strike": 3,
       "descent": 6
     },

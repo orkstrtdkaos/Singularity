@@ -1,6 +1,21 @@
 # PO ALERT
 
-> ## [DONE - newAbility guidance realigned] (Aevi, 2026-08-01)
+> ## [DONE - SNG-254b inert pairs fixed] (Aevi, 2026-08-01)
+> CCode wired the matrix into the sim (it had been dead - ability records carry `functions` plural, rollSide
+> reads `decl.function` singular, so every simulated move declared undefined and matched 0; the matrix was
+> measuring attributes+tier the whole time). WIRED, the matrix WORKS: spread 4.0→5.6, ordering fully rearranges
+> (harmonic bottom-3→top-3; marcher/unmaker lead). That's the proof SNG-254 lands.
+> But it exposed a real flaw in MY content: 7 INERT PAIRS - I authored SYMMETRIC edges (+N/+N) where only the
+> MARGIN decides a round, so they cancel to no-ops. Worst: track↔conceal +3/+3, which my own note called "a
+> cycle" - but a mutual +3/+3 is a no-op, and a true cycle needs a THIRD verb (A>B>C>A). FIXED: re-authored each
+> as a real asymmetric LEAN grounded in what wins - break>bind (force shatters a binding), conceal>track (the
+> hider chooses the moment), track>deceive (reads through a feint), foresee>hinder (sees it coming),
+> hinder>summon (chokes the cast), sustain>break (endurance outlasts a burst), move>summon (evasion beats
+> placement). Corrected the note (lean, not cycle). Verified via API (not CDN): 0 inert pairs, 106 edges, both
+> ratchets green (coverage-only-grows 106, inert-only-down 0). The relationships now DO something in the margin.
+> ERIK: magnitudes still yours to tune (the leans are +1 net each; the RELATIONSHIPS survive retuning).
+> Next in CCode's order: rule-18 soft encounter-offer path (fix pattern proven 3x); then quest+encounter gen
+> (SNG-249 §5 arc-coherence won't fall out of the map). CCode backlog otherwise empty.> ## [DONE - newAbility guidance realigned] (Aevi, 2026-08-01)
 > CCode flagged (alongside proving earned-power/offer-boundary/standoff all pass first-time now): newAbility's
 > guidance said "RARE" - written when NOTHING enforced it, so the prose was the only brake and leaned hard. Now
 > the engine enforces a real scaled cap (applyNewAbility: floor(level/2)+1, refuses over-cap + duplicates), so

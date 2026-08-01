@@ -69,6 +69,12 @@ Some evolutions SPLIT an item. Memory split by design — hers to wield, Silas's
   power), linked to the parent (Memory). The child is its own inventory item the player can invoke.
 - **The link is real** — the derived item knows its parent (provenance: "the sealed shadow-twin of Memory"); the
   parent notes the split. Both evolve independently thereafter.
+- **DERIVED != LESSER (Erik-corrected).** A derived item is DIFFERENT, not automatically weaker. The default must
+  NOT be "an echo at reduced strength" — a split can be a PEER that excels where the parent doesn't (Memory's
+  shadow-twin bites shadow-substance/Zone-changed/bodiless foes that IRON handles poorly, and adds a thrown +
+  re-summoning mode with shadow-effects the iron spear can't do). The derived item gets its OWN grants, scaled to
+  the same level/craft economy (§4), which may be complementary or even stronger IN THEIR DOMAIN. Neither is 'the
+  main'; they answer different problems.
 - **This fixes "show the shadow twin as its own item I can call"** — the split becomes two real items, the shadow
   one callable.
 
@@ -109,6 +115,10 @@ no inflation). Get this right for items and it's the template for creature/npc/e
   parent; not a prose mention, not a fake button. Callable because it's real.
 - **Coherent with the item** (SNG-250 §6) — the evolution follows from what the item IS and what the fiction did;
   Memory grows deathbound-runic because that's what was bound into it, not random power.
+- **A derived item is a PEER, not a downgrade** — don't default a split/child to reduced-strength echoes. It gets
+  its own grants (scaled to the same §4 economy), complementary to the parent — strong where the parent is weak,
+  a different tool, not a lesser copy. (The lazy "derived = lesser" assumption is banned; Erik corrected it on
+  Memory's twin.)
 
 ## OPEN QUESTIONS
 1. (Erik) The clamp ceiling — how much earned power before an item is too strong? A per-item grant cap, or a

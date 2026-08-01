@@ -1,5 +1,62 @@
 # PO ALERT
 
+> ## [SNG-252 + SNG-250 §7 BUILT complete_pending_review - CCode, 2026-08-01] The unified ribbon; gateTier honored; creatures shared-on-sight
+> Write-up: `po/results/20260801_SNG-252_unified_encounter_ribbon.md`. Full `npm test` green. **SNG-252 VERIFIED
+> LIVE in the browser** on a never-used port, all five kinds: correct per-kind hue, ZERO panels outside the
+> ribbon, subtitle present, actions inside, skill-battle controls still wired after re-parenting.
+>
+> **SNG-252 §2a IS A NO-OP — premise correction, Aevi.** The spec diagnosed hazard's `enc-frame-hazard` stone
+> hue as "missing/incomplete in style.css". It is neither: the hue is defined (style.css:123), `.enc-frame`
+> reads it for the border, `encounterKind` returns "hazard" for every challenge, and `frameModel` produces a
+> full hazard frame — all four verified before touching anything. Nothing was added; a smoke check now asserts
+> the hue EXISTS so it can't be "fixed" later by adding a duplicate rule. **The border was never partial —
+> most of a hazard's content sat OUTSIDE it**, and hazard reads worst precisely because it is the fast path
+> (slimmest frame ⇒ largest share of the encounter outside the box). §2b is the real fix for what Erik saw.
+>
+> **§2b one container** — everything inside one enc-frame: header→subtitle→win→meter→receipt→exits→moves→
+> freeform. **The skill-battle panel went in too, and finding that is why I verified live:** I first left it
+> outside as "the fight's own richer panel", then drove a standoff in the browser and the ribbon rendered with
+> NO actions in it at all, every control in a box below — fight/chase/standoff/puzzle would have shipped
+> exactly as split as before, on the ticket whose whole point was to unsplit them. The ⚙ deliberately does NOT
+> appear for a skill battle: that panel is the fight's only action set, and a collapse control that hid it
+> would leave the player in a fight with no visible way to act. The receipt now PERSISTS in the ribbon; the
+> floating copy renders only after the encounter ends, so it is never both inside and outside.
+>
+> **§2c moves** — kind-aware order (un-emphasised families KEPT, never dropped), consequence hints in the
+> kind's currency, off-currency families marked but still CLICKABLE, warded moves disabled-with-reason, shown
+> by default, and picking one no longer collapses the encounter you're still in. Ways out RELABELLED from the
+> frame (hazard now reads "Turn back"), never rebuilt from it — the frame's `defeat` exit is the PRIMARY move
+> and its `strike` action has no dispatcher case, so rebuilding would have filed "Push on" under ways-out and
+> wired a dead button. Both content files promoted to core rules + registered + loaded.
+>
+> **AEVI — one content note.** Your freeform line REPLACES the frame's cue rather than wrapping it:
+> interpolating both produced a doubled sentence ("…against the stage. — or pick a move above; …against the
+> stage."), and the old constant `FRAME_FREEFORM_CUE` (encounterFrame.js:41) says the moves are "below",
+> which stopped being true when they moved into the ribbon. `{freeform}` now fills only from a cue a kind
+> actually customised; none do today, so your line stands alone. If you want `{freeform}` to carry something,
+> it needs a short per-kind phrase — the old constant is not it.
+>
+> **SNG-250 §7a BUILT** — gateTier honored in the verdict: HARD escalates EMPTY→reject (an un-fightable
+> monster is worse than no monster), SOFT keeps EMPTY as repair/warn. CRASH still rejects and DEGRADED still
+> warns in BOTH tiers — the tier only moves EMPTY. An unset gateTier defaults SOFT so a type nobody has tiered
+> never silently starts rejecting; smoke asserts all 7 declare one.
+> **SNG-250 §7b BUILT** — creatures are SHARED-ON-SIGHT, and the reasoning is the better model: a creature is
+> a fact about the country, not a relationship. `SHARE_ON_SIGHT_TYPES` skips the tier+weight tests only —
+> still idempotent once promoted, still contests through the same merge. NPCs/places still climb (BATCH-9 §2
+> untouched). Shared creatures reach the pool through the SAME merge point, so a grown monster draws its
+> threat/weight/minDanger from BEAST_TIER exactly as an authored one does — one difficulty curve for the whole
+> valley — deduped so your own creature returning through canon is one entry, not two. **The live-scene guard
+> is a SNAPSHOT, not a read-time filter:** filtering at read time was the obvious implementation and the wrong
+> one, because an id already offered would stop resolving mid-encounter. A snapshot means the pool cannot
+> change under a fight you are in, and everything offered stays engageable.
+>
+> **ERIK:** (a) mobile height is now a see-it-built call — the ribbon is tall when engaged; collapse moves
+> under a count, or scroll within the ribbon? (b) the input-row ⚙ Moves gear is now redundant with the
+> in-ribbon ⚙ (same state, both wired) — removing one is a layout call, so I left both.
+> **NEXT (§4, parked as Aevi planned):** SNG-253 kind-native action vocabulary. 252 isolated it exactly as she
+> predicted — the remaining fight-flavour is `skill_battle.js:48`'s hardcoded opponent verbs ("a hard strike" /
+> "a raised guard") firing on every kind. Ready to scope; Aevi owes the per-kind verb sets when it opens.
+
 > ## [DECIDED - Erik] SNG-250 §7 gate tiering + shared creatures (Aevi, 2026-08-01)
 > - **§7a gate tier per type = YES, LIGHT.** The gate already tiers by FIELD severity, so this is just a
 >   `gateTier` field in the map read by the same gate: HARD (hollowness breaks play, EMPTY escalates toward

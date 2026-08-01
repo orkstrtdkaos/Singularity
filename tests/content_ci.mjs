@@ -687,16 +687,29 @@ for (const pack of PACKS) {
       // that may not belong in provides.rules at all, and that is Aevi's call to make, not a build failure to
       // impose. So the existing set is baselined and warned; anything NEW fails. The list may only go DOWN.
       const KNOWN_UNLOADED = new Set(["challenge_design", "coliseum_grid", "combination_recipes", "cross_axis_modifiers",
-        "emergence_recipes", "gambit_design", "martial_paths", "peoples_of_kind", "pole_signatures", "power_sources",
+        "gambit_design", "martial_paths", "peoples_of_kind", "pole_signatures", "power_sources",
         "quest_structure", "skill_utility_audit"]);
       const stateSrc = readFileSync(join(root, "engine/state.js"), "utf8");
+      // Matched the way `rulePath` ACTUALLY resolves — by SUBSTRING, not exact stem. `loadRule("emergence")`
+      // loads `rules/emergence_recipes.json`, and an exact-stem check called that file dead when it is loaded
+      // every boot. The check has to mirror the loader it is auditing, or it invents gaps.
+      const loadRuleNames = [...stateSrc.matchAll(/loadRule\("([^"]+)"/g)].map(m => m[1]);
       const unread = (rj("content/packs/core/manifest.json").provides?.rules || [])
         .map(p => p.replace(/^rules\//, "").replace(/\.json$/, ""))
-        // resolution is the fatal base rules (fetched by path, not loadRule); the rest must be loadRule'd by name
-        .filter(stem => stem !== "resolution" && !stateSrc.includes(`loadRule("${stem}"`));
+        // resolution is the fatal base rules (fetched by path, not loadRule); the rest resolve through rulePath
+        .filter(stem => stem !== "resolution" && !loadRuleNames.some(n => stem.includes(n)));
       const fresh = unread.filter(s => !KNOWN_UNLOADED.has(s));
       const fixed = [...KNOWN_UNLOADED].filter(s => !unread.includes(s));
-      if (unread.length) warnShape(`[loader] ${unread.length} registered core rule(s) are loaded by NOTHING (baselined): ${unread.join(", ")} — Aevi: are these runtime rules, or design docs that should leave provides.rules?`);
+      // Aevi ruled on these (manifest `_notes.rulesDeregistered`): they stay REGISTERED, because SNG-064 requires
+      // any file on disk in rules/ to be whitelisted — deregistering in place would make them on-disk-but-not-
+      // whitelisted, which is worse. Her follow-on (her call, not this ticket) is to move the pure design docs
+      // out of rules/ entirely. ONE correction to her note: it says the data files "load via dedicated modules
+      // (recipes.js etc)" — they do not. Nothing in engine/ or app.js reads power_sources, combination_recipes,
+      // martial_paths, cross_axis_modifiers or pole_signatures at all; the only two that LOOK referenced
+      // (peoples_of_kind in affiliation.js, quest_structure in quests.js) are mentioned in COMMENTS, not fetched.
+      // That does not change her ruling — they still stay registered — but the reason is "unused", not "loaded
+      // elsewhere", and the distinction matters if anyone later wonders whether they can be deleted.
+      if (unread.length) warnShape(`[loader] ${unread.length} registered core rule(s) are loaded by NOTHING (baselined, Aevi-ruled): ${unread.join(", ")}`);
       check("CCODE-55: no NEWLY registered core rule is left unloaded (registered ≠ read)",
         fresh.length === 0, `registered but never loaded: ${fresh.join(", ")} — the file exists, is whitelisted, and reaches nothing (earned_power_guidance was exactly this: the numbers would clamp while its whole voice layer never reached the GM)`);
       if (fixed.length) ok(`CCODE-55: ${fixed.length} previously-unloaded rule(s) now reach the engine — shrink KNOWN_UNLOADED: ${fixed.join(", ")}`);

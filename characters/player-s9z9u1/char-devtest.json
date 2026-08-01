@@ -11,7 +11,7 @@
     "physical": 6,
     "mental": 8,
     "social": 6,
-    "practical": 6
+    "practical": 7
   },
   "skills": {},
   "abilities": [
@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 76,
+  "energy": 91,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -105,141 +105,125 @@
         "narration": "Evening light comes through the orchard in long, low bars, catching the undersides of the oldest branches and turning them gold. The air smells of damp soil and early blossom — the small white kind that comes before the fruit and means nothing by itself except that something is trying. Ossivyn Tallow is at the planting gate, moving back toward the orchard proper. He has the record book tucked under one arm, closed now, and the marker stake he drove in earlier catches the last of the light — a small iron tooth in the turned earth beside the sapling. The hole is filled. The tree is in. He is not in a hurry to go anywhere. Cy walks at its usual precise distance from your left heel, lens irising slowly as it takes in the orchard's geometry. It has already, without asking, straightened a loose hinge on the gate post. Spring mud still clings to your boots from the road, and the evening is cool enough to feel the warmth the turned earth is giving off. The quest thread from the Unlit Deep is closed on its surface, but the man who paid for a stranger to come at you with a fabricated charge is still unnamed, still somewhere in the lower Annex, and the regulator's signal is moving downstream without anyone knowing to expect it. That is tomorrow. For now, there is the orchard, and the tender returning from a finished planting, and the kind of quiet that happens when something slow has been done correctly."
       },
       {
-        "player": "Attempt: Read the hazard",
-        "summary": "Read the muddy lane — the right line is clear.",
-        "narration": "You take your time at the gate, letting your eye travel the path ahead. The orchard slopes gently down from here, but the recent melt has done its work on the lower lane. A run of mud spreads across the stones — not treacherous if you know where to set your feet, but wider than it looks from a standing start. You can see where the water pooled and drained: there is a shallow rut along the left side where the ground is softer, still wet and yielding. The right side is firmer, where the old tree roots have knitted the soil together just below the surface. If you angle toward the stone wall on the right and step where the roots hold, the crossing is honest work. Ossivyn glances back once, not offering anything, the record book still tucked under his arm. He has walked this path a hundred times and does not think about it anymore. Cy's lens adjusts, catching the same light you do — but the choice is yours."
-      },
-      {
-        "player": "Attempt: Commit to the crossing",
-        "summary": "The muddy crossing made cleanly along the root-held right line; the lane behind them now.",
-        "narration": "You angle right at the gate, stepping where the old tree roots have knitted the ground. The first step is solid underfoot. The second holds just as well. The mud sucks at the air around your boots but not at your feet, and you walk the root-held line cleanly to the far side of the lane. Cy follows in your exact footprints without comment, lens catching the last of the gold light.\n\nOssivyn has half-turned to watch. He gives a short nod — not approval exactly, more acknowledgment — and turns back toward the orchard proper."
-      },
-      {
         "player": null,
-        "summary": "Loki reads the toll keeper through Prism Sight — the right shoulder betrays a pending strike.",
-        "narration": "You open your sight and let the spectrum layer over the keeper. Heat blooms at their shoulder — the right shoulder, the leading one — warmer than the rest of them by a clear margin. That is where they carry their weight when they mean to move forward. Their jaw is set and their breathing is shallow, and the warmth at that shoulder is already shifting forward, a fraction, like a door beginning to open."
-      },
-      {
-        "player": null,
-        "summary": "At the Slow Orchard gate, the keeper of the toll pressed and found the line held — a bound exchange that scattered both blows — and stepped aside when the arithmetic didn't add up in their favor.",
-        "narration": "The keeper's right shoulder drops first — the tell you already read. They drive forward with a short, hard shove, weight committed, certain of it. You let the resonance come up through your chest and release it as a blunt push that meets their force at the midpoint between you. The sound is a flat, ugly crack — not loud, but felt — and the impact shudders back through both of you at once. Your boots skid an inch in the lane mud. Their boots skid an inch the other way. Neither of you goes down.\n\nFor a moment it is simply two people standing in the same lane, breathing.\n\nThen something goes out of the keeper's face. Not fear exactly. More like the arithmetic of it settled: they had pressed, you had held, and the lane had not given them anything new to work with. Their jaw unclenches. Their right shoulder drops to level — the weight shifting back, off the leading foot.\n\n\"Lane's open,\" the keeper says, quietly, and steps aside to the verge.\n\nCy moves up to your left heel without a word. Ossivyn is already well into the orchard behind you, not looking back. The long gold light is nearly gone now, and the village lane stretches ahead toward the first lit windows of Millbrook."
+        "summary": "Loki reads the sealed door — it is bracing, not barring, weight-heavy on the right.",
+        "narration": "The door tells you everything, if you look rather than push. The resistance is not even — there is a slight give on the left side, a hairline's worth, where the rightward brace takes more of the load. Whatever holds it is bracing, not barring: it is set to absorb force, not to stop a mind. Cy's lens irises, reading the same geometry you are, and says nothing."
       }
     ],
     "lastTurn": {
-      "narration": "The keeper's right shoulder drops first — the tell you already read. They drive forward with a short, hard shove, weight committed, certain of it. You let the resonance come up through your chest and release it as a blunt push that meets their force at the midpoint between you. The sound is a flat, ugly crack — not loud, but felt — and the impact shudders back through both of you at once. Your boots skid an inch in the lane mud. Their boots skid an inch the other way. Neither of you goes down.\n\nFor a moment it is simply two people standing in the same lane, breathing.\n\nThen something goes out of the keeper's face. Not fear exactly. More like the arithmetic of it settled: they had pressed, you had held, and the lane had not given them anything new to work with. Their jaw unclenches. Their right shoulder drops to level — the weight shifting back, off the leading foot.\n\n\"Lane's open,\" the keeper says, quietly, and steps aside to the verge.\n\nCy moves up to your left heel without a word. Ossivyn is already well into the orchard behind you, not looking back. The long gold light is nearly gone now, and the village lane stretches ahead toward the first lit windows of Millbrook.",
-      "sceneSummary": "At the Slow Orchard gate, the keeper of the toll pressed and found the line held — a bound exchange that scattered both blows — and stepped aside when the arithmetic didn't add up in their favor.",
+      "narration": "The door tells you everything, if you look rather than push. The resistance is not even — there is a slight give on the left side, a hairline's worth, where the rightward brace takes more of the load. Whatever holds it is bracing, not barring: it is set to absorb force, not to stop a mind. Cy's lens irises, reading the same geometry you are, and says nothing.",
+      "sceneSummary": "Loki reads the sealed door — it is bracing, not barring, weight-heavy on the right.",
       "choices": [
         {
-          "label": "Walk on toward the village lights — the lane is open",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Hold a moment and look at the keeper — read what just passed in their face",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "trivial": true
-        },
-        {
-          "label": "Ask the keeper plainly — who sent them to this lane tonight",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Strike the weaker left side with a focused sonic pulse — bypass the brace where it gives",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 15,
           "intentTags": [
-            "persuade"
+            "attack",
+            "press"
           ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 8,
           "trivial": false
         },
         {
-          "label": "Catch up to Ossivyn before he disappears into the orchard — he saw everything",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Study the right brace more carefully before committing — find where the ward actually anchors",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "study",
+            "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Use Prism Sight to read the heat trace on the door's surface — something or someone worked this lock recently",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Abandon the door for now — note what you've learned and come back with more information",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "energy": -5
-      },
       "scene": {
-        "setting": "The lower lane beyond the Slow Orchard's planting gate — the last gold light is nearly gone, cool spring dusk settling in. The muddy crossing is behind. The lane ahead toward Millbrook is open, first lit windows visible in the distance.",
+        "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
         "npcsPresent": [
           {
-            "name": "The keeper of the toll",
-            "state": "Standing on the verge to the side of the lane, weight settled back, jaw unclenched — watching but no longer blocking."
-          },
-          {
             "name": "Ossivyn Tallow",
-            "state": "Withdrawing into the orchard proper with his record book, not looking back."
+            "state": "Moving back from the gate toward the orchard proper, record book closed under one arm, unhurried."
           },
           {
             "name": "Cy",
-            "state": "At Loki's left heel, still, lens catching the last light."
+            "state": "Lens irising, reading the door geometry alongside Loki, silent."
           }
         ],
         "objects": [
-          "Muddy lane behind — the crossing done",
-          "Iron marker stake and sapling visible back through the gate",
-          "Open lane ahead toward Millbrook, first lit windows in the distance"
+          "Freshly-planted sapling in tamped earth",
+          "Small unlabeled iron marker stake driven beside the root base",
+          "Closed record book (carried by Ossivyn)",
+          "Gate post with newly-straightened hinge",
+          "The sealed door — resistance concentrated on the right brace, slight give on the left"
         ],
         "threads": [
+          "The door's right brace bears the load — the ward is absorbing force, not simply blocking passage",
           "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
-          "The keeper of the toll — who put them here tonight",
-          "The regulator signal moving downstream — no one upstream knows",
-          "A tree planted three hundred years ago said to be nearly ready to fruit — its person missing"
+          "The regulator signal moving downstream — no one upstream knows to expect it",
+          "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
         ]
-      },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange at the lane's end — minutes, not more"
       }
     },
     "sceneState": {
-      "setting": "The lower lane beyond the Slow Orchard's planting gate — the last gold light is nearly gone, cool spring dusk settling in. The muddy crossing is behind. The lane ahead toward Millbrook is open, first lit windows visible in the distance.",
+      "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
       "npcsPresent": [
         {
-          "name": "The keeper of the toll",
-          "state": "Standing on the verge to the side of the lane, weight settled back, jaw unclenched — watching but no longer blocking."
-        },
-        {
           "name": "Ossivyn Tallow",
-          "state": "Withdrawing into the orchard proper with his record book, not looking back."
+          "state": "Moving back from the gate toward the orchard proper, record book closed under one arm, unhurried."
         },
         {
           "name": "Cy",
-          "state": "At Loki's left heel, still, lens catching the last light."
+          "state": "Lens irising, reading the door geometry alongside Loki, silent."
         }
       ],
       "objects": [
-        "Muddy lane behind — the crossing done",
-        "Iron marker stake and sapling visible back through the gate",
-        "Open lane ahead toward Millbrook, first lit windows in the distance"
+        "Freshly-planted sapling in tamped earth",
+        "Small unlabeled iron marker stake driven beside the root base",
+        "Closed record book (carried by Ossivyn)",
+        "Gate post with newly-straightened hinge",
+        "The sealed door — resistance concentrated on the right brace, slight give on the"
       ],
       "threads": [
+        "The door's right brace bears the load — the ward is absorbing force, not simply blocking passage",
         "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
-        "The keeper of the toll — who put them here tonight",
-        "The regulator signal moving downstream — no one upstream knows",
-        "A tree planted three hundred years ago said to be nearly ready to fruit — its person missing"
+        "The regulator signal moving downstream — no one upstream knows to expect it",
+        "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 10,
+    "hour": 11,
     "realAnchor": null
   },
   "companions": [],
@@ -264,7 +248,7 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 9
+    "turnsSinceOffer": 10
   },
   "bio": null,
   "subAttributes": {
@@ -275,7 +259,7 @@
     "presence": 6,
     "rapport": 6,
     "craft": 6,
-    "wits": 6
+    "wits": 8
   },
   "pendingSubPoints": 0,
   "skillPoints": 3,
@@ -308,9 +292,134 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785604497493,
-  "rev": 55,
-  "activeEncounter": null,
+  "updatedAt": 1785608420941,
+  "rev": 63,
+  "activeEncounter": {
+    "defId": "re-enc_the_sealed_door",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-enc_the_sealed_door",
+      "type": "puzzle",
+      "status": "active",
+      "round": 1,
+      "log": [
+        "r1: reveal vs ward → momentum 0"
+      ],
+      "attempts": 0,
+      "hintsRevealed": 1,
+      "solved": false,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "static": true,
+        "staticResist": 18,
+        "resistLabel": "it holds — not fighting you, simply made to hold, and made well",
+        "attributes": {},
+        "subAttributes": {},
+        "alignment": {},
+        "skills": [
+          {
+            "function": "ward",
+            "name": "it holds its order",
+            "tier": 2
+          }
+        ],
+        "energy": 60,
+        "tacticTags": [
+          "unmoving"
+        ]
+      },
+      "momentum": 0,
+      "opponentHealth": 5,
+      "opponentEnergy": 55,
+      "turn": {
+        "phase": "action",
+        "sel": {
+          "sense": [
+            8,
+            9
+          ],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": 8,
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with Size them up (Wits) ⋈ Reason it out (Reason) — success. You have the read (+8 to your action). The opening is there — you have earned a BONUS action. You read they: they favour ward. Pick a craft that answers it.",
+        "readPayoff": "You read they: they favour ward. Pick a craft that answers it."
+      },
+      "effects": [
+        {
+          "kind": "insight",
+          "label": "you have their measure",
+          "value": 3,
+          "roundsLeft": 2,
+          "applies": "always",
+          "side": "player",
+          "source": "Reason it out (Reason)",
+          "from": "player"
+        },
+        {
+          "kind": "ward",
+          "label": "warded",
+          "value": 4,
+          "roundsLeft": 2,
+          "applies": "whenAttacked",
+          "side": "opponent",
+          "source": "it holds its order",
+          "from": "opponent"
+        }
+      ],
+      "pressure": {
+        "player": 0,
+        "opponent": 0
+      },
+      "spent": {
+        "player": false,
+        "opponent": false
+      },
+      "lastOppFn": "ward",
+      "lastOppReceipt": {
+        "roll": 0,
+        "chance": 18,
+        "rawChance": 18,
+        "margin": 18,
+        "degree": "success",
+        "breakdown": {
+          "contestMods": [
+            {
+              "label": "it holds — not fighting you, simply made to hold, and made well",
+              "value": 18
+            },
+            {
+              "label": "matchup (ward vs reveal)",
+              "value": 0
+            }
+          ],
+          "static": true
+        },
+        "matchup": 0,
+        "intensity": "standard",
+        "tier": 2,
+        "function": "ward",
+        "name": "it holds its order",
+        "effectMods": [],
+        "woven": null,
+        "static": true
+      },
+      "lastReadWasSense": true,
+      "senseTierEarned": 3,
+      "senseResist": {
+        "value": 0,
+        "label": "their natural guardedness",
+        "from": "passive"
+      }
+    }
+  },
   "customEncounters": {
     "re-enc_the_sealed_door": {
       "schemaVersion": 1,
@@ -325,6 +434,7 @@
       "minDanger": 1,
       "resist": 18,
       "holdName": "it holds its order",
+      "holdTier": 2,
       "hintTiers": [
         "Read the marks — find the pattern under the shifting (KNOW/insight).",
         "Work the order you found — set the marks right (CRAFT/know).",
@@ -404,7 +514,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 9
+    "valley": 10
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -412,10 +522,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T17:14:57.491Z",
+      "lastAt": "2026-08-01T18:20:20.939Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 9
+      "beats": 10
     }
   ],
   "establishedFacts": [
@@ -444,8 +554,8 @@
     "choices": 7,
     "scene": 7,
     "stateOps": 1,
-    "characterDeltas": 4,
-    "timeOps": 5,
+    "characterDeltas": 3,
+    "timeOps": 4,
     "sceneEnded": 1
   },
   "_opTurns": 7,

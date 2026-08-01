@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [SPEC §6 added] SNG-250 §6 WHOLE IS NOT FROZEN - every type EVOLVES (Aevi, 2026-07-27)
+> Erik: "making these whole doesn't mean rigid - they all need a way to evolve and grow, like Pell (NPC) and
+> Memory." The counterbalance to born-whole (§1-5): complete at birth must not = frozen for life. STATE
+> (verified): growth EXISTS but per-type/ad-hoc across 6 modules - item (evoStage/SNG-215), npc (the Pell
+> mechanism: relationshipDelta), location (placeMemory = Erik's Memory example), companion (growBond), skill
+> (rank ladder), arc (net-vector) - BUT creatures/monsters have NO evolution path (frozen once minted) and none
+> of it is CONTRACTED. Fix: the growth half of the contract - each type declares its evolution VECTOR (concrete
+> 'grows warier, threat+1' not 'changes somehow'; coherent-with-what-it-IS - Pell deepens possessive because
+> born possessive, doesn't invert; bounded - no power inflation); a creatureUpdates path (the missing one);
+> unify the scattered mechanisms so every type + every FUTURE type declares how it grows. A quest EVOLVES too
+> (aftermath spawns follow-ons - the wake engine SNG-204 is the vector), not just advances.
+> CCODE: the creatureUpdates path + a contract check that every generatable type declares an evolution vector +
+> unify the scattered growth under one 'evolvable' contract. AEVI: per-type growth semantics + prompt guidance.
+> ERIK: evolution aggression (reuse the Eventful dial?) + do generated entities evolve as readily as authored.
+
 > ## [SPEC - universalize the contract] SNG-250 born-whole for EVERY type (Aevi, 2026-07-27)
 > Erik: "the engine needs to do this same basic thing for everything it can generate - NPCs, items, monsters,
 > skills, etc." Universalizes SNG-248 (learn) + SNG-249 (concrete+coherent). STATE (verified): only npc/location/

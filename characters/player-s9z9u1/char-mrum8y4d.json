@@ -133,7 +133,130 @@
     "At the braided confluence in the Disputed Zone, a hired stranger came at Loki with a fabricated charge — that Loki had pulled something sealed loose from the Deep and was carrying it out. The name behind it: a man in the lower Annex, who paid in coin. Veln Ashpause watched from the brush without surprise. The question is answered; the person who set it in motion is not yet named."
   ],
   "currentLocationId": "the_slow_orchard",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_slow_orchard",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Evening in the Slow Orchard — the planting finished, Ossivyn returning with the closed record book.",
+        "narration": "Evening light comes through the orchard in long, low bars, catching the undersides of the oldest branches and turning them gold. The air smells of damp soil and early blossom — the small white kind that comes before the fruit and means nothing by itself except that something is trying. Ossivyn Tallow is at the planting gate, moving back toward the orchard proper. He has the record book tucked under one arm, closed now, and the marker stake he drove in earlier catches the last of the light — a small iron tooth in the turned earth beside the sapling. The hole is filled. The tree is in. He is not in a hurry to go anywhere. Cy walks at its usual precise distance from your left heel, lens irising slowly as it takes in the orchard's geometry. It has already, without asking, straightened a loose hinge on the gate post. Spring mud still clings to your boots from the road, and the evening is cool enough to feel the warmth the turned earth is giving off. The quest thread from the Unlit Deep is closed on its surface, but the man who paid for a stranger to come at you with a fabricated charge is still unnamed, still somewhere in the lower Annex, and the regulator's signal is moving downstream without anyone knowing to expect it. That is tomorrow. For now, there is the orchard, and the tender returning from a finished planting, and the kind of quiet that happens when something slow has been done correctly."
+      }
+    ],
+    "lastTurn": {
+      "narration": "Evening light comes through the orchard in long, low bars, catching the undersides of the oldest branches and turning them gold. The air smells of damp soil and early blossom — the small white kind that comes before the fruit and means nothing by itself except that something is trying. Ossivyn Tallow is at the planting gate, moving back toward the orchard proper. He has the record book tucked under one arm, closed now, and the marker stake he drove in earlier catches the last of the light — a small iron tooth in the turned earth beside the sapling. The hole is filled. The tree is in. He is not in a hurry to go anywhere. Cy walks at its usual precise distance from your left heel, lens irising slowly as it takes in the orchard's geometry. It has already, without asking, straightened a loose hinge on the gate post. Spring mud still clings to your boots from the road, and the evening is cool enough to feel the warmth the turned earth is giving off. The quest thread from the Unlit Deep is closed on its surface, but the man who paid for a stranger to come at you with a fabricated charge is still unnamed, still somewhere in the lower Annex, and the regulator's signal is moving downstream without anyone knowing to expect it. That is tomorrow. For now, there is the orchard, and the tender returning from a finished planting, and the kind of quiet that happens when something slow has been done correctly.",
+      "sceneSummary": "Evening in the Slow Orchard — the planting finished, Ossivyn returning with the closed record book.",
+      "choices": [
+        {
+          "label": "Fall in beside Ossivyn and walk with him — ask about the marker stake, the one with no label.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Crouch at the sapling and look at it properly — examine the planting with See the Made Thing, just to know what was put into it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false
+        },
+        {
+          "label": "Ask Ossivyn directly — is there a tree planted here for someone who is already missing? You heard the seed talk at the gate earlier.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Head back toward Millbrook before full dark — the man in the lower Annex is not going to name himself.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
+        "npcsPresent": [
+          {
+            "name": "Ossivyn Tallow",
+            "state": "Moving back from the gate toward the orchard proper, record book closed under one arm, unhurried."
+          },
+          {
+            "name": "Cy",
+            "state": "Keeping its usual precise distance at Loki's left heel, lens irising as it reads the orchard geometry. The gate hinge is already straightened."
+          }
+        ],
+        "objects": [
+          "Freshly-planted sapling in tamped earth",
+          "Small unlabeled iron marker stake driven beside the root base",
+          "Closed record book (carried by Ossivyn)",
+          "Gate post with newly-straightened hinge"
+        ],
+        "threads": [
+          "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
+          "The regulator signal moving downstream — no one upstream knows to expect it",
+          "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "ossivyn-tallow",
+          "name": "Ossivyn Tallow",
+          "note": "Finished the planting and is returning through the orchard with the closed record book — the work is done for today.",
+          "statusNote": "Moving through the orchard toward the interior path, record book closed, done for the evening."
+        }
+      ],
+      "offer": {
+        "thing": "The marker stake Ossivyn drove in is unlabeled — but Ossivyn's own fear is that the child the tree is for will never be told it exists. The stake is the only physical mark. A stranger passing through could ask what it means to leave no name on it.",
+        "from": "Ossivyn's own fear: that the child the tree is planted for will never be told it exists — and the unlabeled stake is that fear made iron."
+      },
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "Scene opening — no time passes on the scene-set beat."
+      }
+    },
+    "sceneState": {
+      "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
+      "npcsPresent": [
+        {
+          "name": "Ossivyn Tallow",
+          "state": "Moving back from the gate toward the orchard proper, record book closed under one arm, unhurried."
+        },
+        {
+          "name": "Cy",
+          "state": "Keeping its usual precise distance at Loki's left heel, lens irising as it reads the orchard geometry. The gate hinge is"
+        }
+      ],
+      "objects": [
+        "Freshly-planted sapling in tamped earth",
+        "Small unlabeled iron marker stake driven beside the root base",
+        "Closed record book (carried by Ossivyn)",
+        "Gate post with newly-straightened hinge"
+      ],
+      "threads": [
+        "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
+        "The regulator signal moving downstream — no one upstream knows to expect it",
+        "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -460,7 +583,8 @@
         "[d1] Heard the name Tree given plainly — no layered meaning reached him. Has his record book open and pencil ready, waiting for the giver's name.",
         "[d1] Recognized the false-shaped name as made — recorded it honestly as such, and closed the book without hostility. Said the child will know it was made, and will know someone wanted to be found.",
         "[d1] Received Loki's help digging without complaint — accepted the labor easily. Heard the retelling of the morning's exchange; it found no wound in him and he did not need it to. Thanked the help plainly. Now backfilling.",
-        "[d1] Thanked Loki plainly for the help with the digging and returned to the orchard. The exchange is closed on his end."
+        "[d1] Thanked Loki plainly for the help with the digging and returned to the orchard. The exchange is closed on his end.",
+        "[d1] Finished the planting and is returning through the orchard with the closed record book — the work is done for today."
       ],
       "knownFacts": [
         "The tree names itself through the child who inherits it — a name given by a stranger ahead of time is not part of the gift being planted here.",
@@ -472,7 +596,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Returning to the orchard gate with the closed record book — the planting is done.",
+      "statusNote": "Moving through the orchard toward the interior path, record book closed, done for the evening.",
       "domains": {
         "primary": "rootkin"
       },
@@ -806,16 +930,12 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 783,
-    "lastSharedReadAt": "2026-08-01T15:28:19.979Z",
+    "lastGenCount": 784,
+    "lastSharedReadAt": "2026-08-01T16:39:02.743Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 32,
+    "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
-        "from": "Cy's companion boundary (it will not damage a Precursor working, but it will study one — and this is the deepest Precursor-adjacent thing…"
-      },
       {
         "thing": "Cy's click in the dark — not alarm, not report; a question shaped like an old maintenance protocol, aimed at nothing Loki can see",
         "from": "Cy's boundary: it will not explain what it knows, because it does not know that it knows it — but something in the passage below matches a…"
@@ -831,6 +951,10 @@
       {
         "thing": "Cy has tilted its lens toward the sapling's root ball without being asked — the beginning of an assessment it hasn't been told to make",
         "from": "Cy's compulsion to assess and repair things, which runs ahead of any instruction"
+      },
+      {
+        "thing": "The marker stake Ossivyn drove in is unlabeled — but Ossivyn's own fear is that the child the tree is for will never be told it exists…",
+        "from": "Ossivyn's own fear: that the child the tree is planted for will never be told it exists — and the unlabeled stake is that fear made iron."
       }
     ],
     "wantProgress": {
@@ -866,7 +990,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 11,
+        "stage": 12,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -879,7 +1003,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 11,
+        "stage": 12,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -904,7 +1028,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 6,
+        "stage": 7,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1873,8 +1997,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785598495135,
-  "rev": 303,
+  "updatedAt": 1785602374028,
+  "rev": 306,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2257,7 +2381,7 @@
           "entityId": "ossivyn-tallow",
           "type": "npc",
           "birthWeight": 6,
-          "engagementScore": 18,
+          "engagementScore": 20,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -2304,6 +2428,10 @@
             },
             {
               "kind": "fact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
               "day": 1
             },
             {
@@ -2464,7 +2592,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 33
+    "the_quickwood": 34
   },
   "opLossPending": false,
   "sessions": [
@@ -2511,10 +2639,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-08-01T12:32:16.648Z",
-      "lastAt": "2026-08-01T15:34:55.130Z",
+      "lastAt": "2026-08-01T16:39:34.027Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -2545,7 +2673,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 9,
+      "applied": 10,
       "rejected": 0,
       "lastWhy": null
     }
@@ -2557,11 +2685,11 @@
     "characterDeltas": 47,
     "scene": 107,
     "placeUpdates": 12,
-    "codexUpdates": 77,
+    "codexUpdates": 76,
     "timeOps": 101,
-    "offer": 9,
+    "offer": 10,
     "generateRequest": 4,
-    "sceneEnded": 23,
+    "sceneEnded": 22,
     "npcUpdates": 82,
     "moveTo": 3,
     "gambitApt": 1,

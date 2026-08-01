@@ -6,11 +6,11 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 167,
+  "xp": 0,
   "attributes": {
     "physical": 6,
-    "mental": 7,
-    "social": 7,
+    "mental": 6,
+    "social": 6,
     "practical": 6
   },
   "skills": {},
@@ -21,50 +21,15 @@
     },
     {
       "abilityId": "prism_sight",
-      "level": 2
-    },
-    {
-      "abilityId": "echo_memory",
       "level": 1
-    },
-    {
-      "abilityId": "boundary_stone",
-      "level": 1
-    },
-    {
-      "abilityId": "echo_sense",
-      "level": 1,
-      "native": true
-    },
-    {
-      "abilityId": "stillness_field",
-      "level": 1,
-      "native": true
-    },
-    {
-      "abilityId": "tremor_sense",
-      "level": 1,
-      "native": true
-    },
-    {
-      "abilityId": "drumline_stride",
-      "level": 1,
-      "native": true
     }
   ],
-  "alignment": {
-    "falsehood_truth": 0.0323125,
-    "spectrumId": -0.11887237156665012,
-    "dark_light": 0.03,
-    "emotional_logical": 0.015,
-    "violence_peace": 0.04000000000000001,
-    "body_mind": -0.03
-  },
+  "alignment": {},
   "attunement": 3,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 0,
+  "energy": 92,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -113,1286 +78,545 @@
         "climb"
       ],
       "consumable": false
-    },
-    {
-      "id": "dried_rations",
-      "name": "Dried Rations",
-      "kind": "consumable",
-      "qty": 4,
-      "description": "Fish, fruit leather, hard bread. Two days if you're honest with yourself, three if you're not.",
-      "effects": {
-        "energy": 15
-      },
-      "consumable": true,
-      "pinned": true
-    },
-    {
-      "id": null,
-      "name": "Loose Paving-Stone",
-      "kind": "quest",
-      "qty": 1,
-      "description": "A flat grey stone worked loose from an Edge District light-guide street, threaded with faint mineral veining. Stowed to complete the test errand.",
-      "consumable": false
-    },
-    {
-      "id": null,
-      "name": "Loose Paving-Stones x2",
-      "kind": "misc",
-      "qty": 1,
-      "description": "Two more flat grey stones from the Edge District light-guide street, mineral-veined, smelling faintly of old bonding compound on their undersides.",
-      "consumable": false
-    },
-    {
-      "id": null,
-      "name": "Lower Filtration Ledger",
-      "kind": "quest",
-      "qty": 1,
-      "description": "The official measurement log for the Radiant Plateau's lower filtration arrays. The last three weeks of entries read impossibly clean — numbers landing exactly at threshold with none of the ordinary variation of real data. Fendt's initials appear at the bottom of each entry.",
-      "consumable": false
     }
   ],
-  "deeds": [
-    {
-      "at": "2026-07-11T22:11:38.201Z",
-      "locationId": "radiant_plateau_edge",
-      "communityId": "valley.radiant-plateau",
-      "description": "Infiltrated a sealed array-office in the Edge District and removed the falsified filtration ledger — clean, unseen, and without force.",
-      "tags": [
-        "infiltration",
-        "investigation",
-        "evidence"
-      ],
-      "weight": 2,
-      "spread": [],
-      "day": 1,
-      "worldDay": 11
-    }
-  ],
+  "deeds": [],
   "relationships": {},
-  "chronicle": [
-    "On the Common Hall roof terrace, midday, the shared beat ended — Lira spent and deliberate at the coping wall, the Stillness Field barely holding, the ledger on the stone between them. She named the count-bell window and pointed the way to Vael without ceremony. The scene closes."
-  ],
-  "currentLocationId": "gen-object-object",
+  "chronicle": [],
+  "currentLocationId": "millbrook",
   "activeScene": {
-    "locationId": "gen-object-object",
+    "locationId": "millbrook",
     "turns": [
       {
-        "player": "Ask her if she wants to be fucked one more time, then do it.",
-        "summary": "On the roof terrace, before the count-bell window closed, Lira said yes — and meant it the same way she means everything.",
-        "narration": "You say it plainly, the way she would want — not dressed up, not soft-pedaled. Do you want to be fucked one more time?\n\nLira looks at you from the coping wall. She hasn't moved yet. Then she sets her jacket down on the bench without looking at it, and she says yes.\n\nThe terrace is bare stone and open sky, the count-bell window still ahead of you — enough time, if neither of you wastes it. She comes to you the way she moves through the district: reading the angle first, adjusting once, arriving exactly where she means to be. Her hands find your collar. She is unhurried and completely deliberate, the way she always is when she's decided something. When she pulls you down to her, her mouth is warm and her grip is certain and she makes a sound low in her throat that is not polite or decorative — it is simply what she sounds like when she wants something and has it.\n\nAfterward she rests her forehead against your shoulder for a moment. Just a moment. Then she straightens, picks up her jacket, and says the keeper's office closes one bell past the afternoon count. Her voice is level. She is already back in the world — and she says it without apology, which is the most Lira thing she could do."
+        "player": "Ask to name the tree if you help by analyzing the sapling's root structure.  In 40 years let the child know that the tree has a name.",
+        "summary": "Loki offers to name the tree in exchange for analyzing the sapling — Ossivyn declines, explaining the tree names itself through the child's own reckoning.",
+        "narration": "The man at the gate is knee-deep in his hole when Loki crouches beside the bundled sapling and makes the offer. Help with the analysis, he says — he can read the root structure, tell whether the binding is sound, whether the sapling will take in this soil. In exchange, the tree gets a name. And in forty years, when the child is grown, someone tells them what that name is.\n\nOssivyn Tallow straightens up in the hole. He plants his spade and rests both hands on the handle and looks at Loki for a long moment. Not hostile. Not insulted. He looks the way a man looks when he has heard something that almost fits but doesn't.\n\n'The tree names itself,' he says finally, said Ossivyn. 'That's not how it works here. I plant it. It grows. The child finds out what kind of thing it is when they're old enough to sit with it. A name from a stranger forty years ahead of that — ' he pauses, and his hands shift on the spade handle. 'That's a different gift than the one I'm giving.'\n\nCy, perched on the fence post nearest the gate, tilts its lens toward the sapling without moving otherwise. The offer is declined cleanly. The hole is still there. The spare spade is still leaning against the post."
       },
       {
-        "player": "Take her slowly... say her name, Lira.... have her show you how she works.",
-        "summary": "Lira showed how she works — exact, unhurried, nothing hidden. The silence after was its own answer.",
-        "narration": "You slow down. You say her name — Lira — and mean it as a question she can answer however she wants.\n\nShe stills. Not surprise, exactly. More like something she hadn't expected to be handed and doesn't quite know where to set. Then she takes your hand and moves it, exact and unhurried, the way she would correct a bad angle on a lens. Here. Like this. Her voice stays level but she watches your face when she says it, checking whether you're actually paying attention. You are.\n\nShe shows you. A pressure here, a pace there — she guides without apology and without performance, the same precision she brings to everything, nothing hidden or dressed up. When something lands right she doesn't dramatize it. She just stays with it, and her breathing changes, and you know. After a while she stops directing and simply lets it happen, her hand loose over yours, her eyes open.\n\nWhen it's done she is quiet for a moment — a real quiet, not a composed one. Then she exhales through her nose and looks at the sky, and her hand finds your arm without urgency, and she says nothing for a little while. That silence, too, is information. It says she is not in a hurry to be anywhere else just yet."
+        "player": "Use the better story to have Ossivyn reconsider.",
+        "summary": "Loki tried The Better Story on Ossivyn — but the man knows exactly what he is doing, and a well-shaped frame finds no purchase in a person who has already made peace with his own.",
+        "narration": "Loki tries the angle that has worked before — the liveable frame, the version of a thing that lets a person pick it up and carry it without cutting themselves. He shapes the words carefully. The tree already has a name forming in it, he says. The child will find it. But a name given in love, by a stranger who looked at the roots and thought of them before they were born — that is not the same thing as the name the tree claims. That is an older gift. A name laid under the name.\n\nOssivyn Tallow listens. He does not interrupt. He tilts his head the way a man tilts his head at a sound that is pleasant but coming from the wrong direction.\n\nThen he shakes his head. Not unkindly. He picks up his spade again and sets the blade into the earth.\n\n'That is a good story,' he says, said Ossivyn. 'I can hear the care in it. But I know what I am planting and I know why, and a name laid under the name is still a stranger's name. The child will not find mine either. They will find their own.' He glances at the spare spade against the fence post. 'The offer stands, if you want to dig.'"
       },
       {
-        "player": "While she's riding you, watch he body for signs of truth, do he nipples go taught, what sounds come out, does she say you name?  How does she feel on you",
-        "summary": "On the roof terrace, midday, she rode him with her full deliberate attention — and he watched for the truth of it, and found it.",
-        "narration": "She moves over you with the same economy she brings to everything — no waste, no theater, weight settling through her hips in a rhythm that is entirely her own. You watch.\n\nHer nipples tighten early, before the pace has built to anything, the first honest signal her body gives before she decides to give anything else. The sounds she makes are low and held back at first — not hidden, just controlled, the way she controls most things. But as the rhythm finds its shape the control loosens at the edges. A catch of breath. A small sound, released without quite meaning to be. When something lands precisely right she exhales through her nose and presses down harder, seeking the angle again with the same deliberateness she uses for everything — the same instinct to repeat what works, to return to the exact degree.\n\nShe does not say your name. She says nothing for a long time. What she does is look at you — steady, direct, the amber-grey eyes not glancing away — and that watching is its own answer, more unguarded than words. She is not performing for you. She is here because she chose to be, and what you can read in her is simply that: a decision made and honored, attended to with her whole body. The warmth of her is real and close, and when she finally does make a sound that she doesn't bother to muffle, it is not your name but it is for you.\n\nAt the end she slows rather than stops, deliberate even in this, and rests her hands flat on your chest. The count-bell window is still ahead of you. She looks at the sky."
+        "player": "Use the wrong reality with Harmonic voice... convince the man that it is import for them to name this tree as you say, and to raise a plaque at their own expense to ensure the name is known until that child hears it.",
+        "summary": "The Harmonic undertone and a brush of Wrong Reality cracked Ossivyn's certainty partway — he won't raise a plaque, but he'll write the name in the orchard's record.",
+        "narration": "Loki lets the silence sit for a moment after Ossivyn's last refusal. Then something shifts in the way the morning light falls between them — not a trick of weather, but a subtle wrongness in the air, the kind that makes a person reconsider what they were certain of a breath ago. The Harmonic undertone comes up beneath Loki's next words, low and steady, the way a plucked string fills a room before you know you are hearing it.\n\n'You are right that the tree names itself,' Loki says. 'I am not trying to change that. But there is a name that comes before the name. The way a house has a foundation before it has walls. The child will still find their own name. This one is not in competition with it.'\n\nOssivyn goes still in the hole. His hands do not move on the spade. His eyes shift — just slightly — toward the bundled sapling, and for a moment he is seeing it differently than he has for the last hour. The wrongness in the air does not push him. It simply opens a crack in the certainty he has been standing on, the way early-spring mud opens a crack in stone that froze all winter.\n\nThen the certainty closes again. Not all the way. Ossivyn exhales through his nose. 'I will not put up a plaque,' he says, his voice unhurried. 'That is not how this place does its remembering.' He sets the spade aside and crouches down to lift the bundled sapling by its cloth wrap. 'But I will write it down.' He glances up at Loki directly. 'The name you give, and who gave it, and what day it was given. In the orchard's record. Where it will stay until someone reads it to that child.' He waits, holding the sapling. 'Give me a name worth writing.'"
       },
       {
-        "player": "Describe what Lira and the scene looks like in detail.",
-        "summary": "Midday on the roof terrace — Lira at rest, the valley open to the west, the ledger waiting, the count-bell still to come.",
-        "narration": "The terrace is flat grey stone, warm from the midday sun. The coping wall runs the edge — knee-high, solid, the kind of thing you lean against without thinking. Beyond it the valley floor opens west, the light-guide streets below catching the noon angle and throwing it back in slow, pale ribbons. The air is still up here. Early spring, so the cold is mostly gone but the heat hasn't settled in yet — a clean, open kind of warmth.\n\nLira is sitting on the bench beside the stone. Her jacket is folded under one hip. She pulled it there without ceremony, the way you fold a jacket, not a gesture. Her hair is loose — it was loose before — and the end of it catches on her collarbone when she tilts her head back toward the sky. Her breathing has settled. She is not in a hurry. She does not perform stillness, she simply has it, the same way she has everything — as a fact about herself she stopped arguing with some time ago.\n\nHer hands are flat on her thighs now, resting. The amber-grey of her eyes catches the noon light at this angle and holds it, a small brightness inside the iris that shifts when she moves. The apprentice-rank sash is loose across her shoulder, the knot undone. Her skin is warm where the sun has been on it. She is not looking at you yet — her gaze is on the middle distance, the valley, whatever is out there. But the quality of her attention says she knows exactly where you are.\n\nThe ledger sits on the bench beside her jacket, the cover closed, the corner just visible under the folded cloth. The iron stairs at the far end of the terrace catch a little heat and tick quietly. Below, the district moves on its ordinary business. Up here it is quiet, the count-bell still ahead of you."
+        "player": "Give him the name Tree - using falsecraft - while the actual name is yours with instruction for the child to find you when he hears the name.",
+        "summary": "Loki tried to layer a hidden instruction beneath the name Tree using Falsecraft — but the substrate here is too thin to hold the working, and only the plain name lands.",
+        "narration": "Loki draws the craft up — the Fitting Mask, the name that looks like a gift while carrying a different instruction beneath it. The words come out shaped and layered, the way Falsecraft is supposed to work. 'Tree,' he says, said Loki, with a careful weight beneath it. 'And when the child hears that name, they should find the one who gave it.'\n\nBut the substrate here is thin. The lattice is barely present in this orchard — the Rootkin have kept it far from anything mechanical, and Falsecraft is a craft of made things running on made-thing power. What comes out is a name. What does not come out is the instruction beneath it. The layering simply does not hold without the substrate to bind it.\n\nOssivyn tilts his head. He hears a name — Tree — and he hears it plain. No second meaning lands in the air between them. His expression does not shift with suspicion. He takes the name at face value, because that is all the name is offering him right now.\n\n'Tree,' Ossivyn says, said Ossivyn. He says it the way a man repeats a word to hear how it fits in his mouth. He does not look delighted, and he does not look offended. He looks like a man who has been handed something smaller than expected, and who is too courteous to say so. He reaches for the orchard's record book, tucked in his coat pocket, and opens it to a clean line. 'Tree,' he says again, said Ossivyn, quieter. 'Given by.' He looks up at Loki, pencil ready."
       },
       {
-        "player": "Change positions while still inside her g3t another angle on her for deeper joining.  Feel her cunt slide on your cocktail over and over again... on her side with her leg above your shoulder - ask her what she likes about this bestst.",
-        "summary": "Position shifted on the roof terrace — a partial recovery, the angle narrowing but holding, Lira naming what she likes without ceremony.",
-        "narration": "You shift without pulling away — a careful pivot, one hand at her hip, the other arm sliding under her so she rolls onto her side without losing the thread of what you were doing. It almost works clean. There is a moment where the angle goes wrong, where you lose the depth you had and she makes a quiet sound that is not quite what you want to hear. Then you find it again — not as deep as before, but close. Her leg lifts and you put her ankle to your shoulder and that changes things. The angle narrows. The pressure shifts. She is tight around you from this side and the slide of it is slower, more deliberate, something you have to work for.\n\nShe settles into it with patience, though the angle is not quite what it was. You ask her what she likes about this position. She is quiet for a moment — actually thinking about it, not performing the thinking. Then she says: the weight of your shoulder on her leg, the way it holds her open without her having to hold herself. She says it plainly, the way she names any true thing. You feel her shift fractionally, finding a small correction, and the fit improves. Not perfect. Good enough to work from."
+        "player": "Give a false name as the giver — a name the child could follow to find you anyway, even without the hidden layer.",
+        "summary": "Loki gave a false-shaped name as the orchard giver — Ossivyn recognized it as made, recorded it plainly as such, and closed the book.",
+        "narration": "Loki gives a name. Not his own name — a name shaped to sound like a road, like a direction, like something a child could follow when they were old enough to want to. He says it with presence, with the weight of a person who has done this before and knows how it lands.\n\nOssivyn writes it down. His pencil moves in the record book with the careful patience of a man who has written ten thousand names in forty years of this work. He does not look up while he writes. He spells it back, quietly, asking if he has it right.\n\nAnd then he looks at Loki with the patient, unhurried attention of someone who tends trees that take a lifetime to fruit. 'This is a made name,' he says simply. 'Not wrong. But made.' He does not say it with suspicion. He says it the way a craftsman names a thing they recognize — not accusing the craft, only naming what it is. His pencil rests on the page. 'The child will read this when they are old enough,' said Ossivyn, 'and they will know it is a made name, and they will know someone was here who wanted to be found. That is what will go into the record.' He closes the book with a soft click, and looks at the sapling in his other hand. The planting waits."
       },
       {
-        "player": "Watch her face while you work — use Prism Sight to read what she won't say aloud",
-        "summary": "Prism Sight read what Lira's face held without asking — presence confirmed, no performance found.",
-        "narration": "You let Prism Sight open quietly — no push, just a gentle parting of the surface layer of the light. At this conserved draw the reading is lean and clear: the high angle of noon catches Lira's face exactly right.\n\nWhat you see there is not complicated. The slight darkening at the cheekbones when something lands well. The way her jaw loosens a fraction before she decides to hold it. A small tightening at the corners of her eyes that is not pain — it is the opposite of pain. Her breathing changes a beat before her body does, and the breath is what she cannot choose.\n\nShe does not say your name. What she does instead is look directly at you and hold the look, which is harder to hold than a name is — a name is a sound, and a sound ends. Her gaze is steady and present and asking nothing back from you, which is its own kind of answer.\n\nShe is here. All the way here. That much the light confirms without ambiguity."
+        "player": "Use the Better Story to retell the entire echange, while you physically help plant the tree.",
+        "summary": "Loki helped plant the tree and tried to retell the exchange as a better story — Ossivyn received the help and heard the telling, but the story found no wound to heal; the tree went into the ground as recorded.",
+        "narration": "Loki takes up the spare spade from the fence post. The blade bites the loose mounded earth easily and he tosses the first scoop aside without being asked, stepping down into the hole beside the root space Ossivyn has prepared.\n\nHe begins to talk as he works. He reaches for The Better Story — the angle that is also true, the shape that heals differently. He tells the whole exchange back: the sapling, the name, the record, the made name recognized and written down honestly. He tries to frame it as something that worked out, as a gift that landed in the only form the orchard could receive.\n\nBut Ossivyn is already kneeling at the hole's edge, lowering the sapling's root ball into place with both hands. He is listening. His face is not closed or cold. He simply has no wound here for the story to find. A man who has been doing the same right work for forty years does not need a different angle on this morning. The story slides off him the way water slides off good planting clay — not resisted, just not absorbed.\n\nOssivyn firms the roots gently with his thumbs and looks up. 'You dug well,' he says. He means it. He reaches for Loki's spade with a nod — there is backfilling to do — and the tree is going into the ground right now, with the name as it was recorded: made, giver unknown, and waiting for whoever the child becomes."
       },
       {
-        "player": "With what Prism Sight just showed you — stay in it, give her exactly that, and see what she does with it.",
-        "summary": "On the roof terrace, with Prism Sight open and honest, he gave Lira back exactly what her face showed — and she answered with full, unguarded presence.",
-        "narration": "You do not close Prism Sight. You let it run open and quiet, the noon light holding her face in that clean, readable angle, and you give her back exactly what it shows you.\n\nWhen the tightening at the corners of her eyes comes, you slow down. When the breath shifts a beat before her body does, you match the beat. You are not guessing. You are reading her the way she reads a light-guide — following the actual angle, not the one you expected.\n\nShe notices. That is what Lira does — she notices, and she does not pretend she hasn't. Her chin drops a fraction. Her hand, which has been resting flat on the stone, closes into a loose grip. She says nothing, but her body says yes with the kind of specificity that does not allow for misunderstanding. When you hold the pace she asked for and stay exactly where the angle gives her what she named, she makes a sound low in her throat that is not composed at all. It is the sound a person makes when they have stopped managing the moment.\n\nAfterward she is quiet for a while. The valley stays open to the west. The light on the streets below does not move. She does not reach for the jacket or for conversation — she stays on her side, looking at you with the same steady directness she has held all afternoon, and there is something in it that is neither gratitude nor performance. It is just presence, given freely, and she is not in a hurry to take it back."
+        "player": null,
+        "summary": "The planting finished and thanks given, Loki took to the road — and met a challenge in the Disputed Zone.",
+        "narration": "The backfilling is nearly done. Loki tosses the last loose scoop of earth around the root ball and tamps it down with the flat of the spade. Ossivyn pats the mounded soil once, firmly, the way a man closes something that is meant to last. Cy clicks twice on the fence post and irises its lens wide, then narrow, then wide again — its version of a long look at something it has filed away.\n\nOssivyn straightens and tucks his pencil behind his ear. 'Thank you for the hands,' he says simply, and he means it. He picks up the closed record book and carries it back toward the gate without hurry.\n\nThe Slow Orchard falls quiet behind Loki as the road opens again. The Disputed Zone lies ahead — the stretch of country between the valley's settled places where the ground belongs to no one and everyone traveling it is, for a moment, neither guest nor trespasser. The mud here is deep from the spring melt, and the morning light is thin through the trees.\n\nThe sound comes before the shape does. A footfall too deliberate to be accidental. Then a second. Someone steps out from the brush line to the left of the road — not running, not shouting, but moving with the flat-footed economy of a person who has done this before and knows the first move is presence. Their eyes are on Loki. Their hand is already near their belt. The Disputed Zone has its own rules, and one of them is that a stranger alone on this road is an invitation."
       },
       {
-        "player": "Ask her how it feels to have you inside her while using your sight... and ask her what she was doing during it with her body",
-        "summary": "Lira named what Prism Sight felt like from inside — being measured by something not cold — and said plainly what she had been doing: first deciding how much to show, then stopping deciding. The second half was different from the first.",
-        "narration": "You ask her quietly, still close, the light unhurried on her face. You ask how it feels to have you inside her while your sight is open — while you are reading her and giving back what you find.\n\nLira is quiet for a moment. Not evasive. She is choosing the honest words the way she chooses anything — with precision.\n\n\"Like being measured,\" she says finally, \"but by something that isn't cold about it.\" Her voice is level and specific. \"Most people look at you and see what they want to see. You were looking at what was actually there. I could feel that. It changes the — \" She pauses. \"It changes the angle of it.\"\n\nYou ask what she was doing with her body during it. Her expression shifts — a small thing, a fraction of openness crossing her face before she names it plainly. \"Deciding how much I was going to let it show,\" she says. \"And then stopping deciding. The second half was different from the first half.\" She says it without apology. \"That's what you got, at the end. When I stopped managing it.\"\n\nShe holds your gaze for a moment after that, steady and present, and does not reach for anything to fill the space the words leave."
+        "player": null,
+        "summary": "A stranger stepped out of the brush with intent and yielded without a word spoken between them — the Disputed Zone road is clear.",
+        "narration": "The aggressor stops moving. They do not run — they simply stop, the way a person stops when they realize the calculation has changed and does not favor them anymore. Their hand comes away from their belt. They look at Loki with something that is not quite fear and not quite respect, but lives in the neighborhood of both.\n\nCy makes a small sound from the pack-strap. One click. The lens is still narrow.\n\nThe stranger exhales through their nose and takes a half-step back toward the brush line. 'Not worth it,' they say, mostly to themselves. The words come out flat and honest — not an apology, not a threat, just the truth of what they have arrived at. They do not look away until they are two full strides back, and then they turn and are gone into the trees.\n\nThe road settles. The spring mud holds the flat morning light and the bare-budded branches are still. Behind Loki, the Slow Orchard is quiet. Ahead, the Disputed Zone opens on its own terms — contested ground, thin light, and the thread of the three-hundred-year tree still unaddressed somewhere further in."
       },
       {
-        "player": "Ask her to show you again and walk you through it.",
-        "summary": "Lira walked him through the falsification evidence in the ledger — the missing noise, the impossible consistency — and turned it back to him as a question.",
-        "narration": "You ask her to show you again — and this time walk you through it.\n\nLira tilts her head. The question lands without surprise, which tells you she expected it, or something like it. She sits up a little, easy and unhurried, and reaches past you to lift the ledger off the bench. She sets it on her knee and opens it to the last page of entries.\n\n\"The falsification isn't in the numbers themselves,\" she says, tapping the column with one finger. \"It's in the absence. Real measurements have noise — a point high one morning, a point low the next, small drifts when a filter cakes up or the intake runs fast after rain.\" She traces a row. \"These land exactly at threshold every time. For three weeks. Nothing drifts. Nothing cakes. The river has been gray-green since before the solstice, and Fendt's numbers say clean.\" She turns the ledger toward you so you can read the column yourself. \"Show me what you see.\"\n\nHer voice is patient — the same patience she uses with difficult light, the kind that expects you to look at the actual thing and not the shape you expected."
+        "player": null,
+        "summary": "The stranger yielded and withdrew; the road opened onto a quiet confluence and a field in bloom.",
+        "narration": "The stranger is gone into the brush, and the road breathes again. Spring mud, bare-budded trees, a thin morning light that hasn't decided yet whether it wants to be warm. Cy clicks once from the pack-strap and lets its lens iris back to a neutral width. The calculation settled without a blow.\n\nAhead, the Disputed Zone opens. The road bends around a low rise and the trees thin out, and there it is — not a dramatic thing, just a felt shift, the air a degree cooler and the ground a shade less certain underfoot. Spring mud here holds footprints longer than it should.\n\nAnd to the left, where the road crests the rise, the country opens. Two small rivers braid together in a shallow confluence below the bank, the water running clear over pale stone, and the far field is full of something low and white-flowering that Loki doesn't have a name for. The whole vista just sits there, giving nothing away, asking nothing back. Cy's lens widens all the way and stays wide. It does not click. It is, in its particular fashion, looking.\n\nThe spare spade is still in Loki's hands. The mud of the orchard is still on the blade."
       },
       {
-        "player": "I was talking about the fucking... walk me through it again and explain it... there is more to expri3nce.",
-        "summary": "Lira set the ledger aside and asked him to name what he was actually reaching for.",
-        "narration": "She reads you clearly. The ledger is already in her hand, the column of entries still open, but she sets it back down on the bench without looking at it.\n\n\"You weren't asking about the numbers,\" Lira says. It is not a question. She shifts on the bench to face you more squarely, and the afternoon light comes in low and even across her collarbone. \"You want to go back into it.\"\n\nShe does not move immediately. She studies you for a moment the way she studies a light-guide joint — looking for where the angle is actually pointing, not where it appears to point. Then she sets one hand flat on the stone between you, deliberate, and says: \"Then ask me properly. Tell me what you want to understand better. I'll walk you through it again as many times as it takes — but I want to know which part you're reaching for.\""
+        "player": null,
+        "summary": "The stranger overcame Loki and took the Waterskin — then vanished into the brush without a word.",
+        "narration": "The stranger moves faster than you read them. One moment they are two steps back, and the next they are close — a hand at your coat, a boot behind your heel, and the road comes up hard. Loki goes down into the spring mud with a grunt and the spare spade skids sideways out of reach. The orchard mud is still on the blade.\n\nCy makes a sound. Not a click. A long, low tone, like a mechanism under strain. The lens is very narrow.\n\nThe stranger crouches just out of arm's reach and takes what they came for. They move quickly and without malice — this is work, not cruelty. When they straighten, they are holding the Waterskin. They look at it once, look at Loki once, and then they are back into the brush line. The road is empty again. Birdsong returns, indifferent.\n\nLoki sits up slowly in the mud. The confluence braids below the rise, unhurried. The white-flowering field sits where it was. Everything is exactly the same except the weight on the pack is slightly less, and the morning is colder than it was a moment ago."
       },
       {
-        "player": "Tell her plainly — it's not the ledger, it's her. Ask her to walk you through what she was doing with her body the second time, now that you're both clearer.",
-        "summary": "Lira named the difference between the first time and the second — managing herself versus stopping — and demonstrated it in the telling.",
-        "narration": "You say it plainly. Not the ledger. Her.\n\nShe holds the look for a moment after you say it — the kind of hold that isn't deciding, because she already decided something a few exchanges back. Then the corner of her mouth moves, not quite a smile, something more specific than that.\n\n\"The second time,\" Lira says, \"I stopped managing it.\" She says it the way she names a measurement — not confessing, just reporting what was true. \"The first time I was still tracking what I was doing. Holding a small part of myself back to watch. That's habit.\" She shifts her weight on the bench, unhurried, and turns toward you a little more. \"The second time I didn't. You gave me back what you were seeing and I stopped watching myself and just — \" She pauses, and what she does with the pause is specific: she lets her breath out slowly, and her shoulder drops a fraction, and she is demonstrating rather than describing. \"That.\"\n\nHer hand is still flat on the warm stone between you. She doesn't move it. \"What I was doing with my body,\" she says, \"was letting the angle change. Every time I stopped bracing against it, the angle changed again. I kept finding that out fresh, over and over.\" She looks at you steadily. \"You felt that.\"\n\nIt is not a question. She is asking you to confirm it, which is different."
+        "player": "Follow the brush line — try to track where they went.",
+        "summary": "Loki tracked the stranger to the confluence — the trail ends at the water's edge, but something was left behind.",
+        "narration": "Loki gets up from the mud. The spring mud has already taken the fall's print — two clear heel-scuffs, a knee-impression, and a smear where the coat dragged. Cy's tone drops back to silence. The lens widens, just slightly.\n\nThe brush line holds the stranger's passage plainly enough. Bent stems at the entry point. A snapped low branch, still pale and wet at the break — recent. The mud inside the treeline has taken boot-prints going in, angled left, toward the confluence below. Whoever they are, they moved fast but not lightly. The prints are deep. They were carrying something they did not carry in.\n\nLoki follows the line twenty yards into the brush before the ground firms and the prints thin. But the direction holds — down toward the braided confluence, where the two rivers meet in a low hollow ringed with grey-barked willows. A smear of fresh mud on a root confirms it. The stranger went to the water's edge. Beyond that, the ground rises again into open country, and the trail loses itself on the rocky bank.\n\nAt the confluence, beside the root where the mud smear sits, there is something left behind. A small object half-pressed into the bank — not dropped carelessly, but set down. A flat river stone with a short mark scratched into it, recent enough that the scratch still shows pale against the grey surface. Cy drops from the pack-strap to the ground without being asked and walks to it on careful legs. The lens narrows to a thread."
       },
       {
-        "player": "Show me again and tell me the words for the parts you're talking about while you do it.",
-        "summary": "Lira demonstrated the shift in plain words and plainer body — bracing, then the moment it left — and told him the rest was what he could already see.",
-        "narration": "You say it simply. Show me again, and tell me the words for the parts while you do it.\n\nLira looks at you for a moment. Not weighing — she is past weighing. She nods once, the way she nods when a measurement confirms what she already knew.\n\nShe sets both hands flat on the warm stone. Then she lifts one and rests it on her own sternum, fingers spread, and takes one breath — deliberate, not theatrical. \"This is the part I was still holding,\" she says. \"Right here. When you had Prism Sight open the first time, this was doing something — bracing, maybe. Not against you. Just against being seen fully.\" Her hand rises slightly on the inhale, then settles. \"That's the habit.\"\n\nShe moves her hand away and lets her shoulders drop — not slumping, more like a door unlatching. The quality of her stillness changes. It is the same thing you read in her face before, in the light: the difference between a surface that has been arranged and a surface that simply is. \"And this is the second part,\" she says. Her voice is the same level tone, but something underneath it is open in a way it was not a moment ago. \"I don't have a better word for it than stopping. You gave me back what you were actually seeing and I stopped making any decisions about it at all.\" She looks at him steadily. \"Watch where I carry the tension and watch it leave. That's all the words I have. The rest is what you can see.\""
+        "player": null,
+        "summary": "The stranger did not run — they waited at the confluence, Waterskin in hand, to see what following means.",
+        "narration": "The flat stone sits half-pressed into the bank, the fresh scratch-mark catching the thin morning light. Cy has reached it already, moving on careful legs across the wet mud. The lens irises once at the mark, then holds still.\n\nLoki looks up from the stone and finds that the stranger did not leave.\n\nThey are standing at the water's edge where the two rivers braid together, maybe eight paces out. The Waterskin hangs from one hand. They are looking at Loki the way a person looks at something they have not decided what to do with yet. Medium height, a coat the color of old bark, no obvious weapon drawn — but the way they are standing is the way someone stands when they have thought about this already and are waiting to see if you have too.\n\n\"You followed,\" the stranger says. Their voice is flat and even, carrying easily across the water sound. It is not quite a greeting and not quite a threat. It is an observation, with a question folded inside it.\n\nCy makes one quiet click. The lens does not move from the stranger.\n\nThe confluence is open ground — nowhere to circle without wading. The willows stand back from the bank and the light is still thin, still undecided. The stranger has the skin and is between Loki and the deeper water. They are waiting to find out what kind of following this is."
       },
       {
-        "player": "Lira- tell me in detail what we just did together.",
-        "summary": "Lira reconstructed what passed between them — managing, then stopping — and turned it back as a question: what did it read as from your side?",
-        "narration": "You say it simply. Tell me in detail what we just did together.\n\nLira sits with that for a breath. Then she does something you have not seen her do before — she leans back against the coping wall, tilts her face up toward the afternoon light for a moment, and lets the quiet have the terrace. When she looks back at you, the steadiness in her eyes has something new in it. Not softness exactly. Recognition.\n\n\"You opened the sight,\" she says, \"and you gave it back instead of keeping it.\" She is not reciting. She is reconstructing, the way she would reconstruct a sequence of measurements — careful, in order. \"The first time, I felt it land and I started managing. Deciding what angle to show. Tracking how much of myself was visible.\" Her hand comes up and rests again at her sternum, the same place it went before, easy now without performance. \"This was holding. Not closed — just held. Like a door open one hand's width.\" She pauses. \"That is the first time.\"\n\nShe lets a beat pass. \"Then you said it was her, not the ledger. And I stopped deciding.\" Her hand drops to the warm stone between you. \"The tension here left. I did not choose for it to leave — I just stopped running the part of me that was watching myself. And the sight you had open landed differently after that. You were still measuring, but I was not angled away from it anymore.\" She looks at the hand on the stone. \"That is the second time. That is what was different.\"\n\nShe looks up at you. \"You felt it too,\" she says. It is not a question. \"What did it read as, from your side?\""
+        "player": null,
+        "summary": "The stranger yielded without a word and returned the Waterskin — then walked upstream and was gone.",
+        "narration": "The stranger does not move for a long moment. They look at Loki standing at the bank. They look at Cy, whose lens has not shifted from them once. Then they set the Waterskin down on the flat stone with a care that is almost deliberate — not thrown, not dropped. Set down. The scratch-mark on the stone is underneath it now, hidden.\n\nThey straighten and pull their coat closed at the collar. Their eyes are still flat, still evaluating, but the decision has landed somewhere. They say nothing. They turn and walk upstream along the near bank, unhurried, into the willows, and the grey-barked branches close behind them without much sound.\n\nCy clicks once. Then again. The lens draws wide, tracking the last movement of branches, and then the orchard is quiet except for the two rivers talking past each other at the confluence. The Waterskin sits on the stone. The morning light is still thin.\n\n*✦ Waterskin — added to your pack.*"
       },
       {
-        "player": "Did we have sex? Did I fondle your breasts? Did you orgasm?",
-        "summary": "Lira confirmed plainly what passed between them on the terrace — and what did not — and asked whether he was getting his bearings or reaching for something new.",
-        "narration": "Lira looks at you steadily. The afternoon light sits warm on the terrace stone between you. She does not look away.\n\n\"No,\" she says. Plain, no edge to it. \"We sat here. You opened Prism Sight and gave back what you saw. I stopped managing myself for a little while. That is what happened between us.\" She lets that sit. \"No one's hands were anywhere. No one came.\"\n\nShe picks up a corner of her jacket from the bench. Not leaving — just something to do with her hands. \"That is not a complaint,\" she adds, quieter. \"It was more than most people give me in a room with their hands full of me.\" She looks at you with that particular steadiness again. \"But I want to know what you are actually asking — whether you are orienting yourself to what was real, or reaching for something that didn't happen yet.\"\n\nBelow, the district moves. The accountability board is still on the Common Hall face. The count-bell window to reach Keeper Vael is still open, and it will not stay open."
+        "player": null,
+        "summary": "The stranger returned from the willows and squared off at the confluence bank — a hostile meeting, no words, still a choice.",
+        "narration": "The stranger does not stay gone.\n\nThey step back out of the willows ten paces upstream — same bark-colored coat, same flat evaluating eyes — and this time they are not holding the Waterskin. They are holding nothing at all, which is somehow more considered than a drawn blade. They plant their feet in the soft bank and face Loki across the ground between them.\n\nCy stops moving. The lens narrows to a tight iris and does not expand.\n\nThe stranger says nothing, but the body says plenty: squared shoulders, weight forward, the particular stillness of someone who has made a decision and is waiting for you to catch up to it. Whatever the scratch-mark meant, whatever the yielding meant, something about Loki following brought them back. They are not running. They are not speaking. They are beginning."
       },
       {
-        "player": "Lira, let me show you how slowly we can make love.",
-        "summary": "On the roof terrace in the late-afternoon light, Lira closed the distance herself and met the offer plainly — no management left in her at all.",
-        "narration": "You say it quietly. Lira, let me show you how slowly we can make love.\n\nShe is still leaning against the coping wall. The afternoon light is coming in at a low angle now, and it catches the amber in her eyes the way light catches something it has been looking for. She does not move away. She does not look away either. She holds the corner of her jacket for one more breath, then sets it down on the bench beside the ledger.\n\n\"Slowly,\" she says. The word is not a question. She is turning it over, the way she turns a measurement over before she trusts it. Then something in her face settles — the last of the managing, gone. \"Alright,\" she says. \"Show me.\"\n\nShe crosses the small distance between you first. That is the surprise — she moves, not you, closing the gap on the warm terrace stone with the valley floor wide and gold behind her. She stops near enough that you can feel the warmth coming off her shoulder in the early-spring air. She puts one hand flat against your chest, not pushing, just placing — the way she placed her own hand there an hour ago to name the habit. \"I want you to know,\" she says, looking up at you, \"that I am not managing anything right now.\"\n\nYou bring a hand up to her face. Her jaw is warm and her skin has a faint roughness at the cheekbone from the long morning in the district light. She closes her eyes for a moment — not flinching, receiving — and then opens them again and finds yours. The count-bell will ring. The ledger is still on the bench. None of that is the most important thing on this terrace. You kiss her slowly, exactly as you said, and she makes a small sound low in her throat that is not surprise — it is the sound of someone who has been bracing for a long time, finally not."
+        "player": null,
+        "summary": "The stranger put Loki on the ground at the confluence and asked, plainly and without malice, why they followed.",
+        "narration": "The stranger closes the distance faster than the gap between you suggested was possible. There is no preamble and no wasted motion — a hand at your collar, a foot behind your ankle, and the ground arrives hard through your shoulder. The mud takes the impact with a cold, wet slap. You lie there for a moment with the breath knocked out of you and the smell of river silt close. Cy backs three precise steps. The lens is wide open, unblinking. The stranger stands over you and looks down. Their expression has not changed — the same flat, evaluating look, only now you are the thing being evaluated from a different angle. They do not offer a hand. After a breath, they crouch — not to help, but to bring their face level with yours — and they say, quietly and without heat, 'You followed. Why?' The question sits in the cool spring air between you. The scratch on the stone, the Waterskin, the yielding, the return — all of it was leading to this. They are waiting."
       },
       {
-        "player": "Help her remove her top, when she wants. Watch the slow release of her breasts.",
-        "summary": "Lira's top comes away in the late-afternoon light; she stands present and unhurried, holding his forearms, her breathing steady and chosen.",
-        "narration": "The afternoon light is doing something particular to the terrace now — low and angled, the kind that picks out texture, that makes ordinary stone look like it is lit from inside. Lira is close. The last of the distance went when she crossed it herself, and nothing about her posture suggests it is coming back.\n\nYou reach for the hem of her top — slowly, as you said you would — and she lifts her arms for you. Not passive. Decided. The fabric comes away and she lets it go without watching where it lands, because she is watching you instead. And there it is: the slow release you waited for — the weight of her settling, the small exhale that goes with it, her shoulders dropping a degree she had not known they were holding. She does not cover herself or move to arrange anything. She simply stands in the low amber light and lets you look, because she has decided that is what this is.\n\nHer skin is warm from the afternoon stone. There is a faint crease across her ribs from the fabric, and you can see her breathing — steadier than you might have expected, except her hands have found your forearms and are holding there with a quiet, particular grip that says the steadiness is something she is choosing, not something that came free. She looks at you the way she looked at the ledger numbers. But warmer. Like something she wants to get exactly right."
+        "player": null,
+        "summary": "Loki rises from the mud and faces the stranger without answering — the hostile meeting is joined.",
+        "narration": "The stranger's question is one word, but it holds weight. It sits in the mud between you like a stone dropped into still water.\n\nYou look up at the flat evaluating face. Cy is three steps back, lens wide and unblinking, tracking everything and committing to nothing. The confluence moves past you both, cold and indifferent. The scratch-mark on the flat river stone is still hidden beneath the Waterskin, its meaning unspoken.\n\nYou do not answer the question. You get up.\n\nIt is not fast and it is not graceful — the mud holds your coat for a moment before it lets go — but you find your feet and you face them at close range, and that is its own kind of answer. The stranger watches this without stepping back. Their weight is still forward. The decision they made at the willows is still in their body, waiting.\n\nCy clicks once, very quietly."
       },
       {
-        "player": "Trace the line of her collarbone downward — slow, deliberate, your hands doing the looking now.",
-        "summary": "Slow and deliberate on the terrace in the late-afternoon light — Lira present and unhurried, watching his face while his hand moved.",
-        "narration": "You trace the line of her collarbone with one fingertip. You start at the hollow of her throat and move outward, slowly, the way you said you would. She does not flinch. She does not rush to help you or to interpret what it means. She simply lets your hand be there, and her skin is warm in the afternoon light, and you can feel the small rise and fall of her breathing underneath your touch.\n\nShe watches your face more than your hand. That is the Lira thing — she measures from the source. Her own hands rest loosely on your forearms. Not gripping. Just present. The amber-grey of her eyes has gone a little dark in the way that has nothing to do with light.\n\nYou follow the line down, off the ridge of bone and onto the soft slope below it. Your palm opens a little. She draws one slow breath in through her nose and lets it go through her mouth, and her eyes stay on yours the whole time. She says nothing. She is not managing any part of this."
+        "player": null,
+        "summary": "Loki slipped the stranger's final strike with The False Target — they yielded, calling it enough, and the confrontation settled into something that is not yet a conversation but might become one.",
+        "narration": "The False Target does what it does best — it makes you easy to miss.\n\nThe stranger commits to a strike that is clean and well-aimed and lands on nothing. Their fist finds the shape of you, the posture of you, the slight forward lean that said *here* — and you are not there. You have not moved far. A half-step, a shoulder dropped, and the weight of their momentum carries them past the place you just were.\n\nYou do not hit them. You simply become the obstacle their own motion runs into.\n\nThey stop themselves with the kind of control that means they have done this before, and they turn, and they look at you with those flat evaluating eyes, and something in the look changes. Not much. Enough.\n\nAfter a breath, they say it: \"Enough.\" The word is quiet and does not taste like defeat. It tastes more like a conclusion — the way you set down a tool when the measurement has told you what you needed to know.\n\nCy unfolds from its cautious stillness and moves three precise steps forward. The lens irisses once and goes still. The spring confluence moves past you both.\n\nThe stranger straightens. The weight shifts back off their front foot. They are looking at you the way a person looks at a door they did not expect to be locked, but are not angry about."
       },
       {
-        "player": "Keep moving slower — let her feel the full attention of it, no destination yet.",
-        "summary": "On the roof terrace above the Common Hall in the Edge District, late afternoon: Lira lets you move slowly, deliberately, learning the shape of her without reaching for anything yet. The moment is unhurried and present. The count-bell window holds.",
-        "narration": "Your hand moves slowly down the line of her ribs, deliberately deliberate, the way you said you would move. Not reaching yet. Just feeling the shape of her under your palm — the small rise of bone, the give of breath underneath it. She holds still under your touch. Her breathing stays chosen and steady. She watches your face the whole time, the way she watches measurements, the way she watches things she is deciding to trust.\n\nThe afternoon is cooling now. The light off the terrace stone has gone a particular gold. It is just you and her and the valley falling away to the west beyond the coping wall. The count-bell will ring in a while. Keeper Aldris Vael is still waiting. The ledger is still on the bench. None of that has changed, and none of it is what is happening right now.\n\nYour hand reaches her waist. She does not move. Her hands on your forearms stay loose and present, not pulling, not pushing — just there, the way you have learned she is there when she has stopped managing."
+        "player": null,
+        "summary": "The stranger's strike missed and they stood down — the hostile meeting holds at this edge, unanswered question still between them.",
+        "narration": "The stranger does not press the advantage they no longer have.\n\nThey stand where their momentum left them — three feet past the place you vacated — and they breathe once, slowly, through the nose. Their eyes come back to you. The flat evaluating look is still there, but something has been added to it. Not respect, not yet. Recognition, maybe. The look of someone who has found the edge of a thing they thought was open ground.\n\nCy has not moved since the strike missed. Its lens is fixed on the stranger with the particular stillness it reserves for things it is still deciding whether to categorize as a threat or a phenomenon.\n\nThe confluence runs past your boots. Mud on your coat. The Waterskin sits on the flat stone where the stranger set it, the pale scratch-mark hidden beneath. The willows on the far bank drip with melt-water. There is no one else here.\n\nThe stranger turns to face you fully and drops their weight back onto both feet — not a ready stance, exactly, but not an idle one either. They are watching what you do next. The question they asked — why — is still unanswered, still in the air between you, heavier now for everything that has happened since they said it. Whatever this becomes, it has not become that yet."
       },
       {
-        "player": "Stop here and look at each brewst in turn, each nipple, the shap and color and texture and movement, the look at them together on her frame and her face and hair.",
-        "summary": "On the roof terrace in late-afternoon light, Lira stands present and unhurried while you look at her — deliberate, steady, no management left in either of you. The moment holds.",
-        "narration": "You stop moving. Your hand rests on her ribs, and you simply look.\n\nLira doesn't move. She lets you look — really look — at each breast in turn. The afternoon light is particular here. It catches the shape of her, the small rise and fall with her breathing, the color of her skin in the gold. Her nipples are a warm brown, darker at the edges, and they tighten slightly under your attention — not from cold. You trace the shape of one with your eyes, then the other. The asymmetry is subtle; one sits a fraction higher. The texture catches light differently depending on the angle you're watching from.\n\nThen you look at them together on her frame — the way they sit, the space between them, how they move when she breathes. She is still watching your face, not her own body. Her hair falls loose down her back, amber-brown in the late-afternoon gold. Her shoulders are steady. Her breathing is steady. There is no self-consciousness in her posture, no management left — just the simple fact of her body in the light, and you looking at it, and her letting you.\n\nThe count-bell window is still open. The ledger waits on the bench. But right now, on this terrace above the district, there is only this."
+        "player": null,
+        "summary": "The stranger overcame Loki at the confluence bank — a shoulder strike drove them to one knee in the mud, and the question 'Why?' still hangs unanswered in the morning air.",
+        "narration": "Hunter's Strike is honest force and nothing more, and honest force is not enough today.\n\nYou commit to it — the weight behind it is real, the aim is real — and the stranger meets it with something that is not a block so much as a redirection. Your own momentum becomes the problem. Their counter lands on your shoulder and drives you sideways and your feet find the mud again, and this time the mud does not let go gracefully. You go down on one knee and stay there for a moment with the confluence loud in your ears and the cold coming up through your coat from the ground.\n\nCy does not move. Its lens is fixed on you with the particular stillness it reserves for damage assessment.\n\nThe stranger does not press it. They stand where the exchange left them, breathing steady, and they look at you on the ground, and they wait. The question has not moved. It is still in the air between you, still looking for an answer. 'Why.' The confluence runs past. The mud holds. The scratch-mark on the flat stone is still under the Waterskin, still unspoken, still yours to give or keep."
       },
       {
-        "player": "Move closer — your hand, your mouth, your breath on her skin",
-        "summary": "On the Common Hall roof terrace in late afternoon, Lira — present and unhurried, watching his face — stands while he moves slowly closer. The moment holds. The count-bell window is still open.",
-        "narration": "You lean in slowly. Your hand stays where it rests on her ribs, and you bring your mouth to the hollow of her collarbone — not rushing. She tilts her head slightly, just enough to see your face as you move. Her breathing deepens. She does not look away.\n\nYour breath warms her skin. You kiss the line where her shoulder meets her neck, deliberate and unhurried, the way you said you would move. Her hands tighten fractionally on your forearms — the first time she has gripped instead of rested. She is still looking at your face. Still present. Still chosen.\n\nThe afternoon light is turning honey-gold. The count-bell has not rung yet. Below the terrace, the district sounds small and far away. Here, there is only the two of you and the particular stillness of a decision held between two people who are not managing anything anymore."
+        "player": "Use the better story to heal yourself up and gain energy.",
+        "summary": "Loki attempted to use The Better Story to restore themselves — the craft found the angle but the thin substrate here gave it nothing to run on, and the attempt failed without purchase.",
+        "narration": "You reach for it — the technique that finds the angle that heals, the retelling that lets a wound sit differently. You have used it on others. You have watched a person's face change when the shape of their own experience shifted in your hands. It should work the same way pointed inward.\n\nIt doesn't.\n\nThe substrate here is thin to the point of being nearly absent, and the craft needs more than intention — it needs something to run on, some density in the lattice to carry the reframe home. What you get instead is the attempt without the arrival. You find the angle. You see it clearly. The mud on your coat, the ache in your shoulder, the cold coming up through your knee — you can arrange those facts into a shape that reads as endurable, even instructive. But the arrangement does not land. The story you tell yourself sits on the surface and does not take root, and the shoulder still aches the same amount, and the mud is still cold.\n\nCy watches you from three steps back. Its lens irises once — slowly, the way it does when it has recorded something and is deciding where to file it. It says nothing, which is its way of saying it saw what happened and has opinions it is keeping.\n\nThe stranger has not moved. They are still waiting for the answer to their question, and they have enough patience that waiting costs them nothing."
       },
       {
-        "player": "Keep moving — lower, to her breast",
-        "summary": "On the Common Hall roof terrace, the moment between you and Lira turns as the count-bell rings—intimacy and urgency meeting, the window beginning to close.",
-        "narration": "You move lower, deliberate and unhurried. Your mouth finds the curve of her breast — the warmth of her skin, the small shift of her breathing when you reach her. She does not move. Her hands stay gripped on your forearms, holding steady. You trace the line of her ribs with your lips, and she tilts her head back, not far — just enough that the line of her throat opens to the late-afternoon light.\n\nBelow, the count-bell begins to toll.\n\nOne note. Two. It carries up through the still air. Lira's eyes close for just a moment — the sound pulling at something. When they open again, she looks at you directly, her breathing steady but deeper now. The moment is still present. Still chosen. But the count is ringing.\n\nThree notes. Four. The bell marks time the way it always does, and you both hear it marking something else: the window closing. The afternoon is still gold. Her skin is still warm under your touch. But the count moves on, and Keeper Aldris Vael is waiting. The ledger sits on the bench, drying in the fading light."
+        "player": null,
+        "summary": "The hostile meeting at the confluence ended with Loki on one knee in the mud — the stranger's question still unanswered, the moment held at its edge.",
+        "narration": "The stranger's question still hangs in the morning air. You are on one knee in the cold mud, shoulder aching, coat dark with the fall. Cy stands three steps back. Its lens is fixed on the stranger with the stillness it uses when it has not yet decided what category of thing it is looking at.\n\nThe stranger has not moved from where their momentum left them. They are breathing evenly now. Their eyes are on you — not the look of someone who wants more, but the look of someone who is still waiting for the answer they asked for before any of this started.\n\nYou meet their eyes. The waterskin is beside you in the mud. The flat stone with its pale scratch-mark is underneath it. The confluence moves past your boots as it has been moving since before either of you arrived here.\n\nThe stranger says, without impatience, \"You can still answer the question.\""
+      },
+      {
+        "player": null,
+        "summary": "The stranger overcame Loki fully at the confluence — driven to the mud, both hands down, Cy's lens tight. The question stands open: Why?",
+        "narration": "The stranger's last strike comes low and fast, aimed at your center rather than your guard. You read it a half-beat too late. Your feet are already compromised by the mud, and when their shoulder connects with yours the impact travels all the way down through your planted knee and tips you the rest of the way over. You land on your hands and one knee, mud seeping cold through your coat at the wrist and the shin.\n\nCy does not approach. Its lens irises tight and holds there — the particular contraction it uses when the numbers it is running come out somewhere it does not like.\n\nThe stranger does not follow through. They stop exactly where the exchange ended, breathing harder now than they were a moment ago, and let the silence settle. The morning light is thin and pale on the water. The confluence moves past both of you with no opinion about any of it.\n\nThen they say it again, quieter this time than the first. 'Why,' says the stranger, and it is not really a question anymore — it is a door they are holding open, and they are waiting to see if you will walk through it."
+      },
+      {
+        "player": "Use the better story to heal yourself.",
+        "summary": "Loki turned The Better Story inward at the confluence and stood again — the morning reshaped as arrival rather than defeat, the stranger's question still open.",
+        "narration": "You stop fighting the craft outward and turn it all the way in.\n\nThe angle finds you before you find it — the mud on your hands, the ache in your shoulder, the stranger still standing three paces away with their question open. You let the whole morning sit in a different light for a moment. Not a lie. Not a retelling that softens the fall. A true shape that also functions: you came down the road looking for something, the stranger came from wherever they came from looking for something, and the confluence is exactly where two things that are looking for each other tend to arrive. The mud is not failure. It is the texture of having arrived.\n\nThe craft catches. Not the way it does in thick substrate — no clean surge, no warmth spreading from the center out. Something thinner and more effortful, like pulling water uphill through a reed. But it catches. The ache in your shoulder does not leave, but it settles back to a place where it stops shaping every breath. The cold in your knee stops reading as damage and starts reading as ground. You rise to one foot and then both, slowly, and your hands come out of the mud.\n\nCy's lens eases — not all the way, but one degree. Across the confluence, the stranger is watching you stand. They have not moved. Their question is still in the air, and now you are upright in it."
+      },
+      {
+        "player": null,
+        "summary": "The hostile meeting ended without resolution — Loki back on their feet, the stranger still waiting, the question 'Why?' still open between them.",
+        "narration": "The stranger has not closed the distance. They stand three paces away, shoulders dropping from the height of the exchange, breath still steadying. Their eyes are on you — not hunting, not finished, just waiting. The question has not moved.\n\nYou are back on your feet. The mud on your coat and hands is cold and drying at the edges. Your shoulder remembers the strike. Cy stands at its precise distance behind you, lens irised to the tightest ring it uses when it is running numbers it finds unacceptable.\n\nThe stranger says nothing. They let the silence hold the shape of 'Why?' — still a door, not a threat. The flat stone is beneath the waterskin. The confluence moves past all of you without comment.\n\nThe morning has its answer ready if you want to give it."
+      },
+      {
+        "player": null,
+        "summary": "The stranger put Loki down a second time — a hand to the sternum, not a blow — and the question 'Why?' still stands open in the afternoon air.",
+        "narration": "Your strike goes in clean and the stranger reads it clean. They don't step away from it — they step into it, letting your blow glance off their outer arm so the rotation carries them inside your reach. The impact scatters both attacks at once and the momentum belongs entirely to them after that.\n\nThey put a hand flat against your sternum and push. Not a strike. A correction. You go backward two steps into the mud and your heel catches on something — the flat stone, still there beneath the waterskin — and you sit down hard. Not thrown. Deposited.\n\nThe stranger stands where they stopped. Their breathing has settled. They look down at you with an expression that is not contempt and is not satisfaction. It is the expression of someone who asked a question and is still waiting for the answer, and who has now made it very clear they are prepared to wait all afternoon.\n\nCy moves two precise steps to your left. Its lens irises once, then holds. It says nothing. It is doing the thing it does when it has already reached its conclusion and is waiting for you to reach yours."
+      },
+      {
+        "player": null,
+        "summary": "An Hourkeeper appeared from the brush — silent, still, watching Loki with terrible foreknowledge and saying nothing.",
+        "narration": "A sound comes from behind you — not from the direction of the road, not from the stranger. From somewhere off to your left, where the brush thins toward a flat stretch of pale mud.\n\nAn Hourkeeper is standing there. You did not see them arrive. They are wearing the plain grey coat the Hourkeepers favor, and they are looking directly at you with an expression of terrible, helpless sympathy — the kind that belongs to someone who already knows how a story ends and has no good way to say so.\n\nThey do not speak. They do not move toward you or toward the stranger. They simply stand in the mud with that expression fixed on their face, the way a person stands when they are carrying something they cannot put down and cannot explain.\n\nCy's lens swings toward them, irises once, and swings back to you. That is Cy's way of saying: I have noted it and I have no entry for it.\n\nThe stranger has not moved. They are still three paces away, still waiting on their question. But now there are three of you in this confluence — and the Hourkeeper's silence has weight."
+      },
+      {
+        "player": null,
+        "summary": "The stranger overcame Loki at the confluence — the final exchange drove them into the mud, Cy running unhappy numbers, the question 'Why?' still unanswered in the cold air.",
+        "narration": "The stranger's final strike comes in low and you raise a guard against it — and for a moment it looks like it will hold. Then it doesn't. They turn your arm with their wrist and the force redirects up through your elbow and into your shoulder, and you go down sideways into the cold mud. Not thrown. Not beaten senseless. Just — done.\n\nYou land on one hip and one palm. The mud is cold enough to sting. Cy is at your left, utterly still, its lens irised to the smallest ring it uses when it has run the numbers and found them not to its liking. The stranger stands three paces away and does not press forward. Their breathing has settled and their arms hang open at their sides, which is not a gesture of surrender — it is a gesture of having been answered.\n\nThe question is still there. 'Why?' It has not moved. It stands in the cold afternoon air between you like something they set down carefully and are willing to wait beside for as long as it takes. The Hourkeeper at the edge of the brush has not moved either. Their expression has not changed — that terrible foreknowing sympathy, fixed on you in the mud, carrying whatever they know and cannot say.\n\nThe waterskin is beside you. The flat stone is beneath it, its pale scratch-mark invisible from here. Somewhere north of you, the orchard tends its forty-year trees, and someone planted one today for a child not yet born. The spring mud is cold and the afternoon is not finished yet and the stranger is waiting."
+      },
+      {
+        "player": null,
+        "summary": "Loki sits in the mud at the confluence — the stranger waiting, the Hourkeeper watching, Cy's numbers unhappy, the question 'Why?' still open in the cold spring air.",
+        "narration": "The mud is cold through your coat. Your palm is flat against the ground and the stone is still beneath the waterskin, and the stranger has not moved. They are waiting. Not impatiently. The way a person waits who has been waiting longer than this before.\n\nCy makes a small sound beside you — not a word, not a click, just a brief tightening of its mechanism the way a person might draw a breath before they speak and then decide not to. Its lens stays at its smallest ring. The numbers it has been running have not improved.\n\nThe Hourkeeper at the edge of the brush has not moved either. Their expression has not changed. Whatever they are carrying, they are carrying it the same way they were before — without relief, without any sign that the situation has reached the moment they were dreading or the moment they were hoping for. Just the same terrible, quiet foreknowledge, fixed on you.\n\nThe stranger's question is still in the air. 'Why?' Not a taunt. Not a demand. A door held open with patience and no particular expectation that you will walk through it. You are sitting in the mud in the cold afternoon, Cy at your left, an Hourkeeper at your back, and a person three paces away who has put you on the ground twice and still has not told you why."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the aggressor through See the Made Thing — a striker who has already decided what Loki will do next.",
+        "narration": "See the Made Thing opens and the stranger becomes legible — all their seams at once. They favour the strike. You can see it in the way they weight their lead foot, in the slight forward lean of the shoulder, in the way their hands are never fully still. They are not waiting to read you. They have already decided what you are going to do, and they are positioned for it. They think you are going to get up swinging."
+      },
+      {
+        "player": null,
+        "summary": "Loki feinted a strike, read the aggressor through the Misdirect, and answered with Hunter's Strike — on their feet now, the gap reset, the question still open.",
+        "narration": "You let them see what they expect to see. Your weight shifts forward — the beginning of a strike, the exact shape they have already decided you will make. Their guard comes up clean and hard, the way a practiced striker's guard does, and for a breath you are exactly where they thought you would be.\n\nThen you are not.\n\nThe Misdirect is already in the air between you — not a sound, not a gesture, just the wrong information landing in the right place. Their eye goes to where the strike should be arriving. You go sideways. The opening costs you ground; they feel the false read and press, and your shoulder takes it. It is not nothing. But you are moving now, and moving is different from lying in the mud.\n\nYou get your hand to the belt knife on the turn. Hunter's Strike comes up from the hip, low and without ceremony, the way it is supposed to — not a warrior's form, just honest force aimed at something real. They meet it hard. Their own strike comes in at the same moment and the two of you exchange it, shoulder to shoulder, neither clean. But you are on your feet. The knife has found the edge of the space between you and the stranger is three paces out rather than two, breathing a little faster than before.\n\nThe question is still open in the cold air. Veln Ashpause has not moved. Cy's lens stays at its smallest ring, but its numbers have shifted — you can hear it in the small change of its mechanism, a brief easing. The aggressor's guard is up and their weight has reset, and they are watching you differently now."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the aggressor through insight — a striker already committed to the next blow.",
+        "narration": "You are on your feet now, knife in hand, and you let yourself go still for a moment — not passive, just listening with your whole body. The aggressor is forward-weighted, the way a striker is who has committed to the next move before they have made it. Their eyes are fixed at throat-height. They have decided where you are going to be."
+      },
+      {
+        "player": null,
+        "summary": "At the braided confluence below the rise, a stranger came at Loki out of the cold spring afternoon and did not stop until the fight did — and even then, the question neither of them had fully asked was still hanging in the mud between them, with Veln Ashpause watching from the brush and Cy running its numbers in silence.",
+        "narration": "The stranger's guard comes up — clean, practiced, the same guard they have used a dozen times before. Your knife finds it anyway. Not through it. Against it. The impact runs up your arm and they step back hard, heel catching a root, and for a moment they are only trying not to fall.\n\nThey do not fall. But they stop.\n\nTheir eyes find yours again and the forward lean is gone. The hands have dropped slightly. They are breathing through their mouth now, which is a thing people do when the body has decided the fight is over before the mind has caught up.\n\nThe question is still in the air. 'Why?' You asked it. They asked it. Nobody has answered it yet. The stranger looks at you across the cold mud and says nothing, and the silence is a different kind of silence than the one before the first blow.\n\nVeln Ashpause has not moved. They are still at the edge of the brush, grey coat, that expression of helpless sympathy fixed on Loki like a weight they cannot put down. Cy is at your left, lens at its smallest ring, watching the stranger with the patience of something that has waited longer than this before."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the stranger through Prism Sight and sees a warding fighter waiting to redirect.",
+        "narration": "You let your eyes go soft the way Prism Sight teaches — not looking at the stranger, but at the light that has already passed through them. Their last hour writes itself across the air in faint, overlapping layers. You see how they plant their feet before a clash — weight back, arms wide, the stance of someone who means to absorb and redirect rather than break through. They ward. They wait for you to come to them, and they answer what arrives."
       }
     ],
     "lastTurn": {
-      "narration": "You move lower, deliberate and unhurried. Your mouth finds the curve of her breast — the warmth of her skin, the small shift of her breathing when you reach her. She does not move. Her hands stay gripped on your forearms, holding steady. You trace the line of her ribs with your lips, and she tilts her head back, not far — just enough that the line of her throat opens to the late-afternoon light.\n\nBelow, the count-bell begins to toll.\n\nOne note. Two. It carries up through the still air. Lira's eyes close for just a moment — the sound pulling at something. When they open again, she looks at you directly, her breathing steady but deeper now. The moment is still present. Still chosen. But the count is ringing.\n\nThree notes. Four. The bell marks time the way it always does, and you both hear it marking something else: the window closing. The afternoon is still gold. Her skin is still warm under your touch. But the count moves on, and Keeper Aldris Vael is waiting. The ledger sits on the bench, drying in the fading light.",
-      "sceneSummary": "On the Common Hall roof terrace, the moment between you and Lira turns as the count-bell rings—intimacy and urgency meeting, the window beginning to close.",
+      "narration": "You let your eyes go soft the way Prism Sight teaches — not looking at the stranger, but at the light that has already passed through them. Their last hour writes itself across the air in faint, overlapping layers. You see how they plant their feet before a clash — weight back, arms wide, the stance of someone who means to absorb and redirect rather than break through. They ward. They wait for you to come to them, and they answer what arrives.",
+      "sceneSummary": "Loki reads the stranger through Prism Sight and sees a warding fighter waiting to redirect.",
       "choices": [
         {
-          "label": "Stay here. The moment matters more than the deadline.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
+          "label": "Sonic Resonance — shatter the ward before they can set it",
+          "attribute": "physical",
+          "subAttribute": "craft",
+          "difficulty": 15,
           "intentTags": [
-            "romantic"
+            "attack"
+          ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 8,
+          "trivial": false
+        },
+        {
+          "label": "Press hard and fast — give them nothing to redirect",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "attack",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Step back gently and reach for your clothes. The ledger has to move now.",
-          "attribute": "practical",
+          "label": "Draw back — bait the ward into a reach it cannot cover",
+          "attribute": "mental",
           "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "plan"
+            "feint",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
+          "trivial": false
+        }
+      ],
+      "scene": {
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring evening, thin fading light, cold mud underfoot. The fight has paused at the read.",
+        "npcsPresent": [
+          {
+            "name": "The Stranger",
+            "state": "Weight back, arms wide, the warding stance fully set — waiting for Loki to come."
+          },
+          {
+            "name": "Veln Ashpause",
+            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy unchanged."
+          },
+          {
+            "name": "Cy",
+            "state": "At Loki's left, lens at its smallest ring, watching with old patience."
+          }
+        ],
+        "objects": [
+          "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
+          "Waterskin beside Loki in the mud",
+          "boot-prints in mud ending at the water's edge",
+          "mud on Loki's coat, hands, hip, and both legs",
+          "belt knife in Loki's hand"
+        ],
+        "threads": [
+          "The question — 'Why?' — still open and unanswered between Loki and the stranger.",
+          "The stranger has yielded but has not explained themselves.",
+          "The Hourkeeper has pre-remembered something and will not say what.",
+          "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
+          "The three-hundred-year tree about to fruit and the missing person it was planted for.",
+          "The read is complete — the stranger wards; the bonus action is Loki's to spend."
+        ]
+      },
+      "stateOps": [
         {
-          "label": "Kiss her, unhurried, and tell her what you need to do—trust her to understand.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "romantic",
-            "honest"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "op": "correctAbilityRank",
+          "id": "prism_sight",
+          "to": 1,
+          "why": "Repair: prism_sight sits at rank 2 with 0/8 practice — rank has not been earned; correcting to rank 1."
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
+        "energy": -3,
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-clean-numbers",
-          "title": "The Clean Numbers",
-          "summary": "Obtain and deliver evidence of Fendt's falsified filtration purity reports to someone who can act on them.",
-          "giver": "circumstance",
-          "note": "The count-bell window to reach Keeper Aldris Vael is closing—five bells remain before the day-turn.",
-          "xpReward": null
-        }
-      ],
-      "standingOps": [],
-      "delegateOps": [],
-      "arcOps": [],
-      "adoptSchool": null,
-      "offer": null,
-      "stageOps": [],
-      "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light turning honey-gold, the sun angling lower. The valley floor visible beyond the coping wall; the count-bell's voice carries clear and distant from the district below.",
-        "npcsPresent": [
-          {
-            "name": "Lira",
-            "state": "Present and unhurried, her hands gripped on your forearms, her eyes tracking yours. Her breathing deepened. Eyes open now, watching directly. Present. Chosen. Listening to the count-bell mark the closing window."
-          }
-        ],
-        "objects": [
-          "Lower Filtration Ledger — on the bench",
-          "Lira's jacket — on the bench",
-          "Lira's top — on the terrace nearby",
-          "Iron exterior staircase leading down to the street",
-          "Coping wall overlooking the district"
-        ],
-        "threads": [
-          "The count-bell is ringing—the window to reach Keeper Aldris Vael is closing",
-          "The moment between you and Lira is present and open",
-          "The ledger still waits on the bench"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "lira",
-          "name": "Lira",
-          "role": "Apprentice optics-weaver, Edge District",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": null,
-          "note": "On the roof terrace as the count-bell rings—present and deliberate under your touch, her hands gripped on your forearms, watching your face. The moment holds; the window closes.",
-          "learned": [],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "On the Common Hall roof terrace, present and unhurried, in the late-afternoon light. The count-bell is ringing.",
-          "bondType": "romantic",
-          "bondStage": "together"
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "discovery": null,
-      "codexUpdates": [],
-      "generateRequest": [],
-      "encounterOps": [],
-      "newEncounter": null,
-      "unlockPrecursor": null,
-      "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.75,
-        "why": "The late-afternoon light deepens; the count-bell begins to toll"
-      },
-      "moveTo": null,
-      "stateOps": [],
-      "itemUpdates": [],
-      "imagePrompt": null,
-      "newAbility": null,
-      "gambitOps": null,
-      "gambitApt": false,
-      "markDefiningMoment": null,
-      "markTeacher": null,
-      "offerPromotion": null,
-      "offerAcquisition": null,
-      "offerIntent": null,
-      "sceneEnded": false
+        "hoursPassed": 0.1,
+        "why": "a moment's read in the fight"
+      }
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light turning honey-gold, the sun angling lower. The valley floor visible beyond the coping wall; the count-bell's voice carries clear and distant from the district below.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring evening, thin fading light, cold mud underfoot. The fight has paused at the read.",
       "npcsPresent": [
         {
-          "name": "Lira",
-          "state": "Present and unhurried, her hands gripped on your forearms, her eyes tracking yours. Her breathing deepened. Eyes open no"
+          "name": "The Stranger",
+          "state": "Weight back, arms wide, the warding stance fully set — waiting for Loki to come."
+        },
+        {
+          "name": "Veln Ashpause",
+          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy unchanged."
+        },
+        {
+          "name": "Cy",
+          "state": "At Loki's left, lens at its smallest ring, watching with old patience."
         }
       ],
       "objects": [
-        "Lower Filtration Ledger — on the bench",
-        "Lira's jacket — on the bench",
-        "Lira's top — on the terrace nearby",
-        "Iron exterior staircase leading down to the street",
-        "Coping wall overlooking the district"
+        "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
+        "Waterskin beside Loki in the mud",
+        "boot-prints in mud ending at the water's edge",
+        "mud on Loki's coat, hands, hip, and both legs",
+        "belt knife in Loki's hand"
       ],
       "threads": [
-        "The count-bell is ringing—the window to reach Keeper Aldris Vael is closing",
-        "The moment between you and Lira is present and open",
-        "The ledger still waits on the bench"
+        "The question — 'Why?' — still open and unanswered between Loki and the stranger.",
+        "The stranger has yielded but has not explained themselves.",
+        "The Hourkeeper has pre-remembered something and will not say what.",
+        "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
+        "The three-hundred-year tree about to fruit and the missing person it was planted for."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 19,
+    "hour": 8,
     "realAnchor": null
   },
   "companions": [],
-  "quests": [
-    {
-      "id": "dev-test-quest",
-      "title": "A Test Errand",
-      "status": "completed",
-      "summary": "Dev-seeded quest to verify progress→complete.",
-      "progress": [
-        "begun",
-        "Stone picked up and stowed — objective fulfilled."
-      ],
-      "resolvedAt": "2026-07-11T22:04:27.070Z"
-    },
-    {
-      "id": "the-clean-numbers",
-      "title": "The Clean Numbers",
-      "summary": "Obtain and deliver evidence of Fendt's falsified filtration purity reports to someone who can act on them — before the cover-up goes deeper.",
-      "giver": "circumstance / Keeper Aldris Vael (context)",
-      "giverEntityId": null,
-      "locationId": null,
-      "locationEntityId": null,
-      "status": "active",
-      "progress": [
-        "Ledger now in hand. Fendt's initials on three weeks of impossible entries. Next step: who receives this, and what do they do with it?",
-        "Ledger in hand; plan mapped — deliver to Aldris Vael or carry it to the forge first. The cooling window and the evidence window are in direct tension.",
-        "Lira received the full truth and confirmed she'd sensed the numbers were wrong for weeks. She warned that the supervisor's office faces the direct path — the window to reach Vael unobserved is closing. Afternoon count in minutes.",
-        "The count-bell has rung. The window to reach Keeper Aldris Vael is open — eastern route behind array housing, ledger in hand, Lira's last word guiding the approach.",
-        "The count-bell window to reach Keeper Vael is still open. The ledger is in hand. Lira has named the closing time — one bell past the afternoon count.",
-        "The count-bell window to reach Keeper Aldris Vael is closing—five bells remain before the day-turn."
-      ],
-      "aliases": [],
-      "startedAt": "2026-07-11T22:11:38.224Z"
-    }
-  ],
-  "npcRegistry": {
-    "lira": {
-      "id": "lira",
-      "name": "Lira",
-      "role": "Apprentice optics-weaver, Edge District",
-      "description": "Apprentice-rank sash worn loose, amber-grey eyes, at ease in ways that suggest she stopped caring about district formality some time ago. She's spoken with the character twice over the paving work and has lingered both times.",
-      "firstMet": {
-        "locationId": "radiant_plateau_edge",
-        "day": 1
-      },
-      "relationship": 10,
-      "history": [
-        "[d1] Reconstructed the shared sequence in order — managing, then the moment of stopping — and turned it back to him as a question about what it registered from his side.",
-        "[d1] Confirmed plainly what passed between them and what did not — no touch, no orgasm, only the Prism Sight exchange and her stopping managing herself. Named it as more than most people give her. Asked whether he is orienting to what was real or reaching for something that hasn't happened yet.",
-        "[d1] Closed the distance herself. Said plainly she was not managing anything. Met the kiss without hesitation.",
-        "[d1] Lifted her arms for him without hesitation — decided, not passive. Stands in the afternoon light and lets him look, her hands on his forearms, breathing steady and chosen.",
-        "[d1] Held still under his hand moving along her collarbone — watching his face the whole time, breathing slow, not managing any part of it.",
-        "[d1] On the roof terrace in late-afternoon light, present and unhurried — breathing steady and chosen, watching his face while his hand moved along her ribs. No management left. Decided.",
-        "[d1] On the roof terrace in late afternoon, present and steady under your attention — watching your face while you look at her. No management left.",
-        "[d1] On the roof terrace in late afternoon, present and unhurried — her hands tightened on your forearms for the first time, gripping instead of resting. Still watching your face. Still chosen.",
-        "[d1] On the roof terrace as the count-bell rings—present and deliberate under your touch, her hands gripped on your forearms, watching your face. The moment holds; the window closes.",
-        "[d1] Your bond deepens — together."
-      ],
-      "knownFacts": [
-        "She draws a clear line between what was real and what didn't happen — and names both without embarrassment.",
-        "She considers the Prism Sight exchange more intimate than surface touch, and said so directly.",
-        "She moves first when she has decided — the choosing is internal and the action follows without ceremony.",
-        "She names her own state in real time: 'I am not managing anything right now.'",
-        "When she stops managing, she is fully present — her attention unguarded",
-        "She watches from the source — measures the person, not the gesture",
-        "She lets you look without self-consciousness, without rushing to interpret",
-        "When she stops managing herself, her grip shows first — a physical truth before words."
-      ],
-      "skillsObserved": [
-        "light-channeling through deliberate hip motion",
-        "teaching by physical correction — exact and warm",
-        "reading falsified data by its missing variation",
-        "teaching by turning the evidence back to the student",
-        "emotional precision and recall — naming internal states in s",
-        "the ability to be still under genuine attention"
-      ],
-      "status": "active",
-      "statusNote": "On the Common Hall roof terrace, present and unhurried, in the late-afternoon light. The count-bell is ringing.",
-      "lastSeen": {
-        "locationId": "gen-object-object",
-        "day": 1
-      },
-      "gender": "woman",
-      "pronouns": "she/her",
-      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Lira%2C%20woman%2C%20Apprentice%20optics-weaver%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=44200&nologo=true",
-      "_portraitTier": "devoted",
-      "bondType": "romantic",
-      "bondStage": "together"
-    },
-    "keeper-aldris-vael": {
-      "id": "keeper-aldris-vael",
-      "name": "Keeper Aldris Vael",
-      "role": "",
-      "description": "",
-      "firstMet": {
-        "locationId": null,
-        "day": 1
-      },
-      "relationship": 0,
-      "history": [
-        "[d1] Known from what has passed between you."
-      ],
-      "knownFacts": [],
-      "skillsObserved": [],
-      "status": "active",
-      "gender": null,
-      "pronouns": null,
-      "_backfilledFrom": "establishedFacts"
-    }
-  },
+  "quests": [],
+  "npcRegistry": {},
   "placeMemory": {
-    "radiant_plateau_edge": {
-      "visits": 1,
-      "notes": [
-        "[d1] Fendt's name written in red chalk on the district accountability board with no accompanying record — still present on arrival, World-day 11 morning.",
-        "[d1] One loose paving-stone removed from the Edge District light-guide street — a small gap now visible in the paving near the Common Hall approach.",
-        "[d1] Three paving-stones removed from the light-guide street near the Common Hall approach — the gap is now noticeably wider.",
-        "[d1] The lower filtration ledger is no longer in the array-office — removed this morning. The door was re-latched but shows signs of forced entry on close inspection.",
-        "[d1] Roof terrace above the Common Hall wick-room — a flat terrace with coping wall and one bench, accessed by exterior iron stairs; quiet during morning and midday counts, known to Lira as reliably unobse"
-      ],
-      "flags": {
-        "fendt_board_marking": "red_chalk_no_record",
-        "paving_stone_removed": "true",
-        "paving_stones_removed_count": "3",
-        "array_office_ledger_removed": true,
-        "array_office_entry_evidence": "belt-knife lever marks on latch"
-      },
-      "lastVisit": 1,
-      "vectorsKnown": [
-        "dark_light",
-        "falsehood_truth",
-        "concrete_abstract",
-        "mechanical_spiritual",
-        "violence_peace"
-      ],
-      "subPlaces": {
-        "district-common-hall": {
-          "name": "District Common Hall",
-          "day": 1,
-          "visited": true,
-          "note": "Has an accountability board on its exterior face — publicly visible; used for shift rosters, supply tallies, and rare di",
-          "parentId": "radiant_plateau_edge"
-        },
-        "array-office-behind-common-hall-": {
-          "name": "Array Office (behind Common Hall)",
-          "day": 1,
-          "visited": true,
-          "note": "Sealed service office for lower filtration array records — ledger now missing, latch slightly marked.",
-          "parentId": "radiant_plateau_edge"
-        },
-        "roof-terrace-common-hall-": {
-          "name": "Roof Terrace (Common Hall)",
-          "day": 1,
-          "visited": true,
-          "note": "Flat terrace above the wick-room — quiet before the afternoon count, valley floor visible to the west. Lira brought the ",
-          "parentId": "radiant_plateau_edge"
-        }
-      }
-    },
-    "gen-object-object": {
+    "millbrook": {
       "visits": 1,
       "notes": [],
-      "flags": {},
-      "lastVisit": 1,
-      "vectorsKnown": []
+      "flags": {}
     }
   },
   "worldState": {
     "schemaVersion": 1,
     "lastTickDay": 1,
-    "eventStages": {
-      "water_crisis": {
-        "stage": 2,
-        "sinceDay": 13
-      }
-    },
-    "spectrumDrift": {
-      "death_life": -0.1,
-      "violence_peace": -0.1,
-      "falsehood_truth": -0.05
-    },
-    "news": [
-      {
-        "day": 1,
-        "worldDay": 10,
-        "text": "Word reaches you: Word of Millbrook's elder decision — and Fendt's public naming — reached the Radiant Plateau Edge District by Day 11 night via the eastern path. Fendt's name appeared in red chalk on the district acco ("
-      },
-      {
-        "day": 1,
-        "worldDay": 10,
-        "text": "Word reaches you: A filtration array supervisor marked their own subordinate — Fendt — on the Edge District accountability board and filed no accompanying record. A keeper of thirty years has never seen this before. (nea"
-      },
-      {
-        "day": 1,
-        "worldDay": 12,
-        "text": "Word reaches you: A dead animal was brought back to life in Millbrook's upper meadow — no known ability in the valley's three civilizations accounts for it cleanly (near millbrook)"
-      },
-      {
-        "day": 1,
-        "worldDay": 13,
-        "text": "Word reaches you: A death-binding ceremony was completed at Pell's forge in Millbrook — runes pressed into wood and iron with a maker's mark seated into the blade. The spear holds a nascent thread to Huginn and an open (near millbrook)"
-      },
-      {
-        "day": 1,
-        "worldDay": 13,
-        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
-      },
-      {
-        "day": 1,
-        "worldDay": 13,
-        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
-      },
-      {
-        "day": 1,
-        "worldDay": 25,
-        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations.",
-        "tier": "event"
-      },
-      {
-        "day": 1,
-        "worldDay": 24,
-        "text": "Word reaches you: Silas Weir named Overseer Grael formally to Warden Coll as the receiving authority in the filtration accountability chain — on the record, in the Registry office, with a document roll in hand (near gen-north-gate-registry-ossian-office)",
-        "tier": "event"
-      },
-      {
-        "day": 1,
-        "worldDay": 24,
-        "text": "Word reaches you: A persistent shadow-slate bound to Silas Weir's Weirmark is now seated on Warden Coll's desk — a two-way written channel that does not require runners. (near gen-north-gate-registry-ossian-office)",
-        "tier": "event"
-      },
-      {
-        "day": 1,
-        "worldDay": 24,
-        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 24,
-        "text": "This reaches your area — Edvar Crane formally commissioned as a Stillwater's Trouble agent — a twenty-year watcher brought into the fellowship's filtration work. (near gen-waygate)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 25,
-        "text": "This reaches your area — A new waygate stands on the left branch road in the Disputed Zone — the first made-gate since the Transition, built by a wright who tends endings. (near gen-disputed-zone-left-branch-entrance)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 25,
-        "text": "Lira: Lira secured a three-morning trial with a lens-grinder in the Edge District who agreed to let her sweep and observe in exchange for running deliveries — small, unglamorous, but she is now inside a working shop.",
-        "tier": "ambient"
-      },
-      {
-        "day": 1,
-        "worldDay": 26,
-        "text": "This reaches your area — The hollow's warden named its full purpose: a receiver built for a watershed-readiness question from the relay node south of the hollow. The circuit is intact. The question was never sent. (near gen-disputed-zone-left-branch-entrance)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 26,
-        "text": "Keeper Aldris Vael: Aldris spent the evening re-examining the mark under three different lens-stacks and made a quiet, indirect inquiry to retired Keeper Suven — not showing the mark yet, only asking whether he still reviews authentication requests, laying groundwork for the second pair of eyes she needs.",
-        "tier": "ambient"
-      },
-      {
-        "day": 1,
-        "worldDay": 26,
-        "text": "This reaches your area — The left-branch reclamation site was given its final instruction and began winding down — the watershed contamination will clear on its own schedule within one to two weeks. (near gen-disputed-zone-left-branch-entrance)",
-        "tier": "event",
-        "impactsLocal": true
-      },
-      {
-        "day": 1,
-        "worldDay": 27,
-        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
-        "tier": "event"
-      },
-      {
-        "day": 1,
-        "worldDay": 27,
-        "text": "Keeper Aldris Vael: Aldris quietly sent a short, carefully worded note — no specifics, no mention of the mark — to Keeper Fennow in the Tallow Quarter, whose eyes she has trusted for thirty years, asking if he might find an hour for her this week.",
-        "tier": "ambient"
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "Keeper Aldris Vael: Aldris quietly arranged a private viewing with Conservator Mette Orvyn — an old colleague she trusts above guild politics — who examined the mark under side-lit glass and said nothing for a long moment before giving a single, careful nod.",
-        "tier": "ambient"
-      },
-      {
-        "day": 1,
-        "worldDay": 32,
-        "text": "Lira: Lira was taken on for two mornings as an informal runner for a lens-grinder in the Edge District, close enough to the work to watch the shaping process and ask one question that got a real answer.",
-        "tier": "ambient"
-      }
-    ],
+    "eventStages": {},
+    "arcStages": {},
+    "spectrumDrift": {},
+    "news": [],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-08-01T04:05:45.578Z",
-    "lastCanonWorldDay": 32,
-    "lastTickWorldDay": 32,
-    "lastGenCount": 772,
-    "wantProgress": {
-      "lira": {
-        "progress": 2,
-        "status": "active",
-        "updatedWorldDay": 32,
-        "lastOutcome": "progress"
-      },
-      "keeper-aldris-vael": {
-        "progress": 3,
-        "status": "active",
-        "updatedWorldDay": 32,
-        "lastOutcome": "progress"
-      },
-      "the_open_figure": {
-        "progress": 0,
-        "status": "active",
-        "updatedWorldDay": 32,
-        "lastOutcome": "stall"
-      }
-    },
-    "turnsSinceOffer": 35,
-    "arcStages": {
-      "arc_what_wakes_beneath": {
-        "othersPush": 1
-      },
-      "the_second_manifestation": {
-        "othersPush": 1
-      }
-    },
-    "pressureQueue": []
+    "turnsSinceOffer": 1
   },
   "bio": null,
   "subAttributes": {
     "strength": 6,
     "agility": 6,
     "reason": 6,
-    "insight": 8,
+    "insight": 6,
     "presence": 6,
-    "rapport": 8,
+    "rapport": 6,
     "craft": 6,
     "wits": 6
   },
-  "pendingSubPoints": 0,
+  "pendingSubPoints": 2,
   "skillPoints": 3,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
-    "topics": {
-      "fendt-marking": {
-        "id": "fendt-marking",
-        "label": "Fendt — Red Chalk Marking",
-        "kind": "mystery",
-        "facts": [
-          "[d1] A filtration array supervisor marked their subordinate Fendt in red chalk on the Edge District accountability board and filed no record — a thing no keeper of thirty years has seen done before. The na"
-        ],
-        "links": [
-          "radiant-plateau",
-          "water-crisis"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "millbrook-elder-decision": {
-        "id": "millbrook-elder-decision",
-        "label": "Millbrook Elder Panel — Precursor Recognition",
-        "kind": "event",
-        "facts": [
-          "[d1] Millbrook's elder panel formally accepted evidence of an operating Precursor system beneath the valley and named it publicly — the first governance body in the valley to do so. Sela demonstrated the s"
-        ],
-        "links": [
-          "millbrook",
-          "precursor-system"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "precursor-system": {
-        "id": "precursor-system",
-        "label": "Precursor System — Beneath the Valley",
-        "kind": "mystery",
-        "facts": [
-          "[d1] An operating Precursor system beneath the valley has been officially named by Millbrook's elders. Usnea proposed a multi-settlement expedition into the Disputed Zone to investigate; the panel could no"
-        ],
-        "links": [
-          "millbrook-elder-decision",
-          "disputed-zone",
-          "water-crisis"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "water-crisis": {
-        "id": "water-crisis",
-        "label": "The Water Crisis — Discoloration Stage",
-        "kind": "event",
-        "facts": [
-          "[d1] The Echo River runs gray-green on bad mornings. Fish catches are down across the valley. Communities murmur but cooperate. The crisis stands at the Discoloration stage as of World-day 11."
-        ],
-        "links": [
-          "echo-river",
-          "millbrook",
-          "radiant-plateau"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "keeper-aldris-vael": {
-        "id": "keeper-aldris-vael",
-        "label": "Keeper Aldris Vael",
-        "kind": "person",
-        "facts": [
-          "[d1] Senior Marks-Keeper, Radiant Plateau Accountability Board",
-          "[d1] met in play",
-          "[d1] [while away] Aldris drafted a short letter to the one colleague she trusts enough to ask, then held it unset for nine days — she cannot yet bring herself to commit the mark to writing, even in cautious terms, until she is more certain of what she is describing.",
-          "[d1] [while away] Aldris spent the evening re-examining the mark under three different lens-stacks and made a quiet, indirect inquiry to retired Keeper Suven — not showing the mark yet, only asking whether he still reviews authentication requests, laying groundwork for the second pair of eyes she needs.",
-          "[d1] [while away] Aldris quietly sent a short, carefully worded note — no specifics, no mention of the mark — to Keeper Fennow in the Tallow Quarter, whose eyes she has trusted for thirty years, asking if he might find an hour for her this week.",
-          "[d1] [while away] Aldris quietly arranged a private viewing with Conservator Mette Orvyn — an old colleague she trusts above guild politics — who examined the mark under side-lit glass and said nothing for a long moment before giving a single, careful nod."
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 1,
-        "entityId": "keeper-aldris-vael",
-        "updatedDay": 1
-      },
-      "fendt-falsified-reports": {
-        "id": "fendt-falsified-reports",
-        "label": "Fendt — Falsified Purity Reports",
-        "kind": "mystery",
-        "facts": [
-          "[d1] Fendt's filtration quality reports began reading impossibly clean three weeks ago — showing purified water that couldn't exist given the river's contamination. A six-year record of unremarkable work, "
-        ],
-        "links": [
-          "water-crisis",
-          "radiant-plateau",
-          "fendt-board-marking",
-          "keeper-aldris-vael"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "lower-filtration-ledger": {
-        "id": "lower-filtration-ledger",
-        "label": "Lower Filtration Ledger",
-        "kind": "event",
-        "facts": [
-          "[d1] Three weeks of entries in Fendt's hand read exactly at threshold — no natural measurement noise. The falsification is careful, practiced, and recent. The ledger is now in Test Hero's possession."
-        ],
-        "links": [
-          "the-clean-numbers",
-          "fendt-board-marking",
-          "water-crisis",
-          "radiant-plateau"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "lira": {
-        "id": "lira",
-        "label": "Lira — Edge District Apprentice",
-        "kind": "person",
-        "facts": [
-          "[d1] An apprentice optics-weaver in the Edge District who has sought the character's company twice over the paving work; met in the service corridor, she noticed the ledger and chose silence on it — delibe",
-          "[d1] She noticed the ledger in the corridor and chose silence deliberately. On the roof terrace she named both wants plainly: what you'll do with the evidence, and who you are.",
-          "[d1] She meets directness with directness — touched his collar, set the ledger aside herself, and said 'all right' without deflection. The interest has become something mutual and named.",
-          "[d1] She meets physical moments the same way she meets everything else — fully present, without performance. The kiss was unhurried and mutual. Her hand moved past the collar.",
-          "[d1] The moment on the terrace concluded — fully, mutually, without performance. She handed the ledger back into his hands herself as the afternoon count approached: practical and personal in the same gest",
-          "[d1] She knew the filtration numbers felt wrong for weeks but had no formal cause to name it. When given the full truth she absorbed it cleanly and responded with practical help: a warning about the superv",
-          "[d1] Her precision with people is a direct extension of optics training — she extrapolates arc and angle from the first degree of movement. She reads him clearly and said so without apology.",
-          "[d1] Apprentice optics-weaver, Edge District",
-          "[d1] [while away] Lira secured a three-morning trial with a lens-grinder in the Edge District who agreed to let her sweep and observe in exchange for running deliveries — small, unglamorous, but she is now inside a working shop.",
-          "[d1] She felt Prism Sight as being measured by something not cold — named it as a change in angle. Said she spent the first half deciding how much to show, then stopped; the second half was what he actually got.",
-          "[d1] [while away] Lira spent the day running routine deliveries for her current employer and had no opportunity to pursue the apprenticeship contact she's been building toward.",
-          "[d1] [while away] Lira was taken on for two mornings as an informal runner for a lens-grinder in the Edge District, close enough to the work to watch the shaping process and ask one question that got a real answer."
-        ],
-        "links": [
-          "radiant-plateau",
-          "the-clean-numbers",
-          "fendt-falsified-purity-reports"
-        ],
-        "aliases": [
-          "Lira"
-        ],
-        "createdDay": 1,
-        "entityId": "lira",
-        "updatedDay": 1
-      },
-      "the-clean-numbers": {
-        "id": "the-clean-numbers",
-        "label": "The Clean Numbers",
-        "kind": "event",
-        "facts": [
-          "[d1] Lira — an apprentice-weaver in the district — noticed the filtration numbers felt wrong for weeks before any formal naming. The wrongness was legible to at least one person inside the district hierarc"
-        ],
-        "links": [
-          "lira",
-          "fendt-falsified-purity-reports",
-          "fendt-board-marking",
-          "water-crisis"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "radiant-plateau-edge": {
-        "id": "radiant-plateau-edge",
-        "label": "Radiant Plateau — Edge District",
-        "kind": "place",
-        "facts": [
-          "[d1] you have walked here"
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 1,
-        "entityId": "radiant-plateau-edge",
-        "updatedDay": 1
-      },
-      "radiant-weaving-attention": {
-        "id": "radiant-weaving-attention",
-        "label": "Radiant Weaving — Attention Directs Light",
-        "kind": "lore",
-        "facts": [
-          "[d1] Lira demonstrated that prism-arcs track deliberate motion when genuine attention underlies it — 'the light goes where attention goes.' Motion is the vehicle; intent is the mechanism. A Radiant weaver does not push light; they mean it."
-        ],
-        "links": [
-          "radiant-plateau",
-          "lira",
-          "prism-sight"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "drumline-stride-novel-use": {
-        "id": "drumline-stride-novel-use",
-        "label": "Drumline Stride — Synchronized Rapport",
-        "kind": "lore",
-        "facts": [
-          "[d1] Drumline Stride can be used not as a sprint but as a locked shared rhythm — matching another person's tempo exactly, with the nanite field settling into pace rather than burst. Lira named it something she has never seen done before."
-        ],
-        "links": [
-          "lira",
-          "radiant-plateau"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "the-open-figure": {
-        "id": "the-open-figure",
-        "label": "The Open Figure",
-        "kind": "person",
-        "facts": [
-          "[d1] [while away] The Open Figure stirs at the edges of awareness but has found no clear seam to press against — the world's symbols sit undisturbed enough that there is nothing yet to resist."
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 1,
-        "entityId": "the-open-figure",
-        "updatedDay": 1
-      },
-      "gen-object-object": {
-        "id": "gen-object-object",
-        "label": "[Object Object]",
-        "kind": "place",
-        "facts": [
-          "[d1] you have walked here"
-        ],
-        "links": [],
-        "aliases": [],
-        "createdDay": 1,
-        "entityId": "gen-object-object",
-        "updatedDay": 1
-      }
-    }
+    "topics": {}
   },
-  "tendencies": {
-    "social": 7.712298953261706,
-    "strategic": 5.599123829884599,
-    "cautious": 3.091959751454849,
-    "cerebral": 4.127849773461365,
-    "physical": 0.4383676736256703,
-    "ruthless": 1.0565088841067987,
-    "generous": 0.4632171524040035,
-    "amorous": 17.599766940084116,
-    "risky": 1.1910711864894103
-  },
-  "aptitudes": [
-    "silver_tongue",
-    "charmer",
-    "devoted_lover",
-    "ardent"
-  ],
-  "actionCount": 47,
+  "tendencies": {},
+  "aptitudes": [],
+  "actionCount": 0,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785582344731,
-  "rev": 106,
-  "opLossPending": false,
-  "establishedFacts": [
-    {
-      "id": "f1",
-      "text": "Fendt's name appeared in red chalk on the Edge District accountability board with no accompanying record — a filtration array supervisor marked them and filed nothing; a keeper of thirty years has nev",
-      "day": 1,
-      "subjectId": null
-    },
-    {
-      "id": "keeper-aldris-vael",
-      "text": "Fendt's purity reports for the lower filtration arrays read impossibly clean — showing purified water against a river that has run gray-green for two months. The data is false. This was revealed by Ke",
-      "day": 1,
-      "subjectId": "keeper-aldris-vael"
-    },
-    {
-      "id": "fendt",
-      "text": "The lower filtration ledger — containing three weeks of falsified purity entries under Fendt's initials — has been removed from the array-office in the Edge District by Test Hero.",
-      "day": 1,
-      "subjectId": "fendt"
-    }
-  ],
-  "generated": {
-    "schemaVersion": 1,
-    "npc": {
-      "keeper-aldris-vael": {
-        "schemaVersion": 1,
-        "id": "keeper-aldris-vael",
-        "name": "Keeper Aldris Vael",
-        "role": "Senior Marks-Keeper, Radiant Plateau Accountability Board",
-        "homeLocation": "radiant_plateau_edge",
-        "communityId": "valley.radiant_plateau",
-        "personality": {
-          "warmth": 0.65,
-          "trust": 0.35,
-          "candor": 0.55,
-          "patience": 0.8
-        },
-        "spectrum": {
-          "dark_light": 0.75,
-          "falsehood_truth": 0.85,
-          "concrete_abstract": 0.6,
-          "emotional_logical": 0.45
-        },
-        "voiceHints": "Measured cadence, the kind built by thirty years of reading light rather than speaking into it. Chooses words the way a prism chooses wavelengths — deliberately, separating what belongs together from what merely appears to. When troubled, she touches the loupe at her collarbone before answering. Her silences are longer than they need to be and mean more than they say.",
-        "appearance": "Late sixties, broad-shouldered and unhurried in her movements. Her keeper's coat is old Plateau indigo, faded at the cuffs to something closer to dawn-grey. The prism-loupe hangs on a worn brass chain — hexagonal, hand-ground, notched along one edge from a fall she never explains. Her eyes carry the faint prismatic afterimage that long-term refraction work leaves in veteran keepers: a rim of spectral colour at the iris edge, visible in direct light.",
-        "knowledge": [
-          "The Fendt grain-mark currently posted to the accountability board carries a refraction signature that does not resolve cleanly under her loupe — the internal scatter pattern suggests the mark was struck from a die that has been subtly re-cut, not simply worn",
-          "She has seen die-wear, forgery, and honest error in thirty years; this reads as none of the three, and that is precisely what frightens her",
-          "The Fendt consignment passed the junior keeper's table three weeks ago, in the last days of winter, during the transitional period when the board rotates its verification staff — a gap she now suspects was not accidental",
-          "There is a Plateau record, mid-archive, of a similar anomalous mark appearing once before, roughly forty years prior; the case was closed without a finding and the original examiner's notes are missing",
-          "She knows every keeper currently seated on the accountability board by temperament and habit; she is watching two of them more carefully than the board's posted work would explain"
-        ],
-        "wants": "To hold the mark up to a second pair of trained eyes she trusts before she says a word aloud — she needs confirmation that what she sees is real, not the pattern-hunger of an old keeper who has looked through glass too long. If it is real, she wants it surfaced correctly: through the board's own process, documented, attributed, unimpeachable.",
-        "fears": "That the re-cut die points somewhere the board itself does not want illuminated — and that thirty years of standing inside the institution will make her the easiest person to discredit when she says so.",
-        "functions": [
-          "reveal",
-          "ward"
-        ],
-        "abilities": [
+  "updatedAt": 1785594680377,
+  "rev": 5,
+  "activeEncounter": {
+    "defId": "re-enc_the_sealed_door",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-enc_the_sealed_door",
+      "type": "puzzle",
+      "status": "active",
+      "round": 1,
+      "log": [
+        "r1: reveal vs ward → momentum 0"
+      ],
+      "attempts": 0,
+      "hintsRevealed": 1,
+      "solved": false,
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "static": true,
+        "staticResist": 18,
+        "resistLabel": "it holds — not fighting you, simply made to hold, and made well",
+        "attributes": {},
+        "subAttributes": {},
+        "alignment": {},
+        "skills": [
           {
-            "id": "prismatic_discernment",
-            "label": "Prismatic Discernment",
-            "functions": [
-              "reveal"
-            ],
-            "description": "Through her prism-loupe, Aldris can read the internal refraction signature of any Plateau mark, die-impression, or sealed document. Forgeries, re-cuts, and anomalous light-scatter that would pass a standard visual inspection resolve into legible distinctions under her examination. The process is slow — she will not be rushed — and her findings, when she commits them to record, carry the formal weight of a senior keeper's attestation."
-          },
-          {
-            "id": "procedural_ward",
-            "label": "Procedural Ward",
-            "functions": [
-              "ward"
-            ],
-            "description": "Aldris knows exactly which documentation pathways, filing sequences, and board protocols make a finding difficult to quietly undo. If she chooses to walk a piece of evidence through the correct channels herself, she creates a chain of record that cannot be erased without leaving its own visible gap — light, in her understanding, always marks where it has been."
+            "function": "ward",
+            "name": "it holds its order",
+            "tier": "notable"
           }
         ],
-        "reactsToReputation": {
-          "truth-seeker": "exhales slowly, uncurls slightly, will show the loupe reading unprompted if she judges the player ready to understand what they are looking at",
-          "deceiver": "becomes courteous and completely opaque; continues to touch the loupe but stops looking through it in the player's presence",
-          "institution-loyalist": "grows visibly tired; gives correct, careful, unhelpful answers until she decides whether the loyalty runs deeper than the institution or only as deep as its convenience",
-          "outsider-investigator": "weighs them against the risk of bringing an uncontrolled light source into a room she is still trying to read; may ask one precise, unexpected question before deciding"
-        },
-        "seasonalDetail": "Early spring means the accountability board's annual re-certification cycle has just opened — all marks logged in the winter quarter are under review. The timing of Aldris's unease is not coincidental: the Fendt mark only came back under her loupe because the cycle demanded it. She has been sitting with what she saw for four days.",
-        "_gen": {
-          "entityId": "keeper-aldris-vael",
-          "type": "npc",
-          "birthWeight": 5,
-          "engagementScore": 2,
-          "tier": "fresh",
-          "rating": "R+",
-          "provenance": {
-            "playerKey": "player-s9z9u1",
-            "characterId": "char-devtest",
-            "locationId": "radiant_plateau_edge",
-            "day": 1,
-            "worldDay": null,
-            "hint": "the older Radiant keeper with a prism-loupe around her neck — a veteran of thirty years who's watching the accountabilit",
-            "why": "She is present in the scene and the player may address her directly; she needs a stable identity, name, and history to p"
-          },
-          "attentionHistory": [
-            {
-              "kind": "interact",
-              "day": 1
-            }
+        "energy": 60,
+        "tacticTags": [
+          "unmoving"
+        ]
+      },
+      "momentum": 0,
+      "opponentHealth": 5,
+      "opponentEnergy": 55,
+      "turn": {
+        "phase": "action",
+        "sel": {
+          "sense": [
+            4
           ],
-          "createdDay": 1,
-          "repaired": false,
-          "stubbed": false,
-          "romanceEligible": true,
-          "lastAttentionDay": 1,
-          "offscreen": [
-            {
-              "worldDay": 25,
-              "note": "Aldris drafted a short letter to the one colleague she trusts enough to ask, then held it unset for nine days — she cannot yet bring herself to commit the mark to writing, even in cautious terms, until she is more certain of what she is describing.",
-              "outcome": "stall"
-            },
-            {
-              "worldDay": 26,
-              "note": "Aldris spent the evening re-examining the mark under three different lens-stacks and made a quiet, indirect inquiry to retired Keeper Suven — not showing the mark yet, only asking whether he still reviews authentication requests, laying groundwork for the second pair of eyes she needs.",
-              "outcome": "progress"
-            },
-            {
-              "worldDay": 27,
-              "note": "Aldris quietly sent a short, carefully worded note — no specifics, no mention of the mark — to Keeper Fennow in the Tallow Quarter, whose eyes she has trusted for thirty years, asking if he might find an hour for her this week.",
-              "outcome": "progress"
-            },
-            {
-              "worldDay": 32,
-              "note": "Aldris quietly arranged a private viewing with Conservator Mette Orvyn — an old colleague she trusts above guild politics — who examined the mark under side-lit glass and said nothing for a long moment before giving a single, careful nod.",
-              "outcome": "progress"
-            }
-          ]
+          "action": [],
+          "bonus": []
         },
-        "image": "https://image.pollinations.ai/prompt/character%20portrait%2C%20Keeper%20Aldris%20Vael%2C%20Senior%20Marks-Keeper%2C%20Radiant%20Plateau%20Accountability%20Board.%20Late%20sixties%2C%20broad-shouldered%20and%20unhurried%20in%20her%20movements.%20Her%20keeper's%20coat%20is%20old%20Plateau%20indigo%2C%20faded%20at%20the%20cuffs%20to%20something%20closer%20to%20dawn-grey.%20The%20prism-loupe%20hangs%20on%20a%20worn%20brass%20chain%20%E2%80%94%20hexagonal%2C%20hand-ground%2C%20notched%20along%20one%20edge%20from%20a%20fall%20she%20never%20explains.%20Her%20eyes%20carry%20the%20faint%20prismatic%20afterimage%20that%20long-term%20refraction%20work%20leaves%20in%20veteran%20keepers%3A%20a%20rim%20of%20spectral%20colour%20at%20the%20iris%20edge%2C%20visible%20in%20direct%20light.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49313&nologo=true"
-      }
-    },
-    "location": {
-      "gen-object-object": {
-        "id": "gen-object-object",
-        "name": "[Object Object]",
-        "regionId": "valley",
-        "descriptionSeed": "A place the road led to — [Object Object]. The fiction brought you here before the map knew its name.",
-        "tags": [
-          "transitional"
-        ],
-        "connections": [
-          "radiant_plateau_edge"
-        ],
-        "_mintedAs": "transit",
-        "dangerLevel": 1,
-        "_gen": {
-          "type": "location",
-          "tier": "fresh",
-          "engagementScore": 2,
-          "birthWeight": 1,
-          "rating": null,
-          "attentionHistory": [
-            {
-              "kind": "revisit",
-              "day": 1
-            }
-          ],
-          "createdDay": 1,
-          "provenance": {
-            "locationId": "radiant_plateau_edge",
-            "day": null,
-            "hint": "transit"
-          },
-          "lastAttentionDay": 1
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
         },
-        "map": {
-          "x": 231.24568211039406,
-          "y": 250.19909545986675
+        "setupBonus": 12,
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with Prism Sight — success. You have the read (+12 to your action). The opening is there — you have earned a BONUS action. You read they: they favour ward. Pick a craft that answers it.",
+        "readPayoff": "You read they: they favour ward. Pick a craft that answers it."
+      },
+      "effects": [
+        {
+          "kind": "insight",
+          "label": "you have their measure",
+          "value": 3,
+          "roundsLeft": 2,
+          "applies": "always",
+          "side": "player",
+          "source": "Prism Sight",
+          "from": "player"
+        },
+        {
+          "kind": "ward",
+          "label": "warded",
+          "value": 4,
+          "roundsLeft": 2,
+          "applies": "whenAttacked",
+          "side": "opponent",
+          "source": "it holds its order",
+          "from": "opponent"
         }
+      ],
+      "pressure": {
+        "player": 0,
+        "opponent": 0
+      },
+      "spent": {
+        "player": false,
+        "opponent": false
+      },
+      "lastOppFn": "ward",
+      "lastOppReceipt": {
+        "roll": 0,
+        "chance": 18,
+        "rawChance": 18,
+        "margin": 18,
+        "degree": "success",
+        "breakdown": {
+          "contestMods": [
+            {
+              "label": "it holds — not fighting you, simply made to hold, and made well",
+              "value": 18
+            },
+            {
+              "label": "matchup (ward vs reveal)",
+              "value": 0
+            }
+          ],
+          "static": true
+        },
+        "matchup": 0,
+        "intensity": "standard",
+        "tier": "notable",
+        "function": "ward",
+        "name": "it holds its order",
+        "effectMods": [],
+        "woven": null,
+        "static": true
+      },
+      "lastReadWasSense": true,
+      "senseTierEarned": 3,
+      "senseResist": {
+        "value": 0,
+        "label": "their natural guardedness",
+        "from": "passive"
       }
-    },
-    "arc": {}
-  },
-  "gallery": [
-    {
-      "kind": "moment",
-      "prompt": "Late-afternoon gold light on a rooftop terrace in the Edge District: a woman with amber-grey eyes, top off, standing present and unhurried in the slow amber light, a man's hand traced down the line of",
-      "url": "https://image.pollinations.ai/prompt/Late-afternoon%20gold%20light%20on%20a%20rooftop%20terrace%20in%20the%20Edge%20District%3A%20a%20woman%20with%20amber-grey%20eyes%2C%20top%20off%2C%20standing%20present%20and%20unhurried%20in%20the%20slow%20amber%20light%2C%20a%20man's%20hand%20traced%20down%20the%20line%20of%20her%20ribs%2C%20both%20of%20them%20present%20in%20the%20moment%20without%20rush%20or%20management%2C%20the%20valley%20falling%20away%20be%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=91222&nologo=true",
-      "caption": "On the roof terrace above the Common Hall in the Edge District, late afternoon: Lira lets ",
-      "worldDay": 32,
-      "at": "2026-08-01T04:08:35.902Z"
-    },
-    {
-      "kind": "location",
-      "prompt": "[Object Object]",
-      "url": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true",
-      "caption": "[Object Object]",
-      "worldDay": 32,
-      "at": "2026-08-01T04:08:35.893Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "a person, character portrait, named Lira, woman, Apprentice optics-weaver, Edge District",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Lira%2C%20woman%2C%20Apprentice%20optics-weaver%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=44200&nologo=true",
-      "caption": "Lira — devoted",
-      "worldDay": 25,
-      "at": "2026-07-25T23:16:35.718Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "Test Hero (dev)",
-      "url": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
-      "caption": "Test Hero (dev) — harmonic",
-      "worldDay": 12,
-      "at": "2026-07-12T01:52:05.769Z"
-    },
-    {
-      "kind": "npc",
-      "prompt": "Keeper Aldris Vael",
-      "url": "https://image.pollinations.ai/prompt/character%20portrait%2C%20Keeper%20Aldris%20Vael%2C%20Senior%20Marks-Keeper%2C%20Radiant%20Plateau%20Accountability%20Board.%20Late%20sixties%2C%20broad-shouldered%20and%20unhurried%20in%20her%20movements.%20Her%20keeper's%20coat%20is%20old%20Plateau%20indigo%2C%20faded%20at%20the%20cuffs%20to%20something%20closer%20to%20dawn-grey.%20The%20prism-loupe%20hangs%20on%20a%20worn%20brass%20chain%20%E2%80%94%20hexagonal%2C%20hand-ground%2C%20notched%20along%20one%20edge%20from%20a%20fall%20she%20never%20explains.%20Her%20eyes%20carry%20the%20faint%20prismatic%20afterimage%20that%20long-term%20refraction%20work%20leaves%20in%20veteran%20keepers%3A%20a%20rim%20of%20spectral%20colour%20at%20the%20iris%20edge%2C%20visible%20in%20direct%20light.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49313&nologo=true",
-      "caption": "Keeper Aldris Vael",
-      "worldDay": 11,
-      "at": "2026-07-11T20:39:49.006Z"
-    }
-  ],
-  "practice": {
-    "schemaVersion": 1,
-    "uses": {
-      "boundary_stone": 5,
-      "echo_memory": 4,
-      "prism_sight": 10,
-      "sonic_resonance": 5,
-      "stillness_field": 1,
-      "drumline_stride": 3
-    },
-    "coActivations": {
-      "prism_sight+sonic_resonance": 2,
-      "boundary_stone+stillness_field": 1
-    },
-    "aspirations": [],
-    "lastUsed": {
-      "boundary_stone": 25,
-      "stillness_field": 25,
-      "drumline_stride": 25,
-      "sonic_resonance": 25,
-      "prism_sight": 26
     }
   },
-  "syncedAt": 1783952796030,
-  "customAbilities": {},
-  "companionBonds": {},
-  "precursorAccess": [],
-  "forkChoices": {},
-  "backfillVersion": 1,
-  "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
-  "teachers": {},
-  "regionsKnown": {
-    "valley": 48
+  "customEncounters": {
+    "re-enc_the_sealed_door": {
+      "schemaVersion": 1,
+      "id": "re-enc_the_sealed_door",
+      "type": "puzzle",
+      "name": "The Sealed Door",
+      "setup": "A door with no handle — a lattice of shifting marks that resolves only for the one who reads its order. It was made to keep something in, or out, and it has kept it a long time.",
+      "lethal": false,
+      "avoidable": true,
+      "fromRandom": true,
+      "tier": "notable",
+      "minDanger": 1,
+      "resist": 18,
+      "holdName": "it holds its order",
+      "hintTiers": [
+        "Read the marks — find the pattern under the shifting (KNOW/insight).",
+        "Work the order you found — set the marks right (CRAFT/know).",
+        "The last turn — commit the solution (KNOW)."
+      ],
+      "codexUnlocks": [],
+      "premise": "pattern_puzzle",
+      "stakes": "The door holds, and what it guards notices you tried."
+    }
   },
-  "foreclosed": [],
   "company": [],
-  "nativeGrantsVersion": 1,
-  "livingCurrentAccess": [],
-  "wildCurrentAccess": [],
-  "braidDiscount": 0,
-  "schools": {},
-  "locationAliases": {
-    "gen-center": "the_crossing",
-    "gen-stillwater-s-trouble": "the_old_warden_post"
-  },
   "_pinsInitialized": true,
+  "regionsKnown": {
+    "valley": 1
+  },
+  "opLossPending": false,
   "_applyFailures": null,
   "sessions": [
     {
       "id": "sess-1",
-      "startedAt": "2026-07-25T23:18:42.738Z",
-      "lastAt": "2026-07-25T23:50:08.317Z",
-      "startDay": 25,
-      "endDay": 25,
-      "beats": 15
-    },
-    {
-      "id": "sess-2",
-      "startedAt": "2026-07-26T02:52:53.973Z",
-      "lastAt": "2026-07-26T03:34:39.006Z",
-      "startDay": 26,
-      "endDay": 26,
-      "beats": 16
-    },
-    {
-      "id": "sess-3",
-      "startedAt": "2026-08-01T04:08:35.880Z",
-      "lastAt": "2026-08-01T04:08:35.880Z",
+      "startedAt": "2026-08-01T14:31:20.375Z",
+      "lastAt": "2026-08-01T14:31:20.375Z",
       "startDay": 32,
       "endDay": 32,
       "beats": 1
-    },
-    {
-      "id": "sess-4",
-      "startedAt": "2026-08-01T11:03:22.597Z",
-      "lastAt": "2026-08-01T11:05:44.724Z",
-      "startDay": 32,
-      "endDay": 32,
-      "beats": 3
     }
   ],
+  "establishedFacts": [],
   "peopleDisposition": {},
   "_pendingArrival": null,
-  "_opEmitted": {
-    "sceneSummary": 31,
-    "choices": 31,
-    "scene": 31,
-    "npcUpdates": 31,
-    "timeOps": 25,
-    "sceneEnded": 10,
-    "characterDeltas": 8,
-    "codexUpdates": 3,
-    "imagePrompt": 2,
-    "gambitApt": 3,
-    "discoveryEligible": 1,
-    "questUpdates": 1
-  },
-  "_opTurns": 31,
-  "_intentAsked": null,
-  "_opLedger": {
-    "offer": {
-      "applied": 0,
-      "rejected": 1,
-      "lastWhy": "rejected-shape"
+  "corrections": [
+    {
+      "kind": "abilityRank",
+      "id": "prism_sight",
+      "from": 2,
+      "to": 1,
+      "why": "Repair: prism_sight sits at rank 2 with 0/8 practice — rank has not been earned; correcting to rank 1.",
+      "worldDay": 32,
+      "at": "2026-08-01T14:31:20.376Z"
     }
-  },
-  "knownPlaces": [
-    "gen-object-object"
   ],
-  "locationImages": {
-    "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
-  }
+  "_opEmitted": {
+    "sceneSummary": 1,
+    "choices": 1,
+    "scene": 1,
+    "stateOps": 1,
+    "characterDeltas": 1,
+    "timeOps": 1
+  },
+  "_opTurns": 1
 }

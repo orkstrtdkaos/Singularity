@@ -97,3 +97,33 @@ whole encounter read as one thing instead of scattered controls.
    than in a fight). Grounded in the SNG-247 kind voice + the SNG-246 receipt formats.
 3. (Erik) Should the ⚙ Moves toggle still exist to COLLAPSE moves for space, or are they always shown when
    engaged? Lean: shown by default, collapsible via ⚙ (best of both).
+
+
+---
+
+# §4 — FOLLOW-ON (noted, not yet ticketed): the kind-native ACTION vocabulary (SNG-253 candidate)
+From Erik's Toll Keeper standoff screenshot (pre-252). 252 fixes the player-facing PRESENTATION — the one
+container, the receipt line (hp → "their resolve"), the player's own move hints. It does NOT fix two deeper
+leaks that make a standoff still PLAY like a fight underneath the label. Verified at origin:
+
+1. **The OPPONENT's move vocabulary is hardcoded fight-verbs.** `skill_battle.js:48` — the default archetype is
+   `[{function:"strike", name:"a hard strike"}, {function:"shield", name:"a raised guard"}]`. So a standoff
+   opponent "gathers to STRIKE" and raises a "GUARD shield" because those are the ONLY verbs opponentPolicy has.
+   There is NO per-kind verb mapping (confirmed empty). A standoff opponent should "press a point / hold the line
+   / counter"; a chase pursuer should "close / cut you off"; a puzzle has no opponent at all.
+2. **The round runs the fight's `battleRound` with a GUARD/strike family structure**, so even the player's moves
+   are combat-shaped underneath the composure label. The kind changes the METER LABEL (skill_battle currency:
+   "standoff your composure, a fight your blood") and the NARRATION ("NOBODY IS HURT"), but not the round-by-round
+   ACTION WORDS on either side.
+
+**Why NOT ticket it yet:** 252 is specced but NOT BUILT. Adding a third encounter spec ahead of it front-runs the
+queue. And 252's UI work will EXPOSE the exact seam — once the ribbon + receipt + move-hints land, the remaining
+fight-flavor will be precisely the opponent-verb + round-vocab layer, isolated and easy to see. So: build 252
+first, re-look at a standoff, and THEN scope SNG-253 against what actually remains (likely: a per-kind
+opponent-archetype verb set — a standoff's opponent gathers to "press", not "strike" — + a kind-native action
+label on the player's side, both mapping the SAME families to kind-appropriate WORDS without changing the
+symmetric engine). The engine staying symmetric is fine; the VOCABULARY on top of it must be kind-native.
+
+**Aevi owes, WHEN SNG-253 opens:** the per-kind opponent-verb sets (standoff/chase/fight/hazard) + the kind-native
+action words per family — the same authoring shape as the SNG-247 kind voice + the SNG-252 move hints, extended to
+the opponent's declared intent. Flagged here so it's not lost; parked behind 252 deliberately.

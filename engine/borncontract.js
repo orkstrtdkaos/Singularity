@@ -32,7 +32,19 @@
  *  a typo in the map must not silently start rejecting content. */
 const RANK = { DEGRADED: 1, EMPTY: 2, CRASH: 3 };
 const rankOf = s => RANK[String(s || "").toUpperCase()] || RANK.DEGRADED;
-const worstOf = list => list.reduce((w, x) => (rankOf(x.severity) > rankOf(w) ? String(x.severity).toUpperCase() : w), null);
+/** Worst severity in a list, or null when the list is EMPTY.
+ *
+ *  The "no findings" seed must rank BELOW every real severity, which is why it is a number here and
+ *  not `null` fed back through rankOf. It was: `reduce((w,x) => rankOf(x.severity) > rankOf(w) ? … : w, null)`
+ *  — and rankOf(null) falls back to DEGRADED(1), so a DEGRADED finding was never `> ` the seed and
+ *  `worst` stayed null. Every DEGRADED-only record therefore reported verdict "clean". The CI sweep hid
+ *  it by reading `missing`/`vague` directly, but the live item path branches on `verdict !== "clean"`,
+ *  so thin items were being waved through in exactly the case the gate exists for. */
+function worstOf(list) {
+  let best = 0, label = null;
+  for (const x of list) { const r = rankOf(x?.severity); if (r > best) { best = r; label = String(x.severity || "DEGRADED").toUpperCase(); } }
+  return label;
+}
 
 /** The map's presence test, kept identical to the CI sweep's: null/undefined, a blank string and an
  *  empty array are all ABSENT. `false` and `0` are PRESENT — they are real values a consumer reads
@@ -61,6 +73,28 @@ export function contractedTypes(contract) {
   return Object.keys(contract?.contentTypes || {});
 }
 
+/** Normalize a `concrete` block to a rule ARRAY.
+ *
+ *  This file has TWO authors with different instincts and both shapes are reasonable, so the gate
+ *  accepts both rather than making one of them wrong (CCODE-55: I wrote an array of rule objects;
+ *  Aevi wrote a field -> rule MAP for the arc contract, which is terser and reads better for simple
+ *  cases). The map form accepts either a bare rule name (`"pressure": "someNumeric"`) or an object
+ *  (`"tendency": {"rule": "enum", "source": "..."}`), and the field key becomes `field`.
+ *
+ *  This is not politeness — it is the reason the gate crashed. A `for…of` over her object threw
+ *  TypeError inside checkBorn, which generate() calls on every arc mint, so a contract edit alone
+ *  would have taken down generation in play. A contract is CONTENT and content varies; the gate has
+ *  to be total over it. */
+function concreteRules(spec) {
+  const c = spec?.concrete;
+  if (!c) return [];
+  if (Array.isArray(c)) return c;
+  if (typeof c !== "object") return [];
+  return Object.entries(c).map(([field, v]) =>
+    typeof v === "string" ? { id: `${field}-${v}`, rule: v, field }
+      : { id: v?.id || `${field}-${v?.rule || "concrete"}`, field, ...v });
+}
+
 // ---------- the concrete rules ----------
 // Each returns true when the value IS concrete. Every rule is machine-checkable and traceable to a real
 // read or a real clamp in HEAD — none of them encodes a judgement about prose. The semantic half of §3
@@ -77,6 +111,8 @@ function evalRule(rule, entity, spec, vocabs) {
   switch (String(rule.rule || "")) {
     case "nonEmptyArray":
       return Array.isArray(value) && value.length > 0;
+    case "nonEmptyString":
+      return typeof value === "string" && value.trim().length > 0;
     case "enum": {
       // Values may sit on the rule OR on the field spec (where they also document the field). Either way
       // this is a closed vocabulary the engine already resolves against.
@@ -139,17 +175,53 @@ export function checkBorn(entity, type, contract, opts = {}) {
   if (!spec || !entity || typeof entity !== "object") return out;
   const vocabs = opts.vocabs || {};
 
-  for (const f of (spec.topLevel || [])) {
-    if (f.optional) continue;                       // a field the contract marks optional is not a hole
-    if (hasValue(entity[f.field])) continue;
-    out.missing.push({ field: f.field, severity: String(f.severity || "DEGRADED").toUpperCase(), read: f.read || "", note: f.note || "" });
-  }
-  for (const r of (spec.concrete || [])) {
-    let ok = true;
-    try { ok = evalRule(r, entity, spec, vocabs); } catch { ok = true; }  // a broken rule never fails content
-    if (ok) continue;
-    out.vague.push({ id: r.id || r.rule || "concrete", field: r.field || null, severity: String(r.severity || "DEGRADED").toUpperCase(), why: r.why || "" });
-  }
+  // TOTAL over the contract, by construction. The contract is CONTENT — two authors edit it and its
+  // shapes vary — so nothing a contract file can contain may throw here. It once did: a `concrete`
+  // block authored as an object rather than an array threw TypeError out of the for…of, and
+  // generate() calls this on every mint, so a pure content edit would have taken down generation in
+  // play. Guarding only the rule EVALUATION was not enough; the iteration itself has to be safe.
+  try {
+    for (const f of (Array.isArray(spec.topLevel) ? spec.topLevel : [])) {
+      if (!f || f.optional) continue;               // a field the contract marks optional is not a hole
+      if (hasValue(entity[f.field])) continue;
+      out.missing.push({ field: f.field, severity: String(f.severity || "DEGRADED").toUpperCase(), read: f.read || "", note: f.note || "" });
+    }
+    // SNG-250 §3 SEMANTIC layer (Aevi's vagueMarkers, CCODE-55 OQ4). The machine rules above ask
+    // "is the value the right SHAPE"; this asks "is it just an abstraction" — "wants respect" vs
+    // "wants the forge her brother left". Doc-level `common` markers apply to every type; `byType`
+    // markers are per type+field. Always DEGRADED (a warn), per her note: never a hard reject alone.
+    //
+    // Deliberately CONSERVATIVE — it fires only when the value IS the abstraction, after stripping
+    // leading articles/infinitives, never on a value that merely CONTAINS one. "wants respect" is
+    // flagged; "wants the respect of the forge-guild she was cast out of" is not. Measured over the
+    // authored corpus before shipping: a semantic rule that flags real content is the worst kind,
+    // because it cannot be checked mechanically and so nobody can tell the false alarms from the real
+    // ones. Tightening the bar costs recall; a rule people learn to ignore costs everything.
+    const vm = contract?.vagueMarkers;
+    if (vm) {
+      const strip = s => String(s).toLowerCase().trim().replace(/^(to\s+|a\s+|an\s+|the\s+)+/, "").replace(/[.!?,;:]+$/, "").trim();
+      const byField = vm.byType?.[out.type] || vm.byType?.[spec.alsoKnownAs] || {};
+      const common = Array.isArray(vm.common) ? vm.common.map(strip) : [];
+      for (const [field, markers] of Object.entries(byField)) {
+        const raw = entity[field];
+        if (!hasValue(raw)) continue;                       // absence is the WHOLE half's business, not this
+        const list = Array.isArray(markers) ? markers.map(strip) : [];
+        const bad = new Set([...list, ...common]);
+        const values = (Array.isArray(raw) ? raw : [raw]).filter(v => typeof v === "string");
+        if (values.length && values.every(v => bad.has(strip(v)))) {
+          out.vague.push({ id: `vague-${field}`, field, severity: "DEGRADED",
+            why: `every value of "${field}" is a bare abstraction with no concrete anchor (SNG-250 §3 semantic layer, Aevi's vagueMarkers) — e.g. "${values[0]}"` });
+        }
+      }
+    }
+
+    for (const r of concreteRules(spec)) {
+      let ok = true;
+      try { ok = evalRule(r, entity, spec, vocabs); } catch { ok = true; }  // a broken rule never fails content
+      if (ok) continue;
+      out.vague.push({ id: r.id || r.rule || "concrete", field: r.field || null, severity: String(r.severity || "DEGRADED").toUpperCase(), why: r.why || "" });
+    }
+  } catch { /* a contract shape this engine cannot read gates NOTHING — never a crash, never a false reject */ }
 
   out.worst = worstOf([...out.missing, ...out.vague]);
   out.verdict = out.worst === "CRASH" ? "reject" : out.worst ? "thin" : "clean";

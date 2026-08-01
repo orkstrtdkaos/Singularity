@@ -650,6 +650,10 @@ for (const pack of PACKS) {
     for (const p of (rj("content/packs/core/manifest.json").provides?.items || [])) for (const it of (rj(`content/packs/core/${p}`).items || [])) if (it?.id) itemCatalog[it.id] = it;
     for (const p of (rj("content/packs/valley/manifest.json").provides?.items || [])) { const f = join(root, `content/packs/valley/${p}`); if (existsSync(f)) for (const it of (rj(`content/packs/valley/${p}`).items || [])) if (it?.id) itemCatalog[it.id] = it; }
     sweepType("item", Object.values(itemCatalog), CT.item);
+    // Aevi's arc contract (CCODE-55 OQ5) — arc is the one type that GENERATES today, so its authored
+    // corpus is the few-shot the generator imitates; holding it to the contract is holding generation
+    // to it one step upstream.
+    sweepType("arc", (rj("content/packs/valley/lore/greater_arcs.json").arcs || []), CT.arc);
     const abilityCatalog = [];
     for (const p of (rj("content/packs/core/manifest.json").provides?.abilities || [])) for (const a of (rj(`content/packs/core/${p}`).abilities || [])) if (a?.id) abilityCatalog.push(a);
     sweepType("skill", abilityCatalog, CT.skill);

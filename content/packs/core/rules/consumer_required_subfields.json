@@ -467,18 +467,11 @@
    ],
    "concrete": [
     {
-     "id": "pressure-numeric",
-     "rule": "someNumeric",
+     "id": "pressure-concrete",
+     "rule": "nonEmptyString",
      "field": "pressure",
-     "keys": [
-      "magnitude",
-      "value",
-      "strength",
-      "x",
-      "y"
-     ],
      "severity": "DEGRADED",
-     "why": "SNG-250 §3 ARC: 'the pressure is a real directional force'. The net-vector (SNG-203) needs a numeric push, not a mood word - an arc whose pressure is only 'something stirs' can't advance."
+     "why": "SNG-250 §3 ARC: 'the pressure is a real directional force with named consequences'. On the DATA as it exists, that force is NAMED, not numbered — so the bar is a real named pressure, and the 'is it a mood word' question is the semantic one, answered by vagueMarkers.byType.arc."
     },
     {
      "id": "hinges-present",
@@ -488,6 +481,7 @@
      "why": "SNG-250 §3 ARC: hingeNpcs are the handles the arc turns on. An arc with no hinge-npcs is an arc with nothing to grab - it drives nothing and the player can't engage it."
     }
    ],
+   "ccodeReconciled": "CCODE-55 (2026-08-01): `pressure-numeric` (someNumeric over magnitude/value/strength/x/y) -> `pressure-concrete` (nonEmptyString), reconciled against the real corpus — the same check every rule in this file gets, and the same false-positive class as the creature `threat` field. Arc pressure is a STRING of prose, never an object with numeric sub-keys: the 5 authored arcs carry 'slow-building, vast', 'the deep clock', 'building', 'medium', 'slow-building', and generate.js stubEntity mints 'medium'. someNumeric flagged 5 of 5 authored arcs. The INTENT behind the rule is right and is preserved — an arc whose pressure is only a mood cannot drive — but that is a judgement about WORDS, so it lives in vagueMarkers.byType.arc (where Aevi put it) rather than in a numeric shape-check the data can never satisfy. If the net-vector ever grows a numeric push field, the rule comes back keyed to THAT field. `hinges-present` kept exactly as authored: 0 of 5 authored arcs are empty and stubEntity mints `hingeNpcs: []`, so it flags precisely the stubbed arcs it should.",
    "note": "SNG-250 §3/§5 (Aevi 2026-08-01): the arc contract - arc generates today but had NO contract, so the born-whole gate didn't cover the one live generator (boot said so). Grounded in the real SNG-203 net-vector reads. A whole arc DRIVES (has a real pressure/tendency) and RESOLVES (ifIgnored/ifEngaged are its stakes)."
   }
  },

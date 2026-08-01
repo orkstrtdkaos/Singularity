@@ -8487,6 +8487,37 @@ await (async () => {
   check("SNG-250 §3 CONCRETE: a consumable whose effects are all ZERO is flagged — consumeItem destroys the stack for nothing",
     born({ id: "k", name: "Tea", kind: "consumable", description: "d", consumable: true, effects: { energy: 0 } }, "item").vague.some(v => v.id === "consumable-spends-to-something"));
 
+  // The severity fold. A DEGRADED-only report MUST read as "thin" — it once read as "clean" (the
+  // no-findings seed fell through rankOf to DEGRADED, so a DEGRADED finding was never worse than it),
+  // and the live item path branches on `verdict !== "clean"`, so thin items were waved through in
+  // exactly the case the gate exists for. The CI sweep hid it by reading missing/vague directly.
+  check("SNG-250 §4: a DEGRADED-only report is THIN, not clean (the severity fold must rank 'no findings' lowest)",
+    born({ id: "i", name: "Trinket", kind: "misc", description: "It hums.", consumable: false }, "item").verdict === "thin");
+  check("SNG-250 §4: a clean record still reports clean, and worst is null",
+    (() => { const r = born({ id: "i", name: "Axe", kind: "weapon", description: "d", consumable: false, bonusTags: ["strike"] }, "item"); return r.verdict === "clean" && r.worst === null; })());
+
+  // Two authors, two shapes. The `concrete` block is an ARRAY of rule objects for creature/item/skill
+  // and a field->rule MAP for arc; the gate normalizes both so neither author has to change style.
+  check("SNG-250 §4: a `concrete` block authored as an OBJECT MAP is honoured, not ignored or fatal",
+    (() => { const c2 = { contentTypes: { thing: { topLevel: [{ field: "id", severity: "CRASH" }], concrete: { tag: "nonEmptyArray", label: "nonEmptyString" } } } };
+      const r = checkBorn({ id: "t", tag: [], label: "" }, "thing", c2, {});
+      return r.vague.some(v => v.field === "tag") && r.vague.some(v => v.field === "label"); })(),
+    "the object form was silently skipped — arc's rules would gate nothing while appearing to");
+  check("SNG-250 §4: the real arc contract gates (arc was the one live generator with no contract)",
+    born({ id: "a", name: "A" }, "arc").gated && contractedTypes(contract).includes("arc"));
+
+  // Aevi's SEMANTIC layer (vagueMarkers) — the half no machine rule can decide.
+  check("SNG-250 §3 SEMANTIC: a bare abstraction is flagged — 'wants respect' is not an actable want",
+    born({ id: "x", name: "X", personality: {}, wants: ["respect"], fears: ["the unknown"], disposition: "d", appearance: "a" }, "npc")
+      .vague.map(v => v.id).includes("vague-wants"));
+  check("SNG-250 §3 SEMANTIC: a want with a concrete anchor passes — the marker must not fire on real content",
+    born({ id: "y", name: "Y", personality: {}, wants: ["the forge her brother left, which Silas holds"], fears: ["being undone by the grain of this place"], disposition: "d", appearance: "a" }, "npc")
+      .vague.length === 0);
+  check("SNG-250 §3 SEMANTIC: it fires on IS-the-abstraction, never on merely CONTAINS one",
+    born({ id: "z", name: "Z", personality: {}, wants: ["the respect of the guild that cast her out"], fears: ["f"], disposition: "d", appearance: "a" }, "npc")
+      .vague.length === 0,
+    "a value that merely contains a marker was flagged — this rule cannot be checked mechanically, so a false alarm is uncorrectable noise");
+
   // Robustness: the gate sits inside a turn that must never die (generate.js's standing invariant).
   check("SNG-250 §4: the gate NEVER throws — null/garbage entity, absent contract, garbled rule all degrade quietly",
     (() => { try {

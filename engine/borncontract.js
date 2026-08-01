@@ -167,6 +167,7 @@ function evalRule(rule, entity, spec, vocabs) {
  *    missing: [{field, severity, read, note}],      // §3 WHOLE failures
  *    vague:   [{id, field, severity, why}],         // §3 CONCRETE failures
  *    worst,                        // "CRASH" | "EMPTY" | "DEGRADED" | null
+ *    tier,                         // §7a "hard" | "soft" — from the contract's gateTier (default soft)
  *    verdict                       // "clean" | "thin" | "reject"
  *  } */
 export function checkBorn(entity, type, contract, opts = {}) {
@@ -223,8 +224,19 @@ export function checkBorn(entity, type, contract, opts = {}) {
     }
   } catch { /* a contract shape this engine cannot read gates NOTHING — never a crash, never a false reject */ }
 
+  // SNG-250 §7a (Erik's ruling, 2026-08-01): TIER THE GATE BY TYPE — "yes, but light". The gate already
+  // tiers by FIELD severity, so this is one more field read by the same logic, not a second mechanism:
+  //   HARD  (creature / skill / quest / encounter — hollowness BREAKS play): an EMPTY escalates to REJECT.
+  //         An un-fightable monster or a skill that resolves to nothing is worse than no monster and no
+  //         skill; better to mint nothing than to put a broken thing in the world.
+  //   SOFT  (item / npc / location / arc — thin DEGRADES but still plays): EMPTY stays repair/warn, so a
+  //         slightly thin item still reaches the player's hands rather than vanishing.
+  // CRASH always rejects and DEGRADED always warns, in both tiers — the tier only moves EMPTY. Unknown or
+  // absent gateTier means SOFT: a type whose tier nobody has set must not start silently rejecting.
+  out.tier = String(spec.gateTier || "soft").toLowerCase() === "hard" ? "hard" : "soft";
   out.worst = worstOf([...out.missing, ...out.vague]);
-  out.verdict = out.worst === "CRASH" ? "reject" : out.worst ? "thin" : "clean";
+  const rejects = out.worst === "CRASH" || (out.tier === "hard" && out.worst === "EMPTY");
+  out.verdict = rejects ? "reject" : out.worst ? "thin" : "clean";
   return out;
 }
 

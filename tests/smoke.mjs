@@ -8522,6 +8522,22 @@ await (async () => {
       .vague.length === 0,
     "a value that merely contains a marker was flagged — this rule cannot be checked mechanically, so a false alarm is uncorrectable noise");
 
+  // SNG-250 §7a (Erik): TIER THE GATE BY TYPE — "yes, but light". One more field read by the same logic.
+  check("SNG-250 §7a: a HARD type escalates an EMPTY to REJECT — an un-fightable monster is worse than no monster",
+    born({ id: "c", tier: "riffraff", class: "b", look: "l", danger: "d", pressures: ["HARM"] }, "creature").verdict === "reject",
+    "a name-less creature (EMPTY) was kept — hard-tier hollowness breaks play and must not ship");
+  check("SNG-250 §7a: a SOFT type keeps an EMPTY as THIN — a slightly thin item still reaches the player's hands",
+    born({ id: "i", name: "Axe", kind: "weapon", consumable: false, bonusTags: ["strike"], description: "" }, "item").verdict === "thin");
+  check("SNG-250 §7a: the tier comes from the CONTRACT, and an unset gateTier defaults to SOFT (never silently starts rejecting)",
+    born({}, "creature").tier === "hard" && born({}, "item").tier === "soft" &&
+    checkBorn({ id: "x" }, "thing", { contentTypes: { thing: { topLevel: [{ field: "n", severity: "EMPTY" }] } } }, {}).verdict === "thin");
+  check("SNG-250 §7a: CRASH still rejects and DEGRADED still warns in BOTH tiers — the tier only moves EMPTY",
+    born({ name: "x" }, "creature").verdict === "reject" &&
+    born({ id: "i", name: "Trinket", kind: "misc", description: "hums", consumable: false }, "item").verdict === "thin");
+  check("SNG-250 §7a: every contracted type declares a gateTier (an unset one silently plays soft)",
+    contractedTypes(contract).every(t => ["hard", "soft"].includes(String(contract.contentTypes[t].gateTier || "").toLowerCase())),
+    `no gateTier on: ${contractedTypes(contract).filter(t => !contract.contentTypes[t].gateTier).join(", ")}`);
+
   // Robustness: the gate sits inside a turn that must never die (generate.js's standing invariant).
   check("SNG-250 §4: the gate NEVER throws — null/garbage entity, absent contract, garbled rule all degrade quietly",
     (() => { try {
@@ -8608,6 +8624,21 @@ await (async () => {
       grown[0].id === "gen_beast_gen-thing" && grown[0].id !== re.bestiaryEncounters({ roster: [{ id: "gen-thing", name: "x", tier: "notable" }] })[0].id);
     check("SNG-250 §4 SEAM: no character / no generated creatures is a clean no-op (never throws into a turn)",
       re.generatedCreatureEncounters(null).length === 0 && re.generatedCreatureEncounters({}).length === 0);
+    // SNG-250 §7b (Erik): SHARED-ON-SIGHT, overriding the per-character build.
+    const canonMod = await import("../engine/canon.js");
+    check("SNG-250 §7b: a creature promotes to shared canon ON SIGHT — no tier climb, no weight floor",
+      canonMod.promotionCandidates({ generated: { creature: { a: { id: "a", name: "A", _gen: { type: "creature", tier: "fresh", engagementScore: 0, birthWeight: 1 } } } } }).length === 1,
+      "a fresh creature was not a candidate — the valley's monsters stay private until someone meets one repeatedly");
+    check("SNG-250 §7b: an NPC still CLIMBS (attention builds realness — the BATCH-9 §2 model is untouched)",
+      canonMod.promotionCandidates({ generated: { npc: { n: { id: "n", name: "N", _gen: { type: "npc", tier: "fresh", engagementScore: 0, birthWeight: 1 } } } } }).length === 0);
+    check("SNG-250 §7b: share-on-sight stays IDEMPOTENT — an already-promoted creature is not a candidate again",
+      canonMod.promotionCandidates({ generated: { creature: { a: { id: "a", name: "A", _gen: { type: "creature", promotedWorldDay: 3 } } } } }).length === 0);
+    check("SNG-250 §7b: shared creatures reach the pool through the SAME merge point, deduped against your own",
+      /sharedCreaturePool\.length \? generatedCreatureEncounters\(/.test(appSrc250) && /theirs\.filter\(e => !seen\.has\(e\.id\)\)/.test(appSrc250),
+      "your own creature returning through canon would appear twice in the pool");
+    check("SNG-250 §7b: the LIVE-SCENE GUARD — the shared set is snapshotted only when no encounter is active",
+      /if \(!activeEnc\(\)\) sharedCreaturePool = creatures;/.test(appSrc250),
+      "the pool could change underneath a fight the player is already in");
     check("SNG-250 §4 SEAM: EVERY app read of the encounter pool goes through the ONE merge point",
       !/CONTENT\.randomEncounters\?\.encounters/.test(appSrc250) &&
       !/eligibleEncountersFor\(CONTENT\.randomEncounters/.test(appSrc250) &&

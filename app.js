@@ -289,6 +289,9 @@ let _capturedErrors = [];        // runtime errors since load (for a one-click p
 let lastPlayerAction = null;     // the last choice the player took
 let sceneGenCount = 0;   // SNG-BATCH-9: generative-mint counter for this scene (the governor cap)
 let sharedCanonView = []; // SNG-BATCH-9 Phase 3: this viewer's rating-lensed slice of shared canon
+// SNG-250 §7b: creatures OTHER players have grown, snapshotted from shared canon at a safe seam (never
+// mid-encounter — see hydrateCanonIntoContent). One valley, one bestiary.
+let sharedCreaturePool = [];
 let sceneArtCount = 0;   // SNG-035: moment-art mints this scene (clamp ~1/scene)
 let mapShowKG = false;   // SNG-046: knowledge-overlay toggle on the world map
 let mapShowSub = false;  // SNG-082b: sub-place satellites toggle (off by default — the clean look)
@@ -2360,7 +2363,19 @@ let GENERATABLE_TYPES = new Set();
 function encounterTable() {
   const base = CONTENT.randomEncounters;
   if (!base) return base;
-  const grown = (() => { try { return generatedCreatureEncounters(character); } catch { return []; } })();
+  // Your OWN grown creatures are fightable immediately; creatures other players have made arrive through
+  // shared canon (SNG-250 §7b). Both go through generatedCreatureEncounters, so a grown monster draws its
+  // threat/weight/minDanger from BEAST_TIER exactly as an authored one does — one difficulty curve for the
+  // whole valley. Deduped by id: once your own creature comes back to you through canon it is still ONE
+  // entry in the pool, not two.
+  const grown = (() => {
+    try {
+      const mine = generatedCreatureEncounters(character);
+      const theirs = sharedCreaturePool.length ? generatedCreatureEncounters({ generated: { creature: Object.fromEntries(sharedCreaturePool.map(c => [c.id, c])) } }) : [];
+      const seen = new Set(mine.map(e => e.id));
+      return [...mine, ...theirs.filter(e => !seen.has(e.id))];
+    } catch { return []; }
+  })();
   return grown.length ? { ...base, encounters: [...(base.encounters || []), ...grown] } : base;
 }
 
@@ -2752,11 +2767,20 @@ async function maybeTick() {
  *  players into the live CONTENT maps (authored + this character's own local content always win a
  *  clash). The records are already lens-resolved (shown/adapted) — a filtered one never arrives. */
 function hydrateCanonIntoContent(view) {
+  const creatures = [];
   for (const { record } of view || []) {
     const type = record?._canon?.type;
     if (type === "location" && !CONTENT.locations[record.id]) CONTENT.locations[record.id] = record;
     else if (type === "npc" && !CONTENT.npcs[record.id]) CONTENT.npcs[record.id] = record;
+    else if (type === "creature" && record?.id) creatures.push(record);
   }
+  // SNG-250 §7b (Erik): a generated creature is SHARED-ON-SIGHT — one valley, one bestiary. The shared set
+  // is SNAPSHOTTED here rather than filtered at read time, and only while no encounter is live: that is the
+  // "live-scene guard". A creature another player made can therefore only enter your world at a safe seam
+  // (this runs in the world-tick, between scenes), never mid-encounter — the pool cannot change underneath
+  // a fight you are already in, and because it is a snapshot rather than a filter, an id already offered
+  // stays resolvable for the whole encounter.
+  if (!activeEnc()) sharedCreaturePool = creatures;
 }
 
 /** One-time beat when THIS character's grown entity earns its way into the shared world. */

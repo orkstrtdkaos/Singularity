@@ -63,13 +63,26 @@ export function ensureCanonStore(store, regionId = "valley") {
 
 // ---------- promotion (pure) ----------
 
+/** SNG-250 §7b (Erik, 2026-08-01): types that join the shared world ON SIGHT rather than earning their way
+ *  up the engagement ladder. A CREATURE is a fact about the country, not a relationship — if a thing like
+ *  that is out there, it is out there for everyone, and waiting for it to reach `nominated` would keep the
+ *  valley's monsters private until one player had met the same one repeatedly. NPCs and places still climb:
+ *  their realness is built by attention, which is the BATCH-9 §2 model and is untouched here. */
+export const SHARE_ON_SIGHT_TYPES = new Set(["creature"]);
+
 /** The local entities eligible to promote right now: nominated-tier, weight at/above the floor,
  *  and NOT already promoted (idempotent — `_gen.promotedWorldDay` marks a record as landed).
+ *  §7b: a share-on-sight type skips the TIER and WEIGHT tests only. It is still excluded once promoted, so
+ *  this stays idempotent, and it still contests through the same merge as every other promotion.
  *  Returns [{ record, weight }], strongest first. */
 export function promotionCandidates(character, { weightFloor = PROMOTE_WEIGHT_FLOOR } = {}) {
   const all = GEN_TYPES.flatMap(t => generatedRecords(character, t));
   return all
-    .filter(r => r?._gen?.tier === PROMOTE_TIER && r._gen.promotedWorldDay == null && effectiveWeight(r) >= weightFloor)
+    .filter(r => {
+      if (!r?._gen || typeof r._gen !== "object" || r._gen.promotedWorldDay != null) return false;
+      if (SHARE_ON_SIGHT_TYPES.has(r._gen.type)) return true;              // §7b
+      return r._gen.tier === PROMOTE_TIER && effectiveWeight(r) >= weightFloor;
+    })
     .map(r => ({ record: r, weight: effectiveWeight(r) }))
     .sort((a, b) => b.weight - a.weight);
 }

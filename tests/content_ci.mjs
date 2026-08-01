@@ -676,6 +676,32 @@ for (const pack of PACKS) {
       ok(`SNG-250 §3: companion bondGrants checked for a resolvable function family — ${grants.length} grants (${hollow.length} hollow)`);
     }
 
+    // CCODE-55 (the SNG-064 lesson, applied to the LOADER): a core rules file can be manifest-registered and
+    // read by NOTHING — it passes every existing check (the file exists, it is whitelisted) and is still dead
+    // content. It happened twice in one day: encounter_move_hints/encounter_ribbon_copy, and Aevi's
+    // earned_power_guidance, which was registered and would have clamped grants by the numbers while its whole
+    // voice layer never reached the GM. Every registered rule must be named in a state.js loadRule call.
+    {
+      // A RATCHET, not a wall. 12 rules files were already registered-but-unloaded when this check was
+      // written — several read like DESIGN references (challenge_design, gambit_design, skill_utility_audit)
+      // that may not belong in provides.rules at all, and that is Aevi's call to make, not a build failure to
+      // impose. So the existing set is baselined and warned; anything NEW fails. The list may only go DOWN.
+      const KNOWN_UNLOADED = new Set(["challenge_design", "coliseum_grid", "combination_recipes", "cross_axis_modifiers",
+        "emergence_recipes", "gambit_design", "martial_paths", "peoples_of_kind", "pole_signatures", "power_sources",
+        "quest_structure", "skill_utility_audit"]);
+      const stateSrc = readFileSync(join(root, "engine/state.js"), "utf8");
+      const unread = (rj("content/packs/core/manifest.json").provides?.rules || [])
+        .map(p => p.replace(/^rules\//, "").replace(/\.json$/, ""))
+        // resolution is the fatal base rules (fetched by path, not loadRule); the rest must be loadRule'd by name
+        .filter(stem => stem !== "resolution" && !stateSrc.includes(`loadRule("${stem}"`));
+      const fresh = unread.filter(s => !KNOWN_UNLOADED.has(s));
+      const fixed = [...KNOWN_UNLOADED].filter(s => !unread.includes(s));
+      if (unread.length) warnShape(`[loader] ${unread.length} registered core rule(s) are loaded by NOTHING (baselined): ${unread.join(", ")} — Aevi: are these runtime rules, or design docs that should leave provides.rules?`);
+      check("CCODE-55: no NEWLY registered core rule is left unloaded (registered ≠ read)",
+        fresh.length === 0, `registered but never loaded: ${fresh.join(", ")} — the file exists, is whitelisted, and reaches nothing (earned_power_guidance was exactly this: the numbers would clamp while its whole voice layer never reached the GM)`);
+      if (fixed.length) ok(`CCODE-55: ${fixed.length} previously-unloaded rule(s) now reach the engine — shrink KNOWN_UNLOADED: ${fixed.join(", ")}`);
+    }
+
     // CCODE-55 (the SNG-064 lesson, applied to the contract itself): a type can be DECLARED in the map and
     // never actually swept — the contract would read as enforced while nothing checked it. Every contracted
     // type must be wired to a real corpus here, or this fails and names the one that isn't.

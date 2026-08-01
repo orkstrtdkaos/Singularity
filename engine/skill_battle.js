@@ -379,6 +379,28 @@ export function degradeIfSpent(decl, energy, sb, steps, rules) {
  *  margins; the higher shifts momentum by the difference; both pay energy (attrition). The engine computes
  *  BOTH full rolls — the returned `opponent` receipt is complete and identical regardless of who's watching;
  *  the fog is applied later by senseOpponent over this true state. Pure; rng injectable. */
+/** SNG-248: what RESISTS being read. Their concealing craft when they have one (its tier is real opposition),
+ *  else a flat passive off their sharpest attribute — a foe who is not hiding is easier to read, which is right.
+ *  Returns a NAMED value so it can sit on a breakdown like every other term. Pure. */
+export function senseResistOf(oppSheet = {}, sb) {
+  const cfg = sb?.senseStep || {};
+  const hideFns = cfg.concealFunctions || ["conceal", "deceive"];
+  const hide = (oppSheet.skills || []).find(x => hideFns.includes(x.function));
+  if (hide) return { value: Math.round((hide.tier || 1) * (cfg.concealTierWeight ?? 6)), label: `they are hiding it (${hide.name || hide.function})`, from: "craft" };
+  const best = Math.max(0, ...Object.values(oppSheet.attributes || {}).map(Number).filter(Number.isFinite));
+  return { value: Math.round(best * (cfg.passiveAttributeWeight ?? 3)), label: "their natural guardedness", from: "passive" };
+}
+
+/** SNG-248 (Erik's ladder): the sense TIER is earned by the read's DEGREE — fail 0, partial 1, success 2, and a
+ *  crit (or a decisive margin) 3. Pure; every band is a content dial. */
+export function senseTierFromDegree(degree, margin, sb) {
+  const cfg = sb?.senseStep?.tierByDegree || {};
+  if (degree === "crit_success") return cfg.crit ?? 3;
+  if (degree === "success") return (margin >= (cfg.decisiveMargin ?? 25)) ? (cfg.crit ?? 3) : (cfg.success ?? 2);
+  if (degree === "partial") return cfg.partial ?? 1;
+  return cfg.failure ?? 0;
+}
+
 export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state = {}, rules, sb, steps, rng = Math.random,
   // CCODE-45: a TURN is sense -> action -> bonus. Both options DEFAULT to today's behaviour, so every existing
   // caller is untouched: phase "action" resolves exactly as before, and tickEffects true ticks per exchange.
@@ -473,8 +495,46 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // CCODE-39: energy no longer ENDS a fight. Running dry means your crafts stop answering (a spent side can only
   // make simple, costless moves — steel and wit), not that you lose. Yielding while spent is the player's call,
   // and an energy item is a real answer to it. The opponent breaking is still the engine's own end condition.
+  // SNG-248 (Erik: "the fight ends even though the strike didn't seem to land… I can't seem to actually
+  // wound/damage an opponent"). He was right, and it was structural: CCODE-38 replaced momentum-as-death with
+  // PRESSURE and never put DAMAGE back, so opponentHealth was set at startEncounter and never moved again. A
+  // skill battle had no wounds and no way to kill — it was a two-tick pressure race that reported "they yield"
+  // whether or not anything landed.
+  //
+  // Damage is now what a WON exchange with a HARM verb does. Pressure stays what it became — being driven back —
+  // so the two tracks answer different questions: pressure is position, health is injury. Only the side that WON
+  // the exchange deals it, only with a harming verb, and it scales with the margin (a clean hit hurts more than a
+  // scraping one) — so a turned-aside blow does nothing, which is what Erik watched fail to happen.
+  const dcfg = sb.damage || {};
+  const harmFns = new Set(dcfg.harmFunctions || sb.persistentEffects?.attackFunctions || ["strike", "break"]);
+  let opponentHealth = state.opponentHealth ?? oppSheet.health ?? null;
+  let damage = null;
+  // A kind whose LOSING costs no health deals no DAMAGE either — the same ruling, read once. Caught by the
+  // SNG-247 tests the moment damage was added: without this a standoff drew blood, which is exactly what
+  // `losingCostsHealth: false` was written to forbid. A contest of wills cannot wound you from either side.
+  const kindDealsDamage = kcfg.outcomes?.losingCostsHealth !== false;
+  if (!senseStep && roundWinner && dcfg.enabled !== false && kindDealsDamage) {
+    const winDecl = roundWinner === "player" ? playerDecl : oppDecl;
+    const winRoll = roundWinner === "player" ? p : o;
+    const loseRoll = roundWinner === "player" ? o : p;
+    if (harmFns.has(winDecl.function)) {
+      const marginGap = Math.max(0, (winRoll.margin || 0) - (loseRoll.margin || 0));
+      const raw = (dcfg.base ?? 1)
+        + (winDecl.tier || 1) * (dcfg.perTier ?? 0.5)
+        + marginGap * (dcfg.perMarginPoint ?? 0.06);
+      const hit = Math.max(dcfg.minHit ?? 1, Math.round(raw));
+      damage = { side: roundWinner === "player" ? "opponent" : "player", amount: hit, verb: winDecl.function, by: winDecl.name || winDecl.function };
+      if (roundWinner === "player" && opponentHealth != null) opponentHealth = Math.max(0, opponentHealth - hit);
+      // the PLAYER's health is the app's to apply (checkIncapacitation owns that exit) — reported, never written here
+    }
+  }
+
   let resolved = null;
-  if (pressure.opponent >= (pcfg.breakAtPressure ?? 3)) resolved = "player";                       // they finally break
+  // Health reaching zero ENDS it — a foe can be put down. Whether that reads as FELL or YIELDED is the caller's
+  // call (encounters.js already owns `def.opponent.yieldAt`), so the engine only reports that they are finished.
+  // This is the exit Erik was looking for and could not reach: "test out what happens when I kill an opponent."
+  if (opponentHealth != null && opponentHealth <= 0) resolved = "player";
+  else if (pressure.opponent >= (pcfg.breakAtPressure ?? 3)) resolved = "player";                  // or they finally break
   // SNG-247 Tier 2b: a kind where LOSING COSTS NO HEALTH needs its own player-break condition, or the player can
   // never lose it — a chase would run forever because being run down isn't damage. A FIGHT deliberately has none:
   // health owns the player's exit there (CCODE-39), and adding one would take that back from them.
@@ -483,14 +543,26 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // does an empty energy pool.
 
   // CCODE-45: a sense step doesn't advance the ROUND counter either — the whole turn is one round.
-  const newState = { ...state, round: (state.round || 0) + (senseStep ? 0 : 1), momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, status: resolved ? "resolved" : "active" };
-  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, landed: [landedP, landedW, landedO].filter(Boolean),
+  const newState = { ...state, round: (state.round || 0) + (senseStep ? 0 : 1), momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, opponentHealth, status: resolved ? "resolved" : "active" };
+  const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback } };
   // What the SENSE step bought: a named bonus on the coming action (signed toward whoever read better), and —
   // on a crit read — the bonus step. "It's the payoff." Both are content dials.
   if (phase === "sense") {
     const scale = turnCfg.setupBonusScale ?? 0.3, cap = turnCfg.setupBonusMax ?? 12;
-    out.setupBonus = clamp(Math.round((p.margin - o.margin) * scale), -cap, cap);
+    // SNG-248 (Erik, decisive): "a Read/Sense should NOT depend on out-sensing them. It should depend on your
+    // sense skill and all modifiers vs their relevant attribute/conceal skill and modifiers."
+    // It DID depend on out-sensing them: `o.margin` is whatever the opponent declared that step — usually a
+    // STRIKE — so reading a foe who was swinging meant beating their swing with your eyes. The read is now
+    // opposed by what actually resists BEING READ: their concealing craft if they have one, else a flat passive
+    // off their sharpest attribute. A foe who isn't hiding is simply easier to read, which is right.
+    const resist = senseResistOf(oppSheet, sb);
+    out.senseResist = resist;
+    out.setupBonus = clamp(Math.round((p.margin - resist.value) * scale), -cap, cap);
+    // Erik's ladder: "a failed roll should drop the sense tier that round to 0. a partial should give you tier 1,
+    // success 2, and a large success margin and/or a crit success tier 3." What you LEARN is earned by the roll
+    // now, not by a standing character stat — a read is a thing you DO, not a thing you have.
+    out.senseTier = senseTierFromDegree(p.degree, p.margin - resist.value, sb);
     const grants = turnCfg.bonusOnDegrees || ["crit_success"];
     out.bonusEarned = { player: grants.includes(p.degree), opponent: grants.includes(o.degree) };
   }

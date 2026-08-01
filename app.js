@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.326";
+const APP_VERSION = "1.8.327";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8780,7 +8780,9 @@ function skillBattlePanel() {
   // opened and a read bought the player nothing they could SEE. A read also buys the scouting tier.
   const oppReceipt = st.lastOppReceipt || ((sbLastRound?.opponent && st.round > 1) ? sbLastRound.opponent : null);
   const readScout = scout || !!st.lastReadWasSense;
-  const fog = oppReceipt ? senseOpponent(character, oppReceipt, CONTENT.rules, sb, { scouting: readScout, buyTier: readScout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods }) : null;
+  // SNG-248 (Erik's ladder): a read that was actually ROLLED sets the tier from its degree — st.senseTierEarned.
+  // Absent a rolled read we fall back to the standing stat, so an unread fight still shows what you can see.
+  const fog = oppReceipt ? senseOpponent(character, oppReceipt, CONTENT.rules, sb, { scouting: readScout, buyTier: readScout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods, earnedTier: st.senseTierEarned }) : null;
   const skills = playerBattleSkills();
   window._sbSkills = skills; // handler lookup (data-sbskill = index into this flat list)
   // CCODE-45: which STEP of the turn we are selecting for, and what is picked so far (2 = a braid).
@@ -8804,7 +8806,17 @@ function skillBattlePanel() {
   // — it should only allow skills that can sense." The SENSE step shows only sense-capable crafts + the generic
   // attribute reads; every other step shows the full set.
   const senseFns = CONTENT.skillBattle?.engine?.senseStep?.senseFunctions || ["reveal", "foresee", "track"];
-  const stepSkills = turn.phase === "sense" ? skills.filter(x => senseFns.includes(x.function)) : skills;
+  // SNG-248 (Erik: "the skills you can use seem to be unfiltered... why does hunter's strike show up??? it should
+  // be mainly about movement, concealing, binding, sensing"). The step filter only knew about the SENSE step, so
+  // every kind offered the whole kit on its action step — a knife-fighting craft as a way to win a footrace. Each
+  // kind now names the verbs that can move ITS meter (content: kinds.<kind>.moveFunctions). Absent an entry the
+  // full kit shows, so a fight is unchanged. Never a hard lock: the free-text field below still takes anything —
+  // the filter shapes the SHORTCUTS, and the GM resolves whatever you actually describe.
+  const kindNow = encounterKind(def) || "fight";
+  const kindMoves = CONTENT.skillBattle?.engine?.kinds?.[kindNow]?.moveFunctions || null;
+  const stepSkills = turn.phase === "sense"
+    ? skills.filter(x => senseFns.includes(x.function))
+    : (kindMoves ? skills.filter(x => x.itemMove || kindMoves.includes(x.function)) : skills);
   // CCODE-46: PRICE each move — an estimated chance to win the exchange, with the confidence itself fogged.
   // Reading them buys precision; holding a counter-craft to what they are doing buys it too.
   const priceOf = sbPriceMove(skills, fog, st, sb);
@@ -9017,6 +9029,10 @@ async function sbResolveSense() {
   // persist what the read bought, so the fog — and every move's PRICE — survives the re-render
   character.activeEncounter.state.lastOppReceipt = rr.opponent || null;
   character.activeEncounter.state.lastReadWasSense = true;
+  // SNG-248 (Erik's ladder): what the READ EARNED — fail 0, partial 1, success 2, crit/decisive 3. Persisted so
+  // the fog reads the ROLL, not a standing stat, and so a botched read genuinely leaves you blinder this turn.
+  character.activeEncounter.state.senseTierEarned = rr.senseTier ?? null;
+  character.activeEncounter.state.senseResist = rr.senseResist || null;
   sbLogRound(enc, decl, rr, character.activeEncounter.state.momentum ?? 0, true);
   saveCharacter(character);
   // GM call #1 — the sense beat. Needs a key; without one the mechanical line above still tells the story.
@@ -9070,6 +9086,7 @@ async function sbExecuteTurn() {
     sbLastRound = { opponent: r.opponent };
     character.activeEncounter.state.lastOppReceipt = r.opponent || null;
     character.activeEncounter.state.lastReadWasSense = false;
+    character.activeEncounter.state.senseTierEarned = null;   // SNG-248: a read is SPENT when the turn resolves
     sbLastRoundReceipt = sbRoundReceipt(r, d, (r.state?.momentum ?? 0) - 0, false);
     sbLogRound(enc, d, r, enc.state.momentum ?? 0, false);
     beats.push(`${label}: ${sbFightBeat(r, d, 0, false)}`);

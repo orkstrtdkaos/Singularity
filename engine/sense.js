@@ -51,10 +51,17 @@ export function senseAction(ctx, trueChance) {
  *  viewer's tier earns (per sb.senseVisibility): tier 0 outcome-only, tier 3 the full SNG-106 breakdown.
  *  THE ENGINE ALREADY KNOWS THE WHOLE ROUND — this gates DISPLAY only; it never fabricates a number.
  *  `oppRound` is the `opponent` receipt from battleRound. Pure. */
-export function senseOpponent(viewer, oppRound, rules, sb, { scouting = false, buyTier = 0, aptitudeMods = {} } = {}) {
+export function senseOpponent(viewer, oppRound, rules, sb, { scouting = false, buyTier = 0, aptitudeMods = {}, earnedTier = null } = {}) {
   const maxTier = (rules?.senseTiers || []).reduce((m, t) => Math.max(m, t.tier), 0);
-  let tier = senseTier({ character: viewer, action: { planned: scouting }, location: null, rules, aptitudeMods });
-  tier = Math.max(0, Math.min(maxTier, tier + (buyTier || 0)));
+  // SNG-248 (Erik's ladder): when a READ was actually rolled, its DEGREE sets what you learned — fail 0, partial
+  // 1, success 2, crit/decisive 3. It REPLACES the stat-derived tier rather than adding to it: a read is a thing
+  // you DO, and a botched one should leave you blinder than not looking — which a floor would hide.
+  let tier;
+  if (Number.isFinite(earnedTier)) tier = Math.max(0, Math.min(maxTier, earnedTier));
+  else {
+    tier = senseTier({ character: viewer, action: { planned: scouting }, location: null, rules, aptitudeMods });
+    tier = Math.max(0, Math.min(maxTier, tier + (buyTier || 0)));
+  }
   const vis = (sb?.senseVisibility && sb.senseVisibility[String(tier)]) || { reveals: ["outcome"] };
   const reveals = new Set(vis.reveals || ["outcome"]);
   const revealed = {};

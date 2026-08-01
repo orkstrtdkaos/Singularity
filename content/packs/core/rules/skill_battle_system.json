@@ -54,11 +54,23 @@
       "giveNote": "each thing you understand about it is give taken out of it; it does not tire, it YIELDS — the door was always going to open for whoever read it right",
       "degreeBands": { "crit": 40, "success": 15, "partial": 0, "failure": -15 }
     },
+    "damage": {
+      "note": "SNG-248 (Erik: 'the fight ends even though the strike didn't seem to land... I can't seem to actually wound/damage an opponent'). CCODE-38 replaced momentum-as-death with PRESSURE and never put damage back, so opponentHealth was set at startEncounter and never moved again - a skill battle had no wounds and no kill. Damage is what a WON exchange with a HARM verb does. The two tracks answer different questions: PRESSURE is position (being driven back), HEALTH is injury. Only the winner of the exchange deals it, only with a harming verb, and it scales with the MARGIN GAP - so a turned-aside blow does nothing.",
+      "enabled": true,
+      "harmFunctions": ["strike", "break"],
+      "base": 1,
+      "perTier": 0.5,
+      "perMarginPoint": 0.06,
+      "minHit": 1,
+      "tuning": "A synthesized foe has health 3-8 (3 + threat/15). At base 1 + t3*0.5 + a 20-margin gap*0.06 that is a ~4-point hit, so a clean exchange or two puts down a riffraff and a regional takes real work. Raise perMarginPoint to reward decisive blows more; raise base to make every landed hit matter."
+    },
     "kinds": {
       "note": "SNG-247 Tier 1: THE EXIT RULE, PER BOUNDED-THING KIND. The contest core (battleRound) is symmetric and kind-agnostic - two sheets, two rolls, a margin delta driving a meter. The ONE fight-shaped thing left in it was what a PRESSURE TICK costs each side and what it is called. That now lives here, keyed by encounterKind(def) - the SAME function the frame uses to pick its border colour, so the exit rule and the colour can never disagree about what kind of thing you are in. An absent kind falls back to the fight's numbers, so a kind works before anyone authors it.",
       "dialDiscipline": "The fight deliberately authors NO playerLoss/opponentLoss here - its tick costs keep flowing from momentum.pressure (playerHealthLoss / opponentEnergyLoss / breakAtPressure) so those COMBAT_DIALS knobs stay live. An explicit playerLoss/opponentLoss on a kind SHADOWS those dials for that kind - use it only where the cost is a genuinely different currency (a chase takes wind, not blood; a standoff takes composure and cannot hurt you at all).",
       "lossShape": "playerLoss / opponentLoss: { health, energy } - what ONE pressure tick takes from that side. pressure: {} - per-kind overrides of momentum.pressure (breakAtPressure, resetTo).",
       "puzzle": {
+        "moveFunctions": ["reveal", "foresee", "track", "break", "shape", "restore", "empower", "sustain", "ward"],
+        "moveNote": "SNG-248: a sealed thing yields to KNOWING and MAKING - reveal/foresee to read the order, break/shape to work it. Striking a door is in the free-text field if you want it, not a shortcut.",
         "note": "SNG-247 Tier 3. A puzzle is UNOPPOSED - the sealed thing has no turn - so its other side is a STATIC ANTAGONIST: it resists at one number and never chooses. That is honest rather than a fudge, because a fixed margin is exactly what a DC is. Per Erik's per-kind weighting the SENSE step is the whole game here: winning the read buys a layer of understanding, which is what keeps the authored hint ladder alive inside the contest instead of replacing it. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
         "playerLoss": { "health": 0, "energy": 8 },
         "opponentLoss": { "health": 0, "energy": 25 },
@@ -76,6 +88,8 @@
         }
       },
       "chase": {
+        "moveFunctions": ["move", "conceal", "bind", "hinder", "reveal", "foresee", "track", "empower", "sustain", "restore", "shield"],
+        "moveNote": "SNG-248 (Erik): a chase is won with LEGS and GROUND, not blades - move/conceal to break away, bind/hinder to slow them, the senses to read the route. A strike does not close a gap, so it is not offered as a shortcut here. The free-text field still takes anything.",
         "note": "SNG-247 Tier 2b. A chase is an OPPOSED contest - the same person who was swinging at you is running you down, with their own wind and their own choices - so it runs the one contest engine. What differs is the CURRENCY: ground is bought with WIND, not blood. Short by design: breakAtPressure 1, because a chase that grinds is a fight with extra steps. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-4.",
         "playerLoss": { "health": 0, "energy": 12 },
         "opponentLoss": { "health": 0, "energy": 18 },
@@ -94,6 +108,8 @@
         "openQuestion": "AEVI: a chase is DIRECTIONALLY AMBIGUOUS and the frame copy currently assumes you are the PURSUER ('Give up the pursuit'), while every chase the engine actually mints today is one you are FLEEING. Either two flavors (chase_fleeing / chase_pursuing) or copy that reads both ways."
         },
       "standoff": {
+        "moveFunctions": ["command", "deceive", "reveal", "foresee", "resist", "ward", "shield", "sustain", "empower", "bind", "restore"],
+        "moveNote": "SNG-248: a standoff is won on WILL - command/deceive to press, resist/ward to hold, the senses to read them. Drawing a blade is not a standoff move; it is the MORPH into a fight.",
         "note": "SNG-247 Tier 2a. A standoff is structurally a DUEL - two wills, two rolls, a meter between them - so it runs the one contest engine. What differs is the CURRENCY: pressing a point costs composure, never blood. CCode DEFAULTS, awaiting AEVI-247-AUTHOR items 1-3.",
         "playerLoss": { "health": 0, "energy": 6 },
         "opponentLoss": { "health": 0, "energy": 20 },
@@ -178,6 +194,12 @@
       "maxItemMovesShown": 6
     },
     "senseStep": {
+      "concealFunctions": ["conceal", "deceive"],
+      "concealTierWeight": 6,
+      "passiveAttributeWeight": 3,
+      "senseOppositionNote": "SNG-248 (Erik): a read is opposed by what resists BEING READ - their concealing craft, else a flat passive off their sharpest attribute - NOT by whatever they happened to declare. Reading a foe who is swinging should not mean beating their swing with your eyes.",
+      "tierByDegree": { "failure": 0, "partial": 1, "success": 2, "crit": 3, "decisiveMargin": 25 },
+      "tierByDegreeNote": "SNG-248 (Erik's ladder): what you LEARN is earned by the roll, not by a standing stat. Craft NAMES come in at tier 1; tier 3 additionally earns GM-narrated advice on the read.",
       "note": "CCODE-46 (Erik): 'During the sense action, you shouldn’t be able to use clearly attacks during the sense round — it should only allow skills that can sense, or an attribute based generic type sense.' senseFunctions gates the craft list for the SENSE step. genericSenses are the always-available attribute reads — you can always LOOK, even with no sensing craft — and the attribute you look WITH changes what you find: 'a wits sense could find a solution that a Reason based sense might miss.'",
       "senseFunctions": ["reveal", "foresee", "track"],
       "genericSenses": [
@@ -269,8 +291,8 @@
     "senseVisibility": {
       "note": "your senseTier vs the opponent gates what their round shows. Fog is presentation over TRUE state — the engine computes both full rolls; this table only hides display. NEVER fabricate a number to fill fog: show less, never false.",
       "0": { "reveals": ["outcome"], "label": "blind — you fight by feel; only the aftermath" },
-      "1": { "reveals": ["outcome", "intent"], "label": "a read — their intent category, enough to counter-pick" },
-      "2": { "reveals": ["outcome", "intent", "band"], "label": "a measure — intent plus a band on their roll" },
+      "1": { "reveals": ["outcome", "intent", "skill"], "label": "a read — their intent AND the craft's name, enough to counter-pick" },
+      "2": { "reveals": ["outcome", "intent", "skill", "band"], "label": "a measure — the craft, plus a band on their roll" },
       "3": { "reveals": ["outcome", "intent", "band", "skill", "intensity", "breakdown"], "label": "near-precise — their skill, intensity, and full roll breakdown" }
     },
     "revealActionBuysTier": 1,

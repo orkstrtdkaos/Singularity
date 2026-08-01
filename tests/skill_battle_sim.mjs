@@ -117,8 +117,34 @@ check("SNG-098 B: yielding ends the contest via the classic lifecycle outcome", 
 // CCODE-38: a decisive swing no longer ENDS the fight — it is PRESSURE. Sustained domination does end it: once the
 // opponent has been driven back breakAtPressure times they break, and THAT maps to the classic duel outcome.
 const crush = skillBattleRound({ ...sbState, momentum: 9 }, duelDef, { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" }, { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
-check("CCODE-38: a single decisive swing PRESSURES rather than ends (Erik: a meter must not decide a fight)",
-  !crush.ended && crush.pressureEvent?.side === "opponent");
+// SNG-248 kept CCODE-38's ruling and added a SECOND, different one. Erik's rule was that a METER must not decide a
+// fight — that still holds exactly. What ends a fight now is HEALTH at zero, which is not a meter; it is the wound
+// track he could not previously reach. So this check is made specific: with blood left, a decisive swing still
+// only PRESSURES. The kill is asserted separately, right below.
+const hardyDef = { ...duelDef, opponent: { ...duelDef.opponent, health: 40 } };
+const crushHardy = skillBattleRound({ ...sbState, momentum: 9, opponentHealth: 40 }, hardyDef,
+  { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" },
+  { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
+check("CCODE-38: a decisive swing PRESSURES rather than ends, while the foe still has blood (a meter must not decide a fight)",
+  !crushHardy.ended && crushHardy.pressureEvent?.side === "opponent");
+check("SNG-248 (Erik: 'I can't seem to actually wound/damage an opponent'): that same swing now WOUNDS — and says so",
+  crushHardy.damage?.side === "opponent" && crushHardy.damage.amount > 0
+  && crushHardy.state.opponentHealth < 40 && /LANDS/.test(crushHardy.events.join(" ")));
+check("SNG-248 (the exit he could not reach): health at zero ENDS it — an opponent can be put DOWN, not just driven off",
+  (() => {
+    const frail = { ...duelDef, opponent: { ...duelDef.opponent, health: 1, yieldAt: 0 } };
+    const out = skillBattleRound({ ...sbState, momentum: 9, opponentHealth: 1 }, frail,
+      { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" },
+      { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
+    return out.ended && out.outcome === "opponent_fell" && out.state.opponentHealth === 0;
+  })());
+check("SNG-248: a TURNED-ASIDE blow does no damage — only the winner of the exchange wounds",
+  (() => {
+    const out = skillBattleRound({ ...sbState, opponentHealth: 40 }, hardyDef,
+      { function: "strike", tier: 1, attribute: "practical", intensity: "conserve", name: "a poke" },
+      { character: char, rules, sb, steps, rng: seqRng([0.98, 0.02]) });
+    return out.damage?.side !== "opponent" && out.state.opponentHealth === 40;
+  })());
 check("CCODE-38: sustained domination DOES end it — the opponent breaks, mapped to a classic duel outcome",
   (() => {
     const breakAt = sb.momentum.pressure.breakAtPressure;

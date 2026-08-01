@@ -122,7 +122,9 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // encounter state (they persist). This hand-built state object is the seam where they would silently drop.
     // CCODE-35/38: `effects` and `pressure` must ride BOTH ways — into the round (they modify this roll / carry the
     // count) and back out onto the encounter state. This hand-built state object is the seam where they'd drop.
-    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 } }, rules, sb, steps, rng,
+    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy,
+      // SNG-248: health rides BOTH ways, like effects and pressure before it — the same seam, the fourth time.
+      opponentHealth: state.opponentHealth ?? def.opponent?.health ?? null, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 } }, rules, sb, steps, rng,
     phase, tickEffects, setupBonus,
     // SNG-247: DERIVED here, never passed in. This wrapper has now silently eaten a forwarded option twice
     // (CCODE-35 `effects`, CCODE-45 `phase`) — a value the wrapper computes from what it already holds cannot be
@@ -135,7 +137,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const senseOnly = phase === "sense" && sb?.turn?.senseMovesMomentum !== true; // CCODE-45: a sense is part of the turn, not a round of its own
   // CCODE-48 (Erik): a ROUND is a TURN, not a step. Sense never advanced it; now action/bonus only advance it on
   // the step that ENDS the turn (the same signal that ticks effects), so "round 3" means three turns, not six steps.
-  const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
+  const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, opponentHealth: r.state.opponentHealth ?? state.opponentHealth, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
   // SNG-247 Tier 3 (Erik's per-kind weighting: "a puzzle's sense step is the whole game — insight IS the meter"):
   // on a sealed thing, WINNING THE READ buys a layer of understanding. That is what makes a puzzle play differently
   // from a fight on the same engine rather than being a reskin of it — and it keeps the hint ladder the authored
@@ -163,7 +165,13 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const say = (t, fb) => (t ? String(t).replace(/\{them\}/g, def.opponent.name) : fb);
   if (r.resolved === "player") {
     s.status = "ended"; ended = true;
-    outcome = (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell";
+    // SNG-248: a foe that is DOWN has fallen; one driven off by pressure while still standing has yielded. The old
+    // line asked only "does this def have a yieldAt", so every contest reported "yields" — including one you won by
+    // putting them down, which is why Erik could not find the kill.
+    const hpLeft = s.opponentHealth;
+    outcome = (hpLeft != null && hpLeft <= 0 && (def.opponent.yieldAt ?? 0) <= 0) ? "opponent_fell"
+      : (hpLeft != null && hpLeft <= 0) ? "opponent_yielded"
+      : (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell";
     events.push(say(outcome === "opponent_yielded" ? kOut.opponentYields : kOut.opponentBreaks,
       `You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`));
   }
@@ -176,6 +184,13 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   else events.push(r.roundWinner === "player" ? "You press the advantage." : r.roundWinner === "opponent" ? "You give ground." : "Neither gains an inch.");
   // CCODE-39: running dry is a STATE the player must be told about — their crafts stopped answering, and yielding
   // (or an energy item) is now a CHOICE in front of them rather than an ending the engine imposed.
+  // SNG-248: a landed blow is EVENT-VISIBLE. A hit the player cannot see is the same failure as a modifier they
+  // cannot see — "the strike didn't seem to land" was true, and also unreported when it did.
+  if (r.damage) {
+    const hpLeft = s.opponentHealth, of = def.opponent?.health;
+    if (r.damage.side === "opponent") events.push(`Your ${r.damage.by} LANDS — ${def.opponent.name} takes ${r.damage.amount}${of ? ` (${Math.max(0, hpLeft)}/${of} left)` : ""}.`);
+    else { deltas.health -= r.damage.amount; events.push(`${def.opponent.name}'s ${r.damage.by} LANDS on you — ${r.damage.amount} taken.`); }
+  }
   if (r.degraded?.player) events.push("You are spent — your crafts will not answer. Steel and wit still will.");
   if (r.degraded?.opponent) events.push(`${def.opponent.name} is spent — swinging on will alone now.`);
   // CCODE-38: a PRESSURE event — the meter filled, so someone was driven back hard. Real attrition, not an ending.
@@ -195,7 +210,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     }
   }
   s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);
-  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent, spent: r.spent, degraded: r.degraded, setupBonus: r.setupBonus, bonusEarned: r.bonusEarned };
+  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner, effects: r.effects || [], landed: r.landed || [], pressure: r.pressure, pressureEvent: r.pressureEvent, spent: r.spent, degraded: r.degraded, setupBonus: r.setupBonus, bonusEarned: r.bonusEarned, senseTier: r.senseTier, senseResist: r.senseResist, damage: r.damage };
 }
 
 /** Player incapacitation check (app calls after applying deltas). */

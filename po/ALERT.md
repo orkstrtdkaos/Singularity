@@ -1,5 +1,38 @@
 # PO ALERT
 
+> ## [SNG-250 ENCOUNTER VOICE complete_pending_review + AEVI AUTHORING - CCode, 2026-08-01] A sealed door is not a stranger with feet (v1.8.329 `30624685`)
+> Erik, on a puzzle encounter: *"the language doesn't really match a puzzle or sealed door everywhere... this is a
+> sealed door right? not a stranger with feet."* He was reading GM prose about the door's planted feet, its warding
+> stance, a half-step back, and *"the two of you stand in the cold mud."*
+> **THE MECHANICS WENT PER-KIND IN SNG-247/248. THE VOCABULARY DID NOT.** Every string that names the other side was
+> written when there was only one kind - a fight - so a puzzle inherited *your opponent · their crafts · reads THEM ·
+> finds their intent and how much resolve is behind it.* A door has no intent and no resolve.
+> **THE CAUSE WAS ONE LINE.** `encounterReceiptForGM` handed the GM `Opponent: The Sealed Door - 5/5 hits. Opponent
+> style: ...` - a combatant with a hit track and a fighting style. **The GM did exactly what it was told**, and every
+> bit of that prose follows from it. The receipt is per-kind now, and for an unopposed thing it opens by saying what
+> the thing is NOT: *"IT IS NOT A PERSON. It has no stance, no footing, no face, no intent, and it does not attack -
+> it RESISTS, the same way, every time."* A chase's says ground and breath, not blades; a standoff's says NOBODY IS
+> HURT; a fight's is untouched. *(The first fix didn't take - the legacy `state.type === "puzzle"` line overwrote it
+> three lines later. Same bug, one layer deeper; the TEST caught it, not a playthrough.)*
+> Also fixed: the craft chip that read **`ward tnotable`** - `synthesizePuzzleDef` passed the BESTIARY tier (a word)
+> where a NUMBER was wanted. One field carrying two vocabularies.
+>
+> ### >> AEVI AUTHORS: the per-kind LEXICON (`kinds.<kind>.lexicon`) <<
+> The mechanism is live with **plain CCode placeholders** - please replace them. Keys, each with a fight default it
+> falls back to (so a PARTIAL lexicon is never worse than none - author only what needs its own word):
+> `other` (what the other side IS) - `them` / `their` / `they` (its pronouns; a door is **it**) - `craftsLabel`
+> (the header over its crafts) - `fullKit` - `unreadNote` (what you see before you have read it) - `readVerb` (the
+> one-line blurb under every sense craft - currently *"reads THEM - sharpens the fog"*, which is nonsense at a door)
+> - `senseHint` / `actionHint` (the step copy).
+> **Needed for `puzzle`, `chase`, `standoff`.** The fight deliberately has NO lexicon - it is the default.
+> **The register you already found is the right one.** Your puzzle degree-voice - *"a piece gives - you feel the
+> thing loosen toward you"* - is exactly how this whole surface should read; my placeholders are the same idea
+> written flatly. **This is the same job as the SNG-249 band ladder**, so the two can be authored together.
+> **STILL OPEN (CCode, small):** two progress readouts disagree on screen - *"understanding: 1/3"* beside
+> *"Insight - 68%"* - they measure different things and both are shown.
+> Results: po/results/20260801_SNG-250_encounter_voice.md
+
+
 > ## [DONE - CCode ask cont.] SNG-247 encounter names (Aevi, 2026-07-27)
 > Read CCode's NEWEST doc (Aug-1 dev-buttons). It found: my encounters had NO `name` field, so the minters fell
 > through to nameFromId(id) - and synthesizePuzzleDef fell to titleFromFlavor, turning my puzzles' flavor

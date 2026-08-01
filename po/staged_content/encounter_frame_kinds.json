@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "encounter_frame_kinds",
  "kind": "content",
- "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths. | SNG-238/237 (Aevi 2026-07-27): expanded from 2 seed exemplars to a real LIBRARY - standoffs (grieving-warden/toll-of-names/rival-claim - the non-combat exchange with stakes, the stationary-talker SNG-237 Fix C needs) + puzzles (stopped-mechanism/warded-cache/flooded-works), all grounded in the Valley's real fiction (precursor works, wards, named prices, contested claims). Matches the enc_the_sealed_door shape exactly. | SNG-247 chase-direction fix (Aevi 2026-07-27): chase copy was pursuer-assumed ('run it down') but chaseFromFight mints a FLEEING chase (the common case) - added byDirection.fleeing/pursuing so the frame reads right whether you're running or hunting.",
+ "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths. | SNG-238/237 (Aevi 2026-07-27): expanded from 2 seed exemplars to a real LIBRARY - standoffs (grieving-warden/toll-of-names/rival-claim - the non-combat exchange with stakes, the stationary-talker SNG-237 Fix C needs) + puzzles (stopped-mechanism/warded-cache/flooded-works), all grounded in the Valley's real fiction (precursor works, wards, named prices, contested claims). Matches the enc_the_sealed_door shape exactly. | SNG-247 chase-direction fix (Aevi 2026-07-27): chase copy was pursuer-assumed ('run it down') but chaseFromFight mints a FLEEING chase (the common case) - added byDirection.fleeing/pursuing so the frame reads right whether you're running or hunting. | SNG-247 names (Aevi 2026-07-27): authored explicit name + opponent.name on all 8 exemplars so they carry AUTHORED identity - CCode's nameFromId was a fallback for my missing names (a puzzle was rendering as 'Hard Ground' via titleFromFlavor). Now entry.name is real, not derived.",
  "frameKinds": {
   "fight": {
    "icon": "⚔",
@@ -117,7 +117,11 @@
     }
    ],
    "trivializeNote": "A high KNOW/reveal craft lays this SIMPLE puzzle out whole (trivial, with the §8 acknowledgment). A HARDER sealed door raises resistDC and resists even the reading — opposed.",
-   "failStakes": "The door holds, and what it guards notices you tried."
+   "failStakes": "The door holds, and what it guards notices you tried.",
+   "name": "The Sealed Door",
+   "opponent": {
+    "name": "the door that reads you back"
+   }
   },
   {
    "id": "enc_the_toll_keeper",
@@ -142,7 +146,11 @@
     }
    ],
    "morphNote": "A failed standoff can MORPH into a FIGHT (§6b) — press too hard and the toll-keeper draws. A SWAY-collapse (a commanding presence craft) can end it in one beat, opposed against their resolve.",
-   "failStakes": "They prevail — you pay, you turn back, or it becomes a fight on their terms."
+   "failStakes": "They prevail — you pay, you turn back, or it becomes a fight on their terms.",
+   "name": "The Toll Keeper",
+   "opponent": {
+    "name": "the keeper of the toll"
+   }
   },
   {
    "id": "enc_the_grieving_warden",
@@ -167,7 +175,11 @@
     }
    ],
    "trivializeNote": "A high BOND/witness craft can meet the grief whole in one exchange (trivial, §8 acknowledged). A warden hardened by betrayal raises resistDC — the resolve resists even a true offer.",
-   "failStakes": "They do not move. The road stays shut, or you take it by force and wear that."
+   "failStakes": "They do not move. The road stays shut, or you take it by force and wear that.",
+   "name": "The Grieving Warden",
+   "opponent": {
+    "name": "the warden who will not move"
+   }
   },
   {
    "id": "enc_the_toll_of_names",
@@ -188,7 +200,11 @@
     }
    ],
    "trivializeNote": "A character carrying a genuine hard truth already surfaced can pay it plainly (trivial). A keeper who wants a SPECIFIC name raises resistDC.",
-   "failStakes": "No true name, no crossing. You go around — longer, and colder."
+   "failStakes": "No true name, no crossing. You go around — longer, and colder.",
+   "name": "The Toll of Names",
+   "opponent": {
+    "name": "the keeper of the crossing"
+   }
   },
   {
    "id": "enc_the_rival_claim",
@@ -213,7 +229,11 @@
     }
    ],
    "trivializeNote": "Overwhelming standing or an ironclad right can settle this in one move (trivial). A rival with a BETTER claim raises resistDC — you may have to split.",
-   "failStakes": "The claim goes to them. You walk away with nothing but the knowledge of how you lost it."
+   "failStakes": "The claim goes to them. You walk away with nothing but the knowledge of how you lost it.",
+   "name": "The Rival Claim",
+   "opponent": {
+    "name": "the one who got there first"
+   }
   },
   {
    "id": "enc_the_stopped_mechanism",
@@ -238,7 +258,11 @@
     }
    ],
    "trivializeNote": "A high KNOW/precursor-attuned craft reads the whole order at a glance (trivial, §8). A mechanism guarding something raises resistDC and can strike when misread.",
-   "failStakes": "It stays stopped, or wakes wrong — and a woken-wrong precursor thing is its own trouble."
+   "failStakes": "It stays stopped, or wakes wrong — and a woken-wrong precursor thing is its own trouble.",
+   "name": "The Stopped Mechanism",
+   "opponent": {
+    "name": "the halted engine"
+   }
   },
   {
    "id": "enc_the_warded_cache",
@@ -259,7 +283,11 @@
     }
    ],
    "trivializeNote": "A character who shares the maker's craft/tradition reads the logic immediately (trivial). A ward set against outsiders raises resistDC.",
-   "failStakes": "The cache stays shut. What's inside stays the maker's, and you leave empty."
+   "failStakes": "The cache stays shut. What's inside stays the maker's, and you leave empty.",
+   "name": "The Warded Cache",
+   "opponent": {
+    "name": "the maker's ward"
+   }
   },
   {
    "id": "enc_the_flooded_works",
@@ -284,7 +312,11 @@
     }
    ],
    "trivializeNote": "A high KNOW/water-craft reads the whole system fast (trivial). A works actively failing raises resistDC and the rising water is a real clock.",
-   "failStakes": "The water wins — you're forced back, soaked and set back, and the works stay drowned."
+   "failStakes": "The water wins — you're forced back, soaked and set back, and the works stay drowned.",
+   "name": "The Flooded Works",
+   "opponent": {
+    "name": "the drowning system"
+   }
   }
  ]
 }

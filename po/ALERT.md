@@ -1,5 +1,39 @@
 # PO ALERT
 
+> ## [SNG-246 FIX A complete_pending_review - CCode, 2026-07-31] Engine-enforced fight entry (v1.8.317 `c72223fd`)
+> Erik ruled **(c) with (b) as the fallback**. Built exactly that. This closes the OLDEST open ticket in the combat
+> line - and the root of his very first complaint at CCODE-33: *"one action ended it in pure prose."*
+> **THE GAP:** a committed killing blow resolved as ONE prose roll, because entry into a structured fight depended
+> on the GM remembering rule 18.
+> **(c) THE ENGINE RESOLVES THE TARGET THE PLAYER CHOSE.** New pure `harmTargetFor(action, ctx)` in `intent.js`:
+> an explicit `targetNpcId`/`targetName` on the choice, else a **registered** npc whose name or alias appears in the
+> choice label or the player's own words (the same matching `personDestination` uses, so both agree on what a person
+> is). When it resolves, `onChoice` calls `escalateToFight`: the engine **MINTS** a duel against that named person
+> (threat from the registry when known, else this place's danger) and **ENTERS it as a real skill battle**. No
+> prose-only fight, no waiting on the GM.
+> **(b) WHEN NO TARGET RESOLVES, IT REFUSES TO INVENT ONE.** `harmTargetFor` returns **null** rather than guessing -
+> a guessed opponent is the same class as `seam_travelTo_is_place`, where a PERSON got minted as a travel
+> destination. On null the engine sets `pendingFightFraming` and the next GM turn carries a HARD directive: *"the
+> player has COMMITTED to violence... you MUST present it as a bounded FIGHT and emit `newEncounter` for the person
+> they are attacking (name them from what you have already narrated)."* The engine still decides a fight must be
+> structured; it only borrows the GM's knowledge of who is standing there.
+> **THE GATE CAUGHT MY WIRING, AGAIN.** The wiring audit failed the first run - *"fightFramingDetail: consumed but
+> NEVER provided - can never land."* I had threaded the key into `gm.js` and `app.js` but not registered it in
+> `gm_registry.js`, so it would have been **silently dead**. Now registered with its full `reachedBy`. **That is the
+> third inert path the audit has caught this session** (the others: `phaseDenied` with no consumer, and the
+> `skillBattleRound` option drop). It is worth its weight.
+> 5 new checks; the load-bearing one is that an unresolvable target returns NULL - the property the whole design
+> rests on. npm test exit 0 (19 seams, rawProseCaps 63). Boot verified on never-used port 8431, no console errors.
+> **SNG-246 IS NOW FULLY CLOSED** - A, B, C and D all shipped. **Fix C** was completed across the session rather than
+> as one ticket: `frameExits` surfaces defeat/flee/fail, CCODE-42 gave the finish condition honest situational odds,
+> and CCODE-39 made energy a state with real exits. The only remnant is the fight->chase morph being *visible*,
+> which is cosmetic and small.
+> **WHAT IS LEFT, HONESTLY:** nothing structural. The whole combat line has now been built without Erik ever playing
+> it with a live API key - the two GM calls, the whole-fight narration and the Haiku quick beat are all still
+> theoretical. **The next useful thing is his combat log, not more code.**
+> Results: po/results/20260731_SNG-246-FixA_engine_enforced_fight_entry.md
+
+
 > ## [CCODE-48 complete_pending_review + SNG-246 Fix A NEEDS A RULING - CCode, 2026-07-31] The debris cleaned (v1.8.316 `13e29e46`)
 > Erik: *"clean all that up and do the fixes."* Three cleanups done. All three were **"advertised but inert"** - the
 > worst class, because the content AND the tests both claimed the feature existed.

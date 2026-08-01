@@ -676,6 +676,25 @@ for (const pack of PACKS) {
       ok(`SNG-250 §3: companion bondGrants checked for a resolvable function family — ${grants.length} grants (${hollow.length} hollow)`);
     }
 
+    // ORPHANED CONTENT, one level down (SNG-253/254, twice in two days). A rules file can have a nested block
+    // the engine reads (`skill_battle_system.engine.*`) and content authored to the SAME key at the TOP level,
+    // where nothing looks. It passes every existing check — the file loads, the JSON is valid, the content is
+    // right there — and the feature is dead. Aevi hit it with the SNG-254 matchup edges (caught and fixed) and
+    // again with the SNG-253 kind archetypes (found by the tradition matrix showing standoff opponents still
+    // striking). A key that appears BOTH at the top level and inside the block the engine reads is the
+    // signature, and it is cheap to detect.
+    {
+      // Documentary keys are EXPECTED at both levels — a doc has a `note` and so does its engine block, and
+      // that is annotation, not orphaned content. Only keys that carry DATA can be dead.
+      const ANNOTATION = new Set(["note", "_notes", "schemaVersion", "id", "kind", "redesignNote", "whenItTriggers"]);
+      const sbsDoc = rj("content/packs/core/rules/skill_battle_system.json");
+      const inner = Object.keys(sbsDoc.engine || {});
+      const shadowed = Object.keys(sbsDoc).filter(k => k !== "engine" && !ANNOTATION.has(k) && inner.includes(k));
+      check("CCODE-55: no rules key is ORPHANED at the top level while the engine reads it under .engine",
+        shadowed.length === 0,
+        `${shadowed.join(", ")} exists BOTH at the top level and inside .engine — the engine reads .engine, so the top-level copy is dead content that looks authored`);
+    }
+
     // CCODE-55 (the SNG-064 lesson, applied to the LOADER): a core rules file can be manifest-registered and
     // read by NOTHING — it passes every existing check (the file exists, it is whitelisted) and is still dead
     // content. It happened twice in one day: encounter_move_hints/encounter_ribbon_copy, and Aevi's

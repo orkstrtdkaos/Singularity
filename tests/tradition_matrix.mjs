@@ -56,6 +56,28 @@ const LEVELS = [5, 12, 20];
 const BANDS = [{ name: "riffraff", threat: 22 }, { name: "notable", threat: 38 }, { name: "regional", threat: 55 }, { name: "epic", threat: 78 }];
 const TRIALS = 40;
 
+// SITUATIONS — Erik: "the marchers probably have an edge in physical fighting, but who wins the skill
+// challenges, the puzzles, the world arcs?" A straight fight is ONE axis and the least interesting one.
+// Each kind now selects a different opponent VOCABULARY (SNG-253), so a tradition's verbs are answered
+// differently: a standoff opponent presses and holds, a chase closes and cuts off, and a puzzle/hazard is
+// STATIC — it does not choose, it resists the same way every round (Aevi's ruling, SNG-247).
+// puzzle and hazard both run the STATIC antagonist and are therefore MECHANICALLY IDENTICAL by design —
+// Aevi's SNG-247 ruling is that neither chooses, so neither gets a verb set. Listing both would print the
+// same row twice and imply a distinction the engine does not make; `static` stands for the pair.
+const SITUATIONS = ["fight", "standoff", "chase", "static"];
+const SIT_KIND = { fight: "fight", standoff: "standoff", chase: "chase", static: "puzzle" };
+
+// PLAYSTYLES — Erik: "they don't all need to be identical." The uniform sheet was deliberate when the only
+// question was "does the KIT matter"; it is wrong once the question is "who is good at WHAT", because a
+// craft's `attribute` is half of its roll. Each build leans one attribute and is thin elsewhere, so a
+// tradition whose crafts key off reason reads differently from one that keys off presence.
+const PLAYSTYLES = [
+  { name: "warrior", lead: "physical", note: "strength/agility — the marcher hypothesis" },
+  { name: "scholar", lead: "mental", note: "reason/insight — reads and solves" },
+  { name: "envoy", lead: "social", note: "presence/rapport — presses and persuades" },
+  { name: "maker", lead: "practical", note: "craft/wits — builds and improvises" }
+];
+
 /** A synthetic character of this tradition at this level. Attributes are UNIFORM across traditions on
  *  purpose — the variable under test is the KIT, so any difference in outcome is the craft, not a sheet I
  *  tuned. Capacity comes from the real skill_capacity table; the kit is the highest-tier abilities the
@@ -75,24 +97,32 @@ function buildKit(tradition, level) {
     ...a, function: fn, intensity: "standard", tier: a.levelReq || 1, name: `${a.name} (${fn})`
   }))).filter(m => m.function);
 }
-function sheetFor(level) {
-  const attr = Math.max(2, Math.min(8, 2 + Math.floor(level / 4)));
+function sheetFor(level, style) {
+  const hi = Math.max(3, Math.min(9, 3 + Math.floor(level / 3)));   // the attribute they built
+  const lo = Math.max(2, Math.min(5, 2 + Math.floor(level / 8)));   // everything else, thin
+  const at = k => (k === style.lead ? hi : lo);
+  const sub = { physical: ["strength", "agility"], mental: ["reason", "insight"], social: ["presence", "rapport"], practical: ["craft", "wits"] };
+  const subAttributes = {};
+  for (const [attr, keys] of Object.entries(sub)) for (const k of keys) subAttributes[k] = at(attr);
   return { name: "the player", level,
-    attributes: { physical: attr, mental: attr, social: attr, practical: attr },
-    subAttributes: { strength: attr, agility: attr, reason: attr, insight: attr, presence: attr, rapport: attr, craft: attr, wits: attr },
-    energy: 60 + level * 4, health: 30 + level * 2, maxHealth: 30 + level * 2 };
+    attributes: { physical: at("physical"), mental: at("mental"), social: at("social"), practical: at("practical") },
+    subAttributes, energy: 60 + level * 4, health: 30 + level * 2, maxHealth: 30 + level * 2 };
 }
 
 console.log("TRADITION MATRIX — synthetic players from every tradition, across levels and threat bands\n");
 console.log(`      ${UNDER_TEST.length} traditions under test (+${CONTROL} as the control) × levels ${LEVELS.join("/")} × ${BANDS.length} bands × ${TRIALS} trials\n`);
 
 // ---------- run the matrix ----------
-const results = {};   // tradition -> level -> band -> winRate
+// Two passes, because they answer different questions and mixing them muddies both:
+//   BANDS      — the level/threat curve, on the best-fit playstyle (is anyone unplayable?)
+//   SITUATIONS — tradition × situation × playstyle at one level (who is good at WHAT?)
+const results = {};
 for (const trad of [...UNDER_TEST, CONTROL]) {
-  results[trad] = {};
+  results[trad] = { bands: {}, sit: {} };
   for (const level of LEVELS) {
-    const kit = buildKit(trad, level), sheet = sheetFor(level);
-    results[trad][level] = { kitSize: kit.length, families: [...new Set(kit.flatMap(a => familiesOfAbility(a, FN_INDEX)))], bands: {} };
+    const kit = buildKit(trad, level);
+    const sheet = sheetFor(level, PLAYSTYLES[0]);
+    results[trad].bands[level] = { kitSize: kit.length, families: [...new Set(kit.flatMap(a => familiesOfAbility(a, FN_INDEX)))], bands: {} };
     for (const band of BANDS) {
       let won = 0;
       for (let i = 0; i < TRIALS; i++) {
@@ -100,56 +130,90 @@ for (const trad of [...UNDER_TEST, CONTROL]) {
           rng: mulberry32(0x7ABC ^ (trad.length * 7919) ^ (level * 104729) ^ (band.threat * 31) ^ i) });
         if (f.won) won++;
       }
-      results[trad][level].bands[band.name] = pct(won, TRIALS);
+      results[trad].bands[level].bands[band.name] = pct(won, TRIALS);
+    }
+  }
+  // SITUATIONS at L12 vs an EPIC foe. First pass used a regional foe and every tradition's best build
+  // won ~100% of everything — a ceiling effect that made the table say nothing. Separation needs a foe that
+  // can actually beat you.
+  const kit12 = buildKit(trad, 12);
+  for (const kind of SITUATIONS) {
+    results[trad].sit[kind] = {};
+    for (const style of PLAYSTYLES) {
+      const sheet = sheetFor(12, style);
+      let won = 0;
+      for (let i = 0; i < TRIALS; i++) {
+        const f = oneFight({ threat: 78, kind: SIT_KIND[kind], moves: kit12, sheet, sb, steps, rules,
+          rng: mulberry32(0x51D ^ (trad.length * 31337) ^ (kind.length * 7919) ^ (style.name.length * 104729) ^ i) });
+        if (f.won) won++;
+      }
+      results[trad].sit[kind][style.name] = pct(won, TRIALS);
     }
   }
 }
 
 // ---------- THE REPORT (the deliverable — Erik and Aevi rule on these numbers, not this file) ----------
-const overall = t => LEVELS.flatMap(l => BANDS.map(b => results[t][l].bands[b.name])).reduce((a, x) => a + x, 0) / (LEVELS.length * BANDS.length);
+const overall = t => LEVELS.flatMap(l => BANDS.map(b => results[t].bands[l].bands[b.name])).reduce((a, x) => a + x, 0) / (LEVELS.length * BANDS.length);
 const ranked = [...UNDER_TEST].sort((a, b) => overall(b) - overall(a));
 
+console.log("      THE LEVEL/THREAT CURVE (warrior build)");
 console.log("      TRADITION            L5  riff/note/reg/epic   L12 riff/note/reg/epic   L20 riff/note/reg/epic   mean");
-for (const t of ranked) {
-  const row = LEVELS.map(l => BANDS.map(b => String(results[t][l].bands[b.name]).padStart(3)).join("/")).join("   ");
+for (const t of ranked.slice(0, 5).concat(["…"]).concat(ranked.slice(-3))) {
+  if (t === "…") { console.log("      …"); continue; }
+  const row = LEVELS.map(l => BANDS.map(b => String(results[t].bands[l].bands[b.name]).padStart(3)).join("/")).join("   ");
   console.log(`      ${t.padEnd(20)} ${row}   ${overall(t).toFixed(1)}%`);
 }
-const ctrl = overall(CONTROL);
-console.log(`      ${("[" + CONTROL + "]").padEnd(20)} ${LEVELS.map(l => BANDS.map(b => String(results[CONTROL][l].bands[b.name]).padStart(3)).join("/")).join("   ")}   ${ctrl.toFixed(1)}%  ← control`);
+console.log(`      ${("[" + CONTROL + "]").padEnd(20)} ${LEVELS.map(l => BANDS.map(b => String(results[CONTROL].bands[l].bands[b.name]).padStart(3)).join("/")).join("   ")}   ${overall(CONTROL).toFixed(1)}%  ← control`);
+const spread = overall(ranked[0]) - overall(ranked[ranked.length - 1]);
+console.log(`      STRONGEST ${ranked.slice(0, 3).map(t => `${t} ${overall(t).toFixed(0)}%`).join(" · ")}   WEAKEST ${ranked.slice(-3).map(t => `${t} ${overall(t).toFixed(0)}%`).join(" · ")}   spread ${spread.toFixed(1)}pts`);
 
-console.log(`\n      STRONGEST: ${ranked.slice(0, 3).map(t => `${t} ${overall(t).toFixed(0)}%`).join(" · ")}`);
-console.log(`      WEAKEST:   ${ranked.slice(-3).map(t => `${t} ${overall(t).toFixed(0)}%`).join(" · ")}`);
-console.log(`      SPREAD:    ${(overall(ranked[0]) - overall(ranked[ranked.length - 1])).toFixed(1)} points between the strongest and weakest kit in a straight fight`);
-
-// Where a tradition beats its PEERS, not where it beats the easiest foe — "everyone's best band is
-// riffraff" is true and useless. Relative to the cohort mean at each band, so the line says something.
-console.log("\n      where each tradition OUT-performs the cohort (band-relative, +pts vs the mean):");
-for (const b of BANDS) {
-  const mean = UNDER_TEST.reduce((s, t) => s + LEVELS.reduce((q, l) => q + results[t][l].bands[b.name], 0) / LEVELS.length, 0) / UNDER_TEST.length;
-  const lead = UNDER_TEST.map(t => ({ t, d: LEVELS.reduce((q, l) => q + results[t][l].bands[b.name], 0) / LEVELS.length - mean }))
-    .sort((x, y) => y.d - x.d).slice(0, 3).filter(x => x.d > 0.5);
-  console.log(`        ${b.name.padEnd(9)} mean ${mean.toFixed(1)}%  ${lead.length ? lead.map(x => `${x.t} +${x.d.toFixed(1)}`).join(" · ") : "— nobody leads by more than half a point"}`);
+// ---------- WHO WINS WHAT: tradition × SITUATION (L12 vs a regional foe, best playstyle) ----------
+// This is the half Erik actually asked for. A straight fight is the least interesting axis; the question
+// is who answers a standoff, a chase, a sealed door.
+// MEAN across builds, not best-of: taking the best of four builds saturates at the top and collapses the
+// ranking into an alphabetical tie. The mean says "how does this PEOPLE fare here", which is the question.
+const meanStyleAt = (t, kind) => PLAYSTYLES.reduce((a, p) => a + results[t].sit[kind][p.name], 0) / PLAYSTYLES.length;
+const bestStyleAt = (t, kind) => { const v = meanStyleAt(t, kind); const lead = PLAYSTYLES.map(p => ({ p: p.name, v: results[t].sit[kind][p.name] })).sort((a, b) => b.v - a.v)[0]; return { v: Math.round(v * 10) / 10, p: lead.p }; };
+const sitMean = kind => UNDER_TEST.reduce((a, t) => a + bestStyleAt(t, kind).v, 0) / UNDER_TEST.length;
+console.log("\n      WHO WINS WHAT — mean win% across 4 builds, L12 vs an EPIC foe (leading build named)");
+for (const kind of SITUATIONS) {
+  const mean = sitMean(kind);
+  const rank = UNDER_TEST.map(t => ({ t, v: bestStyleAt(t, kind).v, s: bestStyleAt(t, kind).p })).sort((a, b) => b.v - a.v);
+  console.log(`        ${kind.toUpperCase().padEnd(9)} mean ${mean.toFixed(1)}%  ▲ ${rank.slice(0, 3).map(r => `${r.t} ${r.v}% (${r.s})`).join(" · ")}`);
+  console.log(`        ${"".padEnd(9)}              ▼ ${rank.slice(-3).map(r => `${r.t} ${r.v}%`).join(" · ")}`);
 }
 
-// ---------- WHY THE SPREAD IS FLAT: the matchup table is almost entirely unpopulated ----------
-// This is the finding the matrix exists to surface. `functionMatchup` is the rock-paper-scissors layer that
-// would make a tradition's CHOSEN VERBS matter against what the opponent is doing. Erik's own live combat
-// log shows "matchup 0" on every single round, and here is why.
+// A tradition's SIGNATURE — measured against its PEERS in that situation, not against its own average.
+// The first version compared each tradition's kinds to its own cross-kind mean and returned 21 of 26 as
+// "standoff specialists", which is a BASE-RATE artifact rather than a finding: a standoff is simply easier
+// for everyone (cohort mean ~39% against ~8% for a static thing). Relative-to-cohort is the honest
+// statistic — it asks where this people beats the OTHER peoples, which is the question worth answering.
+console.log("\n      EACH TRADITION'S SIGNATURE — where it most out-performs its PEERS (+pts vs that situation's cohort mean):");
+const sigs = {};
+for (const t of UNDER_TEST) {
+  const rel = SITUATIONS.map(k => ({ k, d: bestStyleAt(t, k).v - sitMean(k) })).sort((a, b) => b.d - a.d)[0];
+  (sigs[rel.k] = sigs[rel.k] || []).push(`${t} ${rel.d >= 0 ? "+" : ""}${rel.d.toFixed(1)}${rel.d > 8 ? "*" : ""}`);
+}
+for (const k of SITUATIONS) console.log(`        ${k.padEnd(9)} ${(sigs[k] || ["—"]).join(", ")}`);
+console.log("        (* = more than 8 points clear of the cohort in that situation — a real specialism, not noise)");
+
+// PLAYSTYLE — does the build matter, or is the kit carrying everything?
+console.log("\n      PLAYSTYLE SENSITIVITY (best minus worst build, averaged over traditions, per situation):");
+for (const kind of SITUATIONS) {
+  const gaps = UNDER_TEST.map(t => { const vs = PLAYSTYLES.map(p => results[t].sit[kind][p.name]); return Math.max(...vs) - Math.min(...vs); });
+  console.log(`        ${kind.padEnd(9)} ${(gaps.reduce((a, x) => a + x, 0) / gaps.length).toFixed(1)} points`);
+}
+
+// ---------- WHY the spread is what it is: the matchup layer ----------
 const edges = sb.functionMatchup?.edges || {};
 const VERBS = Object.values(rj("content/packs/core/rules/function_vocabulary.json").families || {})
   .flatMap(l => (Array.isArray(l) ? l : []).map(v => (typeof v === "string" ? v : v?.verb))).filter(Boolean);
 let pairs = 0, nonzero = 0;
 for (const a of VERBS) for (const d of VERBS) { pairs++; const v = edges[a]?.[d]; if (Number.isFinite(v) && v !== 0) nonzero++; }
 const noEdges = VERBS.filter(v => !edges[v]);
-console.log(`\n      MATCHUP COVERAGE: ${nonzero} of ${pairs} verb pairs (${pct(nonzero, pairs)}%) carry a non-zero edge; ${noEdges.length} of ${VERBS.length} verbs have NO edges at all.`);
-if (noEdges.length) console.log(`      Verbs with no matchup at all: ${noEdges.join(", ")}`);
-
-// INERT PAIRS — the subtle failure in a matchup table, and one a coverage count cannot see.
-// `rollSide` gives EACH side matchupBonus(ownVerb, theirVerb) and the round is decided by comparing
-// margins, so only the DIFFERENCE can change an outcome. A pair scored equally in both directions adds
-// the same number to both margins and cancels EXACTLY — it reads as a designed relationship and is
-// mechanically nothing. Aevi's SNG-254 note names track↔conceal as "a real CYCLE not a hierarchy"; a
-// cycle needs A>B>C>A, and a mutual +3/+3 is not a cycle, it is a no-op.
+// INERT PAIRS — a failure a coverage count cannot see. `rollSide` gives EACH side matchupBonus(own, theirs)
+// and the round is decided by comparing margins, so only the DIFFERENCE can change an outcome. A pair scored
+// equally in both directions cancels EXACTLY: it reads as a designed relationship and is mechanically nothing.
 const inert = [], seenPair = new Set();
 for (const a of VERBS) for (const d of VERBS) {
   if (a === d) continue;
@@ -158,30 +222,30 @@ for (const a of VERBS) for (const d of VERBS) {
   if (A == null && D == null) continue;
   if ((Number(A) || 0) - (Number(D) || 0) === 0) inert.push(`${a}↔${d}`);
 }
-console.log(`      INERT PAIRS (equal in both directions ⇒ cancels in the margin ⇒ no mechanical effect): ${inert.length}${inert.length ? ` — ${inert.join(", ")}` : ""}`);
-const spread = overall(ranked[0]) - overall(ranked[ranked.length - 1]);
-console.log(`      ⇒ ${UNDER_TEST.length} independently-authored kits span ${spread.toFixed(1)} points.`);
+console.log(`
+      MATCHUP COVERAGE: ${nonzero}/${pairs} verb pairs (${pct(nonzero, pairs)}%); ${noEdges.length} verbs with no edges${noEdges.length ? ` (${noEdges.join(", ")})` : ""}.`);
+console.log(`      INERT PAIRS (cancel in the margin ⇒ no effect): ${inert.length}${inert.length ? ` — ${inert.join(", ")}` : ""}`);
 
 // ---------- THE GATES (structural truths no design intent excuses) ----------
 console.log("");
 check("every tradition has a USABLE KIT at every level — nobody picks a people and has nothing to do",
-  [...UNDER_TEST, CONTROL].every(t => LEVELS.every(l => results[t][l].kitSize > 0)),
-  [...UNDER_TEST].filter(t => LEVELS.some(l => results[t][l].kitSize === 0)).join(", ") + " have an empty kit at some level");
+  [...UNDER_TEST, CONTROL].every(t => LEVELS.every(l => results[t].bands[l].kitSize > 0)),
+  [...UNDER_TEST].filter(t => LEVELS.some(l => results[t].bands[l].kitSize === 0)).join(", ") + " have an empty kit at some level");
 
 check("every tradition's kit resolves to at least one FUNCTION FAMILY — a kit that engages nothing is the SNG-250 §3 hollow-skill failure at scale",
-  [...UNDER_TEST].every(t => LEVELS.every(l => results[t][l].families.length > 0)),
-  [...UNDER_TEST].filter(t => LEVELS.some(l => results[t][l].families.length === 0)).join(", ") + " engage no family");
+  [...UNDER_TEST].every(t => LEVELS.every(l => results[t].bands[l].families.length > 0)),
+  [...UNDER_TEST].filter(t => LEVELS.some(l => results[t].bands[l].families.length === 0)).join(", ") + " engage no family");
 
 check("kits GROW with level — a level-20 character of any tradition holds at least as many abilities as at level 5",
-  [...UNDER_TEST].every(t => results[t][20].kitSize >= results[t][5].kitSize));
+  [...UNDER_TEST].every(t => results[t].bands[20].kitSize >= results[t].bands[5].kitSize));
 
 check("no tradition is UNPLAYABLE — every one can beat the lowest threat band at least sometimes at level 20",
-  [...UNDER_TEST].every(t => results[t][20].bands.riffraff > 0),
-  [...UNDER_TEST].filter(t => results[t][20].bands.riffraff === 0).join(", ") + " cannot beat riffraff at L20 in any trial");
+  [...UNDER_TEST].every(t => results[t].bands[20].bands.riffraff > 0),
+  [...UNDER_TEST].filter(t => results[t].bands[20].bands.riffraff === 0).join(", ") + " cannot beat riffraff at L20 in any trial");
 
 check("no tradition makes THREAT IRRELEVANT — none wins ~everything at the epic band across all levels",
-  [...UNDER_TEST].every(t => LEVELS.some(l => results[t][l].bands.epic < 95)),
-  [...UNDER_TEST].filter(t => LEVELS.every(l => results[t][l].bands.epic >= 95)).join(", ") + " trivialise the top of the curve");
+  [...UNDER_TEST].every(t => LEVELS.some(l => results[t].bands[l].bands.epic < 95)),
+  [...UNDER_TEST].filter(t => LEVELS.every(l => results[t].bands[l].bands.epic >= 95)).join(", ") + " trivialise the top of the curve");
 
 // A RATCHET, not a wall. Populating the matchup table is Aevi's content lane and a real piece of work;
 // failing the build on today's 7 edges would be imposing a backlog item as a regression. But it may only
@@ -196,8 +260,8 @@ check(`INERT matchup pairs may only go DOWN — ${inert.length} pairs cancel to 
 
 check("threat still MEANS something across the whole matrix — riffraff beats epic on average, everywhere",
   [...UNDER_TEST, CONTROL].every(t => {
-    const r = LEVELS.reduce((s, l) => s + results[t][l].bands.riffraff, 0);
-    const e = LEVELS.reduce((s, l) => s + results[t][l].bands.epic, 0);
+    const r = LEVELS.reduce((s, l) => s + results[t].bands[l].bands.riffraff, 0);
+    const e = LEVELS.reduce((s, l) => s + results[t].bands[l].bands.epic, 0);
     return r >= e;
   }), "some tradition finds epics EASIER than riffraff — the threat curve is inverted for that kit");
 

@@ -11,7 +11,7 @@
 // first draft of contest_sim did exactly that and reported a 100% win rate at three of four threat bands.
 // Applying it is mirrored from encounters.js and lives here once.
 
-import { battleRound, opponentPolicy, synthesizeOpponentSheet } from "../../engine/skill_battle.js";
+import { battleRound, opponentPolicy, synthesizeOpponentSheet, synthesizeStaticSheet } from "../../engine/skill_battle.js";
 import { receiptLine, roundVerdict } from "../../engine/roundreceipt.js";
 
 /** Seeded RNG — a red run must reproduce exactly. */
@@ -22,10 +22,17 @@ export function mulberry32(a) { return () => { a |= 0; a = (a + 0x6D2B79F5) | 0;
  *  `moves` is the player's kit — real ability records. `sheet` is their character sheet. Returns the
  *  per-round trail INCLUDING the receipt line the player would have read, so a caller can assert on the
  *  artifact rather than on a recomputation of it. */
-export function oneFight({ threat, moves, sheet, sb, steps, rules, rng, maxRounds = 40, oppHealth = 6 }) {
-  const oppSheet = synthesizeOpponentSheet({ name: "them", threat }, sb);
+export function oneFight({ threat, moves, sheet, sb, steps, rules, rng, maxRounds = 40, oppHealth = 6, kind = null }) {
+  // SNG-253: `kind` selects the opponent's VOCABULARY (a standoff presses and holds; a chase closes and
+  // cuts off), which is what makes a tradition's verbs matter DIFFERENTLY per situation. hazard and puzzle
+  // deliberately have no opponent vocabulary — Aevi's design answer was that hard ground and a sealed door
+  // do not CHOOSE — so they run the STATIC antagonist, which resists the same way every round.
+  const staticKind = kind === "puzzle" || kind === "hazard";
+  const oppSheet = staticKind
+    ? synthesizeStaticSheet({ resist: threat, resistLabel: kind === "puzzle" ? "it holds, unmoving" : "the ground gives nothing" }, sb)
+    : synthesizeOpponentSheet({ name: "them", threat, encounterKind: kind || undefined }, sb);
   const cfg = sb.momentum?.pressure || {};
-  let state = { round: 1, momentum: 0, playerEnergy: sheet.energy, opponentEnergy: oppSheet.energy,
+  let state = { round: 1, momentum: 0, playerEnergy: sheet.energy, opponentEnergy: oppSheet.energy ?? 999,
     effects: [], pressure: { player: 0, opponent: 0 }, opponentHealth: oppHealth };
   let playerHealth = sheet.health;
   const rounds = [];

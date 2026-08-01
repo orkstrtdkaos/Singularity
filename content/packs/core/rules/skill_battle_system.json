@@ -821,7 +821,6 @@
    }
   },
   "senseVisibility": {
-   "note": "your senseTier vs the opponent gates what their round shows. Fog is presentation over TRUE state — the engine computes both full rolls; this table only hides display. NEVER fabricate a number to fill fog: show less, never false.",
    "0": {
     "reveals": [
      "outcome"
@@ -855,7 +854,8 @@
      "breakdown"
     ],
     "label": "near-precise — their skill, intensity, and full roll breakdown"
-   }
+   },
+   "note": "your senseTier vs the opponent gates what their round shows. Fog is presentation over TRUE state — the engine computes both full rolls; this table only hides display. NEVER fabricate a number to fill fog: show less, never false."
   },
   "revealActionBuysTier": 1,
   "opponentSheetSynthesis": {
@@ -920,58 +920,53 @@
       "function": "shield",
       "name": "a raised guard"
      }
+    ],
+    "kind:standoff": [
+     {
+      "function": "command",
+      "name": "presses a point",
+      "attribute": "social"
+     },
+     {
+      "function": "resist",
+      "name": "holds the line",
+      "attribute": "social"
+     },
+     {
+      "function": "reveal",
+      "name": "reads your certainty",
+      "attribute": "mental"
+     },
+     {
+      "function": "bind",
+      "name": "presses their advantage",
+      "attribute": "social"
+     }
+    ],
+    "kind:chase": [
+     {
+      "function": "move",
+      "name": "closes the gap",
+      "attribute": "physical"
+     },
+     {
+      "function": "track",
+      "name": "cuts off your line",
+      "attribute": "practical"
+     },
+     {
+      "function": "move",
+      "name": "gains ground",
+      "attribute": "physical"
+     },
+     {
+      "function": "foresee",
+      "name": "anticipates your turn",
+      "attribute": "mental"
+     }
     ]
    }
   }
  },
- "buildImplication": "Engine: a skill-battle mode alongside single-check resolution — triggered when two wills contest with skills. Per round: both declare skill+intensity; roll d100+attr+tierBonus+matchupBonus; winner shifts momentum by margin; track energy (attrition); resolve at meter-end or exhaustion. Reads challengeProfile (matchup relevance), functions (the edge table), intensity_scaling (energy), tier (weight). SNG-027 social contest is the SOCIAL-flavored instance of this same engine — unify them: a skill-battle is the general case, social-contest and combat and the duel are flavors. Matchup table authored here; expand per-function. Flag SNG-045. Smoke: a conceal-vs-reveal contest runs multiple rounds; energy attrition can decide it independent of rolls; tier gives both power and stamina; a Surge-botch backlashes; matchup edge beats raw rolls; social-contest resolves through the same engine.",
- "opponentSheetSynthesis": {
-  "archetypeSkills": {
-   "kind:standoff": [
-    {
-     "function": "command",
-     "name": "presses a point",
-     "attribute": "social"
-    },
-    {
-     "function": "resist",
-     "name": "holds the line",
-     "attribute": "social"
-    },
-    {
-     "function": "reveal",
-     "name": "reads your certainty",
-     "attribute": "mental"
-    },
-    {
-     "function": "bind",
-     "name": "presses their advantage",
-     "attribute": "social"
-    }
-   ],
-   "kind:chase": [
-    {
-     "function": "move",
-     "name": "closes the gap",
-     "attribute": "physical"
-    },
-    {
-     "function": "track",
-     "name": "cuts off your line",
-     "attribute": "practical"
-    },
-    {
-     "function": "move",
-     "name": "gains ground",
-     "attribute": "physical"
-    },
-    {
-     "function": "foresee",
-     "name": "anticipates your turn",
-     "attribute": "mental"
-    }
-   ]
-  },
-  "_kindArchetypeNote": "SNG-253 (Aevi 2026-08-01): per-kind opponent VOCABULARY. kind:standoff = presses/holds/reads (INFLUENCE+KNOW+PROTECT, NO strike - a contest of will that cannot hurt you); kind:chase = closes/cuts-off/gains-ground (MOVE+KNOW, no blood). DESIGN ANSWER to CCode's question - hazard + puzzle get NO opponent vocabulary DELIBERATELY: hard ground and a sealed door do not CHOOSE a move, so there is no opponent to give verbs. SNG-247's static-antagonist path already handles both (opponentPolicy returns early for oppSheet.static - it HOLDS the same way every round, no declared move). Adding a hazard/puzzle vocabulary would be inventing tactics for a thing that has none - the exact lie SNG-247 guards against. So: standoff + chase get verb sets; fight keeps the default; hazard + puzzle stay static-antagonist, no archetype. That's the complete set."
- }
+ "buildImplication": "Engine: a skill-battle mode alongside single-check resolution — triggered when two wills contest with skills. Per round: both declare skill+intensity; roll d100+attr+tierBonus+matchupBonus; winner shifts momentum by margin; track energy (attrition); resolve at meter-end or exhaustion. Reads challengeProfile (matchup relevance), functions (the edge table), intensity_scaling (energy), tier (weight). SNG-027 social contest is the SOCIAL-flavored instance of this same engine — unify them: a skill-battle is the general case, social-contest and combat and the duel are flavors. Matchup table authored here; expand per-function. Flag SNG-045. Smoke: a conceal-vs-reveal contest runs multiple rounds; energy attrition can decide it independent of rolls; tier gives both power and stamina; a Surge-botch backlashes; matchup edge beats raw rolls; social-contest resolves through the same engine."
 }

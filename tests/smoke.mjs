@@ -8968,9 +8968,12 @@ await (async () => {
   const cfg = JSON.parse(JSON.stringify(base));
   const names = o => sb253.synthesizeOpponentSheet(o, cfg).skills.map(s => s.name).join(" , ");
 
-  check("SNG-253: with NO per-kind archetypes authored, synthesis is UNCHANGED — the engine half lands safely ahead of the content",
-    names({ name: "x", threat: 40, encounterKind: "standoff" }) === names({ name: "x", threat: 40 }),
-    "the engine half changed behaviour before Aevi's verb sets exist — that is a silent content regression");
+  // SUPERSEDED by SNG-253's content landing: this asserted that synthesis was UNCHANGED while no per-kind
+  // archetypes existed, which was the right check for an engine half shipping ahead of its content. The
+  // verb sets are authored now, so the durable claim is the FALLBACK: a kind nobody has authored must still
+  // resolve exactly as it always did, or adding one kind silently changes every other.
+  check("SNG-253: an UNAUTHORED kind still falls back to the default vocabulary (adding one kind cannot change the rest)",
+    names({ name: "x", threat: 40, encounterKind: "no_such_kind" }) === names({ name: "x", threat: 40 }));
   cfg.opponentSheetSynthesis.archetypeSkills["kind:standoff"] = [{ function: "influence", name: "a pressed point" }, { function: "ward", name: "the held line" }];
   check("SNG-253: a per-kind archetype, once authored, gives the opponent KIND-NATIVE verbs",
     names({ name: "x", threat: 40, encounterKind: "standoff" }) === "a pressed point , the held line");
@@ -8986,9 +8989,16 @@ await (async () => {
       return calls.length > 0 && calls.every(c => /withKind\(/.test(c)); })(),
     "a call site passes the raw opponent — that encounter keeps the fight default no matter what Aevi authors");
   // The evidence that motivated the ticket, kept as a live assertion so nobody has to re-derive it.
-  check("SNG-253 EVIDENCE: today every authored archetype is a FIGHT vocabulary (no standoff/chase verb set exists yet)",
-    Object.keys(base.opponentSheetSynthesis?.archetypeSkills || {}).every(k => !k.startsWith("kind:")),
-    "per-kind verb sets have landed — update this check and the SNG-253 scope note; the fight-default fallback is no longer the whole story");
+  // The scope note this replaces said "update this check when the verb sets land". They landed, so it now
+  // asserts what SNG-253 was FOR: a standoff opponent must not gather to STRIKE in a contest the ribbon has
+  // just told the player cannot hurt them. That is the whole point, and it is checkable in the content.
+  const authored = base.opponentSheetSynthesis?.archetypeSkills || {};
+  check("SNG-253: per-kind opponent vocabularies are AUTHORED and reachable under .engine (not orphaned a level up)",
+    Object.keys(authored).some(k => k.startsWith("kind:")),
+    `archetypes present: ${Object.keys(authored).join(", ")} — a kind: set authored at the TOP level instead of inside .engine is dead content`);
+  check("SNG-253: a STANDOFF opponent has no STRIKE in its vocabulary — the contest cannot hurt you, so it must not swing",
+    !(authored["kind:standoff"] || []).some(m => /^(strike|break)$/.test(String(m.function))),
+    JSON.stringify((authored["kind:standoff"] || []).map(m => m.function)));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

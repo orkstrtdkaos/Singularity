@@ -1,5 +1,44 @@
 # PO ALERT
 
+> ## [SNG-247 TIER 0+1 complete_pending_review - CCode, 2026-07-31] The frame knows what kind of thing it is (v1.8.318 `6c34c904`)
+> Erik: *"morph the other encounter types similarly as the fight... but put a different colour border around them -
+> a chase could be yellow or orange, a puzzle blue or purple. Let's think this through."* Thought through, Tiers 0
+> and 1 built, **deliberate stop for review** before four kinds get built on the contract.
+> **THE SURVEY CHANGED THE COST ESTIMATE.** (1) The colour hook `enc-frame-<kind>` has been emitted on every frame
+> since SNG-230 and had **NO CSS rules at all** - built, then never used - so a chase, a sealed door and a knife
+> fight all rendered fight-red. (2) `mode:"skill_battle"` is set in exactly ONE place. (3) `battleRound` was already
+> kind-agnostic except for **one** block. (4) **`standoff` is a FIFTH inert path** - FRAME_KINDS has it,
+> `encounterKind` maps it, Aevi authored an exemplar AND a receipt-line format, and **nothing ever mints one**.
+> **THE SPLIT THAT SHAPES TIERS 2-3.** Chase and standoff are genuinely OPPOSED - someone with intent and their own
+> crafts - so battleRound is already right for them (~80% reuse). Hazard and puzzle are UNOPPOSED; giving them an
+> opponent sheet means inventing an agent (the SNG-246-A error class). But `rollSide` produces a margin and a
+> zero-variance sheet **is** a DC - so a static antagonist is an honest mapping, not a fudge.
+> **THE RISK WORTH NAMING:** if all five kinds become the same five-step panel, the variety is cosmetic and every
+> encounter just got longer. The answer is that each kind differs in **which step carries the weight** - a puzzle's
+> sense step is the whole game, a chase's is near-worthless (no time to read), a standoff's payoff is the bonus
+> action. Content dial, not code, and it is what makes this a morph rather than a reskin.
+> **TIER 0:** `--enc-hue` on both the play wrapper and the frame; border, meter, takeover glow, contest panel and
+> receipt all read the one variable. fight `#c05b4d` / chase `#e07b39` / hazard `#6f7b8c` / puzzle `#7c6bd4` /
+> standoff `#5aa8a0`. Colour is a THIRD channel - the icon and title already name the kind.
+> **TIER 1:** the pressure block reads `sb.kinds[kind]` - what a tick costs each side, how many break them, what it
+> is CALLED (per-side clauses, since "they open the gap" and "you lose ground" are not one sentence with the subject
+> swapped). The fight authors **no costs**: they keep flowing from `momentum.pressure` so those COMBAT_DIALS knobs
+> stay live rather than being shadowed by a duplicate. `kind` comes from `encounterKind(def)` - the same function
+> the frame uses - and is **DERIVED** in skillBattleRound, never forwarded, because that wrapper has silently eaten
+> a forwarded option twice. **Seam #20** declared.
+> 9 new checks; the load-bearing one is that kind defaults to fight AND an unknown kind falls back to it with the
+> numbers **bit-identical** - lifting a rule into content is only safe if it provably didn't move the thing. Plus a
+> gate that every FRAME_KINDS kind has a hue on both hooks, so no new kind ships colourless the way this one did.
+> npm test exit 0 (20 seams). Live on never-used port 8447: all five hues resolve on frame AND panel, a kindless
+> frame falls back to fight-red, the gold quest-decision strip keeps its colour inside a live chase.
+> **NOT BUILT (awaiting review):** Tier 2 chase+standoff onto the engine (**needs `type:"standoff"` to exist
+> first**; Aevi's receipt content for both is already authored and waiting) - Tier 3 the static antagonist for
+> puzzle (**hazard stays the fast one** per Erik: a 3-stage cliff as three five-step turns is worse pacing) -
+> Tier 4 the morph made VISIBLE (chaseFromFight already fires on a flee; it just isn't announced - the border should
+> go red->amber and say so).
+> Results: po/results/20260731_SNG-247_Tier0-1_kind_colours_and_exit_rule.md
+
+
 > ## [SNG-246 FIX A complete_pending_review - CCode, 2026-07-31] Engine-enforced fight entry (v1.8.317 `c72223fd`)
 > Erik ruled **(c) with (b) as the fallback**. Built exactly that. This closes the OLDEST open ticket in the combat
 > line - and the root of his very first complaint at CCODE-33: *"one action ended it in pure prose."*

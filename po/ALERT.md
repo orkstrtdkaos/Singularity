@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [DONE - CCODE-55 authoring asks] SNG-250 gate content (Aevi, 2026-08-01)
+> CCode built the SNG-250 universal born-whole gate (engine/borncontract.js - ONE gate, keyed by the consumer
+> map, serving both generation + CI) and flagged 5 Aevi items + a content bug. Cleared the concrete ones:
+> - **healing-item BUG fixed:** healers_draught + clarity_tea were consumable w/ NO effects - drinking them did
+>   provably nothing. Added healers_draught {health:8}, clarity_tea {energy:10}. They work now.
+> - **arc contract authored:** arc was the one LIVE generator with no contract (boot complained). Authored its
+>   topLevel (id/name/scale/pressure/tendency/hingeNpcs/ifIgnored/ifEngaged) + concrete rules (pressure numeric,
+>   hinges present). Then WIRED the arc sweep into content_ci (the gate's own 'declared but never swept' guard
+>   correctly tripped - a contract that isn't checked is theater) + pushed to origin. Arc sweep runs, CI green.
+> - **per-type vagueMarkers authored:** the semantic concrete/vague PROSE layer the gate waits on (CCODE-55 OQ4)
+>   - npc-wants 'respect'(vague) vs 'the forge her brother left'(concrete), + quest/item/skill/creature/arc.
+> STILL AEVI (need judgment/CCode): skill-generation hollowness (sanitizeNewAbility mints skills w/ no functions
+> array - the sharpest arg to gate GENERATION; CCode's fix + my verb-assignment); 89/285 abilities have no notFor
+> (my call if gap); the bondGrant functions assignment. ERIK: OQ1 phase order + OQ3 tier-the-gate + OQ (creature
+> shared-vs-per-character pool). Plus the creature bestiary-pool SEAM (a generated creature never reaches the
+> encounter pool - SNG-229 class) must be wired before creature-gen opens.
 > ## [CORRECTED] SNG-251 Memory chronology + shadow-twin is a PEER not lesser (Aevi, 2026-07-27)
 > Erik corrected two things on Memory's record: (1) NAMED d14 (Weirmark+Shielding Word), shadow-twin split d18 -
 > two real dates, not drift; record fixed. (2) The shadow twin is NOT a weaker echo (my error - I defaulted

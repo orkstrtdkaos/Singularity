@@ -274,14 +274,19 @@
         "player": "Use Descent — name, for her, what she just revealed about herself in the way she said that.",
         "summary": "Descent named the last thing Vessin held back — that she did not notice stopping — and she acknowledged it plainly.",
         "narration": "You feel it in the small sound she made — the thing she did not intend to give away. So you name it.\n\nYou say it quietly, close to her ear, so it lands without weight: she does not know when she stopped mapping the exit. That is the thing. Not that she stopped — that she did not notice stopping. She has been in this alcove long enough for the calculation to dissolve, and she did not feel it go.\n\nVessin is still for a moment. Then she lets out a long, slow breath through her nose. Not a laugh. Not a protest. The breath of someone who has been found out by someone who is not going to use it against them.\n\n\"Yes,\" she says. Her voice is dry again, but it is the dry of someone who has given up pretending the dryness is armor. \"That is the one.\"\n\nCy's lens irises once, very small, and then goes still."
+      },
+      {
+        "player": "Say nothing more — just continue what your hands and mouth are doing, and let the quiet be the answer.",
+        "summary": "In the dry storage alcove of the Half-Cathedral's eastern tower, Loki and Vessin Tallow-bark found a quiet that neither one filled — and Vessin turned and put her hand against Loki's face and held it there, and said nothing, and that was the answer.",
+        "narration": "You say nothing. Your mouth stays at her neck, and your hands stay where they are. The quiet is the answer.\n\nVessin does not fill it. That is the thing — she does not reach for a word to stand between herself and the moment. Her head remains tipped back. Her hands stay closed around nothing on the drop-cloth. The candle in the landing wall-crack burns without drama, steady as it has been all night.\n\nAfter a while she turns, slowly, the way a person turns when they have decided something and are not afraid of having decided it. She looks at you directly. The appraising quality is gone from her eyes — not replaced by softness, but by something more straightforward than that. Recognition, maybe. She reaches up and puts one hand against the side of your face, and holds it there, and says nothing either.\n\nCy does not stir between her shoulder blades. The nave beyond the door is quiet. The scaffold stands out there in the dark, patient and half-built, the way this whole place has always been."
       }
     ],
     "lastTurn": {
-      "narration": "You feel it in the small sound she made — the thing she did not intend to give away. So you name it.\n\nYou say it quietly, close to her ear, so it lands without weight: she does not know when she stopped mapping the exit. That is the thing. Not that she stopped — that she did not notice stopping. She has been in this alcove long enough for the calculation to dissolve, and she did not feel it go.\n\nVessin is still for a moment. Then she lets out a long, slow breath through her nose. Not a laugh. Not a protest. The breath of someone who has been found out by someone who is not going to use it against them.\n\n\"Yes,\" she says. Her voice is dry again, but it is the dry of someone who has given up pretending the dryness is armor. \"That is the one.\"\n\nCy's lens irises once, very small, and then goes still.",
-      "sceneSummary": "Descent named the last thing Vessin held back — that she did not notice stopping — and she acknowledged it plainly.",
+      "narration": "You say nothing. Your mouth stays at her neck, and your hands stay where they are. The quiet is the answer.\n\nVessin does not fill it. That is the thing — she does not reach for a word to stand between herself and the moment. Her head remains tipped back. Her hands stay closed around nothing on the drop-cloth. The candle in the landing wall-crack burns without drama, steady as it has been all night.\n\nAfter a while she turns, slowly, the way a person turns when they have decided something and are not afraid of having decided it. She looks at you directly. The appraising quality is gone from her eyes — not replaced by softness, but by something more straightforward than that. Recognition, maybe. She reaches up and puts one hand against the side of your face, and holds it there, and says nothing either.\n\nCy does not stir between her shoulder blades. The nave beyond the door is quiet. The scaffold stands out there in the dark, patient and half-built, the way this whole place has always been.",
+      "sceneSummary": "In the dry storage alcove of the Half-Cathedral's eastern tower, Loki and Vessin Tallow-bark found a quiet that neither one filled — and Vessin turned and put her hand against Loki's face and held it there, and said nothing, and that was the answer.",
       "choices": [
         {
-          "label": "Say nothing more — just continue what your hands and mouth are doing, and let the quiet be the answer.",
+          "label": "Meet her eyes and stay in the silence — let it be what it is",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -291,46 +296,44 @@
           "trivial": true
         },
         {
-          "label": "Tell her that is the part you find most interesting — not the wanting, but the not-noticing. Ask what she thinks that means.",
+          "label": "Bring your mouth to hers",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Descent one more time — name what this moment is, for you",
           "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Turn her gently so you can see her face — and let her see yours.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
             "romantic"
           ],
-          "trivial": true
+          "abilityId": "descent",
+          "energyCost": 6,
+          "trivial": false
         },
         {
-          "label": "Ask her about the other person she mentioned — the older one with eyes like yours. Not now to change the subject, but because you want to know what Vessin keeps.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Let the scene close — rest here until morning",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "sustain"
           ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "energy": -1
-      },
       "scene": {
         "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight from the landing wall-crack steady through the open door.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Sitting between Loki's legs, coat off, head tilted back — still, breath steadied, the last held-back thing named and acknowledged."
+            "state": "Turned to face Loki, one hand raised and held against the side of their face — looking directly, quiet, decided."
           },
           {
             "name": "Cy",
@@ -341,7 +344,7 @@
           "Canvas drop-cloth spread on the alcove floor",
           "Vessin's grey-green coat pooled on the drop-cloth beside her",
           "Low shelf with remaining scaffold supplies above",
-          "Tallow candle burning in the landing wall-crack — light reaching through the opening",
+          "Tallow candle burning in the landing wall-crack — light reaching through the open door",
           "Stone stairs curling upward visible through the door",
           "The open nave beyond — quiet"
         ],
@@ -357,38 +360,28 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Descent named the last held-back thing — that she did not notice the moment the calculation dissolved — and she acknowledged it plainly. Said 'yes, that is the one.' The armor in her voice is present but no longer performing.",
+          "note": "Turned to face Loki and put one hand against their face — held it without speaking. The appraisal is gone from her eyes. She has decided something and is not afraid of having decided it.",
           "learned": [
-            "She did not feel the moment she stopped mapping the exit — the not-noticing is the thing that was revealed, and she knows it now."
+            "She can choose to stay somewhere without mapping the exit — she has now done it"
           ],
-          "statusNote": "Sitting between Loki's legs in the alcove, coat off, breath steadied — the last guard named and acknowledged."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "vessin-tallow-bark",
-          "label": "Vessin Tallow-bark",
-          "kind": "person",
-          "entityId": "vessin-tallow-bark",
-          "fact": "Descent found the last thing she held back: she did not notice the moment the calculation dissolved. She acknowledged it without defense — 'yes, that is the one.' The dry voice is still there, but it is no longer pretending to be armor.",
-          "links": [
-            "grovehome",
-            "the-half-cathedral",
-            "the-man-in-the-lower-annex"
-          ]
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "In the dry storage alcove, face turned to Loki, one hand at their cheek — present and decided.",
+          "bondStage": "courting"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet exchange, words few and well-placed"
-      }
+        "why": "a few quiet minutes in the alcove"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight from the landing wall-crack steady through the open door.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Sitting between Loki's legs, coat off, head tilted back — still, breath steadied, the last held-back thing named and ack"
+          "state": "Turned to face Loki, one hand raised and held against the side of their face — looking directly, quiet, decided."
         },
         {
           "name": "Cy",
@@ -837,7 +830,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Gave the physical description of the man at the posting board while Loki worked the tension from her shoulders and Cy walked its precise grid along her back. Tipped her head into the pressure without self-consciousness. The description was clean and precise — four seconds of profile, held the way…",
         "[d2] Accepted the harmonic offer without hesitation — body released a held tension, began to speak of eleven years of salvage pricing, the Rootkin's record-keeping, and a person she met once who moved like Loki does.",
         "[d2] Loki named their own pleasure aloud through Descent — the real cost of it, thin and exposed. Vessin went still, exhaled, turned to look at them directly. Acknowledged the honesty with 'that was an honest thing to say.' Did not move away. Shoulder settled further into Loki's hands.",
         "[d2] Answered plainly — eleven years of pricing things, and this she doesn't yet know the worth of. Said she would like to keep talking. Turned fully toward Loki and did not move away.",
@@ -846,23 +838,24 @@
         "[d2] Descent named the true word for what she is doing. She went still, held the canvas, and said: she has not done this. The distinction from 'does not' was deliberate and she knew it. She did not move away.",
         "[d2] Named the shape of what she wants tonight: to stop somewhere without calculating the cost, to have something only for having. Admitted she stopped mapping the exit without knowing when she stopped.",
         "[d2] Received Loki's mouth on her neck and the hands moving toward more sensitive places without pulling away — made a small honest sound; named what she sees Loki doing in the dry voice of someone who recognizes a craft.",
-        "[d2] Descent named the last held-back thing — that she did not notice the moment the calculation dissolved — and she acknowledged it plainly. Said 'yes, that is the one.' The armor in her voice is present but no longer performing."
+        "[d2] Descent named the last held-back thing — that she did not notice the moment the calculation dissolved — and she acknowledged it plainly. Said 'yes, that is the one.' The armor in her voice is present but no longer performing.",
+        "[d2] Turned to face Loki and put one hand against their face — held it without speaking. The appraisal is gone from her eyes. She has decided something and is not afraid of having decided it."
       ],
       "knownFacts": [
-        "Came to the Half-Cathedral tonight for reasons she has not fully worked out",
         "Loki's honesty through Descent landed as something real — she did not dismiss it or deflect from it",
         "She has made herself very good at knowing what things are worth — and this situation sits outside that skill in a way she doesn't yet know how to name",
         "Received 'priceless' as a compliment — found it strange and genuine rather than flattering; will sit with it",
         "She has not let herself want something unpriced in a long time — the distinction between 'does not' and 'has not' is the whole of it, and she named it herself.",
         "She wants, tonight, to stay somewhere without the exit already mapped — to have something that is only for having.",
         "She does not know when she stopped calculating the cost of this alcove. That is the thing she named.",
-        "She did not feel the moment she stopped mapping the exit — the not-noticing is the thing that was revealed, and she knows it now."
+        "She did not feel the moment she stopped mapping the exit — the not-noticing is the thing that was revealed, and she knows it now.",
+        "She can choose to stay somewhere without mapping the exit — she has now done it"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Sitting between Loki's legs in the alcove, coat off, breath steadied — the last guard named and acknowledged.",
+      "statusNote": "In the dry storage alcove, face turned to Loki, one hand at their cheek — present and decided.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1201,7 +1194,7 @@
     "lastSharedReadAt": "2026-08-01T22:13:09.571Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 12,
+    "turnsSinceOffer": 13,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -2140,17 +2133,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.1403261273264063,
-    "cerebral": 10.153621960117633,
-    "social": 21.501693377342736,
-    "strategic": 7.214702564434879,
-    "cautious": 5.749092596131761,
-    "amorous": 15.502107844114345,
-    "generous": 5.401059122650278,
-    "ruthless": 0.504813084401885,
-    "risky": 1.5483310839106685,
-    "patient": 0.42282137456861496,
-    "deception": 0.49218598109595263
+    "devotion": 2.086817974143246,
+    "cerebral": 9.899781411114692,
+    "social": 20.96415104290917,
+    "strategic": 7.034335000324007,
+    "cautious": 5.605365281228467,
+    "amorous": 16.114555148011487,
+    "generous": 5.266032644584022,
+    "ruthless": 0.49219275729183787,
+    "risky": 1.5096228068129018,
+    "patient": 0.41225084020439956,
+    "deception": 0.4798813315685538
   },
   "aptitudes": [
     "silver_tongue",
@@ -2160,7 +2153,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 112,
+  "actionCount": 113,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2469,8 +2462,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785622422378,
-  "rev": 387,
+  "updatedAt": 1785622535834,
+  "rev": 388,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3240,7 +3233,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 61
+    "the_quickwood": 62
   },
   "opLossPending": false,
   "sessions": [
@@ -3295,10 +3288,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T22:13:42.377Z",
+      "lastAt": "2026-08-01T22:15:35.834Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 27
+      "beats": 28
     }
   ],
   "establishedFacts": [
@@ -3336,17 +3329,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 128,
-    "choices": 128,
+    "sceneSummary": 129,
+    "choices": 129,
     "characterDeltas": 53,
-    "scene": 128,
+    "scene": 129,
     "placeUpdates": 17,
     "codexUpdates": 86,
-    "timeOps": 119,
+    "timeOps": 120,
     "offer": 11,
     "generateRequest": 6,
-    "sceneEnded": 24,
-    "npcUpdates": 100,
+    "sceneEnded": 25,
+    "npcUpdates": 101,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3360,7 +3353,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 128,
+  "_opTurns": 129,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

@@ -1,5 +1,15 @@
 # PO ALERT
 
+> ## [CORRECTED] SNG-251 Memory chronology + shadow-twin is a PEER not lesser (Aevi, 2026-07-27)
+> Erik corrected two things on Memory's record: (1) NAMED d14 (Weirmark+Shielding Word), shadow-twin split d18 -
+> two real dates, not drift; record fixed. (2) The shadow twin is NOT a weaker echo (my error - I defaulted
+> derived=lesser). It's DIFFERENT/complementary and a PEER: Shadow Bite (bites shadow-substance/Zone-changed/
+> bodiless foes that IRON handles poorly - each spear excels where the other doesn't), Call and Cast (throwable +
+> re-summoning - a ranged strike the iron can't make, returns to throw again), Strange Shadow-Power on the Cast
+> (a palework effect delivered on impact, clamped to rank+daily ceiling). A matched pair, neither the 'main'.
+> Fixed both Memory's record AND the SNG-251 §2d spec (added a guard: DERIVED != LESSER, a split gets its own
+> complementary grants on the same §4 economy - the lazy 'derived=downgrade' default is banned).
+
 > ## [DECIDED + worked example] SNG-251 §4 economy + Memory authored (Aevi, 2026-07-27)
 > Erik DECIDED the earned-power economy: power scales to level + craft/skill (master smith earns more than
 > novice; ceiling = a function of level+craft-rank, not flat; makes crafting/skills a real payoff), always

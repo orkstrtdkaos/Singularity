@@ -10,6 +10,7 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validate } from "../engine/genschema.js";
 import { structuredQuestRecord } from "../engine/quests.js";
+import { checkBorn, describeBorn, contractedTypes } from "../engine/borncontract.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -613,19 +614,53 @@ for (const pack of PACKS) {
     const warnShape = m => console.log("warn  " + m);
     const has = v => v != null && !(typeof v === "string" && !v.trim()) && !(Array.isArray(v) && !v.length);
     const loadDir = (dir, key, keep) => { const out = []; const abs = join(root, dir); if (!existsSync(abs)) return out; for (const f of readdirSync(abs).filter(x => x.endsWith(".json"))) { const d = rj(`${dir}/${f}`); const arr = Array.isArray(d) ? d : (d[key] || (d && d.id ? [d] : [])); for (const x of arr) if (keep(x)) out.push(x); } return out; };
+    // CCODE-55 (SNG-250 §4): this sweep now runs THE SAME FUNCTION the generation path runs —
+    // engine/borncontract.js checkBorn — over authored content. SNG-250 §4 requires "authored and
+    // generated content held to the same completeness bar", and that is only true if it is literally
+    // one function; two implementations of one contract drift (the CCODE-16 lesson). The severity
+    // policy is unchanged and still the map's own: CRASH fails the build, EMPTY/DEGRADED warn. What
+    // is NEW is the `concrete` half — a record can carry every field and still be hollow, which
+    // presence-checking alone can never catch.
+    // Built EXACTLY as functions.js:20-24 builds its index: an ability's `functions` holds VERBS, and the
+    // 8 families are what those verbs resolve TO. Comparing verbs against family names would fail all 285.
+    const VOCABS = { "function_vocabulary.verbs": Object.values(rj("content/packs/core/rules/function_vocabulary.json").families || {})
+      .flatMap(l => (Array.isArray(l) ? l : []).map(v => (typeof v === "string" ? v : v?.verb))).filter(Boolean) };
     const sweepType = (label, items, spec) => {
       if (!spec || !items.length) return;
       let crashBad = 0, softBad = 0;
-      for (const it of items) for (const f of (spec.topLevel || [])) {
-        if (has(it[f.field])) continue;
-        if (f.severity === "CRASH") { check(`[shape:${label}] "${it.id || "?"}" has CRASH-required "${f.field}"`, false, `${f.read || ""} — a consumer THROWS on its absence (SNG-238 §5b, map-driven)`); crashBad++; }
-        else { softBad++; if (softBad <= 3) warnShape(`[shape:${label}] "${it.id || "?"}" missing ${f.severity} "${f.field}" — ${f.note || f.read || "hollow"} (warn: map field may need runtime reconcile)`); }
+      for (const it of items) {
+        const rep = checkBorn(it, label, mapDoc, { vocabs: VOCABS });
+        for (const m of rep.missing) {
+          if (m.severity === "CRASH") { check(`[shape:${label}] "${it.id || "?"}" has CRASH-required "${m.field}"`, false, `${m.read || ""} — a consumer THROWS on its absence (SNG-238 §5b, map-driven)`); crashBad++; }
+          else { softBad++; if (softBad <= 3) warnShape(`[shape:${label}] "${it.id || "?"}" missing ${m.severity} "${m.field}" — ${m.note || m.read || "hollow"} (warn: map field may need runtime reconcile)`); }
+        }
+        for (const v of rep.vague) {
+          if (v.severity === "CRASH") { check(`[shape:${label}] "${it.id || "?"}" is CONCRETE at "${v.id}"`, false, `${v.why} (SNG-250 §3 concreteness, map-driven)`); crashBad++; }
+          else { softBad++; if (softBad <= 3) warnShape(`[shape:${label}] "${it.id || "?"}" not concrete: ${v.id} — ${v.why}`); }
+        }
       }
-      ok(`SNG-238 §5b: ${label} sweep vs consumer map — ${items.length} checked (${crashBad} CRASH-fail, ${softBad} EMPTY/DEGRADED warn)`);
+      ok(`SNG-238 §5b / SNG-250 §3: ${label} sweep vs consumer map — ${items.length} checked (${crashBad} CRASH-fail, ${softBad} EMPTY/DEGRADED warn)`);
     };
     sweepType("npc", loadDir("content/packs/valley/npcs", "npcs", n => n && n.id && !n.challengers && !Array.isArray(n.pool)), CT.npc);
     sweepType("location", loadDir("content/packs/valley/locations", "locations", l => l && l.id), CT.location);
     sweepType("creature", (mapDoc && existsSync(join(root, "content/packs/valley/bestiary.json"))) ? (rj("content/packs/valley/bestiary.json").roster || []) : [], CT.creature);
+    // CCODE-55: the two types SNG-250 §3 added. Items fold core + valley exactly as state.js:136/139 does
+    // (valley OVERLAYS core by id), so the sweep sees the same catalog the engine serves.
+    const itemCatalog = {};
+    for (const p of (rj("content/packs/core/manifest.json").provides?.items || [])) for (const it of (rj(`content/packs/core/${p}`).items || [])) if (it?.id) itemCatalog[it.id] = it;
+    for (const p of (rj("content/packs/valley/manifest.json").provides?.items || [])) { const f = join(root, `content/packs/valley/${p}`); if (existsSync(f)) for (const it of (rj(`content/packs/valley/${p}`).items || [])) if (it?.id) itemCatalog[it.id] = it; }
+    sweepType("item", Object.values(itemCatalog), CT.item);
+    const abilityCatalog = [];
+    for (const p of (rj("content/packs/core/manifest.json").provides?.abilities || [])) for (const a of (rj(`content/packs/core/${p}`).abilities || [])) if (a?.id) abilityCatalog.push(a);
+    sweepType("skill", abilityCatalog, CT.skill);
+
+    // CCODE-55 (the SNG-064 lesson, applied to the contract itself): a type can be DECLARED in the map and
+    // never actually swept — the contract would read as enforced while nothing checked it. Every contracted
+    // type must be wired to a real corpus here, or this fails and names the one that isn't.
+    const SWEPT = new Set(["quest", "npc", "location", "creature", "item", "skill"]);
+    const unswept = contractedTypes(mapDoc).filter(t => !SWEPT.has(t));
+    check("CCODE-55: every type declared in the consumer map is actually SWEPT by this CI (no declared-but-unchecked contract)",
+      unswept.length === 0, `declared but never swept: ${unswept.join(", ")} — add its corpus to the sweep or the contract is decorative`);
   }
 
   // SNG-238 §5c (the "never again" proof, anti-theater — the SNG-232 discipline): the sweep must BITE, or a

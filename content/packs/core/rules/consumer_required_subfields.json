@@ -284,7 +284,8 @@
      "severity": "DEGRADED",
      "read": "inventory.js:245 equipmentBonus + :273 itemCombatFunctions -> :285 wieldBonusFor + :301 the throwable test",
      "type": "array",
-     "note": "THE mechanical hook for non-consumable gear: tags are what the rules match an action against. An item with no bonusTags helps NOTHING — it is exactly SNG-250 §3's 'flavor text you can't use'."
+     "optional": true,
+     "note": "THE mechanical hook for non-consumable GEAR: tags are what the rules match an action against. Optional at the FIELD level and enforced by the effect-resolvable rule instead, because an item has two possible hooks and needs only one — waterskin/healing_draught/dried_rations carry no bonusTags and are fully resolvable through effects{energy|health}. CCode-corrected 2026-08-01: as a flat requirement this flagged those three every run, which is the same false-positive class as the creature `threat` field this map just lost. The bar is 'has A hook', and that is a rule, not a field."
     },
     {
      "field": "consumable",
@@ -379,23 +380,22 @@
      "id": "function-in-vocab",
      "rule": "everyInVocab",
      "field": "functions",
-     "vocab": "function_vocabulary.families",
+     "vocab": "function_vocabulary.verbs",
      "severity": "DEGRADED",
      "why": "SNG-250 §3 SKILL: 'it resolves to a real function family with tier + cost, not \"channels the essence of the deep\"'. familiesOfAbility silently DROPS any verb not in the vocab (functions.js:34 .filter(Boolean)), so an invented verb is not an error — it is an ability that quietly engages nothing. Non-empty AND in-vocab are both required, or the check passes on a word the engine will discard."
     },
     {
-     "id": "cost-in-band",
+     "id": "cost-is-real",
      "rule": "numberInRange",
      "field": "energyCost",
-     "min": 4,
-     "max": 15,
+     "min": 1,
      "severity": "DEGRADED",
-     "why": "the band sanitizeNewAbility already clamps to (progression.js:533, Math.max(4, Math.min(15, ...))). Stated here so the CONTRACT owns the band and the clamp enforces it, rather than the band existing only as a magic number inside one function."
+     "why": "SNG-250 §3 SKILL requires 'an energy cost'. The bar is a POSITIVE number the engine can actually charge — progression.js:171 pays `abilityDef.energyCost` directly, so a 0/absent/non-numeric cost is a craft that is free to use forever. CCode-corrected 2026-08-01: this rule was first written as the 4..15 band from sanitizeNewAbility (progression.js:533) and flagged 111 of 285 authored abilities — the authored range is 1..14, and the cheap 1-3 crafts are correct, not thin. 4..15 is a GENERATION clamp (a policy about what the GM may mint), not a statement about what makes a skill whole; conflating the two would have gated legitimate authored content on a generation-only rule. The clamp stays where it is and is asserted separately in the smoke tests."
     }
    ]
   }
  },
- "theConcreteLayer": "CCODE-55 (SNG-250 §3/§4): each contentType may declare a `concrete` array beside `topLevel`. `topLevel` answers SNG-250's WHOLE question (does every consumer-read field carry a value?); `concrete` answers its CONCRETE question (is that value a real thing the rules can ACT on, or a word?). Every rule is machine-checkable and code-grounded — no rule here encodes a judgement, only a fact the engine already relies on. Rule vocabulary: `enum` (value in the listed set), `everyInVocab` (every array member resolves in a named content vocab), `nonEmptyArray`, `numberInRange`, `someNumeric` (an object has a numeric value at one of `keys`), `anyOf` (at least one nested rule holds), `impliesSomeNumeric` (when `whenField` is truthy, `field` must have a numeric value at one of `keys`). ONE gate reads this for every type — a new type declares its contract here and is gated without new gate code (SNG-250 §5).",
+ "theConcreteLayer": "CCODE-55 (SNG-250 §3/§4): each contentType may declare a `concrete` array beside `topLevel`. `topLevel` answers SNG-250's WHOLE question (does every consumer-read field carry a value?); `concrete` answers its CONCRETE question (is that value a real thing the rules can ACT on, or a word?). Every rule is machine-checkable and code-grounded — no rule here encodes a judgement, only a fact the engine already relies on. Rule vocabulary: `enum` (value in the listed set), `everyInVocab` (every array member resolves in a named content vocab — `function_vocabulary.verbs` is the 24 VERBS flattened out of the 8 families, which is what an ability's `functions` array actually holds; the families are what those verbs RESOLVE TO, not what is authored), `nonEmptyArray`, `numberInRange`, `someNumeric` (an object has a numeric value at one of `keys`), `anyOf` (at least one nested rule holds), `impliesSomeNumeric` (when `whenField` is truthy, `field` must have a numeric value at one of `keys`). ONE gate reads this for every type — a new type declares its contract here and is gated without new gate code (SNG-250 §5).",
  "lanes": "SNG-250 §4 OWNERSHIP. CCode owns the MECHANICAL half of this file — which fields a consumer reads, their types, and the `concrete` rules above, every one traceable to a real read or a real clamp in HEAD. Aevi owns the SEMANTIC half — the per-type vague/concrete PROSE markers ('wants the forge her brother left' vs 'wants respect'), which no static rule can decide. Those markers are deliberately NOT invented here; the §3 semantic bar for npc/item/creature/skill is Aevi's to author, and the gate will read them from this same file when they land (a `vagueMarkers` array per type is the natural slot).",
  "howTheSweepUsesThis": "For each contentType, for each authored instance, assert every non-optional field here is PRESENT and (where typed) correctly TYPED. CRASH-severity missing = the build must fail (a consumer throws). EMPTY = fail (renders broken - the visible class). DEGRADED = warn (works but hollow - e.g. no image) unless Erik promotes it. The generator round-trip (§5c) runs its OUTPUT through this same map. Grows by incident: a new consumer.read that breaks on absence adds a line here + the sweep covers it.",
  "provenance": "Every field verified at origin by grepping the consumer code for X.subfield reads (2026-07-25): quest reads app.js~6070-6130/7291; npc reads gm.js (25x .name) + SNG-233 directive; location reads random_encounters.js/SNG-180; creature reads random_encounters.js. Non-speculative - if a field isn't read by a real consumer, it's NOT here (no bloat, the SNG-232 lesson)."

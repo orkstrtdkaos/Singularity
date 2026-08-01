@@ -8434,6 +8434,109 @@ await (async () => {
   check("168 §2: the feed VIEW pulls the shared file + lenses it on read (feedForViewer(store, profile))", /function renderFeed\(\)/.test(appSrc168) && /feedForViewer\(store \|\| \{\}, profile\)/.test(appSrc168) && /fetchRepoJSON\(FEED_PATH\)/.test(appSrc168));
 }
 
+// ---------- CCODE-55 / SNG-250 §4: the universal born-whole gate ----------
+// The SNG-232 / SNG-238 §5c discipline: a gate never shown to go RED proves nothing. Every check below
+// runs against the REAL contract file the engine ships, not a fixture — so a map edit that guts a rule
+// turns these red rather than quietly disarming the gate in production.
+{
+  const { checkBorn, hasValue, contractedTypes } = await import("../engine/borncontract.js");
+  const contract = JSON.parse(readFileSync(join(root, "content/packs/core/rules/consumer_required_subfields.json"), "utf8"));
+  const VERBS = Object.values(JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8")).families || {})
+    .flatMap(l => (Array.isArray(l) ? l : []).map(v => (typeof v === "string" ? v : v?.verb))).filter(Boolean);
+  const vocabs = { "function_vocabulary.verbs": VERBS };
+  const born = (e, t) => checkBorn(e, t, contract, { vocabs });
+
+  // ONE mechanism, every type (SNG-250 §5) — keyed by the map, with no per-type branch.
+  check("SNG-250 §4: the gate is keyed by the MAP — every contracted type is gated by the same function",
+    contractedTypes(contract).every(t => born({}, t).gated),
+    "a declared type came back ungated — the gate is not actually map-driven");
+  check("SNG-250 §4: an UNCONTRACTED type is reported ungated, never silently 'clean'",
+    born({ id: "x" }, "nonesuch").gated === false);
+  check("SNG-250 §5: a type added to the MAP ALONE is gated with no new gate code (the durable win)",
+    (() => { const grown = { contentTypes: { ...contract.contentTypes, widget: { topLevel: [{ field: "sprocket", severity: "CRASH" }] } } };
+      return checkBorn({ id: "w" }, "widget", grown, {}).verdict === "reject"; })(),
+    "a newly declared type was not gated — adding a type would need engine changes, which §5 forbids");
+  check("SNG-250: `ability` resolves to the `skill` contract (one contract, both names)",
+    born({}, "ability").gated === true);
+
+  // WHOLE — the topLevel half.
+  check("SNG-250 §3 WHOLE: a creature with no id REJECTS (CRASH — random_encounters.js:59 filters it out of existence)",
+    born({ name: "a shape" }, "creature").verdict === "reject");
+  check("SNG-250 §3 WHOLE: a fully-authored creature passes clean (no false-flag on real content)",
+    born({ id: "warpling_hare", name: "warpling hare", tier: "riffraff", class: "beast", pressures: ["HARM"], look: "a hare briefly two hares", danger: "it bites" }, "creature").verdict === "clean");
+  check("SNG-250 §3: `false` and `0` count as PRESENT — a real value a consumer reads is not a hole",
+    hasValue(false) && hasValue(0) && !hasValue("") && !hasValue([]) && !hasValue(null));
+
+  // CONCRETE — the half presence-checking can never catch. This is the §3 thesis.
+  const hollowSkill = { id: "deep_essence", name: "Deep Essence", functions: ["channel"], energyCost: 8, levelReq: 3, description: "It channels the essence of the deep.", notFor: "Anything else." };
+  const hollow = born(hollowSkill, "skill");
+  check("SNG-250 §3 CONCRETE: a skill with EVERY field present but an off-vocab verb is still flagged — the §3 thesis",
+    hollow.missing.length === 0 && hollow.vague.some(v => v.id === "function-in-vocab"),
+    "'channels the essence of the deep' passed the gate — wholeness alone cannot catch hollowness");
+  check("SNG-250 §3 CONCRETE: an empty `functions` array is flagged (familiesOfAbility would engage nothing)",
+    born({ ...hollowSkill, functions: [] }, "skill").vague.some(v => v.id === "function-in-vocab"));
+  check("SNG-250 §3 CONCRETE: a real in-vocab verb passes clean",
+    born({ ...hollowSkill, functions: ["strike"] }, "skill").verdict === "clean");
+  check("SNG-250 §3 CONCRETE: an off-vocab creature tier is flagged (BEAST_TIER silently resolves it to `notable`)",
+    born({ id: "c", name: "c", tier: "legendary", class: "b", pressures: ["HARM"], look: "l", danger: "d" }, "creature").vague.some(v => v.id === "tier-in-vocab"));
+  check("SNG-250 §3 CONCRETE: an item with NEITHER hook (no bonusTags, no numeric effects) is flagged inert",
+    born({ id: "i", name: "Old Trinket", kind: "misc", description: "It hums with old power.", consumable: false }, "item").vague.some(v => v.id === "effect-resolvable"));
+  check("SNG-250 §3 CONCRETE: EITHER hook alone satisfies the item bar (gear via bonusTags, consumable via effects)",
+    born({ id: "i", name: "Axe", kind: "weapon", description: "d", consumable: false, bonusTags: ["strike"] }, "item").verdict === "clean" &&
+    born({ id: "j", name: "Tea", kind: "consumable", description: "d", consumable: true, effects: { energy: 10 } }, "item").verdict === "clean");
+  check("SNG-250 §3 CONCRETE: a consumable whose effects are all ZERO is flagged — consumeItem destroys the stack for nothing",
+    born({ id: "k", name: "Tea", kind: "consumable", description: "d", consumable: true, effects: { energy: 0 } }, "item").vague.some(v => v.id === "consumable-spends-to-something"));
+
+  // Robustness: the gate sits inside a turn that must never die (generate.js's standing invariant).
+  check("SNG-250 §4: the gate NEVER throws — null/garbage entity, absent contract, garbled rule all degrade quietly",
+    (() => { try {
+      checkBorn(null, "skill", contract, { vocabs }); checkBorn("nope", "item", contract, {}); checkBorn({}, "item", null, {});
+      const bad = { contentTypes: { item: { topLevel: [{ field: "id", severity: "WAT" }], concrete: [{ id: "x", rule: "no_such_rule", field: "id" }] } } };
+      return checkBorn({ id: "i" }, "item", bad, {}).verdict === "clean";  // unknown severity warns, unknown rule inert — never fatal
+    } catch { return false; } })(),
+    "a malformed contract or entity took the gate down — generation must never halt a turn");
+
+  // The wiring: one function, both halves (SNG-250 §4 "authored and generated held to the same bar").
+  const genSrc250 = readFileSync(join(root, "engine/generate.js"), "utf8");
+  const ciSrc250 = readFileSync(join(root, "tests/content_ci.mjs"), "utf8");
+  const appSrc250 = readFileSync(join(root, "app.js"), "utf8");
+  check("SNG-250 §4: BOTH halves call the SAME gate — generate.js and content_ci both import checkBorn",
+    /from "\.\/borncontract\.js"/.test(genSrc250) && /from "\.\.\/engine\/borncontract\.js"/.test(ciSrc250),
+    "two implementations of one contract WILL drift (the CCODE-16 lesson)");
+  check("SNG-250 §4: generate() REJECTS a CRASH-verdict record (never ships a hollow anything)",
+    /born\.verdict === "reject"/.test(genSrc250));
+  check("SNG-250 §4: a thin-but-kept record is STAMPED on _gen.contract so it stays findable for enrichment",
+    /_gen\.contract = \{/.test(genSrc250));
+  // Comment lines are stripped first — a prose mention of generate("arc", …) is not a call site, and
+  // counting one would make this assertion fail for a documentation edit (or, worse, be "fixed" by
+  // loosening it until it stopped biting).
+  // A generate() call spans several lines (the deps object sits below the opening), so each site is
+  // checked over a forward WINDOW rather than one line.
+  const code250 = appSrc250.split("\n").filter(l => { const t = l.trim(); return !t.startsWith("//") && !t.startsWith("*"); });
+  const ungated250 = [];
+  code250.forEach((l, i) => {
+    if (!/\bgenerate\(\s*["'a-z]/.test(l)) return;
+    if (!code250.slice(i, i + 8).some(w => /\.\.\.genContractDeps\(\)/.test(w))) ungated250.push(l.trim().slice(0, 70));
+  });
+  check("SNG-250 §4: EVERY app generate() call site passes the contract (an ungated site mints ungated records)",
+    code250.some(l => /\bgenerate\(\s*["'a-z]/.test(l)) && ungated250.length === 0,
+    `these generate() call sites never pass ...genContractDeps() — they would mint UNGATED records while CI stays green: ${ungated250.join(" | ")}`);
+  check("SNG-250 §5: the generatable set is DERIVED from genSchemas, not a hardcoded type literal",
+    /GENERATABLE_TYPES = new Set\(Object\.keys\(CONTENT\.genSchemas \|\| \{\}\)\)/.test(appSrc250) &&
+    /GENERATABLE_TYPES\.has\(type\)/.test(appSrc250) &&
+    !/\["npc", "location", "arc"\]\.includes\(type\)/.test(appSrc250),
+    "the allow-list is a literal again — a newly schema'd type would be silently vetoed and 'generation is open for X' would ship as a no-op");
+  check("SNG-250 §4: boot NAMES any type whose two halves disagree (generatable-but-uncontracted / contracted-but-not-generatable)",
+    /GENERATES BUT UNCONTRACTED/.test(appSrc250) && /function reportContractCoverage\(\)/.test(appSrc250));
+  check("CCODE-55: the app feeds the gate the SAME verb index familiesOfAbility resolves against (no drifting copy)",
+    /"function_vocabulary\.verbs": Object\.values\(FN_INDEX\?\.byFamily \|\| \{\}\)\.flat\(\)/.test(appSrc250));
+  // The generation-only clamp the skill contract deliberately does NOT encode (authored costs run 1..14).
+  check("CCODE-55: the 4..15 energyCost band stays a GENERATION clamp in sanitizeNewAbility, not a contract rule",
+    /Math\.max\(4, Math\.min\(15, Number\(raw\.energyCost\) \|\| 8\)\)/.test(readFileSync(join(root, "engine/progression.js"), "utf8")) &&
+    !JSON.stringify(contract).includes('"min": 4'),
+    "the band leaked into the contract — it would flag 111 of 285 legitimately cheap authored abilities");
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

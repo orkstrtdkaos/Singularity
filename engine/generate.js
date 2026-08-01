@@ -21,6 +21,7 @@ import { namesMatch, smartClamp } from "./namematch.js";
 import { affiliationOf, regionHomeTradition } from "./affiliation.js";   // SNG-185: the ONE affiliation impl
 import { validate, missingRequired, defaultFor } from "./genschema.js";
 import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
+import { checkBorn, describeBorn } from "./borncontract.js";  // SNG-250 §4: the ONE born-whole gate (the same fn content_ci runs over authored content)
 
 export const GEN_TYPES = ["npc", "location", "arc"];
 const DEFAULT_SESSION_CAP = 6; // governor: mints per scene/session before we prefer reuse-only
@@ -314,7 +315,9 @@ export function persistGenerated(character, type, record, deps = {}) { // regist
  *
  *  context: { location, role, season, arcPressure, hint, why, rating, character, playerKey,
  *             day, birthPower, known:{authored,generated}, examples, substrate, genBudget }
- *  deps:    { callJSON(messages, opts), schema, applyCodexUpdates, codexCtx } */
+ *  deps:    { callJSON(messages, opts), schema, applyCodexUpdates, codexCtx, contract, vocabs, onContractReject }
+ *           `contract` = the consumer map (CONTENT.consumerContract) and `vocabs` its named vocabularies —
+ *           INJECTED, never imported, so this module stays pure and the SNG-250 gate is testable headless. */
 export async function generate(type, context = {}, deps = {}) {
   if (!GEN_TYPES.includes(type)) return null;
   ensureGenerated(context.character || (context.character = {}));
@@ -355,10 +358,30 @@ export async function generate(type, context = {}, deps = {}) {
     return generatedPool[existingId] || known.authored[existingId];
   }
 
+  // SNG-250 §4 — THE UNIVERSAL BORN-WHOLE GATE. The schema pass above answers "is it SHAPED like an
+  // authored record"; this answers the two questions SNG-250 actually asks: is every field a real
+  // consumer READS present (whole), and is each value something the rules can ACT on (concrete)? A
+  // record can be schema-valid and still hollow — an ability with functions:["channel"] validates fine
+  // and engages nothing. Same function, same contract file the CI sweep runs over authored content, so
+  // §4's "authored and generated content held to the same completeness bar" is literally true.
+  //
+  // A CRASH-severity failure REJECTS (return null) — the SNG-234 discipline universalized: never ship a
+  // hollow anything. Everything softer is stamped and kept, because a thin-but-present record is worth
+  // more than a hole in the world, and `_gen.contract` makes it findable for later enrichment (the same
+  // way `_gen.needsDepth` marks a rung crossing). Generation still NEVER throws and never halts a turn.
+  const born = checkBorn(entity, type, deps.contract || context.contract || null, { vocabs: deps.vocabs || context.vocabs || {} });
+  if (born.gated && born.verdict === "reject") {
+    try { deps.onContractReject?.(type, entity, born); } catch { /* telemetry is a convenience */ }
+    return null;
+  }
+
   const entityId = mintId(entity.name, generatedPool);
   stampGenerated(entity, type, entityId, context);
   entity._gen.repaired = repaired;
   entity._gen.stubbed = stubbed;
+  if (born.gated && born.verdict !== "clean") {
+    entity._gen.contract = { verdict: born.verdict, worst: born.worst, missing: born.missing.map(m => m.field), vague: born.vague.map(v => v.id), why: describeBorn(born) };
+  }
   // structural minor protection: a minor NPC is never romance/sexual-eligible, any tier, any player
   entity._gen.romanceEligible = !(type === "npc" && isMinorEntity(entity));
   // SNG-177: an NPC arrives affiliated. Without this the standing system cannot see the people a

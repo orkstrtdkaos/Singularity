@@ -18,6 +18,7 @@ import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
+import { contractedTypes } from "./engine/borncontract.js";   // SNG-250 §4: which types the born-whole contract covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
@@ -368,6 +369,8 @@ const RECIPES_PATH = "world/braid_recipes.json"; // SNG-201: a NEW shared store 
   try {
     CONTENT = await loadContent();
     FN_INDEX = buildFunctionIndex(CONTENT.functionVocabulary); // SNG-124: verb→function-family index for coverage + badges
+    GENERATABLE_TYPES = new Set(Object.keys(CONTENT.genSchemas || {})); // SNG-250 §5: derived, never a literal
+    reportContractCoverage();                                  // SNG-250 §4: name any type whose two halves disagree
   } catch (err) {
     app.innerHTML = `<div class="boot">Failed to load content packs: ${esc(err.message)}<br>Serve this folder over HTTP (packs load via fetch).</div>`;
     return;
@@ -659,7 +662,7 @@ async function seedGrownEntity() {
   const rec = await generate("npc", {
     character, location: loc, day: readClock(character.clock).day, rating: ratingCeilingNow(),
     known: { authored: CONTENT.npcs, generated: character.generated?.npc || {} }, genBudget: 5
-  }, { callJSON: fake(), schema: CONTENT.genSchemas?.npc || {}, applyCodexUpdates, codexCtx: { locationId: loc.id } });
+  }, { callJSON: fake(), schema: CONTENT.genSchemas?.npc || {}, applyCodexUpdates, codexCtx: { locationId: loc.id }, ...genContractDeps() });
   if (rec?._gen) {
     recordAttention(rec, "keep", readClock(character.clock).day); // → established, so it's clearly grown
     saveCharacter(character);
@@ -2325,6 +2328,46 @@ function pickExamples(type, location) {
   return [];
 }
 
+/** SNG-250 §4 (CCODE-55): the born-whole contract + its vocabularies, as generate() deps.
+ *
+ *  The engine is kept pure — engine/borncontract.js imports nothing and reads no globals — so the app
+ *  is what hands it the contract. ONE place builds these deps so every generate() call site is gated
+ *  identically; a call site that quietly omitted them would mint ungated records while the CI sweep
+ *  stayed green, which is the exact half-wired failure this ticket exists to close.
+ *
+ *  `function_vocabulary.verbs` is flattened from FN_INDEX.byFamily — the SAME index familiesOfAbility
+ *  resolves against (functions.js:20-24), so the gate judges a skill's verbs by the vocabulary the
+ *  engine will actually resolve them through, not by a second copy that could drift. */
+function genContractDeps() {
+  return {
+    contract: CONTENT.consumerContract || null,
+    vocabs: { "function_vocabulary.verbs": Object.values(FN_INDEX?.byFamily || {}).flat() }
+  };
+}
+
+/** SNG-250 §5: the generatable set, DERIVED — a type generates when a derived genSchema exists for it
+ *  (state.js builds CONTENT.genSchemas from schemas/<type>.schema.json). Built once at load. */
+let GENERATABLE_TYPES = new Set();
+
+/** SNG-250 §4 — the two halves must not drift apart, in EITHER direction, and both directions are real:
+ *   • generatable but UNCONTRACTED = the engine can mint the type and nothing checks it is born whole.
+ *     checkBorn reports `gated:false` for it, so it passes silently — the hollow-content hole this
+ *     ticket exists to close, reopened by omission.
+ *   • contracted but NOT generatable = the contract governs authored content only (the CI half), which
+ *     is exactly the half-wired state the map sat in before it was promoted.
+ *  Neither is fatal and neither should be silent, so both are named at boot beside the content canary.
+ *  (Today: `arc` generates and has no contract — SNG-250 §3 defines one, it is simply not in the map
+ *  yet; and quest/creature/item/skill are contracted with no generator. Both lists shrink as SNG-250
+ *  lands, and this line is how anyone can see where the seam currently is.) */
+function reportContractCoverage() {
+  const contracted = new Set(contractedTypes(CONTENT.consumerContract));
+  const ungated = [...GENERATABLE_TYPES].filter(t => !contracted.has(t));
+  const ciOnly = [...contracted].filter(t => !GENERATABLE_TYPES.has(t));
+  console.log(`[born-contract] generatable=${[...GENERATABLE_TYPES].join(",") || "none"} contracted=${[...contracted].join(",") || "none"}`
+    + (ungated.length ? ` | ⚠ GENERATES BUT UNCONTRACTED (born-whole unchecked): ${ungated.join(",")}` : "")
+    + (ciOnly.length ? ` | contracted but not generatable (CI half only): ${ciOnly.join(",")}` : ""));
+}
+
 /** The GM asked the world to grow. For each request (governor-capped per scene), author the
  *  durable in-grain entity via generate(), register it live so it's usable + revisitable NOW,
  *  and return light notes to surface. Never throws — generation must not halt a turn. */
@@ -2334,13 +2377,18 @@ async function handleGenerateRequests(turn) {
   if (!reqs.length) return [];
   ensureGenerated(character);
   const location = hereNow();
+  // (genContractDeps below supplies the SNG-250 born-whole contract to every generate() call)
   const time = readClock(character.clock);
   const memCtx = { locationId: location.id, day: time.day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
   const notes = [];
   for (const req of reqs.slice(0, 3)) {
     const type = req?.type;
-    if (!["npc", "location", "arc"].includes(type)) continue;
-    if (!CONTENT.genSchemas?.[type]) continue;                 // generation disabled for this type
+    // SNG-250 §5 (CCODE-55): which types may generate is DATA, not a literal. A type is generatable
+    // when it has a derived genSchema, so opening one means adding schemas/<type>.schema.json and
+    // registering it in state.js — never editing this line. The hardcoded ["npc","location","arc"]
+    // that used to sit here would have silently vetoed a newly schema'd type and made the next
+    // "generation is open for creature" ship as a no-op.
+    if (!GENERATABLE_TYPES.has(type)) continue;                // generation disabled for this type
     const budget = Math.max(0, 3 - sceneGenCount);              // per-scene governor cap
     if (budget <= 0) break;
     const authored = type === "npc" ? CONTENT.npcs : type === "location" ? CONTENT.locations : {};
@@ -2363,7 +2411,7 @@ async function handleGenerateRequests(turn) {
     // arrives with its picture regardless of caller — the app just injects the art builder.
     const imageFor = (entity, t) => imagesEnabled() ? ensureImage(entity, t, { ratingLevel: viewerRatingLevel() }) : null;
     let rec = null;
-    try { rec = await generate(type, ctx, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas[type], applyCodexUpdates, codexCtx: memCtx, imageFor }); }
+    try { rec = await generate(type, ctx, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas[type], applyCodexUpdates, codexCtx: memCtx, imageFor, ...genContractDeps() }); }
     catch { rec = null; }
     // SNG-190 §2: if this npc request is fleshing out someone MET the same turn, it is ONE person —
     // re-home the fresh record onto the met id (npcs.js owns npc identity), so two ids never survive.
@@ -2607,7 +2655,7 @@ async function maybeTick() {
       generateFn: async (wakeCtx) => generate("arc", {
         ...wakeCtx, character, location: CONTENT.locations[character.currentLocationId] || {},
         examples: CONTENT.genArc || [], rating: ratingCeiling(profile), genBudget: 1
-      }, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas?.arc || {}, applyCodexUpdates, codexCtx: { locationId: character.currentLocationId } })
+      }, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas?.arc || {}, applyCodexUpdates, codexCtx: { locationId: character.currentLocationId }, ...genContractDeps() })
     });
   } catch (e) { console.warn("[wake-gen] skipped:", e?.message); }
   await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)

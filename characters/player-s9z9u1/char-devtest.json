@@ -6,7 +6,7 @@
   "origin": "harmonic",
   "background": "craftsman",
   "level": 5,
-  "xp": 10,
+  "xp": 27,
   "attributes": {
     "physical": 6,
     "mental": 7,
@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 95,
+  "energy": 90,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -108,91 +108,107 @@
         "player": "Attempt: Read the hazard",
         "summary": "Read the muddy lane — the right line is clear.",
         "narration": "You take your time at the gate, letting your eye travel the path ahead. The orchard slopes gently down from here, but the recent melt has done its work on the lower lane. A run of mud spreads across the stones — not treacherous if you know where to set your feet, but wider than it looks from a standing start. You can see where the water pooled and drained: there is a shallow rut along the left side where the ground is softer, still wet and yielding. The right side is firmer, where the old tree roots have knitted the soil together just below the surface. If you angle toward the stone wall on the right and step where the roots hold, the crossing is honest work. Ossivyn glances back once, not offering anything, the record book still tucked under his arm. He has walked this path a hundred times and does not think about it anymore. Cy's lens adjusts, catching the same light you do — but the choice is yours."
+      },
+      {
+        "player": "Attempt: Commit to the crossing",
+        "summary": "The muddy crossing made cleanly along the root-held right line; the lane behind them now.",
+        "narration": "You angle right at the gate, stepping where the old tree roots have knitted the ground. The first step is solid underfoot. The second holds just as well. The mud sucks at the air around your boots but not at your feet, and you walk the root-held line cleanly to the far side of the lane. Cy follows in your exact footprints without comment, lens catching the last of the gold light.\n\nOssivyn has half-turned to watch. He gives a short nod — not approval exactly, more acknowledgment — and turns back toward the orchard proper."
       }
     ],
     "lastTurn": {
-      "narration": "You take your time at the gate, letting your eye travel the path ahead. The orchard slopes gently down from here, but the recent melt has done its work on the lower lane. A run of mud spreads across the stones — not treacherous if you know where to set your feet, but wider than it looks from a standing start. You can see where the water pooled and drained: there is a shallow rut along the left side where the ground is softer, still wet and yielding. The right side is firmer, where the old tree roots have knitted the soil together just below the surface. If you angle toward the stone wall on the right and step where the roots hold, the crossing is honest work. Ossivyn glances back once, not offering anything, the record book still tucked under his arm. He has walked this path a hundred times and does not think about it anymore. Cy's lens adjusts, catching the same light you do — but the choice is yours.",
-      "sceneSummary": "Read the muddy lane — the right line is clear.",
-      "choices": [
-        {
-          "label": "Take the right line along the wall where the roots hold — commit to the crossing",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "trivial": false,
-          "encounterId": "hard-ground"
-        },
-        {
-          "label": "Step wide to test the left rut before committing — careful, slower",
-          "attribute": "physical",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "scout"
-          ],
-          "trivial": false,
-          "encounterId": "hard-ground"
-        },
-        {
-          "label": "Call ahead to Ossivyn and ask where he puts his feet — let local knowledge lead",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "trivial": true,
-          "encounterId": "hard-ground"
-        }
-      ],
+      "narration": "You angle right at the gate, stepping where the old tree roots have knitted the ground. The first step is solid underfoot. The second holds just as well. The mud sucks at the air around your boots but not at your feet, and you walk the root-held line cleanly to the far side of the lane. Cy follows in your exact footprints without comment, lens catching the last of the gold light.\n\nOssivyn has half-turned to watch. He gives a short nod — not approval exactly, more acknowledgment — and turns back toward the orchard proper.",
+      "sceneSummary": "The muddy crossing made cleanly along the root-held right line; the lane behind them now.",
       "scene": {
-        "setting": "The Slow Orchard, planting gate and lower lane — evening, long golden light through the old branches, cool early-spring air. A run of mud spreads across the lane ahead: soft left rut, firmer root-held ground along the right wall.",
+        "setting": "The lower lane beyond the Slow Orchard's planting gate — early evening, long gold light fading at the tree-line, cool early-spring air. The muddy crossing is behind. The lane opens ahead toward the village proper.",
         "npcsPresent": [
           {
             "name": "Ossivyn Tallow",
-            "state": "Moving back toward the orchard proper, record book under his arm, glancing back once."
+            "state": "Heading back into the orchard proper, record book under his arm, not lingering."
           },
           {
             "name": "Cy",
-            "state": "At Loki's left heel, lens adjusted, reading the terrain."
+            "state": "At Loki's left heel, picking the same line through the mud without fuss."
           }
         ],
         "objects": [
-          "Freshly-planted sapling in tamped earth",
-          "Small unlabeled iron marker stake beside the root base",
-          "Closed record book (carried by Ossivyn)",
-          "Gate post with newly-straightened hinge",
-          "Muddy lane with left rut and firmer root-held right side"
+          "Muddy lane now behind — the crossing is done",
+          "Iron marker stake and sapling visible back through the gate in the orchard",
+          "The lane ahead toward the village, empty in the evening light"
         ],
         "threads": [
           "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
           "The regulator signal moving downstream — no one upstream knows to expect it",
           "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
         ]
+      },
+      "choices": [
+        {
+          "label": "Head toward the village well — the day's last gossip gathers there",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Turn back and ask Ossivyn directly about the missing person — the one whose tree is almost ready to fruit",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "study"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Follow the lane toward the lower Annex — find out who paid for the false charge",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "plan"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Find a quiet spot off the lane and use Prism Sight — see if anyone has passed this way recently",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a short crossing and a moment's pause at the lane end"
       }
     },
     "sceneState": {
-      "setting": "The Slow Orchard, planting gate and lower lane — evening, long golden light through the old branches, cool early-spring air. A run of mud spreads across the lane ahead: soft left rut, firmer root-held ground along the right wall.",
+      "setting": "The lower lane beyond the Slow Orchard's planting gate — early evening, long gold light fading at the tree-line, cool early-spring air. The muddy crossing is behind. The lane opens ahead toward the village proper.",
       "npcsPresent": [
         {
           "name": "Ossivyn Tallow",
-          "state": "Moving back toward the orchard proper, record book under his arm, glancing back once."
+          "state": "Heading back into the orchard proper, record book under his arm, not lingering."
         },
         {
           "name": "Cy",
-          "state": "At Loki's left heel, lens adjusted, reading the terrain."
+          "state": "At Loki's left heel, picking the same line through the mud without fuss."
         }
       ],
       "objects": [
-        "Freshly-planted sapling in tamped earth",
-        "Small unlabeled iron marker stake beside the root base",
-        "Closed record book (carried by Ossivyn)",
-        "Gate post with newly-straightened hinge",
-        "Muddy lane with left rut and firmer root-held right side"
+        "Muddy lane now behind — the crossing is done",
+        "Iron marker stake and sapling visible back through the gate in the orchard",
+        "The lane ahead toward the village, empty in the evening light"
       ],
       "threads": [
         "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
@@ -229,7 +245,7 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 6
+    "turnsSinceOffer": 7
   },
   "bio": null,
   "subAttributes": {
@@ -266,32 +282,16 @@
     }
   },
   "tendencies": {
-    "physical": 0.975,
-    "risky": 1
+    "physical": 0.9506249999999999,
+    "risky": 1.975
   },
   "aptitudes": [],
-  "actionCount": 2,
+  "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785603039044,
-  "rev": 36,
-  "activeEncounter": {
-    "defId": "re-re_rockfall_hazard",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-re_rockfall_hazard",
-      "type": "challenge",
-      "status": "active",
-      "round": 2,
-      "log": [
-        "r1: success @ Read the hazard → Stage clear: Read the hazard."
-      ],
-      "stageIndex": 1,
-      "stagesDone": [
-        "Read the hazard"
-      ]
-    }
-  },
+  "updatedAt": 1785603129142,
+  "rev": 38,
+  "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
       "schemaVersion": 1,
@@ -354,7 +354,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 6
+    "valley": 7
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -362,10 +362,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T16:50:39.042Z",
+      "lastAt": "2026-08-01T16:52:09.141Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -390,15 +390,15 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 5,
-    "choices": 5,
-    "scene": 5,
+    "sceneSummary": 6,
+    "choices": 6,
+    "scene": 6,
     "stateOps": 1,
     "characterDeltas": 3,
-    "timeOps": 3,
+    "timeOps": 4,
     "sceneEnded": 1
   },
-  "_opTurns": 5,
+  "_opTurns": 6,
   "practice": {
     "schemaVersion": 1,
     "uses": {

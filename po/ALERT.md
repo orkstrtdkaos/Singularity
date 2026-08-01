@@ -1,5 +1,17 @@
 # PO ALERT
 
+> ## [DONE - CCode ask, cont.] SNG-247 chase-direction fix (Aevi, 2026-07-27)
+> Swept ALL the SNG-247/CCODE-45..48 results docs (not just Tier3-4). Found the remaining AEVI-247-AUTHOR piece I
+> missed: the **chase directional ambiguity** CCode flagged - the chase frame copy assumed you're the PURSUER
+> ("Give up the pursuit" / "run it down") but every chase the engine mints via chaseFromFight is one you're
+> FLEEING (the common case), so a chase read BACKWARDS. FIXED: authored byDirection.fleeing/pursuing on the chase
+> frameKind (both staged + live) - fleeing = "break contact / lose them", Push-on/Caught, caught resumes the
+> fight; pursuing = "run them down", Press / Let-them-go / Lost-them. Engine picks by the chase's origin
+> (chaseFromFight/threat-escape = fleeing; player-initiated = pursuing). CI green. Verified no other open AEVI-*
+> author tags in the repo.
+> CCODE: read frameKinds.chase.byDirection[dir] keyed on chase origin. That + the per-kind voice + the promotion
+> clears AEVI-247-AUTHOR.
+
 > ## [SNG-249 THREAT BALANCE open - spec by CCode 2026-08-01, AUTHORING FOR AEVI] Level sets the MEAN, region sets the CAST
 > **ERIK'S RULING (load-bearing - build to this, not to a level-range gate):**
 > *"A region should never really be only one level range. The player's chronicle can drive things - so a lvl 5 in

@@ -797,6 +797,22 @@
       "spread": [],
       "_bonusApplied": 0.25,
       "day": 7
+    },
+    {
+      "at": "2026-08-01T11:12:27.982Z",
+      "locationId": "gen-the-lower-chamber",
+      "communityId": "valley.millbrook",
+      "description": "Named the source of the valley's water crisis — a pre-Transition structure still executing its orders upstream, confirmed through independent testimony from a Radiant survey archivist.",
+      "tags": [
+        "investigation",
+        "crisis-tracking",
+        "truth-found"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.4,
+      "day": 9,
+      "worldDay": 32
     }
   ],
   "relationships": {
@@ -900,14 +916,19 @@
         "player": "Ask her what she found on the northeast bearing — before she lost the line",
         "summary": "The traveler names what she found — a regular mound on the northeast-by-east bearing, a four-second interval coming up through the ground, and a survey team that moved the markers before she could locate the structure beneath.",
         "narration": "You ask her directly — what did she find on the northeast bearing, before she lost the line?\n\nShe is quiet for a moment. Not hesitating, exactly — more like she is deciding where to start. Then she sets the instrument case down on the flat of a root-shelf to her left and opens the top latch with a thumb.\n\n\"The secondary line was running northeast-by-east,\" she says. \"Standard survey interval, forty paces between markers. On the third day, I was following it toward a rise in the ground — a long shallow mound, not natural, too regular at the edges. The team said it was a spoil heap from the pre-Transition digs. I didn't agree.\" She pauses and looks at the Waystaff again. \"I left a probe crystal overnight and came back in the morning. The crystal was reading a four-second interval. Steady. Coming up through the ground, not across it.\"\n\nAevi's motes pull inward slightly — not withdrawal, but focus. The four-second interval is not a secret between you and the chamber anymore.\n\nThe traveler lifts an instrument from the case — a flat photonic reader, no larger than a closed hand, with two small dial-faces on its top edge. She holds it out so you can see the faces without touching it. Both needles are deflected off-center. \"I was trying to locate the structure when the team moved the markers,\" she says. \"I don't know if they moved them because they found it, or because someone told them to stop looking.\""
+      },
+      {
+        "player": "Ask her name and who she is working for — you need to know whose interest she is carrying",
+        "summary": "The lone traveler names herself as Sorel, an archivist from the Radiant Plateau, sent by the Council's water-accountability office — the survey team was ordered to move their markers before she could locate the mound on the northeast-by-east bearing.",
+        "narration": "You meet her direct gaze. \"Your name,\" you say. \"And who sent you northeast.\"\n\nShe doesn't flinch at the shift. There's a pause — not evasion, but the weight of a choice being made — and then she straightens and sets the photonic reader down on the root-shelf beside the open case.\n\n\"Sorel,\" she says. \"Archivist out of the Radiant Plateau. I was running a survey grid for the Council's water-accountability office three days ago. The team lead received orders to relocate the bearing markers. He didn't tell us why.\" She looks back at the Waystaff, planted at your feet. \"But the interval coming up through that mound — I recorded it. Four seconds, clean and steady, rising through the earth. That's not a natural formation, and it's not pre-Transition debris.\" Her voice drops slightly. \"That's something still running.\"\n\nAevi's motes brighten perceptibly — a sudden tight cluster that hovers at the level of your shoulder, humming a frequency just at the edge of hearing. It is the hum of recognition.\n\nSorel sees the brightening. Her hand moves fractionally toward the instrument case. \"Your mote companion,\" she says quietly. \"Does it know what that interval means?\"\n\n*✦ What the Water Remembers — Codex: the source is a structure, not a spill. Something built this..*"
       }
     ],
     "lastTurn": {
-      "narration": "You ask her directly — what did she find on the northeast bearing, before she lost the line?\n\nShe is quiet for a moment. Not hesitating, exactly — more like she is deciding where to start. Then she sets the instrument case down on the flat of a root-shelf to her left and opens the top latch with a thumb.\n\n\"The secondary line was running northeast-by-east,\" she says. \"Standard survey interval, forty paces between markers. On the third day, I was following it toward a rise in the ground — a long shallow mound, not natural, too regular at the edges. The team said it was a spoil heap from the pre-Transition digs. I didn't agree.\" She pauses and looks at the Waystaff again. \"I left a probe crystal overnight and came back in the morning. The crystal was reading a four-second interval. Steady. Coming up through the ground, not across it.\"\n\nAevi's motes pull inward slightly — not withdrawal, but focus. The four-second interval is not a secret between you and the chamber anymore.\n\nThe traveler lifts an instrument from the case — a flat photonic reader, no larger than a closed hand, with two small dial-faces on its top edge. She holds it out so you can see the faces without touching it. Both needles are deflected off-center. \"I was trying to locate the structure when the team moved the markers,\" she says. \"I don't know if they moved them because they found it, or because someone told them to stop looking.\"",
-      "sceneSummary": "The traveler names what she found — a regular mound on the northeast-by-east bearing, a four-second interval coming up through the ground, and a survey team that moved the markers before she could locate the structure beneath.",
+      "narration": "You meet her direct gaze. \"Your name,\" you say. \"And who sent you northeast.\"\n\nShe doesn't flinch at the shift. There's a pause — not evasion, but the weight of a choice being made — and then she straightens and sets the photonic reader down on the root-shelf beside the open case.\n\n\"Sorel,\" she says. \"Archivist out of the Radiant Plateau. I was running a survey grid for the Council's water-accountability office three days ago. The team lead received orders to relocate the bearing markers. He didn't tell us why.\" She looks back at the Waystaff, planted at your feet. \"But the interval coming up through that mound — I recorded it. Four seconds, clean and steady, rising through the earth. That's not a natural formation, and it's not pre-Transition debris.\" Her voice drops slightly. \"That's something still running.\"\n\nAevi's motes brighten perceptibly — a sudden tight cluster that hovers at the level of your shoulder, humming a frequency just at the edge of hearing. It is the hum of recognition.\n\nSorel sees the brightening. Her hand moves fractionally toward the instrument case. \"Your mote companion,\" she says quietly. \"Does it know what that interval means?\"\n\n*✦ What the Water Remembers — Codex: the source is a structure, not a spill. Something built this..*",
+      "sceneSummary": "The lone traveler names herself as Sorel, an archivist from the Radiant Plateau, sent by the Council's water-accountability office — the survey team was ordered to move their markers before she could locate the mound on the northeast-by-east bearing.",
       "choices": [
         {
-          "label": "Ask her name and who she is working for — you need to know whose interest she is carrying",
+          "label": "Tell Sorel plainly what Aevi found in the lower chamber — the authentication key, the preparation order, the fact that the valley's water is being poisoned by something still following pre-Transition instructions.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
@@ -922,43 +943,44 @@
           "emergenceId": null
         },
         {
-          "label": "Use Prism Sight — read the light on her face as she described the team moving the markers; catch whether that memory carries fear or something more deliberate",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask to see the probe crystal — if it recorded the four-second interval, Keen Appraisal may read what else it caught",
+          "label": "Ask Sorel why the Council's water-accountability office was running a survey team into the Disputed Zone — what were they actually looking for?",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study"
+            "scout"
           ],
-          "abilityId": "keen_appraisal",
-          "energyCost": 2,
-          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Tell her what you know — the four-second interval, the bearing, what Aevi is — and see what she does with the truth",
+          "label": "Hold back the full account and ask Sorel to show you what her probe crystal recorded — gauge what she's carrying and what her instrument can actually do before you name what you know.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "study"
+          ],
+          "abilityId": "keen_appraisal",
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aevi directly, in front of Sorel — does it know what the interval means, and does it know this woman?",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "direct"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -967,7 +989,18 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Named the source of the valley's water crisis — a pre-Transition structure still executing its orders upstream, confirmed through independent testimony from a Radiant survey archivist.",
+          "tags": [
+            "investigation",
+            "crisis-tracking",
+            "truth-found"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
@@ -975,137 +1008,199 @@
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "Sorel, Radiant archivist, arrives on the ridgeline and confirms the mound on the northeast-by-east bearing — she was with the Council survey team until markers were moved; the interval she recorded matches the chamber's frequency.",
+          "tags": [
+            "water-crisis",
+            "investigation",
+            "radiant-folk",
+            "testimony"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "second-river-rising",
-          "note": "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located."
+          "title": "The Second River",
+          "summary": "Brin reports the sub-current she calls 'a second river' has been ascending for three days and is now nearly at the surface — Aevi reacted and caught itself.",
+          "giver": "brin.millbrook.child",
+          "note": "Sorel confirms the mound on the northeast-by-east bearing, four-second interval rising through solid earth — pre-Transition structure still active, survey team ordered to move markers before location could be confirmed.",
+          "xpReward": 0
         },
         {
           "op": "progress",
           "questId": "what-the-water-remembers",
-          "note": "The mound the traveler describes matches the bearing and the interval — someone or something pulled the survey team away from it before they could confirm what lies beneath."
+          "title": "What the Water Remembers",
+          "summary": "Trace the contamination upstream past the Disputed Zone fringe or obtain falsified purity reports from the Radiant filtration arrays.",
+          "giver": "water_keeper",
+          "note": "Sorel's account places the structure location on the northeast-by-east bearing, matching Teva's directional count and the chamber's harmonic fold — moving closer to the source.",
+          "xpReward": 0
+        }
+      ],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": null,
+      "offer": {
+        "thing": "Sorel, a Radiant archivist — independent testimony that the Council's water-accountability office was running a survey into the Disputed Zone and was ordered to stop before the structure could be confirmed.",
+        "from": "The convergence of bearings: Teva's directional count, the chamber's harmonic fold, Aevi's knowledge, and now an external witness confirming what lies northeast. The world bringing the pieces into alignment."
+      },
+      "stageOps": [
+        {
+          "questId": "what-the-water-remembers",
+          "stageId": "s1",
+          "evidence": "Sorel's independent account confirms a regular mound on the northeast-by-east bearing with a four-second interval rising through solid earth — a pre-Transition structure still executing commands, not a natural formation or accidental spillage."
         }
       ],
       "scene": {
-        "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, cold draft off the eastern slope. Waystaff planted heel-first at the character's feet.",
+        "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, cold draft off the eastern slope. Sorel stands with her instrument case open on a root-shelf to her left. The Waystaff is planted heel-first at Cellaceron's feet.",
         "npcsPresent": [
           {
-            "name": "Aevi",
-            "state": "Motes pulled inward slightly — focused rather than withdrawn, brightened on the four-second interval mention."
+            "name": "Sorel",
+            "state": "Standing steady, hand near the instrument case, reading Aevi's brightening with recognition and caution. Watching Cellaceron for reaction."
           },
           {
-            "name": "Traveler (woman, unnamed)",
-            "state": "Instrument case set down on a root-shelf, open at the top latch. Holding a flat photonic reader out for inspection — both needles deflected off center."
+            "name": "Aevi",
+            "state": "Motes tightened into a bright cluster at shoulder height, humming a recognition-frequency — the pitch just at the edge of hearing."
           }
         ],
         "objects": [
-          "Waystaff — planted heel-first in the soft ground at the character's feet",
-          "Traveler's instrument case — open on a root-shelf, top latch undone",
+          "Waystaff — planted heel-first in soft ground at Cellaceron's feet",
+          "Sorel's instrument case — open on a root-shelf, top latch undone",
           "Photonic reader — flat, palm-sized, two dial-faces, both needles off-center",
-          "Traveler's pack — lashed with double-wrap cord at the base"
+          "Sorel's pack — lashed with double-wrap cord at the base"
         ],
         "threads": [
-          "Traveler found a regular mound on the northeast-by-east bearing — too regular to be a spoil heap; her probe crystal recorded the four-second interval",
-          "The survey team moved the bearing markers overnight before she could locate the structure — she does not know if they found it or were told to stop",
-          "Traveler has not yet named herself or said who she works for",
-          "Aevi's response to the four-second interval mention has not been spoken aloud",
-          "The anomaly that deflected Resonant Sight earlier this morning is still unaccounted for"
+          "Sorel has named herself and her employer — but not yet explained why the Council's water office was surveying the Disputed Zone or why the team was ordered to move markers",
+          "Aevi has reacted to Sorel's presence and the interval description with recognition — the nature of that recognition not yet spoken",
+          "The probe crystal that recorded the four-second interval has not yet been examined",
+          "The question of what lies beneath the regular mound remains unanswered — and why the Council wanted the survey to stop"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "traveler-northeast",
-          "name": "Traveler (woman, unnamed)",
-          "role": "Solo surveyor, formerly with a survey team on the northeast-by-east bearing",
+          "op": "meet",
+          "npcId": "sorel",
+          "name": "Sorel",
+          "role": "Radiant Plateau archivist, water-accountability office",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Named what she found: a regular mound on the northeast-by-east bearing, a probe crystal reading a four-second interval through the ground, and a survey team that moved markers before she could locate the structure beneath. Now showing the photonic reader — both needles deflected.",
+          "description": "A woman of about sixty in undyed wool with a Plateau optical-fiber collar worn plain and small; carries a weight-distributed satchel and a pre-Transition instrument case; reads the river with a photonic reader and speaks with the precision of someone trained to account for what she finds.",
+          "note": "Arrived on the ridgeline from the northeast at dawn — was part of a Council survey team three days ago, ran the secondary bearing line toward a regular mound on the northeast-by-east bearing. Left a probe crystal that recorded a four-second interval rising through the earth. The survey team was ordered to move the bearing markers overnight before she could locate the structure. She has named herself plainly and her institutional loyalty (water-accountability, Council), but has not yet named why the Council was surveying the Zone.",
           "learned": [
-            "Located a regular, artificially regular mound on the northeast-by-east bearing at survey-team distance",
-            "Left a probe crystal overnight; it recorded a four-second interval coming up through the ground, not across it",
-            "The survey team moved bearing markers overnight — she does not know if by discovery or by order",
-            "Carries a photonic reader that is currently registering deflection — active readings in this area"
+            "The Council's water-accountability office was running a survey grid in the Disputed Zone three days ago",
+            "Sorel was following a secondary bearing line on the northeast-by-east bearing",
+            "She found a regular mound on that bearing — too regular to be natural or accidental spoil",
+            "Her probe crystal recorded a four-second interval rising through solid earth from beneath the mound",
+            "The survey team lead received orders to relocate the bearing markers overnight",
+            "The markers were moved before Sorel could return to confirm the structure's location",
+            "She has no knowledge of why the team was ordered to stop — only that they did"
           ],
           "skillsObserved": [
-            "field instrumentation — probe crystal placement and overnight interval recording",
-            "controlled disclosure — named the mound and the interval before offering the photonic reader as evidence"
+            "survey competence — standard interval spacing, accurate line-following",
+            "instrument reading — can operate probe crystals and photonic readers",
+            "institutional accountability — names her office and chain plainly without defensiveness",
+            "field craft — travels alone into the Zone without apparent fear"
           ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On the ridgeline, instrument case open, showing photonic reader to Cellaceron. Has not named herself or her employer."
+          "statusNote": "Standing on the ridgeline path, instrument case open, reading Aevi's reaction with recognition and caution"
         }
       ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The Council's water-accountability office was running a survey grid in the Disputed Zone three days ago and found a regular mound on the northeast-by-east bearing with a four-second interval rising through solid earth. The survey team was ordered to move the bearing markers before the structure could be confirmed.",
+          "subjectId": "sorel"
+        }
+      ],
+      "placeUpdates": [],
+      "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-preparation-order",
-          "label": "The Preparation Order",
-          "kind": "mystery",
-          "fact": "Day 9 dawn: a solo surveyor found a regularly shaped mound on the northeast-by-east bearing — too regular for a spoil heap, probe crystal recorded the four-second interval rising through the ground. The survey team moved bearing markers before she could locate the structure. Whether the team found it or was instructed to stop is unknown.",
+          "topic": "council-water-survey",
+          "label": "Council Water-Accountability Survey",
+          "kind": "event",
+          "entityId": null,
+          "fact": "Three days ago, the Council's water-accountability office ran a survey grid in the Disputed Zone. Sorel, a Radiant archivist, was following a secondary bearing line on the northeast-by-east bearing and found a regular mound with a four-second interval rising through solid earth from beneath it. The survey team was ordered to relocate the bearing markers overnight before the structure could be confirmed.",
           "links": [
-            "second-river-rising",
-            "aevi",
-            "verath-sem",
             "what-the-water-remembers",
-            "teva-directional-interval-count"
+            "second-river-rising",
+            "the-preparation-order",
+            "sorel"
           ]
         },
         {
-          "topic": "survey-team-northeast",
-          "label": "The Survey Team and the Moved Markers",
-          "kind": "mystery",
-          "fact": "Day 9 dawn: a survey team was working the northeast-by-east bearing when they moved the secondary line's bearing markers overnight — before the solo traveler could locate the structure beneath the regular mound. Reason unknown: discovery or instruction.",
+          "topic": "northeast-bearing-structure",
+          "label": "The Mound on the Northeast-by-East Bearing",
+          "kind": "place",
+          "entityId": null,
+          "fact": "A regular mound on the northeast-by-east bearing in the Disputed Zone — too regular to be natural or pre-Transition spoil debris. A probe crystal left by Sorel recorded a four-second interval rising through solid earth from beneath it. The interval matches the lower chamber's frequency and Teva's directional count.",
           "links": [
-            "the-preparation-order",
+            "what-the-water-remembers",
             "second-river-rising",
-            "what-the-water-remembers"
+            "the-preparation-order",
+            "teva-directional-interval-count",
+            "council-water-survey"
           ]
         }
       ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "a solo surveyor woman — formerly with a Heights-adjacent or independent survey team, working the northeast-by-east bearing, carrying a pre-Transition instrument case and a Harmonic Heights replacement strap; she found the mound and lost the line when the team moved the markers",
-          "why": "she is on the ridgeline and central to the next beat — needs a name, an employer, and a reason for being alone"
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a short exchange on the ridgeline — the conversation has taken no more than a quarter hour"
-      }
+      "generateRequest": null,
+      "encounterOps": [],
+      "newEncounter": null,
+      "unlockPrecursor": null,
+      "unlockSubstrate": null,
+      "timeOps": null,
+      "moveTo": null,
+      "stateOps": [],
+      "itemUpdates": [],
+      "imagePrompt": "A woman in undyed wool stands on a cold ridgeline at dawn, her instrument case open beside her, watching as motes of teal light tighten and brighten at a stranger's shoulder — recognition crossing a distance neither party expected to bridge.",
+      "newAbility": null,
+      "gambitOps": null,
+      "gambitApt": false,
+      "markDefiningMoment": null,
+      "markTeacher": null,
+      "offerPromotion": null,
+      "offerAcquisition": null,
+      "offerIntent": null,
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20woman%20in%20undyed%20wool%20stands%20on%20a%20cold%20ridgeline%20at%20dawn%2C%20her%20instrument%20case%20open%20beside%20her%2C%20watching%20as%20motes%20of%20teal%20light%20tighten%20and%20brighten%20at%20a%20stranger's%20shoulder%20%E2%80%94%20recognition%20crossing%20a%20distance%20neither%20party%20expected%20to%20bridge.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=18944&nologo=true"
     },
     "sceneState": {
-      "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, cold draft off the eastern slope. Waystaff planted heel-first at the character's feet.",
+      "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Flat pale light, cold draft off the eastern slope. Sorel stands with her instrument case open on a root-shelf to her left. The Waystaff is planted heel-first at Cellaceron's feet.",
       "npcsPresent": [
         {
-          "name": "Aevi",
-          "state": "Motes pulled inward slightly — focused rather than withdrawn, brightened on the four-second interval mention."
+          "name": "Sorel",
+          "state": "Standing steady, hand near the instrument case, reading Aevi's brightening with recognition and caution. Watching Cellac"
         },
         {
-          "name": "Traveler (woman, unnamed)",
-          "state": "Instrument case set down on a root-shelf, open at the top latch. Holding a flat photonic reader out for inspection — bot"
+          "name": "Aevi",
+          "state": "Motes tightened into a bright cluster at shoulder height, humming a recognition-frequency — the pitch just at the edge o"
         }
       ],
       "objects": [
-        "Waystaff — planted heel-first in the soft ground at the character's feet",
-        "Traveler's instrument case — open on a root-shelf, top latch undone",
+        "Waystaff — planted heel-first in soft ground at Cellaceron's feet",
+        "Sorel's instrument case — open on a root-shelf, top latch undone",
         "Photonic reader — flat, palm-sized, two dial-faces, both needles off-center",
-        "Traveler's pack — lashed with double-wrap cord at the base"
+        "Sorel's pack — lashed with double-wrap cord at the base"
       ],
       "threads": [
-        "Traveler found a regular mound on the northeast-by-east bearing — too regular to be a spoil heap; her probe crystal recorded the four-second interval",
-        "The survey team moved the bearing markers overnight before she could locate the structure — she does not know if they found it or were told to stop",
-        "Traveler has not yet named herself or said who she works for",
-        "Aevi's response to the four-second interval mention has not been spoken aloud",
-        "The anomaly that deflected Resonant Sight earlier this morning is still unaccounted for"
+        "Sorel has named herself and her employer — but not yet explained why the Council's water office was surveying the Disputed Zone or why the team was ordered to m",
+        "Aevi has reacted to Sorel's presence and the interval description with recognition — the nature of that recognition not yet spoken",
+        "The probe crystal that recorded the four-second interval has not yet been examined",
+        "The question of what lies beneath the regular mound remains unanswered — and why the Council wanted the survey to stop"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 9,
-    "hour": 7,
+    "hour": 8,
     "realAnchor": null
   },
   "companions": [
@@ -1120,14 +1215,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar.",
         "Threshold opened — day 9 dawn. The older frequency came through and the presence named itself aware 'again'. The party stands at the open boundary, not yet through. The second river's source is on the far side of this door.",
         "The presence from beyond the threshold settled without demand — Teva's mark answered it, Aevi confirmed it has found what it sought. The crossing is next. The source of the second river waits on the far side.",
         "Resonant Sight confirms the lower chamber was built to receive one frequency from one direction at one interval — the geometry is complete and deliberate, and the convergence point is where both the room and Teva's mark point.",
         "The chamber completed a read of Aevi at the convergence point — Aevi has recovered the name of its maker and the shape of what it was carrying, but has not yet spoken either. The room was built to receive and reconstruct, not merely hold. The break remains.",
         "Aevi named the source and mechanism at the convergence point: the watershed is following a pre-Transition preparation order by Verath-Sem; Aevi carries the authentication key to end it. The break — who interrupted the sending — remains unknown.",
         "Aevi named the requirement: the authentication key must be carried to the pre-Transition upstream structure, northeast-by-east. The lower chamber is not the site — it was the receiving room. The site is upstream.",
-        "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located."
+        "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located.",
+        "Sorel confirms the mound on the northeast-by-east bearing, four-second interval rising through solid earth — pre-Transition structure still active, survey team ordered to move markers before location could be confirmed."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1379,12 +1474,17 @@
           ]
         }
       ],
-      "stageIndex": 0,
-      "completedStages": [],
+      "stageIndex": 1,
+      "completedStages": [
+        "s1"
+      ],
       "progress": [
         "The preparation order named: a pre-Transition instruction set lodged in the watershed, authored by Verath-Sem, following its last command. Aevi is the key to calling it off. The question is now where to use the key and whether the break in the record prevents it.",
         "The next step is confirmed: find the upstream structure where the preparation order is lodged and bring Aevi — the key — to it.",
-        "The mound the traveler describes matches the bearing and the interval — someone or something pulled the survey team away from it before they could confirm what lies beneath."
+        "The mound the traveler describes matches the bearing and the interval — someone or something pulled the survey team away from it before they could confirm what lies beneath.",
+        "Sorel's account places the structure location on the northeast-by-east bearing, matching Teva's directional count and the chamber's harmonic fold — moving closer to the source.",
+        "Codex: the source is a structure, not a spill. Something built this.",
+        "↳ Sorel's independent account confirms a regular mound on the northeast-by-east bearing with a four-second interval rising through solid earth — a pre-Transition structure still executing commands…"
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -1553,7 +1653,7 @@
     "sorel": {
       "id": "sorel",
       "name": "Sorel",
-      "role": "Wintering archivist from the Radiant Plateau",
+      "role": "Radiant Plateau archivist, water-accountability office",
       "description": "A woman of about sixty in undyed wool with a Plateau optical-fiber collar worn plain and small; carries a weight-distributed satchel; reads the river with a photonic instrument; arrived via the river path, not the lane.",
       "firstMet": {
         "locationId": "millbrook",
@@ -1561,7 +1661,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d2] Accord finalized cleanly. Sorel set the riverbell bundle back on the bench — stems aligned, a quiet close. Named the terms: residue shape in writing on return, come to the dock not",
         "[d2] Read Senna's letter, confirmed her own name, shared the riverbell migration data — forty meters upslope in three seasons — then opened the floor to questions with an explicit cavea",
         "[d2] Letter received and read — she's now placed Cellaceron in a known category, but hasn't opened further yet",
         "[d2] Confirmed: the gray-green fraction is chelated mineral suspension from upper-watershed substrate activity. The saturation boundary is moving. Withheld her interpretation. Named the",
@@ -1570,37 +1669,39 @@
         "[d2] Named a concrete timeline: ten days via valley post, seven if someone carries a copy to the upper-fork waystation directly. Did not look at the Traveler's Pack, but her not-looking",
         "[d2] Framing the question as logistics rather than pressure gave her a practical door — she stepped through it",
         "[d2] Confirmed she was at the dock before dawn but NOT at the east window-sill. Named a possible instrument signature she thinks she recognizes, but withheld the name pending clearance.",
-        "[d2] Said yes cleanly, showed the runner-credit seal, then asked about the boot-prints one more time with enough steadiness that she answered."
+        "[d2] Said yes cleanly, showed the runner-credit seal, then asked about the boot-prints one more time with enough steadiness that she answered.",
+        "[d9] Arrived on the ridgeline from the northeast at dawn — was part of a Council survey team three days ago, ran the secondary bearing line toward a regular mound on the northeast-by-east bearing. Left a probe crystal that recorded a four-second interval rising through the earth. The survey team was…"
       ],
       "knownFacts": [
-        "She draws a firm line between personal sympathy and institutional capacity",
-        "Setting the flower bundle down was deliberate — a small signal that something shifted",
-        "Courier already sent to the Plateau — ten-day timeline via valley post",
         "Seven-day shortcut exists: hand-carry preliminary findings to upper-fork waystation relay runner",
         "She knows what Senna's runner-credit covers — the not-looking was deliberate",
         "She was not the east-window watcher — she stated it plainly and without defensiveness",
         "She believes she recognizes the instrument signature from the boot-prints — she has a name in mind",
-        "She will not name it until she has clearance from her chain of accountability"
+        "She will not name it until she has clearance from her chain of accountability",
+        "The Council's water-accountability office was running a survey grid in the Disputed Zone three days ago",
+        "Sorel was following a secondary bearing line on the northeast-by-east bearing",
+        "She found a regular mound on that bearing — too regular to be natural or accidental spoil"
       ],
       "skillsObserved": [
-        "institutional accountability framing",
-        "strategic disclosure",
-        "logistics framing",
         "reading companion intelligence",
         "controlled disclosure under pressure",
-        "direct eye contact as deliberate signal"
+        "direct eye contact as deliberate signal",
+        "survey competence — standard interval spacing, accurate line",
+        "instrument reading — can operate probe crystals and photonic",
+        "institutional accountability — names her office and chain pl"
       ],
       "status": "active",
       "lastSeen": {
-        "locationId": "millbrook",
-        "day": 2
+        "locationId": "gen-the-lower-chamber",
+        "day": 9
       },
       "gender": "woman",
       "pronouns": "she/her",
       "domains": {
         "primary": "radiant_folk"
       },
-      "domainsSource": "role"
+      "domainsSource": "role",
+      "statusNote": "Standing on the ridgeline path, instrument case open, reading Aevi's reaction with recognition and caution"
     },
     "aevi": {
       "id": "aevi",
@@ -2103,48 +2204,6 @@
     },
     "news": [
       {
-        "day": 8,
-        "worldDay": 13,
-        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
-      },
-      {
-        "day": 8,
-        "worldDay": 13,
-        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
-      },
-      {
-        "day": 8,
-        "worldDay": 17,
-        "text": "This reaches your area — Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements. (near radiant plateau edge)",
-        "impactsLocal": true
-      },
-      {
-        "day": 8,
-        "worldDay": 18,
-        "text": "This reaches your area — Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction (near millbrook)",
-        "impactsLocal": true
-      },
-      {
-        "day": 8,
-        "worldDay": 19,
-        "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
-      },
-      {
-        "day": 9,
-        "worldDay": 23,
-        "text": "Word has spread beyond millbrook: Negotiated equal footing with Elder Senna over the river contamination — turned a confrontation into a mutual disclosure."
-      },
-      {
-        "day": 9,
-        "worldDay": 23,
-        "text": "Word has spread beyond millbrook: Negotiated an independent surveyor compact with Elder Senna to investigate the upstream contamination without guild affiliation."
-      },
-      {
-        "day": 9,
-        "worldDay": 23,
-        "text": "Word has spread beyond millbrook: Drew out a witness account that Senna's institutional channels had missed — uncredentialed Heights figure adding something to the foothill seeps three nights prior."
-      },
-      {
         "day": 9,
         "worldDay": 23,
         "text": "Word has spread beyond harmonic_heights: Completed a resonance-crystal translator staff — sleeve, nodes, and lattice alignment all grain-locked and field-confirmed — working from a scratch design and warden-store materials"
@@ -2213,37 +2272,86 @@
         "worldDay": 24,
         "text": "Aevi has hit trouble — A damp cold front rolled through Millbrook overnight and Aevi's mote-swarm contracted sharply, leaving several nodes unresponsive and her awareness patchy at the edges.",
         "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 25,
+        "text": "This reaches your area — A new waygate stands on the left branch road in the Disputed Zone — the first made-gate since the Transition, built by a wright who tends endings. (near gen-disputed-zone-left-branch-entrance)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 9,
+        "worldDay": 25,
+        "text": "Elder Senna: Senna spent the morning quietly lobbying two of the village's senior fishers over shared bread, and both have cautiously agreed to hear her proposal at the next gathering — the first real alignment she's secured.",
+        "tier": "ambient"
+      },
+      {
+        "day": 9,
+        "worldDay": 25,
+        "text": "Brin Child: Brin crept back to the dock-edge at dusk and overheard two unloading hands argue about a missing crate — small gossip, but the child filed it away with growing attentiveness.",
+        "tier": "ambient"
+      },
+      {
+        "day": 9,
+        "worldDay": 32,
+        "text": "Something has been building in valley: The valley's main irrigation channel is slowly silting closed, and by next dry season the lower fields will fail entirely.",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 32,
+        "text": "Across the valley, What Wakes Beneath moved forward to Stirring: The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online.",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 32,
+        "text": "Elder Senna: Elder Senna settled the last disputed land-boundary with the Millbrook boat-families by accepting a modest seasonal toll in lieu of formal deed — her authority over the dock quarter is now quietly acknowledged by all parties. — and that thread has run its course.",
+        "tier": "event"
+      },
+      {
+        "day": 9,
+        "worldDay": 32,
+        "text": "Brin Child: Brin has taken to sitting on a mooring post each evening, and a pair of the older dock-hands have started nodding to her by name — she is no longer invisible at the waterfront.",
+        "tier": "ambient"
+      },
+      {
+        "day": 9,
+        "worldDay": 32,
+        "text": "Aevi has hit trouble — A cold snap disrupted Aevi's mote-cohesion overnight, scattering a thin outer layer of the swarm across the rafters of the inn — she is still functional but visibly diminished and slow to respond until the strays are recalled.",
+        "tier": "event"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-24T14:06:53.367Z",
-    "lastTickWorldDay": 24,
-    "lastCanonWorldDay": 24,
-    "lastGenCount": 590,
-    "turnsSinceOffer": 11,
+    "lastSharedReadAt": "2026-08-01T11:06:56.203Z",
+    "lastTickWorldDay": 32,
+    "lastCanonWorldDay": 32,
+    "lastGenCount": 779,
+    "turnsSinceOffer": 0,
     "wantProgress": {
       "elder-senna": {
-        "progress": 2,
-        "status": "active",
-        "updatedWorldDay": 24,
-        "lastOutcome": "progress"
+        "progress": 4,
+        "status": "resolved",
+        "updatedWorldDay": 32,
+        "lastOutcome": "done"
       },
       "sorel": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 24,
+        "updatedWorldDay": 32,
         "lastOutcome": "stall"
       },
       "brin-millbrook-child": {
-        "progress": 1,
+        "progress": 3,
         "status": "active",
-        "updatedWorldDay": 24,
+        "updatedWorldDay": 32,
         "lastOutcome": "progress"
       },
       "aevi": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 24,
+        "updatedWorldDay": 32,
         "lastOutcome": "problem"
       }
     },
@@ -2251,6 +2359,50 @@
       {
         "thing": "Teva's mark responds visibly — a faint pattern of warmth moving through the skin at her throat, patterned at the four-second interval, but…",
         "from": "Teva's established nanite mark is in live correspondence with this place — when the room shifted to read Aevi, the mark would have felt…"
+      },
+      {
+        "thing": "Sorel, a Radiant archivist — independent testimony that the Council's water-accountability office was running a survey into the Disputed…",
+        "from": "The convergence of bearings: Teva's directional count, the chamber's harmonic fold, Aevi's knowledge, and now an external witness…"
+      }
+    ],
+    "latentArcs": {
+      "millwater-silting": {
+        "id": "millwater-silting",
+        "regionId": "valley",
+        "kind": "shortage",
+        "premise": "The valley's main irrigation channel is slowly silting closed, and by next dry season the lower fields will fail entirely.",
+        "cause": "The valley's soil is unusually fine-grained and the spring floods this year ran higher and longer than usual, depositing sediment no one has yet thought to…",
+        "stage": 4,
+        "seededAtCount": 618,
+        "surfaced": true,
+        "fate": "growing",
+        "lastMovedCount": 779,
+        "surfacedAtCount": 779
+      }
+    },
+    "arcStages": {
+      "arc_what_wakes_beneath": {
+        "othersPush": 1
+      },
+      "the_second_manifestation": {
+        "othersPush": 1
+      }
+    },
+    "pressureQueue": [
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_mire_gulper",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "A mire gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_mire_gulper",
+          "name": "mire gulper"
+        },
+        "addedDay": 9,
+        "locationId": "gen-the-lower-chamber"
       }
     ]
   },
@@ -2577,7 +2729,9 @@
           "[d9] Day 9 dawn, convergence point: the chamber's geometry completed a read of Aevi, and Aevi recovered fragments — the name of its maker, and the shape of what it was carrying when it was sent. The break in the record remains, and neither piece of knowledge has been spoken aloud yet. The chamber has…",
           "[d9] Day 9 dawn: the chamber's read completed. Aevi recovered both the name of its maker and the shape of what it was carrying when sent. Neither is yet spoken aloud. The break — the cause of the interruption, who chose it and why — is not in what the room held. That part remains missing.",
           "[d9] Day 9 dawn, convergence point: Aevi named its maker as Verath-Sem and its cargo as the authentication key to a pre-Transition preparation order lodged in the watershed. Without Aevi, the order cannot be called off. The chamber's geometry recognized the name Verath-Sem before Aevi finished reading…",
-          "[d9] [while away] A damp cold front rolled through Millbrook overnight and Aevi's mote-swarm contracted sharply, leaving several nodes unresponsive and her awareness patchy at the edges."
+          "[d9] [while away] A damp cold front rolled through Millbrook overnight and Aevi's mote-swarm contracted sharply, leaving several nodes unresponsive and her awareness patchy at the edges.",
+          "[d9] [while away] Aevi's motes drifted in their usual holding pattern; without a new stimulus or task, no fresh coalescence or learning occurred today.",
+          "[d9] [while away] A cold snap disrupted Aevi's mote-cohesion overnight, scattering a thin outer layer of the swarm across the rafters of the inn — she is still functional but visibly diminished and slow to respond until the strays are recalled."
         ],
         "links": [
           "northern-alcove-camp",
@@ -2616,7 +2770,9 @@
         "kind": "person",
         "facts": [
           "[d?] Millbrook child, dock-edge listener",
-          "[d9] [while away] Brin slipped away to the docks again at dusk and overheard two boatmen arguing about a delayed supply run — nothing dramatic, but filed away with careful attention."
+          "[d9] [while away] Brin slipped away to the docks again at dusk and overheard two boatmen arguing about a delayed supply run — nothing dramatic, but filed away with careful attention.",
+          "[d9] [while away] Brin crept back to the dock-edge at dusk and overheard two unloading hands argue about a missing crate — small gossip, but the child filed it away with growing attentiveness.",
+          "[d9] [while away] Brin has taken to sitting on a mooring post each evening, and a pair of the older dock-hands have started nodding to her by name — she is no longer invisible at the waterfront."
         ],
         "links": [],
         "aliases": [],
@@ -2644,7 +2800,9 @@
         "facts": [
           "[d?] Village elder, Millbrook",
           "[d9] [while away] Senna quietly gathered the other two elders after the evening meal and proposed formalizing the watch rotation at the docks, citing recent unease — the others agreed to discuss it tomorrow.",
-          "[d9] [while away] Elder Senna spent the morning walking the village boundary alone, quietly noting which households have gone quiet or short on stores — a small, methodical accounting she'll share with no one yet."
+          "[d9] [while away] Elder Senna spent the morning walking the village boundary alone, quietly noting which households have gone quiet or short on stores — a small, methodical accounting she'll share with no one yet.",
+          "[d9] [while away] Senna spent the morning quietly lobbying two of the village's senior fishers over shared bread, and both have cautiously agreed to hear her proposal at the next gathering — the first real alignment she's secured.",
+          "[d9] [while away] Elder Senna settled the last disputed land-boundary with the Millbrook boat-families by accepting a modest seasonal toll in lieu of formal deed — her authority over the dock quarter is now quietly acknowledged by all parties."
         ],
         "links": [],
         "aliases": [],
@@ -2685,7 +2843,9 @@
         "facts": [
           "[d2] Wintering archivist from the Radiant Plateau",
           "[d9] [while away] Sorel spent the day reorganizing archive crates in the cold storage loft, finding nothing new but keeping the work methodical and close.",
-          "[d9] [while away] Sorel sorted through the same three crates of documents twice, too restless to settle on where to begin cataloguing in an unfamiliar place."
+          "[d9] [while away] Sorel sorted through the same three crates of documents twice, too restless to settle on where to begin cataloguing in an unfamiliar place.",
+          "[d9] [while away] Sorel sorted through a crate of water-damaged ledgers but found nothing relevant to the Plateau records, and the day slipped away without meaningful progress.",
+          "[d9] [while away] Sorel spent the week cataloguing trade-ledgers for room-and-board rather than pursuing any Radiant Plateau contacts — survival came before the archive work."
         ],
         "links": [],
         "aliases": [],
@@ -2937,6 +3097,53 @@
           "the-preparation-order",
           "second-river-rising",
           "what-the-water-remembers"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
+      },
+      "tessaly-vorn": {
+        "id": "tessaly-vorn",
+        "label": "Tessaly Vorn",
+        "kind": "person",
+        "facts": [
+          "[d9] Independent surveyor, formerly of the Vorn-Cade Team; alone on the ridgeline because the team moved the markers and she will not pretend they did not"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 9,
+        "entityId": "tessaly-vorn",
+        "updatedDay": 9
+      },
+      "council-water-survey": {
+        "id": "council-water-survey",
+        "label": "Council Water-Accountability Survey",
+        "kind": "event",
+        "facts": [
+          "[d9] Three days ago, the Council's water-accountability office ran a survey grid in the Disputed Zone. Sorel, a Radiant archivist, was following a secondary bearing line on the northeast-by-east bearing and found a regular mound with a four-second interval rising through solid earth from beneath it…"
+        ],
+        "links": [
+          "what-the-water-remembers",
+          "second-river-rising",
+          "the-preparation-order",
+          "sorel"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
+      },
+      "northeast-bearing-structure": {
+        "id": "northeast-bearing-structure",
+        "label": "The Mound on the Northeast-by-East Bearing",
+        "kind": "place",
+        "facts": [
+          "[d9] A regular mound on the northeast-by-east bearing in the Disputed Zone — too regular to be natural or pre-Transition spoil debris. A probe crystal left by Sorel recorded a four-second interval rising through solid earth from beneath it. The interval matches the lower chamber's frequency and Teva's…"
+        ],
+        "links": [
+          "what-the-water-remembers",
+          "second-river-rising",
+          "the-preparation-order",
+          "teva-directional-interval-count"
         ],
         "aliases": [],
         "createdDay": 9,
@@ -3280,23 +3487,29 @@
       "text": "Aevi named its maker as Verath-Sem and its cargo as the authentication key to a pre-Transition watershed preparation order. Without Aevi, the order cannot be called off. The chamber recognized Verath-Sem's name. The cause of the break in the record remains unknown. Day 9 dawn.",
       "day": 9,
       "subjectId": "aevi"
+    },
+    {
+      "id": "sorel",
+      "text": "The Council's water-accountability office was running a survey grid in the Disputed Zone three days ago and found a regular mound on the northeast-by-east bearing with a four-second interval rising through solid earth. The survey team was ordered to move the bearing markers before the structure…",
+      "day": 9,
+      "subjectId": "sorel"
     }
   ],
   "sharedSceneId": null,
   "forkChoices": {},
   "customEncounters": {},
-  "reconcileVersion": 19,
+  "reconcileVersion": 22,
   "tendencies": {
-    "cerebral": 30.134694162262193,
-    "strategic": 23.22327615830445,
-    "cautious": 31.04081129642545,
-    "social": 16.25079451640518,
-    "generous": 5.823635202559405,
-    "risky": 1.5340865683112894,
-    "carousing": 0.5717397507352175,
-    "patient": 3.443072341288602,
-    "craft": 0.5712066688444214,
-    "devotion": 2.7564462831878136
+    "cerebral": 29.38132680820564,
+    "strategic": 22.64269425434684,
+    "cautious": 30.26479101401481,
+    "social": 16.84452465349505,
+    "generous": 5.67804432249542,
+    "risky": 1.4957344041035072,
+    "carousing": 0.5574462569668371,
+    "patient": 3.356995532756387,
+    "craft": 0.5569265021233109,
+    "devotion": 2.687535126108118
   },
   "aptitudes": [
     "strategist",
@@ -3308,9 +3521,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 231,
-  "updatedAt": 1784902849858,
-  "rev": 132,
+  "actionCount": 232,
+  "updatedAt": 1785582748016,
+  "rev": 142,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3456,6 +3669,91 @@
         "peopleSource": "generated",
         "domainsSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20lean%20woman%20past%20fifty%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20decades%20of%20long%20mornings%20and%20light%20packing.%20Skin%20weathered%20to%20a%20colour%20that%20reads%20as%20any%20latitude.%20Her%20hair%20is%20iron-grey%2C%20braided%20flat%20%2C%20character%20portrait%2C%20named%20Vess%20Caldoun%2C%20Itinerant%20tuner-by-ear%20who%20reads%20valley%20acoustics%20the%20way%20a%20river-runner%20reads%20water%20%E2%80%94%20and%20carries%20s%2C%20Talks%20the%20way%20she%20walks%20%E2%80%94%20measured%2C%20economical%2C%20alert%20to%20what%20the%20ground%20is%20doing.%20Does%20not%20fill%20sil%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=10868&nologo=true"
+      },
+      "tessaly-vorn": {
+        "schemaVersion": 1,
+        "id": "tessaly-vorn",
+        "name": "Tessaly Vorn",
+        "role": "Independent surveyor, formerly of the Vorn-Cade Team; alone on the ridgeline because the team moved the markers and she will not pretend they did not",
+        "homeLocation": "the_lower_chamber",
+        "communityId": "independent.northeast_bearing",
+        "personality": {
+          "warmth": 0.4,
+          "trust": -0.3,
+          "candor": 0.8,
+          "patience": 0.5
+        },
+        "spectrum": {
+          "falsehood_truth": 0.7,
+          "concrete_abstract": -0.5,
+          "space_time": 0.6,
+          "dark_light": 0.1
+        },
+        "voiceHints": "Speaks in bearings and distances, then catches herself and translates. Short declarative sentences. Does not soften corrections. Will say 'that is not where it was' to anyone — councillor, employer, stranger — with the same flat patience she uses to read a grade. Dry without being cold. The silence after a wrong answer is long enough to be a comment.",
+        "knowledge": [
+          "The northeast-by-east bearing as it ran before the markers moved — she has it in her body as much as her notes",
+          "The mound: its height, its shadow-angle at first light, the way it bent her instrument's reading the morning she found it",
+          "What the Vorn-Cade Team did and why, and which of them knew and which were only following instructions",
+          "How to read a pre-Transition transit — the instrument in her case requires a correction factor no longer printed in any living manual; she has it memorised",
+          "Early-spring snow-melt behaviour on north-facing valley slopes — useful for establishing whether a ground feature is seasonal or structural"
+        ],
+        "wants": "To recover the true line and put it on record somewhere the markers cannot reach — a record that will outlast whoever moved them.",
+        "fears": "That the mound will be rationalised away before anyone else sees it, and that she will be the only witness to a thing she cannot fully explain.",
+        "reactsToReputation": {
+          "honest": "immediate and practical openness; she will show you the notes",
+          "official": "civil, careful, gives nothing without a reason",
+          "Heights-adjacent": "a long pause, then a direct question about which team and what year",
+          "curious": "she wants to know what brought you here and whether your route crossed the ridgeline"
+        },
+        "appearance": "A lean woman in her mid-forties, weathered past her age in the face and steady past her age in the hands. Brown skin scored by cold seasons. Hair the colour of winter grass, pulled back with cord rather than a clip — a clip would catch on the transit. She wears a Harmonic Heights replacement strap on a pre-Transition instrument case that is obviously older than the strap; the mismatch is functional, not sentimental, and she will say so if asked. Boots resoled twice, gaiters blotched with early-spring mud. A red-pencil mark runs from her left wrist to the heel of her palm — the surveyor's habit of marking the skin when paper is unavailable.",
+        "equipment": {
+          "instrument_case": "Pre-Transition transit, brass and optical glass, requiring a hand-calculated correction factor for magnetic deviation; worn exterior, optics intact",
+          "strap": "Harmonic Heights replacement — practical acquisition, not affiliation; the original strap failed two winters ago",
+          "field_notes": "Three notebooks, two full, one active; the active notebook has a fold-out bearing diagram tucked inside the cover",
+          "personal": "A small spirit-level worn on a cord at her sternum — habit, not ceremony"
+        },
+        "employer": {
+          "name": "Vorn-Cade Survey Partnership (dissolved, de facto)",
+          "status": "Tessaly holds an independent field commission issued before the team's dissolution; the commission names the northeast-by-east corridor as her assigned work and has not been formally revoked. She operates under it on the grounds that no one has told her to stop, which is not the same as being authorised and she knows it.",
+          "reason_for_dissolution": "The team moved the markers. She did not. The partnership did not survive the disagreement."
+        },
+        "functions": [
+          "reveal",
+          "bind"
+        ],
+        "functionsNote": "REVEAL — she surfaces what was obscured (the true line, the mound, the fact of the moved markers); BIND — her commission and her record-keeping are acts of fixing truth to place, holding a version of events against erasure. Both functions expressed through the Lower Chamber's grain: ground-truth over ambient narrative, measurement against the valley's tendency to let things quietly shift.",
+        "people": "human",
+        "domains": {
+          "primary": "figurist",
+          "secondary": "hourkeeper",
+          "tertiary": "syllogist"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Figurist primary: her work is spatial representation — she reads the land as a figure to be rendered truly. Hourkeeper secondary: the mound's shadow-angle at first light is a temporal datum; she thinks in terms of what a place was, what it is now, and what the record must preserve across that gap. Syllogist tertiary: her case against the team is not emotional — it is a sequence of observed facts leading to an unavoidable conclusion. Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+        "_gen": {
+          "entityId": "tessaly-vorn",
+          "type": "npc",
+          "birthWeight": 17,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mr4ejo8c",
+            "locationId": "gen-the-lower-chamber",
+            "day": 9,
+            "worldDay": null,
+            "hint": "a solo surveyor woman — formerly with a Heights-adjacent or independent survey team, working the northeast-by-east beari",
+            "why": "she is on the ridgeline and central to the next beat — needs a name, an employer, and a reason for being alone"
+          },
+          "attentionHistory": [],
+          "createdDay": 9,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20lean%20woman%20in%20her%20mid-forties%2C%20weathered%20past%20her%20age%20in%20the%20face%20and%20steady%20past%20her%20age%20in%20the%20hands.%20Brown%20skin%20scored%20by%20cold%20seasons.%20Hair%20the%20colour%20of%20winter%20grass%2C%20pulled%20back%20with%20cord%20rath%2C%20character%20portrait%2C%20named%20Tessaly%20Vorn%2C%20Independent%20surveyor%2C%20formerly%20of%20the%20Vorn-Cade%20Team%3B%20alone%20on%20the%20ridgeline%20because%20the%20team%20moved%20%2C%20Speaks%20in%20bearings%20and%20distances%2C%20then%20catches%20herself%20and%20translates.%20Short%20declarative%20sentences.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=22117&nologo=true"
       }
     },
     "location": {
@@ -3496,7 +3794,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 54
+    "valley": 55
   },
   "company": [],
   "foreclosed": [],
@@ -3511,6 +3809,22 @@
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
   "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20seasoned%2C%20bearing%20the%20marks%20of%20what%20they've%20done%2C%20Negotiated%20equal%20footing%20with%20Elder%20Senna%20over%20the%20river%20contamination%20%E2%80%94%20turned%20a%20confront%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=60206&nologo=true",
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A woman in undyed wool stands on a cold ridgeline at dawn, her instrument case open beside her, watching as motes of teal light tighten and brighten at a stranger's shoulder — recognition crossing a d",
+      "url": "https://image.pollinations.ai/prompt/A%20woman%20in%20undyed%20wool%20stands%20on%20a%20cold%20ridgeline%20at%20dawn%2C%20her%20instrument%20case%20open%20beside%20her%2C%20watching%20as%20motes%20of%20teal%20light%20tighten%20and%20brighten%20at%20a%20stranger's%20shoulder%20%E2%80%94%20recognition%20crossing%20a%20distance%20neither%20party%20expected%20to%20bridge.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=18944&nologo=true",
+      "caption": "The lone traveler names herself as Sorel, an archivist from the Radiant Plateau, sent by t",
+      "worldDay": 32,
+      "at": "2026-08-01T11:12:28.016Z"
+    },
+    {
+      "kind": "npc",
+      "prompt": "Tessaly Vorn",
+      "url": "https://image.pollinations.ai/prompt/A%20lean%20woman%20in%20her%20mid-forties%2C%20weathered%20past%20her%20age%20in%20the%20face%20and%20steady%20past%20her%20age%20in%20the%20hands.%20Brown%20skin%20scored%20by%20cold%20seasons.%20Hair%20the%20colour%20of%20winter%20grass%2C%20pulled%20back%20with%20cord%20rath%2C%20character%20portrait%2C%20named%20Tessaly%20Vorn%2C%20Independent%20surveyor%2C%20formerly%20of%20the%20Vorn-Cade%20Team%3B%20alone%20on%20the%20ridgeline%20because%20the%20team%20moved%20%2C%20Speaks%20in%20bearings%20and%20distances%2C%20then%20catches%20herself%20and%20translates.%20Short%20declarative%20sentences.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=22117&nologo=true",
+      "caption": "Tessaly Vorn",
+      "worldDay": 24,
+      "at": "2026-07-24T14:21:24.292Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Cellaceron",
@@ -3709,6 +4023,14 @@
       "startDay": 24,
       "endDay": 24,
       "beats": 5
+    },
+    {
+      "id": "sess-6",
+      "startedAt": "2026-08-01T11:12:27.982Z",
+      "lastAt": "2026-08-01T11:12:27.982Z",
+      "startDay": 32,
+      "endDay": 32,
+      "beats": 1
     }
   ],
   "_pendingArrival": null,
@@ -3762,25 +4084,29 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 43,
-    "choices": 43,
-    "characterDeltas": 26,
-    "scene": 43,
-    "npcUpdates": 38,
-    "codexUpdates": 36,
+    "sceneSummary": 44,
+    "choices": 44,
+    "characterDeltas": 27,
+    "scene": 44,
+    "npcUpdates": 39,
+    "codexUpdates": 37,
     "timeOps": 42,
-    "sceneEnded": 20,
+    "sceneEnded": 21,
     "placeUpdates": 24,
     "moveTo": 2,
-    "questUpdates": 20,
+    "questUpdates": 21,
     "stateOps": 1,
-    "factUpdates": 5,
-    "stageOps": 1,
+    "factUpdates": 6,
+    "stageOps": 2,
     "scene_ended": 1,
-    "imagePrompt": 2,
-    "generateRequest": 3
+    "imagePrompt": 3,
+    "generateRequest": 3,
+    "deeds": 1,
+    "ledgerEvents": 1,
+    "offer": 1,
+    "gambitApt": 1
   },
-  "_opTurns": 43,
+  "_opTurns": 44,
   "_intentAsked": null,
   "corrections": [
     {
@@ -3806,7 +4132,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 1,
+      "applied": 2,
       "rejected": 0,
       "lastWhy": null
     }
@@ -3851,5 +4177,35 @@
     "the_held_form": "https://image.pollinations.ai/prompt/The%20Held%20Form%3A%20Sustain%20something%20by%20maintaining%20its%20correct%20form%20in%20your%20mind%20%E2%80%94%20the%20pattern%20held%20is%20the%20thing%20held.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20figurist%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30301&nologo=true",
     "noesis": "https://image.pollinations.ai/prompt/Noesis%3A%20The%20mind-pole%20mastery%3A%20memory%2C%20focus%2C%20reason%2C%20thought%20as%20an%20instrument%20sharp%20enough%20to%20act%20on%20the%20world.%20The%20Cogitarium's%20art.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20cogitant%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=79356&nologo=true",
     "the_green_claim": "https://image.pollinations.ai/prompt/The%20Green%20Claim%3A%20Call%20living%20growth%20into%20action%3A%20impede%2C%20constrict%2C%20strike.%20The%20living%20world%20mobilises%20against%20what%20the%20Rootkin%20names%20as%20threat%20%E2%80%94%20and%20it%20also%20tells%20them%20what%20it%20has%20sensed.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20rootkin%20tradition%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=46481&nologo=true"
-  }
+  },
+  "_applyFailures": null,
+  "companionMemory": {
+    "aevi": [
+      {
+        "text": "Named the source of the valley's water crisis — a pre-Transition structure still executing its orders upstream, confirmed through independent testimony from a Radiant survey archivist.",
+        "weight": 2,
+        "day": 9
+      }
+    ]
+  },
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-08-01T11:12:28.010Z",
+      "worldDay": 32,
+      "who": "char-mr4ejo8c",
+      "playerKey": "player-s9z9u1",
+      "where": "gen-the-lower-chamber",
+      "what": "Sorel, Radiant archivist, arrives on the ridgeline and confirms the mound on the northeast-by-east bearing — she was with the Council survey team until markers were moved; the interval she recorded ma",
+      "tags": [
+        "water-crisis",
+        "investigation",
+        "radiant-folk",
+        "testimony"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true
+    }
+  ]
 }

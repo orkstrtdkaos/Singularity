@@ -67,7 +67,7 @@ import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirectiv
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
-import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
+import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine, FRAME_FREEFORM_CUE } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
@@ -295,7 +295,7 @@ let mapShowSub = false;  // SNG-082b: sub-place satellites toggle (off by defaul
 let _lightboxWired = false; // SNG-053: one-time lightbox click delegation (referenced by boot)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
-let movesOpen = false;           // SNG-236 UX: the encounter Moves gear (grouped ward/sense/strike) open?
+let movesOpen = true;            // SNG-252 §2c: the ribbon's moves are SHOWN BY DEFAULT when engaged (Erik: work them back in, visible — not behind a control you must find). The ⚙ collapses them for space; SNG-236 had them closed-by-default behind the gear.
 let _richNextTurn = false;       // SNG-242 §5: armed by the "✦ Rich" toggle — the NEXT turn is told at the flagship tier, then cleared
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
 let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
@@ -2499,17 +2499,32 @@ function listAvailableEncounters() {
  *  [data-encact] path; an ability-move fires through onFreeform (parseIntent → onChoice) so the roll params are
  *  derived correctly and — because an encounter is active — the encounter rules bind. The free-type field stays
  *  the open path; this is grouped shortcuts, never a replacement (SNG-230: the frame is a legibility layer). */
-function encounterMovesPanel() {
+function encounterMovesPanel(fm = null) {
   const e = activeEnc(); if (!e) return "";
   const d = e.def;
+  // SNG-252 §2c: the moves now know the KIND. `fm` is the frame model the ribbon already built — passed in
+  // rather than recomputed so the moves and the frame can never disagree about what kind of thing this is
+  // (the seam_encounter_kind_single_source rule). Falls back to the def's own kind when called without one.
+  const kind = fm?.kind || encounterKind(d) || "fight";
+  const hints = CONTENT.moveHints || {};
+  const copy = CONTENT.ribbonCopy || {};
+  const kindHints = hints.byKind?.[kind] || {};
+  // SNG-252 §2c: the ways out are RELABELLED from the frame, never rebuilt from it. SNG-247 made the frame's
+  // exit WORDS kind-correct (a chase "breaks away", a standoff "withdraws", a crossing "turns back") while this
+  // panel still printed the generic duel words beside them — two vocabularies for one act. Only the label is
+  // taken: the ACTION stays the known-good [data-encact] value the dispatcher handles, because the frame's
+  // `defeat` exit is the PRIMARY move (Commit / Strike / Press / Work it), not a way out, and its `strike`
+  // action has no dispatcher case at all. Rebuilding the buttons from fm.exits would have filed "Push on"
+  // under "ways out" and wired a dead button.
+  const exitLabel = (act, fallback) => fm?.exits?.find(x => x.action === act && x.role !== "defeat")?.label || fallback;
   const mk = (label, act, extra = "") => `<button class="move-btn enc-move" data-encact="${act}"${extra}>${esc(label)}</button>`;
   const primary = [], exits = [];
-  if (d.type === "duel") { exits.push(mk("⚑ Break away & flee", "flee"), mk("Yield", "yield")); }
-  if (d.type === "challenge") { primary.push(mk(`Attempt: ${d.stages[e.state.stageIndex]?.name || "the stage"}`, "stage")); exits.push(mk("Abandon", "abandon")); }
+  if (d.type === "duel") { exits.push(mk(`⚑ ${exitLabel("flee", "Break away & flee")}`, "flee"), mk(exitLabel("yield", "Yield"), "yield")); }
+  if (d.type === "challenge") { primary.push(mk(`Attempt: ${d.stages[e.state.stageIndex]?.name || "the stage"}`, "stage")); exits.push(mk(exitLabel("abandon", "Abandon"), "abandon")); }
   if (d.type === "puzzle") {
     primary.push(mk("Work the mechanism", "attempt"));
     for (const [ui, u] of puzzleUnlocks(d, character).entries()) primary.push(mk(`◈ ${String(u.note).slice(0, 56)}`, "unlock", ` data-unlock="${ui}"`));
-    exits.push(mk("Walk away", "walkAway"));
+    exits.push(mk(exitLabel("walkAway", "Walk away"), "walkAway"));
   }
   // owned abilities → grouped by function family (the 24-verb vocabulary; ward/sense/strike are its verbs)
   const owned = (character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(Boolean);
@@ -2519,17 +2534,52 @@ function encounterMovesPanel() {
     const verb = (ab.functions || [])[0] || "use";
     (byFam[fam] = byFam[fam] || []).push({ ab, verb });
   }
-  const famGroups = FUNCTION_FAMILIES.filter(f => byFam[f]?.length).map(f => {
-    const chips = byFam[f].slice(0, 6).map(({ ab, verb }) =>
-      `<button class="move-btn move-ability" data-moveab="${esc(ab.id)}" data-verb="${esc(verb)}" style="border-left-color:${FAMILY_COLOR[f]}" title="${esc(verb)} — ${esc(ab.name)}">${esc(ab.name)}</button>`).join("");
-    return `<div class="moves-group"><div class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(f.toLowerCase())}</div><div class="moves-chips">${chips}</div></div>`;
+  // SNG-252 §2c: KIND-AWARE ORDER. The families a kind actually trades in come first (a standoff leads with
+  // INFLUENCE/KNOW, a fight with HARM) — same grouping, different emphasis. Families the kind has no opinion
+  // about keep their canonical order behind the emphasised ones, so nothing ever disappears.
+  const emphasis = Array.isArray(kindHints.emphasis) ? kindHints.emphasis : [];
+  const ordered = [...emphasis.filter(f => byFam[f]?.length), ...FUNCTION_FAMILIES.filter(f => byFam[f]?.length && !emphasis.includes(f))];
+  const famGroups = ordered.map(f => {
+    // The hint may be a plain string, or an object with `.weak` — a family this kind cannot spend
+    // meaningfully. A weak move stays CLICKABLE (moves are shortcuts, not a cage — the §2c guard); it is
+    // only marked, so the player can see it is off-currency before spending the beat.
+    const raw = kindHints.families?.[f] ?? hints.default?.[f] ?? null;
+    const weak = raw && typeof raw === "object" && raw.weak;
+    const hintText = raw == null ? "" : (typeof raw === "string" ? raw : (raw.text || ""));
+    const chips = byFam[f].slice(0, 6).map(({ ab, verb }) => {
+      // SNG-230 §7b: a move the encounter WARDS reads disabled-with-reason here, rather than being offered
+      // and then refused after the player has spent the click.
+      const ward = wardDenialFor(d, f, ab);
+      if (ward) return `<button class="move-btn move-ability move-warded" disabled title="${esc(ward)}">${esc(ab.name)} <span class="move-ward">⚑</span></button>`;
+      return `<button class="move-btn move-ability${weak ? " move-weak" : ""}" data-moveab="${esc(ab.id)}" data-verb="${esc(verb)}" style="border-left-color:${FAMILY_COLOR[f]}" title="${esc(verb)} — ${esc(ab.name)}${hintText ? ` · ${hintText}` : ""}">${esc(ab.name)}</button>`;
+    }).join("");
+    const hintHtml = hintText ? ` <span class="moves-group-hint${weak ? " weak" : ""}">· ${esc(hintText)}</span>` : "";
+    return `<div class="moves-group"><div class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(f.toLowerCase())}${hintHtml}</div><div class="moves-chips">${chips}</div></div>`;
   }).join("");
+  const thisLabel = copy.movesHeader?.thisEncounterLabel?.[kind] || `this ${d.type === "duel" ? "fight" : d.type}`;
+  const waysOutLabel = copy.movesHeader?.waysOutLabel || "ways out";
   const ctx = [
-    primary.length ? `<div class="moves-group"><div class="moves-group-lbl">this ${esc(d.type === "duel" ? "fight" : d.type)}</div><div class="moves-chips">${primary.join("")}</div></div>` : "",
-    exits.length ? `<div class="moves-group"><div class="moves-group-lbl">ways out</div><div class="moves-chips">${exits.join("")}</div></div>` : ""
+    primary.length ? `<div class="moves-group"><div class="moves-group-lbl">${esc(thisLabel)}</div><div class="moves-chips">${primary.join("")}</div></div>` : "",
+    exits.length ? `<div class="moves-group"><div class="moves-group-lbl">${esc(waysOutLabel)}</div><div class="moves-chips">${exits.join("")}</div></div>` : ""
   ].join("");
-  const kindWord = d.type === "duel" ? "fight's" : `${d.type}'s`;
-  return `<div class="moves-panel"><div class="moves-hint">Grouped moves — or just type your own below. The ${esc(kindWord)} rules bind either way.</div>${ctx}${famGroups || `<div class="moves-hint dim">No learned crafts to shortcut yet — describe your move below.</div>`}</div>`;
+  const header = String(copy.movesHeader?.text || "Your moves — grouped by what they do. Or describe your own below; the {kind} rules bind either way.").replace(/\{kind\}/g, kind);
+  return `<div class="moves-panel"><div class="moves-hint">${esc(header)}</div>${ctx}${famGroups || `<div class="moves-hint dim">No learned crafts to shortcut yet — describe your move below.</div>`}</div>`;
+}
+
+/** SNG-252 §2c / SNG-230 §7b: is this move WARDED by the encounter? Returns the reason, or null.
+ *  A ward is authored on the def (wards: [{family|ability, reason}]) or supplied by the frame content's
+ *  wardDenials. Reading it HERE — before the chip renders — is the whole point: the player sees the closed
+ *  door instead of walking into it. */
+function wardDenialFor(def, family, ability) {
+  const wards = Array.isArray(def?.wards) ? def.wards : [];
+  for (const w of wards) {
+    if (w?.ability && w.ability === ability?.id) return w.reason || "warded here";
+    if (w?.family && String(w.family).toUpperCase() === String(family).toUpperCase()) return w.reason || "warded here";
+  }
+  const denials = CONTENT.encounterFrameContent?.wardDenials || {};
+  const byFam = denials[String(family).toUpperCase()];
+  if (byFam && def?.warded) return typeof byFam === "string" ? byFam : (byFam.text || "warded here");
+  return null;
 }
 
 /** End an encounter: outcome XP, clear state, incapacitation floor. */
@@ -2541,7 +2591,7 @@ function endEncounter(outcome) {
   character.xp += Math.max(0, xpMap[outcome] ?? 0);
   for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules);
   character.activeEncounter = null;
-  movesOpen = false; // SNG-236 UX: the Moves gear closes with the encounter
+  movesOpen = true;  // SNG-252 §2c: reset to SHOWN, so the next encounter opens with its moves visible
   if (outcome === "incapacitated") {
     if (enc.def.lethal) { character.dead = true; }
     else { character.health = Math.max(1, character.health); character.energy = Math.max(5, character.energy); }
@@ -5079,6 +5129,10 @@ async function onChoice(choice) {
           bag.finishHint = to >= total && total > 0 ? hk[0] : to > from ? hk[1] : hk[2];
         }
         resolution.encReceiptLine = playerReceiptLine(kind, bag, CONTENT.receiptLine);
+        // SNG-252 §2b: the receipt also PERSISTS on the encounter state, so the ribbon can show where you
+        // stand for as long as you stand there. Printed once beside its roll, it scrolled away with the
+        // narration and the player lost the readout the moment the next beat arrived.
+        if (resolution.encReceiptLine && rr.state) rr.state._lastReceipt = resolution.encReceiptLine;
       } catch (e) { /* the receipt is a convenience — never block the round */ }
       if (outcome) endEncounter(outcome); else saveCharacter(character);
     }
@@ -9722,7 +9776,52 @@ function renderPlay(turn, opts = {}) {
         : fm.collapsible
         ? `<div class="enc-frame-collapse">⚡ A decisive finisher could end this in one beat — an all-or-nothing stroke (a clean crit collapses it; a botch turns it worse).</div>`
         : `<div class="enc-frame-collapse dim">⚑ Too great to end in one stroke — you'll have to work it through.</div>`;
-      const cueHtml = `${collapseHtml}${fm.freeform ? `<div class="enc-frame-cue">▸ ${esc(fm.freeform)} — or tap <b>⚙ Moves</b> below for grouped shortcuts.</div>` : ""}`;
+      // SNG-252 §2b: THE RIBBON IS ONE CONTAINER. The moves panel used to be appended as a SIBLING far down the
+      // play surface beside the input row, so an engaged encounter read as three disconnected fragments — a
+      // frame at the top, an orphaned line, a moves panel near the bottom — and the player assembled it by eye.
+      // Everything about the encounter now renders INSIDE this one bordered box, in the §2b order:
+      // header → subtitle → win → meter → receipt → exits → moves → freeform.
+      //
+      // This is also the true cause of Erik's "the hazard border doesn't seem to have the full border": the
+      // border was never partial — `enc-frame-hazard` and its stone hue are both present and correct (verified)
+      // — but most of a hazard's content sat OUTSIDE the box. Hazard shows it worst precisely because it is the
+      // fast path: its frame is the slimmest, so the share of the encounter living outside the border is
+      // largest. §2a as specced was a no-op; §2b is the fix.
+      const copy252 = CONTENT.ribbonCopy || {};
+      const subtitle = copy252.subtitle?.byKind?.[fm.kind] || "";
+      const subtitleHtml = subtitle ? `<div class="enc-frame-sub">${esc(subtitle)}</div>` : "";
+      // The receipt is the last round's mechanical readout, kept on the encounter state so it PERSISTS in the
+      // ribbon ("where you stand") instead of scrolling away with the narration it was printed beside.
+      const receiptHtml = st._lastReceipt ? `<div class="enc-receipt enc-frame-receipt">${esc(st._lastReceipt)}</div>` : "";
+      // Moves ride INSIDE the ribbon and are SHOWN BY DEFAULT when engaged (Erik's intent); the ⚙ collapses
+      // them for space rather than hiding them behind a control the player must find first.
+      const movesShown = movesOpen;
+      // The ⚙ collapses the SHORTCUT moves for space. It deliberately does NOT appear for a skill battle: that
+      // panel is the fight's only action set, and a control that hid it would leave the player standing in a
+      // fight with no visible way to act. "Collapse for space" must never read as "remove the controls".
+      const movesToggle = (st.mode === "skill_battle") ? ""
+        : `<button class="enc-frame-movetoggle" id="enc-moves-toggle">${esc(movesShown ? (copy252.collapse?.openLabel || "⚙ hide moves") : (copy252.collapse?.closedLabel || "⚙ moves"))}</button>`;
+      // A SKILL BATTLE brings its own richer structured panel (fog / intensity / skills / read / break / yield),
+      // and that panel IS the fight's action choices — so it belongs inside the ribbon too, or the most common
+      // kinds stay exactly as split as before. Verified live: a standoff showed an empty moves area with all of
+      // its controls in a separate box far below, which is Erik's complaint on the kind he meets most.
+      // It is NESTED here, not rebuilt (the §2c guard: extend, don't rebuild) — the same panel, re-parented.
+      const movesHtml = (st.mode === "skill_battle") ? skillBattlePanel() : (movesShown ? encounterMovesPanel(fm) : "");
+      // The freeform line is Aevi's ribbon copy, and it REPLACES the frame's own cue rather than wrapping it.
+      // `fm.freeform` is the fixed pre-252 constant (FRAME_FREEFORM_CUE) — it already says everything her line
+      // says, and it says the moves are "below", which stopped being true the moment they moved inside the
+      // ribbon. Interpolating it produced a doubled sentence ending "…against the stage. — or pick a move
+      // above; …against the stage." So `{freeform}` is filled ONLY by a cue a kind actually customised; when
+      // it is the generic constant, her line stands alone.
+      const ownCue = fm.freeform && fm.freeform !== FRAME_FREEFORM_CUE ? String(fm.freeform) : null;
+      const cueTpl = String(copy252.freeform?.text || "▸ {freeform} — or pick a move above; type anything and the {kind} resolves it against the stage.");
+      const cueText = (ownCue ? cueTpl.replace("{freeform}", ownCue) : cueTpl.replace(/\{freeform\}\s*—\s*/, "").replace("{freeform}", ""))
+        .replace(/\{kind\}/g, fm.kind)
+        // dropping the placeholder leaves her sentence starting mid-clause ("▸ or pick a move above"); the
+        // capital is repairing MY removal, not editing her voice.
+        .replace(/^(\s*▸\s*)([a-z])/, (_, p, c) => p + c.toUpperCase());
+      const freeformHtml = fm.freeform ? `<div class="enc-frame-cue">${esc(cueText)}</div>` : "";
+      const cueHtml = `${collapseHtml}${movesToggle}${movesHtml}${freeformHtml}`;
       return `<div class="enc-frame enc-strip${prom} enc-frame-${fm.kind}">
         ${(() => {
           // SNG-247 Tier 4 (the morph made VISIBLE). Frames have chained since SNG-230 — flee a fight and you ARE
@@ -9738,9 +9837,10 @@ function renderPlay(turn, opts = {}) {
             <span class="morph-said">${esc(mf.note || "it became something else")}</span></div>`;
         })()}
         <div class="enc-frame-top"><span class="enc-frame-title">${fm.icon} ${esc(fm.title)}</span><span class="enc-frame-kind">${esc(fm.kind)} · round ${st.round}</span></div>
+        ${subtitleHtml}
         <div class="enc-frame-win">${esc(fm.winCondition)}</div>
         ${status ? `<div class="enc-status">${status}</div>` : ""}
-        ${meterHtml}${exitsHtml}${cueHtml}</div>`;
+        ${meterHtml}${receiptHtml}${exitsHtml}${cueHtml}</div>`;
     })()}
     ${(() => {
       // SNG-244: a quest that has reached its DECISION shows an integrated strip here — above the narration,
@@ -9798,8 +9898,11 @@ function renderPlay(turn, opts = {}) {
       // SNG-106: the chance is tappable → the full component breakdown (only when this turn retained one).
       const chanceCell = r.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...r.breakdown, roll: r.roll, degree: r.degree })}" tabindex="0" role="button" title="Why this number?">${r.chance}</span>` : `${r.chance}`;
       main += `<div class="roll-receipt">d100: ${r.roll} vs ${chanceCell} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${subBit}${blBit}`;
-      // SNG-246 Fix D: the encounter's mechanical receipt line — the round result SHOWN (not inferred from prose).
-      if (r.encReceiptLine) main += `<div class="enc-receipt">${esc(r.encReceiptLine)}</div>`;
+      // SNG-246 Fix D: the encounter's mechanical receipt line — the round result SHOWN (not inferred from
+      // prose). SNG-252 §2b: it renders here only when the encounter has ENDED. While one is live the ribbon
+      // owns it (persisted as state._lastReceipt), because "fold it IN, not floating" is the whole point of
+      // the one container — printing it in both places would put the same readout inside and outside the box.
+      if (r.encReceiptLine && !activeEnc()) main += `<div class="enc-receipt">${esc(r.encReceiptLine)}</div>`;
     }
   }
   if (opts.itemsAdvanced?.length) main += opts.itemsAdvanced.map(a => `<div class="beat item-woke">✦ ${esc(a.itemName)} stirs — <em>${esc(a.stageName)}</em></div>`).join("");
@@ -9930,8 +10033,11 @@ function renderPlay(turn, opts = {}) {
     // SNG-236 UX: while an encounter is live, the ⚙ Moves gear opens the grouped move palette above the input.
     // SNG-246 BUG1: a SKILL BATTLE renders its structured controls (fog/intensity/skills/read/break/yield) HERE,
     // in the play surface — no separate screen. It's always shown (the fight IS the option set), not gear-gated.
-    if (activeEnc()?.state?.mode === "skill_battle") main += skillBattlePanel();
-    else if (activeEnc() && movesOpen) main += encounterMovesPanel();
+    // SNG-252 §2b: BOTH sibling appends are gone — the moves panel AND the skill-battle panel now render
+    // INSIDE the encounter ribbon at the top of the play surface, so nothing about an engaged encounter lives
+    // outside its one border. Erik's ask was the whole encounter in one container, and for a fight or a
+    // standoff the skill-battle panel IS the action choices; leaving it here would have left the commonest
+    // kinds exactly as split as before.
     main += `<div class="freeform">
       <div class="mode-chips">
         <button id="mode-act" class="mode-chip ${askMode ? "" : "active"}" title="Act in the scene">Act</button>
@@ -10181,11 +10287,15 @@ function renderPlay(turn, opts = {}) {
   // (parseIntent derives the roll params; the active encounter's rules bind), the exits/primary via [data-encact].
   const movesBtn = document.getElementById("moves-open");
   if (movesBtn) movesBtn.onclick = () => { movesOpen = !movesOpen; renderPlay(turn, opts); };
+  // SNG-252 §2b: the ⚙ INSIDE the ribbon collapses/expands the moves in place — same state as the input-row
+  // gear, so the two controls can never disagree about whether the moves are showing.
+  const movesInBtn = document.getElementById("enc-moves-toggle");
+  if (movesInBtn) movesInBtn.onclick = () => { movesOpen = !movesOpen; renderPlay(turn, opts); };
   wireSkillBattlePanel(); // SNG-246 BUG1: wire the in-place skill-battle controls when a skill battle is active (no-op otherwise)
   for (const btn of app.querySelectorAll("[data-moveab]")) btn.onclick = () => {
     if (busy) return;
     const ab = fullCatalog()[btn.dataset.moveab];
-    movesOpen = false;
+    // SNG-252 §2c: the ribbon stays OPEN — picking a move should not collapse the encounter you are still in.
     onFreeform(`I use ${ab?.name || "my craft"} to ${btn.dataset.verb || "act"}.`);
   };
   const ghGo = document.getElementById("gambit-hint-go");

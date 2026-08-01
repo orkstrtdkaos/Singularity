@@ -211,6 +211,33 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 .enc-frame-btns { display: flex; flex-direction: column; gap: 6px; }
 .enc-frame-btns .enc-choice { width: 100%; text-align: left; }
 .enc-frame-cue { margin-top: 8px; font-size: 11px; color: var(--ink-dim); font-style: italic; line-height: 1.4; }
+/* SNG-252 §2b: THE UNIFIED RIBBON. The moves now render INSIDE the enc-frame, so the nested panel drops its own
+   border and background — a box inside a box is exactly the fragmentation this ticket removes. It becomes a
+   SECTION of the ribbon, separated by a hairline in the kind's own hue instead of a second frame. */
+.enc-frame .moves-panel,
+.enc-frame .sb-panel { border: none; background: none; padding: 8px 0 0; margin: 8px 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--enc-hue, var(--danger)) 30%, transparent); }
+.enc-frame .moves-hint { font-style: normal; }
+/* the "watch for" flavor, folded in under the header as the ribbon's subtitle rather than orphaned between panels */
+.enc-frame-sub { font-family: var(--font-ui); font-size: 11.5px; color: var(--ink-dim); font-style: italic;
+  line-height: 1.35; margin: 2px 0 6px; }
+/* the persistent receipt — where you stand, kept in the ribbon instead of scrolling away with the narration */
+.enc-frame-receipt { margin: 4px 0 7px; padding: 3px 7px; border-radius: 5px; font-style: normal;
+  background: color-mix(in srgb, var(--enc-hue, var(--danger)) 10%, transparent);
+  border-left: 2px solid color-mix(in srgb, var(--enc-hue, var(--danger)) 55%, transparent); }
+/* the ⚙ that collapses the moves in place. Small and quiet — the moves are shown by default, so this is an
+   escape hatch for space, not the way in. */
+.enc-frame-movetoggle { float: right; font-family: var(--font-ui); font-size: 10.5px; letter-spacing: .5px;
+  padding: 2px 7px; margin-top: 6px; border: 1px solid var(--border); border-radius: 5px;
+  background: transparent; color: var(--ink-dim); cursor: pointer; }
+.enc-frame-movetoggle:hover { border-color: var(--enc-hue, var(--accent)); color: var(--ink); }
+/* a family the kind cannot spend meaningfully — still CLICKABLE (moves are shortcuts, not a cage), just marked */
+.moves-group-hint { text-transform: none; letter-spacing: 0; font-size: 10.5px; font-style: italic; opacity: .85; margin-left: 6px; }
+.moves-group-hint.weak { opacity: .6; }
+.move-weak { opacity: .72; border-style: dashed; }
+/* SNG-230 §7b: a WARDED move reads closed-with-reason instead of being offered and then refused */
+.move-warded { opacity: .5; cursor: not-allowed; text-decoration: line-through; border-style: dotted; }
+.move-warded .move-ward { text-decoration: none; color: var(--danger); }
 .enc-frame-collapse { margin-top: 8px; font-size: 11px; color: var(--accent); line-height: 1.4; }
 .enc-frame-collapse.dim { color: var(--ink-dim); }
 /* ---------- world map ---------- */

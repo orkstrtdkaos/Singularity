@@ -8631,6 +8631,81 @@ await (async () => {
     "the band leaked into the contract — it would flag 111 of 285 legitimately cheap authored abilities");
 }
 
+// ---------- SNG-252: the unified encounter ribbon + Moves worked back in ----------
+{
+  const appSrc252 = readFileSync(join(root, "app.js"), "utf8");
+  const cssSrc252 = readFileSync(join(root, "style.css"), "utf8");
+  const hints252 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/encounter_move_hints.json"), "utf8"));
+  const copy252 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/encounter_ribbon_copy.json"), "utf8"));
+  const coreMani252 = JSON.parse(readFileSync(join(root, "content/packs/core/manifest.json"), "utf8"));
+
+  // §2a — the PREMISE CHECK. The spec diagnosed hazard's hue as "missing or incomplete in style.css". It is
+  // neither: the hue is defined and .enc-frame reads it. Asserting that keeps the no-op from being "fixed"
+  // later by someone re-reading the spec and adding a duplicate rule.
+  check("SNG-252 §2a: hazard's stone hue EXISTS and the frame border reads it (the specced CSS gap is a no-op)",
+    /\.enc-frame-hazard\s*{\s*--enc-hue:\s*#6f7b8c/.test(cssSrc252) &&
+    /\.enc-frame\s*{[^}]*border:\s*1px solid var\(--enc-hue/.test(cssSrc252),
+    "hazard's hue really is missing — then §2a is a real fix after all, not the no-op the build recorded");
+  check("SNG-252 §2a: hazard resolves to a real frame kind, so it flies enc-frame-hazard like every other kind",
+    (() => { const m = FRAME_KINDS && Object.keys(FRAME_KINDS); return !!(m && m.includes("hazard")); })());
+
+  // §2b — ONE container. This is the actual fix for what Erik saw.
+  check("SNG-252 §2b: BOTH sibling appends are gone — nothing about an engaged encounter renders outside the ribbon",
+    !/main \+= encounterMovesPanel\(\)/.test(appSrc252) && !/main \+= skillBattlePanel\(\)/.test(appSrc252) &&
+    /const movesHtml = \(st\.mode === "skill_battle"\) \? skillBattlePanel\(\) : \(movesShown \? encounterMovesPanel\(fm\) : ""\)/.test(appSrc252),
+    "a panel is appended as a sibling again — the encounter reads as fragments, which is the whole bug. The skill-battle panel matters most: it IS the action set for fight/chase/standoff, the kinds the player meets most.");
+  check("SNG-252 §2b: the ⚙ never hides a SKILL BATTLE's controls — collapse-for-space must not read as remove-the-controls",
+    /const movesToggle = \(st\.mode === "skill_battle"\) \? ""/.test(appSrc252) &&
+    !/\(st\.mode === "skill_battle"\)\s*\?\s*\(movesShown \? skillBattlePanel/.test(appSrc252),
+    "collapsing the moves would leave the player in a fight with no visible way to act");
+  check("SNG-252 §2b: the ribbon renders header → subtitle → win → meter → receipt → exits → moves/freeform, in one enc-frame",
+    /\$\{subtitleHtml\}/.test(appSrc252) && /\$\{meterHtml\}\$\{receiptHtml\}\$\{exitsHtml\}\$\{cueHtml\}<\/div>/.test(appSrc252));
+  check("SNG-252 §2b: the receipt PERSISTS on encounter state, so it stays visible instead of scrolling away",
+    /rr\.state\._lastReceipt = resolution\.encReceiptLine/.test(appSrc252) && /st\._lastReceipt \? /.test(appSrc252));
+  check("SNG-252 §2b: the floating receipt only renders once the encounter has ENDED (never inside AND outside the box)",
+    /if \(r\.encReceiptLine && !activeEnc\(\)\)/.test(appSrc252),
+    "the same readout renders in both places — 'fold it IN, not floating' means one of them has to go");
+  check("SNG-252 §2b: the nested panels drop their own borders — a box inside a box is the fragmentation being removed",
+    /\.enc-frame \.moves-panel,\s*\n\.enc-frame \.sb-panel\s*{\s*border: none/.test(cssSrc252),
+    "a nested panel still draws its own frame, so the ribbon reads as two boxes instead of one");
+
+  // §2c — moves shown by default, kind-aware, consequence-hinted, ward-aware.
+  check("SNG-252 §2c: moves are SHOWN BY DEFAULT when engaged (Erik: worked back IN, not behind a control to find)",
+    /let movesOpen = true;/.test(appSrc252) && /const movesShown = movesOpen;/.test(appSrc252));
+  check("SNG-252 §2c: picking a move no longer COLLAPSES the ribbon you are still standing in",
+    !/movesOpen = false;\s*\n\s*onFreeform\(/.test(appSrc252));
+  check("SNG-252 §2c: the family groups are ordered by the KIND's emphasis, with un-emphasised families kept (never dropped)",
+    /const emphasis = Array\.isArray\(kindHints\.emphasis\)/.test(appSrc252) &&
+    /FUNCTION_FAMILIES\.filter\(f => byFam\[f\]\?\.length && !emphasis\.includes\(f\)\)/.test(appSrc252),
+    "a kind-aware order that DROPS families would hide crafts the player owns");
+  check("SNG-252 §2c: a weak (off-currency) move stays CLICKABLE — moves are shortcuts, never a cage",
+    /move-weak/.test(appSrc252) && !/weak[^\n]*disabled/.test(appSrc252) && /\.move-weak\s*{/.test(cssSrc252));
+  check("SNG-252 §2c: a WARDED move reads disabled-with-reason, not offered-then-refused (SNG-230 §7b)",
+    /function wardDenialFor\(/.test(appSrc252) && /move-warded" disabled title="\$\{esc\(ward\)\}/.test(appSrc252));
+  check("SNG-252 §2c: the ways out are RELABELLED from the frame, and the primary is NOT filed under them",
+    /const exitLabel = \(act, fallback\)/.test(appSrc252) && /x\.role !== "defeat"/.test(appSrc252),
+    "rebuilding the exits from fm.exits files the 'defeat' primary (Push on / Strike / Press) under ways-out and wires a dead `strike` action");
+  check("SNG-252 §2c: the moves take the frame's kind rather than recomputing it (one source, per seam_encounter_kind_single_source)",
+    /function encounterMovesPanel\(fm = null\)/.test(appSrc252) && /const kind = fm\?\.kind \|\| encounterKind\(d\)/.test(appSrc252));
+
+  // The content is REACHABLE — the SNG-247 promotion lesson: staged content the browser cannot fetch does not exist.
+  check("SNG-252: both content files are PROMOTED to core rules and manifest-registered (staged = unreachable)",
+    existsSync(join(root, "content/packs/core/rules/encounter_move_hints.json")) &&
+    existsSync(join(root, "content/packs/core/rules/encounter_ribbon_copy.json")) &&
+    ["encounter_move_hints", "encounter_ribbon_copy"].every(n => (coreMani252.provides?.rules || []).some(r => r.includes(n))));
+  check("SNG-252: state.js LOADS both onto CONTENT (a registered file nothing reads is still dead content)",
+    (() => { const s = readFileSync(join(root, "engine/state.js"), "utf8");
+      return /loadRule\("encounter_move_hints"/.test(s) && /loadRule\("encounter_ribbon_copy"/.test(s) &&
+             /moveHints: moveHintsDoc/.test(s) && /ribbonCopy: ribbonCopyDoc/.test(s); })());
+  check("SNG-252: every framed kind has both an emphasis order and a subtitle (no kind renders hint-less)",
+    Object.keys(FRAME_KINDS).every(k => Array.isArray(hints252.byKind?.[k]?.emphasis) && hints252.byKind[k].emphasis.length
+      && typeof copy252.subtitle?.byKind?.[k] === "string" && copy252.subtitle.byKind[k].length > 0),
+    `missing emphasis/subtitle for: ${Object.keys(FRAME_KINDS).filter(k => !hints252.byKind?.[k]?.emphasis || !copy252.subtitle?.byKind?.[k]).join(", ")}`);
+  check("SNG-252: every emphasis list names only REAL function families (a typo'd family silently orders nothing)",
+    Object.values(hints252.byKind).every(v => (v.emphasis || []).every(f => FUNCTION_FAMILIES.includes(f))),
+    "an emphasis entry is not a function family — it would match no group and quietly do nothing");
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

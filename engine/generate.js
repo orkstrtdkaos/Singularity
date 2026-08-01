@@ -391,19 +391,10 @@ export async function generate(type, context = {}, deps = {}) {
   // hollow anything. Everything softer is stamped and kept, because a thin-but-present record is worth
   // more than a hole in the world, and `_gen.contract` makes it findable for later enrichment (the same
   // way `_gen.needsDepth` marks a rung crossing). Generation still NEVER throws and never halts a turn.
-  const born = checkBorn(entity, type, deps.contract || context.contract || null, { vocabs: deps.vocabs || context.vocabs || {} });
-  if (born.gated && born.verdict === "reject") {
-    try { deps.onContractReject?.(type, entity, born); } catch { /* telemetry is a convenience */ }
-    return null;
-  }
-
   const entityId = mintId(entity.name, generatedPool);
   stampGenerated(entity, type, entityId, context);
   entity._gen.repaired = repaired;
   entity._gen.stubbed = stubbed;
-  if (born.gated && born.verdict !== "clean") {
-    entity._gen.contract = { verdict: born.verdict, worst: born.worst, missing: born.missing.map(m => m.field), vague: born.vague.map(v => v.id), why: describeBorn(born) };
-  }
   // structural minor protection: a minor NPC is never romance/sexual-eligible, any tier, any player
   entity._gen.romanceEligible = !(type === "npc" && isMinorEntity(entity));
   // SNG-177: an NPC arrives affiliated. Without this the standing system cannot see the people a
@@ -419,6 +410,30 @@ export async function generate(type, context = {}, deps = {}) {
   // agnostic + headless-testable. Never throws — a missing image never blocks a mint.
   if (deps.imageFor && (type === "npc" || type === "location") && !entity.image) {
     try { const url = deps.imageFor(entity, type); if (url) entity.image = url; } catch { /* art is a convenience */ }
+  }
+
+  // SNG-250 §4 — THE UNIVERSAL BORN-WHOLE GATE, run LAST, on the FINISHED record.
+  //
+  // Placement is the whole correctness argument, and getting it wrong was a real bug found in live
+  // generation: the gate used to run BEFORE the type-specific enrichment above, so it judged a
+  // half-built entity. A stubbed LOCATION carries no worldPos/axisVector — both CRASH in the contract —
+  // and `resolveRegionFor` is what supplies the address a moment later. Gating first meant every
+  // degraded location (any truncated response, any repair-to-stub) was REJECTED outright and generate()
+  // returned null: the exact "gate too strict, world quietly stops growing" failure, and a direct
+  // contradiction of `seam_gen_location_worldPos`, which says a generated place MAY omit them because
+  // they are derived. "Born whole" means whole at BIRTH — and birth is not over until the engine has
+  // finished stamping. Judge the record the world will actually receive.
+  //
+  // A CRASH-severity failure REJECTS (return null) — SNG-234 universalized: never ship a hollow
+  // anything. Anything softer is kept and stamped, because a thin-but-present record beats a hole in
+  // the world, and `_gen.contract` makes it findable for later enrichment. Never throws, never halts.
+  const born = checkBorn(entity, type, deps.contract || context.contract || null, { vocabs: deps.vocabs || context.vocabs || {} });
+  if (born.gated && born.verdict === "reject") {
+    try { deps.onContractReject?.(type, entity, born); } catch { /* telemetry is a convenience */ }
+    return null;
+  }
+  if (born.gated && born.verdict !== "clean") {
+    entity._gen.contract = { verdict: born.verdict, worst: born.worst, missing: born.missing.map(m => m.field), vague: born.vague.map(v => v.id), why: describeBorn(born) };
   }
   return persistGenerated(context.character, type, entity, deps);
 }

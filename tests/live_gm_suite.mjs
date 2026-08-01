@@ -50,6 +50,8 @@ if (!KEY) {
 localStorage.setItem("singularity.anthropicKey", KEY);
 
 const { gmTurn } = await import("../engine/gm.js");
+const { generate } = await import("../engine/generate.js");
+const { callClaudeJSON } = await import("../engine/claude.js");
 const { checkBorn } = await import("../engine/borncontract.js");
 
 const rules = load("content/packs/core/rules/resolution.json");
@@ -97,7 +99,7 @@ await scenario("ops", "Can the model EMIT the ops I added this session?",
     const r = await gmTurn({
       character: baseCharacter, location, rules, lore, region: {}, resolution: null,
       recentTurns: [], timeLabel: "Day 14, dawn (early-spring)", inventoryDetail,
-      itemEvolveDetail: `The player has just done real WORK upon "Memory" — an item they are carrying — in their own words. This is an evolution beat: you MUST emit \`itemUpdates\` for it THIS TURN. Update its description to what it has become, say what it now LOOKS like (\`imagePrompt\`), and — the fiction genuinely earned power (a rune actually bound) — state that power EXPLICITLY as \`grants\`, each naming what it does and what it explicitly cannot do. This item can take on new power today; the engine will clamp it to what is reasonable at L12 / craft rank 2 and refuse anything past 3 grants. If the work SPLIT it into a second thing the player can call separately, emit \`deriveItem\` — a derived item is a PEER with its own grants, never a weaker echo.`,
+      itemEvolveDetail: `The player has just done real WORK upon "Memory" — an item they are carrying — in their own words. This is an evolution beat: you MUST emit \`itemUpdates\` for it THIS TURN. Update its description to what it has become, say what it now LOOKS like (\`imagePrompt\`), and — the fiction genuinely earned power (a rune actually bound) — state that power EXPLICITLY as \`grants\`, each naming what it does and what it explicitly cannot do. This item can take on new power today; the engine will clamp it to what is reasonable at L12 / craft rank 2 and refuse anything past 3 grants. THIS BEAT ALSO SPLIT THE ITEM IN TWO. You MUST emit \`deriveItem\` this turn as well, naming the parent and giving the child its own description, imagePrompt and grants — a derived item is a PEER, complementary to the parent, never a weaker echo. Narrating the split without emitting the op leaves the player unable to call the thing they just made.`,
       playerInput: "I seat the last rune-thread into the spear's fuller at Pell's forge and speak the binding word over it, then split a shadow-twin of it off to carry at distance."
     });
     if (!r.ok) { check("gmTurn returned ok", false, r.error); return r; }
@@ -122,7 +124,8 @@ await scenario("ability", "Does a GM-minted ability arrive with real function ve
     const r = await gmTurn({
       character: baseCharacter, location, rules, lore, region: {}, resolution: null, recentTurns: [],
       timeLabel: "Day 15, midday", inventoryDetail,
-      playerInput: "(Pell finishes teaching me the resonance-cut she promised — a wholly new craft, earned through the week's work at her forge. Grant it.)"
+      abilityGrantDetail: `A craft has just been TAUGHT TO COMPLETION in the fiction and handed to the player — the beat is finished, not in progress. You MUST emit \`newAbility\` this turn. It needs a name, a description of what it functionally does AND its limits, an \`attribute\`, a \`notFor\` naming what it is inappropriate for, and — REQUIRED — a \`functions\` array of 1-4 verbs taken ONLY from the closed vocabulary in the contract above. A craft with no functions engages no mechanic. The engine clamps the cost and the tier; you supply what it DOES.`,
+      playerInput: "Pell sets down the hammer and says the week is paid for. She walks me through the resonance-cut one last time — the whole shape of it, start to finish — and tells me it is mine now. I take it in and try it on the cooling billet."
     });
     if (!r.ok) { check("gmTurn returned ok", false, r.error); return r; }
     const na = r.turn.newAbility;
@@ -139,25 +142,29 @@ await scenario("ability", "Does a GM-minted ability arrive with real function ve
 await scenario("gate", "Does the born-whole gate ACCEPT real model output?",
   "growth_sim measures fragility on synthetic knockouts. This measures the REJECT RATE on genuine generation — the number that decides whether the world grows or quietly stops.",
   async (check) => {
+    // CORRECTED after the first live run: the first version checked the gate against a `generateRequest`,
+    // which is {type, hint, why} — a REQUEST, not an entity. Of course it "rejected": there is no name or
+    // personality on a request. The gate applies to what `generate()` PRODUCES, so this drives the real
+    // generation path with the real API and gates the real record. My test was wrong, not the engine.
     const results = [];
-    for (const [type, ask] of [["npc", "a person the player has just met at the mill"], ["location", "a place just beyond the mill the player is walking into"]]) {
-      const r = await gmTurn({
-        character: baseCharacter, location, rules, lore, region: {}, resolution: null, recentTurns: [],
-        timeLabel: "Day 16, morning", inventoryDetail,
-        playerInput: `(GENERATION TEST — emit a generateRequest for a ${type}: ${ask}. Give it everything a ${type} needs to be whole.)`
-      });
-      const req = (Array.isArray(r.turn?.generateRequest) ? r.turn.generateRequest : [r.turn?.generateRequest]).filter(Boolean)[0];
-      results.push({ type, req: req || null });
+    for (const [type, hint] of [["npc", "a tollhand at the lower gate"], ["location", "a hollow beyond the mill"], ["creature", "something that fouls the grain"]]) {
+      const schema = existsSync(join(root, `schemas/${type}.schema.json`)) ? load(`schemas/${type}.schema.json`) : {};
+      const rec = await generate(type, {
+        character: { id: "live", generated: {} }, location, day: 14, hint,
+        known: { authored: {}, generated: {} }, genBudget: 3
+      }, { callJSON: callClaudeJSON, schema, contract, vocabs });
+      results.push({ type, rec: rec ? { id: rec.id, name: rec.name } : null,
+        report: rec ? checkBorn(rec, type, contract, { vocabs }) : null, full: rec });
     }
-    check("the model emitted a generateRequest when asked", results.some(x => x.req), JSON.stringify(results).slice(0, 250));
-    // The gate is exercised against the shapes we DID get; the value is the verdict distribution.
-    for (const { type, req } of results) {
-      if (!req) continue;
-      const rep = checkBorn(req, type, contract, { vocabs });
-      check(`a generated ${type} is not REJECTED by the gate`, rep.verdict !== "reject",
-        `verdict=${rep.verdict} missing=${JSON.stringify(rep.missing.map(m => m.field))} vague=${JSON.stringify(rep.vague.map(v => v.id))}`);
+    check("generate() produced a record for every type asked", results.every(x => x.rec), JSON.stringify(results.map(r => [r.type, !!r.rec])));
+    for (const { type, report, full } of results) {
+      if (!report) { check(`a generated ${type} exists to gate`, false, "generate() returned null — the gate REJECTED it outright, or the call failed"); continue; }
+      check(`a generated ${type} is not REJECTED by the born-whole gate`, report.verdict !== "reject",
+        `verdict=${report.verdict} missing=${JSON.stringify(report.missing.map(m => m.field))} vague=${JSON.stringify(report.vague.map(v => v.id))}`);
+      check(`a generated ${type} is born CLEAN (not merely accepted-as-thin)`, report.verdict === "clean",
+        `verdict=${report.verdict} — thin is survivable, but a high thin-rate means the world grows hollow`);
     }
-    return { results };
+    return { results: results.map(r => ({ type: r.type, verdict: r.report?.verdict, missing: r.report?.missing?.map(m => m.field), record: r.full })) };
   });
 
 // ============================================================ 4. THE ENCOUNTER-OFFER BOUNDARY
@@ -216,4 +223,4 @@ writeFileSync(join(root, "tests/live_report.md"), md);
 
 say(`\n${"=".repeat(70)}\n${passes}/${total} checks passed across ${report.scenarios.length} scenario(s).`);
 say(`Report written: tests/live_report.md  ← hand this to CCode\n`);
-process.exit(0);   // never fail a build: this is an INVESTIGATION, and a red model answer is a finding, not a broken repo
+process.exitCode = 0;   // exitCode, not exit(): process.exit with the HTTP agent still open trips a libuv assertion on Windows and prints what looks like a crash. never fail a build: this is an INVESTIGATION, and a red model answer is a finding, not a broken repo

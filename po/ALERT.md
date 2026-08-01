@@ -1,5 +1,16 @@
 # PO ALERT
 
+> ## [DONE - CCode ask cont.] SNG-247 encounter names (Aevi, 2026-07-27)
+> Read CCode's NEWEST doc (Aug-1 dev-buttons). It found: my encounters had NO `name` field, so the minters fell
+> through to nameFromId(id) - and synthesizePuzzleDef fell to titleFromFlavor, turning my puzzles' flavor
+> 'dangerous' into the "Hard Ground" TITLE (a sealed mechanism flying a hazard's name). nameFromId was CCode's
+> SAFETY NET for my missing content. FIXED: authored explicit name + opponent.name on all 8 exemplars (The
+> Grieving Warden, The Toll of Names, The Rival Claim, The Stopped Mechanism, The Warded Cache, The Flooded
+> Works, + named the 2 pre-existing seeds). Both staged + live. CI green. Now each renders as ITSELF, not
+> id-derived or flavor-mistitled.
+> Lesson (again): read the NEWEST results doc - the Aug-1 one was newer than the wave I'd swept. CCode's minters
+> shouldn't have to derive names my content should carry.
+
 > ## [DONE - CCode ask, cont.] SNG-247 chase-direction fix (Aevi, 2026-07-27)
 > Swept ALL the SNG-247/CCODE-45..48 results docs (not just Tier3-4). Found the remaining AEVI-247-AUTHOR piece I
 > missed: the **chase directional ambiguity** CCode flagged - the chase frame copy assumed you're the PURSUER

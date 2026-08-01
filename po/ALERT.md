@@ -1,5 +1,40 @@
 # PO ALERT
 
+> ## [SNG-247 TRY-EACH-KIND complete_pending_review - CCode, 2026-08-01] The dev buttons - and the two bugs clicking them found (v1.8.325 `f798a6f0`)
+> Erik: *"update the test encounters so I can try each of the new updates... maybe put a matching colored border
+> around the button."* Five buttons at the top of 🧪 Legs, one per kind, each with its icon, name and a one-line
+> **watch-for** naming what that kind does differently. Each wears the **SAME `enc-kind-<kind>` class the play
+> surface uses**, so its border IS the hue the frame will fly - one source for the colour, so a button can never
+> advertise a hue the frame doesn't use.
+> They mint from the **LIVE POOL**, not synthetic defs - the authored standoffs and puzzles only became reachable
+> last build, so a button firing a stand-in would "work" while the real content stayed invisible. The chase button
+> goes through `beginChaseFromFight`, the actual chain, not a shortcut that looks like one.
+> **TWO REAL BUGS, FOUND THE MOMENT THEY WERE CLICKED.** Neither was visible to any prior test, because every prior
+> test asserted ENGINE behaviour rather than what a player SEES.
+> **(1) AN AUTHORED PUZZLE RENDERED AS "HARD GROUND".** `synthesizePuzzleDef` fell back to `titleFromFlavor`, and
+> Aevi's puzzles carry `flavor:"dangerous"` - which that map turns into the HAZARD title. A sealed precursor
+> mechanism was flying a hazard's name under a puzzle's icon. New `nameFromId` derives from the authored id, so each
+> gets its OWN name: **The Sealed Door / The Stopped Mechanism / The Warded Cache / The Flooded Works**, and the
+> standoffs likewise (**The Toll Keeper / The Grieving Warden / The Toll of Names / The Rival Claim**) instead of
+> four identical "The Standoff"s.
+> **(2) THE METER NEVER RENDERED ON A CONTEST-ENGINE KIND.** The strip gated the meter on `meter.total` - a STAGE
+> COUNT. A duel-shaped chase/standoff/puzzle has a pct but no stages, so **a chase had no Distance bar, a standoff
+> no Resolve bar, a puzzle no Insight bar**. Every kind I had just built was missing its meter and no test noticed.
+> The bar now shows whenever there IS one; done/total text still only when there are stages to count.
+> 3 regression checks for those + 5 for the buttons, including that every button is wired to a handler (a dev button
+> that does nothing is worse than none).
+> npm test exit 0 (20 seams). Live on never-used port 8491, clicking each: fight → ⚔ A Hostile Meeting / Momentum
+> 50% / red / contest panel · standoff → 🗣 The Toll Keeper / Their Resolve 50% / teal · puzzle → 🧩 The Sealed Door
+> / Insight 50% / indigo · hazard → ⚠ Hard Ground / Progress 0/2 / stone / classic path (correctly the fast one) ·
+> chase → 🏃 The Chase / Distance 50% / orange, **with the morph line** reading *"⚔ The Contest → 🏃 The Chase - you
+> broke from the aggressor, now it is ground, not blades"* in red→orange.
+> *(The first verify pass ran on an already-used port and showed the OLD names - the cross-port module cache again,
+> since `engine/*.js` carry no version query. Re-verified clean on a never-used one.)*
+> **ERIK: the five buttons are at the top of 🧪 Legs.** The two bugs above are exactly the class only playing finds -
+> a real fight log is still the most useful thing you can send back.
+> Results: po/results/20260801_SNG-247_try_each_kind_dev_buttons.md
+
+
 > ## [SNG-247 PROMOTION + AEVI-247-AUTHOR MERGED complete_pending_review - CCode, 2026-07-31] The exemplars are reachable; the voice is live (v1.8.322 `d4c82e27`, v1.8.323 `4b20395c`)
 > Erik: *"can't you pull in the staged exemplars?"* Yes - **and I was wrong to call it not mine.**
 > `po/staged_content/README.md` says the opposite in as many words: *"Aevi authors content; CCode does the

@@ -9,7 +9,9 @@
    "rules/attribute_gates.json",
    "rules/backgrounds.json",
    "rules/branch_forks.json",
+   "rules/challenge_design.json",
    "rules/class_archetypes.json",
+   "rules/coliseum_grid.json",
    "rules/combination_recipes.json",
    "rules/consumer_required_subfields.json",
    "rules/cross_axis_modifiers.json",
@@ -21,6 +23,7 @@
    "rules/encounter_receipt_line.json",
    "rules/encounter_ribbon_copy.json",
    "rules/function_vocabulary.json",
+   "rules/gambit_design.json",
    "rules/helper_text.json",
    "rules/intensity_scaling.json",
    "rules/location_affinities.json",
@@ -38,6 +41,7 @@
    "rules/schools.json",
    "rules/skill_battle_system.json",
    "rules/skill_capacity.json",
+   "rules/skill_utility_audit.json",
    "rules/the_accords.json",
    "rules/the_substrate.json",
    "rules/tradition_visual_aesthetics.json",
@@ -71,6 +75,6 @@
  },
  "note": "SNG-064 LAW 10 — the manifest is a LOAD WHITELIST. A file not listed here DOES NOT EXIST. Fixed 2026-07-12: 18 of 26 rules files were unlisted, including helper_text.json (SNG-084) and gambit_design.json (the recovered gambit definition). ⚠️ state.js ALSO fetches several of these by HARDCODED PATH (traditions/origins/backgrounds/regions/the_accords), bypassing the manifest entirely — TWO loading mechanisms, and the manifest is not the source of truth. [CCODE: unify — read rules from provides.rules; delete the hardcoded fetches.] And the Content CI did NOT catch this because it checks the VALLEY manifest, not CORE.",
  "_notes": {
-  "rulesDeregistered": "SNG-253 ratchet resolution (Aevi 2026-08-01): CCode's every-registered-rule-must-be-loaded ratchet surfaced registered-but-unloaded files. Sorted by their own `kind`: DESIGN DOCS (kind design_canon/design_audit/contest_design - challenge_design, gambit_design, skill_utility_audit, coliseum_grid) DEREGISTERED from provides.rules - they're Aevi/design reference, not loadable rule DATA, so they shouldn't be claimed as rules (they stay on disk as docs). The rest (power_sources/combination_recipes/martial_paths/cross_axis_modifiers/pole_signatures - kind rules/emergence/world_structure/social_mechanic_spec) are real DATA loaded by DEDICATED modules (e.g. recipes.js reads combination_recipes) not the generic loadRule - not a gap, kept."
+  "rulesDeregistered": "SNG-253 ratchet resolution (Aevi 2026-08-01): CCode's ratchet surfaced registered-but-unloaded files. RESOLUTION: they are correctly KNOWN_UNLOADED and stay registered - SNG-064 requires any file on disk in rules/ to be manifest-whitelisted, so deregistering-in-place isn't valid (it makes them on-disk-but-not-whitelisted). The DESIGN DOCS (challenge_design/gambit_design/skill_utility_audit/coliseum_grid - kind design_canon/audit/contest_design) are reference that happens to live in rules/; the DATA files (power_sources/combination_recipes/martial_paths/cross_axis_modifiers/pole_signatures) load via dedicated modules (recipes.js etc). Neither is a true gap. FOLLOW-ON (Aevi's call, not this turn): move the 4 pure design docs out of content/packs/core/rules/ into a docs/ location so they're not claimed as rules at all - a bigger move than the ratchet needs today."
  }
 }

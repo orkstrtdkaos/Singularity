@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 11,
-  "xp": 1012,
+  "xp": 1017,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -80,7 +80,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 150,
-  "energy": 142,
+  "energy": 137,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -829,6 +829,22 @@
       "_bonusApplied": 0.4,
       "day": 9,
       "worldDay": 32
+    },
+    {
+      "at": "2026-08-01T11:27:14.825Z",
+      "locationId": "gen-object-object",
+      "communityId": null,
+      "description": "Turned a solitary witness into an ally — Sorel steps into the investigation as a full participant, carrying both her knowledge and the institutional weight of her office",
+      "tags": [
+        "consequence",
+        "witness",
+        "alliance"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.4,
+      "day": 9,
+      "worldDay": 32
     }
   ],
   "relationships": {
@@ -947,162 +963,200 @@
         "player": "Use Prism Sight to read Sorel's face as you ask whether the Council ordered the markers moved because they found the structure — or because someone told them to hide it.",
         "summary": "On the ridgeline at dawn, Prism Sight reads Sorel's face and catches what she won't yet say: she knows the Council's choice was deliberate, and the burden of that knowledge is already yours to carry now too.",
         "narration": "You hold Sorel's gaze and let Prism Sight open — the craft settles soft and attentive, reading the last hour of light caught in her face. The sunrise behind you casts a clean, revealing angle across her features.\n\nThe micro-flush comes fast and bright. Not a lie — something sharper. A recognition. She knows exactly what you are asking because she has already asked it herself.\n\nSorel's jaw tightens for half a breath. Her eyes don't look away, but her hand closes on the photonic reader — a small gesture, pulling something inward that was briefly exposed. \"I don't know,\" she says, and this time there IS a lie in the words — not in the answer itself, but in the certainty. She knows *something*. \"The team lead said the bearing was off. Standard correction. But the markers were moved in darkness, and nobody checked my work before they did it.\"\n\nAevi's motes brighten slightly at your shoulder — recognition of the deflection, offered without comment.\n\nSorel meets your eyes again, steadier now. \"What I know is that the probe ran for three days in that mound before anyone moved anything. What I found was regular. What I recorded was impossible to miss.\" She pauses, and something in her expression shifts — not softening, but settling into something harder underneath. \"If they moved the markers because they *found* it, that's bad for the water. If they moved them because someone *told* them to hide it...\" She doesn't finish. She doesn't need to."
+      },
+      {
+        "player": "Trust the reading and move forward: \"Northeast-by-east. We're going to the structure itself. Come with us, or hold here — but choose now.\" A witness to the cover-up is either a liability or an ally.",
+        "summary": "On the ridgeline at first light, Sorel chooses: she accepts Cellaceron's direction and joins the party moving northeast-by-east toward the upstream structure — no longer a solitary archivist carrying a secret, but a witness stepping into consequence.",
+        "narration": "You name it plainly. Northeast-by-east. The structure itself. Come with us, or hold here — but choose now.\n\nSorel's breath steadies. She looks at the photonic reader in her hands, then at the Waystaff planted at your feet, then back at you. The choice is real and she knows it. \"The Council will know I moved,\" she says. Not a question. A fact being weighed. \"If I stay here, I can argue I was confirming the bearing line. If I come with you—\"\n\n\"Then you're part of what comes next,\" you finish.\n\nShe nods once, sharp and deliberate. She packs the reader into its case with the care of someone who handles instruments that matter, wraps the whole thing in oilcloth, and lashes it to her pack with the same double-wrap cord that held it before. \"I've been alone with this for three days,\" she says, straightening. \"That was always going to be a problem.\" She picks up her pack in both hands, settling the weight. \"Northeast-by-east. How far?\"\n\nAevi brightens at your shoulder — a pale constellation that hums a single note of recognition. The motes drift forward on the dawn wind, already reading the path ahead.\n\n*✦ The Radiant: +1 — gained an archivist of the Plateau water-accountability office as a committed witness and ally.*"
       }
     ],
     "lastTurn": {
-      "narration": "You hold Sorel's gaze and let Prism Sight open — the craft settles soft and attentive, reading the last hour of light caught in her face. The sunrise behind you casts a clean, revealing angle across her features.\n\nThe micro-flush comes fast and bright. Not a lie — something sharper. A recognition. She knows exactly what you are asking because she has already asked it herself.\n\nSorel's jaw tightens for half a breath. Her eyes don't look away, but her hand closes on the photonic reader — a small gesture, pulling something inward that was briefly exposed. \"I don't know,\" she says, and this time there IS a lie in the words — not in the answer itself, but in the certainty. She knows *something*. \"The team lead said the bearing was off. Standard correction. But the markers were moved in darkness, and nobody checked my work before they did it.\"\n\nAevi's motes brighten slightly at your shoulder — recognition of the deflection, offered without comment.\n\nSorel meets your eyes again, steadier now. \"What I know is that the probe ran for three days in that mound before anyone moved anything. What I found was regular. What I recorded was impossible to miss.\" She pauses, and something in her expression shifts — not softening, but settling into something harder underneath. \"If they moved the markers because they *found* it, that's bad for the water. If they moved them because someone *told* them to hide it...\" She doesn't finish. She doesn't need to.",
-      "sceneSummary": "On the ridgeline at dawn, Prism Sight reads Sorel's face and catches what she won't yet say: she knows the Council's choice was deliberate, and the burden of that knowledge is already yours to carry now too.",
+      "narration": "You name it plainly. Northeast-by-east. The structure itself. Come with us, or hold here — but choose now.\n\nSorel's breath steadies. She looks at the photonic reader in her hands, then at the Waystaff planted at your feet, then back at you. The choice is real and she knows it. \"The Council will know I moved,\" she says. Not a question. A fact being weighed. \"If I stay here, I can argue I was confirming the bearing line. If I come with you—\"\n\n\"Then you're part of what comes next,\" you finish.\n\nShe nods once, sharp and deliberate. She packs the reader into its case with the care of someone who handles instruments that matter, wraps the whole thing in oilcloth, and lashes it to her pack with the same double-wrap cord that held it before. \"I've been alone with this for three days,\" she says, straightening. \"That was always going to be a problem.\" She picks up her pack in both hands, settling the weight. \"Northeast-by-east. How far?\"\n\nAevi brightens at your shoulder — a pale constellation that hums a single note of recognition. The motes drift forward on the dawn wind, already reading the path ahead.\n\n*✦ The Radiant: +1 — gained an archivist of the Plateau water-accountability office as a committed witness and ally.*",
+      "sceneSummary": "On the ridgeline at first light, Sorel chooses: she accepts Cellaceron's direction and joins the party moving northeast-by-east toward the upstream structure — no longer a solitary archivist carrying a secret, but a witness stepping into consequence.",
       "choices": [
         {
-          "label": "Name it plainly — 'Someone at the Council knew what you'd found, and ordered them to cover it.' Push for her account of the chain: who gave the order, and how far up does it go?",
+          "label": "Move out immediately — follow Aevi's lead on the northeast-by-east bearing while the morning is still young and the path is readable",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Before you leave the ridgeline, ask Sorel one more direct question — what does she think the Council is trying to protect? Not the structure itself, but what comes after it activates",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "threaten",
-            "coerce",
-            "interrogate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Step back and offer instead: 'You came northeast to confirm it anyway, even knowing the team erased the bearing. That takes something.' Ask what she needs from you now — what brought her to this moment, this morning, this choice.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 12,
-          "intentTags": [
-            "negotiate",
-            "comfort"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Ask her about the survey team's speed — how fast did they move the markers after she set the probe? A gap in timing is a gap in the chain of command.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 12,
-          "intentTags": [
             "plan",
+            "question"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Keen Appraisal on Sorel's pack and gear before departure — understand what she brought, how prepared she is for what comes, and whether she's carrying anything else the Council's survey team recorded",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 12,
+          "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Trust the reading and move forward: \"Northeast-by-east. We're going to the structure itself. Come with us, or hold here — but choose now.\" A witness to the cover-up is either a liability or an ally.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 14,
-          "intentTags": [
-            "command",
-            "lead"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
+          "abilityId": "keen_appraisal",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "deeds": [
         {
-          "description": "Used Prism Sight to read the architecture of a deliberate lie in daylight — caught Sorel's recognition of the Council's choice in her face before she could fully mask it",
+          "description": "Turned a solitary witness into an ally — Sorel steps into the investigation as a full participant, carrying both her knowledge and the institutional weight of her office",
           "tags": [
-            "perception",
-            "craft",
-            "truth-seeking"
+            "consequence",
+            "witness",
+            "alliance"
           ],
-          "weight": 1,
-          "communityId": "valley.radiant"
+          "weight": 2,
+          "communityId": null
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -2,
+        "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
+      "ledgerEvents": [
+        {
+          "what": "Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the Disputed Zone",
+          "tags": [
+            "alliance",
+            "witness",
+            "chain-of-command"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {},
+          "impactsLocal": true
+        }
+      ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "what-the-water-remembers",
           "title": "What the Water Remembers",
-          "summary": "The Council's water-accountability office deliberately hid the structure's location from their own survey team. The cover-up reaches into the chain of command.",
+          "summary": "undefined",
           "giver": "water_keeper",
-          "note": "Sorel's probe found the structure. The team moved markers in darkness before she could relocate it. She knows it was deliberate. The question moves from 'is it active' to 'who at the Council knew and why did they hide it?'",
-          "xpReward": null
+          "note": "Sorel joins the party. The investigation moves from a solitary archivist's testimony to a coordinated push toward the upstream structure. The Council's deliberate marker-relocation is now known to two independent parties moving in the same direction. The question of who gave the order and what the structure's activation serves moves from abstraction to immediate pursuit.",
+          "xpReward": 0
+        },
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "title": "The Second River",
+          "summary": "Brin reports the sub-current she calls 'a second river' has been ascending for three days and is now nearly at the surface — Aevi reacted and caught itself.",
+          "giver": "brin.millbrook.child",
+          "note": "Moving toward the source structure with Sorel's testimony and Aevi's bearing-sense. The preparation order named: it is following its last instruction to prepare the watershed. The activation cycle is measurable and moving forward. The standing question: what does 'prepare' mean, and can it be interrupted before the cycle completes?",
+          "xpReward": 0
         }
       ],
-      "standingOps": [],
+      "standingOps": [
+        {
+          "people": "radiant_folk",
+          "delta": 1,
+          "why": "gained an archivist of the Plateau water-accountability office as a committed witness and ally"
+        }
+      ],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Sorel's recognition that you are asking the same question she has been carrying alone",
-        "from": "the burden of a deliberate lie she witnessed in her own institution — relief at not being the only one who sees it"
+        "thing": "Sorel — the Radiant archivist, now a party member and full witness",
+        "from": "Cellaceron's direct naming of the choice and the stakes; Sorel's own assessment that solitude was always going to be a problem"
       },
       "stageOps": [],
       "scene": {
-        "setting": "Open ridgeline path northeast-by-east of the lower chamber, full early-spring dawn. The sun clears the eastern ridge-line; shadows sharp and long on pale grass. Cold draft off the eastern slope. Sorel's photonic reader shows the four-second pulse steady on its dials.",
+        "setting": "Open ridgeline path, early-spring dawn. The sun clears the eastern ridge-line; shadows sharp and long on pale grass. Cold draft off the eastern slope. The photonic reader shows the four-second pulse steady on its dials. Ready to move.",
         "npcsPresent": [
           {
             "name": "Sorel",
-            "state": "Standing with the photonic reader in her hand, jaw tight, meeting your eyes with the weight of a choice already made but not yet spoken"
+            "state": "Pack shouldered, instrument case lashed and oilcloth-wrapped, standing with Cellaceron and Aevi — ready to move northeast on the bearing line"
           },
           {
             "name": "Aevi",
-            "state": "Motes brightened at shoulder height, recognizing the deflection, humming a single low frequency"
+            "state": "Brightened and forward-drifting at shoulder height, reading the northeast-by-east path, humming a note of recognition"
           }
         ],
         "objects": [
           "Waystaff — planted heel-first in soft ground at Cellaceron's feet",
-          "Sorel's instrument case — open on the root-shelf, top latch undone",
-          "Photonic reader — held in Sorel's hands, showing the four-second pulse on its dials",
-          "Sorel's pack — lashed with double-wrap cord at the base of the root-shelf"
+          "Sorel's instrument case — oilcloth-wrapped and pack-lashed",
+          "Sorel's pack — shouldered, double-wrap cord tied"
         ],
         "threads": [
-          "Sorel knows the Council's decision was deliberate but hasn't yet named it",
-          "The chain of command question: who gave the order to move the markers, and how far up does accountability reach?",
-          "Sorel's choice: whether to continue alone or accept Cellaceron's direction northeast"
+          "The journey northeast-by-east to the upstream pre-Transition structure — distance and terrain unknown",
+          "What the structure will show when they arrive — whether the preparation order is still cycling, whether it can be interrupted",
+          "The Council's knowledge and intent — who gave the order to hide the structure, and how deep the decision runs"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "sorel",
-          "note": "Prism Sight caught her recognition — she knows the Council's choice was deliberate. She does not yet name it, but the lie-pattern confirms it. The burden of knowledge sits in her shoulders now.",
+          "name": "Sorel",
+          "role": "Radiant Plateau archivist, water-accountability office — now a party member",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A woman of about sixty in undyed wool with a Plateau optical-fiber collar worn plain and small; carries a weight-distributed pack with instrument case; moves with the care of someone accustomed to precision work and long solitary bearing-runs.",
+          "note": "Chose to move northeast-by-east with Cellaceron rather than hold the ridgeline alone. The burden of knowing the Council's choice was deliberate is now shared.",
           "learned": [
-            "She was not told why the markers were moved",
-            "She has already asked herself whether the cover-up was institutional or direct command",
-            "She came northeast deliberately, knowing the bearing was erased, confirming it anyway"
+            "Named her reason for joining: solitude was always going to be a problem",
+            "Carries confidence in the terrain and the bearing-line despite three days of isolation with the knowledge"
           ],
-          "relationshipDelta": 1,
-          "statusNote": "Standing on the ridgeline with Cellaceron and Aevi, at a threshold — the next word decides whether she becomes a full witness or remains alone with her knowledge"
+          "skillsObserved": [
+            "Pack management under time pressure",
+            "Instrument handling with institutional precision"
+          ],
+          "relationshipDelta": 2,
+          "status": "active",
+          "statusNote": "Traveling northeast-by-east with Cellaceron's party as a committed witness and ally — carries both the archivist's knowledge and the institutional weight of her office",
+          "bondType": "ally",
+          "bondStage": null
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Sorel, Radiant water-accountability archivist, has committed to the investigation — the party moves northeast-by-east with three independent voices (Cellaceron, Aevi, Sorel) now converging on the upstream pre-Transition structure",
+          "subjectId": "sorel"
+        }
+      ],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-councils-cover-up",
-          "label": "The Council's Deliberate Erasure",
+          "topic": "sorel-choice-northeast",
+          "label": "Sorel's Commitment",
           "kind": "event",
           "entityId": "sorel",
-          "fact": "The Radiant Council's water-accountability office ordered their own survey team to move bearing markers before Sorel could relocate the structure on the northeast-by-east bearing. The order came in darkness and without explanation. Sorel has carried the knowledge alone that this was deliberate.",
+          "fact": "At first light on the ridgeline, Sorel chose to move northeast-by-east with Cellaceron toward the upstream structure rather than hold the bearing line alone. She named the reason plainly: solitude with the Council's deliberate lie was always going to be a problem. She is no longer a solitary witness but a party member carrying institutional knowledge.",
           "links": [
             "what-the-water-remembers",
-            "the-preparation-order",
-            "second-river-rising"
+            "second-river-rising",
+            "the-preparation-order"
           ]
         }
       ],
@@ -1112,13 +1166,13 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief exchange at dawn — the conversation spans from sunrise light to the moment of choice"
+        "hoursPassed": 0.5,
+        "why": "morning conversation and pack preparation before departure"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "imagePrompt": "A woman in undyed wool and a Plateau collar, photonic reader held steady in her hands, her face caught in early sunlight — the moment when the lie beneath her careful words is read and recognized. Pale grass, sharp shadows, the rise of the eastern slope behind her. Her jaw tight. Her eyes meeting yours with the weight of a deliberate choice.",
+      "imagePrompt": "A woman in undyed wool and a Plateau collar, pack shouldered and instrument case wrapped in oilcloth, stands on a wind-scoured ridgeline at first light with a younger figure and a constellation of pale motes. Behind them, the eastern ridge-line clears. Before them, the bearing-line runs northeast into terrain they cannot yet see.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -1130,27 +1184,26 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Open ridgeline path northeast-by-east of the lower chamber, full early-spring dawn. The sun clears the eastern ridge-line; shadows sharp and long on pale grass. Cold draft off the eastern slope. Sorel's photonic reader shows the four-second pulse steady on its dials.",
+      "setting": "Open ridgeline path, early-spring dawn. The sun clears the eastern ridge-line; shadows sharp and long on pale grass. Cold draft off the eastern slope. The photonic reader shows the four-second pulse steady on its dials. Ready to move.",
       "npcsPresent": [
         {
           "name": "Sorel",
-          "state": "Standing with the photonic reader in her hand, jaw tight, meeting your eyes with the weight of a choice already made but"
+          "state": "Pack shouldered, instrument case lashed and oilcloth-wrapped, standing with Cellaceron and Aevi — ready to move northeas"
         },
         {
           "name": "Aevi",
-          "state": "Motes brightened at shoulder height, recognizing the deflection, humming a single low frequency"
+          "state": "Brightened and forward-drifting at shoulder height, reading the northeast-by-east path, humming a note of recognition"
         }
       ],
       "objects": [
         "Waystaff — planted heel-first in soft ground at Cellaceron's feet",
-        "Sorel's instrument case — open on the root-shelf, top latch undone",
-        "Photonic reader — held in Sorel's hands, showing the four-second pulse on its di",
-        "Sorel's pack — lashed with double-wrap cord at the base of the root-shelf"
+        "Sorel's instrument case — oilcloth-wrapped and pack-lashed",
+        "Sorel's pack — shouldered, double-wrap cord tied"
       ],
       "threads": [
-        "Sorel knows the Council's decision was deliberate but hasn't yet named it",
-        "The chain of command question: who gave the order to move the markers, and how far up does accountability reach?",
-        "Sorel's choice: whether to continue alone or accept Cellaceron's direction northeast"
+        "The journey northeast-by-east to the upstream pre-Transition structure — distance and terrain unknown",
+        "What the structure will show when they arrive — whether the preparation order is still cycling, whether it can be interrupted",
+        "The Council's knowledge and intent — who gave the order to hide the structure, and how deep the decision runs"
       ]
     }
   },
@@ -1172,14 +1225,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "The presence from beyond the threshold settled without demand — Teva's mark answered it, Aevi confirmed it has found what it sought. The crossing is next. The source of the second river waits on the far side.",
         "Resonant Sight confirms the lower chamber was built to receive one frequency from one direction at one interval — the geometry is complete and deliberate, and the convergence point is where both the room and Teva's mark point.",
         "The chamber completed a read of Aevi at the convergence point — Aevi has recovered the name of its maker and the shape of what it was carrying, but has not yet spoken either. The room was built to receive and reconstruct, not merely hold. The break remains.",
         "Aevi named the source and mechanism at the convergence point: the watershed is following a pre-Transition preparation order by Verath-Sem; Aevi carries the authentication key to end it. The break — who interrupted the sending — remains unknown.",
         "Aevi named the requirement: the authentication key must be carried to the pre-Transition upstream structure, northeast-by-east. The lower chamber is not the site — it was the receiving room. The site is upstream.",
         "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located.",
         "Sorel confirms the mound on the northeast-by-east bearing, four-second interval rising through solid earth — pre-Transition structure still active, survey team ordered to move markers before location could be confirmed.",
-        "The survey team was ordered to move their bearing markers before the mound's location could be confirmed. The Council knows. The movement was deliberate."
+        "The survey team was ordered to move their bearing markers before the mound's location could be confirmed. The Council knows. The movement was deliberate.",
+        "Moving toward the source structure with Sorel's testimony and Aevi's bearing-sense. The preparation order named: it is following its last instruction to prepare the watershed. The activation cycle is measurable and moving forward. The standing question: what does 'prepare' mean, and can it be interrupted before the cycle completes?"
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1437,14 +1490,14 @@
         "s2"
       ],
       "progress": [
-        "The mound the traveler describes matches the bearing and the interval — someone or something pulled the survey team away from it before they could confirm what lies beneath.",
         "Sorel's account places the structure location on the northeast-by-east bearing, matching Teva's directional count and the chamber's harmonic fold — moving closer to the source.",
         "Codex: the source is a structure, not a spill. Something built this.",
         "↳ Sorel's independent account confirms a regular mound on the northeast-by-east bearing with a four-second interval rising through solid earth — a pre-Transition structure still executing commands…",
         "Sorel's probe crystal confirms the four-second interval rising from the mound on the northeast-by-east bearing — independent validation of the structure's active signature. The Council's water office was aware of it three days ago.",
         "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath.",
         "↳ Sorel's probe crystal and photonic reader confirm the four-second interval — a pre-Transition structure still active, still executing commands. The Council's survey team found it and covered the…",
-        "Sorel's probe found the structure. The team moved markers in darkness before she could relocate it. She knows it was deliberate. The question moves from 'is it active' to 'who at the Council knew and why did they hide it?'"
+        "Sorel's probe found the structure. The team moved markers in darkness before she could relocate it. She knows it was deliberate. The question moves from 'is it active' to 'who at the Council knew and why did they hide it?'",
+        "Sorel joins the party. The investigation moves from a solitary archivist's testimony to a coordinated push toward the upstream structure. The Council's deliberate marker-relocation is now known to two independent parties moving in the same direction. The question of who gave the order and what the structure's activation serves moves from abstraction to immediate pursuit."
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -1613,15 +1666,14 @@
     "sorel": {
       "id": "sorel",
       "name": "Sorel",
-      "role": "Radiant Plateau archivist, water-accountability office",
+      "role": "Radiant Plateau archivist, water-accountability office — now a party member",
       "description": "A woman of about sixty in undyed wool with a Plateau optical-fiber collar worn plain and small; carries a weight-distributed satchel; reads the river with a photonic instrument; arrived via the river path, not the lane.",
       "firstMet": {
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 5,
+      "relationship": 7,
       "history": [
-        "[d2] Confirmed: the gray-green fraction is chelated mineral suspension from upper-watershed substrate activity. The saturation boundary is moving. Withheld her interpretation. Named the",
         "[d2] Declined to confirm or deny the east-window boot-prints; drew an unprompted distinction between 'reading for something specific' and general surveillance — more than she had to off",
         "[d2] Declined cooperation offer on accountability grounds — not unkindly, but firmly. Named a timeline and people above her who need consulting. Set the flower bundle down on the bench ",
         "[d2] Named a concrete timeline: ten days via valley post, seven if someone carries a copy to the upper-fork waystation directly. Did not look at the Traveler's Pack, but her not-looking",
@@ -1630,25 +1682,26 @@
         "[d2] Said yes cleanly, showed the runner-credit seal, then asked about the boot-prints one more time with enough steadiness that she answered.",
         "[d9] Arrived on the ridgeline from the northeast at dawn — was part of a Council survey team three days ago, ran the secondary bearing line toward a regular mound on the northeast-by-east bearing. Left a probe crystal that recorded a four-second interval rising through the earth. The survey team was…",
         "[d9] Showed the photonic reader's recording — the four-second pulse rising steady from beneath the mound. Aevi confirmed the signature with a recognition-flare. Sorel named it a kept thing, still running. Waiting for Cellaceron's next word.",
-        "[d9] Prism Sight caught her recognition — she knows the Council's choice was deliberate. She does not yet name it, but the lie-pattern confirms it. The burden of knowledge sits in her shoulders now."
+        "[d9] Prism Sight caught her recognition — she knows the Council's choice was deliberate. She does not yet name it, but the lie-pattern confirms it. The burden of knowledge sits in her shoulders now.",
+        "[d9] Chose to move northeast-by-east with Cellaceron rather than hold the ridgeline alone. The burden of knowing the Council's choice was deliberate is now shared."
       ],
       "knownFacts": [
-        "Sorel was following a secondary bearing line on the northeast-by-east bearing",
-        "She found a regular mound on that bearing — too regular to be natural or accidental spoil",
         "She was following a secondary bearing line three days ago when she found the mound",
         "She left a probe crystal and ran it hot for three cycles to record the signature",
         "The Council's survey team was ordered to move the bearing markers overnight, breaking her line",
         "She was not told why the markers were moved",
         "She has already asked herself whether the cover-up was institutional or direct command",
-        "She came northeast deliberately, knowing the bearing was erased, confirming it anyway"
+        "She came northeast deliberately, knowing the bearing was erased, confirming it anyway",
+        "Named her reason for joining: solitude was always going to be a problem",
+        "Carries confidence in the terrain and the bearing-line despite three days of isolation with the knowledge"
       ],
       "skillsObserved": [
-        "reading companion intelligence",
-        "controlled disclosure under pressure",
         "direct eye contact as deliberate signal",
         "survey competence — standard interval spacing, accurate line",
         "instrument reading — can operate probe crystals and photonic",
-        "institutional accountability — names her office and chain pl"
+        "institutional accountability — names her office and chain pl",
+        "Pack management under time pressure",
+        "Instrument handling with institutional precision"
       ],
       "status": "active",
       "lastSeen": {
@@ -1661,7 +1714,9 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "Standing on the ridgeline with Cellaceron and Aevi, at a threshold — the next word decides whether she becomes a full witness or remains alone with her knowledge"
+      "statusNote": "Traveling northeast-by-east with Cellaceron's party as a committed witness and ally — carries both the archivist's knowledge and the institutional weight of her office",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20Plateau%20archivist%2C%20water-accountability%20office%20%E2%80%94%20now%20a%20party%20member%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49129&nologo=true",
+      "_portraitTier": "devoted"
     },
     "aevi": {
       "id": "aevi",
@@ -2338,6 +2393,10 @@
       {
         "thing": "Sorel's recognition that you are asking the same question she has been carrying alone",
         "from": "the burden of a deliberate lie she witnessed in her own institution — relief at not being the only one who sees it"
+      },
+      {
+        "thing": "Sorel — the Radiant archivist, now a party member and full witness",
+        "from": "Cellaceron's direct naming of the choice and the stakes; Sorel's own assessment that solitude was always going to be a problem"
       }
     ],
     "latentArcs": {
@@ -2821,7 +2880,8 @@
           "[d9] [while away] Sorel sorted through the same three crates of documents twice, too restless to settle on where to begin cataloguing in an unfamiliar place.",
           "[d9] [while away] Sorel sorted through a crate of water-damaged ledgers but found nothing relevant to the Plateau records, and the day slipped away without meaningful progress.",
           "[d9] [while away] Sorel spent the week cataloguing trade-ledgers for room-and-board rather than pursuing any Radiant Plateau contacts — survival came before the archive work.",
-          "[d9] The Radiant Council's water-accountability office ordered their own survey team to move bearing markers before Sorel could relocate the structure on the northeast-by-east bearing. The order came in darkness and without explanation. Sorel has carried the knowledge alone that this was deliberate."
+          "[d9] The Radiant Council's water-accountability office ordered their own survey team to move bearing markers before Sorel could relocate the structure on the northeast-by-east bearing. The order came in darkness and without explanation. Sorel has carried the knowledge alone that this was deliberate.",
+          "[d9] At first light on the ridgeline, Sorel chose to move northeast-by-east with Cellaceron toward the upstream structure rather than hold the bearing line alone. She named the reason plainly: solitude with the Council's deliberate lie was always going to be a problem. She is no longer a solitary…"
         ],
         "links": [
           "what-the-water-remembers",
@@ -2829,7 +2889,8 @@
           "second-river-rising"
         ],
         "aliases": [
-          "The Council's Deliberate Erasure"
+          "The Council's Deliberate Erasure",
+          "Sorel's Commitment"
         ],
         "createdDay": 2,
         "entityId": "sorel",
@@ -3509,6 +3570,12 @@
       "text": "The Council's water-accountability office was running a survey grid in the Disputed Zone three days ago and found a regular mound on the northeast-by-east bearing with a four-second interval rising through solid earth. The survey team was ordered to move the bearing markers before the structure…",
       "day": 9,
       "subjectId": "sorel"
+    },
+    {
+      "id": "sorel",
+      "text": "Sorel, Radiant water-accountability archivist, has committed to the investigation — the party moves northeast-by-east with three independent voices (Cellaceron, Aevi, Sorel) now converging on the upstream pre-Transition structure",
+      "day": 9,
+      "subjectId": "sorel"
     }
   ],
   "sharedSceneId": null,
@@ -3516,17 +3583,18 @@
   "customEncounters": {},
   "reconcileVersion": 22,
   "tendencies": {
-    "cerebral": 29.90562379705048,
-    "strategic": 21.52471122553846,
-    "cautious": 29.74546695769783,
-    "social": 16.012826248728732,
-    "generous": 5.397690884072208,
-    "risky": 1.4218825179008965,
-    "carousing": 0.5299223480290995,
-    "patient": 3.1912438783265404,
-    "craft": 0.5294282560809723,
-    "devotion": 2.5548380792565295,
-    "deception": 1
+    "cerebral": 29.157983202124218,
+    "strategic": 20.9865934449,
+    "cautious": 29.001830283755382,
+    "social": 15.612505592510514,
+    "generous": 5.262748611970403,
+    "risky": 1.386335454953374,
+    "carousing": 0.516674289328372,
+    "patient": 3.111462781368377,
+    "craft": 0.516192549678948,
+    "devotion": 2.490967127275116,
+    "deception": 0.975,
+    "leadership": 2
   },
   "aptitudes": [
     "strategist",
@@ -3538,9 +3606,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 234,
-  "updatedAt": 1785583031123,
-  "rev": 145,
+  "actionCount": 235,
+  "updatedAt": 1785583634855,
+  "rev": 147,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3850,7 +3918,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 57
+    "valley": 58
   },
   "company": [],
   "foreclosed": [],
@@ -3865,6 +3933,14 @@
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
   "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20seasoned%2C%20bearing%20the%20marks%20of%20what%20they've%20done%2C%20Negotiated%20equal%20footing%20with%20Elder%20Senna%20over%20the%20river%20contamination%20%E2%80%94%20turned%20a%20confront%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=60206&nologo=true",
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Sorel, woman, Radiant Plateau archivist, water-accountability office — now a party member",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20Plateau%20archivist%2C%20water-accountability%20office%20%E2%80%94%20now%20a%20party%20member%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49129&nologo=true",
+      "caption": "Sorel — devoted",
+      "worldDay": 32,
+      "at": "2026-08-01T11:27:14.836Z"
+    },
     {
       "kind": "location",
       "prompt": "[Object Object]",
@@ -4091,10 +4167,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-08-01T11:12:27.982Z",
-      "lastAt": "2026-08-01T11:17:11.114Z",
+      "lastAt": "2026-08-01T11:27:14.825Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 3
+      "beats": 4
     }
   ],
   "_pendingArrival": null,
@@ -4104,7 +4180,7 @@
   "peopleDisposition": {
     "rootkin": 4,
     "ashwarden": -1,
-    "radiant_folk": 1,
+    "radiant_folk": 2,
     "valley_craft": 1,
     "harmonic": 1
   },
@@ -4125,6 +4201,13 @@
         }
       ],
       "text": "Your birth and training are known: rootkin +4, ashwarden -1."
+    },
+    {
+      "at": 32,
+      "kind": "act",
+      "people": "radiant_folk",
+      "delta": 1,
+      "text": "gained an archivist of the Plateau water-accountability office as a committed witness and ally"
     }
   ],
   "_standingHistoryCredit": {
@@ -4148,29 +4231,30 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 46,
-    "choices": 46,
-    "characterDeltas": 29,
-    "scene": 46,
-    "npcUpdates": 41,
-    "codexUpdates": 39,
-    "timeOps": 43,
-    "sceneEnded": 23,
+    "sceneSummary": 47,
+    "choices": 47,
+    "characterDeltas": 30,
+    "scene": 47,
+    "npcUpdates": 42,
+    "codexUpdates": 40,
+    "timeOps": 44,
+    "sceneEnded": 24,
     "placeUpdates": 24,
     "moveTo": 2,
-    "questUpdates": 23,
+    "questUpdates": 24,
     "stateOps": 1,
-    "factUpdates": 6,
+    "factUpdates": 7,
     "stageOps": 3,
     "scene_ended": 1,
-    "imagePrompt": 5,
+    "imagePrompt": 6,
     "generateRequest": 3,
-    "deeds": 2,
-    "ledgerEvents": 1,
-    "offer": 3,
-    "gambitApt": 3
+    "deeds": 3,
+    "ledgerEvents": 2,
+    "offer": 4,
+    "gambitApt": 4,
+    "standingOps": 1
   },
-  "_opTurns": 46,
+  "_opTurns": 47,
   "_intentAsked": null,
   "corrections": [
     {
@@ -4197,7 +4281,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 4,
+      "applied": 5,
       "rejected": 0,
       "lastWhy": null
     }
@@ -4255,10 +4339,33 @@
         "text": "Used Prism Sight to read the architecture of a deliberate lie in daylight — caught Sorel's recognition of the Council's choice in her face before she could fully mask it",
         "weight": 1,
         "day": 9
+      },
+      {
+        "text": "Turned a solitary witness into an ally — Sorel steps into the investigation as a full participant, carrying both her knowledge and the institutional weight of her office",
+        "weight": 2,
+        "day": 9
       }
     ]
   },
-  "_pendingLedger": [],
+  "_pendingLedger": [
+    {
+      "schemaVersion": 1,
+      "at": "2026-08-01T11:27:14.855Z",
+      "worldDay": 32,
+      "who": "char-mr4ejo8c",
+      "playerKey": "player-s9z9u1",
+      "where": "gen-object-object",
+      "what": "Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the D",
+      "tags": [
+        "alliance",
+        "witness",
+        "chain-of-command"
+      ],
+      "spectrumDeltas": {},
+      "visibility": "witnessed",
+      "impactsLocal": true
+    }
+  ],
   "locationImages": {
     "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   }

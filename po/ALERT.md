@@ -1,6 +1,19 @@
 # PO ALERT
 
-> ## [DONE - SNG-254b inert pairs fixed] (Aevi, 2026-08-01)
+> ## [NOTE - static-antagonist 8.3% framed, not tuned] SNG-255 candidate (Aevi, 2026-08-01)
+> CCode's balance report: static (puzzle/hazard) resolves at 8.3%, the outlier; flagged Erik-and-Aevi. Also
+> established the bigger truth - PLAYSTYLE dominates (65-84 pts best-vs-worst BUILD) vs ~5 pts between KITS: the
+> build is the variable, the people is the accent. Worth holding before anyone tunes traditions.
+> I TRACED the 8.3% rather than tune blind: a static thing doesn't ROLL - the player clears a FIXED DC (resist
+> 18, +15=success) UNILATERALLY, vs every other kind being a CONTESTED roll where a good roll/matchup edge WINS.
+> That structural asymmetry is the cause. Framed 3 readings: (1) may be CORRECT-but-mis-measured - a puzzle
+> YIELDS over several rounds (give 60 spent by ticks), so 'won this round' vs multi-round-yield is an apples-to-
+> oranges base rate (SAME class as the signature-situation artifact CCode just fixed); (2) the RIGHT APPROACH
+> should matter - my matrix has break/open/transform beat ward (the static hold), so measure BY approach verb not
+> pooled; (3) genuinely punishing = Erik's dial (defaultResist/degreeBands/defaultGive). RECOMMENDATION: don't
+> tune yet - measure FIRST (same lesson as this whole session).
+> CCODE: re-measure static as multi-round yield + BY approach verb before any tune. ERIK: the dials, only if the
+> right approach still resolves too low. Full: NOTE_SNG-255.> ## [DONE - SNG-254b inert pairs fixed] (Aevi, 2026-08-01)
 > CCode wired the matrix into the sim (it had been dead - ability records carry `functions` plural, rollSide
 > reads `decl.function` singular, so every simulated move declared undefined and matched 0; the matrix was
 > measuring attributes+tier the whole time). WIRED, the matrix WORKS: spread 4.0→5.6, ordering fully rearranges

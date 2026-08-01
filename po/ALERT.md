@@ -1,5 +1,43 @@
 # PO ALERT
 
+> ## [SNG-251 BUILT complete_pending_review - CCode, 2026-08-01] Story-driven item evolution: all four gaps + the §4 economy
+> Write-up: `po/results/20260801_SNG-251_story_driven_item_evolution.md`. Full `npm test` green, 31 new smoke
+> checks, **validated against Aevi's Memory worked example** — the reference the mechanism has to reproduce.
+> **§2a THE ROOT CAUSE.** `itemUpdates` is 1 of 114 MUSTs and drops under saturation — no prompt rewrite fixes a
+> directive competing with a hundred others, which is why Erik did the work repeatedly and the op never fired.
+> The ENGINE now decides: when his own words name an item he HOLDS and a verb of MAKING (bind/seat/reforge/
+> inscribe/temper/seal/split), the directive is HARD that turn (the SNG-246 fight-framing pattern). Narrow on
+> purpose — a false positive spends a hard directive on an ordinary turn, which is how hard ones become soft.
+> Plus a player-initiated **✦ Evolve** on the item card that must CITE the fiction, checked against the daily
+> budget BEFORE the turn is spent.
+> **§2b** a real evolution (grant / stage / materially rewritten description — not a tweak, per OQ2) marks the
+> image dirty and bumps a stamp that BUSTS the cache key; the stale pinned URL is bypassed and an authored
+> imagePrompt beats the plain description, so the re-mint SHOWS the runes instead of redrawing the same spear.
+> **§2c** new `engine/earnedpower.js`. gm.js:88's flat ban meant the one thing that would make an evolution
+> "explicit about what that translates to in game mechanics" was the thing the tool was DENIED. Grants are now
+> sheet entries (name/from/effect/clamp) — each states its own bound, because an explicit power with no stated
+> limit is power creep with better typography — rendered on the item card AND carried into the GM's inventory
+> line (or the mechanics exist and the narrator can't see them). A grant with no `effect` is refused outright.
+> **§4** the ceiling is a FUNCTION of level + craft rank, not a flat cap; ~1/day per item. **The rate limit
+> bites only on the POWER** — prose/name/provenance still evolve when the day is spent, because rate-limiting
+> the storytelling would be the wrong lesson. Refusals are surfaced: a full item SAYS so. Memory's four threads
+> all fit at L29/rank-3 — an economy that can't express its own reference artifact is the wrong economy.
+> **§2d AND A BUG THAT WOULD HAVE EATEN ERIK'S SPEAR.** `namesMatch("Memory's Shadow-Twin", "Memory")` is TRUE,
+> so the fuzzy stack-resolver merged the derived child INTO its own parent — one stack of qty 2 wearing the
+> child's custom name, and Memory GONE. Silent and destructive: the split would have destroyed the very item
+> this ticket is about. `addItem` now takes `distinct` for callers minting a genuinely new thing; own
+> regression check, because the failure was silent. Derived items are PEERS — nothing scales a child down, and
+> that absence is tested for.
+> **AEVI:** gm.js:88's blanket "does NOT grant new power" became factually FALSE about the engine once §2c
+> landed, and would have kept the GM from ever emitting a grant — feature built, dead on arrival. I made the
+> MINIMAL correction in §2c's own words ("no UNEARNED power; earned power is explicit and clamped") + the
+> deriveItem/peer guidance. The fuller prompt rewrite is still yours, as is the §4 grant-strength guidance per
+> level band. The op SHAPE (fields the engine reads) I treated as mine under seam_op_vocab_triples.
+> **ERIK:** (a) the worked example is a REFERENCE, not a write to your live save — Memory in your game is
+> unchanged; evolving it for real is now an in-play beat, worth doing once to confirm it lands. (b) two numbers
+> are engine guesses at the shape of your ruling, not values you gave: max 2 derived children per item, and the
+> daily cap (1, or 2 at L30+). Say if either feels wrong.
+
 > ## [SPEC + content - Erik lost in the ribbon] SNG-252b coherence pass (Aevi, 2026-08-01)
 > Erik: "tapping to open moves is a good default; move narration INSIDE the encounter; a coherent cleanup would
 > help - I'm lost with everything it's showing." SNG-252 unified the container but not the HIERARCHY - everything

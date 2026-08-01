@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 5,
-  "xp": 462,
+  "xp": 467,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -79,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 50,
+  "energy": 44,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -254,64 +254,58 @@
         "player": "Gently remove her coat so you can work her more broadly.  put your legs around her to provide some squeezing pressure as she talks... work her arms then her hips and thighs.",
         "summary": "Vessin's coat came off; Loki worked her arms and hips and thighs while she talked, steady and unhurried, held in the bracket of their legs.",
         "narration": "You ease her coat from her shoulders with both hands, asking with the motion rather than words — a slow unhurried peel, giving her every chance to stop it. She does not stop it. She lifts one arm to help, then the other, and the grey-green coat pools behind her on the drop-cloth.\n\nYou settle your legs around her, calf to outer thigh, a steady bracketing pressure that holds without gripping. She exhales at it — one long breath that sounds like something she has been carrying put down on a floor. Cy does not move from its position between her shoulder blades. It simply adjusts the angle of its legs by a few degrees, an accommodation so precise it could only be intentional.\n\nYou work her arms from the shoulder down — thumbs tracing the cord of each muscle, fingertips finding the small hard knots at the inner elbow that come from years of writing and hauling and pricing things in poor light. She lets you move her. One arm, then the other. She is talking about the Rootkin record-keepers and the particular way they keep agreements, how a bargain made with them has a weight that human contracts simply do not, and her voice stays even and unhurried even when your hands reach her hips and she has to shift her weight to let you work the outer thigh.\n\nShe does not stop talking. She does not stop moving toward your hands."
+      },
+      {
+        "player": "Use Descent again — name what she is actually doing right now, not what she would call it if someone asked. Give her the true word for what this is.",
+        "summary": "Descent named the true word for what Vessin is doing — letting herself want something, not pricing it first — and she held it without moving away.",
+        "narration": "You let your hands slow on her thighs. Not stopping — slowing, the way you do when you want someone to hear what comes next.\n\nThen you say it. Not what she would call it if someone asked. Not the word she has been keeping in reserve behind the pricing and the eleven years of knowing what things cost. The word she is actually doing right now, in this alcove, with her coat on the floor and her arms loose and her back open to your hands.\n\nYou say: she is letting herself want something. Not pricing it first. Not building the exit before she opens the door. Just — wanting.\n\nCy's lens irises once. It does not speak.\n\nVessin goes very still between your legs. Not the still of someone caught out. The still of someone who has just heard a word in their own language that they had not been using. Her hands, which have been resting easy on the drop-cloth, close slowly around the canvas — not gripping it, just holding it, the way you hold something when you need to know there is something solid under you.\n\nShe says, quietly, without turning around: she does not do this. And then, after a breath: she has not done this. The difference is small and she says it like she knows the difference is the whole thing.\n\nShe does not move away."
       }
     ],
     "lastTurn": {
-      "narration": "You ease her coat from her shoulders with both hands, asking with the motion rather than words — a slow unhurried peel, giving her every chance to stop it. She does not stop it. She lifts one arm to help, then the other, and the grey-green coat pools behind her on the drop-cloth.\n\nYou settle your legs around her, calf to outer thigh, a steady bracketing pressure that holds without gripping. She exhales at it — one long breath that sounds like something she has been carrying put down on a floor. Cy does not move from its position between her shoulder blades. It simply adjusts the angle of its legs by a few degrees, an accommodation so precise it could only be intentional.\n\nYou work her arms from the shoulder down — thumbs tracing the cord of each muscle, fingertips finding the small hard knots at the inner elbow that come from years of writing and hauling and pricing things in poor light. She lets you move her. One arm, then the other. She is talking about the Rootkin record-keepers and the particular way they keep agreements, how a bargain made with them has a weight that human contracts simply do not, and her voice stays even and unhurried even when your hands reach her hips and she has to shift her weight to let you work the outer thigh.\n\nShe does not stop talking. She does not stop moving toward your hands.",
-      "sceneSummary": "Vessin's coat came off; Loki worked her arms and hips and thighs while she talked, steady and unhurried, held in the bracket of their legs.",
+      "narration": "You let your hands slow on her thighs. Not stopping — slowing, the way you do when you want someone to hear what comes next.\n\nThen you say it. Not what she would call it if someone asked. Not the word she has been keeping in reserve behind the pricing and the eleven years of knowing what things cost. The word she is actually doing right now, in this alcove, with her coat on the floor and her arms loose and her back open to your hands.\n\nYou say: she is letting herself want something. Not pricing it first. Not building the exit before she opens the door. Just — wanting.\n\nCy's lens irises once. It does not speak.\n\nVessin goes very still between your legs. Not the still of someone caught out. The still of someone who has just heard a word in their own language that they had not been using. Her hands, which have been resting easy on the drop-cloth, close slowly around the canvas — not gripping it, just holding it, the way you hold something when you need to know there is something solid under you.\n\nShe says, quietly, without turning around: she does not do this. And then, after a breath: she has not done this. The difference is small and she says it like she knows the difference is the whole thing.\n\nShe does not move away.",
+      "sceneSummary": "Descent named the true word for what Vessin is doing — letting herself want something, not pricing it first — and she held it without moving away.",
       "choices": [
         {
-          "label": "Ask about the other one — the person she met who moved like Loki does. Open that thread while your hands keep working.",
+          "label": "Say nothing. Let your hands continue their work and let the word sit in the room between you.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "comfort",
-            "study"
+            "calm"
           ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Use Descent again — name what she is actually doing right now, not what she would call it if someone asked. Give her the true word for what this is.",
+          "label": "Tell her plainly — you do not do this either. And you are doing it anyway.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Ask her what it would mean, for her, to let herself have the thing she wants tonight — not the worth of it, just the shape of what she wants.",
           "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "devote",
             "romantic"
           ],
           "abilityId": "descent",
-          "energyCost": 6,
           "trivial": false
         },
         {
-          "label": "Stay quiet. Let her talk. Let the warmth and the pressure and the rhythm of it be the whole thing — no craft, no naming, just presence.",
+          "label": "Move forward — not past the moment, but into it. Let your hands settle at her hips and your face come close to the back of her neck. Let her feel the question before you ask it.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort",
-            "romantic"
-          ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "A sound from the stairwell above — something alive, many-legged. The warpling that has been circling this level is near. Decide what to do before it decides for you.",
-          "attribute": "mental",
-          "subAttribute": "wits",
           "difficulty": 15,
           "intentTags": [
-            "defend",
-            "careful"
+            "romantic",
+            "woo"
           ],
-          "trivial": false,
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": "beast_warpling_hare"
+          "trivial": false
         }
       ],
       "scene": {
@@ -319,26 +313,26 @@
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Coat off, settled between Loki's legs, arms loose and responsive to the massage — talking about the Rootkin record-keepers in a steady, unhurried voice."
+            "state": "Sitting between Loki's legs, coat off, very still — hands closed loosely on the canvas drop-cloth, not turning around, holding something just said."
           },
           {
             "name": "Cy",
-            "state": "Adjusted its leg-angle a precise few degrees between Vessin's shoulder blades — lens dimmed, still, quietly present."
+            "state": "Settled between Vessin's shoulder blades, legs adjusted, lens irised once and now dimmed — quiet."
           }
         ],
         "objects": [
           "Canvas drop-cloth spread on the alcove floor",
-          "Vessin's grey-green coat pooled on the drop-cloth behind her",
+          "Vessin's grey-green coat pooled on the drop-cloth beside her",
           "Low shelf with remaining scaffold supplies above",
           "Tallow candle burning in the landing wall-crack — light reaching through the open door",
           "Stone stairs curling upward visible through the door",
           "The open nave beyond — quiet"
         ],
         "threads": [
+          "The word is in the room — she has not moved away and has not yet turned around",
           "The other person Vessin met — older, eyes like Loki's — thread not yet opened",
           "The man at the posting board: long face, jaw healed crooked, grey coat with the split seam — identity not yet known",
           "What Vessin was pricing in the lower Annex, and for whom",
-          "Why Vessin came to the Half-Cathedral tonight — not yet fully spoken",
           "A warpling has been circling this level of the tower — not yet confronted"
         ]
       },
@@ -347,14 +341,30 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Coat removed without hesitation; settled between Loki's legs with a long exhale, arms given over to the massage, still talking about the Rootkin in a steady voice.",
-          "statusNote": "Coat off, in the alcove with Loki, physically at ease — talking freely.",
+          "note": "Descent named the true word for what she is doing. She went still, held the canvas, and said: she has not done this. The distinction from 'does not' was deliberate and she knew it. She did not move away.",
+          "learned": [
+            "She has not let herself want something unpriced in a long time — the distinction between 'does not' and 'has not' is the whole of it, and she named it herself."
+          ],
+          "statusNote": "Sitting between Loki's legs in the alcove, coat off, very still — the word just given, not yet answered in full.",
           "relationshipDelta": 1
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "vessin-tallow-bark",
+          "label": "Vessin Tallow-bark",
+          "kind": "person",
+          "entityId": "vessin-tallow-bark",
+          "fact": "Descent named the true word for what she is doing tonight — letting herself want something without pricing it first. She said she has not done this. The difference from 'does not' was the thing she let out. She did not move away.",
+          "links": [
+            "the-half-cathedral",
+            "grovehome"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet stretch of touch and talk in the alcove"
+        "why": "A quiet beat — a word spoken, a silence held."
       }
     },
     "sceneState": {
@@ -362,26 +372,26 @@
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Coat off, settled between Loki's legs, arms loose and responsive to the massage — talking about the Rootkin record-keepe"
+          "state": "Sitting between Loki's legs, coat off, very still — hands closed loosely on the canvas drop-cloth, not turning around, h"
         },
         {
           "name": "Cy",
-          "state": "Adjusted its leg-angle a precise few degrees between Vessin's shoulder blades — lens dimmed, still, quietly present."
+          "state": "Settled between Vessin's shoulder blades, legs adjusted, lens irised once and now dimmed — quiet."
         }
       ],
       "objects": [
         "Canvas drop-cloth spread on the alcove floor",
-        "Vessin's grey-green coat pooled on the drop-cloth behind her",
+        "Vessin's grey-green coat pooled on the drop-cloth beside her",
         "Low shelf with remaining scaffold supplies above",
         "Tallow candle burning in the landing wall-crack — light reaching through the ope",
         "Stone stairs curling upward visible through the door",
         "The open nave beyond — quiet"
       ],
       "threads": [
+        "The word is in the room — she has not moved away and has not yet turned around",
         "The other person Vessin met — older, eyes like Loki's — thread not yet opened",
         "The man at the posting board: long face, jaw healed crooked, grey coat with the split seam — identity not yet known",
         "What Vessin was pricing in the lower Annex, and for whom",
-        "Why Vessin came to the Half-Cathedral tonight — not yet fully spoken",
         "A warpling has been circling this level of the tower — not yet confronted"
       ]
     }
@@ -812,7 +822,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Loki named her real want — not the attacker's name, but whether Loki was worth knowing — and she acknowledged it with a plain yes and then refocused: asked for the answers and said 'then we'll see.'",
         "[d2] Received the full account of the aggressor's employer and the false charge. Returned it with an unplanned detail: she was in the lower Annex this morning, pricing a routing component someone wanted moved quietly, and saw a man in a grey coat with a split seam on the left shoulder watching the…",
         "[d2] Gave her appraisal plainly — the answer held, Cy's loyalty was the more honest testimony. Has offered to describe the face of the man in the grey coat with the split seam on the left shoulder.",
         "[d2] Moved without hesitation to sit beside Loki — shoulder to shoulder against the stone. Said yes plainly, without sentiment. Settled in and began describing the man in the grey coat.",
@@ -821,23 +830,24 @@
         "[d2] Loki named their own pleasure aloud through Descent — the real cost of it, thin and exposed. Vessin went still, exhaled, turned to look at them directly. Acknowledged the honesty with 'that was an honest thing to say.' Did not move away. Shoulder settled further into Loki's hands.",
         "[d2] Answered plainly — eleven years of pricing things, and this she doesn't yet know the worth of. Said she would like to keep talking. Turned fully toward Loki and did not move away.",
         "[d2] Called the compliment the strangest she has ever received and said she will think about it a long time. Gave a plain yes to more, shifted forward, pulled her collar aside.",
-        "[d2] Coat removed without hesitation; settled between Loki's legs with a long exhale, arms given over to the massage, still talking about the Rootkin in a steady voice."
+        "[d2] Coat removed without hesitation; settled between Loki's legs with a long exhale, arms given over to the massage, still talking about the Rootkin in a steady voice.",
+        "[d2] Descent named the true word for what she is doing. She went still, held the canvas, and said: she has not done this. The distinction from 'does not' was deliberate and she knew it. She did not move away."
       ],
       "knownFacts": [
-        "Vessin saw the man's face for a moment when he turned — she can describe it",
         "The man at the posting board: long face, jaw healed crooked on the right side, hair pulled back and not fresh, grey coat with the split seam on the left shoulder — did not touch the board, only read…",
         "Has been pricing salvage runs for eleven years",
         "Came to Grovehome specifically because the Rootkin keep records and do not lie",
         "Came to the Half-Cathedral tonight for reasons she has not fully worked out",
         "Loki's honesty through Descent landed as something real — she did not dismiss it or deflect from it",
         "She has made herself very good at knowing what things are worth — and this situation sits outside that skill in a way she doesn't yet know how to name",
-        "Received 'priceless' as a compliment — found it strange and genuine rather than flattering; will sit with it"
+        "Received 'priceless' as a compliment — found it strange and genuine rather than flattering; will sit with it",
+        "She has not let herself want something unpriced in a long time — the distinction between 'does not' and 'has not' is the whole of it, and she named it herself."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Coat off, in the alcove with Loki, physically at ease — talking freely.",
+      "statusNote": "Sitting between Loki's legs in the alcove, coat off, very still — the word just given, not yet answered in full.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1176,7 +1186,7 @@
     "lastSharedReadAt": "2026-08-01T21:43:30.515Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -2007,7 +2017,8 @@
           "[d1] Itinerant assessor of salvage, ruins, and risk — she prices things so others don't have to learn the hard way",
           "[d1] Has met one other person who might have been a construct like Loki — older, also without knowledge of what they were. She named this without pity, as a fact she was glad to set down.",
           "[d2] Her real want in this conversation is not the aggressor's employer — it is whether Loki is worth knowing. She confirmed this when Descent named it, and she did not resent the naming.",
-          "[d2] When Loki named their own pleasure plainly through Descent, Vessin went still and then acknowledged it directly — 'that was an honest thing to say.' She did not deflect or move away. What she thinks of it beyond the acknowledgment is not yet said."
+          "[d2] When Loki named their own pleasure plainly through Descent, Vessin went still and then acknowledged it directly — 'that was an honest thing to say.' She did not deflect or move away. What she thinks of it beyond the acknowledgment is not yet said.",
+          "[d2] Descent named the true word for what she is doing tonight — letting herself want something without pricing it first. She said she has not done this. The difference from 'does not' was the thing she let out. She did not move away."
         ],
         "links": [
           "grovehome",
@@ -2111,17 +2122,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.3427940829074958,
-    "cerebral": 11.235761887984669,
-    "social": 23.793273762329537,
-    "strategic": 7.983622043939436,
-    "cautious": 6.361812143079209,
-    "amorous": 11.812290039353815,
-    "generous": 5.97668639657753,
-    "ruthless": 0.5586144172550006,
-    "risky": 1.7133471632997392,
-    "patient": 0.4678842982793399,
-    "deception": 0.5446415584428731
+    "devotion": 2.3092242308348085,
+    "cerebral": 10.954867840785052,
+    "social": 23.1984419182713,
+    "strategic": 7.78403149284095,
+    "cautious": 6.202766839502229,
+    "amorous": 12.516982788369969,
+    "generous": 5.827269236663091,
+    "ruthless": 0.5446490568236256,
+    "risky": 1.6705134842172458,
+    "patient": 0.4561871908223564,
+    "deception": 0.5310255194818012
   },
   "aptitudes": [
     "silver_tongue",
@@ -2129,7 +2140,7 @@
     "orator",
     "charmer"
   ],
-  "actionCount": 108,
+  "actionCount": 109,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2438,8 +2449,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785621656335,
-  "rev": 379,
+  "updatedAt": 1785621800199,
+  "rev": 380,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3209,7 +3220,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 57
+    "the_quickwood": 58
   },
   "opLossPending": false,
   "sessions": [
@@ -3264,10 +3275,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T22:00:56.334Z",
+      "lastAt": "2026-08-01T22:03:20.198Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 23
+      "beats": 24
     }
   ],
   "establishedFacts": [
@@ -3305,17 +3316,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 126,
-    "choices": 126,
+    "sceneSummary": 127,
+    "choices": 127,
     "characterDeltas": 52,
-    "scene": 126,
+    "scene": 127,
     "placeUpdates": 17,
-    "codexUpdates": 84,
-    "timeOps": 117,
+    "codexUpdates": 85,
+    "timeOps": 118,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 24,
-    "npcUpdates": 98,
+    "npcUpdates": 99,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3329,7 +3340,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 126,
+  "_opTurns": 127,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3345,7 +3356,7 @@
       "prism_sight": 8,
       "harmonic_voice": 3,
       "hunters_strike": 3,
-      "descent": 3
+      "descent": 4
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -3363,7 +3374,7 @@
       {
         "abilityId": "appetite_sense",
         "since": "2026-07-21T18:16:21.011Z",
-        "progress": 3
+        "progress": 4
       }
     ],
     "lastUsed": {

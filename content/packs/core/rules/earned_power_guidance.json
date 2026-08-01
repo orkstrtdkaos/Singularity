@@ -1,0 +1,50 @@
+{
+ "schemaVersion": 1,
+ "id": "earned_power_guidance",
+ "kind": "content",
+ "note": "SNG-251 §4 (Aevi 2026-08-01): the grant-strength GUIDANCE - the content/voice layer over earnedpower.js's math (grantCeiling → maxGrants + effectCap 2-15, scaled by level + craft rank). The engine CLAMPS the number; this tells the GM/player what a reasonable grant READS like at each band, so grants are authored to FIT rather than authored big and refused. Aligned to the real formula: maxGrants = 1 + floor(level/10) + max(0,rank-1); effectCap = clamp(round(level/3) + rank*2, 2..15). Bands are guidance, not new limits - the engine's numbers are authoritative.",
+ "principle": "A grant states what the FICTION earned, at a strength reasonable for who you are. Earned power is explicit + clamped, never unearned, never inflationary. The ceiling is a PAYOFF for level + craft - a master's binding is stronger than a novice's, which is why building crafts matters.",
+ "bands": {
+  "novice": {
+   "levelRange": "1-9",
+   "craftRank": "0-1",
+   "reads_like": "A single modest grant. A rune that READS (senses, warns, reveals) rather than strikes; a small steadying; a narrow, situational edge. One thing, done plainly. maxGrants ~1-2, effectCap low (~2-4).",
+   "example": "'reads the structure of what the blade touches' — a sense, not a strike."
+  },
+  "journeyman": {
+   "levelRange": "10-19",
+   "craftRank": "1-2",
+   "reads_like": "Two grants, one of which may STRIKE or SHAPE at a modest level. A real if-bounded effect - a focused strike, a genuine ward, a reliable read. Still narrow (works on X, not everything). maxGrants ~2-3, effectCap mid (~5-8).",
+   "example": "'a strike routed through the shadow-focus - harm that operates, bounded to what the read finds.'"
+  },
+  "adept": {
+   "levelRange": "20-29",
+   "craftRank": "2-3",
+   "reads_like": "Three to four grants forming a coherent SET (a read + an ending-sense + a strike + a held charge - each doing its own work, together making the item a real instrument). Each grant strong within its domain, clamped against runaway. This is Memory's band - Silas L29/rank-3, four threads. maxGrants ~4-5, effectCap high (~9-12).",
+   "example": "Memory's four threads: Anchored Read + The Ending Through the Blade + The Shadow-Harm Strike + The Held Read."
+  },
+  "master": {
+   "levelRange": "30+",
+   "craftRank": "3",
+   "reads_like": "Up to five grants, or a derived PEER item (the split - each item a full instrument). The set can be broad AND deep, but every grant still states its clamp; mastery is REACH and COHERENCE, not a blank check. maxGrants 5 (cap), effectCap near the ceiling (~13-15).",
+   "example": "Memory + the Called Spear as a matched pair - two full instruments, each strong where the other is weak."
+  }
+ },
+ "howToAuthorAGrant": {
+  "note": "the GM authors a grant as a sheet entry with these fields; band = the human phrase from grantCeiling so the player sees the ceiling.",
+  "fields": {
+   "name": "what the power is called",
+   "from": "the fiction that earned it (a bound rune, a completed craft)",
+   "effect": "what it does, concretely",
+   "clamp": "what it explicitly CANNOT do - the bound that keeps explicit from becoming unbounded",
+   "band": "reasonable @ L{level} / craft rank {rank}"
+  },
+  "rule": "scale the grant's effect to the band. If the fiction earned something bigger than the band allows, the engine clamps it and says so - so author to the band, and let a bigger power come as the character GROWS into a higher one (evolution is repeatable). A grant refused for being too big is not lost - it's early."
+ },
+ "guards": {
+  "earned_not_handwaved": "'the sword feels stronger' earns NOTHING. A grant needs real fiction-work behind it (a rune bound, a craft completed, a death taken and sealed).",
+  "scale_to_who_you_are": "the SAME fiction earns a stronger grant for a master than a novice - the ceiling is the payoff for what you've built.",
+  "explicit_and_clamped": "every grant states its own clamp; explicit power that can't be seen or bounded is the thing the ban existed to stop.",
+  "derived_is_peer": "a split/derived item gets its own grants under the SAME ceiling - not a scaled-down echo (Erik's rule)."
+ }
+}

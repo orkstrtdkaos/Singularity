@@ -132,32 +132,35 @@
     "The regulator closed and the veil thinned — Loki glimpsed the mesh beneath the valley, then came up from the deep. On the road to the Slow Orchard, a stranger is planting a tree for a child not yet born and invites help with the digging.",
     "At the braided confluence in the Disputed Zone, a hired stranger came at Loki with a fabricated charge — that Loki had pulled something sealed loose from the Deep and was carrying it out. The name behind it: a man in the lower Annex, who paid in coin. Veln Ashpause watched from the brush without surprise. The question is answered; the person who set it in motion is not yet named."
   ],
-  "currentLocationId": "the_slow_orchard",
+  "currentLocationId": "grovehome",
   "activeScene": {
-    "locationId": "the_slow_orchard",
+    "locationId": "grovehome",
     "turns": [
       {
         "player": null,
-        "summary": "Evening in the Slow Orchard — the planting finished, Ossivyn returning with the closed record book.",
-        "narration": "Evening light comes through the orchard in long, low bars, catching the undersides of the oldest branches and turning them gold. The air smells of damp soil and early blossom — the small white kind that comes before the fruit and means nothing by itself except that something is trying. Ossivyn Tallow is at the planting gate, moving back toward the orchard proper. He has the record book tucked under one arm, closed now, and the marker stake he drove in earlier catches the last of the light — a small iron tooth in the turned earth beside the sapling. The hole is filled. The tree is in. He is not in a hurry to go anywhere. Cy walks at its usual precise distance from your left heel, lens irising slowly as it takes in the orchard's geometry. It has already, without asking, straightened a loose hinge on the gate post. Spring mud still clings to your boots from the road, and the evening is cool enough to feel the warmth the turned earth is giving off. The quest thread from the Unlit Deep is closed on its surface, but the man who paid for a stranger to come at you with a fabricated charge is still unnamed, still somewhere in the lower Annex, and the regulator's signal is moving downstream without anyone knowing to expect it. That is tomorrow. For now, there is the orchard, and the tender returning from a finished planting, and the kind of quiet that happens when something slow has been done correctly."
+        "summary": "Loki arrives at the Half-Cathedral in its fourth design — scaffolded, open to the sky, two hundred years into being built, and never meant to be finished.",
+        "narration": "Night has settled over Grovehome proper, but the track that cuts north along the wood's edge does not end at Grovehome. It ends at the Half-Cathedral. You have heard the name. Everyone in the valley has heard the name. The thing itself is something else. It rises from a clearing where the Quickwood's margin softens into scrub grass and old stone — four hundred years of accumulation, scaffolded in pale timber that has been replaced so many times the lumber is always fresh and the bones beneath it are not. The current design is the fourth. The second was abandoned when the Rootkin who proposed it walked into the deep wood and did not come back. The third was completed, briefly, and then declared wrong by the Conclave of 641 and disassembled with the same patience with which it had been raised. The fourth is what stands now: a ribcage of arching stone, open to the sky along the nave, its two towers finished to different heights because the eastern one was finished by a different generation with a slightly different idea of what a tower was for. Scaffolding covers the south transept in tight-lashed planks. Someone is always working on it. At this hour, in the early spring dark, two lanterns move up there like slow thought. Cy walks at your heel and its lens opens wide, reading the structure the way it reads everything — as a system, as a record, as a question about what it was made to do."
       }
     ],
     "lastTurn": {
-      "narration": "Evening light comes through the orchard in long, low bars, catching the undersides of the oldest branches and turning them gold. The air smells of damp soil and early blossom — the small white kind that comes before the fruit and means nothing by itself except that something is trying. Ossivyn Tallow is at the planting gate, moving back toward the orchard proper. He has the record book tucked under one arm, closed now, and the marker stake he drove in earlier catches the last of the light — a small iron tooth in the turned earth beside the sapling. The hole is filled. The tree is in. He is not in a hurry to go anywhere. Cy walks at its usual precise distance from your left heel, lens irising slowly as it takes in the orchard's geometry. It has already, without asking, straightened a loose hinge on the gate post. Spring mud still clings to your boots from the road, and the evening is cool enough to feel the warmth the turned earth is giving off. The quest thread from the Unlit Deep is closed on its surface, but the man who paid for a stranger to come at you with a fabricated charge is still unnamed, still somewhere in the lower Annex, and the regulator's signal is moving downstream without anyone knowing to expect it. That is tomorrow. For now, there is the orchard, and the tender returning from a finished planting, and the kind of quiet that happens when something slow has been done correctly.",
-      "sceneSummary": "Evening in the Slow Orchard — the planting finished, Ossivyn returning with the closed record book.",
+      "narration": "Night has settled over Grovehome proper, but the track that cuts north along the wood's edge does not end at Grovehome. It ends at the Half-Cathedral. You have heard the name. Everyone in the valley has heard the name. The thing itself is something else. It rises from a clearing where the Quickwood's margin softens into scrub grass and old stone — four hundred years of accumulation, scaffolded in pale timber that has been replaced so many times the lumber is always fresh and the bones beneath it are not. The current design is the fourth. The second was abandoned when the Rootkin who proposed it walked into the deep wood and did not come back. The third was completed, briefly, and then declared wrong by the Conclave of 641 and disassembled with the same patience with which it had been raised. The fourth is what stands now: a ribcage of arching stone, open to the sky along the nave, its two towers finished to different heights because the eastern one was finished by a different generation with a slightly different idea of what a tower was for. Scaffolding covers the south transept in tight-lashed planks. Someone is always working on it. At this hour, in the early spring dark, two lanterns move up there like slow thought. Cy walks at your heel and its lens opens wide, reading the structure the way it reads everything — as a system, as a record, as a question about what it was made to do.",
+      "sceneSummary": "Loki arrives at the Half-Cathedral in its fourth design — scaffolded, open to the sky, two hundred years into being built, and never meant to be finished.",
       "choices": [
         {
-          "label": "Fall in beside Ossivyn and walk with him — ask about the marker stake, the one with no label.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "label": "Climb the scaffold and see the work the lanterns are doing at this hour",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
-            "help"
+            "scout",
+            "risky"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         },
         {
-          "label": "Crouch at the sapling and look at it properly — examine the planting with See the Made Thing, just to know what was put into it.",
+          "label": "Use See the Made Thing on the structure itself — read what four designs and four hundred years have actually built",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -169,98 +172,121 @@
           "trivial": false
         },
         {
-          "label": "Ask Ossivyn directly — is there a tree planted here for someone who is already missing? You heard the seed talk at the gate earlier.",
+          "label": "Find whoever is in the lantern-light and ask them what the fourth design is for",
           "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Head back toward Millbrook before full dark — the man in the lower Annex is not going to name himself.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "persuade"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Sit at the base of the finished eastern tower and stay with it — let the place be what it is",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
       "scene": {
-        "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
+        "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. The structure rises against a dark sky: open nave, two mismatched towers, south transept covered in scaffold. Two lanterns move slowly up in the timberwork.",
         "npcsPresent": [
           {
-            "name": "Ossivyn Tallow",
-            "state": "Moving back from the gate toward the orchard proper, record book closed under one arm, unhurried."
-          },
-          {
-            "name": "Cy",
-            "state": "Keeping its usual precise distance at Loki's left heel, lens irising as it reads the orchard geometry. The gate hinge is already straightened."
+            "name": "Unknown workers",
+            "state": "Two lanterns moving in the scaffold above the south transept — their faces not yet visible"
           }
         ],
         "objects": [
-          "Freshly-planted sapling in tamped earth",
-          "Small unlabeled iron marker stake driven beside the root base",
-          "Closed record book (carried by Ossivyn)",
-          "Gate post with newly-straightened hinge"
+          "Stone rib-arches open to the sky along the nave",
+          "Scaffold of pale, recently-replaced timber lashed over the south transept",
+          "Eastern tower — finished, taller; western tower — finished shorter, different generation's idea of done",
+          "Two slow-moving lanterns high in the scaffold"
         ],
         "threads": [
-          "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
-          "The regulator signal moving downstream — no one upstream knows to expect it",
-          "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
+          "Who is working on the scaffold at this hour, and on which design's problem",
+          "What Cy is reading in the structure — its lens is wide open"
         ]
       },
-      "npcUpdates": [
+      "npcUpdates": [],
+      "codexUpdates": [
         {
-          "op": "update",
-          "npcId": "ossivyn-tallow",
-          "name": "Ossivyn Tallow",
-          "note": "Finished the planting and is returning through the orchard with the closed record book — the work is done for today.",
-          "statusNote": "Moving through the orchard toward the interior path, record book closed, done for the evening."
+          "topic": "the-half-cathedral",
+          "label": "The Half-Cathedral",
+          "kind": "place",
+          "fact": "In its fourth design, its second hundredth year: a ribcage of stone open to the sky, two towers finished to different heights by different generations, south transept scaffolded and always being worked. The third design was completed and then disassembled. The fourth has not been declared finished. It is not meant to be.",
+          "links": [
+            "grovehome",
+            "rootkin"
+          ]
         }
       ],
-      "offer": {
-        "thing": "The marker stake Ossivyn drove in is unlabeled — but Ossivyn's own fear is that the child the tree is for will never be told it exists. The stake is the only physical mark. A stranger passing through could ask what it means to leave no name on it.",
-        "from": "Ossivyn's own fear: that the child the tree is planted for will never be told it exists — and the unlabeled stake is that fear made iron."
-      },
+      "placeUpdates": [
+        {
+          "note": "The Half-Cathedral stands north of Grovehome at the wood's edge — visited for the first time at night, its fourth design scaffolded and open-naved, always being built.",
+          "subPlace": {
+            "name": "The Half-Cathedral",
+            "parent": "Grovehome",
+            "note": "Four hundred years of construction in four designs — open to the sky, never finished, always worked on. Two mismatched towers. South transept scaffolded.",
+            "visited": true
+          }
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "Scene opening — no time passes on the scene-set beat."
-      }
+        "hoursPassed": 0.25,
+        "why": "A short walk from Grovehome proper to the Cathedral clearing"
+      },
+      "offer": {
+        "thing": "The Half-Cathedral itself — in its patient, patient incompletion",
+        "from": "The player named this place and its nature; the world is honoring exactly what they said it is"
+      },
+      "imagePrompt": "A vast stone structure open to a dark spring sky — four hundred years of building, ribbed arches without a roof, two towers at different heights, fresh pale scaffold covering one transept, two lanterns moving like slow thought high in the timberwork. A small brass-legged figure watches from the ground below, its single lens wide.",
+      "scene_ended": false,
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20vast%20stone%20structure%20open%20to%20a%20dark%20spring%20sky%20%E2%80%94%20four%20hundred%20years%20of%20building%2C%20ribbed%20arches%20without%20a%20roof%2C%20two%20towers%20at%20different%20heights%2C%20fresh%20pale%20scaffold%20covering%20one%20transept%2C%20two%20lanterns%20moving%20like%20slow%20thought%20high%20in%20the%20timberwork.%20A%20small%20brass-legged%20figure%20watches%20from%20the%20grou%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=93278&nologo=true"
     },
     "sceneState": {
-      "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
+      "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. The structure rises against a dark sky: open nave, two mismatched towers, south transept covered in scaffold. Two lanterns move slowly up in the timberwork.",
       "npcsPresent": [
         {
-          "name": "Ossivyn Tallow",
-          "state": "Moving back from the gate toward the orchard proper, record book closed under one arm, unhurried."
-        },
-        {
-          "name": "Cy",
-          "state": "Keeping its usual precise distance at Loki's left heel, lens irising as it reads the orchard geometry. The gate hinge is"
+          "name": "Unknown workers",
+          "state": "Two lanterns moving in the scaffold above the south transept — their faces not yet visible"
         }
       ],
       "objects": [
-        "Freshly-planted sapling in tamped earth",
-        "Small unlabeled iron marker stake driven beside the root base",
-        "Closed record book (carried by Ossivyn)",
-        "Gate post with newly-straightened hinge"
+        "Stone rib-arches open to the sky along the nave",
+        "Scaffold of pale, recently-replaced timber lashed over the south transept",
+        "Eastern tower — finished, taller; western tower — finished shorter, different ge",
+        "Two slow-moving lanterns high in the scaffold"
       ],
       "threads": [
-        "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed",
-        "The regulator signal moving downstream — no one upstream knows to expect it",
-        "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing"
+        "Who is working on the scaffold at this hour, and on which design's problem",
+        "What Cy is reading in the structure — its lens is wide open"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 18,
+    "hour": 21,
     "realAnchor": null
   },
   "companions": [
@@ -783,6 +809,26 @@
       "vectorsKnown": [
         "death_life"
       ]
+    },
+    "grovehome": {
+      "visits": 1,
+      "notes": [
+        "[d1] The Half-Cathedral stands north of Grovehome at the wood's edge — visited for the first time at night, its fourth design scaffolded and open-naved, always being built."
+      ],
+      "flags": {},
+      "lastVisit": 1,
+      "vectorsKnown": [
+        "death_life"
+      ],
+      "subPlaces": {
+        "the-half-cathedral": {
+          "name": "The Half-Cathedral",
+          "parentId": "grovehome",
+          "day": 1,
+          "visited": true,
+          "note": "Four hundred years of construction in four designs — open to the sky, never finished, always worked on. Two mismatched towers. South transept scaffolded."
+        }
+      }
     }
   },
   "worldState": {
@@ -930,16 +976,12 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 784,
-    "lastSharedReadAt": "2026-08-01T16:39:02.743Z",
+    "lastGenCount": 787,
+    "lastSharedReadAt": "2026-08-01T19:53:47.754Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
     "turnsSinceOffer": 0,
     "recentOffers": [
-      {
-        "thing": "Cy's click in the dark — not alarm, not report; a question shaped like an old maintenance protocol, aimed at nothing Loki can see",
-        "from": "Cy's boundary: it will not explain what it knows, because it does not know that it knows it — but something in the passage below matches a…"
-      },
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
         "from": "The installation panels themselves, which were built as a conversation for a specific person to find — the prior visitor is the other side…"
@@ -955,6 +997,10 @@
       {
         "thing": "The marker stake Ossivyn drove in is unlabeled — but Ossivyn's own fear is that the child the tree is for will never be told it exists…",
         "from": "Ossivyn's own fear: that the child the tree is planted for will never be told it exists — and the unlabeled stake is that fear made iron."
+      },
+      {
+        "thing": "The Half-Cathedral itself — in its patient, patient incompletion",
+        "from": "The player named this place and its nature; the world is honoring exactly what they said it is"
       }
     ],
     "wantProgress": {
@@ -990,7 +1036,7 @@
         "kind": "shortage",
         "premise": "The shallow wells that sustain the scattered settlements are dropping faster each season than anyone has yet admitted aloud.",
         "cause": "The Palelands' sparse, chalky soil has always demanded more water to work than it naturally holds, and the settlements were founded at the margins of what the…",
-        "stage": 12,
+        "stage": 14,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1003,7 +1049,7 @@
         "kind": "rot",
         "premise": "A slow fungal bloom is working through the oldest grain stores, and the steward responsible has been quietly discarding the worst sacks rather than reporting the loss.",
         "cause": "The valley's mild, damp winters make its granaries prone to moisture, and the current steward was appointed for loyalty rather than knowledge of grain-keeping.",
-        "stage": 12,
+        "stage": 14,
         "seededAtCount": 660,
         "surfaced": true,
         "fate": "growing",
@@ -1028,7 +1074,7 @@
         "kind": "rot",
         "premise": "A key sequence in the primary record is being quietly re-threaded by someone who made an error years ago and cannot bear to have it discovered.",
         "cause": "Unspooling's knowledge is stored in physical cordage whose integrity depends entirely on the honesty of the hands that maintain it.",
-        "stage": 7,
+        "stage": 9,
         "seededAtCount": 758,
         "surfaced": true,
         "fate": "growing",
@@ -1071,6 +1117,21 @@
           "type": "encounter",
           "encounterId": "beast_glimmerling_swarm",
           "name": "glimmerling swarm"
+        },
+        "addedDay": 1,
+        "locationId": "the_slow_orchard"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_mire_gulper",
+        "aimedAtPlayer": true,
+        "urgency": 2,
+        "oneLineHook": "A mire gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_mire_gulper",
+          "name": "mire gulper"
         },
         "addedDay": 1,
         "locationId": "the_slow_orchard"
@@ -1727,6 +1788,35 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "grovehome": {
+        "id": "grovehome",
+        "label": "Grovehome",
+        "kind": "place",
+        "facts": [
+          "[d1] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "grovehome",
+        "updatedDay": 1
+      },
+      "the-half-cathedral": {
+        "id": "the-half-cathedral",
+        "label": "The Half-Cathedral",
+        "kind": "place",
+        "facts": [
+          "[d1] In its fourth design, its second hundredth year: a ribcage of stone open to the sky, two towers finished to different heights by different generations, south transept scaffolded and always being worked. The third design was completed and then disassembled. The fourth has not been declared…"
+        ],
+        "links": [
+          "grovehome",
+          "rootkin"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "the-half-cathedral",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -1870,6 +1960,22 @@
   "reconcileVersion": 22,
   "gallery": [
     {
+      "kind": "moment",
+      "prompt": "A vast stone structure open to a dark spring sky — four hundred years of building, ribbed arches without a roof, two towers at different heights, fresh pale scaffold covering one transept, two lantern",
+      "url": "https://image.pollinations.ai/prompt/A%20vast%20stone%20structure%20open%20to%20a%20dark%20spring%20sky%20%E2%80%94%20four%20hundred%20years%20of%20building%2C%20ribbed%20arches%20without%20a%20roof%2C%20two%20towers%20at%20different%20heights%2C%20fresh%20pale%20scaffold%20covering%20one%20transept%2C%20two%20lanterns%20moving%20like%20slow%20thought%20high%20in%20the%20timberwork.%20A%20small%20brass-legged%20figure%20watches%20from%20the%20grou%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=93278&nologo=true",
+      "caption": "Loki arrives at the Half-Cathedral in its fourth design — scaffolded, open to the sky, two",
+      "worldDay": 32,
+      "at": "2026-08-01T19:54:24.284Z"
+    },
+    {
+      "kind": "location",
+      "prompt": "Grovehome",
+      "url": "https://image.pollinations.ai/prompt/Grovehome%3A%20Where%20the%20Rootkin%20meet%20the%20world%20%E2%80%94%20the%20only%20Quickwood%20settlement%20that%20keeps%20human%20hours%2C%20because%20trade%20requires%20it%20and%20the%20Rootkin%20find%20that%20funny.%20Grovehome%20is%20patient%20in%20a%20way%20that%20reads%20as%20either%20profound%20hospitality%20or%20maddening%20obstruction%20depending%20on%20how%20much%20of%20a%20hurry%20you%20are%20in.%20Deals%20here%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=16046&nologo=true",
+      "caption": "Grovehome",
+      "worldDay": 32,
+      "at": "2026-08-01T19:53:47.297Z"
+    },
+    {
       "kind": "npc",
       "prompt": "Veln Ashpause",
       "url": "https://image.pollinations.ai/prompt/A%20human%20woman%2C%20late%20fifties%2C%20with%20the%20pale-olive%20complexion%20of%20someone%20who%20lives%20under%20canopy%20rather%20than%20sky.%20The%20grey%20coat%20falls%20to%20mid-calf%2C%20unmarked%2C%20unweathered%2C%20impossibly%20clean%20for%20the%20Orchard'%2C%20character%20portrait%2C%20named%20Veln%20Ashpause%2C%20Hourkeeper%20of%20the%20Confluence%20%E2%80%94%20she%20holds%20the%20moment%20before%20the%20moment%2C%20says%20nothing%20of%20what%20she%20carr%2C%20Almost%20nothing.%20What%20she%20does%20say%20comes%20out%20like%20the%20creak%20of%20a%20bough%20settling%20%E2%80%94%20not%20alarming%2C%20not%20c%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=12708&nologo=true",
@@ -1997,8 +2103,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785602374028,
-  "rev": 306,
+  "updatedAt": 1785614064284,
+  "rev": 321,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2585,14 +2691,15 @@
         }
       }
     },
-    "arc": {}
+    "arc": {},
+    "creature": {}
   },
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 34
+    "the_quickwood": 35
   },
   "opLossPending": false,
   "sessions": [
@@ -2643,6 +2750,14 @@
       "startDay": 32,
       "endDay": 32,
       "beats": 4
+    },
+    {
+      "id": "sess-7",
+      "startedAt": "2026-08-01T19:54:24.280Z",
+      "lastAt": "2026-08-01T19:54:24.280Z",
+      "startDay": 32,
+      "endDay": 32,
+      "beats": 1
     }
   ],
   "establishedFacts": [
@@ -2673,7 +2788,7 @@
   ],
   "_opLedger": {
     "offer": {
-      "applied": 10,
+      "applied": 11,
       "rejected": 0,
       "lastWhy": null
     }
@@ -2682,15 +2797,15 @@
   "_opEmitted": {
     "sceneSummary": 107,
     "choices": 107,
-    "characterDeltas": 47,
+    "characterDeltas": 48,
     "scene": 107,
-    "placeUpdates": 12,
-    "codexUpdates": 76,
+    "placeUpdates": 13,
+    "codexUpdates": 77,
     "timeOps": 101,
     "offer": 10,
     "generateRequest": 4,
-    "sceneEnded": 22,
-    "npcUpdates": 82,
+    "sceneEnded": 23,
+    "npcUpdates": 81,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -2700,7 +2815,9 @@
     "stageOps": 7,
     "encounterOps": 6,
     "ledgerEvents": 1,
-    "newEncounter": 1
+    "newEncounter": 1,
+    "imagePrompt": 1,
+    "scene_ended": 1
   },
   "_opTurns": 107,
   "customAbilities": {},
@@ -2761,7 +2878,6 @@
     "gen-stillwater-s-trouble": "the_old_warden_post"
   },
   "knownPlaces": [
-    "the_blocklands",
     "the_bloodless_hold",
     "the_ceaseless",
     "the_churn_edge",
@@ -2840,7 +2956,8 @@
     "gen-hub-north-gate-district-street",
     "gen-mara-wells-store",
     "gen-disputed-zone-left-branch-entrance",
-    "gen-the-passage-below-the-unlit-deep"
+    "gen-the-passage-below-the-unlit-deep",
+    "grovehome"
   ],
   "_devActions": [
     {
@@ -2855,7 +2972,8 @@
   "locationImages": {
     "the_unlit_deep": "https://image.pollinations.ai/prompt/The%20Unlit%20Deep%3A%20Past%20the%20city%2C%20past%20the%20harbor%2C%20the%20dark%20stops%20being%20a%20home%20and%20becomes%20a%20doctrine.%20The%20Unlit%20live%20here%20%E2%80%94%20the%20cult%20of%20the%20pure%20pole%20%E2%80%94%20and%20they%20would%20put%20out%20every%20light%20in%20the%20world%2C%20beginning%20with%20the%20ones%20people%20love.%20The%20Umbrals%20do%20not%20disown%20them%2C%20exactly.%20They%20simply%20do%20not%20go%2C%20and%20they%20do%20not%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=83099&nologo=true",
     "gen-the-passage-below-the-unlit-deep": "https://image.pollinations.ai/prompt/The%20Passage%20Below%20The%20Unlit%20Deep%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20The%20Passage%20Below%20The%20Unlit%20Deep.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=93653&nologo=true",
-    "the_slow_orchard": "https://image.pollinations.ai/prompt/The%20Slow%20Orchard%3A%20Trees%20that%20take%20a%20human%20lifetime%20to%20fruit%2C%20tended%20by%20people%20who%20will%20taste%20them.%20The%20Orchard%20is%20where%20the%20Rootkin%20explain%20themselves%2C%20and%20they%20explain%20themselves%20by%20walking%20you%20through%20it%20and%20saying%20nothing.%20There%20is%20a%20tree%20here%20planted%20for%20a%20woman%20who%20has%20not%20been%20born.%20There%20is%20a%20tree%20here%20planted%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=41221&nologo=true"
+    "the_slow_orchard": "https://image.pollinations.ai/prompt/The%20Slow%20Orchard%3A%20Trees%20that%20take%20a%20human%20lifetime%20to%20fruit%2C%20tended%20by%20people%20who%20will%20taste%20them.%20The%20Orchard%20is%20where%20the%20Rootkin%20explain%20themselves%2C%20and%20they%20explain%20themselves%20by%20walking%20you%20through%20it%20and%20saying%20nothing.%20There%20is%20a%20tree%20here%20planted%20for%20a%20woman%20who%20has%20not%20been%20born.%20There%20is%20a%20tree%20here%20planted%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=41221&nologo=true",
+    "grovehome": "https://image.pollinations.ai/prompt/Grovehome%3A%20Where%20the%20Rootkin%20meet%20the%20world%20%E2%80%94%20the%20only%20Quickwood%20settlement%20that%20keeps%20human%20hours%2C%20because%20trade%20requires%20it%20and%20the%20Rootkin%20find%20that%20funny.%20Grovehome%20is%20patient%20in%20a%20way%20that%20reads%20as%20either%20profound%20hospitality%20or%20maddening%20obstruction%20depending%20on%20how%20much%20of%20a%20hurry%20you%20are%20in.%20Deals%20here%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=16046&nologo=true"
   },
   "customEncounters": {
     "re-re_raider_duel": {

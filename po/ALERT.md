@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [DECIDED + worked example] SNG-251 §4 economy + Memory authored (Aevi, 2026-07-27)
+> Erik DECIDED the earned-power economy: power scales to level + craft/skill (master smith earns more than
+> novice; ceiling = a function of level+craft-rank, not flat; makes crafting/skills a real payoff), always
+> available but RATE-LIMITED (~1 evolution/day, capped by level/ability, cited to fiction - can't be farmed).
+> Recorded as §4, replaces OQ1+OQ4.
+> WORKED EXAMPLE authored (po/staged_content/memory_worked_example.json): Memory's four threads as explicit
+> CLAMPED grants scaled to Silas (L29; order_sense/deathsense/palework rank 3; braids Ashen Meridian + Undying
+> Ledger) - Anchored Read (read structure), The Ending Through the Blade (a death comes off dry), The Shadow-Harm
+> Strike (Palework - the offensive register, the one grant that raises the strike), The Held Read (holds one
+> read). + the shadow-twin as a DERIVED item (the Called Spear - call from any distance + echoed threads at
+> reduced strength). Grants = the mechanical translation of powers Silas ALREADY earned, focused through the
+> spear (reasonable-for-level, not invented). CCode validates the SNG-251 mechanism against this. d14/d18
+> chronology FLAGGED for Erik (his canon), not silently fixed.
+> CCODE: §251 build (enforced trigger, image-invalidation, earned-effects, deriveItem) + the §4 per-day counter +
+> level/craft-scaled ceiling, validated against Memory's record. ERIK: the d14/d18 chronology call.
+
 > ## [SPEC - Erik's live frustration] SNG-251 story-driven item evolution (Aevi, 2026-07-27)
 > Erik bound runes into Memory in-fiction; the GM won't update the description, re-run the image to show the
 > runes, or split the shadow twin into its own callable item. DIAGNOSIS (verified) - 4 gaps: (1) the GM emits

@@ -65,10 +65,17 @@ export function sceneImage(location, sceneState, { ratingLevel = 2 } = {}) {
 export function itemImage(item, { ratingLevel = 2 } = {}) {
   const mode = getArtMode();
   if (mode === "off") return null;
-  if (item.image) return item.image;
-  if (mode !== "generate") return null;
+  // SNG-251 §2b: an EVOLVED item must not keep showing its old picture. `imageDirty` is set by
+  // applyItemUpdates only when the change was a real evolution (a grant, a stage, a materially rewritten
+  // description) — never a small edit — so a pinned URL minted before the runes were bound is bypassed
+  // rather than trusted. This was half of what Erik reported: the spear grew runes, the art did not.
+  if (item.image && !item.imageDirty) return item.image;
+  if (mode !== "generate") return item.image || null;   // no generator running: the old picture beats none
   const safe = sanitizeImagePrompt(assembleImagePrompt("item", item), { ratingLevel });
-  return imageURLFor("item", safe, item.name);
+  // `imageStamp` increments on every evolution, so it BUSTS the cache key — the new stage gets a genuinely
+  // new image instead of the memoised one keyed on the (unchanged) item name.
+  const seed = item.imageStamp ? `${item.name}#${item.imageStamp}` : item.name;
+  return imageURLFor("item", safe, seed);
 }
 
 /** Image URL for an NPC portrait, or null. */
@@ -214,7 +221,12 @@ export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
   if (kind === "character") return characterPromptSeed(subject, ctx);
   if (kind === "npc") return npcPromptSeed(subject, ctx.character || {}); // SNG-136: richer seed w/ bond-to-player
   if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
-  if (kind === "item") return `single item on plain dark background, ${subject.name}: ${subject.description || subject.kind || ""}`;
+  // SNG-251 §2b: an evolved item may carry an authored `imagePrompt` naming what the story put ON it (the
+  // seated rune-threads, the maker's mark); it wins over the plain description so the re-mint SHOWS the
+  // change rather than re-drawing the same spear.
+  if (kind === "item") return subject.imagePrompt
+    ? `single item on plain dark background, ${subject.name}: ${subject.imagePrompt}`
+    : `single item on plain dark background, ${subject.name}: ${subject.description || subject.kind || ""}`;
   // SNG-223: a craft's image — its authored description IS the prompt, grounded in its tradition's aesthetic.
   // SNG-223 Q4: when the per-tradition visual block is loaded (ctx.aesthetic = palette/materials/light/mood),
   // that CONCRETE style rides the prompt so a people's crafts share a look (Ashwarden = greys/ash; Wright =

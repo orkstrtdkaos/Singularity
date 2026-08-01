@@ -9,6 +9,7 @@
 // of forking. Catalog re-link happens on any resolvable name, not just at normalize.
 
 import { namesMatch, resolveByName, smartClamp } from "./namematch.js"; // SNG-152
+import { grantSummary } from "./earnedpower.js"; // SNG-251 §2c: the item's mechanical sheet, one line
 
 /** Find the existing stack an incoming item belongs to (id → name/custom/alias → fuzzy). */
 export function resolveInventoryItem(character, incoming, catalog = {}) {
@@ -59,8 +60,15 @@ export function fromCatalog(catItem, qty = 1) {
   return { id, name, kind, qty, description, effects, bonusTags, consumable, image };
 }
 
-/** Add an item — from catalog id, plain name, or a GM-proposed object (clamped). */
-export function addItem(character, incoming, catalog = {}) {
+/** Add an item — from catalog id, plain name, or a GM-proposed object (clamped).
+ *
+ *  `opts.distinct` SKIPS the fuzzy stack-resolver. The resolver exists so drifted GM phrasings ("a
+ *  waterskin" / "the waterskin") collapse onto one stack — right for a mention, catastrophic for a
+ *  deliberate SPLIT. SNG-251 §2d found this the hard way: `namesMatch("Memory's Shadow-Twin", "Memory")`
+ *  is TRUE, so deriving the shadow-twin merged it INTO its own parent — one stack of qty 2, wearing the
+ *  child's custom name. The player would have lost the spear the whole ticket is about. A caller that
+ *  KNOWS it is minting a new thing says so, and the resolver is not consulted. */
+export function addItem(character, incoming, catalog = {}, opts = {}) {
   let item;
   if (typeof incoming === "string") {
     const cat = catalog[incoming] || Object.values(catalog).find(c => c.name.toLowerCase() === incoming.toLowerCase());
@@ -79,7 +87,7 @@ export function addItem(character, incoming, catalog = {}) {
     };
   }
   // SNG-BATCH-7 Phase 3: resolve to an existing stack (fuzzy), not just exact-name
-  const existing = resolveInventoryItem(character, item, catalog);
+  const existing = opts.distinct ? null : resolveInventoryItem(character, item, catalog);
   if (existing) {
     existing.qty += item.qty;
     recordItemAlias(existing, item.name); // remember the drifted phrasing
@@ -195,21 +203,96 @@ export function removeItem(character, name, qty = 1) {
  *  tags / a new use grow past the shop-fresh line (Memory the spear that drinks a death). Bounded to OWNED
  *  items (never creates one); it DEEPENS the item, it does NOT inflate power (qty untouched, effects stay
  *  clamped). Returns [{name, changed:[fields]}]. */
-export function applyItemUpdates(character, ops = []) {
+export function applyItemUpdates(character, ops = [], opts = {}) {
   const applied = [];
   for (const op of (ops || []).slice(0, 6)) {
     const it = findItem(character, op?.name || op?.customName || "");
     if (!it) continue; // an unowned item is never created through an update — only add creates
     const changed = [];
+    const before = { description: it.description || "", evoStage: it.evoStage || 0 };
     if (op.description != null) { it.description = smartClamp(String(op.description), 400); changed.push("description"); } // SNG-152
     if (op.customName != null && String(op.customName).trim()) { it.customName = String(op.customName).slice(0, 60); changed.push("name"); }
     if (op.provenance != null) { it.provenance = smartClamp(String(op.provenance), 160); changed.push("provenance"); } // SNG-152
     if (Array.isArray(op.bonusTags)) { it.bonusTags = op.bonusTags.map(t => String(t).slice(0, 24)).slice(0, 4); changed.push("tags"); }
     if (op.addUse && op.addUse.label) { it.uses = [...(it.uses || []), { label: String(op.addUse.label).slice(0, 40), prompt: String(op.addUse.prompt || op.addUse.label).slice(0, 160) }].slice(-5); changed.push("use"); }
     if (op.effects) { const fx = clampEffects(op.effects); if (fx) { it.effects = fx; changed.push("effects"); } } // still clamped — evolution, not inflation
+
+    // SNG-251 §2c: EARNED POWER, recorded explicitly. This is the line gm.js:88 used to forbid outright
+    // ("it does NOT grant new power") — the ban that left Erik's bound rune-threads with nowhere to live.
+    // The rule is now "no UNEARNED power": a grant lands only when the caller supplies the earned-power
+    // context (ceiling + a fiction cite), so the GM's path and the player's own evolve action are held to
+    // the same bar, and the ceiling is Erik's §4 function of level + craft rank rather than a flat cap.
+    if (op.grants && opts.ceiling && typeof opts.foldGrants === "function") {
+      const fold = opts.foldGrants(it.grants || [], op.grants, opts.ceiling);
+      if (fold.added.length || fold.replaced.length) {
+        it.grants = fold.grants;
+        changed.push("grants");
+        if (fold.refused.length) applied.refused = [...(applied.refused || []), ...fold.refused.map(g => ({ item: it.customName || it.name, grant: g.name }))];
+      }
+    }
+    // The evolution STAGE — the item's own count of how far the story has carried it (SNG-215 evoStage is
+    // read by equipmentBonus, so this is a real mechanical step, not a label).
+    if (op.evoStageName != null && String(op.evoStageName).trim()) { it.evoStageName = String(op.evoStageName).slice(0, 60); changed.push("stage"); } // prose-cap-ok: a stage NAME, not prose
+    if (op.evolved || changed.includes("grants") || op.evoStageName != null) it.evoStage = Math.max(1, (it.evoStage || 1) + (op.evolved || changed.includes("grants") ? 1 : 0));
+
+    // SNG-251 §2b: IMAGE INVALIDATION. applyItemUpdates has always rewritten `description`, and nothing
+    // ever told the image it was stale — so a spear that grew runes kept showing its runeless picture,
+    // which is half of what Erik reported. Bust the cache key ONLY on a real evolution (per OQ2's lean:
+    // a grant, a stage, or a materially rewritten description), never on a tiny tweak, so an ordinary
+    // provenance edit does not spend a generation. The OLD image is not deleted — it stays in the gallery
+    // as history; this only moves the CURRENT view forward.
+    const materially = changed.includes("grants") || changed.includes("stage")
+      // NOT a cap — neither slice is stored; it compares the opening of the old and new description to tell a
+      // real rewrite from a touch-up, so a comma edit never spends an image generation.
+      || (changed.includes("description") && String(it.description).slice(0, 120) !== before.description.slice(0, 120)); // prose-cap-ok: a comparison prefix, not a stored cap
+    if (materially) {
+      it.imageStamp = (Number(it.imageStamp) || 0) + 1;   // the cache-key bust
+      it.imagePrompt = op.imagePrompt ? smartClamp(String(op.imagePrompt), 300) : (it.description || it.imagePrompt);
+      it.imageDirty = true;
+      changed.push("image");
+    }
     if (changed.length) applied.push({ name: it.customName || it.name, changed });
   }
   return applied;
+}
+
+/** SNG-251 §2d: DERIVE a linked child item — the split that Memory's shadow-twin is.
+ *
+ *  Erik: "now to show the shadow twin as its own item I can call — the GM fails to do so." There was no
+ *  path at all: `itemUpdates` evolves ONE item and `addItem` creates an unlinked one, so a split could only
+ *  ever be prose. This makes it two real items that know about each other.
+ *
+ *  DERIVED IS NOT LESSER (Erik corrected Aevi's first spec on exactly this). The child gets its OWN grants
+ *  under the SAME economy as the parent — complementary, often stronger in its own domain. Nothing here
+ *  scales a child down, and that absence is deliberate: the "echo at reduced strength" default is the thing
+ *  the guard bans. Returns { item, parent } or null. */
+export function deriveItem(character, op = {}, opts = {}) {
+  const parent = findItem(character, op?.parent || op?.from || "");
+  if (!parent || !op?.name) return null;
+  if (opts.canDerive && !opts.canDerive(parent).ok) return null;
+  const child = addItem(character, {
+    name: String(op.name).slice(0, 60), // prose-cap-ok: an item name
+    kind: op.kind || parent.kind || "misc",
+    description: op.description ? smartClamp(String(op.description), 400) : parent.description,
+    bonusTags: Array.isArray(op.bonusTags) ? op.bonusTags : undefined,
+    consumable: false,
+    qty: 1
+    // `distinct` is load-bearing: a split's child is NAMED for its parent ("Memory's Shadow-Twin"), and the
+    // fuzzy resolver reads that as the same item. Without this the derive merges the child into the parent.
+  }, opts.catalog || {}, { distinct: true });
+  if (!child || child === parent) return null;
+  if (op.customName) child.customName = String(op.customName).slice(0, 60); // prose-cap-ok: a name
+  child.derivedFrom = parent.customName || parent.name;
+  child.provenance = smartClamp(String(op.provenance || `Split from ${parent.customName || parent.name}.`), 160);
+  if (op.imagePrompt) child.imagePrompt = smartClamp(String(op.imagePrompt), 300);
+  child.imageStamp = 1; child.imageDirty = true;         // §2b: a new item is a new picture, always
+  child.evoStage = 1;
+  if (op.grants && opts.ceiling && typeof opts.foldGrants === "function") {
+    const fold = opts.foldGrants([], op.grants, opts.ceiling);   // its OWN sheet, same ceiling — never scaled down
+    if (fold.grants.length) child.grants = fold.grants;
+  }
+  parent.derived = [...(parent.derived || []), child.customName || child.name].slice(0, 4);
+  return { item: child, parent };
 }
 
 function clampEffects(fx) {
@@ -256,8 +339,11 @@ export function equipmentBonus(character, actionTags = [], rules) {
 /** One-line inventory summary for the GM prompt. */
 export function inventoryForGM(character) {
   if (!character.inventory?.length) return "empty-handed";
+  // SNG-251 §2c: an evolved item's GRANTS ride into the GM's context. Without this the GM narrates a spear
+  // it does not know has a shadow-harm focus and an ending-sense — the mechanics would exist on the sheet
+  // and be invisible to the one party that has to describe them in play.
   return character.inventory.map(i =>
-    `${i.customName ? `${i.customName} (their name for: ${i.name})` : i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""})`
+    `${i.customName ? `${i.customName} (their name for: ${i.name})` : i.name}${i.qty > 1 ? ` x${i.qty}` : ""} (${i.kind}${i.consumable ? ", consumable" : ""}${i.description ? ` — ${i.description}` : ""}${grantSummary(i) ? `; ${grantSummary(i)}` : ""})`
   ).join("; ");
 }
 

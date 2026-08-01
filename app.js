@@ -24,7 +24,8 @@ import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, merg
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { buildFeedPost, appendFeedPost, feedForViewer, FEED_PATH } from "./engine/feed.js"; // SNG-168 §2: the world feed (post a turn to the family — never canon)
-import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
+import { wieldBonusFor, usableCombatItems, normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates, deriveItem, findItem } from "./engine/inventory.js";
+import { grantCeiling, evolutionBudget, recordEvolution, foldGrants, canDerive } from "./engine/earnedpower.js"; // SNG-251 §2c/§4: the earned-power economy (ceiling = f(level, craft rank); ~1 evolution/day)
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
@@ -2348,6 +2349,27 @@ function genContractDeps() {
   };
 }
 
+/** SNG-251 §2c/§4: the earned-power deps for an item evolution — the CEILING this character's items are
+ *  bound by, and the fold. The ceiling is Erik's function of LEVEL + the relevant CRAFT RANK, so the craft
+ *  behind the binding has to be identified: the op may name it (`from`/`craft`), otherwise the character's
+ *  best-ranked ability stands in. That is deliberately generous rather than strict — refusing a real
+ *  in-fiction binding because the op didn't label its craft would recreate the exact frustration §251
+ *  exists to end, and the ceiling still bounds how much it can grant.
+ *
+ *  ONE set of numbers for every path: the GM's itemUpdates, a deriveItem split, and the player's own
+ *  "evolve this" action all pass through here, so no route can quietly grant more than another. */
+function itemEvolveDeps(ops = []) {
+  const named = (Array.isArray(ops) ? ops : [ops]).flatMap(o => [o?.craft, o?.from, ...(Array.isArray(o?.grants) ? o.grants.map(g => g?.from) : [])]).filter(Boolean).join(" ").toLowerCase();
+  let rank = 0;
+  for (const owned of (character.abilities || [])) {
+    const ab = fullCatalog()[owned.abilityId]; if (!ab) continue;
+    const mentioned = named && (named.includes(String(ab.id).toLowerCase()) || named.includes(String(ab.name || "").toLowerCase()));
+    if (mentioned) { rank = Math.max(rank, owned.level || 1); }
+  }
+  if (!rank) for (const owned of (character.abilities || [])) rank = Math.max(rank, owned.level || 1); // best craft stands in
+  return { ceiling: grantCeiling(character, rank), foldGrants };
+}
+
 /** SNG-250 §5: the generatable set, DERIVED — a type generates when a derived genSchema exists for it
  *  (state.js builds CONTENT.genSchemas from schemas/<type>.schema.json). Built once at load. */
 let GENERATABLE_TYPES = new Set();
@@ -3753,6 +3775,29 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const fightFramingDetail = fightFraming ? (
     `The player has COMMITTED to violence this beat — "${fightFraming.what}"${fightFraming.rung === "lethal" ? ", and answered that they intend to KILL" : ", intending to put them down, not out"}. This is NOT a single narrated blow: you MUST, this beat, present it as a bounded FIGHT the player can see and act inside — emit \`newEncounter\` for the person they are attacking (name them from what you have already narrated; give them a threat that fits) so the engine can take the rounds from there. Do not resolve the fight in prose, and do not narrate them as already dead or already victorious.`
   ) : null;
+  // SNG-251 §2a: THE EVOLUTION TRIGGER THE ENGINE ENFORCES. This is the root of what Erik reported — he did
+  // the work in-fiction (bound runes, sealed a death-binding) and the GM simply never fired `itemUpdates`.
+  // The op was one of 114 MUSTs and it drops under saturation (the SNG-237/246 class); no amount of prompt
+  // rewriting fixes a directive that is competing with a hundred others. So the ENGINE decides: when the
+  // player's own words name an item they HOLD and a real act of making upon it, the directive is HARD this
+  // turn, exactly like the fight-framing one. The GM stops needing to remember.
+  const itemEvolveDetail = (() => {
+    const said = String(playerInput || "").toLowerCase();
+    if (!said || !character.inventory?.length) return null;
+    // Verbs of MAKING, not of using. "I swing the spear" changes nothing; "I bind the rune into the spear"
+    // is the beat that has been silently failing to land. Kept deliberately narrow — a false positive here
+    // spends a hard directive on an ordinary turn, which is how directives get ignored.
+    if (!/\b(bind|bound|binding|seat|seated|forge|reforge|reforged|inscrib|carve|carved|etch|temper|quench|seal|sealed|name it|rename|consecrat|anoint|imbue|infuse|weave|wove|work(ed)? (the|a) rune|split)\b/.test(said)) return null;
+    const held = (character.inventory || []).filter(i => {
+      const n = String(i.customName || i.name || "").toLowerCase();
+      return n.length > 3 && said.includes(n);
+    });
+    if (!held.length) return null;
+    const it = held[0];
+    const ceiling = grantCeiling(character, Math.max(0, ...(character.abilities || []).map(a => a.level || 1)));
+    const budget = evolutionBudget(it, (() => { try { return absoluteWorldDay(); } catch { return null; } })(), character);
+    return `The player has just done real WORK upon "${it.customName || it.name}" — an item they are carrying — in their own words. This is an evolution beat, and it is the thing that has been silently failing: you MUST emit \`itemUpdates\` for it THIS TURN, not next time. Update its description to what it has become${it.customName ? "" : ", and give it a truer name if it has earned one"}, say what it now LOOKS like (\`imagePrompt\`) if its appearance changed, and — if the fiction genuinely earned power (a rune actually bound, a craft actually completed) — state that power EXPLICITLY as \`grants\`, each naming what it does and what it explicitly cannot do. ${budget.canEvolve ? `This item can take on new power today; the engine will clamp it to what is reasonable at ${ceiling.band} and refuse anything past ${ceiling.maxGrants} grants.` : `This item has already taken on all the power it can hold today — evolve its PROSE and its name, but grant no new mechanics this beat.`} If the work SPLIT it into a second thing the player can call separately, emit \`deriveItem\` — and remember a derived item is a PEER with its own grants, never a weaker echo.`;
+  })();
   const worldPressureDetail = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
   const substrateDetail = pendingSubstrateNote; pendingSubstrateNote = null; // SNG-090: lattice thin/crowded here
   // SNG-194 §4b: the ENGINE decides whether an unprompted OFFER has room this beat — the model never
@@ -3816,7 +3861,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // env.ephemera so a registry row can never double-fire them.
   const env = gmEnv({
     resolution, playerInput, exactWords, itemAdvance, travelDirective,
-    ephemera: { encounterWeaveDetail, encounterOfferDetail, fightFramingDetail, stageRevealDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
+    ephemera: { encounterWeaveDetail, encounterOfferDetail, fightFramingDetail, stageRevealDetail, itemEvolveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
   });
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
@@ -4281,9 +4326,36 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   for (const item of d.inventoryRemove || []) { const nm = typeof item === "string" ? item : item?.name; removeItem(character, nm); if (nm) _invNotes.push(`− ${nm} — taken from you.`); }
   if (_invNotes.length) turn.narration = (turn.narration || "") + "\n\n" + _invNotes.map(n => `*${n}*`).join("\n");
-  // SNG-137: items EVOLVE — the GM grows an owned item's story (description/name/provenance/use); bounded,
-  // no power inflation. A light note so the player sees the thing they carry changed.
-  if (turn.itemUpdates?.length) { const iu = applyItemUpdates(character, turn.itemUpdates); if (iu.length) turn.narration = (turn.narration || "") + "\n\n" + iu.map(u => `*✦ ${u.name} has changed — ${u.changed.join(", ")}.*`).join("\n"); }
+  // SNG-137: items EVOLVE — the GM grows an owned item's story (description/name/provenance/use).
+  // SNG-251 §2c: and now, when the FICTION earned it, the evolution can carry explicit MECHANICAL GRANTS —
+  // bounded by Erik's §4 economy (a ceiling that is a function of level + craft rank, ~1 evolution/day),
+  // never by a flat ban. The refusals are surfaced too: an item that is FULL says so, rather than the
+  // player wondering why their binding didn't take.
+  if (turn.itemUpdates?.length) {
+    const wd = (() => { try { return absoluteWorldDay(); } catch { return null; } })();
+    // §4's rate limit bites BEFORE the grant lands, and only on the POWER: an item that has already taken
+    // on what it can hold today still evolves its prose, name and provenance (story is always free) — it
+    // simply banks no further mechanics. Rate-limiting the storytelling would be the wrong lesson.
+    const ops = turn.itemUpdates.map(op => {
+      if (!op?.grants) return op;
+      const held = findItem(character, op.name || op.customName || "");
+      if (held && !evolutionBudget(held, wd, character).canEvolve) { const { grants, ...rest } = op; return rest; }
+      return op;
+    });
+    const iu = applyItemUpdates(character, ops, itemEvolveDeps(ops));
+    for (const u of iu) if (u.changed.includes("grants")) { const held = findItem(character, u.name); if (held) recordEvolution(held, wd); }
+    if (iu.length) turn.narration = (turn.narration || "") + "\n\n" + iu.map(u => `*✦ ${u.name} has changed — ${u.changed.join(", ")}.*`).join("\n");
+    for (const r of (iu.refused || [])) turn.narration = (turn.narration || "") + `\n\n*✦ ${r.item} cannot hold "${r.grant}" as well — it carries all it can at your level and craft.*`;
+  }
+  // SNG-251 §2d: an evolution can SPLIT an item — the shadow-twin as its own callable thing. A derived item
+  // is a PEER, not a lesser echo (Erik corrected the spec on exactly this), so it gets its own sheet under
+  // the SAME ceiling as its parent; nothing here scales a child down.
+  if (turn.deriveItem) {
+    for (const op of (Array.isArray(turn.deriveItem) ? turn.deriveItem : [turn.deriveItem]).slice(0, 2)) {
+      const made = deriveItem(character, op, { ...itemEvolveDeps([op]), catalog: CONTENT.items, canDerive });
+      if (made) turn.narration = (turn.narration || "") + `\n\n*✦ ${esc(made.item.customName || made.item.name)} is split from ${esc(made.parent.customName || made.parent.name)} — its own thing now, yours to call.*`;
+    }
+  }
 
   // deeds → reputation (day-stamped so news spread knows when they happened; SNG-041 also
   // stamps the shared absolute world-day so a deed dates the same on every character's calendar)
@@ -8624,10 +8696,27 @@ function itemCard(it, { open = false, toggleAttr = "data-item-toggle", showPin =
     ${open ? `<div class="item-detail">
       ${img ? `<img class="item-img" data-lightbox="item" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
       <div class="item-desc">${esc(it.description || it.kind)}</div>
+      ${it.provenance ? `<div class="item-prov">${esc(it.provenance)}</div>` : ""}
       ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
       ${it.effects ? `<div class="item-tags">${Object.entries(it.effects).map(([k, v]) => `${esc(k)} ${v > 0 ? "+" : ""}${esc(String(v))}`).join(", ")}</div>` : ""}
+      ${/* SNG-251 §2c: THE MECHANICAL SHEET. Erik's ask, literally on the item — what the story's work
+            translated to in rules. Every grant states where it came FROM and what it explicitly CANNOT do,
+            because "explicit" without a stated bound is just power creep with better typography. */""}
+      ${Array.isArray(it.grants) && it.grants.length ? `<div class="item-grants">
+        <div class="item-grants-lbl">what it grants${it.derivedFrom ? ` — split from ${esc(it.derivedFrom)}` : ""}</div>
+        ${it.grants.map(g => `<div class="item-grant">
+          <div class="item-grant-name">◈ ${esc(g.name)}${g.from ? `<span class="item-grant-from"> — ${esc(g.from)}</span>` : ""}</div>
+          <div class="item-grant-effect">${esc(g.effect)}</div>
+          ${g.clamp ? `<div class="item-grant-clamp">bound: ${esc(g.clamp)}</div>` : ""}
+        </div>`).join("")}
+      </div>` : ""}
+      ${it.derived?.length ? `<div class="item-tags">split into: ${it.derived.map(esc).join(", ")}</div>` : ""}
       <div class="item-actions">
         <button class="opt" data-item-use="${esc(it.name)}">${it.consumable ? "Consume" : "Use in scene"}</button>
+        ${/* SNG-251 §2a: the PLAYER-INITIATED evolution. Erik should not have to beg the GM to notice that
+              he bound runes into his spear — he can say so directly. Always available (Erik's §4 ruling),
+              gated by the daily budget and by having to CITE the fiction that earned it. */""}
+        ${it.consumable ? "" : `<button class="opt" data-item-evolve="${esc(it.name)}" title="Tell the story what this has become — cite what earned it">✦ Evolve</button>`}
         <button class="opt" data-item-name="${esc(it.name)}">Name it</button>
         <button class="opt" data-item-drop="${esc(it.name)}">Drop</button>
       </div></div>` : ""}
@@ -8640,6 +8729,20 @@ function bindItemCardHandlers(afterChange) {
   for (const b of app.querySelectorAll("[data-item-use]")) b.onclick = () => useItem(b.dataset.itemUse);
   for (const b of app.querySelectorAll("[data-item-drop]")) b.onclick = () => { const n = b.dataset.itemDrop; if (confirm("Drop " + n + "?")) { removeItem(character, n, 999); saveCharacter(character); afterChange(); } };
   for (const b of app.querySelectorAll("[data-item-name]")) b.onclick = () => { const nn = prompt("Name this item:"); if (nn !== null && nameItem(character, b.dataset.itemName, nn)) { saveCharacter(character); afterChange(b.dataset.itemName); } };
+  // SNG-251 §2a: PLAYER-INITIATED EVOLUTION. The whole ticket exists because Erik did the work in-fiction
+  // and the GM never fired the op — so this path does not depend on the GM remembering anything. It is a
+  // normal turn (the GM narrates and resolves it), but one the player can always start, and it arrives
+  // carrying the CITE, so the "earned, not hand-waved" guard is answered by the player in their own words
+  // rather than inferred. The daily budget is checked BEFORE the turn is spent, not after.
+  for (const b of app.querySelectorAll("[data-item-evolve]")) b.onclick = () => {
+    if (busy) return;
+    const it = findItem(character, b.dataset.itemEvolve); if (!it) return;
+    const budget = evolutionBudget(it, (() => { try { return absoluteWorldDay(); } catch { return null; } })(), character);
+    if (!budget.canEvolve) { renderPlay(character.activeScene?.lastTurn || null, { aside: budget.why }); return; }
+    const cite = prompt(`What has ${displayName(it)} been through that changed it?\n\nName the work the story actually did — a rune bound, a craft completed, a death taken. The GM records what that earns; "it feels stronger" earns nothing.`);
+    if (cite == null || !String(cite).trim()) return;
+    onFreeform(`I take up ${displayName(it)} and take stock of what it has become. ${String(cite).trim()} — reflect that in the item: its description, its name if it has earned one, and be explicit about what it now grants mechanically.`);
+  };
   for (const b of app.querySelectorAll("[data-item-pin]")) b.onclick = (e) => { e.stopPropagation(); togglePin(character, b.dataset.itemPin); saveCharacter(character); afterChange(b.dataset.itemPin); }; // SNG-121
 }
 

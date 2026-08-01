@@ -8737,6 +8737,122 @@ await (async () => {
     "an emphasis entry is not a function family — it would match no group and quietly do nothing");
 }
 
+// ---------- SNG-251: story-driven item evolution (prose + image + explicit mechanics + derived items) ----------
+// Validated against Aevi's MEMORY WORKED EXAMPLE — the reference artifact the spec says the mechanism must be
+// able to reproduce. An economy that cannot express the exemplar it was written for is the wrong economy.
+{
+  const ep = await import("../engine/earnedpower.js");
+  const inv251 = await import("../engine/inventory.js");
+  const memo = JSON.parse(readFileSync(join(root, "po/staged_content/memory_worked_example.json"), "utf8"));
+  const appSrc251 = readFileSync(join(root, "app.js"), "utf8");
+  const gmSrc251 = readFileSync(join(root, "engine/gm.js"), "utf8");
+  const artSrc251 = readFileSync(join(root, "engine/art.js"), "utf8");
+  // Silas as the worked example states him: L29, the relevant crafts at ability-rank 3.
+  const silas = { level: 29, abilities: [{ abilityId: "palework", level: 3 }] };
+
+  // §4 — the ECONOMY. Erik: the ceiling is a FUNCTION of level + craft rank, not a flat cap.
+  const ceil29 = ep.grantCeiling(silas, 3), ceil1 = ep.grantCeiling({ level: 1 }, 0);
+  check("SNG-251 §4: the grant ceiling SCALES with level + craft rank (not a flat cap) — evolution is the payoff for building crafts",
+    ceil29.maxGrants > ceil1.maxGrants && ceil29.effectCap > ceil1.effectCap);
+  check("SNG-251 §4: the ceiling can hold Aevi's Memory worked example — the exemplar the economy was written for",
+    ceil29.maxGrants >= (memo.parentItem.grants || []).length,
+    `Memory carries ${(memo.parentItem.grants || []).length} grants; the ceiling at L29/rank3 allows ${ceil29.maxGrants} — an economy that cannot express its own reference artifact is wrong`);
+  check("SNG-251 §4: a level-1 character with no craft cannot mint a master's binding",
+    ceil1.maxGrants === 1);
+
+  // §4 — the RATE LIMIT. "~1 evolution attempt per day, capped by level/ability."
+  const it251 = { name: "Memory" };
+  check("SNG-251 §4: an item evolves about once a day — the second attempt the same day is refused, with a reason",
+    ep.evolutionBudget(it251, 14, silas).canEvolve === true &&
+    (ep.recordEvolution(it251, 14), ep.evolutionBudget(it251, 14, { level: 5 }).canEvolve === false) &&
+    !!ep.evolutionBudget(it251, 14, { level: 5 }).why);
+  check("SNG-251 §4: a NEW day frees it again (a rate limit, not a lifetime cap)",
+    ep.evolutionBudget(it251, 15, silas).canEvolve === true);
+  check("SNG-251 §4: an unknown world-day never blocks — never fail closed on a missing clock",
+    ep.evolutionBudget({ name: "x" }, null, silas).canEvolve === true);
+
+  // §2c — grants are EXPLICIT and CLAMPED. This is the heart of Erik's ask.
+  const g = ep.sanitizeGrant(memo.parentItem.grants[2], ceil29);   // "The Shadow-Harm Strike"
+  check("SNG-251 §2c: a real grant survives sanitisation with its effect, its source AND its stated bound intact",
+    !!g && g.effect.length > 0 && g.from.length > 0 && g.clamp.length > 0);
+  check("SNG-251 §2c: a grant with no EFFECT is refused — a named power that doesn't say what it does is the hollow flavour SNG-250 §3 bans",
+    ep.sanitizeGrant({ name: "Ancient Power" }, ceil29) === null);
+  check("SNG-251 §2c: a grant with no stated clamp still GETS one (an explicit power with no stated limit is power creep with better typography)",
+    ep.sanitizeGrant({ name: "X", effect: "does a thing" }, ceil29).clamp.length > 0);
+  const fold = ep.foldGrants([], memo.parentItem.grants, ceil29);
+  check("SNG-251 §2c: Memory's four authored threads all land as grants under the real ceiling",
+    fold.grants.length === memo.parentItem.grants.length && fold.refused.length === 0, JSON.stringify(fold.refused.map(x => x.name)));
+  check("SNG-251 §2c: re-binding the SAME thread REPLACES it — a repeated evolution beat deepens, never stacks duplicates",
+    ep.foldGrants(fold.grants, [memo.parentItem.grants[0]], ceil29).grants.length === fold.grants.length);
+  const over = ep.foldGrants(fold.grants, [{ name: "Fifth", effect: "e" }, { name: "Sixth", effect: "e" }, { name: "Seventh", effect: "e" }], ep.grantCeiling({ level: 10 }, 1));
+  check("SNG-251 §2c: past the ceiling a grant is REFUSED and RETURNED, never silently dropped — the player is told their item is full",
+    over.refused.length > 0);
+
+  // §2c — the mechanical sheet reaches BOTH the player and the GM.
+  check("SNG-251 §2c: the item card shows the mechanical sheet — Erik's 'explicit about what that translates to in game mechanics', on the item",
+    /item-grants/.test(appSrc251) && /item-grant-clamp/.test(appSrc251));
+  check("SNG-251 §2c: the GM's inventory line carries the grants — otherwise the mechanics exist and the narrator cannot see them",
+    inv251.inventoryForGM({ inventory: [{ name: "Memory", kind: "weapon", qty: 1, grants: [{ name: "Shadow-Harm Strike" }] }] }).includes("Shadow-Harm Strike"));
+  check("SNG-251 §2c: gm.js no longer states the blanket 'does NOT grant new power' ban that left earned power nowhere to live",
+    !/does NOT grant new power/.test(gmSrc251) && /no UNEARNED power/.test(gmSrc251));
+  check("SNG-251: the op TRIPLE agrees — prompt contract, handler, and salvageable vocab all know deriveItem (seam_op_vocab_triples)",
+    /"deriveItem":/.test(gmSrc251) && /"deriveItem"\]/.test(gmSrc251) && /deriveItem\(character, op,/.test(appSrc251));
+
+  // §2b — the image re-mints. Half of what Erik reported.
+  const evolving = { inventory: [{ name: "Spear", kind: "weapon", qty: 1, description: "A plain ash spear.", image: "http://old/pic.png" }] };
+  const before251 = evolving.inventory[0].image;
+  inv251.applyItemUpdates(evolving, [{ name: "Spear", description: "Four rune-threads seated and answering, the Weirmark drawn at the collar — nothing plain about it now.", grants: [{ name: "Anchored Read", effect: "reads the structure of what it touches" }] }],
+    { ceiling: ceil29, foldGrants: ep.foldGrants });
+  const after251 = evolving.inventory[0];
+  check("SNG-251 §2b: a real evolution marks the image DIRTY and busts the cache key — the runed spear stops showing its runeless picture",
+    after251.imageDirty === true && after251.imageStamp >= 1 && before251 === "http://old/pic.png");
+  check("SNG-251 §2b: itemImage BYPASSES the stale pinned URL once dirty, and keys on the stamp",
+    /if \(item\.image && !item\.imageDirty\) return item\.image;/.test(artSrc251) && /item\.imageStamp \? `\$\{item\.name\}#\$\{item\.imageStamp\}`/.test(artSrc251));
+  check("SNG-251 §2b: an evolved item's authored imagePrompt WINS over the plain description, or the re-mint redraws the same spear",
+    /subject\.imagePrompt/.test(artSrc251));
+  const tweak = { inventory: [{ name: "Cup", kind: "misc", qty: 1, description: "A tin cup.", image: "u" }] };
+  inv251.applyItemUpdates(tweak, [{ name: "Cup", provenance: "carried since the crossing" }], {});
+  check("SNG-251 §2b (OQ2): a small tweak does NOT bust the image — only a real evolution re-mints",
+    !tweak.inventory[0].imageDirty, "every provenance edit would spend an image generation");
+
+  // §2d — DERIVED ITEMS, and the guard Erik corrected the spec on.
+  const split = { inventory: [{ name: "Memory", kind: "weapon", qty: 1, description: "the iron spear" }] };
+  const made = inv251.deriveItem(split, { parent: "Memory", name: memo.derivedItem.name, customName: memo.derivedItem.customName, description: memo.derivedItem.description, grants: memo.derivedItem.grants }, { ceiling: ceil29, foldGrants: ep.foldGrants, canDerive: ep.canDerive });
+  check("SNG-251 §2d: a split makes a SECOND REAL ITEM in the pack — 'show the shadow twin as its own item I can call'",
+    !!made && split.inventory.length === 2 && !!inv251.findItem(split, memo.derivedItem.customName || memo.derivedItem.name));
+  check("SNG-251 §2d: the link is real in BOTH directions — the child knows its parent, the parent notes the split",
+    made.item.derivedFrom === "Memory" && (made.parent.derived || []).length === 1);
+  check("SNG-251 §2d: DERIVED IS NOT LESSER — the child gets its OWN grants under the SAME ceiling, never scaled down (Erik corrected the spec on exactly this)",
+    (made.item.grants || []).length === (memo.derivedItem.grants || []).length &&
+    !/reduced|lesser|weaker|\* *0?\.\d/.test(readFileSync(join(root, "engine/inventory.js"), "utf8").split("export function deriveItem")[1].split("\n}")[0]),
+    "the derive path scales the child down somewhere — the 'echo at reduced strength' default is banned");
+  // The bug this nearly shipped with, and the reason `distinct` exists. Kept as its own check because the
+  // failure was SILENT and destructive: the split ate its own parent.
+  check("SNG-251 §2d: a child NAMED FOR ITS PARENT does not get fuzzy-merged INTO the parent (namesMatch says they're the same thing)",
+    split.inventory.length === 2 && split.inventory.every(i => i.qty === 1) &&
+    !!inv251.findItem(split, "Memory") && inv251.findItem(split, "Memory").customName !== memo.derivedItem.customName,
+    "the derive merged into the parent stack — the player would LOSE the parent item and get a doubled stack wearing the child's name");
+  check("SNG-251 §2d: a derived item is born with its own picture (it is a new thing, not a re-skin)",
+    made.item.imageDirty === true && made.item.imageStamp === 1);
+  check("SNG-251 §2d: splitting is BOUNDED — an item cannot be split endlessly into a duplication engine",
+    ep.canDerive({ derived: ["a", "b"] }).ok === false);
+
+  // §2a — the trigger the ENGINE enforces. This is the root cause of Erik's report.
+  check("SNG-251 §2a: the engine detects the evolution beat itself and hands the GM a HARD directive (itemUpdates is 1 of 114 MUSTs and drops under saturation)",
+    /const itemEvolveDetail = \(\) =>|const itemEvolveDetail = \(\(\) =>/.test(appSrc251) &&
+    /AN ITEM HAS BEEN CHANGED BY WHAT WAS JUST DONE/.test(gmSrc251));
+  check("SNG-251 §2a: the trigger needs a verb of MAKING and a HELD item — narrow on purpose, because a false positive spends a hard directive on an ordinary turn",
+    /bind\|bound\|binding\|seat/.test(appSrc251) && /said\.includes\(n\)/.test(appSrc251));
+  check("SNG-251 §2a: the player can start an evolution themselves, and must CITE the fiction that earned it",
+    /data-item-evolve/.test(appSrc251) && /What has \$\{displayName\(it\)\} been through/.test(appSrc251));
+  check("SNG-251 §2a: the player path checks the daily budget BEFORE spending the turn, not after",
+    /if \(!budget\.canEvolve\) \{ renderPlay/.test(appSrc251));
+  check("SNG-251 §4: the rate limit bites only on the POWER — prose, name and provenance still evolve when the day is spent (rate-limiting storytelling would be the wrong lesson)",
+    /const \{ grants, \.\.\.rest \} = op; return rest;/.test(appSrc251));
+  check("SNG-251: ONE economy for every path — the GM's op, a derive, and the player's own action all pass through itemEvolveDeps",
+    (appSrc251.match(/itemEvolveDeps\(/g) || []).length >= 3);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

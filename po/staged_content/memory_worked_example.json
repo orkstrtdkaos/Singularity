@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "memory_worked_example",
  "kind": "reference",
- "note": "SNG-251 worked example (Aevi 2026-07-27): Memory's CORRECT evolved record - the four threads as explicit CLAMPED grants scaled to Silas (L29; order_sense/deathsense/palework at ability-rank 3; braids Ashen Meridian + Undying Ledger). The grants are the MECHANICAL translation of powers Silas already earned, FOCUSED through the spear - not invented power, and reasonable-for-level per Erik's §4 ruling. Plus the shadow twin as a derived item, and the corrected chronology. CCode validates the SNG-251 prose+image+mechanics+derive mechanism against THIS; it is not a direct write to Erik's live save (that's an in-play evolution beat).",
+ "note": "SNG-251 worked example (Aevi 2026-07-27): Memory's CORRECT evolved record - the four threads as explicit CLAMPED grants scaled to Silas (L29; order_sense/deathsense/palework at ability-rank 3; braids Ashen Meridian + Undying Ledger). The grants are the MECHANICAL translation of powers Silas already earned, FOCUSED through the spear - not invented power, and reasonable-for-level per Erik's §4 ruling. Plus the shadow twin as a derived item, and the corrected chronology. CCode validates the SNG-251 prose+image+mechanics+derive mechanism against THIS; it is not a direct write to Erik's live save (that's an in-play evolution beat). | CORRECTED 2026-07-27 (Erik): named d14, shadow-twin split d18 (two real dates, not drift). The shadow twin is NOT weaker - it's DIFFERENT/complementary: bites shadow-substance/Zone-changed/bodiless foes that iron handles poorly, is throwable + re-summonable, and carries shadow-power effects on the cast. A matched pair, neither the 'main'.",
  "parentItem": {
   "name": "Assembled Mid-Weight Spear",
   "customName": "Memory",
@@ -10,7 +10,7 @@
   "evoStage": 4,
   "evoStageName": "The Sealed Shadow-Spear",
   "description": "A seasoned ash shaft six feet long, the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding gone dark with handling. Four rune-threads seated and answering: ironsense along the shaft as anchor, Huginn's Ashwarden ending-sense worked through the fuller, a shadow-harm focus cut at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The Weirmark is drawn at the collar; the Shielding Word is spoken into the haft. Pell's maker's mark sits in the blade. A death comes off it dry — no blood in the channels.",
-  "provenance": "Reforged from a light hunting point to the mid-weight tip at Pell's forge; rune-bound at the Fell Pell with Huginn as witness at the stone ring; named Memory, Weirmark drawn and Shielding Word spoken, and split — the shadow-twin sealed — at dawn in Pell's forge. 'Yours to call. Mine to carry.'",
+  "provenance": "Reforged from a light hunting point to the mid-weight tip at Pell's forge; rune-bound and NAMED Memory at Pell's forge on World-day 14, Weirmark drawn and Shielding Word spoken. Further work on World-day 18 evening at the Fell Pell, with Huginn as witness at the stone ring, split off the shadow-twin — 'Yours to call. Mine to carry.'",
   "imagePrompt": "A six-foot ash war-spear with a wide mid-weight iron blade, four faintly-glowing rune-threads worked into shaft, fuller, quillon and collar — one cold iron-grey, one ashen death-pale, one shadow-black, one ordered blue — a smith's maker's-mark stamped in the blade, dark oiled-leather binding, held upright in a dim forge at dawn. Runic, deathbound, real.",
   "grants": [
    {
@@ -47,7 +47,7 @@
    }
   ],
   "derivedInto": [
-   "memory_shadow_twin"
+   "memory_shadow_twin (the Called Spear — a PEER, not a lesser echo)"
   ]
  },
  "derivedItem": {
@@ -56,31 +56,40 @@
   "customName": "the Called Spear",
   "kind": "weapon",
   "parent": "Memory",
-  "description": "The sealed shadow-duplicate of Memory, split from it by design at Pell's forge. No iron in it — a spear of held shadow that answers Silas's call from any distance, forms in his hand, and carries Memory's threads in echo. Pell holds the iron; Silas calls the shadow. Two bodies, one binding.",
+  "description": "The shadow-twin of Memory, split from it by further work at Pell's forge. No iron in it — a spear of bound shadow that Silas calls to his hand from any distance and can HURL, re-summoning it to throw again. Not a lesser echo of the iron Memory but its COMPLEMENT: where iron bites poorly — shadow-substance things, Zone-changed creatures, what has no ordinary body to wound — the shadow-spear bites TRUE, and it carries strange shadow-power on the throw. Pell holds the iron; Silas calls the shadow. Two bodies, one binding, each answering what the other can't.",
   "provenance": "Sealed from Memory at dawn on the completion of the rune-work — 'Yours to call. Mine to carry.' The physical Memory is in Pell's hand; this is Silas's to summon.",
   "imagePrompt": "A spear made of held shadow and faint rune-light, no metal — a translucent dark echo of a runic war-spear forming in an open hand, threads of cold light where the iron blade would be, summoned from nothing in a dim space. Shadow-craft, called, sealed.",
   "grants": [
    {
-    "id": "twin_call",
-    "name": "Call From Any Distance",
+    "id": "twin_call_throw",
+    "name": "Call and Cast",
     "from": "the sealed shadow-binding + palework",
-    "effect": "Silas can summon the shadow-twin to his hand from any distance — it forms sealed and ready. The 'yours to call' half of the split.",
+    "effect": "Summon the shadow-spear to hand from any distance AND hurl it — it re-forms in the hand to be thrown again, repeatedly. A ranged, re-summoning strike the iron Memory can't make (throw a physical spear and it's gone; throw this and it comes back).",
     "band": "reasonable @ L29",
-    "clamp": "a summon, not a teleport of Silas; the spear comes to him, once ready"
+    "clamp": "the spear returns on call; the throw is a real strike, not a guaranteed hit"
    },
    {
-    "id": "twin_echo",
-    "name": "Echoed Threads",
-    "from": "Memory's threads in shadow-echo",
-    "effect": "Carries Memory's reads/ending-sense in echo (lighter than the iron original); the shadow-harm strike answers when called.",
-    "band": "reasonable @ L29 — CLAMPED: an echo, weaker than the iron Memory",
-    "clamp": "echoes the parent's grants at reduced strength; not a second full weapon"
+    "id": "twin_shadow_bite",
+    "name": "Shadow Bite",
+    "from": "palework shadow-substance + the shadow-harm focus",
+    "effect": "Bites what IRON bites poorly — shadow-substance creatures, Zone-changed things, the bodiless or half-there. Where Memory's physical blade finds nothing to wound, the shadow-spear finds purchase. Complementary damage type, not a weaker one.",
+    "band": "reasonable @ L29 / palework 3 — a DIFFERENT bite, on par with Memory's iron, against a different target class",
+    "clamp": "strong vs shadow/Zone-changed/bodiless; ordinary against what iron already handles (each spear excels where the other doesn't)"
+   },
+   {
+    "id": "twin_shadow_effects",
+    "name": "Strange Shadow-Power on the Cast",
+    "from": "palework + the shadow-binding",
+    "effect": "The thrown shadow-spear carries shadow-power effects — the cast does more than land: it can carry a Palework-flavored consequence (a reading, a hindrance, an ending-touch) into the target on impact. The throw is a delivery, not just a spear.",
+    "band": "reasonable @ L29 — clamped to what Silas's palework rank supports",
+    "clamp": "one shadow-effect per cast, scaled to palework rank + the daily-evolution ceiling; not a free spell every throw"
    }
-  ]
+  ],
+  "note": "NOT weaker than Memory - DIFFERENT (Erik corrected). Complementary damage type + a thrown/re-summon mode the iron spear doesn't have.",
+  "effectiveness": "PEER of the iron Memory, not a reduced echo. The two are a matched pair: Memory (iron) for ordinary bodies + the read/ending/held-read threads; the Called Spear (shadow) for shadow-substance/Zone-changed/bodiless foes + a thrown, re-summoning, shadow-effect-carrying strike. Neither is the 'main' — they answer different problems."
  },
  "chronologyCorrection": {
-  "issue": "The save dates the naming/split to d14 but the thread-binding provenance to World-day 18 evening — backwards (can't name+split before the threads are bound).",
-  "resolution": "NEEDS ERIK - he was there. Two readings: (a) the assembly/tip + first threads across d1-d14, binding COMPLETED d18, naming+split d18+ (the provenance is right, the d14 naming notes are drift); or (b) the naming/split was d14 and the 'd18' provenance stamp is the drift. Aevi's lean from the notes: the binding-then-naming order is real, so the d14 naming timestamps are likely the drift - but ERIK'S CANON DECIDES. Flagged, not silently 'fixed'.",
-  "owner": "Erik"
+  "resolved": "Erik confirmed (his canon): NAMED Memory on World-day 14 (Weirmark + Shielding Word). Further work on World-day 18 — the SHADOW TWIN split. Not a drift: two real dates, d14 naming, d18 the twin. Record corrected.",
+  "owner": "resolved"
  }
 }

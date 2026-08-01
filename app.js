@@ -65,7 +65,7 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
-import { characterPower } from "./engine/threat.js"; // SNG-249: built power sets the mean the encounter pool revolves around
+import { characterPower } from "./engine/threat.js"; // CCODE-52: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
@@ -2421,7 +2421,7 @@ function listAvailableEncounters() {
   // built are reachable through GM OFFERS (rule 18), not just the sparse hand-seeds. Danger-gated: a calm place
   // surfaces little, a dangerous one real threats; the GM still only offers when the fiction invites.
   const seeded = new Set((loc.encounterSeeds || []).map(s => s.encounterId));
-  // SNG-249: the pool the GM is offered revolves around THIS character's power — the region supplies the cast,
+  // CCODE-52: the pool the GM is offered revolves around THIS character's power — the region supplies the cast,
   // the player's power supplies the mean, and a foe they have outgrown drops out unless it is special.
   const poolLines = eligibleEncountersFor(CONTENT.randomEncounters, loc, { power: characterPower(character, CONTENT.rules?.threat || {}) })
     .filter(e => !seeded.has(e.id))                              // don't duplicate a hand-seeded encounter
@@ -4805,7 +4805,7 @@ async function onChoice(choice) {
   // that was the root of "one action ended it in pure prose." The ENGINE escalates it, not the GM's memory of
   // rule 18. Erik's ruling: resolve the TARGET the player actually chose (c), and fall back to a hard directive
   // (b) when none resolves — inventing an opponent is worse than asking the GM to frame the one it just narrated.
-  // SNG-251 (Erik: "I used hunter's strike to kill veln... but it didn't launch me into a duel or fight — it just
+  // CCODE-54 (Erik: "I used hunter's strike to kill veln... but it didn't launch me into a duel or fight — it just
   // killed him when i succeeded in the roll"). The guard was `!activeEnc()` — no encounter at all. He was working
   // the SEALED DOOR at the time, so an encounter WAS active, the whole fight-entry hook was skipped, and the
   // killing blow fell through to one prose roll. That is the exact failure SNG-246 A exists to prevent, reached
@@ -8565,7 +8565,7 @@ const SB_DEFENSIVE = new Set(["shield", "ward", "resist", "conceal", "deceive"])
 /** SNG-247 Tier 2a: what the meter is CALLED in this contest — Momentum in a fight, Their Resolve in a standoff,
  *  Distance in a chase. Reads the same per-kind framing copy the frame strip's meter uses, so the receipt and the
  *  bar above it can never name the same number two different things. */
-// ---------- SNG-250 (Erik: "this is a sealed door right? not a stranger with feet") ----------
+// ---------- CCODE-53 (Erik: "this is a sealed door right? not a stranger with feet") ----------
 // The MECHANICS went per-kind in SNG-247/248; the VOCABULARY did not. Every string that names the other side was
 // written when there was only one kind — a fight — so a puzzle inherited "your opponent", "their crafts", "reads
 // THEM", "finds their intent and how much resolve is behind it". A door has no intent and no resolve.
@@ -8582,8 +8582,8 @@ const FIGHT_LEXICON = {
   senseHint: "Read them first — it costs the craft's energy, but it is NOT a free hit for them any more. Skip it to conserve.",
   actionHint: "Your real move this turn.",
 };
-/** SNG-250: the words for the kind you are actually in. Pure over the loaded content. */
-/** SNG-250: a step's hint, in the words of the kind you are in — falls back to the step's own fight phrasing. */
+/** CCODE-53: the words for the kind you are actually in. Pure over the loaded content. */
+/** CCODE-53: a step's hint, in the words of the kind you are in — falls back to the step's own fight phrasing. */
 function sbStepHint(step) {
   const L = sbLex();
   if (step?.key === "sense" && L.senseHint) return L.senseHint;
@@ -8834,7 +8834,7 @@ function skillBattlePanel() {
   // opened and a read bought the player nothing they could SEE. A read also buys the scouting tier.
   const oppReceipt = st.lastOppReceipt || ((sbLastRound?.opponent && st.round > 1) ? sbLastRound.opponent : null);
   const readScout = scout || !!st.lastReadWasSense;
-  // SNG-248 (Erik's ladder): a read that was actually ROLLED sets the tier from its degree — st.senseTierEarned.
+  // CCODE-51 (Erik's ladder): a read that was actually ROLLED sets the tier from its degree — st.senseTierEarned.
   // Absent a rolled read we fall back to the standing stat, so an unread fight still shows what you can see.
   const fog = oppReceipt ? senseOpponent(character, oppReceipt, CONTENT.rules, sb, { scouting: readScout, buyTier: readScout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods, earnedTier: st.senseTierEarned }) : null;
   const skills = playerBattleSkills();
@@ -8860,7 +8860,7 @@ function skillBattlePanel() {
   // — it should only allow skills that can sense." The SENSE step shows only sense-capable crafts + the generic
   // attribute reads; every other step shows the full set.
   const senseFns = CONTENT.skillBattle?.engine?.senseStep?.senseFunctions || ["reveal", "foresee", "track"];
-  // SNG-248 (Erik: "the skills you can use seem to be unfiltered... why does hunter's strike show up??? it should
+  // CCODE-51 (Erik: "the skills you can use seem to be unfiltered... why does hunter's strike show up??? it should
   // be mainly about movement, concealing, binding, sensing"). The step filter only knew about the SENSE step, so
   // every kind offered the whole kit on its action step — a knife-fighting craft as a way to win a footrace. Each
   // kind now names the verbs that can move ITS meter (content: kinds.<kind>.moveFunctions). Absent an entry the
@@ -9084,7 +9084,7 @@ async function sbResolveSense() {
   // persist what the read bought, so the fog — and every move's PRICE — survives the re-render
   character.activeEncounter.state.lastOppReceipt = rr.opponent || null;
   character.activeEncounter.state.lastReadWasSense = true;
-  // SNG-248 (Erik's ladder): what the READ EARNED — fail 0, partial 1, success 2, crit/decisive 3. Persisted so
+  // CCODE-51 (Erik's ladder): what the READ EARNED — fail 0, partial 1, success 2, crit/decisive 3. Persisted so
   // the fog reads the ROLL, not a standing stat, and so a botched read genuinely leaves you blinder this turn.
   character.activeEncounter.state.senseTierEarned = rr.senseTier ?? null;
   character.activeEncounter.state.senseResist = rr.senseResist || null;
@@ -9141,7 +9141,7 @@ async function sbExecuteTurn() {
     sbLastRound = { opponent: r.opponent };
     character.activeEncounter.state.lastOppReceipt = r.opponent || null;
     character.activeEncounter.state.lastReadWasSense = false;
-    character.activeEncounter.state.senseTierEarned = null;   // SNG-248: a read is SPENT when the turn resolves
+    character.activeEncounter.state.senseTierEarned = null;   // CCODE-51: a read is SPENT when the turn resolves
     sbLastRoundReceipt = sbRoundReceipt(r, d, (r.state?.momentum ?? 0) - 0, false);
     sbLogRound(enc, d, r, enc.state.momentum ?? 0, false);
     beats.push(`${label}: ${sbFightBeat(r, d, 0, false)}`);
@@ -9321,7 +9321,7 @@ function contestSheetFor(def) {
   if (!eng || !def || def.skillBattle === false) return null;
   if (def.type === "duel") return synthesizeOpponentSheet(def.opponent, eng);
   if (def.type === "puzzle" && eng.kinds?.puzzle) {
-    return synthesizeStaticSheet({ resist: def.resist ?? def.difficulty, tier: def.holdTier,   // SNG-250: the NUMERIC craft tier, not the bestiary word
+    return synthesizeStaticSheet({ resist: def.resist ?? def.difficulty, tier: def.holdTier,   // CCODE-53: the NUMERIC craft tier, not the bestiary word
       holdName: def.holdName || "it holds", give: def.give }, eng);
   }
   return null;

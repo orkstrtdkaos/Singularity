@@ -1,4 +1,4 @@
-// threat.js — SNG-249: the threat balance system.
+// threat.js — CCODE-52: the threat balance system.
 //
 // ERIK'S RULING (2026-08-01), which this module exists to implement:
 //   "A region should never really be only one level range... All of these things exist everywhere in the world —
@@ -12,7 +12,7 @@
 //   • a LOWER tail that falls below a relevance floor and stops being an encounter at all — unless something
 //     makes it special again (a variant, a quest, a swarm).
 //
-// Everything here is PURE and dial-driven. The band LABELS and the variant FICTION are Aevi's (SNG-249 authoring);
+// Everything here is PURE and dial-driven. The band LABELS and the variant FICTION are Aevi's (CCODE-52 authoring);
 // the defaults below are deliberately plain so they read as placeholders rather than as decisions.
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -20,7 +20,7 @@ const num = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
 
 // ---------- what the player is worth, on the same scale as threat ----------
 
-/** SNG-249 (Erik's call: "built power for the band readout, level for the world's mean"): an HONEST power number
+/** CCODE-52 (Erik's call: "built power for the band readout, level for the world's mean"): an HONEST power number
  *  from what the character actually IS — their sharpest attribute, their breadth, and the depth of their craft —
  *  not from their XP total. Two level-6 characters who built differently are different threats to take on, and the
  *  readout should say so. Returns a number on the THREAT scale, so power 55 ≈ an even fight with a threat-55 foe.
@@ -43,7 +43,7 @@ export function characterPower(character = {}, cfg = {}) {
 
 // ---------- the band: how this foe reads AGAINST YOU ----------
 
-// Plain defaults, awaiting Aevi's authored ladder (SNG-249). `atRatio` is threat/power — the point at or above
+// Plain defaults, awaiting Aevi's authored ladder (CCODE-52). `atRatio` is threat/power — the point at or above
 // which a foe reads as this rung. Ordered hardest-first so the first match wins.
 export const DEFAULT_BANDS = [
   { key: "flee",     atRatio: 2.50, label: "beyond you",        counsel: "Do not fight this. Run, hide, or find another road." },
@@ -54,7 +54,7 @@ export const DEFAULT_BANDS = [
   { key: "beneath",  atRatio: 0.00, label: "beneath notice",    counsel: "Not a fight. Something else would have to make this matter." },
 ];
 
-/** SNG-249: which rung this foe sits on FOR THIS CHARACTER. Relative by construction — the same warpling is a
+/** CCODE-52: which rung this foe sits on FOR THIS CHARACTER. Relative by construction — the same warpling is a
  *  real fight at level 5 and beneath notice at level 20, which is the whole point of Erik's model. `bands` comes
  *  from content when authored (Aevi), else the plain defaults. Pure. */
 export function threatBand(power, threat, bands = null) {
@@ -64,7 +64,7 @@ export function threatBand(power, threat, bands = null) {
   return { ...rung, ratio: Math.round(ratio * 100) / 100, power: num(power), threat: num(threat) };
 }
 
-/** SNG-249: is this foe worth being an encounter at all? Erik: "a boar at lvl 20 isn't really an encounter
+/** CCODE-52: is this foe worth being an encounter at all? Erik: "a boar at lvl 20 isn't really an encounter
  *  anymore, UNLESS it's a special encounter." So the floor RETIRES a foe that has fallen far below you — and
  *  `special` (a variant, a quest hook, a swarm) is exactly what puts it back on the table. Pure. */
 export function isRelevantThreat(power, threat, { special = false, cfg = {} } = {}) {
@@ -75,7 +75,7 @@ export function isRelevantThreat(power, threat, { special = false, cfg = {} } = 
 
 // ---------- the distribution: level sets the MEAN, both tails are real ----------
 
-/** SNG-249: draw a threat for an encounter around the player's power. Not a gate and not a ladder — a spread,
+/** CCODE-52: draw a threat for an encounter around the player's power. Not a gate and not a ladder — a spread,
  *  with a deliberately LONG upper tail so the thing you must run from genuinely turns up, and a lower bound at
  *  the relevance floor so the draw never wastes itself on a boar you have outgrown.
  *
@@ -101,17 +101,17 @@ export function sampleThreat(power, rng = Math.random, cfg = {}) {
 
 // ---------- variants: what makes an outgrown thing matter again ----------
 
-// Plain defaults awaiting Aevi's fiction (SNG-249). WHAT makes a thing warped in the Valley is lore, not code —
+// Plain defaults awaiting Aevi's fiction (CCODE-52). WHAT makes a thing warped in the Valley is lore, not code —
 // this is the mechanism, deliberately thin, so her axes drop straight in.
 export const DEFAULT_VARIANTS = {
   greater: { threatMultiplier: 1.8, healthMultiplier: 1.6, namePrefix: "Greater", note: "larger, older, and harder to put down" },
   // `rebaseToPowerRatio` is the "it is not really that creature any more" option — see applyVariant. Aevi decides
-  // which axes rebase and which merely multiply; these numbers are placeholders awaiting SNG-249 authoring.
+  // which axes rebase and which merely multiply; these numbers are placeholders awaiting CCODE-52 authoring.
   warped:  { threatMultiplier: 2.2, healthMultiplier: 1.3, rebaseToPowerRatio: 0.9, namePrefix: "Warped", note: "changed into something it was not meant to be" },
   swarm:   { threatMultiplier: 1.5, healthMultiplier: 2.0, namePrefix: "A press of", note: "not one of them — many" },
 };
 
-/** SNG-249: apply a variant AXIS to a base creature. The mechanism only — Aevi authors which axes exist, what they
+/** CCODE-52: apply a variant AXIS to a base creature. The mechanism only — Aevi authors which axes exist, what they
  *  mean, and which creatures take them. Returns a NEW entry (pure), tagged so downstream can tell a variant from
  *  a base creature, and marked `special` so the relevance floor lets it through however far you have outgrown the
  *  base. That is Erik's "unless it's a special encounter", made mechanical. */
@@ -119,7 +119,7 @@ export function applyVariant(entry = {}, axis, variants = null, { power = null }
   const table = variants || DEFAULT_VARIANTS;
   const v = table[axis];
   if (!v) return entry;
-  // SNG-249: a variant can work TWO ways, and which one is Aevi's call per axis.
+  // CCODE-52: a variant can work TWO ways, and which one is Aevi's call per axis.
   //   • MULTIPLY the base — a greater boar is a bigger boar. It becomes special (so it appears at all) but stays
   //     roughly a boar, which is right for "the same creature, more of it".
   //   • REBASE toward the player's power — the thing has been made into something else, and what it WAS barely

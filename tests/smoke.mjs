@@ -8174,7 +8174,7 @@ await (async () => {
     eligibleEncountersFor({ encounters: Array.from({ length: 20 }, (_, i) => ({ id: "x" + i, routing: "duel", flavor: "fight", minDanger: 0, weight: 1 })) }, loc231, { cap: 5 }).length === 5);
   const appSrc231 = readFileSync(join(root, "app.js"), "utf8");
   check("231 §3: listAvailableEncounters offers authored seeds AND the eligible pool (the two encounter systems now talk)",
-    // SNG-249: the call now carries the player's POWER (the pool revolves around it). The property this check
+    // CCODE-52: the call now carries the player's POWER (the pool revolves around it). The property this check
     // protects — seeds AND the eligible pool both reach the offer — is unchanged; only the signature moved.
     /eligibleEncountersFor\(CONTENT\.randomEncounters, loc(,|\))/.test(appSrc231) && /don't duplicate a hand-seeded/.test(appSrc231)
     && /power: characterPower\(character/.test(appSrc231));

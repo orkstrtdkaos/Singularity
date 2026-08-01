@@ -3,7 +3,7 @@
 // their attunement earns them. Pure functions; no I/O.
 
 import { spectrumAlignment } from "./resolve.js";
-import { characterPower, threatBand } from "./threat.js"; // SNG-249: the band is RELATIVE — the same foe reads differently at level 5 and level 20
+import { characterPower, threatBand } from "./threat.js"; // CCODE-52: the band is RELATIVE — the same foe reads differently at level 5 and level 20
 
 /** Determine the character's sense tier for this action.
  *  Attunement grows with level/ability use; matching the local spectrum sharpens the read;
@@ -54,7 +54,7 @@ export function senseAction(ctx, trueChance) {
  *  `oppRound` is the `opponent` receipt from battleRound. Pure. */
 export function senseOpponent(viewer, oppRound, rules, sb, { scouting = false, buyTier = 0, aptitudeMods = {}, earnedTier = null } = {}) {
   const maxTier = (rules?.senseTiers || []).reduce((m, t) => Math.max(m, t.tier), 0);
-  // SNG-248 (Erik's ladder): when a READ was actually rolled, its DEGREE sets what you learned — fail 0, partial
+  // CCODE-51 (Erik's ladder): when a READ was actually rolled, its DEGREE sets what you learned — fail 0, partial
   // 1, success 2, crit/decisive 3. It REPLACES the stat-derived tier rather than adding to it: a read is a thing
   // you DO, and a botched one should leave you blinder than not looking — which a floor would hide.
   let tier;
@@ -125,10 +125,10 @@ export function appraiseOpponent(character, def, oppSheet, rules, sb, content = 
   const theirTier = Math.max(0, ...((oppSheet?.skills || []).map(s => Number(s.tier) || 0)));
   const skill = APPR_REL(myTier, theirTier, tol);
   const threat = Number(def?.opponent?.threat) || 0;
-  // SNG-249 (Erik's model): the band is RELATIVE, not absolute. The old ladder read `threat >= 80 = deadly` for
+  // CCODE-52 (Erik's model): the band is RELATIVE, not absolute. The old ladder read `threat >= 80 = deadly` for
   // everyone — so the same warpling was "deadly" to a level-20 character, and the world could never tell you that
   // you had outgrown a thing, nor that what is in front of you is far beyond you. "Your level sets the mean about
-  // which the encounters revolve": the rung is threat ÷ YOUR power. Labels are Aevi's once authored (SNG-249).
+  // which the encounters revolve": the rung is threat ÷ YOUR power. Labels are Aevi's once authored (CCODE-52).
   const power = characterPower(character, content.power || {});
   const rung = threatBand(power, threat, content.threatBands || null);
   const band = rung.label;
@@ -137,7 +137,7 @@ export function appraiseOpponent(character, def, oppSheet, rules, sb, content = 
     : against === 1 ? "They have an edge on you. Winnable, but it will cost."
     : (skill === "low" && prowess === "low") ? "You have the better of them on both counts."
     : "An even contest.";
-  // SNG-249: on the hard rungs the BAND's counsel wins — "do not fight this" outranks a craft-vs-prowess compare,
+  // CCODE-52: on the hard rungs the BAND's counsel wins — "do not fight this" outranks a craft-vs-prowess compare,
   // and this is the line that has to stop a player walking into a death.
   const finalCounsel = ["flee", "dire"].includes(rung.key) ? (rung.counsel || counsel) : counsel;
   return { skill, prowess, disposition: dispositionOf(def, content), threat: band, threatScore: threat,

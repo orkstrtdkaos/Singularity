@@ -123,7 +123,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
     // CCODE-35/38: `effects` and `pressure` must ride BOTH ways — into the round (they modify this roll / carry the
     // count) and back out onto the encounter state. This hand-built state object is the seam where they'd drop.
     oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy,
-      // SNG-248: health rides BOTH ways, like effects and pressure before it — the same seam, the fourth time.
+      // CCODE-51: health rides BOTH ways, like effects and pressure before it — the same seam, the fourth time.
       opponentHealth: state.opponentHealth ?? def.opponent?.health ?? null, effects: state.effects || [], pressure: state.pressure || { player: 0, opponent: 0 } }, rules, sb, steps, rng,
     phase, tickEffects, setupBonus,
     // SNG-247: DERIVED here, never passed in. This wrapper has now silently eaten a forwarded option twice
@@ -165,7 +165,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const say = (t, fb) => (t ? String(t).replace(/\{them\}/g, def.opponent.name) : fb);
   if (r.resolved === "player") {
     s.status = "ended"; ended = true;
-    // SNG-248: a foe that is DOWN has fallen; one driven off by pressure while still standing has yielded. The old
+    // CCODE-51: a foe that is DOWN has fallen; one driven off by pressure while still standing has yielded. The old
     // line asked only "does this def have a yieldAt", so every contest reported "yields" — including one you won by
     // putting them down, which is why Erik could not find the kill.
     const hpLeft = s.opponentHealth;
@@ -184,7 +184,7 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   else events.push(r.roundWinner === "player" ? "You press the advantage." : r.roundWinner === "opponent" ? "You give ground." : "Neither gains an inch.");
   // CCODE-39: running dry is a STATE the player must be told about — their crafts stopped answering, and yielding
   // (or an energy item) is now a CHOICE in front of them rather than an ending the engine imposed.
-  // SNG-248: a landed blow is EVENT-VISIBLE. A hit the player cannot see is the same failure as a modifier they
+  // CCODE-51: a landed blow is EVENT-VISIBLE. A hit the player cannot see is the same failure as a modifier they
   // cannot see — "the strike didn't seem to land" was true, and also unreported when it did.
   if (r.damage) {
     const hpLeft = s.opponentHealth, of = def.opponent?.health;
@@ -303,7 +303,7 @@ export function puzzleAttempt(state, def, resolution, rules, opts = {}) {
 export function encounterReceiptForGM(state, def, resolution, roundResult) {
   const head = `ENCOUNTER — ${def.name} (${state.type}), round ${state.round}${state.status === "ended" ? " — ENDED: " + (roundResult?.outcome || "") : ""}`;
   let sides = "";
-  // SNG-250 (Erik: "this is a sealed door right? not a stranger with feet"). THIS LINE was the cause. It handed
+  // CCODE-53 (Erik: "this is a sealed door right? not a stranger with feet"). THIS LINE was the cause. It handed
   // the GM `Opponent: The Sealed Door — 5/5 hits. Opponent style: …` — a combatant with a hit track and a fighting
   // style — so the GM narrated a person: planted feet, a warding stance, a half-step back, "the two of you stand
   // in the cold mud." It did exactly what it was told. The receipt is per-KIND now, and for an unopposed thing it
@@ -324,7 +324,7 @@ IT IS NOT A PERSON. It has no stance, no footing, no face, no intent, and it doe
       sides = `Opponent: ${who}${hp} hits${state.tactic ? `, current tactic: ${state.tactic}` : ""}. Opponent style: ${(def.opponent?.tacticTags || []).join(", ")}.`;
     }
   }
-  // SNG-250: the CLASSIC-path lines only fire when the kind-shaped receipt above did NOT produce one. Otherwise a
+  // CCODE-53: the CLASSIC-path lines only fire when the kind-shaped receipt above did NOT produce one. Otherwise a
   // puzzle on the contest engine had its "it is not a person" instruction silently overwritten by the old attempts
   // line — which is this same bug, one layer deeper, and is why the first fix didn't take.
   if (!sides && state.type === "challenge") sides = `Progress: ${state.stagesDone.length}/${def.stages.length} stages (next: ${def.stages[state.stageIndex]?.name || "done"}).`;

@@ -27,7 +27,7 @@ export function matchupBonus(attackerFn, defenderFn, sb) {
 export function synthesizeOpponentSheet(opponent = {}, sb) {
   const syn = sb?.opponentSheetSynthesis || {};
   const threat = Number(opponent.threat) || 20;
-  // SNG-249 (Erik: "opponent stats need to not be capped like that. We need a threat system for the world that
+  // CCODE-52 (Erik: "opponent stats need to not be capped like that. We need a threat system for the world that
   // can handle all levels of play"). attributeCeiling 6 / tierCeiling 4 meant EVERY foe at threat ≥ 70 was
   // mechanically identical — an epic was no harder than a threat-70 raider, so the world had no upper tail and
   // "run from this" could never be the right answer. The ceilings are gone; the floors stay, and growth goes
@@ -388,7 +388,7 @@ export function degradeIfSpent(decl, energy, sb, steps, rules) {
  *  margins; the higher shifts momentum by the difference; both pay energy (attrition). The engine computes
  *  BOTH full rolls — the returned `opponent` receipt is complete and identical regardless of who's watching;
  *  the fog is applied later by senseOpponent over this true state. Pure; rng injectable. */
-/** SNG-248: what RESISTS being read. Their concealing craft when they have one (its tier is real opposition),
+/** CCODE-51: what RESISTS being read. Their concealing craft when they have one (its tier is real opposition),
  *  else a flat passive off their sharpest attribute — a foe who is not hiding is easier to read, which is right.
  *  Returns a NAMED value so it can sit on a breakdown like every other term. Pure. */
 export function senseResistOf(oppSheet = {}, sb) {
@@ -400,7 +400,7 @@ export function senseResistOf(oppSheet = {}, sb) {
   return { value: Math.round(best * (cfg.passiveAttributeWeight ?? 3)), label: "their natural guardedness", from: "passive" };
 }
 
-/** SNG-248 (Erik's ladder): the sense TIER is earned by the read's DEGREE — fail 0, partial 1, success 2, and a
+/** CCODE-51 (Erik's ladder): the sense TIER is earned by the read's DEGREE — fail 0, partial 1, success 2, and a
  *  crit (or a decisive margin) 3. Pure; every band is a content dial. */
 export function senseTierFromDegree(degree, margin, sb) {
   const cfg = sb?.senseStep?.tierByDegree || {};
@@ -504,7 +504,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // CCODE-39: energy no longer ENDS a fight. Running dry means your crafts stop answering (a spent side can only
   // make simple, costless moves — steel and wit), not that you lose. Yielding while spent is the player's call,
   // and an energy item is a real answer to it. The opponent breaking is still the engine's own end condition.
-  // SNG-248 (Erik: "the fight ends even though the strike didn't seem to land… I can't seem to actually
+  // CCODE-51 (Erik: "the fight ends even though the strike didn't seem to land… I can't seem to actually
   // wound/damage an opponent"). He was right, and it was structural: CCODE-38 replaced momentum-as-death with
   // PRESSURE and never put DAMAGE back, so opponentHealth was set at startEncounter and never moved again. A
   // skill battle had no wounds and no way to kill — it was a two-tick pressure race that reported "they yield"
@@ -559,7 +559,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // on a crit read — the bonus step. "It's the payoff." Both are content dials.
   if (phase === "sense") {
     const scale = turnCfg.setupBonusScale ?? 0.3, cap = turnCfg.setupBonusMax ?? 12;
-    // SNG-248 (Erik, decisive): "a Read/Sense should NOT depend on out-sensing them. It should depend on your
+    // CCODE-51 (Erik, decisive): "a Read/Sense should NOT depend on out-sensing them. It should depend on your
     // sense skill and all modifiers vs their relevant attribute/conceal skill and modifiers."
     // It DID depend on out-sensing them: `o.margin` is whatever the opponent declared that step — usually a
     // STRIKE — so reading a foe who was swinging meant beating their swing with your eyes. The read is now

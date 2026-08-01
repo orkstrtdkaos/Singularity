@@ -8,7 +8,7 @@
 // encounters.js unchanged. Any lethal-capable encounter is OFFERED with a decline
 // path built HERE (SNG-002b), not left to the model.
 
-import { sampleThreat, isRelevantThreat } from "./threat.js"; // SNG-249: the player power the pool revolves around
+import { sampleThreat, isRelevantThreat } from "./threat.js"; // CCODE-52: the player power the pool revolves around
 import { smartClamp } from "./namematch.js"; // SNG-229: word-boundary clamp for a synthesized creature's seed prose
 
 const PEACEFUL = ["beneficial", "benign", "beautiful"];
@@ -173,7 +173,7 @@ export function classifyNarrativeKind({ intentTags = [], why = "", hoursPassed =
  *  flooded. Pure. */
 export function eligibleEncountersFor(table, location, { cap = 8, power = null, rng = Math.random, threatCfg = {} } = {}) {
   const danger = dangerOf(location);
-  // SNG-249 (Erik): "your level sets the mean about which the encounters revolve." When the caller knows the
+  // CCODE-52 (Erik): "your level sets the mean about which the encounters revolve." When the caller knows the
   // player's power, the pool is drawn AROUND it: a target threat is sampled (a body plus a real upper tail), foes
   // you have outgrown are RETIRED unless something makes them special, and what is left is ordered by how near it
   // sits to the draw. Absent `power` this is the old danger-weighted pool, unchanged — so every existing caller
@@ -333,7 +333,7 @@ export function synthesizePuzzleDef(entry) {
     ...(entry.tier != null ? { tier: entry.tier } : {}), ...(entry.minDanger != null ? { minDanger: entry.minDanger } : {}),
     resist: Number.isFinite(entry.resist) ? entry.resist : (tierResist[entry.tier] ?? 18),
     holdName: entry.holdName || "it holds its order",
-    // SNG-250: the craft chip rendered "ward tnotable" because `tier` here is the BESTIARY tier (a word:
+    // CCODE-53: the craft chip rendered "ward tnotable" because `tier` here is the BESTIARY tier (a word:
     // riffraff/notable/regional/epic) while the sheet wants a NUMBER. Carry a numeric craft tier separately
     // rather than overloading one field with two vocabularies.
     holdTier: { riffraff: 1, notable: 2, regional: 3, epic: 4 }[entry.tier] || 2,

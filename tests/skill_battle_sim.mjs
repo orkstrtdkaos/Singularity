@@ -13,7 +13,7 @@ import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CC
 import { recordUse } from "../engine/practice.js";
 import { FRAME_KINDS, encounterKind, chaseFromFight, frameModel } from "../engine/encounterFrame.js";   // SNG-247: the kind list the colour gate checks
 import { synthesizeStandoffDef, synthesizePuzzleDef, frameExemplarEncounters, eligibleEncountersFor } from "../engine/random_encounters.js";
-import { characterPower, threatBand, isRelevantThreat, sampleThreat, applyVariant } from "../engine/threat.js";   // SNG-249
+import { characterPower, threatBand, isRelevantThreat, sampleThreat, applyVariant } from "../engine/threat.js";   // CCODE-52
 import { appraiseOpponent } from "../engine/sense.js";   // SNG-247 2a: the kind that never minted
 import { harmTargetFor } from "../engine/intent.js";   // SNG-246 Fix A: who the player committed harm against
 
@@ -119,7 +119,7 @@ check("SNG-098 B: yielding ends the contest via the classic lifecycle outcome", 
 // CCODE-38: a decisive swing no longer ENDS the fight — it is PRESSURE. Sustained domination does end it: once the
 // opponent has been driven back breakAtPressure times they break, and THAT maps to the classic duel outcome.
 const crush = skillBattleRound({ ...sbState, momentum: 9 }, duelDef, { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" }, { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
-// SNG-248 kept CCODE-38's ruling and added a SECOND, different one. Erik's rule was that a METER must not decide a
+// CCODE-51 kept CCODE-38's ruling and added a SECOND, different one. Erik's rule was that a METER must not decide a
 // fight — that still holds exactly. What ends a fight now is HEALTH at zero, which is not a meter; it is the wound
 // track he could not previously reach. So this check is made specific: with blood left, a decisive swing still
 // only PRESSURES. The kill is asserted separately, right below.
@@ -129,10 +129,10 @@ const crushHardy = skillBattleRound({ ...sbState, momentum: 9, opponentHealth: 4
   { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
 check("CCODE-38: a decisive swing PRESSURES rather than ends, while the foe still has blood (a meter must not decide a fight)",
   !crushHardy.ended && crushHardy.pressureEvent?.side === "opponent");
-check("SNG-248 (Erik: 'I can't seem to actually wound/damage an opponent'): that same swing now WOUNDS — and says so",
+check("CCODE-51 (Erik: 'I can't seem to actually wound/damage an opponent'): that same swing now WOUNDS — and says so",
   crushHardy.damage?.side === "opponent" && crushHardy.damage.amount > 0
   && crushHardy.state.opponentHealth < 40 && /LANDS/.test(crushHardy.events.join(" ")));
-check("SNG-248 (the exit he could not reach): health at zero ENDS it — an opponent can be put DOWN, not just driven off",
+check("CCODE-51 (the exit he could not reach): health at zero ENDS it — an opponent can be put DOWN, not just driven off",
   (() => {
     const frail = { ...duelDef, opponent: { ...duelDef.opponent, health: 1, yieldAt: 0 } };
     const out = skillBattleRound({ ...sbState, momentum: 9, opponentHealth: 1 }, frail,
@@ -140,7 +140,7 @@ check("SNG-248 (the exit he could not reach): health at zero ENDS it — an oppo
       { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
     return out.ended && out.outcome === "opponent_fell" && out.state.opponentHealth === 0;
   })());
-check("SNG-248: a TURNED-ASIDE blow does no damage — only the winner of the exchange wounds",
+check("CCODE-51: a TURNED-ASIDE blow does no damage — only the winner of the exchange wounds",
   (() => {
     const out = skillBattleRound({ ...sbState, opponentHealth: 40 }, hardyDef,
       { function: "strike", tier: 1, attribute: "practical", intensity: "conserve", name: "a poke" },
@@ -857,26 +857,26 @@ check("SNG-247: the OLD escaper would have failed that same round-trip (the chec
     return esc2(JSON.stringify({ label: "Hunter's Strike" })).includes("'");
   })());
 
-// ---- SNG-249: THREAT BALANCE — level sets the MEAN, region sets the CAST ----
+// ---- CCODE-52: THREAT BALANCE — level sets the MEAN, region sets the CAST ----
 // Erik: "a lvl 5 in Millbrook will fight boars... when they come back at lvl 15 the monster is easy to slay...
 // a boar at lvl 20 isn't really an encounter anymore, unless it's a special encounter."
 const lvl5 = { attributes: { physical: 3, mental: 3, practical: 3, social: 2 }, abilities: [{ level: 1 }] };
 const lvl20 = { attributes: { physical: 9, mental: 8, practical: 9, social: 6 }, abilities: [{ level: 5 }, { level: 4 }, { level: 4 }] };
 const p5 = characterPower(lvl5, {}), p20 = characterPower(lvl20, {});
-check("SNG-249: built power, not level — a character who built deep reads as a bigger threat-taker",
+check("CCODE-52: built power, not level — a character who built deep reads as a bigger threat-taker",
   p20 > p5 * 2 && characterPower({ attributes: { physical: 9 }, abilities: [{ level: 5 }] }, {}) > characterPower({ attributes: { physical: 3 }, abilities: [{ level: 5 }] }, {}));
-check("SNG-249 (the one that matters): the SAME foe reads differently at two levels — the band is relative",
+check("CCODE-52 (the one that matters): the SAME foe reads differently at two levels — the band is relative",
   threatBand(p5, 45).key === "even" && threatBand(p20, 45).key === "beneath");
-check("SNG-249: Erik's Millbrook arc — the thing you fled at 5 is a real fight at 20, and there is STILL something beyond you",
+check("CCODE-52: Erik's Millbrook arc — the thing you fled at 5 is a real fight at 20, and there is STILL something beyond you",
   threatBand(p5, 180).key === "flee" && threatBand(p20, 180).key === "even" && threatBand(p20, 900).key === "flee");
-check("SNG-249: the ceilings are GONE — a threat-300 foe is genuinely harder than a threat-70 one",
+check("CCODE-52: the ceilings are GONE — a threat-300 foe is genuinely harder than a threat-70 one",
   (() => {
     const a = synthesizeOpponentSheet({ threat: 70 }, sb), b = synthesizeOpponentSheet({ threat: 300 }, sb);
     return b.attributes.physical > a.attributes.physical && b.skills[0].tier > a.skills[0].tier && b.energy > a.energy;
   })());
-check("SNG-249: a boar you have outgrown stops being an encounter — UNLESS something makes it special",
+check("CCODE-52: a boar you have outgrown stops being an encounter — UNLESS something makes it special",
   !isRelevantThreat(p20, 20, {}) && isRelevantThreat(p20, 20, { special: true }));
-check("SNG-249: a variant makes an outgrown thing appear, and a REBASING axis makes it matter again",
+check("CCODE-52: a variant makes an outgrown thing appear, and a REBASING axis makes it matter again",
   (() => {
     const boar = { opponent: { name: "boar", threat: 20, health: 4 } };
     const greater = applyVariant(boar, "greater", null, { power: p20 });
@@ -885,7 +885,7 @@ check("SNG-249: a variant makes an outgrown thing appear, and a REBASING axis ma
       && warped.opponent.threat > greater.opponent.threat
       && threatBand(p20, warped.opponent.threat).key !== "beneath";
   })());
-check("SNG-249: the draw is a DISTRIBUTION with both tails — mostly a real fight, sometimes something to run from",
+check("CCODE-52: the draw is a DISTRIBUTION with both tails — mostly a real fight, sometimes something to run from",
   (() => {
     let x = 7; const rng = () => ((x = (x * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
     const keys = {};
@@ -893,14 +893,14 @@ check("SNG-249: the draw is a DISTRIBUTION with both tails — mostly a real fig
     const flee = (keys.flee || 0) + (keys.dire || 0);
     return (keys.even || 0) / 3000 > 0.4 && flee / 3000 > 0.02 && flee / 3000 < 0.30;   // a real tail, not a treadmill
   })());
-check("SNG-249: the appraisal COUNSEL escalates on the hard rungs — the line that stops a walk into a death",
+check("CCODE-52: the appraisal COUNSEL escalates on the hard rungs — the line that stops a walk into a death",
   (() => {
     const def = { opponent: { name: "x", threat: 900 } };
     const a = appraiseOpponent(lvl20, def, synthesizeOpponentSheet(def.opponent, sb), rules, sb, {});
     return /run|escape|do not/i.test(a.counsel) && a.band.key === "flee" && a.power === p20;
   })());
 
-// ---- SNG-250 (Erik: "this is a sealed door right? not a stranger with feet") ----
+// ---- CCODE-53 (Erik: "this is a sealed door right? not a stranger with feet") ----
 // The mechanics went per-kind; the VOCABULARY did not, so a puzzle inherited "your opponent / their crafts /
 // finds their intent and how much resolve is behind it". The GM was then HANDED a combatant and narrated one:
 // planted feet, a warding stance, "the two of you stand in the cold mud". That receipt line was the cause.
@@ -908,16 +908,16 @@ const doorDef250 = { id: "d250", type: "puzzle", name: "The Sealed Door", hintTi
   opponent: { name: "The Sealed Door", health: 5 } };
 const gmSaw = encounterReceiptForGM({ type: "puzzle", mode: "skill_battle", round: 2, opponentHealth: 4, hintsRevealed: 1, status: "active" },
   doorDef250, null, { events: [] });
-check("SNG-250 (the one that matters): the GM is TOLD a sealed thing is not a person — no stance, no intent, no attack",
+check("CCODE-53 (the one that matters): the GM is TOLD a sealed thing is not a person — no stance, no intent, no attack",
   /NOT A PERSON/i.test(gmSaw) && /no stance/i.test(gmSaw) && /does not attack/i.test(gmSaw)
   && !/Opponent style/i.test(gmSaw));
-check("SNG-250: a FIGHT's receipt is unchanged — it still gets an opponent with hits and a style",
+check("CCODE-53: a FIGHT's receipt is unchanged — it still gets an opponent with hits and a style",
   (() => {
     const f = encounterReceiptForGM({ type: "duel", mode: "skill_battle", round: 2, opponentHealth: 3, status: "active" },
       { name: "A Hostile Meeting", flavor: "fight", type: "duel", opponent: { name: "the raider", health: 5, tacticTags: ["press-in"] } }, null, {});
     return /Opponent: the raider/.test(f) && /Opponent style/.test(f);
   })());
-check("SNG-250: a chase reads as ground and breath, a standoff as will with nobody hurt",
+check("CCODE-53: a chase reads as ground and breath, a standoff as will with nobody hurt",
   (() => {
     const c = encounterReceiptForGM({ type: "duel", mode: "skill_battle", round: 1, status: "active" },
       { name: "The Chase", type: "duel", flavor: "chase", opponent: { name: "the raider", health: 5 } }, null, {});
@@ -925,29 +925,29 @@ check("SNG-250: a chase reads as ground and breath, a standoff as will with nobo
       { name: "The Standoff", type: "duel", flavor: "standoff", opponent: { name: "the toll-keeper", health: 5 } }, null, {});
     return /GROUND and BREATH/.test(c) && /not blades/.test(c) && /NOBODY IS HURT/.test(so);
   })());
-check("SNG-250: every kind that needs its own words HAS them, and a fight keeps the default",
+check("CCODE-53: every kind that needs its own words HAS them, and a fight keeps the default",
   ["puzzle", "chase", "standoff"].every(k => sb.kinds[k]?.lexicon?.other)
   && !sb.kinds.fight?.lexicon);
-check("SNG-250: the craft chip no longer prints 'ward tnotable' — a numeric craft tier, not the bestiary word",
+check("CCODE-53: the craft chip no longer prints 'ward tnotable' — a numeric craft tier, not the bestiary word",
   (() => {
     const e = (liveKinds.exemplarEncounters || []).find(x => x.kind === "puzzle" && x.tier);
     const d = synthesizePuzzleDef(e);
     return typeof d.holdTier === "number" && d.holdTier > 0;
   })());
 
-// ---- SNG-251 (Erik: "I used hunter's strike to kill veln... but it didn't launch me into a duel or fight") ----
+// ---- CCODE-54 (Erik: "I used hunter's strike to kill veln... but it didn't launch me into a duel or fight") ----
 // The SNG-246-A guard was `!activeEnc()` — no encounter AT ALL. He was working the SEALED DOOR at the time, so an
 // encounter WAS active, the whole fight-entry hook was skipped, and a killing blow fell through to ONE prose roll.
 // The question was never "is anything active" but "am I already fighting THIS person".
 const appSrc251 = readFileSync(join(root, "app.js"), "utf8");
-check("SNG-251: the fight-entry hook no longer gives up merely because SOME encounter is active",
+check("CCODE-54: the fight-entry hook no longer gives up merely because SOME encounter is active",
   !appSrc251.includes("if (choice.intentRung && !activeEnc())")
   && /if \(choice\.intentRung\) \{/.test(appSrc251));
-check("SNG-251 (the property): it skips only when you are ALREADY fighting that same person",
+check("CCODE-54 (the property): it skips only when you are ALREADY fighting that same person",
   /alreadyFightingThem/.test(appSrc251)
   && /encounterKind\(encNow\.def\) === "fight"/.test(appSrc251)
   && /if \(!alreadyFightingThem\)/.test(appSrc251));
-check("SNG-251: turning on someone mid-puzzle CLEARS the bounded thing — the fight is what you are in now",
+check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the fight is what you are in now",
   /if \(encNow\) character\.activeEncounter = null;/.test(appSrc251));
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

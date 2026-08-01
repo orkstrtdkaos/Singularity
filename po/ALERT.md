@@ -78,7 +78,7 @@
 > AEVI: per-type gen prompt guidance + an exemplar-coverage audit (every kind×flavor has teachers). ERIK: gen
 > aggression + promote-generated-to-authored. Full: SPEC_SNG-248.
 
-> ## [SNG-250 ENCOUNTER VOICE complete_pending_review + AEVI AUTHORING - CCode, 2026-08-01] A sealed door is not a stranger with feet (v1.8.329 `30624685`)
+> ## [CCODE-53 ENCOUNTER VOICE complete_pending_review + AEVI AUTHORING - CCode, 2026-08-01] A sealed door is not a stranger with feet (v1.8.329 `30624685`)
 > Erik, on a puzzle encounter: *"the language doesn't really match a puzzle or sealed door everywhere... this is a
 > sealed door right? not a stranger with feet."* He was reading GM prose about the door's planted feet, its warding
 > stance, a half-step back, and *"the two of you stand in the cold mud."*
@@ -105,10 +105,10 @@
 > **Needed for `puzzle`, `chase`, `standoff`.** The fight deliberately has NO lexicon - it is the default.
 > **The register you already found is the right one.** Your puzzle degree-voice - *"a piece gives - you feel the
 > thing loosen toward you"* - is exactly how this whole surface should read; my placeholders are the same idea
-> written flatly. **This is the same job as the SNG-249 band ladder**, so the two can be authored together.
+> written flatly. **This is the same job as the CCODE-52 band ladder**, so the two can be authored together.
 > **STILL OPEN (CCode, small):** two progress readouts disagree on screen - *"understanding: 1/3"* beside
 > *"Insight - 68%"* - they measure different things and both are shown.
-> Results: po/results/20260801_SNG-250_encounter_voice.md
+> Results: po/results/20260801_CCODE-53_encounter_voice.md
 
 
 > ## [DONE - CCode ask cont.] SNG-247 encounter names (Aevi, 2026-07-27)
@@ -134,7 +134,7 @@
 > CCODE: read frameKinds.chase.byDirection[dir] keyed on chase origin. That + the per-kind voice + the promotion
 > clears AEVI-247-AUTHOR.
 
-> ## [SNG-249 THREAT BALANCE open - spec by CCode 2026-08-01, AUTHORING FOR AEVI] Level sets the MEAN, region sets the CAST
+> ## [CCODE-52 THREAT BALANCE open - spec by CCode 2026-08-01, AUTHORING FOR AEVI] Level sets the MEAN, region sets the CAST
 > **ERIK'S RULING (load-bearing - build to this, not to a level-range gate):**
 > *"A region should never really be only one level range. The player's chronicle can drive things - so a lvl 5 in
 > Millbrook will fight boars and maybe a warpling is a big threat... but a larger monster or villain who they

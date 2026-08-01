@@ -1,0 +1,44 @@
+{
+ "schemaVersion": 1,
+ "id": "encounter_ribbon_copy",
+ "kind": "content",
+ "note": "SNG-252 §2b/§2c (Aevi 2026-08-01): the unified-ribbon copy - the connective strings CCode needs when it folds the whole engaged encounter into ONE enc-frame container. The flavor 'watch for' line becomes the ribbon SUBTITLE (not orphaned between panels); the moves get an in-ribbon header; the freeform line stays. Voice: spare, present-tense, the ribbon speaks the encounter as one object.",
+ "subtitle": {
+  "note": "the SNG-247 'watch for' flavor line, folded in UNDER the header as the ribbon's subtitle (was orphaned between the frame and the moves panel). Per-kind, short.",
+  "byKind": {
+   "fight": "a real fight — it can hurt you; the meter is blood",
+   "chase": "wind and ground — losing costs breath, not blood; break contact to win",
+   "standoff": "a contest of will — it cannot hurt you, however badly it goes; their resolve is the meter",
+   "puzzle": "a sealed thing — understood, not beaten; win the read and a layer gives",
+   "hazard": "hard ground — the fast one; a short brutal crossing, cross it before it costs you"
+  }
+ },
+ "movesHeader": {
+  "note": "the in-ribbon header for the moves section (replaces the separate panel's hint). Present when the ribbon is engaged.",
+  "text": "Your moves — grouped by what they do. Or describe your own below; the {kind} rules bind either way.",
+  "waysOutLabel": "ways out",
+  "thisEncounterLabel": {
+   "fight": "this fight",
+   "chase": "this chase",
+   "standoff": "this standoff",
+   "puzzle": "this puzzle",
+   "hazard": "this crossing"
+  }
+ },
+ "freeform": {
+  "note": "the freeform-cue line stays IN the ribbon - moves are shortcuts to intent, never a cage.",
+  "text": "▸ {freeform} — or pick a move above; type anything and the {kind} resolves it against the stage.",
+  "shortcutNote": "the moves are shortcuts; a typed move routes through the same rules."
+ },
+ "wardDisabled": {
+  "note": "a move the encounter FORBIDS (SNG-230 §7b ward) reads disabled-with-reason IN the moves, not offered-then-refused.",
+  "text": "{ability} — warded here: {reason}"
+ },
+ "collapse": {
+  "note": "the ⚙ still collapses the moves for space; default is SHOWN when engaged (Erik's intent).",
+  "openLabel": "⚙ hide moves",
+  "closedLabel": "⚙ moves",
+  "openByDefault": true
+ },
+ "howCCodeUses": "When the ribbon is engaged (§2b), render as ONE enc-frame: header → subtitle (byKind) → win/meter/receipt → exits → movesHeader + the grouped moves (SNG-252 §2c, hints from encounter_move_hints.json) → freeform. The moves are open by default; ⚙ collapses. No separate moves-panel append - it's all inside the one container."
+}

@@ -465,14 +465,29 @@
      "note": "what changes if they do - the reward"
     }
    ],
-   "concrete": {
-    "pressure": "someNumeric",
-    "tendency": {
-     "rule": "enum",
-     "source": "arc-tendency-vocab"
+   "concrete": [
+    {
+     "id": "pressure-numeric",
+     "rule": "someNumeric",
+     "field": "pressure",
+     "keys": [
+      "magnitude",
+      "value",
+      "strength",
+      "x",
+      "y"
+     ],
+     "severity": "DEGRADED",
+     "why": "SNG-250 §3 ARC: 'the pressure is a real directional force'. The net-vector (SNG-203) needs a numeric push, not a mood word - an arc whose pressure is only 'something stirs' can't advance."
     },
-    "hingeNpcs": "nonEmptyArray"
-   },
+    {
+     "id": "hinges-present",
+     "rule": "nonEmptyArray",
+     "field": "hingeNpcs",
+     "severity": "DEGRADED",
+     "why": "SNG-250 §3 ARC: hingeNpcs are the handles the arc turns on. An arc with no hinge-npcs is an arc with nothing to grab - it drives nothing and the player can't engage it."
+    }
+   ],
    "note": "SNG-250 §3/§5 (Aevi 2026-08-01): the arc contract - arc generates today but had NO contract, so the born-whole gate didn't cover the one live generator (boot said so). Grounded in the real SNG-203 net-vector reads. A whole arc DRIVES (has a real pressure/tendency) and RESOLVES (ifIgnored/ifEngaged are its stakes)."
   }
  },

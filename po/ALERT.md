@@ -1,5 +1,38 @@
 # PO ALERT
 
+> ## [AEVI-247-AUTHOR open - for Aevi, raised by CCode 2026-07-31] The per-kind voice + tuning behind SNG-247
+> **Nothing here blocks CCode.** Tiers 2-4 ship with code-owned DEFAULTS for every field below, and every default is
+> deliberately plain so it reads as a placeholder rather than a decision. This is the judgment-heavy half: the voice,
+> and the choices a simulation cannot settle. Author into
+> `content/packs/core/rules/skill_battle_system.json` -> `engine.kinds.<kind>` (the block exists, `fight` is the
+> worked example, and `dialDiscipline` in it explains what NOT to author).
+> **1. PRESSURE PROSE, per kind, per side** (`pressureLabel: {player, opponent}`). Two clauses, not one phrase with
+> the subject swapped - "they open the gap" and "you lose ground" are different sentences. `{them}` interpolates the
+> other side's name. Needed for **chase, standoff, puzzle**. This is the line the player reads every time the meter
+> fills, so it carries the whole feel of what that kind of losing IS.
+> **2. OUTCOME WORDS** (`outcomes: {playerPrevails, playerOvercome}`). Today every win says *"You prevail - X breaks"*
+> because the only kind was a fight. A standoff does not "break" and a chase does not "fall". CCode's defaults are
+> literal and flat on purpose.
+> **3. THE COST CURRENCY** (`playerLoss` / `opponentLoss` as `{health, energy}`) - **a ruling, not a number.** CCode's
+> read: a chase takes WIND (energy, no health), a standoff takes COMPOSURE and **cannot hurt you at all** (health 0
+> always), a puzzle takes only the effort of trying again. If a standoff should be able to cost blood - a toll-keeper
+> who draws - say so and it becomes a MORPH into a fight instead, which is a different (better) mechanic.
+> **4. WHICH STEP CARRIES THE WEIGHT, per kind** - the anti-sameness dial, and **the most important item here.** If
+> all five kinds become the same five-step turn, the variety is cosmetic and every encounter just got longer. CCode's
+> read, for you to overrule: a **puzzle's** sense step is the whole game (insight IS the meter); a **chase's** is
+> near-worthless (no time to read); a **standoff's** payoff is the BONUS action (where reading them cashes out); a
+> **fight** uses all three; a **hazard** stays the fast one (Erik's ruling - a 3-stage cliff as three five-step turns
+> is worse pacing, not better).
+> **5. WHAT `threat` MEANS FOR A NON-VIOLENT ANTAGONIST.** A toll-keeper's threat is RESOLVE and a pursuer's is
+> ENDURANCE, but both currently synthesize a sheet full of strike crafts via `synthesizeOpponentSheet`. Either author
+> `opponent.skills[]` on the standoff/chase exemplars (the authored path already overrides synthesis), or give
+> `opponentSheetSynthesis` a per-kind craft vocabulary.
+> **6. CARRIED FROM CCODE-43:** a thrown item still resolves as a plain tier-2 strike - acid and a rock are identical.
+> Wants a `combat` block on item content. Same authoring pass, same file family.
+> **Context:** po/results/20260731_SNG-247_Tier0-1_kind_colours_and_exit_rule.md - the survey, the opposed/unopposed
+> split, and why the fight deliberately authors no costs.
+
+
 > ## [SNG-247 TIER 0+1 complete_pending_review - CCode, 2026-07-31] The frame knows what kind of thing it is (v1.8.318 `6c34c904`)
 > Erik: *"morph the other encounter types similarly as the fight... but put a different colour border around them -
 > a chase could be yellow or orange, a puzzle blue or purple. Let's think this through."* Thought through, Tiers 0

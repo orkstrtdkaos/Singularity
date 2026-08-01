@@ -18,7 +18,8 @@ import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
-import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";   // SNG-250 §4: the born-whole gate + which types it covers
+import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
+import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
@@ -8870,8 +8871,6 @@ let sbDetailOpen = false;      // SNG-252b §2c: the tucked turn-detail (intensi
 // SNG-246 (Erik: "no rolls, no opposed rolls or descriptions… ended inexplicably"): a per-round MECHANICAL line
 // for the skill battle — names YOUR move and THEIRS, the interaction (blades lock / turned aside / you slip it),
 // who took the exchange, and the momentum swing. Engine-generated (no per-round GM call), so every round is legible.
-const SB_VERB = { strike: "strike", break: "shatter at", hinder: "hamper", shield: "guard", ward: "ward", resist: "brace", reveal: "read", foresee: "foresee", track: "track", conceal: "slip aside", deceive: "feint", command: "command", bind: "bind", move: "reposition", travel: "reposition", open: "open a way", heal: "steady", mend: "mend", restore: "restore", empower: "empower", make: "conjure", transform: "reshape", summon: "call", sustain: "hold" };
-const SB_DEFENSIVE = new Set(["shield", "ward", "resist", "conceal", "deceive"]);
 /** SNG-247 Tier 2a: what the meter is CALLED in this contest — Momentum in a fight, Their Resolve in a standoff,
  *  Distance in a chase. Reads the same per-kind framing copy the frame strip's meter uses, so the receipt and the
  *  bar above it can never name the same number two different things. */
@@ -8950,28 +8949,12 @@ function fogLadderLine(fog) {
              : `A read buys +${buys} tier — not enough here. Their math needs tier 3, so it takes a sharper sense (a reveal/foresee craft, or a higher Insight) as well as reading them.`);
 }
 
+/** SNG-246 receipt — a thin adapter now. The whole builder moved to engine/roundreceipt.js so it could be
+ *  TESTED: it was untestable in here, which is exactly how it shipped a line that reported every round of
+ *  every fight as "neither gains — it's even". tests/contest_sim.mjs Monte-Carlos it now. */
 function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
-  const meterMax = CONTENT.skillBattle?.engine?.momentum?.meterMax ?? 16;
-  const mWord = sbMeterWord();
-  const after = rr.state?.momentum ?? beforeMom, swing = after - beforeMom;
-  const oVerb = rr.oppDecl?.function || "press in", pVerb = playerDecl.function;
-  const oPhrase = SB_VERB[oVerb] || oVerb;
-  const gain = swing > 0.5 ? "you take the exchange" : swing < -0.5 ? "they take the exchange" : "neither gains — it's even";
-  const enBit = rr.deltas?.energy ? ` · you ${rr.deltas.energy}e` : "";
-  const hpBit = (rr.deltas?.health || 0) < 0 ? ` · you −${Math.abs(rr.deltas.health)} hp` : "";
-  const prox = after >= meterMax * 0.7 ? " · they're nearly done" : after <= -meterMax * 0.7 ? " · you're nearly overcome" : "";
-  // CCODE-35: name what STUCK. An effect that lands silently is the same failure as a round that resolves
-  // silently — the player has to see the thing their move left standing.
-  const fxBit = (rr.landed || []).map(f => ` · ${f.from === "player" ? "you gain" : "they gain"} ${f.label} ${f.value >= 0 ? "+" : ""}${f.value} for ${f.roundsLeft} round${f.roundsLeft === 1 ? "" : "s"}`).join("");
-  if (scouting) return `👁 You read them — they ${oPhrase}. You give nothing away. ${mWord} ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${prox}${fxBit}`;
-  const pDef = SB_DEFENSIVE.has(pVerb), oDef = SB_DEFENSIVE.has(oVerb);
-  const interaction = pDef && !oDef ? `they ${oPhrase} — you turn it aside`
-    : !pDef && oDef ? `they ${oPhrase} — your blow is turned aside`
-    : !pDef && !oDef ? `they ${oPhrase} — the blows meet and both scatter`
-    : `they ${oPhrase} — you both circle, testing`;
-  // CCODE-37: a woven round says so — you did two things in one turn, and it cost you for both.
-  const wov = playerDecl.woven ? ` ⋈ woven with ${playerDecl.woven.name}` : "";
-  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name}${wov} · ${interaction} · ${gain} · ${mWord} ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}${fxBit}`;
+  return receiptLine({ rr, playerDecl, beforeMom, scouting,
+    meterWord: sbMeterWord(), meterMax: CONTENT.skillBattle?.engine?.momentum?.meterMax ?? 16 });
 }
 
 // CCODE-36 (Erik): one round as a compact line for the END-OF-FIGHT narration. This is the GM's raw material for
@@ -8979,8 +8962,11 @@ function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
 // in plain terms, not the full telemetry (that's the machine tab's job).
 function sbFightBeat(rr, decl, beforeMom, scouting) {
   const deg = (rr.player?.degree || "").replace("_", " ");
-  const after = rr.state?.momentum ?? beforeMom, swing = after - beforeMom;
-  const who = swing > 0.5 ? "you gained" : swing < -0.5 ? "they gained" : "neither gained";
+  // Shares roundVerdict with the receipt instead of re-deriving the same comparison. This WAS a second copy
+  // of that logic — which is how the two could drift into telling the player and the GM different stories
+  // about one round, and the GM narrates from this beat.
+  const { verdict } = roundVerdict(beforeMom, rr.state?.momentum);
+  const who = verdict === "player" ? "you gained" : verdict === "opponent" ? "they gained" : "neither gained";
   const hurt = (rr.deltas?.health || 0) < 0 ? `, you took ${Math.abs(rr.deltas.health)} damage` : "";
   const stuck = (rr.landed || []).map(f => `${f.from === "player" ? "you" : "they"} gained ${f.label}`).join("; ");
   const mine = scouting ? `you read them (${deg})` : `you used ${decl.name} — a ${decl.function} at ${decl.intensity} (${deg})`;

@@ -3,3 +3,10 @@ node_modules/
 *.log
 .DS_Store
 Thumbs.db
+
+# live GM suite: the API key + its generated reports never enter git
+.claude/anthropic_key
+tests/live_report.json
+tests/live_report.md
+world_projection.json
+world_projection.svg

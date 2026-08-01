@@ -19,8 +19,8 @@
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { battleRound, opponentPolicy, synthesizeOpponentSheet } from "../engine/skill_battle.js";
 import { receiptLine, roundVerdict } from "../engine/roundreceipt.js";
+import { oneFight as harnessFight, mulberry32 } from "./lib/fightharness.mjs"; // ONE fight loop, shared with tradition_matrix
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -33,9 +33,6 @@ const ok = m => console.log("ok    " + m);
 const fail = m => { console.log("FAIL  " + m); failures++; };
 const check = (label, cond, detail = "") => cond ? ok(label) : fail(label + (detail ? " — " + detail : ""));
 const pct = (n, d) => d ? Math.round((n / d) * 1000) / 10 : 0;
-
-/** Seeded RNG so a failure reproduces exactly (the playthrough-sim's mulberry32). */
-function mulberry32(a) { return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 
 // ---------- the cast: a player kit spanning the function families, across threat bands ----------
 const PLAYER_MOVES = [
@@ -53,45 +50,9 @@ const playerSheet = (level = 5) => ({
   energy: 120, health: 50, maxHealth: 50
 });
 
-/** Fight one contest to resolution (or the cap) with the REAL engine, collecting per-round telemetry —
- *  including the receipt line the player would actually have read. */
-function oneFight(threat, rng, { maxRounds = 40 } = {}) {
-  const oppSheet = synthesizeOpponentSheet({ name: "them", threat }, sb);
-  const def = { name: "a contest", type: "duel", opponent: { name: "them", health: 6, threat, yieldAt: 1 } };
-  let state = { round: 1, momentum: 0, playerEnergy: 120, opponentEnergy: oppSheet.energy, effects: [], pressure: { player: 0, opponent: 0 }, opponentHealth: 6 };
-  // THE PLAYER'S HEALTH IS THE CALLER'S TO APPLY. battleRound reports the player's damage and never writes it
-  // ("the PLAYER's health is the app's to apply — checkIncapacitation owns that exit"), so a harness that
-  // forgets to apply it simulates an IMMORTAL player. The first run of this sim did exactly that and reported
-  // a 100% win rate at three of four threat bands — the sim's own bug, caught by its own assertion, which is
-  // the argument for having the assertion. Mirrored from encounters.js: a pressure event on the player costs
-  // health, and a landed harm move costs `damage.amount`.
-  const cfg = sb.momentum?.pressure || {};
-  let playerHealth = playerSheet().health;
-  const rounds = [];
-  for (let i = 0; i < maxRounds; i++) {
-    const decl = { ...PLAYER_MOVES[Math.floor(rng() * PLAYER_MOVES.length)] };
-    const oppDecl = opponentPolicy(oppSheet, state, null, sb);
-    const before = state.momentum;
-    let rr;
-    try {
-      rr = battleRound({ state, playerSheet: { ...playerSheet(), health: playerHealth }, oppSheet, playerDecl: decl, oppDecl, sb, steps, rules, rng, phase: "action", tickEffects: true });
-    } catch (e) { return { rounds, error: e.message }; }
-    if (rr.damage?.side === "player") playerHealth -= rr.damage.amount || 0;
-    if (rr.pressureEvent?.side === "player") playerHealth -= rr.pressureEvent.healthLoss ?? cfg.playerHealthLoss ?? 3;
-    const after = rr.state?.momentum ?? before;
-    const line = receiptLine({ rr: { ...rr, oppDecl }, playerDecl: decl, beforeMom: before, meterWord: "momentum", meterMax: sb.momentum?.meterMax ?? 16 });
-    const downed = playerHealth <= 0;   // the player's real exit (checkIncapacitation's, mirrored)
-    // The verdict is read BACK OUT OF THE EMITTED LINE, not recomputed from roundVerdict. Recomputing tests
-    // the helper; the bug was in what the line SAID. Verified by re-introducing the real regression: with the
-    // verdict recomputed, only the anti-theater fixture caught it and 2700 sampled rounds sailed through.
-    // Assert on the artifact the player actually reads.
-    const said = /neither gains/.test(line) ? "even" : /you take the exchange/.test(line) ? "player" : /they take the exchange/.test(line) ? "opponent" : "?";
-    rounds.push({ before, after, verdict: said, engineVerdict: roundVerdict(before, after).verdict, roundWinner: rr.roundWinner, line,
-      resolved: downed ? "opponent" : rr.resolved, pressure: { ...rr.pressure }, opponentHealth: rr.opponentHealth, playerHealth });
-    state = rr.state;
-    if (rr.resolved || downed) break;
-  }
-  return { rounds, resolvedBy: rounds[rounds.length - 1]?.resolved || null };
+/** Fight one contest with the SHARED harness — same loop tradition_matrix drives. */
+function oneFight(threat, rng) {
+  return harnessFight({ threat, moves: PLAYER_MOVES, sheet: playerSheet(), sb, steps, rules, rng });
 }
 
 console.log("CONTEST SIM — distributional truth about the round engine\n");

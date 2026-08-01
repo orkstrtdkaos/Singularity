@@ -102,7 +102,8 @@
      "read": "SNG-238 §3b decision art",
      "optional": true
     }
-   ]
+   ],
+   "gateTier": "hard"
   },
   "npc": {
    "consumer": "the GM NPC-render block (engine/gm.js buildTurnContext) + the drivenNpcDirective (SNG-233)",
@@ -143,7 +144,8 @@
      "read": "app.js/gm.js 2x the portrait/description"
     }
    ],
-   "note": "SNG-233 established that registered-in-play NPCs got name+bond but not the interiority the GM-render reads - THE SAME CLASS as quest under-shaping. The sweep should flag an important NPC (stable id, bond>threshold) missing personality/wants/fears."
+   "note": "SNG-233 established that registered-in-play NPCs got name+bond but not the interiority the GM-render reads - THE SAME CLASS as quest under-shaping. The sweep should flag an important NPC (stable id, bond>threshold) missing personality/wants/fears.",
+   "gateTier": "soft"
   },
   "location": {
    "consumer": "encounter eligibility (engine/random_encounters.js dangerOf) + map/travel (worldPos) + the GM scene (gm.js) + SNG-180 wiring audit",
@@ -184,7 +186,8 @@
      "read": "app.js:1749/2209/4894 the scene text (descriptionSeed, NOT description)",
      "note": "CCode-reconciled 2026-07-25: the consumer reads descriptionSeed, not description"
     }
-   ]
+   ],
+   "gateTier": "soft"
   },
   "creature": {
    "consumer": "the encounter builder (random_encounters.js bestiaryEncounters) + the beast-image minter (app.js noteBeastImage) + the dread resolver (state.js traditionMotivationsForGM)",
@@ -254,7 +257,8 @@
      "severity": "DEGRADED",
      "why": "SNG-250 §3: 'pressures are real mechanics the encounter engine runs'. An empty array is the hollow-monster case — a scary description with nothing the crafts can answer."
     }
-   ]
+   ],
+   "gateTier": "hard"
   },
   "item": {
    "consumer": "the inventory engine (engine/inventory.js) — equipmentBonus, itemCombatFunctions/wieldBonusFor, usableCombatItems, consumeItem, itemUses, inventoryForGM",
@@ -341,7 +345,8 @@
      "severity": "DEGRADED",
      "why": "a consumable with no numeric effects is the sharpest form of the hollow item: consumeItem (inventory.js:224) DESTROYS the stack and returns {} — the player spends a real resource and provably nothing happens. usableCombatItems will not even offer it as a move."
     }
-   ]
+   ],
+   "gateTier": "soft"
   },
   "skill": {
    "consumer": "the function-family engine (engine/functions.js familiesOfAbility/functionCoverage/recommendSkills) + the cost/tier readers (progression.js, intensity.js, company.js) + the braid parents (braids.js)",
@@ -410,7 +415,8 @@
      "severity": "DEGRADED",
      "why": "SNG-250 §3 SKILL requires 'an energy cost'. The bar is a POSITIVE number the engine can actually charge — progression.js:171 pays `abilityDef.energyCost` directly, so a 0/absent/non-numeric cost is a craft that is free to use forever. CCode-corrected 2026-08-01: this rule was first written as the 4..15 band from sanitizeNewAbility (progression.js:533) and flagged 111 of 285 authored abilities — the authored range is 1..14, and the cheap 1-3 crafts are correct, not thin. 4..15 is a GENERATION clamp (a policy about what the GM may mint), not a statement about what makes a skill whole; conflating the two would have gated legitimate authored content on a generation-only rule. The clamp stays where it is and is asserted separately in the smoke tests."
     }
-   ]
+   ],
+   "gateTier": "hard"
   },
   "arc": {
    "consumer": "the greater-arcs system (SNG-203 net-vector) + worldArcsForGM + the arc-stir pressure producer (SNG-245)",
@@ -482,7 +488,8 @@
     }
    ],
    "ccodeReconciled": "CCODE-55 (2026-08-01): `pressure-numeric` (someNumeric over magnitude/value/strength/x/y) -> `pressure-concrete` (nonEmptyString), reconciled against the real corpus — the same check every rule in this file gets, and the same false-positive class as the creature `threat` field. Arc pressure is a STRING of prose, never an object with numeric sub-keys: the 5 authored arcs carry 'slow-building, vast', 'the deep clock', 'building', 'medium', 'slow-building', and generate.js stubEntity mints 'medium'. someNumeric flagged 5 of 5 authored arcs. The INTENT behind the rule is right and is preserved — an arc whose pressure is only a mood cannot drive — but that is a judgement about WORDS, so it lives in vagueMarkers.byType.arc (where Aevi put it) rather than in a numeric shape-check the data can never satisfy. If the net-vector ever grows a numeric push field, the rule comes back keyed to THAT field. `hinges-present` kept exactly as authored: 0 of 5 authored arcs are empty and stubEntity mints `hingeNpcs: []`, so it flags precisely the stubbed arcs it should.",
-   "note": "SNG-250 §3/§5 (Aevi 2026-08-01): the arc contract - arc generates today but had NO contract, so the born-whole gate didn't cover the one live generator (boot said so). Grounded in the real SNG-203 net-vector reads. A whole arc DRIVES (has a real pressure/tendency) and RESOLVES (ifIgnored/ifEngaged are its stakes)."
+   "note": "SNG-250 §3/§5 (Aevi 2026-08-01): the arc contract - arc generates today but had NO contract, so the born-whole gate didn't cover the one live generator (boot said so). Grounded in the real SNG-203 net-vector reads. A whole arc DRIVES (has a real pressure/tendency) and RESOLVES (ifIgnored/ifEngaged are its stakes).",
+   "gateTier": "soft"
   }
  },
  "theConcreteLayer": "CCODE-55 (SNG-250 §3/§4): each contentType may declare a `concrete` array beside `topLevel`. `topLevel` answers SNG-250's WHOLE question (does every consumer-read field carry a value?); `concrete` answers its CONCRETE question (is that value a real thing the rules can ACT on, or a word?). Every rule is machine-checkable and code-grounded — no rule here encodes a judgement, only a fact the engine already relies on. Rule vocabulary: `enum` (value in the listed set), `everyInVocab` (every array member resolves in a named content vocab — `function_vocabulary.verbs` is the 24 VERBS flattened out of the 8 families, which is what an ability's `functions` array actually holds; the families are what those verbs RESOLVE TO, not what is authored), `nonEmptyArray`, `numberInRange`, `someNumeric` (an object has a numeric value at one of `keys`), `anyOf` (at least one nested rule holds), `impliesSomeNumeric` (when `whenField` is truthy, `field` must have a numeric value at one of `keys`). ONE gate reads this for every type — a new type declares its contract here and is gated without new gate code (SNG-250 §5).",
@@ -581,5 +588,8 @@
     "note": "an arc's pressure must be a DIRECTIONAL force with named consequences (SNG-239 statable tremor). VAGUE: 'something stirs'. CONCRETE: 'the deep sites report tremors, and each week untended, one more well upstream goes bad'."
    }
   }
+ },
+ "_notes": {
+  "gateTier": "SNG-250 §7a (Erik-decided): per-type gate tier. hard = a hollow one BREAKS play, EMPTY escalates toward reject (creature/skill/quest/encounter); soft = a thin one degrades but plays, EMPTY stays repair/warn (item/npc/location/arc). Read by the SAME gate - one field, not a parallel policy system. Severities per field unchanged."
  }
 }

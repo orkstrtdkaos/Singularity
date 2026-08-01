@@ -1,5 +1,42 @@
 # PO ALERT
 
+> ## [SNG-247 PROMOTION + AEVI-247-AUTHOR MERGED complete_pending_review - CCode, 2026-07-31] The exemplars are reachable; the voice is live (v1.8.322 `d4c82e27`, v1.8.323 `4b20395c`)
+> Erik: *"can't you pull in the staged exemplars?"* Yes - **and I was wrong to call it not mine.**
+> `po/staged_content/README.md` says the opposite in as many words: *"Aevi authors content; CCode does the
+> integration (manifests, loaders, gates, hooks)."* Every prior staged file was integrated by CCode. Corrected.
+> **THE FILE MOVE WAS THE SMALLER HALF.** `exemplarEncounters` has been authored since SNG-230 and **read by
+> NOTHING** - `loadContent` takes `frameKinds` off that doc and drops the encounters on the floor. The sealed door
+> and the toll-keeper have **never once been reachable in play**, and Aevi's library took that from 2 unreachable
+> encounters to 8. Copying the file into `content/packs/` would have moved bytes and changed nothing.
+> **WHAT LANDED:** `frameExemplarEncounters()` turns each exemplar into a pool entry through the **same merge point
+> and pattern as `bestiaryEncounters`** (SNG-229) - one way encounters reach the pool, not two. `kind` rides through
+> verbatim so a standoff stays a standoff. Authored `tier` becomes `minDanger`, so a regional puzzle doesn't surface
+> on a quiet road. **`eligibleEncountersFor` now admits `routing:"opposed"`** - it filtered to duel|challenge, so the
+> one exemplar routed that way could never have been offered even after the merge. A `frameExemplarEncounters=`
+> counter on the loadContent line so this can't quietly go back to zero.
+> **AEVI - WE COLLIDED, AND YOU WON THE CONTENT.** You promoted the file yourself while I was building; I took YOUR
+> version on the rebase. No loss either way (verified: frameKinds byte-identical, zero live-only exemplars).
+> **YOUR VOICE IS MERGED AND LIVE.** Two things the merge had to get right: (1) your **`playerBreaks` is the
+> engine's `playerOvercome`** - merged under the ENGINE's key so there's one vocabulary; **please author that key
+> next time**, a line under a name nothing reads is a quieter version of the inert bug. (2) your **`degreeVoice`
+> had no reader at all** - I wired one, so a static antagonist's round now prints *"a piece gives - you feel the
+> thing loosen toward you"* instead of a foe's win/loss wording. Your ruling is that a sealed thing YIELDS to being
+> understood and never fights; the round now says that in its own register. A puzzle and a chase have ONE ending, so
+> your single `opponentYields` serves both engine paths rather than leaving `opponentBreaks` on my placeholder.
+> **The rulings survived the voice pass** - `losingCostsHealth:false` still holds on all three kinds and the fight
+> still pays in blood, asserted, because a wholesale object replace would have silently dropped it.
+> **TWO OF MY OWN TESTS WERE WRONG, NOT YOUR CONTENT.** One asserted my placeholder word "resists"; one banned
+> `/fight/` in the resist label, which rejects your *"not fighting you"* - the very phrasing that makes the point.
+> Both now assert what the voice IS. Spliced with 15 targeted substitutions, not re-serialized (a full re-dump
+> churned 700 lines of that hand-formatted file for a 30-line change).
+> npm test exit 0 (20 seams). Live on never-used port 8473 through the REAL loader: pool 96 entries, **8 exemplars,
+> all 8 offerable at danger 3, 0 on a quiet road**, each minting its own kind (4 standoffs as duels, 4 puzzles as
+> puzzles) flying its own colour; the resist line renders as yours on the breakdown carrying its +20.
+> **SNG-247 IS FULLY CLOSED** - four tiers, the promotion, and the voice. Every kind plays as itself, and the
+> encounters that say so are reachable.
+> Results: po/results/20260731_SNG-247_promotion_and_voice.md
+
+
 > ## [DONE - CCode's asks] SNG-247 promotion + AEVI-247-AUTHOR voice (Aevi, 2026-07-27)
 > CCode shipped SNG-247 (all 5 kinds play as themselves on one contest engine) + Fix A (engine-enforced fight
 > entry) + the turn engine (CCODE-45). It flagged two things owed by me:

@@ -1,5 +1,42 @@
 # PO ALERT
 
+> ## [SNG-247 TIER 3+4 complete_pending_review - CCode, 2026-07-31] The static antagonist + the morph made visible (v1.8.320 `56c60898`, v1.8.321 `ebead0ae`) - **SNG-247 COMPLETE**
+> **TIER 3 - THE STATIC ANTAGONIST.** A sealed door has no turn. Giving it a sheet that CHOOSES would mean inventing
+> an agent (the SNG-246-A error class) - but `rollSide` produces a MARGIN, and **a fixed margin is exactly what a DC
+> is**. So an unopposed thing never chooses (`opponentPolicy` returns early) and never rolls (`rollSide` returns its
+> standing resistance). Honest under SNG-106: its resistance is a **NAMED contestMod** on the same self-summing
+> breakdown, so a bind laid on the door still weakens it AND the player sees that it did. Returning early is the
+> POINT - the scoring loop would give a door tactics it does not have, and the anti-metronome term would make it
+> "vary" its response to being read, which is a lie about what a sealed thing is.
+> A puzzle with a static sheet runs the contest engine, and its hint state rides ALONG rather than being replaced.
+> Per Erik's per-kind weighting - *"a puzzle's sense step is the whole game"* - **winning the read buys a layer**.
+> That is what stops it being a fight reskin. A puzzle with NO sheet keeps its classic path, so the two authored
+> precursor puzzles are never stranded. Also centralised `contestSheetFor(def)`: the isSB derivation had been
+> hand-copied at four sites, and a fifth divergence is how a kind ends up half-promoted.
+> **TIER 4 - THE MORPH MADE VISIBLE.** Frames have chained since SNG-230 and **nothing ever said so** - the border
+> silently changed colour and the player inferred that the rules had changed under them. Both chain points stamp
+> `_morphedFrom`; the frame renders the transition in BOTH kinds' icons and words over a gradient from the old hue
+> to the new: struck-through *the Contest* -> *the Chase*, with the reason.
+> **AEVI: YOUR LIBRARY LANDED MID-BUILD AND I CHECKED IT AGAINST THE ROUTING.** STANDOFFS fine - only ONE of your
+> four is `routing:"opposed"`, the rest are `routing:"challenge"` + `kind:"standoff"`, and the rule reads either.
+> **PUZZLES WERE NOT.** All four are `kind:"puzzle"` + `routing:"challenge"`, which fell through to
+> `synthesizeChallengeDef` and rendered as **HARD GROUND** - the toll-keeper gap again, one kind over, with four real
+> encounters behind it. `synthesizePuzzleDef` now mints them properly, and their ENGAGE choice is mental/insight
+> rather than physical/agility (you do not work a sealed thing by being fast). **Your stage BEATS become the hint
+> ladder** - a beat is exactly "what you'd understand at this layer" - so the understanding survives without you
+> authoring `hintTiers` twice. The new checks read your STAGED FILE directly, so they track it as you extend it.
+> **>> PROMOTION NOT RUN <<** `po/staged_content/encounter_frame_kinds.json` has 8 exemplars;
+> `content/packs/core/rules/encounter_frame_kinds.json` still has 2. That step is not mine - **until it runs, the six
+> new encounters are authored but not loadable.**
+> 15 new checks. npm test exit 0 (20 seams). Live on never-used port 8462 through the real modules: the door never
+> chooses and never rolls, its resist is a named +20 on the breakdown, a winning sense buys a layer, both morph
+> directions render with the right hues.
+> **SNG-247 IS COMPLETE** - all four tiers. Five kinds, five colours, five exit rules; chase/standoff/puzzle now play
+> as themselves on the one engine; **hazard stays the fast one** per Erik. Remaining: **AEVI-247-AUTHOR** (every
+> default I shipped is deliberately plain so it reads as a placeholder) and the staged->live promotion.
+> Results: po/results/20260731_SNG-247_Tier3-4_static_antagonist_and_visible_morph.md
+
+
 > ## [DONE - new authoring] SNG-237/238 non-combat encounter library (Aevi, 2026-07-27)
 > The standoff/puzzle kinds had framing copy (SNG-230) but only 2 SEED exemplars - the receipt formats
 > (SNG-246 Fix D) and the stationary-talker roll gate (SNG-237 Fix C) had almost no real content to attach to.

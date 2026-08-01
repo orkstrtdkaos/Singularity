@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 11,
-  "xp": 1017,
+  "xp": 1030,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -80,7 +80,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 150,
-  "energy": 137,
+  "energy": 132,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -845,6 +845,22 @@
       "_bonusApplied": 0.4,
       "day": 9,
       "worldDay": 32
+    },
+    {
+      "at": "2026-08-01T11:29:42.111Z",
+      "locationId": "gen-object-object",
+      "communityId": "radiant_folk",
+      "description": "Turned a solitary witness into an invested ally — Sorel moved from isolation with a dangerous secret into a party moving toward consequence with three independent voices converging on the truth.",
+      "tags": [
+        "diplomacy",
+        "consequence",
+        "witness"
+      ],
+      "weight": 1,
+      "spread": [],
+      "_bonusApplied": 0.4,
+      "day": 9,
+      "worldDay": 32
     }
   ],
   "relationships": {
@@ -968,36 +984,41 @@
         "player": "Trust the reading and move forward: \"Northeast-by-east. We're going to the structure itself. Come with us, or hold here — but choose now.\" A witness to the cover-up is either a liability or an ally.",
         "summary": "On the ridgeline at first light, Sorel chooses: she accepts Cellaceron's direction and joins the party moving northeast-by-east toward the upstream structure — no longer a solitary archivist carrying a secret, but a witness stepping into consequence.",
         "narration": "You name it plainly. Northeast-by-east. The structure itself. Come with us, or hold here — but choose now.\n\nSorel's breath steadies. She looks at the photonic reader in her hands, then at the Waystaff planted at your feet, then back at you. The choice is real and she knows it. \"The Council will know I moved,\" she says. Not a question. A fact being weighed. \"If I stay here, I can argue I was confirming the bearing line. If I come with you—\"\n\n\"Then you're part of what comes next,\" you finish.\n\nShe nods once, sharp and deliberate. She packs the reader into its case with the care of someone who handles instruments that matter, wraps the whole thing in oilcloth, and lashes it to her pack with the same double-wrap cord that held it before. \"I've been alone with this for three days,\" she says, straightening. \"That was always going to be a problem.\" She picks up her pack in both hands, settling the weight. \"Northeast-by-east. How far?\"\n\nAevi brightens at your shoulder — a pale constellation that hums a single note of recognition. The motes drift forward on the dawn wind, already reading the path ahead.\n\n*✦ The Radiant: +1 — gained an archivist of the Plateau water-accountability office as a committed witness and ally.*"
+      },
+      {
+        "player": "Before you leave the ridgeline, ask Sorel one more direct question — what does she think the Council is trying to protect? Not the structure itself, but what comes after it activates",
+        "summary": "On the ridgeline at first light, Sorel names the Council's fear plainly: the preparation order will render the valley's water undrinkable, and the Council has spent three days building a hidden secondary purification system rather than stopping the order itself. The party now moves northeast-by-east toward the structure with full knowledge that interrupting or witnessing its completion will determine whether the valley's water crisis becomes a two-people war.",
+        "narration": "You ask the question plainly: what does the Council fear once the structure activates? What comes after?\n\nSorel's shoulders tighten. She turns to face the northeast-by-east path ahead, her hand still resting on the pack-lashes. For a long moment she doesn't answer—not because she's weighing the cost anymore, but because she's choosing which truth to speak.\n\n\"The water,\" she says finally. \"When the preparation finishes, the water changes. We don't know into what.\" She turns back to you. \"The filtration arrays will fail. The current purification can't handle a watershed that's being... prepared. Prepared for what, I don't know. But the Council has known for three days that their own people downstream are going to lose access to drinking water.\" Her voice stays steady. \"That's why they moved the markers. Not to protect the structure. To buy time to build something else. A secondary system. An answer before people notice the first one dies.\"\n\nAevi brightens slightly at shoulder-height, a small constellation condensing at the news.\n\n\"So if we interrupt the preparation,\" Sorel continues, \"we stop the crisis before it reaches the arrays. But if we don't interrupt it, the Council's secondary system has to be ready. And if neither thing happens—if we find nothing, or if we're too late—then Millbrook's guards and the Radiant leadership go to war over water that's already poison.\" She looks at you directly. \"That's what they're protecting. Not the structure. The assumption that they can control what comes after.\"\n\n*✦ What the Water Remembers — Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not..*\n\n*✦ The Radiant: +1 — heard a Radiant archivist's full testimony and trusted her account enough to act on it.*"
       }
     ],
     "lastTurn": {
-      "narration": "You name it plainly. Northeast-by-east. The structure itself. Come with us, or hold here — but choose now.\n\nSorel's breath steadies. She looks at the photonic reader in her hands, then at the Waystaff planted at your feet, then back at you. The choice is real and she knows it. \"The Council will know I moved,\" she says. Not a question. A fact being weighed. \"If I stay here, I can argue I was confirming the bearing line. If I come with you—\"\n\n\"Then you're part of what comes next,\" you finish.\n\nShe nods once, sharp and deliberate. She packs the reader into its case with the care of someone who handles instruments that matter, wraps the whole thing in oilcloth, and lashes it to her pack with the same double-wrap cord that held it before. \"I've been alone with this for three days,\" she says, straightening. \"That was always going to be a problem.\" She picks up her pack in both hands, settling the weight. \"Northeast-by-east. How far?\"\n\nAevi brightens at your shoulder — a pale constellation that hums a single note of recognition. The motes drift forward on the dawn wind, already reading the path ahead.\n\n*✦ The Radiant: +1 — gained an archivist of the Plateau water-accountability office as a committed witness and ally.*",
-      "sceneSummary": "On the ridgeline at first light, Sorel chooses: she accepts Cellaceron's direction and joins the party moving northeast-by-east toward the upstream structure — no longer a solitary archivist carrying a secret, but a witness stepping into consequence.",
+      "narration": "You ask the question plainly: what does the Council fear once the structure activates? What comes after?\n\nSorel's shoulders tighten. She turns to face the northeast-by-east path ahead, her hand still resting on the pack-lashes. For a long moment she doesn't answer—not because she's weighing the cost anymore, but because she's choosing which truth to speak.\n\n\"The water,\" she says finally. \"When the preparation finishes, the water changes. We don't know into what.\" She turns back to you. \"The filtration arrays will fail. The current purification can't handle a watershed that's being... prepared. Prepared for what, I don't know. But the Council has known for three days that their own people downstream are going to lose access to drinking water.\" Her voice stays steady. \"That's why they moved the markers. Not to protect the structure. To buy time to build something else. A secondary system. An answer before people notice the first one dies.\"\n\nAevi brightens slightly at shoulder-height, a small constellation condensing at the news.\n\n\"So if we interrupt the preparation,\" Sorel continues, \"we stop the crisis before it reaches the arrays. But if we don't interrupt it, the Council's secondary system has to be ready. And if neither thing happens—if we find nothing, or if we're too late—then Millbrook's guards and the Radiant leadership go to war over water that's already poison.\" She looks at you directly. \"That's what they're protecting. Not the structure. The assumption that they can control what comes after.\"\n\n*✦ What the Water Remembers — Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not..*\n\n*✦ The Radiant: +1 — heard a Radiant archivist's full testimony and trusted her account enough to act on it.*",
+      "sceneSummary": "On the ridgeline at first light, Sorel names the Council's fear plainly: the preparation order will render the valley's water undrinkable, and the Council has spent three days building a hidden secondary purification system rather than stopping the order itself. The party now moves northeast-by-east toward the structure with full knowledge that interrupting or witnessing its completion will determine whether the valley's water crisis becomes a two-people war.",
       "choices": [
         {
-          "label": "Move out immediately — follow Aevi's lead on the northeast-by-east bearing while the morning is still young and the path is readable",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Move northeast-by-east immediately — the terrain is clear and the bearing is solid. Push hard for distance before the day breaks.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
             "travel",
-            "scout"
+            "push"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Before you leave the ridgeline, ask Sorel one more direct question — what does she think the Council is trying to protect? Not the structure itself, but what comes after it activates",
+          "label": "Ask Sorel if the Council's secondary system is already built — or if it still needs components that might not be on the northeast-by-east line with you.",
           "attribute": "social",
           "subAttribute": "insight",
           "axes": {},
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "plan",
+            "scout",
             "question"
           ],
           "abilityId": null,
@@ -1007,16 +1028,17 @@
           "emergenceId": null
         },
         {
-          "label": "Use Keen Appraisal on Sorel's pack and gear before departure — understand what she brought, how prepared she is for what comes, and whether she's carrying anything else the Council's survey team recorded",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Wait and listen — let Aevi read the full northeast-by-east bearing one more time before you move. The anomaly it caught before should be closer now, and you want to know what's moving on that line.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
-          "difficulty": 12,
+          "difficulty": 0,
           "intentTags": [
-            "study"
+            "scout",
+            "careful"
           ],
-          "abilityId": "keen_appraisal",
-          "energyCost": 2,
+          "abilityId": "motes_vigil",
+          "energyCost": 4,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
@@ -1024,14 +1046,14 @@
       ],
       "deeds": [
         {
-          "description": "Turned a solitary witness into an ally — Sorel steps into the investigation as a full participant, carrying both her knowledge and the institutional weight of her office",
+          "description": "Turned a solitary witness into an invested ally — Sorel moved from isolation with a dangerous secret into a party moving toward consequence with three independent voices converging on the truth.",
           "tags": [
+            "diplomacy",
             "consequence",
-            "witness",
-            "alliance"
+            "witness"
           ],
-          "weight": 2,
-          "communityId": null
+          "weight": 1,
+          "communityId": "radiant_folk"
         }
       ],
       "characterDeltas": {
@@ -1039,15 +1061,15 @@
         "energy": 0,
         "inventoryAdd": [],
         "inventoryRemove": [],
-        "xp": 0
+        "xp": 8
       },
       "ledgerEvents": [
         {
-          "what": "Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the Disputed Zone",
+          "what": "The Council's secondary purification system is not yet complete — they are racing the preparation order's timeline with infrastructure that may not be ready.",
           "tags": [
-            "alliance",
-            "witness",
-            "chain-of-command"
+            "crisis",
+            "infrastructure",
+            "water"
           ],
           "visibility": "witnessed",
           "spectrumDeltas": {},
@@ -1059,57 +1081,66 @@
           "op": "progress",
           "questId": "what-the-water-remembers",
           "title": "What the Water Remembers",
-          "summary": "undefined",
+          "summary": "Interrupt the preparation order before it renders the valley's water undrinkable.",
           "giver": "water_keeper",
-          "note": "Sorel joins the party. The investigation moves from a solitary archivist's testimony to a coordinated push toward the upstream structure. The Council's deliberate marker-relocation is now known to two independent parties moving in the same direction. The question of who gave the order and what the structure's activation serves moves from abstraction to immediate pursuit.",
-          "xpReward": 0
+          "note": "Sorel names the Council's true fear: the structure will change the watershed into something the current arrays cannot process. They have chosen to build a secondary system in secret rather than stop the order. The timeline is now critical — the party moves toward the structure knowing that both sides of the valley's conflict are racing toward a collision over resources that are already poisoned.",
+          "xpReward": null
         },
         {
           "op": "progress",
           "questId": "second-river-rising",
           "title": "The Second River",
-          "summary": "Brin reports the sub-current she calls 'a second river' has been ascending for three days and is now nearly at the surface — Aevi reacted and caught itself.",
+          "summary": "The ascending sub-current Brin detected is part of the pre-Transition watershed preparation system reaching its cycle completion.",
           "giver": "brin.millbrook.child",
-          "note": "Moving toward the source structure with Sorel's testimony and Aevi's bearing-sense. The preparation order named: it is following its last instruction to prepare the watershed. The activation cycle is measurable and moving forward. The standing question: what does 'prepare' mean, and can it be interrupted before the cycle completes?",
-          "xpReward": 0
+          "note": "Sorel's account confirms the Council's knowledge that the preparation will change the water itself. The second river is not a natural phenomenon — it is the preparation ascending toward surface.",
+          "xpReward": null
         }
       ],
       "standingOps": [
         {
           "people": "radiant_folk",
           "delta": 1,
-          "why": "gained an archivist of the Plateau water-accountability office as a committed witness and ally"
+          "why": "heard a Radiant archivist's full testimony and trusted her account enough to act on it"
         }
       ],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": {
-        "thing": "Sorel — the Radiant archivist, now a party member and full witness",
-        "from": "Cellaceron's direct naming of the choice and the stakes; Sorel's own assessment that solitude was always going to be a problem"
+        "thing": "Sorel's knowledge of the Council's secondary system — where it's being built, whether it's complete, whether the materials or plans travel on the northeast-by-east bearing",
+        "from": "Sorel's need to move from holding a dangerous secret alone to being part of a group that already knows more than she does — she chose you, and now she has information worth keeping or spending"
       },
-      "stageOps": [],
+      "stageOps": [
+        {
+          "questId": "what-the-water-remembers",
+          "stageId": "s3",
+          "evidence": "Sorel's direct account identifies the preparation order as a watershed-change instruction — not a destruction, but a transformation the current filtration systems cannot survive."
+        }
+      ],
       "scene": {
-        "setting": "Open ridgeline path, early-spring dawn. The sun clears the eastern ridge-line; shadows sharp and long on pale grass. Cold draft off the eastern slope. The photonic reader shows the four-second pulse steady on its dials. Ready to move.",
+        "setting": "Open ridgeline path, early-spring dawn. The sun clears the eastern ridge line; shadows sharp and long on pale grass. Cold draft off the eastern slope. Sorel and Cellaceron stand facing northeast, Aevi condensed and bright at shoulder height, three packs ready, Waystaff planted and lifted.",
         "npcsPresent": [
           {
             "name": "Sorel",
-            "state": "Pack shouldered, instrument case lashed and oilcloth-wrapped, standing with Cellaceron and Aevi — ready to move northeast on the bearing line"
+            "state": "packed and ready to move, hand on the pack-lashes, having just named the Council's true fear plainly — water that will poison the current infrastructure, a secondary system racing against the preparation order's completion"
           },
           {
             "name": "Aevi",
-            "state": "Brightened and forward-drifting at shoulder height, reading the northeast-by-east path, humming a note of recognition"
+            "state": "brightened and condensed at shoulder height, motes reading the northeast-by-east bearing, alert and listening"
           }
         ],
         "objects": [
-          "Waystaff — planted heel-first in soft ground at Cellaceron's feet",
+          "Waystaff — planted heel-first in soft ground, lifted and ready to carry",
+          "Sorel's pack — shouldered, double-wrap cord tied",
           "Sorel's instrument case — oilcloth-wrapped and pack-lashed",
-          "Sorel's pack — shouldered, double-wrap cord tied"
+          "Photonic reader — packed inside the oilcloth case",
+          "Cellaceron's pack — worn and ready"
         ],
         "threads": [
-          "The journey northeast-by-east to the upstream pre-Transition structure — distance and terrain unknown",
-          "What the structure will show when they arrive — whether the preparation order is still cycling, whether it can be interrupted",
-          "The Council's knowledge and intent — who gave the order to hide the structure, and how deep the decision runs"
+          "The journey northeast-by-east to the upstream pre-Transition structure — distance and terrain still unknown, but the bearing is solid and Aevi has caught something outside the zone's interference pattern on that line",
+          "What the structure will show when they arrive — whether the preparation order is still cycling, whether it can be interrupted, whether the completion will render the valley's water undrinkable",
+          "The Council's secondary purification system — where it is, whether it is complete, whether the timeline still allows both the party to reach the structure AND the Council to finish their answer",
+          "The anomaly Aevi caught before on the northeast-by-east bearing — closer now, still unidentified, still aware of being looked at"
         ]
       },
       "npcUpdates": [
@@ -1120,43 +1151,54 @@
           "role": "Radiant Plateau archivist, water-accountability office — now a party member",
           "gender": "woman",
           "pronouns": "she/her",
-          "description": "A woman of about sixty in undyed wool with a Plateau optical-fiber collar worn plain and small; carries a weight-distributed pack with instrument case; moves with the care of someone accustomed to precision work and long solitary bearing-runs.",
-          "note": "Chose to move northeast-by-east with Cellaceron rather than hold the ridgeline alone. The burden of knowing the Council's choice was deliberate is now shared.",
+          "note": "Named the Council's true fear plainly: the preparation order changes the watershed into something the current arrays cannot process. The Council has chosen to build a secondary purification system in secret rather than stop the order itself. Sorel has moved from isolation with this knowledge into a party moving toward the structure with three independent voices converging on the truth.",
           "learned": [
-            "Named her reason for joining: solitude was always going to be a problem",
-            "Carries confidence in the terrain and the bearing-line despite three days of isolation with the knowledge"
+            "The Council's secondary system is not yet complete — they are racing the preparation order's timeline",
+            "The preparation will change the water itself, not merely contaminate it",
+            "The current filtration arrays will fail when the preparation completes",
+            "If the preparation is not interrupted and the secondary system is not ready, Millbrook's guards and the Radiant leadership will go to war over water that is already poison"
           ],
-          "skillsObserved": [
-            "Pack management under time pressure",
-            "Instrument handling with institutional precision"
-          ],
-          "relationshipDelta": 2,
+          "skillsObserved": [],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Traveling northeast-by-east with Cellaceron's party as a committed witness and ally — carries both the archivist's knowledge and the institutional weight of her office",
-          "bondType": "ally",
-          "bondStage": null
+          "statusNote": "Traveling northeast-by-east with Cellaceron as a committed witness and ally, carrying the Radiant water-accountability office's institutional weight and her own testimony of the Council's deliberate choice."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Sorel, Radiant water-accountability archivist, has committed to the investigation — the party moves northeast-by-east with three independent voices (Cellaceron, Aevi, Sorel) now converging on the upstream pre-Transition structure",
-          "subjectId": "sorel"
+          "text": "The Council's water-accountability office ordered their own survey team to move bearing markers before Sorel could locate the structure, buying time to build a secondary purification system in secret — they chose to hide the order rather than stop it.",
+          "subjectId": "radiant_folk"
+        },
+        {
+          "op": "add",
+          "text": "The preparation order will change the valley's watershed into something the current filtration arrays cannot process — the water will become undrinkable to the population relying on Harmonic and Radiant systems.",
+          "subjectId": "second-river-rising"
         }
       ],
       "placeUpdates": [],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "sorel-choice-northeast",
-          "label": "Sorel's Commitment",
+          "topic": "the-councils-race",
+          "label": "The Council's Secondary System",
           "kind": "event",
-          "entityId": "sorel",
-          "fact": "At first light on the ridgeline, Sorel chose to move northeast-by-east with Cellaceron toward the upstream structure rather than hold the bearing line alone. She named the reason plainly: solitude with the Council's deliberate lie was always going to be a problem. She is no longer a solitary witness but a party member carrying institutional knowledge.",
+          "entityId": "radiant_folk",
+          "fact": "The Radiant water-accountability office is building a secondary purification system in secret, racing against the preparation order's completion timeline. They chose infrastructure over intervention.",
+          "links": [
+            "what-the-water-remembers",
+            "second-river-rising"
+          ]
+        },
+        {
+          "topic": "preparation-order-effect",
+          "label": "The Preparation Changes the Water",
+          "kind": "lore",
+          "fact": "The pre-Transition preparation order does not merely contaminate — it transforms the watershed into something the current filtration systems cannot survive. The change is structural, not chemical.",
           "links": [
             "what-the-water-remembers",
             "second-river-rising",
-            "the-preparation-order"
+            "the-councils-race"
           ]
         }
       ],
@@ -1167,12 +1209,12 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "morning conversation and pack preparation before departure"
+        "why": "the conversation and final preparations before departure"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "imagePrompt": "A woman in undyed wool and a Plateau collar, pack shouldered and instrument case wrapped in oilcloth, stands on a wind-scoured ridgeline at first light with a younger figure and a constellation of pale motes. Behind them, the eastern ridge-line clears. Before them, the bearing-line runs northeast into terrain they cannot yet see.",
+      "imagePrompt": "Sorel standing on an open ridgeline in early spring dawn, the sun clearing the eastern peaks, her hand resting on a packed instrument case wrapped in oilcloth — her face turned northeast toward the bearing line, shoulders tight with the weight of a secret she is no longer carrying alone. Aevi condenses into brightness at her shoulder. Behind them both, the path stretches into shadow and mist.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -1184,26 +1226,29 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Open ridgeline path, early-spring dawn. The sun clears the eastern ridge-line; shadows sharp and long on pale grass. Cold draft off the eastern slope. The photonic reader shows the four-second pulse steady on its dials. Ready to move.",
+      "setting": "Open ridgeline path, early-spring dawn. The sun clears the eastern ridge line; shadows sharp and long on pale grass. Cold draft off the eastern slope. Sorel and Cellaceron stand facing northeast, Aevi condensed and bright at shoulder height, three packs ready, Waystaff planted and lifted.",
       "npcsPresent": [
         {
           "name": "Sorel",
-          "state": "Pack shouldered, instrument case lashed and oilcloth-wrapped, standing with Cellaceron and Aevi — ready to move northeas"
+          "state": "packed and ready to move, hand on the pack-lashes, having just named the Council's true fear plainly — water that will p"
         },
         {
           "name": "Aevi",
-          "state": "Brightened and forward-drifting at shoulder height, reading the northeast-by-east path, humming a note of recognition"
+          "state": "brightened and condensed at shoulder height, motes reading the northeast-by-east bearing, alert and listening"
         }
       ],
       "objects": [
-        "Waystaff — planted heel-first in soft ground at Cellaceron's feet",
+        "Waystaff — planted heel-first in soft ground, lifted and ready to carry",
+        "Sorel's pack — shouldered, double-wrap cord tied",
         "Sorel's instrument case — oilcloth-wrapped and pack-lashed",
-        "Sorel's pack — shouldered, double-wrap cord tied"
+        "Photonic reader — packed inside the oilcloth case",
+        "Cellaceron's pack — worn and ready"
       ],
       "threads": [
-        "The journey northeast-by-east to the upstream pre-Transition structure — distance and terrain unknown",
-        "What the structure will show when they arrive — whether the preparation order is still cycling, whether it can be interrupted",
-        "The Council's knowledge and intent — who gave the order to hide the structure, and how deep the decision runs"
+        "The journey northeast-by-east to the upstream pre-Transition structure — distance and terrain still unknown, but the bearing is solid and Aevi has caught someth",
+        "What the structure will show when they arrive — whether the preparation order is still cycling, whether it can be interrupted, whether the completion will rende",
+        "The Council's secondary purification system — where it is, whether it is complete, whether the timeline still allows both the party to reach the structure AND t",
+        "The anomaly Aevi caught before on the northeast-by-east bearing — closer now, still unidentified, still aware of being looked at"
       ]
     }
   },
@@ -1225,14 +1270,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Resonant Sight confirms the lower chamber was built to receive one frequency from one direction at one interval — the geometry is complete and deliberate, and the convergence point is where both the room and Teva's mark point.",
         "The chamber completed a read of Aevi at the convergence point — Aevi has recovered the name of its maker and the shape of what it was carrying, but has not yet spoken either. The room was built to receive and reconstruct, not merely hold. The break remains.",
         "Aevi named the source and mechanism at the convergence point: the watershed is following a pre-Transition preparation order by Verath-Sem; Aevi carries the authentication key to end it. The break — who interrupted the sending — remains unknown.",
         "Aevi named the requirement: the authentication key must be carried to the pre-Transition upstream structure, northeast-by-east. The lower chamber is not the site — it was the receiving room. The site is upstream.",
         "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located.",
         "Sorel confirms the mound on the northeast-by-east bearing, four-second interval rising through solid earth — pre-Transition structure still active, survey team ordered to move markers before location could be confirmed.",
         "The survey team was ordered to move their bearing markers before the mound's location could be confirmed. The Council knows. The movement was deliberate.",
-        "Moving toward the source structure with Sorel's testimony and Aevi's bearing-sense. The preparation order named: it is following its last instruction to prepare the watershed. The activation cycle is measurable and moving forward. The standing question: what does 'prepare' mean, and can it be interrupted before the cycle completes?"
+        "Moving toward the source structure with Sorel's testimony and Aevi's bearing-sense. The preparation order named: it is following its last instruction to prepare the watershed. The activation cycle is measurable and moving forward. The standing question: what does 'prepare' mean, and can it be interrupted before the cycle completes?",
+        "Sorel's account confirms the Council's knowledge that the preparation will change the water itself. The second river is not a natural phenomenon — it is the preparation ascending toward surface."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1484,20 +1529,23 @@
           ]
         }
       ],
-      "stageIndex": 2,
+      "stageIndex": 3,
       "completedStages": [
         "s1",
-        "s2"
+        "s2",
+        "s3"
       ],
       "progress": [
-        "Sorel's account places the structure location on the northeast-by-east bearing, matching Teva's directional count and the chamber's harmonic fold — moving closer to the source.",
         "Codex: the source is a structure, not a spill. Something built this.",
         "↳ Sorel's independent account confirms a regular mound on the northeast-by-east bearing with a four-second interval rising through solid earth — a pre-Transition structure still executing commands…",
         "Sorel's probe crystal confirms the four-second interval rising from the mound on the northeast-by-east bearing — independent validation of the structure's active signature. The Council's water office was aware of it three days ago.",
         "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath.",
         "↳ Sorel's probe crystal and photonic reader confirm the four-second interval — a pre-Transition structure still active, still executing commands. The Council's survey team found it and covered the…",
         "Sorel's probe found the structure. The team moved markers in darkness before she could relocate it. She knows it was deliberate. The question moves from 'is it active' to 'who at the Council knew and why did they hide it?'",
-        "Sorel joins the party. The investigation moves from a solitary archivist's testimony to a coordinated push toward the upstream structure. The Council's deliberate marker-relocation is now known to two independent parties moving in the same direction. The question of who gave the order and what the structure's activation serves moves from abstraction to immediate pursuit."
+        "Sorel joins the party. The investigation moves from a solitary archivist's testimony to a coordinated push toward the upstream structure. The Council's deliberate marker-relocation is now known to two independent parties moving in the same direction. The question of who gave the order and what the structure's activation serves moves from abstraction to immediate pursuit.",
+        "Sorel names the Council's true fear: the structure will change the watershed into something the current arrays cannot process. They have chosen to build a secondary system in secret rather than stop the order. The timeline is now critical — the party moves toward the structure knowing that both sides of the valley's conflict are racing toward a collision over resources that are already poisoned.",
+        "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not.",
+        "↳ Sorel's direct account identifies the preparation order as a watershed-change instruction — not a destruction, but a transformation the current filtration systems cannot survive."
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -1672,9 +1720,8 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 7,
+      "relationship": 8,
       "history": [
-        "[d2] Declined to confirm or deny the east-window boot-prints; drew an unprompted distinction between 'reading for something specific' and general surveillance — more than she had to off",
         "[d2] Declined cooperation offer on accountability grounds — not unkindly, but firmly. Named a timeline and people above her who need consulting. Set the flower bundle down on the bench ",
         "[d2] Named a concrete timeline: ten days via valley post, seven if someone carries a copy to the upper-fork waystation directly. Did not look at the Traveler's Pack, but her not-looking",
         "[d2] Framing the question as logistics rather than pressure gave her a practical door — she stepped through it",
@@ -1683,17 +1730,18 @@
         "[d9] Arrived on the ridgeline from the northeast at dawn — was part of a Council survey team three days ago, ran the secondary bearing line toward a regular mound on the northeast-by-east bearing. Left a probe crystal that recorded a four-second interval rising through the earth. The survey team was…",
         "[d9] Showed the photonic reader's recording — the four-second pulse rising steady from beneath the mound. Aevi confirmed the signature with a recognition-flare. Sorel named it a kept thing, still running. Waiting for Cellaceron's next word.",
         "[d9] Prism Sight caught her recognition — she knows the Council's choice was deliberate. She does not yet name it, but the lie-pattern confirms it. The burden of knowledge sits in her shoulders now.",
-        "[d9] Chose to move northeast-by-east with Cellaceron rather than hold the ridgeline alone. The burden of knowing the Council's choice was deliberate is now shared."
+        "[d9] Chose to move northeast-by-east with Cellaceron rather than hold the ridgeline alone. The burden of knowing the Council's choice was deliberate is now shared.",
+        "[d9] Named the Council's true fear plainly: the preparation order changes the watershed into something the current arrays cannot process. The Council has chosen to build a secondary purification system in secret rather than stop the order itself. Sorel has moved from isolation with this knowledge into…"
       ],
       "knownFacts": [
-        "She was following a secondary bearing line three days ago when she found the mound",
-        "She left a probe crystal and ran it hot for three cycles to record the signature",
-        "The Council's survey team was ordered to move the bearing markers overnight, breaking her line",
         "She was not told why the markers were moved",
         "She has already asked herself whether the cover-up was institutional or direct command",
         "She came northeast deliberately, knowing the bearing was erased, confirming it anyway",
         "Named her reason for joining: solitude was always going to be a problem",
-        "Carries confidence in the terrain and the bearing-line despite three days of isolation with the knowledge"
+        "Carries confidence in the terrain and the bearing-line despite three days of isolation with the knowledge",
+        "The Council's secondary system is not yet complete — they are racing the preparation order's timeline",
+        "The preparation will change the water itself, not merely contaminate it",
+        "The current filtration arrays will fail when the preparation completes"
       ],
       "skillsObserved": [
         "direct eye contact as deliberate signal",
@@ -1714,7 +1762,7 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "Traveling northeast-by-east with Cellaceron's party as a committed witness and ally — carries both the archivist's knowledge and the institutional weight of her office",
+      "statusNote": "Traveling northeast-by-east with Cellaceron as a committed witness and ally, carrying the Radiant water-accountability office's institutional weight and her own testimony of the Council's deliberate choice.",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20Plateau%20archivist%2C%20water-accountability%20office%20%E2%80%94%20now%20a%20party%20member%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49129&nologo=true",
       "_portraitTier": "devoted"
     },
@@ -2379,10 +2427,6 @@
     },
     "recentOffers": [
       {
-        "thing": "Teva's mark responds visibly — a faint pattern of warmth moving through the skin at her throat, patterned at the four-second interval, but…",
-        "from": "Teva's established nanite mark is in live correspondence with this place — when the room shifted to read Aevi, the mark would have felt…"
-      },
-      {
         "thing": "Sorel, a Radiant archivist — independent testimony that the Council's water-accountability office was running a survey into the Disputed…",
         "from": "The convergence of bearings: Teva's directional count, the chamber's harmonic fold, Aevi's knowledge, and now an external witness…"
       },
@@ -2397,6 +2441,10 @@
       {
         "thing": "Sorel — the Radiant archivist, now a party member and full witness",
         "from": "Cellaceron's direct naming of the choice and the stakes; Sorel's own assessment that solitude was always going to be a problem"
+      },
+      {
+        "thing": "Sorel's knowledge of the Council's secondary system — where it's being built, whether it's complete, whether the materials or plans travel…",
+        "from": "Sorel's need to move from holding a dangerous secret alone to being part of a group that already knows more than she does — she chose you…"
       }
     ],
     "latentArcs": {
@@ -3225,6 +3273,38 @@
         "createdDay": 9,
         "entityId": "gen-object-object",
         "updatedDay": 9
+      },
+      "radiant-folk": {
+        "id": "radiant-folk",
+        "label": "The Council's Secondary System",
+        "kind": "event",
+        "facts": [
+          "[d9] The Radiant water-accountability office is building a secondary purification system in secret, racing against the preparation order's completion timeline. They chose infrastructure over intervention."
+        ],
+        "links": [
+          "what-the-water-remembers",
+          "second-river-rising"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "entityId": "radiant-folk",
+        "updatedDay": 9
+      },
+      "preparation-order-effect": {
+        "id": "preparation-order-effect",
+        "label": "The Preparation Changes the Water",
+        "kind": "lore",
+        "facts": [
+          "[d9] The pre-Transition preparation order does not merely contaminate — it transforms the watershed into something the current filtration systems cannot survive. The change is structural, not chemical."
+        ],
+        "links": [
+          "what-the-water-remembers",
+          "second-river-rising",
+          "the-councils-race"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -3576,6 +3656,18 @@
       "text": "Sorel, Radiant water-accountability archivist, has committed to the investigation — the party moves northeast-by-east with three independent voices (Cellaceron, Aevi, Sorel) now converging on the upstream pre-Transition structure",
       "day": 9,
       "subjectId": "sorel"
+    },
+    {
+      "id": "radiant_folk",
+      "text": "The Council's water-accountability office ordered their own survey team to move bearing markers before Sorel could locate the structure, buying time to build a secondary purification system in secret — they chose to hide the order rather than stop it.",
+      "day": 9,
+      "subjectId": "radiant_folk"
+    },
+    {
+      "id": "second-river-rising",
+      "text": "The preparation order will change the valley's watershed into something the current filtration arrays cannot process — the water will become undrinkable to the population relying on Harmonic and Radiant systems.",
+      "day": 9,
+      "subjectId": "second-river-rising"
     }
   ],
   "sharedSceneId": null,
@@ -3583,18 +3675,18 @@
   "customEncounters": {},
   "reconcileVersion": 22,
   "tendencies": {
-    "cerebral": 29.157983202124218,
-    "strategic": 20.9865934449,
-    "cautious": 29.001830283755382,
-    "social": 15.612505592510514,
-    "generous": 5.262748611970403,
-    "risky": 1.386335454953374,
-    "carousing": 0.516674289328372,
-    "patient": 3.111462781368377,
-    "craft": 0.516192549678948,
-    "devotion": 2.490967127275116,
-    "deception": 0.975,
-    "leadership": 2
+    "cerebral": 28.42903362207111,
+    "strategic": 21.461928608777498,
+    "cautious": 28.276784526661498,
+    "social": 15.222192952697752,
+    "generous": 5.131179896671142,
+    "risky": 1.3516770685795396,
+    "carousing": 0.5037574320951627,
+    "patient": 3.0336762118341674,
+    "craft": 0.5032877359369743,
+    "devotion": 2.428692949093238,
+    "deception": 0.9506249999999999,
+    "leadership": 1.95
   },
   "aptitudes": [
     "strategist",
@@ -3606,9 +3698,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 235,
-  "updatedAt": 1785583634855,
-  "rev": 147,
+  "actionCount": 236,
+  "updatedAt": 1785583782140,
+  "rev": 150,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3918,7 +4010,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 58
+    "valley": 59
   },
   "company": [],
   "foreclosed": [],
@@ -4167,10 +4259,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-08-01T11:12:27.982Z",
-      "lastAt": "2026-08-01T11:27:14.825Z",
+      "lastAt": "2026-08-01T11:29:42.110Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 4
+      "beats": 5
     }
   ],
   "_pendingArrival": null,
@@ -4180,7 +4272,7 @@
   "peopleDisposition": {
     "rootkin": 4,
     "ashwarden": -1,
-    "radiant_folk": 2,
+    "radiant_folk": 3,
     "valley_craft": 1,
     "harmonic": 1
   },
@@ -4208,6 +4300,13 @@
       "people": "radiant_folk",
       "delta": 1,
       "text": "gained an archivist of the Plateau water-accountability office as a committed witness and ally"
+    },
+    {
+      "at": 32,
+      "kind": "act",
+      "people": "radiant_folk",
+      "delta": 1,
+      "text": "heard a Radiant archivist's full testimony and trusted her account enough to act on it"
     }
   ],
   "_standingHistoryCredit": {
@@ -4231,30 +4330,30 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 47,
-    "choices": 47,
-    "characterDeltas": 30,
-    "scene": 47,
-    "npcUpdates": 42,
-    "codexUpdates": 40,
-    "timeOps": 44,
-    "sceneEnded": 24,
+    "sceneSummary": 48,
+    "choices": 48,
+    "characterDeltas": 31,
+    "scene": 48,
+    "npcUpdates": 43,
+    "codexUpdates": 41,
+    "timeOps": 45,
+    "sceneEnded": 25,
     "placeUpdates": 24,
     "moveTo": 2,
-    "questUpdates": 24,
+    "questUpdates": 25,
     "stateOps": 1,
-    "factUpdates": 7,
-    "stageOps": 3,
+    "factUpdates": 8,
+    "stageOps": 4,
     "scene_ended": 1,
-    "imagePrompt": 6,
+    "imagePrompt": 7,
     "generateRequest": 3,
-    "deeds": 3,
-    "ledgerEvents": 2,
-    "offer": 4,
-    "gambitApt": 4,
-    "standingOps": 1
+    "deeds": 4,
+    "ledgerEvents": 3,
+    "offer": 5,
+    "gambitApt": 5,
+    "standingOps": 2
   },
-  "_opTurns": 47,
+  "_opTurns": 48,
   "_intentAsked": null,
   "corrections": [
     {
@@ -4281,7 +4380,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 5,
+      "applied": 6,
       "rejected": 0,
       "lastWhy": null
     }
@@ -4344,22 +4443,27 @@
         "text": "Turned a solitary witness into an ally — Sorel steps into the investigation as a full participant, carrying both her knowledge and the institutional weight of her office",
         "weight": 2,
         "day": 9
+      },
+      {
+        "text": "Turned a solitary witness into an invested ally — Sorel moved from isolation with a dangerous secret into a party moving toward consequence with three independent voices converging on the truth.",
+        "weight": 1,
+        "day": 9
       }
     ]
   },
   "_pendingLedger": [
     {
       "schemaVersion": 1,
-      "at": "2026-08-01T11:27:14.855Z",
+      "at": "2026-08-01T11:29:42.139Z",
       "worldDay": 32,
       "who": "char-mr4ejo8c",
       "playerKey": "player-s9z9u1",
       "where": "gen-object-object",
-      "what": "Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the D",
+      "what": "The Council's secondary purification system is not yet complete — they are racing the preparation order's timeline with infrastructure that may not be ready.",
       "tags": [
-        "alliance",
-        "witness",
-        "chain-of-command"
+        "crisis",
+        "infrastructure",
+        "water"
       ],
       "spectrumDeltas": {},
       "visibility": "witnessed",

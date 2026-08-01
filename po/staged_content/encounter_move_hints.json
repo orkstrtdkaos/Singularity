@@ -1,0 +1,149 @@
+{
+ "schemaVersion": 1,
+ "id": "encounter_move_hints",
+ "kind": "content",
+ "note": "SNG-252 §2c (Aevi 2026-08-01): move consequence-hints per function family × encounter kind + per-kind emphasis order. The moves chip reads '{ability} — {FAMILY} · {hint}'; this authors the {hint} in the kind's CURRENCY (hp/ground/resolve/insight/progress across) and VOICE (SNG-247 kind voice). `emphasis` = the family order the kind surfaces first (kind-aware ordering - a standoff leads with INFLUENCE/KNOW, a fight with HARM). CCode reads hint[kind][family]; falls back to `default` for a family with no kind-specific hint. A family a kind can't use meaningfully gets a `weak` note (still offered - moves are shortcuts not a cage - but flagged as off-currency).",
+ "byKind": {
+  "fight": {
+   "emphasis": [
+    "HARM",
+    "PROTECT",
+    "SHAPE",
+    "MOVE",
+    "INFLUENCE",
+    "KNOW",
+    "SUSTAIN",
+    "RESTORE"
+   ],
+   "currency": "hp",
+   "families": {
+    "HARM": "strikes for damage",
+    "PROTECT": "guards — blunts the next hit",
+    "KNOW": "reads the opening — sharpens your next strike",
+    "INFLUENCE": "rattles them — may cost them the initiative",
+    "SHAPE": "changes the ground of the fight",
+    "MOVE": "repositions — closes or breaks the distance",
+    "RESTORE": "mends mid-fight",
+    "SUSTAIN": "steadies your wind for the next exchange"
+   }
+  },
+  "chase": {
+   "emphasis": [
+    "MOVE",
+    "SHAPE",
+    "KNOW",
+    "SUSTAIN",
+    "INFLUENCE",
+    "PROTECT",
+    "HARM",
+    "RESTORE"
+   ],
+   "currency": "ground",
+   "families": {
+    "MOVE": "gains ground — the gap opens your way",
+    "SHAPE": "alters the path — a shortcut or a barrier",
+    "KNOW": "reads the ground ahead — the smart line",
+    "SUSTAIN": "holds your wind — you don't flag",
+    "INFLUENCE": "breaks their pace — they falter a step",
+    "PROTECT": "shrugs off a stumble",
+    "HARM": {
+     "text": "a thrown strike — costs a beat of ground",
+     "weak": true
+    },
+    "RESTORE": "catches your breath — recovers wind"
+   }
+  },
+  "standoff": {
+   "emphasis": [
+    "INFLUENCE",
+    "KNOW",
+    "PROTECT",
+    "SHAPE",
+    "SUSTAIN",
+    "MOVE",
+    "RESTORE",
+    "HARM"
+   ],
+   "currency": "their resolve",
+   "families": {
+    "INFLUENCE": "presses their resolve — they bend toward yielding",
+    "KNOW": "reads their certainty — finds the crack to press",
+    "PROTECT": "holds your position — their pressure slides off",
+    "SHAPE": "reframes the standoff — shifts what's at stake",
+    "SUSTAIN": "keeps your composure — you don't waver",
+    "MOVE": "changes your footing — a better angle to press from",
+    "RESTORE": "steadies your nerve",
+    "HARM": {
+     "text": "a threat of force — may harden them instead of bending them",
+     "weak": true
+    }
+   }
+  },
+  "puzzle": {
+   "emphasis": [
+    "KNOW",
+    "SHAPE",
+    "INFLUENCE",
+    "MOVE",
+    "PROTECT",
+    "SUSTAIN",
+    "HARM",
+    "RESTORE"
+   ],
+   "currency": "insight",
+   "families": {
+    "KNOW": "reads the mechanism — a piece gives",
+    "SHAPE": "works the mechanism — reorders what's stuck",
+    "INFLUENCE": "coaxes it — the sealed thing loosens",
+    "MOVE": "tries a new approach — a different angle in",
+    "PROTECT": "guards against a mis-step's cost",
+    "SUSTAIN": "holds your focus — you don't lose the thread",
+    "HARM": {
+     "text": "forces it — may break what you meant to open",
+     "weak": true
+    },
+    "RESTORE": "clears your head — a fresh read"
+   }
+  },
+  "hazard": {
+   "emphasis": [
+    "MOVE",
+    "PROTECT",
+    "KNOW",
+    "SUSTAIN",
+    "SHAPE",
+    "RESTORE",
+    "INFLUENCE",
+    "HARM"
+   ],
+   "currency": "progress across",
+   "families": {
+    "MOVE": "presses across — ground gained toward the far side",
+    "PROTECT": "guards against a bad step — softens the cost",
+    "KNOW": "reads the ground — the safe line across",
+    "SUSTAIN": "holds your footing — you don't tire on the crossing",
+    "SHAPE": "steadies the ground — makes the crossing surer",
+    "RESTORE": "recovers from a slip",
+    "INFLUENCE": {
+     "text": "the ground doesn't care — little to press",
+     "weak": true
+    },
+    "HARM": {
+     "text": "nothing here to strike",
+     "weak": true
+    }
+   }
+  }
+ },
+ "default": {
+  "HARM": "strikes",
+  "PROTECT": "guards",
+  "KNOW": "reads the situation",
+  "INFLUENCE": "presses",
+  "SHAPE": "reshapes it",
+  "MOVE": "repositions",
+  "RESTORE": "mends",
+  "SUSTAIN": "steadies you"
+ },
+ "howCCodeUses": "For each owned ability's family in the ribbon moves, look up byKind[encounterKind].families[FAMILY]; if a string, use as the hint; if an object with .weak, render the .text dimmed/flagged (still clickable - moves are shortcuts not a cage, but the player sees it's off-currency for this kind). Order the family groups by byKind[kind].emphasis. Fall back to default[FAMILY] if the kind lacks a specific hint. The chip reads: '{ability.name} — {FAMILY} · {hint}'."
+}

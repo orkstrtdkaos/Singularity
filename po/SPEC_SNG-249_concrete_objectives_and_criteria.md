@@ -93,3 +93,77 @@ WITHOUT filling with wordy mush. Generation earns trust by being concrete, not j
 3. (Aevi) The vague-marker + concrete-anchor sets — I author these (which abstractions fail, which anchors pass)
    from the SNG-239 change-statability audit, so the validator has a real list to check against.
 4. (Erik) Same bar for authored content in CI? Lean: yes — SNG-239 finally becomes the gate it should have been.
+
+
+---
+
+# §5 — COMPLETE ARC AT CREATION: the whole thing is built at mint; play REVEALS it (Erik, 2026-07-27)
+Erik: "A quest or encounter needs to have a complete structured arc built at time of creation. How it's
+accomplished and revealed IS the play."
+
+This SHARPENS §1-4 from "each stage is concrete" to "the WHOLE ARC exists, coherent, at the moment of creation."
+The distinction matters:
+- §1-4 (concreteness): each stage has a testable objective + criterion.
+- §5 (completeness): ALL the stages, AND the resolution(s), AND the win-condition exist AT MINT — the quest is
+  born whole. Play is the REVEALING and ACCOMPLISHING of a determined structure, NOT making-it-up-as-you-go.
+
+## §5a — the requirement
+A generated quest is born carrying its ENTIRE arc, exactly as an authored one does (verified: the Second Thread
+mints with all 6 stages — each objective+condition+change — AND all 3 outcomes, authored whole). A generated
+quest MUST match that: premise + the full stage sequence (beginning→middle→turn) + every resolution/outcome +
+the win-condition, ALL determined at creation. Same for a generated encounter: its kind, its finish conditions,
+its change-conditions, its exits — the complete structured frame, at mint.
+- **NOT allowed:** generate a thin premise + one or two stages and let play improvise the rest; a quest whose
+  later stages or ending don't exist yet and get made up when reached. That's the "improvises its own spine and
+  hopes it connects" failure — it produces incoherence (a middle that doesn't lead to the end, an ending that
+  doesn't answer the premise).
+- **Required:** the arc is COHERENT as a whole at birth — the stages LEAD to the resolutions, the resolutions
+  ANSWER the premise, the win-condition is reachable through the stages. A GM/engine could read the whole quest
+  at creation and see a complete, sensible arc.
+
+## §5b — "how it's accomplished and revealed is the play" — the key clarification
+The complete arc is NOT spoiled to the player. Built-whole ≠ shown-whole:
+- The STRUCTURE is fully determined at mint (all stages, the resolution, the win-condition exist).
+- The REVEAL is paced through play (SNG-239 §6a — the player learns the arc as they walk it; mystery at the
+  start is fine).
+- The ACCOMPLISHMENT is the player's (their choices move through the determined stages toward the determined
+  resolutions).
+So: the whole thing exists, hidden; play uncovers and enacts it. This is exactly authored quests today — the
+Second Thread's ending exists from the moment it's authored; the player just hasn't reached it. Generated quests
+must be the SAME: whole at birth, revealed through play. The lazy-generation stance (app.js:2037 "never batch a
+quest's future stages") is about IMAGERY (don't pre-RENDER art for unreached stages) — NOT structure. Structure
+is built whole; only the art/prose surface is lazy. Keep that split: complete STRUCTURE at mint, lazy RENDERING.
+
+## §5c — why this is load-bearing for SNG-248
+An on-demand generator that emits partial arcs produces quests that START coherent and DRIFT — because the parts
+that don't exist yet get improvised turn-by-turn with no view of the whole, so the middle wanders and the ending
+doesn't land. Building the complete arc at creation is what guarantees COHERENCE: the generator commits to a
+whole shape once, with all parts visible to each other, so the ending answers the premise and the stages lead
+there. It's the structural version of §1-4's concreteness: not just "each stage is testable" but "the stages
+form a real arc that resolves." Generation earns trust by being WHOLE, not just fluent and concrete.
+
+## §5d — enforcement (extends §3)
+- **Generation is ATOMIC (CCode):** a generated quest/encounter is authored in ONE mint as a complete arc —
+  premise + all stages + all outcomes + win-condition — not a premise now and stages later. The generate() call
+  for a quest returns the whole structure or fails (repair/reject); it never returns a partial to be extended in
+  play.
+- **A COMPLETENESS + COHERENCE gate (CCode):** extend the born-complete gate (SNG-234/248/§3b) to check the ARC:
+  (a) has ≥ the minimum stages for its type, (b) has at least one resolution/outcome, (c) the win-condition is
+  reachable via the stages, (d) the outcomes ANSWER the premise (a coherence check — the ending resolves what the
+  premise raised). Fail → repair or reject; a partial or incoherent arc never ships.
+- **Aevi:** the generation prompt requires the WHOLE arc in one authored object, with the coherence bar stated
+  ("the final stage's condition must make at least one outcome reachable; the outcomes must resolve the premise's
+  tension") + a GOOD (complete, coherent) vs BAD (thin premise, missing ending, wandering middle) example.
+
+## §5e — guards (added)
+- **Whole ≠ spoiled** — the complete arc is built, then REVEALED through play (SNG-239 §6a). Don't dump the whole
+  quest on the player at mint; pace the reveal. Built-whole, shown-gradually.
+- **Structure whole, rendering lazy** — the STRUCTURE (stages, outcomes, win-condition) is complete at mint; the
+  ART/PROSE for unreached beats stays lazily rendered (app.js:2037). Don't conflate them — complete the skeleton,
+  render the surface on reach.
+- **Coherence is the real bar** — the point isn't just "N stages exist" but "the stages form an arc that
+  RESOLVES." A quest with 5 disconnected stages and an unrelated ending passes a count but fails coherence —
+  reject it. The ending must answer the premise.
+- **No improvised spine** — play may color HOW a determined beat goes, but the beats and the resolutions
+  themselves are fixed at creation. The player's choices move THROUGH the arc; they don't author the arc's
+  missing pieces mid-play. (Emergent side-content is fine; the quest's own spine is determined.)

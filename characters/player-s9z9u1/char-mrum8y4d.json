@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 31,
   "maxEnergy": 115,
-  "energy": 57,
+  "energy": 47,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -289,89 +289,79 @@
         "player": null,
         "summary": "Loki reads the aggressor through insight — a striker already committed to the next blow.",
         "narration": "You are on your feet now, knife in hand, and you let yourself go still for a moment — not passive, just listening with your whole body. The aggressor is forward-weighted, the way a striker is who has committed to the next move before they have made it. Their eyes are fixed at throat-height. They have decided where you are going to be."
+      },
+      {
+        "player": null,
+        "summary": "At the braided confluence below the rise, a stranger came at Loki out of the cold spring afternoon and did not stop until the fight did — and even then, the question neither of them had fully asked was still hanging in the mud between them, with Veln Ashpause watching from the brush and Cy running its numbers in silence.",
+        "narration": "The stranger's guard comes up — clean, practiced, the same guard they have used a dozen times before. Your knife finds it anyway. Not through it. Against it. The impact runs up your arm and they step back hard, heel catching a root, and for a moment they are only trying not to fall.\n\nThey do not fall. But they stop.\n\nTheir eyes find yours again and the forward lean is gone. The hands have dropped slightly. They are breathing through their mouth now, which is a thing people do when the body has decided the fight is over before the mind has caught up.\n\nThe question is still in the air. 'Why?' You asked it. They asked it. Nobody has answered it yet. The stranger looks at you across the cold mud and says nothing, and the silence is a different kind of silence than the one before the first blow.\n\nVeln Ashpause has not moved. They are still at the edge of the brush, grey coat, that expression of helpless sympathy fixed on Loki like a weight they cannot put down. Cy is at your left, lens at its smallest ring, watching the stranger with the patience of something that has waited longer than this before."
       }
     ],
     "lastTurn": {
-      "narration": "You are on your feet now, knife in hand, and you let yourself go still for a moment — not passive, just listening with your whole body. The aggressor is forward-weighted, the way a striker is who has committed to the next move before they have made it. Their eyes are fixed at throat-height. They have decided where you are going to be.",
-      "sceneSummary": "Loki reads the aggressor through insight — a striker already committed to the next blow.",
+      "narration": "The stranger's guard comes up — clean, practiced, the same guard they have used a dozen times before. Your knife finds it anyway. Not through it. Against it. The impact runs up your arm and they step back hard, heel catching a root, and for a moment they are only trying not to fall.\n\nThey do not fall. But they stop.\n\nTheir eyes find yours again and the forward lean is gone. The hands have dropped slightly. They are breathing through their mouth now, which is a thing people do when the body has decided the fight is over before the mind has caught up.\n\nThe question is still in the air. 'Why?' You asked it. They asked it. Nobody has answered it yet. The stranger looks at you across the cold mud and says nothing, and the silence is a different kind of silence than the one before the first blow.\n\nVeln Ashpause has not moved. They are still at the edge of the brush, grey coat, that expression of helpless sympathy fixed on Loki like a weight they cannot put down. Cy is at your left, lens at its smallest ring, watching the stranger with the patience of something that has waited longer than this before.",
+      "sceneSummary": "At the braided confluence below the rise, a stranger came at Loki out of the cold spring afternoon and did not stop until the fight did — and even then, the question neither of them had fully asked was still hanging in the mud between them, with Veln Ashpause watching from the brush and Cy running its numbers in silence.",
       "choices": [
         {
-          "label": "Feed them the expected strike — then go somewhere else entirely (The Misdirect)",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": -0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "feint",
-            "deceive"
-          ],
-          "abilityId": "the_misdirect",
-          "energyCost": 1,
-          "trivial": false
-        },
-        {
-          "label": "Make yourself appear to be a step to the left — let the blow land on empty air (The False Target)",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": -0.25
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "feint",
-            "hide"
-          ],
-          "abilityId": "the_false_target",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "They are already committed — hit them while they are mid-decision (Hunter's Strike)",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "risky"
-          ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Answer the question — say 'Why?' back to them, plainly, and see if the fight stops before it finishes",
+          "label": "Ask the question plainly — 'Who sent you, and what did they tell you I'd done?'",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "violence_peace": 0.2
-          },
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
-            "calm"
+            "persuade",
+            "negotiate"
           ],
           "abilityId": null,
-          "energyCost": null,
           "trivial": false
+        },
+        {
+          "label": "Let See the Made Thing run — read what the yield actually cost them, and what they're still deciding",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "trivial": false
+        },
+        {
+          "label": "Turn to Veln — 'You've been waiting for this. What did you see coming?'",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "study"
+          ],
+          "abilityId": null,
+          "trivial": false
+        },
+        {
+          "label": "Say nothing — keep the knife out, keep still, and let the silence do the work",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "guard"
+          ],
+          "abilityId": null,
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet, knife in hand, three paces from the aggressor.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — spring evening, thin fading light, cold mud underfoot. The fight has ended; both figures are still standing.",
         "npcsPresent": [
           {
             "name": "The Stranger (aggressor)",
-            "state": "Forward-weighted, eyes at throat-height, already committed to the next strike — waiting for Loki to move first."
+            "state": "Stepped back, heel caught a root, breathing through the mouth — the forward lean gone, hands lower, the body has decided before the mind has."
           },
           {
             "name": "Veln Ashpause",
-            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki — unchanged."
+            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy unchanged — watching Loki."
           },
           {
             "name": "Cy",
-            "state": "At Loki's left, lens at its smallest ring, mechanism tight and waiting."
+            "state": "At Loki's left, lens at its smallest ring, watching the stranger with old patience."
           }
         ],
         "objects": [
@@ -382,33 +372,33 @@
           "belt knife in Loki's hand"
         ],
         "threads": [
-          "The stranger's question — 'Why?' — still open, unanswered.",
+          "The question — 'Why?' — still open and unanswered between Loki and the stranger.",
+          "The stranger has yielded but has not explained themselves.",
           "The Hourkeeper has pre-remembered something and will not say what.",
           "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
           "The three-hundred-year tree about to fruit and the missing person it was planted for."
         ]
       },
-      "encounterOps": [
-        {
-          "op": "tactic",
-          "tag": "press-in"
-        }
-      ]
+      "sceneEnded": false,
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief sharp exchange"
+      }
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — spring afternoon, thin light, cold mud underfoot. Loki is on their feet, knife in hand, three paces from the aggressor.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — spring evening, thin fading light, cold mud underfoot. The fight has ended; both figures are still standing.",
       "npcsPresent": [
         {
           "name": "The Stranger (aggressor)",
-          "state": "Forward-weighted, eyes at throat-height, already committed to the next strike — waiting for Loki to move first."
+          "state": "Stepped back, heel caught a root, breathing through the mouth — the forward lean gone, hands lower, the body has decided"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy fixed on Loki — unchanged."
+          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy unchanged — watching Loki."
         },
         {
           "name": "Cy",
-          "state": "At Loki's left, lens at its smallest ring, mechanism tight and waiting."
+          "state": "At Loki's left, lens at its smallest ring, watching the stranger with old patience."
         }
       ],
       "objects": [
@@ -419,7 +409,8 @@
         "belt knife in Loki's hand"
       ],
       "threads": [
-        "The stranger's question — 'Why?' — still open, unanswered.",
+        "The question — 'Why?' — still open and unanswered between Loki and the stranger.",
+        "The stranger has yielded but has not explained themselves.",
         "The Hourkeeper has pre-remembered something and will not say what.",
         "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
         "The three-hundred-year tree about to fruit and the missing person it was planted for."
@@ -1066,7 +1057,7 @@
     "lastSharedReadAt": "2026-07-31T18:47:06.183Z",
     "lastTickWorldDay": 31,
     "lastCanonWorldDay": 31,
-    "turnsSinceOffer": 30,
+    "turnsSinceOffer": 31,
     "recentOffers": [
       {
         "thing": "Cy's held foreleg — a Precursor thing recognizing something Precursor; it has formed a judgment it has not spoken",
@@ -2096,8 +2087,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785587536650,
-  "rev": 286,
+  "updatedAt": 1785587972930,
+  "rev": 295,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2672,7 +2663,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 31
+    "the_quickwood": 32
   },
   "opLossPending": false,
   "sessions": [
@@ -2719,10 +2710,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-08-01T12:32:16.648Z",
-      "lastAt": "2026-08-01T12:32:16.648Z",
+      "lastAt": "2026-08-01T12:39:32.928Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -2760,16 +2751,16 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 106,
-    "choices": 106,
+    "sceneSummary": 107,
+    "choices": 107,
     "characterDeltas": 47,
-    "scene": 106,
+    "scene": 107,
     "placeUpdates": 12,
     "codexUpdates": 76,
-    "timeOps": 100,
+    "timeOps": 101,
     "offer": 9,
     "generateRequest": 4,
-    "sceneEnded": 22,
+    "sceneEnded": 23,
     "npcUpdates": 81,
     "moveTo": 3,
     "gambitApt": 1,
@@ -2782,7 +2773,7 @@
     "ledgerEvents": 1,
     "newEncounter": 1
   },
-  "_opTurns": 106,
+  "_opTurns": 107,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2791,13 +2782,13 @@
     "schemaVersion": 1,
     "uses": {
       "see_the_made_thing": 27,
-      "falsecraft": 4,
+      "falsecraft": 5,
       "the_wrong_reality": 4,
       "the_misdirect": 2,
       "the_better_story": 10,
       "prism_sight": 7,
       "harmonic_voice": 1,
-      "hunters_strike": 1
+      "hunters_strike": 2
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -2819,13 +2810,13 @@
     ],
     "lastUsed": {
       "see_the_made_thing": 27,
-      "falsecraft": 27,
+      "falsecraft": 32,
       "the_wrong_reality": 27,
       "the_misdirect": 31,
       "the_better_story": 31,
       "prism_sight": 27,
       "harmonic_voice": 27,
-      "hunters_strike": 31
+      "hunters_strike": 32
     }
   },
   "teachers": {},
@@ -3050,158 +3041,7 @@
       }
     }
   },
-  "activeEncounter": {
-    "defId": "re-re_zone_hostile",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-re_zone_hostile",
-      "type": "duel",
-      "status": "active",
-      "round": 3,
-      "log": [
-        "r1: foresee vs strike → momentum 0",
-        "r1: move vs shield → momentum -3",
-        "r2: strike vs strike → momentum 4",
-        "r3: reveal vs shield → momentum 4"
-      ],
-      "opponentHealth": 7,
-      "tactic": "press-in",
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the aggressor",
-        "attributes": {
-          "practical": 5,
-          "physical": 5,
-          "mental": 5,
-          "social": 5
-        },
-        "energy": 112,
-        "maxEnergy": 112,
-        "tacticTags": [
-          "press-in",
-          "circle",
-          "feint"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 4,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 4,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 3.5,
-      "opponentEnergy": 69,
-      "turn": {
-        "phase": "action",
-        "sel": {
-          "sense": [
-            32
-          ],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": -7,
-        "bonusEarned": true,
-        "senseDone": true,
-        "senseLine": "You read with Read them (Insight) — success. They read you better (-7 to your action). The opening is there — you have earned a BONUS action. You read the aggressor: they favour strike. Pick a craft that answers it.",
-        "readPayoff": "You read the aggressor: they favour strike. Pick a craft that answers it."
-      },
-      "effects": [
-        {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 3,
-          "roundsLeft": 2,
-          "applies": "always",
-          "side": "player",
-          "source": "Read them (Insight)",
-          "from": "player"
-        },
-        {
-          "kind": "guard",
-          "label": "guard up",
-          "value": 4,
-          "roundsLeft": 2,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "source": "a raised guard",
-          "from": "opponent"
-        }
-      ],
-      "pressure": {
-        "player": 1,
-        "opponent": 1
-      },
-      "spent": {
-        "player": false,
-        "opponent": false
-      },
-      "lastOppFn": "shield",
-      "lastOppReceipt": {
-        "roll": 78,
-        "chance": 95,
-        "degree": "success",
-        "action": {
-          "attribute": "practical",
-          "abilityLevel": 4,
-          "label": "a raised guard",
-          "axes": {}
-        },
-        "breakdown": {
-          "components": [
-            {
-              "label": "practical 5",
-              "value": 80
-            },
-            {
-              "label": "practical mastery (beyond 4)",
-              "value": 5
-            },
-            {
-              "label": "ability rank 4",
-              "value": 20
-            },
-            {
-              "label": "surge",
-              "value": 10
-            },
-            {
-              "label": "momentum (you're on the back foot)",
-              "value": -2
-            }
-          ],
-          "total": 95,
-          "clampedFrom": 113,
-          "base": "practical",
-          "opposed": null
-        },
-        "rawChance": 113,
-        "margin": 35,
-        "matchup": 0,
-        "intensity": "surge",
-        "tier": 4,
-        "function": "shield",
-        "name": "a raised guard",
-        "effectMods": [],
-        "woven": null
-      },
-      "lastReadWasSense": true
-    }
-  },
+  "activeEncounter": null,
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"

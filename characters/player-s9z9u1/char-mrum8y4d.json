@@ -79,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 103,
+  "energy": 98,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -169,94 +169,94 @@
         "player": null,
         "summary": "Rust-choir gnats swarm the nave — old repair-drones, still trying to fix what they cannot read.",
         "narration": "The rust-choir gnats come in silence first — no hum, no warning, just a shift in the warm air of the nave as the cloud finds the two of you on the fallen stone.\n\nThey are thumbnail-sized, each one a little pressed-copper disc with six legs and a soldering tip where a mouth should be. They move in the strange, too-regular rhythm of things that were made to have a purpose and have outlasted the instruction. The cloud is perhaps three hundred of them, and it has already found the seam at Vessin's boot-lace — the place where the sole is beginning to part from the leather — and six of them are working it with the focused, oblivious industry of repair-drones attending to a hull breach.\n\nVessin pulls her boot back and gets to her feet in one motion. The knife comes up, not dramatically, just ready. She looks at the cloud and then at you, and her voice is dry and completely level. \"Tell me you know what these are,\" she says.\n\nCy, across the nave, has already pivoted. Its lens irises open to its widest position. It clicks once — a sound you have learned to read as recognition — and does not move closer. It is watching the swarm the way a thing watches something it has a filing on. The lanterns above the scaffold have gone still. The workers up there, whoever they are, have stopped moving.\n\nThe gnats have found the seam in your coat where the left shoulder was mended. The cold tips of them are already testing it."
+      },
+      {
+        "player": null,
+        "summary": "Loki reads the aggressor's pattern through Falsecraft — strike-first, committed, no recalibration.",
+        "narration": "The aggressor fills the nave's cold air with a particular kind of confidence — the leading shoulder, the weight shifting forward before the hands come up. Falsecraft reads the construction of it: this is a person who hits first and adjusts after, who has learned that the first blow usually settles the question and has never met a situation where it didn't. The seam is exactly there, in the gap between the commitment and the reconsideration — they are already deciding they have won."
       }
     ],
     "lastTurn": {
-      "narration": "The rust-choir gnats come in silence first — no hum, no warning, just a shift in the warm air of the nave as the cloud finds the two of you on the fallen stone.\n\nThey are thumbnail-sized, each one a little pressed-copper disc with six legs and a soldering tip where a mouth should be. They move in the strange, too-regular rhythm of things that were made to have a purpose and have outlasted the instruction. The cloud is perhaps three hundred of them, and it has already found the seam at Vessin's boot-lace — the place where the sole is beginning to part from the leather — and six of them are working it with the focused, oblivious industry of repair-drones attending to a hull breach.\n\nVessin pulls her boot back and gets to her feet in one motion. The knife comes up, not dramatically, just ready. She looks at the cloud and then at you, and her voice is dry and completely level. \"Tell me you know what these are,\" she says.\n\nCy, across the nave, has already pivoted. Its lens irises open to its widest position. It clicks once — a sound you have learned to read as recognition — and does not move closer. It is watching the swarm the way a thing watches something it has a filing on. The lanterns above the scaffold have gone still. The workers up there, whoever they are, have stopped moving.\n\nThe gnats have found the seam in your coat where the left shoulder was mended. The cold tips of them are already testing it.",
-      "sceneSummary": "Rust-choir gnats swarm the nave — old repair-drones, still trying to fix what they cannot read.",
+      "narration": "The aggressor fills the nave's cold air with a particular kind of confidence — the leading shoulder, the weight shifting forward before the hands come up. Falsecraft reads the construction of it: this is a person who hits first and adjusts after, who has learned that the first blow usually settles the question and has never met a situation where it didn't. The seam is exactly there, in the gap between the commitment and the reconsideration — they are already deciding they have won.",
+      "sceneSummary": "Loki reads the aggressor's pattern through Falsecraft — strike-first, committed, no recalibration.",
       "choices": [
         {
-          "label": "Step back and put shadow between you and the swarm — let Umbracraft wrap the seam they're working so the 'wound' they're chasing disappears into dark.",
+          "label": "Step inside the commitment — The Wrong Reality plants a false read of where you are as they swing",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "dark_light": -0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "defend",
-            "careful"
-          ],
-          "abilityId": "umbracraft",
-          "energyCost": 6,
-          "trivial": false,
-          "encounterId": "hard-ground"
-        },
-        {
-          "label": "Use See the Made Thing — read the swarm's pattern, find where the collective behavior has a seam of its own, and work it.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "mechanical_spiritual": -0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "defend"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": "hard-ground"
-        },
-        {
-          "label": "Use The Misdirect — give the swarm something else to chase: a false seam, a false wound, somewhere else entirely.",
-          "attribute": "social",
-          "subAttribute": "wits",
-          "axes": {
-            "falsehood_truth": -0.2
+            "falsehood_truth": -0.3
           },
           "difficulty": 15,
           "intentTags": [
             "feint",
             "defend"
           ],
-          "abilityId": "the_misdirect",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": "hard-ground"
+          "abilityId": "the_wrong_reality",
+          "energyCost": 2,
+          "trivial": false
         },
         {
-          "label": "Grab Vessin and move — get both of you out of the nave entirely, into the eastern tower where the lantern-light is absent and the stone has no open seams.",
+          "label": "Let them close and answer with Hunter's Strike — the seam you read is real, use it",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "defend",
-            "careful",
-            "travel"
+            "attack",
+            "risky"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": "hard-ground"
+          "abilityId": "hunters_strike",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Drop into the shadows the scaffold throws — Umbracraft, vanish before the strike lands",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {
+            "dark_light": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "hide",
+            "defend"
+          ],
+          "abilityId": "umbracraft",
+          "energyCost": 6,
+          "trivial": false
+        },
+        {
+          "label": "Give them a false position to commit to — The False Target, appear to be a step left while you are not",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "feint",
+            "deceive"
+          ],
+          "abilityId": "the_false_target",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. A cloud of rust-choir gnats fills the warm air of the nave, testing seams in cloth and boot-leather.",
+        "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. A cloud of rust-choir gnats still moves through the warm air. The aggressor is in the nave, closing distance.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "On her feet, knife raised, dry-eyed, watching the swarm and waiting on Loki."
+            "state": "On her feet, knife raised, watching both the swarm and the aggressor — holding her ground."
           },
           {
             "name": "Cy",
-            "state": "Lens at full iris across the nave — recognition, no approach, filing something."
+            "state": "Lens at full iris, pressed to the edge of the nave — not moving, filing everything."
           },
           {
-            "name": "Unknown workers",
-            "state": "Lanterns above the scaffold have gone still — no movement."
+            "name": "the aggressor",
+            "state": "Leaning into the approach — leading shoulder, weight forward, already certain."
           }
         ],
         "objects": [
@@ -264,15 +264,13 @@
           "Scaffold of pale lashed timber over the south transept",
           "Eastern tower doorway — darker, quieter",
           "Low run of fallen stone at the nave's eastern edge",
-          "Small knife — in Vessin's raised hand",
-          "Cloud of rust-choir gnats — three hundred copper-disc repair-drones working open seams in cloth and leather"
+          "Cloud of rust-choir gnats — still moving through the warm air"
         ],
         "threads": [
-          "Rust-choir gnats are testing the seam on Loki's mended shoulder and Vessin's parting boot-sole",
-          "Cy has recognition-clicked but has not moved — it knows what these are",
-          "Vessin asked: 'Tell me you know what these are' — unanswered",
-          "Vessin has met someone like Loki before — name and circumstances not yet given",
-          "Who is working on the scaffold at this hour"
+          "The aggressor is committed to a first strike — the seam Falsecraft found is open",
+          "Vessin is present and armed — her position is uncertain",
+          "Rust-choir gnats are still working the nave",
+          "Who is working the scaffold at this hour — unanswered"
         ]
       },
       "encounterOps": [
@@ -280,48 +278,22 @@
           "op": "tactic",
           "tag": "press-in"
         }
-      ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "vessin-tallow-bark",
-          "name": "Vessin Tallow-bark",
-          "note": "On her feet the moment the gnats found her boot-seam — knife up, dry-voiced, waiting on Loki to identify the threat.",
-          "statusNote": "Standing in the nave, knife raised, watching the gnat-cloud and Loki both.",
-          "status": "active"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "rust-choir-gnats",
-          "label": "Rust-Choir Gnats",
-          "kind": "lore",
-          "fact": "Thumbnail-sized copper repair-drones, makers long gone, still running their last instruction — find a seam, close it. They read wounds and open joints as hull-breach and attend to them with indiscriminate soldering-tips. Individually nothing; in a swarm of hundreds, a slow ruin. Found in the nave of the Half-Cathedral.",
-          "links": [
-            "grovehome",
-            "the-half-cathedral"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short, sudden encounter — moments in the nave."
-      }
+      ]
     },
     "sceneState": {
-      "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. A cloud of rust-choir gnats fills the warm air of the nave, testing seams in cloth and boot-leather.",
+      "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. A cloud of rust-choir gnats still moves through the warm air. The aggressor is in the nave, closing distance.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "On her feet, knife raised, dry-eyed, watching the swarm and waiting on Loki."
+          "state": "On her feet, knife raised, watching both the swarm and the aggressor — holding her ground."
         },
         {
           "name": "Cy",
-          "state": "Lens at full iris across the nave — recognition, no approach, filing something."
+          "state": "Lens at full iris, pressed to the edge of the nave — not moving, filing everything."
         },
         {
-          "name": "Unknown workers",
-          "state": "Lanterns above the scaffold have gone still — no movement."
+          "name": "the aggressor",
+          "state": "Leaning into the approach — leading shoulder, weight forward, already certain."
         }
       ],
       "objects": [
@@ -329,22 +301,20 @@
         "Scaffold of pale lashed timber over the south transept",
         "Eastern tower doorway — darker, quieter",
         "Low run of fallen stone at the nave's eastern edge",
-        "Small knife — in Vessin's raised hand",
-        "Cloud of rust-choir gnats — three hundred copper-disc repair-drones working open"
+        "Cloud of rust-choir gnats — still moving through the warm air"
       ],
       "threads": [
-        "Rust-choir gnats are testing the seam on Loki's mended shoulder and Vessin's parting boot-sole",
-        "Cy has recognition-clicked but has not moved — it knows what these are",
-        "Vessin asked: 'Tell me you know what these are' — unanswered",
-        "Vessin has met someone like Loki before — name and circumstances not yet given",
-        "Who is working on the scaffold at this hour"
+        "The aggressor is committed to a first strike — the seam Falsecraft found is open",
+        "Vessin is present and armed — her position is uncertain",
+        "Rust-choir gnats are still working the nave",
+        "Who is working the scaffold at this hour — unanswered"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 22,
+    "hour": 23,
     "realAnchor": null
   },
   "companions": [
@@ -1080,7 +1050,7 @@
     "lastSharedReadAt": "2026-08-01T19:55:26.911Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -2310,8 +2280,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785615060580,
-  "rev": 346,
+  "updatedAt": 1785615152431,
+  "rev": 349,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3081,7 +3051,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 40
+    "the_quickwood": 41
   },
   "opLossPending": false,
   "sessions": [
@@ -3136,10 +3106,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T20:11:00.579Z",
+      "lastAt": "2026-08-01T20:12:32.431Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 6
+      "beats": 7
     }
   ],
   "establishedFacts": [
@@ -3177,10 +3147,10 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 112,
-    "choices": 112,
+    "sceneSummary": 113,
+    "choices": 113,
     "characterDeltas": 50,
-    "scene": 112,
+    "scene": 113,
     "placeUpdates": 13,
     "codexUpdates": 79,
     "timeOps": 105,
@@ -3195,13 +3165,13 @@
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
-    "encounterOps": 7,
+    "encounterOps": 8,
     "ledgerEvents": 1,
     "newEncounter": 1,
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 112,
+  "_opTurns": 113,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3512,7 +3482,9 @@
       "type": "duel",
       "status": "active",
       "round": 1,
-      "log": [],
+      "log": [
+        "r1: reveal vs strike → momentum 0"
+      ],
       "opponentHealth": 4,
       "tactic": "press-in",
       "mode": "skill_battle",
@@ -3548,11 +3520,13 @@
         "synthesized": true
       },
       "momentum": 0,
-      "opponentEnergy": 66,
+      "opponentEnergy": 61,
       "turn": {
-        "phase": "sense",
+        "phase": "action",
         "sel": {
-          "sense": [],
+          "sense": [
+            9
+          ],
           "action": [],
           "bonus": []
         },
@@ -3561,10 +3535,75 @@
           "action": "",
           "bonus": ""
         },
-        "setupBonus": 0,
-        "bonusEarned": false,
-        "senseDone": false,
-        "senseLine": ""
+        "setupBonus": 4,
+        "bonusEarned": true,
+        "senseDone": true,
+        "senseLine": "You read with Falsecraft — success. You have the read (+4 to your action). The opening is there — you have earned a BONUS action. You read the aggressor: they favour strike. Pick a craft that answers it.",
+        "readPayoff": "You read the aggressor: they favour strike. Pick a craft that answers it."
+      },
+      "effects": [
+        {
+          "kind": "insight",
+          "label": "you have their measure",
+          "value": 3,
+          "roundsLeft": 2,
+          "applies": "always",
+          "side": "player",
+          "source": "Falsecraft",
+          "from": "player"
+        }
+      ],
+      "pressure": {
+        "player": 0,
+        "opponent": 0
+      },
+      "spent": {
+        "player": false,
+        "opponent": false
+      },
+      "lastOppFn": "strike",
+      "lastOppReceipt": {
+        "roll": 5,
+        "chance": 45,
+        "degree": "crit_success",
+        "action": {
+          "attribute": "practical",
+          "abilityLevel": 1,
+          "label": "a hard strike",
+          "axes": {}
+        },
+        "breakdown": {
+          "components": [
+            {
+              "label": "practical 2",
+              "value": 40
+            },
+            {
+              "label": "ability rank 1",
+              "value": 5
+            }
+          ],
+          "total": 45,
+          "clampedFrom": null,
+          "base": "practical",
+          "opposed": null
+        },
+        "rawChance": 45,
+        "margin": 40,
+        "matchup": 0,
+        "intensity": "standard",
+        "tier": 1,
+        "function": "strike",
+        "name": "a hard strike",
+        "effectMods": [],
+        "woven": null
+      },
+      "lastReadWasSense": true,
+      "senseTierEarned": 2,
+      "senseResist": {
+        "value": 6,
+        "label": "their natural guardedness",
+        "from": "passive"
       }
     }
   },

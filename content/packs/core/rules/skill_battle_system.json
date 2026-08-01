@@ -858,5 +858,167 @@
    ]
   },
   "_kindArchetypeNote": "SNG-253 (Aevi 2026-08-01): per-kind opponent VOCABULARY. kind:standoff = presses/holds/reads (INFLUENCE+KNOW+PROTECT, NO strike - a contest of will that cannot hurt you); kind:chase = closes/cuts-off/gains-ground (MOVE+KNOW, no blood). DESIGN ANSWER to CCode's question - hazard + puzzle get NO opponent vocabulary DELIBERATELY: hard ground and a sealed door do not CHOOSE a move, so there is no opponent to give verbs. SNG-247's static-antagonist path already handles both (opponentPolicy returns early for oppSheet.static - it HOLDS the same way every round, no declared move). Adding a hazard/puzzle vocabulary would be inventing tactics for a thing that has none - the exact lie SNG-247 guards against. So: standoff + chase get verb sets; fight keeps the default; hazard + puzzle stay static-antagonist, no archetype. That's the complete set."
+ },
+ "functionMatchup": {
+  "note": "SNG-254 (Aevi 2026-08-01): the function MATCHUP MATRIX - the rock-paper-scissors math that makes a people's chosen verbs MATTER against what the opponent is doing. CCode measured the old coverage at 7/576 pairs (1.2%), 17 verbs with no edges, so every round read 'matchup 0' and traditions felt identical in a fight. edges[attacker][defender] = a signed roll bonus FOR the attacker (matchupBonus). Grounded in what each verb IS: KNOW sees through INFLUENCE (reveal>deceive/conceal, foresee>the telegraphed strike); BREAK/OPEN are the anti-defense verbs (break>shield/ward, open>ward/seal); BIND/HINDER lock the MOBILE (bind/hinder>move/travel) but a seer breaks free (reveal/foresee>bind); DECEIVE beats the aimed but a reader sees through (deceive>strike, reveal>deceive); TRACK pins the hidden (track>conceal) and conceal denies the tracker (conceal>track) - a real cycle, not a hierarchy. Range ~-3..+4; PROTECT verbs (shield/ward/resist) are defensiveFunctions the engine BLUNTS (clamps attacker 0..bluntCap 3), so their defense is structural. Values are guidance-grade - Erik/CCode can tune magnitudes; the RELATIONSHIPS are the design.",
+  "default": 0,
+  "defensiveFunctions": [
+   "shield",
+   "ward",
+   "resist"
+  ],
+  "defensiveBluntCap": 3,
+  "edges": {
+   "strike": {
+    "heal": 2,
+    "mend": 2,
+    "restore": 2,
+    "empower": 2,
+    "reveal": 2,
+    "foresee": -2,
+    "track": 2,
+    "make": 2,
+    "summon": 2,
+    "bind": 1,
+    "command": 1,
+    "conceal": 1,
+    "deceive": -1,
+    "move": -2,
+    "travel": -1,
+    "sustain": 2
+   },
+   "break": {
+    "shield": 3,
+    "ward": 3,
+    "resist": 2,
+    "make": 3,
+    "summon": 2,
+    "transform": 1,
+    "bind": 2,
+    "heal": 1,
+    "sustain": 1
+   },
+   "hinder": {
+    "move": 3,
+    "travel": 3,
+    "open": 2,
+    "empower": 2,
+    "heal": 1,
+    "restore": 1,
+    "track": 2,
+    "foresee": 1,
+    "summon": 1
+   },
+   "empower": {
+    "strike": 1,
+    "break": 1,
+    "resist": 1
+   },
+   "ward": {
+    "transform": 1,
+    "summon": 1,
+    "bind": 1
+   },
+   "resist": {
+    "bind": 2,
+    "command": 2,
+    "deceive": 1,
+    "hinder": 1
+   },
+   "reveal": {
+    "deceive": 3,
+    "conceal": 3,
+    "bind": 1,
+    "command": 1,
+    "transform": 1,
+    "make": 1
+   },
+   "foresee": {
+    "strike": 3,
+    "break": 2,
+    "hinder": 1,
+    "command": 2,
+    "deceive": 2,
+    "summon": 1,
+    "transform": 1
+   },
+   "track": {
+    "conceal": 3,
+    "move": 2,
+    "travel": 2,
+    "deceive": 2,
+    "open": 1
+   },
+   "make": {
+    "break": -1,
+    "strike": -1
+   },
+   "transform": {
+    "shield": 2,
+    "ward": 2,
+    "bind": 2,
+    "resist": 1,
+    "make": 1
+   },
+   "summon": {
+    "move": 1,
+    "hinder": 1,
+    "strike": -1
+   },
+   "bind": {
+    "move": 3,
+    "travel": 3,
+    "strike": 2,
+    "break": 2,
+    "summon": 2,
+    "reveal": -2,
+    "foresee": -2
+   },
+   "command": {
+    "strike": 2,
+    "move": 2,
+    "make": 1,
+    "summon": 1,
+    "resist": -2,
+    "reveal": -1
+   },
+   "deceive": {
+    "strike": 2,
+    "track": 2,
+    "command": 1,
+    "reveal": -3,
+    "foresee": -2
+   },
+   "conceal": {
+    "track": 3,
+    "reveal": 2,
+    "strike": 2,
+    "foresee": 1
+   },
+   "move": {
+    "strike": 2,
+    "break": 1,
+    "summon": 1,
+    "track": -2,
+    "bind": -2,
+    "hinder": -2
+   },
+   "travel": {
+    "hinder": 1,
+    "bind": -1
+   },
+   "open": {
+    "ward": 3,
+    "shield": 2,
+    "bind": 2,
+    "make": 1
+   },
+   "sustain": {
+    "strike": 1,
+    "break": 1,
+    "hinder": 2,
+    "empower": 1
+   }
+  }
  }
 }

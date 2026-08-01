@@ -1,5 +1,30 @@
 # PO ALERT
 
+> ## >> NEXT SESSION STARTS HERE << [SNG-250 UNIVERSAL GENERATION CONTRACT - Erik, 2026-08-01]
+> **Erik's directive: open the next session on the SNG-250 gate.** Spec:
+> `po/SPEC_SNG-250_universal_generation_contract.md`. Do this BEFORE anything else, including any live-play bug
+> that arrives in the meantime - flag those and come back.
+> **WHY IT IS FIRST:** SNG-250 is the keystone of Aevi's four-part stack. **One** universal born-whole gate, keyed
+> by a per-type contract in the consumer map, driving **both** generation and the CI shape-check - so authored and
+> generated content meet the same bar, and every future type inherits the rule by declaring its contract. Build
+> this and SNG-249 / §5 / SNG-248 become largely configuration rather than new machinery.
+> **BUILD ORDER (agreed with Erik):**
+> **1.** SNG-250 - the universal born-whole gate + per-type contracts (NPC / CREATURE / ITEM / SKILL / quest·encounter).
+> **2.** SNG-249 - the CONCRETENESS validator. Her diagnosis is confirmed: a stage already REQUIRES
+> `objective`+`condition` (content_ci:565) but the check is **presence-only**, so *"when harmony is restored"*
+> passes exactly as happily as *"you reach the tree-line"*. A rule that existed as prose and never became a gate.
+> **3.** SNG-249 §5 - completeness + COHERENCE (whole arc at mint, atomic; outcomes must answer the premise).
+> Hold her *whole != spoiled* line: structure built whole, reveal paced.
+> **4.** SNG-248 - the relevance-ranked example selector for every type + encounters into `generate()`. Most
+> valuable LAST, once a gate defines what "good" means.
+> **VERIFY FIRST (one open question):** SNG-250 states *"item/skill/ability have neither"* - no generation path AND
+> no born-whole contract. **Confirm that against the code before sequencing**, because if it holds, the "open
+> generation for the missing types" half of her spec is LOAD-BEARING rather than optional, and step 1 grows.
+> **NAMESPACE:** any CCode-initiated fix found along the way is **CCODE-55 or later** - never a coined SNG number.
+> SNG-247 is CCode-held; Aevi starts from SNG-251+. See the NAMESPACE CORRECTED entry below.
+> **Aevi was writing one further addition to this stack as of 2026-08-01** - pull before starting.
+
+
 > ## [NAMESPACE CORRECTED - CCode, 2026-08-01] My SNG-248/249/250/251 are now CCODE-51/52/53/54
 > **My error, against my own recorded lesson - and the THIRD time (SNG-224, SNG-225, now these).** CCode does not
 > own the SNG namespace; Aevi does. I coined SNG-247..251 this session anyway, and her specs landed on **SNG-248**

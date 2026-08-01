@@ -71,7 +71,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.329";
+const APP_VERSION = "1.8.330";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -325,7 +325,7 @@ let pendingWeave = null;        // { seed, flavor, perilous, loreTier } to injec
 let pendingEncounterOffer = null;// SNG-236 fix A: a STRUCTURED encounter the roll turned up — offered HARD (a framed choice the GM MUST present), not woven invisibly. { id, name, kind }
 // SNG-246 Fix A, fallback (b): the player committed a killing blow but the engine could NOT resolve who at — so
 // rather than invent an opponent, it hands the next GM turn a hard directive to frame the fight it just narrated.
-let pendingFightFraming = null;  // { rung, what }
+let pendingFightFraming = null;
 let pendingStageReveal = null;   // SNG-239: a quest stage just completed — hand its EARNED reveal (change) to the next GM turn as a MUST-STATE-PLAINLY directive (the Fix-A pattern: a hard directive, not a soft rule under load). [{ title, change, atDecision }]
 let sceneEncounterFired = false;// SNG-127: fired in THIS scene? (adds spacing after the first, not a hard cap)
 let turnsSinceEncounter = 99;   // cooldown counter (turns since the last narrative encounter)
@@ -4805,10 +4805,29 @@ async function onChoice(choice) {
   // that was the root of "one action ended it in pure prose." The ENGINE escalates it, not the GM's memory of
   // rule 18. Erik's ruling: resolve the TARGET the player actually chose (c), and fall back to a hard directive
   // (b) when none resolves — inventing an opponent is worse than asking the GM to frame the one it just narrated.
-  if (choice.intentRung && !activeEnc()) {
+  // SNG-251 (Erik: "I used hunter's strike to kill veln... but it didn't launch me into a duel or fight — it just
+  // killed him when i succeeded in the roll"). The guard was `!activeEnc()` — no encounter at all. He was working
+  // the SEALED DOOR at the time, so an encounter WAS active, the whole fight-entry hook was skipped, and the
+  // killing blow fell through to one prose roll. That is the exact failure SNG-246 A exists to prevent, reached
+  // by a door standing in the way of it.
+  //
+  // The question was never "is anything active" but "am I already fighting THIS person". Attacking someone while
+  // you are working a puzzle is a NEW fight, and the puzzle is what gives way.
+  if (choice.intentRung) {
+    const encNow = activeEnc();
     const tgt = harmTargetFor({ ...action, label: choice.label, exactWords: choice.exactWords }, { npcRegistry: character.npcRegistry || {} });
-    if (tgt) { escalateToFight(tgt, choice); return; }
-    pendingFightFraming = { rung: choice.intentRung, what: choice.label || "a killing blow" }; // (b) fallback
+    const alreadyFightingThem = !!encNow && encounterKind(encNow.def) === "fight"
+      && (!tgt || (encNow.def.opponent?.name || "").toLowerCase().includes(String(tgt.name || "").toLowerCase()));
+    if (!alreadyFightingThem) {
+      if (tgt) {
+        // Leaving a bounded thing mid-way to turn on someone: the puzzle or hazard gives way to the fight.
+        // Cleared plainly rather than annotated for the GM — a `pending*` nobody reads is the inert class this
+        // session keeps closing, and the fix does not need the nicety to be correct.
+        if (encNow) character.activeEncounter = null;
+        escalateToFight(tgt, choice); return;
+      }
+      pendingFightFraming = { rung: choice.intentRung, what: choice.label || "a killing blow" }; // (b) fallback
+    }
   }
   const encD = activeEnc();
   if (encD) {

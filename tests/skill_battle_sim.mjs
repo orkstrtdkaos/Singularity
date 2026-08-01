@@ -935,5 +935,20 @@ check("SNG-250: the craft chip no longer prints 'ward tnotable' — a numeric cr
     return typeof d.holdTier === "number" && d.holdTier > 0;
   })());
 
+// ---- SNG-251 (Erik: "I used hunter's strike to kill veln... but it didn't launch me into a duel or fight") ----
+// The SNG-246-A guard was `!activeEnc()` — no encounter AT ALL. He was working the SEALED DOOR at the time, so an
+// encounter WAS active, the whole fight-entry hook was skipped, and a killing blow fell through to ONE prose roll.
+// The question was never "is anything active" but "am I already fighting THIS person".
+const appSrc251 = readFileSync(join(root, "app.js"), "utf8");
+check("SNG-251: the fight-entry hook no longer gives up merely because SOME encounter is active",
+  !appSrc251.includes("if (choice.intentRung && !activeEnc())")
+  && /if \(choice\.intentRung\) \{/.test(appSrc251));
+check("SNG-251 (the property): it skips only when you are ALREADY fighting that same person",
+  /alreadyFightingThem/.test(appSrc251)
+  && /encounterKind\(encNow\.def\) === "fight"/.test(appSrc251)
+  && /if \(!alreadyFightingThem\)/.test(appSrc251));
+check("SNG-251: turning on someone mid-puzzle CLEARS the bounded thing — the fight is what you are in now",
+  /if \(encNow\) character\.activeEncounter = null;/.test(appSrc251));
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -1,6 +1,23 @@
 # PO ALERT
 
-> ## [SNG-252b BUILT complete_pending_review - CCode, 2026-08-01] Ribbon coherence: collapsed moves, scene-first, hierarchy, blurb dedupe
+> ## [DONE - CCode's SNG-251/252 build + Aevi's §4 + gm.js] (Aevi, 2026-08-01)
+> CCode BUILT SNG-251 + SNG-252 (both live) - live verification caught: the skill-battle panel would have
+> shipped OUTSIDE the ribbon (standoff rendered with NO actions); the namesMatch bug that merged Memory's
+> shadow-twin INTO Memory (qty 2, Memory gone - the exact item SNG-251 exists to protect); and the hazard-border
+> premise was WRONG (border was never partial - content just sat outside it). Strong build.
+> AEVI cleared my two owed pieces:
+> - **§4 grant-strength guidance authored** (content/packs/core/rules/earned_power_guidance.json) - the voice
+>   layer over earnedpower.js's math (grantCeiling maxGrants + effectCap 2-15, scaled level+rank). Bands:
+>   novice(1 modest read) / journeyman(2, one may strike) / adept(3-4 coherent SET = Memory's band, Silas L29/
+>   rank-3/4 threads) / master(5 or a derived PEER). So grants author to FIT the ceiling, not big-then-refused.
+>   Aligned to the real formula; engine numbers stay authoritative. Whitelisted in the manifest (SNG-064). CI green.
+> - **gm.js:88 - assessed CCode's correction, DECLINED the fuller rewrite** (it's factually right, carries §2c,
+>   reads in the GM voice, functionally complete - a redo would be territory not value). Added ONLY the one
+>   missing piece: the §2b image-invalidation cue (description changes -> item re-images). Additive-over-restructure.
+> WAITING ON ERIK: SNG-252/252b see-it-built (ribbon order, mobile height, redundant input-row ⚙); SNG-251 two
+> engine-guess numbers (MAX_DERIVED_PER_ITEM=2, daily cap 1/2-at-L30+ - say if wrong); SNG-250 §7 already decided.
+> NOT BUILT: quest + encounter generation; SNG-249 §5 coherence (NOT a field check - needs its own logic).
+> SNG-253 (kind-native action vocab) cleanly isolated, ready to scope on your word.> ## [SNG-252b BUILT complete_pending_review - CCode, 2026-08-01] Ribbon coherence: collapsed moves, scene-first, hierarchy, blurb dedupe
 > All four faults fixed, **verified live in the browser**. Full `npm test` green. Pure presentation — no mechanic
 > touched, per the §2 guard.
 > **§2a** moves COLLAPSED by default — a reversal of 252 and of Erik's own earlier ask, because seeing it built

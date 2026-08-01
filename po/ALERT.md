@@ -1,5 +1,16 @@
 # PO ALERT
 
+> ## [DONE - new authoring] SNG-237/238 non-combat encounter library (Aevi, 2026-07-27)
+> The standoff/puzzle kinds had framing copy (SNG-230) but only 2 SEED exemplars - the receipt formats
+> (SNG-246 Fix D) and the stationary-talker roll gate (SNG-237 Fix C) had almost no real content to attach to.
+> Authored a LIBRARY: 4 standoffs + 4 puzzles (from 2). STANDOFFS - the-grieving-warden (grief under a refusal),
+> the-toll-of-names (a true name as the price), the-rival-claim (a contested claim settled on standing not blood)
+> = the non-combat exchange that resolves on RESOLVE, exactly what a foe who won't fight needs. PUZZLES -
+> the-stopped-mechanism (a scrambled precursor thing), the-warded-cache (a maker's ward), the-flooded-works (a
+> water system worked in order against a rising clock). All grounded in the Valley's real fiction, matching the
+> enc_the_sealed_door shape. CI green. Gives SNG-246's standoff/puzzle receipt formats + SNG-237 Fix C real
+> encounters. CCODE: these are startEncounter-ready seeds for the standoff/puzzle paths.
+
 > ## [SNG-247 TIER 2 complete_pending_review - CCode, 2026-07-31] Chase + standoff run the one contest engine (v1.8.319 `f681efa0`)
 > **2a - STANDOFF BECOMES A REAL THING.** It had a FRAME_KINDS entry, an `encounterKind` mapping, an authored
 > exemplar (`enc_the_toll_keeper`) AND an authored receipt format - and nothing ever minted one. A

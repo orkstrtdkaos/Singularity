@@ -1,6 +1,22 @@
 # PO ALERT
 
-> ## [AUTHORED - SNG-252 content ready for CCode] ribbon copy + move hints (Aevi, 2026-08-01)
+> ## [DONE + IN PROGRESS - CCODE-55 handoff to Aevi] (Aevi, 2026-08-01)
+> CCode handed me 3 items. Cleared 2 fully + started the 3rd:
+> - **DONE — GM inert template:** gm.js:47's inventoryAdd example showed the literal inert 'effects':{health:0,
+>   energy:0} - teaching the GM to emit exactly the zero-effect item the gate flags (the healers_draught bug's
+>   source). Changed to a real {health:8}.
+> - **DONE — 9 companion bondGrants functions:** each companion's single bondGrant had no functions (invisible to
+>   functionCoverage/wield). Assigned grounded in what each DOES: aevi/ember=foresee, bristle/marrow/quill=reveal,
+>   coil=open, hush=conceal, sprig=mend, tal=sustain. CI: 9 grants, 0 hollow. VERIFIED on a fresh origin clone.
+> - **IN PROGRESS — the '89 notFor' gap CORRECTED + started:** it's NOT 89 missing notFor - all 285 HAVE the key;
+>   89 have notFor:[] (present-but-EMPTY = no bound, gate correctly warns). Real gap, WARN not fail. Authored the
+>   first file (reach_chaos_order, 6 bounds) as the PATTERN-SETTER - grounded per-ability, obeying the SNG-089
+>   notFor LAW (cap HOW it serves, never forbid the need). 83 empty-notFor remain across the reach_* files - to
+>   batch, grounded per-ability (a generic filler bound is worse than empty). CI green.
+> ERIK (CCode's calls): OQ3 tier-the-gate per type; generated creatures per-character (what CCode built) vs
+> shared-on-sight. NOT BUILT (CCode flag): quest + encounter generation; SNG-249 §5 COHERENCE ('stages lead to
+> resolutions') won't fall out of the map - it's not a field check, needs its own logic (already in SPEC_SNG-249
+> §5, flagged for the builder).> ## [AUTHORED - SNG-252 content ready for CCode] ribbon copy + move hints (Aevi, 2026-08-01)
 > Authored the two content files SNG-252 needs so CCode can build against them:
 > - **po/staged_content/encounter_move_hints.json** — the moves consequence-hints per function family × kind +
 >   per-kind emphasis order. A HARM move 'strikes for damage' in a fight but is off-currency in a standoff ('a

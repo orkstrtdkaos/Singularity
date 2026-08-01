@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "encounter_frame_kinds",
  "kind": "content",
- "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths.",
+ "note": "SNG-230 (Aevi 2026-07-22): per-kind framing copy for FRAME_KINDS (engine/encounterFrame.js) + PUZZLE and STANDOFF exemplar encounters (the two NEW kinds that need seed content). The framing copy themes the one universal frame per kind (title/icon/verbs/meter-label/exit-labels); the exemplars are startEncounter-ready seeds CCode uses to smoke the puzzle/standoff paths. | SNG-238/237 (Aevi 2026-07-27): expanded from 2 seed exemplars to a real LIBRARY - standoffs (grieving-warden/toll-of-names/rival-claim - the non-combat exchange with stakes, the stationary-talker SNG-237 Fix C needs) + puzzles (stopped-mechanism/warded-cache/flooded-works), all grounded in the Valley's real fiction (precursor works, wards, named prices, contested claims). Matches the enc_the_sealed_door shape exactly.",
  "frameKinds": {
   "fight": {
    "icon": "⚔",
@@ -116,6 +116,148 @@
    ],
    "morphNote": "A failed standoff can MORPH into a FIGHT (§6b) — press too hard and the toll-keeper draws. A SWAY-collapse (a commanding presence craft) can end it in one beat, opposed against their resolve.",
    "failStakes": "They prevail — you pay, you turn back, or it becomes a fight on their terms."
+  },
+  {
+   "id": "enc_the_grieving_warden",
+   "kind": "standoff",
+   "tier": "notable",
+   "flavor": "dangerous",
+   "routing": "challenge",
+   "premise": "blocked_passage",
+   "seed": "A warden stands in the only way through, and will not move. Not hostile — grieving. Someone they were meant to guard is gone, and they have decided no one else passes until they understand why. Reason with them, or the road stays shut.",
+   "stages": [
+    {
+     "beat": "Hear what they actually lost — get under the refusal to the grief (READ/resolve).",
+     "onFail": "you misread it as stubbornness; they close harder, and the way is more shut than before."
+    },
+    {
+     "beat": "Offer them something true — not a trick, a real reckoning with the loss (BOND/read).",
+     "onFail": "they hear the angle in it; a false comfort costs you standing you won't easily get back."
+    },
+    {
+     "beat": "Let them choose to step aside — carry it with them, not for them (BOND).",
+     "onYield": "they move, and the road is yours; they do not thank you, but they nod."
+    }
+   ],
+   "trivializeNote": "A high BOND/witness craft can meet the grief whole in one exchange (trivial, §8 acknowledged). A warden hardened by betrayal raises resistDC — the resolve resists even a true offer.",
+   "failStakes": "They do not move. The road stays shut, or you take it by force and wear that."
+  },
+  {
+   "id": "enc_the_toll_of_names",
+   "kind": "standoff",
+   "tier": "minor",
+   "flavor": "benign",
+   "routing": "challenge",
+   "premise": "named_price",
+   "seed": "A keeper of an old crossing asks not for coin but for a NAME — a true thing about yourself, given freely, or you do not cross. They have collected names for a long time, and they can tell a real one from a made one.",
+   "stages": [
+    {
+     "beat": "Decide what you'll give — a true name costs, a false one is caught (READ/resolve).",
+     "onFail": "you offer a hollow thing; they smile, unmoved, and the price goes up."
+    },
+    {
+     "beat": "Give it — and mean it, because they read the meaning not the words (BOND).",
+     "onYield": "they take the name, and something in them settles; the way opens, and they are, briefly, kind."
+    }
+   ],
+   "trivializeNote": "A character carrying a genuine hard truth already surfaced can pay it plainly (trivial). A keeper who wants a SPECIFIC name raises resistDC.",
+   "failStakes": "No true name, no crossing. You go around — longer, and colder."
+  },
+  {
+   "id": "enc_the_rival_claim",
+   "kind": "standoff",
+   "tier": "notable",
+   "flavor": "dangerous",
+   "routing": "challenge",
+   "premise": "contested_claim",
+   "seed": "Another has arrived at the thing you came for — a find, a person's favor, a right-of-way — and claims it first. Neither of you wants a fight. The claim will go to whoever holds the exchange: reason, standing, or the better right.",
+   "stages": [
+    {
+     "beat": "Test their claim — is it real, or bluff? (READ/resolve).",
+     "onFail": "you press a strong claim as if it were weak; you look grasping, and lose ground."
+    },
+    {
+     "beat": "Make yours land harder — right, standing, or the sharper need (BOND/read).",
+     "onFail": "they turn your own words; the exchange tilts to them."
+    },
+    {
+     "beat": "Close it — a split, a concession, or the clean win (READ).",
+     "onYield": "they concede the point; the claim is yours, and they remember you took it fair."
+    }
+   ],
+   "trivializeNote": "Overwhelming standing or an ironclad right can settle this in one move (trivial). A rival with a BETTER claim raises resistDC — you may have to split.",
+   "failStakes": "The claim goes to them. You walk away with nothing but the knowledge of how you lost it."
+  },
+  {
+   "id": "enc_the_stopped_mechanism",
+   "kind": "puzzle",
+   "tier": "notable",
+   "flavor": "dangerous",
+   "routing": "challenge",
+   "premise": "broken_precursor",
+   "seed": "A pre-Transition mechanism, stopped mid-task and left. It still holds charge — you can feel it — and it will do SOMETHING if woken, but its order is scrambled and part of it is wrong. Read it, right it, or leave it sleeping.",
+   "stages": [
+    {
+     "beat": "Read what it was FOR — trace the stopped work (KNOW/insight).",
+     "onFail": "you wake the wrong part; it lurches, and the danger is now live."
+    },
+    {
+     "beat": "Find the wrong piece — what broke the order (KNOW/craft).",
+     "onFail": "you mistake a right piece for a wrong one; correcting it makes things worse."
+    },
+    {
+     "beat": "Set it right and wake it clean — or decide it should stay stopped (CRAFT/know).",
+     "onSolve": "it turns over and does the thing it was made to do — for you, this time."
+    }
+   ],
+   "trivializeNote": "A high KNOW/precursor-attuned craft reads the whole order at a glance (trivial, §8). A mechanism guarding something raises resistDC and can strike when misread.",
+   "failStakes": "It stays stopped, or wakes wrong — and a woken-wrong precursor thing is its own trouble."
+  },
+  {
+   "id": "enc_the_warded_cache",
+   "kind": "puzzle",
+   "tier": "minor",
+   "flavor": "beneficial",
+   "routing": "challenge",
+   "premise": "locked_reward",
+   "seed": "A cache someone hid and warded — a real reward inside, behind a ward that answers only the right approach. The maker left a logic to it, if you can read the marks they trusted no stranger would.",
+   "stages": [
+    {
+     "beat": "Find the maker's logic — how did THEY think? (READ/insight).",
+     "onFail": "you force it; the ward tightens and the cache is harder now."
+    },
+    {
+     "beat": "Answer the ward the way it wants (KNOW).",
+     "onSolve": "the ward yields; the cache opens on what was kept."
+    }
+   ],
+   "trivializeNote": "A character who shares the maker's craft/tradition reads the logic immediately (trivial). A ward set against outsiders raises resistDC.",
+   "failStakes": "The cache stays shut. What's inside stays the maker's, and you leave empty."
+  },
+  {
+   "id": "enc_the_flooded_works",
+   "kind": "puzzle",
+   "tier": "notable",
+   "flavor": "dangerous",
+   "routing": "challenge",
+   "premise": "environmental_system",
+   "seed": "An old works — sluices, gates, a system built to move water — now flooded and fighting itself. To get through (or to fix what it's drowning), you have to understand the system and work it in the right order, while the water rises.",
+   "stages": [
+    {
+     "beat": "Read the flow — which gate feeds which, and where it's jammed (KNOW/insight).",
+     "onFail": "you open the wrong gate; the water surges, and you're now working against the clock harder."
+    },
+    {
+     "beat": "Work the order — relieve the pressure without flooding yourself out (CRAFT/know).",
+     "onFail": "the system fights back; a wrong move undoes the last."
+    },
+    {
+     "beat": "Set the last gate — drain it, or divert it where it needs to go (CRAFT).",
+     "onSolve": "the water goes where you sent it; the works breathe, and the way is clear."
+    }
+   ],
+   "trivializeNote": "A high KNOW/water-craft reads the whole system fast (trivial). A works actively failing raises resistDC and the rising water is a real clock.",
+   "failStakes": "The water wins — you're forced back, soaked and set back, and the works stay drowned."
   }
  ]
 }

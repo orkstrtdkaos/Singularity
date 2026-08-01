@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 5,
-  "xp": 428,
+  "xp": 433,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -79,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 77,
+  "energy": 71,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -204,44 +204,47 @@
         "player": "Let Vessin lead — step aside and let her choose whether she enters the alcove at all",
         "summary": "Loki stepped aside; Vessin chose the alcove herself — settled against the far wall, drop-cloth down, asking who sent the aggressor.",
         "narration": "You step aside from the half-hidden door and gesture toward it without pressure. The choice is hers to make.\n\nVessin reads the gesture immediately. She looks at the door, then at you, then at the door again. Her eyes move to the frame, to the hinges, to the gap at the threshold — the assessor's habit, pricing a thing before deciding on it. Then she pushes it open herself and steps through.\n\nThe alcove is small and dry. A flat canvas drop-cloth sits folded on a low shelf. The smell is sawdust and cold stone and the faint resin of old scaffold-rope. Vessin takes one full turn around the space — wall, shelf, ceiling, the single entrance — and then settles with her back against the far wall where she can see both the door and you. She pulls the drop-cloth off the shelf and spreads it on the floor for something to sit on.\n\n'Right,' she says, her dry voice quieter now that there are walls around it. 'You were going to tell me who sent him.'"
+      },
+      {
+        "player": "Use Descent to name what she actually wants from this conversation — not the surface question, but the real one underneath it.",
+        "summary": "Loki named Vessin's real want — not the man's name, but a test of whether Loki is worth knowing — and she acknowledged it plainly.",
+        "narration": "Vessin is watching you with the particular patience of someone who has learned to wait for the real question. Her knife is sheathed. Her hands are loose in her lap. She asked who sent the aggressor, and she is still waiting for that answer — but underneath it, the Descent opens the thing she actually wants, and it is not the man's name.\n\nWhat she wants is to know whether you are worth knowing. Not whether you are useful, not whether you are safe. Whether the thing she half-glimpsed in the nave — the way you moved, the way the aggressor broke and left without a word — was real, or a performance. She has met a lot of performances. She prices them quickly and sets them down. She came into this alcove because something did not price out as a performance, and she is here to find out if she was wrong.\n\nYou do not say this to her as a speech. You say it quietly, the way the Descent works — naming the thing underneath the thing, so the person hears it without the framing of being read. You say something like: \"You did not follow me here for the answer about who sent him. You followed me here to see if I was worth following.\"\n\nVessin is quiet for a moment. Her eyes do not change — they are still the same appraising eyes — but something behind them settles, the way a scale settles when the right weight has been placed on it. \"Yes,\" she says simply, as though the word costs her nothing now that it is true. Then: \"So. Who sent him, and is there a second. And then we'll see.\""
       }
     ],
     "lastTurn": {
-      "narration": "You step aside from the half-hidden door and gesture toward it without pressure. The choice is hers to make.\n\nVessin reads the gesture immediately. She looks at the door, then at you, then at the door again. Her eyes move to the frame, to the hinges, to the gap at the threshold — the assessor's habit, pricing a thing before deciding on it. Then she pushes it open herself and steps through.\n\nThe alcove is small and dry. A flat canvas drop-cloth sits folded on a low shelf. The smell is sawdust and cold stone and the faint resin of old scaffold-rope. Vessin takes one full turn around the space — wall, shelf, ceiling, the single entrance — and then settles with her back against the far wall where she can see both the door and you. She pulls the drop-cloth off the shelf and spreads it on the floor for something to sit on.\n\n'Right,' she says, her dry voice quieter now that there are walls around it. 'You were going to tell me who sent him.'",
-      "sceneSummary": "Loki stepped aside; Vessin chose the alcove herself — settled against the far wall, drop-cloth down, asking who sent the aggressor.",
+      "narration": "Vessin is watching you with the particular patience of someone who has learned to wait for the real question. Her knife is sheathed. Her hands are loose in her lap. She asked who sent the aggressor, and she is still waiting for that answer — but underneath it, the Descent opens the thing she actually wants, and it is not the man's name.\n\nWhat she wants is to know whether you are worth knowing. Not whether you are useful, not whether you are safe. Whether the thing she half-glimpsed in the nave — the way you moved, the way the aggressor broke and left without a word — was real, or a performance. She has met a lot of performances. She prices them quickly and sets them down. She came into this alcove because something did not price out as a performance, and she is here to find out if she was wrong.\n\nYou do not say this to her as a speech. You say it quietly, the way the Descent works — naming the thing underneath the thing, so the person hears it without the framing of being read. You say something like: \"You did not follow me here for the answer about who sent him. You followed me here to see if I was worth following.\"\n\nVessin is quiet for a moment. Her eyes do not change — they are still the same appraising eyes — but something behind them settles, the way a scale settles when the right weight has been placed on it. \"Yes,\" she says simply, as though the word costs her nothing now that it is true. Then: \"So. Who sent him, and is there a second. And then we'll see.\"",
+      "sceneSummary": "Loki named Vessin's real want — not the man's name, but a test of whether Loki is worth knowing — and she acknowledged it plainly.",
       "choices": [
         {
-          "label": "Tell her plainly: a man in the lower Annex, hired the striker with coin, gave him a false charge about something unsealed from the Deep.",
+          "label": "Answer both questions plainly — the man in the lower Annex, the false charge, and what you think it means.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Descent to name what she actually wants from this conversation — not the surface question, but the real one underneath it.",
+          "label": "Answer, and then ask your own question — she said she met someone who might have been like you. Ask about them now.",
           "attribute": "social",
           "subAttribute": "insight",
-          "axes": {},
           "difficulty": 15,
           "intentTags": [
+            "negotiate",
             "study"
           ],
-          "abilityId": "descent",
-          "energyCost": 6,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Use Prism Sight to read her face as you talk — catch the moment any part of your account lands wrong or she recognizes something.",
+          "label": "Use Prism Sight — read her face in the candlelight for how much she already knows or suspects about who sent the aggressor.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
@@ -251,25 +254,25 @@
           "trivial": false
         },
         {
-          "label": "Answer her question with a question: ask what she already knows about the lower Annex and the man who might have sent him.",
+          "label": "Tell her what you are — not a performance, not a preamble. Just the plain fact of it. Let that be the test she came here to run.",
           "attribute": "social",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
+          "subAttribute": "presence",
+          "difficulty": 15,
           "intentTags": [
-            "negotiate"
+            "negotiate",
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance, sawdust and cold-resin smell. A low shelf holds scaffold supplies. Deep night, candle-light from the landing spills through the open door.",
+        "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Sawdust and cold-resin smell. Candlelight from the landing wall-crack spills through the open door. Deep night.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Seated against the far wall on the spread canvas drop-cloth, back straight, knife sheathed, watching Loki and waiting for the answer."
+            "state": "Seated against the far wall on the canvas drop-cloth, back straight, knife sheathed, scale-settled — she has acknowledged the naming and is waiting for the answers now."
           },
           {
             "name": "Cy",
@@ -279,15 +282,16 @@
         "objects": [
           "Canvas drop-cloth spread on the alcove floor",
           "Low shelf with remaining scaffold supplies",
-          "Tallow candle burning in the landing wall-crack — light reaching through the open doorway",
+          "Tallow candle burning in the landing wall-crack — light reaching through the open door",
           "Stone stairs curling upward visible through the door",
-          "The open nave beyond — quiet now"
+          "The open nave beyond — quiet"
         ],
         "threads": [
           "Who sent the aggressor — the man in the lower Annex, still unnamed",
           "Whether there is a second aggressor",
           "Vessin's account of the person she met who might have been like Loki — not yet given",
-          "A low, patient voice heard in the nave earlier — not yet identified"
+          "A low, patient voice heard in the nave earlier — not yet identified",
+          "Vessin's test: whether Loki is worth knowing — named and acknowledged, not yet answered by deed"
         ]
       },
       "npcUpdates": [
@@ -295,33 +299,38 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Chose the alcove herself — read the space fully before settling, back to the wall, drop-cloth down. Now asking who sent the aggressor.",
-          "statusNote": "Seated in the dry storage alcove off the eastern tower landing — settled, knife sheathed, waiting for answers.",
-          "relationshipDelta": 0
+          "note": "Loki named her real want — not the attacker's name, but whether Loki was worth knowing — and she acknowledged it with a plain yes and then refocused: asked for the answers and said 'then we'll see.'",
+          "learned": [
+            "Vessin's real question in this conversation is whether Loki is worth knowing — she confirmed this when it was named."
+          ],
+          "relationshipDelta": 1,
+          "statusNote": "Seated in the dry storage alcove, scale-settled, waiting for Loki to answer who sent the aggressor and whether there is a second."
         }
       ],
-      "placeUpdates": [
+      "codexUpdates": [
         {
-          "subPlace": {
-            "name": "Dry Storage Alcove",
-            "parent": "The Half-Cathedral",
-            "note": "Small dry room off the eastern tower landing — canvas drop-cloth now spread on the floor where Vessin is sitting; single entrance, scaffold supplies on a low shelf.",
-            "visited": true
-          },
-          "note": "Vessin Tallow-bark chose and entered the dry storage alcove — drop-cloth spread on the floor."
+          "topic": "vessin-tallow-bark",
+          "label": "Vessin Tallow-bark",
+          "kind": "person",
+          "entityId": "vessin-tallow-bark",
+          "fact": "Her real want in this conversation is not the aggressor's employer — it is whether Loki is worth knowing. She confirmed this when Descent named it, and she did not resent the naming.",
+          "links": [
+            "grovehome",
+            "the-half-cathedral"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief settling — moving from the landing into the alcove and getting situated."
+        "why": "A short exchange in the alcove — a moment's naming and a settling."
       }
     },
     "sceneState": {
-      "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance, sawdust and cold-resin smell. A low shelf holds scaffold supplies. Deep night, candle-light from the landing spills through the open door.",
+      "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Sawdust and cold-resin smell. Candlelight from the landing wall-crack spills through the open door. Deep night.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Seated against the far wall on the spread canvas drop-cloth, back straight, knife sheathed, watching Loki and waiting fo"
+          "state": "Seated against the far wall on the canvas drop-cloth, back straight, knife sheathed, scale-settled — she has acknowledge"
         },
         {
           "name": "Cy",
@@ -333,13 +342,14 @@
         "Low shelf with remaining scaffold supplies",
         "Tallow candle burning in the landing wall-crack — light reaching through the ope",
         "Stone stairs curling upward visible through the door",
-        "The open nave beyond — quiet now"
+        "The open nave beyond — quiet"
       ],
       "threads": [
         "Who sent the aggressor — the man in the lower Annex, still unnamed",
         "Whether there is a second aggressor",
         "Vessin's account of the person she met who might have been like Loki — not yet given",
-        "A low, patient voice heard in the nave earlier — not yet identified"
+        "A low, patient voice heard in the nave earlier — not yet identified",
+        "Vessin's test: whether Loki is worth knowing — named and acknowledged, not yet answered by deed"
       ]
     }
   },
@@ -767,7 +777,7 @@
         "locationId": "grovehome",
         "day": 1
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d1] Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation.",
         "[d1] Heard Descent's full naming — her want and Loki's — said no plainly and without hostility; acknowledged the craft ('you named it right'), but said this kind of thing is for people she knows. Held the door open: 'ask me something else.'",
@@ -776,20 +786,22 @@
         "[d2] Lowered the knife after confirming the aggressor left — but kept it out. Asked the practical question: who sent him, and is there a second.",
         "[d2] Agreed to follow Loki out of the open nave — sheathed the knife, but kept the decision on her own terms. Not a full yes; a yes to moving.",
         "[d2] Followed Loki into the eastern tower landing; settled with her back to the wall where she can watch both exits. Knife sheathed. Present and cautious.",
-        "[d2] Chose the alcove herself — read the space fully before settling, back to the wall, drop-cloth down. Now asking who sent the aggressor."
+        "[d2] Chose the alcove herself — read the space fully before settling, back to the wall, drop-cloth down. Now asking who sent the aggressor.",
+        "[d2] Loki named her real want — not the attacker's name, but whether Loki was worth knowing — and she acknowledged it with a plain yes and then refocused: asked for the answers and said 'then we'll see.'"
       ],
       "knownFacts": [
         "Noticed the craft in the air — the easing of tiredness — and marked it consciously",
         "Intimacy is something she reserves for people she knows — the want being named correctly is not sufficient; the person behind it has to be real to her first.",
         "Loki was made, not born — a construct from before the Transition; the specification has not been found",
         "Loki has an adopted giant father and a nymph-touched enchantress mother, neither of whom made her",
-        "Vessin has met one person who might have been like Loki — she did not give a name"
+        "Vessin has met one person who might have been like Loki — she did not give a name",
+        "Vessin's real question in this conversation is whether Loki is worth knowing — she confirmed this when it was named."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated in the dry storage alcove off the eastern tower landing — settled, knife sheathed, waiting for answers.",
+      "statusNote": "Seated in the dry storage alcove, scale-settled, waiting for Loki to answer who sent the aggressor and whether there is a second.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1126,7 +1138,7 @@
     "lastSharedReadAt": "2026-08-01T21:06:04.486Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 12,
+    "turnsSinceOffer": 13,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1951,7 +1963,8 @@
         "kind": "person",
         "facts": [
           "[d1] Itinerant assessor of salvage, ruins, and risk — she prices things so others don't have to learn the hard way",
-          "[d1] Has met one other person who might have been a construct like Loki — older, also without knowledge of what they were. She named this without pity, as a fact she was glad to set down."
+          "[d1] Has met one other person who might have been a construct like Loki — older, also without knowledge of what they were. She named this without pity, as a fact she was glad to set down.",
+          "[d2] Her real want in this conversation is not the aggressor's employer — it is whether Loki is worth knowing. She confirmed this when Descent named it, and she did not resent the naming."
         ],
         "links": [
           "grovehome",
@@ -1960,7 +1973,7 @@
         "aliases": [],
         "createdDay": 1,
         "entityId": "vessin-tallow-bark",
-        "updatedDay": 1
+        "updatedDay": 2
       },
       "rust-choir-gnats": {
         "id": "rust-choir-gnats",
@@ -2040,24 +2053,24 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.729670035552864,
-    "cerebral": 12.312335416893976,
-    "social": 19.15796227023388,
-    "strategic": 10.2838044941941,
-    "cautious": 8.194730655853288,
-    "amorous": 5.656749516054501,
-    "generous": 5.275582166631679,
-    "ruthless": 0.7195582936005247,
-    "risky": 2.2069841434229893,
-    "patient": 0.6026876802191,
-    "deception": 0.70155967750146
+    "devotion": 1.6864282846640424,
+    "cerebral": 13.004527031471627,
+    "social": 18.679013213478033,
+    "strategic": 10.026709381839249,
+    "cautious": 7.989862389456955,
+    "amorous": 5.515330778153138,
+    "generous": 5.143692612465887,
+    "ruthless": 0.7015693362605115,
+    "risky": 2.1518095398374144,
+    "patient": 0.5876204882136226,
+    "deception": 0.6840206855639235
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "orator"
   ],
-  "actionCount": 98,
+  "actionCount": 99,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2358,8 +2371,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785618962986,
-  "rev": 367,
+  "updatedAt": 1785619196311,
+  "rev": 368,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3129,7 +3142,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 47
+    "the_quickwood": 48
   },
   "opLossPending": false,
   "sessions": [
@@ -3184,10 +3197,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T21:16:02.985Z",
+      "lastAt": "2026-08-01T21:19:56.309Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 13
+      "beats": 14
     }
   ],
   "establishedFacts": [
@@ -3225,17 +3238,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 117,
-    "choices": 117,
+    "sceneSummary": 118,
+    "choices": 118,
     "characterDeltas": 51,
-    "scene": 117,
+    "scene": 118,
     "placeUpdates": 17,
-    "codexUpdates": 80,
-    "timeOps": 109,
+    "codexUpdates": 81,
+    "timeOps": 110,
     "offer": 10,
     "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 89,
+    "npcUpdates": 90,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3249,7 +3262,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 117,
+  "_opTurns": 118,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3265,7 +3278,7 @@
       "prism_sight": 8,
       "harmonic_voice": 2,
       "hunters_strike": 3,
-      "descent": 1
+      "descent": 2
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -3283,7 +3296,7 @@
       {
         "abilityId": "appetite_sense",
         "since": "2026-07-21T18:16:21.011Z",
-        "progress": 1
+        "progress": 2
       }
     ],
     "lastUsed": {

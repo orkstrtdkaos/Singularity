@@ -206,7 +206,12 @@
      "field": "tier",
      "severity": "DEGRADED",
      "read": "random_encounters.js:60 BEAST_TIER[c.tier] || BEAST_TIER.notable — sets threat, weight AND minDanger",
-     "enum": ["riffraff", "notable", "regional", "epic"],
+     "enum": [
+      "riffraff",
+      "notable",
+      "regional",
+      "epic"
+     ],
      "note": "the single most load-bearing creature field: it IS the fight's difficulty. Missing or off-vocab silently resolves to `notable` (threat 38), so a riffraff and an epic both fight as mid-tier. Because the fallback is silent, the ENUM is the real gate — see concrete.tier-in-vocab."
     },
     {
@@ -309,8 +314,18 @@
      "rule": "anyOf",
      "severity": "DEGRADED",
      "anyOf": [
-      { "rule": "nonEmptyArray", "field": "bonusTags" },
-      { "rule": "someNumeric", "field": "effects", "keys": ["health", "energy"] }
+      {
+       "rule": "nonEmptyArray",
+       "field": "bonusTags"
+      },
+      {
+       "rule": "someNumeric",
+       "field": "effects",
+       "keys": [
+        "health",
+        "energy"
+       ]
+      }
      ],
      "why": "SNG-250 §3 ITEM: 'the effect is a real rules-resolvable thing (heals N / grants function F / opens X), not \"hums with old power\"'. Grounded in the code, rules-resolvable means EXACTLY one of two things: bonusTags the roll can match (equipmentBonus/wieldBonusFor), or numeric effects.health/energy the spend can apply (consumeItem). An item with neither is inert — it can be carried and described and can never once change a roll or a state."
     },
@@ -319,7 +334,10 @@
      "rule": "impliesSomeNumeric",
      "field": "effects",
      "whenField": "consumable",
-     "keys": ["health", "energy"],
+     "keys": [
+      "health",
+      "energy"
+     ],
      "severity": "DEGRADED",
      "why": "a consumable with no numeric effects is the sharpest form of the hollow item: consumeItem (inventory.js:224) DESTROYS the stack and returns {} — the player spends a real resource and provably nothing happens. usableCombatItems will not even offer it as a move."
     }
@@ -393,10 +411,166 @@
      "why": "SNG-250 §3 SKILL requires 'an energy cost'. The bar is a POSITIVE number the engine can actually charge — progression.js:171 pays `abilityDef.energyCost` directly, so a 0/absent/non-numeric cost is a craft that is free to use forever. CCode-corrected 2026-08-01: this rule was first written as the 4..15 band from sanitizeNewAbility (progression.js:533) and flagged 111 of 285 authored abilities — the authored range is 1..14, and the cheap 1-3 crafts are correct, not thin. 4..15 is a GENERATION clamp (a policy about what the GM may mint), not a statement about what makes a skill whole; conflating the two would have gated legitimate authored content on a generation-only rule. The clamp stays where it is and is asserted separately in the smoke tests."
     }
    ]
+  },
+  "arc": {
+   "consumer": "the greater-arcs system (SNG-203 net-vector) + worldArcsForGM + the arc-stir pressure producer (SNG-245)",
+   "topLevel": [
+    {
+     "field": "id",
+     "severity": "CRASH",
+     "read": "the arc registry key + net-vector merge",
+     "note": "an id-less arc can't accumulate pushes"
+    },
+    {
+     "field": "name",
+     "severity": "CRASH",
+     "read": "worldArcsForGM + news when the canonical stage shifts",
+     "note": "the arc's name in every surface"
+    },
+    {
+     "field": "scale",
+     "severity": "DEGRADED",
+     "read": "arc rendering + reach",
+     "note": "local/regional/world - how far it reaches"
+    },
+    {
+     "field": "pressure",
+     "severity": "DEGRADED",
+     "read": "the net-vector advancement (SNG-203)",
+     "note": "the directional force; absent = an arc that can't advance"
+    },
+    {
+     "field": "tendency",
+     "severity": "DEGRADED",
+     "read": "arc advancement direction",
+     "note": "which way it leans"
+    },
+    {
+     "field": "hingeNpcs",
+     "severity": "DEGRADED",
+     "read": "the arc-to-npc binding",
+     "type": "array",
+     "note": "who the arc turns on; absent = an arc with no handles"
+    },
+    {
+     "field": "ifIgnored",
+     "severity": "DEGRADED",
+     "read": "the consequence-on-neglect render",
+     "note": "what happens if the player doesn't engage - the stakes"
+    },
+    {
+     "field": "ifEngaged",
+     "severity": "DEGRADED",
+     "read": "the consequence-on-engagement render",
+     "note": "what changes if they do - the reward"
+    }
+   ],
+   "concrete": {
+    "pressure": "someNumeric",
+    "tendency": {
+     "rule": "enum",
+     "source": "arc-tendency-vocab"
+    },
+    "hingeNpcs": "nonEmptyArray"
+   },
+   "note": "SNG-250 §3/§5 (Aevi 2026-08-01): the arc contract - arc generates today but had NO contract, so the born-whole gate didn't cover the one live generator (boot said so). Grounded in the real SNG-203 net-vector reads. A whole arc DRIVES (has a real pressure/tendency) and RESOLVES (ifIgnored/ifEngaged are its stakes)."
   }
  },
  "theConcreteLayer": "CCODE-55 (SNG-250 §3/§4): each contentType may declare a `concrete` array beside `topLevel`. `topLevel` answers SNG-250's WHOLE question (does every consumer-read field carry a value?); `concrete` answers its CONCRETE question (is that value a real thing the rules can ACT on, or a word?). Every rule is machine-checkable and code-grounded — no rule here encodes a judgement, only a fact the engine already relies on. Rule vocabulary: `enum` (value in the listed set), `everyInVocab` (every array member resolves in a named content vocab — `function_vocabulary.verbs` is the 24 VERBS flattened out of the 8 families, which is what an ability's `functions` array actually holds; the families are what those verbs RESOLVE TO, not what is authored), `nonEmptyArray`, `numberInRange`, `someNumeric` (an object has a numeric value at one of `keys`), `anyOf` (at least one nested rule holds), `impliesSomeNumeric` (when `whenField` is truthy, `field` must have a numeric value at one of `keys`). ONE gate reads this for every type — a new type declares its contract here and is gated without new gate code (SNG-250 §5).",
  "lanes": "SNG-250 §4 OWNERSHIP. CCode owns the MECHANICAL half of this file — which fields a consumer reads, their types, and the `concrete` rules above, every one traceable to a real read or a real clamp in HEAD. Aevi owns the SEMANTIC half — the per-type vague/concrete PROSE markers ('wants the forge her brother left' vs 'wants respect'), which no static rule can decide. Those markers are deliberately NOT invented here; the §3 semantic bar for npc/item/creature/skill is Aevi's to author, and the gate will read them from this same file when they land (a `vagueMarkers` array per type is the natural slot).",
  "howTheSweepUsesThis": "For each contentType, for each authored instance, assert every non-optional field here is PRESENT and (where typed) correctly TYPED. CRASH-severity missing = the build must fail (a consumer throws). EMPTY = fail (renders broken - the visible class). DEGRADED = warn (works but hollow - e.g. no image) unless Erik promotes it. The generator round-trip (§5c) runs its OUTPUT through this same map. Grows by incident: a new consumer.read that breaks on absence adds a line here + the sweep covers it.",
- "provenance": "Every field verified at origin by grepping the consumer code for X.subfield reads (2026-07-25): quest reads app.js~6070-6130/7291; npc reads gm.js (25x .name) + SNG-233 directive; location reads random_encounters.js/SNG-180; creature reads random_encounters.js. Non-speculative - if a field isn't read by a real consumer, it's NOT here (no bloat, the SNG-232 lesson)."
+ "provenance": "Every field verified at origin by grepping the consumer code for X.subfield reads (2026-07-25): quest reads app.js~6070-6130/7291; npc reads gm.js (25x .name) + SNG-233 directive; location reads random_encounters.js/SNG-180; creature reads random_encounters.js. Non-speculative - if a field isn't read by a real consumer, it's NOT here (no bloat, the SNG-232 lesson).",
+ "vagueMarkers": {
+  "note": "AEVI (2026-08-01): the SEMANTIC concrete/vague layer CCode's gate waits on (CCODE-55 OQ4). A value that is ONLY one of these abstractions, with no concrete anchor (a named thing/place/person/action the world tracks), fails the concreteness bar. NOT a hard reject on its own - a WARN that the value is generic; combined with the machine-checkable `concrete` rules it gates. Per type because 'vague' differs by field.",
+  "common": [
+   "something",
+   "somehow",
+   "a sense of",
+   "a feeling of",
+   "the essence of",
+   "the power of",
+   "strange",
+   "mysterious",
+   "ancient power",
+   "old magic",
+   "unknown"
+  ],
+  "byType": {
+   "npc": {
+    "wants": [
+     "respect",
+     "to be happy",
+     "a better life",
+     "meaning",
+     "purpose",
+     "acceptance",
+     "to matter",
+     "recognition",
+     "freedom"
+    ],
+    "note": "a want must name a SPECIFIC actable thing the world can act on. VAGUE: 'wants respect'. CONCRETE: 'wants the forge her brother left, and resents that Silas holds it'. The test: can an NPC ACT toward it, and can the world grant/deny it?",
+    "fears": [
+     "death",
+     "failure",
+     "the unknown",
+     "being alone",
+     "loss"
+    ],
+    "fearsNote": "a fear must be specific enough to DRIVE behavior. VAGUE: 'fears failure'. CONCRETE: 'fears the water rising to the second bench again, the way it did the year the mill flooded'."
+   },
+   "quest": {
+    "objective_and_condition": [
+     "restore harmony",
+     "find peace",
+     "achieve balance",
+     "understand the truth",
+     "bring order",
+     "heal the land",
+     "set things right",
+     "make things whole"
+    ],
+    "note": "an objective/condition must be a CHECKABLE state. VAGUE: 'restore harmony'. CONCRETE: 'shut the reclamation ring's valve and confirm the downstream wells run clear'. The SNG-249 test: can the GM say yes/no from game state without reading a metaphor?"
+   },
+   "item": {
+    "effect": [
+     "hums with power",
+     "radiates energy",
+     "feels significant",
+     "carries old magic",
+     "thrums with meaning"
+    ],
+    "note": "an item effect must be RULES-RESOLVABLE. VAGUE: 'hums with old power'. CONCRETE: 'heals 8 health' / 'grants the shadow-harm strike'. Resolves through the real hooks (bonusTags / effects.health/energy)."
+   },
+   "skill": {
+    "effect": [
+     "channels the essence",
+     "draws on deep power",
+     "manipulates reality",
+     "bends the world",
+     "touches the source"
+    ],
+    "note": "a skill must map to a real FUNCTION family (HARM/RESTORE/PROTECT/KNOW/SHAPE/INFLUENCE/MOVE/SUSTAIN) with a tier + cost. VAGUE: 'channels the essence of the deep'. CONCRETE: 'HARM, tier 1, 4 energy - a shadow-flavored strike'."
+   },
+   "creature": {
+    "behavior": [
+     "is dangerous",
+     "attacks fiercely",
+     "is a threat",
+     "is powerful",
+     "is menacing"
+    ],
+    "note": "a creature's behavior must name what it DOES mechanically. VAGUE: 'attacks fiercely'. CONCRETE: 'opens with a lunge (chase-morph on a miss), presses when wounded, breaks at half health'."
+   },
+   "arc": {
+    "pressure": [
+     "change is coming",
+     "something stirs",
+     "the balance shifts",
+     "forces gather",
+     "tension builds"
+    ],
+    "note": "an arc's pressure must be a DIRECTIONAL force with named consequences (SNG-239 statable tremor). VAGUE: 'something stirs'. CONCRETE: 'the deep sites report tremors, and each week untended, one more well upstream goes bad'."
+   }
+  }
+ }
 }

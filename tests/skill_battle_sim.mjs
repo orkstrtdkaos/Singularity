@@ -800,5 +800,34 @@ check("SNG-247 dev-found: every authored exemplar mints a DISTINCT name — four
 check("SNG-247 dev-found: the frame's meter renders on a CONTEST-engine kind — the old gate was a stage count, so a chase had no Distance bar",
   /Number\.isFinite\(fm\.meter\?\.pct\)/.test(readFileSync(join(root, "app.js"), "utf8")));
 
+// ---- SNG-247 (Erik): the roll pill that did nothing ----
+// esc() does not escape the APOSTROPHE, and the breakdown payload goes into a SINGLE-quoted attribute — so a
+// craft named "Hunter's Strike" closed the attribute early, the JSON arrived truncated, JSON.parse threw, and the
+// delegated handler's catch swallowed it. The pill rendered perfectly and did nothing, ONLY for crafts with an
+// apostrophe in the name — which is exactly why it looked intermittent.
+const appPill = readFileSync(join(root, "app.js"), "utf8");
+check("SNG-247: attrJson exists and escapes the apostrophe — the character that silently broke the roll pill",
+  appPill.includes("function attrJson(v)") && appPill.includes('replace(/\'/g, "&#39;")'));
+check("SNG-247: EVERY data-breakdown attribute goes through attrJson, so the quoting can't be got wrong again",
+  !appPill.includes("data-breakdown='${esc(JSON.stringify")
+  && !appPill.includes('data-breakdown="${esc(JSON.stringify')
+  && (appPill.match(/data-breakdown=["']\$\{attrJson\(/g) || []).length >= 4);
+check("SNG-247 (the property): a craft name with an apostrophe survives the attribute round-trip",
+  (() => {
+    const esc2 = x => String(x ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    const attrJson = v => esc2(JSON.stringify(v)).replace(/'/g, "&#39;");
+    const bd = { contestMods: [{ label: "woven: Hunter's Strike", value: 4 }] };
+    const written = attrJson(bd);
+    if (written.includes("'")) return false;              // a raw ' would close the single-quoted attribute
+    const decoded = written.replace(/&#39;/g, "'").replace(/&quot;/g, '"')
+      .replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&amp;/g, "&");
+    return JSON.parse(decoded).contestMods[0].label === "woven: Hunter's Strike";
+  })());
+check("SNG-247: the OLD escaper would have failed that same round-trip (the check can go red)",
+  (() => {
+    const esc2 = x => String(x ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    return esc2(JSON.stringify({ label: "Hunter's Strike" })).includes("'");
+  })());
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

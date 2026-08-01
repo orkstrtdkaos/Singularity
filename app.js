@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.325";
+const APP_VERSION = "1.8.326";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -8316,7 +8316,7 @@ async function runGambit() {
     const a = g.actions[failed.index];
     chrome(`<div class="screen" style="max-width:640px">
       <h2>The plan hits a wall</h2>
-      <div class="roll-receipt" style="margin:10px 0">Step ${failed.index + 1}: ${esc(a.label)} — d100: ${failed.roll} vs ${failed.breakdown ? `<span class="roll-chance" data-breakdown="${esc(JSON.stringify({ ...failed.breakdown, roll: failed.roll, degree: failed.degree }))}" tabindex="0" role="button" title="Why this number?">${failed.chance}</span>` : failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
+      <div class="roll-receipt" style="margin:10px 0">Step ${failed.index + 1}: ${esc(a.label)} — d100: ${failed.roll} vs ${failed.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...failed.breakdown, roll: failed.roll, degree: failed.degree })}" tabindex="0" role="button" title="Why this number?">${failed.chance}</span>` : failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
       <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
         ${g.steps[failed.index]?.fallback && !run.fallbackUsed[failed.index] ? `<button class="choice" id="c-fallback">Fallback: ${esc(g.steps[failed.index].fallback)}</button>` : ""}
         ${run.adaptLeft > 0 ? `<button class="choice" id="c-adapt">Adapt — force another try (${run.adaptLeft} adaptation point${run.adaptLeft > 1 ? "s" : ""} left)</button>` : ""}
@@ -8552,6 +8552,39 @@ const FRAME_KINDS_FALLBACK = { fight: "Momentum", chase: "Distance", hazard: "Pr
 // SNG-247 Tier 4: icon + title per kind for the MORPH line, used only when Aevi's frameKinds copy isn't loaded.
 const FRAME_KINDS_FALLBACK_FULL = { fight: { icon: "⚔", title: "The Contest" }, chase: { icon: "🏃", title: "The Chase" },
   hazard: { icon: "⚠", title: "Hard Ground" }, puzzle: { icon: "🧩", title: "The Sealed Thing" }, standoff: { icon: "🗣", title: "The Standoff" } };
+
+// ---------- SNG-247 (Erik): WHAT A PLAYER CAN SEE AT EACH LEVEL OF FOG ----------
+// The fog ladder was authored in content (senseVisibility 0–3) and never SHOWN, so the panel could tell you to
+// "read them to see it" when reading could not possibly get you there: their math needs tier 3, and a read buys
+// only `revealActionBuysTier` (1). A character whose base sense tier is 0 can read every single turn and never
+// see a breakdown. Fog may hide; it must never promise.
+const FOG_RUNG = {
+  outcome:   "whether their move landed",
+  intent:    "the VERB they are gathering to (enough to counter-pick)",
+  band:      "a BAND on their roll (crushing / strong / even / weak)",
+  skill:     "the NAME of the craft they used",
+  intensity: "how hard they are spending (conserve / standard / surge)",
+  breakdown: "their FULL roll math — every modifier, itemised",
+};
+/** What this tier shows, and honestly what the NEXT rung would add. Pure over the loaded content. */
+function fogLadder(tier) {
+  const vis = CONTENT.skillBattle?.engine?.senseVisibility || {};
+  const t = Math.max(0, Math.min(3, tier | 0));
+  const now = new Set(vis[String(t)]?.reveals || ["outcome"]);
+  const next = t >= 3 ? null : new Set(vis[String(t + 1)]?.reveals || []);
+  const gained = next ? [...next].filter(r => !now.has(r)) : [];
+  return { tier: t, label: vis[String(t)]?.label || null, sees: [...now], nextTier: next ? t + 1 : null, nextGains: gained };
+}
+/** The one line the receipt prints when their math is still hidden — naming the rung, not a false promise. */
+function fogLadderLine(fog) {
+  const l = fogLadder(fog?.tier ?? 0);
+  const buys = CONTENT.skillBattle?.engine?.revealActionBuysTier ?? 1;
+  const reach = (fog?.tier ?? 0) + buys >= 3;
+  const seeing = l.sees.map(r => FOG_RUNG[r]).filter(Boolean).join(" · ");
+  return `their math is fogged — you are at sense tier ${l.tier} of 3, which shows: ${seeing}. `
+    + (reach ? `👁 A read (+${buys} tier) reaches their full math.`
+             : `A read buys +${buys} tier — not enough here. Their math needs tier 3, so it takes a sharper sense (a reveal/foresee craft, or a higher Insight) as well as reading them.`);
+}
 
 function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
   const meterMax = CONTENT.skillBattle?.engine?.momentum?.meterMax ?? 16;
@@ -8813,24 +8846,48 @@ function skillBattlePanel() {
   }).join("");
   return `<div class="sb-panel">
     <div class="sb-opponent">${esc(def.opponent?.name || "your opponent")}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
+    ${(() => {
+      // SNG-247 (Erik: "I want to see what options the aggressor has for skills too — fighting an NPC or
+      // anything should include that the opponent has skills they can use, just like you do"). They always DID —
+      // opponentPolicy picks from this list every round — it was simply never shown, so their moves read as
+      // arbitrary. Fog-gated on the same ladder as everything else: what you can see, you see; what you can't is
+      // named as hidden rather than faked.
+      const sk = st.opponentSheet?.skills || []; if (!sk.length) return "";
+      const t = fog?.tier ?? 0;
+      const chips = sk.map(s => {
+        const showName = t >= 3 && s.name;
+        const body = showName ? `${esc(s.name)} <span class="hint">(${esc(s.function)}${s.tier ? ` t${s.tier}` : ""})</span>`
+          : t >= 1 ? esc(s.function)
+          : "▨";
+        const why = t >= 1 ? `They can ${esc(s.function)} — matchup applies when they use it.` : "Unread — you know they have a craft here, not what it is.";
+        return `<span class="sb-oppcraft" title="${why}">${body}</span>`;
+      }).join("");
+      const note = t >= 3 ? "their full kit" : t >= 1 ? "the verbs you can read — names need tier 3" : `unread — a sense read shows you the verbs`;
+      return `<div class="sb-oppcrafts"><span class="sb-fx-lbl">their crafts</span>${chips}<span class="hint">${esc(note)}</span></div>`;
+    })()}
     <div class="sb-fog">${fog ? `
       <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
-      ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${esc(JSON.stringify(fog.revealed.breakdown))}'>see their math</button>` : ""}</div>` : ""}` :
+      ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${attrJson(fog.revealed.breakdown)}'>see their math</button>` : ""}</div>` : ""}` :
       `<div class="hint">You size each other up. Choose ONE move — or read them first.</div>`}</div>
     ${sbLastRoundReceipt && st.round > 1 ? `<div class="sb-receipt">${esc(sbLastRoundReceipt)}${(() => {
       // CCODE-36 (Erik): the ROLLS behind this round, in the same breakdown popover normal play uses. Your own math
       // is always yours to see; THEIR math stays behind the same fog gate the fog-line uses — reading them buys it.
       const r = sbLastRoundRolls; if (!r) return "";
       const mk = (side, bd, roll, chance, deg) => bd
-        ? `<button class="data-link" data-breakdown='${esc(JSON.stringify(bd))}' title="The full math for ${side === "you" ? "your" : "their"} roll this round">⚄ ${side === "you" ? "your" : "their"} roll ${roll}/${chance}${deg ? ` · ${String(deg).replace("_", " ")}` : ""}</button>`
+        ? `<button class="data-link" data-breakdown='${attrJson(bd)}' title="The full math for ${side === "you" ? "your" : "their"} roll this round">⚄ ${side === "you" ? "your" : "their"} roll ${roll}/${chance}${deg ? ` · ${String(deg).replace("_", " ")}` : ""}</button>`
         : "";
       // CCODE-40: when the ceiling bit, say so plainly — the number that DECIDED the exchange is the raw stack,
       // not the 95 you rolled against. Otherwise "95 vs 95" reads as a tie when one side was really far ahead.
       const rawNote = (r.you?.rawChance != null && r.you.rawChance !== r.you.chance)
         ? `<span class="hint sb-raw-note">your stack totalled <strong>${r.you.rawChance}</strong> before the ${r.you.chance}% ceiling — the contest is decided on the full stack, so every bonus and penalty counts</span>` : "";
       const yours = mk("you", r.you?.breakdown, r.you?.roll, r.you?.chance, r.you?.degree) + rawNote;
+      // SNG-247 (Erik: "claims you have to read them to see it, but I've already used a read skill and I can't
+      // see it"). The old line was a lie of omission: their math needs sense tier 3, and a read buys only
+      // +revealActionBuysTier. A character whose base tier is 0 can read every turn and never reach it. The fog
+      // must never promise what it cannot deliver — so it now names the tier you are AT, what that bought, and
+      // what the next rung would add.
       const theirs = fog?.revealed?.breakdown ? mk("them", r.them?.breakdown, r.them?.roll, r.them?.chance, r.them?.degree)
-        : `<span class="hint sb-roll-fog">their math is fogged — 👁 read them to see it</span>`;
+        : `<span class="hint sb-roll-fog">${esc(fogLadderLine(fog))}</span>`;
       return `<div class="sb-rolls">${yours}${theirs}</div>`;
     })()}</div>` : ""}
     ${(() => { // CCODE-35: what's STANDING right now — a raised guard, an insight, a bind laid on them. Each
@@ -9456,7 +9513,26 @@ function renderPlay(turn, opts = {}) {
     <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}<span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span></div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
       let status = "";
-      if (d.type === "duel") status = `${esc(d.opponent.name)}: ${"▮".repeat(Math.max(0, st.opponentHealth))}${"▯".repeat(Math.max(0, d.opponent.health - st.opponentHealth))} · you: ${character.health}/${character.maxHealth}${st.tactic ? ` · tactic: ${esc(st.tactic)}` : ""}`;
+      if (d.type === "duel") {
+        // SNG-247 (Erik: "a 6 block indicator that never seems to change... i think it might be broken") — it WAS.
+        // Those pips were the opponent's HP, and a skill battle has not moved opponentHealth since CCODE-38 made
+        // filling the meter a PRESSURE tick instead of damage. So the bar sat full for the whole fight in every
+        // contest — a fight, a chase, everything. On the contest engine the honest "how close is this to ending"
+        // track is PRESSURE, which is what actually ends it; the classic duel keeps its hp pips, which do move.
+        if (st.mode === "skill_battle") {
+          const cfg = { ...(CONTENT.skillBattle?.engine?.momentum?.pressure || {}),
+            ...((CONTENT.skillBattle?.engine?.kinds?.[encounterKind(d) || "fight"] || {}).pressure || {}) };
+          const need = cfg.breakAtPressure ?? 2;
+          const pipRow = (n, of) => "◆".repeat(Math.max(0, Math.min(n, of))) + "◇".repeat(Math.max(0, of - n));
+          const theirs = st.pressure?.opponent || 0, mine = st.pressure?.player || 0;
+          const yourBreak = cfg.playerBreaksAtPressure;
+          status = `${esc(d.opponent.name)} driven back: ${pipRow(theirs, need)} ${theirs}/${need}`
+            + (Number.isFinite(yourBreak) ? ` · you: ${pipRow(mine, yourBreak)} ${mine}/${yourBreak}` : ` · you: ${character.health}/${character.maxHealth} hp`)
+            + ` · ${character.energy}e`;
+        } else {
+          status = `${esc(d.opponent.name)}: ${"▮".repeat(Math.max(0, st.opponentHealth))}${"▯".repeat(Math.max(0, d.opponent.health - st.opponentHealth))} · you: ${character.health}/${character.maxHealth}${st.tactic ? ` · tactic: ${esc(st.tactic)}` : ""}`;
+        }
+      }
       if (d.type === "challenge") status = `stage ${Math.min(st.stageIndex + 1, d.stages.length)}/${d.stages.length}: ${esc(d.stages[st.stageIndex]?.name || "complete")}`;
       if (d.type === "puzzle") {
         const tier = senseTierFor();
@@ -9558,7 +9634,7 @@ function renderPlay(turn, opts = {}) {
       // SNG-084 Ph2: one contextual ⓘ on the roll — why it was hard (novel), suddenly easy (discovery), or the d100-vs-chance basics.
       const rollHelp = r.action?.novel ? infoDot("roll.novel") : (r.usedDiscovery || r.action?.discoveryBonus) ? infoDot("roll.discovery") : infoDot("roll.difficulty");
       // SNG-106: the chance is tappable → the full component breakdown (only when this turn retained one).
-      const chanceCell = r.breakdown ? `<span class="roll-chance" data-breakdown="${esc(JSON.stringify({ ...r.breakdown, roll: r.roll, degree: r.degree }))}" tabindex="0" role="button" title="Why this number?">${r.chance}</span>` : `${r.chance}`;
+      const chanceCell = r.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...r.breakdown, roll: r.roll, degree: r.degree })}" tabindex="0" role="button" title="Why this number?">${r.chance}</span>` : `${r.chance}`;
       main += `<div class="roll-receipt">d100: ${r.roll} vs ${chanceCell} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${subBit}${blBit}`;
       // SNG-246 Fix D: the encounter's mechanical receipt line — the round result SHOWN (not inferred from prose).
       if (r.encReceiptLine) main += `<div class="enc-receipt">${esc(r.encReceiptLine)}</div>`;
@@ -9961,6 +10037,12 @@ function renderPlay(turn, opts = {}) {
 // ---------- utils ----------
 
 function esc(s) { return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+// SNG-247 (Erik: "the 'your roll...' clickable doesn't do anything"). `esc` does not escape the APOSTROPHE, and
+// these payloads go into SINGLE-quoted attributes — so a craft named "Hunter's Strike" closed the attribute early,
+// the JSON arrived truncated, JSON.parse threw, and the delegated handler's catch swallowed it. The pill rendered
+// perfectly and did nothing, only for crafts with an apostrophe in the name — which is why it looked intermittent.
+// Anything serialised INTO an attribute goes through this, never through esc.
+function attrJson(v) { return esc(JSON.stringify(v)).replace(/'/g, "&#39;"); }
 
 /** SNG-190 §5 / SNG-189 §1: coerce a scene summary to a safe string before it can reach the permanent
  *  chronicle. The model is asked for a string; when it returns an object that still parses, `String(it)`

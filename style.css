@@ -915,6 +915,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-roll-fog { font-size: 11px; font-style: italic; }
 /* CCODE-35 — what's STANDING: a raised guard, an insight, a bind laid on them. The signed value on each chip is
    the real number going into the next roll (it appears as its own line in the roll breakdown). */
+/* SNG-247: the opponent's CRAFTS, fog-gated — they always had them (opponentPolicy picks from this list every
+   round); it was simply never shown, so their moves read as arbitrary. */
+.sb-oppcrafts { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin-bottom: 8px; }
+.sb-oppcraft { font-family: var(--font-ui); font-size: 11px; padding: 2px 8px; border-radius: 10px;
+  border: 1px dashed color-mix(in srgb, var(--enc-hue, var(--danger)) 50%, var(--border)); background: var(--panel2);
+  color: var(--ink); cursor: help; white-space: nowrap; }
+.sb-roll-fog { display: block; margin-top: 4px; line-height: 1.4; }
 .sb-fx-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin-bottom: 8px; }
 .sb-fx-lbl { font-family: var(--font-ui); font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ink-dim); margin-right: 2px; }
 .sb-fx { font-family: var(--font-ui); font-size: 11px; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel2); cursor: help; white-space: nowrap; }

@@ -275,44 +275,19 @@
         "player": "Move closer — your hand, your mouth, your breath on her skin",
         "summary": "On the Common Hall roof terrace in late afternoon, Lira — present and unhurried, watching his face — stands while he moves slowly closer. The moment holds. The count-bell window is still open.",
         "narration": "You lean in slowly. Your hand stays where it rests on her ribs, and you bring your mouth to the hollow of her collarbone — not rushing. She tilts her head slightly, just enough to see your face as you move. Her breathing deepens. She does not look away.\n\nYour breath warms her skin. You kiss the line where her shoulder meets her neck, deliberate and unhurried, the way you said you would move. Her hands tighten fractionally on your forearms — the first time she has gripped instead of rested. She is still looking at your face. Still present. Still chosen.\n\nThe afternoon light is turning honey-gold. The count-bell has not rung yet. Below the terrace, the district sounds small and far away. Here, there is only the two of you and the particular stillness of a decision held between two people who are not managing anything anymore."
+      },
+      {
+        "player": "Keep moving — lower, to her breast",
+        "summary": "On the Common Hall roof terrace, the moment between you and Lira turns as the count-bell rings—intimacy and urgency meeting, the window beginning to close.",
+        "narration": "You move lower, deliberate and unhurried. Your mouth finds the curve of her breast — the warmth of her skin, the small shift of her breathing when you reach her. She does not move. Her hands stay gripped on your forearms, holding steady. You trace the line of her ribs with your lips, and she tilts her head back, not far — just enough that the line of her throat opens to the late-afternoon light.\n\nBelow, the count-bell begins to toll.\n\nOne note. Two. It carries up through the still air. Lira's eyes close for just a moment — the sound pulling at something. When they open again, she looks at you directly, her breathing steady but deeper now. The moment is still present. Still chosen. But the count is ringing.\n\nThree notes. Four. The bell marks time the way it always does, and you both hear it marking something else: the window closing. The afternoon is still gold. Her skin is still warm under your touch. But the count moves on, and Keeper Aldris Vael is waiting. The ledger sits on the bench, drying in the fading light."
       }
     ],
     "lastTurn": {
-      "narration": "You lean in slowly. Your hand stays where it rests on her ribs, and you bring your mouth to the hollow of her collarbone — not rushing. She tilts her head slightly, just enough to see your face as you move. Her breathing deepens. She does not look away.\n\nYour breath warms her skin. You kiss the line where her shoulder meets her neck, deliberate and unhurried, the way you said you would move. Her hands tighten fractionally on your forearms — the first time she has gripped instead of rested. She is still looking at your face. Still present. Still chosen.\n\nThe afternoon light is turning honey-gold. The count-bell has not rung yet. Below the terrace, the district sounds small and far away. Here, there is only the two of you and the particular stillness of a decision held between two people who are not managing anything anymore.",
-      "sceneSummary": "On the Common Hall roof terrace in late afternoon, Lira — present and unhurried, watching his face — stands while he moves slowly closer. The moment holds. The count-bell window is still open.",
+      "narration": "You move lower, deliberate and unhurried. Your mouth finds the curve of her breast — the warmth of her skin, the small shift of her breathing when you reach her. She does not move. Her hands stay gripped on your forearms, holding steady. You trace the line of her ribs with your lips, and she tilts her head back, not far — just enough that the line of her throat opens to the late-afternoon light.\n\nBelow, the count-bell begins to toll.\n\nOne note. Two. It carries up through the still air. Lira's eyes close for just a moment — the sound pulling at something. When they open again, she looks at you directly, her breathing steady but deeper now. The moment is still present. Still chosen. But the count is ringing.\n\nThree notes. Four. The bell marks time the way it always does, and you both hear it marking something else: the window closing. The afternoon is still gold. Her skin is still warm under your touch. But the count moves on, and Keeper Aldris Vael is waiting. The ledger sits on the bench, drying in the fading light.",
+      "sceneSummary": "On the Common Hall roof terrace, the moment between you and Lira turns as the count-bell rings—intimacy and urgency meeting, the window beginning to close.",
       "choices": [
         {
-          "label": "Keep moving — lower, to her breast",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Look up at her face — meet her eyes",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stop — step back and speak",
+          "label": "Stay here. The moment matters more than the deadline.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -322,22 +297,38 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Pull away — remember the count-bell window, the ledger, Keeper Vael waiting",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Step back gently and reach for your clothes. The ledger has to move now.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Kiss her, unhurried, and tell her what you need to do—trust her to understand.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic",
+            "honest"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
@@ -351,19 +342,29 @@
         "xp": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-clean-numbers",
+          "title": "The Clean Numbers",
+          "summary": "Obtain and deliver evidence of Fendt's falsified filtration purity reports to someone who can act on them.",
+          "giver": "circumstance",
+          "note": "The count-bell window to reach Keeper Aldris Vael is closing—five bells remain before the day-turn.",
+          "xpReward": null
+        }
+      ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
-      "adoptSchool": {},
+      "adoptSchool": null,
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light turning honey-gold, angling warm from the west. The valley floor visible beyond the coping wall; the district sounds small and far away below.",
+        "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light turning honey-gold, the sun angling lower. The valley floor visible beyond the coping wall; the count-bell's voice carries clear and distant from the district below.",
         "npcsPresent": [
           {
             "name": "Lira",
-            "state": "Standing present and unhurried, her hands on your forearms, watching your face. Her breathing deepened. Present. Chosen."
+            "state": "Present and unhurried, her hands gripped on your forearms, her eyes tracking yours. Her breathing deepened. Eyes open now, watching directly. Present. Chosen. Listening to the count-bell mark the closing window."
           }
         ],
         "objects": [
@@ -374,19 +375,28 @@
           "Coping wall overlooking the district"
         ],
         "threads": [
-          "The count-bell window to reach Keeper Aldris Vael is still open — one bell past the afternoon count.",
-          "The moment is unhurried and present between you."
+          "The count-bell is ringing—the window to reach Keeper Aldris Vael is closing",
+          "The moment between you and Lira is present and open",
+          "The ledger still waits on the bench"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "lira",
-          "note": "On the roof terrace in late afternoon, present and unhurried — her hands tightened on your forearms for the first time, gripping instead of resting. Still watching your face. Still chosen.",
-          "learned": [
-            "When she stops managing herself, her grip shows first — a physical truth before words."
-          ],
-          "skillsObserved": []
+          "name": "Lira",
+          "role": "Apprentice optics-weaver, Edge District",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": null,
+          "note": "On the roof terrace as the count-bell rings—present and deliberate under your touch, her hands gripped on your forearms, watching your face. The moment holds; the window closes.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the Common Hall roof terrace, present and unhurried, in the late-afternoon light. The count-bell is ringing.",
+          "bondType": "romantic",
+          "bondStage": "together"
         }
       ],
       "factUpdates": [],
@@ -398,11 +408,14 @@
       "newEncounter": null,
       "unlockPrecursor": null,
       "unlockSubstrate": null,
-      "timeOps": {},
+      "timeOps": {
+        "hoursPassed": 0.75,
+        "why": "The late-afternoon light deepens; the count-bell begins to toll"
+      },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "imagePrompt": "On a rooftop terrace in honey-gold late-afternoon light, a woman stands present and unhurried — amber-grey eyes dark with choice, her hands gripping forearms, her skin warm where a man's mouth has just found her collarbone. The valley spreads below. Nothing else moves.",
+      "imagePrompt": null,
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -414,11 +427,11 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light turning honey-gold, angling warm from the west. The valley floor visible beyond the coping wall; the district sounds small and far away below.",
+      "setting": "Roof terrace above the Common Hall wick-room, Edge District. Late-afternoon light turning honey-gold, the sun angling lower. The valley floor visible beyond the coping wall; the count-bell's voice carries clear and distant from the district below.",
       "npcsPresent": [
         {
           "name": "Lira",
-          "state": "Standing present and unhurried, her hands on your forearms, watching your face. Her breathing deepened. Present. Chosen."
+          "state": "Present and unhurried, her hands gripped on your forearms, her eyes tracking yours. Her breathing deepened. Eyes open no"
         }
       ],
       "objects": [
@@ -429,8 +442,9 @@
         "Coping wall overlooking the district"
       ],
       "threads": [
-        "The count-bell window to reach Keeper Aldris Vael is still open — one bell past the afternoon count.",
-        "The moment is unhurried and present between you."
+        "The count-bell is ringing—the window to reach Keeper Aldris Vael is closing",
+        "The moment between you and Lira is present and open",
+        "The ledger still waits on the bench"
       ]
     }
   },
@@ -467,7 +481,8 @@
         "Ledger in hand; plan mapped — deliver to Aldris Vael or carry it to the forge first. The cooling window and the evidence window are in direct tension.",
         "Lira received the full truth and confirmed she'd sensed the numbers were wrong for weeks. She warned that the supervisor's office faces the direct path — the window to reach Vael unobserved is closing. Afternoon count in minutes.",
         "The count-bell has rung. The window to reach Keeper Aldris Vael is open — eastern route behind array housing, ledger in hand, Lira's last word guiding the approach.",
-        "The count-bell window to reach Keeper Vael is still open. The ledger is in hand. Lira has named the closing time — one bell past the afternoon count."
+        "The count-bell window to reach Keeper Vael is still open. The ledger is in hand. Lira has named the closing time — one bell past the afternoon count.",
+        "The count-bell window to reach Keeper Aldris Vael is closing—five bells remain before the day-turn."
       ],
       "aliases": [],
       "startedAt": "2026-07-11T22:11:38.224Z"
@@ -485,8 +500,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d1] Named the difference between first and second time — managing herself versus stopping — and demonstrated it in the telling rather than just describing it. Asked him to confirm he felt each shift.",
-        "[d1] Demonstrated the two states — bracing and stopping — in plain words and body, and told him the rest is what he can already see.",
         "[d1] Reconstructed the shared sequence in order — managing, then the moment of stopping — and turned it back to him as a question about what it registered from his side.",
         "[d1] Confirmed plainly what passed between them and what did not — no touch, no orgasm, only the Prism Sight exchange and her stopping managing herself. Named it as more than most people give her. Asked whether he is orienting to what was real or reaching for something that hasn't happened yet.",
         "[d1] Closed the distance herself. Said plainly she was not managing anything. Met the kiss without hesitation.",
@@ -494,7 +507,9 @@
         "[d1] Held still under his hand moving along her collarbone — watching his face the whole time, breathing slow, not managing any part of it.",
         "[d1] On the roof terrace in late-afternoon light, present and unhurried — breathing steady and chosen, watching his face while his hand moved along her ribs. No management left. Decided.",
         "[d1] On the roof terrace in late afternoon, present and steady under your attention — watching your face while you look at her. No management left.",
-        "[d1] On the roof terrace in late afternoon, present and unhurried — her hands tightened on your forearms for the first time, gripping instead of resting. Still watching your face. Still chosen."
+        "[d1] On the roof terrace in late afternoon, present and unhurried — her hands tightened on your forearms for the first time, gripping instead of resting. Still watching your face. Still chosen.",
+        "[d1] On the roof terrace as the count-bell rings—present and deliberate under your touch, her hands gripped on your forearms, watching your face. The moment holds; the window closes.",
+        "[d1] Your bond deepens — together."
       ],
       "knownFacts": [
         "She draws a clear line between what was real and what didn't happen — and names both without embarrassment.",
@@ -515,7 +530,7 @@
         "the ability to be still under genuine attention"
       ],
       "status": "active",
-      "statusNote": "On the roof terrace with the player, present and unhurried, in the late-afternoon light.",
+      "statusNote": "On the Common Hall roof terrace, present and unhurried, in the late-afternoon light. The count-bell is ringing.",
       "lastSeen": {
         "locationId": "gen-object-object",
         "day": 1
@@ -525,7 +540,7 @@
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Lira%2C%20woman%2C%20Apprentice%20optics-weaver%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=44200&nologo=true",
       "_portraitTier": "devoted",
       "bondType": "romantic",
-      "bondStage": "courting"
+      "bondStage": "together"
     },
     "keeper-aldris-vael": {
       "id": "keeper-aldris-vael",
@@ -765,7 +780,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 34,
+    "turnsSinceOffer": 35,
     "arcStages": {
       "arc_what_wakes_beneath": {
         "othersPush": 1
@@ -1027,15 +1042,15 @@
     }
   },
   "tendencies": {
-    "social": 7.910050208473544,
-    "strategic": 5.742691107573948,
-    "cautious": 3.1712407707229224,
-    "cerebral": 4.233692075344989,
-    "physical": 0.44960787038530287,
-    "ruthless": 1.0835988554941525,
-    "generous": 0.4750945152861575,
-    "amorous": 17.025401989829863,
-    "risky": 1.221611473322472
+    "social": 7.712298953261706,
+    "strategic": 5.599123829884599,
+    "cautious": 3.091959751454849,
+    "cerebral": 4.127849773461365,
+    "physical": 0.4383676736256703,
+    "ruthless": 1.0565088841067987,
+    "generous": 0.4632171524040035,
+    "amorous": 17.599766940084116,
+    "risky": 1.1910711864894103
   },
   "aptitudes": [
     "silver_tongue",
@@ -1043,11 +1058,11 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 46,
+  "actionCount": 47,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785582291381,
-  "rev": 105,
+  "updatedAt": 1785582344731,
+  "rev": 106,
   "opLossPending": false,
   "establishedFacts": [
     {
@@ -1300,7 +1315,7 @@
   "portrait": "https://image.pollinations.ai/prompt/character%20portrait%2C%20named%20Test%20Hero%20(dev)%2C%20a%20harmonic%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=94832&nologo=true",
   "teachers": {},
   "regionsKnown": {
-    "valley": 47
+    "valley": 48
   },
   "foreclosed": [],
   "company": [],
@@ -1343,28 +1358,29 @@
     {
       "id": "sess-4",
       "startedAt": "2026-08-01T11:03:22.597Z",
-      "lastAt": "2026-08-01T11:04:51.374Z",
+      "lastAt": "2026-08-01T11:05:44.724Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 2
+      "beats": 3
     }
   ],
   "peopleDisposition": {},
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 30,
-    "choices": 30,
-    "scene": 30,
-    "npcUpdates": 30,
-    "timeOps": 24,
-    "sceneEnded": 9,
-    "characterDeltas": 7,
+    "sceneSummary": 31,
+    "choices": 31,
+    "scene": 31,
+    "npcUpdates": 31,
+    "timeOps": 25,
+    "sceneEnded": 10,
+    "characterDeltas": 8,
     "codexUpdates": 3,
     "imagePrompt": 2,
-    "gambitApt": 2,
-    "discoveryEligible": 1
+    "gambitApt": 3,
+    "discoveryEligible": 1,
+    "questUpdates": 1
   },
-  "_opTurns": 30,
+  "_opTurns": 31,
   "_intentAsked": null,
   "_opLedger": {
     "offer": {

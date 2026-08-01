@@ -109,3 +109,90 @@ adding a type means declaring its contract." The engine can't generate a hollow 
 4. (CCode) Can the consumer map fully drive the gate for all types, or do some need a bespoke coherence check
    (like SNG-249 §5 for quests)? Lean: consumer map for completeness+concreteness; bespoke coherence only for the
    structured/arc types (quest, encounter, arc).
+
+
+---
+
+# §6 — WHOLE IS NOT FROZEN: every type declares how it EVOLVES (Erik, 2026-07-27)
+Erik: "Making each of these whole doesn't mean making them completely rigid. They all likely need a way to
+evolve and grow. We've seen this with Pell (NPC) and Memory — so build that in as well."
+
+The essential counterbalance to §1-5. "Born whole" must not harden into "born FROZEN." A world where nothing
+changes after creation is dead. The contract has TWO halves:
+- **Born whole** (§1-5): complete, concrete, coherent AT creation.
+- **Grows through play** (§6): a defined way to EVOLVE after creation, so the whole thing is a living seed, not
+  a finished statue.
+
+## §6a — the state (verified): growth EXISTS but is per-type, ad hoc, and has a hole
+Most types already evolve — but via scattered, per-type mechanisms, and one type can't evolve at all:
+- **item** → applyItemUpdates + evoStage (SNG-215) — grows in stages ✓
+- **npc** → applyNpcUpdates + relationshipDelta — **the Pell mechanism** ✓ (disposition/relationship move through play)
+- **location** → applyPlaceUpdates + placeMemory — accrues history/**memory** ✓ (Erik's second example)
+- **companion** → growBond + stageCount — bond deepens ✓
+- **skill/ability** → tree/rank ladder (CCODE-29) — evolves rank-by-rank ✓
+- **arc** → net-vector advancement (SNG-203) ✓
+- **creature/monster** → **NOTHING** — frozen once minted (no creatureUpdates path)
+- **quest/encounter** → stages ADVANCE (progress) but the quest itself doesn't EVOLVE (a static structure you walk)
+So growth is REAL but UNCONTRACTED — nothing guarantees every generatable type declares HOW it grows, the
+mechanisms are six different scattered modules, and creatures are frozen. Erik's point: make evolution part of
+the contract, universally.
+
+## §6b — the growth half of the contract
+Just as §3 defines what makes each type WHOLE, each type declares HOW IT GROWS — its evolution vector(s):
+- **NPC** — relationship/disposition moves with the player (the Pell path); wants can shift as they're met or
+  betrayed; a new want can surface. The interiority is a STARTING state, not a fixed one.
+- **CREATURE** (the gap to fill) — a creature can evolve: a beast that survives an encounter grows warier/scarred;
+  a recurring threat escalates tier; a bonded/tamed creature shifts disposition. Give creatures a `creatureUpdates`
+  path (generalize itemUpdates/npcUpdates) so a monster met twice isn't identical.
+- **ITEM** — evoStage growth through use (SNG-215) — already there; keep as the model.
+- **SKILL** — rank-ladder evolution (already there); a skill deepens with mastery.
+- **LOCATION** — placeMemory accrues; a place remembers what happened there, its danger/tone can shift with events.
+- **QUEST/ENCOUNTER** — beyond stage-advance: a quest can EVOLVE (a new stage surfaces from a choice, an outcome's
+  aftermath spawns a follow-on, the world's reaction changes the remaining arc). Distinct from §5's "complete arc
+  at creation": the arc is whole at birth AND the world can extend/branch it through play — the SNG-204 wake +
+  SNG-245 pressure are the vectors (a finished quest WAKES into new pressure). Growth here = the aftermath lives.
+- **ARC** — net-vector advancement (already there).
+
+## §6c — the same discipline as §1-5, applied to growth
+- **The evolution vector is CONCRETE** — "grows warier (threat +1, gains a scar-trait)" not "changes somehow." A
+  growth path is as testable as a birth field: a real state transition, engine-detectable (ties SNG-235/249).
+- **Growth is COHERENT with what the thing IS** — an NPC's evolution follows from their authored interiority
+  (Pell grows possessive because she was born possessive), a creature's from its class, an item's from its use.
+  Growth EXTENDS the whole; it doesn't contradict it. (A gentle NPC doesn't randomly turn cruel — evolution is
+  grounded in the born-whole self, the way §5's arc is grounded in the premise.)
+- **Growth is BOUNDED** — no power inflation (the itemUpdates rule already: "no power inflation"). Evolution
+  deepens and shifts; it doesn't runaway-escalate. The bound is part of the contract.
+
+## §6d — enforcement
+- **CCode:** a `creatureUpdates` path (the missing one) generalizing the itemUpdates/npcUpdates pattern; and a
+  contract check that every generatable type DECLARES an evolution vector (a type that can be generated but has NO
+  way to grow is flagged — creatures today). Unify the scattered growth mechanisms under one "evolvable" contract
+  (each type points at its evolution path) so it's legible + every future type must declare how it grows.
+- **Aevi:** the per-type growth SEMANTICS — what a concrete, coherent, bounded evolution looks like per type
+  (how a creature grows warier, how an NPC's want shifts, what a quest's aftermath spawns), + the growth prompt
+  guidance so generated updates stay concrete + grounded + bounded.
+- **Erik:** how MUCH the world evolves things (aggressive living-world vs. stable) — likely the same pacing/
+  Eventful dial; and whether generated entities evolve as readily as authored ones (lean: yes — a generated NPC
+  is as alive as an authored one, that's the point).
+
+## §6e — guards
+- **Whole AND living** — born complete (§1-5) AND able to grow (§6); neither half alone. A frozen-whole entity is
+  a statue; a growing-but-hollow one is the mush §1-5 banned. Both halves, every type.
+- **Evolution is grounded** — growth follows from the born-whole self (Pell's possessiveness deepens; it doesn't
+  invert). Coherent evolution, not random mutation. The §5 coherence bar applies to growth too.
+- **Concrete + bounded** — a growth step is a real, testable, bounded transition (no "changes somehow", no power
+  inflation). Same bar as birth.
+- **Every type declares its vector** — the contract's second half: a generatable type with no evolution path is
+  incomplete (fix creatures). Future types declare how they grow, as they declare how they're whole.
+- **Fix the creature hole** — creatures are the one generatable-ish type that's frozen; the creatureUpdates path
+  is the concrete first deliverable of §6.
+
+## §6 open questions
+1. (Erik) Living-world aggression for evolution — reuse the Eventful/pacing dial (Calm = things change slowly,
+   Eventful = the world evolves fast)? Lean: yes, one dial.
+2. (CCode) creatureUpdates: generalize itemUpdates, or does a creature need its own shape (threat/behavior/
+   disposition deltas)? Lean: generalize the pattern, creature-specific fields.
+3. (Aevi) Per-type growth semantics + the "how it grows" prompt guidance — I author next, grounded in each type's
+   real evolution path.
+4. (Erik) Do quests EVOLVE (aftermath spawns follow-ons) or just ADVANCE? The wake engine (SNG-204) is the vector
+   — lean: yes, a finished quest's aftermath can grow the world (that's what wake is FOR).

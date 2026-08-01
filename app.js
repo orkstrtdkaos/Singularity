@@ -9458,6 +9458,17 @@ async function sbExecuteTurn() {
     seenTendency: sbLastPlayerFn, rng: Math.random, phase: "action", tickEffects: !bDecl, setupBonus: turn.setupBonus || 0 });
   sbLastPlayerFn = aDecl.function;
   const applyRR = (r, d, label) => {
+    // ERIK (2026-08-01, from the Machine log): EVERY round reported "neither gains — it's even", including a
+    // roll of 1/95 (margin 102) against a margin of 25. The receipt was being handed the round's AFTER momentum
+    // as its BEFORE — `sbRoundReceipt(r, d, (r.state?.momentum ?? 0) - 0, …)`, that stray `- 0` a leftover from
+    // an edit — so `swing = after - before` was ALWAYS 0 and the line read "even" and "4→4" no matter what
+    // happened. The receipt has been lying about every round in every fight.
+    //
+    // The same value has to be captured HERE, before the line below overwrites activeEncounter with the new
+    // state: applyRR runs once per STEP (action, then bonus), so `enc.state` is the pre-TURN momentum and is
+    // already stale for the bonus step — which is why the log showed the bonus starting from 0 when the action
+    // had already moved the meter to 3.5. The mechanics chained correctly throughout; only the reporting lied.
+    const beforeMom = character.activeEncounter?.state?.momentum ?? enc.state?.momentum ?? 0;
     character.health = Math.max(0, Math.min(character.maxHealth, character.health + (r.deltas?.health || 0)));
     character.energy = Math.max(0, character.energy + (r.deltas?.energy || 0));
     character.activeEncounter = { defId: enc.def.id, state: r.state }; // write THROUGH the activeEnc() wrapper
@@ -9483,9 +9494,13 @@ async function sbExecuteTurn() {
     character.activeEncounter.state.lastOppReceipt = r.opponent || null;
     character.activeEncounter.state.lastReadWasSense = false;
     character.activeEncounter.state.senseTierEarned = null;   // CCODE-51: a read is SPENT when the turn resolves
-    sbLastRoundReceipt = sbRoundReceipt(r, d, (r.state?.momentum ?? 0) - 0, false);
-    sbLogRound(enc, d, r, enc.state.momentum ?? 0, false);
-    beats.push(`${label}: ${sbFightBeat(r, d, 0, false)}`);
+    // All three reporters get the SAME true before-value, so the receipt, the machine log and the transcript
+    // beat can never disagree about what a round did. `label` ("Action" / "Bonus action") is already on the
+    // beat — with a real swing behind it, the two steps are now separately legible, which is the other half of
+    // Erik's "the main action and the bonus action… i'm never sure they are both narrated".
+    sbLastRoundReceipt = sbRoundReceipt(r, d, beforeMom, false);
+    sbLogRound(enc, d, r, beforeMom, false);
+    beats.push(`${label}: ${sbFightBeat(r, d, beforeMom, false)}`);
   };
   applyRR(rr, aDecl, "Action");
   saveCharacter(character);

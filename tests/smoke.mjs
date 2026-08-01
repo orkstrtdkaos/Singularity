@@ -8930,6 +8930,34 @@ await (async () => {
     /rr\?\.pressure\?\.opponent \|\| 0\) >= brkAt/.test(appE));
 }
 
+// ---------- ERIK'S BUG (2026-08-01, Machine log): every round reported "neither gains — it's even" ----------
+// A roll of 1/95 (margin 102) against a margin of 25 was reported as an even exchange, and the meter as "4→4".
+// `sbRoundReceipt` was handed the round's AFTER momentum as its BEFORE — the stray `(r.state?.momentum ?? 0) - 0`
+// — so `swing = after - before` was ALWAYS 0. The receipt lied about every round of every fight, and because
+// the GM narrates FROM those beats (both of which used beforeMom 0), the Action and the Bonus step read
+// identically and inconsequentially: which is exactly "I'm never sure they are both narrated".
+{
+  const appMraw = readFileSync(join(root, "app.js"), "utf8");
+  // Comments are stripped: the fix's own comment QUOTES the old broken call to explain it, and a naive
+  // negative match would read that quotation as the bug still being present.
+  const appM = appMraw.split("\n").filter(l => { const t = l.trim(); return !t.startsWith("//") && !t.startsWith("*"); }).join("\n");
+  check("ERIK-BUG: the receipt is no longer handed the AFTER momentum as its BEFORE (swing can be non-zero again)",
+    !/sbRoundReceipt\(r, d, \(r\.state\?\.momentum \?\? 0\) - 0/.test(appM) && /sbRoundReceipt\(r, d, beforeMom, false\)/.test(appM),
+    "swing is pinned to 0, so every round reports 'neither gains — it's even' regardless of the rolls");
+  check("ERIK-BUG: the transcript beat gets the REAL before-momentum, not a hardcoded 0 — the GM narrates from these",
+    !/sbFightBeat\(r, d, 0, false\)/.test(appM) && /sbFightBeat\(r, d, beforeMom, false\)/.test(appM),
+    "both steps report as even, so the Action and the Bonus read the same in the prose");
+  check("ERIK-BUG: the machine log uses the same before-value, not the stale pre-TURN enc.state (wrong for the bonus step)",
+    !/sbLogRound\(enc, d, r, enc\.state\.momentum \?\? 0, false\)/.test(appM) && /sbLogRound\(enc, d, r, beforeMom, false\)/.test(appM));
+  check("ERIK-BUG: before-momentum is captured BEFORE activeEncounter is overwritten with the new state",
+    (() => { const i = appM.indexOf("const beforeMom = character.activeEncounter?.state?.momentum");
+      const j = appM.indexOf("character.activeEncounter = { defId: enc.def.id, state: r.state }");
+      return i > 0 && j > i; })(),
+    "captured after the write, it would read the new state and be pinned to 0 all over again");
+  check("ERIK-BUG: all three reporters share ONE before-value, so receipt / log / beat cannot disagree",
+    (appM.match(/, beforeMom, false\)/g) || []).length === 3);
+}
+
 // ---------- SNG-253 (engine half): the opponent's move vocabulary can be KIND-NATIVE ----------
 // Scoped from the post-252 re-look Aevi asked for, and grounded in what the engine ACTUALLY declared rather
 // than what the spec predicted: a standoff opponent declared "a hard strike" and held "a raised guard" — in a

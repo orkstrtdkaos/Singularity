@@ -164,127 +164,139 @@
         "player": "Tell her what you are — not where you came from, but what you actually are — and see what she does with that.",
         "summary": "Loki told Vessin plainly what she is — made, not born, the specification unfound — and Vessin answered with a fact she had been carrying: she has met one person like that before. The door between them opened a little more.",
         "narration": "You sit down on the fallen stone beside her — not too close, but closer than a stranger would. The lanterns up in the scaffold move slowly. Neither of you watches them.\n\nYou tell her what you are. Not the performance of it, not the careful version — the plain one. That you were made, not born. That somewhere in the record of the old world there is a specification for you and you have never found it. That the nanites in you are not a tool you learned to use but something closer to a language you were born already speaking, and you are still learning what it says. You tell her that you have an adopted father who is a giant now and a mother who is a nymph-touched enchantress, and that neither of them made you, and that this is the most interesting thing and also the worst thing you know about yourself, depending on the hour.\n\nVessin is quiet through all of it. The knife rests across her knee. She is looking at you the way she was not looking at you a moment ago — not appraising now, not pricing. She says, after a pause that is long enough to mean something, \"I've met one person who might have been like you. Older. He did not know what he was either.\" She says it without pity. She says it the way someone names a fact they have been carrying a while and are glad to set down somewhere. Then she tilts her head and says, \"What do you do with not knowing?\"\n\nCy, at the base of the arch across the nave, opens its lens a single degree. It does not comment. The scaffold workers above shift a lantern, and the light moves across the stone ribs of the ceiling like a slow thought."
+      },
+      {
+        "player": null,
+        "summary": "Rust-choir gnats swarm the nave — old repair-drones, still trying to fix what they cannot read.",
+        "narration": "The rust-choir gnats come in silence first — no hum, no warning, just a shift in the warm air of the nave as the cloud finds the two of you on the fallen stone.\n\nThey are thumbnail-sized, each one a little pressed-copper disc with six legs and a soldering tip where a mouth should be. They move in the strange, too-regular rhythm of things that were made to have a purpose and have outlasted the instruction. The cloud is perhaps three hundred of them, and it has already found the seam at Vessin's boot-lace — the place where the sole is beginning to part from the leather — and six of them are working it with the focused, oblivious industry of repair-drones attending to a hull breach.\n\nVessin pulls her boot back and gets to her feet in one motion. The knife comes up, not dramatically, just ready. She looks at the cloud and then at you, and her voice is dry and completely level. \"Tell me you know what these are,\" she says.\n\nCy, across the nave, has already pivoted. Its lens irises open to its widest position. It clicks once — a sound you have learned to read as recognition — and does not move closer. It is watching the swarm the way a thing watches something it has a filing on. The lanterns above the scaffold have gone still. The workers up there, whoever they are, have stopped moving.\n\nThe gnats have found the seam in your coat where the left shoulder was mended. The cold tips of them are already testing it."
       }
     ],
     "lastTurn": {
-      "narration": "You sit down on the fallen stone beside her — not too close, but closer than a stranger would. The lanterns up in the scaffold move slowly. Neither of you watches them.\n\nYou tell her what you are. Not the performance of it, not the careful version — the plain one. That you were made, not born. That somewhere in the record of the old world there is a specification for you and you have never found it. That the nanites in you are not a tool you learned to use but something closer to a language you were born already speaking, and you are still learning what it says. You tell her that you have an adopted father who is a giant now and a mother who is a nymph-touched enchantress, and that neither of them made you, and that this is the most interesting thing and also the worst thing you know about yourself, depending on the hour.\n\nVessin is quiet through all of it. The knife rests across her knee. She is looking at you the way she was not looking at you a moment ago — not appraising now, not pricing. She says, after a pause that is long enough to mean something, \"I've met one person who might have been like you. Older. He did not know what he was either.\" She says it without pity. She says it the way someone names a fact they have been carrying a while and are glad to set down somewhere. Then she tilts her head and says, \"What do you do with not knowing?\"\n\nCy, at the base of the arch across the nave, opens its lens a single degree. It does not comment. The scaffold workers above shift a lantern, and the light moves across the stone ribs of the ceiling like a slow thought.",
-      "sceneSummary": "Loki told Vessin plainly what she is — made, not born, the specification unfound — and Vessin answered with a fact she had been carrying: she has met one person like that before. The door between them opened a little more.",
+      "narration": "The rust-choir gnats come in silence first — no hum, no warning, just a shift in the warm air of the nave as the cloud finds the two of you on the fallen stone.\n\nThey are thumbnail-sized, each one a little pressed-copper disc with six legs and a soldering tip where a mouth should be. They move in the strange, too-regular rhythm of things that were made to have a purpose and have outlasted the instruction. The cloud is perhaps three hundred of them, and it has already found the seam at Vessin's boot-lace — the place where the sole is beginning to part from the leather — and six of them are working it with the focused, oblivious industry of repair-drones attending to a hull breach.\n\nVessin pulls her boot back and gets to her feet in one motion. The knife comes up, not dramatically, just ready. She looks at the cloud and then at you, and her voice is dry and completely level. \"Tell me you know what these are,\" she says.\n\nCy, across the nave, has already pivoted. Its lens irises open to its widest position. It clicks once — a sound you have learned to read as recognition — and does not move closer. It is watching the swarm the way a thing watches something it has a filing on. The lanterns above the scaffold have gone still. The workers up there, whoever they are, have stopped moving.\n\nThe gnats have found the seam in your coat where the left shoulder was mended. The cold tips of them are already testing it.",
+      "sceneSummary": "Rust-choir gnats swarm the nave — old repair-drones, still trying to fix what they cannot read.",
       "choices": [
         {
-          "label": "Ask about the person she met — the one who might have been like you.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Answer her question honestly — tell her what you actually do with not knowing.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask who is working the scaffold at this hour — and why.",
+          "label": "Step back and put shadow between you and the swarm — let Umbracraft wrap the seam they're working so the 'wound' they're chasing disappears into dark.",
           "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "axes": {
+            "dark_light": -0.3
+          },
+          "difficulty": 15,
           "intentTags": [
-            "scout"
+            "defend",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "umbracraft",
+          "energyCost": 6,
+          "trivial": false,
+          "encounterId": "hard-ground"
         },
         {
-          "label": "Rust choir gnats have found the warmth of two bodies in the cold nave — deal with them before they become a problem.",
+          "label": "Use See the Made Thing — read the swarm's pattern, find where the collective behavior has a seam of its own, and work it.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "defend"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": "hard-ground"
+        },
+        {
+          "label": "Use The Misdirect — give the swarm something else to chase: a false seam, a false wound, somewhere else entirely.",
+          "attribute": "social",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "feint",
+            "defend"
+          ],
+          "abilityId": "the_misdirect",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": "hard-ground"
+        },
+        {
+          "label": "Grab Vessin and move — get both of you out of the nave entirely, into the eastern tower where the lantern-light is absent and the stone has no open seams.",
           "attribute": "physical",
           "subAttribute": "agility",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "defend"
+            "defend",
+            "careful",
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false,
-          "encounterId": "beast_rust_choir_gnats",
-          "emergenceId": null
+          "encounterId": "hard-ground"
         }
       ],
       "scene": {
-        "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
+        "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. A cloud of rust-choir gnats fills the warm air of the nave, testing seams in cloth and boot-leather.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Seated on the fallen stone beside Loki, knife across her knee, looking at Loki with the door a little more open than before — waiting for an answer to her question."
-          },
-          {
-            "name": "Unknown workers",
-            "state": "Two lanterns still moving slowly in the scaffold above the south transept — faces not visible."
+            "state": "On her feet, knife raised, dry-eyed, watching the swarm and waiting on Loki."
           },
           {
             "name": "Cy",
-            "state": "At the base of a rib-arch across the nave, lens open one degree — present, not commenting."
+            "state": "Lens at full iris across the nave — recognition, no approach, filing something."
+          },
+          {
+            "name": "Unknown workers",
+            "state": "Lanterns above the scaffold have gone still — no movement."
           }
         ],
         "objects": [
           "Stone rib-arches open to the sky along the nave",
-          "Scaffold of pale, recently-replaced timber lashed over the south transept",
-          "Eastern tower — finished, taller; western tower — finished shorter, different generation",
-          "Two slow-moving lanterns high in the scaffold",
+          "Scaffold of pale lashed timber over the south transept",
+          "Eastern tower doorway — darker, quieter",
           "Low run of fallen stone at the nave's eastern edge",
-          "Small knife — resting across Vessin's knee"
+          "Small knife — in Vessin's raised hand",
+          "Cloud of rust-choir gnats — three hundred copper-disc repair-drones working open seams in cloth and leather"
         ],
         "threads": [
-          "Vessin asked: 'What do you do with not knowing?' — the question is open",
-          "Vessin has met someone like Loki before — the name and circumstances are not yet given",
-          "Who is working on the scaffold at this hour, and on which design's problem",
-          "Rust choir gnats gathering in the warmth of the nave"
+          "Rust-choir gnats are testing the seam on Loki's mended shoulder and Vessin's parting boot-sole",
+          "Cy has recognition-clicked but has not moved — it knows what these are",
+          "Vessin asked: 'Tell me you know what these are' — unanswered",
+          "Vessin has met someone like Loki before — name and circumstances not yet given",
+          "Who is working on the scaffold at this hour"
         ]
       },
+      "encounterOps": [
+        {
+          "op": "tactic",
+          "tag": "press-in"
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Heard Loki's plain account of what she is — made, not born, the specification unfound. Answered with a real fact: she has met one person who might have been the same. Did not ask follow-up; asked instead what Loki does with not knowing. The knife is still across her knee; the appraising register has shifted into something quieter.",
-          "learned": [
-            "Loki was made, not born — a construct from before the Transition; the specification has not been found",
-            "Loki has an adopted giant father and a nymph-touched enchantress mother, neither of whom made her",
-            "Vessin has met one person who might have been like Loki — she did not give a name"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Seated beside Loki on the fallen stone at the Half-Cathedral nave, knife across knee, the door between them a little more open — waiting for an answer."
+          "note": "On her feet the moment the gnats found her boot-seam — knife up, dry-voiced, waiting on Loki to identify the threat.",
+          "statusNote": "Standing in the nave, knife raised, watching the gnat-cloud and Loki both.",
+          "status": "active"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "vessin-tallow-bark",
-          "label": "Vessin Tallow-bark",
-          "kind": "person",
-          "entityId": "vessin-tallow-bark",
-          "fact": "Has met one other person who might have been a construct like Loki — older, also without knowledge of what they were. She named this without pity, as a fact she was glad to set down.",
+          "topic": "rust-choir-gnats",
+          "label": "Rust-Choir Gnats",
+          "kind": "lore",
+          "fact": "Thumbnail-sized copper repair-drones, makers long gone, still running their last instruction — find a seam, close it. They read wounds and open joints as hull-breach and attend to them with indiscriminate soldering-tips. Individually nothing; in a swarm of hundreds, a slow ruin. Found in the nave of the Half-Cathedral.",
           "links": [
             "grovehome",
             "the-half-cathedral"
@@ -293,38 +305,39 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange of truths in the cold nave — a few minutes, no more."
+        "why": "A short, sudden encounter — moments in the nave."
       }
     },
     "sceneState": {
-      "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
+      "setting": "The Half-Cathedral nave, night, early spring — cold, open to the sky. A cloud of rust-choir gnats fills the warm air of the nave, testing seams in cloth and boot-leather.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Seated on the fallen stone beside Loki, knife across her knee, looking at Loki with the door a little more open than bef"
-        },
-        {
-          "name": "Unknown workers",
-          "state": "Two lanterns still moving slowly in the scaffold above the south transept — faces not visible."
+          "state": "On her feet, knife raised, dry-eyed, watching the swarm and waiting on Loki."
         },
         {
           "name": "Cy",
-          "state": "At the base of a rib-arch across the nave, lens open one degree — present, not commenting."
+          "state": "Lens at full iris across the nave — recognition, no approach, filing something."
+        },
+        {
+          "name": "Unknown workers",
+          "state": "Lanterns above the scaffold have gone still — no movement."
         }
       ],
       "objects": [
         "Stone rib-arches open to the sky along the nave",
-        "Scaffold of pale, recently-replaced timber lashed over the south transept",
-        "Eastern tower — finished, taller; western tower — finished shorter, different ge",
-        "Two slow-moving lanterns high in the scaffold",
+        "Scaffold of pale lashed timber over the south transept",
+        "Eastern tower doorway — darker, quieter",
         "Low run of fallen stone at the nave's eastern edge",
-        "Small knife — resting across Vessin's knee"
+        "Small knife — in Vessin's raised hand",
+        "Cloud of rust-choir gnats — three hundred copper-disc repair-drones working open"
       ],
       "threads": [
-        "Vessin asked: 'What do you do with not knowing?' — the question is open",
-        "Vessin has met someone like Loki before — the name and circumstances are not yet given",
-        "Who is working on the scaffold at this hour, and on which design's problem",
-        "Rust choir gnats gathering in the warmth of the nave"
+        "Rust-choir gnats are testing the seam on Loki's mended shoulder and Vessin's parting boot-sole",
+        "Cy has recognition-clicked but has not moved — it knows what these are",
+        "Vessin asked: 'Tell me you know what these are' — unanswered",
+        "Vessin has met someone like Loki before — name and circumstances not yet given",
+        "Who is working on the scaffold at this hour"
       ]
     }
   },
@@ -756,7 +769,8 @@
       "history": [
         "[d1] Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation.",
         "[d1] Heard Descent's full naming — her want and Loki's — said no plainly and without hostility; acknowledged the craft ('you named it right'), but said this kind of thing is for people she knows. Held the door open: 'ask me something else.'",
-        "[d1] Heard Loki's plain account of what she is — made, not born, the specification unfound. Answered with a real fact: she has met one person who might have been the same. Did not ask follow-up; asked instead what Loki does with not knowing. The knife is still across her knee; the appraising register…"
+        "[d1] Heard Loki's plain account of what she is — made, not born, the specification unfound. Answered with a real fact: she has met one person who might have been the same. Did not ask follow-up; asked instead what Loki does with not knowing. The knife is still across her knee; the appraising register…",
+        "[d1] On her feet the moment the gnats found her boot-seam — knife up, dry-voiced, waiting on Loki to identify the threat."
       ],
       "knownFacts": [
         "Noticed the craft in the air — the easing of tiredness — and marked it consciously",
@@ -769,7 +783,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated beside Loki on the fallen stone at the Half-Cathedral nave, knife across knee, the door between them a little more open — waiting for an answer.",
+      "statusNote": "Standing in the nave, knife raised, watching the gnat-cloud and Loki both.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1066,7 +1080,7 @@
     "lastSharedReadAt": "2026-08-01T19:55:26.911Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1900,6 +1914,21 @@
         "createdDay": 1,
         "entityId": "vessin-tallow-bark",
         "updatedDay": 1
+      },
+      "rust-choir-gnats": {
+        "id": "rust-choir-gnats",
+        "label": "Rust-Choir Gnats",
+        "kind": "lore",
+        "facts": [
+          "[d1] Thumbnail-sized copper repair-drones, makers long gone, still running their last instruction — find a seam, close it. They read wounds and open joints as hull-breach and attend to them with indiscriminate soldering-tips. Individually nothing; in a swarm of hundreds, a slow ruin. Found in the nave…"
+        ],
+        "links": [
+          "grovehome",
+          "the-half-cathedral"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -2041,6 +2070,14 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "beast",
+      "prompt": "A cloud of thumbnail-sized repair-drones, makers long gone, still trying to 'fix' — welding shut what should be open, patching flesh like it's hull.",
+      "url": "https://image.pollinations.ai/prompt/a%20dangerous%20creature%2C%20rust-choir%20gnats%3A%20A%20cloud%20of%20thumbnail-sized%20repair-drones%2C%20makers%20long%20gone%2C%20still%20trying%20to%20'fix'%20%E2%80%94%20welding%20shut%20what%20should%20be%20open%2C%20patching%20flesh%20like%20it's%20hull.%20%E2%80%94%20dark%20fantasy%20creature%20art%2C%20ominous%2C%20no%20text%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=640&height=512&seed=44800&nologo=true",
+      "caption": "rust-choir gnats",
+      "worldDay": 32,
+      "at": "2026-08-01T20:09:47.038Z"
+    },
     {
       "kind": "ability",
       "prompt": "The Descent Path",
@@ -2273,8 +2310,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785614918263,
-  "rev": 340,
+  "updatedAt": 1785615060580,
+  "rev": 346,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3044,7 +3081,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 39
+    "the_quickwood": 40
   },
   "opLossPending": false,
   "sessions": [
@@ -3099,10 +3136,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T20:08:38.262Z",
+      "lastAt": "2026-08-01T20:11:00.579Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [
@@ -3140,17 +3177,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 111,
-    "choices": 111,
+    "sceneSummary": 112,
+    "choices": 112,
     "characterDeltas": 50,
-    "scene": 111,
+    "scene": 112,
     "placeUpdates": 13,
-    "codexUpdates": 78,
-    "timeOps": 104,
+    "codexUpdates": 79,
+    "timeOps": 105,
     "offer": 10,
     "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 84,
+    "npcUpdates": 85,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3158,13 +3195,13 @@
     "standingOps": 1,
     "factUpdates": 4,
     "stageOps": 7,
-    "encounterOps": 6,
+    "encounterOps": 7,
     "ledgerEvents": 1,
     "newEncounter": 1,
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 111,
+  "_opTurns": 112,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3434,9 +3471,103 @@
           "feint"
         ]
       }
+    },
+    "re-beast_rust_choir_gnats": {
+      "schemaVersion": 1,
+      "id": "re-beast_rust_choir_gnats",
+      "type": "duel",
+      "name": "Hard Ground",
+      "tier": "riffraff",
+      "minDanger": 1,
+      "setup": "rust-choir gnats — A cloud of thumbnail-sized repair-drones, makers long gone, still trying to 'fix' — welding shut what should be open, patching flesh like it's hull. Swarms a wound or a seam and 'mends' it wrong; individually nothing, together a slow ruin.",
+      "lethal": false,
+      "avoidable": true,
+      "fromRandom": true,
+      "flavor": "dangerous",
+      "opponent": {
+        "name": "the aggressor",
+        "health": 4,
+        "threat": 22,
+        "yieldAt": 1,
+        "fleeDifficulty": 15,
+        "spectrum": {
+          "violence_peace": -0.3,
+          "chaos_order": -0.3
+        },
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "notes": "Fights for gain or ground, not to kill — yields when badly hurt, honors a yield."
+      },
+      "stakes": "Losing means waking bruised and lighter, not dead. Victory or a clean break keeps everything."
     }
   },
-  "activeEncounter": null,
+  "activeEncounter": {
+    "defId": "re-beast_rust_choir_gnats",
+    "state": {
+      "schemaVersion": 1,
+      "encounterId": "re-beast_rust_choir_gnats",
+      "type": "duel",
+      "status": "active",
+      "round": 1,
+      "log": [],
+      "opponentHealth": 4,
+      "tactic": "press-in",
+      "mode": "skill_battle",
+      "opponentSheet": {
+        "name": "the aggressor",
+        "attributes": {
+          "practical": 2,
+          "physical": 2,
+          "mental": 2,
+          "social": 2
+        },
+        "energy": 66,
+        "maxEnergy": 66,
+        "tacticTags": [
+          "press-in",
+          "circle",
+          "feint"
+        ],
+        "skills": [
+          {
+            "function": "strike",
+            "name": "a hard strike",
+            "tier": 1,
+            "attribute": "practical"
+          },
+          {
+            "function": "shield",
+            "name": "a raised guard",
+            "tier": 1,
+            "attribute": "practical"
+          }
+        ],
+        "synthesized": true
+      },
+      "momentum": 0,
+      "opponentEnergy": 66,
+      "turn": {
+        "phase": "sense",
+        "sel": {
+          "sense": [],
+          "action": [],
+          "bonus": []
+        },
+        "text": {
+          "sense": "",
+          "action": "",
+          "bonus": ""
+        },
+        "setupBonus": 0,
+        "bonusEarned": false,
+        "senseDone": false,
+        "senseLine": ""
+      }
+    }
+  },
   "legendGovernor": {
     "lastDeployDay": 31,
     "lastBeat": "witness_power"

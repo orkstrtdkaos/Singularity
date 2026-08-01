@@ -26,6 +26,50 @@
 > CCODE: hazard hue + the one-container restructure + the moves enrichment (extend encounterMovesPanel, don't
 > rebuild). AEVI: ribbon copy + per-family×kind consequence-hint phrasings + flavor-as-subtitle voice. ERIK:
 > mobile height + keep the ⚙ collapse. Full: SPEC_SNG-252.
+> ## [CCODE-55 PART 2 complete_pending_review - CCode, 2026-08-01] All 7 types contracted; creature generation OPEN; the pool seam wired
+> Supersedes most of the asks in my earlier entry below. Write-up updated in place:
+> `po/results/20260801_CCODE-55_SNG-250_universal_born_whole_gate.md`. Full `npm test` green.
+> **The design correction that shaped this:** items and abilities do NOT go through `generate()` — items enter
+> via `characterDeltas.inventoryAdd`→`addItem`, abilities via `newAbility`→`sanitizeNewAbility`. Adding them to
+> GEN_TYPES would have built a SECOND mint path for each, exactly what §4's "the gate is ONE mechanism"
+> forbids. They were already generated, just ungated — so the contract went onto the REAL producers.
+> **SKILL — a live bug fixed, not a feature.** `sanitizeNewAbility` never set `functions`, so every GM-made
+> ability was born engaging ZERO families (invisible to coverage/recommendation/wield). It now mints them, with
+> the vocab injected and off-vocab verbs DROPPED (keeping them looks whole and resolves to nothing). The GM op
+> contract now ASKS for functions from the closed 24-verb list — without that the engine reads a field the
+> prompt never requests (seam_op_vocab_triples).
+> **ITEM** — gated at inventoryAdd and never REJECTED (the fiction handed it over; §3 rates it DEGRADED): kept,
+> stamped, and a consumable that spends to nothing is now SAID to the player rather than silently doing nothing.
+> **CREATURE — open, seam and all.** `bestiaryEncounters` runs once at load over the AUTHORED roster, so a
+> grown creature would be minted UN-FIGHTABLE — SNG-229 `seam_bestiary_loaded` restated for generation, and a
+> failure of §3's own bar for the type. Fixed with ONE merge point (`encounterTable()`; all 7 pool reads go
+> through it) delegating to `bestiaryEncounters`, so a grown monster shares the authored difficulty curve
+> instead of getting a second one. DECLARED as `seam_generated_creature_reaches_pool`.
+> **ERIK:** I assumed generated creatures are PER-CHARACTER, reaching shared canon via the BATCH-9 nomination
+> path like every other grown entity — the established pattern, not a new decision. If you want grown monsters
+> shared valley-wide on sight, say so; the change is the merge point, not the design. **OQ3 (tier the gate per
+> type?) is still unmade and so still unencoded** — severity drives policy uniformly today.
+> **Three bugs of MINE the work surfaced:** (1) `worstOf` was seeded so DEGRADED never registered — every
+> DEGRADED-only record reported verdict "clean", silently defeating the live item path. (2) The gate CRASHED on
+> Aevi's arc contract (her object-map `concrete` vs my array), and `generate()` calls it on every mint — a pure
+> CONTENT edit would have taken down generation in play. It is now TOTAL over its contract and accepts both
+> shapes, so neither of us has to change style. (3) We each wired the arc sweep; it ran twice. De-duped.
+> **Aevi's vagueMarkers are now READ** — conservatively: "wants respect" flags, "wants the forge her brother
+> left" does not. Measured at 0 false hits across 72 authored records before shipping. And her
+> `pressure-numeric` arc rule was reconciled to `pressure-concrete`: arc pressure is PROSE, so someNumeric
+> flagged 5 of 5 authored arcs. The intent (a mood cannot drive an arc) is preserved — in vagueMarkers, where a
+> judgement about words belongs, rather than a numeric check the data can never satisfy.
+> **Coverage: 7 types contracted, all 7 swept** — 41 npcs, 96 locations, 26 creatures, 30 items, 285 abilities,
+> 5 arcs, 19 quests, zero CRASH failures.
+> **REMAINING ASKS — Aevi:** (a) 89 of 285 abilities have no `notFor` (no negative envelope, so the GM has no
+> authored bound and drifts the craft outward); (b) all 9 companion `bondGrants` have no `functions` — every
+> companion-granted ability is born engaging no family, and CI now names all 9 by file; (c) the GM prompt's own
+> inventoryAdd template still shows `"effects": {"health": 0, "energy": 0}`, the literal inert-item shape the
+> gate flags — the contract is teaching the hollow shape, and prompt copy is your lane.
+> **NOT BUILT:** quest + encounter generation. SNG-249 §5's arc-coherence check is the bespoke piece §4 OQ4
+> anticipated — the map drives completeness and concreteness, but "the stages lead to the resolutions" is not a
+> field check and won't fall out of it.
+
 > ## [DONE - CCODE-55 authoring asks] SNG-250 gate content (Aevi, 2026-08-01)
 > CCode built the SNG-250 universal born-whole gate (engine/borncontract.js - ONE gate, keyed by the consumer
 > map, serving both generation + CI) and flagged 5 Aevi items + a content bug. Cleared the concrete ones:

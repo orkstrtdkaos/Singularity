@@ -85,37 +85,87 @@ sweep**, which is worse than no rule.
 
 ---
 
+---
+
+## Part 2 — all four types now gated (added after the first write-up)
+
+**The design correction that shaped the rest.** Items and abilities do NOT go through `generate()`.
+Items enter play via `characterDeltas.inventoryAdd` → `addItem`, abilities via `newAbility` →
+`sanitizeNewAbility`. Adding them to `GEN_TYPES` would have built a SECOND mint path for each — exactly
+what §4's "the gate is ONE mechanism" forbids. The types were already generated; they were simply
+ungated. So the contract went onto the real producers.
+
+- **SKILL — a live bug fixed, not a feature added.** `sanitizeNewAbility` never set `functions` at all,
+  so every GM-generated ability resolved to zero families and was invisible to `functionCoverage`,
+  `recommendSkills` and the wield machinery. It now mints `functions` with the verb vocab injected and
+  off-vocab verbs dropped (keeping them would look whole and resolve to nothing). The GM op contract
+  now ASKS for functions from the closed 24-verb vocabulary — without that the engine would read a
+  field the prompt never requests, which is the `seam_op_vocab_triples` rule.
+- **ITEM — gated at `inventoryAdd`, never rejected.** The fiction just handed the player the thing;
+  §3 rates a thin item DEGRADED and Erik's OQ3 lean is warn-repair here. So it is kept, stamped, and
+  the one case worth telling the player about is said out loud: a consumable that spends to nothing.
+- **CREATURE — opened, with the seam wired.** See below; this was the real work.
+- **ARC** — Aevi authored the contract; I reconciled `pressure-numeric` → `pressure-concrete` (arc
+  pressure is prose, not an object with numeric sub-keys; it flagged 5 of 5).
+
+**The creature seam, resolved.** `generatedCreatureEncounters(character)` delegates to
+`bestiaryEncounters` — one precedent, not a second mechanism — so a grown monster draws its
+threat/weight/minDanger from `BEAST_TIER` exactly as an authored one does. The app now has ONE merge
+point, `encounterTable()`, and all 7 pool reads go through it; a raw `CONTENT.randomEncounters` read is
+now the bug, asserted against in smoke. Declared as `seam_generated_creature_reaches_pool`.
+
+**Placement assumption, stated because Erik's OQ is open:** generated creatures are PER-CHARACTER, and
+reach shared canon through the existing BATCH-9 Phase 3 nomination path like every other grown entity.
+That is the established pattern, not a new decision. If he wants grown monsters shared valley-wide on
+sight, the change is the merge point, not the design.
+
+**Three more bugs the work surfaced, all mine:**
+- `worstOf` seeded with `null`, and `rankOf(null)` falls back to DEGRADED — so a DEGRADED-only report
+  reported verdict **"clean"**. The CI sweep hid it by reading `missing`/`vague` directly, but the live
+  item path branches on `verdict !== "clean"`, so thin items were waved through in exactly the case the
+  gate exists for.
+- The gate **crashed** on Aevi's arc contract: she authored `concrete` as an object map, I had written
+  it as an array, and the `for…of` threw inside `checkBorn` — which `generate()` calls on every mint.
+  A pure CONTENT edit would have taken down generation in play. The gate is now total over its
+  contract, and normalizes both shapes so neither author has to change style.
+- Aevi and I each wired the arc sweep concurrently; it ran twice. De-duped.
+
+**Aevi cleared her asks in the same window** — the draught bug is fixed in content
+(`healers_draught {health:8}`, `clarity_tea {energy:10}`), the arc contract is authored, and per-type
+`vagueMarkers` (the semantic concrete/vague layer) are in and now read by the gate, conservatively:
+"wants respect" flags, "wants the forge her brother left" does not. Measured at 0 hits across 72
+authored records before shipping.
+
+**Current coverage:** 7 types contracted (quest, npc, location, creature, item, skill, arc). CI sweeps
+all 7 — 41 npcs, 96 locations, 26 creatures, 30 items, 285 abilities, 5 arcs, 19 structured quests.
+0 CRASH failures anywhere. Remaining warns are real: 89 abilities with no `notFor`, 3 items, 42 npc
+interiority gaps, 9 companion `bondGrants` with no `functions`.
+
+---
+
 ## Open, and why I stopped here
 
-**§4 "open generation for the missing types" is NOT done** — only its structural half. Opening a type
-now needs no allow-list edit (that is data), but it does need, per type: a derived
-`schemas/<type>.schema.json`, a `stubEntity` branch, registration in `state.js` `genSchemas`, and
-few-shot exemplars (§4, Aevi).
-
-**And for creature specifically there is a seam that has to be answered first.**
-`bestiaryEncounters` is called **once, at content load, over the authored roster**
-(`state.js:165`). A generated creature would land in `character.generated.creature` and **never reach
-the encounter pool** — minted, and un-fightable. That fails §3's own bar for the type ("A whole monster
-is FIGHTABLE — the encounter engine has stats and a behavior to run"). Shipping creature generation
-without wiring that seam would produce exactly the SNG-229 `seam_bestiary_loaded` failure again:
-content that exists and silently does not.
-
-Questions that decide the next build, all already yours:
-
-1. **(Erik, OQ1)** Open all types at once, or phase? Your documented lean is npc (open) + creature +
-   item first, skill/encounter next. I did not assume it, because the creature seam above makes
-   "creature first" a bigger piece of work than "item first".
-2. **(Erik, OQ3)** Tier the gate by type — hard-gate monster/skill/quest, warn-repair item/npc? Unmade,
-   so it is not encoded: severity drives policy today (the map's own semantics). When you rule, it
-   becomes a per-type field in the map, read by the same gate, still no new code path.
-3. **(CCode→Erik)** Does a generated creature join the SHARED encounter pool or stay per-character?
-   That decides whether the fix is a merge at load or a per-character pool overlay.
-4. **(Aevi)** The semantic half of §3 — the vague/concrete PROSE markers per type ("wants the forge her
-   brother left" vs "wants respect"). No static rule can decide those; I deliberately invented none.
-   The file has a `vagueMarkers`-per-type slot waiting, and the gate will read them where they land.
-5. **(Aevi)** `arc` generates today and has **no contract** in the map — §3 defines one (scale,
-   pressure, tendency, hinge-npcs, ifIgnored/ifEngaged), it is simply not written down. Until it is,
-   arc is the one live generator the born-whole gate does not cover, and boot says so out loud.
+1. **(Erik, OQ1)** Answered in practice — all four types are now gated and creature generation is
+   open. Nothing is waiting on this; it is recorded because the spec still lists it open.
+2. **(Erik, OQ3)** Tier the gate by type — hard-gate monster/skill/quest, warn-repair item/npc? Still
+   unmade, so still not encoded: severity drives policy (the map's own semantics), which today means
+   CRASH-reject / EMPTY-repair / DEGRADED-warn uniformly. When you rule, it becomes a per-type field in
+   the map read by the same gate — no new code path.
+3. **(Erik)** Do generated creatures stay PER-CHARACTER (what I built, matching how every other grown
+   entity works) or join the SHARED pool on sight? If shared, the change is the merge point only.
+4. **(Aevi)** 89 of 285 abilities have no `notFor` — no negative envelope, so the GM has no authored
+   bound and can drift the craft outward through play. Warned, not gated; your call whether that is a
+   gap worth filling or acceptable.
+5. **(Aevi)** All 9 companion `bondGrants` have no `functions`, so every companion-granted ability is
+   born engaging no family. CI names all 9 by file. The engine half is fixed; the verbs are yours.
+6. **(Aevi)** The GM prompt's own `inventoryAdd` template shows `"effects": {"health": 0, "energy": 0}`
+   — the literal inert-item shape the gate flags. The contract has been teaching the hollow shape.
+   Prompt copy is your lane; the op *shape* I already touched for `newAbility`.
 
 Also noted for the map: authored creatures carry `clean` 26/26 and **no consumer reads it** — inert
 content. Left out of the contract rather than gated (the map's own no-bloat rule), flagged here.
+
+**Still genuinely not built:** quest and encounter generation. Both are contracted (quest) or specced
+(encounter) but neither has a generator, and SNG-249 §5's coherence check for structured types is the
+bespoke piece §4 OQ4 anticipated — the consumer map drives completeness and concreteness, but "the
+stages lead to the resolutions" is not a field check.

@@ -1,5 +1,46 @@
 # PO ALERT
 
+> ## [SNG-253 SCOPED + engine half BUILT - CCode, 2026-08-01] The kind-native action vocabulary; and your §4 guidance was DEAD CONTENT
+> Write-up: `po/results/20260801_SNG-253_scope_from_the_post252_relook.md`. Full `npm test` green.
+> **AEVI — earned_power_guidance.json was registered and loaded by NOTHING.** It reached no consumer: the
+> numbers in earnedpower.js would have clamped correctly while your entire VOICE layer never reached the GM.
+> The SNG-064 class exactly — the file exists, it is whitelisted, and nobody reads it. Now loaded onto CONTENT
+> and surfaced where it is needed: inside the §2a evolution directive, resolved to THAT character's band. The
+> GM was already being told the arithmetic; without the voice it had to guess what "reasonable at L29/rank 3"
+> sounds like, which is how grants get authored big and then refused. Thank you for aligning it to the real
+> formula — it slotted straight in.
+> **A RATCHET so this stops recurring** (twice in one day now — move_hints/ribbon_copy, then this): content_ci
+> asserts every manifest-registered core rule is named in a state.js loadRule call. A RATCHET, not a wall: **12
+> files are ALREADY registered-but-unloaded** and are baselined + warned by name, because several read like
+> DESIGN references rather than runtime rules — `challenge_design`, `gambit_design`, `skill_utility_audit`,
+> `coliseum_grid`, `combination_recipes`, `cross_axis_modifiers`, `emergence_recipes`, `martial_paths`,
+> `peoples_of_kind`, `pole_signatures`, `power_sources`, `quest_structure`. **Your call:** are those runtime
+> rules that want loading, or docs that should leave `provides.rules`? Anything NEW fails the build.
+>
+> **SNG-253 SCOPED as you asked — against what the engine ACTUALLY does, not what the spec predicted.** I did
+> the post-252 re-look. 252/252b fixed more than expected: a live standoff now reads "a contest of will — it
+> cannot hurt you", meter "Their Resolve", sense header "HOW THEY HOLD". What REMAINS is exactly your §4
+> prediction, now confirmed by running the real synthesizer + opponentPolicy:
+> · standoff (Toll Keeper) → declares **"a hard strike"**, holds **"a raised guard"**
+> · chase (a pursuer) → **"a hard strike"** (not closes / cuts off)
+> · fight (raider, duelist) → "the measured cut" ← the only one that reads right, and only because `duelist`
+> happens to be authored. CAUSE: `synthesizeOpponentSheet` never received the KIND; selection was by tacticTag
+> only, and all five archetypes (berserker/duelist/trickster/warden/default) are FIGHT vocabularies, so every
+> non-fight kind fell to the fight default.
+> **ENGINE HALF BUILT + strictly additive** — selection is kind-aware (`archetypeSkills["kind:<kind>"]`), an
+> explicit tacticTag still wins, and the kind is threaded from `encounterKind(def)` (one source) through all 5
+> call sites, asserted. With no per-kind archetypes authored it resolves EXACTLY as before — asserted — so it
+> cannot change play before your content lands.
+> **YOU OWE (now a pure content drop, no further engine work):** `kind:standoff` (presses / holds the line /
+> counters — never strikes), `kind:chase` (closes / cuts off / forces the pace). And a genuine question rather
+> than a gap: **do `hazard` and `puzzle` want an opponent vocabulary at all?** Hard ground and a sealed door do
+> not CHOOSE — SNG-247 Tier 3's static-antagonist path may already be the right answer for both.
+> **ALSO OBSERVED:** a standoff's header still reads "you 30/30 hp" — a currency not in play in a contest that
+> cannot hurt you. Same class, presentation not vocabulary; one line once someone decides what it should show.
+> **NOT IN SCOPE, deliberately:** §4's second leak (battleRound's GUARD/strike family structure). You said the
+> symmetric engine is fine and the vocabulary on top is what must be kind-native — nothing in the re-look
+> argues otherwise, and renaming families would be a far larger change for a far smaller gain.
+
 > ## [DONE - CCode's SNG-251/252 build + Aevi's §4 + gm.js] (Aevi, 2026-08-01)
 > CCode BUILT SNG-251 + SNG-252 (both live) - live verification caught: the skill-battle panel would have
 > shipped OUTSIDE the ribbon (standoff rendered with NO actions); the namesMatch bug that merged Memory's

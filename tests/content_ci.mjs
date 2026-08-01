@@ -650,15 +650,13 @@ for (const pack of PACKS) {
     for (const p of (rj("content/packs/core/manifest.json").provides?.items || [])) for (const it of (rj(`content/packs/core/${p}`).items || [])) if (it?.id) itemCatalog[it.id] = it;
     for (const p of (rj("content/packs/valley/manifest.json").provides?.items || [])) { const f = join(root, `content/packs/valley/${p}`); if (existsSync(f)) for (const it of (rj(`content/packs/valley/${p}`).items || [])) if (it?.id) itemCatalog[it.id] = it; }
     sweepType("item", Object.values(itemCatalog), CT.item);
-    // Aevi's arc contract (CCODE-55 OQ5) — arc is the one type that GENERATES today, so its authored
-    // corpus is the few-shot the generator imitates; holding it to the contract is holding generation
-    // to it one step upstream.
-    sweepType("arc", (rj("content/packs/valley/lore/greater_arcs.json").arcs || []), CT.arc);
     const abilityCatalog = [];
     for (const p of (rj("content/packs/core/manifest.json").provides?.abilities || [])) for (const a of (rj(`content/packs/core/${p}`).abilities || [])) if (a?.id) abilityCatalog.push(a);
     sweepType("skill", abilityCatalog, CT.skill);
     // CCODE-55/Aevi: arc is a LIVE generator; SNG-250 §3 now gives it a contract, so it must be swept too
-    // (else the "declared but never swept" guard trips). The arcs corpus is the greater-arcs file.
+    // (else the "declared but never swept" guard trips). The arcs corpus is the greater-arcs file, which is
+    // also the few-shot the arc generator imitates — so sweeping it holds generation to the contract one
+    // step upstream. (Aevi and I each added this sweep concurrently; hers is kept, the duplicate removed.)
     sweepType("arc", (existsSync(join(root, "content/packs/valley/lore/greater_arcs.json")) ? (rj("content/packs/valley/lore/greater_arcs.json").arcs || []) : []), CT.arc);
 
     // CCODE-55 (SNG-250 §3): a companion's `bondGrants` becomes a REAL ABILITY through sanitizeNewAbility,

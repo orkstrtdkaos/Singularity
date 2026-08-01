@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [SPEC - universalize the contract] SNG-250 born-whole for EVERY type (Aevi, 2026-07-27)
+> Erik: "the engine needs to do this same basic thing for everything it can generate - NPCs, items, monsters,
+> skills, etc." Universalizes SNG-248 (learn) + SNG-249 (concrete+coherent). STATE (verified): only npc/location/
+> arc generate today; a born-whole contract exists (consumer map) for quest/npc/location/creature; item/skill/
+> ability have NEITHER. The failure is one shape per type: NPC w/o wants = agreeable furniture (SNG-233); monster
+> w/o stats = un-fightable; skill w/o a function = decorative; item w/o an effect = flavor you can't use. ONE
+> rule: born with every consumer-read field, each CONCRETE (actable want / real threat number / a real function
+> family HARM/RESTORE/etc + tier+cost / a rules-resolvable item effect), the whole COHERENT (SNG-249 for
+> structured types). Enforce: ONE universal born-whole gate keyed by the per-type contract in the CONSUMER MAP
+> (drives generation AND the CI shape-check - authored+generated same bar), open generation for the missing
+> types, few-shot per type (SNG-248). Every FUTURE type inherits it by declaring its contract - the engine can't
+> generate a hollow anything.
+> CCODE: the universal gate (one mechanism keyed by type-contract) + open creature/item/skill/encounter gen +
+> extend the consumer map to item/skill/ability. AEVI: the per-type concreteness contract for item/skill/ability
+> + exemplar coverage per type. ERIK: which types to open first + tier the gate (hard-reject hollow monster/skill
+> vs warn-repair thin item). Full: SPEC_SNG-250.
+
 > ## [SPEC §5 added] SNG-249 §5 COMPLETE ARC AT CREATION (Aevi, 2026-07-27)
 > Erik: "a generated quest/encounter needs a COMPLETE structured arc built at time of creation - how it's
 > accomplished and revealed IS the play." Sharpens §1-4 (each stage concrete) -> the WHOLE ARC (all stages + all

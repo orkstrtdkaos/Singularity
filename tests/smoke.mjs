@@ -4685,8 +4685,11 @@ await (async () => {
   // the control must sit WITH the narration, not in a sidebar drawer (Erik: "buried way down with the map")
   const appSrc155 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   const cssSrc155 = readFileSync(new URL('../style.css', import.meta.url), 'utf8');
+  // SNG-252b §2b: the beat is now BUILT once at the top of renderPlay (so the encounter ribbon can claim it —
+  // the scene leads the ribbon) instead of being emitted inline. The property this protects is unchanged and
+  // is what still matters: the speak control sits INSIDE the beat, with the prose it reads.
   check("155: the speak control renders INSIDE the beat, with the prose it reads",
-    /main \+= `<div class="beat">\$\{speakCtl\}/.test(appSrc155) && /class="beat-speak"/.test(appSrc155));
+    /const beatHtml = \(turn && turn\.narration\)[\s\S]{0,200}<div class="beat">\$\{beatSpeakCtl\}/.test(appSrc155) && /class="beat-speak"/.test(appSrc155));
   check("155: it is no longer in the Map & Rest sidebar", !/id="do-speak"[\s\S]{0,200}Map &amp; Rest/.test(appSrc155) &&
     (appSrc155.match(/id="do-speak"/g) || []).length === 1);
   check("155: it speaks the DISPLAYED beat, not always the last one",
@@ -8689,8 +8692,15 @@ await (async () => {
     /const movesToggle = \(st\.mode === "skill_battle"\) \? ""/.test(appSrc252) &&
     !/\(st\.mode === "skill_battle"\)\s*\?\s*\(movesShown \? skillBattlePanel/.test(appSrc252),
     "collapsing the moves would leave the player in a fight with no visible way to act");
-  check("SNG-252 §2b: the ribbon renders header → subtitle → win → meter → receipt → exits → moves/freeform, in one enc-frame",
-    /\$\{subtitleHtml\}/.test(appSrc252) && /\$\{meterHtml\}\$\{receiptHtml\}\$\{exitsHtml\}\$\{cueHtml\}<\/div>/.test(appSrc252));
+  // SNG-252b §2c superseded 252's flat order: the SCENE now leads and the exits go last and quietest.
+  // header → subtitle → SCENE → where-you-stand → meter/receipt → moves+freeform → ways out.
+  check("SNG-252b §2c: the ribbon orders by IMPORTANCE — the scene leads, the exits go last",
+    /\$\{subtitleHtml\}/.test(appSrc252) && /enc-frame-scene/.test(appSrc252) && /enc-frame-stand/.test(appSrc252) &&
+    /\$\{meterHtml\}\$\{receiptHtml\}\$\{cueHtml\}\$\{exitsHtml\}<\/div>/.test(appSrc252),
+    "the ribbon is back to one flat weight — which is what left Erik lost in it");
+  check("SNG-252b §2b: the SCENE renders inside the ribbon, and exactly once (never in both places)",
+    /beatPlacedInRibbon = true; return `<div class="enc-frame-scene">/.test(appSrc252) &&
+    /if \(!beatPlacedInRibbon\) main \+= beatHtml;/.test(appSrc252));
   check("SNG-252 §2b: the receipt PERSISTS on encounter state, so it stays visible instead of scrolling away",
     /rr\.state\._lastReceipt = resolution\.encReceiptLine/.test(appSrc252) && /st\._lastReceipt \? /.test(appSrc252));
   check("SNG-252 §2b: the floating receipt only renders once the encounter has ENDED (never inside AND outside the box)",
@@ -8701,8 +8711,24 @@ await (async () => {
     "a nested panel still draws its own frame, so the ribbon reads as two boxes instead of one");
 
   // §2c — moves shown by default, kind-aware, consequence-hinted, ward-aware.
-  check("SNG-252 §2c: moves are SHOWN BY DEFAULT when engaged (Erik: worked back IN, not behind a control to find)",
-    /let movesOpen = true;/.test(appSrc252) && /const movesShown = movesOpen;/.test(appSrc252));
+  // REVERSED by SNG-252b §2a. 252 opened the moves by default — Erik's earlier ask — and seeing it built he
+  // reversed it: ~5 full-width cards ate the screen before he had chosen to look. Collapsed is the default now,
+  // and the affordance SUMMARISES what is behind it so folding it away costs no information.
+  check("SNG-252b §2a: moves are COLLAPSED by default, behind an affordance that says what is in there",
+    /let movesOpen = false;/.test(appSrc252) && /const movesShown = movesOpen;/.test(appSrc252) &&
+    /function movesSummaryLine\(/.test(appSrc252) && /movesSummaryLine\(copy252\)/.test(appSrc252));
+  check("SNG-252b §2a: the collapsed summary TALLIES by family in plain words ('4 reads, 1 strike'), never a bare '⚙ Moves'",
+    /FAMILY_PLAIN_WORD/.test(appSrc252) && /\{summary\}/.test(JSON.stringify(copy252.collapsedMoves || {})),
+    "a bare label would make the player open it just to find out what they have");
+  check("SNG-252b §2d: a family blurb shared by every move in the group is hoisted to the GROUP header, once",
+    /const famDoes = \[\.\.\.new Set\(/.test(appSrc252) && /const sharedDoes = famDoes\.length === 1/.test(appSrc252) &&
+    /const does = sharedDoes \? "" :/.test(appSrc252),
+    "five REVEAL moves each repeating 'reads THEM — sharpens the fog' buries the per-move line under identical ones");
+  check("SNG-252b §2c: intensity + the action chain are TUCKED behind a turn-detail toggle that remembers its state",
+    /<details class="sb-detail"\$\{sbDetailOpen \? " open" : ""\}/.test(appSrc252) &&
+    /sbDetailOpen = d\.open/.test(appSrc252) &&
+    (appSrc252.match(/\$\{sbStepTracker\(turn\)\}/g) || []).length === 1,   // CALL sites, not the definition
+    "the step tracker renders twice, or the tuck forgets its state every round");
   check("SNG-252 §2c: picking a move no longer COLLAPSES the ribbon you are still standing in",
     !/movesOpen = false;\s*\n\s*onFreeform\(/.test(appSrc252));
   check("SNG-252 §2c: the family groups are ordered by the KIND's emphasis, with un-emphasised families kept (never dropped)",

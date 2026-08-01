@@ -299,7 +299,7 @@ let mapShowSub = false;  // SNG-082b: sub-place satellites toggle (off by defaul
 let _lightboxWired = false; // SNG-053: one-time lightbox click delegation (referenced by boot)
 let tuneOpen = null;             // SNG-015 Part B: index of the choice whose tune panel is open
 let tuneSel = { abilityId: undefined, intensity: "standard" }; // current tune selection
-let movesOpen = true;            // SNG-252 §2c: the ribbon's moves are SHOWN BY DEFAULT when engaged (Erik: work them back in, visible — not behind a control you must find). The ⚙ collapses them for space; SNG-236 had them closed-by-default behind the gear.
+let movesOpen = false;           // SNG-252b §2a: COLLAPSED by default. SNG-252 opened them (Erik's earlier ask); seeing it built he reversed it — ~5 full-width cards ate the screen before he had chosen to look. The collapsed affordance SUMMARISES what is behind it, so nothing is lost by folding it away.
 let _richNextTurn = false;       // SNG-242 §5: armed by the "✦ Rich" toggle — the NEXT turn is told at the flagship tier, then cleared
 let pendingPartyBeats = [];      // shared-scene: other players' new beats awaiting catch-up (non-destructive)
 let npcGroupsClosed = new Set(); // explicitly collapsed (overrides current-location default)
@@ -2603,6 +2603,25 @@ function encounterMovesPanel(fm = null) {
   return `<div class="moves-panel"><div class="moves-hint">${esc(header)}</div>${ctx}${famGroups || `<div class="moves-hint dim">No learned crafts to shortcut yet — describe your move below.</div>`}</div>`;
 }
 
+/** SNG-252b §2a: the COLLAPSED moves affordance — "⚙ Your moves — 4 reads, 1 strike · tap to open".
+ *
+ *  Collapsing is only an improvement if it costs no information about WHAT you have; a bare "⚙ Moves" would
+ *  make the player open it just to find out. The tally is by family, in the family's plain word (Aevi's
+ *  `summaryFormat`), so the summary answers the question the cards were answering. */
+function movesSummaryLine(copy = {}) {
+  const c = copy.collapsedMoves || {};
+  const owned = (character.abilities || []).map(a => fullCatalog()[a.abilityId]).filter(Boolean);
+  const tally = {};
+  for (const ab of owned) { const f = (familiesOfAbility(ab, FN_INDEX)[0]) || "SHAPE"; tally[f] = (tally[f] || 0) + 1; }
+  const entries = Object.entries(tally).sort((a, b) => b[1] - a[1]);
+  if (!entries.length) return c.empty || "⚙ No learned crafts to shortcut — describe your move below";
+  const summary = entries.map(([f, n]) => `${n} ${FAMILY_PLAIN_WORD[f] || f.toLowerCase()}${n === 1 ? "" : "s"}`).join(" · ");
+  return String(c.summary || "⚙ Your moves — {summary} · tap to open").replace("{summary}", summary);
+}
+
+/** SNG-252b §2a: the family's plain word for the collapsed summary — "4 reads", not "4 KNOW". */
+const FAMILY_PLAIN_WORD = { HARM: "strike", PROTECT: "guard", KNOW: "read", INFLUENCE: "press", SHAPE: "shaping", MOVE: "move", RESTORE: "mend", SUSTAIN: "steadying" };
+
 /** SNG-252 §2c / SNG-230 §7b: is this move WARDED by the encounter? Returns the reason, or null.
  *  A ward is authored on the def (wards: [{family|ability, reason}]) or supplied by the frame content's
  *  wardDenials. Reading it HERE — before the chip renders — is the whole point: the player sees the closed
@@ -2628,7 +2647,7 @@ function endEncounter(outcome) {
   character.xp += Math.max(0, xpMap[outcome] ?? 0);
   for (const c of activeCompanions(character, CONTENT.companions)) growBond(character, c.id, "encounter", CONTENT.rules);
   character.activeEncounter = null;
-  movesOpen = true;  // SNG-252 §2c: reset to SHOWN, so the next encounter opens with its moves visible
+  movesOpen = false; // SNG-252b §2a: reset to COLLAPSED, so the next encounter opens clean
   if (outcome === "incapacitated") {
     if (enc.def.lethal) { character.dead = true; }
     else { character.health = Math.max(1, character.health); character.energy = Math.max(5, character.energy); }
@@ -8827,6 +8846,7 @@ let sbBusyLabel = "";    // CCODE-47: what we are waiting ON, in the player's te
 let sbQuickBeat = "";    // CCODE-47: the fast Haiku read of the exchange, shown while the full telling renders.       // CCODE-45: a GM call is in flight for this turn — don't let a double-click double-resolve.
 let sbWeaveArmed = null;       // CCODE-37 (Erik: "this is where braids really shine"): index of the craft armed to WEAVE.
 const sbOpenFams = {};         // CCODE-38 (Erik: "can we make the categories collapsible?"): family → open?, kept across rounds.
+let sbDetailOpen = false;      // SNG-252b §2c: the tucked turn-detail (intensity + the action chain), remembered across rounds
 
 // SNG-246 (Erik: "no rolls, no opposed rolls or descriptions… ended inexplicably"): a per-round MECHANICAL line
 // for the skill battle — names YOUR move and THEIRS, the interaction (blades lock / turned aside / you slip it),
@@ -9150,8 +9170,15 @@ function skillBattlePanel() {
   const groups = FUNCTION_FAMILIES.filter(f => byFam[f]?.length).map(f => {
     // CCODE-34: each move carries a WHAT-IT-DOES line (target clarity) + an ⓘ that opens the full craft detail.
     // The ⓘ is a SIBLING of the declare-button, never a child — inside it, a tap would also declare the move.
+    // SNG-252b §2d: DEDUPE THE FAMILY BLURB. `SB_DOES` is keyed by VERB, and a family usually holds several
+    // skills of one verb — so five REVEAL crafts each repeated "reads THEM — sharpens the fog", burying the
+    // per-move distinguishing line ("finds the opening" vs "finds the pattern") underneath five identical
+    // ones. When the whole group shares a blurb it belongs to the GROUP, once; each row then carries only what
+    // makes IT different. Mixed-verb groups keep their per-row lines, since there is nothing to hoist.
+    const famDoes = [...new Set(byFam[f].map(({ s }) => SB_DOES[s.function] || ""))];
+    const sharedDoes = famDoes.length === 1 && famDoes[0] ? famDoes[0] : "";
     const chips = byFam[f].map(({ s, i }) => {
-      const does = SB_DOES[s.function] || "";
+      const does = sharedDoes ? "" : (SB_DOES[s.function] || "");
       const known = !!fullCatalog()[s.id];
       const info = known
         ? `<button class="sb-skill-info" data-entity="skill:${esc(s.id)}" title="What this craft is — full detail" aria-label="Explain ${esc(s.name)}">ⓘ</button>`
@@ -9179,7 +9206,7 @@ function skillBattlePanel() {
     // and the open/closed choice persists across the round re-renders via sbOpenFams so a fight doesn't keep
     // re-expanding what you just folded away.
     const open = sbOpenFams[f] !== false;
-    return `<details class="moves-group" data-sbfam="${esc(f)}"${open ? " open" : ""}><summary class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())} <span class="hint">(${byFam[f].length})</span></summary>${chips}</details>`;
+    return `<details class="moves-group" data-sbfam="${esc(f)}"${open ? " open" : ""}><summary class="moves-group-lbl"><span style="color:${FAMILY_COLOR[f]}">${FAMILY_GLYPH[f]}</span> ${esc(SB_FAM_LABEL[f] || f.toLowerCase())} <span class="hint">(${byFam[f].length})</span>${sharedDoes ? `<span class="moves-group-hint"> · ${esc(sharedDoes)}</span>` : ""}</summary>${chips}</details>`;
   }).join("");
   return `<div class="sb-panel">
     <div class="sb-opponent">${esc(def.opponent?.name || sbLex().other)}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""} <span class="hint">· you ${character.health}/${character.maxHealth} hp · ${character.energy}e</span></div>
@@ -9236,13 +9263,20 @@ function skillBattlePanel() {
       return `<div class="sb-fx-row">${mine.length ? `<span class="sb-fx-lbl">on you</span>${mine.map(chip).join("")}` : ""}${theirs.length ? `<span class="sb-fx-lbl">on them</span>${theirs.map(chip).join("")}` : ""}</div>`;
     })()}
     ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
-    <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
+    ${/* SNG-252b §2c: TURN DETAIL, tucked. Intensity and the Sense→Action→Bonus→Execute chain are ADVANCED
+          controls — precise, rarely changed, and they were sitting at the same visual weight as the scene,
+          competing with it. Behind a <details> they stay one tap away and stop shouting. Default closed;
+          `sbDetailOpen` remembers the choice across the round re-renders, the same way sbOpenFams does, so a
+          player who wants them open is not re-collapsing them every beat. */""}
+    <details class="sb-detail"${sbDetailOpen ? " open" : ""}><summary class="sb-detail-sum">${esc(CONTENT.ribbonCopy?.turnDetail?.label || "⚙ turn detail")}<span class="hint"> — ${esc(CONTENT.ribbonCopy?.turnDetail?.hint || "intensity + the action chain")}</span></summary>
+      <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
+      ${sbStepTracker(turn)}
+    </details>
     ${st.spent?.player ? `<div class="sb-spent-bar">🕯 <strong>You are spent</strong> — your crafts will not answer until you find energy. <span class="hint">Steel and wit still work (a plain strike, a raised guard). This is the moment to <strong>Yield</strong> by choice, or use something that restores you — the fight no longer ends itself here.</span></div>` : ""}
     ${st.spent?.opponent ? `<div class="sb-spent-bar dim">🕯 <strong>${esc(def.opponent?.name || "They")} are spent</strong> — swinging on will alone. <span class="hint">Their crafts are done; press it.</span></div>` : ""}
     ${busySB ? `<div class="sb-waiting"><span class="sb-spinner"></span> ${esc(sbBusyLabel || "resolving…")}</div>` : ""}
     ${sbQuickBeat && !busySB ? `<div class="sb-quick">${esc(sbQuickBeat)}</div>` : ""}
     ${turn.senseBlinded ? `<div class="sb-spent-bar">◉ <strong>Blinded</strong> — your senses are shut this turn. <span class="hint">You go straight to your action; the read is denied you.</span></div>` : ""}
-    ${sbStepTracker(turn)}
     ${turn.phase === "review" ? sbReviewCard(turn, skills) : `
       <div class="sb-step-hint hint">${esc(sbStepHint(step))}${selCount === 2 ? ` <strong class="sb-braid-note">⋈ braided — both crafts, both effects, both costs.</strong>` : selCount === 1 ? ` <span class="hint">Pick a second craft to BRAID them.</span>` : ""}</div>
       <div class="sb-skills">${groups}</div>
@@ -9313,6 +9347,9 @@ function wireSkillBattlePanel() {
   // clamp at a word boundary — it is the player's own prose, so never cut them mid-word
   if (ti) ti.oninput = () => { turn.text[turn.phase] = smartClamp(ti.value, 300); };
   for (const d of app.querySelectorAll("[data-sbfam]")) d.ontoggle = () => { sbOpenFams[d.dataset.sbfam] = d.open; };
+  // SNG-252b §2c: remember the turn-detail tuck across round re-renders, same as the family groups above —
+  // a player who opens it should not have to re-open it every beat.
+  for (const d of app.querySelectorAll("details.sb-detail")) d.ontoggle = () => { sbDetailOpen = d.open; };
   const proceed = document.getElementById("sb-proceed");
   if (proceed) proceed.onclick = () => {
     if (ti) turn.text[turn.phase] = smartClamp(ti.value, 300); // clamp at a word boundary — it is the player's own prose
@@ -9656,6 +9693,19 @@ async function beginFightFromChase(chaseDef) {
 // ---------- play rendering ----------
 
 function renderPlay(turn, opts = {}) {
+  // SNG-252b §2b (Erik: "move the narration to a good place INSIDE the encounter… I'm lost with everything
+  // it's showing"). The scene prose rendered as a separate block BELOW the whole ribbon, so the thing you are
+  // acting IN sat after the controls for acting in it. It is built HERE, once, and the ribbon claims it when
+  // an encounter is live — the SCENE leads, the machinery follows. Outside an encounter nothing moves: the
+  // same block renders in its usual place further down.
+  const beatSpeakCtl = ttsAvailable()
+    ? `<button class="beat-speak" id="do-speak" title="Read this beat aloud. Narration only — choices and costs are not spoken.">${_speaking ? "⏸ Stop" : "▶ Read aloud"}</button>`
+    : "";
+  const beatHtml = (turn && turn.narration)
+    ? `<div class="beat">${beatSpeakCtl}${turn.narration.split(/\n\n+/).map(renderProseHtml).join("")}</div>`
+    : "";
+  let beatPlacedInRibbon = false;   // set when the ribbon takes it, so it can never render twice
+
   // SNG-088B / SNG-091: the GM sketched a plan this turn — open the builder pre-filled instead of the
   // scene, so the plan goes INTO the builder (editable, not executed). The request is UNCONDITIONAL:
   // it fires even if a stale draft lingers (a dropped request looks exactly like the GM ignoring you),
@@ -9923,30 +9973,29 @@ function renderPlay(turn, opts = {}) {
       // Moves ride INSIDE the ribbon and are SHOWN BY DEFAULT when engaged (Erik's intent); the ⚙ collapses
       // them for space rather than hiding them behind a control the player must find first.
       const movesShown = movesOpen;
-      // The ⚙ collapses the SHORTCUT moves for space. It deliberately does NOT appear for a skill battle: that
-      // panel is the fight's only action set, and a control that hid it would leave the player standing in a
-      // fight with no visible way to act. "Collapse for space" must never read as "remove the controls".
+      // SNG-252b §2a (Erik: "tapping to open the moves is a good default"). SNG-252 opened them by default —
+      // his earlier ask — and seeing it built he reversed it: ~5 full-width cards ate the screen before he had
+      // chosen to look at his moves. Collapsed is now the default, and the affordance SUMMARISES what is behind
+      // it ("4 reads, 1 strike") so collapsing costs no information about what you have. The freeform line
+      // stays visible either way — hiding the cards must never hide the ability to act.
       const movesToggle = (st.mode === "skill_battle") ? ""
-        : `<button class="enc-frame-movetoggle" id="enc-moves-toggle">${esc(movesShown ? (copy252.collapse?.openLabel || "⚙ hide moves") : (copy252.collapse?.closedLabel || "⚙ moves"))}</button>`;
+        : `<button class="enc-frame-movetoggle${movesShown ? "" : " collapsed"}" id="enc-moves-toggle">${esc(movesShown
+            ? (copy252.collapsedMoves?.openLabel || copy252.collapse?.openLabel || "⚙ hide moves")
+            : movesSummaryLine(copy252))}</button>`;
       // A SKILL BATTLE brings its own richer structured panel (fog / intensity / skills / read / break / yield),
       // and that panel IS the fight's action choices — so it belongs inside the ribbon too, or the most common
       // kinds stay exactly as split as before. Verified live: a standoff showed an empty moves area with all of
       // its controls in a separate box far below, which is Erik's complaint on the kind he meets most.
       // It is NESTED here, not rebuilt (the §2c guard: extend, don't rebuild) — the same panel, re-parented.
       const movesHtml = (st.mode === "skill_battle") ? skillBattlePanel() : (movesShown ? encounterMovesPanel(fm) : "");
-      // The freeform line is Aevi's ribbon copy, and it REPLACES the frame's own cue rather than wrapping it.
-      // `fm.freeform` is the fixed pre-252 constant (FRAME_FREEFORM_CUE) — it already says everything her line
-      // says, and it says the moves are "below", which stopped being true the moment they moved inside the
-      // ribbon. Interpolating it produced a doubled sentence ending "…against the stage. — or pick a move
-      // above; …against the stage." So `{freeform}` is filled ONLY by a cue a kind actually customised; when
-      // it is the generic constant, her line stands alone.
+      // The freeform line COMPOSES from Aevi's corrected copy: the frame supplies the ▸, `cue` is the bare
+      // phrase, `wrapSuffix` is the moves pointer. Her first version was a whole self-contained line that
+      // doubled this wrapper (and still said "Moves below" when they had moved inside); she split it, so the
+      // frame now owns the wrapping and the content stays hers. A kind that customises `fm.freeform` beyond
+      // the generic constant supplies its own cue instead.
       const ownCue = fm.freeform && fm.freeform !== FRAME_FREEFORM_CUE ? String(fm.freeform) : null;
-      const cueTpl = String(copy252.freeform?.text || "▸ {freeform} — or pick a move above; type anything and the {kind} resolves it against the stage.");
-      const cueText = (ownCue ? cueTpl.replace("{freeform}", ownCue) : cueTpl.replace(/\{freeform\}\s*—\s*/, "").replace("{freeform}", ""))
-        .replace(/\{kind\}/g, fm.kind)
-        // dropping the placeholder leaves her sentence starting mid-clause ("▸ or pick a move above"); the
-        // capital is repairing MY removal, not editing her voice.
-        .replace(/^(\s*▸\s*)([a-z])/, (_, p, c) => p + c.toUpperCase());
+      const cue = String(ownCue || copy252.freeform?.cue || copy252.freeform?.text || "describe your own move — the {kind} resolves whatever you try, against the stage");
+      const cueText = `▸ ${cue} ${String(copy252.freeform?.wrapSuffix || "")}`.replace(/\{kind\}/g, fm.kind).replace(/\s+/g, " ").trim();
       const freeformHtml = fm.freeform ? `<div class="enc-frame-cue">${esc(cueText)}</div>` : "";
       const cueHtml = `${collapseHtml}${movesToggle}${movesHtml}${freeformHtml}`;
       return `<div class="enc-frame enc-strip${prom} enc-frame-${fm.kind}">
@@ -9963,11 +10012,21 @@ function renderPlay(turn, opts = {}) {
             <span class="morph-to">${fm.icon} ${esc(fm.title)}</span>
             <span class="morph-said">${esc(mf.note || "it became something else")}</span></div>`;
         })()}
+        ${/* SNG-252b §2c — THE HIERARCHY. SNG-252 put everything in one container at one visual weight, which
+              is why Erik was lost: a single object with no internal order reads WORSE than the old split. The
+              order is now importance, top to bottom (Aevi's `hierarchy.order`):
+                1 header (a small label)      2 THE SCENE — what is actually happening, prominent
+                3 where you stand (win · meter · receipt, ONE compact row, not three stacked bars)
+                4 what you can do (collapsed moves + the always-visible freeform line)
+                5 the ways out — quietest, last. */""}
         <div class="enc-frame-top"><span class="enc-frame-title">${fm.icon} ${esc(fm.title)}</span><span class="enc-frame-kind">${esc(fm.kind)} · round ${st.round}</span></div>
         ${subtitleHtml}
-        <div class="enc-frame-win">${esc(fm.winCondition)}</div>
-        ${status ? `<div class="enc-status">${status}</div>` : ""}
-        ${meterHtml}${receiptHtml}${exitsHtml}${cueHtml}</div>`;
+        ${(() => { if (!beatHtml) return ""; beatPlacedInRibbon = true; return `<div class="enc-frame-scene">${beatHtml}</div>`; })()}
+        <div class="enc-frame-stand">
+          <span class="enc-frame-win">${esc(fm.winCondition)}</span>
+          ${status ? `<span class="enc-status">${status}</span>` : ""}
+        </div>
+        ${meterHtml}${receiptHtml}${cueHtml}${exitsHtml}</div>`;
     })()}
     ${(() => {
       // SNG-244: a quest that has reached its DECISION shows an integrated strip here — above the narration,
@@ -10069,10 +10128,9 @@ function renderPlay(turn, opts = {}) {
     // SNG-155: the speak control belongs ON THE BEAT — it reads THIS narration, so it sits with it.
     // It was in the Map & Rest sidebar, nowhere near the prose it speaks: the same mistake as the
     // ⭐ in CCODE-06, putting the control next to the plumbing instead of next to the thing it acts on.
-    const speakCtl = ttsAvailable()
-      ? `<button class="beat-speak" id="do-speak" title="Read this beat aloud. Narration only — choices and costs are not spoken.">${_speaking ? "⏸ Stop" : "▶ Read aloud"}</button>`
-      : "";
-    main += `<div class="beat">${speakCtl}${turn.narration.split(/\n\n+/).map(renderProseHtml).join("")}</div>`;
+    // SNG-252b §2b: the ribbon may already have claimed this beat — when an encounter is live the SCENE
+    // leads the ribbon. Rendered here only when it did not, so the prose appears exactly once.
+    if (!beatPlacedInRibbon) main += beatHtml;
     if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="${esc(turn.sceneSummary || "a moment")}" data-lightbox="moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035/053
     // SNG-168 §2: post THIS turn to the family feed — the value is the CHOOSING (a moment you loved), never
     // automatic. Only when family-sync is on (a shared feed needs the shared repo). Not canon — a scrapbook post.

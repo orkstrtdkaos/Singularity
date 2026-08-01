@@ -231,6 +231,34 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
   padding: 2px 7px; margin-top: 6px; border: 1px solid var(--border); border-radius: 5px;
   background: transparent; color: var(--ink-dim); cursor: pointer; }
 .enc-frame-movetoggle:hover { border-color: var(--enc-hue, var(--accent)); color: var(--ink); }
+/* SNG-252b §2c: THE HIERARCHY. 252 put everything in one box at one visual weight — which is exactly why Erik
+   got lost in it. The SCENE leads and is the only prominent thing; status is one compact row; the controls are
+   quiet; the exits quietest. Fewer things shouting, clearer order — not less content. */
+.enc-frame-scene { margin: 6px 0 9px; }
+.enc-frame-scene .beat { margin: 0; padding: 0; background: none; border: none; font-size: 15px; line-height: 1.55; }
+.enc-frame-scene .beat p { margin: 0 0 8px; }
+.enc-frame-scene .beat p:last-child { margin-bottom: 0; }
+/* where you stand — win + stage on ONE row, not two stacked full-width bars */
+.enc-frame-stand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 0 0 5px;
+  padding-top: 7px; border-top: 1px solid color-mix(in srgb, var(--enc-hue, var(--danger)) 22%, transparent); }
+.enc-frame-stand .enc-frame-win { font-size: 12.5px; margin: 0; }
+.enc-frame-stand .enc-status { font-size: 11px; color: var(--ink-dim); }
+/* the collapsed moves affordance — now the DEFAULT state, so it must read as an invitation, not a leftover */
+.enc-frame-movetoggle.collapsed { float: none; display: block; width: 100%; text-align: left; margin: 7px 0 0;
+  padding: 6px 9px; font-size: 12px; color: var(--ink);
+  border-color: color-mix(in srgb, var(--enc-hue, var(--danger)) 45%, transparent);
+  background: color-mix(in srgb, var(--enc-hue, var(--danger)) 8%, transparent); }
+.enc-frame-movetoggle.collapsed:hover { background: color-mix(in srgb, var(--enc-hue, var(--danger)) 16%, transparent); }
+/* the tucked advanced controls — present, one tap away, no longer competing with the scene */
+.sb-detail { margin: 8px 0 4px; }
+.sb-detail-sum { cursor: pointer; font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim);
+  letter-spacing: .5px; padding: 3px 0; list-style: none; }
+.sb-detail-sum::-webkit-details-marker { display: none; }
+.sb-detail-sum:hover { color: var(--ink); }
+.sb-detail[open] .sb-detail-sum { margin-bottom: 5px; }
+/* the exits go quiet — the least-used control in the ribbon, and it was reading as loud as the win line */
+.enc-frame .enc-frame-exits { margin-top: 8px; padding-top: 7px; opacity: .82; font-size: 11.5px;
+  border-top: 1px solid color-mix(in srgb, var(--enc-hue, var(--danger)) 18%, transparent); }
 /* a family the kind cannot spend meaningfully — still CLICKABLE (moves are shortcuts, not a cage), just marked */
 .moves-group-hint { text-transform: none; letter-spacing: 0; font-size: 10.5px; font-style: italic; opacity: .85; margin-left: 6px; }
 .moves-group-hint.weak { opacity: .6; }

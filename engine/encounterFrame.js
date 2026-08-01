@@ -65,19 +65,24 @@ export function chaseFromFight(fightDef) {
   return {
     schemaVersion: 1,
     id: `chase-${fightDef?.id || "fight"}`,
-    type: "challenge",
+    // SNG-247 Tier 2b: a chase is an OPPOSED contest, not a stage ladder — the same person who was swinging at you
+    // is now running you down, with their own wind and their own choices. It runs the one contest engine (duel) and
+    // its FLAVOR says what is being contested: ground, not blood. Its exit rule (sb.kinds.chase) makes losing cost
+    // WIND rather than hits, and `frameMeter` reads the contest meter as Distance instead of counting stages.
+    type: "duel",
     flavor: "chase",
     name: `The Chase — ${oppName}`,
     setup: `You break off — ${oppName} gives chase across the broken country. Lose them, or be run down.`,
     fromRandom: true,
+    lethal: false,
+    tier: fightDef?.tier ?? undefined,
     danger: [fightDef?.danger, fightDef?.minDanger].find(d => Number.isFinite(d)) ?? null,
+    // The pursuer IS the foe you broke from — same person, same legs. Carried whole so the contest is against
+    // someone real rather than a synthesized stand-in; `yieldAt` 0 because a chase ends by being shaken, not yielded.
+    opponent: { ...(fightDef?.opponent || { name: oppName, threat: 35, health: 5 }), yieldAt: 0,
+      notes: "Runs you down for what breaking off cost them — gives up when the ground and their wind run out." },
     // the fight to fall back into if caught (the def stays in customEncounters; the pursuer's name for narration)
     _chainedFrom: { kind: "fight", fightDefId: fightDef?.id || null, opponentName: oppName },
-    stages: [
-      { name: "Break line of sight", attribute: "physical", subAttribute: "agility", axes: {}, difficulty: 8, failureCost: { health: 2, energy: 4, hours: 0 } },
-      { name: "A burst through the broken country", attribute: "physical", subAttribute: "agility", axes: {}, difficulty: 12, failureCost: { health: 2, energy: 4, hours: 0 } },
-      { name: "Lose them — or be run down", attribute: "physical", subAttribute: "wits", axes: {}, difficulty: 16, failureCost: { health: 3, energy: 4, hours: 0 } },
-    ],
   };
 }
 
@@ -215,9 +220,14 @@ export function trivializes(def, kitKeys, premises = {}) {
 export function encounterKind(def, entry = null) {
   const type = def?.type || null;
   const flavor = def?.flavor || entry?.flavor || null;
-  if (type === "duel") return "fight";
+  // SNG-247 Tier 2: a DUEL is the structural shape of an OPPOSED contest — two wills, two rolls, a meter between
+  // them. WHAT is being contested is its FLAVOR: blades (fight), ground (chase), or resolve (standoff). Reading
+  // flavor here is what lets all three run the one contest engine while keeping their own exit rule, meter, colour
+  // and outcome words. Verified safe against the content: every `routing:"duel"` entry today carries
+  // flavor:"fight", so no existing duel changes kind. An absent or unknown flavor stays a fight.
+  if (type === "duel") return flavor === "standoff" ? "standoff" : flavor === "chase" ? "chase" : "fight";
   if (type === "puzzle") return "puzzle";
-  if (type === "standoff") return "standoff";
+  if (type === "standoff") return "standoff";   // a hand-authored standoff def; the duel+flavor form is the minted one
   if (type === "challenge") {
     if (flavor === "chase") return "chase";
     if (flavor === "dangerous") return "hazard";
@@ -236,6 +246,13 @@ export function encounterKind(def, entry = null) {
  *  owns its own; exposed here only for the shared grammar). Tolerant of missing state. Pure. */
 function frameMeter(kind, def, state) {
   const total = def?.stages?.length || 0;
+  // SNG-247 Tier 2b: IF IT RUNS ON THE CONTEST ENGINE, THE CONTEST METER IS THE METER. A chase or a standoff on
+  // skill_battle has no stages to count, so the stage branches below would report 0/0 forever. Checked before the
+  // per-kind branches so one rule covers every kind that gets promoted onto the engine, now or later.
+  if (state?.mode === "skill_battle") {
+    const mm = def?.momentum?.meterMax ?? 10;
+    return { pct: Math.round((((state?.momentum ?? 0) + mm) / (2 * mm)) * 100), label: (FRAME_KINDS[kind] || FRAME_KINDS.fight).meterLabel };
+  }
   if (kind === "chase" || kind === "hazard") {
     const done = (state?.stagesDone?.length ?? state?.stageIndex ?? 0);
     return { pct: total ? Math.round((Math.min(done, total) / total) * 100) : 0, label: FRAME_KINDS[kind].meterLabel, done, total };
@@ -282,6 +299,13 @@ export function frameExits(kind, def, state, exitLabels = null) {
     { role: "flee", ...flee },
     { role: "fail", ...fail },
   ];
+  // SNG-247 Tier 2b: a kind promoted onto the CONTEST engine keeps its own words but must wire to the duel's
+  // actions — a duel-shaped chase has no `stage` to attempt and no `abandon` to click, so its buttons would have
+  // fired at nothing. Labels and meanings (the per-kind voice) are untouched; only the plumbing changes.
+  if (def?.type === "duel") {
+    const duelAction = { defeat: "strike", flee: "flee", fail: "yield" };
+    for (const ex of exits) if (ex.label != null) ex.action = duelAction[ex.role];
+  }
   // Aevi's authored per-kind exit labels override the placeholders (a "—", e.g. chase's disabled flee, keeps the
   // default label — a dash isn't a button). Only labels the player can act on (non-null) are overridden.
   if (exitLabels) for (const ex of exits) { const lbl = exitLabels[ex.role]; if (lbl && lbl !== "—" && ex.label != null) ex.label = lbl; }

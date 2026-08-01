@@ -125,8 +125,24 @@ export function skillBattleRound(state, def, playerDecl, { character, rules, sb,
   const s = { ...state, round: state.round + ((senseOnly || !tickEffects) ? 0 : 1), momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy, effects: r.state.effects || [], pressure: r.state.pressure || { player: 0, opponent: 0 }, spent: r.state.spent || { player: false, opponent: false }, lastOppFn: oppDecl.function };
   const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
   const events = []; let ended = false, outcome = null;
-  if (r.resolved === "player") { s.status = "ended"; ended = true; outcome = (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell"; events.push(`You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`); }
-  else if (r.resolved === "opponent") { s.status = "ended"; ended = true; outcome = "player_overcome"; deltas.health -= (cfg.playerHealthPerHit ?? 4); events.push(`${def.opponent.name} overwhelms you.`); }
+  // SNG-247 Tier 2a: the ENDING is per-kind too. A standoff does not "break" and a chase does not "fall", and —
+  // the part that matters mechanically — losing a standoff must not cost BLOOD. `outcomes.losingCostsHealth:
+  // false` is the ruling that a contest of wills cannot hurt you; being pressed until someone draws is a MORPH
+  // into a fight, a different mechanic entirely. Outcome CODES are unchanged so the XP map and every downstream
+  // reader keep working; only the prose and the toll are kind-shaped.
+  const kOut = ((sb?.kinds || {})[encounterKind(def) || "fight"] || {}).outcomes || {};
+  const say = (t, fb) => (t ? String(t).replace(/\{them\}/g, def.opponent.name) : fb);
+  if (r.resolved === "player") {
+    s.status = "ended"; ended = true;
+    outcome = (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell";
+    events.push(say(outcome === "opponent_yielded" ? kOut.opponentYields : kOut.opponentBreaks,
+      `You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`));
+  }
+  else if (r.resolved === "opponent") {
+    s.status = "ended"; ended = true; outcome = "player_overcome";
+    if (kOut.losingCostsHealth !== false) deltas.health -= (cfg.playerHealthPerHit ?? 4);
+    events.push(say(kOut.playerOvercome, `${def.opponent.name} overwhelms you.`));
+  }
   else if (r.resolved === "stalemate") { s.status = "ended"; ended = true; outcome = "stalemate"; events.push("Both of you are spent — it ends unresolved."); }
   else events.push(r.roundWinner === "player" ? "You press the advantage." : r.roundWinner === "opponent" ? "You give ground." : "Neither gains an inch.");
   // CCODE-39: running dry is a STATE the player must be told about — their crafts stopped answering, and yielding

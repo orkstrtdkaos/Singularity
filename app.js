@@ -70,7 +70,7 @@ import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, col
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.318";
+const APP_VERSION = "1.8.319";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4608,8 +4608,13 @@ async function onChoice(choice) {
   // the roll: the transition IS the resolution, GM-narrated. Only the classic (non-skill-battle) duel routes flee
   // through here; the skill-battle fight's own #sb-flee button calls beginChaseFromFight directly.
   { const encT = activeEnc();
-    if (encT?.def?.type === "duel" && choice.encounterAction === "flee") { await beginChaseFromFight(encT.def); return; }
-    if (encT?.def?.type === "challenge" && encT.def._chainedFrom?.kind === "fight" && choice.encounterAction === "abandon") { await beginFightFromChase(encT.def); return; } }
+    // SNG-247 Tier 2b: gate on KIND, not on `type` — a chase is now a duel too, so a bare `type === "duel"` test
+    // would turn fleeing a CHASE into a chase-of-a-chase. A chained chase given up on (or abandoned, for a legacy
+    // staged chase still in a save) is CAUGHT: drop back into the fight it came from.
+    const kindT = encT ? encounterKind(encT.def) : null;
+    if (kindT === "fight" && choice.encounterAction === "flee") { await beginChaseFromFight(encT.def); return; }
+    if (kindT === "chase" && encT.def._chainedFrom?.kind === "fight"
+        && ["flee", "yield", "abandon"].includes(choice.encounterAction)) { await beginFightFromChase(encT.def); return; } }
   let itemsAdvanced = [];
   const location = hereNow();
   const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
@@ -8479,8 +8484,19 @@ const sbOpenFams = {};         // CCODE-38 (Erik: "can we make the categories co
 // who took the exchange, and the momentum swing. Engine-generated (no per-round GM call), so every round is legible.
 const SB_VERB = { strike: "strike", break: "shatter at", hinder: "hamper", shield: "guard", ward: "ward", resist: "brace", reveal: "read", foresee: "foresee", track: "track", conceal: "slip aside", deceive: "feint", command: "command", bind: "bind", move: "reposition", travel: "reposition", open: "open a way", heal: "steady", mend: "mend", restore: "restore", empower: "empower", make: "conjure", transform: "reshape", summon: "call", sustain: "hold" };
 const SB_DEFENSIVE = new Set(["shield", "ward", "resist", "conceal", "deceive"]);
+/** SNG-247 Tier 2a: what the meter is CALLED in this contest — Momentum in a fight, Their Resolve in a standoff,
+ *  Distance in a chase. Reads the same per-kind framing copy the frame strip's meter uses, so the receipt and the
+ *  bar above it can never name the same number two different things. */
+function sbMeterWord() {
+  const e = activeEnc(); if (!e) return "momentum";
+  const k = encounterKind(e.def) || "fight";
+  return (CONTENT.frameKinds?.[k]?.meterLabel || FRAME_KINDS_FALLBACK[k] || "momentum").toLowerCase();
+}
+const FRAME_KINDS_FALLBACK = { fight: "Momentum", chase: "Distance", hazard: "Progress", puzzle: "Insight", standoff: "Their Resolve" };
+
 function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
   const meterMax = CONTENT.skillBattle?.engine?.momentum?.meterMax ?? 16;
+  const mWord = sbMeterWord();
   const after = rr.state?.momentum ?? beforeMom, swing = after - beforeMom;
   const oVerb = rr.oppDecl?.function || "press in", pVerb = playerDecl.function;
   const oPhrase = SB_VERB[oVerb] || oVerb;
@@ -8491,7 +8507,7 @@ function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
   // CCODE-35: name what STUCK. An effect that lands silently is the same failure as a round that resolves
   // silently — the player has to see the thing their move left standing.
   const fxBit = (rr.landed || []).map(f => ` · ${f.from === "player" ? "you gain" : "they gain"} ${f.label} ${f.value >= 0 ? "+" : ""}${f.value} for ${f.roundsLeft} round${f.roundsLeft === 1 ? "" : "s"}`).join("");
-  if (scouting) return `👁 You read them — they ${oPhrase}. You give nothing away. Momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${prox}${fxBit}`;
+  if (scouting) return `👁 You read them — they ${oPhrase}. You give nothing away. ${mWord} ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${prox}${fxBit}`;
   const pDef = SB_DEFENSIVE.has(pVerb), oDef = SB_DEFENSIVE.has(oVerb);
   const interaction = pDef && !oDef ? `they ${oPhrase} — you turn it aside`
     : !pDef && oDef ? `they ${oPhrase} — your blow is turned aside`
@@ -8499,7 +8515,7 @@ function sbRoundReceipt(rr, playerDecl, beforeMom, scouting) {
     : `they ${oPhrase} — you both circle, testing`;
   // CCODE-37: a woven round says so — you did two things in one turn, and it cost you for both.
   const wov = playerDecl.woven ? ` ⋈ woven with ${playerDecl.woven.name}` : "";
-  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name}${wov} · ${interaction} · ${gain} · momentum ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}${fxBit}`;
+  return `⚔ You ${SB_VERB[pVerb] || pVerb} with ${playerDecl.name}${wov} · ${interaction} · ${gain} · ${mWord} ${Math.round(beforeMom)}→${Math.round(after)}${enBit}${hpBit}${prox}${fxBit}`;
 }
 
 // CCODE-36 (Erik): one round as a compact line for the END-OF-FIGHT narration. This is the GM's raw material for
@@ -9050,6 +9066,13 @@ function sbDeclare(skill, { intensity = "standard", scouting = false, finisher =
 /** The contest ends: clear it, then hand the outcome to the GM to narrate the aftermath and return to the scene. */
 async function sbEnd(rr) {
   const enc = activeEnc(); const def = enc?.def;
+  // SNG-247 Tier 2b: FRAMES CHAIN, and now they chain through the contest engine. A chained CHASE that is LOST
+  // means you were run down — that is not an ending, it is the fight resuming (FRAME_TRANSITIONS chase.fail =
+  // fight). Intercepted before the encounter is cleared, so the drop-back still has its def to read.
+  if (encounterKind(def) === "chase" && def?._chainedFrom?.kind === "fight"
+      && ["player_overcome", "incapacitated"].includes(rr.outcome)) {
+    await beginFightFromChase(def); return;
+  }
   character.activeEncounter = null; saveCharacter(character);
   sbLastPlayerFn = null; sbIntensity = "standard"; sbWeaveArmed = null; sbLastRound = null; // CCODE-46: never leak a read into the next fight // CCODE-37: never carry a weave into the next fight
   const nm = def?.opponent?.name || "your opponent";
@@ -9110,7 +9133,11 @@ async function beginChaseFromFight(fightDef) {
   character.customEncounters = character.customEncounters || {};
   character.customEncounters[chase.id] = chase;
   if (fightDef.id && !character.customEncounters[fightDef.id] && !CONTENT.encounters?.[fightDef.id]) character.customEncounters[fightDef.id] = fightDef; // keep the fight to fall back into
-  character.activeEncounter = { defId: chase.id, state: startEncounter(chase) };
+  // SNG-247 Tier 2b: the chase runs on the CONTEST engine, so it needs the pursuer's sheet the same way a fight
+  // does. Without this it would start with no sheet and fall back to the classic single-margin path — the chase
+  // would look like a chase and play like the old one-roll ladder.
+  const chaseSheet = CONTENT.skillBattle?.engine ? synthesizeOpponentSheet(chase.opponent, CONTENT.skillBattle.engine) : null;
+  character.activeEncounter = { defId: chase.id, state: startEncounter(chase, { oppSheet: chaseSheet }) };
   sbLastPlayerFn = null; sbIntensity = "standard";
   saveCharacter(character);
   const nm = fightDef.opponent?.name || "your foe";

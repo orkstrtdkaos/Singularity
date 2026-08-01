@@ -8306,14 +8306,20 @@ await (async () => {
   // caught chase drops back into the fight. Pure def-builder tested here; the app wiring is source-asserted.
   const fightDef230 = { id: "duel-raider", type: "duel", name: "A Road-Raider", opponent: { name: "the raider" }, danger: 3 };
   const chase230 = chaseFromFight(fightDef230);
-  check("230 §6a: chaseFromFight builds a challenge/chase from the fight, carrying the pursuer + the fight to return to",
-    chase230.type === "challenge" && chase230.flavor === "chase" && chase230._chainedFrom?.kind === "fight" && chase230._chainedFrom.fightDefId === "duel-raider" && /raider/.test(chase230.name) && chase230.stages.length >= 3 && chase230.danger === 3);
+  // SNG-247 Tier 2b: the chase is now an OPPOSED CONTEST (a duel whose flavor says ground is what's contested),
+  // not a stage ladder — the same person who was swinging at you is running you down, with their own wind. What
+  // this check has always protected is unchanged: it carries the PURSUER and the way back into the fight.
+  check("230 §6a: chaseFromFight builds an opposed chase from the fight, carrying the pursuer + the fight to return to",
+    chase230.type === "duel" && chase230.flavor === "chase" && chase230._chainedFrom?.kind === "fight" && chase230._chainedFrom.fightDefId === "duel-raider" && /raider/.test(chase230.name) && chase230.opponent?.name === "the raider" && chase230.danger === 3);
   check("230 §6a: the chase reads as a frame (kind chase, its own three exits) — the same frame machinery drives it",
-    frameModel(chase230, { stageIndex: 0 }, null).kind === "chase" && encounterKind(chase230) === "chase");
+    frameModel(chase230, { mode: "skill_battle", momentum: 0 }, null).kind === "chase" && encounterKind(chase230) === "chase");
   check("230 §6a WIRING: fleeing a fight starts a chase, and a caught chained chase re-enters the fight — GM-narrated",
-    /beginChaseFromFight\(activeEnc\(\)\?\.def\)/.test(appSrc230) && /encT\?\.def\?\.type === "duel" && choice\.encounterAction === "flee"/.test(appSrc230) && /_chainedFrom\?\.kind === "fight" && choice\.encounterAction === "abandon"/.test(appSrc230) && /async function beginChaseFromFight/.test(appSrc230) && /async function beginFightFromChase/.test(appSrc230));
+    // SNG-247 Tier 2b: the gates read KIND, not `type` — a chase is a duel too now, so a bare type check would
+    // have turned fleeing a CHASE into a chase-of-a-chase. And a chase is lost by being RUN DOWN, not only by
+    // clicking away from it, so the drop-back fires from sbEnd as well.
+    /beginChaseFromFight\(activeEnc\(\)\?\.def\)/.test(appSrc230) && /kindT === "fight" && choice\.encounterAction === "flee"/.test(appSrc230) && /kindT === "chase" && encT\.def\._chainedFrom\?\.kind === "fight"/.test(appSrc230) && /encounterKind\(def\) === "chase" && def\?\._chainedFrom\?\.kind === "fight"/.test(appSrc230) && /async function beginChaseFromFight/.test(appSrc230) && /async function beginFightFromChase/.test(appSrc230));
   check("230 §6a GUARD: the frame stays a legibility layer through the chain — the chase renders with the GM + freefield (no bespoke mini-loop)",
-    /character\.activeEncounter = \{ defId: chase\.id, state: startEncounter\(chase\)/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
+    /character\.activeEncounter = \{ defId: chase\.id, state: startEncounter\(chase, \{ oppSheet: chaseSheet \}\)/.test(appSrc230) && /Do NOT resolve the chase — it plays out in its own frame/.test(appSrc230));
 
   // §6b/§7a: a SKILL can COLLAPSE (or morph) the frame — resolved along the degree bands, gated by collapsibility.
   check("230 §6b: frameCollapsible — riffraff/notable/regional + low danger can be one-beat-ended (regional only on a demolishing crit); an EPIC/danger-4 cannot",

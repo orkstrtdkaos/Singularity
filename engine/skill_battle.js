@@ -425,6 +425,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // and an energy item is a real answer to it. The opponent breaking is still the engine's own end condition.
   let resolved = null;
   if (pressure.opponent >= (pcfg.breakAtPressure ?? 3)) resolved = "player";                       // they finally break
+  // SNG-247 Tier 2b: a kind where LOSING COSTS NO HEALTH needs its own player-break condition, or the player can
+  // never lose it — a chase would run forever because being run down isn't damage. A FIGHT deliberately has none:
+  // health owns the player's exit there (CCODE-39), and adding one would take that back from them.
+  else if (Number.isFinite(pcfg.playerBreaksAtPressure) && pressure.player >= pcfg.playerBreaksAtPressure) resolved = "opponent";
   // the PLAYER's exit is health, owned by the app (checkIncapacitation) — a meter never decides it, and neither
   // does an empty energy pool.
 

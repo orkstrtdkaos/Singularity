@@ -11,7 +11,8 @@ import { senseOpponent } from "../engine/sense.js";
 import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engine/encounters.js";
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
 import { recordUse } from "../engine/practice.js";
-import { FRAME_KINDS } from "../engine/encounterFrame.js";   // SNG-247: the kind list the colour gate checks
+import { FRAME_KINDS, encounterKind, chaseFromFight, frameModel } from "../engine/encounterFrame.js";   // SNG-247: the kind list the colour gate checks
+import { synthesizeStandoffDef } from "../engine/random_encounters.js";   // SNG-247 2a: the kind that never minted
 import { harmTargetFor } from "../engine/intent.js";   // SNG-246 Fix A: who the player committed harm against
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -536,6 +537,97 @@ check(`SNG-247: every frame kind has an --enc-hue rule on BOTH hooks (missing: $
   kindsMissingHue.length === 0);
 check("SNG-247: the frame + the contest panel read the SAME hue variable — one colour decision, not two",
   /\.enc-frame\s*\{[^}]*var\(--enc-hue/.test(cssText) && /\.sb-panel\s*\{[^}]*var\(--enc-hue/.test(cssText));
+
+// ---- SNG-247 Tier 2a: STANDOFF BECOMES A REAL THING ----
+// It had a FRAME_KINDS entry, an encounterKind mapping, an authored exemplar and an authored receipt format —
+// and nothing ever minted one. A routing:"opposed" entry fell through to synthesizeChallengeDef and rendered as
+// "hard ground": a contest of wills shown as terrain.
+check("SNG-247 2a: a duel's FLAVOR says what is being contested — blades, ground, or resolve",
+  encounterKind({ type: "duel", flavor: "standoff" }) === "standoff"
+  && encounterKind({ type: "duel", flavor: "chase" }) === "chase"
+  && encounterKind({ type: "duel", flavor: "fight" }) === "fight");
+check("SNG-247 2a (regression guard): a duel with no/unknown flavor is still a FIGHT — no existing duel changes kind",
+  encounterKind({ type: "duel" }) === "fight" && encounterKind({ type: "duel", flavor: "theft" }) === "fight");
+const tollEntry = { id: "toll", kind: "standoff", routing: "opposed", flavor: "theft", tier: "notable",
+  seed: "Someone stands between you and where you are going.", opponent: { name: "the toll-keeper", threat: 30 } };
+const tollDef = synthesizeStandoffDef(tollEntry);
+check("SNG-247 2a: an opposed entry mints a STANDOFF that the frame reads as a standoff (not hard ground)",
+  tollDef.type === "duel" && tollDef.flavor === "standoff" && encounterKind(tollDef) === "standoff"
+  && tollDef.opponent.name === "the toll-keeper" && tollDef.lethal === false);
+check("SNG-247 2a: a standoff runs the ONE contest engine — startEncounter gives it a real skill battle",
+  (() => {
+    const st = startEncounter(tollDef, { oppSheet: synthesizeOpponentSheet(tollDef.opponent, sb) });
+    return st?.mode === "skill_battle" && st.momentum === 0;
+  })());
+// The mechanically load-bearing half: a contest of WILLS cannot cost blood. Pressing one until someone draws is
+// a MORPH into a fight — a different mechanic — not a standoff that deals damage.
+const standoffLost = (kindDef) => {
+  const oppSheet = synthesizeOpponentSheet(kindDef.opponent, sb);
+  const st = startEncounter(kindDef, { oppSheet });
+  return skillBattleRound({ ...st, pressure: { player: 9, opponent: 0 }, opponentEnergy: oppSheet.energy },
+    kindDef, { function: "strike", tier: 1, attribute: "practical", intensity: "standard" },
+    { character: { attributes: { practical: 2 }, energy: 100, health: 40, skills: {} },
+      rules, sb, steps, rng: seqRng([0.99, 0.01]) });
+};
+check("SNG-247 2a: the standoff's authored prose reaches the round (no fight wording on a contest of wills)",
+  /certainty|stands aside|holds the line/i.test(standoffLost(tollDef).events.join(" ")));
+check("SNG-247 2a (the one that matters): losing a STANDOFF costs no health — losingCostsHealth:false is a ruling, not a label",
+  standoffLost(tollDef).deltas.health === 0);
+check("SNG-247 2a: a FIGHT still pays in blood — the per-kind rule didn't disarm the fight",
+  (() => {
+    const fightDef = { ...tollDef, flavor: "fight", id: "f", opponent: { ...tollDef.opponent, name: "the raider" } };
+    return standoffLost(fightDef).deltas.health <= 0;
+  })());
+
+// ---- SNG-247 Tier 2b: A CHASE IS AN OPPOSED CONTEST, NOT A STAGE LADDER ----
+// The same person who was swinging at you is running you down, with their own wind and their own choices. It runs
+// the one contest engine; only the CURRENCY differs — ground is bought with wind, not blood.
+const fightForChase = { id: "fight-1", type: "duel", flavor: "fight", tier: "notable",
+  opponent: { name: "the raider", threat: 35, health: 5, yieldAt: 1 } };
+const chaseDef = chaseFromFight(fightForChase);
+check("SNG-247 2b: fleeing a fight builds a chase that RUNS ON THE CONTEST ENGINE, against the same person",
+  chaseDef.type === "duel" && chaseDef.flavor === "chase" && encounterKind(chaseDef) === "chase"
+  && chaseDef.opponent.name === "the raider" && chaseDef.opponent.yieldAt === 0);
+check("SNG-247 2b: the chase keeps the way back into the fight it came from (the chain is what makes flee not a teleport)",
+  chaseDef._chainedFrom.kind === "fight" && chaseDef._chainedFrom.fightDefId === "fight-1");
+const chaseState = startEncounter(chaseDef, { oppSheet: synthesizeOpponentSheet(chaseDef.opponent, sb) });
+check("SNG-247 2b: it starts as a real skill battle (a chase you can actually play, not a ladder you click through)",
+  chaseState?.mode === "skill_battle");
+// The meter bug this had to dodge: a duel-shaped chase has NO stages, so the stage-counting branch would have
+// reported 0/0 forever — a bar that never moves through the whole chase.
+const fmChase = frameModel(chaseDef, { ...chaseState, momentum: 5 });
+check("SNG-247 2b (the one that matters): a contest-engine chase reads the CONTEST meter, not a stage count that does not exist",
+  fmChase.meter.pct === 75 && /distance|ground/i.test(fmChase.meter.label));
+check("SNG-247 2b: its exits keep the chase's own words but wire to the DUEL's actions — buttons that fire at something",
+  (() => {
+    const byRole = Object.fromEntries(fmChase.exits.map(e => [e.role, e]));
+    return byRole.defeat.action === "strike" && byRole.flee.action === "flee"
+      && /chase|catch|pursu/i.test(byRole.defeat.label + byRole.defeat.means);
+  })());
+check("SNG-247 2b: a STAGED encounter still counts stages — the contest-meter rule didn't swallow hazards",
+  (() => {
+    const hz = { type: "challenge", flavor: "dangerous", stages: [{ name: "a" }, { name: "b" }] };
+    const m = frameModel(hz, { stageIndex: 1, stagesDone: ["a"] }).meter;
+    return m.total === 2 && m.done === 1 && m.pct === 50;
+  })());
+check("SNG-247 2b: losing a chase costs WIND, not blood — being caught is the fight resuming, not damage",
+  (() => {
+    const oppSheet = synthesizeOpponentSheet(chaseDef.opponent, sb);
+    const st = startEncounter(chaseDef, { oppSheet });
+    const rr = skillBattleRound({ ...st, pressure: { player: 9, opponent: 0 }, opponentEnergy: oppSheet.energy },
+      chaseDef, { function: "move", tier: 1, attribute: "physical", intensity: "standard" },
+      { character: { attributes: { physical: 2 }, energy: 100, health: 40, skills: {} },
+        rules, sb, steps, rng: seqRng([0.99, 0.01]) });
+    return rr.deltas.health === 0 && /runs you down|ground is gone/i.test(rr.events.join(" "));
+  })());
+
+check("SNG-247 2b: a FIGHT still has NO player-break dial — health owns the player's exit (CCODE-39 not taken back)",
+  (() => {
+    const cfg = sb.kinds || {};
+    const fightPressure = { ...(sb.momentum.pressure || {}), ...((cfg.fight || {}).pressure || {}) };
+    return fightPressure.playerBreaksAtPressure === undefined
+      && cfg.chase.pressure.playerBreaksAtPressure > 0 && cfg.standoff.pressure.playerBreaksAtPressure > 0;
+  })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

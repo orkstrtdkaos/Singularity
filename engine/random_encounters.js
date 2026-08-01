@@ -230,6 +230,31 @@ export function synthesizeDuelDef(entry) {
   };
 }
 
+/** SNG-247 Tier 2a: a STANDOFF def. The kind existed in FRAME_KINDS, `encounterKind` mapped it, and Aevi authored
+ *  both an exemplar (`enc_the_toll_keeper`) and a per-kind receipt format — and NOTHING EVER MINTED ONE. A
+ *  `routing:"opposed"` entry fell through to synthesizeChallengeDef and read as "hard ground": a contest of wills
+ *  rendered as terrain. It is structurally a DUEL (two wills, two rolls, a meter between them); only what is being
+ *  contested differs, which is what `flavor` now names. The engine's exit rule (sb.kinds.standoff) makes the
+ *  costs composure rather than blood — a standoff cannot hurt you; pressing one until it draws is a MORPH into a
+ *  fight, which is a different mechanic. Pure. */
+export function synthesizeStandoffDef(entry) {
+  const base = synthesizeDuelDef(entry);
+  const who = entry.opponent?.name || "the one standing in your way";
+  return {
+    ...base,
+    flavor: "standoff",
+    name: entry.name || "The Standoff",
+    lethal: false,
+    opponent: {
+      ...base.opponent, name: who,
+      // their "health" is RESOLVE — how many times their certainty can be pressed before they stand aside
+      tacticTags: (entry.opponent?.tacticTags || ["hold-the-line", "name-a-price", "read-you"]).slice(0, 4),
+      notes: "Contests by will, not by blade — wants something from you and is certain of the right to it. Yields the point when their certainty cracks.",
+    },
+    stakes: "Losing costs you the point — you pay, you turn back, or it becomes a fight on their terms. It does not cost you blood.",
+  };
+}
+
 const STAGE_NAMES = {
   chase: ["Read the ground and pick a line", "A burst through the broken country", "Close it out — catch or shake free"],
   dangerous: ["Read the hazard", "Commit to the crossing", "Clear the last of it"],
@@ -276,17 +301,30 @@ export function buildOffer(entry, character, catalog = {}, rules = {}, opts = {}
   }
 
   // challenge / duel — build the def and a deterministic offer beat
-  const def = entry.routing === "duel" ? synthesizeDuelDef(entry) : synthesizeChallengeDef(entry);
+  // SNG-247 Tier 2a: an OPPOSED entry (or one Aevi tagged kind:"standoff") mints a STANDOFF, not a staged
+  // challenge. Routing it to synthesizeChallengeDef was why the toll-keeper read as terrain.
+  const isStandoff = entry.kind === "standoff" || entry.routing === "opposed";
+  const def = isStandoff ? synthesizeStandoffDef(entry)
+    : entry.routing === "duel" ? synthesizeDuelDef(entry) : synthesizeChallengeDef(entry);
   // SNG-246 (Erik: "I'm the one moving forward to attack — the button shouldn't say 'stand and meet it'"): the
   // engage label reads as an ACTION and names the foe, and swings to the aggressor's voice when the PLAYER is the
   // one closing in (opts.aggressor). The old flat defensive "Stand and meet it" only fit the it-comes-to-you case.
   const foeName = def?.opponent?.name || "them";
-  const engageLabel = entry.routing === "duel"
+  // SNG-247 Tier 2a: a standoff engages by WILL, so neither its verb nor its roll is physical — a contest of who
+  // yields first is pressed with presence, and refusing it is paying rather than fleeing.
+  const engageLabel = isStandoff
+    ? `🗣 Face ${foeName} down — hold your ground`
+    : entry.routing === "duel"
     ? (opts.aggressor ? `⚔ Press the attack on ${foeName}` : `⚔ Meet ${foeName} — take the fight`)
     : (entry.flavor === "chase" ? "Commit to the chase" : "Take the crossing on");
   const choices = [
-    { label: engageLabel, encounterId: def.id, attribute: "physical", subAttribute: def.type === "duel" ? "strength" : "agility", axes: {}, difficulty: 0, intentTags: ["risky", "commit"] },
-    { label: entry.routing === "duel" ? "Back away — refuse the fight" : "Turn back — find another way", attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful", "retreat"], trivial: true }
+    { label: engageLabel, encounterId: def.id,
+      attribute: isStandoff ? "social" : "physical",
+      subAttribute: isStandoff ? "presence" : def.type === "duel" ? "strength" : "agility",
+      axes: {}, difficulty: 0, intentTags: ["risky", "commit"] },
+    { label: isStandoff ? "Give them what they want — pay the price and move on"
+      : entry.routing === "duel" ? "Back away — refuse the fight" : "Turn back — find another way",
+      attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful", "retreat"], trivial: true }
   ];
   // peaceful out: an owned ability can END the encounter instead of engaging it
   const peaceful = entry.peacefulOut;

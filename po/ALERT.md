@@ -1,5 +1,20 @@
 # PO ALERT
 
+> ## [SPEC - the concreteness guardrail on generation] SNG-249 (Aevi, 2026-07-27)
+> Erik: "build the requirement of CONCRETE objectives + criteria to satisfy them into any quests/encounters - just
+> because we CAN generate a quest doesn't mean I want vague nice-sounding nonsense." The necessary guardrail on
+> SNG-248. DIAGNOSIS: a stage already REQUIRES id+objective+condition (content_ci:565; self-test intent = 'Go to
+> the tree-line'/'you reach the tree-line') BUT the check is PRESENCE-ONLY - 'when harmony is restored' passes as
+> happily as a real condition, and SNG-239 stayed a prose rule, never a gate. FIX (3 layers): §3a generation
+> prompt DEMANDS concrete objective + testable condition w/ GOOD/BAD examples in-prompt; §3b a CONCRETENESS
+> VALIDATOR (extend the SNG-234/248 born-complete gate) - condition must name a checkable event/state, vague-only
+> conditions rejected/repaired; §3c wire the criterion to engine-detectable state (SNG-235 effects) so 'met' is
+> real not a GM guess. Guards: concrete=TESTABLE not verbose; mystery-at-start still fine (SNG-239 §6a); reject-
+> vague on GENERATION (hard gate, higher risk); don't strip voice (the grieving-warden is concrete AND voiced).
+> CCODE: the concreteness validator (gen at mint + authored in CI - SNG-239 finally a gate) + wire criterion to
+> SNG-235 effects. AEVI: the gen-prompt concreteness language + the vague-marker/concrete-anchor sets (from the
+> SNG-239 audit). ERIK: gate strictness + same-bar-for-authored. Full: SPEC_SNG-249.
+
 > ## [SPEC - Erik: the generative core] SNG-248 the generative engine learns & grows (Aevi, 2026-07-27)
 > Erik: "make sure the seed encounters are a REFERENCE when the engine creates a NEW encounter - generative
 > ability is a huge point of the game. Spec a completely capable generative engine that learns and grows as we

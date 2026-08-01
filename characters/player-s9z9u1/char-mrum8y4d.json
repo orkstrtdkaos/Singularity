@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 5,
-  "xp": 457,
+  "xp": 462,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -79,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 55,
+  "energy": 50,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -239,24 +239,42 @@
         "player": "Use descent to state plainly how much she enjoys your touch... and then confess your own deep pleasure at touching her.",
         "summary": "Loki named their own pleasure aloud through Descent — the cost of real exposure, the thin lattice straining; Vessin went still and then exhaled and looked directly at them, acknowledging the honesty without quite answering it.",
         "narration": "The harmonic undertone is still low in the air when you let Descent open in you — not a tool aimed at Vessin, but something turned toward yourself. You name your own want aloud. You say that her shoulder under your hands is a pleasure you had not expected to feel tonight. You say that the warmth of her, the particular tension of her muscle giving way under your thumb, the way she tilted her head without self-consciousness — you have been touching people as a craft for so long that you had forgotten it could feel like this. You say it plainly, the way Descent requires. Not a performance. Just the true thing, spoken. The lattice strains around it — the substrate thin here, the craft running on something close to the bone — and there is a moment where the naming costs more than you planned for. A flicker of real exposure, the kind you cannot walk back once it is in the air.\n\nVessin goes still under your hands. Not tense — still. The kind of still that belongs to someone who has just heard something they were not ready for and is deciding what to do with it. Cy pauses its grid on her upper back, one small leg lifted, its lens irising toward you with the attentive blankness of a thing that notices changes in human behavior without fully understanding them.\n\nThen Vessin exhales. It is a slow breath, through her nose, and when it is done she turns her head far enough to look at you directly. Her eyes in the candlelight are appraising, as they always are. But there is something behind the appraisal that is not the same as pricing a salvage route. She says: that was an honest thing to say. She does not immediately say more than that. But she does not move away, and her shoulder settles a little further into your hands, a small weight she is choosing to give you rather than carry herself."
+      },
+      {
+        "player": "Ask her plainly what she thought of it — the naming, the honesty — and whether she has anything of her own she would put in the air.",
+        "summary": "Vessin answered the naming honestly — eleven years of pricing things, and this she doesn't yet know the worth of, and that is not nothing.",
+        "narration": "You ask her plainly. What did she think of it — the naming, the honesty — and whether she has anything of her own she would put in the air.\n\nVessin is quiet for a moment. Not the quiet of someone who doesn't have an answer. The quiet of someone deciding how much of it to hand over. Cy has settled into a small, warm weight between her shoulder blades, its legs still, its lens dimmed to something that reads almost like tact.\n\nShe says: she has spent eleven years making herself very good at knowing what things are worth. Salvage runs, routing components, passage agreements — she prices them, she moves on. She has not, in eleven years, sat on a drop-cloth in an alcove with someone who told her the truth about what they were feeling in the middle of telling it. She says she does not know what to do with that yet. She says she is not sure she minds.\n\nThen she turns her head fully toward you. The candlelight from the landing wall-crack catches the line of her jaw and the half-undone pin in her hair. She says, with the dry precision of someone who does not traffic in flattery: you are the strangest thing I have priced in a long time, and I have not finished pricing you. She does not move away. She says that she thinks she would like to keep talking."
       }
     ],
     "lastTurn": {
-      "narration": "The harmonic undertone is still low in the air when you let Descent open in you — not a tool aimed at Vessin, but something turned toward yourself. You name your own want aloud. You say that her shoulder under your hands is a pleasure you had not expected to feel tonight. You say that the warmth of her, the particular tension of her muscle giving way under your thumb, the way she tilted her head without self-consciousness — you have been touching people as a craft for so long that you had forgotten it could feel like this. You say it plainly, the way Descent requires. Not a performance. Just the true thing, spoken. The lattice strains around it — the substrate thin here, the craft running on something close to the bone — and there is a moment where the naming costs more than you planned for. A flicker of real exposure, the kind you cannot walk back once it is in the air.\n\nVessin goes still under your hands. Not tense — still. The kind of still that belongs to someone who has just heard something they were not ready for and is deciding what to do with it. Cy pauses its grid on her upper back, one small leg lifted, its lens irising toward you with the attentive blankness of a thing that notices changes in human behavior without fully understanding them.\n\nThen Vessin exhales. It is a slow breath, through her nose, and when it is done she turns her head far enough to look at you directly. Her eyes in the candlelight are appraising, as they always are. But there is something behind the appraisal that is not the same as pricing a salvage route. She says: that was an honest thing to say. She does not immediately say more than that. But she does not move away, and her shoulder settles a little further into your hands, a small weight she is choosing to give you rather than carry herself.",
-      "sceneSummary": "Loki named their own pleasure aloud through Descent — the cost of real exposure, the thin lattice straining; Vessin went still and then exhaled and looked directly at them, acknowledging the honesty without quite answering it.",
+      "narration": "You ask her plainly. What did she think of it — the naming, the honesty — and whether she has anything of her own she would put in the air.\n\nVessin is quiet for a moment. Not the quiet of someone who doesn't have an answer. The quiet of someone deciding how much of it to hand over. Cy has settled into a small, warm weight between her shoulder blades, its legs still, its lens dimmed to something that reads almost like tact.\n\nShe says: she has spent eleven years making herself very good at knowing what things are worth. Salvage runs, routing components, passage agreements — she prices them, she moves on. She has not, in eleven years, sat on a drop-cloth in an alcove with someone who told her the truth about what they were feeling in the middle of telling it. She says she does not know what to do with that yet. She says she is not sure she minds.\n\nThen she turns her head fully toward you. The candlelight from the landing wall-crack catches the line of her jaw and the half-undone pin in her hair. She says, with the dry precision of someone who does not traffic in flattery: you are the strangest thing I have priced in a long time, and I have not finished pricing you. She does not move away. She says that she thinks she would like to keep talking.",
+      "sceneSummary": "Vessin answered the naming honestly — eleven years of pricing things, and this she doesn't yet know the worth of, and that is not nothing.",
       "choices": [
         {
-          "label": "Stay in the quiet after the naming — let the moment hold without filling it; see what she does next.",
+          "label": "Tell her you would like that too — and let the silence hold a moment before saying anything else.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "romantic",
+            "calm"
           ],
           "trivial": true
         },
         {
-          "label": "Ask her plainly what she thought of it — the naming, the honesty — and whether she has anything of her own she would put in the air.",
+          "label": "Use See the Made Thing quietly — read the seams of what she just built, what she left out, what is still behind the pricing.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false
+        },
+        {
+          "label": "Put something of your own in the air in return — tell her one true thing about where you came from and why you are here.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
@@ -267,55 +285,39 @@
           "trivial": false
         },
         {
-          "label": "Return your hands to her shoulders and work the silence into something instead of words — let the contact answer for you.",
+          "label": "Ask her the thing she hasn't said yet — the reasons she came to the Half-Cathedral tonight, the thing she hasn't fully worked out.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use The Better Story — offer her a frame for what just happened between you, something that makes it less exposed and more like something that was always possible.",
-          "attribute": "mental",
-          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "romantic",
-            "comfort"
+            "study",
+            "persuade"
           ],
-          "abilityId": "the_better_story",
-          "energyCost": 1,
           "trivial": false
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -6
-      },
       "scene": {
-        "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight from the landing wall-crack holds steady through the open door.",
+        "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight from the landing wall-crack steady through the open door.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Turned to look at Loki directly — appraising, but with something behind the appraisal. Shoulder settled a little further into Loki's hands. Has acknowledged the honesty; has not yet answered it."
+            "state": "Turned fully toward Loki now, candlelight on her jaw and the half-undone pin in her hair — has answered, and has not moved away"
           },
           {
             "name": "Cy",
-            "state": "Paused mid-grid on Vessin's upper back, one leg lifted, lens irising toward Loki — noticing the change in human behavior without understanding it."
+            "state": "Settled between Vessin's shoulder blades, legs still, lens dimmed — quietly present"
           }
         ],
         "objects": [
           "Canvas drop-cloth spread on the alcove floor",
           "Low shelf with remaining scaffold supplies above them",
-          "Tallow candle burning in the landing wall-crack — light reaching through the open door",
+          "Tallow candle burning in the landing wall-crack — light reaching through the opening",
           "Stone stairs curling upward visible through the door",
           "The open nave beyond — quiet"
         ],
         "threads": [
-          "Vessin has acknowledged the honesty of the naming — has not yet said what it means to her or whether she has anything of her own to put in the air",
-          "The other person Vessin met — older, not-quite-human, eyes that calculated the thing behind the thing — no name, no location yet given",
+          "Vessin has said she does not know what to do with the honesty yet — and that she does not mind",
+          "She said she would like to keep talking — the invitation is open",
           "The reasons Vessin came to the Half-Cathedral tonight — not yet fully spoken",
           "The man at the posting board: long face, jaw healed crooked, grey coat with the split seam — identity not yet known",
           "What Vessin was pricing in the lower Annex, and for whom"
@@ -326,43 +328,29 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Loki named their own pleasure aloud through Descent — the real cost of it, thin and exposed. Vessin went still, exhaled, turned to look at them directly. Acknowledged the honesty with 'that was an honest thing to say.' Did not move away. Shoulder settled further into Loki's hands.",
+          "note": "Answered plainly — eleven years of pricing things, and this she doesn't yet know the worth of. Said she would like to keep talking. Turned fully toward Loki and did not move away.",
           "learned": [
-            "Loki's honesty through Descent landed as something real — she did not dismiss it or deflect from it"
+            "She has made herself very good at knowing what things are worth — and this situation sits outside that skill in a way she doesn't yet know how to name"
           ],
           "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Seated beside Loki in the storage alcove, shoulder warm against theirs — has acknowledged an honest naming and is sitting with it."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "vessin-tallow-bark",
-          "label": "Vessin Tallow-bark",
-          "kind": "person",
-          "entityId": "vessin-tallow-bark",
-          "fact": "When Loki named their own pleasure plainly through Descent, Vessin went still and then acknowledged it directly — 'that was an honest thing to say.' She did not deflect or move away. What she thinks of it beyond the acknowledgment is not yet said.",
-          "links": [
-            "grovehome",
-            "the-half-cathedral"
-          ]
+          "statusNote": "Seated beside Loki in the storage alcove, fully turned toward them — has opened something of her own, and is staying"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a charged moment of honesty and quiet aftermath"
+        "why": "a quiet exchange in the alcove — a short beat"
       }
     },
     "sceneState": {
-      "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight from the landing wall-crack holds steady through the open door.",
+      "setting": "The dry storage alcove off the eastern tower landing — small, stone-walled, one entrance. Deep night. Candlelight from the landing wall-crack steady through the open door.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Turned to look at Loki directly — appraising, but with something behind the appraisal. Shoulder settled a little further"
+          "state": "Turned fully toward Loki now, candlelight on her jaw and the half-undone pin in her hair — has answered, and has not mov"
         },
         {
           "name": "Cy",
-          "state": "Paused mid-grid on Vessin's upper back, one leg lifted, lens irising toward Loki — noticing the change in human behavior"
+          "state": "Settled between Vessin's shoulder blades, legs still, lens dimmed — quietly present"
         }
       ],
       "objects": [
@@ -373,8 +361,8 @@
         "The open nave beyond — quiet"
       ],
       "threads": [
-        "Vessin has acknowledged the honesty of the naming — has not yet said what it means to her or whether she has anything of her own to put in the air",
-        "The other person Vessin met — older, not-quite-human, eyes that calculated the thing behind the thing — no name, no location yet given",
+        "Vessin has said she does not know what to do with the honesty yet — and that she does not mind",
+        "She said she would like to keep talking — the invitation is open",
         "The reasons Vessin came to the Half-Cathedral tonight — not yet fully spoken",
         "The man at the posting board: long face, jaw healed crooked, grey coat with the split seam — identity not yet known",
         "What Vessin was pricing in the lower Annex, and for whom"
@@ -805,9 +793,8 @@
         "locationId": "grovehome",
         "day": 1
       },
-      "relationship": 7,
+      "relationship": 8,
       "history": [
-        "[d2] Agreed to follow Loki out of the open nave — sheathed the knife, but kept the decision on her own terms. Not a full yes; a yes to moving.",
         "[d2] Followed Loki into the eastern tower landing; settled with her back to the wall where she can watch both exits. Knife sheathed. Present and cautious.",
         "[d2] Chose the alcove herself — read the space fully before settling, back to the wall, drop-cloth down. Now asking who sent the aggressor.",
         "[d2] Loki named her real want — not the attacker's name, but whether Loki was worth knowing — and she acknowledged it with a plain yes and then refocused: asked for the answers and said 'then we'll see.'",
@@ -816,23 +803,24 @@
         "[d2] Moved without hesitation to sit beside Loki — shoulder to shoulder against the stone. Said yes plainly, without sentiment. Settled in and began describing the man in the grey coat.",
         "[d2] Gave the physical description of the man at the posting board while Loki worked the tension from her shoulders and Cy walked its precise grid along her back. Tipped her head into the pressure without self-consciousness. The description was clean and precise — four seconds of profile, held the way…",
         "[d2] Accepted the harmonic offer without hesitation — body released a held tension, began to speak of eleven years of salvage pricing, the Rootkin's record-keeping, and a person she met once who moved like Loki does.",
-        "[d2] Loki named their own pleasure aloud through Descent — the real cost of it, thin and exposed. Vessin went still, exhaled, turned to look at them directly. Acknowledged the honesty with 'that was an honest thing to say.' Did not move away. Shoulder settled further into Loki's hands."
+        "[d2] Loki named their own pleasure aloud through Descent — the real cost of it, thin and exposed. Vessin went still, exhaled, turned to look at them directly. Acknowledged the honesty with 'that was an honest thing to say.' Did not move away. Shoulder settled further into Loki's hands.",
+        "[d2] Answered plainly — eleven years of pricing things, and this she doesn't yet know the worth of. Said she would like to keep talking. Turned fully toward Loki and did not move away."
       ],
       "knownFacts": [
-        "The man in the lower Annex hired the stranger with a false charge — that Loki had pulled something sealed from the Deep.",
         "Loki's read: the threat was meant to slow or frighten, not to kill.",
         "Vessin saw the man's face for a moment when he turned — she can describe it",
         "The man at the posting board: long face, jaw healed crooked on the right side, hair pulled back and not fresh, grey coat with the split seam on the left shoulder — did not touch the board, only read…",
         "Has been pricing salvage runs for eleven years",
         "Came to Grovehome specifically because the Rootkin keep records and do not lie",
         "Came to the Half-Cathedral tonight for reasons she has not fully worked out",
-        "Loki's honesty through Descent landed as something real — she did not dismiss it or deflect from it"
+        "Loki's honesty through Descent landed as something real — she did not dismiss it or deflect from it",
+        "She has made herself very good at knowing what things are worth — and this situation sits outside that skill in a way she doesn't yet know how to name"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated beside Loki in the storage alcove, shoulder warm against theirs — has acknowledged an honest naming and is sitting with it.",
+      "statusNote": "Seated beside Loki in the storage alcove, fully turned toward them — has opened something of her own, and is staying",
       "domains": {
         "primary": "rootkin"
       },
@@ -1171,7 +1159,7 @@
     "lastSharedReadAt": "2026-08-01T21:43:30.515Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -2122,24 +2110,25 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.4487570813075026,
-    "cerebral": 12.122401942565094,
-    "social": 22.51436337074277,
-    "strategic": 8.613628193531987,
-    "cautious": 6.863837508337454,
-    "amorous": 9.61490521618106,
-    "generous": 5.369408273587922,
-    "ruthless": 0.6026959777528286,
-    "risky": 1.8485513655183552,
-    "patient": 0.5048061344573873,
-    "deception": 0.5876204882136226
+    "devotion": 1.412538154274815,
+    "cerebral": 11.819341894000967,
+    "social": 22.9515042864742,
+    "strategic": 8.398287488693688,
+    "cautious": 6.692241570629018,
+    "amorous": 10.374532585776533,
+    "generous": 5.2351730667482235,
+    "ruthless": 0.5876285783090078,
+    "risky": 1.8023375813803963,
+    "patient": 0.49218598109595263,
+    "deception": 0.572929976008282
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
-    "orator"
+    "orator",
+    "charmer"
   ],
-  "actionCount": 105,
+  "actionCount": 106,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2448,8 +2437,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785620928231,
-  "rev": 376,
+  "updatedAt": 1785621094862,
+  "rev": 377,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3219,7 +3208,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 54
+    "the_quickwood": 55
   },
   "opLossPending": false,
   "sessions": [
@@ -3274,10 +3263,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T21:48:48.230Z",
+      "lastAt": "2026-08-01T21:51:34.861Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 20
+      "beats": 21
     }
   ],
   "establishedFacts": [
@@ -3315,17 +3304,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 123,
-    "choices": 123,
+    "sceneSummary": 124,
+    "choices": 124,
     "characterDeltas": 52,
-    "scene": 123,
+    "scene": 124,
     "placeUpdates": 17,
     "codexUpdates": 84,
-    "timeOps": 114,
+    "timeOps": 115,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 95,
+    "npcUpdates": 96,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3339,7 +3328,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 123,
+  "_opTurns": 124,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

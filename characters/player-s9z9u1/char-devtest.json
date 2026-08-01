@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 72,
+  "energy": 57,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -118,122 +118,144 @@
         "player": null,
         "summary": "Loki reads the keeper mid-reset — the arm wants another strike.",
         "narration": "The keeper's weight is wrong for someone who has just missed. The right shoulder has already begun its return arc — that arm wants to go again, and soon. The feet say it plainly: they are squared, not braced, already angling for the next commit."
+      },
+      {
+        "player": null,
+        "summary": "The keeper of the toll yields — the arm drops, the challenge ends, and the sapling stays in the ground.",
+        "narration": "The keeper's right arm comes again — faster than the first, aimed lower, the tell of someone who has recalibrated and committed. You bring your guard up and catch the blow on the outside of your forearm, angling just enough that the force skids off and takes nothing with it. The impact rings up through your arm but you are still standing exactly where you chose to stand.\n\nNeither of you moves for a moment. The orchard holds its breath around you — the gate post, the fresh-turned earth, the little marker stake still catching the last of the light. Then something goes out of the keeper's shoulders. Not all at once. Like a rope that has been cut and is only now realizing it.\n\n\"Enough,\" the keeper says, and the word sounds like it cost them something. They step back one pace, then two, and their right arm drops to their side. They look at the sapling — at the tamped earth, at the stake — and then they look away, toward the lower lane, as though they are counting something in their head that no longer adds up the way it did.\n\nOssivyn Tallow has not moved from the gate post. The record book is still under their arm. They watch the keeper go quiet, and they say nothing — but they write something down."
       }
     ],
     "lastTurn": {
-      "narration": "The keeper's weight is wrong for someone who has just missed. The right shoulder has already begun its return arc — that arm wants to go again, and soon. The feet say it plainly: they are squared, not braced, already angling for the next commit.",
-      "sceneSummary": "Loki reads the keeper mid-reset — the arm wants another strike.",
+      "narration": "The keeper's right arm comes again — faster than the first, aimed lower, the tell of someone who has recalibrated and committed. You bring your guard up and catch the blow on the outside of your forearm, angling just enough that the force skids off and takes nothing with it. The impact rings up through your arm but you are still standing exactly where you chose to stand.\n\nNeither of you moves for a moment. The orchard holds its breath around you — the gate post, the fresh-turned earth, the little marker stake still catching the last of the light. Then something goes out of the keeper's shoulders. Not all at once. Like a rope that has been cut and is only now realizing it.\n\n\"Enough,\" the keeper says, and the word sounds like it cost them something. They step back one pace, then two, and their right arm drops to their side. They look at the sapling — at the tamped earth, at the stake — and then they look away, toward the lower lane, as though they are counting something in their head that no longer adds up the way it did.\n\nOssivyn Tallow has not moved from the gate post. The record book is still under their arm. They watch the keeper go quiet, and they say nothing — but they write something down.",
+      "sceneSummary": "The keeper of the toll yields — the arm drops, the challenge ends, and the sapling stays in the ground.",
       "choices": [
         {
-          "label": "Answer the strike with sound — push them off their line before the arm can unwind again.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
-          "intentTags": [
-            "defend",
-            "attack"
-          ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 8,
-          "trivial": false
-        },
-        {
-          "label": "Step into the gap and press with the hunter's read — meet them before they reset fully.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "attack",
-            "risky"
-          ],
-          "abilityId": "hunters_strike",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Hold ground and speak — name what you see out loud, again, and let the certainty in your voice do the work.",
+          "label": "Ask the keeper plainly: who sent them, and what were they paid to guard this gate against.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "defend"
+            "persuade"
           ],
-          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Step back toward Ossivyn and the gate — break the geometry of the fight without striking.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Turn to Ossivyn — ask what they just wrote in the record book, and whether they know this keeper's name.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "defend",
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Prism Sight to read what the keeper is looking at in the lower lane — heat-traces on the road, a direction someone came from, a waiting figure.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Let the keeper go without a word — watch which way they walk, then follow at a distance.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
             "careful"
           ],
-          "abilityId": null,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
+        "setting": "The Slow Orchard, planting gate — evening, long golden light fading through old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last of the light. Mud underfoot.",
         "npcsPresent": [
           {
             "name": "Ossivyn Tallow",
-            "state": "Pressed against the gate post, record book under one arm, watching without speaking."
+            "state": "Pressed against the gate post, record book open, writing something — watching the keeper."
           },
           {
             "name": "Cy",
-            "state": "Motionless at Loki's left heel, lens tracking the keeper."
+            "state": "Motionless at Loki's left heel, lens tracking the keeper's retreat."
           },
           {
             "name": "The Keeper of the Toll",
-            "state": "Squared up, right shoulder coming back, feet repositioning — resetting for another strike."
+            "state": "Stepped back two paces, right arm dropped, looking toward the lower lane — quiet, recalculating."
           }
         ],
         "objects": [
           "Freshly-planted sapling in tamped earth",
           "Small unlabeled iron marker stake driven beside the root base",
-          "Closed record book (carried by Ossivyn)",
+          "Closed record book (carried by Ossivyn, now open)",
           "Gate post with newly-straightened hinge"
         ],
         "threads": [
-          "The keeper is resetting — the arm wants to go again.",
+          "The keeper yielded but hasn't explained who sent them or why.",
           "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed.",
+          "Ossivyn wrote something in the record book just now — unknown what.",
           "The regulator signal moving downstream — no one upstream knows to expect it.",
           "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing."
         ]
       },
       "characterDeltas": {
-        "health": 0,
-        "energy": 0
+        "energy": -5
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "keeper-of-the-toll",
+          "name": "The Keeper of the Toll",
+          "note": "Yielded after the second exchange — arm dropped, stepped back, looked toward the lower lane. Did not explain themselves.",
+          "status": "active",
+          "statusNote": "Yielded at the orchard gate; standing two paces back, quiet and recalculating.",
+          "relationshipDelta": 1
+        },
+        {
+          "op": "update",
+          "npcId": "ossivyn-tallow",
+          "name": "Ossivyn Tallow",
+          "note": "Watched the whole exchange without speaking; wrote something in the record book when the keeper yielded.",
+          "status": "active",
+          "statusNote": "Present at the orchard gate; record book now open, something just written."
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short exchange — the toll-contest resolved in a handful of minutes."
       }
     },
     "sceneState": {
-      "setting": "The Slow Orchard, planting gate — evening, long golden light through the old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last light. Mud underfoot from the recent watering.",
+      "setting": "The Slow Orchard, planting gate — evening, long golden light fading through old branches, cool early-spring air. The sapling is in the ground; the marker stake catches the last of the light. Mud underfoot.",
       "npcsPresent": [
         {
           "name": "Ossivyn Tallow",
-          "state": "Pressed against the gate post, record book under one arm, watching without speaking."
+          "state": "Pressed against the gate post, record book open, writing something — watching the keeper."
         },
         {
           "name": "Cy",
-          "state": "Motionless at Loki's left heel, lens tracking the keeper."
+          "state": "Motionless at Loki's left heel, lens tracking the keeper's retreat."
         },
         {
           "name": "The Keeper of the Toll",
-          "state": "Squared up, right shoulder coming back, feet repositioning — resetting for another strike."
+          "state": "Stepped back two paces, right arm dropped, looking toward the lower lane — quiet, recalculating."
         }
       ],
       "objects": [
         "Freshly-planted sapling in tamped earth",
         "Small unlabeled iron marker stake driven beside the root base",
-        "Closed record book (carried by Ossivyn)",
+        "Closed record book (carried by Ossivyn, now open)",
         "Gate post with newly-straightened hinge"
       ],
       "threads": [
-        "The keeper is resetting — the arm wants to go again.",
+        "The keeper yielded but hasn't explained who sent them or why.",
         "The man in the lower Annex who paid for the false charge against Loki — unnamed, unaddressed.",
+        "Ossivyn wrote something in the record book just now — unknown what.",
         "The regulator signal moving downstream — no one upstream knows to expect it.",
         "A tree planted three hundred years ago said to be nearly ready to fruit — and its person missing."
       ]
@@ -267,7 +289,7 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 13
+    "turnsSinceOffer": 14
   },
   "bio": null,
   "subAttributes": {
@@ -311,162 +333,9 @@
   "actionCount": 3,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785613759500,
-  "rev": 82,
-  "activeEncounter": {
-    "defId": "re-enc_the_toll_keeper",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-enc_the_toll_keeper",
-      "type": "duel",
-      "status": "active",
-      "round": 2,
-      "log": [
-        "r1: reveal vs strike → momentum 0",
-        "r1: reveal vs shield → momentum 4",
-        "r1: reveal vs strike → momentum 10",
-        "r2: reveal vs shield → momentum 10"
-      ],
-      "opponentHealth": 6,
-      "tactic": null,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "name": "the keeper of the toll",
-        "attributes": {
-          "practical": 3,
-          "physical": 3,
-          "mental": 3,
-          "social": 3
-        },
-        "energy": 88,
-        "maxEnergy": 88,
-        "tacticTags": [
-          "hold-the-line",
-          "name-a-price",
-          "read-you"
-        ],
-        "skills": [
-          {
-            "function": "strike",
-            "name": "a hard strike",
-            "tier": 2,
-            "attribute": "practical"
-          },
-          {
-            "function": "shield",
-            "name": "a raised guard",
-            "tier": 2,
-            "attribute": "practical"
-          }
-        ],
-        "synthesized": true
-      },
-      "momentum": 9.5,
-      "opponentEnergy": 42,
-      "turn": {
-        "phase": "action",
-        "sel": {
-          "sense": [
-            8
-          ],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 7,
-        "bonusEarned": true,
-        "senseDone": true,
-        "senseLine": "You read with Size them up (Wits) — success. You have the read (+7 to your action). The opening is there — you have earned a BONUS action. You read the keeper of the toll: they favour strike. Pick a craft that answers it.",
-        "readPayoff": "You read the keeper of the toll: they favour strike. Pick a craft that answers it."
-      },
-      "effects": [
-        {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 3,
-          "roundsLeft": 2,
-          "applies": "always",
-          "side": "player",
-          "source": "Size them up (Wits)",
-          "from": "player"
-        },
-        {
-          "kind": "guard",
-          "label": "guard up",
-          "value": 4,
-          "roundsLeft": 2,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "source": "a raised guard",
-          "from": "opponent"
-        }
-      ],
-      "pressure": {
-        "player": 0,
-        "opponent": 1
-      },
-      "spent": {
-        "player": false,
-        "opponent": false
-      },
-      "lastOppFn": "shield",
-      "lastOppReceipt": {
-        "roll": 42,
-        "chance": 75,
-        "degree": "success",
-        "action": {
-          "attribute": "practical",
-          "abilityLevel": 2,
-          "label": "a raised guard",
-          "axes": {}
-        },
-        "breakdown": {
-          "components": [
-            {
-              "label": "practical 3",
-              "value": 60
-            },
-            {
-              "label": "ability rank 2",
-              "value": 10
-            },
-            {
-              "label": "surge",
-              "value": 10
-            },
-            {
-              "label": "momentum (you're on the back foot)",
-              "value": -5
-            }
-          ],
-          "total": 75,
-          "clampedFrom": null,
-          "base": "practical",
-          "opposed": null
-        },
-        "rawChance": 75,
-        "margin": 33,
-        "matchup": 0,
-        "intensity": "surge",
-        "tier": 2,
-        "function": "shield",
-        "name": "a raised guard",
-        "effectMods": [],
-        "woven": null
-      },
-      "lastReadWasSense": true,
-      "senseTierEarned": 2,
-      "senseResist": {
-        "value": 9,
-        "label": "their natural guardedness",
-        "from": "passive"
-      }
-    }
-  },
+  "updatedAt": 1785613835989,
+  "rev": 91,
+  "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
       "schemaVersion": 1,
@@ -561,7 +430,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 13
+    "valley": 14
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -569,10 +438,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T19:49:19.500Z",
+      "lastAt": "2026-08-01T19:50:35.989Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 13
+      "beats": 14
     }
   ],
   "establishedFacts": [
@@ -597,20 +466,21 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 9,
-    "choices": 9,
-    "scene": 9,
+    "sceneSummary": 10,
+    "choices": 10,
+    "scene": 10,
     "stateOps": 1,
-    "characterDeltas": 5,
-    "timeOps": 4,
+    "characterDeltas": 6,
+    "timeOps": 5,
     "sceneEnded": 1,
-    "encounterOps": 2
+    "encounterOps": 2,
+    "npcUpdates": 1
   },
-  "_opTurns": 9,
+  "_opTurns": 10,
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "sonic_resonance": 4,
+      "sonic_resonance": 5,
       "hunters_strike": 1
     },
     "coActivations": {},

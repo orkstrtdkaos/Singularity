@@ -1,0 +1,50 @@
+{
+ "schemaVersion": 1,
+ "id": "encounter_kind_voice",
+ "kind": "content",
+ "note": "AEVI-247-AUTHOR (Aevi 2026-07-27): the per-kind VOICE for SNG-247. CCode shipped the engine with plain placeholder labels awaiting this. Each kind's pressure/outcome text in its OWN register - a puzzle's static resistance reads as a thing yielding to understanding (not a foe tiring); a chase reads as wind and ground; the static antagonist resists unmoving. CCode merges these onto engine.kinds.{kind}.pressureLabel/outcomes and engine.staticAntagonist.resistLabel. Token {them} = the opponent/thing.",
+ "staticAntagonist": {
+  "resistLabel": "it holds — not fighting you, simply made to hold, and made well",
+  "giveNote_voice": "each thing you understand about it is give taken out of it; it does not tire, it YIELDS — the door was always going to open for whoever read it right",
+  "degreeVoice": {
+   "crit": "the whole order comes clear at once — it has no answer to being understood",
+   "success": "a piece gives — you feel the thing loosen toward you",
+   "partial": "it holds, but you've learned the shape of how",
+   "failure": "it holds, and closes a little — it has taken your measure now"
+  }
+ },
+ "kinds": {
+  "puzzle": {
+   "pressureLabel": {
+    "player": "the sealed thing gives you nothing back — an approach fails, and you've spent effort learning it was the wrong one",
+    "opponent": "a piece of the order comes clear — {them} loosens toward you, one understanding closer to open"
+   },
+   "outcomes": {
+    "opponentYields": "the last of it gives — {them} opens on what it kept, and it was always going to be whoever read it right",
+    "playerBreaks": "you're spent on it — the thing stays sealed, and it has learned you now; come back warier or leave it to its keeping",
+    "note": "a puzzle is UNDERSTOOD, not beaten - the voice is yielding-to-comprehension, never a foe defeated"
+   }
+  },
+  "chase": {
+   "pressureLabel": {
+    "player": "{them} closes — the gap shrinks the wrong way and your wind goes with it",
+    "opponent": "you open the gap — {them} is losing you, breath by hard breath"
+   },
+   "outcomes": {
+    "opponentYields": "{them} falls off the pace — blown, or beaten to the ground you needed; either way, clear",
+    "playerBreaks": "your wind goes — {them} runs you down, or you lose them and the thing you were chasing both; if you were fleeing a fight, it's on you again",
+    "note": "a chase is WIND and GROUND, never blood - the voice is breath, distance, the pace giving out"
+   }
+  },
+  "standoff": {
+   "note": "CCode already voiced standoff's pressureLabel well; this refines the OUTCOMES to match the composure register.",
+   "outcomes": {
+    "opponentYields": "{them}'s certainty gives — they stand aside, or grant the point; not beaten, PERSUADED, and they'll remember it went to you clean",
+    "playerBreaks": "your position collapses — you've lost the exchange, and {them} holds the ground you were contesting; nothing was laid a hand on, and you feel it anyway",
+    "note": "a standoff takes COMPOSURE and cannot hurt you - the voice is will, certainty, the exchange tilting"
+   }
+  }
+ },
+ "howCCodeUses": "merge staticAntagonist.resistLabel + degreeVoice onto engine.staticAntagonist; merge each kinds.{k}.pressureLabel + outcomes onto engine.kinds.{k}. These REPLACE the plain CCode placeholders. Token {them} filled with the opponent/thing name. The mechanics (numbers, bands) are CCode's and unchanged - this is voice only.",
+ "designNote": "The four items CCode flagged (per-kind voice) resolve to: 1) puzzle reads as yielding-to-understanding not a foe tiring; 2) chase reads as wind/ground/pace; 3) standoff outcomes read as composure/persuasion; 4) the static antagonist reads as HOLDING (made to hold, made well) and YIELDING to comprehension, never fighting. Each kind sounds like ITSELF - the whole point of SNG-247."
+}

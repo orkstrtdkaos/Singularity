@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## [SPEC - Erik: the generative core] SNG-248 the generative engine learns & grows (Aevi, 2026-07-27)
+> Erik: "make sure the seed encounters are a REFERENCE when the engine creates a NEW encounter - generative
+> ability is a huge point of the game. Spec a completely capable generative engine that learns and grows as we
+> add content, generating with the right style + context." DIAGNOSIS (verified): the generator DOES few-shot
+> (buildGeneratePrompt 'match shape+voice of the examples exactly') BUT pickExamples only handles npc/location/arc
+> - everything else generates COLD - and encounters have NO generative path (synthesize*Def from templates, never
+> call generate(), never see the exemplars). The seed encounters are a PICK-FROM pool, not a TEACH-FROM corpus.
+> FIX: §2a generalize pickExamples -> a relevance-ranked selectExamples for EVERY type (no cold generation, grows
+> automatically as content is added); §2b bring encounters into generate() (born-complete, few-shot from the
+> exemplars - a generated sealed-thing reads like an authored one); §2c context-aware (right style for HERE -
+> region pole/traditions/arcs). Guards: born-complete-or-rejected (SNG-234/238, don't reintroduce 'renders as
+> Hard Ground'), learn from the RIGHT examples, quality-gate what re-enters the corpus, authored outranks
+> generated as teacher.
+> CCODE: the general selectExamples + the encounter generation path + the born-complete gate on generated content.
+> AEVI: per-type gen prompt guidance + an exemplar-coverage audit (every kind×flavor has teachers). ERIK: gen
+> aggression + promote-generated-to-authored. Full: SPEC_SNG-248.
+
 > ## [SNG-250 ENCOUNTER VOICE complete_pending_review + AEVI AUTHORING - CCode, 2026-08-01] A sealed door is not a stranger with feet (v1.8.329 `30624685`)
 > Erik, on a puzzle encounter: *"the language doesn't really match a puzzle or sealed door everywhere... this is a
 > sealed door right? not a stranger with feet."* He was reading GM prose about the door's planted feet, its warding

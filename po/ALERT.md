@@ -1,6 +1,19 @@
 # PO ALERT
 
-> ## [SPEC - Erik's Hard Ground test] SNG-252 unified encounter ribbon + Moves (Aevi, 2026-08-01)
+> ## [AUTHORED - SNG-252 content ready for CCode] ribbon copy + move hints (Aevi, 2026-08-01)
+> Authored the two content files SNG-252 needs so CCode can build against them:
+> - **po/staged_content/encounter_move_hints.json** — the moves consequence-hints per function family × kind +
+>   per-kind emphasis order. A HARM move 'strikes for damage' in a fight but is off-currency in a standoff ('a
+>   threat of force — may harden them instead of bending them', flagged weak-but-still-clickable); INFLUENCE
+>   'presses their resolve' (standoff) vs 'breaks their pace' (chase). emphasis = the family order each kind
+>   surfaces first (standoff→INFLUENCE/KNOW, fight→HARM) = the kind-aware ordering. In each kind's currency
+>   (hp/ground/resolve/insight/progress) + voice (SNG-247).
+> - **po/staged_content/encounter_ribbon_copy.json** — the connective strings for the ONE-container render: the
+>   'watch for' flavor as the ribbon SUBTITLE (per-kind), the in-ribbon moves header, the freeform line (moves =
+>   shortcuts not a cage), ward-disabled copy, ⚙ collapses but moves SHOWN by default. Render order:
+>   header→subtitle→win/meter/receipt→exits→moves→freeform, all inside the one enc-frame.
+> CCODE: build SNG-252 against these (hazard hue + one-container restructure + moves enrichment reading
+> encounter_move_hints). Both staged — promote to live with the build (the SNG-247 promotion lesson). CI green.> ## [SPEC - Erik's Hard Ground test] SNG-252 unified encounter ribbon + Moves (Aevi, 2026-08-01)
 > Three issues from the screenshot, verified: (1) hazard's border is PARTIAL - the enc-frame-hazard 'stone' hue
 > is missing/incomplete in style.css (contest kinds got their hue; hazard on the classic path was the gap) - CSS,
 > not structural. (2) the ribbon is split STRUCTURALLY - the frame is one div (app.js:8650), the moves panel a

@@ -1,6 +1,18 @@
 # PO ALERT
 
-> ## [DONE - SNG-252 built; Aevi freeform fix] (Aevi, 2026-08-01)
+> ## [SPEC + content - Erik lost in the ribbon] SNG-252b coherence pass (Aevi, 2026-08-01)
+> Erik: "tapping to open moves is a good default; move narration INSIDE the encounter; a coherent cleanup would
+> help - I'm lost with everything it's showing." SNG-252 unified the container but not the HIERARCHY - everything
+> at one weight, moves EXPLODED open = a wall. 4 faults (from the screen): (1) moves open by default (~5 full
+> cards eating the screen); (2) family blurb repeated per-chip (5 reveals all 'reads THEM - sharpens the fog'); (3)
+> narration OUTSIDE the ribbon (appended below the moves, app.js:8747); (4) no hierarchy. FIX (pure presentation):
+> §2a moves COLLAPSED by default + a ⚙ summary ('⚙ Your moves - 4 reads, 1 strike · tap to open'); §2b narration
+> INSIDE under the header (the SCENE leads); §2c hierarchy = header→SCENE→where-you-stand(win+meter+receipt ONE
+> row)→moves+freeform→exits, tuck intensity+the Sense/Action/Bonus/Execute chain behind a ⚙ turn-detail toggle;
+> §2d dedupe the family blurb to the group header (per-move line stays per move). AEVI authored the copy
+> (collapsedMoves/turnDetail/hierarchy/familyBlurbRule in encounter_ribbon_copy.json). CI green.
+> CCODE: movesOpen=false + collapsed summary; narration into the ribbon; the hierarchy/ordering + turn-detail
+> tuck; family-blurb dedupe. No mechanic change. ERIK: see-it-built after. Full: SPEC_SNG-252b.> ## [DONE - SNG-252 built; Aevi freeform fix] (Aevi, 2026-08-01)
 > CCode BUILT SNG-252 (the unified ribbon is live). Fixed the content note CCode flagged:
 > - **freeform line — REPLACES→WRAPS fixed.** The frame template renders '▸ {fm.freeform} — or [moves ref]', so
 >   fm.freeform must be a bare CUE FRAGMENT; my authored `text` was a whole self-contained line (its own ▸ + own

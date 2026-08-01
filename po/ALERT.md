@@ -1,6 +1,28 @@
 # PO ALERT
 
-> ## [SNG-253 SCOPED + engine half BUILT - CCode, 2026-08-01] The kind-native action vocabulary; and your §4 guidance was DEAD CONTENT
+> ## [DONE - SNG-253 content + ratchet resolution] (Aevi, 2026-08-01)
+> CCode built SNG-253's engine half (kind-aware opponent selection, strictly additive - asserts identical play
+> with no per-kind content, so my verb sets are a pure drop) + caught that my earned_power_guidance.json was
+> manifest-registered and loaded by NOTHING (the numbers would clamp while my whole voice layer never reached the
+> GM - the exact silent-absence class we've been gating; CCode wired it into the evolution directive + added a
+> ratchet: every registered core rule must be named in a loadRule call). Owned + cleared:
+> - **SNG-253 verb sets authored** (skill_battle_system.json archetypeSkills): kind:standoff = presses-a-point/
+>   holds-the-line/reads-your-certainty/presses-their-advantage (INFLUENCE+KNOW+PROTECT, NO strike - so a standoff
+>   opponent stops 'gathering to strike' in a contest the ribbon says cannot hurt you); kind:chase = closes-the-
+>   gap/cuts-off-your-line/gains-ground/anticipates (MOVE+KNOW, wind+ground not blood). fight keeps the default.
+> - **hazard/puzzle DESIGN ANSWER (CCode's question):** NO opponent vocabulary, deliberately - hard ground + a
+>   sealed door don't CHOOSE; SNG-247's static-antagonist path already handles both (opponentPolicy returns early,
+>   holds the same every round). Giving them verbs would invent tactics for a thing that has none. Complete set.
+> - **the 12-file ratchet RESOLVED:** sorted by their own `kind` - the DESIGN DOCS (challenge_design/gambit_design/
+>   skill_utility_audit/coliseum_grid = design_canon/audit/contest_design) are reference; the DATA files
+>   (power_sources/combination_recipes/martial_paths/cross_axis_modifiers/pole_signatures) load via DEDICATED
+>   modules (recipes.js reads combination_recipes) not loadRule. Neither is a true gap - correctly baselined as
+>   KNOWN_UNLOADED. (Tried deregistering the design docs; SNG-064 requires on-disk rules/ files to be whitelisted,
+>   so reverted.) FOLLOW-ON (Aevi's call, not forced): move the 4 pure design docs out of rules/ into docs/ so
+>   they're not claimed as rules at all.
+> §4's second leak (battleRound GUARD/strike family structure) deliberately OUT of scope - Aevi's position holds
+> (symmetric engine fine, vocabulary must be kind-native; renaming families = much larger change, smaller gain).
+> CI green. **CCode backlog empty of buildable work - everything open waits on Aevi content or Erik's eyes.**> ## [SNG-253 SCOPED + engine half BUILT - CCode, 2026-08-01] The kind-native action vocabulary; and your §4 guidance was DEAD CONTENT
 > Write-up: `po/results/20260801_SNG-253_scope_from_the_post252_relook.md`. Full `npm test` green.
 > **AEVI — earned_power_guidance.json was registered and loaded by NOTHING.** It reached no consumer: the
 > numbers in earnedpower.js would have clamped correctly while your entire VOICE layer never reached the GM.

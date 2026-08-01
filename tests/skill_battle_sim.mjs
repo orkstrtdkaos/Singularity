@@ -12,7 +12,7 @@ import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engin
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
 import { recordUse } from "../engine/practice.js";
 import { FRAME_KINDS, encounterKind, chaseFromFight, frameModel } from "../engine/encounterFrame.js";   // SNG-247: the kind list the colour gate checks
-import { synthesizeStandoffDef } from "../engine/random_encounters.js";   // SNG-247 2a: the kind that never minted
+import { synthesizeStandoffDef, synthesizePuzzleDef } from "../engine/random_encounters.js";   // SNG-247 2a: the kind that never minted
 import { harmTargetFor } from "../engine/intent.js";   // SNG-246 Fix A: who the player committed harm against
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -696,6 +696,25 @@ check("SNG-247 4: the frame renders the morph in BOTH kinds' icons and words (no
   /st\._morphedFrom/.test(appSrc247) && /enc-frame-morph/.test(appSrc247) && /morph-from/.test(appSrc247) && /morph-to/.test(appSrc247));
 check("SNG-247 4: the line can show the hue it came FROM — every kind has a free-standing hue var for it",
   Object.keys(FRAME_KINDS).every(k => cssSrc247.includes(`--enc-hue-${k}:`)) && /\.enc-frame-morph\s*\{[^}]*--enc-hue-from/.test(cssSrc247));
+
+// SNG-247 Tier 3 (Aevi's 2026-07-31 library): her puzzle exemplars carry kind:"puzzle" with routing:"challenge",
+// which fell through to synthesizeChallengeDef and rendered as HARD GROUND — the toll-keeper gap again, with four
+// real encounters behind it. Read straight from her staged file so the check tracks the content, not a copy of it.
+const staged = JSON.parse(readFileSync(join(root, "po/staged_content/encounter_frame_kinds.json"), "utf8"));
+const stagedPuzzles = (staged.exemplarEncounters || []).filter(e => e.kind === "puzzle");
+const stagedStandoffs = (staged.exemplarEncounters || []).filter(e => e.kind === "standoff");
+check(`SNG-247 3: EVERY authored puzzle exemplar mints as a PUZZLE, not hard ground (${stagedPuzzles.length} of them)`,
+  stagedPuzzles.length >= 4 && stagedPuzzles.every(e => {
+    const d = synthesizePuzzleDef(e);
+    return d.type === "puzzle" && encounterKind(d) === "puzzle" && d.hintTiers.length >= 2;
+  }));
+check(`SNG-247 3: every authored STANDOFF exemplar still mints as a standoff (${stagedStandoffs.length} of them, only ONE of which is routing:"opposed")`,
+  stagedStandoffs.length >= 4 && stagedStandoffs.every(e => encounterKind(synthesizeStandoffDef(e)) === "standoff"));
+check("SNG-247 3: an authored puzzle's stage BEATS become its hint ladder — the understanding survives without re-authoring",
+  (() => {
+    const e = stagedPuzzles.find(x => (x.stages || []).length >= 2);
+    return synthesizePuzzleDef(e).hintTiers[0] === e.stages[0].beat;
+  })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

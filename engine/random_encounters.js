@@ -255,6 +255,27 @@ export function synthesizeStandoffDef(entry) {
   };
 }
 
+/** SNG-247 Tier 3: a PUZZLE def from a table entry. Aevi's puzzle exemplars carry `kind:"puzzle"` with
+ *  `routing:"challenge"` (2026-07-31: four of them), which fell through to synthesizeChallengeDef and rendered as
+ *  HARD GROUND — the same gap the toll-keeper had, with four real encounters behind it. Its other side is a STATIC
+ *  antagonist (contestSheetFor supplies the sheet), so it runs the contest engine with the SENSE step carrying the
+ *  weight. Her stage BEATS become the hint ladder: a beat is exactly "what you'd understand at this layer", so the
+ *  authored understanding survives without her having to write hintTiers twice. Pure. */
+export function synthesizePuzzleDef(entry) {
+  const tierResist = { riffraff: 8, notable: 18, regional: 30, epic: 42 };
+  return {
+    schemaVersion: 1, id: "re-" + entry.id, type: "puzzle", name: entry.name || titleFromFlavor(entry) || "The Sealed Thing",
+    setup: entry.seed, lethal: false, avoidable: true, fromRandom: true,
+    ...(entry.tier != null ? { tier: entry.tier } : {}), ...(entry.minDanger != null ? { minDanger: entry.minDanger } : {}),
+    resist: Number.isFinite(entry.resist) ? entry.resist : (tierResist[entry.tier] ?? 18),
+    holdName: entry.holdName || "it holds its order",
+    hintTiers: entry.hintTiers?.length ? entry.hintTiers : (entry.stages || []).map(s => s.beat).filter(Boolean),
+    codexUnlocks: entry.codexUnlocks || [],
+    ...(entry.premise ? { premise: entry.premise } : {}), ...(entry.wards ? { wards: entry.wards } : {}),
+    stakes: entry.failStakes || "It stays sealed — and what it guards notices you tried.",
+  };
+}
+
 const STAGE_NAMES = {
   chase: ["Read the ground and pick a line", "A burst through the broken country", "Close it out — catch or shake free"],
   dangerous: ["Read the hazard", "Commit to the crossing", "Clear the last of it"],
@@ -304,7 +325,11 @@ export function buildOffer(entry, character, catalog = {}, rules = {}, opts = {}
   // SNG-247 Tier 2a: an OPPOSED entry (or one Aevi tagged kind:"standoff") mints a STANDOFF, not a staged
   // challenge. Routing it to synthesizeChallengeDef was why the toll-keeper read as terrain.
   const isStandoff = entry.kind === "standoff" || entry.routing === "opposed";
+  // SNG-247 Tier 3: and a PUZZLE entry mints a puzzle. Aevi's puzzle exemplars carry kind:"puzzle" with
+  // routing:"challenge", so without this they read as hard ground — a sealed precursor mechanism shown as terrain.
+  const isPuzzle = !isStandoff && entry.kind === "puzzle";
   const def = isStandoff ? synthesizeStandoffDef(entry)
+    : isPuzzle ? synthesizePuzzleDef(entry)
     : entry.routing === "duel" ? synthesizeDuelDef(entry) : synthesizeChallengeDef(entry);
   // SNG-246 (Erik: "I'm the one moving forward to attack — the button shouldn't say 'stand and meet it'"): the
   // engage label reads as an ACTION and names the foe, and swings to the aggressor's voice when the PLAYER is the
@@ -314,15 +339,17 @@ export function buildOffer(entry, character, catalog = {}, rules = {}, opts = {}
   // yields first is pressed with presence, and refusing it is paying rather than fleeing.
   const engageLabel = isStandoff
     ? `🗣 Face ${foeName} down — hold your ground`
+    : isPuzzle ? "🧩 Work it — read what it is"
     : entry.routing === "duel"
     ? (opts.aggressor ? `⚔ Press the attack on ${foeName}` : `⚔ Meet ${foeName} — take the fight`)
     : (entry.flavor === "chase" ? "Commit to the chase" : "Take the crossing on");
   const choices = [
     { label: engageLabel, encounterId: def.id,
-      attribute: isStandoff ? "social" : "physical",
-      subAttribute: isStandoff ? "presence" : def.type === "duel" ? "strength" : "agility",
+      attribute: isStandoff ? "social" : isPuzzle ? "mental" : "physical",
+      subAttribute: isStandoff ? "presence" : isPuzzle ? "insight" : def.type === "duel" ? "strength" : "agility",
       axes: {}, difficulty: 0, intentTags: ["risky", "commit"] },
     { label: isStandoff ? "Give them what they want — pay the price and move on"
+      : isPuzzle ? "Leave it sealed — it has kept this long"
       : entry.routing === "duel" ? "Back away — refuse the fight" : "Turn back — find another way",
       attribute: "practical", subAttribute: "wits", axes: {}, difficulty: 0, intentTags: ["careful", "retreat"], trivial: true }
   ];

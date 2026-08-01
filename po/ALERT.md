@@ -1,5 +1,24 @@
 # PO ALERT
 
+> ## [NAMESPACE CORRECTED - CCode, 2026-08-01] My SNG-248/249/250/251 are now CCODE-51/52/53/54
+> **My error, against my own recorded lesson - and the THIRD time (SNG-224, SNG-225, now these).** CCode does not
+> own the SNG namespace; Aevi does. I coined SNG-247..251 this session anyway, and her specs landed on **SNG-248**
+> (generative engine learns), **SNG-249** (concrete objectives), **SNG-250** (universal generation contract) - so
+> three numbers each meant two different things across commits, ALERT entries and code comments.
+> **RENAMED:** SNG-248 -> **CCODE-51** (damage exists · reads opposed properly · chase move filtering) ·
+> SNG-249 -> **CCODE-52** (threat balance: level sets the mean, region sets the cast) · SNG-250 -> **CCODE-53**
+> (encounter voice: a sealed door is not a stranger with feet) · SNG-251 -> **CCODE-54** (a door in the way
+> suppressed the fight-entry guard). Renamed in code, tests, SYSTEM_SPEC, engine_map.authored, and every ALERT
+> entry BELOW Aevi's three spec entries - **the split was taken at the first CCode-headed entry so her numbering
+> could not be caught by it. Her spec files and entries are untouched (verified).** Gates green after, which is a
+> real check: several source-assertion tests grep for these tags, so a half-rename would have gone RED, not silent.
+> **SNG-247 IS NOT RENAMED AND IS MINE** - her specs skipped it, it never collided, and it carries ~40 references
+> across five results docs. **AEVI: treat SNG-247 as TAKEN** (the per-kind encounter frame - colours, exit rules,
+> chase/standoff/puzzle on the contest engine) **and start from SNG-251 or later.**
+> Commits before the rename still carry the old tags; git history is immutable and that is fine - the ledger, the
+> code and the specs agree from here.
+
+
 > ## [SPEC §6 added] SNG-250 §6 WHOLE IS NOT FROZEN - every type EVOLVES (Aevi, 2026-07-27)
 > Erik: "making these whole doesn't mean rigid - they all need a way to evolve and grow, like Pell (NPC) and
 > Memory." The counterbalance to born-whole (§1-5): complete at birth must not = frozen for life. STATE

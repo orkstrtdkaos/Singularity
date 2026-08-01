@@ -1,5 +1,34 @@
 # PO ALERT
 
+> ## [SNG-252b BUILT complete_pending_review - CCode, 2026-08-01] Ribbon coherence: collapsed moves, scene-first, hierarchy, blurb dedupe
+> All four faults fixed, **verified live in the browser**. Full `npm test` green. Pure presentation — no mechanic
+> touched, per the §2 guard.
+> **§2a** moves COLLAPSED by default — a reversal of 252 and of Erik's own earlier ask, because seeing it built
+> changed the answer. The affordance TALLIES what is behind it ("⚙ Your moves — 1 press · 1 read · tap to open")
+> in each family's plain word, so folding them away costs no information; a bare "⚙ Moves" would make him open
+> it just to find out what he has. The freeform line stays visible either way — hiding the cards must never hide
+> the ability to act. Verified: 0 cards collapsed, 4 groups on tap.
+> **§2b** the SCENE leads. The beat is built once at the top of renderPlay and the ribbon CLAIMS it when an
+> encounter is live, with a flag so it can never render in both places.
+> **§2c** the hierarchy — header → SCENE → where-you-stand (win + stage on ONE row, not stacked bars) →
+> meter/receipt → moves + freeform → ways out, quietest and last. Intensity + the Sense→Action→Bonus→Execute
+> chain are tucked behind a turn-detail toggle that REMEMBERS its state across rounds (like the family groups),
+> because they are precise, rarely-changed controls that were sitting at the same weight as the fiction.
+> **§2d** the blurb dedupe, and the cause is worth recording: `SB_DOES` is keyed by VERB, and a family usually
+> holds several skills of one verb — that is why five REVEAL crafts each repeated "reads THEM — sharpens the
+> fog". A blurb shared by the whole group is hoisted to the group header ONCE; each row keeps only its own line.
+> Verified live: summary carries it, rows now read "finds the opening…" / "finds the pattern…" / "finds their
+> intent…". Mixed-verb groups keep per-row lines — there is nothing to hoist.
+> **Aevi's corrected freeform copy adopted** — the frame supplies the ▸ and wraps `cue` + `wrapSuffix`; thank
+> you, that composes cleanly and the doubling is gone.
+> **A note on verification:** port 8411 served a phantom "inventory.js does not provide an export named
+> deriveItem" — the export was on disk AND correct over HTTP. That is the documented internal-module cache
+> trap, not a real fault; only a NEVER-USED port clears it (8477). Flagging because it looks exactly like a
+> broken build and would cost the next person an hour.
+> **ERIK — see-it-built, and the two 252 calls fold in here:** is the order right now, or does something still
+> want to move? Mobile height (the ribbon is shorter collapsed, but the scene is in it now), and the input-row
+> ⚙ is still redundant with the in-ribbon one — Aevi leans drop the input-row one; say the word and it goes.
+
 > ## [SNG-251 BUILT complete_pending_review - CCode, 2026-08-01] Story-driven item evolution: all four gaps + the §4 economy
 > Write-up: `po/results/20260801_SNG-251_story_driven_item_evolution.md`. Full `npm test` green, 31 new smoke
 > checks, **validated against Aevi's Memory worked example** — the reference the mechanism has to reproduce.

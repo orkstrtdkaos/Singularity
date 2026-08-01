@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 4,
-  "xp": 389,
+  "xp": 392,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -66,7 +66,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.1250641093801732,
+    "spectrumId": -0.11881090391116454,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
@@ -75,7 +75,7 @@
   "maxHealth": 45,
   "health": 31,
   "maxEnergy": 115,
-  "energy": 42,
+  "energy": 37,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -140,146 +140,128 @@
         "player": null,
         "summary": "Loki arrives at the Half-Cathedral in its fourth design — scaffolded, open to the sky, two hundred years into being built, and never meant to be finished.",
         "narration": "Night has settled over Grovehome proper, but the track that cuts north along the wood's edge does not end at Grovehome. It ends at the Half-Cathedral. You have heard the name. Everyone in the valley has heard the name. The thing itself is something else. It rises from a clearing where the Quickwood's margin softens into scrub grass and old stone — four hundred years of accumulation, scaffolded in pale timber that has been replaced so many times the lumber is always fresh and the bones beneath it are not. The current design is the fourth. The second was abandoned when the Rootkin who proposed it walked into the deep wood and did not come back. The third was completed, briefly, and then declared wrong by the Conclave of 641 and disassembled with the same patience with which it had been raised. The fourth is what stands now: a ribcage of arching stone, open to the sky along the nave, its two towers finished to different heights because the eastern one was finished by a different generation with a slightly different idea of what a tower was for. Scaffolding covers the south transept in tight-lashed planks. Someone is always working on it. At this hour, in the early spring dark, two lanterns move up there like slow thought. Cy walks at your heel and its lens opens wide, reading the structure the way it reads everything — as a system, as a record, as a question about what it was made to do."
+      },
+      {
+        "player": "find an attractive woman to seduce.",
+        "summary": "A lone traveler rests at the nave's eastern edge — not scaffold crew, not Rootkin — working a stone from her boot sole and very deliberately not yet looking up.",
+        "narration": "The Half-Cathedral clears its throat around you — stone and cold air and the distant tap of someone working in the scaffold above. Cy settles against the base of a rib-arch and irises its lens closed, which is Cy's way of saying it has no filing to add.\n\nThe clearing is not empty. A woman is seated on a low run of fallen stone at the nave's eastern edge, about twenty yards from where you stand. She has her boots off and one foot in her lap — she is working a stone out of a boot-sole with a small knife, with the focused expression of someone who has decided this is the only problem in the world right now. Her coat is grey-green and practical, and her hair is pinned back in a way that has been losing the argument with the wind. She is not from the scaffold crew — no sawdust, no tool-belt. She looks like someone who walked a long road today and stopped here because here was where her feet gave out.\n\nShe has not looked up yet. But she is aware of you — she shifted her angle very slightly when you moved, and the knife slowed. You are in her peripheral vision and she is making a choice about whether to turn toward it or keep her eyes on the boot. It is, as these things go, an opening. A narrow one, a little sideways, and not yet decided. What is in her face when she does turn will depend entirely on what you do with the next thirty seconds."
       }
     ],
     "lastTurn": {
-      "narration": "Night has settled over Grovehome proper, but the track that cuts north along the wood's edge does not end at Grovehome. It ends at the Half-Cathedral. You have heard the name. Everyone in the valley has heard the name. The thing itself is something else. It rises from a clearing where the Quickwood's margin softens into scrub grass and old stone — four hundred years of accumulation, scaffolded in pale timber that has been replaced so many times the lumber is always fresh and the bones beneath it are not. The current design is the fourth. The second was abandoned when the Rootkin who proposed it walked into the deep wood and did not come back. The third was completed, briefly, and then declared wrong by the Conclave of 641 and disassembled with the same patience with which it had been raised. The fourth is what stands now: a ribcage of arching stone, open to the sky along the nave, its two towers finished to different heights because the eastern one was finished by a different generation with a slightly different idea of what a tower was for. Scaffolding covers the south transept in tight-lashed planks. Someone is always working on it. At this hour, in the early spring dark, two lanterns move up there like slow thought. Cy walks at your heel and its lens opens wide, reading the structure the way it reads everything — as a system, as a record, as a question about what it was made to do.",
-      "sceneSummary": "Loki arrives at the Half-Cathedral in its fourth design — scaffolded, open to the sky, two hundred years into being built, and never meant to be finished.",
+      "narration": "The Half-Cathedral clears its throat around you — stone and cold air and the distant tap of someone working in the scaffold above. Cy settles against the base of a rib-arch and irises its lens closed, which is Cy's way of saying it has no filing to add.\n\nThe clearing is not empty. A woman is seated on a low run of fallen stone at the nave's eastern edge, about twenty yards from where you stand. She has her boots off and one foot in her lap — she is working a stone out of a boot-sole with a small knife, with the focused expression of someone who has decided this is the only problem in the world right now. Her coat is grey-green and practical, and her hair is pinned back in a way that has been losing the argument with the wind. She is not from the scaffold crew — no sawdust, no tool-belt. She looks like someone who walked a long road today and stopped here because here was where her feet gave out.\n\nShe has not looked up yet. But she is aware of you — she shifted her angle very slightly when you moved, and the knife slowed. You are in her peripheral vision and she is making a choice about whether to turn toward it or keep her eyes on the boot. It is, as these things go, an opening. A narrow one, a little sideways, and not yet decided. What is in her face when she does turn will depend entirely on what you do with the next thirty seconds.",
+      "sceneSummary": "A lone traveler rests at the nave's eastern edge — not scaffold crew, not Rootkin — working a stone from her boot sole and very deliberately not yet looking up.",
       "choices": [
         {
-          "label": "Climb the scaffold and see the work the lanterns are doing at this hour",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Use See the Made Thing on the structure itself — read what four designs and four hundred years have actually built",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false
-        },
-        {
-          "label": "Find whoever is in the lantern-light and ask them what the fourth design is for",
+          "label": "Walk over and offer to help with the boot — plain, direct, close.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "romantic",
+            "flirt"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Sit at the base of the finished eastern tower and stay with it — let the place be what it is",
+          "label": "Say something from here first — give her a reason to look up before you close the distance.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "flirt",
+            "woo"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Read her first — what is she actually doing here, alone, at the Half-Cathedral at night?",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
+            "study",
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Settle nearby without addressing her — let her make the first move.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
       "scene": {
-        "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. The structure rises against a dark sky: open nave, two mismatched towers, south transept covered in scaffold. Two lanterns move slowly up in the timberwork.",
+        "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
         "npcsPresent": [
           {
             "name": "Unknown workers",
-            "state": "Two lanterns moving in the scaffold above the south transept — their faces not yet visible"
+            "state": "Two lanterns moving in the scaffold above the south transept — faces not visible."
+          },
+          {
+            "name": "Traveler woman",
+            "state": "Seated on fallen stone at the nave's eastern edge, boots off, working a stone from a boot-sole with a small knife — aware of Loki but has not yet looked up."
           }
         ],
         "objects": [
           "Stone rib-arches open to the sky along the nave",
           "Scaffold of pale, recently-replaced timber lashed over the south transept",
-          "Eastern tower — finished, taller; western tower — finished shorter, different generation's idea of done",
-          "Two slow-moving lanterns high in the scaffold"
+          "Eastern tower — finished, taller; western tower — finished shorter, different generation",
+          "Two slow-moving lanterns high in the scaffold",
+          "Low run of fallen stone at the nave's eastern edge"
         ],
         "threads": [
           "Who is working on the scaffold at this hour, and on which design's problem",
-          "What Cy is reading in the structure — its lens is wide open"
+          "What Cy is reading in the structure — its lens is now closed, which is a conclusion of some kind",
+          "The traveler woman at the eastern edge — aware of Loki, decision unmade"
         ]
       },
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "a lone traveler woman resting at the Half-Cathedral at night — practical coat, long road behind her, boot off, knife in hand, independent and a little guarded",
+          "why": "she appeared in the clearing as a partial result of scouting for a romantic prospect — needs a stable identity, history, and reason for being here"
+        }
+      ],
       "npcUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "the-half-cathedral",
-          "label": "The Half-Cathedral",
-          "kind": "place",
-          "fact": "In its fourth design, its second hundredth year: a ribcage of stone open to the sky, two towers finished to different heights by different generations, south transept scaffolded and always being worked. The third design was completed and then disassembled. The fourth has not been declared finished. It is not meant to be.",
-          "links": [
-            "grovehome",
-            "rootkin"
-          ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The Half-Cathedral stands north of Grovehome at the wood's edge — visited for the first time at night, its fourth design scaffolded and open-naved, always being built.",
-          "subPlace": {
-            "name": "The Half-Cathedral",
-            "parent": "Grovehome",
-            "note": "Four hundred years of construction in four designs — open to the sky, never finished, always worked on. Two mismatched towers. South transept scaffolded.",
-            "visited": true
-          }
-        }
-      ],
+      "codexUpdates": [],
+      "factUpdates": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short walk from Grovehome proper to the Cathedral clearing"
-      },
-      "offer": {
-        "thing": "The Half-Cathedral itself — in its patient, patient incompletion",
-        "from": "The player named this place and its nature; the world is honoring exactly what they said it is"
-      },
-      "imagePrompt": "A vast stone structure open to a dark spring sky — four hundred years of building, ribbed arches without a roof, two towers at different heights, fresh pale scaffold covering one transept, two lanterns moving like slow thought high in the timberwork. A small brass-legged figure watches from the ground below, its single lens wide.",
-      "scene_ended": false,
-      "sceneEnded": false,
-      "momentArt": "https://image.pollinations.ai/prompt/A%20vast%20stone%20structure%20open%20to%20a%20dark%20spring%20sky%20%E2%80%94%20four%20hundred%20years%20of%20building%2C%20ribbed%20arches%20without%20a%20roof%2C%20two%20towers%20at%20different%20heights%2C%20fresh%20pale%20scaffold%20covering%20one%20transept%2C%20two%20lanterns%20moving%20like%20slow%20thought%20high%20in%20the%20timberwork.%20A%20small%20brass-legged%20figure%20watches%20from%20the%20grou%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=93278&nologo=true"
+        "why": "a short scan of the clearing"
+      }
     },
     "sceneState": {
-      "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. The structure rises against a dark sky: open nave, two mismatched towers, south transept covered in scaffold. Two lanterns move slowly up in the timberwork.",
+      "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
       "npcsPresent": [
         {
           "name": "Unknown workers",
-          "state": "Two lanterns moving in the scaffold above the south transept — their faces not yet visible"
+          "state": "Two lanterns moving in the scaffold above the south transept — faces not visible."
+        },
+        {
+          "name": "Traveler woman",
+          "state": "Seated on fallen stone at the nave's eastern edge, boots off, working a stone from a boot-sole with a small knife — awar"
         }
       ],
       "objects": [
         "Stone rib-arches open to the sky along the nave",
         "Scaffold of pale, recently-replaced timber lashed over the south transept",
         "Eastern tower — finished, taller; western tower — finished shorter, different ge",
-        "Two slow-moving lanterns high in the scaffold"
+        "Two slow-moving lanterns high in the scaffold",
+        "Low run of fallen stone at the nave's eastern edge"
       ],
       "threads": [
         "Who is working on the scaffold at this hour, and on which design's problem",
-        "What Cy is reading in the structure — its lens is wide open"
+        "What Cy is reading in the structure — its lens is now closed, which is a conclusion of some kind",
+        "The traveler woman at the eastern edge — aware of Loki, decision unmade"
       ]
     }
   },
@@ -977,10 +959,10 @@
     ],
     "unseenNews": [],
     "lastGenCount": 787,
-    "lastSharedReadAt": "2026-08-01T19:53:47.754Z",
+    "lastSharedReadAt": "2026-08-01T19:55:26.911Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1135,6 +1117,21 @@
         },
         "addedDay": 1,
         "locationId": "the_slow_orchard"
+      },
+      {
+        "source": "threat-attack",
+        "kind": "threat-attack",
+        "subjectId": "beast_rust_choir_gnats",
+        "aimedAtPlayer": true,
+        "urgency": 2,
+        "oneLineHook": "A rust choir gnats has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
+        "becomes": {
+          "type": "encounter",
+          "encounterId": "beast_rust_choir_gnats",
+          "name": "rust choir gnats"
+        },
+        "addedDay": 1,
+        "locationId": "grovehome"
       }
     ]
   },
@@ -1881,24 +1878,24 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.172309595508664,
-    "cerebral": 15.463183046176152,
-    "social": 15.138376043692679,
-    "strategic": 9.440865936795035,
-    "cautious": 6.677981857902938,
-    "amorous": 2.8412977067159053,
-    "generous": 5.57371597393139,
-    "ruthless": 0.903700332194653,
-    "risky": 1.665196334239942,
-    "patient": 0.7569213803350267,
-    "deception": 0.8810956933593749
+    "devotion": 2.1180018556209474,
+    "cerebral": 15.076603470021748,
+    "social": 14.759916642600361,
+    "strategic": 10.204844288375158,
+    "cautious": 6.511032311455365,
+    "amorous": 3.7702652640480077,
+    "generous": 5.434373074583105,
+    "ruthless": 0.8811078238897866,
+    "risky": 1.6235664258839435,
+    "patient": 0.7379983458266509,
+    "deception": 0.8590683010253904
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 89,
+  "actionCount": 90,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2103,8 +2100,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785614064284,
-  "rev": 321,
+  "updatedAt": 1785614174149,
+  "rev": 324,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2699,7 +2696,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 35
+    "the_quickwood": 36
   },
   "opLossPending": false,
   "sessions": [
@@ -2754,10 +2751,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T19:54:24.280Z",
+      "lastAt": "2026-08-01T19:56:14.149Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 1
+      "beats": 2
     }
   ],
   "establishedFacts": [
@@ -2795,15 +2792,15 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 107,
-    "choices": 107,
-    "characterDeltas": 48,
-    "scene": 107,
+    "sceneSummary": 108,
+    "choices": 108,
+    "characterDeltas": 49,
+    "scene": 108,
     "placeUpdates": 13,
     "codexUpdates": 77,
-    "timeOps": 101,
+    "timeOps": 102,
     "offer": 10,
-    "generateRequest": 4,
+    "generateRequest": 5,
     "sceneEnded": 23,
     "npcUpdates": 81,
     "moveTo": 3,
@@ -2819,7 +2816,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 107,
+  "_opTurns": 108,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

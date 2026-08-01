@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 6,
-  "xp": 505,
+  "xp": 510,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -79,7 +79,7 @@
   "maxHealth": 55,
   "health": 55,
   "maxEnergy": 125,
-  "energy": 120,
+  "energy": 115,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -160,21 +160,77 @@
         "player": "Have her show you her breasts and talk about them and her nipples as you assess her - remove both yours and her pants as she does so.",
         "summary": "In the alcove candlelight, Vessin spoke about herself without performance and without embarrassment — reporting, as she would any fact worth knowing — while Loki removed both their trousers and she settled back, close, and asked for the verdict.",
         "narration": "She does not rush it. She holds your gaze for a moment longer, then looks down at herself with the same deliberate attention she gave the posting board this morning — the same consideration, applied to different material.\n\nShe speaks quietly. She tells you the left one sits slightly higher. She tells you the right one is more sensitive and she has always found that interesting, as a fact. She is not performing this. She is reporting, the way she reports anything worth knowing, and the candlelight catches the small curve of her mouth as she does it.\n\nYou work at your own belt while she talks. She watches your hands for a moment, then reaches for her own — unhurried, practical, the same economy of motion she brings to everything. Her trousers go first, then yours, and she settles back onto your lap with only the thin warmth of the candlelight between you. She goes quiet for a moment when she feels how close you are.\n\nThen she looks up. She asks, in that dry and careful voice, whether the assessment is still favorable."
+      },
+      {
+        "player": "hold the left up that sits a bit lower, cupping it while you ask here to describe them as she would a rare set of expensive items... then rub your palm across the right sensitive one and it's nipple while she's answering.  Move your hips below her right after and observe her reaction",
+        "summary": "Loki cupped the cooler breast and drew a palm across the right — Vessin's careful appraisal broke mid-sentence, and the shift of her weight settled closer.",
+        "narration": "You bring your left hand up and cup the lower one gently, lifting it to even. The candlelight is steady on her face as you do it.\n\nShe looks down at your hand. She makes the same small sound she made before — dry, almost a laugh, but not quite. Then she straightens her assessment the way she would straighten a report.\n\nShe says the left one tends toward the cooler side of the room. She says it holds its shape better under pressure, which she has always considered a reliable quality. She says the right one is more responsive to attention, and that this has occasionally made it difficult to appear indifferent during inspections.\n\nWhile she is still speaking, you draw your palm slowly across the right one and across the nipple. Her sentence stops in the middle of a word. Not the word she intended. You feel the small tightening under your hand.\n\nShe recovers. She finishes the sentence, almost correctly. Her voice has dropped a half-register.\n\nYou shift your hips below her — a deliberate, slow movement. Her hands come down to your thighs, not gripping, just landing there. She lets out a breath she was holding without knowing she was holding it. Her weight settles more fully against you, and she stops mid-appraisal to look at your face again — steady, but the calculation is not running the way it usually does."
       }
     ],
     "lastTurn": {
-      "narration": "She does not rush it. She holds your gaze for a moment longer, then looks down at herself with the same deliberate attention she gave the posting board this morning — the same consideration, applied to different material.\n\nShe speaks quietly. She tells you the left one sits slightly higher. She tells you the right one is more sensitive and she has always found that interesting, as a fact. She is not performing this. She is reporting, the way she reports anything worth knowing, and the candlelight catches the small curve of her mouth as she does it.\n\nYou work at your own belt while she talks. She watches your hands for a moment, then reaches for her own — unhurried, practical, the same economy of motion she brings to everything. Her trousers go first, then yours, and she settles back onto your lap with only the thin warmth of the candlelight between you. She goes quiet for a moment when she feels how close you are.\n\nThen she looks up. She asks, in that dry and careful voice, whether the assessment is still favorable.",
-      "sceneSummary": "In the alcove candlelight, Vessin spoke about herself without performance and without embarrassment — reporting, as she would any fact worth knowing — while Loki removed both their trousers and she settled back, close, and asked for the verdict.",
+      "narration": "You bring your left hand up and cup the lower one gently, lifting it to even. The candlelight is steady on her face as you do it.\n\nShe looks down at your hand. She makes the same small sound she made before — dry, almost a laugh, but not quite. Then she straightens her assessment the way she would straighten a report.\n\nShe says the left one tends toward the cooler side of the room. She says it holds its shape better under pressure, which she has always considered a reliable quality. She says the right one is more responsive to attention, and that this has occasionally made it difficult to appear indifferent during inspections.\n\nWhile she is still speaking, you draw your palm slowly across the right one and across the nipple. Her sentence stops in the middle of a word. Not the word she intended. You feel the small tightening under your hand.\n\nShe recovers. She finishes the sentence, almost correctly. Her voice has dropped a half-register.\n\nYou shift your hips below her — a deliberate, slow movement. Her hands come down to your thighs, not gripping, just landing there. She lets out a breath she was holding without knowing she was holding it. Her weight settles more fully against you, and she stops mid-appraisal to look at your face again — steady, but the calculation is not running the way it usually does.",
+      "sceneSummary": "Loki cupped the cooler breast and drew a palm across the right — Vessin's careful appraisal broke mid-sentence, and the shift of her weight settled closer.",
+      "choices": [
+        {
+          "label": "Bring harmonic voice in again — low and slow, aimed at her spine this time, while your hands stay where they are.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": "harmonic_voice",
+          "energyCost": 6,
+          "trivial": false
+        },
+        {
+          "label": "Let her finish the appraisal — ask her what marks would make a piece like this worth acquiring at any price.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic",
+            "flirt"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Stop asking her to report. Move instead — slowly — and see what she does with her hands.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Use Descent — name what she actually wants right now, plainly, aloud, and watch what it does to the appraisal.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": "descent",
+          "energyCost": 6,
+          "trivial": false
+        }
+      ],
       "scene": {
         "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral, deep night. Single candle burning on the low shelf. Drop-cloth spread on the floor. The open stair is the only entrance.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Settled on Loki's lap, bare from the waist down, holding Loki's gaze and waiting for the verdict — quiet, unguarded, close."
+            "state": "Settled on Loki's lap, bare from the waist down, both hands resting on Loki's thighs — the appraisal interrupted mid-sentence, weight settled fully, watching Loki's face with the calculation not quite running."
           },
           {
             "name": "Cy",
-            "state": "Still at the far wall, inspecting the latch bracket with its lens — present and untroubled."
+            "state": "At the far wall, inspecting the latch bracket with its lens — present and untroubled."
           }
         ],
         "objects": [
@@ -186,85 +242,22 @@
           "Traveler's Pack against the wall"
         ],
         "threads": [
-          "Vessin has asked for the verdict — the answer is hers to receive"
+          "Vessin's appraisal was interrupted — the verdict she started giving is not finished",
+          "Her hands have landed on Loki's thighs; the weight of her has settled — what happens next is unresolved"
         ]
       },
-      "choices": [
-        {
-          "label": "Give her the verdict plainly — in words, this time, direct and close.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Turn harmonic voice to its low register again — let her feel the answer before you speak it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": "harmonic_voice",
-          "energyCost": 6,
-          "trivial": false
-        },
-        {
-          "label": "Answer her question with one of your own — ask what she wants the verdict to be.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": "descent",
-          "energyCost": 6,
-          "trivial": false
-        },
-        {
-          "label": "Don't answer yet — pull her closer and let the closeness be the answer.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        }
-      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Spoke about herself plainly and without performance while Loki removed both their trousers — reporting, as she would any fact worth knowing. Settled close and asked whether the assessment still holds.",
-          "learned": [
-            "Reports herself the way she reports anything worth knowing — factual, unhurried, and without embarrassment"
-          ],
-          "status": "active",
-          "statusNote": "Settled on Loki's lap in the alcove, bare from the waist down, waiting for the verdict.",
-          "relationshipDelta": 0
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "vessin-tallow-bark",
-          "label": "Vessin Tallow-bark",
-          "kind": "person",
-          "entityId": "vessin-tallow-bark",
-          "fact": "Spoke about herself without performance — reported plainly, as a fact worth knowing, then asked for the verdict with her dry economy of voice. She brings the same deliberate attention to this as to anything else she has decided to keep.",
-          "links": [
-            "grovehome",
-            "the-half-cathedral"
-          ]
+          "note": "Her appraiser's report broke mid-sentence at Loki's palm across the right breast and the slow shift of hips — she finished the sentence almost correctly and then stopped performing the indifference. Her hands landed on Loki's thighs without grip — landing, not holding.",
+          "statusNote": "Settled on Loki's lap, bare from the waist down — appraisal interrupted, weight fully settled, watching Loki's face."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short, close exchange in the alcove"
+        "why": "a slow, unhurried exchange in the alcove"
       }
     },
     "sceneState": {
@@ -272,11 +265,11 @@
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Settled on Loki's lap, bare from the waist down, holding Loki's gaze and waiting for the verdict — quiet, unguarded, clo"
+          "state": "Settled on Loki's lap, bare from the waist down, both hands resting on Loki's thighs — the appraisal interrupted mid-sen"
         },
         {
           "name": "Cy",
-          "state": "Still at the far wall, inspecting the latch bracket with its lens — present and untroubled."
+          "state": "At the far wall, inspecting the latch bracket with its lens — present and untroubled."
         }
       ],
       "objects": [
@@ -288,7 +281,8 @@
         "Traveler's Pack against the wall"
       ],
       "threads": [
-        "Vessin has asked for the verdict — the answer is hers to receive"
+        "Vessin's appraisal was interrupted — the verdict she started giving is not finished",
+        "Her hands have landed on Loki's thighs; the weight of her has settled — what happens next is unresolved"
       ]
     }
   },
@@ -718,7 +712,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Met the kiss directly and without hesitation — hand at Loki's face, hand at their coat. Pulled back to breathe and said she is going to stop calculating the cost of this, just for now. Said it like someone testing a new instrument.",
         "[d2] Your bond becomes romantic.",
         "[d2] Your bond deepens — courting.",
         "[d2] Named her preference plainly — neither leading nor being led, something shared. Said she has spent enough of today in charge of things.",
@@ -727,7 +720,8 @@
         "[d2] Your bond deepens — together.",
         "[d2] Met Loki's proposition without deflection — turned the appraisal back, undid her collar one button at a time, and asked for a full assessment.",
         "[d2] Felt the harmonic verdict land — breath caught, weight settled; she is holding the silence rather than filling it.",
-        "[d2] Spoke about herself plainly and without performance while Loki removed both their trousers — reporting, as she would any fact worth knowing. Settled close and asked whether the assessment still holds."
+        "[d2] Spoke about herself plainly and without performance while Loki removed both their trousers — reporting, as she would any fact worth knowing. Settled close and asked whether the assessment still holds.",
+        "[d2] Her appraiser's report broke mid-sentence at Loki's palm across the right breast and the slow shift of hips — she finished the sentence almost correctly and then stopped performing the indifference. Her hands landed on Loki's thighs without grip — landing, not holding."
       ],
       "knownFacts": [
         "She is capable of choosing not to calculate — she did it, and said so aloud.",
@@ -743,7 +737,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Settled on Loki's lap in the alcove, bare from the waist down, waiting for the verdict.",
+      "statusNote": "Settled on Loki's lap, bare from the waist down — appraisal interrupted, weight fully settled, watching Loki's face.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1084,7 +1078,7 @@
     "lastSharedReadAt": "2026-08-01T22:35:06.269Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 20,
+    "turnsSinceOffer": 21,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -1221,11 +1215,11 @@
     "reason": 4,
     "insight": 4,
     "presence": 3,
-    "rapport": 4,
+    "rapport": 5,
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 1,
   "discoveries": [],
   "codex": {
@@ -2356,8 +2350,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785624258707,
-  "rev": 398,
+  "updatedAt": 1785624559590,
+  "rev": 401,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3127,7 +3121,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 69
+    "the_quickwood": 70
   },
   "opLossPending": false,
   "sessions": [
@@ -3182,10 +3176,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T22:44:18.706Z",
+      "lastAt": "2026-08-01T22:49:19.589Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 35
+      "beats": 36
     }
   ],
   "establishedFacts": [
@@ -3223,17 +3217,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 135,
-    "choices": 135,
+    "sceneSummary": 136,
+    "choices": 136,
     "characterDeltas": 54,
-    "scene": 135,
+    "scene": 136,
     "placeUpdates": 17,
     "codexUpdates": 89,
-    "timeOps": 126,
+    "timeOps": 127,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 26,
-    "npcUpdates": 107,
+    "npcUpdates": 108,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3247,7 +3241,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 135,
+  "_opTurns": 136,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

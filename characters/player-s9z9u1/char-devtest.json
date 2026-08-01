@@ -29,7 +29,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 56,
+  "energy": 65,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -42,18 +42,6 @@
         "careful"
       ],
       "consumable": false
-    },
-    {
-      "id": "waterskin",
-      "name": "Waterskin",
-      "kind": "consumable",
-      "qty": 1,
-      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
-      "effects": {
-        "energy": 10
-      },
-      "consumable": true,
-      "pinned": true
     },
     {
       "id": "belt_knife",
@@ -261,125 +249,126 @@
         "player": null,
         "summary": "Loki reads the stranger through Prism Sight and sees a warding fighter who is tiring.",
         "narration": "You let Prism Sight open wide, and the stranger's last few minutes write themselves across the cold air in layered heat-traces. Their weight is still back, the warding stance still there, but the traces are thinning at the edges — the warmth behind their knees, the faint bleed of effort from their shoulders — and you can see where the commitment has gone out of it. They are still standing in the shape of a fighter, but the heat-signature of someone truly ready looks different from this, and theirs does not look like that anymore."
+      },
+      {
+        "player": null,
+        "summary": "At the braided confluence below the rise in the Disputed Zone, Loki and a warding stranger fought to a quiet standstill at dusk — no cruelty on either side, only the grammar of a fight, and something sealed moving one notch closer to open. Veln Ashpause watched from the brush, and the scratch on the river stone remained unread.",
+        "narration": "The waterskin is in your hand before you think about it — the pull automatic, a fighter's reflex between the last exchange and the next. You drink, and the cold river water grounds you somewhere below the chest. Then you raise your eyes.\n\nThe stranger's ward catches your blow exactly the way the heat-traces said it would. Your hand meets their forearm, force absorbed and turned. Neither of you gains ground. For a held breath, the fight is perfectly even.\n\nThen they step back.\n\nNot a tactical retreat. A decision. Their arms lower in one slow, deliberate motion — not dropped in exhaustion, not flung wide in defeat, but set down, the way you set down something you've been carrying too long. They stand in the mud at the edge of the brush and meet your eyes, and say nothing, and stay standing.\n\nThe fight is over. You both know it.\n\nSomewhere in the stillness after, something shifts — not in the air, not in the light, but in you. The way you read the warding stance, the ground-pulse, the thinning heat-trace — the pieces arrange themselves into something that is almost a grammar. A sealed understanding moves one notch closer to open. You do not know yet what it is. You know only that it moved.\n\nVeln Ashpause steps out of the brush at last. He looks at the stranger, then at you, then at the scratch on the flat stone still half-hidden beneath your waterskin, and his expression does not change. Said Veln, quietly: \"You're both still here.\" He says it as though he expected something different and is grateful to be wrong."
       }
     ],
     "lastTurn": {
-      "narration": "You let Prism Sight open wide, and the stranger's last few minutes write themselves across the cold air in layered heat-traces. Their weight is still back, the warding stance still there, but the traces are thinning at the edges — the warmth behind their knees, the faint bleed of effort from their shoulders — and you can see where the commitment has gone out of it. They are still standing in the shape of a fighter, but the heat-signature of someone truly ready looks different from this, and theirs does not look like that anymore.",
-      "sceneSummary": "Loki reads the stranger through Prism Sight and sees a warding fighter who is tiring.",
+      "narration": "The waterskin is in your hand before you think about it — the pull automatic, a fighter's reflex between the last exchange and the next. You drink, and the cold river water grounds you somewhere below the chest. Then you raise your eyes.\n\nThe stranger's ward catches your blow exactly the way the heat-traces said it would. Your hand meets their forearm, force absorbed and turned. Neither of you gains ground. For a held breath, the fight is perfectly even.\n\nThen they step back.\n\nNot a tactical retreat. A decision. Their arms lower in one slow, deliberate motion — not dropped in exhaustion, not flung wide in defeat, but set down, the way you set down something you've been carrying too long. They stand in the mud at the edge of the brush and meet your eyes, and say nothing, and stay standing.\n\nThe fight is over. You both know it.\n\nSomewhere in the stillness after, something shifts — not in the air, not in the light, but in you. The way you read the warding stance, the ground-pulse, the thinning heat-trace — the pieces arrange themselves into something that is almost a grammar. A sealed understanding moves one notch closer to open. You do not know yet what it is. You know only that it moved.\n\nVeln Ashpause steps out of the brush at last. He looks at the stranger, then at you, then at the scratch on the flat stone still half-hidden beneath your waterskin, and his expression does not change. Said Veln, quietly: \"You're both still here.\" He says it as though he expected something different and is grateful to be wrong.",
+      "sceneSummary": "At the braided confluence below the rise in the Disputed Zone, Loki and a warding stranger fought to a quiet standstill at dusk — no cruelty on either side, only the grammar of a fight, and something sealed moving one notch closer to open. Veln Ashpause watched from the brush, and the scratch on the river stone remained unread.",
       "choices": [
         {
-          "label": "Drive into the ward — Sonic Resonance to break the stance from inside it",
-          "attribute": "physical",
-          "subAttribute": "craft",
-          "difficulty": 15,
+          "label": "Ask the stranger plainly — 'Why did you come at me?'",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
           "intentTags": [
-            "attack",
-            "risky"
+            "persuade"
           ],
-          "abilityId": "sonic_resonance",
-          "energyCost": 8,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Wait them out — hold still and let the exhaustion finish what the fight started",
+          "label": "Pick up the waterskin and look at the scratch-mark on the stone beneath it",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "defend",
-            "careful"
+            "study"
           ],
-          "abilityId": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Step aside and speak — name what you saw, give them a way to put the ward down without losing face",
+          "label": "Turn to Veln — he foreknew something; press him on what he saw coming",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
           "intentTags": [
-            "calm",
-            "negotiate"
+            "persuade"
           ],
-          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Feint low — draw the ward down, then go over it",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
+          "label": "Let the silence sit — watch the stranger's body for what their words won't say",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
           "intentTags": [
-            "feint",
-            "attack"
+            "study"
           ],
-          "abilityId": null,
+          "abilityId": "prism_sight",
+          "energyCost": 4,
           "trivial": false
         }
       ],
+      "characterDeltas": {
+        "energy": 5
+      },
       "scene": {
-        "setting": "The braided confluence below the rise in the Disputed Zone — near-dark now, cold mud underfoot, the last thin light going out of the spring sky.",
+        "setting": "The braided confluence below the rise in the Disputed Zone — near-dark now, cold mud underfoot, the last thin light gone from the spring sky. Still.",
         "npcsPresent": [
           {
             "name": "The Stranger",
-            "state": "Still in the warding stance — weight back, arms wide — but the heat-signature of genuine readiness is thinning; they are tiring."
+            "state": "Standing at the edge of the brush, arms lowered deliberately — not collapsed, set down. Meeting Loki's eyes. Has yielded; has not spoken."
           },
           {
             "name": "Veln Ashpause",
-            "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy unchanged."
+            "state": "Stepped out of the brush at last. Standing a few paces back, grey coat, expression of quiet relief — 'You're both still here.'"
           },
           {
             "name": "Cy",
-            "state": "At the stranger's left, lens at its smallest ring, watching with old patience."
+            "state": "At Loki's left, lens settled, watching the stranger with old patience."
           }
         ],
         "objects": [
-          "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
-          "Waterskin beside Loki in the mud",
+          "Waterskin in Loki's hand",
+          "flat river stone with fresh pale scratch-mark (now exposed — waterskin lifted)",
           "boot-prints in mud ending at the water's edge",
           "belt knife in Loki's hand"
         ],
         "threads": [
           "The question — 'Why?' — still open and unanswered between Loki and the stranger.",
           "The stranger has yielded but has not explained themselves.",
-          "The Hourkeeper has pre-remembered something and will not say what.",
-          "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
-          "The three-hundred-year tree about to fruit and the missing person it was planted for.",
-          "The stranger is tiring — the ward is still up but the heat behind it is going out."
+          "Veln Ashpause stepped out — he foreknew something and has not said what.",
+          "The scratch-mark on the stone is visible now — its meaning unspoken.",
+          "The three-hundred-year tree about to fruit and the missing person it was planted for."
         ]
       },
+      "sceneEnded": false,
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "a single read-moment, no time passes"
+        "hoursPassed": 0.25,
+        "why": "the final exchange and its settling — a short breath of time"
       }
     },
     "sceneState": {
-      "setting": "The braided confluence below the rise in the Disputed Zone — near-dark now, cold mud underfoot, the last thin light going out of the spring sky.",
+      "setting": "The braided confluence below the rise in the Disputed Zone — near-dark now, cold mud underfoot, the last thin light gone from the spring sky. Still.",
       "npcsPresent": [
         {
           "name": "The Stranger",
-          "state": "Still in the warding stance — weight back, arms wide — but the heat-signature of genuine readiness is thinning; they are"
+          "state": "Standing at the edge of the brush, arms lowered deliberately — not collapsed, set down. Meeting Loki's eyes. Has yielded"
         },
         {
           "name": "Veln Ashpause",
-          "state": "Motionless at the edge of the brush, grey coat, expression of helpless foreknowing sympathy unchanged."
+          "state": "Stepped out of the brush at last. Standing a few paces back, grey coat, expression of quiet relief — 'You're both still "
         },
         {
           "name": "Cy",
-          "state": "At the stranger's left, lens at its smallest ring, watching with old patience."
+          "state": "At Loki's left, lens settled, watching the stranger with old patience."
         }
       ],
       "objects": [
-        "flat river stone with fresh pale scratch-mark (beneath the Waterskin)",
-        "Waterskin beside Loki in the mud",
+        "Waterskin in Loki's hand",
+        "flat river stone with fresh pale scratch-mark (now exposed — waterskin lifted)",
         "boot-prints in mud ending at the water's edge",
         "belt knife in Loki's hand"
       ],
       "threads": [
         "The question — 'Why?' — still open and unanswered between Loki and the stranger.",
         "The stranger has yielded but has not explained themselves.",
-        "The Hourkeeper has pre-remembered something and will not say what.",
-        "The scratch-mark on the stone is still beneath the Waterskin — its meaning unspoken.",
+        "Veln Ashpause stepped out — he foreknew something and has not said what.",
+        "The scratch-mark on the stone is visible now — its meaning unspoken.",
         "The three-hundred-year tree about to fruit and the missing person it was planted for."
       ]
     }
@@ -408,7 +397,7 @@
     "spectrumDrift": {},
     "news": [],
     "unseenNews": [],
-    "turnsSinceOffer": 3
+    "turnsSinceOffer": 4
   },
   "bio": null,
   "subAttributes": {
@@ -433,141 +422,9 @@
   "actionCount": 0,
   "grantsVersion": 1,
   "reconcileVersion": 22,
-  "updatedAt": 1785596144458,
-  "rev": 19,
-  "activeEncounter": {
-    "defId": "re-enc_the_sealed_door",
-    "state": {
-      "schemaVersion": 1,
-      "encounterId": "re-enc_the_sealed_door",
-      "type": "puzzle",
-      "status": "active",
-      "round": 2,
-      "log": [
-        "r1: reveal vs ward → momentum 0",
-        "r1: break vs ward → momentum 6",
-        "r1: reveal vs ward → momentum 4",
-        "r2: reveal vs ward → momentum 4"
-      ],
-      "attempts": 0,
-      "hintsRevealed": 2,
-      "solved": false,
-      "mode": "skill_battle",
-      "opponentSheet": {
-        "static": true,
-        "staticResist": 18,
-        "resistLabel": "it holds — not fighting you, simply made to hold, and made well",
-        "attributes": {},
-        "subAttributes": {},
-        "alignment": {},
-        "skills": [
-          {
-            "function": "ward",
-            "name": "it holds its order",
-            "tier": "notable"
-          }
-        ],
-        "energy": 60,
-        "tacticTags": [
-          "unmoving"
-        ]
-      },
-      "momentum": 3.5,
-      "opponentHealth": 5,
-      "opponentEnergy": 15,
-      "turn": {
-        "phase": "action",
-        "sel": {
-          "sense": [
-            4,
-            9
-          ],
-          "action": [],
-          "bonus": []
-        },
-        "text": {
-          "sense": "",
-          "action": "",
-          "bonus": ""
-        },
-        "setupBonus": 7,
-        "bonusEarned": true,
-        "senseDone": true,
-        "senseLine": "You read with Prism Sight ⋈ Reason it out (Reason) — success. You have the read (+7 to your action). The opening is there — you have earned a BONUS action. You read they: they favour ward, and they are tiring. Pick a craft that answers it.",
-        "readPayoff": "You read they: they favour ward, and they are tiring. Pick a craft that answers it."
-      },
-      "effects": [
-        {
-          "kind": "insight",
-          "label": "you have their measure",
-          "value": 3,
-          "roundsLeft": 2,
-          "applies": "always",
-          "side": "player",
-          "source": "Reason it out (Reason)",
-          "from": "player"
-        },
-        {
-          "kind": "ward",
-          "label": "warded",
-          "value": 4,
-          "roundsLeft": 2,
-          "applies": "whenAttacked",
-          "side": "opponent",
-          "source": "it holds its order",
-          "from": "opponent"
-        }
-      ],
-      "pressure": {
-        "player": 0,
-        "opponent": 1
-      },
-      "spent": {
-        "player": false,
-        "opponent": false
-      },
-      "lastOppFn": "ward",
-      "lastOppReceipt": {
-        "roll": 0,
-        "chance": 16,
-        "rawChance": 16,
-        "margin": 16,
-        "degree": "success",
-        "breakdown": {
-          "contestMods": [
-            {
-              "label": "it holds — not fighting you, simply made to hold, and made well",
-              "value": 18
-            },
-            {
-              "label": "matchup (ward vs reveal)",
-              "value": 0
-            },
-            {
-              "label": "momentum (you're on the back foot)",
-              "value": -2
-            }
-          ],
-          "static": true
-        },
-        "matchup": 0,
-        "intensity": "standard",
-        "tier": "notable",
-        "function": "ward",
-        "name": "it holds its order",
-        "effectMods": [],
-        "woven": null,
-        "static": true
-      },
-      "lastReadWasSense": true,
-      "senseTierEarned": 2,
-      "senseResist": {
-        "value": 0,
-        "label": "their natural guardedness",
-        "from": "passive"
-      }
-    }
-  },
+  "updatedAt": 1785596378526,
+  "rev": 28,
+  "activeEncounter": null,
   "customEncounters": {
     "re-enc_the_sealed_door": {
       "schemaVersion": 1,
@@ -595,7 +452,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "valley": 3
+    "valley": 4
   },
   "opLossPending": false,
   "_applyFailures": null,
@@ -603,10 +460,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-08-01T14:31:20.375Z",
-      "lastAt": "2026-08-01T14:55:44.456Z",
+      "lastAt": "2026-08-01T14:59:38.525Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [],
@@ -624,18 +481,19 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 3,
-    "choices": 3,
-    "scene": 3,
+    "sceneSummary": 4,
+    "choices": 4,
+    "scene": 4,
     "stateOps": 1,
-    "characterDeltas": 2,
-    "timeOps": 2
+    "characterDeltas": 3,
+    "timeOps": 3,
+    "sceneEnded": 1
   },
-  "_opTurns": 3,
+  "_opTurns": 4,
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "sonic_resonance": 1
+      "sonic_resonance": 2
     },
     "coActivations": {},
     "aspirations": [],

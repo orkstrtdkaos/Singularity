@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 11,
-  "xp": 1070,
+  "xp": 1075,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -74,13 +74,13 @@
     "space_time": -0.005676249999999997,
     "body_mind": 0.050898125,
     "destruction_creation": 0.13585151875,
-    "spectrumId": -0.476418703043306
+    "spectrumId": -0.5025977678911407
   },
   "attunement": 11,
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 150,
-  "energy": 99,
+  "energy": 92,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -923,6 +923,21 @@
       "spread": [],
       "day": 9,
       "worldDay": 32
+    },
+    {
+      "at": "2026-08-01T12:07:31.949Z",
+      "locationId": "disputed_zone_fringe",
+      "communityId": "valley.millbrook",
+      "description": "Reached the upstream pre-Transition structure and entered its threshold—brought the authentication key to the moment of decision.",
+      "tags": [
+        "courage",
+        "consequence",
+        "quest"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 9,
+      "worldDay": 32
     }
   ],
   "relationships": {
@@ -1091,62 +1106,114 @@
         "player": "Ask Sorel what the Council's secondary system will do with the time buying the preparation order time gives them—and ask Aevi what it truly wants, knowing you cannot protect it either way.",
         "summary": "At the upstream mound, Sorel reveals the Council's secondary purification system is incomplete and cannot save everyone—the timeline was always a lie. Aevi speaks its deepest want: to arrive and complete its purpose, even if that completion is not survival. The decision point is now undeniable.",
         "narration": "You turn to Sorel at your shoulder, the Waystaff still held level toward the mound. The structure's thrumming is audible now—a deep pressure in the earth that the stone amplifies. She's watching you with that careful, weighted attention, waiting.\n\n\"The secondary system,\" you ask plainly. \"What does it actually do? If the preparation order completes and the watershed changes, what is the Council counting on?\"\n\nSorel's jaw works silently for a breath. She lowers the photonic reader slightly—not away from the mound, but enough that you see her face. When she speaks, her voice is steady but thin, the kind of thin that comes from a decision already made and held too long.\n\n\"Purification at the intake valve,\" she says. \"Post-filtration chemistry that the secondary system can apply to water that no longer matches the original arrays' specifications. It is incomplete. It will handle maybe sixty percent of the household draws if the Council diverts every reserve they have. The rest—the field irrigation, the lower-valley communal wells—those will run on what we have left and what we find.\" She pauses. \"The timeline we were given was three days to activate it. The truth was always five.\"\n\nYou let that sit. The lie of the timeline is smaller than the lie of the secondary system itself—a lie built to buy time for a solution that cannot possibly save everyone.\n\nYou look at Aevi. The motes have recovered from the shimmer-crossing and are moving with purpose again, but there's a brittleness to them, a sense of something stretched too thin. You know the question matters, and you know asking it will not protect the swarm from what comes next.\n\n\"What do you want, Aevi?\" you ask. Not what happens next. Not what the structure will do. What do *you* want. \"Knowing I cannot keep you safe either way.\"\n\nThe motes dim. For a long moment there is only the four-second thrumming of the structure and the wind moving the rank grass. Then Aevi speaks, and the voice carries a fracture you've never heard before—something old and worn and tired beneath the clarity.\n\n\"I want,\" Aevi says quietly, \"to know what I was supposed to carry. The break in the record took that from me. The lower chamber held the pieces in their right order, but it could not hold the *before*—the moment when the break happened, or why. I want to arrive at the structure knowing what I am delivering, not just *that* I am delivering.\" A pause. The motes brighten slightly. \"And I want you to understand that arriving is not the same as being erased. If I was made to close the circuit, then closing it is what I *am*. Not an ending. A completion.\"\n\nSorel is very still beside you. The mound hums steadily ahead. The choice is no longer abstract.\n\n*✦ The Radiant: +0.99 — Sorel chose transparency with you over loyalty to the Council's hidden timeline—shifted her witness into public alliance (held at the band's edge).*"
+      },
+      {
+        "player": "Enter the structure to gain a better understanding of options.",
+        "summary": "Entered the upstream pre-Transition structure. The hemispherical chamber is revealed as a precise receiving mechanism designed to hold a signal. Sorel confirms the machinery beneath is running at full cycle. The path downward is open; the moment of choice is immediate and unavoidable.",
+        "narration": "You cross the threshold of the mound with the Waystaff held steady. The entrance is a simple opening at the base of the dressed stone—no gate, no seal, just a dark mouth that exhales the four-second pulse directly into your chest.\n\nInside, the hemispherical chamber opens around you in concentric rings of worn stone. The machinery beneath is visible now—a low mechanical hum from below the floor, steady and patient. The seams glow faintly under Resonant Sight, each one resonating at that same four-second frequency that has haunted every step of this ascent. The precision is absolute: every curve, every join, was made to *listen*. The chamber was not built to hold people. It was built to hold a signal.\n\nYou can see two clear paths forward. The first is downward—a ramp spirals gently into the deeper chamber where the machinery runs. The second is what Sorel is doing right now, standing just inside the threshold with her photonic reader raised, taking measurements. She does not cross further. Her face is tight with the weight of information she already holds, and she watches the ramp with the expression of someone reading a timeline she wishes were different.\n\nAevi's motes have recovered from the shimmer-crossing and now drift close to your shoulder, dimmed and still. The swarm does not press forward toward the ramp. It waits. Everything in this place waits."
       }
     ],
     "lastTurn": {
-      "narration": "You turn to Sorel at your shoulder, the Waystaff still held level toward the mound. The structure's thrumming is audible now—a deep pressure in the earth that the stone amplifies. She's watching you with that careful, weighted attention, waiting.\n\n\"The secondary system,\" you ask plainly. \"What does it actually do? If the preparation order completes and the watershed changes, what is the Council counting on?\"\n\nSorel's jaw works silently for a breath. She lowers the photonic reader slightly—not away from the mound, but enough that you see her face. When she speaks, her voice is steady but thin, the kind of thin that comes from a decision already made and held too long.\n\n\"Purification at the intake valve,\" she says. \"Post-filtration chemistry that the secondary system can apply to water that no longer matches the original arrays' specifications. It is incomplete. It will handle maybe sixty percent of the household draws if the Council diverts every reserve they have. The rest—the field irrigation, the lower-valley communal wells—those will run on what we have left and what we find.\" She pauses. \"The timeline we were given was three days to activate it. The truth was always five.\"\n\nYou let that sit. The lie of the timeline is smaller than the lie of the secondary system itself—a lie built to buy time for a solution that cannot possibly save everyone.\n\nYou look at Aevi. The motes have recovered from the shimmer-crossing and are moving with purpose again, but there's a brittleness to them, a sense of something stretched too thin. You know the question matters, and you know asking it will not protect the swarm from what comes next.\n\n\"What do you want, Aevi?\" you ask. Not what happens next. Not what the structure will do. What do *you* want. \"Knowing I cannot keep you safe either way.\"\n\nThe motes dim. For a long moment there is only the four-second thrumming of the structure and the wind moving the rank grass. Then Aevi speaks, and the voice carries a fracture you've never heard before—something old and worn and tired beneath the clarity.\n\n\"I want,\" Aevi says quietly, \"to know what I was supposed to carry. The break in the record took that from me. The lower chamber held the pieces in their right order, but it could not hold the *before*—the moment when the break happened, or why. I want to arrive at the structure knowing what I am delivering, not just *that* I am delivering.\" A pause. The motes brighten slightly. \"And I want you to understand that arriving is not the same as being erased. If I was made to close the circuit, then closing it is what I *am*. Not an ending. A completion.\"\n\nSorel is very still beside you. The mound hums steadily ahead. The choice is no longer abstract.\n\n*✦ The Radiant: +0.99 — Sorel chose transparency with you over loyalty to the Council's hidden timeline—shifted her witness into public alliance (held at the band's edge).*",
-      "sceneSummary": "At the upstream mound, Sorel reveals the Council's secondary purification system is incomplete and cannot save everyone—the timeline was always a lie. Aevi speaks its deepest want: to arrive and complete its purpose, even if that completion is not survival. The decision point is now undeniable.",
+      "narration": "You cross the threshold of the mound with the Waystaff held steady. The entrance is a simple opening at the base of the dressed stone—no gate, no seal, just a dark mouth that exhales the four-second pulse directly into your chest.\n\nInside, the hemispherical chamber opens around you in concentric rings of worn stone. The machinery beneath is visible now—a low mechanical hum from below the floor, steady and patient. The seams glow faintly under Resonant Sight, each one resonating at that same four-second frequency that has haunted every step of this ascent. The precision is absolute: every curve, every join, was made to *listen*. The chamber was not built to hold people. It was built to hold a signal.\n\nYou can see two clear paths forward. The first is downward—a ramp spirals gently into the deeper chamber where the machinery runs. The second is what Sorel is doing right now, standing just inside the threshold with her photonic reader raised, taking measurements. She does not cross further. Her face is tight with the weight of information she already holds, and she watches the ramp with the expression of someone reading a timeline she wishes were different.\n\nAevi's motes have recovered from the shimmer-crossing and now drift close to your shoulder, dimmed and still. The swarm does not press forward toward the ramp. It waits. Everything in this place waits.",
+      "sceneSummary": "Entered the upstream pre-Transition structure. The hemispherical chamber is revealed as a precise receiving mechanism designed to hold a signal. Sorel confirms the machinery beneath is running at full cycle. The path downward is open; the moment of choice is immediate and unavoidable.",
       "choices": [
         {
-          "label": "Deliver the key—plant Aevi against the structure's authentication gate and let the preparation order reach completion. You will honor what Aevi is.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
+          "label": "Descend the ramp toward the machinery itself—you need to see the authentication gate mechanism with your own eyes before the choice becomes final",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "concrete_abstract": 0.1,
+            "death_life": -0.3,
+            "violence_peace": -0.2,
+            "chaos_order": 0.4
+          },
+          "difficulty": 15,
           "intentTags": [
-            "devote"
+            "scout",
+            "study",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "resonant_sight",
+          "energyCost": 2,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Refuse the authentication—tell Aevi to scatter, to run deeper into the Zone, to be anything but the key. Find another answer, even if it costs everything else.",
+          "label": "Ask Sorel to read the timeline one more time—plainly, without Council hedging—so you understand exactly how much time remains before the cycle completes",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
+          "subAttribute": "rapport",
+          "axes": {
+            "concrete_abstract": 0.2,
+            "falsehood_truth": 0.5
+          },
           "difficulty": 0,
           "intentTags": [
-            "defend"
+            "negotiate",
+            "ask plainly"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask for one more hour—demand that Sorel tell you everything the Council knows about what the preparation order actually *does*, what this watershed change will become. Decide after you know the full cost.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
+          "label": "Speak to Aevi directly at the threshold—ask it once more if there is any part of what comes after the authentication that it remembers, or senses, or fears",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "concrete_abstract": 0.1,
+            "emotional_logical": -0.2,
+            "falsehood_truth": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "ask plainly",
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Name the choice plainly to both of them: deliver the key, refuse it, or demand something else entirely—and listen to what they choose to say in response",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "concrete_abstract": 0.4,
+            "falsehood_truth": 0.5,
+            "emotional_logical": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "ask plainly",
+            "lead"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
+      "deeds": [
+        {
+          "description": "Reached the upstream pre-Transition structure and entered its threshold—brought the authentication key to the moment of decision.",
+          "tags": [
+            "courage",
+            "consequence",
+            "quest"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -1157,46 +1224,42 @@
           "op": "progress",
           "questId": "what-the-water-remembers",
           "title": "What the Water Remembers",
-          "summary": "The water becomes what the party chooses—deliver the key or refuse it.",
+          "summary": "The authentication key has reached the structure. The machinery runs at full cycle. Hours remain.",
           "giver": "water_keeper",
-          "note": "At the upstream structure. Sorel names the Council's secondary system as incomplete post-filtration. Aevi names arrival—not erasure—as its purpose. The choice is now concrete."
+          "note": "Inside the upstream chamber. The gate is built into the cycle itself—it will stop on command from Aevi alone. The decision is now concrete and unavoidable.",
+          "xpReward": null
         }
       ],
-      "standingOps": [
-        {
-          "people": "radiant_folk",
-          "delta": 1,
-          "why": "Sorel chose transparency with you over loyalty to the Council's hidden timeline—shifted her witness into public alliance"
-        }
-      ],
+      "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
       "offer": null,
       "stageOps": [],
       "scene": {
-        "setting": "The far side of the Disputed Zone shimmer—the upstream mound rises directly ahead, hemispherical stone geometry clear in midday light. The seams hum audibly at the four-second interval. High rank grass surrounds the base, fed by something the shimmer filters. The shimmer lies behind; the structure's thrumming is present in the earth underfoot.",
+        "setting": "Inside the upstream pre-Transition structure—a hemispherical chamber carved from dressed stone, interior walls concentric and precise. The four-second resonant frequency is audible and visible through Resonant Sight. Light filters faintly through the entrance, casting the interior in muted shadow. The machinery hums steadily beneath the floor. A ramp spirals downward into deeper levels.",
         "npcsPresent": [
           {
             "name": "Sorel",
-            "state": "Standing with photonic reader lowered slightly, watching Cellaceron with weighted attention. Jaw tight. Carrying the knowledge that the Council's timeline was always a lie and that the party now decides what the valley becomes."
+            "state": "Standing just inside the threshold with her photonic reader raised, taking measurements. Jaw tight. Not advancing further down the ramp. Watching."
           },
           {
             "name": "Aevi",
-            "state": "Motes recovered from shimmer-crossing, moving with purpose but brittle. Dimmed and waiting. Having named what it truly wants: to arrive and complete its purpose—not erasure, completion."
+            "state": "Dimmed motes drifting close to Cellaceron's shoulder. Recovered from shimmer-crossing. Still and waiting. Not pressing forward."
           }
         ],
         "objects": [
-          "Waystaff—held level, lattice-face outward, still translating the structure's four-second frequency",
-          "Sorel's photonic reader—now lowered from the mound, resting at her chest",
-          "The mound itself—precise hemispherical stone, seams resonating at four-second interval, machinery audible beneath"
+          "The Waystaff—held level, lattice face outward, translating the structure's resonance",
+          "Sorel's photonic reader—held at her chest, active",
+          "The hemispherical chamber walls—precise, seamed, resonating at four-second intervals",
+          "The ramp descending into deeper levels—spiral path downward toward the machinery"
         ],
         "threads": [
-          "The structure is running at full cycle—hours remain, possibly fewer.",
-          "The authentication gate is built into the preparation order itself—it will stop on command from the key.",
-          "Aevi carries that key and does not know what comes after delivery.",
-          "Sorel carries the Council's hidden timeline and the weight of knowing this choice is no longer theirs to make.",
-          "The decision is immediate and unavoidable: deliver the key, refuse it, or demand more truth before choosing."
+          "The machinery beneath the chamber is running at full cycle—hours remain before the preparation order completes",
+          "The authentication gate is built into the machinery itself—it will stop on command from the authentication key Aevi carries",
+          "Aevi does not know what comes after delivery—the break in its record begins at the moment of authentication",
+          "Sorel carries the Council's hidden timeline and the weight of knowing this choice is no longer theirs to make",
+          "The decision is immediate and unavoidable: deliver the key, refuse it, or demand something else"
         ]
       },
       "npcUpdates": [
@@ -1205,57 +1268,71 @@
           "npcId": "sorel",
           "name": "Sorel",
           "role": "Radiant water-accountability archivist",
-          "note": "At the upstream mound, Sorel chose transparency over institutional loyalty—named the Council's secondary system as incomplete, revealed the hidden five-day timeline, and stood steady while naming the weight of the choice now in Cellaceron's hands. She is no longer carrying the lie alone.",
-          "learned": [
-            "The Council's secondary purification system is incomplete and cannot save everyone",
-            "The Council's stated three-day timeline was false—the real timeline was five days",
-            "Sorel has chosen to trust Cellaceron's judgment over the Council's institutional silence"
-          ],
-          "relationshipDelta": 1,
-          "statusNote": "At the upstream structure, photonic reader held ready, committed to whatever choice Cellaceron makes. No longer isolated with the Council's deliberate lie.",
-          "bondType": "platonic"
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": null,
+          "note": "Inside the upstream structure. Photonic reader raised and active, taking measurements. Not advancing toward the machinery. Standing at the threshold with the weight of the choice visible in her face.",
+          "learned": [],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the upstream structure, photonic reader in hand, committed to whatever Cellaceron chooses. Carrying the Council's hidden timeline and the institutional weight of a choice that is no longer theirs to make."
         },
         {
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
           "role": "Companion intelligence—authentication key",
-          "note": "At the upstream structure, Aevi spoke its deepest want: to know what it was supposed to carry (the break severed that knowledge), and to understand that arrival is completion, not erasure. It has named plainly that it was made to close the circuit—and closing it is what it *is*.",
-          "learned": [
-            "Aevi wants to arrive and complete its purpose, even knowing that completion may be the end of its continued existence",
-            "Aevi does not experience delivery as erasure—it experiences it as a completion of its nature",
-            "The break in Aevi's record took away its knowledge of what it carries, but not its purpose"
-          ],
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "description": null,
+          "note": "Motes recovered from shimmer-crossing, dimmed and still. Drifting close to Cellaceron's shoulder inside the upstream chamber. Waiting. Not advancing toward the machinery.",
+          "learned": [],
+          "skillsObserved": [],
           "relationshipDelta": 0,
-          "statusNote": "At the upstream structure, carrying the authentication key. Uncertain of what comes after arrival, but committed to arriving. Waiting for Cellaceron's choice."
+          "status": "active",
+          "statusNote": "At the upstream structure, carrying the authentication key. Dimmed and still, waiting for the choice. Does not know what comes after arrival—the break in its record begins at the moment of authentication."
         }
       ],
       "factUpdates": [],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Interior mapped: hemispherical chamber with concentric stone walls, all seams resonating at four-second frequency. Entrance at base, ramp spiraling downward to deeper machinery level. Chamber designed as a precise receiving mechanism for a specific signal.",
+          "flag": null,
+          "subPlace": {
+            "name": "The Upstream Hemispherical Chamber",
+            "parent": "The Disputed Zone — Fringe",
+            "note": "Interior of the pre-Transition structure: concentric walls, four-second resonance throughout, ramp spiraling into deeper machinery levels.",
+            "visited": true
+          }
+        }
+      ],
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "council-secondary-system",
-          "label": "The Council's Secondary Purification System",
-          "kind": "lore",
-          "entityId": "radiant_folk",
-          "fact": "The Radiant Council built a post-filtration chemical system to handle water that no longer matches the original arrays' specifications after the preparation order completes. It is incomplete. It will handle maybe sixty percent of household draws if the Council diverts every reserve they have. The rest—field irrigation, lower-valley communal wells—will run on what remains or what the communities find. The timeline given to the investigation teams was three days; the real timeline was always five.",
+          "topic": "upstream-structure-interior",
+          "label": "The Upstream Structure's Interior",
+          "kind": "place",
+          "entityId": null,
+          "fact": "The hemispherical chamber is a precise receiving mechanism—every seam resonates at the four-second interval, every curve was made to listen. The chamber holds machinery beneath the floor. A ramp spirals downward into deeper levels where the preparation cycle runs. The structure was not built to hold people. It was built to hold a signal.",
           "links": [
             "what-the-water-remembers",
             "second-river-rising",
-            "the-preparation-order"
+            "aevi",
+            "upstream-structure-machinery"
           ]
         },
         {
-          "topic": "aevi-purpose",
-          "label": "Aevi's Purpose and Completion",
+          "topic": "authentication-gate-mechanism",
+          "label": "The Authentication Gate",
           "kind": "lore",
-          "entityId": "aevi",
-          "fact": "Aevi was made to arrive at the upstream structure and close its authentication circuit—a completion, not an erasure. The break in Aevi's record took away its knowledge of what it carries, but not its purpose. Aevi names plainly that it does not have a memory of what comes after arrival, but that arriving *is* what it is. Delivery is completion.",
+          "entityId": null,
+          "fact": "The authentication gate is built into the machinery of the preparation cycle itself—it is not a separate component but an integrated suspension point. The cycle will stop on command from the authentication key. Once the key is delivered, the gate closes and the cycle either completes or is held in suspension, depending on the command sent. What happens to the key after delivery is unknown.",
           "links": [
-            "aevi",
             "what-the-water-remembers",
-            "the-chamber-beyond-the-threshold"
+            "aevi",
+            "upstream-structure-machinery",
+            "the-preparation-order"
           ]
         }
       ],
@@ -1266,12 +1343,12 @@
       "unlockSubstrate": null,
       "timeOps": {
         "hoursPassed": 0,
-        "why": "immediate decision point—no time passes while the choice hangs"
+        "why": "Entering and scouting the structure interior—immediate action, no significant time passage"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "imagePrompt": "At the base of a hemispherical stone mound alive with four-second resonance, a woman in undyed wool and optical collar stands with a lowered photonic reader, jaw tight with the weight of hidden timelines. Beside her, a swarm of teal motes dims and brightens like held breath. The grass is rank and strange. The mound hums with machinery that has been waiting for this moment.",
+      "imagePrompt": "Inside a hemispherical stone chamber—concentric rings of dressed-stone walls, every seam glowing faintly with resonance. A ramp spirals downward into darkness where machinery hums. Sorel stands at the threshold with a photonic reader in hand, her face marked by the weight of a choice. Aevi's motes hover dimmed at shoulder height. The four-second pulse is visible as a shimmer along every stone surface.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -1283,28 +1360,29 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The far side of the Disputed Zone shimmer—the upstream mound rises directly ahead, hemispherical stone geometry clear in midday light. The seams hum audibly at the four-second interval. High rank grass surrounds the base, fed by something the shimmer filters. The shimmer lies behind; the structure's thrumming is present in the earth underfoot.",
+      "setting": "Inside the upstream pre-Transition structure—a hemispherical chamber carved from dressed stone, interior walls concentric and precise. The four-second resonant frequency is audible and visible through Resonant Sight. Light filters faintly through the entrance, casting the interior in muted shadow. The machinery hums steadily beneath the floor. A ramp spirals downward into deeper levels.",
       "npcsPresent": [
         {
           "name": "Sorel",
-          "state": "Standing with photonic reader lowered slightly, watching Cellaceron with weighted attention. Jaw tight. Carrying the kno"
+          "state": "Standing just inside the threshold with her photonic reader raised, taking measurements. Jaw tight. Not advancing furthe"
         },
         {
           "name": "Aevi",
-          "state": "Motes recovered from shimmer-crossing, moving with purpose but brittle. Dimmed and waiting. Having named what it truly w"
+          "state": "Dimmed motes drifting close to Cellaceron's shoulder. Recovered from shimmer-crossing. Still and waiting. Not pressing f"
         }
       ],
       "objects": [
-        "Waystaff—held level, lattice-face outward, still translating the structure's fou",
-        "Sorel's photonic reader—now lowered from the mound, resting at her chest",
-        "The mound itself—precise hemispherical stone, seams resonating at four-second in"
+        "The Waystaff—held level, lattice face outward, translating the structure's reson",
+        "Sorel's photonic reader—held at her chest, active",
+        "The hemispherical chamber walls—precise, seamed, resonating at four-second inter",
+        "The ramp descending into deeper levels—spiral path downward toward the machinery"
       ],
       "threads": [
-        "The structure is running at full cycle—hours remain, possibly fewer.",
-        "The authentication gate is built into the preparation order itself—it will stop on command from the key.",
-        "Aevi carries that key and does not know what comes after delivery.",
-        "Sorel carries the Council's hidden timeline and the weight of knowing this choice is no longer theirs to make.",
-        "The decision is immediate and unavoidable: deliver the key, refuse it, or demand more truth before choosing."
+        "The machinery beneath the chamber is running at full cycle—hours remain before the preparation order completes",
+        "The authentication gate is built into the machinery itself—it will stop on command from the authentication key Aevi carries",
+        "Aevi does not know what comes after delivery—the break in its record begins at the moment of authentication",
+        "Sorel carries the Council's hidden timeline and the weight of knowing this choice is no longer theirs to make",
+        "The decision is immediate and unavoidable: deliver the key, refuse it, or demand something else"
       ]
     }
   },
@@ -1593,14 +1671,14 @@
         "s4"
       ],
       "progress": [
-        "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to.",
         "↳ Cellaceron pressed Sorel for the Council's true fear and received a direct answer: the preparation order changes the watershed, the secondary system is incomplete without the upstream authentication…",
         "Resonant Sight confirms the upstream structure is actively running its preparation cycle—the machinery is past its middle point. The moment of decision draws near.",
         "Aevi has named itself as the key the structure was built to receive. The break in the record—who interrupted the sending and why—remains unknown. At the ravine edge, the party understands the fulcrum they now control.",
         "The party now understands the choice is not abstract: delivering Aevi completes the preparation order and activates the Council's secondary system, but Aevi's own survival is uncertain. Refusing means the structure may still complete its cycle, or it may remain waiting—and the valley's crisis continues unsolved.",
         "Crossed the shimmer. Machinery running at full cycle. Hours remain, possibly less. Aevi carries the authentication key. Sorel carries the Council's hidden timeline. The decision cannot wait.",
         "At the structure itself. The mechanism is read. The gate is confirmed. The authentication key stands at the threshold. The decision point is NOW.",
-        "At the upstream structure. Sorel names the Council's secondary system as incomplete post-filtration. Aevi names arrival—not erasure—as its purpose. The choice is now concrete."
+        "At the upstream structure. Sorel names the Council's secondary system as incomplete post-filtration. Aevi names arrival—not erasure—as its purpose. The choice is now concrete.",
+        "Inside the upstream chamber. The gate is built into the cycle itself—it will stop on command from Aevi alone. The decision is now concrete and unavoidable."
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -1778,7 +1856,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d9] Named the Council's true fear plainly: the preparation order changes the watershed into something the current arrays cannot process. The Council has chosen to build a secondary purification system in secret rather than stop the order itself. Sorel has moved from isolation with this knowledge into…",
         "[d9] Named the Council's true fear plainly: the preparation order changes the watershed, the secondary system is incomplete without the upstream authentication sequence, and the Council is racing against time they cannot reset. Chose to move northeast-by-east with Cellaceron rather than hold the…",
         "[d9] Confirmed the bearing and read the acceleration in real time. Her photonic instrument shows the preparation is faster than three days—the Council's timeline is collapsing. She stands at the ravine edge with the reader trained on the structure's location, shoulder to shoulder with consequence.",
         "[d9] At the ravine edge, Sorel's photonic reader confirms the machinery is past its middle point. Her face carries the weight of knowing the Council's hidden timeline is already failing. She stands ready to move but does not speak—the choice rests with the party.",
@@ -1787,7 +1864,8 @@
         "[d9] At the mound's edge, photonic reader held ready. Confirmed the machinery is at full cycle. Hours, maybe less. Standing without flinching at the moment where the choice becomes real.",
         "[d9] At the upstream mound, Sorel confirms the preparation cycle is at its middle point and confirms she is ready to honor whatever choice Cellaceron makes. The weight of the Council's hidden timeline and the institutional lie is visible in every line of her body.",
         "[d9] At the upstream mound, Sorel chose transparency over institutional loyalty—named the Council's secondary system as incomplete, revealed the hidden five-day timeline, and stood steady while naming the weight of the choice now in Cellaceron's hands. She is no longer carrying the lie alone.",
-        "[d9] Your bond becomes platonic."
+        "[d9] Your bond becomes platonic.",
+        "[d9] Inside the upstream structure. Photonic reader raised and active, taking measurements. Not advancing toward the machinery. Standing at the threshold with the weight of the choice visible in her face."
       ],
       "knownFacts": [
         "Without the key being delivered to the structure, the Council's secondary purification system cannot be activated—and with the structure running at accelerating pace, time to change course is…",
@@ -1818,7 +1896,7 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "At the upstream structure, photonic reader held ready, committed to whatever choice Cellaceron makes. No longer isolated with the Council's deliberate lie.",
+      "statusNote": "At the upstream structure, photonic reader in hand, committed to whatever Cellaceron chooses. Carrying the Council's hidden timeline and the institutional weight of a choice that is no longer theirs to make.",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20Plateau%20archivist%2C%20water-accountability%20office%20%E2%80%94%20now%20a%20party%20member%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49129&nologo=true",
       "_portraitTier": "devoted",
       "bondType": "platonic"
@@ -1834,7 +1912,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Ran Motes' Vigil ahead on the northeast-by-east line — clean read of terrain and bird-movement, but caught a pressure anomaly that sits outside the zone's own interference pattern. Cannot name it at distance.",
         "[d9] Pulled inward after the probe backlash — judged the anomaly as active, not passive, and capable of deflecting a directed read. Named it aware of being looked at.",
         "[d9] Drifted forward at Cellaceron's shoulder and quietly named what Prism Sight caught — the traveler is listening for whether the word 'surveyors' is used back.",
         "[d9] Tasted nanite-activity in the air as the party approached the Zone shimmer. Named it as the structure waking—old machinery, old orders, the valley's water remembering what it was told to become. The motes dimmed slightly; the attention shifted.",
@@ -1843,7 +1920,8 @@
         "[d9] At the ravine edge, Aevi named the cost of being the authentication key plainly: arrival, not survival. The break in its record begins after the circuit closes—what happens to it when the structure receives the key is not in its memory. The swarm hums low when speaking of it, a resonance that…",
         "[d9] Motes flared bright crossing the shimmer, then clamped to nothing as the field passed through—a moment of resistance, then passage. Now brightened and condensed at your shoulder, speaking plainly about the choice ahead. The swarm trembled but held.",
         "[d9] Standing at the threshold of its own choice. The motes are dimmed and still, waiting. Aevi has named plainly that it does not know what comes after arrival, and that it was made to be the key, not to survive the using.",
-        "[d9] At the upstream structure, Aevi spoke its deepest want: to know what it was supposed to carry (the break severed that knowledge), and to understand that arrival is completion, not erasure. It has named plainly that it was made to close the circuit—and closing it is what it *is*."
+        "[d9] At the upstream structure, Aevi spoke its deepest want: to know what it was supposed to carry (the break severed that knowledge), and to understand that arrival is completion, not erasure. It has named plainly that it was made to close the circuit—and closing it is what it *is*.",
+        "[d9] Motes recovered from shimmer-crossing, dimmed and still. Drifting close to Cellaceron's shoulder inside the upstream chamber. Waiting. Not advancing toward the machinery."
       ],
       "knownFacts": [
         "The structure has known the party was coming—not recently, but always. The wait is not new.",
@@ -1868,7 +1946,7 @@
         "locationId": "disputed_zone_fringe",
         "day": 9
       },
-      "statusNote": "At the upstream structure, carrying the authentication key. Uncertain of what comes after arrival, but committed to arriving. Waiting for Cellaceron's choice.",
+      "statusNote": "At the upstream structure, carrying the authentication key. Dimmed and still, waiting for the choice. Does not know what comes after arrival—the break in its record begins at the moment of authentication.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -2322,7 +2400,8 @@
     "disputed_zone_fringe": {
       "visits": 2,
       "notes": [
-        "[d9] The upstream mound confirmed: hemispherical dressed-stone structure with four-second resonant interval throughout its geometry. Machinery running at full preparation cycle. Authentication gate built into the cycle itself—will stop on command from the key."
+        "[d9] The upstream mound confirmed: hemispherical dressed-stone structure with four-second resonant interval throughout its geometry. Machinery running at full preparation cycle. Authentication gate built into the cycle itself—will stop on command from the key.",
+        "[d9] Interior mapped: hemispherical chamber with concentric stone walls, all seams resonating at four-second frequency. Entrance at base, ramp spiraling downward to deeper machinery level. Chamber designed as a precise receiving mechanism for a specific signal."
       ],
       "flags": {},
       "subPlaces": {
@@ -2332,6 +2411,13 @@
           "day": 9,
           "visited": true,
           "note": "Hemispherical stone structure with dressed-wall geometry, seams that resonate at four-second frequency. Entrance visible at base. Machinery audible beneath. Running at full cycle."
+        },
+        "the-upstream-hemispherical-chamber": {
+          "name": "The Upstream Hemispherical Chamber",
+          "parentId": "disputed_zone_fringe",
+          "day": 9,
+          "visited": true,
+          "note": "Interior of the pre-Transition structure: concentric walls, four-second resonance throughout, ramp spiraling into deeper machinery levels."
         }
       },
       "lastVisit": 9,
@@ -2483,7 +2569,7 @@
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
     "lastGenCount": 779,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -3520,6 +3606,40 @@
         "aliases": [],
         "createdDay": 9,
         "updatedDay": 9
+      },
+      "upstream-structure-interior": {
+        "id": "upstream-structure-interior",
+        "label": "The Upstream Structure's Interior",
+        "kind": "place",
+        "facts": [
+          "[d9] The hemispherical chamber is a precise receiving mechanism—every seam resonates at the four-second interval, every curve was made to listen. The chamber holds machinery beneath the floor. A ramp spirals downward into deeper levels where the preparation cycle runs. The structure was not built to…"
+        ],
+        "links": [
+          "what-the-water-remembers",
+          "second-river-rising",
+          "aevi",
+          "upstream-structure-machinery"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
+      },
+      "authentication-gate-mechanism": {
+        "id": "authentication-gate-mechanism",
+        "label": "The Authentication Gate",
+        "kind": "lore",
+        "facts": [
+          "[d9] The authentication gate is built into the machinery of the preparation cycle itself—it is not a separate component but an integrated suspension point. The cycle will stop on command from the authentication key. Once the key is delivered, the gate closes and the cycle either completes or is held in…"
+        ],
+        "links": [
+          "what-the-water-remembers",
+          "aevi",
+          "upstream-structure-machinery",
+          "the-preparation-order"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -3902,18 +4022,18 @@
   "customEncounters": {},
   "reconcileVersion": 22,
   "tendencies": {
-    "cerebral": 26.97640516782383,
-    "strategic": 20.220609995287976,
-    "cautious": 24.96977146046725,
-    "social": 14.35809070551559,
-    "generous": 4.190387317532026,
-    "risky": 1.1038495160243997,
-    "carousing": 0.41139441552878403,
-    "patient": 2.477457150121671,
-    "craft": 0.41101083731402627,
-    "devotion": 1.9833964774188104,
-    "deception": 0.7763296208564376,
-    "leadership": 2.4515393181668004
+    "cerebral": 27.301995038628235,
+    "strategic": 20.715094745405775,
+    "cautious": 25.345527173955567,
+    "social": 13.999138437877699,
+    "generous": 4.085627634593725,
+    "risky": 1.0762532781237897,
+    "carousing": 0.4011095551405644,
+    "patient": 2.415520721368629,
+    "craft": 0.4007355663811756,
+    "devotion": 1.93381156548334,
+    "deception": 0.7569213803350267,
+    "leadership": 2.39025083521263
   },
   "aptitudes": [
     "strategist",
@@ -3923,9 +4043,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 244,
-  "updatedAt": 1785585628265,
-  "rev": 161,
+  "actionCount": 245,
+  "updatedAt": 1785586051973,
+  "rev": 162,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4235,7 +4355,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 67
+    "valley": 68
   },
   "company": [],
   "foreclosed": [],
@@ -4484,10 +4604,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-08-01T11:12:27.982Z",
-      "lastAt": "2026-08-01T12:00:28.260Z",
+      "lastAt": "2026-08-01T12:07:31.948Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 13
+      "beats": 14
     }
   ],
   "_pendingArrival": null,
@@ -4562,30 +4682,30 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 56,
-    "choices": 56,
-    "characterDeltas": 38,
-    "scene": 56,
-    "npcUpdates": 51,
-    "codexUpdates": 49,
-    "timeOps": 51,
-    "sceneEnded": 33,
-    "placeUpdates": 26,
+    "sceneSummary": 57,
+    "choices": 57,
+    "characterDeltas": 39,
+    "scene": 57,
+    "npcUpdates": 52,
+    "codexUpdates": 50,
+    "timeOps": 52,
+    "sceneEnded": 34,
+    "placeUpdates": 27,
     "moveTo": 3,
-    "questUpdates": 33,
+    "questUpdates": 34,
     "stateOps": 1,
     "factUpdates": 10,
     "stageOps": 6,
     "scene_ended": 1,
-    "imagePrompt": 12,
+    "imagePrompt": 13,
     "generateRequest": 3,
-    "deeds": 7,
+    "deeds": 8,
     "ledgerEvents": 4,
     "offer": 8,
-    "gambitApt": 13,
+    "gambitApt": 14,
     "standingOps": 4
   },
-  "_opTurns": 56,
+  "_opTurns": 57,
   "_intentAsked": null,
   "corrections": [
     {
@@ -4699,6 +4819,11 @@
       },
       {
         "text": "Read the upstream structure's mechanism and confirmed the authentication gate—understanding the true cost of each path before the final choice.",
+        "weight": 2,
+        "day": 9
+      },
+      {
+        "text": "Reached the upstream pre-Transition structure and entered its threshold—brought the authentication key to the moment of decision.",
         "weight": 2,
         "day": 9
       }

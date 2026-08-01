@@ -70,7 +70,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.09092748389199723,
+    "spectrumId": -0.08638110969739736,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
@@ -170,14 +170,19 @@
         "player": "Use Descent — name what she actually wants right now, plainly, aloud, and watch what it does to the appraisal.",
         "summary": "Loki named Vessin's want plainly — the appraisal dropped, and what was left was honest.",
         "narration": "You let the silence sit for a breath after the last shift of her hips. Then you speak.\n\nYou name it. Not a question. Not a shape she has to agree to. Just the plain thing she wants — said quietly, close to her ear, the way you would name a component that has finally been correctly identified.\n\nShe goes still. Not the stillness of composure. The other kind.\n\nThen she laughs — a short, dry sound — and the laugh is honest and a little startled, the way a person laughs when they have been accurately read by someone who should not have been able to read them. She does not argue with the naming. She does not pretend it landed wrong. She shifts her weight, a fraction, deliberate, and looks at you with eyes that have stopped appraising anything and started simply wanting."
+      },
+      {
+        "player": "meet her hip shift - then put your mouth on her sensitive breast and tongue her nipple as your hold the other.  resonant voice through her chest into her folds slick against you and slide along them.  Ask her if she has and craft she'd like to use.",
+        "summary": "Loki turned harmonic voice through her body and asked — Vessin answered, shaky but dry, that she has a craft and would like to use it.",
+        "narration": "You meet the shift of her hips with a slow roll of your own. Then you duck your head and take the right breast into your mouth.\n\nShe makes a sound that is not the careful report voice. Not at all.\n\nYou hold the left in your palm and keep your mouth on the right, tongue slow and deliberate across the nipple, and you let harmonic voice unspool through your chest — not words, not verdict, just the low resonant thread of it, aimed down through her sternum and into the heat of her where she sits open against you. She is slick where your length rides against her, and you feel the small helpless forward press of her hips as the resonance finds its way through.\n\nShe gets one hand into your hair and holds on. Not directing. Just holding.\n\nAfter a moment — when she remembers she has a voice — she says, low and a little unsteady, that she does have one craft. She says she has been told it is very good for appraisals. She says she would like to use it, if you have no objection, and her dry economy is almost intact except for the small catch at the end of the sentence where it isn't."
       }
     ],
     "lastTurn": {
-      "narration": "You let the silence sit for a breath after the last shift of her hips. Then you speak.\n\nYou name it. Not a question. Not a shape she has to agree to. Just the plain thing she wants — said quietly, close to her ear, the way you would name a component that has finally been correctly identified.\n\nShe goes still. Not the stillness of composure. The other kind.\n\nThen she laughs — a short, dry sound — and the laugh is honest and a little startled, the way a person laughs when they have been accurately read by someone who should not have been able to read them. She does not argue with the naming. She does not pretend it landed wrong. She shifts her weight, a fraction, deliberate, and looks at you with eyes that have stopped appraising anything and started simply wanting.",
-      "sceneSummary": "Loki named Vessin's want plainly — the appraisal dropped, and what was left was honest.",
+      "narration": "You meet the shift of her hips with a slow roll of your own. Then you duck your head and take the right breast into your mouth.\n\nShe makes a sound that is not the careful report voice. Not at all.\n\nYou hold the left in your palm and keep your mouth on the right, tongue slow and deliberate across the nipple, and you let harmonic voice unspool through your chest — not words, not verdict, just the low resonant thread of it, aimed down through her sternum and into the heat of her where she sits open against you. She is slick where your length rides against her, and you feel the small helpless forward press of her hips as the resonance finds its way through.\n\nShe gets one hand into your hair and holds on. Not directing. Just holding.\n\nAfter a moment — when she remembers she has a voice — she says, low and a little unsteady, that she does have one craft. She says she has been told it is very good for appraisals. She says she would like to use it, if you have no objection, and her dry economy is almost intact except for the small catch at the end of the sentence where it isn't.",
+      "sceneSummary": "Loki turned harmonic voice through her body and asked — Vessin answered, shaky but dry, that she has a craft and would like to use it.",
       "choices": [
         {
-          "label": "Give her what she wants — let the night carry where it leads.",
+          "label": "Say yes — let her use it and watch what her craft does",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -187,32 +192,32 @@
           "trivial": true
         },
         {
-          "label": "Hold the moment — let her come to you on her own terms.",
-          "attribute": "social",
+          "label": "Ask her to name the craft first — you want to know what you're agreeing to",
+          "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "careful"
+            "study",
+            "romantic"
           ],
           "trivial": true
         },
         {
-          "label": "Ask her to name something in return — what she thinks you want.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
+          "label": "Use See the Made Thing — read what the offer actually is, before she names it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "negotiate"
+            "study",
+            "romantic"
           ],
-          "abilityId": "descent",
-          "trivial": false
+          "abilityId": "see_the_made_thing",
+          "trivial": true
         },
         {
-          "label": "Say nothing more — let the named want do all its own work.",
+          "label": "Say nothing — answer with your body instead of words",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -225,11 +230,11 @@
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Settled on Loki's lap, bare from the waist down — gone still after the naming, weight deliberate, watching Loki with eyes that have stopped appraising."
+            "state": "Settled on Loki's lap, bare from the waist down, one hand in Loki's hair — steadied, a little unsteady, her offer just made"
           },
           {
             "name": "Cy",
-            "state": "At the far wall, inspecting the latch bracket with its lens — present and untroubled."
+            "state": "At the far wall, inspecting the latch bracket with its lens — present and untroubled"
           }
         ],
         "objects": [
@@ -241,8 +246,8 @@
           "Traveler's Pack against the wall"
         ],
         "threads": [
-          "The want has been named — what she does with it is unresolved",
-          "The laugh was honest and startled — there is something she did not expect to feel"
+          "Vessin has named a craft she wants to use — what it is and whether Loki accepts is open",
+          "The named want is present; the calculation has not come back up"
         ]
       },
       "npcUpdates": [
@@ -250,25 +255,28 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "The Descent naming landed — her appraisal dropped entirely; the laugh that followed was honest, not a deflection.",
+          "note": "Harmonic voice through her body broke the composed report voice — she held on and then offered her own craft, dry economy almost intact",
           "learned": [
-            "Loki can read the plain want beneath the appraiser's manner — she did not expect to be named that accurately, and the surprise was genuine."
+            "She has a craft she describes as very good for appraisals — she is willing to use it here"
           ],
-          "statusNote": "Settled on Loki's lap, bare from the waist down — the named want hanging in the air between them; the calculation has not come back up.",
-          "relationshipDelta": 0
+          "statusNote": "Settled on Loki's lap, bare from the waist down, one hand in Loki's hair — her craft offered, waiting for the answer"
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a slow intimate beat in the alcove"
+      }
     },
     "sceneState": {
       "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral, deep night. Single candle burning on the low shelf. Drop-cloth spread on the floor. The open stair is the only entrance.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Settled on Loki's lap, bare from the waist down — gone still after the naming, weight deliberate, watching Loki with eye"
+          "state": "Settled on Loki's lap, bare from the waist down, one hand in Loki's hair — steadied, a little unsteady, her offer just m"
         },
         {
           "name": "Cy",
-          "state": "At the far wall, inspecting the latch bracket with its lens — present and untroubled."
+          "state": "At the far wall, inspecting the latch bracket with its lens — present and untroubled"
         }
       ],
       "objects": [
@@ -280,8 +288,8 @@
         "Traveler's Pack against the wall"
       ],
       "threads": [
-        "The want has been named — what she does with it is unresolved",
-        "The laugh was honest and startled — there is something she did not expect to feel"
+        "Vessin has named a craft she wants to use — what it is and whether Loki accepts is open",
+        "The named want is present; the calculation has not come back up"
       ]
     }
   },
@@ -711,7 +719,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Your bond deepens — courting.",
         "[d2] Named her preference plainly — neither leading nor being led, something shared. Said she has spent enough of today in charge of things.",
         "[d2] Lay quiet in the candlelight afterward — said the night was worth the not-knowing. The ease in her voice is new and small and real.",
         "[d2] Felt the harmonic current turned inward on her — recognized it without naming it, answered with intent. Forehead against Loki's. Has chosen to be here fully.",
@@ -720,23 +727,24 @@
         "[d2] Felt the harmonic verdict land — breath caught, weight settled; she is holding the silence rather than filling it.",
         "[d2] Spoke about herself plainly and without performance while Loki removed both their trousers — reporting, as she would any fact worth knowing. Settled close and asked whether the assessment still holds.",
         "[d2] Her appraiser's report broke mid-sentence at Loki's palm across the right breast and the slow shift of hips — she finished the sentence almost correctly and then stopped performing the indifference. Her hands landed on Loki's thighs without grip — landing, not holding.",
-        "[d2] The Descent naming landed — her appraisal dropped entirely; the laugh that followed was honest, not a deflection."
+        "[d2] The Descent naming landed — her appraisal dropped entirely; the laugh that followed was honest, not a deflection.",
+        "[d2] Harmonic voice through her body broke the composed report voice — she held on and then offered her own craft, dry economy almost intact"
       ],
       "knownFacts": [
-        "The phrase 'just for now' may be a hedge or may be the most honest thing she has said — she does not yet know which.",
         "She knows what she wants and is not embarrassed to say it directly when asked plainly",
         "She can hold something without calculating its cost — and she did, and she knows it now.",
         "Loki can turn harmonic voice to intimate register — she felt it clearly and did not pull away",
         "She meets a direct proposition with her own directness — she will not be coy about this.",
         "Loki can deliver a verdict through harmonic voice with precision and restraint — not a wash, a specific thing aimed at her.",
         "Reports herself the way she reports anything worth knowing — factual, unhurried, and without embarrassment",
-        "Loki can read the plain want beneath the appraiser's manner — she did not expect to be named that accurately, and the surprise was genuine."
+        "Loki can read the plain want beneath the appraiser's manner — she did not expect to be named that accurately, and the surprise was genuine.",
+        "She has a craft she describes as very good for appraisals — she is willing to use it here"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Settled on Loki's lap, bare from the waist down — the named want hanging in the air between them; the calculation has not come back up.",
+      "statusNote": "Settled on Loki's lap, bare from the waist down, one hand in Loki's hair — her craft offered, waiting for the answer",
       "domains": {
         "primary": "rootkin"
       },
@@ -1077,7 +1085,7 @@
     "lastSharedReadAt": "2026-08-01T22:35:06.269Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 22,
+    "turnsSinceOffer": 23,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -2020,17 +2028,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.7479011923065737,
-    "cerebral": 8.291973687434817,
-    "social": 19.321588065118608,
-    "strategic": 5.891899862132491,
-    "cautious": 4.695006838052358,
-    "amorous": 20.99014086661302,
-    "generous": 4.410784674198863,
-    "ruthless": 0.41225651588910905,
-    "risky": 1.2644473723419924,
-    "patient": 0.34529783816841614,
-    "deception": 0.40194456919928956
+    "devotion": 1.7042036624989094,
+    "cerebral": 8.084674345248947,
+    "social": 18.83854836349064,
+    "strategic": 5.744602365579179,
+    "cautious": 4.577631667101049,
+    "amorous": 22.465387344947697,
+    "generous": 4.300515057343892,
+    "ruthless": 0.40195010299188133,
+    "risky": 1.2328361880334426,
+    "patient": 0.3366653922142057,
+    "deception": 0.3918959549693073
   },
   "aptitudes": [
     "silver_tongue",
@@ -2040,7 +2048,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 120,
+  "actionCount": 121,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2349,8 +2357,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785624746479,
-  "rev": 402,
+  "updatedAt": 1785625149209,
+  "rev": 403,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3120,7 +3128,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 71
+    "the_quickwood": 72
   },
   "opLossPending": false,
   "sessions": [
@@ -3175,10 +3183,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T22:52:26.477Z",
+      "lastAt": "2026-08-01T22:59:09.209Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 37
+      "beats": 38
     }
   ],
   "establishedFacts": [
@@ -3216,17 +3224,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 137,
-    "choices": 137,
+    "sceneSummary": 138,
+    "choices": 138,
     "characterDeltas": 54,
-    "scene": 137,
+    "scene": 138,
     "placeUpdates": 17,
     "codexUpdates": 89,
-    "timeOps": 127,
+    "timeOps": 128,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 26,
-    "npcUpdates": 109,
+    "npcUpdates": 110,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3240,7 +3248,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 137,
+  "_opTurns": 138,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

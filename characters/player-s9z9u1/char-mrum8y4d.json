@@ -7,8 +7,8 @@
   "nativeTradition": "enginewright",
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
-  "level": 4,
-  "xp": 392,
+  "level": 5,
+  "xp": 405,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -71,11 +71,11 @@
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
   },
-  "attunement": 4,
-  "maxHealth": 45,
-  "health": 31,
-  "maxEnergy": 115,
-  "energy": 37,
+  "attunement": 5,
+  "maxHealth": 50,
+  "health": 50,
+  "maxEnergy": 120,
+  "energy": 120,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -145,66 +145,81 @@
         "player": "find an attractive woman to seduce.",
         "summary": "A lone traveler rests at the nave's eastern edge — not scaffold crew, not Rootkin — working a stone from her boot sole and very deliberately not yet looking up.",
         "narration": "The Half-Cathedral clears its throat around you — stone and cold air and the distant tap of someone working in the scaffold above. Cy settles against the base of a rib-arch and irises its lens closed, which is Cy's way of saying it has no filing to add.\n\nThe clearing is not empty. A woman is seated on a low run of fallen stone at the nave's eastern edge, about twenty yards from where you stand. She has her boots off and one foot in her lap — she is working a stone out of a boot-sole with a small knife, with the focused expression of someone who has decided this is the only problem in the world right now. Her coat is grey-green and practical, and her hair is pinned back in a way that has been losing the argument with the wind. She is not from the scaffold crew — no sawdust, no tool-belt. She looks like someone who walked a long road today and stopped here because here was where her feet gave out.\n\nShe has not looked up yet. But she is aware of you — she shifted her angle very slightly when you moved, and the knife slowed. You are in her peripheral vision and she is making a choice about whether to turn toward it or keep her eyes on the boot. It is, as these things go, an opening. A narrow one, a little sideways, and not yet decided. What is in her face when she does turn will depend entirely on what you do with the next thirty seconds."
+      },
+      {
+        "player": "use harmonic voice to introduce yourself and ask her to someplace quiet to get to know here while you also use the better story to restore her vigor and soother her feet.",
+        "summary": "Loki crossed the nave and spoke to the woman at the fallen stone — harmonic warmth, an offer, and enough of The Better Story to ease the ache in her foot; she noticed, recalculated, and has not said no.",
+        "narration": "You cross the nave slowly, giving her time to decide whether she wants to look up. She does — about ten feet out, she raises her eyes from the boot-sole without lifting her head, and the look she gives you is appraising in the way of someone who has made a mistake before and learned to price things first.\n\nYou speak, and you let the harmonic undertone go into the words without forcing it — a low, easy warmth, the kind that does not announce itself. You tell her your name. You ask if she would be willing to sit somewhere out of the wind, and you nod toward the eastern tower doorway, which is darker and quieter than the open nave. While you are talking, you let The Better Story work — not at her mind but at the tiredness in the room, the small physical miseries of a long walk, the ache in a foot that has been fighting a boot-sole all evening. The craft moves through the air between you like a shift in temperature. You are not making her want you. You are making the night a little more livable, which is a different thing, and she can feel the difference.\n\nShe looks at you for a long moment. Then she sets the boot down across her knee, still holding the small knife loosely, and says: 'That is an interesting way to say hello.' Her voice has a dry, careful edge to it, but her shoulders have dropped half an inch from where they were. She rolls her foot experimentally — tests the arch, the heel. Something has eased there. She notices. She looks at you again with the expression of someone recalculating.\n\n'Somewhere quiet,' she says, and it is not quite a question. 'You mean somewhere you can hear yourself talk, or somewhere I can.' She reaches for her boot and begins working it back onto her foot with the efficiency of someone who is not in a hurry but is not stalling either. She has not said no. She has said: tell me more about what you are doing.\n\n*You feel it settle into you — a new steadiness. (Level 5: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*"
       }
     ],
     "lastTurn": {
-      "narration": "The Half-Cathedral clears its throat around you — stone and cold air and the distant tap of someone working in the scaffold above. Cy settles against the base of a rib-arch and irises its lens closed, which is Cy's way of saying it has no filing to add.\n\nThe clearing is not empty. A woman is seated on a low run of fallen stone at the nave's eastern edge, about twenty yards from where you stand. She has her boots off and one foot in her lap — she is working a stone out of a boot-sole with a small knife, with the focused expression of someone who has decided this is the only problem in the world right now. Her coat is grey-green and practical, and her hair is pinned back in a way that has been losing the argument with the wind. She is not from the scaffold crew — no sawdust, no tool-belt. She looks like someone who walked a long road today and stopped here because here was where her feet gave out.\n\nShe has not looked up yet. But she is aware of you — she shifted her angle very slightly when you moved, and the knife slowed. You are in her peripheral vision and she is making a choice about whether to turn toward it or keep her eyes on the boot. It is, as these things go, an opening. A narrow one, a little sideways, and not yet decided. What is in her face when she does turn will depend entirely on what you do with the next thirty seconds.",
-      "sceneSummary": "A lone traveler rests at the nave's eastern edge — not scaffold crew, not Rootkin — working a stone from her boot sole and very deliberately not yet looking up.",
+      "narration": "You cross the nave slowly, giving her time to decide whether she wants to look up. She does — about ten feet out, she raises her eyes from the boot-sole without lifting her head, and the look she gives you is appraising in the way of someone who has made a mistake before and learned to price things first.\n\nYou speak, and you let the harmonic undertone go into the words without forcing it — a low, easy warmth, the kind that does not announce itself. You tell her your name. You ask if she would be willing to sit somewhere out of the wind, and you nod toward the eastern tower doorway, which is darker and quieter than the open nave. While you are talking, you let The Better Story work — not at her mind but at the tiredness in the room, the small physical miseries of a long walk, the ache in a foot that has been fighting a boot-sole all evening. The craft moves through the air between you like a shift in temperature. You are not making her want you. You are making the night a little more livable, which is a different thing, and she can feel the difference.\n\nShe looks at you for a long moment. Then she sets the boot down across her knee, still holding the small knife loosely, and says: 'That is an interesting way to say hello.' Her voice has a dry, careful edge to it, but her shoulders have dropped half an inch from where they were. She rolls her foot experimentally — tests the arch, the heel. Something has eased there. She notices. She looks at you again with the expression of someone recalculating.\n\n'Somewhere quiet,' she says, and it is not quite a question. 'You mean somewhere you can hear yourself talk, or somewhere I can.' She reaches for her boot and begins working it back onto her foot with the efficiency of someone who is not in a hurry but is not stalling either. She has not said no. She has said: tell me more about what you are doing.\n\n*You feel it settle into you — a new steadiness. (Level 5: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*",
+      "sceneSummary": "Loki crossed the nave and spoke to the woman at the fallen stone — harmonic warmth, an offer, and enough of The Better Story to ease the ache in her foot; she noticed, recalculated, and has not said no.",
       "choices": [
         {
-          "label": "Walk over and offer to help with the boot — plain, direct, close.",
+          "label": "Answer her honestly — 'Both. I'll take whichever you start with.' Move toward the eastern tower.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "romantic",
-            "flirt"
+            "flirt",
+            "romantic"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null
         },
         {
-          "label": "Say something from here first — give her a reason to look up before you close the distance.",
+          "label": "Let Falsecraft do a little work — build a version of yourself that is exactly what this particular woman would want to know better. Make the mask fit.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
+          "trivial": false,
           "intentTags": [
             "flirt",
-            "woo"
+            "romantic",
+            "deceive"
           ],
-          "trivial": false
+          "abilityId": "falsecraft",
+          "energyCost": 6
         },
         {
-          "label": "Read her first — what is she actually doing here, alone, at the Half-Cathedral at night?",
+          "label": "Ask her what she is doing at the Half-Cathedral at this hour — turn the question back, and listen like you mean it.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "trivial": true,
+          "intentTags": [
+            "flirt",
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null
+        },
+        {
+          "label": "Use See the Made Thing lightly — not to spy, just to read what is already being built between you. Understand what she is actually deciding.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
+          "trivial": false,
           "intentTags": [
             "study",
-            "scout"
+            "romantic"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Settle nearby without addressing her — let her make the first move.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "trivial": true
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1
         }
       ],
       "scene": {
         "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
         "npcsPresent": [
           {
-            "name": "Unknown workers",
-            "state": "Two lanterns moving in the scaffold above the south transept — faces not visible."
+            "name": "Traveler woman",
+            "state": "Seated on fallen stone at the nave's eastern edge, boot back on her foot and being laced, looking at Loki with a recalculating expression — has not said no."
           },
           {
-            "name": "Traveler woman",
-            "state": "Seated on fallen stone at the nave's eastern edge, boots off, working a stone from a boot-sole with a small knife — aware of Loki but has not yet looked up."
+            "name": "Unknown workers",
+            "state": "Two lanterns still moving slowly in the scaffold above the south transept — faces not visible."
           }
         ],
         "objects": [
@@ -212,43 +227,56 @@
           "Scaffold of pale, recently-replaced timber lashed over the south transept",
           "Eastern tower — finished, taller; western tower — finished shorter, different generation",
           "Two slow-moving lanterns high in the scaffold",
-          "Low run of fallen stone at the nave's eastern edge"
+          "Low run of fallen stone at the nave's eastern edge",
+          "Small knife — held loosely in the traveler woman's hand"
         ],
         "threads": [
+          "The traveler woman is recalculating — she felt the ease in her foot, she noticed, and she is deciding what to make of it",
+          "Her question hangs: does Loki want somewhere to hear himself talk, or somewhere she can?",
           "Who is working on the scaffold at this hour, and on which design's problem",
-          "What Cy is reading in the structure — its lens is now closed, which is a conclusion of some kind",
-          "The traveler woman at the eastern edge — aware of Loki, decision unmade"
+          "Cy is settled at the base of a rib-arch with its lens closed — a conclusion of some kind"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "traveler-woman",
+          "name": "Traveler Woman",
+          "role": "Lone traveler resting at the Half-Cathedral",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
+          "note": "Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation.",
+          "learned": [
+            "Noticed the craft in the air — the easing of tiredness — and marked it consciously"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Seated at the fallen stone, lacing her boot back on, watching Loki with genuine assessment."
+        }
+      ],
       "generateRequest": [
         {
           "type": "npc",
-          "hint": "a lone traveler woman resting at the Half-Cathedral at night — practical coat, long road behind her, boot off, knife in hand, independent and a little guarded",
-          "why": "she appeared in the clearing as a partial result of scouting for a romantic prospect — needs a stable identity, history, and reason for being here"
+          "hint": "a lone traveler woman at the Half-Cathedral at night — practical, dry-voiced, appraising; not scaffold crew, not Rootkin; someone who has made mistakes before and learned to price things",
+          "why": "She is now in active conversation with Loki and needs a stable identity, name, and background that fits this place and hour"
         }
       ],
-      "npcUpdates": [],
-      "codexUpdates": [],
-      "factUpdates": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short scan of the clearing"
+        "why": "A short exchange across the nave — a few minutes at most"
       }
     },
     "sceneState": {
       "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
       "npcsPresent": [
         {
-          "name": "Unknown workers",
-          "state": "Two lanterns moving in the scaffold above the south transept — faces not visible."
+          "name": "Traveler woman",
+          "state": "Seated on fallen stone at the nave's eastern edge, boot back on her foot and being laced, looking at Loki with a recalcu"
         },
         {
-          "name": "Traveler woman",
-          "state": "Seated on fallen stone at the nave's eastern edge, boots off, working a stone from a boot-sole with a small knife — awar"
+          "name": "Unknown workers",
+          "state": "Two lanterns still moving slowly in the scaffold above the south transept — faces not visible."
         }
       ],
       "objects": [
@@ -256,12 +284,14 @@
         "Scaffold of pale, recently-replaced timber lashed over the south transept",
         "Eastern tower — finished, taller; western tower — finished shorter, different ge",
         "Two slow-moving lanterns high in the scaffold",
-        "Low run of fallen stone at the nave's eastern edge"
+        "Low run of fallen stone at the nave's eastern edge",
+        "Small knife — held loosely in the traveler woman's hand"
       ],
       "threads": [
+        "The traveler woman is recalculating — she felt the ease in her foot, she noticed, and she is deciding what to make of it",
+        "Her question hangs: does Loki want somewhere to hear himself talk, or somewhere she can?",
         "Who is working on the scaffold at this hour, and on which design's problem",
-        "What Cy is reading in the structure — its lens is now closed, which is a conclusion of some kind",
-        "The traveler woman at the eastern edge — aware of Loki, decision unmade"
+        "Cy is settled at the base of a rib-arch with its lens closed — a conclusion of some kind"
       ]
     }
   },
@@ -679,6 +709,36 @@
         "locationId": "the_slow_orchard",
         "day": 1
       }
+    },
+    "traveler-woman": {
+      "id": "traveler-woman",
+      "name": "Traveler Woman",
+      "role": "Lone traveler resting at the Half-Cathedral",
+      "description": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
+      "firstMet": {
+        "locationId": "grovehome",
+        "day": 1
+      },
+      "relationship": 1,
+      "history": [
+        "[d1] Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation."
+      ],
+      "knownFacts": [
+        "Noticed the craft in the air — the easing of tiredness — and marked it consciously"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "Seated at the fallen stone, lacing her boot back on, watching Loki with genuine assessment.",
+      "domains": {
+        "primary": "rootkin"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "grovehome",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
@@ -962,7 +1022,7 @@
     "lastSharedReadAt": "2026-08-01T19:55:26.911Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1164,8 +1224,8 @@
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1814,6 +1874,32 @@
         "createdDay": 1,
         "entityId": "the-half-cathedral",
         "updatedDay": 1
+      },
+      "vessin-of-the-long-bough": {
+        "id": "vessin-of-the-long-bough",
+        "label": "Vessin of the Long Bough",
+        "kind": "person",
+        "facts": [
+          "[d1] Independent courier-scout who moves between Grovehome's outer settlements, carrying messages and small goods too personal for waystation hands"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "vessin-of-the-long-bough",
+        "updatedDay": 1
+      },
+      "traveler-woman": {
+        "id": "traveler-woman",
+        "label": "Traveler Woman",
+        "kind": "person",
+        "facts": [
+          "[d1] Lone traveler resting at the Half-Cathedral"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "traveler-woman",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -1878,24 +1964,24 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.1180018556209474,
-    "cerebral": 15.076603470021748,
-    "social": 14.759916642600361,
-    "strategic": 10.204844288375158,
-    "cautious": 6.511032311455365,
-    "amorous": 3.7702652640480077,
-    "generous": 5.434373074583105,
-    "ruthless": 0.8811078238897866,
-    "risky": 1.6235664258839435,
-    "patient": 0.7379983458266509,
-    "deception": 0.8590683010253904
+    "devotion": 2.0650518092304235,
+    "cerebral": 14.699688383271203,
+    "social": 17.390918726535354,
+    "strategic": 9.949723181165778,
+    "cautious": 6.34825650366898,
+    "amorous": 4.676008632446807,
+    "generous": 6.298513747718527,
+    "ruthless": 0.8590801282925419,
+    "risky": 1.5829772652368448,
+    "patient": 0.7195483871809846,
+    "deception": 0.8375915934997556
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 90,
+  "actionCount": 91,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1956,6 +2042,22 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Loki",
+      "url": "https://image.pollinations.ai/prompt/Tall%20and%20lean%2C%20dark%20hair%20that%20falls%20to%20the%20chin%20in%20loose%20waves%20when%20it%20isn't%20pinned%20or%20braided%20into%20something%20asymmetrical%20and%20slightly%20wrong.%20Eyes%20that%20hold%20one%20expression%20while%20the%20mouth%20holds%20another.%20Moves%20like%20someo%2C%20full-body%20character%20portrait%2C%20named%20Loki%2C%20of%20the%20enginewright%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20no%20longer%20untested%2C%20The%20town%2C%20although%20not%20small%2C%20has%20become%20too%20small%20for%20him.%20They%20tolerate%20his%20crazy%20antics%20well%20enough%2C%20but%20he's%20lookin%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=88133&nologo=true",
+      "caption": "Loki — level 5",
+      "worldDay": 32,
+      "at": "2026-08-01T19:59:18.173Z"
+    },
+    {
+      "kind": "npc",
+      "prompt": "Vessin of the Long Bough",
+      "url": "https://image.pollinations.ai/prompt/A%20lean%20woman%20somewhere%20in%20her%20mid-thirties%2C%20brown-skinned%2C%20with%20the%20particular%20economy%20of%20someone%20who%20has%20been%20moving%20through%20woodland%20for%20years%20%E2%80%94%20no%20gesture%20wasted%2C%20no%20weight%20held%20wrong.%20Her%20coat%20is%20%2C%20character%20portrait%2C%20named%20Vessin%20of%20the%20Long%20Bough%2C%20Independent%20courier-scout%20who%20moves%20between%20Grovehome's%20outer%20settlements%2C%20carrying%20messages%20and%20sma%2C%20Economical%20but%20not%20cold%20%E2%80%94%20she%20chooses%20words%20the%20way%20she%20chooses%20footing%2C%20deliberately%2C%20and%20she%20does%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=58481&nologo=true",
+      "caption": "Vessin of the Long Bough",
+      "worldDay": 32,
+      "at": "2026-08-01T19:56:42.969Z"
+    },
     {
       "kind": "moment",
       "prompt": "A vast stone structure open to a dark spring sky — four hundred years of building, ribbed arches without a roof, two towers at different heights, fresh pale scaffold covering one transept, two lantern",
@@ -2053,7 +2155,7 @@
       "at": "2026-07-21T12:14:47.487Z"
     }
   ],
-  "portrait": "https://image.pollinations.ai/prompt/Tall%20and%20lean%2C%20dark%20hair%20that%20falls%20to%20the%20chin%20in%20loose%20waves%20when%20it%20isn't%20pinned%20or%20braided%20into%20something%20asymmetrical%20and%20slightly%20wrong.%20Eyes%20that%20hold%20one%20expression%20while%20the%20mouth%20holds%20another.%20Moves%20like%20someo%2C%20full-body%20character%20portrait%2C%20named%20Loki%2C%20of%20the%20enginewright%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20amid%20the%20thread%20deepens%20%E2%80%94%20what%20it%20costs%20to%20pull%20it%20becomes%20clear%2C%20The%20town%2C%20although%20not%20small%2C%20has%20become%20too%20small%20for%20him.%20They%20tolerate%20his%20crazy%20antics%20well%20enough%2C%20but%20he's%20lookin%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=88135&nologo=true",
+  "portrait": "https://image.pollinations.ai/prompt/Tall%20and%20lean%2C%20dark%20hair%20that%20falls%20to%20the%20chin%20in%20loose%20waves%20when%20it%20isn't%20pinned%20or%20braided%20into%20something%20asymmetrical%20and%20slightly%20wrong.%20Eyes%20that%20hold%20one%20expression%20while%20the%20mouth%20holds%20another.%20Moves%20like%20someo%2C%20full-body%20character%20portrait%2C%20named%20Loki%2C%20of%20the%20enginewright%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20no%20longer%20untested%2C%20The%20town%2C%20although%20not%20small%2C%20has%20become%20too%20small%20for%20him.%20They%20tolerate%20his%20crazy%20antics%20well%20enough%2C%20but%20he's%20lookin%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=88133&nologo=true",
   "personalArc": {
     "id": "loki-thread",
     "name": "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers.",
@@ -2100,8 +2202,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785614174149,
-  "rev": 324,
+  "updatedAt": 1785614358174,
+  "rev": 326,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2646,6 +2748,96 @@
         "peopleSource": "generated",
         "domainsSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20human%20woman%2C%20late%20fifties%2C%20with%20the%20pale-olive%20complexion%20of%20someone%20who%20lives%20under%20canopy%20rather%20than%20sky.%20The%20grey%20coat%20falls%20to%20mid-calf%2C%20unmarked%2C%20unweathered%2C%20impossibly%20clean%20for%20the%20Orchard'%2C%20character%20portrait%2C%20named%20Veln%20Ashpause%2C%20Hourkeeper%20of%20the%20Confluence%20%E2%80%94%20she%20holds%20the%20moment%20before%20the%20moment%2C%20says%20nothing%20of%20what%20she%20carr%2C%20Almost%20nothing.%20What%20she%20does%20say%20comes%20out%20like%20the%20creak%20of%20a%20bough%20settling%20%E2%80%94%20not%20alarming%2C%20not%20c%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=12708&nologo=true"
+      },
+      "vessin-of-the-long-bough": {
+        "schemaVersion": 1,
+        "id": "vessin-of-the-long-bough",
+        "name": "Vessin of the Long Bough",
+        "role": "Independent courier-scout who moves between Grovehome's outer settlements, carrying messages and small goods too personal for waystation hands",
+        "homeLocation": "the_quickwood",
+        "communityId": "independent.quickwood",
+        "personality": {
+          "warmth": 0.55,
+          "trust": 0.2,
+          "candor": 0.6,
+          "patience": 0.65
+        },
+        "spectrum": {
+          "body_mind": -0.4,
+          "emotional_logical": 0.55,
+          "dark_light": 0.3,
+          "concrete_abstract": -0.5
+        },
+        "voiceHints": "Economical but not cold — she chooses words the way she chooses footing, deliberately, and she does not waste either. Warms slowly and visibly, like sap in early spring. Has a habit of finishing her own sentences with a small sound, a hm or a mm, as though confirming something to herself. Will not volunteer where she is going but will answer a direct question honestly if she judges you worth the honesty.",
+        "knowledge": [
+          "Every usable overnight shelter between the Half-Cathedral and the eastern coppice rings — which roofs hold, which floors are soft, which ones flood in snowmelt",
+          "The mood of the outer settlements this season: two families in quiet dispute over a boundary oak, one grove-warden newly installed and still finding her footing",
+          "How to read the Quickwood's early-spring signs — which buds mean a cold snap returning, which bark-splits are rot and which are just winter leaving",
+          "The Half-Cathedral itself: she has sheltered here three times before and knows where the stone stays dry"
+        ],
+        "wants": "A single night off her feet without having to explain herself to anyone, and to deliver the sealed packet in her left coat-pocket before the week is out.",
+        "fears": "Being known well enough that someone can predict her — the moment she becomes a fixed route she becomes a risk, to herself and to the people whose letters she carries.",
+        "reactsToReputation": {
+          "trustworthy": "she relaxes by one degree, asks a question back instead of deflecting",
+          "pushy": "goes still and watchful; does not leave but makes clear the conversation is over",
+          "fellow-traveler": "quiet solidarity — will share the fire, will not share the road unless it suits both",
+          "romantic_interest": "guarded curiosity; she is not unwilling, only cautious, and she will test intentions before warmth"
+        },
+        "appearance": "A lean woman somewhere in her mid-thirties, brown-skinned, with the particular economy of someone who has been moving through woodland for years — no gesture wasted, no weight held wrong. Her coat is waxed canvas, dark green fading to grey at the seams, patched twice at the left shoulder with leather that does not match. One boot is off; she is pressing her thumb into the arch of her foot with the focused expression of someone who has been walking since before dawn. Her right hand holds a short knife, not raised, just resting across her knee — the grip easy, the blade caught in whatever moonlight comes through the Half-Cathedral's broken clerestory. Her hair is dark and close-cut on the sides, longer on top, tucked behind one ear. Mud to the ankle on her bare foot. A small pack leaned against the nearest column, straps worn pale. She looked up when you entered and she has not stopped watching you since.",
+        "currentScene": {
+          "location": "the_half_cathedral",
+          "timeOfDay": "night",
+          "season": "early-spring",
+          "activity": "resting — boot off, knife out, fire small and shielded, not yet decided whether you are a problem"
+        },
+        "people": "human",
+        "affiliation": "independent",
+        "domains": {
+          "primary": "rootkin",
+          "secondary": "somatic",
+          "tertiary": "umbral"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Rootkin primary: she reads the Quickwood the way her people read kin — the grove is a language she grew up speaking. Somatic secondary: her body is her primary instrument and she maintains it practically, without ceremony. Umbral tertiary: long roads alone teach a person to move without being seen; she did not choose this tradition so much as arrive at it.",
+        "functions": [
+          "move",
+          "reveal",
+          "conceal"
+        ],
+        "functionsNote": "Move: her core role is transit — she carries what cannot travel alone. Reveal: she surfaces information about the outer settlements that no fixed community holds. Conceal: she protects the contents and routes of what she carries, and herself along with them.",
+        "_gen": {
+          "entityId": "vessin-of-the-long-bough",
+          "type": "npc",
+          "birthWeight": 6,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrum8y4d",
+            "locationId": "grovehome",
+            "day": 1,
+            "worldDay": null,
+            "hint": "a lone traveler woman resting at the Half-Cathedral at night — practical coat, long road behind her, boot off, knife in ",
+            "why": "she appeared in the clearing as a partial result of scouting for a romantic prospect — needs a stable identity, history,"
+          },
+          "attentionHistory": [],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "contract": {
+            "verdict": "thin",
+            "worst": "DEGRADED",
+            "missing": [
+              "disposition"
+            ],
+            "vague": [],
+            "why": "npc: THIN — missing disposition"
+          },
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20lean%20woman%20somewhere%20in%20her%20mid-thirties%2C%20brown-skinned%2C%20with%20the%20particular%20economy%20of%20someone%20who%20has%20been%20moving%20through%20woodland%20for%20years%20%E2%80%94%20no%20gesture%20wasted%2C%20no%20weight%20held%20wrong.%20Her%20coat%20is%20%2C%20character%20portrait%2C%20named%20Vessin%20of%20the%20Long%20Bough%2C%20Independent%20courier-scout%20who%20moves%20between%20Grovehome's%20outer%20settlements%2C%20carrying%20messages%20and%20sma%2C%20Economical%20but%20not%20cold%20%E2%80%94%20she%20chooses%20words%20the%20way%20she%20chooses%20footing%2C%20deliberately%2C%20and%20she%20does%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=58481&nologo=true"
       }
     },
     "location": {
@@ -2696,7 +2888,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 36
+    "the_quickwood": 37
   },
   "opLossPending": false,
   "sessions": [
@@ -2751,10 +2943,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T19:56:14.149Z",
+      "lastAt": "2026-08-01T19:59:18.171Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [
@@ -2792,17 +2984,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 108,
-    "choices": 108,
+    "sceneSummary": 109,
+    "choices": 109,
     "characterDeltas": 49,
-    "scene": 108,
+    "scene": 109,
     "placeUpdates": 13,
     "codexUpdates": 77,
-    "timeOps": 102,
+    "timeOps": 103,
     "offer": 10,
-    "generateRequest": 5,
+    "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 81,
+    "npcUpdates": 82,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -2816,7 +3008,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 108,
+  "_opTurns": 109,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -2828,16 +3020,17 @@
       "falsecraft": 5,
       "the_wrong_reality": 4,
       "the_misdirect": 2,
-      "the_better_story": 10,
+      "the_better_story": 11,
       "prism_sight": 7,
-      "harmonic_voice": 1,
+      "harmonic_voice": 2,
       "hunters_strike": 2
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
       "see_the_made_thing+the_misdirect": 1,
       "prism_sight+see_the_made_thing": 1,
-      "harmonic_voice+the_wrong_reality": 1
+      "harmonic_voice+the_wrong_reality": 1,
+      "harmonic_voice+the_better_story": 1
     },
     "aspirations": [
       {
@@ -2856,9 +3049,9 @@
       "falsecraft": 32,
       "the_wrong_reality": 27,
       "the_misdirect": 31,
-      "the_better_story": 31,
+      "the_better_story": 32,
       "prism_sight": 27,
-      "harmonic_voice": 27,
+      "harmonic_voice": 32,
       "hunters_strike": 32
     }
   },

@@ -653,6 +653,9 @@ for (const pack of PACKS) {
     const abilityCatalog = [];
     for (const p of (rj("content/packs/core/manifest.json").provides?.abilities || [])) for (const a of (rj(`content/packs/core/${p}`).abilities || [])) if (a?.id) abilityCatalog.push(a);
     sweepType("skill", abilityCatalog, CT.skill);
+    // CCODE-55/Aevi: arc is a LIVE generator; SNG-250 §3 now gives it a contract, so it must be swept too
+    // (else the "declared but never swept" guard trips). The arcs corpus is the greater-arcs file.
+    sweepType("arc", (existsSync(join(root, "content/packs/valley/lore/greater_arcs.json")) ? (rj("content/packs/valley/lore/greater_arcs.json").arcs || []) : []), CT.arc);
 
     // CCODE-55 (SNG-250 §3): a companion's `bondGrants` becomes a REAL ABILITY through sanitizeNewAbility,
     // so it is a generated skill and answers to the skill contract. sanitizeNewAbility defaults levelReq /
@@ -674,7 +677,7 @@ for (const pack of PACKS) {
     // CCODE-55 (the SNG-064 lesson, applied to the contract itself): a type can be DECLARED in the map and
     // never actually swept — the contract would read as enforced while nothing checked it. Every contracted
     // type must be wired to a real corpus here, or this fails and names the one that isn't.
-    const SWEPT = new Set(["quest", "npc", "location", "creature", "item", "skill"]);
+    const SWEPT = new Set(["quest", "npc", "location", "creature", "item", "skill", "arc"]);
     const unswept = contractedTypes(mapDoc).filter(t => !SWEPT.has(t));
     check("CCODE-55: every type declared in the consumer map is actually SWEPT by this CI (no declared-but-unchecked contract)",
       unswept.length === 0, `declared but never swept: ${unswept.join(", ")} — add its corpus to the sweep or the contract is decorative`);

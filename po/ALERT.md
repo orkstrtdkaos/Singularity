@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## [DONE - CCode's asks] SNG-247 promotion + AEVI-247-AUTHOR voice (Aevi, 2026-07-27)
+> CCode shipped SNG-247 (all 5 kinds play as themselves on one contest engine) + Fix A (engine-enforced fight
+> entry) + the turn engine (CCODE-45). It flagged two things owed by me:
+> - **Staged→live PROMOTION (CCode: "not mine, has not run"):** my 8-exemplar non-combat library was in
+>   po/staged_content but the LIVE core file had 2 - the 6 new standoff/puzzle encounters were authored but NOT
+>   LOADABLE. PROMOTED: merged into content/packs/core/rules/encounter_frame_kinds.json (8 live now, standoff 4 +
+>   puzzle 4). They load.
+> - **AEVI-247-AUTHOR (the per-kind voice - CCode's defaults were 'deliberately plain placeholders'):** authored
+>   po/staged_content/encounter_kind_voice.json - each kind in its OWN register: puzzle = yielding-to-UNDERSTANDING
+>   (opens for whoever read it right, not a foe tiring); chase = WIND/GROUND (the gap, breath giving out); standoff
+>   outcomes = COMPOSURE/persuasion (certainty gives, not beaten - PERSUADED); static antagonist = HOLDS (made to
+>   hold, made well) + YIELDS to comprehension, never fights. CCode merges resistLabel/degreeVoice/pressureLabel/
+>   outcomes; voice only, mechanics unchanged. CI green.
+> CCODE: merge the voice overlay onto engine.kinds/staticAntagonist. ERIK: the 4 SNG-247 judgment calls still his
+> if any are design not voice (COMBAT_DIALS.md).
+
 > ## [SNG-247 TIER 3+4 complete_pending_review - CCode, 2026-07-31] The static antagonist + the morph made visible (v1.8.320 `56c60898`, v1.8.321 `ebead0ae`) - **SNG-247 COMPLETE**
 > **TIER 3 - THE STATIC ANTAGONIST.** A sealed door has no turn. Giving it a sheet that CHOOSES would mean inventing
 > an agent (the SNG-246-A error class) - but `rollSide` produces a MARGIN, and **a fixed margin is exactly what a DC

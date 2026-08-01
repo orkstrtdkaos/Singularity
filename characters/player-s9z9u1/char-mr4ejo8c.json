@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 11,
-  "xp": 1055,
+  "xp": 1060,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -80,7 +80,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 150,
-  "energy": 118,
+  "energy": 111,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1032,21 +1032,26 @@
         "player": "Press forward on the northeast-by-east bearing immediately—you have the direction and the hours are against you.",
         "summary": "The party descends from the ridgeline toward the Disputed Zone in morning light. Sorel confirms the structure is near and the preparation cycle is accelerating. The shimmer waits ahead.",
         "narration": "The ridgeline path turns downslope to the northeast, and you follow it into steeper country. The spring melt has cut new water-runs through the hillside, and the grass is soft with mud beneath. Sorel keeps pace, her pack riding easy on shoulders that know this work. Aevi's motes brighten as the bearing clarifies—the swarm tightens into a single pointed cone aimed at the low ground ahead.\n\nTwo hours into the descent, the shimmer of the Disputed Zone comes into view like heat-haze, but colder. The interference layer sits between you and the ravine where the structure waits. Aevi hums a thin note—a check of the boundary, a conversation with whatever field-logic holds this place. \"Still aware,\" the motes say quietly. \"Still expecting something.\"\n\nSorel slows. She is reading the light across the ravine with her photonic reader, and her jaw tightens. \"The signal is stronger,\" she says. \"The preparation is accelerating. We have less time than three days. We have less time than two.\" She looks at you. \"The structure is down there. Your bearing is good.\"\n\nAevi dims slightly, and you feel the motes' attention shift. They are tasting something in the air—something that tastes like nanite activity, like old machinery waking. Like the valley's water remembering what it was ordered to become."
+      },
+      {
+        "player": "Use Resonant Sight through the Waystaff to read the structure's frequency signature across the shimmer—confirm what lies ahead before crossing.",
+        "summary": "At the ravine edge overlooking the Disputed Zone, Resonant Sight reads the upstream structure across the shimmer—a hemispherical chamber with active machinery beneath, running steadily through its preparation cycle. The timeline is shorter than the Council believed.",
+        "narration": "You lift the Waystaff and let your awareness spread through the lattice—prism-light braiding with sonic pull, reading how the morning refracts against what lies beneath the shimmer. The staff hums in your hands, a low frequency that settles through your chest.\n\nThe structure comes clear across the interference layer. Not a ruin. Not dead machinery waiting for the world to finish ignoring it. The mound holds a hemispherical chamber—stone dressed with geometric precision, seams that sing their own resonance back at you. Below it, something deeper still: a shaft descending, and at its throat, machinery. Not rusted. Not sleeping.\n\nIt is running.\n\nThe four-second pulse Aevi named three days ago reads through the Waystaff as a steady calibration—not a malfunction, not a cry for help. A countdown. Sorel's photonic reader, trained on the ravine, catches the same frequency her instrument has been tracking since the ridgeline. Her jaw tightens. She looks at you, and in her face you read what the numbers mean: the preparation is not in its beginning. It is well past its middle.\n\nAevi's motes brighten sharply, then dim again. When the swarm speaks, its voice carries a note you have not heard before—not fear, but recognition of something already in motion that cannot easily be turned aside. \"It knows we are watching,\" Aevi says quietly. \"It has always known we were coming.\""
       }
     ],
     "lastTurn": {
-      "narration": "The ridgeline path turns downslope to the northeast, and you follow it into steeper country. The spring melt has cut new water-runs through the hillside, and the grass is soft with mud beneath. Sorel keeps pace, her pack riding easy on shoulders that know this work. Aevi's motes brighten as the bearing clarifies—the swarm tightens into a single pointed cone aimed at the low ground ahead.\n\nTwo hours into the descent, the shimmer of the Disputed Zone comes into view like heat-haze, but colder. The interference layer sits between you and the ravine where the structure waits. Aevi hums a thin note—a check of the boundary, a conversation with whatever field-logic holds this place. \"Still aware,\" the motes say quietly. \"Still expecting something.\"\n\nSorel slows. She is reading the light across the ravine with her photonic reader, and her jaw tightens. \"The signal is stronger,\" she says. \"The preparation is accelerating. We have less time than three days. We have less time than two.\" She looks at you. \"The structure is down there. Your bearing is good.\"\n\nAevi dims slightly, and you feel the motes' attention shift. They are tasting something in the air—something that tastes like nanite activity, like old machinery waking. Like the valley's water remembering what it was ordered to become.",
-      "sceneSummary": "The party descends from the ridgeline toward the Disputed Zone in morning light. Sorel confirms the structure is near and the preparation cycle is accelerating. The shimmer waits ahead.",
+      "narration": "You lift the Waystaff and let your awareness spread through the lattice—prism-light braiding with sonic pull, reading how the morning refracts against what lies beneath the shimmer. The staff hums in your hands, a low frequency that settles through your chest.\n\nThe structure comes clear across the interference layer. Not a ruin. Not dead machinery waiting for the world to finish ignoring it. The mound holds a hemispherical chamber—stone dressed with geometric precision, seams that sing their own resonance back at you. Below it, something deeper still: a shaft descending, and at its throat, machinery. Not rusted. Not sleeping.\n\nIt is running.\n\nThe four-second pulse Aevi named three days ago reads through the Waystaff as a steady calibration—not a malfunction, not a cry for help. A countdown. Sorel's photonic reader, trained on the ravine, catches the same frequency her instrument has been tracking since the ridgeline. Her jaw tightens. She looks at you, and in her face you read what the numbers mean: the preparation is not in its beginning. It is well past its middle.\n\nAevi's motes brighten sharply, then dim again. When the swarm speaks, its voice carries a note you have not heard before—not fear, but recognition of something already in motion that cannot easily be turned aside. \"It knows we are watching,\" Aevi says quietly. \"It has always known we were coming.\"",
+      "sceneSummary": "At the ravine edge overlooking the Disputed Zone, Resonant Sight reads the upstream structure across the shimmer—a hemispherical chamber with active machinery beneath, running steadily through its preparation cycle. The timeline is shorter than the Council believed.",
       "choices": [
         {
-          "label": "Cross the shimmer into the Zone and move directly to the structure's location—you have the bearing and the time is urgent.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Cross the shimmer now—the preparation is past its middle, and every hour costs ground you cannot recover.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
             "travel",
-            "scout"
+            "risky"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1055,49 +1060,49 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Sorel what she can do with the photonic reader to map the safest approach—use her instrument to scout the Zone before you commit to a crossing.",
+          "label": "Ask Sorel what her photonic reader shows about the machinery's condition—is it degrading, or performing exactly as designed?",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "insight",
           "axes": {},
-          "difficulty": 12,
+          "difficulty": 0,
           "intentTags": [
-            "scout",
+            "study",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Use Resonant Sight through the Waystaff to read the structure's frequency signature across the shimmer—confirm what lies ahead before crossing.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 18,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "braid_prism_sight_sonic_resonance",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Hold the ridgeline a moment longer and ask Aevi what it tastes in the nanite-activity ahead—press your companion for a read of what the structure's current state is.",
-          "attribute": "social",
-          "subAttribute": "insight",
+          "label": "Use Keen Appraisal on the stone's visible wear from this distance—read how long the machinery has been running and what condition the chamber itself is in.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": 12,
           "intentTags": [
-            "scout"
+            "study",
+            "careful"
+          ],
+          "abilityId": "keen_appraisal",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aevi what it means—the structure knowing you were coming. What does it want from the party?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -1105,7 +1110,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -4,
+        "energy": -2,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
@@ -1114,70 +1119,82 @@
       "questUpdates": [
         {
           "op": "progress",
+          "questId": "what-the-water-remembers",
+          "title": "What the Water Remembers",
+          "summary": "Decide what the water becomes",
+          "giver": "water_keeper",
+          "note": "Resonant Sight confirms the upstream structure is actively running its preparation cycle—the machinery is past its middle point. The moment of decision draws near.",
+          "xpReward": 0
+        },
+        {
+          "op": "progress",
           "questId": "second-river-rising",
           "title": "The Second River",
-          "summary": "The preparation order is accelerating. Two days remain, not three.",
+          "summary": "Track the sub-current rising toward the surface",
           "giver": "brin.millbrook.child",
-          "note": "Sorel's photonic reader confirms: the sub-current at the source is rising faster than the three-day estimate. The timeline is collapsing.",
-          "xpReward": null
+          "note": "Sorel's reader and the Waystaff's resonance-read both confirm the ascent is accelerating. The structure's machinery is running at full cycle.",
+          "xpReward": 0
         }
       ],
       "standingOps": [],
       "delegateOps": [],
       "arcOps": [],
       "adoptSchool": null,
-      "offer": null,
+      "offer": {
+        "thing": "Aevi names something new about the structure's awareness—it has always known the party was coming, and its readiness is not hostile.",
+        "from": "Aevi's capacity to taste nanite-activity and recognize Precursor workmanship; the chamber's design, which was always waiting for this moment"
+      },
       "stageOps": [],
       "scene": {
-        "setting": "Hillside ravine overlooking the Disputed Zone shimmer, early morning light sharp on wet grass and mud-cut water-runs. The Zone's interference layer sits like heat-haze across the ravine ahead, colder and wrong. The descent is steep and the path switchbacks into steeper country.",
+        "setting": "Hillside ravine overlooking the Disputed Zone shimmer, early morning light bright on wet grass. The Zone's interference layer sits like cold heat-haze across the ravine ahead. The descent path switchbacks into steeper country. The mound holding the upstream structure is visible across the shimmer, its stone geometry clear through the resonant read.",
         "npcsPresent": [
           {
             "name": "Sorel",
-            "state": "Holding the photonic reader trained on the ravine, jaw tight, shoulders carrying the weight of accelerating timelines"
+            "state": "Holding the photonic reader trained on the ravine, jaw tight, shoulders carrying the accelerating timeline. She has seen what the machinery is doing and knows what it means."
           },
           {
             "name": "Aevi",
-            "state": "Motes dimmed slightly, tasting nanite-activity in the air, humming a thin check-frequency at the Zone boundary"
+            "state": "Motes brightened sharply then dimmed, speaking in a voice that carries recognition of something already in motion. The swarm hovers at your shoulder, pointing northeast-by-east into the Zone."
           }
         ],
         "objects": [
-          "Waystaff—held ready, nodal crystals aligned",
-          "Sorel's photonic reader—trained on the ravine",
+          "Waystaff—held and active, lattice singing",
+          "Sorel's photonic reader—trained downslope",
           "Sorel's pack—riding her shoulders",
           "Cellaceron's pack—worn and ready"
         ],
         "threads": [
-          "The structure lies directly ahead across the shimmer—location confirmed, bearing solid",
-          "The preparation cycle is faster than anticipated—two days remain, possibly less",
-          "The Zone's shimmer waits between the party and the structure",
-          "What Aevi tastes in the nanite-activity is still unnamed"
+          "The structure is running past its middle point—hours remain, not days.",
+          "Aevi names the structure as aware and waiting—not hostile, but certain of your arrival.",
+          "The shimmer waits between the party and the machinery—crossing it will commit you to whatever comes next.",
+          "Sorel's expression carries the weight of knowing the Council's timeline has already collapsed."
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "sorel",
-          "note": "Confirmed the bearing and read the acceleration in real time. Her photonic instrument shows the preparation is faster than three days—the Council's timeline is collapsing. She stands at the ravine edge with the reader trained on the structure's location, shoulder to shoulder with consequence.",
+          "note": "At the ravine edge, Sorel's photonic reader confirms the machinery is past its middle point. Her face carries the weight of knowing the Council's hidden timeline is already failing. She stands ready to move but does not speak—the choice rests with the party.",
           "learned": [
-            "The preparation cycle is accelerating—two days remain, possibly less"
+            "The photonic reader shows the machinery's cycle as accelerating, not steady",
+            "Sorel's silent readiness suggests she has accepted the consequence of moving forward"
           ],
-          "skillsObserved": [
-            "photonic instrument read under pressure—named the acceleration immediately"
-          ],
-          "statusNote": "Moving toward the upstream structure with Cellaceron and Aevi. The photonic reader is her institutional credential and her compass both."
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "statusNote": "Moving toward the upstream structure with Cellaceron and Aevi, carrying the Council's burden and her own knowledge in equal measure."
         },
         {
           "op": "update",
           "npcId": "aevi",
-          "note": "Tasted nanite-activity in the air as the party approached the Zone shimmer. Named it as the structure waking—old machinery, old orders, the valley's water remembering what it was told to become. The motes dimmed slightly; the attention shifted.",
+          "note": "At the ravine edge, Aevi's motes brightened sharply in response to the Resonant Sight read, then dimmed. The swarm named something new: the structure has always known the party was coming. The statement carries weight—not a threat, but recognition.",
           "learned": [
-            "The structure's nanite-activity is increasing—the preparation is accelerating",
-            "Aevi tastes something in the air that tastes like waking, like memory, like old instruction"
+            "Aevi tastes the structure's machinery as aware and purposeful",
+            "The phrase 'always known we were coming' suggests the structure's design anticipated this moment",
+            "Aevi's recognition reads as something deeper than mere observation"
           ],
-          "skillsObserved": [
-            "nanite-taste under field conditions—distinguished preparation-cycle activity from zone interference"
-          ],
-          "statusNote": "At Cellaceron's shoulder on the ravine edge, motes tightened and dimmed, reading the boundary. The cone of attention points northeast-by-east into the Zone."
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "statusNote": "At Cellaceron's shoulder on the ravine edge, motes dimmed and pointed northeast-by-east. Speaking with recognition of something set in motion long before this moment."
         }
       ],
       "factUpdates": [],
@@ -1185,15 +1202,28 @@
       "discovery": null,
       "codexUpdates": [
         {
-          "topic": "the-preparation-order",
-          "label": "The Preparation Order",
+          "topic": "upstream-structure-machinery",
+          "label": "The Upstream Structure's Machinery",
           "kind": "lore",
-          "fact": "The preparation cycle is accelerating beyond the Council's three-day estimate. The timeline is collapsing. Two days remain, possibly less.",
+          "entityId": null,
+          "fact": "The hemispherical chamber houses machinery beneath it that is actively running its preparation cycle—past its middle point, accelerating. The four-second pulse Aevi named is a steady calibration, not a malfunction. The structure is performing exactly as it was ordered to perform.",
           "links": [
-            "second-river-rising",
             "what-the-water-remembers",
-            "sorel",
-            "aevi"
+            "second-river-rising",
+            "aevi",
+            "sorel"
+          ]
+        },
+        {
+          "topic": "structure-awareness",
+          "label": "The Structure's Awareness",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "Aevi names the upstream structure as aware of the party's approach. The statement 'It has always known we were coming' suggests the structure's design anticipated this moment, or that something within it has been watching and waiting. Whether this is benevolence or simple mechanical readiness is not yet clear.",
+          "links": [
+            "aevi",
+            "upstream-structure-machinery",
+            "what-the-water-remembers"
           ]
         }
       ],
@@ -1203,13 +1233,13 @@
       "unlockPrecursor": null,
       "unlockSubstrate": null,
       "timeOps": {
-        "hoursPassed": 2,
-        "why": "descent from the ridgeline into the ravine, moving northeast-by-east toward the Zone"
+        "hoursPassed": 0.5,
+        "why": "reading the structure through the Waystaff's resonance lattice—a few minutes of focused sensing"
       },
       "moveTo": null,
       "stateOps": [],
       "itemUpdates": [],
-      "imagePrompt": "The ravine opens before you, and the Disputed Zone's shimmer sits across it like cold water—the interference layer rippling faintly in the spring morning. Behind it, unseen, the pre-Transition structure waits and wakes. Sorel stands at the edge with her photonic reader held high, light catching the Plateau collar at her throat. Aevi's motes have tightened into a single pointed cone, all attention aimed northeast-by-east. The path downslope is steep and cut with fresh water-runs. Time is no longer an abstraction.",
+      "imagePrompt": "Morning light on a ravine edge: you stand holding a resonance staff that hums with pale light, its lattice glowing faintly. Below, across a shimmer like cold heat-haze, a stone mound rises—geometric, purposeful, alive with machinery you can feel but not yet see. Sorel stands at your shoulder, her photonic reader trained downslope, her face carved with the weight of what the numbers mean. Aevi's motes form a single pointed cone, brighter than before, aimed directly at the structure across the interference layer. The spring morning is bright and merciless. Everything is in motion, and the structure is waiting.",
       "newAbility": null,
       "gambitOps": null,
       "gambitApt": false,
@@ -1221,28 +1251,28 @@
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Hillside ravine overlooking the Disputed Zone shimmer, early morning light sharp on wet grass and mud-cut water-runs. The Zone's interference layer sits like heat-haze across the ravine ahead, colder and wrong. The descent is steep and the path switchbacks into steeper country.",
+      "setting": "Hillside ravine overlooking the Disputed Zone shimmer, early morning light bright on wet grass. The Zone's interference layer sits like cold heat-haze across the ravine ahead. The descent path switchbacks into steeper country. The mound holding the upstream structure is visible across the shimmer, its stone geometry clear through the resonant read.",
       "npcsPresent": [
         {
           "name": "Sorel",
-          "state": "Holding the photonic reader trained on the ravine, jaw tight, shoulders carrying the weight of accelerating timelines"
+          "state": "Holding the photonic reader trained on the ravine, jaw tight, shoulders carrying the accelerating timeline. She has seen"
         },
         {
           "name": "Aevi",
-          "state": "Motes dimmed slightly, tasting nanite-activity in the air, humming a thin check-frequency at the Zone boundary"
+          "state": "Motes brightened sharply then dimmed, speaking in a voice that carries recognition of something already in motion. The s"
         }
       ],
       "objects": [
-        "Waystaff—held ready, nodal crystals aligned",
-        "Sorel's photonic reader—trained on the ravine",
+        "Waystaff—held and active, lattice singing",
+        "Sorel's photonic reader—trained downslope",
         "Sorel's pack—riding her shoulders",
         "Cellaceron's pack—worn and ready"
       ],
       "threads": [
-        "The structure lies directly ahead across the shimmer—location confirmed, bearing solid",
-        "The preparation cycle is faster than anticipated—two days remain, possibly less",
-        "The Zone's shimmer waits between the party and the structure",
-        "What Aevi tastes in the nanite-activity is still unnamed"
+        "The structure is running past its middle point—hours remain, not days.",
+        "Aevi names the structure as aware and waiting—not hostile, but certain of your arrival.",
+        "The shimmer waits between the party and the machinery—crossing it will commit you to whatever comes next.",
+        "Sorel's expression carries the weight of knowing the Council's timeline has already collapsed."
       ]
     }
   },
@@ -1264,14 +1294,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Aevi named the requirement: the authentication key must be carried to the pre-Transition upstream structure, northeast-by-east. The lower chamber is not the site — it was the receiving room. The site is upstream.",
         "A solo surveyor confirms the four-second interval rising through a regular mound on the northeast-by-east bearing — and that the survey team's markers were moved before the structure could be located.",
         "Sorel confirms the mound on the northeast-by-east bearing, four-second interval rising through solid earth — pre-Transition structure still active, survey team ordered to move markers before location could be confirmed.",
         "The survey team was ordered to move their bearing markers before the mound's location could be confirmed. The Council knows. The movement was deliberate.",
         "Moving toward the source structure with Sorel's testimony and Aevi's bearing-sense. The preparation order named: it is following its last instruction to prepare the watershed. The activation cycle is measurable and moving forward. The standing question: what does 'prepare' mean, and can it be interrupted before the cycle completes?",
         "Sorel's account confirms the Council's knowledge that the preparation will change the water itself. The second river is not a natural phenomenon — it is the preparation ascending toward surface.",
         "Three days remain before the preparation reaches completion. The party is now moving toward the source structure with full knowledge of what is at stake.",
-        "Sorel's photonic reader confirms: the sub-current at the source is rising faster than the three-day estimate. The timeline is collapsing."
+        "Sorel's photonic reader confirms: the sub-current at the source is rising faster than the three-day estimate. The timeline is collapsing.",
+        "Sorel's reader and the Waystaff's resonance-read both confirm the ascent is accelerating. The structure's machinery is running at full cycle."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1531,16 +1561,14 @@
         "s4"
       ],
       "progress": [
-        "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath.",
-        "↳ Sorel's probe crystal and photonic reader confirm the four-second interval — a pre-Transition structure still active, still executing commands. The Council's survey team found it and covered the…",
-        "Sorel's probe found the structure. The team moved markers in darkness before she could relocate it. She knows it was deliberate. The question moves from 'is it active' to 'who at the Council knew and why did they hide it?'",
         "Sorel joins the party. The investigation moves from a solitary archivist's testimony to a coordinated push toward the upstream structure. The Council's deliberate marker-relocation is now known to two independent parties moving in the same direction. The question of who gave the order and what the structure's activation serves moves from abstraction to immediate pursuit.",
         "Sorel names the Council's true fear: the structure will change the watershed into something the current arrays cannot process. They have chosen to build a secondary system in secret rather than stop the order. The timeline is now critical — the party moves toward the structure knowing that both sides of the valley's conflict are racing toward a collision over resources that are already poisoned.",
         "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not.",
         "↳ Sorel's direct account identifies the preparation order as a watershed-change instruction — not a destruction, but a transformation the current filtration systems cannot survive.",
         "Sorel confirms the Council chose to hide the order rather than stop it. The secondary system is incomplete and depends on reaching the upstream structure first.",
         "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to.",
-        "↳ Cellaceron pressed Sorel for the Council's true fear and received a direct answer: the preparation order changes the watershed, the secondary system is incomplete without the upstream authentication…"
+        "↳ Cellaceron pressed Sorel for the Council's true fear and received a direct answer: the preparation order changes the watershed, the secondary system is incomplete without the upstream authentication…",
+        "Resonant Sight confirms the upstream structure is actively running its preparation cycle—the machinery is past its middle point. The moment of decision draws near."
       ],
       "aliases": [],
       "startedAt": "2026-07-23T03:44:10.237Z",
@@ -1718,7 +1746,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d2] Framing the question as logistics rather than pressure gave her a practical door — she stepped through it",
         "[d2] Confirmed she was at the dock before dawn but NOT at the east window-sill. Named a possible instrument signature she thinks she recognizes, but withheld the name pending clearance.",
         "[d2] Said yes cleanly, showed the runner-credit seal, then asked about the boot-prints one more time with enough steadiness that she answered.",
         "[d9] Arrived on the ridgeline from the northeast at dawn — was part of a Council survey team three days ago, ran the secondary bearing line toward a regular mound on the northeast-by-east bearing. Left a probe crystal that recorded a four-second interval rising through the earth. The survey team was…",
@@ -1727,17 +1754,18 @@
         "[d9] Chose to move northeast-by-east with Cellaceron rather than hold the ridgeline alone. The burden of knowing the Council's choice was deliberate is now shared.",
         "[d9] Named the Council's true fear plainly: the preparation order changes the watershed into something the current arrays cannot process. The Council has chosen to build a secondary purification system in secret rather than stop the order itself. Sorel has moved from isolation with this knowledge into…",
         "[d9] Named the Council's true fear plainly: the preparation order changes the watershed, the secondary system is incomplete without the upstream authentication sequence, and the Council is racing against time they cannot reset. Chose to move northeast-by-east with Cellaceron rather than hold the…",
-        "[d9] Confirmed the bearing and read the acceleration in real time. Her photonic instrument shows the preparation is faster than three days—the Council's timeline is collapsing. She stands at the ravine edge with the reader trained on the structure's location, shoulder to shoulder with consequence."
+        "[d9] Confirmed the bearing and read the acceleration in real time. Her photonic instrument shows the preparation is faster than three days—the Council's timeline is collapsing. She stands at the ravine edge with the reader trained on the structure's location, shoulder to shoulder with consequence.",
+        "[d9] At the ravine edge, Sorel's photonic reader confirms the machinery is past its middle point. Her face carries the weight of knowing the Council's hidden timeline is already failing. She stands ready to move but does not speak—the choice rests with the party."
       ],
       "knownFacts": [
-        "Carries confidence in the terrain and the bearing-line despite three days of isolation with the knowledge",
-        "The Council's secondary system is not yet complete — they are racing the preparation order's timeline",
         "The preparation will change the water itself, not merely contaminate it",
         "The current filtration arrays will fail when the preparation completes",
         "The Council's secondary purification system is a framework with initial filtration beds—but no authentication sequence to activate it",
         "The Council has known for three days that they cannot stop the preparation order; they are only trying to contain its aftermath",
         "Without the authentication sequence from the upstream structure, the Council's secondary system is inert—a hedge that cannot be deployed",
-        "The preparation cycle is accelerating—two days remain, possibly less"
+        "The preparation cycle is accelerating—two days remain, possibly less",
+        "The photonic reader shows the machinery's cycle as accelerating, not steady",
+        "Sorel's silent readiness suggests she has accepted the consequence of moving forward"
       ],
       "skillsObserved": [
         "survey competence — standard interval spacing, accurate line",
@@ -1758,7 +1786,7 @@
         "primary": "radiant_folk"
       },
       "domainsSource": "role",
-      "statusNote": "Moving toward the upstream structure with Cellaceron and Aevi. The photonic reader is her institutional credential and her compass both.",
+      "statusNote": "Moving toward the upstream structure with Cellaceron and Aevi, carrying the Council's burden and her own knowledge in equal measure.",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Sorel%2C%20woman%2C%20Radiant%20Plateau%20archivist%2C%20water-accountability%20office%20%E2%80%94%20now%20a%20party%20member%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49129&nologo=true",
       "_portraitTier": "devoted"
     },
@@ -1773,7 +1801,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Named itself plainly at the convergence point: it is — or was — a record, or part of one, and this room was built to receive it. Says it was broken before it could read itself. Does not know who built the room or who sent it here.",
         "[d9] The chamber's geometry completed a read of Aevi at the convergence point — Aevi recovered the name of its maker and the shape of what it was carrying, though the break remains. Spoke from the scored walls for the first time rather than from near the shoulder.",
         "[d9] Completed the chamber's read at the convergence point — recovered the maker's name and the shape of its cargo. Drew its motes inward and offered to speak both aloud for the first time. Named plainly that the break remains and the room could not fill it.",
         "[d9] Spoke the full account at the convergence point: named its maker as Verath-Sem, named its cargo as the authentication key to a pre-Transition watershed preparation order. Confirmed: without the key, the order cannot be called off. The break — who interrupted the sending — is not in what the room…",
@@ -1782,17 +1809,18 @@
         "[d9] Ran Motes' Vigil ahead on the northeast-by-east line — clean read of terrain and bird-movement, but caught a pressure anomaly that sits outside the zone's own interference pattern. Cannot name it at distance.",
         "[d9] Pulled inward after the probe backlash — judged the anomaly as active, not passive, and capable of deflecting a directed read. Named it aware of being looked at.",
         "[d9] Drifted forward at Cellaceron's shoulder and quietly named what Prism Sight caught — the traveler is listening for whether the word 'surveyors' is used back.",
-        "[d9] Tasted nanite-activity in the air as the party approached the Zone shimmer. Named it as the structure waking—old machinery, old orders, the valley's water remembering what it was told to become. The motes dimmed slightly; the attention shifted."
+        "[d9] Tasted nanite-activity in the air as the party approached the Zone shimmer. Named it as the structure waking—old machinery, old orders, the valley's water remembering what it was told to become. The motes dimmed slightly; the attention shifted.",
+        "[d9] At the ravine edge, Aevi's motes brightened sharply in response to the Resonant Sight read, then dimmed. The swarm named something new: the structure has always known the party was coming. The statement carries weight—not a threat, but recognition."
       ],
       "knownFacts": [
-        "The preparation order is the source of the valley's water contamination — it is following its last instruction",
-        "The authentication key must be brought to the upstream pre-Transition structure — the chamber was a receiving room, not the site of the order itself",
-        "Aevi knows the bearing northeast-by-east but cannot give exact distance or landmarks from the chamber's position",
         "The zone interference layer has a consistent pattern; the anomaly ahead does not match it — it is something else, lying on the bearing.",
         "The anomaly on the northeast-by-east bearing deflected the Resonant Sight probe actively — it is not the zone's own interference",
         "The anomaly appears to be aware that a scan was attempted",
         "The structure's nanite-activity is increasing—the preparation is accelerating",
-        "Aevi tastes something in the air that tastes like waking, like memory, like old instruction"
+        "Aevi tastes something in the air that tastes like waking, like memory, like old instruction",
+        "Aevi tastes the structure's machinery as aware and purposeful",
+        "The phrase 'always known we were coming' suggests the structure's design anticipated this moment",
+        "Aevi's recognition reads as something deeper than mere observation"
       ],
       "skillsObserved": [
         "pressure-direction read through gathered field — distinguish",
@@ -1807,7 +1835,7 @@
         "locationId": "gen-object-object",
         "day": 9
       },
-      "statusNote": "At Cellaceron's shoulder on the ravine edge, motes tightened and dimmed, reading the boundary. The cone of attention points northeast-by-east into the Zone.",
+      "statusNote": "At Cellaceron's shoulder on the ravine edge, motes dimmed and pointed northeast-by-east. Speaking with recognition of something set in motion long before this moment.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -2394,7 +2422,7 @@
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
     "lastGenCount": 779,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 0,
     "wantProgress": {
       "elder-senna": {
         "progress": 4,
@@ -2423,10 +2451,6 @@
     },
     "recentOffers": [
       {
-        "thing": "Sorel's direct, waiting presence — a solo surveyor willing to stand on the ridge at dawn, instrument in hand, reading the story the…",
-        "from": "The water crisis itself — someone in the valley's institutional chain knows more than they've said, and sent an archivist to find the…"
-      },
-      {
         "thing": "Sorel's recognition that you are asking the same question she has been carrying alone",
         "from": "the burden of a deliberate lie she witnessed in her own institution — relief at not being the only one who sees it"
       },
@@ -2441,6 +2465,10 @@
       {
         "thing": "Sorel names the authentication sequence as the pivot point—the thing the Council cannot replace or rebuild, the thing that determines…",
         "from": "Sorel's direct answer to a pressure-point question; the weight of knowledge she has been carrying alone now spoken clearly"
+      },
+      {
+        "thing": "Aevi names something new about the structure's awareness—it has always known the party was coming, and its readiness is not hostile.",
+        "from": "Aevi's capacity to taste nanite-activity and recognize Precursor workmanship; the chamber's design, which was always waiting for this moment"
       }
     ],
     "latentArcs": {
@@ -3335,6 +3363,39 @@
         "aliases": [],
         "createdDay": 9,
         "updatedDay": 9
+      },
+      "upstream-structure-machinery": {
+        "id": "upstream-structure-machinery",
+        "label": "The Upstream Structure's Machinery",
+        "kind": "lore",
+        "facts": [
+          "[d9] The hemispherical chamber houses machinery beneath it that is actively running its preparation cycle—past its middle point, accelerating. The four-second pulse Aevi named is a steady calibration, not a malfunction. The structure is performing exactly as it was ordered to perform."
+        ],
+        "links": [
+          "what-the-water-remembers",
+          "second-river-rising",
+          "aevi",
+          "sorel"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
+      },
+      "structure-awareness": {
+        "id": "structure-awareness",
+        "label": "The Structure's Awareness",
+        "kind": "mystery",
+        "facts": [
+          "[d9] Aevi names the upstream structure as aware of the party's approach. The statement 'It has always known we were coming' suggests the structure's design anticipated this moment, or that something within it has been watching and waiting. Whether this is benevolence or simple mechanical readiness is…"
+        ],
+        "links": [
+          "aevi",
+          "upstream-structure-machinery",
+          "what-the-water-remembers"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -3459,7 +3520,7 @@
       "motes-vigil": 5,
       "light_well": 3,
       "greenlore": 4,
-      "braid_prism_sight_sonic_resonance": 9
+      "braid_prism_sight_sonic_resonance": 10
     },
     "coActivations": {
       "keen_appraisal+sonic_resonance": 1,
@@ -3481,7 +3542,7 @@
     "lastUsed": {
       "prism_sight": 32,
       "keen_appraisal": 32,
-      "braid_prism_sight_sonic_resonance": 23,
+      "braid_prism_sight_sonic_resonance": 32,
       "sonic_resonance": 23,
       "motes-vigil": 23
     }
@@ -3711,18 +3772,18 @@
   "customEncounters": {},
   "reconcileVersion": 22,
   "tendencies": {
-    "cerebral": 27.025350086981348,
-    "strategic": 21.37724588371911,
-    "cautious": 26.880618290657587,
-    "social": 14.470597175658298,
-    "generous": 4.8778278892730045,
-    "risky": 1.2849380133184247,
-    "carousing": 0.478884408885464,
-    "patient": 2.8838884488748553,
-    "craft": 0.4784379039750862,
-    "devotion": 2.3087762347317593,
-    "deception": 0.9036878906249999,
-    "leadership": 2.8537187499999996
+    "cerebral": 27.349716334806814,
+    "strategic": 21.84281473662613,
+    "cautious": 26.208602833391147,
+    "social": 14.108832246266841,
+    "generous": 4.755882192041179,
+    "risky": 1.2528145629854641,
+    "carousing": 0.4669122986633274,
+    "patient": 2.811791237652984,
+    "craft": 0.466476956375709,
+    "devotion": 2.251056828863465,
+    "deception": 0.8810956933593749,
+    "leadership": 2.7823757812499994
   },
   "aptitudes": [
     "strategist",
@@ -3733,9 +3794,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 238,
-  "updatedAt": 1785584343294,
-  "rev": 155,
+  "actionCount": 239,
+  "updatedAt": 1785584462409,
+  "rev": 156,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4045,7 +4106,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 61
+    "valley": 62
   },
   "company": [],
   "foreclosed": [],
@@ -4294,10 +4355,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-08-01T11:12:27.982Z",
-      "lastAt": "2026-08-01T11:39:03.284Z",
+      "lastAt": "2026-08-01T11:41:02.399Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 7
+      "beats": 8
     }
   ],
   "_pendingArrival": null,
@@ -4365,30 +4426,30 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 50,
-    "choices": 50,
-    "characterDeltas": 33,
-    "scene": 50,
-    "npcUpdates": 45,
-    "codexUpdates": 43,
-    "timeOps": 47,
-    "sceneEnded": 27,
+    "sceneSummary": 51,
+    "choices": 51,
+    "characterDeltas": 34,
+    "scene": 51,
+    "npcUpdates": 46,
+    "codexUpdates": 44,
+    "timeOps": 48,
+    "sceneEnded": 28,
     "placeUpdates": 24,
     "moveTo": 2,
-    "questUpdates": 27,
+    "questUpdates": 28,
     "stateOps": 1,
     "factUpdates": 9,
     "stageOps": 5,
     "scene_ended": 1,
-    "imagePrompt": 8,
+    "imagePrompt": 9,
     "generateRequest": 3,
     "deeds": 5,
     "ledgerEvents": 4,
-    "offer": 6,
-    "gambitApt": 7,
+    "offer": 7,
+    "gambitApt": 8,
     "standingOps": 3
   },
-  "_opTurns": 50,
+  "_opTurns": 51,
   "_intentAsked": null,
   "corrections": [
     {
@@ -4415,7 +4476,7 @@
   },
   "_opLedger": {
     "offer": {
-      "applied": 7,
+      "applied": 8,
       "rejected": 0,
       "lastWhy": null
     }

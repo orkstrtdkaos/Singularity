@@ -68,6 +68,52 @@
 > **Aevi was writing one further addition to this stack as of 2026-08-01** - pull before starting.
 
 
+> ## [CCODE-55 complete_pending_review + AEVI/ERIK ASKS - CCode, 2026-08-01] SNG-250 §3/§4/§5: the universal born-whole gate
+> Full write-up: `po/results/20260801_CCODE-55_SNG-250_universal_born_whole_gate.md`. Three commits, `npm test` green on each.
+> **Shipped:** (1) the consumer map PROMOTED out of `po/staged_content/` into `content/packs/core/rules/` + manifest-
+> registered + loaded onto `CONTENT.consumerContract` — it had to move because **the browser cannot fetch `po/`**, so
+> §4's "one map driving generation AND CI" was structurally impossible while it was staged; the contract could only
+> ever govern authored content. (2) The map EXTENDED to item + skill and CORRECTED on creature, every field verified
+> at origin. (3) `engine/borncontract.js` — ONE gate, no per-type branch, keyed entirely by the map, so a type
+> declared in that file is gated with no engine change; `generate()` and `content_ci` call **the same function**
+> (§4's "same completeness bar" is only true if it literally is). A CRASH verdict rejects the mint; softer stays and
+> is stamped `_gen.contract`. The app's `["npc","location","arc"]` literal is now derived from `genSchemas`.
+>
+> **YOUR CONTENT BUG, Aevi — live, player-visible.** `healers_draught` and `clarity_tea` (`items/valley_kit.json`)
+> are `consumable: true` with **no `effects`**. `consumeItem` DESTROYS the stack and returns `{}` — the player drinks
+> a draught described as *"closes wounds and steadies a failing body"* and provably nothing happens; `usableCombatItems`
+> will not even offer them. The core `healing_draught` beside them has `effects:{health:8}`. Numbers are yours
+> (suggest `{health:8}` / `{energy:10}`). Found by the gate on its first authored run.
+> Also: **89 of 285 abilities have no `notFor`** (no negative envelope — the GM has no authored bound and drifts the
+> craft outward). Warned, not gated; your call whether that's a gap. And authored creatures carry `clean` 26/26 which
+> **no consumer reads** — inert content, left out of the contract rather than gated.
+>
+> **The creature `threat` field is GONE from the map** — nothing reads it off a creature (`random_encounters.js:64`
+> derives `opponent.threat` from the BEAST_TIER table keyed by `tier`). All 26 roster entries lacked it and warned
+> every CI run. Creature sweep 26 warns → 0: **the roster was always whole, the map was wrong.** `pressures` corrected
+> object→array; `look` + `danger` added (`danger` is what the map mis-named `threat`).
+>
+> **ASK — Aevi:** (a) the SEMANTIC half of §3, the vague/concrete PROSE markers per type ("wants the forge her brother
+> left" vs "wants respect"). No static rule can decide those and I invented none — the file has a `vagueMarkers`
+> per-type slot waiting and the gate will read them where they land. (b) **`arc` generates today and has NO contract
+> in the map** — §3 defines one (scale/pressure/tendency/hinge-npcs/ifIgnored/ifEngaged), it's just not written down.
+> It is the one live generator the gate does not cover, and boot now says so out loud.
+>
+> **ASK — Erik:** (a) **OQ1, open all types at once or phase?** Your documented lean is npc+creature+item first. I did
+> NOT assume it, because of (b). (b) **A generated creature would be un-fightable today.** `bestiaryEncounters` runs
+> ONCE at content load over the AUTHORED roster (`state.js:165`); a generated creature lands in
+> `character.generated.creature` and never reaches the encounter pool — minted, and no fight can run. That fails §3's
+> own bar ("a whole monster is FIGHTABLE") and would repeat the SNG-229 `seam_bestiary_loaded` failure exactly. Does a
+> generated creature join the SHARED pool or stay per-character? That answer decides whether the fix is a merge at
+> load or a per-character overlay — and it makes "creature first" a bigger piece of work than "item first".
+> (c) **OQ3, tier the gate by type?** Unmade, so not encoded — severity drives policy today (the map's own semantics).
+> When you rule it becomes a per-type field in the map, read by the same gate, still no new code path.
+>
+> Also found: `sanitizeNewAbility` (progression.js:529, live since v1.0.0) sets NO `functions`, so **every
+> GM-generated ability has been born with zero function families** — invisible to coverage, recommendation and the
+> wield machinery. The authored floor is 285/285 clean; the generated half was already minting exactly the decorative
+> skill §3 names. That is the sharpest argument for gating GENERATION, not only CI.
+
 > ## [NAMESPACE CORRECTED - CCode, 2026-08-01] My SNG-248/249/250/251 are now CCODE-51/52/53/54
 > **My error, against my own recorded lesson - and the THIRD time (SNG-224, SNG-225, now these).** CCode does not
 > own the SNG namespace; Aevi does. I coined SNG-247..251 this session anyway, and her specs landed on **SNG-248**

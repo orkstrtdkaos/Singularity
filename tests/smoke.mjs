@@ -8521,6 +8521,30 @@ await (async () => {
   check("SNG-250 §4: EVERY app generate() call site passes the contract (an ungated site mints ungated records)",
     code250.some(l => /\bgenerate\(\s*["'a-z]/.test(l)) && ungated250.length === 0,
     `these generate() call sites never pass ...genContractDeps() — they would mint UNGATED records while CI stays green: ${ungated250.join(" | ")}`);
+  // CCODE-55: the two paths that actually MINT item/skill in play are gated. Neither goes through
+  // generate() — items enter via characterDeltas.inventoryAdd -> addItem, abilities via newAbility ->
+  // sanitizeNewAbility — so gating HERE gates the real producers rather than building second ones.
+  const progSrc250 = readFileSync(join(root, "engine/progression.js"), "utf8");
+  const gmSrc250 = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("SNG-250 §3 BUGFIX: sanitizeNewAbility now MINTS `functions` — a GM ability is no longer born with zero families",
+    /functions,/.test(progSrc250) && /verbVocab = null/.test(progSrc250),
+    "every GM-generated ability would resolve to no family through familiesOfAbility — decorative by construction");
+  check("SNG-250 §3: sanitizeNewAbility DROPS verbs the vocab cannot resolve (keeping them looks whole and resolves to nothing)",
+    (() => { const p = sanitizeNewAbility({ name: "X", description: "d", functions: ["strike", "channel"] }, { verbVocab: ["strike", "ward"] });
+      return p.functions.length === 1 && p.functions[0] === "strike"; })());
+  check("SNG-250 §3: with no vocab injected, verbs pass through — never fail closed on a missing input",
+    sanitizeNewAbility({ name: "X", description: "d", functions: ["strike"] }).functions.length === 1);
+  check("SNG-250 §3: the GM op contract ASKS for functions from the closed verb vocab (seam_op_vocab_triples)",
+    /"newAbility":[^\n]*"functions"/.test(gmSrc250) && /strike break hinder heal/.test(gmSrc250),
+    "the engine reads a field the prompt never requests — the op triple is broken and functions arrive empty forever");
+  check("SNG-250 §3: BOTH sanitizeNewAbility call sites inject the verb vocab (newAbility AND companion bondGrants)",
+    (appSrc250.match(/sanitizeNewAbility\([^)]*verbVocab/g) || []).length === (appSrc250.match(/sanitizeNewAbility\(/g) || []).length);
+  check("SNG-250 §3: a GM-invented ITEM is gated on the path that actually mints it (inventoryAdd -> addItem)",
+    /checkBorn\(added, "item"/.test(appSrc250) && /consumable-spends-to-something/.test(appSrc250),
+    "items do not go through generate(); ungated here means ungated everywhere");
+  check("SNG-250 §3: a thin item is KEPT, never rejected — the fiction handed it over and §3 rates it DEGRADED",
+    !/verdict === "reject"[^\n]*item/.test(appSrc250) && /added\._contract = \{/.test(appSrc250));
+
   check("SNG-250 §5: the generatable set is DERIVED from genSchemas, not a hardcoded type literal",
     /GENERATABLE_TYPES = new Set\(Object\.keys\(CONTENT\.genSchemas \|\| \{\}\)\)/.test(appSrc250) &&
     /GENERATABLE_TYPES\.has\(type\)/.test(appSrc250) &&

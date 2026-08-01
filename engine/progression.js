@@ -516,8 +516,21 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
 
 // ---------- GM-generated abilities (earned in fiction, clamped by engine) ----------
 
-/** Validate a GM-proposed new ability. Returns a safe def or null. */
-export function sanitizeNewAbility(raw) {
+/** Validate a GM-proposed new ability. Returns a safe def or null.
+ *
+ *  SNG-250 §3 (CCODE-55) — `functions` is now part of what this mints, and that is a BUG FIX, not a
+ *  feature. This path has been live since v1.0.0 and never set `functions` at all, so every
+ *  GM-generated ability resolved to ZERO families through familiesOfAbility (functions.js:33) and was
+ *  invisible to functionCoverage, recommendSkills and the wield/battle machinery — it could not fill a
+ *  coverage gap, be recommended, or pass its functions to a braid. All 285 AUTHORED abilities carry
+ *  `functions`; only the generated ones were born decorative. That is precisely §3's "a skill born
+ *  without a mechanical function does nothing the rules can resolve".
+ *
+ *  `verbVocab` (the 24 verbs of function_vocabulary.json) is INJECTED rather than imported, so this
+ *  module stays free of a content dependency and the caller supplies the same vocabulary
+ *  familiesOfAbility will resolve against. Verbs the vocab does not know are DROPPED, not kept —
+ *  keeping them would look whole while resolving to nothing, which is the failure itself. */
+export function sanitizeNewAbility(raw, { verbVocab = null } = {}) {
   if (!raw || !raw.name || !raw.description) return null;
   const id = slugify(raw.id || raw.name);
   if (!id) return null;
@@ -526,6 +539,13 @@ export function sanitizeNewAbility(raw) {
     const n = Number(v);
     if (Number.isFinite(n)) axes[String(k)] = Math.max(-1, Math.min(1, n));
   }
+  // Keep only verbs the engine can actually resolve. With no vocab supplied we cannot judge, so the
+  // model's verbs pass through unfiltered — never fail closed on a missing injection.
+  const known = Array.isArray(verbVocab) && verbVocab.length ? new Set(verbVocab.map(v => String(v).toLowerCase())) : null;
+  const functions = (Array.isArray(raw.functions) ? raw.functions : [])
+    .map(v => String(v).toLowerCase().trim())
+    .filter(v => v && (!known || known.has(v)))
+    .slice(0, 4);
   return {
     id,
     name: String(raw.name).slice(0, 60),
@@ -538,6 +558,7 @@ export function sanitizeNewAbility(raw) {
     levelReq: 1,
     powerSystem: "learned",
     taughtBy: raw.taughtBy ? String(raw.taughtBy).slice(0, 60) : null,
+    functions,
     effectTags: []
   };
 }

@@ -654,6 +654,23 @@ for (const pack of PACKS) {
     for (const p of (rj("content/packs/core/manifest.json").provides?.abilities || [])) for (const a of (rj(`content/packs/core/${p}`).abilities || [])) if (a?.id) abilityCatalog.push(a);
     sweepType("skill", abilityCatalog, CT.skill);
 
+    // CCODE-55 (SNG-250 §3): a companion's `bondGrants` becomes a REAL ABILITY through sanitizeNewAbility,
+    // so it is a generated skill and answers to the skill contract. sanitizeNewAbility defaults levelReq /
+    // energyCost / notFor, but it can only pass through `functions` the content supplies — so that one field
+    // is the whole gap, and it is checked directly rather than by sweeping partial defs against every field.
+    // Warn, not fail: the engine half (CCODE-55) had never read `functions` off a bondGrant until now, so
+    // the content was authored against a contract that did not yet exist. Aevi assigns the verbs.
+    {
+      const grants = [];
+      for (const p of (rj("content/packs/valley/manifest.json").provides?.companions || [])) {
+        const d = rj(`content/packs/valley/${p}`); const g = d.bondGrants || d.companion?.bondGrants;
+        if (g) grants.push([p.split("/").pop(), g]);
+      }
+      const hollow = grants.filter(([, g]) => !Array.isArray(g.functions) || !g.functions.length);
+      if (hollow.length) warnShape(`[shape:skill] ${hollow.length}/${grants.length} companion bondGrants have no "functions" — the granted ability engages NO family (invisible to functionCoverage/recommendSkills/wield): ${hollow.map(([f, g]) => `${f}:${g.name}`).join(", ")}`);
+      ok(`SNG-250 §3: companion bondGrants checked for a resolvable function family — ${grants.length} grants (${hollow.length} hollow)`);
+    }
+
     // CCODE-55 (the SNG-064 lesson, applied to the contract itself): a type can be DECLARED in the map and
     // never actually swept — the contract would read as enforced while nothing checked it. Every contracted
     // type must be wired to a real corpus here, or this fails and names the one that isn't.

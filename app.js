@@ -18,7 +18,7 @@ import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver, MODELS } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
-import { contractedTypes } from "./engine/borncontract.js";   // SNG-250 §4: which types the born-whole contract covers
+import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
 import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
@@ -4165,7 +4165,31 @@ function applyTurn(turn, resolution, playerWords = null) {
   // SILENT, so a legitimate outcome ("the raider took your Waterskin") felt like a broken button. Same italic
   // mechanical-note convention as itemUpdates below, so the loss/gain is never a mystery.
   const _invNotes = [];
-  for (const item of d.inventoryAdd || []) { addItem(character, item, CONTENT.items); const nm = typeof item === "string" ? item : item?.name; if (nm) _invNotes.push(`✦ ${nm} — added to your pack.`); }
+  // SNG-250 §3/§4 (CCODE-55): an ITEM the GM invents is GENERATED CONTENT, and this is the path that
+  // actually mints one — items do NOT go through generate() (that path makes npc/location/arc only), so
+  // gating them here is gating the real producer rather than building a second one. §3's bar: "a whole
+  // item DOES something the rules can apply — usable, not just flavor."
+  //
+  // Never REJECTED, deliberately. The fiction just handed the player this thing; making it vanish would
+  // lose a story beat to a data problem, and §3 rates a thin item as DEGRADED (it works, hollowly) —
+  // Erik's OQ3 lean is warn-repair for exactly this type. So a thin item is kept, STAMPED so it stays
+  // findable, and — the point — SAID OUT LOUD in the same mechanical-note channel as the gain itself,
+  // because a draught that restores nothing should not read to the player as a working draught.
+  for (const item of d.inventoryAdd || []) {
+    const added = addItem(character, item, CONTENT.items);
+    const nm = typeof item === "string" ? item : item?.name;
+    if (nm) _invNotes.push(`✦ ${nm} — added to your pack.`);
+    if (added && typeof item !== "string") {
+      const rep = checkBorn(added, "item", CONTENT.consumerContract, { vocabs: genContractDeps().vocabs });
+      if (rep.gated && rep.verdict !== "clean") {
+        added._contract = { verdict: rep.verdict, missing: rep.missing.map(m => m.field), vague: rep.vague.map(v => v.id) };
+        console.warn(`[born-contract] item "${added.name}" ${describeBorn(rep)}`);
+        // The one case worth telling the player about: a consumable that spends to nothing. consumeItem
+        // would destroy the stack and return {} — silently, and indistinguishably from a working one.
+        if (rep.vague.some(v => v.id === "consumable-spends-to-something")) _invNotes.push(`  ${nm} carries no mechanical effect yet — it is a story item until one is set.`);
+      }
+    }
+  }
   for (const item of d.inventoryRemove || []) { const nm = typeof item === "string" ? item : item?.name; removeItem(character, nm); if (nm) _invNotes.push(`− ${nm} — taken from you.`); }
   if (_invNotes.length) turn.narration = (turn.narration || "") + "\n\n" + _invNotes.map(n => `*${n}*`).join("\n");
   // SNG-137: items EVOLVE — the GM grows an owned item's story (description/name/provenance/use); bounded,
@@ -4193,7 +4217,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       }
       if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules, c.stages).events);
       if (unlocked.includes("grant") && c.bondGrants) {
-        const def = sanitizeNewAbility(c.bondGrants);
+        const def = sanitizeNewAbility(c.bondGrants, { verbVocab: genContractDeps().vocabs["function_vocabulary.verbs"] }); // SNG-250 §3: born with real families
         if (def && !character.abilities.some(a => a.abilityId === def.id)) {
           character.customAbilities = character.customAbilities || {};
           character.customAbilities[def.id] = def;
@@ -4391,7 +4415,10 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   // GM-granted new ability: earned in fiction, clamped by engine
   if (turn.newAbility) {
-    const def = sanitizeNewAbility(turn.newAbility);
+    // SNG-250 §3 (CCODE-55): the verb vocab is INJECTED so a GM-minted ability is born with real
+    // function families instead of none — see sanitizeNewAbility. Same index familiesOfAbility uses.
+    const def = sanitizeNewAbility(turn.newAbility, { verbVocab: genContractDeps().vocabs["function_vocabulary.verbs"] });
+    if (def) { const rep = checkBorn(def, "skill", CONTENT.consumerContract, { vocabs: genContractDeps().vocabs }); if (rep.gated && rep.verdict !== "clean") console.warn(`[born-contract] newAbility ${describeBorn(rep)}`); }
     const granted = def ? applyNewAbility(character, def, CONTENT.rules) : { ok: false };
     if (granted.ok) turn.narration += `
 

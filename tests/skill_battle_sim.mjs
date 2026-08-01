@@ -12,7 +12,9 @@ import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engin
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
 import { recordUse } from "../engine/practice.js";
 import { FRAME_KINDS, encounterKind, chaseFromFight, frameModel } from "../engine/encounterFrame.js";   // SNG-247: the kind list the colour gate checks
-import { synthesizeStandoffDef, synthesizePuzzleDef, frameExemplarEncounters, eligibleEncountersFor } from "../engine/random_encounters.js";   // SNG-247 2a: the kind that never minted
+import { synthesizeStandoffDef, synthesizePuzzleDef, frameExemplarEncounters, eligibleEncountersFor } from "../engine/random_encounters.js";
+import { characterPower, threatBand, isRelevantThreat, sampleThreat, applyVariant } from "../engine/threat.js";   // SNG-249
+import { appraiseOpponent } from "../engine/sense.js";   // SNG-247 2a: the kind that never minted
 import { harmTargetFor } from "../engine/intent.js";   // SNG-246 Fix A: who the player committed harm against
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -853,6 +855,49 @@ check("SNG-247: the OLD escaper would have failed that same round-trip (the chec
   (() => {
     const esc2 = x => String(x ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     return esc2(JSON.stringify({ label: "Hunter's Strike" })).includes("'");
+  })());
+
+// ---- SNG-249: THREAT BALANCE — level sets the MEAN, region sets the CAST ----
+// Erik: "a lvl 5 in Millbrook will fight boars... when they come back at lvl 15 the monster is easy to slay...
+// a boar at lvl 20 isn't really an encounter anymore, unless it's a special encounter."
+const lvl5 = { attributes: { physical: 3, mental: 3, practical: 3, social: 2 }, abilities: [{ level: 1 }] };
+const lvl20 = { attributes: { physical: 9, mental: 8, practical: 9, social: 6 }, abilities: [{ level: 5 }, { level: 4 }, { level: 4 }] };
+const p5 = characterPower(lvl5, {}), p20 = characterPower(lvl20, {});
+check("SNG-249: built power, not level — a character who built deep reads as a bigger threat-taker",
+  p20 > p5 * 2 && characterPower({ attributes: { physical: 9 }, abilities: [{ level: 5 }] }, {}) > characterPower({ attributes: { physical: 3 }, abilities: [{ level: 5 }] }, {}));
+check("SNG-249 (the one that matters): the SAME foe reads differently at two levels — the band is relative",
+  threatBand(p5, 45).key === "even" && threatBand(p20, 45).key === "beneath");
+check("SNG-249: Erik's Millbrook arc — the thing you fled at 5 is a real fight at 20, and there is STILL something beyond you",
+  threatBand(p5, 180).key === "flee" && threatBand(p20, 180).key === "even" && threatBand(p20, 900).key === "flee");
+check("SNG-249: the ceilings are GONE — a threat-300 foe is genuinely harder than a threat-70 one",
+  (() => {
+    const a = synthesizeOpponentSheet({ threat: 70 }, sb), b = synthesizeOpponentSheet({ threat: 300 }, sb);
+    return b.attributes.physical > a.attributes.physical && b.skills[0].tier > a.skills[0].tier && b.energy > a.energy;
+  })());
+check("SNG-249: a boar you have outgrown stops being an encounter — UNLESS something makes it special",
+  !isRelevantThreat(p20, 20, {}) && isRelevantThreat(p20, 20, { special: true }));
+check("SNG-249: a variant makes an outgrown thing appear, and a REBASING axis makes it matter again",
+  (() => {
+    const boar = { opponent: { name: "boar", threat: 20, health: 4 } };
+    const greater = applyVariant(boar, "greater", null, { power: p20 });
+    const warped = applyVariant(boar, "warped", null, { power: p20 });
+    return greater.special === true && greater.opponent.threat > 20
+      && warped.opponent.threat > greater.opponent.threat
+      && threatBand(p20, warped.opponent.threat).key !== "beneath";
+  })());
+check("SNG-249: the draw is a DISTRIBUTION with both tails — mostly a real fight, sometimes something to run from",
+  (() => {
+    let x = 7; const rng = () => ((x = (x * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
+    const keys = {};
+    for (let i = 0; i < 3000; i++) { const k = threatBand(p20, sampleThreat(p20, rng, {}).threat).key; keys[k] = (keys[k] || 0) + 1; }
+    const flee = (keys.flee || 0) + (keys.dire || 0);
+    return (keys.even || 0) / 3000 > 0.4 && flee / 3000 > 0.02 && flee / 3000 < 0.30;   // a real tail, not a treadmill
+  })());
+check("SNG-249: the appraisal COUNSEL escalates on the hard rungs — the line that stops a walk into a death",
+  (() => {
+    const def = { opponent: { name: "x", threat: 900 } };
+    const a = appraiseOpponent(lvl20, def, synthesizeOpponentSheet(def.opponent, sb), rules, sb, {});
+    return /run|escape|do not/i.test(a.counsel) && a.band.key === "flee" && a.power === p20;
   })());
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

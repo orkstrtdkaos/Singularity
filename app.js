@@ -65,12 +65,13 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective, drivenPressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { ensurePressureQueue, enqueuePressure, pullTopPressure, npcWantPressures, threatAttackPressure } from "./engine/pressure.js"; // SNG-245: the pressure queue — the world DRIVES
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
+import { characterPower } from "./engine/threat.js"; // SNG-249: built power sets the mean the encounter pool revolves around
 import { frameModel, frameSize, chaseFromFight, encounterKind, collapseMode, collapseResult, collapseFloor, frameCollapsible, swingDegree, wardAgainst, wardBroken, trivializes, playerReceiptLine } from "./engine/encounterFrame.js"; // SNG-230: the ENCOUNTER FRAME — obvious kind/win/exits; frameSize routes takeover-vs-banner; chaseFromFight = the chase you flee into (§6a); collapse* = a finisher ends a collapsible foe (§6b/§7a); wardAgainst/wardBroken = a ward FORBIDS a mechanic (§7b); trivializes = the right kit VOIDS a challenge's premise (§7c). SNG-246 Fix D: playerReceiptLine = the mechanical receipt SHOWN to the player
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.327";
+const APP_VERSION = "1.8.328";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2420,7 +2421,9 @@ function listAvailableEncounters() {
   // built are reachable through GM OFFERS (rule 18), not just the sparse hand-seeds. Danger-gated: a calm place
   // surfaces little, a dangerous one real threats; the GM still only offers when the fiction invites.
   const seeded = new Set((loc.encounterSeeds || []).map(s => s.encounterId));
-  const poolLines = eligibleEncountersFor(CONTENT.randomEncounters, loc)
+  // SNG-249: the pool the GM is offered revolves around THIS character's power — the region supplies the cast,
+  // the player's power supplies the mean, and a foe they have outgrown drops out unless it is special.
+  const poolLines = eligibleEncountersFor(CONTENT.randomEncounters, loc, { power: characterPower(character, CONTENT.rules?.threat || {}) })
     .filter(e => !seeded.has(e.id))                              // don't duplicate a hand-seeded encounter
     .map(e => `- id "${e.id}" (${e.routing}${e.flavor ? "/" + e.flavor : ""}): ${smartClamp(String(e.seed || e.look || e.id), 150)}`);
   const lines = [...seedLines, ...poolLines];

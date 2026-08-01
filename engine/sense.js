@@ -3,6 +3,7 @@
 // their attunement earns them. Pure functions; no I/O.
 
 import { spectrumAlignment } from "./resolve.js";
+import { characterPower, threatBand } from "./threat.js"; // SNG-249: the band is RELATIVE — the same foe reads differently at level 5 and level 20
 
 /** Determine the character's sense tier for this action.
  *  Attunement grows with level/ability use; matching the local spectrum sharpens the read;
@@ -124,15 +125,24 @@ export function appraiseOpponent(character, def, oppSheet, rules, sb, content = 
   const theirTier = Math.max(0, ...((oppSheet?.skills || []).map(s => Number(s.tier) || 0)));
   const skill = APPR_REL(myTier, theirTier, tol);
   const threat = Number(def?.opponent?.threat) || 0;
-  const bands = content.threatBands || [{ at: 80, label: "deadly" }, { at: 60, label: "dangerous" },
-    { at: 40, label: "serious" }, { at: 20, label: "modest" }, { at: 0, label: "slight" }];
-  const band = (bands.find(b => threat >= b.at) || bands[bands.length - 1]).label;
+  // SNG-249 (Erik's model): the band is RELATIVE, not absolute. The old ladder read `threat >= 80 = deadly` for
+  // everyone — so the same warpling was "deadly" to a level-20 character, and the world could never tell you that
+  // you had outgrown a thing, nor that what is in front of you is far beyond you. "Your level sets the mean about
+  // which the encounters revolve": the rung is threat ÷ YOUR power. Labels are Aevi's once authored (SNG-249).
+  const power = characterPower(character, content.power || {});
+  const rung = threatBand(power, threat, content.threatBands || null);
+  const band = rung.label;
   const against = [skill, prowess].filter(r => r === "high").length;
   const counsel = against === 2 ? "They have the better of you on both counts — this is a fight you may not win."
     : against === 1 ? "They have an edge on you. Winnable, but it will cost."
     : (skill === "low" && prowess === "low") ? "You have the better of them on both counts."
     : "An even contest.";
-  return { skill, prowess, disposition: dispositionOf(def, content), threat: band, threatScore: threat, counsel,
-    lines: [{ label: "craft", rel: skill, text: `Their craft ${APPR_WORD[skill]}` },
+  // SNG-249: on the hard rungs the BAND's counsel wins — "do not fight this" outranks a craft-vs-prowess compare,
+  // and this is the line that has to stop a player walking into a death.
+  const finalCounsel = ["flee", "dire"].includes(rung.key) ? (rung.counsel || counsel) : counsel;
+  return { skill, prowess, disposition: dispositionOf(def, content), threat: band, threatScore: threat,
+    power, band: rung, counsel: finalCounsel,
+    lines: [{ label: "how they stand to you", rel: rung.key, text: `${rung.label} — threat ${threat} against your ${power}` },
+            { label: "craft", rel: skill, text: `Their craft ${APPR_WORD[skill]}` },
             { label: "prowess", rel: prowess, text: `Their physical prowess ${APPR_WORD[prowess]}` }] };
 }

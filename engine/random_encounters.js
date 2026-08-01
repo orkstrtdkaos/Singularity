@@ -8,6 +8,7 @@
 // encounters.js unchanged. Any lethal-capable encounter is OFFERED with a decline
 // path built HERE (SNG-002b), not left to the model.
 
+import { sampleThreat, isRelevantThreat } from "./threat.js"; // SNG-249: the player power the pool revolves around
 import { smartClamp } from "./namematch.js"; // SNG-229: word-boundary clamp for a synthesized creature's seed prose
 
 const PEACEFUL = ["beneficial", "benign", "beautiful"];
@@ -170,8 +171,28 @@ export function classifyNarrativeKind({ intentTags = [], why = "", hoursPassed =
  *  synthesize a real def, incl. the SNG-229 beast_ duels) are offerable by id; loose narrative/opposed rows have
  *  no def to start, so they stay ambient narration (not offered). Weight-ordered + capped so the prompt isn't
  *  flooded. Pure. */
-export function eligibleEncountersFor(table, location, { cap = 8 } = {}) {
+export function eligibleEncountersFor(table, location, { cap = 8, power = null, rng = Math.random, threatCfg = {} } = {}) {
   const danger = dangerOf(location);
+  // SNG-249 (Erik): "your level sets the mean about which the encounters revolve." When the caller knows the
+  // player's power, the pool is drawn AROUND it: a target threat is sampled (a body plus a real upper tail), foes
+  // you have outgrown are RETIRED unless something makes them special, and what is left is ordered by how near it
+  // sits to the draw. Absent `power` this is the old danger-weighted pool, unchanged — so every existing caller
+  // keeps working, and the REGION supplies the cast either way. That is the whole model in one function.
+  const draw = Number.isFinite(power) ? sampleThreat(power, rng, threatCfg) : null;
+  if (draw) {
+    const threatOf = e => Number(e.opponent?.threat ?? e.threat) || 0;
+    const near = (table?.encounters || [])
+      .filter(e => (e.routing === "duel" || e.routing === "challenge" || e.routing === "opposed") && isEligible(e, location))
+      // "a boar at lvl 20 isn't really an encounter anymore, unless it's a special encounter"
+      .filter(e => !threatOf(e) || isRelevantThreat(power, threatOf(e), { special: !!e.special, cfg: threatCfg }))
+      .map(e => ({ e, d: Math.abs(threatOf(e) - draw.threat) }))
+      .sort((a, b) => a.d - b.d)
+      .slice(0, Math.max(0, cap))
+      .map(x => x.e);
+    // A thin local cast can leave nothing near the draw — fall through to the danger-weighted pool rather than
+    // handing back an empty list, so a quiet region still offers its own beasts.
+    if (near.length) return near;
+  }
   return (table?.encounters || [])
     // SNG-247: "opposed" is a real routing (the toll-keeper) and mints a standoff — without it here the one
     // exemplar Aevi routed that way could never be offered, which is how it stayed invisible.

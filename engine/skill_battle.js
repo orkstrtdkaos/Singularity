@@ -27,8 +27,17 @@ export function matchupBonus(attackerFn, defenderFn, sb) {
 export function synthesizeOpponentSheet(opponent = {}, sb) {
   const syn = sb?.opponentSheetSynthesis || {};
   const threat = Number(opponent.threat) || 20;
-  const attr = clamp(Math.round(threat * (syn.threatToAttribute ?? 0.08)), syn.attributeFloor ?? 2, syn.attributeCeiling ?? 6);
-  const tier = clamp(Math.round(threat * (syn.threatToTier ?? 0.06)), syn.tierFloor ?? 1, syn.tierCeiling ?? 4);
+  // SNG-249 (Erik: "opponent stats need to not be capped like that. We need a threat system for the world that
+  // can handle all levels of play"). attributeCeiling 6 / tierCeiling 4 meant EVERY foe at threat ≥ 70 was
+  // mechanically identical — an epic was no harder than a threat-70 raider, so the world had no upper tail and
+  // "run from this" could never be the right answer. The ceilings are gone; the floors stay, and growth goes
+  // sub-linear past a knee so a threat-300 thing is fearsome without the arithmetic running away. A ceiling is
+  // still readable as a dial for anyone who wants to re-impose one.
+  const curve = (v, knee) => (v <= knee ? v : knee + Math.pow(v - knee, syn.aboveKneeExponent ?? 0.75));
+  const attrRaw = curve(threat * (syn.threatToAttribute ?? 0.08), syn.attributeKnee ?? 6);
+  const tierRaw = curve(threat * (syn.threatToTier ?? 0.06), syn.tierKnee ?? 4);
+  const attr = Math.max(syn.attributeFloor ?? 2, Math.round(Number.isFinite(syn.attributeCeiling) ? Math.min(attrRaw, syn.attributeCeiling) : attrRaw));
+  const tier = Math.max(syn.tierFloor ?? 1, Math.round(Number.isFinite(syn.tierCeiling) ? Math.min(tierRaw, syn.tierCeiling) : tierRaw));
   const energy = Math.round((syn.energyBase ?? 40) + threat * (syn.threatToEnergy ?? 1.2));
   const tags = opponent.tacticTags || [];
   if (opponent.skills?.length) { // authored override — a real, hand-built sheet

@@ -196,3 +196,40 @@ Just as §3 defines what makes each type WHOLE, each type declares HOW IT GROWS 
    real evolution path.
 4. (Erik) Do quests EVOLVE (aftermath spawns follow-ons) or just ADVANCE? The wake engine (SNG-204) is the vector
    — lean: yes, a finished quest's aftermath can grow the world (that's what wake is FOR).
+
+
+---
+
+# §7 — DECIDED (Erik, 2026-08-01): gate tiering + generated-creature scope
+Two rulings that close SNG-250's + CCODE-55's open questions:
+
+## §7a — OQ3: tier the gate per type — YES, but LIGHT (the gate already tiers by FIELD severity)
+Erik: "If the gate tiered per type makes sense, ok." It does, and the key is it's a SMALL addition, not a new
+system — the gate ALREADY decides reject-vs-warn by FIELD severity (CRASH→reject, EMPTY→repair, DEGRADED→warn),
+and those severities are already set per-type in the map. So per-type tiering is just a **per-type policy field**
+that raises the stakes for the types whose hollowness BREAKS play:
+- **Hard-gate (a broken one must NOT ship): monster/creature, skill, quest, encounter.** A hollow monster gives
+  the encounter engine nothing to run; a hollow skill resolves to nothing; a hollow quest/encounter has no
+  playable arc. For these, EMPTY escalates toward reject (regenerate), not just repair.
+- **Warn-repair (a thin one degrades but plays): item, npc, location, arc.** A thin item does a bit less, a thin
+  npc is flatter — annoying, not broken. For these, EMPTY stays repair/warn.
+Implementation is a `gateTier: "hard" | "soft"` field per type in the consumer map (default soft), read by the
+SAME one gate — no new code path (CCode's CCODE-55 already anticipated this: "when you rule, it becomes a per-type
+field in the map, read by the same gate"). Aevi sets the tier field per type; the severities themselves are
+unchanged. LIGHT: don't build a parallel policy system; one field, honored by the existing verdict logic.
+
+## §7b — generated-creature scope: SHARED-ON-SIGHT (Erik)
+Erik: "shared-on-sight — yes." A generated creature does NOT stay locked to the character who minted it — it joins
+the SHARED world so another character can encounter it too. This matches the one-shared-Valley principle (the
+death-propagation call): one player's world is the shared world. CCode built per-character (matching every other
+grown entity); this OVERRIDES that for creatures → shared-on-sight.
+- **"On sight" = the live-scene guard applies** (same as the shared-death principle): a generated creature
+  becomes shared/canonical, but reaches another character as the world catches up at a safe seam — it doesn't
+  teleport a monster into someone's active scene. It becomes available to encounter, not injected mid-beat.
+- **This depends on the creature bestiary-pool SEAM being wired first** (CCODE-55 flagged: a generated creature
+  lands in character.generated.creature and never reaches the encounter pool — the SNG-229 class). Shared-on-sight
+  makes that wiring a SHARED-pool merge, not a per-character overlay — so the seam fix and the shared-scope
+  decision are the same piece of work: generated creatures promote into a shared bestiary pool (via the
+  syncSharedCanon path that already promotes generated npcs/locations), guarded by the live-scene rule.
+CCode: wire generated creatures into a SHARED encounter pool (via syncSharedCanon-style promotion), live-scene
+guarded, so a creature one character mints becomes another's possible encounter.

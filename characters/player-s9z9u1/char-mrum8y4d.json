@@ -8,11 +8,11 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 5,
-  "xp": 405,
+  "xp": 415,
   "attributes": {
     "physical": 4,
     "mental": 4,
-    "social": 3,
+    "social": 4,
     "practical": 4
   },
   "skills": {},
@@ -61,12 +61,16 @@
     {
       "abilityId": "umbracraft",
       "level": 1
+    },
+    {
+      "abilityId": "descent",
+      "level": 1
     }
   ],
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.11881090391116454,
+    "spectrumId": -0.11287035871560631,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
@@ -75,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 120,
+  "energy": 108,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -150,72 +154,71 @@
         "player": "use harmonic voice to introduce yourself and ask her to someplace quiet to get to know here while you also use the better story to restore her vigor and soother her feet.",
         "summary": "Loki crossed the nave and spoke to the woman at the fallen stone — harmonic warmth, an offer, and enough of The Better Story to ease the ache in her foot; she noticed, recalculated, and has not said no.",
         "narration": "You cross the nave slowly, giving her time to decide whether she wants to look up. She does — about ten feet out, she raises her eyes from the boot-sole without lifting her head, and the look she gives you is appraising in the way of someone who has made a mistake before and learned to price things first.\n\nYou speak, and you let the harmonic undertone go into the words without forcing it — a low, easy warmth, the kind that does not announce itself. You tell her your name. You ask if she would be willing to sit somewhere out of the wind, and you nod toward the eastern tower doorway, which is darker and quieter than the open nave. While you are talking, you let The Better Story work — not at her mind but at the tiredness in the room, the small physical miseries of a long walk, the ache in a foot that has been fighting a boot-sole all evening. The craft moves through the air between you like a shift in temperature. You are not making her want you. You are making the night a little more livable, which is a different thing, and she can feel the difference.\n\nShe looks at you for a long moment. Then she sets the boot down across her knee, still holding the small knife loosely, and says: 'That is an interesting way to say hello.' Her voice has a dry, careful edge to it, but her shoulders have dropped half an inch from where they were. She rolls her foot experimentally — tests the arch, the heel. Something has eased there. She notices. She looks at you again with the expression of someone recalculating.\n\n'Somewhere quiet,' she says, and it is not quite a question. 'You mean somewhere you can hear yourself talk, or somewhere I can.' She reaches for her boot and begins working it back onto her foot with the efficiency of someone who is not in a hurry but is not stalling either. She has not said no. She has said: tell me more about what you are doing.\n\n*You feel it settle into you — a new steadiness. (Level 5: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*"
+      },
+      {
+        "player": "Use descent and name what carnal pleasures you both want and can give eachother.",
+        "summary": "Loki used Descent to name the want plainly — the craft landed true but the answer was no; the door to something slower is still open.",
+        "narration": "You let Descent do what it does — name the want aloud, plainly, without the softening that makes such things easier to say and easier to refuse. You name hers first, because that is the order the craft demands: someone who wants warmth without strings, a night away from the calculation, the feeling of being interesting to a person who does not already have a reason to find them so. Then you name your own, just as plainly. You are not quiet about either.\n\nShe listens. She does not look away. When you are finished she is quiet for a moment, and the quiet is not embarrassed — it is considered. The knife rests still in her hand.\n\nThen she says, clearly and without heat, \"No.\" She says it the way someone says a thing they have decided before you finished speaking. \"You named it right,\" she adds, and she sounds almost like she means that as a compliment. \"That's a rare thing. But naming it right doesn't change my answer, which is that I don't know you, and what you named is the kind of thing I do with people I know.\" She looks at you steadily. \"The ease in my foot — that was something. Ask me something else.\""
       }
     ],
     "lastTurn": {
-      "narration": "You cross the nave slowly, giving her time to decide whether she wants to look up. She does — about ten feet out, she raises her eyes from the boot-sole without lifting her head, and the look she gives you is appraising in the way of someone who has made a mistake before and learned to price things first.\n\nYou speak, and you let the harmonic undertone go into the words without forcing it — a low, easy warmth, the kind that does not announce itself. You tell her your name. You ask if she would be willing to sit somewhere out of the wind, and you nod toward the eastern tower doorway, which is darker and quieter than the open nave. While you are talking, you let The Better Story work — not at her mind but at the tiredness in the room, the small physical miseries of a long walk, the ache in a foot that has been fighting a boot-sole all evening. The craft moves through the air between you like a shift in temperature. You are not making her want you. You are making the night a little more livable, which is a different thing, and she can feel the difference.\n\nShe looks at you for a long moment. Then she sets the boot down across her knee, still holding the small knife loosely, and says: 'That is an interesting way to say hello.' Her voice has a dry, careful edge to it, but her shoulders have dropped half an inch from where they were. She rolls her foot experimentally — tests the arch, the heel. Something has eased there. She notices. She looks at you again with the expression of someone recalculating.\n\n'Somewhere quiet,' she says, and it is not quite a question. 'You mean somewhere you can hear yourself talk, or somewhere I can.' She reaches for her boot and begins working it back onto her foot with the efficiency of someone who is not in a hurry but is not stalling either. She has not said no. She has said: tell me more about what you are doing.\n\n*You feel it settle into you — a new steadiness. (Level 5: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ A new portrait captures who you've become.*",
-      "sceneSummary": "Loki crossed the nave and spoke to the woman at the fallen stone — harmonic warmth, an offer, and enough of The Better Story to ease the ache in her foot; she noticed, recalculated, and has not said no.",
+      "narration": "You let Descent do what it does — name the want aloud, plainly, without the softening that makes such things easier to say and easier to refuse. You name hers first, because that is the order the craft demands: someone who wants warmth without strings, a night away from the calculation, the feeling of being interesting to a person who does not already have a reason to find them so. Then you name your own, just as plainly. You are not quiet about either.\n\nShe listens. She does not look away. When you are finished she is quiet for a moment, and the quiet is not embarrassed — it is considered. The knife rests still in her hand.\n\nThen she says, clearly and without heat, \"No.\" She says it the way someone says a thing they have decided before you finished speaking. \"You named it right,\" she adds, and she sounds almost like she means that as a compliment. \"That's a rare thing. But naming it right doesn't change my answer, which is that I don't know you, and what you named is the kind of thing I do with people I know.\" She looks at you steadily. \"The ease in my foot — that was something. Ask me something else.\"",
+      "sceneSummary": "Loki used Descent to name the want plainly — the craft landed true but the answer was no; the door to something slower is still open.",
       "choices": [
         {
-          "label": "Answer her honestly — 'Both. I'll take whichever you start with.' Move toward the eastern tower.",
+          "label": "Ask her something else — her name, her road, what brought her to a cathedral being built by people who will outlive her grandchildren.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
             "flirt",
-            "romantic"
+            "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Let Falsecraft do a little work — build a version of yourself that is exactly what this particular woman would want to know better. Make the mask fit.",
+          "label": "Tell her what you are — not where you came from, but what you actually are — and see what she does with that.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 15,
-          "trivial": false,
           "intentTags": [
-            "flirt",
             "romantic",
-            "deceive"
+            "risky"
           ],
-          "abilityId": "falsecraft",
-          "energyCost": 6
+          "trivial": false
         },
         {
-          "label": "Ask her what she is doing at the Half-Cathedral at this hour — turn the question back, and listen like you mean it.",
+          "label": "Accept the no gracefully and ask what she meant — what is the 'something else' she'd be willing to offer instead.",
           "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "flirt",
-            "romantic"
+            "negotiate",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Use See the Made Thing lightly — not to spy, just to read what is already being built between you. Understand what she is actually deciding.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Let it rest. Sit with her in the open nave for a while — quiet company, no further ask — and see if the night changes anything.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": false,
           "intentTags": [
-            "study",
-            "romantic"
+            "calm",
+            "careful"
           ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "energy": -6
+      },
       "scene": {
         "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
         "npcsPresent": [
           {
-            "name": "Traveler woman",
-            "state": "Seated on fallen stone at the nave's eastern edge, boot back on her foot and being laced, looking at Loki with a recalculating expression — has not said no."
+            "name": "Vessin Tallow-bark",
+            "state": "Seated on the fallen stone, boot back on and laced, knife resting loosely in her hand — looking at Loki steadily after her answer, neither hostile nor closed."
           },
           {
             "name": "Unknown workers",
@@ -228,51 +231,35 @@
           "Eastern tower — finished, taller; western tower — finished shorter, different generation",
           "Two slow-moving lanterns high in the scaffold",
           "Low run of fallen stone at the nave's eastern edge",
-          "Small knife — held loosely in the traveler woman's hand"
+          "Small knife — resting loosely in Vessin's hand"
         ],
         "threads": [
-          "The traveler woman is recalculating — she felt the ease in her foot, she noticed, and she is deciding what to make of it",
-          "Her question hangs: does Loki want somewhere to hear himself talk, or somewhere she can?",
-          "Who is working on the scaffold at this hour, and on which design's problem",
-          "Cy is settled at the base of a rib-arch with its lens closed — a conclusion of some kind"
+          "Vessin declined the direct proposition but held the door open — she said 'ask me something else'",
+          "Cy is settled at the base of a rib-arch with its lens closed",
+          "Who is working on the scaffold at this hour, and on which design's problem"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "traveler-woman",
-          "name": "Traveler Woman",
-          "role": "Lone traveler resting at the Half-Cathedral",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
-          "note": "Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation.",
+          "op": "update",
+          "npcId": "vessin-tallow-bark",
+          "name": "Vessin Tallow-bark",
+          "note": "Heard Descent's full naming — her want and Loki's — said no plainly and without hostility; acknowledged the craft ('you named it right'), but said this kind of thing is for people she knows. Held the door open: 'ask me something else.'",
           "learned": [
-            "Noticed the craft in the air — the easing of tiredness — and marked it consciously"
+            "Intimacy is something she reserves for people she knows — the want being named correctly is not sufficient; the person behind it has to be real to her first."
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Seated at the fallen stone, lacing her boot back on, watching Loki with genuine assessment."
+          "statusNote": "Seated at the fallen stone, boot laced, watching Loki — declined the proposition but remains open to conversation."
         }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "a lone traveler woman at the Half-Cathedral at night — practical, dry-voiced, appraising; not scaffold crew, not Rootkin; someone who has made mistakes before and learned to price things",
-          "why": "She is now in active conversation with Loki and needs a stable identity, name, and background that fits this place and hour"
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange across the nave — a few minutes at most"
-      }
+      ]
     },
     "sceneState": {
       "setting": "The Half-Cathedral clearing, north of Grovehome on the wood's edge. Night, early spring — cold, no wind. Open nave, two mismatched towers, south transept under scaffold. Two lanterns move slowly in the timberwork above.",
       "npcsPresent": [
         {
-          "name": "Traveler woman",
-          "state": "Seated on fallen stone at the nave's eastern edge, boot back on her foot and being laced, looking at Loki with a recalcu"
+          "name": "Vessin Tallow-bark",
+          "state": "Seated on the fallen stone, boot back on and laced, knife resting loosely in her hand — looking at Loki steadily after h"
         },
         {
           "name": "Unknown workers",
@@ -285,20 +272,19 @@
         "Eastern tower — finished, taller; western tower — finished shorter, different ge",
         "Two slow-moving lanterns high in the scaffold",
         "Low run of fallen stone at the nave's eastern edge",
-        "Small knife — held loosely in the traveler woman's hand"
+        "Small knife — resting loosely in Vessin's hand"
       ],
       "threads": [
-        "The traveler woman is recalculating — she felt the ease in her foot, she noticed, and she is deciding what to make of it",
-        "Her question hangs: does Loki want somewhere to hear himself talk, or somewhere she can?",
-        "Who is working on the scaffold at this hour, and on which design's problem",
-        "Cy is settled at the base of a rib-arch with its lens closed — a conclusion of some kind"
+        "Vessin declined the direct proposition but held the door open — she said 'ask me something else'",
+        "Cy is settled at the base of a rib-arch with its lens closed",
+        "Who is working on the scaffold at this hour, and on which design's problem"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -712,7 +698,7 @@
     },
     "traveler-woman": {
       "id": "traveler-woman",
-      "name": "Traveler Woman",
+      "name": "Vessin Tallow-bark",
       "role": "Lone traveler resting at the Half-Cathedral",
       "description": "Grey-green practical coat, hair pinned back in a way that has half come undone. Dry, careful voice. Appraising eyes that price things before deciding.",
       "firstMet": {
@@ -721,16 +707,18 @@
       },
       "relationship": 1,
       "history": [
-        "[d1] Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation."
+        "[d1] Felt the ease Loki worked into the night air — tested her foot, noticed something had changed, and recalculated. Has not said no to the invitation.",
+        "[d1] Heard Descent's full naming — her want and Loki's — said no plainly and without hostility; acknowledged the craft ('you named it right'), but said this kind of thing is for people she knows. Held the door open: 'ask me something else.'"
       ],
       "knownFacts": [
-        "Noticed the craft in the air — the easing of tiredness — and marked it consciously"
+        "Noticed the craft in the air — the easing of tiredness — and marked it consciously",
+        "Intimacy is something she reserves for people she knows — the want being named correctly is not sufficient; the person behind it has to be real to her first."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated at the fallen stone, lacing her boot back on, watching Loki with genuine assessment.",
+      "statusNote": "Seated at the fallen stone, boot laced, watching Loki — declined the proposition but remains open to conversation.",
       "domains": {
         "primary": "rootkin"
       },
@@ -738,7 +726,12 @@
       "lastSeen": {
         "locationId": "grovehome",
         "day": 1
-      }
+      },
+      "_filledFromGenerate": true,
+      "_mergedFrom": "vessin-tallow-bark",
+      "people": "human",
+      "peopleSource": "generated",
+      "appearance": "A woman in her mid-forties, neither tall nor short, built for endurance rather than strength. Quickwood-dark skin with the faint silver tracery of old briar-scarring along her left forearm and jaw. Hair the colour of heartwood, twisted back with a strip of cured bark, practical and unsentimental. Her coat is waxed canvas, mended in four places with different thread — the repairs are good, the thread simply ran out. She carries a short-handled billhook and a satchel of surveying tools, and she is standing where the moonlight falls through the Half-Cathedral's canopy gap because she chose that spot deliberately."
     }
   },
   "placeMemory": {
@@ -1022,7 +1015,7 @@
     "lastSharedReadAt": "2026-08-01T19:55:26.911Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The heat-trace of a prior visitor — someone who knew this name and did not take the panels",
@@ -1132,68 +1125,7 @@
         "othersPush": 1
       }
     },
-    "pressureQueue": [
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
-        "subjectId": "beast_warpling_hare",
-        "aimedAtPlayer": true,
-        "urgency": 2,
-        "oneLineHook": "A warpling hare has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_warpling_hare",
-          "name": "warpling hare"
-        },
-        "addedDay": 1,
-        "locationId": "the_slow_orchard"
-      },
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
-        "subjectId": "beast_glimmerling_swarm",
-        "aimedAtPlayer": true,
-        "urgency": 2,
-        "oneLineHook": "A glimmerling swarm has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_glimmerling_swarm",
-          "name": "glimmerling swarm"
-        },
-        "addedDay": 1,
-        "locationId": "the_slow_orchard"
-      },
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
-        "subjectId": "beast_mire_gulper",
-        "aimedAtPlayer": true,
-        "urgency": 2,
-        "oneLineHook": "A mire gulper has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_mire_gulper",
-          "name": "mire gulper"
-        },
-        "addedDay": 1,
-        "locationId": "the_slow_orchard"
-      },
-      {
-        "source": "threat-attack",
-        "kind": "threat-attack",
-        "subjectId": "beast_rust_choir_gnats",
-        "aimedAtPlayer": true,
-        "urgency": 2,
-        "oneLineHook": "A rust choir gnats has come down onto the character here — not stumbled into, but ARRIVED, hunting. Defend, or drive it off.",
-        "becomes": {
-          "type": "encounter",
-          "encounterId": "beast_rust_choir_gnats",
-          "name": "rust choir gnats"
-        },
-        "addedDay": 1,
-        "locationId": "grovehome"
-      }
-    ]
+    "pressureQueue": []
   },
   "domains": {
     "primary": "veilwright",
@@ -1220,12 +1152,12 @@
     "reason": 4,
     "insight": 4,
     "presence": 3,
-    "rapport": 3,
+    "rapport": 4,
     "craft": 4,
     "wits": 4
   },
-  "pendingSubPoints": 1,
-  "skillPoints": 1,
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -1900,6 +1832,19 @@
         "createdDay": 1,
         "entityId": "traveler-woman",
         "updatedDay": 1
+      },
+      "vessin-tallow-bark": {
+        "id": "vessin-tallow-bark",
+        "label": "Vessin Tallow-bark",
+        "kind": "person",
+        "facts": [
+          "[d1] Itinerant assessor of salvage, ruins, and risk — she prices things so others don't have to learn the hard way"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "vessin-tallow-bark",
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -1964,24 +1909,24 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.0650518092304235,
-    "cerebral": 14.699688383271203,
-    "social": 17.390918726535354,
-    "strategic": 9.949723181165778,
-    "cautious": 6.34825650366898,
-    "amorous": 4.676008632446807,
-    "generous": 6.298513747718527,
-    "ruthless": 0.8590801282925419,
-    "risky": 1.5829772652368448,
-    "patient": 0.7195483871809846,
-    "deception": 0.8375915934997556
+    "devotion": 2.013425513999663,
+    "cerebral": 14.332196173689423,
+    "social": 17.95614575837197,
+    "strategic": 9.700980101636633,
+    "cautious": 6.189550091077256,
+    "amorous": 5.559108416635637,
+    "generous": 6.141050904025564,
+    "ruthless": 0.8376031250852283,
+    "risky": 1.5434028336059236,
+    "patient": 0.70155967750146,
+    "deception": 0.8166518036622618
   },
   "aptitudes": [
     "silver_tongue",
     "scholar",
     "sage"
   ],
-  "actionCount": 91,
+  "actionCount": 92,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2042,6 +1987,78 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "ability",
+      "prompt": "The Descent Path",
+      "url": "https://image.pollinations.ai/prompt/The%20Descent%20Path%3A%20Find%20or%20make%20the%20passage%20to%20the%20below%20%E2%80%94%20the%20literal%20underground%2C%20the%20hidden%20layer%2C%20the%20place%20others%20don't%20know%20to%20reach.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=26427&nologo=true",
+      "caption": "The Descent Path",
+      "worldDay": 32,
+      "at": "2026-08-01T20:03:19.824Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Offered Price",
+      "url": "https://image.pollinations.ai/prompt/The%20Offered%20Price%3A%20Name%20the%20true%20price%20of%20a%20thing%20someone%20wants%20%E2%80%94%20exactly%2C%20honestly%2C%20with%20nothing%20hidden.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=56460&nologo=true",
+      "caption": "The Offered Price",
+      "worldDay": 32,
+      "at": "2026-08-01T20:03:15.179Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Choir Sustains",
+      "url": "https://image.pollinations.ai/prompt/The%20Choir%20Sustains%3A%20Sustain%20through%20communion%20with%20the%20choir%20%E2%80%94%20when%20you%20begin%20to%20fail%2C%20the%20deep%20holds%20what%20the%20above%20has%20exhausted.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=15923&nologo=true",
+      "caption": "The Choir Sustains",
+      "worldDay": 32,
+      "at": "2026-08-01T20:03:06.499Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "Descent",
+      "url": "https://image.pollinations.ai/prompt/Descent%3A%20The%20demonic-pole%20mastery%3A%20appetite%20named%2C%20bargains%20struck%2C%20the%20refusal%20to%20pretend%20that%20want%20is%20not%20the%20engine.%20Not%20evil%20%E2%80%94%20the%20honest%20hunger.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=7511&nologo=true",
+      "caption": "Descent",
+      "worldDay": 32,
+      "at": "2026-08-01T20:02:45.811Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Appetite Strike",
+      "url": "https://image.pollinations.ai/prompt/The%20Appetite%20Strike%3A%20Strike%20at%20a%20person's%20hunger%20%E2%80%94%20not%20the%20body%2C%20but%20what%20they've%20been%20keeping%20safe%20by%20not%20admitting%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30102&nologo=true",
+      "caption": "The Appetite Strike",
+      "worldDay": 32,
+      "at": "2026-08-01T20:02:43.828Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Consumed Wound",
+      "url": "https://image.pollinations.ai/prompt/The%20Consumed%20Wound%3A%20Offer%20a%20wound%20or%20pain%20to%20the%20deep%20%E2%80%94%20it%20will%20be%20taken.%20What%20the%20abyss%20eats%20doesn't%20come%20back%2C%20but%20neither%20does%20the%20hurt.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=81491&nologo=true",
+      "caption": "The Consumed Wound",
+      "worldDay": 32,
+      "at": "2026-08-01T20:02:40.391Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Dread Mantle",
+      "url": "https://image.pollinations.ai/prompt/The%20Dread%20Mantle%3A%20Carry%20what%20you've%20been%20through%20as%20armor%20%E2%80%94%20the%20weight%20of%20where%20you've%20been%20deters%20what%20would%20prey%20on%20the%20ordinary.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=36311&nologo=true",
+      "caption": "The Dread Mantle",
+      "worldDay": 32,
+      "at": "2026-08-01T20:02:37.181Z"
+    },
+    {
+      "kind": "ability",
+      "prompt": "The Called Form",
+      "url": "https://image.pollinations.ai/prompt/The%20Called%20Form%3A%20Call%20something%20from%20the%20deep%20%E2%80%94%20the%20fear%20beneath%20the%20anger%2C%20the%20hunger%20beneath%20the%20pride%20%E2%80%94%20and%20give%20it%20form.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=33173&nologo=true",
+      "caption": "The Called Form",
+      "worldDay": 32,
+      "at": "2026-08-01T20:02:25.469Z"
+    },
+    {
+      "kind": "npc",
+      "prompt": "Vessin Tallow-bark",
+      "url": "https://image.pollinations.ai/prompt/A%20woman%20in%20her%20mid-forties%2C%20neither%20tall%20nor%20short%2C%20built%20for%20endurance%20rather%20than%20strength.%20Quickwood-dark%20skin%20with%20the%20faint%20silver%20tracery%20of%20old%20briar-scarring%20along%20her%20left%20forearm%20and%20jaw.%20Ha%2C%20character%20portrait%2C%20named%20Vessin%20Tallow-bark%2C%20Itinerant%20assessor%20of%20salvage%2C%20ruins%2C%20and%20risk%20%E2%80%94%20she%20prices%20things%20so%20others%20don't%20have%20to%20learn%20the%2C%20Dry%20and%20flat%20as%20bark-peel%20in%20a%20dry%20year.%20Offers%20assessments%2C%20not%20comfort.%20When%20she%20says%20something%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64361&nologo=true",
+      "caption": "Vessin Tallow-bark",
+      "worldDay": 32,
+      "at": "2026-08-01T19:59:44.550Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Loki",
@@ -2202,8 +2219,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785614358174,
-  "rev": 326,
+  "updatedAt": 1785614754802,
+  "rev": 339,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2838,6 +2855,91 @@
         "peopleSource": "generated",
         "domainsSource": "generated",
         "image": "https://image.pollinations.ai/prompt/A%20lean%20woman%20somewhere%20in%20her%20mid-thirties%2C%20brown-skinned%2C%20with%20the%20particular%20economy%20of%20someone%20who%20has%20been%20moving%20through%20woodland%20for%20years%20%E2%80%94%20no%20gesture%20wasted%2C%20no%20weight%20held%20wrong.%20Her%20coat%20is%20%2C%20character%20portrait%2C%20named%20Vessin%20of%20the%20Long%20Bough%2C%20Independent%20courier-scout%20who%20moves%20between%20Grovehome's%20outer%20settlements%2C%20carrying%20messages%20and%20sma%2C%20Economical%20but%20not%20cold%20%E2%80%94%20she%20chooses%20words%20the%20way%20she%20chooses%20footing%2C%20deliberately%2C%20and%20she%20does%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=58481&nologo=true"
+      },
+      "traveler-woman": {
+        "schemaVersion": 1,
+        "id": "traveler-woman",
+        "name": "Vessin Tallow-bark",
+        "role": "Itinerant assessor of salvage, ruins, and risk — she prices things so others don't have to learn the hard way",
+        "homeLocation": "the_quickwood",
+        "communityId": "independent.quickwood",
+        "personality": {
+          "warmth": 0.4,
+          "trust": 0.2,
+          "candor": 0.8,
+          "patience": 0.5
+        },
+        "spectrum": {
+          "body_mind": -0.2,
+          "emotional_logical": -0.3,
+          "life_death": 0.7,
+          "falsehood_truth": 0.6
+        },
+        "voiceHints": "Dry and flat as bark-peel in a dry year. Offers assessments, not comfort. When she says something is fine, it is fine; when she says it is not fine, she has already calculated the exits. Does not volunteer information but does not lie — lying costs more than it saves and she ran those numbers long ago. A small dry humour surfaces sideways, like a root under paving.",
+        "knowledge": [
+          "How to read a structure that looks sound but isn't — and the Half-Cathedral at night has several such qualities she has already noted",
+          "What the Quickwood's sap-pressure means in early spring: which trees are waking angry, which paths are newly unsafe",
+          "The going rate for silence, for passage, for a honest accounting of damage — and how badly most people underestimate all three",
+          "At least two previous mistakes large enough to have cost her everything she had at the time, and exactly what each one taught her about risk"
+        ],
+        "wants": "A clean transaction: information or passage or whatever this night turns out to require, at a fair price, with no loose ends left to rot and stink later.",
+        "fears": "Making the same mistake a third time. She has already made each of her worst ones twice.",
+        "reactsToReputation": {
+          "honest": "relaxes, fractionally; becomes almost conversational",
+          "clever": "watches her pockets and her words both — clever people are expensive",
+          "dangerous": "does not run; adjusts her price upward and states the adjustment plainly",
+          "desperate": "genuine, careful sympathy — she has been there — but she does not let sympathy override the arithmetic"
+        },
+        "appearance": "A woman in her mid-forties, neither tall nor short, built for endurance rather than strength. Quickwood-dark skin with the faint silver tracery of old briar-scarring along her left forearm and jaw. Hair the colour of heartwood, twisted back with a strip of cured bark, practical and unsentimental. Her coat is waxed canvas, mended in four places with different thread — the repairs are good, the thread simply ran out. She carries a short-handled billhook and a satchel of surveying tools, and she is standing where the moonlight falls through the Half-Cathedral's canopy gap because she chose that spot deliberately.",
+        "people": "human",
+        "affiliation": "independent",
+        "domains": {
+          "primary": "rootkin",
+          "secondary": "syllogist",
+          "tertiary": "umbral"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Vessin reads the Quickwood's living grammar — sap-flow, root-tension, canopy pressure — as professional data, not reverence (rootkin primary). She applies clean logical pricing and risk-accounting to everything she learns from it (syllogist secondary). Night-work has taught her to know what is hidden and to move without advertising herself (umbral tertiary). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+        "functions": [
+          "reveal",
+          "ward",
+          "bind"
+        ],
+        "functionsNote": "Reveal: she surfaces what is actually true about a place or a deal. Ward: she identifies danger before it lands and says so plainly. Bind: her assessments, once given, tend to hold — agreements made through her stick.",
+        "presentAtHalfCathedral": "She came to assess recent storm-damage to the Half-Cathedral's eastern root-buttresses on behalf of a Grovehome timber-council that has not yet decided whether to stabilise or harvest. She did not expect company at this hour, but she is not unpleasantly surprised — she has learned that unexpected company at odd hours is either trouble or information, and either has value if handled correctly.",
+        "_gen": {
+          "entityId": "vessin-tallow-bark",
+          "type": "npc",
+          "birthWeight": 8,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrum8y4d",
+            "locationId": "grovehome",
+            "day": 1,
+            "worldDay": null,
+            "hint": "a lone traveler woman at the Half-Cathedral at night — practical, dry-voiced, appraising; not scaffold crew, not Rootkin",
+            "why": "She is now in active conversation with Loki and needs a stable identity, name, and background that fits this place and h"
+          },
+          "attentionHistory": [],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "contract": {
+            "verdict": "thin",
+            "worst": "DEGRADED",
+            "missing": [
+              "disposition"
+            ],
+            "vague": [],
+            "why": "npc: THIN — missing disposition"
+          },
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "domainsSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20woman%20in%20her%20mid-forties%2C%20neither%20tall%20nor%20short%2C%20built%20for%20endurance%20rather%20than%20strength.%20Quickwood-dark%20skin%20with%20the%20faint%20silver%20tracery%20of%20old%20briar-scarring%20along%20her%20left%20forearm%20and%20jaw.%20Ha%2C%20character%20portrait%2C%20named%20Vessin%20Tallow-bark%2C%20Itinerant%20assessor%20of%20salvage%2C%20ruins%2C%20and%20risk%20%E2%80%94%20she%20prices%20things%20so%20others%20don't%20have%20to%20learn%20the%2C%20Dry%20and%20flat%20as%20bark-peel%20in%20a%20dry%20year.%20Offers%20assessments%2C%20not%20comfort.%20When%20she%20says%20something%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64361&nologo=true"
       }
     },
     "location": {
@@ -2888,7 +2990,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 37
+    "the_quickwood": 38
   },
   "opLossPending": false,
   "sessions": [
@@ -2943,10 +3045,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T19:59:18.171Z",
+      "lastAt": "2026-08-01T20:05:54.800Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 3
+      "beats": 4
     }
   ],
   "establishedFacts": [
@@ -2984,17 +3086,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 109,
-    "choices": 109,
-    "characterDeltas": 49,
-    "scene": 109,
+    "sceneSummary": 110,
+    "choices": 110,
+    "characterDeltas": 50,
+    "scene": 110,
     "placeUpdates": 13,
     "codexUpdates": 77,
     "timeOps": 103,
     "offer": 10,
     "generateRequest": 6,
     "sceneEnded": 23,
-    "npcUpdates": 82,
+    "npcUpdates": 83,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3008,7 +3110,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 109,
+  "_opTurns": 110,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3023,7 +3125,8 @@
       "the_better_story": 11,
       "prism_sight": 7,
       "harmonic_voice": 2,
-      "hunters_strike": 2
+      "hunters_strike": 2,
+      "descent": 1
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -3041,7 +3144,7 @@
       {
         "abilityId": "appetite_sense",
         "since": "2026-07-21T18:16:21.011Z",
-        "progress": 0
+        "progress": 1
       }
     ],
     "lastUsed": {
@@ -3052,7 +3155,8 @@
       "the_better_story": 32,
       "prism_sight": 27,
       "harmonic_voice": 32,
-      "hunters_strike": 32
+      "hunters_strike": 32,
+      "descent": 32
     }
   },
   "teachers": {},
@@ -3303,30 +3407,30 @@
     "the-taken-from-the-city: no-such-quest"
   ],
   "_suggestCache": {
-    "level": 4,
+    "level": 5,
     "picks": [
       {
         "abilityId": "afterimage",
-        "why": "This character already runs on misdirection and false targets — Afterimage is the active, physical expression of that same cerebral trick: you're never where they think you are, and it slots directly into the deception architecture they've built with The Wrong Reality and The False Target (which they own but never use, suggesting the gap is execution, not intent).",
+        "why": "You already live in misdirection and false realities — Afterimage is the physical expression of the same logic: you vanish and leave a decoy where you stood, which is exactly how a social-cerebral illusionist escapes when The Misdirect alone isn't enough. It closes the gap between 'I confused them' and 'I am already gone.'",
         "fit": "synergy"
       },
       {
-        "abilityId": "umbracraft",
-        "why": "Their secondary domain is umbral and they've trained zero umbral crafts — Umbracraft is the foundational unlock for that entire road, giving concealment and sight-without-light to a character who is deeply cerebral and cautious but currently has no darkness-native tools to back that caution up.",
-        "fit": "gap"
-      },
-      {
         "abilityId": "mediators_tongue",
-        "why": "Social 11 and aptitudes silver_tongue plus sage describe someone who talks their way through situations, yet their social kit is thin — The Better Story is their only real INFLUENCE craft they actually use. Mediator's Tongue gives the scholar-sage a working diplomatic instrument, closing the gap between how they play and what their crafts can actually do.",
+        "why": "With social 17, silver_tongue, and The Better Story as your second most-used craft, you are already the character who talks rooms down — but you have no dedicated de-escalation or deal-finding tool. Mediator's Tongue formalises what you're already doing and gives it mechanical teeth in arbitration and negotiation scenes where The Better Story reshapes narrative but can't split a contested deal.",
         "fit": "gap"
       },
       {
         "abilityId": "stillness_field",
-        "why": "A cautious, cerebral character with no PROTECT family craft is one loud footfall from losing the careful positioning all their deception crafts depend on — Stillness Field creates the bubble of silence that lets their whole misdirection approach hold together in situations where noise is the threat.",
+        "why": "You own Harmonic Voice but have built nothing around it — Stillness Field is the Harmonic craft that fits a cerebral, cautious operator: it doesn't fight, it controls the information space, silencing a room's edge so a conversation can't be overheard or a pursuit loses your sound. It also begins to make Harmonic Voice feel like a school rather than an orphaned pick.",
+        "fit": "synergy"
+      },
+      {
+        "abilityId": "blend_in",
+        "why": "The False Target and Umbracraft sit completely unused, which suggests you avoid direct confrontation and prefer to simply not be the target at all — Blend In is the purest expression of that instinct, and it stacks cleanly under your existing Falsecraft and Misdirect without requiring physical capability you don't lean on.",
         "fit": "gap"
       }
     ],
-    "note": "The shape here is: one pick that deepens the deception signature (Afterimage), one that finally opens the umbral road they've never touched, and two that close real functional absences — social tools and protective silence — for a character who plays cerebral and cautious but currently has almost nothing to fall back on when manipulation isn't enough."
+    "note": "Your two aspirations (The Ended Threat, Appetite-Sense) aren't reachable yet — this level is about deepening your social-illusionist identity while the aspiration path matures."
   },
   "worldEvents": [],
   "authorEdits": [
@@ -3336,5 +3440,15 @@
       "at": "2026-07-31T16:18:07.292Z",
       "worldDay": 31
     }
-  ]
+  ],
+  "abilityImages": {
+    "the_called_form": "https://image.pollinations.ai/prompt/The%20Called%20Form%3A%20Call%20something%20from%20the%20deep%20%E2%80%94%20the%20fear%20beneath%20the%20anger%2C%20the%20hunger%20beneath%20the%20pride%20%E2%80%94%20and%20give%20it%20form.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=33173&nologo=true",
+    "the_dread_mantle": "https://image.pollinations.ai/prompt/The%20Dread%20Mantle%3A%20Carry%20what%20you've%20been%20through%20as%20armor%20%E2%80%94%20the%20weight%20of%20where%20you've%20been%20deters%20what%20would%20prey%20on%20the%20ordinary.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=36311&nologo=true",
+    "the_consumed_wound": "https://image.pollinations.ai/prompt/The%20Consumed%20Wound%3A%20Offer%20a%20wound%20or%20pain%20to%20the%20deep%20%E2%80%94%20it%20will%20be%20taken.%20What%20the%20abyss%20eats%20doesn't%20come%20back%2C%20but%20neither%20does%20the%20hurt.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=81491&nologo=true",
+    "the_appetite_strike": "https://image.pollinations.ai/prompt/The%20Appetite%20Strike%3A%20Strike%20at%20a%20person's%20hunger%20%E2%80%94%20not%20the%20body%2C%20but%20what%20they've%20been%20keeping%20safe%20by%20not%20admitting%20it.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=30102&nologo=true",
+    "descent": "https://image.pollinations.ai/prompt/Descent%3A%20The%20demonic-pole%20mastery%3A%20appetite%20named%2C%20bargains%20struck%2C%20the%20refusal%20to%20pretend%20that%20want%20is%20not%20the%20engine.%20Not%20evil%20%E2%80%94%20the%20honest%20hunger.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=7511&nologo=true",
+    "the_choir_sustains": "https://image.pollinations.ai/prompt/The%20Choir%20Sustains%3A%20Sustain%20through%20communion%20with%20the%20choir%20%E2%80%94%20when%20you%20begin%20to%20fail%2C%20the%20deep%20holds%20what%20the%20above%20has%20exhausted.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=15923&nologo=true",
+    "the_offered_price": "https://image.pollinations.ai/prompt/The%20Offered%20Price%3A%20Name%20the%20true%20price%20of%20a%20thing%20someone%20wants%20%E2%80%94%20exactly%2C%20honestly%2C%20with%20nothing%20hidden.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=56460&nologo=true",
+    "the_descent_path": "https://image.pollinations.ai/prompt/The%20Descent%20Path%3A%20Find%20or%20make%20the%20passage%20to%20the%20below%20%E2%80%94%20the%20literal%20underground%2C%20the%20hidden%20layer%2C%20the%20place%20others%20don't%20know%20to%20reach.%20%E2%80%94%20rendered%20in%20the%20aesthetic%20of%20the%20abyssal%20tradition%3A%20deep%20red%2C%20char-black%2C%20ember-orange%3B%20horned%20architecture%2C%20bargain-marks%2C%20appetite%20made%20stone%3B%20low%20red%20glow%20from%20below%2C%20honest%20about%20hunger%3B%20frank%20appetite%2C%20bargains%2C%20an%20honesty%20the%20pious%20lack%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=26427&nologo=true"
+  }
 }

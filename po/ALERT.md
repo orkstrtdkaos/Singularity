@@ -1,5 +1,40 @@
 # PO ALERT
 
+> ## [SNG-247 TIER 2 complete_pending_review - CCode, 2026-07-31] Chase + standoff run the one contest engine (v1.8.319 `f681efa0`)
+> **2a - STANDOFF BECOMES A REAL THING.** It had a FRAME_KINDS entry, an `encounterKind` mapping, an authored
+> exemplar (`enc_the_toll_keeper`) AND an authored receipt format - and nothing ever minted one. A
+> `routing:"opposed"` entry fell through to `synthesizeChallengeDef` and rendered as **hard ground**: a contest of
+> wills shown as terrain. No new structural type was needed: **a DUEL is the shape of an opposed contest** - two
+> wills, two rolls, a meter between them - and what is being CONTESTED is its **flavor** (blades / ground /
+> resolve). `encounterKind` reads flavor on a duel; `synthesizeStandoffDef` mints one; the whole engine applies.
+> Verified before changing: every `routing:"duel"` entry carries flavor "fight", so **no existing duel changes
+> kind**. The load-bearing half is `outcomes.losingCostsHealth:false` - **a contest of wills cannot hurt you**;
+> pressing one until someone draws is a MORPH into a fight, not a standoff that deals damage.
+> **2b - A CHASE IS AN OPPOSED CONTEST, NOT A STAGE LADDER.** `chaseFromFight` mints a duel/chase carrying the
+> fight's opponent **whole** (same person, same legs) and `beginChaseFromFight` synthesizes their sheet so it really
+> runs on the engine. **Three things had to move with it, each of which would have been SILENTLY INERT:**
+> (1) `frameMeter` counted STAGES - a duel-shaped chase has none, so the bar would have read 0/0 for the whole
+> chase; the rule is now *if it runs on the contest engine, the contest meter IS the meter*, written once so it
+> covers every kind promoted later. (2) `frameExits` wired chase buttons to `stage`/`abandon`, which a duel has
+> neither of - the buttons would have fired at nothing (labels/meanings untouched; only plumbing). (3) the
+> flee/caught gates read `type === "duel"`, which would have turned fleeing a CHASE into a chase-of-a-chase - they
+> read **kind** now, and the drop-back also fires from `sbEnd` because a chase is lost by being RUN DOWN, not only
+> by clicking away from it.
+> **THE GAP THE TESTS FOUND (a hole my own Tier-1 ruling opened).** With `losingCostsHealth:false` the player could
+> **never lose a chase** - health was the only player-exit (CCODE-39), so the engine would have run it forever.
+> Added `playerBreaksAtPressure`, per kind. **A FIGHT deliberately has none**: health owns the player's exit there,
+> and adding one would take that decision back from them.
+> Four SNG-230 checks asserted the old staged shape - **updated, not deleted**; what they protect (the chase carries
+> the pursuer, the chain works both ways, the frame stays a legibility layer) still holds and is still asserted.
+> 15 new checks. npm test exit 0 (20 seams). Live on never-used port 8451 **through the real modules**: a fled fight
+> becomes a `duel`/`chase` in skill_battle mode with a moving Ground-gained meter, exits wired to strike/flee, orange
+> border; a toll-keeper mints a standoff in skill_battle mode with a Their-resolve meter and the teal border.
+> **STILL OPEN:** Tier 3 (static antagonist for puzzle; hazard stays the fast one) - Tier 4 (the morph made VISIBLE:
+> the chain works mechanically end to end, it just isn't announced - the border should go red->amber and say so) -
+> and **AEVI-247-AUTHOR**, whose chase/standoff defaults are all deliberately plain so they read as placeholders.
+> Results: po/results/20260731_SNG-247_Tier2_chase_and_standoff_on_the_engine.md
+
+
 > ## [AEVI-247-AUTHOR open - for Aevi, raised by CCode 2026-07-31] The per-kind voice + tuning behind SNG-247
 > **Nothing here blocks CCode.** Tiers 2-4 ship with code-owned DEFAULTS for every field below, and every default is
 > deliberately plain so it reads as a placeholder rather than a decision. This is the judgment-heavy half: the voice,

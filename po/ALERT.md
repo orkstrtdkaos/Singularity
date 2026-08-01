@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## [SPEC §5 added] SNG-249 §5 COMPLETE ARC AT CREATION (Aevi, 2026-07-27)
+> Erik: "a generated quest/encounter needs a COMPLETE structured arc built at time of creation - how it's
+> accomplished and revealed IS the play." Sharpens §1-4 (each stage concrete) -> the WHOLE ARC (all stages + all
+> resolutions + win-condition) exists coherent AT MINT; play REVEALS+ACCOMPLISHES a determined structure, never
+> improvises its spine. Verified authored quests already do this (Second Thread mints w/ 6 stages + 3 outcomes
+> whole). KEY: whole != spoiled - structure built whole, REVEAL paced through play (SNG-239 §6a); the lazy
+> 'never batch future stages' (app.js:2037) is IMAGERY not structure -> complete STRUCTURE at mint, lazy
+> RENDERING. Enforce: generation is ATOMIC (whole arc in one mint or fail) + a completeness+COHERENCE gate
+> (stages LEAD to resolutions, outcomes ANSWER the premise - not just 'N stages exist'). Guards: whole!=spoiled,
+> structure-whole/rendering-lazy, coherence is the real bar, no improvised spine.
+> CCODE: atomic quest/encounter generation + the completeness+coherence gate (extends born-complete SNG-234/248).
+> AEVI: the gen prompt requires the whole coherent arc + GOOD/BAD (complete vs thin-premise) example. ERIK: min
+> stages per type + how strict the coherence check.
+
 > ## [SPEC - the concreteness guardrail on generation] SNG-249 (Aevi, 2026-07-27)
 > Erik: "build the requirement of CONCRETE objectives + criteria to satisfy them into any quests/encounters - just
 > because we CAN generate a quest doesn't mean I want vague nice-sounding nonsense." The necessary guardrail on

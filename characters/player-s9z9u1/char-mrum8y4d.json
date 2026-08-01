@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 5,
-  "xp": 477,
+  "xp": 490,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -70,7 +70,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.1007506746725731,
+    "spectrumId": -0.09571314093894445,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
@@ -79,7 +79,7 @@
   "maxHealth": 50,
   "health": 50,
   "maxEnergy": 120,
-  "energy": 33,
+  "energy": 23,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -138,11 +138,144 @@
     "In the dry storage alcove of the Half-Cathedral's eastern tower, deep in early-spring night, Loki and Vessin Tallow-bark came to rest — she named what she wanted and had it, and afterward lay quiet in the candlelight and said the night was worth not knowing what morning brings."
   ],
   "currentLocationId": "grovehome",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "grovehome",
+    "turns": [
+      {
+        "player": "You let her remove your shirt as you pull her toward you and settle her on your lap... you use harmonic voice on her midsection to stimulate her gentle... now that she's on your lap any movement she has will ride against your hard member under your pants.",
+        "summary": "In the candlelit alcove, Loki drew Vessin close and turned harmonic voice to intimate use — she felt it, recognized it for what it was, and answered with her own intent.",
+        "narration": "You pull her toward you and she comes willingly, settling her weight onto your lap in the candlelight. Her hands find the hem of your shirt and work it up and off — she takes a moment to look, the way she looks at things she's decided to keep, and then her hands are on your shoulders.\n\nYou let the harmonic voice drop low, below speech, below anything she could name as a sound. You turn it inward — toward the warm center of her, her ribs, her belly, a slow resonant pressure that has nothing to do with words. She feels it the way you feel a bow drawn across the low strings of something you are standing too close to. Her breath catches on the second note. She does not ask what you are doing. She tilts her chin up instead, eyes half-lidded, and her hands tighten on your shoulders.\n\nShe shifts her weight and then goes still, because she has found what was waiting for her there, and the stillness is its own answer. The candlelight does not move. Cy is very, very far away on the other side of the alcove and has decided to inspect the latch bracket for the fourth time tonight.\n\nVessin makes a low sound — not a word, not a question. Her forehead comes to rest against yours. She breathes. Then, carefully and with complete intention, she moves again."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You pull her toward you and she comes willingly, settling her weight onto your lap in the candlelight. Her hands find the hem of your shirt and work it up and off — she takes a moment to look, the way she looks at things she's decided to keep, and then her hands are on your shoulders.\n\nYou let the harmonic voice drop low, below speech, below anything she could name as a sound. You turn it inward — toward the warm center of her, her ribs, her belly, a slow resonant pressure that has nothing to do with words. She feels it the way you feel a bow drawn across the low strings of something you are standing too close to. Her breath catches on the second note. She does not ask what you are doing. She tilts her chin up instead, eyes half-lidded, and her hands tighten on your shoulders.\n\nShe shifts her weight and then goes still, because she has found what was waiting for her there, and the stillness is its own answer. The candlelight does not move. Cy is very, very far away on the other side of the alcove and has decided to inspect the latch bracket for the fourth time tonight.\n\nVessin makes a low sound — not a word, not a question. Her forehead comes to rest against yours. She breathes. Then, carefully and with complete intention, she moves again.",
+      "sceneSummary": "In the candlelit alcove, Loki drew Vessin close and turned harmonic voice to intimate use — she felt it, recognized it for what it was, and answered with her own intent.",
+      "choices": [
+        {
+          "label": "Stay as you are — let the moment carry where it goes, unhurried",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Speak to her — not words of craft, just something true, quietly",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Bring Descent to bear — name what you want, and let her hear the same named in herself",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": "descent",
+          "energyCost": 6,
+          "trivial": false
+        },
+        {
+          "label": "Do nothing but hold her — hands on her, presence full, no craft",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        }
+      ],
+      "characterDeltas": {
+        "energy": -6
+      },
+      "scene": {
+        "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral, deep night. Single candle burning on the low shelf. Drop-cloth spread on the floor. The open stair is the only entrance.",
+        "npcsPresent": [
+          {
+            "name": "Vessin Tallow-bark",
+            "state": "Seated on Loki's lap in the candlelight, forehead against Loki's, hands on Loki's shoulders, breath slowed — present and deliberate."
+          },
+          {
+            "name": "Cy",
+            "state": "Stationed at the far wall, inspecting the latch bracket with focused and repeated attention."
+          }
+        ],
+        "objects": [
+          "Candle burning on low shelf",
+          "Flat canvas drop-cloth spread on the floor",
+          "Loki's shirt, removed",
+          "Traveler's Pack against the wall"
+        ],
+        "threads": [
+          "The moment is fully in motion — neither has said what comes next"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "vessin-tallow-bark",
+          "name": "Vessin Tallow-bark",
+          "note": "Felt the harmonic current turned inward on her — recognized it without naming it, answered with intent. Forehead against Loki's. Has chosen to be here fully.",
+          "learned": [
+            "Loki can turn harmonic voice to intimate register — she felt it clearly and did not pull away"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "In the dry storage alcove, seated on Loki's lap in the candlelight — present and fully choosing it.",
+          "bondType": "romantic",
+          "bondStage": "together"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "vessin-tallow-bark",
+          "label": "Vessin Tallow-bark",
+          "kind": "person",
+          "entityId": "vessin-tallow-bark",
+          "fact": "Felt harmonic voice turned to intimate use — recognized it for what it was without naming it, and answered deliberately. The calculation she said she'd put down stayed down.",
+          "links": [
+            "grovehome",
+            "the-half-cathedral"
+          ]
+        }
+      ]
+    },
+    "sceneState": {
+      "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral, deep night. Single candle burning on the low shelf. Drop-cloth spread on the floor. The open stair is the only entrance.",
+      "npcsPresent": [
+        {
+          "name": "Vessin Tallow-bark",
+          "state": "Seated on Loki's lap in the candlelight, forehead against Loki's, hands on Loki's shoulders, breath slowed — present and"
+        },
+        {
+          "name": "Cy",
+          "state": "Stationed at the far wall, inspecting the latch bracket with focused and repeated attention."
+        }
+      ],
+      "objects": [
+        "Candle burning on low shelf",
+        "Flat canvas drop-cloth spread on the floor",
+        "Loki's shirt, removed",
+        "Traveler's Pack against the wall"
+      ],
+      "threads": [
+        "The moment is fully in motion — neither has said what comes next"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 2,
+    "hour": 3,
     "realAnchor": null
   },
   "companions": [
@@ -565,8 +698,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Descent named the true word for what she is doing. She went still, held the canvas, and said: she has not done this. The distinction from 'does not' was deliberate and she knew it. She did not move away.",
-        "[d2] Named the shape of what she wants tonight: to stop somewhere without calculating the cost, to have something only for having. Admitted she stopped mapping the exit without knowing when she stopped.",
         "[d2] Received Loki's mouth on her neck and the hands moving toward more sensitive places without pulling away — made a small honest sound; named what she sees Loki doing in the dry voice of someone who recognizes a craft.",
         "[d2] Descent named the last held-back thing — that she did not notice the moment the calculation dissolved — and she acknowledged it plainly. Said 'yes, that is the one.' The armor in her voice is present but no longer performing.",
         "[d2] Turned to face Loki and put one hand against their face — held it without speaking. The appraisal is gone from her eyes. She has decided something and is not afraid of having decided it.",
@@ -574,23 +705,25 @@
         "[d2] Your bond becomes romantic.",
         "[d2] Your bond deepens — courting.",
         "[d2] Named her preference plainly — neither leading nor being led, something shared. Said she has spent enough of today in charge of things.",
-        "[d2] Lay quiet in the candlelight afterward — said the night was worth the not-knowing. The ease in her voice is new and small and real."
+        "[d2] Lay quiet in the candlelight afterward — said the night was worth the not-knowing. The ease in her voice is new and small and real.",
+        "[d2] Felt the harmonic current turned inward on her — recognized it without naming it, answered with intent. Forehead against Loki's. Has chosen to be here fully.",
+        "[d2] Your bond deepens — together."
       ],
       "knownFacts": [
-        "She wants, tonight, to stay somewhere without the exit already mapped — to have something that is only for having.",
         "She does not know when she stopped calculating the cost of this alcove. That is the thing she named.",
         "She did not feel the moment she stopped mapping the exit — the not-noticing is the thing that was revealed, and she knows it now.",
         "She can choose to stay somewhere without mapping the exit — she has now done it",
         "She is capable of choosing not to calculate — she did it, and said so aloud.",
         "The phrase 'just for now' may be a hedge or may be the most honest thing she has said — she does not yet know which.",
         "She knows what she wants and is not embarrassed to say it directly when asked plainly",
-        "She can hold something without calculating its cost — and she did, and she knows it now."
+        "She can hold something without calculating its cost — and she did, and she knows it now.",
+        "Loki can turn harmonic voice to intimate register — she felt it clearly and did not pull away"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the dry storage alcove, shoulder against Loki's, quiet and at ease in the candlelight.",
+      "statusNote": "In the dry storage alcove, seated on Loki's lap in the candlelight — present and fully choosing it.",
       "domains": {
         "primary": "rootkin"
       },
@@ -607,7 +740,7 @@
       "image": "https://image.pollinations.ai/prompt/A%20woman%20in%20her%20mid-forties%2C%20neither%20tall%20nor%20short%2C%20built%20for%20endurance%20rather%20than%20strength.%20Quickwood-dark%20skin%20with%20the%20faint%20silver%20tracery%20of%20old%20briar-scarring%20along%20her%20left%20forearm%20and%20jaw.%20Ha%2C%20character%20portrait%2C%20named%20Vessin%20Tallow-bark%2C%20woman%2C%20Lone%20traveler%20resting%20at%20the%20Half-Cathedral%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=98296&nologo=true",
       "_portraitTier": "devoted",
       "bondType": "romantic",
-      "bondStage": "courting"
+      "bondStage": "together"
     }
   },
   "placeMemory": {
@@ -931,7 +1064,7 @@
     "lastSharedReadAt": "2026-08-01T22:13:09.571Z",
     "lastTickWorldDay": 32,
     "lastCanonWorldDay": 32,
-    "turnsSinceOffer": 16,
+    "turnsSinceOffer": 17,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -1767,7 +1900,8 @@
           "[d2] Named the shape of what she wants tonight, unprompted and without deflection: to stop somewhere without calculating the cost, to have something only for having. She does not know when she stopped mapping the exit — only that she did.",
           "[d2] Descent found the last thing she held back: she did not notice the moment the calculation dissolved. She acknowledged it without defense — 'yes, that is the one.' The dry voice is still there, but it is no longer pretending to be armor.",
           "[d2] Met the kiss without hesitation — and afterward said she was going to stop calculating the cost of this, just for now. Said it like someone testing a new instrument and finding it works. The 'just for now' is either her last hedge or the most honest thing she has said tonight.",
-          "[d2] Came to rest in the alcove and said afterward that the night was worth not knowing what morning brings — the calculation, for once, put down."
+          "[d2] Came to rest in the alcove and said afterward that the night was worth not knowing what morning brings — the calculation, for once, put down.",
+          "[d2] Felt harmonic voice turned to intimate use — recognized it for what it was without naming it, and answered deliberately. The calculation she said she'd put down stayed down."
         ],
         "links": [
           "grovehome",
@@ -1872,17 +2006,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 1.934186803253175,
-    "cerebral": 9.17570521134238,
-    "social": 21.38081993303639,
-    "strategic": 6.5198393419409335,
-    "cautious": 5.1953853612061165,
-    "amorous": 16.886551512888957,
-    "generous": 4.880871725688743,
-    "ruthless": 0.4561934714030395,
-    "risky": 1.399208051208352,
-    "patient": 0.3820985560950746,
-    "deception": 0.4447825110517975
+    "devotion": 1.8858321331718457,
+    "cerebral": 8.946312581058821,
+    "social": 20.846299434710478,
+    "strategic": 6.35684335839241,
+    "cautious": 5.065500727175963,
+    "amorous": 18.464387725066732,
+    "generous": 4.758849932546524,
+    "ruthless": 0.44478863461796353,
+    "risky": 1.3642278499281433,
+    "patient": 0.37254609219269774,
+    "deception": 0.43366294827550256
   },
   "aptitudes": [
     "silver_tongue",
@@ -1892,7 +2026,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 116,
+  "actionCount": 117,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2201,8 +2335,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785623030076,
-  "rev": 391,
+  "updatedAt": 1785623411858,
+  "rev": 392,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -2972,7 +3106,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 65
+    "the_quickwood": 66
   },
   "opLossPending": false,
   "sessions": [
@@ -3027,10 +3161,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-01T22:23:50.076Z",
+      "lastAt": "2026-08-01T22:30:11.856Z",
       "startDay": 32,
       "endDay": 32,
-      "beats": 31
+      "beats": 32
     }
   ],
   "establishedFacts": [
@@ -3068,17 +3202,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 132,
-    "choices": 132,
-    "characterDeltas": 53,
-    "scene": 132,
+    "sceneSummary": 133,
+    "choices": 133,
+    "characterDeltas": 54,
+    "scene": 133,
     "placeUpdates": 17,
-    "codexUpdates": 88,
+    "codexUpdates": 89,
     "timeOps": 123,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 26,
-    "npcUpdates": 104,
+    "npcUpdates": 105,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3092,7 +3226,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 132,
+  "_opTurns": 133,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1
@@ -3106,7 +3240,7 @@
       "the_misdirect": 2,
       "the_better_story": 11,
       "prism_sight": 8,
-      "harmonic_voice": 3,
+      "harmonic_voice": 4,
       "hunters_strike": 3,
       "descent": 6
     },

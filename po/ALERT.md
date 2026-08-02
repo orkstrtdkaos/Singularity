@@ -1,6 +1,30 @@
 # PO ALERT
 
-> ## [SPEC - SNG-263 the CRAFT MECHANICS OVERHAUL] the biggest one yet (Aevi, 2026-08-02)
+> ## [SPEC r2 - SNG-263 the magnitude RULER] + a verified gap Erik called (Aevi, 2026-08-02)
+> Erik gave the ruler the authoring pass needed:
+> - **§6 INTENSITY:** conserve ≈ HALF, surge ≈ DOUBLE range/damage/push — **but the important half is Erik's
+>   constraint: each craft AUDITED INDIVIDUALLY** so the effect reads logically in that craft's own terms. A
+>   blanket ×2 is wrong for a conceal, a ward, a read, a bargain — a surged reveal widens what you SEE, not
+>   "double damage." Stated per craft, visible before committing.
+> - **§7 DAMAGE IS ROLLED** — a distribution with a max, not a fixed number. **VERIFIED ANCHOR:** default
+>   opponent health is **5** (`encounters.js:108`) and today's generic formula gives a T-I strike ≈2 → ~3 hits.
+>   So the AVERAGE is already near Erik's "2-3 hits"; what's missing is **the roll (variance) and a MAX that
+>   reaches lethal** — "a T-I strike at max should be able to kill a T-I beast."
+> - **§8 TIER SCALING (Erik's terms):** T-II ≈ **double on the craft's OWN operative axis** (damage OR area OR
+>   range — not all three); **T-III NOT linear** (more than another doubling); **T-IV/V get SPECIAL ABILITIES**
+>   — qualitative, not bigger numbers. Matches the existing `capstoneTier: 4`, and it settles SNG-258 §3 at the
+>   CONTENT layer: **the top tiers buy KIND, not quantity.** (Tier = level-band; RANK = depth within an owned
+>   craft. Different axes — don't conflate in authoring.)
+> - **§9 THE GAP ERIK CALLED, VERIFIED:** `braids.js:132` and `:186` and `progression.js:577` all hard-code
+>   **`effectTags: []` and carry NO magnitude fields.** So the moment this lands, **every braid, discovery, and
+>   generated craft is born mechanically EMPTY** — second-class citizens of the system meant to make crafts
+>   real. The minting paths must produce a COMPLETE body — authored within clamps, or **DERIVED** (a braid
+>   combines its parents' magnitudes; a discovery derives from its source) — and the §5 CI check must cover
+>   MINTED crafts, not just the authored catalog. Otherwise PromisedButUnread returns through the back door.
+> **STILL ERIK'S (the two that block authoring):** (1) the T-I damage BAND in numbers (anchor: max kills a
+> 5-health T-I beast); (2) **what "SPECIAL" means at T-IV/V** — that's 54 crafts (28 at levelReq 4, 26 at 5) and
+> it's the biggest authoring unknown; I'd want 2-3 worked examples from Erik before authoring the rest.
+> Full: SPEC_SNG-263 r2.> ## [SPEC - SNG-263 the CRAFT MECHANICS OVERHAUL] the biggest one yet (Aevi, 2026-08-02)
 > Erik: every described function needs a matching, VERIFIABLE game mechanic; ranks must be distinguishable;
 > conserve/normal/surge must be mechanically known per skill. Audited it — **he's right and it's worse than it
 > sounds:**

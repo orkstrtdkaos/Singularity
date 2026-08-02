@@ -1,6 +1,35 @@
 # PO ALERT
 
-> ## [CCODE-67 - §11 WIELDER SCALING + LIVE BALANCE DIALS IN THE MACHINE TAB - CCode, 2026-08-02] Erik can now turn every dial AS HE PLAYS
+> ## [DONE - SNG-263 BLAZEBORN PILOT authored, STAGED not live] (Aevi, 2026-08-02)
+> Erik: proceed, but CCode is mid-work — don't disrupt. **Staged to `po/staged_content/
+> blazeborn_mechanics_pilot.json`; `reach_dark_light.json` NOT touched** (verified: its last commit is still
+> SNG-147c). CCode folds it into the ability records once the schema locks — same pattern as the SNG-252 ribbon
+> content. It doubles as the concrete schema proposal.
+> 12 crafts, each with operativeAxis + base magnitudes + per-rank deltas + conserve/surge in the craft's own
+> language + bounds from `tree[].cannot`. **Seven findings, and several change the plan:**
+> 1. **The prose carried the mechanics.** Every axis and increment is traceable to a line already in
+>    `tree[].grants`. The authoring job is **transcription + arithmetic, not invention** — much smaller than
+>    feared.
+> 2. **Only 4 of 12 crafts are damage-carrying.** The other 8 needed healing, soak, area, range, duration,
+>    targets, materials, persistence, bindStrength. **A damage-only schema would fail 2/3 of ONE tradition** —
+>    18 distinct axes across 12 crafts. CCode: the schema must be axis-general from the start.
+> 3. **Rank increments land on a NON-damage axis MORE OFTEN than on damage** (kindle r3 → range+persistence,
+>    radiance r2 → area, lightsense r3 → range, line_of_light r3 → companions). The §10 "a rank spends on the
+>    axis its own prose names" rule is **the common case, not an edge case.**
+> 4. **`the_last_light` REFUSES both intensity modes** — its own cannot-text says *"it cannot be half-given."* A
+>    blanket ×0.5/×2 would have invented a "conserved capstone" the fiction forbids. **Erik's audit-every-craft
+>    instruction, vindicated on the first capstone it touched.**
+> 5. **`the_blaze_wall` is unauthorable without the soak layer** — its entire body is a barrier value. §11 Gap 2
+>    confirmed a blocker, not a nice-to-have.
+> 6. **`the_revealing_burn` r2 is ALREADY an identity-attack in existing prose** ("what is false in a PERSON —
+>    an assumed shape, a worn name, a glamour grown into them"). **SNG-258 §4e is not a new system to invent —
+>    the catalog already reaches for it**, and this craft is its first concrete instance.
+> 7. **T-IV/V "SPECIAL" has a clear register from the prose:** the craft gains a KIND it did not have
+>    (identity-attack; total expenditure at total self-cost) — **not a bigger number.** That answers Erik's
+>    biggest open question without needing worked examples, though his sign-off on the register is still wanted.
+> **ERIK:** (1) sign off the ladder as applied (T-I 1d6 · T-II 2d6 · T-III 3d6+2 · T-IV 4d6+2 · T-V 5d6+4);
+> (2) the §11 scaling strength — how much better should a master's `kindle` be than a novice's?; (3) is
+> "REFUSED" the right authored value for an intensity mode the fiction forbids, or should it read differently?> ## [CCODE-67 - §11 WIELDER SCALING + LIVE BALANCE DIALS IN THE MACHINE TAB - CCode, 2026-08-02] Erik can now turn every dial AS HE PLAYS
 > Full `npm test` green. `npm run endgame` re-answers Aevi's test of done on demand.
 > **§11 SCALING IS LIVE.** damage = DICE(tier,rank) + **SCALING(level,attribute,uses)** - SOAK(target).
 > Calibrated MODEST on purpose: `perLevel 0.06`, `perAttributePoint 0.15` above a base of 3, capped at 6 - a

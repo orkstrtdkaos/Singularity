@@ -1,6 +1,22 @@
 # PO ALERT
 
-> ## [DECIDED - Erik] SNG-258 §4c alignment DRIFTS (Aevi, 2026-08-02)
+> ## [SPEC r3 + 2 decisions - SNG-258] world-uses-crafts + identity-as-assailable (Aevi, 2026-08-02)
+> Three more from Erik, goals-first:
+> - **§4d:** the roll-math + alignment transparency belongs on the CHARACTER SHEET as a standing self-portrait
+>   (same data as the popup, two surfaces - popup answers "why this roll", sheet answers "who am I").
+> - **§4e:** alignment + experience can be ATTACKED and RESTORED - villains/crafts pull your alignment against
+>   your will + erase use/experience (a real danger: losing who you are / what you earned), and certain crafts
+>   RESTORE it. An attack/defense/restore triad on IDENTITY, like health. Resolves §4c cleanly: 3 sources on one
+>   value - your actions (natural, slow), a hostile craft (forced, an attack), a restorative craft (heals).
+> - **§11 THE WORLD USES CRAFTS (foundational, verified):** NPCs only ROLL crafts inside a structured encounter;
+>   everywhere else it's NARRATIVE-ONLY (skillsObserved = a label, no cast+resolve mechanism), so the player must
+>   PROMPT it and it's nebulous. GOAL: the world runs on the SAME craft system - NPCs use crafts unprompted in/out
+>   of encounters, resolving through the real roll system, with real effects (an NPC's ward = §10 prepared ground;
+>   a villain's alignment-pull = §4e), legible/fogged to the player. THE KEYSTONE that makes crafts the WORLD's
+>   engine not just the player's toolbar - likely its own epic.
+> - **§4c anchor DECIDED:** tradition alignment stays a BASE, but MUCH can be moved to another area through
+>   INTENTIONAL action - a real home you can genuinely relocate FROM, not a wobble around a fixed point.
+> CCode owns every HOW. §11 is the big foundational one. Full: SPEC_SNG-258 §4d/§4e/§11.> ## [DECIDED - Erik] SNG-258 §4c alignment DRIFTS (Aevi, 2026-08-02)
 > Erik: yes, alignment should drift. GOAL: who a character IS on the world's spectrums is shaped by what they
 > repeatedly DO - identity earned by action (same spine as skill-use §2 / aptitude §5). Because spectral fit
 > reads off alignment, a committed path literally gets EASIER (better fit) - a virtuous loop rewarding

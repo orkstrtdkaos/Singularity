@@ -1,0 +1,898 @@
+{
+ "schemaVersion": 1,
+ "id": "harmonic_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Authored against the locked CCODE-64 schema; dice are FINAL for their tier (no re-laddering). Bounds carry SNG-264 §3 classes.",
+ "note": "SNG-263 catalog pass, tradition 3 of 27. Authored NEXT deliberately: radiant_lance r3 beats 'a Harmonic shield's FIRST RANK' and resonant_shield r3 'turns a Radiant lance's first strike' — the two traditions reference each other by RANK from both sides. Authoring them adjacently pins the ranked-soak numbers so the cross-reference is mechanically true rather than two independent guesses.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "crafts": [
+  {
+   "id": "sonic_resonance",
+   "tier": 1,
+   "functions": [
+    "bind",
+    "break",
+    "move",
+    "strike"
+   ],
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.02,
+    "range": 10,
+    "targets": 1,
+    "note": "r1's own numbers: objects up to a person's weight within ~10 paces"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets+duration",
+     "delta": "SUSTAINED pressure — hold a door shut or force it, pin a light object, shatter dense material; TWO TARGETS MAX (its own bound)",
+     "from": "r2 grants + its own explicit two-target cap"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: find and exploit a structure's RESONANT FREQUENCY — collapse a wall section, shatter quality steel, stun everyone in a small room (nonlethal)",
+     "from": "r3 grants — frequency-exploitation is a KIND, not a bigger push"
+    }
+   ],
+   "intensity": {
+    "conserve": "a nudge — half the force, no strain, and nothing announces it",
+    "surge": "double the pressure; the field still limits output near living tissue"
+   },
+   "bounds": [
+    {
+     "text": "no effect through solid stone",
+     "class": "hard"
+    },
+    {
+     "text": "nothing heavier than a person",
+     "class": "soft"
+    },
+    {
+     "text": "cannot LIFT, only push",
+     "class": "hard"
+    },
+    {
+     "text": "two targets max",
+     "class": "soft"
+    },
+    {
+     "text": "fails in heavy interference",
+     "class": "soft"
+    },
+    {
+     "text": "NOT LETHAL BY DESIGN — the field limits output near living tissue",
+     "class": "hard"
+    },
+    {
+     "text": "exhausting",
+     "class": "cost"
+    }
+   ],
+   "designNote": "'Not lethal by design — the field limits output' is HARD: it is a fact about the WORLD's field, not the wielder's skill. No mastery makes sonic_resonance a killing craft."
+  },
+  {
+   "id": "echo_sense",
+   "tier": 1,
+   "functions": [
+    "reveal"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 10,
+    "note": "r1: map bodies through ONE wall or in darkness within ~10 paces"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "~30 paces and TWO walls; distinguish individuals you know by gait and breath; overhear muffled speech as rhythm and tone (NOT words)",
+     "from": "r2 grants — its own numbers"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "hear ACTUAL WORDS through barriers at ~20 paces; read a building's whole layout in a minute; detect the sub-sound of active nanite fields",
+     "from": "r3 grants — resolution finally reaches words"
+    }
+   ],
+   "intensity": {
+    "conserve": "a listen — half the range, and you can keep moving",
+    "surge": "double the reach, and you are deaf to everything nearer while you hold it"
+   },
+   "bounds": [
+    {
+     "text": "no fine detail — a face, a small tool",
+     "class": "hard"
+    },
+    {
+     "text": "one wall only at r1",
+     "class": "soft"
+    },
+    {
+     "text": "loud environments blind it",
+     "class": "hard"
+    },
+    {
+     "text": "running water scrambles it",
+     "class": "hard"
+    },
+    {
+     "text": "REQUIRES STILLNESS — cannot deep-listen while moving or fighting",
+     "class": "soft"
+    },
+    {
+     "text": "Precursor tech reads as a blank",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "stillness_field",
+   "tier": 1,
+   "functions": [
+    "bind",
+    "conceal",
+    "resist",
+    "ward"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "hush",
+    "area",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 3,
+    "area": 1,
+    "note": "r1: a room-CORNER of hush for a few minutes"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "area+duration",
+     "delta": "ROOM-SIZED, held near an HOUR; carry it at a slow walk; what arrives as sound arrives BLUNTED",
+     "from": "r2 grants — its own numbers"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: SHAPE HOLES in the field — let one voice pass while all else stills; still an alarm bell MID-SWING; grant a whole camp true rest",
+     "from": "r3 grants — selective permeability is a new kind of control"
+    }
+   ],
+   "intensity": {
+    "conserve": "a corner of quiet — half the area, and it holds itself",
+    "surge": "double the hush; a Harmonic adept notices the theft of sound instantly"
+   },
+   "bounds": [
+    {
+     "text": "sudden loud sounds punch through",
+     "class": "soft"
+    },
+    {
+     "text": "moving with it breaks it",
+     "class": "soft"
+    },
+    {
+     "text": "cannot cover a second person's noise unless they stay within arm's reach",
+     "class": "soft"
+    },
+    {
+     "text": "A HARMONIC ADEPT NOTICES THE THEFT OF SOUND INSTANTLY",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "tremor_sense",
+   "tier": 1,
+   "functions": [
+    "reveal"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 30,
+    "note": "r1's own number: approach through earth within ~30 paces"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "~80 paces on good ground; know a person's gait; feel hollow spaces underfoot; sense a collapse SECONDS EARLY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "a full minute standing still reads a HILLSIDE: every mover, every void, water veins, the grind of old machinery underground",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick read of the ground — half the range, no stillness required",
+    "surge": "double the reach and the detail, at the cost of a full minute of absolute stillness"
+   },
+   "bounds": [
+    {
+     "text": "STILL TARGETS ARE INVISIBLE",
+     "class": "hard"
+    },
+    {
+     "text": "rain and river-roar drown it",
+     "class": "hard"
+    },
+    {
+     "text": "wooden floors blur everything",
+     "class": "soft"
+    },
+    {
+     "text": "cannot localize precisely past 40 paces",
+     "class": "soft"
+    },
+    {
+     "text": "the minute of stillness is ABSOLUTE — one step resets it",
+     "class": "soft"
+    },
+    {
+     "text": "Precursor works read as silence",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "drumline_stride",
+   "tier": 1,
+   "functions": [
+    "empower",
+    "move"
+   ],
+   "shape": "reposition",
+   "operativeAxis": [
+    "speed",
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 3,
+    "push": 0,
+    "magnitude": 2,
+    "duration": 2,
+    "targets": 1,
+    "note": "r1: a sprint HALF AGAIN your best over open ground"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range+targets",
+     "delta": "hold the stride A MILE; carry a burden at speed; PASS THE BEAT to one runner beside you",
+     "from": "r2 grants — distance plus a second target"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: for a dozen heartbeats OUTRUN A HORSE; cross a collapsing surface before it finishes falling; arrive with momentum THAT COUNTS AS FORCE",
+     "from": "r3 grants — arriving-as-force is a new capability"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick burst — half the distance, and the debt is small",
+    "surge": "double the speed; the stop costs a slide of several body-lengths, so plan the landing"
+   },
+   "bounds": [
+    {
+     "text": "broken ground breaks the beat",
+     "class": "soft"
+    },
+    {
+     "text": "cornering hard drops the rhythm",
+     "class": "soft"
+    },
+    {
+     "text": "A STUMBLE AT SPEED IS A REAL FALL",
+     "class": "hard"
+    },
+    {
+     "text": "once per scene",
+     "class": "soft"
+    },
+    {
+     "text": "the burst ends in a DEBT",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "id": "resonant_shield",
+   "tier": 2,
+   "functions": [
+    "resist",
+    "shield"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "soak",
+    "duration",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 4,
+    "soakRank": 1,
+    "duration": 1,
+    "targets": 1,
+    "note": "THE CROSS-REFERENCE ANCHOR. r1 = ONE impact then gone (soakRank 1). radiant_lance r3 'beats a Harmonic shield's FIRST RANK' — so soakRank 1 is exactly what a T-II lance's top rank overcomes, and r3 below raises the rank so the relationship stays live rather than becoming a permanent hard-counter."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration+targets",
+     "delta": "sustain SEVERAL BREATHS; cover yourself PLUS ONE adjacent ally; shrug off thrown stones, arrows, tool-swings (soakRank 2)",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "soak+targets",
+     "delta": "a room-corner DOME for up to FOUR people, held a full scene if unmolested; TURNS CROSSBOW BOLTS AND A RADIANT LANCE'S FIRST STRIKE (soak 6, soakRank 3)",
+     "from": "r3 grants — and note it names the lance's FIRST strike, i.e. it beats lance r1 but not lance r3: the two crafts out-rank each other at different ranks, which is a genuine authored rock-paper-scissors"
+    }
+   ],
+   "intensity": {
+    "conserve": "a heartbeat's shimmer — half the soak, but it costs nothing and warns you of an ambush",
+    "surge": "double the barrier; you are immobile once anchored and it collapses if you take a hit inside it"
+   },
+   "bounds": [
+    {
+     "text": "ONE IMPACT then gone at r1",
+     "class": "soft"
+    },
+    {
+     "text": "only protects you at r1",
+     "class": "soft"
+    },
+    {
+     "text": "cannot hold against sustained force",
+     "class": "soft"
+    },
+    {
+     "text": "walking pace only while held",
+     "class": "soft"
+    },
+    {
+     "text": "heavy impacts break it AND COST YOU",
+     "class": "cost"
+    },
+    {
+     "text": "IMMOBILE once anchored; COLLAPSES INSTANTLY if you take a hit inside it",
+     "class": "hard"
+    }
+   ],
+   "designNote": "This craft and radiant_lance now form a RANKED counter-pair authored from both sides: lance r3 beats shield r1; shield r3 turns lance r1. Neither is a flat hard-counter — who wins depends on which RANK each has reached. This is the strongest argument yet that §11 Gap-2 soak must be RANKED, and it is now expressible in content."
+  },
+  {
+   "id": "harmonic_voice",
+   "tier": 2,
+   "functions": [
+    "command",
+    "empower",
+    "heal"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "morale",
+    "targets",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 4,
+    "targets": 6,
+    "note": "r1: a CONVERSATION-SIZED group"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "project to a CROWD or across a river without shouting; lace a negotiation with patience — hotheads get ONE REFLEXIVE PAUSE (a heartbeat, not a hold)",
+     "from": "r2 grants + its own bound naming the pause's size"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: bring a room to GENUINE WILLINGNESS TO LISTEN — feuding parties hear one full argument out; quiet a mob's edge and TURN it; sung over the wounded it eases them",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "steady them — half the reach, and nobody notices you did it",
+    "surge": "double the reach; crowds beyond ~50 resist, and people feel it the second time"
+   },
+   "bounds": [
+    {
+     "text": "CANNOT CHANGE ANYONE'S MIND — only their temperature",
+     "class": "hard"
+    },
+    {
+     "text": "breaks if you or an ally acts against it",
+     "class": "hard"
+    },
+    {
+     "text": "the pause is a HEARTBEAT, not a hold",
+     "class": "soft"
+    },
+    {
+     "text": "crowds beyond ~50 resist",
+     "class": "soft"
+    },
+    {
+     "text": "CANNOT MAKE ANYONE AGREE",
+     "class": "hard"
+    },
+    {
+     "text": "one use per gathering — people feel it the second time",
+     "class": "cost"
+    }
+   ],
+   "designNote": "'Cannot change anyone's mind — only their temperature' and 'cannot make anyone agree' are HARD. This is the tradition's ethical spine: harmonic influence never becomes mind-control at ANY level of mastery."
+  },
+  {
+   "id": "chord_of_mending",
+   "tier": 2,
+   "functions": [
+    "empower",
+    "heal",
+    "mend",
+    "restore"
+   ],
+   "shape": "healing",
+   "operativeAxis": [
+    "repair",
+    "duration"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 0,
+    "duration": 2,
+    "note": "RESTORE→healing, but this craft mends THINGS, not bodies — the dice read as repair magnitude"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "repair",
+     "delta": "STRUCTURAL work — a cartwheel, a roof truss, a boat's strake; blend the seam near-invisible; STRENGTHEN a sound joint beyond its original make",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: REBUILD FROM PARTS — a shattered mechanism whose pieces are gathered sings itself back together under your sustained chord; mend Radiant crystal",
+     "from": "r3 grants — reassembly is a kind, not a magnitude"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick tightening — half the mend, minutes not hours",
+    "surge": "double the work in one sitting; an hour's hum per major mend, and nothing may hammer or shout nearby"
+   },
+   "bounds": [
+    {
+     "text": "CANNOT RESTORE MISSING MATERIAL",
+     "class": "hard"
+    },
+    {
+     "text": "the mend SHOWS as a bright seam",
+     "class": "soft"
+    },
+    {
+     "text": "an hour's hum per major mend",
+     "class": "soft"
+    },
+    {
+     "text": "cannot work while anything hammers or shouts nearby",
+     "class": "soft"
+    },
+    {
+     "text": "EVERY MISSING SLIVER STAYS MISSING",
+     "class": "hard"
+    },
+    {
+     "text": "PRECURSOR MATERIAL REFUSES THE SONG OUTRIGHT",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "voice_of_the_flock",
+   "tier": 2,
+   "functions": [
+    "command",
+    "empower"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "coordination",
+    "targets",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 4,
+    "targets": 4,
+    "note": "r1's own number: a crew of FOUR moves in sync"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "EIGHT people, signals in true silence, coordination under stress; each member FEELS WHERE THE OTHERS ARE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: A DOZEN move as ONE ORGANISM for a scene — the group ROLLS as if led by your presence",
+     "from": "r3 grants — a group-level roll substitution is a new mechanic, not more targets"
+    }
+   ],
+   "intensity": {
+    "conserve": "a crew in step — half the number, and it needs no practice hour",
+    "surge": "double the flock; when it ends, all of you feel the sudden loneliness"
+   },
+   "bounds": [
+    {
+     "text": "participants must have PRACTICED with you an hour",
+     "class": "soft"
+    },
+    {
+     "text": "breaks if the group scatters",
+     "class": "soft"
+    },
+    {
+     "text": "A PANICKED MEMBER FLOODS THE CHORD WITH THEIR FEAR",
+     "class": "hard"
+    },
+    {
+     "text": "deaf companions cannot join",
+     "class": "hard"
+    },
+    {
+     "text": "when it ends, all of you feel the SUDDEN LONELINESS; over-use breeds dependence",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "id": "resonant_anchor",
+   "tier": 2,
+   "functions": [
+    "bind",
+    "resist",
+    "shield",
+    "ward"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "anchorStrength",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 3,
+    "soakRank": 2,
+    "targets": 1,
+    "duration": 3,
+    "note": "r1: hold against a strong man's shove, a river current to the waist"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "hold a rope against a falling weight; be the fixed point a climber trusts; ONE ALLY MAY BRACE THROUGH YOU",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "anchorStrength",
+     "delta": "anchor against a ROCKSLIDE's edge, a stampede, A RADIANT LANCE'S PUSH; hold OTHERS fast to you against what would sweep them away",
+     "from": "r3 grants — a second explicit cross-tradition reference to the lance"
+    }
+   ],
+   "intensity": {
+    "conserve": "set your feet — half the hold, and you can still use your hands",
+    "surge": "double the anchor; you are a fixed target for anything ranged"
+   },
+   "bounds": [
+    {
+     "text": "ONE anchored spot — lifting a foot ends it",
+     "class": "hard"
+    },
+    {
+     "text": "your arms are braced too — no fine work",
+     "class": "soft"
+    },
+    {
+     "text": "sustained crushing force WINS EVENTUALLY (minutes, not hours)",
+     "class": "hard"
+    },
+    {
+     "text": "YOU ARE A FIXED TARGET for anything ranged",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "id": "shatterpoint",
+   "tier": 3,
+   "functions": [
+    "break",
+    "foresee",
+    "reveal",
+    "strike"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "precision",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 1,
+    "note": "T-III setup. r1: a minute's study names the weakest point — YOUR NEXT STRIKE OR LEVER THERE COUNTS DOUBLE (its own explicit mechanic)"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "foresight",
+     "delta": "see where a bridge, scaffold, or dam WILL FAIL and WHEN; sabotage that looks like age; certify a structure safe with real authority",
+     "from": "r2 grants — from present weakness to future failure"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: read a mechanism MID-MOTION; call the shatterpoint of A HARMONIC SHIELD OR RADIANT LATTICE in a single held breath; a warning shouted in time counts",
+     "from": "r3 grants — a third cross-tradition rank-reference, and it counters its OWN tradition's shield"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick look — half the certainty, no minute of study",
+    "surge": "double the read; a lie about what you read is still a lie"
+   },
+   "bounds": [
+    {
+     "text": "KNOWING THE POINT IS NOT REACHING IT",
+     "class": "hard"
+    },
+    {
+     "text": "sound-dead materials (lead, cloth, water) refuse it",
+     "class": "hard"
+    },
+    {
+     "text": "predictions hold only while loads stay as read",
+     "class": "soft"
+    },
+    {
+     "text": "A LIVING STRUCTURE MUST HAVE A FLAW for the song to find — the young, sound, and whole are proof against it",
+     "class": "hard"
+    }
+   ],
+   "designNote": "r3 calls the shatterpoint of 'a HARMONIC shield' — the tradition authored a counter to ITSELF. Worth preserving: the best answer to a resonant_shield is another harmonic."
+  },
+  {
+   "id": "echo_memory",
+   "tier": 3,
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "recallDepth",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 1,
+    "note": "T-III setup. r1: recover the TONE of the last loud event in a quiet room"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "recallDepth+timeReach",
+     "delta": "recover FRAGMENTS OF ACTUAL WORDS from the last DAY in an enclosed space; identify a known voice; hear the ORDER of events",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "timeReach",
+     "delta": "in DEEP STONE reach back WEEKS; recover a conversation's spine; HEAR WHAT A PRECURSOR MECHANISM LAST SAID, if it spoke",
+     "from": "r3 grants — and this is a second in-catalog PRECURSOR hook (SNG-261 §B)"
+    }
+   ],
+   "intensity": {
+    "conserve": "a listen back — half the reach, and it costs you nothing",
+    "surge": "double the reach; it costs a night's sleep of focus, and what the deep stacks answer YOU CANNOT UNHEAR"
+   },
+   "bounds": [
+    {
+     "text": "words stay SMEARED",
+     "class": "soft"
+    },
+    {
+     "text": "open sky holds almost nothing",
+     "class": "hard"
+    },
+    {
+     "text": "FRAGMENTS, NEVER TRANSCRIPTS",
+     "class": "hard"
+    },
+    {
+     "text": "a space scrubbed by wind or a Stillness Field yields nothing",
+     "class": "hard"
+    },
+    {
+     "text": "costs a NIGHT'S SLEEP of focus",
+     "class": "soft"
+    },
+    {
+     "text": "WHAT THE DEEP STACKS ANSWER, YOU CANNOT UNHEAR",
+     "class": "cost"
+    }
+   ],
+   "designNote": "r3 hears 'what a Precursor mechanism LAST SAID' — a second already-authored precursor hook, alongside radiant's prism_sight r3. Two traditions independently give the player a way to CONTACT precursor presence. SNG-261 §B's staging problem is largely already solved in content."
+  },
+  {
+   "id": "the_sustained_chord",
+   "tier": 4,
+   "functions": [
+    "empower",
+    "sustain"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "magnitude",
+    "duration",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 12,
+    "targets": 6,
+    "note": "T-IV. r1: sustain a chord holding all attuned in strength and coherence"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: SET THE CHORD AND LET IT STAND — it no longer depends on your breath, but rings on its own resonance through a night's march or a night's sleep",
+     "from": "r2 grants — independence from the caster is the T-IV kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "hum it low — half the strength, and it asks almost nothing of you",
+    "surge": "double the chord; it ends the instant you stop carrying it (until r2)"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT HARM, ONLY HOLD",
+     "class": "hard"
+    },
+    {
+     "text": "it ends the instant you stop carrying it (r1)",
+     "class": "soft"
+    },
+    {
+     "text": "A STANDING CHORD IS TUNED TO WHAT IT WAS SET FOR AND WILL NOT ADAPT; re-tuning means re-setting",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "the_worldsong",
+   "tier": 5,
+   "functions": [
+    "empower",
+    "foresee",
+    "reveal"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "scale",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 8,
+    "duration": 24,
+    "area": 8,
+    "note": "T-V capstone"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: hear and JOIN A PLACE'S RESONANCE ACROSS ALL ITS TIME, moving it toward its truest note — everything in that place becomes more itself. The capstone is a KIND (acting on a PLACE across TIME) at near-total cost.",
+     "from": "r1 grants — a single-rank capstone; the special IS the craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — the worldsong is not a thing you half-sing; it costs nearly all you have or it does not sound.",
+    "surge": "REFUSED — it already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "IT COSTS NEARLY ALL YOU HAVE",
+     "class": "hard"
+    },
+    {
+     "text": "IT CAN ONLY DRAW OUT WHAT IS ALREADY LATENT — it cannot add what was never there",
+     "class": "hard"
+    }
+   ],
+   "designNote": "Third capstone across three traditions, same register: a KIND the craft did not have (acting on a place across time), at an absolute cost, with intensity REFUSED. the_last_light, light_borne, the_worldsong — the T-IV/V pattern is now demonstrated three times independently."
+  }
+ ],
+ "passFindings": [
+  "THE CROSS-REFERENCE RESOLVED: radiant_lance r3 'beats a Harmonic shield's FIRST RANK' and resonant_shield r3 'turns a Radiant lance's FIRST strike'. Authored adjacently, these now form a RANKED counter-pair — lance r3 beats shield r1; shield r3 turns lance r1. Neither is a flat hard-counter; who wins depends on which RANK each has reached. This is the strongest possible argument that §11 Gap-2 soak must be RANKED, and it is now expressible in content from both sides.",
+  "A THIRD cross-reference: resonant_anchor r3 holds against 'a Radiant lance's push', and shatterpoint r3 calls the shatterpoint of 'a Harmonic shield OR Radiant lattice'. The catalog is densely cross-referential — traditions were authored knowing each other. A composed/cross-tradition interaction mechanic would be reading intent that is already there.",
+  "shatterpoint r3 counters its OWN tradition's resonant_shield. The best answer to a harmonic is another harmonic — an authored intra-tradition counter worth preserving as mechanic.",
+  "A SECOND precursor hook: echo_memory r3 hears 'what a Precursor mechanism LAST SAID'. With radiant's prism_sight r3 (sees 'the seams of Precursor work'), TWO traditions independently give players a way to CONTACT precursor presence. SNG-261 §B's staging problem is largely already solved in content — it needs wiring, not authoring.",
+  "the_worldsong is the THIRD capstone (after the_last_light, light_borne) to demand REFUSED on both intensity modes and to be a KIND rather than a magnitude. Three traditions, three capstones, identical register — the T-IV/V pattern is now demonstrated, not asserted.",
+  "harmonic_voice's HARD bounds ('cannot change anyone's mind — only their temperature', 'cannot make anyone agree') are the tradition's ETHICAL spine: harmonic influence never becomes mind-control at any level of mastery. Bound-classing surfaced a values statement the mechanics must protect.",
+  "sonic_resonance's 'NOT LETHAL BY DESIGN — the field limits output near living tissue' is HARD and notable: it is a fact about the WORLD's field, not the wielder's skill. A whole damage-craft that can never kill. Worth Erik knowing the mechanic will hold that line."
+ ]
+}

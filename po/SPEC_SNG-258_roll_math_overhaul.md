@@ -199,10 +199,8 @@ deeds.
 These are the real questions drift raises; I flag them so the implementation is deliberate:
 1. **Rate.** Drift should be SLOW — a felt arc over many sessions, not a wobble that swings each fight. One
    strong-aligned action shouldn't move you much; a hundred should. (Same concave/earned shape as skill-use.)
-2. **Anchor vs. free.** Does your TRADITION/creation alignment act as a home you drift AROUND (a gravity well you
-   return toward), or can sustained action move you fully away from where you started? Lean (Erik's call): a home
-   pull that can be OVERCOME by sustained contrary action — you can become something other than you were born,
-   but it takes real, repeated doing. This keeps tradition meaningful while honoring earned change.
+2. **Anchor vs. free — DECIDED (Erik).** Your tradition/creation alignment stays as a BASE, but MUCH of it CAN be moved to another area through INTENTIONAL action. So: a real home you start from (tradition means something), but sustained deliberate work genuinely relocates you — not just a wobble around a fixed point, a true move to a new place you chose to become. The base is where you began; intentional action is how you become something else. (This is the natural pairing with §4e: your OWN intentional action moves you a lot; a hostile craft can force-move you as an attack; a restorative craft pulls you back toward your base or your chosen true.)
+
 3. **Can it be pulled UNWANTED?** If an enemy or a place forces you to act against your grain repeatedly, should
    that drift you? Interesting (a curse that erodes who you are) but risky (griefing your own identity). Lean:
    only YOUR chosen actions drift you; forced/coerced actions don't — drift is self-authored. (Erik's call.)

@@ -260,66 +260,88 @@
         "player": "run your hands over her body, her breasts, taking in the slick warmth of the act in it's softness... then help her dress slowly as you kiss her.",
         "summary": "In the grey dawn of the dry storage alcove, Loki dressed Vessin slowly with hands and kisses — the last warmth of the night carried into the morning until the scaffold crew called them back to the day.",
         "narration": "Your hands move over her slowly, no urgency left in them now. You trace the curve of her ribs, the soft weight of her breasts, the slick warmth that still clings to her skin. Vessin exhales through her nose — a small sound, almost a laugh, almost not. She does not pull away. She turns her head just enough to let you see the edge of her expression, which has lost its appraiser's edge entirely and found something quieter in its place.\n\nYou find her shirt and work it down over her shoulders with the same unhurried care you gave everything else this morning. She lifts her arms for you, which is its own kind of answer. When the cloth settles you smooth it against her back with one hand, a slow press of your palm along her spine, and she stands still under it the way she stood still for nothing else tonight. Then you hand her the trousers and she steps into them and your hands are at the waist, helping, and she turns around while you do the fastening.\n\nShe looks at you when you are done. The grey dawn is a full band under the door now. The candle gave out some time ago and was not missed. Her hair is entirely undone. She does not fix it. She says nothing at first — just holds the look with those appraiser's eyes that are, this morning, appraising something they have no category for and have apparently decided not to fight.\n\nYou kiss her, and she kisses back with a precision that is entirely hers — nothing performed, nothing held back, her hands coming up briefly to either side of your face. Then she steps away one step and takes a breath. \"Scaffold crew,\" she says, dry and quiet, in the voice she uses for facts. And reaches for her coat."
+      },
+      {
+        "player": "Ask Cy, quietly, if it noticed anything in the night — the latch bracket it was watching, or anything that moved on the landing.",
+        "summary": "Cy reports footsteps that stopped on the landing above and waited eleven minutes in the night — one person, no entry attempted.",
+        "narration": "You keep your voice low. The scaffold crew is not yet on the landing — there is still a margin of quiet left in the alcove — and you use it.\n\n\"Cy,\" you say, just above a breath. \"The latch bracket. Did anything move in the night?\"\n\nCy's lens irises once, slow and deliberate, the way it does when it is retrieving something from a deep register. It turns from the bracket to face you. The lamp it carries — the one it has never explained — throws no light this morning; the dawn under the door is enough.\n\n\"The bracket held,\" Cy says, in its precise, slightly antique way. \"No lateral stress. No entry from the landing passage.\" A pause, the kind that means it is not finished. \"However. Approximately two hours before current light: footsteps on the stair. One person. They stopped at the landing above and did not descend. They remained for eleven minutes and then withdrew. No door was tried.\"\n\nVessin, coat still in hand, glances at you. Her expression has returned most of the way to its working surface — the appraiser is back, reading the information alongside you rather than reacting to it.\n\n\"Eleven minutes is not someone who got lost,\" she says quietly.\n\nCy's lens irises again. \"That is a social inference,\" it says, with the tone of a mechanism that has stopped pretending it does not make them. \"It is consistent with the data.\"\n\nThe first scrape of boots on stone sounds from somewhere above — not close yet, but close enough. The margin of quiet is almost gone."
       }
     ],
     "lastTurn": {
-      "narration": "Your hands move over her slowly, no urgency left in them now. You trace the curve of her ribs, the soft weight of her breasts, the slick warmth that still clings to her skin. Vessin exhales through her nose — a small sound, almost a laugh, almost not. She does not pull away. She turns her head just enough to let you see the edge of her expression, which has lost its appraiser's edge entirely and found something quieter in its place.\n\nYou find her shirt and work it down over her shoulders with the same unhurried care you gave everything else this morning. She lifts her arms for you, which is its own kind of answer. When the cloth settles you smooth it against her back with one hand, a slow press of your palm along her spine, and she stands still under it the way she stood still for nothing else tonight. Then you hand her the trousers and she steps into them and your hands are at the waist, helping, and she turns around while you do the fastening.\n\nShe looks at you when you are done. The grey dawn is a full band under the door now. The candle gave out some time ago and was not missed. Her hair is entirely undone. She does not fix it. She says nothing at first — just holds the look with those appraiser's eyes that are, this morning, appraising something they have no category for and have apparently decided not to fight.\n\nYou kiss her, and she kisses back with a precision that is entirely hers — nothing performed, nothing held back, her hands coming up briefly to either side of your face. Then she steps away one step and takes a breath. \"Scaffold crew,\" she says, dry and quiet, in the voice she uses for facts. And reaches for her coat.",
-      "sceneSummary": "In the grey dawn of the dry storage alcove, Loki dressed Vessin slowly with hands and kisses — the last warmth of the night carried into the morning until the scaffold crew called them back to the day.",
+      "narration": "You keep your voice low. The scaffold crew is not yet on the landing — there is still a margin of quiet left in the alcove — and you use it.\n\n\"Cy,\" you say, just above a breath. \"The latch bracket. Did anything move in the night?\"\n\nCy's lens irises once, slow and deliberate, the way it does when it is retrieving something from a deep register. It turns from the bracket to face you. The lamp it carries — the one it has never explained — throws no light this morning; the dawn under the door is enough.\n\n\"The bracket held,\" Cy says, in its precise, slightly antique way. \"No lateral stress. No entry from the landing passage.\" A pause, the kind that means it is not finished. \"However. Approximately two hours before current light: footsteps on the stair. One person. They stopped at the landing above and did not descend. They remained for eleven minutes and then withdrew. No door was tried.\"\n\nVessin, coat still in hand, glances at you. Her expression has returned most of the way to its working surface — the appraiser is back, reading the information alongside you rather than reacting to it.\n\n\"Eleven minutes is not someone who got lost,\" she says quietly.\n\nCy's lens irises again. \"That is a social inference,\" it says, with the tone of a mechanism that has stopped pretending it does not make them. \"It is consistent with the data.\"\n\nThe first scrape of boots on stone sounds from somewhere above — not close yet, but close enough. The margin of quiet is almost gone.",
+      "sceneSummary": "Cy reports footsteps that stopped on the landing above and waited eleven minutes in the night — one person, no entry attempted.",
       "choices": [
         {
-          "label": "Step out of the alcove ahead of her — check the landing is clear before she follows.",
+          "label": "Step out first alone — look at the landing and see who is there now, or what they left.",
           "attribute": "mental",
-          "subAttribute": "wits",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
             "scout"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Linger a moment more — ask her if she knows the man in the lower Annex with the crooked jaw and the grey coat.",
+          "label": "Use Prism Sight on the landing through the gap under the door — read the light-history of whoever stood there.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Vessin plainly — the man in the lower Annex. Does eleven minutes on a landing sound like him?",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "persuade",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Cy, quietly, if it noticed anything in the night — the latch bracket it was watching, or anything that moved on the landing.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Walk out together and let the morning be what it is — head down toward the lower Annex to find the man who hired the stranger.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Step out together — let the scaffold crew see you both emerging naturally and read the landing as you go.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel",
             "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral — full dawn grey under the door, candle burned to nothing, drop-cloth on the floor. The scaffold crew will be stirring on the landing above shortly.",
+        "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral — full dawn grey under the door, candle burned to nothing, drop-cloth on the floor. Boots scraping stone above — the scaffold crew is starting to stir on the landing.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Dressed, coat in hand, hair still fully undone — holding the look before reaching for the door."
+            "state": "Coat in hand, hair still undone — appraiser's composure mostly restored, listening."
           },
           {
             "name": "Cy",
-            "state": "At the far wall, lens tilted toward the latch bracket. Has not moved."
+            "state": "Turned from the latch bracket toward Loki, lens irised, lamp dim in the growing dawn."
           }
         ],
         "objects": [
@@ -329,8 +351,9 @@
           "Traveler's Pack against the wall"
         ],
         "threads": [
+          "Someone stood on the landing above for eleven minutes in the night and then withdrew — purpose unknown.",
           "The Descent bargain is sealed — want on both sides, access on demand.",
-          "The scaffold crew will be on the landing shortly — the alcove will not stay private.",
+          "The scaffold crew is beginning to stir — the alcove will not stay private much longer.",
           "The man in the lower Annex: long face, jaw healed crooked, grey coat with a split seam — not yet found."
         ]
       },
@@ -339,30 +362,28 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Dressed slowly with hands and kisses — stood still under it, kissed back with precision, said 'scaffold crew' dry and quiet and reached for her coat.",
+          "note": "Heard Cy's report alongside Loki — said eleven minutes is not someone who got lost. Appraiser's composure mostly restored.",
+          "statusNote": "In the alcove at dawn, coat in hand, hair still undone — reading the situation.",
           "learned": [
-            "Accepts unhurried care after the finish — stands still for a palm along her spine in a way she stood still for nothing else."
-          ],
-          "statusNote": "Dressed and present in the alcove — composure returning, hair still undone, coat in hand.",
-          "relationshipDelta": 0
+            "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental."
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A slow unhurried dressing — a quarter-hour of quiet."
-      },
-      "sceneEnded": false
+        "why": "A brief quiet exchange in the alcove at dawn."
+      }
     },
     "sceneState": {
-      "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral — full dawn grey under the door, candle burned to nothing, drop-cloth on the floor. The scaffold crew will be stirring on the landing above shortly.",
+      "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral — full dawn grey under the door, candle burned to nothing, drop-cloth on the floor. Boots scraping stone above — the scaffold crew is starting to stir on the landing.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Dressed, coat in hand, hair still fully undone — holding the look before reaching for the door."
+          "state": "Coat in hand, hair still undone — appraiser's composure mostly restored, listening."
         },
         {
           "name": "Cy",
-          "state": "At the far wall, lens tilted toward the latch bracket. Has not moved."
+          "state": "Turned from the latch bracket toward Loki, lens irised, lamp dim in the growing dawn."
         }
       ],
       "objects": [
@@ -372,8 +393,9 @@
         "Traveler's Pack against the wall"
       ],
       "threads": [
+        "Someone stood on the landing above for eleven minutes in the night and then withdrew — purpose unknown.",
         "The Descent bargain is sealed — want on both sides, access on demand.",
-        "The scaffold crew will be on the landing shortly — the alcove will not stay private.",
+        "The scaffold crew is beginning to stir — the alcove will not stay private much longer.",
         "The man in the lower Annex: long face, jaw healed crooked, grey coat with a split seam — not yet found."
       ]
     }
@@ -804,7 +826,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named what she likes best — the pressure, and the specific attention of someone who is actually watching. Delivered in her professional voice even now.",
         "[d2] Named plainly that her craft gave her structure, not preference — the first thing she found about Loki that the reading didn't hand her in advance. Met the request to stand and brace without hesitation.",
         "[d2] Named her want plainly when Loki used Descent — held two seconds, then said please and pressed back without hesitation.",
         "[d2] Said Loki's name into the stone when the harmonic undertone found her — composure absent, want fully present.",
@@ -813,23 +834,24 @@
         "[d2] Held two seconds when Descent named the bargain — want on both sides, access on demand — then said yes and lost the last of the composure she had been holding. Came apart entirely when the pace changed. The bargain is sealed.",
         "[d2] Came apart completely at the finish — cried out once, rode the waves with her forehead against the stone, breath now evening out. The composure is absent. She has not moved away.",
         "[d2] Came down from the finish slowly, said nothing through the long easing, then reached for her trousers and said she should find them — dry, precise, quieter than usual. Composure returning in stages.",
-        "[d2] Dressed slowly with hands and kisses — stood still under it, kissed back with precision, said 'scaffold crew' dry and quiet and reached for her coat."
+        "[d2] Dressed slowly with hands and kisses — stood still under it, kissed back with precision, said 'scaffold crew' dry and quiet and reached for her coat.",
+        "[d2] Heard Cy's report alongside Loki — said eleven minutes is not someone who got lost. Appraiser's composure mostly restored."
       ],
       "knownFacts": [
-        "Vessin likes pressure and deliberate attention — she named it plainly when asked, in the moment, without deflection",
         "Her craft read Loki's structure but not his preferences — that distinction matters to her",
         "She can be reached past the appraiser's composure when the naming is exact enough — she responds to being seen correctly, not to pressure alone",
         "Descent can reach past her appraisal composure when the naming is exact enough — not just structure, but the live interior fact of the moment",
         "Loki holds a pace deliberately and does not hurry when he does not have to — that reads as a kind of precision she respects",
         "Said yes to the Descent bargain — a standing offer between them, want named on both sides, access on demand. She named it with one word and the composure stepped aside.",
         "Descent can bind a genuine bargain between them — she recognized the shape of it and agreed without deflection.",
-        "Accepts unhurried care after the finish — stands still for a palm along her spine in a way she stood still for nothing else."
+        "Accepts unhurried care after the finish — stands still for a palm along her spine in a way she stood still for nothing else.",
+        "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Dressed and present in the alcove — composure returning, hair still undone, coat in hand.",
+      "statusNote": "In the alcove at dawn, coat in hand, hair still undone — reading the situation.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1169,7 +1191,7 @@
     "lastSharedReadAt": "2026-08-02T00:08:11.368Z",
     "lastTickWorldDay": 33,
     "lastCanonWorldDay": 33,
-    "turnsSinceOffer": 40,
+    "turnsSinceOffer": 41,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -2136,17 +2158,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.2498831581699315,
-    "cerebral": 6.276372169194883,
-    "social": 19.883273402999514,
-    "strategic": 4.459704976441078,
-    "cautious": 4.391342650040736,
-    "amorous": 26.431980395238355,
-    "generous": 3.338617223955185,
-    "ruthless": 1.1711140720842839,
-    "risky": 0.9570872504340984,
-    "patient": 0.2613633162931382,
-    "deception": 0.3042404381364938
+    "devotion": 2.193636079215683,
+    "cerebral": 7.119462864965011,
+    "social": 19.386191567924527,
+    "strategic": 4.348212352030051,
+    "cautious": 4.281559083789717,
+    "amorous": 25.771180885357396,
+    "generous": 3.2551517933563052,
+    "ruthless": 1.1418362202821768,
+    "risky": 0.9331600691732459,
+    "patient": 0.2548292333858097,
+    "deception": 0.2966344271830815
   },
   "aptitudes": [
     "silver_tongue",
@@ -2155,7 +2177,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 131,
+  "actionCount": 132,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2464,8 +2486,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785633792932,
-  "rev": 430,
+  "updatedAt": 1785634221883,
+  "rev": 432,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3240,12 +3262,22 @@
     "arc": {},
     "creature": {}
   },
-  "company": [],
+  "company": [
+    {
+      "npcId": "traveler-woman",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 33
+    }
+  ],
   "_pinsInitialized": true,
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 89
+    "the_quickwood": 90
   },
   "opLossPending": false,
   "sessions": [
@@ -3300,10 +3332,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-02T01:23:12.931Z",
+      "lastAt": "2026-08-02T01:30:21.881Z",
       "startDay": 32,
       "endDay": 33,
-      "beats": 55
+      "beats": 56
     }
   ],
   "establishedFacts": [
@@ -3341,17 +3373,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 154,
-    "choices": 154,
+    "sceneSummary": 155,
+    "choices": 155,
     "characterDeltas": 60,
-    "scene": 154,
+    "scene": 155,
     "placeUpdates": 17,
     "codexUpdates": 92,
-    "timeOps": 143,
+    "timeOps": 144,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 34,
-    "npcUpdates": 126,
+    "npcUpdates": 127,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3365,7 +3397,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 154,
+  "_opTurns": 155,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

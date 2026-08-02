@@ -30,6 +30,15 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
    · `shatterpoint` r3 ↔ `resonant_shield` (a harmonic counters its own tradition)
 6. **LIGHT-ABSORPTION** *(bestiary: the_bright_devourer heals from light-family crafts)* — needs a
    damage-type/affinity concept the engine doesn't have.
+6a. **TERRAIN-GATED MOVEMENT** — a complete pattern across FOUR axes that the engine has no concept of:
+   `the_root_road` (cannot cross the dead or the made) · `the_grey_road` (death substantial and recent) ·
+   `shortfold` (both ends must be truly KNOWN) · `shadowstep` (both ends need real shadow — **a lit gap is a
+   WALL**). **Every axis's travel craft is walled off by its antipode's medium.** Movement crafts need a
+   terrain/medium precondition the engine can check.
+6c. **ZERO-SOAK CONCEALMENT DEFENCE** *(the_harbor)* — a guard whose soak is 0 because it defends by NOT BEING
+   FOUND (*"concealment hides, it does not defend"*), and whose failure mode is **TOTAL**: found = no protection
+   at all. A genuinely different curve from soak that degrades. Five defensive logics now exist: BLUNT / ANCHOR
+   / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND.
 6b. **GUARD `autonomy` FLAG** *(the_mechanical_defense r2)* — its whole rank-increment is that the defence
    *"holds without constant attention — works while you work on something else."* Four defensive logics now
    exist (BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU) and the fourth needs a field: **does holding this cost your

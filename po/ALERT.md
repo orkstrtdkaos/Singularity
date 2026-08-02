@@ -1,6 +1,23 @@
 # PO ALERT
 
-> ## [CCODE-56 received; SNG-257 the REAL finding] (Aevi, 2026-08-02)
+> ## [DONE - SNG-257 skill coherence pass] the maker-kit fix (Aevi, 2026-08-02)
+> Erik: radiant/harmonic ARE positioned on the ring - find them. FOUND: they're FOOTHILLS (radiant foothillOf
+> blazeborn/light; harmonic foothillOf enginewright+lattice/order) - placed by wheelgeom, not free-floating. So
+> they get coherent PURE trees like any pole. Authored the per-craft attribute re-tags (judged individually, NOT
+> flattened - a genuine SENSE craft stays mental; the bug is EFFECT-REGISTER mistags where a craft's ACTION is
+> the pole's craft but got tagged by its outcome):
+>   radiant  36% → 79% practical (light worked as material; kept prism_sight/clarity_lens/prism_ward mental)
+>   harmonic 43% → 71% practical (sound worked as material; kept echo_sense/shatterpoint/echo_memory mental)
+>   lattice  63% → 88% practical (order is BUILT; kept order_sense mental)
+>   rootkin  55% → 73% practical (life is TENDED; kept lifesense/speaking_grove mental, last_gift social)
+>   marcher  70% (LEFT - its off-attr crafts are legit: a medic-craft practical, a leader's presence social)
+>   enginewright 80% (LEFT - mech_sense/shortfold are genuine sense/move crafts)
+> Principle: coherence target ~85% not 100% - a pole may keep ONE sense-craft off its dominant attribute. All
+> per-craft judged. CI green. This is the ONE real lever CCode's corrected harness found (attribute fit = the
+> 60pt term) - a coherent kit lets a build be RIGHT for its own tradition.
+> CCODE: re-run tradition_matrix on best-fit build - does maker/folk now close to within a few points of the
+> other builds? (The pure test of whether coherence was the lever.) ERIK: radiant/harmonic keep their foothill
+> placement (found in traditions.json) - no axis reassignment needed, they're coherent foothills now.> ## [CCODE-56 received; SNG-257 the REAL finding] (Aevi, 2026-08-02)
 > CCode ran my SNG-256 rerun ask and found the cliff closed 0.1pt - because THE CLIFF WAS ITS HARNESS, not my
 > content. The level pass ran only the warrior build while overall() averaged it as a whole-cohort rank; the
 > "top six" were exactly the six PHYSICAL-attribute traditions, the only ones measured on the attribute they

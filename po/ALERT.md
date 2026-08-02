@@ -1,6 +1,23 @@
 # PO ALERT
 
-> ## [NOTE - static-antagonist 8.3% framed, not tuned] SNG-255 candidate (Aevi, 2026-08-01)
+> ## [ASSESSMENT - balance readout vs spec] the wheel-not-hierarchy finding (Aevi, 2026-08-01)
+> Erik asked "are we where we want to be?" against CCode's tradition charts. Read them vs SPEC §5's promise ("no
+> people structurally advantaged - fairness by geometry"). VERDICT: engine YES, content NOT YET - but it's ONE
+> defect wearing 3 faces, and it's in MY lane.
+> - **Engine is right:** level curve (2.8%@L5 vs epic → 75.7%@L20), situation differentiation (marcher≠unmaker≠
+>   scholar by KIND - the SNG-254 win), symmetric geometry, playstyle-as-real-axis.
+> - **The ONE defect:** Finding 1 (scholar OUT-FIGHTS warrior 36.9 vs 20.6) + Finding 2 (primary family predicts
+>   tier; 10 INFLUENCE traditions capped ≤65) are the SAME bug - my SNG-254 matrix is a HIERARCHY where the spec
+>   needs a WHEEL. Verified: break NET +12, deceive NET -8; KNOW hard-counters INFLUENCE with no counter-back;
+>   heal/mend/restore/shield have ZERO reach so RESTORE-led traditions have no contest tool at all.
+> - **Finding 3 (marcher):** NOT a defect - a mis-labelled strength (standoff specialist 53.1%, not fighter). The
+>   matrix now differentiates BY situation = the win. unmaker (46.9% fight, leads standoff+chase) worth its own look.
+> PROPOSED SNG-256 (my content lane): (1) give INFLUENCE a predator to close the KNOW>INFLUENCE>?>KNOW cycle;
+> (2) give RESTORE/PROTECT a defensive-blunt tool (not naked in a contest they didn't pick); (3) trim the +12
+> outliers; (4) a NET-ZERO ratchet (-4..+4 per verb) so the hierarchy can't reform. Then re-run tradition_matrix
+> and see how much of the 19.1pt cliff closes BEFORE touching any tradition content (matrix is upstream).
+> Full: ASSESSMENT_balance_readout_vs_spec.md. ERIK: is SNG-256 the right next content pass? (my read: yes -
+> it's the root, and it's cheaper + more surgical than tuning 27 traditions).> ## [NOTE - static-antagonist 8.3% framed, not tuned] SNG-255 candidate (Aevi, 2026-08-01)
 > CCode's balance report: static (puzzle/hazard) resolves at 8.3%, the outlier; flagged Erik-and-Aevi. Also
 > established the bigger truth - PLAYSTYLE dominates (65-84 pts best-vs-worst BUILD) vs ~5 pts between KITS: the
 > build is the variable, the people is the accent. Worth holding before anyone tunes traditions.

@@ -1,6 +1,29 @@
 # PO ALERT
 
-> ## [DECIDED + SPEC r2 - SNG-260 §B/§D] skill points as a CURRENCY (Aevi, 2026-08-02)
+> ## [SPEC - SNG-261] tier IV/V pricing + PRECURSOR never surfaces (Aevi, 2026-08-02)
+> Erik: don't forget tier IV/V — and the precursor skills he has "no idea what they do or how they show up…
+> Silas hasn't seen them, neither has Loki, who is literally a walking precursor-created being."
+> - **§A tier IV/V:** the catalog has **28 abilities at levelReq 4, 26 at levelReq 5** — SNG-260 §D's 2/3 price
+>   ladder stops a tier short. Extend T-I 1 … T-V 5 (Erik: linear 4/5 or accelerating 4/6? note
+>   `capstoneTier: 4` means T-IV is ALREADY the engine's capstone threshold). The §D sweep must include T-IV/V —
+>   that's where an "expensive build" actually gets expensive.
+> - **§B THE REAL FINDING — precursor is fully designed and apparently NEVER FIRES.** Verified all present: 6
+>   abilities (address_sense/latticespeak T3, wake_the_line/foreclose T4, unmake_seal/hold_the_aperture T5);
+>   `specialSystems` "Precursor Arts", civilization "none living — the ancient nanite-lattice", **OUTSIDE the
+>   pole matrix**, `access.open:false` "fiction-gated: requires precursor contact/marking"; a full GM doctrine
+>   (`unlockPrecursor`, never at creation, only when the fiction earns it, peril real); **PRECURSOR DRIFT**
+>   (`precursorAxes` + bandNotice — "they are being changed by what they wield"); and innate seeding
+>   (`origins.json innatePrecursor: [latticespeak]/[address_sense]` for substrate-keepers via
+>   `seedInnateSubstrate`). **Nothing is missing mechanically — it just never reaches the player.**
+>   GOALS: (1) STAGE precursor presence in the world so unlockPrecursor has occasions to fire (same shape as
+>   SNG-258 §11 — designed system, no path into play); (2) make it a LEGIBLE rumoured mystery — if the game's
+>   author can't tell what they do, no player can; (3) **LOKI is the test case and likely a DATA BUG** — a
+>   literal precursor-construct should carry an origin with innatePrecursor; check his record vs origins.json;
+>   (4) drift visible on the sheet (§4d).
+> AEVI: audit Loki's origin (cheapest first move, likely a content fix I author) + legibility/GM-pressure copy.
+> CCODE: has `unlockPrecursor` EVER fired in any save? + surface precursorAxes on the sheet. ERIK: what should
+> precursor arts FEEL like (they read as reality-editing, not spellcasting) + should Loki's origin carry innate
+> access. Full: SPEC_SNG-261.> ## [DECIDED + SPEC r2 - SNG-260 §B/§D] skill points as a CURRENCY (Aevi, 2026-08-02)
 > - **§B DECIDED (Erik):** bands stand as drafted; **Silas is a MASTER who FEELS heroic.** Clean separation worth
 >   keeping explicit: POWER TIER = what you can DO (L26-45 master); HEROIC STANDING = what the world says about
 >   you. Two axes, rise together, not the same thing.

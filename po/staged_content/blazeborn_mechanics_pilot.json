@@ -1,0 +1,511 @@
+{
+ "schemaVersion": 1,
+ "id": "blazeborn_mechanics_pilot",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged, not live. Authored by Aevi (PO) as the SNG-263 pilot. CCode folds into the ability records once the schema is locked; nothing here writes to reach_dark_light.json.",
+ "note": "SNG-263 pilot: 12 blazeborn crafts given a mechanical body DERIVED FROM their existing rank prose (tree[].grants) and bounded by their existing tree[].cannot. The text is the spec — every axis and every rank increment below is traceable to a line the content already committed to. Damage model per §11: TOTAL = dice(tier,rank) + scaling(level, attribute, uses) − soak(target); the craft authors its DICE and its OPERATIVE AXIS only. Ladder per §10: T-I 1d6 (+1 at r2, +2 at r3), T-II 2d6, T-III 3d6+2, T-IV/V dice + a SPECIAL. A rank may spend its increment on a DIFFERENT axis when its own prose names one — that is the point of the pilot.",
+ "conventions": {
+  "operativeAxis": "What this craft actually does — the dimension its magnitudes and its intensity scaling apply to. Never assume damage.",
+  "rankDeltas": "What r1→r2→r3 CHANGES, and on which axis, traceable to that rank's own grants line.",
+  "intensity": "conserve ≈ half / surge ≈ double ON THE OPERATIVE AXIS, stated in this craft's own language. Some crafts refuse a mode — that is authored, not an omission.",
+  "bounds": "Mechanical limits taken from tree[].cannot — these are intent, not decoration."
+ },
+ "crafts": [
+  {
+   "id": "lightsense",
+   "tier": 1,
+   "functions": [
+    "reveal",
+    "track"
+   ],
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "base": {
+    "axis": "perceptionDepth",
+    "value": "read a place's light and shadow — where you are seen and unseen",
+    "range": "line of sight"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "perceptionDepth",
+     "delta": "+spectrum: residual heat, age of a scorch, the flush of a lie rising in a face",
+     "from": "r2 grants names KINDS of reading, not distance"
+    },
+    {
+     "rank": 3,
+     "axis": "range",
+     "delta": "×valley-scale — follow any beam to its source and know every surface it touched",
+     "from": "r3 grants names DISTANCE and a trace-history; the increment goes to RANGE, not depth"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — the room's lit and unlit, no detail beyond where you'd be seen",
+    "surge": "double the read: the whole spectrum at once, and the trace held long enough to follow"
+   },
+   "bounds": [
+    "reads, does not make",
+    "reports what the LIGHT says, not what is true — a good liar with cold blood defeats it",
+    "darkness stays genuinely opaque (the gap the Umbrals built an art inside)"
+   ]
+  },
+  {
+   "id": "kindle",
+   "tier": 1,
+   "functions": [
+    "hinder",
+    "make",
+    "reveal",
+    "strike"
+   ],
+   "harmRung": "damaging",
+   "operativeAxis": [
+    "damage",
+    "range",
+    "duration"
+   ],
+   "base": {
+    "axis": "damage",
+    "dice": "1d6",
+    "note": "the T-I baseline strike — max can drop a peer beast, average takes 2"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "damage",
+     "delta": "+1 (1d6+1) AND a lingering mark — the afterimage seared in",
+     "from": "r2 grants: 'a light that WOUNDS… leaves an afterimage seared in' — damage plus a small standing effect"
+    },
+    {
+     "rank": 3,
+     "axis": "range+duration",
+     "delta": "anywhere within sight (range → line of sight, at will) and it GOES ON BURNING after release (damage persists per round)",
+     "from": "r3 grants names PLACEMENT and PERSISTENCE, not a bigger hit — the increment leaves the damage die alone"
+    }
+   ],
+   "intensity": {
+    "conserve": "a lit hand, a signal, a dazzle — half the burn, none of the announcement",
+    "surge": "double the burn and it takes hold on what it lands on"
+   },
+   "bounds": [
+    "ordinary light — spent, it blinds you too",
+    "blunt: it ANNOUNCES you, and the dark remembers who lit it",
+    "what you light you may not be able to put out"
+   ]
+  },
+  {
+   "id": "the_radiant_ground",
+   "tier": 1,
+   "functions": [
+    "resist",
+    "sustain"
+   ],
+   "operativeAxis": [
+    "duration",
+    "upkeepRelief"
+   ],
+   "base": {
+    "axis": "duration",
+    "value": "sustain in intense light that exhausts others — radiance feeds rather than drains"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "upkeepRelief",
+     "delta": "genuine sustenance — reduced need for food, rest, and shelter in full radiance",
+     "from": "r2 grants converts endurance into real resource relief"
+    },
+    {
+     "rank": 3,
+     "axis": "duration",
+     "delta": "in the fullest light you do not diminish — no attrition at all where others cannot follow",
+     "from": "r3 grants: completeness, the umbral-parallel"
+    }
+   ],
+   "intensity": {
+    "conserve": "bank it — take half the relief, spend nothing to hold it",
+    "surge": "drink the blaze: double relief now, and the light owes you nothing after"
+   },
+   "bounds": [
+    "requires INTENSE light — worthless in shade, and the blaze wastes are the home it assumes"
+   ]
+  },
+  {
+   "id": "radiance",
+   "tier": 2,
+   "functions": [
+    "break",
+    "hinder",
+    "reveal",
+    "strike"
+   ],
+   "harmRung": "lethal",
+   "operativeAxis": [
+    "damage",
+    "area"
+   ],
+   "base": {
+    "axis": "damage",
+    "dice": "2d6",
+    "note": "T-II: the clean double of T-I per §8",
+    "targeting": "a focused beam — one target"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "area",
+     "delta": "×2 — strip a place or person of every concealment AT ONCE; the beam ends a threat clean",
+     "from": "r2 grants says AT ONCE — the increment is AREA, and the damage die is unchanged"
+    },
+    {
+     "rank": 3,
+     "axis": "area+scale",
+     "delta": "revelation at scale — a whole deception undone before a people; and the light at full flood WEAKENS everything that lives by dark (a standing debuff in the lit area)",
+     "from": "r3 grants names scale AND a field effect"
+    }
+   ],
+   "intensity": {
+    "conserve": "a narrow beam — half the burn, one target, no spill onto what you did not mean to show",
+    "surge": "full flood: double area and the light does not stop at the one you aimed it at"
+   },
+   "bounds": [
+    "reveals surfaces and shapes, NOT hearts",
+    "light spent blinds you too",
+    "the convincing-lie-of-true-pieces (the Cathedral) survives it",
+    "the wielder drifts light-hot; total revelation burns its own land to glass"
+   ]
+  },
+  {
+   "id": "the_cleansing_light",
+   "tier": 2,
+   "functions": [
+    "break",
+    "heal",
+    "restore"
+   ],
+   "operativeAxis": [
+    "healing",
+    "purge"
+   ],
+   "base": {
+    "axis": "healing",
+    "dice": "2d6",
+    "note": "heals on the T-II ladder; the purge is the craft's second axis",
+    "quality": "unusually clean — infection finds no shadow to persist in"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "purge",
+     "delta": "burn away infection, corruption, or a POISONOUS WORKING — removes a hostile standing effect, not just damage",
+     "from": "r2 grants names workings, i.e. effect-removal"
+    },
+    {
+     "rank": 3,
+     "axis": "purge",
+     "delta": "purified entirely — the working is returned to nothing, no residue, no recurrence",
+     "from": "r3 grants: complete purification"
+    }
+   ],
+   "intensity": {
+    "conserve": "tend it — half the mending, but nothing is burned away that did not need to be",
+    "surge": "full exposure: double the mending and it takes the corruption with it — and what survives it is clean, including the parts that hurt to lose"
+   },
+   "bounds": [
+    "light does not SOOTHE, it purifies — the healing hurts",
+    "what cannot bear the light does not survive being cleaned"
+   ]
+  },
+  {
+   "id": "the_blaze_wall",
+   "tier": 2,
+   "functions": [
+    "shield",
+    "ward"
+   ],
+   "operativeAxis": [
+    "soak",
+    "duration"
+   ],
+   "base": {
+    "axis": "soak",
+    "value": "2d6-equivalent barrier — halts an approach by those without a blazeborn's tolerance for radiance",
+    "note": "THE PILOT'S TEST CASE for §11 Gap 2: this craft NEEDS the soak/armor layer to do anything at all"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "duration",
+     "delta": "held — repels SUSTAINED approach rather than one rush (the ward persists across rounds)",
+     "from": "r2 grants: 'a HELD brightness… sustained approach'"
+    },
+    {
+     "rank": 3,
+     "axis": "soak",
+     "delta": "passage requires what only a blazeborn has — soak rises to effectively impassable for the unprotected",
+     "from": "r3 grants: completeness of the barrier"
+    }
+   ],
+   "intensity": {
+    "conserve": "a bright line — half the barrier, but it costs almost nothing to hold",
+    "surge": "double brightness: the wall is impassable now, and you will feel the spending after"
+   },
+   "bounds": [
+    "those WITH radiance-tolerance pass it (an umbral suffers; a blazeborn walks through)",
+    "it blocks, it does not harm"
+   ]
+  },
+  {
+   "id": "glass_work",
+   "tier": 2,
+   "functions": [
+    "make",
+    "transform"
+   ],
+   "operativeAxis": [
+    "materials",
+    "persistence",
+    "speed"
+   ],
+   "base": {
+    "axis": "speed",
+    "value": "shape glass or heat-worked material in moments where others take hours"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "materials",
+     "delta": "×2 breadth — any material susceptible to intense light and heat: glass, metal, crystal",
+     "from": "r2 grants widens the MATERIAL set"
+    },
+    {
+     "rank": 3,
+     "axis": "persistence",
+     "delta": "SPECIAL: work LIGHT ITSELF into a form that holds shape and persists as an object beyond the making",
+     "from": "r3 grants — this is qualitative, not a bigger number; a T-II craft reaching a special at its top rank"
+    }
+   ],
+   "intensity": {
+    "conserve": "rough it out — half the speed, half the finish, and the material forgives you",
+    "surge": "double the working: finer than hands can manage, and the heat does not wait for your judgment"
+   },
+   "bounds": [
+    "requires material that ANSWERS to light and heat",
+    "shaped light (r3) is an object, not a weapon — it holds a shape, it does not strike"
+   ]
+  },
+  {
+   "id": "the_blazing_word",
+   "tier": 2,
+   "functions": [
+    "bind",
+    "command"
+   ],
+   "operativeAxis": [
+    "bindStrength",
+    "duration",
+    "witnesses"
+   ],
+   "base": {
+    "axis": "bindStrength",
+    "value": "2d6-equivalent — spoken in full light before all, it carries weight that shadows and whispers cannot undermine",
+    "requires": "OPEN LIGHT and witnesses"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "bindStrength",
+     "delta": "it BINDS — there is no shadow to hide the lie in; what was agreed is agreed (a standing effect on the bound party)",
+     "from": "r2 grants: 'binds because there is no shadow'"
+    },
+    {
+     "rank": 3,
+     "axis": "duration",
+     "delta": "SPECIAL: declared in the blaze it becomes ESTABLISHED FACT — those who witnessed cannot pretend they did not see; the binding does not lapse",
+     "from": "r3 grants: 'not a promise, an established fact'"
+    }
+   ],
+   "intensity": {
+    "conserve": "say it plainly — half the weight, and it can be walked back later",
+    "surge": "declare it: double the binding, before everyone, and you cannot take it back either"
+   },
+   "bounds": [
+    "requires OPEN LIGHT and witnesses — useless whispered, useless alone",
+    "it binds the SPEAKER equally"
+   ]
+  },
+  {
+   "id": "unshadow",
+   "tier": 3,
+   "functions": [
+    "break",
+    "hinder",
+    "reveal"
+   ],
+   "harmRung": "incapacitating",
+   "operativeAxis": [
+    "area",
+    "debuff"
+   ],
+   "base": {
+    "axis": "area",
+    "dice": "3d6+2",
+    "note": "T-III per §10 — more than a third doubling",
+    "targeting": "strip disguise, shadow, and illusion from a target at once"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "area",
+     "delta": "×2 — a PLACE, not a thing: every shadow in a room gives up what it held",
+     "from": "r2 grants: place over thing"
+    },
+    {
+     "rank": 3,
+     "axis": "debuff",
+     "delta": "nothing within reach stays concealed — shroud, harbor, and false trail fail at once, and those RELYING on cover are badly weakened (a real standing penalty, not just information)",
+     "from": "r3 grants names the weakening explicitly"
+    }
+   ],
+   "intensity": {
+    "conserve": "lift one shadow — half the reach, and only what you aimed at gives up its secret",
+    "surge": "double the reach and nothing in it keeps anything — including what nobody wanted found"
+   },
+   "bounds": [
+    "the Cathedral's true-piece lie survives it",
+    "it reveals INDISCRIMINATELY — yours, theirs, and things nobody wanted found",
+    "the Umbrals consider this an atrocity, and they are not entirely wrong"
+   ]
+  },
+  {
+   "id": "the_line_of_light",
+   "tier": 3,
+   "functions": [
+    "move",
+    "travel"
+   ],
+   "operativeAxis": [
+    "range",
+    "targets",
+    "uses"
+   ],
+   "base": {
+    "axis": "range",
+    "value": "cross to any point you can illuminate in a single committed crossing — as fast as thrown light"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "range",
+     "delta": "instant — the path between here and there COLLAPSES to the line of light",
+     "from": "r2 grants: from fast to instant"
+    },
+    {
+     "rank": 3,
+     "axis": "targets+uses",
+     "delta": "SPECIAL: carry OTHERS, along any beam you can throw, as many times as needed — the whole lit world is a road",
+     "from": "r3 grants names companions and repetition, not distance"
+    }
+   ],
+   "intensity": {
+    "conserve": "a short hop — half the distance, and you arrive able to act",
+    "surge": "double the crossing and take what you are holding with you"
+   },
+   "bounds": [
+    "requires a LIT path — no light, no road",
+    "a COMMITTED crossing: once begun it completes, wherever that lands you"
+   ]
+  },
+  {
+   "id": "the_revealing_burn",
+   "tier": 4,
+   "functions": [
+    "reveal",
+    "strike"
+   ],
+   "harmRung": "damaging",
+   "operativeAxis": [
+    "area",
+    "damage",
+    "special"
+   ],
+   "base": {
+    "axis": "area+damage",
+    "dice": "4d6+2",
+    "note": "T-IV — dice PLUS a special per §8",
+    "targeting": "burn away all falsehood and concealment in a PLACE"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "axis": "special",
+     "delta": "SPECIAL — the burn takes a DISTRICT, and it reaches what is false IN A PERSON: an assumed shape, a worn name, a glamour kept so long it has grown into them. Tearing that free is an attack on IDENTITY, not the body.",
+     "from": "r2 grants — and this is the SNG-258 §4e identity-attack made concrete: a craft that assails what someone IS"
+    }
+   ],
+   "intensity": {
+    "conserve": "burn narrow — half the district, and only the falsehood you named",
+    "surge": "double the reach, and at that scale it reliably includes allies and yourself"
+   },
+   "bounds": [
+    "it CANNOT UN-REVEAL what it shows",
+    "it does not discriminate whose secret burns free",
+    "at r2 scale that reliably includes allies and yourself"
+   ],
+   "designNote": "T-IV special = the craft gains a KIND it did not have (identity-attack), not a bigger number. This is the register Erik asked for at IV/V, and the prose already reached for it."
+  },
+  {
+   "id": "the_last_light",
+   "tier": 5,
+   "functions": [
+    "strike"
+   ],
+   "harmRung": "damaging",
+   "operativeAxis": [
+    "damage",
+    "area",
+    "special"
+   ],
+   "base": {
+    "axis": "damage",
+    "dice": "5d6+4",
+    "note": "T-V capstone — dice plus a special",
+    "targeting": "all shadow in reach"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "axis": "special",
+     "delta": "SPECIAL — spend your ENTIRE inner fire at once: everything in reach that lives by the dark takes the full weight (an umbral takes it whole). Self-cost is total: spent to nothing and cold after.",
+     "from": "r1 grants — the capstone IS its special"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — this craft has no half-measure. Its own text: 'it cannot be half-given.'",
+    "surge": "REFUSED — it is already everything you have. There is nothing above it to spend."
+   },
+   "bounds": [
+    "it leaves you SPENT TO NOTHING and cold after",
+    "it cannot be held or sustained",
+    "IT CANNOT BE HALF-GIVEN — no conserve, no surge; the intensity dial does not apply to this craft"
+   ],
+   "designNote": "The pilot's proof that intensity must be PER-CRAFT and audited: a blanket ×0.5/×2 would have silently created a 'conserved last light,' which the craft's own cannot-text forbids. Erik's audit-each-craft instruction, vindicated by the first capstone it touched."
+  }
+ ],
+ "pilotFindings": [
+  "The prose carried the mechanics. Every axis and every rank increment above is traceable to a line already in tree[].grants — nothing was invented. The authoring job is TRANSCRIPTION plus arithmetic, not invention.",
+  "Only 4 of 12 blazeborn crafts are damage-carrying (kindle, radiance, the_revealing_burn, the_last_light). The other 8 needed healing, soak, area, range, duration, targets, materials, persistence, and bind-strength. A damage-only schema would have failed 2/3 of a single tradition.",
+  "Rank increments landed on a NON-damage axis more often than on damage: kindle r3 buys range+persistence, radiance r2 buys area, lightsense r3 buys range, the_line_of_light r3 buys companions. The §10 rule (a rank spends on the axis its own prose names) is not an edge case — it is the common case.",
+  "the_last_light REFUSES both intensity modes on the authority of its own cannot-text ('it cannot be half-given'). A blanket conserve/surge multiplier would have invented a mode the fiction forbids. This is the single clearest vindication of Erik's audit-every-craft instruction.",
+  "the_blaze_wall cannot be authored at all without §11 Gap 2 (soak/armor). Its whole body is a barrier value. Confirms the soak layer is a blocker, not a nice-to-have.",
+  "the_revealing_burn r2 is already an IDENTITY ATTACK in the existing prose ('what is false in a PERSON — an assumed shape, a worn name'). SNG-258 §4e (alignment/experience can be assailed) is not a new system to invent — the catalog already reaches for it, and this craft is its first concrete instance.",
+  "T-IV/V 'special' has a clear register from the prose: the craft gains a KIND it did not have (identity-attack; total expenditure with total self-cost), not a bigger number. That answers Erik's open question without needing worked examples from him — though his sign-off on the register is still wanted."
+ ],
+ "openForErik": [
+  "Sign off the dice ladder as applied here (T-I 1d6 / T-II 2d6 / T-III 3d6+2 / T-IV 4d6+2 / T-V 5d6+4).",
+  "The scaling term's strength (§11): how much better should a master's kindle be than a novice's kindle?",
+  "Whether 'REFUSED' is the right authored value for an intensity mode a craft's fiction forbids, or whether it should read as something else in the UI."
+ ]
+}

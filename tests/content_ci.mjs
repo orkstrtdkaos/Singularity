@@ -11,7 +11,8 @@ import { fileURLToPath } from "node:url";
 import { validate } from "../engine/genschema.js";
 import { structuredQuestRecord } from "../engine/quests.js";
 import { checkBorn, describeBorn, contractedTypes } from "../engine/borncontract.js";
-import { critFor } from "../engine/craftmechanics.js";   // CCODE-76: run the REAL resolver, don't re-describe the schema
+import { critFor } from "../engine/craftmechanics.js";
+import { openAccessFor } from "../engine/progression.js";   // SNG-261 B: run the real opener, not a re-description of it   // CCODE-76: run the REAL resolver, don't re-describe the schema
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -1032,6 +1033,47 @@ for (const pack of PACKS) {
   }
   check("CCODE-77: every family's operative dimension is a field its shape actually carries (else the tier ladder scales nothing)",
     dangling.length === 0, dangling.join(" · "));
+}
+
+// ---------- SNG-261 B: `opensAccess` must actually OPEN something ----------
+// SNG-011 says precursor access is unlocked "only when the fiction earns it - a live remnant answers, a quest
+// concludes, OLD ROADS MASTERY, a teacher". Every one of those routes ran through the GM emitting
+// unlockPrecursor, and that op has never once fired. `opensAccess` is the deterministic route: master the
+// craft whose own rank-3 text describes touching Precursor work and the door opens because you did the thing.
+//
+// The declaration is the exact PromisedButUnread shape again - name a craft that does not exist, or one of
+// the wrong powerSystem, and openAccessFor correctly opens NOTHING, silently. So it is checked here, against
+// the real catalog, by running the real function.
+{
+  const CAT = {};
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json")))
+    for (const a of (rj(`content/packs/core/abilities/${f}`).abilities || [])) CAT[a.id] = a;
+
+  const declared = [], broken = [];
+  for (const a of Object.values(CAT)) {
+    for (const t of (a.tree || [])) {
+      if (!t?.opensAccess) continue;
+      const d = t.opensAccess;
+      const ids = typeof d === "string" ? [] : (d.abilityIds || []);
+      declared.push(`${a.id} r${t.rank} -> ${ids.join(",") || "(no abilityIds)"}`);
+      if (!ids.length) { broken.push(`${a.id} r${t.rank}: opensAccess names no abilityIds, so it opens nothing`); continue; }
+      for (const id of ids) {
+        if (!CAT[id]) broken.push(`${a.id} r${t.rank}: names "${id}", which is not a craft in the catalog`);
+        else if (CAT[id].powerSystem !== (typeof d === "string" ? d : d.system))
+          broken.push(`${a.id} r${t.rank}: "${id}" is powerSystem ${CAT[id].powerSystem}, not ${typeof d === "string" ? d : d.system}`);
+      }
+      // and prove it end-to-end through the REAL function, on a fresh character
+      const who = {};
+      const opened = openAccessFor(who, a.id, t.rank, CAT);
+      if (!opened.length) broken.push(`${a.id} r${t.rank}: openAccessFor opened NOTHING for a fresh character`);
+    }
+  }
+  if (declared.length) console.log(`note  SNG-261 B: ${declared.length} mastery door(s) declared - ${declared.join(" | ")}`);
+  check("SNG-261 B: every `opensAccess` declaration opens a real craft of the system it names",
+    broken.length === 0, broken.join(" \u00b7 "));
+  // The route existed on paper and had never fired. It must not silently go back to zero.
+  check("SNG-261 B: the deterministic mastery route is WIRED (at least one craft opens a door)",
+    declared.length > 0, "no craft declares opensAccess - precursor access is back to the GM op that has never fired");
 }
 
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);

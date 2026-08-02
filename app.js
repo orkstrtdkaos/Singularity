@@ -4696,6 +4696,10 @@ function applyTurn(turn, resolution, playerWords = null) {
     const r = markDefiningMoment(character, mid, CONTENT.rules, { attributeGates: CONTENT.attributeGates, branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
     if (r.ok) turn.narration += `\n\n*✦ A defining moment — **${ab?.name}** is mastered now (rank 3).*`;
     else if (r.forkPending) { character.pendingMasteryFork = mid; turn.narration += `\n\n*⑂ A defining moment for **${ab?.name}** — but it stands at a fork. Choose its path on your Character screen to master it.*`; }
+    // SNG-261 §B: mastery can OPEN A DOOR, and the player must be told in the same beat. An access list that
+    // grows silently is a door nobody knows they may walk through — which is exactly how `unlockPrecursor`
+    // managed to never fire without anyone noticing.
+    for (const o of (r.opened || [])) turn.narration += `\n\n*✦ And a door opens that was never on any list: **${o.name}** may now be learned — ${o.via}.*`;
   }
   // SNG-100b: the GM records a willing teacher of a people (durable — unlocks that people's capstones,
   // and later promotion/acquisition). Only for a real tradition; the engine never invents one.

@@ -272,7 +272,45 @@ export function markDefiningMoment(character, abilityId, rules, opts = {}) {
     return { ok: false, why: "fork", forkPending: true }; // caller resolves the fork, then re-calls
   }
   owned.level++;
-  return { ok: true, newRank: owned.level };
+  return { ok: true, newRank: owned.level, opened: openAccessFor(character, abilityId, owned.level, opts.catalog) };
+}
+
+/** SNG-261 §B — MASTERY OPENS A DOOR THE FICTION ALREADY OPENED.
+ *
+ *  SNG-011 says precursor access is unlocked "only when the fiction earns it — a live remnant answers, a quest
+ *  concludes, OLD ROADS MASTERY, a teacher". Every one of those routes ran through the GM emitting
+ *  `unlockPrecursor`, and measured, that op HAS NEVER ONCE FIRED. A door with exactly one key, held by a
+ *  narrator that has never used it, is a locked door — and "mastery unlocks it" was a rule the engine simply
+ *  did not have. This is the deterministic route: reach rank 3 in a craft whose own rank-3 text describes
+ *  touching Precursor work, and the door opens because you did the thing, not because a narrator remembered.
+ *
+ *  DECLARED, NOT INFERRED. It reads an explicit `opensAccess` on the rank node rather than pattern-matching
+ *  prose — a regex over `grants` would open doors on a rewording, which is the class of bug the named-field
+ *  discipline exists to prevent. The GM op still works and is still the route for remnants, quests and
+ *  teachers; this adds the one route that was always meant to be mechanical.
+ *
+ *  Every declared id is validated against the catalog AND against its own powerSystem — the same guard the
+ *  unlock op uses — so a typo or a wrong-system id opens NOTHING rather than opening the wrong thing. */
+const ACCESS_LIST = { precursor: "precursorAccess", living_current: "livingCurrentAccess", wild_current: "wildCurrentAccess" };
+export function openAccessFor(character, abilityId, rank, catalog = {}) {
+  const cat = catalog || {};
+  const node = ((cat[abilityId]?.tree) || []).find(t => Number(t?.rank) === Number(rank));
+  const decl = node?.opensAccess;
+  if (!decl) return [];
+  const system = typeof decl === "string" ? decl : decl.system;
+  const listKey = ACCESS_LIST[system];
+  const ids = (typeof decl === "string" ? [] : (decl.abilityIds || [])).filter(Boolean);
+  if (!listKey || !ids.length) return [];
+  const opened = [];
+  for (const id of ids) {
+    const target = cat[id];
+    if (!target || target.powerSystem !== system) continue;   // never the wrong system, never a typo's target
+    if ((character[listKey] || []).includes(id)) continue;
+    character[listKey] = [...(character[listKey] || []), id];
+    opened.push({ abilityId: id, name: target.name || id, system,
+      via: (typeof decl === "object" && decl.via) || `mastering ${cat[abilityId]?.name || abilityId}` });
+  }
+  return opened;
 }
 
 /** SNG-003 access rule: own tradition at face value; valley folk take any system

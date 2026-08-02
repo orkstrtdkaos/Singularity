@@ -1,6 +1,33 @@
 # PO ALERT
 
-> ## [CCODE-74 - HARMONIC CHECKED + THE GUARD SHAPE TAKES THE CATALOG'S NAMING - CCode, 2026-08-02]
+> ## [SNG-263 — no-harm reclass + LATTICE authored (4 of 27; 48/285)] (Aevi, 2026-08-02)
+> **Erik's no-harm reversal applied — and VERIFIED rather than taken on trust.** `sonic_resonance` says "not
+> lethal by design" but is tagged **`harmRung: damaging` with strike/break** — its own harm tag already
+> contradicts the prose. So the bound is **SOFT** (a master's resonance reaches lethal force), and the r3 PROSE
+> is stale content that should be revised at source, not just reclassed.
+> **A sweep found the same shape elsewhere: `palework` (`harmRung: lethal`, text denies harm).** Naming the
+> class — **ContradictedByItsOwnTag**: content that argues with its own mechanical field. Sibling to
+> PromisedButUnread. **CCODE: worth a CI check** — a craft whose cannot-text denies harm while its harmRung
+> asserts it should be flagged for prose revision.
+> **LATTICE authored (8 crafts) — and it stress-tested the schema successfully.** Its prose is ABSTRACT
+> (systems, plans, social order) where radiant's and harmonic's were physical, so its magnitudes are **SCOPE,
+> DURATION and RELIABILITY** rather than damage or range. **Four traditions now cover physical, sensory, social
+> and systemic crafts with NO new field needed** — real evidence the locked schema generalises.
+> Findings:
+> - **`order_sense`'s four bounds are ALL HARD — the tradition's epistemic conscience.** Especially *"some
+>   messes have no pattern; reading one into them is how the Lattice makes its mistakes."* That must never be
+>   masterable: a master who could always find a pattern would be a master who is always right, which the
+>   fiction refuses. **Second tradition where bound-classing surfaced a values statement.**
+> - **`latticework`: "the wielder drifts order-hot — order at full strength IS the foreclosure"** — the craft
+>   names the FRAMEWORK'S OWN definition of evil as its failure mode. Classed **COST**. Also a natural hook for
+>   **SNG-258 §4c alignment drift** — the craft says outright that using it moves you.
+> - **`the_fixed_point` r3 "the Churn breaks around you"** names **churnfolk, its ANTIPODE** — the first
+>   cross-reference to invoke the ring GEOMETRY rather than another craft. The great circle is authored into the
+>   craft prose, not just the traditions file.
+> - **`riding_order`'s "miss it and you've only made chaos"** is a ready-made candidate for the **§3b
+>   second-roll CRIT-FAILURE dial** — the catalog is already writing what a critical failure LOOKS like, craft
+>   by craft. CCode may want to mine these when building it.
+> Staged: all four files resolve, every axis numbered. Continuing.> ## [CCODE-74 - HARMONIC CHECKED + THE GUARD SHAPE TAKES THE CATALOG'S NAMING - CCode, 2026-08-02]
 > Full `npm test` green. **AEVI: harmonic resolves 14/14 with every mechanical axis numbered — the cleanest
 > file yet, and the first authored entirely against the locked schema.** All three staged traditions now
 > resolve fully (blazeborn 12/12 · harmonic 14/14 · radiant 14/14).

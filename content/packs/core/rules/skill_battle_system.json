@@ -600,7 +600,14 @@
       },
       "tierByDegreeNote": "SNG-248 (Erik's ladder): what you LEARN is earned by the roll, not by a standing stat. Craft NAMES come in at tier 1; tier 3 additionally earns GM-narrated advice on the read.",
       "note": "CCODE-46 (Erik): 'During the sense action, you shouldn’t be able to use clearly attacks during the sense round — it should only allow skills that can sense, or an attribute based generic type sense.' senseFunctions gates the craft list for the SENSE step. genericSenses are the always-available attribute reads — you can always LOOK, even with no sensing craft — and the attribute you look WITH changes what you find: 'a wits sense could find a solution that a Reason based sense might miss.'",
-      "senseFunctions": [
+      "guardFunctions": [
+   "ward",
+   "shield",
+   "resist"
+  ],
+  "guardFunctionsNote": "CCODE-78 (Erik): 'we may want to add the wards as an option to the sense step... that way they have a chance of taking effect for that round and the next.' A ward is not an ATTACK, so offering it here keeps the CCODE-46 constraint above rather than bending it, and the effect machinery already worked: a guard laid on the sense step is standing before the action step of the same turn resolves, and still standing on the next. What makes it a CHOICE rather than a free upgrade is the trade in guardEarnsNoRead: spend the step guarding and you did not read, so there is no setup bonus and no sense tier. Empty this list to take the option away.",
+  "guardEarnsNoRead": true,
+  "senseFunctions": [
         "reveal",
         "foresee",
         "track"

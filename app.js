@@ -9284,6 +9284,11 @@ function skillBattlePanel() {
   // — it should only allow skills that can sense." The SENSE step shows only sense-capable crafts + the generic
   // attribute reads; every other step shows the full set.
   const senseFns = CONTENT.skillBattle?.engine?.senseStep?.senseFunctions || ["reveal", "foresee", "track"];
+  // CCODE-78 (Erik): "we may want to add the wards as an option to the sense step... that way they have a
+  // chance of taking effect for that round and the next." A ward is not an attack, so this KEEPS the rule
+  // above rather than bending it. The engine charges for it: guard here and you earn no read (setup bonus 0,
+  // sense tier 0), which is what makes it a decision instead of a strictly-better opening.
+  const guardFns = CONTENT.skillBattle?.engine?.senseStep?.guardFunctions || [];
   // CCODE-51 (Erik: "the skills you can use seem to be unfiltered... why does hunter's strike show up??? it should
   // be mainly about movement, concealing, binding, sensing"). The step filter only knew about the SENSE step, so
   // every kind offered the whole kit on its action step — a knife-fighting craft as a way to win a footrace. Each
@@ -9293,7 +9298,7 @@ function skillBattlePanel() {
   const kindNow = encounterKind(def) || "fight";
   const kindMoves = CONTENT.skillBattle?.engine?.kinds?.[kindNow]?.moveFunctions || null;
   const stepSkills = turn.phase === "sense"
-    ? skills.filter(x => senseFns.includes(x.function))
+    ? skills.filter(x => senseFns.includes(x.function) || guardFns.includes(x.function))
     : (kindMoves ? skills.filter(x => x.itemMove || kindMoves.includes(x.function)) : skills);
   // CCODE-46: PRICE each move — an estimated chance to win the exchange, with the confidence itself fogged.
   // Reading them buys precision; holding a counter-craft to what they are doing buys it too.
@@ -9329,10 +9334,17 @@ function skillBattlePanel() {
         ? `<span class="sb-fin" title="FINISHING POTENTIAL${fin.why === "innate" ? " — this craft can kill, so it has carried this from the start" : " — earned by reaching tier " + (s.tier || 1)}. Declare it as your ACTION and a decisive swing can end the fight in one beat.${fo ? "\n\nChance to END it outright: " + fo.pct + "%\n· " + fo.reasons.join("\n· ") : ""}${foKnown ? "" : "\n\n(Read them to see the number.)"}">\u26a1 finisher${foKnown ? ` \u00b7 ${fo.pct}% to end it` : ""}</span>`
         : (fin && fin.why === "needs-tier" ? `<span class="sb-fin dim" title="Not yet a finisher — this craft gains finishing potential at tier ${fin.needTier}.">\u26a1 at T${fin.needTier}</span>` : "");
       const oddsTag = odds ? `<span class="sb-odds sb-odds-${odds.show}" title="${esc(odds.tip)}">${esc(odds.label)}</span>` : "";
+      // CCODE-78: on the SENSE step a guard is offered alongside the reads, and the TRADE has to be visible
+      // BEFORE the pick, not discovered after it. An unpriced choice between "read them" and "raise a shield"
+      // reads as strictly-better-defence; priced, it is the actual decision Erik described.
+      const guardHere = turn.phase === "sense" && guardFns.includes(s.function);
+      const guardTag = guardHere
+        ? `<span class="sb-guard-early" title="Raise it NOW and it is standing for this round\u0027s action AND the next \u2014 you do not have to spend a whole turn getting your guard up.&#10;&#10;THE TRADE: you guarded instead of looking, so this step earns you NO read \u2014 no setup bonus on the action, and you learn nothing about them this turn.">\u{1f6e1} up early \u00b7 no read</span>`
+        : "";
       const findsLine = s.finds ? `<span class="sb-skill-does">finds ${esc(s.finds)}</span>` : ""
         + (s.itemNote ? `<span class="sb-skill-does sb-item-note">${esc(s.itemNote)}</span>` : "");
       return `<div class="sb-skill-row${on ? " picked" : ""}" style="border-left:3px solid ${FAMILY_COLOR[f]}">
-        <button class="btn secondary sb-skill${on ? " on" : ""}" data-sbskill="${i}" title="${on ? "Deselect" : selFull ? "Two crafts already chosen for this step — deselect one first" : "Choose this for the " + step.label.toLowerCase() + " step"}">${on ? `<span class="sb-pick-n">${pick + 1}</span> ` : ""}${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}${findsLine}${oddsTag}${finTag}</button>${info}
+        <button class="btn secondary sb-skill${on ? " on" : ""}" data-sbskill="${i}" title="${on ? "Deselect" : selFull ? "Two crafts already chosen for this step — deselect one first" : "Choose this for the " + step.label.toLowerCase() + " step"}">${on ? `<span class="sb-pick-n">${pick + 1}</span> ` : ""}${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span>${does ? `<span class="sb-skill-does">${esc(does)}</span>` : ""}${findsLine}${oddsTag}${guardTag}${finTag}</button>${info}
       </div>`;
     }).join("");
     // CCODE-38 (Erik: "can we make the categories collapsible?"): each family is a <details> — open by default,

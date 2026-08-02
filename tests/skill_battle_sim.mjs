@@ -972,6 +972,49 @@ check("CCODE-54 (the property): it skips only when you are ALREADY fighting that
   && /if \(!alreadyFightingThem\)/.test(appSrc251));
 check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the fight is what you are in now",
   /if \(encNow\) character\.activeEncounter = null;/.test(appSrc251));
+
+
+// ---------- CCODE-78: A WARD MAY BE RAISED ON THE SENSE STEP (Erik) ----------
+// Erik: "we may want to add the wards as an option to the sense step... that way they have a chance of taking
+// effect for that round and the next." The EFFECT machinery already did that - a guard laid on the sense step
+// is standing before the action step of the same turn resolves. What did not exist was the COST: the sense
+// block computed a setup bonus from the roll no matter what was declared, so warding there would have bought
+// the guard AND the read. It is a choice only if it is a trade.
+{
+  const gOpp = synthesizeOpponentSheet({ name: "foe", threat: 38 }, sb);
+  const gSheet = { attributes: { practical: 8 }, energy: 100, level: 8 };
+  const gSeed = () => { let s = 11; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };
+  const senseWith = (fn, cfg = sb) => battleRound({
+    playerSheet: gSheet, oppSheet: gOpp,
+    playerDecl: { function: fn, tier: 3, attribute: "practical", intensity: "standard", name: "raise the glass" },
+    oppDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+    state: { momentum: 0, effects: [], opponentHealth: 20 },
+    rules, sb: cfg, steps, rng: gSeed(), phase: "sense", tickEffects: false });
+
+  const warded = senseWith("ward"), read = senseWith("reveal");
+
+  check("CCODE-78: a ward declared on the SENSE step leaves a standing guard",
+    (warded.state.effects || []).some(e => e.side === "player" && e.kind === "ward"));
+  check("CCODE-78: it is standing BEFORE the action step of the same turn (Erik: 'that round and the next')",
+    ((warded.state.effects || []).find(e => e.kind === "ward")?.roundsLeft || 0) >= 2);
+  check("CCODE-78: the sense step still does not advance the round counter with a guard on it",
+    warded.state.round === 0);
+
+  // THE TRADE, both halves. Without these the option is strictly-better defence rather than a decision.
+  check("CCODE-78: guarding on the sense step earns NO setup bonus (you guarded instead of looking)",
+    warded.setupBonus === 0 && warded.guardedInsteadOfReading?.function === "ward");
+  check("CCODE-78: and NO sense tier - you learn nothing about them this turn",
+    warded.senseTier === 0);
+  check("CCODE-78: a craft that actually READS still earns its read (the trade is priced, not a blanket nerf)",
+    read.senseTier > 0 && !read.guardedInsteadOfReading);
+
+  // The option is CONTENT. Erik must be able to take it away without an engine edit.
+  const sbOff = JSON.parse(JSON.stringify(sb));
+  sbOff.senseStep.guardFunctions = [];
+  check("CCODE-78: emptying senseStep.guardFunctions removes the trade (the option is content, not code)",
+    !senseWith("ward", sbOff).guardedInsteadOfReading);
+}
+
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

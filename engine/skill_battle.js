@@ -697,10 +697,23 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     const resist = senseResistOf(oppSheet, sb);
     out.senseResist = resist;
     out.setupBonus = clamp(Math.round((p.margin - resist.value) * scale), -cap, cap);
+    // CCODE-78 (Erik): a ward may be declared on the SENSE step, so a guard raised early covers this round and
+    // the next. The effect machinery already did that — a guard laid here is standing before the action step
+    // resolves. What did NOT exist was the COST: this block computes a setup bonus from the roll no matter
+    // what was declared, so warding here would have bought the guard AND the read. It is a choice only if it
+    // is a trade — you guarded, so you did not look.
+    const senseCfg = sb?.senseStep || {};
+    const guardFns = senseCfg.guardFunctions || [];
+    if (senseCfg.guardEarnsNoRead !== false && guardFns.includes(playerDecl.function)) {
+      out.setupBonus = 0;
+      out.guardedInsteadOfReading = { function: playerDecl.function, name: playerDecl.name || playerDecl.function };
+    }
     // Erik's ladder: "a failed roll should drop the sense tier that round to 0. a partial should give you tier 1,
     // success 2, and a large success margin and/or a crit success tier 3." What you LEARN is earned by the roll
     // now, not by a standing character stat — a read is a thing you DO, not a thing you have.
-    out.senseTier = senseTierFromDegree(p.degree, p.margin - resist.value, sb);
+    // ...and a guard earns no sense TIER either. senseTier is what you LEARN — craft names, then GM advice —
+    // and learning it from a step you spent raising a shield would be the free upgrade by another door.
+    out.senseTier = out.guardedInsteadOfReading ? 0 : senseTierFromDegree(p.degree, p.margin - resist.value, sb);
     const grants = turnCfg.bonusOnDegrees || ["crit_success"];
     out.bonusEarned = { player: grants.includes(p.degree), opponent: grants.includes(o.degree) };
   }

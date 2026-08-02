@@ -1,6 +1,36 @@
 # PO ALERT
 
-> ## [DONE - SNG-263/264 conversion + THE MASTERY CALL] (Aevi, 2026-08-02)
+> ## [SNG-263 — HARMONIC authored (tradition 3 of 27); 40/285 crafts] (Aevi, 2026-08-02)
+> Authored harmonic NEXT deliberately: `radiant_lance` r3 beats "a Harmonic shield's FIRST RANK" and
+> `resonant_shield` r3 "turns a Radiant lance's first strike" — authoring them adjacently pins the numbers so
+> the cross-reference is mechanically TRUE rather than two independent guesses. Staged clean: **14/14 resolving,
+> every declared axis carries a number** (all three files now fully resolve).
+> **THE HEADLINE — the cross-reference resolved as a RANKED COUNTER-PAIR:** lance r3 beats shield r1; shield r3
+> turns lance r1. **Neither is a flat hard-counter — who wins depends on which RANK each has reached.** That is
+> the strongest possible argument that §11 Gap-2 soak must be **RANKED**, and it is now authored from both
+> sides (`soak` + `soakRank` on both crafts). **CCODE: this is the content the soak layer should be built
+> against.**
+> Other findings:
+> - **A third and fourth cross-reference:** `resonant_anchor` r3 holds "a Radiant lance's push"; `shatterpoint`
+>   r3 calls the shatterpoint of "a Harmonic shield OR Radiant lattice." **The catalog is densely
+>   cross-referential — traditions were authored knowing each other.** A cross-tradition interaction mechanic
+>   would be reading intent that is already on the page.
+> - **`shatterpoint` r3 counters its OWN tradition's `resonant_shield`** — the best answer to a harmonic is
+>   another harmonic. An authored intra-tradition counter.
+> - **A SECOND PRECURSOR HOOK:** `echo_memory` r3 hears "what a Precursor mechanism LAST SAID." With radiant's
+>   `prism_sight` r3 ("the seams of Precursor work"), **two traditions independently give players a way to
+>   CONTACT precursor presence.** ERIK: SNG-261 §B's staging problem is largely **already solved in content** —
+>   it needs wiring, not authoring.
+> - **`the_worldsong` is the THIRD capstone** (after `the_last_light`, `light_borne`) to demand **REFUSED** on
+>   both intensity modes and to be a KIND rather than a magnitude. **Three traditions, three capstones,
+>   identical register — the T-IV/V pattern is demonstrated, not asserted.**
+> - **Bound-classing surfaced a VALUES statement:** `harmonic_voice`'s "cannot change anyone's mind — only their
+>   temperature" and "cannot make anyone agree" are **HARD**. Harmonic influence never becomes mind-control at
+>   any level of mastery. The mechanics now protect the tradition's ethical spine.
+> - **`sonic_resonance` "NOT LETHAL BY DESIGN — the field limits output near living tissue" is HARD** — a fact
+>   about the WORLD's field, not the wielder's skill. A damage-craft that can never kill, and the mechanic will
+>   hold that line. ERIK: worth knowing.
+> Next: continuing the catalog.> ## [DONE - SNG-263/264 conversion + THE MASTERY CALL] (Aevi, 2026-08-02)
 > CCode's dice fix is right and my reading stands — **authored dice are FINAL for their tier**, no re-authoring
 > needed. `npm run staged` is exactly the tool this loop was missing, and **it caught a real error on its first
 > run**: all 12 blazeborn crafts were silently inheriting FAMILY DEFAULTS because the pilot predated the lock

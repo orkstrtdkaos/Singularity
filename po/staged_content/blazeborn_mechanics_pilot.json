@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "blazeborn_mechanics_pilot",
  "kind": "staged_proposal",
- "status": "PROPOSAL — staged, not live. Authored by Aevi (PO) as the SNG-263 pilot. CCode folds into the ability records once the schema is locked; nothing here writes to reach_dark_light.json.",
+ "status": "PROPOSAL — staged. CONVERTED to the locked CCODE-64 schema: every craft now carries a real `mechanic` block (was `base`, which made the engine fall back to family defaults instead of my authored numbers — caught by npm run staged). Authored dice are FINAL for their tier per CCode's double-ladder fix. Bounds now carry SNG-264 §3 classes.",
  "note": "SNG-263 pilot: 12 blazeborn crafts given a mechanical body DERIVED FROM their existing rank prose (tree[].grants) and bounded by their existing tree[].cannot. The text is the spec — every axis and every rank increment below is traceable to a line the content already committed to. Damage model per §11: TOTAL = dice(tier,rank) + scaling(level, attribute, uses) − soak(target); the craft authors its DICE and its OPERATIVE AXIS only. Ladder per §10: T-I 1d6 (+1 at r2, +2 at r3), T-II 2d6, T-III 3d6+2, T-IV/V dice + a SPECIAL. A rank may spend its increment on a DIFFERENT axis when its own prose names one — that is the point of the pilot.",
  "conventions": {
   "operativeAxis": "What this craft actually does — the dimension its magnitudes and its intensity scaling apply to. Never assume damage.",
@@ -22,11 +22,6 @@
     "perceptionDepth",
     "range"
    ],
-   "base": {
-    "axis": "perceptionDepth",
-    "value": "read a place's light and shadow — where you are seen and unseen",
-    "range": "line of sight"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -46,10 +41,24 @@
     "surge": "double the read: the whole spectrum at once, and the trace held long enough to follow"
    },
    "bounds": [
-    "reads, does not make",
-    "reports what the LIGHT says, not what is true — a good liar with cold blood defeats it",
-    "darkness stays genuinely opaque (the gap the Umbrals built an art inside)"
-   ]
+    {
+     "text": "reads, does not make; the deep-hidden stay hidden",
+     "class": "hard"
+    },
+    {
+     "text": "reports what the LIGHT says, not what is true — a good liar with cold blood defeats it",
+     "class": "hard"
+    },
+    {
+     "text": "darkness stays genuinely opaque (the gap the Umbrals built an art inside)",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 30
+   }
   },
   {
    "id": "kindle",
@@ -66,11 +75,6 @@
     "range",
     "duration"
    ],
-   "base": {
-    "axis": "damage",
-    "dice": "1d6",
-    "note": "the T-I baseline strike — max can drop a peer beast, average takes 2"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -90,10 +94,30 @@
     "surge": "double the burn and it takes hold on what it lands on"
    },
    "bounds": [
-    "ordinary light — spent, it blinds you too",
-    "blunt: it ANNOUNCES you, and the dark remembers who lit it",
-    "what you light you may not be able to put out"
-   ]
+    {
+     "text": "ordinary light — spent, it blinds you too",
+     "class": "cost"
+    },
+    {
+     "text": "blunt: it ANNOUNCES you, and the dark remembers who lit it",
+     "class": "soft"
+    },
+    {
+     "text": "what you light you may not be able to put out",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.02,
+    "range": 15,
+    "duration": 1,
+    "note": "the T-I baseline strike — max can drop a peer beast, average takes 2"
+   }
   },
   {
    "id": "the_radiant_ground",
@@ -106,10 +130,6 @@
     "duration",
     "upkeepRelief"
    ],
-   "base": {
-    "axis": "duration",
-    "value": "sustain in intense light that exhausts others — radiance feeds rather than drains"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -129,8 +149,15 @@
     "surge": "drink the blaze: double relief now, and the light owes you nothing after"
    },
    "bounds": [
-    "requires INTENSE light — worthless in shade, and the blaze wastes are the home it assumes"
-   ]
+    {
+     "text": "requires INTENSE light — worthless in shade",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 8
+   }
   },
   {
    "id": "radiance",
@@ -146,12 +173,6 @@
     "damage",
     "area"
    ],
-   "base": {
-    "axis": "damage",
-    "dice": "2d6",
-    "note": "T-II: the clean double of T-I per §8",
-    "targeting": "a focused beam — one target"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -171,11 +192,33 @@
     "surge": "full flood: double area and the light does not stop at the one you aimed it at"
    },
    "bounds": [
-    "reveals surfaces and shapes, NOT hearts",
-    "light spent blinds you too",
-    "the convincing-lie-of-true-pieces (the Cathedral) survives it",
-    "the wielder drifts light-hot; total revelation burns its own land to glass"
-   ]
+    {
+     "text": "reveals surfaces and shapes, NOT hearts",
+     "class": "hard"
+    },
+    {
+     "text": "light spent blinds you too",
+     "class": "cost"
+    },
+    {
+     "text": "the convincing-lie-of-true-pieces (the Cathedral) survives it",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder drifts light-hot; total revelation burns its own land to glass",
+     "class": "cost"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.02,
+    "area": 2,
+    "note": "T-II: the clean double of T-I per §8"
+   }
   },
   {
    "id": "the_cleansing_light",
@@ -189,12 +232,6 @@
     "healing",
     "purge"
    ],
-   "base": {
-    "axis": "healing",
-    "dice": "2d6",
-    "note": "heals on the T-II ladder; the purge is the craft's second axis",
-    "quality": "unusually clean — infection finds no shadow to persist in"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -214,9 +251,24 @@
     "surge": "full exposure: double the mending and it takes the corruption with it — and what survives it is clean, including the parts that hurt to lose"
    },
    "bounds": [
-    "light does not SOOTHE, it purifies — the healing hurts",
-    "what cannot bear the light does not survive being cleaned"
-   ]
+    {
+     "text": "light does not SOOTHE, it purifies — the healing hurts",
+     "class": "hard"
+    },
+    {
+     "text": "what cannot bear the light does not survive being cleaned",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 0,
+    "magnitude": 2,
+    "note": "heals on the T-II ladder; the purge is the craft's second axis"
+   }
   },
   {
    "id": "the_blaze_wall",
@@ -229,11 +281,6 @@
     "soak",
     "duration"
    ],
-   "base": {
-    "axis": "soak",
-    "value": "2d6-equivalent barrier — halts an approach by those without a blazeborn's tolerance for radiance",
-    "note": "THE PILOT'S TEST CASE for §11 Gap 2: this craft NEEDS the soak/armor layer to do anything at all"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -253,9 +300,20 @@
     "surge": "double brightness: the wall is impassable now, and you will feel the spending after"
    },
    "bounds": [
-    "those WITH radiance-tolerance pass it (an umbral suffers; a blazeborn walks through)",
-    "it blocks, it does not harm"
-   ]
+    {
+     "text": "those WITH radiance-tolerance pass it",
+     "class": "hard"
+    },
+    {
+     "text": "it blocks, it does not harm",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 3,
+    "note": "THE PILOT'S TEST CASE for §11 Gap 2: this craft NEEDS the soak/armor layer to do anything at all"
+   }
   },
   {
    "id": "glass_work",
@@ -269,10 +327,6 @@
     "persistence",
     "speed"
    ],
-   "base": {
-    "axis": "speed",
-    "value": "shape glass or heat-worked material in moments where others take hours"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -292,9 +346,19 @@
     "surge": "double the working: finer than hands can manage, and the heat does not wait for your judgment"
    },
    "bounds": [
-    "requires material that ANSWERS to light and heat",
-    "shaped light (r3) is an object, not a weapon — it holds a shape, it does not strike"
-   ]
+    {
+     "text": "requires material that ANSWERS to light and heat",
+     "class": "hard"
+    },
+    {
+     "text": "shaped light is an object, not a weapon",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 6
+   }
   },
   {
    "id": "the_blazing_word",
@@ -308,11 +372,6 @@
     "duration",
     "witnesses"
    ],
-   "base": {
-    "axis": "bindStrength",
-    "value": "2d6-equivalent — spoken in full light before all, it carries weight that shadows and whispers cannot undermine",
-    "requires": "OPEN LIGHT and witnesses"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -332,9 +391,19 @@
     "surge": "declare it: double the binding, before everyone, and you cannot take it back either"
    },
    "bounds": [
-    "requires OPEN LIGHT and witnesses — useless whispered, useless alone",
-    "it binds the SPEAKER equally"
-   ]
+    {
+     "text": "requires OPEN LIGHT and witnesses — useless whispered, useless alone",
+     "class": "soft"
+    },
+    {
+     "text": "it binds the SPEAKER equally",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 6
+   }
   },
   {
    "id": "unshadow",
@@ -349,12 +418,6 @@
     "area",
     "debuff"
    ],
-   "base": {
-    "axis": "area",
-    "dice": "3d6+2",
-    "note": "T-III per §10 — more than a third doubling",
-    "targeting": "strip disguise, shadow, and illusion from a target at once"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -374,10 +437,29 @@
     "surge": "double the reach and nothing in it keeps anything — including what nobody wanted found"
    },
    "bounds": [
-    "the Cathedral's true-piece lie survives it",
-    "it reveals INDISCRIMINATELY — yours, theirs, and things nobody wanted found",
-    "the Umbrals consider this an atrocity, and they are not entirely wrong"
-   ]
+    {
+     "text": "the Cathedral's true-piece lie survives",
+     "class": "hard"
+    },
+    {
+     "text": "it reveals INDISCRIMINATELY — yours, theirs, and things nobody wanted found",
+     "class": "cost"
+    },
+    {
+     "text": "the Umbrals consider this an atrocity, and they are not entirely wrong",
+     "class": "hard"
+    }
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 3,
+     "d": 6
+    },
+    "plus": 3,
+    "marginFloorPer": 0.02,
+    "area": 3,
+    "note": "T-III per §10 — more than a third doubling"
+   }
   },
   {
    "id": "the_line_of_light",
@@ -391,10 +473,6 @@
     "targets",
     "uses"
    ],
-   "base": {
-    "axis": "range",
-    "value": "cross to any point you can illuminate in a single committed crossing — as fast as thrown light"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -414,9 +492,20 @@
     "surge": "double the crossing and take what you are holding with you"
    },
    "bounds": [
-    "requires a LIT path — no light, no road",
-    "a COMMITTED crossing: once begun it completes, wherever that lands you"
-   ]
+    {
+     "text": "requires a LIT path — no light, no road",
+     "class": "hard"
+    },
+    {
+     "text": "a COMMITTED crossing: once begun it completes",
+     "class": "soft"
+    }
+   ],
+   "mechanic": {
+    "range": 8,
+    "push": 0,
+    "targets": 1
+   }
   },
   {
    "id": "the_revealing_burn",
@@ -431,12 +520,6 @@
     "damage",
     "special"
    ],
-   "base": {
-    "axis": "area+damage",
-    "dice": "4d6+2",
-    "note": "T-IV — dice PLUS a special per §8",
-    "targeting": "burn away all falsehood and concealment in a PLACE"
-   },
    "rankDeltas": [
     {
      "rank": 2,
@@ -450,11 +533,30 @@
     "surge": "double the reach, and at that scale it reliably includes allies and yourself"
    },
    "bounds": [
-    "it CANNOT UN-REVEAL what it shows",
-    "it does not discriminate whose secret burns free",
-    "at r2 scale that reliably includes allies and yourself"
+    {
+     "text": "it CANNOT UN-REVEAL what it shows",
+     "class": "hard"
+    },
+    {
+     "text": "it does not discriminate whose secret burns free",
+     "class": "hard"
+    },
+    {
+     "text": "at r2 scale that reliably includes allies and yourself",
+     "class": "cost"
+    }
    ],
-   "designNote": "T-IV special = the craft gains a KIND it did not have (identity-attack), not a bigger number. This is the register Erik asked for at IV/V, and the prose already reached for it."
+   "designNote": "T-IV special = the craft gains a KIND it did not have (identity-attack), not a bigger number. This is the register Erik asked for at IV/V, and the prose already reached for it.",
+   "mechanic": {
+    "dice": {
+     "n": 4,
+     "d": 6
+    },
+    "plus": 2,
+    "marginFloorPer": 0.02,
+    "area": 4,
+    "note": "T-IV — dice PLUS a special per §8"
+   }
   },
   {
    "id": "the_last_light",
@@ -468,12 +570,6 @@
     "area",
     "special"
    ],
-   "base": {
-    "axis": "damage",
-    "dice": "5d6+4",
-    "note": "T-V capstone — dice plus a special",
-    "targeting": "all shadow in reach"
-   },
    "rankDeltas": [
     {
      "rank": 1,
@@ -487,11 +583,30 @@
     "surge": "REFUSED — it is already everything you have. There is nothing above it to spend."
    },
    "bounds": [
-    "it leaves you SPENT TO NOTHING and cold after",
-    "it cannot be held or sustained",
-    "IT CANNOT BE HALF-GIVEN — no conserve, no surge; the intensity dial does not apply to this craft"
+    {
+     "text": "it leaves you SPENT TO NOTHING and cold after",
+     "class": "hard"
+    },
+    {
+     "text": "it cannot be held or sustained",
+     "class": "hard"
+    },
+    {
+     "text": "IT CANNOT BE HALF-GIVEN — no conserve, no surge",
+     "class": "hard"
+    }
    ],
-   "designNote": "The pilot's proof that intensity must be PER-CRAFT and audited: a blanket ×0.5/×2 would have silently created a 'conserved last light,' which the craft's own cannot-text forbids. Erik's audit-each-craft instruction, vindicated by the first capstone it touched."
+   "designNote": "The pilot's proof that intensity must be PER-CRAFT and audited: a blanket ×0.5/×2 would have silently created a 'conserved last light,' which the craft's own cannot-text forbids. Erik's audit-each-craft instruction, vindicated by the first capstone it touched.",
+   "mechanic": {
+    "dice": {
+     "n": 5,
+     "d": 6
+    },
+    "plus": 4,
+    "marginFloorPer": 0.02,
+    "area": 5,
+    "note": "T-V capstone — dice plus a special"
+   }
   }
  ],
  "pilotFindings": [
@@ -507,5 +622,10 @@
   "Sign off the dice ladder as applied here (T-I 1d6 / T-II 2d6 / T-III 3d6+2 / T-IV 4d6+2 / T-V 5d6+4).",
   "The scaling term's strength (§11): how much better should a master's kindle be than a novice's kindle?",
   "Whether 'REFUSED' is the right authored value for an intensity mode a craft's fiction forbids, or whether it should read as something else in the UI."
- ]
+ ],
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ }
 }

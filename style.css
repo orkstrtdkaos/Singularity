@@ -1207,3 +1207,13 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-quick { font-size: 13px; line-height: 1.5; font-style: italic; color: var(--ink); border-left: 3px solid var(--accent2, #7a9); background: color-mix(in srgb, var(--accent2, #7a9) 7%, var(--panel2)); border-radius: 4px; padding: 7px 10px; margin-bottom: 8px; }
 /* CCODE-43 — an item move: what spending it buys you. */
 .sb-item-note { color: var(--accent, #c9a227); font-style: italic; }
+
+/* SNG-263 r4 — the Machine tab's live balance dials. Dev-only surface: a compact grid so fifteen numbers
+   fit without scrolling, and an overridden dial is visibly not the shipped value. */
+.mach-dials { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 14px; }
+.mach-dial { display: grid; grid-template-columns: 1fr 90px; align-items: center; gap: 2px 8px; }
+.mach-dial input { grid-row: 1 / span 2; grid-column: 2; width: 100%; }
+.mach-dial-label { font-size: 13px; }
+.mach-dial-ship { font-size: 11px; opacity: 0.75; }
+.mach-dial-set .mach-dial-label { font-weight: 700; }
+.mach-dial-set input { outline: 2px solid var(--accent, #c9a227); }

@@ -118,6 +118,16 @@
       "perTier": 0.5,
       "perMarginPoint": 0.06,
       "minHit": 1,
+      "scaling": {
+        "note": "SNG-263 r4 §11: damage = DICE(tier,rank) + SCALING(level,attribute,uses) - SOAK(target). The DICE are what the craft IS; SCALING is the WIELDER — a master's kindle hits harder than a novice's (the D&D cantrip answer, and the same earned-through-repetition spine as skill-use and aptitudes). Deliberately MODEST: scaling is a flat add, so it lifts a low tier into usefulness without closing the gap to a high tier, and SOAK is the limiter that stops a scaled cantrip becoming universal. Calibrated so a level-20 master adds about +2 — enough that a T-I stays worth casting at epic, not enough to rival a T-III.",
+        "perLevel": 0.06,
+        "perAttributePoint": 0.15,
+        "attributeBase": 3,
+        "perUse": 0,
+        "useCap": 0,
+        "useNote": "INERT until SNG-258 §2's skill-use counter writes `uses` onto a declared move. Left at 0 rather than guessed: a term that scales on a field nobody supplies is a dial with nothing on the other end. Owner: whoever builds §2.",
+        "maxScaling": 6
+      },
       "tuning": "A synthesized foe has health 3-8 (3 + threat/15). At base 1 + t3*0.5 + a 20-margin gap*0.06 that is a ~4-point hit, so a clean exchange or two puts down a riffraff and a regional takes real work. Raise perMarginPoint to reward decisive blows more; raise base to make every landed hit matter."
     },
     "kinds": {

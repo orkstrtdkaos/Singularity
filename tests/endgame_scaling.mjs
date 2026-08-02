@@ -40,7 +40,7 @@ const ROUND_CAP = 60;   // past this a fight is not a fight; it is a war of attr
 const rngFor = k => { let s = k * 7919 + 13; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };
 
 /** Beat one synthesized foe to death with one craft, many times, and report how long it took. */
-function roundsToKill(tier, threat, playerAttr, trials = 400) {
+function roundsToKill(tier, threat, playerAttr, trials = 400, playerLevel = 20) {
   const opp = synthesizeOpponentSheet({ name: "foe", threat }, SB);
   const lengths = [];
   for (let k = 0; k < trials; k++) {
@@ -49,7 +49,7 @@ function roundsToKill(tier, threat, playerAttr, trials = 400) {
     for (let r = 0; r < ROUND_CAP && hp > 0; r++) {
       rounds++;
       const out = battleRound({
-        playerSheet: { attributes: { practical: playerAttr }, energy: 100 }, oppSheet: opp,
+        playerSheet: { attributes: { practical: playerAttr }, energy: 100, level: playerLevel }, oppSheet: opp,
         playerDecl: { function: "strike", tier, attribute: "practical", intensity: "standard", name: "a cut" },
         oppDecl: { function: "shield", tier: 1, attribute: "practical", intensity: "standard" },
         state: { momentum: 0, effects: [], opponentHealth: hp }, rules: RULES, sb: SB, steps: STEPS, rng });
@@ -83,9 +83,10 @@ for (const [name, threat] of BANDS) {
   console.log(`      3. a L20's T-I still worth casting ....... ${notWorth.length === 0 ? "MET" : "NOT MET at " + notWorth.join(", ")}`);
   if (notWorth.length) {
     console.log(`         T-I holds up at ${stillWorth.join(", ") || "no band"}, and falls off above that.`);
-    console.log("         THIS IS THE GAP §11's LEVEL-SCALING TERM EXISTS TO CLOSE: damage currently scales with the");
-    console.log("         CRAFT (tier/rank) and not at all with the WIELDER, so a master's kindle hits exactly as hard");
-    console.log("         as a novice's. Health and soak now scale; damage does not yet. Erik owns how strongly it should.");
+    console.log("         §11's WIELDER SCALING IS LIVE (damage.scaling: perLevel + perAttributePoint, capped), which is");
+    console.log("         what carried T-I through the epic band. Whether a T-I SHOULD still solo a legendary is a design");
+    console.log("         call, not a defect — a cantrip arguably should not. Raise damage.scaling.* to push it further;");
+    console.log("         the dials are live in the Machine tab, so this can be felt in play rather than argued on paper.");
   }
 }
 

@@ -373,6 +373,7 @@ const RECIPES_PATH = "world/braid_recipes.json"; // SNG-201: a NEW shared store 
   wireLightbox(); // SNG-053: click any image → larger view
   try {
     CONTENT = await loadContent();
+    applyDevDials();   // SNG-263 r4: dev-only live balance overrides, applied over the loaded content
     FN_INDEX = buildFunctionIndex(CONTENT.functionVocabulary); // SNG-124: verb→function-family index for coverage + badges
     GENERATABLE_TYPES = new Set(Object.keys(CONTENT.genSchemas || {})); // SNG-250 §5: derived, never a literal
     reportContractCoverage();                                  // SNG-250 §4: name any type whose two halves disagree
@@ -543,6 +544,59 @@ function wireLightbox() {
  *  (`?dev=1` earlier this session) · a DELIBERATE persistent opt-in from Settings.
  *  `?dev=0` in the URL always wins OFF. No sticky localStorage flag, so a family member can
  *  never be trapped in dev mode — a plain reload on the live URL is a clean player view. */
+// ---------- SNG-263 r4: LIVE BALANCE DIALS (dev only) ----------
+// Erik: "ALL of these dials should/could be dev settings to have me tweak as I play to find the right feel...
+// when we update things like this we should always keep in mind what dev and machine screens are available."
+//
+// Every balance number we have shipped this session lives in content, which makes it TUNABLE but not
+// FEELABLE — changing one meant editing JSON and reloading, which is the wrong loop for a question like "how
+// hard should a master's kindle hit?" That is answered by playing, not by reading a table. This applies a
+// thin override layer over the already-loaded rules so a dial can be turned mid-session.
+//
+// DEV ONLY, and deliberately so: `isDevMode()` gates both the read and the UI, so a player build has no
+// override path at all and the shipped content is the only source of truth. Overrides persist per-browser.
+const DIALS_KEY = "singularity.dials";
+/** The dials worth turning, as dotted paths into the loaded content. Adding a row here is the whole job of
+ *  exposing a new dial — the panel, the apply and the reset all read this one list. */
+const DEV_DIALS = [
+  { path: "skillBattle.engine.damage.base", label: "damage: base", step: 0.5, why: "the floor under every landed hit" },
+  { path: "skillBattle.engine.damage.perTier", label: "damage: per tier", step: 0.25, why: "flat per-tier term (the generic fallback path)" },
+  { path: "skillBattle.engine.damage.perMarginPoint", label: "damage: per margin point", step: 0.01, why: "how much a decisive exchange adds" },
+  { path: "skillBattle.engine.damage.minHit", label: "damage: minimum hit", step: 1, why: "a blow that connects always costs at least this, even through soak" },
+  { path: "skillBattle.engine.damage.scaling.perLevel", label: "scaling: per character level", step: 0.02, why: "SNG-263 §11 — how much the WIELDER adds; a master's kindle vs a novice's" },
+  { path: "skillBattle.engine.damage.scaling.perAttributePoint", label: "scaling: per attribute point", step: 0.05, why: "above scaling.attributeBase" },
+  { path: "skillBattle.engine.damage.scaling.maxScaling", label: "scaling: cap", step: 1, why: "the ceiling on the wielder term, so it never rivals a tier step" },
+  { path: "skillBattle.engine.opponentSheetSynthesis.healthBase", label: "foe: health base", step: 1, why: "SNG-263 r4 GAP1 — synthesised foes had a flat 5 before this" },
+  { path: "skillBattle.engine.opponentSheetSynthesis.threatToHealth", label: "foe: health per threat", step: 0.01, why: "how fast durability climbs with the band" },
+  { path: "skillBattle.engine.opponentSheetSynthesis.threatToSoak", label: "foe: soak per threat", step: 0.005, why: "SNG-263 r4 GAP2 — how hard armour bites" },
+  { path: "craftMechanics.familyDefaults.damage.max", label: "craft: T-I damage max", step: 1, why: "the top of an unauthored T-I band; the anchor is 'max can kill a 5-health peer'" },
+  { path: "craftMechanics.familyDefaults.damage.weight", label: "craft: damage roll bend", step: 0.5, why: "higher = more low rolls; 3 puts a T-I at ~2 hits to kill" },
+  { path: "rules.baseChance.attributeMultiplier", label: "roll: attribute multiplier", step: 1, why: "SNG-258 §1 — attribute's share of a strong chance" },
+  { path: "rules.crit.baseSuccessChance", label: "crit: base success dial", step: 1, why: "SNG-258 §3b — the second roll" },
+  { path: "rules.crit.baseFailChance", label: "crit: base failure dial", step: 1, why: "lowered by rank and practice; floored so catastrophe stays possible" },
+];
+function readDials() { try { return JSON.parse(localStorage.getItem(DIALS_KEY) || "{}") || {}; } catch { return {}; } }
+function writeDials(m) { try { localStorage.setItem(DIALS_KEY, JSON.stringify(m)); } catch { /* ignore */ } }
+function dialGet(root, path) { return path.split(".").reduce((o, k) => (o == null ? o : o[k]), root); }
+function dialSet(root, path, val) {
+  const parts = path.split("."); const last = parts.pop();
+  const parent = parts.reduce((o, k) => (o && o[k] != null ? o[k] : null), root);
+  if (parent && typeof parent === "object") parent[last] = val;
+}
+/** Apply the stored overrides onto the LOADED content. Called after load and after every edit, so a turned
+ *  dial takes effect on the next roll without a reload. Records each dial's shipped value the first time it
+ *  is touched, so Reset restores content truth rather than a guess. */
+let DIAL_BASELINE = null;
+function applyDevDials() {
+  if (!isDevMode() || !CONTENT) return;
+  if (!DIAL_BASELINE) { DIAL_BASELINE = {}; for (const d of DEV_DIALS) DIAL_BASELINE[d.path] = dialGet(CONTENT, d.path); }
+  const over = readDials();
+  for (const d of DEV_DIALS) {
+    const v = Object.prototype.hasOwnProperty.call(over, d.path) ? Number(over[d.path]) : DIAL_BASELINE[d.path];
+    if (Number.isFinite(v)) dialSet(CONTENT, d.path, v);
+  }
+}
+
 function isDevMode() {
   try {
     const p = new URLSearchParams(location.search);
@@ -1319,7 +1373,19 @@ function renderMachine() {
 
     ${caps.length ? caps.map(card).join("") : "<div class='insight'>No model calls captured yet. Take a turn in play, then return — every GM turn and its sub-calls (intent-parse, narrate) land here.</div>"}
 
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Balance dials <span class="hint" style="text-transform:none">— turn one here and feel it on the next roll; no reload, no JSON edit</span></h3>
+      <p class="hint" style="margin:0 0 8px">Overrides the loaded content for this browser only, and only in dev mode — a player build has no override path at all. Blank a field to fall back to the shipped value, shown beside each. Every number here is one tuned in SNG-258/263.</p>
+      <div class="mach-dials">${DEV_DIALS.map(d => {
+        const cur = dialGet(CONTENT, d.path), ship = DIAL_BASELINE ? DIAL_BASELINE[d.path] : cur;
+        const over = Object.prototype.hasOwnProperty.call(readDials(), d.path);
+        return `<label class="mach-dial${over ? " mach-dial-set" : ""}" title="${esc(d.why)}">
+          <span class="mach-dial-label">${esc(d.label)}</span>
+          <input type="number" step="${d.step}" value="${cur ?? ""}" data-dial="${esc(d.path)}">
+          <span class="hint mach-dial-ship">ships ${ship ?? "—"}</span></label>`;
+      }).join("")}</div></div>
+
     <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap">
+      <button class="btn secondary" id="mach-dials-reset">Reset balance dials</button>
       <button class="btn secondary" id="mach-clear">Clear captures</button>
       <button class="btn secondary" id="mach-back">Back</button>
     </div>
@@ -1331,6 +1397,16 @@ function renderMachine() {
     const text = `TASK ${c.task} · ${c.model} · ${usageLine(c)}\n\n=== ASSEMBLED PROMPT ===\n${promptText(c)}\n\n=== RAW RESPONSE ===\n${c.raw || ""}\n\n=== PARSED ===\n${c.parsed ? JSON.stringify(c.parsed, null, 2) : "(not a parsed turn)"}\n\n=== OPS EMITTED ===\n${(c.opsFired || []).map(o => `${o.op} ${o.shape}`).join("\n") || "(none)"}`;
     try { await navigator.clipboard.writeText(text); b.textContent = "Copied ✓"; } catch { b.textContent = "Copy failed — select the text above"; }
   };
+  // SNG-263 r4: a dial edit writes the override, re-applies it over the loaded content, and re-renders — so
+  // the next roll in this session already uses it. No reload, which is the entire point: "how hard should a
+  // master's kindle hit?" is answered by playing, not by editing JSON and starting over.
+  for (const inp of app.querySelectorAll("[data-dial]")) inp.onchange = () => {
+    const over = readDials(), path = inp.getAttribute("data-dial"), raw = String(inp.value).trim();
+    if (raw === "") delete over[path]; else over[path] = Number(raw);
+    writeDials(over); applyDevDials(); renderMachine();
+  };
+  { const rb = document.getElementById("mach-dials-reset");
+    if (rb) rb.onclick = () => { writeDials({}); applyDevDials(); renderMachine(); }; }
   document.getElementById("mach-clear").onclick = () => { clearCaptures(); renderMachine(); };
   const combatCopy = document.getElementById("mach-combat-copy");
   if (combatCopy) combatCopy.onclick = async () => {

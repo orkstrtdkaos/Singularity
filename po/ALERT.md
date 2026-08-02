@@ -1,5 +1,44 @@
 # PO ALERT
 
+> ## [CCODE-67 - §11 WIELDER SCALING + LIVE BALANCE DIALS IN THE MACHINE TAB - CCode, 2026-08-02] Erik can now turn every dial AS HE PLAYS
+> Full `npm test` green. `npm run endgame` re-answers Aevi's test of done on demand.
+> **§11 SCALING IS LIVE.** damage = DICE(tier,rank) + **SCALING(level,attribute,uses)** - SOAK(target).
+> Calibrated MODEST on purpose: `perLevel 0.06`, `perAttributePoint 0.15` above a base of 3, capped at 6 - a
+> level-20 master adds about **+2**. Flat-add by design, so it lifts a low tier into usefulness WITHOUT
+> closing the gap to a high tier (whose dice are bigger at both ends), and soak stays the limiter that stops
+> a scaled cantrip going universal.
+> **AEVI'S TEST OF DONE - what the scaling bought (L20, attribute 9):**
+> ```
+> foe          hp/soak   T-I rounds  (was)   T-III rounds   advantage
+> riffraff       6/0       2.0  (3.0)          1.1            1.8x
+> notable        7/1       2.9  (5.3)          1.5            2.0x
+> regional       9/1       4.0  (7.5)          2.0            2.0x
+> epic          11/2       7.4 (14.0)          2.7            2.8x
+> legendary     17/3      23.8 (35.9)          5.4            4.4x
+> ```
+> 1. T-III clearly better - **MET** (1.8x-4.4x, widening with the band). 2. Armored epic needs more than a
+> cantrip - **MET**. 3. A L20's T-I worth casting - **MET through epic** (14.0 -> 7.4 rounds), still falls off
+> at legendary. **I'd argue that last one is correct rather than a defect** - a cantrip probably should not
+> solo a legendary - but it is one dial away either direction now, and Erik can feel it rather than argue it.
+> >> **ERIK'S STANDING INSTRUCTION TAKEN: 'ALL of these dials should/could be dev settings to have me tweak
+> as I play... always keep in mind what dev and machine screens are available.'** Built a **Balance Dials
+> panel in the Machine tab** - 15 live number fields covering everything we tuned this session: damage
+> base/perTier/perMarginPoint/minHit, the three §11 scaling terms, foe health base + per-threat, soak
+> per-threat, the T-I craft damage band + roll bend, the SNG-258 attribute multiplier, and both crit dials.
+> Turn one, and **the next roll uses it** - no reload, no JSON edit, because "how hard should a master's
+> kindle hit?" is answered by PLAYING, not by reading a table. Shipped value shown beside each, blank to
+> revert one, Reset restores all. Overrides are per-browser and **DEV-GATED at both the read and the UI**, so
+> a player build has no override path at all and shipped content stays the only source of truth.
+> Adding a dial is now ONE ROW in `DEV_DIALS` - the panel, the apply and the reset all read that one list.
+> **6 wiring tests** guard it, including that **every declared dial resolves to a real content path** - a
+> typo'd path would be a control with nothing on the other end, which is the encounterRate lesson landing on
+> the tuning surface itself.
+> >> KNOWN, and named rather than hidden: `damage.scaling.perUse` is **INERT** - it reads `winDecl.uses`,
+> which nothing writes until SNG-258 §2's skill-use counter lands. Left at 0 rather than guessed. That is a
+> READER WITH NO WRITER, the same shape as the `oppSheet.health` one I just activated; flagging it deliberately
+> so it is a known debt with an owner (whoever builds §2) rather than a discovery six weeks from now.
+> NEXT: the §11 schema/CI update (r4 changes the damage FIELD from my band to dice+axis, so craft_mechanics
+> and its CI need the new shape) - then §9 minted crafts. The blazeborn pilot stays held until that lands.
 > ## [CCODE-66 - SNG-263 r4: HEALTH SCALING + SOAK SHIPPED - CCode, 2026-08-02] Both blocking gaps closed; Aevi's test of done now MEASURABLE, 2 of 3 met
 > Write-up in the ALERT; `npm run endgame` (wired into `npm test`, `--json`). Full suite green.
 > **GAP1 CLOSED - opponent health scales.** `opponentSheetSynthesis` gains healthBase/threatToHealth/

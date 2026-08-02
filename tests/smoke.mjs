@@ -9036,6 +9036,36 @@ await (async () => {
     JSON.stringify((authored["kind:standoff"] || []).map(m => m.function)));
 }
 
+
+// ---------- SNG-263 r4: the LIVE BALANCE DIALS are wired (Erik: dials should be tweakable AS I PLAY) ----------
+// Erik's standing instruction: "ALL of these dials should/could be dev settings to have me tweak as I play
+// to find the right feel... always keep in mind what dev and machine screens are available." A dial panel
+// that silently stops applying is worse than none — he would turn a number, feel nothing, and conclude the
+// mechanic is inert (the encounterRate lesson, on the tuning surface this time).
+{
+  const src = readFileSync(join(root, "app.js"), "utf8");
+  check("SNG-263 dials: the override layer exists and is DEV-GATED (a player build has no override path)",
+    /const DIALS_KEY = "singularity\.dials"/.test(src) && /function applyDevDials\(\)\s*\{\s*if \(!isDevMode\(\)/.test(src));
+  check("SNG-263 dials: overrides are applied to the LOADED content right after loadContent()",
+    /CONTENT = await loadContent\(\);\s*\n\s*applyDevDials\(\);/.test(src));
+  check("SNG-263 dials: every dial is declared once, and the panel/apply/reset all read that one list",
+    /const DEV_DIALS = \[/.test(src) && /DEV_DIALS\.map\(d =>/.test(src) && /for \(const d of DEV_DIALS\)/.test(src));
+  check("SNG-263 dials: editing one re-applies and re-renders, so the NEXT roll uses it (no reload)",
+    /\[data-dial\]/.test(src) && /writeDials\(over\); applyDevDials\(\); renderMachine\(\);/.test(src));
+  check("SNG-263 dials: Reset restores the SHIPPED values, not a guess (baseline captured before any override)",
+    /DIAL_BASELINE\[d\.path\] = dialGet\(CONTENT, d\.path\)/.test(src) && /writeDials\(\{\}\); applyDevDials\(\)/.test(src));
+  // the dials must point at REAL paths — a typo'd path is a control with nothing on the other end
+  const paths = [...src.matchAll(/\{ path: "([^"]+)"/g)].map(m => m[1]);
+  const content = {
+    rules: JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8")),
+    skillBattle: JSON.parse(readFileSync(join(root, "content/packs/core/rules/skill_battle_system.json"), "utf8")),
+    craftMechanics: JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8")),
+  };
+  const dead = paths.filter(p => p.split(".").reduce((o, k) => (o == null ? o : o[k]), content) === undefined);
+  check("SNG-263 dials: every declared dial resolves to a real content value (no phantom control)",
+    paths.length >= 10 && dead.length === 0, `dials pointing at nothing: ${dead.join(", ")}`);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

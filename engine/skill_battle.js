@@ -575,6 +575,22 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
           + marginGap * (dcfg.perMarginPoint ?? 0.06);
         hit = Math.max(dcfg.minHit ?? 1, Math.round(raw));
       }
+      // SNG-263 r4 §11 — SCALING: the WIELDER's contribution. The dice are what the craft IS; this is what
+      // the person swinging it brings. Without it a master's kindle hit exactly as hard as a novice's, which
+      // is why a level-20 character's T-I fell off a cliff above the regional band. Deliberately a FLAT ADD:
+      // it lifts a low tier into usefulness without closing the gap to a high tier (whose dice are bigger at
+      // both ends), and soak below is the limiter that stops a scaled cantrip becoming universal.
+      const scfg = dcfg.scaling || {};
+      const wielder = roundWinner === "player" ? playerSheet : oppSheet;
+      const attrKey = winDecl.attribute || "practical";
+      const attrVal = Number(wielder?.attributes?.[attrKey]) || 0;
+      const uses = Number(winDecl.uses) || 0;   // inert until SNG-258 §2's use-counter supplies it
+      const scaled = Math.min(scfg.maxScaling ?? 6,
+        (Number(wielder?.level) || 0) * (scfg.perLevel ?? 0)
+        + Math.max(0, attrVal - (scfg.attributeBase ?? 3)) * (scfg.perAttributePoint ?? 0)
+        + Math.min(uses, scfg.useCap ?? 0) * (scfg.perUse ?? 0));
+      if (scaled > 0) hit = hit + Math.round(scaled);
+
       // SNG-263 r4 GAP2 — SOAK. The target's armour is subtracted from a landed hit, floored at minHit so a
       // blow that connects always costs something. This is the honest limiter Erik's §11 asks for: it is what
       // stops a level-scaled low-tier craft from becoming universal, because soak is a FLAT subtraction and a

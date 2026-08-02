@@ -1,6 +1,32 @@
 # PO ALERT
 
-> ## [CCODE-71 - SNG-263 §9 MINTED CRAFTS - CCode, 2026-08-02] They were never empty. They were born CHARACTERLESS, which is worse to find later
+> ## [SNG-263 catalog pass — RADIANT authored (tradition 2 of 27)] (Aevi, 2026-08-02)
+> Verified the locked schema at origin first (CCODE-64 + through CCODE-71) rather than authoring against my
+> proposal's shape. Authored radiant's **14 crafts** to `po/staged_content/radiant_mechanics.json` — staged,
+> no live ability file touched. (Noted CCode's remark that my pilot broke his first CLOSED operativeAxis list —
+> 12 crafts declared 18 axes — and it's open now. Good outcome for a pilot.)
+> **Findings, several actionable:**
+> 1. **Radiant's prose is MORE mechanically specific than blazeborn's** — it already states distances (10 paces,
+>    20 paces, a mile), counts (three vessels / three companions / three afterimages) and durations (one night,
+>    a week, a month, a season). Almost nothing was a judgement call. **Second tradition, same conclusion:
+>    transcription plus arithmetic.**
+> 2. **`radiant_lance` r2/r3 name ARMOR and "a Harmonic shield's FIRST RANK."** The catalog already assumes a
+>    **RANKED guard layer that penetration beats by degree** → direct content support for making §11 Gap-2 soak
+>    **ranked, not flat.** CCode: worth reading before finalising the soak shape.
+> 3. **`afterimage`'s own bound names `prism_sight` r2+ as a hard counter** ("reads every ghost instantly") — an
+>    in-tradition counter-relationship the content authored itself. Should be a real mechanic, not flavour.
+> 4. **`prism_ward` r3 composes explicitly with `light_well` and `beacon_thread`.** The catalog is already
+>    authoring **craft COMBINATION** — deserves a composed-craft mechanic rather than staying prose.
+> 5. **`prism_sight` r3 sees "the seams of PRECURSOR work"** — an already-authored, in-catalog path for a player
+>    to ENCOUNTER precursor presence. **SNG-261 §B wanted exactly this staging and it already exists.** ERIK:
+>    this is the cheapest possible precursor hook — a radiant with prism_sight r3 finds Precursor seams by
+>    looking.
+> 6. **`light_borne` (T-V, single rank) confirms the capstone register** from the pilot: the special is a KIND
+>    the craft did not have (leaving the ground), at an absolute cost (total visibility). **Two traditions, two
+>    capstones, same shape — the T-IV/V register holds**, which answers Erik's biggest open authoring question
+>    empirically rather than by assertion.
+> Continuing the catalog. Still open for Erik: the §11 scaling strength (a master's kindle vs a novice's), and
+> whether "REFUSED" is the right authored value for an intensity mode a craft's fiction forbids.> ## [CCODE-71 - SNG-263 §9 MINTED CRAFTS - CCode, 2026-08-02] They were never empty. They were born CHARACTERLESS, which is worse to find later
 > Full `npm test` green. §9 closes the last engine item on SNG-263.
 > >> **THE SPEC'S FRAMING WAS OUT OF DATE, and measuring said so.** §9 said braids/discoveries/generated
 > crafts are "born WITHOUT damage, duration, range". Measured: **a minted braid resolves to 4d6+5 at T-IV** -

@@ -19,7 +19,7 @@
 //
 // Run: node tests/tradition_matrix.mjs
 
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { oneFight, mulberry32 } from "./lib/fightharness.mjs";
@@ -114,23 +114,41 @@ console.log(`      ${UNDER_TEST.length} traditions under test (+${CONTROL} as th
 
 // ---------- run the matrix ----------
 // Two passes, because they answer different questions and mixing them muddies both:
-//   BANDS      — the level/threat curve, on the best-fit playstyle (is anyone unplayable?)
+//   BANDS      — the level/threat curve ACROSS ALL FOUR BUILDS (is anyone unplayable?)
 //   SITUATIONS — tradition × situation × playstyle at one level (who is good at WHAT?)
+//
+// THE BUG THIS SHAPE EXISTS TO PREVENT. The bands pass used to run PLAYSTYLES[0] — the warrior — only,
+// while `overall` (the number that ranks the traditions, and the one the published charts led with)
+// averaged it as though it were a whole-cohort figure. An ability's `attribute` is half its roll, and the
+// six traditions that came out 19 points clear of the field — unmaker, horizon, mason, somatic, marcher,
+// wright — are precisely the six whose crafts are almost all `physical`. They were the only ones being
+// measured with the attribute they actually roll; every mental/social/practical tradition was scored on a
+// sheet thin exactly where its kit lives. The "tier of their own" was the harness, not the content, and it
+// sent a whole content pass (SNG-256) at a matchup layer that was never responsible for it. `overall` must
+// therefore be a mean over ALL builds; a single-build number may be PRINTED but must never be RANKED.
 const results = {};
 for (const trad of [...UNDER_TEST, CONTROL]) {
   results[trad] = { bands: {}, sit: {} };
   for (const level of LEVELS) {
     const kit = buildKit(trad, level);
-    const sheet = sheetFor(level, PLAYSTYLES[0]);
-    results[trad].bands[level] = { kitSize: kit.length, families: [...new Set(kit.flatMap(a => familiesOfAbility(a, FN_INDEX)))], bands: {} };
-    for (const band of BANDS) {
-      let won = 0;
-      for (let i = 0; i < TRIALS; i++) {
-        const f = oneFight({ threat: band.threat, moves: kit, sheet, sb, steps, rules,
-          rng: mulberry32(0x7ABC ^ (trad.length * 7919) ^ (level * 104729) ^ (band.threat * 31) ^ i) });
-        if (f.won) won++;
+    results[trad].bands[level] = { kitSize: kit.length, families: [...new Set(kit.flatMap(a => familiesOfAbility(a, FN_INDEX)))], bands: {}, byStyle: {} };
+    for (const style of PLAYSTYLES) {
+      const sheet = sheetFor(level, style);
+      results[trad].bands[level].byStyle[style.name] = {};
+      for (const band of BANDS) {
+        let won = 0;
+        for (let i = 0; i < TRIALS; i++) {
+          const f = oneFight({ threat: band.threat, moves: kit, sheet, sb, steps, rules,
+            rng: mulberry32(0x7ABC ^ (trad.length * 7919) ^ (level * 104729) ^ (band.threat * 31) ^ (style.name.length * 2654435761) ^ i) });
+          if (f.won) won++;
+        }
+        results[trad].bands[level].byStyle[style.name][band.name] = pct(won, TRIALS);
       }
-      results[trad].bands[level].bands[band.name] = pct(won, TRIALS);
+    }
+    // the headline band figure is the mean ACROSS builds — no single build may stand for the tradition
+    for (const band of BANDS) {
+      results[trad].bands[level].bands[band.name] =
+        Math.round(PLAYSTYLES.reduce((a, s) => a + results[trad].bands[level].byStyle[s.name][band.name], 0) / PLAYSTYLES.length * 10) / 10;
     }
   }
   // SITUATIONS at L12 vs an EPIC foe. First pass used a regional foe and every tradition's best build
@@ -156,7 +174,7 @@ for (const trad of [...UNDER_TEST, CONTROL]) {
 const overall = t => LEVELS.flatMap(l => BANDS.map(b => results[t].bands[l].bands[b.name])).reduce((a, x) => a + x, 0) / (LEVELS.length * BANDS.length);
 const ranked = [...UNDER_TEST].sort((a, b) => overall(b) - overall(a));
 
-console.log("      THE LEVEL/THREAT CURVE (warrior build)");
+console.log("      THE LEVEL/THREAT CURVE (mean of all four builds — a single build ranks nobody)");
 console.log("      TRADITION            L5  riff/note/reg/epic   L12 riff/note/reg/epic   L20 riff/note/reg/epic   mean");
 for (const t of ranked.slice(0, 5).concat(["…"]).concat(ranked.slice(-3))) {
   if (t === "…") { console.log("      …"); continue; }
@@ -202,6 +220,32 @@ console.log("\n      PLAYSTYLE SENSITIVITY (best minus worst build, averaged ove
 for (const kind of SITUATIONS) {
   const gaps = UNDER_TEST.map(t => { const vs = PLAYSTYLES.map(p => results[t].sit[kind][p.name]); return Math.max(...vs) - Math.min(...vs); });
   console.log(`        ${kind.padEnd(9)} ${(gaps.reduce((a, x) => a + x, 0) / gaps.length).toFixed(1)} points`);
+}
+
+// ATTRIBUTE FIT — the confound that once WAS the headline. Half a craft's roll is its `attribute`, so a
+// tradition measured on a build that leans the attribute its crafts key off is measured with a thumb on the
+// scale. Printed, so the next reader of a ranking can see at a glance whether it is tracking design or fit.
+const ATTR_STYLE = { physical: "warrior", mental: "scholar", social: "envoy", practical: "maker" };
+const homeStyle = t => {
+  const c = {};
+  for (const a of (byTradition[t] || []).filter(a => (a.levelReq || 1) <= 3)) if (a.attribute) c[a.attribute] = (c[a.attribute] || 0) + 1;
+  const top = Object.entries(c).sort((a, b) => b[1] - a[1])[0];
+  return top ? { attr: top[0], style: ATTR_STYLE[top[0]], share: Math.round((top[1] / Object.values(c).reduce((x, y) => x + y, 0)) * 100) } : null;
+};
+console.log("\n      ATTRIBUTE FIT — the build each tradition's own crafts roll on (half of every roll):");
+{
+  const byStyleName = {};
+  for (const t of UNDER_TEST) { const h = homeStyle(t); if (h) (byStyleName[h.style] = byStyleName[h.style] || []).push(`${t} ${h.share}%`); }
+  for (const s of PLAYSTYLES) console.log(`        ${s.name.padEnd(9)} ${(byStyleName[s.name] || ["—"]).join(", ")}`);
+}
+// The GUARD. If the top of the ranking is all one attribute-home, the ranking is measuring fit, not craft —
+// which is exactly the artifact that sent a content pass at the wrong layer. Cheap to check, and it can only
+// fire when the confound has come back.
+{
+  const homes = ranked.slice(0, 6).map(t => homeStyle(t)?.style).filter(Boolean);
+  check("the leaderboard is not just ATTRIBUTE FIT — the top 6 do not all share one home build",
+    new Set(homes).size > 1 || homes.length < 6,
+    `top 6 all roll on the ${homes[0]} attribute — a single-build ranking artifact, not a content finding`);
 }
 
 // ---------- WHY the spread is what it is: the matchup layer ----------
@@ -264,6 +308,27 @@ check("threat still MEANS something across the whole matrix — riffraff beats e
     const e = LEVELS.reduce((s, l) => s + results[t].bands[l].bands.epic, 0);
     return r >= e;
   }), "some tradition finds epics EASIER than riffraff — the threat curve is inverted for that kit");
+
+// --json: dump the whole matrix so a chart is built from the REAL numbers rather than hand-copied ones.
+// A figure transcribed by hand is a figure that drifts from the run that produced it.
+if (process.argv.includes("--json")) {
+  const out = { at: new Date().toISOString(), levels: LEVELS, bands: BANDS.map(b => b.name),
+    situations: SITUATIONS, playstyles: PLAYSTYLES.map(p => p.name), control: CONTROL,
+    cohortMeanBySituation: Object.fromEntries(SITUATIONS.map(k => [k, Math.round(sitMean(k) * 10) / 10])),
+    matchup: { pairs, nonzero, inert: inert.length, verbsWithNoEdges: noEdges },
+    traditions: Object.fromEntries([...UNDER_TEST, CONTROL].map(t => [t, {
+      overall: Math.round(overall(t) * 10) / 10,
+      bands: Object.fromEntries(LEVELS.map(l => [l, results[t].bands[l].bands])),
+      // per-build bands too: the whole reason `overall` is now a mean is that one build is not a tradition
+      bandsByStyle: Object.fromEntries(LEVELS.map(l => [l, results[t].bands[l].byStyle])),
+      kitSize: Object.fromEntries(LEVELS.map(l => [l, results[t].bands[l].kitSize])),
+      families: results[t].bands[12].families,
+      situations: Object.fromEntries(SITUATIONS.map(k => [k, { mean: bestStyleAt(t, k).v, lead: bestStyleAt(t, k).p, byStyle: results[t].sit[k] }])),
+      signature: SITUATIONS.map(k => ({ k, d: Math.round((bestStyleAt(t, k).v - sitMean(k)) * 10) / 10 })).sort((a, b) => b.d - a.d)[0]
+    }])) };
+  writeFileSync(join(root, "tests/matrix_data.json"), JSON.stringify(out, null, 2));
+  console.log("      wrote tests/matrix_data.json");
+}
 
 console.log(failures === 0 ? "\nTradition matrix: all checks passed. (The percentages above are a REPORT — Erik/Aevi own the balance calls.)"
   : `\nTradition matrix: ${failures} FAILURE(S)`);

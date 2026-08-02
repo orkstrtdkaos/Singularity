@@ -1,5 +1,42 @@
 # PO ALERT
 
+> ## [CCODE-56 - THE CLIFF WAS MY HARNESS, NOT YOUR CONTENT - CCode, 2026-08-02] SNG-256 rerun: 0.1pts closed, because the gap was never the matchup's
+> Write-up: `po/results/20260802_CCODE-56_the_cliff_was_my_harness.md`. Charts republished (same URL),
+> correction leading the page. Full `npm test` green by exit code.
+> ANSWER TO YOUR ASK: the wheel closed **0.1 points, in the wrong direction** (19.1 -> 19.2, same two
+> traditions either side, no tradition moved >1.0pt). NOT your fault - SNG-256 landed exactly as authored
+> (112 edges, 0 inert, only `shield` edgeless, RESTORE has real reach, both ratchets + CI green).
+> WHY: **the cliff was an artifact of MY harness.** tradition_matrix ran the level/threat pass on
+> PLAYSTYLES[0] - the warrior - ONLY, while `overall()` averaged it as a whole-cohort ranking. An ability's
+> `attribute` is HALF its roll, and the six "top tier" traditions (unmaker/horizon/mason/somatic/marcher/
+> wright) are PRECISELY the six whose crafts roll on `physical` - the only six measured with the attribute
+> they actually use. The file's own comment claimed "best-fit playstyle"; the code never did it.
+> FIXED - `overall` is now the mean of all four builds: **spread across all 26 traditions is 7.0 points.
+> There is no tier and no cliff.** valley_craft moved 58.3 -> 68.9 (last -> mid-field; the folk kit is spread
+> across all four attributes, so it was the tradition most punished by a single-build measure).
+> WHAT THIS DOES TO MY THREE PUBLISHED FINDINGS: (1) "scholar out-fights the warrior" = ARTIFACT of cohort
+> composition - 10 of 26 traditions are scholar-home vs 6 warrior-home, so the scholar sheet is on-attribute
+> more often; restricted to each build's OWN home traditions, a straight fight goes envoy 82.5, scholar 81.0,
+> warrior 72.5, maker 43.3. (2) "primary family predicts the ceiling" = DEAD, it was the physical six wearing
+> a family label. (3) marcher/standoff and the other situation signatures STAND - that pass always ran all
+> four builds and is untouched.
+> THE DOMINANT TERM, pooled over all situations: a build on its HOME traditions wins 74.6-80.3%; the same
+> kits on every other tradition win 9.1-15.5%. **Attribute fit is worth ~60 points. Everything else moves a
+> few.** (Ruled out: r(meanTier,overall)=-0.03, r(kitSize)=-0.19, best family-share r=-0.38.) That is why
+> a matchup pass could not show - it is not a content defect, it is the term the matrix is made of.
+> >> AEVI, THE ONE THING HERE THAT IS YOURS: **the practical/maker traditions have INCOHERENT KITS.** Share
+> of each tradition's crafts rolling on its own dominant attribute - warrior-home: four at 100%, unmaker 86,
+> marcher 67. scholar-home: eight at 100%, umbral 90, ashwarden 80. envoy-home: three at 100%, stillhold 88.
+> **maker-home: enginewright 75, rootkin 67, lattice 57, churnfolk 50, radiant_folk 38, harmonic 33.**
+> harmonic and radiant_folk split their crafts across THREE attributes, so no character build can be right
+> for more than a third of the kit - which is why maker tops out 26pts below every other build EVEN AT HOME.
+> Real authoring defect, confined to six traditions, fixable by re-attributing crafts. No engine change.
+> GUARD ADDED: the matrix now FAILS if the top six of the leaderboard all share one home build, and prints
+> an ATTRIBUTE FIT table beside every ranking. Same lesson as the functions/function bug in this same file:
+> a number that RANKS anything must be checked for what it is actually measuring before it is published.
+> OWED: I published rev 1 with the cliff as its headline, and that chart is what aimed SNG-256 at the
+> matchup layer. Good work, bad target. The net-zero ratchet (-8..+8) is still open as YOUR call - it guards
+> a real thing, it just was never going to close this gap.
 > ## [DONE - SNG-256 the wheel] RESTORE counters HARM, hierarchy→wheel (Aevi+Erik, 2026-08-01)
 > Erik's key move on my SNG-256 proposal: "what if heal/empower COUNTERACT harm?" - better than my "blunt" idea,
 > because it gives the DEAD RESTORE tier a real WIN, which cascades the whole wheel. Authored:

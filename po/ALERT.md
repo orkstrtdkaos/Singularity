@@ -1,6 +1,29 @@
 # PO ALERT
 
-> ## [RULING - coherence is REALISM, not the balance lever] answering CCODE-60 (Aevi, 2026-08-02)
+> ## [SNG-263 r3 - the damage ladder + a FIND that shrinks the job] (Aevi, 2026-08-02)
+> **THE FIND (changes the authoring shape, for the better): all 285 crafts ALREADY carry a full rank `tree` —
+> per-rank `name` / `grants` / `cannot`** (read by `skilltree.js rankExpression`). Erik was right that "some rank
+> descriptions make the skills sound more powerful" — and the escalation is **NOT uniformly damage**:
+>   · `radiance` r2 *"strip every concealment AT ONCE"* = **AREA**; r3 *"revelation at scale… before a people"*
+>     = **SCALE + qualitative**
+>   · `the_long_reach` r3 *"distance ceases to reduce your effectiveness"* = **RANGE/penalty-removal, no damage
+>     change at all**
+>   · `the_appetite_strike` — all ranks escalate **WHAT is hit** (qualitative targeting), not magnitude
+> **So a flat d6/d6+1/d6+3 on every craft would CONTRADICT the authored text on most of the catalog.** The
+> mechanic must be **DERIVED FROM the existing `grants` text**. That makes the job smaller and better-defined:
+> **read what each rank already promises, and give that promise a number.** The text IS the spec.
+> **THE LADDER (Erik's d6, checked vs the 5hp anchor):** r1 `d6` avg 3.5 → kills in 2, one-shots 33% — **very
+> close to right**. `d6+3` at r3 one-shots **83%** — too hot, erases the 2-3-hit feel at the same tier.
+> **RECOMMENDED (the D&D idiom Erik asked for — TIER adds DICE, RANK adds a small flat bonus, which maps exactly
+> onto his own §8):** T-I **`1d6` / `1d6+1` / `1d6+2`** · T-II **`2d6`** (the clean double) · T-III **`3d6+2`**
+> (more than a third doubling) · T-IV/V **dice PLUS a special ability**.
+> **AND: a rank may spend its increment on a DIFFERENT AXIS** — `the_long_reach` r3 buys RANGE, `radiance` r2
+> buys AREA. **Each rank's increment goes to the axis its own `grants` text names.** That's the per-craft audit.
+> Also flagged: **`cannot` text is mechanical intent too** — it should BOUND the effect, not decorate.
+> **ERIK:** (1) sign off the ladder (or give your numbers); (2) **what "SPECIAL" means at T-IV/V** — still the
+> biggest unknown (54 crafts), now clearly framed: the rank text at those tiers ALREADY reaches qualitative
+> ("a beam that ends the unendurable"), so 2-3 worked examples from you would set the register for the rest.
+> Full: SPEC_SNG-263 r3.> ## [RULING - coherence is REALISM, not the balance lever] answering CCODE-60 (Aevi, 2026-08-02)
 > CCode's finding is correct and important: SNG-257 and SNG-262 are BOTH right and pull the spread opposite ways
 > (11.8 → 8.1 → 11.5); mason/wright moved warrior-home → maker-home and lost 8.3 on their own build. His
 > framing — *"coherence can't be both the realism target and the balance lever"* — is exactly right, and the

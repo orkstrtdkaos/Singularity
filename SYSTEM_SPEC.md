@@ -162,6 +162,37 @@ index.html ──> app.js  (all UI, screens, creation, play loop, sidebars, whee
 
 ## 4. Character & Resolution (the numbers)
 
+### 4a. The skill roll — every term, at a glance (the reference table)
+You roll **d100 (1–100)**; you succeed if **roll ≤ your success chance**. Success chance is the sum of these
+named terms (every term is a labelled, self-summing line — SNG-106; the engine never hides a modifier):
+
+| Term | What it is | Value | Note |
+|---|---|---|---|
+| **Attribute** | Your score in the craft's TAGGED attribute × 20 (through soft-cap 4), +5/pt beyond | attr4 = **80** | The dominant term. **This is "coherence": the roll uses the attribute the CRAFT is tagged with, so a kit that matches your build's high attribute rolls strong.** ⚠️ SNG-258 §1: too dominant — tuning. |
+| **Skill** | Trained level in a specific skill × 10 | skill3 = +30 | ⚠️ SNG-258 §2: flat today; should reward USE. |
+| **Ability rank / tier** | The craft's own tier × 5 | T3 = +15 | ⚠️ SNG-258 §3: flat "+15 just because"; should scale. |
+| **Spectral fit (you)** | How your ALIGNMENT matches the craft × 15 | ±0…15 | Clamped with place, total ±25. SNG-258 §4: popup must say WHY. |
+| **Spectral fit (place)** | Whether the LOCATION favours the working × 10 | ±0…10 | " |
+| **Equipment** | Best matching wielded item (best ONE only) | +5, cap 10 | SNG-258 §7: make which-gear-helps obvious + equip-for-skill link. |
+| **Companion** | A relevant companion present | +5, cap 10 | |
+| **Aptitude** | Innate build bonuses (physical/mental/social/finesse) | small | SNG-258 §5: earn-counter so decay slows; popup names them. |
+| **− Difficulty** | The action's difficulty band | 0 / −15 / −30 | |
+| **− Exhaustion** | At 0 energy | −10 | |
+| **− Substrate penalty** | Ability actions, when out-of-band | −N | SNG-258 §6: should be IDEAL-POINT (bonus in-band), not always a penalty; transparent before use. |
+| **Novel −15 / Discovery +20** | Improvising the unknown (−) vs a known discovery (+) — a REPLACEMENT, not a stack | −15 or +20 | A 35-pt swing once a technique is yours. |
+
+**Then, in a CONTEST** (both sides roll; the margin between the two stacks decides): **matchup** (rock-paper-scissors, SNG-254), **intensity** (conserve/standard/surge), **woven** craft, **momentum**, **setup** ("you read them first"), **standing effects** (a bind on you −, a ward you raised +). All are named contest-mods added to the roll.
+
+**d100 degrees:** crit success ≤5 · success ≤chance · partial ≤chance+15 · failure · crit-fail ≥96 *(a "wild"/novel craft widens the crit band)*. ⚠️ SNG-258 §9: show these bands to the player.
+**Stack-before-clamp (CCODE-40):** all terms sum BEFORE the 95 ceiling for the CONTEST margin (so a −15 bind on a +35 vs +25 opponent reads as the true −5, not two clamped 95s); the ceiling still applies to your own DEGREE so any action can fail.
+
+> ⚠️ **SNG-258 (Erik's roll-math review) is open against this table** — the attribute term is so dominant that
+> above attr 4 everything else piles against the 95 ceiling and is wasted (base hits 80-90 trivially). The full
+> overhaul (curve re-weight, skill-use tracking, tier scaling, the transparency popup, substrate ideal-points,
+> gear equip-links, aptitude counters, out-of-encounter standing effects, visible crit bands) + a sensitivity
+> tool to tune it on data lives in `po/SPEC_SNG-258_roll_math_overhaul.md`. The numbers below are HEAD; SNG-258
+> is the pending revision.
+
 - **Sub-attributes (8):** strength/agility · reason/insight · presence/rapport · craft/wits. Creation: 12 points across 4 parents (1–4) + 2 specialise points. Cap 20.
 - **Chance** = attr contribution + skill×10 + abilityRank×5 + spectrum fit (alignment×15 + location×10, clamped ±25) + equipment (**best matching item only**, cap 10 — §15) + companion (+5/relevant, cap 10) + aptitude mods − difficulty (0/15/30) − exhaustion (−10 at 0 energy) − **novel surcharge (−15)** *or* **+ discovery bonus (+20)** − **substratePenalty (§9b, ability actions only — 0 if within band or no ability)**. **Clamped 5–95.**
   - **Attr contribution: ×20/point through soft cap 4, +5/point beyond** — mastery buys power against hard rolls without trivialising easy ones.

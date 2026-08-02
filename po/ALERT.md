@@ -1,6 +1,23 @@
 # PO ALERT
 
-> ## [SPEC - SNG-259b level-tier reset] "legendary at 7" fix (Aevi, 2026-08-02)
+> ## [SPEC - SNG-260 tiers+pacing+breadth, from SAVE DATA] (Aevi, 2026-08-02)
+> Erik gave 3 interlocking things + real playthrough data. Read the actual saves:
+> - **Silas L29, 36 crafts, 27 still RANK 1** (breadth without depth) = "just becoming heroic"; **Cellaceron
+>   L11, 9 crafts** = "adept-to-master". Full game = 3-5 arcs ~**L100**. This is the calibration.
+> - **§A TWO PARALLEL SPECTRUMS (Erik's reconciliation):** player novice/adept/master/heroic/legendary +
+>   opponent riffraff/notable/regional/epic/legendary stay SEPARATE but map onto ONE powerBand scale (no big
+>   rename - a band layer UNDER both label sets so they can't drift; legendary shared at top). This is what 259b
+>   needed.
+> - **§B recalibrate bands to ~L100** on the save anchors. TENSION for Erik: Silas L29 reads "heroic" but that
+>   may be his STORY role, not power-tier (L29 could be entering MASTER). Reconcile the number to the feel.
+> - **§C breadth cap ALREADY EXISTS** (skill_capacity.json skillsKnownByLevel, enforced atCapacity, shown in UI)
+>   but is LINEAR (level+1) so it barely caps (101 crafts at L100 - why Silas has 36). GOAL: base crafts-per-tier
+>   tuned so KIT DIFFERENTIATES you (can't learn most of the game); braids/discoveries/grants ALWAYS on top
+>   (already bypass the cap). METHOD Erik asked for: sweep BREADTH-vs-depth with synthetic chars, find N where
+>   effective-but-specialized, flatten the curve (legendary ~12-18 chosen crafts not 40).
+> ABSORBS 259+259b onto one powerBand. CCODE: build the breadth-vs-depth sweep (unblocks §C) + the powerBand
+> layer under the two label sets. ERIK: band cuts (esp. where heroic starts) + breadth targets once the sweep
+> lands. Full: SPEC_SNG-260.> ## [SPEC - SNG-259b level-tier reset] "legendary at 7" fix (Aevi, 2026-08-02)
 > Erik: reset the levels we call master/heroic/epic/legendary - not 7 anymore. VERIFIED tierForArc (legends.js:51)
 > is the canonical mapping and it's BOTH stale AND underbuilt: level>=7 legendary / >=4 regional / else riffraff -
 > only 3 bands, skips notable+epic, and 7 is absurdly low vs the real economy (rank3+top-tier at L5, CAPSTONE at

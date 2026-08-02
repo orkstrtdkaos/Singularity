@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Singularity \u2014 an AI-GM narrative RPG (pure ES modules on GitHub Pages, no build step).",
   "scripts": {
-    "test": "node tests/smoke.mjs && node tests/parse_probe.mjs && node tests/content_ci.mjs && node tests/balance_sim.mjs && node tests/skill_battle_sim.mjs && node tests/contest_sim.mjs && node tests/growth_sim.mjs && node tests/tradition_matrix.mjs && node tests/wiring_audit.mjs && node scripts/engine_map.mjs --check",
+    "test": "node tests/smoke.mjs && node tests/parse_probe.mjs && node tests/content_ci.mjs && node tests/balance_sim.mjs && node tests/skill_battle_sim.mjs && node tests/contest_sim.mjs && node tests/growth_sim.mjs && node tests/tradition_matrix.mjs && node tests/roll_sensitivity.mjs && node tests/wiring_audit.mjs && node scripts/engine_map.mjs --check",
     "engine-map": "node scripts/engine_map.mjs",
     "smoke": "node tests/smoke.mjs",
     "parse": "node tests/parse_probe.mjs",
@@ -14,6 +14,7 @@
     "contest-sim": "node tests/contest_sim.mjs",
     "growth-sim": "node tests/growth_sim.mjs",
     "matrix": "node tests/tradition_matrix.mjs",
+    "sensitivity": "node tests/roll_sensitivity.mjs",
     "live": "node tests/live_gm_suite.mjs"
   }
 }

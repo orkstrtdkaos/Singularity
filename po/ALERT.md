@@ -17,6 +17,44 @@
 > - **§4c anchor DECIDED:** tradition alignment stays a BASE, but MUCH can be moved to another area through
 >   INTENTIONAL action - a real home you can genuinely relocate FROM, not a wobble around a fixed point.
 > CCode owns every HOW. §11 is the big foundational one. Full: SPEC_SNG-258 §4d/§4e/§11.> ## [DECIDED - Erik] SNG-258 §4c alignment DRIFTS (Aevi, 2026-08-02)
+> ## [CCODE-59 - SNG-258 SENSITIVITY TOOL BUILT + FIRST READ - CCode, 2026-08-02] The tool says 12; and the floor wastes points just like the ceiling
+> Write-up: `po/results/20260802_CCODE-59_SNG-258_sensitivity_tool.md`. `npm run sensitivity`, wired into
+> `npm test`, `--json` for charts. Full suite green by exit code. **IT CHANGES NO CONSTANTS** - reads the
+> shipped ones and reports, exactly as Aevi specced ("runs BEFORE any constant changes ship").
+> HOW: it sweeps the REAL `successChance` from engine/resolve.js by handing it a MUTATED COPY of the rules
+> JSON. It does not reimplement the formula - a sensitivity tool with its own version of the math would hand
+> Erik confident dials for an engine that does something else.
+> ERIK'S FINDING CONFIRMED, AND WORSE THAN STATED: **the FLOOR wastes points exactly like the ceiling.** A
+> novice vs a regional threat is at 5% whatever they carry; a master below the notable band is at 95%
+> whatever they carry. **Only 60% of the grid is in the LIVE BAND** - the range where any term other than
+> attribute changes an outcome at all. At the shipped x20, **a rank of ability delivers 2.9 of its nominal 5
+> points (58%)**, and attribute is **72.7% of everything working in a character's favour**.
+> §1 - THE TOOL'S ANSWER IS **MULTIPLIER 12**: a rank delivers 3.6, 68% of the grid live, attribute down to
+> 62.8% of the budget, master still beats novice by 60.6pts. That lands squarely inside Aevi's stated goal
+> ("attribute ~50-60% of a strong chance, not 100%"). The ladder never collapses anywhere in the sweep -
+> asserted, not eyeballed. ERIK: this is your dial; the data is now there to turn it on.
+> §3 - A BIGGER FLAT TIER BONUS IS NOT THE ANSWER: tripling it (5->15) buys 10.8 delivered points and pushes
+> another 20% of the grid into the ceiling (nominal 45 -> delivered 19.5). **That is the evidence for Aevi's
+> §3 design call** - tier must buy a WIDER BAND (reach/crit/partial), not flat points that clamp away.
+> >> §3b - A DEFECT WORTH NAMING, AND A SEQUENCING CONSTRAINT. Expert and master sit at chance 95 and
+> crit-failure starts at 96, so **there is NO ROOM between their success line and the crit-fail line. A
+> master's miss is never a PARTIAL - it is a CRITICAL FAILURE.** Widening the band moves them 0.0% at ANY
+> width (10/15/20/25/30 all measured). So today **expertise makes failure MORE binary** - the exact inverse
+> of §3b's goal. CONSEQUENCE: **§3b cannot be solved by the band alone.** While mastery pins at the ceiling
+> there is nowhere for a partial to live, so §3b is BLOCKED BEHIND §1. That agrees with Aevi's build order
+> rather than fighting it, but it should be stated: the band is not an independent dial.
+> INVARIANTS asserted at EVERY setting (not just the shipped one): every named component sums to the
+> pre-clamp total (SNG-106 - the §4 popup can only be honest if this holds); competence is monotonic; no
+> non-finite chance; the shipped constants are inside the swept range so the report always states the status
+> quo; no swept multiplier flattens master into novice.
+> §4b ALIGNMENT FINDING CONFIRMED FROM THE ENGINE SIDE: `successChance` reads `character.alignment` directly
+> and NOTHING anywhere writes to it after creation. Aevi's read is exact - it is a creation-time vector, and
+> the popup will have to explain a number the player has had no way to influence. That makes the "does it
+> drift" call (Erik's) more load-bearing than a transparency ticket usually is.
+> NEXT (per Aevi's order): §4/§4b the roll-math popup is mine and I'll start there. Blocked on Erik for §1
+> (the multiplier) and therefore for §3b.
+> ## [SPEC r2 - SNG-258 follow-ups, GOALS-FIRST] (Aevi, 2026-08-02)
+> ## [DECIDED - Erik] SNG-258 §4c alignment DRIFTS (Aevi, 2026-08-02)
 > Erik: yes, alignment should drift. GOAL: who a character IS on the world's spectrums is shaped by what they
 > repeatedly DO - identity earned by action (same spine as skill-use §2 / aptitude §5). Because spectral fit
 > reads off alignment, a committed path literally gets EASIER (better fit) - a virtuous loop rewarding

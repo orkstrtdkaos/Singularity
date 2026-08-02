@@ -290,15 +290,11 @@
    "note": "SNG-254 (Aevi 2026-08-01): the function MATCHUP MATRIX. edges[attacker][defender]=signed bonus for attacker. Only the MARGIN (my edge minus theirs) decides a round, so a pair must be ASYMMETRIC to do anything - equal-both-ways cancels to a no-op (the SNG-254b inert-pair fix). KNOW sees through INFLUENCE (reveal>deceive/conceal, foresee>the telegraphed strike); BREAK/OPEN break defenses (break>shield/ward, break>bind); BIND/HINDER lock the mobile but a seer breaks free (reveal/foresee>bind, foresee>hinder); DECEIVE beats the aimed but a reader sees through; TRACK/CONCEAL LEAN to the hider (conceal>track slightly - not a cycle, a lean; a true cycle would need a third verb A>B>C>A); SUSTAIN outlasts a burst (sustain>break). Range ~-3..+4; PROTECT blunted. Relationships are the design; magnitudes tunable.",
    "edges": {
     "strike": {
-     "heal": 2,
-     "mend": 2,
-     "restore": 2,
-     "empower": 2,
      "reveal": 2,
      "foresee": -2,
      "track": 2,
-     "make": 2,
-     "summon": 2,
+     "make": 1,
+     "summon": 1,
      "bind": 1,
      "command": 1,
      "conceal": 1,
@@ -308,24 +304,24 @@
      "sustain": 2
     },
     "break": {
-     "shield": 3,
+     "shield": 2,
      "ward": 3,
      "resist": 2,
-     "make": 3,
-     "summon": 2,
+     "make": 1,
+     "summon": 1,
      "transform": 1,
-     "bind": 2,
-     "heal": 1
+     "bind": 2
     },
     "hinder": {
-     "move": 3,
-     "travel": 3,
-     "open": 2,
-     "empower": 2,
+     "move": 1,
+     "travel": 2,
+     "open": 1,
+     "empower": 1,
      "heal": 1,
      "restore": 1,
      "track": 2,
-     "summon": 1
+     "summon": 1,
+     "mend": 1
     },
     "empower": {
      "strike": 1,
@@ -344,7 +340,7 @@
      "hinder": 1
     },
     "reveal": {
-     "deceive": 3,
+     "deceive": 1,
      "conceal": 3,
      "bind": 1,
      "command": 1,
@@ -352,11 +348,11 @@
      "make": 1
     },
     "foresee": {
-     "strike": 3,
-     "break": 2,
+     "strike": 1,
+     "break": 1,
      "hinder": 1,
      "command": 2,
-     "deceive": 2,
+     "deceive": 1,
      "summon": 1,
      "transform": 1
     },
@@ -382,13 +378,15 @@
      "strike": -1
     },
     "bind": {
-     "move": 3,
+     "move": 2,
      "travel": 3,
      "strike": 2,
      "break": 1,
-     "summon": 2,
-     "reveal": -2,
-     "foresee": -2
+     "summon": 1,
+     "foresee": -2,
+     "heal": 2,
+     "mend": 1,
+     "restore": 2
     },
     "command": {
      "strike": 2,
@@ -396,10 +394,13 @@
      "make": 1,
      "summon": 1,
      "resist": -2,
-     "reveal": -1
+     "reveal": -1,
+     "heal": 2,
+     "restore": 1,
+     "foresee": 1
     },
     "deceive": {
-     "strike": 2,
+     "strike": 1,
      "track": 1,
      "command": 1,
      "reveal": -3,
@@ -412,7 +413,7 @@
      "foresee": 1
     },
     "move": {
-     "strike": 2,
+     "strike": 1,
      "break": 1,
      "summon": 1,
      "track": -2,
@@ -434,6 +435,17 @@
      "break": 1,
      "hinder": 2,
      "empower": 1
+    },
+    "heal": {
+     "strike": 2,
+     "break": 1
+    },
+    "mend": {
+     "strike": 1,
+     "break": 1
+    },
+    "restore": {
+     "strike": 1
     }
    },
    "defensiveFunctions": [

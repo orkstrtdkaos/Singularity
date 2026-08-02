@@ -174,7 +174,8 @@ named terms (every term is a labelled, self-summing line — SNG-106; the engine
 | **Spectral fit (you)** | How your ALIGNMENT matches the craft × 15 | ±0…15 | Clamped with place, total ±25. SNG-258 §4: popup must say WHY. |
 | **Spectral fit (place)** | Whether the LOCATION favours the working × 10 | ±0…10 | " |
 | **Equipment** | Best matching wielded item (best ONE only) | +5, cap 10 | SNG-258 §7: make which-gear-helps obvious + equip-for-skill link. |
-| **Companion** | A relevant companion present | +5, cap 10 | |
+| **Companion** | A relevant companion present | +5, cap 10 | SNG-258 §10: one of the ENVIRONMENTAL EFFECTS family. |
+| **Environmental / prepared ground** | Wards you set in advance, carried-item auras, companion presence — effects attached to the PLACE/situation | ±N | SNG-258 §10: establishable before a fight, CONTESTABLE (take out the wards first, or fight through them), transparent before you engage. |
 | **Aptitude** | Innate build bonuses (physical/mental/social/finesse) | small | SNG-258 §5: earn-counter so decay slows; popup names them. |
 | **− Difficulty** | The action's difficulty band | 0 / −15 / −30 | |
 | **− Exhaustion** | At 0 energy | −10 | |

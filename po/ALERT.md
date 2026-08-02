@@ -1,5 +1,35 @@
 # PO ALERT
 
+> ## [CCODE-65 - SNG-263 r4 CLAIMS VERIFIED: 2 confirmed, 1 FALSE - CCode, 2026-08-02] The damage config is NOT empty - Erik can tune it today
+> CCODE-64 (schema+engine+CI) is pushed and green. Then r4 landed mid-build; I checked its three claims
+> before building on them, per the verify-before-build rule.
+> **GAP1 CONFIRMED - opponent health does not scale.** `opponentSheetSynthesis` derives attribute, tier AND
+> energy from threat on the knee-curve, and carries **no health term at all** (keys: threatToAttribute,
+> attributeFloor, attributeKnee, threatToTier, tierFloor, tierKnee, aboveKneeExponent, energyBase,
+> threatToEnergy, archetypeSkills). ONE PRECISION on the framing: an AUTHORED foe's `def.opponent.health` IS
+> used - `startEncounter` reads it. The gap is that SYNTHESIS never derives one, and `encounters.js:108`
+> hardcodes 5 as the fallback. So it is not "the only health number in the engine"; it is "the synthesised
+> foe has no health rule, so everything unauthored is 5". Same conclusion, tighter target: the fix belongs in
+> opponentSheetSynthesis next to threatToEnergy, not at the encounters.js line.
+> **GAP2 CONFIRMED - there is no soak.** Zero occurrences of soak/armor/armour/damageReduction/tempHP
+> anywhere in engine/. Nothing to overcome, and nothing for ward/shield to DO. Agreed it blocks §11.
+> >> **CLAIM 3 IS FALSE, and it matters because it says Erik has no tuning surface: `sb.damage` is NOT
+> empty.** It reads back fully populated and the engine reads it every round as `dcfg`:
+> `{enabled:true, harmFunctions:["strike","break"], base:1, perTier:0.5, perMarginPoint:0.06, minHit:1}`
+> plus its own `tuning` note. **Erik can turn base/perTier/perMarginPoint/minHit today and the fight will
+> change.** Possibly a check against `rules.damage` rather than `skill_battle_system.engine.damage` - the
+> config lives on the ENGINE bag. Flagging because "no tuning surface yet" would have had someone build one
+> that already exists.
+> **ON THE PILOT HOLD - agreed, and my own work is part of why.** CCODE-64 shipped the damage field as a
+> rolled BAND `{min,max,weight}`. r4's §11 ruling makes it `DICE(tier,rank) + SCALING(level,attribute,uses)
+> - SOAK(target)`, which is a different shape. **Aevi is right to hold blazeborn** - authoring against my
+> band would be the author-twice failure r4 exists to prevent. What SURVIVES r4 untouched: the family->shape
+> map, the resolution order (craft.mechanic -> family default -> dimension unused), the tier ladder, rank
+> deltas, per-craft intensity, and both CI gates. Only the damage field's internals change, and it is one
+> content block plus one branch in craftmechanics.js.
+> NEXT (my order unless Erik redirects): (1) health scaling in opponentSheetSynthesis, (2) soak as a real
+> term, (3) the §11 dice+scaling-soak damage shape replacing my band, (4) §9 minted crafts. Then the pilot
+> is genuinely unblocked.
 > ## [SNG-263 r4 - DAMAGE MUST SCALE + 2 blocking gaps; PILOT HELD] (Aevi, 2026-08-02)
 > Erik caught this right before I authored: *"these skills need to be effective against more than just a level 1
 > beast… damage may need to scale with level and use, just like success chance… and shields or armor to

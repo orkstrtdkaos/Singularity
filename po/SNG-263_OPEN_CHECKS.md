@@ -30,6 +30,10 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
    · `shatterpoint` r3 ↔ `resonant_shield` (a harmonic counters its own tradition)
 6. **LIGHT-ABSORPTION** *(bestiary: the_bright_devourer heals from light-family crafts)* — needs a
    damage-type/affinity concept the engine doesn't have.
+6b. **GUARD `autonomy` FLAG** *(the_mechanical_defense r2)* — its whole rank-increment is that the defence
+   *"holds without constant attention — works while you work on something else."* Four defensive logics now
+   exist (BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU) and the fourth needs a field: **does holding this cost your
+   action?**
 
 ---
 ## B. CONTENT DEFECTS FOUND WHILE AUTHORING (Aevi to fix / CCode to guard)
@@ -43,9 +47,11 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
 
 ---
 ## C. THINGS THE CATALOG ALREADY SOLVED (wiring, not authoring — worth not re-inventing)
-10. **PRECURSOR STAGING is largely already written** *(SNG-261 §B)* — two independent in-catalog hooks:
-    `prism_sight` r3 sees *"the seams of Precursor work"*; `echo_memory` r3 hears *"what a Precursor mechanism
-    last said."* Two traditions give players precursor CONTACT without new content. Needs wiring.
+10. **PRECURSOR STAGING is already written — now FIVE hooks across THREE traditions** *(SNG-261 §B)*:
+    `prism_sight` r3 *"the seams of Precursor work"* · `echo_memory` r3 *"what a Precursor mechanism last
+    said"* · `mech_sense` r3 *"the Precursor works do not confess — they only answer, and only sometimes"* ·
+    `command_engine` r2 *"a Precursor door that still half-listens"* · `enginecraft` r2/r3 *repair, repurpose,
+    and command whole Precursor installations*. **§B does not need new content. It needs wiring.**
 11. **§3b CRIT-FAILURE TEXT is already authored, craft by craft** — `riding_order` *"miss it and you've only
     made chaos"*; `probability_tilt` *"the world balances its books"*; `the_long_odds` *"it fails hard."*
     **CCode should mine these when building the crit dial** rather than inventing failure text.
@@ -80,3 +86,23 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
     energetic one (`the_last_light`) — same word, different reason. Might warrant different copy.
 19. A sanity check on the HARD/SOFT/COST split — particularly any HARD bound that should be SOFT. (Erik has
     already corrected one: the no-harm call.)
+
+---
+## F. PATTERNS WORTH KEEPING (observations, not tasks)
+20. **To find an axis's real content, read its two T-I SENSE-CRAFTS.** Four antipode pairs authored, four times
+    the geometry was carried by the pair of T-I senses (order_sense/chaos_sense · lifesense/deathsense ·
+    mech_sense/numen_sense · and the light pair). Reliable authoring signal.
+21. **The ring FENCES ITSELF, without cross-referencing.** `the_self_mending_work` "cannot mend the living, ONLY
+    THE MADE" exactly mirrors rootkin's `the_green_road` "cannot cross the dead or THE MADE" — two traditions on
+    DIFFERENT axes each walling themselves off from the other's material, with no reference to each other. The
+    geometry is emergent in the prose, not imposed by the traditions file.
+22. **THREE traditions independently refuse coercion at the mechanical level** — `harmonic_voice` "cannot change
+    anyone's mind, only their temperature" · `steady_soul` "it opens the door, NEVER SHOVES" · the numinous
+    `the_weight_of_practice` "it cannot be faked." Traditions that never reference each other agree that
+    influence-craft stops short of control. **A values statement the mechanics must protect.**
+23. **The framework's philosophical spine runs through the crafts.** `latticework`: "order at full strength IS
+    the foreclosure" (causes it) vs `numenwork` r3: "keep a FORECLOSING thing open by significance alone"
+    (refuses it) — Erik's own definition of evil, authored into two crafts on different axes as cause and cure.
+24. **A tradition can contain its own antipode** — `shatterpoint` counters its own tradition's
+    `resonant_shield`; `the_dimmed_meaning` is the precise inverse of `numenwork`. Intra-tradition counters
+    exist alongside cross-tradition ones.

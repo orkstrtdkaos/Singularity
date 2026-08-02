@@ -1,6 +1,14 @@
 # PO ALERT
 
-> ## [SPEC r2 - SNG-258 follow-ups, GOALS-FIRST] (Aevi, 2026-08-02)
+> ## [DECIDED - Erik] SNG-258 §4c alignment DRIFTS (Aevi, 2026-08-02)
+> Erik: yes, alignment should drift. GOAL: who a character IS on the world's spectrums is shaped by what they
+> repeatedly DO - identity earned by action (same spine as skill-use §2 / aptitude §5). Because spectral fit
+> reads off alignment, a committed path literally gets EASIER (better fit) - a virtuous loop rewarding
+> commitment, legible identity from deeds. Design tensions NAMED for CCode (not solved): rate SLOW (felt over
+> sessions), tradition as a HOME you drift around but can leave under sustained contrary action, only YOUR chosen
+> actions drift you (not coerced), visible trajectory in the popup, fit-consequence is the FEATURE. CCode owns
+> the drift function/rate/anchor/storage. Sequences LATE (after roll-math core + §8/§10), likely its own ticket.
+> Full: SPEC_SNG-258 §4c.> ## [SPEC r2 - SNG-258 follow-ups, GOALS-FIRST] (Aevi, 2026-08-02)
 > Erik's meta-instruction taken: STATE THE GOAL, let CCode design the how (I've been over-specifying mechanics -
 > good correction). Three follow-ups appended to SPEC_SNG-258:
 > - **§3b:** tier AND practice widen the PARTIAL band, not just success - mastery reaches further AND fails

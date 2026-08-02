@@ -1,6 +1,31 @@
 # PO ALERT
 
-> ## [AUDIT DONE - the PromisedButUnread bug class] good news: ONE instance (Aevi, 2026-08-02)
+> ## [DONE - SNG-262 the OVER-coherence pass] the mirror of SNG-257 (Aevi, 2026-08-02)
+> Erik: some traditions are likely TOO coherent — audit and reallocate. He was right. 14 traditions sat at 100%,
+> and the test that matters is WHY: a pole coherent by NATURE is fine; a pole at 100% because crafts were
+> FLATTENED onto its theme is the same mistag bug in the opposite direction.
+> - **Legitimately pure (LEFT ALONE, 10):** blazeborn, cogitant, syllogist, veilwright, verist, figurist,
+>   seraphic, hourkeeper (mental — light IS revelation, falsehood IS mental construction, logic IS mental);
+>   threnodist, abyssal (social — emotion and appetite ARE social). Pure by nature, not by flattening.
+> - **OVER-flattened (4 fixed) — all were 100% PHYSICAL and shouldn't have been.** Same principle as SNG-257:
+>   **the attribute is the CRAFT'S ACTION, not the tradition's theme.** 20 reallocations:
+>     mason   100% → **67% practical** (concrete/material pole: thingcraft, sound_repair, the_near_way,
+>       keystone_blow, unmaking_of_walls = material CRAFT, not athletics. Kept stone_read mental (a real
+>       sense-read), the_set_word social (authority through standing), the_long_haul physical (endurance).)
+>     wright  100% → **70% practical** (creation pole: MAKING is craft-work — makecraft/raised_thing/
+>       true_making/reforging/masterwork/built_way. makers_eye → mental (a read); the_work_speaks → social.)
+>     horizon 100% → **70% physical** (travel IS physical; way_sense + the_land_knowledge → mental (reads);
+>       the_made_crossing → practical.)
+>     somatic 100% → **78% physical** (body pole, mostly correct already; body_read → mental,
+>       the_weight_of_presence → social.)
+> - **SELF-CORRECTION mid-pass:** my first mason edit OVERSHOT to 33% — I over-corrected into the exact scatter
+>   SNG-257 existed to fix. Pulled it back to 67% with 2-3 genuine outliers. Worth noting: the failure mode of an
+>   over-coherence pass is under-coherence, and the guard is the same target (~70-85% with a few real outliers).
+> CI green, verified at origin. **Design principle now symmetric: a pole has ONE home attribute plus a few
+> genuinely off-register crafts — neither scattered (SNG-257) nor flattened (SNG-262).**
+> CCODE: worth re-running tradition_matrix — mason/wright moving physical→practical shifts which BUILD plays
+> them (they become maker-home, not warrior-home), so the home-build map and the coherence/win-rate fit should
+> be re-measured.> ## [AUDIT DONE - the PromisedButUnread bug class] good news: ONE instance (Aevi, 2026-08-02)
 > Erik: use the precursor bug as a TYPE and find the rest. Swept the whole rules layer, five passes:
 > 1. **Background fields:** all 40 records carry only id/name/category/description/gmHint/affinity/
 >    grantsAptitudes. `grantsAptitudes` IS properly applied at creation (app.js:3303); `gmHint` is prose by

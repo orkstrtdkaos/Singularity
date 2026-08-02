@@ -570,7 +570,7 @@ const DEV_DIALS = [
   { path: "skillBattle.engine.opponentSheetSynthesis.threatToHealth", label: "foe: health per threat", step: 0.01, why: "how fast durability climbs with the band" },
   { path: "skillBattle.engine.opponentSheetSynthesis.threatToSoak", label: "foe: soak per threat", step: 0.005, why: "SNG-263 r4 GAP2 — how hard armour bites" },
   { path: "skillBattle.engine.opponentSheetSynthesis.soakBase", label: "foe: soak base", step: 1, why: "SNG-263: the flat floor under a foe's guard before threat scaling" },
-  { path: "craftMechanics.familyDefaults.guard.rank", label: "ward: guard rank raised", step: 1, why: "what RANK a ward/shield layer sits at — a craft must out-penetrate it to go through" },
+  { path: "craftMechanics.familyDefaults.guard.soakRank", label: "ward: guard rank raised", step: 1, why: "what RANK a ward/shield layer sits at — a craft must out-penetrate it to go through" },
   { path: "craftMechanics.familyDefaults.damage.dice.n", label: "craft: T-I damage dice", step: 1, why: "SNG-263 r4 — how many dice an unauthored T-I rolls; the tier ladder multiplies this" },
   { path: "craftMechanics.familyDefaults.damage.dice.d", label: "craft: T-I die size", step: 1, why: "the die's faces; the anchor is 'a T-I max can kill a peer riffraff in one blow'" },
   { path: "craftMechanics.familyDefaults.damage.plus", label: "craft: T-I flat bonus", step: 1, why: "added after the dice; the tier ladder adds its own on top from T-III" },

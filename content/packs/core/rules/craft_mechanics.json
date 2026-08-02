@@ -114,10 +114,11 @@
       "plus": 0
     },
     "guard": {
-      "magnitude": 2,
+      "soak": 2,
+      "soakRank": 1,
       "duration": 2,
-      "rank": 1,
-      "note": "reduces incoming harm by `magnitude` for `duration` rounds, as a layer of RANK `rank`. A craft whose penetration meets or exceeds that rank goes straight through it."
+      "magnitude": 2,
+      "note": "SNG-263: a ward raises a RANKED guard layer — it soaks `soak` for `duration` rounds at rank `soakRank`, and a craft must out-PENETRATE that rank to go through it. Field names follow the catalog: Aevi's resonant_shield authors `soak` + `soakRank` (and `magnitude` alongside), and her note ties soakRank 1 to radiant_lance r3 'beating a Harmonic shield's FIRST RANK' — the two traditions authored the counter-pair from both sides before the engine had it. `magnitude` is kept as an accepted alias so guard crafts authored either way resolve."
     },
     "hobble": {
       "magnitude": 2,
@@ -220,6 +221,7 @@
       "area",
       "targets",
       "soak",
+      "soakRank",
       "penetration",
       "magnitude",
       "setup",

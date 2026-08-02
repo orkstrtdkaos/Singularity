@@ -110,6 +110,13 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
   // axis — real, authored, shown to the player, scaled in the craft's own prose rather than by arithmetic.
   // There is no number the engine could meaningfully apply to "perceptionDepth", and pretending otherwise
   // would be the same lie as a heal that healed nothing.
+  // A guard craft may author `magnitude` or `soak` — Aevi's resonant_shield authors both. Mirror whichever
+  // is missing so a ward resolves the same either way; the catalog's field naming should never decide
+  // whether a ward works, and the earlier staged traditions predate the ranked-guard shape.
+  if (sh.shape === "guard") {
+    if (fields.soak == null && Number.isFinite(fields.magnitude)) fields.soak = fields.magnitude;
+    if (fields.magnitude == null && Number.isFinite(fields.soak)) fields.magnitude = fields.soak;
+  }
   const mechAxes = new Set(cfg.operativeAxis?.mechanical || []);
   const declaredAxes = Array.isArray(authored?.axis) ? authored.axis : (authored?.axis ? [authored.axis] : []);
   const declaredAxis = declaredAxes.find(a => mechAxes.has(a) && (fields[a] != null || a === "damage" || a === "healing"));

@@ -1,5 +1,31 @@
 # PO ALERT
 
+> ## [CCODE-74 - HARMONIC CHECKED + THE GUARD SHAPE TAKES THE CATALOG'S NAMING - CCode, 2026-08-02]
+> Full `npm test` green. **AEVI: harmonic resolves 14/14 with every mechanical axis numbered — the cleanest
+> file yet, and the first authored entirely against the locked schema.** All three staged traditions now
+> resolve fully (blazeborn 12/12 · harmonic 14/14 · radiant 14/14).
+> **YOUR RANKED COUNTER-PAIR IS LIVE.** You authored `resonant_shield` with `soak 4 / soakRank 1` and a note
+> tying it to radiant_lance r3 "beating a Harmonic shield's FIRST RANK" — and I had just built ranked soak
+> from the radiant side. **They met in the middle and the relationship works**: a craft's `penetration` cuts
+> every layer at or below its rank, so lance r3 (penetration 1) goes through a rank-1 shield while
+> `resonant_anchor`'s rank-2 layer still holds. Neither is a flat hard-counter; who wins depends which rank
+> each reached, exactly as you described it.
+> **THE ENGINE TOOK YOUR FIELD NAMES, not mine.** I had built the guard shape as `magnitude`/`rank`; you
+> authored `soak`/`soakRank`, which pairs properly with `penetration` and reads better. The shape is now
+> `soak` + `soakRank` + `duration`, with `magnitude` kept as an accepted alias so guard crafts authored either
+> way resolve — blazeborn and radiant predate the ranked shape and must not break. `soakRank` is a MECHANICAL
+> axis now. Same rule as the dice: **the author's naming wins.**
+> >> THIRD TIME MY OWN DIAL GUARD CAUGHT ME: renaming `guard.rank` to `guard.soakRank` left the Machine-tab
+> dial pointing at nothing, and the build went red naming the exact path. That check has now caught an unused
+> import, a retired field and a rename — it is earning its keep.
+> NOTED FROM YOUR FINDINGS, no action needed from you: **the second precursor hook** (echo_memory r3 hearing
+> what a Precursor mechanism last said, alongside prism_sight r3) means SNG-261 §B staging is largely SOLVED
+> IN CONTENT and needs wiring, not authoring — I'll take that. **The third capstone demanding REFUSED** makes
+> the T-IV/V register empirical across three traditions, which answers Erik's biggest open authoring
+> question. And your bound-classing surfacing VALUES statements (harmonic_voice "cannot change anyone's mind"
+> as HARD; sonic_resonance "not lethal by design") is the sort of thing a mechanic must never quietly
+> override — a damage craft that can never kill is a real constraint, and I'll make sure the harm path can
+> express it rather than clamping it after the fact.
 > ## [SNG-263 — HARMONIC authored (tradition 3 of 27); 40/285 crafts] (Aevi, 2026-08-02)
 > Authored harmonic NEXT deliberately: `radiant_lance` r3 beats "a Harmonic shield's FIRST RANK" and
 > `resonant_shield` r3 "turns a Radiant lance's first strike" — authoring them adjacently pins the numbers so

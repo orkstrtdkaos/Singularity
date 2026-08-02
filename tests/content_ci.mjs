@@ -903,13 +903,28 @@ for (const pack of PACKS) {
     }
   }
   {
-    const legal = new Set(cm.operativeAxis?.legal || []);
-    check("SNG-263 r4: the legal operative-axis list is authored (a craft may double on ITS axis, not all)",
-      legal.size >= 5 && legal.has("damage") && legal.has("area"));
-    const badAxis = crafts.filter(c => c.mechanic && Object.values(c.mechanic).some(m => m && m.axis && !legal.has(m.axis)))
-      .map(c => c.id);
-    check("SNG-263 r4: no craft declares an operative axis outside the legal set",
-      badAxis.length === 0, `crafts with an unknown axis: ${badAxis.join(", ")}`);
+    // Aevi's pilot corrected this check as much as it corrected the schema. The first version failed a craft
+    // for declaring an axis outside a closed list — and her 12 crafts named 18 axes, ten of them ones I had
+    // not imagined. The vocabulary is OPEN now, so the question is no longer "is this axis legal" but "if
+    // this axis is one the ENGINE computes, does it carry a number?" A named axis with prose is correct
+    // content, not a violation; a mechanical axis with no number is a promise the engine cannot keep.
+    const mech = new Set(cm.operativeAxis?.mechanical || []);
+    check("SNG-263 r4: the MECHANICAL axis subset is declared (the dimensions the engine can actually compute)",
+      mech.size >= 5 && mech.has("damage") && mech.has("duration"),
+      `mechanical axes: ${[...mech].join(", ")}`);
+    const emptyMechanical = [];
+    for (const c of crafts) {
+      for (const [verb, m] of Object.entries(c.mechanic || {})) {
+        const axes = Array.isArray(m?.axis) ? m.axis : (m?.axis ? [m.axis] : []);
+        for (const a of axes) {
+          if (!mech.has(a)) continue;                       // a named axis carries prose, and that is fine
+          const val = m[a] ?? (a === "damage" || a === "healing" ? m.dice : undefined);
+          if (val == null) emptyMechanical.push(`${c.id}.${verb}.${a}`);
+        }
+      }
+    }
+    check("SNG-263 r4: every MECHANICAL axis a craft claims carries a number the engine can act on",
+      emptyMechanical.length === 0, `claimed but empty: ${emptyMechanical.slice(0, 8).join(", ")}`);
   }
   check("SNG-263 §8: T-IV and T-V are flagged SPECIAL (they buy a KIND of ability, not a bigger number)",
     ladder["4"]?.special === true && ladder["5"]?.special === true);

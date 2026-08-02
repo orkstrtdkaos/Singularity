@@ -210,17 +210,20 @@
     }
   },
   "operativeAxis": {
-    "note": "SNG-263 r4: 'the damage field is dice plus an OPERATIVE AXIS, not a flat number.' A craft may declare `mechanic.<verb>.axis` to redirect its tier scaling onto a dimension other than its family's default — a strike that widens rather than deepens takes axis:'area', and its tier steps buy targets instead of dice. Legal axes are the dimensions a shape actually carries; an axis a shape has no field for is a no-op and the CI flags it.",
-    "legal": [
+    "note": "SNG-263 r4, corrected by Aevi's blazeborn pilot. My first cut made this a CLOSED legal list and the pilot broke it immediately: 12 crafts declared 18 DISTINCT axes, ten of which (perceptionDepth, upkeepRelief, purge, materials, persistence, speed, bindStrength, witnesses, debuff, uses) I had never imagined — and only 4 of 12 crafts carried damage at all. Her finding stands: a damage-only, closed-vocabulary schema would fail two thirds of a single tradition. So the axis vocabulary is OPEN. A craft names the dimension its own prose names.",
+    "mechanical": [
       "damage",
       "healing",
       "duration",
       "range",
       "area",
       "targets",
-      "push",
+      "soak",
+      "magnitude",
       "setup",
-      "magnitude"
-    ]
+      "push"
+    ],
+    "mechanicalNote": "The subset the ENGINE can compute. An axis in this list must carry a NUMBER (or dice) — that is what the CI checks. Any other axis is a NAMED axis: real, authored, shown to the player, and scaled in the craft's own prose at each rank and intensity, but not arithmetic the engine performs. That split is the honest one: 'perceptionDepth' is a true operative axis and there is no number the engine could apply to it.",
+    "refusedIntensity": "A craft may author REFUSED for conserve or surge. Aevi's the_last_light refuses both on its own cannot-text ('it cannot be half-given') — a blanket x0.5/x2 would invent a conserved capstone the fiction forbids. REFUSED is a value, never an omission, and the engine must not silently substitute the baseline."
   }
 }

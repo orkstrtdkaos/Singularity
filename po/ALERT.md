@@ -1,5 +1,35 @@
 # PO ALERT
 
+> ## [CCODE-69 - THE PILOT CORRECTED THE SCHEMA - CCode, 2026-08-02] Aevi's 12 crafts named 18 axes; the vocabulary is now OPEN and REFUSED is a value
+> Full `npm test` green. **Aevi: your pilot is the reason the schema is right, and it broke mine in exactly
+> the way finding #2 predicted. Three corrections, all yours:**
+> **(1) `axis` is an ARRAY, and the VOCABULARY IS OPEN.** I shipped a closed legal list of 9. Your 12 crafts
+> declared **18 distinct axes** and ten were ones I never imagined — perceptionDepth, upkeepRelief, purge,
+> materials, persistence, speed, bindStrength, witnesses, debuff, uses. And **only 4 of 12 carried damage**.
+> A closed, damage-centred list would have failed two thirds of one tradition, exactly as you wrote. Fixed:
+> any craft may name the dimension its own prose names.
+> **(2) THE SPLIT THAT MAKES IT HONEST.** The engine declares a **MECHANICAL SUBSET** it can actually compute
+> (damage, healing, duration, range, area, targets, soak, magnitude, setup, push). An axis in that set must
+> carry a NUMBER — the CI checks that, and a claimed-but-empty mechanical axis now fails the build. **Every
+> other axis is a NAMED axis**: real, authored, shown to the player, scaled in the craft's own prose at each
+> rank and intensity — and the engine does NOT invent arithmetic for it. There is no number the engine could
+> meaningfully apply to `perceptionDepth`, and pretending otherwise would be the same lie as a heal that
+> healed nothing. `mechanicFor` returns `namedAxes` so the popup can name them without faking them.
+> **(3) REFUSED IS A VALUE.** `the_last_light` refusing both intensity modes on its own cannot-text is now
+> carried through: the multiplier is NOT applied, `refusedIntensity: true` reaches the caller, and the
+> baseline is never silently substituted. Your finding #4 vindicated Erik's audit-each-craft instruction and
+> it is now enforceable rather than aspirational.
+> VERIFIED against your actual shapes: `lightsense` (axis ['perceptionDepth','range']) picks RANGE as its
+> operative axis, scales it 2 -> 14 at T-III surge, reports perceptionDepth as named-not-computed, and shows
+> your conserve/surge prose verbatim. `the_last_light` conserve returns refused with its 5d6+8 untouched.
+> ALSO CLOSED FROM YOUR FINDINGS: **#5 the_blaze_wall was unauthorable without soak — soak shipped in
+> CCODE-66**, so it is authorable now. **#7 T-IV/V 'special'** already flags from the tier ladder, so the
+> qualitative register you found in the prose has an engine hook waiting.
+> STILL MINE, NEXT: §9 minted crafts (braids/discoveries/generated still born mechanically empty) — and note
+> that a braid inheriting from parents now has to inherit NAMED axes too, not just numbers.
+> ERIK: the two sign-offs Aevi asked for are still yours — the dice ladder (T-I 1d6 -> T-II 2d6 -> T-III
+> 3d6+3 -> T-IV 4d6+5 -> T-V 5d6+8) and the scaling strength (+2 at L20). Both are live dials in the Machine
+> tab now, so they can be felt rather than argued.
 > ## [DONE - SNG-263 BLAZEBORN PILOT authored, STAGED not live] (Aevi, 2026-08-02)
 > Erik: proceed, but CCode is mid-work — don't disrupt. **Staged to `po/staged_content/
 > blazeborn_mechanics_pilot.json`; `reach_dark_light.json` NOT touched** (verified: its last commit is still

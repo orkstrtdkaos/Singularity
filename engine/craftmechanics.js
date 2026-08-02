@@ -75,7 +75,14 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
 
   const t = String(num(tier ?? ability?.levelReq, 1));
   const rung = cfg.tierLadder?.[t] || cfg.tierLadder?.["1"] || { mult: 1, special: false };
-  const iCfg = (authored?.intensity?.[intensity]) || cfg.intensity?.[intensity] || { mult: 1 };
+  // REFUSED is a VALUE, not an omission (Aevi's the_last_light "cannot be half-given"). A blanket x0.5/x2
+  // would invent a conserved capstone the fiction forbids, so a refusal is carried through to the caller and
+  // never silently replaced by the baseline.
+  const authoredIntensity = authored?.intensity?.[intensity];
+  const refused = typeof authoredIntensity === "string" && /^refused$/i.test(authoredIntensity.trim());
+  const iCfg = refused ? { mult: 1 }
+    : ((authoredIntensity && typeof authoredIntensity === "object") ? authoredIntensity : null)
+      || cfg.intensity?.[intensity] || { mult: 1 };
   // An authored per-rank delta wins. Otherwise the default DEEPENS, and it must COMPOUND with rank or
   // rank 2 and rank 3 resolve identically — which is the exact complaint (§3, Erik: "I can't tell how ranks
   // differ") reappearing inside the fix for it.
@@ -87,11 +94,19 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
       : null);
 
   // The operative dimension carries tier, intensity and a DEEPEN rank-delta. Everything else stays put.
-  // SNG-263 r4: a craft may declare its own OPERATIVE AXIS, redirecting tier scaling onto a dimension other
-  // than its family's default — a strike that widens rather than deepens takes axis:"area", and its tier
-  // steps buy targets instead of dice. "A craft doubles on ITS axis, not all axes" is Erik's rule; this is
-  // where it becomes real. An axis the shape carries no field for is ignored (and the CI flags it).
-  const declaredAxis = authored?.axis;
+  // SNG-263 r4: a craft declares its own OPERATIVE AXES, redirecting tier scaling off its family's default —
+  // "a craft doubles on ITS axis, not all axes" is Erik's rule and this is where it becomes real.
+  //
+  // Aevi's blazeborn pilot corrected the shape twice over: `axis` is an ARRAY (a craft has several), and the
+  // vocabulary is OPEN — her 12 crafts named 18 axes, ten of which I had never imagined (perceptionDepth,
+  // upkeepRelief, bindStrength, witnesses…), and only 4 of 12 carried damage at all. So: take the first axis
+  // that is both declared AND in the MECHANICAL subset the engine can compute. Everything else is a NAMED
+  // axis — real, authored, shown to the player, scaled in the craft's own prose rather than by arithmetic.
+  // There is no number the engine could meaningfully apply to "perceptionDepth", and pretending otherwise
+  // would be the same lie as a heal that healed nothing.
+  const mechAxes = new Set(cfg.operativeAxis?.mechanical || []);
+  const declaredAxes = Array.isArray(authored?.axis) ? authored.axis : (authored?.axis ? [authored.axis] : []);
+  const declaredAxis = declaredAxes.find(a => mechAxes.has(a) && (fields[a] != null || a === "damage" || a === "healing"));
   const op = (declaredAxis && (fields[declaredAxis] != null || declaredAxis === "damage" || declaredAxis === "healing"))
     ? declaredAxis : sh.operative;
   const scale = num(rung.mult, 1) * num(iCfg.mult, 1)
@@ -123,7 +138,11 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
     authored: !!authored,
     special: !!rung.special || !!authored?.special,
     rankDelta: rDelta ? { kind: rDelta.kind, ...(rDelta.dimension ? { dimension: rDelta.dimension } : {}) } : null,
-    intensityNote: authored?.intensity?.[intensity]?.note || null,
+    refusedIntensity: refused,
+    // the craft's OWN words for this intensity — what §4's popup must show before the player commits
+    intensityNote: (typeof authoredIntensity === "string" ? authoredIntensity : authoredIntensity?.note) || null,
+    // declared, real, and NOT arithmetic the engine performs — the popup names them, the engine doesn't fake them
+    namedAxes: declaredAxes.filter(a => !mechAxes.has(a)),
     fields
   };
 }

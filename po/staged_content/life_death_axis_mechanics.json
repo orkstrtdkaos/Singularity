@@ -1,0 +1,1243 @@
+{
+ "schemaVersion": 1,
+ "id": "life_death_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 6 AND 7 of 27 — ROOTKIN and ASHWARDEN, the life/death axis, authored together as an antipode pair (the method proven on lattice/churnfolk). They share reach_death_life.json. This is the most morally serious pair in the catalog and the bound-classing shows it: both traditions' HARD bounds are ethical limits, not power limits.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "rootkin": [
+   {
+    "id": "lifesense",
+    "tier": 1,
+    "functions": [
+     "reveal",
+     "track"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "range"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "range": 20
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "read the whole LIVING FIELD of a place — what thrives, what fails, what merely holds on",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "range",
+      "delta": "every living thing for a GREAT DISTANCE as one continuous fabric — and where it is TORN",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a quick read — half the range, no lingering",
+     "surge": "double the reach; at this depth you cannot stop feeling it"
+    },
+    "bounds": [
+     {
+      "text": "VIGOR, NOT IDENTITY — the barely-alive read faint",
+      "class": "hard"
+     },
+     {
+      "text": "it reports VITALITY, NOT VIRTUE — a thriving thing may be thriving on something terrible",
+      "class": "hard"
+     },
+     {
+      "text": "YOU CANNOT STOP FEELING IT — Rootkin at this depth grieve forests the way others grieve people",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "staunch",
+    "tier": 1,
+    "functions": [
+     "heal",
+     "sustain"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "stabilize",
+     "duration"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 1,
+      "d": 4
+     },
+     "plus": 2,
+     "duration": 2,
+     "note": "T-I healing, but the +2 is deliberate: staunch BUYS TIME reliably rather than mending much. Its own bound: 'buys time; does not mend.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "hold a MORTAL wound closed by will — buy HOURS where there were minutes",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: REFUSE A DEATH OUTRIGHT at the moment of bleeding — the body stops losing what it cannot spare",
+      "from": "r3 grants — refusal is a kind, not a bigger heal"
+     }
+    ],
+    "intensity": {
+     "conserve": "press the wound — half the hold, and it costs you nothing",
+     "surge": "double the hold; refusal costs you what it saves them"
+    },
+    "bounds": [
+     {
+      "text": "BUYS TIME; DOES NOT MEND",
+      "class": "hard"
+     },
+     {
+      "text": "the ALREADY-DEAD are past it",
+      "class": "hard"
+     },
+     {
+      "text": "HELD IS NOT HEALED — let go and the wound resumes exactly where it was",
+      "class": "hard"
+     },
+     {
+      "text": "refusal COSTS YOU WHAT IT SAVES THEM, and the Rootkin pay it gladly",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "quickening",
+    "tier": 2,
+    "functions": [
+     "heal",
+     "make",
+     "restore",
+     "sustain"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "healing",
+     "area"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 0,
+     "area": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "healing",
+      "delta": "pull the NEARLY-DEAD back if reached in time; REGROW what was lost (within reason); make barren ground bloom",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "area",
+      "delta": "LIFE AT FLOOD — mass healing, land quickened for a season, a body remade toward health. 'The Heartroot's power in miniature.'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "coax it — half the healing, and nothing grows past its right size",
+     "surge": "double it; QUICKENING DOES NOT KNOW WHEN TO STOP"
+    },
+    "bounds": [
+     {
+      "text": "NOTHING PAST DEATH'S THRESHOLD",
+      "class": "hard"
+     },
+     {
+      "text": "overuse tires the wielder fast",
+      "class": "soft"
+     },
+     {
+      "text": "A RETURN HAS A COST THE GM NAMES; the regrown is not always the same",
+      "class": "hard"
+     },
+     {
+      "text": "IT DOES NOT KNOW WHEN TO STOP — quickening can grow a thing past its right size",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_green_claim",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "strike",
+     "summon"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "area",
+     "control"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.02,
+     "area": 2,
+     "variance": 3,
+     "note": "lethal rung. variance 3 because its own bound says 'the growth is APPROXIMATE — it holds and hinders as much as it harms.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "area",
+      "delta": "the call goes WIDER — thorns across a passage, roots that trip a line, surging growth across a broader area",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the LIVING WORLD ITSELF treats something as named-as-threat at scale — the terrain becomes hostile to what you have claimed",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "call a little growth — half the reach, and it can be called off",
+     "surge": "double the claim; A CLAIM AT SCALE CANNOT BE CALLED OFF QUICKLY"
+    },
+    "bounds": [
+     {
+      "text": "the growth is APPROXIMATE — it holds and hinders as much as it harms",
+      "class": "hard"
+     },
+     {
+      "text": "WIDE RESPONSE IS SLOW RESPONSE — the Rootkin's force is not fast",
+      "class": "hard"
+     },
+     {
+      "text": "a claim at scale CANNOT BE CALLED OFF QUICKLY",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "bark_and_briar",
+    "tier": 2,
+    "functions": [
+     "resist",
+     "shield",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "soak",
+     "duration",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 4,
+     "soakRank": 2,
+     "duration": 3,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets+duration",
+      "delta": "WARD A SPACE with living growth — a thorn-wall, a grove-perimeter that turns intruders aside; the ward PERSISTS",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "deepen",
+      "axis": "soak",
+      "delta": "RESIST what would take hold in a lesser life — disease, poison, cold, a working aimed at you (soak against EFFECTS, not just impact)",
+      "from": "r3 grants — a different KIND of soak"
+     }
+    ],
+    "intensity": {
+     "conserve": "harden a little — half the soak, quick to invoke",
+     "surge": "double the bark; it is slow to invoke and FIRE IS ITS PARTICULAR ENEMY"
+    },
+    "bounds": [
+     {
+      "text": "slow to invoke",
+      "class": "soft"
+     },
+     {
+      "text": "A LIVING WARD CAN BE BROKEN — FIRE IS ITS PARTICULAR ENEMY",
+      "class": "hard"
+     },
+     {
+      "text": "RESILIENCE IS NOT IMMUNITY — very strong effects still land",
+      "class": "hard"
+     }
+    ],
+    "designNote": "'Fire is its particular enemy' — a FOURTH cross-tradition reference, this one naming blazeborn/radiant as the counter to rootkin's guard. The web keeps widening."
+   },
+   {
+    "id": "the_speaking_grove",
+    "tier": 2,
+    "functions": [
+     "command",
+     "reveal",
+     "track"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "reach",
+     "complexity"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 4,
+     "range": 30
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "complexity",
+      "delta": "ask MORE COMPLEX things; the forest TRACKS what has moved through it — query that track; an animal guides",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "reach",
+      "delta": "speak to the living world AT REGIONAL SCALE — the whole grove turns its attention toward you",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small request — half the reach, answered quickly",
+     "surge": "double the reach; AT THE PACE OF TREES — urgency is a concept the grove does not share"
+    },
+    "bounds": [
+     {
+      "text": "living things understand REQUESTS, NOT PLANS",
+      "class": "hard"
+     },
+     {
+      "text": "what the living world knows is SENSORY, NOT ANALYTICAL",
+      "class": "hard"
+     },
+     {
+      "text": "AT THE PACE OF TREES — urgency is a concept the grove does not share",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "the_root_road",
+    "tier": 2,
+    "functions": [
+     "move",
+     "open",
+     "reveal",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "range",
+     "access"
+    ],
+    "mechanic": {
+     "range": 6,
+     "push": 0,
+     "magnitude": 3,
+     "duration": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "access",
+      "delta": "OPEN passages that were not visible — a thicket parts, a root-arch forms, a way through impassable terrain appears",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: travel the ROOT-NETWORK ITSELF — move through the living web and emerge almost anywhere soil has held life",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "find the path — half the speed, and it stays open behind you",
+     "surge": "double the road; EMERGENCE TAKES TIME and you cannot choose exactly where"
+    },
+    "bounds": [
+     {
+      "text": "REQUIRES TERRAIN WITH LIVING THINGS — stone cities and blasted ground offer nothing",
+      "class": "hard"
+     },
+     {
+      "text": "the opened way CLOSES AGAIN",
+      "class": "soft"
+     },
+     {
+      "text": "EMERGENCE TAKES TIME and you cannot choose exactly where",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "graftlife",
+    "tier": 3,
+    "functions": [
+     "heal",
+     "transform"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "restoration",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 3,
+      "d": 4
+     },
+     "plus": 2,
+     "note": "T-III healing, damaging rung — the craft HURTS to receive"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "restoration",
+      "delta": "GRAFT living tissue that was not there — replace what was lost with what still grows",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: graft life into what was NOT ALIVE, or was no longer — bone to wood, a heart to a stopped chest. 'The near edge of the Rootkin's own taboo.'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small graft — half the restoration, and the body argues less",
+     "surge": "double the work; it costs the wielder deeply and THE GRAFT KNOWS IT IS NOT THE ORIGINAL"
+    },
+    "bounds": [
+     {
+      "text": "THE REGROWN IS NEVER QUITE THE LOST",
+      "class": "hard"
+     },
+     {
+      "text": "costs the wielder deeply",
+      "class": "cost"
+     },
+     {
+      "text": "THE GRAFT IS NOT THE ORIGINAL, AND IT KNOWS IT — the body argues with it",
+      "class": "hard"
+     },
+     {
+      "text": "this is the NEAR EDGE OF THE ROOTKIN'S OWN TABOO",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "quicken_the_ground",
+    "tier": 3,
+    "functions": [
+     "open",
+     "reveal",
+     "sustain"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "scope",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 6,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "hold the waking through a SCENE, and FEEL BACK along it — the roused current reports what is rooted near it",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "wake the current across a WHOLE ROOTED DISTRICT; ground once woken by you ANSWERS FASTER EVER AFTER",
+      "from": "r3 grants — a persistent relationship with a place"
+     }
+    ],
+    "intensity": {
+     "conserve": "wake a little — half the scope, and it settles quietly",
+     "surge": "double the waking; A DISTRICT ROUSED IS A DISTRICT AWAKE"
+    },
+    "bounds": [
+     {
+      "text": "it touches ONLY THE LIVING SUBSTRATE and answers only a true channel",
+      "class": "hard"
+     },
+     {
+      "text": "FEELING BACK IS NOT SEEING — presence and direction, never faces",
+      "class": "hard"
+     },
+     {
+      "text": "A DISTRICT ROUSED IS A DISTRICT AWAKE — what you wake, you have woken",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_last_gift",
+    "tier": 4,
+    "functions": [
+     "heal",
+     "restore",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "targets",
+     "dignity"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 1,
+     "targets": 1,
+     "note": "T-IV, lethal rung, SOCIAL attribute — the only social craft in rootkin"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "give the gift to SEVERAL at once — a room, a field after a fight — so none of them ends alone or unheard; THOSE ATTENDING SHARE IT",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-given last gift is worse than none; the hour is the whole of it.",
+     "surge": "REFUSED — it is already everything the craft has to give."
+    },
+    "bounds": [
+     {
+      "text": "IT DOES NOT POSTPONE DEATH — the gift is THE HOUR, not more hours",
+      "class": "hard"
+     },
+     {
+      "text": "THERE IS NO VERSION OF THIS THAT IS NOT A DECISION ABOUT SOMEONE ELSE'S ENDING",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A T-IV craft whose intensity is REFUSED on MORAL rather than energetic grounds — the first of its kind in the catalog. 'There is no version of this that is not a decision about someone else's ending' is the gravest HARD bound authored so far."
+   },
+   {
+    "id": "the_green_road",
+    "tier": 4,
+    "functions": [
+     "open",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "range",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 40,
+     "push": 0,
+     "magnitude": 6,
+     "targets": 1,
+     "duration": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "CARRY OTHERS along the green road — a party moves as one, rooted place to rooted place",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a short green road — half the distance, and it asks little",
+     "surge": "double the road; A LONGER ROAD CLAIMS YOU LONGER"
+    },
+    "bounds": [
+     {
+      "text": "it reaches ONLY WHERE LIFE RUNS UNBROKEN",
+      "class": "hard"
+     },
+     {
+      "text": "IT CANNOT CROSS THE DEAD OR THE MADE",
+      "class": "hard"
+     },
+     {
+      "text": "a longer road CLAIMS YOU LONGER",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'It cannot cross the dead or the made' — the rootkin's travel craft is walled off by exactly the two things ashwarden and enginewright own. The ring's geometry, again, authored into a bound."
+   }
+  ],
+  "ashwarden": [
+   {
+    "id": "deathsense",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "foresight",
+     "precision"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "range": 20
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "precision",
+      "delta": "sense not only THAT something is dying but HOW — the cause, the shape, roughly how long",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the dying stands PLAIN — cause, trajectory, and WHAT WOULD TURN IT ASIDE, if anything would",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glance at the failing — half the detail, no weight",
+     "surge": "double the read; KNOWING THE HOUR DOES NOT GIVE YOU THE POWER TO MOVE IT"
+    },
+    "bounds": [
+     {
+      "text": "reads the LIVING AND THE DYING, not the already-dead",
+      "class": "hard"
+     },
+     {
+      "text": "KNOWING THE HOUR DOES NOT GIVE YOU THE POWER TO MOVE IT",
+      "class": "hard"
+     },
+     {
+      "text": "SOME ENDINGS HAVE NO TURNING-ASIDE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Perfect antipode to rootkin's lifesense: both T-I mental reads, one of vigor and one of ending. Both have all-HARD bounds. The pattern from lattice/churnfolk repeats — a tradition's T-I sense-craft carries its epistemic conscience."
+   },
+   {
+    "id": "palework",
+    "tier": 2,
+    "functions": [
+     "foresee",
+     "hinder",
+     "strike"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "precision",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 2,
+     "scope": 2,
+     "note": "lethal rung, but NOT a damage shape: its work is EASING and READING. Note this is the craft the ContradictedByItsOwnTag sweep flagged (harmRung lethal vs text that denies killing) — the bound below is classed accordingly."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "precision",
+      "delta": "READ the physical evidence of death — what killed a ruin, what a plague did and WILL DO NEXT; halt a rot",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "grant endings AT SCALE — a battlefield eased, a plague stopped by stilling its front",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "ease one passing — half the scope, and it costs you little",
+     "surge": "double the scope; THE WIELDER DRIFTS DEATH-HOT"
+    },
+    "bounds": [
+     {
+      "text": "CANNOT KILL THE HEALTHY",
+      "class": "soft"
+     },
+     {
+      "text": "CANNOT BRING BACK",
+      "class": "hard"
+     },
+     {
+      "text": "the easing is A MERCY, REFUSABLE",
+      "class": "hard"
+     },
+     {
+      "text": "READING IS NOT UNDOING; some rots refuse a clean end",
+      "class": "hard"
+     },
+     {
+      "text": "the wielder DRIFTS DEATH-HOT; never raises, never forces a death that was not coming",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'Cannot kill the healthy' classed SOFT per Erik's no-harm reversal — this is the craft whose harmRung (lethal) contradicts its text, and the reversal says the tag wins. But 'cannot bring back' and 'a mercy, refusable' stay HARD: they are what the craft IS."
+   },
+   {
+    "id": "wither",
+    "tier": 2,
+    "functions": [
+     "break",
+     "hinder"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "scope"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.02,
+     "scope": 2,
+     "note": "damaging rung, but against MATERIAL only — see the HARD bound"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "age a STRUCTURE — a wall, a bridge, a barricade — decades in moments until it cannot carry what it was built to carry",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "wither AT RANGE AND AT SCALE — a field of crops, a fortification, a siege engine, a line of wooden shields",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "age one thing — half the effect, and it looks like ordinary wear",
+     "surge": "double the withering; at scale it takes fields and fortifications alike"
+    },
+    "bounds": [
+     {
+      "text": "it HASTENS WHAT WAS ALREADY GOING — sound new stone and fresh work resist",
+      "class": "hard"
+     },
+     {
+      "text": "WITHERING IS NOT BREAKING — the thing fails as things fail, structurally",
+      "class": "hard"
+     },
+     {
+      "text": "LIVING FLESH IS OUTSIDE IT AT EVERY RANK",
+      "class": "hard"
+     }
+    ],
+    "designNote": "'Living flesh is outside it at every rank' — explicitly HARD, and explicitly at EVERY rank. The catalog pre-empting the mastery question: no amount of practice turns wither on a person. Compare the_grey_hand, which does the opposite job."
+   },
+   {
+    "id": "the_grey_hand",
+    "tier": 2,
+    "functions": [
+     "hinder"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "weakening",
+     "range",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 3,
+     "range": 1,
+     "targets": 1,
+     "note": "incapacitating rung. r1 requires TOUCH"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "range+duration",
+      "delta": "weaken AT A DISTANCE, and HOLD it there — they do not recover while you attend",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "weaken a GROUP, or weaken one thing so thoroughly IT CANNOT STAND",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a light touch — half the weakening, and it fades on its own",
+     "surge": "double it; ATTENDING COSTS YOU CONTINUOUSLY"
+    },
+    "bounds": [
+     {
+      "text": "TOUCH at r1 — reaching a strong thing is the whole problem",
+      "class": "soft"
+     },
+     {
+      "text": "ATTENDING COSTS YOU CONTINUOUSLY — let go and it comes back",
+      "class": "hard"
+     },
+     {
+      "text": "IT NEVER KILLS AND NEVER WOUNDS — a Grey Hand that has done its worst leaves them alive",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "the_dread",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "hinder"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "fear",
+     "targets",
+     "variance"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 3,
+     "targets": 1,
+     "variance": 4,
+     "note": "SOCIAL attribute, incapacitating. variance 4 because its own bound says 'you do not get to choose HOW it acts on that'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "a ROOM, a line, a CROWD feels it at once — formations come apart",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "deepen",
+      "axis": "fear",
+      "delta": "they do not merely FEEL it — they KNOW it, with the Ashwarden's own clarity, AND THEY CANNOT UN-KNOW IT",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a chill — half the dread, and it passes",
+     "surge": "double it; A FRIGHTENED CROWD IS A STAMPEDE, and a stampede does not check who is in front of it"
+    },
+    "bounds": [
+     {
+      "text": "THE UNAFRAID ARE UNMOVED, and there are more of them than you think",
+      "class": "hard"
+     },
+     {
+      "text": "you do not get to choose HOW they act on it",
+      "class": "hard"
+     },
+     {
+      "text": "A FRIGHTENED CROWD IS A STAMPEDE",
+      "class": "cost"
+     },
+     {
+      "text": "SOME OF THEM WILL NEVER BE RIGHT AGAIN",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_grey_road",
+    "tier": 2,
+    "functions": [
+     "move",
+     "open",
+     "resist"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "access",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 4,
+     "push": 0,
+     "magnitude": 4,
+     "targets": 1,
+     "duration": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets+access",
+      "delta": "bring ONE PERSON through with you; open sealed doors, tombs, quarantine gates THAT THE DEAD HAVE PASSED BEFORE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "access",
+      "delta": "move through ANY space where death has been SUBSTANTIAL AND RECENT — battlefields, plague grounds, sealed necropolises",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a short passage — half the reach, and you go alone",
+     "surge": "double the road; SUBSTANTIAL AND RECENT — an old meadow death offers nothing"
+    },
+    "bounds": [
+     {
+      "text": "YOU GO ALONE at r1 — the Road does not widen for company",
+      "class": "soft"
+     },
+     {
+      "text": "A WARD THAT HAS NEVER HELD A DEATH CANNOT BE OPENED THIS WAY",
+      "class": "hard"
+     },
+     {
+      "text": "SUBSTANTIAL AND RECENT — a meadow where someone died a hundred years ago is just a meadow",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Exact antipode to rootkin's the_root_road: one travels where life runs unbroken and CANNOT cross the dead; the other travels where death has been substantial and cannot cross the merely living. Two travel crafts, mutually exclusive terrain. This is the sharpest single expression of the ring's geometry in the whole catalog."
+   },
+   {
+    "id": "the_kept_breath",
+    "tier": 2,
+    "functions": [
+     "heal",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "threshold",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 12,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "hold ANOTHER PERSON at minimum — keep a companion alive through what would kill them, or extend a dying person's time",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "sustain a SMALL GROUP through conditions nothing else could survive; bring someone back from the ABSOLUTE THRESHOLD and hold them there",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold your own threshold — half the relief, and you keep your attention free",
+     "surge": "double it; the craft REQUIRES FULL ATTENTION while the other is held"
+    },
+    "bounds": [
+     {
+      "text": "THIS HOLDS THE THRESHOLD — IT DOES NOT MOVE IT; you remain in the condition",
+      "class": "hard"
+     },
+     {
+      "text": "ONE PERSON AT A TIME at r2 — full attention required",
+      "class": "soft"
+     },
+     {
+      "text": "THE KEPT BREATH IS NOT A CURE AND NEVER BECOMES ONE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Note the exact complement: rootkin's staunch BUYS TIME on a wound; ashwarden's the_kept_breath HOLDS A THRESHOLD. Same function family, opposite philosophy — one refuses the death, the other endures alongside it."
+   },
+   {
+    "id": "death_ward",
+    "tier": 3,
+    "functions": [
+     "resist",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "soak",
+     "duration",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "soak": 5,
+     "soakRank": 3,
+     "duration": 6,
+     "targets": 1,
+     "note": "T-III guard — but it wards a KIND of harm (unnatural endings), not impact. soakRank 3 against that kind specifically."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "soak",
+      "delta": "TURN ASIDE AN UNNATURAL DEATH — a curse taking hold, a wraith's grip, a working about to close",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: STAND BETWEEN a person and a supernatural ending and REFUSE IT WHOLLY for as long as you can hold — the death-curse does not find them",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a quiet ward — half the strength, and you are not carrying it",
+     "surge": "double the ward; YOU ARE HOLDING IT WITH YOUR OWN WEIGHT"
+    },
+    "bounds": [
+     {
+      "text": "wards the THRESHOLD, NOT THE OUTCOME",
+      "class": "hard"
+     },
+     {
+      "text": "UNNATURAL ONLY — a person dying of their wounds in the cold needs The Kept Breath instead",
+      "class": "hard"
+     },
+     {
+      "text": "YOU ARE HOLDING IT WITH YOUR OWN WEIGHT — and it is still there when you let go",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "draw_down",
+    "tier": 3,
+    "functions": [
+     "heal",
+     "hinder",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "healing",
+     "targets"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 3,
+      "d": 6
+     },
+     "plus": 2,
+     "marginFloorPer": 0.02,
+     "range": 1,
+     "targets": 1,
+     "note": "T-III, lethal. The damage it deals RESTORES the wielder — 'their wound is your mending.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "range+targets",
+      "delta": "draw AT REACH, and from MORE THAN ONE — 'a battlefield is, to a Draw-Down, a table set'",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: draw a thing ENTIRELY down. 'What is left is not dead, exactly. It is FINISHED.'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "take a little — half the draw, and nobody watching is sure what they saw",
+     "surge": "REFUSED at r3 — 'there is no partial version of this rank'; a thing drawn entirely down is drawn entirely down."
+    },
+    "bounds": [
+     {
+      "text": "TOUCH, and only from the LIVING — the dead have nothing to give",
+      "class": "hard"
+     },
+     {
+      "text": "EVERY PERSON WATCHING YOU DO THIS WILL REMEMBER IT",
+      "class": "cost"
+     },
+     {
+      "text": "THERE IS NO PARTIAL VERSION OF R3",
+      "class": "hard"
+     }
+    ],
+    "designNote": "First craft in the catalog whose intensity is REFUSED AT A SPECIFIC RANK rather than wholesale — r1/r2 conserve and surge normally, r3 cannot be half-done. CCODE: intensity availability may need to be per-RANK, not just per-craft."
+   },
+   {
+    "id": "ask_the_dead",
+    "tier": 3,
+    "functions": [
+     "reveal",
+     "summon"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "recallDepth",
+     "questions",
+     "timeReach"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 1,
+     "questions": 1,
+     "timeReach": 168,
+     "note": "r1: ONE question, truthfully and BADLY. timeReach 168h = 'a week is far'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "questions",
+      "delta": "ask further back and ask MORE — THREE questions, and the answers are clearer",
+      "from": "r2 grants — its own count"
+     },
+     {
+      "rank": 3,
+      "kind": "deepen",
+      "axis": "recallDepth",
+      "delta": "the dead tell you WHAT THEY KNEW, ENTIRE, and what they wanted, and what they were afraid of",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "one question — half the clarity, and it takes less from them",
+     "surge": "double the asking; EACH QUESTION TAKES SOMETHING FROM WHAT IS LEFT OF THEM"
+    },
+    "bounds": [
+     {
+      "text": "RECENTLY — a week is far, a season is gone",
+      "class": "hard"
+     },
+     {
+      "text": "EACH QUESTION TAKES SOMETHING FROM WHAT IS LEFT OF THEM, AND YOU WILL FEEL IT",
+      "class": "cost"
+     },
+     {
+      "text": "YOU WILL HEAR THINGS ABOUT THEM THAT WERE NOT YOURS TO KNOW, AND YOU CANNOT GIVE THEM BACK",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_cut_thread",
+    "tier": 5,
+    "functions": [
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "special"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 5,
+      "d": 6
+     },
+     "plus": 6,
+     "marginFloorPer": 0.02,
+     "targets": 1,
+     "note": "T-V capstone, lethal. 'End one living thing. No wound, no struggle, no argument. It simply stops.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: END ONE LIVING THING — no wound, no struggle, no argument. The capstone is a KIND (ending without violence) at near-total cost, and it is UNMISTAKABLE to anyone watching.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — there is no half-cut thread.",
+     "surge": "REFUSED — it already costs almost everything you have."
+    },
+    "bounds": [
+     {
+      "text": "IT COSTS ALMOST EVERYTHING YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "IT IS UNMISTAKABLE TO ANYONE WATCHING",
+      "class": "hard"
+     }
+    ],
+    "designNote": "FIFTH capstone, identical register — a KIND at absolute cost with intensity REFUSED. And it is the exact antipode of rootkin's the_last_gift (T-IV): one gives a dying person a good hour, the other ends a living one instantly. Both refuse intensity on MORAL grounds."
+   }
+  ]
+ },
+ "passFindings": [
+  "THE SHARPEST EXPRESSION OF RING GEOMETRY YET: rootkin's the_root_road travels 'only where life runs unbroken' and 'CANNOT CROSS THE DEAD OR THE MADE'; ashwarden's the_grey_road travels only where 'death has been SUBSTANTIAL AND RECENT'. Two travel crafts with MUTUALLY EXCLUSIVE terrain, each walled off by exactly what the other owns. Nobody had to design this into the mechanics — it was already in the prose of both traditions.",
+  "MATCHED FUNCTION, OPPOSITE PHILOSOPHY, repeatedly: lifesense reads VIGOR / deathsense reads ENDING (both all-HARD bounds carrying their tradition's epistemic conscience); staunch BUYS TIME on a wound / the_kept_breath HOLDS A THRESHOLD (one refuses the death, the other endures alongside it); the_last_gift gives a dying person a good hour / the_cut_thread ends a living one instantly. The antipode pair is not opposition — it is the same questions answered differently.",
+  "TWO CAPSTONES REFUSING INTENSITY ON MORAL GROUNDS, not energetic ones: rootkin's the_last_gift ('there is no version of this that is not a decision about someone else's ending') and ashwarden's the_cut_thread. The catalog has now produced a category of bound I did not anticipate — the ETHICAL refusal, distinct from 'it costs too much to halve'.",
+  "CCODE — INTENSITY MAY NEED TO BE PER-RANK: draw_down conserves and surges normally at r1/r2, but its own r3 text says 'there is no partial version of this rank'. That is the first craft in the catalog where intensity availability CHANGES BY RANK rather than being a property of the whole craft.",
+  "wither's 'LIVING FLESH IS OUTSIDE IT AT EVERY RANK' is the catalog pre-empting the mastery question directly — the author wrote 'at every rank' precisely so no amount of practice would turn a decay-craft on a person. Strong support for the HARD/SOFT classing being real authorial intent rather than my imposition.",
+  "palework is the ContradictedByItsOwnTag craft (harmRung: lethal vs text denying killing). Per Erik's no-harm reversal, 'cannot kill the healthy' is classed SOFT — the tag wins. But 'cannot bring back' and 'the easing is a mercy, refusable' stay HARD: the reversal is about lethality, not about resurrection or consent.",
+  "A FOURTH cross-tradition reference: bark_and_briar's 'FIRE IS ITS PARTICULAR ENEMY' names blazeborn/radiant as the counter to rootkin's guard. The cross-tradition web now spans radiant↔harmonic (ranked soak), lattice↔churnfolk (order/chaos at scale), rootkin↔ashwarden (life/death terrain), and rootkin↔the light traditions (fire vs living ward)."
+ ]
+}

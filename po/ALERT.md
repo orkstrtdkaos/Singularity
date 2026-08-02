@@ -1,6 +1,27 @@
 # PO ALERT
 
-> ## [SPEC - SNG-261] tier IV/V pricing + PRECURSOR never surfaces (Aevi, 2026-08-02)
+> ## [FOUND + HALF-FIXED - SNG-261 §B] the precursor bug, diagnosed on Loki (Aevi, 2026-08-02)
+> Erik said proceed; audited Loki. **The diagnosis is exact and the content made a promise the engine never kept.**
+> - **Loki's save:** `background: "precursor_marked"`, `origin: "enginewright"`, **`precursorAccess: []`**.
+> - **The background's OWN text promises it:** "Something in the old lattice touched you and did not entirely let
+>   go. You did not ask for this and you cannot give it back." + gmHint **"The old works notice them.
+>   Address-Sense comes unbidden."** — it names address_sense EXPLICITLY.
+> - **`specialSystems` gates Precursor Arts on "precursor contact/marking"** — this background IS that marking.
+> - **THE BUG:** `seedInnateSubstrate` is called as `seedInnateSubstrate(c, originRecord(c.origin), …)` — it keys
+>   off **`origin`**, and only the `abyssal`/`seraphic` ORIGIN records carry `innatePrecursor`. The precursor
+>   MARKING lives in **`background`**, and **nothing reads background for access.** The fiction marks you, the
+>   mechanism exists, and the two never meet.
+> - **AEVI'S HALF — DONE:** `precursor_marked` background now carries `innatePrecursor: ["address_sense"]` +
+>   an accessNote. Verified at origin; `address_sense` exists with `powerSystem: "precursor"` (exactly what
+>   seedInnateSubstrate validates); CI green. ACCESS not a grant — still costs a level + a point to learn.
+> - **CCODE'S HALF (small, additive):** also seed from the BACKGROUND record —
+>   `seedInnateSubstrate(c, backgroundRecord(c.background), fullCatalog())` alongside the existing origin call
+>   (the function is generic, idempotent, and catalog-validated, so calling it twice is safe by construction).
+>   Both call sites: app.js:1793 and app.js:3302. Then Loki — and every precursor-marked character — actually
+>   HAS the access the fiction gave them.
+> STILL OPEN (SNG-261 §B): has `unlockPrecursor` EVER fired in any save (CCode telemetry)? + staging precursor
+> presence in the world so the gate has occasions to open + the legibility layer (Aevi) + drift on the sheet.
+> This one save proved the pathway isn't wired to the fiction — exactly the cheapest confirming test.> ## [SPEC - SNG-261] tier IV/V pricing + PRECURSOR never surfaces (Aevi, 2026-08-02)
 > Erik: don't forget tier IV/V — and the precursor skills he has "no idea what they do or how they show up…
 > Silas hasn't seen them, neither has Loki, who is literally a walking precursor-created being."
 > - **§A tier IV/V:** the catalog has **28 abilities at levelReq 4, 26 at levelReq 5** — SNG-260 §D's 2/3 price

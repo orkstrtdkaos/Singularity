@@ -1,0 +1,583 @@
+{
+ "schemaVersion": 1,
+ "id": "churnfolk_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, tradition 5 of 27. Authored NEXT deliberately as LATTICE'S ANTIPODE — lattice's the_fixed_point says 'the Churn breaks around you', and the bestiary's churn_revel is suppressed by ORDER crafts. The pairing is instructive: where lattice's magnitudes were SCOPE / RELIABILITY / DURATION, churnfolk's are VARIANCE and UNPREDICTABILITY. Same schema, opposite axis vocabulary — and a new mechanical idea the schema did NOT anticipate (see findings): several churnfolk crafts want a WIDENED OUTCOME BAND rather than a bigger number.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "crafts": [
+  {
+   "id": "chaos_sense",
+   "tier": 1,
+   "functions": [
+    "foresee",
+    "reveal"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "foresight",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "r1: feel WHERE and roughly WHEN something will break down; find the loose thread"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "foresight",
+     "delta": "feel where a SITUATION is about to come apart, and roughly HOW — from a thing to a situation, and the failure MODE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the failure ANNOUNCES ITSELF to you before it happens — the bridge, the alliance, the plan. Unprompted warning is a different act from looking for the flaw.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a feel for the loose thread — half the warning, no cost",
+    "surge": "double the reach: the failure comes to you, and you still do not get to choose where you are standing when it lands"
+   },
+   "bounds": [
+    {
+     "text": "FEEL, NOT DETAIL — the truly stable reads quiet",
+     "class": "hard"
+    },
+    {
+     "text": "you feel the break coming; YOU DO NOT GET TO CHOOSE WHERE YOU ARE STANDING when it arrives",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING IS NOT PREVENTING — and the Churnfolk have made peace with that",
+     "class": "hard"
+    }
+   ],
+   "designNote": "Perfect antipode to lattice's order_sense: both are T-I mental reads of structure, but order_sense sees the DESIGN and chaos_sense sees the FAILURE. Both have all-HARD bounds that are their tradition's epistemic conscience — lattice's 'some messes have no pattern', churnfolk's 'knowing is not preventing'. The ring geometry is legible in the bound-classing itself."
+  },
+  {
+   "id": "the_misdirect",
+   "tier": 1,
+   "functions": [
+    "deceive",
+    "hinder",
+    "move"
+   ],
+   "shape": "hobble",
+   "operativeAxis": [
+    "misdirection",
+    "targets",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "targets": 1,
+    "note": "r1: a distraction convincing enough to buy ONE CLEAN MOVE — for you or a friend"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets+duration",
+     "delta": "a FALSE TRAIL credible enough that pursuit follows it seriously, or misdirect a GROUP's full attention at exactly the moment it matters",
+     "from": "r2 grants — one move → a pursuit or a group"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a misdirection so FUNDAMENTAL — the wrong door, the wrong figure, the wrong danger — that the opposition ORGANIZES AROUND something that was never there",
+     "from": "r3 grants — making the enemy's whole plan wrong is a kind, not a magnitude"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance elsewhere — half the misdirection, and nobody afterwards is sure anything happened",
+    "surge": "double it: the opposition commits, and a committed opposition is very angry when it learns"
+   },
+   "bounds": [
+    {
+     "text": "it buys a MOVE, not a victory",
+     "class": "hard"
+    },
+    {
+     "text": "a false trail must be PLAUSIBLE — you cannot misdirect toward the absurd",
+     "class": "soft"
+    },
+    {
+     "text": "when it breaks, they know they were played",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "id": "catch_as_catch_can",
+   "tier": 1,
+   "functions": [
+    "restore",
+    "sustain"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 12,
+    "targets": 1,
+    "note": "SUSTAIN→bolster. r1: sustain YOURSELF where others have run dry"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "sustain a GROUP through constant creative improvisation — 'never enough of anything, always just enough'",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE DISORDER THAT STRIPS OTHERS BARE IS YOUR SUPPLY LINE — in total disorder you and yours have what you need, because you have learned to need what disorder provides",
+     "from": "r3 grants — inverting scarcity is a kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "scrape by — half the relief, and it asks nothing of the situation",
+    "surge": "double it: you find what a place can give, and a place stripped twice gives less the second time"
+   },
+   "bounds": [
+    {
+     "text": "it finds ENOUGH, never PLENTY",
+     "class": "hard"
+    },
+    {
+     "text": "requires DISORDER — an orderly, well-provisioned place offers a churnfolk nothing to improvise from",
+     "class": "hard"
+    },
+    {
+     "text": "improvisation is CONSTANT — it is work, not luck",
+     "class": "soft"
+    }
+   ],
+   "designNote": "'Requires DISORDER — an orderly place offers nothing to improvise from' is a beautiful HARD bound: the churnfolk are WEAKEST where the lattice is strongest. The antipode relationship is mechanical, not just thematic."
+  },
+  {
+   "id": "wildcraft",
+   "tier": 2,
+   "functions": [
+    "break",
+    "hinder",
+    "make",
+    "transform"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "variance",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 2,
+    "scope": 2,
+    "variance": 3,
+    "note": "T-II construct — but see `variance`. Churnfolk crafts want a WIDENED OUTCOME BAND, not a fixed magnitude: 'you don't choose HOW it breaks, only that it does.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "variance",
+     "delta": "THRIVE where others founder — read the grain of a chaotic situation and RIDE it; DENY AN ENEMY THE PREDICTABILITY THEY RELY ON (a direct debuff to ordered opponents)",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "UNMAKE ORDER AT SCALE — a fortress's discipline, a system's certainty, a plan a season in the making, come apart; and out of the loosed chaos, something useful",
+     "from": "r3 grants — the explicit counter to lattice's latticework r3 'impose structure at scale'"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small improvisation — half the effect, and you keep control of what breaks",
+    "surge": "double it; YOU DO NOT CHOOSE HOW IT BREAKS, and at this scale that matters"
+   },
+   "bounds": [
+    {
+     "text": "YOU DON'T CHOOSE HOW IT BREAKS, only that it does",
+     "class": "hard"
+    },
+    {
+     "text": "luck spent runs thin",
+     "class": "soft"
+    },
+    {
+     "text": "CANNOT IMPOSE AN OUTCOME, only surf toward a good one",
+     "class": "hard"
+    },
+    {
+     "text": "the ordered and prepared resist it",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU UNSPOOL YOU CANNOT RE-ORDER",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS CHAOS-HOT",
+     "class": "cost"
+    }
+   ],
+   "designNote": "wildcraft r3 ('unmake order at scale') and latticework r3 ('impose structure at scale') are a DIRECT antipodal counter-pair at the same tier and rank — the second such pair found (after radiant_lance/resonant_shield), and this one is across the ring's true axis. Both also carry a matching COST bound: the lattice drifts order-hot, the churn drifts chaos-hot. The framework's 'evil as premature foreclosure' has a mirror here: unmaking what cannot be re-ordered."
+  },
+  {
+   "id": "scatter",
+   "tier": 2,
+   "functions": [
+    "break",
+    "hinder",
+    "move"
+   ],
+   "shape": "hobble",
+   "operativeAxis": [
+    "scope",
+    "variance"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 2,
+    "scope": 2,
+    "variance": 3,
+    "note": "T-II hobble, incapacitating rung. r1: disrupt a formation, jam a device, break a pattern to make an opening"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "scatter a formation, a plan, a CROWD — the thing that was one becomes MANY and cannot re-form quickly; EACH is weakened by it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: unmake the COHERENCE of a thing entirely — an army, a contract, a certainty — AND IT DOES NOT COME BACK TOGETHER. Permanence is the kind-change.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "break one pattern — half the scatter, and it re-forms",
+    "surge": "double it: what you scatter you NO LONGER CONTROL, and scattering a mob makes many small problems"
+   },
+   "bounds": [
+    {
+     "text": "YOU DON'T PICK HOW IT SCATTERS",
+     "class": "hard"
+    },
+    {
+     "text": "brief at r1",
+     "class": "soft"
+    },
+    {
+     "text": "WHAT YOU SCATTER YOU NO LONGER CONTROL — scattering a mob makes many small problems",
+     "class": "hard"
+    },
+    {
+     "text": "THE CHURNFOLK WARN: YOU WILL NOT BE ABLE TO PUT IT BACK. NOBODY WILL.",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "the_wrong_target",
+   "tier": 2,
+   "functions": [
+    "move",
+    "resist",
+    "shield"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "evasion",
+    "soak"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 3,
+    "soakRank": 2,
+    "duration": 3,
+    "note": "GUARD by EVASION rather than armour — 'not blocking, not armoring, just not being where they land.' Authored as soak/soakRank so it sits in the same ranked layer, but the flavour is dodge. soakRank 2 because organized attacks specifically fail against it."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "evasion",
+     "delta": "organized attempts to harm you DISSOLVE — 'they are always aiming at where you were a moment ago'",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the DISORDER AROUND YOU actively deflects organized harm — not just you moving unpredictably, but THE SITUATION ITSELF refusing to cooperate with anyone trying to hurt you",
+     "from": "r3 grants — the environment defending you is a kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep moving — half the evasion, and it costs you no wind",
+    "surge": "double the unpredictability; you cannot also be doing anything precise"
+   },
+   "bounds": [
+    {
+     "text": "it works against AIMED and ORGANIZED harm — an area effect or a collapsing roof does not care where you are",
+     "class": "hard"
+    },
+    {
+     "text": "you cannot also be doing anything precise",
+     "class": "hard"
+    },
+    {
+     "text": "sustained evasion costs wind",
+     "class": "soft"
+    }
+   ],
+   "designNote": "The authored counter to this craft is exactly the lattice/harmonic answer: unaimed, area, or structural harm. A guard that defeats PRECISION and fails against INDISCRIMINATE force is a genuinely different defensive shape from resonant_shield (which blunts impact) or the_fixed_point (which refuses to move). Three guard crafts, three distinct defensive logics — the schema carries all three through soak/soakRank plus bounds."
+  },
+  {
+   "id": "probability_tilt",
+   "tier": 3,
+   "functions": [
+    "empower",
+    "foresee"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "luck",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 1,
+    "variance": 4,
+    "note": "T-III bolster. r1: tilt an UNCERTAIN moment toward a good break"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "tilt the odds of a WHOLE SEQUENCE, not one roll — inside that run everything comes off better than it should",
+     "from": "r2 grants — one moment → a run"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: around you THE UNLIKELY SIMPLY HAPPENS — the gap opens, the guard turns, the coin lands",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a nudge — half the tilt, and the books balance quietly",
+    "surge": "double the tilt; THE WORLD BALANCES ITS BOOKS, and what you tilt toward you, something tilts away"
+   },
+   "bounds": [
+    {
+     "text": "ONLY WHERE CHANCE IS LIVE — a certainty cannot be tilted",
+     "class": "hard"
+    },
+    {
+     "text": "spends fast",
+     "class": "soft"
+    },
+    {
+     "text": "TILTED ODDS ARE STILL ODDS — the Churn keeps its right to the improbable",
+     "class": "hard"
+    },
+    {
+     "text": "THE WORLD BALANCES ITS BOOKS: whatever you tilt toward you, something tilts away",
+     "class": "cost"
+    }
+   ],
+   "designNote": "'The world balances its books' is a COST bound with real teeth — and a natural hook for the SNG-258 §3b crit-FAILURE dial: probability_tilt should measurably raise the wielder's crit-failure chance elsewhere. The catalog is again writing the mechanic before the engine has it."
+  },
+  {
+   "id": "the_churns_gift",
+   "tier": 3,
+   "functions": [
+    "make",
+    "summon",
+    "transform"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "potency",
+    "variance",
+    "control"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "variance": 5,
+    "note": "T-III construct with the roster's HIGHEST variance: 'generous and strong, but NEVER EXACTLY AS AIMED.' The craft's identity IS its unreliability."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "control",
+     "delta": "you may now name the SHAPE of what you want — a weapon, a warmth, a way through — and the wild current provides it (variance narrows, potency rises)",
+     "from": "r2 grants — the increment buys CONTROL, which for this craft is the scarce thing"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE WILD CURRENT BEGINS TO KNOW YOU — gifts arrive UNASKED at the edge of need. Not reliably, never on command, but often enough.",
+     "from": "r3 grants — unbidden provision is a kind-change, and it is also a RELATIONSHIP"
+    }
+   ],
+   "intensity": {
+    "conserve": "ask small — half the potency, and much closer to what you asked for",
+    "surge": "ask large: double the potency, and THE SIDEWAYS-NESS GROWS WITH THE ASKING"
+   },
+   "bounds": [
+    {
+     "text": "you CANNOT CONTROL ITS PRECISE FORM — it gives its own way rather than yours",
+     "class": "hard"
+    },
+    {
+     "text": "THE SHAPE HOLDS; NOTHING INSIDE IT DOES",
+     "class": "hard"
+    },
+    {
+     "text": "ask larger and THE SIDEWAYS-NESS GROWS",
+     "class": "cost"
+    },
+    {
+     "text": "BEING KNOWN BY THE CHURN RUNS BOTH DIRECTIONS — it takes an interest",
+     "class": "cost"
+    }
+   ],
+   "designNote": "'Being known by the Churn runs both directions; it takes an interest' — the craft creates a RELATIONSHIP with a force, with an authored cost. This is the closest thing in the catalog to a patron/pact mechanic, and it is a strong candidate for an alignment-drift hook (§4c): using it repeatedly should move you chaos-ward whether you intend it or not."
+  },
+  {
+   "id": "the_wild_flowering",
+   "tier": 4,
+   "functions": [
+    "open",
+    "transform"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "variance",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "scope": 4,
+    "variance": 6,
+    "note": "T-IV, incapacitating. r1: a wild flowering of tangled growth-and-ruin — potent, beautiful, BEYOND PRECISE CONTROL"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the flowering takes A DISTRICT rather than a room, and WHAT IT MAKES NOW LASTS — days rather than moments — before the tangle takes it back",
+     "from": "r2 grants — persistence at district scale is the T-IV kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small flowering — half the scope, and the tangle takes it back quickly",
+    "surge": "double the flowering; the larger it is, the less it can be aimed at anything"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT BE AIMED AT PURE CREATION OR PURE DESTRUCTION — it is always both",
+     "class": "hard"
+    },
+    {
+     "text": "what it makes WILL be taken back by the tangle",
+     "class": "hard"
+    },
+    {
+     "text": "the larger the flowering, the less aimable",
+     "class": "hard"
+    }
+   ],
+   "designNote": "'Cannot be aimed at pure creation or pure destruction — it is always both' is one of the strongest HARD bounds in the catalog: it encodes the tradition's whole thesis as an inviolable mechanic. No mastery makes the Churn tidy."
+  },
+  {
+   "id": "the_long_odds",
+   "tier": 5,
+   "functions": [
+    "empower",
+    "foresee"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "luck",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 3,
+    "variance": 8,
+    "note": "T-V capstone. r1: turn a WHOLE CHASE by riding a cascade of lucky breaks no one could plan"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: ride a CASCADE of improbabilities through an entire chase — escape a closing net, or run down a fleeing foe. The capstone is a KIND (bending a whole sequence of events) at enormous cost.",
+     "from": "r1 grants — single-rank capstone; the special IS the craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — the long odds are not a thing you take halfway; a hedged cascade is just ordinary luck.",
+    "surge": "REFUSED — it already spends enormously; there is nothing above it to spend."
+   },
+   "bounds": [
+    {
+     "text": "SPENDS ENORMOUSLY",
+     "class": "hard"
+    },
+    {
+     "text": "THE ORDERED AND PREPARED CAN STILL CORNER YOU",
+     "class": "hard"
+    },
+    {
+     "text": "IT FAILS HARD when it fails",
+     "class": "hard"
+    }
+   ],
+   "designNote": "FOURTH capstone, same register — a KIND at absolute cost with intensity REFUSED. But note the distinct bound: 'the ordered and prepared can still corner you.' Even the churnfolk capstone bows to the lattice's virtue. The antipode is honoured at the highest rung of both traditions."
+  }
+ ],
+ "passFindings": [
+  "A MECHANICAL IDEA THE SCHEMA DID NOT ANTICIPATE: churnfolk crafts want a WIDENED OUTCOME BAND, not a bigger number. 'You don't choose HOW it breaks, only that it does'; 'never exactly as aimed'; 'generous and strong but sideways'. I authored a `variance` axis (3-8 across the tradition) but the ENGINE has no concept of it. CCODE: this is a real gap — a high-variance craft should roll a WIDER band (bigger max, worse min) rather than a higher mean. It pairs naturally with the SNG-258 §3b second-roll crit dials, and it is the mechanical difference between a lattice craft and a churnfolk craft.",
+  "wildcraft r3 ('unmake order at scale') vs latticework r3 ('impose structure at scale') is a DIRECT antipodal counter-pair at identical tier AND rank — the second such pair (after radiant_lance/resonant_shield), and the first on the ring's true axis. Both carry a matching COST bound: the lattice drifts order-hot, the churn drifts chaos-hot. Authoring antipodes adjacently is now a proven method.",
+  "catch_as_catch_can's HARD bound 'requires DISORDER — an orderly, well-provisioned place offers a churnfolk nothing' makes the antipode relationship MECHANICAL, not just thematic: churnfolk are weakest exactly where lattice is strongest. That is fairness-by-geometry (SPEC §5) expressed at the craft level.",
+  "THREE DISTINCT DEFENSIVE LOGICS now exist across the authored traditions, all carried by the same soak/soakRank shape plus bounds: resonant_shield BLUNTS impact, the_fixed_point REFUSES to move, the_wrong_target IS NOT THERE (and explicitly fails against unaimed/area harm). The guard shape generalises further than I expected.",
+  "probability_tilt's 'the world balances its books — whatever you tilt toward you, something tilts away' is a COST bound with real teeth, and a natural hook for the §3b crit-FAILURE dial: tilting luck should measurably raise your crit-failure chance elsewhere. Third craft now writing a mechanic the engine hasn't built yet.",
+  "the_churns_gift r3 'the wild current begins to know you… being known runs both directions; it takes an interest' is the closest thing in the catalog to a PATRON/PACT mechanic, and a strong §4c alignment-drift hook: repeated use should move the wielder chaos-ward whether they intend it or not.",
+  "the_long_odds is the FOURTH capstone with the identical register (a KIND, absolute cost, intensity REFUSED) — but its bound is pointed: 'the ordered and prepared can still corner you.' Even the churnfolk capstone bows to the lattice's virtue. The antipode is honoured at the highest rung of both traditions."
+ ]
+}

@@ -47,6 +47,42 @@ export function knownVerbs(cfg = {}) {
 
 const num = (v, fb) => (Number.isFinite(Number(v)) ? Number(v) : fb);
 
+/** CCODE-81 — INTENSITY CAN BE REFUSED BY RANK, not only by craft (Aevi, `draw_down`).
+ *
+ *  REFUSED has been a VALUE since the_last_light ("cannot be half-given"), but the test for it was
+ *  `/^refused$/i` on the whole trimmed string — so it matched the bare word and NOTHING ELSE. Aevi authored
+ *  `surge: "REFUSED at r3 — 'there is no partial version of this rank'"`, which is unmistakably a refusal and
+ *  did not match, so `draw_down` surged freely at exactly the rank its own text forbids. The marker was there;
+ *  the reader was too narrow.
+ *
+ *  `draw_down` is also the first craft where intensity availability changes BY RANK rather than being a
+ *  property of the whole craft — it conserves and surges normally at r1/r2. So refusal is now rank-aware:
+ *
+ *   · `{ refused: true }` or `"REFUSED"`            — the whole craft refuses it, at every rank (unchanged);
+ *   · `{ refusedFromRank: 3, note }` or `"REFUSED at r3 — ..."` — refused at that rank AND ABOVE.
+ *
+ *  The string form is read as a MARKER, not as prose: it must START with REFUSED, and the rank is taken only
+ *  from an `at r3` / `at rank 3` immediately after it. That is deliberately not prose-mining — extending a
+ *  value the engine already treats as structural is a different thing from inferring meaning from a sentence,
+ *  and the staged checker reports every string it reads this way so an author can see what it concluded.
+ *
+ *  "AND ABOVE" is the reading of a max-rank craft's refusal; if Aevi means a rank to refuse in isolation,
+ *  that is `refusedAtRanks: [3]` and this is where it would go. */
+export function refusalOf(authoredIntensity, rank = 1) {
+  if (authoredIntensity && typeof authoredIntensity === "object") {
+    const from = num(authoredIntensity.refusedFromRank, null);
+    if (from != null) return { refused: num(rank, 1) >= from, fromRank: from, marker: "refusedFromRank" };
+    return { refused: !!authoredIntensity.refused, marker: authoredIntensity.refused ? "refused" : null };
+  }
+  if (typeof authoredIntensity !== "string") return { refused: false, marker: null };
+  const s = authoredIntensity.trim();
+  if (!/^refused\b/i.test(s)) return { refused: false, marker: null };
+  const m = s.slice(0, 24).match(/\bat\s+r(?:ank)?\s*(\d+)/i);
+  if (!m) return { refused: true, marker: "REFUSED" };
+  const from = Number(m[1]);
+  return { refused: num(rank, 1) >= from, fromRank: from, marker: `REFUSED at r${from}` };
+}
+
 /** THE RESOLVED MECHANIC for one craft using one of its verbs, at a tier / rank / intensity.
  *
  *  Returns `{ verb, shape, operative, authored, fields, special }` where `fields` carries only the
@@ -85,7 +121,8 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
   // would invent a conserved capstone the fiction forbids, so a refusal is carried through to the caller and
   // never silently replaced by the baseline.
   const authoredIntensity = authored?.intensity?.[intensity];
-  const refused = typeof authoredIntensity === "string" && /^refused$/i.test(authoredIntensity.trim());
+  const refusal = refusalOf(authoredIntensity, rank);
+  const refused = refusal.refused;
   const iCfg = refused ? { mult: 1 }
     : ((authoredIntensity && typeof authoredIntensity === "object") ? authoredIntensity : null)
       || cfg.intensity?.[intensity] || { mult: 1 };
@@ -160,6 +197,8 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
     special: !!rung.special || !!authored?.special,
     rankDelta: rDelta ? { kind: rDelta.kind, ...(rDelta.dimension ? { dimension: rDelta.dimension } : {}) } : null,
     refusedIntensity: refused,
+    ...(refusal.fromRank ? { refusedFromRank: refusal.fromRank } : {}),
+    ...(refusal.marker ? { refusalMarker: refusal.marker } : {}),
     // the craft's OWN words for this intensity — what §4's popup must show before the player commits
     intensityNote: (typeof authoredIntensity === "string" ? authoredIntensity : authoredIntensity?.note) || null,
     // declared, real, and NOT arithmetic the engine performs — the popup names them, the engine doesn't fake them
@@ -381,7 +420,9 @@ export function deriveMechanic(sources = [], { verbs = null, cfg = null } = {}) 
     for (const mode of ["conserve", "standard", "surge"]) {
       const said = blocks.map(b => b.intensity?.[mode]).filter(v => v != null);
       if (!said.length) continue;
-      const refused = said.find(v => typeof v === "string" && /^refused$/i.test(String(v).trim()));
+      // CCODE-81: the braid contagion reads refusal through the SAME function as mechanicFor. It had its own
+      // narrower copy of the test, so a parent that refused "at r3" was contagious to nothing.
+      const refused = said.find(v => refusalOf(v, 99).refused);
       intensity[mode] = refused || said[0];
     }
     if (Object.keys(intensity).length) merged.intensity = intensity;

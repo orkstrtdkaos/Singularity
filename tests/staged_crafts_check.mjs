@@ -14,7 +14,7 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { mechanicFor, shapeOfVerb, critFor } from "../engine/craftmechanics.js";
+import { mechanicFor, shapeOfVerb, critFor, refusalOf } from "../engine/craftmechanics.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -85,6 +85,15 @@ for (const f of files) {
     check(`${f}: every authored \`crit\` block resolves through critFor`,
       crits.every(x => x.got), crits.filter(x => !x.got).map(x => x.id).join(", "));
   }
+  // CCODE-81: every intensity the engine reads as REFUSED, and WHAT IT CONCLUDED. The string form is a marker
+  // rather than prose, so an author must be able to see that "REFUSED at r3" was read as rank 3 and not as a
+  // blanket refusal - a marker nobody can check is prose-mining with extra steps.
+  const refusals = [];
+  for (const c of crafts) for (const [mode, val] of Object.entries((c.mechanic?.intensity) || c.intensity || {})) {
+    const r = refusalOf(val, 99);
+    if (r.marker) refusals.push(`${c.id}.${mode}: ${r.marker}${r.fromRank ? ` (allowed below r${r.fromRank})` : " (every rank)"}`);
+  }
+  if (refusals.length) console.log(`        deny  ${refusals.length} refused intensity/ies: ${refusals.join(" \u00b7 ")}`);
   summary.push({ file: f, rows });
 
   // --- the gates: facts, not tuning ---

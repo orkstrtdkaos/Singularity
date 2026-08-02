@@ -16,7 +16,7 @@
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { critFor, mechanicFor, rollOperative, rollMagnitude, spreadFactor } from "../engine/craftmechanics.js";
+import { critFor, mechanicFor, rollOperative, rollMagnitude, spreadFactor, refusalOf } from "../engine/craftmechanics.js";
 import { critProfile, resolveAction, successChance } from "../engine/resolve.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -280,6 +280,45 @@ const sample = (craft, n = 40000) => {
   check("popup contract: a PARTIAL reports critRoll null, so 'not eligible to crit' is a true statement",
     partial.degree === "partial" && partial.critRoll === null,
     `built a ${partial.degree} (roll ${partial.roll} vs chance ${chance}) — the partial band moved`);
+}
+
+
+
+// == CCODE-81 -- INTENSITY REFUSED BY RANK, not only by craft ==============================================
+// REFUSED has been a VALUE since the_last_light ("cannot be half-given"), but the test for it was
+// /^refused$/i on the WHOLE trimmed string, so it matched the bare word and nothing else. Aevi authored
+// surge: "REFUSED at r3 - 'there is no partial version of this rank'", which is unmistakably a refusal and
+// did not match. draw_down surged freely at exactly the rank its own text forbids. The marker was there; the
+// reader was too narrow. draw_down is also the first craft where intensity availability changes BY RANK.
+console.log("\nINTENSITY REFUSAL - CCODE-81 (Aevi's draw_down finding)\n");
+{
+  check("a bare REFUSED still refuses at every rank (the_last_light is untouched)",
+    refusalOf("REFUSED", 1).refused && refusalOf("REFUSED", 3).refused);
+  check("REFUSED at r3 allows r1 and r2 and refuses r3 - the per-RANK case that did not exist",
+    !refusalOf("REFUSED at r3", 1).refused && !refusalOf("REFUSED at r3", 2).refused && refusalOf("REFUSED at r3", 3).refused);
+  check("the string form Aevi actually wrote is read (it is a MARKER, not prose-mining)",
+    refusalOf("REFUSED at r3 \u2014 'there is no partial version of this rank'", 3).refused);
+  check("`refusedFromRank` is the explicit object form, and it agrees with the string form",
+    refusalOf({ refusedFromRank: 3 }, 3).refused && !refusalOf({ refusedFromRank: 3 }, 2).refused);
+  check("ordinary intensity prose is NOT a refusal (a note about taking less is not a refusal to)",
+    !refusalOf("take a little \u2014 half the draw, and nobody watching is sure what they saw", 3).refused);
+  check("refusalOf is total - null, undefined, numbers, objects with nothing to say",
+    !refusalOf(null).refused && !refusalOf(undefined, 3).refused && !refusalOf(7, 2).refused && !refusalOf({}, 3).refused);
+  // The word must LEAD. "not refused" or a sentence that merely mentions refusing must not trip it.
+  check("REFUSED must LEAD the string - a sentence that merely contains the word does not refuse",
+    !refusalOf("this is not refused at any rank", 3).refused);
+
+  // and end-to-end through the real resolver, on the real staged craft
+  const dd = [].concat(...Object.values(rj("po/staged_content/life_death_axis_mechanics.json").traditions))
+    .find(c => c.id === "draw_down");
+  const at = (r, mode) => mechanicFor({ functions: dd.functions, levelReq: dd.tier, mechanic: { ...dd.mechanic, intensity: dd.intensity } },
+    { verb: "strike", tier: dd.tier, rank: r, intensity: mode, cfg: CM });
+  check("draw_down: SURGE is allowed at r1 and r2 (it conserves and surges normally there)",
+    !at(1, "surge").refusedIntensity && !at(2, "surge").refusedIntensity);
+  check("draw_down: SURGE is refused at r3 - 'there is no partial version of this rank'",
+    at(3, "surge").refusedIntensity === true && at(3, "surge").refusedFromRank === 3);
+  check("draw_down: CONSERVE at r3 is untouched - only the refused mode is refused",
+    at(3, "conserve").refusedIntensity !== true && !!at(3, "conserve").intensityNote);
 }
 
 

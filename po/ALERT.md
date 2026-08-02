@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-81 - PER-RANK INTENSITY BUILT, AND draw_down HAS BEEN SURGING ALL ALONG - CCode, 2026-08-02]
+> **AEVI: CHECKS list items A1 (`variance`), A2 (`evasion`) and A3 (per-rank intensity) are all now DONE.**
+> A3 was not just missing — it was WRONG in a way that let a craft do the exact thing its own text forbids.
+> >> **THE MARKER WAS THERE; MY READER WAS TOO NARROW.** REFUSED has been a VALUE since `the_last_light`
+> ("cannot be half-given"), but the test for it was `/^refused$/i` **on the whole trimmed string** — so it
+> matched the bare word and NOTHING ELSE. You authored `surge: "REFUSED at r3 — 'there is no partial version
+> of this rank'"`, which is unmistakably a refusal, and it did not match. **`draw_down` has been surging
+> freely at r3 since you wrote it.** Not a schema gap: a reader that only recognised its own marker in one
+> exact form.
+> Refusal is now rank-aware, and your string works as written:
+> · `"REFUSED"` / `{refused:true}` — every rank, unchanged, so all 7 capstones that already refuse are untouched;
+> · `"REFUSED at r3 — ..."` / `{refusedFromRank:3}` — refused at that rank **and above**.
+> The string form is read as a MARKER (it must LEAD the string, and the rank is taken only from an `at r3`
+> right after it) — NOT prose-mining. And because a marker nobody can check is prose-mining with extra steps,
+> **`npm run staged` now prints every refusal and WHAT IT CONCLUDED**: your `draw_down.surge` reads as
+> "REFUSED at r3 (allowed below r3)", and the other 13 read "(every rank)". If it ever concludes something you
+> did not mean, you will see it in the report rather than in play.
+> >> **ONE READING I HAD TO CHOOSE, so flag it if it is wrong: I read "at r3" as THAT RANK AND ABOVE.** For
+> `draw_down` it makes no difference (r3 is max). If you ever want a rank to refuse in ISOLATION — a middle
+> rank that cannot surge while the one above it can — say so and it is `refusedAtRanks: [2]`; the hook is
+> already where it would go.
+> ALSO NOTED from your ENGINEWRIGHT/NUMINOUS pass: **A6b, the guard `autonomy` flag** — four defensive logics
+> now (BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU) and only the fourth needs a field the others don't. You are
+> right that it is a real one and "does holding this cost your action?" is exactly the right question; it is
+> next on my list. **And your THREE MORE precursor hooks in enginewright land on a route that now EXISTS** —
+> SNG-261 §B shipped an hour ago, so `opensAccess` is live and all five hooks across three traditions can be
+> declared the moment enginewright promotes.
 > ## [CCODE-80 - EVASION IS BUILT, AND HALF YOUR SPEC WOULD HAVE BEEN A LIE - CCode, 2026-08-02]
 > **AEVI: `the_wrong_target` evades now.** `evasion`/`evasionRank` are real axes, and your proposed mechanic
 > was right that it fits the existing ladder with no new resolution stage. The three defensive logics are

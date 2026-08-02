@@ -1,0 +1,962 @@
+{
+ "schemaVersion": 1,
+ "id": "mechanical_spiritual_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 8 AND 9 of 27 — ENGINEWRIGHT and NUMINOUS, the mechanical/spiritual axis, authored as an antipode pair (method now proven three times). THE PAIR'S SIGNATURE: each tradition names the OTHER's territory as its own blind spot, explicitly, in its T-I sense-craft. mech_sense: 'Function, not purpose; THE NUMINOUS STAYS DARK... what a machine MEANS is the Numinous's country.' numen_sense reads significance and cannot touch mechanism. Neither is weaker; they are looking at different things about the same object.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "enginewright": [
+   {
+    "id": "mech_sense",
+    "tier": 1,
+    "functions": [
+     "reveal",
+     "track"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "history"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "read a machine ENTIRE — what it does, what it was FOR, where it will fail, and WHAT SOMEONE CHANGED",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "history",
+      "delta": "SPECIAL: the mechanism tells you its WHOLE HISTORY — every hand that touched it, every misuse, every repair made in a hurry",
+      "from": "r3 grants — provenance is a different act from diagnosis"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glance at the works — half the depth, instant",
+     "surge": "double the read; THE PRECURSOR WORKS DO NOT CONFESS"
+    },
+    "bounds": [
+     {
+      "text": "FUNCTION, NOT PURPOSE — the numinous stays dark",
+      "class": "hard"
+     },
+     {
+      "text": "it reads MECHANISM; what a machine MEANS is the Numinous's country",
+      "class": "hard"
+     },
+     {
+      "text": "THE PRECURSOR WORKS DO NOT CONFESS — they only answer, and only sometimes",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A THIRD PRECURSOR HOOK, and the most explicit yet: 'the Precursor works do not confess. They only answer, and only sometimes.' An enginewright examining precursor mechanism gets partial answers — a ready-made encounter shape for SNG-261 §B."
+   },
+   {
+    "id": "mend_device",
+    "tier": 1,
+    "functions": [
+     "empower",
+     "make",
+     "mend"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "repair",
+     "quality"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 1,
+      "d": 4
+     },
+     "plus": 2,
+     "note": "mends the MADE, not the living — the +2 is enginewright reliability"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "quality",
+      "delta": "mend so it works AS IT WAS MEANT TO — not patched, but RESTORED TO ITS INTENT",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: THE MENDED THING IS BETTER THAN IT WAS — you understood it well enough to improve it in the mending",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a quick fix — half the quality, and it holds",
+     "surge": "double the work: restored past its original, and NOT EVERYTHING YOU CAN IMPROVE SHOULD BE"
+    },
+    "bounds": [
+     {
+      "text": "ORDINARY MECHANISM ONLY — the deep works resist",
+      "class": "hard"
+     },
+     {
+      "text": "YOU MUST KNOW WHAT IT WAS FOR — a mend against the true intent fails",
+      "class": "hard"
+     },
+     {
+      "text": "THE ENGINEWRIGHTS' PRIDE AND THEIR SIN: not everything you can improve should be improved",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_running_engine",
+    "tier": 1,
+    "functions": [
+     "resist",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 12
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "keep working through DAMAGE AND DEPRIVATION by knowing exactly what the mechanism needs — no panic, no waste",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the body does what it must FOR AS LONG AS IT MUST — calibrated to exact need, running past what others would call the wall",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "pace yourself — half the relief, sustainable indefinitely",
+     "surge": "double it: run past the wall, and a mechanism run past its tolerance has a maintenance debt"
+    },
+    "bounds": [
+     {
+      "text": "the body is TREATED as a mechanism — it is still a body",
+      "class": "hard"
+     },
+     {
+      "text": "running past the wall accrues a real debt",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "command_engine",
+    "tier": 2,
+    "functions": [
+     "command",
+     "mend"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "scope",
+     "fidelity"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 4,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "command engines BEYOND THE SMALL — a mill, a lock-system, A PRECURSOR DOOR THAT STILL HALF-LISTENS",
+      "from": "r2 grants — and a FOURTH precursor hook"
+     },
+     {
+      "rank": 3,
+      "kind": "deepen",
+      "axis": "fidelity",
+      "delta": "mechanism answers you AS IF YOU WERE ITS MAKER — it does WHAT YOU MEAN, not merely what you say",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a simple instruction — half the scope, and it does exactly what you said",
+     "surge": "double the command; ENGINES OBEY THE WORDS"
+    },
+    "bounds": [
+     {
+      "text": "ONLY WHAT THE MECHANISM ALLOWS — meaning stays opaque",
+      "class": "hard"
+     },
+     {
+      "text": "COMMANDING A THING IS NOT UNDERSTANDING IT — engines obey the words",
+      "class": "hard"
+     },
+     {
+      "text": "HALVEX COIL BEGAN EXACTLY HERE, AND DID NOT STOP",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'Halvex Coil began exactly here, and did not stop' — the craft names a specific in-world cautionary figure as its COST. The catalog uses lore as a bound; worth preserving as flavour the GM can invoke."
+   },
+   {
+    "id": "the_fault_strike",
+    "tier": 2,
+    "functions": [
+     "break",
+     "hinder",
+     "reveal",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.03,
+     "note": "incapacitating. The higher marginFloorPer is deliberate: enginewright damage is PRECISE — it rewards a decisive margin more than raw force."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "precision",
+      "delta": "hit a mechanism's fault SO PRECISELY IT FAILS IN THE WAY YOU NEED — not just broken, STOPPED; not just damaged, DISABLED",
+      "from": "r2 grants — choosing the failure MODE"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: END what would otherwise require sustained effort THROUGH ONE WELL-PLACED ACTION — because you knew where it would break",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a measured tap — half the force, and nothing else is damaged",
+     "surge": "double the strike; precision is not subtlety and everyone sees what you did"
+    },
+    "bounds": [
+     {
+      "text": "requires KNOWING the weak point — an unfamiliar mechanism must be read first",
+      "class": "soft"
+     },
+     {
+      "text": "it is PRECISION, not power — a thing with no fault to find resists it",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Direct kin to harmonic's shatterpoint (find the weak point, strike it) — but shatterpoint READS and the_fault_strike STRIKES. A cross-tradition complement rather than a counter: a harmonic finds it, an enginewright breaks it."
+   },
+   {
+    "id": "the_mechanical_defense",
+    "tier": 2,
+    "functions": [
+     "resist",
+     "shield",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "soak",
+     "targets",
+     "autonomy"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 4,
+     "soakRank": 2,
+     "duration": 4,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "a defense that HOLDS WITHOUT CONSTANT ATTENTION — barriers and redirects that work WHILE YOU WORK ON SOMETHING ELSE",
+      "from": "r2 grants — freeing the wielder is the increment"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "a defense that ADAPTS — interlocking protections covering the GROUP, responding to the threat's FORM, not just its direction",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a redirect — half the soak, set up in a moment",
+     "surge": "double the works; an engineered defense takes TIME to build and cannot be moved once built"
+    },
+    "bounds": [
+     {
+      "text": "it must be BUILT — engineered positioning takes setup time",
+      "class": "soft"
+     },
+     {
+      "text": "what is built in place STAYS in place",
+      "class": "hard"
+     }
+    ],
+    "designNote": "FOURTH distinct defensive logic, and the first that is AUTONOMOUS: resonant_shield BLUNTS, the_fixed_point ANCHORS, the_wrong_target EVADES, the_mechanical_defense RUNS WITHOUT YOU. r2's whole increment is freeing the wielder's attention — a mechanic the guard shape should probably express (an `autonomy` flag: does holding it cost your action?)."
+   },
+   {
+    "id": "enginecraft",
+    "tier": 3,
+    "functions": [
+     "command",
+     "make",
+     "mend",
+     "reveal"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "scope",
+     "fidelity"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 8,
+     "scope": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "command a machine-system to RECONFIGURE toward your intent; chain devices into working wholes; repair or repurpose PRECURSOR mechanism",
+      "from": "r2 grants — a FIFTH precursor hook"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "command MACHINE-COUNTRY — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small system — half the scope, and it stays predictable",
+     "surge": "double the works; THE WIELDER DRIFTS HARD-MECHANICAL"
+    },
+    "bounds": [
+     {
+      "text": "UNDERSTANDING FUNCTION IS NOT UNDERSTANDING WHY IT WAS MADE",
+      "class": "hard"
+     },
+     {
+      "text": "the system does what its MECHANISM ALLOWS, not what you wish",
+      "class": "hard"
+     },
+     {
+      "text": "the wielder DRIFTS HARD-MECHANICAL; a person who becomes all-Enginewright loses something",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "shortfold",
+    "tier": 3,
+    "functions": [
+     "move",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "range",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 30,
+     "push": 0,
+     "magnitude": 5,
+     "targets": 1,
+     "note": "r1's own number: ~30 paces, line of sight"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "range+targets",
+      "delta": "fold a VALLEY rather than a courtyard, and BRING OTHERS through with you",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: fold distance as a ROAD YOU CAN WALK REPEATEDLY — a route through the short way that STAYS OPEN",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a short fold — half the distance, and the world barely notices",
+     "surge": "double the fold; THE FOLDED ROAD IS A HOLE IN THE WORLD, AND THE WORLD NOTICES HOLES"
+    },
+    "bounds": [
+     {
+      "text": "LINE OF SIGHT ONLY at r1; substrate-thin places REFUSE it",
+      "class": "hard"
+     },
+     {
+      "text": "BOTH ENDS MUST BE PLACES YOU TRULY KNOW — a half-remembered fold fails",
+      "class": "hard"
+     },
+     {
+      "text": "THE FOLDED ROAD IS A HOLE IN THE WORLD, AND THE WORLD NOTICES HOLES",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Compare numinous's waygate (T-V): both fold distance, but shortfold folds SPACE by understanding and waygate opens a gate by MEANING/memory. The axis expressed in its travel crafts, exactly as with root_road/grey_road."
+   },
+   {
+    "id": "the_self_mending_work",
+    "tier": 4,
+    "functions": [
+     "make",
+     "mend"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "persistence",
+     "quality"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 720,
+     "scope": 3,
+     "note": "T-IV. duration in hours ≈ a month of standing operation"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the folded-in mending no longer merely RESTORES — it IMPROVES; a work at this grade repairs itself TOWARD WHAT ITS USE HAS TAUGHT IT",
+      "from": "r2 grants — a work that learns is the T-IV kind-change"
+     }
+    ],
+    "intensity": {
+     "conserve": "a durable work — half the endurance, and it stays exactly as built",
+     "surge": "double the endurance; A WORK THAT IMPROVES ITSELF DRIFTS FROM ITS MAKER'S INTENT"
+    },
+    "bounds": [
+     {
+      "text": "IT CANNOT MEND THE LIVING, ONLY THE MADE",
+      "class": "hard"
+     },
+     {
+      "text": "it costs the FUTURE'S resources",
+      "class": "cost"
+     },
+     {
+      "text": "A WORK THAT IMPROVES ITSELF DRIFTS FROM ITS MAKER'S INTENT",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'It cannot mend the living, only the made' is the exact mirror of rootkin's the_green_road bound ('cannot cross the dead or THE MADE'). Two traditions on different axes each fencing themselves off from the other's material. The ring's geometry is enforced by the crafts themselves, repeatedly."
+   },
+   {
+    "id": "the_deep_works",
+    "tier": 5,
+    "functions": [
+     "make"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "scope",
+     "persistence"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 8760,
+     "scope": 5,
+     "note": "T-V capstone. duration ≈ a year+ — a world-scale making"
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: commit to and COMPLETE A GREAT WORK — a mechanism or edifice at WORLD-SCALE. The capstone is a KIND (making at the scale of civilisations) at near-total cost, and IT CHANGES WHO YOU ARE.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a deep work half-committed is an abandoned work, and the Enginewrights are unsentimental about those.",
+     "surge": "REFUSED — it already demands nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "IT DEMANDS REAL TIME AND NEARLY ALL YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "IT CHANGES WHO YOU ARE",
+      "class": "cost"
+     }
+    ],
+    "designNote": "SIXTH capstone, identical register. Note its COST bound — 'it changes who you are' — is a §4c alignment-drift hook stated as plainly as any in the catalog."
+   }
+  ],
+  "numinous": [
+   {
+    "id": "numen_sense",
+    "tier": 1,
+    "functions": [
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "range"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "range": 20,
+     "note": "SOCIAL attribute — numinous reads MEANING, and meaning is social"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "feel WHERE THE VEIL IS THIN — where meaning presses close enough to touch, AND WHERE SOMETHING IS PRESSING BACK",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the numinous is simply VISIBLE to you — the sacred, the haunted, the charged, all plain as furniture",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a feel for the room — half the depth, and it does not stay with you",
+     "surge": "double the sensitivity; ONCE SEEN, NEVER UNSEEN"
+    },
+    "bounds": [
+     {
+      "text": "FEEL, NOT COMMAND — barren places read empty",
+      "class": "hard"
+     },
+     {
+      "text": "FEELING THE THIN PLACE IS NOT SURVIVING IT",
+      "class": "hard"
+     },
+     {
+      "text": "ONCE SEEN, NEVER UNSEEN — the Numinous who reach this depth find the ordinary world thinner afterward",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Exact antipode to mech_sense, and both say so: mech_sense reads FUNCTION and 'the numinous stays dark'; numen_sense reads MEANING and cannot touch mechanism. Each tradition's T-I sense-craft names the other's country as its blind spot. Fourth antipode pair, fourth time the T-I senses carry the geometry."
+   },
+   {
+    "id": "steady_soul",
+    "tier": 1,
+    "functions": [
+     "empower",
+     "heal",
+     "resist"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "steadying",
+     "targets"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 1,
+      "d": 4
+     },
+     "plus": 1,
+     "targets": 1,
+     "note": "heals the SPIRIT, not the body — a social-attribute healing craft, the first in the catalog"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "steadying",
+      "delta": "steady another through TERROR, GRIEF, OR THE SHAKES — they can act when they could not",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: nothing shakes YOU, and nearness to you steadies others WITHOUT EFFORT — panic does not propagate through you",
+      "from": "r3 grants — a passive field is a kind-change"
+     }
+    ],
+    "intensity": {
+     "conserve": "a steadying word — half the effect, and it asks nothing of them",
+     "surge": "double it; STEADYING IS A LOAN AGAINST THEIR OWN STRENGTH, and it comes due"
+    },
+    "bounds": [
+     {
+      "text": "IT OPENS THE DOOR, NEVER SHOVES — the closed resist",
+      "class": "hard"
+     },
+     {
+      "text": "STEADYING IS A LOAN AGAINST THEIR OWN STRENGTH — it comes due later",
+      "class": "cost"
+     },
+     {
+      "text": "UNSHAKABLE IS NOT UNHURT — it means the hurt does not show",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'It opens the door, never shoves' is HARD — the same ethical spine as harmonic_voice's 'cannot change anyone's mind'. THIRD tradition whose influence craft refuses coercion at the mechanical level. The catalog is consistent about this across traditions that never reference each other."
+   },
+   {
+    "id": "the_unbroken_practice",
+    "tier": 1,
+    "functions": [
+     "resist",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 24
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "upkeepRelief",
+      "delta": "THE FORM HOLDS YOU where people with nothing to return to break — 'not will, THE PRACTICE'",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: YOU DO NOT RUN OUT as long as you can still attend — the body may fail; the practice holds what the body was holding",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "keep the form — half the relief, and it costs nothing to maintain",
+     "surge": "double it; the practice holds what the body cannot, and the body still fails"
+    },
+    "bounds": [
+     {
+      "text": "requires A PRACTICE — it is not willpower, and it cannot be improvised",
+      "class": "hard"
+     },
+     {
+      "text": "THE BODY MAY STILL FAIL — the practice holds what the body was holding, not the body",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Perfect antipode to enginewright's the_running_engine: both are T-I sustain crafts, one calibrating the body AS A MECHANISM, the other holding it BY PRACTICE. Same function, opposite theory of what a person is."
+   },
+   {
+    "id": "the_dimmed_meaning",
+    "tier": 2,
+    "functions": [
+     "break",
+     "hinder"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "drain",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 4,
+     "scope": 2,
+     "note": "incapacitating. It drains SIGNIFICANCE — the antipode of a damage craft"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "break a thing's significance SO COMPLETELY that those who relied on it LOSE ORIENTATION",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "WITHDRAW numinous presence from an entire PLACE or working — what meaning was sustaining simply STOPS",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "dim it — half the drain, and it returns on its own",
+     "surge": "double the withdrawal; what meaning was sustaining simply stops, INCLUDING WHAT YOU VALUED"
+    },
+    "bounds": [
+     {
+      "text": "it drains MEANING, not function — the thing still exists and still works",
+      "class": "hard"
+     },
+     {
+      "text": "withdrawing meaning from a place takes YOURS TOO",
+      "class": "cost"
+     }
+    ],
+    "designNote": "The precise inverse of numenwork: one attends until truth surfaces, the other withdraws until meaning stops. A tradition containing its own antipode internally — worth noting as a pattern (harmonic's shatterpoint countered its own shield; here numinous can un-make its own material)."
+   },
+   {
+    "id": "the_weight_of_practice",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "command"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "authority",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 6,
+     "targets": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "authority",
+      "delta": "BIND a person or group TO A TRUTH THEY HAVE BEEN AVOIDING — 'not manipulation, the simple pull of someone who has been fully honest'",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: your presence IS SIMPLY THE AUTHORITY IN THE ROOM — not commanded, not explained, present; people naturally arrange themselves around it",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "carry it quietly — half the weight, and nobody defers to you",
+     "surge": "double the presence; authority you did not ask for is still authority you must answer for"
+    },
+    "bounds": [
+     {
+      "text": "it is the pull of GENUINE PRACTICE — it cannot be faked, and a fraud gets nothing",
+      "class": "hard"
+     },
+     {
+      "text": "binding someone to a truth they were avoiding is still doing it TO them",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "numenwork",
+    "tier": 3,
+    "functions": [
+     "heal",
+     "restore",
+     "reveal",
+     "summon",
+     "sustain"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "attention",
+     "scope"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 3,
+      "d": 4
+     },
+     "plus": 2,
+     "scope": 2,
+     "note": "T-III. Its healing is ATTENTION — 'attend so fully that the truth of a person, place, or moment surfaces'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "attention",
+      "delta": "WHERE MEANING IS DENSE THE MATERIAL SOFTENS — a symbol made briefly real, a threshold held open by significance, a wound eased by attention",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: ATTENTION AS A FORCE THAT HOLDS — keep a FORECLOSING thing open by significance alone, hold a truth in a place until it is heard",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "attend briefly — half the effect, and you keep your own centre",
+     "surge": "double the attention; THE WIELDER DRIFTS HARD-SPIRITUAL, toward leaving the material behind"
+    },
+    "bounds": [
+     {
+      "text": "attention REVEALS AND STEADIES; IT DOES NOT COMMAND OR COERCE",
+      "class": "hard"
+     },
+     {
+      "text": "ONLY WHERE MEANING ALREADY RUNS DENSE — it bends the world, never builds it",
+      "class": "hard"
+     },
+     {
+      "text": "the wielder DRIFTS HARD-SPIRITUAL, toward leaving the material behind",
+      "class": "cost"
+     }
+    ],
+    "designNote": "numenwork r3 'keep a FORECLOSING thing open by significance alone' is the framework's own vocabulary — foreclosure is Erik's definition of evil, and this craft is authored as its direct answer. Pair it with latticework's 'order at full strength IS the foreclosure': one craft causes it, another refuses it, on different axes of the ring."
+   },
+   {
+    "id": "thin_place",
+    "tier": 3,
+    "functions": [
+     "make",
+     "open",
+     "reveal",
+     "strike",
+     "summon",
+     "sustain"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "opening",
+     "duration",
+     "variance"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 2,
+     "scope": 2,
+     "variance": 5,
+     "note": "LETHAL rung — because 'you cannot choose what answers.' variance 5: what comes through is not yours to pick."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "HOLD a thin place open — long enough for others to see, speak, pass a thing through. WHAT PASSES GOES BOTH WAYS.",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: OPEN a thin place WHERE THERE WAS NONE, in a room that had no reason to be sacred. And A DOOR OPENED IS A DOOR BOTH WAYS.",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "crack it — half the opening, and you can close it",
+     "surge": "double the opening; YOU CANNOT CHOOSE WHAT ANSWERS, YOU CANNOT CALL IT OFF"
+    },
+    "bounds": [
+     {
+      "text": "ONLY WHERE MEANING IS DENSE at r1; costs proportional",
+      "class": "soft"
+     },
+     {
+      "text": "YOU HOLD THE OPENING, NEVER WHAT COMES THROUGH IT",
+      "class": "hard"
+     },
+     {
+      "text": "YOU CANNOT CHOOSE WHAT ANSWERS, YOU CANNOT CALL IT OFF",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "waygate",
+    "tier": 5,
+    "functions": [
+     "open",
+     "summon",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "range",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 9999,
+     "push": 0,
+     "magnitude": 9,
+     "targets": 3,
+     "note": "T-V capstone: 'crossing any distance at once' — range is effectively unbounded, gated by MEMORY instead"
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: OPEN A GATE to a well-known distant place and step (or lead a few) through, CROSSING ANY DISTANCE AT ONCE. The capstone is a KIND (distance ceasing to apply) at enormous cost — and gated by MEMORY, not by range.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-opened waygate is a hole, not a door.",
+     "surge": "REFUSED — it already demands enormous cost and a cooldown."
+    },
+    "bounds": [
+     {
+      "text": "ONLY TO PLACES HELD CLEARLY IN MEMORY",
+      "class": "hard"
+     },
+     {
+      "text": "ENORMOUS COST plus a real cooldown",
+      "class": "hard"
+     }
+    ],
+    "designNote": "SEVENTH capstone, identical register. And the pair's travel crafts complete the axis: enginewright's shortfold folds SPACE by understanding its geometry; numinous's waygate crosses distance by MEMORY and meaning. Same problem, opposite solution — exactly as root_road/grey_road did for life/death."
+   }
+  ]
+ },
+ "passFindings": [
+  "THE PAIR'S SIGNATURE: each tradition names the OTHER's territory as its own blind spot, explicitly, in its T-I sense-craft. mech_sense: 'Function, not purpose; THE NUMINOUS STAYS DARK... what a machine MEANS is the Numinous's country.' numen_sense reads meaning and cannot touch mechanism. FOURTH antipode pair authored, and the FOURTH time the two T-I sense-crafts carry the ring geometry between them. This is now a reliable authoring signal: to find an axis's real content, read its two T-I senses.",
+  "THREE MORE PRECURSOR HOOKS, all in enginewright: mech_sense r3 ('the Precursor works do not confess — they only answer, and only sometimes'), command_engine r2 ('a Precursor door that still half-listens'), enginecraft r2/r3 ('repair or repurpose Precursor mechanism'; 'command a whole Precursor installation'). With radiant's prism_sight r3 and harmonic's echo_memory r3, that is FIVE independent in-catalog precursor hooks across THREE traditions. SNG-261 §B does not need new content — it needs wiring.",
+  "A FOURTH DISTINCT DEFENSIVE LOGIC, and the first AUTONOMOUS one: the_mechanical_defense r2's whole increment is that it 'holds without constant attention — works while you work on something else'. resonant_shield BLUNTS, the_fixed_point ANCHORS, the_wrong_target EVADES, the_mechanical_defense RUNS WITHOUT YOU. CCODE: the guard shape may want an `autonomy` flag — does holding this cost your action?",
+  "THE RING FENCES ITSELF, AGAIN: the_self_mending_work 'cannot mend the living, ONLY THE MADE' is the exact mirror of rootkin's the_green_road 'cannot cross the dead or THE MADE'. Two traditions on DIFFERENT axes each fencing themselves off from the other's material, without cross-referencing each other. The geometry is emergent in the prose, not imposed.",
+  "numenwork r3 'keep a FORECLOSING thing open by significance alone' uses the FRAMEWORK'S OWN vocabulary — foreclosure is Erik's definition of evil, and this craft is authored as its direct answer. Pair it with latticework's 'order at full strength IS the foreclosure': one craft CAUSES it, another REFUSES it, on different axes. The philosophical spine runs through the mechanics.",
+  "A THIRD TRADITION REFUSES COERCION AT THE MECHANICAL LEVEL: steady_soul's 'it opens the door, NEVER SHOVES' joins harmonic_voice's 'cannot change anyone's mind' and the_weight_of_practice's 'it cannot be faked'. Three traditions that never reference each other are consistent that influence-craft stops short of control. That is a values statement the mechanics must protect, and it is now demonstrated three times.",
+  "A TRADITION CAN CONTAIN ITS OWN ANTIPODE: the_dimmed_meaning (withdraw until meaning stops) is the precise inverse of numenwork (attend until truth surfaces). Same pattern as harmonic's shatterpoint countering its own resonant_shield. Worth noting that intra-tradition counters exist alongside cross-tradition ones."
+ ]
+}

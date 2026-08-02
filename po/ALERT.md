@@ -1,6 +1,33 @@
 # PO ALERT
 
-> ## [SNG-263 — THE BESTIARY GETS A BODY (CCODE-74's ask, done)] (Aevi, 2026-08-02)
+> ## [SNG-263 — CHURNFOLK authored (5 of 27; 58/285)] + a real engine gap (Aevi, 2026-08-02)
+> Authored churnfolk as **LATTICE'S ANTIPODE** (lattice's `the_fixed_point`: "the Churn breaks around you";
+> the bestiary's `churn_revel` is suppressed by ORDER crafts). Staged clean 10/10, every axis numbered.
+> **⚠️ CCODE — A MECHANICAL IDEA THE SCHEMA DID NOT ANTICIPATE, and it is a real gap.** Churnfolk crafts want a
+> **WIDENED OUTCOME BAND, not a bigger number**: *"you don't choose HOW it breaks, only that it does"*, *"never
+> exactly as aimed"*, *"generous and strong, but sideways."* I authored a **`variance`** axis (3-8 across the
+> tradition) and the engine has no concept of it. **A high-variance craft should roll a WIDER band — bigger max,
+> worse min — rather than a higher mean.** It pairs naturally with the §3b second-roll crit dials, and it is
+> *the* mechanical difference between a lattice craft and a churnfolk craft. Right now both resolve identically.
+> Findings:
+> - **A DIRECT ANTIPODAL COUNTER-PAIR at identical tier AND rank:** `wildcraft` r3 "unmake order at scale" vs
+>   `latticework` r3 "impose structure at scale." Second such pair found (after radiant_lance/resonant_shield),
+>   and the first on the ring's TRUE axis. Both carry matching COST bounds — the lattice **drifts order-hot**,
+>   the churn **drifts chaos-hot**. **Authoring antipodes adjacently is now a proven method.**
+> - **The antipode relationship is MECHANICAL, not thematic.** `catch_as_catch_can`'s HARD bound — *"requires
+>   DISORDER; an orderly, well-provisioned place offers a churnfolk nothing"* — means **churnfolk are weakest
+>   exactly where lattice is strongest.** That is SPEC §5 fairness-by-geometry expressed at the craft level.
+> - **THREE DISTINCT DEFENSIVE LOGICS now ride the one `soak`/`soakRank` shape:** `resonant_shield` BLUNTS
+>   impact · `the_fixed_point` REFUSES to move · `the_wrong_target` IS NOT THERE (and explicitly fails against
+>   unaimed/area harm). The guard shape generalises further than I expected.
+> - **Two more crafts writing mechanics the engine hasn't built:** `probability_tilt`'s *"the world balances its
+>   books — whatever you tilt toward you, something tilts away"* is a natural **§3b crit-FAILURE** hook; and
+>   `the_churns_gift` r3 *"the wild current begins to know you… it takes an interest"* is the catalog's closest
+>   thing to a **PATRON/PACT** mechanic and a strong **§4c alignment-drift** hook.
+> - **`the_long_odds` is the FOURTH capstone** with the identical register (a KIND, absolute cost, intensity
+>   REFUSED) — but its bound is pointed: *"the ordered and prepared can still corner you."* **Even the churnfolk
+>   capstone bows to the lattice's virtue.** The antipode is honoured at the highest rung of both traditions.
+> Continuing.> ## [SNG-263 — THE BESTIARY GETS A BODY (CCODE-74's ask, done)] (Aevi, 2026-08-02)
 > CCode: *"the bestiary has no mechanical body either — the SNG-263 finding one level up. 26/26 creatures carry
 > no threat, no health, no soak; a dire wolf and a swarm of glimmerlings at the same tier are mechanically the
 > identical fight."* **Authored all 26** to `po/staged_content/bestiary_mechanics.json` — threat, health, soak,

@@ -70,7 +70,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.1473121001167453,
+    "spectrumId": -0.13994649511090804,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
@@ -265,35 +265,26 @@
         "player": "Ask Cy, quietly, if it noticed anything in the night — the latch bracket it was watching, or anything that moved on the landing.",
         "summary": "Cy reports footsteps that stopped on the landing above and waited eleven minutes in the night — one person, no entry attempted.",
         "narration": "You keep your voice low. The scaffold crew is not yet on the landing — there is still a margin of quiet left in the alcove — and you use it.\n\n\"Cy,\" you say, just above a breath. \"The latch bracket. Did anything move in the night?\"\n\nCy's lens irises once, slow and deliberate, the way it does when it is retrieving something from a deep register. It turns from the bracket to face you. The lamp it carries — the one it has never explained — throws no light this morning; the dawn under the door is enough.\n\n\"The bracket held,\" Cy says, in its precise, slightly antique way. \"No lateral stress. No entry from the landing passage.\" A pause, the kind that means it is not finished. \"However. Approximately two hours before current light: footsteps on the stair. One person. They stopped at the landing above and did not descend. They remained for eleven minutes and then withdrew. No door was tried.\"\n\nVessin, coat still in hand, glances at you. Her expression has returned most of the way to its working surface — the appraiser is back, reading the information alongside you rather than reacting to it.\n\n\"Eleven minutes is not someone who got lost,\" she says quietly.\n\nCy's lens irises again. \"That is a social inference,\" it says, with the tone of a mechanism that has stopped pretending it does not make them. \"It is consistent with the data.\"\n\nThe first scrape of boots on stone sounds from somewhere above — not close yet, but close enough. The margin of quiet is almost gone."
+      },
+      {
+        "player": "Ask Cy how long Vessin and I were... engaged, and if he things the person was listening to our activities.",
+        "summary": "In the dry storage alcove at dawn, Cy reported the night's watch — four hours and seventeen minutes of engagement, eleven of them with a listener on the landing. Vessin received this with straight shoulders and a dry remark, and named the real question: was the listener after them, or merely unlucky in their timing.",
+        "narration": "Cy's lens irises twice in quick succession — the double-tick that means it is cross-referencing. 'Duration of engagement,' it says, in its precise way: 'four hours and seventeen minutes, from the closing of the latch to the moment you addressed me.' It pauses. 'The individual on the landing was present for eleven of those minutes. The acoustics of this chamber are favorable.' Another pause. 'Favorable for the person on the landing. Not, in this instance, for the current assignment.' Vessin makes a sound that is entirely composed of air, and turns to face the wall for a moment. Her shoulders are very straight. 'So,' she says, at last, dry and quiet, 'someone knows we were here and what we were doing.' She turns back. The appraiser's eye is fully restored. 'The question is whether they wanted that particular information, or whether they wanted something else and received it by accident.'"
       }
     ],
     "lastTurn": {
-      "narration": "You keep your voice low. The scaffold crew is not yet on the landing — there is still a margin of quiet left in the alcove — and you use it.\n\n\"Cy,\" you say, just above a breath. \"The latch bracket. Did anything move in the night?\"\n\nCy's lens irises once, slow and deliberate, the way it does when it is retrieving something from a deep register. It turns from the bracket to face you. The lamp it carries — the one it has never explained — throws no light this morning; the dawn under the door is enough.\n\n\"The bracket held,\" Cy says, in its precise, slightly antique way. \"No lateral stress. No entry from the landing passage.\" A pause, the kind that means it is not finished. \"However. Approximately two hours before current light: footsteps on the stair. One person. They stopped at the landing above and did not descend. They remained for eleven minutes and then withdrew. No door was tried.\"\n\nVessin, coat still in hand, glances at you. Her expression has returned most of the way to its working surface — the appraiser is back, reading the information alongside you rather than reacting to it.\n\n\"Eleven minutes is not someone who got lost,\" she says quietly.\n\nCy's lens irises again. \"That is a social inference,\" it says, with the tone of a mechanism that has stopped pretending it does not make them. \"It is consistent with the data.\"\n\nThe first scrape of boots on stone sounds from somewhere above — not close yet, but close enough. The margin of quiet is almost gone.",
-      "sceneSummary": "Cy reports footsteps that stopped on the landing above and waited eleven minutes in the night — one person, no entry attempted.",
+      "narration": "Cy's lens irises twice in quick succession — the double-tick that means it is cross-referencing. 'Duration of engagement,' it says, in its precise way: 'four hours and seventeen minutes, from the closing of the latch to the moment you addressed me.' It pauses. 'The individual on the landing was present for eleven of those minutes. The acoustics of this chamber are favorable.' Another pause. 'Favorable for the person on the landing. Not, in this instance, for the current assignment.' Vessin makes a sound that is entirely composed of air, and turns to face the wall for a moment. Her shoulders are very straight. 'So,' she says, at last, dry and quiet, 'someone knows we were here and what we were doing.' She turns back. The appraiser's eye is fully restored. 'The question is whether they wanted that particular information, or whether they wanted something else and received it by accident.'",
+      "sceneSummary": "In the dry storage alcove at dawn, Cy reported the night's watch — four hours and seventeen minutes of engagement, eleven of them with a listener on the landing. Vessin received this with straight shoulders and a dry remark, and named the real question: was the listener after them, or merely unlucky in their timing.",
       "choices": [
         {
-          "label": "Step out first alone — look at the landing and see who is there now, or what they left.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Prism Sight on the landing through the gap under the door — read the light-history of whoever stood there.",
+          "label": "Use Prism Sight on the latch and the door — read the light-history of the landing, see if the person's approach left a trace.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "study"
+            "study",
+            "scout"
           ],
           "abilityId": "prism_sight",
           "energyCost": 3,
@@ -302,13 +293,14 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Vessin plainly — the man in the lower Annex. Does eleven minutes on a landing sound like him?",
+          "label": "Ask Vessin directly — does she think this connects to the man in the lower Annex, or is it something of her own?",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -317,13 +309,29 @@
           "emergenceId": null
         },
         {
-          "label": "Step out together — let the scaffold crew see you both emerging naturally and read the landing as you go.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Dress and leave the alcove now, before the scaffold crew arrives — let the morning be your cover.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "careful",
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Cy if it can distinguish anything about the person — weight, footfall pattern, whether it has heard this particular tread before.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -337,11 +345,11 @@
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Coat in hand, hair still undone — appraiser's composure mostly restored, listening."
+            "state": "Coat in hand, hair still undone — appraiser's composure fully restored, turning the listener question over with professional calm."
           },
           {
             "name": "Cy",
-            "state": "Turned from the latch bracket toward Loki, lens irised, lamp dim in the growing dawn."
+            "state": "Lens irised from the cross-reference, lamp dark, facing Loki — has delivered its report."
           }
         ],
         "objects": [
@@ -351,10 +359,11 @@
           "Traveler's Pack against the wall"
         ],
         "threads": [
-          "Someone stood on the landing above for eleven minutes in the night and then withdrew — purpose unknown.",
+          "Someone stood on the landing for eleven minutes in the night and listened — purpose and identity unknown.",
           "The Descent bargain is sealed — want on both sides, access on demand.",
           "The scaffold crew is beginning to stir — the alcove will not stay private much longer.",
-          "The man in the lower Annex: long face, jaw healed crooked, grey coat with a split seam — not yet found."
+          "The man in the lower Annex: long face, jaw healed crooked, grey coat with a split seam — not yet found.",
+          "Vessin's question hangs: was the listener after information about them, or was the listening accidental?"
         ]
       },
       "npcUpdates": [
@@ -362,16 +371,17 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Heard Cy's report alongside Loki — said eleven minutes is not someone who got lost. Appraiser's composure mostly restored.",
-          "statusNote": "In the alcove at dawn, coat in hand, hair still undone — reading the situation.",
+          "note": "Received Cy's report on the listener — four hours seventeen minutes of engagement, eleven of them overheard. Responded with contained composure and named the right question: intentional surveillance or accidental witness.",
           "learned": [
-            "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental."
-          ]
+            "Someone was on the landing for eleven minutes during the night — she now knows this too.",
+            "Cy's acoustics assessment: the alcove carries sound to the landing."
+          ],
+          "statusNote": "In the alcove at dawn, coat in hand, hair still undone — composure restored, processing the listener's presence."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief quiet exchange in the alcove at dawn."
+        "hoursPassed": 0.1,
+        "why": "A brief exchange — Cy's report and Vessin's response, no more than a few minutes."
       }
     },
     "sceneState": {
@@ -379,11 +389,11 @@
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Coat in hand, hair still undone — appraiser's composure mostly restored, listening."
+          "state": "Coat in hand, hair still undone — appraiser's composure fully restored, turning the listener question over with professi"
         },
         {
           "name": "Cy",
-          "state": "Turned from the latch bracket toward Loki, lens irised, lamp dim in the growing dawn."
+          "state": "Lens irised from the cross-reference, lamp dark, facing Loki — has delivered its report."
         }
       ],
       "objects": [
@@ -393,10 +403,11 @@
         "Traveler's Pack against the wall"
       ],
       "threads": [
-        "Someone stood on the landing above for eleven minutes in the night and then withdrew — purpose unknown.",
+        "Someone stood on the landing for eleven minutes in the night and listened — purpose and identity unknown.",
         "The Descent bargain is sealed — want on both sides, access on demand.",
         "The scaffold crew is beginning to stir — the alcove will not stay private much longer.",
-        "The man in the lower Annex: long face, jaw healed crooked, grey coat with a split seam — not yet found."
+        "The man in the lower Annex: long face, jaw healed crooked, grey coat with a split seam — not yet found.",
+        "Vessin's question hangs: was the listener after information about them, or was the listening accidental?"
       ]
     }
   },
@@ -826,7 +837,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named plainly that her craft gave her structure, not preference — the first thing she found about Loki that the reading didn't hand her in advance. Met the request to stand and brace without hesitation.",
         "[d2] Named her want plainly when Loki used Descent — held two seconds, then said please and pressed back without hesitation.",
         "[d2] Said Loki's name into the stone when the harmonic undertone found her — composure absent, want fully present.",
         "[d2] Descent named what she was feeling precisely — her composure stepped aside completely; she said Loki's name into the dawn light rather than into the wall.",
@@ -835,23 +845,24 @@
         "[d2] Came apart completely at the finish — cried out once, rode the waves with her forehead against the stone, breath now evening out. The composure is absent. She has not moved away.",
         "[d2] Came down from the finish slowly, said nothing through the long easing, then reached for her trousers and said she should find them — dry, precise, quieter than usual. Composure returning in stages.",
         "[d2] Dressed slowly with hands and kisses — stood still under it, kissed back with precision, said 'scaffold crew' dry and quiet and reached for her coat.",
-        "[d2] Heard Cy's report alongside Loki — said eleven minutes is not someone who got lost. Appraiser's composure mostly restored."
+        "[d2] Heard Cy's report alongside Loki — said eleven minutes is not someone who got lost. Appraiser's composure mostly restored.",
+        "[d2] Received Cy's report on the listener — four hours seventeen minutes of engagement, eleven of them overheard. Responded with contained composure and named the right question: intentional surveillance or accidental witness."
       ],
       "knownFacts": [
-        "Her craft read Loki's structure but not his preferences — that distinction matters to her",
-        "She can be reached past the appraiser's composure when the naming is exact enough — she responds to being seen correctly, not to pressure alone",
         "Descent can reach past her appraisal composure when the naming is exact enough — not just structure, but the live interior fact of the moment",
         "Loki holds a pace deliberately and does not hurry when he does not have to — that reads as a kind of precision she respects",
         "Said yes to the Descent bargain — a standing offer between them, want named on both sides, access on demand. She named it with one word and the composure stepped aside.",
         "Descent can bind a genuine bargain between them — she recognized the shape of it and agreed without deflection.",
         "Accepts unhurried care after the finish — stands still for a palm along her spine in a way she stood still for nothing else.",
-        "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental."
+        "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental.",
+        "Someone was on the landing for eleven minutes during the night — she now knows this too.",
+        "Cy's acoustics assessment: the alcove carries sound to the landing."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the alcove at dawn, coat in hand, hair still undone — reading the situation.",
+      "statusNote": "In the alcove at dawn, coat in hand, hair still undone — composure restored, processing the listener's presence.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1191,7 +1202,7 @@
     "lastSharedReadAt": "2026-08-02T00:08:11.368Z",
     "lastTickWorldDay": 33,
     "lastCanonWorldDay": 33,
-    "turnsSinceOffer": 41,
+    "turnsSinceOffer": 42,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -2158,17 +2169,17 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.193636079215683,
-    "cerebral": 7.119462864965011,
-    "social": 19.386191567924527,
-    "strategic": 4.348212352030051,
-    "cautious": 4.281559083789717,
-    "amorous": 25.771180885357396,
-    "generous": 3.2551517933563052,
-    "ruthless": 1.1418362202821768,
-    "risky": 0.9331600691732459,
-    "patient": 0.2548292333858097,
-    "deception": 0.2966344271830815
+    "devotion": 2.138795177235291,
+    "cerebral": 7.941476293340886,
+    "social": 18.901536778726413,
+    "strategic": 4.239507043229299,
+    "cautious": 4.174520106694974,
+    "amorous": 25.12690136322346,
+    "generous": 3.1737729985223977,
+    "ruthless": 1.1132903147751223,
+    "risky": 0.9098310674439147,
+    "patient": 0.24845850255116445,
+    "deception": 0.2892185665035044
   },
   "aptitudes": [
     "silver_tongue",
@@ -2177,7 +2188,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 132,
+  "actionCount": 133,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2486,8 +2497,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785634221883,
-  "rev": 432,
+  "updatedAt": 1785634450655,
+  "rev": 433,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3277,7 +3288,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 90
+    "the_quickwood": 91
   },
   "opLossPending": false,
   "sessions": [
@@ -3332,10 +3343,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-02T01:30:21.881Z",
+      "lastAt": "2026-08-02T01:34:10.653Z",
       "startDay": 32,
       "endDay": 33,
-      "beats": 56
+      "beats": 57
     }
   ],
   "establishedFacts": [
@@ -3373,17 +3384,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 155,
-    "choices": 155,
+    "sceneSummary": 156,
+    "choices": 156,
     "characterDeltas": 60,
-    "scene": 155,
+    "scene": 156,
     "placeUpdates": 17,
     "codexUpdates": 92,
-    "timeOps": 144,
+    "timeOps": 145,
     "offer": 11,
     "generateRequest": 6,
     "sceneEnded": 34,
-    "npcUpdates": 127,
+    "npcUpdates": 128,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3397,7 +3408,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 155,
+  "_opTurns": 156,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

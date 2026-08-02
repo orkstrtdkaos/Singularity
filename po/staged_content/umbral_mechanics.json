@@ -1,0 +1,603 @@
+{
+ "schemaVersion": 1,
+ "id": "umbral_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, tradition 10 of 27 — UMBRAL, completing the DARK/LIGHT axis with blazeborn (the pilot). THE PAIR'S SIGNATURE, consistent with the other three axes: blazeborn's lightsense reads what light SAYS and 'darkness stays genuinely opaque (the gap the Umbrals built an art inside)'; umbral's darksight 'sees the dark, NOT THE INTENT moving in it'. Each names the other's country. But this pair has something the others don't — umbral's crafts are morally weighted toward RESPONSIBILITY: nearly every bound is about what you owe for what you hide.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "crafts": [
+  {
+   "id": "darksight",
+   "tier": 1,
+   "functions": [
+    "move",
+    "reveal"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 20
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "see FAR AND FINE without light — read a face across a black room, follow a trail BY THE SHAPE OF THE AIR IN IT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the dark becomes your NATIVE MEDIUM — you see better in it than most see at noon, and you can CHOOSE light-blindness and shed it at will",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a dark-adjusted glance — half the range, and light does not hurt as much",
+    "surge": "double the sight; SUDDEN LIGHT STILL BLINDS YOU"
+   },
+   "bounds": [
+    {
+     "text": "TOTAL LIGHT DEFEATS IT — sees dark, not hidden intent",
+     "class": "hard"
+    },
+    {
+     "text": "SUDDEN LIGHT STILL BLINDS YOU",
+     "class": "soft"
+    },
+    {
+     "text": "you see the DARK, NOT THE INTENT MOVING IN IT",
+     "class": "hard"
+    },
+    {
+     "text": "A LIFE SPENT IN THE DARK MARKS YOU — Blazeborn read it on sight",
+     "class": "cost"
+    }
+   ],
+   "designNote": "Exact antipode to blazeborn's lightsense — and both name the other's blind spot in the same terms. lightsense: 'darkness stays genuinely opaque (THE GAP THE UMBRALS BUILT AN ART INSIDE)'. darksight: 'you see the dark, NOT THE INTENT moving in it'. FIFTH antipode pair, fifth time the T-I senses carry the geometry. The pattern is now unbroken across every axis authored."
+  },
+  {
+   "id": "dim",
+   "tier": 1,
+   "functions": [
+    "break",
+    "conceal",
+    "hinder"
+   ],
+   "shape": "hobble",
+   "operativeAxis": [
+    "suppression",
+    "area",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 2,
+    "area": 1,
+    "note": "incapacitating rung — it suppresses LIGHT, including other people's light-craft"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "PUT A LIGHT OUT CLEANLY AT DISTANCE — a lamp, a signal-fire, A RADIANT'S KINDLED BEAM MID-BURN",
+     "from": "r2 grants — an explicit counter to a named tradition's craft, mid-cast"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "area+duration",
+     "delta": "dim a WHOLE PLACE — a hall, a street, a courtyard — down to working shadow, and HOLD IT THERE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a deeper shadow — half the dimming, and it costs nothing to hold",
+    "surge": "double the dark; HOLDING COSTS CONTINUOUSLY and a determined light-worker pushes back"
+   },
+   "bounds": [
+    {
+     "text": "brief at r1; BRIGHT OPEN GROUND DEFEATS IT",
+     "class": "soft"
+    },
+    {
+     "text": "YOU CANNOT DOUSE THE SUN, AND YOU CANNOT DOUSE THE BLAZE",
+     "class": "hard"
+    },
+    {
+     "text": "holding costs CONTINUOUSLY — a determined light-worker can push back",
+     "class": "cost"
+    }
+   ],
+   "designNote": "SIXTH cross-tradition counter, and the most direct yet: dim r2 puts out 'a Radiant's kindled beam MID-BURN' — a craft that counters another tradition's craft WHILE IT IS BEING CAST. But its own HARD bound concedes the limit: 'you cannot douse the Blaze.' It beats radiant's kindle, not blazeborn's radiance. Ranked counters again, exactly like lance/shield."
+  },
+  {
+   "id": "the_long_dark",
+   "tier": 1,
+   "functions": [
+    "resist",
+    "sustain"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "DRAW SUSTENANCE from genuine lightlessness — reduced need for warmth, light, and ordinary comforts in true dark",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: in the lightless depths WHERE OTHERS RUN OUT, YOU RUN DEEPER — the dark is not deprivation, it is where you are most alive",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "settle into it — half the relief, and it asks nothing",
+    "surge": "double it; you are drawing on a place most people cannot follow you into"
+   },
+   "bounds": [
+    {
+     "text": "REQUIRES GENUINE LIGHTLESSNESS — a dim room is not the dark",
+     "class": "hard"
+    }
+   ],
+   "designNote": "Exact antipode to blazeborn's the_radiant_ground ('requires INTENSE light — worthless in shade'). Two T-I sustain crafts, each useless in the other's medium. The fairness-by-geometry pattern from lattice/churnfolk (catch_as_catch_can 'requires DISORDER') repeats on a third axis."
+  },
+  {
+   "id": "umbracraft",
+   "tier": 2,
+   "functions": [
+    "command",
+    "conceal",
+    "move",
+    "reveal",
+    "ward"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "concealment",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 4,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "hide a person, a truth, or a thing SO WELL EVEN A SEARCHER WHO KNOWS IT IS THERE CANNOT FIND IT; move unseen through watched places",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "COMMAND SHADOW AT SCALE — hide a caravan, a rite, A REBELLION; see into the hidden hearts of things; GIVE SANCTUARY",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a wrap of shadow — half the concealment, and you answer for nothing",
+    "surge": "double it; THE WIELDER DRIFTS DARK-HOT, and the one who harbors everything eventually harbors something terrible"
+   },
+   "bounds": [
+    {
+     "text": "TOTAL LIGHT DEFEATS IT",
+     "class": "hard"
+    },
+    {
+     "text": "CONCEALMENT HIDES, IT DOES NOT DEFEND",
+     "class": "hard"
+    },
+    {
+     "text": "HARBORING SOMETHING MAKES YOU RESPONSIBLE FOR IT",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS DARK-HOT — the one who harbors everything eventually harbors something terrible",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "id": "the_harbor",
+   "tier": 2,
+   "functions": [
+    "conceal",
+    "ward"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "concealment",
+    "targets",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 0,
+    "soakRank": 0,
+    "duration": 8,
+    "targets": 1,
+    "note": "A GUARD SHAPE WITH ZERO SOAK — deliberate. Its own bound: 'concealment hides, it does not defend.' The Harbor protects by never being found, not by absorbing a blow. If it IS found, it offers nothing."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "harbor so completely that A SEARCHER WHO KNOWS IT IS THERE STILL COMES AWAY EMPTY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE HARBOR BECOMES A PLACE — a warded shadow others can step into and be hidden within, AND KNOW THEY ARE SAFE",
+     "from": "r3 grants — a sanctuary others can enter is a kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "hide one thing — half the concealment, and you answer for less",
+    "surge": "double the harbor; EVERYONE INSIDE BECOMES YOUR RESPONSIBILITY, INCLUDING THE ONES YOU WOULD NOT HAVE CHOSEN"
+   },
+   "bounds": [
+    {
+     "text": "YOU BECOME RESPONSIBLE FOR WHAT YOU HARBOR",
+     "class": "hard"
+    },
+    {
+     "text": "THE BLAZE CAN STILL BURN what it cannot see",
+     "class": "hard"
+    },
+    {
+     "text": "the harbored thing is NOW YOURS TO ANSWER FOR",
+     "class": "hard"
+    },
+    {
+     "text": "EVERYONE INSIDE BECOMES YOUR RESPONSIBILITY, INCLUDING THE ONES YOU WOULD NOT HAVE CHOSEN",
+     "class": "cost"
+    }
+   ],
+   "designNote": "A FIFTH DEFENSIVE LOGIC, and mechanically the strangest: soak 0. It defends by NOT BEING FOUND. BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND. CCODE: this one needs the guard shape to accept a zero-soak concealment defence whose failure mode is total (found = no protection at all), which is a genuinely different curve from a soak that degrades."
+  },
+  {
+   "id": "shroud",
+   "tier": 2,
+   "functions": [
+    "conceal",
+    "deceive"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "concealment",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 12
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "shroud a THING rather than yourself — a body, a door, a whole wagon — so EYES SLIDE OFF IT ENTIRELY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "SPECIAL: the shroud HOLDS WITHOUT YOUR ATTENTION — set it and walk away; it keeps until something breaks it",
+     "from": "r3 grants — autonomy again, cf. the_mechanical_defense"
+    }
+   ],
+   "intensity": {
+    "conserve": "a light shroud — half the persistence, and you can lift it easily",
+    "surge": "double it; WHAT YOU SHROUD AND FORGET, YOU MAY NEVER FIND AGAIN"
+   },
+   "bounds": [
+    {
+     "text": "bright light THINS it; a knowing searcher with a lamp can work at it",
+     "class": "soft"
+    },
+    {
+     "text": "A SHROUD IS A LIE OF ABSENCE — touch, sound, and a dog's nose all still work",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU SHROUD AND FORGET, YOU MAY NEVER FIND AGAIN",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "id": "false_trail",
+   "tier": 2,
+   "functions": [
+    "conceal",
+    "deceive"
+   ],
+   "shape": "hobble",
+   "operativeAxis": [
+    "misdirection",
+    "trails"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 24,
+    "trails": 1,
+    "note": "PRACTICAL attribute — the only one in umbral; trail-craft is handwork"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "trails",
+     "delta": "lay SEVERAL trails at once, each equally convincing, and let a pursuer CHOOSE WRONG",
+     "from": "r2 grants — count is the increment"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: lay a trail YOU DID NOT WALK — a path leading somewhere you have NEVER BEEN, convincing all the way to its end",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "one plausible trail — half the conviction, and it costs you no time",
+    "surge": "double the trails; A TRACKER WHO KNOWS YOUR WORK WILL READ THE BRAID ITSELF AS A SIGNATURE"
+   },
+   "bounds": [
+    {
+     "text": "a MASTER TRACKER or TRUTH-READER may catch the lie",
+     "class": "hard"
+    },
+    {
+     "text": "a tracker who knows your work READS THE BRAID ITSELF AS A SIGNATURE",
+     "class": "cost"
+    },
+    {
+     "text": "IT MUST END SOMEWHERE — what waits at the end of a trail you invented is not yours to choose",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "the_shadowed_mending",
+   "tier": 2,
+   "functions": [
+    "heal",
+    "mend"
+   ],
+   "shape": "healing",
+   "operativeAxis": [
+    "healing",
+    "conditions"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 1,
+    "note": "CONDITIONAL healing — it works BETTER in true darkness. The +1 assumes the condition is met; in light it is worse than an ordinary mend."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "healing",
+     "delta": "in TRUE SHADOW recovery proceeds with unusual speed — fever breaks faster, pain quiets, wounds close cleaner than they should",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: set a person in genuine lightlessness and healing proceeds PAST THE ORDINARY — as if darkness itself were medicine",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "tend in the dark — half the healing, and no darkness is required",
+    "surge": "double it; the patient must be kept in genuine lightlessness, which is its own hardship"
+   },
+   "bounds": [
+    {
+     "text": "REQUIRES DARKNESS to exceed ordinary mending — in light it is merely competent",
+     "class": "hard"
+    },
+    {
+     "text": "the patient must ACCEPT the dark, and not everyone can",
+     "class": "soft"
+    }
+   ],
+   "designNote": "The exact inverse of radiant's dawn_surgery (heals by BURNING CLEAN in full light) and rootkin's set_to_rights (heals by RESTORING THE DESIGN). THREE healing crafts, three incompatible theories of medicine — light, design, and darkness. The `healing` shape carries all three through magnitudes and bounds alone."
+  },
+  {
+   "id": "shadowstep",
+   "tier": 3,
+   "functions": [
+    "conceal",
+    "move",
+    "travel"
+   ],
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 15,
+    "push": 0,
+    "magnitude": 5,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "step between shadows ACROSS A ROOM, A STREET, A BATTLEFIELD — anywhere dark touches dark",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: TRAVEL THE DARK AS A ROAD — league upon league between distant shadows, arriving WHERE NO LIGHT HAS BEEN",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a short step — half the distance, and nothing notices the passage",
+    "surge": "double the road; THE SHADOWROAD IS NOT EMPTY — something else uses it"
+   },
+   "bounds": [
+    {
+     "text": "BOTH ENDS NEED REAL SHADOW — a lit gap is a WALL",
+     "class": "hard"
+    },
+    {
+     "text": "TOTAL LIGHT STRANDS YOU",
+     "class": "hard"
+    },
+    {
+     "text": "THE SHADOWROAD IS NOT EMPTY. SOMETHING ELSE USES IT.",
+     "class": "cost"
+    }
+   ],
+   "designNote": "FOURTH travel craft with terrain-exclusive access, and the pattern is now complete across four axes: the_root_road (life, cannot cross the dead or the made) · the_grey_road (death, needs death substantial and recent) · shortfold (mechanism, both ends must be KNOWN) · shadowstep (dark, both ends need real shadow, LIGHT IS A WALL). Every axis's travel craft is walled off by its antipode's medium. CCODE: terrain-gated movement is a real mechanic the catalog assumes and the engine does not have."
+  },
+  {
+   "id": "the_shadow_work",
+   "tier": 3,
+   "functions": [
+    "conceal",
+    "make",
+    "transform"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "persistence",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 6,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "TRANSFORM A SPACE'S LIGHT CONDITIONS and give shadow the shape you need — it holds until you release it or something breaks it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "SPECIAL: work in shadow AS A MASTER WORKS IN MATERIAL — make things that PERSIST, transform environments, give darkness a form that lasts",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a pocket of shaped shadow — half the persistence, quick to make",
+    "surge": "double the work; shadow given lasting form is a thing others can find and use"
+   },
+   "bounds": [
+    {
+     "text": "it is SHADOW — it screens and conceals; it stops nothing physical",
+     "class": "hard"
+    },
+    {
+     "text": "what you build of darkness UNMAKES IN TOTAL LIGHT",
+     "class": "hard"
+    }
+   ],
+   "designNote": "Exact antipode to radiant's glass_work r3 ('work LIGHT ITSELF into a form that persists as an object'). Both traditions' T-II/T-III shape-crafts reach the same capability — giving their medium lasting form — and each is unmade by the other's medium."
+  },
+  {
+   "id": "the_never_there",
+   "tier": 5,
+   "functions": [
+    "conceal",
+    "deceive"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "concealment",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 8,
+    "scope": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: move through THE MOST-WATCHED PLACE leaving NO TRACE, NO MEMORY, NO EVIDENCE you were ever there. The capstone is a KIND (unbeing-in-the-record) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a partial never-there is simply being there quietly, which is a lesser craft.",
+    "surge": "REFUSED — it already costs nearly everything and cannot be pushed further."
+   },
+   "bounds": [
+    {
+     "text": "A SINGLE OVERT ACTION ENDS IT",
+     "class": "hard"
+    },
+    {
+     "text": "A VERITY-READER PRESENT MAY FEEL THE ABSENCE ITSELF",
+     "class": "hard"
+    }
+   ],
+   "designNote": "EIGHTH capstone, identical register. And its bound names ANOTHER tradition as its counter — 'a Verity-reader may feel THE ABSENCE ITSELF'. The truth-tradition detects the umbral capstone not by seeing through it but by noticing a hole in the record. A superb authored counter, and a direct hook for the verist pair I author next."
+  }
+ ],
+ "passFindings": [
+  "THE DARK/LIGHT AXIS IS NOW COMPLETE (blazeborn was the pilot; radiant is its foothill; umbral is the antipode) and the T-I sense pattern holds a FIFTH time: lightsense 'darkness stays genuinely opaque — THE GAP THE UMBRALS BUILT AN ART INSIDE' vs darksight 'you see the dark, NOT THE INTENT MOVING IN IT'. Five axes, five times the two T-I senses carry the geometry. Unbroken.",
+  "A FIFTH DEFENSIVE LOGIC, mechanically the strangest: the_harbor is a GUARD with soak 0. It defends by NOT BEING FOUND — its own bound says 'concealment hides, it does not defend', and if it IS found it offers nothing. BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND. CCODE: this needs a zero-soak concealment defence whose failure mode is TOTAL, a genuinely different curve from soak that degrades.",
+  "TERRAIN-GATED MOVEMENT IS NOW A COMPLETE PATTERN ACROSS FOUR AXES, and the engine has no concept of it: the_root_road (cannot cross the dead or the made) · the_grey_road (death substantial and recent) · shortfold (both ends must be truly known) · shadowstep (both ends need real shadow — A LIT GAP IS A WALL). Every axis's travel craft is walled off by its antipode's medium. Adding to the open-checks list.",
+  "dim r2 puts out 'a Radiant's kindled beam MID-BURN' — a craft that counters another tradition's craft WHILE IT IS BEING CAST, and the sixth cross-tradition counter found. But its own HARD bound concedes the limit: 'you cannot douse the Blaze.' It beats radiant's kindle, not blazeborn's radiance — RANKED counters again, exactly like lance/shield.",
+  "THREE HEALING CRAFTS, THREE INCOMPATIBLE THEORIES OF MEDICINE: radiant's dawn_surgery heals by BURNING CLEAN in full light; rootkin's set_to_rights by RESTORING THE DESIGN; umbral's the_shadowed_mending by DARKNESS AS MEDICINE (and it is merely competent in light). The one `healing` shape carries all three through magnitudes and bounds alone — further evidence the schema generalises.",
+  "UMBRAL'S MORAL SIGNATURE IS RESPONSIBILITY, and it is unique in the catalog: nearly every bound is about what you OWE for what you hide. 'Harboring something makes you responsible for it' · 'the harbored thing is now yours to answer for' · 'everyone inside becomes your responsibility, INCLUDING THE ONES YOU WOULD NOT HAVE CHOSEN' · 'what waits at the end of a trail you invented is not yours to choose'. Where other traditions bound POWER, umbral bounds CONSEQUENCE.",
+  "the_never_there's bound names the NEXT tradition as its counter: 'a Verity-reader may feel THE ABSENCE ITSELF' — the truth-tradition detects the umbral capstone not by seeing through it but by noticing a hole in the record. A direct hook into the veilwright/verist pair."
+ ]
+}

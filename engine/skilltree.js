@@ -164,10 +164,44 @@ export function isCrossClass(ability, character) {
   return sys !== homeClassOf(character);
 }
 
-/** Skill-point cost to learn or rank an ability: 1 normally, ×multiplier cross-class. */
+/** Skill-point cost to learn or rank an ability: 1 normally, ×multiplier cross-class.
+ *  DISTANCE ONLY — see learnPointCost for the composed price a player actually pays. */
 export function skillPointCost(ability, character, skillCapacity) {
   const mult = skillCapacity?.crossClass?.costMultiplier ?? 2;
   return isCrossClass(ability, character) ? mult : 1;
+}
+
+/** SNG-260 §D / SNG-261 §A — WHAT A CRAFT IS WORTH, by tier. Erik: "a Tier-II costs 2, a Tier-III costs 3.
+ *  Power costs more." Tier was previously UNPRICED, so a Tier-III cost exactly what a Tier-I did and there
+ *  was no reason to buy shallow — one of the two drivers of Silas's 36 crafts.
+ *
+ *  Data-driven from skill_capacity.tierPrice so Erik owns the ladder, including the question SNG-261 §A
+ *  raises: the catalog holds 28 abilities at levelReq 4 and 26 at levelReq 5, so a 1/2/3 ladder stops two
+ *  tiers short. Default here is LINEAR (a tier-N craft costs N); whether T-IV/V accelerate is Erik's dial. */
+export function tierPrice(ability, skillCapacity) {
+  const table = skillCapacity?.tierPrice;
+  const tier = Math.max(1, Number(ability?.levelReq) || 1);
+  if (Array.isArray(table)) return Number(table[tier - 1]) || tier;
+  if (table && typeof table === "object") return Number(table[String(tier)]) || tier;
+  return tier;
+}
+
+/** THE ONE SITE that answers "what does this craft cost me?".
+ *
+ *  It exists because that answer was previously computed in SIX places, and the two shapes disagreed: with
+ *  `character.domains.primary` set — the normal case — every caller used `domainVerdict(ab).penalty || 1`
+ *  and never called skillPointCost at all. A tier price added there alone would have been DEAD for real
+ *  characters while looking correct in isolation. Distance and tier now compose here, once.
+ *
+ *  cost = tierPrice × distance, where distance is the domain ring penalty when domains are set (braids
+ *  already discount that upstream) and the cross-class multiplier otherwise. A far Tier-III is genuinely
+ *  dear; a near Tier-I stays 1. Never below 1 — and nothing EARNED comes through here at all: practice,
+ *  braids and discoveries route around this function by design, and must keep doing so (SNG-260 §D item 5). */
+export function learnPointCost(ability, character, skillCapacity, verdict = null) {
+  const distance = (character?.domains?.primary && verdict)
+    ? (Number(verdict.penalty) || 1)
+    : skillPointCost(ability, character, skillCapacity);
+  return Math.max(1, Math.round(tierPrice(ability, skillCapacity) * distance));
 }
 
 // ---------- SNG-BATCH-5 Phase 2: branch forks ----------

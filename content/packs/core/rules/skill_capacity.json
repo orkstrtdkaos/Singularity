@@ -15,6 +15,8 @@
     "11": 12,
     "12": 13
   },
+  "tierPrice": { "1": 1, "2": 2, "3": 3, "4": 4, "5": 5 },
+  "tierPriceNote": "SNG-260 §D / SNG-261 §A — what a craft is WORTH, by its levelReq tier. Erik: 'a Tier-II costs 2, a Tier-III costs 3. Power costs more.' Composes MULTIPLICATIVELY with the distance term (domain ring penalty, or the cross-class multiplier when domains are unset), so a far Tier-III is genuinely dear and a near Tier-I stays 1. The catalog holds 28 abilities at levelReq 4 and 26 at levelReq 5, so the ladder must reach T-V (SNG-261 §A); this default is LINEAR — whether T-IV/V accelerate (4/6 rather than 4/5) is Erik's dial. Earned growth (practice, braids, discoveries) never comes through this table.",
   "beyondTable": "level + 1",
   "rule": "LEARN a new ability only while distinct-ability count < skillsKnownByLevel[level]. At the cap, points go to depth (rank-ups). Emergence combos/branches (SNG-010) and crit-discoveries do NOT count against the cap \u2014 earned techniques are free growth, not chosen breadth.",
   "crossClass": {

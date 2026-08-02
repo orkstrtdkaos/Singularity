@@ -8,7 +8,7 @@
 //     critical success mints a permanent named technique with a standing bonus.
 
 import { slugify } from "./quests.js";
-import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpression, forkPending } from "./skilltree.js";
+import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, learnPointCost, rankExpression, forkPending } from "./skilltree.js";
 import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./traditions.js";
 import { standingWithPeople } from "./reputation.js";
 import { trainerFor } from "./company.js";
@@ -212,7 +212,7 @@ export function rankUpAbility(character, abilityId, rules, opts = {}) {
   }
   // SNG-BATCH-5: affordability last — cross-class abilities cost 2x (opts.catalog resolves the class)
   const ab = (opts.catalog || {})[abilityId];
-  const cost = opts.viaPractice ? 0 : skillPointCost(ab, character, opts.skillCapacity);
+  const cost = opts.viaPractice ? 0 : learnPointCost(ab, character, opts.skillCapacity, opts.domainVerdict || null);
   if (!opts.viaPractice && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (cross-class)` : "no points" };
   owned.level++;
   if (!opts.viaPractice) character.skillPoints -= cost;
@@ -306,7 +306,8 @@ export function effectiveLevelReq(ab, character, rules) {
  *  Reads the great-circle geometry via domainAccess (traditions.json). Only applies once a
  *  character has crystallized/picked domains; legacy (no domains) stays open. Braid combinations
  *  and artifact grants never route through learnAbility, so those crossings are unaffected. */
-export function domainGateFor(ab, character, traditionIndex) { // registry:internal
+export function domainGateFor(ab, character, traditionIndex) {
+ // registry:internal
   // SNG-089: an Accord craft is FREELY ACCESSED — ungated by origin/domain/ring-distance. It still
   // costs a point (base 1); the tuition is the journey to the waygate, not a domain gate.
   if (ab?.accord) return { allowed: true, penalty: 1, band: "accord" };
@@ -406,7 +407,8 @@ export function acquireDomain(character, traditionId, rules, opts = {}) {
 }
 
 /** SNG-101: the additive per-character access state domainAccess consults (all absent-tolerant). */
-export function domainOpts(character) { // registry:internal
+export function domainOpts(character) {
+ // registry:internal
   return { foreclosed: character?.foreclosed, domainCeilings: character?.domainCeilings, domainsAcquired: character?.domainsAcquired };
 }
 
@@ -498,8 +500,12 @@ export function canLearnAbility(character, abilityId, catalog, rules, opts = {})
   // SNG-131: the center's braidAffinity — a cross-pole BRAID (a reach_* diameter-line) costs `braidDiscount`
   // less for valleyfolk (the one people who can braid the poles), floored at 1 (never free).
   const braidCut = (character.braidDiscount && String(ab.powerSystem || "").startsWith("reach_")) ? character.braidDiscount : 0;
+  // SNG-260 §D: tier composes with distance inside learnPointCost — the ONE site — and the braid discount
+  // still applies after, floored at 1 (never free). This branch used to compute the distance term inline,
+  // which is precisely how a tier price could have shipped DEAD for every character with domains set.
   const cost = opts.free ? 0
-    : Math.max(1, ((opts.traditionIndex && character?.domains?.primary) ? (verdict.penalty || 1) : skillPointCost(ab, character, opts.skillCapacity)) - braidCut);
+    : Math.max(1, learnPointCost(ab, character, opts.skillCapacity,
+        (opts.traditionIndex && character?.domains?.primary) ? verdict : null) - braidCut);
   if (!opts.free && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (${verdict.band === "far" ? "distant domain" : "cross-class"})` : "no points", gate: "cost", cost, band: verdict.band };
   return { ok: true, free: !!opts.free, cost, band: verdict.band };
 }
@@ -622,7 +628,8 @@ export function applyBacklash(character, rules) {
 /** SNG-089: how a craft harms, in words the GM can narrate to. "Can fight" ≠ "can harm" — an
  *  incapacitating craft STOPS a threat without wounding it; a `none` craft (Stillhold peace-working)
  *  wounds nothing at all. Feeding this stops the GM inventing a wound a craft cannot cause. */
-export function harmRungGloss(rung) { // registry:internal
+export function harmRungGloss(rung) {
+ // registry:internal
   switch (rung) {
     case "lethal": return "this craft CAN end a life — in its own idiom (never a generic wound); narrate a real death when the fiction earns it";
     case "damaging": return "this craft WOUNDS but does not slay — a weakened thing is still a thing; it hurts, it does not kill";

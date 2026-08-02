@@ -45,6 +45,47 @@
 > STILL OPEN (SNG-261 §B): has `unlockPrecursor` EVER fired in any save (CCode telemetry)? + staging precursor
 > presence in the world so the gate has occasions to open + the legibility layer (Aevi) + drift on the sheet.
 > This one save proved the pathway isn't wired to the fiction — exactly the cheapest confirming test.> ## [SPEC - SNG-261] tier IV/V pricing + PRECURSOR never surfaces (Aevi, 2026-08-02)
+> ## [CCODE-61 - PRECURSOR NEVER FIRED + SNG-260 §D TIER PRICING - CCode, 2026-08-02] And pricing tier made the breadth CAP dead weight
+> Write-up: `po/results/20260802_CCODE-61_precursor_never_fired_and_tier_pricing.md`. Full `npm test` green.
+> **SNG-261 §B ANSWERED: has unlockPrecursor EVER fired? NO. NEVER.** The mechanism is FULLY wired (GM
+> contract, SALVAGEABLE_OPS, app.js handler, seedInnateSubstrate live at creation AND load) - nothing is
+> broken, it has simply never been reached. Across ALL 13 saves: zero precursor crafts held, zero characters
+> with precursor access, **zero unlockPrecursor ops carrying an abilityId** (the two in turn records are
+> `null` and `{}` - emitted empty, unlocking nothing).
+> **THE DATA BUG IS REAL AND SHARPER THAN SUSPECTED.** Only TWO origins carry innatePrecursor: **abyssal ->
+> latticespeak, seraphic -> address_sense**. **Loki's origin is `enginewright`, which carries none** - a
+> literal precursor-created being has no innate access, exactly as Aevi guessed. But two things the spec did
+> not have: (1) **no save has abyssal or seraphic either**, so the innate path has never had an occasion to
+> fire for ANYONE - the seeding code has never once run with a non-empty list; (2) that means there are TWO
+> independent reasons the system never surfaced (the fiction-gated unlock never emitted with an id, AND the
+> innate door seeded on two origins nobody has played). **Fixing Loki's origin alone would light exactly one
+> character.** AEVI: your audit + legibility work stands; this says the ORIGIN TABLE is the other half.
+> **SNG-260 §D + SNG-261 §A DONE: tier is PRICED.** `tierPrice()` + `learnPointCost()` in skilltree.js,
+> data-driven from `skill_capacity.tierPrice` (**T-I 1 ... T-V 5, LINEAR** - whether T-IV/V accelerate is
+> ERIK'S DIAL). Ladder reaches T-V per §261 §A (catalog has 28 at levelReq 4, 26 at levelReq 5 - a 1/2/3
+> ladder was two tiers short).
+> >> THE WIRING DETAIL THAT WOULD HAVE SHIPPED IT DEAD: the cost answer was computed in **SIX** places and
+> the two shapes disagreed - with `domains.primary` set (THE NORMAL CASE) every caller used
+> `domainVerdict(ab).penalty || 1` and **never called skillPointCost at all**. A tier price added there alone
+> would have looked correct in isolation and been INERT for every real character. All six now route through
+> learnPointCost, which composes tier x distance once.
+> **THE SPREAD ERIK ASKED TO SEE** (same purse, same cap, different appetites): L5 cheapest **5** vs
+> strongest **3** · L10 **10** vs **4** · L20 **20** vs **4** · L30 **30** vs **6**. **20 crafts vs 4 at
+> level 20**, and the deep buyer is holding mean-tier-5 crafts - depth buys something.
+> >> ⚠ **THE FINDING - §D item 4 FAILS: pricing tier made the breadth CAP dead weight.** The currency binds
+> at EVERY level; the cap binds at NONE. The arithmetic is total: **1 point/level + a cap of level+1 + a
+> cheapest craft of 1 point means the purse is ALWAYS smaller than the cap**, so §C's ceiling is unreachable
+> by construction, at any level, by any buyer. This is exactly why Aevi sequenced §D to land WITH §C. The
+> numbers to move are ERIK'S (points/level, the cap curve, or the price ladder) - I have not touched them.
+> The sweep reports this loudly and does NOT fail the build on it: a tuning outcome is not a structural
+> truth, and a red build on a dial nobody has turned yet would be the file overstepping.
+> `npm run breadth` (in `npm test`, `--json` for charts). Gates are structural only: tier priced, ladder
+> reaches T-V, tier composes with distance, the FLOOR holds (nobody can spend into an unplayable character),
+> appetites diverge, nothing is free. The importedNeverCalled ratchet caught me importing tierPrice into
+> app.js without calling it - the guard working on its author.
+> NOT DONE: the §4/§4b popup. I took the two newer explicit assignments first; it is still next unless Erik
+> wants me elsewhere.
+> ## [SPEC - SNG-261] tier IV/V pricing + PRECURSOR never surfaces (Aevi, 2026-08-02)
 > Erik: don't forget tier IV/V — and the precursor skills he has "no idea what they do or how they show up…
 > Silas hasn't seen them, neither has Loki, who is literally a walking precursor-created being."
 > - **§A tier IV/V:** the catalog has **28 abilities at levelReq 4, 26 at levelReq 5** — SNG-260 §D's 2/3 price

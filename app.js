@@ -58,7 +58,7 @@ import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAsp
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
 import { ensureFacts, applyFactUpdates, factsForGM } from "./engine/facts.js";
 import { notePerception, perceivedVectors, vectorSummary } from "./engine/vectors.js";
-import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression } from "./engine/skilltree.js";
+import { tierOf, classColor, classLabel, gateFor, meetsLearnGate, meetsRank3Gate, breadthUsed, breadthCap, atCapacity, skillGraphModel, skillPointCost, learnPointCost, forkPending, forkPaths, chosenFork, setFork, rankExpression } from "./engine/skilltree.js";
 import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncounterState, partyBlockForGM, fetchScene, listScenesAt, pushSceneWithMerge, scenePath, lastSceneError } from "./engine/party.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
@@ -6452,7 +6452,7 @@ function skillSelectionActions(ab) {
   // Thread) now shows its real "deepen your standing" reason instead of a Learn button that then refuses.
   const ripe = aspirationRipe(character, ab.id, rules);
   const verdict = canLearnAbility(character, ab.id, fullCatalog(), rules, { free: ripe, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
-  const cost = verdict.cost ?? (character.domains?.primary ? (domainVerdict(ab).penalty || 1) : skillPointCost(ab, character, CONTENT.skillCapacity));
+  const cost = verdict.cost ?? learnPointCost(ab, character, CONTENT.skillCapacity, domainVerdict(ab));
   return `<div class="skill-actions">${ladderBlock}
     ${!verdict.ok
       ? `<span class="hint">🔒 ${esc(verdict.why || "not learnable yet")}</span>`
@@ -6911,7 +6911,7 @@ function renderLevelUp(status = "") {
 
   // DEEPEN: owned abilities, showing what a rank costs / grants / why it's blocked
   const rankRows = character.abilities.map(a => ({ a, ab: fullCatalog()[a.abilityId] })).filter(x => x.ab).map(({ a, ab }) => {
-    const rankCost = skillPointCost(ab, character, CONTENT.skillCapacity);
+    const rankCost = learnPointCost(ab, character, CONTENT.skillCapacity, domainVerdict(ab));
     const nextReq = rules.leveling?.rankLevelReq?.[String(a.level + 1)];
     const atMax = a.level >= maxRank;
     const levelOk = character.level >= (nextReq ?? 1);
@@ -6940,7 +6940,7 @@ function renderLevelUp(status = "") {
     const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
     const dv = domainVerdict(ab);
     const ripe = aspirationRipe(character, ab.id, rules);
-    const cost = character.domains?.primary ? (dv.penalty || 1) : skillPointCost(ab, character, CONTENT.skillCapacity);
+    const cost = learnPointCost(ab, character, CONTENT.skillCapacity, dv);
     const tooPoor = !ripe && sp < cost;
     const capBlock = cap && ab.powerSystem !== "learned";
     const blocked = !gate.ok || capBlock || tooPoor;
@@ -9882,7 +9882,7 @@ function renderPlay(turn, opts = {}) {
             const dv = domainVerdict(ab); // SNG-055 band + skill-point penalty
             // SNG-BATCH-10: once domains are set the ring-distance penalty is authoritative (matches
             // the engine in learnAbility); pre-domain/legacy characters keep the old cross-class cost.
-            const learnCost = character.domains?.primary ? (dv.penalty || 1) : skillPointCost(ab, character, CONTENT.skillCapacity);
+            const learnCost = learnPointCost(ab, character, CONTENT.skillCapacity, dv);
             const tooExpensive = !ripe && character.skillPoints < learnCost;
             const blocked = !gate.ok || capBlock || tooExpensive;
             const bandTag = dv.band === "far" ? ", far" : dv.band === "adjacent" ? ", kin" : "";

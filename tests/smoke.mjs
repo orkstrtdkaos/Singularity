@@ -1180,7 +1180,10 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const cat3 = {};
   for (const g of ["harmonic","radiant","valley_craft"]) { const pk = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/"+g+".json"),"utf8")); for (const a of pk.abilities) cat3[a.id] = {...a, powerSystem: pk.powerSystem}; }
   // attribute-gate blocks learn of a gated ability below threshold
-  const lowReason = { origin: "valley", level: 5, skillPoints: 3, abilities: [], subAttributes: { reason: 3 }, customAbilities: {} };
+  // SNG-260 §D: this pair tests the ATTRIBUTE GATE, not affordability — but shatterpoint is a cross-class
+  // Tier-III for a valley character, so tier pricing now makes it cost 3 x 2 = 6. Funded so the gate stays
+  // the thing under test; the price itself is asserted separately in the tier-pricing block.
+  const lowReason = { origin: "valley", level: 5, skillPoints: 8, abilities: [], subAttributes: { reason: 3 }, customAbilities: {} };
   check("gated learn blocked below sub-attribute", learnAbility(lowReason, "shatterpoint", cat3, rules, { attributeGates: gates3 }).why.includes("reason"));
   lowReason.subAttributes.reason = 5;
   check("gated learn clears at threshold", learnAbility(lowReason, "shatterpoint", cat3, rules, { attributeGates: gates3, skillCapacity: cap3 }).ok);
@@ -3495,7 +3498,10 @@ await (async () => {
   // the raw-source assertion confirms the cut is applied there, and the browser check exercises it on real
   // geometry. Here: confirm braidCut never makes a braid FREE and never touches a non-braid.
   const appSrc131 = readFileSync(join(root, "engine/progression.js"), "utf8");
-  check("SNG-131: the braid cut is floored at 1 (a braid is never free) and only touches reach_* powerSystems", /braidCut = \(character\.braidDiscount && String\(ab\.powerSystem \|\| ""\)\.startsWith\("reach_"\)\)/.test(appSrc131) && /Math\.max\(1, \(\(opts\.traditionIndex[\s\S]{0,120}\) - braidCut\)/.test(appSrc131));
+  check("SNG-131: the braid cut is floored at 1 (a braid is never free) and only touches reach_* powerSystems",
+    /braidCut = \(character\.braidDiscount && String\(ab\.powerSystem \|\| ""\)\.startsWith\("reach_"\)\)/.test(appSrc131)
+    // SNG-260 §D moved the distance term into learnPointCost; the floor and the subtraction are unchanged.
+    && /Math\.max\(1, learnPointCost\([\s\S]{0,160}\) - braidCut\)/.test(appSrc131));
   check("SNG-131: precursor + living_current both route to the innate-access gate (not the domain gate)", /const innateAccess = ab\.powerSystem === "precursor" \|\| ab\.powerSystem === "living_current"/.test(appSrc131));
 
   // end-to-end on the REAL authored content (origins.json + precursor.json + living_current.json)

@@ -1,6 +1,40 @@
 # PO ALERT
 
-> ## [CCODE-72 - RADIANT CHECKED: a schema ambiguity was DOUBLING every authored damage craft - CCode, 2026-08-02]
+> ## [SPEC - SNG-264 MASTERY] Erik's scaling answer, and the best idea in the arc (Aevi, 2026-08-02)
+> Erik: *"A master's kindle should be sharper, cleaner, more effective… but it's still kindle. Maybe their surge
+> would be greater. Plus a master can probably overcome the cannots."* Three mechanics. Timing is lucky: the §11
+> wielder term is **not built yet**, so this SHAPES it rather than revising it (use-counter =
+> `character.practice.uses`).
+> - **§1 RELIABLE, not BIG.** Mastery **raises the FLOOR, not the ceiling** — the same shape as the shipped
+>   `marginFloorPer`. A master's kindle rarely fizzles; it is still a `1d6` craft. **A master's kindle is a
+>   better kindle, not a radiance** — which preserves the §11 ladder exactly (T-I stays *viable* by being
+>   *reliable*; T-III still wins on dice).
+> - **§2 mastery scales the SURGE CEILING** more than the baseline → mastery is **situational** power, not
+>   constant power. Day-to-day it's merely clean; when a master spends, they spend bigger than anyone can. Also
+>   gives the §CEILING "reserve" a second place to cash out beside the crit dial.
+> - **§3 MASTERY ERODES THE `cannot`s — the strongest idea in the roll-math arc.** It answers low-tier
+>   relevance **without inflating numbers**, and it makes the `cannot` text load-bearing (which was §263's
+>   original complaint). **But bounds are NOT uniform** — a blanket "mastery breaks cannots" would wreck the
+>   fiction, so I audited both authored traditions into **three classes**:
+>   · **SOFT (masterable)** — a limit of SKILL: `afterimage` "one breath of hang-time", `radiant_lance` "one
+>     heartbeat of beam per breath", `dawn_surgery` "an hour costs you a day's labour", `clarity_lens` "wobbles
+>     if you're winded".
+>   · **HARD (never breaks)** — a limit of WHAT THE CRAFT IS: `sun_coax` **"cannot cure — only comfort and buy
+>     time"**, `light_bending` "your shadow stays true" / "bent light still stops no arrow", `prism_sight` "a
+>     HINT, not proof" (it would become a truth machine, which the text refuses), `radiance` "surfaces, not
+>     hearts".
+>   · **COST (transmutable, not removable)** — the price stays, its FORM changes: `kindle` "spent, it blinds you
+>     too" → a master is *dazzled*, not blinded.
+>   Each bound carries a class; the engine consults practice-level ONLY for soft bounds; CI requires every bound
+>   to declare a class, so "can mastery break this?" is never an unwritten call at the table.
+> - **§4 this ANSWERS the open "REFUSED" question on principle:** `the_last_light`'s *"cannot be half-given"* is
+>   a **HARD** bound — no mastery reaches it. REFUSED stands, and now sits inside a general system instead of
+>   being a special case. Same for `light_borne`'s "you shine — no concealment."
+> ERIK: (1) the size of the floor-raise and the surge-ceiling growth (how much greater IS a master's surge?);
+> (2) a sanity check on the three-class split — especially whether any HARD bound above should really be SOFT,
+> since you know the fiction's intent better than the text alone tells me.
+> AEVI owes: a back-pass adding bound-classes to blazeborn + radiant (authored before this decision), then on
+> through the catalog. Full: SPEC_SNG-264.> ## [CCODE-72 - RADIANT CHECKED: a schema ambiguity was DOUBLING every authored damage craft - CCode, 2026-08-02]
 > `npm run staged` (new, wired into `npm test`). Full suite green. **AEVI: radiant is good work and it found
 > a real engine bug — but check the dice line below before you author tradition 3.**
 > >> **THE BUG: your dice were being MULTIPLIED TWICE.** You authored `radiant_lance` as `{n:2,d:6}` with the

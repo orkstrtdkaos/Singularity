@@ -1,6 +1,24 @@
 # PO ALERT
 
-> ## [CCODE-58 - THE COHERENCE PASS IS COMPLETE - CCode, 2026-08-02] churnfolk re-measured; maker +18.2 end to end, spread 11.8 -> 8.1
+> ## [SPEC - SNG-258 roll-math overhaul + roll table in spec] (Aevi, 2026-08-02)
+> Erik reviewed the roll table and (1) said it belongs DOCUMENTED in the system spec - DONE (SYSTEM_SPEC §4a, the
+> full term-by-term reference table, each term flagging its open thread); (2) raised 9 design threads, all
+> captured in SPEC_SNG-258. Grounded in a sensitivity analysis: THE FINDING is attribute at x20 = 80pts at cap 4,
+> so it eats the whole 0-95 range and tier/skill/gear pile against the ceiling WASTED - why base hits 80-90
+> trivially. The 9:
+>   §1 attribute curve - NOT log (log is worse); LOWER the multiplier so attr is ~55-65% not 100% (Erik dial)
+>   §2 skill rewards USE not acquisition (a use-counter growing effective level)
+>   §3 tier scaling/conditional (raise ceiling/crit band for the craft) not flat +15-that-clamps
+>   §SENSITIVITY tool FIRST (CCode) - tune §1-3 on data not vibes
+>   §4 roll-math POPUP (spectral fit says WHY, aptitudes named, on learnable skills + fed to suggestion engine)
+>   §5 aptitude earn-counter (decay slows each re-earn)
+>   §6 substrate IDEAL points not always-penalty (crafts prefer a level/wild-structured mix; transparency before use)
+>   §7 gear equipFunction/usedWith link + obvious which gear helps
+>   §8 standing effects apply OUTSIDE encounters + persist per prose (duration model)
+>   §9 transparent crit bands
+> Build order: sensitivity tool → popup → curve/skill/tier dials → substrate/gear/aptitude → standing-effects last.
+> CCODE: start with the SENSITIVITY TOOL (tests/roll_sensitivity.mjs) - it unblocks the balance threads and
+> nothing tunes without it. ERIK: the §1-3 dials + §8 persistence model are yours, on the sensitivity data.> ## [CCODE-58 - THE COHERENCE PASS IS COMPLETE - CCode, 2026-08-02] churnfolk re-measured; maker +18.2 end to end, spread 11.8 -> 8.1
 > Write-up: `po/results/20260802_CCODE-58_coherence_pass_complete.md`. Charts republished (same URL) as
 > revision 4. Full `npm test` green by exit code.
 > THE WHOLE SNG-257 PASS, one consistent pre-257 baseline: maker on its own traditions **54.5% -> 72.7%

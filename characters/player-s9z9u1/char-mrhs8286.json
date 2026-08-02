@@ -177,7 +177,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.025069305801652248,
+    "spectrumId": -0.023815840511569635,
     "violence_peace": 0.09078381765624999,
     "chaos_order": 0.24652962003904677,
     "mechanical_spiritual": 0.2629700196352162,
@@ -267,11 +267,34 @@
       "name": "Assembled Mid-Weight Spear",
       "kind": "weapon",
       "qty": 1,
-      "description": "A seasoned ash shaft six feet long with the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding. Four threads seated: ironsense as anchor, Huginn's Ashwarden ending-sense through the fuller, a shadow-harm focus at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The maker's mark is Pell's. Silas's…",
+      "description": "A seasoned ash shaft six feet long with a mid-weight iron tip road-lashed at the socket throat. The wide-cut blade catches light and shadow both now. Four threads are bound into it: ironsense as anchor through the haft, Huginn's Ashwarden ending-sense running the fuller like a pulse, a shadow-harm focus at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The rune-binding…",
       "consumable": false,
-      "customName": "Memory",
+      "customName": "Memory — The Dual Spear",
       "pinned": true,
-      "provenance": "Rune-bound at the Fell Pell on World-day 18 evening, with Huginn as witness at the stone ring."
+      "provenance": "Forged by Pell Ran Marsh. Rune-bound by Silas Weir, Pell, and Huginn in unified working at the Fell Pell. Now carries the formalized shadow-twin binding…",
+      "bonusTags": [
+        "shadow-unity"
+      ],
+      "grants": [
+        {
+          "id": "shadow_twin_manifestation",
+          "name": "Shadow-Twin Manifestation",
+          "from": "Unified rune-binding of the spear's physical and shadow forms",
+          "effect": "The wielder may summon and wield the shadow-twin of Memory at will — a second spear, identical in form but composed of shadow-substance, answering through the same bond. The shadow-spear manifests in darkness or penumbra and costs no energy to call or sustain once the bond is formalized. It follows the wielder's intent and returns to the anchor-spear when dismissed or when dawn-light fully…",
+          "band": "reasonable @ L29 / craft rank 3",
+          "clamp": "Cannot be used in direct sunlight at full intensity; requires at least shadow or penumbra to manifest visibly. In total darkness, both forms are equally present. The shadow-twin cannot be given to…"
+        }
+      ],
+      "evoStage": 2,
+      "imageStamp": 1,
+      "imagePrompt": "A seasoned ash shaft six feet long with a mid-weight iron tip road-lashed at the socket throat. The wide-cut blade catches light and shadow both now. Four threads are bound into it: ironsense as anchor through the haft, Huginn's Ashwarden ending-sense running the fuller like a pulse, a shadow-harm focus at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The rune-binding…",
+      "imageDirty": true,
+      "_evo": {
+        "byDay": {
+          "33": 1
+        },
+        "lastDay": 33
+      }
     },
     {
       "id": null,
@@ -1970,9 +1993,9 @@
     },
     "Silas Weir assumed the Left Branch approach watch, took delivery of a Hub message about Cael, attended Deni Cors's whistling for Logana as an Ashwarden should, walked Deni through the made gate, named the coming waypost the Whistling Woman after her song, handed the shadow-sheet to Pell with instructions to write Mara about workers and materials, left Veth thinking about the post's layout, and made the first clean routine crossing of the gate. Deni filed her registry entry and departed south. The post is not yet built — but it is named, staffed, on the circuit's record, and begun."
   ],
-  "currentLocationId": "the_crossing",
+  "currentLocationId": "gen-object-object",
   "activeScene": {
-    "locationId": "the_crossing",
+    "locationId": "gen-object-object",
     "turns": [
       {
         "player": null,
@@ -2063,39 +2086,37 @@
         "player": "Set a Boundary-Stone ward at the well's cap — mark it and hold it before anything else comes up through the channel",
         "summary": "Silas sets a Boundary-Stone ward at the east-side draw-well's cap — the open channel is sealed against uninvited passage, the mark seated into the old foundation stone.",
         "narration": "You crouch at the well's stone cap and set your hand flat against it.\n\nThe channel below is open and oriented — south-by-southwest, the hollow's address still sitting in it like a letter waiting to be read. That is useful. An open channel under a public well, in the middle of a market row, is also a door.\n\nYou draw the Boundary-Stone's mark into the cap's worn face with your thumb, using the chalk dust from the tin at your belt. The motion is small and unhurried. A line, a crossing, a close. The stone takes it without resistance — old foundation, old habit, and the mark finds a seat in the material the way a key finds a lock it was cut for.\n\nThe ward seals into place. Quiet. Contained. It will hold against anything that tries to come up through the channel uninvited — not with force, but with refusal. A thing that reaches for this threshold will find it already spoken for.\n\nPell watches the cap until the mark settles, then looks up at you. \"Clean,\" she says simply. Veth nods once at the stone, reading the ward's weight the way she reads all completed work — without ceremony, but with attention.\n\nHuginn shifts on your shoulder and says nothing. The channel is warded. The well is still usable. The morning traffic moves behind you as if nothing changed, which is exactly how it should look."
+      },
+      {
+        "player": "I take up Memory and take stock of what it has become. Memory had a shadow twin created from it.  Pell and Huginn and I laborer hard on that rune binding.  now I can summon and wield the shadow twin. — reflect that in the item: its description, its name if it has earned one, and be explicit about what it now grants mechanically.",
+        "summary": "At the east-side well, Silas attunes to Memory's evolved form and formalizes its shadow-twin capability — the spear now carries both the physical and shadow forms as a unified working, bound through rune-thread and Huginn's ending-sense.",
+        "narration": "You take Memory from where it rests against the well's stone cap, and the spear comes alive in your hand the way it always does — but different now. The weight is there, solid and familiar, but beneath it runs a second presence, shadow-thin and patient. The ash shaft holds the rune-thread you and Pell bound into it at the forge, and Huginn's ending-sense runs the fuller like a pulse. The shadow-twin is not a separate thing anymore — it is part of Memory's whole, woven in so deep that calling it costs nothing more than naming it aloud.\n\nYou close your hand on the binding and feel the second spear answer from the dark beside you. Not visible in the morning light, but present. Answerable. When you have need, the shadow-spear is already there, waiting in the place between. The one on the bench at the Fell Pell is the anchor; this one — the name-bearer, the one you carry — is the working tool. Both are Memory now. Both answer to your hand.\n\n*✦ Memory — The Dual Spear has changed — description, name, provenance, tags, grants, image.*"
       }
     ],
     "lastTurn": {
-      "narration": "You crouch at the well's stone cap and set your hand flat against it.\n\nThe channel below is open and oriented — south-by-southwest, the hollow's address still sitting in it like a letter waiting to be read. That is useful. An open channel under a public well, in the middle of a market row, is also a door.\n\nYou draw the Boundary-Stone's mark into the cap's worn face with your thumb, using the chalk dust from the tin at your belt. The motion is small and unhurried. A line, a crossing, a close. The stone takes it without resistance — old foundation, old habit, and the mark finds a seat in the material the way a key finds a lock it was cut for.\n\nThe ward seals into place. Quiet. Contained. It will hold against anything that tries to come up through the channel uninvited — not with force, but with refusal. A thing that reaches for this threshold will find it already spoken for.\n\nPell watches the cap until the mark settles, then looks up at you. \"Clean,\" she says simply. Veth nods once at the stone, reading the ward's weight the way she reads all completed work — without ceremony, but with attention.\n\nHuginn shifts on your shoulder and says nothing. The channel is warded. The well is still usable. The morning traffic moves behind you as if nothing changed, which is exactly how it should look.",
-      "sceneSummary": "Silas sets a Boundary-Stone ward at the east-side draw-well's cap — the open channel is sealed against uninvited passage, the mark seated into the old foundation stone.",
+      "narration": "You take Memory from where it rests against the well's stone cap, and the spear comes alive in your hand the way it always does — but different now. The weight is there, solid and familiar, but beneath it runs a second presence, shadow-thin and patient. The ash shaft holds the rune-thread you and Pell bound into it at the forge, and Huginn's ending-sense runs the fuller like a pulse. The shadow-twin is not a separate thing anymore — it is part of Memory's whole, woven in so deep that calling it costs nothing more than naming it aloud.\n\nYou close your hand on the binding and feel the second spear answer from the dark beside you. Not visible in the morning light, but present. Answerable. When you have need, the shadow-spear is already there, waiting in the place between. The one on the bench at the Fell Pell is the anchor; this one — the name-bearer, the one you carry — is the working tool. Both are Memory now. Both answer to your hand.\n\n*✦ Memory — The Dual Spear has changed — description, name, provenance, tags, grants, image.*",
+      "sceneSummary": "At the east-side well, Silas attunes to Memory's evolved form and formalizes its shadow-twin capability — the spear now carries both the physical and shadow forms as a unified working, bound through rune-thread and Huginn's ending-sense.",
       "choices": [
         {
-          "label": "Check the north gate registry foundation — the Working Model placed a node there; go read it before the morning gets older",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.3,
-            "mechanical_spiritual": 0.2
-          },
+          "label": "The east-side well is sealed. Turn back toward the market row and reconvene with the group.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study",
             "travel"
           ],
-          "abilityId": "order_sense",
+          "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Huginn plainly — was there an ending here recently, or is the channel just old and open?",
+          "label": "Ask Veth plainly: if there are five to seven nodes and we've marked two, what is the pattern for the others? Where would they sit?",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.2
-          },
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -2107,161 +2128,163 @@
           "emergenceId": null
         },
         {
-          "label": "Engage the weeping stone — a hostile meeting has turned up here; meet it squarely",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": -0.3
-          },
+          "label": "Use Order-Sense again to read deeper into the node itself — what is it actually FOR? What does it receive? What does it send?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "attack",
-            "defend"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "trivial": false,
-          "encounterId": "beast_weeping_stone",
-          "emergenceId": null
-        },
-        {
-          "label": "Step back and look at the row as a whole — five to seven nodes, and two are now warded; where do the others likely sit?",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.2,
-            "mechanical_spiritual": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "plan"
-          ],
-          "abilityId": "the_working_model",
-          "energyCost": null,
-          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": []
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "delegateOps": [],
+      "arcOps": [],
+      "adoptSchool": {},
+      "offer": {},
+      "stageOps": [],
       "scene": {
-        "setting": "The east end of the Crossing market row, morning — early spring light, flat and clear. Standing at the east-side draw-well against a low stone wall, the Boundary-Stone mark now seated into the cap's worn face. Ordinary market traffic moves behind the group.",
+        "setting": "The east end of the Crossing market row, morning — early spring light, flat and clear. Standing at the east-side draw-well against a low stone wall. The Boundary-Stone mark is now seated into the cap's worn face. The shadow-twin of Memory is present and answering.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Standing at Silas's left, Memory at her side, watching the sealed well cap."
+            "state": "Standing at Silas's left, watching the well cap where the ward sealed, her focus steady and present."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing at Silas's right, reading the ward's weight with attention."
+            "state": "Standing at Silas's right, reading the weight of both the ward and the shadow-twin's binding with quiet attention."
           },
           {
             "name": "Huginn",
-            "state": "Perched on Silas's shoulder, still, saying nothing."
+            "state": "Perched on Silas's shoulder, still and silent — but the ending-sense that runs Memory's fuller is coming from this bird, and it knows the shadow-spear now as surely as it knows the living one."
           },
           {
             "name": "Bren Thalle",
-            "state": "At the rear board of the Sheaf and Bowl stall — shoulders down, watching the row."
+            "state": "At the rear board of the Sheaf and Bowl stall — shoulders still down, watching the row, her ledger against her chest. Waiting."
           }
         ],
         "objects": [
-          "East-side draw-well — stone cap, worn rope, low stone wall surround — Boundary-Stone mark now sealed into the cap",
-          "Memory (spear) — in Pell's hand",
-          "Market row — ordinary morning traffic behind the group",
-          "Chalk dust tin — open at Silas's belt, used to draw the mark"
+          "East-side draw-well — stone cap with Boundary-Stone mark now seated",
+          "Memory — spear in Silas's hand, now carrying unified shadow-form binding",
+          "Market row — ordinary morning traffic continuing around the group",
+          "Low stone wall — backdrop for the well, worn and ancient"
         ],
         "threads": [
-          "North gate registry — likely hub node, unread and unvisited",
-          "Weeping stone — a hostile presence has turned up on the row; nature and intent unknown",
+          "Five to seven relay nodes — two now marked (stall, well), three to five others beneath unknown old-foundation sites",
+          "North gate registry — likely node location, unread and unvisited",
           "Channel beneath the well — warded but still open, oriented south-by-southwest toward the hollow",
-          "Warpling's partial instruction — arrival at Stillwater's Hollow still uncertain",
-          "Remaining relay nodes — two warded (stall, well), three to five others beneath old-foundation sites across the Crossing"
+          "Shadow-twin formalized — the second Memory now unified with the first, both answering to Silas's call"
         ]
       },
+      "npcUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Memory now carries a unified shadow-form binding — both the physical and shadow spears are one working, answerable through a single rune-thread and Huginn's ending-sense. The shadow-twin is no longer separate; it is part of Memory's whole. Calling it costs nothing more than naming it aloud.",
+          "subjectId": null
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "A Boundary-Stone ward is now seated at the east-side draw-well's cap — the open channel is warded against uninvited passage; the mark is in the stone.",
+          "note": "East-side draw-well is now sealed with a Boundary-Stone ward at the cap — the mark is seated into the stone. The open relay-node channel beneath is warded against uninvited passage, though the channel remains oriented south-by-southwest toward the left-branch hollow.",
           "flag": {
-            "east_well_warded": true
-          },
-          "subPlace": {
-            "name": "East-Side Draw-Well",
-            "parent": "The Crossing",
-            "note": "Relay node in the foundation; channel warded at the cap with Boundary-Stone mark, oriented south-by-southwest toward the hollow.",
-            "visited": true
+            "node_warded": true,
+            "channel_open": true,
+            "channel_orientation": "south-by-southwest"
           }
         }
       ],
-      "codexUpdates": [
+      "discovery": {},
+      "codexUpdates": [],
+      "generateRequest": [],
+      "encounterOps": [],
+      "newEncounter": {},
+      "unlockPrecursor": {},
+      "unlockSubstrate": {},
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "The attunement is immediate and requires no time to formalize"
+      },
+      "moveTo": {},
+      "stateOps": [],
+      "itemUpdates": [
         {
-          "topic": "crossing-relay-network",
-          "label": "The Crossing Relay Network",
-          "kind": "lore",
-          "fact": "The east-side draw-well's open channel is now warded with a Boundary-Stone mark — the second node secured, after the Sheaf and Bowl stall. The north gate registry remains unread and is the likely hub node.",
-          "links": [
-            "millbrook",
-            "the-water-crisis",
-            "what-the-water-remembers"
+          "name": "Memory",
+          "customName": "Memory — The Dual Spear",
+          "description": "A seasoned ash shaft six feet long with a mid-weight iron tip road-lashed at the socket throat. The wide-cut blade catches light and shadow both now. Four threads are bound into it: ironsense as anchor through the haft, Huginn's Ashwarden ending-sense running the fuller like a pulse, a shadow-harm focus at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The rune-binding that unites the shadow-form is worked into the binding-wraps themselves — invisible until the moment the shadow-spear is called. The maker's mark is Pell's. The working is Silas's. Both the physical spear and its shadow-twin are now one instrument, answering to a single hand.",
+          "provenance": "Forged by Pell Ran Marsh. Rune-bound by Silas Weir, Pell, and Huginn in unified working at the Fell Pell. Now carries the formalized shadow-twin binding, sealed on the morning of Day 14 at the east-side well.",
+          "bonusTags": [
+            "shadow-unity"
+          ],
+          "grants": [
+            {
+              "name": "Shadow-Twin Manifestation",
+              "from": "Unified rune-binding of the spear's physical and shadow forms",
+              "effect": "The wielder may summon and wield the shadow-twin of Memory at will — a second spear, identical in form but composed of shadow-substance, answering through the same bond. The shadow-spear manifests in darkness or penumbra and costs no energy to call or sustain once the bond is formalized. It follows the wielder's intent and returns to the anchor-spear when dismissed or when dawn-light fully clears the shadow.",
+              "clamp": "Cannot be used in direct sunlight at full intensity; requires at least shadow or penumbra to manifest visibly. In total darkness, both forms are equally present. The shadow-twin cannot be given to another person permanently — it answers only to Silas Weir."
+            }
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a few minutes at the well to set the ward"
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell Ran Marsh",
-          "note": "Watched the Boundary-Stone ward seat into the well cap and named it clean without ceremony.",
-          "statusNote": "At the east-side well, Memory in hand, the ward complete."
-        },
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Read the completed ward's weight without ceremony — attention without comment.",
-          "statusNote": "At the east-side well, watching."
-        }
-      ]
+      "deriveItem": {},
+      "imagePrompt": {},
+      "newAbility": {},
+      "gambitOps": {},
+      "gambitApt": false,
+      "markDefiningMoment": {},
+      "markTeacher": {},
+      "offerPromotion": {},
+      "offerAcquisition": {},
+      "offerIntent": {},
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/%5Bobject%20Object%5D%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=14631&nologo=true"
     },
     "sceneState": {
-      "setting": "The east end of the Crossing market row, morning — early spring light, flat and clear. Standing at the east-side draw-well against a low stone wall, the Boundary-Stone mark now seated into the cap's worn face. Ordinary market traffic moves behind the group.",
+      "setting": "The east end of the Crossing market row, morning — early spring light, flat and clear. Standing at the east-side draw-well against a low stone wall. The Boundary-Stone mark is now seated into the cap's worn face. The shadow-twin of Memory is present and answering.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Standing at Silas's left, Memory at her side, watching the sealed well cap."
+          "state": "Standing at Silas's left, watching the well cap where the ward sealed, her focus steady and present."
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing at Silas's right, reading the ward's weight with attention."
+          "state": "Standing at Silas's right, reading the weight of both the ward and the shadow-twin's binding with quiet attention."
         },
         {
           "name": "Huginn",
-          "state": "Perched on Silas's shoulder, still, saying nothing."
+          "state": "Perched on Silas's shoulder, still and silent — but the ending-sense that runs Memory's fuller is coming from this bird,"
         },
         {
           "name": "Bren Thalle",
-          "state": "At the rear board of the Sheaf and Bowl stall — shoulders down, watching the row."
+          "state": "At the rear board of the Sheaf and Bowl stall — shoulders still down, watching the row, her ledger against her chest. Wa"
         }
       ],
       "objects": [
-        "East-side draw-well — stone cap, worn rope, low stone wall surround — Boundary-S",
-        "Memory (spear) — in Pell's hand",
-        "Market row — ordinary morning traffic behind the group",
-        "Chalk dust tin — open at Silas's belt, used to draw the mark"
+        "East-side draw-well — stone cap with Boundary-Stone mark now seated",
+        "Memory — spear in Silas's hand, now carrying unified shadow-form binding",
+        "Market row — ordinary morning traffic continuing around the group",
+        "Low stone wall — backdrop for the well, worn and ancient"
       ],
       "threads": [
-        "North gate registry — likely hub node, unread and unvisited",
-        "Weeping stone — a hostile presence has turned up on the row; nature and intent unknown",
+        "Five to seven relay nodes — two now marked (stall, well), three to five others beneath unknown old-foundation sites",
+        "North gate registry — likely node location, unread and unvisited",
         "Channel beneath the well — warded but still open, oriented south-by-southwest toward the hollow",
-        "Warpling's partial instruction — arrival at Stillwater's Hollow still uncertain",
-        "Remaining relay nodes — two warded (stall, well), three to five others beneath old-foundation sites across the Crossing"
+        "Shadow-twin formalized — the second Memory now unified with the first, both answering to Silas's call"
       ]
     }
   },
@@ -5579,11 +5602,14 @@
         "[d13] Silas arrived at the landing outside Ossian's corner room via Marrow's Wings — the approach is now known to Ossian and anyone who glanced up from the market row",
         "[d14] A pre-Transition relay node, same construction as the wolverine-clearing node, is seated in the earth beneath the Sheaf and Bowl stall's third board from the gap's left edge — still holding an open channel address after the reclamation site's close",
         "[d14] East-side draw-well confirmed as a relay network node — upstream of the Sheaf and Bowl stall spoke, channel open and oriented south-by-southwest toward the left-branch hollow.",
-        "[d14] A Boundary-Stone ward is now seated at the east-side draw-well's cap — the open channel is warded against uninvited passage; the mark is in the stone."
+        "[d14] A Boundary-Stone ward is now seated at the east-side draw-well's cap — the open channel is warded against uninvited passage; the mark is in the stone.",
+        "[d14] East-side draw-well is now sealed with a Boundary-Stone ward at the cap — the mark is seated into the stone. The open relay-node channel beneath is warded against uninvited passage, though the channel remains oriented south-by-southwest toward the left-branch hollow."
       ],
       "flags": {
         "waymarker_seated": "stillwaters-trouble",
-        "east_well_warded": true
+        "east_well_warded": true,
+        "node_warded": true,
+        "channel_open": true
       },
       "lastVisit": 14,
       "vectorsKnown": [],
@@ -5802,6 +5828,13 @@
       "flags": {},
       "lastVisit": 14,
       "vectorsKnown": []
+    },
+    "gen-object-object": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 14,
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -5819,60 +5852,6 @@
       "falsehood_truth": -0.05
     },
     "news": [
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond millbrook: Silas Weir bound death-runes into the assembled spear at an open-sky fire, with Pell Marsh's maker's mark seated into the blade and Huginn witness at the stone ring.",
-        "tier": "event"
-      },
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond millbrook: Delivered a dressed bull and sow to Aldric's smokehouse — a significant haul by village standards, carried down from the north wood by three hunters.",
-        "tier": "event"
-      },
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond millbrook: Persuaded Fendt to commit his testimony to paper and walk to Millbrook — moved the falsified ledger thread from evidence-held to evidence-carried.",
-        "tier": "event"
-      },
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond millbrook: Persuaded Calvar — pre-Transition filtration engineer and author of the seventh-band specification — to leave the Edge District and travel to Millbrook to attest against Overseer Grael",
-        "tier": "event"
-      },
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond edge-district: Neutralized a relay figure in the cut-lane without violence or alarm — The Ended Threat, Wildcraft, and The Shadow Work braided into a clean exit for Calvar and the document.",
-        "tier": "event"
-      },
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond millbrook: Showed mercy to road opportunists after disarming them — named the broad man's grief, gave them provisions, and sent them to honest work rather than leaving them in the mud",
-        "tier": "event"
-      },
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond millbrook: Called the key players of the water crisis to Pell's forge for an evening council — Dara, Aldric, Fendt, Mara, and the engineer Calvar, all in one room.",
-        "tier": "event"
-      },
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond millbrook: Organized the valley's water-crisis response into four parallel working threads — engineering, logistics, supply, and accounts — with named leads for each, in front of every stakeholder",
-        "tier": "event"
-      },
-      {
-        "day": 14,
-        "worldDay": 24,
-        "text": "Word has spread beyond hub: Seated a ward in the Ent grove circle — a collective working with Pell, Veth, Siol, and Huginn — the grove's own shape as the structure, the Weirmark at the join. The Ent received it.",
-        "tier": "event"
-      },
       {
         "day": 14,
         "worldDay": 25,
@@ -5938,14 +5917,72 @@
         "worldDay": 28,
         "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir has hit trouble — Someone at the plaza recognized Siol from somewhere earlier in their travels and said so aloud, in company — not with malice, but the name now sits in the air among strangers, and Siol cannot take it back.",
         "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 33,
+        "text": "Something has been building in the palelands: The shallow wells along the eastern edge of the Palelands are silting over one by one, and no one has yet connected the pattern.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 33,
+        "text": "Something has been building in valley: The valley's miller has been quietly shorting grain weights for two seasons to cover a debt owed to a creditor in the Center, and a farmer is beginning to suspect.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 32,
+        "text": "This reaches your area — Sorel, Radiant archivist, arrives on the ridgeline and confirms the mound on the northeast-by-east bearing — she was with the Council survey team until markers were moved; the interval she recorded ma (near gen-the-lower-chamber)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 14,
+        "worldDay": 32,
+        "text": "This reaches your area — Sorel, Radiant archivist and water-accountability office witness, commits to the investigation of the upstream pre-Transition structure and joins Cellaceron's party moving northeast-by-east into the D (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 14,
+        "worldDay": 32,
+        "text": "This reaches your area — The Council's secondary purification system is not yet complete — they are racing the preparation order's timeline with infrastructure that may not be ready. (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 14,
+        "worldDay": 32,
+        "text": "This reaches your area — The Council's secondary purification system is incomplete without the authentication sequence housed at the upstream structure. Whoever reaches it first determines the valley's response to the prepara (near gen-object-object)",
+        "tier": "event",
+        "impactsLocal": true
+      },
+      {
+        "day": 14,
+        "worldDay": 32,
+        "text": "Word reaches you: Veln Ashpause was killed at the braided confluence below the rise in the Disputed Zone. (near millbrook)",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 33,
+        "text": "Vash: Alone with the fragment long enough, Vash finally placed the overheard words in their right sequence and understood what she had been holding — not a conspiracy, not a warning, but a private grief made briefly audible, and the weight she felt was not guilt but the ordinary ache of having been an unwilling witness to someone else's unfinished thing. — and that thread has run its course.",
+        "tier": "event"
+      },
+      {
+        "day": 14,
+        "worldDay": 33,
+        "text": "Cassiel Ord: After five days of sitting with it, Cassiel has narrowed the question at least this far: the feeling sharpens in the mornings and dulls toward evening, which is the rhythm of conscience, not exhaustion — he hasn't answered it yet, but he knows now what he is actually asking.",
+        "tier": "ambient"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-28T01:42:56.876Z",
-    "lastTickWorldDay": 28,
-    "lastCanonWorldDay": 28,
-    "lastGenCount": 673,
-    "turnsSinceOffer": 13,
+    "lastSharedReadAt": "2026-08-02T03:35:26.333Z",
+    "lastTickWorldDay": 33,
+    "lastCanonWorldDay": 33,
+    "lastGenCount": 795,
+    "turnsSinceOffer": 14,
     "recentOffers": [
       {
         "thing": "The Working Model's read of the reclamation site as a spread, not a point — intake valves, chambers, arrays — hints that the site could be…",
@@ -5976,10 +6013,10 @@
         "lastOutcome": "done"
       },
       "vash": {
-        "progress": 3,
-        "status": "active",
-        "updatedWorldDay": 28,
-        "lastOutcome": "progress"
+        "progress": 4,
+        "status": "resolved",
+        "updatedWorldDay": 33,
+        "lastOutcome": "done"
       },
       "calvar": {
         "progress": 4,
@@ -5990,20 +6027,20 @@
       "siol-elven-traveler-at-the-hub-plaza-tal": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 28,
-        "lastOutcome": "problem"
+        "updatedWorldDay": 33,
+        "lastOutcome": "stall"
       },
       "tane-solr": {
         "progress": 0,
         "status": "active",
-        "updatedWorldDay": 28,
+        "updatedWorldDay": 33,
         "lastOutcome": "stall"
       },
       "cassiel-ord": {
-        "progress": 0,
+        "progress": 1,
         "status": "active",
-        "updatedWorldDay": 28,
-        "lastOutcome": "stall"
+        "updatedWorldDay": 33,
+        "lastOutcome": "progress"
       }
     },
     "assignments": {
@@ -6206,11 +6243,12 @@
         "kind": "shortage",
         "premise": "The shallow wells along the eastern edge of the Palelands are silting over one by one, and no one has yet connected the pattern.",
         "cause": "The Palelands are arid and sparsely settled, with wells dug generations ago into substrata that were never fully understood — the soil is already thin and…",
-        "stage": 0,
+        "stage": 3,
         "seededAtCount": 673,
-        "surfaced": false,
+        "surfaced": true,
         "fate": "growing",
-        "lastMovedCount": 673
+        "lastMovedCount": 795,
+        "surfacedAtCount": 795
       },
       "valley-miller-debt": {
         "id": "valley-miller-debt",
@@ -6218,14 +6256,79 @@
         "kind": "decision",
         "premise": "The valley's miller has been quietly shorting grain weights for two seasons to cover a debt owed to a creditor in the Center, and a farmer is beginning to suspect.",
         "cause": "The valley is agricultural and the mill sits at the heart of its trade, making the miller both trusted and positioned to deceive — and debts flow toward…",
-        "stage": 0,
+        "stage": 2,
         "seededAtCount": 673,
+        "surfaced": true,
+        "fate": "growing",
+        "lastMovedCount": 795,
+        "surfacedAtCount": 795
+      },
+      "center-ledger-rot": {
+        "id": "center-ledger-rot",
+        "regionId": "the_center",
+        "kind": "rot",
+        "premise": "A clerk in the Center's lending house has been recording phantom interest payments to mask a shortfall in the creditor's books, and the discrepancy is now large enough that an audit would unravel…",
+        "cause": "The Center runs on ledger-trust; no one audits what no one doubts, and the creditor has been trusted for a generation.",
+        "stage": 0,
+        "seededAtCount": 795,
         "surfaced": false,
         "fate": "growing",
-        "lastMovedCount": 673
+        "lastMovedCount": 795
+      },
+      "palelands-elder-decision": {
+        "id": "palelands-elder-decision",
+        "regionId": "the_palelands",
+        "kind": "decision",
+        "premise": "An elder in the Palelands has privately decided to abandon the eastern settlements and consolidate survivors westward, but has told no one, and is already quietly redirecting the communal seed-stores.",
+        "cause": "The silting wells are not new to her — she recognized the pattern a season before anyone else, and has been watching it confirm her fear ever since.",
+        "stage": 0,
+        "seededAtCount": 795,
+        "surfaced": false,
+        "fate": "growing",
+        "lastMovedCount": 795
       }
     },
-    "pressureQueue": []
+    "pressureQueue": [
+      {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "calvar",
+        "aimedAtPlayer": true,
+        "urgency": 3,
+        "oneLineHook": "Calvar, unseen for 5 days, has come looking for you — driven by an unmet want: The filtration work done CORRECTLY — he came out of a solitary twenty-year watch for this; sloppiness offends him more than danger.. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "calvar"
+        },
+        "addedDay": 14
+      },
+      {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "siol",
+        "aimedAtPlayer": true,
+        "urgency": 2,
+        "oneLineHook": "Siol, unseen for 8 days, has come looking for you — driven by an unmet want: To WITNESS the thing unfolding correctly — she recognizes the shape of what Silas is doing (the Palework-through-grove) and wants to see it done true.. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "siol"
+        },
+        "addedDay": 14
+      },
+      {
+        "source": "npc-want",
+        "kind": "npc-want",
+        "subjectId": "tane-solr",
+        "aimedAtPlayer": true,
+        "urgency": 2,
+        "oneLineHook": "Tane Solr, unseen for 8 days, has come looking for you — driven by an unmet want: A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.. They arrive now, not content to keep waiting.",
+        "becomes": {
+          "type": "scene",
+          "who": "tane-solr"
+        },
+        "addedDay": 14
+      }
+    ]
   },
   "domains": {
     "primary": "ashwarden",
@@ -7368,7 +7471,8 @@
           "[d14] [while away] Vash turned the overheard words over again today but without new context they remain the same shapeless fragment — she still cannot tell whether what she held was the edge of something or just noise.",
           "[d14] [while away] She turned the overheard words over again through a long, quiet shift and still cannot place what kind of thing they were a piece of — the shape of it won't resolve.",
           "[d14] [while away] She found someone who was in the corridor at the same time and, without revealing what she heard, asked a careful sideways question — the answer confirmed that what she overheard was not routine, and the weight of that has settled into something she can no longer defer.",
-          "[d14] [while away] Vash spent the evening quietly tracing the words she overheard against what she's since learned, and one piece locked into another — she now understands whose name was missing from what was said, and why its absence mattered."
+          "[d14] [while away] Vash spent the evening quietly tracing the words she overheard against what she's since learned, and one piece locked into another — she now understands whose name was missing from what was said, and why its absence mattered.",
+          "[d14] [while away] Alone with the fragment long enough, Vash finally placed the overheard words in their right sequence and understood what she had been holding — not a conspiracy, not a warning, but a private grief made briefly audible, and the weight she felt was not guilt but the ordinary ache of…"
         ],
         "links": [
           "leth-archive-complaint",
@@ -7716,22 +7820,22 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.60827492953738,
-    "cerebral": 21.56629886932237,
-    "social": 8.721543726030436,
-    "generous": 3.55230134918776,
-    "cautious": 10.03771460455105,
-    "physical": 1.1722695326657473,
-    "risky": 0.28117256922015776,
-    "ruthless": 0.6119950313299047,
-    "carousing": 0.09950273343295588,
-    "amorous": 0.36577152448559686,
-    "patient": 0.22164652037073815,
-    "stealth": 0.00002138867649838775,
-    "devotion": 0.8740119394339912,
-    "craft": 0.7590362884470401,
-    "leadership": 0.33005532839955315,
-    "deception": 0.1024272264326445
+    "strategic": 20.118068056298945,
+    "cerebral": 22.02714139758931,
+    "social": 8.503505132879676,
+    "generous": 3.4634938154580657,
+    "cautious": 9.786771739437274,
+    "physical": 1.1429627943491036,
+    "risky": 0.2741432549896538,
+    "ruthless": 0.5966951555466571,
+    "carousing": 0.09701516509713197,
+    "amorous": 0.35662723637345695,
+    "patient": 0.21610535736146969,
+    "stealth": 0.000020853959585928057,
+    "devotion": 0.8521616409481414,
+    "craft": 0.740060381235864,
+    "leadership": 0.3218039451895643,
+    "deception": 0.09986654577182838
   },
   "aptitudes": [
     "strategist",
@@ -7740,10 +7844,26 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 912,
+  "actionCount": 913,
   "grantsVersion": 1,
   "reconcileVersion": 22,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "[object Object]",
+      "url": "https://image.pollinations.ai/prompt/%5Bobject%20Object%5D%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=14631&nologo=true",
+      "caption": "At the east-side well, Silas attunes to Memory's evolved form and formalizes its shadow-tw",
+      "worldDay": 33,
+      "at": "2026-08-02T03:40:34.210Z"
+    },
+    {
+      "kind": "location",
+      "prompt": "[Object Object]",
+      "url": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true",
+      "caption": "[Object Object]",
+      "worldDay": 33,
+      "at": "2026-08-02T03:40:34.194Z"
+    },
     {
       "kind": "beast",
       "prompt": "Was a hare. Is now too many legs and a hunger that doesn't match its size, moving in stutters the eye can't track.",
@@ -8154,8 +8274,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1785242112383,
-  "rev": 1625,
+  "updatedAt": 1785642034210,
+  "rev": 1630,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8715,10 +8835,6 @@
           "canonTier": "variant",
           "offscreen": [
             {
-              "worldDay": 21,
-              "note": "Vash spent the quiet hours between grinds tracing back what she overheard against the small things she knows about the array's optical layer — a particular phrase she'd dismissed as jargon now sits wrong in her, not quite matching the geometry it should describe, and she has not yet decided whether that wrongness is hers or theirs."
-            },
-            {
               "worldDay": 22,
               "note": "Vash spent part of the night re-grinding a lens she had declared finished, the repetitive motion giving her cover to turn the overheard fragment over and over until she isolated the one word in it she still cannot place — and now she is nearly certain it was a name, not a process term."
             },
@@ -8751,6 +8867,11 @@
               "worldDay": 28,
               "note": "Vash spent the evening quietly tracing the words she overheard against what she's since learned, and one piece locked into another — she now understands whose name was missing from what was said, and why its absence mattered.",
               "outcome": "progress"
+            },
+            {
+              "worldDay": 33,
+              "note": "Alone with the fragment long enough, Vash finally placed the overheard words in their right sequence and understood what she had been holding — not a conspiracy, not a warning, but a private grief made briefly audible, and the weight she felt was not guilt but the ordinary ache of having been an unwilling witness to someone else's unfinished thing.",
+              "outcome": "done"
             }
           ]
         },
@@ -8924,6 +9045,11 @@
               "worldDay": 28,
               "note": "Someone at the plaza recognized Siol from somewhere earlier in their travels and said so aloud, in company — not with malice, but the name now sits in the air among strangers, and Siol cannot take it back.",
               "outcome": "problem"
+            },
+            {
+              "worldDay": 33,
+              "note": "Siol remained at the plaza's edge another five days, the world continuing its small insistences around them, and they continued to absorb those insistences without quite yielding to any of them — neither pushed out nor pulled in, still just beginning.",
+              "outcome": "stall"
             }
           ]
         },
@@ -9165,6 +9291,11 @@
               "worldDay": 28,
               "note": "Tane found no partner willing to meet him at the center-line today — every offer that came was laced with something else, pride or performance, and he turned them all down quietly.",
               "outcome": "stall"
+            },
+            {
+              "worldDay": 33,
+              "note": "The bouts available to Tane in these five days were the usual kind — winnable, manageable, already mapped before the first step — and he showed up for none of them, which is its own kind of answer he isn't ready to look at yet.",
+              "outcome": "stall"
             }
           ]
         },
@@ -9350,6 +9481,11 @@
               "worldDay": 28,
               "note": "Cassiel sat with it another night and still could not say which one it was — the feeling has not clarified, only persisted, and he hasn't moved.",
               "outcome": "stall"
+            },
+            {
+              "worldDay": 33,
+              "note": "After five days of sitting with it, Cassiel has narrowed the question at least this far: the feeling sharpens in the mornings and dulls toward evening, which is the rhythm of conscience, not exhaustion — he hasn't answered it yet, but he knows now what he is actually asking.",
+              "outcome": "progress"
             }
           ]
         },
@@ -10913,6 +11049,44 @@
           "x": 272.37251111495743,
           "y": 297.10793550220046
         }
+      },
+      "gen-object-object": {
+        "id": "gen-object-object",
+        "name": "[Object Object]",
+        "regionId": "the_center",
+        "descriptionSeed": "A place the road led to — [Object Object]. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "the_crossing"
+        ],
+        "_mintedAs": "transit",
+        "dangerLevel": 2,
+        "_gen": {
+          "type": "location",
+          "tier": "fresh",
+          "engagementScore": 2,
+          "birthWeight": 1,
+          "rating": null,
+          "attentionHistory": [
+            {
+              "kind": "revisit",
+              "day": 14
+            }
+          ],
+          "createdDay": 14,
+          "provenance": {
+            "locationId": "the_crossing",
+            "day": null,
+            "hint": "transit"
+          },
+          "lastAttentionDay": 14
+        },
+        "map": {
+          "x": 295.6723737765526,
+          "y": 233.26322574031602
+        }
       }
     },
     "arc": {
@@ -10990,16 +11164,11 @@
           "romanceEligible": true
         }
       }
-    }
+    },
+    "creature": {}
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "stillwaters-trouble",
-      "text": "Silas Weir named and claimed the Raven's Home warden post as his own Ashwarden base on World-day 19 — naming it Stillwater's Trouble aloud, hand on the door, Order-Sense seating the name into the March's design. The post now belongs to him.",
-      "day": 6,
-      "subjectId": "stillwaters-trouble"
-    },
     {
       "id": "veth-ondra",
       "text": "Veth Ondra entered the Stillwater's Trouble hollow floor on World-day 19 — the first time since the post was dissolved. She named it aloud: 'Eleven years. It holds.' The completion is witnessed by all four people most connected to the site.",
@@ -11233,6 +11402,12 @@
       "text": "Logana accepted the charge of party guardian on Day 14 at dawn — Silas Weir named her purpose plainly, she stepped forward in receipt. She now travels with the party as protector, with Silas and Pell named as her primary charges.",
       "day": 14,
       "subjectId": "logana"
+    },
+    {
+      "id": "f41",
+      "text": "Memory now carries a unified shadow-form binding — both the physical and shadow spears are one working, answerable through a single rune-thread and Huginn's ending-sense. The shadow-twin is no longer separate; it is part of Memory's whole. Calling it costs nothing more than naming it aloud.",
+      "day": 14,
+      "subjectId": null
     }
   ],
   "practice": {
@@ -11999,12 +12174,12 @@
       "at": "2026-07-19T12:49:09.209Z"
     }
   ],
-  "syncedAt": 1785071380339,
+  "syncedAt": 1785242112383,
   "teachers": {},
   "regionsKnown": {
     "valley": 646,
     "the_palelands": 6,
-    "the_center": 118
+    "the_center": 119
   },
   "foreclosed": [
     "rootkin",
@@ -12028,7 +12203,8 @@
     "gen-hub-north-gate-district-street",
     "gen-mara-wells-store",
     "gen-disputed-zone-left-branch-entrance",
-    "gen-the-made-gate"
+    "gen-the-made-gate",
+    "gen-object-object"
   ],
   "opLossLog": [
     {
@@ -12210,6 +12386,14 @@
       "startDay": 28,
       "endDay": 28,
       "beats": 5
+    },
+    {
+      "id": "sess-21",
+      "startedAt": "2026-08-02T03:40:34.175Z",
+      "lastAt": "2026-08-02T03:40:34.175Z",
+      "startDay": 33,
+      "endDay": 33,
+      "beats": 1
     }
   ],
   "company": [
@@ -12554,21 +12738,22 @@
     "gen-hub-north-gate-district-street": "https://image.pollinations.ai/prompt/Hub%20%E2%80%94%20North%20Gate%20District%20Street%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Hub%20%E2%80%94%20North%20Gate%20District%20Street.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=33155&nologo=true",
     "gen-mara-wells-store": "https://image.pollinations.ai/prompt/Mara%20Wells%20Store%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Mara%20Wells%20Store.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=13548&nologo=true",
     "gen-disputed-zone-left-branch-entrance": "https://image.pollinations.ai/prompt/Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Disputed%20Zone%20%E2%80%94%20Left%20Branch%20Entrance.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=63628&nologo=true",
-    "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true"
+    "gen-the-made-gate": "https://image.pollinations.ai/prompt/The%20Made%20Gate%3A%20The%20first%20waygate%20MADE%20rather%20than%20reached-for%20%E2%80%94%20cut%20at%20the%20Crossing%20by%20a%20wright%20who%20tends%20endings%2C%20standing%20where%20the%20fold%20once%20was.%20Proof%20that%20a%20gate%20can%20be%20made%2C%20not%20only%20reached.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=90346&nologo=true",
+    "gen-object-object": "https://image.pollinations.ai/prompt/%5BObject%20Object%5D%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20%5BObject%20Object%5D.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=32752&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 285,
-    "choices": 284,
-    "characterDeltas": 123,
-    "scene": 285,
+    "sceneSummary": 286,
+    "choices": 285,
+    "characterDeltas": 124,
+    "scene": 286,
     "npcUpdates": 255,
-    "factUpdates": 22,
-    "placeUpdates": 54,
+    "factUpdates": 23,
+    "placeUpdates": 55,
     "codexUpdates": 180,
-    "timeOps": 276,
+    "timeOps": 277,
     "imagePrompt": 7,
-    "sceneEnded": 65,
-    "itemUpdates": 5,
+    "sceneEnded": 66,
+    "itemUpdates": 6,
     "questUpdates": 41,
     "offer": 27,
     "moveTo": 16,
@@ -12583,9 +12768,10 @@
     "scene_ended": 2,
     "_applyFailedOp": 7,
     "newEncounter": 1,
-    "encounterOps": 1
+    "encounterOps": 1,
+    "gambitApt": 1
   },
-  "_opTurns": 285,
+  "_opTurns": 286,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",
@@ -12594,8 +12780,8 @@
   "_opLedger": {
     "offer": {
       "applied": 29,
-      "rejected": 0,
-      "lastWhy": null
+      "rejected": 1,
+      "lastWhy": "rejected-shape"
     },
     "delegateOps": {
       "applied": 3,

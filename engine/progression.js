@@ -144,7 +144,7 @@ export function retroNativeGrants(character, rules) {
  *  point to learn, then grows normally); the innate floor + earned growth Erik ruled. Each seeded id is
  *  VALIDATED against the catalog's powerSystem so a mis-authored id can never create a false access.
  *  Idempotent (adds only what's missing) and Law-14-safe. Returns the newly-seeded ability ids. */
-export function seedInnateSubstrate(character, originRecord = {}, catalog = {}) {
+export function seedInnateSubstrate(character, originRecord = {}, catalog = {}, backgroundRecord = {}) {
   character.precursorAccess = character.precursorAccess || [];
   character.livingCurrentAccess = character.livingCurrentAccess || [];
   character.wildCurrentAccess = character.wildCurrentAccess || [];
@@ -157,6 +157,15 @@ export function seedInnateSubstrate(character, originRecord = {}, catalog = {}) 
   seed(originRecord.innatePrecursor, character.precursorAccess, "precursor");
   seed(originRecord.innateLivingCurrent, character.livingCurrentAccess, "living_current");
   seed(originRecord.wildCurrent, character.wildCurrentAccess, "wild_current"); // SNG-140: the Wild Half (churnfolk/abyssal)
+  // SNG-261 §B: a BACKGROUND can carry the same innate marking, and until now nothing read it. `backgrounds
+  // .precursor_marked` has named `address_sense` since it was authored, Loki has carried that background the
+  // whole time, and this function was only ever called with an ORIGIN record — so the key was unreachable and
+  // the entire precursor system never opened for anyone. The content was right; the seeder never looked.
+  // Origin is what people you are FROM; a background is what happened TO you, and a precursor marking is the
+  // second kind — which is exactly why it alone fell through origin-keyed seeding.
+  seed(backgroundRecord.innatePrecursor, character.precursorAccess, "precursor");
+  seed(backgroundRecord.innateLivingCurrent, character.livingCurrentAccess, "living_current");
+  seed(backgroundRecord.wildCurrent, character.wildCurrentAccess, "wild_current");
   character.braidDiscount = originRecord.braidAffinity?.discount || 0; // derived; harmless to restamp
   return seeded;
 }

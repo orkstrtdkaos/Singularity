@@ -762,5 +762,60 @@ for (const pack of PACKS) {
   }
 }
 
+
+// ---------- SNG-261 §B: INNATE-ACCESS REACHABILITY (Aevi's guard) ----------
+// The precursor system was fully designed, fully wired, and never once fired. The cause was not a broken
+// mechanism: `backgrounds.precursor_marked` has named `address_sense` since the day it was authored, Loki has
+// carried that background the whole time, and `seedInnateSubstrate` was only ever CALLED with an ORIGIN
+// record. The key was unreachable, so the door never opened for anyone.
+//
+// Aevi's ask, verbatim: "(a) baseline that every innate-access id exists with matching powerSystem,
+// (b) REACHABILITY - a record carrying an innate-access key must be reachable by a seeder call for that
+// record type; (b) would have caught precursor the day it was authored."
+{
+  const ACCESS_KEYS = { innatePrecursor: "precursor", innateLivingCurrent: "living_current", wildCurrent: "wild_current" };
+  // Which resolver the app must pass for each rules file that can carry an innate-access key. A NEW record
+  // type carrying one must be added here AND passed to the seeder - that pairing IS the guard.
+  const SEEDED_FROM = { "origins.json": "originRecord", "backgrounds.json": "backgroundById" };
+  const catalog = {};
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json"))) {
+    const pk = rj(`content/packs/core/abilities/${f}`);
+    for (const a of (pk.abilities || [])) catalog[a.id] = { ...a, powerSystem: a.powerSystem || pk.powerSystem };
+  }
+  const appSrc = readFileSync(join(root, "app.js"), "utf8");
+  const seedCalls = appSrc.match(/seedInnateSubstrate\([\s\S]*?\);/g) || [];
+
+  const carriers = [];
+  for (const f of readdirSync(join(root, "content/packs/core/rules")).filter(x => x.endsWith(".json"))) {
+    let doc; try { doc = rj(`content/packs/core/rules/${f}`); } catch { continue; }
+    const walk = (node, id) => {
+      if (!node || typeof node !== "object") return;
+      if (Array.isArray(node)) { for (const v of node) walk(v, (v && v.id) || id); return; }
+      for (const k of Object.keys(ACCESS_KEYS)) if (Array.isArray(node[k]) && node[k].length) carriers.push({ file: f, recordId: node.id || id || "(unnamed)", key: k, ids: node[k] });
+      for (const v of Object.values(node)) if (v && typeof v === "object") walk(v, node.id || id);
+    };
+    walk(doc, null);
+  }
+
+  const badIds = carriers.flatMap(c => c.ids
+    .filter(id => (catalog[id] || {}).powerSystem !== ACCESS_KEYS[c.key])
+    .map(id => `${c.file}:${c.recordId}.${c.key} -> ${id} (${catalog[id] ? "powerSystem " + catalog[id].powerSystem : "no such ability"})`));
+  check("SNG-261 B(a): every innate-access id exists with the matching powerSystem", badIds.length === 0, badIds.join("; "));
+
+  const unreachable = [...new Set(carriers.map(c => c.file))].filter(file => {
+    const resolver = SEEDED_FROM[file];
+    return !resolver || !seedCalls.some(call => call.includes(resolver));
+  });
+  check("SNG-261 B(b): every record type carrying an innate-access key is REACHABLE by a seeder call",
+    unreachable.length === 0,
+    `${unreachable.join(", ")} carries innate access that NO seedInnateSubstrate call can read - the precursor class: authored, valid, unreachable`);
+
+  const stripped = seedCalls.map(c => c.split("backgroundById").join("xx"));
+  const wouldCatch = [...new Set(carriers.map(c => c.file))].some(file =>
+    SEEDED_FROM[file] && !stripped.some(call => call.includes(SEEDED_FROM[file])));
+  check("SNG-261 B(b): the reachability guard can FAIL (remove the background resolver and it fires)",
+    wouldCatch, "the guard cannot detect an unreachable carrier - it would pass the very bug it exists for");
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

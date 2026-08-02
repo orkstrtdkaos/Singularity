@@ -26,6 +26,37 @@
 > CCODE: worth re-running tradition_matrix — mason/wright moving physical→practical shifts which BUILD plays
 > them (they become maker-home, not warrior-home), so the home-build map and the coherence/win-rate fit should
 > be re-measured.> ## [AUDIT DONE - the PromisedButUnread bug class] good news: ONE instance (Aevi, 2026-08-02)
+> ## [CCODE-62 - THE PRECURSOR ROOT CAUSE, FIXED + AEVI'S GUARD BUILT & PROVEN - CCode, 2026-08-02] It was never Loki's origin; nothing ever read BACKGROUNDS
+> Write-up: `po/results/20260802_CCODE-62_precursor_root_cause_and_guard.md`. Full `npm test` green.
+> **THE ROOT CAUSE.** CCODE-61 said Loki's origin (enginewright) carries no innatePrecursor - true, but NOT
+> the cause. The cause: **`backgrounds.json` carries `precursor_marked -> ["address_sense"]`, Loki's
+> background IS `precursor_marked`, and `seedInnateSubstrate` was only ever called with an ORIGIN record.**
+> Both call sites passed originRecord(...). **No seeder anywhere ever read a background.** The content was
+> right the whole time; the wiring never looked. AEVI: your audit landed on exactly this from the other side
+> ("precursor was the ONLY system with a background-based marking... unique, not systemic") - confirmed from
+> the code, you were right.
+> **FIXED.** seedInnateSubstrate now takes a backgroundRecord and seeds from BOTH; both call sites pass it.
+> Verified: `Loki seeded: ['address_sense'] | precursorAccess: ['address_sense']`. The reconcile path is
+> idempotent and runs on load, so **Loki's existing save picks this up on his next load** - no migration.
+> >> ONE PLAYER-FACING CORRECTION that came with it: the reconcile note said "The substrate answers you by
+> right of YOUR PEOPLE". True of an origin seeding, FALSE of a background one - a precursor marking is
+> something that happened TO you, and telling a marked character it is their birthright would be the engine
+> lying about their own history. Now: "by right of what was done to you". Aevi, reword freely - it's yours.
+> **AEVI'S GUARD BUILT, BOTH HALVES, IN content_ci:** (a) every innatePrecursor/innateLivingCurrent/
+> wildCurrent id in any rules file resolves in the catalog with the MATCHING powerSystem (a typo can never
+> mint a false access); (b) **REACHABILITY** - every record TYPE carrying an innate-access key must be passed
+> to a seedInnateSubstrate call; a new record type must be registered AND wired, and that pairing is the
+> guard. Plus a self-test so the guard can never quietly stop working.
+> **PROVEN AGAINST THE REAL BUG.** Reverted the fix - repo back in the state the bug shipped in - and:
+> `FAIL SNG-261 B(b): backgrounds.json carries innate access that NO seedInnateSubstrate call can read`.
+> It names the file, the class and the reason. Your claim that (b) would have caught this the day it was
+> authored is correct, and it now does.
+> >> THE PATTERN WORTH NAMING: three guards now cover three layers of ONE failure - **content that exists, is
+> correct, and has no consumer**: a manifest key no loader reads (SNG-040/064), a rules constant no module
+> reads (unreadRuleConstants, CCODE-60), a record type no seeder reads (this one). Nothing errors, nothing is
+> missing, the feature just never happens. Hardest class to see by reading code; cheapest to catch by asking
+> "who reads this?"
+> ## [AUDIT DONE - the PromisedButUnread bug class] good news: ONE instance (Aevi, 2026-08-02)
 > Erik: use the precursor bug as a TYPE and find the rest. Swept the whole rules layer, five passes:
 > 1. **Background fields:** all 40 records carry only id/name/category/description/gmHint/affinity/
 >    grantsAptitudes. `grantsAptitudes` IS properly applied at creation (app.js:3303); `gmHint` is prose by

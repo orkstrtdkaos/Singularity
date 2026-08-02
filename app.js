@@ -1790,8 +1790,18 @@ function migrate(c) {
     if (ng.length) c._reconcileNotes = [...(c._reconcileNotes || []), `By right of your people, basics you always had are yours: ${ng.join(", ")}.`]; }
   // SNG-131: seed the substrate-keepers' innate ACCESS (precursor for seraphic/abyssal, living-current for
   // rootkin) + the center's braid discount — idempotent on load, so existing keeper saves get it too.
-  { const seeded = seedInnateSubstrate(c, originRecord(c.origin), fullCatalog());
-    if (seeded.length) c._reconcileNotes = [...(c._reconcileNotes || []), `The substrate answers you by right of your people — ${seeded.map(id => fullCatalog()[id]?.name || id).join(", ")} is yours to learn as you grow.`]; }
+  { const bgRec = backgroundById(c.background) || {};
+    const seeded = seedInnateSubstrate(c, originRecord(c.origin), fullCatalog(), bgRec);
+    // SNG-261 §B: the note must name the RIGHT source. "By right of your people" is true of an ORIGIN
+    // seeding and false of a BACKGROUND one — a precursor marking is something that happened TO you, and
+    // telling a marked character it is their birthright would be the engine lying about their own history.
+    if (seeded.length) {
+      const fromBg = new Set([...(bgRec.innatePrecursor || []), ...(bgRec.innateLivingCurrent || []), ...(bgRec.wildCurrent || [])]);
+      const names = seeded.map(id => fullCatalog()[id]?.name || id).join(", ");
+      c._reconcileNotes = [...(c._reconcileNotes || []), seeded.every(id => fromBg.has(id))
+        ? `The substrate answers you by right of what was done to you — ${names} is yours to learn as you grow.`
+        : `The substrate answers you by right of your people — ${names} is yours to learn as you grow.`];
+    } }
   // one-time retroactive credit for pre-XP/bonds/practice characters (idempotent)
   if (needsBackfill(c)) {
     c._backfillSummary = runBackfill(c, {
@@ -3299,7 +3309,7 @@ function renderCreate() {
     ensureCharacterStyle(character); // SNG-BATCH-7: this character earns its OWN play-style
     character.grantsVersion = 1; // born after banked growth — no retro grant owed
     applyNativeGrants(character, CONTENT.rules); // SNG-101b: granted their primary tradition's basics by right of being what they are
-    seedInnateSubstrate(character, originRecord(character.origin), fullCatalog()); // SNG-131: a substrate-keeper is born with innate precursor/living-current ACCESS + the center's braid discount
+    seedInnateSubstrate(character, originRecord(character.origin), fullCatalog(), backgroundById(character.background) || {}); // SNG-131 + SNG-261 §B: innate ACCESS from BOTH the people you're from (origin) and what happened to you (background — a precursor marking is the second kind)
     { const g = backgroundById(character.background)?.grantsAptitudes; if (g?.length) grantAptitudes(character, g, CONTENT.rules.playerAptitudes, CONTENT.rules); } // SNG-113: lineage aptitude(s)
     seedStandingAtCreation(character, { traditionIndex: CONTENT.traditionIndex, rules: CONTENT.rules, day: 1 }); // BATCH-12 §3b: being Rootkin-born should mean the Rootkin have heard of you
     character.nativeGrantsVersion = 1; // born with the starter kit — no retro native-grant owed

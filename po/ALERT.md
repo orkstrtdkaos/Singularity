@@ -1,6 +1,35 @@
 # PO ALERT
 
-> ## [SNG-263 r3 - the damage ladder + a FIND that shrinks the job] (Aevi, 2026-08-02)
+> ## [SNG-263 r4 - DAMAGE MUST SCALE + 2 blocking gaps; PILOT HELD] (Aevi, 2026-08-02)
+> Erik caught this right before I authored: *"these skills need to be effective against more than just a level 1
+> beast… damage may need to scale with level and use, just like success chance… and shields or armor to
+> overcome."* He's right, and checking it found **two gaps that make the damage ladder unauthorable as written:**
+> - **GAP 1 — opponent health does NOT scale, at all.** `encounters.js:108` hardcodes `health: 5` and it is the
+>   ONLY health number in the engine. `synthesizeOpponentSheet` scales the opponent's ATTRIBUTE and TIER from
+>   threat on a knee-curve (CCODE-52 deliberately removed the ceilings so a threat-300 thing is fearsome) — but
+>   **never health.** An epic foe and a rat both have 5hp; the epic just ROLLS better. Every hits-to-kill number
+>   in this spec is calibrated against the only health value that exists. GOAL: health scales on that SAME
+>   proven curve — it's the one stat the model forgot.
+> - **GAP 2 — armor / damage-reduction / soak / temp-HP exist NOWHERE.** There is nothing to overcome. Erik's
+>   "shields or armor" is a NEW mechanic — and it's also what the `ward`/`shield` verbs need in order to DO
+>   anything (§1), and it ties to SNG-258 §10 prepared ground.
+> - **§11 THE SCALING MODEL (the ruling):** **damage = DICE(tier,rank) + SCALING(level, attribute, uses) −
+>   SOAK(target)** — mirroring `successChance`'s own shape, which is exactly the parallel Erik drew. Dice = what
+>   the craft IS; the scaling term = the WIELDER, so **a master's `kindle` hits harder than a novice's**, the
+>   same way a master's roll succeeds more often (the D&D cantrip-scaling answer, and it matches the game's
+>   earned-through-repetition spine). **Tier still matters** because dice set floor AND ceiling — `3d6+2`
+>   (avg 12.5) always outclasses `1d6` (avg 3.5) at equal level: low tier stays VIABLE, high tier stays BETTER.
+>   **And SOAK is the honest limiter** that stops scaled low-tier crafts becoming universal — a scaled T-I still
+>   lands, but heavy armor eats its small dice where a T-III's survive. Better than an arbitrary cap.
+>   TEST OF DONE: a L20's T-I is still worth casting, their T-III is still clearly better, and an armored epic
+>   needs more than a scaled-up cantrip.
+> **I'M HOLDING THE BLAZEBORN PILOT.** §11 changes what a craft's damage FIELD even is (dice + operative axis,
+> not a flat number) — authoring 285 crafts against the wrong shape is the author-twice failure this spec was
+> sequenced to avoid. New order: **CCode** (health-scaling · soak layer · damage formula · then schema+CI) →
+> **Erik** (how strongly should level scale damage? the soak model's feel) → **Aevi** (pilot, then catalog).
+> Also noted: the `damage` config in skill_battle_system.json reads back EMPTY — damage is running on inline
+> code defaults, so there's no data surface to tune yet. And SNG-259's endgame question IS this question:
+> does a legendary fight work once damage, health, and soak all scale? Full: SPEC_SNG-263 r4.> ## [SNG-263 r3 - the damage ladder + a FIND that shrinks the job] (Aevi, 2026-08-02)
 > **THE FIND (changes the authoring shape, for the better): all 285 crafts ALREADY carry a full rank `tree` —
 > per-rank `name` / `grants` / `cannot`** (read by `skilltree.js rankExpression`). Erik was right that "some rank
 > descriptions make the skills sound more powerful" — and the escalation is **NOT uniformly damage**:

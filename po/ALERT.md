@@ -1,6 +1,19 @@
 # PO ALERT
 
-> ## [SPEC - SNG-259 model the endgame] heroic + legendary in the sim (Aevi, 2026-08-02)
+> ## [SPEC - SNG-259b level-tier reset] "legendary at 7" fix (Aevi, 2026-08-02)
+> Erik: reset the levels we call master/heroic/epic/legendary - not 7 anymore. VERIFIED tierForArc (legends.js:51)
+> is the canonical mapping and it's BOTH stale AND underbuilt: level>=7 legendary / >=4 regional / else riffraff -
+> only 3 bands, skips notable+epic, and 7 is absurdly low vs the real economy (rank3+top-tier at L5, CAPSTONE at
+> L10, earnedpower high-water at L30, sim samples to L20).
+> PROPOSED 5-tier reset on real breakpoints (Erik tunes): riffraff L1-4, notable L5-9, regional L10-17, epic
+> L18-29, legendary L30+. Makes legendary mean a L30 figure not a L7 one, uses all 5 bands, every cut on a real
+> economy gate.
+> NAMING QUESTION (Erik's, half the fix): he named master/heroic/epic/legendary (4); the engine spectrum is
+> riffraff/notable/regional/epic/legendary (5). Option A = keep engine names + fix cuts (simple). Option B =
+> rename toward master/heroic (bigger - threads legends.js/weight-table/GM-prompt/codex). Must stay aligned with
+> the SNG-259 sim bands (SAME spectrum: adversary-difficulty + character-tier) - decide TOGETHER with SNG-259.
+> ERIK: (1) the cuts, (2) Option A vs B naming, (3) where "heroic" sits (6th band or replace one?). Then Aevi
+> authors tierForArc + any rename, CCode does engine+sim, and it pairs with SNG-259's endgame bands. Full: 259b.> ## [SPEC - SNG-259 model the endgame] heroic + legendary in the sim (Aevi, 2026-08-02)
 > Erik asked: add heroic/legendary to the sim to explore the endgame? YES, and it's LOAD-BEARING - we just tuned
 > §1(mult-10)+§3b(crits) against a grid that STOPS AT EPIC. Verified: the game already HAS a legendary tier ABOVE
 > epic (legends.js spectrum legendary/epic→regional/notable/riffraff, legendary birth-weight 50 vs epic 45; a

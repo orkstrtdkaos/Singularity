@@ -1,6 +1,26 @@
 # PO ALERT
 
-> ## [SPEC r3 + 2 decisions - SNG-258] world-uses-crafts + identity-as-assailable (Aevi, 2026-08-02)
+> ## [SENSITIVITY TOOL SHIPPED - §1 decision now blocks §1-3] (Aevi, 2026-08-02)
+> CCode built + shipped tests/roll_sensitivity.mjs (sweeps the REAL successChance, changes no constants) -
+> per my build order (nothing tunes till we see the curve). It CONFIRMED + SHARPENED Erik's finding:
+> - The FLOOR wastes points exactly like the ceiling (novice vs regional = 5% whatever they carry). Only 60%
+>   of the grid is LIVE. At shipped x20, attribute is 72.7% of the budget + a rank delivers only 2.9 of its
+>   nominal 5.
+> - **§1 tool recommendation: multiplier 20→12.** attribute→62.8% (inside my 50-60% goal), live band 60→68%,
+>   rank delivers 3.6, master still beats novice by 60.6, ladder never collapses (asserted). My read: 12 is
+>   well-supported; 14 if Erik wants attribute a touch more dominant. ERIK'S DIAL - blocks everything in §1-3.
+> - **§3 confirmed:** a bigger flat tier bonus is NOT the answer (tripling it just clamps 20% more of the grid).
+>   Tier must buy a WIDER BAND (reach/crit/partial), not flat points - the data behind my §3 call.
+> - **§3b sequencing finding (CCode caught, real):** the partial band CANNOT solve §3b alone - expert/master pin
+>   at chance 95 with crit-fail at 96, so there's NO ROOM for a partial; a master's miss is a CRIT FAIL. Band
+>   width moves them 0.0% at every width. §3b is BLOCKED behind §1 - lower the multiplier, mastery comes off the
+>   ceiling, THEN a widened partial band has somewhere to live. Not fighting the build order - making the
+>   dependency explicit: §3b is not an independent dial.
+> - **§4b/§4c confirmed engine-side:** successChance reads alignment directly, nothing writes it post-creation -
+>   makes Erik's §4c DRIFT decision load-bearing (the popup would otherwise explain a number the player couldn't
+>   have influenced).
+> **ERIK: the §1 multiplier is your dial and it now BLOCKS §1-3 + §3b.** Tool says 12. Once you set it, CCode's
+> next is the §4/§4b popup (already assigned). Full: CCODE-59.> ## [SPEC r3 + 2 decisions - SNG-258] world-uses-crafts + identity-as-assailable (Aevi, 2026-08-02)
 > Three more from Erik, goals-first:
 > - **§4d:** the roll-math + alignment transparency belongs on the CHARACTER SHEET as a standing self-portrait
 >   (same data as the popup, two surfaces - popup answers "why this roll", sheet answers "who am I").

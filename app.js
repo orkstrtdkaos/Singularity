@@ -19,6 +19,7 @@ import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCa
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
+import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
@@ -577,6 +578,7 @@ const DEV_DIALS = [
   { path: "rules.baseChance.attributeMultiplier", label: "roll: attribute multiplier", step: 1, why: "SNG-258 §1 — attribute's share of a strong chance" },
   { path: "rules.crit.baseSuccessChance", label: "crit: base success dial", step: 1, why: "SNG-258 §3b — the second roll" },
   { path: "rules.crit.baseFailChance", label: "crit: base failure dial", step: 1, why: "lowered by rank and practice; floored so catastrophe stays possible" },
+  { path: "rules.crit.perCraftCap", label: "crit: per-craft authoring cap", step: 1, why: "CCODE-76 — how far a craft may bias its OWN crit dials; 0 makes authored crit prose-only" },
 ];
 function readDials() { try { return JSON.parse(localStorage.getItem(DIALS_KEY) || "{}") || {}; } catch { return {}; } }
 function writeDials(m) { try { localStorage.setItem(DIALS_KEY, JSON.stringify(m)); } catch { /* ignore */ } }
@@ -5118,6 +5120,11 @@ async function onChoice(choice) {
     novel: !!choice.novel, abilityId: choice.abilityId || null, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || "", // CCODE-23: carry the primary abilityId — recordAspirationProgress reads action.abilityId; without it a SOLO same-tradition cast never fed an aspiration (only combos did)
     // SNG-140: a wild_current craft carries the tangled current's variance — the resolver widens both crit bands
     wildVariance: [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean).some(id => { const ab = fullCatalog()[id]; return !!(ab?.wildVariance || ab?.powerSystem === "wild_current"); }),
+    // CCODE-76: every craft in this cast that authored what ITS critical looks like. critProfile takes the
+    // strongest contributor per side (never the sum), and the receipt carries the sentence.
+    craftCrit: [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean)
+      .map(id => { const ab = fullCatalog()[id]; const c = critFor(ab, { cfg: CONTENT.craftMechanics, cap: CONTENT.rules?.crit?.perCraftCap });
+                   return c ? { name: ab?.name || id, ...c } : null; }).filter(Boolean),
     travelTo: choice.travelTo || null, exactWords: choice.exactWords || null // SNG-122: travel destination + literal words for travel-intent detection
   };
   // accepting ripe emergence (GM-offered choice carrying an engine-verified emergenceId)

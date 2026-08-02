@@ -203,6 +203,43 @@ export function rollMagnitude(fields = {}, rng = Math.random, { marginGap = 0, m
   return floor + Math.round(Math.pow(rng(), w) * span);
 }
 
+/** CCODE-76 / SNG-258 §3b — WHAT THIS CRAFT'S CRITICAL LOOKS LIKE, in the craft's own words.
+ *
+ *  Aevi authored `riding_order` with a soft bound that is not a bound at all: "A HEARTBEAT'S WINDOW — miss it
+ *  and YOU HAVE ONLY MADE CHAOS." That is not "you fail"; it is a specific, authored consequence that belongs
+ *  to THAT craft and no other. The second-roll crit model already had a per-craft dial waiting; what it had no
+ *  way to hear was the SENTENCE. Without this the prose sits in `bounds` where the engine reads it as a
+ *  restriction, and the one line that says what going critically wrong MEANS never reaches the receipt.
+ *
+ *  Two deliberate limits, both learned the hard way in this codebase:
+ *   · a craft BIASES the dial, it does not own it. Its contribution is clamped to `rules.crit.perCraftCap` so
+ *     "this one goes badly wrong" cannot author itself past expertise, which is the thing crit is FOR (§3b:
+ *     mastery triumphs harder and fails softer). Author +80 and you get the cap, with the ask recorded.
+ *   · text with no chance is legal and common — most crafts want to say what their disaster looks like without
+ *     claiming it happens more often. `chance` is opt-in; `text` alone shifts nothing.
+ *
+ *  Returns `{ success:{text,chance}, failure:{text,chance} }` with absent halves omitted, or null.
+ *  The cap comes from `cap`, or from `cfg.crit.perCraftCap` if you hand it the rules bag instead. */
+export function critFor(ability, { cfg = {}, cap = null } = {}) {
+  const src = ability?.mechanic?.crit || ability?.crit || null;
+  if (!src) return null;
+  const lim = num(cap, num(cfg.crit?.perCraftCap, 10));
+  const side = key => {
+    const raw = src[key];
+    if (raw == null) return null;
+    // "failure": "a sentence" is the shorthand an author reaches for first. Accept it rather than making the
+    // object form the only door — the same tolerance `axis` gets for a bare string.
+    const o = typeof raw === "string" ? { text: raw } : raw;
+    const text = typeof o.text === "string" && o.text.trim() ? o.text.trim() : null;
+    const asked = num(o.chance, 0);
+    const chance = Math.max(-lim, Math.min(lim, asked));
+    if (!text && !chance) return null;
+    return { ...(text ? { text } : {}), ...(chance ? { chance } : {}), ...(chance !== asked ? { asked } : {}) };
+  };
+  const success = side("success"), failure = side("failure");
+  return success || failure ? { ...(success ? { success } : {}), ...(failure ? { failure } : {}) } : null;
+}
+
 /** Does this craft describe anything the engine cannot do? The §5 completeness question, per craft.
  *  Returns the verbs with no resolvable shape — the "narration only" set the overhaul exists to empty. */
 export function unmechanisedVerbs(ability, cfg = {}) {

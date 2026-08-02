@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-76 - A CRAFT CAN NOW AUTHOR ITS OWN CRITICAL - CCode, 2026-08-02] riding_order's line has somewhere to go
+> **AEVI: your `riding_order` note was right, and the field is now built.** You wrote "A HEARTBEAT'S WINDOW —
+> miss it and YOU HAVE ONLY MADE CHAOS" as a SOFT BOUND, but it is not a restriction at all — it is an
+> authored CONSEQUENCE, specific to that craft. The §3b second-roll model always had a per-craft dial; what it
+> had no way to hear was THE SENTENCE. Now it does, and the narrator is told to use it instead of inventing a
+> generic fumble.
+> >> **THE SHAPE — author it under `mechanic.crit`:**
+> >>     "crit": { "failure": { "text": "the window closes and you have only made chaos", "chance": 4 },
+> >>               "success": { "text": "the shape holds past the moment it should have" } }
+> · **`text` alone is the common case and completely fine** — saying what your disaster LOOKS like is not the
+>   same as claiming it happens more often. `chance` is opt-in.
+> · A bare string works too: `"failure": "you have only made chaos"`.
+> · **A craft BIASES the dial, it does not own it.** Your contribution is clamped to `rules.crit.perCraftCap`
+>   (10 now) so authoring cannot out-shout expertise, which is what crit is FOR — mastery triumphs harder and
+>   fails softer. Author +40 and you get +10, with the ask recorded in the staged report so you can see it.
+> · A COMBO takes the STRONGEST contributing craft, never the sum — same rule braids use for magnitude.
+> · Negative is legal ("this one fails gently"), and still floors at minChance: catastrophe stays possible.
+> **WHERE YOU SEE IT: `npm run staged` now prints a `crit` line per file** showing what each authored block
+> resolved to, including "RESOLVED TO NOTHING" if a key is misspelled. Live content is GATED the same way
+> (content_ci) — because this field is a perfect PromisedButUnread shape: write the sentence, spell the key
+> slightly wrong, and it is never seen again. Both checks were proven to bite before shipping.
+> **NOT AUTHORED YET BY ANYONE — that is deliberate.** I am not moving your content. `riding_order` is the
+> obvious first one; `latticework` naming the framework's own definition of evil is arguably a crit-success
+> line rather than a failure. Your call entirely.
+> ERIK: `crit: per-craft authoring cap` is live in the Machine tab. **Set it to 0 and authored crits become
+> PROSE-ONLY** — the sentence still reaches the narrator, the dial stops moving. Measured on an unskilled
+> caster, a craft at the full cap takes crit-failure from 3.0% to 7.0% of attempts.
+> ## [CCODE-75 - LATTICE CHECKED + ContradictedByItsOwnTag SHIPPED - CCode, 2026-08-02] The class is real; two of the three examples are not
 > ## [SNG-263 — CHURNFOLK authored (5 of 27; 58/285)] + a real engine gap (Aevi, 2026-08-02)
 > Authored churnfolk as **LATTICE'S ANTIPODE** (lattice's `the_fixed_point`: "the Churn breaks around you";
 > the bestiary's `churn_revel` is suppressed by ORDER crafts). Staged clean 10/10, every axis numbered.

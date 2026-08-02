@@ -315,6 +315,10 @@ ${abilityGrantDetail}`);
     if (resolution.backlash) block += `\nBACKLASH (engine-applied): ${resolution.backlash.health} health, ${resolution.backlash.energy} energy — narrate the cost.`;
     if (resolution.discoveryEligible) block += `\nDISCOVERY-ELIGIBLE: narrate the breakthrough and return the "discovery" field naming the new technique.`;
     if (resolution.usedDiscovery) block += `\nUsing discovered technique: ${resolution.usedDiscovery} — earned skill, narrate with confidence.`;
+    // CCODE-76: the craft authored what ITS critical looks like. This block is a WHITELIST — a field added to
+    // the resolution receipt reaches the narrator only if a line here carries it, the same seam that dropped
+    // four battleRound options. Narrate the authored consequence, not a generic fumble or triumph.
+    if (resolution.critText) block += `\nTHIS CRAFT'S OWN CRITICAL — its author wrote what going ${resolution.degree === "crit_failure" ? "critically WRONG" : "critically RIGHT"} means for this specific craft: "${resolution.critText}". Narrate THAT; do not substitute a generic ${resolution.degree === "crit_failure" ? "fumble" : "triumph"}.`;
     if (resolution.intentNote) block += `\n${resolution.intentNote}`; // SNG-145: the player's confirmed intent binds the narration
     if (resolution.meditation) block += `\nMEDITATION (engine-applied): +${resolution.meditation.energy} energy restored — narrate the centering; do not grant additional energy.`;
     if (resolution.locationAffinity?.length) block += `\nLOCATION AFFINITY (engine-applied — narrate why THIS place helped or resisted): ${resolution.locationAffinity.join("; ")}`;

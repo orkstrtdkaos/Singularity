@@ -186,6 +186,16 @@ export function critProfile(ctx) {
   // still cancelled by a technique the character actually discovered.
   if (action.novel && !action.discoveryBonus) addF("novel use", rules.novel?.critFailWiden ?? 3);
 
+  // CCODE-76 — WHAT THIS CRAFT'S CRITICAL LOOKS LIKE, authored on the craft (see craftmechanics.critFor).
+  // A combo takes the STRONGEST contributing craft per side, never the sum — same rule deriveMechanic uses for
+  // braids, and for the same reason: braiding three crafts must not out-crit any of them.
+  const cc = Array.isArray(action.craftCrit) ? action.craftCrit : (action.craftCrit ? [action.craftCrit] : []);
+  const strongest = key => cc.map(x => ({ n: x?.name, v: Number(x?.[key]?.chance) || 0 }))
+    .filter(x => x.v).sort((a, b) => Math.abs(b.v) - Math.abs(a.v))[0];
+  const cs = strongest("success"), cf = strongest("failure");
+  if (cs) addS(cs.n ? `${cs.n}` : "this craft", cs.v);
+  if (cf) addF(cf.n ? `${cf.n}` : "this craft", cf.v);
+
   // The existing aptitude keys keep their meaning, so no authored aptitude is orphaned by this change.
   addS("aptitude", aptitudeMods.critSuccessBonus || 0);
   addF("aptitude", aptitudeMods.critFailPenalty || 0);
@@ -223,8 +233,18 @@ export function resolveAction(ctx, rng = Math.random) {
     if (critRoll <= dial) degree = degree === "success" ? "crit_success" : "crit_failure";
   }
 
+  // CCODE-76: when a crit LANDS, hand the narrator the craft's own sentence for it. A dial the GM has to
+  // invent the consequence for is the generic-default problem again — `riding_order` already says what its
+  // disaster is, and this is the one moment that line is for. Absent authoring, absent field: the narrator
+  // improvises exactly as before rather than receiving an empty string that reads like content.
+  const cc = ctx.action?.craftCrit;
+  const said = side => (Array.isArray(cc) ? cc : (cc ? [cc] : []))
+    .map(x => x?.[side]?.text).find(Boolean) || null;
+  const critText = degree === "crit_success" ? said("success") : degree === "crit_failure" ? said("failure") : null;
+
   // SNG-106: carry the retained component breakdown onto the receipt so the popup shows the real math.
-  return { roll, chance, degree, action: ctx.action, breakdown: ctx._breakdown || null, critRoll, crit };
+  return { roll, chance, degree, action: ctx.action, breakdown: ctx._breakdown || null, critRoll, crit,
+    ...(critText ? { critText } : {}) };
 }
 
 /** Apply energy cost for an action/ability use. Returns new energy (never below 0). */

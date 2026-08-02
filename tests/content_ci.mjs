@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 import { validate } from "../engine/genschema.js";
 import { structuredQuestRecord } from "../engine/quests.js";
 import { checkBorn, describeBorn, contractedTypes } from "../engine/borncontract.js";
+import { critFor } from "../engine/craftmechanics.js";   // CCODE-76: run the REAL resolver, don't re-describe the schema
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -981,6 +982,29 @@ for (const pack of PACKS) {
   check(`SNG-264: crafts whose text denies the harm their own harmRung asserts = ${contradicted.length} (baseline ${CONTRADICTED_BASELINE}) — may only go DOWN`,
     contradicted.length <= CONTRADICTED_BASELINE,
     `a craft now argues with its own harm tag — fix the tag or the prose, never leave them disagreeing: ${contradicted.join(", ")}`);
+}
+
+// ---------- CCODE-76: an authored `crit` block must actually REACH critFor ----------
+// The new field is exactly the shape PromisedButUnread keeps arriving in: an author writes what their craft's
+// disaster looks like, spells the key slightly differently, and the sentence is never seen again. So the check
+// runs the REAL resolver rather than re-describing the schema — if critFor returns nothing for a craft that
+// wrote a crit block, the field reached no reader, and that is a fact, not a preference.
+{
+  const orphaned = [], capped = [];
+  const cap = rj("content/packs/core/rules/resolution.json").crit?.perCraftCap ?? 10;
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json"))) {
+    for (const c of (rj(`content/packs/core/abilities/${f}`).abilities || [])) {
+      const src = c.mechanic?.crit || c.crit;
+      if (!src) continue;
+      const got = critFor(c, { cap });
+      if (!got) { orphaned.push(c.id); continue; }
+      for (const side of ["success", "failure"]) if (got[side]?.asked != null) capped.push(`${c.id}.${side} asked ${got[side].asked}, capped to ${got[side].chance}`);
+    }
+  }
+  if (capped.length) console.log(`note  CCODE-76: ${capped.length} authored crit dial(s) clamped by rules.crit.perCraftCap=${cap} — ${capped.join("; ")}`);
+  check(`CCODE-76: every authored craft \`crit\` block resolves through critFor (none is write-only)`,
+    orphaned.length === 0,
+    `these crafts authored a crit block the engine cannot read — check the key names (\`text\`/\`chance\` under \`success\`/\`failure\`): ${orphaned.join(", ")}`);
 }
 
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);

@@ -14,11 +14,12 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { mechanicFor, shapeOfVerb } from "../engine/craftmechanics.js";
+import { mechanicFor, shapeOfVerb, critFor } from "../engine/craftmechanics.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
 const CM = rj("content/packs/core/rules/craft_mechanics.json");
+const CRIT_CAP = rj("content/packs/core/rules/resolution.json").crit?.perCraftCap ?? 10;
 
 let failures = 0;
 const ok = m => console.log("ok    " + m);
@@ -58,6 +59,18 @@ for (const f of files) {
     const named = [...new Set(perVerb.flatMap(x => x.m?.namedAxes || []))];
     rows.push({ id: c.id, tier: c.tier, verbs, unresolved, shown, named, declared: c.operativeAxis || [] });
     console.log(`        ${String(c.id).slice(0, 24).padEnd(24)}  ${pad(c.tier, 4)}  ${verbs.join("/").slice(0, 20).padEnd(20)}  ${shown.padEnd(19)}  ${named.join(", ").slice(0, 28)}`);
+  }
+  // CCODE-76: a craft may author what ITS critical looks like ("miss it and you have only made chaos").
+  // Surfaced here rather than gated: the field is new and OPTIONAL, so "nobody used it yet" is not a defect —
+  // but an author who wrote one and spelled the key wrong needs to see that it resolved to nothing.
+  const crits = crafts.map(c => ({ id: c.id, got: critFor(c, { cap: CRIT_CAP }), wrote: !!(c.mechanic?.crit || c.crit) })).filter(x => x.wrote);
+  if (crits.length) {
+    console.log(`        crit  ${crits.length} craft(s) authored their own critical:`);
+    for (const x of crits) console.log(`              ${x.id}: ` + (x.got
+      ? Object.entries(x.got).map(([side, v]) => `${side} ${v.chance ? (v.chance > 0 ? "+" : "") + v.chance : "prose only"}${v.asked != null ? ` (asked ${v.asked}, capped)` : ""}${v.text ? ` — "${String(v.text).slice(0, 46)}"` : ""}`).join(" · ")
+      : "RESOLVED TO NOTHING — the engine cannot read this block; keys are text/chance under success/failure"));
+    check(`${f}: every authored \`crit\` block resolves through critFor`,
+      crits.every(x => x.got), crits.filter(x => !x.got).map(x => x.id).join(", "));
   }
   summary.push({ file: f, rows });
 

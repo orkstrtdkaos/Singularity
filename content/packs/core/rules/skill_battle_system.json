@@ -709,6 +709,12 @@
       "critBonusRounds": 1,
       "maxActivePerSide": 3,
       "refreshesSameKind": true,
+   "craftDuration": {
+    "note": "CCODE-77: how long a landed move STANDS comes from the craft that made it, not from one number per verb. Before this a T-V bind held exactly as long as a T-I one and an authored `duration` reached nothing. roundsPerPoint converts the craft's duration ladder into rounds; craftDurationMax clamps it, because that ladder runs to 17 and a fight is not 17 rounds long - the tier advantage should be FELT, not decisive on its own. Set enabled:false to go back to the flat per-verb rounds.",
+    "enabled": true,
+    "roundsPerPoint": 0.35,
+    "craftDurationMax": 5
+   },
       "byFunction": {
         "shield": {
           "kind": "guard",

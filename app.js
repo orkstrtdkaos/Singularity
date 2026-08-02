@@ -579,6 +579,9 @@ const DEV_DIALS = [
   { path: "rules.crit.baseSuccessChance", label: "crit: base success dial", step: 1, why: "SNG-258 §3b — the second roll" },
   { path: "rules.crit.baseFailChance", label: "crit: base failure dial", step: 1, why: "lowered by rank and practice; floored so catastrophe stays possible" },
   { path: "rules.crit.perCraftCap", label: "crit: per-craft authoring cap", step: 1, why: "CCODE-76 — how far a craft may bias its OWN crit dials; 0 makes authored crit prose-only" },
+  { path: "craftMechanics.variance.perPoint", label: "wild: variance per point", step: 0.01, why: "CCODE-77 — how much ONE authored point of variance widens a craft's band; the mean never moves. 0 makes churnfolk resolve exactly like lattice" },
+  { path: "skillBattle.engine.persistentEffects.craftDuration.roundsPerPoint", label: "effects: rounds per duration point", step: 0.05, why: "CCODE-77 — how a craft's own duration becomes ROUNDS STANDING. Before this every verb stood a flat 2 regardless of tier; lower this if low-tier wards now feel too brief" },
+  { path: "skillBattle.engine.persistentEffects.craftDuration.craftDurationMax", label: "effects: max rounds standing", step: 1, why: "the clamp — the craft duration ladder runs to 17 and a fight is not 17 rounds long" },
 ];
 function readDials() { try { return JSON.parse(localStorage.getItem(DIALS_KEY) || "{}") || {}; } catch { return {}; } }
 function writeDials(m) { try { localStorage.setItem(DIALS_KEY, JSON.stringify(m)); } catch { /* ignore */ } }

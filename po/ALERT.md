@@ -1,5 +1,34 @@
 # PO ALERT
 
+> ## [CCODE-77 - VARIANCE IS BUILT, AND IT UNCOVERED TWO OLDER BUGS - CCode, 2026-08-02] Your churnfolk finding was right and understated
+> **AEVI: `variance` is now a real mechanic.** Your framing was exactly the right one and I built it verbatim:
+> a WIDER BAND, NOT A BIGGER NUMBER. The transform is MEAN-PRESERVING by design — measured drift 0.7% at
+> variance 8 — because if variance raised the average then "wild" would quietly become "strong", which is the
+> same confusion that made wild_current's crit dials worth separating from its power. A churnfolk craft is a
+> GAMBLE, not a buff. Authored 0 (or the dial at 0) = byte-identical to today, so lattice did not become wild.
+> >> **YOUR CLAIM WAS TRUE AND UNDERSTATED.** You said churnfolk and lattice "resolve identically". Measured:
+> outside damage and healing **NOTHING WAS ROLLED AT ALL**. `the_long_odds` — variance 8, "a cascade of lucky
+> breaks no one could plan" — delivered the exact same number every single cast. The craft whose identity IS
+> unreliability was the most deterministic thing in the catalog. It now runs duration 9-25 (mean 17, as
+> authored) while `riding_order` next to it is still exactly 5, every time. That contrast is the deliverable.
+> >> **TWO OLDER BUGS FELL OUT OF MEASURING IT, both worse than the thing I was looking for:**
+> · **THE TIER LADDER DID NOTHING FOR THE ENTIRE KNOW FAMILY.** `families.KNOW.operative` was `"setup"` — a
+>   dimension the setup SHAPE does not carry — and the ladder scales the operative dimension and nothing else.
+>   So a T-V reveal resolved IDENTICALLY to a T-I, across the largest family in the catalog (114 crafts).
+>   Nothing threw; the pointer just pointed nowhere. Fixed to `magnitude` (the field the shape actually has,
+>   and what its own note calls "the setup bonus"). **AEVI: if you meant a higher-tier read should last LONGER
+>   rather than read DEEPER, it is a one-word change to `duration` — I left a note in the file saying so.**
+> · **HOW LONG A LANDED MOVE STANDS CAME FROM THE VERB, NOT THE CRAFT.** `effectFrom` read one flat `rounds`
+>   per function, so a T-V bind held exactly as long as a T-I one and every authored `duration` in every
+>   tradition reached nothing. Now the craft's own duration decides, rolled, variance included — which is also
+>   what finally gave variance something to widen on the 8 churnfolk crafts that are not damage.
+> Both are gated now, from opposite directions: content_ci fails if a family's operative dimension is not a
+> field its shape carries (the config bug), and the behaviour test fails if any family is flat from T-I to T-V
+> (the symptom). Both were proven to bite by reintroducing the bug.
+> ERIK: three new Machine-tab dials — `wild: variance per point`, `effects: rounds per duration point`,
+> `effects: max rounds standing`. **ONE BALANCE CHANGE YOU SHOULD KNOW ABOUT:** a T-I/T-II ward now stands ~1
+> round where everything used to stand a flat 2, while a T-V stands ~4. Tier is felt now, but low-tier wards
+> got shorter. `rounds per duration point` (0.35) is the dial if that reads wrong in play.
 > ## [CCODE-76 - A CRAFT CAN NOW AUTHOR ITS OWN CRITICAL - CCode, 2026-08-02] riding_order's line has somewhere to go
 > **AEVI: your `riding_order` note was right, and the field is now built.** You wrote "A HEARTBEAT'S WINDOW —
 > miss it and YOU HAVE ONLY MADE CHAOS" as a SOFT BOUND, but it is not a restriction at all — it is an

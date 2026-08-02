@@ -16,12 +16,13 @@
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { critFor } from "../engine/craftmechanics.js";
+import { critFor, mechanicFor, rollOperative, rollMagnitude, spreadFactor } from "../engine/craftmechanics.js";
 import { critProfile, resolveAction } from "../engine/resolve.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
 const RULES = rj("content/packs/core/rules/resolution.json");
+const CM = rj("content/packs/core/rules/craft_mechanics.json");
 const CAP = RULES.crit.perCraftCap;
 
 let failures = 0;
@@ -138,5 +139,109 @@ const plain = critProfile(baseCtx);
   check("the cap is worth something (a dial nobody can feel is a dial nobody will author to)", on > off);
 }
 
-console.log(failures === 0 ? "\nCraft criticals: all checks passed." : `\nCraft criticals: ${failures} FAILURE(S)`);
+
+// == CCODE-77 -- VARIANCE: A WIDER BAND, NOT A BIGGER NUMBER ===============================================
+// Aevi, authoring churnfolk: "churnfolk crafts want a WIDENED OUTCOME BAND, not a bigger number - you don't
+// choose HOW it breaks, only that it does." She authored `variance` 3-8 and reported the engine had no
+// concept of it. True, and worse: outside damage/healing nothing was rolled at all, so `the_long_odds`
+// (variance 8, "a cascade of lucky breaks no one could plan") delivered the identical number every cast.
+console.log("\nVARIANCE - CCODE-77 (Aevi's churnfolk finding)\n");
+
+const seeded = () => { let s = 7; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };
+const sample = (craft, n = 40000) => {
+  const verb = (craft.functions || [])[0];
+  const m = mechanicFor({ functions: craft.functions, levelReq: craft.tier, mechanic: craft.mechanic }, { verb, tier: craft.tier, cfg: CM });
+  const rng = seeded(), out = [];
+  for (let i = 0; i < n; i++) { const r = rollOperative(m, rng, { cfg: CM }); if (r && r.value != null) out.push(r.value); }
+  if (!out.length) return null;
+  out.sort((a, b) => a - b);
+  return { dim: m.operative, p5: out[Math.floor(n * 0.05)], p95: out[Math.floor(n * 0.95)],
+    mean: out.reduce((a, b) => a + b, 0) / out.length };
+};
+
+{
+  // THE MEAN MUST NOT MOVE. This is the whole design constraint: a chaotic craft is a GAMBLE, not a buff.
+  // Let variance raise the average and "wild" quietly becomes "strong" - the same confusion that made
+  // wild_current's crit dials worth separating from its power in the first place.
+  let worst = 0, worstAt = "";
+  for (const v of [0, 2, 4, 6, 8]) {
+    const m = { operative: "magnitude", fields: { magnitude: 12, variance: v } };
+    const rng = seeded(); let sum = 0; const N = 60000;
+    for (let i = 0; i < N; i++) sum += rollOperative(m, rng, { cfg: CM }).value;
+    const drift = Math.abs(sum / N - 12) / 12;
+    if (drift > worst) { worst = drift; worstAt = "variance " + v; }
+  }
+  check(`variance preserves the MEAN - a wild craft is a gamble, not a buff (worst drift ${(worst * 100).toFixed(1)}% at ${worstAt})`,
+    worst < 0.03, `${(worst * 100).toFixed(1)}% drift`);
+
+  // THE BAND MUST ACTUALLY WIDEN, monotonically. A dial nobody can feel is a dial nobody will author to.
+  const spreads = [0, 2, 4, 6, 8].map(v => {
+    const m = { operative: "magnitude", fields: { magnitude: 12, variance: v } };
+    const rng = seeded(), out = [];
+    for (let i = 0; i < 40000; i++) out.push(rollOperative(m, rng, { cfg: CM }).value);
+    out.sort((a, b) => a - b);
+    return { v, spread: out[Math.floor(40000 * 0.95)] - out[Math.floor(40000 * 0.05)] };
+  });
+  console.log("      one craft at magnitude 12, swept across authored variance:");
+  for (const s of spreads) console.log(`      variance ${s.v} .... p5-p95 band width ${s.spread}`);
+  check("the band widens monotonically with authored variance",
+    spreads.every((s, i) => i === 0 || s.spread >= spreads[i - 1].spread), JSON.stringify(spreads));
+  check("variance 0 is EXACTLY today's behaviour - the authored number, every time (no catalog-wide re-roll)",
+    spreads[0].spread === 0);
+
+  // BIGGER MAX, NOT JUST WORSE MIN. The first draft clipped the widened roll at the UNWIDENED dice ceiling,
+  // which would have delivered only the downside - a wilder craft that is simply a worse one.
+  const dice = { dice: { n: 2, d: 6 }, plus: 0 };
+  const hi = f => { const rng = seeded(); let mx = 0; for (let i = 0; i < 40000; i++) mx = Math.max(mx, rollMagnitude(f, rng, { cfg: CM })); return mx; };
+  const plainMax = hi(dice), wildMax = hi({ ...dice, variance: 6 });
+  check(`a widened craft can roll HIGHER than its unwidened ceiling (2d6 max ${plainMax} -> ${wildMax})`,
+    wildMax > plainMax, `${plainMax} vs ${wildMax}`);
+
+  check("spreadFactor is total and neutral by default", spreadFactor(0) === 1 && spreadFactor(null) === 1 && spreadFactor(undefined, {}) === 1);
+  check("the dev dial at 0 makes variance inert - churnfolk resolve exactly like lattice",
+    rollOperative({ operative: "magnitude", fields: { magnitude: 12, variance: 8 } }, seeded(), { cfg: { variance: { perPoint: 0 } } }).value === 12);
+}
+
+// -- the two traditions side by side: the REPORT Aevi asked for -------------------------------------------
+{
+  const rows = [];
+  for (const file of ["churnfolk", "lattice"]) {
+    for (const c of rj(`po/staged_content/${file}_mechanics.json`).crafts) {
+      const s = sample(c);
+      if (s) rows.push({ file, id: c.id, tier: c.tier, v: c.mechanic?.variance ?? null, ...s });
+    }
+  }
+  console.log("\n      CHURNFOLK vs LATTICE - the same shapes, different bands (a REPORT; the numbers are Aevi's and Erik's)");
+  console.log("      craft                 tier  var  dimension     p5    mean     p95    band");
+  for (const r of rows) console.log(`      ${r.id.slice(0, 20).padEnd(20)}  T-${r.tier}   ${String(r.v ?? "-").padStart(2)}  ${String(r.dim).padEnd(10)} ${String(r.p5).padStart(5)}  ${r.mean.toFixed(1).padStart(6)}  ${String(r.p95).padStart(6)}  ${String(r.p95 - r.p5).padStart(6)}`);
+
+  const wild = rows.filter(r => r.v), tame = rows.filter(r => !r.v);
+  check("every craft that AUTHORED variance now has a band (it had none before - this is the finding closed)",
+    wild.every(r => r.p95 > r.p5), wild.filter(r => r.p95 <= r.p5).map(r => r.id).join(", "));
+  check("a craft that authored NO variance is still exactly deterministic (lattice did not become wild)",
+    tame.filter(r => r.dim !== "damage" && r.dim !== "healing").every(r => r.p95 === r.p5),
+    tame.filter(r => r.p95 !== r.p5).map(r => `${r.id} ${r.p5}-${r.p95}`).join(", "));
+}
+
+// -- CCODE-77b: the operative dimension must EXIST, or tier scales nothing --------------------------------
+// Found while measuring the above: `families.KNOW.operative` was "setup", a dimension the setup SHAPE does
+// not carry, so the tier ladder scaled a field that did not exist and a T-V reveal resolved identically to a
+// T-I - across the largest family in the catalog. content_ci now gates the CONFIG; this gates the BEHAVIOUR.
+{
+  const grew = [];
+  for (const [fam, def] of Object.entries(CM.families || {})) {
+    const verb = (def.verbs || [])[0];
+    if (!verb) continue;
+    const at = t => mechanicFor({ functions: [verb], levelReq: t }, { verb, tier: t, cfg: CM });
+    const lo = at(1), hi = at(5);
+    const val = m => m.fields.dice ? m.fields.dice.n * m.fields.dice.d + (m.fields.plus || 0) : m.fields[m.operative];
+    grew.push({ fam, verb, operative: lo.operative, lo: val(lo), hi: val(hi) });
+  }
+  console.log("\n      DOES TIER DO ANYTHING? every family, T-I vs T-V on its own operative dimension");
+  for (const g of grew) console.log(`      ${g.fam.padEnd(10)} ${String(g.verb).padEnd(9)} ${String(g.operative).padEnd(10)} T-I ${String(g.lo).padStart(4)}  ->  T-V ${String(g.hi).padStart(4)}${Number(g.hi) > Number(g.lo) ? "" : "   <- FLAT"}`);
+  check("CCODE-77b: a T-V craft out-scales a T-I in EVERY family (KNOW was flat at every tier)",
+    grew.every(g => Number(g.hi) > Number(g.lo)), grew.filter(g => !(Number(g.hi) > Number(g.lo))).map(g => `${g.fam} flat at ${g.lo}`).join(", "));
+}
+
+console.log(failures === 0 ? "\nCraft character (crit + variance): all checks passed." : `\nCraft character: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

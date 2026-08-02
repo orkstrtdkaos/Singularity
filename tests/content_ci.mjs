@@ -1007,5 +1007,32 @@ for (const pack of PACKS) {
     `these crafts authored a crit block the engine cannot read — check the key names (\`text\`/\`chance\` under \`success\`/\`failure\`): ${orphaned.join(", ")}`);
 }
 
+// ---------- CCODE-77: every family's OPERATIVE dimension must be a field its shape actually carries ----------
+// PromisedButUnread one level up, inside the config itself. `families.KNOW.operative` was "setup" while
+// `familyDefaults.setup` carries only {magnitude, duration} — so the tier ladder, which scales the OPERATIVE
+// dimension and nothing else, scaled a field that did not exist. Every reveal/foresee/track craft in the
+// catalog (the largest family) resolved a T-V identically to a T-I. Nothing threw, nothing warned; the
+// pointer simply pointed nowhere.
+//
+// This is a GATE, not a report: "the dimension a craft grows on does not exist" is a fact, and no design
+// intent can want it. WHICH dimension a family should grow on is Aevi's and Erik's — that it resolves is mine.
+{
+  const CM = rj("content/packs/core/rules/craft_mechanics.json");
+  const carries = (shape, dim) => dim in shape || (!!shape.dice && (dim === "damage" || dim === "healing"));
+  const dangling = [];
+  for (const [fam, def] of Object.entries(CM.families || {})) {
+    const shape = CM.familyDefaults?.[def.shape];
+    if (!def.operative || !shape) continue;
+    if (!carries(shape, def.operative)) dangling.push(`${fam}.operative="${def.operative}" but familyDefaults.${def.shape} carries {${Object.keys(shape).filter(k => !/^(note|operativeNote)$/.test(k)).join(", ")}}`);
+  }
+  for (const [verb, ov] of Object.entries(CM.verbOverrides || {})) {
+    const shape = CM.familyDefaults?.[ov.shape];
+    if (!ov.operative || !shape) continue;
+    if (!carries(shape, ov.operative)) dangling.push(`verbOverrides.${verb}.operative="${ov.operative}" not in familyDefaults.${ov.shape}`);
+  }
+  check("CCODE-77: every family's operative dimension is a field its shape actually carries (else the tier ladder scales nothing)",
+    dangling.length === 0, dangling.join(" · "));
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

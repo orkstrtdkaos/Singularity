@@ -168,6 +168,67 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
   };
 }
 
+/** CCODE-77 / Aevi's churnfolk finding — VARIANCE IS A WIDER BAND, NOT A BIGGER NUMBER.
+ *
+ *  Her words, authoring tradition 5: "churnfolk crafts want a WIDENED OUTCOME BAND, not a bigger number — you
+ *  don't choose HOW it breaks, only that it does" · "generous and strong, but NEVER EXACTLY AS AIMED". She
+ *  authored `variance` 3-8 across the roster and reported the engine had no concept of it. Measured, true —
+ *  and worse than she said: outside damage and healing NOTHING is rolled at all, so `the_long_odds` (variance
+ *  8, "a cascade of lucky breaks no one could plan") delivered exactly the same number every single cast. The
+ *  craft whose identity is unreliability was the most deterministic thing in the catalog.
+ *
+ *  The transform is deliberately MEAN-PRESERVING, because that is precisely what she asked for: stretch the
+ *  outcome away from its own mean, so the max goes up, the min goes down, and the average does not move. A
+ *  chaotic craft must be a GAMBLE, not a buff — otherwise "wild" quietly becomes "strong", which is the exact
+ *  confusion that made wild_current's crit dials worth separating in the first place.
+ *
+ *  Erik owns `perPoint` (it is a dev dial): how much one authored point of variance widens the band. */
+export function spreadFactor(variance, cfg = {}) {
+  const v = Math.max(0, num(variance, 0));
+  if (!v) return 1;
+  const c = (cfg && cfg.variance) || {};
+  return 1 + v * num(c.perPoint, 0.09);
+}
+
+/** Stretch a value away from `mid` by `k`, so the spread grows and the mean does not move. */
+function stretch(value, mid, k) { return mid + (value - mid) * k; }
+
+/** CCODE-77 — ROLL THE DIMENSION THIS CRAFT IS ACTUALLY ABOUT, whatever shape it is.
+ *
+ *  `rollMagnitude` only ever rolled damage/healing, because only those carry dice. Every other shape resolved
+ *  its operative dimension as a FLAT CONSTANT — a hobble's duration, a reposition's range — which is why
+ *  variance had nothing to widen on eight of the ten churnfolk crafts. This rolls the operative dimension for
+ *  ANY shape: dice when the craft has them, otherwise a band around the authored value whose width is the
+ *  craft's variance.
+ *
+ *  A craft with NO variance returns its authored number unchanged, exactly as before. That is not a special
+ *  case bolted on — it falls out of a spread factor of 1 — and it is what keeps this from re-rolling the
+ *  entire catalog to introduce one tradition's mechanic.
+ *
+ *  Returns `{ value, base, spread, rolled }` so a receipt can say "18 (authored 14, wild)" rather than just
+ *  handing back a number nobody can account for. */
+export function rollOperative(m, rng = Math.random, { cfg = {}, marginGap = 0 } = {}) {
+  if (!m) return null;
+  const f = m.fields || {};
+  const key = m.operative;
+  const widen = spreadFactor(f.variance, cfg);
+  if (f.dice && (key === "damage" || key === "healing")) {
+    const value = rollMagnitude(f, rng, { marginGap, cfg });
+    return { value, base: null, spread: widen, rolled: true, dimension: key };
+  }
+  const base = num(f[key], null);
+  if (base == null) return { value: null, base: null, spread: widen, rolled: false, dimension: key };
+  if (widen === 1) return { value: base, base, spread: 1, rolled: false, dimension: key };
+  // A flat value becomes a band: triangular (two draws averaged) rather than uniform, so the authored number
+  // stays the most likely outcome and the extremes stay extreme. Half-width is the stretch applied to the
+  // value itself, which makes a bigger craft swing wider in absolute terms — a T-V wild cast should miss by
+  // more than a T-I one, not by the same two points.
+  const half = Math.max(1, Math.round(base * (widen - 1)));
+  const tri = (rng() + rng()) / 2;                 // 0..1, centred on 0.5
+  const value = Math.max(1, Math.round(base + (tri * 2 - 1) * half));
+  return { value, base, spread: widen, rolled: true, dimension: key, band: [Math.max(1, base - half), base + half] };
+}
+
 /** SNG-263 §7 — DAMAGE IS ROLLED. Erik: "damage should be rolled btw", anchored to "a T-I strike at max
  *  damage should be able to KILL a T-I beast — but likely take 2-3 hits due to random distribution."
  *
@@ -179,8 +240,9 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
  *  `marginGap` raises the FLOOR rather than adding a bonus — a decisive exchange cannot roll feeble, but it
  *  can never exceed the craft's own maximum. That keeps the engine's existing "a turned-aside blow does
  *  nothing" intent while making the ceiling mean what the craft says it means. */
-export function rollMagnitude(fields = {}, rng = Math.random, { marginGap = 0, marginFloorPer = null } = {}) {
+export function rollMagnitude(fields = {}, rng = Math.random, { marginGap = 0, marginFloorPer = null, cfg = {} } = {}) {
   const perPoint = Number.isFinite(marginFloorPer) ? marginFloorPer : num(fields.marginFloorPer, 0.02);
+  const widen = spreadFactor(fields.variance, cfg);
   // SNG-263 r4: DICE are the craft's own shape. Rolling n independent dice gives a bell rather than the flat
   // line a uniform band gave — which is what makes a big hit feel like a big hit rather than a coin flip, and
   // it retires the `weight` fudge the band needed to sit where Erik wanted it.
@@ -189,8 +251,17 @@ export function rollMagnitude(fields = {}, rng = Math.random, { marginGap = 0, m
     let total = 0;
     for (let i = 0; i < n; i++) total += 1 + Math.floor(rng() * faces);
     total += num(fields.plus, 0);
-    // a decisive exchange raises the FLOOR without ever exceeding what the dice could have given
-    const ceiling = n * faces + num(fields.plus, 0);
+    // CCODE-77: VARIANCE stretches the roll around its own mean. Applied BEFORE the margin floor so a decisive
+    // exchange still clips a widened low roll rather than being widened itself — the floor is about the
+    // exchange, the spread is about the craft.
+    const mid = (n * (faces + 1)) / 2 + num(fields.plus, 0);
+    if (widen !== 1) total = stretch(total, mid, widen);
+    // a decisive exchange raises the FLOOR without ever exceeding what the dice could have given. When the
+    // craft is WIDENED the ceiling widens with it — clipping at the unwidened maximum would silently delete
+    // the "bigger max" half of variance and leave only "worse min", which is not a wilder craft, just a worse
+    // one. The ceiling means "what THIS craft could have given", and variance changes that.
+    const ceiling = widen === 1 ? n * faces + num(fields.plus, 0)
+      : Math.round(stretch(n * faces + num(fields.plus, 0), mid, widen));
     total = Math.min(ceiling, total + Math.round(Math.max(0, marginGap) * perPoint));
     return Math.max(1, Math.round(total * num(fields.mult, 1)));
   }

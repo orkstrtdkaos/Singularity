@@ -6,7 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
-import { mechanicFor, rollMagnitude } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
+import { mechanicFor, rollMagnitude, rollOperative } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const DEFAULT_STEPS = { conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
@@ -169,7 +169,7 @@ export function effectMods(effects, side, ownDecl, oppDecl, sb) {
 
 /** The effect a landed move leaves behind, or null. `roll` is that side's resolved receipt; `actor` is the side
  *  that declared it. A miss leaves nothing — a botched guard is not a raised shield. */
-function effectFrom(decl, roll, actor, sb) {
+function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}) {
   const cfg = sb?.persistentEffects; if (!cfg) return null;
   const def = cfg.byFunction?.[decl.function]; if (!def) return null;
   const ok = (cfg.requiresDegree || ["crit_success", "success", "partial"]).includes(roll.degree);
@@ -177,7 +177,31 @@ function effectFrom(decl, roll, actor, sb) {
   const partial = roll.degree === "partial";
   const value = Math.round((def.value || 0) * (partial ? (cfg.partialValueMult ?? 0.5) : 1));
   if (!value) return null;
-  const rounds = Math.max(1, (def.rounds || 1) + (roll.degree === "crit_success" ? (cfg.critBonusRounds ?? 0) : 0));
+  let rounds = Math.max(1, (def.rounds || 1) + (roll.degree === "crit_success" ? (cfg.critBonusRounds ?? 0) : 0));
+
+  // CCODE-77 — HOW LONG IT LASTS COMES FROM THE CRAFT, NOT THE VERB. `def.rounds` is one number per verb, so a
+  // T-V bind held exactly as long as a T-I one and an authored `duration` reached nothing: SNG-263's finding
+  // in a place nobody had looked. Where the craft's own shape is ABOUT duration, that is the number, rolled —
+  // which is also what finally gives Aevi's `variance` something to widen on the eight churnfolk crafts that
+  // are not damage.
+  //
+  // Two deliberate limits. Rounds are CLAMPED (`craftDurationMax`), because a craft's duration ladder runs to
+  // 17 and a fight is not 17 rounds long — the tier advantage should be felt, not decisive on its own. And
+  // `value` is left alone: a contest-mod and a craft magnitude are different currencies, and quietly making
+  // one drive the other is how a number ends up serving two masters.
+  const durCfg = cfg.craftDuration || {};
+  if (durCfg.enabled !== false && cm?.families) {
+    const m = mechanicFor(decl, { verb: decl.function, tier: decl.tier, rank: decl.rank || 1,
+      intensity: decl.intensity || "standard", cfg: cm });
+    if (m && m.operative === "duration") {
+      const rolled = rollOperative(m, rng, { cfg: cm })?.value;
+      if (Number.isFinite(rolled)) {
+        const scaled = rolled * (durCfg.roundsPerPoint ?? 0.5) * (partial ? (cfg.partialValueMult ?? 0.5) : 1);
+        rounds = Math.max(1, Math.min(durCfg.craftDurationMax ?? 5,
+          Math.round(scaled) + (roll.degree === "crit_success" ? (cfg.critBonusRounds ?? 0) : 0)));
+      }
+    }
+  }
   const other = actor === "player" ? "opponent" : "player";
   return {
     kind: def.kind, label: def.label, value, roundsLeft: rounds, applies: def.applies || "always",
@@ -477,12 +501,15 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // CCODE-45: effects tick ONCE PER TURN, not per step — Erik: "the sustaining effects would not tick down a count
   // until the full round's actions are complete." The orchestrator passes tickEffects:false on every step but the last.
   let effects = doTick ? tickEffects(standing) : standing.slice();
-  const landedP = effectFrom(playerDecl, p, "player", sb);
+  // CCODE-77: the craft-mechanics bag and the SAME rng ride into effectFrom so a craft's own duration —
+  // and its authored variance — decide how long what it leaves behind actually stands.
+  const fxOpts = { cm: rules?.craftMechanics, rng };
+  const landedP = effectFrom(playerDecl, p, "player", sb, fxOpts);
   // CCODE-37: THE PAYOFF — a woven round lands the SECOND craft's effect too, so one turn leaves two things
   // standing. This is what "braids shine in combat" means mechanically: turn-by-turn forces one move per turn,
   // and a weave is how a practised pairing beats that limit.
-  const landedW = playerDecl.woven ? effectFrom({ ...playerDecl.woven, intensity: playerDecl.intensity }, p, "player", sb) : null;
-  const landedO = effectFrom(oppDecl, o, "opponent", sb);
+  const landedW = playerDecl.woven ? effectFrom({ ...playerDecl.woven, intensity: playerDecl.intensity }, p, "player", sb, fxOpts) : null;
+  const landedO = effectFrom(oppDecl, o, "opponent", sb, fxOpts);
   effects = addEffect(effects, landedP, sb);
   effects = addEffect(effects, landedW, sb);
   effects = addEffect(effects, landedO, sb);
@@ -586,7 +613,9 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
         // SNG-263 r4: the dice reshape retired `max`, and this guard still tested for it — so the craft path
         // silently stopped firing and every hit fell back to the generic formula. Caught by measuring damage
         // per landed hit (T-III delivered 5.2 where its dice say 13.4) rather than by reading the code.
-        if (m?.shape === "damage" && (m.fields?.dice || m.fields?.max != null)) hit = Math.max(dcfg.minHit ?? 1, rollMagnitude(m.fields, rng, { marginGap }));
+        // CCODE-77: `cfg` is threaded so a craft's authored VARIANCE widens its band from Erik's live dial
+        // rather than the function's own fallback — the same reason the wild dials read from rules.wild.
+        if (m?.shape === "damage" && (m.fields?.dice || m.fields?.max != null)) hit = Math.max(dcfg.minHit ?? 1, rollMagnitude(m.fields, rng, { marginGap, cfg: cmCfg }));
       }
       if (hit == null) {
         const raw = (dcfg.base ?? 1)

@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 6,
-  "xp": 576,
+  "xp": 589,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -70,7 +70,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.005936940750000001,
-    "spectrumId": -0.13994649511090804,
+    "spectrumId": -0.13294917035536263,
     "value": -0.07300000000000001,
     "demonic_angelic": -0.020000000000000004,
     "dark_light": -0.015
@@ -79,7 +79,7 @@
   "maxHealth": 55,
   "health": 55,
   "maxEnergy": 125,
-  "energy": 33,
+  "energy": 31,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -275,55 +275,61 @@
         "player": "Use Prism Sight on the latch and the door — read the light-history of the landing, see if the person's approach left a trace.",
         "summary": "Prism Sight read the landing's light-history — a patient listener who came to the door, stood eleven minutes, then descended rather than climbing to the roof. Still in the building, or gone through the nave. Vessin read the conclusion before it was spoken.",
         "narration": "You kneel at the latch bracket and let Prism Sight open — not a dramatic effort, just a quiet settling of attention, the way a lens finds its focal distance. The door's grain comes up layered in your vision. Light-history reads backward from now: the grey seep of dawn, the candle's warm orange pooling under the door, and before that, the landing's settled dark.\n\nThen a shape in the record. One person, standing at the door for just long enough to be deliberate. The light carries the impression cleanly: boots with a distinctive wear-pattern on the outer edge of the heel, weight shifted to the right — someone listening, not moving. The trace has the quality of patience. They were not passing through.\n\nThey came, stood, and left the way they came. The light-record gives you the direction: down the stair, not up. Whoever it was did not go to the roof. They went deeper into the cathedral — or out through the nave.\n\nVessin has pulled on her coat by the time you straighten. She reads your expression before you speak, which is its own kind of assessment. \"Down, not up,\" she says flatly, as if confirming a line in a ledger. \"That's a scaffold crew member, or it isn't. The crew comes from the yard.\" She glances toward the door. \"If it isn't, they're still in the building.\""
+      },
+      {
+        "player": "Use prism sight on the room you're in... watch the last 4.5 hrs replay in highlights.",
+        "summary": "Prism Sight's replay of the alcove's light-history added one detail to the known: the listener on the landing carried a shuttered lamp — prepared for a dark stairwell, which means they came deliberately, not accidentally.",
+        "narration": "You settle back against the alcove wall and open Prism Sight quietly — not a surge, just a careful leaning-in, the way you might press an ear to a door. The light-history of the alcove is dense and warm, layered over itself in the way a small enclosed space accumulates it. Four and a half hours is a long read. You do not take all of it.\n\nYou take the relevant passages. The candle burning steady, two bodies close in the drop-cloth's fold, the bargain playing out in the light's own language — heat and breath and the slow geometry of limbs. You let that part go quickly; you already know what happened there. What you are looking for is the margins. The moments at the door.\n\nThere. The eleven-minute impression on the landing, already known. But Prism Sight adds a detail the bracket alone could not give: the lamp the listener carried was shuttered, not absent. The light-trace is the faint heat-bloom of a covered flame, not the absolute darkness of someone moving by memory. Deliberate. Prepared. A person who expected to wait in a dark stairwell and brought something for it.\n\nCy watches you come back to the room. Vessin is watching too, coat buttoned, reading your expression with that appraiser's precision that does not need to be told — she has already arrived at the shape of your conclusion. She says, dry and quiet: \"Prepared means they knew the building.\" She reaches for her pack. \"Scaffold crew knows the building.\""
       }
     ],
     "lastTurn": {
-      "narration": "You kneel at the latch bracket and let Prism Sight open — not a dramatic effort, just a quiet settling of attention, the way a lens finds its focal distance. The door's grain comes up layered in your vision. Light-history reads backward from now: the grey seep of dawn, the candle's warm orange pooling under the door, and before that, the landing's settled dark.\n\nThen a shape in the record. One person, standing at the door for just long enough to be deliberate. The light carries the impression cleanly: boots with a distinctive wear-pattern on the outer edge of the heel, weight shifted to the right — someone listening, not moving. The trace has the quality of patience. They were not passing through.\n\nThey came, stood, and left the way they came. The light-record gives you the direction: down the stair, not up. Whoever it was did not go to the roof. They went deeper into the cathedral — or out through the nave.\n\nVessin has pulled on her coat by the time you straighten. She reads your expression before you speak, which is its own kind of assessment. \"Down, not up,\" she says flatly, as if confirming a line in a ledger. \"That's a scaffold crew member, or it isn't. The crew comes from the yard.\" She glances toward the door. \"If it isn't, they're still in the building.\"",
-      "sceneSummary": "Prism Sight read the landing's light-history — a patient listener who came to the door, stood eleven minutes, then descended rather than climbing to the roof. Still in the building, or gone through the nave. Vessin read the conclusion before it was spoken.",
+      "narration": "You settle back against the alcove wall and open Prism Sight quietly — not a surge, just a careful leaning-in, the way you might press an ear to a door. The light-history of the alcove is dense and warm, layered over itself in the way a small enclosed space accumulates it. Four and a half hours is a long read. You do not take all of it.\n\nYou take the relevant passages. The candle burning steady, two bodies close in the drop-cloth's fold, the bargain playing out in the light's own language — heat and breath and the slow geometry of limbs. You let that part go quickly; you already know what happened there. What you are looking for is the margins. The moments at the door.\n\nThere. The eleven-minute impression on the landing, already known. But Prism Sight adds a detail the bracket alone could not give: the lamp the listener carried was shuttered, not absent. The light-trace is the faint heat-bloom of a covered flame, not the absolute darkness of someone moving by memory. Deliberate. Prepared. A person who expected to wait in a dark stairwell and brought something for it.\n\nCy watches you come back to the room. Vessin is watching too, coat buttoned, reading your expression with that appraiser's precision that does not need to be told — she has already arrived at the shape of your conclusion. She says, dry and quiet: \"Prepared means they knew the building.\" She reaches for her pack. \"Scaffold crew knows the building.\"",
+      "sceneSummary": "Prism Sight's replay of the alcove's light-history added one detail to the known: the listener on the landing carried a shuttered lamp — prepared for a dark stairwell, which means they came deliberately, not accidentally.",
       "choices": [
         {
-          "label": "Go now, quietly — down the stair before they're too far ahead. Try to find them in the nave or the lower passages.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Step out onto the landing now — find the listener before they are gone or the crew makes it impossible to tell one person from another.",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "difficulty": 15,
           "intentTags": [
             "scout",
             "careful"
           ],
+          "abilityId": null,
           "trivial": false
         },
         {
-          "label": "Use Umbracraft — wrap yourself in the alcove's remaining shadow and slip out behind them, unseen.",
+          "label": "Use See the Made Thing on the landing itself — read what was built up out there, who arranged to be here, what version of events they are constructing.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "sneak",
-            "hide"
+            "study"
           ],
-          "abilityId": "umbracraft",
-          "energyCost": 6,
+          "abilityId": "see_the_made_thing",
           "trivial": false
         },
         {
-          "label": "Ask the scaffold crew when they come up — someone on that stair in the night would have been noticed if the crew had early risers.",
+          "label": "Ask Vessin directly: does she know anyone who works this building and would carry a shuttered lamp on a stairwell in the dark?",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "negotiate"
           ],
+          "abilityId": null,
           "trivial": true
         },
         {
-          "label": "Leave through the yard — the listener's direction tells you enough. Take the longer route out and let Vessin handle the crew.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Leave with Vessin now, through the nave before the crew fills the landing — put distance between the alcove and wherever the listener went.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
             "careful",
             "travel"
           ],
+          "abilityId": null,
           "trivial": true
         }
       ],
@@ -332,25 +338,23 @@
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Coat on, hair still half-undone, reading Loki's expression with appraiser's precision — already arrived at the conclusion before it was stated."
+            "state": "Coat fully buttoned, pack in hand, reading Loki's expression — has already arrived at the conclusion before it was spoken."
           },
           {
             "name": "Cy",
-            "state": "Lens irised down to resting diameter, lamp dark, waiting."
+            "state": "Lens at resting diameter, lamp dark, watching Loki return from the Prism Sight read."
           }
         ],
         "objects": [
           "Candle burned out on the shelf",
           "Flat canvas drop-cloth on the floor",
-          "Loki's shirt and trousers",
           "Traveler's Pack against the wall"
         ],
         "threads": [
-          "The listener came down, not up — still in the building or out through the nave; direction and identity unknown.",
-          "Vessin has noted the crew comes from the yard — if it wasn't crew, they were deliberate.",
-          "The Descent bargain stands — want on both sides, access on demand.",
+          "The listener on the landing carried a shuttered lamp — prepared, deliberate, familiar with the building.",
           "The man in the lower Annex: long face, crooked jaw, grey coat with a split seam — not yet found.",
-          "The scaffold crew is stirring — the alcove will not stay private much longer."
+          "The scaffold crew is stirring — the alcove will not stay private much longer.",
+          "The Descent bargain stands — want on both sides, access on demand."
         ]
       },
       "npcUpdates": [
@@ -358,56 +362,55 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Read Loki's conclusion from expression alone — named the key distinction (crew comes from the yard) before being told. Composure fully restored; operating in appraiser-mode.",
+          "note": "Heard the Prism Sight conclusion before it was spoken — named the operative detail (scaffold crew knows the building) and reached for her pack.",
           "learned": [
-            "The listener descended, not climbed — either scaffold crew or a deliberate visitor still in the building."
+            "The listener on the landing carried a shuttered lamp — prepared for a dark stairwell wait."
           ],
-          "statusNote": "In the alcove at dawn, coat on — composure fully restored, assessing the listener's direction with professional attention."
+          "statusNote": "Coat buttoned, pack in hand, ready to move — alert and operational."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-half-cathedral",
-          "label": "The Half-Cathedral",
-          "kind": "place",
-          "entityId": "the-half-cathedral",
-          "fact": "Prism Sight read the landing door: a patient listener stood eleven minutes on the landing, weight on the right foot, then descended — not to the roof, but down the stair toward the nave or lower passages. The scaffold crew comes up from the yard, not down from above.",
+          "topic": "the-man-in-the-lower-annex",
+          "label": "The Man in the Lower Annex",
+          "kind": "mystery",
+          "fact": "The listener on the eastern tower landing carried a shuttered lamp — not moving by memory but prepared for a dark wait. They knew the building well enough to plan for the stairwell's darkness. Scaffold crew knows the building; but the crew comes up from the yard, not down from above.",
           "links": [
-            "the-man-in-the-lower-annex",
             "grovehome",
+            "the-half-cathedral",
+            "vessin-tallow-bark",
             "prism-sight-deep-read"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quick examination — kneeling at the bracket, reading the light-history, straightening, and exchanging a few words with Vessin."
-      }
+        "why": "A short, careful Prism Sight read — a few minutes of settled attention."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral — full dawn grey under the door, candle burned to nothing, drop-cloth on the floor. Boots scraping stone above — the scaffold crew is starting to move on the landing.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Coat on, hair still half-undone, reading Loki's expression with appraiser's precision — already arrived at the conclusio"
+          "state": "Coat fully buttoned, pack in hand, reading Loki's expression — has already arrived at the conclusion before it was spoke"
         },
         {
           "name": "Cy",
-          "state": "Lens irised down to resting diameter, lamp dark, waiting."
+          "state": "Lens at resting diameter, lamp dark, watching Loki return from the Prism Sight read."
         }
       ],
       "objects": [
         "Candle burned out on the shelf",
         "Flat canvas drop-cloth on the floor",
-        "Loki's shirt and trousers",
         "Traveler's Pack against the wall"
       ],
       "threads": [
-        "The listener came down, not up — still in the building or out through the nave; direction and identity unknown.",
-        "Vessin has noted the crew comes from the yard — if it wasn't crew, they were deliberate.",
-        "The Descent bargain stands — want on both sides, access on demand.",
+        "The listener on the landing carried a shuttered lamp — prepared, deliberate, familiar with the building.",
         "The man in the lower Annex: long face, crooked jaw, grey coat with a split seam — not yet found.",
-        "The scaffold crew is stirring — the alcove will not stay private much longer."
+        "The scaffold crew is stirring — the alcove will not stay private much longer.",
+        "The Descent bargain stands — want on both sides, access on demand."
       ]
     }
   },
@@ -837,7 +840,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Said Loki's name into the stone when the harmonic undertone found her — composure absent, want fully present.",
         "[d2] Descent named what she was feeling precisely — her composure stepped aside completely; she said Loki's name into the dawn light rather than into the wall.",
         "[d2] Held against the wall until her composure became entirely beside the point — said Loki's name when the last of the holding gave way. Called him thorough afterward. Reaching for her trousers now.",
         "[d2] Held two seconds when Descent named the bargain — want on both sides, access on demand — then said yes and lost the last of the composure she had been holding. Came apart entirely when the pace changed. The bargain is sealed.",
@@ -846,23 +848,24 @@
         "[d2] Dressed slowly with hands and kisses — stood still under it, kissed back with precision, said 'scaffold crew' dry and quiet and reached for her coat.",
         "[d2] Heard Cy's report alongside Loki — said eleven minutes is not someone who got lost. Appraiser's composure mostly restored.",
         "[d2] Received Cy's report on the listener — four hours seventeen minutes of engagement, eleven of them overheard. Responded with contained composure and named the right question: intentional surveillance or accidental witness.",
-        "[d2] Read Loki's conclusion from expression alone — named the key distinction (crew comes from the yard) before being told. Composure fully restored; operating in appraiser-mode."
+        "[d2] Read Loki's conclusion from expression alone — named the key distinction (crew comes from the yard) before being told. Composure fully restored; operating in appraiser-mode.",
+        "[d2] Heard the Prism Sight conclusion before it was spoken — named the operative detail (scaffold crew knows the building) and reached for her pack."
       ],
       "knownFacts": [
-        "Loki holds a pace deliberately and does not hurry when he does not have to — that reads as a kind of precision she respects",
         "Said yes to the Descent bargain — a standing offer between them, want named on both sides, access on demand. She named it with one word and the composure stepped aside.",
         "Descent can bind a genuine bargain between them — she recognized the shape of it and agreed without deflection.",
         "Accepts unhurried care after the finish — stands still for a palm along her spine in a way she stood still for nothing else.",
         "Someone stood on the landing above for eleven minutes in the night — not lost, not accidental.",
         "Someone was on the landing for eleven minutes during the night — she now knows this too.",
         "Cy's acoustics assessment: the alcove carries sound to the landing.",
-        "The listener descended, not climbed — either scaffold crew or a deliberate visitor still in the building."
+        "The listener descended, not climbed — either scaffold crew or a deliberate visitor still in the building.",
+        "The listener on the landing carried a shuttered lamp — prepared for a dark stairwell wait."
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the alcove at dawn, coat on — composure fully restored, assessing the listener's direction with professional attention.",
+      "statusNote": "Coat buttoned, pack in hand, ready to move — alert and operational.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1202,7 +1205,7 @@
     "lastSharedReadAt": "2026-08-02T00:08:11.368Z",
     "lastTickWorldDay": 33,
     "lastCanonWorldDay": 33,
-    "turnsSinceOffer": 43,
+    "turnsSinceOffer": 44,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -1958,15 +1961,18 @@
         "facts": [
           "[d1] A man in the lower Annex hired the stranger at the confluence — told them Loki had pulled something sealed from the Deep and was carrying it out. The charge was fabricated well enough to buy a hired blade. His name and appearance are not yet known.",
           "[d2] Vessin was in the lower Annex this morning, pricing a routing component someone wanted moved quietly. A man in a grey coat with a split seam on the left shoulder was watching the posting board when she left. This is the first partial physical description of the person who hired the aggressor.",
-          "[d2] Vessin's four-second profile: long face, jaw healed crooked on the right side, hair pulled back and not fresh. Grey coat with the split seam on the left shoulder — already known from context, now confirmed on his person. Did not touch the posting board, only read it. Left through the lower passage…"
+          "[d2] Vessin's four-second profile: long face, jaw healed crooked on the right side, hair pulled back and not fresh. Grey coat with the split seam on the left shoulder — already known from context, now confirmed on his person. Did not touch the posting board, only read it. Left through the lower passage…",
+          "[d2] The listener on the eastern tower landing carried a shuttered lamp — not moving by memory but prepared for a dark wait. They knew the building well enough to plan for the stairwell's darkness. Scaffold crew knows the building; but the crew comes up from the yard, not down from above."
         ],
         "links": [
-          "the-unlit-deep",
           "the-passage-below",
           "the-water-crisis",
           "the-taken-from-the-city",
           "vessin-tallow-bark",
-          "ring-form-residue-at-eastern-intake"
+          "ring-form-residue-at-eastern-intake",
+          "grovehome",
+          "the-half-cathedral",
+          "prism-sight-deep-read"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -2172,26 +2178,27 @@
     ]
   },
   "tendencies": {
-    "devotion": 2.085325297804409,
-    "cerebral": 8.742939386007365,
-    "social": 18.42899835925825,
-    "strategic": 5.133519367148566,
-    "cautious": 4.0701571040276,
-    "amorous": 24.498728829142873,
-    "generous": 3.094428673559338,
-    "ruthless": 1.0854580569057442,
-    "risky": 0.8870852907578168,
-    "patient": 0.24224703998738534,
-    "deception": 0.2819881023409168
+    "devotion": 2.0331921653592984,
+    "cerebral": 11.52436590135718,
+    "social": 17.968273400276797,
+    "strategic": 5.005181382969852,
+    "cautious": 3.96840317642691,
+    "amorous": 23.8862606084143,
+    "generous": 3.0170679567203544,
+    "ruthless": 1.0583216054831006,
+    "risky": 0.8649081584888714,
+    "patient": 0.2361908639877007,
+    "deception": 0.27493839978239387
   },
   "aptitudes": [
     "silver_tongue",
+    "scholar",
     "orator",
     "charmer",
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 134,
+  "actionCount": 135,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -2500,8 +2507,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785634562006,
-  "rev": 434,
+  "updatedAt": 1785634791282,
+  "rev": 435,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3291,7 +3298,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 92
+    "the_quickwood": 93
   },
   "opLossPending": false,
   "sessions": [
@@ -3346,10 +3353,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-02T01:36:02.006Z",
+      "lastAt": "2026-08-02T01:39:51.279Z",
       "startDay": 32,
       "endDay": 33,
-      "beats": 58
+      "beats": 59
     }
   ],
   "establishedFacts": [
@@ -3387,17 +3394,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 157,
-    "choices": 157,
+    "sceneSummary": 158,
+    "choices": 158,
     "characterDeltas": 60,
-    "scene": 157,
+    "scene": 158,
     "placeUpdates": 17,
-    "codexUpdates": 93,
-    "timeOps": 146,
+    "codexUpdates": 94,
+    "timeOps": 147,
     "offer": 11,
     "generateRequest": 6,
-    "sceneEnded": 34,
-    "npcUpdates": 129,
+    "sceneEnded": 35,
+    "npcUpdates": 130,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3411,10 +3418,10 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 157,
+  "_opTurns": 158,
   "customAbilities": {},
   "companionBonds": {
-    "coil": 1
+    "coil": 1.25
   },
   "practice": {
     "schemaVersion": 1,
@@ -3424,7 +3431,7 @@
       "the_wrong_reality": 5,
       "the_misdirect": 2,
       "the_better_story": 11,
-      "prism_sight": 9,
+      "prism_sight": 10,
       "harmonic_voice": 6,
       "hunters_strike": 3,
       "descent": 8

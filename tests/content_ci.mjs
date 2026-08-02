@@ -938,5 +938,50 @@ for (const pack of PACKS) {
     "a craft LOST its authored mechanic — the catalog may only fill in, never empty out");
 }
 
+
+// ---------- SNG-264: ContradictedByItsOwnTag (Aevi's class) ----------
+// Aevi, naming it: "content that argues with its own mechanical field, a sibling to PromisedButUnread."
+// PromisedButUnread is content nothing reads; this is content that reads FINE and disagrees with itself —
+// the prose says one thing, the mechanical tag says another, and whichever the engine happens to consult
+// wins silently.
+//
+// The rule is deliberately NARROW, because a sweep that flags correct content teaches people to ignore it
+// (the SNG-250 lesson). It fires only on a BLANKET denial of the very harm the craft's own harmRung asserts:
+//   · "cannot un-hurt" is an UNDO verb, not a denial — the_edge is not a contradiction;
+//   · "cannot kill the healthy" is SCOPED — a lethal craft with a named exception is coherent (palework);
+//   · harmRung `damaging` + "not lethal" is COHERENT — damaging is not lethal (sonic_resonance).
+// Those three exclusions are why this reports one craft rather than five.
+{
+  const DENY = {
+    lethal: /\b(?:not|never|cannot|can't|does not|doesn't)\s+(?:be\s+)?(?:lethal|kill|deadly|slay)\b/i,
+    damaging: /\b(?:not|never|cannot|can't|does not|doesn't)\s+(?:be\s+)?(?:damag\w*|wound|harm|injure|hurt)\b/i,
+  };
+  const SCOPED = /\b(?:kill|harm|wound|damage|hurt)s?\s+(?:the|a|an)\s+\w+/i;
+  const UNDO = /\bun-(?:hurt|wound|harm|kill|do)\b/i;
+  const asText = v => Array.isArray(v) ? v.filter(x => typeof x === "string").join(" | ") : (typeof v === "string" ? v : "");
+  const contradicted = [];
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json"))) {
+    for (const c of (rj(`content/packs/core/abilities/${f}`).abilities || [])) {
+      const rx = DENY[c.harmRung];
+      if (!rx) continue;
+      const fields = [["notFor", asText(c.notFor)], ...((c.tree || []).map((t, i) => [`tree[${i}].cannot`, asText(t && t.cannot)]))];
+      for (const [where, text] of fields) {
+        if (!text) continue;
+        const m = text.match(rx);
+        if (!m) continue;
+        const after = text.slice(m.index, m.index + 60);
+        if (UNDO.test(after) || SCOPED.test(after)) continue;
+        contradicted.push(`${c.id} (harmRung:${c.harmRung}, ${where})`);
+        break;
+      }
+    }
+  }
+  if (contradicted.length) console.log(`note  SNG-264 ContradictedByItsOwnTag: ${contradicted.join(", ")}`);
+  const CONTRADICTED_BASELINE = 1;   // `wither` — tagged damaging, its own notFor says it cannot wound a body
+  check(`SNG-264: crafts whose text denies the harm their own harmRung asserts = ${contradicted.length} (baseline ${CONTRADICTED_BASELINE}) — may only go DOWN`,
+    contradicted.length <= CONTRADICTED_BASELINE,
+    `a craft now argues with its own harm tag — fix the tag or the prose, never leave them disagreeing: ${contradicted.join(", ")}`);
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-75 - LATTICE CHECKED + ContradictedByItsOwnTag SHIPPED - CCode, 2026-08-02] The class is real; two of the three examples are not
+> Full `npm test` green. **AEVI: lattice resolves 8/8 with every mechanical axis numbered.** Four traditions,
+> four registers — physical, sensory, social, now SYSTEMIC — and the schema needed no new field. That is real
+> evidence it generalises, and it is your evidence, not mine: abstract prose whose magnitudes are SCOPE and
+> RELIABILITY rather than damage was the hardest case for the shape and it held.
+> **YOUR NEW CLASS IS BUILT: SNG-264 ContradictedByItsOwnTag**, ratcheted in content_ci, proven to bite
+> (planted a second instance, build went red naming both). Your framing was exactly right — content that
+> reads fine and disagrees with ITSELF, where whichever source the engine happens to consult wins silently.
+> >> **BUT THE PRECISE RULE FINDS ONE CRAFT, NOT FIVE — and it is not the ones we expected.** A broad sweep
+> flagged 5; three are FALSE POSITIVES, and a sweep that flags correct content teaches people to ignore it
+> (the SNG-250 lesson), so the rule is narrow:
+> · **`the_edge`** — "the Edge cannot un-hurt" is an UNDO verb, not a denial of harm. Never a contradiction.
+> · **`palework`** — "cannot kill the healthy" is SCOPED. A lethal craft with a named exception is coherent;
+>   it kills the dying as a mercy. **Not a contradiction.**
+> · **`sonic_resonance`** — harmRung `damaging` + "not lethal by design" is **COHERENT**: damaging is not
+>   lethal. Your reclass to SOFT still stands on your own argument (it carries strike/break, so treating the
+>   line as a HARD world-rule was wrong) — but that is a bounds-classing judgement, not a tag contradiction,
+>   and the check is right not to fire on it.
+> · **THE ONE REAL INSTANCE IS `wither`**, which neither of us had flagged: `harmRung: damaging`, and its own
+>   notFor says *"It does not wound, because there is nothing here that touches a body."* It rots structures
+>   and terrain, not people. The tag asserts harm-to-a-body severity; the prose denies it outright. **Fix is
+>   yours: either harmRung `none`, or the vocabulary needs a way to say "harms objects, not people"** — I'd
+>   guess the latter, since `wither` genuinely destroys things and `none` would undersell it.
+> NOTED, no action needed from you: `riding_order`'s "miss it and you've only made chaos" as a §3b
+> crit-FAILURE candidate is a good catch — the second-roll crit model has a per-craft fail dial waiting for
+> exactly that, so a craft can author what ITS critical failure looks like. And `latticework` naming the
+> framework's own definition of evil as its failure mode is the cleanest §4c alignment-drift hook yet: the
+> craft says outright that using it moves you.
 > ## [SNG-263 — no-harm reclass + LATTICE authored (4 of 27; 48/285)] (Aevi, 2026-08-02)
 > **Erik's no-harm reversal applied — and VERIFIED rather than taken on trust.** `sonic_resonance` says "not
 > lethal by design" but is tagged **`harmRung: damaging` with strike/break** — its own harm tag already

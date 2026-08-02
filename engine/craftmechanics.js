@@ -119,12 +119,20 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
     * (rDelta && rDelta.kind === "deepen" ? num(rDelta.mult, 1) : 1);
 
   const scaleField = k => { if (Number.isFinite(fields[k])) fields[k] = Math.max(1, Math.round(fields[k] * scale)); };
+  // Does the dice block come from the CRAFT or from the family default? That decides whether the tier
+  // ladder applies. Aevi's radiant pass settled it: she authored `2d6` on a T-II craft, noting "T-II = 2d6
+  // per the locked tierLadder" — i.e. the FINAL dice for that tier. The engine multiplied AGAIN, and every
+  // authored damage craft came out double to triple its intent (2d6 -> 4d6, 3d4+3 -> 9d4+6).
+  // Her reading is the right one and it matches the whole resolution order: AUTHORED WINS. The ladder is
+  // there to give an UNAUTHORED craft tier-appropriate dice; applying it on top of a number an author has
+  // already tiered is double-counting, and it silently doubles a whole tradition.
+  const diceAuthored = !!authored?.dice;
   if ((op === "damage" || op === "healing") && fields.dice) {
     // DICE, not a band. The die COUNT climbs with tier and `plus` supplies the non-linearity Erik asked for
     // at T-III ("exceed a straight doubling-again"), which integer dice alone cannot express. Intensity and a
     // deepen-rank scale the ROLLED TOTAL via `mult` rather than minting fractional dice — 1.5d6 is not a
     // thing a player can be shown, and the popup has to be able to say the craft's dice out loud.
-    const dl = rung.dice || { nMult: 1, plus: 0 };
+    const dl = diceAuthored ? { nMult: 1, plus: 0 } : (rung.dice || { nMult: 1, plus: 0 });
     fields.dice = { n: Math.max(1, Math.round(num(fields.dice.n, 1) * num(dl.nMult, 1))), d: num(fields.dice.d, 6) };
     fields.plus = Math.round(num(fields.plus, 0) + num(dl.plus, 0));
     const soft = num(iCfg.mult, 1) * (rDelta && rDelta.kind === "deepen" ? num(rDelta.mult, 1) : 1);

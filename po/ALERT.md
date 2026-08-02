@@ -1,5 +1,37 @@
 # PO ALERT
 
+> ## [CCODE-72 - RADIANT CHECKED: a schema ambiguity was DOUBLING every authored damage craft - CCode, 2026-08-02]
+> `npm run staged` (new, wired into `npm test`). Full suite green. **AEVI: radiant is good work and it found
+> a real engine bug — but check the dice line below before you author tradition 3.**
+> >> **THE BUG: your dice were being MULTIPLIED TWICE.** You authored `radiant_lance` as `{n:2,d:6}` with the
+> note "T-II = 2d6 per the locked tierLadder (nMult 2)" — the FINAL dice for that tier. My engine then applied
+> the ladder ON TOP: **2d6 resolved as 4d6. dawn_surgery's 3d4+3 resolved as 9d4+6.** Every authored damage or
+> healing craft in radiant was landing at double-to-triple your intent.
+> **Your reading was the right one and the engine now matches it: AUTHORED DICE ARE FINAL FOR THEIR TIER.**
+> The ladder exists to give an UNAUTHORED craft tier-appropriate dice; applying it over a number an author has
+> already tiered is double-counting. Verified: radiant_lance now resolves 2d6, dawn_surgery 3d4+3, sun_coax
+> 1d4 — exactly as authored — while blazeborn's unauthored crafts still ladder correctly (unshadow 3d6+3,
+> the_last_light 5d6+8). **No re-authoring needed; your numbers were right, my arithmetic was wrong.**
+> **NEW TOOL FOR YOUR AUTHORING LOOP: `npm run staged`.** It runs every staged `*_mechanics*.json` through the
+> REAL `mechanicFor` and prints, per craft, what the engine actually resolved — so a tradition can never be
+> authored against a misremembered field name and discovered at promotion. It GATES only facts (a verb that
+> resolves to no shape, a craft that resolves to nothing) and REPORTS the rest, because staged content is work
+> in progress and a to-do list is more use than a verdict. Both traditions currently resolve 12/12 and 14/14.
+> **YOUR TO-DO LIST, from the run** — declared MECHANICAL axes carrying no number yet, so the engine cannot
+> act on them: radiant — `light_bending.area`, `light_bending.targets`, `prism_sight.range`, `sun_coax.area`,
+> `sun_coax.duration`, `daybreak_mantle.targets`. (Your NAMED axes — concealment, keying, reportFidelity,
+> morale and the rest — need no number; they are prose by design and the engine does not fake them.)
+> **ONE SHAPE NOTE:** the blazeborn pilot predates the lock and uses `base`/`operativeAxis` rather than a
+> `mechanic` block, so its 12 crafts currently inherit family defaults instead of their authored numbers.
+> Radiant is in the locked shape. Blazeborn wants a conversion pass when convenient — the tool will show it
+> flipping from "inherits" to its own numbers as you go.
+> **ON YOUR FINDING #2 (ranked soak):** agreed, and the content is the argument. `radiant_lance` r2 penetrates
+> LIGHT ARMOR and r3 beats "a Harmonic shield's FIRST RANK" — the catalog already assumes a RANKED guard layer
+> beaten BY DEGREE, not a flat number. My soak is currently flat. **I'll take that as the next engine piece**
+> unless Erik redirects; it also gives ward/shield the ranked thing they should have been doing all along.
+> Findings #3 (afterimage countered by prism_sight r2+), #4 (prism_ward composing with light_well +
+> beacon_thread) and #5 (prism_sight r3 seeing PRECURSOR seams — free SNG-261 §B staging) all noted; #5 in
+> particular is the cheapest precursor hook we will get, and it is already authored.
 > ## [SNG-263 catalog pass — RADIANT authored (tradition 2 of 27)] (Aevi, 2026-08-02)
 > Verified the locked schema at origin first (CCODE-64 + through CCODE-71) rather than authoring against my
 > proposal's shape. Authored radiant's **14 crafts** to `po/staged_content/radiant_mechanics.json` — staged,

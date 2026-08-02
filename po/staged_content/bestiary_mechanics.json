@@ -1,0 +1,258 @@
+{
+ "schemaVersion": 1,
+ "id": "bestiary_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Per-creature threat/health/soak for all 26 roster entries, per CCODE-74's ask ('the bestiary has no mechanical body either — the SNG-263 finding one level up').",
+ "note": "Every number is derived from what the roster ALREADY says: `class` (what kind of thing it is), `tier` (its band), `danger` (how it hurts you) and `pressures` (which function families it stresses). SAME METHOD AS THE CRAFTS: the prose is the spec. The bestiary's own design law — 'every entry pressures FUNCTION FAMILIES, not just deals damage' — is the reason soak and soakRank vary so much: a creature's DEFENCE should be the thing its pressures name.",
+ "designBasis": {
+  "threat": "drives the opponent sheet's attribute/tier curve (synthesizeOpponentSheet). Set by tier band, then nudged by how ACTIVELY dangerous the entry is: a relentless hunter out-threats a passive hazard of the same tier.",
+  "health": "how long it takes to put down. CCode set riffraff base 13 to satisfy the T-III ladder; these scale from that. A SWARM has low health per the design law that it dies to area, not to a big hit.",
+  "soak/soakRank": "the DEFENCE its prose names. A construct has real plating (high soak, ranked); a manifested fiction has almost none (it 'winks out') but may resist by KIND; a warped beast is flesh. soakRank matters because the ranked penetration layer now exists — a rank-2 hide needs a rank-2+ penetration to cut cleanly.",
+  "special": "where the prose names a mechanic no number carries (un-belonging, resolution-into-grammar, an unrefusable contract)."
+ },
+ "roster": [
+  {
+   "id": "glimmerling_swarm",
+   "threat": 14,
+   "health": 8,
+   "soak": 0,
+   "soakRank": 0,
+   "why": "Manifested fiction: 'they wink out like the fiction they are' = NO soak. Low health because a swarm should die to AREA, not to a big single hit — its pressures (KNOW/WARD/UNMAKE) say the fight is about seeing through it, not out-damaging it.",
+   "special": "SWARM: single-target damage is halved; area effects hit whole. Pressures KNOW (which are real) — a failed KNOW check means striking illusions."
+  },
+  {
+   "id": "hollow_pace",
+   "threat": 16,
+   "health": 15,
+   "soak": 4,
+   "soakRank": 2,
+   "why": "Feral construct: a MACHINE with plating — real soak, ranked 2, so an unranked strike scrapes it. 'Relentless, tireless, no judgment' = high health, low cunning. Its pressures name UNMAKE (break the directive) as the CLEAN answer, which should out-perform grinding its health down.",
+   "special": "DIRECTIVE: UNMAKE against its directive bypasses soak entirely — the authored 'clean' answer beats the brute one."
+  },
+  {
+   "id": "warpling_hare",
+   "threat": 12,
+   "health": 7,
+   "soak": 1,
+   "soakRank": 1,
+   "why": "Substrate-warped flesh: little armour. Low health, but its danger is 'fast, erratic' — the threat is landing a hit at all, not surviving it. Its pressures say MOVE (match the stutter) and HARM (END IT FAST).",
+   "special": "ERRATIC: attacks against it take a penalty unless the attacker matched its movement (MOVE) or predicted the warp (KNOW) this round."
+  },
+  {
+   "id": "cinder_mote_drift",
+   "threat": 13,
+   "health": 9,
+   "soak": 0,
+   "soakRank": 0,
+   "why": "Manifested drift — no body to armour. Hazard-shaped rather than hunter-shaped, so threat sits at the band's floor.",
+   "special": "DRIFT: it does not pursue. Damage taken while inside it each round; the real answer is leaving or warding, not killing."
+  },
+  {
+   "id": "rust_choir_gnats",
+   "threat": 14,
+   "health": 8,
+   "soak": 1,
+   "soakRank": 1,
+   "why": "Feral construct swarm — flecks of metal, so a token soak, but swarm rules dominate.",
+   "special": "SWARM: as glimmerlings. Metal means UNMAKE and area both work; WARD blunts the chorus."
+  },
+  {
+   "id": "mire_gulper",
+   "threat": 15,
+   "health": 16,
+   "soak": 2,
+   "soakRank": 1,
+   "why": "Warped beast, ambush-shaped: hide gives modest ranked soak, and heavy health because it is a big wet thing that holds on.",
+   "special": "GRAPPLE: once it has you, MOVE checks to break free; damage continues while held."
+  },
+  {
+   "id": "pale_reader",
+   "threat": 15,
+   "health": 10,
+   "soak": 0,
+   "soakRank": 0,
+   "why": "Manifested: no armour. Its danger is what it READS, not what it bites — so threat is mid-band while health is low.",
+   "special": "READS YOU: each round it learns a craft you used and resists it at +2 next time. WARD or vary your crafts."
+  },
+  {
+   "id": "the_wrong_stag",
+   "threat": 26,
+   "health": 30,
+   "soak": 5,
+   "soakRank": 2,
+   "why": "Warped beast, LARGE: real hide (soak 5, rank 2) and the health to charge through a party. Its pressures name HARM (bring down something large) explicitly, and WARD (against the hum).",
+   "special": "THE HUM UNMAKES SMALL CRAFT: T-I and T-II crafts are suppressed within its reach unless warded. It DOES NOT FLEE and cannot be driven off."
+  },
+  {
+   "id": "gloamwolf_pack",
+   "threat": 24,
+   "health": 10,
+   "soak": 2,
+   "soakRank": 1,
+   "why": "A PACK: per-wolf health is low, but the pack acts as many. Warped flesh, light soak.",
+   "special": "PACK: multiple bodies. Area and MOVE-control matter more than single-target damage; killing one does not end it."
+  },
+  {
+   "id": "toll_wraith",
+   "threat": 25,
+   "health": 18,
+   "soak": 0,
+   "soakRank": 0,
+   "why": "Manifested: nothing to armour, but it should not be trivial — the health is high for its class because you cannot simply cut it.",
+   "special": "THE TOLL: it demands payment (a resource, a memory, a craft's uses). Refusing costs you; paying ends the encounter without a fight. A genuine non-combat resolution."
+  },
+  {
+   "id": "lantern_ambusher",
+   "threat": 25,
+   "health": 17,
+   "soak": 4,
+   "soakRank": 2,
+   "why": "Feral construct: plating and a ranked defence. Ambush-shaped — high threat relative to health.",
+   "special": "AMBUSH: its first strike is unopposed unless something detected it (KNOW/tremor/echo crafts). After that it is an ordinary construct."
+  },
+  {
+   "id": "weeping_stone",
+   "threat": 22,
+   "health": 34,
+   "soak": 7,
+   "soakRank": 3,
+   "why": "Manifested as STONE — the roster's highest soak and rank at notable. Enormously durable, barely mobile: threat below band because it cannot chase you.",
+   "special": "STONE: soakRank 3 means unranked and rank-1 penetration barely scratch it. It cannot pursue. Attrition or the right craft, not a brawl."
+  },
+  {
+   "id": "quill_swarm",
+   "threat": 23,
+   "health": 11,
+   "soak": 1,
+   "soakRank": 1,
+   "why": "Warped swarm — light natural armour, swarm rules.",
+   "special": "SWARM + RANGED: it damages at distance; closing costs you, and area answers it."
+  },
+  {
+   "id": "the_kept_hunger",
+   "threat": 27,
+   "health": 26,
+   "soak": 4,
+   "soakRank": 2,
+   "why": "Feral construct whose directive rotted into appetite. Strong plating, high health, high threat — the notable band's brawler.",
+   "special": "IT FEEDS: damage it deals restores its own health. Ending it fast matters more than out-lasting it."
+  },
+  {
+   "id": "glass_stalker",
+   "threat": 26,
+   "health": 14,
+   "soak": 3,
+   "soakRank": 2,
+   "why": "Manifested but glass-bodied — real ranked soak, low health. A thing you must HIT, and it breaks when you do.",
+   "special": "GLASS: soakRank 2, but any crit-success shatters it outright regardless of remaining health. A ready-made hook for the §3b crit-SUCCESS dial."
+  },
+  {
+   "id": "churn_revel",
+   "threat": 24,
+   "health": 20,
+   "soak": 1,
+   "soakRank": 1,
+   "why": "Manifested chaos-thing. Little armour, but disorder is its defence.",
+   "special": "REVEL: each round it randomises one of your active standing effects or intensity settings. ORDER-family crafts (lattice) suppress it — a direct antipode interaction."
+  },
+  {
+   "id": "the_unrefusing_blade",
+   "threat": 28,
+   "health": 22,
+   "soak": 5,
+   "soakRank": 2,
+   "why": "MADE WEAPON — a person unmade into a weapon. Armour and skill both: high soak, high threat, moderate health. The class's design note says it cannot refuse its contract.",
+   "special": "CANNOT REFUSE: it will not disengage, cannot be reasoned with, and pursues its contract target past all sense. INFLUENCE crafts fail against it entirely — a hard immunity the class earns."
+  },
+  {
+   "id": "tessellith",
+   "threat": 42,
+   "health": 48,
+   "soak": 6,
+   "soakRank": 3,
+   "why": "Manifested geometry, regional. High soak with rank 3 — 'resolves what it touches into its own grammar' means it is structurally hard. Its pressures name SHAPE (impose your own order) as the counter.",
+   "special": "RESOLUTION: each round it converts terrain/gear into its grammar (a growing area effect). SHAPE or UNMAKE reverses a tile; ignoring it means fighting in its geometry by the end."
+  },
+  {
+   "id": "the_pure_of_ash",
+   "threat": 45,
+   "health": 40,
+   "soak": 6,
+   "soakRank": 3,
+   "why": "Made weapon at regional — a finished killer. Heavy ranked armour and real threat.",
+   "special": "PURITY: immune to INFLUENCE (class rule). Its strikes ignore soakRank 1 defences — bring a rank-2+ ward or take it clean."
+  },
+  {
+   "id": "the_severed_choir",
+   "threat": 44,
+   "health": 44,
+   "soak": 3,
+   "soakRank": 2,
+   "why": "Made weapon, but a CHOIR — many voices severed into one purpose. Lower soak, higher health, and its danger is dispersal.",
+   "special": "SEVERED: it acts multiple times per round. Immune to INFLUENCE. Silencing crafts (harmonic stillness_field) genuinely blunt it — an authored cross-tradition answer."
+  },
+  {
+   "id": "the_gearfather",
+   "threat": 46,
+   "health": 58,
+   "soak": 8,
+   "soakRank": 3,
+   "why": "Feral construct, regional — THE ROSTER'S HEAVIEST ARMOUR (soak 8, rank 3). A pre-Transition machine that never stopped. Enormous health, ponderous threat.",
+   "special": "GEARFATHER: soakRank 3 defeats most penetration; the authored answer is UNMAKE against the directive (as hollow_pace) or shatterpoint-style structural reading. A brawl loses."
+  },
+  {
+   "id": "the_bloom_that_hungers",
+   "threat": 43,
+   "health": 52,
+   "soak": 4,
+   "soakRank": 2,
+   "why": "Warped flora, regional: heavy health (it is a mass), moderate ranked bark-soak.",
+   "special": "BLOOM: it regrows — health returns each round unless the round dealt fire/light damage or an UNMAKE landed. Radiant and blazeborn crafts are the authored answer."
+  },
+  {
+   "id": "the_unmoored_choir",
+   "threat": 78,
+   "health": 95,
+   "soak": 5,
+   "soakRank": 3,
+   "why": "GREAT MANIFESTATION, epic. Its danger is not damage — 'everything inside it starts to un-belong: craft frays, memory loosens, the self blurs.' Health is high but the real fight is the identity attack.",
+   "special": "UN-BELONGING: each round inside it, a random craft is suppressed and the character takes an ALIGNMENT/IDENTITY attack (SNG-258 §4e made concrete — this is the catalog's clearest existing instance of a foe that assails WHO YOU ARE). WARD holds the self; SHAPE (give it a true fiction) is the authored win condition, not damage."
+  },
+  {
+   "id": "the_ashen_wyrm",
+   "threat": 85,
+   "health": 120,
+   "soak": 9,
+   "soakRank": 4,
+   "why": "Great manifestation — a dragon-scale thing. THE HIGHEST SOAK AND RANK IN THE ROSTER (soak 9, rank 4): this is the creature the 'reserve capacity' reframe was FOR. A T-I craft cannot meaningfully scratch it; a mastered T-III with rank-4 penetration can.",
+   "special": "ASHEN: soakRank 4 — the authored proof that ranked penetration must reach rank 4. Erik's 'death-dragon's lair' made literal: every clamped point of a master's roll finally matters here."
+  },
+  {
+   "id": "the_bright_devourer",
+   "threat": 84,
+   "health": 110,
+   "soak": 7,
+   "soakRank": 3,
+   "why": "Great manifestation of LIGHT — and therefore the authored counter to the light traditions. Blazeborn and radiant crafts should NOT be the easy answer here.",
+   "special": "DEVOURS LIGHT: light-family crafts (blazeborn, radiant) are ABSORBED — it heals from them. The valley's light-workers must fight it with something other than their own tradition. A superb authored subversion worth preserving exactly."
+  },
+  {
+   "id": "the_unspooling_worm",
+   "threat": 83,
+   "health": 105,
+   "soak": 6,
+   "soakRank": 3,
+   "why": "Great manifestation: it unspools structure. The order-traditions' nightmare.",
+   "special": "UNSPOOLS: each round it degrades one standing effect, ward, or bound agreement in play (lattice/harmonic constructs first). The counter is re-establishing faster than it unspools, or ending it."
+  }
+ ],
+ "findings": [
+  "The roster's own `pressures` field already told me what each creature's DEFENCE should be. 'Every entry pressures FUNCTION FAMILIES, not just deals damage' is the bestiary's design law, and it is why soak/soakRank vary so widely: a construct has plating, a manifested fiction 'winks out' with none, a warped beast is flesh. Same method as the crafts — the prose is the spec.",
+  "THE RANKED SOAK LAYER NOW HAS ITS FULL RANGE, authored end to end: 0 (glimmerlings — no body) through soakRank 4 (the_ashen_wyrm). CCode's penetration model cuts every layer at or below its rank, so the roster now spans exactly what player crafts can reach, and the_ashen_wyrm is the authored proof that penetration must reach rank 4.",
+  "THE ASHEN WYRM IS ERIK'S 'DEATH-DRAGON'S LAIR', MADE LITERAL. soak 9 / rank 4 / health 120 is the encounter the SNG-258 ceiling-as-RESERVE reframe was for: a master's clamped points finally matter, and a T-I craft genuinely cannot scratch it. The design conversation and the bestiary meet here.",
+  "the_bright_devourer ABSORBS light-family crafts and heals from them — an authored subversion where the valley's light-workers cannot use their own tradition. This is the single best argument in the roster for why per-creature bodies matter: at tier alone, it is just another epic; with a body, it is a specific problem.",
+  "the_unmoored_choir is the catalog's clearest existing instance of SNG-258 §4e (identity attack): 'craft frays, memory loosens, the self blurs.' Its authored WIN CONDITION is SHAPE — give it a true fiction — not damage. A foe you defeat by authorship rather than violence, already written.",
+  "SEVERAL CREATURES ANSWER TO SPECIFIC TRADITIONS as authored: the_bloom_that_hungers regrows unless burned (blazeborn/radiant), the_severed_choir is blunted by silencing (harmonic stillness_field), churn_revel is suppressed by ORDER crafts (lattice — its antipode), the_gearfather yields to UNMAKE-the-directive rather than damage. The cross-tradition web the craft pass found runs through the bestiary too.",
+  "RESOLVING CCODE-74'S REPORTED TENSION: Erik's 'a T-I max kills a T-I beast' and my 'T-III clearly better' were incompatible at riffraff health 13. These bodies resolve it WITHOUT changing either dial — the T-I anchor holds against the WEAKEST riffraff (glimmerling_swarm 8, warpling_hare 7, rust_choir_gnats 8 — a T-I max of 6 plus a mastery floor-raise takes them in one or two), while the sturdier riffraff (hollow_pace 15, mire_gulper 16) need a real weapon. The band was never meant to be uniform: 'a T-I beast' is the hare, not the war-machine."
+ ]
+}

@@ -1,6 +1,29 @@
 # PO ALERT
 
-> ## [FOUND + HALF-FIXED - SNG-261 §B] the precursor bug, diagnosed on Loki (Aevi, 2026-08-02)
+> ## [AUDIT DONE - the PromisedButUnread bug class] good news: ONE instance (Aevi, 2026-08-02)
+> Erik: use the precursor bug as a TYPE and find the rest. Swept the whole rules layer, five passes:
+> 1. **Background fields:** all 40 records carry only id/name/category/description/gmHint/affinity/
+>    grantsAptitudes. `grantsAptitudes` IS properly applied at creation (app.js:3303); `gmHint` is prose by
+>    design. **No other orphaned capability field.**
+> 2. **Capability-shaped fields across ALL rules files** (grants/innate/access/unlock/seed/bonus/…): 20 found,
+>    **16 read by the engine**; the 4 non-reads all benign (accessNote = my doc; openQuestion = a design note;
+>    openSlots = PROSE in schools.json; openByDefault = one unused subkey of the consumed collapsedMoves).
+> 3. **Prose-promise test on backgrounds:** 3 hits — only `precursor_marked` named a real ability (THE BUG,
+>    fixed). `survivalist` + `lineage_taught` are roleplay/social flavor, and standing IS wired
+>    (seedStandingAtCreation).
+> 4. **Same test on origins:** 3 FALSE positives (radiance/descent/ascent are natural words colliding with
+>    ability ids). **Reverse check CLEAN — every seeded id exists with a valid powerSystem, no broken seeds.**
+> 5. **Sibling systems:** living_current seeds from origin `rootkin` only; wild_current from `churnfolk`/
+>    `abyssal` only; **no background is the marking for either — and that's CORRECT** (those are what-people-
+>    you're-FROM, not an acquired mark). **Precursor was the ONLY system with a BACKGROUND-based marking, which
+>    is exactly why it alone fell through origin-keyed seeding. The bug was unique, not systemic.**
+> **CONCLUSION: the class has exactly one instance and it's fixed.** The rules layer is otherwise well-wired.
+> **GUARD recommended to CCODE** (so it can't recur), two cheap content-CI checks: (a) every innate-access id
+> must exist with the matching powerSystem (passes today — baseline it so a typo can't create silent false
+> access); (b) **REACHABILITY — every record carrying an innate-access key must be reachable by a
+> `seedInnateSubstrate` call for that record TYPE** (origin ✅, background ❌ until CCode's one-liner). Check (b)
+> would have caught precursor the day it was authored. Same shape as the inert-pair + registered-but-unloaded
+> ratchets. Full: po/AUDIT_promised_but_unread_bugclass.md> ## [FOUND + HALF-FIXED - SNG-261 §B] the precursor bug, diagnosed on Loki (Aevi, 2026-08-02)
 > Erik said proceed; audited Loki. **The diagnosis is exact and the content made a promise the engine never kept.**
 > - **Loki's save:** `background: "precursor_marked"`, `origin: "enginewright"`, **`precursorAccess: []`**.
 > - **The background's OWN text promises it:** "Something in the old lattice touched you and did not entirely let

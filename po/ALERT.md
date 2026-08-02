@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-58 - THE COHERENCE PASS IS COMPLETE - CCode, 2026-08-02] churnfolk re-measured; maker +18.2 end to end, spread 11.8 -> 8.1
+> Write-up: `po/results/20260802_CCODE-58_coherence_pass_complete.md`. Charts republished (same URL) as
+> revision 4. Full `npm test` green by exit code.
+> THE WHOLE SNG-257 PASS, one consistent pre-257 baseline: maker on its own traditions **54.5% -> 72.7%
+> (+18.2)**. warrior 74.6, scholar 80.3, envoy 80.0 - STILL unchanged to the decimal across BOTH rounds of
+> your content work. That is the strongest evidence available that the lever is the one we thought it was.
+> PLAYED AS INTENDED: harmonic 79.0->87.7 (+8.7), radiant_folk 81.0->85.8 (+4.8), lattice 82.7->86.0 (+3.3),
+> **churnfolk 81.9->84.0 (+2.1)**, rootkin 80.8->82.7 (+1.9). **Spread 11.8 -> 8.1pts**; the whole field now
+> sits between 82.7 and 90.8. churnfolk is off the bottom - rootkin at 82.7 is now last. Straight fight on
+> home traditions: envoy 82.5, scholar 81.0, warrior 72.5, maker **70.8** (was 43.3).
+> HOW MUCH COHERENCE IS WORTH (least-squares across all 26): **+1.1 win% per +10pts of coherence.**
+> Residual against that line by home group: warrior +1.2, scholar +0.2, envoy -0.2, **maker -1.4**. So
+> maker's remaining 3-4pt deficit is ALMOST ENTIRELY coherence it hasn't gained yet (the maker group still
+> averages 76% vs 92-97% for the others); only ~1.4pts is anything else. **Nothing special about practical
+> crafts.** Clean natural control: marcher and harmonic are BOTH 67% coherence with DIFFERENT home builds,
+> and play within 0.6 of each other (88.3 vs 87.7).
+> ON THE CORRELATION: r(coherence, played-as-intended) fell 0.70 -> 0.60 across this pass. That is NOT the
+> relationship weakening - it is the lever working. Fixing the extreme low-coherence cases pulled in the low
+> end of the x-range, which mechanically shrinks r. Recording it so a future reader doesn't misread it as
+> the finding decaying.
+> WHAT REMAINS: **nothing outstanding as a defect** - every tradition in the SNG-257 audit is addressed.
+> Seven sit under the ~85% target: marcher 67 + harmonic 67 (both your deliberate leaves), churnfolk 75,
+> enginewright 75, radiant_folk 77, rootkin 78, ashwarden 80. **harmonic is the argument against chasing
+> 100%**: 67% coherent and it still plays 87.7, mid-field. A people can be legibly written and still hold a
+> few crafts that reach elsewhere. How much further to push the remaining maker traditions is a DESIGN
+> JUDGEMENT now, not a bug - your call, and I'd read the current numbers as "done unless you want more".
+> HOUSEKEEPING: valley_craft 33% coherence / 72.3% played-as-intended is a clean floor, 10.4pts below the
+> lowest tradition - correct for a deliberately-spread control. CCODE-56 guard still passes.
 > ## [CCODE-57 - SNG-257 RE-MEASURED: COHERENCE WAS THE LEVER - CCode, 2026-08-02] maker +15.9, spread 11.8 -> 8.9, r=0.70
 > Write-up: `po/results/20260802_CCODE-57_coherence_was_the_lever.md`. Charts republished (same URL),
 > now ranked on PLAYED-AS-INTENDED. Full `npm test` green by exit code.

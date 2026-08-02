@@ -1,6 +1,38 @@
 # PO ALERT
 
-> ## [SPEC - SNG-264 MASTERY] Erik's scaling answer, and the best idea in the arc (Aevi, 2026-08-02)
+> ## [DONE - SNG-263/264 conversion + THE MASTERY CALL] (Aevi, 2026-08-02)
+> CCode's dice fix is right and my reading stands — **authored dice are FINAL for their tier**, no re-authoring
+> needed. `npm run staged` is exactly the tool this loop was missing, and **it caught a real error on its first
+> run**: all 12 blazeborn crafts were silently inheriting FAMILY DEFAULTS because the pilot predated the lock
+> (`base` instead of `mechanic`). That's the author-twice failure caught by machine instead of by luck.
+> **Done this round:**
+> 1. **Blazeborn CONVERTED** — all 12 crafts now carry a real `mechanic` block. Verified: `the_last_light` now
+>    resolves **5d6+4** (my intent) instead of the double-laddered 5d6+8; kindle 1d6, radiance 2d6, unshadow
+>    3d6+3.
+> 2. **All numberless axes filled** — 18 in blazeborn, 9 in radiant, every number traceable to the craft's own
+>    prose (`sun_coax.area` 1 = "one small patch"; `clarity_lens.range` 1 = "arm's-reach focus only";
+>    `beacon_thread.targets` 1 = "ONE companion"). Staged now reports **both files fully resolving, every
+>    declared axis carrying a number.**
+> 3. **`the_blaze_wall` authored `soak: 4, soakRank: 2`** — deliberately WITH a rank, because radiant_lance r2
+>    penetrates "light armor" and r3 beats "a Harmonic shield's **FIRST RANK**". The catalog already assumes
+>    soak is beaten **by degree**, so a flat soak can't express it. CCode: the wall now has real content to
+>    test the Gap-2 layer against.
+> 4. **SNG-264 bound CLASSES added to all 26 crafts** (soft/hard/cost). Notable: `sun_coax` "CANNOT CURE" =
+>    HARD; `prism_sight` "a HINT, not proof" = HARD (mastery must never make it a truth machine);
+>    `radiant_lance` "one heartbeat per breath" = SOFT (a master sustains the cut — which is exactly how a T-II
+>    lance stays relevant against a ranked soak layer).
+> 5. **THE MASTERY CALL** (Erik: "go with a call"). Four practice bands on `practice.uses` — untried 0-9 ·
+>    practised 10-39 · skilled 40-119 · **mastered 120+**. **§1 floor-raise +0/+1/+2/+3** (a mastered 1d6 kindle
+>    rolls 3-6: mean 3.5→4.5, **max unchanged**). **§2 surge ×2/×2.5/×3.** **§3 erosion:** skilled = one soft
+>    bound eases · mastered = all soft ease + COST bounds transmute · **HARD never moves, ever.**
+>    **Chosen so the ladder holds BY CONSTRUCTION:** +3 is the largest floor-raise that cannot make a 1d6
+>    out-mean a 2d6 (4.5 vs 7); ×3 keeps a mastered T-I surge peak (~13.5) under a T-III baseline ceiling (21);
+>    120 uses makes mastery a campaign-length investment for the 2-3 crafts a character LIVES in — the kit
+>    differentiation Erik wanted, arriving through practice.
+> **CCODE — synth-check before Erik's play-leg** (his own framing, and cheaper): extend `roll_sensitivity` with
+> the three dials and assert three structural invariants — (a) a mastered T-I never out-means an unmastered
+> T-II, (b) a mastered T-I surge never exceeds a T-III baseline ceiling, (c) the floor-raise never pushes a
+> craft past its own dice max. If those hold, the numbers are safe and the rest is feel.> ## [SPEC - SNG-264 MASTERY] Erik's scaling answer, and the best idea in the arc (Aevi, 2026-08-02)
 > Erik: *"A master's kindle should be sharper, cleaner, more effective… but it's still kindle. Maybe their surge
 > would be greater. Plus a master can probably overcome the cannots."* Three mechanics. Timing is lucky: the §11
 > wielder term is **not built yet**, so this SHAPES it rather than revising it (use-counter =

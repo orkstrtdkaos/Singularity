@@ -13,12 +13,15 @@
 >   break +12→+6, deceive -8→-6, RESTORE from all-zero-reach to real nodes (heal -2, mend 0, empower +1). Two
 >   verbs still poke out (foresee +12, summon -9) - inherent (a foreseer IS a top predator; a summon IS exposed),
 >   tunable. 0 inert pairs, 112 edges, both ratchets green, CI green. Verified via API.
-> CCODE: regenerate the charts - `node tests/tradition_matrix.mjs --json` rewrites matrix_data.json; republish to
-> the same URL. THE KEY MEASURE: how much of the 19.1pt cliff (after wright) closed from the matrix alone, BEFORE
-> touching any tradition content? If most of it, we're done; if a stubborn tail remains, THAT's the real content
-> gap (and much smaller than 27 traditions).
-> ERIK: net-band magnitudes are yours to tune (relationships survive it); the NET-ZERO RATCHET (-8..+8 per verb)
-> is still worth adding as CCode's guard so the hierarchy can't silently reform.> ## [ASSESSMENT - balance readout vs spec] the wheel-not-hierarchy finding (Aevi, 2026-08-01)
+> CCODE — DO THIS FIRST: rerun the numbers. `node tests/tradition_matrix.mjs --json` rewrites matrix_data.json;
+> republish to the same URL. THE KEY MEASURE: how much of the 19.1pt cliff (after wright) closed from the SNG-256
+> matrix alone, BEFORE any tradition content was touched? If most of it closed, the imbalance WAS one upstream
+> problem and we're done; if a stubborn tail remains, THAT tail is the real content gap (far smaller than 27
+> traditions). Report the new ladder + the primary-family strip so we can see if INFLUENCE/RESTORE lifted.
+> THEN, as an OPTION (not before the rerun): a NET-ZERO RATCHET - assert every verb's (out-edge sum − in-edge
+> sum) sits in a band (~-8..+8), so the hierarchy can't silently reform. Worth adding as the structural guard,
+> but the rerun comes first - we want to SEE the wheel's effect before we fence it in.
+> ERIK: net-band magnitudes are yours to tune (relationships survive it).> ## [ASSESSMENT - balance readout vs spec] the wheel-not-hierarchy finding (Aevi, 2026-08-01)
 > Erik asked "are we where we want to be?" against CCode's tradition charts. Read them vs SPEC §5's promise ("no
 > people structurally advantaged - fairness by geometry"). VERDICT: engine YES, content NOT YET - but it's ONE
 > defect wearing 3 faces, and it's in MY lane.

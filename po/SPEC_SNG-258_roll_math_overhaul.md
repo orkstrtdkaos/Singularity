@@ -179,3 +179,42 @@ all transparent before and during; and preparation BEFORE a fight is a genuine s
 ## Sequencing note (unchanged): sensitivity tool → popup (now incl. §4b) → curve/skill/tier (now incl. §3b
 ## partial band) → substrate/gear/aptitude → standing-effects §8 → environmental-effects §10 (built ON §8).
 §10 sits naturally after §8 because prepared-ground-that-persists IS a standing effect attached to a place.
+
+
+---
+
+# §4c — ALIGNMENT DRIFTS (Erik: DECIDED yes). Goal-first.
+Erik confirmed: alignment SHOULD drift toward what you repeatedly do. Identity is earned by action — the same
+"earned through repetition" spine as §2 (skill-use) and §5 (aptitude counters). This resolves the §4b finding
+that alignment was static.
+
+GOAL: **who a character IS, on the world's spectrums, is shaped by what they repeatedly DO.** A character who
+works chaos-craft after chaos-craft drifts chaos-ward; one who mends and tends drifts toward life/order. Over
+time, your alignment comes to reflect your history, not just your creation choice. And because spectral fit reads
+off alignment, drift has a real consequence: **the more you do a kind of work, the better you fit it** — a
+virtuous loop that rewards commitment to a path, and makes a character's spectral identity legible from their
+deeds.
+
+## Design tensions CCode + Erik will navigate (named, not solved — CCode owns the how)
+These are the real questions drift raises; I flag them so the implementation is deliberate:
+1. **Rate.** Drift should be SLOW — a felt arc over many sessions, not a wobble that swings each fight. One
+   strong-aligned action shouldn't move you much; a hundred should. (Same concave/earned shape as skill-use.)
+2. **Anchor vs. free.** Does your TRADITION/creation alignment act as a home you drift AROUND (a gravity well you
+   return toward), or can sustained action move you fully away from where you started? Lean (Erik's call): a home
+   pull that can be OVERCOME by sustained contrary action — you can become something other than you were born,
+   but it takes real, repeated doing. This keeps tradition meaningful while honoring earned change.
+3. **Can it be pulled UNWANTED?** If an enemy or a place forces you to act against your grain repeatedly, should
+   that drift you? Interesting (a curse that erodes who you are) but risky (griefing your own identity). Lean:
+   only YOUR chosen actions drift you; forced/coerced actions don't — drift is self-authored. (Erik's call.)
+4. **Legibility (ties to §4b popup).** The player should be able to SEE their alignment and its trajectory — "you
+   have been leaning chaos-ward" — so drift is a visible arc they can steer, not a silent change. The popup that
+   explains spectral fit (§4b) should also show WHERE alignment is heading.
+5. **Fit consequence is the point.** Because fit reads off alignment, drift means a committed path literally gets
+   easier (better fit) and an abandoned one harder — mechanical reinforcement of identity-through-action. That's
+   the FEATURE, not a side effect; the reward for walking a path is that the path becomes yours.
+
+GOAL restated for CCode: alignment moves, slowly, toward the character's repeated CHOSEN actions; tradition is a
+home it can drift around and eventually leave under sustained contrary action; the movement is visible to the
+player; and the payoff is that fit improves along the path you actually walk. HOW (the drift function, the rate,
+the anchor strength, the storage) is CCode's to design. This is a meaningful character-identity system, so it
+sequences LATE — after the roll-math core and §8/§10 — and likely wants its own ticket once the core lands.

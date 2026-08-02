@@ -73,8 +73,14 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
     fields[k] = val;
   }
 
-  const t = String(num(tier ?? ability?.levelReq, 1));
-  const rung = cfg.tierLadder?.[t] || cfg.tierLadder?.["1"] || { mult: 1, special: false };
+  // A tier past the authored ladder must clamp to the TOP rung, never fall back to tier 1. The old
+  // `|| tierLadder["1"]` did exactly that, so a T-VI craft — which generation, a braid, or simply authoring
+  // beyond the current ladder can mint — resolved to 1d6 and was WEAKER THAN A TIER-I. Found by the edge-case
+  // battery on its first run, which is the argument for having one.
+  const rungs = Object.keys(cfg.tierLadder || {}).filter(k => /^\d+$/.test(k)).map(Number).sort((a, b) => a - b);
+  const want = num(tier ?? ability?.levelReq, 1);
+  const t = String(rungs.length ? Math.min(Math.max(want, rungs[0]), rungs[rungs.length - 1]) : want);
+  const rung = cfg.tierLadder?.[t] || { mult: 1, special: false };
   // REFUSED is a VALUE, not an omission (Aevi's the_last_light "cannot be half-given"). A blanket x0.5/x2
   // would invent a conserved capstone the fiction forbids, so a refusal is carried through to the caller and
   // never silently replaced by the baseline.

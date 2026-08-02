@@ -1,5 +1,37 @@
 # PO ALERT
 
+> ## [CCODE-70 - DAMAGE SENSITIVITY SWEEP + EDGE-CASE BATTERY - CCode, 2026-08-02] The edge battery found a real bug on its FIRST run: a T-VI craft was WEAKER than a T-I
+> `npm run damage` (wired into `npm test`, `--json`). Full suite green. Erik: "we will want to run synthetic
+> sensitivity analysis and find edge cases too" - both, and they answer different questions so they get
+> different standards of proof: **sweeps are a REPORT, edge cases are GATED.**
+> >> **THE BUG, caught immediately.** `mechanicFor` clamped an unknown tier with `|| tierLadder["1"]` - so a
+> **T-VI+ craft resolved to 1d6 and was WEAKER THAN A TIER-I.** Generation, a braid, or simply authoring past
+> the current ladder would all mint one. It now clamps to the TOP rung. Nothing in the catalog is above T-V
+> today, which is exactly why nobody would have found this until content moved - the argument for having an
+> edge battery at all.
+> **SENSITIVITY - the SAFE RANGE is the useful column** (each dial swept alone; "safe" = all three of Aevi's
+> criteria still hold):
+> ```
+> dial                              swept                    safe range        shipped
+> damage.scaling.perLevel           0 .. 0.25                0.03 - 0.25       0.06   robust
+> synthesis.threatToHealth          0.06 .. 0.25             0.06 - 0.12       0.12   AT THE EDGE
+> synthesis.threatToSoak            0 .. 0.08                0    - 0.02       0.02   AT THE EDGE
+> craft T-I die size (1dN)          d4 .. d12                d6   - d12        d6     at the low edge
+> ```
+> **READ: the scaling dial is robust (fails nowhere in a 4x sweep) but THREE of the four are sitting on a
+> boundary.** Push threatToHealth past 0.12 or threatToSoak past 0.02 and low-tier viability breaks; drop the
+> die to d4 and it breaks the other way. That is worth knowing before anyone nudges one - and all four are
+> live in the Machine tab, so the boundaries can be felt.
+> Every failure mode is the SAME one: **low-tier-viability** goes first. Tier-advantage never broke anywhere
+> in the sweep. So the fragile property is "a L20's T-I is still worth casting", not "T-III is better".
+> **EDGE CASES - 10, all gated, all green:** soak far above the biggest die still lets a blow land (no immune
+> foe); malformed dice (0d0, null plus) never reach the dice as NaN; a tier past the ladder clamps UP; an
+> absurd rank stays finite; CONSERVE on the smallest craft never reaches zero; **a craft whose axes are ALL
+> named resolves and fakes nothing** (Aevi's lightsense shape); a REFUSED intensity keeps its magnitudes; a
+> level-1 novice vs an epic resolves cleanly (hopeless is a design answer, NaN is not); massive overkill never
+> reports negative health; an enormous margin raises the floor but never exceeds the craft's own ceiling.
+> NEXT: §9 minted crafts - and the T-VI finding makes it sharper, since a braid combining two T-V parents is
+> exactly the thing that would have minted the broken tier.
 > ## [CCODE-69 - THE PILOT CORRECTED THE SCHEMA - CCode, 2026-08-02] Aevi's 12 crafts named 18 axes; the vocabulary is now OPEN and REFUSED is a value
 > Full `npm test` green. **Aevi: your pilot is the reason the schema is right, and it broke mine in exactly
 > the way finding #2 predicted. Three corrections, all yours:**

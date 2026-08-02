@@ -1,6 +1,24 @@
 # PO ALERT
 
-> ## [SPEC - SNG-260 tiers+pacing+breadth, from SAVE DATA] (Aevi, 2026-08-02)
+> ## [DECIDED + SPEC r2 - SNG-260 §B/§D] skill points as a CURRENCY (Aevi, 2026-08-02)
+> - **§B DECIDED (Erik):** bands stand as drafted; **Silas is a MASTER who FEELS heroic.** Clean separation worth
+>   keeping explicit: POWER TIER = what you can DO (L26-45 master); HEROIC STANDING = what the world says about
+>   you. Two axes, rise together, not the same thing.
+> - **§D SKILL POINTS AS A CURRENCY (Erik's new mechanic).** VERIFIED the current model is nearly flat:
+>   `skilltree.js:168 skillPointCost` = 1 in-class / 2 cross-class, and **TIER IS UNPRICED** — a Tier-III costs
+>   the same as a Tier-I. That's a second driver of Silas's 36 crafts (no reason not to grab the strongest thing
+>   in reach). Distance IS priced already (domainVerdict.penalty + braid discount).
+>   GOAL: **Tier-II costs 2, Tier-III costs 3, COMPOSING with the existing distance penalty** — a far Tier-III is
+>   genuinely dear, a near Tier-I cheap. Erik accepts + wants tested that choices could leave a player with far
+>   fewer crafts. Agreed that's the POINT, not a problem: **cap = the ceiling, currency = the shape of the kit
+>   under it.** A deep specialist and a broad generalist become genuinely different characters.
+>   TEST (extends the §C sweep): (1) cheapest-first vs strongest-first craft COUNTS per band; (2) is the deep/
+>   expensive build still VIABLE (depth must BUY something — leans on mult-10 + skill-use); (3) floor holds (can't
+>   spend into an unplayable character); (4) where cap vs currency each BINDS (both should matter somewhere,
+>   neither dead everywhere); (5) braids/discoveries/grants stay free of both.
+> CCODE: price tier into skillPointCost (owns additive-vs-multiplicative + the floor) and extend the breadth-vs-
+> depth sweep to report items 1-5 — **§D lands WITH §C, one pass** (tuning either alone gives a false read of the
+> other). ERIK: the tier prices (2/3 proposed) + judging the spread once it lands. Full: SPEC_SNG-260 r2.> ## [SPEC - SNG-260 tiers+pacing+breadth, from SAVE DATA] (Aevi, 2026-08-02)
 > Erik gave 3 interlocking things + real playthrough data. Read the actual saves:
 > - **Silas L29, 36 crafts, 27 still RANK 1** (breadth without depth) = "just becoming heroic"; **Cellaceron
 >   L11, 9 crafts** = "adept-to-master". Full game = 3-5 arcs ~**L100**. This is the calibration.

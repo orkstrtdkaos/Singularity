@@ -79,14 +79,15 @@
     },
     {
      "text": "NOT LETHAL BY DESIGN — the field limits output near living tissue",
-     "class": "hard"
+     "class": "soft",
+     "note": "Erik reversed the no-harm call. VERIFIED in data: sonic_resonance is tagged `harmRung: damaging` and carries strike/break — its own harm tag contradicts this cannot-text, so the prose is STALE, not a world-rule. SOFT: a master's resonance can reach lethal force."
     },
     {
      "text": "exhausting",
      "class": "cost"
     }
    ],
-   "designNote": "'Not lethal by design — the field limits output' is HARD: it is a fact about the WORLD's field, not the wielder's skill. No mastery makes sonic_resonance a killing craft."
+   "designNote": "Erik reversed the no-harm call; verified against the ability's own `harmRung: damaging` + strike/break functions, which already contradict the r3 cannot-text. The bound is SOFT — mastery reaches past it. FLAGGED SEPARATELY: the r3 prose itself ('not lethal by design — the field limits output near living tissue') is now stale content and should be revised in reach_* source, not just reclassed here."
   },
   {
    "id": "echo_sense",
@@ -893,6 +894,7 @@
   "A SECOND precursor hook: echo_memory r3 hears 'what a Precursor mechanism LAST SAID'. With radiant's prism_sight r3 (sees 'the seams of Precursor work'), TWO traditions independently give players a way to CONTACT precursor presence. SNG-261 §B's staging problem is largely already solved in content — it needs wiring, not authoring.",
   "the_worldsong is the THIRD capstone (after the_last_light, light_borne) to demand REFUSED on both intensity modes and to be a KIND rather than a magnitude. Three traditions, three capstones, identical register — the T-IV/V pattern is now demonstrated, not asserted.",
   "harmonic_voice's HARD bounds ('cannot change anyone's mind — only their temperature', 'cannot make anyone agree') are the tradition's ETHICAL spine: harmonic influence never becomes mind-control at any level of mastery. Bound-classing surfaced a values statement the mechanics must protect.",
-  "sonic_resonance's 'NOT LETHAL BY DESIGN — the field limits output near living tissue' is HARD and notable: it is a fact about the WORLD's field, not the wielder's skill. A whole damage-craft that can never kill. Worth Erik knowing the mechanic will hold that line."
+  "sonic_resonance's 'NOT LETHAL BY DESIGN — the field limits output near living tissue' is HARD and notable: it is a fact about the WORLD's field, not the wielder's skill. A whole damage-craft that can never kill. Worth Erik knowing the mechanic will hold that line.",
+  "STALE-PROSE CLASS FOUND (Erik's no-harm reversal): a craft's cannot-text can contradict its own harmRung. sonic_resonance says 'not lethal by design' while tagged harmRung:damaging with strike/break. A sweep found the same shape on `palework` (harmRung: lethal, text denies harm). This is a THIRD bug-class sibling to PromisedButUnread — call it ContradictedByItsOwnTag: content that argues with its own mechanical field. Worth a CI check: a craft whose cannot-text denies harm while its harmRung asserts it should be flagged for prose revision."
  ]
 }

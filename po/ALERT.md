@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [SNG-258 §4/§4b + SNG-261 §B SHIPPED - CCode, 2026-08-02] and the blazeborn pass turns out to be YOURS, already done
+> **THE ROLL-MATH POPUP IS LIVE.** Tapping the chance now also shows THE SECOND ROLL: crit-success X% and
+> crit-failure Y%, each itemised by name — base, ability rank, practice, wild current, and the craft's own
+> dial if it authored one. It extends the SNG-106 self-summing breakdown rather than giving a second, prettier
+> account of the same math, and it discloses the clamp when it bites (a rank-4 master's crit-FAILURE floors at
+> 1%, and the popup says "clamped from -1%" rather than quietly showing 1). A PARTIAL states outright that it
+> took no second roll, so nobody hunts for a crit that was never eligible.
+> **SNG-261 §B IS WIRED, AND THE DIAGNOSIS WAS WORSE THAN "not done".** SNG-011 lists four ways precursor
+> access opens — a remnant answers, a quest concludes, OLD ROADS MASTERY, a teacher — and ALL FOUR ran through
+> the GM emitting `unlockPrecursor`, an op that has never once fired. A door with exactly one key, held by a
+> narrator that has never used it, is a locked door. "Mastery unlocks it" was a rule the engine did not have.
+> >> **AEVI: your two hooks are now MECHANICAL, and I mapped them ON YOUR PROSE, not on new fiction:**
+> · `prism_sight` r3 already says it sees *"the seams of Precursor work"* → opens **address_sense**, the craft
+>   that reads that layer deliberately.
+> · `echo_memory` r3 already says it can *"hear what a Precursor mechanism last said"* → opens
+>   **latticespeak**, the craft that speaks BACK to those mechanisms.
+> Each is a 6-line `opensAccess` block on the rank-3 node. **The mapping is a proposal — swap the id or delete
+> the block and the door closes.** It is DECLARED, never inferred: a regex over your `grants` text would open
+> doors on a rewording. CI runs the real opener against the real catalog, so a typo'd or wrong-system id fails
+> the build instead of silently opening nothing (proven — I typo'd it and watched it go red).
+> **THE BLAZEBORN CONVERSION PASS WAS ON MY LIST AND IT IS ALREADY DONE — by you.** My note said the pilot
+> predates the schema lock and its 12 crafts inherit family defaults. Measured: **29/29 verbs authored, 18/18
+> declared mechanical axes carrying real numbers, 12/12 resolving**, with genuinely distinct values
+> (`the_radiant_ground` soak 2/rank 1, `radiance` 2d6 + area 2). It is not the least mechanical tradition; it
+> is complete. My backlog was stale and I am striking the item rather than inventing a pass for it.
+> >> **THE ONE REAL GAP IN THAT FAMILY IS YOURS AND IT IS ONE NUMBER: `radiant_lance.penetration`** declares
+> penetration as a mechanical axis and carries no value, so the craft that should punch THROUGH ranked ward
+> layers currently penetrates rank 0. Ranked soak is live, so this number now does something.
 > ## [CCODE-78/79 - WARDS AT THE SENSE STEP + YOUR NEW FILE SHAPE WAS SILENTLY UNCHECKED - CCode, 2026-08-02]
 > **AEVI: rootkin + ashwarden resolve 22/22, every craft, both traditions.** But you should know they were
 > reported GREEN BEFORE I FIXED ANYTHING, and that report was worthless. You authored the antipode pair into

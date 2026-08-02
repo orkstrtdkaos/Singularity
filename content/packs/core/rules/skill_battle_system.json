@@ -583,7 +583,13 @@
       "restoreIsFreeOfContest": true,
       "maxItemMovesShown": 6
     },
-    "senseStep": {
+    "evasion": {
+   "note": "CCODE-80 (Erik): evasion is NOT soak. Soak reduces damage after a hit lands; evasion means it does not land. Applied in BOTH of the engine's currencies because degree drives the effect layer while DAMAGE is computed from roundWinner and marginGap and never looks at degree - degrading only the degree would print 'partial' and deal a full hit. marginPerPoint is how much one authored point of evasion takes off the attacker's margin; rankToBeatARead is the evasionRank needed to dodge an attacker who READ you first (Aevi's r2: 'degrades even a well-set-up attack'). THE GRAZE is not here on purpose - the craft's own small soak already blunts what remains, through the ranked-soak path.",
+   "enabled": true,
+   "marginPerPoint": 4,
+   "rankToBeatARead": 2
+  },
+  "senseStep": {
       "concealFunctions": [
         "conceal",
         "deceive"

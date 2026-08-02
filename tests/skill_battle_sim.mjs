@@ -1016,5 +1016,75 @@ check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the 
 }
 
 
+
+// ---------- CCODE-80: EVASION IS NOT SOAK (Erik's correction; Aevi's re-authored the_wrong_target) ----------
+// "Not blocking, not armoring, just not being where they land." Aevi's proposed mechanic is a DEGREE DEGRADE
+// and it fits the existing ladder - but measured, only half of it lands: `degree` drives the effect layer and
+// the receipt, while DAMAGE is computed from roundWinner and marginGap and never looks at degree. Degrading
+// only the degree would print "partial" and deal a full hit. So it is applied in BOTH currencies, and both
+// halves are asserted here.
+{
+  const eOpp = synthesizeOpponentSheet({ name: "foe", threat: 45 }, sb);
+  const eRules = { ...rules, craftMechanics: JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8")) };
+  const EV = { evasion: 3, evasionRank: 2, soak: 2, soakRank: 1, duration: 3 };
+  const eSeed = () => { let s = 5; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };
+  const round = (mech, cfg = sb, setup = 0) => battleRound({
+    playerSheet: { attributes: { practical: 6 }, energy: 100, level: 6 }, oppSheet: eOpp,
+    playerDecl: { function: "shield", tier: 2, attribute: "practical", intensity: "standard", name: "the wrong target", mechanic: { shield: mech } },
+    oppDecl: { function: "strike", tier: 3, attribute: "practical", intensity: "standard" },
+    state: { momentum: 0, effects: [], opponentHealth: 99 }, rules: eRules, sb: cfg, steps, rng: eSeed(), setupBonus: setup });
+
+  const evaded = round(EV), plain = round({ soak: 2, soakRank: 1, duration: 3 });
+
+  // A degrade is a no-op on a roll that already FAILED - there is no step below failure - so the assertion is
+  // made on an attack CONSTRUCTED to succeed. Asserted against the default seed it passed for the wrong
+  // reason: the attacker had simply missed, and "degree unchanged" looked like "degree degraded".
+  const landed = round(EV, sb, -9);
+  check("CCODE-80: an evading craft degrades the ATTACKER's degree one step (Aevi's ladder)",
+    landed.opponent.evaded?.degreeFrom === "success" && landed.opponent.degree === "partial",
+    `${landed.opponent.evaded?.degreeFrom} -> ${landed.opponent.degree}`);
+  check("CCODE-80: and it takes the attacker's MARGIN down too - the currency damage is actually computed in",
+    evaded.opponent.margin < evaded.opponent.evaded.marginFrom);
+  check("CCODE-80: a craft with NO evasion authored degrades nothing (soak-only guards are untouched)",
+    !plain.opponent.evaded && !plain.evasion);
+  check("CCODE-80: the round SAYS it was evaded - an attack that quietly does less is just a bad roll",
+    Array.isArray(evaded.evasion) && evaded.evasion.some(e => e.applied && e.evader === "player"));
+
+  // The mechanic must actually reduce what gets through, or it is a label rather than a defence.
+  const tally = mech => {
+    const rng = eSeed(); let hits = 0, dmg = 0;
+    for (let k = 0; k < 3000; k++) {
+      const out = battleRound({
+        playerSheet: { attributes: { practical: 6 }, energy: 100, level: 6 }, oppSheet: eOpp,
+        playerDecl: { function: "shield", tier: 2, attribute: "practical", intensity: "standard", mechanic: { shield: mech } },
+        oppDecl: { function: "strike", tier: 3, attribute: "practical", intensity: "standard" },
+        state: { momentum: 0, effects: [], opponentHealth: 999 }, rules: eRules, sb, steps, rng });
+      if (out.damage?.side === "player") { hits++; dmg += out.damage.amount; }
+    }
+    return { hits, dmg };
+  };
+  const withEv = tally(EV), without = tally({ soak: 2, soakRank: 1, duration: 3 });
+  console.log(`      CCODE-80 measured over 3000 rounds \u2014 soak-only: ${without.hits} hits / ${without.dmg} damage \u00b7 EVASION: ${withEv.hits} hits / ${withEv.dmg} damage`);
+  check("CCODE-80: evasion means FEWER BLOWS LAND, not merely smaller ones (that is what soak already did)",
+    withEv.hits < without.hits, `${without.hits} \u2192 ${withEv.hits}`);
+
+  // Aevi's rank-2 note, verbatim: "degrades even a well-set-up attack." At rank 1 a read beats the dodge.
+  const readAt = r => battleRound({
+    playerSheet: { attributes: { practical: 6 }, energy: 100, level: 6 }, oppSheet: eOpp,
+    playerDecl: { function: "shield", tier: 2, attribute: "practical", intensity: "standard", mechanic: { shield: { ...EV, evasionRank: r } } },
+    oppDecl: { function: "strike", tier: 3, attribute: "practical", intensity: "standard" },
+    state: { momentum: 0, effects: [], opponentHealth: 99 }, rules: eRules, sb, steps, rng: eSeed(), setupBonus: -9 });
+  check("CCODE-80: a rank-1 dodge does NOT beat an attacker who read you first (they aim where you will be)",
+    readAt(1).evasion?.every(e => !e.applied));
+  check("CCODE-80: a rank-2 dodge does - Aevi's r2 verbatim, 'degrades even a well-set-up attack'",
+    readAt(2).evasion?.some(e => e.applied));
+
+  // Content, not code.
+  const sbNoEv = JSON.parse(JSON.stringify(sb)); sbNoEv.evasion.enabled = false;
+  check("CCODE-80: evasion.enabled false turns the whole mechanic off (it is a content dial)",
+    !round(EV, sbNoEv).evasion);
+}
+
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

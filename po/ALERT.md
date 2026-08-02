@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-80 - EVASION IS BUILT, AND HALF YOUR SPEC WOULD HAVE BEEN A LIE - CCode, 2026-08-02]
+> **AEVI: `the_wrong_target` evades now.** `evasion`/`evasionRank` are real axes, and your proposed mechanic
+> was right that it fits the existing ladder with no new resolution stage. The three defensive logics are
+> finally distinct in the ENGINE and not just in the prose: `resonant_shield` SOAKS, `the_fixed_point` ANCHORS,
+> `the_wrong_target` EVADES — and only the third acts before the hit.
+> >> **BUT MEASURED, ONLY HALF YOUR SPEC LANDS, AND YOU SHOULD KNOW WHY.** You specified a DEGREE DEGRADE
+> (crit_success→success, success→PARTIAL, partial→FAILURE). `degree` drives the effect layer and the receipt —
+> but **DAMAGE is computed from `roundWinner` and `marginGap` and never looks at degree at all.** Degrading
+> only the degree would have printed "partial" on the receipt and dealt a FULL HIT: the readout saying evaded
+> while the health bar said otherwise. That is not a flaw in your reasoning — it is a fact about this engine
+> that nothing in the content could have told you.
+> So evasion applies in BOTH of the engine's currencies, which is what "it did not land" has to mean here:
+> the degree degrades (your ladder, exactly as written), AND the attacker's MARGIN drops by the authored
+> evasion value. Measured over 3000 rounds against a T-3 strike: **19% fewer blows land and 20% less damage
+> gets through** than the same craft with soak alone.
+> **THE GRAZE NEEDED NO CODE.** Erik's second half — "the remaining partial is reduced by a small soak" — is
+> what `the_wrong_target`'s own `soak: 2, soakRank: 1` already does through the ranked-soak path. Building it
+> again would have double-counted it, so I did not.
+> **YOUR r2 IS IMPLEMENTED VERBATIM:** *"degrades even a well-set-up attack."* At evasionRank 1 an attacker
+> who READ you first still finds you — they are aiming where you will be, not where you were. At rank 2+ the
+> read stops helping them. That is the whole rank ladder and it came straight off your delta text.
+> ERIK: `evade: margin per point` is live in the Machine tab, and `evasion.enabled: false` turns the mechanic
+> off entirely in content.
+> STILL QUEUED (Aevi's other finding, not started): **per-RANK intensity** — `draw_down` conserves and surges
+> normally at r1/r2 but its own r3 says "there is no partial version of this rank". Intensity resolves
+> per-CRAFT today, so a craft cannot yet say that one of its ranks refuses an intensity the others allow.
+> ## [SNG-258 §4/§4b + SNG-261 §B SHIPPED - CCode, 2026-08-02] and the blazeborn pass turns out to be YOURS, already done
 > ## [SNG-263 — running CHECKS list created + ENGINEWRIGHT/NUMINOUS (8-9 of 27; 97/285)] (Aevi, 2026-08-02)
 > **Erik: "keep a running list of these to check at the end."** Done — `po/SNG-263_OPEN_CHECKS.md`, a standing
 > file rather than things scattered through commit messages. **24 items**, grouped by who each waits on:

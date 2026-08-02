@@ -213,6 +213,64 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
   };
 }
 
+/** CCODE-80 — EVASION: THE ATTACK DOES NOT LAND (Erik's correction; Aevi's re-authored `the_wrong_target`).
+ *
+ *  Erik: evasion is NOT soak. Soak reduces damage after a hit lands; evasion means the attack doesn't land,
+ *  and the craft's own prose says so — "not blocking, not armoring, just not being where they land." Authoring
+ *  it as soak flattened a real distinction: `resonant_shield` SOAKS, `the_fixed_point` ANCHORS, and this one
+ *  EVADES, and only the third acts before the hit.
+ *
+ *  Aevi's proposed mechanic is a DEGREE DEGRADE — crit_success→success, success→partial, partial→failure — and
+ *  she is right that it fits the existing ladder with no new resolution stage. But measured, HALF of it lands:
+ *  `degree` drives the effect layer and the receipt, while DAMAGE is computed from `roundWinner` and
+ *  `marginGap` and never looks at degree at all. Degrading only the degree would print "partial" and deal a
+ *  full hit — the readout would say evaded while the health bar said otherwise.
+ *
+ *  So evasion is applied in BOTH of the engine's currencies, which is what "it did not land" has to mean here:
+ *   · the attacker's DEGREE degrades one step (Aevi's spec — the effects they would have left, they do not);
+ *   · the attacker's MARGIN drops by the authored `evasion` (the damage currency — a smaller gap is a smaller
+ *     hit, and it can flip a won exchange into a lost one, which IS a miss).
+ *
+ *  THE GRAZE needs no code: Erik's second half — "the remaining partial is reduced by a small soak" — is what
+ *  `the_wrong_target`'s own `soak: 2, soakRank: 1` already does through the ranked-soak path. Building it again
+ *  here would double-count it.
+ *
+ *  `evasionRank` follows Aevi's rank-2 note verbatim ("degrades even a well-set-up attack"): at rank 1 an
+ *  attacker who READ you first still finds you, because they know where you will be; at rank 2+ the read does
+ *  not help them. Pure; every number is a content dial. */
+const DEGREE_DOWN = { crit_success: "success", success: "partial", partial: "failure", failure: "failure", crit_failure: "crit_failure" };
+export function evasionOf(decl, cm) {
+  if (!decl || !cm?.families) return null;
+  const m = mechanicFor(decl, { verb: decl.function, tier: decl.tier, rank: decl.rank || 1,
+    intensity: decl.intensity || "standard", cfg: cm });
+  const ev = Number(m?.fields?.evasion) || 0;
+  return ev > 0 ? { evasion: ev, rank: Math.max(1, Number(m.fields.evasionRank) || 1) } : null;
+}
+export function applyEvasion(p, o, playerDecl, oppDecl, sb, cm, setupBonus = 0) {
+  const cfg = sb?.evasion || {};
+  if (cfg.enabled === false) return null;
+  const out = [];
+  for (const [evader, evadeDecl, attacker, attackRoll] of [["player", playerDecl, "opponent", o], ["opponent", oppDecl, "player", p]]) {
+    const ev = evasionOf(evadeDecl, cm);
+    if (!ev) continue;
+    // A read beats a low-rank dodge: they are aiming where you WILL be, not where you were. Read from the
+    // SETUP BONUS ITSELF, whose sign says who the read favoured (battleRound hands the opponent `-setupBonus`).
+    // The first draft sniffed the roll's `components` for a setup line — and `components` comes back EMPTY on
+    // these rolls, so the whole rule was inert while reading as though it worked. The value was right there.
+    const wasRead = attacker === "player" ? setupBonus > 0 : setupBonus < 0;
+    if (wasRead && ev.rank < (cfg.rankToBeatARead ?? 2)) {
+      out.push({ evader, attacker, applied: false, why: "they read you first — a rank-1 dodge does not beat a set-up attack" });
+      continue;
+    }
+    const before = attackRoll.degree, marginBefore = attackRoll.margin;
+    attackRoll.degree = DEGREE_DOWN[before] || before;                       // Aevi's ladder step
+    attackRoll.margin = marginBefore - ev.evasion * (cfg.marginPerPoint ?? 1); // the damage currency
+    attackRoll.evaded = { by: evader, evasion: ev.evasion, rank: ev.rank, degreeFrom: before, marginFrom: marginBefore };
+    out.push({ evader, attacker, applied: true, evasion: ev.evasion, rank: ev.rank, from: before, to: attackRoll.degree });
+  }
+  return out.length ? out : null;
+}
+
 /** Tick every effect down one round and drop the expired. Pure. */
 function tickEffects(effects) {
   return (effects || []).map(fx => ({ ...fx, roundsLeft: fx.roundsLeft - 1 })).filter(fx => fx.roundsLeft > 0);
@@ -498,6 +556,11 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   const standing = state.effects || [];
   const p = rollSide(playerSheet, playerDecl, oppDecl, sb, steps, rules, rng, effectMods(standing, "player", playerDecl, oppDecl, sb), momentumModifier(state.momentum || 0, "player", sb), setupBonus);
   const o = rollSide(oppSheet, oppDecl, playerDecl, sb, steps, rules, rng, effectMods(standing, "opponent", oppDecl, playerDecl, sb), momentumModifier(state.momentum || 0, "opponent", sb), -setupBonus);
+  // CCODE-80 — EVASION IS NOT SOAK (Erik's correction, Aevi's re-authoring of `the_wrong_target`).
+  // "Not blocking, not armoring, just not being where they land." Soak reduces damage AFTER a hit lands;
+  // evasion means it does not land. Applied HERE, between the rolls and everything downstream, because both
+  // the effect layer and the damage layer read what this changes.
+  const evasion = applyEvasion(p, o, playerDecl, oppDecl, sb, rules?.craftMechanics, setupBonus);
   // CCODE-45: effects tick ONCE PER TURN, not per step — Erik: "the sustaining effects would not tick down a count
   // until the full round's actions are complete." The orchestrator passes tickEffects:false on every step but the last.
   let effects = doTick ? tickEffects(standing) : standing.slice();
@@ -683,7 +746,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // CCODE-45: a sense step doesn't advance the ROUND counter either — the whole turn is one round.
   const newState = { ...state, round: (state.round || 0) + (senseStep ? 0 : 1), momentum, playerEnergy, opponentEnergy, effects, pressure, spent, resolved, opponentHealth, status: resolved ? "resolved" : "active" };
   const out = { state: newState, player: p, opponent: o, roundWinner, delta, resolved, effects, pressure, pressureEvent, spent, damage, opponentHealth, landed: [landedP, landedW, landedO].filter(Boolean),
-    degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback } };
+    degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
+    // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
+    // from a bad roll, and the whole point of the three defensive logics is that they read differently.
+    ...(evasion ? { evasion } : {}) };
   // What the SENSE step bought: a named bonus on the coming action (signed toward whoever read better), and —
   // on a crit read — the bonus step. "It's the payoff." Both are content dials.
   if (phase === "sense") {

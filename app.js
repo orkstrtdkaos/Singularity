@@ -608,6 +608,7 @@ const DEV_DIALS = [
   { path: "craftMechanics.variance.perPoint", label: "wild: variance per point", step: 0.01, why: "CCODE-77 — how much ONE authored point of variance widens a craft's band; the mean never moves. 0 makes churnfolk resolve exactly like lattice" },
   { path: "skillBattle.engine.persistentEffects.craftDuration.roundsPerPoint", label: "effects: rounds per duration point", step: 0.05, why: "CCODE-77 — how a craft's own duration becomes ROUNDS STANDING. Before this every verb stood a flat 2 regardless of tier; lower this if low-tier wards now feel too brief" },
   { path: "skillBattle.engine.persistentEffects.craftDuration.craftDurationMax", label: "effects: max rounds standing", step: 1, why: "the clamp — the craft duration ladder runs to 17 and a fight is not 17 rounds long" },
+  { path: "skillBattle.engine.evasion.marginPerPoint", label: "evade: margin per point", step: 1, why: "CCODE-80 — how much ONE authored point of evasion takes off the attacker's margin. Evasion is not soak: it means the blow does not land, so it acts on the roll, not the damage" },
 ];
 function readDials() { try { return JSON.parse(localStorage.getItem(DIALS_KEY) || "{}") || {}; } catch { return {}; } }
 function writeDials(m) { try { localStorage.setItem(DIALS_KEY, JSON.stringify(m)); } catch { /* ignore */ } }

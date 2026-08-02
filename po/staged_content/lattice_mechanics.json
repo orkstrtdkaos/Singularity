@@ -1,0 +1,472 @@
+{
+ "schemaVersion": 1,
+ "id": "lattice_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; bounds carry SNG-264 §3 classes.",
+ "note": "SNG-263 catalog pass, tradition 4 of 27. NOTE A DIFFERENT AUTHORING SHAPE: lattice's prose is ABSTRACT where harmonic's and radiant's were physical. It speaks in systems, structures, plans, and social order rather than paces and hit points. Its magnitudes are therefore SCOPE (a thing → a structure → a system), DURATION (briefly → stays → for as long as you attend), and RELIABILITY, not damage or range. This is a good stress-test of the schema: four traditions in, and the shape has held for physical, sensory, social, and now systemic crafts without a new field being needed.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "crafts": [
+  {
+   "id": "order_sense",
+   "tier": 1,
+   "functions": [
+    "reveal"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "scope": 1,
+    "note": "r1: see a system's structure, rules, and load-bearing points AT A GLANCE"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the structure UNDER A MESS — the schedule behind a crowd, the rule behind a ritual",
+     "from": "r2 grants — from visible order to hidden order"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: see the ENTIRE DESIGN a thing is part of — INCLUDING THE PARTS THAT ARE NOT PRESENT. Inferring absent structure is a different act from reading present structure.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — half the depth, and it costs nothing",
+    "surge": "double the read: the whole design, and you will see patterns that are not there if you push it"
+   },
+   "bounds": [
+    {
+     "text": "reads STRUCTURE, not INTENT",
+     "class": "hard"
+    },
+    {
+     "text": "pure chaos returns noise",
+     "class": "hard"
+    },
+    {
+     "text": "SOME MESSES HAVE NO PATTERN — reading one into them is how the Lattice makes its mistakes",
+     "class": "hard"
+    },
+    {
+     "text": "seeing the design does not give you STANDING to change it",
+     "class": "hard"
+    }
+   ],
+   "designNote": "All four bounds HARD — and they are the tradition's epistemic conscience. 'Some messes have no pattern; reading one into them is how the Lattice makes its mistakes' must NEVER be masterable: a master lattice who could always find a pattern would be a master who is always right, which the fiction explicitly refuses."
+  },
+  {
+   "id": "the_established_route",
+   "tier": 1,
+   "functions": [
+    "move",
+    "open",
+    "reveal",
+    "travel"
+   ],
+   "shape": "reposition",
+   "operativeAxis": [
+    "scope",
+    "access"
+   ],
+   "mechanic": {
+    "range": 1,
+    "push": 0,
+    "magnitude": 3,
+    "duration": 2,
+    "scope": 1,
+    "note": "r1: find the LAWFUL, structured way through a guarded or ordered space"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "navigate ANY sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — USING ITS OWN RULES",
+     "from": "r2 grants — a place → any structured system"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: move through a system AS IF YOU DESIGNED IT — the parts only insiders know, at the speed the structure permits at its best, without a door barred",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "find the correct corridor — half the reach, entirely unremarkable",
+    "surge": "double the access: you move as an insider, and insiders are remembered"
+   },
+   "bounds": [
+    {
+     "text": "requires a system that HAS rules — the lawless offer no route",
+     "class": "hard"
+    },
+    {
+     "text": "the route is LAWFUL, which means it is also LOGGED",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "id": "latticework",
+   "tier": 2,
+   "functions": [
+    "bind",
+    "break",
+    "command",
+    "foresee",
+    "make"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "reliability",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 4,
+    "scope": 2,
+    "note": "T-II construct. r1: build a plan that HOLDS UNDER PRESSURE; predict a system's next move"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "reliability",
+     "delta": "BIND A POSSIBILITY DOWN — make a thing reliably true, a route reliably safe, an agreement reliably kept; read a system deeply enough to break OR repair it",
+     "from": "r2 grants — reliability becomes the operative axis"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "impose structure AT SCALE — a lawless place made orderly, a chaotic force predicted and countered, A POSSIBILITY FORECLOSED BY SHEER STRUCTURE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a working plan — half the binding, and nothing calcifies",
+    "surge": "double the structure; over-bound systems CANNOT ADAPT and shatter when they finally break"
+   },
+   "bounds": [
+    {
+     "text": "prediction fails on the TRULY CHAOTIC",
+     "class": "hard"
+    },
+    {
+     "text": "a plan is not a guarantee, only good odds",
+     "class": "hard"
+    },
+    {
+     "text": "binding is BRITTLE AGAINST WILDCRAFT",
+     "class": "hard"
+    },
+    {
+     "text": "over-bound systems can't adapt and shatter",
+     "class": "cost"
+    },
+    {
+     "text": "the wielder DRIFTS ORDER-HOT — and order at full strength IS the foreclosure the framework warns about",
+     "class": "cost"
+    }
+   ],
+   "designNote": "'Order at full strength IS the foreclosure' — the craft names the framework's own definition of evil (premature foreclosure) as its own failure mode. A COST bound, not hard: mastery changes its form (a master forecloses deliberately rather than accidentally), but the drift never disappears."
+  },
+  {
+   "id": "truename_order",
+   "tier": 2,
+   "functions": [
+    "bind",
+    "command",
+    "restore"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 2,
+    "scope": 1,
+    "note": "r1: calm a panicking group, organize a chaotic space, steady a failing structure BRIEFLY"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "set a thing into its proper order AND IT STAYS — a room, a ledger, a broken argument (from 'briefly' to persistent)",
+     "from": "r2 grants — duration is the whole increment"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NAME a thing's true order AND IT TAKES IT — the crooked wall stands straight, the failing plan coheres. Declaring order into being is a different act from imposing it.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "tidy it — half the hold, and nobody resents it",
+    "surge": "double the ordering; what you right, someone may resent being righted"
+   },
+   "bounds": [
+    {
+     "text": "small scale at r1; SLIPS WITHOUT MAINTENANCE",
+     "class": "soft"
+    },
+    {
+     "text": "ORDER IMPOSED IS NOT ORDER ACCEPTED — what you right, someone may resent",
+     "class": "hard"
+    },
+    {
+     "text": "THE LATTICE'S GREAT SIN IS BELIEVING IT ALWAYS KNOWS WHAT A THING SHOULD BE",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "set_to_rights",
+   "tier": 2,
+   "functions": [
+    "heal",
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "shape": "healing",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "T-II healing. r1: diagnose EXACTLY what's wrong and apply the precise intervention — NO GUESSING, NO WASTE. The +2 is the precision: lattice healing wastes nothing."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "restore not just function but THE UNDERLYING CONDITIONS for continued function — the body that heals cleanly, the mechanism that runs without further attention",
+     "from": "r2 grants — durable restoration, not just repair"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "return a thing FULLY to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "the precise minimum — half the restoration, a fraction of the time",
+    "surge": "double the work: exhaustive and methodical, and it takes exactly as long as it takes"
+   },
+   "bounds": [
+    {
+     "text": "requires knowing what the INTENDED STATE was",
+     "class": "hard"
+    },
+    {
+     "text": "methodical means SLOW — this is not field medicine",
+     "class": "soft"
+    },
+    {
+     "text": "it restores to INTENDED, which may not be what the thing WANTS to be",
+     "class": "hard"
+    }
+   ],
+   "designNote": "Contrast worth noting: radiant's dawn_surgery heals by BURNING CLEAN (fast, painful, cauterising); lattice's set_to_rights heals by RESTORING THE DESIGN (slow, exhaustive, wasteless). Same shape, opposite character — the schema carries the distinction without a new field."
+  },
+  {
+   "id": "the_maintained_order",
+   "tier": 2,
+   "functions": [
+    "bind",
+    "sustain"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 8,
+    "scope": 2,
+    "note": "SUSTAIN→bolster. r1: keep an ordered structure functioning UNDER PRESSURE that would normally cause it to fail"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "maintain order in a DECAYING situation ACROSS DAYS — a failing supply line, a fragmenting group, a plan under constant attack — through continuous attention",
+     "from": "r2 grants — hours to days"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a structure you maintain SIMPLY DOES NOT COLLAPSE while you attend to it — the siege holds, the treaty stands, the organization functions",
+     "from": "r3 grants — categorical non-collapse is a kind, not a duration"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold the essentials — half the scope, and you can do other things",
+    "surge": "double what you can hold, and it takes CONTINUOUS attention — you are doing nothing else"
+   },
+   "bounds": [
+    {
+     "text": "requires CONTINUOUS ATTENTION — it holds while you attend and not after",
+     "class": "hard"
+    },
+    {
+     "text": "what you maintain does not IMPROVE, only persists",
+     "class": "hard"
+    },
+    {
+     "text": "attending costs you everything else you might have done",
+     "class": "cost"
+    }
+   ]
+  },
+  {
+   "id": "the_fixed_point",
+   "tier": 3,
+   "functions": [
+    "bind",
+    "resist",
+    "shield"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "anchorStrength",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "soak": 4,
+    "soakRank": 2,
+    "targets": 1,
+    "duration": 4,
+    "note": "T-III guard. r1: be the still, reliable point in a chaotic scene; LET OTHERS RALLY TO YOU"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "anchorStrength",
+     "delta": "be THE THING THAT DOES NOT MOVE — a person, a promise, a position — while everything around you does",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: you become THE FIXED POINT OTHERS NAVIGATE BY — chaos itself ORGANIZES AROUND your refusal to shift",
+     "from": "r3 grants — the world reorganising around you is a kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold your ground — half the anchor, and you can still move afterward",
+    "surge": "double the fixity; a fixed point CANNOT ALSO BE A TRAVELER"
+   },
+   "bounds": [
+    {
+     "text": "you must HOLD STILL",
+     "class": "hard"
+    },
+    {
+     "text": "strong chaos still batters",
+     "class": "soft"
+    },
+    {
+     "text": "BEING UNMOVED IS NOT BEING UNHARMED — the Churn breaks around you, and around is not through",
+     "class": "hard"
+    },
+    {
+     "text": "A FIXED POINT CANNOT ALSO BE A TRAVELER — what you anchor, you are anchored TO",
+     "class": "hard"
+    }
+   ],
+   "designNote": "Direct antipode-pair with churnfolk (the chaos pole): 'the Churn breaks around you.' A fifth cross-tradition reference, and this one names the ANTIPODE — the ring geometry is authored into the craft text."
+  },
+  {
+   "id": "riding_order",
+   "tier": 4,
+   "functions": [
+    "bind",
+    "break",
+    "command"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "window",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 1,
+    "scope": 3,
+    "note": "T-IV. r1: break a thing and REFORGE ITS PIECES INTO WHAT YOU NEED IN THE SAME MOTION — a heartbeat's window"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the window widens from a HEARTBEAT to a BREATH, and the scale from a THING to a STRUCTURE — ride the collapse of a wall, a wagon, a bridge, a formation. Riding a collapse rather than causing one is the T-IV kind-change.",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small reforging — half the scale, and a miss only costs you the piece",
+    "surge": "double the scale; THE LARGER THE COLLAPSE THE CRUDER THE FORM you can catch out of it"
+   },
+   "bounds": [
+    {
+     "text": "A HEARTBEAT'S WINDOW — miss it and YOU HAVE ONLY MADE CHAOS",
+     "class": "soft"
+    },
+    {
+     "text": "a widened window is STILL a window",
+     "class": "hard"
+    },
+    {
+     "text": "the larger the collapse, THE CRUDER THE FORM",
+     "class": "hard"
+    }
+   ],
+   "designNote": "T-IV special confirming the register a fourth time: the craft gains a KIND (riding a collapse in progress) rather than a bigger number — and its failure mode is authored ('miss it and you've only made chaos'), which is a good candidate for the second-roll CRIT-FAILURE dial from SNG-258 §3b."
+  }
+ ],
+ "passFindings": [
+  "A DIFFERENT AUTHORING SHAPE, and the schema held. Lattice's prose is ABSTRACT — systems, plans, social order — where radiant's and harmonic's were physical. Its magnitudes are SCOPE (a thing → a structure → a system), DURATION (briefly → stays → while you attend) and RELIABILITY, not damage or range. Four traditions in, covering physical, sensory, social and now SYSTEMIC crafts, and no new field has been needed. That is real evidence the locked schema generalises.",
+  "order_sense's four bounds are ALL HARD and they are the tradition's EPISTEMIC CONSCIENCE — especially 'some messes have no pattern; reading one into them is how the Lattice makes its mistakes.' That must never be masterable: a master who could always find a pattern would be a master who is always right, which the fiction explicitly refuses. Second tradition where bound-classing surfaced a values statement (after harmonic_voice's anti-mind-control).",
+  "latticework's 'the wielder drifts order-hot — order at full strength IS the foreclosure' names the FRAMEWORK'S OWN definition of evil (premature foreclosure) as the craft's failure mode. Classed COST, not hard: mastery changes its form (a master forecloses deliberately rather than blindly) but the drift never disappears. This is also a natural hook for SNG-258 §4c alignment DRIFT — the craft says outright that using it moves you.",
+  "the_fixed_point r3's 'the Churn breaks around you' names churnfolk, its ANTIPODE on the ring. A fifth cross-tradition reference, and the first to invoke the ring GEOMETRY rather than another craft. The great-circle structure is authored into the craft prose, not just the traditions file.",
+  "A useful contrast the schema carries without a new field: radiant's dawn_surgery heals by BURNING CLEAN (fast, painful); lattice's set_to_rights heals by RESTORING THE DESIGN (slow, exhaustive, wasteless). Same `healing` shape, opposite character, expressed entirely through magnitudes, rank deltas and bounds.",
+  "riding_order's authored failure mode — 'a heartbeat's window; miss it and you've only made chaos' — is a ready-made candidate for the SNG-258 §3b second-roll CRIT-FAILURE dial. The catalog is already writing what a critical failure LOOKS like, craft by craft."
+ ]
+}

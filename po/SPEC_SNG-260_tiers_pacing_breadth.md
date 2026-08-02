@@ -76,3 +76,64 @@ L100); §C is new. And the SNG-259 endgame sim should use §A's powerBand so adv
 + the sim all speak ONE scale. Order: (1) CCode builds the breadth-vs-depth sweep (cheap, unblocks §C) + the
 powerBand layer; (2) Erik sets band cuts + breadth targets on the data; (3) Aevi authors the curves; (4) the
 SNG-259 endgame sim runs on the unified bands. One coherent pass, not four scattered ones.
+
+
+---
+
+# SNG-260 round 2 — Erik's decisions + §D skill points as a real CURRENCY
+
+## §B DECIDED (Erik): keep the bands as drafted; **Silas is a MASTER who FEELS heroic**
+The Silas-L29 tension resolves cleanly: **power tier ≠ story role.** Silas at L29 sits in MASTER (L26-45); "he
+has begun establishing himself as a hero" is his STANDING IN THE FICTION, not his mechanical band. That's a
+genuinely useful separation to keep explicit in the design: a character's power tier is what they can DO; their
+heroic standing is what the world says about them. They rise together but are not the same axis. Bands stand as
+drafted (novice/riffraff L1-10 · adept/notable L11-25 · master/regional L26-45 · heroic/epic L46-70 ·
+legendary L71-100), reconciled under §A's single powerBand.
+
+## §D — SKILL POINTS AS A CURRENCY (Erik's new mechanic)
+### The current model (verified — tier is UNPRICED)
+`engine/skilltree.js:168 skillPointCost()` returns **1 in-class, 2 cross-class. That's the whole model.** A
+Tier-III craft costs exactly what a Tier-I costs. The DISTANCE axis does exist (`domainVerdict.penalty` becomes
+the cost when domains are set; braids discount it) — but **tier is free**, so there's no reason to buy shallow
+and every reason to grab the most powerful thing you can reach. That's a second driver of Silas's 36 crafts.
+
+### The goal (Erik)
+**GOAL: skill points are a real CURRENCY, and what you buy is a genuine tradeoff.** Earned ~1/level, spent
+against a cost that reflects BOTH what a craft is worth and how far it is from you:
+- **Tier price:** a Tier-II costs 2, a Tier-III costs 3 (Tier-I stays 1). Power costs more.
+- **Distance price:** the existing domain ring-distance penalty keeps applying (near crafts cheap, far crafts
+  dear; braids discount).
+- These COMPOSE — so a far Tier-III is genuinely expensive, and a near Tier-I is cheap.
+CONSEQUENCE Erik named and accepts: **depending on choices, a player could end up with far fewer crafts than
+someone who bought only the cheapest.** Erik: *"I don't think this is a problem, just something to test."* I
+agree it's not a problem — it's the POINT: a deep specialist and a broad generalist are different characters,
+and the currency is what makes that a real decision instead of a formality. It pairs exactly with §C (the breadth
+CAP limits how many you may hold; the CURRENCY limits what you can afford) — cap = ceiling, currency = the shape
+of the kit under it.
+
+### What must be TESTED (the reason Erik flagged it)
+Extend the §C breadth-vs-depth sweep to sweep the CURRENCY too, and report:
+1. **The spread:** at each tier band, how many crafts does a cheapest-first buyer end with vs a
+   most-powerful-first buyer? (The gap Erik wants to see. If it's 18 vs 6, is 6 still a playable character?)
+2. **Is the expensive build still VIABLE?** A player who buys three far Tier-IIIs must not be strictly worse
+   than one who bought nine near Tier-Is — depth should BUY something (this is where §1's multiplier-10 and
+   §2's skill-use matter: a few deep crafts should out-perform many shallow ones in their lane).
+3. **Does the floor hold?** Nobody should be able to spend into a character who can't function — check the
+   worst-case expensive build still clears the basic bands.
+4. **Interaction with the breadth cap:** if the currency already limits you below the cap, the cap is doing
+   nothing at that tier (and vice versa). Report where each binds — we want BOTH to matter somewhere, and
+   neither to be dead weight everywhere.
+5. **Braids/discoveries/grants stay free of both** (already true) — so earned breadth is unaffected.
+
+### What's whose
+- **CCode:** price tier into `skillPointCost` (Tier-II 2 / Tier-III 3, composing with the existing distance
+  penalty — CCode owns whether that's additive/multiplicative and where the floor sits); extend the sweep to
+  report items 1-5. The math is small; the REPORT is the deliverable.
+- **Erik:** the exact tier prices (2/3 proposed) and, once the sweep lands, whether the cheapest-vs-dearest
+  spread feels right or wants softening.
+- **Aevi:** fold the results into the §C breadth-cap curve — cap and currency must be tuned TOGETHER (they're
+  two hands on the same dial: how many crafts a character ends up with, and which ones).
+
+## Sequencing note
+§D lands with §C, not after — the breadth-vs-depth sweep should measure BOTH the cap and the currency in one
+pass, because tuning either alone gives a false read of the other.

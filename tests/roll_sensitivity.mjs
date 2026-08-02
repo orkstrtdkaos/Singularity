@@ -3,9 +3,14 @@
 // Aevi: "sweep each constant across a range, report where the field's win-rate and spread land, so §1-3 are
 // tuned on DATA not vibes. This runs BEFORE any constant changes ship."
 //
-// Erik's finding, restated as the thing this file measures: attribute at x20 to a soft cap of 4 contributes
-// 80 points on its own, so once a character reaches attr 4 the tier/skill/gear terms pile against the 95
-// ceiling and are CLAMPED AWAY. They do not feel weak — they mathematically ARE nothing.
+// Erik's finding, restated as the thing this file measures: when the attribute term is heavy enough, the
+// tier/skill/gear terms pile against the 95 ceiling and stop changing the outcome.
+//
+// ERIK'S REFRAME (SNG-258), and why this file no longer says "waste": clamped points are RESERVE, not waste.
+// A point above 95 is capacity THIS encounter did not need — it would have answered an enemy ward, a matchup
+// deficit, an opposing roll, and the master wants it in the death-dragon's lair. Overwhelming capacity SHOULD
+// trivialise the trivial. So the metric here is the LIVE BAND — how much of the grid sits in the range where
+// the other terms still move the outcome — never "points reclaimed".
 //
 // THE INSTRUMENT. This sweeps the REAL `successChance` from engine/resolve.js by handing it a MUTATED COPY of
 // the rules JSON. It does not reimplement the math. That matters more here than anywhere else in the test
@@ -24,7 +29,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { successChance, resolveAction } from "../engine/resolve.js";
+import { successChance, resolveAction, critProfile } from "../engine/resolve.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -82,7 +87,8 @@ function cell(rules, who, difficulty, { rankPlus = 0, skillPlus = 0 } = {}) {
   // question is "of everything working in this character's favour, how much is attribute?"
   const budget = b.components.filter(c => c.value > 0).reduce((a, c) => a + c.value, 0);
   return { total, raw, attrPts, budget,
-    // points thrown away at BOTH ends: above the ceiling nothing more helps, below the floor nothing helps.
+    // pinned at BOTH ends: above the ceiling the surplus is RESERVE for a harder day; below the floor
+    // nothing carried can reach. Neither is waste — but in neither does another term move THIS outcome.
     wastedHigh: Math.max(0, raw - RULES.d100.ceilingChance),
     wastedLow: Math.max(0, RULES.d100.floorChance - raw),
     live: raw > RULES.d100.floorChance && raw < RULES.d100.ceilingChance,
@@ -121,15 +127,15 @@ console.log(`      shipped constants: attributeMultiplier ${RULES.baseChance.att
   + ` · abilityLevelBonus ${RULES.baseChance.abilityLevelBonus} · ceiling ${RULES.d100.ceilingChance}\n`);
 
 // ── THE STATUS QUO, cell by cell ────────────────────────────────────────────────────────────────────────
-console.log("      WHERE THE FIELD SITS TODAY (chance / pre-clamp raw — a raw above 95 is points thrown away)");
+console.log("      WHERE THE FIELD SITS TODAY (chance / pre-clamp raw — raw above 95 is RESERVE, not waste)");
 console.log("      " + "PROFILE".padEnd(12) + DIFFICULTIES.map(d => d.name.padStart(13)).join(""));
 for (const who of CAST) {
   const row = DIFFICULTIES.map(dd => { const c = cell(RULES, who, dd.d);
     return `${pad(c.total, 3)}/${pad(c.raw, 4)}${c.wastedHigh ? "^" : c.wastedLow ? "v" : " "}`.padStart(13); }).join("");
   console.log("      " + who.name.padEnd(12) + row);
 }
-console.log("      (^ = pinned at the ceiling, v = pinned at the floor. In BOTH, tier/skill/gear buy the player NOTHING.)");
-console.log("      Note the master: solved at everything up to notable, and only genuinely playing at regional and epic.\n");
+console.log("      (^ = pinned at the ceiling — surplus held in reserve. v = pinned at the floor — nothing carried reaches.)");
+console.log("      In both, another term stops moving THIS outcome: at the ceiling capacity is spare, at the floor it is short.\n");
 
 // ── §1 THE ATTRIBUTE CURVE ──────────────────────────────────────────────────────────────────────────────
 const MULTS = [8, 10, 12, 14, 16, 18, 20];
@@ -150,8 +156,8 @@ for (const s of byMult) {
   console.log(`      Attribute is ${now.attrShare}% of everything working in a character's favour.`);
   console.log(`      Best in this sweep: multiplier ${best.m} — a rank delivers ${best.marginalRank}, ${best.pctLive}% of the grid live,`);
   console.log(`      attribute down to ${best.attrShare}% of the budget, and the master-novice gap still ${best.ladderSpread} points.`);
-  console.log(`      NOTE the floor is a ceiling too: points are thrown away at BOTH ends, which is why no multiplier`);
-  console.log(`      in this sweep delivers a rank's full ${RULES.baseChance.abilityLevelBonus} points. A hard cell is as dead as a solved one.`);
+  console.log(`      NOTE the floor pins as hard as the ceiling: at BOTH ends another term stops moving the`);
+  console.log(`      outcome, which is why no multiplier in this sweep delivers a rank's full ${RULES.baseChance.abilityLevelBonus} points.`);
 }
 
 // ── §3 THE TIER TERM ────────────────────────────────────────────────────────────────────────────────────
@@ -173,33 +179,67 @@ for (const b of [4, 6, 8, 10, 12]) {
   console.log(`      ${pad(b, 5)}   ${pad(b * 3, 14)}   ${pad(r1(s.marginalSkill * 3), 18)}   ${pad(s.pctAtCeiling, 11)}`);
 }
 
-// ── §3b / §9 THE PARTIAL BAND ───────────────────────────────────────────────────────────────────────────
-// Aevi's §3b goal: mastery should FAIL SOFTER. Before that can be designed, we need to know what the band is
-// worth today — how much of the outcome space a point of band actually moves.
-console.log("\n      §3b/§9 PARTIAL BAND SWEEP — how much outcome space does the band buy? (10k seeded rolls per cell)");
-console.log("      band   " + CAST.map(c => c.name.padStart(11)).join("") + "     (share of rolls landing PARTIAL, at the notable band)");
-for (const band of [10, 15, 20, 25, 30]) {
-  const rules = { ...RULES, d100: { ...RULES.d100, partialBand: band } };
-  const row = CAST.map(who => {
-    const rng = mulberry32(0x5EED ^ (who.attr * 7919) ^ (band * 104729));
-    let partial = 0;
-    for (let i = 0; i < 10000; i++) {
-      const character = { attributes: { physical: who.attr, mental: who.attr, social: who.attr, practical: who.attr },
-        subAttributes: {}, skills: { the_craft: who.skill }, alignment: {}, energy: 50 };
-      const action = { attribute: "physical", skillId: who.skill > 0 ? "the_craft" : null,
-        abilityLevel: who.rank, difficulty: 38, axes: {}, tags: [] };
-      if (resolveAction({ character, action, location: null, rules, equipmentBonus: who.gear, substratePenalty: 0 }, rng).degree === "partial") partial++;
-    }
-    return r1((partial / 10000) * 100).toString().padStart(11);
-  }).join("");
-  console.log(`      ${pad(band, 4)}   ${row}`);
+// ── §3b / §9 THE CRIT DIALS ─────────────────────────────────────────────────────────────────────────────
+// This section used to sweep the PARTIAL BAND, and what it found killed that approach: expert and master sat
+// at chance 95 while crit-failure started at 96, so there was no room between their success line and their
+// crit-fail line. A master's miss was never a partial — it was a critical failure — and widening the band
+// moved them 0.0% at every width. Expertise made failure MORE binary, the inverse of §3b's goal.
+//
+// Erik's answer (SNG-258) was better than a wider band: move crits to a SECOND roll. The dials are then
+// independent of where the first roll landed, so a pinned master can crit-succeed AND fail softer without
+// having to come off the ceiling first. This section measures whether that actually holds.
+console.log("\n      §3b/§9 THE CRIT DIALS — expertise should triumph harder AND fail softer (10k seeded rolls per cell)");
+console.log("      " + "PROFILE".padEnd(12) + "crit-succ dial  crit-fail dial  observed crit-succ%  observed crit-fail%");
+const critRows = [];
+for (const who of CAST) {
+  const character = { attributes: { physical: who.attr, mental: who.attr, social: who.attr, practical: who.attr },
+    subAttributes: {}, skills: { the_craft: who.skill }, alignment: {}, energy: 50 };
+  const action = { attribute: "physical", skillId: who.skill > 0 ? "the_craft" : null,
+    abilityLevel: who.rank, difficulty: 38, axes: {}, tags: [] };
+  const base = () => ({ character, action, location: null, rules: RULES, equipmentBonus: who.gear, substratePenalty: 0 });
+  const dials = critProfile(base());
+  const rng = mulberry32(0xC217 ^ (who.attr * 7919) ^ (who.rank * 104729));
+  let cs = 0, cf = 0;
+  for (let i = 0; i < 10000; i++) {
+    const d = resolveAction(base(), rng).degree;
+    if (d === "crit_success") cs++; else if (d === "crit_failure") cf++;
+  }
+  const row = { who: who.name, successDial: dials.successChance, failDial: dials.failChance,
+    obsSuccess: r1((cs / 10000) * 100), obsFail: r1((cf / 10000) * 100) };
+  critRows.push(row);
+  console.log("      " + who.name.padEnd(12) + pad(row.successDial, 12) + pad(row.failDial, 16)
+    + pad(row.obsSuccess, 20) + pad(row.obsFail, 21));
 }
-console.log(`      READ: expert and master sit at chance ${RULES.d100.ceilingChance}, and crit-failure starts at ${RULES.d100.critFailMin} —`);
-console.log("      so there is NO ROOM between their success line and the crit-fail line. Widening the band moves");
-console.log("      them not at all: a master's miss is never a partial, it is a critical failure. The flat band");
-console.log("      lands entirely on the people who need it least. This is Aevi's §3b goal stated as a defect:");
-console.log("      today expertise makes failure MORE binary, not softer. Any §3b design has to reach the ceiling");
-console.log("      cases, which means the band cannot be the only lever — the ceiling has to come down too (§1).");
+{
+  const novice = critRows[0], master = critRows[critRows.length - 1];
+  console.log(`\n      READ: the master's crit-success dial is ${master.successDial}% against the novice's ${novice.successDial}%,`);
+  console.log(`      and the master's crit-FAILURE dial is ${master.failDial}% against the novice's ${novice.failDial}%.`);
+  console.log("      Mastery reaches further AND degrades softer — at chance 95, which the partial band could never");
+  console.log("      touch. The observed rates track the dials, so the second roll is genuinely live in the engine.");
+}
+
+
+// ── §3b INVARIANTS — the goal, asserted ─────────────────────────────────────────────────────────────────
+{
+  const novice = critRows[0], master = critRows[critRows.length - 1];
+  check("§3b: expertise TRIUMPHS HARDER — the master's crit-success dial beats the novice's",
+    master.successDial > novice.successDial, `master ${master.successDial} vs novice ${novice.successDial}`);
+  check("§3b: expertise FAILS SOFTER — the master's crit-failure dial is below the novice's",
+    master.failDial < novice.failDial, `master ${master.failDial} vs novice ${novice.failDial}`);
+  // The exact defect the partial band could not reach: a character pinned at the ceiling must still be able
+  // to crit-succeed. Under the old bands this was impossible; if it ever becomes impossible again, say so.
+  const pinned = { character: { attributes: { physical: 9, mental: 9, social: 9, practical: 9 }, subAttributes: {},
+      skills: { the_craft: 3 }, alignment: {}, energy: 50 },
+    action: { attribute: "physical", skillId: "the_craft", abilityLevel: 3, difficulty: 0, axes: {}, tags: [] },
+    location: null, rules: RULES, equipmentBonus: 10, substratePenalty: 0 };
+  check("§3b: a character PINNED at the chance ceiling can still crit-succeed (the defect the band could not reach)",
+    successChance({ ...pinned }) === RULES.d100.ceilingChance && critProfile(pinned).successChance > 0);
+  // "Fails softer" must not become "never fails". A floor keeps catastrophe on the table at every rank —
+  // the first run of this model gave every rank-2+ character a 0% crit-fail dial, which removed the tail
+  // from the game entirely. That is a data dial (crit.minChance), and this asserts it stays honest.
+  check("§3b: mastery softens catastrophe but never abolishes it — every profile keeps a crit-failure tail",
+    critRows.every(r => r.failDial > 0), `zero-tail profiles: ${critRows.filter(r => !r.failDial).map(r => r.who).join(", ")}`);
+}
 
 // ── INVARIANTS ──────────────────────────────────────────────────────────────────────────────────────────
 // The report is the deliverable. These gates are the structural truths that must hold at EVERY setting —

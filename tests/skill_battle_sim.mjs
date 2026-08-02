@@ -353,8 +353,13 @@ check("CCODE-39: fights still terminate — the opponent breaking remains a real
 // ---- CCODE-40: stacks are compared PRIOR to the clamp (Erik's exact arithmetic) ----
 // "If I have +35 due to abilities and skills and the enemy has +25 but has also landed a bind on me (-15) the net
 // difference would be (-5) to my roll." Before this, both sides clamped at the 95% ceiling and the bind did NOTHING.
-const strongP = { attributes: { physical: 6 }, energy: 100 };   // deep into the clamp on its own
-const strongO = { attributes: { physical: 6 }, energy: 100, skills: [] };
+// SNG-258 §1: at attributeMultiplier 20, `physical: 6` raw'd 105 — deep into the clamp on its own, which is
+// the PRECONDITION this whole block tests. At the new multiplier of 10 that sheet raws 65, the clamp never
+// bites, and the test would pass vacuously on a bug it can no longer see. `physical: 14` reproduces raw 105
+// EXACTLY, so Erik's arithmetic ("+35 vs +25 with a -15 bind") is unchanged — only the input needed to reach
+// the ceiling moved. Every assertion below is untouched.
+const strongP = { attributes: { physical: 14 }, energy: 100 };   // raw 105 — deep into the clamp on its own
+const strongO = { attributes: { physical: 14 }, energy: 100, skills: [] };
 const evenDecls = { playerDecl: { function: "strike", tier: 3, attribute: "physical", intensity: "standard", name: "a cut" },
                     oppDecl: { function: "strike", tier: 3, attribute: "physical", intensity: "standard", name: "a hard strike" } };
 const noBind = battleRound({ ...evenDecls, playerSheet: strongP, oppSheet: strongO, state: { momentum: 0, effects: [] }, rules, sb, steps, rng: seqRng([0.5, 0.5]) });
@@ -409,7 +414,7 @@ const turnSheets = { playerSheet: { attributes: { mental: 5, physical: 4 }, ener
 const senseDecls = { playerDecl: { function: "reveal", tier: 3, attribute: "mental", intensity: "standard", name: "Prism Sight" },
                      oppDecl: { function: "strike", tier: 1, attribute: "physical", intensity: "standard", name: "a hard strike" } };
 const baseState = { momentum: 4, effects: [], pressure: { player: 0, opponent: 0 }, round: 3 };
-const senseOut = battleRound({ ...senseDecls, ...turnSheets, state: baseState, rules, sb, steps, rng: seqRng([0.01, 0.99]), phase: "sense", tickEffects: false });
+const senseOut = battleRound({ ...senseDecls, ...turnSheets, state: baseState, rules, sb, steps, rng: seqRng([0.01, 0.00, 0.99, 0.99]), phase: "sense", tickEffects: false });
 check("CCODE-45: the turn dials are CONTENT (engine.turn)", !!sb.turn && Array.isArray(sb.turn.bonusOnDegrees));
 check("CCODE-45 (the whole point): a SENSE step does NOT move momentum — sensing is not a free hit for them",
   senseOut.state.momentum === baseState.momentum);
@@ -536,7 +541,10 @@ const kindRound = (kind, sbUse, rngVals) => battleRound({
   state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 } },
   rules, sb: sbUse, steps, rng: seqRng(rngVals), ...(kind ? { kind } : {}),
 });
-const pLoses = [0.95, 0.05], pWins = [0.05, 0.95];   // lower roll = bigger margin (see the SNG-098 round above)
+// SNG-258: resolveAction draws TWO values per side now (outcome roll, then crit roll), and seqRng CYCLES —
+// so a 2-value array silently fed the player's crit roll to the opponent as their outcome. Explicit per-side
+// quads: [playerRoll, playerCrit, oppRoll, oppCrit]. Degrees preserved from the old bands exactly.
+const pLoses = [0.95, 0.00, 0.05, 0.99], pWins = [0.05, 0.99, 0.95, 0.00];   // lower roll = bigger margin (see the SNG-098 round above)
 const noKind = kindRound(null, sbCrush, pLoses), asFight = kindRound("fight", sbCrush, pLoses), unknown = kindRound("wombat", sbCrush, pLoses);
 check("SNG-247: the player-side tick fires and costs the fight's authored blood (health 3, no energy)",
   noKind.pressureEvent?.side === "player" && noKind.pressureEvent.healthLoss === 3 && noKind.pressureEvent.energyLoss === 0);
@@ -602,7 +610,7 @@ const standoffLost = (kindDef) => {
   return skillBattleRound({ ...st, pressure: { player: 9, opponent: 0 }, opponentEnergy: oppSheet.energy },
     kindDef, { function: "strike", tier: 1, attribute: "practical", intensity: "standard" },
     { character: { attributes: { practical: 2 }, energy: 100, health: 40, skills: {} },
-      rules, sb, steps, rng: seqRng([0.99, 0.01]) });
+      rules, sb, steps, rng: seqRng([0.99, 0.00, 0.01, 0.99]) });
 };
 check("SNG-247 2a: the standoff's authored prose reaches the round (no fight wording on a contest of wills)",
   /certainty|stands aside|holds the line/i.test(standoffLost(tollDef).events.join(" ")));

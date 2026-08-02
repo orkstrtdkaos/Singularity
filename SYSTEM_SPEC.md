@@ -184,7 +184,7 @@ named terms (every term is a labelled, self-summing line — SNG-106; the engine
 
 **Then, in a CONTEST** (both sides roll; the margin between the two stacks decides): **matchup** (rock-paper-scissors, SNG-254), **intensity** (conserve/standard/surge), **woven** craft, **momentum**, **setup** ("you read them first"), **standing effects** (a bind on you −, a ward you raised +). All are named contest-mods added to the roll.
 
-**d100 degrees:** crit success ≤5 · success ≤chance · partial ≤chance+15 · failure · crit-fail ≥96 *(a "wild"/novel craft widens the crit band)*. ⚠️ SNG-258 §9: show these bands to the player.
+**d100 degrees (SNG-258 — crits are a SECOND roll, not a band on the first):** the first roll grades the outcome — success ≤chance · partial ≤chance+15 · failure. A success or a failure then takes its **own** crit roll against a dial: `crit.baseSuccessChance`/`baseFailChance` (5/5), raised or lowered by ability rank, practice, wild/novel crafts and aptitudes (gear and field effects hook in via `ctx.critMods`), clamped to `crit.minChance`–`maxChance` (1–60). A **partial takes no crit roll** — it is already the soft middle. Expertise raises crit-success and lowers crit-failure, so mastery reaches further AND degrades softer *without* having to come off the chance ceiling — the defect that killed the old flat partial band, where a master at chance 95 with crit-fail at 96 could only ever crit-FAIL. ⚠️ SNG-258 §9: show both dials, and their reasons, to the player.
 **Stack-before-clamp (CCODE-40):** all terms sum BEFORE the 95 ceiling for the CONTEST margin (so a −15 bind on a +35 vs +25 opponent reads as the true −5, not two clamped 95s); the ceiling still applies to your own DEGREE so any action can fail.
 
 > ⚠️ **SNG-258 (Erik's roll-math review) is open against this table** — the attribute term is so dominant that
@@ -199,7 +199,7 @@ named terms (every term is a labelled, self-summing line — SNG-106; the engine
   - **Attr contribution: ×20/point through soft cap 4, +5/point beyond** — mastery buys power against hard rolls without trivialising easy ones.
   - **Novel vs discovery is a REPLACEMENT, not a stack.** The same action that cost −15 to improvise pays **+20** once it is a known discovery: a 35-point swing. *Reaching past what you know is dangerous; surviving it and repeating it makes it yours.*
   - **⚠️ OPEN BALANCE Q (Erik, parked for sensitivity testing):** at +20 a discovered technique ceilings out on most builds. Intended, or tune to +12–15?
-- **d100 degrees:** crit ≤5 · success ≤chance · partial ≤chance+15 · failure · crit-fail ≥96 (novel widens by 3).
+- **d100 degrees:** success ≤chance · partial ≤chance+15 · failure — then a **second roll** decides crit, against the `crit.*` dials (SNG-258; novel raises the crit-FAILURE dial by 3, wild raises both). A partial takes no crit roll.
 - **Trivial actions** (GM-marked or parser-detected; never ability/novel): no roll, no energy, no XP.
 - **Sense tiers** by attunement (0/2/5/9): nothing → vibes → 5 bands → ~numeric. +1 tier if location matches alignment; Strategist +1 on planned.
 - **XP** (engine-paid, per rolled action): crit 8 / success 5 / partial 3 / failure 2 / crit-fail 2, **+8 novel** (`xp.novelBonus`). **Gambits 12/10/3 + completion bonus 10.** Quest completion: **structured quests award the outcome's `xp` effect (default 30, clamped 0–60); freeform GM-proposed completion clamps 0–25** (§14, §11). *(⚠️ ROUND-2 CORRECTION: v2.0 draft said "+3 novel" — HEAD `resolution.json → xp.novelBonus` is **8**.)*

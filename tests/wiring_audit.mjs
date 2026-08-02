@@ -387,6 +387,38 @@ importedNeverCalled.sort();
 // test → testOnlyExports · imported by app/engine and never invoked → here.
 if (importedNeverCalled.length) console.log(`note  ${importedNeverCalled.length} export(s) imported and never invoked (ratcheted below): ${importedNeverCalled.join(", ")}`);
 
+// ---------- unread RULE CONSTANTS (SNG-258) ----------
+// The unread-writes guard above covers dials the SETTINGS SCREEN writes. It does not cover the much larger
+// surface of authored TUNING CONSTANTS in the rules files — and a real instance slipped through on this very
+// ticket. Moving crits to a second roll, the first draft COPIED SNG-140's `wild.critSuccessWiden` /
+// `critFailWiden` into a new `crit` block instead of reading them, silently orphaning Aevi's authored dial.
+// Erik would have turned it and seen nothing: the encounterRate class, one layer down, where nothing looked.
+// Ratcheted, not absolute — resolution.json legitimately carries constants read by content or authored ahead
+// of their consumer. The baseline pins today's count; a NEW orphan fails the build.
+const ANNOTATION_KEYS = new Set(["note", "notes", "comment", "_comment", "schemaVersion", "label", "description", "band", "tier", "precision"]);
+const unreadRuleConstants = (() => {
+  const consumers = engineSrc + "\n" + appSrc;
+  const out = [];
+  const walk = (node, path) => {
+    if (!node || typeof node !== "object") return;
+    if (Array.isArray(node)) { for (const v of node) walk(v, path); return; }   // array entries are data, not dials
+    for (const [k, v] of Object.entries(node)) {
+      if (ANNOTATION_KEYS.has(k)) continue;
+      if (v && typeof v === "object") { walk(v, path.concat(k)); continue; }
+      if (!new RegExp(`\\b${k.replace(/[^\w]/g, "\\$&")}\\b`).test(consumers)) out.push(path.concat(k).join("."));
+    }
+  };
+  walk(JSON.parse(read("content/packs/core/rules/resolution.json")), []);
+  return out;
+})();
+check("unread-rule-constant guard can fail (a dial no module names is detected as unread)",
+  !/\bfabricatedPhantomDial\b/.test(engineSrc + appSrc));
+// Naming them costs nothing and saves the next person writing a bespoke script (which is easy to point at
+// the wrong directory and get a confidently wrong answer): SHOW_UNREAD_RULE_CONSTANTS=1 node tests/wiring_audit.mjs
+if (process.env.SHOW_UNREAD_RULE_CONSTANTS === "1") {
+  console.log(`note  ${unreadRuleConstants.length} unread resolution.json constant(s):\n      ${unreadRuleConstants.join("\n      ")}`);
+}
+
 const measured = {
   testOnlyExports: testOnlyExports.length,
   abilitiesMissingHarmRung: missingHarm.length,
@@ -394,7 +426,8 @@ const measured = {
   abilitiesNonCanonChallengeTypes: nonCanonTypes.length,
   abilitiesCombatClaimedNotTaught: combatUntaught.length,
   rawProseCaps: rawProseCaps.length,
-  importedNeverCalled: importedNeverCalled.length
+  importedNeverCalled: importedNeverCalled.length,
+  unreadRuleConstants: unreadRuleConstants.length
 };
 
 const baselinePath = join(root, "tests", "wiring_baseline.json");
@@ -416,7 +449,9 @@ for (const [k, v] of Object.entries(measured)) {
         ? `a NEW export reachable only from a test — it passes CI and CANNOT FIRE IN PLAY. Wire it or delete it:\n      ${testOnlyExports.join("\n      ")}`
         : k === "importedNeverCalled"
           ? `a NEW export that is imported and never invoked — built, shipped, and unreachable in play. Call it, surface it, or delete it:\n      ${importedNeverCalled.join("\n      ")}`
-          : `regressed past baseline`;
+          : k === "unreadRuleConstants"
+            ? `a NEW authored tuning constant in resolution.json that no engine/app module reads by name — a dial Erik can turn with nothing on the other end (SNG-258; the encounterRate class, one layer down). Read it, or delete it:\n      ${unreadRuleConstants.slice(0, 10).join("\n      ")}`
+            : `regressed past baseline`;
   check(`ratchet: ${k} = ${v} (baseline ${baseline[k] ?? "unset"}) — may only go DOWN`, v <= (baseline[k] ?? v), why);
 }
 check("invalid harmRung values are always zero (enum is machine-checked from here)", badHarm.length === 0,

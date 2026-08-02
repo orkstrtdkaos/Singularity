@@ -127,6 +127,81 @@ export function successChance(ctx) {
   return total;
 }
 
+/** SNG-258 §3b — THE CRIT DIALS. Crits are a SECOND roll, not a position on the first.
+ *
+ *  WHY THIS SHAPE. Crits used to be bands on the first roll: 1-5 crit-success, 96+ crit-failure. The
+ *  sensitivity tool found the defect that kills — a master sits at chance 95 while crit-failure starts at
+ *  96, so there is NO ROOM between their success line and the crit-fail line. A master's miss was never a
+ *  partial; it was always a critical failure, and widening the partial band moved them 0.0% at every width.
+ *  Expertise made failure MORE binary, the exact inverse of what it should do.
+ *
+ *  Moving crits to their own roll unbinds them from the first roll's position entirely. A pinned master can
+ *  now crit-succeed, and their crit-FAILURE rate can be lowered independently — mastery reaches further AND
+ *  degrades softer, without needing to drag the master off the ceiling to do it. It also gives the clamped
+ *  points somewhere to go: reserve capacity that this encounter did not need can feed the crit dial instead
+ *  of vanishing.
+ *
+ *  Returns both dials AND their named reasons, in the same shape successChance uses, because §9 asks the
+ *  popup to say "your crit-success X% / crit-failure Y% — and why". A dial the player cannot see the
+ *  reasons for is the opaque-spectral-fit problem again.
+ *
+ *  `ctx.critMods` is the hook §7 (gear) and §10 (field effects) will feed — same shape as contestMods, so
+ *  those tickets add a source without another pass through this function. */
+export function critProfile(ctx) {
+  const { rules, action = {}, character = {}, aptitudeMods = {} } = ctx;
+  const c = rules.crit || {};
+  const lo = c.minChance ?? 0, hi = c.maxChance ?? 60;
+  const sc = [], fc = [];
+  let s = 0, f = 0;
+  const addS = (label, v) => { if (v) { sc.push({ label, value: v }); s += v; } };
+  const addF = (label, v) => { if (v) { fc.push({ label, value: v }); f += v; } };
+
+  addS("base", c.baseSuccessChance ?? 5);
+  addF("base", c.baseFailChance ?? 5);
+
+  // EXPERTISE — the whole point. Rank and practice push crit-success UP and crit-failure DOWN, on separate
+  // constants so Erik can tune "triumphs harder" and "fails softer" independently rather than as one dial.
+  const rank = Number(action.abilityLevel) || 0;
+  if (rank) {
+    addS(`ability rank ${rank}`, rank * (c.perAbilityRankSuccess ?? 3));
+    addF(`ability rank ${rank}`, rank * (c.perAbilityRankFail ?? -2));
+  }
+  const skill = action.skillId ? (Number(character.skills?.[action.skillId]) || 0) : 0;
+  if (skill) {
+    addS(`practice: ${action.skillId}`, skill * (c.perSkillLevelSuccess ?? 2));
+    addF(`practice: ${action.skillId}`, skill * (c.perSkillLevelFail ?? -1));
+  }
+
+  // SNG-140: a WILD-current craft channels both substrates untamed — it amplifies BOTH tails, upside-forward.
+  // "Joyous, generous, and lethally unreliable." READ FROM rules.wild, not copied into rules.crit: the first
+  // draft of this function duplicated these two numbers into the new block, which silently orphaned SNG-140's
+  // authored dial — the registered-but-unread failure this codebase gates hardest against, and one no audit
+  // here covers for rule constants. The mechanism changed from widening a band to raising a dial; the values
+  // and their home did not.
+  if (action.wildVariance) {
+    addS("wild current", rules.wild?.critSuccessWiden ?? 6);
+    addF("wild current", rules.wild?.critFailWiden ?? 3);
+  }
+  // Novel use is volatile: reach exceeding grasp can HURT. Same dial as before (rules.novel.critFailWiden),
+  // still cancelled by a technique the character actually discovered.
+  if (action.novel && !action.discoveryBonus) addF("novel use", rules.novel?.critFailWiden ?? 3);
+
+  // The existing aptitude keys keep their meaning, so no authored aptitude is orphaned by this change.
+  addS("aptitude", aptitudeMods.critSuccessBonus || 0);
+  addF("aptitude", aptitudeMods.critFailPenalty || 0);
+
+  for (const m of ctx.critMods || []) {
+    if (m.success) addS(m.label, m.success);
+    if (m.fail) addF(m.label, m.fail);
+  }
+
+  const clamp = v => Math.max(lo, Math.min(hi, Math.round(v)));
+  return { successChance: clamp(s), failChance: clamp(f),
+    successComponents: sc, failComponents: fc,
+    successClampedFrom: clamp(s) !== Math.round(s) ? Math.round(s) : null,
+    failClampedFrom: clamp(f) !== Math.round(f) ? Math.round(f) : null };
+}
+
 /** Roll and grade an action. Returns the full receipt so narration and telemetry both have everything.
  *  rng injectable for tests. Degrees: crit_success | success | partial | failure | crit_failure */
 export function resolveAction(ctx, rng = Math.random) {
@@ -134,28 +209,22 @@ export function resolveAction(ctx, rng = Math.random) {
   const chance = successChance(ctx);
   const roll = Math.floor(rng() * 100) + 1;
   const d = rules.d100;
-  let critLow = d.critSuccessMax + (ctx.aptitudeMods?.critSuccessBonus || 0);
-  let critHigh = d.critFailMin - (ctx.aptitudeMods?.critFailPenalty || 0);
-  // Novel use is volatile: the crit-failure band widens — reach exceeding grasp can HURT
-  if (ctx.action.novel && !ctx.action.discoveryBonus) critHigh -= rules.novel?.critFailWiden ?? 3;
-  // SNG-140: a WILD-current craft channels both substrates untamed — the tangled current amplifies BOTH
-  // tails, upside-forward: more likely to bloom past what you aimed (crit-success widens MORE) AND more
-  // likely to slip (crit-failure widens, a real but smaller tail). "Joyous, generous, and lethally
-  // unreliable" — backfire lands only on a genuine crit-fail, never a flat per-cast penalty. Data-tunable.
-  if (ctx.action.wildVariance) {
-    critLow += rules.wild?.critSuccessWiden ?? 6;
-    critHigh -= rules.wild?.critFailWiden ?? 3;
+
+  // The first roll decides only how well it went. It no longer decides whether it was CRITICAL.
+  let degree = roll <= chance ? "success" : roll <= chance + d.partialBand ? "partial" : "failure";
+
+  // The second roll. A PARTIAL takes no crit roll on purpose — it is already the soft middle outcome, and
+  // "a critical partial" is not a thing the narration or the receipt line has any meaning for.
+  const crit = critProfile(ctx);
+  let critRoll = null;
+  if (degree === "success" || degree === "failure") {
+    critRoll = Math.floor(rng() * 100) + 1;
+    const dial = degree === "success" ? crit.successChance : crit.failChance;
+    if (critRoll <= dial) degree = degree === "success" ? "crit_success" : "crit_failure";
   }
 
-  let degree;
-  if (roll <= critLow) degree = "crit_success";
-  else if (roll >= critHigh) degree = "crit_failure";
-  else if (roll <= chance) degree = "success";
-  else if (roll <= chance + d.partialBand) degree = "partial";
-  else degree = "failure";
-
   // SNG-106: carry the retained component breakdown onto the receipt so the popup shows the real math.
-  return { roll, chance, degree, action: ctx.action, breakdown: ctx._breakdown || null };
+  return { roll, chance, degree, action: ctx.action, breakdown: ctx._breakdown || null, critRoll, crit };
 }
 
 /** Apply energy cost for an action/ability use. Returns new energy (never below 0). */

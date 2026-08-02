@@ -64,6 +64,51 @@
 > top. AEVI: re-read §1/§3b against the full grid once reported. ERIK: whether to do it now (leaning yes) + do
 > legendary contests have their own rules (lean harder on crits/matchup since raw chance pins for both?).
 > Likely CONFIRMS the decisions (the reserve is FOR this) but we measure not assume. Full: SPEC_SNG-259.> ## [DECIDED - Erik] §1 mult=10, ceiling REFRAME, §3b→second-roll crits (Aevi, 2026-08-02)
+> ## [CCODE-60 - SNG-258 §1 SET + SECOND-ROLL CRITS BUILT - CCode, 2026-08-02] And the splash damage the audits could NOT see
+> Write-up: `po/results/20260802_CCODE-60_SNG-258_mult10_and_second_roll_crits.md`. Full `npm test` green.
+> **§1 DONE: attributeMultiplier 20 -> 10.** Verified against the tool: attribute 72.7% -> **59%** of a
+> character's positive budget, **skill delivers 6.8 vs a rank's 3.3** (skill selection ~2x a tier step -
+> Erik's goal), ladder holds (master still +55.4 over novice). §1-3 are unblocked.
+> **§3b DONE: crits are a SECOND roll.** `critProfile(ctx)` returns BOTH dials AND their named reasons, in
+> the same shape successChance uses - so §9/§4 get "crit-success X% / crit-failure Y%, and why" for free.
+> First roll grades success/partial/failure; a success or a failure then takes its own crit roll. A PARTIAL
+> takes no crit roll (already the soft middle; "a critical partial" means nothing to the receipt line) - my
+> call, say the word if you want otherwise. Measured at notable, 10k seeded rolls: novice dials 8/3 ->
+> master **20/1**. Mastery triumphs harder AND fails softer, AT CHANCE 95, which the partial band could
+> never reach. 4 invariants assert it, incl. "a character PINNED at the ceiling can still crit-succeed" so
+> the original defect cannot silently return.
+> >> A TUNING DEFECT THE MODEL SURFACED: the first run gave every rank-2+ character a **0% crit-failure
+> dial** - "fails softer" had become "cannot catastrophically fail at all", which deletes the tail from the
+> game. Floored `crit.minChance` at 1 so catastrophe stays on the table at every rank, and asserted it.
+> Magnitudes are Erik's.
+> >> THE SPLASH DAMAGE - ERIK'S POINT WAS RIGHT, npm test + grep was NOT enough:
+> 1. **SNG-140's dials were nearly ORPHANED.** My first draft COPIED wild.critSuccessWiden/critFailWiden
+>    into the new crit block instead of READING them - Aevi's authored dial would have become dead content
+>    (Erik turns it, nothing happens). The encounterRate class, one layer down. Fixed: read from their real
+>    home, values and meaning unchanged.
+> 2. **So I built the guard for the whole class.** wiring_audit now ratchets **`unreadRuleConstants`** -
+>    every authored tuning constant in resolution.json that no engine/app module reads BY NAME. Baselined at
+>    the 11 that exist today, and **proven to bite**: planted a fake dial, count went 11->12, build failed
+>    naming the exact key. `SHOW_UNREAD_RULE_CONSTANTS=1` lists them.
+> 3. **API CONTRACT CHANGE: resolveAction now draws up to TWO rng values.** Callers feeding a fixed-length
+>    seeded sequence sized one-per-action now UNDER-FEED. Production uses Math.random so it is a test/replay
+>    concern - but it broke 4 fixtures, and worse:
+> 4. **`seqRng` CYCLES** - a 2-value array meaning "player rolls X, opponent rolls Y" was silently feeding
+>    the player's CRIT roll to the opponent as their OUTCOME roll. Rewritten as explicit per-side quads
+>    [pRoll, pCrit, oRoll, oCrit], old degrees reproduced exactly.
+> 5. **SYSTEM_SPEC §4a LIED in two places** - both roll-table lines described the old bands. Corrected.
+> 6. **skill_battle.js still has its OWN crit model** (margin >= 40 -> crit_success). There are now TWO
+>    notions of "critical" in the codebase. DELIBERATELY not changed - different subsystem, own dials in
+>    COMBAT_DIALS.md, folding it in is a bigger call than this ticket. **Flagging it, not leaving it to be
+>    discovered.** AEVI/ERIK: worth a decision on whether the contest path should follow.
+> Two of my own edits caught in diff review and reverted: a fixture patched at the wrong line, and an
+> em-dash my JSON writer re-encoded in the ratchet baseline.
+> ATTRIBUTION (for the log): the ceiling-as-RESERVE reframe and the second-roll crit model were **Erik's**,
+> per Aevi's entry recording them as his corrections. What I contributed was the measurement that made them
+> findable - the master pinned at 95 with crit-fail at 96, which proved the partial band could not work.
+> NEXT: the §4/§4b popup. critProfile already returns its components, so the popup gets the crit dials and
+> their reasons alongside successChance's breakdown for free.
+> ## [DECIDED - Erik] §1 mult=10, ceiling REFRAME, §3b→second-roll crits (Aevi, 2026-08-02)
 > - **§1 DECIDED: attribute multiplier 20 → 10.** Erik: don't want attribute king, want skill selection to
 >   matter. At 10 (from the tool): attribute share 72.7%→59%, SKILL delivers 6.8 vs a rank's 3.3 (skill
 >   selection ~2x a tier step - Erik's goal hit), master still +55.4, ladder holds. CCode: set it. UNBLOCKS §1-3.
@@ -116,7 +161,7 @@
 >   engine not just the player's toolbar - likely its own epic.
 > - **§4c anchor DECIDED:** tradition alignment stays a BASE, but MUCH can be moved to another area through
 >   INTENTIONAL action - a real home you can genuinely relocate FROM, not a wobble around a fixed point.
-> CCode owns every HOW. §11 is the big foundational one. Full: SPEC_SNG-258 §4d/§4e/§11.> ## [DECIDED - Erik] SNG-258 §4c alignment DRIFTS (Aevi, 2026-08-02)
+> CCode owns every HOW. §11 is the big foundational one. Full: SPEC_SNG-258 §4d/§4e/§11.
 > ## [CCODE-59 - SNG-258 SENSITIVITY TOOL BUILT + FIRST READ - CCode, 2026-08-02] The tool says 12; and the floor wastes points just like the ceiling
 > Write-up: `po/results/20260802_CCODE-59_SNG-258_sensitivity_tool.md`. `npm run sensitivity`, wired into
 > `npm test`, `--json` for charts. Full suite green by exit code. **IT CHANGES NO CONSTANTS** - reads the
@@ -153,7 +198,6 @@
 > drift" call (Erik's) more load-bearing than a transparency ticket usually is.
 > NEXT (per Aevi's order): §4/§4b the roll-math popup is mine and I'll start there. Blocked on Erik for §1
 > (the multiplier) and therefore for §3b.
-> ## [SPEC r2 - SNG-258 follow-ups, GOALS-FIRST] (Aevi, 2026-08-02)
 > ## [DECIDED - Erik] SNG-258 §4c alignment DRIFTS (Aevi, 2026-08-02)
 > Erik: yes, alignment should drift. GOAL: who a character IS on the world's spectrums is shaped by what they
 > repeatedly DO - identity earned by action (same spine as skill-use §2 / aptitude §5). Because spectral fit

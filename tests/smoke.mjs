@@ -3,7 +3,7 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from "../engine/resolve.js";
+import { resolveAction, successChance, spectrumAlignment, applyEnergyCost, critProfile as critProfileEarly } from "../engine/resolve.js";
 import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, grantAptitudes, fadingAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
@@ -89,10 +89,17 @@ const chance = successChance({ character: char, action, location: loc, rules });
 check(`chance in bounds (got ${chance})`, chance >= rules.d100.floorChance && chance <= rules.d100.ceilingChance);
 check("aligned action beats misaligned", chance > successChance({ character: char, action: { ...action, axes: { violence_peace: -0.7 } }, location: loc, rules }));
 
-const r1 = resolveAction({ character: char, action, location: loc, rules }, () => 0.01); // roll = 2
-check("roll 2 = crit_success", r1.degree === "crit_success");
-const r2 = resolveAction({ character: char, action, location: loc, rules }, () => 0.98); // roll = 99
-check("roll 99 = crit_failure", r2.degree === "crit_failure");
+// SNG-258: crits are a SECOND roll. The first decides success/partial/failure; the second decides whether
+// it was critical. Both draws are named here so the contract is legible rather than incidental.
+const twoRolls = (a, b) => { const q = [a, b]; let i = 0; return () => q[Math.min(i++, 1)]; };
+const r1 = resolveAction({ character: char, action, location: loc, rules }, twoRolls(0.01, 0.00)); // roll 1, crit roll 1
+check("a low roll succeeds, and a low crit roll makes it CRITICAL", r1.degree === "crit_success");
+const r1b = resolveAction({ character: char, action, location: loc, rules }, twoRolls(0.01, 0.99)); // roll 1, crit roll 100
+check("the same success with a high crit roll is an ORDINARY success", r1b.degree === "success");
+const r2 = resolveAction({ character: char, action, location: loc, rules }, twoRolls(0.98, 0.00)); // roll 99, crit roll 1
+check("a high roll fails, and a low crit roll makes it a CRITICAL failure", r2.degree === "crit_failure");
+const r2b = resolveAction({ character: char, action, location: loc, rules }, twoRolls(0.98, 0.99)); // roll 99, crit roll 100
+check("the same failure with a high crit roll is an ORDINARY failure", r2b.degree === "failure");
 check("energy cost floors at 0", applyEnergyCost({ energy: 3 }, 8, rules) === 0);
 
 // --- CCODE-30: the breakdown carries what the clarity popup needs to read plainly — the BASE attribute and
@@ -361,13 +368,14 @@ const gActions = [
   { label: "copy the logs", attribute: "practical", axes: {}, difficulty: 15, intentTags: ["careful"], tags: ["careful"], planned: true }
 ];
 const gCtx = { character: char, location: loc, rules, aptitudeMods: {}, bonuses: () => 0 };
-const luckyRolls = [0.1, 0.1, 0.1];
-let li = 0;
-const cleanRun = executeGambit(gActions, gCtx, () => luckyRolls[li++]);
+// SNG-258 CONTRACT CHANGE: resolveAction now draws up to TWO rng values per action (the outcome roll, then
+// the crit roll on a success or a failure). A fixed-length sequence sized one-per-step now under-feeds and
+// yields undefined -> NaN. These fixtures are written per-STEP so they cannot silently go stale again if the
+// draw count moves: each step's rolls are declared together and flattened.
+const perStep = steps => { const q = steps.flat(); let i = 0; return () => q[Math.min(i++, q.length - 1)]; };
+const cleanRun = executeGambit(gActions, gCtx, perStep([[0.1, 0.9], [0.1, 0.9], [0.1, 0.9]])); // succeed, never crit
 check("clean run completes all steps", cleanRun.done && cleanRun.receipts.length === 3 && cleanRun.blockedAt === null);
-const mixedRolls = [0.1, 0.93, 0.1]; // step 2 rolls 94 -> failure
-let mi = 0;
-const blocked = executeGambit(gActions, gCtx, () => mixedRolls[mi++]);
+const blocked = executeGambit(gActions, gCtx, perStep([[0.1, 0.9], [0.93, 0.9], [0.1, 0.9]])); // step 2 rolls 94 -> failure
 check("failed step blocks the run", !blocked.done && blocked.blockedAt === 1 && blocked.receipts.length === 2);
 const resumed = executeGambit(gActions, gCtx, () => 0.1, 2);
 check("resume from index continues", resumed.done && resumed.receipts[0].index === 2);
@@ -435,8 +443,12 @@ const novelAction = { attribute: "practical", subAttribute: "craft", axes: {}, d
 const plainChance = successChance({ character: hero2, action: { ...novelAction, novel: false }, location: { spectrum: {} }, rules });
 const novelChance = successChance({ character: hero2, action: novelAction, location: { spectrum: {} }, rules });
 check("novel use pays the surcharge", novelChance === plainChance - rules.novel.difficultySurcharge);
-const rNovel = resolveAction({ character: hero2, action: novelAction, location: { spectrum: {} }, rules }, () => 0.93); // roll 94
-check("novel crit-fail band widens (94 crit-fails)", rNovel.degree === "crit_failure");
+// SNG-258: novel use no longer widens a BAND on the first roll — it raises the crit-FAILURE dial. Same
+// intent (reach exceeding grasp hurts more), asserted against the dial itself rather than a band position.
+const novelDials = critProfileEarly({ character: hero2, action: novelAction, location: { spectrum: {} }, rules });
+const plainDials2 = critProfileEarly({ character: hero2, action: { ...novelAction, novel: false }, location: { spectrum: {} }, rules });
+check("novel use raises the crit-FAILURE dial (reach exceeding grasp)", novelDials.failChance > plainDials2.failChance);
+check("novel use leaves the crit-SUCCESS dial alone (it is a risk, not a boon)", novelDials.successChance === plainDials2.successChance);
 const rPlain = resolveAction({ character: hero2, action: { ...novelAction, novel: false, difficulty: -50 }, location: { spectrum: {} }, rules }, () => 0.93);
 check("same roll is not a crit-fail when routine", rPlain.degree !== "crit_failure");
 
@@ -3641,12 +3653,29 @@ await (async () => {
 
   // resolver variance: wildVariance widens BOTH crit bands (upside-forward), vs a plain action. Reuses the
   // module-scope char/action/loc/rules (real loaded rules incl. the `wild` knob).
-  const degAt = (n, extra) => resolveAction({ character: char, action: { ...action, ...extra }, location: loc, rules }, () => (n - 1) / 100).degree; // force roll n
-  const csMax = rules.d100.critSuccessMax, cfMin = rules.d100.critFailMin;
-  const upRoll = csMax + 2;   // just past the plain crit-success band, inside the wild one
-  const tailRoll = cfMin - 2; // just shy of the plain crit-fail band, inside the wild one
-  check("SNG-140: a WILD craft crit-SUCCEEDS on a roll a plain action would not (upside band widened)", degAt(upRoll, {}) !== "crit_success" && degAt(upRoll, { wildVariance: true }) === "crit_success");
-  check("SNG-140: a WILD craft crit-FAILS on a high roll a plain action would not (the real tail)", degAt(tailRoll, {}) !== "crit_failure" && degAt(tailRoll, { wildVariance: true }) === "crit_failure");
+  // SNG-258 moved crits to a SECOND roll, so this no longer probes band POSITIONS on the first roll — it
+  // probes the two dials directly. The intent is identical and is what actually matters: a wild craft must
+  // crit where a plain one would not, on BOTH tails. Driving it through critProfile also means the test
+  // reads the real dial rather than a band arithmetic re-derived here (which is how it went stale).
+  const { critProfile } = await import("../engine/resolve.js");
+  const critCtx = extra => ({ character: char, action: { ...action, ...extra }, location: loc, rules });
+  const plainDials = critProfile(critCtx({}));
+  const wildDials = critProfile(critCtx({ wildVariance: true }));
+  // two-draw rng: the first roll decides success/failure, the second decides whether it was critical
+  const seq = (...vals) => { let i = 0; return () => (vals[Math.min(i++, vals.length - 1)] - 1) / 100; };
+  const degWith = (firstRoll, critRoll, extra) =>
+    resolveAction(critCtx(extra), seq(firstRoll, critRoll)).degree;
+  const chanceHere = successChance(critCtx({}));
+  const upCrit = plainDials.successChance + 2;   // past the plain crit-success dial, inside the wild one
+  const tailCrit = plainDials.failChance + 2;    // past the plain crit-fail dial, inside the wild one
+  check("SNG-140: the wild craft's crit dials are both RAISED over a plain action's",
+    wildDials.successChance > plainDials.successChance && wildDials.failChance > plainDials.failChance);
+  check("SNG-140: a WILD craft crit-SUCCEEDS on a crit roll a plain action would not (upside dial raised)",
+    degWith(1, upCrit, {}) === "success" && degWith(1, upCrit, { wildVariance: true }) === "crit_success");
+  check("SNG-140: a WILD craft crit-FAILS on a crit roll a plain action would not (the real tail)",
+    degWith(100, tailCrit, {}) === "failure" && degWith(100, tailCrit, { wildVariance: true }) === "crit_failure");
+  check("SNG-140: the first roll still decides success vs failure — the crit roll never rescues a miss",
+    degWith(1, 100, {}) === "success" && degWith(100, 100, {}) === "failure" && chanceHere < 100);
   check("SNG-140: the upside is FORWARD of the tail (crit-success widens more than crit-fail)", (rules.wild.critSuccessWiden > rules.wild.critFailWiden));
 
   // raw-source + real content

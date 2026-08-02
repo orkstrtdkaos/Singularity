@@ -1,14 +1,22 @@
 {
   "schemaVersion": 1,
   "d100": {
-    "critSuccessMax": 5,
-    "critFailMin": 96,
     "partialBand": 15,
     "floorChance": 5,
     "ceilingChance": 95
   },
+  "crit": {
+    "baseSuccessChance": 5,
+    "baseFailChance": 5,
+    "perAbilityRankSuccess": 3,
+    "perAbilityRankFail": -2,
+    "perSkillLevelSuccess": 2,
+    "perSkillLevelFail": -1,
+    "minChance": 1,
+    "maxChance": 60
+  },
   "baseChance": {
-    "attributeMultiplier": 20,
+    "attributeMultiplier": 10,
     "attributeSoftCap": 4,
     "attributePerPointBeyond": 5,
     "skillBonus": 10,
@@ -215,7 +223,7 @@
   "wild": {
     "critSuccessWiden": 6,
     "critFailWiden": 3,
-    "note": "SNG-140: a wild_current (wildVariance) craft widens BOTH crit bands — upside-forward (crit-success +6, crit-fail +3). Potent + generous with a real but smaller tail; the Wild Half's 'lethally unreliable' made tunable."
+    "note": "SNG-140: a wild_current (wildVariance) craft amplifies BOTH crit tails — upside-forward (crit-success +6, crit-fail +3). SNG-258 moved crits to a SECOND roll, so these now raise the two crit DIALS rather than widening bands on the first roll; the values and their meaning are unchanged. Potent + generous with a real but smaller tail; the Wild Half's 'lethally unreliable' made tunable."
   },
   "gambit": {
     "maxSteps": 5,

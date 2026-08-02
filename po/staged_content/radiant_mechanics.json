@@ -24,7 +24,9 @@
     "magnitude": 2,
     "duration": 2,
     "range": 10,
-    "note": "r1's own number: unseen beyond 10 paces, while STILL"
+    "note": "r1's own number: unseen beyond 10 paces, while STILL",
+    "area": 1,
+    "targets": 1
    },
    "rankDeltas": [
     {
@@ -47,13 +49,34 @@
     "surge": "double the veil: a moving mirage, and everyone in the flash's reach is taken, friend included"
    },
    "bounds": [
-    "movement breaks it above a slow creep",
-    "your SHADOW STAYS TRUE",
-    "touch reveals everything",
-    "images don't survive scrutiny from arm's length",
-    "fails under Harmonic sound-sight",
-    "bent light still stops no arrow",
-    "the flash takes friend and foe alike unless they knew"
+    {
+     "text": "movement breaks it above a slow creep",
+     "class": "soft"
+    },
+    {
+     "text": "your SHADOW STAYS TRUE",
+     "class": "hard"
+    },
+    {
+     "text": "touch reveals everything",
+     "class": "hard"
+    },
+    {
+     "text": "images don't survive scrutiny from arm's length",
+     "class": "soft"
+    },
+    {
+     "text": "fails under Harmonic sound-sight",
+     "class": "hard"
+    },
+    {
+     "text": "bent light still stops no arrow",
+     "class": "hard"
+    },
+    {
+     "text": "the flash takes friend and foe alike unless they knew",
+     "class": "cost"
+    }
    ]
   },
   {
@@ -70,7 +93,8 @@
    "mechanic": {
     "magnitude": 3,
     "duration": 1,
-    "note": "KNOW→setup: a read that buys advantage. r1 sees heat traces, tampering, light-bending at work"
+    "note": "KNOW→setup: a read that buys advantage. r1 sees heat traces, tampering, light-bending at work",
+    "range": 10
    },
    "rankDeltas": [
     {
@@ -93,11 +117,26 @@
     "surge": "double the read, and pay it in hours of eye-ache"
    },
    "bounds": [
-    "traces fade in minutes to hours; rain and cold erase them",
-    "cannot identify WHO, only that",
-    "lie-reading is a HINT, not proof",
-    "minutes of use cost HOURS of eye-ache",
-    "some Precursor work reads as blank"
+    {
+     "text": "traces fade in minutes to hours; rain and cold erase them",
+     "class": "soft"
+    },
+    {
+     "text": "cannot identify WHO, only that",
+     "class": "hard"
+    },
+    {
+     "text": "lie-reading is a HINT, not proof",
+     "class": "hard"
+    },
+    {
+     "text": "minutes of use cost HOURS of eye-ache",
+     "class": "soft"
+    },
+    {
+     "text": "some Precursor work reads as blank",
+     "class": "hard"
+    }
    ],
    "designNote": "Its r3 sees 'the seams of Precursor work' — a ready-made, already-authored path for a player to ENCOUNTER precursor presence (SNG-261 §B wants exactly this staging). Worth flagging to Erik: the hook exists in content already."
   },
@@ -143,9 +182,22 @@
     "surge": "release it all at once as a flare — double the light, and the vessel is spent"
    },
    "bounds": [
-    "keeps one night only at r1; LEAKS VISIBLY (a glowing pack is a beacon)",
-    "nothing brighter than the day you banked; cloudy-day light is thin gruel",
-    "the great cache takes a WEEK of clear noons to fill; broken early it is simply GONE"
+    {
+     "text": "keeps one night only at r1",
+     "class": "soft"
+    },
+    {
+     "text": "LEAKS VISIBLY — a glowing pack is a beacon",
+     "class": "cost"
+    },
+    {
+     "text": "nothing brighter than the day you banked",
+     "class": "hard"
+    },
+    {
+     "text": "the great cache takes a WEEK of clear noons; broken early it is GONE",
+     "class": "cost"
+    }
    ]
   },
   {
@@ -168,7 +220,9 @@
      "d": 4
     },
     "plus": 0,
-    "note": "RESTORE→healing at T-I default. But radiant's healing is SLOW COMFORT, not battlefield mending — see bounds"
+    "note": "RESTORE→healing at T-I default. But radiant's healing is SLOW COMFORT, not battlefield mending — see bounds",
+    "area": 1,
+    "duration": 4
    },
    "rankDeltas": [
     {
@@ -191,10 +245,22 @@
     "surge": "concentrated dawn: double the warmth, and the debt comes due (an early crop is a smaller one)"
    },
    "bounds": [
-    "one small patch at r1; YOU MUST STAY WITH IT",
-    "exactly as visible as sunlight",
-    "the plants' DEBT IS REAL — an early crop is a smaller one unless the soil is fed",
-    "CANNOT CURE — only comfort and buy time"
+    {
+     "text": "one small patch; YOU MUST STAY WITH IT",
+     "class": "soft"
+    },
+    {
+     "text": "exactly as visible as sunlight",
+     "class": "cost"
+    },
+    {
+     "text": "the plants' DEBT IS REAL — an early crop is a smaller one",
+     "class": "hard"
+    },
+    {
+     "text": "CANNOT CURE — only comfort and buy time",
+     "class": "hard"
+    }
    ]
   },
   {
@@ -236,10 +302,22 @@
     "surge": "double the persistence and the brightness, and it is that much easier for a prism-reader to find"
    },
    "bounds": [
-    "fades in days outdoors",
-    "ANY Radiant-trained eye can find it if they look",
-    "the key travels by TEACHING, not by wish",
-    "each standing word is a thread of your own light BUDGET until it fades"
+    {
+     "text": "fades in days outdoors",
+     "class": "soft"
+    },
+    {
+     "text": "ANY Radiant-trained eye can find it",
+     "class": "hard"
+    },
+    {
+     "text": "the key travels by TEACHING, not by wish",
+     "class": "hard"
+    },
+    {
+     "text": "each standing word is a thread of your own light BUDGET",
+     "class": "cost"
+    }
    ]
   },
   {
@@ -287,12 +365,30 @@
     "surge": "double the beam and hold it: the cut goes through, and you are anchored in place while it does"
    },
    "bounds": [
-    "cannot penetrate armor or thick wood at r1",
-    "ONE HEARTBEAT of beam per breath",
-    "useless in smoke",
-    "sustained cutting ANCHORS YOU IN PLACE",
-    "the beam-line advertises your exact position",
-    "there is no quiet way to do this"
+    {
+     "text": "cannot penetrate armor or thick wood at r1",
+     "class": "soft"
+    },
+    {
+     "text": "ONE HEARTBEAT of beam per breath",
+     "class": "soft"
+    },
+    {
+     "text": "useless in smoke",
+     "class": "hard"
+    },
+    {
+     "text": "sustained cutting ANCHORS YOU IN PLACE",
+     "class": "soft"
+    },
+    {
+     "text": "the beam-line advertises your exact position",
+     "class": "cost"
+    },
+    {
+     "text": "there is no quiet way to do this",
+     "class": "hard"
+    }
    ],
    "designNote": "r2 'light armor' and r3 'a Harmonic shield's FIRST RANK' are the catalog's clearest statement that a soak/ward layer must exist and must be RANKED — the content already assumes penetration beats guard by degree. Direct support for §11 Gap 2's shape."
   },
@@ -313,7 +409,8 @@
    "mechanic": {
     "magnitude": 3,
     "duration": 4,
-    "note": "empower is a verbOverride (RESTORE family, bolster shape — a standing bonus, not healing). r1: first words always get listened to; steady the hopeless for AN HOUR"
+    "note": "empower is a verbOverride (RESTORE family, bolster shape — a standing bonus, not healing). r1: first words always get listened to; steady the hopeless for AN HOUR",
+    "targets": 1
    },
    "rankDeltas": [
     {
@@ -336,9 +433,22 @@
     "surge": "blaze: double the reach of it, and afterward you are the most identifiable person in the valley"
    },
    "bounds": [
-    "ATTENTION IS NOT AGREEMENT; draws every eye including hostile ones",
-    "strangers' goodwill is SHALLOW — one favor deep",
-    "LEADERSHIP, NOT CONTROL — where you lead them matters"
+    {
+     "text": "ATTENTION IS NOT AGREEMENT",
+     "class": "hard"
+    },
+    {
+     "text": "draws every eye including hostile ones",
+     "class": "cost"
+    },
+    {
+     "text": "strangers' goodwill is SHALLOW — one favor deep",
+     "class": "soft"
+    },
+    {
+     "text": "LEADERSHIP, NOT CONTROL — where you lead them matters",
+     "class": "hard"
+    }
    ]
   },
   {
@@ -360,7 +470,8 @@
     "push": 0,
     "magnitude": 2,
     "duration": 1,
-    "note": "MOVE→reposition. r1: ONE sidestep hidden behind your own afterimage — break a grab, dodge a swing"
+    "note": "MOVE→reposition. r1: ONE sidestep hidden behind your own afterimage — break a grab, dodge a swing",
+    "targets": 1
    },
    "rankDeltas": [
     {
@@ -383,10 +494,26 @@
     "surge": "double the ghosts and the hang-time, at the cost of a real sprint's wind"
    },
    "bounds": [
-    "ONE BREATH of hang-time; the ghost doesn't move or speak",
-    "bright EVEN light needed",
-    "once per scene PER WATCHER — eyes learn",
-    "PRISM SIGHT r2+ READS EVERY GHOST INSTANTLY"
+    {
+     "text": "ONE BREATH of hang-time",
+     "class": "soft"
+    },
+    {
+     "text": "the ghost doesn't move or speak",
+     "class": "hard"
+    },
+    {
+     "text": "bright EVEN light needed",
+     "class": "soft"
+    },
+    {
+     "text": "once per scene PER WATCHER — eyes learn",
+     "class": "soft"
+    },
+    {
+     "text": "PRISM SIGHT r2+ READS EVERY GHOST INSTANTLY",
+     "class": "hard"
+    }
    ],
    "designNote": "Its bound names prism_sight r2 as a hard counter — an in-tradition rock-paper-scissors the content authored itself. Worth preserving as a real mechanic, not flavour."
   },
@@ -407,7 +534,8 @@
    "mechanic": {
     "magnitude": 3,
     "duration": 2,
-    "note": "r1: a hovering lens for fine work — craft checks on SMALL things sharpen (arm's reach)"
+    "note": "r1: a hovering lens for fine work — craft checks on SMALL things sharpen (arm's reach)",
+    "range": 1
    },
    "rankDeltas": [
     {
@@ -430,10 +558,26 @@
     "surge": "double the magnification: read the far ridge, and be blind to everything near you while you do"
    },
    "bounds": [
-    "arm's-reach focus only at r1; wobbles if you're winded; needs decent light",
-    "heat-shimmer and rain ruin it",
-    "WATCHING FAR MEANS BLIND NEAR",
-    "one standing eye at a time; findable by anyone with light-craft"
+    {
+     "text": "arm's-reach focus only at r1",
+     "class": "soft"
+    },
+    {
+     "text": "wobbles if you're winded",
+     "class": "soft"
+    },
+    {
+     "text": "heat-shimmer and rain ruin it",
+     "class": "hard"
+    },
+    {
+     "text": "WATCHING FAR MEANS BLIND NEAR",
+     "class": "cost"
+    },
+    {
+     "text": "one standing eye at a time; findable by anyone with light-craft",
+     "class": "hard"
+    }
    ]
   },
   {
@@ -454,7 +598,8 @@
     "magnitude": 2,
     "duration": 8,
     "range": 1600,
-    "note": "r1's own numbers: ONE companion, across A MILE of open valley, three pulse-signals (come/wait/danger)"
+    "note": "r1's own numbers: ONE companion, across A MILE of open valley, three pulse-signals (come/wait/danger)",
+    "targets": 1
    },
    "rankDeltas": [
     {
@@ -477,9 +622,22 @@
     "surge": "double the range and the count, and a woven night costs you a day's strength"
    },
    "bounds": [
-    "line of sight bends around hills poorly; THE THREAD DIES AT RUNNING WATER",
-    "the weave frays past a few miles; the Disputed Zone gnaws threads",
-    "YOU ARE THE LOOM — IF YOU FALL, EVERY THREAD DIES AT ONCE"
+    {
+     "text": "line of sight bends around hills poorly",
+     "class": "soft"
+    },
+    {
+     "text": "THE THREAD DIES AT RUNNING WATER",
+     "class": "hard"
+    },
+    {
+     "text": "the weave frays past a few miles",
+     "class": "soft"
+    },
+    {
+     "text": "YOU ARE THE LOOM — IF YOU FALL, EVERY THREAD DIES AT ONCE",
+     "class": "hard"
+    }
    ]
   },
   {
@@ -525,10 +683,22 @@
     "surge": "double the work in one sitting, and it costs you like a day's labour"
    },
    "bounds": [
-    "PAIN IS NOT REMOVED — someone must hold them",
-    "deep wounds still need a real medic's knowledge",
-    "an hour's work costs you like A DAY'S LABOUR; the patient's stillness is a hard requirement",
-    "THE FIELD ITSELF RESISTS deep intervention near heart and head"
+    {
+     "text": "PAIN IS NOT REMOVED — someone must hold them",
+     "class": "hard"
+    },
+    {
+     "text": "deep wounds still need a real medic's knowledge",
+     "class": "soft"
+    },
+    {
+     "text": "an hour's work costs you like A DAY'S LABOUR",
+     "class": "soft"
+    },
+    {
+     "text": "THE FIELD ITSELF RESISTS deep intervention near heart and head",
+     "class": "hard"
+    }
    ]
   },
   {
@@ -572,11 +742,26 @@
     "surge": "double the fence: instant, directional, and your sleep is thinner for every night it stands"
    },
    "bounds": [
-    "reports only at your next quiet moment unless you hold VIGIL",
-    "a light-crafter who SEES it can step around it",
-    "running water and Zone interference eat wards in hours",
-    "YOUR SLEEP IS THINNER for each",
-    "a season-fence is COMMUNITY WORK — the village must consent"
+    {
+     "text": "reports only at your next quiet moment unless you hold VIGIL",
+     "class": "soft"
+    },
+    {
+     "text": "a light-crafter who SEES it can step around it",
+     "class": "hard"
+    },
+    {
+     "text": "running water and Zone interference eat wards in hours",
+     "class": "hard"
+    },
+    {
+     "text": "YOUR SLEEP IS THINNER for each",
+     "class": "cost"
+    },
+    {
+     "text": "a season-fence is COMMUNITY WORK — the village must consent",
+     "class": "hard"
+    }
    ],
    "designNote": "r3 explicitly pairs with light_well (anchored vessels) and beacon_thread (identity-echo). The catalog is already authoring craft COMBINATION — worth a mechanic (a composed-craft bonus) rather than leaving it as prose."
   },
@@ -620,10 +805,22 @@
     "surge": "double the seal, and everyone within sight knows a sealing was done here"
    },
    "bounds": [
-    "needs periodic RE-LIGHTING",
-    "PHYSICAL FOES IGNORE IT",
-    "a seal is only as good as who holds its WORD — light-seals are famously stolen",
-    "sealed by right means SOMEONE WITH THE RIGHT CAN ALWAYS OPEN IT"
+    {
+     "text": "needs periodic RE-LIGHTING",
+     "class": "soft"
+    },
+    {
+     "text": "PHYSICAL FOES IGNORE IT",
+     "class": "hard"
+    },
+    {
+     "text": "a seal is only as good as who holds its WORD",
+     "class": "hard"
+    },
+    {
+     "text": "sealed by right means SOMEONE WITH THE RIGHT CAN ALWAYS OPEN IT",
+     "class": "hard"
+    }
    ]
   },
   {
@@ -661,8 +858,14 @@
     "surge": "double the height and the interval; you are visible for miles and there is no version of this that is subtle"
    },
    "bounds": [
-    "YOU SHINE — seen for miles, NO CONCEALMENT possible",
-    "the interval ENDS and you must be down or you fall"
+    {
+     "text": "YOU SHINE — seen for miles, NO CONCEALMENT possible",
+     "class": "hard"
+    },
+    {
+     "text": "the interval ENDS and you must be down or you fall",
+     "class": "hard"
+    }
    ],
    "designNote": "T-V capstone confirming the register from the blazeborn pilot: the special is a KIND the craft did not have (leaving the ground entirely), carrying an absolute cost (total visibility). Same shape as the_last_light's total expenditure."
   }
@@ -674,5 +877,10 @@
   "prism_ward r3 composes explicitly with light_well (anchored vessels) and beacon_thread (identity-echo). The catalog is already authoring craft COMBINATION; a composed-craft bonus deserves a mechanic rather than staying prose.",
   "prism_sight r3 sees 'the seams of PRECURSOR work' — an already-authored, in-catalog path for a player to encounter precursor presence. SNG-261 §B wants exactly this staging and it already exists in content.",
   "light_borne (T-V, single rank) confirms the capstone register from the pilot: the special is a KIND the craft did not have, carrying an absolute cost. Two traditions, two capstones, same shape — the register holds."
- ]
+ ],
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ }
 }

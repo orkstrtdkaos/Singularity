@@ -312,7 +312,10 @@
    "mechanic": {
     "magnitude": 4,
     "duration": 3,
-    "note": "THE PILOT'S TEST CASE for §11 Gap 2: this craft NEEDS the soak/armor layer to do anything at all"
+    "note": "THE PILOT'S TEST CASE for §11 Gap 2: this craft NEEDS the soak/armor layer to do anything at all",
+    "soak": 4,
+    "soakRank": 2,
+    "awaitingEngine": "soak/soakRank await the §11 Gap-2 guard layer. Authored now so the layer lands with real content to test against; radiant_lance r2/r3 (penetrates light armor / beats a Harmonic shield's FIRST RANK) is the matching attacker side, which is why soak wants a RANK as well as a magnitude."
    }
   },
   {

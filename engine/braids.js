@@ -15,6 +15,7 @@
 
 import { discoveryKey } from "./progression.js"; // the SAME co-activation key the ledger is written with
 import { smartClamp } from "./namematch.js";
+import { deriveMechanic } from "./craftmechanics.js";  // SNG-263 §9: a braid inherits its parents' specificity
 
 export const BRAID_RIPEN_AT = 5; // co-activations before a pairing is EARNED as a braid — a clearly deliberate
 //   pattern (Silas's Double Register sits at 5, and Erik treats it as canon). Tunable; a lower bar risks
@@ -130,6 +131,14 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
     levelReq, energyCost: braidBaseCost(sources, opts.braidFraction), // SNG-227 §3d: priciest parent + a share of the cheaper — a premium over either part, still < running both sequentially
     attribute: sources[0]?.attribute || "practical",
     functions, harmRung, effectTags: [], nativeOrCombination: "combination",
+    // SNG-263 §9: DERIVED, never invented. Measured before writing this: a minted braid was not
+    // mechanically empty (the resolution order already gave it its family's dice at its own tier) — it was
+    // born GENERIC, losing the named axes and per-intensity prose its parents carried. A braid of two
+    // depth-readers came out reading nothing in particular. Union the parents' axes, take the stronger
+    // field, and let a REFUSED intensity be contagious. Bounds are deliberately NOT inherited — notFor
+    // below draws the boundary around the braid's own reach, and widening it to the sum of its parents is
+    // the one thing that never-delete comment forbids.
+    ...(deriveMechanic(sources, { verbs: functions, cfg: opts.craftMechanics }) ? { mechanic: deriveMechanic(sources, { verbs: functions, cfg: opts.craftMechanics }) } : {}),
     description: smartClamp(String(authored.description || `A braid earned in play: ${srcNames.join(" and ")}, channelled together until they became one craft.`), 400),
     // SNG-197 §1: the boundary is drawn around the BRAID's own reach, not around its parents — it is not
     // either parent entire; it is the one new craft their joining makes, and no wider. (Never delete this.)
@@ -165,7 +174,7 @@ export function mintBraid(character, def, { at = null } = {}) {
  *  fallback from the discovery's own name + description. Parents are DEDUPED (a 3-parent discovery with a
  *  repeated craft collapses to 2) and id-drift-tolerant (hyphen/underscore). Idempotent: skips a discovery
  *  already in `abilities[]`, OR whose parent-pairing was already braided (it's usable via that braid). Pure. */
-export function registerDiscoveryAbility(character, discovery, catalog = {}, { at = null, braidFraction } = {}) {
+export function registerDiscoveryAbility(character, discovery, catalog = {}, { at = null, braidFraction, craftMechanics = null } = {}) {
   if (!character || !discovery?.id || !discovery?.name) return null;
   character.abilities = character.abilities || [];
   if (character.abilities.some(a => a.abilityId === discovery.id)) return null; // already usable under its own id
@@ -173,7 +182,7 @@ export function registerDiscoveryAbility(character, discovery, catalog = {}, { a
   const parents = [...new Set((discovery.abilities || []).map(resolve).filter(Boolean))];
   // already usable via a braid of the SAME pairing (e.g. a discovery that was also braided) → nothing to do.
   if (parents.length === 2 && (character.braids || []).some(b => braidKey(b.from) === braidKey(parents))) return null;
-  let def = parents.length === 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description }, braidFraction }) : null;
+  let def = parents.length === 2 ? buildBraidDef(character, parents, catalog, { name: discovery.name, authored: { description: discovery.description }, braidFraction, craftMechanics }) : null;
   if (!def) {
     // fallback: a minimal braid-shaped def from whatever resolved + the discovery's own words (rank 1, deepens).
     const sources = parents.map(id => catalog[id]).filter(Boolean);
@@ -184,6 +193,8 @@ export function registerDiscoveryAbility(character, discovery, catalog = {}, { a
     def = {
       id: discovery.id, name: nm, powerSystem: "learned", tradition: "learned", levelReq: 1, energyCost,
       attribute: sources[0]?.attribute || "practical", functions, harmRung: "none", effectTags: [], nativeOrCombination: "combination",
+      // SNG-263 §9: a discovery derives from the craft it came out of, for the same reason a braid does.
+      ...(deriveMechanic(sources, { verbs: functions, cfg: craftMechanics }) ? { mechanic: deriveMechanic(sources, { verbs: functions, cfg: craftMechanics }) } : {}),
       description: desc, notFor: "What lies outside this craft's own reach — the single new move your discovery made, no wider.",
       narrationHints: smartClamp(String(discovery.description || discovery.name), 200),
       tree: [{ rank: 1, name: nm, grants: smartClamp(String(discovery.description || "The discovered craft runs as one."), 200), cannot: "What it has not yet grown to do.", functions }],

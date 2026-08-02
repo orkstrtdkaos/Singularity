@@ -19,7 +19,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { battleRound, synthesizeOpponentSheet } from "../engine/skill_battle.js";
-import { mechanicFor, rollMagnitude } from "../engine/craftmechanics.js";
+import { mechanicFor, rollMagnitude, deriveMechanic } from "../engine/craftmechanics.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -176,6 +176,35 @@ const SB = SBRAW.engine;
   const rolls = Array.from({ length: 500 }, (() => { const r = rngFor(7); return () => rollMagnitude(m.fields, r, { marginGap: 10000 }); })());
   check("EDGE: an enormous margin raises the FLOOR but never exceeds the craft's own ceiling",
     rolls.every(v => v <= ceiling), `ceiling ${ceiling}, saw max ${Math.max(...rolls)}`);
+}
+
+// ── MINTED CRAFTS (§9) — a braid must not be born characterless ─────────────────────────────────────────
+// The spec said minted crafts are "born mechanically empty". Measured, that was no longer true — the
+// resolution order already gave a braid its family's dice at its own tier. What it WAS born without is its
+// parents' authored specificity, which is the subtler and more damaging version of the same bug: correct,
+// and characterless. These gate the derivation.
+{
+  const p1 = { functions: ["reveal"], levelReq: 3,
+    mechanic: { reveal: { axis: ["perceptionDepth", "range"], range: 2, intensity: { surge: "the whole spectrum at once" } } } };
+  const p2 = { functions: ["strike"], levelReq: 5,
+    mechanic: { strike: { axis: ["damage"], dice: { n: 2, d: 8 }, intensity: { conserve: "REFUSED" } } } };
+  const derived = deriveMechanic([p1, p2], { verbs: ["reveal", "strike"], cfg: CM });
+  const braid = { id: "b", functions: ["reveal", "strike"], levelReq: 4, mechanic: derived };
+
+  check("§9: a braid INHERITS its parents' named axes (it was born with none — correct but characterless)",
+    mechanicFor(braid, { verb: "reveal", tier: 4, cfg: CM }).namedAxes.includes("perceptionDepth"));
+  check("§9: a braid takes the STRONGER parent's dice, never the sum (a braid of two must not outclass both)",
+    JSON.stringify(mechanicFor(braid, { verb: "strike", tier: 1, cfg: CM }).fields.dice) === JSON.stringify({ n: 2, d: 8 }));
+  check("§9: a REFUSED intensity is CONTAGIOUS — if a parent cannot be half-given, neither can the braid",
+    mechanicFor(braid, { verb: "strike", tier: 4, intensity: "conserve", cfg: CM }).refusedIntensity === true);
+  check("§9: parents with no authored mechanic derive nothing (no invented body)",
+    deriveMechanic([{ functions: ["strike"], levelReq: 2 }], { verbs: ["strike"], cfg: CM }) === null);
+  check("§9: the braid's BOUNDS are not inherited — braids.js draws that boundary around its own reach",
+    !("bounds" in (derived.strike || {})) && !("notFor" in (derived.strike || {})));
+  // and the minting path actually calls it, rather than the derivation existing unused
+  const braidSrc = readFileSync(join(root, "engine/braids.js"), "utf8");
+  check("§9: BOTH minting paths call deriveMechanic (a derivation nothing calls is the bug it fixes)",
+    (braidSrc.match(/deriveMechanic\(/g) || []).length >= 4, "braids.js should derive at the braid AND discovery mints");
 }
 
 if (process.argv.includes("--json")) {

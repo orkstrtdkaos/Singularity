@@ -203,3 +203,66 @@ export function authoredCoverage(ability, cfg = {}) {
   const authored = verbs.filter(v => m && (m[v] || (!Object.keys(cfg.families || {}).length ? false : Object.keys(m).some(k => k !== "note")))).length;
   return { verbs: verbs.length, authored: m ? authored : 0 };
 }
+
+/** SNG-263 §9 — WHAT A MINTED CRAFT INHERITS.
+ *
+ *  The spec said braids, discoveries and generated crafts are "born mechanically empty". Measured, that is no
+ *  longer true: the resolution order gives any record with `functions` + `levelReq` its family's numbers, so a
+ *  minted braid already resolves to real dice at its own tier. What it is born WITHOUT is its parents'
+ *  AUTHORED SPECIFICITY — and that is the actual gap. A braid of two crafts that read `perceptionDepth`
+ *  resolved with no named axes at all, and a parent's per-intensity prose vanished. The braid was correct and
+ *  characterless: exactly the generic default this ticket exists to end, arriving through the back door.
+ *
+ *  So this DERIVES rather than invents:
+ *   · named axes are the UNION of the parents' — a braid keeps what its parents were about;
+ *   · a mechanical field takes the STRONGER parent's value, mirroring braidBaseCost ("priciest parent");
+ *   · a REFUSED intensity is CONTAGIOUS — if either parent cannot be half-given, neither can their braid;
+ *   · `bounds`/`notFor` are deliberately NOT unioned. braids.js draws that boundary around the braid's own
+ *     reach ("it is not either parent entire") and marks it never-delete; inheriting parental bounds would
+ *     quietly widen a braid to the sum of its parents, which is the one thing that comment forbids.
+ *
+ *  Returns a `mechanic` block keyed by verb, or null when the parents carry nothing worth inheriting. */
+export function deriveMechanic(sources = [], { verbs = null, cfg = null } = {}) {
+  // A default parameter does NOT catch an explicit null, and every caller here threads a config that may
+  // legitimately be absent (a minting path with no content loaded). Total over its contract, like the
+  // born-whole gate: a config edit or a missing bag must never be able to throw inside a MINT.
+  const conf = cfg || {};
+  const parents = (sources || []).filter(Boolean);
+  if (!parents.length) return null;
+  const mechAxes = new Set(conf.operativeAxis?.mechanical || []);
+  const wanted = verbs && verbs.length ? verbs : [...new Set(parents.flatMap(p => p.functions || []))];
+  const out = {};
+  for (const verb of wanted) {
+    const blocks = parents
+      .map(p => (p.mechanic?.[verb] || (p.mechanic && !Object.keys(p.mechanic).some(k => (p.functions || []).includes(k)) ? p.mechanic : null)))
+      .filter(Boolean);
+    if (!blocks.length) continue;
+    const axes = [...new Set(blocks.flatMap(b => Array.isArray(b.axis) ? b.axis : (b.axis ? [b.axis] : [])))];
+    const merged = {};
+    if (axes.length) merged.axis = axes;
+    // the stronger parent wins each mechanical field — never the sum, or a braid of two would outclass both
+    for (const a of axes) {
+      if (!mechAxes.has(a)) continue;
+      const vals = blocks.map(b => b[a]).filter(v => Number.isFinite(Number(v))).map(Number);
+      if (vals.length) merged[a] = Math.max(...vals);
+    }
+    const dice = blocks.map(b => b.dice).filter(Boolean);
+    if (dice.length) {
+      const best = dice.reduce((x, y) => ((num(y.n, 1) * num(y.d, 6)) > (num(x.n, 1) * num(x.d, 6)) ? y : x));
+      merged.dice = { n: num(best.n, 1), d: num(best.d, 6) };
+      const pluses = blocks.map(b => num(b.plus, 0));
+      if (pluses.some(v => v)) merged.plus = Math.max(...pluses);
+    }
+    // a refusal is contagious; otherwise keep the first parent that actually said something
+    const intensity = {};
+    for (const mode of ["conserve", "standard", "surge"]) {
+      const said = blocks.map(b => b.intensity?.[mode]).filter(v => v != null);
+      if (!said.length) continue;
+      const refused = said.find(v => typeof v === "string" && /^refused$/i.test(String(v).trim()));
+      intensity[mode] = refused || said[0];
+    }
+    if (Object.keys(intensity).length) merged.intensity = intensity;
+    if (Object.keys(merged).length) out[verb] = merged;
+  }
+  return Object.keys(out).length ? out : null;
+}

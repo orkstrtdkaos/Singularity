@@ -1,5 +1,36 @@
 # PO ALERT
 
+> ## [CCODE-71 - SNG-263 §9 MINTED CRAFTS - CCode, 2026-08-02] They were never empty. They were born CHARACTERLESS, which is worse to find later
+> Full `npm test` green. §9 closes the last engine item on SNG-263.
+> >> **THE SPEC'S FRAMING WAS OUT OF DATE, and measuring said so.** §9 said braids/discoveries/generated
+> crafts are "born WITHOUT damage, duration, range". Measured: **a minted braid resolves to 4d6+5 at T-IV** -
+> the resolution order (craft.mechanic -> family default) already gives any record with `functions` +
+> `levelReq` real dice at its own tier. That was true the moment CCODE-64 landed.
+> **What they ARE born without is their parents' AUTHORED SPECIFICITY**, and that is the subtler bug: a braid
+> of two crafts that both read `perceptionDepth` came out reading **nothing in particular** - generic setup 3,
+> no named axes, no per-intensity prose. Correct, and characterless. The generic default arriving through the
+> back door, exactly what this ticket exists to end - and far harder to notice than an empty field, because
+> nothing is missing and nothing errors.
+> **FIXED - `deriveMechanic(parents)`, DERIVED never invented:** named axes are the UNION of the parents (a
+> braid keeps what its parents were about); a mechanical field takes the **STRONGER** parent, mirroring
+> braidBaseCost's "priciest parent" - never the SUM, or a braid of two would outclass both; and **a REFUSED
+> intensity is CONTAGIOUS** - if either parent cannot be half-given, neither can their braid. Wired into BOTH
+> mint paths (braid + discovery) and threaded from app.js through 5 call sites.
+> >> **ONE THING DELIBERATELY NOT INHERITED: bounds/notFor.** braids.js draws that boundary around the
+> braid's own reach ("it is not either parent entire; it is the one new craft their joining makes") and marks
+> it never-delete. Unioning parental bounds would silently widen every braid to the sum of its parents, which
+> is precisely what that comment forbids. Gated, so nobody adds it later thinking it was an oversight.
+> **6 new gates** on the derivation, incl. "parents with no authored mechanic derive NOTHING" (no invented
+> body) and "BOTH mint paths actually call it" - a derivation nothing calls would be the bug it fixes.
+> TWO BUGS CAUGHT WIRING IT, both mine, both the same family: `opts` referenced out of scope in the discovery
+> mint, and `cfg = {}` NOT catching an explicit `null` (a default parameter never does). The second is the
+> born-whole-gate lesson again - **a function that runs inside a MINT must be total over its contract**, or a
+> missing content bag throws while a player is earning a braid. `deriveMechanic` is now total.
+> **SNG-263 ENGINE WORK IS COMPLETE**: §1 shapes · §2 per-craft magnitudes · §3 rank deltas · §5 CI harness ·
+> §6 per-craft intensity + REFUSED · §7 rolled dice · §8 tier ladder · §9 minted crafts · plus r4's health
+> scaling, soak, wielder scaling and the open axis vocabulary. **AEVI: the catalog is unblocked** - the shape
+> is locked, the CI names what each craft owes, and a braid of two authored parents now inherits properly.
+> ERIK: still yours - the dice ladder and scaling-strength sign-off (both live dials in the Machine tab).
 > ## [CCODE-70 - DAMAGE SENSITIVITY SWEEP + EDGE-CASE BATTERY - CCode, 2026-08-02] The edge battery found a real bug on its FIRST run: a T-VI craft was WEAKER than a T-I
 > `npm run damage` (wired into `npm test`, `--json`). Full suite green. Erik: "we will want to run synthetic
 > sensitivity analysis and find edge cases too" - both, and they answer different questions so they get

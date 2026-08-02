@@ -567,7 +567,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       if (cmCfg?.families) {
         const m = mechanicFor(winDecl, { verb: winDecl.function, tier: winDecl.tier,
           rank: winDecl.rank || 1, intensity: winDecl.intensity || "standard", cfg: cmCfg });
-        if (m?.shape === "damage" && m.fields?.max != null) hit = Math.max(dcfg.minHit ?? 1, rollMagnitude(m.fields, rng, { marginGap }));
+        // SNG-263 r4: the dice reshape retired `max`, and this guard still tested for it — so the craft path
+        // silently stopped firing and every hit fell back to the generic formula. Caught by measuring damage
+        // per landed hit (T-III delivered 5.2 where its dice say 13.4) rather than by reading the code.
+        if (m?.shape === "damage" && (m.fields?.dice || m.fields?.max != null)) hit = Math.max(dcfg.minHit ?? 1, rollMagnitude(m.fields, rng, { marginGap }));
       }
       if (hit == null) {
         const raw = (dcfg.base ?? 1)

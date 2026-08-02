@@ -87,12 +87,28 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
       : null);
 
   // The operative dimension carries tier, intensity and a DEEPEN rank-delta. Everything else stays put.
-  const op = sh.operative;
+  // SNG-263 r4: a craft may declare its own OPERATIVE AXIS, redirecting tier scaling onto a dimension other
+  // than its family's default — a strike that widens rather than deepens takes axis:"area", and its tier
+  // steps buy targets instead of dice. "A craft doubles on ITS axis, not all axes" is Erik's rule; this is
+  // where it becomes real. An axis the shape carries no field for is ignored (and the CI flags it).
+  const declaredAxis = authored?.axis;
+  const op = (declaredAxis && (fields[declaredAxis] != null || declaredAxis === "damage" || declaredAxis === "healing"))
+    ? declaredAxis : sh.operative;
   const scale = num(rung.mult, 1) * num(iCfg.mult, 1)
     * (rDelta && rDelta.kind === "deepen" ? num(rDelta.mult, 1) : 1);
 
   const scaleField = k => { if (Number.isFinite(fields[k])) fields[k] = Math.max(1, Math.round(fields[k] * scale)); };
-  if (op === "damage" || op === "healing") {
+  if ((op === "damage" || op === "healing") && fields.dice) {
+    // DICE, not a band. The die COUNT climbs with tier and `plus` supplies the non-linearity Erik asked for
+    // at T-III ("exceed a straight doubling-again"), which integer dice alone cannot express. Intensity and a
+    // deepen-rank scale the ROLLED TOTAL via `mult` rather than minting fractional dice — 1.5d6 is not a
+    // thing a player can be shown, and the popup has to be able to say the craft's dice out loud.
+    const dl = rung.dice || { nMult: 1, plus: 0 };
+    fields.dice = { n: Math.max(1, Math.round(num(fields.dice.n, 1) * num(dl.nMult, 1))), d: num(fields.dice.d, 6) };
+    fields.plus = Math.round(num(fields.plus, 0) + num(dl.plus, 0));
+    const soft = num(iCfg.mult, 1) * (rDelta && rDelta.kind === "deepen" ? num(rDelta.mult, 1) : 1);
+    if (soft !== 1) fields.mult = Math.round(soft * 100) / 100;
+  } else if (op === "damage" || op === "healing") {
     if (fields.min != null) fields.min = Math.max(1, Math.round(num(fields.min, 1) * scale));
     if (fields.max != null) fields.max = Math.max(fields.min ?? 1, Math.round(num(fields.max, 1) * scale));
   } else scaleField(op);
@@ -125,6 +141,19 @@ export function mechanicFor(ability, { verb, tier, rank = 1, intensity = "standa
  *  nothing" intent while making the ceiling mean what the craft says it means. */
 export function rollMagnitude(fields = {}, rng = Math.random, { marginGap = 0, marginFloorPer = null } = {}) {
   const perPoint = Number.isFinite(marginFloorPer) ? marginFloorPer : num(fields.marginFloorPer, 0.02);
+  // SNG-263 r4: DICE are the craft's own shape. Rolling n independent dice gives a bell rather than the flat
+  // line a uniform band gave — which is what makes a big hit feel like a big hit rather than a coin flip, and
+  // it retires the `weight` fudge the band needed to sit where Erik wanted it.
+  if (fields.dice) {
+    const n = Math.max(1, num(fields.dice.n, 1)), faces = Math.max(2, num(fields.dice.d, 6));
+    let total = 0;
+    for (let i = 0; i < n; i++) total += 1 + Math.floor(rng() * faces);
+    total += num(fields.plus, 0);
+    // a decisive exchange raises the FLOOR without ever exceeding what the dice could have given
+    const ceiling = n * faces + num(fields.plus, 0);
+    total = Math.min(ceiling, total + Math.round(Math.max(0, marginGap) * perPoint));
+    return Math.max(1, Math.round(total * num(fields.mult, 1)));
+  }
   const min = Math.max(0, num(fields.min, 1));
   const max = Math.max(min, num(fields.max, min));
   const floor = Math.min(max, min + Math.round(Math.max(0, marginGap) * perPoint));

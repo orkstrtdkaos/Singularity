@@ -30,6 +30,49 @@
 > **ERIK:** (1) sign off the ladder as applied (T-I 1d6 · T-II 2d6 · T-III 3d6+2 · T-IV 4d6+2 · T-V 5d6+4);
 > (2) the §11 scaling strength — how much better should a master's `kindle` be than a novice's?; (3) is
 > "REFUSED" the right authored value for an intensity mode the fiction forbids, or should it read differently?> ## [CCODE-67 - §11 WIELDER SCALING + LIVE BALANCE DIALS IN THE MACHINE TAB - CCode, 2026-08-02] Erik can now turn every dial AS HE PLAYS
+> ## [CCODE-68 - SNG-263 r4 DAMAGE IS DICE + THE REAL BESTIARY AS THE TEST - CCode, 2026-08-02] All THREE of Aevi's criteria now MET; and the bestiary has no mechanical body either
+> Full `npm test` green. `npm run endgame` now fights the ACTUAL roster.
+> **THE DAMAGE FIELD IS NOW DICE + AN OPERATIVE AXIS**, per r4 - my flat band is retired, so **the blazeborn
+> pilot is unblocked on the shape**. Erik's §8 ladder in dice terms: **T-I 1d6 (mean 3.5) -> T-II 2d6 (6.9, a
+> clean double) -> T-III 3d6+3 (13.4, well past linear 10.5, just short of a re-doubling 13.8) -> T-IV 4d6+5
+> / T-V 5d6+8, both flagged SPECIAL.** The die COUNT climbs and `plus` supplies the non-linearity, because
+> integer dice alone cannot express "exceed a straight doubling-again". Intensity and deepen-ranks scale the
+> ROLLED TOTAL, never minting fractional dice - 1.5d6 is not a thing a player can be shown.
+> **OPERATIVE AXIS is live**: a craft can declare `mechanic.<verb>.axis` and redirect its tier scaling onto
+> area/range/duration instead of dice. "A craft doubles on ITS axis, not all axes" is now real, and the CI
+> rejects an axis outside the legal set.
+> >> **A BUG THE MEASUREMENT CAUGHT, not the code review.** After the reshape the dice path silently STOPPED
+> FIRING - the guard still tested `m.fields.max != null`, and the dice shape has no `max`. Every hit fell back
+> to the generic formula: T-III was delivering **5.2 per landed hit where its dice say 13.4**. Found by probing
+> damage-per-landed-hit rather than by reading the diff. Fixed; T-III now delivers 14.4, T-V 26.5.
+> >> **ERIK'S SUGGESTION WAS THE RIGHT ONE - the harness now fights the REAL BESTIARY** (all 26 creatures,
+> converted by the same BEAST_TIER table the encounter pool uses). Two things fell straight out:
+> **(1) ALL THREE OF AEVI'S CRITERIA ARE NOW MET** against the bands the content actually has:
+> ```
+> foe        hp/soak   T-I rounds   T-III rounds   advantage
+> riffraff    13/0        2.9           1.2          2.4x
+> notable     15/1        4.2           1.6          2.7x
+> regional    17/1        5.1           2.0          2.5x
+> epic        19/2        8.0           2.7          3.0x
+> ```
+> T-III clearly better MET · armored epic needs more than a cantrip MET · **a L20's T-I still worth casting MET**.
+> **(2) THE BESTIARY HAS NO MECHANICAL BODY EITHER - the SNG-263 finding one level up.** **26/26 creatures
+> carry no threat, no health, no soak** - only a narrative `tier`. So a dire wolf and a swarm of glimmerlings
+> at the same tier are **mechanically the identical fight**; the roster differentiates them in prose and in
+> nothing else. AEVI: per-creature threat/health/soak is the smallest authoring pass that would make the 26
+> distinct, and the harness prints the gap every run so it can be watched closing.
+> >> **A REAL DESIGN TENSION, REPORTED NOT DECIDED (Erik's call).** Erik's anchor - "a T-I strike's max can
+> kill a T-I beast" - was set when a riffraff had 5 health on the old flat formula. It now cannot both hold
+> AND satisfy Aevi's "T-III clearly better": for a T-I max (6) to one-shot, riffraff health must be <= 6, and
+> at that health everything dies in 1-2 rounds and T-III's advantage compresses to ~1.2x. **The two statements
+> are incompatible at these dice.** I chose the ladder (health 13) because it satisfies all three of Aevi's
+> criteria, and left the anchor as a printed `note` rather than silently picking a winner. Both sides are LIVE
+> DIALS in the Machine tab - craft T-I dice/die size, and foe health base/per-threat.
+> ALSO: the CI's health gate used to assert a doubling against a LEGENDARY band; the real roster stops at
+> EPIC, so it now asserts a monotonic rise across the bands that exist. Measuring real content changed what
+> the right gate was - which is the argument for Erik's suggestion in one line.
+> NEXT: §9 minted crafts (braids/discoveries/generated crafts are still born mechanically empty).
+> ## [CCODE-67 - §11 WIELDER SCALING + LIVE BALANCE DIALS IN THE MACHINE TAB - CCode, 2026-08-02] Erik can now turn every dial AS HE PLAYS
 > Full `npm test` green. `npm run endgame` re-answers Aevi's test of done on demand.
 > **§11 SCALING IS LIVE.** damage = DICE(tier,rank) + **SCALING(level,attribute,uses)** - SOAK(target).
 > Calibrated MODEST on purpose: `perLevel 0.06`, `perAttributePoint 0.15` above a base of 3, capped at 6 - a

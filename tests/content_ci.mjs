@@ -860,6 +860,57 @@ for (const pack of PACKS) {
   check("SNG-263 §8: the tier ladder reaches T-V and never steps down",
     mults.every(Number.isFinite) && mults.every((m, i) => i === 0 || m > mults[i-1]),
     `mults: ${mults.join(", ")}`);
+  // SNG-263 r4: the DICE ladder is what damage/healing actually read, and Erik's ruler is specific about its
+  // shape - T-II a clean double, T-III past linear. A ladder that satisfies `mult` but not this would look
+  // right in the config and play wrong at the table.
+  const dice = [1,2,3,4,5].map(t => ladder[String(t)]?.dice);
+  check("SNG-263 r4 §8: the DICE ladder reaches T-V and its die count never steps down",
+    dice.every(x => x && Number.isFinite(Number(x.nMult))) && dice.every((x, i) => i === 0 || Number(x.nMult) >= Number(dice[i-1].nMult)),
+    `nMult: ${dice.map(x => x && x.nMult).join(", ")}`);
+  {
+    // mean of nDm+plus = n*(d+1)/2 + plus, so the ruler can be checked in closed form rather than simulated
+    const base = cm.familyDefaults?.damage?.dice || { n: 1, d: 6 };
+    const meanAt = t => { const dl = ladder[String(t)]?.dice || { nMult: 1, plus: 0 };
+      return Number(base.n) * Number(dl.nMult) * (Number(base.d) + 1) / 2 + Number(dl.plus || 0); };
+    const m1 = meanAt(1), m2 = meanAt(2), m3 = meanAt(3);
+    check("SNG-263 r4 §8: T-II is about DOUBLE a T-I (Erik: 'twice the damage on its axis')",
+      m2 >= m1 * 1.8 && m2 <= m1 * 2.2, `T-I mean ${m1}, T-II mean ${m2}`);
+    check("SNG-263 r4 §8: T-III EXCEEDS linear (Erik: 'not linear — a real step up')",
+      m3 > m1 * 3, `T-I ${m1}, T-III ${m3}, linear would be ${m1 * 3}`);
+  }
+  {
+    // Erik's anchor, checked against the foe the engine actually synthesizes rather than a remembered 5
+    const sbSyn = rj("content/packs/core/rules/skill_battle_system.json").engine?.opponentSheetSynthesis || {};
+    const curve = (v, knee) => (v <= knee ? v : knee + Math.pow(v - knee, sbSyn.aboveKneeExponent ?? 0.75));
+    const peerHealth = Math.max(sbSyn.healthFloor ?? 3,
+      Math.round((sbSyn.healthBase ?? 4) + curve(22 * (sbSyn.threatToHealth ?? 0.09), sbSyn.healthKnee ?? 12)));
+    const b = cm.familyDefaults?.damage?.dice || { n: 1, d: 6 };
+    const maxT1 = Number(b.n) * Number(b.d) + Number(cm.familyDefaults?.damage?.plus || 0);
+    // Erik's anchor was set when a riffraff had 5 health and damage ran on the old generic formula. Now that
+    // health scales and damage is dice, the anchor and the TIER LADDER pull against each other: for a T-I max
+    // to one-shot a peer, riffraff health must sit at or below that max — and at that health everything dies
+    // in one or two rounds, which compresses T-III's advantage to ~1.2x and fails Aevi's first criterion.
+    // REPORTED, not gated: it is a genuine design tension between two of Erik's own statements, and picking
+    // one silently would be this file making a balance decision it has no business making.
+    if (maxT1 >= peerHealth) {
+      ok(`SNG-263 §7: a T-I strike's MAXIMUM can one-shot a peer riffraff (Erik's anchor) — max ${maxT1} vs ${peerHealth} health`);
+    } else {
+      console.log(`note  SNG-263 §7 TENSION — a T-I max is ${maxT1}; a peer riffraff now has ${peerHealth} health, so it cannot one-shot.`);
+      console.log(`      Erik's anchor ("a T-I max can kill a T-I beast") was set at 5 health on the old flat formula. Holding it`);
+      console.log(`      now means riffraff health <= ${maxT1}, and at that health T-III's advantage compresses to ~1.2x, failing`);
+      console.log(`      Aevi's "T-III clearly better". The two cannot both hold at these dice. ERIK'S CALL — and both sides are`);
+      console.log(`      live dials in the Machine tab (craft T-I dice/die size, foe health base/per-threat).`);
+    }
+  }
+  {
+    const legal = new Set(cm.operativeAxis?.legal || []);
+    check("SNG-263 r4: the legal operative-axis list is authored (a craft may double on ITS axis, not all)",
+      legal.size >= 5 && legal.has("damage") && legal.has("area"));
+    const badAxis = crafts.filter(c => c.mechanic && Object.values(c.mechanic).some(m => m && m.axis && !legal.has(m.axis)))
+      .map(c => c.id);
+    check("SNG-263 r4: no craft declares an operative axis outside the legal set",
+      badAxis.length === 0, `crafts with an unknown axis: ${badAxis.join(", ")}`);
+  }
   check("SNG-263 §8: T-IV and T-V are flagged SPECIAL (they buy a KIND of ability, not a bigger number)",
     ladder["4"]?.special === true && ladder["5"]?.special === true);
 

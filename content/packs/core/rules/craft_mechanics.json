@@ -2,53 +2,225 @@
   "schemaVersion": 1,
   "note": "SNG-263 — THE CRAFT MECHANICAL BODY. Erik: 'every function described needs a matching game mechanic that can be verified.' Audit confirmed exactly: 285 crafts, 24 verbs, and NO field for damage, healing, duration, range, area, targets or rank anywhere on any craft — of 24 verbs only strike and break did anything, so heal on 31 crafts healed nothing and ward on 23 warded nothing. This file is the SHAPE: what each verb-family DOES, and the default magnitudes a craft inherits until it authors its own. The engine reads craft.mechanic first and falls back here, so an unauthored craft still works and an authored one is genuinely its own.",
   "resolutionOrder": "craft.mechanic.<field>  ->  familyDefaults[family].<field>  ->  nothing (the verb does not use that dimension)",
-
   "families": {
-    "HARM":      { "verbs": ["strike", "break", "hinder"], "shape": "damage",      "operative": "damage",   "note": "A won exchange with a harming verb wounds. hinder sits in HARM by vocabulary but does not damage — it hobbles; its shape is overridden below." },
-    "RESTORE":   { "verbs": ["heal", "mend", "restore", "empower"], "shape": "healing", "operative": "healing", "note": "31 crafts said heal and healed nothing. Restores health to a target; empower instead grants a standing bonus (see overrides)." },
-    "PROTECT":   { "verbs": ["shield", "ward", "resist"], "shape": "guard",        "operative": "duration", "note": "A standing DEFENSIVE effect on the caster or an ally — reduces incoming harm for a duration. 23 crafts said ward and warded nothing." },
-    "INFLUENCE": { "verbs": ["bind", "command", "deceive", "conceal"], "shape": "hobble", "operative": "duration", "note": "A standing PENALTY on a target — 55 crafts said bind and bound nothing." },
-    "KNOW":      { "verbs": ["reveal", "foresee", "track"], "shape": "setup",      "operative": "setup",    "note": "The largest family (114 reveal crafts). Grants a setup bonus / reads the field — the sense-phase mechanic the engine already has, now something a craft can actually carry." },
-    "SHAPE":     { "verbs": ["make", "transform", "summon"], "shape": "construct", "operative": "duration", "note": "Creates or alters a thing that persists for a duration." },
-    "MOVE":      { "verbs": ["move", "travel", "open"], "shape": "reposition",     "operative": "range",    "note": "Changes position or opens a way — range is the operative dimension." },
-    "SUSTAIN":   { "verbs": ["sustain"], "shape": "bolster",                       "operative": "duration", "note": "Extends what is already standing / resists depletion." }
+    "HARM": {
+      "verbs": [
+        "strike",
+        "break",
+        "hinder"
+      ],
+      "shape": "damage",
+      "operative": "damage",
+      "note": "A won exchange with a harming verb wounds. hinder sits in HARM by vocabulary but does not damage — it hobbles; its shape is overridden below."
+    },
+    "RESTORE": {
+      "verbs": [
+        "heal",
+        "mend",
+        "restore",
+        "empower"
+      ],
+      "shape": "healing",
+      "operative": "healing",
+      "note": "31 crafts said heal and healed nothing. Restores health to a target; empower instead grants a standing bonus (see overrides)."
+    },
+    "PROTECT": {
+      "verbs": [
+        "shield",
+        "ward",
+        "resist"
+      ],
+      "shape": "guard",
+      "operative": "duration",
+      "note": "A standing DEFENSIVE effect on the caster or an ally — reduces incoming harm for a duration. 23 crafts said ward and warded nothing."
+    },
+    "INFLUENCE": {
+      "verbs": [
+        "bind",
+        "command",
+        "deceive",
+        "conceal"
+      ],
+      "shape": "hobble",
+      "operative": "duration",
+      "note": "A standing PENALTY on a target — 55 crafts said bind and bound nothing."
+    },
+    "KNOW": {
+      "verbs": [
+        "reveal",
+        "foresee",
+        "track"
+      ],
+      "shape": "setup",
+      "operative": "setup",
+      "note": "The largest family (114 reveal crafts). Grants a setup bonus / reads the field — the sense-phase mechanic the engine already has, now something a craft can actually carry."
+    },
+    "SHAPE": {
+      "verbs": [
+        "make",
+        "transform",
+        "summon"
+      ],
+      "shape": "construct",
+      "operative": "duration",
+      "note": "Creates or alters a thing that persists for a duration."
+    },
+    "MOVE": {
+      "verbs": [
+        "move",
+        "travel",
+        "open"
+      ],
+      "shape": "reposition",
+      "operative": "range",
+      "note": "Changes position or opens a way — range is the operative dimension."
+    },
+    "SUSTAIN": {
+      "verbs": [
+        "sustain"
+      ],
+      "shape": "bolster",
+      "operative": "duration",
+      "note": "Extends what is already standing / resists depletion."
+    }
   },
-
   "verbOverrides": {
-    "hinder":  { "shape": "hobble",  "operative": "duration", "why": "in the HARM vocabulary but it impedes rather than wounds — engine harmFunctions is strike+break only, and this keeps the mechanic honest to that" },
-    "empower": { "shape": "bolster", "operative": "duration", "why": "in RESTORE by vocabulary; mechanically it grants a standing bonus rather than restoring health" }
+    "hinder": {
+      "shape": "hobble",
+      "operative": "duration",
+      "why": "in the HARM vocabulary but it impedes rather than wounds — engine harmFunctions is strike+break only, and this keeps the mechanic honest to that"
+    },
+    "empower": {
+      "shape": "bolster",
+      "operative": "duration",
+      "why": "in RESTORE by vocabulary; mechanically it grants a standing bonus rather than restoring health"
+    }
   },
-
   "familyDefaults": {
-    "damage":     { "min": 1, "max": 5, "weight": 3, "marginFloorPer": 0.02, "note": "SNG-263 §7 — damage is ROLLED. Erik's anchor: a T-I strike's MAX can kill a T-I beast (engine default opponent health 5) and the AVERAGE takes 2-3 hits. `weight` bends the roll toward the low end; MEASURED against a peer matchup through the real battleRound, weight 3 gives mean 2.43 and 2.06 hits to kill — inside Erik's 2-3 band, with the max still able to one-shot. A flat uniform roll (weight 1) killed in 1.5. `marginFloorPer` lets a decisive exchange raise the FLOOR without ever exceeding the craft's max. All four numbers are Erik's dials; these are calibrated defaults, not decisions." },
-    "healing":    { "min": 1, "max": 4, "weight": 2 },
-    "guard":      { "magnitude": 2, "duration": 2, "note": "reduces incoming harm by magnitude, for duration rounds" },
-    "hobble":     { "magnitude": 2, "duration": 2, "note": "a named penalty on the target's rolls, for duration rounds" },
-    "setup":      { "magnitude": 3, "duration": 1, "note": "the setup bonus a read buys for the next exchange" },
-    "construct":  { "magnitude": 2, "duration": 3 },
-    "reposition": { "range": 1, "push": 1 },
-    "bolster":    { "magnitude": 2, "duration": 2 }
+    "damage": {
+      "dice": {
+        "n": 1,
+        "d": 6
+      },
+      "plus": 0,
+      "marginFloorPer": 0.02,
+      "note": "SNG-263 r4 §7/§11: damage is DICE, not a flat band. The die is what the craft IS; the wielder term and soak are applied by the engine around it. T-I default 1d6 — mean 3.5, max 6, so the MAX takes a peer riffraff (6hp) in one blow and the average needs two, which is Erik's anchor. `marginFloorPer` lets a decisive exchange raise the floor of the roll without ever exceeding what the dice can give."
+    },
+    "healing": {
+      "dice": {
+        "n": 1,
+        "d": 4
+      },
+      "plus": 0
+    },
+    "guard": {
+      "magnitude": 2,
+      "duration": 2,
+      "note": "reduces incoming harm by magnitude, for duration rounds"
+    },
+    "hobble": {
+      "magnitude": 2,
+      "duration": 2,
+      "note": "a named penalty on the target's rolls, for duration rounds"
+    },
+    "setup": {
+      "magnitude": 3,
+      "duration": 1,
+      "note": "the setup bonus a read buys for the next exchange"
+    },
+    "construct": {
+      "magnitude": 2,
+      "duration": 3
+    },
+    "reposition": {
+      "range": 1,
+      "push": 1
+    },
+    "bolster": {
+      "magnitude": 2,
+      "duration": 2
+    }
   },
-
   "tierLadder": {
-    "note": "SNG-263 §8, Erik's ruler in his own terms: T-II is DOUBLE a T-I on the craft's operative dimension; T-III is MORE than a straight doubling-again, not linear; T-IV and T-V stop being 'more of the same' and gain a SPECIAL ABILITY. capstoneStanding.capstoneTier is already 4, so the engine's existing capstone rung agrees with Erik's instinct. The multiplier applies to the OPERATIVE dimension only — a craft doubles on ITS axis, not all of them.",
-    "1": { "mult": 1,   "special": false },
-    "2": { "mult": 2,   "special": false },
-    "3": { "mult": 3.5, "special": false, "why": "better than the linear 3 — a real step up, per Erik" },
-    "4": { "mult": 4.5, "special": true,  "why": "capstone rung: the craft is expected to declare a qualitative ability, not just a bigger number" },
-    "5": { "mult": 5.5, "special": true }
+    "note": "SNG-263 §8, Erik's ruler. For MAGNITUDE shapes (guard/hobble/setup/construct/reposition/bolster) `mult` scales the operative dimension. For DICE shapes (damage/healing) the `dice` row is authoritative: the die COUNT climbs linearly and `plus` supplies the non-linearity, because Erik's T-III is 'not linear — it should exceed a straight doubling-again' and integer dice alone cannot express that. T-I 1d6 (mean 3.5) -> T-II 2d6 (7.0, a clean double) -> T-III 3d6+3 (13.5, well past linear 10.5 and close to a re-doubling of 14) -> T-IV/V flagged SPECIAL because at the capstone rung a craft should buy a KIND of ability, not a bigger number. capstoneStanding.capstoneTier is already 4, so the engine's existing rung agrees.",
+    "1": {
+      "mult": 1,
+      "dice": {
+        "nMult": 1,
+        "plus": 0
+      },
+      "special": false
+    },
+    "2": {
+      "mult": 2,
+      "dice": {
+        "nMult": 2,
+        "plus": 0
+      },
+      "special": false
+    },
+    "3": {
+      "mult": 3.5,
+      "dice": {
+        "nMult": 3,
+        "plus": 3
+      },
+      "special": false
+    },
+    "4": {
+      "mult": 4.5,
+      "dice": {
+        "nMult": 4,
+        "plus": 5
+      },
+      "special": true
+    },
+    "5": {
+      "mult": 5.5,
+      "dice": {
+        "nMult": 5,
+        "plus": 8
+      },
+      "special": true
+    }
   },
-
   "intensity": {
     "note": "SNG-263 §6 — Erik: conserve ~= HALF, surge ~= DOUBLE the operative dimension. But his constraint is the important half: 'each skill has its own descriptions, so you would need to audit each to verify they get applied logically.' A blanket x0.5/x2 is wrong for a concealment or a read, so these are the BASELINE only; a craft may state its own conserve/surge in its own terms via craft.mechanic.intensity, and the authored text is what the player is shown before committing.",
-    "conserve": { "mult": 0.5 },
-    "standard": { "mult": 1 },
-    "surge":    { "mult": 2 }
+    "conserve": {
+      "mult": 0.5
+    },
+    "standard": {
+      "mult": 1
+    },
+    "surge": {
+      "mult": 2
+    }
   },
-
   "rankDeltas": {
     "note": "SNG-263 §3 — Erik: 'I can't tell how ranks differ.' A rank must change something nameable. Three legal kinds, per Erik's own framing: ADD a function, DEEPEN the existing one (more magnitude), or EXTEND a dimension (area/range/duration). A craft declares its own per-rank delta; until it does, this default DEEPENS, so ranking up is never invisible. TIER is the craft's level-band; RANK is depth within an owned craft — different axes, never conflated.",
-    "kinds": ["add", "deepen", "extend"],
-    "default": { "kind": "deepen", "mult": 1.35, "why": "an unauthored rank still does something measurable — but a craft that names its own delta reads better and should" }
+    "kinds": [
+      "add",
+      "deepen",
+      "extend"
+    ],
+    "default": {
+      "kind": "deepen",
+      "mult": 1.35,
+      "why": "an unauthored rank still does something measurable — but a craft that names its own delta reads better and should"
+    }
+  },
+  "operativeAxis": {
+    "note": "SNG-263 r4: 'the damage field is dice plus an OPERATIVE AXIS, not a flat number.' A craft may declare `mechanic.<verb>.axis` to redirect its tier scaling onto a dimension other than its family's default — a strike that widens rather than deepens takes axis:'area', and its tier steps buy targets instead of dice. Legal axes are the dimensions a shape actually carries; an axis a shape has no field for is a no-op and the CI flags it.",
+    "legal": [
+      "damage",
+      "healing",
+      "duration",
+      "range",
+      "area",
+      "targets",
+      "push",
+      "setup",
+      "magnitude"
+    ]
   }
 }

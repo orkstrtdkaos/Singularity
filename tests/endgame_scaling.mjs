@@ -34,7 +34,15 @@ const fail = m => { console.log("FAIL  " + m); failures++; };
 const check = (label, cond, detail = "") => cond ? ok(label) : fail(label + (detail ? " — " + detail : ""));
 const pad = (v, n) => String(v).padStart(n);
 
-const BANDS = [["riffraff", 22], ["notable", 38], ["regional", 55], ["epic", 78], ["legendary", 150]];
+// Erik: "you might want to use the actual bestiary as tests... that would highlight any bestiary updates
+// needed too." Right on both counts. These are the REAL 26 creatures a player can meet, converted to a threat
+// by the SAME table the encounter pool uses (random_encounters BEAST_TIER), so this measures the fights that
+// actually happen rather than a synthetic ladder — and it immediately surfaced the finding below.
+const BEAST_TIER = { riffraff: 22, notable: 38, regional: 55, epic: 78 };
+const ROSTER = (rj("content/packs/valley/bestiary.json").roster || [])
+  .map(c => ({ id: c.id, name: c.name, tier: c.tier, threat: BEAST_TIER[c.tier] ?? 38,
+               authoredThreat: c.threat ?? null, authoredHealth: c.health ?? null, authoredSoak: c.soak ?? null }));
+const BANDS = ["riffraff", "notable", "regional", "epic"].map(t => [t, BEAST_TIER[t]]);
 const ROUND_CAP = 60;   // past this a fight is not a fight; it is a war of attrition nobody would sit through
 
 const rngFor = k => { let s = k * 7919 + 13; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };
@@ -90,6 +98,32 @@ for (const [name, threat] of BANDS) {
   }
 }
 
+// ── THE REAL BESTIARY — every creature a player can actually meet ───────────────────────────────────────
+console.log("\n      THE ACTUAL ROSTER — all " + ROSTER.length + " creatures, fought with a T-I and a T-III by a level-20 character");
+console.log("      creature                 tier        hp / soak    T-I rounds   T-III rounds");
+const beasts = [];
+for (const c of ROSTER) {
+  const t1 = roundsToKill(1, c.threat, 9, 120), t3 = roundsToKill(3, c.threat, 9, 120);
+  beasts.push({ ...c, t1, t3 });
+}
+for (const b of beasts) {
+  console.log(`      ${b.name.slice(0, 24).padEnd(24)} ${b.tier.padEnd(10)} ${pad(b.t1.health + " / " + b.t1.soak, 9)}   ${pad(isFinite(b.t1.rounds) ? b.t1.rounds.toFixed(1) : "never", 10)}   ${pad(isFinite(b.t3.rounds) ? b.t3.rounds.toFixed(1) : "never", 12)}`);
+}
+{
+  // THE POINT of using real content: it tells the authors what the content still owes.
+  const noThreat = beasts.filter(b => b.authoredThreat == null).length;
+  const noHealth = beasts.filter(b => b.authoredHealth == null).length;
+  const noSoak = beasts.filter(b => b.authoredSoak == null).length;
+  console.log(`\n      BESTIARY GAPS — what the roster still owes the mechanics:`);
+  console.log(`      ${noThreat}/${beasts.length} carry no THREAT of their own (all fall back to their tier's table value)`);
+  console.log(`      ${noHealth}/${beasts.length} carry no HEALTH, ${noSoak}/${beasts.length} no SOAK — so every creature of a tier is mechanically IDENTICAL.`);
+  if (noHealth === beasts.length) {
+    console.log("      A dire wolf and a swarm of glimmerlings at the same tier are the same fight. That is the SNG-263");
+    console.log("      finding one level up: the bestiary describes creatures and carries no mechanical body either.");
+    console.log("      AEVI: per-creature threat/health/soak is the smallest authoring pass that would make these distinct.");
+  }
+}
+
 // ── the structural gates — true at ANY tuning ───────────────────────────────────────────────────────────
 console.log("");
 check("a higher tier is never SLOWER than a lower one, at any band",
@@ -100,9 +134,13 @@ check("a tougher band never resolves FASTER than an easier one (T-III)",
   "the threat ladder is inverted somewhere — a harder foe dies quicker");
 check("nothing is unkillable — a T-III always finishes every band inside the round cap",
   rows.every(r => r.t3.killRate > 0.99), rows.filter(r => r.t3.killRate <= 0.99).map(r => `${r.name} ${(r.t3.killRate * 100).toFixed(0)}%`).join(", "));
-check("SNG-263 r4 GAP1 CLOSED: opponent health SCALES with threat (it was a flat 5 for everything)",
-  rows[rows.length - 1].t1.health > rows[0].t1.health * 2,
-  `riffraff ${rows[0].t1.health} vs legendary ${rows[rows.length - 1].t1.health}`);
+// The real roster tops out at EPIC (threat 78) — there is no legendary creature authored — so this asserts a
+// meaningful RISE across the bands that exist rather than a doubling against a band the content does not have.
+// The synthetic ladder used to include a legendary; measuring real content changed what the right gate is.
+check("SNG-263 r4 GAP1 CLOSED: opponent health RISES across the authored bands (it was a flat 5 for everything)",
+  rows.every((r, i) => i === 0 || r.t1.health > rows[i - 1].t1.health)
+  && rows[rows.length - 1].t1.health >= rows[0].t1.health + 4,
+  `${rows.map(r => `${r.name} ${r.t1.health}`).join(", ")}`);
 check("SNG-263 r4 GAP2 CLOSED: soak exists and rises with threat (there was none anywhere)",
   rows[rows.length - 1].t1.soak > 0 && rows[rows.length - 1].t1.soak >= rows[0].t1.soak,
   `riffraff ${rows[0].t1.soak} vs legendary ${rows[rows.length - 1].t1.soak}`);

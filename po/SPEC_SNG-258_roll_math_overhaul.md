@@ -218,3 +218,65 @@ home it can drift around and eventually leave under sustained contrary action; t
 player; and the payoff is that fit improves along the path you actually walk. HOW (the drift function, the rate,
 the anchor strength, the storage) is CCode's to design. This is a meaningful character-identity system, so it
 sequences LATE — after the roll-math core and §8/§10 — and likely wants its own ticket once the core lands.
+
+
+---
+
+# SNG-258 (round 3) — three more from Erik. Goals-first.
+
+## §4d — the roll-math + alignment transparency belongs on the CHARACTER SHEET (Erik)
+GOAL: everything the §4 roll popup shows in the moment — the term breakdown, spectral fit WITH its explanation,
+which aptitudes are helping, substrate fit, alignment and its trajectory — should also live on the **character
+sheet** as a standing view. The popup answers "why this roll"; the sheet answers "who am I and what am I good
+at, and why." Specifically the sheet should show: the character's alignment (and, per §4c, where it's DRIFTING),
+their aptitudes and how entrenched each is (§5 counter), their skills and practice level (§2 uses), and — for any
+craft — a plain-language read of their fit for it. Same data, two surfaces: the popup is per-roll, the sheet is
+the standing self-portrait. CCode owns the how; the goal is that a player can understand their character's
+mechanical identity from the sheet, not just infer it from rolls.
+
+## §4e — alignment/experience can be ATTACKED and RESTORED (Erik: "a real danger")
+GOAL: alignment drift (§4c) and use/experience (§2) are not only EARNED — they can be **assailed**. Some skills
+and some villains can:
+  - **pull your alignment** against your will (a corruptor dragging you off your path — the coerced-drift the
+    §4c lean said YOUR actions don't cause, but a hostile CRAFT deliberately can, as an attack);
+  - **erase use/experience** (strip practice from a skill, un-entrench an aptitude — a thief of mastery).
+This is a REAL danger in the world — losing who you are or what you've earned. AND it is **restorable**: certain
+crafts can heal alignment back toward true, or recover lost experience. So there's an attack/defense/restore
+triad on IDENTITY itself, the same way there is on health.
+GOAL restated: identity (alignment) and mastery (experience) are ASSAILABLE resources with their own attacks and
+their own healers — a curse can erode you, a craft can restore you. This makes identity something you can lose
+and fight to keep, not just accumulate. (This resolves the §4c tension cleanly: your own actions drift you
+naturally + slowly; a hostile craft can force drift as an ATTACK; a restorative craft heals it. Three distinct
+sources, one alignment value.) CCode owns the how; sequences with §4c (the drift system).
+
+## §11 — THE WORLD USES CRAFTS (the big one — Erik: "crafts are how the world DOES things")
+This is a foundational gap, verified in the engine. **NPCs only actually ROLL crafts inside a structured
+encounter (synthesizeOpponentSheet). Everywhere else, NPC skill use is NARRATIVE-ONLY** — the GM prompt records
+`skillsObserved` (a LABEL of what an NPC demonstrated) but there is no mechanism for an NPC to CAST a craft in
+the living world and have it resolve/do something. So the player must PROMPT the GM to have NPCs use skills, and
+the result is nebulous prose, not the craft system doing work. Crafts are meant to be how the WORLD does
+things — right now they're how the PLAYER does things and the world narrates around them.
+
+GOAL: **the world runs on the same craft system the player does.** NPCs — allies, rivals, villains, folk going
+about their lives — USE their crafts, visibly and mechanically, as a normal part of the world:
+  1. **NPCs use crafts unprompted**, in and out of encounters — a healer mends, a warden wards, a rival tracks
+     you, a villain works a curse — because that is how those people DO their work. The player should CONSTANTLY
+     see crafts in use around them, not have to ask for it.
+  2. **NPC craft use RESOLVES through the real system** — an NPC casting a craft rolls it (their attribute, their
+     tier, their fit) the way the player does, so the outcome is real and legible, not hand-waved. A villain's
+     bind is a real bind with a real strength you can read and resist; a healer's mend actually heals.
+  3. **What NPCs do with crafts has real EFFECTS** — an NPC warding a place creates the prepared ground of §10; a
+     villain pulling your alignment (§4e) is a craft they CAST; an NPC teaching is their craft demonstrated. The
+     craft system is the world's verb-set.
+  4. **It's LEGIBLE to the player** — you can see (fogged by your own senses, per sense.js) what an NPC is doing
+     with a craft, read its strength, and respond in kind. Seeing crafts used teaches the player the world's
+     possibilities.
+This is the spine that connects everything: §10 (prepared ground = NPCs casting persistent crafts), §4e (villains
+attacking your identity = a craft cast at you), the whole matchup/roll system (it should govern NPC actions too,
+not just player-vs-opponent-sheet). CCode owns the HOW (does the GM emit an npcCraftCast op the engine resolves?
+does the worldtick let delegated/present NPCs act? how is it fogged and surfaced?). The GOAL: the craft system is
+how the WORLD does things, the player sees it in use everywhere, and it resolves for real.
+
+Sequencing: §11 is FOUNDATIONAL and large — it likely wants its own epic once the roll-math core lands, because
+so much (§10, §4e, prepared ground, villain identity-attacks) is really "the world casting crafts." Flag it as
+the keystone that makes the whole craft system the world's engine, not just the player's toolbar.

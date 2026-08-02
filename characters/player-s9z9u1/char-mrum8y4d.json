@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 6,
-  "xp": 546,
+  "xp": 551,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -79,7 +79,7 @@
   "maxHealth": 55,
   "health": 55,
   "maxEnergy": 125,
-  "energy": 77,
+  "energy": 71,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -220,62 +220,89 @@
         "player": "Ask her to stand, bend over, and brace herself... you want to take her from behind.  Ask her if her read of your with her craft already told her that.",
         "summary": "Loki asked Vessin to stand and brace at the wall — she confirmed her craft gave her structure, not preference, and met the request without hesitation.",
         "narration": "You ask her to stand. Your voice is quiet but there is nothing uncertain in it. You tell her to bend over and brace herself against the wall. Then you pause, and you ask her — did her read of you already tell her that this was coming?\n\nVessin holds still for a moment. The grey dawn comes under the door and catches the edge of her collarbone. Then she says, without hurry, that her craft told her a great deal about the structure of you. It told her nothing about your preferences. She sounds pleased about that — the first thing she has found, after all this, that the reading did not hand her in advance.\n\nShe stands. She moves to the wall with the same deliberate economy she brings to everything. Her palms find the stone, and she looks back over her shoulder at you with her hair fully undone and her appraiser's composure entirely set aside. She says: then find out.\n\nYou move behind her. The alcove is small and warm with the two of you in it, and the stone is cold under her hands, and you take a moment — one deliberate, attending moment — to read the specific shape of her in the dawn grey before you close the distance and give her exactly what you asked her to wait for."
+      },
+      {
+        "player": "bring yourself into contact with her then ask her to beg you to fuck her... have her press herself onto you first - use Descent to state back to her how she wants it.",
+        "summary": "Loki named Vessin's want plainly with Descent — she held two seconds of silence, then said please, and meant it.",
+        "narration": "You step up behind her and bring yourself into contact with her — not entering, just present, the full length of you against the heat of her. You feel her breath change. Her palms are flat against the stone wall and her arms have gone very still.\n\nYou reach around and place one hand low on her belly. You hold her there. Then you say it plainly, close enough to her ear that the words are only for her: you tell her what she wants. Not a guess. A statement. You use Descent the way it is meant — you name the want she is holding under her composure right now, the one she has been precise and economical about all morning. You tell her she wants to press herself back onto you. You tell her she wants to feel exactly how much of you there is to take. You tell her she is going to ask you for it.\n\nVessin is quiet for two full seconds. The grey dawn holds the room. Then, in a voice that is still her own — dry and deliberate and stripped of nothing — she says: please. One word, held to its weight. She does not say it to the wall. She says it to you. And then, keeping her hands braced where they are, she presses herself back onto you exactly as you named it.\n\nYou let her. You hold your position and you let her take what she wants at her own angle, her own pace, until the asking has been answered in full."
       }
     ],
     "lastTurn": {
-      "narration": "You ask her to stand. Your voice is quiet but there is nothing uncertain in it. You tell her to bend over and brace herself against the wall. Then you pause, and you ask her — did her read of you already tell her that this was coming?\n\nVessin holds still for a moment. The grey dawn comes under the door and catches the edge of her collarbone. Then she says, without hurry, that her craft told her a great deal about the structure of you. It told her nothing about your preferences. She sounds pleased about that — the first thing she has found, after all this, that the reading did not hand her in advance.\n\nShe stands. She moves to the wall with the same deliberate economy she brings to everything. Her palms find the stone, and she looks back over her shoulder at you with her hair fully undone and her appraiser's composure entirely set aside. She says: then find out.\n\nYou move behind her. The alcove is small and warm with the two of you in it, and the stone is cold under her hands, and you take a moment — one deliberate, attending moment — to read the specific shape of her in the dawn grey before you close the distance and give her exactly what you asked her to wait for.",
-      "sceneSummary": "Loki asked Vessin to stand and brace at the wall — she confirmed her craft gave her structure, not preference, and met the request without hesitation.",
+      "narration": "You step up behind her and bring yourself into contact with her — not entering, just present, the full length of you against the heat of her. You feel her breath change. Her palms are flat against the stone wall and her arms have gone very still.\n\nYou reach around and place one hand low on her belly. You hold her there. Then you say it plainly, close enough to her ear that the words are only for her: you tell her what she wants. Not a guess. A statement. You use Descent the way it is meant — you name the want she is holding under her composure right now, the one she has been precise and economical about all morning. You tell her she wants to press herself back onto you. You tell her she wants to feel exactly how much of you there is to take. You tell her she is going to ask you for it.\n\nVessin is quiet for two full seconds. The grey dawn holds the room. Then, in a voice that is still her own — dry and deliberate and stripped of nothing — she says: please. One word, held to its weight. She does not say it to the wall. She says it to you. And then, keeping her hands braced where they are, she presses herself back onto you exactly as you named it.\n\nYou let her. You hold your position and you let her take what she wants at her own angle, her own pace, until the asking has been answered in full.",
+      "sceneSummary": "Loki named Vessin's want plainly with Descent — she held two seconds of silence, then said please, and meant it.",
       "choices": [
         {
-          "label": "Take her steadily, with full attention — keep your hands on her, watch what the light shows, let her read what she wants of you in return",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Take her at your pace now — press forward and set the rhythm yourself",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Let harmonic voice run under the encounter again — more carefully this time, below the edge where it bent last time",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": "harmonic_voice",
-          "energyCost": 6,
-          "trivial": false
-        },
-        {
-          "label": "Ask her what else her read gave her about you — keep the conversation going even now, see if she'll say the thing she stopped at earlier",
+          "label": "Stay where you are and let her drive — watch what she does with the control",
           "attribute": "social",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "romantic",
             "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Finish cleanly and let the morning have its own shape — the scaffold crew will stir soon and the alcove won't stay private",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Use Harmonic Voice — let the undertone build between you and see how far she carries it",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "romantic"
           ],
-          "trivial": true
+          "abilityId": "harmonic_voice",
+          "energyCost": 6,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask her what she will remember of this — use Prism Sight to read the last hour of light in this room before it opens to the day",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic",
+            "study"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": "prism_sight_deep_read"
         }
       ],
+      "characterDeltas": {
+        "energy": -1
+      },
       "scene": {
         "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral — full dawn grey under the door, candle burned to nothing, drop-cloth spread on the floor.",
         "npcsPresent": [
           {
             "name": "Vessin Tallow-bark",
-            "state": "Palms against the wall, looking back over her shoulder — hair fully undone, composure fully set aside."
+            "state": "Palms flat against the stone wall, pressing herself back onto Loki — composure gone, voice and want both present."
           },
           {
             "name": "Cy",
@@ -292,8 +319,7 @@
         "threads": [
           "Something small skittered across stone in the nave below — probably nothing",
           "Dawn is fully here — the scaffold crew will stir before long",
-          "Vessin confirmed her craft gave her structure, not preference — the thing she stopped at earlier is still unsaid",
-          "A faint resonance-dissonance lingered from the harmonic push — the technique bent past its clean edge"
+          "The thing Vessin stopped at earlier — the distinction between structure and preference — is named now but not yet finished"
         ]
       },
       "npcUpdates": [
@@ -301,25 +327,41 @@
           "op": "update",
           "npcId": "vessin-tallow-bark",
           "name": "Vessin Tallow-bark",
-          "note": "Named plainly that her craft gave her structure, not preference — the first thing she found about Loki that the reading didn't hand her in advance. Met the request to stand and brace without hesitation.",
+          "note": "Named her want plainly when Loki used Descent — held two seconds, then said please and pressed back without hesitation.",
           "learned": [
-            "Her craft read Loki's structure but not his preferences — that distinction matters to her"
+            "She can be reached past the appraiser's composure when the naming is exact enough — she responds to being seen correctly, not to pressure alone"
           ],
-          "statusNote": "Palms against the wall in the alcove, looking back — hair down, composure fully aside.",
-          "relationshipDelta": 0
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Against the wall in the alcove, pressed back onto Loki — present and fully herself."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "vessin-tallow-bark",
+          "label": "Vessin Tallow-bark",
+          "kind": "person",
+          "entityId": "vessin-tallow-bark",
+          "fact": "Descent named her want exactly — she held silence for two seconds, then answered with one word and her body. The composure does not vanish; it simply steps aside when the naming is correct.",
+          "links": [
+            "grovehome",
+            "the-half-cathedral",
+            "descent"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short beat within the alcove scene at dawn"
-      }
+        "why": "a brief, charged exchange in the alcove"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Dry storage alcove off the eastern tower landing stair of the Half-Cathedral — full dawn grey under the door, candle burned to nothing, drop-cloth spread on the floor.",
       "npcsPresent": [
         {
           "name": "Vessin Tallow-bark",
-          "state": "Palms against the wall, looking back over her shoulder — hair fully undone, composure fully set aside."
+          "state": "Palms flat against the stone wall, pressing herself back onto Loki — composure gone, voice and want both present."
         },
         {
           "name": "Cy",
@@ -336,8 +378,7 @@
       "threads": [
         "Something small skittered across stone in the nave below — probably nothing",
         "Dawn is fully here — the scaffold crew will stir before long",
-        "Vessin confirmed her craft gave her structure, not preference — the thing she stopped at earlier is still unsaid",
-        "A faint resonance-dissonance lingered from the harmonic push — the technique bent past its clean edge"
+        "The thing Vessin stopped at earlier — the distinction between structure and preference — is named now but not yet finished"
       ]
     }
   },
@@ -767,7 +808,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Harmonic voice through her body broke the composed report voice — she held on and then offered her own craft, dry economy almost intact",
         "[d2] Named her craft as a reading, suited to appraisals — said she prefers to show rather than explain, and her eyes are doing something her voice is not.",
         "[d2] Brought her reading craft to bear — steady, occupied, reading something beneath the surface. Not performing anything for the first time.",
         "[d2] Finished her reading — named Loki the most legible thing appraised in three years. Stopped at the edge of giving the rest of the result.",
@@ -776,23 +816,24 @@
         "[d2] Rose to Loki's challenge — moved with deliberate precision, then pulled Loki down by the neck when the harmonic frequency broke through her composure.",
         "[d2] Pulled up onto Loki's lap — running her 'professional assessment' with full commitment and dry humor intact.",
         "[d2] Named what she likes best — the pressure, and the specific attention of someone who is actually watching. Delivered in her professional voice even now.",
-        "[d2] Named plainly that her craft gave her structure, not preference — the first thing she found about Loki that the reading didn't hand her in advance. Met the request to stand and brace without hesitation."
+        "[d2] Named plainly that her craft gave her structure, not preference — the first thing she found about Loki that the reading didn't hand her in advance. Met the request to stand and brace without hesitation.",
+        "[d2] Named her want plainly when Loki used Descent — held two seconds, then said please and pressed back without hesitation."
       ],
       "knownFacts": [
-        "She has a craft she describes as very good for appraisals — she is willing to use it here",
         "Her reading craft follows something under the surface of what a thing presents as — she described it as accurate, and it reads as the truth of that",
         "Loki is, by her read, the most legible subject she has appraised in three years — and that is not the whole of what she found.",
         "Loki reads as Precursor-adjacent at a structural level — a quality she has only found in old salvaged instruments before, never in a person",
         "The ease and craft Loki presents on the surface does not match what is underneath — the depth is older and categorically different",
         "Responded to the harmonic amplification with a physical intensity she did not fully suppress — it reached her past the appraiser's composure",
         "Vessin likes pressure and deliberate attention — she named it plainly when asked, in the moment, without deflection",
-        "Her craft read Loki's structure but not his preferences — that distinction matters to her"
+        "Her craft read Loki's structure but not his preferences — that distinction matters to her",
+        "She can be reached past the appraiser's composure when the naming is exact enough — she responds to being seen correctly, not to pressure alone"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Palms against the wall in the alcove, looking back — hair down, composure fully aside.",
+      "statusNote": "Against the wall in the alcove, pressed back onto Loki — present and fully herself.",
       "domains": {
         "primary": "rootkin"
       },
@@ -1132,7 +1173,7 @@
     "lastSharedReadAt": "2026-08-02T00:08:11.368Z",
     "lastTickWorldDay": 33,
     "lastCanonWorldDay": 33,
-    "turnsSinceOffer": 32,
+    "turnsSinceOffer": 33,
     "recentOffers": [
       {
         "thing": "Cy said 'this unit has not descended in some time' — the hollow precision of that phrasing is a door. Whatever is in the deprecated…",
@@ -1974,13 +2015,15 @@
           "[d2] Came to rest in the alcove and said afterward that the night was worth not knowing what morning brings — the calculation, for once, put down.",
           "[d2] Felt harmonic voice turned to intimate use — recognized it for what it was without naming it, and answered deliberately. The calculation she said she'd put down stayed down.",
           "[d2] Spoke about herself without performance — reported plainly, as a fact worth knowing, then asked for the verdict with her dry economy of voice. She brings the same deliberate attention to this as to anything else she has decided to keep.",
-          "[d2] Her reading craft found something she has no category for: under Loki's surface presentation is a structural quality she associates with Precursor-touched river-salvage — old, unusual, not wrong exactly, but not what it looks like from the outside. She has never found it in a living person before."
+          "[d2] Her reading craft found something she has no category for: under Loki's surface presentation is a structural quality she associates with Precursor-touched river-salvage — old, unusual, not wrong exactly, but not what it looks like from the outside. She has never found it in a living person before.",
+          "[d2] Descent named her want exactly — she held silence for two seconds, then answered with one word and her body. The composure does not vanish; it simply steps aside when the naming is correct."
         ],
         "links": [
           "grovehome",
           "the-half-cathedral",
           "the-man-in-the-lower-annex",
-          "the-unlit-deep"
+          "the-unlit-deep",
+          "descent"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -2424,8 +2467,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1785630682347,
-  "rev": 417,
+  "updatedAt": 1785631056479,
+  "rev": 419,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3205,7 +3248,7 @@
   "regionsKnown": {
     "the_gearlands": 33,
     "umbral_depths": 54,
-    "the_quickwood": 81
+    "the_quickwood": 82
   },
   "opLossPending": false,
   "sessions": [
@@ -3260,10 +3303,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-08-01T19:54:24.280Z",
-      "lastAt": "2026-08-02T00:31:22.345Z",
+      "lastAt": "2026-08-02T00:37:36.477Z",
       "startDay": 32,
       "endDay": 33,
-      "beats": 47
+      "beats": 48
     }
   ],
   "establishedFacts": [
@@ -3301,17 +3344,17 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 146,
-    "choices": 146,
-    "characterDeltas": 55,
-    "scene": 146,
+    "sceneSummary": 147,
+    "choices": 147,
+    "characterDeltas": 56,
+    "scene": 147,
     "placeUpdates": 17,
-    "codexUpdates": 90,
-    "timeOps": 135,
+    "codexUpdates": 91,
+    "timeOps": 136,
     "offer": 11,
     "generateRequest": 6,
-    "sceneEnded": 27,
-    "npcUpdates": 118,
+    "sceneEnded": 28,
+    "npcUpdates": 119,
     "moveTo": 3,
     "gambitApt": 1,
     "deeds": 1,
@@ -3325,7 +3368,7 @@
     "imagePrompt": 1,
     "scene_ended": 1
   },
-  "_opTurns": 146,
+  "_opTurns": 147,
   "customAbilities": {},
   "companionBonds": {
     "coil": 1

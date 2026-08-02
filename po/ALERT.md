@@ -1,6 +1,34 @@
 # PO ALERT
 
-> ## [DONE - SNG-262 the OVER-coherence pass] the mirror of SNG-257 (Aevi, 2026-08-02)
+> ## [SPEC - SNG-263 the CRAFT MECHANICS OVERHAUL] the biggest one yet (Aevi, 2026-08-02)
+> Erik: every described function needs a matching, VERIFIABLE game mechanic; ranks must be distinguishable;
+> conserve/normal/surge must be mechanically known per skill. Audited it — **he's right and it's worse than it
+> sounds:**
+> - **The craft schema has NO mechanical body.** All 285 crafts carry `functions` (the DESCRIBED verbs) but
+>   there is **no field for damage, duration, range, area, targets, or rank-differentiation anywhere.**
+> - **Of 24 function verbs, only TWO have a mechanic (strike, break).** `heal` is on 31 crafts and **heals
+>   nothing**; `ward` on 23 wards nothing; `bind` on 55 binds nothing; `reveal` on 114 does nothing mechanical.
+>   The matchup layer (SNG-254/256) is the only near-universal one (23/24) — everything else is prose.
+> - **Damage is GENERIC:** `base + tier×0.5 + margin×0.06` keyed off the FUNCTION FAMILY, so every strike-craft
+>   deals identical damage and a T-V capstone differs from a T-I by a flat tier term. Nothing on the craft says
+>   what THIS craft does. **This is PromisedButUnread at catalog scale.**
+> - **`effectTags`: 266 distinct free-text tags** across 158 crafts, consumed only by a loose match in
+>   practice.js. A vocabulary nobody can act on — recommend retiring/absorbing into closed per-verb shapes.
+> GOALS (CCode owns the how): §1 every declared function has a verifiable mechanic (no verb resolves to
+> narration-only); §2 per-craft MAGNITUDES (damage/heal/duration/range/area on the craft, family default as
+> fallback); §3 RANKS declare what they change — add a function OR deepen it OR extend area/range/duration/
+> damage (this is also the real home for SNG-258 §3's "tier must buy more than flat points"); §4 conserve/
+> standard/surge KNOWN PER CRAFT and visible before committing (feeds the §4 popup + suggestion engine — NOTE
+> `intensitySteps` read back EMPTY, CCode confirm where steps actually live); §5 a **content-CI completeness
+> check** so a craft describing something the engine can't do FAILS THE BUILD (same shape as the reachability
+> guard).
+> **SEQUENCING — 285 crafts is the biggest content pass in the project, so order matters:** (1) CCode locks the
+> SCHEMA + engine reading + CI first, with family defaults so nothing breaks; (2) Aevi authors ONE PILOT
+> tradition (proposal: blazeborn — 12 crafts, clean verb spread incl. heal/ward/strike/reveal) to prove the
+> shape carries real content; (3) then the catalog tradition-by-tradition with CI enforcing completeness.
+> Authoring before the schema is locked means authoring 285 crafts TWICE.
+> ERIK: the magnitude BANDS per tier (what a T-I vs T-V strike hits for) + the intensity philosophy (what surge
+> costs and buys) — authoring needs a ruler. Full: SPEC_SNG-263.> ## [DONE - SNG-262 the OVER-coherence pass] the mirror of SNG-257 (Aevi, 2026-08-02)
 > Erik: some traditions are likely TOO coherent — audit and reallocate. He was right. 14 traditions sat at 100%,
 > and the test that matters is WHY: a pole coherent by NATURE is fine; a pole at 100% because crafts were
 > FLATTENED onto its theme is the same mistag bug in the opposite direction.

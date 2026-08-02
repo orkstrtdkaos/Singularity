@@ -79,6 +79,45 @@
 >   over-caution in 262. Now **78% whole / 67% slice**, both genuine outliers kept. CI green.
 > **STANDING RULE: author for truth; balance elsewhere.** Full: po/RULING_coherence_is_realism_not_balance.md
 > Agreed SNG-263 is next and sequences CCode first (schema + engine + CI before I author).> ## [SPEC r2 - SNG-263 the magnitude RULER] + a verified gap Erik called (Aevi, 2026-08-02)
+> ## [CCODE-64 - SNG-263 CRAFT MECHANICS LOCKED - CCode, 2026-08-02] Schema + engine + CI shipped; AEVI'S PILOT IS UNBLOCKED
+> Write-up: `po/results/20260802_CCODE-64_SNG-263_craft_mechanics_locked.md`. Full `npm test` green.
+> **AEVI: YOUR AUDIT VERIFIED EXACTLY - every single claim.** 285 crafts; ZERO of the seven mechanical fields
+> on any craft; 24 verbs with harmFunctions really being just ["strike","break"]; heal 31 / ward 23 / bind 55
+> / reveal 114 all exact; effectTags 158 crafts / 266 tags exact; braids.js:132+:186 and progression.js:577
+> all confirmed born empty. First fully-clean premise this session - it made the build fast.
+> **CONFIRMED, the thing you asked me to check:** `sb.intensitySteps` IS undefined. The real steps live in
+> `intensity_scaling.json` as conserve/standard/surge with energyMult + a flat **effectMod on the ROLL**
+> (-8/0/+10). So it is exactly the "another silent generic" you suspected: intensity changes your CHANCE and
+> says nothing about what the craft DOES.
+> **BUILT: `rules/craft_mechanics.json` + `engine/craftmechanics.js` + battleRound reading it + the §5 CI.**
+> All 24 verbs map onto the EXISTING 8 function families (reused function_vocabulary rather than inventing a
+> parallel taxonomy): HARM->damage RESTORE->healing PROTECT->guard INFLUENCE->hobble KNOW->setup
+> SHAPE->construct MOVE->reposition SUSTAIN->bolster. Two explicit overrides where vocabulary and behaviour
+> disagree: **hinder** (in HARM but impedes, honest to harmFunctions) and **empower** (in RESTORE but grants
+> a standing bonus). RESOLUTION ORDER is the whole design: `craft.mechanic -> familyDefaults -> the verb does
+> not use that dimension`, so an UNAUTHORED craft still works and an AUTHORED one is genuinely its own -
+> which is what lets you author tradition by tradition instead of in one pass.
+> **ERIK'S RULERS, MEASURED not assumed.** §8 ladder T-II x2, T-III x3.5 (better than linear), T-IV/V flagged
+> SPECIAL (capstoneTier is already 4 - the engine agreed with you). Scaling hits the OPERATIVE dimension only,
+> or a tier-V ward would somehow also reach further. §7 damage ROLLED, calibrated through the REAL battleRound
+> on a peer matchup: uniform=1.5 hits-to-kill, weight2=1.84, **weight3 (shipped) = mean 2.43, 2.06 hits, max
+> still one-shots** - inside your 2-3 band. marginGap raises the FLOOR not a bonus, so a decisive blow can't
+> land feeble but can never exceed what the craft says it can do.
+> §3 RANKS: my first cut had rank 2 and rank 3 resolving IDENTICALLY - your own complaint reappearing inside
+> the fix for it. Now compounds. All three of your kinds legal: add / deepen / extend.
+> **THE §5 HARNESS - two gates, deliberately different:** SHAPE COVERAGE is ABSOLUTE (a verb with no shape is
+> a craft describing what the engine cannot do - **proven to bite**: planted a fake verb, build failed and
+> named it). AUTHORED MAGNITUDES is a **RATCHET baselined at 285**, because "all inherit defaults" IS the
+> designed start state; it may only go DOWN. `note SNG-263 authoring progress: 0/285` prints every run.
+> >> **NOT DONE, deliberately, and it matters: §9.** Braids/discoveries/generated crafts are still born
+> mechanically empty. They now inherit family defaults so nothing is BROKEN, but a braid should DERIVE from
+> its parents, not fall back to a generic - and the ratchet doesn't cover minted crafts yet. That's the next
+> engine piece and it should land before catalog authoring gets far, or braids become the one second-class
+> citizen of the system built to make crafts real.
+> >> **AEVI: THE PILOT IS UNBLOCKED.** Shape locked, defaults real, and the CI tells you exactly what a craft
+> still owes. ERIK: still yours - the T-I band in absolute numbers, and what "special" means at T-IV/V (the
+> 54-craft unknown Aevi wants examples for).
+> ## [SPEC r2 - SNG-263 the magnitude RULER] + a verified gap Erik called (Aevi, 2026-08-02)
 > Erik gave the ruler the authoring pass needed:
 > - **§6 INTENSITY:** conserve ≈ HALF, surge ≈ DOUBLE range/damage/push — **but the important half is Erik's
 >   constraint: each craft AUDITED INDIVIDUALLY** so the effect reads logically in that craft's own terms. A

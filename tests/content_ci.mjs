@@ -817,5 +817,60 @@ for (const pack of PACKS) {
     wouldCatch, "the guard cannot detect an unreachable carrier - it would pass the very bug it exists for");
 }
 
+
+// ---------- SNG-263 §5: THE CRAFT-MECHANICS COMPLETENESS HARNESS ----------
+// Erik: "every function described needs a matching game mechanic that can be verified." The measured start
+// state: 285 crafts, 24 verbs, and only strike/break did anything - heal on 31 crafts healed nothing, ward on
+// 23 warded nothing, reveal on 114 did nothing. Two different questions, and they need different gates:
+//
+//   (1) SHAPE COVERAGE - does every verb the catalog uses resolve to an implemented effect-shape? This is
+//       ABSOLUTE. A verb with no shape is a craft that describes a capability the engine cannot perform, and
+//       that is the bug this ticket exists to end. It must be zero, today and forever.
+//   (2) AUTHORED MAGNITUDES - how many crafts still inherit their family's defaults instead of declaring
+//       their own numbers? This is a RATCHET, because the answer today is "all 285" by design: the fallback
+//       chain is what lets Aevi author the catalog tradition by tradition instead of in one pass. It may
+//       only go DOWN, so the catalog can fill in and can never drift back.
+{
+  const cm = rj("content/packs/core/rules/craft_mechanics.json");
+  const crafts = [];
+  for (const f of readdirSync(join(root, "content/packs/core/abilities")).filter(x => x.endsWith(".json"))) {
+    const pk = rj(`content/packs/core/abilities/${f}`);
+    for (const a of (pk.abilities || [])) crafts.push({ ...a, powerSystem: a.powerSystem || pk.powerSystem });
+  }
+  const shaped = new Set();
+  for (const fam of Object.values(cm.families || {})) for (const v of (fam.verbs || [])) shaped.add(v);
+  for (const v of Object.keys(cm.verbOverrides || {})) shaped.add(v);
+
+  const used = new Set();
+  for (const c of crafts) for (const v of (c.functions || [])) used.add(v);
+  const orphanVerbs = [...used].filter(v => !shaped.has(v));
+  check("SNG-263 §1: every verb the catalog uses resolves to an implemented effect-shape (no craft describes what the engine cannot do)",
+    orphanVerbs.length === 0, `unmechanised verbs: ${orphanVerbs.join(", ")}`);
+
+  // every shape named by a family must have defaults, or the fallback chain has a hole
+  const shapes = new Set([...Object.values(cm.families || {}).map(f => f.shape),
+                          ...Object.values(cm.verbOverrides || {}).map(o => o.shape)]);
+  const shapesWithoutDefaults = [...shapes].filter(s => !cm.familyDefaults?.[s]);
+  check("SNG-263 §2: every effect-shape has family defaults (an unauthored craft still resolves to real numbers)",
+    shapesWithoutDefaults.length === 0, `shapes with no defaults: ${shapesWithoutDefaults.join(", ")}`);
+
+  // the tier ladder must reach T-V and be monotonic - the catalog has 28 crafts at levelReq 4 and 26 at 5
+  const ladder = cm.tierLadder || {};
+  const mults = [1,2,3,4,5].map(t => Number(ladder[String(t)]?.mult));
+  check("SNG-263 §8: the tier ladder reaches T-V and never steps down",
+    mults.every(Number.isFinite) && mults.every((m, i) => i === 0 || m > mults[i-1]),
+    `mults: ${mults.join(", ")}`);
+  check("SNG-263 §8: T-IV and T-V are flagged SPECIAL (they buy a KIND of ability, not a bigger number)",
+    ladder["4"]?.special === true && ladder["5"]?.special === true);
+
+  const authoredCrafts = crafts.filter(c => c.mechanic && Object.keys(c.mechanic).length).length;
+  const unauthored = crafts.length - authoredCrafts;
+  console.log(`note  SNG-263 authoring progress: ${authoredCrafts}/${crafts.length} crafts declare their own mechanic (${unauthored} still inherit family defaults)`);
+  const CRAFTS_UNAUTHORED_BASELINE = 285;
+  check(`SNG-263 §5 ratchet: crafts still inheriting family defaults = ${unauthored} (baseline ${CRAFTS_UNAUTHORED_BASELINE}) — may only go DOWN`,
+    unauthored <= CRAFTS_UNAUTHORED_BASELINE,
+    "a craft LOST its authored mechanic — the catalog may only fill in, never empty out");
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -375,5 +375,10 @@
   "purpose": "The ROUND RECEIPT — the line the player reads and the GM narrates from. Extracted from app.js so it could be TESTED: roundVerdict (did the meter actually move, with a 0.5 deadband), interactionClause (how two declared moves read against each other), and receiptLine (the whole thing).",
   "playerVisibleSurface": "The per-round receipt in the encounter ribbon, and — because the GM narrates FROM these beats — the prose of every fight turn.",
   "whatMakesItFire": "Every resolved contest round (app.js sbRoundReceipt / sbFightBeat), and tests/contest_sim.mjs, which Monte-Carlos it across threat bands to assert a decisive round is never reported as even. It lives here BECAUSE it shipped a permanent \"neither gains — it's even\" while it was untestable inside app.js."
+ },
+ "craftmechanics.js": {
+  "purpose": "SNG-263: THE CRAFT MECHANICAL BODY. Erik: 'every function described needs a matching game mechanic that can be verified.' The audit found 285 crafts carrying `functions` and not one field for damage, healing, duration, range, area or rank — of 24 verbs only strike and break did anything, so heal on 31 crafts healed nothing and reveal, the largest family at 114 crafts, did nothing at all. This resolves a verb to its family's effect-SHAPE and then to real numbers: magnitudes, Erik's tier ladder (T-II doubles, T-III beats linear, T-IV/V flagged special), the per-rank delta, and per-intensity scaling. Damage is ROLLED, calibrated so a T-I strike's maximum can kill a 5-health peer and its average takes 2-3 hits.",
+  "playerVisibleSurface": "NONE directly — the player meets it as crafts that finally DO what their description says: a ward that actually reduces incoming harm, a heal that restores health, a bind that applies a named penalty, and a rank-up that changes a number they can point at.",
+  "whatMakesItFire": "Pure and injected: every magnitude, multiplier and band comes from rules/craft_mechanics.json. NEVER invents a number, and NEVER reports a zero for a dimension a verb does not use — 'no range' and 'range 0' must not look alike."
  }
 }

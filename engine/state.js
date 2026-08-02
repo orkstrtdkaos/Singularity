@@ -59,7 +59,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -75,11 +75,16 @@ export async function loadContent() {
     loadRule("world_clock", null),                                      // SNG-191: two clocks — the Kept Count unit + peoples' idioms
     loadRule("schools", null),                                          // SNG-193b: a tradition is a root; a school is what it reaches WITH (sets the substrate band)
     loadRule("class_archetypes", null),                                 // SNG-192 §4: soft archetype lenses (role × reach) for the creation front door
-    loadRule("repair_panel_manifest", null)                             // SNG-207 §6.2: the authoritative Repair-panel capability list, for the GM's context (no hallucinated controls)
+    loadRule("repair_panel_manifest", null),                            // SNG-207 §6.2: the authoritative Repair-panel capability list, for the GM's context (no hallucinated controls)
+    loadRule("craft_mechanics", { families: {}, familyDefaults: {} })    // SNG-263: what each verb-family DOES + the magnitudes an unauthored craft inherits
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
+  // SNG-263: the craft-mechanics config rides the rules bag so battleRound reads it off a value it already
+  // carries — adding it as a battleRound OPTION would have to survive skillBattleRound's hand-built call,
+  // and seam_battle_round_options records four separate times an option was silently dropped there.
+  rules.craftMechanics = craftMechanics || null;
   // SNG-055/059: traditions optional — absence leaves the domain gates ungoverned (open), never breaks load.
   let traditions = traditionsRaw, traditionIndex = null;
   if (traditions) { try { traditionIndex = buildTraditionIndex(traditions); } catch { traditions = null; } }
@@ -305,7 +310,7 @@ export async function loadContent() {
   }
 
   console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length} bestiary=${bestiary.roster?.length || 0} beastEncounters=${(randomEncounters?.encounters || []).filter(e => /^beast_/.test(e.id)).length} traditionMotivations=${Object.keys(traditionMotivations?.traditions || {}).length} npcInteriority=${Object.keys(npcInteriority?.npcs || {}).length} traditionAesthetics=${Object.keys(traditionAestheticsDoc?.traditions || {}).length} wardDenials=${Object.keys(frameContentDoc?.wardDenials || {}).filter(k => k[0] !== "_").length} challengePremises=${Object.keys(frameContentDoc?.challengePremises || {}).filter(k => k[0] !== "_").length} frameKinds=${Object.keys(frameKindsDoc?.frameKinds || {}).length} frameExemplarEncounters=${(randomEncounters?.encounters || []).filter(e => e.fromFrameExemplar).length} consumerContractTypes=${Object.keys(consumerMapDoc?.contentTypes || {}).length}`);
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
+  const content = { craftMechanics, spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, repairPanelManifest, trait_readouts: traitReadoutsDoc?.readouts || traitReadoutsDoc || {}, traditionVisualAesthetics: traditionAestheticsDoc?.traditions || {}, bestiary, traditionMotivations, npcInteriority, encounterFrameContent: frameContentDoc || {}, frameKinds: frameKindsDoc?.frameKinds || {}, receiptLine: receiptLineDoc || {}, consumerContract: consumerMapDoc || { contentTypes: {} }, moveHints: moveHintsDoc || { byKind: {}, default: {} }, ribbonCopy: ribbonCopyDoc || {}, earnedPowerGuidance: earnedPowerDoc || { bands: {} }, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

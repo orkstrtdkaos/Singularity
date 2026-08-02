@@ -6,6 +6,7 @@
 // narrates the resolved exchange; it never chooses the opponent's mechanical move — that is opponentPolicy.
 
 import { resolveAction } from "./resolve.js";
+import { mechanicFor, rollMagnitude } from "./craftmechanics.js";   // SNG-263: a craft's own magnitudes, with family fallback
 
 const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const DEFAULT_STEPS = { conserve: { energyMult: 0.6, effectMod: -8 }, standard: { energyMult: 1, effectMod: 0 }, surge: { energyMult: 1.6, effectMod: 10, backlashChance: 0.25 } };
@@ -541,10 +542,27 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     const loseRoll = roundWinner === "player" ? o : p;
     if (harmFns.has(winDecl.function)) {
       const marginGap = Math.max(0, (winRoll.margin || 0) - (loseRoll.margin || 0));
-      const raw = (dcfg.base ?? 1)
-        + (winDecl.tier || 1) * (dcfg.perTier ?? 0.5)
-        + marginGap * (dcfg.perMarginPoint ?? 0.06);
-      const hit = Math.max(dcfg.minHit ?? 1, Math.round(raw));
+      // SNG-263 §7: the damage is the CRAFT's now, and it is ROLLED. The formula below was
+      // `base + tier*0.5 + marginGap*0.06` keyed off the function FAMILY — so every strike-craft in the game
+      // hit for the same number, and a Tier-V capstone differed from a Tier-I basic by a flat per-tier term.
+      // If the craft (or, until the catalog is authored, its family) resolves a damage band, roll it. Margin
+      // raises the FLOOR rather than adding a bonus: a decisive blow cannot land feeble, and no blow can
+      // exceed what the craft itself says it can do. Read off `rules` rather than a new battleRound option
+      // on purpose — seam_battle_round_options has bitten four times, and a value the wrapper already
+      // carries cannot be dropped on the way in.
+      let hit = null;
+      const cmCfg = rules?.craftMechanics;
+      if (cmCfg?.families) {
+        const m = mechanicFor(winDecl, { verb: winDecl.function, tier: winDecl.tier,
+          rank: winDecl.rank || 1, intensity: winDecl.intensity || "standard", cfg: cmCfg });
+        if (m?.shape === "damage" && m.fields?.max != null) hit = Math.max(dcfg.minHit ?? 1, rollMagnitude(m.fields, rng, { marginGap }));
+      }
+      if (hit == null) {
+        const raw = (dcfg.base ?? 1)
+          + (winDecl.tier || 1) * (dcfg.perTier ?? 0.5)
+          + marginGap * (dcfg.perMarginPoint ?? 0.06);
+        hit = Math.max(dcfg.minHit ?? 1, Math.round(raw));
+      }
       damage = { side: roundWinner === "player" ? "opponent" : "player", amount: hit, verb: winDecl.function, by: winDecl.name || winDecl.function };
       if (roundWinner === "player" && opponentHealth != null) opponentHealth = Math.max(0, opponentHealth - hit);
       // the PLAYER's health is the app's to apply (checkIncapacitation owns that exit) — reported, never written here

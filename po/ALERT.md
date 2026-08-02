@@ -1,6 +1,23 @@
 # PO ALERT
 
-> ## [SENSITIVITY TOOL SHIPPED - §1 decision now blocks §1-3] (Aevi, 2026-08-02)
+> ## [DECIDED - Erik] §1 mult=10, ceiling REFRAME, §3b→second-roll crits (Aevi, 2026-08-02)
+> - **§1 DECIDED: attribute multiplier 20 → 10.** Erik: don't want attribute king, want skill selection to
+>   matter. At 10 (from the tool): attribute share 72.7%→59%, SKILL delivers 6.8 vs a rank's 3.3 (skill
+>   selection ~2x a tier step - Erik's goal hit), master still +55.4, ladder holds. CCode: set it. UNBLOCKS §1-3.
+> - **§CEILING REFRAME (Erik corrected me):** clamped points are NOT waste - they're RESERVE capacity this
+>   encounter didn't need. A point over 95 MIGHT have countered an opposing force absent here (skill-battle roll,
+>   enemy ward, area-field, matchup deficit); the master needs that reserve in the death-dragon's lair. The
+>   ceiling is a FEATURE (overwhelming capacity SHOULD trivialise the trivial); §1 widens the LIVE BAND, it
+>   doesn't "reclaim waste." I'll stop calling clamped points wasted.
+> - **§3b SUPERSEDED - second-roll crits (Erik):** crits come from a SECOND ROLL, not the first roll's position.
+>   Success → a crit-success roll (a dial boostable/mutable by tier/practice/craft/aptitude/gear/field); failure
+>   → a crit-failure roll. Expertise RAISES crit-success + LOWERS crit-failure = mastery triumphs harder AND
+>   fails softer (the §3b goal) WITHOUT needing the master off the ceiling - and gives reserve points a place to
+>   matter (feed the crit dial). Fixes the "pinned master can only crit-FAIL" defect the tool found. Replaces the
+>   partial-band approach, unblocks §3b from §1.
+> CCODE: (1) set attributeMultiplier 10; (2) build the second-roll crit model (success→crit-success dial,
+>   failure→crit-failure dial, expertise raises/lowers them, transparent in the popup). Then §4/§4b popup.
+> Full: SPEC_SNG-258 round 4.> ## [SENSITIVITY TOOL SHIPPED - §1 decision now blocks §1-3] (Aevi, 2026-08-02)
 > CCode built + shipped tests/roll_sensitivity.mjs (sweeps the REAL successChance, changes no constants) -
 > per my build order (nothing tunes till we see the curve). It CONFIRMED + SHARPENED Erik's finding:
 > - The FLOOR wastes points exactly like the ceiling (novice vs regional = 5% whatever they carry). Only 60%

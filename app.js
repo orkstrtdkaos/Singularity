@@ -248,7 +248,33 @@ function showBreakdownPopover(bd) {
       ? `\nNo opposed roll here — "difficulty" is the task's own hardness, set by the GM from the fiction.`
       : "";
   const foot = `total   ${bd.total}%${bd.roll != null ? `   — rolled ${bd.roll} → ${String(bd.degree || "").replace("_", " ")}` : ""}`;
-  showPopoverText(`Success chance ${bd.total}% — roll a d100 at or under this to succeed.\n\n${lines.join("\n")}${oppLine}\n────────────\n${foot}`);
+  // SNG-258 §4/§4b + §9 — THE SECOND ROLL, SHOWN. Crits stopped being a position on the first roll (1-5 /
+  // 96+) and became their own roll with their own dials, which made them INVISIBLE: the player could see the
+  // chance they had to beat and had no way to learn that a master crits harder and fumbles softer. §9 asks for
+  // "your crit-success X% / crit-failure Y%, and why", and critProfile already returns both dials WITH their
+  // named components for exactly this — so this is the same self-summing discipline as the chance above, not
+  // a second, prettier account of the same math. A craft that authored its OWN critical is named here too.
+  const critBlock = (() => {
+    const c = bd.crit;
+    if (!c) return "";
+    const side = (label, chance, comps, clampedFrom) => {
+      const rows = (comps || []).map(x => `   ${x.label}   ${sign(x.value)}`);
+      if (clampedFrom != null) rows.push(`   clamped (from ${clampedFrom}%)`);
+      return `${label}   ${chance}%${rows.length ? "\n" + rows.join("\n") : ""}`;
+    };
+    const rolled = bd.critRoll != null
+      ? `\n\nThis time the second roll was ${bd.critRoll} — ${String(bd.degree || "").startsWith("crit") ? "it landed." : "no crit."}`
+      : "";
+    // A PARTIAL takes no second roll at all, and saying so is the difference between "you were unlucky" and
+    // "this outcome was never eligible" — the player should not hunt for a crit that could not have happened.
+    const partial = bd.degree === "partial"
+      ? "\n\n(A partial takes no second roll — the soft middle outcome is not eligible to crit either way.)" : "";
+    const authored = bd.critText ? `\n\n“${bd.critText}”\n   — this craft’s own critical, written by its author.` : "";
+    return `\n\n────────────\nTHE SECOND ROLL — crits are their own d100, not a band on the one above.\n\n`
+      + `${side("crit success", c.successChance, c.successComponents, c.successClampedFrom)}\n\n`
+      + `${side("crit failure", c.failChance, c.failComponents, c.failClampedFrom)}${rolled}${partial}${authored}`;
+  })();
+  showPopoverText(`Success chance ${bd.total}% — roll a d100 at or under this to succeed.\n\n${lines.join("\n")}${oppLine}\n────────────\n${foot}${critBlock}`);
 }
 
 // SNG-104: what a Health/Energy number's tap/hover shows — how rest restores it, read from CONTENT.rules.recovery.
@@ -8745,7 +8771,7 @@ async function runGambit() {
     const a = g.actions[failed.index];
     chrome(`<div class="screen" style="max-width:640px">
       <h2>The plan hits a wall</h2>
-      <div class="roll-receipt" style="margin:10px 0">Step ${failed.index + 1}: ${esc(a.label)} — d100: ${failed.roll} vs ${failed.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...failed.breakdown, roll: failed.roll, degree: failed.degree })}" tabindex="0" role="button" title="Why this number?">${failed.chance}</span>` : failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
+      <div class="roll-receipt" style="margin:10px 0">Step ${failed.index + 1}: ${esc(a.label)} — d100: ${failed.roll} vs ${failed.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...failed.breakdown, roll: failed.roll, degree: failed.degree, ...(failed.crit ? { crit: failed.crit, critRoll: failed.critRoll, critText: failed.critText } : {}) })}" tabindex="0" role="button" title="Why this number?">${failed.chance}</span>` : failed.chance} — <span class="${failed.degree}">${failed.degree.replace("_", " ")}</span></div>
       <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
         ${g.steps[failed.index]?.fallback && !run.fallbackUsed[failed.index] ? `<button class="choice" id="c-fallback">Fallback: ${esc(g.steps[failed.index].fallback)}</button>` : ""}
         ${run.adaptLeft > 0 ? `<button class="choice" id="c-adapt">Adapt — force another try (${run.adaptLeft} adaptation point${run.adaptLeft > 1 ? "s" : ""} left)</button>` : ""}
@@ -10264,7 +10290,7 @@ function renderPlay(turn, opts = {}) {
       // SNG-084 Ph2: one contextual ⓘ on the roll — why it was hard (novel), suddenly easy (discovery), or the d100-vs-chance basics.
       const rollHelp = r.action?.novel ? infoDot("roll.novel") : (r.usedDiscovery || r.action?.discoveryBonus) ? infoDot("roll.discovery") : infoDot("roll.difficulty");
       // SNG-106: the chance is tappable → the full component breakdown (only when this turn retained one).
-      const chanceCell = r.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...r.breakdown, roll: r.roll, degree: r.degree })}" tabindex="0" role="button" title="Why this number?">${r.chance}</span>` : `${r.chance}`;
+      const chanceCell = r.breakdown ? `<span class="roll-chance" data-breakdown="${attrJson({ ...r.breakdown, roll: r.roll, degree: r.degree, ...(r.crit ? { crit: r.crit, critRoll: r.critRoll, critText: r.critText } : {}) })}" tabindex="0" role="button" title="Why this number?">${r.chance}</span>` : `${r.chance}`;
       main += `<div class="roll-receipt">d100: ${r.roll} vs ${chanceCell} — <span class="${r.degree}">${r.degree.replace("_", " ")}</span> ${rollHelp}${helpers}${intBit}</div>${locBits}${subBit}${blBit}`;
       // SNG-246 Fix D: the encounter's mechanical receipt line — the round result SHOWN (not inferred from
       // prose). SNG-252 §2b: it renders here only when the encounter has ENDED. While one is live the ribbon

@@ -17,7 +17,7 @@ import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { critFor, mechanicFor, rollOperative, rollMagnitude, spreadFactor } from "../engine/craftmechanics.js";
-import { critProfile, resolveAction } from "../engine/resolve.js";
+import { critProfile, resolveAction, successChance } from "../engine/resolve.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -242,6 +242,46 @@ const sample = (craft, n = 40000) => {
   check("CCODE-77b: a T-V craft out-scales a T-I in EVERY family (KNOW was flat at every tier)",
     grew.every(g => Number(g.hi) > Number(g.lo)), grew.filter(g => !(Number(g.hi) > Number(g.lo))).map(g => `${g.fam} flat at ${g.lo}`).join(", "));
 }
+
+
+// == SNG-258 4/4b -- WHAT THE ROLL-MATH POPUP READS =========================================================
+// The popup is DOM, so it cannot be exercised here -- but what it reads is a CONTRACT on the resolver's
+// return, and that contract is the part that breaks silently. The gm.js RESOLUTION block already proved the
+// shape of this failure: a whitelist that only carries the fields someone remembered to add. If resolveAction
+// stops returning any of these, the popup renders a shorter, confident, WRONG account of the math and nothing
+// anywhere fails. So the keys are asserted by name.
+{
+  const PC = { attributes: { practical: 5, spiritual: 5, social: 5, mental: 5 }, skills: {} };
+  const ctx = { rules: RULES, character: PC, location: null,
+    action: { label: "a cut", attribute: "practical", abilityLevel: 3 } };
+  const seq = vals => { let i = 0; return () => vals[i++ % vals.length]; };
+  const r = resolveAction(ctx, seq([0.5, 0.5]));
+
+  check("popup contract: the receipt carries the crit PROFILE, not just the outcome",
+    !!r.crit && Number.isFinite(r.crit.successChance) && Number.isFinite(r.crit.failChance),
+    JSON.stringify(r.crit));
+  check("popup contract: both dials carry their NAMED components (4b asks 'and why', not just a number)",
+    Array.isArray(r.crit.successComponents) && Array.isArray(r.crit.failComponents)
+    && r.crit.successComponents.every(c => typeof c.label === "string" && Number.isFinite(c.value)));
+  check("popup contract: the components SUM to the dial, or the clamp is disclosed (same self-summing rule as the chance)",
+    [["success", r.crit.successComponents, r.crit.successChance, r.crit.successClampedFrom],
+     ["fail", r.crit.failComponents, r.crit.failChance, r.crit.failClampedFrom]]
+      .every(([, comps, total, from]) => comps.reduce((a, c) => a + c.value, 0) === (from ?? total)));
+  check("popup contract: the SECOND ROLL itself is on the receipt (so the popup can say what actually happened)",
+    "critRoll" in r);
+
+  // A PARTIAL takes no second roll. The popup says so explicitly, and that line is only honest if critRoll is
+  // genuinely null rather than a number the player would go looking for.
+  // Computed, not guessed: a roll of chance+1 is the first value inside the partial band. An `if (degree ===
+  // "partial")` around this check would SKIP SILENTLY the day the chance math moves — which is the one day it
+  // matters — so the partial is CONSTRUCTED rather than hoped for, and the construction is asserted too.
+  const chance = successChance(ctx);
+  const partial = resolveAction(ctx, seq([chance / 100, 0.001]));
+  check("popup contract: a PARTIAL reports critRoll null, so 'not eligible to crit' is a true statement",
+    partial.degree === "partial" && partial.critRoll === null,
+    `built a ${partial.degree} (roll ${partial.roll} vs chance ${chance}) — the partial band moved`);
+}
+
 
 console.log(failures === 0 ? "\nCraft character (crit + variance): all checks passed." : `\nCraft character: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

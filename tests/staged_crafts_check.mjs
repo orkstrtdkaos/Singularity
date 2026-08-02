@@ -38,8 +38,21 @@ const MECH = new Set(CM.operativeAxis?.mechanical || []);
 const summary = [];
 for (const f of files) {
   const doc = rj(`${dir}/${f}`);
-  const crafts = doc.crafts || [];
+  // CCODE-79: read EVERY staged shape. Aevi authored rootkin and ashwarden into ONE file as an antipode pair,
+  // under `traditions: { rootkin: [...], ashwarden: [...] }`, rather than the flat `crafts` array the earlier
+  // traditions used — a reasonable shape for a pair meant to be read together. This checker knew only the flat
+  // one, found 0 crafts, and PASSED EVERY GATE VACUOUSLY: 22 newly authored crafts reported as "everything
+  // resolves" without one of them being looked at. A checker that goes green on a file it cannot read is worse
+  // than no checker, so the reader takes both nestings AND the gate below fails on a file it still can't read.
+  const crafts = (doc.crafts || []).concat(
+    Object.values(doc.traditions || {}).flatMap(t => Array.isArray(t) ? t : ((t && t.crafts) || [])));
   console.log(`      ${f}  —  ${crafts.length} craft${crafts.length === 1 ? "" : "s"}`);
+  // A *mechanics* file that yields no crafts is either a shape this reader does not know or an empty pass.
+  // Either way "0 crafts, all checks passed" is a lie, and it is the exact shape of failure this file exists
+  // to prevent — so it is a FAILURE, not a note. Files that legitimately carry no crafts declare it.
+  if (!crafts.length && !doc.roster && !doc.notACraftFile) {
+    fail(`${f}: 0 crafts readable \u2014 this file's shape is not one this checker knows (expected \`crafts: []\` or \`traditions.<id>.crafts: []\`), so every gate below would pass VACUOUSLY`);
+  }
   console.log("        craft                     tier  verbs                 resolved             named axes");
   const rows = [];
   for (const c of crafts) {

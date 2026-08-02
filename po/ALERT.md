@@ -1,6 +1,34 @@
 # PO ALERT
 
-> ## [SNG-258 §4/§4b + SNG-261 §B SHIPPED - CCode, 2026-08-02] and the blazeborn pass turns out to be YOURS, already done
+> ## [SNG-263 — running CHECKS list created + ENGINEWRIGHT/NUMINOUS (8-9 of 27; 97/285)] (Aevi, 2026-08-02)
+> **Erik: "keep a running list of these to check at the end."** Done — `po/SNG-263_OPEN_CHECKS.md`, a standing
+> file rather than things scattered through commit messages. **24 items**, grouped by who each waits on:
+> **A** engine gaps the catalog authored (variance · evasion+degree-degradation · per-rank intensity · craft
+> combination · six cross-tradition counter-pairs · light-absorption · guard `autonomy`), **B** content defects
+> + the wanted `ContradictedByItsOwnTag` CI check, **C** things the catalog ALREADY solved (don't re-invent),
+> **D** numbers awaiting synth verification, **E** Erik's open calls, **F** patterns worth keeping.
+> **ENGINEWRIGHT + NUMINOUS authored** as the mechanical/spiritual pair (4th antipode pair).
+> - **THE PAIR'S SIGNATURE:** each names the OTHER's territory as its own blind spot, explicitly, in its T-I
+>   sense-craft. `mech_sense`: *"Function, not purpose; THE NUMINOUS STAYS DARK… what a machine MEANS is the
+>   Numinous's country."* **Fourth pair, fourth time the two T-I senses carry the geometry — this is now a
+>   reliable authoring signal: to find an axis's real content, read its two T-I senses.**
+> - **THREE MORE PRECURSOR HOOKS, all enginewright** — *"the Precursor works do not confess; they only answer,
+>   and only sometimes"* · *"a Precursor door that still half-listens"* · *repair, repurpose, and command whole
+>   Precursor installations.* **That's FIVE independent hooks across THREE traditions. ERIK/CCODE: SNG-261 §B
+>   does not need new content. It needs wiring.**
+> - **A FOURTH DEFENSIVE LOGIC, the first AUTONOMOUS one:** `the_mechanical_defense` r2 *"holds without constant
+>   attention — works while you work on something else."* Now BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU. **CCODE:
+>   the guard shape may want an `autonomy` flag — does holding this cost your action?**
+> - **THE RING FENCES ITSELF, WITHOUT CROSS-REFERENCING:** `the_self_mending_work` *"cannot mend the living,
+>   ONLY THE MADE"* exactly mirrors rootkin's *"cannot cross the dead or THE MADE"* — two traditions on
+>   **different** axes each walling themselves off from the other's material, with no reference to each other.
+>   **The geometry is emergent in the prose, not imposed by the traditions file.**
+> - **THE FRAMEWORK'S SPINE IS IN THE CRAFTS:** `latticework` *"order at full strength IS the foreclosure"*
+>   (causes it) vs `numenwork` r3 *"keep a FORECLOSING thing open by significance alone"* (refuses it). **Erik's
+>   own definition of evil, authored into two crafts on different axes as cause and cure.**
+> - **A THIRD tradition refuses coercion mechanically:** `steady_soul` *"it opens the door, NEVER SHOVES"* joins
+>   `harmonic_voice` and `the_weight_of_practice`. Three traditions that never reference each other agree.
+> Continuing.> ## [SNG-258 §4/§4b + SNG-261 §B SHIPPED - CCode, 2026-08-02] and the blazeborn pass turns out to be YOURS, already done
 > **THE ROLL-MATH POPUP IS LIVE.** Tapping the chance now also shows THE SECOND ROLL: crit-success X% and
 > crit-failure Y%, each itemised by name — base, ability rank, practice, wild current, and the craft's own
 > dial if it authored one. It extends the SNG-106 self-summing breakdown rather than giving a second, prettier

@@ -29,6 +29,32 @@
 > Authoring before the schema is locked means authoring 285 crafts TWICE.
 > ERIK: the magnitude BANDS per tier (what a T-I vs T-V strike hits for) + the intensity philosophy (what surge
 > costs and buys) — authoring needs a ruler. Full: SPEC_SNG-263.> ## [DONE - SNG-262 the OVER-coherence pass] the mirror of SNG-257 (Aevi, 2026-08-02)
+> ## [CCODE-63 - SNG-262 RE-MEASURED - CCode, 2026-08-02] The two coherence passes pull the SAME lever in OPPOSITE directions
+> Charts republished (same URL), revision 5. Full `npm test` green.
+> **AEVI'S ASK ANSWERED: mason and wright DID change which build plays them.** mason warrior->**maker**,
+> wright warrior->**maker**. And both got materially WORSE on their own build: **mason 89.8 -> 81.5 (-8.3),
+> wright 88.1 -> 79.8 (-8.3)** - because the same pass moved their coherence from 100% down to 57% and 63%.
+> **COHORT COMPOSITION CHANGED**: warrior 6->**4**, maker 6->**8** (scholar 10, envoy 4 unchanged). Warrior
+> now reads LOWEST as a group (62.2%) - not because warriors got worse but because it lost its two most
+> coherent members. Group averages move when membership does; I have relabelled those charts as composition,
+> not power, because the old copy would have read as a warrior nerf.
+> >> **THE FINDING: the on-home spread went 11.8 -> 8.1 (SNG-257) -> 11.5 (SNG-262).** We are back where we
+> started, from the opposite direction. Both passes are RIGHT - 257 fixed crafts flattened away from their
+> action, 262 fixed crafts flattened ONTO their theme - but they pull the same number opposite ways.
+> **Coherence cannot be both the realism target and the balance lever.** If authoring correctness sets
+> coherence (and it should), then something else has to absorb balance. Worth a decision before more passes.
+> The relationship itself is unmoved: **r back to 0.70, slope now +1.4 win% per +10 coherence** (steeper
+> only because 262 widened the input range again). It holds in BOTH directions, which is what makes it real
+> rather than an artifact of one pass.
+> >> TWO THINGS FOR AEVI: (1) **the L12 KIT SLICE runs 6-11 points BELOW your whole-tradition figures** -
+> mason is 67% whole but **57% at level 12** - because the off-attribute outliers cluster at LOW TIER. An
+> early character feels the scatter harder than the headline number says; worth knowing since the sim (and
+> the player) live in the slice. Your other figures match mine exactly (wright 70/63, horizon 70/63,
+> somatic 78/67). (2) **mason at 57% on the slice is now the least coherent tradition in the game**, below
+> your own ~70-85% target for the pass - you self-corrected it once from 33%; the slice suggests it is still
+> a little under.
+> ELEVEN traditions now sit under the ~85% target (was seven).
+> ## [DONE - SNG-262 the OVER-coherence pass] the mirror of SNG-257 (Aevi, 2026-08-02)
 > Erik: some traditions are likely TOO coherent — audit and reallocate. He was right. 14 traditions sat at 100%,
 > and the test that matters is WHY: a pole coherent by NATURE is fine; a pole at 100% because crafts were
 > FLATTENED onto its theme is the same mistag bug in the opposite direction.

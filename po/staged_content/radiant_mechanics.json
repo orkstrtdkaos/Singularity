@@ -1,0 +1,678 @@
+{
+ "schemaVersion": 1,
+ "id": "radiant_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Authored by Aevi (PO) against the LOCKED CCODE-64 schema (craft_mechanics.json: families→shapes, familyDefaults, tierLadder, open operativeAxis). CCode folds into radiant.json; nothing here writes to a live ability file.",
+ "note": "SNG-263 catalog pass, tradition 2 of 27 (after the blazeborn pilot). Radiant's prose is markedly MORE mechanically specific than blazeborn's — it already states distances (10/20 paces, a mile), counts (three vessels, three companions, three afterimages), and durations (one night, a week, a month, a season). Almost nothing here is a judgement call: the numbers below are the numbers the content already wrote. That is the strongest confirmation yet of the pilot's finding that the authoring job is transcription plus arithmetic.",
+ "crafts": [
+  {
+   "id": "light_bending",
+   "tier": 1,
+   "functions": [
+    "conceal",
+    "deceive",
+    "hinder",
+    "move"
+   ],
+   "shape": "hobble",
+   "operativeAxis": [
+    "concealment",
+    "area",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 2,
+    "range": 10,
+    "note": "r1's own number: unseen beyond 10 paces, while STILL"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets+duration",
+     "delta": "move at walking pace veiled; cloak ONE companion; hold a simple still image for MINUTES",
+     "from": "r2 grants — targets 1→2, duration to minutes"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: full mirage-craft (a moving figure, a wall that isn't there) + SPLIT YOUR IMAGE INTO THREE + a soundless flash that blinds a GROUP",
+     "from": "r3 grants adds a new capability class, not more of the same"
+    }
+   ],
+   "intensity": {
+    "conserve": "a shimmer while still — half the veil, but it costs nothing to hold",
+    "surge": "double the veil: a moving mirage, and everyone in the flash's reach is taken, friend included"
+   },
+   "bounds": [
+    "movement breaks it above a slow creep",
+    "your SHADOW STAYS TRUE",
+    "touch reveals everything",
+    "images don't survive scrutiny from arm's length",
+    "fails under Harmonic sound-sight",
+    "bent light still stops no arrow",
+    "the flash takes friend and foe alike unless they knew"
+   ]
+  },
+  {
+   "id": "prism_sight",
+   "tier": 1,
+   "functions": [
+    "reveal"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "KNOW→setup: a read that buys advantage. r1 sees heat traces, tampering, light-bending at work"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read a scene's LAST HOUR of light-history; see through rank-1 veils and mirages; catch the micro-flush of a lie (one reroll of a social sense — a hint, NOT a truth machine)",
+     "from": "r2 grants, incl. its own explicit mechanical bound"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "see STRUCTURAL light: stress lines in a bridge, sickness in a body, active nanite flows, the seams of PRECURSOR work; pierce any mirage",
+     "from": "r3 grants — and note it names Precursor-seam detection, a legitimate hook for SNG-261 §B staging"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — half the depth, no eye-cost",
+    "surge": "double the read, and pay it in hours of eye-ache"
+   },
+   "bounds": [
+    "traces fade in minutes to hours; rain and cold erase them",
+    "cannot identify WHO, only that",
+    "lie-reading is a HINT, not proof",
+    "minutes of use cost HOURS of eye-ache",
+    "some Precursor work reads as blank"
+   ],
+   "designNote": "Its r3 sees 'the seams of Precursor work' — a ready-made, already-authored path for a player to ENCOUNTER precursor presence (SNG-261 §B wants exactly this staging). Worth flagging to Erik: the hook exists in content already."
+  },
+  {
+   "id": "light_well",
+   "tier": 1,
+   "functions": [
+    "bind",
+    "heal",
+    "hinder",
+    "reveal",
+    "ward"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "storage",
+    "duration",
+    "vessels"
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 8,
+    "note": "r1's own number: a lantern's worth through ONE NIGHT (~8h), one vessel"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "vessels+duration",
+     "delta": "THREE vessels, THREE nights' keeping; tune release warm/cold, wide/narrow; a sudden release startles a beast off its line or slows a pursuer",
+     "from": "r2 grants — explicit counts"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "a SEASON'S cache for a cellar or sickroom; banked noon released over days measurably speeds a mending body; a release timed to a set moment",
+     "from": "r3 grants — duration to a season, plus a healing-over-time effect"
+    }
+   ],
+   "intensity": {
+    "conserve": "bank half, leak nothing",
+    "surge": "release it all at once as a flare — double the light, and the vessel is spent"
+   },
+   "bounds": [
+    "keeps one night only at r1; LEAKS VISIBLY (a glowing pack is a beacon)",
+    "nothing brighter than the day you banked; cloudy-day light is thin gruel",
+    "the great cache takes a WEEK of clear noons to fill; broken early it is simply GONE"
+   ]
+  },
+  {
+   "id": "sun_coax",
+   "tier": 1,
+   "functions": [
+    "heal",
+    "mend",
+    "sustain"
+   ],
+   "shape": "healing",
+   "operativeAxis": [
+    "healing",
+    "area",
+    "duration"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 4
+    },
+    "plus": 0,
+    "note": "RESTORE→healing at T-I default. But radiant's healing is SLOW COMFORT, not battlefield mending — see bounds"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "area",
+     "delta": "a BED of greens, a whole SICKBED ROW, hold frost off a plot through one hard night — single target → area",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "healing",
+     "delta": "turn a FIELD's bad week around; draw rot's damp from a granary; a touch of concentrated dawn steadies THE DYING toward one more clear hour",
+     "from": "r3 grants — the dying get time, explicitly not a cure"
+    }
+   ],
+   "intensity": {
+    "conserve": "a warm patch — half the effect, and you needn't stay with it as long",
+    "surge": "concentrated dawn: double the warmth, and the debt comes due (an early crop is a smaller one)"
+   },
+   "bounds": [
+    "one small patch at r1; YOU MUST STAY WITH IT",
+    "exactly as visible as sunlight",
+    "the plants' DEBT IS REAL — an early crop is a smaller one unless the soil is fed",
+    "CANNOT CURE — only comfort and buy time"
+   ]
+  },
+  {
+   "id": "glimmer_script",
+   "tier": 1,
+   "functions": [
+    "conceal",
+    "make",
+    "ward"
+   ],
+   "shape": "construct",
+   "operativeAxis": [
+    "persistence",
+    "keying"
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 72,
+    "note": "SHAPE→construct. r1: a mark that glows to YOUR light and sleeps otherwise; 'fades in days outdoors' → ~3 days"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "persistence+keying",
+     "delta": "keyed to a SPECIFIC person's light or a time of day; a WEEK's persistence; a door-sign that flares warning only to your circle",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "persistence",
+     "delta": "a MONTH's persistence; script that changes with the light's ANGLE (two messages in one mark); leave word in the Archive's dark",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a trail-mark — half the persistence, costs nothing standing",
+    "surge": "double the persistence and the brightness, and it is that much easier for a prism-reader to find"
+   },
+   "bounds": [
+    "fades in days outdoors",
+    "ANY Radiant-trained eye can find it if they look",
+    "the key travels by TEACHING, not by wish",
+    "each standing word is a thread of your own light BUDGET until it fades"
+   ]
+  },
+  {
+   "id": "radiant_lance",
+   "tier": 2,
+   "functions": [
+    "break",
+    "hinder",
+    "strike"
+   ],
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "range",
+    "penetration"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 6
+    },
+    "plus": 0,
+    "range": 20,
+    "marginFloorPer": 0.02,
+    "note": "T-II = 2d6 per the locked tierLadder (nMult 2). r1's own number: a precise burn at 20 PACES"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "penetration+special",
+     "delta": "SUSTAINED cut — through a door bar, a cart axle, LIGHT ARMOR at close range; and deflect off a carried mirror to strike AROUND A CORNER (wits check)",
+     "from": "r2 grants — the first craft in the catalog to name ARMOR penetration, which is exactly the §11 Gap-2 soak layer"
+    },
+    {
+     "rank": 3,
+     "kind": "deepen",
+     "axis": "damage+penetration",
+     "delta": "a single devastating COHERENT strike — through a stone wall's weak point, a HARMONIC SHIELD'S FIRST RANK, an engine block; or flare it wide as a blinding",
+     "from": "r3 grants — and note it explicitly beats another tradition's ward by rank, a ready-made cross-tradition interaction"
+    }
+   ],
+   "intensity": {
+    "conserve": "a spark — half the burn, one heartbeat, and no beam-line to trace back to you",
+    "surge": "double the beam and hold it: the cut goes through, and you are anchored in place while it does"
+   },
+   "bounds": [
+    "cannot penetrate armor or thick wood at r1",
+    "ONE HEARTBEAT of beam per breath",
+    "useless in smoke",
+    "sustained cutting ANCHORS YOU IN PLACE",
+    "the beam-line advertises your exact position",
+    "there is no quiet way to do this"
+   ],
+   "designNote": "r2 'light armor' and r3 'a Harmonic shield's FIRST RANK' are the catalog's clearest statement that a soak/ward layer must exist and must be RANKED — the content already assumes penetration beats guard by degree. Direct support for §11 Gap 2's shape."
+  },
+  {
+   "id": "daybreak_mantle",
+   "tier": 2,
+   "functions": [
+    "command",
+    "empower",
+    "shield"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "morale",
+    "targets",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 4,
+    "note": "empower is a verbOverride (RESTORE family, bolster shape — a standing bonus, not healing). r1: first words always get listened to; steady the hopeless for AN HOUR"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "extend courage to companions IN SIGHT — one reroll against fear or despair for the GROUP per scene; requests to strangers land as if from a respected figure",
+     "from": "r2 grants — its own explicit mechanic (one group reroll per scene)"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: become a beacon a CROWD will follow through danger — organize a panicked evacuation, hold a line of frightened volunteers, make a MOB HESITATE before violence",
+     "from": "r3 grants — crowd-scale, a different kind of act"
+    }
+   ],
+   "intensity": {
+    "conserve": "a warm presence — half the lift, and you draw fewer hostile eyes",
+    "surge": "blaze: double the reach of it, and afterward you are the most identifiable person in the valley"
+   },
+   "bounds": [
+    "ATTENTION IS NOT AGREEMENT; draws every eye including hostile ones",
+    "strangers' goodwill is SHALLOW — one favor deep",
+    "LEADERSHIP, NOT CONTROL — where you lead them matters"
+   ]
+  },
+  {
+   "id": "afterimage",
+   "tier": 2,
+   "functions": [
+    "conceal",
+    "deceive",
+    "move"
+   ],
+   "shape": "reposition",
+   "operativeAxis": [
+    "evasion",
+    "uses",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 1,
+    "push": 0,
+    "magnitude": 2,
+    "duration": 1,
+    "note": "MOVE→reposition. r1: ONE sidestep hidden behind your own afterimage — break a grab, dodge a swing"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "evasion+duration",
+     "delta": "your image walks THREE PACES on; watchers disagree later about where you went; in a scuffle THE FIRST STRIKE AIMED AT YOU HITS THE GHOST",
+     "from": "r2 grants — an explicit first-attack negation"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "uses+targets",
+     "delta": "THREE afterimages peel off at a junction; a pursuit SPLITS OR STALLS; walk out of an encirclement inside your own dissolving echo",
+     "from": "r3 grants — count 1→3, and it scales to escaping a surround"
+    }
+   ],
+   "intensity": {
+    "conserve": "half a step of ghost — enough to break a grab, not enough to lose a pursuer",
+    "surge": "double the ghosts and the hang-time, at the cost of a real sprint's wind"
+   },
+   "bounds": [
+    "ONE BREATH of hang-time; the ghost doesn't move or speak",
+    "bright EVEN light needed",
+    "once per scene PER WATCHER — eyes learn",
+    "PRISM SIGHT r2+ READS EVERY GHOST INSTANTLY"
+   ],
+   "designNote": "Its bound names prism_sight r2 as a hard counter — an in-tradition rock-paper-scissors the content authored itself. Worth preserving as a real mechanic, not flavour."
+  },
+  {
+   "id": "clarity_lens",
+   "tier": 2,
+   "functions": [
+    "empower",
+    "reveal",
+    "track"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "precision",
+    "range",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 2,
+    "note": "r1: a hovering lens for fine work — craft checks on SMALL things sharpen (arm's reach)"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "a spyglass of shaped air — read a banner ACROSS THE VALLEY FLOOR, count a far ridge's walkers; steady enough to SHARE with someone at your shoulder",
+     "from": "r2 grants — arm's reach → valley range, plus a second viewer"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "SPECIAL: a FIXED lens that KEEPS WATCHING — set it on a door and know later what crossed the light; pair with Glimmer Script to LOG what it saw",
+     "from": "r3 grants — an unattended standing sensor, a new kind of act"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small lens — half the sharpening, no wobble",
+    "surge": "double the magnification: read the far ridge, and be blind to everything near you while you do"
+   },
+   "bounds": [
+    "arm's-reach focus only at r1; wobbles if you're winded; needs decent light",
+    "heat-shimmer and rain ruin it",
+    "WATCHING FAR MEANS BLIND NEAR",
+    "one standing eye at a time; findable by anyone with light-craft"
+   ]
+  },
+  {
+   "id": "beacon_thread",
+   "tier": 2,
+   "functions": [
+    "bind",
+    "reveal",
+    "track"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "targets",
+    "range",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 8,
+    "range": 1600,
+    "note": "r1's own numbers: ONE companion, across A MILE of open valley, three pulse-signals (come/wait/danger)"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets+duration",
+     "delta": "THREE companions threaded at once; threads persist THROUGH A NIGHT; A SNAPPED THREAD (member fallen or taken) IS FELT BY ALL INSTANTLY",
+     "from": "r2 grants — count 1→3 plus an alarm mechanic"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a party moves as FIXED STARS to each other — night operations without a lantern shown; thread a STRANGER in for one scene by shared consent",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "one thread, half the range — cheap to hold through a quiet night",
+    "surge": "double the range and the count, and a woven night costs you a day's strength"
+   },
+   "bounds": [
+    "line of sight bends around hills poorly; THE THREAD DIES AT RUNNING WATER",
+    "the weave frays past a few miles; the Disputed Zone gnaws threads",
+    "YOU ARE THE LOOM — IF YOU FALL, EVERY THREAD DIES AT ONCE"
+   ]
+  },
+  {
+   "id": "dawn_surgery",
+   "tier": 3,
+   "functions": [
+    "heal",
+    "mend",
+    "restore",
+    "reveal"
+   ],
+   "shape": "healing",
+   "operativeAxis": [
+    "healing",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 3,
+     "d": 4
+    },
+    "plus": 3,
+    "note": "T-III on the healing shape: tierLadder nMult 3, plus 3. r1: close a bleeding wound clean with light-cautery, purge infection with far less scarring"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "REMOVE what must come out — a barbed head, a crushed splinter, a growth near the skin — with a surgeon's precision your hands alone never had",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: SEE INTO TISSUE as you work (paired shallow prism-read) — operate at the edge of the impossible: the crushed hand rebuilt to work again, the eye saved",
+     "from": "r3 grants — a new capability (interior sight), not more healing"
+    }
+   ],
+   "intensity": {
+    "conserve": "close it clean — half the mending, a fraction of the cost to you",
+    "surge": "double the work in one sitting, and it costs you like a day's labour"
+   },
+   "bounds": [
+    "PAIN IS NOT REMOVED — someone must hold them",
+    "deep wounds still need a real medic's knowledge",
+    "an hour's work costs you like A DAY'S LABOUR; the patient's stillness is a hard requirement",
+    "THE FIELD ITSELF RESISTS deep intervention near heart and head"
+   ]
+  },
+  {
+   "id": "prism_ward",
+   "tier": 3,
+   "functions": [
+    "resist",
+    "reveal",
+    "shield",
+    "ward"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "wards",
+    "reportFidelity",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 12,
+    "note": "PROTECT→guard at T-III (magnitude scaled from the family default 2 by the ladder). r1: ONE doorway warded TILL DAWN; you know THAT something crossed and how big"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "wards+reportFidelity",
+     "delta": "THREE wards held; crossings report as a felt colour INSTANTLY AT ANY DISTANCE in the valley; the ward reads DIRECTION AND COUNT",
+     "from": "r2 grants — count 1→3 and latency removed"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "ward a COMPOUND FOR A SEASON with anchored vessels (Light Well pairing); IDENTITY-ECHO on crossings you've threaded before (Beacon pairing)",
+     "from": "r3 grants — and it explicitly composes with two other radiant crafts"
+    }
+   ],
+   "intensity": {
+    "conserve": "one quiet ward — half the fidelity, and your sleep is untroubled",
+    "surge": "double the fence: instant, directional, and your sleep is thinner for every night it stands"
+   },
+   "bounds": [
+    "reports only at your next quiet moment unless you hold VIGIL",
+    "a light-crafter who SEES it can step around it",
+    "running water and Zone interference eat wards in hours",
+    "YOUR SLEEP IS THINNER for each",
+    "a season-fence is COMMUNITY WORK — the village must consent"
+   ],
+   "designNote": "r3 explicitly pairs with light_well (anchored vessels) and beacon_thread (identity-echo). The catalog is already authoring craft COMBINATION — worth a mechanic (a composed-craft bonus) rather than leaving it as prose."
+  },
+  {
+   "id": "sun_seal",
+   "tier": 3,
+   "functions": [
+    "bind",
+    "reveal",
+    "shield",
+    "ward"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "sealStrength",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 24,
+    "note": "T-III guard. r1: ward a place against dark-drawn things; reveal any intrusion in light"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "sealStrength",
+     "delta": "SEAL a door, a vessel, a WOUND with worked light — it does not open to anything WITHOUT THE SEAL'S WORD",
+     "from": "r2 grants — from ward to true seal, keyed to a word"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a seal NOTHING BREAKS BY FORCE — it must be opened BY RIGHT, not by strength",
+     "from": "r3 grants — a categorical immunity to force, which is a KIND not a magnitude"
+    }
+   ],
+   "intensity": {
+    "conserve": "a light ward — half the strength, and it needs no word to hold",
+    "surge": "double the seal, and everyone within sight knows a sealing was done here"
+   },
+   "bounds": [
+    "needs periodic RE-LIGHTING",
+    "PHYSICAL FOES IGNORE IT",
+    "a seal is only as good as who holds its WORD — light-seals are famously stolen",
+    "sealed by right means SOMEONE WITH THE RIGHT CAN ALWAYS OPEN IT"
+   ]
+  },
+  {
+   "id": "light_borne",
+   "tier": 5,
+   "functions": [
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "shape": "reposition",
+   "operativeAxis": [
+    "flight",
+    "range",
+    "exposure"
+   ],
+   "mechanic": {
+    "range": 5,
+    "push": 0,
+    "magnitude": 5,
+    "duration": 3,
+    "note": "T-V capstone on reposition. r1 (its only rank): FLY under full control for a sustained interval — hover, climb, cross the open air"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: true flight under full control, AND you become a light aloft — from height you SHOW THE GROUND to everyone below. The capstone is a KIND (leaving the ground) with a total-exposure cost, per the T-IV/V register.",
+     "from": "r1 grants — a single-rank capstone; the special IS the craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "a low hover — half the interval, and you are a smaller light",
+    "surge": "double the height and the interval; you are visible for miles and there is no version of this that is subtle"
+   },
+   "bounds": [
+    "YOU SHINE — seen for miles, NO CONCEALMENT possible",
+    "the interval ENDS and you must be down or you fall"
+   ],
+   "designNote": "T-V capstone confirming the register from the blazeborn pilot: the special is a KIND the craft did not have (leaving the ground entirely), carrying an absolute cost (total visibility). Same shape as the_last_light's total expenditure."
+  }
+ ],
+ "passFindings": [
+  "Radiant's prose is MORE mechanically specific than blazeborn's — it states distances (10 paces, 20 paces, a mile), counts (three vessels, three companions, three afterimages), and durations (one night, a week, a month, a season) outright. Almost nothing here was a judgement call. Second tradition, same conclusion: the authoring job is transcription plus arithmetic.",
+  "radiant_lance r2/r3 name ARMOR and 'a Harmonic shield's FIRST RANK' — the catalog already assumes a RANKED guard layer that penetration beats by degree. That is direct content support for §11 Gap 2's shape: soak should be ranked, not a flat number.",
+  "afterimage's own bound names prism_sight r2+ as a hard counter that reads every ghost instantly. An in-tradition counter-relationship the content authored itself — it should be a real mechanic, not flavour.",
+  "prism_ward r3 composes explicitly with light_well (anchored vessels) and beacon_thread (identity-echo). The catalog is already authoring craft COMBINATION; a composed-craft bonus deserves a mechanic rather than staying prose.",
+  "prism_sight r3 sees 'the seams of PRECURSOR work' — an already-authored, in-catalog path for a player to encounter precursor presence. SNG-261 §B wants exactly this staging and it already exists in content.",
+  "light_borne (T-V, single rank) confirms the capstone register from the pilot: the special is a KIND the craft did not have, carrying an absolute cost. Two traditions, two capstones, same shape — the register holds."
+ ]
+}

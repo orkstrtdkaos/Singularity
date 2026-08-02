@@ -91,3 +91,56 @@ doesn't out-damage a novice's radiance — it just never fails them, surges hard
 conditions that stop everyone else. **That is what mastery actually feels like**, and it makes the craft's own
 authored limits the thing you grow against. It also retroactively justifies the richness of the `cannot` text:
 those lines are now the progression system's raw material.
+
+
+---
+
+# SNG-264 round 2 — THE CALL (Erik: "go with a call for now… I'll have to playtest it or we can synth it")
+
+Erik delegated the magnitudes. These are my numbers, made to be *checked* — either by his play-leg or by a
+synthetic sweep (`roll_sensitivity` already sweeps constants; mastery is three more).
+
+## THE CALL — mastery's three dials
+Mastery is measured on `character.practice.uses` for that craft (the existing counter). I'm proposing **four
+practice bands**, because a curve with named rungs is legible at the table in a way a continuous function isn't:
+| band | uses | what it means |
+|---|---|---|
+| untried | 0–9 | you know the shape of it |
+| practised | 10–39 | it works when you need it |
+| skilled | 40–119 | it works when conditions don't cooperate |
+| **mastered** | 120+ | it is part of how you move |
+
+**§1 — the floor-raise (reliability, NOT size).** The scaling term raises the roll's FLOOR by band, never the
+ceiling: **untried +0 · practised +1 · skilled +2 · mastered +3** on the operative dimension (for dice shapes,
+a floor under the roll: a mastered `1d6` kindle rolls 3–6, never 1–2). A mastered kindle is **still 1d6** —
+max unchanged, mean up from 3.5 to ~4.5. Sharper and cleaner, exactly as Erik said, and it never turns a T-I
+into a T-II because **the ceiling is untouched.**
+
+**§2 — the surge ceiling (mastery's real growth).** Baseline surge is ×2. By band: **practised ×2 · skilled
+×2.5 · mastered ×3.** So a mastered surge reaches half again as far as anyone else's, while day-to-day output
+barely moves. Mastery becomes *situational* power — the thing you spend, not the thing you carry.
+
+**§3 — bound erosion (the schedule).** Soft bounds yield BY BAND, not all at once:
+· **skilled** — one soft bound eases (the craft works where it used to fail: a `radiant_lance` sustained past
+one heartbeat; an `afterimage` in poorer light).
+· **mastered** — all soft bounds ease, and **COST bounds transmute** (kindle's blinding becomes a dazzle).
+· **HARD bounds never move, at any band, forever.**
+Which soft bound eases first is authored per craft (the craft's own text names the order it would give way).
+
+## Why these numbers
+- **+3 floor at mastery** is the largest raise that cannot make a `1d6` craft exceed a `2d6` craft's mean
+  (mastered T-I mean ~4.5 vs T-II mean 7). The ladder is preserved *by construction*, not by hope.
+- **×3 surge at mastery** keeps a mastered T-I surge (~13.5 peak) under a T-III's baseline ceiling (3d6+3 = 21),
+  so the tier ladder still dominates the top end.
+- **Four bands with a 120-use master** means mastery is a *campaign-length* investment — reachable in a 3-5 arc
+  game (Erik's ~L100 target) for the two or three crafts a character genuinely lives in, not for all of them.
+  **That is the differentiation Erik wanted from the kit**, arriving through practice rather than through the
+  breadth cap alone.
+
+## How to check it (Erik's own framing: play-check or synth)
+**Synth is cheaper and I'd do it first:** extend `roll_sensitivity` with the three dials and assert (a) a
+mastered T-I never out-means an unmastered T-II, (b) a mastered T-I surge never exceeds a T-III baseline
+ceiling, (c) the floor-raise never pushes a craft past its own dice max. All three are structural invariants —
+if they hold across the sweep, the numbers are safe and the rest is feel, which is what a play-leg is for.
+**These are a call, not a conviction.** Any of the three dials can move without disturbing the design; the
+design is "reliable, not bigger; surge is where mastery lives; hard bounds are forever."

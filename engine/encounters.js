@@ -16,7 +16,11 @@ export function startEncounter(def, { oppSheet = null } = {}) {
   if (def.type === "duel") {
     // SNG-098: when the app hands us a synthesized/authored opponent SHEET, this duel runs as a two-sided
     // SKILL BATTLE (momentum + attrition + fog); without a sheet it stays the classic single-margins duel.
-    if (oppSheet) return { ...base, opponentHealth: def.opponent.health, tactic: null, mode: "skill_battle", opponentSheet: oppSheet, momentum: 0, opponentEnergy: oppSheet.energy ?? 40 };
+    // SNG-263 r4 GAP1: an AUTHORED health still wins; otherwise take the sheet's THREAT-SCALED health rather
+    // than whatever the def happened to carry. Until now a synthesised foe had no health rule at all, so
+    // everything unauthored fell to a flat 5 — an epic and a rat were equally durable, which is why no amount
+    // of damage tuning could make a legendary fight feel different from a rat's.
+    if (oppSheet) return { ...base, opponentHealth: def.opponent.health ?? oppSheet.health ?? 5, tactic: null, mode: "skill_battle", opponentSheet: oppSheet, momentum: 0, opponentEnergy: oppSheet.energy ?? 40 };
     return { ...base, opponentHealth: def.opponent.health, tactic: null };
   }
   if (def.type === "challenge") return { ...base, stageIndex: 0, stagesDone: [] };

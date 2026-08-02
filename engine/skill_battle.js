@@ -40,10 +40,21 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
   const attr = Math.max(syn.attributeFloor ?? 2, Math.round(Number.isFinite(syn.attributeCeiling) ? Math.min(attrRaw, syn.attributeCeiling) : attrRaw));
   const tier = Math.max(syn.tierFloor ?? 1, Math.round(Number.isFinite(syn.tierCeiling) ? Math.min(tierRaw, syn.tierCeiling) : tierRaw));
   const energy = Math.round((syn.energyBase ?? 40) + threat * (syn.threatToEnergy ?? 1.2));
+  // SNG-263 r4 GAP1: HEALTH now scales on the same knee-curve as attribute and tier. This block derived
+  // attribute, tier and energy from threat and carried no health term at all, so every synthesised foe fell
+  // back to the hardcoded 5 in encounters.js — an epic and a rat had the same five hit points, and no amount
+  // of damage tuning could ever make a legendary fight feel unlike a rat's.
+  const health = Math.max(syn.healthFloor ?? 3,
+    Math.round((syn.healthBase ?? 4) + curve(threat * (syn.threatToHealth ?? 0.09), syn.healthKnee ?? 12)));
+  // GAP2: SOAK is what a landed hit must overcome. Nothing in the engine reduced damage — no armour, no
+  // damage reduction, no temporary hit points — so there was nothing to overcome, and nothing for ward or
+  // shield to actually DO.
+  const soak = Math.max(0, Math.round((syn.soakBase ?? 0) + curve(threat * (syn.threatToSoak ?? 0.02), syn.soakKnee ?? 4)));
   const tags = opponent.tacticTags || [];
   if (opponent.skills?.length) { // authored override — a real, hand-built sheet
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
-      energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills, authored: true };
+      energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
+      health: opponent.health ?? health, soak: opponent.soak ?? soak, authored: true };
   }
   // SNG-253 (scoped from the post-252 re-look): the opponent's move VOCABULARY was kind-blind. Verified against
   // this engine rather than predicted — a STANDOFF opponent declared "a hard strike" and held "a raised guard",
@@ -63,7 +74,8 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
   for (const t of tags) if (arche[t]) { defs = arche[t]; break; }
   const skills = defs.map(s => ({ function: s.function, name: s.name, tier, attribute: s.attribute || "practical" }));
   return { name: opponent.name || "the opponent", attributes: { practical: attr, physical: attr, mental: attr, social: attr },
-    energy, maxEnergy: energy, tacticTags: tags, skills, synthesized: true };
+    energy, maxEnergy: energy, tacticTags: tags, skills,
+    health: opponent.health ?? health, soak: opponent.soak ?? soak, synthesized: true };
 }
 
 /** The opponent's move for this round — DETERMINISTIC engine policy (not GM invention). Behind on momentum
@@ -563,8 +575,17 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
           + marginGap * (dcfg.perMarginPoint ?? 0.06);
         hit = Math.max(dcfg.minHit ?? 1, Math.round(raw));
       }
-      damage = { side: roundWinner === "player" ? "opponent" : "player", amount: hit, verb: winDecl.function, by: winDecl.name || winDecl.function };
-      if (roundWinner === "player" && opponentHealth != null) opponentHealth = Math.max(0, opponentHealth - hit);
+      // SNG-263 r4 GAP2 — SOAK. The target's armour is subtracted from a landed hit, floored at minHit so a
+      // blow that connects always costs something. This is the honest limiter Erik's §11 asks for: it is what
+      // stops a level-scaled low-tier craft from becoming universal, because soak is a FLAT subtraction and a
+      // bigger die beats it by more. "An armored epic foe needs more than a scaled-up cantrip" is exactly this
+      // arithmetic — reported on the receipt so a blunted blow reads as blunted rather than as a bad roll.
+      const targetSheet = roundWinner === "player" ? oppSheet : playerSheet;
+      const soak = Math.max(0, Number(targetSheet?.soak) || 0);
+      const landed = Math.max(dcfg.minHit ?? 1, hit - soak);
+      damage = { side: roundWinner === "player" ? "opponent" : "player", amount: landed, verb: winDecl.function,
+        by: winDecl.name || winDecl.function, ...(soak ? { rolled: hit, soaked: hit - landed, soak } : {}) };
+      if (roundWinner === "player" && opponentHealth != null) opponentHealth = Math.max(0, opponentHealth - landed);
       // the PLAYER's health is the app's to apply (checkIncapacitation owns that exit) — reported, never written here
     }
   }

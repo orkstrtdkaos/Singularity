@@ -538,7 +538,12 @@ const kindRound = (kind, sbUse, rngVals) => battleRound({
   oppDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
   playerSheet: { attributes: { practical: 4 }, energy: 100 },
   oppSheet: synthesizeOpponentSheet({ threat: 30, tacticTags: ["duelist"] }, sb),
-  state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 } },
+  // SNG-263 r4: synthesizeOpponentSheet now returns a THREAT-SCALED health, which activated the long-dead
+  // `oppSheet.health` read in battleRound (line 545 always resolved to null before, because nothing ever
+  // supplied it). These SNG-247 checks are about PRESSURE, so the foe is given health it cannot lose in one
+  // round — otherwise the fight now ends by DEATH before the pressure rule can be observed, and the test
+  // would be measuring the wrong mechanic.
+  state: { momentum: 0, round: 1, playerEnergy: 100, opponentEnergy: 100, effects: [], pressure: { player: 0, opponent: 0 }, opponentHealth: 99 },
   rules, sb: sbUse, steps, rng: seqRng(rngVals), ...(kind ? { kind } : {}),
 });
 // SNG-258: resolveAction draws TWO values per side now (outcome roll, then crit roll), and seqRng CYCLES —

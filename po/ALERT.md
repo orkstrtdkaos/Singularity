@@ -1,5 +1,46 @@
 # PO ALERT
 
+> ## [CCODE-66 - SNG-263 r4: HEALTH SCALING + SOAK SHIPPED - CCode, 2026-08-02] Both blocking gaps closed; Aevi's test of done now MEASURABLE, 2 of 3 met
+> Write-up in the ALERT; `npm run endgame` (wired into `npm test`, `--json`). Full suite green.
+> **GAP1 CLOSED - opponent health scales.** `opponentSheetSynthesis` gains healthBase/threatToHealth/
+> healthKnee/healthFloor on the SAME knee-curve as attribute and tier. riffraff 6hp -> notable 7 -> regional
+> 9 -> epic 11 -> legendary 17 -> mythic 24. An AUTHORED `def.opponent.health` still wins; startEncounter now
+> falls back to the SHEET's scaled health instead of the flat 5.
+> >> AND IT ACTIVATED A DEAD READ: `battleRound` line 545 was already `state.opponentHealth ?? oppSheet.health
+> ?? null` - it had been reading a field nothing ever supplied. Same class as the precursor bug, from the
+> other direction: not content with no reader, but a READER WITH NO WRITER. Worth adding to the guard family.
+> **GAP2 CLOSED - soak exists.** soakBase/threatToSoak/soakKnee, same curve: 0 at riffraff, 1 notable/regional,
+> 2 epic, 3 legendary, 6 mythic. Subtracted from a landed hit, floored at `damage.minHit` so a blow that
+> connects always costs something. The receipt now carries `{rolled, soaked, soak}` when armour bit, so a
+> blunted blow reads as blunted rather than as a bad roll. This is also the thing ward/shield can finally DO.
+> **AEVI'S TEST OF DONE, measured through the real battleRound (L20, attribute 9):**
+> ```
+> foe          hp/soak   T-I rounds   T-III rounds   T-III advantage
+> riffraff       6/0        3.0           1.3           2.2x
+> notable        7/1        5.3           1.8           2.9x
+> regional       9/1        7.5           2.3           3.3x
+> epic          11/2       14.0           3.4           4.1x
+> legendary     17/3       35.9           7.4           4.9x
+> ```
+> 1. **T-III clearly better - MET** (2.2x to 4.9x, and the gap WIDENS with the band, which is the right shape).
+> 2. **An armored epic needs more than a cantrip - MET** (14.0 rounds vs 3.4).
+> 3. **A L20's T-I still worth casting - NOT MET at epic and legendary.** It holds through regional and falls
+>    off above. **This is precisely the gap §11's level-scaling term exists to close**: damage scales with the
+>    CRAFT (tier/rank) and not at all with the WIELDER, so a master's kindle hits exactly as hard as a
+>    novice's. Health and soak now scale; damage does not yet. **ERIK: this is your dial** - how strongly
+>    should level/attribute/uses scale damage? The harness will re-answer it the moment you name a number.
+> **SNG-259 is sharper, as Aevi said.** `tests/endgame_scaling.mjs` IS that sweep in embryo - it reports
+> rounds-to-kill per band and GATES only the structural truths no tuning may violate (higher tier never
+> slower, tougher band never faster, nothing unkillable, and both r4 gaps stay closed).
+> >> **ON THE 'damage config reads back empty' NOTE - it is not empty, and I think I know why it looked it.**
+> `dcfg = sb.damage` (skill_battle.js:531) where `sb = CONTENT.skillBattle?.engine` (app.js:5376). The raw
+> file's TOP LEVEL has no `damage` key - `raw.damage` is undefined - but `raw.engine.damage` is fully
+> populated and read every round: `{enabled, harmFunctions:["strike","break"], base:1, perTier:0.5,
+> perMarginPoint:0.06, minHit:1}`. **This is the same one-level-up trap as SNG-254's functionMatchup**, in the
+> same file: checked at the top level, lives under `.engine`. Erik can tune those four numbers today. (The
+> new health/soak terms are under `.engine.opponentSheetSynthesis` for the same reason.)
+> NEXT in Aevi's order: the §11 damage formula (dice + scaling - soak), which needs Erik's scaling strength;
+> then the schema/CI update, since r4 changes the damage FIELD from my band to dice+axis. Then §9 minted crafts.
 > ## [CCODE-65 - SNG-263 r4 CLAIMS VERIFIED: 2 confirmed, 1 FALSE - CCode, 2026-08-02] The damage config is NOT empty - Erik can tune it today
 > CCODE-64 (schema+engine+CI) is pushed and green. Then r4 landed mid-build; I checked its three claims
 > before building on them, per the verify-before-build rule.

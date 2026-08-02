@@ -165,3 +165,70 @@ field is exactly the PromisedButUnread bug reappearing through the back door.
 - The T-I damage BAND in numbers (what's the roll's min/max?) — the anchor is "max kills a 5-health T-I beast."
 - What "special" means at T-IV/V — a per-craft qualitative ability is the biggest authoring unknown, and it's
   the one place I'd want examples from Erik before authoring 54 of them (28 at levelReq 4, 26 at levelReq 5).
+
+
+---
+
+# SNG-263 round 3 — the damage ladder, and the FIND that reshapes the authoring job
+
+## THE FIND: rank text already exists, and it already says what each rank does
+**All 285 crafts already carry a full `tree` — a per-rank entry with `name`, `grants`, and `cannot`.**
+(`skilltree.js rankExpression` reads it; branch-forks can replace it.) This is authored intent for what each
+rank DOES, and Erik was right that "some rank descriptions make the skills sound more powerful."
+
+**Crucially, the escalation is NOT uniformly damage.** Three real examples:
+- **`radiance`** — r1 a focused beam · r2 *"strip a place or person of every concealment AT ONCE"* (**AREA**) ·
+  r3 *"revelation at scale… before a people"* + *"a beam that ends the unendurable"* (**SCALE + qualitative**).
+- **`the_long_reach`** — r1 strike from further · r2 attack in full motion *"without losing accuracy or force"* ·
+  r3 *"distance ceases to reduce your effectiveness"* (**RANGE / penalty-removal — no damage change at all**).
+- **`the_appetite_strike`** — all three ranks escalate WHAT is hit and how unguardable it is (**qualitative
+  targeting**, not magnitude).
+
+**CONSEQUENCE FOR AUTHORING (this is the ruling):** a flat `d6 / d6+1 / d6+3` ladder applied to every craft would
+**contradict the authored rank text on most of the catalog**. The mechanic must be **DERIVED FROM the existing
+`grants` text**, not invented alongside it. The authoring job is therefore *smaller and better-defined* than
+feared: for each craft, **read what its ranks already promise, and give that promise a number.** The text is the
+spec. (This is the same principle as the PromisedButUnread audit, applied constructively: make the mechanic match
+what the content already says.)
+
+## §10 — THE DAMAGE LADDER (Erik's d6, checked against the anchor + RPG standards)
+Erik proposed T-I: r1 `d6`, r2 `d6+1`, r3 `d6+3`, and asked for D&D-style guidance. Measured against our anchor
+(default opponent health **5**, `encounters.js:108`) and Erik's benchmark (*"max kills a T-I beast; typically
+2-3 hits"*):
+| | avg | range | hits to kill 5hp | one-shot chance |
+|---|---|---|---|---|
+| r1 `d6` | 3.5 | 1-6 | 2 | 33% |
+| r2 `d6+1` | 4.5 | 2-7 | 2 | 50% |
+| r3 `d6+3` | 6.5 | 4-9 | **1** | 83% |
+**Erik's r1 `d6` is very close to right** — max one-shots (satisfying the benchmark), average kills in 2. Slightly
+hot vs "2-3 hits," and 33% one-shot on a *basic* craft is swingy. **`d6+3` at rank 3 is too hot** — it one-shots
+a peer beast 83% of the time, which erases the 2-3-hit feel entirely at the same TIER.
+
+**RECOMMENDED (Erik tunes), using the standard RPG idiom he asked for:**
+- **TIER adds DICE; RANK adds a small flat bonus.** This is the D&D convention (scale by dice for tier/level;
+  +1/+2/+3 for refinement) and it maps *exactly* onto Erik's own §8 rule — "T-II ≈ double, T-III non-linear,
+  T-IV/V special."
+- **T-I: r1 `1d6` · r2 `1d6+1` · r3 `1d6+2`** (Erik's ladder with r3 pulled from +3 to +2 — keeps rank-up
+  *felt* (+0.5 avg per rank, ~29% total damage gain r1→r3) without collapsing the 2-3-hit benchmark).
+- **T-II: `2d6`** (avg 7 — the clean "double" of §8) · **T-III: `3d6+2`** (avg 12.5 — *more* than a third
+  doubling, satisfying "not linear") · **T-IV/V: dice PLUS a special ability** (§8's qualitative rung).
+- **A rank may spend its increment on a DIFFERENT axis instead** — per the FIND above. `the_long_reach` r3 should
+  buy **range/penalty-removal**, not +2 damage; `radiance` r2 should buy **area**. **Each rank's increment goes
+  to the axis its own `grants` text names.** That is the audit, and it's per-craft.
+
+## Revised authoring ruler
+1. **Read the craft's existing `tree[].grants` first** — it already states what each rank does.
+2. Assign the rank's mechanical increment **to the axis that text names** (damage / area / range / duration /
+   targets / a qualitative capability) — never a blanket +N on damage.
+3. Damage-carrying crafts use the ladder above (tier = dice, rank = +1/+2), unless the text says otherwise.
+4. Non-damage crafts get the equivalent increment on their operative axis (a heal's amount, a ward's duration,
+   a bind's penalty, a reveal's depth/breadth).
+5. Conserve ≈ half / surge ≈ double **on that craft's operative axis**, in the craft's own language (§6).
+6. `cannot` text is also mechanical intent — it should bound the effect (a limit the engine can enforce or the
+   GM can hold), not be decoration.
+
+## Still Erik's
+- Sign-off on the ladder (`1d6 / +1 / +2` at T-I; `2d6` T-II; `3d6+2` T-III) or his own numbers.
+- What "SPECIAL" means at T-IV/V — still the biggest unknown (54 crafts), and now clearly framed: at those tiers
+  the rank text ALREADY reaches for the qualitative ("a beam that ends the unendurable"), so worked examples from
+  Erik on 2-3 capstones would set the register for the rest.

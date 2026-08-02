@@ -314,26 +314,27 @@
     "soak"
    ],
    "mechanic": {
-    "magnitude": 4,
-    "soak": 3,
-    "soakRank": 2,
+    "evasion": 3,
+    "evasionRank": 2,
+    "soak": 2,
+    "soakRank": 1,
     "duration": 3,
-    "note": "GUARD by EVASION rather than armour — 'not blocking, not armoring, just not being where they land.' Authored as soak/soakRank so it sits in the same ranked layer, but the flavour is dodge. soakRank 2 because organized attacks specifically fail against it."
+    "note": "EVASION, not armour — Erik's correction. Soak reduces damage AFTER a hit lands; evasion means the attack DOESN'T land. The craft's own prose says it: 'not blocking, not armoring, just not being where they land.' PROPOSED MECHANIC (fits the existing degree ladder exactly, no new resolution stage): evasion DEGRADES the attacker's degree by one step — crit_success→success, success→PARTIAL, partial→FAILURE. Then Erik's second half: on the PARTIAL that remains, the small soak applies — the graze. So a full hit becomes a graze, and the graze is blunted."
    },
    "rankDeltas": [
     {
      "rank": 2,
      "kind": "deepen",
      "axis": "evasion",
-     "delta": "organized attempts to harm you DISSOLVE — 'they are always aiming at where you were a moment ago'",
+     "delta": "organized attempts DISSOLVE — 'always aiming at where you were a moment ago'. evasionRank 2: degrades even a well-set-up attack.",
      "from": "r2 grants"
     },
     {
      "rank": 3,
      "kind": "add",
      "axis": "special",
-     "delta": "SPECIAL: the DISORDER AROUND YOU actively deflects organized harm — not just you moving unpredictably, but THE SITUATION ITSELF refusing to cooperate with anyone trying to hurt you",
-     "from": "r3 grants — the environment defending you is a kind-change"
+     "delta": "SPECIAL: the DISORDER AROUND YOU deflects organized harm — the situation itself refuses to cooperate with anyone trying to hurt you. Degrades a SECOND step against attackers relying on coordination.",
+     "from": "r3 grants"
     }
    ],
    "intensity": {
@@ -354,7 +355,7 @@
      "class": "soft"
     }
    ],
-   "designNote": "The authored counter to this craft is exactly the lattice/harmonic answer: unaimed, area, or structural harm. A guard that defeats PRECISION and fails against INDISCRIMINATE force is a genuinely different defensive shape from resonant_shield (which blunts impact) or the_fixed_point (which refuses to move). Three guard crafts, three distinct defensive logics — the schema carries all three through soak/soakRank plus bounds."
+   "designNote": "ERIK'S CORRECTION, and it separates the three defensive logics properly. resonant_shield SOAKS (blunts what lands). the_fixed_point ANCHORS (refuses displacement). the_wrong_target EVADES (the attack does not land at all). Only the third acts on the ROLL rather than on the damage — which is why it needed a different field, and why authoring it as soak flattened a real distinction. The partial-gives-soak half is the elegant part: it means evasion is never binary all-or-nothing, and it reuses the degree ladder (crit_success|success|partial|failure|crit_failure) that already exists rather than adding a resolution stage."
   },
   {
    "id": "probability_tilt",
@@ -578,6 +579,7 @@
   "THREE DISTINCT DEFENSIVE LOGICS now exist across the authored traditions, all carried by the same soak/soakRank shape plus bounds: resonant_shield BLUNTS impact, the_fixed_point REFUSES to move, the_wrong_target IS NOT THERE (and explicitly fails against unaimed/area harm). The guard shape generalises further than I expected.",
   "probability_tilt's 'the world balances its books — whatever you tilt toward you, something tilts away' is a COST bound with real teeth, and a natural hook for the §3b crit-FAILURE dial: tilting luck should measurably raise your crit-failure chance elsewhere. Third craft now writing a mechanic the engine hasn't built yet.",
   "the_churns_gift r3 'the wild current begins to know you… being known runs both directions; it takes an interest' is the closest thing in the catalog to a PATRON/PACT mechanic, and a strong §4c alignment-drift hook: repeated use should move the wielder chaos-ward whether they intend it or not.",
-  "the_long_odds is the FOURTH capstone with the identical register (a KIND, absolute cost, intensity REFUSED) — but its bound is pointed: 'the ordered and prepared can still corner you.' Even the churnfolk capstone bows to the lattice's virtue. The antipode is honoured at the highest rung of both traditions."
+  "the_long_odds is the FOURTH capstone with the identical register (a KIND, absolute cost, intensity REFUSED) — but its bound is pointed: 'the ordered and prepared can still corner you.' Even the churnfolk capstone bows to the lattice's virtue. The antipode is honoured at the highest rung of both traditions.",
+  "ERIK'S the_wrong_target CORRECTION — evasion is not soak. Soak reduces damage after a hit lands; evasion means the attack doesn't land. Re-authored with an `evasion`/`evasionRank` axis and a proposed mechanic that fits the EXISTING degree ladder with no new resolution stage: evasion DEGRADES the attacker's degree one step (success→PARTIAL), and Erik's second half — the remaining PARTIAL is then reduced by a small soak (the graze). CCODE: `evasion`/`evasionRank` are new mechanical axes the engine has no concept of, alongside `variance`. Both are churnfolk-shaped ideas: the tradition keeps wanting mechanics that act on the ROLL and its SPREAD rather than on magnitudes. Note nothing in the engine degrades a degree today — this would be the first, and it is a clean fit for the ladder that already exists."
  ]
 }

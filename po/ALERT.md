@@ -1,6 +1,21 @@
 # PO ALERT
 
-> ## [DECIDED - Erik] §1 mult=10, ceiling REFRAME, §3b→second-roll crits (Aevi, 2026-08-02)
+> ## [SPEC - SNG-259 model the endgame] heroic + legendary in the sim (Aevi, 2026-08-02)
+> Erik asked: add heroic/legendary to the sim to explore the endgame? YES, and it's LOAD-BEARING - we just tuned
+> §1(mult-10)+§3b(crits) against a grid that STOPS AT EPIC. Verified: the game already HAS a legendary tier ABOVE
+> epic (legends.js spectrum legendary/epic→regional/notable/riffraff, legendary birth-weight 50 vs epic 45; a
+> character at level≥7 is tiered legendary - players BECOME legendary, before the sim's L20 cap; legends
+> pursuable per SNG-208). Both tools cap at epic (d:78) = one rung below the top of the actual game.
+> WHY NOW: the ceiling-as-reserve reframe says the reserve is for "the death-dragon's lair" = the legendary band
+> we never simulate; second-roll crits are decided in legendary-vs-legendary where both pin near the ceiling;
+> mult-10's ladder is only confirmed THROUGH epic. All three decisions get their hardest test exactly where the
+> sim doesn't look.
+> GOAL: model the full arc up through legendary-player vs legendary-adversary; balance the endgame on data.
+> CCODE: add heroic+legendary bands (scaled from the engine's REAL tier weights, not invented) + legendary/heroic
+> player profiles to roll_sensitivity + tradition_matrix; report the endgame grid; assert the ladder holds at the
+> top. AEVI: re-read §1/§3b against the full grid once reported. ERIK: whether to do it now (leaning yes) + do
+> legendary contests have their own rules (lean harder on crits/matchup since raw chance pins for both?).
+> Likely CONFIRMS the decisions (the reserve is FOR this) but we measure not assume. Full: SPEC_SNG-259.> ## [DECIDED - Erik] §1 mult=10, ceiling REFRAME, §3b→second-roll crits (Aevi, 2026-08-02)
 > - **§1 DECIDED: attribute multiplier 20 → 10.** Erik: don't want attribute king, want skill selection to
 >   matter. At 10 (from the tool): attribute share 72.7%→59%, SKILL delivers 6.8 vs a rank's 3.3 (skill
 >   selection ~2x a tier step - Erik's goal hit), master still +55.4, ladder holds. CCode: set it. UNBLOCKS §1-3.

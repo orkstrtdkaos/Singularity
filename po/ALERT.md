@@ -1,6 +1,22 @@
 # PO ALERT
 
-> ## [SPEC - SNG-258 roll-math overhaul + roll table in spec] (Aevi, 2026-08-02)
+> ## [SPEC r2 - SNG-258 follow-ups, GOALS-FIRST] (Aevi, 2026-08-02)
+> Erik's meta-instruction taken: STATE THE GOAL, let CCode design the how (I've been over-specifying mechanics -
+> good correction). Three follow-ups appended to SPEC_SNG-258:
+> - **§3b:** tier AND practice widen the PARTIAL band, not just success - mastery reaches further AND fails
+>   SOFTER (a master's near-miss lands partial where a novice's is a clean fail).
+> - **§4b:** popup uses the character NAME not "your"; spectral fit EXPLAINS itself. FINDING (answering Erik's
+>   "what is alignment - my skills or domain?"): it's NEITHER - alignment is your position on the world's
+>   philosophical SPECTRUMS, set at CREATION. Two gaps found: char→tradition link is loose; alignment never
+>   DRIFTS. Goal = make it legible + optionally drift-toward-what-you-do (Erik's call).
+> - **§10 ENVIRONMENTAL EFFECTS (the big one):** prepared ground (Stillwater wards set in advance), carried-item
+>   auras, companion auras = ONE family of situational effects. GOALS: apply as transparent named mods;
+>   ESTABLISHABLE before an encounter; CONTESTABLE (take out the wards before battling, or fight through them);
+>   transparent before you engage. Built ON §8 standing-effects (prepared-ground-that-persists IS a standing
+>   effect on a place). Added a row to the SYSTEM_SPEC §4a table so it's discoverable.
+> CCODE owns the HOW for all three. Sequencing: sensitivity tool → popup(+§4b) → curve/skill/tier(+§3b) →
+> substrate/gear/aptitude → §8 standing-effects → §10 environmental (on §8). ERIK: §4b alignment-drift call +
+> §10 is the strategic-depth centerpiece.> ## [SPEC - SNG-258 roll-math overhaul + roll table in spec] (Aevi, 2026-08-02)
 > Erik reviewed the roll table and (1) said it belongs DOCUMENTED in the system spec - DONE (SYSTEM_SPEC §4a, the
 > full term-by-term reference table, each term flagging its open thread); (2) raised 9 design threads, all
 > captured in SPEC_SNG-258. Grounded in a sensitivity analysis: THE FINDING is attribute at x20 = 80pts at cap 4,

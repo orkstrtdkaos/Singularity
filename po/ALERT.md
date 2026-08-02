@@ -10,6 +10,8 @@
 >   harmonic 43% → 71% practical (sound worked as material; kept echo_sense/shatterpoint/echo_memory mental)
 >   lattice  63% → 88% practical (order is BUILT; kept order_sense mental)
 >   rootkin  55% → 73% practical (life is TENDED; kept lifesense/speaking_grove mental, last_gift social)
+>   churnfolk 50% → 80% practical (chaos-craft = working disorder; fixed the_wrong_target/the_wild_flowering/
+>     the_churns_gift, kept chaos_sense/probability_tilt mental) [Erik caught I'd missed this one]
 >   marcher  70% (LEFT - its off-attr crafts are legit: a medic-craft practical, a leader's presence social)
 >   enginewright 80% (LEFT - mech_sense/shortfold are genuine sense/move crafts)
 > Principle: coherence target ~85% not 100% - a pole may keep ONE sense-craft off its dominant attribute. All

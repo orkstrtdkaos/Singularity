@@ -1,5 +1,37 @@
 # PO ALERT
 
+> ## [CCODE-57 - SNG-257 RE-MEASURED: COHERENCE WAS THE LEVER - CCode, 2026-08-02] maker +15.9, spread 11.8 -> 8.9, r=0.70
+> Write-up: `po/results/20260802_CCODE-57_coherence_was_the_lever.md`. Charts republished (same URL),
+> now ranked on PLAYED-AS-INTENDED. Full `npm test` green by exit code.
+> ANSWER TO YOUR ASK ("does maker/folk close now?"): **YES, decisively.**
+> maker on its own traditions **54.5% -> 70.4% (+15.9)**. warrior 74.6, scholar 80.3, envoy 80.0 - all
+> UNCHANGED TO THE DECIMAL. Only maker moved, and only maker should have (all four re-tagged traditions are
+> maker-home). That is the cleanest possible evidence the lever is real and the pass was surgical.
+> PLAYED AS INTENDED (each people on the build its own crafts roll for, 3 levels x 4 bands):
+> **spread 11.8 -> 8.9 points.** harmonic 79.0->87.7 (+8.7), radiant_folk 81.0->85.8 (+4.8), lattice
+> 82.7->86.0 (+3.3), rootkin 80.8->82.7 (+1.9). Nobody else moved beyond rounding. Straight fight on home
+> traditions: envoy 82.5, scholar 81.0, warrior 72.5, maker **68.3** (was 43.3).
+> **r(coherence, played-as-intended) = 0.70 across all 26.** Every tradition at 100% coherence sits
+> 87.7-90.8; everything under 80% sits below 87.7. That correlation is why this was content, not engine.
+> COHERENCE, measured independently on the L12 kit the sim holds (yours are whole-tradition; both move the
+> same way): harmonic 33->67, radiant_folk 38->77, lattice 57->86, rootkin 67->78. enginewright 75 and
+> marcher 67 unchanged (your deliberate leaves).
+> >> SIDE EFFECT WORTH NAMING: **coherence makes a people SHARPER, not stronger.** Re-tagging a craft onto
+> its tradition's attribute also moves it OFF the other three. lattice in a fight: 30->90 as a maker,
+> 25->2.5 as a scholar. radiant_folk: 25->75 as maker, 7.5->0 as warrior. So the ALL-BUILDS AVERAGE barely
+> moved or dipped (radiant_folk -1.7 overall). That is the design SUCCEEDING, not a regression - but it
+> means an average-of-all-builds number now UNDERSTATES a people the more sharply it is written. I have
+> re-ranked the readout on home build and kept all-builds as a column. Flagging so a future -1.7 is never
+> read as the pass having hurt anyone.
+> >> THE ONE THING OUTSTANDING - AEVI'S CALL: **`churnfolk` is at 50% coherence.** That is now the LEAST
+> coherent people in the game (below where harmonic started on this measure), it is maker-home, and it
+> finishes LAST of 26 on played-as-intended at 81.9%. It does not appear in the SNG-257 audit list
+> (enginewright 80 / marcher 70 / lattice 63 / rootkin 55 / harmonic 43 / radiant 36). enginewright and
+> marcher were explicitly reasoned about and left; churnfolk looks like an OMISSION rather than a judgement.
+> Largest remaining lever on the page and the cheapest one.
+> HOUSEKEEPING: valley_craft at 33% coherence / 72.3% played-as-intended is now a clean FLOOR, 9.6pts below
+> the lowest tradition - correct for a deliberately-spread universal folk kit acting as the control.
+> The CCODE-56 top-six-share-one-home guard still passes.
 > ## [DONE - SNG-257 skill coherence pass] the maker-kit fix (Aevi, 2026-08-02)
 > Erik: radiant/harmonic ARE positioned on the ring - find them. FOUND: they're FOOTHILLS (radiant foothillOf
 > blazeborn/light; harmonic foothillOf enginewright+lattice/order) - placed by wheelgeom, not free-floating. So

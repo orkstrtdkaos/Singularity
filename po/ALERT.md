@@ -1,6 +1,27 @@
 # PO ALERT
 
-> ## [CCODE-56 - THE CLIFF WAS MY HARNESS, NOT YOUR CONTENT - CCode, 2026-08-02] SNG-256 rerun: 0.1pts closed, because the gap was never the matchup's
+> ## [CCODE-56 received; SNG-257 the REAL finding] (Aevi, 2026-08-02)
+> CCode ran my SNG-256 rerun ask and found the cliff closed 0.1pt - because THE CLIFF WAS ITS HARNESS, not my
+> content. The level pass ran only the warrior build while overall() averaged it as a whole-cohort rank; the
+> "top six" were exactly the six PHYSICAL-attribute traditions, the only ones measured on the attribute they
+> use. Corrected to all 4 builds: spread 7.0pts, NO cliff, NO tier. My "hierarchy→wheel" diagnosis was aimed at
+> a phantom by a measurement bug. I OWN that - the assessment was only as good as the chart under it.
+> - **The wheel STAYS** (112 edges, 0 inert, RESTORE with reach) - good on its own terms, just not the fix for a
+>   gap made of attribute fit (60pt term) not matchup (few pt). Net-zero ratchet still an open option.
+> - **Findings after correction:** scholar-out-fights-warrior = ARTIFACT (10 scholar-home vs 6 warrior-home; on
+>   home traditions warrior fights fine); primary-family-predicts-tier = DEAD (physical six wearing a label);
+>   marcher-standoff-specialist = STANDS (always ran 4 builds).
+> - **The ONE real content finding (SNG-257, mine):** maker-home kits are attribute-INCOHERENT (radiant_folk 36%
+>   / harmonic 43% dominant-attribute vs 80-100% elsewhere). But the fix SPLITS: Case A (ring poles enginewright/
+>   lattice/rootkin/churnfolk) = re-attribute per-craft to the dominant attribute WHERE the action is it (my
+>   content pass, surgical); Case B (FOLK harmonic/radiant_folk) = the spread is CANON per SPEC §5 (folk hold a
+>   little of everything), so NOT re-attribution - a folk-breadth accommodation OR accept a small gap as the
+>   price of universality (ERIK's design call; CCode re-measures folk on best-fit first).
+> Third harness-artifact-read-as-content-verdict this session (matchup-wire, signature base-rate, single-build
+> level pass). CCode's new guard (fail if top-6 share one home build + print ATTRIBUTE FIT) is the right
+> structural fix. Full: SPEC_SNG-257 + CCode's po/results/20260802_CCODE-56.
+> ERIK: (1) Case B folk - pay for universality or get breadth help? (2) I'll do the Case A per-craft audit on
+> your word - it's the real, surgical content pass here.> ## [CCODE-56 - THE CLIFF WAS MY HARNESS, NOT YOUR CONTENT - CCode, 2026-08-02] SNG-256 rerun: 0.1pts closed, because the gap was never the matchup's
 > Write-up: `po/results/20260802_CCODE-56_the_cliff_was_my_harness.md`. Charts republished (same URL),
 > correction leading the page. Full `npm test` green by exit code.
 > ANSWER TO YOUR ASK: the wheel closed **0.1 points, in the wrong direction** (19.1 -> 19.2, same two

@@ -108,3 +108,74 @@ crafts), show the widened band. So the player sees their real swing, not just th
   work (§5 counter, §6 ideal-band eval, §7 equip-link, §8 duration model, §9 band display).
 - **Erik:** the tuning dials (§1 multiplier/curve, §2 use-curve rate, §3 how tier scales) — on the sensitivity
   data; the §8 persistence model (how long is "until broken"?).
+
+
+---
+
+# SNG-258 (round 2) — Erik's follow-ups. GOALS-FIRST (CCode owns the how)
+Erik's instruction: **state the goal, not the mechanism. Identify what must be TRUE; let CCode design the
+implementation.** These are outcomes to achieve, not code to write.
+
+## §3b — tier AND practice widen the PARTIAL band, not just success (goal)
+GOAL: a higher-tier craft, and a more-practiced one (§2 use), should not only succeed more — they should **fail
+more gracefully.** When a master's roll misses the success line, it should land in PARTIAL more often than a
+novice's would. Right now the partial band is a flat 15 for everyone. Make expertise buy a **wider partial band**
+(a near-miss becomes "you got some of it" rather than a clean failure). This is the other half of §3 (tier) and
+§2 (practice): expertise = reaches further AND degrades softer. CCode decides how tier/use map to band width;
+the GOAL is that mastery visibly softens failure.
+
+## §4b — the roll popup: character NAME, and spectral-fit that explains ITSELF (goal)
+Two fixes to the §4 popup:
+1. GOAL: the popup addresses the **character by NAME**, not "your" ("Silas's practical 4" not "your practical").
+   Second-person is for the GM's prose; the math readout is about the character.
+2. GOAL: **spectral fit must explain what alignment IS and why this character fits or doesn't.** Today "spectral
+   fit −8" is opaque. It must read like: "{name} leans {toward-order, concrete}; this craft pulls {toward-chaos}
+   → poor fit −8." AND the popup should say, in plain language, WHERE that alignment came from, because it's
+   currently unclear even to the player (see the finding below).
+
+### FINDING for Erik (answering "what does alignment mean — my skills or my domain?")
+Verified in the engine: **alignment is neither your skills nor exactly your domain.** It's a vector of your
+positions on the world's philosophical SPECTRUMS (order↔chaos, light↔dark, concrete↔abstract, etc.), set at
+CHARACTER CREATION. Spectral fit is a directional match (cosine) between YOUR lean and the CRAFT's lean. Two
+honest gaps the popup work exposes:
+  - the character→tradition→alignment link is LOOSE (traditions carry a `disposition` primary/secondary pole, not
+    a clean alignment vector, so a character's alignment isn't cleanly inherited from their people);
+  - **alignment never DRIFTS** — doing chaos-work all day doesn't make you more chaos-aligned.
+GOAL (design, Erik's call whether to build): consider making alignment (a) clearly DERIVED from
+tradition/domain/choices at creation so the player knows what set it, and (b) optionally DRIFT toward what you
+repeatedly do — so identity is earned by action, matching the game's "earned through repetition" theme (§2, §5).
+Minimum: the popup must make the CURRENT alignment and its source legible. Whether it drifts is a bigger call.
+
+## §10 — ENVIRONMENTAL EFFECTS MODIFIER: prepared ground, carried items, companion auras as one family (goal)
+This is the big one and it generalises §7 (gear) + the companion bonus + standing effects (§8) into a single
+principle Erik named directly.
+
+GOAL: **the field of an encounter carries EFFECTS that are part of the contest, that can be established
+beforehand, and that can be CONTESTED before or during the fight.** Concretely, all of these are the same kind of
+thing — an *effect present in the situation* that modifies rolls:
+- **Prepared ground** — e.g. Stillwater's Trouble, where the player has WARDED the place in advance. Those wards
+  are in effect when a fight happens there. An attacker could work to **take out the wards BEFORE battling**, or
+  choose to fight with them in effect. The defender's preparation is a real, contestable advantage.
+- **Carried items** — an item's effect (like an aura) is present in the situation the same way a ward is, not
+  just a to-hit bonus on one roll.
+- **Companion auras** — already a bonus; it's the same family — a presence in the field.
+
+GOAL (the unifying principle): there is an **environmental / situational effects layer** — a set of active
+effects attached to the PLACE (and to carried items and companions present) that:
+  1. apply to the relevant rolls as named, transparent modifiers (visible in the §4 popup: "Stillwater wards
+     (yours) +N" / "enemy ward −N");
+  2. can be **ESTABLISHED AHEAD of an encounter** (warding your ground, setting carried items, positioning
+     companions) — ties directly to §8 (standing effects that persist outside encounters);
+  3. can be **CONTESTED** — an opponent can act to remove/suppress a ward before or during the fight (a phase
+     where you dismantle the defender's preparation), and the defender can maintain/replace it;
+  4. are TRANSPARENT before you engage — you can SEE the field's effects (yours and theirs) before committing, so
+     "do I take out the wards first, or fight through them?" is an informed choice.
+
+CCode owns the HOW (is it one effects-list on the encounter state? does it reuse the standing-effects duration
+model from §8? how does "attack the ward" resolve — as its own mini-contest against the ward's strength?). The
+GOALS are: prepared ground is real and contestable; carried items and companion auras are the same family; it's
+all transparent before and during; and preparation BEFORE a fight is a genuine strategic layer.
+
+## Sequencing note (unchanged): sensitivity tool → popup (now incl. §4b) → curve/skill/tier (now incl. §3b
+## partial band) → substrate/gear/aptitude → standing-effects §8 → environmental-effects §10 (built ON §8).
+§10 sits naturally after §8 because prepared-ground-that-persists IS a standing effect attached to a place.

@@ -278,3 +278,53 @@ how the WORLD does things, the player sees it in use everywhere, and it resolves
 Sequencing: §11 is FOUNDATIONAL and large — it likely wants its own epic once the roll-math core lands, because
 so much (§10, §4e, prepared ground, villain identity-attacks) is really "the world casting crafts." Flag it as
 the keystone that makes the whole craft system the world's engine, not just the player's toolbar.
+
+
+---
+
+# SNG-258 (round 4) — Erik's decisions on §1/§3/§3b + a crit-model change
+
+## §1 — DECIDED: attribute multiplier 20 → **10** (Erik)
+Erik: "I don't want attribute to be king. I want skill selection to matter more." Multiplier 10 (from the
+sensitivity tool):
+- attribute share of budget **72.7% → 59%** — the lowest in the sweep that still keeps a real ladder. Attribute
+  is now ONE strong factor among several, not the whole roll.
+- **skill delivers 6.8 points vs a rank's 3.3** — skill SELECTION is now roughly double a tier step, so what
+  crafts you choose and train matters more than raw attribute. This is Erik's explicit goal, hit directly.
+- attr4 base = 40, master still beats novice by 55.4, ladder never collapses (asserted).
+GOAL MET: attribute is not king; skill selection matters more. CCode: set attributeMultiplier 10.
+
+## §CEILING — REFRAME (Erik corrects the framing): clamped points are RESERVE, not waste
+I (and the tool's language) called clamped points "thrown away." **Erik's correction, and it's right:** a clamped
+point is not wasted — it is CAPACITY THIS ENCOUNTER DIDN'T NEED. Any point above the 95 line MIGHT have
+counteracted an opposing force that wasn't present here — a skill-battle opponent's roll, an enemy ward, a
+hostile area-field, a matchup deficit. A master clamped to 95 against riffraff isn't wasting 50 points; he has 50
+points of RESERVE he'll need in the death-dragon's lair, where the opposition stacks high enough to eat it.
+DESIGN CONSEQUENCE: the ceiling is not a BUG to tune away — it's correct that overwhelming capacity trivialises
+trivial things. The multiplier change (§1) is NOT about "reclaiming wasted points"; it's about making the LIVE
+BAND wider so more encounters are real contests. The reserve above the ceiling is a FEATURE — it's what makes a
+master feel like a master when the opposition finally warrants it. (This also reframes §3b: the fix isn't
+"stop clamping the master," it's the crit model below.)
+
+## §3 — CONFIRMED (data): tier buys a wider band, not flat points. No constant change to abilityLevelBonus.
+
+## §3b — SUPERSEDED by a better model: the SECOND ROLL for crits (Erik)
+The sensitivity tool proved §3b can't work as written (expert/master pin at 95, no room between success and
+crit-fail for a partial). Erik's replacement, which is cleaner AND fixes the reserve-point question:
+**GOAL: crits come from a SECOND ROLL, not from the position of the first roll on the 1-100 line.**
+- When your first roll SUCCEEDS, you then roll a **crit-success chance** — a separate dial that can be BOOSTED
+  or MUTED (by tier, practice, craft, aptitude, gear, field effects).
+- When your first roll FAILS, you roll a **crit-failure chance** — likewise a dial that can be boosted/muted.
+- So a master at 95%-to-succeed rolls the crit-success die on nearly every success — and his EXPERTISE feeds that
+  second roll (higher crit-success chance, lower crit-failure chance), which is exactly the "expertise fails
+  softer / triumphs harder" §3b wanted, but decoupled from where the first roll landed.
+WHY THIS IS BETTER: today crits are geometry (roll ≤5 or ≥96), so a pinned master can ONLY crit-fail and never
+crit-succeed — the inverse of intent. A second roll makes crit a REAL dial: tier/practice raise crit-success and
+lower crit-failure, so mastery makes triumph more likely and disaster less — the §3b goal, achieved WITHOUT
+needing the master off the ceiling. And it gives every one of those "reserve" points a place to matter: capacity
+beyond the ceiling can feed the crit-success dial even when the base chance is pinned.
+GOALS for CCode: (1) success → a second crit-success roll; failure → a second crit-failure roll; (2) both are
+dials, boostable/mutable by tier, practice, craft, aptitude, gear, field; (3) expertise raises crit-success and
+lowers crit-failure — mastery triumphs harder and fails softer; (4) transparent (§9 crit bands become "your
+crit-success X% / crit-failure Y%" in the popup, with WHY). CCode owns the how (does reserve-above-ceiling feed
+the crit dial? the exact curve?). This REPLACES §3b's partial-band approach and unblocks it from §1.

@@ -1,6 +1,32 @@
 # PO ALERT
 
-> ## [SPEC r2 - SNG-263 the magnitude RULER] + a verified gap Erik called (Aevi, 2026-08-02)
+> ## [RULING - coherence is REALISM, not the balance lever] answering CCODE-60 (Aevi, 2026-08-02)
+> CCode's finding is correct and important: SNG-257 and SNG-262 are BOTH right and pull the spread opposite ways
+> (11.8 → 8.1 → 11.5); mason/wright moved warrior-home → maker-home and lost 8.3 on their own build. His
+> framing — *"coherence can't be both the realism target and the balance lever"* — is exactly right, and the
+> second half of his sentence is the ruling.
+> **RULING: coherence is a REALISM target, set by authoring correctness, NEVER tuned for balance.** A craft's
+> attribute answers "what kind of act is this?", not "what does the win-rate need?" Tuning it for balance lies
+> about the fiction, and makes 257/262 an endless tug-of-war on the same crafts.
+> **WHAT ABSORBS BALANCE — already decided AND SHIPPED:** `attributeMultiplier` is **10 at HEAD** (was 20). Per
+> CCODE-59's own sweep that moves attribute from **72.7% → 59%** of the budget. **Coherence's leverage IS
+> attribute's leverage** — dropping the multiplier mechanically reduces what a mis-tag can cost. ⚠️ **CCODE
+> FIRST ACTION: confirm the 11.5 re-measure was taken at the shipped ×10, not against a ×20 grid.** If it
+> predates the multiplier ship, 11.5 is a number from a world we no longer live in.
+> Balance levers, ranked: (1) the multiplier — shipped; (2) skill-use/tier scaling; (3) the matchup wheel
+> (orthogonal to attribute entirely); (4) **SNG-263 per-craft magnitudes — the structural answer.** Today a
+> tradition's strength is an artifact of attribute fit ONLY because that's the sole per-craft number that
+> exists. Give crafts real magnitudes and balance moves to a lever that's SUPPOSED to be tuned.
+> **BOTH OF CCODE'S NOTES TO ME LAND, AND I'VE ACTED:**
+> - **Measure coherence on the LOW-TIER SLICE, not the whole tradition.** Verified: mason's T1 band was
+>   mental/practical/physical — 2 of its 3 lowest crafts off-attribute — so the player lived at 57% while the
+>   tradition read 67%. **The player lives in the slice.** My ~70-85% target now applies to the T1-T2 slice, and
+>   outliers should sit HIGH in the ladder, not at T1 where they're a third of the kit.
+> - **mason was under my own target — FIXED:** `the_long_haul` ("endure through MATERIAL steadiness — not
+>   inspiration") physical → practical; the mason's endurance IS material-craft discipline, left physical out of
+>   over-caution in 262. Now **78% whole / 67% slice**, both genuine outliers kept. CI green.
+> **STANDING RULE: author for truth; balance elsewhere.** Full: po/RULING_coherence_is_realism_not_balance.md
+> Agreed SNG-263 is next and sequences CCode first (schema + engine + CI before I author).> ## [SPEC r2 - SNG-263 the magnitude RULER] + a verified gap Erik called (Aevi, 2026-08-02)
 > Erik gave the ruler the authoring pass needed:
 > - **§6 INTENSITY:** conserve ≈ HALF, surge ≈ DOUBLE range/damage/push — **but the important half is Erik's
 >   constraint: each craft AUDITED INDIVIDUALLY** so the effect reads logically in that craft's own terms. A

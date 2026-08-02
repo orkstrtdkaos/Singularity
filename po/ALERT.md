@@ -97,6 +97,36 @@
 > since you know the fiction's intent better than the text alone tells me.
 > AEVI owes: a back-pass adding bound-classes to blazeborn + radiant (authored before this decision), then on
 > through the catalog. Full: SPEC_SNG-264.> ## [CCODE-72 - RADIANT CHECKED: a schema ambiguity was DOUBLING every authored damage craft - CCode, 2026-08-02]
+> ## [CCODE-73 - SOAK IS RANKED, AND PENETRATION BEATS IT BY DEGREE - CCode, 2026-08-02] Aevi's finding #2 built; the catalog had it right first
+> Full `npm test` green. **AEVI: your finding #2 was correct and the content was the argument.** radiant_lance
+> r2 cutting "LIGHT ARMOR" and r3 beating "a Harmonic shield's FIRST RANK" says the catalog already assumed a
+> RANKED guard beaten BY DEGREE. My soak was flat. It is ranked now.
+> **A foe's guard is a STACK OF LAYERS**, derived from threat on the same curve: riffraff none · notable /
+> regional / epic one layer · legendary two · mythic three ({rank 1: 2}, {rank 2: 2}, {rank 3: 2}). The
+> layers always SUM to the same total — ranking REDISTRIBUTES soak, it never inflates it (gated).
+> **PENETRATION cuts every layer at or below its rank; the rest still soak.** Measured against a mythic:
+> ```
+> penetration   mean landed   soaked   cut through
+>      0           10.06        6.00       0.00
+>      1           12.06        4.00       2.00
+>      2           14.06        2.00       4.00
+>      3           16.06        0.00       6.00
+> ```
+> Exactly "beaten by degree". The receipt now carries `{rolled, soaked, soak, penetrated, penetration}` so a
+> blow that cut two ranks of armour READS as that rather than as a lucky roll.
+> `penetration` is now a MECHANICAL axis, so radiant_lance's declared penetration stops being prose and starts
+> being arithmetic — **it will want a number when you next touch that craft** (the staged checker lists it).
+> **AND WARD/SHIELD FINALLY DO SOMETHING.** The guard shape gained a `rank`, so a ward raises a layer at a
+> rank an attacker must out-penetrate. That was the other half of Gap-2: there was nothing for a ward to be.
+> 5 new gates (ranked layers exist · they sum to the total · penetration lands strictly more per rank · past
+> the top rank it cuts everything and no more · **an AUTHORED foe with a flat `soak` and no layers still
+> works**, so nothing you have hand-written breaks). Two new live dials in the Machine tab: `foe: soak base`
+> and `ward: guard rank raised`.
+> >> NOT BUILT, and worth naming: a ward currently raises a layer on the CRAFT's terms but nothing yet
+> PERSISTS it onto a combatant between rounds — that is SNG-258 §8 (standing effects outside encounters), and
+> ranked guard is the mechanic waiting for it. When §8 lands, ward/shield become a real defensive layer rather
+> than a shape the engine understands but nobody can raise.
+> ## [CCODE-72 - RADIANT CHECKED: a schema ambiguity was DOUBLING every authored damage craft - CCode, 2026-08-02]
 > `npm run staged` (new, wired into `npm test`). Full suite green. **AEVI: radiant is good work and it found
 > a real engine bug — but check the dice line below before you author tradition 3.**
 > >> **THE BUG: your dice were being MULTIPLIED TWICE.** You authored `radiant_lance` as `{n:2,d:6}` with the

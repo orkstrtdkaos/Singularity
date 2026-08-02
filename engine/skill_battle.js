@@ -50,11 +50,27 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
   // damage reduction, no temporary hit points — so there was nothing to overcome, and nothing for ward or
   // shield to actually DO.
   const soak = Math.max(0, Math.round((syn.soakBase ?? 0) + curve(threat * (syn.threatToSoak ?? 0.02), syn.soakKnee ?? 4)));
+  // SNG-263: soak is a STACK OF RANKED LAYERS, not one flat number — Aevi's radiant pass showed the catalog
+  // already assumed it. radiant_lance r2 cuts "LIGHT ARMOR" and r3 beats "a Harmonic shield's FIRST RANK":
+  // penetration is meant to beat guard BY DEGREE. The total is unchanged; this decides how it is DISTRIBUTED,
+  // and therefore what a penetrating craft can bypass. A riffraff has no layer at all; an epic has two.
+  const rankAt = syn.soakRankAt || [0, 3, 6];
+  const soakLayers = [];
+  { let left = soak;
+    for (let i = 0; i < rankAt.length && left > 0; i++) {
+      if (soak < (rankAt[i] ?? Infinity)) break;
+      const take = (i === rankAt.length - 1) ? left : Math.ceil(soak / rankAt.length);
+      const value = Math.min(left, Math.max(1, take));
+      soakLayers.push({ rank: i + 1, value });
+      left -= value;
+    }
+    if (left > 0 && soakLayers.length) soakLayers[soakLayers.length - 1].value += left;
+  }
   const tags = opponent.tacticTags || [];
   if (opponent.skills?.length) { // authored override — a real, hand-built sheet
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
-      health: opponent.health ?? health, soak: opponent.soak ?? soak, authored: true };
+      health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers, authored: true };
   }
   // SNG-253 (scoped from the post-252 re-look): the opponent's move VOCABULARY was kind-blind. Verified against
   // this engine rather than predicted — a STANDOFF opponent declared "a hard strike" and held "a raised guard",
@@ -75,7 +91,7 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
   const skills = defs.map(s => ({ function: s.function, name: s.name, tier, attribute: s.attribute || "practical" }));
   return { name: opponent.name || "the opponent", attributes: { practical: attr, physical: attr, mental: attr, social: attr },
     energy, maxEnergy: energy, tacticTags: tags, skills,
-    health: opponent.health ?? health, soak: opponent.soak ?? soak, synthesized: true };
+    health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers, synthesized: true };
 }
 
 /** The opponent's move for this round — DETERMINISTIC engine policy (not GM invention). Behind on momentum
@@ -600,10 +616,23 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // bigger die beats it by more. "An armored epic foe needs more than a scaled-up cantrip" is exactly this
       // arithmetic — reported on the receipt so a blunted blow reads as blunted rather than as a bad roll.
       const targetSheet = roundWinner === "player" ? oppSheet : playerSheet;
-      const soak = Math.max(0, Number(targetSheet?.soak) || 0);
+      // RANKED soak. The catalog authored this before the engine had it: radiant_lance r2 cuts "LIGHT ARMOR"
+      // and r3 beats "a Harmonic shield's FIRST RANK", so penetration is meant to beat a guard BY DEGREE
+      // rather than subtract from one flat number. A craft cuts every layer whose rank is at or below its
+      // penetration; the layers above it still soak. Falls back to the flat value when a sheet carries no
+      // layers, so an authored foe with a hand-written `soak` keeps working unchanged.
+      const pen = Math.max(0, Number(winDecl.penetration) || 0);
+      const layers = Array.isArray(targetSheet?.soakLayers) ? targetSheet.soakLayers : null;
+      const soak = layers
+        ? layers.filter(l => (Number(l.rank) || 1) > pen).reduce((a, l) => a + (Number(l.value) || 0), 0)
+        : Math.max(0, Number(targetSheet?.soak) || 0);
+      const cutThrough = layers
+        ? layers.filter(l => (Number(l.rank) || 1) <= pen).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
       const landed = Math.max(dcfg.minHit ?? 1, hit - soak);
       damage = { side: roundWinner === "player" ? "opponent" : "player", amount: landed, verb: winDecl.function,
-        by: winDecl.name || winDecl.function, ...(soak ? { rolled: hit, soaked: hit - landed, soak } : {}) };
+        by: winDecl.name || winDecl.function,
+        ...(soak || cutThrough ? { rolled: hit, soaked: hit - landed, soak,
+          ...(cutThrough ? { penetrated: cutThrough, penetration: pen } : {}) } : {}) };
       if (roundWinner === "player" && opponentHealth != null) opponentHealth = Math.max(0, opponentHealth - landed);
       // the PLAYER's health is the app's to apply (checkIncapacitation owns that exit) — reported, never written here
     }

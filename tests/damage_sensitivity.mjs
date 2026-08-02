@@ -178,6 +178,49 @@ const SB = SBRAW.engine;
     rolls.every(v => v <= ceiling), `ceiling ${ceiling}, saw max ${Math.max(...rolls)}`);
 }
 
+// ── RANKED SOAK + PENETRATION — Aevi's finding #2, from radiant ─────────────────────────────────────────
+// radiant_lance r2 cuts "LIGHT ARMOR" and r3 beats "a Harmonic shield's FIRST RANK". The catalog assumed a
+// RANKED guard beaten BY DEGREE before the engine had one; these gate that it now behaves that way.
+{
+  const opp = synthesizeOpponentSheet({ name: "mythic", threat: 300 }, SB);
+  const landedAt = pen => {
+    let tot = 0, n = 0;
+    for (let k = 0; k < 300; k++) {
+      const rng = rngFor(k);
+      const r = battleRound({ playerSheet: { attributes: { practical: 9 }, energy: 100, level: 20 }, oppSheet: opp,
+        playerDecl: { function: "strike", tier: 3, attribute: "practical", intensity: "standard", name: "a cut", penetration: pen },
+        oppDecl: { function: "shield", tier: 1, attribute: "practical", intensity: "standard" },
+        state: { momentum: 0, effects: [], opponentHealth: 9999 }, rules: { ...RES, craftMechanics: CM }, sb: SB, steps: STEPS, rng });
+      if (r.damage?.side === "opponent") { tot += r.damage.amount; n++; }
+    }
+    return tot / n;
+  };
+  check("SOAK: a tough foe's guard is a stack of RANKED layers, not one flat number",
+    Array.isArray(opp.soakLayers) && opp.soakLayers.length > 1 && opp.soakLayers.every(l => l.rank && l.value),
+    JSON.stringify(opp.soakLayers));
+  check("SOAK: the ranked layers still SUM to the foe's total soak (ranking redistributes, never inflates)",
+    opp.soakLayers.reduce((a, l) => a + l.value, 0) === opp.soak,
+    `layers ${opp.soakLayers.reduce((a, l) => a + l.value, 0)} vs soak ${opp.soak}`);
+  const [p0, p1, p3] = [landedAt(0), landedAt(1), landedAt(3)];
+  check("SOAK: penetration beats guard BY DEGREE — each rank cut lands strictly more (the catalog's assumption)",
+    p1 > p0 && p3 > p1, `pen0 ${p0.toFixed(2)} < pen1 ${p1.toFixed(2)} < pen3 ${p3.toFixed(2)}`);
+  check("SOAK: penetration past the top rank cuts everything and no more (no negative soak)",
+    Math.abs(landedAt(9) - p3) < 0.01, `pen9 ${landedAt(9).toFixed(2)} vs pen3 ${p3.toFixed(2)}`);
+  // an AUTHORED foe with a hand-written flat soak and no layers must keep working
+  const flat = { ...opp, soakLayers: undefined, soak: 5 };
+  let n = 0, tot = 0;
+  for (let k = 0; k < 200; k++) {
+    const rng = rngFor(k);
+    const r = battleRound({ playerSheet: { attributes: { practical: 9 }, energy: 100, level: 20 }, oppSheet: flat,
+      playerDecl: { function: "strike", tier: 3, attribute: "practical", intensity: "standard", name: "a cut" },
+      oppDecl: { function: "shield", tier: 1, attribute: "practical", intensity: "standard" },
+      state: { momentum: 0, effects: [], opponentHealth: 9999 }, rules: { ...RES, craftMechanics: CM }, sb: SB, steps: STEPS, rng });
+    if (r.damage?.side === "opponent") { tot += r.damage.amount; n++; }
+  }
+  check("SOAK: an AUTHORED foe carrying a flat soak and no layers still works (back-compat)",
+    n > 0 && Number.isFinite(tot / n) && tot / n >= 1, `mean ${(tot / n).toFixed(2)} over ${n} hits`);
+}
+
 // ── MINTED CRAFTS (§9) — a braid must not be born characterless ─────────────────────────────────────────
 // The spec said minted crafts are "born mechanically empty". Measured, that was no longer true — the
 // resolution order already gave a braid its family's dice at its own tier. What it WAS born without is its

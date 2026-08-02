@@ -996,7 +996,13 @@
             "attribute": "mental"
           }
         ]
-      }
+      },
+      "soakRankAt": [
+        0,
+        3,
+        6
+      ],
+      "soakRankNote": "SNG-263: soak is a STACK of ranked layers, not a flat number. A foe gains its rank-N layer once its total soak reaches soakRankAt[N-1], so a riffraff has none, a notable has one thin layer, and an epic has a layered guard. A craft's `penetration` cuts every layer of rank <= penetration; the rest still soak. Total soak is unchanged — this only decides how it is DISTRIBUTED, and therefore what a penetrating craft can bypass."
     }
   },
   "buildImplication": "Engine: a skill-battle mode alongside single-check resolution — triggered when two wills contest with skills. Per round: both declare skill+intensity; roll d100+attr+tierBonus+matchupBonus; winner shifts momentum by margin; track energy (attrition); resolve at meter-end or exhaustion. Reads challengeProfile (matchup relevance), functions (the edge table), intensity_scaling (energy), tier (weight). SNG-027 social contest is the SOCIAL-flavored instance of this same engine — unify them: a skill-battle is the general case, social-contest and combat and the duel are flavors. Matchup table authored here; expand per-function. Flag SNG-045. Smoke: a conceal-vs-reveal contest runs multiple rounds; energy attrition can decide it independent of rolls; tier gives both power and stamina; a Surge-botch backlashes; matchup edge beats raw rolls; social-contest resolves through the same engine."

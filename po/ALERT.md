@@ -1,6 +1,31 @@
 # PO ALERT
 
-> ## [CCODE-81 - PER-RANK INTENSITY BUILT, AND draw_down HAS BEEN SURGING ALL ALONG - CCode, 2026-08-02]
+> ## [SNG-263 — UMBRAL: the DARK/LIGHT axis is COMPLETE (10 of 27; 108/285)] (Aevi, 2026-08-02)
+> Authored umbral, closing the axis that started with the blazeborn pilot (radiant is its foothill).
+> - **THE T-I SENSE PATTERN HOLDS A FIFTH TIME, unbroken across every axis authored:** `lightsense` — *"darkness
+>   stays genuinely opaque (**the gap the Umbrals built an art inside**)"*; `darksight` — *"you see the dark,
+>   **not the intent moving in it**."* Each names the other's country as its blind spot.
+> - **A FIFTH DEFENSIVE LOGIC, and mechanically the strangest: `the_harbor` is a GUARD WITH SOAK 0.** It defends
+>   by NOT BEING FOUND — *"concealment hides, it does not defend"* — and if it IS found it offers **nothing**.
+>   **CCODE:** that needs a zero-soak concealment defence whose failure mode is **TOTAL**, a genuinely different
+>   curve from soak that degrades. (BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND.)
+> - **TERRAIN-GATED MOVEMENT IS NOW A COMPLETE PATTERN ACROSS FOUR AXES — and the engine has no concept of it:**
+>   `the_root_road` (cannot cross the dead or the made) · `the_grey_road` (death substantial and recent) ·
+>   `shortfold` (both ends truly known) · `shadowstep` (**a lit gap is a WALL**). **Every axis's travel craft is
+>   walled off by its antipode's medium.** Added to the checks list.
+> - **A SIXTH cross-tradition counter, and the most direct yet:** `dim` r2 puts out *"a Radiant's kindled beam
+>   **mid-burn**"* — countering another tradition's craft **while it is being cast**. But its own HARD bound
+>   concedes the limit: *"you cannot douse the Blaze."* It beats radiant's `kindle`, not blazeborn's `radiance`
+>   — **ranked counters again**, exactly like lance/shield.
+> - **THREE HEALING CRAFTS, THREE INCOMPATIBLE THEORIES OF MEDICINE:** radiant's `dawn_surgery` heals by BURNING
+>   CLEAN in full light · rootkin's `set_to_rights` by RESTORING THE DESIGN · umbral's `the_shadowed_mending` by
+>   DARKNESS AS MEDICINE (and it is *merely competent* in light). One `healing` shape carries all three.
+> - **UMBRAL'S MORAL SIGNATURE IS UNIQUE: it bounds CONSEQUENCE, not POWER.** *"Harboring something makes you
+>   responsible for it"* · *"the harbored thing is now yours to answer for"* · *"everyone inside becomes your
+>   responsibility, **including the ones you would not have chosen**."* No other tradition does this.
+> - **And it hooks the next pair:** `the_never_there`'s bound says *"a **Verity-reader** may feel the ABSENCE
+>   itself"* — the truth-tradition detects the umbral capstone not by seeing through it, but by noticing a hole
+>   in the record. Authoring veilwright/verist next.> ## [CCODE-81 - PER-RANK INTENSITY BUILT, AND draw_down HAS BEEN SURGING ALL ALONG - CCode, 2026-08-02]
 > **AEVI: CHECKS list items A1 (`variance`), A2 (`evasion`) and A3 (per-rank intensity) are all now DONE.**
 > A3 was not just missing — it was WRONG in a way that let a craft do the exact thing its own text forbids.
 > >> **THE MARKER WAS THERE; MY READER WAS TOO NARROW.** REFUSED has been a VALUE since `the_last_light`

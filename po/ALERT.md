@@ -1,5 +1,37 @@
 # PO ALERT
 
+> ## [CCODE-110 - WHAT ASYMMETRIC ENDINGS WOULD TAKE. MEASURED, NOT GUESSED. - CCode, 2026-08-03]
+> **ERIK: *"I want the NPC injuries and deaths and (once wired) newly minted legends and epics to be able to
+> produce different asymmetric end paths. What would that take?"***
+> **LESS THAN YOU WOULD THINK, BECAUSE THE WORLD IS ALREADY BALANCED ON A KNIFE EDGE.** Every one of the five
+> contested arcs has a weight margin of **6 or less**:
+> >> `what wakes beneath 19/13 (+6) · block bleed 6/7 (−1) · the poles pull 24/29 (−5) · manifestation storm
+> >> 8/11 (−3) · green schism 3/4 (−1)`
+> **A SINGLE DEATH FLIPS ANY OF THEM.** `green schism` is 1 legend vs 2. `block bleed` is 4 vs 4. Erik does not
+> need many deaths — he needs a FEW, and each one will change an ending. The asymmetry mechanism is not
+> missing; **it is already built, already balanced, and never fires.**
+> **THREE THINGS, in the order I would do them:**
+> **1. MOVE THE CLASH INTO THE MECHANICAL PASS (the cheap, decisive one).** A clash currently needs a legend to
+> win a batch seat AND be narrated AND pass `rng() < 0.4` — three gates, which is why attrition is 0.8 of 66
+> in two years. Arc pushes were moved to the mechanical pass in CCODE-105 for exactly this reason and it took
+> four lines. **Clashes are a rival-pair loop; the same move raises attrition to something that matters.** The
+> COST: a clash is an event someone should witness, so the narration still needs to catch up — which is what
+> the CCODE-103 backlog is for. It already carries "what you missed" per entity.
+> **2. WOUNDS ARE ALREADY AN ASYMMETRY AND ARE CHEAPER THAN DEATH.** `blunt` is already `wounded → 0.5,
+> stopped → 0`. A wounded legend pushes at HALF — on an arc with a margin of −1, that is a flip without
+> anyone dying. **This needs no new code at all, only more clashes to produce wounds.** It is the best
+> value in the list: reversible, survivable, and it changes endings.
+> **3. MINTING — and the substrate is already there.** CCODE-85 gave NPCs deeds, renown and reach-weighted
+> bands. A promotion is: an NPC crossing a renown threshold gains `tier: "epic"` and an `arcAffinity`. **The
+> hard part is not the promotion, it is choosing the AFFINITY** — which arc, which direction — and their DEEDS
+> already answer it: someone whose record is all `valor` on one side of a conflict has declared their side.
+> That is Aevi's call on how to read a record into a stance, and it is the only genuinely new design here.
+> >> **THE ONE-LINE ANSWER: 1 and 2 are plumbing, both small, and together they would make deaths and wounds
+> the thing that decides how a world ends. 3 is the only real design work, and NPC deeds already did the
+> expensive half of it.**
+> **AND A WARNING FROM THE SAME NUMBERS:** at margins this tight, raising the clash rate too far would make
+> arcs THRASH — flipping every time a figure is wounded. `rules.arcResponse` damping (CCODE-106) is what keeps
+> that readable, and it should be tuned in the same pass, not after.
 > ## [CCODE-109 - YES. PLAYERS MAKE A DIFFERENCE, AND THEY ARE THE ONLY THING THAT DOES - CCode, 2026-08-03]
 > **ERIK: *"build the scenarios and play out a player's story... are they able to make a difference?"***
 > `npm run player-impact`. 16 worlds — 4 seeds × party sizes 0/1/3/6 — 720 world-days each, real content,

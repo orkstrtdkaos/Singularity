@@ -81,7 +81,55 @@
    ],
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "concealment",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 4,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "hide a person, a truth, or a thing SO WELL EVEN A SEARCHER WHO KNOWS IT IS THERE CANNOT FIND IT; move unseen through watched places",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "COMMAND SHADOW AT SCALE — hide a caravan, a rite, A REBELLION; see into the hidden hearts of things; GIVE SANCTUARY",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a wrap of shadow — half the concealment, and you answer for nothing",
+    "surge": "double it; THE WIELDER DRIFTS DARK-HOT, and the one who harbors everything eventually harbors something terrible"
+   },
+   "bounds": [
+    {
+     "text": "TOTAL LIGHT DEFEATS IT",
+     "class": "hard"
+    },
+    {
+     "text": "CONCEALMENT HIDES, IT DOES NOT DEFEND",
+     "class": "hard"
+    },
+    {
+     "text": "HARBORING SOMETHING MAKES YOU RESPONSIBLE FOR IT",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS DARK-HOT — the one who harbors everything eventually harbors something terrible",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "radiance",
@@ -272,7 +320,55 @@
    ],
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 20
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "see FAR AND FINE without light — read a face across a black room, follow a trail BY THE SHAPE OF THE AIR IN IT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the dark becomes your NATIVE MEDIUM — you see better in it than most see at noon, and you can CHOOSE light-blindness and shed it at will",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a dark-adjusted glance — half the range, and light does not hurt as much",
+    "surge": "double the sight; SUDDEN LIGHT STILL BLINDS YOU"
+   },
+   "bounds": [
+    {
+     "text": "TOTAL LIGHT DEFEATS IT — sees dark, not hidden intent",
+     "class": "hard"
+    },
+    {
+     "text": "SUDDEN LIGHT STILL BLINDS YOU",
+     "class": "soft"
+    },
+    {
+     "text": "you see the DARK, NOT THE INTENT MOVING IN IT",
+     "class": "hard"
+    },
+    {
+     "text": "A LIFE SPENT IN THE DARK MARKS YOU — Blazeborn read it on sight",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "lightsense",
@@ -442,7 +538,53 @@
    ],
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating"
+   "harmRung": "incapacitating",
+   "shape": "hobble",
+   "operativeAxis": [
+    "suppression",
+    "area",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 2,
+    "area": 1,
+    "note": "incapacitating rung — it suppresses LIGHT, including other people's light-craft"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "PUT A LIGHT OUT CLEANLY AT DISTANCE — a lamp, a signal-fire, A RADIANT'S KINDLED BEAM MID-BURN",
+     "from": "r2 grants — an explicit counter to a named tradition's craft, mid-cast"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "area+duration",
+     "delta": "dim a WHOLE PLACE — a hall, a street, a courtyard — down to working shadow, and HOLD IT THERE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a deeper shadow — half the dimming, and it costs nothing to hold",
+    "surge": "double the dark; HOLDING COSTS CONTINUOUSLY and a determined light-worker pushes back"
+   },
+   "bounds": [
+    {
+     "text": "brief at r1; BRIGHT OPEN GROUND DEFEATS IT",
+     "class": "soft"
+    },
+    {
+     "text": "YOU CANNOT DOUSE THE SUN, AND YOU CANNOT DOUSE THE BLAZE",
+     "class": "hard"
+    },
+    {
+     "text": "holding costs CONTINUOUSLY — a determined light-worker can push back",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "kindle",
@@ -626,7 +768,59 @@
    ],
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "concealment",
+    "targets",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 0,
+    "soakRank": 0,
+    "duration": 8,
+    "targets": 1,
+    "note": "A GUARD SHAPE WITH ZERO SOAK — deliberate. Its own bound: 'concealment hides, it does not defend.' The Harbor protects by never being found, not by absorbing a blow. If it IS found, it offers nothing."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "harbor so completely that A SEARCHER WHO KNOWS IT IS THERE STILL COMES AWAY EMPTY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE HARBOR BECOMES A PLACE — a warded shadow others can step into and be hidden within, AND KNOW THEY ARE SAFE",
+     "from": "r3 grants — a sanctuary others can enter is a kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "hide one thing — half the concealment, and you answer for less",
+    "surge": "double the harbor; EVERYONE INSIDE BECOMES YOUR RESPONSIBILITY, INCLUDING THE ONES YOU WOULD NOT HAVE CHOSEN"
+   },
+   "bounds": [
+    {
+     "text": "YOU BECOME RESPONSIBLE FOR WHAT YOU HARBOR",
+     "class": "hard"
+    },
+    {
+     "text": "THE BLAZE CAN STILL BURN what it cannot see",
+     "class": "hard"
+    },
+    {
+     "text": "the harbored thing is NOW YOURS TO ANSWER FOR",
+     "class": "hard"
+    },
+    {
+     "text": "EVERYONE INSIDE BECOMES YOUR RESPONSIBILITY, INCLUDING THE ONES YOU WOULD NOT HAVE CHOSEN",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "unshadow",
@@ -793,7 +987,49 @@
    ],
    "tradition": "cross_pole_braid",
    "nativeOrCombination": "combination",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "healing",
+   "operativeAxis": [
+    "healing",
+    "concealment",
+    "targets"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 4,
+     "d": 4
+    },
+    "plus": 2,
+    "targets": 4,
+    "duration": 8,
+    "requiresPoles": [
+     "umbral",
+     "blazeborn"
+    ]
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "THE HARBOR MOVES WITH THOSE IT HOLDS — a company travels inside it, hidden AND mending as they go",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small harbor — half the healing, and the two poles pull less",
+    "surge": "double it; THE TWO POLES STILL FIGHT, and the cost rises with every person inside"
+   },
+   "bounds": [
+    {
+     "text": "THE TWO POLES FIGHT; costly; OWN-LIGHT SEARCHERS CAN CRACK IT",
+     "class": "hard"
+    },
+    {
+     "text": "the cost RISES WITH EVERY PERSON held",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "shroud",
@@ -856,7 +1092,50 @@
    ],
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "concealment",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 12
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "shroud a THING rather than yourself — a body, a door, a whole wagon — so EYES SLIDE OFF IT ENTIRELY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "SPECIAL: the shroud HOLDS WITHOUT YOUR ATTENTION — set it and walk away; it keeps until something breaks it",
+     "from": "r3 grants — autonomy again, cf. the_mechanical_defense"
+    }
+   ],
+   "intensity": {
+    "conserve": "a light shroud — half the persistence, and you can lift it easily",
+    "surge": "double it; WHAT YOU SHROUD AND FORGET, YOU MAY NEVER FIND AGAIN"
+   },
+   "bounds": [
+    {
+     "text": "bright light THINS it; a knowing searcher with a lamp can work at it",
+     "class": "soft"
+    },
+    {
+     "text": "A SHROUD IS A LIE OF ABSENCE — touch, sound, and a dog's nose all still work",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU SHROUD AND FORGET, YOU MAY NEVER FIND AGAIN",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "false_trail",
@@ -919,7 +1198,52 @@
    ],
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "hobble",
+   "operativeAxis": [
+    "misdirection",
+    "trails"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 24,
+    "trails": 1,
+    "note": "PRACTICAL attribute — the only one in umbral; trail-craft is handwork"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "trails",
+     "delta": "lay SEVERAL trails at once, each equally convincing, and let a pursuer CHOOSE WRONG",
+     "from": "r2 grants — count is the increment"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: lay a trail YOU DID NOT WALK — a path leading somewhere you have NEVER BEEN, convincing all the way to its end",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "one plausible trail — half the conviction, and it costs you no time",
+    "surge": "double the trails; A TRACKER WHO KNOWS YOUR WORK WILL READ THE BRAID ITSELF AS A SIGNATURE"
+   },
+   "bounds": [
+    {
+     "text": "a MASTER TRACKER or TRUTH-READER may catch the lie",
+     "class": "hard"
+    },
+    {
+     "text": "a tracker who knows your work READS THE BRAID ITSELF AS A SIGNATURE",
+     "class": "cost"
+    },
+    {
+     "text": "IT MUST END SOMEWHERE — what waits at the end of a trail you invented is not yours to choose",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_never_there",
@@ -955,7 +1279,40 @@
    "gated": "learned",
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "concealment",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 8,
+    "scope": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: move through THE MOST-WATCHED PLACE leaving NO TRACE, NO MEMORY, NO EVIDENCE you were ever there. The capstone is a KIND (unbeing-in-the-record) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a partial never-there is simply being there quietly, which is a lesser craft.",
+    "surge": "REFUSED — it already costs nearly everything and cannot be pushed further."
+   },
+   "bounds": [
+    {
+     "text": "A SINGLE OVERT ACTION ENDS IT",
+     "class": "hard"
+    },
+    {
+     "text": "A VERITY-READER PRESENT MAY FEEL THE ABSENCE ITSELF",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "shadowstep",
@@ -1018,7 +1375,52 @@
    "gated": "learned",
    "tradition": "umbral",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 15,
+    "push": 0,
+    "magnitude": 5,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "range",
+     "delta": "step between shadows ACROSS A ROOM, A STREET, A BATTLEFIELD — anywhere dark touches dark",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: TRAVEL THE DARK AS A ROAD — league upon league between distant shadows, arriving WHERE NO LIGHT HAS BEEN",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a short step — half the distance, and nothing notices the passage",
+    "surge": "double the road; THE SHADOWROAD IS NOT EMPTY — something else uses it"
+   },
+   "bounds": [
+    {
+     "text": "BOTH ENDS NEED REAL SHADOW — a lit gap is a WALL",
+     "class": "hard"
+    },
+    {
+     "text": "TOTAL LIGHT STRANDS YOU",
+     "class": "hard"
+    },
+    {
+     "text": "THE SHADOWROAD IS NOT EMPTY. SOMETHING ELSE USES IT.",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_shadowed_mending",
@@ -1085,7 +1487,50 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "healing",
+    "conditions"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 1,
+    "note": "CONDITIONAL healing — it works BETTER in true darkness. The +1 assumes the condition is met; in light it is worse than an ordinary mend."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "healing",
+     "delta": "in TRUE SHADOW recovery proceeds with unusual speed — fever breaks faster, pain quiets, wounds close cleaner than they should",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: set a person in genuine lightlessness and healing proceeds PAST THE ORDINARY — as if darkness itself were medicine",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "tend in the dark — half the healing, and no darkness is required",
+    "surge": "double it; the patient must be kept in genuine lightlessness, which is its own hardship"
+   },
+   "bounds": [
+    {
+     "text": "REQUIRES DARKNESS to exceed ordinary mending — in light it is merely competent",
+     "class": "hard"
+    },
+    {
+     "text": "the patient must ACCEPT the dark, and not everyone can",
+     "class": "soft"
+    }
+   ]
   },
   {
    "id": "the_shadow_work",
@@ -1157,7 +1602,47 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "persistence",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 6,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "TRANSFORM A SPACE'S LIGHT CONDITIONS and give shadow the shape you need — it holds until you release it or something breaks it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "SPECIAL: work in shadow AS A MASTER WORKS IN MATERIAL — make things that PERSIST, transform environments, give darkness a form that lasts",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a pocket of shaped shadow — half the persistence, quick to make",
+    "surge": "double the work; shadow given lasting form is a thing others can find and use"
+   },
+   "bounds": [
+    {
+     "text": "it is SHADOW — it screens and conceals; it stops nothing physical",
+     "class": "hard"
+    },
+    {
+     "text": "what you build of darkness UNMAKES IN TOTAL LIGHT",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_long_dark",
@@ -1225,7 +1710,42 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "DRAW SUSTENANCE from genuine lightlessness — reduced need for warmth, light, and ordinary comforts in true dark",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: in the lightless depths WHERE OTHERS RUN OUT, YOU RUN DEEPER — the dark is not deprivation, it is where you are most alive",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "settle into it — half the relief, and it asks nothing",
+    "surge": "double it; you are drawing on a place most people cannot follow you into"
+   },
+   "bounds": [
+    {
+     "text": "REQUIRES GENUINE LIGHTLESSNESS — a dim room is not the dark",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_cleansing_light",

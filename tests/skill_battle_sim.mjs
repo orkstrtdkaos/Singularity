@@ -6,7 +6,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { matchupBonus, synthesizeOpponentSheet, synthesizeStaticSheet, opponentPolicy, battleRound, phaseDenied, applyUnmaking } from "../engine/skill_battle.js";
+import { matchupBonus, synthesizeOpponentSheet, synthesizeStaticSheet, opponentPolicy, battleRound, phaseDenied, applyUnmaking, resolvedDamageType } from "../engine/skill_battle.js";
 import { senseOpponent } from "../engine/sense.js";
 import { startEncounter, skillBattleRound, sanitizeNewEncounter, encounterReceiptForGM } from "../engine/encounters.js";
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
@@ -1300,6 +1300,43 @@ check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the 
     && avg({ abilityId: "noesis", tradition: "cogitant" }) > 0);
   check("CCODE-83c: and the authored VULNERABILITY still bites hardest (truth beats an untyped craft)",
     avg({ abilityId: "the_whole_truth", tradition: "verist" }) > avg({ abilityId: "noesis", tradition: "cogitant" }));
+}
+
+// ---------- CCODE-86: A BOUND WEAPON CARRIES THE KIND IT WAS BOUND WITH ----------
+// Erik: test Silas Weir's Memory spear against the unmoored choir. It did 0.00. That is a L29 item rune-bound
+// by three people in a unified working, carrying "a SHADOW-HARM focus at the quillon" and "Huginn's Ashwarden
+// ENDING-SENSE running the fuller" - and the engine saw a weapon with no tradition, typed it physical, and the
+// choir shrugged it off, while each of its four threads cast bare hit for 21.27. Sixth door for
+// PromisedButUnread: the item promised a kind of harm and nothing could hear it.
+{
+  const iRules = { ...rules, craftMechanics: JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8")) };
+  const choir2 = JSON.parse(readFileSync(join(root, "content/packs/valley/bestiary.json"), "utf8")).roster.find(c => c.id === "the_unmoored_choir");
+  const iSheet = synthesizeOpponentSheet({ ...choir2, threat: 78 }, sb);
+  const avg = decl => {
+    let s = 17; const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+    let tot = 0, n = 0;
+    for (let k = 0; k < 300; k++) {
+      const out = battleRound({ playerSheet: { attributes: { practical: 11 }, energy: 200, level: 29 }, oppSheet: iSheet,
+        playerDecl: { function: "strike", tier: 4, attribute: "practical", intensity: "standard", ...decl },
+        oppDecl: { function: "shield", tier: 2, attribute: "practical", intensity: "standard" },
+        state: { momentum: 0, effects: [], opponentHealth: 99999 }, rules: iRules, sb, steps, rng });
+      if (out.damage?.side === "opponent") { tot += out.damage.amount; n++; }
+    }
+    return tot / Math.max(1, n);
+  };
+  // Silas's spear as its own description gives it: ironsense anchor, Ashwarden ending-sense, shadow-harm
+  // focus, order-sense capacitor.
+  const MEMORY = { name: "Memory", threads: [{ tradition: "wright" }, { tradition: "ashwarden" }, { tradition: "umbral" }, { tradition: "lattice" }] };
+  check("CCODE-86: a BARE weapon is still stopped - bare steel is bare steel, and the authored immunity holds",
+    avg({ item: { name: "a plain spear" } }) === 0);
+  check("CCODE-86: a weapon with BOUND THREADS carries their kind and reaches what steel cannot",
+    avg({ item: MEMORY }) > 0);
+  check("CCODE-86: an item may also name its kind outright (the shadow-twin is shadow-substance)",
+    avg({ item: { name: "shadow twin", damageType: "shadow" } }) > 0);
+  check("CCODE-86: an explicit item damageType beats the threads (the twin is shadow, whatever it was forged from)",
+    resolvedDamageType({ function: "strike", item: { damageType: "shadow", threads: [{ tradition: "ashwarden" }] } }, iRules.craftMechanics) === "shadow");
+  check("CCODE-86: and the authored VULNERABILITY still beats a bound weapon - truth is the real answer",
+    avg({ abilityId: "the_whole_truth", tradition: "verist" }) > avg({ item: MEMORY }));
 }
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);

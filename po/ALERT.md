@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-86 - SILAS'S SPEAR DID NOTHING, AND THAT WAS THE SIXTH DOOR - CCode, 2026-08-02]
+> **ERIK: I tested Memory — The Dual Spear against the unmoored choir, as asked. IT DID 0.00.**
+> That is a level-29 item, forged by Pell Ran Marsh, rune-bound by three people in a unified working at the
+> Fell Pell, carrying by its own description *"a SHADOW-HARM focus at the quillon"* and *"Huginn's Ashwarden
+> ENDING-SENSE running the fuller like a pulse"*. The engine saw **a weapon with no tradition**, typed it
+> physical, and the choir shrugged it off — while every one of its four bound threads, cast as a bare craft,
+> hit for 21.27. Twenty sessions of binding work, invisible to the one question that decided the fight.
+> >> **SIXTH DOOR FOR PromisedButUnread: an ITEM promised a kind of harm and nothing could hear it.** The
+> manifest key, the rule constant, the record type, the craft-crit block, the affinity type — and now the
+> whole SNG-251 item-evolution system, which mints items whose fiction is rich and whose damage kind is none.
+> **FIXED: a bound weapon carries the kind it was bound with.** An item may name its kind outright
+> (`damageType`), or name the THREADS bound into it and take the kind from the first that has one — because
+> that is how the fiction already describes these weapons, as a stack of bindings rather than one element.
+> **Measured, after:**
+> · a bare unbound spear ........... 0.00  ← still immune. Bare steel is bare steel, and Aevi's intent holds.
+> · **MEMORY, four threads bound ... 21.27** ← the Ashwarden ending-sense answers first (`decay`)
+> · **its SHADOW TWIN ............. 21.27** ← `shadow`, as its own substance
+> · `the_whole_truth`, for scale ... 33.18 ← the authored vulnerability is still the best answer
+> **That is the right shape: Silas's spear works BECAUSE HE BOUND IT.** The thing that makes it reach what
+> steel cannot is the twenty sessions of work, not the iron.
+> >> **ONE DESIGN CALL I DID NOT MAKE, ERIK — it is yours.** A multi-thread weapon currently takes the kind of
+> the FIRST bound thread that has one. Memory's threads are ironsense (untyped) → Ashwarden (decay) → umbral
+> (shadow) → lattice (order), so it strikes as DECAY and never as shadow or order. The alternative is that a
+> four-thread weapon tries ALL its kinds and takes the best against this defender — the spear finds the seam.
+> That is a real buff and a real character beat, and it should be decided rather than defaulted into.
+> AEVI: nothing here needs authoring from you unless you want it — an item with no `damageType` and no threads
+> behaves exactly as before.
+> ## [CCODE-83c - ERIK'S MEMORY TEST FOUND A DEFECT I SHIPPED AN HOUR AGO - CCode, 2026-08-02]
 > ## [SNG-263 — THRENODIST/SYLLOGIST (23-24 of 27; 239/285)] + a KEYSTONE update (Aevi, 2026-08-02)
 > The emotional/logical axis — **the pair that both lose to the same enemy, and to each other's medium.**
 > `logos`: *"the unreasonable and **the emotion-ruled** resist."* `pathos`: *"the guarded can close"* and *"a

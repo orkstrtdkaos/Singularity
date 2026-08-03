@@ -321,7 +321,22 @@ export function resolvedDamageType(decl, cm) {
   // then the per-craft table, then its tradition's default. Aevi authored the last two as separate lookups
   // (traditionTypes + perCraftOverrides) because a craft's kind is usually its tradition's and sometimes not.
   // Ordering them explicitly is what keeps a second source from becoming a rival source.
-  const authored = decl.mechanic?.[decl.function]?.damageType ?? decl.mechanic?.damageType;
+  // CCODE-86 — A BOUND WEAPON CARRIES THE KIND OF HARM IT WAS BOUND WITH.
+  //
+  // Erik: test Silas Weir's Memory spear against the unmoored choir. It did 0.00. That spear is a L29 item
+  // rune-bound by three people in a unified working, carrying "a SHADOW-HARM focus at the quillon" and
+  // "Huginn's Ashwarden ENDING-SENSE running the fuller" — and the engine saw a weapon with no tradition,
+  // typed it physical, and the choir shrugged it off. Every one of its four bound threads, cast as a bare
+  // craft, hits for 21.27. The item's whole reason to exist was invisible to the one question that mattered.
+  //
+  // So an item may NAME its kind (`damageType`), or name the THREADS bound into it and take the kind from
+  // the first that has one — because that is how the fiction already describes these weapons, as a stack of
+  // bindings rather than a single element. Sixth door for PromisedButUnread: the item promised a kind of
+  // harm and nothing could hear it.
+  const item = decl.item || null;
+  const itemType = item && (item.damageType
+    || (item.threads || []).map(t => (cm?.damageTypeByTradition || {})[t?.tradition || t]).find(Boolean));
+  const authored = decl.mechanic?.[decl.function]?.damageType ?? decl.mechanic?.damageType ?? decl.itemDamageType ?? itemType;
   if (authored) return authored;
   const byCraft = cm?.damageTypeByCraft || {};
   const id = decl.abilityId || decl.id;

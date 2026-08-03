@@ -1,6 +1,42 @@
 # PO ALERT
 
-> ## [🚨 SNG-266 — ENCOUNTERS AWARD ZERO XP. ALL OF THEM. ALWAYS HAVE.] (Aevi, 2026-08-02)
+> ## [SNG-266 r2 — Erik's three corrections, and one corrects MY OWN SPEC] (Aevi, 2026-08-02)
+> **1. WALK-AWAY — he is right and my flat table was lazy.** I justified it as *"don't tax the player for
+> disengaging correctly"* — but **a flat award doesn't reward *correct* disengagement, it rewards
+> disengagement**, which is a farm: open encounter, walk away, repeat. **Fixed by paying on THREAT GAP, not on
+> the act:** you outclass it → **0** (walking away from riffraff is a stroll) · even match → **~15%** of winXp ·
+> it outclasses you by a band → **~50%** · by two or more → **~70%**. **That makes it a reward for JUDGEMENT,
+> and it cannot be farmed** — being genuinely outmatched is not a state a player can cheaply manufacture.
+> **And `incapacitated` goes 0 → ~20% of winXp, per Erik.** *A zero teaches the player that losing is worthless
+> time* — which is false, and makes defeat feel like a punishment rather than a beat. **Overturns round 1.**
+> **2. WHAT DEFINES A SCENE — checked, and the answer is better than expected: it is already defined, just not
+> enforced.** `gm.js:86` already gives the GM the doctrine — close when *"the confrontation resolves and the
+> people disperse · the character LEAVES the place · they sleep · the question the scene opened is answered"* —
+> and explicitly: **"⛔ DO NOT hold one scene open across a whole session — a scene is a UNIT, not the
+> session."**
+> **What's missing is a floor and a ceiling:**
+> · **The end-scene button is the SYMPTOM.** It exists because the GM sometimes doesn't close and the player
+>   needs an escape hatch. **A manual control for something the system should do itself is a workaround** —
+>   Erik is right to want it off the primary path (keep it as an override, rarely needed).
+> · **`SCENE_TURN_CAP` is bounded STORAGE only** — it trims the array (`slice(-CAP)`) and **does not end the
+>   scene.** A scene can run forever while quietly forgetting its own beginning.
+> **Proposed: SOFT close ~8 beats** (GM gets a directive to find the honest close within two) and **HARD close
+> ~14** (engine sets `sceneEnded`, asks only for the summary) — **never mid-action**, per the existing doctrine.
+> **And this makes the narrative taper coherent:** my round-1 "per-scene cap of 20" was resting on an undefined
+> unit. **With a real 8–14 beat scene it becomes a genuine rate limit — the two fixes need each other.**
+> **3. ⚠️ THE LEVEL CURVE — AND THIS CORRECTS ROUND 1 OF MY OWN SPEC.** I reported `xpPerLevel = 100` as though
+> the cost were flat. **It is not, and I should have read the caller.** `progression.js:70` is
+> `while (xp >= level * per)` — **already linear-rising**: L1→2 costs 100, L99→100 costs **9,900**, cumulative
+> to L100 ≈ **495,000**.
+> So the curve exists; the question is the **shape**. Early is already easy ✅. **Late is arguably too hard** —
+> linear-per-level makes TOTAL cost **quadratic**, and the last ten levels alone cost ~95,000: **a fifth of the
+> whole game for 10% of the levels.**
+> **My recommendation: soft-cap the multiplier — `min(level, 40) × per`.** Rises normally to L40, then flat
+> 4,000/level; total to L100 ≈ 322,000. **One-line change, preserves the early feel, removes the wall.**
+> Alternatives: tier-banded by powerBand (more authorable, ties to SNG-260, more work), or leave it — defensible
+> if L100 is meant to be a marathon, **but it should be a CHOICE rather than an artifact of nobody looking.**
+> **ERIK'S CALL — and whichever way it goes, the encounter XP table scales with it. The two must be tuned
+> together or fixing one will silently unbalance the other.**> ## [🚨 SNG-266 — ENCOUNTERS AWARD ZERO XP. ALL OF THEM. ALWAYS HAVE.] (Aevi, 2026-08-02)
 > Erik asked to keep XP balanced between quests/encounters and narrative play. **Measuring it found a live bug,
 > and it is worse than the question assumed.**
 > `app.js:2794` reads the outcome table from **`CONTENT.rules.encounters?.[enc.def.type]`** — and

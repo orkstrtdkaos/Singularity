@@ -1,6 +1,37 @@
 # PO ALERT
 
-> ## [CCODE-92 - SPEC 4b: HOW THE WORLD DRIVES THE STORY, GENERATED AND VERIFIED - CCode, 2026-08-03]
+> ## [SNG-267 r4 — CURRENCY MADE CONCRETE. Erik was right; the error was mine.] (Aevi, 2026-08-02)
+> Erik: *"seems good narratively, kind of, but it's very vague… currency also needs a concrete way to track it
+> and convert it. A lot of what you came up with, in terms of surplus, are barterable, but not currency per
+> se."*
+> **HE IS RIGHT AND IT WAS A CATEGORY ERROR.** An *attended hour*, a *carried grief*, a *solved problem* are
+> **services someone sells** — not fungible (one attended hour isn't interchangeable with another), not
+> divisible (you can't spend a third of a solved problem), not countable as a balance, not durable. **Good
+> fiction, bad money — and I presented them as money.** Of 27 "currencies" I wrote, about three pass the
+> **fungible / divisible / durable / portable / countable** test.
+> **THE FIX IS TWO CLEAN LAYERS, and the fiction survives intact.**
+> **LAYER 1 — FIVE REAL CURRENCIES**, stored as `character.purse = { crystal, coin, paper, scrip:{byRegion},
+> marks }`. **Crystal is the reference** (baseValue 10, substrate-inert, unforgeable — and the world itself
+> would quote in shards). Old coin 6, **fixed supply.** Outland paper 4 — **the only currency with issuer
+> risk**, and its `baseValue` is **a world-state variable, not a constant**, which contains the collapse as
+> *one number moved by a scripted event*: **a market event without a market sim.** Reach-scrip 3, **per-Reach**
+> (a Kept Reach tally and a Stark Reach tally are not the same money). Marks 8, **deliberately NOT divisible** —
+> a settled obligation is whole or it is nothing. *One oddity is fine; it should not have been my model for
+> everything, which is exactly what I did.*
+> **FIVE CURRENCIES IS A PURSE. TWENTY-SEVEN IS A SPREADSHEET.**
+> **LAYER 2 — EVERYTHING ELSE DEMOTED TO TRADE GOODS**, with a `worth` band (trivial 1 · useful 4 · valuable 15
+> · precious 50 · irreplaceable = narrative only) **× a per-region DEMAND multiplier** (surplus 0.4 · ordinary
+> 1.0 · scarce 2.5 · **cannot-get-it-here 5.0**).
+> **⚠️ THIS IS WHERE ALL THE POLE FICTION ACTUALLY LIVES, AND IT FINALLY WORKS AS A MECHANIC:** enginewright
+> parts are **×0.4 in the Gearlands and ×5.0 in the Quickwood**; rootkin seed is the exact inverse. **The trade
+> route IS the profit** — and it needs no new system, just a demand tag per region. Services (a cogitant solving
+> your problem) become **purchases**, priced in shards like anything else.
+> **LAYER 3 — acceptance + a real conversion formula.** `out = floor(in × (baseIn/baseOut) × (1 − spread))`.
+> Worked: **20 old coin → 10 shards at the Crossing**, the 2-shard difference being the Crossing's bite.
+> **And per Erik's earlier call, the player never sees the number** — the trader says *"I'll give you ten for
+> those."* **The math is concrete; the presentation stays fictional.**
+> **CCODE NEEDS:** the `purse` object · `worth` on items + `demand` on regions · a ~30-line `convert()` · and a
+> GM directive that prices are quoted **in fiction, never as a rate.**> ## [CCODE-92 - SPEC 4b: HOW THE WORLD DRIVES THE STORY, GENERATED AND VERIFIED - CCode, 2026-08-03]
 > **ERIK: *"can we put a clear statement with references into the spec that details exactly how that works?
 > similar to the success roll calculation table."*** Done — **SYSTEM_SPEC §4b**, sitting directly under the
 > skill-roll table it is the counterpart to. **§4a is every term that reaches a ROLL; §4b is every way the

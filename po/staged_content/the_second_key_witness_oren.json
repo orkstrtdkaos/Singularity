@@ -1,0 +1,172 @@
+{
+ "schemaVersion": 1,
+ "id": "the_second_key",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik's answer to the keystone-adversary problem: THE SECOND KEY IS A PERSON.",
+ "note": "CCode raised that the Cathedral's lie-built-from-true-pieces is authored with exactly ONE answer in 285 crafts (verist's T-V the_whole_truth), and warned it is 'a strong shape and an UNFORGIVING one.' I recommended a second non-craft route. ERIK'S ANSWER IS BETTER: author a KNOWN NPC who can wield the craft, and a quest to win him into your party — so a player who does not want to spend a T-V capstone on it can EARN THE PERSON WHO HAS IT. The lock keeps its single key; the key becomes findable TWO ways. It also turns a mechanical gap into characterisation, which is the better trade.",
+ "npc": {
+  "schemaVersion": 1,
+  "id": "witness_oren",
+  "name": "Oren Vale, called the Witness",
+  "role": "Verist of the whole truth — the man who says the entire thing, and has paid for it every time",
+  "homeLocation": "the_edge_district",
+  "communityId": "verist.edge",
+  "personality": {
+   "warmth": 0.3,
+   "trust": 0.2,
+   "candor": 1.0,
+   "patience": 0.4
+  },
+  "spectrum": {
+   "falsehood_truth": 0.95,
+   "emotional_logical": 0.4,
+   "peace_violence": -0.3
+  },
+  "appearance": "Older than his voice suggests, with the still, unhurried posture of a man who has already decided what he will say and is only waiting for the room to be ready. Grey at the temples, plain clothes kept carefully. He looks at people a beat longer than is comfortable — not searching, just declining to look away.",
+  "voiceHints": "Speaks in complete, unhedged sentences and stops when he is done. Never softens a fact and never enjoys delivering one. Will answer any question truthfully, including the ones about himself, including the ones that cost him. His warmth is real but slow; his trust is the thing you actually have to earn, and it is not earned with favours.",
+  "knowledge": [
+   "The Whole Truth at full mastery — the only craft that cracks a lie built from true pieces",
+   "The Cathedral's method from the inside: how a lie assembled entirely from facts holds, and why Verity alone slides off it",
+   "Which three unmaskings of his own did more harm than the lie had — he names them without being asked",
+   "Where the true-pieces lies in the valley are currently standing, and who is maintaining them"
+  ],
+  "wants": [
+   "To be certain, ONE time, that the telling will help — 'I have never lacked the truth. I have lacked the judgement about when to say it.'",
+   "Someone who will argue with him when he is about to speak and be RIGHT",
+   "To see a lie broken by something other than himself, so it is not always his hands"
+  ],
+  "fears": [
+   "That he is the reason a family broke, and that he would do it again the same way",
+   "Being used as a weapon — 'point the Witness and fire' is the thing every faction has tried",
+   "That the whole truth is simply too heavy to hand to people, and that he has been wrong about his life's work"
+  ],
+  "reactsToReputation": {
+   "high_verist": "warmer, but MORE suspicious — a person known for truth-telling is exactly the person who would want him aimed",
+   "high_veilwright": "immediate cold candor. He will not refuse to speak to you, and he will tell you precisely what he thinks you are",
+   "high_stillhold": "his most receptive read: someone who brokers peace has felt the same weight he has"
+  },
+  "people": "verist",
+  "domains": {
+   "primary": "verist"
+  },
+  "domainsNote": "He is the catalog's only NPC authored at T-V in a single craft. His verity is unremarkable; his the_whole_truth is total."
+ },
+ "companion": {
+  "schemaVersion": 1,
+  "id": "witness_oren",
+  "startingOption": false,
+  "name": "Oren Vale",
+  "role": "The Witness — the second key",
+  "persona": "He joins slowly and never pretends otherwise. Oren does not banter, does not fill silence, and does not reassure. What he does is answer, completely, every time, and stand where the answering costs him. He will warn you before he speaks something that cannot be unsaid, and then he will wait — genuinely wait — for you to tell him not to.",
+  "boundaries": [
+   "He will NOT be pointed. If the party tries to deploy him at a target without telling him what it is for, he asks once, plainly, and then declines.",
+   "He will not lie for you, including by omission, including when it would obviously help.",
+   "He will not use the whole truth on a private person's private business. Institutions, lies-of-power, and constructed realities only — and he will say why."
+  ],
+  "bondGrants": {
+   "id": "the-whole-truth-witnessed",
+   "name": "The Whole Truth, Witnessed",
+   "description": "At full bond, Oren will speak the whole truth of a subject ON THE PARTY'S ASK — the complete hidden shape of it, at once. It is the same craft, at the same cost, paid by him: he learns what he cannot unlearn, and the powerful do not thank him. THE PARTY MUST ASK, and he will make sure they understand what they are asking for.",
+   "functions": [
+    "reveal",
+    "break",
+    "restore"
+   ],
+   "attribute": "mental",
+   "energyCost": 0,
+   "damageType": "truth",
+   "requiresStage": 4,
+   "cost": "Borne by Oren, not the party — which is precisely why the party has to decide whether to ask."
+  },
+  "stages": [
+   {
+    "stage": 1,
+    "name": "The Man Who Answered",
+    "narrationHints": "Travels with you but not WITH you. Answers what he is asked, exactly, and offers nothing. Sleeps apart."
+   },
+   {
+    "stage": 2,
+    "name": "The One Who Warned You",
+    "narrationHints": "Begins telling you things BEFORE you ask — the first sign of trust from a man whose trust is not favours. Starts flagging what will cost you to know."
+   },
+   {
+    "stage": 3,
+    "name": "The One Who Waited",
+    "narrationHints": "Asks the party's judgement before speaking something heavy. This is the want being met: someone to argue with him and be right."
+   },
+   {
+    "stage": 4,
+    "name": "The Witness",
+    "narrationHints": "Will speak the whole truth on the party's ask. Stands closer in a fight he cannot win, because standing there is the part he can do."
+   }
+  ],
+  "hooks": "GM-EYES-ONLY: Oren's third named unmasking — the family — is a Cathedral-adjacent lie he broke correctly and early, and the harm was real anyway. He does not know the Cathedral was maintaining it. If the party learns that before he does, they hold the one fact that would either free him or finish him, and choosing is the point."
+ },
+ "quest": {
+  "id": "the_weight_of_saying",
+  "name": "The Weight of Saying",
+  "region": "valley",
+  "tier": "regional",
+  "giver": "witness_oren",
+  "legend": "witness_oren",
+  "axis": "falsehood_truth",
+  "traditions": [
+   "verist",
+   "veilwright",
+   "stillhold",
+   "umbral",
+   "cogitant",
+   "threnodist"
+  ],
+  "premise": "Oren Vale will tell anyone the whole truth of anything, and the valley has learned to stop asking. He is not hiding; he keeps a room in the Edge District and answers his door. The problem is that everyone who has sought him out in ten years wanted him AIMED at something, and he can tell within a sentence. He has begun to wonder whether the craft that made him useful has made him a weapon that happens to be a person.",
+  "stakes": "If you walk away: Oren remains where he is, and the next faction that finds him will be less scrupulous about what they point him at. If you win him: you gain the only answer in the valley to a lie built from true pieces — and a man who will make you say out loud why you want it used.",
+  "stages": [
+   {
+    "stage": 1,
+    "name": "The Room in the Edge District",
+    "beats": "Find him. He answers every question you ask, immediately and completely, including why he thinks you are there. The scene's difficulty is not extracting information — it is that he gives you all of it and watches what you do with it."
+   },
+   {
+    "stage": 2,
+    "name": "The Three He Names",
+    "beats": "He tells you, unprompted, the three unmaskings of his own that did more harm than the lie had. He is not confessing; he is testing whether you flinch, argue, or agree too quickly. All three responses tell him something."
+   },
+   {
+    "stage": 3,
+    "name": "The One You Bring Him",
+    "beats": "A live true-pieces lie is standing somewhere in reach, and the party finds it. Oren will not act on your word alone — he requires that you show him, and that someone in the party makes the case for speaking."
+   },
+   {
+    "stage": 4,
+    "name": "The Argument",
+    "beats": "THE ACTUAL TEST, and it is not a fight. Oren intends to speak, and speaking will cost a bystander something real. The party must either make the case that it should still be said — or talk him down and be right about it. WINNING BY TALKING HIM DOWN IS THE STRONGER OUTCOME: it meets the want he has carried the whole quest."
+   }
+  ],
+  "routes": [
+   {
+    "route": "argue_him_forward",
+    "summary": "Convince him to speak. Achievable, honest, and it costs the bystander. He joins, and he trusts you slightly less than the other route — you are one more voice that wanted him used, even rightly."
+   },
+   {
+    "route": "argue_him_down",
+    "summary": "Convince him NOT to speak, and be RIGHT — the lie is broken another way, or the harm outweighs it. THE INTENDED BEST OUTCOME: it is literally his stated want ('someone who will argue with me when I am about to speak and be right'). He joins at a higher trust and reaches stage 3 immediately."
+   },
+   {
+    "route": "point_him",
+    "summary": "Deploy him at the Cathedral without going through any of this. He asks once, plainly, what it is for. If the party lies or hedges, he declines and the route closes — permanently. THE FAILURE ROUTE IS THE OBVIOUS ONE, deliberately."
+   }
+  ],
+  "outcomes": {
+   "recruited": "Oren joins as a companion. The party has the second key to the Cathedral without spending a T-V capstone on it.",
+   "refused": "He stays. The craft remains available only by learning it — the single-key shape CCode warned about, which is now A CONSEQUENCE OF THE PARTY'S CHOICES rather than of party composition.",
+   "burned": "If pointed and lied to, he will not join THIS party. He remains in the world, and the next faction to find him is the GM's to decide."
+  }
+ },
+ "designRationale": [
+  "ERIK'S FIX IS BETTER THAN MINE. I proposed a second NON-CRAFT route (evidence, testimony, a witness). He proposed a PERSON — and 'a witness' as an abstract mechanic versus 'Oren Vale, who will make you say out loud why you want it used' is not a close contest. The mechanical gap becomes characterisation.",
+  "THE LOCK KEEPS ITS SINGLE KEY, which preserves what four traditions independently authored. What changes is that the key is findable TWO ways: learn the T-V capstone yourself, or earn the man who has it. Neither is a coin-flip on party composition, and both cost something real.",
+  "THE QUEST'S BEST OUTCOME IS TALKING HIM DOWN, not winning him over by agreeing. That is deliberate: his stated want is 'someone who will argue with me when I am about to speak AND BE RIGHT.' A recruitment quest whose ideal solution is restraining the recruit's power is a better scene than one that flatters it — and it is exactly the verist bound 'some unmaskings do more harm than the lie did, and Verity CANNOT TELL WHICH', made playable.",
+  "THE FAILURE ROUTE IS THE OBVIOUS ONE. 'Point him at the Cathedral' is what most parties will try first, and he asks once, plainly, what it is for. Lying closes the route permanently. That teaches the character in one beat.",
+  "HE COSTS WHAT THE CRAFT COSTS. the_whole_truth's bounds are 'you learn things you cannot unlearn' and 'the powerful will not thank you' — and Oren pays both, every time, on the party's ask. The party does not get the craft for free; they get to decide whether to spend SOMEONE ELSE for it. That is a live moral question, which is what this game does well."
+ ]
+}

@@ -63,7 +63,51 @@
    ],
    "gated": "learned",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "hold the waking through a SCENE, and FEEL BACK along it — the roused current reports what is rooted near it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "wake the current across a WHOLE ROOTED DISTRICT; ground once woken by you ANSWERS FASTER EVER AFTER",
+     "from": "r3 grants — a persistent relationship with a place"
+    }
+   ],
+   "intensity": {
+    "conserve": "wake a little — half the scope, and it settles quietly",
+    "surge": "double the waking; A DISTRICT ROUSED IS A DISTRICT AWAKE"
+   },
+   "bounds": [
+    {
+     "text": "it touches ONLY THE LIVING SUBSTRATE and answers only a true channel",
+     "class": "hard"
+    },
+    {
+     "text": "FEELING BACK IS NOT SEEING — presence and direction, never faces",
+     "class": "hard"
+    },
+    {
+     "text": "A DISTRICT ROUSED IS A DISTRICT AWAKE — what you wake, you have woken",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -112,7 +156,46 @@
    ],
    "gated": "learned",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 40,
+    "push": 0,
+    "magnitude": 6,
+    "targets": 1,
+    "duration": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "CARRY OTHERS along the green road — a party moves as one, rooted place to rooted place",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a short green road — half the distance, and it asks little",
+    "surge": "double the road; A LONGER ROAD CLAIMS YOU LONGER"
+   },
+   "bounds": [
+    {
+     "text": "it reaches ONLY WHERE LIFE RUNS UNBROKEN",
+     "class": "hard"
+    },
+    {
+     "text": "IT CANNOT CROSS THE DEAD OR THE MADE",
+     "class": "hard"
+    },
+    {
+     "text": "a longer road CLAIMS YOU LONGER",
+     "class": "cost"
+    }
+   ]
   }
  ]
 }

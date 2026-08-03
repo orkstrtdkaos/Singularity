@@ -79,7 +79,51 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "damaging"
+   "harmRung": "damaging",
+   "shape": "bolster",
+   "operativeAxis": [
+    "capacity",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 6,
+    "note": "damaging rung — soma includes striking, but its shape is BOLSTER: it raises what the body can do"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "capacity",
+     "delta": "FEATS THAT LOOK IMPOSSIBLE — hold a bridge-pose an hour, run past collapse, SLOW YOUR OWN BLEEDING, take a blow and keep the line",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the body as A MASTERED WHOLE — survive what kills others, perform at the edge of the humanly possible",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "steady the body — half the capacity, and no debt",
+    "surge": "double it; THE WIELDER DRIFTS BODY-HOT, and the Temple that rejects thought entirely is a warning"
+   },
+   "bounds": [
+    {
+     "text": "THE BODY STILL HAS LIMITS — Soma raises the ceiling, IT DOES NOT REMOVE IT",
+     "class": "hard"
+    },
+    {
+     "text": "pushing past the TRUE limit still breaks you",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS BODY-HOT — the Temple that rejects thought entirely is what that becomes",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "noesis",
@@ -155,7 +199,52 @@
    ],
    "tradition": "cogitant",
    "nativeOrCombination": "native",
-   "harmRung": "damaging"
+   "harmRung": "damaging",
+   "shape": "setup",
+   "operativeAxis": [
+    "reasoning",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 4,
+    "scope": 2,
+    "note": "damaging rung — 'thought as force'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "reasoning",
+     "delta": "hold VAST STRUCTURED KNOWLEDGE and retrieve it instantly; MODEL a system or a person and PREDICT them",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THOUGHT AS FORCE — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to have arranged it",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "think it through — half the reach, and it costs you no time",
+    "surge": "double it; IT IS SHARP, NOT WISE, and this use of it least of all"
+   },
+   "bounds": [
+    {
+     "text": "RECALL IS NOT UNDERSTANDING",
+     "class": "hard"
+    },
+    {
+     "text": "THE MODEL IS ONLY AS GOOD AS ITS INPUTS — a mind that lives in the model loses the room",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS SHARP, NOT WISE",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "body_read",
@@ -217,7 +306,51 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 10
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the WHOLE body at once — weight, breath, the held shoulder, WHAT THE HANDS ARE DOING WHILE THE FACE IS LYING",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: nothing a body does escapes you — pain, intent, love, THE DECISION MADE A HALF-SECOND BEFORE IT IS ACTED ON",
+     "from": "r3 grants — pre-cognition of action is a kind"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick look — half the depth, and you can stop looking",
+    "surge": "double the read; YOU CANNOT STOP READING"
+   },
+   "bounds": [
+    {
+     "text": "BODY, NOT MIND — the trained conceal tells",
+     "class": "hard"
+    },
+    {
+     "text": "it reads THE BODY'S REPORT — a trained body reports what its owner chooses",
+     "class": "hard"
+    },
+    {
+     "text": "YOU CANNOT STOP READING — the Somatics say knowing every body in a room is its own loneliness",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "mind_read_folk",
@@ -281,7 +414,51 @@
    ],
    "tradition": "cogitant",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "inference",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "range": 10
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "inference",
+     "delta": "FOLLOW A MIND'S REASONING AS IT HAPPENS — where it is going, what it has already ruled out",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a mind at rest is LEGIBLE — its shape, its habits, THE THING IT KEEPS RETURNING TO",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a read of the obvious — half the inference, and it is plainly guesswork",
+    "surge": "double it; THE COGITANTS CONSIDER UNBIDDEN READING A VIOLENCE, AND THEY ARE RIGHT"
+   },
+   "bounds": [
+    {
+     "text": "INFERENCE, NOT CERTAINTY — masters and non-humans resist",
+     "class": "hard"
+    },
+    {
+     "text": "you follow THE REASONING, NOT THE REASONS — a mind moving on feeling is opaque",
+     "class": "hard"
+    },
+    {
+     "text": "THE COGITANTS CONSIDER UNBIDDEN READING A VIOLENCE, AND THEY ARE RIGHT",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "second_wind",
@@ -351,7 +528,51 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "burst",
+    "uses"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 1,
+    "uses": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "uses",
+     "delta": "find breath and strength past where the body had none — TWICE IN ONE DAY, at a cost",
+     "from": "r2 grants — its own count"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: go on past exhaustion FOR AS LONG AS THE THING NEEDS DOING — the body simply does not stop, and it TENDS ITSELF as it runs",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small push — half the burst, and the debt is light",
+    "surge": "double it; THE BODY IS BORROWING FROM TOMORROW, AND TOMORROW COLLECTS WITH INTEREST"
+   },
+   "bounds": [
+    {
+     "text": "THE BODY REMEMBERS THE DEBT — overuse breaks you",
+     "class": "cost"
+    },
+    {
+     "text": "the body is BORROWING FROM TOMORROW",
+     "class": "cost"
+    },
+    {
+     "text": "HELD OFF IS NOT HEALED — everything deferred ARRIVES AT ONCE when you stop",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "total_focus",
@@ -416,7 +637,50 @@
    "nativeOrCombination": "native",
    "harmRung": "none",
    "schoolAffinity": "cog_unaided",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from."
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "bolster",
+   "operativeAxis": [
+    "focus",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "focus",
+     "delta": "narrow so completely that FEAR, PAIN, AND NOISE STOP REACHING YOU",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: narrow so completely that NOTHING ELSE EXISTS — not fear, not pain, NOT THE WOUND YOU ARE STANDING ON",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "narrow a little — half the focus, and you keep your peripheral sense",
+    "surge": "double it; WHAT YOU NARROW OUT IS STILL HAPPENING"
+   },
+   "bounds": [
+    {
+     "text": "it can MISS THE BODY'S WARNINGS; tight focus narrows the view",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU NARROW OUT IS STILL HAPPENING — people have been focused to death",
+     "class": "hard"
+    },
+    {
+     "text": "YOU WILL NOT NOTICE WHAT IT COST UNTIL AFTERWARD",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "perfect_motion",
@@ -483,7 +747,55 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "efficiency",
+    "evasion"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 0,
+    "soakRank": 0,
+    "evasion": 4,
+    "evasionRank": 2,
+    "duration": 4,
+    "note": "AN EIGHTH DEFENSIVE LOGIC — EFFICIENT: not armour, not absence, not misdirection, but never making a wasted or wrong motion. Uses Erik's evasion model; zero soak because a perfect motion still takes the blow it cannot avoid."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "efficiency",
+     "delta": "NO MOTION YOU MAKE IS WASTED — every step, block and reach does exactly and only what it must",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE BODY ACTS CORRECTLY BEFORE THE MIND KNOWS THERE WAS A DECISION — and it is right",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "move cleanly — half the efficiency, and it costs the body nothing",
+    "surge": "double it; EFFICIENCY IS NOT POWER — a perfect motion still loses to a strong enough one"
+   },
+   "bounds": [
+    {
+     "text": "THE TRUE LIMIT STILL HOLDS; it costs the body dearly",
+     "class": "hard"
+    },
+    {
+     "text": "EFFICIENCY IS NOT POWER — a perfect motion still loses to a strong enough one",
+     "class": "hard"
+    },
+    {
+     "text": "THE BODY CHOOSES — if you have trained it badly, IT WILL DO THAT PERFECTLY",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "memory_palace",
@@ -553,7 +865,51 @@
    "nativeOrCombination": "native",
    "harmRung": "none",
    "schoolAffinity": "cog_unaided",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from."
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "setup",
+   "operativeAxis": [
+    "recallDepth",
+    "permanence"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8760,
+    "note": "T-III. duration effectively permanent — 'nothing you have attended to is lost'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "recallDepth",
+     "delta": "store not just FACTS but EXPERIENCES WHOLE — walk back into a conversation and hear it again exactly",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NOTHING YOU HAVE ATTENDED TO IS LOST — the whole of your life is a place you can walk through",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "store what matters — half the depth, and you can let the rest go",
+    "surge": "double it; WHAT YOU STORE, YOU KEEP — INCLUDING WHAT YOU WOULD RATHER HAVE LOST"
+   },
+   "bounds": [
+    {
+     "text": "ONLY AS GOOD AS ITS INPUTS — living in the model loses the room",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU STORE, YOU KEEP — INCLUDING WHAT YOU WOULD RATHER HAVE LOST",
+     "class": "hard"
+    },
+    {
+     "text": "the deepest palaces have trouble LEAVING them",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_whole_act",
@@ -605,7 +961,36 @@
    ],
    "tradition": "somatic",
    "nativeOrCombination": "combination",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "fusion",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 2,
+    "note": "⚠️ THE CATALOG'S ONLY DUAL-POLE CRAFT. Its HARD bound: 'needs both trained near-equal; THE PURE POLES CANNOT DO IT.' It requires somatic AND cogitant together. The engine has no concept of a craft gated on two traditions."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "hold the fusion ACROSS A WHOLE ENGAGEMENT rather than a single instant — every movement in the exchange is one continuous correct act",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "one fused instant — half the duration, and it asks less of both halves",
+    "surge": "double it; it still needs both trained near-equal and the pure poles still cannot"
+   },
+   "bounds": [
+    {
+     "text": "NEEDS BOTH TRAINED NEAR-EQUAL — THE PURE POLES CANNOT DO IT",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "pathless_way",
@@ -644,7 +1029,37 @@
    "gated": "learned",
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 100,
+    "push": 0,
+    "magnitude": 9,
+    "targets": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: CROSS THE UNCROSSABLE — any natural barrier yields to enough skill, breath and will; LEAD A PARTY through what would kill them alone. The capstone is a KIND (natural barriers ceasing to be barriers) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-crossing of the uncrossable is where people die.",
+    "surge": "REFUSED — it already demands everything the body has."
+   },
+   "bounds": [
+    {
+     "text": "THE TRULY IMPOSSIBLE still exacts its price",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "skydancer",
@@ -693,7 +1108,41 @@
    "gated": "learned",
    "tradition": "somatic",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "reposition",
+   "operativeAxis": [
+    "range",
+    "chain"
+   ],
+   "mechanic": {
+    "range": 20,
+    "push": 0,
+    "magnitude": 7,
+    "duration": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "chain",
+     "delta": "CHAIN the air-steps WITHOUT TOUCHING DOWN — cross a canyon, ascend a tower face in one unbroken sequence",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a few bounds — half the distance, and a missed step is survivable",
+    "surge": "double the chain; A MISTIMED STEP AT HEIGHT IS A FALL"
+   },
+   "bounds": [
+    {
+     "text": "MOMENTUM-BOUND — you must keep moving; THERE IS NO HOVER AT ANY MASTERY",
+     "class": "hard"
+    },
+    {
+     "text": "a mistimed step is a real fall",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_working_model",
@@ -768,7 +1217,47 @@
    ],
    "nativeOrCombination": "native",
    "schoolAffinity": "cog_reaching",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from."
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "construct",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 6,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "build a mental model of a complex system COMPLETE ENOUGH TO DIAGNOSE ITS FAULTS AND REPAIR IT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a thing you have modeled completely you can BUILD WITH UNCANNY PRECISION AND SPEED — faster and more accurately than available tools should allow",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "model the essentials — half the precision, and it is quick",
+    "surge": "double the model; a complete model takes as long as it takes"
+   },
+   "bounds": [
+    {
+     "text": "the model is NOT THE THING — reality has details your model omitted",
+     "class": "hard"
+    },
+    {
+     "text": "modelling takes TIME the situation may not give you",
+     "class": "soft"
+    }
+   ]
   },
   {
    "id": "the_necessary_case",
@@ -841,7 +1330,51 @@
    ],
    "nativeOrCombination": "native",
    "schoolAffinity": "cog_reaching",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from."
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "bolster",
+   "operativeAxis": [
+    "persuasion",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "scope": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "persuasion",
+     "delta": "show that a conclusion FOLLOWS SO INEVITABLY that the person cannot act against it WITHOUT EXPLAINING WHY",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: make the logic of a situation SO VISIBLE THAT A GROUP REORGANIZES AROUND IT — not because you commanded them, but because they can all see it",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "make the argument — half the force, and it invites disagreement",
+    "surge": "double it; a person cornered by logic is still a cornered person"
+   },
+   "bounds": [
+    {
+     "text": "IT PERSUADES BY BEING RIGHT — a flawed case gains nothing from this craft",
+     "class": "hard"
+    },
+    {
+     "text": "NOT BECAUSE YOU COMMANDED THEM — it cannot compel, only make plain",
+     "class": "hard"
+    },
+    {
+     "text": "a person cornered by logic is still A CORNERED PERSON",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_clear_path",
@@ -916,7 +1449,48 @@
    ],
    "nativeOrCombination": "native",
    "schoolAffinity": "cog_instrumented",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from."
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "reposition",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "range": 12,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "navigation",
+     "delta": "move through a DYNAMIC space without friction by STAYING TWO STEPS AHEAD of everyone in it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: in a space you understand, you move AS IF YOU DESIGNED THE WHOLE SCENE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a calculated route — half the advantage, and it costs nothing",
+    "surge": "double it; calculating a crowd means you are not FEELING the crowd, and crowds do surprising things"
+   },
+   "bounds": [
+    {
+     "text": "it CALCULATES rather than feels — a space that behaves unreasonably defeats it",
+     "class": "hard"
+    },
+    {
+     "text": "it requires an OBSERVABLE space",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_long_form",
@@ -986,7 +1560,46 @@
    ],
    "nativeOrCombination": "native",
    "schoolAffinity": "cog_unaided",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from."
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 72
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "sustain complex cognitive work ACROSS DAYS without the thinking degrading",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: YOUR MIND IS SIMPLY THE LAST THING TO FAIL — function clearly under conditions that have broken better bodies",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold the thread — half the duration, and it costs little",
+    "surge": "double it; the mind being the last thing to fail means you are AWAKE for all of it"
+   },
+   "bounds": [
+    {
+     "text": "the BODY still fails on its own schedule",
+     "class": "hard"
+    },
+    {
+     "text": "being the last thing to fail means YOU ARE AWAKE FOR ALL OF IT",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_shaped_body",
@@ -1053,7 +1666,47 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "construct",
+   "operativeAxis": [
+    "capacity",
+    "permanence"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 720,
+    "note": "T-III. duration ~a month: these are TRAINED changes that persist"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "permanence",
+     "delta": "reshape something STRUCTURAL about how you move ACROSS WEEKS of sustained effort — a different gait, a changed shoulder",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: you know your body AS MATERIAL — any physical capacity you turn full sustained attention to will change",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small adjustment — half the change, and it comes back easily",
+    "surge": "double the reshaping; what you shape, you have shaped — it does not simply revert"
+   },
+   "bounds": [
+    {
+     "text": "IT TAKES REAL TIME — weeks, not moments",
+     "class": "soft"
+    },
+    {
+     "text": "what you shape you HAVE SHAPED — it does not simply revert",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_weight_of_presence",
@@ -1121,7 +1774,48 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "authority",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 4,
+    "targets": 4,
+    "note": "SOCIAL attribute — presence is social even in a body tradition"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "authority",
+     "delta": "COMMAND A SPACE THROUGH PRESENCE ALONE — enter a room and it restructures; stand still and the situation organizes itself",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: your presence is THE FIXED FACT in a room — anyone who would act against you must first account for what your body represents",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "stand there — half the weight, and nobody resents it",
+    "surge": "double the presence; a body that is the fixed fact in every room is a body everyone is measuring"
+   },
+   "bounds": [
+    {
+     "text": "it is PRESENCE, not permission — people account for you, they do not obey you",
+     "class": "hard"
+    },
+    {
+     "text": "what your body represents is not yours to choose",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1176,7 +1870,47 @@
    ],
    "harmRung": "none",
    "schoolAffinity": "cog_unaided",
-   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from."
+   "schoolAffinityNote": "SNG-193: natively expressed through this school. NOT a gate — any school of the tradition can learn it, and learning it against your school's grain is where braids come from.",
+   "shape": "guard",
+   "operativeAxis": [
+    "clarity",
+    "duration",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "soak": 5,
+    "soakRank": 3,
+    "duration": 4,
+    "note": "T-IV guard — TYPED like the_true_ground: it soaks FEAR, DECEPTION and DISRUPTION at rank 3, and grants NOTHING against physical harm ('it grants no offense, only the unshakeable read')."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "SPECIAL: the stillness NO LONGER OCCUPIES YOU WHOLLY — hold it while fighting, walking, negotiating, and the clarity holds with it",
+     "from": "r2 grants — a FOURTH autonomy-increment craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "a moment's stillness — half the clarity, and you can act freely",
+    "surge": "double it; EXTENDING IT THINS IT — the more you shelter, the less clearly you see"
+   },
+   "bounds": [
+    {
+     "text": "IT GRANTS NO OFFENSE, only the unshakeable read",
+     "class": "hard"
+    },
+    {
+     "text": "it OCCUPIES YOU at r1",
+     "class": "soft"
+    },
+    {
+     "text": "EXTENDING IT THINS IT — the more you shelter, the less clearly you see",
+     "class": "hard"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1215,7 +1949,45 @@
    "challengeTypes": [
     "FIGHT"
    ],
-   "harmRung": "lethal"
+   "harmRung": "lethal",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 5,
+     "d": 6
+    },
+    "plus": 6,
+    "marginFloorPer": 0.04,
+    "targets": 1,
+    "note": "T-V capstone, lethal. The highest marginFloorPer in the catalog: this craft IS the decisive margin — 'read a contest to its ONE DECISIVE INSTANT.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: READ A CONTEST TO ITS ONE DECISIVE INSTANT and deliver the single perfect stroke that ends it. The capstone is a KIND (ending a contest by seeing it whole) at near-total focus-cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-committed single stroke is just a strike, and it will not end anything.",
+    "surge": "REFUSED — it already costs nearly all your focus."
+   },
+   "bounds": [
+    {
+     "text": "IT COSTS NEARLY ALL YOUR FOCUS",
+     "class": "hard"
+    },
+    {
+     "text": "IT REQUIRES A REAL DECISIVE INSTANT — a contest without one offers nothing",
+     "class": "hard"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

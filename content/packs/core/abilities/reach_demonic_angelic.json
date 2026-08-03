@@ -70,7 +70,51 @@
       ],
       "tradition": "abyssal",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "bolster",
+      "operativeAxis": [
+        "namingPower",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "duration": 6,
+        "scope": 2
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "add",
+          "axis": "special",
+          "delta": "STRIKE A BINDING BARGAIN: BOTH SIDES GET WHAT THEY TRULY WANT, AND BOTH SIDES PAY WHAT IT TRULY COSTS",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "DESCEND INTO a person, a place, or an institution and SURFACE WITH ITS TRUE ENGINE — the appetite it actually runs on",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "name it quietly — half the force, and they can pretend they did not hear",
+        "surge": "double it; WHAT YOU SURFACE WITH, YOU NOW CARRY"
+      },
+      "bounds": [
+        {
+          "text": "NAMING A WANT IS NOT GRANTING IT — some people will hate you for the naming alone",
+          "class": "hard"
+        },
+        {
+          "text": "THE BARGAIN IS EXACTLY FAIR, WHICH IS THE HORROR OF IT",
+          "class": "hard"
+        },
+        {
+          "text": "WHAT YOU SURFACE WITH, YOU NOW CARRY",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "appetite_sense",
@@ -130,7 +174,52 @@
       ],
       "tradition": "abyssal",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "setup",
+      "operativeAxis": [
+        "perceptionDepth",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 1,
+        "range": 10,
+        "note": "SOCIAL attribute throughout"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "perceptionDepth",
+          "delta": "feel the want A PERSON IS REFUSING TO ADMIT TO THEMSELVES — the one doing the most work",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "read the appetite of A CROWD, A FACTION, A CITY — what the whole thing is actually reaching for",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a read of the want — half the depth, and it stays surface",
+        "surge": "double it; KNOWING THE WANT THEY DENY IS A WEAPON, and it is very hard to un-know"
+      },
+      "bounds": [
+        {
+          "text": "IT READS WANT, NOT INTENT — what they will DO about it is their own",
+          "class": "hard"
+        },
+        {
+          "text": "KNOWING THE WANT THEY DENY IS A WEAPON, and very hard to un-know",
+          "class": "cost"
+        },
+        {
+          "text": "A CROWD'S HUNGER IS NOT THE SUM OF ITS PEOPLE'S — it is its own thing",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_offered_price",
@@ -196,7 +285,50 @@
       ],
       "tradition": "abyssal",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "setup",
+      "operativeAxis": [
+        "foresight",
+        "bindStrength"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "duration": 8
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "add",
+          "axis": "bindStrength",
+          "delta": "the price, ONCE NAMED AND ACCEPTED, BINDS — it will be paid, IN THE COIN NAMED, whatever they do afterward",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "deepen",
+          "axis": "foresight",
+          "delta": "name what a course of action will ULTIMATELY cost — not the ledger price, THE REAL ONE, YEARS OUT",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "name the cost — half the binding, and it is only information",
+        "surge": "double it; YOU ARE NOW THE ONE WHO HOLDS IT, and COLLECTING IS NOT OPTIONAL"
+      },
+      "bounds": [
+        {
+          "text": "NAMING THE PRICE DOES NOT STOP THEM — it only means they knew",
+          "class": "hard"
+        },
+        {
+          "text": "YOU ARE NOW THE ONE WHO HOLDS IT — COLLECTING IS NOT OPTIONAL",
+          "class": "hard"
+        },
+        {
+          "text": "PEOPLE DO NOT BELIEVE TRUE COSTS — the Choir's oldest grief",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "ascent",
@@ -266,7 +398,51 @@
       ],
       "tradition": "seraphic",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "bolster",
+      "operativeAxis": [
+        "judgement",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "duration": 8,
+        "scope": 2
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "add",
+          "axis": "special",
+          "delta": "GRANT A REAL ABSOLUTION — LIFT A WEIGHT a person has carried, genuinely, and THEY WILL FEEL IT LEAVE",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: PRONOUNCE A JUDGMENT THAT BINDS — it is true, everyone present knows it is true, AND IT DOES NOT COME UNDONE",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "weigh it quietly — half the force, and nothing is pronounced",
+        "surge": "double it; IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY"
+      },
+      "bounds": [
+        {
+          "text": "IT MEASURES THE DEED, NOT THE PERSON",
+          "class": "hard"
+        },
+        {
+          "text": "MERCY GIVEN IS MERCY TAKEN ON — the weight does not vanish, IT MOVES TO YOU",
+          "class": "hard"
+        },
+        {
+          "text": "IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_measuring_eye",
@@ -326,7 +502,52 @@
       ],
       "tradition": "seraphic",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "setup",
+      "operativeAxis": [
+        "perceptionDepth",
+        "range"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 1,
+        "range": 20,
+        "note": "MENTAL attribute throughout — judgement is mental where appetite is social"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "perceptionDepth",
+          "delta": "see THE SPECIFICS: what was done, TO WHOM, and WHETHER IT WAS EVER ANSWERED FOR",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "range",
+          "delta": "WEIGH ANYONE, AT ANY DISTANCE, WITHOUT THEIR CONSENT OR KNOWLEDGE",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a glance at the weight — half the detail, and you can look away",
+        "surge": "double it; NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU"
+      },
+      "bounds": [
+        {
+          "text": "IT SEES WEIGHT, NOT STORY — a heavy person may be heavy for good reasons",
+          "class": "hard"
+        },
+        {
+          "text": "SEEING THE LEDGER TEMPTS YOU TO COLLECT ON IT",
+          "class": "cost"
+        },
+        {
+          "text": "NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_shielding_word",
@@ -394,7 +615,55 @@
       ],
       "tradition": "seraphic",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "guard",
+      "operativeAxis": [
+        "ward",
+        "targets",
+        "autonomy"
+      ],
+      "mechanic": {
+        "magnitude": 6,
+        "soak": 5,
+        "soakRank": 2,
+        "duration": 8,
+        "targets": 1,
+        "note": "A guard whose soak IS YOUR CONVICTION — 'you must ACTUALLY BELIEVE IT. A hollow word wards nothing.'"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "the ward holds over A PLACE AND A PEOPLE — FOR AS LONG AS YOU KEEP SPEAKING FOR THEM",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "autonomy",
+          "delta": "SPECIAL: a ward that HOLDS AFTER YOU HAVE GONE — a word spoken so wholly it KEEPS STANDING ON ITS OWN",
+          "from": "r3 grants — a TENTH autonomy-increment craft"
+        }
+      ],
+      "intensity": {
+        "conserve": "speak one ward — half the protection, and it costs you nothing to mean",
+        "surge": "double it; YOU MUST KEEP MEANING IT, WHICH IS THE HARDER HALF"
+      },
+      "bounds": [
+        {
+          "text": "YOU MUST ACTUALLY BELIEVE IT — A HOLLOW WORD WARDS NOTHING",
+          "class": "hard"
+        },
+        {
+          "text": "you must KEEP SPEAKING, and KEEP MEANING IT",
+          "class": "hard"
+        },
+        {
+          "text": "IT STANDS ON WHAT YOU MEANT WHEN YOU SAID IT — IF YOU CHANGE, IT DOES NOT",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_appetite_strike",
@@ -462,7 +731,52 @@
           "harmRung": "incapacitating"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "damage",
+      "operativeAxis": [
+        "damage",
+        "precision"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 2,
+          "d": 6
+        },
+        "plus": 0,
+        "marginFloorPer": 0.03,
+        "damageType": "appetite",
+        "note": "incapacitating. It strikes what a person has been PROTECTING, not their body."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "precision",
+          "delta": "NAME THE APPETITE AND HIT IT — not the body, WHAT THE BODY HAS BEEN PROTECTING; the wound is real",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: HIT WHAT THEY KEPT UNNAMED. They will know what was struck. THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT.",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a glancing blow — half the wound, and it is deniable",
+        "surge": "double it; THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT"
+      },
+      "bounds": [
+        {
+          "text": "it needs a REAL, HELD appetite — a person who wants nothing is proof against it",
+          "class": "hard"
+        },
+        {
+          "text": "THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_consumed_wound",
@@ -532,7 +846,51 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "healing",
+      "operativeAxis": [
+        "removal",
+        "targets"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 2,
+          "d": 4
+        },
+        "plus": 2,
+        "targets": 1,
+        "note": "A THIRTEENTH THEORY OF MEDICINE — CONSUMPTION: 'not healed in the ordinary sense — GONE; the abyss ate it.'"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "removal",
+          "delta": "NOT HEALED — GONE. The abyss ate it, and what remains is THE PERSON WITHOUT WHAT THEY WERE CARRYING",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "TAKE A WOUND FROM ANOTHER INTO YOURSELF and offer it down — you carry it briefly; then you do not; then NEITHER OF YOU DOES",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "offer a little — half the removal, and you keep the rest",
+        "surge": "double it; WHAT THE ABYSS EATS DOES NOT COME BACK, including the parts that were load-bearing"
+      },
+      "bounds": [
+        {
+          "text": "IT REMOVES, IT DOES NOT MEND — what is eaten is GONE",
+          "class": "hard"
+        },
+        {
+          "text": "what the abyss eats DOES NOT COME BACK, INCLUDING THE PARTS THAT WERE LOAD-BEARING",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_dread_mantle",
@@ -602,7 +960,51 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "guard",
+      "operativeAxis": [
+        "deterrence",
+        "autonomy"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "soak": 0,
+        "soakRank": 0,
+        "evasion": 3,
+        "evasionRank": 1,
+        "duration": 8,
+        "note": "A SEVENTEENTH DEFENSIVE LOGIC — DETERRED: soak 0. It does not stop harm; it makes attackers CHOOSE A DIFFERENT TARGET. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family with DISCOURAGED and NEVER-FOUND."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "deterrence",
+          "delta": "the dread is a GENUINE DETERRENT — not fear you project but WEIGHT OTHERS FEEL BEFORE THEY DECIDE",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "autonomy",
+          "delta": "SPECIAL: THE MANTLE ARRIVES BEFORE YOU DO — those who would act against you are navigating something they do not want to",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "let a little show — half the deterrence, and you pass for ordinary",
+        "surge": "double it; a mantle that arrives before you do means YOU ARE NEVER ARRIVING SOMEWHERE FRESH"
+      },
+      "bounds": [
+        {
+          "text": "IT DETERS THOSE WHO CHOOSE — a beast, a machine, or a fanatic is undeterred",
+          "class": "hard"
+        },
+        {
+          "text": "a mantle that arrives before you means YOU ARE NEVER ARRIVING SOMEWHERE FRESH",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_called_form",
@@ -676,7 +1078,48 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "construct",
+      "operativeAxis": [
+        "summonPower",
+        "control"
+      ],
+      "mechanic": {
+        "magnitude": 6,
+        "duration": 4,
+        "variance": 4,
+        "damageType": "appetite"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "summonPower",
+          "delta": "CALL A FORM FROM THE DEEP THAT SERVES A PURPOSE — an appetite made briefly real, A FEAR GIVEN BODY",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "control",
+          "delta": "what you call up HOLDS, ACTS, and is YOURS TO DIRECT until you release it. 'IT IS NOT DOCILE. IT IS DIRECTED.'",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "call something small — half the power, and it goes back easily",
+        "surge": "double it; IT IS NOT DOCILE. IT IS DIRECTED."
+      },
+      "bounds": [
+        {
+          "text": "what you call is AN APPETITE GIVEN FORM — it wants what it is",
+          "class": "hard"
+        },
+        {
+          "text": "IT IS NOT DOCILE. IT IS DIRECTED. — the difference matters when you stop directing",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_descent_path",
@@ -749,7 +1192,49 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "reposition",
+      "operativeAxis": [
+        "access",
+        "targets"
+      ],
+      "mechanic": {
+        "range": 10,
+        "push": 0,
+        "magnitude": 4,
+        "duration": 4,
+        "targets": 1
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "access",
+          "delta": "TRAVEL THROUGH THE BELOW — beneath sight, beneath light, ALONG THE LAYER OTHERS DO NOT KNOW HOW TO REACH",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "TAKE OTHERS DOWN and BRING THEM BACK UP — the route is yours to walk and to share",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "find the way down — half the depth, and you can turn back easily",
+        "surge": "double it; the below is a place, and places have inhabitants"
+      },
+      "bounds": [
+        {
+          "text": "it goes DOWN — there is no version of this that goes up",
+          "class": "hard"
+        },
+        {
+          "text": "the below is A PLACE, and places have inhabitants",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_choir_sustains",
@@ -817,7 +1302,47 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "bolster",
+      "operativeAxis": [
+        "upkeepRelief",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 24,
+        "targets": 1
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "draw from the depth to carry YOUR PARTY through the hardest part — 'the energy is not yours, but it is available'",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: the communion sustains INDEFINITELY in deprivation — as long as the connection holds, you and yours do not run out",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "draw a little — half the relief, and the debt is small",
+        "surge": "double it; THE ENERGY IS NOT YOURS, and what is not yours is borrowed"
+      },
+      "bounds": [
+        {
+          "text": "THE ENERGY IS NOT YOURS — it comes from the communion, and the communion is a relationship",
+          "class": "hard"
+        },
+        {
+          "text": "as long as THE CONNECTION HOLDS — a severed abyssal has nothing",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_judged_strike",
@@ -886,7 +1411,52 @@
           "gains": "deepen"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "damage",
+      "operativeAxis": [
+        "damage",
+        "revelation"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 2,
+          "d": 6
+        },
+        "plus": 0,
+        "marginFloorPer": 0.03,
+        "damageType": "judgement",
+        "note": "lethal rung"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "add",
+          "axis": "revelation",
+          "delta": "a judged blow HARMS AND REVEALS — what they have done is NAMED IN THE MOMENT OF IMPACT; all present understand",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: strike with THE FULL AUTHORITY OF THE ORDER — the blow is both PHYSICAL AND PRONOUNCEMENT",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a measured blow — half the force, and nothing is announced",
+        "surge": "double it; a blow that is also a pronouncement is a pronouncement you cannot take back"
+      },
+      "bounds": [
+        {
+          "text": "THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED — an unwarranted strike is just a strike",
+          "class": "hard"
+        },
+        {
+          "text": "a blow that is also a pronouncement is one YOU CANNOT TAKE BACK",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_raised_form",
@@ -957,7 +1527,47 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "construct",
+      "operativeAxis": [
+        "order",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "duration": 168,
+        "scope": 2
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "order",
+          "delta": "raise a form that ORGANIZES WHAT SURROUNDS IT — the made thing SETS THE TONE for the space it occupies",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: SUMMON THE FORM A THING SHOULD HAVE and INSTANTIATE IT — the building that should stand, the arrangement that should hold",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "raise something plain — half the influence, and it organizes only itself",
+        "surge": "double it; a form that sets the tone SETS IT FOR EVERYONE"
+      },
+      "bounds": [
+        {
+          "text": "it instantiates what a thing SHOULD be — which requires being RIGHT about that",
+          "class": "hard"
+        },
+        {
+          "text": "a form that sets the tone SETS IT FOR EVERYONE, including those who did not choose it",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_ascent_path",
@@ -1030,7 +1640,49 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "reposition",
+      "operativeAxis": [
+        "range",
+        "targets"
+      ],
+      "mechanic": {
+        "range": 15,
+        "push": 0,
+        "magnitude": 4,
+        "duration": 4,
+        "targets": 1
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "SHOW THE ASCENT PATH AND OTHERS CAN FOLLOW — the route up that was not there is there now FOR THOSE YOU SHOW",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "range",
+          "delta": "travel the ascent AS A ROAD — any height, any approach — and CARRY YOUR PARTY to wherever the way up leads",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "climb what shouldn't be climbable — half the height, and you can come down",
+        "surge": "double it; the way up leads where the way up leads"
+      },
+      "bounds": [
+        {
+          "text": "it goes UP — there is no version of this that goes down",
+          "class": "hard"
+        },
+        {
+          "text": "THE WAY UP LEADS WHERE THE WAY UP LEADS — you do not choose the destination, only the climb",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_sustained_order",
@@ -1098,7 +1750,47 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "bolster",
+      "operativeAxis": [
+        "upkeepRelief",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 24,
+        "targets": 1
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "sustain your party THROUGH THE HIERARCHY'S RESOURCES — not comfort but GENUINE SUSTAINING AUTHORITY",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: the seraphic who REMAINS PART OF THE ORDER remains part of WHAT THE ORDER CAN DO",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "draw on your standing — half the relief, and it asks nothing of the order",
+        "surge": "double it; what the order gives, THE ORDER MAY ASK BACK"
+      },
+      "bounds": [
+        {
+          "text": "YOU MUST HOLD YOUR PLACE IN THE ORDER — a seraphic cast out has nothing",
+          "class": "hard"
+        },
+        {
+          "text": "what the order gives, THE ORDER MAY ASK BACK",
+          "class": "cost"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1150,7 +1842,45 @@
       "challengeTypes": [
         "SOCIAL"
       ],
-      "harmRung": "incapacitating"
+      "harmRung": "incapacitating",
+      "shape": "construct",
+      "operativeAxis": [
+        "bindStrength",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "duration": 720,
+        "scope": 2,
+        "note": "T-IV, incapacitating"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "set a covenant on A HOUSEHOLD, A COMPANY, OR AN OFFICE rather than a person — THOSE WHO TAKE THE ROLE TAKE THE PACT",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a light covenant — half the hold, and it can be spoken out of",
+        "surge": "double it; IT CATCHES ONLY WHAT ALREADY WANTED THE BARGAIN"
+      },
+      "bounds": [
+        {
+          "text": "IT CANNOT COMPEL THE TRULY UNWILLING",
+          "class": "hard"
+        },
+        {
+          "text": "IT FRAYS WHEN SPOKEN OF openly",
+          "class": "soft"
+        },
+        {
+          "text": "it catches only WHAT ALREADY WANTED THE BARGAIN",
+          "class": "hard"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1190,7 +1920,42 @@
       "challengeTypes": [
         "SOCIAL"
       ],
-      "harmRung": "incapacitating"
+      "harmRung": "incapacitating",
+      "shape": "hobble",
+      "operativeAxis": [
+        "certaintyBreach",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 9,
+        "duration": 4,
+        "targets": 1,
+        "damageType": "appetite",
+        "note": "T-V capstone, incapacitating"
+      },
+      "rankDeltas": [
+        {
+          "rank": 1,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: SHOW ONE PERSON THE FULL DEPTH BENEATH THEIR FOOTING — what they were most certain of STOPS BEARING WEIGHT. The capstone is a KIND (unmaking certainty itself) at near-total cost.",
+          "from": "r1 grants — single-rank capstone"
+        }
+      ],
+      "intensity": {
+        "conserve": "REFUSED — a partial drowning is a doubt, and doubts are survivable.",
+        "surge": "REFUSED — it already costs nearly all you have."
+      },
+      "bounds": [
+        {
+          "text": "IT COSTS NEARLY ALL YOU HAVE",
+          "class": "hard"
+        },
+        {
+          "text": "IT FAILS ENTIRELY AGAINST THOSE WITH NOTHING BENEATH THEM",
+          "class": "hard"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1242,7 +2007,43 @@
       "challengeTypes": [
         "DEFEND"
       ],
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "guard",
+      "operativeAxis": [
+        "endurance",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "soak": 6,
+        "soakRank": 3,
+        "duration": 8,
+        "targets": 4,
+        "note": "T-IV — the catalog's purest endurance guard"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "the ward extends FROM A PERSON TO A COMPANY, and from a stand TO A MARCH — IT MOVES WITH THOSE IT COVERS",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "hold a smaller light — half the endurance, and it drains you less",
+        "surge": "double it; IT STILL CANNOT STRIKE, AT ANY MASTERY. IT STILL BURNS YOU THE WHOLE WHILE."
+      },
+      "bounds": [
+        {
+          "text": "IT CANNOT ATTACK, ONLY ENDURE — AT ANY MASTERY",
+          "class": "hard"
+        },
+        {
+          "text": "IT DRAINS YOU THE WHOLE WHILE",
+          "class": "cost"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1284,7 +2085,37 @@
         "DEFEND"
       ],
       "innatePrecursor": true,
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "bolster",
+      "operativeAxis": [
+        "substrateChannel",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 9,
+        "duration": 8,
+        "damageType": "light",
+        "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — the second of exactly two in the catalog."
+      },
+      "rankDeltas": [
+        {
+          "rank": 1,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: CHANNEL THE FABRICATED SUBSTRATE DIRECTLY as sustained radiant power — a precursor-tier working INNATE TO YOUR KIN. The capstone is a KIND (direct substrate channelling) with ONGOING UPKEEP the whole time it burns.",
+          "from": "r1 grants — single-rank capstone"
+        }
+      ],
+      "intensity": {
+        "conserve": "REFUSED — a half-kept flame goes out, and what it was holding goes with it.",
+        "surge": "REFUSED — it already carries upkeep the whole time it burns."
+      },
+      "bounds": [
+        {
+          "text": "IT CARRIES ONGOING UPKEEP THE WHOLE TIME IT BURNS",
+          "class": "hard"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1326,7 +2157,40 @@
         "SOCIAL"
       ],
       "harmRung": "none",
-      "innatePrecursor": true
+      "innatePrecursor": true,
+      "shape": "construct",
+      "operativeAxis": [
+        "substrateChannel",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 9,
+        "duration": 8,
+        "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — one of exactly two in the catalog."
+      },
+      "rankDeltas": [
+        {
+          "rank": 1,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: CHANNEL THE FABRICATED SUBSTRATE through the KEPT ABYSSAL HOLLOW — a precursor-tier working INNATE TO YOUR KIN. The capstone is a KIND (direct substrate channelling) with ONGOING UPKEEP.",
+          "from": "r1 grants — single-rank capstone"
+        }
+      ],
+      "intensity": {
+        "conserve": "REFUSED — a hollow half-opened is a hollow that swallows what it should have held.",
+        "surge": "REFUSED — it already carries ongoing upkeep the whole time it is open."
+      },
+      "bounds": [
+        {
+          "text": "IT CARRIES ONGOING UPKEEP WHILE OPEN",
+          "class": "hard"
+        },
+        {
+          "text": "IT CAN SWALLOW what it was meant to hold",
+          "class": "hard"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

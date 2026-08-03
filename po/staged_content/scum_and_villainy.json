@@ -1,0 +1,124 @@
+{
+ "schemaVersion": 1,
+ "id": "scum_and_villainy",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik: 'the game needs more scum and villainy — it exists in the world and would exist in this one too, rooting where it can in different forms.'",
+ "note": "THE GAP, VERIFIED: the world has FIVE GREAT ARCS (poles pulling, substrate waking, manifestation storm, block-bleed, green schism) — all of them WEATHER. And it has 'bandits, enforcers, the altered' filed under riffraff as generic riffraff. WHAT IT DOES NOT HAVE is anybody MAKING A LIVING off the world's actual conditions. There is no criminal ECOLOGY and no faction structure outside individual quests. THE DESIGN PRINCIPLE, from Erik: villainy ROOTS WHERE IT CAN, IN DIFFERENT FORMS. So the right answer is not a thieves' guild — it is: for each tradition and each world-condition, WHAT IS THE CRIME THAT ONLY EXISTS HERE? A lattice crime and a churnfolk crime are not the same crime.",
+ "designPrinciples": [
+  "CRIME FOLLOWS SCARCITY AND GATES. Every tradition gates something (a craft, a passage, a judgement, a name). Wherever there is a gate, someone sells a way around it. That single rule generates a distinct crime per tradition without inventing anything.",
+  "THE BEST VILLAINS ARE PROVIDING A REAL SERVICE. A smuggler moves what the Orders will not license. A memory-broker gives grieving people an hour with the dead. Nobody in the Valley thinks of themselves as scum — and the ones who do are the frightening ones.",
+  "PETTY / ORGANISED / ROOTED — three depths, and they behave differently. PETTY is a person with a bad month (recoverable, often sympathetic). ORGANISED is a business (negotiable, replaceable — kill the boss, the market persists). ROOTED is grown into an institution and cannot be excised without taking the institution with it. THE THIRD IS THE INTERESTING ONE and the catalog has none.",
+  "IT MUST BE ECONOMIC, NOT MORAL. The Cathedral is already the catalog's great LIE. What is missing is the far more common thing: people who found a margin. That is a different register and the world needs both."
+ ],
+ "theTrades": [
+  {
+   "id": "the_licence_trade",
+   "rootedIn": [
+    "seraphic",
+    "lattice"
+   ],
+   "depth": "ROOTED",
+   "whatItIs": "The Orders and the Lattice both ADJUDICATE — charters, judgements, standing, the right to hold a boundary. Every adjudication is a document, and documents can be antedated, lost, duplicated, or issued by someone almost entitled to issue them.",
+   "theService": "A village whose charter was destroyed in a raid gets a real one, dated correctly, for a fee. Most of the people buying are not criminals — they are people whose true papers burned.",
+   "whyItIsROOTED": "⚠️ The forgers are inside the Orders. They have to be — only an Order hand can issue an Order document. This is not infiltration; it is a SIDELINE that senior clerks have run for three generations, and several of the Valley's legitimate settlements exist ONLY because of a document that was purchased. Excising it invalidates real places.",
+   "theHook": "A party discovers a settlement they LIKE holds a bought charter. Reporting it is correct and destroys them.",
+   "craftInterface": "verist's `verity` r2 strips it bare in a sentence — and `the_plain_fact` reduces the whole thing to 'a piece of paper somebody wrote'. The catalog's truth crafts are DEVASTATING here, which is exactly why the trade fears them and buys them off."
+  },
+  {
+   "id": "the_hollow_market",
+   "rootedIn": [
+    "abyssal",
+    "veilwright"
+   ],
+   "depth": "ORGANISED",
+   "whatItIs": "The Descent's counterpart to the High Seat is not a court — it is a MARKET. Bargains brokered between people who should never have met, with the price named honestly and collected without exception.",
+   "theService": "You can get anything here and the terms are never hidden. That is the trap — the abyssal bargain is EXACTLY FAIR, which is the horror of it (descent's own bound).",
+   "whyItIsORGANISED": "It is a business with a structure, and it survives the loss of any individual broker. Killing a broker changes nothing; the market simply prices in the inconvenience.",
+   "theHook": "The party needs something only the Hollow Market has, and the honest price is something they would rather not pay. THAT IS THE ENTIRE SCENE — there is no cheat available, because the market does not cheat.",
+   "craftInterface": "⚠️ `the_offered_price` is a MARKET CRAFT, and its HARD bound 'COLLECTING IS NOT OPTIONAL' binds the WIELDER. Half the market's brokers are bound by their own craft to collect debts they no longer want to collect. That is the best redemption hook in the set."
+  },
+  {
+   "id": "the_quiet_hands",
+   "rootedIn": [
+    "umbral",
+    "valley_craft"
+   ],
+   "depth": "ORGANISED",
+   "whatItIs": "Smuggling and harbouring, and the two are the same trade. Umbral concealment plus valley-craft roads.",
+   "theService": "They move what the Orders will not license and hide who the cities want. A great deal of what they carry is medicine, refugees, and unlicensed truth.",
+   "whyItIsORGANISED": "Route-based, cell-structured, and genuinely useful — the Valley's actual supply chain in a bad season runs partly through them.",
+   "theHook": "⚠️ The best moral trap in the set, and it is authored straight out of umbral's own bounds: `the_harbor` says 'HARBORING SOMETHING MAKES YOU RESPONSIBLE FOR IT' and 'EVERYONE INSIDE BECOMES YOUR RESPONSIBILITY, INCLUDING THE ONES YOU WOULD NOT HAVE CHOSEN.' The Quiet Hands have been harbouring someone they should not have, for years, and they know it, and letting him go now would expose everyone else they ever hid.",
+   "craftInterface": "`shroud`, `false_trail`, `blend_in`, `quiet_step` — this trade is BUILT from folk and umbral crafts a player may well have. A party can join it without changing tradition."
+  },
+  {
+   "id": "the_kindness",
+   "rootedIn": [
+    "threnodist",
+    "numinous"
+   ],
+   "depth": "ROOTED",
+   "whatItIs": "⚠️ THE ONE I THINK IS BEST, and it is barely a crime. People who use feeling-craft and attention-craft to make the unbearable bearable — for a fee, in a room, on a schedule. Grief eased. A memory of the dead sat with. A terror lifted for an evening.",
+   "theService": "It works. That is the problem. It genuinely works, and the people who buy it are not fools; they are bereaved.",
+   "whyItIsROOTED": "⚠️ It has become the Valley's actual grief infrastructure in places where nothing else survived. Shutting it down leaves nothing behind — and the practitioners are, in the main, kind people doing a needed thing for money.",
+   "theHook": "`the_shared_grief`'s own bound: 'IT CANNOT REMOVE GRIEF, ONLY DISTRIBUTE ITS WEIGHT' — so where is the weight going? THE ANSWER IS THE SCENE. Somebody is carrying it, and they are not being paid enough.",
+   "craftInterface": "`pathos`, `the_consumed_wound` (the abyssal version, which does NOT distribute the weight — it FEEDS it to something), `numenwork`. Note the tiering of harm: threnodist's version is honest and costly; the abyssal version is cheaper and the wound is GONE, 'including the parts that were load-bearing'."
+  },
+  {
+   "id": "the_salvage_rings",
+   "rootedIn": [
+    "enginewright",
+    "valley_craft"
+   ],
+   "depth": "ORGANISED",
+   "whatItIs": "Precursor salvage, unlicensed. `old_roads` and `tinkers_hand` are open folk crafts, which means ANY valley tinker can find and strip a remnant.",
+   "theService": "Working mechanisms, cheap, to people the Orders would never license. Half the Valley's functioning machinery came out of a ring.",
+   "whyItIsORGANISED": "Crews, fences, and a genuine skill economy. Also the most likely to get its people killed.",
+   "theHook": "⚠️ `old_roads` r2 judges whether a remnant is 'DORMANT, CYCLING, OR WAKING' — and its HARD bound is 'JUDGMENT IS CRAFT, NOT CERTAINTY — WAKING CAN LIE.' A ring has stripped something that was cycling, not dormant. They know. They are still selling the parts.",
+   "craftInterface": "This trade is the reason `old_roads` being an OPEN FOLK CRAFT matters — precursor access is not gated to the Orders, so the black market in it is inevitable. The economics fall straight out of the catalog."
+  },
+  {
+   "id": "the_name_takers",
+   "rootedIn": [
+    "veilwright",
+    "figurist"
+   ],
+   "depth": "PETTY→ORGANISED",
+   "whatItIs": "Identity theft, in a world where a NAME can be a mechanic. Forged standing, borrowed reputations, a bought history.",
+   "theService": "A person who needs to not be who they were can stop being them. Sometimes that person is fleeing something real.",
+   "theHook": "⚠️ Ties directly to §4e (identity as an assailable resource) — and the catalog already has the counter authored: figurist's `the_held_form` r2 SUSTAINS 'a person's SENSE OF THEMSELVES', with the cost bound 'you may be holding it WRONG.' A name-taker who has held someone's borrowed identity so long that the original is fading is a §4e attack that nobody committed on purpose.",
+   "craftInterface": "`blend_in` r3 — 'you are the person nobody afterward can quite describe' — with its cost 'BEING FORGETTABLE MEANS BEING FORGOTTEN. Valleyfolk who lean on this LOSE THINGS.' The trade's own practitioners are its victims."
+  },
+  {
+   "id": "the_toll_holders",
+   "rootedIn": [
+    "marcher",
+    "horizon"
+   ],
+   "depth": "PETTY",
+   "whatItIs": "Extortion on the roads, dressed as protection — and in the Reaches it often IS protection.",
+   "theService": "The road really is dangerous and they really do keep it. The rate is the crime, not the service.",
+   "whyItIsPETTY": "Individual, replaceable, and frequently a group of ex-marchers who ran out of war and kept the habit. Recoverable — this is the trade a party can actually FIX.",
+   "theHook": "`the_demonstrated_end`'s cost bound applies exactly: 'authority built on what you can END is authority people OBEY AND DO NOT LOVE.' These are people who got the obedience and noticed too late that it was the only thing they got."
+  }
+ ],
+ "aVillainWorthHaving": {
+  "id": "the_ledgerman",
+  "name": "Serrit Vane, the Ledgerman",
+  "band": "NOTABLE→REGIONAL",
+  "trade": "the_licence_trade",
+  "whoHeIs": "A senior Orders clerk of thirty-one years' service, three of which were spent discovering that the charter system had a gap and twenty-eight of which have been spent operating inside it. He is not a mastermind. He is a competent administrator who found a margin and has been extremely careful ever since.",
+  "whyHeWorks": "He is the ROOTED depth made into a person: he has issued somewhere over four hundred documents, and MOST OF THEM WENT TO PEOPLE WHO DESERVED THEM AND COULD NOT GET THEM LEGITIMATELY. He knows exactly which settlements would cease to legally exist if he were exposed, and he keeps the list not as leverage but because somebody should.",
+  "howHeReads": "Mild, precise, genuinely helpful, and completely unrepentant. He will explain the whole operation to a party that asks directly, because the explanation IS his defence.",
+  "theProblem": "He has begun selling to people who do not deserve it. Not many. He tells himself it subsidises the others, and that is even true. THE PARTY ARRIVES AT THE MOMENT THIS IS STILL ARGUABLE.",
+  "theCounter": "`verity` strips him in one sentence and `the_whole_truth` would end the whole trade — and take eleven settlements' legal existence with it. THE CATALOG'S OWN BOUND IS THE SCENE: 'SOME UNMASKINGS DO MORE HARM THAN THE LIE DID, AND VERITY CANNOT TELL WHICH.'",
+  "designNote": "⚠️ He is authored as the ANSWER to the Cathedral, not a copy of it. The Cathedral is a LIE BUILT FROM TRUE PIECES with one key. Serrit Vane is A TRUE SERVICE BUILT ON A FORGERY with no key at all — you cannot solve him, only decide about him. Between them the world has both registers of wrong: the cosmic and the administrative."
+ },
+ "findings": [
+  "THE GAP WAS REAL AND SPECIFIC: the world has five GREAT ARCS, all of them weather (poles pulling, substrate waking, manifestation storm, block-bleed, green schism), and 'bandits, enforcers, the altered' filed as generic riffraff. NOBODY IS MAKING A LIVING. There is no criminal ecology and no standing faction structure outside individual quests.",
+  "ONE RULE GENERATED EVERY TRADE: crime follows GATES. Every tradition gates something — a licence, a passage, a judgement, a name, a remnant — and wherever there is a gate, someone sells a way around it. That produced seven distinct trades without inventing a single new mechanic, and it means a lattice crime and a churnfolk crime are genuinely different crimes, which is what Erik asked for.",
+  "EVERY TRADE'S BEST HOOK CAME OUT OF A BOUND I HAD ALREADY AUTHORED. the_harbor's 'everyone inside becomes your responsibility, INCLUDING THE ONES YOU WOULD NOT HAVE CHOSEN' generated the Quiet Hands' moral trap. the_offered_price's 'COLLECTING IS NOT OPTIONAL' generated the Hollow Market's redemption hook. the_shared_grief's 'it cannot remove grief, only DISTRIBUTE ITS WEIGHT' generated the Kindness's central question — where is the weight going? The bounds ARE the plot generator.",
+  "THE ROOTED DEPTH IS THE ONE THE CATALOG WAS MISSING and it is the interesting one: villainy grown so far into an institution that excising it takes the institution with it. Both ROOTED trades (the licence trade, the Kindness) have the same shape — THE CRIME IS LOAD-BEARING. A party cannot simply win.",
+  "SERRIT VANE IS AUTHORED AS THE COUNTERWEIGHT TO THE CATHEDRAL, deliberately. The Cathedral is a LIE BUILT FROM TRUE PIECES with exactly one key in 292 crafts. The Ledgerman is A TRUE SERVICE BUILT ON A FORGERY with NO key — `verity` ends him in a sentence and takes eleven settlements' legal existence with it. The catalog's own bound is the scene: 'some unmaskings do more harm than the lie did, and Verity CANNOT TELL WHICH.'",
+  "AND THE VILLAINY IS TRADITION-LEGIBLE, which is the payoff: a party of verists experiences a completely different criminal world from a party of umbrals. The verists keep finding things they could destroy and shouldn't; the umbrals keep being OFFERED WORK."
+ ]
+}

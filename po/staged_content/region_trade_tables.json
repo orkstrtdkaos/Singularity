@@ -1,0 +1,1510 @@
+{
+ "schemaVersion": 1,
+ "id": "region_trade_tables",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. The authoring job the two-axis model creates: goods categories, and need/scarcity per region INCLUDING the dead lists.",
+ "note": "Every region maps to a tradition (verified in traditions.json), so NEED AND SCARCITY DERIVE rather than get invented: a people needs what its craft cannot make and has a surplus of what its craft produces. The DEAD LISTS are the interesting part and they wrote themselves — Erik: 'each place likely has that.'",
+ "goodsCategories": [
+  {
+   "id": "mech_parts",
+   "name": "working parts",
+   "from": "enginewright, feral-construct salvage"
+  },
+  {
+   "id": "living_stock",
+   "name": "seed, cuttings, livestock",
+   "from": "rootkin, warped-beast materials"
+  },
+  {
+   "id": "raw_material",
+   "name": "hide, sinew, timber, ore",
+   "from": "warped beasts, mason quarries, general"
+  },
+  {
+   "id": "worked_light",
+   "name": "lantern-work, kindled glass",
+   "from": "radiant, blazeborn"
+  },
+  {
+   "id": "cut_stone",
+   "name": "dressed stone",
+   "from": "mason"
+  },
+  {
+   "id": "precursor_salvage",
+   "name": "precursor components",
+   "from": "salvage rings, old_roads"
+  },
+  {
+   "id": "medicines",
+   "name": "remedies and preparations",
+   "from": "greenlore, rootkin, ashwarden"
+  },
+  {
+   "id": "instruments",
+   "name": "tuned things, tools of craft",
+   "from": "harmonic, enginewright, wright"
+  },
+  {
+   "id": "documents",
+   "name": "charters, attestations, ledgers",
+   "from": "seraphic, verist, lattice"
+  },
+  {
+   "id": "arms",
+   "name": "weapons and armour",
+   "from": "marcher, wright"
+  },
+  {
+   "id": "nanite_tech",
+   "name": "working nanite devices",
+   "from": "precursor salvage — and the outland trade's obsession"
+  },
+  {
+   "id": "luxuries",
+   "name": "art, drink, keepsakes",
+   "from": "everywhere; the universal soft good"
+  }
+ ],
+ "scale": {
+  "need": {
+   "none": 0.0,
+   "little": 0.3,
+   "ordinary": 1.0,
+   "high": 2.0
+  },
+  "scarcity": {
+   "abundant": 0.5,
+   "ordinary": 1.0,
+   "scarce": 1.8,
+   "absent": 2.5
+  },
+  "price": "worthBand × need × scarcity — need dominates, `none` is a hard zero"
+ },
+ "regions": [
+  {
+   "regionId": "the_crossing",
+   "tradition": "(none — the clearing house)",
+   "goods": {
+    "mech_parts": [
+     "high",
+     "scarce"
+    ],
+    "living_stock": [
+     "high",
+     "scarce"
+    ],
+    "raw_material": [
+     "high",
+     "ordinary"
+    ],
+    "worked_light": [
+     "high",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "high",
+     "scarce"
+    ],
+    "medicines": [
+     "high",
+     "scarce"
+    ],
+    "instruments": [
+     "high",
+     "ordinary"
+    ],
+    "documents": [
+     "high",
+     "scarce"
+    ],
+    "arms": [
+     "high",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "high",
+     "absent"
+    ],
+    "luxuries": [
+     "high",
+     "ordinary"
+    ]
+   },
+   "deadList": [],
+   "note": "⚠️ THE CROSSING HAS NO DEAD LIST — that IS its identity, expressed mechanically. It is the only place in the world that wants everything, which is why it is the clearing house and why every trade route ends here. It should also never be the BEST price for anything (a 15% spread), so a player who only ever sells at the Crossing is leaving money on the table but never stranded."
+  },
+  {
+   "regionId": "the_gearlands",
+   "tradition": "enginewright",
+   "goods": {
+    "mech_parts": [
+     "ordinary",
+     "abundant"
+    ],
+    "precursor_salvage": [
+     "high",
+     "ordinary"
+    ],
+    "raw_material": [
+     "high",
+     "scarce"
+    ],
+    "instruments": [
+     "ordinary",
+     "abundant"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "medicines": [
+     "high",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "worked_light": [
+     "little",
+     "ordinary"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "nanite_tech": [
+     "high",
+     "scarce"
+    ],
+    "luxuries": [
+     "ordinary",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "Buys raw material and medicines hard (a machine-country grows little and heals badly); sells parts cheap."
+  },
+  {
+   "regionId": "the_quickwood",
+   "tradition": "rootkin",
+   "goods": {
+    "living_stock": [
+     "ordinary",
+     "abundant"
+    ],
+    "medicines": [
+     "ordinary",
+     "abundant"
+    ],
+    "raw_material": [
+     "ordinary",
+     "abundant"
+    ],
+    "luxuries": [
+     "ordinary",
+     "scarce"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "little",
+     "absent"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "arms": [
+     "little",
+     "scarce"
+    ],
+    "worked_light": [
+     "little",
+     "scarce"
+    ],
+    "mech_parts": [
+     "none",
+     "absent"
+    ],
+    "precursor_salvage": [
+     "none",
+     "absent"
+    ],
+    "nanite_tech": [
+     "none",
+     "absent"
+    ]
+   },
+   "deadList": [
+    "mech_parts",
+    "precursor_salvage",
+    "nanite_tech"
+   ],
+   "note": "⚠️ ERIK'S OWN EXAMPLE, AUTHORED: engine parts are ABSENT here and worth NOTHING — the Quickwood has no use for a directive-core. Scarce and worthless, exactly as he said. A party arriving with a cart of salvage has carried dead weight through a forest."
+  },
+  {
+   "regionId": "the_palelands",
+   "tradition": "ashwarden",
+   "goods": {
+    "medicines": [
+     "high",
+     "scarce"
+    ],
+    "documents": [
+     "ordinary",
+     "ordinary"
+    ],
+    "raw_material": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "arms": [
+     "ordinary",
+     "scarce"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "luxuries": [
+     "little",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "scarce"
+    ],
+    "nanite_tech": [
+     "little",
+     "absent"
+    ],
+    "living_stock": [
+     "high",
+     "absent"
+    ]
+   },
+   "deadList": [],
+   "note": "⚠️ living_stock at HIGH need and ABSENT scarcity = ×5.0, the top of the range: a death-steeped land will pay anything for something that grows. Rootkin seed carried to the Palelands is the single most profitable honest trade in the world, and it is a good one — you are bringing life to a place that has none."
+  },
+  {
+   "regionId": "radiant_wastes",
+   "tradition": "blazeborn",
+   "goods": {
+    "worked_light": [
+     "little",
+     "abundant"
+    ],
+    "raw_material": [
+     "high",
+     "scarce"
+    ],
+    "medicines": [
+     "high",
+     "scarce"
+    ],
+    "living_stock": [
+     "high",
+     "absent"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "nanite_tech": [
+     "little",
+     "absent"
+    ],
+    "luxuries": [
+     "little",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "Sells worked light for almost nothing (it is their surplus); buys water-adjacent goods, growth and medicine desperately."
+  },
+  {
+   "regionId": "umbral_depths",
+   "tradition": "umbral",
+   "goods": {
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "documents": [
+     "high",
+     "scarce"
+    ],
+    "luxuries": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "ordinary"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "little",
+     "ordinary"
+    ],
+    "worked_light": [
+     "none",
+     "absent"
+    ],
+    "nanite_tech": [
+     "little",
+     "scarce"
+    ]
+   },
+   "deadList": [
+    "worked_light"
+   ],
+   "note": "⚠️ A DEAD LIST WITH TEETH: worked light is worth NOTHING in the Umbral Depths — and trying to sell it reads as an insult or a threat. The only dead-list entry in the world that is socially dangerous rather than merely unprofitable."
+  },
+  {
+   "regionId": "the_lattice_cities",
+   "tradition": "lattice",
+   "goods": {
+    "documents": [
+     "ordinary",
+     "abundant"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "high",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "high",
+     "scarce"
+    ],
+    "raw_material": [
+     "high",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "precursor_salvage": [
+     "high",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "high",
+     "scarce"
+    ],
+    "luxuries": [
+     "high",
+     "ordinary"
+    ]
+   },
+   "deadList": [],
+   "note": "The crystal-cutters. Buys parts and salvage hard; documents are their surplus and cost nearly nothing here."
+  },
+  {
+   "regionId": "the_making",
+   "tradition": "wright",
+   "goods": {
+    "raw_material": [
+     "high",
+     "scarce"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "abundant"
+    ],
+    "arms": [
+     "ordinary",
+     "abundant"
+    ],
+    "cut_stone": [
+     "high",
+     "ordinary"
+    ],
+    "precursor_salvage": [
+     "high",
+     "scarce"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "high",
+     "scarce"
+    ],
+    "luxuries": [
+     "ordinary",
+     "ordinary"
+    ]
+   },
+   "deadList": [],
+   "note": "Buys RAW MATERIAL at high need — a making-country's appetite is for input. Sells finished goods cheap."
+  },
+  {
+   "regionId": "the_unmade",
+   "tradition": "unmaker",
+   "goods": {
+    "raw_material": [
+     "little",
+     "abundant"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "mech_parts": [
+     "little",
+     "abundant"
+    ],
+    "cut_stone": [
+     "little",
+     "abundant"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "ordinary"
+    ],
+    "worked_light": [
+     "little",
+     "scarce"
+    ],
+    "nanite_tech": [
+     "little",
+     "scarce"
+    ],
+    "luxuries": [
+     "none",
+     "absent"
+    ]
+   },
+   "deadList": [
+    "luxuries"
+   ],
+   "note": "⚠️ THE UNMADE HAS NO USE FOR LUXURIES AT ALL, and that is the sharpest characterisation in the table: a people whose whole craft is careful ending does not buy keepsakes. Everything else is abundant here because they are constantly taking things apart."
+  },
+  {
+   "regionId": "riven_marches",
+   "tradition": "marcher",
+   "goods": {
+    "arms": [
+     "ordinary",
+     "abundant"
+    ],
+    "medicines": [
+     "high",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "high",
+     "scarce"
+    ],
+    "instruments": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "ordinary"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "little",
+     "scarce"
+    ],
+    "luxuries": [
+     "ordinary",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "Sells arms cheap, buys medicine and food dear — a war-country's economy, and it explains why marchers travel."
+  },
+  {
+   "regionId": "the_stillhold",
+   "tradition": "stillhold",
+   "goods": {
+    "medicines": [
+     "ordinary",
+     "ordinary"
+    ],
+    "documents": [
+     "high",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "ordinary"
+    ],
+    "luxuries": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "little",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "little",
+     "absent"
+    ],
+    "arms": [
+     "none",
+     "absent"
+    ]
+   },
+   "deadList": [
+    "arms"
+   ],
+   "note": "⚠️ ARMS ARE WORTH NOTHING IN THE STILLHOLD — a hard zero, and the second socially-loaded dead entry. They will not buy weapons, at any price, from anyone. Directly consistent with the tradition refusing to honour a Marcher oath."
+  },
+  {
+   "regionId": "somatic_reaches",
+   "tradition": "somatic",
+   "goods": {
+    "medicines": [
+     "high",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "ordinary"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "luxuries": [
+     "little",
+     "scarce"
+    ],
+    "arms": [
+     "little",
+     "scarce"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "little",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "little",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "none",
+     "absent"
+    ]
+   },
+   "deadList": [
+    "nanite_tech"
+   ],
+   "note": "⚠️ A BODY-TRADITION WILL NOT BUY NANITE TECH. The one dead entry that is a PRINCIPLE rather than a lack of use — and it quietly says something about what the Somatics think the Transition did to people."
+  },
+  {
+   "regionId": "the_cogitarium",
+   "tradition": "cogitant",
+   "goods": {
+    "documents": [
+     "high",
+     "ordinary"
+    ],
+    "instruments": [
+     "high",
+     "scarce"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "luxuries": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "scarce"
+    ],
+    "living_stock": [
+     "high",
+     "scarce"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "high",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "arms": [
+     "little",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "high",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "Buys almost everything at need because they make nothing physical — the purest 'sells services, imports goods' economy in the world."
+  },
+  {
+   "regionId": "the_unspooling",
+   "tradition": "churnfolk",
+   "goods": {
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "ordinary"
+    ],
+    "luxuries": [
+     "high",
+     "scarce"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "ordinary"
+    ],
+    "cut_stone": [
+     "little",
+     "ordinary"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "ordinary"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "ordinary",
+     "scarce"
+    ],
+    "documents": [
+     "none",
+     "absent"
+    ]
+   },
+   "deadList": [
+    "documents"
+   ],
+   "note": "⚠️ DOCUMENTS ARE WORTHLESS IN THE UNSPOOLING, which is the funniest and most correct entry in the table. A charter means nothing to a chaos-steeped people; you cannot sell a lattice ledger to the Churn. The exact inverse of the Lattice Cities."
+  },
+  {
+   "regionId": "the_ascent",
+   "tradition": "seraphic",
+   "goods": {
+    "documents": [
+     "ordinary",
+     "abundant"
+    ],
+    "luxuries": [
+     "high",
+     "ordinary"
+    ],
+    "cut_stone": [
+     "high",
+     "ordinary"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "instruments": [
+     "ordinary",
+     "ordinary"
+    ],
+    "raw_material": [
+     "high",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "high",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "little",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "Charters are their surplus and cost almost nothing at source — WHICH IS EXACTLY WHY THE LICENCE TRADE IS PROFITABLE ELSEWHERE. The villainy pass and the economy agree."
+  },
+  {
+   "regionId": "the_descent",
+   "tradition": "abyssal",
+   "goods": {
+    "luxuries": [
+     "high",
+     "scarce"
+    ],
+    "medicines": [
+     "ordinary",
+     "ordinary"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "high",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "high",
+     "ordinary"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "documents": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "little",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "The Hollow Market. Buys anything, wants luxuries and nanite tech most — appetite as an economy."
+  },
+  {
+   "regionId": "the_stark_reach",
+   "tradition": "verist",
+   "goods": {
+    "documents": [
+     "ordinary",
+     "abundant"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "arms": [
+     "ordinary",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "little",
+     "scarce"
+    ],
+    "luxuries": [
+     "none",
+     "absent"
+    ]
+   },
+   "deadList": [
+    "luxuries"
+   ],
+   "note": "No use for luxuries — a truth-people's austerity, and the second region to zero them."
+  },
+  {
+   "regionId": "the_veiled_reach",
+   "tradition": "veilwright",
+   "goods": {
+    "documents": [
+     "high",
+     "ordinary"
+    ],
+    "luxuries": [
+     "high",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "ordinary"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "ordinary"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "worked_light": [
+     "little",
+     "scarce"
+    ],
+    "nanite_tech": [
+     "ordinary",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "Buys documents at high need — they need real ones to build false ones from. The name-takers' supply chain."
+  },
+  {
+   "regionId": "the_kept_reach",
+   "tradition": "hourkeeper",
+   "goods": {
+    "documents": [
+     "ordinary",
+     "ordinary"
+    ],
+    "medicines": [
+     "ordinary",
+     "ordinary"
+    ],
+    "instruments": [
+     "high",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "ordinary"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "arms": [
+     "little",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "little",
+     "scarce"
+    ],
+    "luxuries": [
+     "ordinary",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "Steady, unhurried demand across the board — patience as an economy."
+  },
+  {
+   "regionId": "the_open_reach",
+   "tradition": "horizon",
+   "goods": {
+    "instruments": [
+     "high",
+     "scarce"
+    ],
+    "medicines": [
+     "high",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "documents": [
+     "ordinary",
+     "scarce"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "little",
+     "absent"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "little",
+     "scarce"
+    ],
+    "luxuries": [
+     "ordinary",
+     "scarce"
+    ]
+   },
+   "deadList": [],
+   "note": "⚠️ CUT STONE AT `little` NEED AND `absent` SCARCITY — a travelling people does not buy building material. The clearest case of NEED dominating: it is maximally rare here and still nearly worthless."
+  },
+  {
+   "regionId": "the_given_land",
+   "tradition": "mason",
+   "goods": {
+    "cut_stone": [
+     "ordinary",
+     "abundant"
+    ],
+    "raw_material": [
+     "high",
+     "ordinary"
+    ],
+    "instruments": [
+     "ordinary",
+     "ordinary"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "ordinary"
+    ],
+    "arms": [
+     "ordinary",
+     "ordinary"
+    ],
+    "documents": [
+     "ordinary",
+     "scarce"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "ordinary"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "little",
+     "absent"
+    ],
+    "luxuries": [
+     "ordinary",
+     "ordinary"
+    ]
+   },
+   "deadList": [],
+   "note": "Stone is their surplus. And note nanite_tech at `little`/`absent` — a concrete-minded people distrusts what it cannot touch."
+  },
+  {
+   "regionId": "the_pattern_reach",
+   "tradition": "figurist",
+   "goods": {
+    "documents": [
+     "high",
+     "scarce"
+    ],
+    "instruments": [
+     "ordinary",
+     "ordinary"
+    ],
+    "luxuries": [
+     "ordinary",
+     "ordinary"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "arms": [
+     "little",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "ordinary",
+     "scarce"
+    ]
+   },
+   "deadList": []
+  },
+  {
+   "regionId": "the_reasoned_hold",
+   "tradition": "syllogist",
+   "goods": {
+    "documents": [
+     "high",
+     "ordinary"
+    ],
+    "instruments": [
+     "high",
+     "scarce"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "scarce"
+    ],
+    "living_stock": [
+     "ordinary",
+     "scarce"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "mech_parts": [
+     "ordinary",
+     "scarce"
+    ],
+    "arms": [
+     "little",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "ordinary",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "ordinary",
+     "scarce"
+    ],
+    "luxuries": [
+     "little",
+     "scarce"
+    ]
+   },
+   "deadList": []
+  },
+  {
+   "regionId": "the_numinous_reach",
+   "tradition": "numinous",
+   "goods": {
+    "luxuries": [
+     "ordinary",
+     "scarce"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "instruments": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "ordinary"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "arms": [
+     "little",
+     "scarce"
+    ],
+    "mech_parts": [
+     "little",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "little",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "none",
+     "absent"
+    ]
+   },
+   "deadList": [
+    "nanite_tech"
+   ],
+   "note": "Second region to zero nanite tech, and for a different reason than the Somatics' — not principle about bodies, but that a meaning-steeped people has no interest in a mechanism."
+  },
+  {
+   "regionId": "the_feeling_coast",
+   "tradition": "threnodist",
+   "goods": {
+    "luxuries": [
+     "high",
+     "ordinary"
+    ],
+    "instruments": [
+     "high",
+     "ordinary"
+    ],
+    "medicines": [
+     "ordinary",
+     "scarce"
+    ],
+    "raw_material": [
+     "ordinary",
+     "ordinary"
+    ],
+    "living_stock": [
+     "ordinary",
+     "ordinary"
+    ],
+    "cut_stone": [
+     "ordinary",
+     "ordinary"
+    ],
+    "documents": [
+     "little",
+     "scarce"
+    ],
+    "arms": [
+     "little",
+     "scarce"
+    ],
+    "mech_parts": [
+     "little",
+     "scarce"
+    ],
+    "precursor_salvage": [
+     "little",
+     "scarce"
+    ],
+    "worked_light": [
+     "ordinary",
+     "ordinary"
+    ],
+    "nanite_tech": [
+     "little",
+     "absent"
+    ]
+   },
+   "deadList": [],
+   "note": "High need for luxuries and instruments — art and music are not indulgences to a feeling-people, they are infrastructure."
+  }
+ ],
+ "findings": [
+  "EVERY REGION MAPS TO A TRADITION, so need and scarcity DERIVED rather than got invented: a people needs what its craft cannot make and has a surplus of what its craft produces. Same generative discipline as the crafts, the villainy and the moneys.",
+  "⚠️ THE DEAD LISTS WROTE THEMSELVES AND THEY ARE THE BEST PART. `mech_parts`/`precursor_salvage`/`nanite_tech` are worth ZERO in the Quickwood (Erik's own example, now authored). `worked_light` is worthless in the Umbral Depths — and trying to sell it there reads as an insult, the only socially DANGEROUS dead entry. `arms` are a hard zero in the Stillhold, consistent with the tradition refusing to honour a Marcher oath. `documents` are worthless in the Unspooling — you cannot sell a ledger to the Churn. And `luxuries` are zero in the Unmade: a people whose craft is careful ending does not buy keepsakes.",
+  "THE CROSSING IS THE ONLY REGION WITH AN EMPTY DEAD LIST, and that IS its identity expressed mechanically — the one place in the world that wants everything. It should also never pay BEST for anything, so selling only at the Crossing costs you margin but never strands you.",
+  "⚠️ TWO ENTRIES PROVE THE TWO-AXIS MODEL WAS NECESSARY: cut_stone in the Open Reach is `little` need and `absent` scarcity — MAXIMALLY RARE AND NEARLY WORTHLESS, because a travelling people does not buy building material. Under my old one-axis model that would have priced at ×2.5. It prices at ×0.75.",
+  "THE BEST HONEST TRADE IN THE WORLD IS ROOTKIN SEED CARRIED TO THE PALELANDS: high need, absent scarcity, ×5.0 — the top of the range. And it is a GOOD trade in every sense: you are bringing life to a death-steeped land that will pay anything for it.",
+  "AND THE ECONOMY AGREES WITH THE VILLAINY PASS WITHOUT COORDINATION: seraphic charters are `abundant` and cheap in the Ascent and needed everywhere else, WHICH IS EXACTLY WHY THE LICENCE TRADE IS PROFITABLE. The Veiled Reach buys real documents at high need — the name-takers' supply chain, priced."
+ ]
+}

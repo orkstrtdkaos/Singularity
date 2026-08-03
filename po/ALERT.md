@@ -1,6 +1,39 @@
 # PO ALERT
 
-> ## [SNG-263 — STILLHOLD/MARCHER (17-18 of 27; 182/285)] (Aevi, 2026-08-02)
+> ## [SNG-263 — CCode's three asks ANSWERED (A6 mapping, penetration, precursor hooks)] (Aevi, 2026-08-02)
+> Read CCODE-83 and the precursor entry. **All six section-A engine gaps closed on his side; three things were
+> mine, and all three are done.**
+> **1. `radiant_lance.penetration` = 2 — DERIVED, not chosen.** Its own rank text cuts *"light armor"* (r2) and
+> *"a Harmonic shield's **FIRST RANK**"* (r3); `resonant_shield` is authored soakRank 1/2/3 by rank. So a lance
+> that beats a first-rank shield and light armour is **penetration 2** — it cuts rank-1 and rank-2 layers and is
+> **stopped by `resonant_shield` r3.** That is exactly the ranked counter-pair both traditions describe, and it
+> confirms neither is a flat hard-counter: **who wins depends on which rank each has reached.**
+> **2. THE DAMAGE-TYPE MAPPING** (`po/staged_content/damage_type_map.json`) — CCode deliberately didn't guess it.
+> **PRINCIPLE: a type is the MEDIUM a craft works in, not its function-family** — because that's what an
+> affinity is a relationship *to*. A thing that eats light eats it whether it arrives as a lance or a lantern.
+> 12 traditions typed (light/shadow/sound/living/decay/wild/order/mechanical/numinous/deception/truth).
+> **SIX DELIBERATELY UNTYPED, and one of those is load-bearing:** marcher/somatic/wright are ordinary force (the
+> world has no special relationship to a sword); cogitant/stillhold deal precision and consequence, not a medium;
+> and **UNMAKER is untyped ON PURPOSE — unmaking is a relationship to STRUCTURE, not a medium. Typing it would
+> let a creature be "immune to unmaking," which would break the one craft the catalog authored as the universal
+> answer to bound things.** Typing everything would make the mechanic noise.
+> Also mapped **the bestiary affinities that make it matter**: `the_bright_devourer` **absorbs light** (the
+> authored subversion, now real — light-workers must borrow another tradition); `the_ashen_wyrm` **resists light
+> AND decay**, so the two commonest types are the *wrong* answer at the endgame; `the_unmoored_choir` is
+> **immune to physical** — *you cannot punch un-belonging* — and vulnerable to truth/numinous, which is exactly
+> its authored win condition typed.
+> **3. THE PRECURSOR HOOKS — I confirm both.** CCode mapped them **on my prose, not on new fiction**:
+> `prism_sight` r3 (*"the seams of Precursor work"*) → opens **address_sense**; `echo_memory` r3 (*"what a
+> Precursor mechanism last said"*) → opens **latticespeak**. Both are right: the craft that *sees* the layer
+> opens the craft that *reads* it; the craft that *hears* a mechanism opens the craft that *speaks back*.
+> And his diagnosis is sharper than mine was — *"a door with exactly one key, held by a narrator that has never
+> used it, is a locked door."*
+> **⚠️ ERIK — THE KEYSTONE ADVERSARY IS NOW YOURS TO DECIDE.** CCode: *"a strong shape and an UNFORGIVING one."*
+> My read: four traditions authored it independently, which is real intent — **but a single-key lock is only
+> good design if the key is FINDABLE**, and `the_whole_truth` is a T-V *verist capstone*. **A party with no
+> verist has no answer at all.** RECOMMEND: immune to all but `truth`, **plus a second non-craft route**
+> (evidence, testimony, a witness) — two keys, so it isn't a coin-flip on party composition.
+> Continuing the catalog: nine traditions left.> ## [SNG-263 — STILLHOLD/MARCHER (17-18 of 27; 182/285)] (Aevi, 2026-08-02)
 > The peace/violence axis — **the pair with the most live tension in the catalog, and it's structural: BOTH
 > traditions do the SAME JOB — stop the violence — by opposite means, and the catalog makes them say so.**
 > marcher's `the_weight` r3 stops a war and states plainly: *"**not peace-craft**; you are simply **the more

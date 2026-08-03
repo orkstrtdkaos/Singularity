@@ -162,3 +162,32 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
     **after** the craft catalog rather than interleaved — the pole crafts are the parent material the foothills
     are shadows OF, and half of them are still unauthored.
     **ERIK'S CALL:** one-per-pole or one-per-adjacent-pair? That single decision halves or doubles the job.
+
+27. **THE FAMED ARENA CIRCUIT** *(Erik, 2026-08-02)* — **NPC contestants who accumulate wins and become
+    genuinely famous.** As a fighter racks up victories the player **starts hearing about them**, can **attend
+    their matches** as a spectator, or **fight them** — and racks up their **own** fame by doing so.
+    **MOST OF THIS ALREADY EXISTS — it needs POINTING AT NPCs, not building:**
+    · **`coliseum_grid.json`** (SNG-149) — the Great Coliseum's **blind grid**: neither competitor picks their
+      own ground; each brings four function families *they actually practise* and then **each chooses from the
+      other's four.** A duel mechanic already designed and unused for this.
+    · **`engine/reputation.js`** — `recordDeed(character, deed)` with **`weight`** and **`spread`** (deeds
+      propagate between communities), `standingWith`, `standingWithPeople`, reputation BANDS.
+    · **`engine/chronicle.js`** — `majorDeeds()` ranks by **salience**, and its own comment says *"a routine act
+      makes no deed, so every deed here is something a community would actually talk about."*
+    · **`engine/legends.js`** — the power-tier ladder (riffraff→legendary) an NPC's fame could climb.
+    · **`gm.js:15`** already instructs: *"Respect reputation: NPCs react to the character's local standing and
+      known deeds."*
+    **WHAT'S ACTUALLY MISSING (the real work):** NPCs don't HAVE deeds or standing — `recordDeed` is
+    character-only. The gap is the same shape as SNG-258 §11 (*the world doesn't DO what the systems describe*)
+    and SNG-263's bestiary finding (*creatures had no mechanical body*): **the machinery exists on the player
+    side and simply isn't pointed at the world.**
+    **GOALS:** (1) arena NPCs accumulate a **win record and deeds that SPREAD**, using the existing reputation
+    machinery; (2) their fame becomes **audible in play** — the player *hears about* a rising fighter before
+    ever meeting them, which is the whole charm of the idea; (3) the player can **spectate** (a real scene, not
+    a summary) **or fight**; (4) **beating a famed contestant transfers fame** — the player's own standing
+    climbs by whose record they broke; (5) the blind-grid is the duel mechanic, so a famous fighter is known
+    for *which four families they practise* — and a player can **prepare for a specific opponent**, which ties
+    it to SNG-258 §10 (prepared ground) beautifully.
+    **WHY IT'S GOOD DESIGN, honestly:** it gives the ladder a FACE. Right now "epic" is a threat number; this
+    makes the endgame a **person with a name and a record you have been hearing about for twenty sessions.**
+    It also gives SNG-259's endgame modelling something to be *about*. **Wants its own ticket.**

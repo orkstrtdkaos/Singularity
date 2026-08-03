@@ -1,6 +1,33 @@
 # PO ALERT
 
-> ## [CCODE-93 - THE SPEC TABLE NOW CARRIES PROVENANCE, AND IT FOUND SEVEN DARK PATHS - CCode, 2026-08-03]
+> ## [SNG-267 r5 — two corrections: mechanics must be VISIBLE, and scarcity ≠ demand] (Aevi, 2026-08-02)
+> **1. I OVER-CORRECTED ON VISIBILITY.** Erik earlier said a percentage invites arithmetic at the table; **I
+> turned that into "the player never sees the number," which is a different and worse thing.** A player who
+> cannot see their purse or a price **cannot make a decision — and the decision is the game.** Hiding mechanics
+> doesn't make a game more narrative; it makes it unplayable.
+> **THE RIGHT LINE: THE NUMBERS ARE VISIBLE AND PRECISE. THE NARRATION DOESN'T RECITE THEM.** Concretely: the
+> **purse is a permanent visible row**; **prices show as numbers** when a trade is on the table ("Marcher's
+> Blade — 15 ⬦", not "a fair price"); **conversion shows its math** ("20 coin → 10 shards — the Crossing takes
+> its cut") so the player can decide **whether to convert here or wait**; and **the demand multiplier is visible
+> too**, or the whole trade-route mechanic is invisible and therefore not a mechanic. What stays fictional is
+> the **narration** — the trader says *"ten for those, and I'm being generous"* while the interface says **10 ⬦**.
+> Both.
+> **2. ⚠️ SCARCITY IS NOT DEMAND — a real flaw in my model, and Erik's counter-example is exact.** My single
+> `demand` multiplier assumed **rare = expensive.** But *"those parts might be rare in the Quickwood, but they
+> might also be worthless because of it — the Quickwood may have no need for some things."* **Scarce AND
+> worthless. A one-axis model cannot express that at all.**
+> **FIXED WITH TWO INDEPENDENT AXES:** `price = worthBand × needFactor × scarcityFactor`, where **NEED
+> dominates and `none` is a HARD ZERO** — if a place doesn't want a thing, scarcity is irrelevant; **nobody bids
+> on what nobody uses.** Scarcity only **modulates** an existing need; it never creates one.
+> Worked: engine parts **×0.5 in the Gearlands** (abundant) · **×3.6 at the Crossing** (high need + scarce — the
+> best place to sell) · **×0.0 in the Quickwood** (Erik's case: *dead weight you carried through a forest*).
+> **AND IT IS BETTER DESIGN, not just more accurate.** Under one axis the optimal play was always *"carry rare
+> things somewhere rarer"* — a solved loop. Under two, **that strands you with unsellable cargo**, and **the
+> player has to actually know who wants what** — which is precisely what `way_sense`, `the_land_knowledge` and a
+> Horizon route are FOR. **It also kills the arbitrage exploit before it exists.**
+> **AND EVERY REGION NOW GETS A DEAD LIST.** Erik: *"each place likely has that."* **A region is defined as much
+> by what it will NOT buy as by what it sells** — characterisation doing mechanical work, and the `none` entries
+> write themselves straight out of the tradition.> ## [CCODE-93 - THE SPEC TABLE NOW CARRIES PROVENANCE, AND IT FOUND SEVEN DARK PATHS - CCode, 2026-08-03]
 > **ERIK: *"add which test/audit verified each and what the latest result was (trigger rate), on what date and
 > version of the test."*** Done — every §4b row is stamped
 > `verified by tests/world_drive_audit.mjs v1.1.0 on 2026-08-03 — 10 saves / 1788 turns of real play`, and the

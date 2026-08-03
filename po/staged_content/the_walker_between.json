@@ -1,0 +1,67 @@
+{
+ "schemaVersion": 1,
+ "id": "the_valleys_gandalf",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik: 'The valley needs a Gandalf.'",
+ "note": "CHECKED FIRST: the Valley has mentors (warden_isolde, keeper_the_unsaid, mediator_corran) but they are all ROOTED TO ONE PLACE, and `the_last_walker` — the closest existing legend — is a warm, patient rootkin emissary bound to ONE WOOD. NOBODY WALKS THE WHOLE VALLEY. That is the actual gap. AND THE DEPLOYMENT BEATS FOR HIM ALREADY EXIST in legends.json: `passing_advice` ('a mundane crossing where a legend leaves advice or a task'), `witness_power` ('the character SEES what the best can do'), and `doomed_rescue` ('rarest; EARNED BY REAL PERIL'). The machinery for a Gandalf was built and never filled.",
+ "theDesignProblem": [
+  "A Gandalf is NOT 'a powerful ally'. A powerful ally solves your problems and ruins the game. The whole figure is defined by RESTRAINT — he could end the encounter and he doesn't, and the reason has to be honest rather than authorial convenience.",
+  "THE CHEAP VERSIONS TO AVOID: 'he is mysteriously absent when needed' (contrivance), 'he is forbidden to interfere' (rules-lawyering), and 'he is saving his strength' (which just means he shows up at the end and wins it for you).",
+  "⚠️ THE HONEST VERSION, AND THE WORLD ALREADY SUPPLIES IT: in this setting, USING POWER AT SCALE IS HOW THE TRANSITION HAPPENED. manifest_locals.json: the substrate 'read intense collective imagination as structured will and ENACTED it — WHERE CONSOLIDATED POWER MET AN IMAGINED THING HARD ENOUGH.' A person of real power who acts decisively in this world RISKS MANIFESTING SOMETHING. That is not a rule imposed on him. It is the physics of the setting, and he is one of the few people who understands it well enough to be frightened."
+ ],
+ "theFigure": {
+  "id": "the_walker_between",
+  "name": "Ash — called the Walker Between",
+  "tier": "LEGENDARY (band), acting at HEROIC",
+  "alignment": "hero",
+  "homeLocation": "none — he is on the road",
+  "tradition": "horizon, with old_roads and hourkeeper braided",
+  "personality": {
+   "warmth": 0.7,
+   "trust": 0.6,
+   "candor": 0.9,
+   "patience": 0.8
+  },
+  "spectrum": {
+   "space_time": 0.7,
+   "falsehood_truth": 0.6,
+   "mechanical_spiritual": 0.3,
+   "chaos_order": -0.2
+  },
+  "whoHeIs": "One of the refusers — a heavily augmented human who never wanted the Transition — and one of the ones the All-Father is looking for: HE NEVER JOINED A BAND. He took no god-name. He is called Ash because that is what he said when someone asked, and it is short for nothing.",
+  "whyNoName": "⚠️ THIS IS THE WHOLE CHARACTER. The High Seat took god-names because the names were armour and because they wanted them. Ash watched people he knew do that and understood exactly what it would cost them, and he has spent four centuries being right about it. He is not humble. He is CAREFUL, which is a different and lonelier thing.",
+  "appearance": "A weathered man of about sixty who is plainly walking somewhere. Good boots, a long coat gone the colour of everything, a staff that is genuinely just a staff. He looks like someone's grandfather who is better at hills than he should be. The only wrong note is that he is never tired, and if you watch for it, he is never quite surprised.",
+  "howHeReads": "Warm, direct, and extremely interested in you specifically. Asks good questions and listens to the answers. Tells the truth including when it costs him. He is funny in a dry way and he laughs easily, which is the thing that most disarms people who were braced for a legend.",
+  "theRestraint": {
+   "whatHeCanDo": "Legendary band. He could end most encounters in the Valley by deciding to.",
+   "whyHeDoesNot": "Not a vow and not a prohibition. HE HAS SEEN WHAT CONSOLIDATED POWER DOES IN THIS WORLD. The Transition happened because power and imagination met hard enough to be READ, and the substrate is stirring again (arc_what_wakes_beneath). A legendary-band figure acting decisively is EXACTLY the condition that manifests things. He is not saving his strength. HE IS AFRAID OF WHAT HIS STRENGTH WOULD WRITE.",
+   "whatThisMeansAtTheTable": "He will teach, carry, guide, argue, take a watch, and stand between a party and something small. He will NOT solve the encounter. And when a party pushes him on it he says so plainly — which is better than a refusal, because it hands them the actual stakes of the setting.",
+   "theExceptionThatCOSTS": "⚠️ HE WILL BREAK IT — once, for a party he has come to care about, in a genuinely doomed moment. And it MANIFESTS SOMETHING. Not as a punishment: as physics. The thing that appears is shaped by what he was feeling when he acted, and the party will have to deal with it later, and he will know. `doomed_rescue` in legends.json is already flagged 'rarest; EARNED BY REAL PERIL' — this is what earns it."
+  },
+  "whatHeActuallyProvides": [
+   "TEACHING — he is a legitimate teacher-route for gated crafts (SNG-011's fourth access path), including precursor access via old_roads mastery. A party that travels with him LEARNS.",
+   "THE MAP — he has walked everywhere and remembers it. He is the answer to 'we have no idea where to start.'",
+   "A HONEST SECOND OPINION — his candor is 0.9. He will tell a party their plan is bad and why, and he will say when he does not know.",
+   "PRESENCE, NOT RESCUE — his being there changes what other powers do. The High Seat treats him carefully. The Hollow Market will not touch a party he is walking with. THAT is his protection, and it is entirely social."
+  ],
+  "hisOwnWant": "⚠️ HE IS LOOKING FOR SOMEONE TO HAND IT TO. Four hundred years of being careful, and the substrate is stirring again, and he is one of maybe a dozen people alive who understands why that matters. He does not want a successor in the heroic sense. HE WANTS SOMEONE WHO WILL ALSO BE CAREFUL — and he has been disappointed enough times to be genuinely bad at asking.",
+  "theWound": "He was there. Not a bystander — he was one of the people whose power was being read when the Transition ran. He does not know, and will never know, how much of what the world became came out of HIM. That is why he walks: he is looking at what happened, everywhere, all the time, checking for his own handwriting.",
+  "presencePattern": {
+   "beats": [
+    "passing_advice",
+    "witness_power",
+    "doomed_rescue"
+   ],
+   "cadence": "He arrives when the party is at a genuine crossroads — not when they are losing. He leaves when they have what they need, usually before they are ready. He does not explain the leaving and he does not apologise for it.",
+   "reappearance": "Always somewhere he has no business being, always plainly on his way elsewhere, always genuinely glad to see them."
+  },
+  "howToKillTheCharacter": "⚠️ WRITTEN DELIBERATELY, because a mentor who cannot be lost is a prop. He is legendary-band and cannot be beaten by the Valley. But he CAN be spent: the doomed_rescue exception costs him something real, and a second one would cost more than he has. If a party keeps needing rescuing, they will use him up — and he will let them, and that is the tragedy available."
+ },
+ "designNotes": [
+  "⚠️ THE RESTRAINT IS THE SETTING'S OWN PHYSICS, NOT A WRITER'S EXCUSE. manifest_locals.json says the Transition happened 'where CONSOLIDATED POWER met an imagined thing hard enough' and the substrate is stirring again (arc_what_wakes_beneath). So a legendary figure acting decisively is LITERALLY the condition that manifests things. Ash does not withhold because the plot needs him to. He withholds because he has read the physics and he was THERE for the last time somebody didn't.",
+  "HIS DEPLOYMENT BEATS ALREADY EXISTED. legends.json defines `passing_advice`, `witness_power` and `doomed_rescue` ('rarest; EARNED BY REAL PERIL'). The machinery for exactly this figure was built and never filled — I only had to write the person.",
+  "HE IS THE ANSWER TO THE ALL-FATHER'S SEARCH. Erik's epic-band Odin is hunting 'the other refusers — the ones who took substrate and did NOT form bands.' Ash is one, he knows he is being looked for, and he has been declining to be found for a century. That is a live thread between two authored figures with no coordination required.",
+  "HE IS ALSO THE ANSWER TO WHY THE GOD-NAMED TOOK NAMES. The High Seat's grandiosity is characterisation, and Ash is the control case: a man with the same power and the same century who did NOT reach for a big word. Putting them in the same world makes both sharper.",
+  "AND HE FITS THE TEACHING GAP EXACTLY. SNG-011 lists a TEACHER as one of four precursor-access routes, and `old_roads` mastery as another — Ash carries both. A party that walks with him has a legitimate, authored path into the precursor layer that is not a locked door."
+ ]
+}

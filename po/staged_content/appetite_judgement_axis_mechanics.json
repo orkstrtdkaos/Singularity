@@ -1,0 +1,1134 @@
+{
+ "schemaVersion": 1,
+ "id": "appetite_judgement_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 25 AND 26 of 27 — ABYSSAL and SERAPHIC, the demonic/angelic axis, 12th and FINAL antipode pair. TWO THINGS MAKE THIS PAIR STRUCTURALLY UNIQUE: (1) BOTH have a T-V craft explicitly described as 'a PRECURSOR-TIER working INNATE TO YOUR KIN' — the_hollow_that_holds and the_kept_flame — which is exactly the innatePrecursor mechanism I fixed on Loki, and these are the two ORIGIN records that already carried it. (2) NEITHER POLE IS THE GOOD ONE, and the catalog is merciless about both: the abyssal Bargain is 'EXACTLY FAIR, WHICH IS THE HORROR OF IT'; the seraphic judgment 'BINDS ANYWAY' if you are wrong.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "abyssal": [
+   {
+    "id": "appetite_sense",
+    "tier": 1,
+    "functions": [
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "range": 10,
+     "note": "SOCIAL attribute throughout"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "feel the want A PERSON IS REFUSING TO ADMIT TO THEMSELVES — the one doing the most work",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "read the appetite of A CROWD, A FACTION, A CITY — what the whole thing is actually reaching for",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a read of the want — half the depth, and it stays surface",
+     "surge": "double it; KNOWING THE WANT THEY DENY IS A WEAPON, and it is very hard to un-know"
+    },
+    "bounds": [
+     {
+      "text": "IT READS WANT, NOT INTENT — what they will DO about it is their own",
+      "class": "hard"
+     },
+     {
+      "text": "KNOWING THE WANT THEY DENY IS A WEAPON, and very hard to un-know",
+      "class": "cost"
+     },
+     {
+      "text": "A CROWD'S HUNGER IS NOT THE SUM OF ITS PEOPLE'S — it is its own thing",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Antipode to seraphic's the_measuring_eye: one reads what a person WANTS, the other what they have DONE. Appetite against ledger. TWELFTH and final pair — and the T-I senses carry the axis for the twelfth time, unbroken across every axis in the catalog."
+   },
+   {
+    "id": "the_choir_sustains",
+    "tier": 1,
+    "functions": [
+     "empower",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 24,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "draw from the depth to carry YOUR PARTY through the hardest part — 'the energy is not yours, but it is available'",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the communion sustains INDEFINITELY in deprivation — as long as the connection holds, you and yours do not run out",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "draw a little — half the relief, and the debt is small",
+     "surge": "double it; THE ENERGY IS NOT YOURS, and what is not yours is borrowed"
+    },
+    "bounds": [
+     {
+      "text": "THE ENERGY IS NOT YOURS — it comes from the communion, and the communion is a relationship",
+      "class": "hard"
+     },
+     {
+      "text": "as long as THE CONNECTION HOLDS — a severed abyssal has nothing",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Perfect antipode to seraphic's the_sustained_order ('the seraphic who holds their place in the order does not run out ALONE'). Both T-I sustains draw on a COLLECTIVE rather than the self — one from below, one from above — and both fail identically if you are cut off from it. The only axis whose sustain crafts are both about BELONGING."
+   },
+   {
+    "id": "descent",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "command",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "namingPower",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 6,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "STRIKE A BINDING BARGAIN: BOTH SIDES GET WHAT THEY TRULY WANT, AND BOTH SIDES PAY WHAT IT TRULY COSTS",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "DESCEND INTO a person, a place, or an institution and SURFACE WITH ITS TRUE ENGINE — the appetite it actually runs on",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "name it quietly — half the force, and they can pretend they did not hear",
+     "surge": "double it; WHAT YOU SURFACE WITH, YOU NOW CARRY"
+    },
+    "bounds": [
+     {
+      "text": "NAMING A WANT IS NOT GRANTING IT — some people will hate you for the naming alone",
+      "class": "hard"
+     },
+     {
+      "text": "THE BARGAIN IS EXACTLY FAIR, WHICH IS THE HORROR OF IT",
+      "class": "hard"
+     },
+     {
+      "text": "WHAT YOU SURFACE WITH, YOU NOW CARRY",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'THE BARGAIN IS EXACTLY FAIR, WHICH IS THE HORROR OF IT' — the finest single line in the catalog, and the whole tradition in six words. The abyssal pole is not evil because it cheats; it is terrifying because it DOESN'T. Compare seraphic's ascent: 'IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY.' Neither pole is the good one."
+   },
+   {
+    "id": "the_offered_price",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "foresight",
+     "bindStrength"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 8
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "bindStrength",
+      "delta": "the price, ONCE NAMED AND ACCEPTED, BINDS — it will be paid, IN THE COIN NAMED, whatever they do afterward",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "deepen",
+      "axis": "foresight",
+      "delta": "name what a course of action will ULTIMATELY cost — not the ledger price, THE REAL ONE, YEARS OUT",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "name the cost — half the binding, and it is only information",
+     "surge": "double it; YOU ARE NOW THE ONE WHO HOLDS IT, and COLLECTING IS NOT OPTIONAL"
+    },
+    "bounds": [
+     {
+      "text": "NAMING THE PRICE DOES NOT STOP THEM — it only means they knew",
+      "class": "hard"
+     },
+     {
+      "text": "YOU ARE NOW THE ONE WHO HOLDS IT — COLLECTING IS NOT OPTIONAL",
+      "class": "hard"
+     },
+     {
+      "text": "PEOPLE DO NOT BELIEVE TRUE COSTS — the Choir's oldest grief",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'Collecting is not optional' is a HARD bound that binds THE WIELDER, not the target — one of very few in the catalog. The abyssal does not get to be merciful about a price they named. Compare umbral's harbor-responsibility bounds: two traditions whose crafts obligate the caster."
+   },
+   {
+    "id": "the_appetite_strike",
+    "tier": 2,
+    "functions": [
+     "hinder",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.03,
+     "damageType": "appetite",
+     "note": "incapacitating. It strikes what a person has been PROTECTING, not their body."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "precision",
+      "delta": "NAME THE APPETITE AND HIT IT — not the body, WHAT THE BODY HAS BEEN PROTECTING; the wound is real",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: HIT WHAT THEY KEPT UNNAMED. They will know what was struck. THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT.",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glancing blow — half the wound, and it is deniable",
+     "surge": "double it; THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT"
+    },
+    "bounds": [
+     {
+      "text": "it needs a REAL, HELD appetite — a person who wants nothing is proof against it",
+      "class": "hard"
+     },
+     {
+      "text": "THEY WILL NOT BE THE SAME ON THE OTHER SIDE OF IT",
+      "class": "hard"
+     }
+    ],
+    "designNote": "The FOURTH §4e identity-attack craft (with the_revealing_burn, the_unmoored_choir, the_grief_strike) — and the most surgical: it strikes what someone kept UNNAMED. CCODE: the identity-attack family now has four authored instances across four traditions; it is a real category, not a one-off."
+   },
+   {
+    "id": "the_consumed_wound",
+    "tier": 2,
+    "functions": [
+     "break",
+     "heal",
+     "restore"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "removal",
+     "targets"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 2,
+     "targets": 1,
+     "note": "A THIRTEENTH THEORY OF MEDICINE — CONSUMPTION: 'not healed in the ordinary sense — GONE; the abyss ate it.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "removal",
+      "delta": "NOT HEALED — GONE. The abyss ate it, and what remains is THE PERSON WITHOUT WHAT THEY WERE CARRYING",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "TAKE A WOUND FROM ANOTHER INTO YOURSELF and offer it down — you carry it briefly; then you do not; then NEITHER OF YOU DOES",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "offer a little — half the removal, and you keep the rest",
+     "surge": "double it; WHAT THE ABYSS EATS DOES NOT COME BACK, including the parts that were load-bearing"
+    },
+    "bounds": [
+     {
+      "text": "IT REMOVES, IT DOES NOT MEND — what is eaten is GONE",
+      "class": "hard"
+     },
+     {
+      "text": "what the abyss eats DOES NOT COME BACK, INCLUDING THE PARTS THAT WERE LOAD-BEARING",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A THIRTEENTH THEORY OF MEDICINE, and the most disturbing: it does not heal a wound, it FEEDS the wound to something. Its HARD bound is the whole ethical problem — 'including the parts that were load-bearing.' Compare unmaker's the_clean_removal (heals by removing what should not be there); the abyssal version removes what the PERSON no longer wants to carry, which is not the same test at all."
+   },
+   {
+    "id": "the_dread_mantle",
+    "tier": 2,
+    "functions": [
+     "hinder",
+     "shield",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "deterrence",
+     "autonomy"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "soak": 0,
+     "soakRank": 0,
+     "evasion": 3,
+     "evasionRank": 1,
+     "duration": 8,
+     "note": "A SEVENTEENTH DEFENSIVE LOGIC — DETERRED: soak 0. It does not stop harm; it makes attackers CHOOSE A DIFFERENT TARGET. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family with DISCOURAGED and NEVER-FOUND."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "deterrence",
+      "delta": "the dread is a GENUINE DETERRENT — not fear you project but WEIGHT OTHERS FEEL BEFORE THEY DECIDE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "SPECIAL: THE MANTLE ARRIVES BEFORE YOU DO — those who would act against you are navigating something they do not want to",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "let a little show — half the deterrence, and you pass for ordinary",
+     "surge": "double it; a mantle that arrives before you do means YOU ARE NEVER ARRIVING SOMEWHERE FRESH"
+    },
+    "bounds": [
+     {
+      "text": "IT DETERS THOSE WHO CHOOSE — a beast, a machine, or a fanatic is undeterred",
+      "class": "hard"
+     },
+     {
+      "text": "a mantle that arrives before you means YOU ARE NEVER ARRIVING SOMEWHERE FRESH",
+      "class": "cost"
+     }
+    ],
+    "designNote": "SEVENTEENTH defensive logic — DETERRED, and it confirms Erik's grouping instinct: it belongs cleanly in the BEFORE-THE-ROLL family (the attack never happens) alongside DISCOURAGED, NEVER-FOUND, PRE-EMPTED and FORESENSED. Five logics, one mechanism."
+   },
+   {
+    "id": "the_descent_path",
+    "tier": 2,
+    "functions": [
+     "open",
+     "reveal",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "access",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 10,
+     "push": 0,
+     "magnitude": 4,
+     "duration": 4,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "access",
+      "delta": "TRAVEL THROUGH THE BELOW — beneath sight, beneath light, ALONG THE LAYER OTHERS DO NOT KNOW HOW TO REACH",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "TAKE OTHERS DOWN and BRING THEM BACK UP — the route is yours to walk and to share",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "find the way down — half the depth, and you can turn back easily",
+     "surge": "double it; the below is a place, and places have inhabitants"
+    },
+    "bounds": [
+     {
+      "text": "it goes DOWN — there is no version of this that goes up",
+      "class": "hard"
+     },
+     {
+      "text": "the below is A PLACE, and places have inhabitants",
+      "class": "cost"
+     }
+    ],
+    "designNote": "FIFTEENTH terrain-gated travel craft, and the exact antipode of seraphic's the_ascent_path ('ascend past what should be a physical barrier'). One tradition's road only goes DOWN, the other's only goes UP. The catalog's most literal expression of an axis."
+   },
+   {
+    "id": "the_called_form",
+    "tier": 3,
+    "functions": [
+     "command",
+     "reveal",
+     "summon",
+     "transform"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "summonPower",
+     "control"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 4,
+     "variance": 4,
+     "damageType": "appetite"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "summonPower",
+      "delta": "CALL A FORM FROM THE DEEP THAT SERVES A PURPOSE — an appetite made briefly real, A FEAR GIVEN BODY",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "control",
+      "delta": "what you call up HOLDS, ACTS, and is YOURS TO DIRECT until you release it. 'IT IS NOT DOCILE. IT IS DIRECTED.'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "call something small — half the power, and it goes back easily",
+     "surge": "double it; IT IS NOT DOCILE. IT IS DIRECTED."
+    },
+    "bounds": [
+     {
+      "text": "what you call is AN APPETITE GIVEN FORM — it wants what it is",
+      "class": "hard"
+     },
+     {
+      "text": "IT IS NOT DOCILE. IT IS DIRECTED. — the difference matters when you stop directing",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_deep_covenant",
+    "tier": 4,
+    "functions": [
+     "bind",
+     "command"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "bindStrength",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 720,
+     "scope": 2,
+     "note": "T-IV, incapacitating"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "set a covenant on A HOUSEHOLD, A COMPANY, OR AN OFFICE rather than a person — THOSE WHO TAKE THE ROLE TAKE THE PACT",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a light covenant — half the hold, and it can be spoken out of",
+     "surge": "double it; IT CATCHES ONLY WHAT ALREADY WANTED THE BARGAIN"
+    },
+    "bounds": [
+     {
+      "text": "IT CANNOT COMPEL THE TRULY UNWILLING",
+      "class": "hard"
+     },
+     {
+      "text": "IT FRAYS WHEN SPOKEN OF openly",
+      "class": "soft"
+     },
+     {
+      "text": "it catches only WHAT ALREADY WANTED THE BARGAIN",
+      "class": "hard"
+     }
+    ],
+    "designNote": "ELEVENTH tradition refusing coercion mechanically, and the most surprising place to find it: the DEMONIC pole's binding craft 'CANNOT COMPEL THE TRULY UNWILLING' and 'catches only what already wanted the bargain.' Even the abyss requires consent. Eleven traditions, none referencing each other."
+   },
+   {
+    "id": "the_honest_bargain",
+    "tier": 4,
+    "functions": [
+     "bind",
+     "command"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "bindStrength",
+     "variance"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 720,
+     "variance": 5,
+     "note": "T-IV. THE WILD-CURRENT CRAFT seeded innately to abyssal origins (origins.json wildCurrent). 'The terms exact, THE FULFILLING UNCONTROLLABLE.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: a bargain may be struck WITH WHAT IS NOT A PERSON — a place, a current, A THING THAT SIMPLY PERSISTS",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small bargain — half the binding, and the fulfilling stays near what you meant",
+     "surge": "double it; THE TERMS ARE EXACT AND THE FULFILLING IS UNCONTROLLABLE"
+    },
+    "bounds": [
+     {
+      "text": "IT NEEDS A GENUINE BARGAIN TO BIND",
+      "class": "hard"
+     },
+     {
+      "text": "IT IS FAIR TO THE LETTER — and at this scale that is COLD",
+      "class": "hard"
+     }
+    ],
+    "designNote": "The abyssal's second T-IV, and the one seeded innately to the kin (origins.json `wildCurrent: [the_honest_bargain]`). Note the variance 5: 'the terms exact, THE FULFILLING UNCONTROLLABLE' is precisely the churnfolk variance mechanic, appearing in a different tradition — the wild current shows up wherever it is drawn on."
+   },
+   {
+    "id": "the_drowning_deep",
+    "tier": 5,
+    "functions": [
+     "hinder",
+     "reveal"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "certaintyBreach",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 4,
+     "targets": 1,
+     "damageType": "appetite",
+     "note": "T-V capstone, incapacitating"
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: SHOW ONE PERSON THE FULL DEPTH BENEATH THEIR FOOTING — what they were most certain of STOPS BEARING WEIGHT. The capstone is a KIND (unmaking certainty itself) at near-total cost.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a partial drowning is a doubt, and doubts are survivable.",
+     "surge": "REFUSED — it already costs nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "IT COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "IT FAILS ENTIRELY AGAINST THOSE WITH NOTHING BENEATH THEM",
+      "class": "hard"
+     }
+    ],
+    "designNote": "TWENTY-SECOND capstone. And its HARD bound is quietly devastating: it fails against 'those with NOTHING BENEATH THEM' — a person with no certainty left cannot be shown the depth. The abyssal capstone is powerless against the already-broken."
+   },
+   {
+    "id": "the_hollow_that_holds",
+    "tier": 5,
+    "functions": [
+     "open",
+     "sustain"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "substrateChannel",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 8,
+     "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — one of exactly two in the catalog."
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: CHANNEL THE FABRICATED SUBSTRATE through the KEPT ABYSSAL HOLLOW — a precursor-tier working INNATE TO YOUR KIN. The capstone is a KIND (direct substrate channelling) with ONGOING UPKEEP.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a hollow half-opened is a hollow that swallows what it should have held.",
+     "surge": "REFUSED — it already carries ongoing upkeep the whole time it is open."
+    },
+    "bounds": [
+     {
+      "text": "IT CARRIES ONGOING UPKEEP WHILE OPEN",
+      "class": "hard"
+     },
+     {
+      "text": "IT CAN SWALLOW what it was meant to hold",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ TWENTY-THIRD capstone, and one of TWO in the catalog described as 'a PRECURSOR-TIER working INNATE TO YOUR KIN' (with seraphic's the_kept_flame). These are exactly the two origins that carry `innatePrecursor` in origins.json — abyssal seeds latticespeak, seraphic seeds address_sense. The precursor layer is not only a gated external system; TWO PEOPLES HAVE A PIECE OF IT NATIVELY, and their T-V craft IS that piece. That is a much richer precursor story than 'a locked door', and it was already written."
+   }
+  ],
+  "seraphic": [
+   {
+    "id": "the_measuring_eye",
+    "tier": 1,
+    "functions": [
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "range"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "range": 20,
+     "note": "MENTAL attribute throughout — judgement is mental where appetite is social"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "see THE SPECIFICS: what was done, TO WHOM, and WHETHER IT WAS EVER ANSWERED FOR",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "range",
+      "delta": "WEIGH ANYONE, AT ANY DISTANCE, WITHOUT THEIR CONSENT OR KNOWLEDGE",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glance at the weight — half the detail, and you can look away",
+     "surge": "double it; NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU"
+    },
+    "bounds": [
+     {
+      "text": "IT SEES WEIGHT, NOT STORY — a heavy person may be heavy for good reasons",
+      "class": "hard"
+     },
+     {
+      "text": "SEEING THE LEDGER TEMPTS YOU TO COLLECT ON IT",
+      "class": "cost"
+     },
+     {
+      "text": "NOBODY SURVIVES BEING WEIGHED FOREVER — INCLUDING YOU",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'It sees WEIGHT, NOT STORY' is the seraphic tradition's own indictment of itself, in its T-I craft. And r3 weighs people 'WITHOUT THEIR CONSENT OR KNOWLEDGE' — the angelic pole is the one authored with the consent problem, while the demonic pole's covenant 'cannot compel the truly unwilling.' The catalog inverts the expectation deliberately."
+   },
+   {
+    "id": "the_sustained_order",
+    "tier": 1,
+    "functions": [
+     "empower",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 24,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "sustain your party THROUGH THE HIERARCHY'S RESOURCES — not comfort but GENUINE SUSTAINING AUTHORITY",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the seraphic who REMAINS PART OF THE ORDER remains part of WHAT THE ORDER CAN DO",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "draw on your standing — half the relief, and it asks nothing of the order",
+     "surge": "double it; what the order gives, THE ORDER MAY ASK BACK"
+    },
+    "bounds": [
+     {
+      "text": "YOU MUST HOLD YOUR PLACE IN THE ORDER — a seraphic cast out has nothing",
+      "class": "hard"
+     },
+     {
+      "text": "what the order gives, THE ORDER MAY ASK BACK",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Exact antipode to abyssal's the_choir_sustains, and structurally identical: both draw on a COLLECTIVE, both fail completely if you are severed from it. The only axis where both poles' T-I sustain crafts are about BELONGING — one to a communion below, one to a hierarchy above, and neither works alone."
+   },
+   {
+    "id": "ascent",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "command",
+     "restore",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "judgement",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 8,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "GRANT A REAL ABSOLUTION — LIFT A WEIGHT a person has carried, genuinely, and THEY WILL FEEL IT LEAVE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: PRONOUNCE A JUDGMENT THAT BINDS — it is true, everyone present knows it is true, AND IT DOES NOT COME UNDONE",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "weigh it quietly — half the force, and nothing is pronounced",
+     "surge": "double it; IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY"
+    },
+    "bounds": [
+     {
+      "text": "IT MEASURES THE DEED, NOT THE PERSON",
+      "class": "hard"
+     },
+     {
+      "text": "MERCY GIVEN IS MERCY TAKEN ON — the weight does not vanish, IT MOVES TO YOU",
+      "class": "hard"
+     },
+     {
+      "text": "IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ THREE HARD BOUNDS, and the third is the darkest line in the catalog: 'IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY.' The angelic pole's central craft does not check your correctness — and its second bound ('MERCY GIVEN IS MERCY TAKEN ON') means absolution TRANSFERS the weight to the absolver. This is the pair's thesis: the abyssal bargain is horrifying because it is FAIR; the seraphic judgment is horrifying because it BINDS whether or not it is RIGHT."
+   },
+   {
+    "id": "the_judged_strike",
+    "tier": 2,
+    "functions": [
+     "strike",
+     "reveal"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "revelation"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.03,
+     "damageType": "judgement",
+     "note": "lethal rung"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "revelation",
+      "delta": "a judged blow HARMS AND REVEALS — what they have done is NAMED IN THE MOMENT OF IMPACT; all present understand",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: strike with THE FULL AUTHORITY OF THE ORDER — the blow is both PHYSICAL AND PRONOUNCEMENT",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a measured blow — half the force, and nothing is announced",
+     "surge": "double it; a blow that is also a pronouncement is a pronouncement you cannot take back"
+    },
+    "bounds": [
+     {
+      "text": "THE BLOW LANDS HARDER BECAUSE IT IS WARRANTED — an unwarranted strike is just a strike",
+      "class": "hard"
+     },
+     {
+      "text": "a blow that is also a pronouncement is one YOU CANNOT TAKE BACK",
+      "class": "cost"
+     }
+    ],
+    "designNote": "The only damage craft in the catalog whose POWER DEPENDS ON BEING RIGHT: 'the blow lands harder because it is WARRANTED.' CCODE: this is a conditional damage bonus gated on a moral fact, which the engine has no concept of — but it is also exactly what `spectralAlignment` is for. Worth a look."
+   },
+   {
+    "id": "the_raised_form",
+    "tier": 2,
+    "functions": [
+     "command",
+     "make",
+     "summon"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "order",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 168,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "order",
+      "delta": "raise a form that ORGANIZES WHAT SURROUNDS IT — the made thing SETS THE TONE for the space it occupies",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: SUMMON THE FORM A THING SHOULD HAVE and INSTANTIATE IT — the building that should stand, the arrangement that should hold",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "raise something plain — half the influence, and it organizes only itself",
+     "surge": "double it; a form that sets the tone SETS IT FOR EVERYONE"
+    },
+    "bounds": [
+     {
+      "text": "it instantiates what a thing SHOULD be — which requires being RIGHT about that",
+      "class": "hard"
+     },
+     {
+      "text": "a form that sets the tone SETS IT FOR EVERYONE, including those who did not choose it",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Direct kin to figurist's formcraft and lattice's truename_order — three traditions that impose a proper form. And all three carry the same HARD bound in different words: you have to be RIGHT about what it should be."
+   },
+   {
+    "id": "the_ascent_path",
+    "tier": 2,
+    "functions": [
+     "move",
+     "open",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "range",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 15,
+     "push": 0,
+     "magnitude": 4,
+     "duration": 4,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "SHOW THE ASCENT PATH AND OTHERS CAN FOLLOW — the route up that was not there is there now FOR THOSE YOU SHOW",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "range",
+      "delta": "travel the ascent AS A ROAD — any height, any approach — and CARRY YOUR PARTY to wherever the way up leads",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "climb what shouldn't be climbable — half the height, and you can come down",
+     "surge": "double it; the way up leads where the way up leads"
+    },
+    "bounds": [
+     {
+      "text": "it goes UP — there is no version of this that goes down",
+      "class": "hard"
+     },
+     {
+      "text": "THE WAY UP LEADS WHERE THE WAY UP LEADS — you do not choose the destination, only the climb",
+      "class": "hard"
+     }
+    ],
+    "designNote": "SIXTEENTH and final terrain-gated travel craft, and the exact antipode of the_descent_path: one road only goes DOWN, the other only goes UP. Across sixteen travel crafts and twelve axes, EVERY SINGLE ONE is gated on a medium its antipode cannot use. Not one exception in the whole catalog."
+   },
+   {
+    "id": "the_shielding_word",
+    "tier": 3,
+    "functions": [
+     "resist",
+     "shield",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "ward",
+     "targets",
+     "autonomy"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "soak": 5,
+     "soakRank": 2,
+     "duration": 8,
+     "targets": 1,
+     "note": "A guard whose soak IS YOUR CONVICTION — 'you must ACTUALLY BELIEVE IT. A hollow word wards nothing.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "the ward holds over A PLACE AND A PEOPLE — FOR AS LONG AS YOU KEEP SPEAKING FOR THEM",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "SPECIAL: a ward that HOLDS AFTER YOU HAVE GONE — a word spoken so wholly it KEEPS STANDING ON ITS OWN",
+      "from": "r3 grants — a TENTH autonomy-increment craft"
+     }
+    ],
+    "intensity": {
+     "conserve": "speak one ward — half the protection, and it costs you nothing to mean",
+     "surge": "double it; YOU MUST KEEP MEANING IT, WHICH IS THE HARDER HALF"
+    },
+    "bounds": [
+     {
+      "text": "YOU MUST ACTUALLY BELIEVE IT — A HOLLOW WORD WARDS NOTHING",
+      "class": "hard"
+     },
+     {
+      "text": "you must KEEP SPEAKING, and KEEP MEANING IT",
+      "class": "hard"
+     },
+     {
+      "text": "IT STANDS ON WHAT YOU MEANT WHEN YOU SAID IT — IF YOU CHANGE, IT DOES NOT",
+      "class": "cost"
+     }
+    ],
+    "designNote": "AN EIGHTEENTH DEFENSIVE LOGIC — CONVICTED: a guard whose strength is literally whether you mean it. And its r3 cost is remarkable: the standing ward holds to WHAT YOU MEANT WHEN YOU SAID IT, even after you have changed your mind. An autonomous ward that outlives its own maker's belief."
+   },
+   {
+    "id": "the_unfaltering_light",
+    "tier": 4,
+    "functions": [
+     "empower",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "endurance",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "soak": 6,
+     "soakRank": 3,
+     "duration": 8,
+     "targets": 4,
+     "note": "T-IV — the catalog's purest endurance guard"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "the ward extends FROM A PERSON TO A COMPANY, and from a stand TO A MARCH — IT MOVES WITH THOSE IT COVERS",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold a smaller light — half the endurance, and it drains you less",
+     "surge": "double it; IT STILL CANNOT STRIKE, AT ANY MASTERY. IT STILL BURNS YOU THE WHOLE WHILE."
+    },
+    "bounds": [
+     {
+      "text": "IT CANNOT ATTACK, ONLY ENDURE — AT ANY MASTERY",
+      "class": "hard"
+     },
+     {
+      "text": "IT DRAINS YOU THE WHOLE WHILE",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'It still cannot strike, AT ANY MASTERY' — the THIRD craft in the catalog to pre-empt the mastery question in its own text (with wither's 'at every rank' and skydancer's 'no hover at any mastery'). Three independent authors, three explicit refusals of mastery-erosion. The strongest evidence yet that HARD-classing recovers real intent."
+   },
+   {
+    "id": "the_kept_flame",
+    "tier": 5,
+    "functions": [
+     "empower",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "substrateChannel",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 8,
+     "damageType": "light",
+     "note": "T-V. ⚠️ 'A PRECURSOR-TIER WORKING INNATE TO YOUR KIN' — the second of exactly two in the catalog."
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: CHANNEL THE FABRICATED SUBSTRATE DIRECTLY as sustained radiant power — a precursor-tier working INNATE TO YOUR KIN. The capstone is a KIND (direct substrate channelling) with ONGOING UPKEEP the whole time it burns.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-kept flame goes out, and what it was holding goes with it.",
+     "surge": "REFUSED — it already carries upkeep the whole time it burns."
+    },
+    "bounds": [
+     {
+      "text": "IT CARRIES ONGOING UPKEEP THE WHOLE TIME IT BURNS",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ TWENTY-FOURTH and FINAL antipode capstone — and the twin of the_hollow_that_holds. Both are 'a PRECURSOR-TIER working INNATE TO YOUR KIN', and abyssal/seraphic are exactly the two origins carrying `innatePrecursor` in origins.json. THE AXIS'S SHAPE IS PERFECT: the abyssal channels the substrate through a HOLLOW that can swallow; the seraphic channels it as a FLAME that must be fed. Down and up, emptiness and burning, the same precursor inheritance held two opposite ways."
+   }
+  ]
+ },
+ "passFindings": [
+  "⚠️ THE PRECURSOR STORY IS RICHER THAN 'A LOCKED DOOR', AND IT WAS ALREADY WRITTEN. Both poles' T-V crafts are described as 'a PRECURSOR-TIER working INNATE TO YOUR KIN' — the_hollow_that_holds and the_kept_flame — and abyssal/seraphic are exactly the two origins carrying `innatePrecursor` in origins.json (latticespeak and address_sense). TWO PEOPLES HAVE A PIECE OF THE PRECURSOR LAYER NATIVELY, and their capstone IS that piece. SNG-261 §B has been treating precursor as a gated external system; the catalog also treats it as an INHERITANCE. Worth Erik and CCode knowing before the §B wiring is called finished.",
+  "NEITHER POLE IS THE GOOD ONE, and the catalog is merciless about both in a single matched pair of bounds: descent — 'THE BARGAIN IS EXACTLY FAIR, WHICH IS THE HORROR OF IT'; ascent — 'IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY.' The demonic pole is terrifying because it does NOT cheat. The angelic pole is terrifying because it does not CHECK. That is the finest antipode framing in the catalog.",
+  "THE CATALOG INVERTS THE EXPECTATION ON CONSENT, DELIBERATELY: the DEMONIC pole's T-IV binding 'CANNOT COMPEL THE TRULY UNWILLING' and 'catches only what already wanted the bargain' — while the ANGELIC pole's T-I craft weighs people 'WITHOUT THEIR CONSENT OR KNOWLEDGE.' The abyss requires consent; the order does not. That is authored, not accidental — and it makes abyssal the ELEVENTH tradition to refuse coercion mechanically.",
+  "EVERY SINGLE TRAVEL CRAFT IN THE CATALOG IS TERRAIN-GATED ON A MEDIUM ITS ANTIPODE CANNOT USE — sixteen crafts, twelve axes, NOT ONE EXCEPTION. This pair is the most literal: the_descent_path 'goes DOWN — there is no version of this that goes up'; the_ascent_path 'goes UP — there is no version that goes down'.",
+  "BOTH POLES' T-I SUSTAIN CRAFTS ARE ABOUT BELONGING, and both fail identically when severed: the_choir_sustains ('the energy is NOT YOURS') and the_sustained_order ('a seraphic cast out has nothing'). The only axis where the sustain crafts draw on a COLLECTIVE rather than the self — one below, one above.",
+  "A THIRD MASTERY PRE-EMPTION IN THE TEXT: the_unfaltering_light's 'IT STILL CANNOT STRIKE, AT ANY MASTERY' joins wither's 'at every rank' and skydancer's 'no hover at any mastery'. Three independent authors explicitly refusing mastery-erosion in the prose — the strongest possible evidence that HARD-classing recovers real intent rather than imposing mine.",
+  "A FOURTH §4e IDENTITY-ATTACK CRAFT: the_appetite_strike hits 'WHAT THEY KEPT UNNAMED' and 'they will not be the same on the other side of it'. With the_revealing_burn, the_unmoored_choir and the_grief_strike, the identity-attack family now has FOUR authored instances across FOUR traditions. CCODE: it is a real category, not a one-off.",
+  "TWO MORE DEFENSIVE LOGICS — EIGHTEEN — and both confirm Erik's grouping instinct: DETERRED (the_dread_mantle makes attackers choose another target — BEFORE-THE-ROLL family) and CONVICTED (the_shielding_word, whose soak IS whether you actually believe it — AFTER-THE-ROLL family, with an autonomy variant whose standing ward holds to 'what you meant when you said it, even if you change'). Eighteen logics, still only THREE mechanisms.",
+  "A THIRTEENTH THEORY OF MEDICINE, and the most disturbing: the_consumed_wound does not heal a wound, it FEEDS it to something — 'not healed in the ordinary sense, GONE' — and its HARD bound is the whole ethical problem: 'what the abyss eats does not come back, INCLUDING THE PARTS THAT WERE LOAD-BEARING.'"
+ ]
+}

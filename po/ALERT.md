@@ -1,6 +1,40 @@
 # PO ALERT
 
-> ## [CCODE-87 - THE GATE NOW UNDERSTANDS "ONLY FOR THIS KIND" - CCode, 2026-08-02] the wall from last commit, taken down
+> ## [SNG-265 PILOT — THE HIGH SEAT: a band, their made Olympus, four of the god-named] (Aevi, 2026-08-02)
+> Erik: *"they may have created an Olympus and a band of sorts — be creative."* Authored to
+> `po/staged_content/the_named_pilot_high_seat.json`.
+> **THE KEY WAS ALREADY IN THE LORE, and it meant nothing had to be invented.** `manifest_locals.json`:
+> *"where consolidated power met an imagined thing hard enough, the imagined thing **MANIFESTED**."* So an
+> Olympus built by god-named is **not a metaphor and not a fortress — it is a DOMAIN RUNNING ON THEIR FICTION.**
+> Nine people imagined a mountain of gods hard enough, at a moment when they had enough power consolidated to be
+> **read**, and the substrate enacted it.
+> **THE PLACE:** terraces that go up **further than the mountain does** · light that never varies (it was
+> imagined as a place of clear judgement, so **it has no night**, and they find that harder every century) ·
+> oaths sworn there are **structurally** load-bearing, so a broken one **cracks the terraces** — and there are
+> cracks · and **it is decaying exactly as fast as they are.** Four of nine gone, four wings ruined. That's the
+> manifestation mechanic **running in reverse** — the fiction sustaining the place is *theirs*, and there are
+> fewer of them believing it. **A party is meeting these people late.**
+> **EVERY NAME WAS TAKEN FOR A REASON THAT IS NOT ABOUT POWER** — which is the whole difference between "a
+> pantheon" and "people who named themselves":
+> · **Thunderer** took *Zeus* **because Zeus ARBITRATED** — he was a water-authority arbitrator who spent
+>   nineteen years deciding which town got the river. **He picked the job title, not the thunderbolt**, and has
+>   stopped explaining it. Four hundred years, **never once overruled**, and he knows what that has done to his
+>   judgement. *That* is what a party can give him.
+> · **The Grey Lady** took *Athena* **as a joke** that curdled — twenty-nine, world ending, it got a laugh. She's
+>   the only one who still goes **down** the mountain, which is why she's still sane. She's done the arithmetic
+>   on the decay and **told nobody.**
+> · **THE SMITH is the one who chose badly, and he's the pilot's argument.** He took *Hephaestus* because
+>   Hephaestus was **the one who made things and was not loved** — he thought that was honest and a little
+>   brave. **It was neither. It was a prediction, and it came true.** He's heroic-band, trivially beatable, and
+>   **the best scene in the whole set is being kind to him.**
+> · **The All-Father** (*Odin*, **EPIC**) took a name from a **different tradition on purpose**, and the band has
+>   never forgiven the implication. He's hunting **the other refusers — the ones who never formed bands.**
+> **THE BANDS ARE LOAD-BEARING:** two HEROIC (meetable, challengeable, fallible), one EPIC (a fixed fact you
+> negotiate with), and the LEGENDARY one deliberately absent — *the High Seat's founding was partly a response
+> to them.* **That's the powerBand ladder with faces on it, and heroic-band god-named ARE the arena-fame idea
+> made concrete.**
+> Open threads left deliberately: **the Descent's band is a MARKET, not a court** · the four who are gone (one
+> isn't dead) · **what is up the terraces past where the mountain ends** — the Grey Lady has been.> ## [CCODE-87 - THE GATE NOW UNDERSTANDS "ONLY FOR THIS KIND" - CCode, 2026-08-02] the wall from last commit, taken down
 > **The blocker I reported an hour ago is gone, and the born-whole requirement Erik asked for is LIVE.**
 > Last commit I had to revert `damageType` out of the item contract because the gate had no notion of a field
 > that applies to only ONE KIND of item — so a whetstone and a folded letter were suddenly "missing a weapon

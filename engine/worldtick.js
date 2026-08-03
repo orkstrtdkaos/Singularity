@@ -508,6 +508,52 @@ const EPIC_PUSH_CAP = 6;
  *  developments are already per-player-generated, so folding this into the local arcStageNow keeps it
  *  consistent and works offline — no cross-player double-count). A `stopped` epic pushes nothing this cycle;
  *  a `wounded` one pushes at half. Returns the applied push or null. */
+/** CCODE-111 — A LEGEND HAS LIMITED ATTENTION AND MORE THAN ONE THING THEY CARE ABOUT.
+ *
+ *  Erik: "legends and epics also have limited attention — if they get pulled from one arc to help another,
+ *  that gives the opposite side an advantage on the one they left. They should care about more than one of
+ *  course, but every time is a decision about where they spend their attention, and they have primary
+ *  driving wants and needs."
+ *
+ *  A fixed `arcAffinity` is a POSITION, not a person: it made every legend push the same arc forever, which
+ *  is why the census was a standoff that only a player could break. Attention turns each pass into a CHOICE,
+ *  and the choice has a cost — the arc you left is a seat you vacated, and the other side gains it for free.
+ *
+ *  Reads `arcAffinities: [{arcId, dir, weight}]` when authored, and falls back to the single `arcAffinity`,
+ *  so existing content behaves exactly as before: one care, all attention, every pass. */
+export function affinitiesOf(figure) {
+  const many = Array.isArray(figure?.arcAffinities) ? figure.arcAffinities : null;
+  const list = (many && many.length ? many : [figure?.arcAffinity]).filter(a => a?.arcId && a?.dir);
+  return list;
+}
+
+/** CCODE-111 — WHERE THIS FIGURE SPENDS ITSELF THIS PASS.
+ *
+ *  Urgency per care is the CCODE-106 term: how far that arc has run AGAINST them. Their PRIMARY want breaks
+ *  ties — a figure whose want names an arc leans there when nothing is on fire, which is what "primary
+ *  driving wants" means when nothing is urgent.
+ *
+ *  Returns the cares they will act on, each with the share of attention it gets. Everything else is a seat
+ *  they left, and `unattended` names those so the caller can report the cost of the choice rather than
+ *  leaving it invisible. */
+export function spendAttention(figure, ws, { budget = 1, perPoint = 0.12, wantArcId = null } = {}) {
+  const cares = affinitiesOf(figure);
+  if (!cares.length) return { spent: [], unattended: [] };
+  const net = ws?.arcNetPush || {};
+  const scored = cares.map(c => {
+    const standing = Number(net[c.arcId]) || 0;
+    const against = -Math.sign(c.dir) * standing;            // positive = it is running away from them
+    const pull = against * perPoint
+      + (c.arcId === wantArcId ? 0.5 : 0)                    // their driving want, when nothing is urgent
+      + (Number(c.weight) || 1) * 0.05;                      // how much they cared to begin with
+    return { care: c, pull };
+  }).sort((a, b) => b.pull - a.pull);
+  // Attention is FINITE and INDIVISIBLE per care: a legend gives a fight their whole weight or leaves it.
+  // Splitting it would let one figure hold every arc at once, which is the thing having attention rules out.
+  const take = Math.max(1, Math.floor(budget));
+  return { spent: scored.slice(0, take), unattended: scored.slice(take).map(s => s.care.arcId) };
+}
+
 export function applyEpicArcPush(ws, figure, worldDay, urgency = 1) {
   const aff = figure?.arcAffinity;
   if (!aff?.arcId || !aff.dir) return null;
@@ -758,14 +804,25 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     const maxMult = Number.isFinite(cfg.maxMult) ? cfg.maxMult : 2.0;       // nobody pushes infinitely hard
     const minMult = Number.isFinite(cfg.minMult) ? cfg.minMult : 0.4;       // and a winning side never fully stops
     const netBefore = ws.arcNetPush || {};
+    // CCODE-111: each figure now DECIDES where to spend itself. A care they leave gets no push from them at
+    // all this pass — which is the vacancy Erik named: the other side gains that seat for free, without
+    // winning anything. `attentionBudget` is a content dial; at 1 (the default) a legend fights one front.
+    const budget = Number.isFinite(cfg.attentionBudget) ? cfg.attentionBudget : 1;
+    const vacated = {};
     for (const f of living) {
-      const arcId = f.arcAffinity.arcId, dir = f.arcAffinity.dir;
-      const standing = Number(netBefore[arcId]) || 0;
-      // `against` is positive when the arc has moved the way this figure does NOT want it to.
-      const against = -Math.sign(dir) * standing;
-      const urgency = Math.max(minMult, Math.min(maxMult, 1 + against * perPoint));
-      applyEpicArcPush(ws, f, currentWorldDay, urgency);
+      const wantArc = f.wantArcId || f.legend?.wantArcId || null;
+      const { spent, unattended } = spendAttention(f, { arcNetPush: netBefore },
+        { budget, perPoint, wantArcId: wantArc });
+      for (const arcId of unattended) vacated[arcId] = (vacated[arcId] || 0) + 1;
+      for (const s of spent) {
+        const against = -Math.sign(s.care.dir) * (Number(netBefore[s.care.arcId]) || 0);
+        const urgency = Math.max(minMult, Math.min(maxMult, 1 + against * perPoint));
+        applyEpicArcPush(ws, { ...f, arcAffinity: s.care }, currentWorldDay, urgency);
+      }
     }
+    // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block
+    // (and any future readout) should be able to say WHY an arc moved when nobody won anything.
+    ws.arcVacancies = vacated;
     // The NET position per arc, so a reader (and the GM block) sees the settled truth rather than one side.
     const net = {};
     for (const rec of Object.values(ws.epicArcPushes || {})) {

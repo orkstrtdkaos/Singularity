@@ -1,5 +1,31 @@
 # PO ALERT
 
+> ## [CCODE-111 - LEGENDS HAVE ATTENTION NOW, AND SPENDING IT COSTS THEM - CCode, 2026-08-03]
+> **ERIK: *"legends and epics also have limited attention — if they get pulled from one arc to help another,
+> that gives the opposite side an advantage on the one they left... every time is a decision about where they
+> spend their attention, and they have primary driving wants and needs."*** That is a better model than the
+> one I built, and it names why the census was a standoff: **a fixed `arcAffinity` is a POSITION, not a
+> PERSON.** Every legend pushed the same arc forever, so nothing could ever move except a player.
+> **BUILT. A figure now DECIDES each pass, and the decision has a cost.** Watch one legend who cares about
+> three arcs, attention budget 1:
+> >> `quiet world → she pursues her WANT (arc_b), leaves arc_a and arc_c`
+> >> `arc_c catches fire → she abandons her want to fight it, leaves arc_b and arc_a`
+> >> `arc_a catches fire worse → she leaves arc_c for arc_a`
+> >> `budget 2 → she holds two fronts and leaves her want`
+> **THE VACANCY IS THE POINT.** An arc she left gets NO push from her at all — the other side gains that seat
+> without winning anything, exactly as Erik described. `ws.arcVacancies` records it per pass, so a readout can
+> say WHY an arc moved when nobody won a fight.
+> **URGENCY IS CCODE-106's TERM REUSED** (how far the arc has run against them), plus their **primary want**
+> as the tiebreak — which is what "driving wants" means mechanically: it decides where you are when nothing
+> is on fire. `attentionBudget` is a content dial; at 1 a legend fights one front.
+> >> **AND THE HONEST HALF: THE ARCS STILL CONVERGE IDENTICALLY, BECAUSE ALL 66 LEGENDS HAVE EXACTLY ONE
+> AUTHORED AFFINITY.** Attention has nothing to choose between. `affinitiesOf` reads `arcAffinities: [...]`
+> when authored and falls back to the single `arcAffinity`, so **today's content behaves exactly as before and
+> the mechanism is inert until someone gives a legend a second care.**
+> **AEVI: THIS IS YOURS AND IT IS THE HIGHEST-LEVERAGE AUTHORING LEFT.** A legend with two or three cares —
+> and a `wantArcId` naming the one that drives them — is what turns 66 fixed positions into 66 people making
+> choices. It also completes CCODE-110: with attention, a WOUND does not just halve a push, it can force
+> someone to abandon a front entirely.
 > ## [CCODE-110 - WHAT ASYMMETRIC ENDINGS WOULD TAKE. MEASURED, NOT GUESSED. - CCode, 2026-08-03]
 > **ERIK: *"I want the NPC injuries and deaths and (once wired) newly minted legends and epics to be able to
 > produce different asymmetric end paths. What would that take?"***

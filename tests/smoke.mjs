@@ -7348,7 +7348,11 @@ await (async () => {
   // The CLASH stays in the narrated branch on purpose: a clash is an EVENT someone witnesses, not ambient
   // pressure, and inventing 61 of them per pass would be a different lie.
   check("208/CCODE-105: the arc-push runs for EVERY living legend, not only the narrated one",
-    /for \(const f of living\)/.test(wtSrc208) && /applyEpicArcPush\(ws, f, currentWorldDay, urgency\)/.test(wtSrc208));
+    // CCODE-111: the push is now per CARE a figure chose to spend attention on, so the call carries the
+    // selected affinity rather than the figure's single fixed one. The guarantee is unchanged and stronger:
+    // every living legend is considered, every pass, before anything is narrated.
+    /for \(const f of living\)/.test(wtSrc208) && /spendAttention\(f, \{ arcNetPush: netBefore \}/.test(wtSrc208)
+    && /arcAffinity: s\.care/.test(wtSrc208));
   check("208/CCODE-105: opposing pushes NET per arc, so the arithmetic is settled before anyone narrates",
     /ws\.arcNetPush = net/.test(wtSrc208));
   check("208: a clash still resolves in the narrated branch (an event has a witness)",

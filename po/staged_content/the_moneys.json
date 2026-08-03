@@ -1,0 +1,85 @@
+{
+ "schemaVersion": 1,
+ "id": "the_moneys",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik's correction: there ARE non-transitioned civilizations, so gold/paper/crystal money exists. The common thread is that MONEY REPRESENTS VALUE; what differs is who honours it.",
+ "eriksRule": {
+  "quote": "The Crossing takes all kinds — the foothills take several kinds — the Reaches only take their kind.",
+  "whyItIsBetterThanTheMark": "My round-1 answer was ONE currency (the Mark) whose value depended on where your reputation reached. Erik's is better and larger: MANY currencies, each real, each honoured across a different radius. It makes ACCEPTANCE the mechanic rather than value, which is both more true to how money actually works and far more playable — the question at a counter stops being 'can I afford it' and becomes 'will they take what I have.'",
+  "andItIsALREADYGROUNDED": "world_framing.json is explicit: 'ADJACENCY = CULTURAL/ENERGETIC KINSHIP, NOT MILES' and a Reach is 'a CHARACTER OF PLACE-AND-PEOPLE, not a place on a map you could survey.' So currency acceptance is not a geographic radius — IT IS CULTURAL DISTANCE FROM THE CROSSING. That is why the Reaches take only their own: a pole-steeped people is defined by running pure, and a pure people does not honour a stranger's token. THE ACCEPTANCE GRADIENT IS THE RING'S OWN GEOMETRY, APPLIED TO MONEY."
+ },
+ "theMoneys": [
+  {
+   "id": "reach_scrip",
+   "name": "Reach-scrip (each Reach its own)",
+   "kind": "local token",
+   "backing": "the Reach itself",
+   "whoIssues": "each Reach, in its own form — the Stark Reach's cut slate, the Kept Reach's counted hours, the Veiled Reach's unmarked paper",
+   "acceptedIn": "its own Reach, fully. THE CROSSING, at a cut. NOWHERE ELSE.",
+   "note": "⚠️ THE REACHES ONLY TAKE THEIR KIND — and this is characterisation, not protectionism. A pole-steeped people is defined by running PURE. Honouring a stranger's token is a small dilution, and the Reaches do not do small dilutions."
+  },
+  {
+   "id": "old_coin",
+   "name": "Old coin (gold, pre-Transition)",
+   "kind": "metal",
+   "backing": "metal itself, and memory",
+   "whoIssues": "nobody now — it is all pre-Transition, and there is a fixed amount of it in the world",
+   "acceptedIn": "the Crossing, readily. The foothills, warily. The Reaches, not at all — except where a Reach happens to want the metal.",
+   "note": "THE FIXED-SUPPLY CURRENCY, and the most interesting one economically: it cannot be minted, only found. A salvage ring that opens a pre-Transition strongroom has changed the money supply. That is a QUEST, not a transaction."
+  },
+  {
+   "id": "outland_paper",
+   "name": "Outland paper",
+   "kind": "paper",
+   "backing": "a civilization that never transitioned, and its promise",
+   "whoIssues": "the untransitioned polities beyond the world's edge — traders bring it in",
+   "acceptedIn": "the Crossing, where outland traders actually come. The foothills, at a steep discount. The Reaches, never.",
+   "note": "⚠️ ITS VALUE DEPENDS ON A GOVERNMENT NOBODY IN THE VALLEY HAS EVER SEEN. That is the most quietly frightening money in the setting, and it is the one that can COLLAPSE — a rumour from outland is a market event, and a party carrying paper when it lands is a scene."
+  },
+  {
+   "id": "crystal",
+   "name": "Cut crystal",
+   "kind": "crystal",
+   "backing": "substrate-inert lattice — it does not warp, anywhere",
+   "whoIssues": "cut in the Lattice Cities to a fixed standard",
+   "acceptedIn": "widest of the hard currencies — the Crossing fully, the foothills readily, and SOME Reaches, because it is the one token that stays exactly what it is in a manifestation storm.",
+   "note": "⚠️ THE SETTING'S OWN LOGIC MAKES THIS THE STRONGEST MONEY: in a world where the substrate rewrites things, A THING THAT CANNOT BE REWRITTEN is worth more than gold. That is worldbuilding doing economics, and it is why crystal — not coin — is what a careful traveller carries."
+  },
+  {
+   "id": "the_mark",
+   "name": "The Mark",
+   "kind": "obligation",
+   "backing": "a settled debt and the community that witnessed it",
+   "whoIssues": "anyone whose word is good, which is the whole point",
+   "acceptedIn": "exactly as far as the deed that earned it TRAVELLED — tied to reputation.js `spread`.",
+   "note": "Kept from round 1, but demoted from THE currency to ONE of them, which is where it belongs. It is the only money whose acceptance depends on YOU rather than on the token, and it is the one the Crossing's best traders prefer."
+  }
+ ],
+ "theGradient": {
+  "the_crossing": {
+   "takes": "ALL KINDS",
+   "cut": "a spread on each, and the spread IS how the Crossing lives",
+   "note": "⚠️ THE CROSSING'S WHOLE IDENTITY, EXPRESSED AS A MECHANIC. It is not merely a trade hub — it is THE ONLY PLACE WHERE EVERY VALUE IS COMMENSURABLE. That makes it the world's clearing-house and gives a party a standing reason to return, which is a very useful thing for a campaign to have."
+  },
+  "foothills": {
+   "takes": "SEVERAL KINDS — crystal readily, old coin warily, the local Reach's scrip, outland paper at a discount",
+   "note": "The foothills are already authored as the blended, folk-accessible middle (harmonic foothills two poles; valley_craft is the near-centre generalist). MONEY BEHAVES EXACTLY LIKE THE FOOTHILL TRADITIONS DO — several kinds, none pure. The economy and the craft geometry agree without being made to."
+  },
+  "reaches": {
+   "takes": "THEIR KIND ONLY",
+   "note": "Purity again. And it creates the single best travel-economy beat in the system: A PARTY LEAVING THE CROSSING FOR A REACH MUST CONVERT FIRST, AND CONVERSION COSTS. Going deep is expensive before you arrive."
+  }
+ },
+ "whatThisBuysMechanically": [
+  "⚠️ THE QUESTION AT A COUNTER STOPS BEING 'CAN I AFFORD IT' AND BECOMES 'WILL THEY TAKE WHAT I HAVE.' That is a better question, it is answerable in fiction without a shop UI, and it makes a trader a PERSON with a position rather than a price list.",
+  "TRAVEL GAINS AN ECONOMY. Going from the Crossing into a Reach means converting, at a cut, before you arrive. Coming back out means converting again. Depth costs — which is thematically exact, because depth into a pole is supposed to cost.",
+  "SPOILS GAIN A DESTINATION AND A GEOGRAPHY. A feral-construct's parts are worth most in the Gearlands, a warped beast's hide in the Quickwood, precursor salvage at the Crossing where the rings fence it. WHAT YOU LOOT NOW IMPLIES WHERE YOU ARE GOING.",
+  "AND IT ANSWERS ERIK'S ORIGINAL QUESTION PROPERLY. 'Why are we fighting things?' — because the hide is worth something to someone who is three days away and will only pay in scrip you cannot spend at home. THAT IS A REASON WITH A STORY IN IT."
+ ],
+ "openCalls": [
+  "ERIK: how many Reach-scrips are real? I have written it as 'each Reach its own', which is clean but implies ~6 tokens. The alternative is that only two or three Reaches mint at all and the rest run on barter and obligation — WHICH MAY BE MORE TRUE TO A POST-TRANSITION WORLD and is less to track.",
+  "ERIK: does the CROSSING's cut have a number, or stay fictional? My instinct is FICTIONAL — 'the Crossing takes its bite' — because a percentage invites arithmetic at a table that has been rewarding judgement over arithmetic all the way through.",
+  "AND ONE I'D FLAG AS A RISK: outland paper CAN COLLAPSE, which is a great scene exactly once. It should be a scripted world event rather than a live market sim — the moment it becomes a simulated market, the game is about the market."
+ ],
+ "supersedes": "SNG-267's single-currency Mark proposal. The Mark survives as ONE money among five, which is a better place for it."
+}

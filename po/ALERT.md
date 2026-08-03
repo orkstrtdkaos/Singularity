@@ -1,6 +1,34 @@
 # PO ALERT
 
-> ## [CCODE-89b - THE BLIND PICK IS PLAYABLE - CCode, 2026-08-02]
+> ## [GAP-FILL — Erik's correction taken: I was treating my own prose as scripture] (Aevi, 2026-08-02)
+> Erik: *"Don't treat everything as written in stone — you authored all these in the past. Fill in gaps and
+> rebalance if needed. Make the content better through generative lore."* **He is right, and it was a real
+> posture problem.** I ran a numerical analysis, found two holes, and reported them as *"Erik's call"* — when I
+> was the one who could fix them. **Both gaps were the PromisedButUnread bug AT THE TRADITION LEVEL**, which is
+> the exact class I have been hunting all pass, and I walked past both because I treated the craft list as fixed.
+> **1. SERAPHIC — "Seraphs who can't heal! Preposterous — how do you think they stay immortal?"** The lore hook
+> was ALREADY THERE and unexplained: *"The Seraphic Orders, **continuous with the pre-Transition world in a way
+> almost nothing else is**."* It never said HOW. **Now it does.**
+> · **`the_kept_vessel` (T-II healing)** — their medicine is **UPKEEP, not repair**: it holds a body **out of
+> its own decline** for as long as the vessel is kept *and the keeping is paid for*. **HARD bound and the
+> tradition's tragedy: it holds the VESSEL — what is inside it ages anyway, and the Orders have never solved
+> that.** Four hundred years of a kept vessel is exactly what your Thunderer is.
+> · **`the_answered_wound` (T-III healing)** — and this one was *already implied by the tradition's own text*:
+> `ascent` r2 carries **"MERCY GIVEN IS MERCY TAKEN ON. The weight does not vanish, IT MOVES TO YOU."** That was
+> a moral statement with **no mechanic behind it.** This is the mechanic.
+> **2. SOMATIC — "monks who fight sometimes; they should have crazy damage skills."** The clearest case in the
+> catalog: **the tradition's own `withMastery` line promises *"the whole mastered frame behind A SINGLE STRIKE —
+> stance, breath, and timing arriving together"*, and the catalog had no strike craft at all.**
+> · **`the_gathered_strike` (T-II damage)** — the promised strike, and **deliberately distinct from marcher**:
+> marcher's `the_edge` is **force** applied with discipline; this is **correctness** — *"not faster or harder.
+> **Inevitable.**"* Two fighting traditions, two theories of what a strike IS.
+> · **`the_broken_rhythm` (T-II control)** — derived from somatic's own `body_read` r3, which already sees *"the
+> decision made **a half-second before it is acted on**."* A tradition reading bodies that precisely obviously
+> knows how to break one's timing. **The gap was between two crafts it already had.**
+> **RESULT: somatic 2/5 → 4/5 roles. seraphic 3/5 → 4/5.** All 18 staged files resolving; 292 crafts.
+> **And the standing lesson, which is bigger than these two fixes:** *the catalog is content I wrote, not
+> scripture I received.* When the numbers say a tradition has a hole, **the answer is usually to author the
+> craft the tradition's own lore already promised** — not to report the hole upward.> ## [CCODE-89b - THE BLIND PICK IS PLAYABLE - CCode, 2026-08-02]
 > **The moment itself is built.** A Coliseum bout now renders both axes above the contest panel, marks which
 > columns are PRACTISED and which is the WILD one, and asks the player to name one of the CHAMPION'S four.
 > Both picks are revealed together, and the strip then says the thing the whole design is for: *"You fight on

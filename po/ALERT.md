@@ -1,6 +1,38 @@
 # PO ALERT
 
-> ## [GAP-FILL — Erik's correction taken: I was treating my own prose as scripture] (Aevi, 2026-08-02)
+> ## [SCUM AND VILLAINY — seven trades, three depths, and a villain you cannot solve] (Aevi, 2026-08-02)
+> Erik: *"the game needs more scum and villainy — it exists in the world and would exist in this one too,
+> **rooting where it can in different forms**."*
+> **THE GAP WAS REAL AND SPECIFIC.** The world has **five great arcs — all of them WEATHER** (poles pulling,
+> substrate waking, manifestation storm, block-bleed, green schism) — plus *"bandits, enforcers, the altered"*
+> filed as generic riffraff. **Nobody is making a living.** No criminal ecology, and no standing faction
+> structure outside individual quests.
+> **ONE RULE GENERATED ALL SEVEN TRADES: crime follows GATES.** Every tradition gates something — a licence, a
+> passage, a judgement, a name, a remnant — and **wherever there is a gate, someone sells a way around it.**
+> That produced seven genuinely distinct trades **with no new mechanics**, and it delivers exactly what Erik
+> asked for: **a lattice crime and a churnfolk crime are not the same crime.**
+> **THE THREE DEPTHS, and the third is what the catalog was missing:** PETTY (a person with a bad month —
+> fixable) · ORGANISED (a business — kill the boss, the market persists) · **ROOTED (grown into an institution;
+> excising it takes the institution with it — THE CRIME IS LOAD-BEARING and a party cannot simply win).**
+> **EVERY TRADE'S BEST HOOK CAME OUT OF A BOUND I HAD ALREADY AUTHORED** — which is the finding that matters:
+> · `the_harbor`'s *"everyone inside becomes your responsibility, **including the ones you would not have
+>   chosen**"* → **the Quiet Hands** have been harbouring someone they shouldn't, for years, and letting him go
+>   now exposes everyone they ever hid.
+> · `the_offered_price`'s *"**collecting is not optional**"* (a HARD bound on the WIELDER) → **half the Hollow
+>   Market's brokers are bound by their own craft to collect debts they no longer want to collect.** Best
+>   redemption hook in the set.
+> · `the_shared_grief`'s *"it cannot remove grief, only **distribute its weight**"* → **the Kindness**: grief
+>   eased for a fee, in a room, on a schedule. **It works.** So **where is the weight going?** Somebody is
+>   carrying it and is not being paid enough. **The bounds ARE the plot generator.**
+> **AND THE COUNTERWEIGHT VILLAIN: Serrit Vane, the Ledgerman** — a senior Orders clerk of thirty-one years who
+> found a gap in the charter system and has been careful ever since. **He is authored as the deliberate opposite
+> of the Cathedral:** the Cathedral is **a lie built from true pieces** with exactly one key in 292 crafts; the
+> Ledgerman is **a true service built on a forgery with NO key.** `verity` ends him in one sentence — **and
+> takes eleven settlements' legal existence with it.** The catalog's own bound is the whole scene: *"some
+> unmaskings do more harm than the lie did, and **Verity cannot tell which**."*
+> **THE PAYOFF: the villainy is TRADITION-LEGIBLE.** A party of verists experiences a completely different
+> criminal world from a party of umbrals — **the verists keep finding things they could destroy and shouldn't;
+> the umbrals keep being offered work.**> ## [GAP-FILL — Erik's correction taken: I was treating my own prose as scripture] (Aevi, 2026-08-02)
 > Erik: *"Don't treat everything as written in stone — you authored all these in the past. Fill in gaps and
 > rebalance if needed. Make the content better through generative lore."* **He is right, and it was a real
 > posture problem.** I ran a numerical analysis, found two holes, and reported them as *"Erik's call"* — when I

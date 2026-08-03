@@ -1,6 +1,36 @@
 # PO ALERT
 
-> ## [SNG-263 — foothills LOGGED + SOMATIC/COGITANT (13-14 of 27; 144/285 — past halfway)] (Aevi, 2026-08-02)
+> ## [SNG-263 — arena idea LOGGED + WRIGHT/UNMAKER (15-16 of 27; 163/285)] (Aevi, 2026-08-02)
+> **Erik's ARENA CIRCUIT idea logged as item 27** — and checking first paid off: **most of it already exists
+> and needs POINTING AT NPCs, not building.** `coliseum_grid.json` (SNG-149) is an **unused blind-grid duel
+> mechanic** (each fighter brings four families they actually practise; each picks from the other's four);
+> `reputation.js` has `recordDeed` with **weight and `spread`** — deeds already propagate between communities;
+> `chronicle.js` ranks by salience with the comment *"every deed here is something a community would actually
+> talk about."* **The gap: NPCs don't HAVE deeds — `recordDeed` is character-only.** Same shape as §11 and the
+> bestiary finding: the machinery exists on the player side and isn't pointed at the world. **Why it's good:
+> it gives the ladder a FACE** — "epic" stops being a threat number and becomes a person with a name and a
+> record you've been hearing about for twenty sessions. Wants its own ticket.
+> **WRIGHT + UNMAKER authored** (creation/destruction, 7th pair).
+> - **THE MOST MORALLY SYMMETRICAL PAIR — and the first where the two T-I senses carry the SAME moral rather
+>   than opposite objects:** `makers_eye` *"seeing what could be made is not knowing **whether it should be**"*
+>   · `fault_sense` *"seeing the fault does not tell you **whether to press it**."* **Neither tradition is the
+>   good one.** Both are authored as a capacity that **outruns its own judgement**, and both bound it identically.
+> - **The line that makes the destruction pole not a villain-tradition:** `ruinwork` r3 — *"**end a thing
+>   well** — a building, an institution, a life's work, a war — so that what it was is **honored**."*
+> - **⚠️ CCODE:** `the_undoing_word` r2 unmakes *"a working, a ward, a **seal**, a **pact** held by craft"* — a
+>   direct counter to `sun_seal`, `death_ward`, `prism_ward`, `the_maintained_veil`, `the_blaze_wall` and
+>   **every standing-effect craft authored so far.** The §8 layer must be **breakable by it**, or the
+>   destruction pole's T-IV does nothing against half the traditions it was written to answer. **Logged as 6f.**
+> - **A NINTH DEFENSIVE LOGIC — PRE-EMPTED** (`the_ended_threat`, soak 0: it doesn't withstand the blow, it
+>   **ends the thing that would swing it**). Full set: BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND /
+>   MISDIRECTED / TYPED-IMMUNITY / EFFICIENT / PRE-EMPTED. **Nine ways not to be hurt, all on one guard shape.**
+> - **A FIFTH THEORY OF MEDICINE** — heals **by removal** (*"it removes; it does not add — what was lost stays
+>   lost"*). Five traditions, five incompatible theories, one `healing` shape.
+> - **THE EXCEPTION THAT PROVES THE COERCION PATTERN:** seven traditions refuse coercion; `the_demonstrated_end`
+>   **embraces** it (*"they know what refusal means"*) — and the catalog immediately **prices** it: *"authority
+>   people **obey and do not love**."* The rule isn't that coercion is impossible here; it's that it **costs**,
+>   and the catalog charges for it consistently.
+> Continuing.> ## [SNG-263 — foothills LOGGED + SOMATIC/COGITANT (13-14 of 27; 144/285 — past halfway)] (Aevi, 2026-08-02)
 > **Erik: all traditions need foothills — logged as item 26** with the pattern derived from the three that
 > exist: a foothill is (a) `access.open: true` — **folk, learnable by anyone**, where a pole is gated; (b)
 > `foothillOf` one or more poles; (c) **its own MEDIUM** (sound, light, growing things); (d) **the gentle,

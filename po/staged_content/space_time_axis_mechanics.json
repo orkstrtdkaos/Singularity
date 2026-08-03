@@ -1,0 +1,1027 @@
+{
+ "schemaVersion": 1,
+ "id": "space_time_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 19 AND 20 of 27 — HORIZON and HOURKEEPER, the space/time axis, 9th antipode pair. THE CLEANEST MECHANICAL DISTINCTION IN THE CATALOG: horizon's magnitudes are DISTANCE and hourkeeper's are DURATION, and almost every craft pairs across that line — spanwork closes distance / the_shaped_duration bends time; the_kept_distance stays where the threat isn't / the_wasted_moment is gone before it lands. Two traditions solving the same problems in the two dimensions the engine actually has fields for.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "horizon": [
+   {
+    "id": "way_sense",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "reveal",
+     "track"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "navigation",
+     "range"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "range": 100
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "navigation",
+      "delta": "read a route's TRUE COST before walking it — where it will be hard, where it will be WATCHED, WHERE IT LIES",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "range",
+      "delta": "hold A REGION ENTIRE in your sense of it — every way in, every way out, EVERY GAP BETWEEN THE WAYS",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a bearing — half the depth, and instant",
+     "surge": "double the read; REGIONS CHANGE, and the map you hold is the one YOU built"
+    },
+    "bounds": [
+     {
+      "text": "KNOWING THE WAY IS NOT KNOWING WHAT IS ON IT",
+      "class": "hard"
+     },
+     {
+      "text": "A READ ROAD IS STILL A ROAD — it does not walk itself",
+      "class": "hard"
+     },
+     {
+      "text": "REGIONS CHANGE — the map you hold is the one you built, and it ages",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Antipode to hourkeeper's hour_sense, and the pairing is exact: way_sense knows WHERE and 'not what is on it'; hour_sense knows WHEN and 'never WHAT'. NINTH pair, ninth time the two T-I senses carry the axis — and both bound themselves with the same admission: the dimension is knowable, the CONTENT is not."
+   },
+   {
+    "id": "the_road_ahead",
+    "tier": 1,
+    "functions": [
+     "empower",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "targets",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 24,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "keep A PARTY moving and functional across BRUTAL DISTANCES — through exhaustion, injury, conditions that would stop them",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "you and your party go on FOR AS LONG AS THE TASK REQUIRES — rest when you must, move when you must, until the road ends",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "set a pace — half the relief, sustainable forever",
+     "surge": "double it; AS LONG AS THERE IS GROUND AHEAD — a party with nowhere to go gets nothing from this"
+    },
+    "bounds": [
+     {
+      "text": "it needs GROUND AHEAD — this sustains MOVEMENT, not a siege",
+      "class": "hard"
+     },
+     {
+      "text": "the road ending is the craft ending",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Perfect antipode to hourkeeper's the_long_watch: one sustains you while MOVING, the other while WAITING. Same T-I sustain slot, opposite relationship to time — and each is useless in the other's situation."
+   },
+   {
+    "id": "spanwork",
+    "tier": 2,
+    "functions": [
+     "move",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "range",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 40,
+     "push": 0,
+     "magnitude": 5,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "CLOSE A DISTANCE YOU CAN SEE — arrive at the far ridge, the far bank, the far door, WITHOUT CROSSING THE BETWEEN",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "distance STOPS BEING AN OBSTACLE for you AND THOSE YOU CARRY — the far place is simply a place you may be",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "cover ground fast — half the distance, and you see everything you pass",
+     "surge": "double it; WHATEVER WAS IN THE BETWEEN IS STILL IN THE BETWEEN"
+    },
+    "bounds": [
+     {
+      "text": "THE GROUND IS STILL CROSSED at r1 — what is on it still meets you",
+      "class": "hard"
+     },
+     {
+      "text": "YOU MUST SEE IT",
+      "class": "soft"
+     },
+     {
+      "text": "WHATEVER WAS IN THE BETWEEN IS STILL IN THE BETWEEN",
+      "class": "hard"
+     },
+     {
+      "text": "THE WORLD IS VERY LARGE — Horizon-Walkers at this depth stop coming home",
+      "class": "cost"
+     }
+    ],
+    "designNote": "NINTH terrain-gated travel craft, and the only one gated on SIGHT rather than a medium: root_road needs life, grey_road needs death, shadowstep needs shadow, the_false_door needs the gap between appearance and reality — spanwork needs only to SEE the destination. The space pole's travel craft asks the least of the world and the most of your eyes."
+   },
+   {
+    "id": "the_long_reach",
+    "tier": 2,
+    "functions": [
+     "move",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "range"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.02,
+     "range": 20
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "damage",
+      "delta": "ATTACK IN FULL MOTION — without losing accuracy or force to the movement; THE SPEED IS THE WEAPON",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "range",
+      "delta": "DISTANCE CEASES TO REDUCE YOUR EFFECTIVENESS — across a room or across a field, you arrive with full force",
+      "from": "r3 grants — the increment is pure RANGE/penalty-removal, no damage change"
+     }
+    ],
+    "intensity": {
+     "conserve": "a measured throw — half the reach, and you keep your footing",
+     "surge": "double the reach; arriving at full force means arriving, and arriving is committing"
+    },
+    "bounds": [
+     {
+      "text": "it extends REACH, not power — the same blow, from further",
+      "class": "hard"
+     },
+     {
+      "text": "arriving at full force means ARRIVING — you are now where they are",
+      "class": "cost"
+     }
+    ],
+    "designNote": "The craft I cited in the very first pilot finding as proof that 'a rank spends on the axis its own prose names' — r3 buys RANGE and penalty-removal with no damage change at all. Authoring it confirms the rule held across nineteen traditions."
+   },
+   {
+    "id": "the_fresh_horizon",
+    "tier": 2,
+    "functions": [
+     "empower",
+     "heal",
+     "restore",
+     "sustain"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "restoration",
+     "targets"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 1,
+     "targets": 1,
+     "note": "A SEVENTH THEORY OF MEDICINE — MOVEMENT AS MEDICINE: 'the movement is the medicine.' It heals by GOING SOMEWHERE ELSE."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "A JOURNEY RESTORES THE PARTY — physically and otherwise; the movement IS the medicine, and you know how to pace it",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: SHOW SOMEONE THE NEXT HORIZON AND IT FILLS THEM AGAIN — despair fails against the sight of further to go",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a change of scene — half the restoration, and it costs nothing",
+     "surge": "double it; it heals by LEAVING, and some things should be stayed with"
+    },
+    "bounds": [
+     {
+      "text": "IT REQUIRES ACTUALLY GOING — a person who cannot move gets nothing",
+      "class": "hard"
+     },
+     {
+      "text": "it heals by LEAVING, and some things should be STAYED WITH",
+      "class": "cost"
+     }
+    ],
+    "designNote": "A SEVENTH THEORY OF MEDICINE, and the most quietly troubling: it works, and its cost bound admits what it is — 'it heals by LEAVING, and some things should be stayed with.' Compare stillhold's safe_ground (heals by a place that HOLDS). The two traditions disagree about whether recovery is a journey or a shelter."
+   },
+   {
+    "id": "the_kept_distance",
+    "tier": 2,
+    "functions": [
+     "move",
+     "resist",
+     "shield"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "evasion",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 0,
+     "soakRank": 0,
+     "evasion": 4,
+     "evasionRank": 2,
+     "duration": 4,
+     "targets": 1,
+     "note": "A TWELFTH DEFENSIVE LOGIC — SPACED: soak 0 because it does not take the blow; it keeps you where the blow cannot reach. Distinct from EVADE (they swing and miss) — here they never get to swing."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "evasion",
+      "delta": "CONTROL the distance — always TOO FAR FOR IT TO ACT, close enough for YOU to",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "stay perpetually WHERE THE THREAT ISN'T — and BRING OTHERS WITH YOU. 'The person who cannot close the gap cannot win.'",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "keep your spacing — half the control, and it costs no attention",
+     "surge": "double it; keeping distance means you are not holding ground, and some things must be held"
+    },
+    "bounds": [
+     {
+      "text": "it needs SOMEWHERE TO GO — cornered, it is worth nothing",
+      "class": "hard"
+     },
+     {
+      "text": "keeping distance means NOT HOLDING GROUND",
+      "class": "cost"
+     }
+    ],
+    "designNote": "TWELFTH defensive logic — SPACED. And the exact antipode of hourkeeper's the_wasted_moment (gone before it lands, by TIMING). Two traditions, two ways to not be where the harm is: one uses space, one uses time. Full set now: BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND / MISDIRECTED / TYPED-IMMUNITY / EFFICIENT / PRE-EMPTED / DISCOURAGED / INTERPOSED / SPACED."
+   },
+   {
+    "id": "the_land_knowledge",
+    "tier": 2,
+    "functions": [
+     "command",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "authority",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 6,
+     "scope": 2,
+     "note": "MENTAL attribute — command through KNOWING"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "authority",
+      "delta": "USE knowledge of land and distance TO DIRECT OTHERS — the advice that wins a chase, the route that avoids the ambush",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "in TERRITORY YOU HAVE WALKED, your knowledge is comprehensive enough to COMMAND any situation that depends on terrain",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "offer the route — half the authority, and it reads as advice",
+     "surge": "double it; authority from having WALKED it ends at the edge of what you have walked"
+    },
+    "bounds": [
+     {
+      "text": "IT REQUIRES HAVING BEEN THERE — an unwalked region offers nothing",
+      "class": "hard"
+     },
+     {
+      "text": "authority from KNOWING ends where your knowing ends",
+      "class": "hard"
+     }
+    ],
+    "designNote": "EIGHTH tradition refusing coercion mechanically, by an eighth distinct route: command through HAVING BEEN THERE. The pattern is now: presence (somatic), practice (numinous), record (verist), work (wright), logic (cogitant), temperature (harmonic), the door-not-the-shove (numinous), and now KNOWLEDGE EARNED BY WALKING."
+   },
+   {
+    "id": "the_made_crossing",
+    "tier": 3,
+    "functions": [
+     "make",
+     "open",
+     "reveal",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "access",
+     "range"
+    ],
+    "mechanic": {
+     "range": 15,
+     "push": 0,
+     "magnitude": 5,
+     "duration": 4,
+     "note": "PRACTICAL attribute — the only one in horizon"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "access",
+      "delta": "identify and EXPLOIT THE SPECIFIC POINT where an obstacle can be crossed — not the obvious attempt but the place where it gives",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: MAKE THE CROSSING — any crossing — by knowing exactly where to commit and exactly how. WHAT THE LAND CALLS UNCROSSABLE, YOU CROSS.",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "find the ford — half the certainty, and it costs nothing to look",
+     "surge": "double it; knowing exactly where to commit means COMMITTING"
+    },
+    "bounds": [
+     {
+      "text": "it FINDS or MAKES a crossing — it does not make it SAFE",
+      "class": "hard"
+     },
+     {
+      "text": "knowing where to commit means COMMITTING",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_far_step",
+    "tier": 4,
+    "functions": [
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "range",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 500,
+     "push": 0,
+     "magnitude": 7,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "CARRY OTHERS — a party crosses in the same stride; and the requirement SOFTENS: a place DESCRIBED truly enough can be stepped to",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a shorter step — half the distance, and it asks less of you",
+     "surge": "double it; A DESCRIBED PLACE IS A DESCRIBED PLACE, and the Horizon peoples have lost walkers to a good description"
+    },
+    "bounds": [
+     {
+      "text": "it needs a SEEN OR KNOWN place at r1",
+      "class": "hard"
+     },
+     {
+      "text": "A DESCRIBED PLACE IS A DESCRIBED PLACE — the Horizon peoples have lost walkers to a good description",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Compare enginewright's shortfold ('both ends must be places you TRULY KNOW') and numinous's waygate ('only to places held clearly in memory'). THREE traditions independently gate long-range travel on KNOWING THE DESTINATION — and horizon is the only one that lets a good DESCRIPTION substitute, and prices it with lost walkers."
+   },
+   {
+    "id": "the_edge_of_the_map",
+    "tier": 5,
+    "functions": [
+     "make",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "range",
+     "scope"
+    ],
+    "mechanic": {
+     "range": 9999,
+     "push": 0,
+     "magnitude": 9,
+     "scope": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: STEP BEYOND THE KNOWN WORLD into the unmapped, HELPING CALL A NEW PLACE INTO BEING BY ARRIVING. The capstone is a KIND (travel that CREATES destination) at near-total cost.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — you cannot half-step off the edge of the map; you are on it or past it.",
+     "surge": "REFUSED — it already costs nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "IT COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "THE DESTINATION IS UNFIXED UNTIL YOU ARRIVE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "SIXTEENTH capstone — and the strangest in the catalog. Every other travel craft REQUIRES a known destination; this one has none, and the arriving is what makes the place. 'The destination is unfixed until you arrive' is the only bound in 285 crafts where the WORLD is incomplete until the craft resolves."
+   }
+  ],
+  "hourkeeper": [
+   {
+    "id": "hour_sense",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "temporalDepth",
+     "timeReach"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "temporalDepth",
+      "delta": "read the AGE of a place, a wound, a working, or A LIE — and WHEN IT WILL FAIL",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "timeReach",
+      "delta": "hold the WHOLE DURATION of a place or a people — its beginning, its hours, and THE HOUR IT IS RUNNING OUT OF",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glance at the clock — half the depth, and it costs nothing",
+     "surge": "double the read; KNOWING A PEOPLE'S REMAINING HOURS AND BEING UNABLE TO SAY SO is the Hourkeeper's particular grief"
+    },
+    "bounds": [
+     {
+      "text": "WHEN, NEVER WHAT — the hour is knowable; THE EVENT IS NOT",
+      "class": "hard"
+     },
+     {
+      "text": "IT COUNTS. IT DOES NOT CARE WHETHER YOU ARE READY.",
+      "class": "hard"
+     },
+     {
+      "text": "knowing a people's remaining hours AND BEING UNABLE TO SAY SO",
+      "class": "cost"
+     }
+    ],
+    "designNote": "'It counts. It does not care whether you are ready.' — the most economical HARD bound in the catalog, and the exact mirror of way_sense's 'knowing the way is not knowing what is on it'. Both T-I senses know their dimension perfectly and its CONTENT not at all."
+   },
+   {
+    "id": "the_long_watch",
+    "tier": 1,
+    "functions": [
+     "resist",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 48
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "upkeepRelief",
+      "delta": "sustain any activity REQUIRING PATIENCE ACROSS DURATION — a negotiation, a stake-out, a long recovery",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: HOLD AS LONG AS THE SITUATION REQUIRES — the vigil, the wait, the watch — and remain FULLY FUNCTIONAL throughout",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "settle in — half the relief, and you can leave at any time",
+     "surge": "double it; a person who can wait indefinitely will be ASKED to"
+    },
+    "bounds": [
+     {
+      "text": "it sustains WAITING, not moving — a march gets nothing from it",
+      "class": "hard"
+     },
+     {
+      "text": "a person who can wait indefinitely WILL BE ASKED TO",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "hourcraft",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "temporalDepth",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 5,
+     "duration": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "duration",
+      "delta": "SLOW DURATION AROUND YOU — a fight, a fall, a conversation STRETCHES, and you have room inside it",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: REMEMBER FORWARD — an hour that has NOT HAPPENED arrives in you as memory does, with a memory's specificity AND A MEMORY'S UNRELIABILITY",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold one moment — half the room, and it costs little",
+     "surge": "double it; IT COSTS CONTINUOUSLY AND STEEPLY, and the world outside does not slow with you"
+    },
+    "bounds": [
+     {
+      "text": "THE MOMENT STILL PASSES FOR EVERYONE ELSE — you get to LOOK",
+      "class": "hard"
+     },
+     {
+      "text": "it costs CONTINUOUSLY AND STEEPLY",
+      "class": "cost"
+     },
+     {
+      "text": "YOU CANNOT TELL A TRUE PRE-MEMORY FROM A FEARED ONE",
+      "class": "hard"
+     }
+    ],
+    "designNote": "'You cannot tell a true pre-memory from a feared one' — an EPISTEMIC hard bound, like verity's 'cannot tell which'. Two traditions whose highest reads are explicitly unreliable AT MASTERY, because the limit is knowledge, not skill. That distinction is exactly what HARD-classing is for."
+   },
+   {
+    "id": "the_wrong_moment",
+    "tier": 2,
+    "functions": [
+     "hinder",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.03,
+     "note": "lethal rung — timing as a weapon"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "precision",
+      "delta": "DICTATE WHEN THE CONFRONTATION HAPPENS by waiting for the exact moment that advantages you — the ambush, the interruption",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: act in a SEQUENCE of moments so precisely chosen that the other person IS NEVER IN A POSITION TO RESPOND",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "take the opening — half the advantage, and it passes unnoticed",
+     "surge": "double it; dictating when the confrontation happens means there IS one"
+    },
+    "bounds": [
+     {
+      "text": "IT NEEDS SOMEONE WHO CAN BE CAUGHT OFF-BALANCE — the genuinely ready are outside it",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "the_given_time",
+    "tier": 2,
+    "functions": [
+     "heal",
+     "restore",
+     "sustain"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "duration",
+     "targets"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 2,
+     "targets": 1,
+     "note": "AN EIGHTH THEORY OF MEDICINE — TIME AS MEDICINE: it does not heal, it BUYS THE HOURS in which healing can happen."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "duration",
+      "delta": "CREATE the time a person or situation needs — not by stopping anything, but by MANAGING THE DURATION so that what needs to happen can",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "HOLD OPEN the duration of a recovery, a negotiation, or a healing — AS LONG AS IT REQUIRES — without the outside clock closing it",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "buy a few minutes — half the time, and it costs almost nothing",
+     "surge": "double it; the hours you give have to come from somewhere"
+    },
+    "bounds": [
+     {
+      "text": "IT GIVES TIME, IT DOES NOT HEAL — someone else still has to do the work",
+      "class": "hard"
+     },
+     {
+      "text": "the hours you give HAVE TO COME FROM SOMEWHERE",
+      "class": "cost"
+     }
+    ],
+    "designNote": "AN EIGHTH THEORY OF MEDICINE, and the humblest: it heals NOTHING and simply buys the hours. Its HARD bound says so outright — 'someone else still has to do the work.' Compare rootkin's staunch (buys time on a WOUND). Both traditions independently concluded that buying time IS a medical act."
+   },
+   {
+    "id": "the_wasted_moment",
+    "tier": 2,
+    "functions": [
+     "foresee",
+     "shield"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "evasion",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 0,
+     "soakRank": 0,
+     "evasion": 5,
+     "evasionRank": 3,
+     "duration": 3,
+     "targets": 1,
+     "note": "THIRTEENTH DEFENSIVE LOGIC — UNTIMED: soak 0; 'not blocking, not armoring, but the exact move that makes the attack land where you were.' It defeats the attack's TIMING. Highest evasionRank in the catalog because it acts on the moment itself."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "PROTECT SOMEONE by watching THEIR threat's timing and CALLING THE MOVE — the dodge, the step, the word — at the instant it works",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: for as long as you ATTEND to a person's safety, NO MOMENT THAT COULD HARM THEM ARRIVES — you see it and fill or empty it",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "watch the timing — half the evasion, and you can do other things",
+     "surge": "double it; attending to someone's safety means ATTENDING — you are doing nothing else"
+    },
+    "bounds": [
+     {
+      "text": "it defeats TIMED harm — a collapsing roof has no timing to defeat",
+      "class": "hard"
+     },
+     {
+      "text": "attending means ATTENDING — at r3 you are doing nothing else",
+      "class": "cost"
+     }
+    ],
+    "designNote": "THIRTEENTH defensive logic — UNTIMED, and the exact antipode of horizon's the_kept_distance (SPACED). Two traditions, two ways to not be where the harm is: one uses SPACE, one uses TIME. And both have soak 0, because neither ever takes the blow."
+   },
+   {
+    "id": "the_shaped_duration",
+    "tier": 3,
+    "functions": [
+     "bind",
+     "hinder",
+     "transform"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "duration",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 4,
+     "scope": 2,
+     "note": "incapacitating — bending how long something takes"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "duration",
+      "delta": "COLLAPSE a long span into less — a day's travel with the fatigue of an hour, a complex process completing in time it should not",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: shape how long something takes WITH PRECISION — bend the duration of ANY ongoing process to what you need it to be",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "stretch it a little — half the bend, and nothing notices",
+     "surge": "double it; IT ONLY BENDS WHAT IS ALREADY RUNNING"
+    },
+    "bounds": [
+     {
+      "text": "IT ONLY BENDS WHAT IS ALREADY RUNNING — it starts nothing, stops nothing",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Direct antipode of horizon's spanwork (close the distance) — one collapses SPACE, the other collapses TIME, both at T-II/T-III. And its single HARD bound is the tradition's whole discipline: hourkeepers do not start or stop, they only BEND what is already moving."
+   },
+   {
+    "id": "the_opened_moment",
+    "tier": 3,
+    "functions": [
+     "make",
+     "move",
+     "open"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "access",
+     "targets"
+    ],
+    "mechanic": {
+     "range": 5,
+     "push": 0,
+     "magnitude": 6,
+     "duration": 1,
+     "targets": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "access",
+      "delta": "OPEN A WINDOW IN TIME — a pause in a guard rotation, a silence in a conversation, A BEAT BETWEEN ALARMS — and move through it",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "CREATE THE GAP THAT DIDN'T EXIST — find or open the instant that allows passage, and step through it BRINGING OTHERS",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "slip through a gap — half the window, and it was already there",
+     "surge": "double it; a gap you created is a gap someone will notice was created"
+    },
+    "bounds": [
+     {
+      "text": "it moves you through TIME'S gaps, not space's — a locked door is still locked",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A TENTH terrain-gated travel craft, and the only one whose 'terrain' is TEMPORAL: root_road needs life, shadowstep needs shadow, spanwork needs sight — the_opened_moment needs A GAP IN ATTENTION. Its bound is precise about the limit: 'a locked door is still locked.'"
+   },
+   {
+    "id": "the_held_hour",
+    "tier": 4,
+    "functions": [
+     "bind",
+     "sustain"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "duration",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 1,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "hold MORE THAN A SINGLE HOUR — a night's work finished inside a kept evening, a siege's preparation inside one afternoon",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold part of it — half the kept time, and the cost is light",
+     "surge": "double it; THE HOLDER STILL DOES NOT REST, and holding several hours ages you through all of them"
+    },
+    "bounds": [
+     {
+      "text": "IT CANNOT REWIND, ONLY DELAY THE PASSING",
+      "class": "hard"
+     },
+     {
+      "text": "THE SAME HOUR CANNOT BE HELD TWICE",
+      "class": "hard"
+     },
+     {
+      "text": "THE HOLDER STILL DOES NOT REST — holding several hours ages you through all of them",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "the_kept_hour",
+    "tier": 5,
+    "functions": [
+     "foresee"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "foresight",
+     "timeReach"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: TRACE ONE POSSIBLE FUTURE TO ITS VERY END, seeing THE WHOLE BRAID OF ITS CONSEQUENCE. The capstone is a KIND (complete consequence-sight) at near-total cost — AND IT BINDS YOU TO WHAT YOU HAVE SEEN.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-traced future is a guess, and the Hourkeepers do not dignify guesses.",
+     "surge": "REFUSED — it already costs nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "IT COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "IT BINDS YOU TO WHAT YOU HAVE SEEN",
+      "class": "cost"
+     }
+    ],
+    "designNote": "SEVENTEENTH capstone — and the perfect antipode to horizon's the_edge_of_the_map. One steps into a place THAT DOES NOT EXIST UNTIL YOU ARRIVE; the other sees a future SO COMPLETELY THAT YOU ARE BOUND TO IT. Space's capstone creates possibility; time's capstone forecloses it. That is the axis's entire argument in two crafts — and 'foreclosure' is Erik's own word for what evil is."
+   }
+  ]
+ },
+ "passFindings": [
+  "THE CLEANEST MECHANICAL DISTINCTION IN THE CATALOG: horizon's magnitudes are DISTANCE, hourkeeper's are DURATION, and nearly every craft pairs across that line — spanwork collapses space / the_shaped_duration collapses time; the_kept_distance stays where the threat isn't (SPACED) / the_wasted_moment is gone before it lands (UNTIMED); the_road_ahead sustains you MOVING / the_long_watch sustains you WAITING. Two traditions solving identical problems in the two dimensions the engine actually has fields for.",
+  "TWO MORE DEFENSIVE LOGICS, both with soak 0, and they are exact antipodes: SPACED (the_kept_distance — they never get to swing) and UNTIMED (the_wasted_moment — 'the exact move that makes the attack land where you were'). Thirteen logics now, all on one guard shape: BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND / MISDIRECTED / TYPED-IMMUNITY / EFFICIENT / PRE-EMPTED / DISCOURAGED / INTERPOSED / SPACED / UNTIMED.",
+  "⚠️ THE PAIR'S CAPSTONES ARE THE AXIS'S ARGUMENT, AND THEY LAND ON ERIK'S OWN VOCABULARY: the_edge_of_the_map steps into a place THAT DOES NOT EXIST UNTIL YOU ARRIVE ('the destination is unfixed until you arrive' — the only bound in 285 crafts where the WORLD is incomplete until the craft resolves). the_kept_hour sees a future so completely that IT BINDS YOU TO WHAT YOU HAVE SEEN. Space's capstone CREATES possibility; time's capstone FORECLOSES it — and foreclosure is Erik's own definition of evil. The axis argues its own ethics without naming them.",
+  "TWO MORE THEORIES OF MEDICINE, taking the count to EIGHT: the_fresh_horizon heals by MOVEMENT ('the movement is the medicine') with the troubling cost bound 'it heals by LEAVING, and some things should be stayed with'; the_given_time heals NOTHING and simply BUYS THE HOURS ('someone else still has to do the work'). Eight traditions, eight incompatible theories of what healing IS, one `healing` shape carrying all of them.",
+  "AN EPISTEMIC HARD BOUND, and the second in the catalog: hourcraft r3 — 'YOU CANNOT TELL A TRUE PRE-MEMORY FROM A FEARED ONE', alongside verity's 'some unmaskings do more harm and Verity CANNOT TELL WHICH'. Two traditions whose highest reads are explicitly unreliable AT MASTERY, because the limit is KNOWLEDGE, not skill. That distinction is precisely what HARD-classing exists to preserve.",
+  "AN EIGHTH ROUTE TO NON-COERCIVE AUTHORITY: the_land_knowledge commands through HAVING BEEN THERE ('authority from knowing ends where your knowing ends'). The full set is now presence, practice, record, work, logic, temperature, the-door-not-the-shove, and walked knowledge — eight traditions, eight distinct earned routes, zero that permit taking.",
+  "THREE TRADITIONS INDEPENDENTLY GATE LONG-RANGE TRAVEL ON KNOWING THE DESTINATION: shortfold ('both ends must be places you TRULY KNOW'), waygate ('only to places held clearly in memory'), the_far_step ('a seen or known place'). Horizon is the only one that lets a good DESCRIPTION substitute — and prices it: 'the Horizon peoples have lost walkers to a good description.'"
+ ]
+}

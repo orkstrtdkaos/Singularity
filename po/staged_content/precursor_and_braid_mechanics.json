@@ -1,0 +1,500 @@
+{
+ "schemaVersion": 1,
+ "id": "precursor_and_braid_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. THE LAST 9. Found by the blazeborn canary: 276 of 285 crafts were covered; these were not.",
+ "note": "The blazeborn fold surfaced `harbored_flame` (tradition `cross_pole_braid`) sitting in a tradition file and covered by nothing. A sweep found 9 uncovered: 6 PRECURSOR ARTS and 3 CROSS-POLE BRAIDS. They were missed for a real reason — I authored BY TRADITION, and these two categories sit OUTSIDE the 27. And they are not filler: the precursor arts are the T3-T5 spine of the whole precursor layer, and the braids are the only crafts in the game that require TWO poles. THE CANARY EARNED ITS KEEP.",
+ "traditions": {
+  "precursor": [
+   {
+    "id": "address_sense",
+    "tier": 3,
+    "functions": [
+     "reveal",
+     "track"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 2,
+     "targets": 1,
+     "damageType": "precursor"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "read a PERSON'S deep vector — standing alignment, not mood; sense when a place's vector has recently MOVED",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: perceive THE UNREPEATABLE COORDINATE of a thing — the point it alone occupies",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "one quiet read — half the depth, and nothing notices being read",
+     "surge": "double it; THE ADDRESS IS FELT, NOT SPOKEN — you can navigate to it and never describe it"
+    },
+    "bounds": [
+     {
+      "text": "ONE TARGET AT A TIME; the read fades when you look away",
+      "class": "hard"
+     },
+     {
+      "text": "NOT MIND-READING — vector is disposition, not thought",
+      "class": "hard"
+     },
+     {
+      "text": "THE ADDRESS IS FELT, NOT SPOKEN",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ ERIK'S OWN FRAMEWORK, LOAD-BEARING IN A CRAFT: 'the unrepeatable coordinate of a thing — the point it alone occupies' is the COSMIC ADDRESS. The precursor art at the root of the whole layer reads the thing his philosophy is built on. Worth knowing before anyone tunes it."
+   },
+   {
+    "id": "latticespeak",
+    "tier": 3,
+    "functions": [
+     "bind",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "reach",
+     "fidelity"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 3,
+     "damageType": "precursor"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "fidelity",
+      "delta": "ask a mechanism to PERFORM ITS FUNCTION ONCE, on its terms; read a lattice node's state (dormant/cycling/live)",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "reach",
+      "delta": "SUSTAINED EXCHANGE with any Precursor system, LIVE INCLUDED; negotiate a live remnant toward dormancy",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "one question — half the exchange, and nothing wakes further",
+     "surge": "double it; IT PERFORMS ITS OWN FUNCTION, NOT YOURS"
+    },
+    "bounds": [
+     {
+      "text": "DORMANT ONLY at r1 — live systems ignore or LASH OUT",
+      "class": "soft"
+     },
+     {
+      "text": "IT PERFORMS ITS OWN FUNCTION, NOT YOURS",
+      "class": "hard"
+     },
+     {
+      "text": "PURPOSE GLIMPSED IS NOT PURPOSE GRASPED — the GM holds the truth",
+      "class": "hard"
+     }
+    ],
+    "designNote": null
+   },
+   {
+    "id": "wake_the_line",
+    "tier": 4,
+    "functions": [
+     "command",
+     "open",
+     "summon"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "scope",
+     "control"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 6,
+     "scope": 3,
+     "variance": 4,
+     "damageType": "precursor"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "scope+control",
+      "delta": "wake a FULL STRETCH to sustained function; direct CRUDELY what the waking does",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: rouse A WHOLE LATTICE DISTRICT toward its old purpose; the woken network partly obeys sustained intent",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "wake a little — half the stretch, and it settles again on its own",
+     "surge": "double the waking; A DISTRICT WOKEN IS A DISTRICT AWAKE, and the consequences ripple beyond you"
+    },
+    "bounds": [
+     {
+      "text": "PARTIAL AND BRIEF at r1; you cannot choose exactly what function returns",
+      "class": "hard"
+     },
+     {
+      "text": "DIRECTION IS CRUDE — waking one line TUGS ADJACENT ONES",
+      "class": "hard"
+     },
+     {
+      "text": "A DISTRICT WOKEN IS A DISTRICT AWAKE",
+      "class": "cost"
+     }
+    ],
+    "designNote": null
+   },
+   {
+    "id": "foreclose",
+    "tier": 4,
+    "functions": [
+     "bind",
+     "break"
+    ],
+    "shape": "hobble",
+    "operativeAxis": [
+     "denial",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 8,
+     "duration": 1,
+     "targets": 1,
+     "damageType": "precursor"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "foreclose a possibility FOR A SCENE — a room stays sealed, a working stays dead",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: foreclose something LASTING — an outcome permanently denied, a door closed for good",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "close one thing briefly — half the hold, and the drift barely registers",
+     "surge": "double it; THE VECTOR-COST IS SEVERE AND LASTING"
+    },
+    "bounds": [
+     {
+      "text": "ONE NARROW POSSIBILITY, the moment only",
+      "class": "hard"
+     },
+     {
+      "text": "EACH USE NUDGES YOUR OWN VECTOR; holding costs continuously and THE DRIFT ACCELERATES",
+      "class": "cost"
+     },
+     {
+      "text": "THE VECTOR-COST IS SEVERE AND LASTING — sustained use walks you somewhere",
+      "class": "cost"
+     }
+    ],
+    "designNote": "⚠️ THE MOST PHILOSOPHICALLY LOADED CRAFT IN THE GAME. `foreclose` IS Erik's definition of evil, made castable — and the catalog prices it exactly right: every use MOVES YOU, and the drift ACCELERATES. Its antipode is `hold_the_aperture` below, which is the same power spent to keep things OPEN. That pair is the framework's whole ethics as two T-IV/T-V crafts."
+   },
+   {
+    "id": "unmake_seal",
+    "tier": 5,
+    "functions": [
+     "break",
+     "open",
+     "reveal",
+     "strike",
+     "summon"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "penetration",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 2,
+     "scope": 3,
+     "variance": 6,
+     "damageType": "precursor"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "penetration",
+      "delta": "open MAJOR seals — vaults, containments, the doors the valley learned to walk around; sense a seal's PURPOSE-SHADOW",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: open GRAVE SEALS — the ones holding back the worst the Precursors feared; open a thing AT DISTANCE by its address",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "crack a minor binding — half the reach, and you can close it again",
+     "surge": "REFUSED at r3 — a grave seal is opened or it is not; there is no half-opened grave."
+    },
+    "bounds": [
+     {
+      "text": "MINOR SEALS ONLY at r1; what is inside is the GM's",
+      "class": "hard"
+     },
+     {
+      "text": "PURPOSE-SHADOW IS A HINT, NOT CERTAINTY; SOME DOORS NOTICE BEING READ",
+      "class": "hard"
+     },
+     {
+      "text": "NOTHING ABOUT THIS IS AIMED. WHAT COMES OUT WAS CONTAINED BY PEOPLE WHO KNEW MORE THAN YOU.",
+      "class": "hard"
+     }
+    ],
+    "designNote": "'Nothing about this is aimed. What comes out was contained by people who knew more than you.' — the single best HARD bound in 285 crafts, and it was already written."
+   },
+   {
+    "id": "hold_the_aperture",
+    "tier": 5,
+    "functions": [
+     "bind",
+     "open",
+     "ward"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "anchorStrength",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "soak": 0,
+     "soakRank": 0,
+     "duration": 2,
+     "targets": 1,
+     "damageType": "precursor",
+     "note": "A TWENTIETH DEFENSIVE LOGIC — HELD-OPEN: soak 0, because it does not stop harm; it stops a thing from CLOSING. The only guard in the catalog whose subject is a possibility rather than a person."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "anchorStrength",
+      "delta": "hold open something LARGER — a way that wants to seal, an outcome the lattice is foreclosing, A PERSON THE WORLD IS CLOSING AROUND",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: hold a GREAT APERTURE open against THE LATTICE'S FULL WILL — a district's foreclosure halted, a grave outcome refused",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "hold one thing open briefly — half the duration, and letting go costs nothing",
+     "surge": "double it; THE PUSH-BACK IS RELENTLESS AND REAL"
+    },
+    "bounds": [
+     {
+      "text": "ONE THING, ONE SCENE; costs continuously; WHEN YOU LET GO IT CLOSES",
+      "class": "hard"
+     },
+     {
+      "text": "THE PUSH-BACK IS RELENTLESS; hold too much too long and it takes something",
+      "class": "cost"
+     },
+     {
+      "text": "THIS IS THE HARDEST THING IN THE GAME AND THE GM PRICES IT AS SUCH",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ THE EXACT ANTIPODE OF `foreclose`, AND THE FRAMEWORK'S ANSWER TO IT. foreclose CLOSES a possibility and drifts you; hold_the_aperture KEEPS ONE OPEN and costs you continuously. Same precursor power, opposite moral direction — and note the game's own text calls THIS one 'the hardest thing in the game'. Not the one that unmakes; the one that refuses to let something close."
+   }
+  ],
+  "cross_pole_braid": [
+   {
+    "id": "meaning_engine",
+    "tier": 4,
+    "functions": [
+     "command",
+     "mend",
+     "reveal"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "fidelity",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 4,
+     "requiresPoles": [
+      "enginewright",
+      "numinous"
+     ],
+     "damageType": "precursor"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "HOLD THE REGISTER OPEN rather than striking it once — a deep Precursor work answers REPEATEDLY, and answers better",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "address it once — half the exchange, and it may not answer",
+     "surge": "double it; BEING ADDRESSED SPECIFICALLY IS NOT THE SAME AS BEING WELCOMED"
+    },
+    "bounds": [
+     {
+      "text": "NEEDS DENSE SUBSTRATE; what answers MAY NOT BE TAME",
+      "class": "hard"
+     },
+     {
+      "text": "BEING ADDRESSED SPECIFICALLY IS NOT THE SAME AS BEING WELCOMED",
+      "class": "hard"
+     }
+    ],
+    "designNote": "⚠️ CCODE: `requiresPoles` — a SECOND instance of the dual-pole gating problem (checks item 6e, first seen on somatic's the_whole_act). It is not a one-off: THREE braid crafts all require two traditions, and the engine cannot express it. This is now a real category needing support, not an edge case."
+   },
+   {
+    "id": "harbored_flame",
+    "tier": 4,
+    "functions": [
+     "conceal",
+     "heal"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "healing",
+     "concealment",
+     "targets"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 4,
+      "d": 4
+     },
+     "plus": 2,
+     "targets": 4,
+     "duration": 8,
+     "requiresPoles": [
+      "umbral",
+      "blazeborn"
+     ]
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "THE HARBOR MOVES WITH THOSE IT HOLDS — a company travels inside it, hidden AND mending as they go",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small harbor — half the healing, and the two poles pull less",
+     "surge": "double it; THE TWO POLES STILL FIGHT, and the cost rises with every person inside"
+    },
+    "bounds": [
+     {
+      "text": "THE TWO POLES FIGHT; costly; OWN-LIGHT SEARCHERS CAN CRACK IT",
+      "class": "hard"
+     },
+     {
+      "text": "the cost RISES WITH EVERY PERSON held",
+      "class": "cost"
+     }
+    ],
+    "designNote": "⚠️ THE CRAFT THE CANARY FOUND, and it is a genuinely lovely thing: umbral's HARBOR braided with blazeborn's HEALING LIGHT — a hidden place that mends. It also resolves the tension I flagged when authoring both poles (umbral bounds CONSEQUENCE, blazeborn bounds POWER): here they fight, mechanically, and the fighting IS the cost."
+   },
+   {
+    "id": "the_turning_word",
+    "tier": 4,
+    "functions": [
+     "bind",
+     "heal",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "persuasion",
+     "scope",
+     "duration"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 6,
+     "scope": 3,
+     "requiresPoles": [
+      "threnodist",
+      "syllogist"
+     ]
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "duration",
+      "delta": "THE TURNING HOLDS PAST THE MOMENT — a crowd moved STAYS moved after you have gone; a council's decision keeps",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "reach a few — half the scope, and nobody feels handled",
+     "surge": "double it; A CHORD YOU MADE IS A CHORD YOU ARE ANSWERABLE FOR"
+    },
+    "bounds": [
+     {
+      "text": "NEEDS A REAL SHARED CHORD TO STRIKE — a crowd set immovably resists",
+      "class": "hard"
+     },
+     {
+      "text": "A CHORD YOU MADE IS A CHORD YOU ARE ANSWERABLE FOR",
+      "class": "cost"
+     }
+    ],
+    "designNote": "The emotional/logical braid — pathos and logos held together, which is exactly what each pole's bounds said it could not do alone ('the unreasonable and the EMOTION-RULED resist' / 'a will set against you IS set against you'). The braid is the authored answer to both."
+   }
+  ]
+ },
+ "findings": [
+  "⚠️ THE CANARY EARNED ITS KEEP. Folding ONE tradition surfaced `harbored_flame` — a `cross_pole_braid` craft living inside a tradition file and covered by nothing. A sweep found 9 uncovered of 285. They were missed for a real reason: I authored BY TRADITION and these sit OUTSIDE the 27. Finding this at tradition 1 instead of tradition 27 is the entire argument for canarying a big change.",
+  "AND THEY ARE NOT FILLER — they are arguably the most important nine crafts in the game. The 6 precursor arts are the T3-T5 SPINE of the whole precursor layer (the thing SNG-261 §B has been trying to wire), and the 3 braids are the ONLY crafts requiring TWO poles.",
+  "⚠️ CCODE — DUAL-POLE GATING IS NOW A REAL CATEGORY, NOT AN EDGE CASE. Checks item 6e logged it from ONE instance (somatic's the_whole_act). There are now FOUR: all three braids carry `requiresPoles`, and the engine cannot express any of them. Worth building properly rather than special-casing.",
+  "⚠️ A TWENTIETH DEFENSIVE LOGIC — HELD-OPEN (`hold_the_aperture`): soak 0, because it does not stop harm, it stops a thing from CLOSING. The only guard in 285 crafts whose subject is A POSSIBILITY rather than a person.",
+  "⚠️ AND THE PAIR AT THE TOP OF THE PRECURSOR LADDER IS ERIK'S FRAMEWORK, MADE CASTABLE: `foreclose` (T-IV) closes a possibility and DRIFTS YOU, with the drift ACCELERATING — foreclosure being his own definition of evil. `hold_the_aperture` (T-V) is the same power spent to keep something OPEN, at continuous cost. And the game's own text calls THAT one 'the hardest thing in the game' — not the one that unmakes, but the one that refuses to let something close. Nobody had to add the ethics; they were already in the catalog.",
+  "`unmake_seal` r3's bound is the best in 285 crafts and it was already written: 'NOTHING ABOUT THIS IS AIMED. WHAT COMES OUT WAS CONTAINED BY PEOPLE WHO KNEW MORE THAN YOU.'"
+ ]
+}

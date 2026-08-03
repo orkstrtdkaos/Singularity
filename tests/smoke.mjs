@@ -7348,7 +7348,7 @@ await (async () => {
   // The CLASH stays in the narrated branch on purpose: a clash is an EVENT someone witnesses, not ambient
   // pressure, and inventing 61 of them per pass would be a different lie.
   check("208/CCODE-105: the arc-push runs for EVERY living legend, not only the narrated one",
-    /for \(const f of living\) applyEpicArcPush\(ws, f, currentWorldDay\)/.test(wtSrc208));
+    /for \(const f of living\)/.test(wtSrc208) && /applyEpicArcPush\(ws, f, currentWorldDay, urgency\)/.test(wtSrc208));
   check("208/CCODE-105: opposing pushes NET per arc, so the arithmetic is settled before anyone narrates",
     /ws\.arcNetPush = net/.test(wtSrc208));
   check("208: a clash still resolves in the narrated branch (an event has a witness)",

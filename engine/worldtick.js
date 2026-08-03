@@ -508,7 +508,7 @@ const EPIC_PUSH_CAP = 6;
  *  developments are already per-player-generated, so folding this into the local arcStageNow keeps it
  *  consistent and works offline — no cross-player double-count). A `stopped` epic pushes nothing this cycle;
  *  a `wounded` one pushes at half. Returns the applied push or null. */
-export function applyEpicArcPush(ws, figure, worldDay) {
+export function applyEpicArcPush(ws, figure, worldDay, urgency = 1) {
   const aff = figure?.arcAffinity;
   if (!aff?.arcId || !aff.dir) return null;
   const status = effectiveEpicStatus(ws, figure.id, worldDay);
@@ -517,7 +517,11 @@ export function applyEpicArcPush(ws, figure, worldDay) {
   if (blunt === 0) return null;
   ws.epicArcPushes = ws.epicArcPushes || {};
   const cur = ws.epicArcPushes[figure.id] || { arcId: aff.arcId, push: 0 };
-  cur.push = Math.max(-EPIC_PUSH_CAP, Math.min(EPIC_PUSH_CAP, cur.push + aff.dir * Math.max(1, aff.weight || 1) * blunt));
+  // CCODE-106: `urgency` is how hard THIS figure is leaning right now — 1 when the arc is where they can live
+  // with it, higher when it is running away from them. The CAP still holds, so responsiveness changes the
+  // RATE a figure closes on their limit, never the limit itself.
+  const lean = aff.dir * Math.max(1, aff.weight || 1) * blunt * (Number.isFinite(urgency) ? urgency : 1);
+  cur.push = Math.max(-EPIC_PUSH_CAP, Math.min(EPIC_PUSH_CAP, cur.push + lean));
   ws.epicArcPushes[figure.id] = cur;
   return { arcId: aff.arcId, push: cur.push, dir: aff.dir };
 }
@@ -733,7 +737,35 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   {
     const living = (content.legends?.roster || []).filter(f =>
       f?.arcAffinity?.arcId && effectiveEpicStatus(ws, f.id, currentWorldDay) !== "dead");
-    for (const f of living) applyEpicArcPush(ws, f, currentWorldDay);
+    // CCODE-106 — THEY RESPOND TO WHAT IS HAPPENING. Erik: "if it's heard that something is moving forward,
+    // other NPCs will become more motivated to try to stop or help it — where does that come in?"
+    //
+    // It did not. Every legend pushed a fixed `dir × weight` every pass forever, so an arc was the SUM OF A
+    // CENSUS rather than a contest: whichever side had more figures won by arithmetic, at a constant rate,
+    // and nobody ever reacted to losing. That is a world of people with opinions and no eyes.
+    //
+    // So the push is now scaled by how the arc stands AGAINST the pusher. Someone watching the thing they
+    // fear gain ground leans in HARDER; someone whose side is already carrying it eases off. That single term
+    // turns a tug-of-war into a RESTORING one — arcs still move, and decisively when one side is genuinely
+    // stronger, but a runaway rallies its opposition instead of simply completing.
+    //
+    // Deliberately NOT modelled: who has HEARD what. Erik said "if it's heard", and a figure reacting to news
+    // that has not reached them would be the reputation-outruns-news bug (CCODE-85) in a new place. Every
+    // legend here reacts to the arc's own state, which is the thing they all live inside. Per-figure
+    // knowledge is a real next step and it is named in the ALERT rather than faked here.
+    const cfg = content.rules?.arcResponse || {};
+    const perPoint = Number.isFinite(cfg.perPoint) ? cfg.perPoint : 0.12;   // urgency gained per point against you
+    const maxMult = Number.isFinite(cfg.maxMult) ? cfg.maxMult : 2.0;       // nobody pushes infinitely hard
+    const minMult = Number.isFinite(cfg.minMult) ? cfg.minMult : 0.4;       // and a winning side never fully stops
+    const netBefore = ws.arcNetPush || {};
+    for (const f of living) {
+      const arcId = f.arcAffinity.arcId, dir = f.arcAffinity.dir;
+      const standing = Number(netBefore[arcId]) || 0;
+      // `against` is positive when the arc has moved the way this figure does NOT want it to.
+      const against = -Math.sign(dir) * standing;
+      const urgency = Math.max(minMult, Math.min(maxMult, 1 + against * perPoint));
+      applyEpicArcPush(ws, f, currentWorldDay, urgency);
+    }
     // The NET position per arc, so a reader (and the GM block) sees the settled truth rather than one side.
     const net = {};
     for (const rec of Object.values(ws.epicArcPushes || {})) {

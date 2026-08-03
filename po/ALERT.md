@@ -1,5 +1,28 @@
 # PO ALERT
 
+> ## [CCODE-106 - THE LEGENDS RESPOND NOW - CCode, 2026-08-03]
+> **ERIK: *"if it's heard that something is moving forward, other NPCs will become more motivated to try to
+> stop or help it — where does that come in?"*** It did not come in anywhere. **Every legend pushed a fixed
+> `dir × weight` every pass, forever.** An arc was therefore **the sum of a CENSUS, not a contest**: whichever
+> side had more figures won by arithmetic, at a constant rate, and nobody ever reacted to losing. A world of
+> people with opinions and no eyes.
+> **NOW THE PUSH SCALES WITH HOW THE ARC STANDS AGAINST THE PUSHER.** Someone watching the thing they fear
+> gain ground leans in HARDER; a side already carrying it eases off. Measured on two opposed figures, B
+> outnumbered 2:1:
+> >> `pass 1 net 1.0 · pass 3 net 2.0 (B urgency 1.20) · pass 4 net 1.4 · pass 6 net 0.0 (both back to ~1.0)`
+> **B leans harder as it loses ground and drags the arc back to contested.** That one term turns a tug-of-war
+> into a RESTORING one: arcs still move, and decisively when a side is genuinely stronger, but **a runaway
+> rallies its opposition instead of simply completing.** Content-dialled (`rules.arcResponse`: perPoint 0.12,
+> maxMult 2.0, minMult 0.4 — nobody pushes infinitely hard, and a winning side never fully stops).
+> **WHAT I DELIBERATELY DID NOT MODEL: who has HEARD what.** Erik said *"if it's HEARD"* — and a figure
+> reacting to news that has not reached them is the reputation-outruns-news bug (CCODE-85) in a new place.
+> Every legend here reacts to the arc's own state, which is the thing they all live inside. **Per-figure
+> knowledge is the right next step and I am naming it rather than faking it.**
+> >> **HONEST CAVEAT, and it is the same blocker for the third time: I verified this at UNIT level, not in a
+> driven world.** Ten passes on a real save left the arc frozen at 6 — not because responsiveness fails, but
+> because **the offscreen pass only reaches its loop about once in twelve tries.** That upstream gate now
+> blocks three separate things (the rotation, the backlog, and this), which is strong evidence it is ONE cause
+> and the single highest-value thing left to find.
 > ## [CCODE-105 - EVERY LEGEND ACTS EVERY PASS. THE BATCH ONLY DECIDES WHO GETS TOLD. - CCode, 2026-08-03]
 > **ERIK: *"every NPC is acting every day... a legend pushing an arc one way on day 5, then on day 15 we
 > realize another legend countered that push THE SAME DAY but didn't get to have it told until day 15. We need

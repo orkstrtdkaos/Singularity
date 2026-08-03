@@ -1,6 +1,36 @@
 # PO ALERT
 
-> ## [SNG-266 r2 — Erik's three corrections, and one corrects MY OWN SPEC] (Aevi, 2026-08-02)
+> ## [SNG-266 — ALL THREE FIXES AUTHORED, Erik approved the curve] (Aevi, 2026-08-02)
+> **1. THE MISSING `rules/encounters.json` — WRITTEN.** Keys verified against content: the only three
+> `enc.def.type` values in the repo are **`duel` (15) · `puzzle` (2) · `challenge` (2)** — plus a **`default`
+> block so a type authored later can never silently pay zero again**, which is exactly the failure that made
+> this file necessary.
+> · **`walkAwayXp` is now a FORMULA, not a value** — paying on **threat gap**: you outclass it → **0** · even →
+>   0.15 · outclassed by a band → **0.50** · badly outmatched → **0.70** of winXp. Rewards **judgement**, and
+>   cannot be farmed.
+> · **`incapacitated` 0 → 0.20 of winXp**, per Erik. *A zero teaches the player that losing is worthless time.*
+> · **`solveXp` EXCEEDS `winXp` at every type** — the most deliberate choice in the file. **292 crafts insist
+>   most problems are not fights; the reward table has to agree**, or fiction and mechanics pull against each
+>   other.
+> · All awards **threat-scaled** (0.4 / 1.0 / 1.8 / 2.8) against `opponent.threat`, a real numeric field in
+>   content (26–45 observed). Base tuned so a notable encounter pays ~30 against L1's cost of 100 — **three even
+>   encounters is a level at the bottom of the ladder.**
+> **2. THE TAPER.** Base band halved (crit 4 · success 3 · partial 2 · fail 1), **`novelBonus` kept at 8** — the
+> base band is paid for *any* resolved action, so it's what compounds; the novel bonus is for doing something
+> genuinely **new**, which is the narrative play worth paying for. Plus **`sceneSoftCap` 20**, beyond which
+> awards drop to 1. **It doesn't punish long scenes — it stops them compounding.**
+> **3. THE LEVEL CURVE — Erik approved.** Add `levelCostCap: 40`; `progression.js` becomes
+> `min(level, cap) × per`. **L1–L40 unchanged** (the early feel Erik liked is untouched), L41–100 flat 4,000
+> instead of rising to 9,900, **cumulative ~322,000 instead of ~495,000.** And it **degrades safely** — with the
+> field absent the formula is identical to today, so old saves and unpatched rules behave exactly as before.
+> **⚠️ CCODE — THE MANIFEST IS THE OTHER HALF, and it is the whole fix.** `rules/encounters.json` **does nothing
+> until it is registered** in `manifest.json` under `provides.rules` — *that omission is precisely how this bug
+> survived.* Also: read `rules.encounters[type] || rules.encounters.default`; implement the threat-ratio scaling
+> and the two formulas; the `min(level, levelCostCap)` read; and the scene soft/hard closes (8 / 14 beats, never
+> mid-action — `SCENE_TURN_CAP` is bounded **storage** only and ends nothing).
+> **THE VERIFICATION THAT MATTERS IS A SESSION-SHAPE SIM** — 1 quest + 2 encounters + ~15 narrative actions,
+> reporting each source's **share** against the 45/35/15/5 target. **Invariant: a player who does one quest and
+> two encounters must out-earn a player who does neither and talks for the same wall-clock time.**> ## [SNG-266 r2 — Erik's three corrections, and one corrects MY OWN SPEC] (Aevi, 2026-08-02)
 > **1. WALK-AWAY — he is right and my flat table was lazy.** I justified it as *"don't tax the player for
 > disengaging correctly"* — but **a flat award doesn't reward *correct* disengagement, it rewards
 > disengagement**, which is a farm: open encounter, walk away, repeat. **Fixed by paying on THREAT GAP, not on

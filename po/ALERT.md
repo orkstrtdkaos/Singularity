@@ -1,6 +1,41 @@
 # PO ALERT
 
-> ## [SNG-263 — ABYSSAL/SERAPHIC (25-26 of 27; 264/285) — THE FINAL ANTIPODE PAIR] (Aevi, 2026-08-02)
+> ## [SNG-265 r2 — THE GOD-NAMED ARE NOT GODS. THEY ARE PEOPLE WHO REFUSED.] (Aevi, 2026-08-02)
+> Erik's reveal: they are **heavily nanotech-augmented humans who NEVER WANTED THE TRANSITION** — they took the
+> substrate into themselves *so they would not be dissolved by it* — **and they named themselves after gods.**
+> **THIS CORRECTS MY CAUTION, AND I WAS WRONG.** I advised importing *the shape, not the roster* (a sky-father,
+> not Zeus). **Void — because the borrowing is DIEGETIC.** Nobody in the Valley is doing comparative mythology.
+> **A heavily-augmented human took the name Zeus for himself**, because it was the only word big enough and
+> because he wanted it. That's not the game borrowing a name; it's **a character borrowing one, in-world, and
+> being judged for it.**
+> **And it's a better story than a pantheon:** every one of them is a person who said *no* to the end of the
+> world and paid for it by becoming something a person should not be. **They are not divine — they are the ones
+> who would not let go**, and they took the names of gods the way a frightened man takes a loud voice.
+> **IT SLOTS INTO LORE THAT IS ALREADY WRITTEN.** `tradition_profiles.json`, on the seraphic: *"The Seraphic
+> Orders, **continuous with the pre-Transition world in a way almost nothing else is**."* The angelic pole is
+> ALREADY the tradition with unbroken pre-Transition continuity — **the god-named are the sharpest instance of
+> it**, and it retroactively explains the Orders' hierarchy, their certainty, and their never-justified habit of
+> weighing people without consent: *some of the people at the top have been there since before.* And
+> `manifest_locals.json` says the Transition *"read intense collective imagination as structured will and
+> enacted it"* — **the god-named are the inverse case: not imagination made real, but PEOPLE WHO REFUSED TO BE
+> READ.**
+> **THE TIERING CONVERGES THREE THREADS.** Heroic / epic / legendary plugs straight into the SNG-260 §A
+> **powerBand** ladder — and **heroic-band god-named ARE Erik's arena-fame idea (item 27) made concrete**: the
+> famous figure you keep hearing about, who can actually be met, served, or fought. **The god-named are the
+> SNG-259 endgame ladder with faces on it.**
+> **What changes in the foothill design:** it is **not a religion, it is a FOLLOWING** — `access.open` means
+> *anyone may take service*, not *anyone may pray*. Observance becomes **relationship with someone who
+> remembers** (companion-stage bonds fit far better than a prayer economy). Crafts are **taught by a person** —
+> the existing teacher access route. **And they can be killed, and they know it** — which is the whole appeal
+> and the whole tragedy: they made themselves into this so they would not end, and they are still endable.
+> **Three things I'd want to get right:** they should be **tired** (Oren Vale's register — complete answers, no
+> relish); **the name should sit slightly wrong on them, and they should know it**; and **not all of them chose
+> well** — a god-named who is *not equal to their own name* is the best story in the set.
+> **ERIK: which band gets authored first?** My strong recommendation is **HEROIC** — the band a party actually
+> meets, where "person, not deity" reads clearest, and where it plugs into the arena idea. And: **do they
+> cluster by AXIS?** (sky/judgement near seraphic, trickster/appetite near abyssal, forge near wright) — that
+> would make **a player's own tradition determine which gods are ambient in their life**, which is strong,
+> cheap worldbuilding.> ## [SNG-263 — ABYSSAL/SERAPHIC (25-26 of 27; 264/285) — THE FINAL ANTIPODE PAIR] (Aevi, 2026-08-02)
 > **All twelve axes are now authored.** One tradition left (valley_craft, the near-centre folk generalist).
 > - **⚠️ ERIK/CCODE — THE PRECURSOR STORY IS RICHER THAN "A LOCKED DOOR", AND IT WAS ALREADY WRITTEN.** Both
 >   poles' T-V crafts are described as *"a **precursor-tier working INNATE TO YOUR KIN**"* —

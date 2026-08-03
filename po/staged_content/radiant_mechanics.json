@@ -342,7 +342,10 @@
     "plus": 0,
     "range": 20,
     "marginFloorPer": 0.02,
-    "note": "T-II = 2d6 per the locked tierLadder (nMult 2). r1's own number: a precise burn at 20 PACES"
+    "note": "T-II = 2d6 per the locked tierLadder (nMult 2). r1's own number: a precise burn at 20 PACES",
+    "penetration": 2,
+    "damageType": "light",
+    "penetrationNote": "penetration 2 is derived from the craft's OWN rank text, not chosen: r2 cuts 'LIGHT ARMOR at close range' and r3 goes through 'a HARMONIC SHIELD'S FIRST RANK'. Harmonic's resonant_shield is authored at soakRank 1/2/3 by rank, so a lance that beats its FIRST rank and light armour is penetration 2 — it cuts rank-1 and rank-2 layers and is stopped by resonant_shield r3 (soakRank 3). That is exactly the ranked counter-pair both traditions describe, and it means neither craft is a flat hard-counter: who wins depends on which rank each has reached."
    },
    "rankDeltas": [
     {
@@ -882,5 +885,6 @@
   "soft": "a limit of SKILL — sustained mastery erodes it",
   "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
   "cost": "the price stays but its FORM changes with mastery"
- }
+ },
+ "damageTypeNote": "CCODE-83 asks for the damage-type mapping and deliberately did not guess it. RADIANT → `light`. NOTE THE CONSEQUENCE, which is the point of the mechanic: the bestiary's the_bright_devourer has an ABSORB affinity to light, so radiant's damage crafts HEAL it. The valley's light-workers genuinely cannot use their own tradition against that adversary — which is precisely the authored subversion I flagged when I gave the bestiary its bodies. It only becomes real once the type is declared, and it is now declared."
 }

@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "id": "coliseum_inner_grid",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Answers CCODE-89d: 'THE INNER CELLS ARE YOURS, AND THE ENGINE IS INERT UNTIL THEY EXIST.'",
+ "note": "CCode said I do not owe 36 × 16 cells and that authoring the played ones is the whole job. TRUE — but reading `drawBackgroundAxis` shows something better: THE SECOND AXIS HAS EXACTLY FOUR KINDS — `origin`, `background`, `role`, `deed`. So an inner cell is not (category × specific-biography); it is (category × KIND-PAIR), and there are only 16 kind-pairs IN THE WHOLE GAME. AUTHOR THE 16 SHAPES ONCE AND THEY SERVE ALL 36 CATEGORIES, with the two competitors' actual values interpolated at run time. That is 16 authored things instead of 576, and it is not a shortcut — it is the right decomposition, because WHAT A CONTEST ASKS depends on the KIND of biography being tested, while the category supplies HOW it is contested. `origin vs deed` is 'the place that made you against the thing you did' in every category; only the medium changes.",
+ "theDecomposition": {
+  "firstGrid": "names the CONTEST KIND — how it is fought (36 family-pair cells, already authored)",
+  "secondGrid": "names WHOSE STORY IS ON TRIAL — the kind-pair decides what the contest is ABOUT",
+  "interpolation": "the competitors' actual origin/background/role/deed strings fill the shape at run time",
+  "whyItWorks": "a contest is (medium × subject). The first grid is the medium. The kind-pair is the subject. Nothing else is needed."
+ },
+ "kindPairs": [
+  {
+   "pair": [
+    "origin",
+    "origin"
+   ],
+   "name": "Two Homes",
+   "shape": "Both competitors' birthplaces are the ground of the contest — the challenge is set to favour NEITHER, on terrain or terms belonging to both or to neither.",
+   "whatItAsks": "Which upbringing prepared you better for a place that is not yours?",
+   "designNote": "The symmetric pairs are the cleanest and should be authored first — they need no asymmetry logic."
+  },
+  {
+   "pair": [
+    "origin",
+    "background"
+   ],
+   "name": "The Made and the Born",
+   "shape": "One competitor is tested on where they are FROM, the other on WHAT WAS DONE TO THEM. The contest gives each the conditions of their own formation and asks who adapts.",
+   "whatItAsks": "Is a person more the place that raised them, or the thing that happened to them?",
+   "designNote": "⚠️ THIS IS THE AXIS'S BEST PAIR and it is the game's own body↔mind question wearing different clothes. Worth flagging to Erik as the one to feature."
+  },
+  {
+   "pair": [
+    "origin",
+    "role"
+   ],
+   "name": "The Native and the Known",
+   "shape": "Home ground against reputation. The local advantage is real and so is the crowd's expectation.",
+   "whatItAsks": "Does knowing the ground beat being known?"
+  },
+  {
+   "pair": [
+    "origin",
+    "deed"
+   ],
+   "name": "The Place and the Act",
+   "shape": "The contest is staged in conditions echoing one competitor's homeland and framed around the other's most-travelled deed.",
+   "whatItAsks": "Can you out-perform your own famous moment on someone else's ground?"
+  },
+  {
+   "pair": [
+    "background",
+    "background"
+   ],
+   "name": "Two Woundings",
+   "shape": "Both are tested on what was done to them. The Coliseum's most uncomfortable cell, and its rules require a Mercy-House witness.",
+   "whatItAsks": "Who has made more of what they did not choose?",
+   "designNote": "⚠️ SAFETY NOTE, and I recommend it stand: `background` is 'what was done to you' — this cell puts two people's damage in an arena for a crowd. Authored WITH a required witness and a competitor veto, because a game that does this thoughtlessly is a different and worse game."
+  },
+  {
+   "pair": [
+    "background",
+    "role"
+   ],
+   "name": "The Wound and the Mask",
+   "shape": "What was done to you, against who you have made yourself into. One competitor must perform their public role under conditions built from the other's formative harm.",
+   "whatItAsks": "Does the mask hold when the ground is someone else's worst day?"
+  },
+  {
+   "pair": [
+    "background",
+    "deed"
+   ],
+   "name": "The Cause and the Consequence",
+   "shape": "One competitor's formation is the arena; the other's famous act is the task. The Coliseum enjoys this pairing when the two are thematically related and the crowd can see it.",
+   "whatItAsks": "Would your great act still be great if it were attempted from inside their history?"
+  },
+  {
+   "pair": [
+    "role",
+    "role"
+   ],
+   "name": "Two Reputations",
+   "shape": "The purest and most common cell: both competitors do the thing they are KNOWN for, at the same time, judged against each other.",
+   "whatItAsks": "Are you actually what people say you are?",
+   "designNote": "This is the DEFAULT cell and should be the fallback when a kind-pair has no authored shape — it is the one that always makes sense and always reads clearly to a crowd."
+  },
+  {
+   "pair": [
+    "role",
+    "deed"
+   ],
+   "name": "The Name and the Story",
+   "shape": "Standing against a single famous act. One competitor is tested on consistency, the other on repeatability.",
+   "whatItAsks": "Is it better to be reliably good, or to have once been extraordinary?"
+  },
+  {
+   "pair": [
+    "deed",
+    "deed"
+   ],
+   "name": "Two Stories",
+   "shape": "Both competitors' travelled deeds are set against each other — usually by staging a contest whose shape rhymes with both.",
+   "whatItAsks": "Whose best day was actually better?",
+   "designNote": "⚠️ The cell most likely to be EMPTY early: it requires BOTH competitors to have a deed that SPREAD. CCode's short-axis rule means new characters simply will not draw it, which is correct and self-solving as play accumulates."
+  },
+  {
+   "pair": [
+    "origin",
+    "none"
+   ],
+   "name": "The Stranger's Ground",
+   "shape": "One competitor drew a SHORT axis — they have no history the world knows. The contest is set entirely on the other's terms, and the unknown competitor is given no handicap.",
+   "whatItAsks": "Can a person with no story beat a person with one?",
+   "designNote": "⚠️ CCode's short-axis rule generates this and it is a GIFT rather than a gap: an unknown competitor with nothing on their axis is the classic arena story — nobody knows what they can do, INCLUDING the person betting against them. Authored deliberately rather than treated as a null case."
+  },
+  {
+   "pair": [
+    "none",
+    "none"
+   ],
+   "name": "Two Strangers",
+   "shape": "Neither competitor has a public history. The Coliseum picks the challenge itself, by lot, from the category — and the crowd loves it, because nobody can handicap it.",
+   "whatItAsks": "What happens when the grid has nothing to go on?",
+   "designNote": "The true null case, and it resolves cleanly: fall back to the first-grid cell's own `contest` line, which is already authored for all 36. THE ENGINE NEVER HAS TO HANDLE AN EMPTY GRID."
+  }
+ ],
+ "workedExamples": [
+  {
+   "firstCell": "harm_restore — The Standing Wound",
+   "kindPair": [
+    "background",
+    "role"
+   ],
+   "rendered": "The Mercy-House volunteer is stood on ground dressed to echo the HARMER'S formative history — the flooded works, the cold ward, whatever made them. The RESTORER must work in that setting while being what they are publicly known to be. Judged on the wound closed AND on whether the restorer's known character held in a place built out of someone else's worst year.",
+   "note": "Shows the interpolation: the category supplies wound-and-mending; the kind-pair supplies whose story the room is made of."
+  },
+  {
+   "firstCell": "harm_know — The Named Blow",
+   "kindPair": [
+    "role",
+    "deed"
+   ],
+   "rendered": "The knower is the one with the REPUTATION and must call the strikes; the harmer is the one with the famous deed and must land the thing they are known for. The crowd already knows what is coming — that is the point. Judged on calls made against a blow everybody in the stands could name.",
+   "note": "The best kind of arena scene: the tension is not what will happen but whether the famous thing still works when it is expected."
+  },
+  {
+   "firstCell": "harm_protect — The Held Line",
+   "kindPair": [
+    "origin",
+    "none"
+   ],
+   "rendered": "The line is set on terrain from the KNOWN competitor's homeland. The stranger gets no adjustment and no introduction. Ten passes, then the roles swap — and the second half is where the crowd finds out what the stranger is.",
+   "note": "The short-axis case authored as drama rather than handled as an exception."
+  }
+ ],
+ "questionsBack": [
+  "⚠️ CCODE — ONE THING I NEED FROM YOU: does a kind-pair arrive ORDERED (competitor A's kind first) or unordered? `The Made and the Born` and `The Cause and the Consequence` are ASYMMETRIC — they assign different jobs to each side — so if the pair is unordered I need to author which competitor takes which role, and the honest answer is THE ONE WHOSE AXIS SLOT WAS PICKED BY THEIR OPPONENT takes the tested role. That is the blind rule doing the work, and it is consistent with everything else in the grid. Confirm and I will fold it in.",
+  "ERIK — `background` is 'WHAT WAS DONE TO YOU'. The `Two Woundings` cell puts two people's damage in an arena for a paying crowd. I authored it WITH a required Mercy-House witness and a competitor veto. I think that is right and I think the cell should exist — the Coliseum being willing to stage it says something true about the Coliseum — but it is your call, and it is the one cell I would understand cutting."
+ ],
+ "findings": [
+  "THE DECOMPOSITION IS THE FINDING: the second axis has exactly FOUR kinds (origin, background, role, deed), so there are only SIXTEEN kind-pairs in the entire game. Authoring the 16 SHAPES once serves all 36 categories, with the competitors' real values interpolated at run time — 16 authored things instead of 576. And it is not a shortcut: a contest is (medium × subject), the first grid is the MEDIUM, the kind-pair is the SUBJECT, and nothing else is required.",
+  "CCODE'S SHORT-AXIS RULE IS A GIFT, NOT A GAP. A competitor with no public history draws a short axis — and 'the stranger nobody can handicap' is the classic arena story. I authored `The Stranger's Ground` and `Two Strangers` as real cells rather than null cases, and the true null resolves cleanly by falling back to the first-grid cell's own `contest` line, which is already authored for all 36. THE ENGINE NEVER HAS TO HANDLE AN EMPTY GRID.",
+  "`role × role` SHOULD BE THE FALLBACK when a kind-pair has no authored shape: both competitors do the thing they are known for, at the same time, judged against each other. It always makes sense and always reads to a crowd.",
+  "THE `deed × deed` CELL WILL BE EMPTY EARLY AND THAT IS CORRECT — it requires BOTH competitors to have a deed that SPREAD. It fills in as play accumulates, which ties the arena to CCODE-85's deed system exactly as CCode intended.",
+  "⚠️ `origin × background` — 'The Made and the Born' — IS THE GAME'S OWN BODY↔MIND QUESTION WEARING DIFFERENT CLOTHES: is a person more the place that raised them or the thing that happened to them? It is the best pair on the axis and worth featuring."
+ ]
+}

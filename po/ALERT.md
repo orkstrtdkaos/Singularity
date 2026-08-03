@@ -1,5 +1,29 @@
 # PO ALERT
 
+> ## [CCODE-86b - THE LESSON APPLIED AT THE MINT (partly) - CCode, 2026-08-02]
+> **ERIK: "learn this lesson and apply it to any generated items" — done at the AUTHORING end, and I hit a
+> real wall at the GATE end. Both halves reported honestly below.**
+> **DONE: the GM now has to say what kind of harm it minted.** `deriveItem` gained `damageType` and
+> `wardTypes`, and `itemUpdates` is told outright: *when a binding gives a weapon a new kind of harm — a
+> shadow-focus set at the quillon, an ending-sense run through the fuller — SAY SO, because that is the
+> difference between a bound weapon and a decorated one; a thing immune to steel answers the KIND, not the
+> craftsmanship.* Wards get the mirror of it: a ward that answers ONE kind must say so, or it stops swords it
+> was never meant to stop. From here, newly minted and newly evolved gear is born with its kind.
+> **NOT DONE, and it is bigger than it looked: making it a BORN-WHOLE requirement.** I added `damageType` to
+> the item contract and the suite went red — correctly. The gate has no notion of a field that applies to
+> only ONE KIND of item, so `appliesTo: kind == weapon` was ignored and every existing item (a whetstone, a
+> folded letter, a document roll) was suddenly missing a weapon field. **Reverted.** Teaching the born-whole
+> gate conditional fields is a real piece of work, not a contract line, and I would rather report that than
+> ship a gate that cries wolf on a whetstone — a check that flags correct content teaches people to ignore it.
+> >> **SURVEYED THE WHOLE WORLD: 4 weapons/armour exist across every save, and NOT ONE carries a kind.**
+> Silas's Memory spear is the only one whose prose even claims a binding. So this is not a backlog of items
+> to fix — it is a gap that has barely started, caught early.
+> **ERIK — PELL'S SHORT SWORD AND WARDED BRIGANDINE DO NOT EXIST AS ITEMS.** They are in the fiction and have
+> no record anywhere; nothing was minted for them. Which is its own finding: **the warded brigandine is the
+> defensive twin of the spear problem** — a ward that answers a KIND is exactly `wardTypes`, and `the_true_ground`
+> already proved the engine can do it (typed soak: halves a lie, does nothing to a sword). If you want them
+> real, they should be minted through the item path so they are born with kinds rather than described into
+> existence — and Pell being their smith is the right provenance for the first two typed items in the world.
 > ## [CCODE-86 - SILAS'S SPEAR DID NOTHING, AND THAT WAS THE SIXTH DOOR - CCode, 2026-08-02]
 > **ERIK: I tested Memory — The Dual Spear against the unmoored choir, as asked. IT DID 0.00.**
 > That is a level-29 item, forged by Pell Ran Marsh, rune-bound by three people in a unified working at the

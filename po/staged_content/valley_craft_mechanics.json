@@ -1,0 +1,871 @@
+{
+ "schemaVersion": 1,
+ "id": "valley_craft_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. THE FINAL TRADITION: 27 of 27. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, tradition 27 of 27 — VALLEY CRAFT, the near-centre folk generalist, and the craft catalog is COMPLETE at 285/285. THIS TRADITION IS THE MOST MECHANICALLY SPECIFIC IN THE ENTIRE CATALOG and it is not close: it states '+2 extra health and energy overnight', 'travel time -1h on familiar routes', 'once per day', 'once per season', 'once per location per visit' OUTRIGHT. Where a pole tradition writes 'revelation at scale', valley_craft writes '+2'. That is exactly right for the folk generalist — and it means this file was nearly pure transcription.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "crafts": [
+  {
+   "id": "wayfinding",
+   "tier": 1,
+   "functions": [
+    "foresee",
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "tracking",
+    "timeReach",
+    "travelSpeed"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "timeReach": 24,
+    "note": "r1's own number: 'a clear trail UP TO A DAY OLD'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "timeReach+travelSpeed",
+     "delta": "trails DAYS old; read a campsite's story (numbers, mood, hurry); TRAVEL TIME -1H on familiar routes",
+     "from": "r2 grants — its own stated number"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: one look at open country reveals routes, hazards and anything recently unusual; ANTICIPATE WHERE QUARRY IS HEADED",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick read of the ground — half the reach, and it costs no time",
+    "surge": "double the read; PREDICTION FAILS AGAINST QUARRY THAT KNOWS YOU ARE TRACKING"
+   },
+   "bounds": [
+    {
+     "text": "trails OLDER THAN A DAY at r1; deliberate anti-tracking beats you",
+     "class": "soft"
+    },
+    {
+     "text": "NO EFFECT IN TRUE WHITEOUT; cannot track flyers",
+     "class": "hard"
+    },
+    {
+     "text": "PREDICTION FAILS AGAINST QUARRY THAT KNOWS YOU ARE TRACKING",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "greenlore",
+   "tier": 1,
+   "functions": [
+    "heal",
+    "hinder",
+    "reveal",
+    "sustain"
+   ],
+   "shape": "healing",
+   "operativeAxis": [
+    "healing",
+    "remedy"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 4
+    },
+    "plus": 1,
+    "note": "incapacitating rung (it also poisons). A FOURTEENTH THEORY OF MEDICINE — HERBAL: small, reliable, over a rest."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "remedy",
+     "delta": "counter MOST NATURAL poisons and sickness; remedies now ALSO RESTORE ENERGY; read an ailment from face and breath",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: brews verging on legend — A NIGHT'S SLEEP IN AN HOUR, clarity through exhaustion, ONE DOSE THAT STABILIZES THE DYING",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a simple tea — half the restoration, brewed in half the time",
+    "surge": "double the potency; IT CANNOT BE STOCKPILED — preparation is the craft"
+   },
+   "bounds": [
+    {
+     "text": "cannot treat SERIOUS WOUNDS or strong toxins; needs LOCAL PLANTS",
+     "class": "hard"
+    },
+    {
+     "text": "PRECURSOR-TOUCHED AFFLICTIONS RESIST",
+     "class": "hard"
+    },
+    {
+     "text": "cannot stockpile — preparation is the craft",
+     "class": "soft"
+    },
+    {
+     "text": "IT HAS TO BE TAKEN, WHICH MEANS IT HAS TO BE GIVEN",
+     "class": "hard"
+    }
+   ],
+   "designNote": "A FOURTEENTH THEORY OF MEDICINE — HERBAL, and the humblest: small reliable restoration over a rest. Its final HARD bound is the loveliest in the tradition: 'IT HAS TO BE TAKEN, WHICH MEANS IT HAS TO BE GIVEN.' A healing craft bounded by consent."
+  },
+  {
+   "id": "mediators_tongue",
+   "tier": 1,
+   "functions": [
+    "bind",
+    "command",
+    "reveal"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "deescalation",
+    "authority"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 4,
+    "note": "SOCIAL. The folk-shadow of stillhold's stillcraft, and the lore says so explicitly."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "authority",
+     "delta": "broker deals THAT HOLD — agreements you mediate GAIN WEIGHT IN THE COMMUNITY LEDGER; call out a lie in negotiation",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: arbitrate FEUDS OF LONG STANDING; your settlements carry NEAR-LAW in communities that know you; ONCE PER SEASON, one hard case",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "cool it a little — half the effect, and nobody owes you",
+    "surge": "double it; A SETTLEMENT YOU BREAK YOURSELF BURNS THE CRAFT"
+   },
+   "bounds": [
+    {
+     "text": "DOESN'T WORK MID-VIOLENCE — it opens a door, it cannot make anyone accept",
+     "class": "hard"
+    },
+    {
+     "text": "cannot broker WHAT ONE SIDE TRULY CANNOT GIVE",
+     "class": "hard"
+    },
+    {
+     "text": "FAILS AGAINST ZEALOTRY",
+     "class": "hard"
+    },
+    {
+     "text": "A SETTLEMENT YOU BREAK YOURSELF BURNS THE CRAFT",
+     "class": "cost"
+    }
+   ],
+   "designNote": "A TWELFTH tradition refusing coercion mechanically — 'it opens a door, IT CANNOT MAKE ANYONE ACCEPT.' And note the canonical relationship: tradition lore names this 'a folk-shadow of Stillcraft'. The foothill's version of the peace pole, exactly as SNG-265 describes the pattern."
+  },
+  {
+   "id": "tinkers_hand",
+   "tier": 1,
+   "functions": [
+    "make",
+    "mend",
+    "open",
+    "reveal"
+   ],
+   "shape": "healing",
+   "operativeAxis": [
+    "repair",
+    "access"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 4
+    },
+    "plus": 1,
+    "note": "mends the MADE. The folk-shadow of enginewright's mend_device."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "access",
+     "delta": "OPEN common locks and mechanisms; repairs now HOLD PERMANENTLY; build compound devices from scrap",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: diagnose ANY mechanism by touch and sound, PRECURSOR INCLUDED; ONCE PER DAY coax one dead device to run ONE MORE TIME",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "a quick fix — half the durability, done now",
+    "surge": "double the work; COAXED DEVICES DIE AGAIN AFTER"
+   },
+   "bounds": [
+    {
+     "text": "fixes are TEMPORARY UNDER HARD USE at r1",
+     "class": "soft"
+    },
+    {
+     "text": "PRECURSOR MECHANISMS STILL RESIST",
+     "class": "hard"
+    },
+    {
+     "text": "COAXED DEVICES DIE AGAIN AFTER — and understanding Precursor FUNCTION is not understanding its PURPOSE",
+     "class": "hard"
+    }
+   ],
+   "designNote": "⚠️ A SIXTH PRECURSOR HOOK, and the most accessible in the catalog: tinkers_hand r3 diagnoses ANY mechanism 'PRECURSOR INCLUDED' — available to an ordinary valley tinker. And its bound echoes enginewright's mech_sense word for word: understanding FUNCTION is not understanding WHY IT WAS MADE."
+  },
+  {
+   "id": "beastfriend",
+   "tier": 1,
+   "functions": [
+    "bind",
+    "command",
+    "reveal",
+    "strike",
+    "summon"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "rapport",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 6,
+    "targets": 1,
+    "note": "damaging rung (a companion beast can fight). SOCIAL."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "ask simple tasks of animals that know you; A COMPANION BEAST MAY TAKE YOU ON; sense what nearby animals sense",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: parley meaningfully with ANY natural creature; PRECURSOR-TOUCHED BEASTS RECOGNIZE YOU AS NEUTRAL",
+     "from": "r3 grants — a SEVENTH precursor hook"
+    }
+   ],
+   "intensity": {
+    "conserve": "settle the animals — half the rapport, and it asks nothing of them",
+    "surge": "double it; YOU ASK — ALWAYS. Nothing here is compelled."
+   },
+   "bounds": [
+    {
+     "text": "NO COMMANDS — ONLY TRUST; predators stay dangerous",
+     "class": "hard"
+    },
+    {
+     "text": "a companion is A PARTNER, NOT A TOOL — mistreat it and it is gone",
+     "class": "hard"
+    },
+    {
+     "text": "YOU ASK — ALWAYS. Nothing here is compelled.",
+     "class": "hard"
+    }
+   ],
+   "designNote": "A THIRTEENTH tradition refusing coercion — and the most absolute statement of it in 285 crafts: 'YOU ASK — ALWAYS. NOTHING HERE IS COMPELLED.' Three HARD bounds, all saying the same thing. The folk tradition is the strictest of all of them about consent."
+  },
+  {
+   "id": "stonewise",
+   "tier": 1,
+   "functions": [
+    "break",
+    "foresee",
+    "mend",
+    "reveal"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "structuralRead",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "damaging rung (it finds the weak point). The folk-shadow of mason's stone_read."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "structuralRead",
+     "delta": "DATE construction and read its story; DETECT VOIDS BY RESONANCE TAP; find the weak point",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "foresight",
+     "delta": "read GEOLOGY like architecture — predict collapse, slide, or sinkhole; navigate caves by stone-sense; PRECURSOR CONSTRUCTION reads partially",
+     "from": "r3 grants — an EIGHTH precursor hook"
+    }
+   ],
+   "intensity": {
+    "conserve": "a look at the stone — half the certainty, and instant",
+    "surge": "double the read; PREDICTION IS HOURS-SCALE, NOT WEEKS"
+   },
+   "bounds": [
+    {
+     "text": "deliberately DISGUISED WORK needs a check",
+     "class": "soft"
+    },
+    {
+     "text": "VOID DETECTION GIVES PRESENCE, NOT LAYOUT",
+     "class": "hard"
+    },
+    {
+     "text": "PRECURSOR MATERIAL reads only partially",
+     "class": "hard"
+    },
+    {
+     "text": "PREDICTION IS HOURS-SCALE, NOT WEEKS — living rock keeps some secrets",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "rivercraft",
+   "tier": 1,
+   "functions": [
+    "foresee",
+    "move",
+    "reveal",
+    "travel"
+   ],
+   "shape": "reposition",
+   "operativeAxis": [
+    "watercraft",
+    "foresight",
+    "range"
+   ],
+   "mechanic": {
+    "range": 10,
+    "push": 0,
+    "magnitude": 3,
+    "duration": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "watercraft",
+     "delta": "RUN WATER OTHERS PORTAGE; read WHAT THE RIVER CARRIES and where from; night navigation",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: hold THE WHOLE WATERSHED in your head — predict flood and drought WEEKS OUT, trace ANY sample to its source reach",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "read the water — half the certainty, and it costs nothing",
+    "surge": "double it; THE GRAY WATER READS AS SILENCE — a gap, not a message"
+   },
+   "bounds": [
+    {
+     "text": "rapids BEYOND YOUR CRAFT'S CLASS still say no",
+     "class": "hard"
+    },
+    {
+     "text": "THE GRAY WATER READS AS SILENCE — a gap, not a message",
+     "class": "hard"
+    },
+    {
+     "text": "tracing NEEDS A SAMPLE IN HAND",
+     "class": "hard"
+    }
+   ],
+   "designNote": "'The gray water reads as SILENCE — a gap, not a message' ties this craft directly to the water-contamination arc Erik's own characters played through. The folk tradition's river-reader can tell you WHERE the silence is, and that is all."
+  },
+  {
+   "id": "quiet_step",
+   "tier": 1,
+   "functions": [
+    "conceal",
+    "move"
+   ],
+   "shape": "reposition",
+   "operativeAxis": [
+    "stealth",
+    "targets"
+   ],
+   "mechanic": {
+    "range": 6,
+    "push": 0,
+    "magnitude": 3,
+    "duration": 4,
+    "targets": 1,
+    "note": "PHYSICAL. The folk-shadow of umbral's shadowstep, at a human scale."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "stealth",
+     "delta": "pass ALERT WATCHERS with cover; READ A GUARD PATTERN in minutes and thread it; leave a pursuit behind in broken country",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "enter and leave watched places AS IF THE WATCH BLINKED; MOVE A SMALL PARTY quietly; ONCE PER DAY break a pursuit clean",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "move quietly — half the concealment, and you can move at speed",
+    "surge": "double it; 'GONE' MEANS ESCAPED, NOT TELEPORTED"
+   },
+   "bounds": [
+    {
+     "text": "ALERT SENTRIES AND OPEN GROUND beat you without a check",
+     "class": "soft"
+    },
+    {
+     "text": "ANIMALS STILL SMELL YOU",
+     "class": "hard"
+    },
+    {
+     "text": "cannot vanish from SOMEONE ALREADY WATCHING",
+     "class": "hard"
+    },
+    {
+     "text": "'GONE' MEANS ESCAPED, NOT TELEPORTED — the GM places you plausibly",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "storykeeper",
+   "tier": 1,
+   "functions": [
+    "foresee",
+    "reveal",
+    "track"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "recall",
+    "implication"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "implication",
+     "delta": "CROSS-REFERENCE stories to surface WHAT THEY JOINTLY IMPLY (+insight when a known topic is in play)",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: access THE OLD STRATUM — pre-crisis stories most keepers lost; recognize when events are RHYMING WITH AN OLD STORY",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "recall what you heard — half the cross-reference, and it costs nothing",
+    "surge": "double it; IMPLICATION ISN'T PROOF"
+   },
+   "bounds": [
+    {
+     "text": "recall is of WHAT YOU HAVE HEARD — gaps are gaps",
+     "class": "hard"
+    },
+    {
+     "text": "IMPLICATION ISN'T PROOF",
+     "class": "hard"
+    },
+    {
+     "text": "the old stratum is FRAGMENTARY and the GM holds its gaps",
+     "class": "hard"
+    }
+   ],
+   "designNote": "'Recognize when events are RHYMING WITH AN OLD STORY' is a quietly extraordinary craft: the folk tradition's answer to prophecy is PATTERN-RECOGNITION ACROSS TIME, and it is bounded by 'implication isn't proof'. Compare figurist's pattern_sense — same insight, one arrived at by philosophy and one by listening to grandmothers."
+  },
+  {
+   "id": "hearthbinding",
+   "tier": 1,
+   "functions": [
+    "bind",
+    "heal",
+    "sustain"
+   ],
+   "shape": "bolster",
+   "operativeAxis": [
+    "restoration",
+    "targets",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 2,
+    "duration": 8,
+    "targets": 6,
+    "note": "⚠️ THE CATALOG'S MOST MECHANICALLY EXPLICIT CRAFT: '+2 extra health and energy to everyone overnight' — stated as a number, in the source, at r1."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "restoration",
+     "delta": "meals you host SUSPEND QUARRELS at the fire — hostile parties WILL EAT TOGETHER; overnight recovery also clears one minor condition",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "SPECIAL: a camp you keep THREE NIGHTS BECOMES A NAMED PLACE (enters place memory); companions and party BOND FASTER at your fire",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a decent camp — half the restoration, and it asks little",
+    "surge": "double it; PEACE LASTS AS LONG AS THE MEAL PLUS THE NIGHT"
+   },
+   "bounds": [
+    {
+     "text": "needs AN EVENING AND MINIMAL MATERIALS; no benefit in a hostile place",
+     "class": "hard"
+    },
+    {
+     "text": "PEACE LASTS AS LONG AS THE MEAL PLUS THE NIGHT — deep feuds are not solved by dinner",
+     "class": "hard"
+    },
+    {
+     "text": "NAMED PLACES PERSIST BUT SO DOES THEIR REPUTATION",
+     "class": "cost"
+    }
+   ],
+   "designNote": "The single most important craft in the tradition, and possibly the catalog: a folk craft that makes CAMP a mechanic, turns a fire into a truce, and can NAME A PLACE INTO THE WORLD'S MEMORY after three nights. It is also the clearest possible argument for what a folk tradition is FOR — no pole tradition has anything like it, because no pole tradition is about ordinary people staying alive together."
+  },
+  {
+   "id": "keen_appraisal",
+   "tier": 1,
+   "functions": [
+    "reveal"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "appraisal",
+    "perceptionDepth"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read an object's HISTORY FROM WEAR — who used it, how, how long; estimate a collection's worth in minutes",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: ONE SWEEP OF A ROOM yields its FULL INVENTORY INCLUDING THE CONCEALED (once per location per visit)",
+     "from": "r3 grants — its own stated rate"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the goods — half the depth, instant",
+    "surge": "double it; EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'"
+   },
+   "bounds": [
+    {
+     "text": "EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'",
+     "class": "hard"
+    },
+    {
+     "text": "HISTORY IS INFERENCE — deliberate aging can fool a first read",
+     "class": "soft"
+    },
+    {
+     "text": "the sweep is ONCE PER LOCATION PER VISIT",
+     "class": "hard"
+    }
+   ]
+  },
+  {
+   "id": "blend_in",
+   "tier": 1,
+   "functions": [
+    "conceal",
+    "deceive"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "concealment",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "soak": 0,
+    "soakRank": 0,
+    "duration": 8,
+    "note": "A NINETEENTH DEFENSIVE LOGIC — UNREMARKED: soak 0, and it is not stealth (quiet_step) or concealment (the_harbor) or misdirection (the_false_target). It is BEING UNWORTH NOTICING. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "concealment",
+     "delta": "not merely unnoticed — READ AS BELONGING. The guard nods you through; THE CROWD MAKES ROOM.",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: you are THE PERSON NOBODY AFTERWARD CAN QUITE DESCRIBE — present, unremarkable, entirely forgettable",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep your head down — half the effect, and you can drop it instantly",
+    "surge": "double it; BEING FORGETTABLE MEANS BEING FORGOTTEN"
+   },
+   "bounds": [
+    {
+     "text": "A SEARCHER WHO KNOWS YOUR FACE AND IS LOOKING defeats it",
+     "class": "hard"
+    },
+    {
+     "text": "BELONGING IS A PERFORMANCE YOU MUST KEEP PERFORMING — one wrong detail ends it",
+     "class": "soft"
+    },
+    {
+     "text": "BEING FORGETTABLE MEANS BEING FORGOTTEN — Valleyfolk who lean on this lose things",
+     "class": "cost"
+    }
+   ],
+   "designNote": "NINETEENTH defensive logic — UNREMARKED. And its COST bound is the saddest small line in the catalog: 'being forgettable means being FORGOTTEN — Valleyfolk who lean on this lose things.' The folk tradition's stealth craft costs you your place among people."
+  },
+  {
+   "id": "hunters_strike",
+   "tier": 1,
+   "functions": [
+    "strike"
+   ],
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 1,
+     "d": 6
+    },
+    "plus": 0,
+    "marginFloorPer": 0.02,
+    "note": "⚠️ THE T-I DAMAGE BASELINE. lethal rung, PHYSICAL, one target, honest force. This is the craft Erik's original benchmark was about: 'a T-I strike at max should be able to kill a T-I beast.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "STRIKE WHERE A THING ACTUALLY ENDS — quickly, without waste, WITHOUT SUFFERING YOU DID NOT NEED",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NOTHING IS WASTED — the strike, the taking, the use. 'The old Valley ethic made into a single motion.'",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a measured strike — half the force, and the animal is not ruined",
+    "surge": "double it; CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead"
+   },
+   "bounds": [
+    {
+     "text": "NO WARRIOR'S FORMS — one target, honest force",
+     "class": "hard"
+    },
+    {
+     "text": "CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS A HUNTER'S CRAFT, NOT A SOLDIER'S — turned on people it is what it is",
+     "class": "hard"
+    }
+   ],
+   "designNote": "⚠️ ERIK: this is the craft your original damage benchmark was about, and I want you to see how it reads with the tradition around it. Its three HARD bounds are all ethical rather than mechanical — 'clean is a DISCIPLINE, not a mercy'; 'turned on people IT IS WHAT IT IS.' The folk tradition's killing craft refuses to be comfortable about killing. That is the T-I baseline of the whole game."
+  },
+  {
+   "id": "old_roads",
+   "tier": 2,
+   "functions": [
+    "reveal",
+    "track",
+    "travel"
+   ],
+   "shape": "setup",
+   "operativeAxis": [
+    "precursorSense",
+    "range"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 2,
+    "range": 30,
+    "note": "⚠️ THE NINTH AND MOST IMPORTANT PRECURSOR HOOK IN THE CATALOG — and it belongs to ORDINARY VALLEY FOLK."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precursorSense",
+     "delta": "MAP A SITE'S PRECURSOR LAYOUT by walking it; judge whether a remnant is DORMANT, CYCLING, OR WAKING; salvage safely",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE DEEP NET REVEALS ITSELF — perceive the valley's WHOLE PRECURSOR LATTICE from any node, and SENSE WHEN THE LATTICE CHANGES",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a sense of the old work — half the range, and it costs nothing",
+    "surge": "double the reach; THE LATTICE'S PURPOSE STAYS DARK — pattern without meaning"
+   },
+   "bounds": [
+    {
+     "text": "SENSE, NOT SIGHT — no detail; depth beyond a few meters muddies",
+     "class": "hard"
+    },
+    {
+     "text": "JUDGMENT IS CRAFT, NOT CERTAINTY — 'waking' CAN LIE",
+     "class": "hard"
+    },
+    {
+     "text": "THE LATTICE'S PURPOSE STAYS DARK — pattern without meaning",
+     "class": "hard"
+    }
+   ],
+   "designNote": "⚠️⚠️ ERIK/CCODE — THIS RESHAPES SNG-261 §B ENTIRELY. `old_roads` is a T-II craft, in the OPEN-ACCESS FOLK TRADITION, that senses Precursor material, maps a site's layout, judges whether a remnant is WAKING, and at r3 perceives the valley's WHOLE LATTICE and knows when it CHANGES. Precursor contact is not a locked door reachable only by rare gated crafts — THE VALLEY'S ORDINARY PEOPLE HAVE A CRAFT FOR IT, and SNG-011's 'OLD ROADS MASTERY' as an unlock route is NAMED AFTER THIS CRAFT. That is the fourth access route, it was authored all along, and it is available to anyone. It also gives the precursor layer a proper epistemic shape: the folk can SENSE it, MAP it, and know when it MOVES — and its PURPOSE stays dark. That is a far better mystery than a door with one key."
+  },
+  {
+   "id": "boundary_stone",
+   "tier": 2,
+   "functions": [
+    "bind",
+    "ward"
+   ],
+   "shape": "guard",
+   "operativeAxis": [
+    "ward",
+    "duration",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 3,
+    "soakRank": 1,
+    "duration": 168,
+    "note": "A folk ward. Note soakRank 1 and the bound: 'A DETERMINED PERSON WALKS THROUGH IT; it DETERS, not stops.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "ward",
+     "delta": "set a boundary THAT HOLDS — a threshold, A CLAIM, a line that things NOTICE AND RESPECT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "SPECIAL: a boundary with THE WEIGHT OF THE OLD ONES — it FEELS ANCIENT, and even things that do not respect YOU respect IT",
+     "from": "r3 grants — an ELEVENTH autonomy-increment craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "a simple ward — half the deterrence, and it costs nothing to keep",
+    "surge": "double it; A BOUNDARY IS A CLAIM, AND CLAIMS ARE CONTESTED"
+   },
+   "bounds": [
+    {
+     "text": "A DETERMINED PERSON WALKS THROUGH IT — it DETERS, not stops",
+     "class": "hard"
+    },
+    {
+     "text": "A BOUNDARY IS A CLAIM, AND CLAIMS ARE CONTESTED",
+     "class": "hard"
+    },
+    {
+     "text": "THE OLD BOUNDARIES WERE SET BY PEOPLE WHO PAID FOR THEM",
+     "class": "cost"
+    }
+   ],
+   "designNote": "The catalog's final craft, and its last bound is the whole tradition in one line: 'THE OLD BOUNDARIES WERE SET BY PEOPLE WHO PAID FOR THEM.' A folk ward that works because someone, once, was willing to stand behind a claim."
+  }
+ ],
+ "passFindings": [
+  "⚠️⚠️ THE CATALOG IS COMPLETE: 27 of 27 traditions, 285 of 285 crafts. Twelve antipode pairs plus three folk traditions (radiant, harmonic, valley_craft), all authored against the locked CCODE-64 schema.",
+  "⚠️ SNG-261 §B IS RESHAPED BY `old_roads`, AND THIS IS THE MOST IMPORTANT SINGLE FINDING OF THE WHOLE PASS. It is a T-II craft in the OPEN-ACCESS FOLK tradition that senses Precursor material, maps a site by walking it, judges whether a remnant is DORMANT/CYCLING/WAKING, and at r3 perceives the VALLEY'S WHOLE LATTICE and knows when it CHANGES. SNG-011's fourth access route — 'OLD ROADS MASTERY' — IS NAMED AFTER THIS CRAFT. Precursor contact was never a locked door: THE VALLEY'S ORDINARY PEOPLE HAVE A CRAFT FOR IT. With prism_sight, echo_memory, mech_sense, command_engine, enginecraft, tinkers_hand, beastfriend and stonewise, that is NINE independent in-catalog precursor hooks — and the folk one is the broadest. The epistemic shape is also better than a door: the folk can SENSE it, MAP it and know when it MOVES, and its PURPOSE stays dark.",
+  "VALLEY_CRAFT IS THE MOST MECHANICALLY SPECIFIC TRADITION IN THE CATALOG, and it is not close: '+2 extra health and energy overnight', 'travel time -1h', 'once per day', 'once per season', 'once per location per visit' — stated outright in the source. Where a pole writes 'revelation at scale', the folk tradition writes '+2'. That is exactly right, and it made this file nearly pure transcription.",
+  "hearthbinding IS THE ARGUMENT FOR WHAT A FOLK TRADITION IS FOR. It makes CAMP a mechanic, turns a shared meal into a truce hostile parties will keep, and after three nights NAMES A PLACE INTO THE WORLD'S MEMORY. No pole tradition has anything remotely like it — because no pole tradition is about ordinary people staying alive together. If Erik's foothills ask (item 26) needs a north star, this craft is it.",
+  "THE FOLK TRADITION IS THE STRICTEST IN THE CATALOG ABOUT CONSENT: beastfriend's three HARD bounds all say the same thing — 'NO COMMANDS, ONLY TRUST'; 'a partner, NOT A TOOL'; 'YOU ASK — ALWAYS. NOTHING HERE IS COMPELLED.' And greenlore's healing is bounded by 'IT HAS TO BE TAKEN, WHICH MEANS IT HAS TO BE GIVEN.' Thirteen traditions now refuse coercion mechanically, and the ordinary people are the most absolute about it.",
+  "hunters_strike IS THE T-I DAMAGE BASELINE ERIK'S ORIGINAL BENCHMARK WAS ABOUT ('a T-I strike at max should kill a T-I beast'), and its three HARD bounds are all ETHICAL rather than mechanical: 'no warrior's forms — one target, honest force'; 'CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead'; 'it is a hunter's craft, NOT A SOLDIER'S — turned on people IT IS WHAT IT IS.' The baseline damage craft of the entire game refuses to be comfortable about killing.",
+  "A NINETEENTH DEFENSIVE LOGIC — UNREMARKED (blend_in): not stealth, not concealment, not misdirection, but BEING UNWORTH NOTICING. Its cost bound is the saddest small line in the catalog: 'being forgettable means being FORGOTTEN — Valleyfolk who lean on this lose things.' Nineteen logics, still THREE mechanisms (Erik's grouping, item 28, holds).",
+  "A FOURTEENTH THEORY OF MEDICINE — HERBAL (greenlore): small, reliable, over a rest. Fourteen traditions, fourteen incompatible theories of what healing IS, one `healing` shape carrying every one of them. That is the strongest single piece of evidence that the CCODE-64 schema generalises.",
+  "THE FINAL CRAFT'S FINAL BOUND IS THE WHOLE TRADITION IN ONE LINE: boundary_stone — 'THE OLD BOUNDARIES WERE SET BY PEOPLE WHO PAID FOR THEM.' A folk ward that works because someone, once, was willing to stand behind a claim. A good place for the catalog to end."
+ ]
+}

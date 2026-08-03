@@ -72,7 +72,55 @@
       ],
       "tradition": "threnodist",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "bolster",
+      "operativeAxis": [
+        "resonance",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "duration": 6,
+        "scope": 2
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "MOVE A CROWD by feeling-with-them; CARRY A PERSON THROUGH AN EMOTION TOO BIG TO BEAR ALONE",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "FEELING AT THE SCALE OF PEOPLES — turn a room, a mob, a mourning-crowd by the TRUTH of shared feeling",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "share a little — half the effect, and you take on less",
+        "surge": "double it; THE WIELDER DRIFTS EMOTION-HOT, feeling everything, all the time"
+      },
+      "bounds": [
+        {
+          "text": "READS AND SHARES; DOES NOT COMMAND — the guarded can close",
+          "class": "hard"
+        },
+        {
+          "text": "YOU TAKE ON WHAT YOU MOVE — the cost is real",
+          "class": "cost"
+        },
+        {
+          "text": "A WILL SET AGAINST YOU IS SET AGAINST YOU",
+          "class": "hard"
+        },
+        {
+          "text": "the wielder DRIFTS EMOTION-HOT",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "logos",
@@ -141,7 +189,61 @@
       ],
       "tradition": "syllogist",
       "nativeOrCombination": "native",
-      "harmRung": "damaging"
+      "harmRung": "damaging",
+      "shape": "damage",
+      "operativeAxis": [
+        "damage",
+        "scope"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 2,
+          "d": 6
+        },
+        "plus": 0,
+        "marginFloorPer": 0.03,
+        "scope": 2,
+        "damageType": "reason",
+        "note": "damaging — 'thought as force' in the argumentative register. Compare cogitant's noesis (also damaging, also mental): noesis out-thinks a SITUATION, logos out-argues a PERSON."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "damage",
+          "delta": "PROVE A THING SO CLEANLY THE PROOF ITSELF CHANGES WHAT PEOPLE MUST DO; CORNER A LIAR IN THEIR OWN LOGIC",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "REASON AT THE SCALE OF PEOPLES — an argument A WHOLE COUNCIL CANNOT ANSWER, a contradiction THAT TOPPLES A DOCTRINE",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "make the point — half the force, and it invites reply",
+        "surge": "double it; A VALID ARGUMENT IS NOT A TRUE ONE, and the unreasonable simply resist"
+      },
+      "bounds": [
+        {
+          "text": "THE UNREASONABLE AND THE EMOTION-RULED RESIST",
+          "class": "hard"
+        },
+        {
+          "text": "A VALID ARGUMENT IS NOT A TRUE ONE",
+          "class": "hard"
+        },
+        {
+          "text": "PROOF BINDS THE HONEST AND THE LOGICAL — THE CATHEDRAL OF CERTAINTY IS NEITHER",
+          "class": "hard"
+        },
+        {
+          "text": "IT NEEDS SOMETHING TRUE TO WORK WITH — Logos cannot prove what is not so",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_turning_word",
@@ -191,7 +293,45 @@
       "gated": "learned",
       "tradition": "cross_pole_braid",
       "nativeOrCombination": "combination",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "bolster",
+      "operativeAxis": [
+        "persuasion",
+        "scope",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "duration": 6,
+        "scope": 3,
+        "requiresPoles": [
+          "threnodist",
+          "syllogist"
+        ]
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "duration",
+          "delta": "THE TURNING HOLDS PAST THE MOMENT — a crowd moved STAYS moved after you have gone; a council's decision keeps",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "reach a few — half the scope, and nobody feels handled",
+        "surge": "double it; A CHORD YOU MADE IS A CHORD YOU ARE ANSWERABLE FOR"
+      },
+      "bounds": [
+        {
+          "text": "NEEDS A REAL SHARED CHORD TO STRIKE — a crowd set immovably resists",
+          "class": "hard"
+        },
+        {
+          "text": "A CHORD YOU MADE IS A CHORD YOU ARE ANSWERABLE FOR",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_grief_strike",
@@ -259,7 +399,53 @@
           "harmRung": "incapacitating"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "hobble",
+      "operativeAxis": [
+        "emotionalBreach",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "duration": 4,
+        "targets": 1,
+        "damageType": "feeling",
+        "note": "incapacitating. THE CATALOG'S MOST ETHICALLY UNCOMFORTABLE CRAFT — it opens a grief someone has been protecting."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "emotionalBreach",
+          "delta": "FIND AND OPEN THE GRIEF A PERSON HAS BEEN PROTECTING — the loss they have not admitted, the feeling they have been holding shut",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: BREAK AN EMOTIONAL FORTIFICATION ENTIRELY — what they were using to stay functional is now open, and requires attending",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a touch of true feeling — half the breach, and they can close again",
+        "surge": "double it; what you open in someone DOES NOT CLOSE BECAUSE YOU ARE DONE WITH IT"
+      },
+      "bounds": [
+        {
+          "text": "IT MUST BE GENUINE FEELING — a manufactured grief is not this craft and does not land",
+          "class": "hard"
+        },
+        {
+          "text": "what you open DOES NOT CLOSE because you are done with it",
+          "class": "hard"
+        },
+        {
+          "text": "breaking what someone was using TO STAY FUNCTIONAL leaves them not functional",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_felt_wall",
@@ -327,7 +513,52 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "guard",
+      "operativeAxis": [
+        "foresight",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 4,
+        "soak": 0,
+        "soakRank": 0,
+        "evasion": 4,
+        "evasionRank": 2,
+        "duration": 4,
+        "targets": 1,
+        "note": "A FIFTEENTH DEFENSIVE LOGIC — FORESENSED: soak 0; it reads the EMOTIONAL WEATHER and moves before harm forms. Distinct from PRE-EMPTED (end the threat) and UNTIMED (defeat the timing): this one feels the intent BEFORE it becomes action."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "PROTECT SOMEONE by feeling the danger around THEM — your emotional sense is the guard watching what eyes do not catch",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: what shifts toward violence or harm in a space REACHES YOU FIRST, across the whole space, and you act in the gap",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "keep half an ear on the room — half the warning, and it costs nothing",
+        "surge": "double it; feeling every shift toward harm in a space means FEELING EVERY SHIFT"
+      },
+      "bounds": [
+        {
+          "text": "it senses INTENT — a rockfall, a machine, or an animal has no feeling to read",
+          "class": "hard"
+        },
+        {
+          "text": "feeling every shift toward harm means FEELING EVERY SHIFT",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_true_feeling",
@@ -395,7 +626,52 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "setup",
+      "operativeAxis": [
+        "perceptionDepth",
+        "timeReach"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 1,
+        "range": 15,
+        "note": "SOCIAL attribute throughout this tradition"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "timeReach",
+          "delta": "TRACK A FEELING OVER TIME — follow grief, find WHERE FEAR DEVELOPED, trace the emotional mark a person left in a place",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "deepen",
+          "axis": "perceptionDepth",
+          "delta": "read the FEELING-TRUTH OF A WHOLE HISTORY — what a place carries, WHAT A PEOPLE HAVE BEEN RUNNING FROM",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a read of the room — half the depth, and it does not stay with you",
+        "surge": "double it; feeling the truth of a whole history means CARRYING some of it"
+      },
+      "bounds": [
+        {
+          "text": "it reads WHAT IS FELT, not what is TRUE — a person sincerely wrong reads sincere",
+          "class": "hard"
+        },
+        {
+          "text": "THE GUARDED CAN CLOSE",
+          "class": "soft"
+        },
+        {
+          "text": "what you read of a history, you carry some of",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_made_elegy",
@@ -464,7 +740,48 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "construct",
+      "operativeAxis": [
+        "persistence",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "duration": 168,
+        "scope": 2,
+        "damageType": "feeling"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "add",
+          "axis": "special",
+          "delta": "BIND A FEELING INTO A MADE THING SO IT ACTS — the song that makes people FEEL what it carries, the totem that steadies",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "make something that carries feeling AT SCALE — art that moves a city, A RITUAL THAT HOLDS A PEOPLE'S GRIEF",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a small keepsake — half the persistence, and it holds one feeling plainly",
+        "surge": "double it; a made thing that carries feeling carries it TO EVERYONE, including those who did not ask"
+      },
+      "bounds": [
+        {
+          "text": "THE FEELING MUST BE TRUE to bind — a made sentiment does not hold",
+          "class": "hard"
+        },
+        {
+          "text": "it carries the feeling TO EVERYONE, including those who did not ask",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_feeling_road",
@@ -536,7 +853,48 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "reposition",
+      "operativeAxis": [
+        "navigation",
+        "range"
+      ],
+      "mechanic": {
+        "range": 50,
+        "push": 0,
+        "magnitude": 4,
+        "duration": 4
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "range",
+          "delta": "travel toward a POWERFUL FEELING in a region as if it were a BEACON — grief, joy, terror — and find what is creating it",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "range",
+          "delta": "follow a feeling's trace ACROSS ANY DISTANCE — track a person BY THEIR EMOTIONAL SIGNATURE",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "follow the trace — half the range, and it fades behind you",
+        "surge": "double it; following a feeling to its source means ARRIVING AT ITS SOURCE"
+      },
+      "bounds": [
+        {
+          "text": "it follows FEELING — a person who feels nothing about where they went leaves no road",
+          "class": "hard"
+        },
+        {
+          "text": "arriving at the source of a great feeling means ARRIVING AT ITS SOURCE",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_wellspring",
@@ -605,7 +963,47 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "bolster",
+      "operativeAxis": [
+        "upkeepRelief",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 24,
+        "targets": 1
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "your emotional depth SUSTAINS OTHERS — not by removing the hardship but BY CARRYING SOME OF IT WITH THEM",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "the depth sustains the PARTY through the hardest stretch — 'not comfort, DEPTH; not peace, feeling so genuine it holds'",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "draw a little — half the relief, and it costs you nothing",
+        "surge": "double it; CARRYING SOME OF IT WITH THEM means carrying it"
+      },
+      "bounds": [
+        {
+          "text": "it sustains by FEELING, not by easing — a person who wants comfort gets depth instead",
+          "class": "hard"
+        },
+        {
+          "text": "carrying some of it with them MEANS CARRYING IT",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_correct_protocol",
@@ -680,7 +1078,50 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "healing",
+      "operativeAxis": [
+        "precision",
+        "completeness"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 2,
+          "d": 4
+        },
+        "plus": 2,
+        "note": "A TWELFTH THEORY OF MEDICINE — PROTOCOL: 'no guesswork, no comfort, THE CORRECT INTERVENTION.'"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "completeness",
+          "delta": "restore THROUGH PROPER SEQUENCE — the correct actions IN THE CORRECT ORDER return the body or system to function",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: restore completely by identifying THE UNDERLYING CAUSE and applying THE FULL CHAIN of correct interventions",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "the correct minimum — half the restoration, and nothing is wasted",
+        "surge": "double it; the correct intervention is CORRECT, not KIND"
+      },
+      "bounds": [
+        {
+          "text": "NO GUESSWORK, NO COMFORT — it does not soothe and does not pretend to",
+          "class": "hard"
+        },
+        {
+          "text": "it requires that the correct protocol IS KNOWN — a novel affliction defeats it",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_proved_position",
@@ -750,7 +1191,50 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "guard",
+      "operativeAxis": [
+        "logicalGround",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 5,
+        "soak": 4,
+        "soakRank": 2,
+        "type": "rhetorical",
+        "duration": 8,
+        "note": "A SIXTEENTH DEFENSIVE LOGIC — PROVED: a TYPED guard (rhetorical/social attacks) whose soak is the soundness of your position. 'Attacks must first ANSWER THE PROOF.' Transparent to a blade."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "extend the proved position to cover A SPACE OR A GROUP — a claim so airtight it FUNCTIONS AS A WARD",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "a proved position holds AT SCALE — at the level of INSTITUTIONS, TREATIES, OR LAWS",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "state your ground — half the protection, and it is easy to hold",
+        "surge": "double it; a position proved at the scale of laws is a position you must keep defending"
+      },
+      "bounds": [
+        {
+          "text": "IT WARDS WHAT MUST ANSWER REASON — a fist does not answer the proof",
+          "class": "hard"
+        },
+        {
+          "text": "the position must ACTUALLY BE SOUND — a proved-wrong position wards nothing",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_built_system",
@@ -821,7 +1305,48 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "construct",
+      "operativeAxis": [
+        "coherence",
+        "scope",
+        "autonomy"
+      ],
+      "mechanic": {
+        "magnitude": 6,
+        "duration": 8760,
+        "scope": 3
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "add",
+          "axis": "autonomy",
+          "delta": "build something that MAINTAINS ITSELF THROUGH ITS INTERNAL LOGIC — not enforced, not reminded, RUNNING BECAUSE THE LOGIC RUNS",
+          "from": "r2 grants — a NINTH autonomy-increment craft"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "scope",
+          "delta": "construct a system so LOGICALLY COHERENT it operates AT SCALE WITHOUT YOU — laws, institutions, mechanisms",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a small sound system — half the scope, and you can revise it",
+        "surge": "double it; a system that runs without you RUNS WITHOUT YOU"
+      },
+      "bounds": [
+        {
+          "text": "IT RUNS ON ITS LOGIC — a system whose logic is unsound fails exactly where the flaw is",
+          "class": "hard"
+        },
+        {
+          "text": "a system that runs without you RUNS WITHOUT YOU, including when it should stop",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "the_derived_route",
@@ -893,7 +1418,48 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "reposition",
+      "operativeAxis": [
+        "navigation",
+        "range"
+      ],
+      "mechanic": {
+        "range": 12,
+        "push": 0,
+        "magnitude": 4,
+        "duration": 3
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "navigation",
+          "delta": "DERIVE the correct path through UNKNOWN territory BY INFERENCE — from what you know about the type of space",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: navigate to ANY CONCLUSION THAT FOLLOWS NECESSARILY from known premises — the route that MUST exist, the exit that MUST be there",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "reason it out — half the certainty, and it costs nothing",
+        "surge": "double it; a route that MUST exist by inference still has to actually be there"
+      },
+      "bounds": [
+        {
+          "text": "it needs SOUND PREMISES — reasoning from a wrong assumption arrives confidently at nowhere",
+          "class": "hard"
+        },
+        {
+          "text": "a route that MUST exist BY INFERENCE still has to actually BE THERE",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "the_axiom_holds",
@@ -961,7 +1527,46 @@
           "harmRung": "none"
         }
       ],
-      "nativeOrCombination": "native"
+      "nativeOrCombination": "native",
+      "shape": "bolster",
+      "operativeAxis": [
+        "upkeepRelief",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 24
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "upkeepRelief",
+          "delta": "sustain through PURE LOGICAL DISCIPLINE — the sequence of correct actions that keeps you going when feeling would not",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: as long as WHAT YOU KNOW IS TRUE REMAINS TRUE, you remain functional around it — the axiom is the ground and the ground holds",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "hold the line of reasoning — half the relief, and it costs nothing",
+        "surge": "double it; an axiom that turns out to be FALSE takes the ground with it"
+      },
+      "bounds": [
+        {
+          "text": "it requires SOMETHING ACTUALLY TRUE to stand on",
+          "class": "hard"
+        },
+        {
+          "text": "AN AXIOM THAT TURNS OUT TO BE FALSE TAKES THE GROUND WITH IT",
+          "class": "hard"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1014,7 +1619,42 @@
         "SOCIAL",
         "INVESTIGATE"
       ],
-      "harmRung": "incapacitating"
+      "harmRung": "incapacitating",
+      "shape": "hobble",
+      "operativeAxis": [
+        "bindStrength",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "duration": 6,
+        "targets": 1,
+        "damageType": "reason",
+        "note": "T-IV, incapacitating"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "WALK A WHOLE BODY OF REASONING MINDS to the same conclusion AT ONCE — a council, a court, a school",
+          "from": "r2 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "make the argument — half the binding, and they can still walk away thinking",
+        "surge": "double it; IT STILL FAILS ENTIRELY against those who will simply REFUSE"
+      },
+      "bounds": [
+        {
+          "text": "IT FAILS AGAINST THOSE WHO REFUSE REASON ITSELF",
+          "class": "hard"
+        },
+        {
+          "text": "it binds A REASONING MIND — the unreasoning are outside it entirely",
+          "class": "hard"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1053,7 +1693,40 @@
         "INVESTIGATE",
         "SOCIAL"
       ],
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "setup",
+      "operativeAxis": [
+        "completeness",
+        "penetration"
+      ],
+      "mechanic": {
+        "magnitude": 9,
+        "duration": 2,
+        "damageType": "reason"
+      },
+      "rankDeltas": [
+        {
+          "rank": 1,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: ASSEMBLE AND OFFER A COMPLETE, IRREFUTABLE PROOF of a true thing. The capstone is a KIND (irrefutability itself) at near-total cost.",
+          "from": "r1 grants — single-rank capstone"
+        }
+      ],
+      "intensity": {
+        "conserve": "REFUSED — a partial proof is an argument, and arguments are what the Cathedral survives.",
+        "surge": "REFUSED — it already costs nearly all you have."
+      },
+      "bounds": [
+        {
+          "text": "IT PROVES ONLY THE TRUE",
+          "class": "hard"
+        },
+        {
+          "text": "IT COSTS NEARLY ALL YOU HAVE",
+          "class": "hard"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1117,7 +1790,52 @@
       "challengeTypes": [
         "SOCIAL"
       ],
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "bolster",
+      "operativeAxis": [
+        "distribution",
+        "scope",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 6,
+        "duration": 12,
+        "scope": 3
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "distribution",
+          "delta": "the lament FINDS THE TRUE SHAPE OF WHAT IS MOURNED — singing it, you perceive what the grief is ACTUALLY for",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "scope+duration",
+          "delta": "hold a lament ACROSS DAYS and ACROSS A SETTLEMENT — a whole community mourning as one",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a short lament — half the distribution, and it asks little of the gathering",
+        "surge": "double it; YOU HOLD THE GATHERING WHILE YOU HOLD THE LAMENT"
+      },
+      "bounds": [
+        {
+          "text": "IT CANNOT REMOVE GRIEF, ONLY DISTRIBUTE ITS WEIGHT",
+          "class": "hard"
+        },
+        {
+          "text": "NAMING IS NOT MENDING — a sorrow correctly named CAN WOUND",
+          "class": "hard"
+        },
+        {
+          "text": "you hold the gathering while you hold the lament, and DAYS ARE DAYS",
+          "class": "cost"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1170,7 +1888,40 @@
       "challengeTypes": [
         "SOCIAL"
       ],
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "bolster",
+      "operativeAxis": [
+        "attendance",
+        "persistence"
+      ],
+      "mechanic": {
+        "magnitude": 7,
+        "duration": 720,
+        "scope": 3
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "add",
+          "axis": "persistence",
+          "delta": "THE NAMES KEEP PAST THE LAMENT — sung over a place (a barrow, a battlefield, a hall), THE ATTENDING HOLDS WITHOUT YOU",
+          "from": "r2 grants — an EIGHTH autonomy-increment craft"
+        }
+      ],
+      "intensity": {
+        "conserve": "sing a few names — half the duration, and the lament closes cleanly",
+        "surge": "double it; keeping names past the lament means the place KEEPS THEM"
+      },
+      "bounds": [
+        {
+          "text": "IT CANNOT RESTORE THE DEAD, ONLY ATTEND THEM",
+          "class": "hard"
+        },
+        {
+          "text": "A NAME KEPT IS NOT A LIFE RETURNED",
+          "class": "hard"
+        }
+      ]
     },
     {
       "schemaVersion": 1,
@@ -1211,7 +1962,40 @@
       "challengeTypes": [
         "SOCIAL"
       ],
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "bolster",
+      "operativeAxis": [
+        "completion",
+        "scope"
+      ],
+      "mechanic": {
+        "magnitude": 9,
+        "duration": 8,
+        "scope": 4
+      },
+      "rankDeltas": [
+        {
+          "rank": 1,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: sing a COMPLETE LAMENT that lets ALL WHO HEAR FINISH A GRIEF THEY COULD NOT FINISH ALONE. The capstone is a KIND (completing what could not be completed) at near-total cost — AND THE SINGER FEELS EVERY GRIEF IN IT.",
+          "from": "r1 grants — single-rank capstone"
+        }
+      ],
+      "intensity": {
+        "conserve": "REFUSED — a half-sung lament leaves a grief half-finished, which is worse than not beginning.",
+        "surge": "REFUSED — the singer already feels every grief in it."
+      },
+      "bounds": [
+        {
+          "text": "IT COSTS NEARLY ALL YOU HAVE",
+          "class": "hard"
+        },
+        {
+          "text": "THE SINGER FEELS EVERY GRIEF IN IT",
+          "class": "cost"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

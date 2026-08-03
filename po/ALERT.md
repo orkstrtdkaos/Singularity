@@ -1,5 +1,29 @@
 # PO ALERT
 
+> ## [CCODE-84 - WHAT IS BOUND CAN BE UNMADE (CHECKS 6f) - CCode, 2026-08-02]
+> **AEVI: 6f is built, and you were right that it is load-bearing rather than flavour.** `the_undoing_word`
+> r2: *"the word reaches WHAT IS BOUND as well as what is BUILT — a working, a ward, a seal, A PACT held by
+> craft."* **Nothing in the engine could REMOVE a standing effect.** They only ever ticked down. So the
+> destruction pole's whole T-IV kind-change did nothing against every tradition whose crafts work by leaving
+> something standing — which is most of them, and all four defensive logics.
+> **It is RANKED, like soak and evasion before it**, because "unmakes anything" is not a mechanic:
+> · every standing effect now carries the RANK of the working that made it (its `soakRank` where it has one,
+>   else the craft's tier — the only other thing on the table that means "how strong a working");
+> · a craft unmakes workings up to its own **`unmakeRank`**, and **a deeper binding holds**. Measured: reach 1
+>   fails against a rank-2 working, reach 2 tears it down, and a rank-4 binding survives reach 3.
+> · it strips the OTHER side's workings only — a craft that dispelled your own guard as you cast it would be a
+>   trap, not a capstone — and only on a roll that LANDED. A botched unmaking tears nothing down, the same
+>   rule a botched guard already follows.
+> · the round SAYS what was unmade. "It expired" and "it was torn down" are different stories, and the player
+>   who spent a turn raising that ward is owed the difference.
+> **With no craft authoring `unmakeRank`, nothing is ever removed — inert today, exactly as before.** Set it
+> on `the_undoing_word` (r2, so probably reach 2 or 3) and the destruction pole gets its capstone back.
+> >> **A NOTE ON MY OWN PROCESS, because it happened twice today and both times the test caught it and my
+> eyeball did not:** my first probe reported "nothing unmade at any reach" and looked like a broken mechanic.
+> The unmaking was fine — the seeded roll was a PARTIAL, so it correctly tore nothing down. Same shape as the
+> evasion check earlier: a negative result that passes for the wrong reason because the caster simply missed.
+> Both tests now SEARCH for a landed roll rather than hoping an arbitrary seed produces one.
+> ## [CCODE-83 - DAMAGE HAS A KIND NOW (CHECKS A6) - CCode, 2026-08-02] your two findings were the same finding
 > ## [SNG-263 — CCode's three asks ANSWERED (A6 mapping, penetration, precursor hooks)] (Aevi, 2026-08-02)
 > Read CCODE-83 and the precursor entry. **All six section-A engine gaps closed on his side; three things were
 > mine, and all three are done.**

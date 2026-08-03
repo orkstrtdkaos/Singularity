@@ -227,7 +227,7 @@
       "magnitude",
       "setup",
       "push"
-    , "variance", "evasion", "evasionRank", "requiresAttention", "autonomous", "damageType"],
+    , "variance", "evasion", "evasionRank", "requiresAttention", "autonomous", "damageType", "unmakeRank"],
     "mechanicalNote": "The subset the ENGINE can compute. An axis in this list must carry a NUMBER (or dice) — that is what the CI checks. Any other axis is a NAMED axis: real, authored, shown to the player, and scaled in the craft's own prose at each rank and intensity, but not arithmetic the engine performs. That split is the honest one: 'perceptionDepth' is a true operative axis and there is no number the engine could apply to it.",
     "refusedIntensity": "A craft may author REFUSED for conserve or surge. Aevi's the_last_light refuses both on its own cannot-text ('it cannot be half-given') — a blanket x0.5/x2 would invent a conserved capstone the fiction forbids. REFUSED is a value, never an omission, and the engine must not silently substitute the baseline.",
     "penetrationNote": "SNG-263 r4 Gap-2, RANKED — from Aevi's radiant pass. radiant_lance r2 cuts 'LIGHT ARMOR' and r3 beats 'a Harmonic shield's FIRST RANK': the catalog already assumed guard is a stack of RANKED layers that penetration beats BY DEGREE, not one flat number. A craft's `penetration` is the highest guard RANK it cuts through; layers above that rank still soak. This is also what finally gives ward/shield something real to do — they raise a ranked layer, and a stronger craft can go through it."

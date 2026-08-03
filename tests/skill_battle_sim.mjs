@@ -6,7 +6,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
-import { matchupBonus, synthesizeOpponentSheet, synthesizeStaticSheet, opponentPolicy, battleRound, phaseDenied } from "../engine/skill_battle.js";
+import { matchupBonus, synthesizeOpponentSheet, synthesizeStaticSheet, opponentPolicy, battleRound, phaseDenied, applyUnmaking } from "../engine/skill_battle.js";
 import { senseOpponent } from "../engine/sense.js";
 import { startEncounter, skillBattleRound, sanitizeNewEncounter, encounterReceiptForGM } from "../engine/encounters.js";
 import { mintableBraidsFor, BRAID_RIPEN_AT } from "../engine/braids.js";   // CCODE-37: the weave feeds the braid economy
@@ -1210,6 +1210,62 @@ check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the 
     check("CCODE-83: feeding an absorber is capped at its OWN maximum - it is restored, never inflated",
       hp <= dev.health, `healed to ${hp} against a max of ${dev.health}`);
   }
+}
+
+
+
+// ---------- CCODE-84: WHAT IS BOUND CAN BE UNMADE (Aevi's CHECKS 6f) ----------
+// the_undoing_word r2: "the word reaches WHAT IS BOUND as well as what is BUILT - a working, a ward, a seal,
+// A PACT held by craft." Nothing in the engine could REMOVE a standing effect; they only ticked down. So the
+// destruction pole's T-IV kind-change did nothing against every tradition whose crafts work by leaving
+// something standing, which is most of them. Ranked, like soak and evasion before it: "unmakes anything" is
+// not a mechanic.
+{
+  const uRules = { ...rules, craftMechanics: JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8")) };
+  const uOpp = synthesizeOpponentSheet({ name: "foe", threat: 20 }, sb);
+  const uSheet = { attributes: { practical: 12 }, energy: 100, level: 20 };
+  // Seed 1 lands the unmaking. Chosen by SEARCHING for a landed roll rather than hoped for - asserted against
+  // an arbitrary seed, "nothing was unmade" passes for the wrong reason when the caster simply missed.
+  const run = (reach, wardRank) => {
+    let s = 1; const rng = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+    const r1 = battleRound({
+      playerSheet: uSheet, oppSheet: uOpp,
+      playerDecl: { function: "strike", tier: 1, attribute: "practical", intensity: "standard" },
+      oppDecl: { function: "ward", tier: 3, attribute: "practical", intensity: "standard", name: "a sealed working", mechanic: { ward: { soak: 5, soakRank: wardRank } } },
+      state: { momentum: 0, effects: [], opponentHealth: 400 }, rules: uRules, sb, steps, rng });
+    const r2 = battleRound({
+      playerSheet: uSheet, oppSheet: uOpp,
+      playerDecl: { function: "break", tier: 4, attribute: "practical", intensity: "standard", name: "the undoing word", ...(reach ? { mechanic: { break: { unmakeRank: reach } } } : {}) },
+      oppDecl: { function: "strike", tier: 2, attribute: "practical", intensity: "standard" },
+      state: JSON.parse(JSON.stringify(r1.state)), rules: uRules, sb, steps, rng });
+    return { raised: r1.state.effects.filter(e => e.from === "opponent").length,
+             degree: r2.player.degree, left: r2.state.effects.filter(e => e.from === "opponent").length, unmade: r2.unmade || [] };
+  };
+
+  check("CCODE-84: every standing effect carries the RANK of the working that made it",
+    run(0, 2).raised === 1 && run(2, 2).degree === "crit_success");
+  check("CCODE-84: a craft with NO unmakeRank tears nothing down (the whole catalog today)",
+    run(0, 2).left === 1 && run(0, 2).unmade.length === 0);
+  check("CCODE-84: reach BELOW the working's rank fails - a deeper binding holds",
+    run(1, 2).left === 1 && run(1, 2).unmade.length === 0);
+  check("CCODE-84: reach AT the working's rank unmakes it",
+    run(2, 2).left === 0 && run(2, 2).unmade.length === 1);
+  check("CCODE-84: and a rank-4 binding still holds against reach 3 (it is RANKED, not absolute)",
+    run(3, 4).left === 1);
+  check("CCODE-84: the round SAYS what was unmade - 'it expired' and 'it was torn down' are different stories",
+    run(2, 2).unmade[0]?.kind === "ward" && run(2, 2).unmade[0]?.by === "player");
+
+  // Direct unit checks for the parts a seeded round cannot isolate.
+  const fx = [{ kind: "ward", from: "opponent", rank: 2 }, { kind: "guard", from: "player", rank: 1 }];
+  const word = { function: "break", tier: 4, mechanic: { break: { unmakeRank: 3 } } };
+  check("CCODE-84: a botched unmaking tears nothing down (same rule a botched guard already follows)",
+    applyUnmaking(fx, [[word, { degree: "partial" }, "player"]], sb, null).removed.length === 0
+    && applyUnmaking(fx, [[word, { degree: "failure" }, "player"]], sb, null).removed.length === 0);
+  check("CCODE-84: it strips the OTHER side's workings only - never your own guard as you cast it",
+    applyUnmaking(fx, [[word, { degree: "success" }, "player"]], sb, null).effects.some(e => e.from === "player"));
+  const sbOff = JSON.parse(JSON.stringify(sb)); sbOff.unmaking.enabled = false;
+  check("CCODE-84: unmaking.enabled false turns it off entirely (it is a content dial)",
+    applyUnmaking(fx, [[word, { degree: "success" }, "player"]], sbOff, null).removed.length === 0);
 }
 
 

@@ -192,7 +192,8 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
   // CCODE-82: does holding this cost your attention? Read from the craft, defaulting to NO — which is
   // what every guard already did.
   const tend = { requiresAttention: !!(decl?.mechanic?.[decl.function]?.requiresAttention ?? decl?.mechanic?.requiresAttention),
-                 autonomous: !!(decl?.mechanic?.[decl.function]?.autonomous ?? decl?.mechanic?.autonomous) };
+                 autonomous: !!(decl?.mechanic?.[decl.function]?.autonomous ?? decl?.mechanic?.autonomous),
+                 rank: decl?.mechanic?.[decl.function]?.soakRank ?? decl?.mechanic?.soakRank ?? null };
   const durCfg = cfg.craftDuration || {};
   if (durCfg.enabled !== false && cm?.families) {
     const m = mechanicFor(decl, { verb: decl.function, tier: decl.tier, rank: decl.rank || 1,
@@ -217,6 +218,10 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
     // line above exists for — a flag left on the definition reads `undefined` on the effect and is inert.
     ...(tend.requiresAttention ? { requiresAttention: true } : {}),
     ...(tend.autonomous ? { autonomous: true } : {}),
+    // CCODE-84: every standing effect carries the RANK of the working that made it, so an unmaking craft has
+    // something to measure itself against. A ward's own `soakRank` is that rank where it has one; otherwise
+    // the craft's tier stands in, which is the only other thing on the table that means "how strong a working".
+    rank: Math.max(1, Number(tend.rank) || Number(decl.tier) || 1),
     source: decl.name || decl.function, from: actor
   };
 }
@@ -277,6 +282,31 @@ export function applyEvasion(p, o, playerDecl, oppDecl, sb, cm, setupBonus = 0) 
     out.push({ evader, attacker, applied: true, evasion: ev.evasion, rank: ev.rank, from: before, to: attackRoll.degree });
   }
   return out.length ? out : null;
+}
+
+/** CCODE-84 — a landed unmaking strips standing effects up to its own rank.
+ *
+ *  `sides` is [[decl, roll, who], ...]. A side unmakes the OTHER side's workings, never its own — a craft that
+ *  dispelled your own guard while you cast it would be a trap rather than a capstone. The roll must actually
+ *  have landed: a botched unmaking tears nothing down, the same rule a botched guard already follows. */
+export function applyUnmaking(effects, sides, sb, cm) {
+  const cfg = sb?.unmaking || {};
+  if (cfg.enabled === false) return { effects, removed: [] };
+  const ok = new Set(cfg.requiresDegree || ["crit_success", "success"]);
+  const kinds = Array.isArray(cfg.kinds) && cfg.kinds.length ? new Set(cfg.kinds) : null;
+  let out = effects, removed = [];
+  for (const [decl, roll, who] of sides) {
+    const m = decl?.mechanic?.[decl.function] ?? decl?.mechanic ?? null;
+    const reach = Math.max(0, Number(m?.unmakeRank) || 0);
+    if (!reach || !ok.has(roll?.degree)) continue;
+    const theirs = who === "player" ? "opponent" : "player";
+    const doomed = out.filter(fx => fx.from === theirs && (Number(fx.rank) || 1) <= reach && (!kinds || kinds.has(fx.kind)));
+    if (!doomed.length) continue;
+    out = out.filter(fx => !doomed.includes(fx));
+    removed.push(...doomed.map(fx => ({ by: who, craft: decl.name || decl.function, kind: fx.kind,
+      label: fx.label, rank: Number(fx.rank) || 1, reach })));
+  }
+  return { effects: out, removed };
 }
 
 /** CCODE-83 — what KIND of harm is this craft's? Read from the craft, else from its tradition's default.
@@ -618,6 +648,20 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   // tending, and `the_mechanical_defense` is then distinguished by not carrying it (or by `autonomous: true`,
   // which overrides an inherited one). With nothing authored this is byte-identical to before - and today
   // nothing is authored, deliberately: WHICH guards cost attention is Aevi's call, not mine.
+  // CCODE-84 — WHAT IS BOUND CAN BE UNMADE (Aevi CHECKS 6f).
+  //
+  // `the_undoing_word` r2: "the word reaches WHAT IS BOUND as well as what is BUILT — a working, a ward, a
+  // seal, A PACT held by craft. Unmaking bindings rather than objects is the T-IV kind-change." Nothing in
+  // the engine could remove a standing effect: they only ever ticked down. So the destruction pole's capstone
+  // increment did NOTHING against every tradition whose crafts work by leaving something standing — which is
+  // most of them. Aevi is right that this is load-bearing, not flavour.
+  //
+  // It is RANKED, like soak and evasion before it, because "unmakes anything" is not a mechanic: a craft
+  // unmakes workings up to its own reach and a deeper binding holds. With no craft authoring `unmakeRank`,
+  // nothing is ever removed and this is inert — which is the case today.
+  const unmade = applyUnmaking(effects, [[playerDecl, p, "player"], [oppDecl, o, "opponent"]], sb, rules?.craftMechanics);
+  if (unmade.removed.length) effects = unmade.effects;
+
   const defFns = new Set(sb?.functionMatchup?.defensiveFunctions || []);
   if (!senseStepEarly(phase, sb)) {
     const actedElsewhere = { player: !defFns.has(playerDecl.function), opponent: !defFns.has(oppDecl.function) };
@@ -838,7 +882,10 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
     degraded: { player: !!playerDecl.spentFallback, opponent: !!oppDecl.spentFallback },
     // CCODE-80: an evaded blow must SAY it was evaded. An attack that quietly does less is indistinguishable
     // from a bad roll, and the whole point of the three defensive logics is that they read differently.
-    ...(evasion ? { evasion } : {}) };
+    ...(evasion ? { evasion } : {}),
+    // CCODE-84: an unmade ward must be SEEN to be unmade — the player who spent a turn raising it is owed the
+    // reason it is gone, and "it expired" and "it was torn down" are different stories.
+    ...(unmade.removed.length ? { unmade: unmade.removed } : {}) };
   // What the SENSE step bought: a named bonus on the coming action (signed toward whoever read better), and —
   // on a crit read — the bonus step. "It's the payoff." Both are content dials.
   if (phase === "sense") {

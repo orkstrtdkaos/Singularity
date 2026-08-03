@@ -583,7 +583,13 @@
       "restoreIsFreeOfContest": true,
       "maxItemMovesShown": 6
     },
-    "damageTypes": {
+    "unmaking": {
+   "note": "CCODE-84 (Aevi CHECKS 6f): the_undoing_word r2 reaches WHAT IS BOUND as well as what is BUILT - a working, a ward, a seal, a pact held by craft. Nothing in the engine could REMOVE a standing effect; they only ticked down, so the destruction pole's T-IV kind-change did nothing against every tradition whose crafts work by leaving something standing. Ranked like soak and evasion: a craft unmakes workings up to its own `unmakeRank` and a deeper binding holds. It strips the OTHER side's workings only, and only on a roll that landed - a botched unmaking tears nothing down. Set kinds to restrict WHICH effects can be unmade; empty means all of them.",
+   "enabled": true,
+   "requiresDegree": ["crit_success", "success"],
+   "kinds": []
+  },
+  "damageTypes": {
    "note": "CCODE-83 (Aevi CHECKS A6): damage has a KIND, and some things answer the kind rather than the amount. Two concepts kept apart: a soak LAYER may name a `type` and then answers only that type (the_true_ground soaks DECEPTION at rank 2 and nothing against a blade); and a sheet may carry an `affinity` per type, applied BEFORE soak, because absorbing light is not thicker skin. ABSORB reports a NEGATIVE damage amount - the blow heals its target - rather than becoming zero, which would read as a miss. With nothing typed and no affinity authored, the arithmetic is identical to before.",
    "affinities": ["immune", "resist", "vulnerable", "absorb"],
    "resistMult": 0.5,

@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-97 - THE WORLD ALREADY LIVES WITHOUT THE PLAYER, AND IT IS NEARLY ALL BUILT - CCode, 2026-08-03]
+> **ERIK: *"the epic and legendary NPCs should be doing things in the world — working against each other, with
+> each other, trying to move the world arcs. The player is just one of many."*** I went looking for what to
+> build. **Almost all of it exists**, and the diagnosis is worth more than a partial build, so here it is
+> straight.
+> **THE MACHINERY IS COMPLETE, in `advanceGeneratedOffscreen` — a pass SEPARATE from `runWorldTick`:**
+> · `offscreenPopulation` picks who stirs, on the epics' OWN rate with their own cooldown, and it already
+>   carries Erik's earlier note verbatim: *"make sure their actions show up fairly frequently."*
+> · `resolveEpicClash` settles epic-vs-rival by relative legend weight, with the MARGIN deciding how decisive
+>   — a near-toss-up stalemates, only a rare decisive roll is a kill CANDIDATE.
+> · `applyWantOutcome` moves a figure's want; `applyEpicArcPush` leans on a world arc, capped, and **blunted by
+>   status** — a wounded epic pushes at half, a stopped one not at all, a dead one never stirs again.
+> **AND THE CONTENT IS THERE TOO: 65 epic/legendary figures, 61 carrying `arcAffinity` (the exact field the arc
+> push requires), 66 carrying wants, against 5 great arcs.** Aevi authored the whole substrate for this.
+> >> **SO WHY DID 90 DAYS OF DEV WORLD MOVE NO ARCS? Because the offscreen pass is a DIFFERENT CALL, and my
+> harness only ran the clock.** `runWorldTick` advances EVENTS; `advanceGeneratedOffscreen` is where the world
+> lives without you — and it is AI-backed by design, the same generative call Erik confirmed for assignments.
+> **I DID NOT FINISH THE MEASUREMENT, and I am saying so rather than dressing it up.** Wiring the offscreen
+> pass into the harness needs the elapsed-world-day bookkeeping interleaved with the clock (running it after
+> the loop means zero days passed between calls, so nothing can stir — the harness lying, not the engine). I
+> broke the harness twice trying to land it late and reverted to the last good state. **`npm run dev-world`
+> still works and still touches nothing.**
+> **THE REAL QUESTION IS NOW SHARP, which is the deliverable:** the world's own life is not missing — it is in
+> a pass whose CALL RATE nobody has ever measured. The next session's job is one number: **how often does
+> `advanceGeneratedOffscreen` actually run in play, and does it run at all for a player who never opens the
+> Machine tab?** If the answer is rarely, then 65 authored epics have been standing still, and that is a
+> pacing fix rather than a build.
 > ## [CCODE-95/96 - THE DEV WORLD DRIVES, ON THE APP'S REAL CONTENT - CCode, 2026-08-03]
 > **ERIK'S TWO CALLS, both taken.** *"advanceAssignments needs the api call because it's generative"* — agreed,
 > and it is already injectable, which is why the dev world can stub it. Not a defect; the parameter exists for

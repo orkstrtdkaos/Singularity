@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-117 - THE CASUALTY KNOB WAS A DISCONNECTED WIRE - CCode, 2026-08-03]
+> **ERIK: *"what if more get killed or injured? what knob would we turn to do that?"*** The knob did not exist
+> because **the wire was cut**: 28 duels a pass across the valley and **not one of them could hurt anybody.**
+> `contestArc` returned push multipliers and never touched `epicStatus`. The only route to a wound was the
+> separate NARRATED clash, gated three ways — which is why attrition read 1.8 of 66 in three years while the
+> valley was, on paper, fighting constantly.
+> **CONNECTED. A decisive arc-fight now resolves through the SAME `resolveEpicClash` + `applyEpicClashOutcome`
+> the narrated path uses** — one injury model, not two, so a wound taken over an arc and a wound taken in a
+> story mean the same thing. **`rules.arcResponse.casualtyRate` is the knob** (default 0.15; set 0 and arcs
+> are bloodless again).
+> >> **TURNING IT ON, same 6 worlds × 3 years: legend deaths 1.8 → 9.5 of 66 (range 6–13). Wounded 0.8 → 3.2.**
+> That is 14% of the roster gone in three years, and it VARIES by world, which the old number never did.
+> **ONLY THE LEADERS ARE AT RISK, deliberately.** The figures who drew allies in are the ones who actually met
+> each other; the allies pushed, they did not duel. Putting all 47 committed figures on the casualty table is
+> how a roster empties in a year.
+> **HONEST RESULT: THE ARCS STILL LEAN THE SAME WAY, but every one now has a REAL RANGE** —
+> `manifestation storm −48…−36 · what wakes beneath 7.2…17.1 · the poles pull −18…−12`. Deaths widened the
+> spread substantially without flipping an arc's side. **A death changes HOW FAR, not yet WHICH WAY** — because
+> with 66 figures, losing 9 rarely crosses a margin. It would cross on the thin arcs, and those are exactly
+> where the player already decides it.
+> ———
+> **ON MINTING (the other half of Erik's question), still not built, and here is the honest shape of it:**
+> **the substrate is done and the decision is not.** NPCs carry deeds, renown bands and reach-weighted
+> spread (CCODE-85). A promotion is mechanically trivial: cross a threshold, gain `tier` and `arcAffinities`.
+> **The unanswered question is WHICH SIDE a new legend takes**, and I will not guess it — Aevi derived all 153
+> existing cares from each figure's authored `wants`, and a minted figure has deeds instead. **Reading a record
+> into a stance is the design work**, and it is hers. Attrition at 9.5 per three years makes it matter: without
+> minting, the age of legends now ends measurably faster than it did this morning.
 > ## [CCODE-116 - THE WORLD, WITH AND WITHOUT PLAYERS. 10 + 24 WORLDS, THREE YEARS EACH. - CCode, 2026-08-03]
 > **WITHOUT PLAYERS — 10 worlds × 1,080 days:** the valley is **stable and bleak**. Arcs land in the same
 > place every time (`manifestation storm −41.9 · what wakes beneath +12.8 · block bleed +1.4 · poles pull −18

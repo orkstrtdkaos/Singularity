@@ -937,6 +937,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     const workMult = Number.isFinite(cfg.indirectPushMult) ? cfg.indirectPushMult : 0.8;
     const wOf = e => (Number(e.f.legend?.weight ?? e.f.weight) || 5) * e.share;
     const arcOutcomes = {};
+    const casualties = [];   // CCODE-117: who was hurt or killed over an arc this pass
     for (const [arcId, sides] of Object.entries(leaning)) {
       // The most urgent seek a fight; the rest get on with their work.
       const split = list => {
@@ -960,6 +961,27 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
         const res = sbCfg ? contestArc({ pro: champ(aSide, aw), con: champ(bSide, bw), sb: sbCfg, rules: content.rules, steps: content.steps, rng }) : null;
         duels++;
         if (res && !res.drawn) (res.winner === aSide[0].f.id ? proWins++ : conWins++);
+        // CCODE-117 — A FIGHT CAN COST SOMETHING. Erik: "what if more get killed or injured? what knob would
+        // we turn to do that?" The knob was a DISCONNECTED WIRE: 28 duels a pass across the valley and not
+        // one could hurt anybody, because `contestArc` returned multipliers and never touched `epicStatus`.
+        // The only path to a wound was the separate NARRATED clash, gated three ways.
+        //
+        // Now a decisive arc-fight resolves through the SAME `resolveEpicClash` + `applyEpicClashOutcome`
+        // that the narrated path uses — one injury model, not two, so a wound taken over an arc and a wound
+        // taken in a story mean the same thing. `casualtyRate` is the knob (0 = arcs are bloodless).
+        //
+        // ONLY THE LEADERS ARE AT RISK: the figures who drew allies in are the ones who met each other. The
+        // allies pushed; they did not duel. Putting everyone on the casualty table is how a roster empties.
+        const casualtyRate = Number.isFinite(cfg.casualtyRate) ? cfg.casualtyRate : 0.15;
+        if (res && !res.drawn && rng() < casualtyRate) {
+          const [wf, lf] = res.winner === aSide[0].f.id ? [aSide[0].f, bSide[0].f] : [bSide[0].f, aSide[0].f];
+          const clash = resolveEpicClash(wf, lf, rng);
+          const outcome = applyEpicClashOutcome(ws, wf, lf, clash.kind, currentWorldDay);
+          if (outcome?.finalKind && outcome.finalKind !== "already_dead") {
+            casualties.push({ arcId, winner: wf.id, loser: lf.id, kind: outcome.finalKind });
+            for (const line of (outcome.news || [])) news.push({ text: line, worldDay: currentWorldDay, tier: "event" });
+          }
+        }
         for (const e of aSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.proMult : 1));
         for (const e of bSide) applyEpicArcPush(ws, { ...e.f, arcAffinity: e.care }, currentWorldDay, e.urgency * e.share * (res ? res.conMult : 1));
       }
@@ -975,6 +997,9 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     // Per arc: how many FOUGHT, how many WORKED, and who won — so a narrator can say "two of them came to
     // blows over it and thirty quietly got on with it", which is what a year in a valley actually looks like.
     ws.arcContests = arcOutcomes;
+    // Recorded so a narrator can say who paid for the line holding, and so the endgame sims can measure
+    // whether the valley is bleeding at a rate anyone wants.
+    ws.arcCasualties = casualties;
 
     // Reported, not just computed: a seat left empty is a fact about the world this pass, and the GM block
     // (and any future readout) should be able to say WHY an arc moved when nobody won anything.

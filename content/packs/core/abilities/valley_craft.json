@@ -75,7 +75,53 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "setup",
+      "operativeAxis": [
+        "tracking",
+        "timeReach",
+        "travelSpeed"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 1,
+        "timeReach": 24,
+        "note": "r1's own number: 'a clear trail UP TO A DAY OLD'"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "timeReach+travelSpeed",
+          "delta": "trails DAYS old; read a campsite's story (numbers, mood, hurry); TRAVEL TIME -1H on familiar routes",
+          "from": "r2 grants — its own stated number"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: one look at open country reveals routes, hazards and anything recently unusual; ANTICIPATE WHERE QUARRY IS HEADED",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a quick read of the ground — half the reach, and it costs no time",
+        "surge": "double the read; PREDICTION FAILS AGAINST QUARRY THAT KNOWS YOU ARE TRACKING"
+      },
+      "bounds": [
+        {
+          "text": "trails OLDER THAN A DAY at r1; deliberate anti-tracking beats you",
+          "class": "soft"
+        },
+        {
+          "text": "NO EFFECT IN TRUE WHITEOUT; cannot track flyers",
+          "class": "hard"
+        },
+        {
+          "text": "PREDICTION FAILS AGAINST QUARRY THAT KNOWS YOU ARE TRACKING",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "greenlore",
@@ -148,7 +194,58 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "incapacitating",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "healing",
+      "operativeAxis": [
+        "healing",
+        "remedy"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 1,
+          "d": 4
+        },
+        "plus": 1,
+        "note": "incapacitating rung (it also poisons). A FOURTEENTH THEORY OF MEDICINE — HERBAL: small, reliable, over a rest."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "remedy",
+          "delta": "counter MOST NATURAL poisons and sickness; remedies now ALSO RESTORE ENERGY; read an ailment from face and breath",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: brews verging on legend — A NIGHT'S SLEEP IN AN HOUR, clarity through exhaustion, ONE DOSE THAT STABILIZES THE DYING",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a simple tea — half the restoration, brewed in half the time",
+        "surge": "double the potency; IT CANNOT BE STOCKPILED — preparation is the craft"
+      },
+      "bounds": [
+        {
+          "text": "cannot treat SERIOUS WOUNDS or strong toxins; needs LOCAL PLANTS",
+          "class": "hard"
+        },
+        {
+          "text": "PRECURSOR-TOUCHED AFFLICTIONS RESIST",
+          "class": "hard"
+        },
+        {
+          "text": "cannot stockpile — preparation is the craft",
+          "class": "soft"
+        },
+        {
+          "text": "IT HAS TO BE TAKEN, WHICH MEANS IT HAS TO BE GIVEN",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "mediators_tongue",
@@ -219,7 +316,55 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "bolster",
+      "operativeAxis": [
+        "deescalation",
+        "authority"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 4,
+        "note": "SOCIAL. The folk-shadow of stillhold's stillcraft, and the lore says so explicitly."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "authority",
+          "delta": "broker deals THAT HOLD — agreements you mediate GAIN WEIGHT IN THE COMMUNITY LEDGER; call out a lie in negotiation",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: arbitrate FEUDS OF LONG STANDING; your settlements carry NEAR-LAW in communities that know you; ONCE PER SEASON, one hard case",
+          "from": "r3 grants — its own stated rate"
+        }
+      ],
+      "intensity": {
+        "conserve": "cool it a little — half the effect, and nobody owes you",
+        "surge": "double it; A SETTLEMENT YOU BREAK YOURSELF BURNS THE CRAFT"
+      },
+      "bounds": [
+        {
+          "text": "DOESN'T WORK MID-VIOLENCE — it opens a door, it cannot make anyone accept",
+          "class": "hard"
+        },
+        {
+          "text": "cannot broker WHAT ONE SIDE TRULY CANNOT GIVE",
+          "class": "hard"
+        },
+        {
+          "text": "FAILS AGAINST ZEALOTRY",
+          "class": "hard"
+        },
+        {
+          "text": "A SETTLEMENT YOU BREAK YOURSELF BURNS THE CRAFT",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "tinkers_hand",
@@ -293,7 +438,54 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "healing",
+      "operativeAxis": [
+        "repair",
+        "access"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 1,
+          "d": 4
+        },
+        "plus": 1,
+        "note": "mends the MADE. The folk-shadow of enginewright's mend_device."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "access",
+          "delta": "OPEN common locks and mechanisms; repairs now HOLD PERMANENTLY; build compound devices from scrap",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: diagnose ANY mechanism by touch and sound, PRECURSOR INCLUDED; ONCE PER DAY coax one dead device to run ONE MORE TIME",
+          "from": "r3 grants — its own stated rate"
+        }
+      ],
+      "intensity": {
+        "conserve": "a quick fix — half the durability, done now",
+        "surge": "double the work; COAXED DEVICES DIE AGAIN AFTER"
+      },
+      "bounds": [
+        {
+          "text": "fixes are TEMPORARY UNDER HARD USE at r1",
+          "class": "soft"
+        },
+        {
+          "text": "PRECURSOR MECHANISMS STILL RESIST",
+          "class": "hard"
+        },
+        {
+          "text": "COAXED DEVICES DIE AGAIN AFTER — and understanding Precursor FUNCTION is not understanding its PURPOSE",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "beastfriend",
@@ -370,7 +562,52 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "damaging",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "bolster",
+      "operativeAxis": [
+        "rapport",
+        "targets"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 6,
+        "targets": 1,
+        "note": "damaging rung (a companion beast can fight). SOCIAL."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "ask simple tasks of animals that know you; A COMPANION BEAST MAY TAKE YOU ON; sense what nearby animals sense",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: parley meaningfully with ANY natural creature; PRECURSOR-TOUCHED BEASTS RECOGNIZE YOU AS NEUTRAL",
+          "from": "r3 grants — a SEVENTH precursor hook"
+        }
+      ],
+      "intensity": {
+        "conserve": "settle the animals — half the rapport, and it asks nothing of them",
+        "surge": "double it; YOU ASK — ALWAYS. Nothing here is compelled."
+      },
+      "bounds": [
+        {
+          "text": "NO COMMANDS — ONLY TRUST; predators stay dangerous",
+          "class": "hard"
+        },
+        {
+          "text": "a companion is A PARTNER, NOT A TOOL — mistreat it and it is gone",
+          "class": "hard"
+        },
+        {
+          "text": "YOU ASK — ALWAYS. Nothing here is compelled.",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "stonewise",
@@ -443,7 +680,55 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "damaging",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "setup",
+      "operativeAxis": [
+        "structuralRead",
+        "foresight"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 1,
+        "note": "damaging rung (it finds the weak point). The folk-shadow of mason's stone_read."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "structuralRead",
+          "delta": "DATE construction and read its story; DETECT VOIDS BY RESONANCE TAP; find the weak point",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "foresight",
+          "delta": "read GEOLOGY like architecture — predict collapse, slide, or sinkhole; navigate caves by stone-sense; PRECURSOR CONSTRUCTION reads partially",
+          "from": "r3 grants — an EIGHTH precursor hook"
+        }
+      ],
+      "intensity": {
+        "conserve": "a look at the stone — half the certainty, and instant",
+        "surge": "double the read; PREDICTION IS HOURS-SCALE, NOT WEEKS"
+      },
+      "bounds": [
+        {
+          "text": "deliberately DISGUISED WORK needs a check",
+          "class": "soft"
+        },
+        {
+          "text": "VOID DETECTION GIVES PRESENCE, NOT LAYOUT",
+          "class": "hard"
+        },
+        {
+          "text": "PRECURSOR MATERIAL reads only partially",
+          "class": "hard"
+        },
+        {
+          "text": "PREDICTION IS HOURS-SCALE, NOT WEEKS — living rock keeps some secrets",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "rivercraft",
@@ -518,7 +803,53 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "reposition",
+      "operativeAxis": [
+        "watercraft",
+        "foresight",
+        "range"
+      ],
+      "mechanic": {
+        "range": 10,
+        "push": 0,
+        "magnitude": 3,
+        "duration": 4
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "watercraft",
+          "delta": "RUN WATER OTHERS PORTAGE; read WHAT THE RIVER CARRIES and where from; night navigation",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: hold THE WHOLE WATERSHED in your head — predict flood and drought WEEKS OUT, trace ANY sample to its source reach",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "read the water — half the certainty, and it costs nothing",
+        "surge": "double it; THE GRAY WATER READS AS SILENCE — a gap, not a message"
+      },
+      "bounds": [
+        {
+          "text": "rapids BEYOND YOUR CRAFT'S CLASS still say no",
+          "class": "hard"
+        },
+        {
+          "text": "THE GRAY WATER READS AS SILENCE — a gap, not a message",
+          "class": "hard"
+        },
+        {
+          "text": "tracing NEEDS A SAMPLE IN HAND",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "quiet_step",
@@ -587,7 +918,58 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "reposition",
+      "operativeAxis": [
+        "stealth",
+        "targets"
+      ],
+      "mechanic": {
+        "range": 6,
+        "push": 0,
+        "magnitude": 3,
+        "duration": 4,
+        "targets": 1,
+        "note": "PHYSICAL. The folk-shadow of umbral's shadowstep, at a human scale."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "stealth",
+          "delta": "pass ALERT WATCHERS with cover; READ A GUARD PATTERN in minutes and thread it; leave a pursuit behind in broken country",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "extend",
+          "axis": "targets",
+          "delta": "enter and leave watched places AS IF THE WATCH BLINKED; MOVE A SMALL PARTY quietly; ONCE PER DAY break a pursuit clean",
+          "from": "r3 grants — its own stated rate"
+        }
+      ],
+      "intensity": {
+        "conserve": "move quietly — half the concealment, and you can move at speed",
+        "surge": "double it; 'GONE' MEANS ESCAPED, NOT TELEPORTED"
+      },
+      "bounds": [
+        {
+          "text": "ALERT SENTRIES AND OPEN GROUND beat you without a check",
+          "class": "soft"
+        },
+        {
+          "text": "ANIMALS STILL SMELL YOU",
+          "class": "hard"
+        },
+        {
+          "text": "cannot vanish from SOMEONE ALREADY WATCHING",
+          "class": "hard"
+        },
+        {
+          "text": "'GONE' MEANS ESCAPED, NOT TELEPORTED — the GM places you plausibly",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "storykeeper",
@@ -657,7 +1039,50 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "setup",
+      "operativeAxis": [
+        "recall",
+        "implication"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 1
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "implication",
+          "delta": "CROSS-REFERENCE stories to surface WHAT THEY JOINTLY IMPLY (+insight when a known topic is in play)",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: access THE OLD STRATUM — pre-crisis stories most keepers lost; recognize when events are RHYMING WITH AN OLD STORY",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "recall what you heard — half the cross-reference, and it costs nothing",
+        "surge": "double it; IMPLICATION ISN'T PROOF"
+      },
+      "bounds": [
+        {
+          "text": "recall is of WHAT YOU HAVE HEARD — gaps are gaps",
+          "class": "hard"
+        },
+        {
+          "text": "IMPLICATION ISN'T PROOF",
+          "class": "hard"
+        },
+        {
+          "text": "the old stratum is FRAGMENTARY and the GM holds its gaps",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "hearthbinding",
@@ -728,7 +1153,53 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "bolster",
+      "operativeAxis": [
+        "restoration",
+        "targets",
+        "persistence"
+      ],
+      "mechanic": {
+        "magnitude": 2,
+        "duration": 8,
+        "targets": 6,
+        "note": "⚠️ THE CATALOG'S MOST MECHANICALLY EXPLICIT CRAFT: '+2 extra health and energy to everyone overnight' — stated as a number, in the source, at r1."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "restoration",
+          "delta": "meals you host SUSPEND QUARRELS at the fire — hostile parties WILL EAT TOGETHER; overnight recovery also clears one minor condition",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "persistence",
+          "delta": "SPECIAL: a camp you keep THREE NIGHTS BECOMES A NAMED PLACE (enters place memory); companions and party BOND FASTER at your fire",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a decent camp — half the restoration, and it asks little",
+        "surge": "double it; PEACE LASTS AS LONG AS THE MEAL PLUS THE NIGHT"
+      },
+      "bounds": [
+        {
+          "text": "needs AN EVENING AND MINIMAL MATERIALS; no benefit in a hostile place",
+          "class": "hard"
+        },
+        {
+          "text": "PEACE LASTS AS LONG AS THE MEAL PLUS THE NIGHT — deep feuds are not solved by dinner",
+          "class": "hard"
+        },
+        {
+          "text": "NAMED PLACES PERSIST BUT SO DOES THEIR REPUTATION",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "keen_appraisal",
@@ -793,7 +1264,50 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "setup",
+      "operativeAxis": [
+        "appraisal",
+        "perceptionDepth"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "duration": 1
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "perceptionDepth",
+          "delta": "read an object's HISTORY FROM WEAR — who used it, how, how long; estimate a collection's worth in minutes",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: ONE SWEEP OF A ROOM yields its FULL INVENTORY INCLUDING THE CONCEALED (once per location per visit)",
+          "from": "r3 grants — its own stated rate"
+        }
+      ],
+      "intensity": {
+        "conserve": "a glance at the goods — half the depth, instant",
+        "surge": "double it; EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'"
+      },
+      "bounds": [
+        {
+          "text": "EXOTIC AND PRECURSOR ITEMS READ AS 'BEYOND SCALE'",
+          "class": "hard"
+        },
+        {
+          "text": "HISTORY IS INFERENCE — deliberate aging can fool a first read",
+          "class": "soft"
+        },
+        {
+          "text": "the sweep is ONCE PER LOCATION PER VISIT",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "old_roads",
@@ -866,7 +1380,52 @@
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
       "harmRung": "none",
-      "powerSystem": "valley_craft"
+      "powerSystem": "valley_craft",
+      "shape": "setup",
+      "operativeAxis": [
+        "precursorSense",
+        "range"
+      ],
+      "mechanic": {
+        "magnitude": 4,
+        "duration": 2,
+        "range": 30,
+        "note": "⚠️ THE NINTH AND MOST IMPORTANT PRECURSOR HOOK IN THE CATALOG — and it belongs to ORDINARY VALLEY FOLK."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "precursorSense",
+          "delta": "MAP A SITE'S PRECURSOR LAYOUT by walking it; judge whether a remnant is DORMANT, CYCLING, OR WAKING; salvage safely",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: THE DEEP NET REVEALS ITSELF — perceive the valley's WHOLE PRECURSOR LATTICE from any node, and SENSE WHEN THE LATTICE CHANGES",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a sense of the old work — half the range, and it costs nothing",
+        "surge": "double the reach; THE LATTICE'S PURPOSE STAYS DARK — pattern without meaning"
+      },
+      "bounds": [
+        {
+          "text": "SENSE, NOT SIGHT — no detail; depth beyond a few meters muddies",
+          "class": "hard"
+        },
+        {
+          "text": "JUDGMENT IS CRAFT, NOT CERTAINTY — 'waking' CAN LIE",
+          "class": "hard"
+        },
+        {
+          "text": "THE LATTICE'S PURPOSE STAYS DARK — pattern without meaning",
+          "class": "hard"
+        }
+      ]
     },
     {
       "id": "blend_in",
@@ -930,7 +1489,53 @@
       ],
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "guard",
+      "operativeAxis": [
+        "concealment",
+        "duration"
+      ],
+      "mechanic": {
+        "magnitude": 3,
+        "soak": 0,
+        "soakRank": 0,
+        "duration": 8,
+        "note": "A NINETEENTH DEFENSIVE LOGIC — UNREMARKED: soak 0, and it is not stealth (quiet_step) or concealment (the_harbor) or misdirection (the_false_target). It is BEING UNWORTH NOTICING. Per Erik's grouping ask this sits in the BEFORE-THE-ROLL family."
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "concealment",
+          "delta": "not merely unnoticed — READ AS BELONGING. The guard nods you through; THE CROWD MAKES ROOM.",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: you are THE PERSON NOBODY AFTERWARD CAN QUITE DESCRIBE — present, unremarkable, entirely forgettable",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "keep your head down — half the effect, and you can drop it instantly",
+        "surge": "double it; BEING FORGETTABLE MEANS BEING FORGOTTEN"
+      },
+      "bounds": [
+        {
+          "text": "A SEARCHER WHO KNOWS YOUR FACE AND IS LOOKING defeats it",
+          "class": "hard"
+        },
+        {
+          "text": "BELONGING IS A PERFORMANCE YOU MUST KEEP PERFORMING — one wrong detail ends it",
+          "class": "soft"
+        },
+        {
+          "text": "BEING FORGETTABLE MEANS BEING FORGOTTEN — Valleyfolk who lean on this lose things",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "boundary_stone",
@@ -993,7 +1598,54 @@
       ],
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "none",
+      "shape": "guard",
+      "operativeAxis": [
+        "ward",
+        "duration",
+        "autonomy"
+      ],
+      "mechanic": {
+        "magnitude": 4,
+        "soak": 3,
+        "soakRank": 1,
+        "duration": 168,
+        "note": "A folk ward. Note soakRank 1 and the bound: 'A DETERMINED PERSON WALKS THROUGH IT; it DETERS, not stops.'"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "ward",
+          "delta": "set a boundary THAT HOLDS — a threshold, A CLAIM, a line that things NOTICE AND RESPECT",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "autonomy",
+          "delta": "SPECIAL: a boundary with THE WEIGHT OF THE OLD ONES — it FEELS ANCIENT, and even things that do not respect YOU respect IT",
+          "from": "r3 grants — an ELEVENTH autonomy-increment craft"
+        }
+      ],
+      "intensity": {
+        "conserve": "a simple ward — half the deterrence, and it costs nothing to keep",
+        "surge": "double it; A BOUNDARY IS A CLAIM, AND CLAIMS ARE CONTESTED"
+      },
+      "bounds": [
+        {
+          "text": "A DETERMINED PERSON WALKS THROUGH IT — it DETERS, not stops",
+          "class": "hard"
+        },
+        {
+          "text": "A BOUNDARY IS A CLAIM, AND CLAIMS ARE CONTESTED",
+          "class": "hard"
+        },
+        {
+          "text": "THE OLD BOUNDARIES WERE SET BY PEOPLE WHO PAID FOR THEM",
+          "class": "cost"
+        }
+      ]
     },
     {
       "id": "hunters_strike",
@@ -1052,7 +1704,55 @@
       ],
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
-      "harmRung": "lethal"
+      "harmRung": "lethal",
+      "shape": "damage",
+      "operativeAxis": [
+        "damage",
+        "precision"
+      ],
+      "mechanic": {
+        "dice": {
+          "n": 1,
+          "d": 6
+        },
+        "plus": 0,
+        "marginFloorPer": 0.02,
+        "note": "⚠️ THE T-I DAMAGE BASELINE. lethal rung, PHYSICAL, one target, honest force. This is the craft Erik's original benchmark was about: 'a T-I strike at max should be able to kill a T-I beast.'"
+      },
+      "rankDeltas": [
+        {
+          "rank": 2,
+          "kind": "deepen",
+          "axis": "precision",
+          "delta": "STRIKE WHERE A THING ACTUALLY ENDS — quickly, without waste, WITHOUT SUFFERING YOU DID NOT NEED",
+          "from": "r2 grants"
+        },
+        {
+          "rank": 3,
+          "kind": "add",
+          "axis": "special",
+          "delta": "SPECIAL: NOTHING IS WASTED — the strike, the taking, the use. 'The old Valley ethic made into a single motion.'",
+          "from": "r3 grants"
+        }
+      ],
+      "intensity": {
+        "conserve": "a measured strike — half the force, and the animal is not ruined",
+        "surge": "double it; CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead"
+      },
+      "bounds": [
+        {
+          "text": "NO WARRIOR'S FORMS — one target, honest force",
+          "class": "hard"
+        },
+        {
+          "text": "CLEAN IS A DISCIPLINE, NOT A MERCY — the animal is still dead",
+          "class": "hard"
+        },
+        {
+          "text": "IT IS A HUNTER'S CRAFT, NOT A SOLDIER'S — turned on people it is what it is",
+          "class": "hard"
+        }
+      ]
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

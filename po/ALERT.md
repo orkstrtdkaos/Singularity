@@ -1,6 +1,41 @@
 # PO ALERT
 
-> ## [CCODE-91 - THE PROMISE SWEEP, and it found a live one immediately - CCode, 2026-08-03]
+> ## [SNG-267 — SPOILS AND THE VALLEY ECONOMY] (Aevi, 2026-08-02)
+> Erik: *"Why are we fighting things? … we should be able to take gear off the defeated, or harvest something
+> useful. We don't have a system for that, and that probably means we need money and buying too."*
+> **VERIFIED SCOPE: the ITEM half is mature, the VALUE half does not exist at all.** Items already carry
+> `bonusTags`, evolution, grants and provenance, and **`inventoryAdd` is live** — so **loot already has a real
+> path.** But there are **zero occurrences of currency, price, or item value anywhere**, and no loot, drops, or
+> shops. **So loot doesn't need a new inventory system. It needs a reason to exist and something to convert
+> into.**
+> **⚠️ THE DESIGN QUESTION UNDER THE QUESTION: the answer to "why are we fighting" must not become "to farm
+> them."** A generic drop table turns every creature into a vending machine and undoes the whole bestiary pass —
+> those 26 creatures got bodies and authored answers so encounters would be **problems, not resources.**
+> **Three rules, and all three fall out of content that already exists:**
+> **1. WHAT YOU GET IS WHAT IT WAS — keyed on the bestiary's existing `class` field.** `manifested_creature` →
+> **NOTHING** (glimmerlings *"wink out like the fiction they are"* — already authored). `warped_beast` →
+> materials. `feral_construct` → parts (**the salvage rings already exist to buy these**). `made_weapon` →
+> **gear**, because it *was* a person — the most uncomfortable loot in the game, correctly.
+> **Half the roster leaves nothing, and the fiction already said so. That kills the vending-machine problem at
+> the root.**
+> **2. HARVEST IS A CRAFT CHECK, NOT A FREE PICKUP** — and the thesis statement is already written:
+> `hunters_strike` r3, ***"nothing is wasted — the strike, the taking, the use."*** **A clean kill harvests
+> clean; a botched one ruins the hide.** That makes **how you won** matter, which is precisely the answer to
+> *why are we fighting.*
+> **3. ⚠️ THE VALLEY SHOULD NOT HAVE GOLD.** The Transition ended that economy. What the world already runs on —
+> in the lore and in my own authored villainy — is **charters, obligations, bargains, and standing.** Proposed
+> three layers, **only the first of which is new**: `worth` (a barter-weight field on items) · **THE MARK**, a
+> tally of settled obligation that **ties into `reputation.js`'s live `spread`** — *a Mark is only good where
+> the deed that earned it travelled*, **a currency with GEOGRAPHY** · and **standing**, already live.
+> **BUILD ORDER (smallest thing that answers the question):** `worth` field → `spoils` on the 26 roster entries
+> → harvest craft-checks → **traders as NPCs, not shops** (the `wants`/`fears` fields already exist; **buying
+> should be a conversation, which is what this game is good at**) → the Mark last.
+> **WOULD NOT BUILD:** gold, a shop screen, drop tables, or loot from manifestations — each flattens something
+> the world already does better.
+> **ERIK'S CALLS:** (1) `worth` as a raw number or as **bands** — *I lean bands; this game has consistently
+> preferred legible qualitative tiers over false precision, and bands survive a GM narrating a trade far better
+> than "37 marks."* (2) Is **the Mark** right? It's the piece I'm least certain of and like most. (3) Should
+> **`made_weapon` gear be lootable?** **I think yes — and I think it should cost something.**> ## [CCODE-91 - THE PROMISE SWEEP, and it found a live one immediately - CCode, 2026-08-03]
 > **ERIK: *"every one of these surfaced something that should also be swept for in the game."*** Right — six
 > doors were found one at a time, each by accident, each while doing something else. They are all the same
 > shape at different altitudes: **something is declared and one end of it is missing.** `npm run sweep`.

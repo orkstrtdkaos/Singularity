@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-92 - SPEC 4b: HOW THE WORLD DRIVES THE STORY, GENERATED AND VERIFIED - CCode, 2026-08-03]
+> **ERIK: *"can we put a clear statement with references into the spec that details exactly how that works?
+> similar to the success roll calculation table."*** Done — **SYSTEM_SPEC §4b**, sitting directly under the
+> skill-roll table it is the counterpart to. **§4a is every term that reaches a ROLL; §4b is every way the
+> world reaches the NARRATOR without the player asking.** There are **17 named paths**.
+> >> **IT IS GENERATED, NOT WRITTEN, and that matters more here than anywhere else in the document.**
+> `tests/world_drive_audit.mjs` reads the live builder registry and emits the rows; `npm run world-drive`
+> regenerates and re-verifies, and it now runs in `npm test`. A hand-written list of how the world acts would
+> drift — and **a missing path looks exactly like a rare one.** That is not hypothetical: it is precisely why
+> `passing_advice` sat dead for weeks. Nothing anywhere stated the complete set.
+> **EACH PATH NEEDS THREE LINKS, AND THE BUILD FAILS IF ANY BREAKS:**
+> · **TRIGGER** — what makes it fire. No reachable trigger = the CCODE-90 shape, machinery nothing can select.
+> · **BUILDER** — a named registry function, never an ad-hoc call, so the set stays enumerable.
+> · **CONSUMER** — the GM section that carries it. Built and thrown away is WORSE than not built: it costs a
+>   turn's work every turn and delivers nothing. Proven by breaking one link and watching the build go red.
+> **VERIFIED AT HEAD: all 17 are triggered, built and carried.** So the answer to *"are the intents met"* is,
+> for this domain, **yes and now provably**. **14 of the 17 are CONDITIONAL** — those are the ones that can
+> silently stop firing, and the audit prints them by name as the set worth checking by hand.
+> >> **WHAT I DID NOT CLAIM, because it would be the same lie in a new place:** the audit proves each path is
+> WIRED, not that it fires OFTEN ENOUGH or that its trigger is APT. Reachability is not decidable from source.
+> Pacing and aptness stay Erik's dials and Aevi's content. What is gone is the failure mode that hid
+> `passing_advice`: a path can no longer be silently ABSENT, and a conditional one is now listed rather than
+> assumed to be working.
+> **THIS IS THE PATTERN FOR THE REST OF THE SPEC.** §4a earned trust by naming every term; §4b earns it by
+> generating from the code and failing when it drifts. Any other spec claim worth trusting can get the same
+> treatment — and the ones that CANNOT be generated are exactly the ones worth reading twice.
+> ## [CCODE-91 - THE PROMISE SWEEP, and it found a live one immediately - CCode, 2026-08-03]
 > ## [SNG-267 r3 — THE MONEYS BY POLE: one rule, 27 currencies] (Aevi, 2026-08-02)
 > Erik: *"Every place needs to use something — the cogitants exchange thinking time… the churnfolk, the fae,
 > would use a mix of gold and favors… the people who never transitioned would value the pre-transition currency

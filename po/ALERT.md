@@ -1,5 +1,29 @@
 # PO ALERT
 
+> ## [CCODE-102 - THE WINDOW NEVER MOVED. NOW IT ROTATES. - CCode, 2026-08-03]
+> **ERIK: *"are the slices necessary? it seems dumb to slice any content if it isn't a big deal to keep it and
+> fully move things."*** The question turned up something better than the slice itself.
+> **THE CAP IS REAL** — every entity in that batch costs a GENERATIVE CALL, and the population is 47 long on
+> Erik's own save. Sending all 47 per pass is not a bound worth removing. **WHAT WAS NOT DEFENSIBLE IS THAT
+> THE WINDOW NEVER MOVED.** `offscreenPopulation` builds in a stable order, so `slice(0, 4)` handed the model
+> **the same four people on every pass, forever**. Measured across five successive passes on the real save:
+> byte-identical — `pip-cotter`, `calvar`, `vash`, `siol`. **43 of 47 could never move at all.** The world had
+> four inhabitants and 43 statues.
+> **FIXED: the batch is a ROTATING WINDOW**, advanced one batch per pass and persisted on the world state.
+> Measured over 12 passes on a 47-entity population: **37 distinct entities reached** (a fixed window reaches
+> 4, forever), full coverage in ~16 passes, **and the legend keeps its seat in all 12** — the CCODE-99 reserve
+> still overrides the rotation, because a legend that paid a cooldown AND a rate roll is never rotated past.
+> Cost per pass is unchanged.
+> **AND ERIK'S INSTINCT WAS RIGHT ABOUT THE OTHER SLICES TOO** — both door-7 candidates checked out yesterday:
+> `death.js` puts legends FIRST so its cut keeps what matters, and the `claude.js` cap of 4 is the API's own
+> ceiling on cache_control blocks. **The only bad slice was the one where the ordering mattered and nobody had
+> written the ordering down.**
+> >> **STILL OPEN, and I could not isolate it before running out of room:** driving 12 passes through the real
+> `advanceGeneratedOffscreen` on a save copy, only ~1 actually reached the development loop — the rest returned
+> early. The rotation is verified at unit level; **how often the PASS ITSELF proceeds is a separate gate I have
+> not found.** That is the next thread, and it is the same question as `npcErrandsDetail` reading
+> `always` and producing zero: something upstream is declining to run.
+> ## [CCODE-101 - BOTH DOOR-7 CANDIDATES CHECKED: BOTH CORRECT - CCode, 2026-08-03]
 > ## [SNG-268 — RING DISTANCE IN THE BRAID GENERATOR (Erik caught a real leak)] (Aevi, 2026-08-02)
 > Erik: *"these aren't the only braids I expect to exist — make sure all of these findings are also reflected in
 > the generative engine that will instantiate new braids."*

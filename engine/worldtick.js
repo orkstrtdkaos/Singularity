@@ -679,11 +679,25 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   // So one seat is RESERVED. `offscreenPopulation` already paid for the cooldown and the rate roll before a
   // legend is offered at all, so if one is in the list it has earned its place; the flat slice was silently
   // overruling that. The other three seats are unchanged, and a population with no legend is untouched.
+  // CCODE-102 — THE WINDOW ROTATES. Erik: "it seems dumb to slice any content if it isn't a big deal to keep
+  // it and fully move things." The cap itself is real — each entity in the batch costs a generative call, and
+  // this population is 47 long on his own save. What was NOT defensible is that the window never MOVED:
+  // `offscreenPopulation` builds in a stable order, so `slice(0, 4)` handed the model THE SAME FOUR PEOPLE on
+  // every pass, forever. Measured across five successive passes: identical. 43 of 47 could never move at all.
+  //
+  // So the batch is a ROTATING window over the whole population, advanced by one batch each pass and
+  // persisted on the world state. Everyone comes round eventually, the cost per pass is unchanged, and the
+  // reserved legend seat still overrides the rotation — a legend that earned its cooldown and rate roll is
+  // never rotated past.
   const BATCH_N = 4;
   const legendAt = population.findIndex(e => e.source === "legend");
-  const batch = legendAt >= 0 && legendAt >= BATCH_N
-    ? [population[legendAt], ...population.slice(0, BATCH_N - 1)]
-    : population.slice(0, BATCH_N);
+  const cursor = Number(ws.offscreenCursor) || 0;
+  const rotated = population.length ? population.slice(cursor % population.length).concat(population.slice(0, cursor % population.length)) : [];
+  const window = rotated.slice(0, BATCH_N);
+  const batch = legendAt >= 0 && !window.some(e => e.source === "legend")
+    ? [population[legendAt], ...window.slice(0, BATCH_N - 1)]
+    : window;
+  ws.offscreenCursor = population.length ? (cursor + BATCH_N) % population.length : 0;
 
   try {
     const result = await evolveFn({ character, entities: batch, elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id), model });

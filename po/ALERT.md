@@ -1,6 +1,36 @@
 # PO ALERT
 
-> ## [CCODE-94 - THE DEV WORLD (scaffold) + A CORRECTION I OWE - CCode, 2026-08-03]
+> ## [SNG-267 r6 — REGION TRADE TABLES: 25 regions, 12 goods, and the dead lists] (Aevi, 2026-08-02)
+> The authoring job the two-axis model created. **Every region maps to a tradition** (verified in
+> `traditions.json`), so **need and scarcity DERIVED rather than got invented**: a people needs what its craft
+> cannot make, and has a surplus of what its craft produces. Same discipline as the crafts, the villainy and the
+> moneys.
+> **⚠️ THE DEAD LISTS WROTE THEMSELVES, AND THEY ARE THE BEST PART OF THE TABLE:**
+> · **The Quickwood** — `mech_parts`, `precursor_salvage`, `nanite_tech` all **worth zero.** Erik's own example,
+>   now authored: **a party arriving with a cart of salvage has carried dead weight through a forest.**
+> · **The Umbral Depths** — `worked_light` is worthless, **and trying to sell it reads as an insult.** The only
+>   dead entry in the world that is *socially dangerous* rather than merely unprofitable.
+> · **The Stillhold** — **`arms` are a hard zero.** They will not buy weapons at any price, from anyone.
+>   Directly consistent with the tradition refusing to honour a Marcher oath.
+> · **The Unspooling** — **`documents` are worthless.** *You cannot sell a lattice ledger to the Churn.* The
+>   exact inverse of the Lattice Cities.
+> · **The Unmade** — **`luxuries` zero.** A people whose whole craft is careful ending **does not buy
+>   keepsakes.** Sharpest characterisation in the table.
+> · **`nanite_tech` is zero in TWO regions for DIFFERENT reasons** — the Somatic Reaches (a *principle* about
+>   what the Transition did to people) and the Numinous Reach (a meaning-steeped people has no interest in a
+>   mechanism).
+> **THE CROSSING IS THE ONLY REGION WITH AN EMPTY DEAD LIST — and that IS its identity, expressed
+> mechanically.** The one place that wants everything. It should also **never pay best for anything**, so a
+> player who only sells there loses margin but is never stranded.
+> **⚠️ TWO ENTRIES PROVE THE TWO-AXIS MODEL WAS NECESSARY:** `cut_stone` in the Open Reach is **`little` need
+> and `absent` scarcity** — **maximally rare and nearly worthless**, because a travelling people doesn't buy
+> building material. **Under my old one-axis model that priced at ×2.5. It prices at ×0.75.**
+> **THE BEST HONEST TRADE IN THE WORLD: rootkin seed carried to the Palelands** — high need, absent scarcity,
+> **×5.0, the top of the range.** And it's a good trade in every sense: **you are bringing life to a
+> death-steeped land that will pay anything for it.**
+> **AND THE ECONOMY AGREES WITH THE VILLAINY PASS WITHOUT COORDINATION:** seraphic charters are **abundant and
+> cheap at source in the Ascent** and needed everywhere else — **which is exactly why the licence trade is
+> profitable.** And the Veiled Reach buys **real documents at high need**: the name-takers' supply chain, priced.> ## [CCODE-94 - THE DEV WORLD (scaffold) + A CORRECTION I OWE - CCode, 2026-08-03]
 > **FIRST, THE CORRECTION: I told Erik SEVEN paths were dark. IT IS FOUR.** Two of the seven were MY PROBE
 > looking in the wrong place — `wakesForGM` reads `worldState.wakes` and I checked `character.wakes`; the
 > teacher footprint is the RECORD, not the `markTeacher` op. **`wakesDetail` is 1/10 and `teacherOfferDetail`

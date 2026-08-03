@@ -1,5 +1,27 @@
 # PO ALERT
 
+> ## [CCODE-90 - ASH'S PRIMARY MODE COULD NEVER FIRE - CCode, 2026-08-02]
+> **AEVI: I checked your claim that the machinery "was built and never filled" — and it is worse than that.
+> `passing_advice`, the beat you built Ash AROUND, could not happen at all.**
+> It is defined in `LEGEND_BEATS`. It is described in the GM directive table. It is authored into legend
+> content. `legendSurfacing` deploys it happily — measured, **215 of 400 apt moments**. And `detectLegendBeat`
+> in app.js, **the only function in the codebase that chooses a beat**, never returned it: both of its
+> branches require an ACTIVE ENCOUNTER, and *"a mundane crossing where a legend leaves ONE true thing —
+> advice, a name, a warning, a task — then moves on"* is by definition **not an encounter**.
+> So the one deployment mode built for a WANDERING mentor was the one that could not occur. A figure whose
+> entire character is restraint had an unreachable primary mode, and the two beats that DID work are the two
+> a careful man would almost never use.
+> **FIXED**, and the rarity is not re-invented: `legendSurfacing` already owns the cooldown and the rarity
+> roll, and that is the right place for both. The detector now only says the beat is APT — you are between
+> things, with nothing else claiming the moment.
+> >> **A NEW DOOR FOR PromisedButUnread, and worth naming: not an unread FIELD, but an UNREACHABLE VALUE of a
+> field that IS read.** Every previous instance was something nobody consulted. This one was consulted
+> constantly by a function that could never return it. Gated now — the audit fails if any moment-detected
+> beat is unreachable from the detector, and `villain_escalation` is exempted BY NAME so the exemption is
+> visible rather than a silent hole.
+> **YOUR ASH IS THE REASON THIS WAS FOUND.** The character came first and the defect surfaced because his
+> design depends on a beat nobody had ever exercised. That is the third time this week content authoring has
+> located an engine gap that no audit of the engine would have shown.
 > ## [CCODE-89d - THE SECOND GRID (Erik named the source: THE GAME ON PROTON) - CCode, 2026-08-02]
 > **ERIK: *"this is supposed to be just like Stile's challenges in the Blue Adept book series."*** That is the
 > Game on Proton — Piers Anthony's Apprentice Adept — and naming it settles two things at once. It confirms

@@ -636,4 +636,32 @@ if (failures > 0) {
   console.log("\nWiring audit: all checks passed.");
   if (KNOWN_RED.length) console.log(`  note: ${KNOWN_RED.length} known-red entr${KNOWN_RED.length === 1 ? "y is" : "ies are"} now green — delete from KNOWN_RED.`);
 }
+// ---------- CCODE-90: every LEGEND BEAT must be reachable from the thing that selects beats ----------
+// `passing_advice` was defined in LEGEND_BEATS, described in the GM directive table, authored into legend
+// content, and deployable by legendSurfacing (215/400 apt moments) - and `detectLegendBeat` in app.js, the
+// ONLY function that chooses a beat, never returned it. Both of its branches required an ACTIVE ENCOUNTER,
+// and a passing legend is by definition a mundane crossing. The one deployment mode built for a wandering
+// mentor was the one that could not happen, which is why Aevi's Ash - a figure whose whole character is
+// restraint - had an unreachable primary mode.
+//
+// This is PromisedButUnread through a new door: not an unread field, but an unreachable VALUE of a read one.
+{
+  const legendsSrc = readFileSync(join(root, "engine/legends.js"), "utf8");
+  const appSrc = readFileSync(join(root, "app.js"), "utf8");
+  const beats = (legendsSrc.match(/LEGEND_BEATS\s*=\s*\[([^\]]*)\]/) || [])[1] || "";
+  const names = [...beats.matchAll(/"([a-z_]+)"/g)].map(m => m[1]);
+  // Extracted by index rather than regex: the function body spans lines and a multi-line pattern here is one
+  // escaping mistake away from being silently wrong about what it read.
+  const dStart = appSrc.indexOf("function detectLegendBeat()");
+  const NL = String.fromCharCode(10);   // no backslash escapes: this line has been mangled twice already
+  const detector = dStart < 0 ? "" : appSrc.slice(dStart, appSrc.indexOf(NL + "}", dStart) + 2);
+  // villain_escalation is world-arc driven rather than moment-detected, and is exempted BY NAME so the
+  // exemption is visible rather than a silent gap in the check.
+  const worldDriven = new Set(["villain_escalation"]);
+  const unreachable = names.filter(b => !worldDriven.has(b) && !detector.includes(`"${b}"`));
+  check("CCODE-90: every moment-detected legend beat is actually returned by detectLegendBeat",
+    unreachable.length === 0,
+    `defined, described and deployable — but nothing can ever SELECT: ${unreachable.join(", ")}`);
+}
+
 process.exit(failures === 0 ? 0 : 1);

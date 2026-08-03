@@ -2129,8 +2129,22 @@ function detectLegendBeat() {
   if (enc) {
     if (enc.def.lethal && character.health <= character.maxHealth * 0.35) return "doomed_rescue"; // real peril
     if (enc.def.type === "challenge" || enc.def.type === "duel") return "witness_power";           // a set-piece
+    return null;   // inside an encounter, a PASSING legend is not passing
   }
-  return null;
+  // CCODE-90 — THE BEAT THAT COULD NEVER FIRE. `passing_advice` is defined in LEGEND_BEATS, described in the
+  // GM directive table, and authored into legend content — and this function, the ONLY thing that selects a
+  // beat, never returned it. Both branches above require an ACTIVE ENCOUNTER, and a passing legend is by
+  // definition a MUNDANE CROSSING: "a legend leaves ONE true thing — advice, a name, a warning, a task — then
+  // moves on." So the one deployment mode built for a wandering mentor was the one that could not happen.
+  //
+  // Found because Aevi authored Ash, the Walker Between, whose entire character is restraint — a figure who
+  // mostly just passes through. Her Gandalf's primary mode was unreachable.
+  //
+  // Rarity is NOT re-invented here: legendSurfacing already holds the cooldown (minGapDays) and the rarity
+  // roll, and it is the right place for both. This only says the beat is APT — you are between places, with
+  // nothing else claiming the moment.
+  if (character.activeScene?.pending || busy) return null;
+  return "passing_advice";
 }
 
 /** If a beat qualifies and the governor + rarity allow, choose a great figure to surface and

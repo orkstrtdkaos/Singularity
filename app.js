@@ -19,6 +19,7 @@ import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCa
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
+import { drawAxis, resolvePick, readOfPick } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
@@ -5086,6 +5087,27 @@ function substratePenaltyFor(choice, location) {
   return usesAbility ? (substrateForAction(choice, location)?.chancePenalty || 0) : 0;
 }
 
+/** SNG-149 / CCODE-89 — draw both axes for a Coliseum bout, or null when this is not one.
+ *
+ *  Gated on the LOCATION rather than on a name match, so a bout is a bout because of where it is fought.
+ *  Returns null everywhere else, which is why adding this changes nothing about any other encounter. */
+function coliseumBoutFor(def, oppSheet) {
+  const grid = CONTENT?.rules?.coliseumGrid;
+  if (!grid?.cells?.length) return null;
+  if (def?.locationId !== (grid.locationId || "the_great_coliseum")) return null;
+  try {
+    const cat = fullCatalog();
+    const yours = drawAxis(character, { catalog: cat, index: FN_INDEX, rng: Math.random });
+    // The opponent draws from the crafts their SHEET actually carries, so a champion's columns are their
+    // real practice too — not a table roll dressed as one.
+    const theirAbilities = (oppSheet?.skills || []).map((s, n) => ({ abilityId: `opp-${n}`, level: s.tier || 1 }));
+    const theirCat = {};
+    (oppSheet?.skills || []).forEach((s, n) => { theirCat[`opp-${n}`] = { functions: [s.function].filter(Boolean) }; });
+    const theirs = drawAxis({ abilities: theirAbilities }, { catalog: theirCat, index: FN_INDEX, rng: Math.random });
+    return { yours, theirs, picked: null };
+  } catch { return null; }   // a bout that cannot draw its grid is still a fight; it is never a crash
+}
+
 async function onChoice(choice) {
   if (busy) return;
   // SNG-145: while an intent gate stands, the gate IS the choice — answer it first.
@@ -5189,6 +5211,12 @@ async function onChoice(choice) {
     const oppSheet = contestSheetFor(def);   // SNG-247: one place decides the other side (duel -> foe, puzzle -> static)
     const isSB = !!oppSheet;
     character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
+    // SNG-149 / CCODE-89 — A COLISEUM BOUT IS FOUGHT ON THE BLIND GRID. Aevi authored the whole design and it
+    // sat as a rules file nothing read, with these three champion encounters already written against it.
+    // Both axes are drawn HERE, at the moment the bout opens, because the draw is part of the fiction: the
+    // columns are what each fighter is known to practise, and the crowd sees them before either picks.
+    const bout = coliseumBoutFor(def, oppSheet);
+    if (bout) character.activeEncounter.coliseum = bout;
     try { noteBeastImage(def); } catch { /* CCODE-31: a beast portrait is a grace, never a blocker */ }
     saveCharacter(character);
     renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, playerWords: choice.playerWords || null } });

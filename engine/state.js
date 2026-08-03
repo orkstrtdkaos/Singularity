@@ -59,7 +59,7 @@ export async function loadContent() {
   // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
   // serial round-trips. rankProgression comments retained on the consumers below.
   const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
-         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics] = await Promise.all([
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw, worldClock, schools, classArchetypes, repairPanelManifest, craftMechanics, coliseumGrid] = await Promise.all([
     fetchJSON(resPath),
     loadRule("emergence", { recipes: [], branchTemplates: [] }),
     loadRule("attribute_gates", { gates: {} }),
@@ -76,7 +76,8 @@ export async function loadContent() {
     loadRule("schools", null),                                          // SNG-193b: a tradition is a root; a school is what it reaches WITH (sets the substrate band)
     loadRule("class_archetypes", null),                                 // SNG-192 §4: soft archetype lenses (role × reach) for the creation front door
     loadRule("repair_panel_manifest", null),                            // SNG-207 §6.2: the authoritative Repair-panel capability list, for the GM's context (no hallucinated controls)
-    loadRule("craft_mechanics", { families: {}, familyDefaults: {} })    // SNG-263: what each verb-family DOES + the magnitudes an unauthored craft inherits
+    loadRule("craft_mechanics", { families: {}, familyDefaults: {} }),   // SNG-263: what each verb-family DOES + the magnitudes an unauthored craft inherits
+    loadRule("coliseum_grid", { cells: [] })                             // SNG-149/CCODE-89: the Great Coliseum's blind grid — 36 authored cells the engine now reads
   ]);
   // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
@@ -85,6 +86,10 @@ export async function loadContent() {
   // carries — adding it as a battleRound OPTION would have to survive skillBattleRound's hand-built call,
   // and seam_battle_round_options records four separate times an option was silently dropped there.
   rules.craftMechanics = craftMechanics || null;
+  // CCODE-89: the blind grid rides the rules bag for the same reason craft-mechanics does — one value the
+  // callers already hold. It was manifest-registered and read by NOTHING for a fortnight, sitting as design
+  // canon with three champion encounters already authored against it; engine/coliseum.js is its body now.
+  rules.coliseumGrid = coliseumGrid || null;
   // SNG-055/059: traditions optional — absence leaves the domain gates ungoverned (open), never breaks load.
   let traditions = traditionsRaw, traditionIndex = null;
   if (traditions) { try { traditionIndex = buildTraditionIndex(traditions); } catch { traditions = null; } }

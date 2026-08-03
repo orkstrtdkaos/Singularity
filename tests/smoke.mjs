@@ -9139,6 +9139,50 @@ await (async () => {
 ;
 }
 
+// ---------- CCODE-89: the Great Coliseum's BLIND GRID (SNG-149, Aevi, Law 15) ----------
+// Aevi authored the whole design and it sat as a design doc NOTHING READ for a fortnight, with three champion
+// encounters already written against it. Every assertion here defends a rule that exists to stop a specialist
+// steering toward their best ground - so a change that makes the grid kinder to a narrow competitor is
+// breaking the mechanic, not tuning it.
+{
+  const { drawAxis, resolvePick, cellFor, readOfPick } = await import("../engine/coliseum.js");
+  const { buildFunctionIndex } = await import("../engine/functions.js");
+  const GRID = JSON.parse(readFileSync(join(root, "content/packs/core/rules/coliseum_grid.json"), "utf8"));
+  const IDX = buildFunctionIndex(JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8")));
+  const cat = { a1: { functions: ["strike"] }, a2: { functions: ["break"] }, a3: { functions: ["ward"] },
+                a4: { functions: ["heal"] }, a5: { functions: ["reveal"] }, a6: { functions: ["bind"] } };
+  const narrow = { abilities: [{ abilityId: "a1", level: 3 }, { abilityId: "a2", level: 3 }] };
+  const broad = { abilities: [{ abilityId: "a1", level: 2 }, { abilityId: "a3", level: 3 }, { abilityId: "a4", level: 2 }, { abilityId: "a5", level: 1 }, { abilityId: "a6", level: 2 }] };
+  const seed = () => { let s = 5; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };
+  const rng = seed();
+  const A = drawAxis(narrow, { catalog: cat, index: IDX, rng }), B = drawAxis(broad, { catalog: cat, index: IDX, rng });
+
+  check("CCODE-89: every competitor brings FOUR slots - nobody enters with a short axis",
+    A.length === 4 && B.length === 4);
+  check("CCODE-89: at least one slot is always WILD, drawn from all eight including untrained families",
+    A.some(s => s.from.startsWith("wild")) && B.some(s => s.from.startsWith("wild")));
+  check("CCODE-89: all 36 cells are authored and every drawn pair resolves to one",
+    GRID.cells.length === 36 && !!cellFor(A[0].family, B[0].family, GRID));
+
+  // THE RULE THE WHOLE DESIGN RESTS ON.
+  const legal = resolvePick({ axisA: A, axisB: B, pickA: B[0].family, pickB: A[0].family, grid: GRID });
+  check("CCODE-89: a legal pick resolves, and NEITHER competitor stands on ground they chose",
+    legal.ok && legal.aFightsOn === A[0].family && legal.bFightsOn === B[0].family);
+  check("CCODE-89: picking from your OWN axis is REFUSED, never coerced (coercion restores the steering)",
+    resolvePick({ axisA: A, axisB: B, pickA: A[0].family, pickB: B[0].family, grid: GRID }).ok === false);
+
+  // Aevi: "a specialist does not become harder to read; they become more exposed." Measured, not asserted.
+  const untrained = (who) => { const r = seed(); let t = 0;
+    for (let k = 0; k < 2000; k++) t += drawAxis(who, { catalog: cat, index: IDX, rng: r }).filter(s => s.from !== "practice").length;
+    return t / 2000; };
+  const nU = untrained(narrow), bU = untrained(broad);
+  console.log(`      CCODE-89 measured — untrained columns per axis: 2-family specialist ${nU.toFixed(2)}/4 · 5-family competitor ${bU.toFixed(2)}/4`);
+  check("CCODE-89: a SPECIALIST is measurably more exposed than a broad competitor (the whole point)",
+    nU > bU, `${nU.toFixed(2)} vs ${bU.toFixed(2)}`);
+  check("CCODE-89: the pick is a readable ARGUMENT about the opponent, not a bare choice",
+    ["deepest", "middle", "wildcard"].includes(readOfPick(B[0].family, B)?.kind));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

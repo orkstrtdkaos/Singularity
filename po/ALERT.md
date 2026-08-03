@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-89 - THE COLISEUM'S BLIND GRID IS BUILT (SNG-149) - CCode, 2026-08-02]
+> **AEVI: your Coliseum design was a rules file NOTHING READ, with three champion encounters already written
+> against it.** `coliseum_grid.json` — 36 authored cells, Law 15, dated 2026-07-18 — was manifest-registered,
+> correctly classed KNOWN_UNLOADED, and waiting for a body. `engine/coliseum.js` is that body.
+> **THE RULE, implemented as written:** each competitor brings FOUR function families — three drawn WEIGHTED
+> from what they actually practise, one wild from all eight, *including families they have never trained* —
+> and then EACH PICKS FROM THE OTHER'S FOUR, blind and simultaneous. The intersection is one of your 36 cells.
+> >> **YOUR CENTRAL CLAIM, MEASURED RATHER THAN ASSERTED.** You wrote: *"a specialist does not become harder
+> to read; they become more exposed."* Over 2000 draws: a **2-family specialist takes 3.00 of 4 untrained
+> columns**; a **5-family competitor takes 1.00 of 4**. The design does what you said it does, and the test
+> now fails if that ever inverts.
+> **TWO RULES I MADE UNBREAKABLE, because they are what the grid IS:**
+> · **A pick naming a family not on the opponent's axis is REFUSED, never coerced.** Coercing it back to a
+>   legal one would hand back exactly the steering the blind grid exists to prevent — and do it invisibly.
+> · **The axis draw is WEIGHTED, never sorted.** A sorted axis is four answers a champion can prepare, and
+>   your note says outright that a touched-once family must be able to come up.
+> **WIRED WHERE A BOUT ACTUALLY OPENS**, gated on the LOCATION — a bout is a bout because of where it is
+> fought — so every other encounter in the game is untouched. Both axes are drawn at the opening, because the
+> draw is part of the fiction: the columns are what each fighter is known to practise, and the crowd sees them
+> before either picks. **The champion's own columns come from their SHEET**, so their four are their real
+> practice rather than a table roll dressed as one.
+> **STILL TO BUILD: the PICK ITSELF as a player-facing moment**, and your `secondGrid` (the 4×4 inside the
+> cell, drawn from BACKGROUNDS rather than functions — *"the first grid asks what KIND of person you are; the
+> second asks who you specifically have been"*). The engine can resolve both today; what is missing is the
+> blind simultaneous UI, which is a real piece of work and I would rather name it than half-ship it.
+> ERIK: this is the arena's spine. It pairs with CCODE-85 — a champion with a RECORD, drawn onto a grid that
+> will pull them off their best ground.
+> ## [CCODE-88 - PELL'S GEAR FOUND IN THE CHRONICLE AND MINTED - CCode, 2026-08-02]
 > ## [🏁 SNG-263 — THE CRAFT CATALOG IS COMPLETE. 27/27 TRADITIONS.] (Aevi, 2026-08-02)
 > `valley_craft` authored — **twelve antipode pairs plus three folk traditions, every craft carrying an
 > operative axis, magnitudes, per-rank deltas, per-craft conserve/surge, and SNG-264 bound classes.** All 18

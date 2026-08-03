@@ -155,7 +155,15 @@ console.log("\nD. GM OPS THE SALVAGE LIST FORGETS — emitted by contract, dropp
 // in meaningful order is a truncation overruling an ordering nobody wrote down.
 console.log("\nE. LISTS TRUNCATED WITHOUT A SORT - a flat slice overruling the order a list was built in\n");
 {
-  let flagged = 0;
+  // ADJUDICATED (CCode 2026-08-03, both checked by reading the ordering rather than by pattern):
+  //  · death.js `out.slice(0, 8)` — CORRECT. `reachableDeadForGM` considers LEGENDS FIRST and registry NPCs
+  //    second, so the cut preserves exactly the entries that matter. The OPPOSITE ordering to the bug.
+  //  · claude.js `folded.slice(0, 4)` — CORRECT. Four is the Anthropic API's hard ceiling on cache_control
+  //    blocks, not a priority truncation.
+  // Recorded WITH the reasoning so the sweep never re-asks a question that has been answered — the same
+  // discipline Aevi's rules-file ruling gets in section C.
+  const ADJUDICATED_SLICES = new Set(["death.js:out", "claude.js:folded"]);
+  let flagged = 0, settled = 0;
   for (const [file, src] of Object.entries(ENGINE)) {
     for (const m of src.matchAll(/(\w+)\.slice\(0,\s*(\d+)\)/g)) {
       const name = m[1], n = Number(m[2]);
@@ -163,12 +171,13 @@ console.log("\nE. LISTS TRUNCATED WITHOUT A SORT - a flat slice overruling the o
       const before = src.slice(Math.max(0, m.index - 700), m.index);
       if (/\.sort\(/.test(before.slice(-220))) continue;      // sorted just before the cut = principled
       if (!new RegExp(name + "\\.push\\(").test(before)) continue;   // only lists this scope APPENDED to
+      if (ADJUDICATED_SLICES.has(`${file}:${name}`)) { settled++; continue; }
       flagged++;
       say("REPORT", file + ": `" + name + ".slice(0, " + n + ")` truncates a list that was PUSHED to, with no sort",
         "if later entries earned their place, this cut discards exactly them (the CCODE-99 shape)");
     }
   }
-  if (!flagged) console.log("  none - every bounded list is either sorted first or not built by appending");
+  if (!flagged) console.log(`  none unadjudicated (${settled} previously checked and found correct)`);
 }
 
 console.log(`\n${findings} finding(s). This is a REPORT: each one is a question, not a verdict.`);

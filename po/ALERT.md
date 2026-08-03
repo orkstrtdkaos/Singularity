@@ -1,5 +1,23 @@
 # PO ALERT
 
+> ## [CCODE-101 - BOTH DOOR-7 CANDIDATES CHECKED: BOTH CORRECT - CCode, 2026-08-03]
+> I said `death.js` was worth checking first because it might be CCODE-99 in a second place. **It is not, and
+> the reason is worth keeping.**
+> · **`death.js` `out.slice(0, 8)` — CORRECT.** `reachableDeadForGM` considers **LEGENDS FIRST** and registry
+>   NPCs second, so the cut preserves exactly the entries that matter. That is the **OPPOSITE ordering** to
+>   `offscreenPopulation`, where legends were appended LAST and cut every time. Same slice, same shape,
+>   opposite consequence — which is precisely why door 7 has to REPORT rather than gate.
+> · **`claude.js` `folded.slice(0, 4)` — CORRECT.** Four is the Anthropic API's hard ceiling on
+>   `cache_control` blocks. A limit, not a priority truncation.
+> **Both recorded in the sweep WITH the reasoning**, so it never re-asks a settled question — the same
+> discipline Aevi's rules-file ruling gets in section C. Section E now reads
+> *"none unadjudicated (2 previously checked and found correct)"*.
+> >> **THE POINT WORTH KEEPING: a sweep that flags correct code is only useful if answering it is CHEAP and
+> the answer STICKS.** Two findings, two minutes of reading, both negative, both now permanent. A gate here
+> would have failed the build on correct code and taught everyone to skip it; a report that forgets would have
+> re-asked the same question every run. **Neither of those is a check anyone keeps.**
+> ALL SEVEN DOORS ARE NOW SWEPT, and the live findings are down to three enum members
+> (`INTENT_KINDS.irreversible` is the one that looks like `passing_advice`).
 > ## [CCODE-100 - DOOR 7 ADDED TO THE SWEEP, AND IT FOUND TWO MORE - CCode, 2026-08-03]
 > The legend-seat bug was a NEW SHAPE, so it went into the sweep rather than staying a war story.
 > **Door 7: a list built up in priority order, then truncated as if it were not.** Nothing was

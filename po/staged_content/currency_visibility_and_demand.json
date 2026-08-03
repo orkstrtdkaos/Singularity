@@ -1,0 +1,89 @@
+{
+ "schemaVersion": 1,
+ "id": "currency_visibility_and_demand",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Two corrections from Erik that supersede parts of currency_concrete.json.",
+ "correction1_mechanicsMustBeVISIBLE": {
+  "erik": "'be careful with the fiction only line... games run on mechanics so the mechanics here need to be visible too - just not a driving narrative.'",
+  "whatIGotWrong": "I over-corrected. Earlier Erik said a percentage invites arithmetic at the table, and I turned that into 'the player never sees the number' — which is a different and worse thing. A player who cannot see their own purse, or what a thing costs, cannot MAKE A DECISION. Hiding the mechanics doesn't make the game more narrative; it makes it unplayable and vaguely insulting.",
+  "theRightLine": "THE NUMBERS ARE VISIBLE AND PRECISE. THE NARRATION DOESN'T RECITE THEM.",
+  "whatThisMeansConcretely": [
+   "THE PURSE IS A VISIBLE UI ROW, always. 12 shards · 4 coin · 30 Kept-Reach tally. A player must be able to look and know.",
+   "PRICES ARE SHOWN AS NUMBERS when a trade is on the table. 'Marcher's Blade — 15 shards.' Not 'a fair price.'",
+   "CONVERSION SHOWS ITS MATH. '20 coin → 10 shards (the Crossing takes its cut)'. The player sees the 2-shard bite and can decide whether to convert here or wait. THAT DECISION IS THE GAME.",
+   "WHAT STAYS FICTIONAL is the NARRATION — the trader says 'ten for those, and I'm being generous', while the interface says 10 ⬦. Both. The prose doesn't read out a rate table; the UI does its job.",
+   "AND THE DEMAND MULTIPLIER IS VISIBLE TOO — if parts fetch 5× in the Quickwood, the player should be able to SEE that this is a good place to sell, or the trade-route mechanic is invisible and therefore not a mechanic."
+  ],
+  "theRuleRestated": "A player should never have to do arithmetic to know their position — and should always be able to SEE their position. Those are compatible. I had them confused."
+ },
+ "correction2_scarcityIsNotDemand": {
+  "erik": "'those parts might be rare in the quickwood, but they might also be worthless because of it. the quickwood may have no need for some things. each place likely has that.'",
+  "whatIGotWrong": "⚠️ A REAL FLAW IN THE MODEL. My single `demand` multiplier assumed RARE = EXPENSIVE. That is false and Erik's counter-example is exact: engine parts are rare in the Quickwood BECAUSE THE QUICKWOOD HAS NO USE FOR THEM. Nobody there wants a directive-core. It is scarce AND worthless — and a one-axis model cannot express that at all.",
+  "theFix": "TWO INDEPENDENT AXES: SCARCITY (how much is here) and NEED (whether they want it). Price is a function of BOTH, and NEED dominates.",
+  "priceModel": {
+   "formula": "price = worthBand × needFactor × scarcityFactor",
+   "needFactor": {
+    "none": 0.0,
+    "little": 0.3,
+    "ordinary": 1.0,
+    "high": 2.0,
+    "note": "⚠️ NEED IS THE DOMINANT TERM AND `none` IS A HARD ZERO. If a place does not want a thing, scarcity is irrelevant — nobody bids on what nobody uses. This is the whole of Erik's correction, expressed as a multiplier that can be 0."
+   },
+   "scarcityFactor": {
+    "abundant": 0.5,
+    "ordinary": 1.0,
+    "scarce": 1.8,
+    "absent": 2.5,
+    "note": "Scarcity only MODULATES an existing need. It never creates one."
+   },
+   "workedExamples": [
+    {
+     "case": "engine parts in the GEARLANDS",
+     "need": "ordinary",
+     "scarcity": "abundant",
+     "result": "×0.5 — cheap, because everyone has them"
+    },
+    {
+     "case": "engine parts in the CROSSING",
+     "need": "high",
+     "scarcity": "scarce",
+     "result": "×3.6 — THE BEST PLACE TO SELL, because the Crossing has buyers for everything"
+    },
+    {
+     "case": "⚠️ engine parts in the QUICKWOOD",
+     "need": "NONE",
+     "scarcity": "absent",
+     "result": "×0.0 — ERIK'S CASE. Scarce and WORTHLESS. You are carrying dead weight through a forest that has no use for it."
+    },
+    {
+     "case": "rootkin seed in the QUICKWOOD",
+     "need": "ordinary",
+     "scarcity": "abundant",
+     "result": "×0.5"
+    },
+    {
+     "case": "rootkin seed in the PALELANDS",
+     "need": "high",
+     "scarcity": "absent",
+     "result": "×5.0 — the top of the range, and it should be rare that anything hits it"
+    }
+   ]
+  },
+  "whyThisIsBetterDesign": [
+   "IT MAKES KNOWING THE WORLD THE ACTUAL SKILL. Under the one-axis model, the optimal play was always 'carry rare things to where they're rarer'. Under two axes, that gets you stranded with unsellable cargo. THE PLAYER HAS TO KNOW WHO WANTS WHAT — which is exactly the knowledge the game wants to reward, and it is what `way_sense`, `the_land_knowledge` and a Horizon route are FOR.",
+   "IT GIVES EVERY REGION A DEAD LIST, and Erik is right that each place has one. A region is now defined as much by what it will NOT buy as by what it sells. That is characterisation doing mechanical work.",
+   "AND IT KILLS THE ARBITRAGE EXPLOIT before it exists: you cannot simply run a loop between two regions, because the return leg may have need `none` and pay nothing."
+  ],
+  "contentCost": "Two tags per region per goods-category instead of one. Slightly more authoring, and it is worth it — the `none` entries are the interesting ones and they write themselves from the tradition."
+ },
+ "supersedes": [
+  "currency_concrete.json §layer2 localDemand (one-axis) — replaced by the two-axis model",
+  "currency_concrete.json 'the player never sees the number' — replaced by 'the numbers are visible; the narration doesn't recite them'"
+ ],
+ "findings": [
+  "⚠️ I OVER-CORRECTED ON VISIBILITY. Erik earlier said a percentage invites arithmetic at the table; I turned that into 'the player never sees the number', which is a different and worse thing. A player who cannot see their purse or a price CANNOT MAKE A DECISION — and the decision is the game. The right line is THE NUMBERS ARE VISIBLE AND PRECISE, THE NARRATION DOESN'T RECITE THEM. Both, not either.",
+  "⚠️ SCARCITY IS NOT DEMAND, and my one-axis model could not express Erik's counter-example at all: engine parts are rare in the Quickwood BECAUSE NOBODY THERE WANTS THEM. Scarce AND worthless. Fixed with two independent axes where NEED dominates and `none` is a HARD ZERO — scarcity only modulates an existing need, it never creates one.",
+  "THE TWO-AXIS MODEL IS BETTER DESIGN, not just more accurate: under one axis the optimal play was always 'carry rare things somewhere rarer', which is a solved loop. Under two, that strands you with unsellable cargo, and THE PLAYER HAS TO ACTUALLY KNOW WHO WANTS WHAT — which is what way_sense, the_land_knowledge and a Horizon route are for. It also kills the arbitrage exploit before it exists.",
+  "AND IT GIVES EVERY REGION A DEAD LIST. Erik: 'each place likely has that.' A region is now defined as much by WHAT IT WILL NOT BUY as by what it sells — characterisation doing mechanical work, and the `none` entries write themselves from the tradition."
+ ]
+}

@@ -83,6 +83,15 @@
       "precision": "close numeric read plus reasons"
     }
   ],
+  "renownBands": [
+    { "min": 40, "band": "legendary" },
+    { "min": 18, "band": "renowned" },
+    { "min": 6, "band": "talked about" },
+    { "min": 1, "band": "locally known" },
+    { "min": -5, "band": "unremarkable" },
+    { "min": -17, "band": "ill-regarded" },
+    { "min": -999, "band": "notorious" }
+  ],
   "reputationBands": [
     {
       "min": 50,

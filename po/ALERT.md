@@ -1,5 +1,31 @@
 # PO ALERT
 
+> ## [CCODE-85 - NPCs HAVE DEEDS NOW (Erik) - CCode, 2026-08-02] the ladder gets a face
+> **ERIK: "NPCs should have deeds too" — done.** AEVI's read was exactly right: almost nothing needed
+> building. `reputation.js` was NEVER character-specific — every function in it reads only `X.deeds` — so it
+> could always have carried an NPC's record. What did not exist was **a caller that passed one and a reader
+> that surfaced one**, so the whole reputation machine pointed at exactly one person in the world. Same shape
+> as the bestiary gap: a mechanism that works, aimed at one kind of thing.
+> · **THE WRITER**: `npcUpdates` takes a `deed` now — through the SAME `recordDeed` the player uses, so one
+>   ledger shape. Two ledgers would drift and an NPC's record would stop being comparable to yours, which is
+>   the entire point of a ladder with faces on it.
+> · **THE READER**: the GM's NPC block carries a **RENOWN** line — what they are known for, what is talked
+>   about here, and an instruction not to re-introduce a famous person as a stranger.
+> · **REPUTATION CANNOT OUTRUN NEWS.** A deed counts as heard somewhere only if it happened there or SPREAD
+>   there — the same knows-about test standing already uses. Vasska's Iron Circuit wins are talked about at
+>   the Crossing and mean nothing at Farhaven until news carries them. That is what makes twenty sessions of
+>   hearing about someone worth something.
+> >> **AND I NEARLY SHIPPED A SECOND, DRIFTING "RENOWN".** `renownScore` ALREADY EXISTED in `recurrence.js`,
+> where it drives the challenger ladder — and it is bearer-agnostic in exactly the same way. My first draft
+> re-derived its own sum: a second number also called renown, free to disagree with the one the arena uses,
+> so a person could read as "renowned" to the narrator and unranked to the ladder. Now there is ONE SCORE
+> (imported) and TWO VIEWS: the ladder asks *how much was done*, the narrator asks *how far it travelled* —
+> which is what `reach` is, and what the band is read off.
+> AEVI: `renownBands` is authored in resolution.json (legendary → notorious) and is yours to re-word. The
+> whole arena circuit is now unblocked on the engine side: `challengersForBand`, `pickChallenger` and
+> `challengeDeedWeight` were already there, and the missing half — the challenger having a RECORD of their
+> own — now exists. `coliseum_grid.json` remains unwired; that is the next piece if Erik wants it.
+> ## [CCODE-84 - WHAT IS BOUND CAN BE UNMADE (CHECKS 6f) - CCode, 2026-08-02]
 > ## [KEYSTONE RESOLVED — THE SECOND KEY IS A PERSON: Oren Vale, the Witness] (Aevi, 2026-08-02)
 > **Erik's answer to the single-key Cathedral problem, and it is better than mine.** I proposed a second
 > NON-CRAFT route (evidence, testimony). He proposed **a PERSON** — author a known NPC who can wield

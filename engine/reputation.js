@@ -1,10 +1,20 @@
 // reputation.js — deeds are the source of truth; reputation is a VIEW over deeds.
+import { renownScore } from "./recurrence.js";   // CCODE-85: the ladder's score, so the two views cannot drift
 // A community's opinion of you = sum of the deeds it knows about. News spread
 // between communities is the world-tick's job (v0.3); the deed schema already
 // carries `spread` so nothing here changes when that lands.
 
-/** Record a deed on the character (append-only). Returns the deed as stored. */
-export function recordDeed(character, deed, aptitudeMods = {}) {
+/** Record a deed on a BEARER (append-only). Returns the deed as stored.
+ *
+ *  CCODE-85 (Erik: "NPCs should have deeds too"). Nothing in this module was ever character-SPECIFIC — every
+ *  function here reads only `X.deeds`, so it has always been able to carry an NPC's record. What did not exist
+ *  was any CALLER that passed one, and any READER that surfaced it. That is the same shape as the bestiary gap:
+ *  a mechanism that works, pointed at exactly one kind of thing.
+ *
+ *  Aevi's arena finding is what this is for: an epic stops being a threat number and becomes a person with a
+ *  record you have been hearing about for twenty sessions. The parameter is named `bearer` now because that is
+ *  what it always was. */
+export function recordDeed(bearer, deed, aptitudeMods = {}) {
   const d = {
     at: new Date().toISOString(),
     locationId: deed.locationId ?? null,
@@ -18,8 +28,8 @@ export function recordDeed(character, deed, aptitudeMods = {}) {
   if (d.weight > 0 && aptitudeMods.reputationGainBonus) {
     d._bonusApplied = aptitudeMods.reputationGainBonus;
   }
-  character.deeds = character.deeds || [];
-  character.deeds.push(d);
+  bearer.deeds = bearer.deeds || [];
+  bearer.deeds.push(d);
   return d;
 }
 
@@ -71,4 +81,49 @@ export function reputationSummary(character, communityId, rules) {
   if (band === "neutral" && tags.length === 0) return "The people here don't know you yet.";
   const tagText = tags.length ? ` They know of: ${tags.join(", ")}.` : "";
   return `Local standing: ${band} (${score}).${tagText}`;
+}
+
+/** CCODE-85 — WHAT THIS PERSON IS KNOWN FOR, from their own deeds.
+ *
+ *  `standingWith` answers "how does this community feel about the bearer"; this answers a different question
+ *  the arena needs — "what has this person DONE, and is any of it famous enough to have reached me?" Renown is
+ *  the weight of their deeds that SPREAD beyond where they happened: a brawl nobody talks about is not renown,
+ *  which is why `spread` (already on the schema since v0.3) is the thing measured rather than raw weight.
+ *
+ *  Returns null for someone with no record, so a nobody stays a nobody rather than getting a "renown: 0" line
+ *  that reads like a stat block. */
+export function renownOf(bearer, rules) {
+  const deeds = (bearer?.deeds || []).filter(d => d && d.description);
+  if (!deeds.length) return null;
+  // ONE SCORE, TWO VIEWS. `renownScore` already existed in recurrence.js, where it drives the challenger
+  // ladder, and it is bearer-agnostic in exactly the same way this module always was. The first draft of this
+  // function re-derived its own sum — a second number also called renown, free to drift from the one the
+  // ladder uses, which is how a person ends up "renowned" to the narrator and unranked to the arena.
+  // So the SCORE is imported, and what this function adds is the separate question it was written for: REACH,
+  // how far the stories travelled, which is a different thing from how much was done.
+  const score = renownScore(bearer);
+  let reach = 0;
+  for (const d of deeds) reach += (Number(d.weight) || 0) * (1 + (d.spread || []).length);
+  const bands = rules?.renownBands || rules?.reputationBands || [];
+  let band = "unknown";
+  // the BAND is read off REACH, not the raw score: fame is what TRAVELLED, not what was done.
+  for (const b of bands) { if (reach >= b.min) { band = b.band; break; } }
+  const notable = deeds.slice().sort((a, b) => Math.abs(b.weight) - Math.abs(a.weight)).slice(0, 3);
+  const tags = {};
+  for (const d of deeds) for (const t of (d.tags || [])) tags[t] = (tags[t] || 0) + Math.abs(Number(d.weight) || 0);
+  return { score: Math.round(score), reach: Math.round(reach), band, deeds: deeds.length,
+    knownFor: Object.entries(tags).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([t]) => t),
+    notable: notable.map(d => d.description) };
+}
+
+/** CCODE-85 — the one line the narrator needs: has this person's record reached where we are standing?
+ *  A deed only counts as HEARD here if it happened here or spread here — the same knows-about test standing
+ *  already uses, so a legend is local until the world tick carries it, and reputation cannot outrun news. */
+export function renownHeardAt(bearer, communityId, rules) {
+  const r = renownOf(bearer, rules);
+  if (!r) return null;
+  const heard = (bearer.deeds || []).filter(d => d.communityId === communityId || (d.spread || []).includes(communityId));
+  if (!heard.length) return { ...r, heardHere: false, here: 0 };
+  return { ...r, heardHere: true, here: heard.length,
+    localNotable: heard.slice().sort((a, b) => Math.abs(b.weight) - Math.abs(a.weight)).slice(0, 2).map(d => d.description) };
 }

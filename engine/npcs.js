@@ -9,6 +9,7 @@ import { slugify } from "./quests.js";
 import { smartClamp, normName } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word
 import { isMinorSubject } from "./art.js";
 import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: meeting someone MUST write the codex — direct, never injected
+import { recordDeed, renownHeardAt } from "./reputation.js";   // CCODE-85: an NPC keeps a record the same way the player does
 
 /** SNG-190 §2: a generateRequest:npc in the SAME turn as an op:"meet" for that person is ONE person.
  *  Both ops are mandatory by the contract (rule 14 + the generateRequest rule) and nothing reconciled
@@ -203,6 +204,21 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     if (u.bondType || u.bondStage) advanceBond(n, { bondType: u.bondType, bondStage: u.bondStage }, ctx.rules, ctx.day);
     if (u.status && ["active", "injured", "missing", "dead", "departed"].includes(u.status)) n.status = u.status;
     if (u.statusNote) n.statusNote = smartClamp(String(u.statusNote), 240); // SNG-152
+    // CCODE-85 (Erik: "NPCs should have deeds too"). reputation.js was never character-specific — every
+    // function in it reads only `X.deeds` — but nothing ever passed it an NPC and nothing read one back, so
+    // the whole reputation machine pointed at exactly one person in the world. This is the writer.
+    // Deliberately the SAME recordDeed the player uses: one ledger shape, or the two drift and an NPC's
+    // record stops being comparable to yours, which is the entire point of a ladder with faces on it.
+    if (u.deed && u.deed.description) {
+      recordDeed(n, {
+        description: smartClamp(String(u.deed.description), 240),   // prose — clamp on a word boundary, never mid-word
+        weight: u.deed.weight | 0,
+        tags: (u.deed.tags || []).slice(0, 4).map(t => String(t).slice(0, 32)), // prose-cap-ok — a tag is an identifier ("valor"), not prose
+        communityId: u.deed.communityId ?? ctx.communityId ?? null,
+        locationId: u.deed.locationId ?? ctx.locationId ?? null,
+      });
+      if ((n.deeds || []).length > 40) n.deeds = n.deeds.slice(-40);   // bounded like every other NPC list
+    }
     // SNG-185: STAMP AFFILIATION HERE. This is the second mint path — anyone the GM meets in play —
     // and until now it stamped nothing, so registry-only people (Veth, the Crossing Ent) carried no
     // domains and could neither teach nor be credited. Same helper generate.js uses, so the two mints
@@ -332,7 +348,17 @@ export function isPartnerAdjacent(n, rules = null) {
 
 /** Registry block for the GM: people relevant to this scene/location first, then
  *  the strongest other bonds. The GM must treat these as established fact. */
-export function npcRegistryForGM(character, { locationId = null, sceneNpcNames = [], interiority = null } = {}) {
+/** CCODE-85: one line naming what this person is known for, or "" for someone with no record. */
+function renownLine(n, ctx = {}) {
+  const r = renownHeardAt(n, ctx.communityId ?? null, ctx.rules || {});
+  if (!r || !r.heardHere) return "";
+  const forWhat = r.knownFor.length ? ` known for: ${r.knownFor.join(", ")}.` : "";
+  const notable = (r.localNotable || []).length ? ` Talked about here: ${r.localNotable.join("; ")}.` : "";
+  return ` ✦ RENOWN — people here know this person's record (${r.band}, ${r.deeds} deed${r.deeds === 1 ? "" : "s"}).${forWhat}${notable} Treat that reputation as something the room already carries; do not re-introduce them as a stranger.`;
+}
+
+export function npcRegistryForGM(character, { locationId = null, sceneNpcNames = [], interiority = null, communityId = null, rules = null } = {}) {
+  const ctx = { communityId, rules };
   const reg = character.npcRegistry || {};
   const all = Object.values(reg);
   if (!all.length) return null;
@@ -386,7 +412,12 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
       (n.skillsObserved.length ? ` Skills seen: ${n.skillsObserved.join(", ")}.` : "") +
       (facts.length ? ` What they know/have experienced: ${facts.join("; ")}.` : "") +
       (hist.length ? ` History with ${character.name}: ${hist.join(" | ")}` : "") +
-      driveLine;
+      driveLine +
+      // CCODE-85: WHAT THEY ARE KNOWN FOR. Erik's arena ask is that the ladder gets a face — an epic stops
+      // being a threat number and becomes a person whose record you have been hearing about. Gated on the
+      // deed having REACHED here (`spread`), so a legend stays local until news carries it and nobody is
+      // famous in a village that never heard of them.
+      renownLine(n, ctx);
   }).join("\n");
   // Append the directive ONLY when a driven NPC is actually in the block — it's the lever that makes drives fire.
   return anyDriven && interiority?.drivenNpcDirective ? `${block}\n\n${interiority.drivenNpcDirective}` : block;

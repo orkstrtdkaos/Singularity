@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { resolveAction, successChance, spectrumAlignment, applyEnergyCost, critProfile as critProfileEarly } from "../engine/resolve.js";
 import { senseTier, renderSense } from "../engine/sense.js";
-import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
+import { recordDeed, standingWith, reputationSummary, knownTags, renownOf, renownHeardAt } from "../engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, grantAptitudes, fadingAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
@@ -9065,6 +9065,56 @@ await (async () => {
   check("SNG-263 dials: every declared dial resolves to a real content value (no phantom control)",
     paths.length >= 10 && dead.length === 0, `dials pointing at nothing: ${dead.join(", ")}`);
 }
+
+
+// ---------- CCODE-85: NPCs HAVE DEEDS TOO (Erik) ----------
+// reputation.js was never character-SPECIFIC - every function in it reads only `X.deeds`. What did not exist
+// was a caller that passed an NPC and a reader that surfaced one, so the whole reputation machine pointed at
+// exactly one person in the world. That is the bestiary gap's shape: a mechanism that works, aimed at one
+// kind of thing. Aevi's arena finding is what it is for - an epic stops being a threat number and becomes a
+// person whose record you have been hearing about for twenty sessions.
+{
+  const RULES_R = JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8"));
+  const ch = { name: "Loki", npcRegistry: {}, currentLocationId: "crossing" };
+  applyNpcUpdates(ch, [{ op: "meet", npcId: "vasska", name: "Vasska", role: "pit champion" }],
+    { locationId: "crossing", communityId: "crossing", rules: RULES_R });
+  const deeds = [
+    { description: "won the Iron Circuit three years running", weight: 3, tags: ["valor", "skill"], communityId: "crossing" },
+    { description: "crippled a challenger who had already yielded", weight: -2, tags: ["cruelty"], communityId: "crossing" },
+    { description: "stood alone against a wight at the Deeping", weight: 3, tags: ["valor"], communityId: "deeping" },
+  ];
+  for (const d of deeds) applyNpcUpdates(ch, [{ op: "update", npcId: "vasska", deed: d }],
+    { locationId: "crossing", communityId: d.communityId, rules: RULES_R });
+  const v = ch.npcRegistry.vasska;
+
+  check("CCODE-85: an NPC accumulates deeds through the same recordDeed the player uses (one ledger shape)",
+    (v.deeds || []).length === 3 && v.deeds.every(d => "weight" in d && "spread" in d));
+  check("CCODE-85: renownOf reads what they are KNOWN FOR, worst and best alike",
+    renownOf(v, RULES_R)?.knownFor.includes("valor") && renownOf(v, RULES_R)?.knownFor.includes("cruelty"));
+  check("CCODE-85: someone with NO record returns null - a nobody stays a nobody, not a renown-0 stat line",
+    renownOf({ name: "a passerby" }, RULES_R) === null);
+
+  // The half that keeps this honest: a reputation cannot outrun the news that carries it.
+  check("CCODE-85: a record is HEARD only where the deed happened or spread to",
+    renownHeardAt(v, "crossing", RULES_R)?.heardHere === true
+    && renownHeardAt(v, "farhaven", RULES_R)?.heardHere === false);
+  check("CCODE-85: and the LOCAL talk is the local deeds, not the whole record",
+    (renownHeardAt(v, "crossing", RULES_R)?.localNotable || []).every(d => !/wight/.test(d)));
+
+  // A writer nothing reads is the failure this codebase gates hardest against.
+  const block = npcRegistryForGM(ch, { locationId: "crossing", sceneNpcNames: ["Vasska"], communityId: "crossing", rules: RULES_R });
+  check("CCODE-85: the GM's NPC block CARRIES the renown (a record nobody reads is a record nobody has)",
+    /RENOWN/.test(block) && /Iron Circuit/.test(block));
+  const away = npcRegistryForGM(ch, { locationId: "crossing", sceneNpcNames: ["Vasska"], communityId: "farhaven", rules: RULES_R });
+  check("CCODE-85: ...and says nothing about them where their record has not reached",
+    !/RENOWN/.test(away));
+  check("CCODE-85: an NPC with no deeds gets no renown line at all",
+    !/RENOWN/.test(npcRegistryForGM(
+      (() => { const c = { name: "Loki", npcRegistry: {} };
+               applyNpcUpdates(c, [{ op: "meet", npcId: "pell", name: "Pell" }], { locationId: "crossing", rules: RULES_R }); return c; })(),
+      { locationId: "crossing", sceneNpcNames: ["Pell"], communityId: "crossing", rules: RULES_R })));
+}
+
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

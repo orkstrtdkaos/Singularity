@@ -75,7 +75,54 @@
    ],
    "tradition": "mason",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "materialTruth",
+    "denial"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8,
+    "soak": 3,
+    "soakRank": 2,
+    "type": "abstraction",
+    "note": "⚠️ THE AXIS'S WEAPON. r3 'denies an abstraction purchase on the real: illusion, glamour, SYMBOL-WORKING AND FIGURE all simply fail in your presence.' Authored with a TYPED soak (CCODE-83's mechanic) against `abstraction` — it is a ward against an entire opposing tradition, and it is TRANSPARENT to a sword."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "materialTruth",
+     "delta": "SET A THING SO IT STAYS — a wall, a joint, a boundary, A CLAIM. What you set does not shift, sag, or come apart",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "denial",
+     "delta": "SPECIAL: DENY AN ABSTRACTION PURCHASE ON THE REAL — illusion, glamour, symbol-working and FIGURE all simply FAIL in your presence",
+     "from": "r3 grants — a categorical denial of a whole opposing craft-family"
+    }
+   ],
+   "intensity": {
+    "conserve": "set it plain — half the hold, and it can be un-set",
+    "surge": "double it; IT DENIES THE ABSTRACT INDISCRIMINATELY — INCLUDING MEANING YOU WANTED"
+   },
+   "bounds": [
+    {
+     "text": "it tells you what a thing IS, NEVER what it means or what it is FOR",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT IS SET IS HARD TO UN-SET, INCLUDING BY YOU",
+     "class": "cost"
+    },
+    {
+     "text": "IT DENIES THE ABSTRACT INDISCRIMINATELY — including meaning you wanted",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "stone_read",
@@ -138,7 +185,50 @@
    ],
    "tradition": "mason",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "history"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "history",
+     "delta": "read a thing's HISTORY IN ITS MATERIAL — the stresses it took, the repairs, THE DAY IT NEARLY BROKE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "perceptionDepth",
+     "delta": "a whole structure legible at once — every fault, every honest joint, EVERY LIE THE BUILDER TOLD",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a touch — half the depth, and instant",
+    "surge": "double the read; BUILDINGS YOU LOVE TURN OUT TO BE FULL OF LIES"
+   },
+   "bounds": [
+    {
+     "text": "MATERIALS, NOT MAKERS — it says the beam will fail, not who cut it",
+     "class": "hard"
+    },
+    {
+     "text": "HISTORY, NOT FUTURE — it reports what happened, not what happens next",
+     "class": "hard"
+    },
+    {
+     "text": "BUILDINGS YOU LOVE TURN OUT TO BE FULL OF LIES",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_plain_fact",
@@ -206,7 +296,54 @@
    ],
    "tradition": "mason",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "denial",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "soak": 5,
+    "soakRank": 3,
+    "type": "abstraction",
+    "duration": 4,
+    "note": "A FOURTEENTH DEFENSIVE LOGIC — REDUCED: it does not block, evade or absorb; it REDUCES an abstract working to its physical basis, and if it has none, it stops existing. Typed soak rank 3 against `abstraction`."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "denial",
+     "delta": "REDUCE an argument, a glamour, or a DOCTRINE to its physical basis — and if it has none, THAT BECOMES VISIBLE TO ALL",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: in your presence THE TOUCHABLE SIMPLY IS THE REAL — abstraction cannot get purchase, NO SYMBOL ACTS, NO FIGURE BINDS",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "state the concrete — half the reduction, and it reads as a fair question",
+    "surge": "double it; YOU HAVE MADE A WORLD WHERE NOTHING MEANS ANYTHING"
+   },
+   "bounds": [
+    {
+     "text": "SOME ABSTRACTIONS ARE TRUE — reducing them does not unmake them",
+     "class": "hard"
+    },
+    {
+     "text": "A DOCTRINE WITH NO PHYSICAL BASIS IS NOT THEREBY FALSE",
+     "class": "hard"
+    },
+    {
+     "text": "YOU HAVE MADE A WORLD WHERE NOTHING MEANS ANYTHING — some people cannot live in it",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "formcraft",
@@ -276,7 +413,52 @@
    ],
    "tradition": "figurist",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "symbolPower",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 8,
+    "scope": 2,
+    "damageType": "abstraction"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "MAKE A SYMBOL THAT ACTS — a mark, a shape, a figure that DOES IN THE WORLD WHAT IT MEANS",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "BUILD AN IDEA INTO THE WORLD so completely it becomes A FACT OTHERS MUST MOVE AROUND — a rule, a boundary, a truth",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small figure — half the power, and it means exactly what you drew",
+    "surge": "double it; A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN"
+   },
+   "bounds": [
+    {
+     "text": "seeing a form DOES NOT GIVE YOU POWER OVER ITS INSTANCE",
+     "class": "hard"
+    },
+    {
+     "text": "A FIGURE DOES WHAT IT MEANS, NOT WHAT YOU WANTED IT TO MEAN",
+     "class": "hard"
+    },
+    {
+     "text": "THE MASONS CAN DENY IT. REALITY CAN, EVENTUALLY, DECLINE.",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "pattern_sense",
@@ -338,7 +520,50 @@
    ],
    "tradition": "figurist",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "foresight"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "NAME THE FORM EXACTLY — and once named, ITS OTHER INSTANCES BECOME VISIBLE TO YOU EVERYWHERE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "foresight",
+     "delta": "SPECIAL: read the form of an event, a life, or a history — THE SHAPE IT IS COMPLETING",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance at the shape — half the depth, and it does not follow you",
+    "surge": "double it; ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T"
+   },
+   "bounds": [
+    {
+     "text": "SEEING THE PATTERN IS NOT SEEING WHETHER IT IS A TRUE ONE",
+     "class": "hard"
+    },
+    {
+     "text": "ONCE YOU CAN SEE IT EVERYWHERE, YOU WILL SEE IT WHERE IT ISN'T",
+     "class": "cost"
+    },
+    {
+     "text": "KNOWING THE SHAPE A LIFE IS COMPLETING DOES NOT PERMIT YOU TO SAY SO",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_walking_figure",
@@ -409,7 +634,52 @@
    ],
    "tradition": "figurist",
    "nativeOrCombination": "native",
-   "harmRung": "damaging"
+   "harmRung": "damaging",
+   "shape": "construct",
+   "operativeAxis": [
+    "autonomy",
+    "persistence"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 8,
+    "damageType": "abstraction",
+    "note": "damaging rung — a sent figure that ACTS"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "persistence",
+     "delta": "THE FIGURE PERSISTS — it keeps meaning, keeps acting, KEEPS THE WARD OR THE RULE IN FORCE AFTER YOU HAVE GONE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the figure ADAPTS ITS MEANING TO CIRCUMSTANCE — it keeps doing WHAT YOU MEANT even where you did not foresee",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "send a small figure — half the persistence, and it acts once cleanly",
+    "surge": "double it; A STANDING FIGURE IS A RULE NOBODY IS SUPERVISING"
+   },
+   "bounds": [
+    {
+     "text": "it acts ONCE and is SPENT at r1; it acts on WHAT IT MEANS",
+     "class": "hard"
+    },
+    {
+     "text": "A STANDING FIGURE IS A RULE NOBODY IS SUPERVISING",
+     "class": "cost"
+    },
+    {
+     "text": "A FIGURE SENT TO HARM IS A FIGURE THAT WILL DO THE SECOND HARM TOO",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "sound_repair",
@@ -481,7 +751,50 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "repair",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "A NINTH THEORY OF MEDICINE — MATERIAL CORRECTNESS: 'the right material intervention, no more and no less.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "repair",
+     "delta": "restore not just function but STRUCTURAL INTEGRITY — the wall that will not sag, THE WOUND THAT WILL NOT FESTER",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: return a thing FULLY to its proper MATERIAL state — building, body, or system — indistinguishable from unbroken",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "patch it right — half the restoration, and it is correct as far as it goes",
+    "surge": "double it; material correctness is not the same as WELLNESS"
+   },
+   "bounds": [
+    {
+     "text": "it repairs the MATERIAL — a sound body is not a well person",
+     "class": "hard"
+    },
+    {
+     "text": "no more and no less: it will not do MORE than the material requires, even when you want it to",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_set_word",
@@ -550,7 +863,47 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "authority",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 12,
+    "note": "SOCIAL attribute — authority by SOLIDITY"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "authority",
+     "delta": "make an agreement or declaration THAT STICKS — not because you charmed anyone, BUT BECAUSE THE WEIGHT OF YOUR STANDING HOLDS IT",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: name the PRACTICAL TRUTH so plainly and with such authority that PEOPLE ORGANIZE AROUND IT as if it were a wall",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "say it plain — half the weight, and it invites discussion",
+    "surge": "double it; a word that lands like a wall is a word you cannot walk back"
+   },
+   "bounds": [
+    {
+     "text": "IT IS SOLIDITY, NOT ELOQUENCE — a mason who is WRONG lands just as hard and is just as wrong",
+     "class": "hard"
+    },
+    {
+     "text": "a word that lands like a wall is a word YOU CANNOT WALK BACK",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_near_way",
@@ -624,7 +977,48 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "access",
+    "range"
+   ],
+   "mechanic": {
+    "range": 8,
+    "push": 0,
+    "magnitude": 3,
+    "duration": 2
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "access",
+     "delta": "move through a built environment AT THE SPEED ITS CONSTRUCTION ALLOWS — the route that does not backtrack",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: in ANY built structure, FIND OR MAKE the passage — not by brute force, BY KNOWING WHERE THE MATERIAL WANTS TO GIVE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "find the loose stone — half the speed, and nothing is damaged",
+    "surge": "double it; knowing where the material gives means the structure gives THERE"
+   },
+   "bounds": [
+    {
+     "text": "BUILT structures only — open ground offers a mason nothing",
+     "class": "hard"
+    },
+    {
+     "text": "what you open, you have OPENED — the passage stays for whoever follows",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_long_haul",
@@ -692,7 +1086,46 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 24
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "upkeepRelief",
+     "delta": "sustain useful work across a long haul WITHOUT THE DEGRADATION that hits others — the QUALITY does not fall",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: CONTINUE UNTIL THE WORK IS FINISHED, regardless of what the body says. THE TASK COMPLETES.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep going — half the relief, and you can stop when you like",
+    "surge": "double it; the task completing regardless of the body is a promise the BODY has to keep"
+   },
+   "bounds": [
+    {
+     "text": "it sustains WORK, not rest — there is no version of this that restores you",
+     "class": "hard"
+    },
+    {
+     "text": "the task completing regardless of the body is a promise THE BODY HAS TO KEEP",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_restored_form",
@@ -762,7 +1195,50 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "restoration",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "A TENTH THEORY OF MEDICINE — FORM RESTORATION: 'not appearance, the FORM a thing is supposed to have', and function follows."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "restoration",
+     "delta": "restore THE UNDERLYING STRUCTURE — the form a person, plan, or object is SUPPOSED to have — AND FUNCTION FOLLOWS",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: return a thing ENTIRELY to its proper form — THE BODY THAT HEALS FROM THE INSIDE OUT, the relationship that finds its shape again",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "restore the outline — half the healing, and nothing is forced",
+    "surge": "double it; restoring the form a thing is SUPPOSED to have requires being right about what it is supposed to be"
+   },
+   "bounds": [
+    {
+     "text": "IT RESTORES THE FORM — a thing whose true form is broken cannot be restored TO it",
+     "class": "hard"
+    },
+    {
+     "text": "restoring what a thing is SUPPOSED to be requires BEING RIGHT about that",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_warding_mark",
@@ -833,7 +1309,51 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "ward",
+    "duration",
+    "autonomy"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "soak": 4,
+    "soakRank": 2,
+    "type": "category",
+    "duration": 12,
+    "note": "A TYPED GUARD of a new kind: it wards A NAMED CATEGORY of thing — 'an intent, a person, a working' — chosen at casting. CCODE: this is typed soak where the TYPE IS AUTHORED AT CAST TIME rather than fixed on the craft."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "autonomy",
+     "delta": "set a warding figure that HOLDS WITHOUT YOUR CONTINUED ATTENTION — IT KNOWS WHAT IT IS KEEPING BACK and it keeps it back",
+     "from": "r2 grants — a SEVENTH autonomy-increment craft"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NAME WHAT DOES NOT BELONG HERE with such formal clarity that IT CANNOT BE HERE — the working fails, the intent dissolves",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small mark — half the ward, and it keeps back one thing",
+    "surge": "double it; a ward that knows what it keeps back also decides what belongs"
+   },
+   "bounds": [
+    {
+     "text": "IT WARDS A CATEGORY — a thing outside the named category walks through untouched",
+     "class": "hard"
+    },
+    {
+     "text": "a ward that decides what BELONGS is a ward that can be WRONG about belonging",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_patterned_way",
@@ -906,7 +1426,44 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "navigation",
+    "range"
+   ],
+   "mechanic": {
+    "range": 12,
+    "push": 0,
+    "magnitude": 4,
+    "duration": 3
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "navigation",
+     "delta": "navigate ANY environment you can read the form of — WITHOUT roads, signs, or memory; THE PATTERN TELLS YOU",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: RECOGNIZE THAT A PLACE IS AN INSTANCE OF A FORM YOU KNOW — and everything about it becomes legible: every exit, every hidden room",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "read the layout — half the certainty, and it costs nothing",
+    "surge": "double it; a place that is NOT an instance of any form you know offers nothing at all"
+   },
+   "bounds": [
+    {
+     "text": "it needs A READABLE PATTERN — genuine chaos or true novelty defeats it",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_held_form",
@@ -974,7 +1531,47 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "persistence",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 24,
+    "targets": 1
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "persistence",
+     "delta": "keep the form of something alive ACROSS TIME AND DISTANCE — a relationship, a plan, A PERSON'S SENSE OF THEMSELVES",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: while you HOLD THE FORM perfectly in mind, IT DOES NOT CEASE — the pattern is the sustaining principle",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold the shape — half the persistence, and you can set it down",
+    "surge": "double it; holding a person's sense of themselves means YOU are holding it, and you may be holding it wrong"
+   },
+   "bounds": [
+    {
+     "text": "YOU MUST HOLD IT — attention lapses and the form lapses with it",
+     "class": "hard"
+    },
+    {
+     "text": "holding A PERSON'S SENSE OF THEMSELVES means YOU are holding it, and you may be WRONG about its shape",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1028,7 +1625,41 @@
     "CREATE",
     "INVESTIGATE"
    ],
-   "harmRung": "incapacitating"
+   "harmRung": "incapacitating",
+   "shape": "construct",
+   "operativeAxis": [
+    "bindStrength",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "damageType": "abstraction",
+    "note": "T-IV, incapacitating"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "THE FIGURE HOLDS PAST ITS MOMENT — a working, a room, a thing's shape held to the pattern FOR AS LONG AS THE FIGURE STANDS",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a light binding — half the hold, and it releases cleanly",
+    "surge": "double it; THE FIGURE MUST REMAIN PHYSICALLY INTACT AND TRUE — deface it and the binding ends"
+   },
+   "bounds": [
+    {
+     "text": "IT FAILS IF THE FIGURE IS UNTRUE",
+     "class": "hard"
+    },
+    {
+     "text": "THE FIGURE MUST REMAIN PHYSICALLY INTACT — DEFACE IT AND THE BINDING ENDS",
+     "class": "hard"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1068,7 +1699,40 @@
    "challengeTypes": [
     "INVESTIGATE"
    ],
-   "harmRung": "incapacitating"
+   "harmRung": "incapacitating",
+   "shape": "setup",
+   "operativeAxis": [
+    "bindStrength",
+    "penetration"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 2,
+    "damageType": "abstraction"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: FIND AND SPEAK A THING'S TRUE NAME, gaining A HOLD ON ITS VERY BEING. The capstone is a KIND (power over a thing's essence) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a partially-spoken true name is a false name, and a false name forewarns.",
+    "surge": "REFUSED — the finding already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "A FALSE NAME FAILS AND FOREWARNS",
+     "class": "hard"
+    },
+    {
+     "text": "THE FINDING COSTS NEARLY ALL YOU HAVE",
+     "class": "hard"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1121,7 +1785,44 @@
     "FIGHT",
     "INVESTIGATE"
    ],
-   "harmRung": "damaging"
+   "harmRung": "damaging",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "precision"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 4,
+     "d": 6
+    },
+    "plus": 2,
+    "marginFloorPer": 0.03,
+    "note": "T-IV, damaging"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: WHERE THERE IS NO TRUE KEYSTONE, MAKE ONE — a sequence of lesser strikes that MANUFACTURES the single load-bearing point",
+     "from": "r2 grants — manufacturing the weakness is the T-IV kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "one placed strike — half the force, exactly where you meant",
+    "surge": "double it; MANUFACTURING A KEYSTONE TAKES TIME AND COVER"
+   },
+   "bounds": [
+    {
+     "text": "it works only on MADE STRUCTURES with a true keystone at r1",
+     "class": "hard"
+    },
+    {
+     "text": "manufacturing a keystone TAKES TIME AND COVER",
+     "class": "soft"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -1159,7 +1860,44 @@
    "challengeTypes": [
     "FIGHT"
    ],
-   "harmRung": "damaging"
+   "harmRung": "damaging",
+   "shape": "damage",
+   "operativeAxis": [
+    "damage",
+    "scope"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 5,
+     "d": 6
+    },
+    "plus": 6,
+    "marginFloorPer": 0.03,
+    "scope": 4
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: UNMAKE A WHOLE BUILT STRUCTURE back to its raw, un-built MATERIAL. The capstone is a KIND (returning the made to the unmade) at near-total cost.",
+     "from": "r1 grants — single-rank capstone"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — a half-unmade wall is a ruin, and the Masons consider a ruin worse than either state.",
+    "surge": "REFUSED — it already costs nearly all you have."
+   },
+   "bounds": [
+    {
+     "text": "IT TOUCHES ONLY THE MADE",
+     "class": "hard"
+    },
+    {
+     "text": "IT COSTS NEARLY ALL YOU HAVE",
+     "class": "hard"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

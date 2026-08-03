@@ -36,6 +36,7 @@
  "roster": [
   {
    "id": "glimmerling_swarm",
+   "affinity": {"truth": "vulnerable"},
    "class": "manifested_creature",
    "tier": "riffraff",
    "name": "glimmerlings",
@@ -109,6 +110,7 @@
   },
   {
    "id": "the_unmoored_choir",
+   "affinity": {"physical": "immune", "truth": "vulnerable", "numinous": "vulnerable"},
    "class": "manifested_creature",
    "tier": "epic",
    "name": "the unmoored choir",
@@ -282,6 +284,7 @@
   },
   {
    "id": "churn_revel",
+   "affinity": {"wild": "resist", "order": "vulnerable"},
    "class": "manifested_creature",
    "tier": "notable",
    "name": "a churn-revel",
@@ -341,6 +344,7 @@
   },
   {
    "id": "the_gearfather",
+   "affinity": {"physical": "resist", "mechanical": "vulnerable"},
    "class": "feral_construct",
    "tier": "regional",
    "name": "the Gearfather",
@@ -356,6 +360,7 @@
   },
   {
    "id": "the_bloom_that_hungers",
+   "affinity": {"living": "resist", "light": "vulnerable", "decay": "vulnerable"},
    "class": "substrate_warped_beast",
    "tier": "regional",
    "name": "the Bloom-That-Hungers",
@@ -371,6 +376,7 @@
   },
   {
    "id": "the_ashen_wyrm",
+   "affinity": {"light": "resist", "decay": "resist"},
    "class": "great_manifestation",
    "tier": "epic",
    "name": "the Ashen Wyrm",
@@ -388,6 +394,7 @@
   },
   {
    "id": "the_bright_devourer",
+   "affinity": {"light": "absorb"},
    "class": "great_manifestation",
    "tier": "epic",
    "name": "the Bright Devourer",
@@ -405,6 +412,7 @@
   },
   {
    "id": "the_unspooling_worm",
+   "affinity": {"order": "resist", "wild": "vulnerable"},
    "class": "great_manifestation",
    "tier": "epic",
    "name": "the Unspooling Worm",

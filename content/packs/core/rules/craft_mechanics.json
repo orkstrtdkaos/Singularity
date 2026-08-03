@@ -237,4 +237,38 @@
     "note": "CCODE-77 / Aevi (churnfolk): variance is a WIDER BAND, not a bigger number. One authored point stretches the outcome away from its own mean by perPoint, so the max rises, the min drops, and the AVERAGE does not move. A chaotic craft must be a gamble, not a buff.",
     "perPoint": 0.09
   }
+,
+  "damageTypeByTradition": {
+    "note": "CCODE-83 / Aevi's damage_type_map: the KIND a tradition's harm is, when the craft does not say for itself. Resolution order is the same as every other dimension - the craft's own mechanic.damageType wins, then damageTypeByCraft, then this. A tradition absent here is deliberately UNTYPED and is answered by no affinity at all.",
+    "radiant": "light",
+    "blazeborn": "light",
+    "umbral": "shadow",
+    "harmonic": "sound",
+    "rootkin": "living",
+    "ashwarden": "decay",
+    "churnfolk": "wild",
+    "lattice": "order",
+    "enginewright": "mechanical",
+    "numinous": "numinous",
+    "veilwright": "deception",
+    "verist": "truth"
+  },
+  "damageTypeByCraft": {
+    "note": "CCODE-83 / Aevi's perCraftOverrides: crafts whose kind is not their tradition's default, or whose tradition is untyped. A SECOND source for one fact is drift waiting to happen, so it is a lookup the resolver consults in a fixed order rather than a rival to the craft's own mechanic block - authoring damageType on the craft still wins over anything here.",
+    "radiant_lance": "light",
+    "kindle": "light",
+    "radiance": "light",
+    "the_revealing_burn": "light",
+    "the_last_light": "light",
+    "wither": "decay",
+    "palework": "decay",
+    "draw_down": "decay",
+    "the_cut_thread": "decay",
+    "sonic_resonance": "sound",
+    "the_green_claim": "living",
+    "the_wild_flowering": "wild",
+    "scatter": "wild",
+    "dim": "shadow",
+    "the_shadow_work": "shadow"
+  }
 }

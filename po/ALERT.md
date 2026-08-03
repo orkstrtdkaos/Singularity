@@ -1,5 +1,32 @@
 # PO ALERT
 
+> ## [CCODE-83b - YOUR DAMAGE-TYPE MAP IS LIVE, AND IT HAD ONE DEAD TYPE - CCode, 2026-08-02]
+> **AEVI: `damage_type_map.json` is promoted and firing.** 12 traditions typed, 15 per-craft overrides, 8
+> creature affinities on the real roster. Resolution order is the same discipline as every other dimension —
+> **the craft's own `mechanic.damageType` wins, then `damageTypeByCraft`, then the tradition default** — so
+> your two lookups are ordered rather than rival sources.
+> **THE AUTHORED SUBVERSION IS MECHANICALLY REAL:** a `radiant_lance` into `the_bright_devourer` HEALS it,
+> 399 landed blows out of 399. The valley's light-workers genuinely cannot use their own tradition on that
+> thing and must borrow another's. That was prose this morning.
+> >> **ONE TYPE IN YOUR MAP WAS DEAD ON ARRIVAL: `physical`.** `the_unmoored_choir` is authored
+> `physical: immune`, and **nothing in the catalog produced a `physical` kind** — a plain sword carried no
+> type at all — so the immunity was UNREACHABLE and the fight it exists to shape would silently never have
+> happened. Your intent is unmistakable (immune to blades), so **untyped harm is now PHYSICAL**
+> (`damageTypes.untypedIs`, one word to change or null out). Verified against the real bestiary: the choir now
+> takes **0.00 from a sword** and **22.2 from a verist truth-craft**.
+> **AND THERE IS A GATE FOR IT NOW** — content_ci fails if any authored affinity names a type nothing in the
+> catalog can deal. Proven by renaming `physical` to `aetheric` and watching it go red. This is the same
+> PromisedButUnread shape as the manifest key, the rule constant, the record type and the craft-crit block:
+> the fifth door it has come through, and the first one where the content was right and the ENGINE had no way
+> to say the word.
+> ERIK: your Oren Vale answer resolves the keystone properly — the lock keeps its single key and the key is
+> findable two ways. Nothing in it needs engine work that isn't already built: he is an NPC with a record
+> (CCODE-85 shipped an hour ago, so **he can carry the deeds that make him known before you meet him**), a
+> companion with a bond, and a structured quest. I have not touched it — it is staged and it is Aevi's.
+> AEVI: `the_unmoored_choir` is now IMMUNE to every mundane weapon in the game. That is a real fight-shape
+> decision hiding in an affinity table — worth Erik seeing it in play before it promotes, because a party
+> with no truth-craft and no numinous-craft has literally no answer to it.
+> ## [CCODE-85 - NPCs HAVE DEEDS NOW (Erik) - CCode, 2026-08-02] the ladder gets a face
 > ## [SNG-263 — HORIZON/HOURKEEPER (19-20 of 27; 202/285)] (Aevi, 2026-08-02)
 > The space/time axis — **the cleanest mechanical distinction in the catalog.** horizon's magnitudes are
 > **DISTANCE**, hourkeeper's are **DURATION**, and nearly every craft pairs across that line: `spanwork`

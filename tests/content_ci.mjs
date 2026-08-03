@@ -1076,5 +1076,32 @@ for (const pack of PACKS) {
     declared.length > 0, "no craft declares opensAccess - precursor access is back to the GM op that has never fired");
 }
 
+// ---------- CCODE-83b: an AFFINITY must name a type something can actually PRODUCE ----------
+// PromisedButUnread in one more shape: a creature was authored `physical: immune` while NOTHING in the
+// catalog dealt a `physical` kind, so the immunity was unreachable and the fight it exists to shape would
+// silently never happen. The fix was to make untyped harm physical; this GATE is what stops the next
+// unreachable type shipping quietly.
+{
+  const CMx = rj("content/packs/core/rules/craft_mechanics.json");
+  const SBE = rj("content/packs/core/rules/skill_battle_system.json").engine;
+  const produced = new Set([
+    ...Object.entries(CMx.damageTypeByTradition || {}).filter(([k]) => k !== "note").map(([, v]) => v),
+    ...Object.entries(CMx.damageTypeByCraft || {}).filter(([k]) => k !== "note").map(([, v]) => v),
+    ...(SBE.damageTypes?.untypedIs ? [SBE.damageTypes.untypedIs] : []),
+  ].filter(v => typeof v === "string"));
+  const legal = new Set(SBE.damageTypes?.affinities || []);
+  const unreachable = [], illegal = [];
+  for (const c of (rj("content/packs/valley/bestiary.json").roster || [])) {
+    for (const [type, verdict] of Object.entries(c.affinity || {})) {
+      if (!produced.has(type)) unreachable.push(`${c.id}.${type}`);
+      if (!legal.has(verdict)) illegal.push(`${c.id}.${type}=${verdict}`);
+    }
+  }
+  check("CCODE-83b: every authored affinity names a damage type something can PRODUCE (else it can never fire)",
+    unreachable.length === 0, `nothing in the catalog deals these kinds: ${unreachable.join(", ")}`);
+  check("CCODE-83b: every affinity verdict is one the engine implements",
+    illegal.length === 0, illegal.join(", "));
+}
+
 console.log(failures === 0 ? "\nContent CI: all checks passed." : `\nContent CI: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

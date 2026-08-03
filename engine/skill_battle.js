@@ -70,7 +70,9 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
   if (opponent.skills?.length) { // authored override — a real, hand-built sheet
     return { name: opponent.name || "the opponent", attributes: opponent.attributes || { practical: attr, physical: attr, mental: attr, social: attr },
       energy: opponent.energy ?? energy, maxEnergy: opponent.energy ?? energy, tacticTags: tags, skills: opponent.skills,
-      health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers, authored: true };
+      health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers,
+    // CCODE-83: the creature's authored AFFINITY must reach the sheet, or a typed bestiary is prose again.
+    ...(opponent.affinity ? { affinity: opponent.affinity } : {}), authored: true };
   }
   // SNG-253 (scoped from the post-252 re-look): the opponent's move VOCABULARY was kind-blind. Verified against
   // this engine rather than predicted — a STANDOFF opponent declared "a hard strike" and held "a raised guard",
@@ -91,7 +93,9 @@ export function synthesizeOpponentSheet(opponent = {}, sb) {
   const skills = defs.map(s => ({ function: s.function, name: s.name, tier, attribute: s.attribute || "practical" }));
   return { name: opponent.name || "the opponent", attributes: { practical: attr, physical: attr, mental: attr, social: attr },
     energy, maxEnergy: energy, tacticTags: tags, skills,
-    health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers, synthesized: true };
+    health: opponent.health ?? health, soak: opponent.soak ?? soak, soakLayers: opponent.soakLayers ?? soakLayers,
+    // CCODE-83: the creature's authored AFFINITY must reach the sheet, or a typed bestiary is prose again.
+    ...(opponent.affinity ? { affinity: opponent.affinity } : {}), synthesized: true };
 }
 
 /** The opponent's move for this round — DETERMINISTIC engine policy (not GM invention). Behind on momentum
@@ -313,8 +317,15 @@ export function applyUnmaking(effects, sides, sb, cm) {
  *  Content owns both; an unmapped craft has no type and resolves exactly as everything did before. */
 export function resolvedDamageType(decl, cm) {
   if (!decl) return null;
+  // The same RESOLUTION ORDER every other dimension uses, for the same reason: the craft's own block wins,
+  // then the per-craft table, then its tradition's default. Aevi authored the last two as separate lookups
+  // (traditionTypes + perCraftOverrides) because a craft's kind is usually its tradition's and sometimes not.
+  // Ordering them explicitly is what keeps a second source from becoming a rival source.
   const authored = decl.mechanic?.[decl.function]?.damageType ?? decl.mechanic?.damageType;
   if (authored) return authored;
+  const byCraft = cm?.damageTypeByCraft || {};
+  const id = decl.abilityId || decl.id;
+  if (id && byCraft[id]) return byCraft[id];
   const byTradition = cm?.damageTypeByTradition || {};
   return byTradition[decl.tradition] || byTradition[decl.powerSystem] || null;
 }
@@ -820,7 +831,9 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       //    because absorbing light is not thicker skin, it is a different relationship to it.
       // ABSORB is the one that changes the record's shape: the blow HEALS its target, so it is reported as a
       // NEGATIVE amount with `absorbed` set, rather than quietly becoming zero and reading as a miss.
-      const dmgType = winDecl.damageType || resolvedDamageType(winDecl, cmCfg);
+      // CCODE-83b: untyped harm still has a KIND, or an affinity naming a type nothing produces can never
+      // fire. `the_unmoored_choir` is authored `physical: immune`, which plainly means immune to blades.
+      const dmgType = winDecl.damageType || resolvedDamageType(winDecl, cmCfg) || (sb.damageTypes || {}).untypedIs || null;
       const aff = affinityOf(targetSheet, dmgType, sb);
       const acfg = sb.damageTypes || {};
       if (aff === "immune") hit = 0;

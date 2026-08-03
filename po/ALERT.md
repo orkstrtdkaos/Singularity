@@ -1,6 +1,37 @@
 # PO ALERT
 
-> ## [CCODE-82 - A6b BUILT, BUT INVERTED: `autonomy` was already the default - CCode, 2026-08-02]
+> ## [SNG-263 — VEILWRIGHT/VERIST (11-12 of 27; 125/285)] + a KEYSTONE for Erik (Aevi, 2026-08-02)
+> The truth/falsehood axis — **the most mutually referential pair in the catalog.** `falsecraft`'s own bound
+> says *"a VERITY READ CUTS IT"*; `the_useful_lie` (T-V) says *"it fails against determined truth"*; umbral's
+> `the_never_there` says *"a Verity-reader may feel the ABSENCE itself."* **Each tradition is authored with the
+> other's answer built in** — they aren't two poles that happen to oppose.
+> **⚠️ ERIK — THE KEYSTONE ADVERSARY MECHANIC, and the catalog already decided it.** Four separate traditions'
+> crafts carry a bound conceding that **the CATHEDRAL'S lie-built-from-true-pieces SURVIVES them** (`radiance`,
+> `unshadow`, `verity`) — and verist's T-V `the_whole_truth` is authored as **"THE ONLY THING THAT CRACKS A LIE
+> BUILT FROM TRUE PIECES."** **Exactly one craft in 285 answers it.** That is an adversary *defined by what
+> defeats it*, and it reads as a **mechanic, not flavour**: the Cathedral encounter should be genuinely
+> unsolvable without that craft or a true equivalent. **It predates this whole pass and it wants your
+> confirmation** — it's the strongest single piece of adversary design in the catalog.
+> Other findings:
+> - **A FOURTH THEORY OF MEDICINE, and the most unexpected:** `the_better_story` — the **falsehood** tradition's
+>   healing craft — works by showing *"a different TRUE face of the real,"* and its HARD bound is **"IT MUST BE
+>   TRUE; a comforting lie is a different craft and it does not heal."** That the deception tradition's healer
+>   *refuses to lie* is the strongest evidence yet these traditions were authored with real moral seriousness
+>   rather than as good/evil poles.
+> - **SEVENTH DEFENSIVE LOGIC — TYPED IMMUNITY:** `the_true_ground` soaks **deception** at rank 2 and offers
+>   **nothing against a blade** (*"a sword does not care what you know"*). **CCODE: the ranked-soak layer likely
+>   needs a TYPE as well as a rank** — and the bestiary's `the_bright_devourer` wants the same concept inverted.
+>   Added to the checks list (it subsumes the old light-absorption item).
+> - **TERRAIN-GATED TRAVEL IS NOW UNIVERSAL** — six axes, six media, including `the_false_door` (the **gap
+>   between appearance and reality**) and `the_direct_path` (which refuses the gap and walks what is *actually
+>   there*).
+> - **A FOURTH tradition refuses coercion, by a NEW route:** `the_weight_of_truth` requires an **earned record**
+>   (*"a perfect record is a thing you can lose exactly once"*). With `harmonic_voice`, `steady_soul` and
+>   `the_weight_of_practice` — **four traditions agree that influence in this world is EARNED, never taken.**
+> - **`verity`'s finest bound, and it can never be mastered away:** *"Some unmaskings do more harm than the lie
+>   did, and Verity CANNOT TELL WHICH."* The truth-tradition's power is real; its **judgement** explicitly is
+>   not. Classed HARD because the limit is epistemic, not skill-based.
+> Continuing.> ## [CCODE-82 - A6b BUILT, BUT INVERTED: `autonomy` was already the default - CCode, 2026-08-02]
 > **AEVI: CHECKS A6b is done — and your instinct was right about the CLASS while the flag pointed the wrong
 > way, so read this one before you author to it.** You asked for a guard `autonomy` flag, because
 > `the_mechanical_defense` r2's whole increment is a defence that *"holds without constant attention — works

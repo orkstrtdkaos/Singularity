@@ -1,6 +1,44 @@
 # PO ALERT
 
-> ## [CCODE-101 - BOTH DOOR-7 CANDIDATES CHECKED: BOTH CORRECT - CCode, 2026-08-03]
+> ## [SNG-268 — RING DISTANCE IN THE BRAID GENERATOR (Erik caught a real leak)] (Aevi, 2026-08-02)
+> Erik: *"these aren't the only braids I expect to exist — make sure all of these findings are also reflected in
+> the generative engine that will instantiate new braids."*
+> **He is right, and the leak was real.** I authored mechanics for **3 hand-written braids**. Braids are
+> **minted at runtime** — so every *future* braid would be born without what those three taught me.
+> **Findings that live only in staged content are findings that leak.**
+> **FIRST, WHAT THE GENERATOR ALREADY DOES RIGHT** (CCode, SNG-263 §9 — verified, not assumed): `deriveMechanic`
+> already **unions the parents' operative axes**, **takes the stronger field**, and makes a **REFUSED intensity
+> contagious.** Its own comment shows it was *measured*: a minted braid *"was born GENERIC, losing the named
+> axes and per-intensity prose its parents carried."* And **bounds are deliberately NOT inherited**, because
+> widening a braid's boundary to the sum of its parents is exactly what `notFor` forbids. **All correct — I
+> propose no change to any of it.**
+> **⚠️ THE GAP: THE GENERATOR HAS NO CONCEPT OF RING DISTANCE.** `braidBaseCost` asks how **expensive** the
+> parents are and never how **far apart** they are — so braiding two *adjacent* traditions and two *exact
+> antipodes* costs the same and reads the same.
+> **AND THE EVIDENCE WAS IN MY OWN THREE BRAIDS — I only noticed on the sweep:**
+> `meaning_engine` = enginewright + numinous · `harbored_flame` = umbral + blazeborn · `the_turning_word` =
+> threnodist + syllogist. **All three are EXACT ANTIPODAL PAIRS.** That isn't coincidence — **it's the author
+> saying what a braid is FOR: the interesting braid is the one that shouldn't work.** And each carries a bound
+> about **the joining itself** — *"the two poles FIGHT, and the cost rises"* · *"a chord you MADE is a chord you
+> are ANSWERABLE FOR."* **A minted braid gets none of that, because the generator can't see that its parents are
+> opposites.**
+> **PROPOSED — all derived from data already in `traditions.json`** (which carries `opposite` and `adjacent`):
+> 1. **`ringDistance(a,b)`** — the missing primitive. 0 same → 4 antipodal. Free from existing data.
+> 2. **Cost scales with distance** — adjacent ×1.0 · far ×1.4 · **antipodal ×1.8**. An antipodal braid is
+>    *harder to hold*, so it costs more to run. **A cheap antipodal braid contradicts authored text.**
+> 3. **⚠️ THE TENSION BOUND — the one genuinely new thing.** CCode is right that parents' bounds must not be
+>    inherited; but a braid should carry **one bound its parents never had: the cost of the joining itself.**
+>    Antipodal → *"The two poles fight. Holding them together is the cost, and it rises the longer you hold."*
+>    Adjacent → **no tension bound**; kin traditions braid cleanly and should say nothing. **Additive, on the
+>    braid's own reach — so it neither widens the boundary nor breaks the never-delete rule.**
+> 4. **`requiresPoles` on minted braids too** — derivable free from `minted.from`, and it matters because
+>    **dual-pole gating is now a real category** (four instances). Otherwise only hand-authored braids are gated.
+> **NOT proposing:** any change to `deriveMechanic` · inherited bounds · or blocking antipodal braids. **They
+> should be expensive and marked, never forbidden — they are the best braids in the game, and the catalog says
+> so by containing only those three.**
+> **TEST OF DONE:** mint one adjacent braid and one antipodal braid. **The antipodal must cost visibly more and
+> carry a tension bound; the adjacent must carry neither.** If they come out identical, the generator still
+> cannot see the ring.> ## [CCODE-101 - BOTH DOOR-7 CANDIDATES CHECKED: BOTH CORRECT - CCode, 2026-08-03]
 > I said `death.js` was worth checking first because it might be CCODE-99 in a second place. **It is not, and
 > the reason is worth keeping.**
 > · **`death.js` `out.slice(0, 8)` — CORRECT.** `reachableDeadForGM` considers **LEGENDS FIRST** and registry

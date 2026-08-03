@@ -34,7 +34,7 @@ const ALL = REG + "\n" + GM + "\n" + APP;
 // CCODE-93 (Erik: "add which test/audit verified each and what the latest result was, on what date and
 // version of the test"). A verification with no provenance is a rumour: bump AUDIT_VERSION whenever the
 // METHOD changes, so a stamped row in the spec can be trusted to mean what it said when it was written.
-export const AUDIT_VERSION = "1.1.0";   // 1.0.0 wiring only · 1.1.0 adds observed-in-play footprints
+export const AUDIT_VERSION = "1.2.0";   // 1.0.0 wiring · 1.1.0 observed footprints · 1.2.0 probes corrected to the readers they mirror
 
 let failures = 0;
 const ok = m => console.log("ok    " + m);
@@ -111,6 +111,11 @@ for (const r of conditional) console.log(`    ${r.key.padEnd(24)} fires when: ${
 // the difference between "the machinery exists" and "the world drives the story". These probes look for each
 // path's FOOTPRINT in the real save files — actual play, not a simulation.
 //
+// ⚠️ AND THE PROBES THEMSELVES WERE WRONG FIRST TIME. v1.1.0 reported SEVEN dark paths; two of them were my
+// probe looking in the wrong place — `wakesForGM` reads `worldState.wakes` and I checked `c.wakes`, and the
+// teacher footprint is the RECORD, not the `markTeacher` op. A probe that guesses the storage path produces
+// exactly the confident zero this audit exists to catch. Each probe now names the reader it mirrors.
+//
 // ⚠️ READ THE LIMIT: a probe is a HEURISTIC for a footprint, not the path itself. "No footprint" means this
 // probe found no evidence — it is a reason to look, never a proof the path is dead. Some are honest
 // negatives (nobody in these saves has used a precursor craft, so `perilNote` SHOULD be absent). Saying
@@ -124,13 +129,13 @@ const PROBES = {
   emergenceDetail: c => (c._opEmitted?.newAbility || 0) > 0 || (c.discoveries || []).length > 0,
   encounterOfferDetail: c => (c._opEmitted?.newEncounter || 0) > 0,
   anomalyDetail: c => (c._opEmitted?.stateOps || 0) > 0,
-  assignmentsDetail: c => (c.assignments || []).length > 0,
-  wakesDetail: c => (c.wakes || []).length > 0,
-  npcErrandsDetail: c => Object.values(c.npcRegistry || {}).some(n => n.errand || n.quest),
-  worldArcsDetail: c => (c.worldState?.arcs || c.worldArcs || []).length > 0,
-  perilNote: c => !!c.precursorAxes,
-  teacherOfferDetail: c => (c._opEmitted?.markTeacher || 0) > 0,
-  latentArcsDetail: c => (c.latentArcs || []).length > 0,
+  assignmentsDetail: c => (c.worldState?.assignments || c.assignments || []).length > 0,
+  wakesDetail: c => (c.worldState?.wakes || []).length > 0,          // wake.js reads worldState.wakes
+  npcErrandsDetail: c => Object.values(c.npcRegistry || {}).some(n => n.questId || n.errand || n.wants),
+  worldArcsDetail: c => Object.keys(c.worldState?.arcStages || {}).length > 0,   // worldtick tracks arcStages
+  perilNote: c => !!c.precursorAxes || (c.precursorAccess || []).length > 0,
+  teacherOfferDetail: c => !!(c.teachers || c.knownTeachers),        // markTeacher is the OP; the record is the footprint
+  latentArcsDetail: c => (c.worldState?.latentArcs || []).length > 0,
 };
 const OBSERVED = {};
 let saves = 0, turns = 0, scanned = false;

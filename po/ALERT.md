@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-94 - THE DEV WORLD (scaffold) + A CORRECTION I OWE - CCode, 2026-08-03]
+> **FIRST, THE CORRECTION: I told Erik SEVEN paths were dark. IT IS FOUR.** Two of the seven were MY PROBE
+> looking in the wrong place — `wakesForGM` reads `worldState.wakes` and I checked `character.wakes`; the
+> teacher footprint is the RECORD, not the `markTeacher` op. **`wakesDetail` is 1/10 and `teacherOfferDetail`
+> is 9/10.** Audit bumped to **v1.2.0**, every probe now mirrors the reader it checks, and the correction is
+> left VISIBLE in §4b rather than quietly restated — a probe that guesses the storage path produces exactly
+> the confident zero the table exists to catch.
+> **THE FOUR THAT REMAIN: `latentArcsDetail`, `npcErrandsDetail`, `perilNote`, `assignmentsDetail`.**
+> `perilNote` is an honest negative (no precursor use in these saves). **`npcErrandsDetail` is the one that
+> matters** — its trigger reads *"always (a known errand-giver)"*, and "always" producing zero across 1,788
+> turns is a contradiction on its face.
+> **ERIK'S DEV WORLD IS SCAFFOLDED, and the SAFETY PROPERTY WORKS**: it builds a character and world in
+> memory, touches no save, creates no `characters/` entry, and tags its subject so a leak into a save path is
+> detectable. **It cannot complete a tick yet** — `runWorldTick` needs the full assembled CONTENT bag the
+> browser's `loadContent()` builds, and hand-assembling it from pack files stops at the first thing the tick
+> reads unguarded. **Deliberately NOT in `npm test` while it fails**: a red test nobody can fix today teaches
+> people to ignore red tests. `npm run dev-world`.
+> >> **IT ALREADY FOUND TWO THINGS, which is why it is committed rather than held:**
+> · **`runWorldTick`'s `advanceAssignments` default is AI-BACKED.** A world tick that needs a MODEL to advance
+>   assignments cannot advance them in a test — and that is a strong candidate for why `assignmentsDetail`
+>   reads 0/10 in real play. **ERIK: should the world's own clock depend on an API call?** That is a design
+>   question, not a bug, and it is yours.
+> · **`buildRegionView` reads `content.region.activeEvents` UNGUARDED**, so a world with no region cannot tick
+>   at all. Every other consumer in this codebase tolerates absent content; this one does not.
+> **THE NEXT STEP IS A HEADLESS `loadContent()`** — the same assembly the app does, callable from node. Worth
+> doing on its own merits: every engine test currently hand-rolls a partial CONTENT bag, which is why each one
+> discovers a different missing key.
+> ## [CCODE-93 - THE SPEC TABLE NOW CARRIES PROVENANCE, AND IT FOUND SEVEN DARK PATHS - CCode, 2026-08-03]
 > ## [SNG-267 r5 — two corrections: mechanics must be VISIBLE, and scarcity ≠ demand] (Aevi, 2026-08-02)
 > **1. I OVER-CORRECTED ON VISIBILITY.** Erik earlier said a percentage invites arithmetic at the table; **I
 > turned that into "the player never sees the number," which is a different and worse thing.** A player who

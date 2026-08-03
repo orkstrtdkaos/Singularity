@@ -219,27 +219,33 @@ files, so it is observed evidence rather than a simulation.
 **Verified at HEAD: all 17 paths are triggered, built and carried.** 14 of the 17 are CONDITIONAL — those are
 the ones that can silently stop firing, and the audit prints them by name.
 
-> ⚠️ **WIRED IS NOT FIRING, and the measurement says so: 7 of the 17 have NO observed footprint across 1,788
-> turns of real play** — `worldArcsDetail`, `latentArcsDetail`, `npcErrandsDetail`, `wakesDetail`, `perilNote`,
-> `assignmentsDetail`, `teacherOfferDetail`. Several are honest negatives (nobody in these saves has used a
-> precursor craft, so `perilNote` *should* be absent). Others are the world's own voice — an NPC wanting
-> something from you, a consequence arriving late, a teacher offering unasked — and those not appearing in
-> 1,788 turns is the single most actionable number in this document.
+> ⚠️ **WIRED IS NOT FIRING, and the measurement says so: 4 of the 17 have NO observed footprint across 1,788
+> turns of real play** — `latentArcsDetail`, `npcErrandsDetail`, `perilNote`, `assignmentsDetail`. `perilNote`
+> is an honest negative (nobody in these saves has used a precursor craft, so it *should* be absent).
+> **`npcErrandsDetail` — an NPC wanting something from you, unprompted — is the one that matters**: its trigger
+> reads `always (a known errand-giver)`, and "always" producing zero in 1,788 turns is a contradiction on its
+> face.
+>
+> **v1.1.0 of this audit said SEVEN, and it was WRONG** — two probes looked in the wrong place (`wakesForGM`
+> reads `worldState.wakes`, not `character.wakes`; the teacher footprint is the RECORD, not the `markTeacher`
+> op). `wakesDetail` is 1/10 and `teacherOfferDetail` is 9/10. v1.2.0 mirrors each probe to the reader it
+> checks, and the correction is left visible here rather than quietly restated — a probe that guesses the
+> storage path produces exactly the confident zero this table exists to catch.
 
 **A probe is a HEURISTIC for a footprint, not the path itself.** "No footprint" is a reason to look, never a
 proof the path is dead — saying "never fired" from this data would be exactly the overclaim this table exists
 to prevent.
 
-<!-- verified by tests/world_drive_audit.mjs v1.1.0 on 2026-08-03 — 10 saves / 1788 turns of real play -->
+<!-- verified by tests/world_drive_audit.mjs v1.2.0 on 2026-08-03 — 10 saves / 1788 turns of real play -->
 | Path | What the world does | Trigger | Builder | Wired? | Seen in play | Spec |
 |---|---|---|---|---|---|---|
 | `worldPressureDetail` | the world's own pressure — what is building whether or not you engage it | always (paced) | `app pendingPressure (SNG-080)` | yes | no probe | §19 |
-| `worldArcsDetail` | world arcs advancing on their own clock | always | `worldtick.worldArcsForGM` | yes | **none** (0/10) | SNG-203 §3 |
+| `worldArcsDetail` | world arcs advancing on their own clock | always | `worldtick.worldArcsForGM` | yes | 4/10 | SNG-203 §3 |
 | `latentArcsDetail` | arcs not yet surfaced, ripening | the generation turn surfacing an arc that fomented on the world count | `latentarcs.arcsForGM (SNG-191 §7)` | yes | **none** (0/10) | §7 |
 | `livingWorldDetail` | the living world — what other people's play has made true here | always | `generate.livingWorldForGM` | yes | 9/10 | §19 |
 | `newsDetail` | news travelling between communities | always | `worldtick.newsForGM` | yes | 9/10 | §19 |
 | `npcErrandsDetail` | NPCs who want something from you, unprompted | always (a known errand-giver) | `quests.npcQuestsForGM` | yes | **none** (0/10) | SNG-203 §5 |
-| `wakesDetail` | the wake of what you did — consequences arriving later | always (a significant outcome recently resolved) | `wake.wakesForGM (SNG-204)` | yes | **none** (0/10) | SNG-204 §OQ1 |
+| `wakesDetail` | the wake of what you did — consequences arriving later | always (a significant outcome recently resolved) | `wake.wakesForGM (SNG-204)` | yes | 1/10 | SNG-204 §OQ1 |
 | `legendDetail` | a great figure surfacing at an apt beat (CCODE-90) | qualifying beat | `app.maybeLegendDetail (SNG-042)` | yes | 3/10 | §16 |
 | `legendsPursuableDetail` | great figures you could reach | always (a practiced tradition or a legend at hand) | `legends.legendsForGM (SNG-208)` | yes | no probe | SNG-208 wiring |
 | `seasonalDetail` | the season acting on the world | always (the character clock always has a season) | `latentarcs.seasonalDetailForGM (SNG-191 §7.4)` | yes | 10/10 | §7.4 |
@@ -248,7 +254,7 @@ to prevent.
 | `emergenceDetail` | practice ripening into new power | practice | `practice.emergenceNoticeForGM` | yes | 3/10 | §7 |
 | `perilNote` | peril the world has put in front of you | precursor use | `character.precursorAxes band` | yes | **none** (0/10) | §6 |
 | `assignmentsDetail` | standing obligations coming due | the player putting a known person in charge of ongoing work (delegateOps) | `assignments.assignmentsForGM (SNG-191 §4)` | yes | **none** (0/10) | §4 |
-| `teacherOfferDetail` | a teacher offering, unasked | the ENGINE finding a present teacher with a reachable next step + room this beat (not the same beat as the general offer) — the model no longer judges 'when the moment fits' | `pacing.roomForATeacherOffer + company.teacherOfferReady (SNG-195 G2)` | yes | **none** (0/10) | SNG-195 G2 |
+| `teacherOfferDetail` | a teacher offering, unasked | the ENGINE finding a present teacher with a reachable next step + room this beat (not the same beat as the general offer) — the model no longer judges 'when the moment fits' | `pacing.roomForATeacherOffer + company.teacherOfferReady (SNG-195 G2)` | yes | 9/10 | SNG-195 G2 |
 | `offerDetail` | an offer the world makes | the ENGINE finding room this beat (a lull or arrival, no encounter/gambit/intent grip, off cooldown) — the model never judges it | `pacing.roomForAnOffer + npcs.npcFearsForGM (SNG-194 §4b)` | yes | 5/10 | SNG-194 |
 
 **What this does NOT claim.** The audit proves each path is *wired*, not that it fires *often enough* or that

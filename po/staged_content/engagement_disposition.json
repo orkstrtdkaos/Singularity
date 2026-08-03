@@ -1,0 +1,77 @@
+{
+ "schemaVersion": 1,
+ "id": "engagement_disposition",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik: 'we probably need to tweak who fights and how.' The mechanism is built; the CONTENT dial inside it is flat.",
+ "staleness_note": "⚠️ FIRST: the sim table quoted (60 legendary / 5 epic / 1 regional) is PRE-RE-TIER. The roster is now 11 legendary / 27 epic / 28 heroic, live and CI-green. CCode's 'the valley has no heroes' finding is fixed — so the death-rate table wants re-running before anyone tunes against it. The 66.7% regional rate was a sample of ONE figure; there are now 28 in that band.",
+ "theGap": {
+  "what": "`engageRate` is a FLAT 0.35 for every figure in the world, and the only tiebreak is urgency.",
+  "why_it_matters": "So THE WAR-ENDER and THE ENDER WHO FORGOT seek confrontation at exactly the same rate. A stillhold peacemaker whose want is 'to prove that any war has a door out' is as likely to pick a fight as a marcher whose want is 'to end — the why fell away years ago'. The engaged/worker split is the right mechanism and it is currently blind to who these people ARE.",
+  "and_it_is_derivable": "Every figure carries `tradition`, `alignment`, `role` and a `wants` line. Disposition falls straight out of them, exactly as arc-cares did."
+ },
+ "proposal_engagementDisposition": {
+  "field": "`engages` on each figure — a multiplier on the global engageRate, default 1.0",
+  "resolution": "effectiveRate = clamp(engageRate * figure.engages, 0.05, 0.9)",
+  "bands": {
+   "seeks_it (1.8)": "confrontation IS their method — the fight is how they pursue the want",
+   "accepts_it (1.2)": "will fight when the want demands, without relish",
+   "default (1.0)": "unstated",
+   "avoids_it (0.5)": "fights only when cornered; the want is pursued another way",
+   "refuses_it (0.15)": "⚠️ NEVER seeks a confrontation. Their whole craft is that they do not."
+  },
+  "byTradition_derived": {
+   "marcher": 1.8,
+   "abyssal": 1.5,
+   "unmaker": 1.4,
+   "blazeborn": 1.3,
+   "somatic": 1.3,
+   "seraphic": 1.3,
+   "ashwarden": 1.0,
+   "verist": 1.2,
+   "syllogist": 1.2,
+   "cogitant": 0.9,
+   "enginewright": 0.8,
+   "wright": 0.8,
+   "mason": 0.8,
+   "lattice": 0.9,
+   "figurist": 0.7,
+   "rootkin": 0.7,
+   "threnodist": 0.6,
+   "numinous": 0.4,
+   "veilwright": 0.4,
+   "umbral": 0.5,
+   "churnfolk": 0.6,
+   "horizon": 0.6,
+   "hourkeeper": 0.7,
+   "stillhold": 0.15
+  },
+  "stillholdIsTheProof": "⚠️ 0.15 — the lowest in the world, and it is not a nerf, it is the tradition. Its crafts say so: `step_between` puts your UNARMORED body between harm and someone else; `the_laid_ground` makes violence HARDER rather than impossible; `the_held_breath` holds maximum threat and maximum restraint in the same instant. A Stillhold figure who sought duels would contradict every bound I authored for them. AND THE MECHANIC REWARDS THEM CORRECTLY: they push as WORKERS — steady, modest, safe — which is exactly what 'the war ender' does. He does not win the arc by fighting; he wins it by still being there.",
+  "overrides_perFigure": {
+   "the_ender_who_forgot": 1.9,
+   "the_undefeated": 1.8,
+   "the_nine_year_master": 1.9,
+   "the_appetite": 1.7,
+   "the_scouring_hand": 1.7,
+   "the_burning_certainty": 1.6,
+   "the_war_ender": 0.1,
+   "keeper_the_unsaid": 0.15,
+   "the_two_who_are_one": 0.3,
+   "the_last_walker": 0.3,
+   "neth_the_stayed": 0.4,
+   "the_deep_lantern": 0.5,
+   "the_hollow_king": 0.2,
+   "note": "⚠️ THE HOLLOW KING AT 0.2 IS THE BEST ONE: his want is 'TO BE ASKED. He never takes; he is given.' A figure who never initiates is a figure who never seeks a confrontation — and he is a legendary-weight abyssal, so a flat rate had him duelling constantly, which contradicts the single most important line about him. The_nine_year_master at 1.9 is the inverse: her entire want is 'ONE FIGHT SHE ISN'T SURE SHE'LL WIN.' She should be seeking, always."
+  }
+ },
+ "predictedEffects": [
+  "FEWER DUELS OVERALL, and the ones that happen are between figures who should be fighting. The bloodbath CCode was correcting for gets solved by CHARACTER rather than by lowering a global rate.",
+  "⚠️ PACIFIST TRADITIONS BECOME MECHANICALLY DISTINCT INSTEAD OF JUST FLAVOURED. Stillhold, numinous and veilwright push as workers — steady and safe — so they hold arcs by ENDURANCE. That is the first time the peace/violence axis has meant anything at world scale.",
+  "GANGING-UP GETS MORE COMMON WHERE IT SHOULD BE. High-engagement traditions cluster into the engaged pool, so marchers and abyssals meet each other — and weight-matched pairing then does its job.",
+  "AND THE DEATH TABLE SHOULD SPREAD BY TRADITION, not just by tier. A world where marchers die and numinous don't is a legible world."
+ ],
+ "openQuestions": [
+  "CCODE: is `engages` best as a multiplier on the global rate (my proposal, one clamp, degrades to today's behaviour if absent) or as an absolute per-figure rate? The multiplier keeps your dial meaningful.",
+  "ERIK: 0.15 for stillhold means they almost never fight. Correct for the tradition — but it also means a stillhold figure is nearly immune to dying in an arc contest. Is that right? MY READ: yes, and it should show up as them dying to something ELSE (a player, a manifestation, a betrayal) rather than in a duel they never sought.",
+  "Should high-engagement figures take MORE injury as the cost of seeking? Currently severity is tier-gap only. Seeking a fight you did not have to have could plausibly carry its own risk."
+ ]
+}

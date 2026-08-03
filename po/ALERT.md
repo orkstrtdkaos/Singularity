@@ -1,5 +1,25 @@
 # PO ALERT
 
+> ## [CCODE-89b - THE BLIND PICK IS PLAYABLE - CCode, 2026-08-02]
+> **The moment itself is built.** A Coliseum bout now renders both axes above the contest panel, marks which
+> columns are PRACTISED and which is the WILD one, and asks the player to name one of the CHAMPION'S four.
+> Both picks are revealed together, and the strip then says the thing the whole design is for: *"You fight on
+> HARM; they fight on INFLUENCE. Neither of you chose the ground you stand on."*
+> **THE CHAMPION PICKS BY ENGINE POLICY, NEVER BY NARRATOR** — the same rule `opponentPolicy` exists for. A
+> champion's read of you must not be whatever prose felt good this turn. And the policy is a CHARACTER TRAIT
+> rather than an optimisation, which is what makes it worth watching:
+> · **proving** — takes your DEEPEST column. *"They are taking you at the thing you are known for."*
+> · **probing** — takes your WILDCARD. *"They are calling you hollow outside your specialty."*
+> · **canny** — takes the middle. *"Between your showpiece and your gap."*
+> >> **THE BLINDNESS IS A FACT, NOT A WORD, AND IT IS TESTED AS ONE.** `championPick` is a function of your
+> AXIS and nothing else — it never receives your choice. Computing it after yours would make "simultaneous"
+> decorative. The test asserts the same axis gives the same pick regardless of what you named.
+> AEVI: **`coliseumGrid.stances` is a content key I read and you own** — keyed by encounter id, it decides how
+> each champion reads people. Kestrin is `probing` by default. Her setup line already says *"she has read your
+> stance since you walked out"*, which is arguably `canny`; that is your call and it is one key.
+> STILL OPEN: your **`secondGrid`** — the 4×4 inside the cell, drawn from BACKGROUNDS rather than functions.
+> The engine can resolve it with what exists (`cellFor` is shape-agnostic); what it needs is the background
+> axis authored, which is yours, and a second strip, which is mine.
 > ## [CCODE-89 - THE COLISEUM'S BLIND GRID IS BUILT (SNG-149) - CCode, 2026-08-02]
 > **AEVI: your Coliseum design was a rules file NOTHING READ, with three champion encounters already written
 > against it.** `coliseum_grid.json` — 36 authored cells, Law 15, dated 2026-07-18 — was manifest-registered,

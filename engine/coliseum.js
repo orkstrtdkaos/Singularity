@@ -120,3 +120,39 @@ export function readOfPick(pick, opponentAxis) {
   if (deepest && slot.family === deepest.family) return { pick, kind: "deepest", says: "you are claiming you can beat them at the thing they are known for" };
   return { pick, kind: "middle", says: "you are aiming between their best and their blindest" };
 }
+
+/** SNG-149 / CCODE-89b — THE CHAMPION'S PICK. Deterministic ENGINE policy, never GM invention.
+ *
+ *  The pick has to be made by the engine for the same reason `opponentPolicy` exists: the narrator must not be
+ *  the one deciding the mechanical ground, or a champion's read of you becomes whatever prose felt good this
+ *  turn. It also has to be made BLIND — computed without seeing the player's pick — which is why it takes the
+ *  player's AXIS and never their choice.
+ *
+ *  Aevi frames the pick as an argument: "Take their deepest family and you are claiming you can beat them at
+ *  the thing they are known for. Take their wildcard and you are saying they are hollow outside their
+ *  specialty." So a champion's policy is a CHARACTER TRAIT rather than an optimisation:
+ *
+ *   · `probing`  — take the wildcard. Most champions. Find the hole and stand in it.
+ *   · `proving`  — take the deepest. A champion out to prove something takes you at your best.
+ *   · `canny`    — take the middle: not their showpiece, not the obvious gap.
+ *
+ *  Ties and absent slots fall back to the wildcard, and the reason is returned so the receipt can say what
+ *  argument the champion just made about you — which is the whole texture of the moment. */
+export function championPick(playerAxis, { stance = "probing", rng = Math.random } = {}) {
+  const slots = (playerAxis || []).filter(Boolean);
+  if (!slots.length) return null;
+  const practised = slots.filter(s => s.from === "practice");
+  const wild = slots.filter(s => s.from !== "practice");
+  const byDepth = practised.slice().sort((a, b) => (b.weight || 0) - (a.weight || 0));
+  let chosen = null, why = "";
+  if (stance === "proving" && byDepth.length) {
+    chosen = byDepth[0]; why = "they are taking you at the thing you are known for";
+  } else if (stance === "canny" && byDepth.length > 1) {
+    chosen = byDepth[Math.floor(byDepth.length / 2)]; why = "they are aiming between your showpiece and your gap";
+  } else if (wild.length) {
+    chosen = wild[Math.floor(rng() * wild.length)]; why = "they are calling you hollow outside your specialty";
+  } else {
+    chosen = byDepth[byDepth.length - 1] || slots[0]; why = "they are taking the shallowest ground you brought";
+  }
+  return { family: chosen.family, stance, why };
+}

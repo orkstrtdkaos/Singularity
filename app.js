@@ -19,7 +19,7 @@ import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCa
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
-import { drawAxis, resolvePick, readOfPick } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid
+import { drawAxis, resolvePick, readOfPick, championPick } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
@@ -112,6 +112,8 @@ function refreshStickyBack() {
 try { new MutationObserver(refreshStickyBack).observe(app, { childList: true }); refreshStickyBack(); } catch { /* observer optional; the bottom buttons still work */ }
 // SNG-104: vitals detail on tap (phone) / hover (desktop) — mirrors the data-help delegation above.
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-vital]"); if (el) { e.preventDefault(); showVitalDetail(el); } });
+// SNG-149/CCODE-89b: naming one of the champion's four. Their pick is computed from your AXIS, not your choice, so it is genuinely blind.
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-colpick]"); if (el) { e.preventDefault(); commitColiseumPick(el.dataset.colpick); } });
 // SNG-106: tap the roll's chance → the full component breakdown (the resolver's retained math, verbatim).
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-breakdown]"); if (el) { e.preventDefault(); try { showBreakdownPopover(JSON.parse(el.dataset.breakdown)); } catch { /* malformed — no popup */ } } });
 // SNG-118: tap a play-style aptitude chip → its effect + description (reuses the one popover surface).
@@ -5106,6 +5108,43 @@ function coliseumBoutFor(def, oppSheet) {
     const theirs = drawAxis({ abilities: theirAbilities }, { catalog: theirCat, index: FN_INDEX, rng: Math.random });
     return { yours, theirs, picked: null };
   } catch { return null; }   // a bout that cannot draw its grid is still a fight; it is never a crash
+}
+
+/** SNG-149 / CCODE-89b — THE BLIND PICK, resolved. The champion's pick is computed from your AXIS and never
+ *  from your choice, so it is genuinely blind: both are decided from the same information and revealed
+ *  together. Computing it AFTER yours would be a simultaneous pick in name only. */
+function commitColiseumPick(family) {
+  const enc = character.activeEncounter, bout = enc?.coliseum;
+  if (!bout || bout.picked) return;
+  const grid = CONTENT?.rules?.coliseumGrid;
+  const stance = (CONTENT?.rules?.coliseumGrid?.stances || {})[enc.defId] || "probing";
+  const theirs = championPick(bout.yours, { stance, rng: Math.random });
+  const r = resolvePick({ axisA: bout.yours, axisB: bout.theirs, pickA: family, pickB: theirs?.family, grid });
+  if (!r.ok) { renderPlay(character.activeScene?.lastTurn || null, { aside: r.why }); return; }
+  bout.picked = { yours: family, theirs: theirs.family, cell: r.cell, aFightsOn: r.aFightsOn, bFightsOn: r.bFightsOn,
+    yourRead: readOfPick(family, bout.theirs), theirRead: theirs.why };
+  saveCharacter(character);
+  // The cell is the CONTEST, so the narrator is told what was chosen and what it means — not asked to invent it.
+  runGM({ resolution: null, playerInput: `(THE BLIND GRID IS REVEALED. You named ${family} from their four — ${bout.picked.yourRead?.says || "your argument about them"}. They named ${theirs.family} from yours — ${theirs.why}. The cell is "${r.cell.name}": ${r.cell.contest} Judged: ${r.cell.judged || "on the bell."} Narrate the reveal and the crowd, then the opening of THIS contest — not a generic bout.)` })
+    .then(result => { if (result) renderPlay(result.turn, { degraded: result.degraded }); });
+}
+
+/** The strip a Coliseum bout renders above the contest panel: both axes, and your four choices from THEIRS. */
+function coliseumStrip() {
+  const bout = character.activeEncounter?.coliseum;
+  if (!bout) return "";
+  const col = s => `<span class="col-fam" title="${s.from === "practice" ? `drawn from what they practise (weight ${s.weight})` : "the WILD column — drawn from all eight, including families never trained"}">${esc(s.family)}${s.from === "practice" ? "" : " ✦"}</span>`;
+  if (bout.picked) {
+    const p = bout.picked;
+    return `<div class="enc-frame col-strip"><div class="col-cell"><strong>${esc(p.cell.name)}</strong> — ${esc(p.cell.contest)}</div>` +
+      `<div class="col-read">You named <b>${esc(p.yours)}</b> — ${esc(p.yourRead?.says || "")}. They named <b>${esc(p.theirs)}</b> — ${esc(p.theirRead || "")}.</div>` +
+      `<div class="col-ground">You fight on <b>${esc(p.aFightsOn)}</b>; they fight on <b>${esc(p.bFightsOn)}</b>. Neither of you chose the ground you stand on.</div></div>`;
+  }
+  return `<div class="enc-frame col-strip">` +
+    `<div class="col-axis">THEIR four: ${bout.theirs.map(col).join(" · ")}</div>` +
+    `<div class="col-axis">YOUR four: ${bout.yours.map(col).join(" · ")}</div>` +
+    `<div class="col-ask">Name which of THEIR four you will take them on at. They are naming one of yours at the same moment — blind, both revealed together.</div>` +
+    `<div class="col-picks">${bout.theirs.map(s => `<button class="btn secondary col-pick" data-colpick="${esc(s.family)}" title="${s.from === "practice" ? "One of the things they actually practise — you are claiming you can beat them at it." : "Their WILD column — a family they may never have trained. You are saying they are hollow outside their specialty."}">${esc(s.family)}</button>`).join("")}</div></div>`;
 }
 
 async function onChoice(choice) {
@@ -10239,7 +10278,10 @@ function renderPlay(turn, opts = {}) {
       const cueText = `▸ ${cue} ${String(copy252.freeform?.wrapSuffix || "")}`.replace(/\{kind\}/g, fm.kind).replace(/\s+/g, " ").trim();
       const freeformHtml = fm.freeform ? `<div class="enc-frame-cue">${esc(cueText)}</div>` : "";
       const cueHtml = `${collapseHtml}${movesToggle}${movesHtml}${freeformHtml}`;
-      return `<div class="enc-frame enc-strip${prom} enc-frame-${fm.kind}">
+      // SNG-149/CCODE-89b: a Coliseum bout renders its BLIND GRID above the frame. It sits outside the
+      // frame rather than inside it because the grid is decided BEFORE the contest — the picks are what
+      // makes it this contest rather than another, and folding it in would read as one more round option.
+      return coliseumStrip() + `<div class="enc-frame enc-strip${prom} enc-frame-${fm.kind}">
         ${(() => {
           // SNG-247 Tier 4 (the morph made VISIBLE). Frames have chained since SNG-230 — flee a fight and you ARE
           // dropped into a chase — but nothing ever SAID SO. The border silently changed colour and the player was

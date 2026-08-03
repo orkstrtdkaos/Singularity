@@ -9145,7 +9145,7 @@ await (async () => {
 // steering toward their best ground - so a change that makes the grid kinder to a narrow competitor is
 // breaking the mechanic, not tuning it.
 {
-  const { drawAxis, resolvePick, cellFor, readOfPick } = await import("../engine/coliseum.js");
+  const { drawAxis, resolvePick, cellFor, readOfPick, championPick } = await import("../engine/coliseum.js");
   const { buildFunctionIndex } = await import("../engine/functions.js");
   const GRID = JSON.parse(readFileSync(join(root, "content/packs/core/rules/coliseum_grid.json"), "utf8"));
   const IDX = buildFunctionIndex(JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8")));
@@ -9179,6 +9179,31 @@ await (async () => {
   console.log(`      CCODE-89 measured — untrained columns per axis: 2-family specialist ${nU.toFixed(2)}/4 · 5-family competitor ${bU.toFixed(2)}/4`);
   check("CCODE-89: a SPECIALIST is measurably more exposed than a broad competitor (the whole point)",
     nU > bU, `${nU.toFixed(2)} vs ${bU.toFixed(2)}`);
+  // CCODE-89b — THE CHAMPION'S PICK. Made by the ENGINE, never the narrator, for the same reason
+  // opponentPolicy exists: a champion's read of you must not be whatever prose felt good this turn.
+  const yourAxis = [{ family: "HARM", from: "practice", weight: 6 }, { family: "PROTECT", from: "practice", weight: 3 },
+                    { family: "KNOW", from: "practice", weight: 1 }, { family: "MOVE", from: "wild", weight: 0 }];
+  const pr = seed();
+  check("CCODE-89b: a PROVING champion takes you at the thing you are known for (your deepest column)",
+    championPick(yourAxis, { stance: "proving", rng: pr }).family === "HARM");
+  check("CCODE-89b: a PROBING champion takes your WILDCARD - calling you hollow outside your specialty",
+    championPick(yourAxis, { stance: "probing", rng: pr }).family === "MOVE");
+  check("CCODE-89b: a CANNY champion takes neither your showpiece nor your gap",
+    !["HARM", "MOVE"].includes(championPick(yourAxis, { stance: "canny", rng: pr }).family));
+  check("CCODE-89b: with no wildcard to take, it still returns a pick rather than nothing",
+    !!championPick(yourAxis.filter(s => s.from === "practice"), { stance: "probing", rng: pr })?.family);
+  check("CCODE-89b: an empty axis is null, not a guess",  championPick([], { rng: pr }) === null);
+  // THE BLINDNESS GUARANTEE: the champion's pick is a function of your AXIS and nothing else. If it could see
+  // your choice, "simultaneous" would be a word rather than a fact - so the same axis must give the same pick
+  // no matter what you named.
+  {
+    const a = championPick(yourAxis, { stance: "proving", rng: seed() });
+    const b = championPick(yourAxis, { stance: "proving", rng: seed() });
+    check("CCODE-89b: the champion's pick cannot depend on yours - blind means blind",
+      a.family === b.family);
+  }
+  check("CCODE-89b: every stance explains ITSELF, so the receipt can say what argument they just made",
+    ["proving", "probing", "canny"].every(s => typeof championPick(yourAxis, { stance: s, rng: pr })?.why === "string"));
   check("CCODE-89: the pick is a readable ARGUMENT about the opponent, not a bare choice",
     ["deepest", "middle", "wildcard"].includes(readOfPick(B[0].family, B)?.kind));
 }

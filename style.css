@@ -1217,3 +1217,14 @@ img[data-lightbox] { cursor: zoom-in; }
 .mach-dial-ship { font-size: 11px; opacity: 0.75; }
 .mach-dial-set .mach-dial-label { font-weight: 700; }
 .mach-dial-set input { outline: 2px solid var(--accent, #c9a227); }
+
+/* SNG-149 / CCODE-89b — the Coliseum's BLIND GRID strip. It sits ABOVE the encounter frame because the picks
+   are decided before the contest and are what makes it this contest rather than another. */
+.col-strip { display: flex; flex-direction: column; gap: 8px; }
+.col-axis { font-size: 0.92em; opacity: 0.9; }
+.col-fam { display: inline-block; padding: 1px 7px; border-radius: 10px; background: rgba(255,255,255,0.07); }
+.col-ask { font-size: 0.9em; opacity: 0.75; }
+.col-picks { display: flex; flex-wrap: wrap; gap: 6px; }
+.col-pick { font-weight: 600; }
+.col-cell { font-size: 1.02em; }
+.col-read, .col-ground { font-size: 0.9em; opacity: 0.85; }

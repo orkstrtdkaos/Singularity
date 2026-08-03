@@ -699,13 +699,48 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
     : window;
   ws.offscreenCursor = population.length ? (cursor + BATCH_N) % population.length : 0;
 
+  // CCODE-103 — THE WORLD KEEPS HAPPENING TO EVERYONE; ONLY THE TELLING WAITS ITS TURN.
+  // Erik: "I don't want to lose the tick content on the npcs who aren't in the current update pass — those
+  // should stack in a log for each, then get their full update when their window comes."
+  //
+  // Right, and it is what makes a rotating window honest rather than merely fair. Without it, a person 15
+  // passes from their turn simply has 15 passes of nothing happen to them — the rotation would spread the
+  // silence around instead of ending it. So every entity OFF the window accrues its elapsed days here, and
+  // the entity whose turn comes is developed against the WHOLE span it waited, not just the last tick.
+  //
+  // Bounded on purpose: days accumulate as a number, not a transcript. The backlog is how LONG it has been
+  // and what was pending, not a second history of the world — that already exists, and duplicating it here
+  // would grow every save forever.
+  ws.offscreenBacklog = ws.offscreenBacklog || {};
+  const inWindow = new Set(batch.map(e => e.id));
+  for (const e of population) {
+    if (inWindow.has(e.id)) continue;
+    const b = ws.offscreenBacklog[e.id] || { days: 0, since: currentWorldDay, want: e.want || null };
+    b.days += elapsedWorldDays;
+    b.want = e.want || b.want;
+    ws.offscreenBacklog[e.id] = b;
+  }
+  // What each entity in THIS window has been waiting through — handed to the evolver so one development can
+  // honestly cover a season rather than pretending only three days passed.
+  const backlogOf = (id) => {
+    const b = ws.offscreenBacklog?.[id];
+    return b && b.days > 0 ? { waitedDays: b.days, since: b.since, want: b.want } : null;
+  };
+
   try {
-    const result = await evolveFn({ character, entities: batch, elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id), model });
+    // CCODE-103: `backlogOf` lets a development cover the whole span this entity waited. `elapsedWorldDays`
+    // stays the TICK's elapsed time — the two are different questions and collapsing them would make a
+    // long-waiting entity look like a fast-moving world.
+    const result = await evolveFn({ character, entities: batch, elapsedWorldDays, currentWorldDay,
+      progressOf: (id) => wantProgressLine(ws, id), backlogOf, model });
     for (const dev of (result?.developments || []).slice(0, 4)) {
       const fig = batch.find(e => e.id === dev.entityId);
       if (!fig || !dev.note) continue;
       // SNG-198 §2: the outcome MOVES state (or honestly does not); the note is the colour on top of it.
       const outcome = WANT_OUTCOMES.includes(dev.outcome) ? dev.outcome : "progress";
+      // CCODE-103: their turn came and was spent — the wait is discharged whether or not the want moved,
+      // because the development covered it either way. Leaving it would double-count the next time round.
+      if (ws.offscreenBacklog) delete ws.offscreenBacklog[fig.id];
       const { moved, resolved } = applyWantOutcome(ws, fig.id, outcome, currentWorldDay);
       if (fig.source === "legend" && moved) {
         ws.lastEpicOffscreenDay = currentWorldDay; // stamp the epic cooldown

@@ -934,7 +934,10 @@ for (const pack of PACKS) {
   const authoredCrafts = crafts.filter(c => c.mechanic && Object.keys(c.mechanic).length).length;
   const unauthored = crafts.length - authoredCrafts;
   console.log(`note  SNG-263 authoring progress: ${authoredCrafts}/${crafts.length} crafts declare their own mechanic (${unauthored} still inherit family defaults)`);
-  const CRAFTS_UNAUTHORED_BASELINE = 285;
+  // CCODE-104: Aevi finished the catalog. This ratchet opened at 285 — every craft in the game inheriting
+  // its family defaults — and it is now ZERO. Tightened to 0 so the achievement is HELD: a craft added
+  // without its own mechanics now fails the build instead of quietly restarting the climb.
+  const CRAFTS_UNAUTHORED_BASELINE = 0;
   check(`SNG-263 §5 ratchet: crafts still inheriting family defaults = ${unauthored} (baseline ${CRAFTS_UNAUTHORED_BASELINE}) — may only go DOWN`,
     unauthored <= CRAFTS_UNAUTHORED_BASELINE,
     "a craft LOST its authored mechanic — the catalog may only fill in, never empty out");

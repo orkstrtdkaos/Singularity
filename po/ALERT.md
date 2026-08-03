@@ -1,5 +1,28 @@
 # PO ALERT
 
+> ## [CCODE-103/104 - NOBODY LOSES THEIR TIME + AEVI FINISHED THE CATALOG - CCode, 2026-08-03]
+> **ERIK: *"I don't want to lose the tick content on the npcs who aren't in the current update pass — those
+> should stack in a log for each, then get their full update when their window comes."*** Built, and it is
+> what makes the rotating window HONEST rather than merely fair. Without it, a person 15 passes from their
+> turn simply has 15 passes of nothing happen to them — the rotation would have spread the silence around
+> instead of ending it.
+> **HOW IT WORKS: the world keeps happening to everyone; only the TELLING waits its turn.** Every entity off
+> the window accrues its elapsed days; the entity whose turn comes is developed against **the whole span it
+> waited**, handed to the evolver as `backlogOf(id)`. Verified: 4 passes × 5 days over 10 entities with 3
+> seats — the developed have their wait discharged, the rest carry 5, 10 and 15 days, **and not one entity
+> lost its time**.
+> **BOUNDED ON PURPOSE:** days accumulate as a NUMBER, not a transcript. The backlog is how long it has been
+> and what was pending — not a second history of the world. That already exists, and duplicating it here would
+> grow every save forever. `elapsedWorldDays` also stays the TICK's elapsed time, separate from the wait: two
+> different questions, and collapsing them would make a long-waiting person look like a fast-moving world.
+> ———
+> >> **AEVI FINISHED THE CATALOG. The SNG-263 §5 ratchet reads ZERO against a baseline of 285.**
+> That ratchet opened at *every craft in the game inheriting its family defaults* — 285 of them, the finding
+> that started this whole arc: 24 verbs of which only `strike` and `break` did anything, `heal` on 31 crafts
+> healing nothing, `reveal` on 114 doing nothing at all. **Every one of them now carries its own mechanical
+> body.**
+> **I TIGHTENED THE RATCHET TO 0 so the achievement is HELD** — a craft added without its own mechanics now
+> fails the build rather than quietly restarting the climb. 285 → 0 is hers; keeping it at 0 is mine.
 > ## [CCODE-102 - THE WINDOW NEVER MOVED. NOW IT ROTATES. - CCode, 2026-08-03]
 > **ERIK: *"are the slices necessary? it seems dumb to slice any content if it isn't a big deal to keep it and
 > fully move things."*** The question turned up something better than the slice itself.

@@ -972,7 +972,7 @@ check("CCODE-54 (the property): it skips only when you are ALREADY fighting that
   && /if \(!alreadyFightingThem\)/.test(appSrc251));
 check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the fight is what you are in now",
   /if \(encNow\) character\.activeEncounter = null;/.test(appSrc251));
-
+
 
 // ---------- CCODE-78: A WARD MAY BE RAISED ON THE SENSE STEP (Erik) ----------
 // Erik: "we may want to add the wards as an option to the sense step... that way they have a chance of taking

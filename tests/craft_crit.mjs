@@ -242,7 +242,7 @@ const sample = (craft, n = 40000) => {
   check("CCODE-77b: a T-V craft out-scales a T-I in EVERY family (KNOW was flat at every tier)",
     grew.every(g => Number(g.hi) > Number(g.lo)), grew.filter(g => !(Number(g.hi) > Number(g.lo))).map(g => `${g.fam} flat at ${g.lo}`).join(", "));
 }
-
+
 
 // == SNG-258 4/4b -- WHAT THE ROLL-MATH POPUP READS =========================================================
 // The popup is DOM, so it cannot be exercised here -- but what it reads is a CONTRACT on the resolver's

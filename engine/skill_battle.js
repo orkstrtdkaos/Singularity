@@ -212,7 +212,7 @@ function effectFrom(decl, roll, actor, sb, { cm = null, rng = Math.random } = {}
     side: def.target === "opponent" ? other : actor,   // WHOSE roll this modifies
     // CCODE-41: deniesPhase must ride from the content def onto the LIVE effect — without this copy, phaseDenied
     // reads undefined on every effect and the blinding counterplay is inert while still advertised in content.
-    ...(def.deniesPhase ? { deniesPhase: def.deniesPhase } : {}),
+    ...(def.deniesPhase ? { deniesPhase: def.deniesPhase } : {}),
     // CCODE-82: whether this guard needs TENDING rides from the craft onto the live effect. Same copy the
     // line above exists for — a flag left on the definition reads `undefined` on the effect and is inert.
     ...(tend.requiresAttention ? { requiresAttention: true } : {}),
@@ -586,7 +586,7 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
   const landedO = effectFrom(oppDecl, o, "opponent", sb, fxOpts);
   effects = addEffect(effects, landedP, sb);
   effects = addEffect(effects, landedW, sb);
-  effects = addEffect(effects, landedO, sb);
+  effects = addEffect(effects, landedO, sb);
   // CCODE-82 — A GUARD THAT NEEDS TENDING LAPSES WHEN YOU LOOK AWAY.
   //
   // Aevi asked for an `autonomy` flag on the guard shape: `the_mechanical_defense` r2's whole increment is a

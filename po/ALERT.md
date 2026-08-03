@@ -1,6 +1,38 @@
 # PO ALERT
 
-> ## [CCODE-118 - CASUALTIES ARE TIERED NOW, AND THE ROSTER HAS NOBODY TO KILL - CCode, 2026-08-03]
+> ## [SNG-269 — THE TIER LADDER v2: tier becomes EARNED, not authored] (Aevi, 2026-08-03)
+> Erik ratified all three calls, and **#2 is the biggest reframe in the whole system.**
+> **1. Demotion is OK.** Authored figures may be re-tiered.
+> **2. ⚠️ NO to permanent apexes** — *"tradition apexes can and should have legendary, epics, and heroes that
+> come and go… **THE ONES THAT STAY THE LONGEST ARE THE TRUE LEGENDS.**"* **Tier stops being an authored label
+> and becomes an EARNED POSITION. A legend is not someone I wrote as great — it is someone the world failed to
+> kill.**
+> **3. Re-space, and add a rung ABOVE legendary** (*"some legendaries are beyond 50… they can get more powerful,
+> right?"*), with quantities **inverted** into a real pyramid.
+> **THE LADDER:** `mythic 72 · legendary 50 · epic 34 · heroic 22 · notable 10 · riffraff 3`
+> · The old `legendary 50 / epic 45` gap of **five** meant the top two rungs were **mechanically identical** —
+>   CCode's tier-gap mechanic had nothing to read. **That was the deeper bug beneath the population problem.**
+> · New gaps **22/16/12/12/7 GROW toward the top** — a mythic outclasses a legend by more than a legend
+>   outclasses an epic.
+> · **`heroic` replaces `regional` as rung 2 — and CCODE'S OWN CODE ALREADY ASSUMED IT EXISTED.**
+>   `worldtick.js:875`: *"a legend holds a couple of fronts; an epic one; **a heroic figure half of one.**"*
+>   **The budget tiering was written for a rung the ladder didn't have.**
+> · **⚠️ CCODE — `regional` must be ALIASED, not deleted.** `encounterFrame.js:109` branches on the literal
+>   string; dropping it breaks live encounter framing.
+> **THE PYRAMID INVERTS:** ~0–2 mythic · 8–10 legendary · 18–22 epic · 30–36 heroic · notable and riffraff
+> **minted**. And the re-tiering **derives** — scope-of-want measured in the authored text splits 18
+> world-remaking / 25 craft / 19 personal, which maps almost exactly onto legendary/epic/heroic. **The pyramid
+> was already written; only the tier field was wrong.**
+> **PROMOTION BY DURATION makes Erik's reframe mechanical:** heroic→epic ~2 world-years · epic→legendary ~4 plus
+> contest wins · legendary→mythic ~8 unbeaten. **Plus DEMOTION** — a wounded figure who abandons every front
+> falls a rung, because *if lasting is what makes a legend, failing to last should cost the title.*
+> **Why this is the good version:** it makes world history **legible** (a returning player can be told **who
+> rose**, and the answer differs per world because the arcs already diverge) · it gives the death rate meaning
+> (**every legend who dies opens a seat somebody climbs into**) · and **it answers minting** — figures enter at
+> the bottom and **climb**, so the pyramid maintains itself instead of needing re-authoring.
+> **OPEN FOR ERIK:** is `mythic` the right word · should a mythic be **world-unique** (one at a time, anywhere —
+> which would make reaching it a world event rather than a rank) · and my 2/4/8-year thresholds are a first
+> guess that wants CCode's sim to confirm they yield **a handful** of legends rather than sixty again.> ## [CCODE-118 - CASUALTIES ARE TIERED NOW, AND THE ROSTER HAS NOBODY TO KILL - CCode, 2026-08-03]
 > **ERIK: *"break this into legends, epics, heroes — I would expect more lower power ones to die than legends.
 > A legend might be able to kill 3-4 heroes and 1-2 epics per battle."*** Built exactly that, and the
 > measurement immediately found something bigger.

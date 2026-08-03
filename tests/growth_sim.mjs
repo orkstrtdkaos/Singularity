@@ -118,7 +118,7 @@ console.log("GROWTH SIM — the rate at which the world grows\n");
 {
   const WHOLE = {
     creature: { id: "c", name: "a thing", tier: "riffraff", class: "beast", look: "l", danger: "d", pressures: ["HARM"] },
-    item: { id: "i", name: "Axe", kind: "weapon", description: "d", consumable: false, bonusTags: ["strike"] },
+    item: { id: "i", name: "Axe", kind: "weapon", description: "d", consumable: false, bonusTags: ["strike"], damageType: "physical" },   // CCODE-87: a weapon owes its KIND of harm
     skill: { id: "s", name: "S", functions: ["strike"], energyCost: 8, levelReq: 1, description: "d", notFor: "n" },
     npc: { id: "n", name: "N", personality: {}, wants: ["the forge her brother left"], fears: ["the ledger"], disposition: "wary", appearance: "tall" },
     location: { id: "l", name: "L", dangerLevel: 2, worldPos: { colatitude: 1, longitude: 1 }, axisVector: new Array(12).fill(0), poleIntensity: {}, descriptionSeed: "s" },

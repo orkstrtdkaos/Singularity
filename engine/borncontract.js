@@ -32,6 +32,21 @@
  *  a typo in the map must not silently start rejecting content. */
 const RANK = { DEGRADED: 1, EMPTY: 2, CRASH: 3 };
 const rankOf = s => RANK[String(s || "").toUpperCase()] || RANK.DEGRADED;
+/** CCODE-87 — does a conditional contract field apply to THIS record?
+ *
+ *  Grammar, entire: `<field> == <value>` or `<field> != <value>`, plus `|` for alternatives on the value
+ *  ("kind == weapon|armor"). Anything else returns false and the field is skipped, because a clause the gate
+ *  cannot read must not be able to condemn a record it was never about. */
+export function appliesTo(clause, entity) {
+  const m = String(clause || "").match(/^\s*([A-Za-z_][\w.]*)\s*(==|!=)\s*(.+?)\s*$/);
+  if (!m) return false;
+  const [, path, op, rhs] = m;
+  const actual = path.split(".").reduce((o, k) => (o == null ? o : o[k]), entity);
+  const wanted = rhs.split("|").map(s => s.trim().replace(/^["']|["']$/g, ""));
+  const hit = wanted.some(w => String(actual) === w);
+  return op === "==" ? hit : !hit;
+}
+
 /** Worst severity in a list, or null when the list is EMPTY.
  *
  *  The "no findings" seed must rank BELOW every real severity, which is why it is a number here and
@@ -184,6 +199,13 @@ export function checkBorn(entity, type, contract, opts = {}) {
   try {
     for (const f of (Array.isArray(spec.topLevel) ? spec.topLevel : [])) {
       if (!f || f.optional) continue;               // a field the contract marks optional is not a hole
+      // CCODE-87: a field may apply to only ONE KIND of the type. A weapon owes a `damageType`; a whetstone
+      // does not, and a gate that says otherwise is crying wolf on a whetstone — which teaches people to
+      // ignore it, the SNG-250 lesson. `appliesTo: "kind == weapon"` is deliberately a TINY grammar rather
+      // than an expression evaluated at runtime: a contract file is content, and content must never be able
+      // to run code inside a gate that every mint passes through. An unparseable clause applies to nothing,
+      // so a typo silences one field instead of failing every record of its type.
+      if (f.appliesTo && !appliesTo(f.appliesTo, entity)) continue;
       if (hasValue(entity[f.field])) continue;
       out.missing.push({ field: f.field, severity: String(f.severity || "DEGRADED").toUpperCase(), read: f.read || "", note: f.note || "" });
     }

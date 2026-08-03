@@ -289,6 +289,13 @@
      "note": "without it the GM sees a bare name+kind and narrates from the name alone"
     },
     {
+     "field": "damageType",
+     "severity": "DEGRADED",
+     "appliesTo": "kind == weapon",
+     "read": "skill_battle.js resolvedDamageType -> affinityOf, and the typed layers in the soak path",
+     "note": "CCODE-86 (Erik: 'learn this lesson and apply it to any generated items'). A weapon with no kind resolves as PHYSICAL, and some things in the world are IMMUNE to physical. Silas Weir's Memory spear - a L29 item rune-bound by three people, carrying an explicit shadow-harm focus and an Ashwarden ending-sense - did 0.00 against the unmoored choir for exactly this reason, while each of its bound threads hit for 21.27 cast alone. An item minted without a kind is BORN MUTE on the one question that decides whether it works at all. DEGRADED rather than EMPTY because a weapon without one still swings; it just cannot reach a thing that answers kinds. Plain steel declaring 'physical' is correct and complete - what is not acceptable is silence standing in for it."
+    },
+    {
      "field": "bonusTags",
      "severity": "DEGRADED",
      "read": "inventory.js:245 equipmentBonus + :273 itemCombatFunctions -> :285 wieldBonusFor + :301 the throwable test",

@@ -1,5 +1,25 @@
 # PO ALERT
 
+> ## [CCODE-87 - THE GATE NOW UNDERSTANDS "ONLY FOR THIS KIND" - CCode, 2026-08-02] the wall from last commit, taken down
+> **The blocker I reported an hour ago is gone, and the born-whole requirement Erik asked for is LIVE.**
+> Last commit I had to revert `damageType` out of the item contract because the gate had no notion of a field
+> that applies to only ONE KIND of item — so a whetstone and a folded letter were suddenly "missing a weapon
+> field". A gate that cries wolf on a whetstone teaches people to ignore it, which is the SNG-250 lesson.
+> **`appliesTo` is now a contract primitive**, and `damageType` is back where Erik wanted it:
+> · **a WEAPON with no `damageType` is flagged at birth** — the Silas spear defect, caught at the mint;
+> · **the same weapon declaring `physical` is CLEAN** — plain steel IS an answer; silence is not;
+> · **a TOOL is never asked for one.** No crying wolf on a whetstone.
+> **THE GRAMMAR IS DELIBERATELY TINY** — `field == value`, `!=`, and `|` for alternatives, and nothing else.
+> A contract file is CONTENT, and content must never be able to run code inside a gate that every mint passes
+> through. An unparseable clause applies to NOTHING, so a typo silences one field instead of condemning every
+> record of its type — tested explicitly, because that failure mode is worse than the bug it would report.
+> **THREE FIXTURES ACROSS TWO TEST FILES HAD TO CHANGE, and they were all the same Axe** — a hand-built
+> "complete weapon" carrying no kind of harm. That is not the tests being loosened to fit; it is the contract
+> genuinely changing what a whole weapon IS, and the fixtures now demonstrate the correct shape.
+> **AEVI: this primitive is general, and it is probably useful to you beyond weapons.** Any field that only
+> some members of a type owe can now be required honestly — a `creature` field only epics owe, a `location`
+> field only settlements owe. It is one key on a contract entry.
+> ## [CCODE-86b - THE LESSON APPLIED AT THE MINT (partly) - CCode, 2026-08-02]
 > ## [SNG-265 r2 — THE GOD-NAMED ARE NOT GODS. THEY ARE PEOPLE WHO REFUSED.] (Aevi, 2026-08-02)
 > Erik's reveal: they are **heavily nanotech-augmented humans who NEVER WANTED THE TRANSITION** — they took the
 > substrate into themselves *so they would not be dissolved by it* — **and they named themselves after gods.**

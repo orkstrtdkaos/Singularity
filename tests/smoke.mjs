@@ -8481,12 +8481,32 @@ await (async () => {
 // runs against the REAL contract file the engine ships, not a fixture — so a map edit that guts a rule
 // turns these red rather than quietly disarming the gate in production.
 {
-  const { checkBorn, hasValue, contractedTypes, describeBorn } = await import("../engine/borncontract.js");
+  const { checkBorn, hasValue, contractedTypes, describeBorn, appliesTo } = await import("../engine/borncontract.js");
   const contract = JSON.parse(readFileSync(join(root, "content/packs/core/rules/consumer_required_subfields.json"), "utf8"));
   const VERBS = Object.values(JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8")).families || {})
     .flatMap(l => (Array.isArray(l) ? l : []).map(v => (typeof v === "string" ? v : v?.verb))).filter(Boolean);
   const vocabs = { "function_vocabulary.verbs": VERBS };
   const born = (e, t) => checkBorn(e, t, contract, { vocabs });
+
+  // ---------- CCODE-87: the born-whole gate understands CONDITIONAL fields ----------
+  // Erik: apply the Memory-spear lesson to generated items. A weapon owes a `damageType` - without one it
+  // resolves as physical and cannot touch a thing that answers kinds. But a WHETSTONE owes nothing of the sort,
+  // and a gate that flags a whetstone for missing a weapon field is crying wolf, which teaches people to ignore
+  // it (the SNG-250 lesson). So a contract field may carry `appliesTo`, and the grammar is deliberately tiny:
+  // a contract file is CONTENT, and content must never run code inside a gate every mint passes through.
+  {
+  const w = k => ({ id: "x", name: "n", kind: k, description: "d", consumable: false, bonusTags: ["strike"] });
+  check("CCODE-87: a WEAPON with no damageType is now flagged - the Silas spear defect, caught at birth",
+    born(w("weapon"), "item").missing.some(m => m.field === "damageType"));
+  check("CCODE-87: the same weapon declaring physical is clean - plain steel IS an answer, silence is not",
+    born({ ...w("weapon"), damageType: "physical" }, "item").verdict === "clean");
+  check("CCODE-87: a TOOL is not asked for one (no crying wolf on a whetstone)",
+    !born({ id: "x", name: "River Whetstone", kind: "tool", description: "d", consumable: false, bonusTags: ["hone"] }, "item")
+      .missing.some(m => m.field === "damageType"));
+  check("CCODE-87: an UNPARSEABLE appliesTo applies to nothing - a typo silences one field, never condemns a type",
+    appliesTo("kind =? weapon", { kind: "weapon" }) === false && appliesTo("", {}) === false);
+  check("CCODE-87: the grammar handles alternatives and negation",
+    appliesTo("kind == weapon|armor", { kind: "armor" }) && appliesTo("kind != weapon", { kind: "tool" }))
 
   // ONE mechanism, every type (SNG-250 §5) — keyed by the map, with no per-type branch.
   check("SNG-250 §4: the gate is keyed by the MAP — every contracted type is gated by the same function",
@@ -8524,7 +8544,7 @@ await (async () => {
   check("SNG-250 §3 CONCRETE: an item with NEITHER hook (no bonusTags, no numeric effects) is flagged inert",
     born({ id: "i", name: "Old Trinket", kind: "misc", description: "It hums with old power.", consumable: false }, "item").vague.some(v => v.id === "effect-resolvable"));
   check("SNG-250 §3 CONCRETE: EITHER hook alone satisfies the item bar (gear via bonusTags, consumable via effects)",
-    born({ id: "i", name: "Axe", kind: "weapon", description: "d", consumable: false, bonusTags: ["strike"] }, "item").verdict === "clean" &&
+    born({ id: "i", name: "Axe", kind: "weapon", description: "d", consumable: false, bonusTags: ["strike"], damageType: "physical" }, "item").verdict === "clean" &&
     born({ id: "j", name: "Tea", kind: "consumable", description: "d", consumable: true, effects: { energy: 10 } }, "item").verdict === "clean");
   check("SNG-250 §3 CONCRETE: a consumable whose effects are all ZERO is flagged — consumeItem destroys the stack for nothing",
     born({ id: "k", name: "Tea", kind: "consumable", description: "d", consumable: true, effects: { energy: 0 } }, "item").vague.some(v => v.id === "consumable-spends-to-something"));
@@ -8536,7 +8556,7 @@ await (async () => {
   check("SNG-250 §4: a DEGRADED-only report is THIN, not clean (the severity fold must rank 'no findings' lowest)",
     born({ id: "i", name: "Trinket", kind: "misc", description: "It hums.", consumable: false }, "item").verdict === "thin");
   check("SNG-250 §4: a clean record still reports clean, and worst is null",
-    (() => { const r = born({ id: "i", name: "Axe", kind: "weapon", description: "d", consumable: false, bonusTags: ["strike"] }, "item"); return r.verdict === "clean" && r.worst === null; })());
+    (() => { const r = born({ id: "i", name: "Axe", kind: "weapon", description: "d", consumable: false, bonusTags: ["strike"], damageType: "physical" }, "item"); return r.verdict === "clean" && r.worst === null; })());
 
   // Two authors, two shapes. The `concrete` block is an ARRAY of rule objects for creature/item/skill
   // and a field->rule MAP for arc; the gate normalizes both so neither author has to change style.
@@ -9115,6 +9135,9 @@ await (async () => {
       { locationId: "crossing", sceneNpcNames: ["Pell"], communityId: "crossing", rules: RULES_R })));
 }
 
+
+;
+}
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

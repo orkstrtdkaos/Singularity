@@ -279,6 +279,26 @@ export function applyEvasion(p, o, playerDecl, oppDecl, sb, cm, setupBonus = 0) 
   return out.length ? out : null;
 }
 
+/** CCODE-83 — what KIND of harm is this craft's? Read from the craft, else from its tradition's default.
+ *  Content owns both; an unmapped craft has no type and resolves exactly as everything did before. */
+export function resolvedDamageType(decl, cm) {
+  if (!decl) return null;
+  const authored = decl.mechanic?.[decl.function]?.damageType ?? decl.mechanic?.damageType;
+  if (authored) return authored;
+  const byTradition = cm?.damageTypeByTradition || {};
+  return byTradition[decl.tradition] || byTradition[decl.powerSystem] || null;
+}
+
+/** CCODE-83 — how does this sheet answer that KIND? immune | resist | vulnerable | absorb | null.
+ *  A thing that EATS light is not heavily armoured against it; it is in a different relationship to it, which
+ *  is why this is separate from soak and applied before it. Unknown values are ignored, never guessed at. */
+export function affinityOf(sheet, type, sb) {
+  if (!type || !sheet) return null;
+  const legal = new Set((sb?.damageTypes?.affinities) || ["immune", "resist", "vulnerable", "absorb"]);
+  const v = sheet.affinity?.[type] ?? sheet.affinities?.[type] ?? null;
+  return v && legal.has(v) ? v : null;
+}
+
 /** CCODE-82: a SENSE step prepares - it must not be read as 'acting elsewhere' and drop a tended guard. */
 function senseStepEarly(phase, sb) { return phase === "sense" && (sb?.turn || {}).senseMovesMomentum !== true; }
 
@@ -742,17 +762,59 @@ export function battleRound({ playerDecl, oppDecl, playerSheet, oppSheet, state 
       // layers, so an authored foe with a hand-written `soak` keeps working unchanged.
       const pen = Math.max(0, Number(winDecl.penetration) || 0);
       const layers = Array.isArray(targetSheet?.soakLayers) ? targetSheet.soakLayers : null;
+
+      // CCODE-83 — DAMAGE HAS A KIND, and some things answer a kind rather than an amount.
+      //
+      // Aevi's CHECKS item A6, sharpened from two directions in one pass: `the_true_ground` soaks DECEPTION at
+      // rank 2 and NOTHING against a blade, and the bestiary's `the_bright_devourer` HEALS from light-family
+      // crafts. Ranked soak had a rank but no TYPE — so a ward against lies stopped a sword just as well, and a
+      // thing that eats light took damage from it like anything else.
+      //
+      // Two concepts, deliberately kept apart:
+      //  · a soak LAYER may name a type — it then answers only that type and is transparent to everything else;
+      //  · a sheet may carry an AFFINITY per type — immune / resist / vulnerable / absorb — applied BEFORE soak,
+      //    because absorbing light is not thicker skin, it is a different relationship to it.
+      // ABSORB is the one that changes the record's shape: the blow HEALS its target, so it is reported as a
+      // NEGATIVE amount with `absorbed` set, rather than quietly becoming zero and reading as a miss.
+      const dmgType = winDecl.damageType || resolvedDamageType(winDecl, cmCfg);
+      const aff = affinityOf(targetSheet, dmgType, sb);
+      const acfg = sb.damageTypes || {};
+      if (aff === "immune") hit = 0;
+      else if (aff === "resist") hit = Math.round(hit * (acfg.resistMult ?? 0.5));
+      else if (aff === "vulnerable") hit = Math.round(hit * (acfg.vulnerableMult ?? 1.5));
+
+      // A TYPED layer answers only its own type; an untyped layer answers everything, which is what every
+      // layer does today — so with nothing typed this arithmetic is identical to before.
+      const answers = l => !l.type || !dmgType || l.type === dmgType;
       const soak = layers
-        ? layers.filter(l => (Number(l.rank) || 1) > pen).reduce((a, l) => a + (Number(l.value) || 0), 0)
+        ? layers.filter(l => answers(l) && (Number(l.rank) || 1) > pen).reduce((a, l) => a + (Number(l.value) || 0), 0)
         : Math.max(0, Number(targetSheet?.soak) || 0);
       const cutThrough = layers
-        ? layers.filter(l => (Number(l.rank) || 1) <= pen).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
-      const landed = Math.max(dcfg.minHit ?? 1, hit - soak);
+        ? layers.filter(l => answers(l) && (Number(l.rank) || 1) <= pen).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
+      const wrongType = layers ? layers.filter(l => !answers(l)).reduce((a, l) => a + (Number(l.value) || 0), 0) : 0;
+      const landed = aff === "absorb"
+        ? -Math.max(1, Math.round(hit * (acfg.absorbMult ?? 1)))          // it FEEDS — a negative hit is healing
+        : aff === "immune" ? 0
+        : Math.max(dcfg.minHit ?? 1, hit - soak);
       damage = { side: roundWinner === "player" ? "opponent" : "player", amount: landed, verb: winDecl.function,
         by: winDecl.name || winDecl.function,
+        // CCODE-83: a blow that was EATEN, shrugged off or doubled must say so. Silently different arithmetic
+        // is indistinguishable from a bad roll — the same argument evasion needed.
+        ...(dmgType ? { damageType: dmgType } : {}),
+        ...(aff ? { affinity: aff } : {}),
+        ...(aff === "absorb" ? { absorbed: true } : {}),
+        ...(wrongType ? { soakBypassedByType: wrongType } : {}),
         ...(soak || cutThrough ? { rolled: hit, soaked: hit - landed, soak,
           ...(cutThrough ? { penetrated: cutThrough, penetration: pen } : {}) } : {}) };
-      if (roundWinner === "player" && opponentHealth != null) opponentHealth = Math.max(0, opponentHealth - landed);
+      // CCODE-83: `landed` is NEGATIVE when the target ABSORBS this damage type, so this same line heals it —
+      // but `Math.max(0, ...)` bounds only the floor, and an absorbing foe would have healed WITHOUT LIMIT,
+      // becoming unkillable by anyone who kept hitting it with the thing it eats. Thematic; still a bug.
+      // Feeding is capped at the creature's OWN maximum: it can be restored, never inflated.
+      if (roundWinner === "player" && opponentHealth != null) {
+        const ceiling = Number(oppSheet?.maxHealth ?? oppSheet?.health);
+        const next = opponentHealth - landed;
+        opponentHealth = Math.max(0, landed < 0 && Number.isFinite(ceiling) ? Math.min(ceiling, next) : next);
+      }
       // the PLAYER's health is the app's to apply (checkIncapacitation owns that exit) — reported, never written here
     }
   }

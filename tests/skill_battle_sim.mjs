@@ -1145,5 +1145,73 @@ check("CCODE-54: turning on someone mid-puzzle CLEARS the bounded thing — the 
 }
 
 
+
+// ---------- CCODE-83: DAMAGE HAS A KIND (Aevi's CHECKS A6) ----------
+// Sharpened from two directions in one authoring pass: the_true_ground soaks DECEPTION at rank 2 and NOTHING
+// against a blade, and the bestiary's the_bright_devourer HEALS from light-family crafts. Ranked soak had a
+// rank but no TYPE, so a ward against lies stopped a sword just as well and a thing that eats light took
+// damage from it like anything else.
+{
+  const dRules = { ...rules, craftMechanics: JSON.parse(readFileSync(join(root, "content/packs/core/rules/craft_mechanics.json"), "utf8")) };
+  const dBase = synthesizeOpponentSheet({ name: "foe", threat: 45 }, sb);
+  const dSeed = () => { let s = 21; return () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; }; };
+  const strike = (oppSheet, type, n = 900) => {
+    const rng = dSeed(); let tot = 0, hits = 0, last = null;
+    for (let k = 0; k < n; k++) {
+      const out = battleRound({
+        playerSheet: { attributes: { practical: 8 }, energy: 100, level: 10 }, oppSheet,
+        playerDecl: { function: "strike", tier: 3, attribute: "practical", intensity: "standard", mechanic: { strike: type ? { damageType: type } : {} } },
+        oppDecl: { function: "shield", tier: 1, attribute: "practical", intensity: "standard" },
+        state: { momentum: 0, effects: [], opponentHealth: 99999 }, rules: dRules, sb, steps, rng });
+      if (out.damage?.side === "opponent") { tot += out.damage.amount; hits++; last = out.damage; }
+    }
+    return { avg: tot / Math.max(1, hits), hits, last };
+  };
+
+  const plain = strike(dBase, "light");
+  const resist = strike({ ...dBase, affinity: { light: "resist" } }, "light");
+  const vuln = strike({ ...dBase, affinity: { light: "vulnerable" } }, "light");
+  const immune = strike({ ...dBase, affinity: { light: "immune" } }, "light");
+  const absorb = strike({ ...dBase, affinity: { light: "absorb" } }, "light");
+
+  check("CCODE-83: RESIST takes less and VULNERABLE takes more of its own damage type",
+    resist.avg < plain.avg && vuln.avg > plain.avg, `${resist.avg.toFixed(1)} < ${plain.avg.toFixed(1)} < ${vuln.avg.toFixed(1)}`);
+  check("CCODE-83: IMMUNE takes nothing at all (not merely a small amount)", immune.avg === 0);
+  check("CCODE-83: ABSORB HEALS - a negative amount, flagged, never a silent zero that reads as a miss",
+    absorb.avg < 0 && absorb.last.absorbed === true && absorb.last.affinity === "absorb");
+  check("CCODE-83: an affinity a sheet does not declare changes nothing (unknown values are ignored, not guessed)",
+    Math.abs(strike({ ...dBase, affinity: { light: "nonsense" } }, "light").avg - plain.avg) < 0.001);
+  check("CCODE-83: a craft with NO damageType is unaffected by any affinity (the whole catalog today)",
+    Math.abs(strike({ ...dBase, affinity: { light: "immune" } }, null).avg - strike(dBase, null).avg) < 0.001);
+  check("CCODE-83: the receipt names the TYPE, so a blunted blow reads as blunted rather than as a bad roll",
+    plain.last.damageType === "light");
+
+  // the_true_ground: a ward that answers ONE type and is transparent to everything else
+  const trueGround = { ...dBase, soakLayers: [{ rank: 2, value: 8, type: "deception" }] };
+  const vsLie = strike(trueGround, "deception"), vsBlade = strike(trueGround, "blade");
+  check("CCODE-83: a TYPED soak layer answers its own type (the_true_ground soaks DECEPTION)",
+    vsLie.avg < vsBlade.avg, `${vsLie.avg.toFixed(1)} vs ${vsBlade.avg.toFixed(1)}`);
+  check("CCODE-83: ...and is transparent to everything else - the lie-ward does not stop a sword",
+    vsBlade.last.soakBypassedByType === 8);
+
+  // The bug this nearly shipped with: `Math.max(0, health - landed)` bounds only the FLOOR, so a negative
+  // landed healed WITHOUT LIMIT and an absorbing foe became unkillable by anyone who kept feeding it.
+  {
+    const dev = { ...dBase, affinity: { light: "absorb" } };
+    const rng = dSeed(); let hp = 1;
+    for (let k = 0; k < 40; k++) {
+      const out = battleRound({
+        playerSheet: { attributes: { practical: 8 }, energy: 100, level: 10 }, oppSheet: dev,
+        playerDecl: { function: "strike", tier: 3, attribute: "practical", intensity: "standard", mechanic: { strike: { damageType: "light" } } },
+        oppDecl: { function: "shield", tier: 1, attribute: "practical", intensity: "standard" },
+        state: { momentum: 0, effects: [], opponentHealth: hp }, rules: dRules, sb, steps, rng });
+      if (out.damage?.side === "opponent") hp = out.state.opponentHealth;
+    }
+    check("CCODE-83: feeding an absorber is capped at its OWN maximum - it is restored, never inflated",
+      hp <= dev.health, `healed to ${hp} against a max of ${dev.health}`);
+  }
+}
+
+
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

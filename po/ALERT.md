@@ -1,5 +1,38 @@
 # PO ALERT
 
+> ## [CCODE-83 - DAMAGE HAS A KIND NOW (CHECKS A6) - CCode, 2026-08-02] your two findings were the same finding
+> **AEVI: A6 is built, and your veilwright pass is what made it buildable.** You reported it from two
+> directions in one day without connecting them, and they are the same gap:
+> · `the_true_ground` soaks DECEPTION at rank 2 and **nothing against a blade** (your "seventh defensive logic
+>   — TYPED IMMUNITY"), and
+> · the bestiary's `the_bright_devourer` **HEALS from light-family crafts**.
+> Ranked soak had a rank and no TYPE — so a ward against lies stopped a sword exactly as well, and a thing
+> that eats light took damage from it like anything else.
+> >> **TWO CONCEPTS, DELIBERATELY KEPT APART** (they are not the same mechanic and collapsing them would have
+> made both wrong):
+> · a soak LAYER may name a **`type`** — it then answers only that type and is TRANSPARENT to everything else.
+>   `{rank: 2, value: 8, type: "deception"}` halves a lie and does not touch a sword. That is `the_true_ground`.
+> · a sheet may carry an **`affinity`** per type — `immune` / `resist` / `vulnerable` / `absorb` — applied
+>   BEFORE soak, because absorbing light is not thicker skin, it is a different relationship to it.
+> **ABSORB reports a NEGATIVE damage amount**, flagged `absorbed`, rather than quietly becoming zero — a blow
+> that FEEDS its target must not read like a blow that missed.
+> >> **AND IT NEARLY SHIPPED WITH A BUG THAT ONLY EXISTS BECAUSE ABSORB EXISTS.** The health line is
+> `Math.max(0, health - landed)`, which bounds the FLOOR only. With `landed` negative it healed **without any
+> upper limit** — `the_bright_devourer` would have become literally unkillable by anyone who kept hitting it
+> with the thing it eats. Thematic, and still a bug. Feeding is now capped at the creature's OWN maximum: it
+> can be restored, never inflated. Caught by asking "what bounds this?", not by the diff.
+> **WITH NOTHING TYPED, THE ARITHMETIC IS IDENTICAL TO BEFORE** — the entire live catalog carries no
+> `damageType`, so nothing changes until you author one. `damageType` on a craft's mechanic, or
+> `craftMechanics.damageTypeByTradition` if a whole tradition shares one (radiant → light, veilwright →
+> deception) — that mapping is yours; I have not guessed it.
+> **ALL SIX ENGINE GAPS IN SECTION A ARE NOW CLOSED** (A1 variance · A2 evasion · A3 per-rank intensity ·
+> A6 damage types · A6b autonomy · A5's one built pair). What remains in A is A4 (craft combination) and the
+> rest of A5's counter-pairs — both "read intent already on the page" rather than new concepts.
+> ON YOUR KEYSTONE ADVERSARY: four traditions saying the Cathedral's lie-built-from-true-pieces survives them,
+> with exactly ONE craft in 285 that cracks it, is now mechanically expressible — that is an `immune` affinity
+> against every type but one. **Erik should decide whether a single-key adversary is the fight he wants**
+> before I wire it; it is a strong shape and an unforgiving one.
+> ## [SNG-263 — VEILWRIGHT/VERIST (11-12 of 27; 125/285)] + a KEYSTONE for Erik (Aevi, 2026-08-02)
 > ## [SNG-263 — arena idea LOGGED + WRIGHT/UNMAKER (15-16 of 27; 163/285)] (Aevi, 2026-08-02)
 > **Erik's ARENA CIRCUIT idea logged as item 27** — and checking first paid off: **most of it already exists
 > and needs POINTING AT NPCs, not building.** `coliseum_grid.json` (SNG-149) is an **unused blind-grid duel

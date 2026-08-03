@@ -139,7 +139,13 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
     `the_whole_truth` is authored as **"THE ONLY THING THAT CRACKS A LIE BUILT FROM TRUE PIECES."**
     **Exactly one craft in 285 answers it.** That is a designed keystone, and it is a MECHANIC rather than
     flavour: the Cathedral encounter should be genuinely unsolvable without that craft or a true equivalent.
-    **ERIK: this wants your confirmation** — it is the strongest single piece of adversary design in the
+    **ERIK ANSWERED (2026-08-02) — AND HIS FIX IS BETTER THAN MINE.** I proposed a second NON-CRAFT route
+    (evidence, testimony). He proposed a **PERSON**: author a known NPC who can wield the craft, plus a quest
+    to win him into the party — so a player who doesn't want to spend a T-V capstone can **earn the man who
+    has it.** The lock keeps its single key (preserving what four traditions independently authored); the key
+    becomes findable **two ways**. Authored as `po/staged_content/the_second_key_witness_oren.json` —
+    **Oren Vale, called the Witness**, with the quest *The Weight of Saying*. **RESOLVED.**
+    *(superseded note)* **ERIK: this wants your confirmation** — it is the strongest single piece of adversary design in the
     catalog and it was authored before any of this pass.
 
 ---

@@ -65,7 +65,57 @@
    "gated": "learned",
    "nativeOrCombination": "native",
    "wildVariance": true,
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "potency",
+    "variance",
+    "control"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 4,
+    "variance": 5,
+    "note": "T-III construct with the roster's HIGHEST variance: 'generous and strong, but NEVER EXACTLY AS AIMED.' The craft's identity IS its unreliability."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "control",
+     "delta": "you may now name the SHAPE of what you want — a weapon, a warmth, a way through — and the wild current provides it (variance narrows, potency rises)",
+     "from": "r2 grants — the increment buys CONTROL, which for this craft is the scarce thing"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE WILD CURRENT BEGINS TO KNOW YOU — gifts arrive UNASKED at the edge of need. Not reliably, never on command, but often enough.",
+     "from": "r3 grants — unbidden provision is a kind-change, and it is also a RELATIONSHIP"
+    }
+   ],
+   "intensity": {
+    "conserve": "ask small — half the potency, and much closer to what you asked for",
+    "surge": "ask large: double the potency, and THE SIDEWAYS-NESS GROWS WITH THE ASKING"
+   },
+   "bounds": [
+    {
+     "text": "you CANNOT CONTROL ITS PRECISE FORM — it gives its own way rather than yours",
+     "class": "hard"
+    },
+    {
+     "text": "THE SHAPE HOLDS; NOTHING INSIDE IT DOES",
+     "class": "hard"
+    },
+    {
+     "text": "ask larger and THE SIDEWAYS-NESS GROWS",
+     "class": "cost"
+    },
+    {
+     "text": "BEING KNOWN BY THE CHURN RUNS BOTH DIRECTIONS — it takes an interest",
+     "class": "cost"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -116,7 +166,47 @@
    "gated": "learned",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
-   "wildVariance": true
+   "wildVariance": true,
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "variance",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 6,
+    "scope": 4,
+    "variance": 6,
+    "note": "T-IV, incapacitating. r1: a wild flowering of tangled growth-and-ruin — potent, beautiful, BEYOND PRECISE CONTROL"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the flowering takes A DISTRICT rather than a room, and WHAT IT MAKES NOW LASTS — days rather than moments — before the tangle takes it back",
+     "from": "r2 grants — persistence at district scale is the T-IV kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small flowering — half the scope, and the tangle takes it back quickly",
+    "surge": "double the flowering; the larger it is, the less it can be aimed at anything"
+   },
+   "bounds": [
+    {
+     "text": "IT CANNOT BE AIMED AT PURE CREATION OR PURE DESTRUCTION — it is always both",
+     "class": "hard"
+    },
+    {
+     "text": "what it makes WILL be taken back by the tangle",
+     "class": "hard"
+    },
+    {
+     "text": "the larger the flowering, the less aimable",
+     "class": "hard"
+    }
+   ]
   },
   {
    "schemaVersion": 1,
@@ -167,7 +257,41 @@
    "gated": "learned",
    "nativeOrCombination": "native",
    "harmRung": "incapacitating",
-   "wildVariance": true
+   "wildVariance": true,
+   "shape": "construct",
+   "operativeAxis": [
+    "bindStrength",
+    "variance"
+   ],
+   "mechanic": {
+    "magnitude": 7,
+    "duration": 720,
+    "variance": 5,
+    "note": "T-IV. THE WILD-CURRENT CRAFT seeded innately to abyssal origins (origins.json wildCurrent). 'The terms exact, THE FULFILLING UNCONTROLLABLE.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a bargain may be struck WITH WHAT IS NOT A PERSON — a place, a current, A THING THAT SIMPLY PERSISTS",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small bargain — half the binding, and the fulfilling stays near what you meant",
+    "surge": "double it; THE TERMS ARE EXACT AND THE FULFILLING IS UNCONTROLLABLE"
+   },
+   "bounds": [
+    {
+     "text": "IT NEEDS A GENUINE BARGAIN TO BIND",
+     "class": "hard"
+    },
+    {
+     "text": "IT IS FAIR TO THE LETTER — and at this scale that is COLD",
+     "class": "hard"
+    }
+   ]
   }
  ]
 }

@@ -1,6 +1,43 @@
 # PO ALERT
 
-> ## [CCODE-120 - THE SIM ON THE NEW LADDER, AND THE HEROES DO NOT DIE - CCode, 2026-08-03]
+> ## [THE THIRD ACTION — strikes and crusades. Erik closed a hole I opened.] (Aevi, 2026-08-03)
+> **⚠️ FIRST, A STALENESS FLAG ON THE SIM TABLE:** the quoted run (60 legendary / 5 epic / 1 regional) is
+> **pre-re-tier.** The roster is now **11 / 27 / 28**, live and CI-green — *"the valley has no heroes"* is
+> fixed, and the `regional` 66.7% death rate was **a sample of one figure** where there are now 28. **The table
+> wants re-running before anyone tunes against it.**
+> **THE HOLE I OPENED:** my `engages` proposal gives stillhold **0.15**, numinous and veilwright 0.4 — so under
+> the two-population model (FIGHT or WORK) **they are effectively immune. Nothing can reach a worker.** That
+> makes **pacifism the dominant strategy**: never fight, take no casualties, push steadily, win every long arc
+> by attrition. **Not a peace tradition rewarded for virtue — an exploit wearing a virtue's clothes.**
+> **ERIK'S FIX IS A THIRD ACTION**, and it's the one the model was missing. **STRIKE** reaches *past* the
+> enemy's engaged pool to hit a **worker** — drawn from the striker's own *working* pool (a striker isn't in the
+> melee; that's the point), resolved as an **asymmetric** battleRound because the target isn't braced, and
+> **rare** (~0.08 against engageRate's 0.35). A strike is an **event**, not a pass-by-pass action.
+> **TWO KINDS, AND THE OPPOSITE PRICES ARE THE WHOLE DESIGN:**
+> · **THE QUIET WORK** (umbral · veilwright · abyssal · ashwarden) — targets **the most VALUABLE worker**: you
+>   kill whoever is actually moving the arc. Pays in **EXPOSURE** — a failed strike doesn't wound the striker,
+>   **it identifies them**, raising the rate they're targeted in return. *That cost is the crafts' own bound
+>   made into a world mechanic:* `the_never_there` leaves no trace — **"a Verity-reader may feel the ABSENCE
+>   itself."**
+> · **THE CRUSADE** (blazeborn · seraphic · verist · marcher) — targets **the most HATED worker**: not the
+>   strongest, **the one doing the thing they cannot bear.** Declared; the target knows and so does everyone.
+>   Pays in **COMMITMENT** — the crusader's attention budget goes to **zero on everything else**, so **a crusade
+>   creates vacancies on its own side**, paid up front and visible. Grounded in `ascent` r3's bound: ***"if you
+>   are wrong, the judgment binds anyway."*** **A crusade against the wrong person is that bound at world
+>   scale, and it should be able to happen.**
+> **Same effect, opposite method, opposite currency — and morally even**, which the catalog has been consistent
+> about throughout: *a declared campaign to destroy someone who was tending a wood is not obviously better than
+> a knife in the dark.*
+> **What it fixes:** pacifism stops being dominant (stillhold still rarely fights — but **can be reached**, and
+> a tradition whose method is standing still is exactly who an assassin can find) · **umbral and veilwright get
+> a world-scale role** they had none of at low engagement · and the death table gains **a second axis**: figures
+> die by **tier gap** in the melee and by **being worth killing** in the back line. **A high-weight worker
+> becomes the most dangerous thing to be** — true of every real conflict, and currently not true here.
+> It also gives `ws.arcVacancies` its best case: *"the Burning Certainty left three fronts to hunt one man, and
+> the poles moved while he was gone."*
+> **⚠️ THE BIG OPEN QUESTION FOR ERIK: can the PLAYER be struck this way?** A party that parks a healer safely
+> behind the line **is exactly the back-line target this system models.** I lean **yes** — it would be the
+> sharpest consequence in the game.> ## [CCODE-120 - THE SIM ON THE NEW LADDER, AND THE HEROES DO NOT DIE - CCode, 2026-08-03]
 > **Ran it both ways, 6 worlds × 3 years each. TODAY behaves as expected. THE PREVIEW DOES NOT, and the
 > failure is worth more than the success.**
 > **TODAY (live roster, 60/5/1):** `legendary 2.5% · epic 6.7% · regional 16.7%` — death rate rises as tier

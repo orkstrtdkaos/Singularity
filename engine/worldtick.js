@@ -67,7 +67,12 @@ function arcStageNow(content, character, arcId) {
   const total = (arc?.stages || []).length || base;
   const { mine, others, epic, legacyStage } = arcPushes(character, arcId);
   if (legacyStage != null) return Math.max(1, Math.min(total, legacyStage)); // 2A back-compat
-  return Math.max(1, Math.min(total, base + mine + others + epic));
+  // CCODE-116: ROUND. A stage is a DISCRETE, NAMED rung ("Drift", "The Widening") that content indexes by
+  // number — but pushes became fractional the moment attention shares, urgency and contest margins started
+  // scaling them (CCODE-111/113/115), and this returned 2.3513513513513513. That is not a stage; it is a
+  // stage-shaped number, and it would have reached the player as "Stage 2.35" and broken every lookup keyed
+  // on the rung. The PUSH stays continuous — that is where the nuance belongs — and only the READOUT rounds.
+  return Math.max(1, Math.min(total, Math.round(base + mine + others + epic)));
 }
 
 /** SNG-203 §3: the PUBLIC face of where the world arcs stand — the readable "state of the world" every

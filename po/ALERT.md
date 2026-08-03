@@ -1,5 +1,31 @@
 # PO ALERT
 
+> ## [CCODE-116 - THE WORLD, WITH AND WITHOUT PLAYERS. 10 + 24 WORLDS, THREE YEARS EACH. - CCode, 2026-08-03]
+> **WITHOUT PLAYERS — 10 worlds × 1,080 days:** the valley is **stable and bleak**. Arcs land in the same
+> place every time (`manifestation storm −41.9 · what wakes beneath +12.8 · block bleed +1.4 · poles pull −18
+> · green schism 0`), **1.8 legends die of 66 (3%)**, 0.8 are wounded, and **51.6 wants resolve**. The world
+> is busy — people fight, get hurt, finish things — and it goes nowhere. **An equilibrium, not a destiny.**
+> **WITH PLAYERS — 24 worlds × 1,080 days, parties of 0/1/3/6:**
+> >> `the poles pull — party 0/1: stage 1 · PARTY 3+: stages 1-4`
+> >> `what wakes beneath — party 0/1: stage 4 · party 3+: 1-4 (they can PULL IT BACK)`
+> >> `block bleed — party 0: 2 · any party: 1-3`
+> >> `green schism — party 0: 1 · party 1: 1-2 · party 3+: 1-3`
+> >> `manifestation storm — stage 1 at EVERY party size` ← the one arc no party could touch
+> **THE SHAPE OF IT, and it is a good shape:**
+> · **A LONE PLAYER MOVES ONE ARC** (`green schism`, the thinly-held one — 3 figures). A party of three moves
+>   four of five. **Scale of effort maps to scale of consequence.**
+> · **`manifestation storm` RESISTS EVERYONE** — 41 points of accumulated pressure and stage 1 at every party
+>   size. **The valley has a problem no party can solve.** Nobody designed that; it fell out of 66 figures'
+>   authored wants. It is either the best thing in this report or a bug, and **that is Erik's call**.
+> · **A LONE PLAYER IS CONTESTED MOST (9 instances vs 5 for a party of six).** Being outnumbered is visible;
+>   being strong enough stops being a fight and starts being a fact.
+> **AND THE RUN CAUGHT A REAL BUG: `block bleed` read STAGE 2.351351351351351.** Stages are DISCRETE, NAMED
+> rungs that content indexes by number, and fractional pushes have been leaking into them ever since attention
+> shares, urgency and contest margins started scaling (CCODE-111/113/115). That would have reached a player as
+> *"Stage 2.35"* and broken every lookup keyed on the rung. **The PUSH stays continuous — that is where the
+> nuance belongs — and only the READOUT rounds.** Verified: a push of 1.3513 now reads *stage 2, "The Bleed"*.
+> **I would not have found it by reading the code.** It only showed up because a range printed across six
+> worlds and one column had sixteen decimal places in it.
 > ## [CCODE-115 - MOST PEOPLE WORK AT A THING; SOME FIGHT OVER IT - CCode, 2026-08-03]
 > **ERIK, both points taken and the second is the bigger one:** *"legends can probably take on more than one
 > epic or heroic... plus I would imagine a lot of people getting hurt or dying this way — not everything is a

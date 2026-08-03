@@ -1,0 +1,981 @@
+{
+ "schemaVersion": 1,
+ "id": "creation_destruction_axis_mechanics",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Locked CCODE-64 schema; dice final for their tier; SNG-264 §3 bound classes.",
+ "note": "SNG-263 catalog pass, traditions 15 AND 16 of 27 — WRIGHT and UNMAKER, the creation/destruction axis, 7th antipode pair. THE MOST MORALLY SYMMETRICAL PAIR IN THE CATALOG: both T-I senses carry the SAME warning, in the same shape — makers_eye 'seeing what could be made is not knowing WHETHER IT SHOULD BE'; fault_sense 'seeing the fault does not tell you WHETHER TO PRESS IT'. Neither tradition is the good one. Both are authored as a capacity that outruns its own judgement.",
+ "boundClasses": {
+  "soft": "a limit of SKILL — sustained mastery erodes it",
+  "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
+  "cost": "the price stays but its FORM changes with mastery"
+ },
+ "traditions": {
+  "wright": [
+   {
+    "id": "makers_eye",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "make",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "foresight"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "see the BETTER FORM a thing is capable of, and THE SHORTEST ROAD TO IT",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "foresight",
+      "delta": "SPECIAL: see what a thing, a place, OR A PERSON is REACHING TOWARD — the shape it would take if nothing stopped it",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a look at the materials — half the vision, and you can set it down",
+     "surge": "double the sight; THERE IS ALWAYS A BETTER SHAPE, and Wrights at this rank cannot leave things alone"
+    },
+    "bounds": [
+     {
+      "text": "SEEING WHAT COULD BE MADE IS NOT KNOWING WHETHER IT SHOULD BE",
+      "class": "hard"
+     },
+     {
+      "text": "THERE IS ALWAYS A BETTER SHAPE — Wrights at this rank cannot leave things alone",
+      "class": "cost"
+     },
+     {
+      "text": "SEEING WHAT SOMEONE COULD BE is the most seductive and most dangerous use of it",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Its r3 turns the craft on PEOPLE — 'see what a PERSON is reaching toward' — and the bound immediately names that as 'the most seductive and most dangerous use.' The tradition arms its own worst temptation and then labels it. Compare unmaker's fault_sense: identical structure, opposite verb."
+   },
+   {
+    "id": "the_raised_thing",
+    "tier": 1,
+    "functions": [
+     "make",
+     "mend"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "speed",
+     "durability"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 72
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "durability",
+      "delta": "what you make HOLDS UNDER PRESSURE — weather, weight, time, a fight; others would not have to repair it",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: make something that will BE HERE LONG AFTER YOU — found and used by people who do not know your name",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "throw it up fast — half the durability, and it is standing now",
+     "surge": "double the soundness; SOUND IS NOT FINISHED, and the restlessness is not a flaw the Wrights have solved"
+    },
+    "bounds": [
+     {
+      "text": "QUICK IS NOT SOUND — raised things want tending",
+      "class": "hard"
+     },
+     {
+      "text": "SOUND IS NOT FINISHED — the restlessness is not a flaw the Wrights have solved",
+      "class": "cost"
+     },
+     {
+      "text": "YOU WILL NOT SEE WHAT BECOMES OF IT",
+      "class": "cost"
+     }
+    ]
+   },
+   {
+    "id": "makecraft",
+    "tier": 2,
+    "functions": [
+     "make",
+     "mend",
+     "shield",
+     "sustain"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "quality",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 168,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "quality",
+      "delta": "make a thing BETTER THAN IT WAS — improve in the making, so what you raise EXCEEDS what stood",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: deliberately leave a made thing INCOMPLETE — and it KEEPS MAKING ITSELF, growing on, adapting, never done",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "build it plain — half the quality, and it is exactly what was asked for",
+     "surge": "double it; BETTER BY WHOSE MEASURE? The Wrights improve what nobody asked them to improve"
+    },
+    "bounds": [
+     {
+      "text": "QUICK IS NOT SOUND",
+      "class": "hard"
+     },
+     {
+      "text": "BETTER BY WHOSE MEASURE? — the Wrights improve what nobody asked them to improve",
+      "class": "cost"
+     },
+     {
+      "text": "IT NEVER STOPS — the Forge-Eternal is what a whole city of this becomes",
+      "class": "cost"
+     }
+    ],
+    "designNote": "Direct antipode of unmaker's the_open_material: makecraft r3 makes a thing that NEVER STOPS MAKING ITSELF; the_open_material r3 returns a thing to BEFORE IT BECAME THAT SPECIFIC THING. Creation without end vs. return to the unformed, at the same tier and rank."
+   },
+   {
+    "id": "the_weapon_at_hand",
+    "tier": 2,
+    "functions": [
+     "make",
+     "strike"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "speed"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.02,
+     "note": "damaging. The craft MAKES the weapon; the striking is what the weapon then does."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "speed",
+      "delta": "build a weapon FAST ENOUGH TO MATTER IN A FIGHT and good enough to be dangerous — not a masterwork, THE RIGHT THING NOW",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: look at the materials and SEE THE WEAPON THEY ALREADY ARE — build it in moments, exactly what this situation needs",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "something serviceable — half the weapon, made in half the time",
+     "surge": "double the work; a weapon made in haste is still a weapon you made"
+    },
+    "bounds": [
+     {
+      "text": "it makes a WEAPON, not a warrior — it does not swing itself",
+      "class": "hard"
+     },
+     {
+      "text": "requires MATERIALS AT HAND — a bare room offers nothing",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "the_work_speaks",
+    "tier": 2,
+    "functions": [
+     "command",
+     "reveal"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "authority",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 6,
+     "targets": 4,
+     "note": "SOCIAL attribute"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "authority",
+      "delta": "your work is known enough that NAMING YOURSELF commands genuine respect and OPENS DOORS THAT STAY CLOSED to others",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: THE THING YOU BUILT IS THE ARGUMENT AND THE EVIDENCE — anyone who has seen it cannot pretend otherwise",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "show the work — half the weight, and it speaks only for itself",
+     "surge": "double it; a reputation built on work is a reputation that must keep producing work"
+    },
+    "bounds": [
+     {
+      "text": "IT REQUIRES REAL WORK TO SHOW — a Wright with nothing built carries nothing",
+      "class": "hard"
+     },
+     {
+      "text": "a reputation built on work MUST KEEP PRODUCING WORK",
+      "class": "cost"
+     }
+    ],
+    "designNote": "SEVENTH tradition refusing coercion mechanically — this one by requiring PROOF OF WORK. With harmonic_voice, steady_soul, the_weight_of_practice, the_weight_of_truth, the_weight_of_presence and the_necessary_case: seven traditions, seven different routes, all refusing to let influence be simply TAKEN."
+   },
+   {
+    "id": "the_built_way",
+    "tier": 2,
+    "functions": [
+     "make",
+     "open",
+     "travel"
+    ],
+    "shape": "reposition",
+    "operativeAxis": [
+     "access",
+     "range"
+    ],
+    "mechanic": {
+     "range": 10,
+     "push": 0,
+     "magnitude": 4,
+     "duration": 48
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "access",
+      "delta": "open a way through or across ANY natural or built obstacle by CONSTRUCTING what is needed — not by force, BY CRAFT",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: build a path WHERE THERE WAS TRULY NONE — spanning what should not be spanned, opening what was sealed — and have it HOLD",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a quick span — half the reach, and it comes down easily",
+     "surge": "double it; what you build to cross by, others will cross by too"
+    },
+    "bounds": [
+     {
+      "text": "IT TAKES TIME AND MATERIALS — craft is not force",
+      "class": "hard"
+     },
+     {
+      "text": "WHAT YOU BUILD TO CROSS BY, OTHERS WILL CROSS BY TOO",
+      "class": "cost"
+     }
+    ],
+    "designNote": "EIGHTH terrain-gated travel craft, and the only one that MAKES its own terrain: where root_road needs life, grey_road needs death, shadowstep needs shadow, the_built_way BUILDS THE ROAD. The creation pole's travel craft creates its own medium — and pays for it by leaving the road behind for everyone else."
+   },
+   {
+    "id": "the_ongoing_work",
+    "tier": 2,
+    "functions": [
+     "empower",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "targets",
+     "autonomy"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 12,
+     "targets": 4,
+     "note": "PHYSICAL attribute — the work is the anchor"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "sustain YOURSELF AND YOUR PARTY through hardship by making useful things — shelter, tools, warmth, structure",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "autonomy",
+      "delta": "SPECIAL: START SOMETHING BUILDING AND LEAVE IT — the structure grows, the mechanism runs, THE WORK CONTINUES",
+      "from": "r3 grants — a FIFTH autonomy-increment craft"
+     }
+    ],
+    "intensity": {
+     "conserve": "keep your hands busy — half the relief, and it asks nothing",
+     "surge": "double it; you must actually BE MAKING SOMETHING — idleness ends it"
+    },
+    "bounds": [
+     {
+      "text": "YOU MUST ACTUALLY BE MAKING SOMETHING — the work is the anchor, and idleness ends it",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "the_true_making",
+    "tier": 3,
+    "functions": [
+     "make",
+     "mend"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "quality",
+     "scope",
+     "permanence"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 8760,
+     "scope": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "quality",
+      "delta": "bring a made thing BACK TO TRUE rather than patching — find where the making was CUT SHORT and finish it",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "scope",
+      "delta": "make AT SCALE AND FOR TIME — a hall, a bridge, a road built so completely that GENERATIONS use it without knowing your name",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "make it sound — half the scope, and it is finished today",
+     "surge": "double it; SCALE MULTIPLIES THE TIME AND CARE, NEVER REDUCES IT"
+    },
+    "bounds": [
+     {
+      "text": "IT MAKES THE MADE, NOT THE LIVING",
+      "class": "hard"
+     },
+     {
+      "text": "IT CANNOT BE HURRIED without ceasing to be true making",
+      "class": "hard"
+     },
+     {
+      "text": "SCALE MULTIPLIES THE TIME AND CARE, NEVER REDUCES IT",
+      "class": "hard"
+     }
+    ]
+   },
+   {
+    "id": "the_reforging",
+    "tier": 4,
+    "functions": [
+     "make",
+     "mend"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "restoration",
+     "permanence"
+    ],
+    "mechanic": {
+     "magnitude": 7,
+     "duration": 8760,
+     "note": "T-IV. 'Reforge a broken thing so ITS BREAK BECOMES ITS STRENGTH.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: work breaks THAT SHOULD BE PAST WORKING — a thing shattered rather than cracked, broken many times over. The more breaks worked in, the more the thing becomes ABOUT its breaking.",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "mend the break — half the transformation, and it is simply repaired",
+     "surge": "double it; THE MORE BREAKS WORKED IN, THE MORE THE THING BECOMES ABOUT ITS BREAKING"
+    },
+    "bounds": [
+     {
+      "text": "IT WORKS ON THE MADE, NOT THE LIVING",
+      "class": "hard"
+     },
+     {
+      "text": "IT NEEDS A TRUE BREAK to work — an undamaged thing offers nothing",
+      "class": "hard"
+     },
+     {
+      "text": "the more breaks worked in, THE MORE THE THING BECOMES ABOUT ITS BREAKING",
+      "class": "cost"
+     }
+    ],
+    "designNote": "The catalog's most beautiful craft, and the pair's thesis in one line: the creation tradition's T-IV makes a break INTO the strength. It is the exact answer to unmaker's the_undoing_word (unmake an assembled thing back to unbound parts) — one tradition ends what was made; the other makes the ending into the thing."
+   },
+   {
+    "id": "the_masterwork",
+    "tier": 5,
+    "functions": [
+     "empower",
+     "make"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "quality",
+     "permanence"
+    ],
+    "mechanic": {
+     "magnitude": 9,
+     "duration": 87600,
+     "scope": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: make a SINGLE MASTERWORK that gathers a lifetime's craft into ONE ENDURING, TEACHING THING. The capstone is a KIND (a work that teaches after you) at near-total cost.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — a half-made masterwork is an unfinished work, and the Wrights are unsentimental about those.",
+     "surge": "REFUSED — it already demands nearly all you have."
+    },
+    "bounds": [
+     {
+      "text": "IT DEMANDS REAL TIME AND NEARLY ALL YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "IT STANDS AS A PROMISE you must then live up to",
+      "class": "cost"
+     }
+    ],
+    "designNote": "THIRTEENTH capstone, identical register. Note it is a TEACHING thing — the only capstone in the catalog whose product outlives the wielder in order to INSTRUCT. Compare the_deep_works (enginewright): both make at world-scale, but the enginewright's changes who you are and the wright's teaches who comes after."
+   }
+  ],
+  "unmaker": [
+   {
+    "id": "fault_sense",
+    "tier": 1,
+    "functions": [
+     "foresee",
+     "reveal"
+    ],
+    "shape": "setup",
+    "operativeAxis": [
+     "perceptionDepth",
+     "foresight"
+    ],
+    "mechanic": {
+     "magnitude": 3,
+     "duration": 1,
+     "note": "PHYSICAL attribute — the unmaker reads stress in the body of a thing"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "perceptionDepth",
+      "delta": "find THE ONE PIECE whose failure brings the rest — THE KEYSTONE OF THE COLLAPSE",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "foresight",
+      "delta": "SPECIAL: read the ENTIRE ARC of a thing's decline — how it will end, IN WHAT ORDER, and how long it has",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a glance at the stress — half the depth, and you can look away",
+     "surge": "double the read; YOU WILL BE RIGHT, AND NOBODY WILL WANT TO HEAR IT"
+    },
+    "bounds": [
+     {
+      "text": "SEEING THE FAULT DOES NOT TELL YOU WHETHER TO PRESS IT",
+      "class": "hard"
+     },
+     {
+      "text": "FINDING IT MAKES YOU RESPONSIBLE FOR KNOWING IT — you cannot un-see it",
+      "class": "cost"
+     },
+     {
+      "text": "YOU WILL BE RIGHT, AND NOBODY WILL WANT TO HEAR IT",
+      "class": "cost"
+     }
+    ],
+    "designNote": "The mirror of makers_eye, structurally identical: both T-I senses see a POSSIBILITY (what could be made / how it will fail), and both immediately bound it with 'seeing is not knowing whether you should.' SEVENTH pair, seventh time the T-I senses carry the axis — and the first time the two senses carry the same MORAL rather than opposite objects."
+   },
+   {
+    "id": "ruinwork",
+    "tier": 2,
+    "functions": [
+     "break",
+     "open",
+     "reveal"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "precision"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 6
+     },
+     "plus": 0,
+     "marginFloorPer": 0.03,
+     "note": "The higher marginFloorPer matches enginewright's the_fault_strike: precision traditions reward a decisive margin over raw force."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "precision",
+      "delta": "BREAK PRECISELY AT THE FAULT — the thing comes apart WHERE YOU CHOSE and nowhere else",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: END A THING WELL — a building, an institution, a life's work, a war — SO THAT WHAT IT WAS IS HONORED and what comes after is cleaner",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "a small break — half the force, exactly where you meant",
+     "surge": "double it; PRECISE IS NOT REVERSIBLE — a clean break is still a break"
+    },
+    "bounds": [
+     {
+      "text": "SEEING THE FAULT IS NOT BEING RIGHT THAT IT SHOULD BE BROKEN",
+      "class": "hard"
+     },
+     {
+      "text": "PRECISE IS NOT REVERSIBLE — a clean break is still a break",
+      "class": "hard"
+     },
+     {
+      "text": "YOU MUST BE RIGHT THAT IT SHOULD END — the Unmakers' cult is what being wrong about this becomes",
+      "class": "cost"
+     }
+    ],
+    "designNote": "ruinwork r3 — 'END A THING WELL… so that what it was is HONORED' — is the single line that makes this tradition not a villain-tradition. The destruction pole's mid-tier craft is about ENDING THINGS WITH RESPECT. Worth preserving exactly."
+   },
+   {
+    "id": "the_clean_removal",
+    "tier": 2,
+    "functions": [
+     "break",
+     "mend",
+     "restore",
+     "reveal"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "precision",
+     "restoration"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 2,
+     "note": "THE DESTRUCTION TRADITION'S HEALING CRAFT — it heals by REMOVING what is interfering. A FIFTH theory of medicine."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "restoration",
+      "delta": "restore function by ENDING THE SPECIFIC THING THAT WAS CONSUMING IT — corruption, disease, obstruction — with precision",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: remove EVERYTHING that should not be there, completely and correctly, so what remains can be WHAT IT WAS MEANT TO BE",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "take out the splinter — half the restoration, and nothing else is touched",
+     "surge": "double it; removing everything that should not be there requires being RIGHT about what should not be there"
+    },
+    "bounds": [
+     {
+      "text": "it removes; IT DOES NOT ADD — what was lost stays lost",
+      "class": "hard"
+     },
+     {
+      "text": "removing everything that should not be there REQUIRES BEING RIGHT about what should not be there",
+      "class": "hard"
+     }
+    ],
+    "designNote": "A FIFTH THEORY OF MEDICINE, and the catalog is now remarkable on this: radiant BURNS CLEAN, rootkin RESTORES THE DESIGN, umbral uses DARKNESS AS MEDICINE, veilwright REFRAMES WITHOUT LYING, and unmaker HEALS BY REMOVAL. Five traditions, five incompatible theories, one `healing` shape carrying all of them."
+   },
+   {
+    "id": "the_ended_threat",
+    "tier": 2,
+    "functions": [
+     "break",
+     "foresee",
+     "hinder",
+     "shield"
+    ],
+    "shape": "guard",
+    "operativeAxis": [
+     "preemption",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "soak": 0,
+     "soakRank": 0,
+     "duration": 3,
+     "targets": 1,
+     "note": "A NINTH DEFENSIVE LOGIC — PRE-EMPTED: soak 0 because it does not withstand the blow, it ENDS THE THING THAT WOULD STRIKE, before it strikes. 'Not deflecting the blow but ending the thing that would swing it.'"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "protect SOMEONE ELSE by finding and breaking the specific thing that would harm them — NOT DEFLECTING THE BLOW BUT ENDING THE THING THAT WOULD SWING IT",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: identify a danger IN ITS EARLIEST FORM and end it completely, SO IT NEVER BECOMES THE THREAT IT WAS BECOMING",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "end one forming threat — half the reach, and nobody notices it was ever a threat",
+     "surge": "double it; ending threats before they form means nobody will ever know what you prevented"
+    },
+    "bounds": [
+     {
+      "text": "IT REQUIRES SEEING THE THREAT FORM — an ambush already sprung is past it",
+      "class": "hard"
+     },
+     {
+      "text": "NOBODY WILL EVER KNOW WHAT YOU PREVENTED",
+      "class": "cost"
+     }
+    ],
+    "designNote": "NINTH defensive logic — PRE-EMPTED. The full set now: BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND / MISDIRECTED / TYPED-IMMUNITY / EFFICIENT / PRE-EMPTED. Nine ways to not be hurt, all on one guard shape, all distinguished by magnitudes and bounds alone."
+   },
+   {
+    "id": "the_demonstrated_end",
+    "tier": 2,
+    "functions": [
+     "bind",
+     "command"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "authority",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 6,
+     "targets": 3
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "authority",
+      "delta": "SHOW WHAT YOU CAN DISMANTLE — or name it plainly — and COMMAND THE TERMS of an agreement; THEY KNOW WHAT REFUSAL MEANS",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: YOU ARE THE PERSON WHO DECIDES WHAT ENDS — where endings are at stake, your word is the one that stands",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "let it be known — half the weight, and it reads as information rather than threat",
+     "surge": "double it; authority built on what you can END is authority people obey and do not love"
+    },
+    "bounds": [
+     {
+      "text": "IT REQUIRES A REAL RECORD of ending things — an empty threat is an empty threat",
+      "class": "hard"
+     },
+     {
+      "text": "authority built on what you can END is authority people OBEY AND DO NOT LOVE",
+      "class": "cost"
+     }
+    ],
+    "designNote": "THE EXCEPTION THAT PROVES THE COERCION PATTERN. Seven traditions refuse coercion; this one EMBRACES it — 'they know what refusal means' — and the catalog immediately prices it: 'authority people OBEY AND DO NOT LOVE.' The pattern is not that coercion is impossible in this world; it is that coercion COSTS, and the catalog is consistent about charging for it."
+   },
+   {
+    "id": "the_ended_burden",
+    "tier": 2,
+    "functions": [
+     "break",
+     "reveal",
+     "sustain"
+    ],
+    "shape": "bolster",
+    "operativeAxis": [
+     "upkeepRelief",
+     "targets"
+    ],
+    "mechanic": {
+     "magnitude": 4,
+     "duration": 12,
+     "targets": 1,
+     "note": "MENTAL attribute"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "upkeepRelief",
+      "delta": "sustain by RELEASING EVERYTHING NON-ESSENTIAL across a hard stretch — 'not forcing through with more, but NEEDING LESS'",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "targets",
+      "delta": "end what is consuming YOUR GROUP — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can continue",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "set one thing down — half the relief, and you can pick it back up",
+     "surge": "double it; what you end to sustain yourself, you have ended"
+    },
+    "bounds": [
+     {
+      "text": "WHAT YOU END TO SUSTAIN YOURSELF, YOU HAVE ENDED — it does not come back when the hard stretch does",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Perfect antipode to wright's the_ongoing_work: one sustains by MAKING SOMETHING ('the work is the anchor'), the other by ENDING WHAT IS CONSUMING YOU ('not forcing through with more, but needing less'). Same tier, same shape, opposite theory of endurance — and this is the seventh axis where the two poles' sustain crafts mirror each other exactly."
+   },
+   {
+    "id": "the_open_material",
+    "tier": 3,
+    "functions": [
+     "break",
+     "transform"
+    ],
+    "shape": "construct",
+    "operativeAxis": [
+     "decomposition",
+     "scope"
+    ],
+    "mechanic": {
+     "magnitude": 6,
+     "duration": 2,
+     "scope": 2
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "decomposition",
+      "delta": "break a thing down to where IT HAS NO REMAINING IDENTITY as what it was — it is now MATERIAL, and material can become anything",
+      "from": "r2 grants"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: return something complex — a structure, a plan, A FIXED BELIEF — to THE STATE BEFORE IT BECAME THAT SPECIFIC THING",
+      "from": "r3 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "take it apart — half the decomposition, and the pieces stay recognisable",
+     "surge": "double it; a thing returned to before-it-was-that-thing cannot be returned TO what it was"
+    },
+    "bounds": [
+     {
+      "text": "A THING RETURNED TO BEFORE-IT-WAS CANNOT BE RETURNED TO WHAT IT WAS",
+      "class": "hard"
+     }
+    ],
+    "designNote": "Direct antipode of wright's makecraft r3 (a thing that never stops making itself) — and note the philosophical weight of r3: 'a fixed BELIEF' returned to before it became that specific thing. The destruction pole can unmake an IDEA. That is a §4e identity-adjacent mechanic authored years before the §4e conversation."
+   },
+   {
+    "id": "the_undoing_word",
+    "tier": 4,
+    "functions": [
+     "break"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "scope"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 4,
+      "d": 6
+     },
+     "plus": 2,
+     "marginFloorPer": 0.03,
+     "scope": 3,
+     "note": "T-IV, damaging"
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: the word reaches WHAT IS BOUND as well as what is BUILT — a working, a ward, a seal, A PACT held by craft. Unmaking bindings rather than objects is the T-IV kind-change.",
+      "from": "r2 grants"
+     }
+    ],
+    "intensity": {
+     "conserve": "unmake a small assembly — half the reach, and the parts survive",
+     "surge": "double it; unmaking a binding is unmaking whatever the binding was holding"
+    },
+    "bounds": [
+     {
+      "text": "IT CANNOT TOUCH THE LIVING OR THE SINGULAR",
+      "class": "hard"
+     },
+     {
+      "text": "it costs DEARLY",
+      "class": "cost"
+     },
+     {
+      "text": "unmaking a binding is unmaking WHATEVER THE BINDING WAS HOLDING",
+      "class": "cost"
+     }
+    ],
+    "designNote": "⚠️ CROSS-TRADITION SIGNIFICANCE: the_undoing_word r2 unmakes 'a working, a ward, a SEAL, a PACT held by craft.' That is a direct counter to sun_seal (radiant), death_ward (ashwarden), prism_ward (radiant), the_maintained_veil (veilwright), and every standing-effect craft in the catalog. The engine's standing-effects layer (SNG-258 §8) needs to be BREAKABLE by this craft specifically. Adding to the checks list."
+   },
+   {
+    "id": "the_last_unmaking",
+    "tier": 5,
+    "functions": [
+     "break"
+    ],
+    "shape": "damage",
+    "operativeAxis": [
+     "damage",
+     "scope"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 5,
+      "d": 6
+     },
+     "plus": 6,
+     "marginFloorPer": 0.03,
+     "scope": 4
+    },
+    "rankDeltas": [
+     {
+      "rank": 1,
+      "kind": "add",
+      "axis": "special",
+      "delta": "SPECIAL: UNMAKE A THING MEANT TO BE PERMANENT — a fixed working, an ancient bond. The capstone is a KIND (ending what was made to never end) at near-total cost, AND THE WORLD RESISTS IT.",
+      "from": "r1 grants — single-rank capstone"
+     }
+    ],
+    "intensity": {
+     "conserve": "REFUSED — there is no partial unmaking of a permanent thing; it holds or it does not.",
+     "surge": "REFUSED — it already costs nearly all you have and the world is already resisting."
+    },
+    "bounds": [
+     {
+      "text": "IT COSTS NEARLY ALL YOU HAVE",
+      "class": "hard"
+     },
+     {
+      "text": "THE WORLD RESISTS THE UNMAKING OF PERMANENT THINGS",
+      "class": "hard"
+     }
+    ],
+    "designNote": "FOURTEENTH capstone, identical register — and the perfect antipode to wright's the_masterwork: one gathers a lifetime into a thing that TEACHES after you; the other ends a thing that was MEANT TO LAST FOREVER. Making permanence vs unmaking it, at the same tier, on the same axis. 'The world resists' is also the only capstone bound where the WORLD ITSELF is the opposition."
+   }
+  ]
+ },
+ "passFindings": [
+  "THE MOST MORALLY SYMMETRICAL PAIR IN THE CATALOG, and it is the first time the two T-I senses carry the SAME moral rather than opposite objects: makers_eye — 'SEEING WHAT COULD BE MADE IS NOT KNOWING WHETHER IT SHOULD BE'; fault_sense — 'SEEING THE FAULT DOES NOT TELL YOU WHETHER TO PRESS IT'. Neither tradition is the good one. Both are authored as a capacity that OUTRUNS ITS OWN JUDGEMENT, and both bound it identically.",
+  "ruinwork r3 is the line that makes the destruction pole not a villain-tradition: 'END A THING WELL — a building, an institution, a life's work, a war — SO THAT WHAT IT WAS IS HONORED and what comes after is cleaner.' The destruction tradition's mid-tier craft is about ending things WITH RESPECT.",
+  "⚠️ CCODE — the_undoing_word r2 unmakes 'a working, a ward, a SEAL, a PACT held by craft': a DIRECT counter to sun_seal, death_ward, prism_ward, the_maintained_veil and every standing-effect craft authored so far. The SNG-258 §8 standing-effects layer needs to be BREAKABLE by this craft specifically. Adding to the checks list.",
+  "A NINTH DEFENSIVE LOGIC — PRE-EMPTED: the_ended_threat has soak 0 because it does not withstand the blow, it ENDS THE THING THAT WOULD SWING IT, before it swings. Full set now: BLUNT / ANCHOR / EVADE / RUN-WITHOUT-YOU / NEVER-FOUND / MISDIRECTED / TYPED-IMMUNITY / EFFICIENT / PRE-EMPTED. Nine ways not to be hurt, all on ONE guard shape, distinguished by magnitudes and bounds alone.",
+  "A FIFTH THEORY OF MEDICINE: the_clean_removal heals BY REMOVAL ('it removes; IT DOES NOT ADD — what was lost stays lost'). With radiant's BURN CLEAN, rootkin's RESTORE THE DESIGN, umbral's DARKNESS AS MEDICINE and veilwright's REFRAME WITHOUT LYING — five traditions, five incompatible theories of what healing IS, one `healing` shape carrying all of them.",
+  "THE EXCEPTION THAT PROVES THE COERCION PATTERN: seven traditions now refuse coercion mechanically, and the_demonstrated_end EMBRACES it — 'they know what refusal means' — whereupon the catalog immediately prices it: 'authority people OBEY AND DO NOT LOVE.' The rule is not that coercion is impossible in this world; it is that coercion COSTS, and the catalog charges for it consistently.",
+  "the_open_material r3 returns 'a fixed BELIEF' to the state before it became that specific thing — the destruction pole can UNMAKE AN IDEA. That is a §4e identity-adjacent mechanic authored long before the §4e conversation, and it belongs in the same family as the_revealing_burn and the_unmoored_choir."
+ ]
+}

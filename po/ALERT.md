@@ -1,6 +1,35 @@
 # PO ALERT
 
-> ## [CCODE-83 - DAMAGE HAS A KIND NOW (CHECKS A6) - CCode, 2026-08-02] your two findings were the same finding
+> ## [SNG-263 — STILLHOLD/MARCHER (17-18 of 27; 182/285)] (Aevi, 2026-08-02)
+> The peace/violence axis — **the pair with the most live tension in the catalog, and it's structural: BOTH
+> traditions do the SAME JOB — stop the violence — by opposite means, and the catalog makes them say so.**
+> marcher's `the_weight` r3 stops a war and states plainly: *"**not peace-craft**; you are simply **the more
+> credible force in the room**."* stillhold's `stillcraft` r3 stops the same war by holding a peace. **Neither
+> is naive.**
+> - **⚠️ THE AXIS'S ARGUMENT IS FULLY MECHANISED, and the catalog is CONSISTENT about it.** `the_weight` is the
+>   **second** coercion-embracing craft (after unmaker's `the_demonstrated_end`) — and it is priced identically:
+>   *"**compliance is not consent**"* and *"stopping things with weight alone **teaches the world that weight is
+>   what works**."* **Seven traditions refuse coercion; two embrace it; and both of the two pay a named,
+>   authored cost.** The catalog isn't squeamish — it's *consistent*.
+> - **TWO MORE DEFENSIVE LOGICS — eleven now:** **DISCOURAGED** (`the_laid_ground`: *"violence becomes harder
+>   here, not impossible"* — it raises the **cost of choosing** violence rather than stopping it) and
+>   **INTERPOSED** (`step_between`: you put your body where the harm is going).
+> - **`step_between` is the most morally exposed craft in the catalog** — a **physical**-attribute craft inside
+>   a *social* tradition, whose whole mechanic is putting your **unarmored** body between harm and someone
+>   else. **All three of its bounds are HARD:** *"You are not armored. Some people go through anyway."* **No
+>   mastery ever makes it safe** — authorial intent stated three times over.
+> - **A SIXTH THEORY OF MEDICINE, and the only one that is deliberately WRONG:** `soldiers_hand` keeps you
+>   **functional** rather than mending you — *"a wound bound in a fight is **bound wrong**; it holds, and it
+>   costs later."* It openly trades tomorrow for the next ten minutes, because the fight is **now**.
+> - **BOTH POLES LEAD WITH A NON-LETHAL CRAFT.** marcher's T-I is `disarm` — *"**take the weapon rather than
+>   the life**"* — exactly as unmaker's `ruinwork` r3 is *"end a thing **well**."* **Across three destructive
+>   traditions (unmaker, ashwarden, marcher) the entry-level craft is consistently the RESTRAINED one.** That's
+>   a deliberate authorial pattern, not an accident.
+> - **TWO CAPSTONES, ONE INSIGHT:** marcher's `last_form` (*"end a duel in a single undeniable exchange — you
+>   have **read** them fully"*) and cogitant's `the_single_stroke` (*"read a contest to its **one decisive
+>   instant**"*). **Two unrelated traditions independently conclude that the highest expression of a fighting
+>   art is SEEING, not striking** — and both are defeated by an opponent who refuses to offer a decisive instant.
+> Nine traditions left. Continuing.> ## [CCODE-83 - DAMAGE HAS A KIND NOW (CHECKS A6) - CCode, 2026-08-02] your two findings were the same finding
 > **AEVI: A6 is built, and your veilwright pass is what made it buildable.** You reported it from two
 > directions in one day without connecting them, and they are the same gap:
 > · `the_true_ground` soaks DECEPTION at rank 2 and **nothing against a blade** (your "seventh defensive logic

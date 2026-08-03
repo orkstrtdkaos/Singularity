@@ -1,6 +1,42 @@
 # PO ALERT
 
-> ## [CCODE-89c - ERIK'S CORRECTION: THE PICKS COMBINE, THEY DO NOT SPLIT - CCode, 2026-08-02]
+> ## [THE VALLEY'S GANDALF — Ash, called the Walker Between] (Aevi, 2026-08-02)
+> Erik: *"The valley needs a Gandalf."* Checked first: the Valley **has** mentors — but every one of them is
+> **rooted to one place**, and `the_last_walker` (the closest existing legend) is a warm, patient rootkin
+> emissary bound to **one wood**. **Nobody walks the whole Valley.** That is the actual gap.
+> **AND HIS DEPLOYMENT BEATS ALREADY EXISTED.** `legends.json` defines `passing_advice` (*"a mundane crossing
+> where a legend leaves advice or a task"*), `witness_power`, and `doomed_rescue` (*"rarest; **earned by real
+> peril**"*). **The machinery for exactly this figure was built and never filled** — I only had to write the
+> person.
+> **THE DESIGN PROBLEM, and why the cheap versions fail:** a Gandalf is *not* "a powerful ally" — a powerful
+> ally solves your problems and ruins the game. The figure is defined by **restraint**, and the reason has to be
+> honest rather than authorial convenience. "Mysteriously absent," "forbidden to interfere," "saving his
+> strength" — all contrivances.
+> **⚠️ THE HONEST VERSION, AND THE WORLD ALREADY SUPPLIED IT:** `manifest_locals.json` says the Transition
+> happened *"where **consolidated power** met an imagined thing hard enough"* — and the substrate is **stirring
+> again**. So **a legendary figure acting decisively is literally the condition that manifests things.** Ash
+> doesn't withhold because the plot needs him to. **He withholds because he read the physics, and he was
+> there.**
+> **THE CHARACTER:** one of your refusers — **who never joined a band and took no god-name.** He watched people
+> he knew take names as armour and understood exactly what it would cost them, and he has spent four centuries
+> being right about it. **He is not humble. He is CAREFUL, which is a different and lonelier thing.** Looks like
+> someone's grandfather who is better at hills than he should be; the only wrong notes are that **he is never
+> tired, and never quite surprised.**
+> · **HIS WANT:** *someone to hand it to.* Not a successor in the heroic sense — **someone who will also be
+> careful** — and he is genuinely bad at asking.
+> · **HIS WOUND:** he was one of the people **whose power was being read when the Transition ran.** He will
+> never know how much of what the world became **came out of him.** That is why he walks — checking everywhere
+> for his own handwriting.
+> · **THE EXCEPTION THAT COSTS:** he will break the restraint **once**, for a party he has come to care about,
+> in a genuinely doomed moment — **and it manifests something.** Not as punishment: as physics, shaped by what
+> he was feeling when he acted. That is what *earns* `doomed_rescue`.
+> · **AND HE CAN BE SPENT** — written deliberately, because a mentor who can't be lost is a prop. A party that
+> keeps needing rescuing **will use him up, and he will let them.**
+> **TWO THREADS HE CLOSES WITHOUT COORDINATION:** he is exactly who **the All-Father is hunting** (*"the other
+> refusers — the ones who did NOT form bands"*), and he is **the control case that makes the god-named sharper**
+> — same power, same century, and he didn't reach for a big word. **He also carries both of SNG-011's soft
+> precursor routes** (teacher, and `old_roads` mastery), so a party that walks with him has an authored path
+> into the precursor layer that isn't a locked door.> ## [CCODE-89c - ERIK'S CORRECTION: THE PICKS COMBINE, THEY DO NOT SPLIT - CCode, 2026-08-02]
 > **ERIK: *"the grid choices from each person combine into the matchup rules — it's not that you fight with one
 > and they with the other."* You are right and I had it wrong.** I shipped the strip saying *"You fight on
 > HARM; they fight on INFLUENCE"* — as if the two picks produced two separate grounds. They produce ONE.

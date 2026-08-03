@@ -1,0 +1,54 @@
+{
+ "schemaVersion": 1,
+ "id": "the_third_action_reaching_the_back_line",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. Erik closes a hole I opened: workers must not be safe.",
+ "theHoleIOpened": {
+  "what": "My `engages` proposal gives stillhold 0.15, numinous 0.4, veilwright 0.4. Those figures almost never enter the engaged pool — so under the current two-population model (FIGHT or WORK) they are effectively IMMUNE. Nothing can reach a worker.",
+  "whyThatIsBad": "⚠️ IT MAKES PACIFISM THE DOMINANT STRATEGY. A tradition that never fights takes no casualties, pushes steadily forever, and wins every long arc by attrition. That is not a peace tradition being rewarded for its virtue — that is an exploit wearing a virtue's clothes.",
+  "eriksFix": "'darker traditions use stealth and assassination sometimes to target those safe back lines — and some lighter traditions crusade, or quest to destroy the same on the other side.' A THIRD ACTION. Correct, and it is the one the model was missing."
+ },
+ "theThreeActions": {
+  "FIGHT": "engaged pool, weight-matched pairing. Decisive. Front-line vs front-line. (built — CCODE-115)",
+  "WORK": "steady modest push, no roll against a person. (built)",
+  "STRIKE": "⚠️ NEW. Reaches PAST the enemy's engaged pool to hit a WORKER. Does not participate in the melee at all."
+ },
+ "strikeMechanic": {
+  "who": "a figure with a `strikes` disposition > 0, drawn from the WORKING pool of their own side (a striker is not in the melee — that is the point)",
+  "target": "a WORKER on the opposing side. Target selection differs by kind (below).",
+  "resolution": "a real battleRound, but ASYMMETRIC — the target is not braced. Proposed: the striker rolls with advantage-equivalent, the target's weight counts at a fraction. This should be DANGEROUS to be on the receiving end of.",
+  "cost": "⚠️ MUST NOT BE FREE, or everyone strikes. Two different prices, by kind — see below. That asymmetry is the whole design.",
+  "frequency": "rare. Proposed `strikeRate` ~0.08 baseline against engageRate's 0.35 — a strike is an EVENT, not a pass-by-pass action."
+ },
+ "twoKinds": {
+  "THE_QUIET_WORK": {
+   "who": "umbral · veilwright · abyssal · ashwarden (and unmaker at low rate)",
+   "targets": "THE MOST VALUABLE WORKER — the highest-weight figure pushing unopposed. Efficiency: you kill the person who is actually moving the arc.",
+   "method": "stealth. The target does not know it is coming.",
+   "cost": "⚠️ EXPOSURE, NOT INJURY. A failed strike does not wound the striker — it IDENTIFIES them. Proposed: a failed quiet strike marks the striker as known to the opposing side, which raises the rate at which they are targeted in return and can trigger a crusade against them specifically.",
+   "groundedIn": "The crafts already say this is what they do: `the_never_there` moves through the most-watched place leaving NO TRACE, NO MEMORY, no evidence — and its bound is 'A VERITY-READER MAY FEEL THE ABSENCE ITSELF'. `quiet_step` r3 breaks a pursuit clean once per day. `the_false_target` draws aimed action to the wrong place. THE EXPOSURE COST IS THE CRAFTS' OWN BOUND, made into a world mechanic."
+  },
+  "THE_CRUSADE": {
+   "who": "blazeborn · seraphic · verist · marcher (and radiant at low rate)",
+   "targets": "THE MOST HATED WORKER — not the strongest, the one whose arc-position most offends them. Proposed selection: the enemy worker with the highest weight ON THE ARC THE CRUSADER MOST WANTS, i.e. the one doing the thing they cannot bear.",
+   "method": "declared. The target KNOWS, and so does everyone else.",
+   "cost": "⚠️ COMMITMENT, NOT EXPOSURE. A crusader abandons their other arcs entirely for the duration — the attention budget goes to ZERO on everything else. So a crusade CREATES VACANCIES on the crusader's own side. That is the price, it is paid up front, and it is visible.",
+   "groundedIn": "`radiance` r3 'reveals ALL that is hidden in a wide area' · `unshadow` r3 'nothing false can hold shape' · `ascent` r3 pronounces a judgment THAT BINDS — 'and IF YOU ARE WRONG, THE JUDGMENT BINDS ANYWAY'. A crusade that targets the wrong person is EXACTLY that bound at world scale, and it should be able to happen."
+  }
+ },
+ "theSymmetryThatMakesItGood": [
+  "⚠️ SAME EFFECT, OPPOSITE METHOD, OPPOSITE PRICE. Both reach the back line and kill the person who was safely working. The assassin pays in EXPOSURE (a failure makes them a target). The crusader pays in COMMITMENT (a crusade empties their other fronts). Neither is cheaper; they are expensive in different currencies.",
+  "AND IT IS MORALLY EVEN, which the catalog has been consistent about all along. The crusade is not the clean version — a declared campaign to destroy someone who was tending a wood is not obviously better than a knife in the dark, and `ascent`'s own bound ('if you are wrong, the judgment binds anyway') says so.",
+  "IT ALSO FIXES THE VACANCY MECHANIC'S BEST CASE: `ws.arcVacancies` currently records seats abandoned by attention. A crusade creates vacancies DELIBERATELY — a narrator can now say 'the Burning Certainty left three fronts to hunt one man, and the poles moved while he was gone.' That is a world telling a story about itself."
+ ],
+ "whatItFixes": [
+  "PACIFISM STOPS BEING DOMINANT. Stillhold still rarely fights — but they can be REACHED, and a tradition whose whole method is standing still is exactly who an assassin can find.",
+  "UMBRAL AND VEILWRIGHT GET A WORLD-SCALE ROLE. At engages 0.4-0.5 they were nearly invisible in the melee. Striking is what they are FOR, and it means the concealment traditions matter without ever winning a duel.",
+  "AND THE DEATH TABLE GAINS A SECOND AXIS: figures will die by TIER GAP (in the melee) and by BEING WORTH KILLING (in the back line). A high-weight worker is now the most dangerous thing to be — which is true of every real conflict and is currently not true here."
+ ],
+ "openForErik": [
+  "Should a STRIKE be able to KILL, or only wound and remove-from-arc? My read: kill, rarely — an assassination that cannot kill is not one. But the death gate should stay in resolveEpicClash so there is one place that decides.",
+  "Should the player be able to BE struck this way, or is it legend-on-legend only? ⚠️ This is the big one: a party that parks a healer safely behind the line is exactly the back-line target the system now models. I lean YES, and it would be the sharpest consequence in the game.",
+  "Crusade duration — one pass, or until resolved? 'Until resolved' is better fiction and worse for the vacancy accounting. Probably a content dial."
+ ]
+}

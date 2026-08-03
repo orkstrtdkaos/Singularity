@@ -766,6 +766,126 @@
     "designNote": "Exact antipode to abyssal's the_choir_sustains, and structurally identical: both draw on a COLLECTIVE, both fail completely if you are severed from it. The only axis where both poles' T-I sustain crafts are about BELONGING — one to a communion below, one to a hierarchy above, and neither works alone."
    },
    {
+    "id": "the_kept_vessel",
+    "tier": 2,
+    "functions": [
+     "heal",
+     "restore",
+     "sustain"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "healing",
+     "longevity"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 2,
+      "d": 4
+     },
+     "plus": 2,
+     "duration": 24,
+     "note": "NEW CRAFT — fills the seraphic healing gap. Its dice sit on the T-II healing ladder; the +2 is the Orders' methodical exactness, the same signature as syllogist's the_correct_protocol."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "healing",
+      "delta": "MAINTAIN a body rather than mend it — hold a person at their best condition rather than returning them to it; wounds close in the ORDER a body would have chosen",
+      "from": "authored: the Orders' medicine is UPKEEP, not repair"
+     },
+     {
+      "rank": 3,
+      "kind": "add",
+      "axis": "longevity",
+      "delta": "SPECIAL: HOLD A BODY OUT OF ITS OWN DECLINE. Not youth returned — decline SUSPENDED, for as long as the vessel is kept and the keeping is paid for. THIS IS HOW THE ORDERS ARE CONTINUOUS WITH THE PRE-TRANSITION WORLD.",
+      "from": "authored: the lore says they persist and never says how; this is how"
+     }
+    ],
+    "intensity": {
+     "conserve": "tend it — half the maintenance, and the vessel keeps itself after",
+     "surge": "double the keeping; A SUSPENDED DECLINE IS STILL A DECLINE, and it resumes with everything it was owed"
+    },
+    "bounds": [
+     {
+      "text": "IT MAINTAINS, IT DOES NOT MEND — a wound this craft has never seen is beyond it",
+      "class": "hard"
+     },
+     {
+      "text": "A SUSPENDED DECLINE IS STILL A DECLINE — stop keeping the vessel and it resumes WITH EVERYTHING IT WAS OWED",
+      "class": "hard"
+     },
+     {
+      "text": "THE KEEPING MUST BE PAID FOR, CONTINUOUSLY, BY SOMEONE",
+      "class": "cost"
+     },
+     {
+      "text": "it holds the VESSEL. What is in it ages normally, and the Orders have never solved that.",
+      "class": "hard"
+     }
+    ],
+    "authoredNew": true,
+    "designNote": "⚠️ AUTHORED TO FILL ERIK'S GAP — 'Seraphs who can't heal! Preposterous — how do you think they stay immortal?' The lore hook was already there and unexplained: 'The Seraphic Orders, CONTINUOUS WITH THE PRE-TRANSITION WORLD IN A WAY ALMOST NOTHING ELSE IS.' It never said how. THIS IS HOW. And it is authored to be seraphic rather than generic: their medicine is UPKEEP, not repair — a hierarchy that maintains its own continuity, at a cost paid continuously by someone, holding the VESSEL while what is inside it ages anyway. That last bound is the tradition's tragedy and it connects straight to the god-named: four hundred years of a kept vessel is exactly what the Thunderer is."
+   },
+   {
+    "id": "the_answered_wound",
+    "tier": 3,
+    "functions": [
+     "heal",
+     "restore"
+    ],
+    "shape": "healing",
+    "operativeAxis": [
+     "healing",
+     "transfer"
+    ],
+    "mechanic": {
+     "dice": {
+      "n": 3,
+      "d": 4
+     },
+     "plus": 2,
+     "note": "NEW CRAFT — the seraphic's second healing craft, and the mechanical partner to `ascent` r2's 'MERCY GIVEN IS MERCY TAKEN ON'."
+    },
+    "rankDeltas": [
+     {
+      "rank": 2,
+      "kind": "deepen",
+      "axis": "transfer",
+      "delta": "TAKE A WOUND ONTO YOURSELF — not shared, TRANSFERRED; they are whole and you are not",
+      "from": "authored from ascent's existing bound: the weight does not vanish, IT MOVES TO YOU"
+     },
+     {
+      "rank": 3,
+      "kind": "extend",
+      "axis": "transfer",
+      "delta": "take from SEVERAL, or take what SHOULD HAVE KILLED THEM — and the Order has a word for a seraph who does this too often, and it is not a kind one",
+      "from": "authored"
+     }
+    ],
+    "intensity": {
+     "conserve": "answer a little of it — half the transfer, and you keep most of yourself",
+     "surge": "double it; THEY ARE WHOLE AND YOU ARE NOT"
+    },
+    "bounds": [
+     {
+      "text": "IT TRANSFERS, IT DOES NOT ERASE — the wound is real and now it is YOURS",
+      "class": "hard"
+     },
+     {
+      "text": "you cannot transfer what you cannot SURVIVE",
+      "class": "hard"
+     },
+     {
+      "text": "the Order has a word for a seraph who does this too often",
+      "class": "cost"
+     }
+    ],
+    "authoredNew": true,
+    "designNote": "AUTHORED — and it is not invented from nothing: `ascent` r2 already carries the bound 'MERCY GIVEN IS MERCY TAKEN ON. The weight does not vanish, IT MOVES TO YOU.' That was a moral statement with no mechanic behind it. This is the mechanic. The gap-fill was already implied by the tradition's own existing text."
+   },
+   {
     "id": "ascent",
     "tier": 2,
     "functions": [

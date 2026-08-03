@@ -20,6 +20,7 @@
     "endgame": "node tests/endgame_scaling.mjs",
     "damage": "node tests/damage_sensitivity.mjs",
     "staged": "node tests/staged_crafts_check.mjs",
-    "craft-crit": "node tests/craft_crit.mjs"
+    "craft-crit": "node tests/craft_crit.mjs",
+    "sweep": "node tests/promise_sweep.mjs"
   }
 }

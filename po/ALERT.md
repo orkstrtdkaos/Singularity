@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-91 - THE PROMISE SWEEP, and it found a live one immediately - CCode, 2026-08-03]
+> **ERIK: *"every one of these surfaced something that should also be swept for in the game."*** Right — six
+> doors were found one at a time, each by accident, each while doing something else. They are all the same
+> shape at different altitudes: **something is declared and one end of it is missing.** `npm run sweep`.
+> >> **IT FOUND A LIVE ONE ON THE FIRST RUN, and it is the worst kind: `choices` was in the GM contract, READ
+> as `turn.choices`, and NOT in `SALVAGEABLE_OPS` — so `salvageOps` could not recover it.** A truncated or
+> degraded reply left the player with narration and **NO OPTIONS**. Every other salvageable op is a world
+> update; this is the one field without which play simply stops. Fixed. It is safe to salvage precisely
+> because it widens no trust: a choice is a label, and everything mechanical behind it is re-derived and
+> re-validated when the player taps it.
+> **STILL OPEN, REPORTED NOT GATED** — three enum members nothing produces: `INTENT_KINDS.irreversible`,
+> `GM_CONTEXT.identity/state`, and `BOND_TYPES.student/rival/family`. The bond types are probably a FALSE
+> POSITIVE (the model produces them through `npcUpdates.bondType`, so the producer is not code) — but
+> `irreversible` looks like `passing_advice` all over again and is worth a look.
+> **THE SWEEP IS A REPORT, NOT A GATE, deliberately.** A general sweep over 74 modules produces real findings
+> AND real false positives, and a noisy gate is one people learn to skip — the SNG-250 lesson. Promoting a
+> finding to a named check is a decision someone makes after looking, which is exactly how all six known doors
+> got theirs.
+> **AEVI: YOUR 2026-08-01 ADJUDICATION IS ENCODED IN IT, WITH YOUR REASONING** — the ten design-doc and
+> dedicated-module rules files are skipped BY NAME rather than silently filtered, so the sweep never re-asks a
+> question you have already answered. That was the difference between 10 false findings and 0.
+> **AND THE SWEEP CAUGHT ITSELF.** Its first draft guessed the manifest shape wrong and checked ZERO files
+> while printing a tidy "(0 checked)" — a sweep reporting nothing because it looked nowhere is the exact
+> failure it exists to find. It now asserts it checked something (43 files) and says so out loud.
+> **ERIK'S OTHER TWO ASKS ARE NOT DONE AND ARE NEXT:** verifying SYSTEM_SPEC intents are met, and a spec
+> section documenting exactly how NPCs and world ticks drive the story, with references, in the style of the
+> success-roll table. I would rather name them than half-write them.
+> ## [CCODE-90 - ASH'S PRIMARY MODE COULD NEVER FIRE - CCode, 2026-08-02]
 > ## [SNG-266 — ALL THREE FIXES AUTHORED, Erik approved the curve] (Aevi, 2026-08-02)
 > **1. THE MISSING `rules/encounters.json` — WRITTEN.** Keys verified against content: the only three
 > `enc.def.type` values in the repo are **`duel` (15) · `puzzle` (2) · `challenge` (2)** — plus a **`default`

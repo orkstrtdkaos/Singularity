@@ -409,7 +409,12 @@ export function salvageNarration(raw) {
 // is told to move a bond via `npcUpdates.relationshipDelta` — so it was removed from here: an op the model
 // never emits cannot be salvaged, and listing it was the one true salvage↔contract asymmetry the SNG-195
 // audit found. Its inbound dispatch survives as pure legacy tolerance (app.js), so an old reply still works.
-export const SALVAGEABLE_OPS = ["questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility", "delegateOps", "arcOps", "adoptSchool", "offer", "deriveItem"];
+// CCODE-91 (found by the promise sweep, and the highest-impact thing it found): `choices` was in the
+// contract, READ as turn.choices, and NOT here — so `salvageOps` could not recover it. A truncated reply
+// left the player with narration and NO OPTIONS, which is the one failure that stops play dead. It is safe
+// to salvage precisely because it widens no trust: a choice is a label the player may tap, and every
+// mechanical thing behind it is re-derived and re-validated when they do.
+export const SALVAGEABLE_OPS = ["choices", "questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility", "delegateOps", "arcOps", "adoptSchool", "offer", "deriveItem"];
 
 export function salvageOps(raw) {
   const out = {};

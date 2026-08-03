@@ -1,6 +1,38 @@
 # PO ALERT
 
-> ## [SNG-267 r2 — THE MONEYS. Acceptance is the mechanic, not value.] (Aevi, 2026-08-02)
+> ## [SNG-267 r3 — THE MONEYS BY POLE: one rule, 27 currencies] (Aevi, 2026-08-02)
+> Erik: *"Every place needs to use something — the cogitants exchange thinking time… the churnfolk, the fae,
+> would use a mix of gold and favors… the people who never transitioned would value the pre-transition currency
+> and any nanite type technology. Extrapolate from there."*
+> **THE RULE WAS ALREADY IN HIS THREE EXAMPLES AND I ONLY HAD TO NOTICE IT:**
+> **⚠️ A PEOPLE'S MONEY IS WHAT THEIR CRAFT PRODUCES IN SURPLUS THAT OUTSIDERS CANNOT MAKE THEMSELVES.**
+> · Cogitants sell **thinking time** — thinking is their surplus.
+> · The untransitioned buy **nanite tech at any price** — their surplus is an intact old economy; **the
+>   substrate is their scarcity.**
+> · Churnfolk take **gold and favors** because **a chaos-steeped people CANNOT back a token with institutions**
+>   (institutions being the thing they are steeped *against*) — so they back it with **metal that needs nobody**,
+>   or **a debt that needs only two people.** Erik gave the answer; the rule explains why it *had* to be that one.
+> **Same generative move as "crime follows gates" in the villainy pass — and it produced 27 currencies with
+> nothing invented.**
+> **THE ANTIPODE PAIRS DO MONEY TOO, WITHOUT BEING MADE TO:** churnfolk money needs **no** institution; lattice
+> money is **nothing but** institution. Umbral's *unspoken favor* works only because it is **unrecorded**;
+> lattice's *registered claim* only because it **is**. Marcher sells **oaths of arms**; Stillhold sells **the
+> guarantee that violence will not happen** — and **Stillhold country will not honour a Marcher oath, on
+> principle.**
+> **⚠️ THE BEST DERIVED CURRENCY IS STILLHOLD'S HELD PEACE: you buy the ABSENCE of something.** Its value
+> **rises as a region worsens** — so **the Stillhold grow rich exactly where they are failing.** An economy with
+> a built-in tragedy, and nobody designed it. It fell out of the rule.
+> **TWO CURRENCIES CANNOT BE STOLEN:** somatic's **trained form** (portable only *inside* the person who learned
+> it) and numinous's **attended hour** (which cannot leave the Reach at all). **A bandit can take everything a
+> party owns and touch neither.**
+> **THE UNTRANSITIONED CARRY THE SHARPEST CONSEQUENCE:** to the Valley a working nanite device is *salvage*. To
+> them it is **the thing they gave up their future to avoid and now cannot live without.** **A salvage ring
+> selling to outland traders is selling people the thing they refused** — a trade route with a moral problem
+> built into it. *It also explains why old coin has value at all: not nostalgia — **a claim on outland goods**.*
+> **AND IT RETROACTIVELY EXPLAINS MY OWN VILLAINY PASS.** The licence trade forges **seraphic charters** — which
+> are that pole's actual currency. The Kindness runs on **threnodist carried grief.** The salvage rings deal
+> **enginewright working parts.** I authored those from a *different* rule, before this one existed, **and they
+> landed on the same economics anyway.** That's the world being consistent underneath both passes.> ## [SNG-267 r2 — THE MONEYS. Acceptance is the mechanic, not value.] (Aevi, 2026-08-02)
 > Erik: *"there are civilizations that never transitioned… so they may have gold or paper or crystal money. The
 > common thread is that the money represents value. **The Crossing takes all kinds — the foothills take several
 > kinds — the Reaches only take their kind.**"*

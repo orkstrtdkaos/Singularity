@@ -89,3 +89,77 @@ neither and talks for the same wall-clock time.** Today they lose to them.
 ## OPEN CALL FOR ERIK
 The band scaling assumes the SNG-260 powerBand ladder (riffraff / notable / regional / epic). **If those bands
 shift, this table shifts with them** — it is derived from them, not independent of them.
+
+
+---
+
+# SNG-266 round 2 — Erik's three corrections, and one of them corrects THIS SPEC
+
+## 1. WALK-AWAY XP: Erik is right, and my table was lazy
+> *"Walk away… that's too easy to get xp. You should only get xp that way if you are really outclassed and it's
+> a smart move. Getting beaten should give you a little xp."*
+**He is right and the flat `walkAwayXp` was a bad answer.** I justified it as "don't tax the player for
+disengaging correctly" — but a flat award doesn't reward *correct* disengagement, it rewards **disengagement**,
+which is a farm: open an encounter, walk away, repeat.
+**THE FIX — walk-away pays on THREAT GAP, not on the act.** The engine already computes what is needed:
+`synthesizeOpponentSheet` scales from threat, and the powerBand ladder gives the player's band.
+| your band vs the encounter's | walkAwayXp | reasoning |
+|---|---|---|
+| **you outclass it** | **0** | walking away from riffraff is not a decision, it is a stroll |
+| **even match** | **~15% of winXp** | a token; you learned a little by sizing it up |
+| **it outclasses you by one band** | **~50% of winXp** | **a real read, correctly acted on** |
+| **it outclasses you by two+** | **~70% of winXp** | recognising a fight you cannot win is the lesson |
+**That makes walk-away XP a REWARD FOR JUDGEMENT rather than for leaving**, and it cannot be farmed — the only
+way to earn it is to be genuinely outmatched, which is not a state a player can cheaply manufacture.
+**AND `incapacitated` GOES FROM 0 TO A LITTLE, per Erik.** Proposed **~20% of winXp**. Rationale: you were
+there, it cost you, and you learned the most expensive lesson available. **A zero teaches the player that
+losing is worthless time**, which is false and makes defeat feel like a punishment rather than a beat. *(This
+overturns "incapacitated stays 0" from round 1 — Erik's call and he is right.)*
+
+## 2. WHAT DEFINES A SCENE — and the good news is it is already defined, just not enforced
+> *"What defines a scene? Right now there is a button to end a long scene… we should make this automatic."*
+**CHECKED, AND THE ANSWER IS BETTER THAN EXPECTED: the GM already owns scene-ending and the doctrine is already
+written.** `gm.js:86` instructs it to set `sceneEnded` when *"the confrontation or conversation RESOLVES and
+the people disperse · the character LEAVES the place · they sleep, or a long stretch passes · the question the
+scene opened is answered."* And explicitly: **"⛔ DO NOT hold one scene open across a whole session — a scene
+is a UNIT, not the session."**
+**SO A SCENE IS ALREADY WELL-DEFINED. WHAT IS MISSING IS A FLOOR AND A CEILING:**
+- **THE BUTTON IS THE SYMPTOM.** `#do-endscene` exists because the GM sometimes *doesn't* close, and the player
+  needs an escape hatch. **A manual control for something the system is supposed to do automatically is a
+  workaround, and Erik is right to want it gone as the primary path.** (Keep it as an override — a player
+  should always be able to say "this is done" — but it should be rarely needed rather than routine.)
+- **THERE IS NO LENGTH ENFORCEMENT.** `SCENE_TURN_CAP` exists but is **bounded STORAGE only** (`sceneTurns =
+  sceneTurns.slice(-CAP)`) — it trims the array and **does not end the scene.** So a scene can run indefinitely
+  while quietly forgetting its own beginning.
+**PROPOSAL — a soft close and a hard close, both content-side:**
+- **SOFT (beat ~8):** the GM gets a directive line in its turn context — *"this scene has run 8 beats; find the
+  honest close within the next two."* Nudge, not force; the GM still picks the moment, which preserves the
+  existing doctrine that a scene must not end mid-action.
+- **HARD (beat ~14):** the engine sets `sceneEnded` itself and asks the GM only for the `sceneSummary`. **The
+  hard close must never fire mid-action** — defer to the end of the current resolution, exactly as the doctrine
+  says.
+- **AND THIS MAKES THE NARRATIVE-XP TAPER COHERENT.** My round-1 "per-scene soft cap of 20" was resting on an
+  undefined unit. **With a real 8–14 beat scene it becomes a genuine rate limit**, and the two fixes need each
+  other: *the taper doesn't work without the scene boundary, and the scene boundary is worth doing anyway.*
+
+## 3. ⚠️ THE LEVEL CURVE — AND THIS CORRECTS ROUND 1 OF THIS SPEC
+> *"Do we want to keep the leveling xp required flat?"*
+**I reported `xpPerLevel = 100` as if the cost were flat. IT IS NOT, AND I SHOULD HAVE READ THE CALLER.**
+`progression.js:70`: `while (character.xp >= character.level * per)` — the threshold is **`level × 100`**, i.e.
+**already linear-rising**: L1→2 costs 100, L9→10 costs 900, L99→100 costs 9,900. Cumulative to L100 is
+**~495,000 XP**. So the curve exists; the question is whether the SHAPE is right.
+**MEASURED AGAINST ERIK'S STATED WANT ("easier in the first levels, a bit harder in late stage"):**
+- **Early is already easy** — 100 XP is one good quest. ✅
+- **Late is already hard** — 9,900 XP is ~165 regional encounters. ⚠️ **arguably too hard**: linear-per-level
+  means TOTAL cost is quadratic, and at L100 the last ten levels alone cost ~95,000, which is a fifth of the
+  whole game for 10% of the levels.
+**RECOMMENDATION — keep it rising, but bend the top down.** A pure quadratic total is the classic late-game
+wall. Options, cheapest first:
+- **(a) SOFT-CAP THE MULTIPLIER:** `min(level, 40) × per` — rises normally to L40, then flat 4,000/level. Total
+  to L100 ≈ 322,000. **One-line change, preserves early feel, removes the wall.** *My recommendation.*
+- **(b) TIER-BANDED:** per-level cost steps by powerBand (novice 80 · adept 150 · master 400 · heroic 900 ·
+  legendary 2,000). More authorable, ties directly to SNG-260, more work.
+- **(c) Leave it.** Defensible if L100 is meant to be a genuine marathon — but it should be a CHOICE rather
+  than an artifact of nobody having looked.
+**ERIK'S CALL.** And whichever way it goes, the **encounter XP table above scales with it** — the two must be
+tuned together, or fixing one will silently unbalance the other.

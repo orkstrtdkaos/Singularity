@@ -1,0 +1,130 @@
+{
+ "schemaVersion": 1,
+ "id": "currency_concrete",
+ "kind": "staged_proposal",
+ "status": "PROPOSAL — staged. SUPERSEDES the tracking half of the_moneys_by_pole.json. Erik: 'currency needs a concrete way to track it and convert it. A lot of what you came up with are barterable, but not currency per se.'",
+ "theCorrection": {
+  "whatIGotWrong": "I conflated TRADE GOODS with CURRENCY. An 'attended hour', a 'carried grief', a 'solved problem' — those are SERVICES SOMEONE SELLS. They are not fungible (one attended hour is not interchangeable with another), not divisible (you cannot spend a third of a solved problem), not countable as a balance, and not durable. They make good FICTION and bad MONEY, and I presented them as money.",
+  "theTest": "A currency must be FUNGIBLE (any unit = any other), DIVISIBLE (makes change), DURABLE (survives a pack), PORTABLE, and COUNTABLE (a number you can hold). Almost nothing in my pole list passes all five.",
+  "theFix": "TWO LAYERS, cleanly separated. A SHORT list of real currencies with numeric balances and published rates — and everything else demoted to TRADE GOODS with a `worth` band, which is what they always were."
+ },
+ "layer1_realCurrencies": {
+  "note": "FIVE. That is the whole list, and it is short on purpose — a tracked balance per currency is a UI row, and five rows is a purse, while twenty-seven is a spreadsheet.",
+  "stored": "character.purse = { crystal: 0, coin: 0, paper: 0, scrip: { the_kept_reach: 0, ... }, marks: 0 }",
+  "currencies": [
+   {
+    "id": "crystal",
+    "name": "Cut crystal",
+    "unit": "a shard",
+    "fungible": true,
+    "divisible": "shard / half / quarter-cut",
+    "baseValue": 10,
+    "note": "THE REFERENCE CURRENCY. Substrate-inert, standard cut, unforgeable, accepted widest. All rates below are quoted in shards because the world itself would quote them that way."
+   },
+   {
+    "id": "coin",
+    "name": "Old coin",
+    "unit": "a coin",
+    "fungible": true,
+    "divisible": "coin / half",
+    "baseValue": 6,
+    "note": "Fixed supply — cannot be minted, only found. Value floats a little on outland demand."
+   },
+   {
+    "id": "paper",
+    "name": "Outland paper",
+    "unit": "a note",
+    "fungible": true,
+    "divisible": "notes come in 1 / 5 / 20",
+    "baseValue": 4,
+    "note": "⚠️ THE ONLY CURRENCY WITH ISSUER RISK. baseValue is a WORLD-STATE VARIABLE, not a constant — a scripted outland event moves it, and that is the one place a 'market' exists in this game."
+   },
+   {
+    "id": "scrip",
+    "name": "Reach-scrip",
+    "unit": "a tally",
+    "fungible": "within its own Reach only",
+    "divisible": "yes, locally",
+    "baseValue": 3,
+    "note": "PER-REACH. Tracked as a sub-object keyed by regionId, because a Kept Reach tally and a Stark Reach tally are not the same money."
+   },
+   {
+    "id": "marks",
+    "name": "Marks",
+    "unit": "a mark",
+    "fungible": true,
+    "divisible": false,
+    "baseValue": 8,
+    "note": "⚠️ NOT DIVISIBLE — a settled obligation is whole or it is nothing. Acceptance is gated on reputation `spread`, not on region: a Mark spends where your deed travelled. Failing the four-of-five test on divisibility is FINE for one currency as a deliberate oddity; it should not be the model for the rest."
+   }
+  ]
+ },
+ "layer2_tradeGoods": {
+  "note": "EVERYTHING FROM THE POLE LIST BELONGS HERE, and this is the demotion Erik's correction requires. These are not money. They are what a place PRODUCES, they carry a `worth` band, and they SELL FOR currency at a price that depends on where you are standing. The fiction I wrote survives intact — it was always describing trade, not tender.",
+  "worthBands": {
+   "trivial": 1,
+   "useful": 4,
+   "valuable": 15,
+   "precious": 50,
+   "irreplaceable": "not for sale — narrative only"
+  },
+  "worthIsInShards": "A `useful` item is ~4 shards where it is ordinary. The BAND is the item's property; the PRICE is the band × local demand.",
+  "localDemand": {
+   "surplus_here": 0.4,
+   "ordinary": 1.0,
+   "scarce_here": 2.5,
+   "cannot_get_it_here": 5.0,
+   "note": "⚠️ THIS IS WHERE ALL THE POLE FICTION ACTUALLY LIVES, and it works properly as a multiplier. Enginewright working parts are `surplus_here` in the Gearlands (×0.4) and `cannot_get_it_here` in the Quickwood (×5.0). Rootkin seed is the exact inverse. THE TRADE ROUTE IS THE PROFIT, which is what a trade economy is supposed to feel like — and it needs no new mechanic, just a per-region demand tag."
+  },
+  "servicesAreNotGoods": "A cogitant solving your problem, a threnodist carrying grief, a numinous attended hour — these are PURCHASES, not currency and not inventory. They are things you SPEND on. That is the correct place for them and it costs nothing to implement: they are priced in shards like everything else."
+ },
+ "layer3_acceptanceAndConversion": {
+  "acceptanceTable": {
+   "the_crossing": {
+    "takes": [
+     "crystal",
+     "coin",
+     "paper",
+     "scrip",
+     "marks"
+    ],
+    "spread": 0.15,
+    "note": "Takes ALL. The 15% spread IS how the Crossing lives, and it is the only place scrip converts at all."
+   },
+   "foothills": {
+    "takes": [
+     "crystal",
+     "coin",
+     "marks",
+     "local scrip"
+    ],
+    "paper": "at 0.5",
+    "spread": 0.25
+   },
+   "reaches": {
+    "takes": [
+     "own scrip",
+     "crystal (some)"
+    ],
+    "spread": "n/a — mostly will not convert at all",
+    "note": "A party heading into a Reach CONVERTS AT THE CROSSING FIRST or arrives unable to buy bread."
+   }
+  },
+  "conversion": "amount_out = floor(amount_in × (baseValue_in / baseValue_out) × (1 − spread))",
+  "workedExample": "20 old coin → crystal at the Crossing: 20 × (6/10) × 0.85 = 10 shards. The 2-shard difference is the Crossing's bite, and it is visible to the player without a percentage ever being quoted at them.",
+  "erikCallHonoured": "The player never sees the number — the trader says 'I'll give you ten for those.' The MATH is concrete; the PRESENTATION stays fictional, which is what Erik asked for earlier."
+ },
+ "whatCCodeNeeds": [
+  "`character.purse` object (5 keys, one nested for scrip) — the whole tracking layer.",
+  "`worth` band on the item schema + `demand` tag per region on locations.",
+  "A `convert(from, to, at)` function reading the acceptance table. ~30 lines.",
+  "GM directive: prices are quoted IN FICTION ('ten for those'), never as a rate. The engine holds the math; the narrator holds the voice."
+ ],
+ "findings": [
+  "⚠️ ERIK'S CORRECTION IS RIGHT AND THE ERROR WAS MINE: I wrote 27 'currencies' of which about three pass the fungible/divisible/durable/portable/countable test. The rest are SERVICES AND TRADE GOODS — good fiction, bad money. Presenting a solved problem as tender was a category error.",
+  "THE FIX COSTS NOTHING NARRATIVELY. Demoting the pole-moneys to TRADE GOODS with a per-region DEMAND MULTIPLIER keeps every piece of the fiction and makes it mechanically real: enginewright parts at ×0.4 in the Gearlands and ×5.0 in the Quickwood IS the pole economy, expressed as two numbers instead of a paragraph.",
+  "FIVE CURRENCIES IS A PURSE; TWENTY-SEVEN IS A SPREADSHEET. The tracked-balance list has to be short or the UI eats the game — and five happens to cover every acceptance case Erik named.",
+  "MARKS DELIBERATELY FAIL THE DIVISIBILITY TEST (a settled obligation is whole or nothing) and that is fine AS ONE ODDITY. It should not have been the model for the whole system, which is what I did.",
+  "AND THE PAPER-COLLAPSE RISK IS NOW CONTAINED CORRECTLY: `paper.baseValue` is the single world-state variable in the economy. One number moves on a scripted event. That is a market event without a market sim, which is what I flagged wanting earlier and did not build until now."
+ ]
+}

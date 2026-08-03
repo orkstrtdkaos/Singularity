@@ -35,6 +35,10 @@ who it's waiting on. **Status: 7 traditions authored (79/285 crafts) + the 26-cr
    `shortfold` (both ends must be truly KNOWN) · `shadowstep` (both ends need real shadow — **a lit gap is a
    WALL**). **Every axis's travel craft is walled off by its antipode's medium.** Movement crafts need a
    terrain/medium precondition the engine can check.
+6e. **DUAL-POLE CRAFT GATING** *(the_whole_act, T-IV somatic)* — its ONLY bound is *"needs both trained
+   near-equal; **THE PURE POLES CANNOT DO IT**."* A craft that requires **two traditions held near-equal**.
+   The engine cannot express this, and it is the catalog's only instance — but it is also the clearest proof
+   that **the middle of an axis is a real authored place** (see the foothills ask, item 26).
 6d. **TYPED SOAK / DAMAGE-AFFINITY** — `the_true_ground` soaks **deception at rank 2 and NOTHING against a
    blade** (*"a sword does not care what you know"*), and its r3 is a **categorical immunity to an entire
    craft-family**. The bestiary's `the_bright_devourer` wants the same concept inverted (absorbs the

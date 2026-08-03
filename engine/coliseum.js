@@ -162,3 +162,35 @@ export function championPick(playerAxis, { stance = "probing", rng = Math.random
   }
   return { family: chosen.family, stance, why };
 }
+
+/** SNG-149 / CCODE-89d — THE SECOND GRID. Erik: "this is just Stile's challenges in the Blue Adept books."
+ *
+ *  That is the Game on Proton, and it names the shape exactly: the first grid picks the CATEGORY and a second
+ *  4x4 inside it picks the actual contest. Aevi specced the same thing — "the first grid asks what KIND of
+ *  person you are; the second asks WHO YOU SPECIFICALLY HAVE BEEN" — and it is the half that turns a category
+ *  into a particular afternoon on the sand.
+ *
+ *  So the second axis is drawn from BIOGRAPHY, not from craft: your origin, your background, the roles people
+ *  have known you in, and the deeds that travelled. Same blind rule, same refusal to let anyone pick their own
+ *  ground — `resolvePick` takes this axis unchanged, because a grid is a grid.
+ *
+ *  Returns four entries, or fewer when a character genuinely has less history — a person with no record has a
+ *  short second axis, and that is a true thing about them rather than a gap to pad. */
+export function drawBackgroundAxis(bearer, { rng = Math.random, slots = 4 } = {}) {
+  const seen = new Set(), pool = [];
+  const add = (label, what, from) => {
+    const key = String(label || "").trim().toLowerCase();
+    if (!key || seen.has(key)) return;
+    seen.add(key); pool.push({ family: label, what, from });
+  };
+  add(bearer?.origin, "where you are from", "origin");
+  add(bearer?.background, "what was done to you", "background");
+  for (const r of (bearer?.rolesKnownFor || [])) add(r, "how people have known you", "role");
+  // Deeds that TRAVELLED are the ones an opponent could have heard — the same `spread` test standing uses, so
+  // the second grid cannot know something the world does not.
+  for (const d of (bearer?.deeds || [])) if ((d?.spread || []).length) add(d.description, "what you are known to have done", "deed");
+  const out = [];
+  const bag = pool.slice();
+  while (out.length < slots && bag.length) out.push(...bag.splice(Math.floor(rng() * bag.length), 1));
+  return out;
+}

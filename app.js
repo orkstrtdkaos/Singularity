@@ -19,7 +19,7 @@ import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCa
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures, recordCombatRound, combatRounds } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { checkBorn, describeBorn, contractedTypes } from "./engine/borncontract.js";
-import { drawAxis, resolvePick, readOfPick, championPick } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid
+import { drawAxis, resolvePick, readOfPick, championPick, drawBackgroundAxis } from "./engine/coliseum.js"; // SNG-149: the Coliseum blind grid
 import { critFor } from "./engine/craftmechanics.js"; // CCODE-76: a craft's own critical, in its own words
 import { receiptLine, roundVerdict } from "./engine/roundreceipt.js"; // the round receipt, extracted so it can be simulated (it shipped a permanent "it's even" because nothing could test it)   // SNG-250 §4: the born-whole gate + which types it covers
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey, registerDiscoveryAbility } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment; SNG-226: a discovery becomes a usable craft
@@ -5093,6 +5093,10 @@ function substratePenaltyFor(choice, location) {
  *
  *  Gated on the LOCATION rather than on a name match, so a bout is a bout because of where it is fought.
  *  Returns null everywhere else, which is why adding this changes nothing about any other encounter. */
+/** The champion's biography seed — an opponent with no authored history draws a short second axis, which
+ *  is a true thing about a stranger rather than a gap to pad. */
+function oppSheetName(enc) { return character.customEncounters?.[enc?.defId]?.opponent?.name || "a champion"; }
+
 function coliseumBoutFor(def, oppSheet) {
   const grid = CONTENT?.rules?.coliseumGrid;
   if (!grid?.cells?.length) return null;
@@ -5121,6 +5125,18 @@ function commitColiseumPick(family) {
   const theirs = championPick(bout.yours, { stance, rng: Math.random });
   const r = resolvePick({ axisA: bout.yours, axisB: bout.theirs, pickA: family, pickB: theirs?.family, grid });
   if (!r.ok) { renderPlay(character.activeScene?.lastTurn || null, { aside: r.why }); return; }
+  // SNG-149/CCODE-89d — THE SECOND GRID (Erik: "just Stile's challenges in the Blue Adept books"). In the
+  // Game the first grid picks the CATEGORY and a second 4x4 inside it picks the actual contest. When a cell
+  // carries its inner grid, the bout narrows again the same blind way — this time from BIOGRAPHY. Cells that
+  // carry no inner grid simply resolve at the category, so this is inert until the inner cells are authored.
+  const inner = r.cell.second || r.cell.secondCells || null;
+  if (inner) {
+    bout.second = {
+      yours: drawBackgroundAxis(character, { rng: Math.random }),
+      theirs: drawBackgroundAxis(enc.oppBio || { origin: oppSheetName(enc) }, { rng: Math.random }),
+      cells: inner, picked: null,
+    };
+  }
   bout.picked = { yours: family, theirs: theirs.family, cell: r.cell, seats: r.seats, matchup: r.matchup,
     yourRead: readOfPick(family, bout.theirs), theirRead: theirs.why };
   saveCharacter(character);

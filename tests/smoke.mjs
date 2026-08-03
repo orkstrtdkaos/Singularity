@@ -9145,7 +9145,7 @@ await (async () => {
 // steering toward their best ground - so a change that makes the grid kinder to a narrow competitor is
 // breaking the mechanic, not tuning it.
 {
-  const { drawAxis, resolvePick, cellFor, readOfPick, championPick } = await import("../engine/coliseum.js");
+  const { drawAxis, resolvePick, cellFor, readOfPick, championPick, drawBackgroundAxis } = await import("../engine/coliseum.js");
   const { buildFunctionIndex } = await import("../engine/functions.js");
   const GRID = JSON.parse(readFileSync(join(root, "content/packs/core/rules/coliseum_grid.json"), "utf8"));
   const IDX = buildFunctionIndex(JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8")));
@@ -9207,6 +9207,26 @@ await (async () => {
     const b = championPick(yourAxis, { stance: "proving", rng: seed() });
     check("CCODE-89b: the champion's pick cannot depend on yours - blind means blind",
       a.family === b.family);
+  }
+  // CCODE-89d — THE SECOND GRID. Erik named the source: Stile's challenges in the Apprentice Adept books,
+  // where the first grid picks the category and a second 4x4 inside it picks the actual contest. Aevi specced
+  // the same: "the first grid asks what KIND of person you are; the second asks WHO YOU SPECIFICALLY HAVE BEEN."
+  {
+    const bio = { origin: "wright", background: "lineage_taught", rolesKnownFor: ["Post Master", "smith's hand"],
+      deeds: [{ description: "named the Fell Pell", spread: ["crossing"] }, { description: "a thing nobody heard", spread: [] }] };
+    const r2 = seed();
+    const ax = drawBackgroundAxis(bio, { rng: r2 });
+    check("CCODE-89d: the second axis is drawn from BIOGRAPHY - origin, background, roles, deeds",
+      ax.length === 4 && new Set(ax.map(s => s.from)).size > 1);
+    check("CCODE-89d: a deed that never SPREAD is not on it - the grid cannot know what the world does not",
+      !ax.some(s => /nobody heard/.test(s.family)));
+    check("CCODE-89d: a person with no history draws a SHORT axis (true about them, never padded)",
+      drawBackgroundAxis({ origin: "valley" }, { rng: r2 }).length === 1);
+    // The blind rule is the SAME rule - a grid is a grid, so resolvePick takes this axis unchanged.
+    const innerCells = [{ id: "x", families: [ax[0].family, ax[1].family], name: "A Particular Afternoon", contest: "c" }];
+    const both = resolvePick({ axisA: [ax[0]], axisB: [ax[1]], pickA: ax[1].family, pickB: ax[0].family, grid: { cells: innerCells } });
+    check("CCODE-89d: the second grid resolves through the SAME blind machinery as the first",
+      both.ok && both.seats.a === ax[0].family && both.seats.b === ax[1].family);
   }
   check("CCODE-89b: every stance explains ITSELF, so the receipt can say what argument they just made",
     ["proving", "probing", "canny"].every(s => typeof championPick(yourAxis, { stance: s, rng: pr })?.why === "string"));

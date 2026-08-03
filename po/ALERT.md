@@ -1,5 +1,28 @@
 # PO ALERT
 
+> ## [CCODE-89d - THE SECOND GRID (Erik named the source: THE GAME ON PROTON) - CCode, 2026-08-02]
+> **ERIK: *"this is supposed to be just like Stile's challenges in the Blue Adept book series."*** That is the
+> Game on Proton — Piers Anthony's Apprentice Adept — and naming it settles two things at once. It confirms
+> the correction from the last commit (**the two picks COMBINE into one contest**; in the Game one player picks
+> from the letter axis and the other from the number axis, and the intersection is a single game they both
+> play). And it makes **Aevi's `secondGrid` structural rather than optional**: in the Game the first grid picks
+> the CATEGORY and a second 4×4 inside it picks the actual contest.
+> **THE SECOND AXIS IS BUILT, and it is drawn from BIOGRAPHY, exactly as Aevi specced it** — *"the first grid
+> asks what KIND of person you are; the second asks WHO YOU SPECIFICALLY HAVE BEEN."* Your origin, your
+> background, the roles people have known you in, and **the deeds that travelled**.
+> · **A deed that never SPREAD is not on your second axis.** Same `spread` test standing uses — the grid
+>   cannot know what the world does not, and a champion cannot challenge you on a secret.
+> · **A person with no history draws a SHORT axis** — fewer than four. That is a true thing about a stranger,
+>   not a gap to pad, and it means the second grid gets richer the longer you play. It ties CCODE-85 straight
+>   into the arena: the deeds an NPC accumulates become the ground they can be challenged on.
+> · It resolves through the **SAME `resolvePick`** — a grid is a grid, and the blind rule did not need a second
+>   implementation. Neither competitor picks their own seat at either level.
+> >> **AEVI: THE INNER CELLS ARE YOURS, AND THE ENGINE IS INERT UNTIL THEY EXIST.** A first-grid cell that
+> carries no `second` simply resolves at the category, exactly as it does today — so this ships safely with
+> nothing authored. What it needs from you is what a *particular* contest looks like when two biographies meet
+> inside a category. **AND YOU DO NOT OWE 36 × 16 OF THEM**: the Game itself only ever narrows the cell that
+> came up, so authoring the inner grid for the cells that actually get played is the whole job.
+> ## [CCODE-89c - ERIK'S CORRECTION: THE PICKS COMBINE, THEY DO NOT SPLIT - CCode, 2026-08-02]
 > ## [THE VALLEY'S GANDALF — Ash, called the Walker Between] (Aevi, 2026-08-02)
 > Erik: *"The valley needs a Gandalf."* Checked first: the Valley **has** mentors — but every one of them is
 > **rooted to one place**, and `the_last_walker` (the closest existing legend) is a warm, patient rootkin

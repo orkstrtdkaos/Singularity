@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## [CCODE-88 - PELL'S GEAR FOUND IN THE CHRONICLE AND MINTED - CCode, 2026-08-02]
+> **ERIK: found them, day 14, the Fell Pell gathering — chronicle entry 1 of Silas's save.** Verbatim:
+> *"Pell's brigandine finished with full protective rune-work collar to hem, ONE RADIANT MARK at the chest
+> from the vial's last scraping, and a PARTIAL SHIELDING WORD seated in its outer ring with the promise of
+> completion. Pell's short sword rune-bound with FOUR THREADS including Huginn's ending-sense and her own
+> ironsense."*
+> Both existed **only as prose** — no item record anywhere in any save. They are now staged records
+> (`po/staged_content/pell_fell_pell_gear.json`), minted with the KIND fields the engine reads, and **both
+> pass the born-whole gate clean**. First items in the world born able to answer the question that decided
+> Silas's fight.
+> >> **PELL'S SWORD IS THE SISTER WEAPON TO MEMORY.** Same working, same night, same four-thread construction,
+> Huginn's ending-sense in both — so it resolves to the same kind (`decay`) for a reason that is a fact about
+> the fiction, not a coincidence of my tables. **14.34 against the unmoored choir, where a bare blade does
+> 0.00.** It reaches because she bound it.
+> >> **THE BRIGANDINE IS THE FIRST TYPED WARD IN THE WORLD.** Two layers: the full rune-work (rank 2, answers
+> everything) and the single radiant mark (rank 1, answers LIGHT only). Measured: **8.34 through from a light
+> attack, 11.34 from a blade** — the mark is worth ~3 against light and NOTHING against steel, which is
+> exactly what one mark at the chest should be. A ward that answered everything equally would make it decor.
+> **THE PARTIAL SHIELDING WORD IS DELIBERATELY NOT A LAYER YET.** A partial working that already soaked would
+> make finishing it a formality, and the chronicle plainly frames completion as still owed. Proposed: it
+> becomes a **rank-3 layer** when finished — the first rank 3 in the world — which is why it is worth a scene
+> rather than a line. **Erik's call.**
+> **WHAT I DID NOT INVENT:** canon names FOUR threads on the sword and only TWO of them. The other two are
+> left unauthored rather than filled in. Same for whether the ironsense or the ending-sense is the LEAD
+> thread — that decides whether the sword strikes as decay or as plain steel, and therefore whether it can
+> touch a thing immune to physical, so it is worth deciding rather than defaulting. All four open questions
+> are listed on the record.
+> ## [CCODE-87 - THE GATE NOW UNDERSTANDS "ONLY FOR THIS KIND" - CCode, 2026-08-02] the wall from last commit, taken down
 > ## [SNG-265 PILOT — THE HIGH SEAT: a band, their made Olympus, four of the god-named] (Aevi, 2026-08-02)
 > Erik: *"they may have created an Olympus and a band of sorts — be creative."* Authored to
 > `po/staged_content/the_named_pilot_high_seat.json`.

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "pell_fell_pell_gear",
+  "kind": "staged_proposal",
+  "status": "staged — Erik/Aevi to promote or amend; nothing here is live",
+  "note": "CCODE-86/87 (Erik: 'Pell has a nice short sword and warded brigadine' → 'read the chronicle of the save to find them, likely around day 14'). FOUND, in Silas Weir's chronicle entry 1, the Fell Pell gathering: \"Pell's brigandine finished with full protective rune-work collar to hem, one radiant mark at the chest from the vial's last scraping, and a partial Shielding Word seated in its outer ring with the promise of completion. Pell's short sword rune-bound with four threads including Huginn's ending-sense and her own ironsense.\" Both existed only as prose — no item record anywhere in any save. These are the records, minted with the KIND fields the engine now reads, so they are born able to answer the question that decided Silas's fight. Every number below is a PROPOSAL; the canon is the prose, and the prose is quoted on each record so an amendment can be checked against it.",
+  "provenanceNote": "Pell's sword is the SISTER WEAPON to Silas's Memory — the same working, the same four-thread construction, Huginn's ending-sense in both. It resolves to the same kind (decay) for the same reason, which is a fact about the fiction rather than a coincidence of the tables.",
+  "items": [
+    {
+      "id": "pells_short_sword",
+      "name": "Pell's Short Sword",
+      "kind": "weapon",
+      "owner": "pell_ran_marsh",
+      "description": "A short, plain-hilted blade of Pell's own making, rune-bound at the Fell Pell with four threads — Huginn's Ashwarden ending-sense laid along the edge, Pell's own ironsense seated through the tang, and two more closed into the ricasso. It is not a showpiece. It is a smith's sword, bound by the smith who made it.",
+      "provenance": "Forged and rune-bound by Pell Ran Marsh at the Fell Pell gathering, the night the fellowship formally opened.",
+      "canonQuote": "Pell's short sword rune-bound with four threads including Huginn's ending-sense and her own ironsense.",
+      "damageType": "decay",
+      "damageTypeWhy": "The first bound thread that carries a kind is Huginn's Ashwarden ending-sense → decay. Same resolution, same reason, as Silas's Memory spear from the same working. If the intended lead thread is the ironsense instead, this becomes untyped-by-tradition and the sword strikes as plain steel — which is a real difference against anything immune to physical, so it is worth deciding rather than defaulting.",
+      "threads": [
+        { "tradition": "wright", "what": "Pell's own ironsense, seated through the tang — the anchor" },
+        { "tradition": "ashwarden", "what": "Huginn's ending-sense, laid along the edge" }
+      ],
+      "threadsNote": "Canon says FOUR threads and names TWO. The other two are deliberately left unauthored rather than invented — Aevi or Erik should name them, and until they do the sword resolves off the two that are canon.",
+      "bonusTags": ["strike"],
+      "consumable": false
+    },
+    {
+      "id": "pells_brigandine",
+      "name": "Pell's Warded Brigandine",
+      "kind": "armor",
+      "owner": "pell_ran_marsh",
+      "description": "A working brigandine, its plates set close and its rune-work run unbroken from collar to hem. One radiant mark sits at the chest, scraped from the last of the vial. In the outer ring a Shielding Word is seated — begun, not finished, and the gap in it is visible to anyone who can read the work.",
+      "provenance": "Finished by Pell Ran Marsh at the Fell Pell gathering, the radiant mark taken from the vial's last scraping.",
+      "canonQuote": "Pell's brigandine finished with full protective rune-work collar to hem, one radiant mark at the chest from the vial's last scraping, and a partial Shielding Word seated in its outer ring with the promise of completion.",
+      "wardLayers": [
+        { "rank": 2, "value": 5, "what": "the full protective rune-work, collar to hem — it answers everything" },
+        { "rank": 1, "value": 3, "type": "light", "what": "the single radiant mark at the chest" }
+      ],
+      "wardTypes": ["light"],
+      "incomplete": {
+        "what": "the Shielding Word seated in the outer ring, partial",
+        "canonQuote": "with the promise of completion",
+        "mechanicalProposal": "It is NOT a layer yet. A partial working that already soaked would make finishing it a formality, and the chronicle plainly frames completion as a thing still owed. Proposed: finishing it adds a rank-3 layer — the first rank-3 ward in the world — which is why it is worth a scene rather than a line.",
+        "whoDecides": "Erik — whether the finished Word is a third layer, a rank promotion of the existing rune-work, or something that is not soak at all."
+      },
+      "bonusTags": ["ward"],
+      "consumable": false
+    }
+  ],
+  "measured": {
+    "note": "Run through the REAL battleRound against the REAL bestiary, so these are what the records actually do, not what they are meant to do.",
+    "pells_short_sword": {
+      "vs the_unmoored_choir": "14.34 mean damage per landed blow",
+      "the point": "a BARE blade does 0.00 to the choir — it is immune to physical. Pell's sword reaches it because she bound it, which is the same thing that makes Silas's spear work and the reason both weapons are worth what they cost."
+    },
+    "pells_brigandine": {
+      "vs a light attack": "8.34 through",
+      "vs a blade": "11.34 through",
+      "the point": "the radiant mark is worth ~3 against light and NOTHING against steel, which is exactly what a single mark at the chest should be. A ward that answered everything equally would make the mark decorative."
+    }
+  },
+  "openQuestions": [
+    "The sword's other TWO threads — canon names two of four. Unauthored on purpose.",
+    "Whether the ironsense or the ending-sense is the sword's LEAD thread; it decides whether the sword strikes as decay or as plain steel, and therefore whether it can touch a thing immune to physical.",
+    "What finishing the Shielding Word actually grants. Proposed as a rank-3 layer; Erik's call.",
+    "Whether these belong to Pell as an NPC (she is in Silas's registry) or should be reachable as gear the party can be lent — the records carry `owner` either way."
+  ]
+}

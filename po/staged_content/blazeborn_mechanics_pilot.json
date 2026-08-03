@@ -58,7 +58,8 @@
     "magnitude": 3,
     "duration": 1,
     "range": 30
-   }
+   },
+   "shape": "setup"
   },
   {
    "id": "kindle",
@@ -117,7 +118,8 @@
     "range": 15,
     "duration": 1,
     "note": "the T-I baseline strike — max can drop a peer beast, average takes 2"
-   }
+   },
+   "shape": "damage"
   },
   {
    "id": "the_radiant_ground",
@@ -157,7 +159,8 @@
    "mechanic": {
     "magnitude": 2,
     "duration": 8
-   }
+   },
+   "shape": "bolster"
   },
   {
    "id": "radiance",
@@ -218,7 +221,8 @@
     "marginFloorPer": 0.02,
     "area": 2,
     "note": "T-II: the clean double of T-I per §8"
-   }
+   },
+   "shape": "damage"
   },
   {
    "id": "the_cleansing_light",
@@ -268,7 +272,8 @@
     "plus": 0,
     "magnitude": 2,
     "note": "heals on the T-II ladder; the purge is the craft's second axis"
-   }
+   },
+   "shape": "healing"
   },
   {
    "id": "the_blaze_wall",
@@ -316,7 +321,8 @@
     "soak": 4,
     "soakRank": 2,
     "awaitingEngine": "soak/soakRank await the §11 Gap-2 guard layer. Authored now so the layer lands with real content to test against; radiant_lance r2/r3 (penetrates light armor / beats a Harmonic shield's FIRST RANK) is the matching attacker side, which is why soak wants a RANK as well as a magnitude."
-   }
+   },
+   "shape": "guard"
   },
   {
    "id": "glass_work",
@@ -361,7 +367,8 @@
    "mechanic": {
     "magnitude": 2,
     "duration": 6
-   }
+   },
+   "shape": "construct"
   },
   {
    "id": "the_blazing_word",
@@ -406,7 +413,8 @@
    "mechanic": {
     "magnitude": 3,
     "duration": 6
-   }
+   },
+   "shape": "bolster"
   },
   {
    "id": "unshadow",
@@ -462,7 +470,8 @@
     "marginFloorPer": 0.02,
     "area": 3,
     "note": "T-III per §10 — more than a third doubling"
-   }
+   },
+   "shape": "hobble"
   },
   {
    "id": "the_line_of_light",
@@ -508,7 +517,8 @@
     "range": 8,
     "push": 0,
     "targets": 1
-   }
+   },
+   "shape": "reposition"
   },
   {
    "id": "the_revealing_burn",
@@ -559,7 +569,8 @@
     "marginFloorPer": 0.02,
     "area": 4,
     "note": "T-IV — dice PLUS a special per §8"
-   }
+   },
+   "shape": "damage"
   },
   {
    "id": "the_last_light",
@@ -609,7 +620,8 @@
     "marginFloorPer": 0.02,
     "area": 5,
     "note": "T-V capstone — dice plus a special"
-   }
+   },
+   "shape": "damage"
   }
  ],
  "pilotFindings": [
@@ -630,5 +642,6 @@
   "soft": "a limit of SKILL — sustained mastery erodes it",
   "hard": "a limit of WHAT THE CRAFT IS — no mastery ever reaches it",
   "cost": "the price stays but its FORM changes with mastery"
- }
+ },
+ "conversionNote": "SHAPE FIELDS ADDED (2026-08-02). The pilot predated the schema lock and my earlier conversion pass added the `mechanic` block but NOT the `shape` field — all 12 crafts were missing it. The engine infers shape from verbs so everything still RESOLVED, which is exactly why it went unnoticed: `npm run staged` checks resolution, not analysability. It surfaced the moment I ran a cross-tradition numerical comparison and blazeborn reported 0/5 role coverage, which is impossible for the tradition that owns kindle and radiance. LESSON: a field the engine can INFER is a field that can go silently missing."
 }

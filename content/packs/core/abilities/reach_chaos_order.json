@@ -77,7 +77,65 @@
    ],
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "variance",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 2,
+    "scope": 2,
+    "variance": 3,
+    "note": "T-II construct — but see `variance`. Churnfolk crafts want a WIDENED OUTCOME BAND, not a fixed magnitude: 'you don't choose HOW it breaks, only that it does.'"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "variance",
+     "delta": "THRIVE where others founder — read the grain of a chaotic situation and RIDE it; DENY AN ENEMY THE PREDICTABILITY THEY RELY ON (a direct debuff to ordered opponents)",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "UNMAKE ORDER AT SCALE — a fortress's discipline, a system's certainty, a plan a season in the making, come apart; and out of the loosed chaos, something useful",
+     "from": "r3 grants — the explicit counter to lattice's latticework r3 'impose structure at scale'"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small improvisation — half the effect, and you keep control of what breaks",
+    "surge": "double it; YOU DO NOT CHOOSE HOW IT BREAKS, and at this scale that matters"
+   },
+   "bounds": [
+    {
+     "text": "YOU DON'T CHOOSE HOW IT BREAKS, only that it does",
+     "class": "hard"
+    },
+    {
+     "text": "luck spent runs thin",
+     "class": "soft"
+    },
+    {
+     "text": "CANNOT IMPOSE AN OUTCOME, only surf toward a good one",
+     "class": "hard"
+    },
+    {
+     "text": "the ordered and prepared resist it",
+     "class": "hard"
+    },
+    {
+     "text": "WHAT YOU UNSPOOL YOU CANNOT RE-ORDER",
+     "class": "hard"
+    },
+    {
+     "text": "the wielder DRIFTS CHAOS-HOT",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "latticework",
@@ -155,7 +213,61 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "scope",
+    "reliability",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 4,
+    "scope": 2,
+    "note": "T-II construct. r1: build a plan that HOLDS UNDER PRESSURE; predict a system's next move"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "reliability",
+     "delta": "BIND A POSSIBILITY DOWN — make a thing reliably true, a route reliably safe, an agreement reliably kept; read a system deeply enough to break OR repair it",
+     "from": "r2 grants — reliability becomes the operative axis"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "impose structure AT SCALE — a lawless place made orderly, a chaotic force predicted and countered, A POSSIBILITY FORECLOSED BY SHEER STRUCTURE",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a working plan — half the binding, and nothing calcifies",
+    "surge": "double the structure; over-bound systems CANNOT ADAPT and shatter when they finally break"
+   },
+   "bounds": [
+    {
+     "text": "prediction fails on the TRULY CHAOTIC",
+     "class": "hard"
+    },
+    {
+     "text": "a plan is not a guarantee, only good odds",
+     "class": "hard"
+    },
+    {
+     "text": "binding is BRITTLE AGAINST WILDCRAFT",
+     "class": "hard"
+    },
+    {
+     "text": "over-bound systems can't adapt and shatter",
+     "class": "cost"
+    },
+    {
+     "text": "the wielder DRIFTS ORDER-HOT — and order at full strength IS the foreclosure the framework warns about",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "chaos_sense",
@@ -219,7 +331,51 @@
    ],
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "foresight",
+    "timeReach"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "note": "r1: feel WHERE and roughly WHEN something will break down; find the loose thread"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "foresight",
+     "delta": "feel where a SITUATION is about to come apart, and roughly HOW — from a thing to a situation, and the failure MODE",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the failure ANNOUNCES ITSELF to you before it happens — the bridge, the alliance, the plan. Unprompted warning is a different act from looking for the flaw.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a feel for the loose thread — half the warning, no cost",
+    "surge": "double the reach: the failure comes to you, and you still do not get to choose where you are standing when it lands"
+   },
+   "bounds": [
+    {
+     "text": "FEEL, NOT DETAIL — the truly stable reads quiet",
+     "class": "hard"
+    },
+    {
+     "text": "you feel the break coming; YOU DO NOT GET TO CHOOSE WHERE YOU ARE STANDING when it arrives",
+     "class": "hard"
+    },
+    {
+     "text": "KNOWING IS NOT PREVENTING — and the Churnfolk have made peace with that",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "order_sense",
@@ -279,7 +435,56 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "setup",
+   "operativeAxis": [
+    "perceptionDepth",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "scope": 1,
+    "note": "r1: see a system's structure, rules, and load-bearing points AT A GLANCE"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "perceptionDepth",
+     "delta": "read the structure UNDER A MESS — the schedule behind a crowd, the rule behind a ritual",
+     "from": "r2 grants — from visible order to hidden order"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: see the ENTIRE DESIGN a thing is part of — INCLUDING THE PARTS THAT ARE NOT PRESENT. Inferring absent structure is a different act from reading present structure.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance — half the depth, and it costs nothing",
+    "surge": "double the read: the whole design, and you will see patterns that are not there if you push it"
+   },
+   "bounds": [
+    {
+     "text": "reads STRUCTURE, not INTENT",
+     "class": "hard"
+    },
+    {
+     "text": "pure chaos returns noise",
+     "class": "hard"
+    },
+    {
+     "text": "SOME MESSES HAVE NO PATTERN — reading one into them is how the Lattice makes its mistakes",
+     "class": "hard"
+    },
+    {
+     "text": "seeing the design does not give you STANDING to change it",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "scatter",
@@ -347,7 +552,57 @@
    ],
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
-   "harmRung": "incapacitating"
+   "harmRung": "incapacitating",
+   "shape": "hobble",
+   "operativeAxis": [
+    "scope",
+    "variance"
+   ],
+   "mechanic": {
+    "magnitude": 4,
+    "duration": 2,
+    "scope": 2,
+    "variance": 3,
+    "note": "T-II hobble, incapacitating rung. r1: disrupt a formation, jam a device, break a pattern to make an opening"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "scatter a formation, a plan, a CROWD — the thing that was one becomes MANY and cannot re-form quickly; EACH is weakened by it",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: unmake the COHERENCE of a thing entirely — an army, a contract, a certainty — AND IT DOES NOT COME BACK TOGETHER. Permanence is the kind-change.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "break one pattern — half the scatter, and it re-forms",
+    "surge": "double it: what you scatter you NO LONGER CONTROL, and scattering a mob makes many small problems"
+   },
+   "bounds": [
+    {
+     "text": "YOU DON'T PICK HOW IT SCATTERS",
+     "class": "hard"
+    },
+    {
+     "text": "brief at r1",
+     "class": "soft"
+    },
+    {
+     "text": "WHAT YOU SCATTER YOU NO LONGER CONTROL — scattering a mob makes many small problems",
+     "class": "hard"
+    },
+    {
+     "text": "THE CHURNFOLK WARN: YOU WILL NOT BE ABLE TO PUT IT BACK. NOBODY WILL.",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "truename_order",
@@ -413,7 +668,52 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "scope",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 2,
+    "scope": 1,
+    "note": "r1: calm a panicking group, organize a chaotic space, steady a failing structure BRIEFLY"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "set a thing into its proper order AND IT STAYS — a room, a ledger, a broken argument (from 'briefly' to persistent)",
+     "from": "r2 grants — duration is the whole increment"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: NAME a thing's true order AND IT TAKES IT — the crooked wall stands straight, the failing plan coheres. Declaring order into being is a different act from imposing it.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "tidy it — half the hold, and nobody resents it",
+    "surge": "double the ordering; what you right, someone may resent being righted"
+   },
+   "bounds": [
+    {
+     "text": "small scale at r1; SLIPS WITHOUT MAINTENANCE",
+     "class": "soft"
+    },
+    {
+     "text": "ORDER IMPOSED IS NOT ORDER ACCEPTED — what you right, someone may resent",
+     "class": "hard"
+    },
+    {
+     "text": "THE LATTICE'S GREAT SIN IS BELIEVING IT ALWAYS KNOWS WHAT A THING SHOULD BE",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "probability_tilt",
@@ -478,7 +778,56 @@
    ],
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "luck",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "duration": 1,
+    "variance": 4,
+    "note": "T-III bolster. r1: tilt an UNCERTAIN moment toward a good break"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "tilt the odds of a WHOLE SEQUENCE, not one roll — inside that run everything comes off better than it should",
+     "from": "r2 grants — one moment → a run"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: around you THE UNLIKELY SIMPLY HAPPENS — the gap opens, the guard turns, the coin lands",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a nudge — half the tilt, and the books balance quietly",
+    "surge": "double the tilt; THE WORLD BALANCES ITS BOOKS, and what you tilt toward you, something tilts away"
+   },
+   "bounds": [
+    {
+     "text": "ONLY WHERE CHANCE IS LIVE — a certainty cannot be tilted",
+     "class": "hard"
+    },
+    {
+     "text": "spends fast",
+     "class": "soft"
+    },
+    {
+     "text": "TILTED ODDS ARE STILL ODDS — the Churn keeps its right to the improbable",
+     "class": "hard"
+    },
+    {
+     "text": "THE WORLD BALANCES ITS BOOKS: whatever you tilt toward you, something tilts away",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_fixed_point",
@@ -544,7 +893,58 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "guard",
+   "operativeAxis": [
+    "anchorStrength",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 5,
+    "soak": 4,
+    "soakRank": 2,
+    "targets": 1,
+    "duration": 4,
+    "note": "T-III guard. r1: be the still, reliable point in a chaotic scene; LET OTHERS RALLY TO YOU"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "anchorStrength",
+     "delta": "be THE THING THAT DOES NOT MOVE — a person, a promise, a position — while everything around you does",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: you become THE FIXED POINT OTHERS NAVIGATE BY — chaos itself ORGANIZES AROUND your refusal to shift",
+     "from": "r3 grants — the world reorganising around you is a kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold your ground — half the anchor, and you can still move afterward",
+    "surge": "double the fixity; a fixed point CANNOT ALSO BE A TRAVELER"
+   },
+   "bounds": [
+    {
+     "text": "you must HOLD STILL",
+     "class": "hard"
+    },
+    {
+     "text": "strong chaos still batters",
+     "class": "soft"
+    },
+    {
+     "text": "BEING UNMOVED IS NOT BEING UNHARMED — the Churn breaks around you, and around is not through",
+     "class": "hard"
+    },
+    {
+     "text": "A FIXED POINT CANNOT ALSO BE A TRAVELER — what you anchor, you are anchored TO",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "riding_order",
@@ -599,7 +999,45 @@
    ],
    "tradition": "lattice",
    "nativeOrCombination": "combination",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "construct",
+   "operativeAxis": [
+    "window",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 6,
+    "duration": 1,
+    "scope": 3,
+    "note": "T-IV. r1: break a thing and REFORGE ITS PIECES INTO WHAT YOU NEED IN THE SAME MOTION — a heartbeat's window"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the window widens from a HEARTBEAT to a BREATH, and the scale from a THING to a STRUCTURE — ride the collapse of a wall, a wagon, a bridge, a formation. Riding a collapse rather than causing one is the T-IV kind-change.",
+     "from": "r2 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "a small reforging — half the scale, and a miss only costs you the piece",
+    "surge": "double the scale; THE LARGER THE COLLAPSE THE CRUDER THE FORM you can catch out of it"
+   },
+   "bounds": [
+    {
+     "text": "A HEARTBEAT'S WINDOW — miss it and YOU HAVE ONLY MADE CHAOS",
+     "class": "soft"
+    },
+    {
+     "text": "a widened window is STILL a window",
+     "class": "hard"
+    },
+    {
+     "text": "the larger the collapse, THE CRUDER THE FORM",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_long_odds",
@@ -636,7 +1074,45 @@
    "gated": "learned",
    "tradition": "churnfolk",
    "nativeOrCombination": "native",
-   "harmRung": "none"
+   "harmRung": "none",
+   "shape": "bolster",
+   "operativeAxis": [
+    "luck",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 9,
+    "duration": 3,
+    "variance": 8,
+    "note": "T-V capstone. r1: turn a WHOLE CHASE by riding a cascade of lucky breaks no one could plan"
+   },
+   "rankDeltas": [
+    {
+     "rank": 1,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: ride a CASCADE of improbabilities through an entire chase — escape a closing net, or run down a fleeing foe. The capstone is a KIND (bending a whole sequence of events) at enormous cost.",
+     "from": "r1 grants — single-rank capstone; the special IS the craft"
+    }
+   ],
+   "intensity": {
+    "conserve": "REFUSED — the long odds are not a thing you take halfway; a hedged cascade is just ordinary luck.",
+    "surge": "REFUSED — it already spends enormously; there is nothing above it to spend."
+   },
+   "bounds": [
+    {
+     "text": "SPENDS ENORMOUSLY",
+     "class": "hard"
+    },
+    {
+     "text": "THE ORDERED AND PREPARED CAN STILL CORNER YOU",
+     "class": "hard"
+    },
+    {
+     "text": "IT FAILS HARD when it fails",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "set_to_rights",
@@ -715,7 +1191,54 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "healing",
+   "operativeAxis": [
+    "precision",
+    "scope"
+   ],
+   "mechanic": {
+    "dice": {
+     "n": 2,
+     "d": 4
+    },
+    "plus": 2,
+    "note": "T-II healing. r1: diagnose EXACTLY what's wrong and apply the precise intervention — NO GUESSING, NO WASTE. The +2 is the precision: lattice healing wastes nothing."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "precision",
+     "delta": "restore not just function but THE UNDERLYING CONDITIONS for continued function — the body that heals cleanly, the mechanism that runs without further attention",
+     "from": "r2 grants — durable restoration, not just repair"
+    },
+    {
+     "rank": 3,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "return a thing FULLY to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "the precise minimum — half the restoration, a fraction of the time",
+    "surge": "double the work: exhaustive and methodical, and it takes exactly as long as it takes"
+   },
+   "bounds": [
+    {
+     "text": "requires knowing what the INTENDED STATE was",
+     "class": "hard"
+    },
+    {
+     "text": "methodical means SLOW — this is not field medicine",
+     "class": "soft"
+    },
+    {
+     "text": "it restores to INTENDED, which may not be what the thing WANTS to be",
+     "class": "hard"
+    }
+   ]
   },
   {
    "id": "the_established_route",
@@ -795,7 +1318,50 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "reposition",
+   "operativeAxis": [
+    "scope",
+    "access"
+   ],
+   "mechanic": {
+    "range": 1,
+    "push": 0,
+    "magnitude": 3,
+    "duration": 2,
+    "scope": 1,
+    "note": "r1: find the LAWFUL, structured way through a guarded or ordered space"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "scope",
+     "delta": "navigate ANY sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — USING ITS OWN RULES",
+     "from": "r2 grants — a place → any structured system"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: move through a system AS IF YOU DESIGNED IT — the parts only insiders know, at the speed the structure permits at its best, without a door barred",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "find the correct corridor — half the reach, entirely unremarkable",
+    "surge": "double the access: you move as an insider, and insiders are remembered"
+   },
+   "bounds": [
+    {
+     "text": "requires a system that HAS rules — the lawless offer no route",
+     "class": "hard"
+    },
+    {
+     "text": "the route is LAWFUL, which means it is also LOGGED",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_maintained_order",
@@ -867,7 +1433,52 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "duration",
+    "scope"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 8,
+    "scope": 2,
+    "note": "SUSTAIN→bolster. r1: keep an ordered structure functioning UNDER PRESSURE that would normally cause it to fail"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "duration",
+     "delta": "maintain order in a DECAYING situation ACROSS DAYS — a failing supply line, a fragmenting group, a plan under constant attack — through continuous attention",
+     "from": "r2 grants — hours to days"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a structure you maintain SIMPLY DOES NOT COLLAPSE while you attend to it — the siege holds, the treaty stands, the organization functions",
+     "from": "r3 grants — categorical non-collapse is a kind, not a duration"
+    }
+   ],
+   "intensity": {
+    "conserve": "hold the essentials — half the scope, and you can do other things",
+    "surge": "double what you can hold, and it takes CONTINUOUS attention — you are doing nothing else"
+   },
+   "bounds": [
+    {
+     "text": "requires CONTINUOUS ATTENTION — it holds while you attend and not after",
+     "class": "hard"
+    },
+    {
+     "text": "what you maintain does not IMPROVE, only persists",
+     "class": "hard"
+    },
+    {
+     "text": "attending costs you everything else you might have done",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "the_wrong_target",
@@ -942,7 +1553,54 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "guard",
+   "operativeAxis": [
+    "evasion",
+    "soak"
+   ],
+   "mechanic": {
+    "evasion": 3,
+    "evasionRank": 2,
+    "soak": 2,
+    "soakRank": 1,
+    "duration": 3,
+    "note": "EVASION, not armour — Erik's correction. Soak reduces damage AFTER a hit lands; evasion means the attack DOESN'T land. The craft's own prose says it: 'not blocking, not armoring, just not being where they land.' PROPOSED MECHANIC (fits the existing degree ladder exactly, no new resolution stage): evasion DEGRADES the attacker's degree by one step — crit_success→success, success→PARTIAL, partial→FAILURE. Then Erik's second half: on the PARTIAL that remains, the small soak applies — the graze. So a full hit becomes a graze, and the graze is blunted."
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "deepen",
+     "axis": "evasion",
+     "delta": "organized attempts DISSOLVE — 'always aiming at where you were a moment ago'. evasionRank 2: degrades even a well-set-up attack.",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: the DISORDER AROUND YOU deflects organized harm — the situation itself refuses to cooperate with anyone trying to hurt you. Degrades a SECOND step against attackers relying on coordination.",
+     "from": "r3 grants"
+    }
+   ],
+   "intensity": {
+    "conserve": "keep moving — half the evasion, and it costs you no wind",
+    "surge": "double the unpredictability; you cannot also be doing anything precise"
+   },
+   "bounds": [
+    {
+     "text": "it works against AIMED and ORGANIZED harm — an area effect or a collapsing roof does not care where you are",
+     "class": "hard"
+    },
+    {
+     "text": "you cannot also be doing anything precise",
+     "class": "hard"
+    },
+    {
+     "text": "sustained evasion costs wind",
+     "class": "soft"
+    }
+   ]
   },
   {
    "id": "the_misdirect",
@@ -1018,7 +1676,53 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "hobble",
+   "operativeAxis": [
+    "misdirection",
+    "targets",
+    "duration"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 1,
+    "targets": 1,
+    "note": "r1: a distraction convincing enough to buy ONE CLEAN MOVE — for you or a friend"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets+duration",
+     "delta": "a FALSE TRAIL credible enough that pursuit follows it seriously, or misdirect a GROUP's full attention at exactly the moment it matters",
+     "from": "r2 grants — one move → a pursuit or a group"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: a misdirection so FUNDAMENTAL — the wrong door, the wrong figure, the wrong danger — that the opposition ORGANIZES AROUND something that was never there",
+     "from": "r3 grants — making the enemy's whole plan wrong is a kind, not a magnitude"
+    }
+   ],
+   "intensity": {
+    "conserve": "a glance elsewhere — half the misdirection, and nobody afterwards is sure anything happened",
+    "surge": "double it: the opposition commits, and a committed opposition is very angry when it learns"
+   },
+   "bounds": [
+    {
+     "text": "it buys a MOVE, not a victory",
+     "class": "hard"
+    },
+    {
+     "text": "a false trail must be PLAUSIBLE — you cannot misdirect toward the absurd",
+     "class": "soft"
+    },
+    {
+     "text": "when it breaks, they know they were played",
+     "class": "cost"
+    }
+   ]
   },
   {
    "id": "catch_as_catch_can",
@@ -1089,7 +1793,52 @@
      "harmRung": "none"
     }
    ],
-   "nativeOrCombination": "native"
+   "nativeOrCombination": "native",
+   "shape": "bolster",
+   "operativeAxis": [
+    "upkeepRelief",
+    "targets"
+   ],
+   "mechanic": {
+    "magnitude": 3,
+    "duration": 12,
+    "targets": 1,
+    "note": "SUSTAIN→bolster. r1: sustain YOURSELF where others have run dry"
+   },
+   "rankDeltas": [
+    {
+     "rank": 2,
+     "kind": "extend",
+     "axis": "targets",
+     "delta": "sustain a GROUP through constant creative improvisation — 'never enough of anything, always just enough'",
+     "from": "r2 grants"
+    },
+    {
+     "rank": 3,
+     "kind": "add",
+     "axis": "special",
+     "delta": "SPECIAL: THE DISORDER THAT STRIPS OTHERS BARE IS YOUR SUPPLY LINE — in total disorder you and yours have what you need, because you have learned to need what disorder provides",
+     "from": "r3 grants — inverting scarcity is a kind-change"
+    }
+   ],
+   "intensity": {
+    "conserve": "scrape by — half the relief, and it asks nothing of the situation",
+    "surge": "double it: you find what a place can give, and a place stripped twice gives less the second time"
+   },
+   "bounds": [
+    {
+     "text": "it finds ENOUGH, never PLENTY",
+     "class": "hard"
+    },
+    {
+     "text": "requires DISORDER — an orderly, well-provisioned place offers a churnfolk nothing to improvise from",
+     "class": "hard"
+    },
+    {
+     "text": "improvisation is CONSTANT — it is work, not luck",
+     "class": "soft"
+    }
+   ]
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

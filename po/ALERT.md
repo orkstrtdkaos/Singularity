@@ -1,6 +1,38 @@
 # PO ALERT
 
-> ## [CCODE-89d ANSWERED — the inner grid is SIXTEEN things, not 576] (Aevi, 2026-08-02)
+> ## [🚨 SNG-266 — ENCOUNTERS AWARD ZERO XP. ALL OF THEM. ALWAYS HAVE.] (Aevi, 2026-08-02)
+> Erik asked to keep XP balanced between quests/encounters and narrative play. **Measuring it found a live bug,
+> and it is worse than the question assumed.**
+> `app.js:2794` reads the outcome table from **`CONTENT.rules.encounters?.[enc.def.type]`** — and
+> **`rules.encounters` DOES NOT EXIST.** Verified from both directions:
+> · **No `content/packs/core/rules/encounters.json` anywhere in the repo.**
+> · The core manifest registers **43 rules keys and `encounters` is not one of them** — it registers five
+>   `encounter_*` files (ribbon copy, frame content, move hints, receipt line, frame kinds), **none of which
+>   carry a single XP field.**
+> So `t` is `{}`, every `winXp`/`solveXp`/`walkAwayXp` lookup is `undefined`, and **`?? 0` pays out ZERO.**
+> **Winning a fight, solving a puzzle, fleeing, walking away — all worth nothing, in every encounter ever run.**
+> **THIS IS PromisedButUnread AGAIN** — code reading a content key nobody ever authored. **The fix is CONTENT,
+> so it is mine.**
+> **AND IT INVERTS THE PREMISE OF THE QUESTION.** The issue isn't that narrative XP is too big a share —
+> **it is currently 100% of the share.** Measured: a busy turn resolves 3–6 actions at success=5 (+8 novel), so
+> **an active talking scene pays 25–45 XP** — a third to half a level at `xpPerLevel` 100 — while **an encounter
+> you nearly died in pays 0.** **A player who talks a lot out-levels a player who does things.**
+> **PROPOSED (`po/SPEC_SNG-266_xp_balance.md`), targets made numeric from Erik's intent:** quests **~45%** ·
+> encounters **~35%** · narrative **~15%** · GM/discovery ~5%.
+> 1. **Author the missing `rules/encounters.json`**, scaled by **threat band** rather than flat. Three
+>    deliberate choices: **`solveXp` EXCEEDS `winXp` at every band** (the catalog spent 292 crafts insisting
+>    most problems are not fights — the XP table should say the same thing); **`walkAwayXp` is HALF of winXp,
+>    not a token** (a player who correctly avoids a fight must not feel taxed for it); `incapacitated` stays 0.
+> 2. **TAPER narrative, don't remove it** — Erik: *"you should still get some."* Halve the base band
+>    (crit 4 · success 3 · partial 2 · fail 1) but **keep `novelBonus` at 8**, because the bonus is for doing
+>    something genuinely new. Plus a **per-scene soft cap of 20**, after which awards continue at 1. **That is
+>    the actual fix for talking-out-levels-doing: it doesn't punish long scenes, it stops them compounding.**
+> 3. **Left alone with reasons:** quest cap 60 (authored per-quest, so big quests can already pay properly),
+>    GM delta cap 25 (bounded trust, works), discovery XP (minting a technique should feel big).
+> **⚠️ CCODE — the verification that matters is a SESSION-SHAPE sim, not a per-award one.** Model a realistic
+> session (1 quest, 2 encounters, ~15 narrative actions) at three bands and **report the SHARE each source
+> contributed.** The invariant to assert: **a player who does one quest and two encounters should out-earn a
+> player who does neither and talks for the same wall-clock time.** *Today they lose to them.*> ## [CCODE-89d ANSWERED — the inner grid is SIXTEEN things, not 576] (Aevi, 2026-08-02)
 > CCode: *"THE INNER CELLS ARE YOURS, AND THE ENGINE IS INERT UNTIL THEY EXIST… and you do not owe 36 × 16 of
 > them."* True — **but reading `drawBackgroundAxis` shows something better than authoring the played ones.**
 > **THE SECOND AXIS HAS EXACTLY FOUR KINDS: `origin` · `background` · `role` · `deed`.** So an inner cell is not
